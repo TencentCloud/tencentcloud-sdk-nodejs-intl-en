@@ -70,10 +70,12 @@ const DescribeFileDownloadUrlResponse = models.DescribeFileDownloadUrlResponse;
 const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
+const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
+const TableColumn = models.TableColumn;
 const SecurityGroupBound = models.SecurityGroupBound;
 const ColumnPrivilege = models.ColumnPrivilege;
 const ModifySyncTaskAttributeRequest = models.ModifySyncTaskAttributeRequest;
@@ -117,6 +119,7 @@ const DescribeDBResourceUsageDetailsRequest = models.DescribeDBResourceUsageDeta
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const DBAccount = models.DBAccount;
 const CreateHourDBInstanceRequest = models.CreateHourDBInstanceRequest;
+const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const DescribeDBPerformanceDetailsResponse = models.DescribeDBPerformanceDetailsResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
@@ -569,6 +572,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeDBSecurityGroups(req, cb) {
         let resp = new DescribeDBSecurityGroupsResponse();
         this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the table information of a TencentDB instance.
+     * @param {DescribeDatabaseTableRequest} req
+     * @param {function(string, DescribeDatabaseTableResponse):void} cb
+     * @public
+     */
+    DescribeDatabaseTable(req, cb) {
+        let resp = new DescribeDatabaseTableResponse();
+        this.request("DescribeDatabaseTable", req, resp, cb);
     }
 
     /**

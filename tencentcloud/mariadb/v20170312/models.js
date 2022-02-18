@@ -2567,6 +2567,48 @@ class SecurityGroup extends  AbstractModel {
 }
 
 /**
+ * DescribeDatabaseTable request structure.
+ * @class
+ */
+class DescribeDatabaseTableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of dcdbt-ow7t8lmc.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Database name, which can be obtained through the `DescribeDatabases` API.
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * Table name, which can be obtained through the `DescribeDatabaseObjects` API.
+         * @type {string || null}
+         */
+        this.Table = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.Table = 'Table' in params ? params.Table : null;
+
+    }
+}
+
+/**
  * OpenDBExtranetAccess response structure.
  * @class
  */
@@ -2717,6 +2759,41 @@ class ModifyBackupTimeRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.StartBackupTime = 'StartBackupTime' in params ? params.StartBackupTime : null;
         this.EndBackupTime = 'EndBackupTime' in params ? params.EndBackupTime : null;
+
+    }
+}
+
+/**
+ * Database column information
+ * @class
+ */
+class TableColumn extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Column name
+         * @type {string || null}
+         */
+        this.Col = null;
+
+        /**
+         * Column type
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Col = 'Col' in params ? params.Col : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -5496,6 +5573,70 @@ If this parameter is left empty, `10.1.9` will be used.
 }
 
 /**
+ * DescribeDatabaseTable response structure.
+ * @class
+ */
+class DescribeDatabaseTableResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Database name.
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * Table name.
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * Column information.
+         * @type {Array.<TableColumn> || null}
+         */
+        this.Cols = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.Table = 'Table' in params ? params.Table : null;
+
+        if (params.Cols) {
+            this.Cols = new Array();
+            for (let z in params.Cols) {
+                let obj = new TableColumn();
+                obj.deserialize(params.Cols[z]);
+                this.Cols.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAccountPrivileges request structure.
  * @class
  */
@@ -6137,10 +6278,12 @@ module.exports = {
     ModifyDBParametersResponse: ModifyDBParametersResponse,
     CopyAccountPrivilegesRequest: CopyAccountPrivilegesRequest,
     SecurityGroup: SecurityGroup,
+    DescribeDatabaseTableRequest: DescribeDatabaseTableRequest,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     DescribeDcnDetailResponse: DescribeDcnDetailResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     ModifyBackupTimeRequest: ModifyBackupTimeRequest,
+    TableColumn: TableColumn,
     SecurityGroupBound: SecurityGroupBound,
     ColumnPrivilege: ColumnPrivilege,
     ModifySyncTaskAttributeRequest: ModifySyncTaskAttributeRequest,
@@ -6184,6 +6327,7 @@ module.exports = {
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     DBAccount: DBAccount,
     CreateHourDBInstanceRequest: CreateHourDBInstanceRequest,
+    DescribeDatabaseTableResponse: DescribeDatabaseTableResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     DescribeDBPerformanceDetailsResponse: DescribeDBPerformanceDetailsResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,

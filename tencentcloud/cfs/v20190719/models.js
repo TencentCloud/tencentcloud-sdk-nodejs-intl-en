@@ -1243,6 +1243,12 @@ class FileSystemInfo extends  AbstractModel {
          */
         this.Capacity = null;
 
+        /**
+         * File system tag list
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1276,6 +1282,15 @@ class FileSystemInfo extends  AbstractModel {
         this.AppId = 'AppId' in params ? params.AppId : null;
         this.BandwidthLimit = 'BandwidthLimit' in params ? params.BandwidthLimit : null;
         this.Capacity = 'Capacity' in params ? params.Capacity : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }

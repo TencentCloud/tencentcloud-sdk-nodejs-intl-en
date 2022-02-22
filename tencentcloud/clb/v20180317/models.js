@@ -794,14 +794,14 @@ Note: if the name of a new CLB instance already exists, a default name will be g
         this.LoadBalancerName = null;
 
         /**
-         * ID of the project to which a CLB instance belongs, which can be obtained through the DescribeProject API. If this parameter is not passed in, the default project will be used.
+         * Project ID of the CLB instance, which can be obtained through the [`DescribeProject`](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. If this field is not specified, it will default to the default project.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
          * Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
-Note: A primary AZ is the default AZ that carries traffic. When it fails, the optimal secondary AZ is chosen automatically to take its place. 
+Note: A primary AZ carries traffic by default, while a secondary AZ does not. It only works when the primary AZ is faulty.
          * @type {string || null}
          */
         this.MasterZoneId = null;
@@ -874,7 +874,7 @@ Note: A secondary AZ carries traffic when the primary AZ fails.
         this.ClusterIds = null;
 
         /**
-         * 
+         * Guaranteed performance specification.
          * @type {string || null}
          */
         this.SlaType = null;
@@ -1791,6 +1791,12 @@ class DescribeTaskStatusRequest extends  AbstractModel {
          */
         this.TaskId = null;
 
+        /**
+         * Order ID.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
     }
 
     /**
@@ -1801,6 +1807,7 @@ class DescribeTaskStatusRequest extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
 
     }
 }
@@ -1928,6 +1935,85 @@ class CreateRuleResponse extends  AbstractModel {
         }
         this.LocationIds = 'LocationIds' in params ? params.LocationIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information of CVMs and ENIs that use cross-region binding 2.0
+ * @class
+ */
+class CrossTargets extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC ID of the CLB instance
+         * @type {string || null}
+         */
+        this.LocalVpcId = null;
+
+        /**
+         * VPC ID of the CVM or ENI instance
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * IP address of the CVM or ENI instance
+         * @type {string || null}
+         */
+        this.IP = null;
+
+        /**
+         * VPC name of the CVM or ENI instance
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * ENI ID of the CVM instance
+         * @type {string || null}
+         */
+        this.EniId = null;
+
+        /**
+         * ID of the CVM instance
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Name of the CVM instance
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Region of the CVM or ENI instance
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocalVpcId = 'LocalVpcId' in params ? params.LocalVpcId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.IP = 'IP' in params ? params.IP : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.EniId = 'EniId' in params ? params.EniId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -2586,6 +2672,56 @@ class AutoRewriteRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCrossTargets response structure.
+ * @class
+ */
+class DescribeCrossTargetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of real server lists
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Real server list
+         * @type {Array.<CrossTargets> || null}
+         */
+        this.CrossTargetSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.CrossTargetSet) {
+            this.CrossTargetSet = new Array();
+            for (let z in params.CrossTargetSet) {
+                let obj = new CrossTargets();
+                obj.deserialize(params.CrossTargetSet[z]);
+                this.CrossTargetSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLoadBalancerListByCertId response structure.
  * @class
  */
@@ -2728,6 +2864,13 @@ class DescribeTaskStatusResponse extends  AbstractModel {
         this.Status = null;
 
         /**
+         * Array of unique CLB instance IDs.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2743,6 +2886,7 @@ class DescribeTaskStatusResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2901,7 +3045,7 @@ class DescribeLBListenersRequest extends  AbstractModel {
 }
 
 /**
- * Parameter for instance specification adjustment
+ * Instance specification adjustment parameters
  * @class
  */
 class SlaUpdateParam extends  AbstractModel {
@@ -2915,7 +3059,7 @@ class SlaUpdateParam extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * Target instance specification
+         * To upgrade to LCU-supported CLB instances. It must be `SLA`.
          * @type {string || null}
          */
         this.SlaType = null;
@@ -4222,6 +4366,46 @@ class ModifyTargetPortResponse extends  AbstractModel {
 }
 
 /**
+ * MigrateClassicalLoadBalancers request structure.
+ * @class
+ */
+class MigrateClassicalLoadBalancersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of classic CLB instance IDs
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+        /**
+         * Exclusive cluster information
+         * @type {ExclusiveCluster || null}
+         */
+        this.ExclusiveCluster = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+
+        if (params.ExclusiveCluster) {
+            let obj = new ExclusiveCluster();
+            obj.deserialize(params.ExclusiveCluster)
+            this.ExclusiveCluster = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeLoadBalancersDetail request structure.
  * @class
  */
@@ -4669,13 +4853,13 @@ class ModifyDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * CLB instance ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * CLB listener ID
+         * CLB listener ID.
          * @type {string || null}
          */
         this.ListenerId = null;
@@ -4745,71 +4929,34 @@ class CreateClsLogSetResponse extends  AbstractModel {
 }
 
 /**
- * Details of a real server bound to a listener
+ * DescribeCrossTargets request structure.
  * @class
  */
-class Backend extends  AbstractModel {
+class DescribeCrossTargetsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Real server type. Valid values: CVM, ENI.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Unique ID of a real server, which can be obtained from the unInstanceId field in the return of the DescribeInstances API
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Listening port of a real server
+         * Number of real server lists returned. Default value: 20; maximum value: 100.
          * @type {number || null}
          */
-        this.Port = null;
+        this.Limit = null;
 
         /**
-         * Forwarding weight of a real server. Value range: [0, 100]. Default value: 10.
+         * Starting offset of the real server list returned. Default value: 0.
          * @type {number || null}
          */
-        this.Weight = null;
+        this.Offset = null;
 
         /**
-         * Public IP of a real server
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
+         * Filter conditions to query CVMs and ENIs
+<li> `vpc-id` - String - Required: No - (Filter condition) Filter by VPC ID, such as "vpc-12345678".</li>
+<li> `ip` - String - Required: No - (Filter condition) Filter by real server IP, such as "192.168.0.1".</li>
+<li> `listener-id` - String - Required: No - (Filter condition) Filter by listener ID, such as "lbl-12345678".</li>
+<li> `location-id` - String - Required: No - (Filter condition) Filter by forwarding rule ID of the layer-7 listener, such as "loc-12345678".</li>
+         * @type {Array.<Filter> || null}
          */
-        this.PublicIpAddresses = null;
-
-        /**
-         * Private IP of a real server
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.PrivateIpAddresses = null;
-
-        /**
-         * Real server instance names
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Bound time of a real server
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RegisteredTime = null;
-
-        /**
-         * Unique ENI ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EniId = null;
+        this.Filters = null;
 
     }
 
@@ -4820,15 +4967,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
-        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
-        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.RegisteredTime = 'RegisteredTime' in params ? params.RegisteredTime : null;
-        this.EniId = 'EniId' in params ? params.EniId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -5237,6 +5386,34 @@ class CreateTargetGroupResponse extends  AbstractModel {
             return;
         }
         this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MigrateClassicalLoadBalancers response structure.
+ * @class
+ */
+class MigrateClassicalLoadBalancersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5985,7 +6162,7 @@ class DescribeTargetGroupInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of results in current query
+         * Number of results returned for the current query
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -5997,7 +6174,7 @@ class DescribeTargetGroupInstancesResponse extends  AbstractModel {
         this.TargetGroupInstanceSet = null;
 
         /**
-         * Actual statistics, which are not affected by `Limit`, `Offset`, and `CAM`.
+         * The actual total number of bound instances, which is not affected by the setting of `Limit`, `Offset` and the CAM permissions.
          * @type {number || null}
          */
         this.RealCount = null;
@@ -8625,7 +8802,7 @@ class ModifyLoadBalancerSlaRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the LCU-supported CLB instance, and the target specification
+         * CLB instance information
          * @type {Array.<SlaUpdateParam> || null}
          */
         this.LoadBalancerSla = null;
@@ -8695,6 +8872,13 @@ class CreateLoadBalancerResponse extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
+         * Order ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -8710,6 +8894,7 @@ class CreateLoadBalancerResponse extends  AbstractModel {
             return;
         }
         this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9338,6 +9523,86 @@ class DescribeLBListenersResponse extends  AbstractModel {
 }
 
 /**
+ * Target group information
+ * @class
+ */
+class TargetGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * `vpcid` of target group
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Target group name
+         * @type {string || null}
+         */
+        this.TargetGroupName = null;
+
+        /**
+         * Default port of target group
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Target group creation time
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Target group modification time
+         * @type {string || null}
+         */
+        this.UpdatedTime = null;
+
+        /**
+         * Array of associated rules
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AssociationItem> || null}
+         */
+        this.AssociatedRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.TargetGroupName = 'TargetGroupName' in params ? params.TargetGroupName : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+
+        if (params.AssociatedRule) {
+            this.AssociatedRule = new Array();
+            for (let z in params.AssociatedRule) {
+                let obj = new AssociationItem();
+                obj.deserialize(params.AssociatedRule[z]);
+                this.AssociatedRule.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteListener response structure.
  * @class
  */
@@ -9779,56 +10044,71 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Target group information
+ * Details of a real server bound to a listener
  * @class
  */
-class TargetGroupInfo extends  AbstractModel {
+class Backend extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Target group ID
+         * Real server type. Valid values: CVM, ENI.
          * @type {string || null}
          */
-        this.TargetGroupId = null;
+        this.Type = null;
 
         /**
-         * `vpcid` of target group
+         * Unique ID of a real server, which can be obtained from the unInstanceId field in the return of the DescribeInstances API
          * @type {string || null}
          */
-        this.VpcId = null;
+        this.InstanceId = null;
 
         /**
-         * Target group name
-         * @type {string || null}
-         */
-        this.TargetGroupName = null;
-
-        /**
-         * Default port of target group
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Listening port of a real server
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Target group creation time
-         * @type {string || null}
+         * Forwarding weight of a real server. Value range: [0, 100]. Default value: 10.
+         * @type {number || null}
          */
-        this.CreatedTime = null;
+        this.Weight = null;
 
         /**
-         * Target group modification time
-         * @type {string || null}
+         * Public IP of a real server
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
          */
-        this.UpdatedTime = null;
+        this.PublicIpAddresses = null;
 
         /**
-         * Array of associated rules
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<AssociationItem> || null}
+         * Private IP of a real server
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
          */
-        this.AssociatedRule = null;
+        this.PrivateIpAddresses = null;
+
+        /**
+         * Real server instance names
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Bound time of a real server
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegisteredTime = null;
+
+        /**
+         * Unique ENI ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EniId = null;
 
     }
 
@@ -9839,21 +10119,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.TargetGroupName = 'TargetGroupName' in params ? params.TargetGroupName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Port = 'Port' in params ? params.Port : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
-
-        if (params.AssociatedRule) {
-            this.AssociatedRule = new Array();
-            for (let z in params.AssociatedRule) {
-                let obj = new AssociationItem();
-                obj.deserialize(params.AssociatedRule[z]);
-                this.AssociatedRule.push(obj);
-            }
-        }
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.RegisteredTime = 'RegisteredTime' in params ? params.RegisteredTime : null;
+        this.EniId = 'EniId' in params ? params.EniId : null;
 
     }
 }
@@ -10431,6 +10705,7 @@ module.exports = {
     TargetGroupInstance: TargetGroupInstance,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
     CreateRuleResponse: CreateRuleResponse,
+    CrossTargets: CrossTargets,
     RuleHealth: RuleHealth,
     RegisterTargetGroupInstancesResponse: RegisterTargetGroupInstancesResponse,
     ClassicalTargetInfo: ClassicalTargetInfo,
@@ -10446,6 +10721,7 @@ module.exports = {
     DescribeClassicalLBTargetsRequest: DescribeClassicalLBTargetsRequest,
     DescribeCustomizedConfigListRequest: DescribeCustomizedConfigListRequest,
     AutoRewriteRequest: AutoRewriteRequest,
+    DescribeCrossTargetsResponse: DescribeCrossTargetsResponse,
     DescribeLoadBalancerListByCertIdResponse: DescribeLoadBalancerListByCertIdResponse,
     ModifyTargetGroupInstancesWeightResponse: ModifyTargetGroupInstancesWeightResponse,
     DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
@@ -10477,6 +10753,7 @@ module.exports = {
     ClassicalHealth: ClassicalHealth,
     DescribeCustomizedConfigAssociateListRequest: DescribeCustomizedConfigAssociateListRequest,
     ModifyTargetPortResponse: ModifyTargetPortResponse,
+    MigrateClassicalLoadBalancersRequest: MigrateClassicalLoadBalancersRequest,
     DescribeLoadBalancersDetailRequest: DescribeLoadBalancersDetailRequest,
     TargetGroupBackend: TargetGroupBackend,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
@@ -10487,7 +10764,7 @@ module.exports = {
     DescribeClassicalLBHealthStatusRequest: DescribeClassicalLBHealthStatusRequest,
     ModifyDomainRequest: ModifyDomainRequest,
     CreateClsLogSetResponse: CreateClsLogSetResponse,
-    Backend: Backend,
+    DescribeCrossTargetsRequest: DescribeCrossTargetsRequest,
     LBChargePrepaid: LBChargePrepaid,
     ClassicalListener: ClassicalListener,
     DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
@@ -10495,6 +10772,7 @@ module.exports = {
     DescribeCustomizedConfigAssociateListResponse: DescribeCustomizedConfigAssociateListResponse,
     CreateListenerResponse: CreateListenerResponse,
     CreateTargetGroupResponse: CreateTargetGroupResponse,
+    MigrateClassicalLoadBalancersResponse: MigrateClassicalLoadBalancersResponse,
     CreateLoadBalancerSnatIpsResponse: CreateLoadBalancerSnatIpsResponse,
     ClassicalLoadBalancerInfo: ClassicalLoadBalancerInfo,
     DescribeListenersResponse: DescribeListenersResponse,
@@ -10573,6 +10851,7 @@ module.exports = {
     ModifyTargetPortRequest: ModifyTargetPortRequest,
     DescribeLoadBalancersResponse: DescribeLoadBalancersResponse,
     DescribeLBListenersResponse: DescribeLBListenersResponse,
+    TargetGroupInfo: TargetGroupInfo,
     DeleteListenerResponse: DeleteListenerResponse,
     DeleteLoadBalancerSnatIpsResponse: DeleteLoadBalancerSnatIpsResponse,
     CertificateOutput: CertificateOutput,
@@ -10582,7 +10861,7 @@ module.exports = {
     TargetGroupAssociation: TargetGroupAssociation,
     ListenerHealth: ListenerHealth,
     AssociationItem: AssociationItem,
-    TargetGroupInfo: TargetGroupInfo,
+    Backend: Backend,
     RegisterTargetGroupInstancesRequest: RegisterTargetGroupInstancesRequest,
     LoadBalancer: LoadBalancer,
 

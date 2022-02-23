@@ -51,6 +51,7 @@ module.exports = {
     postgres: require("./postgres"),
     privatedns: require("./privatedns"),
     redis: require("./redis"),
+    rum: require("./rum"),
     scf: require("./scf"),
     ses: require("./ses"),
     sms: require("./sms"),

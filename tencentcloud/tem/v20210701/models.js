@@ -962,6 +962,8 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
          * JDK version
 - KONA: use KONA JDK
 - OPEN: use open JDK
+- KONA: use KONA JDK
+- OPEN: use open JDK
          * @type {string || null}
          */
         this.JdkVersion = null;
@@ -1073,6 +1075,24 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
          * @type {number || null}
          */
         this.LogEnable = null;
+
+        /**
+         * Whether the configuration is modified (except for the image configuration)
+         * @type {boolean || null}
+         */
+        this.ConfEdited = null;
+
+        /**
+         * Whether the application acceleration is enabled 
+         * @type {boolean || null}
+         */
+        this.SpeedUp = null;
+
+        /**
+         * Whether to enable probing
+         * @type {HealthCheckConfig || null}
+         */
+        this.StartupProbe = null;
 
     }
 
@@ -1196,6 +1216,14 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
             }
         }
         this.LogEnable = 'LogEnable' in params ? params.LogEnable : null;
+        this.ConfEdited = 'ConfEdited' in params ? params.ConfEdited : null;
+        this.SpeedUp = 'SpeedUp' in params ? params.SpeedUp : null;
+
+        if (params.StartupProbe) {
+            let obj = new HealthCheckConfig();
+            obj.deserialize(params.StartupProbe)
+            this.StartupProbe = obj;
+        }
 
     }
 }
@@ -2058,6 +2086,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.EnableTswTraceService = null;
 
+        /**
+         * Whether the environment is locked. `1`: locked; `0`: not locked
+         * @type {number || null}
+         */
+        this.Locked = null;
+
     }
 
     /**
@@ -2083,6 +2117,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
         this.EnableTswTraceService = 'EnableTswTraceService' in params ? params.EnableTswTraceService : null;
+        this.Locked = 'Locked' in params ? params.Locked : null;
 
     }
 }
@@ -2430,31 +2465,31 @@ class RollingUpdateApplicationByVersionRequest extends  AbstractModel {
         this.From = null;
 
         /**
-         * 
+         * The deployment policy. Values: `AUTO` (automatically deploy), `BETA` (deploy a small batch first to test the result, and deploy the rest automatically) and `MANUAL` (manually deploy)
          * @type {string || null}
          */
         this.DeployStrategyType = null;
 
         /**
-         * 
+         * Total number of batches
          * @type {number || null}
          */
         this.TotalBatchCount = null;
 
         /**
-         * 
+         * Interval between the batches
          * @type {number || null}
          */
         this.BatchInterval = null;
 
         /**
-         * 
+         * Number of instances in a beta batch
          * @type {number || null}
          */
         this.BetaBatchNum = null;
 
         /**
-         * 
+         * Minimum number of available instances during the deployment
          * @type {number || null}
          */
         this.MinAvailable = null;
@@ -3138,6 +3173,12 @@ class DeployStrategyConf extends  AbstractModel {
          */
         this.BatchInterval = null;
 
+        /**
+         * The minimum number of available pods
+         * @type {number || null}
+         */
+        this.MinAvailable = null;
+
     }
 
     /**
@@ -3151,6 +3192,7 @@ class DeployStrategyConf extends  AbstractModel {
         this.BetaBatchNum = 'BetaBatchNum' in params ? params.BetaBatchNum : null;
         this.DeployStrategyType = 'DeployStrategyType' in params ? params.DeployStrategyType : null;
         this.BatchInterval = 'BatchInterval' in params ? params.BatchInterval : null;
+        this.MinAvailable = 'MinAvailable' in params ? params.MinAvailable : null;
 
     }
 }
@@ -3660,6 +3702,20 @@ class Pair extends  AbstractModel {
          */
         this.Value = null;
 
+        /**
+         * `default``: Custom. `reserved`: System variable. `referenced`: Referenced configuration item.
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Configuration name
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.Config = null;
+
     }
 
     /**
@@ -3671,6 +3727,8 @@ class Pair extends  AbstractModel {
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Config = 'Config' in params ? params.Config : null;
 
     }
 }

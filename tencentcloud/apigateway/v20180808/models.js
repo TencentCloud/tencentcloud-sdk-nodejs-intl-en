@@ -6591,6 +6591,42 @@ class ModifyApiRequest extends  AbstractModel {
          */
         this.Base64EncodedTriggerRules = null;
 
+        /**
+         * Event bus ID.
+         * @type {string || null}
+         */
+        this.EventBusId = null;
+
+        /**
+         * SCF function type, which takes effect when the backend type is `SCF`. Valid values: `EVENT` and `HTTP`.
+         * @type {string || null}
+         */
+        this.ServiceScfFunctionType = null;
+
+        /**
+         * EIAM application type.
+         * @type {string || null}
+         */
+        this.EIAMAppType = null;
+
+        /**
+         * EIAM application authentication type. Valid values: `AuthenticationOnly`, `Authentication`, `Authorization`.
+         * @type {string || null}
+         */
+        this.EIAMAuthType = null;
+
+        /**
+         * Validity of the EIAM application token. Unit: second. Default value: `7200`.
+         * @type {string || null}
+         */
+        this.EIAMAppId = null;
+
+        /**
+         * EIAM application ID.
+         * @type {number || null}
+         */
+        this.TokenTimeout = null;
+
     }
 
     /**
@@ -6731,6 +6767,12 @@ class ModifyApiRequest extends  AbstractModel {
                 this.Base64EncodedTriggerRules.push(obj);
             }
         }
+        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
+        this.ServiceScfFunctionType = 'ServiceScfFunctionType' in params ? params.ServiceScfFunctionType : null;
+        this.EIAMAppType = 'EIAMAppType' in params ? params.EIAMAppType : null;
+        this.EIAMAuthType = 'EIAMAuthType' in params ? params.EIAMAuthType : null;
+        this.EIAMAppId = 'EIAMAppId' in params ? params.EIAMAppId : null;
+        this.TokenTimeout = 'TokenTimeout' in params ? params.TokenTimeout : null;
 
     }
 }
@@ -7426,6 +7468,12 @@ class CreateApiRequest extends  AbstractModel {
         this.IsBase64Encoded = null;
 
         /**
+         * Event bus ID.
+         * @type {string || null}
+         */
+        this.EventBusId = null;
+
+        /**
          * SCF function type, which takes effect if the backend type is `SCF`. Valid values: `EVENT` and `HTTP`.
          * @type {string || null}
          */
@@ -7588,6 +7636,7 @@ class CreateApiRequest extends  AbstractModel {
         this.TargetNamespaceId = 'TargetNamespaceId' in params ? params.TargetNamespaceId : null;
         this.UserType = 'UserType' in params ? params.UserType : null;
         this.IsBase64Encoded = 'IsBase64Encoded' in params ? params.IsBase64Encoded : null;
+        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.ServiceScfFunctionType = 'ServiceScfFunctionType' in params ? params.ServiceScfFunctionType : null;
         this.EIAMAppType = 'EIAMAppType' in params ? params.EIAMAppType : null;
         this.EIAMAuthType = 'EIAMAuthType' in params ? params.EIAMAuthType : null;

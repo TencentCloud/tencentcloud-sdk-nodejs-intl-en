@@ -85,11 +85,11 @@ request: number of requests
         this.Metrics = null;
 
         /**
-         * Time granularity, which can be:
-1 day	 1, 5, 15, 30, 60, 120, 240, 1440 
-2-3 days 15, 30, 60, 120, 240, 1440
-4-7 days 30, 60, 120, 240, 1440
-8-90 days	 60, 120, 240, 1440
+         * Sampling interval in minutes. The available options vary for different query period. See below: 
+1 day: `1`, `5`, `15`, `30`, `60`, `120`, `240`, `1440` 
+2 to 3 days: `15`, `30`, `60`, `120`, `240`, `1440`
+4 to 7 days: `30`, `60`, `120`, `240`, `1440`
+8 to 31 days: `60`, `120`, `240`, `1440`
          * @type {number || null}
          */
         this.Interval = null;
@@ -218,6 +218,160 @@ class DescribeDomainsConfigResponse extends  AbstractModel {
 }
 
 /**
+ * Custom HTTPS configuration for origin-pull
+ * @class
+ */
+class AdvanceHttps extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Custom TLS data switch
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CustomTlsStatus = null;
+
+        /**
+         * TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.TlsVersion = null;
+
+        /**
+         * Custom encryption suite
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Cipher = null;
+
+        /**
+         * Origin-pull verification status
+`off`: Disables origin-pull verification
+`oneWay`: Only verify the origin
+`twoWay`: Enables two-way origin-pull verification
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VerifyOriginType = null;
+
+        /**
+         * Configuration information of the origin-pull certificate
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {ServerCert || null}
+         */
+        this.CertInfo = null;
+
+        /**
+         * Configuration information of the origin server certificate
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {ClientCert || null}
+         */
+        this.OriginCertInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CustomTlsStatus = 'CustomTlsStatus' in params ? params.CustomTlsStatus : null;
+        this.TlsVersion = 'TlsVersion' in params ? params.TlsVersion : null;
+        this.Cipher = 'Cipher' in params ? params.Cipher : null;
+        this.VerifyOriginType = 'VerifyOriginType' in params ? params.VerifyOriginType : null;
+
+        if (params.CertInfo) {
+            let obj = new ServerCert();
+            obj.deserialize(params.CertInfo)
+            this.CertInfo = obj;
+        }
+
+        if (params.OriginCertInfo) {
+            let obj = new ClientCert();
+            obj.deserialize(params.OriginCertInfo)
+            this.OriginCertInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * PurgeUrlsCache request structure.
+ * @class
+ */
+class PurgeUrlsCacheRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of URLs to be purged. The protocol header must be included.
+         * @type {Array.<string> || null}
+         */
+        this.Urls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Urls = 'Urls' in params ? params.Urls : null;
+
+    }
+}
+
+/**
+ * Query object and its access details
+ * @class
+ */
+class ResourceData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource name, which is categorized as follows based on different query conditions:
+Specific domain name: indicates the details of the specific domain name
+multiDomains: indicates aggregated details of multiple domain names
+Project ID: displays the ID of the specified project to be queried
+all: details at the account level
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Data details of resource
+         * @type {EcdnData || null}
+         */
+        this.EcdnData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+
+        if (params.EcdnData) {
+            let obj = new EcdnData();
+            obj.deserialize(params.EcdnData)
+            this.EcdnData = obj;
+        }
+
+    }
+}
+
+/**
  * HTTPS configuration of domain name.
  * @class
  */
@@ -320,78 +474,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new Hsts();
             obj.deserialize(params.Hsts)
             this.Hsts = obj;
-        }
-
-    }
-}
-
-/**
- * PurgeUrlsCache request structure.
- * @class
- */
-class PurgeUrlsCacheRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of URLs to be purged. The protocol header must be included.
-         * @type {Array.<string> || null}
-         */
-        this.Urls = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Urls = 'Urls' in params ? params.Urls : null;
-
-    }
-}
-
-/**
- * Query object and its access details
- * @class
- */
-class ResourceData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Resource name, which is categorized as follows based on different query conditions:
-Specific domain name: indicates the details of the specific domain name
-multiDomains: indicates aggregated details of multiple domain names
-Project ID: displays the ID of the specified project to be queried
-all: details at the account level
-         * @type {string || null}
-         */
-        this.Resource = null;
-
-        /**
-         * Data details of resource
-         * @type {EcdnData || null}
-         */
-        this.EcdnData = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Resource = 'Resource' in params ? params.Resource : null;
-
-        if (params.EcdnData) {
-            let obj = new EcdnData();
-            obj.deserialize(params.EcdnData)
-            this.EcdnData = obj;
         }
 
     }
@@ -1562,6 +1644,13 @@ class DomainBriefInfo extends  AbstractModel {
          */
         this.Readonly = null;
 
+        /**
+         * Domain name tag
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
     }
 
     /**
@@ -1588,6 +1677,15 @@ class DomainBriefInfo extends  AbstractModel {
         this.Disable = 'Disable' in params ? params.Disable : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.Readonly = 'Readonly' in params ? params.Readonly : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
 
     }
 }
@@ -1694,7 +1792,9 @@ class WebSocket extends  AbstractModel {
         super();
 
         /**
-         * WebSocket configuration switch, which can be `on` or `off`.
+         * Whether to enable custom WebSocket timeout setting. When it’s `off`: WebSocket connection is supported, and the default timeout period is 15 seconds. To change the timeout period, please set it to `on`.
+
+* WebSocket is now only available for beta users. To use it, please submit a ticket.
          * @type {string || null}
          */
         this.Switch = null;
@@ -1758,7 +1858,7 @@ class PurgePathCacheResponse extends  AbstractModel {
         super();
 
         /**
-         * Purge task ID. The first ten digits are the UTC time when the task is submitted.
+         * Purge task ID
          * @type {string || null}
          */
         this.TaskId = null;
@@ -1793,7 +1893,7 @@ class PurgeUrlsCacheResponse extends  AbstractModel {
         super();
 
         /**
-         * Purge task ID. The first ten digits are the UTC time when the task is submitted.
+         * Purge task ID
          * @type {string || null}
          */
         this.TaskId = null;
@@ -2499,6 +2599,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.BackupOriginType = null;
 
+        /**
+         * HTTPS advanced origin-pull configuration
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {AdvanceHttps || null}
+         */
+        this.AdvanceHttps = null;
+
     }
 
     /**
@@ -2514,6 +2621,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.OriginPullProtocol = 'OriginPullProtocol' in params ? params.OriginPullProtocol : null;
         this.BackupOrigins = 'BackupOrigins' in params ? params.BackupOrigins : null;
         this.BackupOriginType = 'BackupOriginType' in params ? params.BackupOriginType : null;
+
+        if (params.AdvanceHttps) {
+            let obj = new AdvanceHttps();
+            obj.deserialize(params.AdvanceHttps)
+            this.AdvanceHttps = obj;
+        }
 
     }
 }
@@ -2632,17 +2745,18 @@ class DomainFilter extends  AbstractModel {
         super();
 
         /**
-         * Filter field name, which can be:
-- origin: primary origin server.
-- domain: domain name.
-- resourceId: domain name ID.
-- status: domain name status. Valid values: online, offline, processing.
-- disable: domain name blockage status. Valid values: normal, unlicensed.
-- projectId: project ID.
-- fullUrlCache: full path cache. Valid values: on, off.
-- https: whether to configure HTTPS. Valid values: on, off, processing.
-- originPullProtocol: origin-pull protocol type. Valid values: http, follow, https.
-- area: acceleration region. Valid values: mainland, overseas, global.
+         * Filters by the field name, which includes:
+- `origin`: Primary origin server.
+- `domain`: Domain name.
+- `resourceId`: Domain name ID.
+- `status`: Domain name status. Valid values: `online`, `offline`, and `processing`.
+- `disable`: Whether the domain name is blocked. Valid values: `normal`, `unlicensed`.
+- `projectId`: Project ID.
+- `fullUrlCache`: Whether to enable full-path cache, which can be `on` or `off`.
+- `https`: Whether to configure HTTPS, which can be `on`, `off` or `processing`.
+- `originPullProtocol`: Origin-pull protocol type, which can be `http`, `follow`, or `https`.
+- `area`: Acceleration region, which can be `mainland`，`overseas` or `global`.
+- `tagKey`: Tag key.
          * @type {string || null}
          */
         this.Name = null;
@@ -3187,9 +3301,10 @@ module.exports = {
     DescribeEcdnStatisticsRequest: DescribeEcdnStatisticsRequest,
     StartEcdnDomainRequest: StartEcdnDomainRequest,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
-    Https: Https,
+    AdvanceHttps: AdvanceHttps,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     ResourceData: ResourceData,
+    Https: Https,
     Cache: Cache,
     ForceRedirect: ForceRedirect,
     DescribePurgeQuotaResponse: DescribePurgeQuotaResponse,

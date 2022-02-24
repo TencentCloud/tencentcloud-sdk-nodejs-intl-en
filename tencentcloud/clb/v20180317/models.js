@@ -736,7 +736,7 @@ class DeleteRuleRequest extends  AbstractModel {
         this.LocationIds = null;
 
         /**
-         * Domain name of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified.
+         * Specifies the target domain name. Only one domain name is allowed. This field is invalid when `LocationIds` is specified.
          * @type {string || null}
          */
         this.Domain = null;
@@ -748,7 +748,7 @@ class DeleteRuleRequest extends  AbstractModel {
         this.Url = null;
 
         /**
-         * A listener must be configured with a default domain name. If you need to delete the default domain name, you can specify another one as the new default domain name.
+         * Specifies a new default domain name for the listener. This field is used when the original default domain name is disabled. If there are multiple domain names, specify one of them.
          * @type {string || null}
          */
         this.NewDefaultServerDomain = null;
@@ -4092,8 +4092,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.HttpVersion = null;
 
         /**
-         * Specifies the source IP for health check. `0`: use the CLB VIP as the source IP; `1`: IP range starting with 100.64 serving as the source IP. Default: `0`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Specifies the type of IP for health check. `0` (default): Use the CLB VIP as the source IP. `1`: Use the IP range starting with 100.64 as the source IP.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SourceIpType = null;
@@ -4181,6 +4181,12 @@ class CreateTopicRequest extends  AbstractModel {
          */
         this.TopicType = null;
 
+        /**
+         * Logset retention period (in days). Default: 30 days.
+         * @type {number || null}
+         */
+        this.Period = null;
+
     }
 
     /**
@@ -4193,6 +4199,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
         this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -5678,6 +5685,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.QuicStatus = null;
 
+        /**
+         * List of domain names associated with the forwarding rule
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
     }
 
     /**
@@ -5728,6 +5742,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
         this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
         this.QuicStatus = 'QuicStatus' in params ? params.QuicStatus : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
 
     }
 }
@@ -6542,16 +6557,16 @@ class CreateClsLogSetRequest extends  AbstractModel {
         super();
 
         /**
-         * Logset retention period in days; max value: 90
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
          * Logset name, which must be unique among all CLS logsets; default value: clb_logset
          * @type {string || null}
          */
         this.LogsetName = null;
+
+        /**
+         * Logset retention period (in days)
+         * @type {number || null}
+         */
+        this.Period = null;
 
         /**
          * Logset type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
@@ -6568,8 +6583,8 @@ class CreateClsLogSetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = 'Period' in params ? params.Period : null;
         this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+        this.Period = 'Period' in params ? params.Period : null;
         this.LogsetType = 'LogsetType' in params ? params.LogsetType : null;
 
     }
@@ -7431,6 +7446,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.TargetHealth = null;
 
+        /**
+         * List o domain names associated with the forwarding rule
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Domains = null;
+
     }
 
     /**
@@ -7496,6 +7518,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
         this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
         this.TargetHealth = 'TargetHealth' in params ? params.TargetHealth : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
 
     }
 }
@@ -7985,13 +8008,13 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
-         * Domain name, which must be under a created forwarding rule.
+         * The domain name, which must be associated with an existing forwarding rule. If there are multiple domain names, you only need to specify one.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * New domain name
+         * The one domain name to modify. `NewDomain` and `NewDomains` can not be both specified.
          * @type {string || null}
          */
         this.NewDomain = null;
@@ -8015,10 +8038,16 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         this.DefaultServer = null;
 
         /**
-         * A listener must be configured with a default domain name. If you need to disable the default domain name, you must specify another one as the new default domain name.
+         * Specifies a new default domain name for the listener. This field is used when the original default domain name is disabled. If there are multiple domain names, specify one of them.
          * @type {string || null}
          */
         this.NewDefaultServerDomain = null;
+
+        /**
+         * The new domain names to modify. `NewDomain` and `NewDomains` can not be both specified.
+         * @type {Array.<string> || null}
+         */
+        this.NewDomains = null;
 
     }
 
@@ -8042,6 +8071,7 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         this.Http2 = 'Http2' in params ? params.Http2 : null;
         this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
         this.NewDefaultServerDomain = 'NewDefaultServerDomain' in params ? params.NewDefaultServerDomain : null;
+        this.NewDomains = 'NewDomains' in params ? params.NewDomains : null;
 
     }
 }
@@ -8502,16 +8532,16 @@ class RuleInput extends  AbstractModel {
         super();
 
         /**
-         * Domain name of the forwarding rule. Length: 1-80.
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
          * Forwarding rule path. Length: 1-200.
          * @type {string || null}
          */
         this.Url = null;
+
+        /**
+         * The domain name associated with the forwarding rule. It can contain 1-80 characters. Only one domain name can be entered. If you need to enter multiple domain names, use `Domains`.
+         * @type {string || null}
+         */
+        this.Domain = null;
 
         /**
          * Session persistence time in seconds. Value range: 30-3,600. Setting it to 0 indicates that session persistence is disabled.
@@ -8580,6 +8610,12 @@ They represent weighted round robin, least connections, and IP hash, respectivel
          */
         this.Quic = null;
 
+        /**
+         * The domain name associated with the forwarding rule. Each contain 1-80 characters. If you only need to enter one domain name, use `Domain` instead.
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
     }
 
     /**
@@ -8589,8 +8625,8 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         if (!params) {
             return;
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
         this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
 
         if (params.HealthCheck) {
@@ -8612,6 +8648,7 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.TrpcCallee = 'TrpcCallee' in params ? params.TrpcCallee : null;
         this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
         this.Quic = 'Quic' in params ? params.Quic : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
 
     }
 }

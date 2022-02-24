@@ -2435,32 +2435,42 @@ all clusters under the account will be obtained)
          * ·  ClusterName
     Filters by the cluster name
     Type: String
-    Required: no
+    Required: No
+
+·  ClusterType
+    Filters by the cluster type
+    Type: String
+    Required: No
+
+·  ClusterStatus
+    Filters by the cluster status
+    Type: String
+    Required: No
 
 ·  Tags
     Filters by key-value pairs of tags
     Type: String
-    Required: no
+    Required: No
 
 ·  vpc-id
     Filters by the VPC ID
     Type: String
-    Required: no
+    Required: No
 
 ·  tag-key
     Filters by the tag key
     Type: String
-    Required: no
+    Required: No
 
 ·  tag-value
     Filters by the tag value
     Type: String
-    Required: no
+    Required: No
 
 ·  tag:tag-key
     Filters by key-value pairs of tags
     Type: String
-    Required: no
+    Required: No
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -7849,6 +7859,30 @@ class DescribeClusterNodePoolsRequest extends  AbstractModel {
          */
         this.ClusterId = null;
 
+        /**
+         * ·  NodePoolsName
+    Filters by the node pool name
+    Type: String
+    Required: No
+
+·  NodePoolsId
+    Filters by the node pool ID
+    Type: String
+    Required: No
+
+·  tags
+    Filters by key-value pairs of tags
+    Type: String
+    Required: No
+
+·  tag:tag-key
+    Filters by key-value pairs of tags
+    Type: String
+    Required: No
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -7859,6 +7893,15 @@ class DescribeClusterNodePoolsRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }

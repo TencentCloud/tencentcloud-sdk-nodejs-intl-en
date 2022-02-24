@@ -33,13 +33,15 @@ const ModifyKeyPairAttributeRequest = models.ModifyKeyPairAttributeRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const ResetInstancesTypeRequest = models.ResetInstancesTypeRequest;
 const InquiryPriceResetInstanceRequest = models.InquiryPriceResetInstanceRequest;
-const RunInstancesRequest = models.RunInstancesRequest;
+const DeleteLaunchTemplateVersionsRequest = models.DeleteLaunchTemplateVersionsRequest;
 const DeleteImagesRequest = models.DeleteImagesRequest;
+const DeleteLaunchTemplateRequest = models.DeleteLaunchTemplateRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeHostsResponse = models.DescribeHostsResponse;
 const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
 const ResetInstanceRequest = models.ResetInstanceRequest;
+const LaunchTemplate = models.LaunchTemplate;
 const InstanceTypeConfig = models.InstanceTypeConfig;
 const AllocateHostsRequest = models.AllocateHostsRequest;
 const LoginSettings = models.LoginSettings;
@@ -47,9 +49,12 @@ const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const PurchaseReservedInstancesOfferingRequest = models.PurchaseReservedInstancesOfferingRequest;
 const RebootInstancesRequest = models.RebootInstancesRequest;
 const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsRequest;
+const DeleteLaunchTemplateResponse = models.DeleteLaunchTemplateResponse;
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeInstancesStatusResponse = models.DescribeInstancesStatusResponse;
 const ZoneInfo = models.ZoneInfo;
+const ModifyLaunchTemplateDefaultVersionResponse = models.ModifyLaunchTemplateDefaultVersionResponse;
+const LaunchTemplateVersionInfo = models.LaunchTemplateVersionInfo;
 const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
@@ -61,6 +66,7 @@ const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
 const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
+const DescribeLaunchTemplateVersionsRequest = models.DescribeLaunchTemplateVersionsRequest;
 const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstanceDisksRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
 const ReservedInstancePrice = models.ReservedInstancePrice;
@@ -83,7 +89,8 @@ const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfi
 const CreateImageResponse = models.CreateImageResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
-const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
+const DescribeImageSharePermissionResponse = models.DescribeImageSharePermissionResponse;
+const DeleteLaunchTemplateVersionsResponse = models.DeleteLaunchTemplateVersionsResponse;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InquiryPriceRunInstancesRequest = models.InquiryPriceRunInstancesRequest;
 const Image = models.Image;
@@ -98,27 +105,32 @@ const DataDisk = models.DataDisk;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const OperationCountLimit = models.OperationCountLimit;
 const ReservedInstanceConfigInfoItem = models.ReservedInstanceConfigInfoItem;
+const LaunchTemplateVersionData = models.LaunchTemplateVersionData;
 const DeleteDisasterRecoverGroupsResponse = models.DeleteDisasterRecoverGroupsResponse;
 const HostItem = models.HostItem;
 const Externals = models.Externals;
 const CreateImageRequest = models.CreateImageRequest;
 const Instance = models.Instance;
+const CreateLaunchTemplateVersionRequest = models.CreateLaunchTemplateVersionRequest;
 const EnhancedService = models.EnhancedService;
-const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
+const DescribeLaunchTemplatesResponse = models.DescribeLaunchTemplatesResponse;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const DescribeReservedInstancesOfferingsRequest = models.DescribeReservedInstancesOfferingsRequest;
 const ReservedInstanceFamilyItem = models.ReservedInstanceFamilyItem;
 const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGroupsResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ActionTimer = models.ActionTimer;
+const CreateLaunchTemplateRequest = models.CreateLaunchTemplateRequest;
 const DescribeReservedInstancesConfigInfosRequest = models.DescribeReservedInstancesConfigInfosRequest;
 const TagSpecification = models.TagSpecification;
+const DescribeLaunchTemplatesRequest = models.DescribeLaunchTemplatesRequest;
 const ResetInstancesInternetMaxBandwidthRequest = models.ResetInstancesInternetMaxBandwidthRequest;
 const InstanceFamilyConfig = models.InstanceFamilyConfig;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const ImportImageRequest = models.ImportImageRequest;
 const SpotMarketOptions = models.SpotMarketOptions;
 const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
+const CreateLaunchTemplateResponse = models.CreateLaunchTemplateResponse;
 const CreateKeyPairRequest = models.CreateKeyPairRequest;
 const InstanceStatus = models.InstanceStatus;
 const ReservedInstancePriceItem = models.ReservedInstancePriceItem;
@@ -126,8 +138,10 @@ const AllocateHostsResponse = models.AllocateHostsResponse;
 const DescribeImageSharePermissionRequest = models.DescribeImageSharePermissionRequest;
 const DisasterRecoverGroup = models.DisasterRecoverGroup;
 const InquiryPriceResetInstanceResponse = models.InquiryPriceResetInstanceResponse;
+const RunInstancesRequest = models.RunInstancesRequest;
 const Filter = models.Filter;
-const DescribeImageSharePermissionResponse = models.DescribeImageSharePermissionResponse;
+const LaunchTemplateInfo = models.LaunchTemplateInfo;
+const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
 const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
 const StartInstancesResponse = models.StartInstancesResponse;
@@ -153,10 +167,14 @@ const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
+const CreateLaunchTemplateVersionResponse = models.CreateLaunchTemplateVersionResponse;
 const OsVersion = models.OsVersion;
 const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
+const GPUInfo = models.GPUInfo;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const RegionInfo = models.RegionInfo;
+const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
+const ModifyLaunchTemplateDefaultVersionRequest = models.ModifyLaunchTemplateDefaultVersionRequest;
 const StopInstancesRequest = models.StopInstancesRequest;
 const DescribeInternetChargeTypeConfigsRequest = models.DescribeInternetChargeTypeConfigsRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
@@ -168,6 +186,7 @@ const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const KeyPair = models.KeyPair;
 const DescribeReservedInstancesOfferingsResponse = models.DescribeReservedInstancesOfferingsResponse;
+const DescribeLaunchTemplateVersionsResponse = models.DescribeLaunchTemplateVersionsResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
@@ -266,6 +285,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the default version of the instance launch template.
+     * @param {ModifyLaunchTemplateDefaultVersionRequest} req
+     * @param {function(string, ModifyLaunchTemplateDefaultVersionResponse):void} cb
+     * @public
+     */
+    ModifyLaunchTemplateDefaultVersion(req, cb) {
+        let resp = new ModifyLaunchTemplateDefaultVersionResponse();
+        this.request("ModifyLaunchTemplateDefaultVersion", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the price of creating instances. You can only use this API for instances whose configuration is within the purchase limit. For more information, see [RunInstances](https://intl.cloud.tencent.com/document/api/213/15730?from_cn_redirect=1).
      * @param {InquiryPriceRunInstancesRequest} req
      * @param {function(string, InquiryPriceRunInstancesResponse):void} cb
@@ -313,12 +343,13 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * The API is used to modify the attributes of an instance. Currently, you can only use the API to modify the name and the associated security groups of the instance.
+     * The API is used to modify the attributes of an instance. Only the name and the associated security groups can be modified for now.
 
-* **Instance names** are used only for users' convenience. Tencent Cloud does not use these names for online support or instance management.
-* Batch operations are supported. The maximum number of Batch instances in each request is 100.
-* When you modify the security groups associated with an instance, the original security groups will be disassociated.
-* You can use the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) API to query the instance operation result. If the 'LatestOperationState' in the response is **SUCCESS**, the operation is successful.
+* An attribute must be specified in the request.
+* "Instance name" is a custom name for easier management. Tencent Cloud does not use the name for online support or instance management.
+* Batch operations are supported. Each request can modify up to 100 instances.
+* When you modify the security groups associated with an instance is modified, the original security groups are disassociated.
+* You can use the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) to query the instance operation result. If the 'LatestOperationState' in the response is **SUCCESS**, the operation is successful.
      * @param {ModifyInstancesAttributeRequest} req
      * @param {function(string, ModifyInstancesAttributeResponse):void} cb
      * @public
@@ -425,18 +456,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * This API is used to import key pairs.
-
-* You can use this API to import key pairs to a user account, but the key pairs will not be automatically associated with any instance. You may use [AssociasteInstancesKeyPair](https://intl.cloud.tencent.com/document/api/213/9404?from_cn_redirect=1) to associate key pairs with instances.
-* You need to specify the names of the key pairs and the content of the public keys.
-* If you only have private keys, you can convert them to public keys with the `SSL` tool before importing them.
-     * @param {ImportKeyPairRequest} req
-     * @param {function(string, ImportKeyPairResponse):void} cb
+     * This API is used to query the information of instance launch template versions.
+     * @param {DescribeLaunchTemplateVersionsRequest} req
+     * @param {function(string, DescribeLaunchTemplateVersionsResponse):void} cb
      * @public
      */
-    ImportKeyPair(req, cb) {
-        let resp = new ImportKeyPairResponse();
-        this.request("ImportKeyPair", req, resp, cb);
+    DescribeLaunchTemplateVersions(req, cb) {
+        let resp = new DescribeLaunchTemplateVersionsResponse();
+        this.request("DescribeLaunchTemplateVersions", req, resp, cb);
     }
 
     /**
@@ -467,19 +494,40 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to create one or more instances with a specified configuration.
+     * This API is used to query the Virtual Network Console (VNC) URL of an instance for its login to the VNC.
 
-* After an instance is created successfully, it will start up automatically, and the [instance state](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#instance_state) will become "Running".
-* If you create a pay-as-you-go instance billed on an hourly basis, an amount equivalent to the hourly rate will be frozen before the creation. Make sure your account balance is sufficient before calling this API.
-* The number of instances you can purchase through this API is subject to the [CVM instance purchase limit](https://intl.cloud.tencent.com/document/product/213/2664?from_cn_redirect=1). Both the instances created through this API and the console will be counted toward the quota.
-* This API is an async API. An instance `ID` list will be returned after you successfully make a creation request. However, it does not mean the creation has been completed. The state of the instance will be `Creating` during the creation. You can use [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) to query the status of the instance. If the status changes from `Creating` to `Running`, it means that the instance has been created successfully.
-     * @param {RunInstancesRequest} req
-     * @param {function(string, RunInstancesResponse):void} cb
+* It does not support `STOPPED` CVMs.
+* A VNC URL is only valid for 15 seconds. If you do not access the URL within 15 seconds, it will become invalid and you have to query a URL again.
+* Once the VNC URL is accessed, it will become invalid and you have to query a URL again if needed.
+* If the connection is interrupted, you can make up to 30 reconnection attempts per minute.
+* After getting the value `InstanceVncUrl`, you need to append `InstanceVncUrl=xxxx` to the end of the link <https://img.qcloud.com/qcloud/app/active_vnc/index.html?>.
+
+  - `InstanceVncUrl`: its value will be returned after the API is successfully called.
+
+    The final URL is in the following format:
+
+```
+https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
+```
+
+     * @param {DescribeInstanceVncUrlRequest} req
+     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
      * @public
      */
-    RunInstances(req, cb) {
-        let resp = new RunInstancesResponse();
-        this.request("RunInstances", req, resp, cb);
+    DescribeInstanceVncUrl(req, cb) {
+        let resp = new DescribeInstanceVncUrlResponse();
+        this.request("DescribeInstanceVncUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an instance launch template.
+     * @param {DeleteLaunchTemplateRequest} req
+     * @param {function(string, DeleteLaunchTemplateResponse):void} cb
+     * @public
+     */
+    DeleteLaunchTemplate(req, cb) {
+        let resp = new DeleteLaunchTemplateResponse();
+        this.request("DeleteLaunchTemplate", req, resp, cb);
     }
 
     /**
@@ -609,6 +657,21 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
+     * This API is used to create an instance launch template.
+
+An instance launch template contains the configuration information required to create an instance, including instance type, data/system disk type and size, and security group, etc.
+
+When a template is created, it defaults to Version 1. You can use `CreateLaunchTemplateVersion` to create new versions of this template, with the version number increasing. When you run `RunInstances` to create instances, you can specify the instance launch template version. If it’s not specified, the default template version is used.
+     * @param {CreateLaunchTemplateRequest} req
+     * @param {function(string, CreateLaunchTemplateResponse):void} cb
+     * @public
+     */
+    CreateLaunchTemplate(req, cb) {
+        let resp = new CreateLaunchTemplateResponse();
+        this.request("CreateLaunchTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to list reserved instances the user has purchased.
      * @param {DescribeReservedInstancesRequest} req
      * @param {function(string, DescribeReservedInstancesResponse):void} cb
@@ -706,14 +769,25 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to query a list of model families available to the current user in the current region.
-     * @param {DescribeInstanceFamilyConfigsRequest} req
-     * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
+     * This API is used to delete one or more instance launch template versions.
+     * @param {DeleteLaunchTemplateVersionsRequest} req
+     * @param {function(string, DeleteLaunchTemplateVersionsResponse):void} cb
      * @public
      */
-    DescribeInstanceFamilyConfigs(req, cb) {
-        let resp = new DescribeInstanceFamilyConfigsResponse();
-        this.request("DescribeInstanceFamilyConfigs", req, resp, cb);
+    DeleteLaunchTemplateVersions(req, cb) {
+        let resp = new DeleteLaunchTemplateVersionsResponse();
+        this.request("DeleteLaunchTemplateVersions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an instance launch template based on the specified template ID and the corresponding template version number. The default version number will be used when no template version numbers are specified. Each instance launch template can have up to 30 version numbers.
+     * @param {CreateLaunchTemplateVersionRequest} req
+     * @param {function(string, CreateLaunchTemplateVersionResponse):void} cb
+     * @public
+     */
+    CreateLaunchTemplateVersion(req, cb) {
+        let resp = new CreateLaunchTemplateVersionResponse();
+        this.request("CreateLaunchTemplateVersion", req, resp, cb);
     }
 
     /**
@@ -823,6 +897,32 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
+     * This API is used to import key pairs.
+
+* You can use this API to import key pairs to a user account, but the key pairs will not be automatically associated with any instance. You may use [AssociasteInstancesKeyPair](https://intl.cloud.tencent.com/document/api/213/9404?from_cn_redirect=1) to associate key pairs with instances.
+* You need to specify the names of the key pairs and the content of the public keys.
+* If you only have private keys, you can convert them to public keys with the `SSL` tool before importing them.
+     * @param {ImportKeyPairRequest} req
+     * @param {function(string, ImportKeyPairResponse):void} cb
+     * @public
+     */
+    ImportKeyPair(req, cb) {
+        let resp = new ImportKeyPairResponse();
+        this.request("ImportKeyPair", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query one or more instance launch templates.
+     * @param {DescribeLaunchTemplatesRequest} req
+     * @param {function(string, DescribeLaunchTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeLaunchTemplates(req, cb) {
+        let resp = new DescribeLaunchTemplatesResponse();
+        this.request("DescribeLaunchTemplates", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the attributes of [spread placement groups](https://intl.cloud.tencent.com/document/product/213/15486?from_cn_redirect=1).
      * @param {ModifyDisasterRecoverGroupAttributeRequest} req
      * @param {function(string, ModifyDisasterRecoverGroupAttributeResponse):void} cb
@@ -834,29 +934,14 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to query the Virtual Network Console (VNC) URL of an instance for its login to the VNC.
-
-* It does not support `STOPPED` CVMs.
-* A VNC URL is only valid for 15 seconds. If you do not access the URL within 15 seconds, it will become invalid and you have to query a URL again.
-* Once the VNC URL is accessed, it will become invalid and you have to query a URL again if needed.
-* If the connection is interrupted, you can make up to 30 reconnection attempts per minute.
-* After getting the value `InstanceVncUrl`, you need to append `InstanceVncUrl=xxxx` to the end of the link <https://img.qcloud.com/qcloud/app/active_vnc/index.html?>.
-
-  - `InstanceVncUrl`: its value will be returned after the API is successfully called.
-
-    The final URL is in the following format:
-
-```
-https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
-```
-
-     * @param {DescribeInstanceVncUrlRequest} req
-     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
+     * This API is used to query a list of model families available to the current user in the current region.
+     * @param {DescribeInstanceFamilyConfigsRequest} req
+     * @param {function(string, DescribeInstanceFamilyConfigsResponse):void} cb
      * @public
      */
-    DescribeInstanceVncUrl(req, cb) {
-        let resp = new DescribeInstanceVncUrlResponse();
-        this.request("DescribeInstanceVncUrl", req, resp, cb);
+    DescribeInstanceFamilyConfigs(req, cb) {
+        let resp = new DescribeInstanceFamilyConfigsResponse();
+        this.request("DescribeInstanceFamilyConfigs", req, resp, cb);
     }
 
     /**
@@ -900,6 +985,22 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     DescribeDisasterRecoverGroups(req, cb) {
         let resp = new DescribeDisasterRecoverGroupsResponse();
         this.request("DescribeDisasterRecoverGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create one or more instances with a specified configuration.
+
+* After an instance is created successfully, it will start up automatically, and the [instance state](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#instance_state) will become "Running".
+* If you create a pay-as-you-go instance billed on an hourly basis, an amount equivalent to the hourly rate will be frozen before the creation. Make sure your account balance is sufficient before calling this API.
+* The number of instances you can purchase through this API is subject to the [CVM instance purchase limit](https://intl.cloud.tencent.com/document/product/213/2664?from_cn_redirect=1). Both the instances created through this API and the console will be counted toward the quota.
+* This API is an async API. An instance `ID` list will be returned after you successfully make a creation request. However, it does not mean the creation has been completed. The state of the instance will be `Creating` during the creation. You can use [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) to query the status of the instance. If the status changes from `Creating` to `Running`, it means that the instance has been created successfully.
+     * @param {RunInstancesRequest} req
+     * @param {function(string, RunInstancesResponse):void} cb
+     * @public
+     */
+    RunInstances(req, cb) {
+        let resp = new RunInstancesResponse();
+        this.request("RunInstances", req, resp, cb);
     }
 
     /**

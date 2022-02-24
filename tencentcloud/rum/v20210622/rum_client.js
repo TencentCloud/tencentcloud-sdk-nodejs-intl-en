@@ -363,7 +363,7 @@ It includes the Web Vitals metric for the page loading performance.
     }
 
     /**
-     * This API is used to add or modify a project limit.
+     * This API is used to add or modify data reporting limit.
      * @param {ModifyProjectLimitRequest} req
      * @param {function(string, ModifyProjectLimitResponse):void} cb
      * @public

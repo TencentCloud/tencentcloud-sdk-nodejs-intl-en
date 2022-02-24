@@ -116,7 +116,7 @@ class DescribeDataFetchProjectRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Type
+         * `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -1332,7 +1332,7 @@ class DescribeDataCustomUrlRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Type
+         * `top`: top resources view; `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `pagepv`: PV view; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -1669,7 +1669,7 @@ class DescribeDataStaticUrlRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Type
+         * `pagepv`: page view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -2292,7 +2292,7 @@ class DescribeDataPerformancePageRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * ["pagepv","allcount"]
+         * `pagepv`: PV view; `allcount`: performance view; `falls`: page loading waterfall plot; `samp`: FMP, `day`: 14-day data, `nettype`: network/platform view; `performance`: top underperformed pages view; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -2511,7 +2511,7 @@ class DescribeDataFetchUrlRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Type
+         * `allcount`: performance view; `day`: 14-day data; `count40x`: HTTP status codes 40X view; `count50x`: HTTP status codes 50X view; `count5xand4x`: HTTP status codes 40X∑50X view; `top`: top resources view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -2924,7 +2924,7 @@ class DescribeDataPvUrlStatisticsRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Type: "allcount", "falls", "samp", "version", "ext3", "nettype", "platform", "isp", "region", "device", "browser", "ext1", "ext2"
+         * `allcount`; performance view; `day`: 14-day data, `vp`: performance; `ckuv`: UV; `ckpv`: PV; `condition`: condition list; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -3185,7 +3185,7 @@ class DescribeDataStaticProjectRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Type
+         * `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -3711,7 +3711,7 @@ class DescribeDataSetUrlStatisticsRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * "allcount", "falls", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+         * `allcount`: performance view; `data`: mini program; `component`: mini program-related components; `day`: 14-day data; `nettype`: network/platform view; `performance`: top underperformed pages view; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -4550,7 +4550,7 @@ class DescribeDataLogUrlStatisticsRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * "analysis", "compare", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+         * `analysis`: exception analysis; `compare`: exception list comparison; `allcount`: performance view; `condition`: condition list; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -5729,7 +5729,7 @@ class DescribeDataEventUrlRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Type
+         * `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `ckuv`: UV trend; `ckpv`: PV trend; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -6122,7 +6122,7 @@ class DescribeDataPerformanceProjectRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * "allcount", "falls", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+         * `allcount`; performance view; `falls`: page loading waterfall plot; `samp`: FMP, `day`: 14-day data, `nettype`: network/platform view; `performance`: top underperformed pages view; `condition`: condition list; `area`: request speed distribution; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
          * @type {string || null}
          */
         this.Type = null;
@@ -6381,7 +6381,7 @@ class DescribeDataStaticResourceRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Type
+         * `top`: top resources view; `count40x`: HTTP status codes 40X view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
          * @type {string || null}
          */
         this.Type = null;

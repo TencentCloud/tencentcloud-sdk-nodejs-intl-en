@@ -287,16 +287,16 @@ class CreateDBImportJobRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Filename. The file must be a .sql file uploaded to Tencent Cloud.
-         * @type {string || null}
-         */
-        this.FileName = null;
-
-        /**
          * TencentDB username
          * @type {string || null}
          */
         this.User = null;
+
+        /**
+         * Filename. The file must be a .sql file uploaded to Tencent Cloud.
+         * @type {string || null}
+         */
+        this.FileName = null;
 
         /**
          * Password of a TencentDB instance user account
@@ -310,6 +310,12 @@ class CreateDBImportJobRequest extends  AbstractModel {
          */
         this.DbName = null;
 
+        /**
+         * URL of a .sql file stored in COS. Either `FileName` or `CosUrl` must be specified.
+         * @type {string || null}
+         */
+        this.CosUrl = null;
+
     }
 
     /**
@@ -320,10 +326,11 @@ class CreateDBImportJobRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
         this.User = 'User' in params ? params.User : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
         this.Password = 'Password' in params ? params.Password : null;
         this.DbName = 'DbName' in params ? params.DbName : null;
+        this.CosUrl = 'CosUrl' in params ? params.CosUrl : null;
 
     }
 }
@@ -2076,6 +2083,12 @@ class DescribeDefaultParamsRequest extends  AbstractModel {
          */
         this.EngineVersion = null;
 
+        /**
+         * Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+         * @type {string || null}
+         */
+        this.TemplateType = null;
+
     }
 
     /**
@@ -2086,6 +2099,7 @@ class DescribeDefaultParamsRequest extends  AbstractModel {
             return;
         }
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.TemplateType = 'TemplateType' in params ? params.TemplateType : null;
 
     }
 }
@@ -11684,7 +11698,7 @@ class ZoneSellConf extends  AbstractModel {
         super();
 
         /**
-         * AZ status. Value range: 0 (not available), 1 (available), 2 (purchasable), 3 (not purchasable), 4 (not displayed)
+         * AZ status used to indicate whether instances are purchasable. Value range: `1` (purchasable), `3` (not purchasable), `4` (AZ not displayed)
          * @type {number || null}
          */
         this.Status = null;
@@ -11780,6 +11794,26 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.RemoteRoZone = null;
 
+        /**
+         * AZ status used to indicate whether dedicated instances are purchasable. Valid values: `1 (purchasable), `3` (not purchasable), `4` (AZ not displayed)
+         * @type {number || null}
+         */
+        this.ExClusterStatus = null;
+
+        /**
+         * AZ information of the cross-AZ deployed read-only instances which are associated with a dedicated instance
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ExClusterRemoteRoZone = null;
+
+        /**
+         * AZ information of a multi-AZ deployed dedicated instance.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {ZoneConf || null}
+         */
+        this.ExClusterZoneConf = null;
+
     }
 
     /**
@@ -11818,6 +11852,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DrZone = 'DrZone' in params ? params.DrZone : null;
         this.IsSupportRemoteRo = 'IsSupportRemoteRo' in params ? params.IsSupportRemoteRo : null;
         this.RemoteRoZone = 'RemoteRoZone' in params ? params.RemoteRoZone : null;
+        this.ExClusterStatus = 'ExClusterStatus' in params ? params.ExClusterStatus : null;
+        this.ExClusterRemoteRoZone = 'ExClusterRemoteRoZone' in params ? params.ExClusterRemoteRoZone : null;
+
+        if (params.ExClusterZoneConf) {
+            let obj = new ZoneConf();
+            obj.deserialize(params.ExClusterZoneConf)
+            this.ExClusterZoneConf = obj;
+        }
 
     }
 }

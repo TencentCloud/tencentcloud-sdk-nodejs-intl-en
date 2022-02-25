@@ -1816,6 +1816,20 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.HealthStatus = null;
 
+        /**
+         * Private URL of the HTTPS cluster
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.EsPrivateUrl = null;
+
+        /**
+         * Private domain of the HTTPS cluster
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.EsPrivateDomain = null;
+
     }
 
     /**
@@ -1956,6 +1970,8 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.FrozenDiskType = 'FrozenDiskType' in params ? params.FrozenDiskType : null;
         this.FrozenDiskSize = 'FrozenDiskSize' in params ? params.FrozenDiskSize : null;
         this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
+        this.EsPrivateUrl = 'EsPrivateUrl' in params ? params.EsPrivateUrl : null;
+        this.EsPrivateDomain = 'EsPrivateDomain' in params ? params.EsPrivateDomain : null;
 
     }
 }

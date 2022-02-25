@@ -1008,6 +1008,48 @@ class SlowLogTopSqlItem extends  AbstractModel {
 }
 
 /**
+ * DescribeProxySessionKillTasks request structure.
+ * @class
+ */
+class DescribeProxySessionKillTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The async session killing task ID, which is obtained after the API `CreateProxySessionKillTask` is successfully called.
+         * @type {Array.<number> || null}
+         */
+        this.AsyncRequestIds = null;
+
+        /**
+         * Service type. Valid value: `redis` (TencentDB for Redis).
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AsyncRequestIds = 'AsyncRequestIds' in params ? params.AsyncRequestIds : null;
+        this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
  * DescribeMySqlProcessList response structure.
  * @class
  */
@@ -1154,6 +1196,104 @@ class DescribeTopSpaceTablesResponse extends  AbstractModel {
         }
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information about Redis session killing task status
+ * @class
+ */
+class TaskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID.
+         * @type {number || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * List of all proxies of the current instance.
+         * @type {Array.<string> || null}
+         */
+        this.InstProxyList = null;
+
+        /**
+         * Total number of proxies of the current instance.
+         * @type {number || null}
+         */
+        this.InstProxyCount = null;
+
+        /**
+         * Task creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Task start time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Task status. Valid values: `created` (create), `chosen` (to be executed), `running` (being executed), `failed` (failed), and `finished` (completed).
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * IDs of the proxies that have completed the session killing tasks.
+         * @type {Array.<string> || null}
+         */
+        this.FinishedProxyList = null;
+
+        /**
+         * IDs of the proxies that failed to execute the session killing tasks.
+         * @type {Array.<string> || null}
+         */
+        this.FailedProxyList = null;
+
+        /**
+         * Task end time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Task progress.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.InstProxyList = 'InstProxyList' in params ? params.InstProxyList : null;
+        this.InstProxyCount = 'InstProxyCount' in params ? params.InstProxyCount : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.FinishedProxyList = 'FinishedProxyList' in params ? params.FinishedProxyList : null;
+        this.FailedProxyList = 'FailedProxyList' in params ? params.FailedProxyList : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2613,37 +2753,30 @@ class CreateDBDiagReportUrlRequest extends  AbstractModel {
 }
 
 /**
- * Deduction details.
+ * DescribeSecurityAuditLogExportTasks response structure.
  * @class
  */
-class ScoreDetail extends  AbstractModel {
+class DescribeSecurityAuditLogExportTasksResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Deduction item type. Valid values: availability, maintainability, performance, and reliability.
+         * List of security audit log export tasks.
+         * @type {Array.<SecLogExportTaskInfo> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * Total numbers of security audit log export tasks.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.IssueType = null;
-
-        /**
-         * Total deducted scores.
-         * @type {number || null}
-         */
-        this.ScoreLost = null;
-
-        /**
-         * Upper limit of the deducted scores.
-         * @type {number || null}
-         */
-        this.ScoreLostMax = null;
-
-        /**
-         * Deduction item list.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ScoreItem> || null}
-         */
-        this.Items = null;
+        this.RequestId = null;
 
     }
 
@@ -2654,18 +2787,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.IssueType = 'IssueType' in params ? params.IssueType : null;
-        this.ScoreLost = 'ScoreLost' in params ? params.ScoreLost : null;
-        this.ScoreLostMax = 'ScoreLostMax' in params ? params.ScoreLostMax : null;
 
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new ScoreItem();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new SecLogExportTaskInfo();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4979,30 +5111,37 @@ class DescribeHealthScoreResponse extends  AbstractModel {
 }
 
 /**
- * DescribeSecurityAuditLogExportTasks response structure.
+ * Deduction details.
  * @class
  */
-class DescribeSecurityAuditLogExportTasksResponse extends  AbstractModel {
+class ScoreDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of security audit log export tasks.
-         * @type {Array.<SecLogExportTaskInfo> || null}
-         */
-        this.Tasks = null;
-
-        /**
-         * Total numbers of security audit log export tasks.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Deduction item type. Valid values: availability, maintainability, performance, and reliability.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.IssueType = null;
+
+        /**
+         * Total deducted scores.
+         * @type {number || null}
+         */
+        this.ScoreLost = null;
+
+        /**
+         * Upper limit of the deducted scores.
+         * @type {number || null}
+         */
+        this.ScoreLostMax = null;
+
+        /**
+         * Deduction item list.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ScoreItem> || null}
+         */
+        this.Items = null;
 
     }
 
@@ -5013,17 +5152,18 @@ class DescribeSecurityAuditLogExportTasksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.IssueType = 'IssueType' in params ? params.IssueType : null;
+        this.ScoreLost = 'ScoreLost' in params ? params.ScoreLost : null;
+        this.ScoreLostMax = 'ScoreLostMax' in params ? params.ScoreLostMax : null;
 
-        if (params.Tasks) {
-            this.Tasks = new Array();
-            for (let z in params.Tasks) {
-                let obj = new SecLogExportTaskInfo();
-                obj.deserialize(params.Tasks[z]);
-                this.Tasks.push(obj);
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ScoreItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5302,6 +5442,56 @@ class DescribeSecurityAuditLogDownloadUrlsResponse extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeProxySessionKillTasks response structure.
+ * @class
+ */
+class DescribeProxySessionKillTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session killing task details.
+         * @type {Array.<TaskInfo> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * Total number of tasks.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new TaskInfo();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     SchemaSpaceTimeSeries: SchemaSpaceTimeSeries,
     HealthReportTask: HealthReportTask,
@@ -5319,9 +5509,11 @@ module.exports = {
     ModifyDiagDBInstanceConfResponse: ModifyDiagDBInstanceConfResponse,
     DescribeTopSpaceSchemaTimeSeriesResponse: DescribeTopSpaceSchemaTimeSeriesResponse,
     SlowLogTopSqlItem: SlowLogTopSqlItem,
+    DescribeProxySessionKillTasksRequest: DescribeProxySessionKillTasksRequest,
     DescribeMySqlProcessListResponse: DescribeMySqlProcessListResponse,
     HealthStatus: HealthStatus,
     DescribeTopSpaceTablesResponse: DescribeTopSpaceTablesResponse,
+    TaskInfo: TaskInfo,
     KillMySqlThreadsResponse: KillMySqlThreadsResponse,
     CreateSchedulerMailProfileRequest: CreateSchedulerMailProfileRequest,
     ContactItem: ContactItem,
@@ -5349,7 +5541,7 @@ module.exports = {
     DeleteSecurityAuditLogExportTasksResponse: DeleteSecurityAuditLogExportTasksResponse,
     KillMySqlThreadsRequest: KillMySqlThreadsRequest,
     CreateDBDiagReportUrlRequest: CreateDBDiagReportUrlRequest,
-    ScoreDetail: ScoreDetail,
+    DescribeSecurityAuditLogExportTasksResponse: DescribeSecurityAuditLogExportTasksResponse,
     HealthScoreInfo: HealthScoreInfo,
     DescribeTopSpaceTableTimeSeriesResponse: DescribeTopSpaceTableTimeSeriesResponse,
     DescribeDBDiagHistoryResponse: DescribeDBDiagHistoryResponse,
@@ -5391,11 +5583,12 @@ module.exports = {
     MonitorMetricSeriesData: MonitorMetricSeriesData,
     SecLogExportTaskInfo: SecLogExportTaskInfo,
     DescribeHealthScoreResponse: DescribeHealthScoreResponse,
-    DescribeSecurityAuditLogExportTasksResponse: DescribeSecurityAuditLogExportTasksResponse,
+    ScoreDetail: ScoreDetail,
     DescribeTopSpaceSchemasRequest: DescribeTopSpaceSchemasRequest,
     DescribeSlowLogTopSqlsResponse: DescribeSlowLogTopSqlsResponse,
     DescribeUserSqlAdviceRequest: DescribeUserSqlAdviceRequest,
     DescribeMySqlProcessListRequest: DescribeMySqlProcessListRequest,
     DescribeSecurityAuditLogDownloadUrlsResponse: DescribeSecurityAuditLogDownloadUrlsResponse,
+    DescribeProxySessionKillTasksResponse: DescribeProxySessionKillTasksResponse,
 
 }

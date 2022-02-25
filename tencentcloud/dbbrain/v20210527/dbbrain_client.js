@@ -32,9 +32,11 @@ const AddUserContactResponse = models.AddUserContactResponse;
 const ModifyDiagDBInstanceConfResponse = models.ModifyDiagDBInstanceConfResponse;
 const DescribeTopSpaceSchemaTimeSeriesResponse = models.DescribeTopSpaceSchemaTimeSeriesResponse;
 const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
+const DescribeProxySessionKillTasksRequest = models.DescribeProxySessionKillTasksRequest;
 const DescribeMySqlProcessListResponse = models.DescribeMySqlProcessListResponse;
 const HealthStatus = models.HealthStatus;
 const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
+const TaskInfo = models.TaskInfo;
 const KillMySqlThreadsResponse = models.KillMySqlThreadsResponse;
 const CreateSchedulerMailProfileRequest = models.CreateSchedulerMailProfileRequest;
 const ContactItem = models.ContactItem;
@@ -62,7 +64,7 @@ const DescribeMailProfileRequest = models.DescribeMailProfileRequest;
 const DeleteSecurityAuditLogExportTasksResponse = models.DeleteSecurityAuditLogExportTasksResponse;
 const KillMySqlThreadsRequest = models.KillMySqlThreadsRequest;
 const CreateDBDiagReportUrlRequest = models.CreateDBDiagReportUrlRequest;
-const ScoreDetail = models.ScoreDetail;
+const DescribeSecurityAuditLogExportTasksResponse = models.DescribeSecurityAuditLogExportTasksResponse;
 const HealthScoreInfo = models.HealthScoreInfo;
 const DescribeTopSpaceTableTimeSeriesResponse = models.DescribeTopSpaceTableTimeSeriesResponse;
 const DescribeDBDiagHistoryResponse = models.DescribeDBDiagHistoryResponse;
@@ -104,12 +106,13 @@ const DescribeDBDiagReportTasksRequest = models.DescribeDBDiagReportTasksRequest
 const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
 const SecLogExportTaskInfo = models.SecLogExportTaskInfo;
 const DescribeHealthScoreResponse = models.DescribeHealthScoreResponse;
-const DescribeSecurityAuditLogExportTasksResponse = models.DescribeSecurityAuditLogExportTasksResponse;
+const ScoreDetail = models.ScoreDetail;
 const DescribeTopSpaceSchemasRequest = models.DescribeTopSpaceSchemasRequest;
 const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
 const DescribeUserSqlAdviceRequest = models.DescribeUserSqlAdviceRequest;
 const DescribeMySqlProcessListRequest = models.DescribeMySqlProcessListRequest;
 const DescribeSecurityAuditLogDownloadUrlsResponse = models.DescribeSecurityAuditLogDownloadUrlsResponse;
+const DescribeProxySessionKillTasksResponse = models.DescribeProxySessionKillTasksResponse;
 
 
 /**
@@ -472,6 +475,17 @@ class DbbrainClient extends AbstractClient {
     CreateDBDiagReportUrl(req, cb) {
         let resp = new CreateDBDiagReportUrlResponse();
         this.request("CreateDBDiagReportUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the result of the session killing task executed by the Redis proxy node. The async task ID (an input parameter) is obtained after the API `CreateProxySessionKillTask` is successfully called. Currently, the only valid value of `product` is `redis`.
+     * @param {DescribeProxySessionKillTasksRequest} req
+     * @param {function(string, DescribeProxySessionKillTasksResponse):void} cb
+     * @public
+     */
+    DescribeProxySessionKillTasks(req, cb) {
+        let resp = new DescribeProxySessionKillTasksResponse();
+        this.request("DescribeProxySessionKillTasks", req, resp, cb);
     }
 
 

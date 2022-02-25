@@ -566,6 +566,12 @@ class CreateCmqTopicRequest extends  AbstractModel {
          */
         this.Trace = null;
 
+        /**
+         * Tag array.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -580,6 +586,15 @@ class CreateCmqTopicRequest extends  AbstractModel {
         this.FilterType = 'FilterType' in params ? params.FilterType : null;
         this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
         this.Trace = 'Trace' in params ? params.Trace : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2093,6 +2108,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ConsumerLimit = null;
 
+        /**
+         * `0`: Non-persistent and non-partitioned
+`1`: Non-persistent and partitioned
+`2`: Persistent and non-partitioned
+`3`: Persistent and partitioned
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PulsarTopicType = null;
+
     }
 
     /**
@@ -2131,6 +2156,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ProducerLimit = 'ProducerLimit' in params ? params.ProducerLimit : null;
         this.ConsumerLimit = 'ConsumerLimit' in params ? params.ConsumerLimit : null;
+        this.PulsarTopicType = 'PulsarTopicType' in params ? params.PulsarTopicType : null;
 
     }
 }
@@ -3746,6 +3772,27 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.UpdateTime = null;
 
+        /**
+         * Subscription type. Valid values: `Exclusive`, `Shared`, `Failover`, and `Key_Shared`. An empty string or `NULL`: Unknown.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubType = null;
+
+        /**
+         * Whether messages are blocked as the limit of unacknowledged messages has been reached.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.BlockedSubscriptionOnUnackedMsgs = null;
+
+        /**
+         * Maximum number of unacknowledged messages.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxUnackedMsgNum = null;
+
     }
 
     /**
@@ -3788,6 +3835,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.SubType = 'SubType' in params ? params.SubType : null;
+        this.BlockedSubscriptionOnUnackedMsgs = 'BlockedSubscriptionOnUnackedMsgs' in params ? params.BlockedSubscriptionOnUnackedMsgs : null;
+        this.MaxUnackedMsgNum = 'MaxUnackedMsgNum' in params ? params.MaxUnackedMsgNum : null;
 
     }
 }
@@ -4132,6 +4182,12 @@ class CreateTopicRequest extends  AbstractModel {
         this.Partitions = null;
 
         /**
+         * Remarks (up to 128 characters).
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
          * 0: general message;
 1: globally sequential message;
 2: partitionally sequential message;
@@ -4142,16 +4198,20 @@ class CreateTopicRequest extends  AbstractModel {
         this.TopicType = null;
 
         /**
-         * Remarks (up to 128 characters).
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
          * Pulsar cluster ID
          * @type {string || null}
          */
         this.ClusterId = null;
+
+        /**
+         * Pulsar topic type.
+`0`: Non-persistent and non-partitioned
+`1`: Non-persistent and partitioned
+`2`: Persistent and non-partitioned
+`3`: Persistent and partitioned
+         * @type {number || null}
+         */
+        this.PulsarTopicType = null;
 
     }
 
@@ -4165,9 +4225,10 @@ class CreateTopicRequest extends  AbstractModel {
         this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.PulsarTopicType = 'PulsarTopicType' in params ? params.PulsarTopicType : null;
 
     }
 }
@@ -6970,6 +7031,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.ClientVersion = null;
 
+        /**
+         * Serial number of the topic partition connected to the consumer.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Partition = null;
+
     }
 
     /**
@@ -6983,6 +7051,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ConsumerAddr = 'ConsumerAddr' in params ? params.ConsumerAddr : null;
         this.ConsumerName = 'ConsumerName' in params ? params.ConsumerName : null;
         this.ClientVersion = 'ClientVersion' in params ? params.ClientVersion : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
 
     }
 }
@@ -7536,6 +7605,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Tags = null;
 
+        /**
+         * Billing mode:
+`0`: Pay-as-you-go
+`1`: Monthly subscription
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
     }
 
     /**
@@ -7579,6 +7657,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.Tags.push(obj);
             }
         }
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }
@@ -8288,6 +8367,12 @@ class CreateCmqQueueRequest extends  AbstractModel {
          */
         this.Trace = null;
 
+        /**
+         * Tag array.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -8312,6 +8397,15 @@ class CreateCmqQueueRequest extends  AbstractModel {
         this.MaxReceiveCount = 'MaxReceiveCount' in params ? params.MaxReceiveCount : null;
         this.MaxTimeToLive = 'MaxTimeToLive' in params ? params.MaxTimeToLive : null;
         this.Trace = 'Trace' in params ? params.Trace : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }

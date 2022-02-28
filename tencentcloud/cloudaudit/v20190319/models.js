@@ -17,43 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * Search criterion
- * @class
- */
-class LookupAttribute extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AttributeKey = null;
-
-        /**
-         * Value of `AttributeValue`
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AttributeValue = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AttributeKey = 'AttributeKey' in params ? params.AttributeKey : null;
-        this.AttributeValue = 'AttributeValue' in params ? params.AttributeValue : null;
-
-    }
-}
-
-/**
  * DescribeEvents response structure.
  * @class
  */
@@ -151,6 +114,92 @@ Note: `null` may be returned for this field, indicating that no valid values can
         }
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+
+    }
+}
+
+/**
+ * DescribeAuditTracks response structure.
+ * @class
+ */
+class DescribeAuditTracksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAuditTracks request structure.
+ * @class
+ */
+class DescribeAuditTracksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * Search criterion
+ * @class
+ */
+class LookupAttribute extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AttributeKey = null;
+
+        /**
+         * Value of `AttributeValue`
+Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AttributeValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AttributeKey = 'AttributeKey' in params ? params.AttributeKey : null;
+        this.AttributeValue = 'AttributeValue' in params ? params.AttributeValue : null;
 
     }
 }
@@ -374,9 +423,11 @@ class DescribeEventsRequest extends  AbstractModel {
 }
 
 module.exports = {
-    LookupAttribute: LookupAttribute,
     DescribeEventsResponse: DescribeEventsResponse,
     Resource: Resource,
+    DescribeAuditTracksResponse: DescribeAuditTracksResponse,
+    DescribeAuditTracksRequest: DescribeAuditTracksRequest,
+    LookupAttribute: LookupAttribute,
     Event: Event,
     DescribeEventsRequest: DescribeEventsRequest,
 

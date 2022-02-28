@@ -16,9 +16,11 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const LookupAttribute = models.LookupAttribute;
 const DescribeEventsResponse = models.DescribeEventsResponse;
 const Resource = models.Resource;
+const DescribeAuditTracksResponse = models.DescribeAuditTracksResponse;
+const DescribeAuditTracksRequest = models.DescribeAuditTracksRequest;
+const LookupAttribute = models.LookupAttribute;
 const Event = models.Event;
 const DescribeEventsRequest = models.DescribeEventsRequest;
 
@@ -33,6 +35,17 @@ class CloudauditClient extends AbstractClient {
         super("cloudaudit.tencentcloudapi.com", "2019-03-19", credential, region, profile);
     }
     
+    /**
+     * This API is used to query the CloudAudit tracking set list.
+     * @param {DescribeAuditTracksRequest} req
+     * @param {function(string, DescribeAuditTracksResponse):void} cb
+     * @public
+     */
+    DescribeAuditTracks(req, cb) {
+        let resp = new DescribeAuditTracksResponse();
+        this.request("DescribeAuditTracks", req, resp, cb);
+    }
+
     /**
      * This API is used to query CloudAudit logs.
      * @param {DescribeEventsRequest} req

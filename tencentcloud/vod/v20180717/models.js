@@ -2979,7 +2979,7 @@ class ComposeMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * List of input media tracks, i.e., information of multiple tracks composed of video, audio, image, and other materials. <li>Multiple input tracks are aligned with the output media file on the time axis. </li><li>The materials of each track at the same time point on the time axis will be superimposed. Specifically, videos or images will be superimposed for video image by track order, where a material with a higher track order will be more on top, while audio materials will be mixed. </li><li>Up to 10 tracks are supported for each type (video, audio, or image).</li>
+         * List of input media tracks, including video, audio, and image tracks. <li>Input tracks are synced to the output media file.</li><li>Input tracks are synced to each other. Videos and images in higher tracks are superimposed over those in lower tracks. Audio tracks are mixed.</li><li>There can be up to 10 tracks for video, audio, and images each.</li><li>The total number of clips in all tracks cannot exceed 500.</li>
          * @type {Array.<MediaTrack> || null}
          */
         this.Tracks = null;
@@ -12080,25 +12080,48 @@ class CreateSuperPlayerConfigRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Switch of DRM-protected adaptive bitstream playback:
-<li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
-<li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
-Default value: OFF.
+         * Type of audio/video played. Valid values:
+<li>AdaptiveDynamicStreaming</li>
+<li>Transcode</li>
+<li>Original</li>
+Default value: `AdaptiveDynamicStream`
+         * @type {string || null}
+         */
+        this.AudioVideoType = null;
+
+        /**
+         * Whether to allow only adaptive bitrate streaming playback protected by DRM. Valid values:
+<li>`ON`: allow only adaptive bitrate streaming playback protected by DRM</li>
+<li>`OFF`: allow adaptive bitrate streaming playback not protected by DRM</li>
+Default value: `OFF`
+This parameter is valid when `AudioVideoType` is `AdaptiveDynamicStream`.
          * @type {string || null}
          */
         this.DrmSwitch = null;
 
         /**
-         * ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if `DrmSwitch` is `OFF`.
+         * ID of the adaptive bitrate streaming template allowed for playback not protected by DRM.
+
+This parameter is required if `AudioVideoType` is `AdaptiveDynamicStream` and `DrmSwitch` is `OFF`.
          * @type {number || null}
          */
         this.AdaptiveDynamicStreamingDefinition = null;
 
         /**
-         * Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if `DrmSwitch` is `ON`.
+         * Content of the adaptive bitrate streaming template allowed for playback protected by DRM.
+
+This parameter is required if `AudioVideoType` is `AdaptiveDynamicStream` and `DrmSwitch` is `ON`.
          * @type {DrmStreamingsInfo || null}
          */
         this.DrmStreamingsInfo = null;
+
+        /**
+         * ID of the transcoding template allowed for playback
+
+This parameter is required if `AudioVideoType` is `Transcode`.
+         * @type {number || null}
+         */
+        this.TranscodeDefinition = null;
 
         /**
          * ID of the image sprite generating template that allows output.
@@ -12155,6 +12178,7 @@ Default value: OFF.
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.AudioVideoType = 'AudioVideoType' in params ? params.AudioVideoType : null;
         this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
         this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
 
@@ -12163,6 +12187,7 @@ Default value: OFF.
             obj.deserialize(params.DrmStreamingsInfo)
             this.DrmStreamingsInfo = obj;
         }
+        this.TranscodeDefinition = 'TranscodeDefinition' in params ? params.TranscodeDefinition : null;
         this.ImageSpriteDefinition = 'ImageSpriteDefinition' in params ? params.ImageSpriteDefinition : null;
 
         if (params.ResolutionNames) {
@@ -23710,6 +23735,15 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * Type of audio/video played. Valid values:
+<li>AdaptiveDynamicStreaming</li>
+<li>Transcode</li>
+<li>Original</li>
+         * @type {string || null}
+         */
+        this.AudioVideoType = null;
+
+        /**
          * Switch of DRM-protected adaptive bitstream playback:
 <li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
 <li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
@@ -23728,6 +23762,12 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
          * @type {DrmStreamingsInfoForUpdate || null}
          */
         this.DrmStreamingsInfo = null;
+
+        /**
+         * ID of the transcoding template allowed for playback
+         * @type {number || null}
+         */
+        this.TranscodeDefinition = null;
 
         /**
          * ID of the image sprite generating template that allows output.
@@ -23778,6 +23818,7 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.AudioVideoType = 'AudioVideoType' in params ? params.AudioVideoType : null;
         this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
         this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
 
@@ -23786,6 +23827,7 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
             obj.deserialize(params.DrmStreamingsInfo)
             this.DrmStreamingsInfo = obj;
         }
+        this.TranscodeDefinition = 'TranscodeDefinition' in params ? params.TranscodeDefinition : null;
         this.ImageSpriteDefinition = 'ImageSpriteDefinition' in params ? params.ImageSpriteDefinition : null;
 
         if (params.ResolutionNames) {

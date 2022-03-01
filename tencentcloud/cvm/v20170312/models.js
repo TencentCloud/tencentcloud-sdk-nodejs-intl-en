@@ -1272,8 +1272,8 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-30 characters long and contain at least two of the following types: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-30 characters long and contain at least three of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Login password of the instance. <br><li>For Linux instances, the password must include 8-30 characters, and contain at least two of the following character sets: [a-z], [A-Z], [0-9] and [()\`~!@#$%^&*-+=|{}[]:;',.?/]. <br><li>For Windows instances, the password must include 12-30 characters, and contain at least three of the following character sets: [a-z], [A-Z], [0-9] and [()\`~!@#$%^&*-+=|{}[]:;',.?/]. <br><br>If it's not specified, the user needs to set the login password using the **Reset password** option in the CVM console or calling the API `ResetInstancesPassword` to complete the creation of the CVM instance(s).
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Password = null;
@@ -2640,7 +2640,7 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         this.SecurityGroups = null;
 
         /**
-         * 
+         * Whether the termination protection is enabled. Values: <br><li>`TRUE`: enable instance protection, which means that this instance can not be deleted by an API action.<br><li>`FALSE`: do not enable the instance protection.<br><br>Default Value: `FALSE`.
          * @type {boolean || null}
          */
         this.DisableApiTermination = null;
@@ -6854,7 +6854,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
+         * Instance login settings. You can use this parameter to set the login method, login password and SSH key, or keep the original login settings of the image. If it's not specified, the user needs to set the login password using the "Reset password" option in the CVM console or calling the API `ResetInstancesPassword` to complete the creation of the CVM instance(s).
          * @type {LoginSettings || null}
          */
         this.LoginSettings = null;
@@ -6942,7 +6942,7 @@ false (default value): send a normal request and create instance(s) if all the r
         this.LaunchTemplate = null;
 
         /**
-         * 
+         * Specify the CHC physical server that used to create the CHC CVM.
          * @type {Array.<string> || null}
          */
         this.ChcIds = null;

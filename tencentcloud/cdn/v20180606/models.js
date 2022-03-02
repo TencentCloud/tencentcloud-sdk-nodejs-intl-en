@@ -4580,9 +4580,11 @@ class AddCdnDomainRequest extends  AbstractModel {
 
         /**
          * Acceleration domain name service type
-web: static acceleration
-download: download acceleration
-media: streaming media VOD acceleration
+`web`: Webpage file downloads
+`download`: Large file downloads
+`media`: Audio and video on demand acceleration
+`hybrid`: Dynamic and static content acceleration
+`dynamic`: Dynamic content acceleration
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -4779,7 +4781,7 @@ Overseas acceleration service must be enabled to use overseas acceleration and g
         this.OfflineCache = null;
 
         /**
-         * QUIC is in beta now. Please submit an application to join the beta. For more information, please see QUIC product documents.
+         * QUIC access, which is a paid service. You can check the product document and Billing Overview for more information.
          * @type {Quic || null}
          */
         this.Quic = null;
@@ -5316,7 +5318,7 @@ When you change it to from `mainland`/`overseas` to `global`, configurations of 
         this.OriginCombine = null;
 
         /**
-         * QUIC is in beta now. Please submit an application to join the beta. For more information, please see QUIC product documents.
+         * QUIC access, which is a paid service. You can check the product document and Billing Overview for more information.
          * @type {Quic || null}
          */
         this.Quic = null;
@@ -7038,6 +7040,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Message = null;
 
+        /**
+         * Certificate source
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.From = null;
+
     }
 
     /**
@@ -7054,6 +7063,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.DeployTime = 'DeployTime' in params ? params.DeployTime : null;
         this.Message = 'Message' in params ? params.Message : null;
+        this.From = 'From' in params ? params.From : null;
 
     }
 }
@@ -7488,10 +7498,12 @@ offline: disabled
         this.ProjectId = null;
 
         /**
-         * Domain name service type
-web: static acceleration
-download: download acceleration
-media: streaming VOD acceleration
+         * Acceleration domain name service type
+`web`: Webpage file downloads
+`download`: Large file downloads
+`media`: Audio and video on demand acceleration
+`hybrid`: Dynamic and static content acceleration
+`dynamic`: Dynamic content acceleration
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -7877,6 +7889,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ShareCname = null;
 
+        /**
+         * Rule engine
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {RuleEngine || null}
+         */
+        this.RuleEngine = null;
+
     }
 
     /**
@@ -8182,6 +8201,50 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             obj.deserialize(params.ShareCname)
             this.ShareCname = obj;
         }
+
+        if (params.RuleEngine) {
+            let obj = new RuleEngine();
+            obj.deserialize(params.RuleEngine)
+            this.RuleEngine = obj;
+        }
+
+    }
+}
+
+/**
+ * Rule engine configuration
+ * @class
+ */
+class RuleEngine extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies whether to enable rule engine
+`on`: Enable
+`off`: Disable
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Rule
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -15088,6 +15151,7 @@ module.exports = {
     Hsts: Hsts,
     DescribeIpStatusRequest: DescribeIpStatusRequest,
     DetailDomain: DetailDomain,
+    RuleEngine: RuleEngine,
     GetDisableRecordsResponse: GetDisableRecordsResponse,
     Ipv6Access: Ipv6Access,
     ResponseHeader: ResponseHeader,

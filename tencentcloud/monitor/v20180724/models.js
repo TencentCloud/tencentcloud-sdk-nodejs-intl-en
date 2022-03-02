@@ -2792,6 +2792,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.TagInstances = null;
 
+        /**
+         * Information on the filter dimension associated with a policy.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FilterDimensionsParam = null;
+
     }
 
     /**
@@ -2869,6 +2876,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
                 this.TagInstances.push(obj);
             }
         }
+        this.FilterDimensionsParam = 'FilterDimensionsParam' in params ? params.FilterDimensionsParam : null;
 
     }
 }
@@ -3912,8 +3920,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.EndTime = null;
 
         /**
-         * Notification channel list. Valid values: EMAIL (email), SMS (SMS), CALL (phone), WECHAT (WeChat)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Notification channel list. Valid values: `EMAIL` (email), `SMS` (SMS), `CALL` (phone), `WECHAT` (WeChat), `RTX` (WeCom)
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.NoticeWay = null;
@@ -3967,6 +3975,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.NeedPhoneArriveNotice = null;
 
+        /**
+         * Dial type. `SYNC` (simultaneous dial), `CIRCLE` (polled dial). Default value: `CIRCLE`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PhoneCallType = null;
+
     }
 
     /**
@@ -3987,6 +4002,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.PhoneInnerInterval = 'PhoneInnerInterval' in params ? params.PhoneInnerInterval : null;
         this.PhoneCircleInterval = 'PhoneCircleInterval' in params ? params.PhoneCircleInterval : null;
         this.NeedPhoneArriveNotice = 'NeedPhoneArriveNotice' in params ? params.NeedPhoneArriveNotice : null;
+        this.PhoneCallType = 'PhoneCallType' in params ? params.PhoneCallType : null;
 
     }
 }
@@ -5891,6 +5907,8 @@ class DescribeAlarmPoliciesRequest extends  AbstractModel {
 You can also refer to the “Example 2” below.
 
 For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1).
+
+Note: If `1` is passed in for `NeedCorrespondence`, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
          * @type {string || null}
          */
         this.Dimensions = null;
@@ -5963,6 +5981,12 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
          */
         this.InstanceGroupId = null;
 
+        /**
+         * Whether the relationship between a policy and the input parameter filter dimension is required. `1`: Yes. `0`: No. Default value: `0`.
+         * @type {number || null}
+         */
+        this.NeedCorrespondence = null;
+
     }
 
     /**
@@ -5990,6 +6014,7 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.NotBindingNoticeRule = 'NotBindingNoticeRule' in params ? params.NotBindingNoticeRule : null;
         this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
+        this.NeedCorrespondence = 'NeedCorrespondence' in params ? params.NeedCorrespondence : null;
 
     }
 }

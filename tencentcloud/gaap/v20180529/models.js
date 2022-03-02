@@ -3105,6 +3105,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ForwardHost = null;
 
+        /**
+         * Specifies whether to enable Server Name Indication (SNI). Valid values: `ON` (enable) and `OFF` (disable).
+Note: This field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ServerNameIndicationSwitch = null;
+
+        /**
+         * Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ServerNameIndication = null;
+
     }
 
     /**
@@ -3139,6 +3155,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.BindStatus = 'BindStatus' in params ? params.BindStatus : null;
         this.ForwardHost = 'ForwardHost' in params ? params.ForwardHost : null;
+        this.ServerNameIndicationSwitch = 'ServerNameIndicationSwitch' in params ? params.ServerNameIndicationSwitch : null;
+        this.ServerNameIndication = 'ServerNameIndication' in params ? params.ServerNameIndication : null;
 
     }
 }
@@ -4176,11 +4194,23 @@ If `ForwardProtocol=default`, the `ForwardProtocol` of the listener will be used
         this.ForwardProtocol = null;
 
         /**
-         * The `host` carried in the request forwarded from the acceleration connection to the origin server.
-If `ForwardHost=default`, the domain name of rule will be used. For other cases, the value set in this field will be used.
+         * The forwarding host, which is carried in the request forwarded from the acceleration connection to the origin server.
+If `ForwardHost=default`, the domain name configured with the forwarding rule will be used. For other cases, the value set in this field will be used.
          * @type {string || null}
          */
         this.ForwardHost = null;
+
+        /**
+         * Specifies whether to enable Server Name Indication (SNI). Valid values: `ON` (enable) and `OFF` (disable).
+         * @type {string || null}
+         */
+        this.ServerNameIndicationSwitch = null;
+
+        /**
+         * Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
+         * @type {string || null}
+         */
+        this.ServerNameIndication = null;
 
     }
 
@@ -4204,6 +4234,8 @@ If `ForwardHost=default`, the domain name of rule will be used. For other cases,
         this.Path = 'Path' in params ? params.Path : null;
         this.ForwardProtocol = 'ForwardProtocol' in params ? params.ForwardProtocol : null;
         this.ForwardHost = 'ForwardHost' in params ? params.ForwardHost : null;
+        this.ServerNameIndicationSwitch = 'ServerNameIndicationSwitch' in params ? params.ServerNameIndicationSwitch : null;
+        this.ServerNameIndication = 'ServerNameIndication' in params ? params.ServerNameIndication : null;
 
     }
 }
@@ -5566,6 +5598,12 @@ class RealServer extends  AbstractModel {
          */
         this.ProjectId = null;
 
+        /**
+         * Indicates whether the origin server IP or domain name is in the blocklist. Valid values: `0` (no) and `1` (yes).
+         * @type {number || null}
+         */
+        this.InBanBlacklist = null;
+
     }
 
     /**
@@ -5579,6 +5617,7 @@ class RealServer extends  AbstractModel {
         this.RealServerId = 'RealServerId' in params ? params.RealServerId : null;
         this.RealServerName = 'RealServerName' in params ? params.RealServerName : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.InBanBlacklist = 'InBanBlacklist' in params ? params.InBanBlacklist : null;
 
     }
 }
@@ -6607,10 +6646,22 @@ If this field is not passed in, it indicates that the ForwardProtocol of the cor
         this.ForwardProtocol = null;
 
         /**
-         * Remote host to which the acceleration connection forwards. If this parameter is not specified, the default host will be used, i.e., the host with which the client initiates HTTP requests.
+         * The forwarding host. If it’s not specified, the default host is used, that is the host with which the client initiates HTTP requests.
          * @type {string || null}
          */
         this.ForwardHost = null;
+
+        /**
+         * Specifies whether to enable Server Name Indication (SNI). Valid values: `ON` (enable) and `OFF` (disable).
+         * @type {string || null}
+         */
+        this.ServerNameIndicationSwitch = null;
+
+        /**
+         * Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
+         * @type {string || null}
+         */
+        this.ServerNameIndication = null;
 
     }
 
@@ -6635,6 +6686,8 @@ If this field is not passed in, it indicates that the ForwardProtocol of the cor
         }
         this.ForwardProtocol = 'ForwardProtocol' in params ? params.ForwardProtocol : null;
         this.ForwardHost = 'ForwardHost' in params ? params.ForwardHost : null;
+        this.ServerNameIndicationSwitch = 'ServerNameIndicationSwitch' in params ? params.ServerNameIndicationSwitch : null;
+        this.ServerNameIndication = 'ServerNameIndication' in params ? params.ServerNameIndication : null;
 
     }
 }
@@ -6906,8 +6959,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.IPAddressVersion = null;
 
         /**
-         * Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (game accelerator connection group), and `CrossBorder` (cross-MLC-border connection group).
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (silver connection group), and `CrossBorder` (cross-MLC-border connection group).
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.PackageType = null;
@@ -7589,7 +7642,7 @@ The default value is 0.
         this.RealServerCertificateId = null;
 
         /**
-         * Domain name of the origin server certificate.
+         * This field has been disused. Use ServerNameIndication instead.
          * @type {string || null}
          */
         this.RealServerCertificateDomain = null;
@@ -8288,8 +8341,8 @@ Other values: specified project
         /**
          * Filter condition   
 Each request can have a maximum of 5 filter conditions for `Filter.Values`.
-RealServerRegion - String - Required: No - Filter by origin server region. You can also check the value of `RegionId` returned by the `DescribeDestRegions` API.
-PackageType - String - Required: No - Filter by type of connection groups, which can be `Thunder` (general connection group) or `Accelerator` (game accelerator connection group).
+`RealServerRegion` - String - Required: No - Filter by origin server region. You can also check the value of `RegionId` returned by the `DescribeDestRegions` API.
+`PackageType` - String - Required: No - Filter by type of connection groups, which can be `Thunder` (general connection group) or `Accelerator` (silver connection group).
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -10970,9 +11023,9 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.NetworkType = null;
 
         /**
-         * Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), 
+         * Package type of connections. Valid values: `Thunder` (general connection), `Accelerator` (silver connection), 
 and `CrossBorder` (cross-MLC-border connection).
-Note: this field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.PackageType = null;
@@ -10998,6 +11051,13 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          * @type {number || null}
          */
         this.Http3Supported = null;
+
+        /**
+         * Indicates whether the origin server IP or domain name is in the blocklist. Valid values: `0` (no) and `1` (yes).
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.InBanBlacklist = null;
 
     }
 
@@ -11067,6 +11127,7 @@ Note: this field may return `null`, indicating that no valid value can be obtain
             }
         }
         this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
+        this.InBanBlacklist = 'InBanBlacklist' in params ? params.InBanBlacklist : null;
 
     }
 }

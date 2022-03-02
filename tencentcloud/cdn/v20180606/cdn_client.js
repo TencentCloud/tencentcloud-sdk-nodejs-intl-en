@@ -128,6 +128,7 @@ const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
 const Hsts = models.Hsts;
 const DescribeIpStatusRequest = models.DescribeIpStatusRequest;
 const DetailDomain = models.DetailDomain;
+const RuleEngine = models.RuleEngine;
 const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
 const Ipv6Access = models.Ipv6Access;
 const ResponseHeader = models.ResponseHeader;
@@ -261,7 +262,9 @@ class CdnClient extends AbstractClient {
     }
     
     /**
-     * This API is used to query the status of the edge servers and intermediate nodes on the domain name acceleration platform. Note: edge servers are not generally available. This API can only be used by allowlisted accounts.
+     * This API is used to query the status of the edge nodes and intermediate nodes. Note: Edge nodes are only available for beta users now.
+
+>? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/41954?from_cn_redirect=1">corresponding CDN API</a>.
      * @param {DescribeIpStatusRequest} req
      * @param {function(string, DescribeIpStatusResponse):void} cb
      * @public

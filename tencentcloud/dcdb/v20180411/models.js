@@ -530,6 +530,97 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBSlowLogs request structure.
+ * @class
+ */
+class DescribeDBSlowLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of dcdbt-hw0qj6m1
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Data entry number starting from which to return results
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results to be returned
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Query start time in the format of 2016-07-23 14:55:20
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Shard ID of the instance in the format of shard-53ima8ln
+         * @type {string || null}
+         */
+        this.ShardId = null;
+
+        /**
+         * Query end time in the format of 2016-08-22 14:55:20. If this parameter is left empty, the current time will be used as the query end time.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Specific name of database to be queried
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * Sorting metric. Valid values: `query_time_sum`, `query_count`. Default value: `query_time_sum`
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `desc` (descending), `asc` (ascending). Default value: `desc`
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * Query slow queries from either the source or the replica. Valid values: `0` (source), `1` (replica). Default value: `0`
+         * @type {number || null}
+         */
+        this.Slave = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Db = 'Db' in params ? params.Db : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.Slave = 'Slave' in params ? params.Slave : null;
+
+    }
+}
+
+/**
  * CreateAccount request structure.
  * @class
  */
@@ -3658,6 +3749,162 @@ class DescribeProjectsRequest extends  AbstractModel {
 }
 
 /**
+ * Information of a slow query that has been logged
+ * @class
+ */
+class SlowLogData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Statement checksum for querying details
+         * @type {string || null}
+         */
+        this.CheckSum = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * Abstracted SQL statement
+         * @type {string || null}
+         */
+        this.FingerPrint = null;
+
+        /**
+         * Average lock duration
+         * @type {string || null}
+         */
+        this.LockTimeAvg = null;
+
+        /**
+         * Maximum lock duration
+         * @type {string || null}
+         */
+        this.LockTimeMax = null;
+
+        /**
+         * Minimum lock duration
+         * @type {string || null}
+         */
+        this.LockTimeMin = null;
+
+        /**
+         * Sum of lock durations
+         * @type {string || null}
+         */
+        this.LockTimeSum = null;
+
+        /**
+         * Number of queries
+         * @type {string || null}
+         */
+        this.QueryCount = null;
+
+        /**
+         * Average query duration
+         * @type {string || null}
+         */
+        this.QueryTimeAvg = null;
+
+        /**
+         * Maximum query duration
+         * @type {string || null}
+         */
+        this.QueryTimeMax = null;
+
+        /**
+         * Minimum query duration
+         * @type {string || null}
+         */
+        this.QueryTimeMin = null;
+
+        /**
+         * Sum of query durations
+         * @type {string || null}
+         */
+        this.QueryTimeSum = null;
+
+        /**
+         * Number of scanned rows
+         * @type {string || null}
+         */
+        this.RowsExaminedSum = null;
+
+        /**
+         * Number of sent rows
+         * @type {string || null}
+         */
+        this.RowsSentSum = null;
+
+        /**
+         * Last execution time
+         * @type {string || null}
+         */
+        this.TsMax = null;
+
+        /**
+         * First execution time
+         * @type {string || null}
+         */
+        this.TsMin = null;
+
+        /**
+         * Account
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Sample SQL
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.ExampleSql = null;
+
+        /**
+         * Host address of the account
+Note: This field may return `null`, indicating that no valid value can be found.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CheckSum = 'CheckSum' in params ? params.CheckSum : null;
+        this.Db = 'Db' in params ? params.Db : null;
+        this.FingerPrint = 'FingerPrint' in params ? params.FingerPrint : null;
+        this.LockTimeAvg = 'LockTimeAvg' in params ? params.LockTimeAvg : null;
+        this.LockTimeMax = 'LockTimeMax' in params ? params.LockTimeMax : null;
+        this.LockTimeMin = 'LockTimeMin' in params ? params.LockTimeMin : null;
+        this.LockTimeSum = 'LockTimeSum' in params ? params.LockTimeSum : null;
+        this.QueryCount = 'QueryCount' in params ? params.QueryCount : null;
+        this.QueryTimeAvg = 'QueryTimeAvg' in params ? params.QueryTimeAvg : null;
+        this.QueryTimeMax = 'QueryTimeMax' in params ? params.QueryTimeMax : null;
+        this.QueryTimeMin = 'QueryTimeMin' in params ? params.QueryTimeMin : null;
+        this.QueryTimeSum = 'QueryTimeSum' in params ? params.QueryTimeSum : null;
+        this.RowsExaminedSum = 'RowsExaminedSum' in params ? params.RowsExaminedSum : null;
+        this.RowsSentSum = 'RowsSentSum' in params ? params.RowsSentSum : null;
+        this.TsMax = 'TsMax' in params ? params.TsMax : null;
+        this.TsMin = 'TsMin' in params ? params.TsMin : null;
+        this.User = 'User' in params ? params.User : null;
+        this.ExampleSql = 'ExampleSql' in params ? params.ExampleSql : null;
+        this.Host = 'Host' in params ? params.Host : null;
+
+    }
+}
+
+/**
  * DescribeDatabases response structure.
  * @class
  */
@@ -4569,6 +4816,77 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeDBSlowLogs response structure.
+ * @class
+ */
+class DescribeDBSlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sum of all statement lock durations
+         * @type {number || null}
+         */
+        this.LockTimeSum = null;
+
+        /**
+         * Total number of statement queries
+         * @type {number || null}
+         */
+        this.QueryCount = null;
+
+        /**
+         * Total number of slow queries that have been logged
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Sum of all statement query durations
+         * @type {number || null}
+         */
+        this.QueryTimeSum = null;
+
+        /**
+         * Slow query log data
+         * @type {Array.<SlowLogData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LockTimeSum = 'LockTimeSum' in params ? params.LockTimeSum : null;
+        this.QueryCount = 'QueryCount' in params ? params.QueryCount : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.QueryTimeSum = 'QueryTimeSum' in params ? params.QueryTimeSum : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SlowLogData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDCDBInstances request structure.
  * @class
  */
@@ -4952,6 +5270,7 @@ module.exports = {
     DescribeFileDownloadUrlRequest: DescribeFileDownloadUrlRequest,
     DescribeDBSyncModeResponse: DescribeDBSyncModeResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
+    DescribeDBSlowLogsRequest: DescribeDBSlowLogsRequest,
     CreateAccountRequest: CreateAccountRequest,
     DescribeDBParametersResponse: DescribeDBParametersResponse,
     DescribeFlowResponse: DescribeFlowResponse,
@@ -5010,6 +5329,7 @@ module.exports = {
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     DescribeProjectsRequest: DescribeProjectsRequest,
+    SlowLogData: SlowLogData,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DestroyDCDBInstanceResponse: DestroyDCDBInstanceResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
@@ -5030,6 +5350,7 @@ module.exports = {
     DescribeDatabaseTableResponse: DescribeDatabaseTableResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     DescribeAccountsResponse: DescribeAccountsResponse,
+    DescribeDBSlowLogsResponse: DescribeDBSlowLogsResponse,
     DescribeDCDBInstancesRequest: DescribeDCDBInstancesRequest,
     Project: Project,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,

@@ -28,6 +28,7 @@ const CancelDcnJobResponse = models.CancelDcnJobResponse;
 const DescribeFileDownloadUrlRequest = models.DescribeFileDownloadUrlRequest;
 const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
@@ -86,6 +87,7 @@ const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const DescribeProjectsRequest = models.DescribeProjectsRequest;
+const SlowLogData = models.SlowLogData;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DestroyDCDBInstanceResponse = models.DestroyDCDBInstanceResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
@@ -106,6 +108,7 @@ const DBAccount = models.DBAccount;
 const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
 const Project = models.Project;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
@@ -203,6 +206,17 @@ Note: accounts with the same username but different hosts are different accounts
     ModifyDBParameters(req, cb) {
         let resp = new ModifyDBParametersResponse();
         this.request("ModifyDBParameters", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of slow query logs.
+     * @param {DescribeDBSlowLogsRequest} req
+     * @param {function(string, DescribeDBSlowLogsResponse):void} cb
+     * @public
+     */
+    DescribeDBSlowLogs(req, cb) {
+        let resp = new DescribeDBSlowLogsResponse();
+        this.request("DescribeDBSlowLogs", req, resp, cb);
     }
 
     /**

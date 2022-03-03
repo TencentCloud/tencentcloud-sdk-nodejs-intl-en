@@ -682,6 +682,12 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
          */
         this.RateControlMode = null;
 
+        /**
+         * Watermark ID
+         * @type {string || null}
+         */
+        this.WatermarkId = null;
+
     }
 
     /**
@@ -704,6 +710,7 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
         this.AudioBitrate = 'AudioBitrate' in params ? params.AudioBitrate : null;
         this.VideoBitrate = 'VideoBitrate' in params ? params.VideoBitrate : null;
         this.RateControlMode = 'RateControlMode' in params ? params.RateControlMode : null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
 
     }
 }
@@ -1622,6 +1629,13 @@ class VideoTemplateInfo extends  AbstractModel {
          */
         this.RateControlMode = null;
 
+        /**
+         * Watermark ID
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.WatermarkId = null;
+
     }
 
     /**
@@ -1640,6 +1654,7 @@ class VideoTemplateInfo extends  AbstractModel {
         this.TopSpeed = 'TopSpeed' in params ? params.TopSpeed : null;
         this.BitrateCompressionRatio = 'BitrateCompressionRatio' in params ? params.BitrateCompressionRatio : null;
         this.RateControlMode = 'RateControlMode' in params ? params.RateControlMode : null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
 
     }
 }
@@ -4589,22 +4604,22 @@ class InputSettingInfo extends  AbstractModel {
         super();
 
         /**
-         * Application name, which is used for RTMP_PUSH and can contain 1-32 letters and digits.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Application name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digits
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.AppName = null;
 
         /**
-         * Stream name, which is used for RTMP_PUSH and can contain 1-32 letters and digits.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Stream name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digits
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.StreamName = null;
 
         /**
-         * Origin-pull URL, which is used for RTMP_PULL/HLS_PULL/MP4_PULL. Length limit: [1,512].
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Source URL, which is valid if `Type` is `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL` and can contain 1-512 characters
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.SourceUrl = null;
@@ -4623,6 +4638,15 @@ Note: this field may return `null`, indicating that no valid value was found.
          */
         this.SourceType = null;
 
+        /**
+         * Delayed time (ms) for playback, which is valid if `Type` is `RTMP_PUSH`
+Value range: 0 (default) or 10000-600000
+The value must be a multiple of 1,000.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DelayTime = null;
+
     }
 
     /**
@@ -4637,6 +4661,7 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.SourceUrl = 'SourceUrl' in params ? params.SourceUrl : null;
         this.InputAddress = 'InputAddress' in params ? params.InputAddress : null;
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
 
     }
 }

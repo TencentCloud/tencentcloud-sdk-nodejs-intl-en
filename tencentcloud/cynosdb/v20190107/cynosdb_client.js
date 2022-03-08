@@ -23,7 +23,7 @@ const DescribeClustersRequest = models.DescribeClustersRequest;
 const InstanceSpec = models.InstanceSpec;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
-const Account = models.Account;
+const BackupFileInfo = models.BackupFileInfo;
 const SecurityGroup = models.SecurityGroup;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
@@ -36,7 +36,7 @@ const DescribeBackupListResponse = models.DescribeBackupListResponse;
 const DescribeRollbackTimeRangeResponse = models.DescribeRollbackTimeRangeResponse;
 const ModifyMaintainPeriodConfigRequest = models.ModifyMaintainPeriodConfigRequest;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
-const ModifyClusterParamRequest = models.ModifyClusterParamRequest;
+const ActivateInstanceResponse = models.ActivateInstanceResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const DescribeRollbackTimeValidityRequest = models.DescribeRollbackTimeValidityRequest;
 const IsolateClusterRequest = models.IsolateClusterRequest;
@@ -49,10 +49,11 @@ const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGrou
 const CynosdbInstanceDetail = models.CynosdbInstanceDetail;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const DescribeMaintainPeriodRequest = models.DescribeMaintainPeriodRequest;
+const PauseServerlessResponse = models.PauseServerlessResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const CynosdbClusterDetail = models.CynosdbClusterDetail;
 const ClusterInstanceDetail = models.ClusterInstanceDetail;
-const BackupFileInfo = models.BackupFileInfo;
+const Account = models.Account;
 const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidityResponse;
 const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
 const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
@@ -60,8 +61,10 @@ const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
 const IsolateInstanceResponse = models.IsolateInstanceResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
+const ResumeServerlessRequest = models.ResumeServerlessRequest;
 const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
 const QueryFilter = models.QueryFilter;
+const ModifyClusterParamRequest = models.ModifyClusterParamRequest;
 const CynosdbInstance = models.CynosdbInstance;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
@@ -70,7 +73,9 @@ const OfflineInstanceRequest = models.OfflineInstanceRequest;
 const BillingResourceInfo = models.BillingResourceInfo;
 const OfflineClusterResponse = models.OfflineClusterResponse;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
+const PauseServerlessRequest = models.PauseServerlessRequest;
 const ObjectTask = models.ObjectTask;
+const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const DescribeInstanceSpecsRequest = models.DescribeInstanceSpecsRequest;
 const ParamItem = models.ParamItem;
 const IsolateClusterResponse = models.IsolateClusterResponse;
@@ -83,10 +88,11 @@ const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const OfflineInstanceResponse = models.OfflineInstanceResponse;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
 const DescribeClustersResponse = models.DescribeClustersResponse;
-const SetRenewFlagResponse = models.SetRenewFlagResponse;
+const ActivateInstanceRequest = models.ActivateInstanceRequest;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const PolicyRule = models.PolicyRule;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
+const ResumeServerlessResponse = models.ResumeServerlessResponse;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 
 
@@ -100,6 +106,17 @@ class CynosdbClient extends AbstractClient {
         super("cynosdb.tencentcloudapi.com", "2019-01-07", credential, region, profile);
     }
     
+    /**
+     * This API is used to resume a serverless cluster.
+     * @param {ResumeServerlessRequest} req
+     * @param {function(string, ResumeServerlessResponse):void} cb
+     * @public
+     */
+    ResumeServerless(req, cb) {
+        let resp = new ResumeServerlessResponse();
+        this.request("ResumeServerless", req, resp, cb);
+    }
+
     /**
      * This API is used to query the list of backup files.
      * @param {DescribeBackupListRequest} req
@@ -142,6 +159,17 @@ class CynosdbClient extends AbstractClient {
     OfflineCluster(req, cb) {
         let resp = new OfflineClusterResponse();
         this.request("OfflineCluster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pause a serverless cluster.
+     * @param {PauseServerlessRequest} req
+     * @param {function(string, PauseServerlessResponse):void} cb
+     * @public
+     */
+    PauseServerless(req, cb) {
+        let resp = new PauseServerlessResponse();
+        this.request("PauseServerless", req, resp, cb);
     }
 
     /**
@@ -365,14 +393,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query whether rollback is possible based on the specified time and cluster.
-     * @param {DescribeRollbackTimeValidityRequest} req
-     * @param {function(string, DescribeRollbackTimeValidityResponse):void} cb
+     * This API is used to remove the isolation of an instance to make it accessible again.
+     * @param {ActivateInstanceRequest} req
+     * @param {function(string, ActivateInstanceResponse):void} cb
      * @public
      */
-    DescribeRollbackTimeValidity(req, cb) {
-        let resp = new DescribeRollbackTimeValidityResponse();
-        this.request("DescribeRollbackTimeValidity", req, resp, cb);
+    ActivateInstance(req, cb) {
+        let resp = new ActivateInstanceResponse();
+        this.request("ActivateInstance", req, resp, cb);
     }
 
     /**
@@ -384,6 +412,17 @@ class CynosdbClient extends AbstractClient {
     DescribeDBSecurityGroups(req, cb) {
         let resp = new DescribeDBSecurityGroupsResponse();
         this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query whether rollback is possible based on the specified time and cluster.
+     * @param {DescribeRollbackTimeValidityRequest} req
+     * @param {function(string, DescribeRollbackTimeValidityResponse):void} cb
+     * @public
+     */
+    DescribeRollbackTimeValidity(req, cb) {
+        let resp = new DescribeRollbackTimeValidityResponse();
+        this.request("DescribeRollbackTimeValidity", req, resp, cb);
     }
 
     /**

@@ -17,6 +17,48 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * IsolateHourDBInstance response structure.
+ * @class
+ */
+class IsolateHourDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of instances removed from isolation
+         * @type {Array.<string> || null}
+         */
+        this.SuccessInstanceIds = null;
+
+        /**
+         * IDs of instances failed to be removed from isolation
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessInstanceIds = 'SuccessInstanceIds' in params ? params.SuccessInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAccountPrivileges response structure.
  * @class
  */
@@ -170,10 +212,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeDBParameters request structure.
+ * DescribeDBResourceUsage request structure.
  * @class
  */
-class DescribeDBParametersRequest extends  AbstractModel {
+class DescribeDBResourceUsageRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -182,6 +224,24 @@ class DescribeDBParametersRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Start date in the format of `yyyy-mm-dd`
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End date in the format of `yyyy-mm-dd`
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Name of pulled metric. Valid values: data_disk_available, binlog_disk_available, mem_available, cpu_usage_rate
+         * @type {string || null}
+         */
+        this.MetricName = null;
 
     }
 
@@ -193,6 +253,9 @@ class DescribeDBParametersRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
     }
 }
@@ -841,10 +904,10 @@ class InitDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBParameters response structure.
+ * DescribeLogFileRetentionPeriod request structure.
  * @class
  */
-class DescribeDBParametersResponse extends  AbstractModel {
+class DescribeLogFileRetentionPeriodRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -853,18 +916,6 @@ class DescribeDBParametersResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * Requests the current parameter values of database
-         * @type {Array.<ParamDesc> || null}
-         */
-        this.Params = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -877,15 +928,33 @@ class DescribeDBParametersResponse extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
-        if (params.Params) {
-            this.Params = new Array();
-            for (let z in params.Params) {
-                let obj = new ParamDesc();
-                obj.deserialize(params.Params[z]);
-                this.Params.push(obj);
-            }
+    }
+}
+
+/**
+ * IsolateHourDBInstance request structure.
+ * @class
+ */
+class IsolateHourDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID list
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1234,10 +1303,10 @@ class ModifyAccountDescriptionResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBResourceUsage request structure.
+ * DescribeDBParameters request structure.
  * @class
  */
-class DescribeDBResourceUsageRequest extends  AbstractModel {
+class DescribeDBParametersRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -1246,24 +1315,6 @@ class DescribeDBResourceUsageRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * Start date in the format of `yyyy-mm-dd`
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End date in the format of `yyyy-mm-dd`
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Name of pulled metric. Valid values: data_disk_available, binlog_disk_available, mem_available, cpu_usage_rate
-         * @type {string || null}
-         */
-        this.MetricName = null;
 
     }
 
@@ -1275,9 +1326,6 @@ class DescribeDBResourceUsageRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
     }
 }
@@ -1408,6 +1456,76 @@ class DBBackupTimeConfig extends  AbstractModel {
 }
 
 /**
+ * ModifyBackupTime request structure.
+ * @class
+ */
+class ModifyBackupTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Start time of daily backup window in the format of `mm:ss`, such as 22:00
+         * @type {string || null}
+         */
+        this.StartBackupTime = null;
+
+        /**
+         * End time of daily backup window in the format of `mm:ss`, such as 23:59
+         * @type {string || null}
+         */
+        this.EndBackupTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartBackupTime = 'StartBackupTime' in params ? params.StartBackupTime : null;
+        this.EndBackupTime = 'EndBackupTime' in params ? params.EndBackupTime : null;
+
+    }
+}
+
+/**
+ * Database view information
+ * @class
+ */
+class DatabaseView extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * View name
+         * @type {string || null}
+         */
+        this.View = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.View = 'View' in params ? params.View : null;
+
+    }
+}
+
+/**
  * DescribeDBLogFiles request structure.
  * @class
  */
@@ -1506,18 +1624,120 @@ class ModifySyncTaskAttributeResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceSecurityGroups response structure.
+ * DCN details
  * @class
  */
-class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
+class DcnDetailItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Region where the instance resides
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Availability zone where the instance resides
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Instance IP address
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Instance IPv6 address
+         * @type {string || null}
+         */
+        this.Vipv6 = null;
+
+        /**
+         * Instance port
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Instance status
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance status description
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * DCN flag. Valid values: `1` (primary), `2` (disaster recovery)
+         * @type {number || null}
+         */
+        this.DcnFlag = null;
+
+        /**
+         * DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected)
+         * @type {number || null}
+         */
+        this.DcnStatus = null;
+
+        /**
+         * Number of CPU cores of the instance
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Instance memory capacity in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance storage capacity in GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Billing mode
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Creation time of the instance in the format of 2006-01-02 15:04:05
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Expiration time of the instance in the format of 2006-01-02 15:04:05
+         * @type {string || null}
+         */
+        this.PeriodEndTime = null;
+
+        /**
+         * Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), `4` (dedicated disaster recovery instance)
+         * @type {number || null}
+         */
+        this.InstanceType = null;
 
     }
 
@@ -1528,7 +1748,24 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
+        this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -1650,6 +1887,161 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.DealName = 'DealName' in params ? params.DealName : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Slow query entry information
+ * @class
+ */
+class SlowLogData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Statement checksum for querying details
+         * @type {string || null}
+         */
+        this.CheckSum = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * Abstracted SQL statement
+         * @type {string || null}
+         */
+        this.FingerPrint = null;
+
+        /**
+         * Average lock duration
+         * @type {string || null}
+         */
+        this.LockTimeAvg = null;
+
+        /**
+         * Maximum lock duration
+         * @type {string || null}
+         */
+        this.LockTimeMax = null;
+
+        /**
+         * Minimum lock duration
+         * @type {string || null}
+         */
+        this.LockTimeMin = null;
+
+        /**
+         * Sum of lock durations
+         * @type {string || null}
+         */
+        this.LockTimeSum = null;
+
+        /**
+         * Number of queries
+         * @type {string || null}
+         */
+        this.QueryCount = null;
+
+        /**
+         * Average query duration
+         * @type {string || null}
+         */
+        this.QueryTimeAvg = null;
+
+        /**
+         * Maximum query duration
+         * @type {string || null}
+         */
+        this.QueryTimeMax = null;
+
+        /**
+         * Minimum query duration
+         * @type {string || null}
+         */
+        this.QueryTimeMin = null;
+
+        /**
+         * Sum of query durations
+         * @type {string || null}
+         */
+        this.QueryTimeSum = null;
+
+        /**
+         * Number of scanned rows
+         * @type {string || null}
+         */
+        this.RowsExaminedSum = null;
+
+        /**
+         * Number of sent rows
+         * @type {string || null}
+         */
+        this.RowsSentSum = null;
+
+        /**
+         * Last execution time
+         * @type {string || null}
+         */
+        this.TsMax = null;
+
+        /**
+         * First execution time
+         * @type {string || null}
+         */
+        this.TsMin = null;
+
+        /**
+         * Account
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Sample SQL
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExampleSql = null;
+
+        /**
+         * Host address of the account
+         * @type {string || null}
+         */
+        this.Host = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CheckSum = 'CheckSum' in params ? params.CheckSum : null;
+        this.Db = 'Db' in params ? params.Db : null;
+        this.FingerPrint = 'FingerPrint' in params ? params.FingerPrint : null;
+        this.LockTimeAvg = 'LockTimeAvg' in params ? params.LockTimeAvg : null;
+        this.LockTimeMax = 'LockTimeMax' in params ? params.LockTimeMax : null;
+        this.LockTimeMin = 'LockTimeMin' in params ? params.LockTimeMin : null;
+        this.LockTimeSum = 'LockTimeSum' in params ? params.LockTimeSum : null;
+        this.QueryCount = 'QueryCount' in params ? params.QueryCount : null;
+        this.QueryTimeAvg = 'QueryTimeAvg' in params ? params.QueryTimeAvg : null;
+        this.QueryTimeMax = 'QueryTimeMax' in params ? params.QueryTimeMax : null;
+        this.QueryTimeMin = 'QueryTimeMin' in params ? params.QueryTimeMin : null;
+        this.QueryTimeSum = 'QueryTimeSum' in params ? params.QueryTimeSum : null;
+        this.RowsExaminedSum = 'RowsExaminedSum' in params ? params.RowsExaminedSum : null;
+        this.RowsSentSum = 'RowsSentSum' in params ? params.RowsSentSum : null;
+        this.TsMax = 'TsMax' in params ? params.TsMax : null;
+        this.TsMin = 'TsMin' in params ? params.TsMin : null;
+        this.User = 'User' in params ? params.User : null;
+        this.ExampleSql = 'ExampleSql' in params ? params.ExampleSql : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -2006,6 +2398,34 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * Database function information
+ * @class
+ */
+class DatabaseFunction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.Func = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Func = 'Func' in params ? params.Func : null;
+
+    }
+}
+
+/**
  * ResetAccountPassword response structure.
  * @class
  */
@@ -2034,6 +2454,41 @@ class ResetAccountPasswordResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDatabaseObjects request structure.
+ * @class
+ */
+class DescribeDatabaseObjectsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of dcdbt-ow7t8lmc.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Database name, which can be obtained through the `DescribeDatabases` API.
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+
+    }
+}
+
+/**
  * DescribeBackupTime request structure.
  * @class
  */
@@ -2057,6 +2512,34 @@ class DescribeBackupTimeRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * Database table information
+ * @class
+ */
+class DatabaseTable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.Table = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Table = 'Table' in params ? params.Table : null;
 
     }
 }
@@ -2644,18 +3127,48 @@ class OpenDBExtranetAccessResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDcnDetail response structure.
+ * DescribeDatabaseObjects response structure.
  * @class
  */
-class DescribeDcnDetailResponse extends  AbstractModel {
+class DescribeDatabaseObjectsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * DCN synchronization details
-         * @type {Array.<DcnDetailItem> || null}
+         * Passed through from the input parameters.
+         * @type {string || null}
          */
-        this.DcnDetails = null;
+        this.InstanceId = null;
+
+        /**
+         * Database name.
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * List of tables.
+         * @type {Array.<DatabaseTable> || null}
+         */
+        this.Tables = null;
+
+        /**
+         * List of views.
+         * @type {Array.<DatabaseView> || null}
+         */
+        this.Views = null;
+
+        /**
+         * List of stored procedures.
+         * @type {Array.<DatabaseProcedure> || null}
+         */
+        this.Procs = null;
+
+        /**
+         * List of functions.
+         * @type {Array.<DatabaseFunction> || null}
+         */
+        this.Funcs = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2672,13 +3185,42 @@ class DescribeDcnDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
 
-        if (params.DcnDetails) {
-            this.DcnDetails = new Array();
-            for (let z in params.DcnDetails) {
-                let obj = new DcnDetailItem();
-                obj.deserialize(params.DcnDetails[z]);
-                this.DcnDetails.push(obj);
+        if (params.Tables) {
+            this.Tables = new Array();
+            for (let z in params.Tables) {
+                let obj = new DatabaseTable();
+                obj.deserialize(params.Tables[z]);
+                this.Tables.push(obj);
+            }
+        }
+
+        if (params.Views) {
+            this.Views = new Array();
+            for (let z in params.Views) {
+                let obj = new DatabaseView();
+                obj.deserialize(params.Views[z]);
+                this.Views.push(obj);
+            }
+        }
+
+        if (params.Procs) {
+            this.Procs = new Array();
+            for (let z in params.Procs) {
+                let obj = new DatabaseProcedure();
+                obj.deserialize(params.Procs[z]);
+                this.Procs.push(obj);
+            }
+        }
+
+        if (params.Funcs) {
+            this.Funcs = new Array();
+            for (let z in params.Funcs) {
+                let obj = new DatabaseFunction();
+                obj.deserialize(params.Funcs[z]);
+                this.Funcs.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -2722,30 +3264,24 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
 }
 
 /**
- * ModifyBackupTime request structure.
+ * DescribeDcnDetail response structure.
  * @class
  */
-class ModifyBackupTimeRequest extends  AbstractModel {
+class DescribeDcnDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-         * @type {string || null}
+         * DCN synchronization details
+         * @type {Array.<DcnDetailItem> || null}
          */
-        this.InstanceId = null;
+        this.DcnDetails = null;
 
         /**
-         * Start time of daily backup window in the format of `mm:ss`, such as 22:00
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StartBackupTime = null;
-
-        /**
-         * End time of daily backup window in the format of `mm:ss`, such as 23:59
-         * @type {string || null}
-         */
-        this.EndBackupTime = null;
+        this.RequestId = null;
 
     }
 
@@ -2756,9 +3292,16 @@ class ModifyBackupTimeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartBackupTime = 'StartBackupTime' in params ? params.StartBackupTime : null;
-        this.EndBackupTime = 'EndBackupTime' in params ? params.EndBackupTime : null;
+
+        if (params.DcnDetails) {
+            this.DcnDetails = new Array();
+            for (let z in params.DcnDetails) {
+                let obj = new DcnDetailItem();
+                obj.deserialize(params.DcnDetails[z]);
+                this.DcnDetails.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3628,120 +4171,18 @@ class DatabasePrivilege extends  AbstractModel {
 }
 
 /**
- * DCN details
+ * ModifyDBInstanceSecurityGroups response structure.
  * @class
  */
-class DcnDetailItem extends  AbstractModel {
+class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Instance name
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Region where the instance resides
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * Availability zone where the instance resides
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Instance IP address
-         * @type {string || null}
-         */
-        this.Vip = null;
-
-        /**
-         * Instance IPv6 address
-         * @type {string || null}
-         */
-        this.Vipv6 = null;
-
-        /**
-         * Instance port
-         * @type {number || null}
-         */
-        this.Vport = null;
-
-        /**
-         * Instance status
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Instance status description
-         * @type {string || null}
-         */
-        this.StatusDesc = null;
-
-        /**
-         * DCN flag. Valid values: `1` (primary), `2` (disaster recovery)
-         * @type {number || null}
-         */
-        this.DcnFlag = null;
-
-        /**
-         * DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected)
-         * @type {number || null}
-         */
-        this.DcnStatus = null;
-
-        /**
-         * Number of CPU cores of the instance
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Instance memory capacity in GB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Instance storage capacity in GB
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Billing mode
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * Creation time of the instance in the format of 2006-01-02 15:04:05
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Expiration time of the instance in the format of 2006-01-02 15:04:05
-         * @type {string || null}
-         */
-        this.PeriodEndTime = null;
-
-        /**
-         * Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), `4` (dedicated disaster recovery instance)
-         * @type {number || null}
-         */
-        this.InstanceType = null;
+        this.RequestId = null;
 
     }
 
@@ -3752,24 +4193,7 @@ class DcnDetailItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
-        this.Vport = 'Vport' in params ? params.Vport : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
-        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
-        this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4036,127 +4460,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Slow query entry information
+ * ActivateHourDBInstance request structure.
  * @class
  */
-class SlowLogData extends  AbstractModel {
+class ActivateHourDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Statement checksum for querying details
-         * @type {string || null}
+         * Instance ID list
+         * @type {Array.<string> || null}
          */
-        this.CheckSum = null;
-
-        /**
-         * Database name
-         * @type {string || null}
-         */
-        this.Db = null;
-
-        /**
-         * Abstracted SQL statement
-         * @type {string || null}
-         */
-        this.FingerPrint = null;
-
-        /**
-         * Average lock duration
-         * @type {string || null}
-         */
-        this.LockTimeAvg = null;
-
-        /**
-         * Maximum lock duration
-         * @type {string || null}
-         */
-        this.LockTimeMax = null;
-
-        /**
-         * Minimum lock duration
-         * @type {string || null}
-         */
-        this.LockTimeMin = null;
-
-        /**
-         * Sum of lock durations
-         * @type {string || null}
-         */
-        this.LockTimeSum = null;
-
-        /**
-         * Number of queries
-         * @type {string || null}
-         */
-        this.QueryCount = null;
-
-        /**
-         * Average query duration
-         * @type {string || null}
-         */
-        this.QueryTimeAvg = null;
-
-        /**
-         * Maximum query duration
-         * @type {string || null}
-         */
-        this.QueryTimeMax = null;
-
-        /**
-         * Minimum query duration
-         * @type {string || null}
-         */
-        this.QueryTimeMin = null;
-
-        /**
-         * Sum of query durations
-         * @type {string || null}
-         */
-        this.QueryTimeSum = null;
-
-        /**
-         * Number of scanned rows
-         * @type {string || null}
-         */
-        this.RowsExaminedSum = null;
-
-        /**
-         * Number of sent rows
-         * @type {string || null}
-         */
-        this.RowsSentSum = null;
-
-        /**
-         * Last execution time
-         * @type {string || null}
-         */
-        this.TsMax = null;
-
-        /**
-         * First execution time
-         * @type {string || null}
-         */
-        this.TsMin = null;
-
-        /**
-         * Account
-         * @type {string || null}
-         */
-        this.User = null;
-
-        /**
-         * Sample SQL
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ExampleSql = null;
-
-        /**
-         * Host address of the account
-         * @type {string || null}
-         */
-        this.Host = null;
+        this.InstanceIds = null;
 
     }
 
@@ -4167,25 +4482,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.CheckSum = 'CheckSum' in params ? params.CheckSum : null;
-        this.Db = 'Db' in params ? params.Db : null;
-        this.FingerPrint = 'FingerPrint' in params ? params.FingerPrint : null;
-        this.LockTimeAvg = 'LockTimeAvg' in params ? params.LockTimeAvg : null;
-        this.LockTimeMax = 'LockTimeMax' in params ? params.LockTimeMax : null;
-        this.LockTimeMin = 'LockTimeMin' in params ? params.LockTimeMin : null;
-        this.LockTimeSum = 'LockTimeSum' in params ? params.LockTimeSum : null;
-        this.QueryCount = 'QueryCount' in params ? params.QueryCount : null;
-        this.QueryTimeAvg = 'QueryTimeAvg' in params ? params.QueryTimeAvg : null;
-        this.QueryTimeMax = 'QueryTimeMax' in params ? params.QueryTimeMax : null;
-        this.QueryTimeMin = 'QueryTimeMin' in params ? params.QueryTimeMin : null;
-        this.QueryTimeSum = 'QueryTimeSum' in params ? params.QueryTimeSum : null;
-        this.RowsExaminedSum = 'RowsExaminedSum' in params ? params.RowsExaminedSum : null;
-        this.RowsSentSum = 'RowsSentSum' in params ? params.RowsSentSum : null;
-        this.TsMax = 'TsMax' in params ? params.TsMax : null;
-        this.TsMin = 'TsMin' in params ? params.TsMin : null;
-        this.User = 'User' in params ? params.User : null;
-        this.ExampleSql = 'ExampleSql' in params ? params.ExampleSql : null;
-        this.Host = 'Host' in params ? params.Host : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -4796,6 +5093,34 @@ class DescribeDBPerformanceResponse extends  AbstractModel {
 }
 
 /**
+ * Database stored procedure information
+ * @class
+ */
+class DatabaseProcedure extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Stored procedure name
+         * @type {string || null}
+         */
+        this.Proc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Proc = 'Proc' in params ? params.Proc : null;
+
+    }
+}
+
+/**
  * ModifyDBSyncMode request structure.
  * @class
  */
@@ -4826,6 +5151,48 @@ class ModifyDBSyncModeRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
+
+    }
+}
+
+/**
+ * ActivateHourDBInstance response structure.
+ * @class
+ */
+class ActivateHourDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of isolated instances
+         * @type {Array.<string> || null}
+         */
+        this.SuccessInstanceIds = null;
+
+        /**
+         * IDs of instances failed to be isolated
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessInstanceIds = 'SuccessInstanceIds' in params ? params.SuccessInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5894,10 +6261,10 @@ class DescribeDBSlowLogsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLogFileRetentionPeriod request structure.
+ * DescribeDBParameters response structure.
  * @class
  */
-class DescribeLogFileRetentionPeriodRequest extends  AbstractModel {
+class DescribeDBParametersResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5906,6 +6273,18 @@ class DescribeLogFileRetentionPeriodRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Requests the current parameter values of database
+         * @type {Array.<ParamDesc> || null}
+         */
+        this.Params = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -5917,6 +6296,16 @@ class DescribeLogFileRetentionPeriodRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Params) {
+            this.Params = new Array();
+            for (let z in params.Params) {
+                let obj = new ParamDesc();
+                obj.deserialize(params.Params[z]);
+                this.Params.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6224,10 +6613,11 @@ class DeleteAccountResponse extends  AbstractModel {
 }
 
 module.exports = {
+    IsolateHourDBInstanceResponse: IsolateHourDBInstanceResponse,
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     ParamDesc: ParamDesc,
-    DescribeDBParametersRequest: DescribeDBParametersRequest,
+    DescribeDBResourceUsageRequest: DescribeDBResourceUsageRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     ProcedurePrivilege: ProcedurePrivilege,
     DestroyHourDBInstanceRequest: DestroyHourDBInstanceRequest,
@@ -6242,32 +6632,39 @@ module.exports = {
     DescribeDBSlowLogsRequest: DescribeDBSlowLogsRequest,
     CreateAccountRequest: CreateAccountRequest,
     InitDBInstancesResponse: InitDBInstancesResponse,
-    DescribeDBParametersResponse: DescribeDBParametersResponse,
+    DescribeLogFileRetentionPeriodRequest: DescribeLogFileRetentionPeriodRequest,
+    IsolateHourDBInstanceRequest: IsolateHourDBInstanceRequest,
     ResourceUsageMonitorSet: ResourceUsageMonitorSet,
     ModifyLogFileRetentionPeriodRequest: ModifyLogFileRetentionPeriodRequest,
     PerformanceMonitorSet: PerformanceMonitorSet,
     DescribeFlowResponse: DescribeFlowResponse,
     CloneAccountResponse: CloneAccountResponse,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
-    DescribeDBResourceUsageRequest: DescribeDBResourceUsageRequest,
+    DescribeDBParametersRequest: DescribeDBParametersRequest,
     ParamConstraint: ParamConstraint,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     DBBackupTimeConfig: DBBackupTimeConfig,
+    ModifyBackupTimeRequest: ModifyBackupTimeRequest,
+    DatabaseView: DatabaseView,
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
     NodeInfo: NodeInfo,
     ModifySyncTaskAttributeResponse: ModifySyncTaskAttributeResponse,
-    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
+    DcnDetailItem: DcnDetailItem,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
     CreateHourDBInstanceResponse: CreateHourDBInstanceResponse,
+    SlowLogData: SlowLogData,
     ParamModifyResult: ParamModifyResult,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     SwitchDBInstanceHAResponse: SwitchDBInstanceHAResponse,
     TablePrivilege: TablePrivilege,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
+    DatabaseFunction: DatabaseFunction,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
+    DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
     DescribeBackupTimeRequest: DescribeBackupTimeRequest,
+    DatabaseTable: DatabaseTable,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
     SwitchDBInstanceHARequest: SwitchDBInstanceHARequest,
     DBParamValue: DBParamValue,
@@ -6280,9 +6677,9 @@ module.exports = {
     SecurityGroup: SecurityGroup,
     DescribeDatabaseTableRequest: DescribeDatabaseTableRequest,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
-    DescribeDcnDetailResponse: DescribeDcnDetailResponse,
+    DescribeDatabaseObjectsResponse: DescribeDatabaseObjectsResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
-    ModifyBackupTimeRequest: ModifyBackupTimeRequest,
+    DescribeDcnDetailResponse: DescribeDcnDetailResponse,
     TableColumn: TableColumn,
     SecurityGroupBound: SecurityGroupBound,
     ColumnPrivilege: ColumnPrivilege,
@@ -6297,14 +6694,14 @@ module.exports = {
     CancelDcnJobRequest: CancelDcnJobRequest,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     DatabasePrivilege: DatabasePrivilege,
-    DcnDetailItem: DcnDetailItem,
+    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     FunctionPrivilege: FunctionPrivilege,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     DescribeDBPerformanceDetailsRequest: DescribeDBPerformanceDetailsRequest,
     DescribeBackupTimeResponse: DescribeBackupTimeResponse,
-    SlowLogData: SlowLogData,
+    ActivateHourDBInstanceRequest: ActivateHourDBInstanceRequest,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     ViewPrivileges: ViewPrivileges,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
@@ -6314,7 +6711,9 @@ module.exports = {
     DescribeFlowRequest: DescribeFlowRequest,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     DescribeDBPerformanceResponse: DescribeDBPerformanceResponse,
+    DatabaseProcedure: DatabaseProcedure,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
+    ActivateHourDBInstanceResponse: ActivateHourDBInstanceResponse,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     CloneAccountRequest: CloneAccountRequest,
     CreateAccountResponse: CreateAccountResponse,
@@ -6332,7 +6731,7 @@ module.exports = {
     DescribeDBPerformanceDetailsResponse: DescribeDBPerformanceDetailsResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeDBSlowLogsResponse: DescribeDBSlowLogsResponse,
-    DescribeLogFileRetentionPeriodRequest: DescribeLogFileRetentionPeriodRequest,
+    DescribeDBParametersResponse: DescribeDBParametersResponse,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     MonitorData: MonitorData,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,

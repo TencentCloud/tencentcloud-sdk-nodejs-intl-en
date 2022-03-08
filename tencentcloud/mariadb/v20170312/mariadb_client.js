@@ -16,10 +16,11 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const IsolateHourDBInstanceResponse = models.IsolateHourDBInstanceResponse;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const ParamDesc = models.ParamDesc;
-const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
+const DescribeDBResourceUsageRequest = models.DescribeDBResourceUsageRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const ProcedurePrivilege = models.ProcedurePrivilege;
 const DestroyHourDBInstanceRequest = models.DestroyHourDBInstanceRequest;
@@ -34,32 +35,39 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
-const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
+const IsolateHourDBInstanceRequest = models.IsolateHourDBInstanceRequest;
 const ResourceUsageMonitorSet = models.ResourceUsageMonitorSet;
 const ModifyLogFileRetentionPeriodRequest = models.ModifyLogFileRetentionPeriodRequest;
 const PerformanceMonitorSet = models.PerformanceMonitorSet;
 const DescribeFlowResponse = models.DescribeFlowResponse;
 const CloneAccountResponse = models.CloneAccountResponse;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
-const DescribeDBResourceUsageRequest = models.DescribeDBResourceUsageRequest;
+const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const ParamConstraint = models.ParamConstraint;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const DBBackupTimeConfig = models.DBBackupTimeConfig;
+const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
+const DatabaseView = models.DatabaseView;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
 const NodeInfo = models.NodeInfo;
 const ModifySyncTaskAttributeResponse = models.ModifySyncTaskAttributeResponse;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const DcnDetailItem = models.DcnDetailItem;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CreateHourDBInstanceResponse = models.CreateHourDBInstanceResponse;
+const SlowLogData = models.SlowLogData;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
 const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const DatabaseFunction = models.DatabaseFunction;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const DescribeBackupTimeRequest = models.DescribeBackupTimeRequest;
+const DatabaseTable = models.DatabaseTable;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const SwitchDBInstanceHARequest = models.SwitchDBInstanceHARequest;
 const DBParamValue = models.DBParamValue;
@@ -72,9 +80,9 @@ const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
-const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
+const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
-const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
+const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const TableColumn = models.TableColumn;
 const SecurityGroupBound = models.SecurityGroupBound;
 const ColumnPrivilege = models.ColumnPrivilege;
@@ -89,14 +97,14 @@ const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const CancelDcnJobRequest = models.CancelDcnJobRequest;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DatabasePrivilege = models.DatabasePrivilege;
-const DcnDetailItem = models.DcnDetailItem;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const FunctionPrivilege = models.FunctionPrivilege;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const DescribeDBPerformanceDetailsRequest = models.DescribeDBPerformanceDetailsRequest;
 const DescribeBackupTimeResponse = models.DescribeBackupTimeResponse;
-const SlowLogData = models.SlowLogData;
+const ActivateHourDBInstanceRequest = models.ActivateHourDBInstanceRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ViewPrivileges = models.ViewPrivileges;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
@@ -106,7 +114,9 @@ const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
+const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
+const ActivateHourDBInstanceResponse = models.ActivateHourDBInstanceResponse;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const CloneAccountRequest = models.CloneAccountRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
@@ -124,7 +134,7 @@ const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest
 const DescribeDBPerformanceDetailsResponse = models.DescribeDBPerformanceDetailsResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
-const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
+const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const MonitorData = models.MonitorData;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
@@ -180,6 +190,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to query the list of database objects in a TencentDB instance, including tables, stored procedures, views, and functions.
+     * @param {DescribeDatabaseObjectsRequest} req
+     * @param {function(string, DescribeDatabaseObjectsResponse):void} cb
+     * @public
+     */
+    DescribeDatabaseObjects(req, cb) {
+        let resp = new DescribeDatabaseObjectsResponse();
+        this.request("DescribeDatabaseObjects", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the remarks of a TencentDB account.
 Note: accounts with the same username but different hosts are different accounts.
      * @param {ModifyAccountDescriptionRequest} req
@@ -222,6 +243,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeDBResourceUsageDetails(req, cb) {
         let resp = new DescribeDBResourceUsageDetailsResponse();
         this.request("DescribeDBResourceUsageDetails", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove the isolation of pay-as-you-go instances.
+     * @param {ActivateHourDBInstanceRequest} req
+     * @param {function(string, ActivateHourDBInstanceResponse):void} cb
+     * @public
+     */
+    ActivateHourDBInstance(req, cb) {
+        let resp = new ActivateHourDBInstanceResponse();
+        this.request("ActivateHourDBInstance", req, resp, cb);
     }
 
     /**
@@ -392,14 +424,14 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to enable public network access for a TencentDB instance. After that, you can access the instance with the public domain name and port obtained through the `DescribeDCDBInstances` API.
-     * @param {OpenDBExtranetAccessRequest} req
-     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
+     * This API is used to isolate pay-as-you-go instances.
+     * @param {IsolateHourDBInstanceRequest} req
+     * @param {function(string, IsolateHourDBInstanceResponse):void} cb
      * @public
      */
-    OpenDBExtranetAccess(req, cb) {
-        let resp = new OpenDBExtranetAccessResponse();
-        this.request("OpenDBExtranetAccess", req, resp, cb);
+    IsolateHourDBInstance(req, cb) {
+        let resp = new IsolateHourDBInstanceResponse();
+        this.request("IsolateHourDBInstance", req, resp, cb);
     }
 
     /**
@@ -445,6 +477,17 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     CreateAccount(req, cb) {
         let resp = new CreateAccountResponse();
         this.request("CreateAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable public network access for a TencentDB instance. After that, you can access the instance with the public domain name and port obtained through the `DescribeDCDBInstances` API.
+     * @param {OpenDBExtranetAccessRequest} req
+     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
+     * @public
+     */
+    OpenDBExtranetAccess(req, cb) {
+        let resp = new OpenDBExtranetAccessResponse();
+        this.request("OpenDBExtranetAccess", req, resp, cb);
     }
 
     /**

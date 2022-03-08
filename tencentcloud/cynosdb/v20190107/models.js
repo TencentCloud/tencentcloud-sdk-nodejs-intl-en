@@ -350,42 +350,66 @@ class ModifyClusterParamResponse extends  AbstractModel {
 }
 
 /**
- * Database account information
+ * Backup file information
  * @class
  */
-class Account extends  AbstractModel {
+class BackupFileInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Database account name
-         * @type {string || null}
+         * Snapshot file ID used for rollback
+         * @type {number || null}
          */
-        this.AccountName = null;
+        this.SnapshotId = null;
 
         /**
-         * Database account description
+         * Snapshot file name
          * @type {string || null}
          */
-        this.Description = null;
+        this.FileName = null;
 
         /**
-         * Creation time
-         * @type {string || null}
+         * Snapshot file size
+         * @type {number || null}
          */
-        this.CreateTime = null;
+        this.FileSize = null;
 
         /**
-         * Update time
+         * Snapshot backup start time
          * @type {string || null}
          */
-        this.UpdateTime = null;
+        this.StartTime = null;
 
         /**
-         * Host
+         * Snapshot backup end time
          * @type {string || null}
          */
-        this.Host = null;
+        this.FinishTime = null;
+
+        /**
+         * Backup type. snapshot: snapshot backup; timepoint: time point backup
+         * @type {string || null}
+         */
+        this.BackupType = null;
+
+        /**
+         * Back mode. auto: auto backup; manual: manual backup
+         * @type {string || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * Backup file status. success: backup succeeded; fail: backup failed; creating: creating backup file; deleting: deleting backup file
+         * @type {string || null}
+         */
+        this.BackupStatus = null;
+
+        /**
+         * Backup file time
+         * @type {string || null}
+         */
+        this.SnapshotTime = null;
 
     }
 
@@ -396,11 +420,15 @@ class Account extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccountName = 'AccountName' in params ? params.AccountName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.Host = 'Host' in params ? params.Host : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.BackupStatus = 'BackupStatus' in params ? params.BackupStatus : null;
+        this.SnapshotTime = 'SnapshotTime' in params ? params.SnapshotTime : null;
 
     }
 }
@@ -915,7 +943,7 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         this.BackupTimeBeg = null;
 
         /**
-         * Full backup start time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
+         * Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively.
          * @type {number || null}
          */
         this.BackupTimeEnd = null;
@@ -958,24 +986,24 @@ class ModifyBackupConfigRequest extends  AbstractModel {
 }
 
 /**
- * ModifyClusterParam request structure.
+ * ActivateInstance response structure.
  * @class
  */
-class ModifyClusterParamRequest extends  AbstractModel {
+class ActivateInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
-         * @type {string || null}
+         * Task flow ID
+         * @type {number || null}
          */
-        this.ClusterId = null;
+        this.FlowId = null;
 
         /**
-         * The list of parameters to be modified
-         * @type {Array.<ParamItem> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.ParamList = null;
+        this.RequestId = null;
 
     }
 
@@ -986,16 +1014,8 @@ class ModifyClusterParamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-        if (params.ParamList) {
-            this.ParamList = new Array();
-            for (let z in params.ParamList) {
-                let obj = new ParamItem();
-                obj.deserialize(params.ParamList[z]);
-                this.ParamList.push(obj);
-            }
-        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1769,6 +1789,41 @@ class DescribeMaintainPeriodRequest extends  AbstractModel {
 }
 
 /**
+ * PauseServerless response structure.
+ * @class
+ */
+class PauseServerlessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstances response structure.
  * @class
  */
@@ -2113,66 +2168,42 @@ class ClusterInstanceDetail extends  AbstractModel {
 }
 
 /**
- * Backup file information
+ * Database account information
  * @class
  */
-class BackupFileInfo extends  AbstractModel {
+class Account extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Snapshot file ID used for rollback
-         * @type {number || null}
-         */
-        this.SnapshotId = null;
-
-        /**
-         * Snapshot file name
+         * Database account name
          * @type {string || null}
          */
-        this.FileName = null;
+        this.AccountName = null;
 
         /**
-         * Snapshot file size
-         * @type {number || null}
-         */
-        this.FileSize = null;
-
-        /**
-         * Snapshot backup start time
+         * Database account description
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.Description = null;
 
         /**
-         * Snapshot backup end time
+         * Creation time
          * @type {string || null}
          */
-        this.FinishTime = null;
+        this.CreateTime = null;
 
         /**
-         * Backup type. snapshot: snapshot backup; timepoint: time point backup
+         * Update time
          * @type {string || null}
          */
-        this.BackupType = null;
+        this.UpdateTime = null;
 
         /**
-         * Back mode. auto: auto backup; manual: manual backup
+         * Host
          * @type {string || null}
          */
-        this.BackupMethod = null;
-
-        /**
-         * Backup file status. success: backup succeeded; fail: backup failed; creating: creating backup file; deleting: deleting backup file
-         * @type {string || null}
-         */
-        this.BackupStatus = null;
-
-        /**
-         * Backup file time
-         * @type {string || null}
-         */
-        this.SnapshotTime = null;
+        this.Host = null;
 
     }
 
@@ -2183,15 +2214,11 @@ class BackupFileInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.FileSize = 'FileSize' in params ? params.FileSize : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
-        this.BackupType = 'BackupType' in params ? params.BackupType : null;
-        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
-        this.BackupStatus = 'BackupStatus' in params ? params.BackupStatus : null;
-        this.SnapshotTime = 'SnapshotTime' in params ? params.SnapshotTime : null;
+        this.AccountName = 'AccountName' in params ? params.AccountName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -2357,7 +2384,14 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.DbType = null;
 
         /**
-         * Instance status
+         * Instance status. Valid values:
+creating
+running
+isolating
+isolated
+activating: Removing the instance from isolation
+offlining: Eliminating the instance
+offlined: Instance eliminated
          * @type {string || null}
          */
         this.Status = null;
@@ -2519,6 +2553,34 @@ class DescribeBackupListRequest extends  AbstractModel {
 }
 
 /**
+ * ResumeServerless request structure.
+ * @class
+ */
+class ResumeServerlessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * DescribeRollbackTimeRange request structure.
  * @class
  */
@@ -2591,6 +2653,56 @@ class QueryFilter extends  AbstractModel {
         this.Values = 'Values' in params ? params.Values : null;
         this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
         this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * ModifyClusterParam request structure.
+ * @class
+ */
+class ModifyClusterParamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The list of parameters to be modified
+         * @type {Array.<ParamItem> || null}
+         */
+        this.ParamList = null;
+
+        /**
+         * Valid values: `yes` (execute during maintenance time), `no` (execute now)
+         * @type {string || null}
+         */
+        this.IsInMaintainPeriod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new ParamItem();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+        this.IsInMaintainPeriod = 'IsInMaintainPeriod' in params ? params.IsInMaintainPeriod : null;
 
     }
 }
@@ -3223,6 +3335,41 @@ class DescribeInstanceSpecsResponse extends  AbstractModel {
 }
 
 /**
+ * PauseServerless request structure.
+ * @class
+ */
+class PauseServerlessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Whether to pause forcibly and ignore the current user connections. Valid values: `0` (no), `1` (yes). Default value: `1`
+         * @type {number || null}
+         */
+        this.ForcePause = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ForcePause = 'ForcePause' in params ? params.ForcePause : null;
+
+    }
+}
+
+/**
  * Task information
  * @class
  */
@@ -3279,6 +3426,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
         this.ObjectId = 'ObjectId' in params ? params.ObjectId : null;
         this.ObjectType = 'ObjectType' in params ? params.ObjectType : null;
+
+    }
+}
+
+/**
+ * SetRenewFlag response structure.
+ * @class
+ */
+class SetRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of successfully manipulated instances
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3548,19 +3730,22 @@ class CreateClustersRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Number of CPU cores of normal instance
+         * It is required when `DbMode` is set to `NORMAL` or left empty.
+Number of CPU cores of a non-serverless instance
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * Memory of a non-serverless instance in GB
+         * It is required when `DbMode` is set to `NORMAL` or left empty.
+Memory of a non-serverless instance in GB
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * Storage capacity in GB
+         * This parameter has been deprecated.
+Storage capacity in GB.
          * @type {number || null}
          */
         this.Storage = null;
@@ -3623,7 +3808,8 @@ timeRollback: rollback by time point
         this.ExpectTime = null;
 
         /**
-         * Specified allowed time range for time point rollback
+         * This parameter has been deprecated.
+Specified allowed time range for time point rollback
          * @type {number || null}
          */
         this.ExpectTimeThresh = null;
@@ -4401,24 +4587,24 @@ class DescribeClustersResponse extends  AbstractModel {
 }
 
 /**
- * SetRenewFlag response structure.
+ * ActivateInstance request structure.
  * @class
  */
-class SetRenewFlagResponse extends  AbstractModel {
+class ActivateInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of successfully manipulated instances
-         * @type {number || null}
-         */
-        this.Count = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Cluster ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClusterId = null;
+
+        /**
+         * Array of instance IDs
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdList = null;
 
     }
 
@@ -4429,8 +4615,8 @@ class SetRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
 
     }
 }
@@ -4606,6 +4792,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ResumeServerless response structure.
+ * @class
+ */
+class ResumeServerlessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceSecurityGroups request structure.
  * @class
  */
@@ -4655,7 +4876,7 @@ module.exports = {
     InstanceSpec: InstanceSpec,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     ModifyClusterParamResponse: ModifyClusterParamResponse,
-    Account: Account,
+    BackupFileInfo: BackupFileInfo,
     SecurityGroup: SecurityGroup,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
@@ -4668,7 +4889,7 @@ module.exports = {
     DescribeRollbackTimeRangeResponse: DescribeRollbackTimeRangeResponse,
     ModifyMaintainPeriodConfigRequest: ModifyMaintainPeriodConfigRequest,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
-    ModifyClusterParamRequest: ModifyClusterParamRequest,
+    ActivateInstanceResponse: ActivateInstanceResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     DescribeRollbackTimeValidityRequest: DescribeRollbackTimeValidityRequest,
     IsolateClusterRequest: IsolateClusterRequest,
@@ -4681,10 +4902,11 @@ module.exports = {
     CynosdbInstanceDetail: CynosdbInstanceDetail,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     DescribeMaintainPeriodRequest: DescribeMaintainPeriodRequest,
+    PauseServerlessResponse: PauseServerlessResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
     CynosdbClusterDetail: CynosdbClusterDetail,
     ClusterInstanceDetail: ClusterInstanceDetail,
-    BackupFileInfo: BackupFileInfo,
+    Account: Account,
     DescribeRollbackTimeValidityResponse: DescribeRollbackTimeValidityResponse,
     DescribeInstanceDetailRequest: DescribeInstanceDetailRequest,
     ModifyMaintainPeriodConfigResponse: ModifyMaintainPeriodConfigResponse,
@@ -4692,8 +4914,10 @@ module.exports = {
     DescribeResourcesByDealNameRequest: DescribeResourcesByDealNameRequest,
     IsolateInstanceResponse: IsolateInstanceResponse,
     DescribeBackupListRequest: DescribeBackupListRequest,
+    ResumeServerlessRequest: ResumeServerlessRequest,
     DescribeRollbackTimeRangeRequest: DescribeRollbackTimeRangeRequest,
     QueryFilter: QueryFilter,
+    ModifyClusterParamRequest: ModifyClusterParamRequest,
     CynosdbInstance: CynosdbInstance,
     DescribeAccountsResponse: DescribeAccountsResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
@@ -4702,7 +4926,9 @@ module.exports = {
     BillingResourceInfo: BillingResourceInfo,
     OfflineClusterResponse: OfflineClusterResponse,
     DescribeInstanceSpecsResponse: DescribeInstanceSpecsResponse,
+    PauseServerlessRequest: PauseServerlessRequest,
     ObjectTask: ObjectTask,
+    SetRenewFlagResponse: SetRenewFlagResponse,
     DescribeInstanceSpecsRequest: DescribeInstanceSpecsRequest,
     ParamItem: ParamItem,
     IsolateClusterResponse: IsolateClusterResponse,
@@ -4715,10 +4941,11 @@ module.exports = {
     OfflineInstanceResponse: OfflineInstanceResponse,
     CynosdbInstanceGrp: CynosdbInstanceGrp,
     DescribeClustersResponse: DescribeClustersResponse,
-    SetRenewFlagResponse: SetRenewFlagResponse,
+    ActivateInstanceRequest: ActivateInstanceRequest,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     PolicyRule: PolicyRule,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
+    ResumeServerlessResponse: ResumeServerlessResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
 
 }

@@ -25,6 +25,7 @@ module.exports = {
     dms: require("./dms"),
     dts: require("./dts"),
     ecdn: require("./ecdn"),
+    ecm: require("./ecm"),
     emr: require("./emr"),
     es: require("./es"),
     faceid: require("./faceid"),

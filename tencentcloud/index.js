@@ -24,6 +24,7 @@ module.exports = {
     dcdb: require("./dcdb"),
     dms: require("./dms"),
     dts: require("./dts"),
+    eb: require("./eb"),
     ecdn: require("./ecdn"),
     ecm: require("./ecm"),
     emr: require("./emr"),

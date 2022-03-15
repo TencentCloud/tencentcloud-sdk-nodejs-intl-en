@@ -249,24 +249,76 @@ class AttachCcnRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSnapshotsDeniedActions response structure.
+ * CreateInstances request structure.
  * @class
  */
-class DescribeSnapshotsDeniedActionsResponse extends  AbstractModel {
+class CreateInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of snapshot operation limit details.
-         * @type {Array.<SnapshotDeniedActions> || null}
-         */
-        this.SnapshotDeniedActionSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * ID of the Lighthouse package
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.BundleId = null;
+
+        /**
+         * ID of the Lighthouse image
+         * @type {string || null}
+         */
+        this.BlueprintId = null;
+
+        /**
+         * Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
+         * The display name of the Lighthouse instance
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Number of the Lighthouse instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * List of availability zones. A random AZ is selected by default.
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * Whether the request is a dry run only.
+`true`: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
+If the dry run fails, the corresponding error code will be returned.
+If the dry run succeeds, the RequestId will be returned.
+`false` (default value): send a normal request and create instance(s) if all the requirements are met.
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * Login password of the instance. It’s only available for Windows instances. If it’s not specified, it means that the user choose to set the login password after the instance creation.
+         * @type {LoginConfiguration || null}
+         */
+        this.LoginConfiguration = null;
+
+        /**
+         * Configuration of the containers to create
+         * @type {Array.<DockerContainerConfiguration> || null}
+         */
+        this.Containers = null;
 
     }
 
@@ -277,16 +329,55 @@ class DescribeSnapshotsDeniedActionsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.BundleId = 'BundleId' in params ? params.BundleId : null;
+        this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
 
-        if (params.SnapshotDeniedActionSet) {
-            this.SnapshotDeniedActionSet = new Array();
-            for (let z in params.SnapshotDeniedActionSet) {
-                let obj = new SnapshotDeniedActions();
-                obj.deserialize(params.SnapshotDeniedActionSet[z]);
-                this.SnapshotDeniedActionSet.push(obj);
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+        if (params.LoginConfiguration) {
+            let obj = new LoginConfiguration();
+            obj.deserialize(params.LoginConfiguration)
+            this.LoginConfiguration = obj;
+        }
+
+        if (params.Containers) {
+            this.Containers = new Array();
+            for (let z in params.Containers) {
+                let obj = new DockerContainerConfiguration();
+                obj.deserialize(params.Containers[z]);
+                this.Containers.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeZones request structure.
+ * @class
+ */
+class DescribeZonesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -517,6 +608,13 @@ class ModifyBundle extends  AbstractModel {
          */
         this.Bundle = null;
 
+        /**
+         * The reason of package changing failure. It’s empty if the package change status is `AVAILABLE`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NotSupportModifyMessage = null;
+
     }
 
     /**
@@ -539,6 +637,7 @@ class ModifyBundle extends  AbstractModel {
             obj.deserialize(params.Bundle)
             this.Bundle = obj;
         }
+        this.NotSupportModifyMessage = 'NotSupportModifyMessage' in params ? params.NotSupportModifyMessage : null;
 
     }
 }
@@ -686,6 +785,41 @@ class DeleteFirewallRulesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstancesAttribute request structure.
+ * @class
+ */
+class ModifyInstancesAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Instance name, which is customizable and can contain up to 60 characters.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -2528,24 +2662,38 @@ class ModifyDisksAttributeRequest extends  AbstractModel {
 }
 
 /**
- * ModifyInstancesAttribute request structure.
+ * Port mapping of the Docker container
  * @class
  */
-class ModifyInstancesAttributeRequest extends  AbstractModel {
+class DockerContainerPublishPort extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-         * @type {Array.<string> || null}
+         * Host port
+         * @type {number || null}
          */
-        this.InstanceIds = null;
+        this.HostPort = null;
 
         /**
-         * Instance name, which is customizable and can contain up to 60 characters.
+         * Container port
+         * @type {number || null}
+         */
+        this.ContainerPort = null;
+
+        /**
+         * External IP. It defaults to 0.0.0.0.
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
-        this.InstanceName = null;
+        this.Ip = null;
+
+        /**
+         * The protocol defaults to `tcp`. Valid values: `tcp`, `udp` and `sctp`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Protocol = null;
 
     }
 
@@ -2556,19 +2704,33 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.HostPort = 'HostPort' in params ? params.HostPort : null;
+        this.ContainerPort = 'ContainerPort' in params ? params.ContainerPort : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
 
     }
 }
 
 /**
- * DescribeZones request structure.
+ * DescribeSnapshotsDeniedActions response structure.
  * @class
  */
-class DescribeZonesRequest extends  AbstractModel {
+class DescribeSnapshotsDeniedActionsResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * List of snapshot operation limit details.
+         * @type {Array.<SnapshotDeniedActions> || null}
+         */
+        this.SnapshotDeniedActionSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2579,6 +2741,16 @@ class DescribeZonesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.SnapshotDeniedActionSet) {
+            this.SnapshotDeniedActionSet = new Array();
+            for (let z in params.SnapshotDeniedActionSet) {
+                let obj = new SnapshotDeniedActions();
+                obj.deserialize(params.SnapshotDeniedActionSet[z]);
+                this.SnapshotDeniedActionSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3126,42 +3298,26 @@ class StopInstancesResponse extends  AbstractModel {
 }
 
 /**
- * Firewall rule information.
+ * CreateInstances response structure.
  * @class
  */
-class FirewallRule extends  AbstractModel {
+class CreateInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Protocol. Valid values: TCP, UDP, ICMP, ALL.
-         * @type {string || null}
+         * List of IDs created by using this API. The returning of IDs does not mean that the instances are created successfully.
+
+You can call `DescribeInstances` API, and find the instance ID in the `InstancesSet` returned to check its status. If the `status` is `running`, the instance is created successfully.
+         * @type {Array.<string> || null}
          */
-        this.Protocol = null;
+        this.InstanceIdSet = null;
 
         /**
-         * Port. Valid values: ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Port = null;
-
-        /**
-         * IP range or IP (mutually exclusive). Default value: 0.0.0.0/0, which indicates all sources.
-         * @type {string || null}
-         */
-        this.CidrBlock = null;
-
-        /**
-         * Valid values: ACCEPT, DROP. Default value: ACCEPT.
-         * @type {string || null}
-         */
-        this.Action = null;
-
-        /**
-         * Firewall rule description.
-         * @type {string || null}
-         */
-        this.FirewallRuleDescription = null;
+        this.RequestId = null;
 
     }
 
@@ -3172,11 +3328,8 @@ class FirewallRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
-        this.Action = 'Action' in params ? params.Action : null;
-        this.FirewallRuleDescription = 'FirewallRuleDescription' in params ? params.FirewallRuleDescription : null;
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3891,6 +4044,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.Tags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Docker container mount volume
+ * @class
+ */
+class DockerContainerVolume extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Container path
+         * @type {string || null}
+         */
+        this.ContainerPath = null;
+
+        /**
+         * Host path
+         * @type {string || null}
+         */
+        this.HostPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ContainerPath = 'ContainerPath' in params ? params.ContainerPath : null;
+        this.HostPath = 'HostPath' in params ? params.HostPath : null;
 
     }
 }
@@ -4867,7 +5055,7 @@ Required: no
 <li>instance-state</li>Filter by **instance status**.
 Type: String
 Required: no
-Each request can contain up to 10 filters, each of which can have 5 values. You cannot specify both `InstanceIds` and `Filters` at the same time.
+Each request can contain up to 10 filters, each of which can have 100 values. You cannot specify both `InstanceIds` and `Filters` at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5482,6 +5670,97 @@ class DescribeInstancesReturnableResponse extends  AbstractModel {
 }
 
 /**
+ * Container environment variables
+ * @class
+ */
+class ContainerEnv extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment variable key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Environment variable value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Firewall rule information.
+ * @class
+ */
+class FirewallRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Protocol. Valid values: TCP, UDP, ICMP, ALL.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Port. Valid values: ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * IP range or IP (mutually exclusive). Default value: 0.0.0.0/0, which indicates all sources.
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * Valid values: ACCEPT, DROP. Default value: ACCEPT.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Firewall rule description.
+         * @type {string || null}
+         */
+        this.FirewallRuleDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.FirewallRuleDescription = 'FirewallRuleDescription' in params ? params.FirewallRuleDescription : null;
+
+    }
+}
+
+/**
  * DeleteBlueprints request structure.
  * @class
  */
@@ -5902,6 +6181,27 @@ class DetachDisksResponse extends  AbstractModel {
 }
 
 /**
+ * Login password information
+ * @class
+ */
+class LoginConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeResetInstanceBlueprints request structure.
  * @class
  */
@@ -5973,6 +6273,93 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `BlueprintIds
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Configuration used to create Docker containers
+ * @class
+ */
+class DockerContainerConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Container image address
+         * @type {string || null}
+         */
+        this.ContainerImage = null;
+
+        /**
+         * Container name
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * List of environment variables
+         * @type {Array.<ContainerEnv> || null}
+         */
+        this.Envs = null;
+
+        /**
+         * List of mappings of container ports and host ports
+         * @type {Array.<DockerContainerPublishPort> || null}
+         */
+        this.PublishPorts = null;
+
+        /**
+         * List of container mount volumes
+         * @type {Array.<DockerContainerVolume> || null}
+         */
+        this.Volumes = null;
+
+        /**
+         * The command to run
+         * @type {string || null}
+         */
+        this.Command = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ContainerImage = 'ContainerImage' in params ? params.ContainerImage : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+
+        if (params.Envs) {
+            this.Envs = new Array();
+            for (let z in params.Envs) {
+                let obj = new ContainerEnv();
+                obj.deserialize(params.Envs[z]);
+                this.Envs.push(obj);
+            }
+        }
+
+        if (params.PublishPorts) {
+            this.PublishPorts = new Array();
+            for (let z in params.PublishPorts) {
+                let obj = new DockerContainerPublishPort();
+                obj.deserialize(params.PublishPorts[z]);
+                this.PublishPorts.push(obj);
+            }
+        }
+
+        if (params.Volumes) {
+            this.Volumes = new Array();
+            for (let z in params.Volumes) {
+                let obj = new DockerContainerVolume();
+                obj.deserialize(params.Volumes[z]);
+                this.Volumes.push(obj);
+            }
+        }
+        this.Command = 'Command' in params ? params.Command : null;
 
     }
 }
@@ -7633,7 +8020,8 @@ module.exports = {
     DescribeInstancesDeniedActionsRequest: DescribeInstancesDeniedActionsRequest,
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
     AttachCcnRequest: AttachCcnRequest,
-    DescribeSnapshotsDeniedActionsResponse: DescribeSnapshotsDeniedActionsResponse,
+    CreateInstancesRequest: CreateInstancesRequest,
+    DescribeZonesRequest: DescribeZonesRequest,
     RegionInfo: RegionInfo,
     DescribeBlueprintInstancesResponse: DescribeBlueprintInstancesResponse,
     InstanceDeniedActions: InstanceDeniedActions,
@@ -7643,6 +8031,7 @@ module.exports = {
     CreateInstanceSnapshotResponse: CreateInstanceSnapshotResponse,
     InquirePriceRenewInstancesResponse: InquirePriceRenewInstancesResponse,
     DeleteFirewallRulesResponse: DeleteFirewallRulesResponse,
+    ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
     DescribeGeneralResourceQuotasRequest: DescribeGeneralResourceQuotasRequest,
     DeleteKeyPairsRequest: DeleteKeyPairsRequest,
     SystemDisk: SystemDisk,
@@ -7684,8 +8073,8 @@ module.exports = {
     InstanceReturnable: InstanceReturnable,
     DescribeInstancesDeniedActionsResponse: DescribeInstancesDeniedActionsResponse,
     ModifyDisksAttributeRequest: ModifyDisksAttributeRequest,
-    ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
-    DescribeZonesRequest: DescribeZonesRequest,
+    DockerContainerPublishPort: DockerContainerPublishPort,
+    DescribeSnapshotsDeniedActionsResponse: DescribeSnapshotsDeniedActionsResponse,
     StartInstancesRequest: StartInstancesRequest,
     SnapshotDeniedActions: SnapshotDeniedActions,
     DeleteSnapshotsRequest: DeleteSnapshotsRequest,
@@ -7701,7 +8090,7 @@ module.exports = {
     DeleteBlueprintsResponse: DeleteBlueprintsResponse,
     ModifyInstancesLoginKeyPairAttributeRequest: ModifyInstancesLoginKeyPairAttributeRequest,
     StopInstancesResponse: StopInstancesResponse,
-    FirewallRule: FirewallRule,
+    CreateInstancesResponse: CreateInstancesResponse,
     ModifyBlueprintAttributeResponse: ModifyBlueprintAttributeResponse,
     DescribeFirewallRulesTemplateResponse: DescribeFirewallRulesTemplateResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
@@ -7715,6 +8104,7 @@ module.exports = {
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
     LoginSettings: LoginSettings,
     Instance: Instance,
+    DockerContainerVolume: DockerContainerVolume,
     CreateKeyPairResponse: CreateKeyPairResponse,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     ModifyFirewallRulesResponse: ModifyFirewallRulesResponse,
@@ -7746,6 +8136,8 @@ module.exports = {
     Software: Software,
     DescribeFirewallRulesResponse: DescribeFirewallRulesResponse,
     DescribeInstancesReturnableResponse: DescribeInstancesReturnableResponse,
+    ContainerEnv: ContainerEnv,
+    FirewallRule: FirewallRule,
     DeleteBlueprintsRequest: DeleteBlueprintsRequest,
     FirewallRuleInfo: FirewallRuleInfo,
     CreateFirewallRulesResponse: CreateFirewallRulesResponse,
@@ -7755,7 +8147,9 @@ module.exports = {
     CreateBlueprintResponse: CreateBlueprintResponse,
     PolicyDetail: PolicyDetail,
     DetachDisksResponse: DetachDisksResponse,
+    LoginConfiguration: LoginConfiguration,
     DescribeResetInstanceBlueprintsRequest: DescribeResetInstanceBlueprintsRequest,
+    DockerContainerConfiguration: DockerContainerConfiguration,
     ResetAttachCcnResponse: ResetAttachCcnResponse,
     ModifyInstancesRenewFlagResponse: ModifyInstancesRenewFlagResponse,
     ApplyInstanceSnapshotRequest: ApplyInstanceSnapshotRequest,

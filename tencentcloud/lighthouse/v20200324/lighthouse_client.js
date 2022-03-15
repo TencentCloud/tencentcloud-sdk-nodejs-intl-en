@@ -23,7 +23,8 @@ const DescribeInstancesTrafficPackagesResponse = models.DescribeInstancesTraffic
 const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
 const AttachCcnRequest = models.AttachCcnRequest;
-const DescribeSnapshotsDeniedActionsResponse = models.DescribeSnapshotsDeniedActionsResponse;
+const CreateInstancesRequest = models.CreateInstancesRequest;
+const DescribeZonesRequest = models.DescribeZonesRequest;
 const RegionInfo = models.RegionInfo;
 const DescribeBlueprintInstancesResponse = models.DescribeBlueprintInstancesResponse;
 const InstanceDeniedActions = models.InstanceDeniedActions;
@@ -33,6 +34,7 @@ const DetachCcnResponse = models.DetachCcnResponse;
 const CreateInstanceSnapshotResponse = models.CreateInstanceSnapshotResponse;
 const InquirePriceRenewInstancesResponse = models.InquirePriceRenewInstancesResponse;
 const DeleteFirewallRulesResponse = models.DeleteFirewallRulesResponse;
+const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const DescribeGeneralResourceQuotasRequest = models.DescribeGeneralResourceQuotasRequest;
 const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
@@ -74,8 +76,8 @@ const DescribeBlueprintsRequest = models.DescribeBlueprintsRequest;
 const InstanceReturnable = models.InstanceReturnable;
 const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
 const ModifyDisksAttributeRequest = models.ModifyDisksAttributeRequest;
-const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
-const DescribeZonesRequest = models.DescribeZonesRequest;
+const DockerContainerPublishPort = models.DockerContainerPublishPort;
+const DescribeSnapshotsDeniedActionsResponse = models.DescribeSnapshotsDeniedActionsResponse;
 const StartInstancesRequest = models.StartInstancesRequest;
 const SnapshotDeniedActions = models.SnapshotDeniedActions;
 const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
@@ -91,7 +93,7 @@ const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const DeleteBlueprintsResponse = models.DeleteBlueprintsResponse;
 const ModifyInstancesLoginKeyPairAttributeRequest = models.ModifyInstancesLoginKeyPairAttributeRequest;
 const StopInstancesResponse = models.StopInstancesResponse;
-const FirewallRule = models.FirewallRule;
+const CreateInstancesResponse = models.CreateInstancesResponse;
 const ModifyBlueprintAttributeResponse = models.ModifyBlueprintAttributeResponse;
 const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
@@ -105,6 +107,7 @@ const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesR
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const LoginSettings = models.LoginSettings;
 const Instance = models.Instance;
+const DockerContainerVolume = models.DockerContainerVolume;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const ModifyFirewallRulesResponse = models.ModifyFirewallRulesResponse;
@@ -136,6 +139,8 @@ const CreateFirewallRulesRequest = models.CreateFirewallRulesRequest;
 const Software = models.Software;
 const DescribeFirewallRulesResponse = models.DescribeFirewallRulesResponse;
 const DescribeInstancesReturnableResponse = models.DescribeInstancesReturnableResponse;
+const ContainerEnv = models.ContainerEnv;
+const FirewallRule = models.FirewallRule;
 const DeleteBlueprintsRequest = models.DeleteBlueprintsRequest;
 const FirewallRuleInfo = models.FirewallRuleInfo;
 const CreateFirewallRulesResponse = models.CreateFirewallRulesResponse;
@@ -145,7 +150,9 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const CreateBlueprintResponse = models.CreateBlueprintResponse;
 const PolicyDetail = models.PolicyDetail;
 const DetachDisksResponse = models.DetachDisksResponse;
+const LoginConfiguration = models.LoginConfiguration;
 const DescribeResetInstanceBlueprintsRequest = models.DescribeResetInstanceBlueprintsRequest;
+const DockerContainerConfiguration = models.DockerContainerConfiguration;
 const ResetAttachCcnResponse = models.ResetAttachCcnResponse;
 const ModifyInstancesRenewFlagResponse = models.ModifyInstancesRenewFlagResponse;
 const ApplyInstanceSnapshotRequest = models.ApplyInstanceSnapshotRequest;
@@ -994,6 +1001,17 @@ In the `FirewallRules` parameter:
     RebootInstances(req, cb) {
         let resp = new RebootInstancesResponse();
         this.request("RebootInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create one or more Lighthouse instances.
+     * @param {CreateInstancesRequest} req
+     * @param {function(string, CreateInstancesResponse):void} cb
+     * @public
+     */
+    CreateInstances(req, cb) {
+        let resp = new CreateInstancesResponse();
+        this.request("CreateInstances", req, resp, cb);
     }
 
     /**

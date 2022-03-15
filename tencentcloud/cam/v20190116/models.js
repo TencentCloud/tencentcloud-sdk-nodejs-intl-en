@@ -37,7 +37,7 @@ class SubAccountUser extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Sub-user UID
+         * Sub-user UID. UID is the unique identifier of a user who is a message recipient, while UIN is a unique identifier of a user.
          * @type {number || null}
          */
         this.Uid = null;
@@ -689,7 +689,7 @@ class GetSecurityLastUsedRequest extends  AbstractModel {
         super();
 
         /**
-         * A parameter used to query the key ID list.
+         * Key ID list query. Up to 10 key IDs can be queried.
          * @type {Array.<string> || null}
          */
         this.SecretIdList = null;
@@ -723,7 +723,7 @@ class DescribeUserSAMLConfigResponse extends  AbstractModel {
         this.SAMLMetadata = null;
 
         /**
-         * Status. `0`: not set, `11`: enabled, `2`: disabled.
+         * Status. `0`: not set, `1`: enabled, `2`: disabled.
          * @type {number || null}
          */
         this.Status = null;
@@ -901,6 +901,76 @@ class DetachUserPolicyRequest extends  AbstractModel {
         }
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.DetachUin = 'DetachUin' in params ? params.DetachUin : null;
+
+    }
+}
+
+/**
+ * GetUserAppId response structure.
+ * @class
+ */
+class GetUserAppIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * UIN of the current account.
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * OwnerUin of the current account.
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * AppId of the current account.
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetUserAppId request structure.
+ * @class
+ */
+class GetUserAppIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -1358,7 +1428,7 @@ class UpdateSAMLProviderRequest extends  AbstractModel {
 }
 
 /**
- * Information on policies associated with the user via the user group.
+ * Information on policies that are associated with the user and inherited from the user group
  * @class
  */
 class AttachedUserPolicyGroupInfo extends  AbstractModel {
@@ -2168,12 +2238,13 @@ class GetUserResponse extends  AbstractModel {
 
         /**
          * Sub-user remarks
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * If sub-user can log in to the Console
+         * Whether the sub-user can log in to the console. `0`: No; `1`: Yes.
          * @type {number || null}
          */
         this.ConsoleLogin = null;
@@ -2780,13 +2851,13 @@ class UpdateRoleConsoleLoginRequest extends  AbstractModel {
         this.ConsoleLogin = null;
 
         /**
-         * Role ID
+         * Role ID. Use either `RoleId` or `RoleName` as the input parameter.
          * @type {number || null}
          */
         this.RoleId = null;
 
         /**
-         * Role name
+         * Role name. Use either `RoleId` or `RoleName` as the input parameter.
          * @type {string || null}
          */
         this.RoleName = null;
@@ -2885,7 +2956,7 @@ class GetPolicyVersionRequest extends  AbstractModel {
         this.PolicyId = null;
 
         /**
-         * Policy version ID
+         * Policy version, which can be obtained through `ListPolicyVersions`.
          * @type {number || null}
          */
         this.VersionId = null;
@@ -3101,6 +3172,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.CreateTime = null;
 
+        /**
+         * Nickname.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NickName = null;
+
     }
 
     /**
@@ -3119,6 +3197,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Email = 'Email' in params ? params.Email : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.NickName = 'NickName' in params ? params.NickName : null;
 
     }
 }
@@ -4958,7 +5037,7 @@ class SetDefaultPolicyVersionRequest extends  AbstractModel {
         this.PolicyId = null;
 
         /**
-         * Policy version ID
+         * Policy version, which can be obtained through `ListPolicyVersions`.
          * @type {number || null}
          */
         this.VersionId = null;
@@ -6670,7 +6749,7 @@ class GroupMemberInfo extends  AbstractModel {
         this.CountryCode = null;
 
         /**
-         * If mobile number has been verified
+         * Whether the mobile phone has been verified. `0`: No; `1`: Yes.
          * @type {number || null}
          */
         this.PhoneFlag = null;
@@ -6682,13 +6761,13 @@ class GroupMemberInfo extends  AbstractModel {
         this.Email = null;
 
         /**
-         * If email has been verified
+         * Whether the email has been verified. `0`: No; `1`: Yes.
          * @type {number || null}
          */
         this.EmailFlag = null;
 
         /**
-         * User type
+         * User type. `1`: Global collaborator; `2`: Project collaborator; `3`: Message recipient.
          * @type {number || null}
          */
         this.UserType = null;
@@ -6700,7 +6779,7 @@ class GroupMemberInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * If the user is the main message recipient
+         * Whether the user is the primary message recipient. `0`: No; `1`: Yes.
          * @type {number || null}
          */
         this.IsReceiverOwner = null;
@@ -6787,6 +6866,8 @@ module.exports = {
     UpdateRoleDescriptionResponse: UpdateRoleDescriptionResponse,
     GetAccountSummaryRequest: GetAccountSummaryRequest,
     DetachUserPolicyRequest: DetachUserPolicyRequest,
+    GetUserAppIdResponse: GetUserAppIdResponse,
+    GetUserAppIdRequest: GetUserAppIdRequest,
     ListGroupsResponse: ListGroupsResponse,
     ListPolicyVersionsRequest: ListPolicyVersionsRequest,
     GetCustomMFATokenInfoRequest: GetCustomMFATokenInfoRequest,

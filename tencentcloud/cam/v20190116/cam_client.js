@@ -38,6 +38,8 @@ const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
 const GetAccountSummaryRequest = models.GetAccountSummaryRequest;
 const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
+const GetUserAppIdResponse = models.GetUserAppIdResponse;
+const GetUserAppIdRequest = models.GetUserAppIdRequest;
 const ListGroupsResponse = models.ListGroupsResponse;
 const ListPolicyVersionsRequest = models.ListPolicyVersionsRequest;
 const GetCustomMFATokenInfoRequest = models.GetCustomMFATokenInfoRequest;
@@ -185,6 +187,17 @@ class CamClient extends AbstractClient {
         super("cam.tencentcloudapi.com", "2019-01-16", credential, region, profile);
     }
     
+    /**
+     * This API is used to get the user AppId.
+     * @param {GetUserAppIdRequest} req
+     * @param {function(string, GetUserAppIdResponse):void} cb
+     * @public
+     */
+    GetUserAppId(req, cb) {
+        let resp = new GetUserAppIdResponse();
+        this.request("GetUserAppId", req, resp, cb);
+    }
+
     /**
      * This API is used to set account verification for login and sensitive operations for sub-users.
      * @param {SetMfaFlagRequest} req

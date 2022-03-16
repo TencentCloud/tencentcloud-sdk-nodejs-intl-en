@@ -20,8 +20,10 @@ const InitDCDBInstancesResponse = models.InitDCDBInstancesResponse;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const ParamDesc = models.ParamDesc;
+const DestroyDCDBInstanceResponse = models.DestroyDCDBInstanceResponse;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const ActiveHourDCDBInstanceResponse = models.ActiveHourDCDBInstanceResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const CancelDcnJobResponse = models.CancelDcnJobResponse;
@@ -31,17 +33,18 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const DestroyHourDCDBInstanceResponse = models.DestroyHourDCDBInstanceResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
 const CloneAccountResponse = models.CloneAccountResponse;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const DestroyDCDBInstanceRequest = models.DestroyDCDBInstanceRequest;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
-const ParamConstraint = models.ParamConstraint;
+const BriefNodeInfo = models.BriefNodeInfo;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
 const DatabaseView = models.DatabaseView;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
-const DcnDetailItem = models.DcnDetailItem;
+const CreateHourDCDBInstanceRequest = models.CreateHourDCDBInstanceRequest;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CloneAccountRequest = models.CloneAccountRequest;
@@ -50,10 +53,9 @@ const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DatabaseFunction = models.DatabaseFunction;
-const BriefNodeInfo = models.BriefNodeInfo;
+const ParamConstraint = models.ParamConstraint;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
-const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const DatabaseTable = models.DatabaseTable;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
@@ -76,20 +78,22 @@ const TableColumn = models.TableColumn;
 const SecurityGroupBound = models.SecurityGroupBound;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
+const CreateHourDCDBInstanceResponse = models.CreateHourDCDBInstanceResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const CancelDcnJobRequest = models.CancelDcnJobRequest;
+const IsolateHourDCDBInstanceResponse = models.IsolateHourDCDBInstanceResponse;
 const ShardInfo = models.ShardInfo;
 const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DestroyHourDCDBInstanceRequest = models.DestroyHourDCDBInstanceRequest;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const DcnDetailItem = models.DcnDetailItem;
 const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const SlowLogData = models.SlowLogData;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
-const DestroyDCDBInstanceResponse = models.DestroyDCDBInstanceResponse;
+const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const InitDCDBInstancesRequest = models.InitDCDBInstancesRequest;
 const ResourceTag = models.ResourceTag;
@@ -100,9 +104,10 @@ const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const CreateAccountResponse = models.CreateAccountResponse;
-const DestroyHourDCDBInstanceResponse = models.DestroyHourDCDBInstanceResponse;
+const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
 const ConstraintRange = models.ConstraintRange;
 const LogFileInfo = models.LogFileInfo;
+const ActiveHourDCDBInstanceRequest = models.ActiveHourDCDBInstanceRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const DBAccount = models.DBAccount;
 const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
@@ -111,6 +116,7 @@ const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
 const Project = models.Project;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
@@ -137,6 +143,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeAccountPrivileges(req, cb) {
         let resp = new DescribeAccountPrivilegesResponse();
         this.request("DescribeAccountPrivileges", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove the isolation of pay-as-you-go TDSQL for MySQL instances.
+     * @param {ActiveHourDCDBInstanceRequest} req
+     * @param {function(string, ActiveHourDCDBInstanceResponse):void} cb
+     * @public
+     */
+    ActiveHourDCDBInstance(req, cb) {
+        let resp = new ActiveHourDCDBInstanceResponse();
+        this.request("ActiveHourDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -306,6 +323,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeDBLogFiles(req, cb) {
         let resp = new DescribeDBLogFilesResponse();
         this.request("DescribeDBLogFiles", req, resp, cb);
+    }
+
+    /**
+     * This API is used to isolate pay-as-you-go TDSQL for MySQL instances.
+     * @param {IsolateHourDCDBInstanceRequest} req
+     * @param {function(string, IsolateHourDCDBInstanceResponse):void} cb
+     * @public
+     */
+    IsolateHourDCDBInstance(req, cb) {
+        let resp = new IsolateHourDCDBInstanceResponse();
+        this.request("IsolateHourDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -527,6 +555,17 @@ Note: Accounts with the same username but different hosts are different accounts
     CloneAccount(req, cb) {
         let resp = new CloneAccountResponse();
         this.request("CloneAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create pay-as-you-go TDSQL for MySQL instances.
+     * @param {CreateHourDCDBInstanceRequest} req
+     * @param {function(string, CreateHourDCDBInstanceResponse):void} cb
+     * @public
+     */
+    CreateHourDCDBInstance(req, cb) {
+        let resp = new CreateHourDCDBInstanceResponse();
+        this.request("CreateHourDCDBInstance", req, resp, cb);
     }
 
     /**

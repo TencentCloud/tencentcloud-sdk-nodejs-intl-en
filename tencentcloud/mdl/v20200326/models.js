@@ -231,6 +231,49 @@ class CreateStreamLivePlanRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeStreamLiveWatermarks response structure.
+ * @class
+ */
+class DescribeStreamLiveWatermarksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of watermark information
+         * @type {Array.<DescribeWatermarkInfo> || null}
+         */
+        this.Infos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new DescribeWatermarkInfo();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeStreamLiveInput request structure.
  * @class
  */
@@ -259,38 +302,36 @@ class DescribeStreamLiveInputRequest extends  AbstractModel {
 }
 
 /**
- * CreateStreamLiveInput request structure.
+ * ModifyStreamLiveWatermark request structure.
  * @class
  */
-class CreateStreamLiveInputRequest extends  AbstractModel {
+class ModifyStreamLiveWatermarkRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
+         * Watermark ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Watermark name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Input type
-Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`
-         * @type {string || null}
+         * Watermark image settings. This parameter is valid if `Type` is `STATIC_IMAGE`.
+         * @type {CreateImageSettings || null}
          */
-        this.Type = null;
+        this.ImageSettings = null;
 
         /**
-         * ID of the input security group to attach
-You can attach only one security group to an input.
-         * @type {Array.<string> || null}
+         * Watermark text settings. This parameter is valid if `Type` is `TEXT`.
+         * @type {CreateTextSettings || null}
          */
-        this.SecurityGroupIds = null;
-
-        /**
-         * Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
-         * @type {Array.<InputSettingInfo> || null}
-         */
-        this.InputSettings = null;
+        this.TextSettings = null;
 
     }
 
@@ -301,17 +342,19 @@ You can attach only one security group to an input.
         if (!params) {
             return;
         }
+        this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
-        if (params.InputSettings) {
-            this.InputSettings = new Array();
-            for (let z in params.InputSettings) {
-                let obj = new InputSettingInfo();
-                obj.deserialize(params.InputSettings[z]);
-                this.InputSettings.push(obj);
-            }
+        if (params.ImageSettings) {
+            let obj = new CreateImageSettings();
+            obj.deserialize(params.ImageSettings)
+            this.ImageSettings = obj;
+        }
+
+        if (params.TextSettings) {
+            let obj = new CreateTextSettings();
+            obj.deserialize(params.TextSettings)
+            this.TextSettings = obj;
         }
 
     }
@@ -1037,6 +1080,34 @@ It contains the value of `StreamStart` which refers to the push information.
 }
 
 /**
+ * DescribeStreamLiveWatermark request structure.
+ * @class
+ */
+class DescribeStreamLiveWatermarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * DRM configuration information, which takes effect only for HLS and DASH.
  * @class
  */
@@ -1176,6 +1247,69 @@ class DeleteStreamLivePlanResponse extends  AbstractModel {
 }
 
 /**
+ * Watermark text settings
+ * @class
+ */
+class CreateTextSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Text
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Origin. Valid values: TOP_LEFT, BOTTOM_LEFT, TOP_RIGHT, BOTTOM_RIGHT.
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * The watermark’s horizontal distance from the origin as a percentage of the video width. Value range: 0-100. Default: 10.
+         * @type {number || null}
+         */
+        this.XPos = null;
+
+        /**
+         * The watermark’s vertical distance from the origin as a percentage of the video height. Value range: 0-100. Default: 10.
+         * @type {number || null}
+         */
+        this.YPos = null;
+
+        /**
+         * Font size. Value range: 25-50.
+         * @type {number || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * Font color, which is an RGB color value. Default value: 0x000000.
+         * @type {string || null}
+         */
+        this.FontColor = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.FontColor = 'FontColor' in params ? params.FontColor : null;
+
+    }
+}
+
+/**
  * DASH configuration information.
  * @class
  */
@@ -1213,6 +1347,65 @@ class DashRemuxSettingsInfo extends  AbstractModel {
         this.SegmentDuration = 'SegmentDuration' in params ? params.SegmentDuration : null;
         this.SegmentNumber = 'SegmentNumber' in params ? params.SegmentNumber : null;
         this.PeriodTriggers = 'PeriodTriggers' in params ? params.PeriodTriggers : null;
+
+    }
+}
+
+/**
+ * CreateStreamLiveWatermark request structure.
+ * @class
+ */
+class CreateStreamLiveWatermarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Watermark type. Valid values: STATIC_IMAGE, TEXT.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Watermark image settings. This parameter is valid if `Type` is `STATIC_IMAGE`.
+         * @type {CreateImageSettings || null}
+         */
+        this.ImageSettings = null;
+
+        /**
+         * Watermark text settings. This parameter is valid if `Type` is `TEXT`.
+         * @type {CreateTextSettings || null}
+         */
+        this.TextSettings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.ImageSettings) {
+            let obj = new CreateImageSettings();
+            obj.deserialize(params.ImageSettings)
+            this.ImageSettings = obj;
+        }
+
+        if (params.TextSettings) {
+            let obj = new CreateTextSettings();
+            obj.deserialize(params.TextSettings)
+            this.TextSettings = obj;
+        }
 
     }
 }
@@ -1454,40 +1647,12 @@ Note: this field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * Pipeline input statistics.
+ * DescribeStreamLiveWatermarks request structure.
  * @class
  */
-class PipelineInputStatistics extends  AbstractModel {
+class DescribeStreamLiveWatermarksRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Data timestamp in seconds.
-         * @type {number || null}
-         */
-        this.Timestamp = null;
-
-        /**
-         * Input bandwidth in bps.
-         * @type {number || null}
-         */
-        this.NetworkIn = null;
-
-        /**
-         * Video information array.
-For `rtp/udp` input, the quantity is the number of `Pid` of the input video.
-For other inputs, the quantity is 1.
-         * @type {Array.<VideoPipelineInputStatistics> || null}
-         */
-        this.Video = null;
-
-        /**
-         * Audio information array.
-For `rtp/udp` input, the quantity is the number of `Pid` of the input audio.
-For other inputs, the quantity is 1.
-         * @type {Array.<AudioPipelineInputStatistics> || null}
-         */
-        this.Audio = null;
 
     }
 
@@ -1497,26 +1662,6 @@ For other inputs, the quantity is 1.
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
-        this.NetworkIn = 'NetworkIn' in params ? params.NetworkIn : null;
-
-        if (params.Video) {
-            this.Video = new Array();
-            for (let z in params.Video) {
-                let obj = new VideoPipelineInputStatistics();
-                obj.deserialize(params.Video[z]);
-                this.Video.push(obj);
-            }
-        }
-
-        if (params.Audio) {
-            this.Audio = new Array();
-            for (let z in params.Audio) {
-                let obj = new AudioPipelineInputStatistics();
-                obj.deserialize(params.Audio[z]);
-                this.Audio.push(obj);
-            }
         }
 
     }
@@ -1707,6 +1852,65 @@ It specifies the recording end time in UTC format (e.g., `2020-01-01T12:00:00Z`)
         this.Time = 'Time' in params ? params.Time : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * CreateStreamLiveInput request structure.
+ * @class
+ */
+class CreateStreamLiveInputRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Input type
+Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * ID of the input security group to attach
+You can attach only one security group to an input.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+         * @type {Array.<InputSettingInfo> || null}
+         */
+        this.InputSettings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.InputSettings) {
+            this.InputSettings = new Array();
+            for (let z in params.InputSettings) {
+                let obj = new InputSettingInfo();
+                obj.deserialize(params.InputSettings[z]);
+                this.InputSettings.push(obj);
+            }
+        }
 
     }
 }
@@ -2296,6 +2500,34 @@ class PlanReq extends  AbstractModel {
 }
 
 /**
+ * DeleteStreamLiveWatermark request structure.
+ * @class
+ */
+class DeleteStreamLiveWatermarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * DescribeStreamLiveRegions response structure.
  * @class
  */
@@ -2568,6 +2800,93 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
             obj.deserialize(params.PlanSettings)
             this.PlanSettings = obj;
         }
+
+    }
+}
+
+/**
+ * Event trigger time settings
+ * @class
+ */
+class TimingSettingsResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event trigger type
+         * @type {string || null}
+         */
+        this.StartType = null;
+
+        /**
+         * Not empty if `StartType` is `FIXED_TIME`
+UTC time, such as `2020-01-01T12:00:00Z`
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
+It indicates the start time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the current time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
+It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the start time for recording.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartType = 'StartType' in params ? params.StartType : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * CreateStreamLiveWatermark response structure.
+ * @class
+ */
+class CreateStreamLiveWatermarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2898,6 +3217,90 @@ class DescribeStreamLiveChannelOutputStatisticsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Watermark information
+ * @class
+ */
+class DescribeWatermarkInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Watermark name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Watermark type. Valid values: STATIC_IMAGE, TEXT.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Watermark image settings. This parameter is valid if `Type` is `STATIC_IMAGE`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {DescribeImageSettings || null}
+         */
+        this.ImageSettings = null;
+
+        /**
+         * Watermark text settings. This parameter is valid if `Type` is `TEXT`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {DescribeTextSettings || null}
+         */
+        this.TextSettings = null;
+
+        /**
+         * Last modified time (UTC+0) of the watermark, in the format of `2020-01-01T12:00:00Z`
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * List of channel IDs the watermark is bound to
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.AttachedChannels = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.ImageSettings) {
+            let obj = new DescribeImageSettings();
+            obj.deserialize(params.ImageSettings)
+            this.ImageSettings = obj;
+        }
+
+        if (params.TextSettings) {
+            let obj = new DescribeTextSettings();
+            obj.deserialize(params.TextSettings)
+            this.TextSettings = obj;
+        }
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.AttachedChannels = 'AttachedChannels' in params ? params.AttachedChannels : null;
 
     }
 }
@@ -3280,6 +3683,80 @@ class StopStreamLiveChannelResponse extends  AbstractModel {
 }
 
 /**
+ * Watermark image settings
+ * @class
+ */
+class CreateImageSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image file format. Valid values: png, jpg.
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
+        /**
+         * Base64 encoded image content
+         * @type {string || null}
+         */
+        this.ImageContent = null;
+
+        /**
+         * Origin. Valid values: TOP_LEFT, BOTTOM_LEFT, TOP_RIGHT, BOTTOM_RIGHT.
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * The watermark’s horizontal distance from the origin as a percentage of the video width. Value range: 0-100. Default: 10.
+         * @type {number || null}
+         */
+        this.XPos = null;
+
+        /**
+         * The watermark’s vertical distance from the origin as a percentage of the video height. Value range: 0-100. Default: 10.
+         * @type {number || null}
+         */
+        this.YPos = null;
+
+        /**
+         * The watermark image’s width as a percentage of the video width. Value range: 0-100. Default: 10.
+`0` means to scale the width proportionally to the height.
+You cannot set both `Width` and `Height` to `0`.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * The watermark image’s height as a percentage of the video height. Value range: 0-100. Default: 10.
+`0` means to scale the height proportionally to the width.
+You cannot set both `Width` and `Height` to `0`.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageType = 'ImageType' in params ? params.ImageType : null;
+        this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
  * StartStreamLiveChannel response structure.
  * @class
  */
@@ -3613,6 +4090,46 @@ class StartStreamLiveChannelRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeStreamLiveWatermark response structure.
+ * @class
+ */
+class DescribeStreamLiveWatermarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark information
+         * @type {DescribeWatermarkInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new DescribeWatermarkInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SCTE-35 information.
  * @class
  */
@@ -3932,24 +4449,40 @@ class ChannelAlertInfos extends  AbstractModel {
 }
 
 /**
- * CreateStreamLiveInput response structure.
+ * Pipeline input statistics.
  * @class
  */
-class CreateStreamLiveInputResponse extends  AbstractModel {
+class PipelineInputStatistics extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Input ID
-         * @type {string || null}
+         * Data timestamp in seconds.
+         * @type {number || null}
          */
-        this.Id = null;
+        this.Timestamp = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Input bandwidth in bps.
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.NetworkIn = null;
+
+        /**
+         * Video information array.
+For `rtp/udp` input, the quantity is the number of `Pid` of the input video.
+For other inputs, the quantity is 1.
+         * @type {Array.<VideoPipelineInputStatistics> || null}
+         */
+        this.Video = null;
+
+        /**
+         * Audio information array.
+For `rtp/udp` input, the quantity is the number of `Pid` of the input audio.
+For other inputs, the quantity is 1.
+         * @type {Array.<AudioPipelineInputStatistics> || null}
+         */
+        this.Audio = null;
 
     }
 
@@ -3960,8 +4493,26 @@ class CreateStreamLiveInputResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.NetworkIn = 'NetworkIn' in params ? params.NetworkIn : null;
+
+        if (params.Video) {
+            this.Video = new Array();
+            for (let z in params.Video) {
+                let obj = new VideoPipelineInputStatistics();
+                obj.deserialize(params.Video[z]);
+                this.Video.push(obj);
+            }
+        }
+
+        if (params.Audio) {
+            this.Audio = new Array();
+            for (let z in params.Audio) {
+                let obj = new AudioPipelineInputStatistics();
+                obj.deserialize(params.Audio[z]);
+                this.Audio.push(obj);
+            }
+        }
 
     }
 }
@@ -4042,6 +4593,34 @@ class DeleteStreamLiveInputSecurityGroupResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopStreamLiveChannel request structure.
+ * @class
+ */
+class StopStreamLiveChannelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -4221,39 +4800,18 @@ class Scte35SettingsInfo extends  AbstractModel {
 }
 
 /**
- * Event trigger time settings
+ * ModifyStreamLiveWatermark response structure.
  * @class
  */
-class TimingSettingsResp extends  AbstractModel {
+class ModifyStreamLiveWatermarkResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event trigger type
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StartType = null;
-
-        /**
-         * Not empty if `StartType` is `FIXED_TIME`
-UTC time, such as `2020-01-01T12:00:00Z`
-         * @type {string || null}
-         */
-        this.Time = null;
-
-        /**
-         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
-It indicates the start time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the current time.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
-It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the start time for recording.
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.RequestId = null;
 
     }
 
@@ -4264,10 +4822,7 @@ It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:0
         if (!params) {
             return;
         }
-        this.StartType = 'StartType' in params ? params.StartType : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4395,18 +4950,171 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
 }
 
 /**
- * StopStreamLiveChannel request structure.
+ * Watermark text settings
  * @class
  */
-class StopStreamLiveChannelRequest extends  AbstractModel {
+class DescribeTextSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Channel ID
+         * Text
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Origin
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * The watermark image’s horizontal distance from the origin as a percentage of the video width
+         * @type {number || null}
+         */
+        this.XPos = null;
+
+        /**
+         * The watermark image’s vertical distance from the origin as a percentage of the video height
+         * @type {number || null}
+         */
+        this.YPos = null;
+
+        /**
+         * Font size
+         * @type {number || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * Font color
+         * @type {string || null}
+         */
+        this.FontColor = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.FontColor = 'FontColor' in params ? params.FontColor : null;
+
+    }
+}
+
+/**
+ * Watermark image settings
+ * @class
+ */
+class DescribeImageSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Origin
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * The watermark image’s horizontal distance from the origin as a percentage of the video width
+         * @type {number || null}
+         */
+        this.XPos = null;
+
+        /**
+         * The watermark image’s vertical distance from the origin as a percentage of the video height
+         * @type {number || null}
+         */
+        this.YPos = null;
+
+        /**
+         * The watermark image’s width as a percentage of the video width
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * The watermark image’s height as a percentage of the video height
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Location = 'Location' in params ? params.Location : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
+ * DeleteStreamLiveWatermark response structure.
+ * @class
+ */
+class DeleteStreamLiveWatermarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateStreamLiveInput response structure.
+ * @class
+ */
+class CreateStreamLiveInputResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input ID
          * @type {string || null}
          */
         this.Id = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4418,6 +5126,7 @@ class StopStreamLiveChannelRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4721,8 +5430,9 @@ module.exports = {
     CreateStreamLiveInputSecurityGroupResponse: CreateStreamLiveInputSecurityGroupResponse,
     StreamVideoInfo: StreamVideoInfo,
     CreateStreamLivePlanRequest: CreateStreamLivePlanRequest,
+    DescribeStreamLiveWatermarksResponse: DescribeStreamLiveWatermarksResponse,
     DescribeStreamLiveInputRequest: DescribeStreamLiveInputRequest,
-    CreateStreamLiveInputRequest: CreateStreamLiveInputRequest,
+    ModifyStreamLiveWatermarkRequest: ModifyStreamLiveWatermarkRequest,
     AudioPidSelectionInfo: AudioPidSelectionInfo,
     AudioPipelineInputStatistics: AudioPipelineInputStatistics,
     CreateStreamLivePlanResponse: CreateStreamLivePlanResponse,
@@ -4739,18 +5449,22 @@ module.exports = {
     DescribeStreamLiveChannelAlertsRequest: DescribeStreamLiveChannelAlertsRequest,
     AudioSelectorInfo: AudioSelectorInfo,
     LogInfo: LogInfo,
+    DescribeStreamLiveWatermarkRequest: DescribeStreamLiveWatermarkRequest,
     DrmSettingsInfo: DrmSettingsInfo,
     PipelineOutputStatistics: PipelineOutputStatistics,
     DeleteStreamLivePlanResponse: DeleteStreamLivePlanResponse,
+    CreateTextSettings: CreateTextSettings,
     DashRemuxSettingsInfo: DashRemuxSettingsInfo,
+    CreateStreamLiveWatermarkRequest: CreateStreamLiveWatermarkRequest,
     StreamInfo: StreamInfo,
     SDMCSettingsInfo: SDMCSettingsInfo,
     DeleteStreamLiveInputSecurityGroupRequest: DeleteStreamLiveInputSecurityGroupRequest,
     AttachedInput: AttachedInput,
-    PipelineInputStatistics: PipelineInputStatistics,
+    DescribeStreamLiveWatermarksRequest: DescribeStreamLiveWatermarksRequest,
     TimeShiftSettingsInfo: TimeShiftSettingsInfo,
     VideoTemplateInfo: VideoTemplateInfo,
     TimingSettingsReq: TimingSettingsReq,
+    CreateStreamLiveInputRequest: CreateStreamLiveInputRequest,
     DescribeStreamLiveChannelLogsResponse: DescribeStreamLiveChannelLogsResponse,
     DescribeStreamLiveChannelInputStatisticsRequest: DescribeStreamLiveChannelInputStatisticsRequest,
     PipelineLogInfo: PipelineLogInfo,
@@ -4764,12 +5478,15 @@ module.exports = {
     StreamPackageSettingsInfo: StreamPackageSettingsInfo,
     DescribeStreamLiveChannelsResponse: DescribeStreamLiveChannelsResponse,
     PlanReq: PlanReq,
+    DeleteStreamLiveWatermarkRequest: DeleteStreamLiveWatermarkRequest,
     DescribeStreamLiveRegionsResponse: DescribeStreamLiveRegionsResponse,
     TimedRecordSettings: TimedRecordSettings,
     StreamLiveRegionInfo: StreamLiveRegionInfo,
     DescribeStreamLiveChannelRequest: DescribeStreamLiveChannelRequest,
     DescribeStreamLivePlansRequest: DescribeStreamLivePlansRequest,
     CreateStreamLiveChannelRequest: CreateStreamLiveChannelRequest,
+    TimingSettingsResp: TimingSettingsResp,
+    CreateStreamLiveWatermarkResponse: CreateStreamLiveWatermarkResponse,
     DescribeStreamLiveInputsResponse: DescribeStreamLiveInputsResponse,
     ModifyStreamLiveInputResponse: ModifyStreamLiveInputResponse,
     DescribeStreamLiveChannelAlertsResponse: DescribeStreamLiveChannelAlertsResponse,
@@ -4778,6 +5495,7 @@ module.exports = {
     DescribeStreamLiveChannelLogsRequest: DescribeStreamLiveChannelLogsRequest,
     CreateStreamLiveInputSecurityGroupRequest: CreateStreamLiveInputSecurityGroupRequest,
     DescribeStreamLiveChannelOutputStatisticsResponse: DescribeStreamLiveChannelOutputStatisticsResponse,
+    DescribeWatermarkInfo: DescribeWatermarkInfo,
     EventSettingsDestinationReq: EventSettingsDestinationReq,
     EventSettingsReq: EventSettingsReq,
     DrmKey: DrmKey,
@@ -4787,6 +5505,7 @@ module.exports = {
     CreateStreamLiveChannelResponse: CreateStreamLiveChannelResponse,
     DescribeStreamLiveChannelInputStatisticsResponse: DescribeStreamLiveChannelInputStatisticsResponse,
     StopStreamLiveChannelResponse: StopStreamLiveChannelResponse,
+    CreateImageSettings: CreateImageSettings,
     StartStreamLiveChannelResponse: StartStreamLiveChannelResponse,
     StreamLiveOutputGroupsInfo: StreamLiveOutputGroupsInfo,
     ChannelOutputsStatistics: ChannelOutputsStatistics,
@@ -4794,6 +5513,7 @@ module.exports = {
     DescribeStreamLiveInputSecurityGroupsResponse: DescribeStreamLiveInputSecurityGroupsResponse,
     DeleteStreamLiveInputResponse: DeleteStreamLiveInputResponse,
     StartStreamLiveChannelRequest: StartStreamLiveChannelRequest,
+    DescribeStreamLiveWatermarkResponse: DescribeStreamLiveWatermarkResponse,
     StreamScte35Info: StreamScte35Info,
     StreamAudioInfo: StreamAudioInfo,
     OutputsStatistics: OutputsStatistics,
@@ -4801,17 +5521,21 @@ module.exports = {
     RegionInfo: RegionInfo,
     ModifyStreamLiveInputSecurityGroupRequest: ModifyStreamLiveInputSecurityGroupRequest,
     ChannelAlertInfos: ChannelAlertInfos,
-    CreateStreamLiveInputResponse: CreateStreamLiveInputResponse,
+    PipelineInputStatistics: PipelineInputStatistics,
     DestinationInfo: DestinationInfo,
     DeleteStreamLiveInputSecurityGroupResponse: DeleteStreamLiveInputSecurityGroupResponse,
+    StopStreamLiveChannelRequest: StopStreamLiveChannelRequest,
     DescribeStreamLiveInputResponse: DescribeStreamLiveInputResponse,
     InputStatistics: InputStatistics,
     LogMessageInfo: LogMessageInfo,
     DescribeStreamLiveInputsRequest: DescribeStreamLiveInputsRequest,
     Scte35SettingsInfo: Scte35SettingsInfo,
-    TimingSettingsResp: TimingSettingsResp,
+    ModifyStreamLiveWatermarkResponse: ModifyStreamLiveWatermarkResponse,
     ModifyStreamLiveChannelRequest: ModifyStreamLiveChannelRequest,
-    StopStreamLiveChannelRequest: StopStreamLiveChannelRequest,
+    DescribeTextSettings: DescribeTextSettings,
+    DescribeImageSettings: DescribeImageSettings,
+    DeleteStreamLiveWatermarkResponse: DeleteStreamLiveWatermarkResponse,
+    CreateStreamLiveInputResponse: CreateStreamLiveInputResponse,
     DescribeStreamLiveInputSecurityGroupResponse: DescribeStreamLiveInputSecurityGroupResponse,
     StreamLiveChannelInfo: StreamLiveChannelInfo,
     InputSettingInfo: InputSettingInfo,

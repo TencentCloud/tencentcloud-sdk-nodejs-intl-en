@@ -1094,6 +1094,18 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
          */
         this.StartupProbe = null;
 
+        /**
+         * The version of the operating system
+If `openjdk` is selected, the value can be: 
+- ALPINE
+- CENTOS
+If `konajdk` is selected, the value can be: 
+- ALPINE
+- TENCENTOS
+         * @type {string || null}
+         */
+        this.OsFlavour = null;
+
     }
 
     /**
@@ -1224,6 +1236,7 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
             obj.deserialize(params.StartupProbe)
             this.StartupProbe = obj;
         }
+        this.OsFlavour = 'OsFlavour' in params ? params.OsFlavour : null;
 
     }
 }
@@ -3179,6 +3192,12 @@ class DeployStrategyConf extends  AbstractModel {
          */
         this.MinAvailable = null;
 
+        /**
+         * Whether to enable force release
+         * @type {boolean || null}
+         */
+        this.Force = null;
+
     }
 
     /**
@@ -3193,6 +3212,7 @@ class DeployStrategyConf extends  AbstractModel {
         this.DeployStrategyType = 'DeployStrategyType' in params ? params.DeployStrategyType : null;
         this.BatchInterval = 'BatchInterval' in params ? params.BatchInterval : null;
         this.MinAvailable = 'MinAvailable' in params ? params.MinAvailable : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }

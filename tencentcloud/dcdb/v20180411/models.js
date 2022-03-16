@@ -212,6 +212,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DestroyDCDBInstance response structure.
+ * @class
+ */
+class DestroyDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which is the same as the request parameter `InstanceId`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/557/56485?from_cn_redirect=1) API to query the async task result.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBParameters request structure.
  * @class
  */
@@ -263,6 +305,48 @@ class DescribeAccountsRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * ActiveHourDCDBInstance response structure.
+ * @class
+ */
+class ActiveHourDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of instances removed from isolation
+         * @type {Array.<string> || null}
+         */
+        this.SuccessInstanceIds = null;
+
+        /**
+         * IDs of instances failed to be removed from isolation
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessInstanceIds = 'SuccessInstanceIds' in params ? params.SuccessInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -742,6 +826,48 @@ class DescribeDBParametersResponse extends  AbstractModel {
 }
 
 /**
+ * DestroyHourDCDBInstance response structure.
+ * @class
+ */
+class DestroyHourDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/557/56485?from_cn_redirect=1) API to query the async task result.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Instance ID, which is the same as the request parameter `InstanceId`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeFlow response structure.
  * @class
  */
@@ -903,37 +1029,30 @@ class OpenDBExtranetAccessResponse extends  AbstractModel {
 }
 
 /**
- * Parameter constraint
+ * Node information of a sharded database
  * @class
  */
-class ParamConstraint extends  AbstractModel {
+class BriefNodeInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Constraint type, such as enum and section
+         * Node ID
          * @type {string || null}
          */
-        this.Type = null;
+        this.NodeId = null;
 
         /**
-         * List of valid values when constraint type is `enum`
+         * Node role. Valid values: `master`, `slave`
          * @type {string || null}
          */
-        this.Enum = null;
+        this.Role = null;
 
         /**
-         * Range when constraint type is `section`
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {ConstraintRange || null}
-         */
-        this.Range = null;
-
-        /**
-         * List of valid values when constraint type is `string`
+         * The ID of the shard where the node resides
          * @type {string || null}
          */
-        this.String = null;
+        this.ShardId = null;
 
     }
 
@@ -944,15 +1063,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Enum = 'Enum' in params ? params.Enum : null;
-
-        if (params.Range) {
-            let obj = new ConstraintRange();
-            obj.deserialize(params.Range)
-            this.Range = obj;
-        }
-        this.String = 'String' in params ? params.String : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
 
     }
 }
@@ -1098,120 +1211,146 @@ class DescribeDBLogFilesRequest extends  AbstractModel {
 }
 
 /**
- * DCN details
+ * CreateHourDCDBInstance request structure.
  * @class
  */
-class DcnDetailItem extends  AbstractModel {
+class CreateHourDCDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * Shard memory in GB, which can be obtained through the `DescribeShardSpec` API.
+  
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.ShardMemory = null;
 
         /**
-         * Instance name
+         * Shard capacity in GB, which can be obtained through the `DescribeShardSpec` API.
+  
+         * @type {number || null}
+         */
+        this.ShardStorage = null;
+
+        /**
+         * The number of nodes per shard, which can be obtained through the `DescribeShardSpec` API.
+  
+         * @type {number || null}
+         */
+        this.ShardNodeCount = null;
+
+        /**
+         * The number of shards in the instance. Value range: 2-8. Upgrade your instance to have up to 64 shards if you require more.
+         * @type {number || null}
+         */
+        this.ShardCount = null;
+
+        /**
+         * The number of instances to be purchased
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Project ID, which can be obtained through the `DescribeProjects` API. If this parameter is not passed in, the instance will be associated with the default project.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * VPC ID. If this parameter is left empty or not passed in, the instance will be created on the classic network.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC subnet ID, which is required when `VpcId` is specified
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * The number of CPU cores per shard, which can be obtained through the `DescribeShardSpec` API.
+  
+         * @type {number || null}
+         */
+        this.ShardCpu = null;
+
+        /**
+         * Database engine version. Valid values:
+10.0.10: MariaDB 10.0.10;
+10.1.9: MariaDB 10.1.9;
+5.7.17: Percona 5.7.17.
+If this parameter is left empty, `10.1.9` will be used.
+         * @type {string || null}
+         */
+        this.DbVersionId = null;
+
+        /**
+         * AZs to deploy shard nodes. You can specify up to two AZs.
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * Security group ID
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * Custom name of the instance
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Region where the instance resides
+         * Whether IPv6 is supported
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+        /**
+         * Array of tag key-value pairs
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * If you create a disaster recovery instance, you need to use this parameter to specify the region of the associated source instance so that the disaster recovery instance can sync data with the source instance over the Data Communication Network (DCN).
          * @type {string || null}
          */
-        this.Region = null;
+        this.DcnRegion = null;
 
         /**
-         * Availability zone where the instance resides
+         * If you create a disaster recovery instance, you need to use this parameter to specify the ID of the associated source instance so that the disaster recovery instance can sync data with the source instance over the Data Communication Network (DCN).
          * @type {string || null}
          */
-        this.Zone = null;
+        this.DcnInstanceId = null;
 
         /**
-         * Instance IP address
+         * List of parameters. Valid values: `character_set_server` (character set; required); `lower_case_table_names` (table name case sensitivity; required; 0: case-sensitive; 1: case-insensitive); `innodb_page_size` (InnoDB data page size; default size: 16 KB); `sync_mode` (sync mode; 0: async; 1: strong sync; 2: downgradable strong sync; default value: 2).
+         * @type {Array.<DBParamValue> || null}
+         */
+        this.InitParams = null;
+
+        /**
+         * ID of the instance to be rolled back
          * @type {string || null}
          */
-        this.Vip = null;
+        this.RollbackInstanceId = null;
 
         /**
-         * Instance IPv6 address
+         * Rollback time
          * @type {string || null}
          */
-        this.Vipv6 = null;
+        this.RollbackTime = null;
 
         /**
-         * Instance port
-         * @type {number || null}
+         * Array of security group IDs (this parameter is compatible with the old parameter `SecurityGroupId`)
+         * @type {Array.<string> || null}
          */
-        this.Vport = null;
-
-        /**
-         * Instance status
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Instance status description
-         * @type {string || null}
-         */
-        this.StatusDesc = null;
-
-        /**
-         * DCN flag. Valid values: `1` (primary), `2` (disaster recovery)
-         * @type {number || null}
-         */
-        this.DcnFlag = null;
-
-        /**
-         * DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected)
-         * @type {number || null}
-         */
-        this.DcnStatus = null;
-
-        /**
-         * Number of CPU cores of the instance
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Instance memory capacity in GB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Instance storage capacity in GB
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Billing mode
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * Creation time of the instance in the format of 2006-01-02 15:04:05
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Expiration time of the instance in the format of 2006-01-02 15:04:05
-         * @type {string || null}
-         */
-        this.PeriodEndTime = null;
-
-        /**
-         * Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), and `4` (dedicated disaster recovery instance).
-         * @type {number || null}
-         */
-        this.InstanceType = null;
+        this.SecurityGroupIds = null;
 
     }
 
@@ -1222,24 +1361,43 @@ class DcnDetailItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
+        this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
+        this.ShardNodeCount = 'ShardNodeCount' in params ? params.ShardNodeCount : null;
+        this.ShardCount = 'ShardCount' in params ? params.ShardCount : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ShardCpu = 'ShardCpu' in params ? params.ShardCpu : null;
+        this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
-        this.Vport = 'Vport' in params ? params.Vport : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
-        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
-        this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.DcnRegion = 'DcnRegion' in params ? params.DcnRegion : null;
+        this.DcnInstanceId = 'DcnInstanceId' in params ? params.DcnInstanceId : null;
+
+        if (params.InitParams) {
+            this.InitParams = new Array();
+            for (let z in params.InitParams) {
+                let obj = new DBParamValue();
+                obj.deserialize(params.InitParams[z]);
+                this.InitParams.push(obj);
+            }
+        }
+        this.RollbackInstanceId = 'RollbackInstanceId' in params ? params.RollbackInstanceId : null;
+        this.RollbackTime = 'RollbackTime' in params ? params.RollbackTime : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -1568,30 +1726,37 @@ class DatabaseFunction extends  AbstractModel {
 }
 
 /**
- * Node information of a sharded database
+ * Parameter constraint
  * @class
  */
-class BriefNodeInfo extends  AbstractModel {
+class ParamConstraint extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node ID
+         * Constraint type, such as enum and section
          * @type {string || null}
          */
-        this.NodeId = null;
+        this.Type = null;
 
         /**
-         * Node role. Valid values: `master`, `slave`
+         * List of valid values when constraint type is `enum`
          * @type {string || null}
          */
-        this.Role = null;
+        this.Enum = null;
 
         /**
-         * The ID of the shard where the node resides
+         * Range when constraint type is `section`
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {ConstraintRange || null}
+         */
+        this.Range = null;
+
+        /**
+         * List of valid values when constraint type is `string`
          * @type {string || null}
          */
-        this.ShardId = null;
+        this.String = null;
 
     }
 
@@ -1602,9 +1767,15 @@ class BriefNodeInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.Role = 'Role' in params ? params.Role : null;
-        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Enum = 'Enum' in params ? params.Enum : null;
+
+        if (params.Range) {
+            let obj = new ConstraintRange();
+            obj.deserialize(params.Range)
+            this.Range = obj;
+        }
+        this.String = 'String' in params ? params.String : null;
 
     }
 }
@@ -1668,91 +1839,6 @@ class DescribeDatabaseObjectsRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.DbName = 'DbName' in params ? params.DbName : null;
-
-    }
-}
-
-/**
- * DescribeDBLogFiles response structure.
- * @class
- */
-class DescribeDBLogFilesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID in the format of dcdbt-ow728lmc.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Requested log type. Valid values: 1 (binlog); 2 (cold backup); 3 (errlog); 4 (slowlog).
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Total number of requested logs
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * List of log files
-         * @type {Array.<LogFileInfo> || null}
-         */
-        this.Files = null;
-
-        /**
-         * For an instance in a VPC, this prefix plus URI can be used as the download address
-         * @type {string || null}
-         */
-        this.VpcPrefix = null;
-
-        /**
-         * For an instance in a common network, this prefix plus URI can be used as the download address
-         * @type {string || null}
-         */
-        this.NormalPrefix = null;
-
-        /**
-         * Shard ID in the format of shard-7noic7tv
-         * @type {string || null}
-         */
-        this.ShardId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.Files) {
-            this.Files = new Array();
-            for (let z in params.Files) {
-                let obj = new LogFileInfo();
-                obj.deserialize(params.Files[z]);
-                this.Files.push(obj);
-            }
-        }
-        this.VpcPrefix = 'VpcPrefix' in params ? params.VpcPrefix : null;
-        this.NormalPrefix = 'NormalPrefix' in params ? params.NormalPrefix : null;
-        this.ShardId = 'ShardId' in params ? params.ShardId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3350,6 +3436,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreateHourDCDBInstance response structure.
+ * @class
+ */
+class CreateHourDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of the instances you have purchased in this order. If no instance IDs are returned, you can query them with the `DescribeOrders` API. You can also use the `DescribeDBInstances` API to check whether an instance has been created successfully.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Task ID, which can be used to query the creation progress
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Database information
  * @class
  */
@@ -3429,6 +3557,48 @@ class CancelDcnJobRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * IsolateHourDCDBInstance response structure.
+ * @class
+ */
+class IsolateHourDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of isolated instances
+         * @type {Array.<string> || null}
+         */
+        this.SuccessInstanceIds = null;
+
+        /**
+         * IDs of instances failed to be isolated
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessInstanceIds = 'SuccessInstanceIds' in params ? params.SuccessInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3588,18 +3758,120 @@ class DestroyHourDCDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceSecurityGroups response structure.
+ * DCN details
  * @class
  */
-class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
+class DcnDetailItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Region where the instance resides
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Availability zone where the instance resides
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Instance IP address
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Instance IPv6 address
+         * @type {string || null}
+         */
+        this.Vipv6 = null;
+
+        /**
+         * Instance port
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Instance status
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance status description
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * DCN flag. Valid values: `1` (primary), `2` (disaster recovery)
+         * @type {number || null}
+         */
+        this.DcnFlag = null;
+
+        /**
+         * DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected)
+         * @type {number || null}
+         */
+        this.DcnStatus = null;
+
+        /**
+         * Number of CPU cores of the instance
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Instance memory capacity in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance storage capacity in GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Billing mode
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Creation time of the instance in the format of 2006-01-02 15:04:05
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Expiration time of the instance in the format of 2006-01-02 15:04:05
+         * @type {string || null}
+         */
+        this.PeriodEndTime = null;
+
+        /**
+         * Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), and `4` (dedicated disaster recovery instance).
+         * @type {number || null}
+         */
+        this.InstanceType = null;
 
     }
 
@@ -3610,7 +3882,24 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
+        this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -3955,24 +4244,54 @@ class DescribeDatabasesResponse extends  AbstractModel {
 }
 
 /**
- * DestroyDCDBInstance response structure.
+ * DescribeDBLogFiles response structure.
  * @class
  */
-class DestroyDCDBInstanceResponse extends  AbstractModel {
+class DescribeDBLogFilesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID, which is the same as the request parameter `InstanceId`.
+         * Instance ID in the format of dcdbt-ow728lmc.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/557/56485?from_cn_redirect=1) API to query the async task result.
+         * Requested log type. Valid values: 1 (binlog); 2 (cold backup); 3 (errlog); 4 (slowlog).
          * @type {number || null}
          */
-        this.FlowId = null;
+        this.Type = null;
+
+        /**
+         * Total number of requested logs
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of log files
+         * @type {Array.<LogFileInfo> || null}
+         */
+        this.Files = null;
+
+        /**
+         * For an instance in a VPC, this prefix plus URI can be used as the download address
+         * @type {string || null}
+         */
+        this.VpcPrefix = null;
+
+        /**
+         * For an instance in a common network, this prefix plus URI can be used as the download address
+         * @type {string || null}
+         */
+        this.NormalPrefix = null;
+
+        /**
+         * Shard ID in the format of shard-7noic7tv
+         * @type {string || null}
+         */
+        this.ShardId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3990,7 +4309,20 @@ class DestroyDCDBInstanceResponse extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Files) {
+            this.Files = new Array();
+            for (let z in params.Files) {
+                let obj = new LogFileInfo();
+                obj.deserialize(params.Files[z]);
+                this.Files.push(obj);
+            }
+        }
+        this.VpcPrefix = 'VpcPrefix' in params ? params.VpcPrefix : null;
+        this.NormalPrefix = 'NormalPrefix' in params ? params.NormalPrefix : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4392,30 +4724,18 @@ class CreateAccountResponse extends  AbstractModel {
 }
 
 /**
- * DestroyHourDCDBInstance response structure.
+ * IsolateHourDCDBInstance request structure.
  * @class
  */
-class DestroyHourDCDBInstanceResponse extends  AbstractModel {
+class IsolateHourDCDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/557/56485?from_cn_redirect=1) API to query the async task result.
-         * @type {number || null}
+         * Instance ID list
+         * @type {Array.<string> || null}
          */
-        this.FlowId = null;
-
-        /**
-         * Instance ID, which is the same as the request parameter `InstanceId`.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.InstanceIds = null;
 
     }
 
@@ -4426,9 +4746,7 @@ class DestroyHourDCDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -4513,6 +4831,34 @@ class LogFileInfo extends  AbstractModel {
         this.Length = 'Length' in params ? params.Length : null;
         this.Uri = 'Uri' in params ? params.Uri : null;
         this.FileName = 'FileName' in params ? params.FileName : null;
+
+    }
+}
+
+/**
+ * ActiveHourDCDBInstance request structure.
+ * @class
+ */
+class ActiveHourDCDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of instance IDs in the format of dcdbt-ow728lmc, which can be obtained through the `DescribeDCDBInstances` API.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -5132,6 +5478,34 @@ class Project extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceSecurityGroups response structure.
+ * @class
+ */
+class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstancesProject request structure.
  * @class
  */
@@ -5262,8 +5636,10 @@ module.exports = {
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     ParamDesc: ParamDesc,
+    DestroyDCDBInstanceResponse: DestroyDCDBInstanceResponse,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
+    ActiveHourDCDBInstanceResponse: ActiveHourDCDBInstanceResponse,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     CancelDcnJobResponse: CancelDcnJobResponse,
@@ -5273,17 +5649,18 @@ module.exports = {
     DescribeDBSlowLogsRequest: DescribeDBSlowLogsRequest,
     CreateAccountRequest: CreateAccountRequest,
     DescribeDBParametersResponse: DescribeDBParametersResponse,
+    DestroyHourDCDBInstanceResponse: DestroyHourDCDBInstanceResponse,
     DescribeFlowResponse: DescribeFlowResponse,
     CloneAccountResponse: CloneAccountResponse,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     DestroyDCDBInstanceRequest: DestroyDCDBInstanceRequest,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
-    ParamConstraint: ParamConstraint,
+    BriefNodeInfo: BriefNodeInfo,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     DescribeDCDBInstanceNodeInfoRequest: DescribeDCDBInstanceNodeInfoRequest,
     DatabaseView: DatabaseView,
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
-    DcnDetailItem: DcnDetailItem,
+    CreateHourDCDBInstanceRequest: CreateHourDCDBInstanceRequest,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
     CloneAccountRequest: CloneAccountRequest,
@@ -5292,10 +5669,9 @@ module.exports = {
     SwitchDBInstanceHAResponse: SwitchDBInstanceHAResponse,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     DatabaseFunction: DatabaseFunction,
-    BriefNodeInfo: BriefNodeInfo,
+    ParamConstraint: ParamConstraint,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
-    DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     DatabaseTable: DatabaseTable,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
     DescribeDCDBShardsRequest: DescribeDCDBShardsRequest,
@@ -5318,20 +5694,22 @@ module.exports = {
     SecurityGroupBound: SecurityGroupBound,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     DescribeDCDBShardsResponse: DescribeDCDBShardsResponse,
+    CreateHourDCDBInstanceResponse: CreateHourDCDBInstanceResponse,
     Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     CancelDcnJobRequest: CancelDcnJobRequest,
+    IsolateHourDCDBInstanceResponse: IsolateHourDCDBInstanceResponse,
     ShardInfo: ShardInfo,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     DestroyHourDCDBInstanceRequest: DestroyHourDCDBInstanceRequest,
-    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
+    DcnDetailItem: DcnDetailItem,
     DescribeDBSyncModeRequest: DescribeDBSyncModeRequest,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     DescribeProjectsRequest: DescribeProjectsRequest,
     SlowLogData: SlowLogData,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
-    DestroyDCDBInstanceResponse: DestroyDCDBInstanceResponse,
+    DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     InitDCDBInstancesRequest: InitDCDBInstancesRequest,
     ResourceTag: ResourceTag,
@@ -5342,9 +5720,10 @@ module.exports = {
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     DescribeProjectsResponse: DescribeProjectsResponse,
     CreateAccountResponse: CreateAccountResponse,
-    DestroyHourDCDBInstanceResponse: DestroyHourDCDBInstanceResponse,
+    IsolateHourDCDBInstanceRequest: IsolateHourDCDBInstanceRequest,
     ConstraintRange: ConstraintRange,
     LogFileInfo: LogFileInfo,
+    ActiveHourDCDBInstanceRequest: ActiveHourDCDBInstanceRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     DBAccount: DBAccount,
     DescribeDatabaseTableResponse: DescribeDatabaseTableResponse,
@@ -5353,6 +5732,7 @@ module.exports = {
     DescribeDBSlowLogsResponse: DescribeDBSlowLogsResponse,
     DescribeDCDBInstancesRequest: DescribeDCDBInstancesRequest,
     Project: Project,
+    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,

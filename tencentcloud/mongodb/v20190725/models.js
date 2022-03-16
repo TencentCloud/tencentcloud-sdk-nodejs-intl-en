@@ -581,7 +581,7 @@ class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of secondary nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
+         * The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
          * @type {number || null}
          */
         this.NodeNum = null;
@@ -605,7 +605,7 @@ class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
         this.MongoVersion = null;
 
         /**
-         * Server type. Valid values: HIO (high IO), HIO10G (10-gigabit high IO), STDS5 (standard).
+         * Server type. Valid values: `HIO` (high IO), `HIO10G` (ten-gigabit high IO)
          * @type {string || null}
          */
         this.MachineCode = null;
@@ -716,7 +716,7 @@ class ReplicaSetInfo extends  AbstractModel {
         super();
 
         /**
-         * Shard name
+         * Replica set ID
          * @type {string || null}
          */
         this.ReplicaSetId = null;
@@ -940,7 +940,7 @@ class AssignProjectRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Project ID
+         * Unique ID of an existing project (instead of a new project).
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -1148,6 +1148,18 @@ class InquirePriceModifyDBInstanceSpecRequest extends  AbstractModel {
          */
         this.Volume = null;
 
+        /**
+         * Node quantity after configuration modification. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the node quantity remains unchanged.
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * Shard quantity after configuration modification, which can only be increased rather than decreased. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the shard quantity remains unchanged.
+         * @type {number || null}
+         */
+        this.ReplicateSetNum = null;
+
     }
 
     /**
@@ -1160,6 +1172,8 @@ class InquirePriceModifyDBInstanceSpecRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.Volume = 'Volume' in params ? params.Volume : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
 
     }
 }
@@ -1248,6 +1262,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceSecurityGroup response structure.
+ * @class
+ */
+class ModifyDBInstanceSecurityGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1465,19 +1507,21 @@ class CreateBackupDownloadTaskRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console
+         * Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * The name of the backup file to be downloaded, which can be obtained by the `DescribeDBBackups` API
+         * The name of the backup file to be downloaded, which can be obtained by the `DescribeDBBackups` API.
          * @type {string || null}
          */
         this.BackupName = null;
 
         /**
-         * The list of shards with backups to be downloaded
+         * Specify the node name of a replica set instance or the shard name list of a sharded cluster instance. Only backups of the specified node or shards will be downloaded.
+Suppose you have a replica set instance (ID: cmgo-p8vnipr5), you can use the sample code `BackupSets.0=cmgo-p8vnipr5_0` to download the full backup. For a replica set instance, the parameter value must be in the format of "instance ID_0".
+Suppose you have a sharded cluster instance (ID: cmgo-p8vnipr5), you can use the sample code `BackupSets.0=cmgo-p8vnipr5_0&BackupSets.1=cmgo-p8vnipr5_1` to download the backup data of shard 0 and shard 1. To download the full backup, please specify all shard names.
          * @type {Array.<ReplicaSetInfo> || null}
          */
         this.BackupSets = null;
@@ -1958,7 +2002,7 @@ class ResetDBInstancePasswordRequest extends  AbstractModel {
         this.UserName = null;
 
         /**
-         * New password
+         * New password, which must contain at least eight characters
          * @type {string || null}
          */
         this.Password = null;
@@ -2125,7 +2169,7 @@ class InstanceIntegerParam extends  AbstractModel {
         this.Min = null;
 
         /**
-         * Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no)
+         * Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no, which means the parameter setting takes effect immediately)
          * @type {string || null}
          */
         this.NeedRestart = null;
@@ -2149,13 +2193,13 @@ class InstanceIntegerParam extends  AbstractModel {
         this.ValueType = null;
 
         /**
-         * Whether the TencentDB for MongoDB console has pulled parameter information successfully. Valid values: `1` (no), `0` (yes). This field is only used in the console.
+         * Whether `CurrentValue` is the parameter value actually in use. Valid values: `1` (yes), `0` (no)
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * This field is not in use
+         * Redundant field which can be ignored
          * @type {string || null}
          */
         this.Unit = null;
@@ -2598,6 +2642,19 @@ class BackupDownloadTask extends  AbstractModel {
          */
         this.Url = null;
 
+        /**
+         * Backup type of the backup file. Valid values: `0` (logical backup), `1` (physical backup)
+         * @type {number || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * Backup description you set when starting a backup task
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupDesc = null;
+
     }
 
     /**
@@ -2615,6 +2672,8 @@ class BackupDownloadTask extends  AbstractModel {
         this.Percent = 'Percent' in params ? params.Percent : null;
         this.TimeSpend = 'TimeSpend' in params ? params.TimeSpend : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.BackupDesc = 'BackupDesc' in params ? params.BackupDesc : null;
 
     }
 }
@@ -2695,7 +2754,7 @@ class InstanceMultiParam extends  AbstractModel {
         this.EnumValue = null;
 
         /**
-         * Whether to restart the instance for the parameter to take effect
+         * Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no, which means the parameter setting takes effect immediately)
          * @type {string || null}
          */
         this.NeedRestart = null;
@@ -2707,7 +2766,7 @@ class InstanceMultiParam extends  AbstractModel {
         this.ParamName = null;
 
         /**
-         * Whether the TencentDB for MongoDB console has pulled parameter information successfully
+         * Whether `CurrentValue` is the parameter value actually in use. Valid values: `1` (yes), `0` (no)
          * @type {number || null}
          */
         this.Status = null;
@@ -2719,7 +2778,7 @@ class InstanceMultiParam extends  AbstractModel {
         this.Tips = null;
 
         /**
-         * Data type of the parameter
+         * Data type of the current value. Default value: `multi`
          * @type {string || null}
          */
         this.ValueType = null;
@@ -2746,6 +2805,41 @@ class InstanceMultiParam extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceSecurityGroup request structure.
+ * @class
+ */
+class ModifyDBInstanceSecurityGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Target security group IDs
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
  * DescribeClientConnections request structure.
  * @class
  */
@@ -2760,7 +2854,7 @@ class DescribeClientConnectionsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * The number of records that will be returned. Default value: 10,000.
+         * Number of results to be returned for a single request. Value range: 1-1,000. Default value: 1,000
          * @type {number || null}
          */
         this.Limit = null;
@@ -2887,49 +2981,49 @@ class InstanceTextParam extends  AbstractModel {
         super();
 
         /**
-         * Current value (not in use)
+         * Current value
          * @type {string || null}
          */
         this.CurrentValue = null;
 
         /**
-         * Default value (not in use)
+         * Default value
          * @type {string || null}
          */
         this.DefaultValue = null;
 
         /**
-         * Whether to restart the instance for the parameter to take effect (not in use)
+         * Whether to restart the instance for the parameter to take effect
          * @type {string || null}
          */
         this.NeedRestart = null;
 
         /**
-         * Parameter name (not in use)
+         * Parameter name
          * @type {string || null}
          */
         this.ParamName = null;
 
         /**
-         * Acceptable values (not in use)
+         * Value of a text parameter
          * @type {string || null}
          */
         this.TextValue = null;
 
         /**
-         * Parameter description (not in use)
+         * Parameter description
          * @type {Array.<string> || null}
          */
         this.Tips = null;
 
         /**
-         * Data type of the parameter (not in use)
+         * Value type
          * @type {string || null}
          */
         this.ValueType = null;
 
         /**
-         * Whether the TencentDB for MongoDB console has pulled parameter information successfully (not in use)
+         * Whether `CurrentValue` is the parameter value actually in use. Valid values: `1` (yes), `0` (no)
          * @type {string || null}
          */
         this.Status = null;
@@ -3017,7 +3111,7 @@ class DescribeBackupDownloadTaskRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * The end time of the query period. Tasks whose start time and end time fall within the query period will be queried. If it is left empty, the end time can be any time later than the start time.
+         * The end time of the query period. Tasks will be queried if their start and end times fall within the query period. If it is left empty, the end time can be any time later than the start time.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -3124,7 +3218,7 @@ class RenameInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Instance name
+         * Custom name of the instance, which can contain up to 60 letters, digits, or symbols (_-)
          * @type {string || null}
          */
         this.NewName = null;
@@ -3227,7 +3321,7 @@ class InstanceEnumParam extends  AbstractModel {
         this.EnumValue = null;
 
         /**
-         * Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no)
+         * Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no, which means the parameter setting takes effect immediately)
          * @type {string || null}
          */
         this.NeedRestart = null;
@@ -3251,7 +3345,7 @@ class InstanceEnumParam extends  AbstractModel {
         this.ValueType = null;
 
         /**
-         * Whether the TencentDB for MongoDB console has pulled parameter information successfully. Valid values: `1` (yes), `0` (no, and displays "Loading" in the console)
+         * Whether `CurrentValue` is the parameter value actually in use. Valid values: `1` (yes), `0` (no)
          * @type {number || null}
          */
         this.Status = null;
@@ -4406,6 +4500,7 @@ module.exports = {
     ClientConnection: ClientConnection,
     InquirePriceModifyDBInstanceSpecRequest: InquirePriceModifyDBInstanceSpecRequest,
     BackupInfo: BackupInfo,
+    ModifyDBInstanceSecurityGroupResponse: ModifyDBInstanceSecurityGroupResponse,
     SecurityGroup: SecurityGroup,
     InquirePriceRenewDBInstancesRequest: InquirePriceRenewDBInstancesRequest,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
@@ -4432,6 +4527,7 @@ module.exports = {
     BackupDownloadTask: BackupDownloadTask,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     InstanceMultiParam: InstanceMultiParam,
+    ModifyDBInstanceSecurityGroupRequest: ModifyDBInstanceSecurityGroupRequest,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
     DescribeDBInstanceDealResponse: DescribeDBInstanceDealResponse,
     ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,

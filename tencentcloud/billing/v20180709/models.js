@@ -17,6 +17,42 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * The product purchased.
+ * @class
+ */
+class UsageDetails extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The name of the product.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SubProductName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.SubProductName = 'SubProductName' in params ? params.SubProductName : null;
+
+    }
+}
+
+/**
  * DescribeBillSummaryByTag response structure.
  * @class
  */
@@ -600,6 +636,91 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * Detailed summary of purchases by region
+ * @class
+ */
+class RegionSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region ID
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Actual cost
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * Cost ratio, to two decimal points
+         * @type {string || null}
+         */
+        this.RealTotalCostRatio = null;
+
+        /**
+         * Cash amount
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * Trial credit amount
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * Voucher amount
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * Billing month, e.g. `2019-08`
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+
+    }
+}
+
+/**
  * DescribeBillDetail request structure.
  * @class
  */
@@ -734,67 +855,37 @@ Note: To query the product codes used in the current month, call <a href="https:
 }
 
 /**
- * Detailed summary of purchases by region
+ * DescribeVoucherInfo response structure.
  * @class
  */
-class RegionSummaryOverviewItem extends  AbstractModel {
+class DescribeVoucherInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region ID
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
+         * The total number of vouchers.
+         * @type {number || null}
          */
-        this.RegionId = null;
+        this.TotalCount = null;
 
         /**
-         * Region name
-         * @type {string || null}
+         * The total voucher balance. The value of this parameter is the total balance (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+         * @type {number || null}
          */
-        this.RegionName = null;
+        this.TotalBalance = null;
 
         /**
-         * Actual cost
-         * @type {string || null}
+         * The voucher information.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<VoucherInfos> || null}
          */
-        this.RealTotalCost = null;
+        this.VoucherInfos = null;
 
         /**
-         * Cost ratio, to two decimal points
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.RealTotalCostRatio = null;
-
-        /**
-         * Cash amount
-         * @type {string || null}
-         */
-        this.CashPayAmount = null;
-
-        /**
-         * Trial credit amount
-         * @type {string || null}
-         */
-        this.IncentivePayAmount = null;
-
-        /**
-         * Voucher amount
-         * @type {string || null}
-         */
-        this.VoucherPayAmount = null;
-
-        /**
-         * Billing month, e.g. `2019-08`
-         * @type {string || null}
-         */
-        this.BillMonth = null;
-
-        /**
-         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
-         * @type {string || null}
-         */
-        this.TotalCost = null;
+        this.RequestId = null;
 
     }
 
@@ -805,15 +896,131 @@ Note: This field may return null, indicating that no valid value was found.
         if (!params) {
             return;
         }
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
-        this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
-        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
-        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
-        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
-        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
-        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalBalance = 'TotalBalance' in params ? params.TotalBalance : null;
+
+        if (params.VoucherInfos) {
+            this.VoucherInfos = new Array();
+            for (let z in params.VoucherInfos) {
+                let obj = new VoucherInfos();
+                obj.deserialize(params.VoucherInfos[z]);
+                this.VoucherInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Voucher information.
+ * @class
+ */
+class VoucherInfos extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The owner of the voucher.
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * The status of the voucher: `unUsed`, `used`, `delivered`, `cancel`, `overdue`
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The value of the voucher. The value of this parameter is the voucher value (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+         * @type {number || null}
+         */
+        this.NominalValue = null;
+
+        /**
+         * The balance left. The value of this parameter is the balance left (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+         * @type {number || null}
+         */
+        this.Balance = null;
+
+        /**
+         * The voucher ID.
+         * @type {string || null}
+         */
+        this.VoucherId = null;
+
+        /**
+         * `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all.
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
+         * @type {string || null}
+         */
+        this.PayScene = null;
+
+        /**
+         * The start time of the validity period.
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * The end time of the validity period.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The products that are applicable.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {ApplicableProducts || null}
+         */
+        this.ApplicableProducts = null;
+
+        /**
+         * The products that are not applicable.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<ExcludedProducts> || null}
+         */
+        this.ExcludedProducts = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NominalValue = 'NominalValue' in params ? params.NominalValue : null;
+        this.Balance = 'Balance' in params ? params.Balance : null;
+        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PayScene = 'PayScene' in params ? params.PayScene : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.ApplicableProducts) {
+            let obj = new ApplicableProducts();
+            obj.deserialize(params.ApplicableProducts)
+            this.ApplicableProducts = obj;
+        }
+
+        if (params.ExcludedProducts) {
+            this.ExcludedProducts = new Array();
+            for (let z in params.ExcludedProducts) {
+                let obj = new ExcludedProducts();
+                obj.deserialize(params.ExcludedProducts[z]);
+                this.ExcludedProducts.push(obj);
+            }
+        }
 
     }
 }
@@ -1144,6 +1351,57 @@ class DescribeBillSummaryByPayModeRequest extends  AbstractModel {
 }
 
 /**
+ * The usage records.
+ * @class
+ */
+class UsageRecords extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The amount used. The value of this parameter is the amount used (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+         * @type {number || null}
+         */
+        this.UsedAmount = null;
+
+        /**
+         * The time when the voucher was used.
+         * @type {string || null}
+         */
+        this.UsedTime = null;
+
+        /**
+         * The details of the product purchased.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<UsageDetails> || null}
+         */
+        this.UsageDetails = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsedAmount = 'UsedAmount' in params ? params.UsedAmount : null;
+        this.UsedTime = 'UsedTime' in params ? params.UsedTime : null;
+
+        if (params.UsageDetails) {
+            this.UsageDetails = new Array();
+            for (let z in params.UsageDetails) {
+                let obj = new UsageDetails();
+                obj.deserialize(params.UsageDetails[z]);
+                this.UsageDetails.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeBillResourceSummary response structure.
  * @class
  */
@@ -1279,6 +1537,167 @@ class ActionSummaryOverviewItem extends  AbstractModel {
 }
 
 /**
+ * DescribeVoucherInfo request structure.
+ * @class
+ */
+class DescribeVoucherInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of records per page. The default is 20, and the maximum is 1,000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The page number the records start from. The default is 1.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The voucher status. Valid values: `unUsed`, `used`, `delivered`, `cancel`, `overdue`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The voucher ID.
+         * @type {string || null}
+         */
+        this.VoucherId = null;
+
+        /**
+         * The voucher order ID.
+         * @type {string || null}
+         */
+        this.CodeId = null;
+
+        /**
+         * The product code.
+         * @type {string || null}
+         */
+        this.ProductCode = null;
+
+        /**
+         * The campaign ID.
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * The voucher name.
+         * @type {string || null}
+         */
+        this.VoucherName = null;
+
+        /**
+         * The start time of the promotional campaign.
+         * @type {string || null}
+         */
+        this.TimeFrom = null;
+
+        /**
+         * The end time of the promotional campaign.
+         * @type {string || null}
+         */
+        this.TimeTo = null;
+
+        /**
+         * The field used to sort the records. Valid values: BeginTime, EndTime, CreateTime.
+         * @type {string || null}
+         */
+        this.SortField = null;
+
+        /**
+         * Whether to sort the records in ascending or descending order. Valid values: desc, asc.
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
+        /**
+         * The payment mode. Valid values: `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all. If this parameter is empty or `*`, `productCode` and `subProductCode` must also be empty.
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
+         * @type {string || null}
+         */
+        this.PayScene = null;
+
+        /**
+         * The operator. The default is the UIN of the current user.
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
+        this.CodeId = 'CodeId' in params ? params.CodeId : null;
+        this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.VoucherName = 'VoucherName' in params ? params.VoucherName : null;
+        this.TimeFrom = 'TimeFrom' in params ? params.TimeFrom : null;
+        this.TimeTo = 'TimeTo' in params ? params.TimeTo : null;
+        this.SortField = 'SortField' in params ? params.SortField : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PayScene = 'PayScene' in params ? params.PayScene : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+
+    }
+}
+
+/**
+ * The products that are applicable.
+ * @class
+ */
+class ApplicableProducts extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Valid values: `all products` or names of the applicable products (string). Multiple names are separated by commas.
+         * @type {string || null}
+         */
+        this.GoodsName = null;
+
+        /**
+         * Valid values: `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all. If `GoodsName` contains multiple product names and `PayMode` is `*`, it indicates that the voucher can be used in all billing modes for each of the products.
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GoodsName = 'GoodsName' in params ? params.GoodsName : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+
+    }
+}
+
+/**
  * DescribeBillSummaryByProject request structure.
  * @class
  */
@@ -1316,6 +1735,55 @@ class DescribeBillSummaryByProjectRequest extends  AbstractModel {
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
+
+    }
+}
+
+/**
+ * DescribeVoucherUsageDetails request structure.
+ * @class
+ */
+class DescribeVoucherUsageDetailsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of records per page. The default is 20, and the maximum is 1,000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The page number the records start from. The default is 1.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The voucher ID.
+         * @type {string || null}
+         */
+        this.VoucherId = null;
+
+        /**
+         * The operator. The default is the UIN of the current.
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
 
     }
 }
@@ -1475,6 +1943,43 @@ Valid values:
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.PayType = 'PayType' in params ? params.PayType : null;
+
+    }
+}
+
+/**
+ * Total cost
+ * @class
+ */
+class SummaryTotal extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total cost
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -1877,6 +2382,64 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * DescribeVoucherUsageDetails response structure.
+ * @class
+ */
+class DescribeVoucherUsageDetailsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of vouchers.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The total amount used. The value of this parameter is the total amount used (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+         * @type {number || null}
+         */
+        this.TotalUsedAmount = null;
+
+        /**
+         * The usage details.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<UsageRecords> || null}
+         */
+        this.UsageRecords = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalUsedAmount = 'TotalUsedAmount' in params ? params.TotalUsedAmount : null;
+
+        if (params.UsageRecords) {
+            this.UsageRecords = new Array();
+            for (let z in params.UsageRecords) {
+                let obj = new UsageRecords();
+                obj.deserialize(params.UsageRecords[z]);
+                this.UsageRecords.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBillSummaryByProject response structure.
  * @class
  */
@@ -1928,26 +2491,24 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * Total cost
+ * The products that are not applicable.
  * @class
  */
-class SummaryTotal extends  AbstractModel {
+class ExcludedProducts extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total cost
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * The names of non-applicable products.
          * @type {string || null}
          */
-        this.RealTotalCost = null;
+        this.GoodsName = null;
 
         /**
-         * The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all.
          * @type {string || null}
          */
-        this.TotalCost = null;
+        this.PayMode = null;
 
     }
 
@@ -1958,8 +2519,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
-        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.GoodsName = 'GoodsName' in params ? params.GoodsName : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }
@@ -2113,6 +2674,7 @@ class BusinessSummaryTotal extends  AbstractModel {
 }
 
 module.exports = {
+    UsageDetails: UsageDetails,
     DescribeBillSummaryByTagResponse: DescribeBillSummaryByTagResponse,
     DescribeBillSummaryByPayModeResponse: DescribeBillSummaryByPayModeResponse,
     BillResourceSummary: BillResourceSummary,
@@ -2120,23 +2682,31 @@ module.exports = {
     DescribeBillSummaryByProductResponse: DescribeBillSummaryByProductResponse,
     BillTagInfo: BillTagInfo,
     DescribeBillSummaryByRegionResponse: DescribeBillSummaryByRegionResponse,
-    DescribeBillDetailRequest: DescribeBillDetailRequest,
     RegionSummaryOverviewItem: RegionSummaryOverviewItem,
+    DescribeBillDetailRequest: DescribeBillDetailRequest,
+    DescribeVoucherInfoResponse: DescribeVoucherInfoResponse,
+    VoucherInfos: VoucherInfos,
     BusinessSummaryOverviewItem: BusinessSummaryOverviewItem,
     BillDetailComponent: BillDetailComponent,
     DescribeBillSummaryByRegionRequest: DescribeBillSummaryByRegionRequest,
     DescribeBillSummaryByPayModeRequest: DescribeBillSummaryByPayModeRequest,
+    UsageRecords: UsageRecords,
     DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
     ActionSummaryOverviewItem: ActionSummaryOverviewItem,
+    DescribeVoucherInfoRequest: DescribeVoucherInfoRequest,
+    ApplicableProducts: ApplicableProducts,
     DescribeBillSummaryByProjectRequest: DescribeBillSummaryByProjectRequest,
+    DescribeVoucherUsageDetailsRequest: DescribeVoucherUsageDetailsRequest,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
     DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
+    SummaryTotal: SummaryTotal,
     BillDetail: BillDetail,
     TagSummaryOverviewItem: TagSummaryOverviewItem,
     ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
     DescribeBillDetailResponse: DescribeBillDetailResponse,
+    DescribeVoucherUsageDetailsResponse: DescribeVoucherUsageDetailsResponse,
     DescribeBillSummaryByProjectResponse: DescribeBillSummaryByProjectResponse,
-    SummaryTotal: SummaryTotal,
+    ExcludedProducts: ExcludedProducts,
     PayModeSummaryOverviewItem: PayModeSummaryOverviewItem,
     BusinessSummaryTotal: BusinessSummaryTotal,
 

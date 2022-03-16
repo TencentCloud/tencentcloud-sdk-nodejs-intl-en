@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const UsageDetails = models.UsageDetails;
 const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const BillResourceSummary = models.BillResourceSummary;
@@ -23,23 +24,31 @@ const DescribeBillSummaryByTagRequest = models.DescribeBillSummaryByTagRequest;
 const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
 const BillTagInfo = models.BillTagInfo;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
-const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
+const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
+const DescribeVoucherInfoResponse = models.DescribeVoucherInfoResponse;
+const VoucherInfos = models.VoucherInfos;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const BillDetailComponent = models.BillDetailComponent;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
+const UsageRecords = models.UsageRecords;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
+const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
+const ApplicableProducts = models.ApplicableProducts;
 const DescribeBillSummaryByProjectRequest = models.DescribeBillSummaryByProjectRequest;
+const DescribeVoucherUsageDetailsRequest = models.DescribeVoucherUsageDetailsRequest;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
+const SummaryTotal = models.SummaryTotal;
 const BillDetail = models.BillDetail;
 const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
 const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
+const DescribeVoucherUsageDetailsResponse = models.DescribeVoucherUsageDetailsResponse;
 const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProjectResponse;
-const SummaryTotal = models.SummaryTotal;
+const ExcludedProducts = models.ExcludedProducts;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
 
@@ -54,6 +63,17 @@ class BillingClient extends AbstractClient {
         super("billing.tencentcloudapi.com", "2018-07-09", credential, region, profile);
     }
     
+    /**
+     * This API is used to query vouchers.
+     * @param {DescribeVoucherInfoRequest} req
+     * @param {function(string, DescribeVoucherInfoResponse):void} cb
+     * @public
+     */
+    DescribeVoucherInfo(req, cb) {
+        let resp = new DescribeVoucherInfoResponse();
+        this.request("DescribeVoucherInfo", req, resp, cb);
+    }
+
     /**
      * This API is used to query bill details.
      * @param {DescribeBillDetailRequest} req
@@ -85,6 +105,17 @@ class BillingClient extends AbstractClient {
     DescribeBillResourceSummary(req, cb) {
         let resp = new DescribeBillResourceSummaryResponse();
         this.request("DescribeBillResourceSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query voucher usage details.
+     * @param {DescribeVoucherUsageDetailsRequest} req
+     * @param {function(string, DescribeVoucherUsageDetailsResponse):void} cb
+     * @public
+     */
+    DescribeVoucherUsageDetails(req, cb) {
+        let resp = new DescribeVoucherUsageDetailsResponse();
+        this.request("DescribeVoucherUsageDetails", req, resp, cb);
     }
 
     /**

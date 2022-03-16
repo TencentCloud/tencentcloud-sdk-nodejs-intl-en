@@ -36,6 +36,7 @@ const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse
 const ClientConnection = models.ClientConnection;
 const InquirePriceModifyDBInstanceSpecRequest = models.InquirePriceModifyDBInstanceSpecRequest;
 const BackupInfo = models.BackupInfo;
+const ModifyDBInstanceSecurityGroupResponse = models.ModifyDBInstanceSecurityGroupResponse;
 const SecurityGroup = models.SecurityGroup;
 const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
@@ -62,6 +63,7 @@ const AssignProjectResponse = models.AssignProjectResponse;
 const BackupDownloadTask = models.BackupDownloadTask;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const InstanceMultiParam = models.InstanceMultiParam;
+const ModifyDBInstanceSecurityGroupRequest = models.ModifyDBInstanceSecurityGroupRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
 const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
@@ -403,6 +405,17 @@ This API is used to get the permission to download a backup file. The detailed b
     InquirePriceRenewDBInstances(req, cb) {
         let resp = new InquirePriceRenewDBInstancesResponse();
         this.request("InquirePriceRenewDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the security groups associated with an instance.
+     * @param {ModifyDBInstanceSecurityGroupRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroup(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupResponse();
+        this.request("ModifyDBInstanceSecurityGroup", req, resp, cb);
     }
 
 

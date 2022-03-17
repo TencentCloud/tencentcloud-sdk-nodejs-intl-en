@@ -5293,6 +5293,12 @@ class DescribeUserSqlAdviceRequest extends  AbstractModel {
          */
         this.Schema = null;
 
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL), `dbbrain-mysql` (self-built MySQL). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
     }
 
     /**
@@ -5305,6 +5311,7 @@ class DescribeUserSqlAdviceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SqlText = 'SqlText' in params ? params.SqlText : null;
         this.Schema = 'Schema' in params ? params.Schema : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }

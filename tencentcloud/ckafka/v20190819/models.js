@@ -554,18 +554,36 @@ class DescribeTopicAttributesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceAttributes request structure.
+ * FetchMessageByOffset request structure.
  * @class
  */
-class DescribeInstanceAttributesRequest extends  AbstractModel {
+class FetchMessageByOffsetRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Partition ID
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Offset information
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -577,6 +595,9 @@ class DescribeInstanceAttributesRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1746,18 +1767,24 @@ class DescribeTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
- * DeleteRouteTriggerTime request structure.
+ * CreateConsumer response structure.
  * @class
  */
-class DeleteRouteTriggerTimeRequest extends  AbstractModel {
+class CreateConsumerResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Modification time.
+         * Description of the created consumer group.
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DelayTime = null;
+        this.RequestId = null;
 
     }
 
@@ -1768,7 +1795,13 @@ class DeleteRouteTriggerTimeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3035,36 +3068,18 @@ class InstanceDetailResponse extends  AbstractModel {
 }
 
 /**
- * FetchMessageByOffset request structure.
+ * DescribeInstanceAttributes request structure.
  * @class
  */
-class FetchMessageByOffsetRequest extends  AbstractModel {
+class DescribeInstanceAttributesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * Topic name
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Partition ID
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-        /**
-         * Offset information
-         * @type {number || null}
-         */
-        this.Offset = null;
 
     }
 
@@ -3076,9 +3091,6 @@ class FetchMessageByOffsetRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -4065,6 +4077,46 @@ class DescribeInstanceAttributesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyPassword response structure.
+ * @class
+ */
+class ModifyPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Returned topic details entity
  * @class
  */
@@ -4713,6 +4765,34 @@ class DeleteTopicResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRouteTriggerTime request structure.
+ * @class
+ */
+class DeleteRouteTriggerTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Modification time.
+         * @type {string || null}
+         */
+        this.DelayTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
 
     }
 }
@@ -5435,24 +5515,36 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
 }
 
 /**
- * ModifyPassword response structure.
+ * CreateConsumer request structure.
  * @class
  */
-class ModifyPasswordResponse extends  AbstractModel {
+class CreateConsumerRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned result
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Group name.
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * Topic name. You must specify the name of an existing topic for either `TopicName` or `TopicNameList`.
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Topic name array.
+         * @type {Array.<string> || null}
+         */
+        this.TopicNameList = null;
 
     }
 
@@ -5463,13 +5555,10 @@ class ModifyPasswordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicNameList = 'TopicNameList' in params ? params.TopicNameList : null;
 
     }
 }
@@ -7163,7 +7252,7 @@ class InstanceDetail extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
-         * Instance status, which is an int-type value. 0: healthy, 1: alarmed, 2: exceptional
+         * Instance status. An int-type value will be returned. `0`: Healthy, `1`: Alarmed, `2`: Exceptional
          * @type {number || null}
          */
         this.Healthy = null;
@@ -7485,7 +7574,7 @@ module.exports = {
     DescribeACLRequest: DescribeACLRequest,
     BatchModifyTopicResultDTO: BatchModifyTopicResultDTO,
     DescribeTopicAttributesRequest: DescribeTopicAttributesRequest,
-    DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
+    FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
     ConsumerGroup: ConsumerGroup,
     Assignment: Assignment,
     DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
@@ -7510,7 +7599,7 @@ module.exports = {
     BatchModifyGroupOffsetsResponse: BatchModifyGroupOffsetsResponse,
     GroupResponse: GroupResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
-    DeleteRouteTriggerTimeRequest: DeleteRouteTriggerTimeRequest,
+    CreateConsumerResponse: CreateConsumerResponse,
     RouteResponse: RouteResponse,
     DescribeGroupResponse: DescribeGroupResponse,
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
@@ -7536,7 +7625,7 @@ module.exports = {
     DynamicRetentionTime: DynamicRetentionTime,
     DescribeTopicSubscribeGroupRequest: DescribeTopicSubscribeGroupRequest,
     InstanceDetailResponse: InstanceDetailResponse,
-    FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
+    DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
     TopicInSyncReplicaInfo: TopicInSyncReplicaInfo,
     DescribeRegionRequest: DescribeRegionRequest,
     InstanceConfigDO: InstanceConfigDO,
@@ -7557,6 +7646,7 @@ module.exports = {
     ZoneResponse: ZoneResponse,
     Instance: Instance,
     DescribeInstanceAttributesResponse: DescribeInstanceAttributesResponse,
+    ModifyPasswordResponse: ModifyPasswordResponse,
     TopicDetailResponse: TopicDetailResponse,
     TopicSubscribeGroup: TopicSubscribeGroup,
     Config: Config,
@@ -7569,6 +7659,7 @@ module.exports = {
     User: User,
     GroupOffsetPartition: GroupOffsetPartition,
     DeleteTopicResponse: DeleteTopicResponse,
+    DeleteRouteTriggerTimeRequest: DeleteRouteTriggerTimeRequest,
     DescribeInstancesRequest: DescribeInstancesRequest,
     InstanceAttributesResponse: InstanceAttributesResponse,
     DescribeGroupRequest: DescribeGroupRequest,
@@ -7578,7 +7669,7 @@ module.exports = {
     CreateUserRequest: CreateUserRequest,
     DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
-    ModifyPasswordResponse: ModifyPasswordResponse,
+    CreateConsumerRequest: CreateConsumerRequest,
     DescribeRouteRequest: DescribeRouteRequest,
     TopicInSyncReplicaResult: TopicInSyncReplicaResult,
     SendMessageResponse: SendMessageResponse,

@@ -195,6 +195,13 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          */
         this.SecurityGroups = null;
 
+        /**
+         * SSH key ID
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicKeyId = null;
+
     }
 
     /**
@@ -242,6 +249,7 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.CbsEncrypt = 'CbsEncrypt' in params ? params.CbsEncrypt : null;
         this.ApplicationRole = 'ApplicationRole' in params ? params.ApplicationRole : null;
         this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
+        this.PublicKeyId = 'PublicKeyId' in params ? params.PublicKeyId : null;
 
     }
 }
@@ -1798,6 +1806,12 @@ Hadoop-Hbase
          */
         this.SceneName = null;
 
+        /**
+         * Shared component information
+         * @type {Array.<ExternalService> || null}
+         */
+        this.ExternalService = null;
+
     }
 
     /**
@@ -1881,6 +1895,68 @@ Hadoop-Hbase
         }
         this.ApplicationRole = 'ApplicationRole' in params ? params.ApplicationRole : null;
         this.SceneName = 'SceneName' in params ? params.SceneName : null;
+
+        if (params.ExternalService) {
+            this.ExternalService = new Array();
+            for (let z in params.ExternalService) {
+                let obj = new ExternalService();
+                obj.deserialize(params.ExternalService[z]);
+                this.ExternalService.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Relationship between shared components and the current cluster
+ * @class
+ */
+class ClusterExternalServiceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dependency. `0`: Other clusters depend on the current cluster. `1`: The current cluster depends on other clusters.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DependType = null;
+
+        /**
+         * Shared component
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Service = null;
+
+        /**
+         * Sharing cluster
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Sharing cluster status
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ClusterStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DependType = 'DependType' in params ? params.DependType : null;
+        this.Service = 'Service' in params ? params.Service : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
 
     }
 }
@@ -2832,6 +2908,13 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.SubnetName = null;
 
+        /**
+         * Cluster dependency
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<ClusterExternalServiceInfo> || null}
+         */
+        this.ClusterExternalServiceInfo = null;
+
     }
 
     /**
@@ -2890,6 +2973,15 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
         this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+
+        if (params.ClusterExternalServiceInfo) {
+            this.ClusterExternalServiceInfo = new Array();
+            for (let z in params.ClusterExternalServiceInfo) {
+                let obj = new ClusterExternalServiceInfo();
+                obj.deserialize(params.ClusterExternalServiceInfo[z]);
+                this.ClusterExternalServiceInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -4290,6 +4382,7 @@ module.exports = {
     DescribeClusterNodesRequest: DescribeClusterNodesRequest,
     PreExecuteFileSettings: PreExecuteFileSettings,
     CreateInstanceRequest: CreateInstanceRequest,
+    ClusterExternalServiceInfo: ClusterExternalServiceInfo,
     DescribeInstancesResponse: DescribeInstancesResponse,
     InquiryPriceScaleOutInstanceRequest: InquiryPriceScaleOutInstanceRequest,
     Tag: Tag,

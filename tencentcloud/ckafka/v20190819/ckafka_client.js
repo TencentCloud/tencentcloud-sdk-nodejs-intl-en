@@ -25,7 +25,7 @@ const PartitionOffset = models.PartitionOffset;
 const DescribeACLRequest = models.DescribeACLRequest;
 const BatchModifyTopicResultDTO = models.BatchModifyTopicResultDTO;
 const DescribeTopicAttributesRequest = models.DescribeTopicAttributesRequest;
-const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesRequest;
+const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
 const ConsumerGroup = models.ConsumerGroup;
 const Assignment = models.Assignment;
 const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
@@ -50,7 +50,7 @@ const Tag = models.Tag;
 const BatchModifyGroupOffsetsResponse = models.BatchModifyGroupOffsetsResponse;
 const GroupResponse = models.GroupResponse;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
-const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
+const CreateConsumerResponse = models.CreateConsumerResponse;
 const RouteResponse = models.RouteResponse;
 const DescribeGroupResponse = models.DescribeGroupResponse;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
@@ -76,7 +76,7 @@ const DeleteAclResponse = models.DeleteAclResponse;
 const DynamicRetentionTime = models.DynamicRetentionTime;
 const DescribeTopicSubscribeGroupRequest = models.DescribeTopicSubscribeGroupRequest;
 const InstanceDetailResponse = models.InstanceDetailResponse;
-const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
+const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesRequest;
 const TopicInSyncReplicaInfo = models.TopicInSyncReplicaInfo;
 const DescribeRegionRequest = models.DescribeRegionRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
@@ -97,6 +97,7 @@ const AclResponse = models.AclResponse;
 const ZoneResponse = models.ZoneResponse;
 const Instance = models.Instance;
 const DescribeInstanceAttributesResponse = models.DescribeInstanceAttributesResponse;
+const ModifyPasswordResponse = models.ModifyPasswordResponse;
 const TopicDetailResponse = models.TopicDetailResponse;
 const TopicSubscribeGroup = models.TopicSubscribeGroup;
 const Config = models.Config;
@@ -109,6 +110,7 @@ const ConsumerGroupTopic = models.ConsumerGroupTopic;
 const User = models.User;
 const GroupOffsetPartition = models.GroupOffsetPartition;
 const DeleteTopicResponse = models.DeleteTopicResponse;
+const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InstanceAttributesResponse = models.InstanceAttributesResponse;
 const DescribeGroupRequest = models.DescribeGroupRequest;
@@ -118,7 +120,7 @@ const BatchCreateAclResponse = models.BatchCreateAclResponse;
 const CreateUserRequest = models.CreateUserRequest;
 const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
-const ModifyPasswordResponse = models.ModifyPasswordResponse;
+const CreateConsumerRequest = models.CreateConsumerRequest;
 const DescribeRouteRequest = models.DescribeRouteRequest;
 const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
 const SendMessageResponse = models.SendMessageResponse;
@@ -184,6 +186,17 @@ class CkafkaClient extends AbstractClient {
     DescribeGroupInfo(req, cb) {
         let resp = new DescribeGroupInfoResponse();
         this.request("DescribeGroupInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a consumer group.
+     * @param {CreateConsumerRequest} req
+     * @param {function(string, CreateConsumerResponse):void} cb
+     * @public
+     */
+    CreateConsumer(req, cb) {
+        let resp = new CreateConsumerResponse();
+        this.request("CreateConsumer", req, resp, cb);
     }
 
     /**

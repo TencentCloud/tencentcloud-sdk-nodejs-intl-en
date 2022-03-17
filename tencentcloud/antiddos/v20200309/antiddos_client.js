@@ -19,8 +19,10 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateDefaultAlarmThresholdRequest = models.CreateDefaultAlarmThresholdRequest;
 const DescribeListBGPIPInstancesResponse = models.DescribeListBGPIPInstancesResponse;
 const DescribeBlackWhiteIpListResponse = models.DescribeBlackWhiteIpListResponse;
+const DeleteCCLevelPolicyRequest = models.DeleteCCLevelPolicyRequest;
 const ProxyTypeInfo = models.ProxyTypeInfo;
 const CreateBoundIPRequest = models.CreateBoundIPRequest;
+const CCReqLimitPolicyRecord = models.CCReqLimitPolicyRecord;
 const DescribeListSchedulingDomainRequest = models.DescribeListSchedulingDomainRequest;
 const CreateWaterPrintConfigRequest = models.CreateWaterPrintConfigRequest;
 const DDoSGeoIPBlockConfig = models.DDoSGeoIPBlockConfig;
@@ -31,33 +33,44 @@ const DescribeL7RulesBySSLCertIdResponse = models.DescribeL7RulesBySSLCertIdResp
 const DescribeListDDoSSpeedLimitConfigRequest = models.DescribeListDDoSSpeedLimitConfigRequest;
 const InstanceRelation = models.InstanceRelation;
 const ModifyNewDomainRulesRequest = models.ModifyNewDomainRulesRequest;
+const RegionInfo = models.RegionInfo;
 const DescribeListProtocolBlockConfigResponse = models.DescribeListProtocolBlockConfigResponse;
 const DescribeListBGPInstancesRequest = models.DescribeListBGPInstancesRequest;
 const KeyValue = models.KeyValue;
+const ModifyCcBlackWhiteIpListRequest = models.ModifyCcBlackWhiteIpListRequest;
 const DeleteDDoSSpeedLimitConfigRequest = models.DeleteDDoSSpeedLimitConfigRequest;
 const CreatePacketFilterConfigResponse = models.CreatePacketFilterConfigResponse;
+const CreateCCReqLimitPolicyResponse = models.CreateCCReqLimitPolicyResponse;
 const DescribeListWaterPrintConfigRequest = models.DescribeListWaterPrintConfigRequest;
 const CreateL7RuleCertsRequest = models.CreateL7RuleCertsRequest;
+const CreateCCPrecisionPolicyResponse = models.CreateCCPrecisionPolicyResponse;
 const DeleteDDoSGeoIPBlockConfigRequest = models.DeleteDDoSGeoIPBlockConfigRequest;
+const DescribeCcBlackWhiteIpListResponse = models.DescribeCcBlackWhiteIpListResponse;
 const CreateIPAlarmThresholdConfigRequest = models.CreateIPAlarmThresholdConfigRequest;
+const CreateCcBlackWhiteIpListResponse = models.CreateCcBlackWhiteIpListResponse;
 const DescribeDefaultAlarmThresholdResponse = models.DescribeDefaultAlarmThresholdResponse;
 const CreateDDoSAIRequest = models.CreateDDoSAIRequest;
 const DescribeListProtectThresholdConfigRequest = models.DescribeListProtectThresholdConfigRequest;
 const ModifyNewDomainRulesResponse = models.ModifyNewDomainRulesResponse;
+const CcBlackWhiteIpPolicy = models.CcBlackWhiteIpPolicy;
+const DescribeCCLevelPolicyRequest = models.DescribeCCLevelPolicyRequest;
 const CreateWaterPrintConfigResponse = models.CreateWaterPrintConfigResponse;
 const DescribeListBGPIPInstancesRequest = models.DescribeListBGPIPInstancesRequest;
 const StaticPackRelation = models.StaticPackRelation;
+const DescribeCCThresholdListResponse = models.DescribeCCThresholdListResponse;
 const DescribeL7RulesBySSLCertIdRequest = models.DescribeL7RulesBySSLCertIdRequest;
 const DescribeListPacketFilterConfigResponse = models.DescribeListPacketFilterConfigResponse;
 const DeleteBlackWhiteIpListResponse = models.DeleteBlackWhiteIpListResponse;
 const CreateSchedulingDomainRequest = models.CreateSchedulingDomainRequest;
 const BoundIpInfo = models.BoundIpInfo;
 const DisassociateDDoSEipAddressResponse = models.DisassociateDDoSEipAddressResponse;
-const BGPIPInstance = models.BGPIPInstance;
+const DeleteCCThresholdPolicyResponse = models.DeleteCCThresholdPolicyResponse;
 const DeleteBlackWhiteIpListRequest = models.DeleteBlackWhiteIpListRequest;
 const SourceServer = models.SourceServer;
 const ModifyDomainUsrNameResponse = models.ModifyDomainUsrNameResponse;
+const ModifyCcBlackWhiteIpListResponse = models.ModifyCcBlackWhiteIpListResponse;
 const DisassociateDDoSEipAddressRequest = models.DisassociateDDoSEipAddressRequest;
+const SwitchWaterPrintConfigResponse = models.SwitchWaterPrintConfigResponse;
 const BlackWhiteIpRelation = models.BlackWhiteIpRelation;
 const DeleteWaterPrintKeyResponse = models.DeleteWaterPrintKeyResponse;
 const EipAddressPackRelation = models.EipAddressPackRelation;
@@ -66,17 +79,21 @@ const DescribeListPacketFilterConfigRequest = models.DescribeListPacketFilterCon
 const BGPIPInstanceUsages = models.BGPIPInstanceUsages;
 const ModifyPacketFilterConfigResponse = models.ModifyPacketFilterConfigResponse;
 const DescribeListDDoSGeoIPBlockConfigRequest = models.DescribeListDDoSGeoIPBlockConfigRequest;
+const CreateCcGeoIPBlockConfigResponse = models.CreateCcGeoIPBlockConfigResponse;
 const Layer7Rule = models.Layer7Rule;
 const L4RuleSource = models.L4RuleSource;
+const DeleteCcGeoIPBlockConfigRequest = models.DeleteCcGeoIPBlockConfigRequest;
+const DescribeCCLevelListResponse = models.DescribeCCLevelListResponse;
 const CreateDDoSSpeedLimitConfigRequest = models.CreateDDoSSpeedLimitConfigRequest;
 const CreateDDoSGeoIPBlockConfigRequest = models.CreateDDoSGeoIPBlockConfigRequest;
 const CreateProtocolBlockConfigRequest = models.CreateProtocolBlockConfigRequest;
 const DeleteWaterPrintKeyRequest = models.DeleteWaterPrintKeyRequest;
 const AssociateDDoSEipAddressResponse = models.AssociateDDoSEipAddressResponse;
 const DDoSSpeedLimitConfigRelation = models.DDoSSpeedLimitConfigRelation;
-const PackInfo = models.PackInfo;
+const DeleteCCLevelPolicyResponse = models.DeleteCCLevelPolicyResponse;
 const ModifyPacketFilterConfigRequest = models.ModifyPacketFilterConfigRequest;
 const DescribeBlackWhiteIpListRequest = models.DescribeBlackWhiteIpListRequest;
+const CreateCcGeoIPBlockConfigRequest = models.CreateCcGeoIPBlockConfigRequest;
 const ModifyDomainUsrNameRequest = models.ModifyDomainUsrNameRequest;
 const CreateDDoSSpeedLimitConfigResponse = models.CreateDDoSSpeedLimitConfigResponse;
 const DeletePacketFilterConfigRequest = models.DeletePacketFilterConfigRequest;
@@ -84,34 +101,45 @@ const DescribeListDDoSGeoIPBlockConfigResponse = models.DescribeListDDoSGeoIPBlo
 const DescribeBasicDeviceStatusResponse = models.DescribeBasicDeviceStatusResponse;
 const WaterPrintConfig = models.WaterPrintConfig;
 const ProtocolBlockConfig = models.ProtocolBlockConfig;
-const DescribeListListenerRequest = models.DescribeListListenerRequest;
+const DeleteCCPrecisionPolicyRequest = models.DeleteCCPrecisionPolicyRequest;
+const BGPIPInstance = models.BGPIPInstance;
 const DeleteWaterPrintConfigResponse = models.DeleteWaterPrintConfigResponse;
 const Layer4Rule = models.Layer4Rule;
 const DeletePacketFilterConfigResponse = models.DeletePacketFilterConfigResponse;
 const CreateProtocolBlockConfigResponse = models.CreateProtocolBlockConfigResponse;
 const BGPIPInstanceSpecification = models.BGPIPInstanceSpecification;
 const CreateIPAlarmThresholdConfigResponse = models.CreateIPAlarmThresholdConfigResponse;
+const DeleteCcGeoIPBlockConfigResponse = models.DeleteCcGeoIPBlockConfigResponse;
 const DeleteWaterPrintConfigRequest = models.DeleteWaterPrintConfigRequest;
+const DescribeCCThresholdListRequest = models.DescribeCCThresholdListRequest;
 const DescribeListBlackWhiteIpListResponse = models.DescribeListBlackWhiteIpListResponse;
 const DDoSAIRelation = models.DDoSAIRelation;
 const DescribeListDDoSSpeedLimitConfigResponse = models.DescribeListDDoSSpeedLimitConfigResponse;
 const CreateDDoSGeoIPBlockConfigResponse = models.CreateDDoSGeoIPBlockConfigResponse;
+const CCPrecisionPolicy = models.CCPrecisionPolicy;
 const ListenerCcThreholdConfig = models.ListenerCcThreholdConfig;
-const DescribeBasicDeviceStatusRequest = models.DescribeBasicDeviceStatusRequest;
-const IPLineInfo = models.IPLineInfo;
 const EipAddressRelation = models.EipAddressRelation;
+const DescribeBasicDeviceStatusRequest = models.DescribeBasicDeviceStatusRequest;
+const PackInfo = models.PackInfo;
+const IPLineInfo = models.IPLineInfo;
+const DescribeCcBlackWhiteIpListRequest = models.DescribeCcBlackWhiteIpListRequest;
 const DescribeListListenerResponse = models.DescribeListListenerResponse;
 const ProtectThresholdRelation = models.ProtectThresholdRelation;
+const IpSegment = models.IpSegment;
 const CreateL7RuleCertsResponse = models.CreateL7RuleCertsResponse;
+const CreateCCPrecisionPolicyRequest = models.CreateCCPrecisionPolicyRequest;
 const DDoSSpeedLimitConfig = models.DDoSSpeedLimitConfig;
 const AssociateDDoSEipLoadBalancerRequest = models.AssociateDDoSEipLoadBalancerRequest;
 const DescribeListProtectThresholdConfigResponse = models.DescribeListProtectThresholdConfigResponse;
 const CertIdInsL7Rules = models.CertIdInsL7Rules;
 const CreateDefaultAlarmThresholdResponse = models.CreateDefaultAlarmThresholdResponse;
 const DescribeListIPAlarmConfigResponse = models.DescribeListIPAlarmConfigResponse;
+const CcGeoIpPolicyNew = models.CcGeoIpPolicyNew;
 const SuccessCode = models.SuccessCode;
+const DescribeCCPrecisionPlyListRequest = models.DescribeCCPrecisionPlyListRequest;
 const ProtocolPort = models.ProtocolPort;
-const DescribeListBGPInstancesResponse = models.DescribeListBGPInstancesResponse;
+const DescribeCCLevelListRequest = models.DescribeCCLevelListRequest;
+const DeleteCCPrecisionPolicyResponse = models.DeleteCCPrecisionPolicyResponse;
 const DescribeListDDoSAIRequest = models.DescribeListDDoSAIRequest;
 const DescribeListIPAlarmConfigRequest = models.DescribeListIPAlarmConfigRequest;
 const PortSegment = models.PortSegment;
@@ -119,43 +147,58 @@ const PacketFilterConfig = models.PacketFilterConfig;
 const DefaultAlarmThreshold = models.DefaultAlarmThreshold;
 const ForwardListener = models.ForwardListener;
 const BGPInstanceSpecification = models.BGPInstanceSpecification;
-const SwitchWaterPrintConfigResponse = models.SwitchWaterPrintConfigResponse;
+const CCLevelPolicy = models.CCLevelPolicy;
 const CreateWaterPrintKeyRequest = models.CreateWaterPrintKeyRequest;
 const WaterPrintRelation = models.WaterPrintRelation;
 const InsL7Rules = models.InsL7Rules;
 const DescribeListDDoSAIResponse = models.DescribeListDDoSAIResponse;
+const ModifyCCPrecisionPolicyResponse = models.ModifyCCPrecisionPolicyResponse;
+const CcGeoIPBlockConfig = models.CcGeoIPBlockConfig;
 const ModifyDDoSSpeedLimitConfigRequest = models.ModifyDDoSSpeedLimitConfigRequest;
 const AssociateDDoSEipAddressRequest = models.AssociateDDoSEipAddressRequest;
 const AssociateDDoSEipLoadBalancerResponse = models.AssociateDDoSEipLoadBalancerResponse;
 const CreateBlackWhiteIpListRequest = models.CreateBlackWhiteIpListRequest;
 const DescribeBizTrendResponse = models.DescribeBizTrendResponse;
 const NewL7RuleEntry = models.NewL7RuleEntry;
+const DeleteCcBlackWhiteIpListResponse = models.DeleteCcBlackWhiteIpListResponse;
 const CreateBoundIPResponse = models.CreateBoundIPResponse;
 const SpeedValue = models.SpeedValue;
 const SwitchWaterPrintConfigRequest = models.SwitchWaterPrintConfigRequest;
 const DescribeListSchedulingDomainResponse = models.DescribeListSchedulingDomainResponse;
+const ModifyCCPrecisionPolicyRequest = models.ModifyCCPrecisionPolicyRequest;
+const CCThresholdPolicy = models.CCThresholdPolicy;
 const DescribeCCTrendResponse = models.DescribeCCTrendResponse;
 const CreateSchedulingDomainResponse = models.CreateSchedulingDomainResponse;
 const EipProductInfo = models.EipProductInfo;
+const DeleteCcBlackWhiteIpListRequest = models.DeleteCcBlackWhiteIpListRequest;
+const DescribeCcGeoIPBlockConfigListResponse = models.DescribeCcGeoIPBlockConfigListResponse;
 const CreateDDoSAIResponse = models.CreateDDoSAIResponse;
 const DDoSGeoIPBlockConfigRelation = models.DDoSGeoIPBlockConfigRelation;
 const DescribeListProtocolBlockConfigRequest = models.DescribeListProtocolBlockConfigRequest;
-const RegionInfo = models.RegionInfo;
+const DescribeListBGPInstancesResponse = models.DescribeListBGPInstancesResponse;
 const DescribeDDoSTrendRequest = models.DescribeDDoSTrendRequest;
 const ModifyDDoSGeoIPBlockConfigResponse = models.ModifyDDoSGeoIPBlockConfigResponse;
+const CreateCcBlackWhiteIpListRequest = models.CreateCcBlackWhiteIpListRequest;
 const BGPInstance = models.BGPInstance;
+const CCPrecisionPlyRecord = models.CCPrecisionPlyRecord;
+const DescribeCCPrecisionPlyListResponse = models.DescribeCCPrecisionPlyListResponse;
 const DescribeBizTrendRequest = models.DescribeBizTrendRequest;
+const DescribeCCLevelPolicyResponse = models.DescribeCCLevelPolicyResponse;
 const DescribeListWaterPrintConfigResponse = models.DescribeListWaterPrintConfigResponse;
 const BGPInstanceUsages = models.BGPInstanceUsages;
 const DeleteDDoSSpeedLimitConfigResponse = models.DeleteDDoSSpeedLimitConfigResponse;
+const DeleteCCThresholdPolicyRequest = models.DeleteCCThresholdPolicyRequest;
+const DescribeListListenerRequest = models.DescribeListListenerRequest;
 const CreateWaterPrintKeyResponse = models.CreateWaterPrintKeyResponse;
 const DeleteDDoSGeoIPBlockConfigResponse = models.DeleteDDoSGeoIPBlockConfigResponse;
 const DescribeDDoSTrendResponse = models.DescribeDDoSTrendResponse;
 const DescribeListBlackWhiteIpListRequest = models.DescribeListBlackWhiteIpListRequest;
+const CreateCCReqLimitPolicyRequest = models.CreateCCReqLimitPolicyRequest;
 const ModifyDDoSSpeedLimitConfigResponse = models.ModifyDDoSSpeedLimitConfigResponse;
 const SchedulingDomainInfo = models.SchedulingDomainInfo;
 const DescribeDefaultAlarmThresholdRequest = models.DescribeDefaultAlarmThresholdRequest;
 const WaterPrintKey = models.WaterPrintKey;
+const DescribeCcGeoIPBlockConfigListRequest = models.DescribeCcGeoIPBlockConfigListRequest;
 const PacketFilterRelation = models.PacketFilterRelation;
 const CreatePacketFilterConfigRequest = models.CreatePacketFilterConfigRequest;
 const DescribeCCTrendRequest = models.DescribeCCTrendRequest;
@@ -202,6 +245,28 @@ class AntiddosClient extends AbstractClient {
     DescribeListWaterPrintConfig(req, cb) {
         let resp = new DescribeListWaterPrintConfigResponse();
         this.request("DescribeListWaterPrintConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify layer-7 forwarding rules.
+     * @param {ModifyNewDomainRulesRequest} req
+     * @param {function(string, ModifyNewDomainRulesResponse):void} cb
+     * @public
+     */
+    ModifyNewDomainRules(req, cb) {
+        let resp = new ModifyNewDomainRulesResponse();
+        this.request("ModifyNewDomainRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a layer 4 access control list to prevent CC attacks.
+     * @param {CreateCcBlackWhiteIpListRequest} req
+     * @param {function(string, CreateCcBlackWhiteIpListResponse):void} cb
+     * @public
+     */
+    CreateCcBlackWhiteIpList(req, cb) {
+        let resp = new CreateCcBlackWhiteIpListResponse();
+        this.request("CreateCcBlackWhiteIpList", req, resp, cb);
     }
 
     /**
@@ -260,6 +325,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * This API is used to obtain a CC precise protection policy.
+     * @param {DescribeCCPrecisionPlyListRequest} req
+     * @param {function(string, DescribeCCPrecisionPlyListResponse):void} cb
+     * @public
+     */
+    DescribeCCPrecisionPlyList(req, cb) {
+        let resp = new DescribeCCPrecisionPlyListResponse();
+        this.request("DescribeCCPrecisionPlyList", req, resp, cb);
+    }
+
+    /**
      * This API is used to add Anti-DDoS feature filtering rules.
      * @param {CreatePacketFilterConfigRequest} req
      * @param {function(string, CreatePacketFilterConfigResponse):void} cb
@@ -268,6 +344,17 @@ class AntiddosClient extends AbstractClient {
     CreatePacketFilterConfig(req, cb) {
         let resp = new CreatePacketFilterConfigResponse();
         this.request("CreatePacketFilterConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a CC precise protection policy.
+     * @param {DeleteCCPrecisionPolicyRequest} req
+     * @param {function(string, DeleteCCPrecisionPolicyResponse):void} cb
+     * @public
+     */
+    DeleteCCPrecisionPolicy(req, cb) {
+        let resp = new DeleteCCPrecisionPolicyResponse();
+        this.request("DeleteCCPrecisionPolicy", req, resp, cb);
     }
 
     /**
@@ -316,25 +403,36 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify layer-7 forwarding rules.
-     * @param {ModifyNewDomainRulesRequest} req
-     * @param {function(string, ModifyNewDomainRulesResponse):void} cb
+     * This API is used to delete a CC cleansing threshold policy.
+     * @param {DeleteCCThresholdPolicyRequest} req
+     * @param {function(string, DeleteCCThresholdPolicyResponse):void} cb
      * @public
      */
-    ModifyNewDomainRules(req, cb) {
-        let resp = new ModifyNewDomainRulesResponse();
-        this.request("ModifyNewDomainRules", req, resp, cb);
+    DeleteCCThresholdPolicy(req, cb) {
+        let resp = new DeleteCCThresholdPolicyResponse();
+        this.request("DeleteCCThresholdPolicy", req, resp, cb);
     }
 
     /**
-     * This API is used to get a list of Anti-DDoS region blocking configurations.
-     * @param {DescribeListDDoSGeoIPBlockConfigRequest} req
-     * @param {function(string, DescribeListDDoSGeoIPBlockConfigResponse):void} cb
+     * This API is used to modify a layer-4 access control list.
+     * @param {ModifyCcBlackWhiteIpListRequest} req
+     * @param {function(string, ModifyCcBlackWhiteIpListResponse):void} cb
      * @public
      */
-    DescribeListDDoSGeoIPBlockConfig(req, cb) {
-        let resp = new DescribeListDDoSGeoIPBlockConfigResponse();
-        this.request("DescribeListDDoSGeoIPBlockConfig", req, resp, cb);
+    ModifyCcBlackWhiteIpList(req, cb) {
+        let resp = new ModifyCcBlackWhiteIpListResponse();
+        this.request("ModifyCcBlackWhiteIpList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain a layer-4 access control list.
+     * @param {DescribeCcBlackWhiteIpListRequest} req
+     * @param {function(string, DescribeCcBlackWhiteIpListResponse):void} cb
+     * @public
+     */
+    DescribeCcBlackWhiteIpList(req, cb) {
+        let resp = new DescribeCcBlackWhiteIpListResponse();
+        this.request("DescribeCcBlackWhiteIpList", req, resp, cb);
     }
 
     /**
@@ -346,6 +444,17 @@ class AntiddosClient extends AbstractClient {
     DisassociateDDoSEipAddress(req, cb) {
         let resp = new DisassociateDDoSEipAddressResponse();
         this.request("DisassociateDDoSEipAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used the query a level-defining policy of CC attacks
+     * @param {DescribeCCLevelPolicyRequest} req
+     * @param {function(string, DescribeCCLevelPolicyResponse):void} cb
+     * @public
+     */
+    DescribeCCLevelPolicy(req, cb) {
+        let resp = new DescribeCCLevelPolicyResponse();
+        this.request("DescribeCCLevelPolicy", req, resp, cb);
     }
 
     /**
@@ -415,6 +524,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the list of CC protection levels.
+     * @param {DescribeCCLevelListRequest} req
+     * @param {function(string, DescribeCCLevelListResponse):void} cb
+     * @public
+     */
+    DescribeCCLevelList(req, cb) {
+        let resp = new DescribeCCLevelListResponse();
+        this.request("DescribeCCLevelList", req, resp, cb);
+    }
+
+    /**
      * This API is used to get a list of Anti-DDoS AI protection switches.
      * @param {DescribeListDDoSAIRequest} req
      * @param {function(string, DescribeListDDoSAIResponse):void} cb
@@ -426,14 +546,36 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get CC attack data, including total QPS peaks, attack QPS, total number of requests and number of attack requests.
-     * @param {DescribeCCTrendRequest} req
-     * @param {function(string, DescribeCCTrendResponse):void} cb
+     * This API is used to get DDoS attack traffic bandwidth and attack packet rate.
+     * @param {DescribeDDoSTrendRequest} req
+     * @param {function(string, DescribeDDoSTrendResponse):void} cb
      * @public
      */
-    DescribeCCTrend(req, cb) {
-        let resp = new DescribeCCTrendResponse();
-        this.request("DescribeCCTrend", req, resp, cb);
+    DescribeDDoSTrend(req, cb) {
+        let resp = new DescribeDDoSTrendResponse();
+        this.request("DescribeDDoSTrend", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of CC cleansing thresholds.
+     * @param {DescribeCCThresholdListRequest} req
+     * @param {function(string, DescribeCCThresholdListResponse):void} cb
+     * @public
+     */
+    DescribeCCThresholdList(req, cb) {
+        let resp = new DescribeCCThresholdListResponse();
+        this.request("DescribeCCThresholdList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a CC precise protection policy.
+     * @param {ModifyCCPrecisionPolicyRequest} req
+     * @param {function(string, ModifyCCPrecisionPolicyResponse):void} cb
+     * @public
+     */
+    ModifyCCPrecisionPolicy(req, cb) {
+        let resp = new ModifyCCPrecisionPolicyResponse();
+        this.request("ModifyCCPrecisionPolicy", req, resp, cb);
     }
 
     /**
@@ -445,6 +587,17 @@ class AntiddosClient extends AbstractClient {
     CreateIPAlarmThresholdConfig(req, cb) {
         let resp = new CreateIPAlarmThresholdConfigResponse();
         this.request("CreateIPAlarmThresholdConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a level-defining policy of CC attacks. 
+     * @param {DeleteCCLevelPolicyRequest} req
+     * @param {function(string, DeleteCCLevelPolicyResponse):void} cb
+     * @public
+     */
+    DeleteCCLevelPolicy(req, cb) {
+        let resp = new DeleteCCLevelPolicyResponse();
+        this.request("DeleteCCLevelPolicy", req, resp, cb);
     }
 
     /**
@@ -478,6 +631,17 @@ class AntiddosClient extends AbstractClient {
     DescribeListDDoSSpeedLimitConfig(req, cb) {
         let resp = new DescribeListDDoSSpeedLimitConfigResponse();
         this.request("DescribeListDDoSSpeedLimitConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a layer-4 access control list.
+     * @param {DeleteCcBlackWhiteIpListRequest} req
+     * @param {function(string, DeleteCcBlackWhiteIpListResponse):void} cb
+     * @public
+     */
+    DeleteCcBlackWhiteIpList(req, cb) {
+        let resp = new DeleteCcBlackWhiteIpListResponse();
+        this.request("DeleteCcBlackWhiteIpList", req, resp, cb);
     }
 
     /**
@@ -548,14 +712,25 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get DDoS attack traffic bandwidth and attack packet rate.
-     * @param {DescribeDDoSTrendRequest} req
-     * @param {function(string, DescribeDDoSTrendResponse):void} cb
+     * This API is used to get a list of Anti-DDoS region blocking configurations.
+     * @param {DescribeListDDoSGeoIPBlockConfigRequest} req
+     * @param {function(string, DescribeListDDoSGeoIPBlockConfigResponse):void} cb
      * @public
      */
-    DescribeDDoSTrend(req, cb) {
-        let resp = new DescribeDDoSTrendResponse();
-        this.request("DescribeDDoSTrend", req, resp, cb);
+    DescribeListDDoSGeoIPBlockConfig(req, cb) {
+        let resp = new DescribeListDDoSGeoIPBlockConfigResponse();
+        this.request("DescribeListDDoSGeoIPBlockConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a CC precise protection policy.
+     * @param {CreateCCPrecisionPolicyRequest} req
+     * @param {function(string, CreateCCPrecisionPolicyResponse):void} cb
+     * @public
+     */
+    CreateCCPrecisionPolicy(req, cb) {
+        let resp = new CreateCCPrecisionPolicyResponse();
+        this.request("CreateCCPrecisionPolicy", req, resp, cb);
     }
 
     /**
@@ -589,6 +764,28 @@ class AntiddosClient extends AbstractClient {
     DeleteWaterPrintConfig(req, cb) {
         let resp = new DeleteWaterPrintConfigResponse();
         this.request("DeleteWaterPrintConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain a list of regional blocking configurations.
+     * @param {DescribeCcGeoIPBlockConfigListRequest} req
+     * @param {function(string, DescribeCcGeoIPBlockConfigListResponse):void} cb
+     * @public
+     */
+    DescribeCcGeoIPBlockConfigList(req, cb) {
+        let resp = new DescribeCcGeoIPBlockConfigListResponse();
+        this.request("DescribeCcGeoIPBlockConfigList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a CC frequency limit policy.
+     * @param {CreateCCReqLimitPolicyRequest} req
+     * @param {function(string, CreateCCReqLimitPolicyResponse):void} cb
+     * @public
+     */
+    CreateCCReqLimitPolicy(req, cb) {
+        let resp = new CreateCCReqLimitPolicyResponse();
+        this.request("CreateCCReqLimitPolicy", req, resp, cb);
     }
 
     /**
@@ -647,6 +844,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get CC attack data, including total QPS peaks, attack QPS, total number of requests and number of attack requests.
+     * @param {DescribeCCTrendRequest} req
+     * @param {function(string, DescribeCCTrendResponse):void} cb
+     * @public
+     */
+    DescribeCCTrend(req, cb) {
+        let resp = new DescribeCCTrendResponse();
+        this.request("DescribeCCTrend", req, resp, cb);
+    }
+
+    /**
      * This API is used to add Anti-DDoS watermark keys.
      * @param {CreateWaterPrintKeyRequest} req
      * @param {function(string, CreateWaterPrintKeyResponse):void} cb
@@ -669,6 +877,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete a regional blocking configuration.
+     * @param {DeleteCcGeoIPBlockConfigRequest} req
+     * @param {function(string, DeleteCcGeoIPBlockConfigResponse):void} cb
+     * @public
+     */
+    DeleteCcGeoIPBlockConfig(req, cb) {
+        let resp = new DeleteCcGeoIPBlockConfigResponse();
+        this.request("DeleteCcGeoIPBlockConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to configure certificates with layer-7 forwarding rules in a batch for SSL testing.
      * @param {CreateL7RuleCertsRequest} req
      * @param {function(string, CreateL7RuleCertsResponse):void} cb
@@ -677,6 +896,17 @@ class AntiddosClient extends AbstractClient {
     CreateL7RuleCerts(req, cb) {
         let resp = new CreateL7RuleCertsResponse();
         this.request("CreateL7RuleCerts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a regional blocking configuration.
+     * @param {CreateCcGeoIPBlockConfigRequest} req
+     * @param {function(string, CreateCcGeoIPBlockConfigResponse):void} cb
+     * @public
+     */
+    CreateCcGeoIPBlockConfig(req, cb) {
+        let resp = new CreateCcGeoIPBlockConfigResponse();
+        this.request("CreateCcGeoIPBlockConfig", req, resp, cb);
     }
 
     /**

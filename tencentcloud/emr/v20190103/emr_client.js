@@ -38,6 +38,7 @@ const ExternalService = models.ExternalService;
 const DescribeClusterNodesRequest = models.DescribeClusterNodesRequest;
 const PreExecuteFileSettings = models.PreExecuteFileSettings;
 const CreateInstanceRequest = models.CreateInstanceRequest;
+const ClusterExternalServiceInfo = models.ClusterExternalServiceInfo;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const InquiryPriceScaleOutInstanceRequest = models.InquiryPriceScaleOutInstanceRequest;
 const Tag = models.Tag;

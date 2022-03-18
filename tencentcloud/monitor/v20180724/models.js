@@ -899,7 +899,7 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * ID of trigger condition template. This parameter can be left empty.
+         * Trigger condition template ID. Pass in this parameter if the policy is associated with the trigger condition template; otherwise, pass in the `Condition` parameter. The trigger condition template ID can be obtained via [`DescribeConditionsTemplateList`](https://intl.cloud.tencent.com/document/api/248/70250?from_cn_redirect=1).
          * @type {number || null}
          */
         this.ConditionTemplateId = null;
@@ -1264,22 +1264,28 @@ class ModifyAlarmPolicyNoticeRequest extends  AbstractModel {
         super();
 
         /**
-         * Module name. Enter "monitor" here
+         * Module name, which is specified as `monitor`.
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * Alarm policy ID
+         * Alarm policy ID. If both `PolicyIds` and this parameter are returned, only `PolicyIds` takes effect.
          * @type {string || null}
          */
         this.PolicyId = null;
 
         /**
-         * Alarm notification template ID list
+         * List of alarm notification template IDs.
          * @type {Array.<string> || null}
          */
         this.NoticeIds = null;
+
+        /**
+         * Alarm policy ID array, which can be used to associate notification templates with multiple alarm policies. Max value: 30.
+         * @type {Array.<string> || null}
+         */
+        this.PolicyIds = null;
 
     }
 
@@ -1293,6 +1299,7 @@ class ModifyAlarmPolicyNoticeRequest extends  AbstractModel {
         this.Module = 'Module' in params ? params.Module : null;
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.NoticeIds = 'NoticeIds' in params ? params.NoticeIds : null;
+        this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
 
     }
 }
@@ -1333,36 +1340,44 @@ class DeleteAlarmPolicyRequest extends  AbstractModel {
 }
 
 /**
- * PutMonitorData request structure.
+ * Event alarm conditions
  * @class
  */
-class PutMonitorDataRequest extends  AbstractModel {
+class EventCondition extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * A group of metrics and data.
-         * @type {Array.<MetricDatum> || null}
-         */
-        this.Metrics = null;
-
-        /**
-         * IP address that is automatically specified when monitoring data is reported.
+         * Alarm notification frequency.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.AnnounceIp = null;
+        this.AlarmNotifyPeriod = null;
 
         /**
-         * Timestamp that is automatically specified when monitoring data is reported.
-         * @type {number || null}
-         */
-        this.AnnounceTimestamp = null;
-
-        /**
-         * IP address or product instance ID that is automatically specified when monitoring data is reported.
+         * Predefined repeated notification policy. `0`: One-time alarm; `1`: exponential alarm; `2`: consecutive alarm
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.AnnounceInstance = null;
+        this.AlarmNotifyType = null;
+
+        /**
+         * Event ID.
+         * @type {string || null}
+         */
+        this.EventID = null;
+
+        /**
+         * Displayed event name.
+         * @type {string || null}
+         */
+        this.EventDisplayName = null;
+
+        /**
+         * Rule ID.
+         * @type {string || null}
+         */
+        this.RuleID = null;
 
     }
 
@@ -1373,18 +1388,81 @@ class PutMonitorDataRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.AlarmNotifyPeriod = 'AlarmNotifyPeriod' in params ? params.AlarmNotifyPeriod : null;
+        this.AlarmNotifyType = 'AlarmNotifyType' in params ? params.AlarmNotifyType : null;
+        this.EventID = 'EventID' in params ? params.EventID : null;
+        this.EventDisplayName = 'EventDisplayName' in params ? params.EventDisplayName : null;
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
 
-        if (params.Metrics) {
-            this.Metrics = new Array();
-            for (let z in params.Metrics) {
-                let obj = new MetricDatum();
-                obj.deserialize(params.Metrics[z]);
-                this.Metrics.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeConditionsTemplateList request structure.
+ * @class
+ */
+class DescribeConditionsTemplateListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value is fixed to `monitor`.
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * View name, which can be obtained via [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1). For the monitoring of Tencent Cloud services, the value of this parameter is `QceNamespacesNew.N.Id` of the output parameter of `DescribeAllNamespaces`, for example, `cvm_device`.
+         * @type {string || null}
+         */
+        this.ViewName = null;
+
+        /**
+         * Filter by trigger condition template name.
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * Filter by trigger condition template ID.
+         * @type {string || null}
+         */
+        this.GroupID = null;
+
+        /**
+         * Pagination parameter, which specifies the number of returned results per page. Value range: 1-100. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Pagination offset starting from 0. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting method by update time. `asc`: Ascending order; `desc`: Descending order.
+         * @type {string || null}
+         */
+        this.UpdateTimeOrder = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
-        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
-        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupID = 'GroupID' in params ? params.GroupID : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.UpdateTimeOrder = 'UpdateTimeOrder' in params ? params.UpdateTimeOrder : null;
 
     }
 }
@@ -2165,6 +2243,58 @@ class DeletePolicyGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccidentEventList response structure.
+ * @class
+ */
+class DescribeAccidentEventListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Platform event list.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {Array.<DescribeAccidentEventListAlarms> || null}
+         */
+        this.Alarms = null;
+
+        /**
+         * Total number of platform events.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Alarms) {
+            this.Alarms = new Array();
+            for (let z in params.Alarms) {
+                let obj = new DescribeAccidentEventListAlarms();
+                obj.deserialize(params.Alarms[z]);
+                this.Alarms.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3442,6 +3572,131 @@ class Dimension extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Template list
+ * @class
+ */
+class TemplateGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Metric alarm rules.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<Condition> || null}
+         */
+        this.Conditions = null;
+
+        /**
+         * Event alarm rules.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<EventCondition> || null}
+         */
+        this.EventConditions = null;
+
+        /**
+         * The associated alarm policy groups.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<PolicyGroup> || null}
+         */
+        this.PolicyGroups = null;
+
+        /**
+         * Template-based policy group ID.
+         * @type {number || null}
+         */
+        this.GroupID = null;
+
+        /**
+         * Template-based policy group name.
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * Creation time.
+         * @type {number || null}
+         */
+        this.InsertTime = null;
+
+        /**
+         * UIN of the last modifier.
+         * @type {number || null}
+         */
+        this.LastEditUin = null;
+
+        /**
+         * Remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Update time.
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * View.
+         * @type {string || null}
+         */
+        this.ViewName = null;
+
+        /**
+         * Whether the logical relationship between rules is AND.
+         * @type {number || null}
+         */
+        this.IsUnionRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Conditions) {
+            this.Conditions = new Array();
+            for (let z in params.Conditions) {
+                let obj = new Condition();
+                obj.deserialize(params.Conditions[z]);
+                this.Conditions.push(obj);
+            }
+        }
+
+        if (params.EventConditions) {
+            this.EventConditions = new Array();
+            for (let z in params.EventConditions) {
+                let obj = new EventCondition();
+                obj.deserialize(params.EventConditions[z]);
+                this.EventConditions.push(obj);
+            }
+        }
+
+        if (params.PolicyGroups) {
+            this.PolicyGroups = new Array();
+            for (let z in params.PolicyGroups) {
+                let obj = new PolicyGroup();
+                obj.deserialize(params.PolicyGroups[z]);
+                this.PolicyGroups.push(obj);
+            }
+        }
+        this.GroupID = 'GroupID' in params ? params.GroupID : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
+        this.LastEditUin = 'LastEditUin' in params ? params.LastEditUin : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.IsUnionRule = 'IsUnionRule' in params ? params.IsUnionRule : null;
 
     }
 }
@@ -5020,6 +5275,100 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * Alarm condition
+ * @class
+ */
+class Condition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alarm notification frequency.
+         * @type {number || null}
+         */
+        this.AlarmNotifyPeriod = null;
+
+        /**
+         * Predefined repeated notification policy. `0`: One-time alarm; `1`: exponential alarm; `2`: consecutive alarm.
+         * @type {number || null}
+         */
+        this.AlarmNotifyType = null;
+
+        /**
+         * Detection method.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CalcType = null;
+
+        /**
+         * Detection value.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CalcValue = null;
+
+        /**
+         * Duration.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContinueTime = null;
+
+        /**
+         * Metric ID.
+         * @type {number || null}
+         */
+        this.MetricID = null;
+
+        /**
+         * Displayed metric name.
+         * @type {string || null}
+         */
+        this.MetricDisplayName = null;
+
+        /**
+         * Statistical period.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Rule ID.
+         * @type {number || null}
+         */
+        this.RuleID = null;
+
+        /**
+         * Metric unit.
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AlarmNotifyPeriod = 'AlarmNotifyPeriod' in params ? params.AlarmNotifyPeriod : null;
+        this.AlarmNotifyType = 'AlarmNotifyType' in params ? params.AlarmNotifyType : null;
+        this.CalcType = 'CalcType' in params ? params.CalcType : null;
+        this.CalcValue = 'CalcValue' in params ? params.CalcValue : null;
+        this.ContinueTime = 'ContinueTime' in params ? params.ContinueTime : null;
+        this.MetricID = 'MetricID' in params ? params.MetricID : null;
+        this.MetricDisplayName = 'MetricDisplayName' in params ? params.MetricDisplayName : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+
+    }
+}
+
+/**
  * DeletePolicyGroup request structure.
  * @class
  */
@@ -5403,6 +5752,63 @@ class UnBindingPolicyObjectResponse extends  AbstractModel {
 }
 
 /**
+ * PutMonitorData request structure.
+ * @class
+ */
+class PutMonitorDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A group of metrics and data.
+         * @type {Array.<MetricDatum> || null}
+         */
+        this.Metrics = null;
+
+        /**
+         * IP address that is automatically specified when monitoring data is reported.
+         * @type {string || null}
+         */
+        this.AnnounceIp = null;
+
+        /**
+         * Timestamp that is automatically specified when monitoring data is reported.
+         * @type {number || null}
+         */
+        this.AnnounceTimestamp = null;
+
+        /**
+         * IP address or product instance ID that is automatically specified when monitoring data is reported.
+         * @type {string || null}
+         */
+        this.AnnounceInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new MetricDatum();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
+        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
+        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
+
+    }
+}
+
+/**
  * Events returned by the DescribeProductEventList API
  * @class
  */
@@ -5744,6 +6150,148 @@ class DescribeAllNamespacesRequest extends  AbstractModel {
 }
 
 /**
+ * Policy group information
+ * @class
+ */
+class PolicyGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the alarm policy can be set to default.
+         * @type {boolean || null}
+         */
+        this.CanSetDefault = null;
+
+        /**
+         * Alarm policy group ID.
+         * @type {number || null}
+         */
+        this.GroupID = null;
+
+        /**
+         * Alarm policy group name.
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * Creation time.
+         * @type {number || null}
+         */
+        this.InsertTime = null;
+
+        /**
+         * Whether the alarm policy is set to default.
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * Whether the alarm policy is enabled.
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * UIN of the last modifier.
+         * @type {number || null}
+         */
+        this.LastEditUin = null;
+
+        /**
+         * Number of unshielded instances.
+         * @type {number || null}
+         */
+        this.NoShieldedInstanceCount = null;
+
+        /**
+         * Parent policy group ID.
+         * @type {number || null}
+         */
+        this.ParentGroupID = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectID = null;
+
+        /**
+         * Alarm recipient information.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<PolicyGroupReceiverInfo> || null}
+         */
+        this.ReceiverInfos = null;
+
+        /**
+         * Remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Modification time.
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * The total number of associated instances.
+         * @type {number || null}
+         */
+        this.TotalInstanceCount = null;
+
+        /**
+         * View.
+         * @type {string || null}
+         */
+        this.ViewName = null;
+
+        /**
+         * Whether the logical relationship between rules is AND.
+         * @type {number || null}
+         */
+        this.IsUnionRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CanSetDefault = 'CanSetDefault' in params ? params.CanSetDefault : null;
+        this.GroupID = 'GroupID' in params ? params.GroupID : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.LastEditUin = 'LastEditUin' in params ? params.LastEditUin : null;
+        this.NoShieldedInstanceCount = 'NoShieldedInstanceCount' in params ? params.NoShieldedInstanceCount : null;
+        this.ParentGroupID = 'ParentGroupID' in params ? params.ParentGroupID : null;
+        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
+
+        if (params.ReceiverInfos) {
+            this.ReceiverInfos = new Array();
+            for (let z in params.ReceiverInfos) {
+                let obj = new PolicyGroupReceiverInfo();
+                obj.deserialize(params.ReceiverInfos[z]);
+                this.ReceiverInfos.push(obj);
+            }
+        }
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.TotalInstanceCount = 'TotalInstanceCount' in params ? params.TotalInstanceCount : null;
+        this.ViewName = 'ViewName' in params ? params.ViewName : null;
+        this.IsUnionRule = 'IsUnionRule' in params ? params.IsUnionRule : null;
+
+    }
+}
+
+/**
  * DescribeAlarmMetrics response structure.
  * @class
  */
@@ -6020,26 +6568,25 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
 }
 
 /**
- * DescribeAccidentEventList response structure.
+ * DescribeConditionsTemplateList response structure.
  * @class
  */
-class DescribeAccidentEventListResponse extends  AbstractModel {
+class DescribeConditionsTemplateListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Platform event list.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {Array.<DescribeAccidentEventListAlarms> || null}
-         */
-        this.Alarms = null;
-
-        /**
-         * Total number of platform events.
-Note: This field may return null, indicating that no valid value was found.
+         * Total number of templates.
          * @type {number || null}
          */
         this.Total = null;
+
+        /**
+         * Template list.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TemplateGroup> || null}
+         */
+        this.TemplateGroupList = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6056,16 +6603,16 @@ Note: This field may return null, indicating that no valid value was found.
         if (!params) {
             return;
         }
+        this.Total = 'Total' in params ? params.Total : null;
 
-        if (params.Alarms) {
-            this.Alarms = new Array();
-            for (let z in params.Alarms) {
-                let obj = new DescribeAccidentEventListAlarms();
-                obj.deserialize(params.Alarms[z]);
-                this.Alarms.push(obj);
+        if (params.TemplateGroupList) {
+            this.TemplateGroupList = new Array();
+            for (let z in params.TemplateGroupList) {
+                let obj = new TemplateGroup();
+                obj.deserialize(params.TemplateGroupList[z]);
+                this.TemplateGroupList.push(obj);
             }
         }
-        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6339,6 +6886,124 @@ class MetricConfig extends  AbstractModel {
         this.Operator = 'Operator' in params ? params.Operator : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.ContinuePeriod = 'ContinuePeriod' in params ? params.ContinuePeriod : null;
+
+    }
+}
+
+/**
+ * Information on recipients in the policy template list (API v2018)
+ * @class
+ */
+class PolicyGroupReceiverInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * End time of a valid time period.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Whether it is required to send notifications.
+         * @type {number || null}
+         */
+        this.NeedSendNotice = null;
+
+        /**
+         * Alarm receiving channel.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.NotifyWay = null;
+
+        /**
+         * Alarm call intervals for individuals in seconds.
+         * @type {number || null}
+         */
+        this.PersonInterval = null;
+
+        /**
+         * Message recipient group list.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.ReceiverGroupList = null;
+
+        /**
+         * Recipient type.
+         * @type {string || null}
+         */
+        this.ReceiverType = null;
+
+        /**
+         * Recipient list. The list of recipient IDs that is queried by a platform API.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.ReceiverUserList = null;
+
+        /**
+         * Alarm resolution notification method.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.RecoverNotify = null;
+
+        /**
+         * Alarm call interval per round in seconds.
+         * @type {number || null}
+         */
+        this.RoundInterval = null;
+
+        /**
+         * Number of alarm call rounds.
+         * @type {number || null}
+         */
+        this.RoundNumber = null;
+
+        /**
+         * Alarm call notification time. Valid values: `OCCUR` (indicating that a notification is sent when the alarm is triggered) and `RECOVER` (indicating that a notification is sent when the alarm is resolved).
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SendFor = null;
+
+        /**
+         * Start time of a valid time period.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * UID of the alarm call recipient.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.UIDList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.NeedSendNotice = 'NeedSendNotice' in params ? params.NeedSendNotice : null;
+        this.NotifyWay = 'NotifyWay' in params ? params.NotifyWay : null;
+        this.PersonInterval = 'PersonInterval' in params ? params.PersonInterval : null;
+        this.ReceiverGroupList = 'ReceiverGroupList' in params ? params.ReceiverGroupList : null;
+        this.ReceiverType = 'ReceiverType' in params ? params.ReceiverType : null;
+        this.ReceiverUserList = 'ReceiverUserList' in params ? params.ReceiverUserList : null;
+        this.RecoverNotify = 'RecoverNotify' in params ? params.RecoverNotify : null;
+        this.RoundInterval = 'RoundInterval' in params ? params.RoundInterval : null;
+        this.RoundNumber = 'RoundNumber' in params ? params.RoundNumber : null;
+        this.SendFor = 'SendFor' in params ? params.SendFor : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.UIDList = 'UIDList' in params ? params.UIDList : null;
 
     }
 }
@@ -9247,7 +9912,8 @@ module.exports = {
     DescribePolicyGroupInfoResponse: DescribePolicyGroupInfoResponse,
     ModifyAlarmPolicyNoticeRequest: ModifyAlarmPolicyNoticeRequest,
     DeleteAlarmPolicyRequest: DeleteAlarmPolicyRequest,
-    PutMonitorDataRequest: PutMonitorDataRequest,
+    EventCondition: EventCondition,
+    DescribeConditionsTemplateListRequest: DescribeConditionsTemplateListRequest,
     CreatePolicyGroupResponse: CreatePolicyGroupResponse,
     ModifyAlarmPolicyTasksResponse: ModifyAlarmPolicyTasksResponse,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
@@ -9265,6 +9931,7 @@ module.exports = {
     InstanceGroup: InstanceGroup,
     DescribePolicyConditionListRequest: DescribePolicyConditionListRequest,
     DeletePolicyGroupResponse: DeletePolicyGroupResponse,
+    DescribeAccidentEventListResponse: DescribeAccidentEventListResponse,
     DescribeMonitorTypesRequest: DescribeMonitorTypesRequest,
     DescribeAlarmNoticesResponse: DescribeAlarmNoticesResponse,
     ModifyAlarmPolicyTasksRequest: ModifyAlarmPolicyTasksRequest,
@@ -9285,6 +9952,7 @@ module.exports = {
     DescribeProductEventListEventsDimensions: DescribeProductEventListEventsDimensions,
     ModifyAlarmPolicyConditionResponse: ModifyAlarmPolicyConditionResponse,
     Dimension: Dimension,
+    TemplateGroup: TemplateGroup,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
     Point: Point,
     ModifyPolicyGroupEventCondition: ModifyPolicyGroupEventCondition,
@@ -9310,24 +9978,28 @@ module.exports = {
     AlarmEvent: AlarmEvent,
     ModifyPolicyGroupResponse: ModifyPolicyGroupResponse,
     DescribePolicyConditionListConfigManualCalcType: DescribePolicyConditionListConfigManualCalcType,
+    Condition: Condition,
     DeletePolicyGroupRequest: DeletePolicyGroupRequest,
     DescribePolicyGroupInfoCondition: DescribePolicyGroupInfoCondition,
     DescribeBindingPolicyObjectListResponse: DescribeBindingPolicyObjectListResponse,
     DescribePolicyGroupInfoConditionTpl: DescribePolicyGroupInfoConditionTpl,
     DescribeBindingPolicyObjectListRequest: DescribeBindingPolicyObjectListRequest,
     UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
+    PutMonitorDataRequest: PutMonitorDataRequest,
     DescribeProductEventListEvents: DescribeProductEventListEvents,
     DeleteAlarmNoticesRequest: DeleteAlarmNoticesRequest,
     DescribePolicyConditionListConfigManualPeriodNum: DescribePolicyConditionListConfigManualPeriodNum,
     DescribeAllNamespacesRequest: DescribeAllNamespacesRequest,
+    PolicyGroup: PolicyGroup,
     DescribeAlarmMetricsResponse: DescribeAlarmMetricsResponse,
     DescribePolicyGroupListGroupInstanceGroup: DescribePolicyGroupListGroupInstanceGroup,
     DescribeAlarmPoliciesRequest: DescribeAlarmPoliciesRequest,
-    DescribeAccidentEventListResponse: DescribeAccidentEventListResponse,
+    DescribeConditionsTemplateListResponse: DescribeConditionsTemplateListResponse,
     DescribePolicyConditionListConfigManualStatType: DescribePolicyConditionListConfigManualStatType,
     ModifyAlarmPolicyInfoResponse: ModifyAlarmPolicyInfoResponse,
     AlarmNotice: AlarmNotice,
     MetricConfig: MetricConfig,
+    PolicyGroupReceiverInfo: PolicyGroupReceiverInfo,
     DescribeAlarmEventsRequest: DescribeAlarmEventsRequest,
     MidQueryCondition: MidQueryCondition,
     ModifyAlarmNoticeResponse: ModifyAlarmNoticeResponse,

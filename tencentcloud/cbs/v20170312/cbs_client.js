@@ -31,15 +31,17 @@ const DescribeDisksRequest = models.DescribeDisksRequest;
 const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const AttachDisksResponse = models.AttachDisksResponse;
 const Policy = models.Policy;
-const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
+const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
 const InquirePriceModifyDiskExtraPerformanceRequest = models.InquirePriceModifyDiskExtraPerformanceRequest;
 const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
 const DescribeSnapshotSharePermissionRequest = models.DescribeSnapshotSharePermissionRequest;
+const CopySnapshotCrossRegionsResponse = models.CopySnapshotCrossRegionsResponse;
 const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
 const ModifyDiskExtraPerformanceResponse = models.ModifyDiskExtraPerformanceResponse;
 const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
+const SnapshotCopyResult = models.SnapshotCopyResult;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
 const DiskConfig = models.DiskConfig;
 const BindAutoSnapshotPolicyRequest = models.BindAutoSnapshotPolicyRequest;
@@ -55,8 +57,9 @@ const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
 const ApplySnapshotResponse = models.ApplySnapshotResponse;
 const DeleteAutoSnapshotPoliciesResponse = models.DeleteAutoSnapshotPoliciesResponse;
 const DescribeDisksResponse = models.DescribeDisksResponse;
-const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
+const CopySnapshotCrossRegionsRequest = models.CopySnapshotCrossRegionsRequest;
 const PrepayPrice = models.PrepayPrice;
+const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
 const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
 const DetachDisksResponse = models.DetachDisksResponse;
 const ModifyDiskExtraPerformanceRequest = models.ModifyDiskExtraPerformanceRequest;
@@ -118,6 +121,20 @@ class CbsClient extends AbstractClient {
     ModifyDiskExtraPerformance(req, cb) {
         let resp = new ModifyDiskExtraPerformanceResponse();
         this.request("ModifyDiskExtraPerformance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to replicate a snapshot to another region.
+
+* This is an async API. A new snapshot ID is issued when the cross-region replication task is generated. It does not mean that the snapshot has been replicated successfully. You can all the [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1) API in the destination region to check for this snapshot. If the snapshot status is `NORMAL`, the snapshot is replicated successfully.
+* The snapshot cross-region replication service will be commercialized in the Q3 of 2022. We will notify users about the commercialization in advance. Please check your messages in the Message Center.
+     * @param {CopySnapshotCrossRegionsRequest} req
+     * @param {function(string, CopySnapshotCrossRegionsResponse):void} cb
+     * @public
+     */
+    CopySnapshotCrossRegions(req, cb) {
+        let resp = new CopySnapshotCrossRegionsResponse();
+        this.request("CopySnapshotCrossRegions", req, resp, cb);
     }
 
     /**

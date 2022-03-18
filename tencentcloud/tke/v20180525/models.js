@@ -3374,6 +3374,34 @@ class DescribeClusterAuthenticationOptionsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTKEEdgeScript response structure.
+ * @class
+ */
+class DescribeTKEEdgeScriptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClusterStatus request structure.
  * @class
  */
@@ -4724,8 +4752,8 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-30 characters long and contain at least two of the following types: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-30 characters long and contain at least three of the following categories: [a-z], [A-Z], [0-9] and [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Login password of the instance. <br><li>For Linux instances, the password must include 8-30 characters, and contain at least two of the following character sets: [a-z], [A-Z], [0-9] and [()\`~!@#$%^&*-+=|{}[]:;',.?/]. <br><li>For Windows instances, the password must include 12-30 characters, and contain at least three of the following character sets: [a-z], [A-Z], [0-9] and [()\`~!@#$%^&*-+=|{}[]:;',.?/]. <br><br>If it's not specified, the user needs to set the login password using the **Reset password** option in the CVM console or calling the API `ResetInstancesPassword` to complete the creation of the CVM instance(s).
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Password = null;
@@ -7693,6 +7721,55 @@ The array length of `InstanceAdvancedSettingsOverride` should be the same as the
 }
 
 /**
+ * DescribeTKEEdgeScript request structure.
+ * @class
+ */
+class DescribeTKEEdgeScriptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * ENI
+         * @type {string || null}
+         */
+        this.Interface = null;
+
+        /**
+         * Name of the name
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Node configuration in JSON format 
+         * @type {string || null}
+         */
+        this.Config = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Interface = 'Interface' in params ? params.Interface : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.Config = 'Config' in params ? params.Config : null;
+
+    }
+}
+
+/**
  * Cluster auto scaling configuration
  * @class
  */
@@ -9483,6 +9560,7 @@ module.exports = {
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     DescribeClusterAuthenticationOptionsRequest: DescribeClusterAuthenticationOptionsRequest,
+    DescribeTKEEdgeScriptResponse: DescribeTKEEdgeScriptResponse,
     DescribeClusterStatusRequest: DescribeClusterStatusRequest,
     VersionInstance: VersionInstance,
     DescribeClusterStatusResponse: DescribeClusterStatusResponse,
@@ -9564,6 +9642,7 @@ module.exports = {
     ModifyClusterAsGroupOptionAttributeResponse: ModifyClusterAsGroupOptionAttributeResponse,
     DescribePrometheusInstanceResponse: DescribePrometheusInstanceResponse,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
+    DescribeTKEEdgeScriptRequest: DescribeTKEEdgeScriptRequest,
     ClusterAsGroupOption: ClusterAsGroupOption,
     AddVpcCniSubnetsResponse: AddVpcCniSubnetsResponse,
     DescribeClusterNodePoolsRequest: DescribeClusterNodePoolsRequest,

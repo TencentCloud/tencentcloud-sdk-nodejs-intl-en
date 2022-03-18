@@ -17,7 +17,7 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * This parameter describes the configuration of automatically initializing and mounting the cloud disk to the CVM when purchasing a new cloud disk.
+ * Describes how a newly purchased cloud disk is initialized and mounted to a CVM
  * @class
  */
 class AutoMountConfiguration extends  AbstractModel {
@@ -666,10 +666,10 @@ class Policy extends  AbstractModel {
 }
 
 /**
- * ModifySnapshotsSharePermission response structure.
+ * ModifySnapshotAttribute response structure.
  * @class
  */
-class ModifySnapshotsSharePermissionResponse extends  AbstractModel {
+class ModifySnapshotAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -878,6 +878,49 @@ class DescribeSnapshotSharePermissionRequest extends  AbstractModel {
 }
 
 /**
+ * CopySnapshotCrossRegions response structure.
+ * @class
+ */
+class CopySnapshotCrossRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Result of the cross-region replication task. The ID of the new snapshot replica is returned if the request succeeds. Otherwise `Error` is returned.
+         * @type {Array.<SnapshotCopyResult> || null}
+         */
+        this.SnapshotCopyResultSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SnapshotCopyResultSet) {
+            this.SnapshotCopyResultSet = new Array();
+            for (let z in params.SnapshotCopyResultSet) {
+                let obj = new SnapshotCopyResult();
+                obj.deserialize(params.SnapshotCopyResultSet[z]);
+                this.SnapshotCopyResultSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAutoSnapshotPolicyAttribute response structure.
  * @class
  */
@@ -957,6 +1000,55 @@ class UnbindAutoSnapshotPolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Result of the cross-region replication task
+ * @class
+ */
+class SnapshotCopyResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the snapshot replica
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * Error message. It’s null if the request succeeds.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Error code. It’s `Success` if the request succeeds.
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * Destination region of the replication task
+         * @type {string || null}
+         */
+        this.DestinationRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.DestinationRegion = 'DestinationRegion' in params ? params.DestinationRegion : null;
 
     }
 }
@@ -1644,18 +1736,30 @@ class DescribeDisksResponse extends  AbstractModel {
 }
 
 /**
- * ModifySnapshotAttribute response structure.
+ * CopySnapshotCrossRegions request structure.
  * @class
  */
-class ModifySnapshotAttributeResponse extends  AbstractModel {
+class CopySnapshotCrossRegionsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Destination regions of the replication task. You can query the value of regions by calling [DescribeRegions](https://intl.cloud.tencent.com/document/product/213/9456?from_cn_redirect=1) API. Note that you can only specify regions that support snapshots.
+         * @type {Array.<string> || null}
+         */
+        this.DestinationRegions = null;
+
+        /**
+         * Snapshot ID, which can be queried via the [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1) API.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SnapshotId = null;
+
+        /**
+         * Name of the snapshot replica. If it’s not specified, it defaults to “Copied [source snapshot ID from [region name]”
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
 
     }
 
@@ -1666,7 +1770,9 @@ class ModifySnapshotAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DestinationRegions = 'DestinationRegions' in params ? params.DestinationRegions : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
 
     }
 }
@@ -1756,6 +1862,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
         this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
         this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
+
+    }
+}
+
+/**
+ * ModifySnapshotsSharePermission response structure.
+ * @class
+ */
+class ModifySnapshotsSharePermissionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4048,15 +4182,17 @@ module.exports = {
     DescribeInstancesDiskNumRequest: DescribeInstancesDiskNumRequest,
     AttachDisksResponse: AttachDisksResponse,
     Policy: Policy,
-    ModifySnapshotsSharePermissionResponse: ModifySnapshotsSharePermissionResponse,
+    ModifySnapshotAttributeResponse: ModifySnapshotAttributeResponse,
     InquirePriceModifyDiskExtraPerformanceRequest: InquirePriceModifyDiskExtraPerformanceRequest,
     GetSnapOverviewRequest: GetSnapOverviewRequest,
     DescribeSnapshotOperationLogsRequest: DescribeSnapshotOperationLogsRequest,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
     DescribeSnapshotSharePermissionRequest: DescribeSnapshotSharePermissionRequest,
+    CopySnapshotCrossRegionsResponse: CopySnapshotCrossRegionsResponse,
     ModifyAutoSnapshotPolicyAttributeResponse: ModifyAutoSnapshotPolicyAttributeResponse,
     ModifyDiskExtraPerformanceResponse: ModifyDiskExtraPerformanceResponse,
     UnbindAutoSnapshotPolicyResponse: UnbindAutoSnapshotPolicyResponse,
+    SnapshotCopyResult: SnapshotCopyResult,
     InquiryPriceCreateDisksResponse: InquiryPriceCreateDisksResponse,
     DiskConfig: DiskConfig,
     BindAutoSnapshotPolicyRequest: BindAutoSnapshotPolicyRequest,
@@ -4072,8 +4208,9 @@ module.exports = {
     ApplySnapshotResponse: ApplySnapshotResponse,
     DeleteAutoSnapshotPoliciesResponse: DeleteAutoSnapshotPoliciesResponse,
     DescribeDisksResponse: DescribeDisksResponse,
-    ModifySnapshotAttributeResponse: ModifySnapshotAttributeResponse,
+    CopySnapshotCrossRegionsRequest: CopySnapshotCrossRegionsRequest,
     PrepayPrice: PrepayPrice,
+    ModifySnapshotsSharePermissionResponse: ModifySnapshotsSharePermissionResponse,
     DeleteSnapshotsResponse: DeleteSnapshotsResponse,
     DetachDisksResponse: DetachDisksResponse,
     ModifyDiskExtraPerformanceRequest: ModifyDiskExtraPerformanceRequest,

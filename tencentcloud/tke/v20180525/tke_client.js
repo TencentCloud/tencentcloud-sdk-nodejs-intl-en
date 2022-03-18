@@ -82,6 +82,7 @@ const UpgradeNodeResetParam = models.UpgradeNodeResetParam;
 const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const DescribeClusterAuthenticationOptionsRequest = models.DescribeClusterAuthenticationOptionsRequest;
+const DescribeTKEEdgeScriptResponse = models.DescribeTKEEdgeScriptResponse;
 const DescribeClusterStatusRequest = models.DescribeClusterStatusRequest;
 const VersionInstance = models.VersionInstance;
 const DescribeClusterStatusResponse = models.DescribeClusterStatusResponse;
@@ -163,6 +164,7 @@ const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
 const ModifyClusterAsGroupOptionAttributeResponse = models.ModifyClusterAsGroupOptionAttributeResponse;
 const DescribePrometheusInstanceResponse = models.DescribePrometheusInstanceResponse;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
+const DescribeTKEEdgeScriptRequest = models.DescribeTKEEdgeScriptRequest;
 const ClusterAsGroupOption = models.ClusterAsGroupOption;
 const AddVpcCniSubnetsResponse = models.AddVpcCniSubnetsResponse;
 const DescribeClusterNodePoolsRequest = models.DescribeClusterNodePoolsRequest;
@@ -904,6 +906,17 @@ class TkeClient extends AbstractClient {
     DescribeClusterRoutes(req, cb) {
         let resp = new DescribeClusterRoutesResponse();
         this.request("DescribeClusterRoutes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the URL of TKE edge script.
+     * @param {DescribeTKEEdgeScriptRequest} req
+     * @param {function(string, DescribeTKEEdgeScriptResponse):void} cb
+     * @public
+     */
+    DescribeTKEEdgeScript(req, cb) {
+        let resp = new DescribeTKEEdgeScriptResponse();
+        this.request("DescribeTKEEdgeScript", req, resp, cb);
     }
 
 

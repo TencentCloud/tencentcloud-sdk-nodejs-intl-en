@@ -20,10 +20,12 @@ const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const SetAutoRenewFlagRequest = models.SetAutoRenewFlagRequest;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeDBXlogsRequest = models.DescribeDBXlogsRequest;
+const CreateReadOnlyGroupNetworkAccessRequest = models.CreateReadOnlyGroupNetworkAccessRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DeleteReadOnlyGroupResponse = models.DeleteReadOnlyGroupResponse;
 const CreateInstancesRequest = models.CreateInstancesRequest;
 const SpecItemInfo = models.SpecItemInfo;
+const CreateDBInstanceNetworkAccessResponse = models.CreateDBInstanceNetworkAccessResponse;
 const DescribeAvailableRecoveryTimeResponse = models.DescribeAvailableRecoveryTimeResponse;
 const ModifyDBInstanceReadOnlyGroupResponse = models.ModifyDBInstanceReadOnlyGroupResponse;
 const CloneDBInstanceRequest = models.CloneDBInstanceRequest;
@@ -41,6 +43,7 @@ const RebalanceReadOnlyGroupRequest = models.RebalanceReadOnlyGroupRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const DBInstanceNetInfo = models.DBInstanceNetInfo;
 const ModifyDBInstanceDeploymentRequest = models.ModifyDBInstanceDeploymentRequest;
+const DeleteReadOnlyGroupNetworkAccessRequest = models.DeleteReadOnlyGroupNetworkAccessRequest;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const NormalQueryItem = models.NormalQueryItem;
@@ -56,6 +59,7 @@ const DurationAnalysis = models.DurationAnalysis;
 const DescribeDBInstanceParametersRequest = models.DescribeDBInstanceParametersRequest;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
+const CreateDBInstanceNetworkAccessRequest = models.CreateDBInstanceNetworkAccessRequest;
 const ModifySwitchTimePeriodResponse = models.ModifySwitchTimePeriodResponse;
 const DisIsolateDBInstancesRequest = models.DisIsolateDBInstancesRequest;
 const ServerlessDBInstanceNetInfo = models.ServerlessDBInstanceNetInfo;
@@ -73,6 +77,7 @@ const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const ReadOnlyGroup = models.ReadOnlyGroup;
 const PgDeal = models.PgDeal;
+const DeleteReadOnlyGroupNetworkAccessResponse = models.DeleteReadOnlyGroupNetworkAccessResponse;
 const DescribeDBErrlogsRequest = models.DescribeDBErrlogsRequest;
 const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const ServerlessDBAccount = models.ServerlessDBAccount;
@@ -88,6 +93,8 @@ const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeSlowQueryListResponse = models.DescribeSlowQueryListResponse;
 const ServerlessDBInstance = models.ServerlessDBInstance;
 const CreateReadOnlyGroupRequest = models.CreateReadOnlyGroupRequest;
+const CreateReadOnlyGroupNetworkAccessResponse = models.CreateReadOnlyGroupNetworkAccessResponse;
+const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
 const DescribeParamsEventResponse = models.DescribeParamsEventResponse;
 const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
 const EventItem = models.EventItem;
@@ -103,9 +110,10 @@ const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAc
 const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const DescribeSlowQueryAnalysisRequest = models.DescribeSlowQueryAnalysisRequest;
 const ErrLogDetail = models.ErrLogDetail;
-const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
+const DBBackup = models.DBBackup;
 const IsolateDBInstancesRequest = models.IsolateDBInstancesRequest;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
+const DeleteDBInstanceNetworkAccessRequest = models.DeleteDBInstanceNetworkAccessRequest;
 const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const DeleteReadOnlyGroupRequest = models.DeleteReadOnlyGroupRequest;
@@ -125,16 +133,16 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const CreateServerlessDBInstanceResponse = models.CreateServerlessDBInstanceResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
-const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const ModifyBackupPlanResponse = models.ModifyBackupPlanResponse;
 const CreateServerlessDBInstanceRequest = models.CreateServerlessDBInstanceRequest;
 const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
 const CreateReadOnlyGroupResponse = models.CreateReadOnlyGroupResponse;
+const DeleteDBInstanceNetworkAccessResponse = models.DeleteDBInstanceNetworkAccessResponse;
 const DeleteServerlessDBInstanceRequest = models.DeleteServerlessDBInstanceRequest;
 const ModifyReadOnlyGroupConfigResponse = models.ModifyReadOnlyGroupConfigResponse;
 const AccountInfo = models.AccountInfo;
-const DBBackup = models.DBBackup;
+const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
 const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
 const ModifyBackupPlanRequest = models.ModifyBackupPlanRequest;
 const ParamEntry = models.ParamEntry;
@@ -175,6 +183,17 @@ class PostgresClient extends AbstractClient {
     }
     
     /**
+     * This API is used to add a network for an RO group.
+     * @param {CreateReadOnlyGroupNetworkAccessRequest} req
+     * @param {function(string, CreateReadOnlyGroupNetworkAccessResponse):void} cb
+     * @public
+     */
+    CreateReadOnlyGroupNetworkAccess(req, cb) {
+        let resp = new CreateReadOnlyGroupNetworkAccessResponse();
+        this.request("CreateReadOnlyGroupNetworkAccess", req, resp, cb);
+    }
+
+    /**
      * This API is used to transfer an instance to another project.
      * @param {ModifyDBInstancesProjectRequest} req
      * @param {function(string, ModifyDBInstancesProjectResponse):void} cb
@@ -194,6 +213,39 @@ class PostgresClient extends AbstractClient {
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
         this.request("DescribeOrders", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of one or more instances.
+     * @param {DescribeDBInstancesRequest} req
+     * @param {function(string, DescribeDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeDBInstances(req, cb) {
+        let resp = new DescribeDBInstancesResponse();
+        this.request("DescribeDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a network of an RO group.
+     * @param {DeleteReadOnlyGroupNetworkAccessRequest} req
+     * @param {function(string, DeleteReadOnlyGroupNetworkAccessResponse):void} cb
+     * @public
+     */
+    DeleteReadOnlyGroupNetworkAccess(req, cb) {
+        let resp = new DeleteReadOnlyGroupNetworkAccessResponse();
+        this.request("DeleteReadOnlyGroupNetworkAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade instance configurations.
+     * @param {UpgradeDBInstanceRequest} req
+     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstance(req, cb) {
+        let resp = new UpgradeDBInstanceResponse();
+        this.request("UpgradeDBInstance", req, resp, cb);
     }
 
     /**
@@ -307,14 +359,25 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of modifiable parameters of an instance.
-     * @param {DescribeDBInstanceParametersRequest} req
-     * @param {function(string, DescribeDBInstanceParametersResponse):void} cb
+     * This API is used to enable public network access.
+     * @param {OpenDBExtranetAccessRequest} req
+     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
      * @public
      */
-    DescribeDBInstanceParameters(req, cb) {
-        let resp = new DescribeDBInstanceParametersResponse();
-        this.request("DescribeDBInstanceParameters", req, resp, cb);
+    OpenDBExtranetAccess(req, cb) {
+        let resp = new OpenDBExtranetAccessResponse();
+        this.request("OpenDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a network of an instance.
+     * @param {DeleteDBInstanceNetworkAccessRequest} req
+     * @param {function(string, DeleteDBInstanceNetworkAccessResponse):void} cb
+     * @public
+     */
+    DeleteDBInstanceNetworkAccess(req, cb) {
+        let resp = new DeleteDBInstanceNetworkAccessResponse();
+        this.request("DeleteDBInstanceNetworkAccess", req, resp, cb);
     }
 
     /**
@@ -406,14 +469,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade instance configurations.
-     * @param {UpgradeDBInstanceRequest} req
-     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * This API is used to query the upgrade price of an instance.
+     * @param {InquiryPriceUpgradeDBInstanceRequest} req
+     * @param {function(string, InquiryPriceUpgradeDBInstanceResponse):void} cb
      * @public
      */
-    UpgradeDBInstance(req, cb) {
-        let resp = new UpgradeDBInstanceResponse();
-        this.request("UpgradeDBInstance", req, resp, cb);
+    InquiryPriceUpgradeDBInstance(req, cb) {
+        let resp = new InquiryPriceUpgradeDBInstanceResponse();
+        this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
     }
 
     /**
@@ -450,14 +513,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the details of one or more instances.
-     * @param {DescribeDBInstancesRequest} req
-     * @param {function(string, DescribeDBInstancesResponse):void} cb
+     * This API is used to get the list of modifiable parameters of an instance.
+     * @param {DescribeDBInstanceParametersRequest} req
+     * @param {function(string, DescribeDBInstanceParametersResponse):void} cb
      * @public
      */
-    DescribeDBInstances(req, cb) {
-        let resp = new DescribeDBInstancesResponse();
-        this.request("DescribeDBInstances", req, resp, cb);
+    DescribeDBInstanceParameters(req, cb) {
+        let resp = new DescribeDBInstanceParametersResponse();
+        this.request("DescribeDBInstanceParameters", req, resp, cb);
     }
 
     /**
@@ -480,17 +543,6 @@ class PostgresClient extends AbstractClient {
     RestartDBInstance(req, cb) {
         let resp = new RestartDBInstanceResponse();
         this.request("RestartDBInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to enable public network access.
-     * @param {OpenDBExtranetAccessRequest} req
-     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
-     * @public
-     */
-    OpenDBExtranetAccess(req, cb) {
-        let resp = new OpenDBExtranetAccessResponse();
-        this.request("OpenDBExtranetAccess", req, resp, cb);
     }
 
     /**
@@ -527,14 +579,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the upgrade price of an instance.
-     * @param {InquiryPriceUpgradeDBInstanceRequest} req
-     * @param {function(string, InquiryPriceUpgradeDBInstanceResponse):void} cb
+     * This API is used to add a network for an instance.
+     * @param {CreateDBInstanceNetworkAccessRequest} req
+     * @param {function(string, CreateDBInstanceNetworkAccessResponse):void} cb
      * @public
      */
-    InquiryPriceUpgradeDBInstance(req, cb) {
-        let resp = new InquiryPriceUpgradeDBInstanceResponse();
-        this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
+    CreateDBInstanceNetworkAccess(req, cb) {
+        let resp = new CreateDBInstanceNetworkAccessResponse();
+        this.request("CreateDBInstanceNetworkAccess", req, resp, cb);
     }
 
     /**

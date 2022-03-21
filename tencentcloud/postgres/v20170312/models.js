@@ -305,6 +305,62 @@ class DescribeDBXlogsRequest extends  AbstractModel {
 }
 
 /**
+ * CreateReadOnlyGroupNetworkAccess request structure.
+ * @class
+ */
+class CreateReadOnlyGroupNetworkAccessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO group ID in the format of pgro-4t9c6g7k.
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupId = null;
+
+        /**
+         * Unified VPC ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Whether to manually assign the VIP. Valid values: `true` (manually assign), `false` (automatically assign).
+         * @type {boolean || null}
+         */
+        this.IsAssignVip = null;
+
+        /**
+         * Target VIP.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.IsAssignVip = 'IsAssignVip' in params ? params.IsAssignVip : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+
+    }
+}
+
+/**
  * DescribeAccounts request structure.
  * @class
  */
@@ -704,6 +760,42 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Type = 'Type' in params ? params.Type : null;
         this.MajorVersion = 'MajorVersion' in params ? params.MajorVersion : null;
         this.KernelVersion = 'KernelVersion' in params ? params.KernelVersion : null;
+
+    }
+}
+
+/**
+ * CreateDBInstanceNetworkAccess response structure.
+ * @class
+ */
+class CreateDBInstanceNetworkAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1576,6 +1668,55 @@ class ModifyDBInstanceDeploymentRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteReadOnlyGroupNetworkAccess request structure.
+ * @class
+ */
+class DeleteReadOnlyGroupNetworkAccessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO group ID in the format of pgro-4t9c6g7k.
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupId = null;
+
+        /**
+         * Unified VPC ID. If you want to delete the classic network, set the parameter to `0`.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID. If you want to delete the classic network, set the parameter to `0`.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Target VIP.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+
+    }
+}
+
+/**
  * AZ information such as number and status
  * @class
  */
@@ -2289,6 +2430,62 @@ class InquiryPriceCreateDBInstancesResponse extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateDBInstanceNetworkAccess request structure.
+ * @class
+ */
+class CreateDBInstanceNetworkAccessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of postgres-6bwgamo3.
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Unified VPC ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Whether to manually assign the VIP. Valid values: `true` (manually assign), `false` (automatically assign).
+         * @type {boolean || null}
+         */
+        this.IsAssignVip = null;
+
+        /**
+         * Target VIP.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.IsAssignVip = 'IsAssignVip' in params ? params.IsAssignVip : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
 
     }
 }
@@ -3273,6 +3470,42 @@ class PgDeal extends  AbstractModel {
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
+
+    }
+}
+
+/**
+ * DeleteReadOnlyGroupNetworkAccess response structure.
+ * @class
+ */
+class DeleteReadOnlyGroupNetworkAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4267,6 +4500,93 @@ class CreateReadOnlyGroupRequest extends  AbstractModel {
 }
 
 /**
+ * CreateReadOnlyGroupNetworkAccess response structure.
+ * @class
+ */
+class CreateReadOnlyGroupNetworkAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeServerlessDBInstances response structure.
+ * @class
+ */
+class DescribeServerlessDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of query results
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Query results
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ServerlessDBInstance> || null}
+         */
+        this.DBInstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DBInstanceSet) {
+            this.DBInstanceSet = new Array();
+            for (let z in params.DBInstanceSet) {
+                let obj = new ServerlessDBInstance();
+                obj.deserialize(params.DBInstanceSet[z]);
+                this.DBInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeParamsEvent response structure.
  * @class
  */
@@ -5008,31 +5328,85 @@ class ErrLogDetail extends  AbstractModel {
 }
 
 /**
- * DescribeServerlessDBInstances response structure.
+ * Database backup information
  * @class
  */
-class DescribeServerlessDBInstancesResponse extends  AbstractModel {
+class DBBackup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The number of query results
+         * Unique backup file ID
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Id = null;
 
         /**
-         * Query results
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<ServerlessDBInstance> || null}
-         */
-        this.DBInstanceSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * File generation start time
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.StartTime = null;
+
+        /**
+         * File generation end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * File size in KB
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * Policy (0: instance backup, 1: multi-database backup)
+         * @type {number || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * Type (0: scheduled)
+         * @type {number || null}
+         */
+        this.Way = null;
+
+        /**
+         * Backup mode (1: full)
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Status (1: creating, 2: success, 3: failure)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * DB list
+         * @type {Array.<string> || null}
+         */
+        this.DbList = null;
+
+        /**
+         * Download address on private network
+         * @type {string || null}
+         */
+        this.InternalAddr = null;
+
+        /**
+         * Download address on public network
+         * @type {string || null}
+         */
+        this.ExternalAddr = null;
+
+        /**
+         * Backup set ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SetId = null;
 
     }
 
@@ -5043,17 +5417,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.DBInstanceSet) {
-            this.DBInstanceSet = new Array();
-            for (let z in params.DBInstanceSet) {
-                let obj = new ServerlessDBInstance();
-                obj.deserialize(params.DBInstanceSet[z]);
-                this.DBInstanceSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.Way = 'Way' in params ? params.Way : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DbList = 'DbList' in params ? params.DbList : null;
+        this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
+        this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
+        this.SetId = 'SetId' in params ? params.SetId : null;
 
     }
 }
@@ -5131,6 +5506,55 @@ class InitDBInstancesRequest extends  AbstractModel {
         this.AdminName = 'AdminName' in params ? params.AdminName : null;
         this.AdminPassword = 'AdminPassword' in params ? params.AdminPassword : null;
         this.Charset = 'Charset' in params ? params.Charset : null;
+
+    }
+}
+
+/**
+ * DeleteDBInstanceNetworkAccess request structure.
+ * @class
+ */
+class DeleteDBInstanceNetworkAccessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of postgres-6bwgamo3.
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Unified VPC ID. If you want to delete the classic network, set the parameter to `0`.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID. If you want to delete the classic network, set the parameter to `0`.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Target VIP.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
 
     }
 }
@@ -6253,48 +6677,6 @@ class DescribeOrdersRequest extends  AbstractModel {
 }
 
 /**
- * ModifyAccountRemark request structure.
- * @class
- */
-class ModifyAccountRemarkRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID in the format of postgres-4wdeb0zv
-         * @type {string || null}
-         */
-        this.DBInstanceId = null;
-
-        /**
-         * Instance username
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * New remarks corresponding to user `UserName`
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-
-    }
-}
-
-/**
  * CloseDBExtranetAccess request structure.
  * @class
  */
@@ -6521,6 +6903,42 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DeleteDBInstanceNetworkAccess response structure.
+ * @class
+ */
+class DeleteDBInstanceNetworkAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteServerlessDBInstance request structure.
  * @class
  */
@@ -6647,85 +7065,30 @@ class AccountInfo extends  AbstractModel {
 }
 
 /**
- * Database backup information
+ * ModifyAccountRemark request structure.
  * @class
  */
-class DBBackup extends  AbstractModel {
+class ModifyAccountRemarkRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique backup file ID
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * File generation start time
+         * Instance ID in the format of postgres-4wdeb0zv
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.DBInstanceId = null;
 
         /**
-         * File generation end time
+         * Instance username
          * @type {string || null}
          */
-        this.EndTime = null;
+        this.UserName = null;
 
         /**
-         * File size in KB
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * Policy (0: instance backup, 1: multi-database backup)
-         * @type {number || null}
-         */
-        this.Strategy = null;
-
-        /**
-         * Type (0: scheduled)
-         * @type {number || null}
-         */
-        this.Way = null;
-
-        /**
-         * Backup mode (1: full)
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Status (1: creating, 2: success, 3: failure)
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * DB list
-         * @type {Array.<string> || null}
-         */
-        this.DbList = null;
-
-        /**
-         * Download address on private network
+         * New remarks corresponding to user `UserName`
          * @type {string || null}
          */
-        this.InternalAddr = null;
-
-        /**
-         * Download address on public network
-         * @type {string || null}
-         */
-        this.ExternalAddr = null;
-
-        /**
-         * Backup set ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SetId = null;
+        this.Remark = null;
 
     }
 
@@ -6736,18 +7099,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Strategy = 'Strategy' in params ? params.Strategy : null;
-        this.Way = 'Way' in params ? params.Way : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.DbList = 'DbList' in params ? params.DbList : null;
-        this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
-        this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
-        this.SetId = 'SetId' in params ? params.SetId : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -8026,10 +8380,12 @@ module.exports = {
     SetAutoRenewFlagRequest: SetAutoRenewFlagRequest,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     DescribeDBXlogsRequest: DescribeDBXlogsRequest,
+    CreateReadOnlyGroupNetworkAccessRequest: CreateReadOnlyGroupNetworkAccessRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     DeleteReadOnlyGroupResponse: DeleteReadOnlyGroupResponse,
     CreateInstancesRequest: CreateInstancesRequest,
     SpecItemInfo: SpecItemInfo,
+    CreateDBInstanceNetworkAccessResponse: CreateDBInstanceNetworkAccessResponse,
     DescribeAvailableRecoveryTimeResponse: DescribeAvailableRecoveryTimeResponse,
     ModifyDBInstanceReadOnlyGroupResponse: ModifyDBInstanceReadOnlyGroupResponse,
     CloneDBInstanceRequest: CloneDBInstanceRequest,
@@ -8047,6 +8403,7 @@ module.exports = {
     DescribeRegionsResponse: DescribeRegionsResponse,
     DBInstanceNetInfo: DBInstanceNetInfo,
     ModifyDBInstanceDeploymentRequest: ModifyDBInstanceDeploymentRequest,
+    DeleteReadOnlyGroupNetworkAccessRequest: DeleteReadOnlyGroupNetworkAccessRequest,
     ZoneInfo: ZoneInfo,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     NormalQueryItem: NormalQueryItem,
@@ -8062,6 +8419,7 @@ module.exports = {
     DescribeDBInstanceParametersRequest: DescribeDBInstanceParametersRequest,
     DescribeOrdersResponse: DescribeOrdersResponse,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
+    CreateDBInstanceNetworkAccessRequest: CreateDBInstanceNetworkAccessRequest,
     ModifySwitchTimePeriodResponse: ModifySwitchTimePeriodResponse,
     DisIsolateDBInstancesRequest: DisIsolateDBInstancesRequest,
     ServerlessDBInstanceNetInfo: ServerlessDBInstanceNetInfo,
@@ -8079,6 +8437,7 @@ module.exports = {
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     ReadOnlyGroup: ReadOnlyGroup,
     PgDeal: PgDeal,
+    DeleteReadOnlyGroupNetworkAccessResponse: DeleteReadOnlyGroupNetworkAccessResponse,
     DescribeDBErrlogsRequest: DescribeDBErrlogsRequest,
     DestroyDBInstanceRequest: DestroyDBInstanceRequest,
     ServerlessDBAccount: ServerlessDBAccount,
@@ -8094,6 +8453,8 @@ module.exports = {
     DescribeSlowQueryListResponse: DescribeSlowQueryListResponse,
     ServerlessDBInstance: ServerlessDBInstance,
     CreateReadOnlyGroupRequest: CreateReadOnlyGroupRequest,
+    CreateReadOnlyGroupNetworkAccessResponse: CreateReadOnlyGroupNetworkAccessResponse,
+    DescribeServerlessDBInstancesResponse: DescribeServerlessDBInstancesResponse,
     DescribeParamsEventResponse: DescribeParamsEventResponse,
     CloseServerlessDBExtranetAccessResponse: CloseServerlessDBExtranetAccessResponse,
     EventItem: EventItem,
@@ -8109,9 +8470,10 @@ module.exports = {
     InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
     DescribeSlowQueryAnalysisRequest: DescribeSlowQueryAnalysisRequest,
     ErrLogDetail: ErrLogDetail,
-    DescribeServerlessDBInstancesResponse: DescribeServerlessDBInstancesResponse,
+    DBBackup: DBBackup,
     IsolateDBInstancesRequest: IsolateDBInstancesRequest,
     InitDBInstancesRequest: InitDBInstancesRequest,
+    DeleteDBInstanceNetworkAccessRequest: DeleteDBInstanceNetworkAccessRequest,
     DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,
     DeleteReadOnlyGroupRequest: DeleteReadOnlyGroupRequest,
@@ -8131,16 +8493,16 @@ module.exports = {
     CreateServerlessDBInstanceResponse: CreateServerlessDBInstanceResponse,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeOrdersRequest: DescribeOrdersRequest,
-    ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     ModifyBackupPlanResponse: ModifyBackupPlanResponse,
     CreateServerlessDBInstanceRequest: CreateServerlessDBInstanceRequest,
     InquiryPriceRenewDBInstanceRequest: InquiryPriceRenewDBInstanceRequest,
     CreateReadOnlyGroupResponse: CreateReadOnlyGroupResponse,
+    DeleteDBInstanceNetworkAccessResponse: DeleteDBInstanceNetworkAccessResponse,
     DeleteServerlessDBInstanceRequest: DeleteServerlessDBInstanceRequest,
     ModifyReadOnlyGroupConfigResponse: ModifyReadOnlyGroupConfigResponse,
     AccountInfo: AccountInfo,
-    DBBackup: DBBackup,
+    ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
     DescribeDBErrlogsResponse: DescribeDBErrlogsResponse,
     ModifyBackupPlanRequest: ModifyBackupPlanRequest,
     ParamEntry: ParamEntry,

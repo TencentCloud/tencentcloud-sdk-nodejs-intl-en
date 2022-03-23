@@ -1050,7 +1050,7 @@ class DescribeSlowLogsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Offset. Minimum value: 0.
+         * Pagination offset, starting from `0`. Default value: `0`.
          * @type {number || null}
          */
         this.Offset = null;
@@ -4672,7 +4672,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.Cpu = null;
 
         /**
-         * Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes).
+         * Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes). Default value: `0`.
          * @type {number || null}
          */
         this.AutoSyncFlag = null;
@@ -5541,7 +5541,7 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * This parameter takes effect only when the ID of read-only replica is passed in. If this parameter is set to `False` or left empty, the security groups bound with the RO group of the read-only replica will be queried. If this parameter is set to `True`, the security groups bound with the read-only replica itself will be queried.
+         * This parameter takes effect only when the ID of a read-only instance is passed in. If the parameter is set to `False` or left empty, the security groups bound with the RO groups of the read-only instance can only be queried. If it is set to `True`, the security groups can be modified.
          * @type {boolean || null}
          */
         this.ForReadonlyInstance = null;
@@ -6038,25 +6038,25 @@ class DescribeBackupSummariesRequest extends  AbstractModel {
         this.Product = null;
 
         /**
-         * Pagination offset.
+         * Paginated query offset. Default value: `0`.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Paginated query limit. Default value: 20.
+         * Maximum entries returned per page, which ranges from 1 to 100. Default value: `20`.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Sorting criterion. Valid values: BackupVolume (backup capacity), DataBackupVolume (data backup capacity), BinlogBackupVolume (log backup capacity), AutoBackupVolume (automatic backup capacity), ManualBackupVolume (manual backup capacity).
+         * Sorting criterion. Valid values: `BackupVolume` (backup capacity), `DataBackupVolume` (data backup capacity), `BinlogBackupVolume` (log backup capacity), `AutoBackupVolume` (automatic backup capacity), `ManualBackupVolume` (manual backup capacity). Default value: `BackupVolume`.
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * Sorting order. Valid values: ASC (ascending), DESC (descending).
+         * Sorting order. Valid values: `ASC` (ascending), `DESC` (descending). Default value: `ASC`.
          * @type {string || null}
          */
         this.OrderDirection = null;
@@ -8650,7 +8650,7 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Instance name.
+         * The modified instance name.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -12128,7 +12128,7 @@ class RoInstanceInfo extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * RO instance status. Value range: 0 (creating), 1 (running), 4 (deleting)
+         * RO instance status. Valid values: `0` (creating), `1` (running), `3` (remote RO), `4` (deleting). When the `DescribeDBInstances` API is used to query the information of the source instance, if the source instance is associated with a remote read-only instance, the returned status value of the remote read-only instance always shows 3.
          * @type {number || null}
          */
         this.Status = null;
@@ -12477,8 +12477,8 @@ class ModifyAccountPrivilegesRequest extends  AbstractModel {
         this.Accounts = null;
 
         /**
-         * Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".
-Note: if this parameter is not passed in, it means to clear the permission.
+         * Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER","CREATE USER","RELOAD","REPLICATION CLIENT","REPLICATION SLAVE","UPDATE".
+Note: If this parameter is not passed in, it means to clear the permission.
          * @type {Array.<string> || null}
          */
         this.GlobalPrivileges = null;

@@ -86,6 +86,7 @@ const TextWatermarkTemplateInputForUpdate = models.TextWatermarkTemplateInputFor
 const DeleteSuperPlayerConfigRequest = models.DeleteSuperPlayerConfigRequest;
 const AiReviewTerrorismOcrTaskInput = models.AiReviewTerrorismOcrTaskInput;
 const AiRecognitionTaskOcrWordsResultInput = models.AiRecognitionTaskOcrWordsResultInput;
+const ModifyMediaStorageClassResponse = models.ModifyMediaStorageClassResponse;
 const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
 const CreateProcedureTemplateRequest = models.CreateProcedureTemplateRequest;
 const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
@@ -212,6 +213,7 @@ const ModifySnapshotByTimeOffsetTemplateResponse = models.ModifySnapshotByTimeOf
 const AiRecognitionTaskObjectResult = models.AiRecognitionTaskObjectResult;
 const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const SearchMediaResponse = models.SearchMediaResponse;
+const ModifyMediaStorageClassRequest = models.ModifyMediaStorageClassRequest;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const AiAnalysisTaskHighlightOutput = models.AiAnalysisTaskHighlightOutput;
 const MediaSubtitleInput = models.MediaSubtitleInput;
@@ -1041,6 +1043,29 @@ The advantage of temporary clipping is that the clipping operation is very "ligh
     LiveRealTimeClip(req, cb) {
         let resp = new LiveRealTimeClipResponse();
         this.request("LiveRealTimeClip", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the storage class of media files.
+If the current storage class is STANDARD, it can be changed to one of the following classes:
+<li>STANDARD_IA</li>
+<li>ARCHIVE</li>
+<li>DEEP ARCHIVE</li>
+If the current storage class is STANDARD_IA, it can be changed to one of the following classes:
+<li>STANDARD</li>
+<li>ARCHIVE</li>
+<li>DEEP ARCHIVE</li>
+If the current storage class is ARCHIVE, it can be changed to the following class:
+<li>STANDARD</li>
+If the current storage class is DEEP ARCHIVE, it can be changed to the following class:
+<li>STANDARD</li>
+     * @param {ModifyMediaStorageClassRequest} req
+     * @param {function(string, ModifyMediaStorageClassResponse):void} cb
+     * @public
+     */
+    ModifyMediaStorageClass(req, cb) {
+        let resp = new ModifyMediaStorageClassResponse();
+        this.request("ModifyMediaStorageClass", req, resp, cb);
     }
 
     /**

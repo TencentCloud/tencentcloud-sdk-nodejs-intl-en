@@ -23,7 +23,7 @@ const StreamVideoInfo = models.StreamVideoInfo;
 const CreateStreamLivePlanRequest = models.CreateStreamLivePlanRequest;
 const DescribeStreamLiveWatermarksResponse = models.DescribeStreamLiveWatermarksResponse;
 const DescribeStreamLiveInputRequest = models.DescribeStreamLiveInputRequest;
-const ModifyStreamLiveWatermarkRequest = models.ModifyStreamLiveWatermarkRequest;
+const CreateStreamLiveInputRequest = models.CreateStreamLiveInputRequest;
 const AudioPidSelectionInfo = models.AudioPidSelectionInfo;
 const AudioPipelineInputStatistics = models.AudioPipelineInputStatistics;
 const CreateStreamLivePlanResponse = models.CreateStreamLivePlanResponse;
@@ -52,10 +52,12 @@ const SDMCSettingsInfo = models.SDMCSettingsInfo;
 const DeleteStreamLiveInputSecurityGroupRequest = models.DeleteStreamLiveInputSecurityGroupRequest;
 const AttachedInput = models.AttachedInput;
 const DescribeStreamLiveWatermarksRequest = models.DescribeStreamLiveWatermarksRequest;
+const DescribeTranscodeDetailInfo = models.DescribeTranscodeDetailInfo;
 const TimeShiftSettingsInfo = models.TimeShiftSettingsInfo;
 const VideoTemplateInfo = models.VideoTemplateInfo;
 const TimingSettingsReq = models.TimingSettingsReq;
-const CreateStreamLiveInputRequest = models.CreateStreamLiveInputRequest;
+const ModifyStreamLiveWatermarkRequest = models.ModifyStreamLiveWatermarkRequest;
+const DescribeStreamLiveTranscodeDetailRequest = models.DescribeStreamLiveTranscodeDetailRequest;
 const DescribeStreamLiveChannelLogsResponse = models.DescribeStreamLiveChannelLogsResponse;
 const DescribeStreamLiveChannelInputStatisticsRequest = models.DescribeStreamLiveChannelInputStatisticsRequest;
 const PipelineLogInfo = models.PipelineLogInfo;
@@ -65,6 +67,7 @@ const FailOverSettings = models.FailOverSettings;
 const ChannelInputStatistics = models.ChannelInputStatistics;
 const HlsRemuxSettingsInfo = models.HlsRemuxSettingsInfo;
 const EventSettingsResp = models.EventSettingsResp;
+const TimingSettingsResp = models.TimingSettingsResp;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const StreamPackageSettingsInfo = models.StreamPackageSettingsInfo;
 const DescribeStreamLiveChannelsResponse = models.DescribeStreamLiveChannelsResponse;
@@ -76,7 +79,7 @@ const StreamLiveRegionInfo = models.StreamLiveRegionInfo;
 const DescribeStreamLiveChannelRequest = models.DescribeStreamLiveChannelRequest;
 const DescribeStreamLivePlansRequest = models.DescribeStreamLivePlansRequest;
 const CreateStreamLiveChannelRequest = models.CreateStreamLiveChannelRequest;
-const TimingSettingsResp = models.TimingSettingsResp;
+const DescribeStreamLiveTranscodeDetailResponse = models.DescribeStreamLiveTranscodeDetailResponse;
 const CreateStreamLiveWatermarkResponse = models.CreateStreamLiveWatermarkResponse;
 const DescribeStreamLiveInputsResponse = models.DescribeStreamLiveInputsResponse;
 const ModifyStreamLiveInputResponse = models.ModifyStreamLiveInputResponse;
@@ -241,6 +244,17 @@ class MdlClient extends AbstractClient {
     DescribeStreamLiveRegions(req, cb) {
         let resp = new DescribeStreamLiveRegionsResponse();
         this.request("DescribeStreamLiveRegions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the transcoding information of StreamLive streams.
+     * @param {DescribeStreamLiveTranscodeDetailRequest} req
+     * @param {function(string, DescribeStreamLiveTranscodeDetailResponse):void} cb
+     * @public
+     */
+    DescribeStreamLiveTranscodeDetail(req, cb) {
+        let resp = new DescribeStreamLiveTranscodeDetailResponse();
+        this.request("DescribeStreamLiveTranscodeDetail", req, resp, cb);
     }
 
     /**

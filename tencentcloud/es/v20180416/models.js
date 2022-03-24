@@ -3438,6 +3438,12 @@ class UpgradeInstanceRequest extends  AbstractModel {
          */
         this.UpgradeMode = null;
 
+        /**
+         * Whether to back up the cluster before version upgrade (no backup by default)
+         * @type {boolean || null}
+         */
+        this.CosBackup = null;
+
     }
 
     /**
@@ -3453,6 +3459,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
         this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
+        this.CosBackup = 'CosBackup' in params ? params.CosBackup : null;
 
     }
 }

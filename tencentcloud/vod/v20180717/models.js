@@ -4083,6 +4083,34 @@ class AiRecognitionTaskOcrWordsResultInput extends  AbstractModel {
 }
 
 /**
+ * ModifyMediaStorageClass response structure.
+ * @class
+ */
+class ModifyMediaStorageClassResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Input parameters for intelligent recognition of pornographic content
  * @class
  */
@@ -11084,6 +11112,66 @@ class SearchMediaResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyMediaStorageClass request structure.
+ * @class
+ */
+class ModifyMediaStorageClassRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique IDs of media files
+         * @type {Array.<string> || null}
+         */
+        this.FileIds = null;
+
+        /**
+         * The target storage class. Valid values:
+<li>STANDARD</li>
+<li>STANDARD_IA</li>
+<li>ARCHIVE</li>
+<li>DEEP_ARCHIVE</li>
+         * @type {string || null}
+         */
+        this.StorageClass = null;
+
+        /**
+         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The retrieval mode. When switching files from DEEP ARCHIVE or ARCHIVE to STANDARD, you need to specify the retrieval mode. For details, see [Data retrieval and retrieval mode](https://intl.cloud.tencent.com/document/product/266/43051#data-retrieval-and-retrieval-mode.3Ca-id.3D.22retake.22.3E.3C.2Fa.3E).
+If the current storage class is ARCHIVE, the valid values for this parameter are as follows:
+<li>Expedited</li>
+<li>Standard</li>
+<li>Bulk</li>
+If the current storage class is DEEP ARCHIVE, the valid values for this parameter are as follows:
+<li>Standard</li>
+<li>Bulk</li>
+         * @type {string || null}
+         */
+        this.RestoreTier = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileIds = 'FileIds' in params ? params.FileIds : null;
+        this.StorageClass = 'StorageClass' in params ? params.StorageClass : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.RestoreTier = 'RestoreTier' in params ? params.RestoreTier : null;
+
+    }
+}
+
+/**
  * Result information of intelligent tagging
  * @class
  */
@@ -12820,9 +12908,7 @@ class TEHDConfig extends  AbstractModel {
         super();
 
         /**
-         * TESHD type. Valid values:
-<li>TEHD-100: TESHD-100.</li>
-If this parameter is left blank, TESHD will not be enabled.
+         * TESHD transcoding type. Valid values: <li>TEHD-100</li> <li>OFF (default)</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -18735,6 +18821,13 @@ class AdaptiveStreamTemplate extends  AbstractModel {
          */
         this.RemoveVideo = null;
 
+        /**
+         * TESHD transcoding parameters
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {TEHDConfig || null}
+         */
+        this.TEHDConfig = null;
+
     }
 
     /**
@@ -18758,6 +18851,12 @@ class AdaptiveStreamTemplate extends  AbstractModel {
         }
         this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
         this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+
+        if (params.TEHDConfig) {
+            let obj = new TEHDConfig();
+            obj.deserialize(params.TEHDConfig)
+            this.TEHDConfig = obj;
+        }
 
     }
 }
@@ -20168,9 +20267,7 @@ class TEHDConfigForUpdate extends  AbstractModel {
         super();
 
         /**
-         * TESHD type. Valid values:
-<li>TEHD-100: TESHD-100.</li>
-If this parameter is left blank, no modification will be made.
+         * TESHD transcoding type. Valid values: <li>TEHD-100</li> <li>OFF (default)</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -30374,6 +30471,7 @@ module.exports = {
     DeleteSuperPlayerConfigRequest: DeleteSuperPlayerConfigRequest,
     AiReviewTerrorismOcrTaskInput: AiReviewTerrorismOcrTaskInput,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
+    ModifyMediaStorageClassResponse: ModifyMediaStorageClassResponse,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
     CreateProcedureTemplateRequest: CreateProcedureTemplateRequest,
     DescribeMediaProcessUsageDataRequest: DescribeMediaProcessUsageDataRequest,
@@ -30500,6 +30598,7 @@ module.exports = {
     AiRecognitionTaskObjectResult: AiRecognitionTaskObjectResult,
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     SearchMediaResponse: SearchMediaResponse,
+    ModifyMediaStorageClassRequest: ModifyMediaStorageClassRequest,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
     MediaSubtitleInput: MediaSubtitleInput,

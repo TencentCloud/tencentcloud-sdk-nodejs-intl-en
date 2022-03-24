@@ -5837,6 +5837,13 @@ Note: `null` may be returned for this field, indicating that no valid values can
          */
         this.AclRuleList = null;
 
+        /**
+         * Traffic throttling policy in topic dimension.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {InstanceQuotaConfigResp || null}
+         */
+        this.QuotaConfig = null;
+
     }
 
     /**
@@ -5876,6 +5883,12 @@ Note: `null` may be returned for this field, indicating that no valid values can
                 obj.deserialize(params.AclRuleList[z]);
                 this.AclRuleList.push(obj);
             }
+        }
+
+        if (params.QuotaConfig) {
+            let obj = new InstanceQuotaConfigResp();
+            obj.deserialize(params.QuotaConfig)
+            this.QuotaConfig = obj;
         }
 
     }
@@ -6885,6 +6898,18 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Production throttling in MB/sec.
+         * @type {number || null}
+         */
+        this.QuotaProducerByteRate = null;
+
+        /**
+         * Consumption throttling in MB/sec.
+         * @type {number || null}
+         */
+        this.QuotaConsumerByteRate = null;
+
     }
 
     /**
@@ -6917,6 +6942,8 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.QuotaProducerByteRate = 'QuotaProducerByteRate' in params ? params.QuotaProducerByteRate : null;
+        this.QuotaConsumerByteRate = 'QuotaConsumerByteRate' in params ? params.QuotaConsumerByteRate : null;
 
     }
 }
@@ -7430,6 +7457,43 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Traffic throttling policy in instance/topic dimension
+ * @class
+ */
+class InstanceQuotaConfigResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Production throttling in MB/sec.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.QuotaProducerByteRate = null;
+
+        /**
+         * Consumption throttling in MB/sec.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.QuotaConsumerByteRate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QuotaProducerByteRate = 'QuotaProducerByteRate' in params ? params.QuotaProducerByteRate : null;
+        this.QuotaConsumerByteRate = 'QuotaConsumerByteRate' in params ? params.QuotaConsumerByteRate : null;
+
+    }
+}
+
+/**
  * DescribeTopicDetail response structure.
  * @class
  */
@@ -7700,6 +7764,7 @@ module.exports = {
     DescribeUserRequest: DescribeUserRequest,
     DescribeTopicSyncReplicaRequest: DescribeTopicSyncReplicaRequest,
     InstanceDetail: InstanceDetail,
+    InstanceQuotaConfigResp: InstanceQuotaConfigResp,
     DescribeTopicDetailResponse: DescribeTopicDetailResponse,
     SubscribedInfo: SubscribedInfo,
     Price: Price,

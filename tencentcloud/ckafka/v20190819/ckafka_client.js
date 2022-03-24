@@ -151,6 +151,7 @@ const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
 const DescribeUserRequest = models.DescribeUserRequest;
 const DescribeTopicSyncReplicaRequest = models.DescribeTopicSyncReplicaRequest;
 const InstanceDetail = models.InstanceDetail;
+const InstanceQuotaConfigResp = models.InstanceQuotaConfigResp;
 const DescribeTopicDetailResponse = models.DescribeTopicDetailResponse;
 const SubscribedInfo = models.SubscribedInfo;
 const Price = models.Price;

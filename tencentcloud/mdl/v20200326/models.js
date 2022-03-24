@@ -302,36 +302,38 @@ class DescribeStreamLiveInputRequest extends  AbstractModel {
 }
 
 /**
- * ModifyStreamLiveWatermark request structure.
+ * CreateStreamLiveInput request structure.
  * @class
  */
-class ModifyStreamLiveWatermarkRequest extends  AbstractModel {
+class CreateStreamLiveInputRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermark ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Watermark name
+         * Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Watermark image settings. This parameter is valid if `Type` is `STATIC_IMAGE`.
-         * @type {CreateImageSettings || null}
+         * Input type
+Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`
+         * @type {string || null}
          */
-        this.ImageSettings = null;
+        this.Type = null;
 
         /**
-         * Watermark text settings. This parameter is valid if `Type` is `TEXT`.
-         * @type {CreateTextSettings || null}
+         * ID of the input security group to attach
+You can attach only one security group to an input.
+         * @type {Array.<string> || null}
          */
-        this.TextSettings = null;
+        this.SecurityGroupIds = null;
+
+        /**
+         * Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+         * @type {Array.<InputSettingInfo> || null}
+         */
+        this.InputSettings = null;
 
     }
 
@@ -342,19 +344,17 @@ class ModifyStreamLiveWatermarkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
-        if (params.ImageSettings) {
-            let obj = new CreateImageSettings();
-            obj.deserialize(params.ImageSettings)
-            this.ImageSettings = obj;
-        }
-
-        if (params.TextSettings) {
-            let obj = new CreateTextSettings();
-            obj.deserialize(params.TextSettings)
-            this.TextSettings = obj;
+        if (params.InputSettings) {
+            this.InputSettings = new Array();
+            for (let z in params.InputSettings) {
+                let obj = new InputSettingInfo();
+                obj.deserialize(params.InputSettings[z]);
+                this.InputSettings.push(obj);
+            }
         }
 
     }
@@ -1668,6 +1668,95 @@ class DescribeStreamLiveWatermarksRequest extends  AbstractModel {
 }
 
 /**
+ * Transcoding details.
+ * @class
+ */
+class DescribeTranscodeDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The channel ID.
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * The start time (UTC+8) of transcoding in the format of yyyy-MM-dd HH:mm:ss.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time (UTC+8) of transcoding in the format of yyyy-MM-dd HH:mm:ss.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The duration (s) of transcoding.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * The encoding method.
+Examples:
+`liveprocessor_H264`: Live transcoding-H264
+`liveprocessor_H265`: Live transcoding-H265
+`topspeed_H264`: Top speed codec-H264
+`topspeed_H265`: Top speed codec-H265
+         * @type {string || null}
+         */
+        this.ModuleCodec = null;
+
+        /**
+         * The target bitrate (Kbps).
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * The transcoding type.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The push domain name.
+         * @type {string || null}
+         */
+        this.PushDomain = null;
+
+        /**
+         * The target resolution.
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.ModuleCodec = 'ModuleCodec' in params ? params.ModuleCodec : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+
+    }
+}
+
+/**
  * Time-shift configuration. This parameter is valid only for HLS_ARCHIVE and DASH_ARCHIVE output groups.
  * @class
  */
@@ -1857,38 +1946,36 @@ It specifies the recording end time in UTC format (e.g., `2020-01-01T12:00:00Z`)
 }
 
 /**
- * CreateStreamLiveInput request structure.
+ * ModifyStreamLiveWatermark request structure.
  * @class
  */
-class CreateStreamLiveInputRequest extends  AbstractModel {
+class ModifyStreamLiveWatermarkRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
+         * Watermark ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Watermark name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Input type
-Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`
-         * @type {string || null}
+         * Watermark image settings. This parameter is valid if `Type` is `STATIC_IMAGE`.
+         * @type {CreateImageSettings || null}
          */
-        this.Type = null;
+        this.ImageSettings = null;
 
         /**
-         * ID of the input security group to attach
-You can attach only one security group to an input.
-         * @type {Array.<string> || null}
+         * Watermark text settings. This parameter is valid if `Type` is `TEXT`.
+         * @type {CreateTextSettings || null}
          */
-        this.SecurityGroupIds = null;
-
-        /**
-         * Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
-         * @type {Array.<InputSettingInfo> || null}
-         */
-        this.InputSettings = null;
+        this.TextSettings = null;
 
     }
 
@@ -1899,18 +1986,80 @@ You can attach only one security group to an input.
         if (!params) {
             return;
         }
+        this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
-        if (params.InputSettings) {
-            this.InputSettings = new Array();
-            for (let z in params.InputSettings) {
-                let obj = new InputSettingInfo();
-                obj.deserialize(params.InputSettings[z]);
-                this.InputSettings.push(obj);
-            }
+        if (params.ImageSettings) {
+            let obj = new CreateImageSettings();
+            obj.deserialize(params.ImageSettings)
+            this.ImageSettings = obj;
         }
+
+        if (params.TextSettings) {
+            let obj = new CreateTextSettings();
+            obj.deserialize(params.TextSettings)
+            this.TextSettings = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeStreamLiveTranscodeDetail request structure.
+ * @class
+ */
+class DescribeStreamLiveTranscodeDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The query start time (UTC+8) in the format of yyyy-MM-dd.
+You can only query data in the last month (not including the current day).
+         * @type {string || null}
+         */
+        this.StartDayTime = null;
+
+        /**
+         * The query end time (UTC+8) in the format of yyyy-MM-dd.
+You can only query data in the last month (not including the current day).
+         * @type {string || null}
+         */
+        this.EndDayTime = null;
+
+        /**
+         * The channel ID (optional).
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * The number of pages. Default value: 1.
+The value cannot exceed 100.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * The number of records per page. Default value: 10.
+Value range: 1-1000.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartDayTime = 'StartDayTime' in params ? params.StartDayTime : null;
+        this.EndDayTime = 'EndDayTime' in params ? params.EndDayTime : null;
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -2314,6 +2463,58 @@ class EventSettingsResp extends  AbstractModel {
                 this.Destinations.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Event trigger time settings
+ * @class
+ */
+class TimingSettingsResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event trigger type
+         * @type {string || null}
+         */
+        this.StartType = null;
+
+        /**
+         * Not empty if `StartType` is `FIXED_TIME`
+UTC time, such as `2020-01-01T12:00:00Z`
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
+It indicates the start time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the current time.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
+It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the start time for recording.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartType = 'StartType' in params ? params.StartType : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -2805,39 +3006,48 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
 }
 
 /**
- * Event trigger time settings
+ * DescribeStreamLiveTranscodeDetail response structure.
  * @class
  */
-class TimingSettingsResp extends  AbstractModel {
+class DescribeStreamLiveTranscodeDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event trigger type
-         * @type {string || null}
+         * A list of the transcoding information.
+         * @type {Array.<DescribeTranscodeDetailInfo> || null}
          */
-        this.StartType = null;
+        this.Infos = null;
 
         /**
-         * Not empty if `StartType` is `FIXED_TIME`
-UTC time, such as `2020-01-01T12:00:00Z`
-         * @type {string || null}
+         * The number of the current page.
+         * @type {number || null}
          */
-        this.Time = null;
+        this.PageNum = null;
 
         /**
-         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
-It indicates the start time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the current time.
-         * @type {string || null}
+         * The number of records per page.
+         * @type {number || null}
          */
-        this.StartTime = null;
+        this.PageSize = null;
 
         /**
-         * This parameter cannot be empty if `EventType` is `TIMED_RECORD`.
-It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:00Z`) and must be at least 1 minute later than the start time for recording.
+         * The total number of records.
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * The total number of pages.
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EndTime = null;
+        this.RequestId = null;
 
     }
 
@@ -2848,10 +3058,20 @@ It indicates the end time for recording in UTC format (e.g., `2020-01-01T12:00:0
         if (!params) {
             return;
         }
-        this.StartType = 'StartType' in params ? params.StartType : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.Infos) {
+            this.Infos = new Array();
+            for (let z in params.Infos) {
+                let obj = new DescribeTranscodeDetailInfo();
+                obj.deserialize(params.Infos[z]);
+                this.Infos.push(obj);
+            }
+        }
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5432,7 +5652,7 @@ module.exports = {
     CreateStreamLivePlanRequest: CreateStreamLivePlanRequest,
     DescribeStreamLiveWatermarksResponse: DescribeStreamLiveWatermarksResponse,
     DescribeStreamLiveInputRequest: DescribeStreamLiveInputRequest,
-    ModifyStreamLiveWatermarkRequest: ModifyStreamLiveWatermarkRequest,
+    CreateStreamLiveInputRequest: CreateStreamLiveInputRequest,
     AudioPidSelectionInfo: AudioPidSelectionInfo,
     AudioPipelineInputStatistics: AudioPipelineInputStatistics,
     CreateStreamLivePlanResponse: CreateStreamLivePlanResponse,
@@ -5461,10 +5681,12 @@ module.exports = {
     DeleteStreamLiveInputSecurityGroupRequest: DeleteStreamLiveInputSecurityGroupRequest,
     AttachedInput: AttachedInput,
     DescribeStreamLiveWatermarksRequest: DescribeStreamLiveWatermarksRequest,
+    DescribeTranscodeDetailInfo: DescribeTranscodeDetailInfo,
     TimeShiftSettingsInfo: TimeShiftSettingsInfo,
     VideoTemplateInfo: VideoTemplateInfo,
     TimingSettingsReq: TimingSettingsReq,
-    CreateStreamLiveInputRequest: CreateStreamLiveInputRequest,
+    ModifyStreamLiveWatermarkRequest: ModifyStreamLiveWatermarkRequest,
+    DescribeStreamLiveTranscodeDetailRequest: DescribeStreamLiveTranscodeDetailRequest,
     DescribeStreamLiveChannelLogsResponse: DescribeStreamLiveChannelLogsResponse,
     DescribeStreamLiveChannelInputStatisticsRequest: DescribeStreamLiveChannelInputStatisticsRequest,
     PipelineLogInfo: PipelineLogInfo,
@@ -5474,6 +5696,7 @@ module.exports = {
     ChannelInputStatistics: ChannelInputStatistics,
     HlsRemuxSettingsInfo: HlsRemuxSettingsInfo,
     EventSettingsResp: EventSettingsResp,
+    TimingSettingsResp: TimingSettingsResp,
     AudioTemplateInfo: AudioTemplateInfo,
     StreamPackageSettingsInfo: StreamPackageSettingsInfo,
     DescribeStreamLiveChannelsResponse: DescribeStreamLiveChannelsResponse,
@@ -5485,7 +5708,7 @@ module.exports = {
     DescribeStreamLiveChannelRequest: DescribeStreamLiveChannelRequest,
     DescribeStreamLivePlansRequest: DescribeStreamLivePlansRequest,
     CreateStreamLiveChannelRequest: CreateStreamLiveChannelRequest,
-    TimingSettingsResp: TimingSettingsResp,
+    DescribeStreamLiveTranscodeDetailResponse: DescribeStreamLiveTranscodeDetailResponse,
     CreateStreamLiveWatermarkResponse: CreateStreamLiveWatermarkResponse,
     DescribeStreamLiveInputsResponse: DescribeStreamLiveInputsResponse,
     ModifyStreamLiveInputResponse: ModifyStreamLiveInputResponse,

@@ -1617,26 +1617,30 @@ class TargetServicesReq extends  AbstractModel {
 }
 
 /**
- * Details of environments bound to service
+ * DescribeUsagePlansStatus request structure.
  * @class
  */
-class ServiceEnvironmentSet extends  AbstractModel {
+class DescribeUsagePlansStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of environments bound to service.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Number of results to be returned. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Limit = null;
 
         /**
-         * List of environments bound to service.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Environment> || null}
+         * Offset. Default value: 0.
+         * @type {number || null}
          */
-        this.EnvironmentList = null;
+        this.Offset = null;
+
+        /**
+         * Usage plan filter. Valid values: UsagePlanId, UsagePlanName, NotServiceId, NotApiId, Environment.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -1647,14 +1651,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
-        if (params.EnvironmentList) {
-            this.EnvironmentList = new Array();
-            for (let z in params.EnvironmentList) {
-                let obj = new Environment();
-                obj.deserialize(params.EnvironmentList[z]);
-                this.EnvironmentList.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
 
@@ -1955,6 +1960,34 @@ class HealthCheckConf extends  AbstractModel {
 }
 
 /**
+ * DeleteUpstream request structure.
+ * @class
+ */
+class DeleteUpstreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the upstream to delete
+         * @type {string || null}
+         */
+        this.UpstreamId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UpstreamId = 'UpstreamId' in params ? params.UpstreamId : null;
+
+    }
+}
+
+/**
  * Details of the API Gateway plugin
  * @class
  */
@@ -2081,6 +2114,113 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyUpstream request structure.
+ * @class
+ */
+class ModifyUpstreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the upstream
+         * @type {string || null}
+         */
+        this.UpstreamId = null;
+
+        /**
+         * Name of the upstream 
+         * @type {string || null}
+         */
+        this.UpstreamName = null;
+
+        /**
+         * Description of the upstream
+         * @type {string || null}
+         */
+        this.UpstreamDescription = null;
+
+        /**
+         * Backend protocol. Values: `HTTP`, `HTTPS`
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * The balancing method can only be `ROUND_ROBIN`.
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * Unique VPC ID.
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Retry attempts. It defaults to `3`.
+         * @type {number || null}
+         */
+        this.Retries = null;
+
+        /**
+         * The host header in the request sending to the backend
+         * @type {string || null}
+         */
+        this.UpstreamHost = null;
+
+        /**
+         * List of backend nodes
+         * @type {Array.<UpstreamNode> || null}
+         */
+        this.Nodes = null;
+
+        /**
+         * Configuration of K8s service
+         * @type {Array.<K8sService> || null}
+         */
+        this.K8sService = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UpstreamId = 'UpstreamId' in params ? params.UpstreamId : null;
+        this.UpstreamName = 'UpstreamName' in params ? params.UpstreamName : null;
+        this.UpstreamDescription = 'UpstreamDescription' in params ? params.UpstreamDescription : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.Retries = 'Retries' in params ? params.Retries : null;
+        this.UpstreamHost = 'UpstreamHost' in params ? params.UpstreamHost : null;
+
+        if (params.Nodes) {
+            this.Nodes = new Array();
+            for (let z in params.Nodes) {
+                let obj = new UpstreamNode();
+                obj.deserialize(params.Nodes[z]);
+                this.Nodes.push(obj);
+            }
+        }
+
+        if (params.K8sService) {
+            this.K8sService = new Array();
+            for (let z in params.K8sService) {
+                let obj = new K8sService();
+                obj.deserialize(params.K8sService[z]);
+                this.K8sService.push(obj);
+            }
+        }
 
     }
 }
@@ -2230,6 +2370,63 @@ class DescribePluginResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeUpstreamBindApis request structure.
+ * @class
+ */
+class DescribeUpstreamBindApisRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of results returned in a page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Upstream ID
+         * @type {string || null}
+         */
+        this.UpstreamId = null;
+
+        /**
+         * Filters the results by `ServiceId` and `ApiId`
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.UpstreamId = 'UpstreamId' in params ? params.UpstreamId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Custom service domain name information
  * @class
  */
@@ -2268,6 +2465,84 @@ class DomainSets extends  AbstractModel {
                 this.DomainSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Configuration of K8s service
+ * @class
+ */
+class K8sService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Weight
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * K8s cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace of the container
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * Name of the service
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * Service port
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * The additional Label of the Pod
+         * @type {Array.<K8sLabel> || null}
+         */
+        this.ExtraLabels = null;
+
+        /**
+         * (Optional) Custom name of the service
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+        if (params.ExtraLabels) {
+            this.ExtraLabels = new Array();
+            for (let z in params.ExtraLabels) {
+                let obj = new K8sLabel();
+                obj.deserialize(params.ExtraLabels[z]);
+                this.ExtraLabels.push(obj);
+            }
+        }
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -2387,6 +2662,27 @@ class DescribeApiEnvironmentStrategyRequest extends  AbstractModel {
         this.ApiId = 'ApiId' in params ? params.ApiId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * The request header configuration of active upstream health check requests
+ * @class
+ */
+class UpstreamHealthCheckerReqHeaders extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -2613,7 +2909,7 @@ class ServiceConfig extends  AbstractModel {
         super();
 
         /**
-         * Backend type, which takes effect when VPC is enabled. Valid values: `clb` and `upstream` (VPC channel)
+         * The backend type. It’s available when `vpc` is enabled. Values: `clb`, `cvm` and `upstream`.
          * @type {string || null}
          */
         this.Product = null;
@@ -4305,30 +4601,24 @@ class UnBindEnvironmentRequest extends  AbstractModel {
 }
 
 /**
- * OAuth authorization configuration information
+ * Information of the queried upstreams
  * @class
  */
-class OauthConfig extends  AbstractModel {
+class DescribeUpstreamInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Public key for user token verification.
-         * @type {string || null}
+         * Total number of results
+         * @type {number || null}
          */
-        this.PublicKey = null;
+        this.TotalCount = null;
 
         /**
-         * Token delivery location.
-         * @type {string || null}
+         * List of query result
+         * @type {Array.<UpstreamInfo> || null}
          */
-        this.TokenLocation = null;
-
-        /**
-         * Redirect address, which is used to guide user logins.
-         * @type {string || null}
-         */
-        this.LoginRedirectUrl = null;
+        this.UpstreamSet = null;
 
     }
 
@@ -4339,9 +4629,16 @@ class OauthConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
-        this.TokenLocation = 'TokenLocation' in params ? params.TokenLocation : null;
-        this.LoginRedirectUrl = 'LoginRedirectUrl' in params ? params.LoginRedirectUrl : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.UpstreamSet) {
+            this.UpstreamSet = new Array();
+            for (let z in params.UpstreamSet) {
+                let obj = new UpstreamInfo();
+                obj.deserialize(params.UpstreamSet[z]);
+                this.UpstreamSet.push(obj);
+            }
+        }
 
     }
 }
@@ -4727,6 +5024,158 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Information of an upstream
+ * @class
+ */
+class UpstreamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the upstream
+         * @type {string || null}
+         */
+        this.UpstreamId = null;
+
+        /**
+         * Name of the upstream 
+         * @type {string || null}
+         */
+        this.UpstreamName = null;
+
+        /**
+         * Description of the upstream
+         * @type {string || null}
+         */
+        this.UpstreamDescription = null;
+
+        /**
+         * Protocol
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * Load balancing algorithm
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * Unique VPC ID.
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Number of retried attempts
+         * @type {number || null}
+         */
+        this.Retries = null;
+
+        /**
+         * Backend nodes
+         * @type {Array.<UpstreamNode> || null}
+         */
+        this.Nodes = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Label
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Health check configuration
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {UpstreamHealthChecker || null}
+         */
+        this.HealthChecker = null;
+
+        /**
+         * Type of the upstream
+         * @type {string || null}
+         */
+        this.UpstreamType = null;
+
+        /**
+         * Configuration of K8s service
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<K8sService> || null}
+         */
+        this.K8sServices = null;
+
+        /**
+         * Host of the upstream
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.UpstreamHost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UpstreamId = 'UpstreamId' in params ? params.UpstreamId : null;
+        this.UpstreamName = 'UpstreamName' in params ? params.UpstreamName : null;
+        this.UpstreamDescription = 'UpstreamDescription' in params ? params.UpstreamDescription : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.Retries = 'Retries' in params ? params.Retries : null;
+
+        if (params.Nodes) {
+            this.Nodes = new Array();
+            for (let z in params.Nodes) {
+                let obj = new UpstreamNode();
+                obj.deserialize(params.Nodes[z]);
+                this.Nodes.push(obj);
+            }
+        }
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.HealthChecker) {
+            let obj = new UpstreamHealthChecker();
+            obj.deserialize(params.HealthChecker)
+            this.HealthChecker = obj;
+        }
+        this.UpstreamType = 'UpstreamType' in params ? params.UpstreamType : null;
+
+        if (params.K8sServices) {
+            this.K8sServices = new Array();
+            for (let z in params.K8sServices) {
+                let obj = new K8sService();
+                obj.deserialize(params.K8sServices[z]);
+                this.K8sServices.push(obj);
+            }
+        }
+        this.UpstreamHost = 'UpstreamHost' in params ? params.UpstreamHost : null;
+
+    }
+}
+
+/**
  * `usagePlan` details
  * @class
  */
@@ -5062,6 +5511,46 @@ class UnBindIPStrategyRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeUpstreams response structure.
+ * @class
+ */
+class DescribeUpstreamsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query results
+         * @type {DescribeUpstreamInfo || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DescribeUpstreamInfo();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePluginApis request structure.
  * @class
  */
@@ -5227,6 +5716,12 @@ class CreateServiceRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * VPC attribute
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
     }
 
     /**
@@ -5254,6 +5749,7 @@ class CreateServiceRequest extends  AbstractModel {
             }
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
 
     }
 }
@@ -5991,17 +6487,17 @@ class DeleteApiKeyRequest extends  AbstractModel {
 }
 
 /**
- * ModifyApiEnvironmentStrategy response structure.
+ * DescribeIPStrategyApisStatus response structure.
  * @class
  */
-class ModifyApiEnvironmentStrategyResponse extends  AbstractModel {
+class DescribeIPStrategyApisStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether modification succeeded.
+         * List of APIs bound to environment.
 Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
+         * @type {IPStrategyApiStatus || null}
          */
         this.Result = null;
 
@@ -6020,7 +6516,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
+
+        if (params.Result) {
+            let obj = new IPStrategyApiStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7689,6 +8190,46 @@ class DescribeServiceEnvironmentStrategyRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeUpstreamBindApis response structure.
+ * @class
+ */
+class DescribeUpstreamBindApisResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query results
+         * @type {DescribeUpstreamBindApis || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DescribeUpstreamBindApis();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ReleaseService request structure.
  * @class
  */
@@ -8061,6 +8602,41 @@ class CreatePluginResponse extends  AbstractModel {
 }
 
 /**
+ * K8s Label
+ * @class
+ */
+class K8sLabel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key of the label
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value of the label
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * ReleaseService response structure.
  * @class
  */
@@ -8253,6 +8829,17 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Authorization = null;
 
+        /**
+         * The path matching mode of the backend COS service
+`BackEndPath`: Match the backend path
+`FullPath`: Match the full path
+
+Default: `BackEndPath`
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PathMatchMode = null;
+
     }
 
     /**
@@ -8265,6 +8852,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Action = 'Action' in params ? params.Action : null;
         this.BucketName = 'BucketName' in params ? params.BucketName : null;
         this.Authorization = 'Authorization' in params ? params.Authorization : null;
+        this.PathMatchMode = 'PathMatchMode' in params ? params.PathMatchMode : null;
 
     }
 }
@@ -8413,25 +9001,66 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeIPStrategyApisStatus response structure.
+ * CreateUpstream request structure.
  * @class
  */
-class DescribeIPStrategyApisStatusResponse extends  AbstractModel {
+class CreateUpstreamRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of APIs bound to environment.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {IPStrategyApiStatus || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Backend protocol. Values: `HTTP`, `HTTPS`
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Scheme = null;
+
+        /**
+         * The balancing method can only be `ROUND_ROBIN`.
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * Unique VPC ID
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Name of the upstream 
+         * @type {string || null}
+         */
+        this.UpstreamName = null;
+
+        /**
+         * Description of the upstream
+         * @type {string || null}
+         */
+        this.UpstreamDescription = null;
+
+        /**
+         * Retry attempts. It defaults to `3`.
+         * @type {number || null}
+         */
+        this.Retries = null;
+
+        /**
+         * The host header in the request sending to the backend
+         * @type {string || null}
+         */
+        this.UpstreamHost = null;
+
+        /**
+         * Backend nodes
+         * @type {Array.<UpstreamNode> || null}
+         */
+        this.Nodes = null;
+
+        /**
+         * The location of K8s service
+         * @type {Array.<K8sService> || null}
+         */
+        this.K8sService = null;
 
     }
 
@@ -8442,13 +9071,31 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UpstreamName = 'UpstreamName' in params ? params.UpstreamName : null;
+        this.UpstreamDescription = 'UpstreamDescription' in params ? params.UpstreamDescription : null;
+        this.Retries = 'Retries' in params ? params.Retries : null;
+        this.UpstreamHost = 'UpstreamHost' in params ? params.UpstreamHost : null;
 
-        if (params.Result) {
-            let obj = new IPStrategyApiStatus();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+        if (params.Nodes) {
+            this.Nodes = new Array();
+            for (let z in params.Nodes) {
+                let obj = new UpstreamNode();
+                obj.deserialize(params.Nodes[z]);
+                this.Nodes.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.K8sService) {
+            this.K8sService = new Array();
+            for (let z in params.K8sService) {
+                let obj = new K8sService();
+                obj.deserialize(params.K8sService[z]);
+                this.K8sService.push(obj);
+            }
+        }
 
     }
 }
@@ -8778,15 +9425,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ApiId = null;
 
         /**
-         * path
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Path
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * method
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Request method
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Method = null;
@@ -8797,6 +9444,27 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.CreatedTime = null;
+
+        /**
+         * Status of the import task
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Details of the error
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * API name
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApiName = null;
 
     }
 
@@ -8811,6 +9479,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Path = 'Path' in params ? params.Path : null;
         this.Method = 'Method' in params ? params.Method : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.ApiName = 'ApiName' in params ? params.ApiName : null;
 
     }
 }
@@ -8959,6 +9630,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OAuth authorization configuration information
+ * @class
+ */
+class OauthConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Public key for user token verification.
+         * @type {string || null}
+         */
+        this.PublicKey = null;
+
+        /**
+         * Token delivery location.
+         * @type {string || null}
+         */
+        this.TokenLocation = null;
+
+        /**
+         * Redirect address, which is used to guide user logins.
+         * @type {string || null}
+         */
+        this.LoginRedirectUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+        this.TokenLocation = 'TokenLocation' in params ? params.TokenLocation : null;
+        this.LoginRedirectUrl = 'LoginRedirectUrl' in params ? params.LoginRedirectUrl : null;
 
     }
 }
@@ -9312,27 +10025,27 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeUsagePlansStatus request structure.
+ * DescribeUpstreams request structure.
  * @class
  */
-class DescribeUsagePlansStatusRequest extends  AbstractModel {
+class DescribeUpstreamsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of results to be returned. Default value: 20. Maximum value: 100.
+         * Number of results returned in a page
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset. Default value: 0.
+         * Page offset
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Usage plan filter. Valid values: UsagePlanId, UsagePlanName, NotServiceId, NotApiId, Environment.
+         * Filters
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -9626,19 +10339,19 @@ class DescribeApiRequest extends  AbstractModel {
 }
 
 /**
- * UnBindSecretIds response structure.
+ * CreateUpstream response structure.
  * @class
  */
-class UnBindSecretIdsResponse extends  AbstractModel {
+class CreateUpstreamResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether unbinding succeeded.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
+         * The unique upstream IP returned
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
          */
-        this.Result = null;
+        this.UpstreamId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -9655,7 +10368,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
+        this.UpstreamId = 'UpstreamId' in params ? params.UpstreamId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9964,6 +10677,49 @@ class DeletePluginResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Querying the list of APIs bound with an upstream.
+ * @class
+ */
+class DescribeUpstreamBindApis extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Information of bound APIs
+         * @type {Array.<BindApiInfo> || null}
+         */
+        this.BindApiSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BindApiSet) {
+            this.BindApiSet = new Array();
+            for (let z in params.BindApiSet) {
+                let obj = new BindApiInfo();
+                obj.deserialize(params.BindApiSet[z]);
+                this.BindApiSet.push(obj);
+            }
+        }
 
     }
 }
@@ -10385,6 +11141,42 @@ class DescribeServiceForApiAppRequest extends  AbstractModel {
         }
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.ApiRegion = 'ApiRegion' in params ? params.ApiRegion : null;
+
+    }
+}
+
+/**
+ * ModifyApiEnvironmentStrategy response structure.
+ * @class
+ */
+class ModifyApiEnvironmentStrategyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether modification succeeded.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11282,6 +12074,64 @@ class ApiKey extends  AbstractModel {
 }
 
 /**
+ * Information of the API bound with the upstream
+ * @class
+ */
+class BindApiInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique API ID.
+         * @type {string || null}
+         */
+        this.ApiId = null;
+
+        /**
+         * Unique ID of the service
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * API name
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ApiName = null;
+
+        /**
+         * Service name
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * Bound At
+         * @type {string || null}
+         */
+        this.BindTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiId = 'ApiId' in params ? params.ApiId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ApiName = 'ApiName' in params ? params.ApiName : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.BindTime = 'BindTime' in params ? params.BindTime : null;
+
+    }
+}
+
+/**
  * Information of the API bound to the application
  * @class
  */
@@ -11493,6 +12343,47 @@ class BindEnvironmentRequest extends  AbstractModel {
         this.Environment = 'Environment' in params ? params.Environment : null;
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.ApiIds = 'ApiIds' in params ? params.ApiIds : null;
+
+    }
+}
+
+/**
+ * ModifyUpstream response structure.
+ * @class
+ */
+class ModifyUpstreamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of the upstream after the modification
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {UpstreamInfo || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new UpstreamInfo();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11742,6 +12633,112 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Metadata of backend nodes of the upstream
+ * @class
+ */
+class UpstreamNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP or domain name of the host
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * The port number. Range: [0, 65535]
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Value range: [0, 100]. `0` refers to disable it.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * VM instance ID
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.VmInstanceId = null;
+
+        /**
+         * Tag
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Health status of the node. Value: `OFF`, `HEALTHY`, `UNHEALTHY` and `NO_DATA`. It’s not required for creating and editing actions.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Healthy = null;
+
+        /**
+         * The K8s service name
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * K8s namespace
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.NameSpace = null;
+
+        /**
+         * ID of the TKE cluster
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Source of the node
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * The unique service name in API Gateway
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.UniqueServiceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Host = 'Host' in params ? params.Host : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.VmInstanceId = 'VmInstanceId' in params ? params.VmInstanceId : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Healthy = 'Healthy' in params ? params.Healthy : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.NameSpace = 'NameSpace' in params ? params.NameSpace : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.UniqueServiceName = 'UniqueServiceName' in params ? params.UniqueServiceName : null;
+
+    }
+}
+
+/**
  * Application information set
  * @class
  */
@@ -11781,6 +12778,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.ApiAppApiSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DeleteUpstream response structure.
+ * @class
+ */
+class DeleteUpstreamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the upstream deleted
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.UpstreamId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UpstreamId = 'UpstreamId' in params ? params.UpstreamId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13053,6 +14086,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * UnBindSecretIds response structure.
+ * @class
+ */
+class UnBindSecretIdsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether unbinding succeeded.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateApiApp request structure.
  * @class
  */
@@ -13269,6 +14338,164 @@ class RequestParameter extends  AbstractModel {
 }
 
 /**
+ * Upstream health check configuration
+ * @class
+ */
+class UpstreamHealthChecker extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specifies whether to enable active health check
+         * @type {boolean || null}
+         */
+        this.EnableActiveCheck = null;
+
+        /**
+         * Specifies whether the enable passive health check
+         * @type {boolean || null}
+         */
+        this.EnablePassiveCheck = null;
+
+        /**
+         * The HTTP status code that indicates that the upstream is healthy
+         * @type {string || null}
+         */
+        this.HealthyHttpStatus = null;
+
+        /**
+         * The HTTP status code that indicates that the upstream is unhealthy
+         * @type {string || null}
+         */
+        this.UnhealthyHttpStatus = null;
+
+        /**
+         * The threshold on consecutive TCP errors. Range: [0, 254]. `0` indicates not to check TCP.
+         * @type {number || null}
+         */
+        this.TcpFailureThreshold = null;
+
+        /**
+         * The threshold on consecutive timeouts. Range: [0, 254]. `0` indicates not to check TCP.
+         * @type {number || null}
+         */
+        this.TimeoutThreshold = null;
+
+        /**
+         * The threshold on consecutive HTTP errors. Range: [0, 254]. `0` indicates not to check HTTP.
+         * @type {number || null}
+         */
+        this.HttpFailureThreshold = null;
+
+        /**
+         * The path for active health check. It defaults to `/`.
+         * @type {string || null}
+         */
+        this.ActiveCheckHttpPath = null;
+
+        /**
+         * The timeout period for active health check in seconds. Default: `5`. 
+         * @type {number || null}
+         */
+        this.ActiveCheckTimeout = null;
+
+        /**
+         * The interval for active health check in seconds. Default: `5`. 
+         * @type {number || null}
+         */
+        this.ActiveCheckInterval = null;
+
+        /**
+         * Header of the active health check request
+         * @type {Array.<UpstreamHealthCheckerReqHeaders> || null}
+         */
+        this.ActiveRequestHeader = null;
+
+        /**
+         * The period for an abnormal to recover automatically in seconds. If only the passive health check is enabled, it must be greater than 0. Otherwise the abnormal nodes can not recovered automatically. The default value is 30 seconds. 
+         * @type {number || null}
+         */
+        this.UnhealthyTimeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnableActiveCheck = 'EnableActiveCheck' in params ? params.EnableActiveCheck : null;
+        this.EnablePassiveCheck = 'EnablePassiveCheck' in params ? params.EnablePassiveCheck : null;
+        this.HealthyHttpStatus = 'HealthyHttpStatus' in params ? params.HealthyHttpStatus : null;
+        this.UnhealthyHttpStatus = 'UnhealthyHttpStatus' in params ? params.UnhealthyHttpStatus : null;
+        this.TcpFailureThreshold = 'TcpFailureThreshold' in params ? params.TcpFailureThreshold : null;
+        this.TimeoutThreshold = 'TimeoutThreshold' in params ? params.TimeoutThreshold : null;
+        this.HttpFailureThreshold = 'HttpFailureThreshold' in params ? params.HttpFailureThreshold : null;
+        this.ActiveCheckHttpPath = 'ActiveCheckHttpPath' in params ? params.ActiveCheckHttpPath : null;
+        this.ActiveCheckTimeout = 'ActiveCheckTimeout' in params ? params.ActiveCheckTimeout : null;
+        this.ActiveCheckInterval = 'ActiveCheckInterval' in params ? params.ActiveCheckInterval : null;
+
+        if (params.ActiveRequestHeader) {
+            this.ActiveRequestHeader = new Array();
+            for (let z in params.ActiveRequestHeader) {
+                let obj = new UpstreamHealthCheckerReqHeaders();
+                obj.deserialize(params.ActiveRequestHeader[z]);
+                this.ActiveRequestHeader.push(obj);
+            }
+        }
+        this.UnhealthyTimeout = 'UnhealthyTimeout' in params ? params.UnhealthyTimeout : null;
+
+    }
+}
+
+/**
+ * Details of environments bound to service
+ * @class
+ */
+class ServiceEnvironmentSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of environments bound to service.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of environments bound to service.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Environment> || null}
+         */
+        this.EnvironmentList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.EnvironmentList) {
+            this.EnvironmentList = new Array();
+            for (let z in params.EnvironmentList) {
+                let obj = new Environment();
+                obj.deserialize(params.EnvironmentList[z]);
+                this.EnvironmentList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Service release version
  * @class
  */
@@ -13427,22 +14654,27 @@ module.exports = {
     ServiceEnvironmentStrategy: ServiceEnvironmentStrategy,
     ApiInfo: ApiInfo,
     TargetServicesReq: TargetServicesReq,
-    ServiceEnvironmentSet: ServiceEnvironmentSet,
+    DescribeUsagePlansStatusRequest: DescribeUsagePlansStatusRequest,
     TsfLoadBalanceConfResp: TsfLoadBalanceConfResp,
     CreateIPStrategyRequest: CreateIPStrategyRequest,
     IPStrategy: IPStrategy,
     DescribeUsagePlansStatusResponse: DescribeUsagePlansStatusResponse,
     HealthCheckConf: HealthCheckConf,
+    DeleteUpstreamRequest: DeleteUpstreamRequest,
     Plugin: Plugin,
     UnbindApiAppResponse: UnbindApiAppResponse,
+    ModifyUpstreamRequest: ModifyUpstreamRequest,
     DescribeApiUsagePlanResponse: DescribeApiUsagePlanResponse,
     DeleteIPStrategyRequest: DeleteIPStrategyRequest,
     DescribeApiAppRequest: DescribeApiAppRequest,
     DescribePluginResponse: DescribePluginResponse,
+    DescribeUpstreamBindApisRequest: DescribeUpstreamBindApisRequest,
     DomainSets: DomainSets,
+    K8sService: K8sService,
     DeleteUsagePlanRequest: DeleteUsagePlanRequest,
     DeleteServiceRequest: DeleteServiceRequest,
     DescribeApiEnvironmentStrategyRequest: DescribeApiEnvironmentStrategyRequest,
+    UpstreamHealthCheckerReqHeaders: UpstreamHealthCheckerReqHeaders,
     DescribeServiceForApiAppResponse: DescribeServiceForApiAppResponse,
     ServiceConfig: ServiceConfig,
     DeleteApiAppResponse: DeleteApiAppResponse,
@@ -13476,7 +14708,7 @@ module.exports = {
     CreateApiResponse: CreateApiResponse,
     DescribeIPStrategyApisStatusRequest: DescribeIPStrategyApisStatusRequest,
     UnBindEnvironmentRequest: UnBindEnvironmentRequest,
-    OauthConfig: OauthConfig,
+    DescribeUpstreamInfo: DescribeUpstreamInfo,
     ModifyApiEnvironmentStrategyRequest: ModifyApiEnvironmentStrategyRequest,
     ServiceReleaseHistory: ServiceReleaseHistory,
     ModifyUsagePlanResponse: ModifyUsagePlanResponse,
@@ -13486,12 +14718,14 @@ module.exports = {
     Base64EncodedTriggerRule: Base64EncodedTriggerRule,
     RequestConfig: RequestConfig,
     DeleteApiKeyResponse: DeleteApiKeyResponse,
+    UpstreamInfo: UpstreamInfo,
     UsagePlan: UsagePlan,
     DescribeServiceReleaseVersionRequest: DescribeServiceReleaseVersionRequest,
     DescribeUsagePlanSecretIdsRequest: DescribeUsagePlanSecretIdsRequest,
     DescribeLogSearchResponse: DescribeLogSearchResponse,
     ModifyAPIDocRequest: ModifyAPIDocRequest,
     UnBindIPStrategyRequest: UnBindIPStrategyRequest,
+    DescribeUpstreamsResponse: DescribeUpstreamsResponse,
     DescribePluginApisRequest: DescribePluginApisRequest,
     ResponseErrorCodeReq: ResponseErrorCodeReq,
     CreateServiceRequest: CreateServiceRequest,
@@ -13514,7 +14748,7 @@ module.exports = {
     UnBindEnvironmentResponse: UnBindEnvironmentResponse,
     UsagePlanBindSecret: UsagePlanBindSecret,
     DeleteApiKeyRequest: DeleteApiKeyRequest,
-    ModifyApiEnvironmentStrategyResponse: ModifyApiEnvironmentStrategyResponse,
+    DescribeIPStrategyApisStatusResponse: DescribeIPStrategyApisStatusResponse,
     ModifyApiAppResponse: ModifyApiAppResponse,
     UpdateApiAppKeyRequest: UpdateApiAppKeyRequest,
     DomainSetList: DomainSetList,
@@ -13530,6 +14764,7 @@ module.exports = {
     ApiIdStatus: ApiIdStatus,
     CreateApiRequest: CreateApiRequest,
     DescribeServiceEnvironmentStrategyRequest: DescribeServiceEnvironmentStrategyRequest,
+    DescribeUpstreamBindApisResponse: DescribeUpstreamBindApisResponse,
     ReleaseServiceRequest: ReleaseServiceRequest,
     DeleteServiceResponse: DeleteServiceResponse,
     DescribeServiceEnvironmentReleaseHistoryResponse: DescribeServiceEnvironmentReleaseHistoryResponse,
@@ -13538,13 +14773,14 @@ module.exports = {
     UsagePlanStatusInfo: UsagePlanStatusInfo,
     ServiceReleaseHistoryInfo: ServiceReleaseHistoryInfo,
     CreatePluginResponse: CreatePluginResponse,
+    K8sLabel: K8sLabel,
     ReleaseServiceResponse: ReleaseServiceResponse,
     APIDocInfo: APIDocInfo,
     CosConfig: CosConfig,
     ModifyApiIncrementRequest: ModifyApiIncrementRequest,
     GenerateApiDocumentRequest: GenerateApiDocumentRequest,
     ServiceUsagePlanSet: ServiceUsagePlanSet,
-    DescribeIPStrategyApisStatusResponse: DescribeIPStrategyApisStatusResponse,
+    CreateUpstreamRequest: CreateUpstreamRequest,
     ModifyServiceEnvironmentStrategyResponse: ModifyServiceEnvironmentStrategyResponse,
     UpdateApiKeyResponse: UpdateApiKeyResponse,
     DescribeApiBindApiAppsStatusRequest: DescribeApiBindApiAppsStatusRequest,
@@ -13557,6 +14793,7 @@ module.exports = {
     DeleteApiRequest: DeleteApiRequest,
     DescribeServiceSubDomainMappingsRequest: DescribeServiceSubDomainMappingsRequest,
     DescribeApiAppResponse: DescribeApiAppResponse,
+    OauthConfig: OauthConfig,
     DescribeApiAppsStatusResponse: DescribeApiAppsStatusResponse,
     ServiceSubDomainMappings: ServiceSubDomainMappings,
     DescribeApiKeyRequest: DescribeApiKeyRequest,
@@ -13566,19 +14803,20 @@ module.exports = {
     UsagePlanBindSecretStatus: UsagePlanBindSecretStatus,
     DeleteServiceSubDomainMappingResponse: DeleteServiceSubDomainMappingResponse,
     CreateApiKeyResponse: CreateApiKeyResponse,
-    DescribeUsagePlansStatusRequest: DescribeUsagePlansStatusRequest,
+    DescribeUpstreamsRequest: DescribeUpstreamsRequest,
     UsagePlanEnvironment: UsagePlanEnvironment,
     ModifyIPStrategyRequest: ModifyIPStrategyRequest,
     ModifyPluginResponse: ModifyPluginResponse,
     UnBindSecretIdsRequest: UnBindSecretIdsRequest,
     DescribeApiRequest: DescribeApiRequest,
-    UnBindSecretIdsResponse: UnBindSecretIdsResponse,
+    CreateUpstreamResponse: CreateUpstreamResponse,
     ResetAPIDocPasswordRequest: ResetAPIDocPasswordRequest,
     ApiUsagePlan: ApiUsagePlan,
     BuildAPIDocRequest: BuildAPIDocRequest,
     DescribeAPIDocsResponse: DescribeAPIDocsResponse,
     DetachPluginResponse: DetachPluginResponse,
     DeletePluginResponse: DeletePluginResponse,
+    DescribeUpstreamBindApis: DescribeUpstreamBindApis,
     ModifyServiceEnvironmentStrategyRequest: ModifyServiceEnvironmentStrategyRequest,
     CreateAPIDocRequest: CreateAPIDocRequest,
     DescribeApiAppBindApisStatusResponse: DescribeApiAppBindApisStatusResponse,
@@ -13589,6 +14827,7 @@ module.exports = {
     DescribeServiceSubDomainsResponse: DescribeServiceSubDomainsResponse,
     AttachPluginRequest: AttachPluginRequest,
     DescribeServiceForApiAppRequest: DescribeServiceForApiAppRequest,
+    ModifyApiEnvironmentStrategyResponse: ModifyApiEnvironmentStrategyResponse,
     BindSubDomainRequest: BindSubDomainRequest,
     ApiAppInfos: ApiAppInfos,
     IPStrategyApiStatus: IPStrategyApiStatus,
@@ -13607,16 +14846,20 @@ module.exports = {
     DeleteIPStrategyResponse: DeleteIPStrategyResponse,
     ApiInfoSummary: ApiInfoSummary,
     ApiKey: ApiKey,
+    BindApiInfo: BindApiInfo,
     ApiAppApiInfo: ApiAppApiInfo,
     DescribeUsagePlanResponse: DescribeUsagePlanResponse,
     AttachPluginResponse: AttachPluginResponse,
     BindEnvironmentRequest: BindEnvironmentRequest,
+    ModifyUpstreamResponse: ModifyUpstreamResponse,
     DescribeIPStrategyRequest: DescribeIPStrategyRequest,
     DescribeApiForApiAppResponse: DescribeApiForApiAppResponse,
     EnvironmentStrategy: EnvironmentStrategy,
     DescribeUsagePlanEnvironmentsRequest: DescribeUsagePlanEnvironmentsRequest,
     DescribeServiceReleaseVersionResponse: DescribeServiceReleaseVersionResponse,
+    UpstreamNode: UpstreamNode,
     ApiAppApiInfos: ApiAppApiInfos,
+    DeleteUpstreamResponse: DeleteUpstreamResponse,
     UpdateServiceResponse: UpdateServiceResponse,
     UsagePlanInfo: UsagePlanInfo,
     DescribeServiceEnvironmentReleaseHistoryRequest: DescribeServiceEnvironmentReleaseHistoryRequest,
@@ -13639,11 +14882,14 @@ module.exports = {
     ApiEnvironmentStrategy: ApiEnvironmentStrategy,
     DescribeIPStrategysStatusResponse: DescribeIPStrategysStatusResponse,
     UpdateApiAppKeyResponse: UpdateApiAppKeyResponse,
+    UnBindSecretIdsResponse: UnBindSecretIdsResponse,
     CreateApiAppRequest: CreateApiAppRequest,
     EnableApiKeyRequest: EnableApiKeyRequest,
     ResetAPIDocPasswordResponse: ResetAPIDocPasswordResponse,
     DescribeServicesStatusRequest: DescribeServicesStatusRequest,
     RequestParameter: RequestParameter,
+    UpstreamHealthChecker: UpstreamHealthChecker,
+    ServiceEnvironmentSet: ServiceEnvironmentSet,
     ServiceReleaseVersion: ServiceReleaseVersion,
     DescribeServicesStatusResponse: DescribeServicesStatusResponse,
     CreateApiKeyRequest: CreateApiKeyRequest,

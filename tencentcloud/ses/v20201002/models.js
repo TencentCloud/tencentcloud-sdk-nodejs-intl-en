@@ -63,13 +63,13 @@ Tencent Cloud team <noreply@mail.qcloud.com>
         this.Template = null;
 
         /**
-         * Email content when emails are sent by calling the API
+         * Email content when emails are sent by calling the API. This parameter is currently unavailable.
          * @type {Simple || null}
          */
         this.Simple = null;
 
         /**
-         * Email attachments
+         * Attachment parameters to set when you need to send attachments. This parameter is currently unavailable.
          * @type {Array.<Attachment> || null}
          */
         this.Attachments = null;
@@ -91,6 +91,12 @@ Tencent Cloud team <noreply@mail.qcloud.com>
          * @type {string || null}
          */
         this.Unsubscribe = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ADLocation = null;
 
     }
 
@@ -140,6 +146,7 @@ Tencent Cloud team <noreply@mail.qcloud.com>
             this.TimedParam = obj;
         }
         this.Unsubscribe = 'Unsubscribe' in params ? params.Unsubscribe : null;
+        this.ADLocation = 'ADLocation' in params ? params.ADLocation : null;
 
     }
 }
@@ -298,42 +305,25 @@ class CreateEmailTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Template list structure.
+ * ListEmailAddress response structure.
  * @class
  */
-class TemplatesMetadata extends  AbstractModel {
+class ListEmailAddressResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Creation time.
-         * @type {number || null}
+         * Details of sender addresses.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<EmailSender> || null}
          */
-        this.CreatedTimestamp = null;
+        this.EmailSenders = null;
 
         /**
-         * Template name.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TemplateName = null;
-
-        /**
-         * Template status. 1: under review; 0: approved; 2: rejected; other values: unavailable.
-         * @type {number || null}
-         */
-        this.TemplateStatus = null;
-
-        /**
-         * Template ID.
-         * @type {number || null}
-         */
-        this.TemplateID = null;
-
-        /**
-         * Review reply
-         * @type {string || null}
-         */
-        this.ReviewReason = null;
+        this.RequestId = null;
 
     }
 
@@ -344,11 +334,16 @@ class TemplatesMetadata extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CreatedTimestamp = 'CreatedTimestamp' in params ? params.CreatedTimestamp : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.TemplateStatus = 'TemplateStatus' in params ? params.TemplateStatus : null;
-        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
-        this.ReviewReason = 'ReviewReason' in params ? params.ReviewReason : null;
+
+        if (params.EmailSenders) {
+            this.EmailSenders = new Array();
+            for (let z in params.EmailSenders) {
+                let obj = new EmailSender();
+                obj.deserialize(params.EmailSenders[z]);
+                this.EmailSenders.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -558,7 +553,7 @@ class Attachment extends  AbstractModel {
         this.FileName = null;
 
         /**
-         * Attachment content after base64 encoding. A single attachment cannot exceed 5 MB. Note: Tencent Cloud APIs require that a request packet should not exceed 10 MB. If you are sending multiple attachments, the total size of these attachments cannot exceed 10 MB.
+         * Attachment content after Base64 encoding. A single attachment cannot exceed 4 MB. Note: Tencent Cloud APIs require that a request packet should not exceed 8 MB. If you are sending multiple attachments, the total size of these attachments cannot exceed 8 MB.
          * @type {string || null}
          */
         this.Content = null;
@@ -772,6 +767,12 @@ Sender <email address>
          */
         this.Unsubscribe = null;
 
+        /**
+         * Email triggering type. `0` (default): non-trigger-based, suitable for marketing emails and non-immediate emails; `1`: trigger-based, suitable for immediate emails such as emails containing verification codes. If the size of an email exceeds a specified value, the system will automatically choose the non-trigger-based type.
+         * @type {number || null}
+         */
+        this.TriggerType = null;
+
     }
 
     /**
@@ -807,6 +808,7 @@ Sender <email address>
             }
         }
         this.Unsubscribe = 'Unsubscribe' in params ? params.Unsubscribe : null;
+        this.TriggerType = 'TriggerType' in params ? params.TriggerType : null;
 
     }
 }
@@ -1227,6 +1229,62 @@ Note: This field may return `null`, indicating that no valid value can be found.
         }
         this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
         this.ReceiversName = 'ReceiversName' in params ? params.ReceiversName : null;
+
+    }
+}
+
+/**
+ * Template list structure.
+ * @class
+ */
+class TemplatesMetadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Creation time.
+         * @type {number || null}
+         */
+        this.CreatedTimestamp = null;
+
+        /**
+         * Template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Template status. 1: under review; 0: approved; 2: rejected; other values: unavailable.
+         * @type {number || null}
+         */
+        this.TemplateStatus = null;
+
+        /**
+         * Template ID.
+         * @type {number || null}
+         */
+        this.TemplateID = null;
+
+        /**
+         * Review reply
+         * @type {string || null}
+         */
+        this.ReviewReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreatedTimestamp = 'CreatedTimestamp' in params ? params.CreatedTimestamp : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateStatus = 'TemplateStatus' in params ? params.TemplateStatus : null;
+        this.TemplateID = 'TemplateID' in params ? params.TemplateID : null;
+        this.ReviewReason = 'ReviewReason' in params ? params.ReviewReason : null;
 
     }
 }
@@ -2048,6 +2106,34 @@ class Simple extends  AbstractModel {
 }
 
 /**
+ * DeleteReceiver request structure.
+ * @class
+ */
+class DeleteReceiverRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recipient group ID, which is returned when a recipient group is created.
+         * @type {number || null}
+         */
+        this.ReceiverId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+
+    }
+}
+
+/**
  * ListEmailIdentities response structure.
  * @class
  */
@@ -2091,19 +2177,12 @@ class ListEmailIdentitiesResponse extends  AbstractModel {
 }
 
 /**
- * ListEmailAddress response structure.
+ * DeleteReceiver response structure.
  * @class
  */
-class ListEmailAddressResponse extends  AbstractModel {
+class DeleteReceiverResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Details of sender addresses.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<EmailSender> || null}
-         */
-        this.EmailSenders = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2119,15 +2198,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.EmailSenders) {
-            this.EmailSenders = new Array();
-            for (let z in params.EmailSenders) {
-                let obj = new EmailSender();
-                obj.deserialize(params.EmailSenders[z]);
-                this.EmailSenders.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2804,7 +2874,7 @@ module.exports = {
     ListSendTasksResponse: ListSendTasksResponse,
     CreateReceiverResponse: CreateReceiverResponse,
     CreateEmailTemplateRequest: CreateEmailTemplateRequest,
-    TemplatesMetadata: TemplatesMetadata,
+    ListEmailAddressResponse: ListEmailAddressResponse,
     ListEmailAddressRequest: ListEmailAddressRequest,
     ListReceiversRequest: ListReceiversRequest,
     GetEmailIdentityResponse: GetEmailIdentityResponse,
@@ -2823,6 +2893,7 @@ module.exports = {
     GetStatisticsReportRequest: GetStatisticsReportRequest,
     DeleteBlackListRequest: DeleteBlackListRequest,
     SendTaskData: SendTaskData,
+    TemplatesMetadata: TemplatesMetadata,
     DeleteEmailTemplateResponse: DeleteEmailTemplateResponse,
     Volume: Volume,
     CreateEmailIdentityRequest: CreateEmailIdentityRequest,
@@ -2840,8 +2911,9 @@ module.exports = {
     ListBlackEmailAddressResponse: ListBlackEmailAddressResponse,
     GetSendEmailStatusRequest: GetSendEmailStatusRequest,
     Simple: Simple,
+    DeleteReceiverRequest: DeleteReceiverRequest,
     ListEmailIdentitiesResponse: ListEmailIdentitiesResponse,
-    ListEmailAddressResponse: ListEmailAddressResponse,
+    DeleteReceiverResponse: DeleteReceiverResponse,
     TemplateContent: TemplateContent,
     GetStatisticsReportResponse: GetStatisticsReportResponse,
     DeleteEmailAddressRequest: DeleteEmailAddressRequest,

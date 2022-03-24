@@ -21,7 +21,7 @@ const GetEmailTemplateRequest = models.GetEmailTemplateRequest;
 const ListSendTasksResponse = models.ListSendTasksResponse;
 const CreateReceiverResponse = models.CreateReceiverResponse;
 const CreateEmailTemplateRequest = models.CreateEmailTemplateRequest;
-const TemplatesMetadata = models.TemplatesMetadata;
+const ListEmailAddressResponse = models.ListEmailAddressResponse;
 const ListEmailAddressRequest = models.ListEmailAddressRequest;
 const ListReceiversRequest = models.ListReceiversRequest;
 const GetEmailIdentityResponse = models.GetEmailIdentityResponse;
@@ -40,6 +40,7 @@ const DeleteEmailIdentityResponse = models.DeleteEmailIdentityResponse;
 const GetStatisticsReportRequest = models.GetStatisticsReportRequest;
 const DeleteBlackListRequest = models.DeleteBlackListRequest;
 const SendTaskData = models.SendTaskData;
+const TemplatesMetadata = models.TemplatesMetadata;
 const DeleteEmailTemplateResponse = models.DeleteEmailTemplateResponse;
 const Volume = models.Volume;
 const CreateEmailIdentityRequest = models.CreateEmailIdentityRequest;
@@ -57,8 +58,9 @@ const SendEmailResponse = models.SendEmailResponse;
 const ListBlackEmailAddressResponse = models.ListBlackEmailAddressResponse;
 const GetSendEmailStatusRequest = models.GetSendEmailStatusRequest;
 const Simple = models.Simple;
+const DeleteReceiverRequest = models.DeleteReceiverRequest;
 const ListEmailIdentitiesResponse = models.ListEmailIdentitiesResponse;
-const ListEmailAddressResponse = models.ListEmailAddressResponse;
+const DeleteReceiverResponse = models.DeleteReceiverResponse;
 const TemplateContent = models.TemplateContent;
 const GetStatisticsReportResponse = models.GetStatisticsReportResponse;
 const DeleteEmailAddressRequest = models.DeleteEmailAddressRequest;
@@ -211,8 +213,19 @@ class SesClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete a recipient group and all recipient email addresses in the group based on the recipient group ID.
+     * @param {DeleteReceiverRequest} req
+     * @param {function(string, DeleteReceiverResponse):void} cb
+     * @public
+     */
+    DeleteReceiver(req, cb) {
+        let resp = new DeleteReceiverResponse();
+        this.request("DeleteReceiver", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a TEXT or HTML email template. To create an HTML template, ensure that it does not include external CSS files. You can use {{variable name}} to specify a variable in the template.
-Note: only an approved template can be used to send emails.
+Note: Only an approved template can be used to send emails.
      * @param {CreateEmailTemplateRequest} req
      * @param {function(string, CreateEmailTemplateResponse):void} cb
      * @public

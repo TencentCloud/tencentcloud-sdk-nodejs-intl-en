@@ -1,4 +1,5 @@
 module.exports = {
+    ams: require("./ams"),
     antiddos: require("./antiddos"),
     apigateway: require("./apigateway"),
     as: require("./as"),
@@ -35,6 +36,7 @@ module.exports = {
     gpm: require("./gpm"),
     gse: require("./gse"),
     iai: require("./iai"),
+    ims: require("./ims"),
     iotcloud: require("./iotcloud"),
     ip: require("./ip"),
     kms: require("./kms"),
@@ -68,7 +70,9 @@ module.exports = {
     tem: require("./tem"),
     tiw: require("./tiw"),
     tke: require("./tke"),
+    tms: require("./tms"),
     trtc: require("./trtc"),
+    vm: require("./vm"),
     vod: require("./vod"),
     vpc: require("./vpc"),
     yunjing: require("./yunjing")

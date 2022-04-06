@@ -793,6 +793,76 @@ class DescribeInstanceLogsRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateDictionaries request structure.
+ * @class
+ */
+class UpdateDictionariesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * COS address of the main dictionary for the IK analyzer
+         * @type {Array.<string> || null}
+         */
+        this.IkMainDicts = null;
+
+        /**
+         * COS address of the stopword dictionary for the IK analyzer
+         * @type {Array.<string> || null}
+         */
+        this.IkStopwords = null;
+
+        /**
+         * COS address of the synonym dictionary
+         * @type {Array.<string> || null}
+         */
+        this.Synonym = null;
+
+        /**
+         * COS address of the QQ dictionary
+         * @type {Array.<string> || null}
+         */
+        this.QQDict = null;
+
+        /**
+         * 0: Install; 1: Delete
+         * @type {number || null}
+         */
+        this.UpdateType = null;
+
+        /**
+         * Whether to force restart the cluster
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.IkMainDicts = 'IkMainDicts' in params ? params.IkMainDicts : null;
+        this.IkStopwords = 'IkStopwords' in params ? params.IkStopwords : null;
+        this.Synonym = 'Synonym' in params ? params.Synonym : null;
+        this.QQDict = 'QQDict' in params ? params.QQDict : null;
+        this.UpdateType = 'UpdateType' in params ? params.UpdateType : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+
+    }
+}
+
+/**
  * UpdateRequestTargetNodeTypes request structure.
  * @class
  */
@@ -1336,6 +1406,34 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
             this.WebNodeTypeInfo = obj;
         }
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+    }
+}
+
+/**
+ * UpdateDictionaries response structure.
+ * @class
+ */
+class UpdateDictionariesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3791,12 +3889,14 @@ module.exports = {
     RestartKibanaRequest: RestartKibanaRequest,
     CreateInstanceResponse: CreateInstanceResponse,
     DescribeInstanceLogsRequest: DescribeInstanceLogsRequest,
+    UpdateDictionariesRequest: UpdateDictionariesRequest,
     UpdateRequestTargetNodeTypesRequest: UpdateRequestTargetNodeTypesRequest,
     NodeView: NodeView,
     CosBackup: CosBackup,
     TagInfo: TagInfo,
     KeyValue: KeyValue,
     CreateInstanceRequest: CreateInstanceRequest,
+    UpdateDictionariesResponse: UpdateDictionariesResponse,
     InstanceInfo: InstanceInfo,
     DeleteInstanceResponse: DeleteInstanceResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,

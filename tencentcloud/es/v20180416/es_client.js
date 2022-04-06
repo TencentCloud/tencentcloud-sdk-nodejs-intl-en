@@ -32,12 +32,14 @@ const RestartInstanceResponse = models.RestartInstanceResponse;
 const RestartKibanaRequest = models.RestartKibanaRequest;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
+const UpdateDictionariesRequest = models.UpdateDictionariesRequest;
 const UpdateRequestTargetNodeTypesRequest = models.UpdateRequestTargetNodeTypesRequest;
 const NodeView = models.NodeView;
 const CosBackup = models.CosBackup;
 const TagInfo = models.TagInfo;
 const KeyValue = models.KeyValue;
 const CreateInstanceRequest = models.CreateInstanceRequest;
+const UpdateDictionariesResponse = models.UpdateDictionariesResponse;
 const InstanceInfo = models.InstanceInfo;
 const DeleteInstanceResponse = models.DeleteInstanceResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
@@ -250,6 +252,17 @@ Only one of the parameters or parameter combinations above can be passed in at a
     RestartKibana(req, cb) {
         let resp = new RestartKibanaResponse();
         this.request("RestartKibana", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update ES cluster dictionaries.
+     * @param {UpdateDictionariesRequest} req
+     * @param {function(string, UpdateDictionariesResponse):void} cb
+     * @public
+     */
+    UpdateDictionaries(req, cb) {
+        let resp = new UpdateDictionariesResponse();
+        this.request("UpdateDictionaries", req, resp, cb);
     }
 
 

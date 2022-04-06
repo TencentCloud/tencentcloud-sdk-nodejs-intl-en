@@ -25,7 +25,6 @@ const DescribeDeliverBandwidthListResponse = models.DescribeDeliverBandwidthList
 const DeleteLiveRecordRuleRequest = models.DeleteLiveRecordRuleRequest;
 const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
 const DeleteLiveTranscodeTemplateResponse = models.DeleteLiveTranscodeTemplateResponse;
-const DescribeBillBandwidthAndFluxListResponse = models.DescribeBillBandwidthAndFluxListResponse;
 const TemplateInfo = models.TemplateInfo;
 const DeleteLiveCallbackRuleResponse = models.DeleteLiveCallbackRuleResponse;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
@@ -38,7 +37,6 @@ const DescribeUploadStreamNumsResponse = models.DescribeUploadStreamNumsResponse
 const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
 const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
-const PushQualityData = models.PushQualityData;
 const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ModifyLivePlayAuthKeyRequest = models.ModifyLivePlayAuthKeyRequest;
 const DescribeLiveDelayInfoListRequest = models.DescribeLiveDelayInfoListRequest;
@@ -58,7 +56,7 @@ const DomainInfo = models.DomainInfo;
 const DescribeLiveTranscodeRulesRequest = models.DescribeLiveTranscodeRulesRequest;
 const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
 const DescribePlayErrorCodeDetailInfoListRequest = models.DescribePlayErrorCodeDetailInfoListRequest;
-const DescribeBillBandwidthAndFluxListRequest = models.DescribeBillBandwidthAndFluxListRequest;
+const PublishTime = models.PublishTime;
 const CommonMixOutputParams = models.CommonMixOutputParams;
 const DescribeUploadStreamNumsRequest = models.DescribeUploadStreamNumsRequest;
 const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
@@ -103,7 +101,6 @@ const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
 const BillAreaInfo = models.BillAreaInfo;
 const PlayDataInfoByStream = models.PlayDataInfoByStream;
-const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
 const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
@@ -148,12 +145,11 @@ const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateReque
 const DescribeProvinceIspPlayInfoListRequest = models.DescribeProvinceIspPlayInfoListRequest;
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
-const DescribeStreamPushInfoListRequest = models.DescribeStreamPushInfoListRequest;
+const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
 const DomainInfoList = models.DomainInfoList;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
-const DescribeStreamPushInfoListResponse = models.DescribeStreamPushInfoListResponse;
 const DescribeLiveStreamPushInfoListRequest = models.DescribeLiveStreamPushInfoListRequest;
 const DescribeLiveWatermarksResponse = models.DescribeLiveWatermarksResponse;
 const WatermarkInfo = models.WatermarkInfo;
@@ -163,7 +159,6 @@ const BindLiveDomainCertRequest = models.BindLiveDomainCertRequest;
 const DescribeTopClientIpSumInfoListRequest = models.DescribeTopClientIpSumInfoListRequest;
 const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
-const PublishTime = models.PublishTime;
 const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
 const MonitorStreamPlayInfo = models.MonitorStreamPlayInfo;
 const DescribeLiveTranscodeDetailInfoRequest = models.DescribeLiveTranscodeDetailInfoRequest;
@@ -450,17 +445,6 @@ Note: data can be queried one hour after it is generated. For example, data betw
     ModifyLivePlayDomain(req, cb) {
         let resp = new ModifyLivePlayDomainResponse();
         this.request("ModifyLivePlayDomain", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and codec of audio and video files.
-     * @param {DescribeStreamPushInfoListRequest} req
-     * @param {function(string, DescribeStreamPushInfoListResponse):void} cb
-     * @public
-     */
-    DescribeStreamPushInfoList(req, cb) {
-        let resp = new DescribeStreamPushInfoListResponse();
-        this.request("DescribeStreamPushInfoList", req, resp, cb);
     }
 
     /**
@@ -1246,17 +1230,6 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     CreateLiveRecordTemplate(req, cb) {
         let resp = new CreateLiveRecordTemplateResponse();
         this.request("CreateLiveRecordTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the data of billable LVB bandwidth and traffic.
-     * @param {DescribeBillBandwidthAndFluxListRequest} req
-     * @param {function(string, DescribeBillBandwidthAndFluxListResponse):void} cb
-     * @public
-     */
-    DescribeBillBandwidthAndFluxList(req, cb) {
-        let resp = new DescribeBillBandwidthAndFluxListResponse();
-        this.request("DescribeBillBandwidthAndFluxList", req, resp, cb);
     }
 
     /**

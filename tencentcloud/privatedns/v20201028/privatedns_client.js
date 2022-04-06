@@ -16,34 +16,27 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeQuotaUsageResponse = models.DescribeQuotaUsageResponse;
 const ModifyPrivateZoneVpcRequest = models.ModifyPrivateZoneVpcRequest;
 const DescribeAuditLogResponse = models.DescribeAuditLogResponse;
 const DescribePrivateDNSAccountListResponse = models.DescribePrivateDNSAccountListResponse;
-const DescribePrivateZoneRecordListRequest = models.DescribePrivateZoneRecordListRequest;
 const PrivateDNSAccount = models.PrivateDNSAccount;
-const DescribePrivateZoneRecordListResponse = models.DescribePrivateZoneRecordListResponse;
-const DescribePrivateZoneListResponse = models.DescribePrivateZoneListResponse;
 const AccountVpcInfoOutput = models.AccountVpcInfoOutput;
-const DescribePrivateZoneRequest = models.DescribePrivateZoneRequest;
 const DatePoint = models.DatePoint;
 const DescribeAccountVpcListResponse = models.DescribeAccountVpcListResponse;
-const DescribePrivateZoneServiceRequest = models.DescribePrivateZoneServiceRequest;
-const PrivateZoneRecord = models.PrivateZoneRecord;
 const AuditLogInfo = models.AuditLogInfo;
-const DescribeRequestDataRequest = models.DescribeRequestDataRequest;
 const ModifyPrivateZoneRecordResponse = models.ModifyPrivateZoneRecordResponse;
 const DescribeAccountVpcListRequest = models.DescribeAccountVpcListRequest;
 const DescribeRequestDataResponse = models.DescribeRequestDataResponse;
-const ModifyPrivateZoneRequest = models.ModifyPrivateZoneRequest;
 const TagInfo = models.TagInfo;
+const TldQuota = models.TldQuota;
 const CreatePrivateZoneRequest = models.CreatePrivateZoneRequest;
 const VpcInfo = models.VpcInfo;
-const AccountVpcInfoOut = models.AccountVpcInfoOut;
 const AccountVpcInfo = models.AccountVpcInfo;
 const ModifyPrivateZoneResponse = models.ModifyPrivateZoneResponse;
-const DescribePrivateZoneListRequest = models.DescribePrivateZoneListRequest;
+const DescribeRequestDataRequest = models.DescribeRequestDataRequest;
 const SubscribePrivateZoneServiceRequest = models.SubscribePrivateZoneServiceRequest;
-const DescribePrivateZoneResponse = models.DescribePrivateZoneResponse;
+const ModifyPrivateZoneRequest = models.ModifyPrivateZoneRequest;
 const CreatePrivateZoneResponse = models.CreatePrivateZoneResponse;
 const DescribeDashboardResponse = models.DescribeDashboardResponse;
 const CreatePrivateZoneRecordResponse = models.CreatePrivateZoneRecordResponse;
@@ -51,22 +44,18 @@ const DescribePrivateZoneServiceResponse = models.DescribePrivateZoneServiceResp
 const CreatePrivateDNSAccountResponse = models.CreatePrivateDNSAccountResponse;
 const DescribeAuditLogRequest = models.DescribeAuditLogRequest;
 const DescribeDashboardRequest = models.DescribeDashboardRequest;
-const DeletePrivateZoneRequest = models.DeletePrivateZoneRequest;
 const AuditLog = models.AuditLog;
 const SubscribePrivateZoneServiceResponse = models.SubscribePrivateZoneServiceResponse;
-const DeletePrivateDNSAccountRequest = models.DeletePrivateDNSAccountRequest;
-const DeletePrivateZoneRecordRequest = models.DeletePrivateZoneRecordRequest;
+const AccountVpcInfoOut = models.AccountVpcInfoOut;
 const Filter = models.Filter;
-const DeletePrivateZoneResponse = models.DeletePrivateZoneResponse;
 const CreatePrivateDNSAccountRequest = models.CreatePrivateDNSAccountRequest;
 const MetricData = models.MetricData;
-const DescribePrivateDNSAccountListRequest = models.DescribePrivateDNSAccountListRequest;
-const PrivateZone = models.PrivateZone;
+const DescribePrivateZoneServiceRequest = models.DescribePrivateZoneServiceRequest;
 const CreatePrivateZoneRecordRequest = models.CreatePrivateZoneRecordRequest;
+const DescribeQuotaUsageRequest = models.DescribeQuotaUsageRequest;
 const ModifyPrivateZoneRecordRequest = models.ModifyPrivateZoneRecordRequest;
-const DeletePrivateDNSAccountResponse = models.DeletePrivateDNSAccountResponse;
 const FlowUsage = models.FlowUsage;
-const DeletePrivateZoneRecordResponse = models.DeletePrivateZoneRecordResponse;
+const DescribePrivateDNSAccountListRequest = models.DescribePrivateDNSAccountListRequest;
 const ModifyPrivateZoneVpcResponse = models.ModifyPrivateZoneVpcResponse;
 
 
@@ -92,28 +81,6 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the private domain information.
-     * @param {DescribePrivateZoneRequest} req
-     * @param {function(string, DescribePrivateZoneResponse):void} cb
-     * @public
-     */
-    DescribePrivateZone(req, cb) {
-        let resp = new DescribePrivateZoneResponse();
-        this.request("DescribePrivateZone", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a DNS record for a private domain.
-     * @param {ModifyPrivateZoneRecordRequest} req
-     * @param {function(string, ModifyPrivateZoneRecordResponse):void} cb
-     * @public
-     */
-    ModifyPrivateZoneRecord(req, cb) {
-        let resp = new ModifyPrivateZoneRecordResponse();
-        this.request("ModifyPrivateZoneRecord", req, resp, cb);
-    }
-
-    /**
      * This API is used to get the VPC list of a Private DNS account.
      * @param {DescribeAccountVpcListRequest} req
      * @param {function(string, DescribeAccountVpcListResponse):void} cb
@@ -125,14 +92,14 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of records for a private domain.
-     * @param {DescribePrivateZoneRecordListRequest} req
-     * @param {function(string, DescribePrivateZoneRecordListResponse):void} cb
+     * This API is used to modify a private domain.
+     * @param {ModifyPrivateZoneRequest} req
+     * @param {function(string, ModifyPrivateZoneResponse):void} cb
      * @public
      */
-    DescribePrivateZoneRecordList(req, cb) {
-        let resp = new DescribePrivateZoneRecordListResponse();
-        this.request("DescribePrivateZoneRecordList", req, resp, cb);
+    ModifyPrivateZone(req, cb) {
+        let resp = new ModifyPrivateZoneResponse();
+        this.request("ModifyPrivateZone", req, resp, cb);
     }
 
     /**
@@ -147,14 +114,14 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a Private DNS account.
-     * @param {DeletePrivateDNSAccountRequest} req
-     * @param {function(string, DeletePrivateDNSAccountResponse):void} cb
+     * This API is used to query quota usage.
+     * @param {DescribeQuotaUsageRequest} req
+     * @param {function(string, DescribeQuotaUsageResponse):void} cb
      * @public
      */
-    DeletePrivateDNSAccount(req, cb) {
-        let resp = new DeletePrivateDNSAccountResponse();
-        this.request("DeletePrivateDNSAccount", req, resp, cb);
+    DescribeQuotaUsage(req, cb) {
+        let resp = new DescribeQuotaUsageResponse();
+        this.request("DescribeQuotaUsage", req, resp, cb);
     }
 
     /**
@@ -191,25 +158,14 @@ class PrivatednsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of private domains.
-     * @param {DescribePrivateZoneListRequest} req
-     * @param {function(string, DescribePrivateZoneListResponse):void} cb
+     * This API is used to modify a DNS record for a private domain.
+     * @param {ModifyPrivateZoneRecordRequest} req
+     * @param {function(string, ModifyPrivateZoneRecordResponse):void} cb
      * @public
      */
-    DescribePrivateZoneList(req, cb) {
-        let resp = new DescribePrivateZoneListResponse();
-        this.request("DescribePrivateZoneList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify a private domain.
-     * @param {ModifyPrivateZoneRequest} req
-     * @param {function(string, ModifyPrivateZoneResponse):void} cb
-     * @public
-     */
-    ModifyPrivateZone(req, cb) {
-        let resp = new ModifyPrivateZoneResponse();
-        this.request("ModifyPrivateZone", req, resp, cb);
+    ModifyPrivateZoneRecord(req, cb) {
+        let resp = new ModifyPrivateZoneRecordResponse();
+        this.request("ModifyPrivateZoneRecord", req, resp, cb);
     }
 
     /**
@@ -254,28 +210,6 @@ class PrivatednsClient extends AbstractClient {
     DescribeRequestData(req, cb) {
         let resp = new DescribeRequestDataResponse();
         this.request("DescribeRequestData", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a DNS record for a private domain.
-     * @param {DeletePrivateZoneRecordRequest} req
-     * @param {function(string, DeletePrivateZoneRecordResponse):void} cb
-     * @public
-     */
-    DeletePrivateZoneRecord(req, cb) {
-        let resp = new DeletePrivateZoneRecordResponse();
-        this.request("DeletePrivateZoneRecord", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a private domain and stop DNS.
-     * @param {DeletePrivateZoneRequest} req
-     * @param {function(string, DeletePrivateZoneResponse):void} cb
-     * @public
-     */
-    DeletePrivateZone(req, cb) {
-        let resp = new DeletePrivateZoneResponse();
-        this.request("DeletePrivateZone", req, resp, cb);
     }
 
     /**

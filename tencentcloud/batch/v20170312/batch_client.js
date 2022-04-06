@@ -19,7 +19,6 @@ const AbstractClient = require('../../common/abstract_client')
 const EventVar = models.EventVar;
 const AnonymousComputeEnv = models.AnonymousComputeEnv;
 const DeleteComputeEnvResponse = models.DeleteComputeEnvResponse;
-const SubmitJobRequest = models.SubmitJobRequest;
 const ComputeEnvData = models.ComputeEnvData;
 const Authentication = models.Authentication;
 const RetryJobsResponse = models.RetryJobsResponse;
@@ -52,7 +51,6 @@ const TerminateComputeNodesRequest = models.TerminateComputeNodesRequest;
 const LocalDiskType = models.LocalDiskType;
 const DescribeComputeEnvActivitiesRequest = models.DescribeComputeEnvActivitiesRequest;
 const CreateTaskTemplateRequest = models.CreateTaskTemplateRequest;
-const Job = models.Job;
 const DeleteComputeEnvRequest = models.DeleteComputeEnvRequest;
 const CreateComputeEnvRequest = models.CreateComputeEnvRequest;
 const DescribeComputeEnvCreateInfoResponse = models.DescribeComputeEnvCreateInfoResponse;
@@ -86,7 +84,6 @@ const DescribeJobRequest = models.DescribeJobRequest;
 const RedirectInfo = models.RedirectInfo;
 const DescribeInstanceCategoriesResponse = models.DescribeInstanceCategoriesResponse;
 const ModifyTaskTemplateResponse = models.ModifyTaskTemplateResponse;
-const SubmitJobResponse = models.SubmitJobResponse;
 const InputMapping = models.InputMapping;
 const RedirectLocalInfo = models.RedirectLocalInfo;
 const DescribeJobSubmitInfoRequest = models.DescribeJobSubmitInfoRequest;
@@ -303,17 +300,6 @@ Instance termination is an asynchronous process, and the time it takes to comple
     DescribeJob(req, cb) {
         let resp = new DescribeJobResponse();
         this.request("DescribeJob", req, resp, cb);
-    }
-
-    /**
-     * This API is used to submit a instance.
-     * @param {SubmitJobRequest} req
-     * @param {function(string, SubmitJobResponse):void} cb
-     * @public
-     */
-    SubmitJob(req, cb) {
-        let resp = new SubmitJobResponse();
-        this.request("SubmitJob", req, resp, cb);
     }
 
     /**

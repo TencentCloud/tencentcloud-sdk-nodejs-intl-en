@@ -852,6 +852,18 @@ class MLIDPassportOCRResponse extends  AbstractModel {
         this.AdvancedInfo = null;
 
         /**
+         * The first row of the machine-readable zone (MRZ) at the bottom
+         * @type {string || null}
+         */
+        this.CodeSet = null;
+
+        /**
+         * The second row of the MRZ at the bottom
+         * @type {string || null}
+         */
+        this.CodeCrc = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -876,6 +888,8 @@ class MLIDPassportOCRResponse extends  AbstractModel {
         this.Warn = 'Warn' in params ? params.Warn : null;
         this.Image = 'Image' in params ? params.Image : null;
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+        this.CodeSet = 'CodeSet' in params ? params.CodeSet : null;
+        this.CodeCrc = 'CodeCrc' in params ? params.CodeCrc : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

@@ -1217,30 +1217,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DeleteCluster request structure.
+ * Auto-upgrades cluster specification
  * @class
  */
-class DeleteClusterRequest extends  AbstractModel {
+class AutoUpgradeClusterLevel extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
-         * @type {string || null}
+         * Whether to enable Auto Cluster Upgrade
+         * @type {boolean || null}
          */
-        this.ClusterId = null;
-
-        /**
-         * Policy used to delete an instance in the cluster: terminate (terminates the instance. Only available for instances on pay-as-you-go CVMs); retain (only removes it from the cluster. The instance will be retained.)
-         * @type {string || null}
-         */
-        this.InstanceDeleteMode = null;
-
-        /**
-         * Specifies the policy to deal with resources in the cluster when the cluster is deleted. It only supports CBS now. The default policy is to retain CBS disks.
-         * @type {Array.<ResourceDeleteOption> || null}
-         */
-        this.ResourceDeleteOptions = null;
+        this.IsAutoUpgrade = null;
 
     }
 
@@ -1251,17 +1239,7 @@ class DeleteClusterRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.InstanceDeleteMode = 'InstanceDeleteMode' in params ? params.InstanceDeleteMode : null;
-
-        if (params.ResourceDeleteOptions) {
-            this.ResourceDeleteOptions = new Array();
-            for (let z in params.ResourceDeleteOptions) {
-                let obj = new ResourceDeleteOption();
-                obj.deserialize(params.ResourceDeleteOptions[z]);
-                this.ResourceDeleteOptions.push(obj);
-            }
-        }
+        this.IsAutoUpgrade = 'IsAutoUpgrade' in params ? params.IsAutoUpgrade : null;
 
     }
 }
@@ -2246,6 +2224,18 @@ class ModifyClusterAttributeRequest extends  AbstractModel {
          */
         this.ClusterDesc = null;
 
+        /**
+         * Cluster specification
+         * @type {string || null}
+         */
+        this.ClusterLevel = null;
+
+        /**
+         * Auto-upgrades cluster specification
+         * @type {AutoUpgradeClusterLevel || null}
+         */
+        this.AutoUpgradeClusterLevel = null;
+
     }
 
     /**
@@ -2259,6 +2249,13 @@ class ModifyClusterAttributeRequest extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
         this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
+        this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
+
+        if (params.AutoUpgradeClusterLevel) {
+            let obj = new AutoUpgradeClusterLevel();
+            obj.deserialize(params.AutoUpgradeClusterLevel)
+            this.AutoUpgradeClusterLevel = obj;
+        }
 
     }
 }
@@ -3067,6 +3064,18 @@ class ClusterBasicSettings extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * Cluster specifications available for managed clusters
+         * @type {string || null}
+         */
+        this.ClusterLevel = null;
+
+        /**
+         * Auto cluster upgrade for managed clusters
+         * @type {AutoUpgradeClusterLevel || null}
+         */
+        this.AutoUpgradeClusterLevel = null;
+
     }
 
     /**
@@ -3094,6 +3103,13 @@ class ClusterBasicSettings extends  AbstractModel {
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
         this.NeedWorkSecurityGroup = 'NeedWorkSecurityGroup' in params ? params.NeedWorkSecurityGroup : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
+
+        if (params.AutoUpgradeClusterLevel) {
+            let obj = new AutoUpgradeClusterLevel();
+            obj.deserialize(params.AutoUpgradeClusterLevel)
+            this.AutoUpgradeClusterLevel = obj;
+        }
 
     }
 }
@@ -6929,7 +6945,7 @@ class Cluster extends  AbstractModel {
         this.TagSpecification = null;
 
         /**
-         * Cluster status (Running, Creating, or Abnormal)
+         * Cluster status (`Running`, `Creating`, `Idling` or `Abnormal`)
          * @type {string || null}
          */
         this.ClusterStatus = null;
@@ -6988,6 +7004,18 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          */
         this.EnableExternalNode = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ClusterLevel = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.AutoUpgradeClusterLevel = null;
+
     }
 
     /**
@@ -7029,6 +7057,8 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
         this.EnableExternalNode = 'EnableExternalNode' in params ? params.EnableExternalNode : null;
+        this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
+        this.AutoUpgradeClusterLevel = 'AutoUpgradeClusterLevel' in params ? params.AutoUpgradeClusterLevel : null;
 
     }
 }
@@ -7416,6 +7446,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ClusterDesc = null;
 
         /**
+         * Cluster specification
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterLevel = null;
+
+        /**
+         * Auto-upgrades cluster specification
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {AutoUpgradeClusterLevel || null}
+         */
+        this.AutoUpgradeClusterLevel = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -7433,6 +7477,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
         this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
+        this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
+
+        if (params.AutoUpgradeClusterLevel) {
+            let obj = new AutoUpgradeClusterLevel();
+            obj.deserialize(params.AutoUpgradeClusterLevel)
+            this.AutoUpgradeClusterLevel = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8976,6 +9027,56 @@ class DeleteClusterNodePoolResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteCluster request structure.
+ * @class
+ */
+class DeleteClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Policy used to delete an instance in the cluster: terminate (terminates the instance. Only available for instances on pay-as-you-go CVMs); retain (only removes it from the cluster. The instance will be retained.)
+         * @type {string || null}
+         */
+        this.InstanceDeleteMode = null;
+
+        /**
+         * Specifies the policy to deal with resources in the cluster when the cluster is deleted. It only supports CBS now. The default policy is to retain CBS disks.
+         * @type {Array.<ResourceDeleteOption> || null}
+         */
+        this.ResourceDeleteOptions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceDeleteMode = 'InstanceDeleteMode' in params ? params.InstanceDeleteMode : null;
+
+        if (params.ResourceDeleteOptions) {
+            this.ResourceDeleteOptions = new Array();
+            for (let z in params.ResourceDeleteOptions) {
+                let obj = new ResourceDeleteOption();
+                obj.deserialize(params.ResourceDeleteOptions[z]);
+                this.ResourceDeleteOptions.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Describes information related to the Cloud Monitor service.
  * @class
  */
@@ -9517,7 +9618,7 @@ module.exports = {
     ServiceAccountAuthenticationOptions: ServiceAccountAuthenticationOptions,
     InstanceUpgradeProgressItem: InstanceUpgradeProgressItem,
     NodePool: NodePool,
-    DeleteClusterRequest: DeleteClusterRequest,
+    AutoUpgradeClusterLevel: AutoUpgradeClusterLevel,
     RunInstancesForNode: RunInstancesForNode,
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
@@ -9669,6 +9770,7 @@ module.exports = {
     DescribeClusterAsGroupOptionResponse: DescribeClusterAsGroupOptionResponse,
     ClusterAsGroupAttribute: ClusterAsGroupAttribute,
     DeleteClusterNodePoolResponse: DeleteClusterNodePoolResponse,
+    DeleteClusterRequest: DeleteClusterRequest,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     UpdateClusterVersionResponse: UpdateClusterVersionResponse,
     CreateClusterNodePoolResponse: CreateClusterNodePoolResponse,

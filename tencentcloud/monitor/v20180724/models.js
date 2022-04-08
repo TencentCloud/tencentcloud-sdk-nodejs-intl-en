@@ -2541,6 +2541,12 @@ class ModifyAlarmNoticeRequest extends  AbstractModel {
          */
         this.URLNotices = null;
 
+        /**
+         * The operation of pushing alarm notifications to CLS. Up to one CLS log topic can be configured.
+         * @type {Array.<CLSNotice> || null}
+         */
+        this.CLSNotices = null;
+
     }
 
     /**
@@ -2571,6 +2577,15 @@ class ModifyAlarmNoticeRequest extends  AbstractModel {
                 let obj = new URLNotice();
                 obj.deserialize(params.URLNotices[z]);
                 this.URLNotices.push(obj);
+            }
+        }
+
+        if (params.CLSNotices) {
+            this.CLSNotices = new Array();
+            for (let z in params.CLSNotices) {
+                let obj = new CLSNotice();
+                obj.deserialize(params.CLSNotices[z]);
+                this.CLSNotices.push(obj);
             }
         }
 
@@ -6535,6 +6550,12 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
          */
         this.NeedCorrespondence = null;
 
+        /**
+         * Filter alarm policy by triggered task (such as auto scaling task). Up to 10 tasks can be specified.
+         * @type {Array.<AlarmPolicyTriggerTask> || null}
+         */
+        this.TriggerTasks = null;
+
     }
 
     /**
@@ -6563,6 +6584,15 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
         this.NotBindingNoticeRule = 'NotBindingNoticeRule' in params ? params.NotBindingNoticeRule : null;
         this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
         this.NeedCorrespondence = 'NeedCorrespondence' in params ? params.NeedCorrespondence : null;
+
+        if (params.TriggerTasks) {
+            this.TriggerTasks = new Array();
+            for (let z in params.TriggerTasks) {
+                let obj = new AlarmPolicyTriggerTask();
+                obj.deserialize(params.TriggerTasks[z]);
+                this.TriggerTasks.push(obj);
+            }
+        }
 
     }
 }
@@ -6809,6 +6839,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.PolicyIds = null;
 
+        /**
+         * Channel to push alarm notifications to CLS.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<CLSNotice> || null}
+         */
+        this.CLSNotices = null;
+
     }
 
     /**
@@ -6844,6 +6881,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.IsPreset = 'IsPreset' in params ? params.IsPreset : null;
         this.NoticeLanguage = 'NoticeLanguage' in params ? params.NoticeLanguage : null;
         this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
+
+        if (params.CLSNotices) {
+            this.CLSNotices = new Array();
+            for (let z in params.CLSNotices) {
+                let obj = new CLSNotice();
+                obj.deserialize(params.CLSNotices[z]);
+                this.CLSNotices.push(obj);
+            }
+        }
 
     }
 }
@@ -9141,6 +9187,12 @@ class CreateAlarmNoticeRequest extends  AbstractModel {
          */
         this.URLNotices = null;
 
+        /**
+         * The operation of pushing alarm notifications to CLS. Up to one CLS log topic can be configured.
+         * @type {Array.<CLSNotice> || null}
+         */
+        this.CLSNotices = null;
+
     }
 
     /**
@@ -9170,6 +9222,15 @@ class CreateAlarmNoticeRequest extends  AbstractModel {
                 let obj = new URLNotice();
                 obj.deserialize(params.URLNotices[z]);
                 this.URLNotices.push(obj);
+            }
+        }
+
+        if (params.CLSNotices) {
+            this.CLSNotices = new Array();
+            for (let z in params.CLSNotices) {
+                let obj = new CLSNotice();
+                obj.deserialize(params.CLSNotices[z]);
+                this.CLSNotices.push(obj);
             }
         }
 
@@ -9446,6 +9507,55 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
         this.Module = 'Module' in params ? params.Module : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+
+    }
+}
+
+/**
+ * The operation of pushing alarm notifications to CLS
+ * @class
+ */
+class CLSNotice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Logset ID.
+         * @type {string || null}
+         */
+        this.LogSetId = null;
+
+        /**
+         * Topic ID.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Status. Valid values: `0` (disabled), `1` (enabled). Default value: `1` (enabled). This parameter can be left empty.
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -10033,6 +10143,7 @@ module.exports = {
     GetMonitorDataResponse: GetMonitorDataResponse,
     ReceiverInfo: ReceiverInfo,
     UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
+    CLSNotice: CLSNotice,
     DescribePolicyGroupInfoEventCondition: DescribePolicyGroupInfoEventCondition,
     SendCustomAlarmMsgResponse: SendCustomAlarmMsgResponse,
     AlarmPolicyCondition: AlarmPolicyCondition,

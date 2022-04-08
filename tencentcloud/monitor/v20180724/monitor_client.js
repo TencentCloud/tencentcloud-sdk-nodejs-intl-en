@@ -158,6 +158,7 @@ const InstanceGroups = models.InstanceGroups;
 const GetMonitorDataResponse = models.GetMonitorDataResponse;
 const ReceiverInfo = models.ReceiverInfo;
 const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const CLSNotice = models.CLSNotice;
 const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
 const AlarmPolicyCondition = models.AlarmPolicyCondition;

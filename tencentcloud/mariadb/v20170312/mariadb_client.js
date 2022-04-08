@@ -16,133 +16,65 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const IsolateHourDBInstanceResponse = models.IsolateHourDBInstanceResponse;
-const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
-const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
-const ParamDesc = models.ParamDesc;
-const DescribeDBResourceUsageRequest = models.DescribeDBResourceUsageRequest;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
-const ProcedurePrivilege = models.ProcedurePrivilege;
-const DestroyHourDBInstanceRequest = models.DestroyHourDBInstanceRequest;
-const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
-const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
-const CancelDcnJobResponse = models.CancelDcnJobResponse;
-const DescribeFileDownloadUrlRequest = models.DescribeFileDownloadUrlRequest;
-const DescribeDBResourceUsageDetailsResponse = models.DescribeDBResourceUsageDetailsResponse;
-const DestroyHourDBInstanceResponse = models.DestroyHourDBInstanceResponse;
-const Account = models.Account;
-const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
-const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
-const CreateAccountRequest = models.CreateAccountRequest;
-const InitDBInstancesResponse = models.InitDBInstancesResponse;
-const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
-const IsolateHourDBInstanceRequest = models.IsolateHourDBInstanceRequest;
-const ResourceUsageMonitorSet = models.ResourceUsageMonitorSet;
-const ModifyLogFileRetentionPeriodRequest = models.ModifyLogFileRetentionPeriodRequest;
-const PerformanceMonitorSet = models.PerformanceMonitorSet;
-const DescribeFlowResponse = models.DescribeFlowResponse;
-const CloneAccountResponse = models.CloneAccountResponse;
-const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
-const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
-const ParamConstraint = models.ParamConstraint;
-const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
-const DBBackupTimeConfig = models.DBBackupTimeConfig;
-const ModifyBackupTimeRequest = models.ModifyBackupTimeRequest;
-const DatabaseView = models.DatabaseView;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
+const DescribeDcnDetailRequest = models.DescribeDcnDetailRequest;
+const DeleteAccountRequest = models.DeleteAccountRequest;
+const DescribeFileDownloadUrlResponse = models.DescribeFileDownloadUrlResponse;
 const NodeInfo = models.NodeInfo;
+const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
+const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const ModifySyncTaskAttributeResponse = models.ModifySyncTaskAttributeResponse;
 const DcnDetailItem = models.DcnDetailItem;
-const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const LogFileInfo = models.LogFileInfo;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CreateHourDBInstanceResponse = models.CreateHourDBInstanceResponse;
-const SlowLogData = models.SlowLogData;
-const ParamModifyResult = models.ParamModifyResult;
+const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
+const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
-const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
-const TablePrivilege = models.TablePrivilege;
-const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
-const DatabaseFunction = models.DatabaseFunction;
-const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
-const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
-const DescribeBackupTimeRequest = models.DescribeBackupTimeRequest;
-const DatabaseTable = models.DatabaseTable;
-const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
-const SwitchDBInstanceHARequest = models.SwitchDBInstanceHARequest;
-const DBParamValue = models.DBParamValue;
-const ModifyDBParametersRequest = models.ModifyDBParametersRequest;
-const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
-const DescribeDcnDetailRequest = models.DescribeDcnDetailRequest;
-const DescribeFileDownloadUrlResponse = models.DescribeFileDownloadUrlResponse;
-const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
-const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
-const SecurityGroup = models.SecurityGroup;
-const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
-const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
-const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
-const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
-const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
-const TableColumn = models.TableColumn;
+const ModifySyncTaskAttributeRequest = models.ModifySyncTaskAttributeRequest;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const CreateAccountResponse = models.CreateAccountResponse;
 const SecurityGroupBound = models.SecurityGroupBound;
 const ColumnPrivilege = models.ColumnPrivilege;
-const ModifySyncTaskAttributeRequest = models.ModifySyncTaskAttributeRequest;
-const InitDBInstancesRequest = models.InitDBInstancesRequest;
-const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
-const DBInstance = models.DBInstance;
-const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
-const ModifyBackupTimeResponse = models.ModifyBackupTimeResponse;
-const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
+const CancelDcnJobResponse = models.CancelDcnJobResponse;
+const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
+const DBInstance = models.DBInstance;
+const DestroyHourDBInstanceResponse = models.DestroyHourDBInstanceResponse;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
+const Account = models.Account;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const ProcedurePrivilege = models.ProcedurePrivilege;
+const CreateAccountRequest = models.CreateAccountRequest;
 const CancelDcnJobRequest = models.CancelDcnJobRequest;
-const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const DestroyHourDBInstanceRequest = models.DestroyHourDBInstanceRequest;
+const CreateHourDBInstanceRequest = models.CreateHourDBInstanceRequest;
+const SecurityGroup = models.SecurityGroup;
+const DescribeFileDownloadUrlRequest = models.DescribeFileDownloadUrlRequest;
 const DatabasePrivilege = models.DatabasePrivilege;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
-const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const FunctionPrivilege = models.FunctionPrivilege;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
-const DescribeDBPerformanceDetailsRequest = models.DescribeDBPerformanceDetailsRequest;
-const DescribeBackupTimeResponse = models.DescribeBackupTimeResponse;
-const ActivateHourDBInstanceRequest = models.ActivateHourDBInstanceRequest;
-const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
+const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
+const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
+const TablePrivilege = models.TablePrivilege;
+const DBParamValue = models.DBParamValue;
 const ViewPrivileges = models.ViewPrivileges;
+const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
-const ResourceTag = models.ResourceTag;
-const DeleteAccountRequest = models.DeleteAccountRequest;
-const DescribeFlowRequest = models.DescribeFlowRequest;
-const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
-const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
-const DatabaseProcedure = models.DatabaseProcedure;
-const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
-const ActivateHourDBInstanceResponse = models.ActivateHourDBInstanceResponse;
-const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
-const CloneAccountRequest = models.CloneAccountRequest;
-const CreateAccountResponse = models.CreateAccountResponse;
-const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
-const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const ConstraintRange = models.ConstraintRange;
-const DescribeDBResourceUsageResponse = models.DescribeDBResourceUsageResponse;
-const LogFileInfo = models.LogFileInfo;
-const DescribeDBResourceUsageDetailsRequest = models.DescribeDBResourceUsageDetailsRequest;
-const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
-const DBAccount = models.DBAccount;
-const CreateHourDBInstanceRequest = models.CreateHourDBInstanceRequest;
-const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
-const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
-const DescribeDBPerformanceDetailsResponse = models.DescribeDBPerformanceDetailsResponse;
-const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
-const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
-const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
-const MonitorData = models.MonitorData;
-const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
-const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
-const ModifyLogFileRetentionPeriodResponse = models.ModifyLogFileRetentionPeriodResponse;
-const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
-const DescribeDBPerformanceRequest = models.DescribeDBPerformanceRequest;
+const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DeleteAccountResponse = models.DeleteAccountResponse;
+const ResourceTag = models.ResourceTag;
 
 
 /**
@@ -155,18 +87,6 @@ class MariadbClient extends AbstractClient {
         super("mariadb.tencentcloudapi.com", "2017-03-12", credential, region, profile);
     }
     
-    /**
-     * This API is used to query the permissions of a TencentDB account.
-Note: accounts with the same username but different hosts are different accounts.
-     * @param {DescribeAccountPrivilegesRequest} req
-     * @param {function(string, DescribeAccountPrivilegesResponse):void} cb
-     * @public
-     */
-    DescribeAccountPrivileges(req, cb) {
-        let resp = new DescribeAccountPrivilegesResponse();
-        this.request("DescribeAccountPrivileges", req, resp, cb);
-    }
-
     /**
      * This API is used to create pay-as-you-go instances.
      * @param {CreateHourDBInstanceRequest} req
@@ -187,17 +107,6 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeInstanceNodeInfo(req, cb) {
         let resp = new DescribeInstanceNodeInfoResponse();
         this.request("DescribeInstanceNodeInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of database objects in a TencentDB instance, including tables, stored procedures, views, and functions.
-     * @param {DescribeDatabaseObjectsRequest} req
-     * @param {function(string, DescribeDatabaseObjectsResponse):void} cb
-     * @public
-     */
-    DescribeDatabaseObjects(req, cb) {
-        let resp = new DescribeDatabaseObjectsResponse();
-        this.request("DescribeDatabaseObjects", req, resp, cb);
     }
 
     /**
@@ -224,39 +133,6 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to get the backup time of a TencentDB instance. The backend system will perform instance backup regularly according to this configuration.
-     * @param {DescribeBackupTimeRequest} req
-     * @param {function(string, DescribeBackupTimeResponse):void} cb
-     * @public
-     */
-    DescribeBackupTime(req, cb) {
-        let resp = new DescribeBackupTimeResponse();
-        this.request("DescribeBackupTime", req, resp, cb);
-    }
-
-    /**
-     * This API is used to view the current performance data of a database instance.
-     * @param {DescribeDBResourceUsageDetailsRequest} req
-     * @param {function(string, DescribeDBResourceUsageDetailsResponse):void} cb
-     * @public
-     */
-    DescribeDBResourceUsageDetails(req, cb) {
-        let resp = new DescribeDBResourceUsageDetailsResponse();
-        this.request("DescribeDBResourceUsageDetails", req, resp, cb);
-    }
-
-    /**
-     * This API is used to remove the isolation of pay-as-you-go instances.
-     * @param {ActivateHourDBInstanceRequest} req
-     * @param {function(string, ActivateHourDBInstanceResponse):void} cb
-     * @public
-     */
-    ActivateHourDBInstance(req, cb) {
-        let resp = new ActivateHourDBInstanceResponse();
-        this.request("ActivateHourDBInstance", req, resp, cb);
-    }
-
-    /**
      * This API is used to reset the password of a TencentDB account.
 Note: accounts with the same username but different hosts are different accounts.
      * @param {ResetAccountPasswordRequest} req
@@ -266,72 +142,6 @@ Note: accounts with the same username but different hosts are different accounts
     ResetAccountPassword(req, cb) {
         let resp = new ResetAccountPasswordResponse();
         this.request("ResetAccountPassword", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify database parameters.
-     * @param {ModifyDBParametersRequest} req
-     * @param {function(string, ModifyDBParametersResponse):void} cb
-     * @public
-     */
-    ModifyDBParameters(req, cb) {
-        let resp = new ModifyDBParametersResponse();
-        this.request("ModifyDBParameters", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the number of days for retention of database backup logs.
-     * @param {ModifyLogFileRetentionPeriodRequest} req
-     * @param {function(string, ModifyLogFileRetentionPeriodResponse):void} cb
-     * @public
-     */
-    ModifyLogFileRetentionPeriod(req, cb) {
-        let resp = new ModifyLogFileRetentionPeriodResponse();
-        this.request("ModifyLogFileRetentionPeriod", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the slow query log list.
-     * @param {DescribeDBSlowLogsRequest} req
-     * @param {function(string, DescribeDBSlowLogsResponse):void} cb
-     * @public
-     */
-    DescribeDBSlowLogs(req, cb) {
-        let resp = new DescribeDBSlowLogsResponse();
-        this.request("DescribeDBSlowLogs", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query flow status.
-     * @param {DescribeFlowRequest} req
-     * @param {function(string, DescribeFlowResponse):void} cb
-     * @public
-     */
-    DescribeFlow(req, cb) {
-        let resp = new DescribeFlowResponse();
-        this.request("DescribeFlow", req, resp, cb);
-    }
-
-    /**
-     * This API is used to start a primary-replica switch of instances.
-     * @param {SwitchDBInstanceHARequest} req
-     * @param {function(string, SwitchDBInstanceHAResponse):void} cb
-     * @public
-     */
-    SwitchDBInstanceHA(req, cb) {
-        let resp = new SwitchDBInstanceHAResponse();
-        this.request("SwitchDBInstanceHA", req, resp, cb);
-    }
-
-    /**
-     * This API is used to rename a TencentDB instance.
-     * @param {ModifyDBInstanceNameRequest} req
-     * @param {function(string, ModifyDBInstanceNameResponse):void} cb
-     * @public
-     */
-    ModifyDBInstanceName(req, cb) {
-        let resp = new ModifyDBInstanceNameResponse();
-        this.request("ModifyDBInstanceName", req, resp, cb);
     }
 
     /**
@@ -358,17 +168,6 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to get the current parameter settings of a database.
-     * @param {DescribeDBParametersRequest} req
-     * @param {function(string, DescribeDBParametersResponse):void} cb
-     * @public
-     */
-    DescribeDBParameters(req, cb) {
-        let resp = new DescribeDBParametersResponse();
-        this.request("DescribeDBParameters", req, resp, cb);
-    }
-
-    /**
      * This API is used to modify the project to which TencentDB instances belong.
      * @param {ModifyDBInstancesProjectRequest} req
      * @param {function(string, ModifyDBInstancesProjectResponse):void} cb
@@ -377,17 +176,6 @@ Note: accounts with the same username but different hosts are different accounts
     ModifyDBInstancesProject(req, cb) {
         let resp = new ModifyDBInstancesProjectResponse();
         this.request("ModifyDBInstancesProject", req, resp, cb);
-    }
-
-    /**
-     * This API is used to view the instance performance data details.
-     * @param {DescribeDBPerformanceDetailsRequest} req
-     * @param {function(string, DescribeDBPerformanceDetailsResponse):void} cb
-     * @public
-     */
-    DescribeDBPerformanceDetails(req, cb) {
-        let resp = new DescribeDBPerformanceDetailsResponse();
-        this.request("DescribeDBPerformanceDetails", req, resp, cb);
     }
 
     /**
@@ -402,17 +190,6 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to modify sync task attributes (currently, only the task name can be modified).
-     * @param {ModifySyncTaskAttributeRequest} req
-     * @param {function(string, ModifySyncTaskAttributeResponse):void} cb
-     * @public
-     */
-    ModifySyncTaskAttribute(req, cb) {
-        let resp = new ModifySyncTaskAttributeResponse();
-        this.request("ModifySyncTaskAttribute", req, resp, cb);
-    }
-
-    /**
      * This API is used to terminate a pay-as-you-go instance.
      * @param {DestroyHourDBInstanceRequest} req
      * @param {function(string, DestroyHourDBInstanceResponse):void} cb
@@ -421,17 +198,6 @@ Note: accounts with the same username but different hosts are different accounts
     DestroyHourDBInstance(req, cb) {
         let resp = new DestroyHourDBInstanceResponse();
         this.request("DestroyHourDBInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to isolate pay-as-you-go instances.
-     * @param {IsolateHourDBInstanceRequest} req
-     * @param {function(string, IsolateHourDBInstanceResponse):void} cb
-     * @public
-     */
-    IsolateHourDBInstance(req, cb) {
-        let resp = new IsolateHourDBInstanceResponse();
-        this.request("IsolateHourDBInstance", req, resp, cb);
     }
 
     /**
@@ -480,36 +246,14 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     }
 
     /**
-     * This API is used to enable public network access for a TencentDB instance. After that, you can access the instance with the public domain name and port obtained through the `DescribeDCDBInstances` API.
-     * @param {OpenDBExtranetAccessRequest} req
-     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
+     * This API is used to modify sync task attributes (currently, only the task name can be modified).
+     * @param {ModifySyncTaskAttributeRequest} req
+     * @param {function(string, ModifySyncTaskAttributeResponse):void} cb
      * @public
      */
-    OpenDBExtranetAccess(req, cb) {
-        let resp = new OpenDBExtranetAccessResponse();
-        this.request("OpenDBExtranetAccess", req, resp, cb);
-    }
-
-    /**
-     * This API is used to initialize TencentDB instances, including setting the default character set and table name case sensitivity.
-     * @param {InitDBInstancesRequest} req
-     * @param {function(string, InitDBInstancesResponse):void} cb
-     * @public
-     */
-    InitDBInstances(req, cb) {
-        let resp = new InitDBInstancesResponse();
-        this.request("InitDBInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to set the backup time of a TencentDB instance. The backend system will perform instance backup regularly according to this configuration.
-     * @param {ModifyBackupTimeRequest} req
-     * @param {function(string, ModifyBackupTimeResponse):void} cb
-     * @public
-     */
-    ModifyBackupTime(req, cb) {
-        let resp = new ModifyBackupTimeResponse();
-        this.request("ModifyBackupTime", req, resp, cb);
+    ModifySyncTaskAttribute(req, cb) {
+        let resp = new ModifySyncTaskAttributeResponse();
+        this.request("ModifySyncTaskAttribute", req, resp, cb);
     }
 
     /**
@@ -529,28 +273,6 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     }
 
     /**
-     * This API is used to modify the security groups associated with TencentDB.
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
-     * @public
-     */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the sync mode of a TencentDB instance.
-     * @param {ModifyDBSyncModeRequest} req
-     * @param {function(string, ModifyDBSyncModeResponse):void} cb
-     * @public
-     */
-    ModifyDBSyncMode(req, cb) {
-        let resp = new ModifyDBSyncModeResponse();
-        this.request("ModifyDBSyncMode", req, resp, cb);
-    }
-
-    /**
      * This API is used to disable public network access for a TencentDB instance, which will make the public IP address inaccessible. The `DescribeDCDBInstances` API will not return the public domain name and port information of the corresponding instance.
      * @param {CloseDBExtranetAccessRequest} req
      * @param {function(string, CloseDBExtranetAccessResponse):void} cb
@@ -559,17 +281,6 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     CloseDBExtranetAccess(req, cb) {
         let resp = new CloseDBExtranetAccessResponse();
         this.request("CloseDBExtranetAccess", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of accounts of a specified TencentDB instance.
-     * @param {DescribeAccountsRequest} req
-     * @param {function(string, DescribeAccountsResponse):void} cb
-     * @public
-     */
-    DescribeAccounts(req, cb) {
-        let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
     }
 
     /**
@@ -596,17 +307,6 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to query the list of databases of a TencentDB instance.
-     * @param {DescribeDatabasesRequest} req
-     * @param {function(string, DescribeDatabasesResponse):void} cb
-     * @public
-     */
-    DescribeDatabases(req, cb) {
-        let resp = new DescribeDatabasesResponse();
-        this.request("DescribeDatabases", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the security group details of an instance.
      * @param {DescribeDBSecurityGroupsRequest} req
      * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
@@ -618,17 +318,6 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to query the table information of a TencentDB instance.
-     * @param {DescribeDatabaseTableRequest} req
-     * @param {function(string, DescribeDatabaseTableResponse):void} cb
-     * @public
-     */
-    DescribeDatabaseTable(req, cb) {
-        let resp = new DescribeDatabaseTableResponse();
-        this.request("DescribeDatabaseTable", req, resp, cb);
-    }
-
-    /**
      * This API is used to cancel DCN synchronization.
      * @param {CancelDcnJobRequest} req
      * @param {function(string, CancelDcnJobResponse):void} cb
@@ -637,50 +326,6 @@ Note: accounts with the same username but different hosts are different accounts
     CancelDcnJob(req, cb) {
         let resp = new CancelDcnJobResponse();
         this.request("CancelDcnJob", req, resp, cb);
-    }
-
-    /**
-     * This API is used to clone an instance account.
-     * @param {CloneAccountRequest} req
-     * @param {function(string, CloneAccountResponse):void} cb
-     * @public
-     */
-    CloneAccount(req, cb) {
-        let resp = new CloneAccountResponse();
-        this.request("CloneAccount", req, resp, cb);
-    }
-
-    /**
-     * This API is used to view the current performance data of a database instance.
-     * @param {DescribeDBPerformanceRequest} req
-     * @param {function(string, DescribeDBPerformanceResponse):void} cb
-     * @public
-     */
-    DescribeDBPerformance(req, cb) {
-        let resp = new DescribeDBPerformanceResponse();
-        this.request("DescribeDBPerformance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to view the configured number of days for retention of database backup logs.
-     * @param {DescribeLogFileRetentionPeriodRequest} req
-     * @param {function(string, DescribeLogFileRetentionPeriodResponse):void} cb
-     * @public
-     */
-    DescribeLogFileRetentionPeriod(req, cb) {
-        let resp = new DescribeLogFileRetentionPeriodResponse();
-        this.request("DescribeLogFileRetentionPeriod", req, resp, cb);
-    }
-
-    /**
-     * This API is used to view the resource usage of a database instance.
-     * @param {DescribeDBResourceUsageRequest} req
-     * @param {function(string, DescribeDBResourceUsageResponse):void} cb
-     * @public
-     */
-    DescribeDBResourceUsage(req, cb) {
-        let resp = new DescribeDBResourceUsageResponse();
-        this.request("DescribeDBResourceUsage", req, resp, cb);
     }
 
     /**

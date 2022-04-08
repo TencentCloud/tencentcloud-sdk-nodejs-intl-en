@@ -17,10 +17,13 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AddInstancesResponse = models.AddInstancesResponse;
-const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
+const NetAddr = models.NetAddr;
+const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const Addr = models.Addr;
 const DescribeClustersRequest = models.DescribeClustersRequest;
+const NewAccount = models.NewAccount;
 const InstanceSpec = models.InstanceSpec;
+const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
 const BackupFileInfo = models.BackupFileInfo;
@@ -30,11 +33,13 @@ const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const DescribeClusterInstanceGrpsRequest = models.DescribeClusterInstanceGrpsRequest;
 const DescribeResourcesByDealNameResponse = models.DescribeResourcesByDealNameResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const CreateAccountsRequest = models.CreateAccountsRequest;
 const IsolateInstanceRequest = models.IsolateInstanceRequest;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
 const DescribeBackupListResponse = models.DescribeBackupListResponse;
 const DescribeRollbackTimeRangeResponse = models.DescribeRollbackTimeRangeResponse;
 const ModifyMaintainPeriodConfigRequest = models.ModifyMaintainPeriodConfigRequest;
+const ResumeServerlessRequest = models.ResumeServerlessRequest;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const ActivateInstanceResponse = models.ActivateInstanceResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
@@ -42,7 +47,8 @@ const DescribeRollbackTimeValidityRequest = models.DescribeRollbackTimeValidityR
 const IsolateClusterRequest = models.IsolateClusterRequest;
 const DescribeClusterInstanceGrpsResponse = models.DescribeClusterInstanceGrpsResponse;
 const AddInstancesRequest = models.AddInstancesRequest;
-const NetAddr = models.NetAddr;
+const CreateAccountsResponse = models.CreateAccountsResponse;
+const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
 const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
 const Tag = models.Tag;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
@@ -61,9 +67,10 @@ const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
 const IsolateInstanceResponse = models.IsolateInstanceResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
-const ResumeServerlessRequest = models.ResumeServerlessRequest;
+const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
 const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
 const QueryFilter = models.QueryFilter;
+const ObjectTask = models.ObjectTask;
 const ModifyClusterParamRequest = models.ModifyClusterParamRequest;
 const CynosdbInstance = models.CynosdbInstance;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
@@ -74,14 +81,12 @@ const BillingResourceInfo = models.BillingResourceInfo;
 const OfflineClusterResponse = models.OfflineClusterResponse;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
 const PauseServerlessRequest = models.PauseServerlessRequest;
-const ObjectTask = models.ObjectTask;
+const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const DescribeInstanceSpecsRequest = models.DescribeInstanceSpecsRequest;
 const ParamItem = models.ParamItem;
 const IsolateClusterResponse = models.IsolateClusterResponse;
-const CreateClustersResponse = models.CreateClustersResponse;
 const SetRenewFlagRequest = models.SetRenewFlagRequest;
-const CreateClustersRequest = models.CreateClustersRequest;
 const CynosdbCluster = models.CynosdbCluster;
 const OfflineClusterRequest = models.OfflineClusterRequest;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
@@ -173,6 +178,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify cluster name.
+     * @param {ModifyClusterNameRequest} req
+     * @param {function(string, ModifyClusterNameResponse):void} cb
+     * @public
+     */
+    ModifyClusterName(req, cb) {
+        let resp = new ModifyClusterNameResponse();
+        this.request("ModifyClusterName", req, resp, cb);
+    }
+
+    /**
      * This API is used to query instance details.
      * @param {DescribeInstanceDetailRequest} req
      * @param {function(string, DescribeInstanceDetailResponse):void} cb
@@ -236,6 +252,17 @@ class CynosdbClient extends AbstractClient {
     OfflineInstance(req, cb) {
         let resp = new OfflineInstanceResponse();
         this.request("OfflineInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance name.
+     * @param {ModifyInstanceNameRequest} req
+     * @param {function(string, ModifyInstanceNameResponse):void} cb
+     * @public
+     */
+    ModifyInstanceName(req, cb) {
+        let resp = new ModifyInstanceNameResponse();
+        this.request("ModifyInstanceName", req, resp, cb);
     }
 
     /**
@@ -382,14 +409,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a cluster.
-     * @param {CreateClustersRequest} req
-     * @param {function(string, CreateClustersResponse):void} cb
+     * This API is used to create an account.
+     * @param {CreateAccountsRequest} req
+     * @param {function(string, CreateAccountsResponse):void} cb
      * @public
      */
-    CreateClusters(req, cb) {
-        let resp = new CreateClustersResponse();
-        this.request("CreateClusters", req, resp, cb);
+    CreateAccounts(req, cb) {
+        let resp = new CreateAccountsResponse();
+        this.request("CreateAccounts", req, resp, cb);
     }
 
     /**

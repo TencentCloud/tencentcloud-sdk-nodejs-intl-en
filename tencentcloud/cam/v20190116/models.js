@@ -208,6 +208,34 @@ class LoginActionFlagIntl extends  AbstractModel {
 }
 
 /**
+ * UpdateUserOIDCConfig response structure.
+ * @class
+ */
+class UpdateUserOIDCConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListAccessKeys request structure.
  * @class
  */
@@ -617,6 +645,42 @@ class AttachRolePolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdatePolicy response structure.
+ * @class
+ */
+class UpdatePolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID, which will be returned only if the input parameter is `PolicyName`
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1133,6 +1197,48 @@ class DescribeUserSAMLConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * PutRolePermissionsBoundary request structure.
+ * @class
+ */
+class PutRolePermissionsBoundaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Role ID (either it or the role name must be entered)
+         * @type {string || null}
+         */
+        this.RoleId = null;
+
+        /**
+         * Role name (either it or the role ID must be entered)
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
     }
 }
@@ -1869,18 +1975,24 @@ class UpdateUserSAMLConfigRequest extends  AbstractModel {
 }
 
 /**
- * DeleteGroup response structure.
+ * SetDefaultPolicyVersion request structure.
  * @class
  */
-class DeleteGroupResponse extends  AbstractModel {
+class SetDefaultPolicyVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Policy ID
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.PolicyId = null;
+
+        /**
+         * Policy version, which can be obtained through `ListPolicyVersions`.
+         * @type {number || null}
+         */
+        this.VersionId = null;
 
     }
 
@@ -1891,7 +2003,8 @@ class DeleteGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
 
     }
 }
@@ -1991,70 +2104,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeSafeAuthFlag response structure.
- * @class
- */
-class DescribeSafeAuthFlagResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Login protection settings
-         * @type {LoginActionFlag || null}
-         */
-        this.LoginFlag = null;
-
-        /**
-         * Sensitive operation protection settings
-         * @type {LoginActionFlag || null}
-         */
-        this.ActionFlag = null;
-
-        /**
-         * Suspicious login location protection settings
-         * @type {OffsiteFlag || null}
-         */
-        this.OffsiteFlag = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.LoginFlag) {
-            let obj = new LoginActionFlag();
-            obj.deserialize(params.LoginFlag)
-            this.LoginFlag = obj;
-        }
-
-        if (params.ActionFlag) {
-            let obj = new LoginActionFlag();
-            obj.deserialize(params.ActionFlag)
-            this.ActionFlag = obj;
-        }
-
-        if (params.OffsiteFlag) {
-            let obj = new OffsiteFlag();
-            obj.deserialize(params.OffsiteFlag)
-            this.OffsiteFlag = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreatePolicyVersion request structure.
  * @class
  */
@@ -2128,6 +2177,34 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         }
         this.SecretId = 'SecretId' in params ? params.SecretId : null;
         this.LastUsedDate = 'LastUsedDate' in params ? params.LastUsedDate : null;
+
+    }
+}
+
+/**
+ * CreateUserOIDCConfig response structure.
+ * @class
+ */
+class CreateUserOIDCConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2538,6 +2615,111 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.AttachEntityCount = 'AttachEntityCount' in params ? params.AttachEntityCount : null;
         this.AttachEntityBoundaryCount = 'AttachEntityBoundaryCount' in params ? params.AttachEntityBoundaryCount : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * DescribeUserOIDCConfig response structure.
+ * @class
+ */
+class DescribeUserOIDCConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IdP type. 12: user OIDC IdP
+         * @type {number || null}
+         */
+        this.ProviderType = null;
+
+        /**
+         * IdP URL
+         * @type {string || null}
+         */
+        this.IdentityUrl = null;
+
+        /**
+         * Signature public key
+         * @type {string || null}
+         */
+        this.IdentityKey = null;
+
+        /**
+         * Client ID
+         * @type {string || null}
+         */
+        this.ClientId = null;
+
+        /**
+         * Status. 0: not set; 2: disabled; 11: enabled.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Authorization endpoint
+         * @type {string || null}
+         */
+        this.AuthorizationEndpoint = null;
+
+        /**
+         * Authorization scope
+         * @type {Array.<string> || null}
+         */
+        this.Scope = null;
+
+        /**
+         * Authorization response type
+         * @type {string || null}
+         */
+        this.ResponseType = null;
+
+        /**
+         * Authorization response mode
+         * @type {string || null}
+         */
+        this.ResponseMode = null;
+
+        /**
+         * Mapping field name
+         * @type {string || null}
+         */
+        this.MappingFiled = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProviderType = 'ProviderType' in params ? params.ProviderType : null;
+        this.IdentityUrl = 'IdentityUrl' in params ? params.IdentityUrl : null;
+        this.IdentityKey = 'IdentityKey' in params ? params.IdentityKey : null;
+        this.ClientId = 'ClientId' in params ? params.ClientId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AuthorizationEndpoint = 'AuthorizationEndpoint' in params ? params.AuthorizationEndpoint : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.ResponseType = 'ResponseType' in params ? params.ResponseType : null;
+        this.ResponseMode = 'ResponseMode' in params ? params.ResponseMode : null;
+        this.MappingFiled = 'MappingFiled' in params ? params.MappingFiled : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3287,6 +3469,27 @@ class SAMLProviderInfo extends  AbstractModel {
 }
 
 /**
+ * DisableUserSSO request structure.
+ * @class
+ */
+class DisableUserSSORequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * UpdateSAMLProvider response structure.
  * @class
  */
@@ -3539,30 +3742,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * PutRolePermissionsBoundary request structure.
+ * ConsumeCustomMFAToken request structure.
  * @class
  */
-class PutRolePermissionsBoundaryRequest extends  AbstractModel {
+class ConsumeCustomMFATokenRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy ID
-         * @type {number || null}
-         */
-        this.PolicyId = null;
-
-        /**
-         * Role ID (either it or the role name must be entered)
+         * Custom multi-factor verification Token
          * @type {string || null}
          */
-        this.RoleId = null;
-
-        /**
-         * Role name (either it or the role ID must be entered)
-         * @type {string || null}
-         */
-        this.RoleName = null;
+        this.MFAToken = null;
 
     }
 
@@ -3573,9 +3764,7 @@ class PutRolePermissionsBoundaryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.RoleId = 'RoleId' in params ? params.RoleId : null;
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.MFAToken = 'MFAToken' in params ? params.MFAToken : null;
 
     }
 }
@@ -3877,18 +4066,18 @@ class DeletePolicyResponse extends  AbstractModel {
 }
 
 /**
- * ConsumeCustomMFAToken request structure.
+ * DisableUserSSO response structure.
  * @class
  */
-class ConsumeCustomMFATokenRequest extends  AbstractModel {
+class DisableUserSSOResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Custom multi-factor verification Token
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.MFAToken = null;
+        this.RequestId = null;
 
     }
 
@@ -3899,7 +4088,7 @@ class ConsumeCustomMFATokenRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MFAToken = 'MFAToken' in params ? params.MFAToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4270,25 +4459,67 @@ class ListCollaboratorsRequest extends  AbstractModel {
 }
 
 /**
- * UpdatePolicy response structure.
+ * CreateUserOIDCConfig request structure.
  * @class
  */
-class UpdatePolicyResponse extends  AbstractModel {
+class CreateUserOIDCConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy ID, which will be returned only if the input parameter is `PolicyName`
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PolicyId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * OpenID Connect IdP URL.
+It corresponds to the value of the `issuer` field in the `Openid-configuration` provided by the enterprise IdP.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.IdentityUrl = null;
+
+        /**
+         * Signature public key, which is used to verify the OpenID Connect IdP's ID token and must be Base64-encoded. For the security of your account, we recommend you rotate it regularly.
+         * @type {string || null}
+         */
+        this.IdentityKey = null;
+
+        /**
+         * Client ID registered with the OpenID Connect IdP.
+         * @type {string || null}
+         */
+        this.ClientId = null;
+
+        /**
+         * OpenID Connect IdP authorization endpoint. It corresponds to the value of the `authorization_endpoint` field in the `Openid-configuration` provided by the enterprise IdP.
+         * @type {string || null}
+         */
+        this.AuthorizationEndpoint = null;
+
+        /**
+         * Authorization response type, which is always `id_token`.
+         * @type {string || null}
+         */
+        this.ResponseType = null;
+
+        /**
+         * Authorization response mode. Valid values: form_post (recommended); fragment.
+         * @type {string || null}
+         */
+        this.ResponseMode = null;
+
+        /**
+         * Mapping field name. It indicates which field in the `id_token` of the IdP is mapped to the username of a sub-user. It is usually the `sub` or `name` field
+         * @type {string || null}
+         */
+        this.MappingFiled = null;
+
+        /**
+         * Authorization information scope. Valid values: openid (default); email; profile.
+         * @type {Array.<string> || null}
+         */
+        this.Scope = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -4299,8 +4530,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.IdentityUrl = 'IdentityUrl' in params ? params.IdentityUrl : null;
+        this.IdentityKey = 'IdentityKey' in params ? params.IdentityKey : null;
+        this.ClientId = 'ClientId' in params ? params.ClientId : null;
+        this.AuthorizationEndpoint = 'AuthorizationEndpoint' in params ? params.AuthorizationEndpoint : null;
+        this.ResponseType = 'ResponseType' in params ? params.ResponseType : null;
+        this.ResponseMode = 'ResponseMode' in params ? params.ResponseMode : null;
+        this.MappingFiled = 'MappingFiled' in params ? params.MappingFiled : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -5023,24 +5261,67 @@ class DescribeSafeAuthFlagIntlRequest extends  AbstractModel {
 }
 
 /**
- * SetDefaultPolicyVersion request structure.
+ * UpdateUserOIDCConfig request structure.
  * @class
  */
-class SetDefaultPolicyVersionRequest extends  AbstractModel {
+class UpdateUserOIDCConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy ID
-         * @type {number || null}
+         * OpenID Connect IdP URL.
+It corresponds to the value of the `issuer` field in the `Openid-configuration` provided by the enterprise IdP.
+         * @type {string || null}
          */
-        this.PolicyId = null;
+        this.IdentityUrl = null;
 
         /**
-         * Policy version, which can be obtained through `ListPolicyVersions`.
-         * @type {number || null}
+         * Signature public key, which is used to verify the OpenID Connect IdP's ID token and must be Base64-encoded. For the security of your account, we recommend you rotate it regularly.
+         * @type {string || null}
          */
-        this.VersionId = null;
+        this.IdentityKey = null;
+
+        /**
+         * Client ID registered with the OpenID Connect IdP.
+         * @type {string || null}
+         */
+        this.ClientId = null;
+
+        /**
+         * OpenID Connect IdP authorization endpoint. It corresponds to the value of the `authorization_endpoint` field in the `Openid-configuration` provided by the enterprise IdP.
+         * @type {string || null}
+         */
+        this.AuthorizationEndpoint = null;
+
+        /**
+         * Authorization response type, which is always `id_token`.
+         * @type {string || null}
+         */
+        this.ResponseType = null;
+
+        /**
+         * Authorization response mode. Valid values: form_post (recommended); fragment.
+         * @type {string || null}
+         */
+        this.ResponseMode = null;
+
+        /**
+         * Mapping field name. It indicates which field in the `id_token` of the IdP is mapped to the username of a sub-user. It is usually the `sub` or `name` field
+         * @type {string || null}
+         */
+        this.MappingFiled = null;
+
+        /**
+         * Authorization information scope. Valid values: openid (default); email; profile.
+         * @type {Array.<string> || null}
+         */
+        this.Scope = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -5051,8 +5332,15 @@ class SetDefaultPolicyVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.IdentityUrl = 'IdentityUrl' in params ? params.IdentityUrl : null;
+        this.IdentityKey = 'IdentityKey' in params ? params.IdentityKey : null;
+        this.ClientId = 'ClientId' in params ? params.ClientId : null;
+        this.AuthorizationEndpoint = 'AuthorizationEndpoint' in params ? params.AuthorizationEndpoint : null;
+        this.ResponseType = 'ResponseType' in params ? params.ResponseType : null;
+        this.ResponseMode = 'ResponseMode' in params ? params.ResponseMode : null;
+        this.MappingFiled = 'MappingFiled' in params ? params.MappingFiled : null;
+        this.Scope = 'Scope' in params ? params.Scope : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -5145,6 +5433,27 @@ class DetachRolePolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeUserOIDCConfig request structure.
+ * @class
+ */
+class DescribeUserOIDCConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -5781,12 +6090,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeSafeAuthFlag request structure.
+ * DeleteGroup response structure.
  * @class
  */
-class DescribeSafeAuthFlagRequest extends  AbstractModel {
+class DeleteGroupResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -5797,6 +6112,7 @@ class DescribeSafeAuthFlagRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6847,6 +7163,7 @@ module.exports = {
     SubAccountUser: SubAccountUser,
     ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
     LoginActionFlagIntl: LoginActionFlagIntl,
+    UpdateUserOIDCConfigResponse: UpdateUserOIDCConfigResponse,
     ListAccessKeysRequest: ListAccessKeysRequest,
     SetMfaFlagResponse: SetMfaFlagResponse,
     DeleteUserRequest: DeleteUserRequest,
@@ -6858,6 +7175,7 @@ module.exports = {
     ListAttachedGroupPoliciesRequest: ListAttachedGroupPoliciesRequest,
     ListGroupsForUserRequest: ListGroupsForUserRequest,
     AttachRolePolicyResponse: AttachRolePolicyResponse,
+    UpdatePolicyResponse: UpdatePolicyResponse,
     GetServiceLinkedRoleDeletionStatusResponse: GetServiceLinkedRoleDeletionStatusResponse,
     GetSecurityLastUsedRequest: GetSecurityLastUsedRequest,
     DescribeUserSAMLConfigResponse: DescribeUserSAMLConfigResponse,
@@ -6873,6 +7191,7 @@ module.exports = {
     GetCustomMFATokenInfoRequest: GetCustomMFATokenInfoRequest,
     DescribeRoleListRequest: DescribeRoleListRequest,
     DescribeUserSAMLConfigRequest: DescribeUserSAMLConfigRequest,
+    PutRolePermissionsBoundaryRequest: PutRolePermissionsBoundaryRequest,
     GetGroupRequest: GetGroupRequest,
     DeleteRoleResponse: DeleteRoleResponse,
     PolicyVersionItem: PolicyVersionItem,
@@ -6892,11 +7211,11 @@ module.exports = {
     GroupIdOfUidInfo: GroupIdOfUidInfo,
     UpdateRoleDescriptionRequest: UpdateRoleDescriptionRequest,
     UpdateUserSAMLConfigRequest: UpdateUserSAMLConfigRequest,
-    DeleteGroupResponse: DeleteGroupResponse,
+    SetDefaultPolicyVersionRequest: SetDefaultPolicyVersionRequest,
     RoleInfo: RoleInfo,
-    DescribeSafeAuthFlagResponse: DescribeSafeAuthFlagResponse,
     CreatePolicyVersionRequest: CreatePolicyVersionRequest,
     SecretIdLastUsed: SecretIdLastUsed,
+    CreateUserOIDCConfigResponse: CreateUserOIDCConfigResponse,
     ListAttachedUserAllPoliciesResponse: ListAttachedUserAllPoliciesResponse,
     DeleteGroupRequest: DeleteGroupRequest,
     GetUserResponse: GetUserResponse,
@@ -6904,6 +7223,7 @@ module.exports = {
     DetachRolePolicyRequest: DetachRolePolicyRequest,
     DeleteRolePermissionsBoundaryRequest: DeleteRolePermissionsBoundaryRequest,
     StrategyInfo: StrategyInfo,
+    DescribeUserOIDCConfigResponse: DescribeUserOIDCConfigResponse,
     DeletePolicyRequest: DeletePolicyRequest,
     GroupInfo: GroupInfo,
     AddUserRequest: AddUserRequest,
@@ -6921,11 +7241,12 @@ module.exports = {
     SubAccountInfo: SubAccountInfo,
     CreateGroupRequest: CreateGroupRequest,
     SAMLProviderInfo: SAMLProviderInfo,
+    DisableUserSSORequest: DisableUserSSORequest,
     UpdateSAMLProviderResponse: UpdateSAMLProviderResponse,
     UpdateUserRequest: UpdateUserRequest,
     CreateSAMLProviderRequest: CreateSAMLProviderRequest,
     AttachPolicyInfo: AttachPolicyInfo,
-    PutRolePermissionsBoundaryRequest: PutRolePermissionsBoundaryRequest,
+    ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
     UpdateRoleConsoleLoginResponse: UpdateRoleConsoleLoginResponse,
     AttachRolePolicyRequest: AttachRolePolicyRequest,
     ConsumeCustomMFATokenResponse: ConsumeCustomMFATokenResponse,
@@ -6934,7 +7255,7 @@ module.exports = {
     ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
     PutUserPermissionsBoundaryResponse: PutUserPermissionsBoundaryResponse,
     DeletePolicyResponse: DeletePolicyResponse,
-    ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
+    DisableUserSSOResponse: DisableUserSSOResponse,
     AccessKey: AccessKey,
     GetGroupResponse: GetGroupResponse,
     DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
@@ -6944,7 +7265,7 @@ module.exports = {
     CreateServiceLinkedRoleResponse: CreateServiceLinkedRoleResponse,
     ListUsersRequest: ListUsersRequest,
     ListCollaboratorsRequest: ListCollaboratorsRequest,
-    UpdatePolicyResponse: UpdatePolicyResponse,
+    CreateUserOIDCConfigRequest: CreateUserOIDCConfigRequest,
     AttachGroupPolicyResponse: AttachGroupPolicyResponse,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
@@ -6963,10 +7284,11 @@ module.exports = {
     ListPolicyVersionsResponse: ListPolicyVersionsResponse,
     GetPolicyRequest: GetPolicyRequest,
     DescribeSafeAuthFlagIntlRequest: DescribeSafeAuthFlagIntlRequest,
-    SetDefaultPolicyVersionRequest: SetDefaultPolicyVersionRequest,
+    UpdateUserOIDCConfigRequest: UpdateUserOIDCConfigRequest,
     AddUserToGroupRequest: AddUserToGroupRequest,
     RemoveUserFromGroupResponse: RemoveUserFromGroupResponse,
     DetachRolePolicyResponse: DetachRolePolicyResponse,
+    DescribeUserOIDCConfigRequest: DescribeUserOIDCConfigRequest,
     AttachedPolicyOfRole: AttachedPolicyOfRole,
     PutUserPermissionsBoundaryRequest: PutUserPermissionsBoundaryRequest,
     ListSAMLProvidersResponse: ListSAMLProvidersResponse,
@@ -6979,7 +7301,7 @@ module.exports = {
     AttachedUserPolicy: AttachedUserPolicy,
     DeleteServiceLinkedRoleResponse: DeleteServiceLinkedRoleResponse,
     GetPolicyResponse: GetPolicyResponse,
-    DescribeSafeAuthFlagRequest: DescribeSafeAuthFlagRequest,
+    DeleteGroupResponse: DeleteGroupResponse,
     AttachGroupPolicyRequest: AttachGroupPolicyRequest,
     DeleteServiceLinkedRoleRequest: DeleteServiceLinkedRoleRequest,
     AttachEntityOfPolicy: AttachEntityOfPolicy,

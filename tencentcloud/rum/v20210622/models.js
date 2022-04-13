@@ -72,6 +72,12 @@ class CreateTawInstanceRequest extends  AbstractModel {
          */
         this.PeriodRetain = null;
 
+        /**
+         * Instance purchase channel. Valid value: `cdn`.
+         * @type {string || null}
+         */
+        this.BuyingChannel = null;
+
     }
 
     /**
@@ -97,6 +103,7 @@ class CreateTawInstanceRequest extends  AbstractModel {
         this.InstanceDesc = 'InstanceDesc' in params ? params.InstanceDesc : null;
         this.CountNum = 'CountNum' in params ? params.CountNum : null;
         this.PeriodRetain = 'PeriodRetain' in params ? params.PeriodRetain : null;
+        this.BuyingChannel = 'BuyingChannel' in params ? params.BuyingChannel : null;
 
     }
 }
@@ -425,91 +432,6 @@ class DescribeProjectLimitsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTawInstances request structure.
- * @class
- */
-class DescribeTawInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Billing status
-         * @type {Array.<number> || null}
-         */
-        this.ChargeStatuses = null;
-
-        /**
-         * Billing type
-         * @type {Array.<number> || null}
-         */
-        this.ChargeTypes = null;
-
-        /**
-         * Pagination limit
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Pagination offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Region ID
-         * @type {Array.<number> || null}
-         */
-        this.AreaIds = null;
-
-        /**
-         * Instance status (1: creating; 2: running; 3: exceptional; 4: restarting; 5: stopping; 6: stopped; 7: terminating; 8: terminated)
-         * @type {Array.<number> || null}
-         */
-        this.InstanceStatuses = null;
-
-        /**
-         * Instance ID
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * Filter parameter
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ChargeStatuses = 'ChargeStatuses' in params ? params.ChargeStatuses : null;
-        this.ChargeTypes = 'ChargeTypes' in params ? params.ChargeTypes : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.AreaIds = 'AreaIds' in params ? params.AreaIds : null;
-        this.InstanceStatuses = 'InstanceStatuses' in params ? params.InstanceStatuses : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * DeleteOfflineLogConfig response structure.
  * @class
  */
@@ -764,7 +686,7 @@ class DescribeLogListRequest extends  AbstractModel {
         this.Context = null;
 
         /**
-         * Query statement. Maximum length: 4096
+         * Query statement, which can contain up to 4,096 characters.
          * @type {string || null}
          */
         this.Query = null;
@@ -1067,48 +989,6 @@ class DescribeOfflineLogsRequest extends  AbstractModel {
         }
         this.ProjectKey = 'ProjectKey' in params ? params.ProjectKey : null;
         this.FileIDs = 'FileIDs' in params ? params.FileIDs : null;
-
-    }
-}
-
-/**
- * DescribeScores request structure.
- * @class
- */
-class DescribeScoresRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * End time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Start time
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ID = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.ID = 'ID' in params ? params.ID : null;
 
     }
 }
@@ -4216,49 +4096,6 @@ class DeleteReleaseFileResponse extends  AbstractModel {
 }
 
 /**
- * DescribeScores response structure.
- * @class
- */
-class DescribeScoresResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Array
-         * @type {Array.<ScoreInfo> || null}
-         */
-        this.ScoreSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ScoreSet) {
-            this.ScoreSet = new Array();
-            for (let z in params.ScoreSet) {
-                let obj = new ScoreInfo();
-                obj.deserialize(params.ScoreSet[z]);
-                this.ScoreSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeOfflineLogConfigs response structure.
  * @class
  */
@@ -4493,44 +4330,6 @@ class DescribeTawAreasRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.AreaStatuses = 'AreaStatuses' in params ? params.AreaStatuses : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
- * Key-Value pair filter for conditional filtering queries, such as filtering ID, name, status, etc.
-
-· If more than one filter exists, the logical relationship between these filters is `AND`.
-· If multiple values exist in one filter, the logical relationship between these values is `OR`.
- * @class
- */
-class Filter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * One or more filter values.
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
-
-        /**
-         * Filter name.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Values = 'Values' in params ? params.Values : null;
-        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -5518,118 +5317,6 @@ class CreateWhitelistResponse extends  AbstractModel {
 }
 
 /**
- * Project score entity
- * @class
- */
-class ScoreInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * duration
-         * @type {string || null}
-         */
-        this.StaticDuration = null;
-
-        /**
-         * pv
-         * @type {string || null}
-         */
-        this.PagePv = null;
-
-        /**
-         * Failure
-         * @type {string || null}
-         */
-        this.ApiFail = null;
-
-        /**
-         * Request
-         * @type {string || null}
-         */
-        this.ApiNum = null;
-
-        /**
-         * fail
-         * @type {string || null}
-         */
-        this.StaticFail = null;
-
-        /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ProjectID = null;
-
-        /**
-         * uv
-         * @type {string || null}
-         */
-        this.PageUv = null;
-
-        /**
-         * Number of requests
-         * @type {string || null}
-         */
-        this.ApiDuration = null;
-
-        /**
-         * Score
-         * @type {string || null}
-         */
-        this.Score = null;
-
-        /**
-         * error
-         * @type {string || null}
-         */
-        this.PageError = null;
-
-        /**
-         * num
-         * @type {string || null}
-         */
-        this.StaticNum = null;
-
-        /**
-         * num
-         * @type {number || null}
-         */
-        this.RecordNum = null;
-
-        /**
-         * Duration
-         * @type {string || null}
-         */
-        this.PageDuration = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StaticDuration = 'StaticDuration' in params ? params.StaticDuration : null;
-        this.PagePv = 'PagePv' in params ? params.PagePv : null;
-        this.ApiFail = 'ApiFail' in params ? params.ApiFail : null;
-        this.ApiNum = 'ApiNum' in params ? params.ApiNum : null;
-        this.StaticFail = 'StaticFail' in params ? params.StaticFail : null;
-        this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
-        this.PageUv = 'PageUv' in params ? params.PageUv : null;
-        this.ApiDuration = 'ApiDuration' in params ? params.ApiDuration : null;
-        this.Score = 'Score' in params ? params.Score : null;
-        this.PageError = 'PageError' in params ? params.PageError : null;
-        this.StaticNum = 'StaticNum' in params ? params.StaticNum : null;
-        this.RecordNum = 'RecordNum' in params ? params.RecordNum : null;
-        this.PageDuration = 'PageDuration' in params ? params.PageDuration : null;
-
-    }
-}
-
-/**
  * DescribeDataWebVitalsPage response structure.
  * @class
  */
@@ -5660,56 +5347,6 @@ class DescribeDataWebVitalsPageResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeProjects request structure.
- * @class
- */
-class DescribeProjectsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of items per page (integer)
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Page number (integer)
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Filter
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
 
     }
 }
@@ -5948,56 +5585,6 @@ class DeleteOfflineLogConfigRequest extends  AbstractModel {
         }
         this.ProjectKey = 'ProjectKey' in params ? params.ProjectKey : null;
         this.UniqueID = 'UniqueID' in params ? params.UniqueID : null;
-
-    }
-}
-
-/**
- * DescribeProjects response structure.
- * @class
- */
-class DescribeProjectsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of items in the list
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Project list
-         * @type {Array.<RumProject> || null}
-         */
-        this.ProjectSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.ProjectSet) {
-            this.ProjectSet = new Array();
-            for (let z in params.ProjectSet) {
-                let obj = new RumProject();
-                obj.deserialize(params.ProjectSet[z]);
-                this.ProjectSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6549,56 +6136,6 @@ class DescribeDataStaticResourceRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTawInstances response structure.
- * @class
- */
-class DescribeTawInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance list
-         * @type {Array.<RumInstanceInfo> || null}
-         */
-        this.InstanceSet = null;
-
-        /**
-         * Total number of instances
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.InstanceSet) {
-            this.InstanceSet = new Array();
-            for (let z in params.InstanceSet) {
-                let obj = new RumInstanceInfo();
-                obj.deserialize(params.InstanceSet[z]);
-                this.InstanceSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribePvList request structure.
  * @class
  */
@@ -6998,136 +6535,6 @@ class Whitelist extends  AbstractModel {
 }
 
 /**
- * RUM project information
- * @class
- */
-class RumProject extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Project name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Creator ID
-         * @type {string || null}
-         */
-        this.Creator = null;
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceID = null;
-
-        /**
-         * Project type
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Project repository address
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Repo = null;
-
-        /**
-         * Project URL
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.URL = null;
-
-        /**
-         * Project sample rate
-         * @type {string || null}
-         */
-        this.Rate = null;
-
-        /**
-         * Unique project key (12 characters)
-         * @type {string || null}
-         */
-        this.Key = null;
-
-        /**
-         * Whether to enable URL aggregation
-         * @type {number || null}
-         */
-        this.EnableURLGroup = null;
-
-        /**
-         * Instance name
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Project ID
-         * @type {number || null}
-         */
-        this.ID = null;
-
-        /**
-         * Instance key
-         * @type {string || null}
-         */
-        this.InstanceKey = null;
-
-        /**
-         * Project description
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Desc = null;
-
-        /**
-         * Starred status. 1: yes; 0: no
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsStar = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Creator = 'Creator' in params ? params.Creator : null;
-        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Repo = 'Repo' in params ? params.Repo : null;
-        this.URL = 'URL' in params ? params.URL : null;
-        this.Rate = 'Rate' in params ? params.Rate : null;
-        this.Key = 'Key' in params ? params.Key : null;
-        this.EnableURLGroup = 'EnableURLGroup' in params ? params.EnableURLGroup : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.ID = 'ID' in params ? params.ID : null;
-        this.InstanceKey = 'InstanceKey' in params ? params.InstanceKey : null;
-        this.Desc = 'Desc' in params ? params.Desc : null;
-        this.IsStar = 'IsStar' in params ? params.IsStar : null;
-
-    }
-}
-
-/**
  * DescribeDataSetUrlStatistics response structure.
  * @class
  */
@@ -7162,119 +6569,6 @@ class DescribeDataSetUrlStatisticsResponse extends  AbstractModel {
     }
 }
 
-/**
- * RUM instance information
- * @class
- */
-class RumInstanceInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance status (1: creating; 2: running; 3: exceptional; 4: restarting; 5: stopping; 6: stopped; 7: deleted)
-         * @type {number || null}
-         */
-        this.InstanceStatus = null;
-
-        /**
-         * Region ID
-         * @type {number || null}
-         */
-        this.AreaId = null;
-
-        /**
-         * Tag list
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Cluster ID
-         * @type {number || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Instance description
-         * @type {string || null}
-         */
-        this.InstanceDesc = null;
-
-        /**
-         * Billing status (1: in use; 2: expired; 3: terminated; 4: assigning; 5: assignment failed)
-         * @type {number || null}
-         */
-        this.ChargeStatus = null;
-
-        /**
-         * Billing type (1: free; 2: prepaid; 3: postpaid)
-         * @type {number || null}
-         */
-        this.ChargeType = null;
-
-        /**
-         * Update time
-         * @type {string || null}
-         */
-        this.UpdatedAt = null;
-
-        /**
-         * Data retention period (in days)
-         * @type {number || null}
-         */
-        this.DataRetentionDays = null;
-
-        /**
-         * Instance name
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.CreatedAt = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
-        this.AreaId = 'AreaId' in params ? params.AreaId : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.InstanceDesc = 'InstanceDesc' in params ? params.InstanceDesc : null;
-        this.ChargeStatus = 'ChargeStatus' in params ? params.ChargeStatus : null;
-        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
-        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
-        this.DataRetentionDays = 'DataRetentionDays' in params ? params.DataRetentionDays : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
-
-    }
-}
-
 module.exports = {
     CreateTawInstanceRequest: CreateTawInstanceRequest,
     DescribeDataFetchProjectRequest: DescribeDataFetchProjectRequest,
@@ -7282,7 +6576,6 @@ module.exports = {
     CreateTawInstanceResponse: CreateTawInstanceResponse,
     DeleteProjectRequest: DeleteProjectRequest,
     DescribeProjectLimitsResponse: DescribeProjectLimitsResponse,
-    DescribeTawInstancesRequest: DescribeTawInstancesRequest,
     DeleteOfflineLogConfigResponse: DeleteOfflineLogConfigResponse,
     DescribeDataPvUrlInfoResponse: DescribeDataPvUrlInfoResponse,
     DescribeDataFetchUrlResponse: DescribeDataFetchUrlResponse,
@@ -7296,7 +6589,6 @@ module.exports = {
     DescribePvListResponse: DescribePvListResponse,
     RumUvInfo: RumUvInfo,
     DescribeOfflineLogsRequest: DescribeOfflineLogsRequest,
-    DescribeScoresRequest: DescribeScoresRequest,
     DescribeDataReportCountRequest: DescribeDataReportCountRequest,
     DeleteOfflineLogRecordRequest: DeleteOfflineLogRecordRequest,
     DescribeReleaseFilesRequest: DescribeReleaseFilesRequest,
@@ -7352,13 +6644,11 @@ module.exports = {
     DescribeDataLogUrlInfoResponse: DescribeDataLogUrlInfoResponse,
     RumPvInfo: RumPvInfo,
     DeleteReleaseFileResponse: DeleteReleaseFileResponse,
-    DescribeScoresResponse: DescribeScoresResponse,
     DescribeOfflineLogConfigsResponse: DescribeOfflineLogConfigsResponse,
     DeleteLogExportResponse: DeleteLogExportResponse,
     DescribeReleaseFileSignResponse: DescribeReleaseFileSignResponse,
     DescribeOfflineLogsResponse: DescribeOfflineLogsResponse,
     DescribeTawAreasRequest: DescribeTawAreasRequest,
-    Filter: Filter,
     DescribeDataLogUrlStatisticsRequest: DescribeDataLogUrlStatisticsRequest,
     DeleteStarProjectResponse: DeleteStarProjectResponse,
     DescribeDataPerformancePageResponse: DescribeDataPerformancePageResponse,
@@ -7373,28 +6663,22 @@ module.exports = {
     CreateOfflineLogConfigRequest: CreateOfflineLogConfigRequest,
     DescribeDataStaticUrlResponse: DescribeDataStaticUrlResponse,
     CreateWhitelistResponse: CreateWhitelistResponse,
-    ScoreInfo: ScoreInfo,
     DescribeDataWebVitalsPageResponse: DescribeDataWebVitalsPageResponse,
-    DescribeProjectsRequest: DescribeProjectsRequest,
     DescribeDataEventUrlRequest: DescribeDataEventUrlRequest,
     DescribeOfflineLogConfigsRequest: DescribeOfflineLogConfigsRequest,
     DeleteOfflineLogConfigRequest: DeleteOfflineLogConfigRequest,
-    DescribeProjectsResponse: DescribeProjectsResponse,
     ModifyProjectResponse: ModifyProjectResponse,
     DescribeLogExportsRequest: DescribeLogExportsRequest,
     DescribeDataReportCountResponse: DescribeDataReportCountResponse,
     DescribeDataPerformanceProjectRequest: DescribeDataPerformanceProjectRequest,
     ModifyProjectRequest: ModifyProjectRequest,
     DescribeDataStaticResourceRequest: DescribeDataStaticResourceRequest,
-    DescribeTawInstancesResponse: DescribeTawInstancesResponse,
     DescribePvListRequest: DescribePvListRequest,
     DescribeDataPvUrlInfoRequest: DescribeDataPvUrlInfoRequest,
     CreateReleaseFileResponse: CreateReleaseFileResponse,
     CreateLogExportResponse: CreateLogExportResponse,
     DescribeDataFetchProjectResponse: DescribeDataFetchProjectResponse,
     Whitelist: Whitelist,
-    RumProject: RumProject,
     DescribeDataSetUrlStatisticsResponse: DescribeDataSetUrlStatisticsResponse,
-    RumInstanceInfo: RumInstanceInfo,
 
 }

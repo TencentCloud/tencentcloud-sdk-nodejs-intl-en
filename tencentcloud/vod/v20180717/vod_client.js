@@ -22,7 +22,6 @@ const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
 const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullTextSegmentItem;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
 const DescribeAllClassRequest = models.DescribeAllClassRequest;
-const WeChatMiniProgramPublishRequest = models.WeChatMiniProgramPublishRequest;
 const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
 const SvgWatermarkInput = models.SvgWatermarkInput;
 const CreateTranscodeTemplateRequest = models.CreateTranscodeTemplateRequest;
@@ -56,6 +55,7 @@ const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateReq
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const AudioTransform = models.AudioTransform;
 const ResetProcedureTemplateRequest = models.ResetProcedureTemplateRequest;
+const ContentReviewOcrResult = models.ContentReviewOcrResult;
 const ComposeMediaResponse = models.ComposeMediaResponse;
 const UrlSignatureAuthPolicy = models.UrlSignatureAuthPolicy;
 const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
@@ -118,10 +118,10 @@ const CoverBySnapshotTaskOutput = models.CoverBySnapshotTaskOutput;
 const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
 const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
-const EditMediaResponse = models.EditMediaResponse;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
 const TaskOutputMediaInfo = models.TaskOutputMediaInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
+const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const PlayStatFileInfo = models.PlayStatFileInfo;
 const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
 const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
@@ -158,13 +158,12 @@ const ModifyAIAnalysisTemplateResponse = models.ModifyAIAnalysisTemplateResponse
 const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
-const EditMediaOutputConfig = models.EditMediaOutputConfig;
 const SplitMediaTaskSegmentInfo = models.SplitMediaTaskSegmentInfo;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
-const EditMediaRequest = models.EditMediaRequest;
 const ConcatFileInfo2017 = models.ConcatFileInfo2017;
+const ContentReviewResult = models.ContentReviewResult;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
 const DeleteProcedureTemplateResponse = models.DeleteProcedureTemplateResponse;
@@ -188,6 +187,7 @@ const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
 const DeleteWordSamplesRequest = models.DeleteWordSamplesRequest;
 const EmptyTrackItem = models.EmptyTrackItem;
 const StickerTrackItem = models.StickerTrackItem;
+const DescribeMediaPlayStatDetailsResponse = models.DescribeMediaPlayStatDetailsResponse;
 const VideoTemplateInfo = models.VideoTemplateInfo;
 const PoliticalOcrReviewTemplateInfo = models.PoliticalOcrReviewTemplateInfo;
 const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUpdate;
@@ -218,6 +218,9 @@ const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const AiAnalysisTaskHighlightOutput = models.AiAnalysisTaskHighlightOutput;
 const MediaSubtitleInput = models.MediaSubtitleInput;
 const ProcessMediaRequest = models.ProcessMediaRequest;
+const PornImageResult = models.PornImageResult;
+const ProcessImageResponse = models.ProcessImageResponse;
+const ProcessImageRequest = models.ProcessImageRequest;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
@@ -237,6 +240,7 @@ const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
 const ModifySubAppIdStatusResponse = models.ModifySubAppIdStatusResponse;
 const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
 const MediaDeleteItem = models.MediaDeleteItem;
+const PoliticalImageResult = models.PoliticalImageResult;
 const AiSamplePerson = models.AiSamplePerson;
 const MediaAdaptiveDynamicStreamingInfo = models.MediaAdaptiveDynamicStreamingInfo;
 const DescribeDailyPlayStatFileListRequest = models.DescribeDailyPlayStatFileListRequest;
@@ -338,6 +342,7 @@ const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const TerrorismOcrReviewTemplateInfo = models.TerrorismOcrReviewTemplateInfo;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
 const AiRecognitionTaskObjectResultOutput = models.AiRecognitionTaskObjectResultOutput;
+const DescribeMediaPlayStatDetailsRequest = models.DescribeMediaPlayStatDetailsRequest;
 const AiReviewProhibitedAsrTaskOutput = models.AiReviewProhibitedAsrTaskOutput;
 const CreateClassResponse = models.CreateClassResponse;
 const DeleteSuperPlayerConfigResponse = models.DeleteSuperPlayerConfigResponse;
@@ -373,6 +378,7 @@ const ComposeMediaTaskOutput = models.ComposeMediaTaskOutput;
 const DescribeMediaInfosRequest = models.DescribeMediaInfosRequest;
 const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
+const TerrorismImageResult = models.TerrorismImageResult;
 const DeleteVodDomainRequest = models.DeleteVodDomainRequest;
 const CreateAIRecognitionTemplateRequest = models.CreateAIRecognitionTemplateRequest;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
@@ -380,7 +386,8 @@ const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationIt
 const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const AiReviewPornTaskOutput = models.AiReviewPornTaskOutput;
 const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextResult;
-const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
+const ImageContentReviewInput = models.ImageContentReviewInput;
+const PlayStatInfo = models.PlayStatInfo;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
 const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
@@ -465,7 +472,6 @@ const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
-const WeChatMiniProgramPublishResponse = models.WeChatMiniProgramPublishResponse;
 const ImageTransform = models.ImageTransform;
 const CreateAnimatedGraphicsTemplateRequest = models.CreateAnimatedGraphicsTemplateRequest;
 const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
@@ -556,27 +562,6 @@ class VodClient extends AbstractClient {
     CreateSnapshotByTimeOffsetTemplate(req, cb) {
         let resp = new CreateSnapshotByTimeOffsetTemplateResponse();
         this.request("CreateSnapshotByTimeOffsetTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to edit a video (by clipping, splicing, etc.) to generate a new VOD video. Editing features include:
-
-1. Clipping a file in VOD to generate a new video;
-2. Splicing multiple files in VOD to generate a new video;
-3. Clipping multiple files in VOD and then splicing the clips to generate a new video;
-4. Directly generating a new video from a stream in VOD;
-5. Clipping a stream in VOD to generate a new video;
-6. Splicing multiple streams in VOD to generate a new video;
-7. Clipping multiple streams in VOD and then splicing the clips to generate a new video.
-
-You can also specify whether to perform a task flow for the generated new video.
-     * @param {EditMediaRequest} req
-     * @param {function(string, EditMediaResponse):void} cb
-     * @public
-     */
-    EditMedia(req, cb) {
-        let resp = new EditMediaResponse();
-        this.request("EditMedia", req, resp, cb);
     }
 
     /**
@@ -872,6 +857,20 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
+     * This API is used to query the playback statistics of a media file at the specified granularity.
+* You can query playback statistics in the past year.
+* If the granularity is an hour, the start and end time cannot be more than seven days apart.
+* If the granularity is a day, the start and end time cannot be more than 90 days apart.
+     * @param {DescribeMediaPlayStatDetailsRequest} req
+     * @param {function(string, DescribeMediaPlayStatDetailsResponse):void} cb
+     * @public
+     */
+    DescribeMediaPlayStatDetails(req, cb) {
+        let resp = new DescribeMediaPlayStatDetailsResponse();
+        this.request("DescribeMediaPlayStatDetails", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a custom image sprite generating template.
      * @param {ModifyImageSpriteTemplateRequest} req
      * @param {function(string, ModifyImageSpriteTemplateResponse):void} cb
@@ -1146,6 +1145,24 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     ParseStreamingManifest(req, cb) {
         let resp = new ParseStreamingManifestResponse();
         this.request("ParseStreamingManifest", req, resp, cb);
+    }
+
+    /**
+     * This API is used to initiate an image processing task. Image processing operations include the following:
+
+1. Intelligent recognition of pornographic, terrorism, and politically sensitive content
+
+><li>File size: < 5 MB</li>
+><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
+><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
+
+     * @param {ProcessImageRequest} req
+     * @param {function(string, ProcessImageResponse):void} cb
+     * @public
+     */
+    ProcessImage(req, cb) {
+        let resp = new ProcessImageResponse();
+        this.request("ProcessImage", req, resp, cb);
     }
 
     /**
@@ -1729,17 +1746,6 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     DeleteSampleSnapshotTemplate(req, cb) {
         let resp = new DeleteSampleSnapshotTemplateResponse();
         this.request("DeleteSampleSnapshotTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to publish a VOD video on WeChat Mini Program for playback in the WeChat Mini Program player.
-     * @param {WeChatMiniProgramPublishRequest} req
-     * @param {function(string, WeChatMiniProgramPublishResponse):void} cb
-     * @public
-     */
-    WeChatMiniProgramPublish(req, cb) {
-        let resp = new WeChatMiniProgramPublishResponse();
-        this.request("WeChatMiniProgramPublish", req, resp, cb);
     }
 
     /**

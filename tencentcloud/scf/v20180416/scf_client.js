@@ -16,25 +16,22 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const AccessInfo = models.AccessInfo;
 const UpdateAliasRequest = models.UpdateAliasRequest;
 const Trigger = models.Trigger;
 const GetProvisionedConcurrencyConfigRequest = models.GetProvisionedConcurrencyConfigRequest;
 const ListAliasesResponse = models.ListAliasesResponse;
 const DeleteLayerVersionResponse = models.DeleteLayerVersionResponse;
 const GetReservedConcurrencyConfigResponse = models.GetReservedConcurrencyConfigResponse;
-const ProtocolParams = models.ProtocolParams;
 const RoutingConfig = models.RoutingConfig;
 const DeleteProvisionedConcurrencyConfigResponse = models.DeleteProvisionedConcurrencyConfigResponse;
 const VersionWeight = models.VersionWeight;
 const TimeInterval = models.TimeInterval;
 const LayerVersionInfo = models.LayerVersionInfo;
 const PutProvisionedConcurrencyConfigResponse = models.PutProvisionedConcurrencyConfigResponse;
-const UpdateFunctionConfigurationResponse = models.UpdateFunctionConfigurationResponse;
+const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
 const PublishLayerVersionResponse = models.PublishLayerVersionResponse;
 const UsageInfo = models.UsageInfo;
-const PublicNetConfigIn = models.PublicNetConfigIn;
-const DeleteProvisionedConcurrencyConfigRequest = models.DeleteProvisionedConcurrencyConfigRequest;
+const AsyncEvent = models.AsyncEvent;
 const DeleteReservedConcurrencyConfigResponse = models.DeleteReservedConcurrencyConfigResponse;
 const GetAliasResponse = models.GetAliasResponse;
 const UpdateAliasResponse = models.UpdateAliasResponse;
@@ -44,23 +41,18 @@ const StatusReason = models.StatusReason;
 const Tag = models.Tag;
 const GetRequestStatusRequest = models.GetRequestStatusRequest;
 const LogFilter = models.LogFilter;
-const EipConfigIn = models.EipConfigIn;
 const ListLayerVersionsResponse = models.ListLayerVersionsResponse;
 const DeleteFunctionRequest = models.DeleteFunctionRequest;
 const CopyFunctionResponse = models.CopyFunctionResponse;
 const InvokeFunctionResponse = models.InvokeFunctionResponse;
 const Namespace = models.Namespace;
-const GetFunctionRequest = models.GetFunctionRequest;
 const ListNamespacesRequest = models.ListNamespacesRequest;
 const PublishVersionRequest = models.PublishVersionRequest;
 const DeleteAliasRequest = models.DeleteAliasRequest;
 const ListVersionByFunctionResponse = models.ListVersionByFunctionResponse;
-const WSParams = models.WSParams;
 const GetAliasRequest = models.GetAliasRequest;
-const CreateNamespaceResponse = models.CreateNamespaceResponse;
-const PublicNetConfigOut = models.PublicNetConfigOut;
+const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const UpdateFunctionCodeRequest = models.UpdateFunctionCodeRequest;
-const UpdateFunctionConfigurationRequest = models.UpdateFunctionConfigurationRequest;
 const DeleteReservedConcurrencyConfigRequest = models.DeleteReservedConcurrencyConfigRequest;
 const GetFunctionEventInvokeConfigResponse = models.GetFunctionEventInvokeConfigResponse;
 const ListTriggersResponse = models.ListTriggersResponse;
@@ -68,15 +60,11 @@ const TerminateAsyncEventRequest = models.TerminateAsyncEventRequest;
 const ListLayersRequest = models.ListLayersRequest;
 const CopyFunctionRequest = models.CopyFunctionRequest;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
-const LayerVersionSimple = models.LayerVersionSimple;
 const TriggerCount = models.TriggerCount;
 const NamespaceLimit = models.NamespaceLimit;
-const CfsConfig = models.CfsConfig;
-const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const ListFunctionsRequest = models.ListFunctionsRequest;
 const CreateTriggerRequest = models.CreateTriggerRequest;
-const UpdateNamespaceResponse = models.UpdateNamespaceResponse;
-const GetAccountResponse = models.GetAccountResponse;
+const GetLayerVersionRequest = models.GetLayerVersionRequest;
 const DeleteFunctionResponse = models.DeleteFunctionResponse;
 const ListAsyncEventsRequest = models.ListAsyncEventsRequest;
 const Result = models.Result;
@@ -84,14 +72,12 @@ const CreateAliasResponse = models.CreateAliasResponse;
 const LogSearchContext = models.LogSearchContext;
 const TriggerInfo = models.TriggerInfo;
 const RequestStatus = models.RequestStatus;
-const CreateFunctionRequest = models.CreateFunctionRequest;
 const GetAccountRequest = models.GetAccountRequest;
 const PutTotalConcurrencyConfigResponse = models.PutTotalConcurrencyConfigResponse;
 const GetAsyncEventStatusRequest = models.GetAsyncEventStatusRequest;
 const DeleteAliasResponse = models.DeleteAliasResponse;
 const PublishVersionResponse = models.PublishVersionResponse;
-const AsyncEvent = models.AsyncEvent;
-const Environment = models.Environment;
+const DeleteProvisionedConcurrencyConfigRequest = models.DeleteProvisionedConcurrencyConfigRequest;
 const TerminateAsyncEventResponse = models.TerminateAsyncEventResponse;
 const GetFunctionAddressRequest = models.GetFunctionAddressRequest;
 const InvokeResponse = models.InvokeResponse;
@@ -107,8 +93,6 @@ const CreateNamespaceRequest = models.CreateNamespaceRequest;
 const UpdateFunctionEventInvokeConfigRequest = models.UpdateFunctionEventInvokeConfigRequest;
 const DeleteLayerVersionRequest = models.DeleteLayerVersionRequest;
 const Filter = models.Filter;
-const Variable = models.Variable;
-const GetFunctionResponse = models.GetFunctionResponse;
 const GetFunctionEventInvokeConfigRequest = models.GetFunctionEventInvokeConfigRequest;
 const Code = models.Code;
 const PutTotalConcurrencyConfigRequest = models.PutTotalConcurrencyConfigRequest;
@@ -121,36 +105,31 @@ const FunctionLog = models.FunctionLog;
 const InvokeFunctionRequest = models.InvokeFunctionRequest;
 const RetryConfig = models.RetryConfig;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
-const CfsInsInfo = models.CfsInsInfo;
 const TriggerAction = models.TriggerAction;
 const LimitsInfo = models.LimitsInfo;
 const ListLayersResponse = models.ListLayersResponse;
 const FunctionVersion = models.FunctionVersion;
 const AsyncTriggerConfig = models.AsyncTriggerConfig;
-const DeadLetterConfig = models.DeadLetterConfig;
 const ListVersionByFunctionRequest = models.ListVersionByFunctionRequest;
 const ListFunctionsResponse = models.ListFunctionsResponse;
 const GetAsyncEventStatusResponse = models.GetAsyncEventStatusResponse;
 const ListTriggersRequest = models.ListTriggersRequest;
-const CreateFunctionResponse = models.CreateFunctionResponse;
+const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const GetReservedConcurrencyConfigRequest = models.GetReservedConcurrencyConfigRequest;
 const PutProvisionedConcurrencyConfigRequest = models.PutProvisionedConcurrencyConfigRequest;
 const Function = models.Function;
 const NamespaceUsage = models.NamespaceUsage;
 const ListAliasesRequest = models.ListAliasesRequest;
-const EipOutConfig = models.EipOutConfig;
 const Alias = models.Alias;
-const GetLayerVersionRequest = models.GetLayerVersionRequest;
+const GetAccountResponse = models.GetAccountResponse;
 const GetFunctionLogsResponse = models.GetFunctionLogsResponse;
 const ImageConfig = models.ImageConfig;
 const DeleteTriggerResponse = models.DeleteTriggerResponse;
 const SearchKey = models.SearchKey;
 const DeleteTriggerRequest = models.DeleteTriggerRequest;
-const VpcConfig = models.VpcConfig;
 const GetProvisionedConcurrencyConfigResponse = models.GetProvisionedConcurrencyConfigResponse;
 const ListAsyncEventsResponse = models.ListAsyncEventsResponse;
 const ListNamespacesResponse = models.ListNamespacesResponse;
-const EipConfigOut = models.EipConfigOut;
 const UpdateFunctionCodeResponse = models.UpdateFunctionCodeResponse;
 
 
@@ -292,14 +271,14 @@ You can manually configure the function after replication as required.
     }
 
     /**
-     * This API is used to delete an existing trigger based on the input parameters.
-     * @param {DeleteTriggerRequest} req
-     * @param {function(string, DeleteTriggerResponse):void} cb
+     * This API returns function running logs according to the specified conditions. Note that this API has been disused. You can use [GetRequestStatus](https://intl.cloud.tencent.com/document/product/583/65348?from_cn_redirect=1) instead. See also [Retrieving Logs](https://intl.cloud.tencent.com/document/product/583/52637?from_cn_redirect=1).
+     * @param {GetFunctionLogsRequest} req
+     * @param {function(string, GetFunctionLogsResponse):void} cb
      * @public
      */
-    DeleteTrigger(req, cb) {
-        let resp = new DeleteTriggerResponse();
-        this.request("DeleteTrigger", req, resp, cb);
+    GetFunctionLogs(req, cb) {
+        let resp = new GetFunctionLogsResponse();
+        this.request("GetFunctionLogs", req, resp, cb);
     }
 
     /**
@@ -314,14 +293,14 @@ You can manually configure the function after replication as required.
     }
 
     /**
-     * This API returns function running logs according to the specified conditions. Note that this API has been disused. You can use [GetRequestStatus](https://intl.cloud.tencent.com/document/product/583/65348?from_cn_redirect=1) instead. See also [Retrieving Logs](https://intl.cloud.tencent.com/document/product/583/52637?from_cn_redirect=1).
-     * @param {GetFunctionLogsRequest} req
-     * @param {function(string, GetFunctionLogsResponse):void} cb
+     * This API is used to delete an existing trigger based on the input parameters.
+     * @param {DeleteTriggerRequest} req
+     * @param {function(string, DeleteTriggerResponse):void} cb
      * @public
      */
-    GetFunctionLogs(req, cb) {
-        let resp = new GetFunctionLogsResponse();
-        this.request("GetFunctionLogs", req, resp, cb);
+    DeleteTrigger(req, cb) {
+        let resp = new DeleteTriggerResponse();
+        this.request("DeleteTrigger", req, resp, cb);
     }
 
     /**
@@ -347,14 +326,14 @@ You can manually configure the function after replication as required.
     }
 
     /**
-     * This API is used to delete the provisioned concurrency configuration of a function version.
-     * @param {DeleteProvisionedConcurrencyConfigRequest} req
-     * @param {function(string, DeleteProvisionedConcurrencyConfigResponse):void} cb
+     * This API is used to run a function.
+     * @param {InvokeRequest} req
+     * @param {function(string, InvokeResponse):void} cb
      * @public
      */
-    DeleteProvisionedConcurrencyConfig(req, cb) {
-        let resp = new DeleteProvisionedConcurrencyConfigResponse();
-        this.request("DeleteProvisionedConcurrencyConfig", req, resp, cb);
+    Invoke(req, cb) {
+        let resp = new InvokeResponse();
+        this.request("Invoke", req, resp, cb);
     }
 
     /**
@@ -377,17 +356,6 @@ You can manually configure the function after replication as required.
     DeleteLayerVersion(req, cb) {
         let resp = new DeleteLayerVersionResponse();
         this.request("DeleteLayerVersion", req, resp, cb);
-    }
-
-    /**
-     * This API is used to obtain function details, such as name, code, handler, associated trigger, and timeout.
-     * @param {GetFunctionRequest} req
-     * @param {function(string, GetFunctionResponse):void} cb
-     * @public
-     */
-    GetFunction(req, cb) {
-        let resp = new GetFunctionResponse();
-        this.request("GetFunction", req, resp, cb);
     }
 
     /**
@@ -524,17 +492,6 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
-     * This API is used to update the function configuration based on the input parameters.
-     * @param {UpdateFunctionConfigurationRequest} req
-     * @param {function(string, UpdateFunctionConfigurationResponse):void} cb
-     * @public
-     */
-    UpdateFunctionConfiguration(req, cb) {
-        let resp = new UpdateFunctionConfigurationResponse();
-        this.request("UpdateFunctionConfiguration", req, resp, cb);
-    }
-
-    /**
      * This API is used to configure the reserved quota of a function.
      * @param {PutReservedConcurrencyConfigRequest} req
      * @param {function(string, PutReservedConcurrencyConfigResponse):void} cb
@@ -568,14 +525,14 @@ An alias must point to a master version and can point to an additional version a
     }
 
     /**
-     * This API is used to run a function.
-     * @param {InvokeRequest} req
-     * @param {function(string, InvokeResponse):void} cb
+     * This API is used to delete the provisioned concurrency configuration of a function version.
+     * @param {DeleteProvisionedConcurrencyConfigRequest} req
+     * @param {function(string, DeleteProvisionedConcurrencyConfigResponse):void} cb
      * @public
      */
-    Invoke(req, cb) {
-        let resp = new InvokeResponse();
-        this.request("Invoke", req, resp, cb);
+    DeleteProvisionedConcurrencyConfig(req, cb) {
+        let resp = new DeleteProvisionedConcurrencyConfigResponse();
+        this.request("DeleteProvisionedConcurrencyConfig", req, resp, cb);
     }
 
     /**
@@ -609,17 +566,6 @@ An alias must point to a master version and can point to an additional version a
     PutTotalConcurrencyConfig(req, cb) {
         let resp = new PutTotalConcurrencyConfigResponse();
         this.request("PutTotalConcurrencyConfig", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a function based on the input parameters.
-     * @param {CreateFunctionRequest} req
-     * @param {function(string, CreateFunctionResponse):void} cb
-     * @public
-     */
-    CreateFunction(req, cb) {
-        let resp = new CreateFunctionResponse();
-        this.request("CreateFunction", req, resp, cb);
     }
 
     /**

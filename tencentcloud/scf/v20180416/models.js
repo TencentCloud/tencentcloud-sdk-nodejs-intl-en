@@ -17,41 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * HTTP domain name-related information
- * @class
- */
-class AccessInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Domain name
-         * @type {string || null}
-         */
-        this.Host = null;
-
-        /**
-         * VIP
-         * @type {string || null}
-         */
-        this.Vip = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Host = 'Host' in params ? params.Host : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-
-    }
-}
-
-/**
  * UpdateAlias request structure.
  * @class
  */
@@ -382,40 +347,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Parameters of the protocol
- * @class
- */
-class ProtocolParams extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Parameters of WebSockets protocol
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {WSParams || null}
-         */
-        this.WSParams = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.WSParams) {
-            let obj = new WSParams();
-            obj.deserialize(params.WSParams)
-            this.WSParams = obj;
-        }
-
-    }
-}
-
-/**
  * Version routing configuration of alias
  * @class
  */
@@ -666,10 +597,10 @@ class PutProvisionedConcurrencyConfigResponse extends  AbstractModel {
 }
 
 /**
- * UpdateFunctionConfiguration response structure.
+ * UpdateNamespace response structure.
  * @class
  */
-class UpdateFunctionConfigurationResponse extends  AbstractModel {
+class UpdateNamespaceResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -793,70 +724,48 @@ class UsageInfo extends  AbstractModel {
 }
 
 /**
- * Public network access configuration
+ * Async event
  * @class
  */
-class PublicNetConfigIn extends  AbstractModel {
+class AsyncEvent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
+         * Invocation request ID
          * @type {string || null}
          */
-        this.PublicNetStatus = null;
+        this.InvokeRequestId = null;
 
         /**
-         * EIP configuration
-         * @type {EipConfigIn || null}
-         */
-        this.EipConfig = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PublicNetStatus = 'PublicNetStatus' in params ? params.PublicNetStatus : null;
-
-        if (params.EipConfig) {
-            let obj = new EipConfigIn();
-            obj.deserialize(params.EipConfig)
-            this.EipConfig = obj;
-        }
-
-    }
-}
-
-/**
- * DeleteProvisionedConcurrencyConfig request structure.
- * @class
- */
-class DeleteProvisionedConcurrencyConfigRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of the function for which to delete the provisioned concurrency
+         * Invocation type
          * @type {string || null}
          */
-        this.FunctionName = null;
+        this.InvokeType = null;
 
         /**
-         * Function version number
+         * Function version
          * @type {string || null}
          */
         this.Qualifier = null;
 
         /**
-         * Function namespace. Default value: `default`
+         * Event status. Values: `RUNNING`; `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed)
          * @type {string || null}
          */
-        this.Namespace = null;
+        this.Status = null;
+
+        /**
+         * Invocation start time in the format of "%Y-%m-%d %H:%M:%S.%f"
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Invocation end time in the format of "%Y-%m-%d %H:%M:%S.%f"
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -867,9 +776,12 @@ class DeleteProvisionedConcurrencyConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
+        this.InvokeType = 'InvokeType' in params ? params.InvokeType : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1358,34 +1270,6 @@ Blank, indicating that all logs will be returned.
 }
 
 /**
- * Fixed IP configuration for public network access
- * @class
- */
-class EipConfigIn extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Status of the EIP. Values: ['ENABLE','DISABLE']
-         * @type {string || null}
-         */
-        this.EipStatus = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EipStatus = 'EipStatus' in params ? params.EipStatus : null;
-
-    }
-}
-
-/**
  * ListLayerVersions response structure.
  * @class
  */
@@ -1590,55 +1474,6 @@ class Namespace extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
-
-    }
-}
-
-/**
- * GetFunction request structure.
- * @class
- */
-class GetFunctionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of the function to obtain details
-         * @type {string || null}
-         */
-        this.FunctionName = null;
-
-        /**
-         * Function version number
-         * @type {string || null}
-         */
-        this.Qualifier = null;
-
-        /**
-         * Function namespace
-         * @type {string || null}
-         */
-        this.Namespace = null;
-
-        /**
-         * It indicates whether to display the code. `TRUE` means displaying the code, and `FALSE` means hiding the code. The code will not be displayed for entry files exceeding 1 MB.
-         * @type {string || null}
-         */
-        this.ShowCode = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
-        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.ShowCode = 'ShowCode' in params ? params.ShowCode : null;
 
     }
 }
@@ -1851,35 +1686,6 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * Parameters of the specified protocol
- * @class
- */
-class WSParams extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Idle timeout period in seconds. Default: 15; range: 1 to 1800
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IdleTimeOut = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IdleTimeOut = 'IdleTimeOut' in params ? params.IdleTimeOut : null;
-
-    }
-}
-
-/**
  * GetAlias request structure.
  * @class
  */
@@ -1922,18 +1728,18 @@ class GetAliasRequest extends  AbstractModel {
 }
 
 /**
- * CreateNamespace response structure.
+ * DeleteNamespace request structure.
  * @class
  */
-class CreateNamespaceResponse extends  AbstractModel {
+class DeleteNamespaceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Namespace name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Namespace = null;
 
     }
 
@@ -1944,47 +1750,7 @@ class CreateNamespaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Public network access configuration
- * @class
- */
-class PublicNetConfigOut extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
-         * @type {string || null}
-         */
-        this.PublicNetStatus = null;
-
-        /**
-         * EIP configuration
-         * @type {EipConfigOut || null}
-         */
-        this.EipConfig = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PublicNetStatus = 'PublicNetStatus' in params ? params.PublicNetStatus : null;
-
-        if (params.EipConfig) {
-            let obj = new EipConfigOut();
-            obj.deserialize(params.EipConfig)
-            this.EipConfig = obj;
-        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -2095,205 +1861,6 @@ class UpdateFunctionCodeRequest extends  AbstractModel {
             this.Code = obj;
         }
         this.CodeSource = 'CodeSource' in params ? params.CodeSource : null;
-
-    }
-}
-
-/**
- * UpdateFunctionConfiguration request structure.
- * @class
- */
-class UpdateFunctionConfigurationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of the function to be modified
-         * @type {string || null}
-         */
-        this.FunctionName = null;
-
-        /**
-         * Function description. It can contain up to 1,000 characters, including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3,072 MB in increments of 128 MB.
-         * @type {number || null}
-         */
-        this.MemorySize = null;
-
-        /**
-         * Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
-         * @type {number || null}
-         */
-        this.Timeout = null;
-
-        /**
-         * Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime
-         * @type {string || null}
-         */
-        this.Runtime = null;
-
-        /**
-         * Function environment variable
-         * @type {Environment || null}
-         */
-        this.Environment = null;
-
-        /**
-         * Function namespace
-         * @type {string || null}
-         */
-        this.Namespace = null;
-
-        /**
-         * Function VPC configuration
-         * @type {VpcConfig || null}
-         */
-        this.VpcConfig = null;
-
-        /**
-         * Role bound to the function
-         * @type {string || null}
-         */
-        this.Role = null;
-
-        /**
-         * Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
-         * @type {string || null}
-         */
-        this.InstallDependency = null;
-
-        /**
-         * CLS logset ID to which logs are shipped
-         * @type {string || null}
-         */
-        this.ClsLogsetId = null;
-
-        /**
-         * CLS Topic ID to which logs are shipped
-         * @type {string || null}
-         */
-        this.ClsTopicId = null;
-
-        /**
-         * It specifies whether to synchronously publish a new version during the update. The default value is `FALSE`, indicating not to publish a new version
-         * @type {string || null}
-         */
-        this.Publish = null;
-
-        /**
-         * Whether to enable L5 access. TRUE: enable; FALSE: not enable
-         * @type {string || null}
-         */
-        this.L5Enable = null;
-
-        /**
-         * List of layer versions that bound with the function. Files with the same name will be overridden by the bound layer versions according to the ascending order in the list. 
-         * @type {Array.<LayerVersionSimple> || null}
-         */
-        this.Layers = null;
-
-        /**
-         * Information of a dead letter queue associated with a function
-         * @type {DeadLetterConfig || null}
-         */
-        this.DeadLetterConfig = null;
-
-        /**
-         * Public network access configuration
-         * @type {PublicNetConfigIn || null}
-         */
-        this.PublicNetConfig = null;
-
-        /**
-         * File system configuration input parameter, which is used for the function to bind the CFS file system
-         * @type {CfsConfig || null}
-         */
-        this.CfsConfig = null;
-
-        /**
-         * The function initialization timeout period
-         * @type {number || null}
-         */
-        this.InitTimeout = null;
-
-        /**
-         * Parameters of the specified protocol
-         * @type {ProtocolParams || null}
-         */
-        this.ProtocolParams = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.MemorySize = 'MemorySize' in params ? params.MemorySize : null;
-        this.Timeout = 'Timeout' in params ? params.Timeout : null;
-        this.Runtime = 'Runtime' in params ? params.Runtime : null;
-
-        if (params.Environment) {
-            let obj = new Environment();
-            obj.deserialize(params.Environment)
-            this.Environment = obj;
-        }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-
-        if (params.VpcConfig) {
-            let obj = new VpcConfig();
-            obj.deserialize(params.VpcConfig)
-            this.VpcConfig = obj;
-        }
-        this.Role = 'Role' in params ? params.Role : null;
-        this.InstallDependency = 'InstallDependency' in params ? params.InstallDependency : null;
-        this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
-        this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
-        this.Publish = 'Publish' in params ? params.Publish : null;
-        this.L5Enable = 'L5Enable' in params ? params.L5Enable : null;
-
-        if (params.Layers) {
-            this.Layers = new Array();
-            for (let z in params.Layers) {
-                let obj = new LayerVersionSimple();
-                obj.deserialize(params.Layers[z]);
-                this.Layers.push(obj);
-            }
-        }
-
-        if (params.DeadLetterConfig) {
-            let obj = new DeadLetterConfig();
-            obj.deserialize(params.DeadLetterConfig)
-            this.DeadLetterConfig = obj;
-        }
-
-        if (params.PublicNetConfig) {
-            let obj = new PublicNetConfigIn();
-            obj.deserialize(params.PublicNetConfig)
-            this.PublicNetConfig = obj;
-        }
-
-        if (params.CfsConfig) {
-            let obj = new CfsConfig();
-            obj.deserialize(params.CfsConfig)
-            this.CfsConfig = obj;
-        }
-        this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
-
-        if (params.ProtocolParams) {
-            let obj = new ProtocolParams();
-            obj.deserialize(params.ProtocolParams)
-            this.ProtocolParams = obj;
-        }
 
     }
 }
@@ -2632,41 +2199,6 @@ class DeleteNamespaceResponse extends  AbstractModel {
 }
 
 /**
- * Specifies a layer version
- * @class
- */
-class LayerVersionSimple extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of the layer to bind. Leave it blank if you want to unbind layers
-         * @type {string || null}
-         */
-        this.LayerName = null;
-
-        /**
-         * Version ID f the layer to bind/unbind. If the layer version to unbind is the only layer version of the function version, enter `0`.
-         * @type {number || null}
-         */
-        this.LayerVersion = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LayerName = 'LayerName' in params ? params.LayerName : null;
-        this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
-
-    }
-}
-
-/**
  * `TriggerCount` describes the numbers of triggers in different types
  * @class
  */
@@ -2862,70 +2394,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * File system (CFS) configuration description
- * @class
- */
-class CfsConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * File system information list
-         * @type {Array.<CfsInsInfo> || null}
-         */
-        this.CfsInsList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.CfsInsList) {
-            this.CfsInsList = new Array();
-            for (let z in params.CfsInsList) {
-                let obj = new CfsInsInfo();
-                obj.deserialize(params.CfsInsList[z]);
-                this.CfsInsList.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DeleteNamespace request structure.
- * @class
- */
-class DeleteNamespaceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Namespace name
-         * @type {string || null}
-         */
-        this.Namespace = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-
-    }
-}
-
-/**
  * ListFunctions request structure.
  * @class
  */
@@ -3052,7 +2520,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.Namespace = null;
 
         /**
-         * Function version
+         * Function version. It defaults to `$LATEST`. It’s recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
          * @type {string || null}
          */
         this.Qualifier = null;
@@ -3091,18 +2559,24 @@ class CreateTriggerRequest extends  AbstractModel {
 }
 
 /**
- * UpdateNamespace response structure.
+ * GetLayerVersion request structure.
  * @class
  */
-class UpdateNamespaceResponse extends  AbstractModel {
+class GetLayerVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Layer name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LayerName = null;
+
+        /**
+         * Version number
+         * @type {number || null}
+         */
+        this.LayerVersion = null;
 
     }
 
@@ -3113,59 +2587,8 @@ class UpdateNamespaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * GetAccount response structure.
- * @class
- */
-class GetAccountResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Namespace usage information
-         * @type {UsageInfo || null}
-         */
-        this.AccountUsage = null;
-
-        /**
-         * Namespace limit information
-         * @type {LimitsInfo || null}
-         */
-        this.AccountLimit = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.AccountUsage) {
-            let obj = new UsageInfo();
-            obj.deserialize(params.AccountUsage)
-            this.AccountUsage = obj;
-        }
-
-        if (params.AccountLimit) {
-            let obj = new LimitsInfo();
-            obj.deserialize(params.AccountLimit)
-            this.AccountLimit = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LayerName = 'LayerName' in params ? params.LayerName : null;
+        this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
 
     }
 }
@@ -3651,260 +3074,6 @@ class RequestStatus extends  AbstractModel {
 }
 
 /**
- * CreateFunction request structure.
- * @class
- */
-class CreateFunctionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of the new function. The name can contain 2 to 60 characters, including English letters, digits, hyphens (-), and underscores (_). The name must start with a letter and cannot end with a hyphen or underscore.
-         * @type {string || null}
-         */
-        this.FunctionName = null;
-
-        /**
-         * Function code. Note: `COS`, `ZipFile`, and `DemoId` cannot be specified at the same time.
-         * @type {Code || null}
-         */
-        this.Code = null;
-
-        /**
-         * Function handler name. It supports the format of "file name.handler name" where the file name and handler name are separated with a "." (for Java, it is in the format of "package name.class name::handler name"). File and handler names can contain 2–60 letters, digits, underscores, and dashes and must start and end with letters
-         * @type {string || null}
-         */
-        this.Handler = null;
-
-        /**
-         * Function description. It can contain up to 1,000 characters including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3072 MB in increments of 128 MB
-         * @type {number || null}
-         */
-        this.MemorySize = null;
-
-        /**
-         * Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
-         * @type {number || null}
-         */
-        this.Timeout = null;
-
-        /**
-         * Function environment variable
-         * @type {Environment || null}
-         */
-        this.Environment = null;
-
-        /**
-         * Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, Php5, Php7, Go1, Java8, CustomRuntime. Default value: Python2.7
-         * @type {string || null}
-         */
-        this.Runtime = null;
-
-        /**
-         * Function VPC configuration
-         * @type {VpcConfig || null}
-         */
-        this.VpcConfig = null;
-
-        /**
-         * Function namespace
-         * @type {string || null}
-         */
-        this.Namespace = null;
-
-        /**
-         * Role bound to the function
-         * @type {string || null}
-         */
-        this.Role = null;
-
-        /**
-         * Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
-         * @type {string || null}
-         */
-        this.InstallDependency = null;
-
-        /**
-         * CLS Logset ID to which the function logs are shipped
-         * @type {string || null}
-         */
-        this.ClsLogsetId = null;
-
-        /**
-         * CLS Topic ID to which the function logs are shipped
-         * @type {string || null}
-         */
-        this.ClsTopicId = null;
-
-        /**
-         * Function type. The default value is `Event`. Enter `Event` if you need to create a trigger function. Enter `HTTP` if you need to create an HTTP function service.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Code source. Valid values: ZipFile, Cos, Demo
-         * @type {string || null}
-         */
-        this.CodeSource = null;
-
-        /**
-         * List of layer versions to be associate with the function. Layers will be overwritten sequentially in the order in the list.
-         * @type {Array.<LayerVersionSimple> || null}
-         */
-        this.Layers = null;
-
-        /**
-         * Dead letter queue parameter
-         * @type {DeadLetterConfig || null}
-         */
-        this.DeadLetterConfig = null;
-
-        /**
-         * Public network access configuration
-         * @type {PublicNetConfigIn || null}
-         */
-        this.PublicNetConfig = null;
-
-        /**
-         * File system configuration parameter, which is used for the function to mount the file system
-         * @type {CfsConfig || null}
-         */
-        this.CfsConfig = null;
-
-        /**
-         * The function initialization timeout period. It defaults to 65s for general cases and 90s for image deployment functions.
-         * @type {number || null}
-         */
-        this.InitTimeout = null;
-
-        /**
-         * Tag parameter of the function. It is an array of key-value pairs.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Whether to enable the async attribute. TRUE: yes; FALSE: no
-         * @type {string || null}
-         */
-        this.AsyncRunEnable = null;
-
-        /**
-         * Whether to enable event tracking. TRUE: yes; FALSE: no
-         * @type {string || null}
-         */
-        this.TraceEnable = null;
-
-        /**
-         * Protocols supported by HTTP-triggered functions. Valid value: `WS` (WebSockets)
-         * @type {string || null}
-         */
-        this.ProtocolType = null;
-
-        /**
-         * Parameters of the specified protocol
-         * @type {ProtocolParams || null}
-         */
-        this.ProtocolParams = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
-
-        if (params.Code) {
-            let obj = new Code();
-            obj.deserialize(params.Code)
-            this.Code = obj;
-        }
-        this.Handler = 'Handler' in params ? params.Handler : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.MemorySize = 'MemorySize' in params ? params.MemorySize : null;
-        this.Timeout = 'Timeout' in params ? params.Timeout : null;
-
-        if (params.Environment) {
-            let obj = new Environment();
-            obj.deserialize(params.Environment)
-            this.Environment = obj;
-        }
-        this.Runtime = 'Runtime' in params ? params.Runtime : null;
-
-        if (params.VpcConfig) {
-            let obj = new VpcConfig();
-            obj.deserialize(params.VpcConfig)
-            this.VpcConfig = obj;
-        }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.Role = 'Role' in params ? params.Role : null;
-        this.InstallDependency = 'InstallDependency' in params ? params.InstallDependency : null;
-        this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
-        this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.CodeSource = 'CodeSource' in params ? params.CodeSource : null;
-
-        if (params.Layers) {
-            this.Layers = new Array();
-            for (let z in params.Layers) {
-                let obj = new LayerVersionSimple();
-                obj.deserialize(params.Layers[z]);
-                this.Layers.push(obj);
-            }
-        }
-
-        if (params.DeadLetterConfig) {
-            let obj = new DeadLetterConfig();
-            obj.deserialize(params.DeadLetterConfig)
-            this.DeadLetterConfig = obj;
-        }
-
-        if (params.PublicNetConfig) {
-            let obj = new PublicNetConfigIn();
-            obj.deserialize(params.PublicNetConfig)
-            this.PublicNetConfig = obj;
-        }
-
-        if (params.CfsConfig) {
-            let obj = new CfsConfig();
-            obj.deserialize(params.CfsConfig)
-            this.CfsConfig = obj;
-        }
-        this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.AsyncRunEnable = 'AsyncRunEnable' in params ? params.AsyncRunEnable : null;
-        this.TraceEnable = 'TraceEnable' in params ? params.TraceEnable : null;
-        this.ProtocolType = 'ProtocolType' in params ? params.ProtocolType : null;
-
-        if (params.ProtocolParams) {
-            let obj = new ProtocolParams();
-            obj.deserialize(params.ProtocolParams)
-            this.ProtocolParams = obj;
-        }
-
-    }
-}
-
-/**
  * GetAccount request structure.
  * @class
  */
@@ -4094,48 +3263,30 @@ class PublishVersionResponse extends  AbstractModel {
 }
 
 /**
- * Async event
+ * DeleteProvisionedConcurrencyConfig request structure.
  * @class
  */
-class AsyncEvent extends  AbstractModel {
+class DeleteProvisionedConcurrencyConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Invocation request ID
+         * Name of the function for which to delete the provisioned concurrency
          * @type {string || null}
          */
-        this.InvokeRequestId = null;
+        this.FunctionName = null;
 
         /**
-         * Invocation type
-         * @type {string || null}
-         */
-        this.InvokeType = null;
-
-        /**
-         * Function version
+         * Function version number
          * @type {string || null}
          */
         this.Qualifier = null;
 
         /**
-         * Event status. Values: `RUNNING`; `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed)
+         * Function namespace. Default value: `default`
          * @type {string || null}
          */
-        this.Status = null;
-
-        /**
-         * Invocation start time in the format of "%Y-%m-%d %H:%M:%S.%f"
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Invocation end time in the format of "%Y-%m-%d %H:%M:%S.%f"
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.Namespace = null;
 
     }
 
@@ -4146,48 +3297,9 @@ class AsyncEvent extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InvokeRequestId = 'InvokeRequestId' in params ? params.InvokeRequestId : null;
-        this.InvokeType = 'InvokeType' in params ? params.InvokeType : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-
-    }
-}
-
-/**
- * Environment variable parameter of the function
- * @class
- */
-class Environment extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment variable array
-         * @type {Array.<Variable> || null}
-         */
-        this.Variables = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Variables) {
-            this.Variables = new Array();
-            for (let z in params.Variables) {
-                let obj = new Variable();
-                obj.deserialize(params.Variables[z]);
-                this.Variables.push(obj);
-            }
-        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -4855,459 +3967,6 @@ When `Name` is `Runtime`, `CustomImage` refers to the image type function
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
-
-    }
-}
-
-/**
- * Variable parameter
- * @class
- */
-class Variable extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Variable name
-         * @type {string || null}
-         */
-        this.Key = null;
-
-        /**
-         * Variable value
-         * @type {string || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * GetFunction response structure.
- * @class
- */
-class GetFunctionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Latest modification time of the function
-         * @type {string || null}
-         */
-        this.ModTime = null;
-
-        /**
-         * Function code
-         * @type {string || null}
-         */
-        this.CodeInfo = null;
-
-        /**
-         * Function description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Function trigger list
-         * @type {Array.<Trigger> || null}
-         */
-        this.Triggers = null;
-
-        /**
-         * Function entry
-         * @type {string || null}
-         */
-        this.Handler = null;
-
-        /**
-         * Function code size
-         * @type {number || null}
-         */
-        this.CodeSize = null;
-
-        /**
-         * Function timeout
-         * @type {number || null}
-         */
-        this.Timeout = null;
-
-        /**
-         * Function version
-         * @type {string || null}
-         */
-        this.FunctionVersion = null;
-
-        /**
-         * Maximum available memory of the function
-         * @type {number || null}
-         */
-        this.MemorySize = null;
-
-        /**
-         * Function running environment
-         * @type {string || null}
-         */
-        this.Runtime = null;
-
-        /**
-         * Function name
-         * @type {string || null}
-         */
-        this.FunctionName = null;
-
-        /**
-         * Function VPC
-         * @type {VpcConfig || null}
-         */
-        this.VpcConfig = null;
-
-        /**
-         * Whether to use GPU
-         * @type {string || null}
-         */
-        this.UseGpu = null;
-
-        /**
-         * Function environment variable
-         * @type {Environment || null}
-         */
-        this.Environment = null;
-
-        /**
-         * Whether the code is correct
-         * @type {string || null}
-         */
-        this.CodeResult = null;
-
-        /**
-         * Code error information
-         * @type {string || null}
-         */
-        this.CodeError = null;
-
-        /**
-         * Error code
-         * @type {number || null}
-         */
-        this.ErrNo = null;
-
-        /**
-         * Function namespace
-         * @type {string || null}
-         */
-        this.Namespace = null;
-
-        /**
-         * Role bound to the function
-         * @type {string || null}
-         */
-        this.Role = null;
-
-        /**
-         * Whether to install dependencies automatically
-         * @type {string || null}
-         */
-        this.InstallDependency = null;
-
-        /**
-         * Function status. For valid values and status change process, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1)
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Status description
-         * @type {string || null}
-         */
-        this.StatusDesc = null;
-
-        /**
-         * CLS logset to which logs are shipped
-         * @type {string || null}
-         */
-        this.ClsLogsetId = null;
-
-        /**
-         * CLS Topic to which logs are shipped
-         * @type {string || null}
-         */
-        this.ClsTopicId = null;
-
-        /**
-         * Function ID
-         * @type {string || null}
-         */
-        this.FunctionId = null;
-
-        /**
-         * Function tag list
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * EipConfig configuration
-         * @type {EipOutConfig || null}
-         */
-        this.EipConfig = null;
-
-        /**
-         * Domain name information
-         * @type {AccessInfo || null}
-         */
-        this.AccessInfo = null;
-
-        /**
-         * Function type. The value is `HTTP` or `Event`.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Whether to enable L5
-         * @type {string || null}
-         */
-        this.L5Enable = null;
-
-        /**
-         * Version information of a layer associated with a function
-         * @type {Array.<LayerVersionInfo> || null}
-         */
-        this.Layers = null;
-
-        /**
-         * Information of a dead letter queue associated with a function
-         * @type {DeadLetterConfig || null}
-         */
-        this.DeadLetterConfig = null;
-
-        /**
-         * Function creation time
-         * @type {string || null}
-         */
-        this.AddTime = null;
-
-        /**
-         * Public network access configuration
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {PublicNetConfigOut || null}
-         */
-        this.PublicNetConfig = null;
-
-        /**
-         * Whether Ons is enabled
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.OnsEnable = null;
-
-        /**
-         * File system configuration parameter, which is used for the function to mount the file system
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {CfsConfig || null}
-         */
-        this.CfsConfig = null;
-
-        /**
-         * Function billing status. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.87.BD.E6.95.B0.E8.AE.A1.E8.B4.B9.E7.8A.B6.E6.80.81)
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AvailableStatus = null;
-
-        /**
-         * Function version
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Qualifier = null;
-
-        /**
-         * Timeout period for function initialization
-         * @type {number || null}
-         */
-        this.InitTimeout = null;
-
-        /**
-         * Cause of function failure
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<StatusReason> || null}
-         */
-        this.StatusReasons = null;
-
-        /**
-         * Specifies whether to enable asynchronization 
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AsyncRunEnable = null;
-
-        /**
-         * Specifies whether to enable event tracking
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TraceEnable = null;
-
-        /**
-         * Protocols supported by HTTP-triggered functions. It supports WebSockets for now.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.ProtocolType = null;
-
-        /**
-         * Parameters of the specified protocol
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {ProtocolParams || null}
-         */
-        this.ProtocolParams = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ModTime = 'ModTime' in params ? params.ModTime : null;
-        this.CodeInfo = 'CodeInfo' in params ? params.CodeInfo : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-        if (params.Triggers) {
-            this.Triggers = new Array();
-            for (let z in params.Triggers) {
-                let obj = new Trigger();
-                obj.deserialize(params.Triggers[z]);
-                this.Triggers.push(obj);
-            }
-        }
-        this.Handler = 'Handler' in params ? params.Handler : null;
-        this.CodeSize = 'CodeSize' in params ? params.CodeSize : null;
-        this.Timeout = 'Timeout' in params ? params.Timeout : null;
-        this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
-        this.MemorySize = 'MemorySize' in params ? params.MemorySize : null;
-        this.Runtime = 'Runtime' in params ? params.Runtime : null;
-        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
-
-        if (params.VpcConfig) {
-            let obj = new VpcConfig();
-            obj.deserialize(params.VpcConfig)
-            this.VpcConfig = obj;
-        }
-        this.UseGpu = 'UseGpu' in params ? params.UseGpu : null;
-
-        if (params.Environment) {
-            let obj = new Environment();
-            obj.deserialize(params.Environment)
-            this.Environment = obj;
-        }
-        this.CodeResult = 'CodeResult' in params ? params.CodeResult : null;
-        this.CodeError = 'CodeError' in params ? params.CodeError : null;
-        this.ErrNo = 'ErrNo' in params ? params.ErrNo : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.Role = 'Role' in params ? params.Role : null;
-        this.InstallDependency = 'InstallDependency' in params ? params.InstallDependency : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
-        this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
-        this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
-        this.FunctionId = 'FunctionId' in params ? params.FunctionId : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-
-        if (params.EipConfig) {
-            let obj = new EipOutConfig();
-            obj.deserialize(params.EipConfig)
-            this.EipConfig = obj;
-        }
-
-        if (params.AccessInfo) {
-            let obj = new AccessInfo();
-            obj.deserialize(params.AccessInfo)
-            this.AccessInfo = obj;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.L5Enable = 'L5Enable' in params ? params.L5Enable : null;
-
-        if (params.Layers) {
-            this.Layers = new Array();
-            for (let z in params.Layers) {
-                let obj = new LayerVersionInfo();
-                obj.deserialize(params.Layers[z]);
-                this.Layers.push(obj);
-            }
-        }
-
-        if (params.DeadLetterConfig) {
-            let obj = new DeadLetterConfig();
-            obj.deserialize(params.DeadLetterConfig)
-            this.DeadLetterConfig = obj;
-        }
-        this.AddTime = 'AddTime' in params ? params.AddTime : null;
-
-        if (params.PublicNetConfig) {
-            let obj = new PublicNetConfigOut();
-            obj.deserialize(params.PublicNetConfig)
-            this.PublicNetConfig = obj;
-        }
-        this.OnsEnable = 'OnsEnable' in params ? params.OnsEnable : null;
-
-        if (params.CfsConfig) {
-            let obj = new CfsConfig();
-            obj.deserialize(params.CfsConfig)
-            this.CfsConfig = obj;
-        }
-        this.AvailableStatus = 'AvailableStatus' in params ? params.AvailableStatus : null;
-        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
-        this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
-
-        if (params.StatusReasons) {
-            this.StatusReasons = new Array();
-            for (let z in params.StatusReasons) {
-                let obj = new StatusReason();
-                obj.deserialize(params.StatusReasons[z]);
-                this.StatusReasons.push(obj);
-            }
-        }
-        this.AsyncRunEnable = 'AsyncRunEnable' in params ? params.AsyncRunEnable : null;
-        this.TraceEnable = 'TraceEnable' in params ? params.TraceEnable : null;
-        this.ProtocolType = 'ProtocolType' in params ? params.ProtocolType : null;
-
-        if (params.ProtocolParams) {
-            let obj = new ProtocolParams();
-            obj.deserialize(params.ProtocolParams)
-            this.ProtocolParams = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6018,93 +4677,6 @@ class GetFunctionAddressResponse extends  AbstractModel {
 }
 
 /**
- * Configuration information of the CFS instance associated with function
- * @class
- */
-class CfsInsInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * User ID
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * User group ID
-         * @type {string || null}
-         */
-        this.UserGroupId = null;
-
-        /**
-         * CFS instance ID
-         * @type {string || null}
-         */
-        this.CfsId = null;
-
-        /**
-         * File system mount target ID
-         * @type {string || null}
-         */
-        this.MountInsId = null;
-
-        /**
-         * Local mount target
-         * @type {string || null}
-         */
-        this.LocalMountDir = null;
-
-        /**
-         * Remote mount target
-         * @type {string || null}
-         */
-        this.RemoteMountDir = null;
-
-        /**
-         * File system IP, which is not required when you configure CFS.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.IpAddress = null;
-
-        /**
-         * VPC ID of file system, which is not required when you configure CFS.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MountVpcId = null;
-
-        /**
-         * VPC subnet ID of file system, which is not required when you configure CFS.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MountSubnetId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.UserGroupId = 'UserGroupId' in params ? params.UserGroupId : null;
-        this.CfsId = 'CfsId' in params ? params.CfsId : null;
-        this.MountInsId = 'MountInsId' in params ? params.MountInsId : null;
-        this.LocalMountDir = 'LocalMountDir' in params ? params.LocalMountDir : null;
-        this.RemoteMountDir = 'RemoteMountDir' in params ? params.RemoteMountDir : null;
-        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
-        this.MountVpcId = 'MountVpcId' in params ? params.MountVpcId : null;
-        this.MountSubnetId = 'MountSubnetId' in params ? params.MountSubnetId : null;
-
-    }
-}
-
-/**
  * Details of a scheduled provisioned concurrency scaling action
  * @class
  */
@@ -6354,48 +4926,6 @@ class AsyncTriggerConfig extends  AbstractModel {
 }
 
 /**
- * Dead letter queue parameter
- * @class
- */
-class DeadLetterConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Dead letter queue mode
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Dead letter queue name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Tag form of a dead letter queue topic mode
-         * @type {string || null}
-         */
-        this.FilterType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.FilterType = 'FilterType' in params ? params.FilterType : null;
-
-    }
-}
-
-/**
  * ListVersionByFunction request structure.
  * @class
  */
@@ -6628,10 +5158,10 @@ Function version, alias
 }
 
 /**
- * CreateFunction response structure.
+ * CreateNamespace response structure.
  * @class
  */
-class CreateFunctionResponse extends  AbstractModel {
+class CreateNamespaceResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -6728,6 +5258,35 @@ class PutProvisionedConcurrencyConfigRequest extends  AbstractModel {
          */
         this.TriggerActions = null;
 
+        /**
+         * Specifies the provisioned concurrency type.
+`Default`: Static provisioned concurrency. 
+`ConcurrencyUtilizationTracking`: Scales the concurrency automatically according to the concurrency utilization.
+If `ConcurrencyUtilizationTracking` is passed in, 
+
+`TrackingTarget`, `MinCapacity` and `MaxCapacity` are required, and `VersionProvisionedConcurrencyNum` must be `0`. 
+         * @type {string || null}
+         */
+        this.ProvisionedType = null;
+
+        /**
+         * The target concurrency utilization. Range: (0,1) (two decimal places)
+         * @type {number || null}
+         */
+        this.TrackingTarget = null;
+
+        /**
+         * The minimum number of instances. It can not be smaller than `1`.
+         * @type {number || null}
+         */
+        this.MinCapacity = null;
+
+        /**
+         * The maximum number of instances
+         * @type {number || null}
+         */
+        this.MaxCapacity = null;
+
     }
 
     /**
@@ -6750,6 +5309,10 @@ class PutProvisionedConcurrencyConfigRequest extends  AbstractModel {
                 this.TriggerActions.push(obj);
             }
         }
+        this.ProvisionedType = 'ProvisionedType' in params ? params.ProvisionedType : null;
+        this.TrackingTarget = 'TrackingTarget' in params ? params.TrackingTarget : null;
+        this.MinCapacity = 'MinCapacity' in params ? params.MinCapacity : null;
+        this.MaxCapacity = 'MaxCapacity' in params ? params.MaxCapacity : null;
 
     }
 }
@@ -6931,6 +5494,20 @@ class NamespaceUsage extends  AbstractModel {
          */
         this.FunctionsCount = null;
 
+        /**
+         * Total memory quota of the namespace
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalConcurrencyMem = null;
+
+        /**
+         * Memory usage of the namespace
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalAllocatedConcurrencyMem = null;
+
     }
 
     /**
@@ -6943,6 +5520,8 @@ class NamespaceUsage extends  AbstractModel {
         this.Functions = 'Functions' in params ? params.Functions : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.FunctionsCount = 'FunctionsCount' in params ? params.FunctionsCount : null;
+        this.TotalConcurrencyMem = 'TotalConcurrencyMem' in params ? params.TotalConcurrencyMem : null;
+        this.TotalAllocatedConcurrencyMem = 'TotalAllocatedConcurrencyMem' in params ? params.TotalAllocatedConcurrencyMem : null;
 
     }
 }
@@ -6999,41 +5578,6 @@ class ListAliasesRequest extends  AbstractModel {
         this.FunctionVersion = 'FunctionVersion' in params ? params.FunctionVersion : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * EipOutConfig
- * @class
- */
-class EipOutConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * It specifies whether the IP is fixed. The value is `TRUE` or `FALSE`.
-         * @type {string || null}
-         */
-        this.EipFixed = null;
-
-        /**
-         * IP list
-         * @type {Array.<string> || null}
-         */
-        this.Eips = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EipFixed = 'EipFixed' in params ? params.EipFixed : null;
-        this.Eips = 'Eips' in params ? params.Eips : null;
 
     }
 }
@@ -7111,24 +5655,30 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * GetLayerVersion request structure.
+ * GetAccount response structure.
  * @class
  */
-class GetLayerVersionRequest extends  AbstractModel {
+class GetAccountResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Layer name
-         * @type {string || null}
+         * Namespace usage information
+         * @type {UsageInfo || null}
          */
-        this.LayerName = null;
+        this.AccountUsage = null;
 
         /**
-         * Version number
-         * @type {number || null}
+         * Namespace limit information
+         * @type {LimitsInfo || null}
          */
-        this.LayerVersion = null;
+        this.AccountLimit = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -7139,8 +5689,19 @@ class GetLayerVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LayerName = 'LayerName' in params ? params.LayerName : null;
-        this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
+
+        if (params.AccountUsage) {
+            let obj = new UsageInfo();
+            obj.deserialize(params.AccountUsage)
+            this.AccountUsage = obj;
+        }
+
+        if (params.AccountLimit) {
+            let obj = new LimitsInfo();
+            obj.deserialize(params.AccountLimit)
+            this.AccountLimit = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7401,41 +5962,6 @@ class DeleteTriggerRequest extends  AbstractModel {
 }
 
 /**
- * VPC parameter configuration
- * @class
- */
-class VpcConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-
-    }
-}
-
-/**
  * GetProvisionedConcurrencyConfig response structure.
  * @class
  */
@@ -7586,42 +6112,6 @@ class ListNamespacesResponse extends  AbstractModel {
 }
 
 /**
- * Fixed IP configuration for public network access
- * @class
- */
-class EipConfigOut extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether it is a fixed IP. Valid values: ["ENABLE","DISABLE"]
-         * @type {string || null}
-         */
-        this.EipStatus = null;
-
-        /**
-         * IP list
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.EipAddress = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EipStatus = 'EipStatus' in params ? params.EipStatus : null;
-        this.EipAddress = 'EipAddress' in params ? params.EipAddress : null;
-
-    }
-}
-
-/**
  * UpdateFunctionCode response structure.
  * @class
  */
@@ -7650,25 +6140,22 @@ class UpdateFunctionCodeResponse extends  AbstractModel {
 }
 
 module.exports = {
-    AccessInfo: AccessInfo,
     UpdateAliasRequest: UpdateAliasRequest,
     Trigger: Trigger,
     GetProvisionedConcurrencyConfigRequest: GetProvisionedConcurrencyConfigRequest,
     ListAliasesResponse: ListAliasesResponse,
     DeleteLayerVersionResponse: DeleteLayerVersionResponse,
     GetReservedConcurrencyConfigResponse: GetReservedConcurrencyConfigResponse,
-    ProtocolParams: ProtocolParams,
     RoutingConfig: RoutingConfig,
     DeleteProvisionedConcurrencyConfigResponse: DeleteProvisionedConcurrencyConfigResponse,
     VersionWeight: VersionWeight,
     TimeInterval: TimeInterval,
     LayerVersionInfo: LayerVersionInfo,
     PutProvisionedConcurrencyConfigResponse: PutProvisionedConcurrencyConfigResponse,
-    UpdateFunctionConfigurationResponse: UpdateFunctionConfigurationResponse,
+    UpdateNamespaceResponse: UpdateNamespaceResponse,
     PublishLayerVersionResponse: PublishLayerVersionResponse,
     UsageInfo: UsageInfo,
-    PublicNetConfigIn: PublicNetConfigIn,
-    DeleteProvisionedConcurrencyConfigRequest: DeleteProvisionedConcurrencyConfigRequest,
+    AsyncEvent: AsyncEvent,
     DeleteReservedConcurrencyConfigResponse: DeleteReservedConcurrencyConfigResponse,
     GetAliasResponse: GetAliasResponse,
     UpdateAliasResponse: UpdateAliasResponse,
@@ -7678,23 +6165,18 @@ module.exports = {
     Tag: Tag,
     GetRequestStatusRequest: GetRequestStatusRequest,
     LogFilter: LogFilter,
-    EipConfigIn: EipConfigIn,
     ListLayerVersionsResponse: ListLayerVersionsResponse,
     DeleteFunctionRequest: DeleteFunctionRequest,
     CopyFunctionResponse: CopyFunctionResponse,
     InvokeFunctionResponse: InvokeFunctionResponse,
     Namespace: Namespace,
-    GetFunctionRequest: GetFunctionRequest,
     ListNamespacesRequest: ListNamespacesRequest,
     PublishVersionRequest: PublishVersionRequest,
     DeleteAliasRequest: DeleteAliasRequest,
     ListVersionByFunctionResponse: ListVersionByFunctionResponse,
-    WSParams: WSParams,
     GetAliasRequest: GetAliasRequest,
-    CreateNamespaceResponse: CreateNamespaceResponse,
-    PublicNetConfigOut: PublicNetConfigOut,
+    DeleteNamespaceRequest: DeleteNamespaceRequest,
     UpdateFunctionCodeRequest: UpdateFunctionCodeRequest,
-    UpdateFunctionConfigurationRequest: UpdateFunctionConfigurationRequest,
     DeleteReservedConcurrencyConfigRequest: DeleteReservedConcurrencyConfigRequest,
     GetFunctionEventInvokeConfigResponse: GetFunctionEventInvokeConfigResponse,
     ListTriggersResponse: ListTriggersResponse,
@@ -7702,15 +6184,11 @@ module.exports = {
     ListLayersRequest: ListLayersRequest,
     CopyFunctionRequest: CopyFunctionRequest,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
-    LayerVersionSimple: LayerVersionSimple,
     TriggerCount: TriggerCount,
     NamespaceLimit: NamespaceLimit,
-    CfsConfig: CfsConfig,
-    DeleteNamespaceRequest: DeleteNamespaceRequest,
     ListFunctionsRequest: ListFunctionsRequest,
     CreateTriggerRequest: CreateTriggerRequest,
-    UpdateNamespaceResponse: UpdateNamespaceResponse,
-    GetAccountResponse: GetAccountResponse,
+    GetLayerVersionRequest: GetLayerVersionRequest,
     DeleteFunctionResponse: DeleteFunctionResponse,
     ListAsyncEventsRequest: ListAsyncEventsRequest,
     Result: Result,
@@ -7718,14 +6196,12 @@ module.exports = {
     LogSearchContext: LogSearchContext,
     TriggerInfo: TriggerInfo,
     RequestStatus: RequestStatus,
-    CreateFunctionRequest: CreateFunctionRequest,
     GetAccountRequest: GetAccountRequest,
     PutTotalConcurrencyConfigResponse: PutTotalConcurrencyConfigResponse,
     GetAsyncEventStatusRequest: GetAsyncEventStatusRequest,
     DeleteAliasResponse: DeleteAliasResponse,
     PublishVersionResponse: PublishVersionResponse,
-    AsyncEvent: AsyncEvent,
-    Environment: Environment,
+    DeleteProvisionedConcurrencyConfigRequest: DeleteProvisionedConcurrencyConfigRequest,
     TerminateAsyncEventResponse: TerminateAsyncEventResponse,
     GetFunctionAddressRequest: GetFunctionAddressRequest,
     InvokeResponse: InvokeResponse,
@@ -7741,8 +6217,6 @@ module.exports = {
     UpdateFunctionEventInvokeConfigRequest: UpdateFunctionEventInvokeConfigRequest,
     DeleteLayerVersionRequest: DeleteLayerVersionRequest,
     Filter: Filter,
-    Variable: Variable,
-    GetFunctionResponse: GetFunctionResponse,
     GetFunctionEventInvokeConfigRequest: GetFunctionEventInvokeConfigRequest,
     Code: Code,
     PutTotalConcurrencyConfigRequest: PutTotalConcurrencyConfigRequest,
@@ -7755,36 +6229,31 @@ module.exports = {
     InvokeFunctionRequest: InvokeFunctionRequest,
     RetryConfig: RetryConfig,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
-    CfsInsInfo: CfsInsInfo,
     TriggerAction: TriggerAction,
     LimitsInfo: LimitsInfo,
     ListLayersResponse: ListLayersResponse,
     FunctionVersion: FunctionVersion,
     AsyncTriggerConfig: AsyncTriggerConfig,
-    DeadLetterConfig: DeadLetterConfig,
     ListVersionByFunctionRequest: ListVersionByFunctionRequest,
     ListFunctionsResponse: ListFunctionsResponse,
     GetAsyncEventStatusResponse: GetAsyncEventStatusResponse,
     ListTriggersRequest: ListTriggersRequest,
-    CreateFunctionResponse: CreateFunctionResponse,
+    CreateNamespaceResponse: CreateNamespaceResponse,
     GetReservedConcurrencyConfigRequest: GetReservedConcurrencyConfigRequest,
     PutProvisionedConcurrencyConfigRequest: PutProvisionedConcurrencyConfigRequest,
     Function: Function,
     NamespaceUsage: NamespaceUsage,
     ListAliasesRequest: ListAliasesRequest,
-    EipOutConfig: EipOutConfig,
     Alias: Alias,
-    GetLayerVersionRequest: GetLayerVersionRequest,
+    GetAccountResponse: GetAccountResponse,
     GetFunctionLogsResponse: GetFunctionLogsResponse,
     ImageConfig: ImageConfig,
     DeleteTriggerResponse: DeleteTriggerResponse,
     SearchKey: SearchKey,
     DeleteTriggerRequest: DeleteTriggerRequest,
-    VpcConfig: VpcConfig,
     GetProvisionedConcurrencyConfigResponse: GetProvisionedConcurrencyConfigResponse,
     ListAsyncEventsResponse: ListAsyncEventsResponse,
     ListNamespacesResponse: ListNamespacesResponse,
-    EipConfigOut: EipConfigOut,
     UpdateFunctionCodeResponse: UpdateFunctionCodeResponse,
 
 }

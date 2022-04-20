@@ -21,16 +21,13 @@ const CreateAlarmResponse = models.CreateAlarmResponse;
 const AlarmInfo = models.AlarmInfo;
 const LogInfo = models.LogInfo;
 const DeleteAlarmNoticeResponse = models.DeleteAlarmNoticeResponse;
+const DescribeLogHistogramRequest = models.DescribeLogHistogramRequest;
 const DescribeLogContextRequest = models.DescribeLogContextRequest;
 const DeleteShipperRequest = models.DeleteShipperRequest;
-const ModifyTopicRequest = models.ModifyTopicRequest;
 const DeleteLogsetResponse = models.DeleteLogsetResponse;
 const DescribeShipperTasksResponse = models.DescribeShipperTasksResponse;
 const CreateMachineGroupResponse = models.CreateMachineGroupResponse;
 const DescribeConfigMachineGroupsRequest = models.DescribeConfigMachineGroupsRequest;
-const DescribeAsyncContextResultResponse = models.DescribeAsyncContextResultResponse;
-const UploadLogRequest = models.UploadLogRequest;
-const CreateAsyncContextTaskRequest = models.CreateAsyncContextTaskRequest;
 const CreateLogsetRequest = models.CreateLogsetRequest;
 const LogItem = models.LogItem;
 const SearchLogResponse = models.SearchLogResponse;
@@ -39,7 +36,7 @@ const DescribePartitionsRequest = models.DescribePartitionsRequest;
 const ModifyAlarmResponse = models.ModifyAlarmResponse;
 const DescribeShipperTasksRequest = models.DescribeShipperTasksRequest;
 const DescribeAlarmsRequest = models.DescribeAlarmsRequest;
-const CreateAsyncContextTaskResponse = models.CreateAsyncContextTaskResponse;
+const MergePartitionRequest = models.MergePartitionRequest;
 const DescribeShippersResponse = models.DescribeShippersResponse;
 const ModifyShipperResponse = models.ModifyShipperResponse;
 const RetryShipperTaskRequest = models.RetryShipperTaskRequest;
@@ -48,13 +45,10 @@ const AlarmTargetInfo = models.AlarmTargetInfo;
 const DescribeIndexRequest = models.DescribeIndexRequest;
 const DescribeConfigsResponse = models.DescribeConfigsResponse;
 const CreateLogsetResponse = models.CreateLogsetResponse;
-const DeleteAsyncContextTaskResponse = models.DeleteAsyncContextTaskResponse;
 const DeleteMachineGroupResponse = models.DeleteMachineGroupResponse;
 const Tag = models.Tag;
-const DescribeAsyncContextResultRequest = models.DescribeAsyncContextResultRequest;
-const DeleteAsyncSearchTaskResponse = models.DeleteAsyncSearchTaskResponse;
-const DescribeExportsRequest = models.DescribeExportsRequest;
-const CreateAsyncSearchTaskRequest = models.CreateAsyncSearchTaskRequest;
+const DescribeMachineGroupsRequest = models.DescribeMachineGroupsRequest;
+const ExtractRuleInfo = models.ExtractRuleInfo;
 const TopicInfo = models.TopicInfo;
 const DescribeConsumerRequest = models.DescribeConsumerRequest;
 const ShipperTaskInfo = models.ShipperTaskInfo;
@@ -82,52 +76,43 @@ const FilterRuleInfo = models.FilterRuleInfo;
 const RetryShipperTaskResponse = models.RetryShipperTaskResponse;
 const SplitPartitionRequest = models.SplitPartitionRequest;
 const MachineGroupInfo = models.MachineGroupInfo;
-const DescribeMachineGroupsRequest = models.DescribeMachineGroupsRequest;
-const DescribeAsyncContextTasksResponse = models.DescribeAsyncContextTasksResponse;
+const DescribeLogHistogramResponse = models.DescribeLogHistogramResponse;
+const RuleTagInfo = models.RuleTagInfo;
 const CreateIndexRequest = models.CreateIndexRequest;
 const DeleteConsumerResponse = models.DeleteConsumerResponse;
 const DescribeTopicsRequest = models.DescribeTopicsRequest;
 const GetAlarmLogResponse = models.GetAlarmLogResponse;
-const DescribeAsyncSearchTasksRequest = models.DescribeAsyncSearchTasksRequest;
 const CreateTopicRequest = models.CreateTopicRequest;
-const DescribeAsyncSearchResultResponse = models.DescribeAsyncSearchResultResponse;
-const DescribeAsyncContextTasksRequest = models.DescribeAsyncContextTasksRequest;
+const DescribeExportsRequest = models.DescribeExportsRequest;
 const AlarmTarget = models.AlarmTarget;
 const DeleteConfigResponse = models.DeleteConfigResponse;
 const ModifyIndexResponse = models.ModifyIndexResponse;
 const DeleteConsumerRequest = models.DeleteConsumerRequest;
 const DeleteIndexRequest = models.DeleteIndexRequest;
 const DescribeConsumerResponse = models.DescribeConsumerResponse;
-const ExtractRuleInfo = models.ExtractRuleInfo;
-const AsyncContextTask = models.AsyncContextTask;
+const UploadLogRequest = models.UploadLogRequest;
 const ModifyConsumerResponse = models.ModifyConsumerResponse;
 const DescribeConfigsRequest = models.DescribeConfigsRequest;
 const DeleteConfigRequest = models.DeleteConfigRequest;
 const AnalysisDimensional = models.AnalysisDimensional;
 const LogsetInfo = models.LogsetInfo;
-const RuleTagInfo = models.RuleTagInfo;
 const CreateExportRequest = models.CreateExportRequest;
 const DescribeAlarmNoticesResponse = models.DescribeAlarmNoticesResponse;
 const ModifyConfigRequest = models.ModifyConfigRequest;
 const DescribeLogsetsResponse = models.DescribeLogsetsResponse;
 const JsonInfo = models.JsonInfo;
-const CreateShipperRequest = models.CreateShipperRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
 const DeleteAlarmResponse = models.DeleteAlarmResponse;
-const DescribeMachinesResponse = models.DescribeMachinesResponse;
+const WebCallback = models.WebCallback;
 const DescribeAlarmsResponse = models.DescribeAlarmsResponse;
 const CreateAlarmNoticeResponse = models.CreateAlarmNoticeResponse;
-const ModifyTopicResponse = models.ModifyTopicResponse;
 const CreateConfigRequest = models.CreateConfigRequest;
-const CreateShipperResponse = models.CreateShipperResponse;
 const DeleteIndexResponse = models.DeleteIndexResponse;
-const DeleteAsyncContextTaskRequest = models.DeleteAsyncContextTaskRequest;
 const ModifyIndexRequest = models.ModifyIndexRequest;
 const Column = models.Column;
 const CompressInfo = models.CompressInfo;
 const ValueInfo = models.ValueInfo;
 const GetAlarmLogRequest = models.GetAlarmLogRequest;
-const DescribeMachinesRequest = models.DescribeMachinesRequest;
 const DeleteShipperResponse = models.DeleteShipperResponse;
 const ExportInfo = models.ExportInfo;
 const ConfigInfo = models.ConfigInfo;
@@ -136,12 +121,11 @@ const SplitPartitionResponse = models.SplitPartitionResponse;
 const LogContextInfo = models.LogContextInfo;
 const ModifyShipperRequest = models.ModifyShipperRequest;
 const DescribeLogContextResponse = models.DescribeLogContextResponse;
-const DescribeAsyncSearchResultRequest = models.DescribeAsyncSearchResultRequest;
 const CreateConsumerRequest = models.CreateConsumerRequest;
 const AlarmNotice = models.AlarmNotice;
 const ModifyConfigResponse = models.ModifyConfigResponse;
 const ModifyAlarmNoticeResponse = models.ModifyAlarmNoticeResponse;
-const DescribeAsyncSearchTasksResponse = models.DescribeAsyncSearchTasksResponse;
+const DescribeMachinesResponse = models.DescribeMachinesResponse;
 const ContentInfo = models.ContentInfo;
 const ApplyConfigToMachineGroupResponse = models.ApplyConfigToMachineGroupResponse;
 const DeleteAlarmRequest = models.DeleteAlarmRequest;
@@ -150,15 +134,11 @@ const MachineGroupTypeInfo = models.MachineGroupTypeInfo;
 const DeleteConfigFromMachineGroupRequest = models.DeleteConfigFromMachineGroupRequest;
 const ShipperInfo = models.ShipperInfo;
 const KeyValueInfo = models.KeyValueInfo;
-const DeleteAsyncSearchTaskRequest = models.DeleteAsyncSearchTaskRequest;
 const ModifyMachineGroupRequest = models.ModifyMachineGroupRequest;
-const MergePartitionRequest = models.MergePartitionRequest;
 const DescribeAlarmNoticesRequest = models.DescribeAlarmNoticesRequest;
 const NoticeReceiver = models.NoticeReceiver;
-const AsyncSearchTask = models.AsyncSearchTask;
 const Ckafka = models.Ckafka;
-const WebCallback = models.WebCallback;
-const CreateAsyncSearchTaskResponse = models.CreateAsyncSearchTaskResponse;
+const CreateExportResponse = models.CreateExportResponse;
 const DeleteAlarmNoticeRequest = models.DeleteAlarmNoticeRequest;
 const DeleteLogsetRequest = models.DeleteLogsetRequest;
 const MachineInfo = models.MachineInfo;
@@ -172,6 +152,7 @@ const DescribeMachineGroupConfigsResponse = models.DescribeMachineGroupConfigsRe
 const CsvInfo = models.CsvInfo;
 const CreateAlarmNoticeRequest = models.CreateAlarmNoticeRequest;
 const DescribeIndexResponse = models.DescribeIndexResponse;
+const HistogramInfo = models.HistogramInfo;
 const DescribeMachineGroupConfigsRequest = models.DescribeMachineGroupConfigsRequest;
 const ModifyLogsetRequest = models.ModifyLogsetRequest;
 const DescribeMachineGroupsResponse = models.DescribeMachineGroupsResponse;
@@ -179,7 +160,7 @@ const DescribeLogsetsRequest = models.DescribeLogsetsRequest;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const Filter = models.Filter;
 const ConsumerContent = models.ConsumerContent;
-const CreateExportResponse = models.CreateExportResponse;
+const DescribeMachinesRequest = models.DescribeMachinesRequest;
 const KeyRegexInfo = models.KeyRegexInfo;
 const MergePartitionResponse = models.MergePartitionResponse;
 
@@ -239,36 +220,15 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify a log topic.
-     * @param {ModifyTopicRequest} req
-     * @param {function(string, ModifyTopicResponse):void} cb
-     * @public
-     */
-    ModifyTopic(req, cb) {
-        let resp = new ModifyTopicResponse();
-        this.request("ModifyTopic", req, resp, cb);
-    }
+     * This API is used to modify the index configuration.
 
-    /**
-     * This API is used to get the result of an offline context search task.
-     * @param {DescribeAsyncContextResultRequest} req
-     * @param {function(string, DescribeAsyncContextResultResponse):void} cb
+     * @param {ModifyIndexRequest} req
+     * @param {function(string, ModifyIndexResponse):void} cb
      * @public
      */
-    DescribeAsyncContextResult(req, cb) {
-        let resp = new DescribeAsyncContextResultResponse();
-        this.request("DescribeAsyncContextResult", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of offline context search tasks.
-     * @param {DescribeAsyncContextTasksRequest} req
-     * @param {function(string, DescribeAsyncContextTasksResponse):void} cb
-     * @public
-     */
-    DescribeAsyncContextTasks(req, cb) {
-        let resp = new DescribeAsyncContextTasksResponse();
-        this.request("DescribeAsyncContextTasks", req, resp, cb);
+    ModifyIndex(req, cb) {
+        let resp = new ModifyIndexResponse();
+        this.request("ModifyIndex", req, resp, cb);
     }
 
     /**
@@ -283,14 +243,14 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of shipping tasks.
-     * @param {DescribeShipperTasksRequest} req
-     * @param {function(string, DescribeShipperTasksResponse):void} cb
+     * This API is used to modify a logset.
+     * @param {ModifyLogsetRequest} req
+     * @param {function(string, ModifyLogsetResponse):void} cb
      * @public
      */
-    DescribeShipperTasks(req, cb) {
-        let resp = new DescribeShipperTasksResponse();
-        this.request("DescribeShipperTasks", req, resp, cb);
+    ModifyLogset(req, cb) {
+        let resp = new ModifyLogsetResponse();
+        this.request("ModifyLogset", req, resp, cb);
     }
 
     /**
@@ -338,17 +298,6 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the result of an offline search task.
-     * @param {DescribeAsyncSearchResultRequest} req
-     * @param {function(string, DescribeAsyncSearchResultResponse):void} cb
-     * @public
-     */
-    DescribeAsyncSearchResult(req, cb) {
-        let resp = new DescribeAsyncSearchResultResponse();
-        this.request("DescribeAsyncSearchResult", req, resp, cb);
-    }
-
-    /**
      * This API is used to delete a collection rule configuration.
      * @param {DeleteConfigRequest} req
      * @param {function(string, DeleteConfigResponse):void} cb
@@ -360,17 +309,6 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a shipping rule. To use this API, you need to grant CLS the write permission of the specified bucket.
-     * @param {CreateShipperRequest} req
-     * @param {function(string, CreateShipperResponse):void} cb
-     * @public
-     */
-    CreateShipper(req, cb) {
-        let resp = new CreateShipperResponse();
-        this.request("CreateShipper", req, resp, cb);
-    }
-
-    /**
      * This API is used to modify a shipping task.
      * @param {ModifyConsumerRequest} req
      * @param {function(string, ModifyConsumerResponse):void} cb
@@ -379,17 +317,6 @@ class ClsClient extends AbstractClient {
     ModifyConsumer(req, cb) {
         let resp = new ModifyConsumerResponse();
         this.request("ModifyConsumer", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete an offline search task.
-     * @param {DeleteAsyncSearchTaskRequest} req
-     * @param {function(string, DeleteAsyncSearchTaskResponse):void} cb
-     * @public
-     */
-    DeleteAsyncSearchTask(req, cb) {
-        let resp = new DeleteAsyncSearchTaskResponse();
-        this.request("DeleteAsyncSearchTask", req, resp, cb);
     }
 
     /**
@@ -514,17 +441,6 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete an offline context search task.
-     * @param {DeleteAsyncContextTaskRequest} req
-     * @param {function(string, DeleteAsyncContextTaskResponse):void} cb
-     * @public
-     */
-    DeleteAsyncContextTask(req, cb) {
-        let resp = new DeleteAsyncContextTaskResponse();
-        this.request("DeleteAsyncContextTask", req, resp, cb);
-    }
-
-    /**
      * This API is used to get the notification group list.
      * @param {DescribeAlarmNoticesRequest} req
      * @param {function(string, DescribeAlarmNoticesResponse):void} cb
@@ -569,15 +485,14 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the index configuration.
-
-     * @param {ModifyIndexRequest} req
-     * @param {function(string, ModifyIndexResponse):void} cb
+     * This API is used to build a histogram.
+     * @param {DescribeLogHistogramRequest} req
+     * @param {function(string, DescribeLogHistogramResponse):void} cb
      * @public
      */
-    ModifyIndex(req, cb) {
-        let resp = new ModifyIndexResponse();
-        this.request("ModifyIndex", req, resp, cb);
+    DescribeLogHistogram(req, cb) {
+        let resp = new DescribeLogHistogramResponse();
+        this.request("DescribeLogHistogram", req, resp, cb);
     }
 
     /**
@@ -592,7 +507,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent calls to the same log topic cannot exceed 15.
+     * This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent queries to the same log topic cannot exceed 15.
      * @param {SearchLogRequest} req
      * @param {function(string, SearchLogResponse):void} cb
      * @public
@@ -614,7 +529,14 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * ## Feature Description
+     * ## Note
+To ensure log data reliability and help you use CLS more efficiently, you are advised to use the optimized API [Uploading Structured Logs](https://intl.cloud.tencent.com/document/api/614/16873) to upload logs.
+
+For the optimized API, we have developed an SDK (available in multiple languages) that provides features including async sending, resource control, automatic retry, graceful shutdown, and detection-based reporting. For details, see [Collection via SDK](https://intl.cloud.tencent.com/document/product/614/67157?from_cn_redirect=1).
+
+`UploadLog` allows you to synchronously upload log data. If you still want to continue to use this API instead of the optimized one, read this document.
+
+## Feature Description
 
 This API is used to write logs to a specified log topic.
 
@@ -622,11 +544,11 @@ CLS provides the following two modes:
 
 #### Load balancing mode
 
-In this mode, logs will be automatically written to a target partition among all readable/writable partitions under the current log topic based on the load balancing principle. This mode is suitable for scenarios where the sequential consumption is not needed.
+In this mode, logs will be automatically written to a target partition among all readable/writable partitions under the current log topic based on the load balancing principle. This mode is suitable for scenarios where sequential consumption is not needed.
 
 #### Hash routing mode
 
-In this mode, data will be written to a target partition that meets the range requirements based on the hash value (`X-CLS-HashKey`) carried by data. For example, a log source can be bound to a topic partition through `HashKey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
+In this mode, data will be written to a target partition that meets the range requirements based on the carried hash value (`X-CLS-HashKey`). For example, a log source can be bound to a topic partition through `HashKey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
 
 In addition, CLS allows you to upload logs in the following two modes:
                  
@@ -642,7 +564,7 @@ In addition, CLS allows you to upload logs in the following two modes:
 | Parameter     | Required | Description                                                         |
 | ----------- | -------- | ------------------------------------------------------------ |
 | logs        | Yes       | Log array consisting of multiple `Log` values. The `Log` indicates a log, and a `LogGroup` can contain up to 10,000 `Log` values. |
-| contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: a 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
+| contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: Uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: A 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
 | filename    | No       | Log filename                                                   |
 | source      | No       | Log source, which is generally the machine IP                           |
 | logTags     | No       | Tag list of logs                                               |
@@ -672,11 +594,11 @@ In addition, CLS allows you to upload logs in the following two modes:
 
 This sample describes how to use the protoc compiler to compile the pb description file into a log upload API in C++.
 
-> ?Currently, protoc supports compilation in multiple programming languages such as Java, C++, and Python. For more information, please see [protoc](https://github.com/protocolbuffers/protobuf).
+> ?Currently, protoc supports compilation in multiple programming languages such as Java, C++, and Python. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
 
 #### 1. Install Protocol Buffers
 
-Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and enter the directory:
+Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and go to the directory:
 
 ```
 tar -zxvf protobuf-2.6.1.tar.gz -C /usr/local/ && cd /usr/local/protobuf-2.6.1
@@ -699,7 +621,7 @@ liprotoc 2.6.1
 
 #### 2. Create a pb description file
 
-A pb description file is an agreed-on data interchange format for communication. To upload logs, please compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, please see [protoc](https://github.com/protocolbuffers/protobuf).
+A pb description file is an agreed-on data interchange format for communication. To upload logs, compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
 
 Create a pb message description file `cls.proto` based on the pb data format content specified by CLS.
 
@@ -744,7 +666,7 @@ message LogGroupList
 
 #### 3. Compile and generate the API
 
-This sample uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation commands:
+This sample uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation command:
 
 ```
 protoc --cpp_out=./ ./cls.proto 
@@ -752,7 +674,7 @@ protoc --cpp_out=./ ./cls.proto
 
 > ?`--cpp_out=./ ` indicates that the file will be compiled in cpp format and output to the current directory. `./cls.proto` indicates the `cls.proto` description file in the current directory.
 
-After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and `cls.pb.cc` code implementation file as shown below:
+After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and [cls.pb.cc](http://cls.pb.cc) code implementation file as shown below:
 
 ```
 [root@VM_0_8_centos protobuf-2.6.1]# protoc --cpp_out=./ ./cls.proto
@@ -773,14 +695,14 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to create an offline context search task.
-     * @param {CreateAsyncContextTaskRequest} req
-     * @param {function(string, CreateAsyncContextTaskResponse):void} cb
+     * This API is used to get the list of shipping tasks.
+     * @param {DescribeShipperTasksRequest} req
+     * @param {function(string, DescribeShipperTasksResponse):void} cb
      * @public
      */
-    CreateAsyncContextTask(req, cb) {
-        let resp = new CreateAsyncContextTaskResponse();
-        this.request("CreateAsyncContextTask", req, resp, cb);
+    DescribeShipperTasks(req, cb) {
+        let resp = new DescribeShipperTasksResponse();
+        this.request("DescribeShipperTasks", req, resp, cb);
     }
 
     /**
@@ -828,7 +750,7 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to delete the index configuration of a log topic.
+     * This API is used to delete the index configuration of a log topic. After deleting, you cannot retrieve or query the collected logs.
      * @param {DeleteIndexRequest} req
      * @param {function(string, DeleteIndexResponse):void} cb
      * @public
@@ -836,17 +758,6 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     DeleteIndex(req, cb) {
         let resp = new DeleteIndexResponse();
         this.request("DeleteIndex", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of offline search tasks.
-     * @param {DescribeAsyncSearchTasksRequest} req
-     * @param {function(string, DescribeAsyncSearchTasksResponse):void} cb
-     * @public
-     */
-    DescribeAsyncSearchTasks(req, cb) {
-        let resp = new DescribeAsyncSearchTasksResponse();
-        this.request("DescribeAsyncSearchTasks", req, resp, cb);
     }
 
     /**
@@ -938,17 +849,6 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to modify a logset.
-     * @param {ModifyLogsetRequest} req
-     * @param {function(string, ModifyLogsetResponse):void} cb
-     * @public
-     */
-    ModifyLogset(req, cb) {
-        let resp = new ModifyLogsetResponse();
-        this.request("ModifyLogset", req, resp, cb);
-    }
-
-    /**
      * This API is used to delete a log download task.
      * @param {DeleteExportRequest} req
      * @param {function(string, DeleteExportResponse):void} cb
@@ -982,7 +882,7 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to create a log download task.
+     * This API is used to create a download task to export raw logs.
      * @param {CreateExportRequest} req
      * @param {function(string, CreateExportResponse):void} cb
      * @public
@@ -1001,17 +901,6 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     SplitPartition(req, cb) {
         let resp = new SplitPartitionResponse();
         this.request("SplitPartition", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create an offline search task.
-     * @param {CreateAsyncSearchTaskRequest} req
-     * @param {function(string, CreateAsyncSearchTaskResponse):void} cb
-     * @public
-     */
-    CreateAsyncSearchTask(req, cb) {
-        let resp = new CreateAsyncSearchTaskResponse();
-        this.request("CreateAsyncSearchTask", req, resp, cb);
     }
 
 

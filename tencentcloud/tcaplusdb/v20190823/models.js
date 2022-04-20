@@ -512,36 +512,24 @@ class ApplyStatus extends  AbstractModel {
 }
 
 /**
- * TcaplusDB service region details
+ * `ServerList`, the list of machines at the storage layer (tcapsvr)
  * @class
  */
-class RegionInfo extends  AbstractModel {
+class ServerMachineInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region `Ap-code`
+         * The unique ID of the machine
          * @type {string || null}
          */
-        this.RegionName = null;
+        this.ServerUid = null;
 
         /**
-         * Region abbreviation
+         * Machine type
          * @type {string || null}
          */
-        this.RegionAbbr = null;
-
-        /**
-         * Region ID
-         * @type {number || null}
-         */
-        this.RegionId = null;
-
-        /**
-         * Whether to support IPv6 address access. Valid values: 0 (support), 1 (not support)
-         * @type {number || null}
-         */
-        this.Ipv6Enable = null;
+        this.MachineType = null;
 
     }
 
@@ -552,10 +540,8 @@ class RegionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.RegionAbbr = 'RegionAbbr' in params ? params.RegionAbbr : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
+        this.ServerUid = 'ServerUid' in params ? params.ServerUid : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
 
     }
 }
@@ -1515,56 +1501,6 @@ class TagsInfoOfTableGroup extends  AbstractModel {
 }
 
 /**
- * DescribeApplications response structure.
- * @class
- */
-class DescribeApplicationsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Application list
-         * @type {Array.<Application> || null}
-         */
-        this.Applications = null;
-
-        /**
-         * Total number of applications
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Applications) {
-            this.Applications = new Array();
-            for (let z in params.Applications) {
-                let obj = new Application();
-                obj.deserialize(params.Applications[z]);
-                this.Applications.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateTableGroup request structure.
  * @class
  */
@@ -2137,121 +2073,30 @@ class SnapshotInfoNew extends  AbstractModel {
 }
 
 /**
- * Cluster operation application
+ * RecoverRecycleTables response structure.
  * @class
  */
-class Application extends  AbstractModel {
+class RecoverRecycleTablesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
-
-        /**
-         * Application type
+         * Number of recovered tables
          * @type {number || null}
          */
-        this.ApplicationType = null;
+        this.TotalCount = null;
 
         /**
-         * Cluster ID
+         * List of information of recovered tables
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ClusterId = null;
-
-        /**
-         * Cluster name
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * Table group name
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TableGroupName = null;
-
-        /**
-         * Table name
-         * @type {string || null}
-         */
-        this.TableName = null;
-
-        /**
-         * Applicant
-         * @type {string || null}
-         */
-        this.Applicant = null;
-
-        /**
-         * The creation time of the application
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * Status. Valid values: `-1` (canceled), `0` (pending approval), `1` (application approved and task submitted), `2` (rejected)
-         * @type {number || null}
-         */
-        this.ApplicationStatus = null;
-
-        /**
-         * Table group ID
-         * @type {string || null}
-         */
-        this.TableGroupId = null;
-
-        /**
-         * ID of the submitted task (if the application is not approved, this parameter is `0`)
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * Globally unique table ID
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TableInstanceId = null;
-
-        /**
-         * Update time
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Approver
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ExecuteUser = null;
-
-        /**
-         * Execution status
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ExecuteStatus = null;
-
-        /**
-         * Whether the application can be approved by the API caller
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.CanCensor = null;
-
-        /**
-         * Whether the application can be canceled by the API caller
-Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.CanWithdrawal = null;
+        this.RequestId = null;
 
     }
 
@@ -2262,23 +2107,17 @@ Note: `null` may be returned for this field, indicating that no valid values can
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.TableGroupName = 'TableGroupName' in params ? params.TableGroupName : null;
-        this.TableName = 'TableName' in params ? params.TableName : null;
-        this.Applicant = 'Applicant' in params ? params.Applicant : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.ApplicationStatus = 'ApplicationStatus' in params ? params.ApplicationStatus : null;
-        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.TableInstanceId = 'TableInstanceId' in params ? params.TableInstanceId : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.ExecuteUser = 'ExecuteUser' in params ? params.ExecuteUser : null;
-        this.ExecuteStatus = 'ExecuteStatus' in params ? params.ExecuteStatus : null;
-        this.CanCensor = 'CanCensor' in params ? params.CanCensor : null;
-        this.CanWithdrawal = 'CanWithdrawal' in params ? params.CanWithdrawal : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2763,6 +2602,27 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.KafkaInfo = null;
 
+        /**
+         * The number of days after which the cluster Txh backup file will expire and be deleted.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TxhBackupExpireDay = null;
+
+        /**
+         * The number of days after which the cluster Ulog backup file will expire and be deleted.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UlogBackupExpireDay = null;
+
+        /**
+         * Whether the expiration policy of cluster Ulog backup file is read-only. `0`: Yes; `1`: No.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsReadOnlyUlogBackupExpireDay = null;
+
     }
 
     /**
@@ -2819,6 +2679,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             obj.deserialize(params.KafkaInfo)
             this.KafkaInfo = obj;
         }
+        this.TxhBackupExpireDay = 'TxhBackupExpireDay' in params ? params.TxhBackupExpireDay : null;
+        this.UlogBackupExpireDay = 'UlogBackupExpireDay' in params ? params.UlogBackupExpireDay : null;
+        this.IsReadOnlyUlogBackupExpireDay = 'IsReadOnlyUlogBackupExpireDay' in params ? params.IsReadOnlyUlogBackupExpireDay : null;
 
     }
 }
@@ -4354,41 +4217,6 @@ class DescribeIdlFileInfosResponse extends  AbstractModel {
 }
 
 /**
- * `ServerList`, the list of machines at the storage layer (tcapsvr)
- * @class
- */
-class ServerMachineInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique ID of the machine
-         * @type {string || null}
-         */
-        this.ServerUid = null;
-
-        /**
-         * Machine type
-         * @type {string || null}
-         */
-        this.MachineType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ServerUid = 'ServerUid' in params ? params.ServerUid : null;
-        this.MachineType = 'MachineType' in params ? params.MachineType : null;
-
-    }
-}
-
-/**
  * CreateSnapshots response structure.
  * @class
  */
@@ -4939,6 +4767,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.DbClusterInfoStruct = null;
 
+        /**
+         * The number of days after which the table Txh backup files will be expire and deleted.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TxhBackupExpireDay = null;
+
     }
 
     /**
@@ -4988,6 +4823,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.SortFieldNum = 'SortFieldNum' in params ? params.SortFieldNum : null;
         this.SortRule = 'SortRule' in params ? params.SortRule : null;
         this.DbClusterInfoStruct = 'DbClusterInfoStruct' in params ? params.DbClusterInfoStruct : null;
+        this.TxhBackupExpireDay = 'TxhBackupExpireDay' in params ? params.TxhBackupExpireDay : null;
 
     }
 }
@@ -6621,56 +6457,6 @@ class DescribeClusterTagsRequest extends  AbstractModel {
 }
 
 /**
- * RecoverRecycleTables response structure.
- * @class
- */
-class RecoverRecycleTablesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of recovered tables
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of information of recovered tables
-         * @type {Array.<TableResultNew> || null}
-         */
-        this.TableResults = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.TableResults) {
-            this.TableResults = new Array();
-            for (let z in params.TableResults) {
-                let obj = new TableResultNew();
-                obj.deserialize(params.TableResults[z]);
-                this.TableResults.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * MergeTablesData response structure.
  * @class
  */
@@ -6714,60 +6500,36 @@ class MergeTablesDataResponse extends  AbstractModel {
 }
 
 /**
- * DescribeApplications request structure.
+ * TcaplusDB service region details
  * @class
  */
-class DescribeApplicationsRequest extends  AbstractModel {
+class RegionInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the cluster whose applications will be queried
+         * Region `Ap-code`
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.RegionName = null;
 
         /**
-         * The maximum number of results returned per page
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Pagination offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Application status used as a filter condition
-         * @type {number || null}
-         */
-        this.CensorStatus = null;
-
-        /**
-         * Table group ID used as a filter condition
+         * Region abbreviation
          * @type {string || null}
          */
-        this.TableGroupId = null;
+        this.RegionAbbr = null;
 
         /**
-         * Table name used as a filter condition
-         * @type {string || null}
-         */
-        this.TableName = null;
-
-        /**
-         * Applicant UIN used as a filter condition
-         * @type {string || null}
-         */
-        this.Applicant = null;
-
-        /**
-         * Application type used as a filter condition
+         * Region ID
          * @type {number || null}
          */
-        this.ApplyType = null;
+        this.RegionId = null;
+
+        /**
+         * Whether to support IPv6 address access. Valid values: 0 (support), 1 (not support)
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
 
     }
 
@@ -6778,14 +6540,10 @@ class DescribeApplicationsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.CensorStatus = 'CensorStatus' in params ? params.CensorStatus : null;
-        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
-        this.TableName = 'TableName' in params ? params.TableName : null;
-        this.Applicant = 'Applicant' in params ? params.Applicant : null;
-        this.ApplyType = 'ApplyType' in params ? params.ApplyType : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionAbbr = 'RegionAbbr' in params ? params.RegionAbbr : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
 
     }
 }
@@ -7667,7 +7425,7 @@ module.exports = {
     DeleteTableIndexResponse: DeleteTableIndexResponse,
     TableRollbackResultNew: TableRollbackResultNew,
     ApplyStatus: ApplyStatus,
-    RegionInfo: RegionInfo,
+    ServerMachineInfo: ServerMachineInfo,
     DescribeTablesResponse: DescribeTablesResponse,
     ModifySnapshotsResponse: ModifySnapshotsResponse,
     UpdateApplyResponse: UpdateApplyResponse,
@@ -7686,7 +7444,6 @@ module.exports = {
     DeleteTableGroupRequest: DeleteTableGroupRequest,
     DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     TagsInfoOfTableGroup: TagsInfoOfTableGroup,
-    DescribeApplicationsResponse: DescribeApplicationsResponse,
     CreateTableGroupRequest: CreateTableGroupRequest,
     ModifyClusterMachineResponse: ModifyClusterMachineResponse,
     TagsInfoOfTable: TagsInfoOfTable,
@@ -7697,7 +7454,7 @@ module.exports = {
     ApplyResult: ApplyResult,
     DescribeTasksRequest: DescribeTasksRequest,
     SnapshotInfoNew: SnapshotInfoNew,
-    Application: Application,
+    RecoverRecycleTablesResponse: RecoverRecycleTablesResponse,
     ClearTablesResponse: ClearTablesResponse,
     DescribeIdlFileInfosRequest: DescribeIdlFileInfosRequest,
     ModifyTableTagsResponse: ModifyTableTagsResponse,
@@ -7736,7 +7493,6 @@ module.exports = {
     SetTableIndexResponse: SetTableIndexResponse,
     ClearTablesRequest: ClearTablesRequest,
     DescribeIdlFileInfosResponse: DescribeIdlFileInfosResponse,
-    ServerMachineInfo: ServerMachineInfo,
     CreateSnapshotsResponse: CreateSnapshotsResponse,
     IdlFileInfo: IdlFileInfo,
     DisableRestProxyResponse: DisableRestProxyResponse,
@@ -7774,9 +7530,8 @@ module.exports = {
     TableResultNew: TableResultNew,
     CreateTablesRequest: CreateTablesRequest,
     DescribeClusterTagsRequest: DescribeClusterTagsRequest,
-    RecoverRecycleTablesResponse: RecoverRecycleTablesResponse,
     MergeTablesDataResponse: MergeTablesDataResponse,
-    DescribeApplicationsRequest: DescribeApplicationsRequest,
+    RegionInfo: RegionInfo,
     DescribeTableGroupsResponse: DescribeTableGroupsResponse,
     DeleteTableGroupResponse: DeleteTableGroupResponse,
     PoolInfo: PoolInfo,

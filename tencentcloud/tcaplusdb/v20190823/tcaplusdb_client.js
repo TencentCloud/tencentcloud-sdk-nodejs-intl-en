@@ -26,7 +26,7 @@ const DeleteClusterResponse = models.DeleteClusterResponse;
 const DeleteTableIndexResponse = models.DeleteTableIndexResponse;
 const TableRollbackResultNew = models.TableRollbackResultNew;
 const ApplyStatus = models.ApplyStatus;
-const RegionInfo = models.RegionInfo;
+const ServerMachineInfo = models.ServerMachineInfo;
 const DescribeTablesResponse = models.DescribeTablesResponse;
 const ModifySnapshotsResponse = models.ModifySnapshotsResponse;
 const UpdateApplyResponse = models.UpdateApplyResponse;
@@ -45,7 +45,6 @@ const DeleteTableDataFlowRequest = models.DeleteTableDataFlowRequest;
 const DeleteTableGroupRequest = models.DeleteTableGroupRequest;
 const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const TagsInfoOfTableGroup = models.TagsInfoOfTableGroup;
-const DescribeApplicationsResponse = models.DescribeApplicationsResponse;
 const CreateTableGroupRequest = models.CreateTableGroupRequest;
 const ModifyClusterMachineResponse = models.ModifyClusterMachineResponse;
 const TagsInfoOfTable = models.TagsInfoOfTable;
@@ -56,7 +55,7 @@ const MergeTableResult = models.MergeTableResult;
 const ApplyResult = models.ApplyResult;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const SnapshotInfoNew = models.SnapshotInfoNew;
-const Application = models.Application;
+const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
 const ClearTablesResponse = models.ClearTablesResponse;
 const DescribeIdlFileInfosRequest = models.DescribeIdlFileInfosRequest;
 const ModifyTableTagsResponse = models.ModifyTableTagsResponse;
@@ -95,7 +94,6 @@ const TagsInfoOfCluster = models.TagsInfoOfCluster;
 const SetTableIndexResponse = models.SetTableIndexResponse;
 const ClearTablesRequest = models.ClearTablesRequest;
 const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
-const ServerMachineInfo = models.ServerMachineInfo;
 const CreateSnapshotsResponse = models.CreateSnapshotsResponse;
 const IdlFileInfo = models.IdlFileInfo;
 const DisableRestProxyResponse = models.DisableRestProxyResponse;
@@ -133,9 +131,8 @@ const CreateBackupRequest = models.CreateBackupRequest;
 const TableResultNew = models.TableResultNew;
 const CreateTablesRequest = models.CreateTablesRequest;
 const DescribeClusterTagsRequest = models.DescribeClusterTagsRequest;
-const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
 const MergeTablesDataResponse = models.MergeTablesDataResponse;
-const DescribeApplicationsRequest = models.DescribeApplicationsRequest;
+const RegionInfo = models.RegionInfo;
 const DescribeTableGroupsResponse = models.DescribeTableGroupsResponse;
 const DeleteTableGroupResponse = models.DeleteTableGroupResponse;
 const PoolInfo = models.PoolInfo;
@@ -327,17 +324,6 @@ class TcaplusdbClient extends AbstractClient {
     ModifyClusterPassword(req, cb) {
         let resp = new ModifyClusterPasswordResponse();
         this.request("ModifyClusterPassword", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a global index for a table.
-     * @param {SetTableIndexRequest} req
-     * @param {function(string, SetTableIndexResponse):void} cb
-     * @public
-     */
-    SetTableIndex(req, cb) {
-        let resp = new SetTableIndexResponse();
-        this.request("SetTableIndex", req, resp, cb);
     }
 
     /**
@@ -550,14 +536,14 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of cluster operation applications.
-     * @param {DescribeApplicationsRequest} req
-     * @param {function(string, DescribeApplicationsResponse):void} cb
+     * This API is used to create a global index for a table.
+     * @param {SetTableIndexRequest} req
+     * @param {function(string, SetTableIndexResponse):void} cb
      * @public
      */
-    DescribeApplications(req, cb) {
-        let resp = new DescribeApplicationsResponse();
-        this.request("DescribeApplications", req, resp, cb);
+    SetTableIndex(req, cb) {
+        let resp = new SetTableIndexResponse();
+        this.request("SetTableIndex", req, resp, cb);
     }
 
     /**

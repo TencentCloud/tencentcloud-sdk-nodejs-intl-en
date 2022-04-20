@@ -206,6 +206,41 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * CreateStorageRegion request structure.
+ * @class
+ */
+class CreateStorageRegionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The region to enable storage in, which must be a storage region supported by VOD.
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Full speech recognition segment.
  * @class
  */
@@ -1270,6 +1305,41 @@ class ManageTaskResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDefaultStorageRegion request structure.
+ * @class
+ */
+class ModifyDefaultStorageRegionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The default storage region, which must be a region you have storage access to. You can use the `DescribeStorageRegions` API to query such regions.
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -4364,6 +4434,57 @@ Note: the image must be a relatively clear full-face photo of a person and has a
 }
 
 /**
+ * The information of a storage region.
+ * @class
+ */
+class StorageRegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage region.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Description of the storage region.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Whether storage is enabled in the region. Valid values:
+<li>opened: Enabled</li>
+<li>unopened: Not enabled</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Whether the region is the default storage region. Valid values: true, false.
+         * @type {boolean || null}
+         */
+        this.IsDefault = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+
+    }
+}
+
+/**
  * Transition information
  * @class
  */
@@ -6827,61 +6948,19 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
 }
 
 /**
- * Video processing task type
+ * Image sprite information of VOD file
  * @class
  */
-class MediaProcessTaskInput extends  AbstractModel {
+class MediaImageSpriteInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of transcoding tasks.
+         * Information set of image sprites with specified specifications. Each element represents a set of image sprites with the same specification.
 Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TranscodeTaskInput> || null}
+         * @type {Array.<MediaImageSpriteItem> || null}
          */
-        this.TranscodeTaskSet = null;
-
-        /**
-         * List of animated image generating tasks.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<AnimatedGraphicTaskInput> || null}
-         */
-        this.AnimatedGraphicTaskSet = null;
-
-        /**
-         * List of time point screencapturing tasks.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
-         */
-        this.SnapshotByTimeOffsetTaskSet = null;
-
-        /**
-         * List of sampled screencapturing tasks.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<SampleSnapshotTaskInput> || null}
-         */
-        this.SampleSnapshotTaskSet = null;
-
-        /**
-         * List of image sprite generating tasks.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ImageSpriteTaskInput> || null}
-         */
-        this.ImageSpriteTaskSet = null;
-
-        /**
-         * List of cover generating tasks.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<CoverBySnapshotTaskInput> || null}
-         */
-        this.CoverBySnapshotTaskSet = null;
-
-        /**
-         * List of adaptive bitrate streaming tasks.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<AdaptiveDynamicStreamingTaskInput> || null}
-         */
-        this.AdaptiveDynamicStreamingTaskSet = null;
+        this.ImageSpriteSet = null;
 
     }
 
@@ -6893,66 +6972,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             return;
         }
 
-        if (params.TranscodeTaskSet) {
-            this.TranscodeTaskSet = new Array();
-            for (let z in params.TranscodeTaskSet) {
-                let obj = new TranscodeTaskInput();
-                obj.deserialize(params.TranscodeTaskSet[z]);
-                this.TranscodeTaskSet.push(obj);
-            }
-        }
-
-        if (params.AnimatedGraphicTaskSet) {
-            this.AnimatedGraphicTaskSet = new Array();
-            for (let z in params.AnimatedGraphicTaskSet) {
-                let obj = new AnimatedGraphicTaskInput();
-                obj.deserialize(params.AnimatedGraphicTaskSet[z]);
-                this.AnimatedGraphicTaskSet.push(obj);
-            }
-        }
-
-        if (params.SnapshotByTimeOffsetTaskSet) {
-            this.SnapshotByTimeOffsetTaskSet = new Array();
-            for (let z in params.SnapshotByTimeOffsetTaskSet) {
-                let obj = new SnapshotByTimeOffsetTaskInput();
-                obj.deserialize(params.SnapshotByTimeOffsetTaskSet[z]);
-                this.SnapshotByTimeOffsetTaskSet.push(obj);
-            }
-        }
-
-        if (params.SampleSnapshotTaskSet) {
-            this.SampleSnapshotTaskSet = new Array();
-            for (let z in params.SampleSnapshotTaskSet) {
-                let obj = new SampleSnapshotTaskInput();
-                obj.deserialize(params.SampleSnapshotTaskSet[z]);
-                this.SampleSnapshotTaskSet.push(obj);
-            }
-        }
-
-        if (params.ImageSpriteTaskSet) {
-            this.ImageSpriteTaskSet = new Array();
-            for (let z in params.ImageSpriteTaskSet) {
-                let obj = new ImageSpriteTaskInput();
-                obj.deserialize(params.ImageSpriteTaskSet[z]);
-                this.ImageSpriteTaskSet.push(obj);
-            }
-        }
-
-        if (params.CoverBySnapshotTaskSet) {
-            this.CoverBySnapshotTaskSet = new Array();
-            for (let z in params.CoverBySnapshotTaskSet) {
-                let obj = new CoverBySnapshotTaskInput();
-                obj.deserialize(params.CoverBySnapshotTaskSet[z]);
-                this.CoverBySnapshotTaskSet.push(obj);
-            }
-        }
-
-        if (params.AdaptiveDynamicStreamingTaskSet) {
-            this.AdaptiveDynamicStreamingTaskSet = new Array();
-            for (let z in params.AdaptiveDynamicStreamingTaskSet) {
-                let obj = new AdaptiveDynamicStreamingTaskInput();
-                obj.deserialize(params.AdaptiveDynamicStreamingTaskSet[z]);
-                this.AdaptiveDynamicStreamingTaskSet.push(obj);
+        if (params.ImageSpriteSet) {
+            this.ImageSpriteSet = new Array();
+            for (let z in params.ImageSpriteSet) {
+                let obj = new MediaImageSpriteItem();
+                obj.deserialize(params.ImageSpriteSet[z]);
+                this.ImageSpriteSet.push(obj);
             }
         }
 
@@ -13731,6 +13756,34 @@ FINISH: completed.
 }
 
 /**
+ * ModifyDefaultStorageRegion response structure.
+ * @class
+ */
+class ModifyDefaultStorageRegionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Media file composing task information
  * @class
  */
@@ -15893,6 +15946,139 @@ class DescribeCdnLogsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * Video processing task type
+ * @class
+ */
+class MediaProcessTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of transcoding tasks.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TranscodeTaskInput> || null}
+         */
+        this.TranscodeTaskSet = null;
+
+        /**
+         * List of animated image generating tasks.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AnimatedGraphicTaskInput> || null}
+         */
+        this.AnimatedGraphicTaskSet = null;
+
+        /**
+         * List of time point screencapturing tasks.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SnapshotByTimeOffsetTaskInput> || null}
+         */
+        this.SnapshotByTimeOffsetTaskSet = null;
+
+        /**
+         * List of sampled screencapturing tasks.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SampleSnapshotTaskInput> || null}
+         */
+        this.SampleSnapshotTaskSet = null;
+
+        /**
+         * List of image sprite generating tasks.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ImageSpriteTaskInput> || null}
+         */
+        this.ImageSpriteTaskSet = null;
+
+        /**
+         * List of cover generating tasks.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<CoverBySnapshotTaskInput> || null}
+         */
+        this.CoverBySnapshotTaskSet = null;
+
+        /**
+         * List of adaptive bitrate streaming tasks.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AdaptiveDynamicStreamingTaskInput> || null}
+         */
+        this.AdaptiveDynamicStreamingTaskSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TranscodeTaskSet) {
+            this.TranscodeTaskSet = new Array();
+            for (let z in params.TranscodeTaskSet) {
+                let obj = new TranscodeTaskInput();
+                obj.deserialize(params.TranscodeTaskSet[z]);
+                this.TranscodeTaskSet.push(obj);
+            }
+        }
+
+        if (params.AnimatedGraphicTaskSet) {
+            this.AnimatedGraphicTaskSet = new Array();
+            for (let z in params.AnimatedGraphicTaskSet) {
+                let obj = new AnimatedGraphicTaskInput();
+                obj.deserialize(params.AnimatedGraphicTaskSet[z]);
+                this.AnimatedGraphicTaskSet.push(obj);
+            }
+        }
+
+        if (params.SnapshotByTimeOffsetTaskSet) {
+            this.SnapshotByTimeOffsetTaskSet = new Array();
+            for (let z in params.SnapshotByTimeOffsetTaskSet) {
+                let obj = new SnapshotByTimeOffsetTaskInput();
+                obj.deserialize(params.SnapshotByTimeOffsetTaskSet[z]);
+                this.SnapshotByTimeOffsetTaskSet.push(obj);
+            }
+        }
+
+        if (params.SampleSnapshotTaskSet) {
+            this.SampleSnapshotTaskSet = new Array();
+            for (let z in params.SampleSnapshotTaskSet) {
+                let obj = new SampleSnapshotTaskInput();
+                obj.deserialize(params.SampleSnapshotTaskSet[z]);
+                this.SampleSnapshotTaskSet.push(obj);
+            }
+        }
+
+        if (params.ImageSpriteTaskSet) {
+            this.ImageSpriteTaskSet = new Array();
+            for (let z in params.ImageSpriteTaskSet) {
+                let obj = new ImageSpriteTaskInput();
+                obj.deserialize(params.ImageSpriteTaskSet[z]);
+                this.ImageSpriteTaskSet.push(obj);
+            }
+        }
+
+        if (params.CoverBySnapshotTaskSet) {
+            this.CoverBySnapshotTaskSet = new Array();
+            for (let z in params.CoverBySnapshotTaskSet) {
+                let obj = new CoverBySnapshotTaskInput();
+                obj.deserialize(params.CoverBySnapshotTaskSet[z]);
+                this.CoverBySnapshotTaskSet.push(obj);
+            }
+        }
+
+        if (params.AdaptiveDynamicStreamingTaskSet) {
+            this.AdaptiveDynamicStreamingTaskSet = new Array();
+            for (let z in params.AdaptiveDynamicStreamingTaskSet) {
+                let obj = new AdaptiveDynamicStreamingTaskInput();
+                obj.deserialize(params.AdaptiveDynamicStreamingTaskSet[z]);
+                this.AdaptiveDynamicStreamingTaskSet.push(obj);
+            }
+        }
 
     }
 }
@@ -19352,6 +19538,34 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeStorageRegions request structure.
+ * @class
+ */
+class DescribeStorageRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Release on WeChat task information
  * @class
  */
@@ -19729,6 +19943,34 @@ class StatDataItem extends  AbstractModel {
         }
         this.Time = 'Time' in params ? params.Time : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * CreateStorageRegion response structure.
+ * @class
+ */
+class CreateStorageRegionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -23872,6 +24114,49 @@ Note: This field may return `null`, indicating that no valid value can be found.
 }
 
 /**
+ * DescribeStorageRegions response structure.
+ * @class
+ */
+class DescribeStorageRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The information of the storage regions.
+         * @type {Array.<StorageRegionInfo> || null}
+         */
+        this.StorageRegionInfos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.StorageRegionInfos) {
+            this.StorageRegionInfos = new Array();
+            for (let z in params.StorageRegionInfos) {
+                let obj = new StorageRegionInfo();
+                obj.deserialize(params.StorageRegionInfos[z]);
+                this.StorageRegionInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifySnapshotByTimeOffsetTemplate request structure.
  * @class
  */
@@ -25167,43 +25452,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
         this.SamplingRate = 'SamplingRate' in params ? params.SamplingRate : null;
         this.Codec = 'Codec' in params ? params.Codec : null;
-
-    }
-}
-
-/**
- * Image sprite information of VOD file
- * @class
- */
-class MediaImageSpriteInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Information set of image sprites with specified specifications. Each element represents a set of image sprites with the same specification.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MediaImageSpriteItem> || null}
-         */
-        this.ImageSpriteSet = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ImageSpriteSet) {
-            this.ImageSpriteSet = new Array();
-            for (let z in params.ImageSpriteSet) {
-                let obj = new MediaImageSpriteItem();
-                obj.deserialize(params.ImageSpriteSet[z]);
-                this.ImageSpriteSet.push(obj);
-            }
-        }
 
     }
 }
@@ -30717,6 +30965,7 @@ module.exports = {
     Canvas: Canvas,
     ModifySampleSnapshotTemplateResponse: ModifySampleSnapshotTemplateResponse,
     ModifyWatermarkTemplateRequest: ModifyWatermarkTemplateRequest,
+    CreateStorageRegionRequest: CreateStorageRegionRequest,
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
     UserDefineOcrTextReviewTemplateInfoForUpdate: UserDefineOcrTextReviewTemplateInfoForUpdate,
     DescribeAllClassRequest: DescribeAllClassRequest,
@@ -30735,6 +30984,7 @@ module.exports = {
     AiReviewProhibitedOcrTaskOutput: AiReviewProhibitedOcrTaskOutput,
     MediaMiniProgramReviewElem: MediaMiniProgramReviewElem,
     ManageTaskResponse: ManageTaskResponse,
+    ModifyDefaultStorageRegionRequest: ModifyDefaultStorageRegionRequest,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
@@ -30789,6 +31039,7 @@ module.exports = {
     CreateProcedureTemplateRequest: CreateProcedureTemplateRequest,
     DescribeMediaProcessUsageDataRequest: DescribeMediaProcessUsageDataRequest,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
+    StorageRegionInfo: StorageRegionInfo,
     MediaTransitionItem: MediaTransitionItem,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
     TagConfigureInfo: TagConfigureInfo,
@@ -30834,7 +31085,7 @@ module.exports = {
     CreateVodDomainRequest: CreateVodDomainRequest,
     OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
     ProcessMediaByProcedureRequest: ProcessMediaByProcedureRequest,
-    MediaProcessTaskInput: MediaProcessTaskInput,
+    MediaImageSpriteInfo: MediaImageSpriteInfo,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
     ProcessMediaResponse: ProcessMediaResponse,
     CreateWordSamplesResponse: CreateWordSamplesResponse,
@@ -30957,6 +31208,7 @@ module.exports = {
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
     WechatMiniProgramPublishTask: WechatMiniProgramPublishTask,
+    ModifyDefaultStorageRegionResponse: ModifyDefaultStorageRegionResponse,
     ComposeMediaTask: ComposeMediaTask,
     HeadTailConfigureInfoForUpdate: HeadTailConfigureInfoForUpdate,
     TranscodePlayInfo2017: TranscodePlayInfo2017,
@@ -30997,6 +31249,7 @@ module.exports = {
     PullEventsResponse: PullEventsResponse,
     AiRecognitionTaskObjectResultInput: AiRecognitionTaskObjectResultInput,
     DescribeCdnLogsRequest: DescribeCdnLogsRequest,
+    MediaProcessTaskInput: MediaProcessTaskInput,
     OutputVideoStream: OutputVideoStream,
     ProcedureTemplate: ProcedureTemplate,
     AiReviewTaskTerrorismResult: AiReviewTaskTerrorismResult,
@@ -31053,11 +31306,13 @@ module.exports = {
     AdaptiveStreamTemplate: AdaptiveStreamTemplate,
     TranscodeTaskInput: TranscodeTaskInput,
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
+    DescribeStorageRegionsRequest: DescribeStorageRegionsRequest,
     WechatPublishTask: WechatPublishTask,
     DescribeCDNStatDetailsRequest: DescribeCDNStatDetailsRequest,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
     ClipFileInfo2017: ClipFileInfo2017,
     StatDataItem: StatDataItem,
+    CreateStorageRegionResponse: CreateStorageRegionResponse,
     AccelerateAreaInfo: AccelerateAreaInfo,
     MediaSourceData: MediaSourceData,
     ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
@@ -31131,6 +31386,7 @@ module.exports = {
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
+    DescribeStorageRegionsResponse: DescribeStorageRegionsResponse,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     ProcedureTask: ProcedureTask,
     ModifySuperPlayerConfigRequest: ModifySuperPlayerConfigRequest,
@@ -31149,7 +31405,6 @@ module.exports = {
     CreateAIAnalysisTemplateRequest: CreateAIAnalysisTemplateRequest,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
     MediaAudioStreamItem: MediaAudioStreamItem,
-    MediaImageSpriteInfo: MediaImageSpriteInfo,
     SubAppIdInfo: SubAppIdInfo,
     DescribeAllClassResponse: DescribeAllClassResponse,
     ModifyImageSpriteTemplateRequest: ModifyImageSpriteTemplateRequest,

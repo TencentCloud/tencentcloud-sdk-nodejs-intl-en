@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const Canvas = models.Canvas;
 const ModifySampleSnapshotTemplateResponse = models.ModifySampleSnapshotTemplateResponse;
 const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
+const CreateStorageRegionRequest = models.CreateStorageRegionRequest;
 const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullTextSegmentItem;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
 const DescribeAllClassRequest = models.DescribeAllClassRequest;
@@ -37,6 +38,7 @@ const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFull
 const AiReviewProhibitedOcrTaskOutput = models.AiReviewProhibitedOcrTaskOutput;
 const MediaMiniProgramReviewElem = models.MediaMiniProgramReviewElem;
 const ManageTaskResponse = models.ManageTaskResponse;
+const ModifyDefaultStorageRegionRequest = models.ModifyDefaultStorageRegionRequest;
 const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
@@ -91,6 +93,7 @@ const AiReviewPornTaskInput = models.AiReviewPornTaskInput;
 const CreateProcedureTemplateRequest = models.CreateProcedureTemplateRequest;
 const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
+const StorageRegionInfo = models.StorageRegionInfo;
 const MediaTransitionItem = models.MediaTransitionItem;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const TagConfigureInfo = models.TagConfigureInfo;
@@ -136,7 +139,7 @@ const TaskStatData = models.TaskStatData;
 const CreateVodDomainRequest = models.CreateVodDomainRequest;
 const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpdate;
 const ProcessMediaByProcedureRequest = models.ProcessMediaByProcedureRequest;
-const MediaProcessTaskInput = models.MediaProcessTaskInput;
+const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
 const ProcessMediaResponse = models.ProcessMediaResponse;
 const CreateWordSamplesResponse = models.CreateWordSamplesResponse;
@@ -259,6 +262,7 @@ const MediaProcessTaskCoverBySnapshotResult = models.MediaProcessTaskCoverBySnap
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
 const WechatMiniProgramPublishTask = models.WechatMiniProgramPublishTask;
+const ModifyDefaultStorageRegionResponse = models.ModifyDefaultStorageRegionResponse;
 const ComposeMediaTask = models.ComposeMediaTask;
 const HeadTailConfigureInfoForUpdate = models.HeadTailConfigureInfoForUpdate;
 const TranscodePlayInfo2017 = models.TranscodePlayInfo2017;
@@ -299,6 +303,7 @@ const DescribeStorageDetailsResponse = models.DescribeStorageDetailsResponse;
 const PullEventsResponse = models.PullEventsResponse;
 const AiRecognitionTaskObjectResultInput = models.AiRecognitionTaskObjectResultInput;
 const DescribeCdnLogsRequest = models.DescribeCdnLogsRequest;
+const MediaProcessTaskInput = models.MediaProcessTaskInput;
 const OutputVideoStream = models.OutputVideoStream;
 const ProcedureTemplate = models.ProcedureTemplate;
 const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
@@ -355,11 +360,13 @@ const DescribeVodDomainsResponse = models.DescribeVodDomainsResponse;
 const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
+const DescribeStorageRegionsRequest = models.DescribeStorageRegionsRequest;
 const WechatPublishTask = models.WechatPublishTask;
 const DescribeCDNStatDetailsRequest = models.DescribeCDNStatDetailsRequest;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
 const ClipFileInfo2017 = models.ClipFileInfo2017;
 const StatDataItem = models.StatDataItem;
+const CreateStorageRegionResponse = models.CreateStorageRegionResponse;
 const AccelerateAreaInfo = models.AccelerateAreaInfo;
 const MediaSourceData = models.MediaSourceData;
 const ProhibitedAsrReviewTemplateInfo = models.ProhibitedAsrReviewTemplateInfo;
@@ -433,6 +440,7 @@ const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
+const DescribeStorageRegionsResponse = models.DescribeStorageRegionsResponse;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const ProcedureTask = models.ProcedureTask;
 const ModifySuperPlayerConfigRequest = models.ModifySuperPlayerConfigRequest;
@@ -451,7 +459,6 @@ const SnapshotByTimeOffset2017 = models.SnapshotByTimeOffset2017;
 const CreateAIAnalysisTemplateRequest = models.CreateAIAnalysisTemplateRequest;
 const AiReviewTerrorismTaskInput = models.AiReviewTerrorismTaskInput;
 const MediaAudioStreamItem = models.MediaAudioStreamItem;
-const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
 const SubAppIdInfo = models.SubAppIdInfo;
 const DescribeAllClassResponse = models.DescribeAllClassResponse;
 const ModifyImageSpriteTemplateRequest = models.ModifyImageSpriteTemplateRequest;
@@ -562,6 +569,17 @@ class VodClient extends AbstractClient {
     CreateSnapshotByTimeOffsetTemplate(req, cb) {
         let resp = new CreateSnapshotByTimeOffsetTemplateResponse();
         this.request("CreateSnapshotByTimeOffsetTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the default storage region. A file will be stored in the default region if no region is specified for file upload.
+     * @param {ModifyDefaultStorageRegionRequest} req
+     * @param {function(string, ModifyDefaultStorageRegionResponse):void} cb
+     * @public
+     */
+    ModifyDefaultStorageRegion(req, cb) {
+        let resp = new ModifyDefaultStorageRegionResponse();
+        this.request("ModifyDefaultStorageRegion", req, resp, cb);
     }
 
     /**
@@ -803,6 +821,19 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     DescribeTasks(req, cb) {
         let resp = new DescribeTasksResponse();
         this.request("DescribeTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable storage in a region.
+  1. When you activate VOD, the system will enable storage for you in certain regions. If you need to store data in another region, you can use this API to enable storage in that region.
+  2. You can use the `DescribeStorageRegions` API to query all supported storage regions and the regions you have storage access to currently.
+     * @param {CreateStorageRegionRequest} req
+     * @param {function(string, CreateStorageRegionResponse):void} cb
+     * @public
+     */
+    CreateStorageRegion(req, cb) {
+        let resp = new CreateStorageRegionResponse();
+        this.request("CreateStorageRegion", req, resp, cb);
     }
 
     /**
@@ -1244,6 +1275,20 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     CreateAIAnalysisTemplate(req, cb) {
         let resp = new CreateAIAnalysisTemplateResponse();
         this.request("CreateAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the following information:
+  1. All supported storage regions.
+  2. The regions you have storage access to currently.
+  3. The default storage region.
+     * @param {DescribeStorageRegionsRequest} req
+     * @param {function(string, DescribeStorageRegionsResponse):void} cb
+     * @public
+     */
+    DescribeStorageRegions(req, cb) {
+        let resp = new DescribeStorageRegionsResponse();
+        this.request("DescribeStorageRegions", req, resp, cb);
     }
 
     /**

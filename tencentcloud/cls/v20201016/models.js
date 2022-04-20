@@ -334,6 +334,62 @@ class DeleteAlarmNoticeResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeLogHistogram request structure.
+ * @class
+ */
+class DescribeLogHistogramRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the log topic to be queried
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Start time of the log to be queried, which is a Unix timestamp in milliseconds
+         * @type {number || null}
+         */
+        this.From = null;
+
+        /**
+         * End time of the log to be queried, which is a Unix timestamp in milliseconds
+         * @type {number || null}
+         */
+        this.To = null;
+
+        /**
+         * Query statement
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * Time interval in milliseconds
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.From = 'From' in params ? params.From : null;
+        this.To = 'To' in params ? params.To : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+    }
+}
+
+/**
  * DescribeLogContext request structure.
  * @class
  */
@@ -348,7 +404,7 @@ class DescribeLogContextRequest extends  AbstractModel {
         this.TopicId = null;
 
         /**
-         * Log time in the format of `YYYY-mm-dd HH:MM:SS`
+         * Log time in the format of YYYY-mm-dd HH:MM:SS.FFF
          * @type {string || null}
          */
         this.BTime = null;
@@ -420,84 +476,6 @@ class DeleteShipperRequest extends  AbstractModel {
             return;
         }
         this.ShipperId = 'ShipperId' in params ? params.ShipperId : null;
-
-    }
-}
-
-/**
- * ModifyTopic request structure.
- * @class
- */
-class ModifyTopicRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Log topic name
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Whether to start collection for this log topic
-         * @type {boolean || null}
-         */
-        this.Status = null;
-
-        /**
-         * Whether to enable automatic split
-         * @type {boolean || null}
-         */
-        this.AutoSplit = null;
-
-        /**
-         * Maximum number of partitions to split into for this topic if automatic split is enabled
-         * @type {number || null}
-         */
-        this.MaxSplitPartitions = null;
-
-        /**
-         * Lifecycle in days. Value range: 1–366
-         * @type {number || null}
-         */
-        this.Period = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.AutoSplit = 'AutoSplit' in params ? params.AutoSplit : null;
-        this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
-        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -638,168 +616,6 @@ class DescribeConfigMachineGroupsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAsyncContextResult response structure.
- * @class
- */
-class DescribeAsyncContextResultResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether the previous logs have been returned
-         * @type {boolean || null}
-         */
-        this.PrevOver = null;
-
-        /**
-         * Whether the next logs have been returned
-         * @type {boolean || null}
-         */
-        this.NextOver = null;
-
-        /**
-         * Log content
-         * @type {Array.<LogInfo> || null}
-         */
-        this.Results = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PrevOver = 'PrevOver' in params ? params.PrevOver : null;
-        this.NextOver = 'NextOver' in params ? params.NextOver : null;
-
-        if (params.Results) {
-            this.Results = new Array();
-            for (let z in params.Results) {
-                let obj = new LogInfo();
-                obj.deserialize(params.Results[z]);
-                this.Results.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UploadLog request structure.
- * @class
- */
-class UploadLogRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Topic partition where data will be written into by `HashKey` 
-         * @type {string || null}
-         */
-        this.HashKey = null;
-
-        /**
-         * Compression type
-         * @type {string || null}
-         */
-        this.CompressType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.HashKey = 'HashKey' in params ? params.HashKey : null;
-        this.CompressType = 'CompressType' in params ? params.CompressType : null;
-
-    }
-}
-
-/**
- * CreateAsyncContextTask request structure.
- * @class
- */
-class CreateAsyncContextTaskRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Log time in milliseconds
-         * @type {number || null}
-         */
-        this.Time = null;
-
-        /**
-         * Log package number
-         * @type {string || null}
-         */
-        this.PkgId = null;
-
-        /**
-         * Log number in log package
-         * @type {string || null}
-         */
-        this.PkgLogId = null;
-
-        /**
-         * Logset ID
-         * @type {string || null}
-         */
-        this.LogsetId = null;
-
-        /**
-         * Offline search task ID
-         * @type {string || null}
-         */
-        this.AsyncSearchTaskId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-        this.PkgLogId = 'PkgLogId' in params ? params.PkgLogId : null;
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.AsyncSearchTaskId = 'AsyncSearchTaskId' in params ? params.AsyncSearchTaskId : null;
-
-    }
-}
-
-/**
  * CreateLogset request structure.
  * @class
  */
@@ -886,54 +702,59 @@ class SearchLogResponse extends  AbstractModel {
         super();
 
         /**
-         * `Context` for loading subsequent content. It will expire after 1 hour.
+         * You can pass through the `Context` value (validity: 1 hour) returned by this API to continue to get more logs.
          * @type {string || null}
          */
         this.Context = null;
 
         /**
-         * Whether to return all raw log query results. This parameter is meaningless if the query statement (Query) contains an SQL query.
+         * Whether to return all raw log query results. If not, you can use `Context` to continue to get logs.
+Note: This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
          * @type {boolean || null}
          */
         this.ListOver = null;
 
         /**
-         * Whether the return is the analysis result
+         * Whether the returned data is the analysis (SQL) result
          * @type {boolean || null}
          */
         this.Analysis = null;
 
         /**
-         * If `Analysis` is `true`, column name of the analysis result will be returned; otherwise, empty content will be returned.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.ColNames = null;
-
-        /**
-         * Log query result. If `Analysis` is `True`, `null` may be returned
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Raw logs that meet the search conditions
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {Array.<LogInfo> || null}
          */
         this.Results = null;
 
         /**
-         * Log analysis result. If `Analysis` is `False`, `null` may be returned
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Column names of log analysis
+This parameter is valid only when `UseNewAnalysis` is `false`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.ColNames = null;
+
+        /**
+         * Log analysis result
+This parameter is valid only when `UseNewAnalysis` is `false`.
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {Array.<LogItems> || null}
          */
         this.AnalysisResults = null;
 
         /**
-         * New log analysis result, which will be valid if `UseNewAnalysis` is `true`
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Log analysis result
+This parameter is valid only when `UseNewAnalysis` is `true`.
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.AnalysisRecords = null;
 
         /**
-         * Column attribute of log analysis, which will be valid if `UseNewAnalysis` is `true`
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Column attributes of log analysis
+This parameter is valid only when `UseNewAnalysis` is `true`.
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {Array.<Column> || null}
          */
         this.Columns = null;
@@ -956,7 +777,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Context = 'Context' in params ? params.Context : null;
         this.ListOver = 'ListOver' in params ? params.ListOver : null;
         this.Analysis = 'Analysis' in params ? params.Analysis : null;
-        this.ColNames = 'ColNames' in params ? params.ColNames : null;
 
         if (params.Results) {
             this.Results = new Array();
@@ -966,6 +786,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.Results.push(obj);
             }
         }
+        this.ColNames = 'ColNames' in params ? params.ColNames : null;
 
         if (params.AnalysisResults) {
             this.AnalysisResults = new Array();
@@ -1199,24 +1020,24 @@ Each request can have up to 10 `Filters` and 5 `Filter.Values`.
 }
 
 /**
- * CreateAsyncContextTask response structure.
+ * MergePartition request structure.
  * @class
  */
-class CreateAsyncContextTaskResponse extends  AbstractModel {
+class MergePartitionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Offline context search task ID
+         * Log topic ID
          * @type {string || null}
          */
-        this.AsyncContextTaskId = null;
+        this.TopicId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Merged `PartitionId`
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.PartitionId = null;
 
     }
 
@@ -1227,8 +1048,8 @@ class CreateAsyncContextTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncContextTaskId = 'AsyncContextTaskId' in params ? params.AsyncContextTaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.PartitionId = 'PartitionId' in params ? params.PartitionId : null;
 
     }
 }
@@ -1384,7 +1205,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Log alarm monitoring object
+ * Alarm object
  * @class
  */
 class AlarmTargetInfo extends  AbstractModel {
@@ -1575,34 +1396,6 @@ class CreateLogsetResponse extends  AbstractModel {
 }
 
 /**
- * DeleteAsyncContextTask response structure.
- * @class
- */
-class DeleteAsyncContextTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DeleteMachineGroup response structure.
  * @class
  */
@@ -1666,109 +1459,48 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * DescribeAsyncContextResult request structure.
+ * DescribeMachineGroups request structure.
  * @class
  */
-class DescribeAsyncContextResultRequest extends  AbstractModel {
+class DescribeMachineGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Offline search task ID
-         * @type {string || null}
+         * <br><li> machineGroupName
+
+Filter by **machine group name**.
+Type: String
+
+Required: no
+
+<br><li> machineGroupId
+
+Filter by **machine group ID**.
+Type: String
+
+Required: no
+
+<br><li> tagKey
+
+Filter by **tag key**.
+
+Type: String
+
+Required: no
+
+<br><li> tag:tagKey
+
+Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
+Type: String
+
+Required: no
+
+
+Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+         * @type {Array.<Filter> || null}
          */
-        this.AsyncContextTaskId = null;
-
-        /**
-         * Log package number
-         * @type {string || null}
-         */
-        this.PkgId = null;
-
-        /**
-         * Log number in log package
-         * @type {string || null}
-         */
-        this.PkgLogId = null;
-
-        /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Number of previous logs. Default value: 10
-         * @type {number || null}
-         */
-        this.PrevLogs = null;
-
-        /**
-         * Number of next logs. Default value: 10
-         * @type {number || null}
-         */
-        this.NextLogs = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncContextTaskId = 'AsyncContextTaskId' in params ? params.AsyncContextTaskId : null;
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-        this.PkgLogId = 'PkgLogId' in params ? params.PkgLogId : null;
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.PrevLogs = 'PrevLogs' in params ? params.PrevLogs : null;
-        this.NextLogs = 'NextLogs' in params ? params.NextLogs : null;
-
-    }
-}
-
-/**
- * DeleteAsyncSearchTask response structure.
- * @class
- */
-class DeleteAsyncSearchTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeExports request structure.
- * @class
- */
-class DescribeExportsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
+        this.Filters = null;
 
         /**
          * Page offset. Default value: 0
@@ -1791,7 +1523,15 @@ class DescribeExportsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
@@ -1799,48 +1539,82 @@ class DescribeExportsRequest extends  AbstractModel {
 }
 
 /**
- * CreateAsyncSearchTask request structure.
+ * Log extraction rule
  * @class
  */
-class CreateAsyncSearchTaskRequest extends  AbstractModel {
+class ExtractRuleInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Logset ID
+         * Time field key name. `time_key` and `time_format` must appear in pairs
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.LogsetId = null;
+        this.TimeKey = null;
 
         /**
-         * Log topic ID. Currently, only log topics whose `StorageType` is `cold` are supported.
+         * Time field format. For more information, please see the output parameters of the time format description of the `strftime` function in C language
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.TopicId = null;
+        this.TimeFormat = null;
 
         /**
-         * Query statement. Maximum length: 1024
+         * Delimiter for delimited log, which is valid only if `log_type` is `delimiter_log`
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Query = null;
+        this.Delimiter = null;
 
         /**
-         * Start time of the log to be queried, which is a Unix timestamp in milliseconds
+         * Full log matching rule, which is valid only if `log_type` is `fullregex_log`
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LogRegex = null;
+
+        /**
+         * First-Line matching rule, which is valid only if `log_type` is `multiline_log` or `fullregex_log`
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BeginRegex = null;
+
+        /**
+         * Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if `log_type` is `delimiter_log`. `json_log` logs use the key of JSON itself
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Keys = null;
+
+        /**
+         * Log keys to be filtered and the corresponding regex
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<KeyRegexInfo> || null}
+         */
+        this.FilterKeyRegex = null;
+
+        /**
+         * Whether to upload the logs that failed to be parsed. Valid values: `true`: yes; `false`: no
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.UnMatchUpLoadSwitch = null;
+
+        /**
+         * Unmatched log key
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnMatchLogKey = null;
+
+        /**
+         * Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection)
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.From = null;
-
-        /**
-         * End time of the log to be queried, which is a Unix timestamp in milliseconds
-         * @type {number || null}
-         */
-        this.To = null;
-
-        /**
-         * Log scan order. Valid values: `asc`: ascending; `desc`: descending. Default value: desc
-         * @type {string || null}
-         */
-        this.Sort = null;
+        this.Backtracking = null;
 
     }
 
@@ -1851,12 +1625,24 @@ class CreateAsyncSearchTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Query = 'Query' in params ? params.Query : null;
-        this.From = 'From' in params ? params.From : null;
-        this.To = 'To' in params ? params.To : null;
-        this.Sort = 'Sort' in params ? params.Sort : null;
+        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
+        this.Delimiter = 'Delimiter' in params ? params.Delimiter : null;
+        this.LogRegex = 'LogRegex' in params ? params.LogRegex : null;
+        this.BeginRegex = 'BeginRegex' in params ? params.BeginRegex : null;
+        this.Keys = 'Keys' in params ? params.Keys : null;
+
+        if (params.FilterKeyRegex) {
+            this.FilterKeyRegex = new Array();
+            for (let z in params.FilterKeyRegex) {
+                let obj = new KeyRegexInfo();
+                obj.deserialize(params.FilterKeyRegex[z]);
+                this.FilterKeyRegex.push(obj);
+            }
+        }
+        this.UnMatchUpLoadSwitch = 'UnMatchUpLoadSwitch' in params ? params.UnMatchUpLoadSwitch : null;
+        this.UnMatchLogKey = 'UnMatchLogKey' in params ? params.UnMatchLogKey : null;
+        this.Backtracking = 'Backtracking' in params ? params.Backtracking : null;
 
     }
 }
@@ -1940,8 +1726,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.StorageType = null;
 
         /**
-         * Lifecycle in days
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {number || null}
          */
         this.Period = null;
@@ -2106,7 +1892,7 @@ class ModifyConsumerRequest extends  AbstractModel {
         this.TopicId = null;
 
         /**
-         * Whether to enable the shipping task
+         * Whether the shipping task takes effect (default: no)
          * @type {boolean || null}
          */
         this.Effective = null;
@@ -2713,34 +2499,34 @@ class ModifyAlarmNoticeRequest extends  AbstractModel {
         super();
 
         /**
-         * Alarm notification template ID
+         * Notification group ID
          * @type {string || null}
          */
         this.AlarmNoticeId = null;
 
         /**
-         * Alarm template name
+         * Notification group name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Alarm template type. Valid values:
-<br><li> `Trigger`: alarm triggered
-<br><li> `Recovery`: alarm cleared
-<br><li> `All`: alarm triggered and alarm cleared
+         * Notification type. Valid values:
+<li> `Trigger`: alarm triggered
+<li> `Recovery`: alarm cleared
+<li> `All`: alarm triggered and alarm cleared
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Information of the recipient in alarm template
+         * Notification recipient
          * @type {Array.<NoticeReceiver> || null}
          */
         this.NoticeReceivers = null;
 
         /**
-         * Alarm template callback information
+         * API callback information (including WeCom)
          * @type {Array.<WebCallback> || null}
          */
         this.WebCallbacks = null;
@@ -3367,106 +3153,30 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeMachineGroups request structure.
+ * DescribeLogHistogram response structure.
  * @class
  */
-class DescribeMachineGroupsRequest extends  AbstractModel {
+class DescribeLogHistogramResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <br><li> machineGroupName
-
-Filter by **machine group name**.
-Type: String
-
-Required: no
-
-<br><li> machineGroupId
-
-Filter by **machine group ID**.
-Type: String
-
-Required: no
-
-<br><li> tagKey
-
-Filter by **tag key**.
-
-Type: String
-
-Required: no
-
-<br><li> tag:tagKey
-
-Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
-Type: String
-
-Required: no
-
-
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Page offset. Default value: 0
+         * Statistical period in milliseconds
          * @type {number || null}
          */
-        this.Offset = null;
+        this.Interval = null;
 
         /**
-         * Maximum number of entries per page. Default value: 20. Maximum value: 100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * DescribeAsyncContextTasks response structure.
- * @class
- */
-class DescribeAsyncContextTasksResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Offline context search task list
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<AsyncContextTask> || null}
-         */
-        this.AsyncContextTasks = null;
-
-        /**
-         * Total number of offline context search tasks
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * The number of logs that hit the keywords
          * @type {number || null}
          */
         this.TotalCount = null;
+
+        /**
+         * Statistical result details within the period
+         * @type {Array.<HistogramInfo> || null}
+         */
+        this.HistogramInfos = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3483,17 +3193,61 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.AsyncContextTasks) {
-            this.AsyncContextTasks = new Array();
-            for (let z in params.AsyncContextTasks) {
-                let obj = new AsyncContextTask();
-                obj.deserialize(params.AsyncContextTasks[z]);
-                this.AsyncContextTasks.push(obj);
+        if (params.HistogramInfos) {
+            this.HistogramInfos = new Array();
+            for (let z in params.HistogramInfos) {
+                let obj = new HistogramInfo();
+                obj.deserialize(params.HistogramInfos[z]);
+                this.HistogramInfos.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Metafield index configuration
+ * @class
+ */
+class RuleTagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Case sensitivity
+         * @type {boolean || null}
+         */
+        this.CaseSensitive = null;
+
+        /**
+         * Field information in the metafield index configuration
+         * @type {Array.<KeyValueInfo> || null}
+         */
+        this.KeyValues = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
+
+        if (params.KeyValues) {
+            this.KeyValues = new Array();
+            for (let z in params.KeyValues) {
+                let obj = new KeyValueInfo();
+                obj.deserialize(params.KeyValues[z]);
+                this.KeyValues.push(obj);
+            }
+        }
 
     }
 }
@@ -3582,53 +3336,7 @@ class DescribeTopicsRequest extends  AbstractModel {
         super();
 
         /**
-         * <br><li> topicName
-
-Filter by **log topic name**.
-Type: String
-
-Required: no
-
-<br><li> topicId
-
-Filter by **log topic ID**.
-Type: String
-
-Required: no
-
-<br><li> logsetId
-
-Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset.
-
-Type: String
-
-Required: no
-
-<br><li> tagKey
-
-Filter by **tag key**.
-
-Type: String
-
-Required: no
-
-<br><li> tag:tagKey
-
-Filter by **tag key-value pair**. The `tag-key` should be replaced with a specified tag key. For more information on how to use it, please see sample 2.
-
-Type: String
-
-Required: no
-
-<br><li> storageType
-
-Filter by **log topic storage class**. Valid values: `hot`: real-time storage; `cold`: offline storage.
-Type: String
-
-Required: no
-
-
-Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
+         * <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call DescribeLogsets to query the list of created logsets or log in to the console to view them. You can also call CreateLogset to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as tag:exampleKey. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (real-time storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -3783,71 +3491,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeAsyncSearchTasks request structure.
- * @class
- */
-class DescribeAsyncSearchTasksRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Page offset. Default value: 0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum number of entries per page. Default value: 20. Maximum value: 100
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * <br><li> topicId
-
-Filter by **log topic ID**.
-Type: String
-
-Required: no
-
-<br><li> logsetId
-
-Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset.
-
-Type: String
-
-Required: no
-
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * CreateTopic request structure.
  * @class
  */
@@ -3892,13 +3535,13 @@ class CreateTopicRequest extends  AbstractModel {
         this.MaxSplitPartitions = null;
 
         /**
-         * Log topic storage class. Valid values: `hot`: real-time storage; `cold`: offline storage. Default value: `hot`. If `cold` is passed in, please contact the customer service to add the log topic to the allowlist first.
+         * Log topic storage type. Valid values: `hot` (real-time storage); `cold` (IA storage). Default value: `hot`.
          * @type {string || null}
          */
         this.StorageType = null;
 
         /**
-         * Lifecycle in days. Value range: 1–366. Default value: 30
+         * Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
          * @type {number || null}
          */
         this.Period = null;
@@ -3933,69 +3576,18 @@ class CreateTopicRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAsyncSearchResult response structure.
+ * DescribeExports request structure.
  * @class
  */
-class DescribeAsyncSearchResultResponse extends  AbstractModel {
+class DescribeExportsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * `Context` for loading subsequent content
+         * Log topic ID
          * @type {string || null}
          */
-        this.Context = null;
-
-        /**
-         * Whether all log query results are returned
-         * @type {boolean || null}
-         */
-        this.ListOver = null;
-
-        /**
-         * Log content
-         * @type {Array.<LogInfo> || null}
-         */
-        this.Results = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Context = 'Context' in params ? params.Context : null;
-        this.ListOver = 'ListOver' in params ? params.ListOver : null;
-
-        if (params.Results) {
-            this.Results = new Array();
-            for (let z in params.Results) {
-                let obj = new LogInfo();
-                obj.deserialize(params.Results[z]);
-                this.Results.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeAsyncContextTasks request structure.
- * @class
- */
-class DescribeAsyncContextTasksRequest extends  AbstractModel {
-    constructor(){
-        super();
+        this.TopicId = null;
 
         /**
          * Page offset. Default value: 0
@@ -4009,27 +3601,6 @@ class DescribeAsyncContextTasksRequest extends  AbstractModel {
          */
         this.Limit = null;
 
-        /**
-         * <br><li> topicId
-
-Filter by **log topic ID**.
-Type: String
-
-Required: no
-
-<br><li> logsetId
-
-Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset.
-
-Type: String
-
-Required: no
-
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
     }
 
     /**
@@ -4039,17 +3610,9 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
         if (!params) {
             return;
         }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
 
     }
 }
@@ -4297,193 +3860,30 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * Log extraction rule
+ * UploadLog request structure.
  * @class
  */
-class ExtractRuleInfo extends  AbstractModel {
+class UploadLogRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Time field key name. `time_key` and `time_format` must appear in pairs
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TimeKey = null;
-
-        /**
-         * Time field format. For more information, please see the output parameters of the time format description of the `strftime` function in C language
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TimeFormat = null;
-
-        /**
-         * Delimiter for delimited log, which is valid only if `log_type` is `delimiter_log`
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Delimiter = null;
-
-        /**
-         * Full log matching rule, which is valid only if `log_type` is `fullregex_log`
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LogRegex = null;
-
-        /**
-         * First-Line matching rule, which is valid only if `log_type` is `multiline_log` or `fullregex_log`
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.BeginRegex = null;
-
-        /**
-         * Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if `log_type` is `delimiter_log`. `json_log` logs use the key of JSON itself
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Keys = null;
-
-        /**
-         * Log keys to be filtered and the corresponding regex
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<KeyRegexInfo> || null}
-         */
-        this.FilterKeyRegex = null;
-
-        /**
-         * Whether to upload the logs that failed to be parsed. Valid values: `true`: yes; `false`: no
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.UnMatchUpLoadSwitch = null;
-
-        /**
-         * Unmatched log key
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UnMatchLogKey = null;
-
-        /**
-         * Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection)
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Backtracking = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
-        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
-        this.Delimiter = 'Delimiter' in params ? params.Delimiter : null;
-        this.LogRegex = 'LogRegex' in params ? params.LogRegex : null;
-        this.BeginRegex = 'BeginRegex' in params ? params.BeginRegex : null;
-        this.Keys = 'Keys' in params ? params.Keys : null;
-
-        if (params.FilterKeyRegex) {
-            this.FilterKeyRegex = new Array();
-            for (let z in params.FilterKeyRegex) {
-                let obj = new KeyRegexInfo();
-                obj.deserialize(params.FilterKeyRegex[z]);
-                this.FilterKeyRegex.push(obj);
-            }
-        }
-        this.UnMatchUpLoadSwitch = 'UnMatchUpLoadSwitch' in params ? params.UnMatchUpLoadSwitch : null;
-        this.UnMatchLogKey = 'UnMatchLogKey' in params ? params.UnMatchLogKey : null;
-        this.Backtracking = 'Backtracking' in params ? params.Backtracking : null;
-
-    }
-}
-
-/**
- * Offline context search task
- * @class
- */
-class AsyncContextTask extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Logset ID
-         * @type {string || null}
-         */
-        this.LogsetId = null;
-
-        /**
-         * Log topic ID
+         * Topic ID
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * Creation time, which is a timestamp accurate down to the millisecond
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Status. Valid values: `0`: to be started; `1`: running; `2`: completed; `-1`: failed
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Offline context search task ID
+         * Topic partition where data will be written into by `HashKey` 
          * @type {string || null}
          */
-        this.AsyncContextTaskId = null;
+        this.HashKey = null;
 
         /**
-         * Error message of task failure
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Compression type
          * @type {string || null}
          */
-        this.ErrorMessage = null;
-
-        /**
-         * Log package number
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PkgId = null;
-
-        /**
-         * Log number in log package
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PkgLogId = null;
-
-        /**
-         * Log time
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Time = null;
-
-        /**
-         * Task completion time, which is a timestamp accurate down to the millisecond
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.FinishTime = null;
-
-        /**
-         * Associated offline search ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AsyncSearchTaskId = null;
+        this.CompressType = null;
 
     }
 
@@ -4494,17 +3894,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.AsyncContextTaskId = 'AsyncContextTaskId' in params ? params.AsyncContextTaskId : null;
-        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
-        this.PkgId = 'PkgId' in params ? params.PkgId : null;
-        this.PkgLogId = 'PkgLogId' in params ? params.PkgLogId : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
-        this.AsyncSearchTaskId = 'AsyncSearchTaskId' in params ? params.AsyncSearchTaskId : null;
+        this.HashKey = 'HashKey' in params ? params.HashKey : null;
+        this.CompressType = 'CompressType' in params ? params.CompressType : null;
 
     }
 }
@@ -4752,49 +4144,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Tag index configuration information
- * @class
- */
-class RuleTagInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Case sensitivity
-         * @type {boolean || null}
-         */
-        this.CaseSensitive = null;
-
-        /**
-         * Field information in tag index configuration
-         * @type {Array.<KeyValueInfo> || null}
-         */
-        this.KeyValues = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
-
-        if (params.KeyValues) {
-            this.KeyValues = new Array();
-            for (let z in params.KeyValues) {
-                let obj = new KeyValueInfo();
-                obj.deserialize(params.KeyValues[z]);
-                this.KeyValues.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * CreateExport request structure.
  * @class
  */
@@ -4803,22 +4152,22 @@ class CreateExportRequest extends  AbstractModel {
         super();
 
         /**
-         * Log topic
+         * Log topic ID
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * Log export search statement
-         * @type {string || null}
-         */
-        this.Query = null;
-
-        /**
-         * Number of logs to be exported. Maximum value: 10 million
+         * Number of logs to be exported. Maximum value: 50 million
          * @type {number || null}
          */
         this.Count = null;
+
+        /**
+         * Search statements for log export. <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statements]</a> are not supported.
+         * @type {string || null}
+         */
+        this.Query = null;
 
         /**
          * Start time of the log to be exported, which is a timestamp in milliseconds
@@ -4854,8 +4203,8 @@ class CreateExportRequest extends  AbstractModel {
             return;
         }
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Query = 'Query' in params ? params.Query : null;
         this.Count = 'Count' in params ? params.Count : null;
+        this.Query = 'Query' in params ? params.Query : null;
         this.From = 'From' in params ? params.From : null;
         this.To = 'To' in params ? params.To : null;
         this.Order = 'Order' in params ? params.Order : null;
@@ -5070,8 +4419,8 @@ class JsonInfo extends  AbstractModel {
         this.EnableTag = null;
 
         /**
-         * Metadata information list
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Metadata information list. Valid values: __SOURCE__; __FILENAME__; __TIMESTAMP__
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.MetaFields = null;
@@ -5087,115 +4436,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.EnableTag = 'EnableTag' in params ? params.EnableTag : null;
         this.MetaFields = 'MetaFields' in params ? params.MetaFields : null;
-
-    }
-}
-
-/**
- * CreateShipper request structure.
- * @class
- */
-class CreateShipperRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the log topic to which the shipping rule to be created belongs
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Destination bucket in the shipping rule to be created
-         * @type {string || null}
-         */
-        this.Bucket = null;
-
-        /**
-         * Prefix of the shipping directory in the shipping rule to be created
-         * @type {string || null}
-         */
-        this.Prefix = null;
-
-        /**
-         * Shipping rule name
-         * @type {string || null}
-         */
-        this.ShipperName = null;
-
-        /**
-         * Shipping time interval in seconds. Default value: 300. Value range: 300–900
-         * @type {number || null}
-         */
-        this.Interval = null;
-
-        /**
-         * Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100–256
-         * @type {number || null}
-         */
-        this.MaxSize = null;
-
-        /**
-         * Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped
-         * @type {Array.<FilterRuleInfo> || null}
-         */
-        this.FilterRules = null;
-
-        /**
-         * Partition rule of shipped log, which can be represented in `strftime` time format
-         * @type {string || null}
-         */
-        this.Partition = null;
-
-        /**
-         * Compression configuration of shipped log
-         * @type {CompressInfo || null}
-         */
-        this.Compress = null;
-
-        /**
-         * Format configuration of shipped log content
-         * @type {ContentInfo || null}
-         */
-        this.Content = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
-        this.Prefix = 'Prefix' in params ? params.Prefix : null;
-        this.ShipperName = 'ShipperName' in params ? params.ShipperName : null;
-        this.Interval = 'Interval' in params ? params.Interval : null;
-        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
-
-        if (params.FilterRules) {
-            this.FilterRules = new Array();
-            for (let z in params.FilterRules) {
-                let obj = new FilterRuleInfo();
-                obj.deserialize(params.FilterRules[z]);
-                this.FilterRules.push(obj);
-            }
-        }
-        this.Partition = 'Partition' in params ? params.Partition : null;
-
-        if (params.Compress) {
-            let obj = new CompressInfo();
-            obj.deserialize(params.Compress)
-            this.Compress = obj;
-        }
-
-        if (params.Content) {
-            let obj = new ContentInfo();
-            obj.deserialize(params.Content)
-            this.Content = obj;
-        }
 
     }
 }
@@ -5264,54 +4504,58 @@ class DeleteAlarmResponse extends  AbstractModel {
 }
 
 /**
- * DescribeMachines response structure.
+ * Callback address
  * @class
  */
-class DescribeMachinesResponse extends  AbstractModel {
+class WebCallback extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Group of machine status information
-         * @type {Array.<MachineInfo> || null}
+         * Callback address
+         * @type {string || null}
          */
-        this.Machines = null;
+        this.Url = null;
 
         /**
-         * Whether to enable the automatic update feature for the machine group
+         * Callback type. Valid values:
+<li> WeCom
+<li> Http
+         * @type {string || null}
+         */
+        this.CallbackType = null;
+
+        /**
+         * Callback method. Valid values:
+<li> POST
+<li> PUT
+Default value: `POST`. This parameter is required if `CallbackType` is `Http`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * Request header
+Note: This parameter is disused. To specify request headers, see `CallBack` in <a href="https://intl.cloud.tencent.com/document/product/614/56466?from_cn_redirect=1">CreateAlarmNotice</a>.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.Headers = null;
+
+        /**
+         * Request content
+Note: This parameter is disused. To specify request content, see `CallBack` in <a href="https://intl.cloud.tencent.com/document/product/614/56466?from_cn_redirect=1">CreateAlarmNotice</a>.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Body = null;
+
+        /**
+         * Number
          * @type {number || null}
          */
-        this.AutoUpdate = null;
-
-        /**
-         * Preset start time of automatic update of machine group
-         * @type {string || null}
-         */
-        this.UpdateStartTime = null;
-
-        /**
-         * Preset end time of automatic update of machine group
-         * @type {string || null}
-         */
-        this.UpdateEndTime = null;
-
-        /**
-         * Latest LogListener version available to the current user
-         * @type {string || null}
-         */
-        this.LatestAgentVersion = null;
-
-        /**
-         * Whether to enable the service log
-         * @type {boolean || null}
-         */
-        this.ServiceLogging = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Index = null;
 
     }
 
@@ -5322,21 +4566,12 @@ class DescribeMachinesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Machines) {
-            this.Machines = new Array();
-            for (let z in params.Machines) {
-                let obj = new MachineInfo();
-                obj.deserialize(params.Machines[z]);
-                this.Machines.push(obj);
-            }
-        }
-        this.AutoUpdate = 'AutoUpdate' in params ? params.AutoUpdate : null;
-        this.UpdateStartTime = 'UpdateStartTime' in params ? params.UpdateStartTime : null;
-        this.UpdateEndTime = 'UpdateEndTime' in params ? params.UpdateEndTime : null;
-        this.LatestAgentVersion = 'LatestAgentVersion' in params ? params.LatestAgentVersion : null;
-        this.ServiceLogging = 'ServiceLogging' in params ? params.ServiceLogging : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.CallbackType = 'CallbackType' in params ? params.CallbackType : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.Headers = 'Headers' in params ? params.Headers : null;
+        this.Body = 'Body' in params ? params.Body : null;
+        this.Index = 'Index' in params ? params.Index : null;
 
     }
 }
@@ -5427,34 +4662,6 @@ class CreateAlarmNoticeResponse extends  AbstractModel {
 }
 
 /**
- * ModifyTopic response structure.
- * @class
- */
-class ModifyTopicResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateConfig request structure.
  * @class
  */
@@ -5538,41 +4745,6 @@ class CreateConfigRequest extends  AbstractModel {
 }
 
 /**
- * CreateShipper response structure.
- * @class
- */
-class CreateShipperResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Shipping rule ID
-         * @type {string || null}
-         */
-        this.ShipperId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ShipperId = 'ShipperId' in params ? params.ShipperId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DeleteIndex response structure.
  * @class
  */
@@ -5601,41 +4773,6 @@ class DeleteIndexResponse extends  AbstractModel {
 }
 
 /**
- * DeleteAsyncContextTask request structure.
- * @class
- */
-class DeleteAsyncContextTaskRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Offline context search task ID
-         * @type {string || null}
-         */
-        this.AsyncContextTaskId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.AsyncContextTaskId = 'AsyncContextTaskId' in params ? params.AsyncContextTaskId : null;
-
-    }
-}
-
-/**
  * ModifyIndex request structure.
  * @class
  */
@@ -5656,10 +4793,22 @@ class ModifyIndexRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Index rule. Either `Rule` or `Effective` must exist.
+         * Index rule
          * @type {RuleInfo || null}
          */
         this.Rule = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IncludeInternalFields = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MetadataFlag = null;
 
     }
 
@@ -5678,6 +4827,8 @@ class ModifyIndexRequest extends  AbstractModel {
             obj.deserialize(params.Rule)
             this.Rule = obj;
         }
+        this.IncludeInternalFields = 'IncludeInternalFields' in params ? params.IncludeInternalFields : null;
+        this.MetadataFlag = 'MetadataFlag' in params ? params.MetadataFlag : null;
 
     }
 }
@@ -5822,7 +4973,7 @@ class GetAlarmLogRequest extends  AbstractModel {
         this.Query = null;
 
         /**
-         * Number of logs returned in a single query. Maximum value: 100
+         * Number of logs returned in a single query. Maximum value: 1000
          * @type {number || null}
          */
         this.Limit = null;
@@ -5861,34 +5012,6 @@ class GetAlarmLogRequest extends  AbstractModel {
         this.Context = 'Context' in params ? params.Context : null;
         this.Sort = 'Sort' in params ? params.Sort : null;
         this.UseNewAnalysis = 'UseNewAnalysis' in params ? params.UseNewAnalysis : null;
-
-    }
-}
-
-/**
- * DescribeMachines request structure.
- * @class
- */
-class DescribeMachinesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the machine group to be queried
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -6452,55 +5575,6 @@ class DescribeLogContextResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAsyncSearchResult request structure.
- * @class
- */
-class DescribeAsyncSearchResultRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Offline search task ID
-         * @type {string || null}
-         */
-        this.AsyncSearchTaskId = null;
-
-        /**
-         * Logset ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * This field is used to load more logs. Pass through the last `Context` value returned to get more log content.
-         * @type {string || null}
-         */
-        this.Context = null;
-
-        /**
-         * Number of logs returned in a single call. Default value: 20. Maximum value: 500
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncSearchTaskId = 'AsyncSearchTaskId' in params ? params.AsyncSearchTaskId : null;
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Context = 'Context' in params ? params.Context : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
  * CreateConsumer request structure.
  * @class
  */
@@ -6710,26 +5784,48 @@ class ModifyAlarmNoticeResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAsyncSearchTasks response structure.
+ * DescribeMachines response structure.
  * @class
  */
-class DescribeAsyncSearchTasksResponse extends  AbstractModel {
+class DescribeMachinesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Offline search task list
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<AsyncSearchTask> || null}
+         * Group of machine status information
+         * @type {Array.<MachineInfo> || null}
          */
-        this.AsyncSearchTasks = null;
+        this.Machines = null;
 
         /**
-         * Total number of offline search tasks
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether to enable the automatic update feature for the machine group
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.AutoUpdate = null;
+
+        /**
+         * Preset start time of automatic update of machine group
+         * @type {string || null}
+         */
+        this.UpdateStartTime = null;
+
+        /**
+         * Preset end time of automatic update of machine group
+         * @type {string || null}
+         */
+        this.UpdateEndTime = null;
+
+        /**
+         * Latest LogListener version available to the current user
+         * @type {string || null}
+         */
+        this.LatestAgentVersion = null;
+
+        /**
+         * Whether to enable the service log
+         * @type {boolean || null}
+         */
+        this.ServiceLogging = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6747,15 +5843,19 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             return;
         }
 
-        if (params.AsyncSearchTasks) {
-            this.AsyncSearchTasks = new Array();
-            for (let z in params.AsyncSearchTasks) {
-                let obj = new AsyncSearchTask();
-                obj.deserialize(params.AsyncSearchTasks[z]);
-                this.AsyncSearchTasks.push(obj);
+        if (params.Machines) {
+            this.Machines = new Array();
+            for (let z in params.Machines) {
+                let obj = new MachineInfo();
+                obj.deserialize(params.Machines[z]);
+                this.Machines.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.AutoUpdate = 'AutoUpdate' in params ? params.AutoUpdate : null;
+        this.UpdateStartTime = 'UpdateStartTime' in params ? params.UpdateStartTime : null;
+        this.UpdateEndTime = 'UpdateEndTime' in params ? params.UpdateEndTime : null;
+        this.LatestAgentVersion = 'LatestAgentVersion' in params ? params.LatestAgentVersion : null;
+        this.ServiceLogging = 'ServiceLogging' in params ? params.ServiceLogging : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7118,7 +6218,7 @@ class KeyValueInfo extends  AbstractModel {
         super();
 
         /**
-         * The field that needs to be configured with a key value or metafield index
+         * When a key value or metafield index needs to be configured for a field, the metafield `Key` does not need to be prefixed with `__TAG__.` and is consistent with the one when logs are uploaded. `__TAG__.` will be prefixed automatically for display in the console.
          * @type {string || null}
          */
         this.Key = null;
@@ -7145,41 +6245,6 @@ class KeyValueInfo extends  AbstractModel {
             obj.deserialize(params.Value)
             this.Value = obj;
         }
-
-    }
-}
-
-/**
- * DeleteAsyncSearchTask request structure.
- * @class
- */
-class DeleteAsyncSearchTaskRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Offline search task ID
-         * @type {string || null}
-         */
-        this.AsyncSearchTaskId = null;
-
-        /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncSearchTaskId = 'AsyncSearchTaskId' in params ? params.AsyncSearchTaskId : null;
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
 
     }
 }
@@ -7275,41 +6340,6 @@ class ModifyMachineGroupRequest extends  AbstractModel {
 }
 
 /**
- * MergePartition request structure.
- * @class
- */
-class MergePartitionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Merged `PartitionId`
-         * @type {number || null}
-         */
-        this.PartitionId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.PartitionId = 'PartitionId' in params ? params.PartitionId : null;
-
-    }
-}
-
-/**
  * DescribeAlarmNotices request structure.
  * @class
  */
@@ -7318,37 +6348,24 @@ class DescribeAlarmNoticesRequest extends  AbstractModel {
         super();
 
         /**
-         * <br><li> name
-
-Filter by **alarm notification template name**.
+         * <li> name
+Filter by **notification group name**.
 Type: String
-
-Required: no
-
-<br><li> alarmNoticeId
-
-Filter by **alarm notification template ID**.
+Required: No
+<li> alarmNoticeId
+Filter by **notification group ID**.
 Type: String
-
-Required: no
-
-<br><li> uid
-
+Required: No
+<li> uid
 Filter by **recipient ID**.
-
 Type: String
-
-Required: no
-
-<br><li> groupId
-
-Filter by **user group ID**.
-
+Required: No
+<li> groupId
+Filter by **recipient ID**.
 Type: String
+Required: No
 
-Required: no
-
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+Each request can have up to 10 `Filters` and 5 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -7460,114 +6477,6 @@ Currently, other recipient types are not supported.
 }
 
 /**
- * Offline search task
- * @class
- */
-class AsyncSearchTask extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Logset ID
-         * @type {string || null}
-         */
-        this.LogsetId = null;
-
-        /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Status. Valid values: `0`: to be started; `1`: running; `2`: completed; `-1`: failed
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Offline search task ID
-         * @type {string || null}
-         */
-        this.AsyncSearchTaskId = null;
-
-        /**
-         * Query statement
-         * @type {string || null}
-         */
-        this.Query = null;
-
-        /**
-         * Start time of the log to be queried, which is a Unix timestamp in milliseconds
-         * @type {number || null}
-         */
-        this.From = null;
-
-        /**
-         * End time of the log to be queried, which is a Unix timestamp in milliseconds
-         * @type {number || null}
-         */
-        this.To = null;
-
-        /**
-         * Log scan order. Valid values: `asc`: ascending; `desc`: descending
-         * @type {string || null}
-         */
-        this.Sort = null;
-
-        /**
-         * Error message of task failure
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ErrorMessage = null;
-
-        /**
-         * Total number of logs matched in offline search task
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.LogCount = null;
-
-        /**
-         * Task completion time
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FinishTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.AsyncSearchTaskId = 'AsyncSearchTaskId' in params ? params.AsyncSearchTaskId : null;
-        this.Query = 'Query' in params ? params.Query : null;
-        this.From = 'From' in params ? params.From : null;
-        this.To = 'To' in params ? params.To : null;
-        this.Sort = 'Sort' in params ? params.Sort : null;
-        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
-        this.LogCount = 'LogCount' in params ? params.LogCount : null;
-        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
-
-    }
-}
-
-/**
  * Information of the CKafka instance to ship to
  * @class
  */
@@ -7631,83 +6540,18 @@ class Ckafka extends  AbstractModel {
 }
 
 /**
- * Callback address
+ * CreateExport response structure.
  * @class
  */
-class WebCallback extends  AbstractModel {
+class CreateExportResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Callback address
+         * Log export ID.
          * @type {string || null}
          */
-        this.Url = null;
-
-        /**
-         * Callback type. Valid values:
-<br><li> WeCom
-<br><li> Http
-         * @type {string || null}
-         */
-        this.CallbackType = null;
-
-        /**
-         * Callback method. Valid values:
-<br><li> POST
-<br><li> PUT
-Default value: `POST`. This parameter is required if `CallbackType` is `Http`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Method = null;
-
-        /**
-         * Request header
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Headers = null;
-
-        /**
-         * Request content, which is required when `CallbackType` is `Http`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Body = null;
-
-        /**
-         * Number
-         * @type {number || null}
-         */
-        this.Index = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Url = 'Url' in params ? params.Url : null;
-        this.CallbackType = 'CallbackType' in params ? params.CallbackType : null;
-        this.Method = 'Method' in params ? params.Method : null;
-        this.Headers = 'Headers' in params ? params.Headers : null;
-        this.Body = 'Body' in params ? params.Body : null;
-        this.Index = 'Index' in params ? params.Index : null;
-
-    }
-}
-
-/**
- * CreateAsyncSearchTask response structure.
- * @class
- */
-class CreateAsyncSearchTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.ExportId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7724,6 +6568,7 @@ class CreateAsyncSearchTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ExportId = 'ExportId' in params ? params.ExportId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7738,7 +6583,7 @@ class DeleteAlarmNoticeRequest extends  AbstractModel {
         super();
 
         /**
-         * Alarm notification template
+         * Notification group ID
          * @type {string || null}
          */
         this.AlarmNoticeId = null;
@@ -7936,49 +6781,61 @@ class SearchLogRequest extends  AbstractModel {
         super();
 
         /**
-         * Log topic ID to be queried
+         * ID of the log topic to be searched
          * @type {string || null}
          */
         this.TopicId = null;
 
         /**
-         * Start time of the log to be queried, which is a Unix timestamp in milliseconds
+         * Start time of the log to be searched, which is a Unix timestamp in milliseconds
          * @type {number || null}
          */
         this.From = null;
 
         /**
-         * End time of the log to be queried, which is a Unix timestamp in milliseconds
+         * End time of the log to be searched, which is a Unix timestamp in milliseconds
          * @type {number || null}
          */
         this.To = null;
 
         /**
-         * Query statement. Maximum length: 4096
+         * Statement for search and analysis. Maximum length: 12 KB
+A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search rule]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
          * @type {string || null}
          */
         this.Query = null;
 
         /**
-         * Number of raw logs returned in a single query. Maximum value: 100. If the query statement (Query) contains an SQL query, you need to specify the number of SQL query results in `Query`. For more information, please visit https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1
+         * The number of raw logs returned by a single query. Maximum value: 1000. You need to use `Context` to continue to get logs.
+Notes:
+* This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+* To limit the number of analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * This parameter is used to load more logs. Pass through the last `Context` value returned to get more log content. Up to 10,000 raw logs can be obtained in total. This parameter expires in 1 hour.
+         * You can pass through the `Context` value (validity: 1 hour) returned by the last API to continue to get logs, which can get up to 10,000 raw logs.
+Notes:
+* This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+* To continue to get analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
          * @type {string || null}
          */
         this.Context = null;
 
         /**
-         * Order of the logs sorted by time returned by the log API. Valid values: `asc`: ascending; `desc`: descending. Default value: `desc`
+         * Time order of the logs returned. Valid values: `asc` (ascending); `desc`: (descending). Default value: `desc`
+Notes:
+* This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+* To sort the analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58978?from_cn_redirect=1" target="_blank">SQL ORDER BY Syntax</a>.
          * @type {string || null}
          */
         this.Sort = null;
 
         /**
-         * If the value is `true`, the new search method will be used, and the response parameters `AnalysisRecords` and `Columns` will be valid. If the value is `false`, the old search method will be used, and `AnalysisResults` and `ColNames` will be valid.
+         * If the value is `true`, the new response method will be used, and the output parameters `AnalysisRecords` and `Columns` will be valid.
+If the value is `false`, the old response method will be used, and the output parameters `AnalysisResults` and `ColNames` will be valid.
+The two response methods differ slightly in terms of encoding format. You are advised to use the new method (`true`).
          * @type {boolean || null}
          */
         this.UseNewAnalysis = null;
@@ -8282,28 +7139,28 @@ class CreateAlarmNoticeRequest extends  AbstractModel {
         super();
 
         /**
-         * Alarm template name
+         * Notification group name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Alarm template type. Valid values:
-<br><li> `Trigger`: alarm triggered
-<br><li> `Recovery`: alarm cleared
-<br><li> `All`: alarm triggered and alarm cleared
+         * Notification type. Valid values:
+<li> `Trigger`: alarm triggered
+<li> `Recovery`: alarm cleared
+<li> `All`: alarm triggered and alarm cleared
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Information of the recipient in alarm template
+         * Notification recipient
          * @type {Array.<NoticeReceiver> || null}
          */
         this.NoticeReceivers = null;
 
         /**
-         * Alarm template callback information
+         * API callback information (including WeCom)
          * @type {Array.<WebCallback> || null}
          */
         this.WebCallbacks = null;
@@ -8399,6 +7256,41 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Histogram details
+ * @class
+ */
+class HistogramInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of logs within the statistical period
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Unix timestamp rounded by `period`, in milliseconds
+         * @type {number || null}
+         */
+        this.BTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.BTime = 'BTime' in params ? params.BTime : null;
 
     }
 }
@@ -8697,6 +7589,13 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.MetaFields = null;
 
+        /**
+         * This parameter is required if `EnableTag` is `true`, and is used to specify whether the tag information is JSON tiled. Valid values: `true` (not tiled); `false` (tiled)
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {boolean || null}
+         */
+        this.TagJsonNotTiled = null;
+
     }
 
     /**
@@ -8708,29 +7607,24 @@ Note: This field may return `null`, indicating that no valid value was found.
         }
         this.EnableTag = 'EnableTag' in params ? params.EnableTag : null;
         this.MetaFields = 'MetaFields' in params ? params.MetaFields : null;
+        this.TagJsonNotTiled = 'TagJsonNotTiled' in params ? params.TagJsonNotTiled : null;
 
     }
 }
 
 /**
- * CreateExport response structure.
+ * DescribeMachines request structure.
  * @class
  */
-class CreateExportResponse extends  AbstractModel {
+class DescribeMachinesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log export ID.
+         * ID of the machine group to be queried
          * @type {string || null}
          */
-        this.ExportId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.GroupId = null;
 
     }
 
@@ -8741,8 +7635,7 @@ class CreateExportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ExportId = 'ExportId' in params ? params.ExportId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -8831,16 +7724,13 @@ module.exports = {
     AlarmInfo: AlarmInfo,
     LogInfo: LogInfo,
     DeleteAlarmNoticeResponse: DeleteAlarmNoticeResponse,
+    DescribeLogHistogramRequest: DescribeLogHistogramRequest,
     DescribeLogContextRequest: DescribeLogContextRequest,
     DeleteShipperRequest: DeleteShipperRequest,
-    ModifyTopicRequest: ModifyTopicRequest,
     DeleteLogsetResponse: DeleteLogsetResponse,
     DescribeShipperTasksResponse: DescribeShipperTasksResponse,
     CreateMachineGroupResponse: CreateMachineGroupResponse,
     DescribeConfigMachineGroupsRequest: DescribeConfigMachineGroupsRequest,
-    DescribeAsyncContextResultResponse: DescribeAsyncContextResultResponse,
-    UploadLogRequest: UploadLogRequest,
-    CreateAsyncContextTaskRequest: CreateAsyncContextTaskRequest,
     CreateLogsetRequest: CreateLogsetRequest,
     LogItem: LogItem,
     SearchLogResponse: SearchLogResponse,
@@ -8849,7 +7739,7 @@ module.exports = {
     ModifyAlarmResponse: ModifyAlarmResponse,
     DescribeShipperTasksRequest: DescribeShipperTasksRequest,
     DescribeAlarmsRequest: DescribeAlarmsRequest,
-    CreateAsyncContextTaskResponse: CreateAsyncContextTaskResponse,
+    MergePartitionRequest: MergePartitionRequest,
     DescribeShippersResponse: DescribeShippersResponse,
     ModifyShipperResponse: ModifyShipperResponse,
     RetryShipperTaskRequest: RetryShipperTaskRequest,
@@ -8858,13 +7748,10 @@ module.exports = {
     DescribeIndexRequest: DescribeIndexRequest,
     DescribeConfigsResponse: DescribeConfigsResponse,
     CreateLogsetResponse: CreateLogsetResponse,
-    DeleteAsyncContextTaskResponse: DeleteAsyncContextTaskResponse,
     DeleteMachineGroupResponse: DeleteMachineGroupResponse,
     Tag: Tag,
-    DescribeAsyncContextResultRequest: DescribeAsyncContextResultRequest,
-    DeleteAsyncSearchTaskResponse: DeleteAsyncSearchTaskResponse,
-    DescribeExportsRequest: DescribeExportsRequest,
-    CreateAsyncSearchTaskRequest: CreateAsyncSearchTaskRequest,
+    DescribeMachineGroupsRequest: DescribeMachineGroupsRequest,
+    ExtractRuleInfo: ExtractRuleInfo,
     TopicInfo: TopicInfo,
     DescribeConsumerRequest: DescribeConsumerRequest,
     ShipperTaskInfo: ShipperTaskInfo,
@@ -8892,52 +7779,43 @@ module.exports = {
     RetryShipperTaskResponse: RetryShipperTaskResponse,
     SplitPartitionRequest: SplitPartitionRequest,
     MachineGroupInfo: MachineGroupInfo,
-    DescribeMachineGroupsRequest: DescribeMachineGroupsRequest,
-    DescribeAsyncContextTasksResponse: DescribeAsyncContextTasksResponse,
+    DescribeLogHistogramResponse: DescribeLogHistogramResponse,
+    RuleTagInfo: RuleTagInfo,
     CreateIndexRequest: CreateIndexRequest,
     DeleteConsumerResponse: DeleteConsumerResponse,
     DescribeTopicsRequest: DescribeTopicsRequest,
     GetAlarmLogResponse: GetAlarmLogResponse,
-    DescribeAsyncSearchTasksRequest: DescribeAsyncSearchTasksRequest,
     CreateTopicRequest: CreateTopicRequest,
-    DescribeAsyncSearchResultResponse: DescribeAsyncSearchResultResponse,
-    DescribeAsyncContextTasksRequest: DescribeAsyncContextTasksRequest,
+    DescribeExportsRequest: DescribeExportsRequest,
     AlarmTarget: AlarmTarget,
     DeleteConfigResponse: DeleteConfigResponse,
     ModifyIndexResponse: ModifyIndexResponse,
     DeleteConsumerRequest: DeleteConsumerRequest,
     DeleteIndexRequest: DeleteIndexRequest,
     DescribeConsumerResponse: DescribeConsumerResponse,
-    ExtractRuleInfo: ExtractRuleInfo,
-    AsyncContextTask: AsyncContextTask,
+    UploadLogRequest: UploadLogRequest,
     ModifyConsumerResponse: ModifyConsumerResponse,
     DescribeConfigsRequest: DescribeConfigsRequest,
     DeleteConfigRequest: DeleteConfigRequest,
     AnalysisDimensional: AnalysisDimensional,
     LogsetInfo: LogsetInfo,
-    RuleTagInfo: RuleTagInfo,
     CreateExportRequest: CreateExportRequest,
     DescribeAlarmNoticesResponse: DescribeAlarmNoticesResponse,
     ModifyConfigRequest: ModifyConfigRequest,
     DescribeLogsetsResponse: DescribeLogsetsResponse,
     JsonInfo: JsonInfo,
-    CreateShipperRequest: CreateShipperRequest,
     CreateTopicResponse: CreateTopicResponse,
     DeleteAlarmResponse: DeleteAlarmResponse,
-    DescribeMachinesResponse: DescribeMachinesResponse,
+    WebCallback: WebCallback,
     DescribeAlarmsResponse: DescribeAlarmsResponse,
     CreateAlarmNoticeResponse: CreateAlarmNoticeResponse,
-    ModifyTopicResponse: ModifyTopicResponse,
     CreateConfigRequest: CreateConfigRequest,
-    CreateShipperResponse: CreateShipperResponse,
     DeleteIndexResponse: DeleteIndexResponse,
-    DeleteAsyncContextTaskRequest: DeleteAsyncContextTaskRequest,
     ModifyIndexRequest: ModifyIndexRequest,
     Column: Column,
     CompressInfo: CompressInfo,
     ValueInfo: ValueInfo,
     GetAlarmLogRequest: GetAlarmLogRequest,
-    DescribeMachinesRequest: DescribeMachinesRequest,
     DeleteShipperResponse: DeleteShipperResponse,
     ExportInfo: ExportInfo,
     ConfigInfo: ConfigInfo,
@@ -8946,12 +7824,11 @@ module.exports = {
     LogContextInfo: LogContextInfo,
     ModifyShipperRequest: ModifyShipperRequest,
     DescribeLogContextResponse: DescribeLogContextResponse,
-    DescribeAsyncSearchResultRequest: DescribeAsyncSearchResultRequest,
     CreateConsumerRequest: CreateConsumerRequest,
     AlarmNotice: AlarmNotice,
     ModifyConfigResponse: ModifyConfigResponse,
     ModifyAlarmNoticeResponse: ModifyAlarmNoticeResponse,
-    DescribeAsyncSearchTasksResponse: DescribeAsyncSearchTasksResponse,
+    DescribeMachinesResponse: DescribeMachinesResponse,
     ContentInfo: ContentInfo,
     ApplyConfigToMachineGroupResponse: ApplyConfigToMachineGroupResponse,
     DeleteAlarmRequest: DeleteAlarmRequest,
@@ -8960,15 +7837,11 @@ module.exports = {
     DeleteConfigFromMachineGroupRequest: DeleteConfigFromMachineGroupRequest,
     ShipperInfo: ShipperInfo,
     KeyValueInfo: KeyValueInfo,
-    DeleteAsyncSearchTaskRequest: DeleteAsyncSearchTaskRequest,
     ModifyMachineGroupRequest: ModifyMachineGroupRequest,
-    MergePartitionRequest: MergePartitionRequest,
     DescribeAlarmNoticesRequest: DescribeAlarmNoticesRequest,
     NoticeReceiver: NoticeReceiver,
-    AsyncSearchTask: AsyncSearchTask,
     Ckafka: Ckafka,
-    WebCallback: WebCallback,
-    CreateAsyncSearchTaskResponse: CreateAsyncSearchTaskResponse,
+    CreateExportResponse: CreateExportResponse,
     DeleteAlarmNoticeRequest: DeleteAlarmNoticeRequest,
     DeleteLogsetRequest: DeleteLogsetRequest,
     MachineInfo: MachineInfo,
@@ -8982,6 +7855,7 @@ module.exports = {
     CsvInfo: CsvInfo,
     CreateAlarmNoticeRequest: CreateAlarmNoticeRequest,
     DescribeIndexResponse: DescribeIndexResponse,
+    HistogramInfo: HistogramInfo,
     DescribeMachineGroupConfigsRequest: DescribeMachineGroupConfigsRequest,
     ModifyLogsetRequest: ModifyLogsetRequest,
     DescribeMachineGroupsResponse: DescribeMachineGroupsResponse,
@@ -8989,7 +7863,7 @@ module.exports = {
     DeleteTopicResponse: DeleteTopicResponse,
     Filter: Filter,
     ConsumerContent: ConsumerContent,
-    CreateExportResponse: CreateExportResponse,
+    DescribeMachinesRequest: DescribeMachinesRequest,
     KeyRegexInfo: KeyRegexInfo,
     MergePartitionResponse: MergePartitionResponse,
 

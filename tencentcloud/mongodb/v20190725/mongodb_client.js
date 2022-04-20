@@ -23,6 +23,7 @@ const DescribeSecurityGroupResponse = models.DescribeSecurityGroupResponse;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const BackupDownloadTaskStatus = models.BackupDownloadTaskStatus;
+const ModifyDBInstanceNetworkAddressResponse = models.ModifyDBInstanceNetworkAddressResponse;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
 const DBInstancePrice = models.DBInstancePrice;
 const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
@@ -51,6 +52,7 @@ const DescribeSpecInfoResponse = models.DescribeSpecInfoResponse;
 const InquirePriceRenewDBInstancesResponse = models.InquirePriceRenewDBInstancesResponse;
 const ResetDBInstancePasswordRequest = models.ResetDBInstancePasswordRequest;
 const TagInfo = models.TagInfo;
+const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
 const InstanceIntegerParam = models.InstanceIntegerParam;
@@ -71,9 +73,9 @@ const InstanceTextParam = models.InstanceTextParam;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
 const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
 const DescribeBackupAccessRequest = models.DescribeBackupAccessRequest;
-const RenameInstanceRequest = models.RenameInstanceRequest;
+const ModifyNetworkAddress = models.ModifyNetworkAddress;
 const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
-const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
+const RenameInstanceRequest = models.RenameInstanceRequest;
 const InstanceEnumParam = models.InstanceEnumParam;
 const DescribeBackupDownloadTaskResponse = models.DescribeBackupDownloadTaskResponse;
 const RenameInstanceResponse = models.RenameInstanceResponse;
@@ -86,6 +88,7 @@ const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const InstanceDetail = models.InstanceDetail;
 const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
 const SlowLogPattern = models.SlowLogPattern;
+const ModifyDBInstanceNetworkAddressRequest = models.ModifyDBInstanceNetworkAddressRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
@@ -228,6 +231,17 @@ This API is used to get the permission to download a backup file. The detailed b
     DescribeAsyncRequestInfo(req, cb) {
         let resp = new DescribeAsyncRequestInfoResponse();
         this.request("DescribeAsyncRequestInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the network settings of a TencentDB instance, such as switching its network type from classic network to VPC or between VPCs.
+     * @param {ModifyDBInstanceNetworkAddressRequest} req
+     * @param {function(string, ModifyDBInstanceNetworkAddressResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceNetworkAddress(req, cb) {
+        let resp = new ModifyDBInstanceNetworkAddressResponse();
+        this.request("ModifyDBInstanceNetworkAddress", req, resp, cb);
     }
 
     /**

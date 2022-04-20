@@ -17,6 +17,51 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * UnTagResources response structure.
+ * @class
+ */
+class UnTagResourcesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of failed resources.
+When tag unbinding succeeds, the returned `FailedResources` will be empty.
+When tag unbinding partially or completely fails, the returned `FailedResources` will display the details of failed resources.
+         * @type {Array.<FailedResource> || null}
+         */
+        this.FailedResources = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FailedResources) {
+            this.FailedResources = new Array();
+            for (let z in params.FailedResources) {
+                let obj = new FailedResource();
+                obj.deserialize(params.FailedResources[z]);
+                this.FailedResources.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * A tag key-value pair and if deletion is allowed.
  * @class
  */
@@ -67,7 +112,7 @@ class DetachResourcesTagRequest extends  AbstractModel {
         super();
 
         /**
-         * Resource service name
+         * Resource service name (the third segment in the six-segment resource description)
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -85,13 +130,13 @@ class DetachResourcesTagRequest extends  AbstractModel {
         this.TagKey = null;
 
         /**
-         * Resource region. This field is not required for resources that do not have the region attribute
+         * Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
          * @type {string || null}
          */
         this.ResourceRegion = null;
 
         /**
-         * Resource prefix, which is not required for COS buckets
+         * Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
          * @type {string || null}
          */
         this.ResourcePrefix = null;
@@ -110,6 +155,56 @@ class DetachResourcesTagRequest extends  AbstractModel {
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
         this.ResourcePrefix = 'ResourcePrefix' in params ? params.ResourcePrefix : null;
+
+    }
+}
+
+/**
+ * GetTagValues response structure.
+ * @class
+ */
+class GetTagValuesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Token value obtained for the next page
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * Tag list.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -138,6 +233,113 @@ class AttachResourcesTagResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetTagKeys response structure.
+ * @class
+ */
+class GetTagKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Token value obtained for the next page
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * Tag key information.
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetResources request structure.
+ * @class
+ */
+class GetResourcesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource.
+For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+If this parameter is passed in, the list of all matching resources will be returned, and the specified `MaxResults` will become invalid.
+Value range of N: 0–9
+         * @type {Array.<string> || null}
+         */
+        this.ResourceList = null;
+
+        /**
+         * Tag key and value.
+If multiple tags are specified, resources bound to all such tags will be queried.
+Value range of N: 0–5
+There can be up to 10 `TagValues` in each `TagFilters`.
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
+        /**
+         * The token value of the next page obtained from the response of the previous page.
+Leave it empty for the first request.
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * Number of data entries to return per page (up to 200).
+Default value: 50.
+         * @type {number || null}
+         */
+        this.MaxResults = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceList = 'ResourceList' in params ? params.ResourceList : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
 
     }
 }
@@ -479,64 +681,6 @@ class DescribeTagValuesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyResourceTags request structure.
- * @class
- */
-class ModifyResourceTagsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * [Six-segment resource description](https://cloud.tencent.com/document/product/598/10606)
-         * @type {string || null}
-         */
-        this.Resource = null;
-
-        /**
-         * The tags to be added or modified. If the resource described by `Resource` is not associated with the input tag keys, an association will be added. If the tag keys are already associated, the values corresponding to the associated tag keys will be modified to the input values. This API must contain either `ReplaceTags` or `DeleteTag`. And these two parameters cannot include the same tag keys.
-         * @type {Array.<Tag> || null}
-         */
-        this.ReplaceTags = null;
-
-        /**
-         * The tags to be unassociated. This API must contain either `ReplaceTags` or `DeleteTag`. And these two parameters cannot include the same tag keys.
-         * @type {Array.<TagKeyObject> || null}
-         */
-        this.DeleteTags = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Resource = 'Resource' in params ? params.Resource : null;
-
-        if (params.ReplaceTags) {
-            this.ReplaceTags = new Array();
-            for (let z in params.ReplaceTags) {
-                let obj = new Tag();
-                obj.deserialize(params.ReplaceTags[z]);
-                this.ReplaceTags.push(obj);
-            }
-        }
-
-        if (params.DeleteTags) {
-            this.DeleteTags = new Array();
-            for (let z in params.DeleteTags) {
-                let obj = new TagKeyObject();
-                obj.deserialize(params.DeleteTags[z]);
-                this.DeleteTags.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * DescribeResourcesByTagsUnion request structure.
  * @class
  */
@@ -622,6 +766,62 @@ class DescribeResourcesByTagsUnionRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteTags response structure.
+ * @class
+ */
+class DeleteTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyResourcesTagValue response structure.
+ * @class
+ */
+class ModifyResourcesTagValueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTags response structure.
  * @class
  */
@@ -686,43 +886,19 @@ class DescribeTagsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeResourcesByTags response structure.
+ * DeleteTags request structure.
  * @class
  */
-class DescribeResourcesByTagsResponse extends  AbstractModel {
+class DeleteTagsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of results.
-         * @type {number || null}
+         * Tag list.
+Value range of N: 0–9
+         * @type {Array.<Tag> || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * Data offset.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of entries per page.
-Note: This field may return null, indicating that no valid value is found.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Resource tag.
-         * @type {Array.<ResourceTag> || null}
-         */
-        this.Rows = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Tags = null;
 
     }
 
@@ -733,19 +909,15 @@ Note: This field may return null, indicating that no valid value is found.
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
 
-        if (params.Rows) {
-            this.Rows = new Array();
-            for (let z in params.Rows) {
-                let obj = new ResourceTag();
-                obj.deserialize(params.Rows[z]);
-                this.Rows.push(obj);
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -795,6 +967,90 @@ class DescribeTagKeysRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ShowProject = 'ShowProject' in params ? params.ShowProject : null;
+
+    }
+}
+
+/**
+ * GetTags request structure.
+ * @class
+ */
+class GetTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The token value of the next page obtained from the response of the previous page.
+Leave it empty for the first request.
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * Number of data entries to return per page (up to 1,000).
+Default value: 50.
+         * @type {number || null}
+         */
+        this.MaxResults = null;
+
+        /**
+         * Tag key.
+All tags corresponding to the list of tag keys.
+Maximum length: 20
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+
+    }
+}
+
+/**
+ * UnTagResources request structure.
+ * @class
+ */
+class UnTagResourcesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
+For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+Value range of N: 0–9
+         * @type {Array.<string> || null}
+         */
+        this.ResourceList = null;
+
+        /**
+         * Tag key.
+Value range: 0–9
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceList = 'ResourceList' in params ? params.ResourceList : null;
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
 
     }
 }
@@ -859,6 +1115,64 @@ class DescribeTagsSeqResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyResourceTags request structure.
+ * @class
+ */
+class ModifyResourceTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * The tags to be added or modified. If the resource described by `Resource` is not associated with the input tag keys, an association will be added. If the tag keys are already associated, the values corresponding to the associated tag keys will be modified to the input values. This API must contain either `ReplaceTags` or `DeleteTag`, and these two parameters cannot include the same tag keys. This parameter can be omitted, but it cannot be an empty array.
+         * @type {Array.<Tag> || null}
+         */
+        this.ReplaceTags = null;
+
+        /**
+         * The tags to be disassociated. This API must contain either `ReplaceTags` or `DeleteTag`, and these two parameters cannot include the same tag keys. This parameter can be omitted, but it cannot be an empty array.
+         * @type {Array.<TagKeyObject> || null}
+         */
+        this.DeleteTags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+
+        if (params.ReplaceTags) {
+            this.ReplaceTags = new Array();
+            for (let z in params.ReplaceTags) {
+                let obj = new Tag();
+                obj.deserialize(params.ReplaceTags[z]);
+                this.ReplaceTags.push(obj);
+            }
+        }
+
+        if (params.DeleteTags) {
+            this.DeleteTags = new Array();
+            for (let z in params.DeleteTags) {
+                let obj = new TagKeyObject();
+                obj.deserialize(params.DeleteTags[z]);
+                this.DeleteTags.push(obj);
+            }
+        }
 
     }
 }
@@ -949,7 +1263,7 @@ class DescribeResourceTagsByResourceIdsRequest extends  AbstractModel {
         this.ResourcePrefix = null;
 
         /**
-         * Unique resource ID.
+         * Array of resource IDs (up to 50)
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
@@ -1120,6 +1434,56 @@ class DescribeResourceTagsByResourceIdsResponse extends  AbstractModel {
 }
 
 /**
+ * GetTags response structure.
+ * @class
+ */
+class GetTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Token value obtained for the next page
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * Tag list.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyResourcesTagValue request structure.
  * @class
  */
@@ -1128,7 +1492,7 @@ class ModifyResourcesTagValueRequest extends  AbstractModel {
         super();
 
         /**
-         * Resource service name
+         * Resource service name (the third segment in the six-segment resource description)
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -1152,13 +1516,13 @@ class ModifyResourcesTagValueRequest extends  AbstractModel {
         this.TagValue = null;
 
         /**
-         * Resource region. This field is not required for resources that do not have the region attribute
+         * Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
          * @type {string || null}
          */
         this.ResourceRegion = null;
 
         /**
-         * Resource prefix, which is not required for COS buckets
+         * Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
          * @type {string || null}
          */
         this.ResourcePrefix = null;
@@ -1247,6 +1611,43 @@ Note: this field may return null, indicating that no valid values found.
 }
 
 /**
+ * GetTagKeys request structure.
+ * @class
+ */
+class GetTagKeysRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The token value of the next page obtained from the response of the previous page.
+Leave it empty for the first request.
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * Number of data entries to return per page (up to 1,000).
+Default value: 50.
+         * @type {number || null}
+         */
+        this.MaxResults = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+
+    }
+}
+
+/**
  * AddResourceTag response structure.
  * @class
  */
@@ -1275,12 +1676,37 @@ class AddResourceTagResponse extends  AbstractModel {
 }
 
 /**
- * ModifyResourcesTagValue response structure.
+ * DescribeResourcesByTags response structure.
  * @class
  */
-class ModifyResourcesTagValueResponse extends  AbstractModel {
+class DescribeResourcesByTagsResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Total number of results.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Data offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of entries per page.
+Note: This field may return null, indicating that no valid value is found.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Resource tag.
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.Rows = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1296,6 +1722,18 @@ class ModifyResourcesTagValueResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Rows) {
+            this.Rows = new Array();
+            for (let z in params.Rows) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.Rows[z]);
+                this.Rows.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1323,7 +1761,7 @@ class AddResourceTagRequest extends  AbstractModel {
         this.TagValue = null;
 
         /**
-         * [Six-segment resource description](https://cloud.tencent.com/document/product/598/10606)
+         * [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
          * @type {string || null}
          */
         this.Resource = null;
@@ -1720,7 +2158,7 @@ class AttachResourcesTagRequest extends  AbstractModel {
         super();
 
         /**
-         * Resource service name
+         * Resource service name (the third segment in the six-segment resource description)
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -1744,13 +2182,13 @@ class AttachResourcesTagRequest extends  AbstractModel {
         this.TagValue = null;
 
         /**
-         * Resource region. This field is not required for resources that do not have the region attribute
+         * Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
          * @type {string || null}
          */
         this.ResourceRegion = null;
 
         /**
-         * Resource prefix, which is not required for COS buckets
+         * Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
          * @type {string || null}
          */
         this.ResourcePrefix = null;
@@ -1803,6 +2241,93 @@ class CreateTagResponse extends  AbstractModel {
 }
 
 /**
+ * Information of failed resources.
+This is returned when resource tag binding or unbinding fails.
+ * @class
+ */
+class FailedResource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Six-segment descriptions of failed resources
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * Error code
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * Error message
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * Resources and their associated tags (key-value pairs).
+ * @class
+ */
+class ResourceTagMapping extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Six-segment resource description. Tencent Cloud uses a six-segment value to describe a resource.
+For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * List of tags associated with the resource
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DetachResourcesTag response structure.
  * @class
  */
@@ -1824,6 +2349,56 @@ class DetachResourcesTagResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetResources response structure.
+ * @class
+ */
+class GetResourcesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Token value obtained for the next page
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * List of resources and their associated tags (key-value pairs)
+         * @type {Array.<ResourceTagMapping> || null}
+         */
+        this.ResourceTagMappingList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+
+        if (params.ResourceTagMappingList) {
+            this.ResourceTagMappingList = new Array();
+            for (let z in params.ResourceTagMappingList) {
+                let obj = new ResourceTagMapping();
+                obj.deserialize(params.ResourceTagMappingList[z]);
+                this.ResourceTagMappingList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2037,7 +2612,7 @@ class UpdateResourceTagValueRequest extends  AbstractModel {
         this.TagValue = null;
 
         /**
-         * [Six-segment resource description](https://cloud.tencent.com/document/product/598/10606)
+         * [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
          * @type {string || null}
          */
         this.Resource = null;
@@ -2054,6 +2629,116 @@ class UpdateResourceTagValueRequest extends  AbstractModel {
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
         this.Resource = 'Resource' in params ? params.Resource : null;
+
+    }
+}
+
+/**
+ * TagResources response structure.
+ * @class
+ */
+class TagResourcesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of failed resources.
+When tag creating and binding succeeds, the returned `FailedResources` will be empty.
+When tag creating and binding partially or completely fails, the returned `FailedResources` will display the details of failed resources.
+         * @type {Array.<FailedResource> || null}
+         */
+        this.FailedResources = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FailedResources) {
+            this.FailedResources = new Array();
+            for (let z in params.FailedResources) {
+                let obj = new FailedResource();
+                obj.deserialize(params.FailedResources[z]);
+                this.FailedResources.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTags request structure.
+ * @class
+ */
+class CreateTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag list.
+Value range of N: 0–9
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateTags response structure.
+ * @class
+ */
+class CreateTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2144,6 +2829,55 @@ class DescribeResourcesByTagsRequest extends  AbstractModel {
 }
 
 /**
+ * TagResources request structure.
+ * @class
+ */
+class TagResourcesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
+For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+Value range of N: 0–9
+         * @type {Array.<string> || null}
+         */
+        this.ResourceList = null;
+
+        /**
+         * Tag key and value.
+If multiple tags are specified, all such tags will be created and bound to the specified resources.
+For each resource, each tag key can have only one value. If you try to add an existing tag key, the corresponding tag value will be updated to the new value.
+Non-existent tags will be automatically created.
+Value range of N: 0–9
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceList = 'ResourceList' in params ? params.ResourceList : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteResourceTag request structure.
  * @class
  */
@@ -2158,7 +2892,7 @@ class DeleteResourceTagRequest extends  AbstractModel {
         this.TagKey = null;
 
         /**
-         * [Six-segment resource description](https://cloud.tencent.com/document/product/598/10606)
+         * [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
          * @type {string || null}
          */
         this.Resource = null;
@@ -2267,7 +3001,7 @@ class DescribeResourceTagsRequest extends  AbstractModel {
         this.ResourcePrefix = null;
 
         /**
-         * Unique resource ID
+         * Unique resource ID. Queries with `ResourceId` only may be slow or fail to return results. We recommend you also enter `ServiceType`, `ResourcePrefix`, and `ResourceRegion` (which can be ignored for resources that don't have the region attribute) when entering `ResourceId`.
          * @type {string || null}
          */
         this.ResourceId = null;
@@ -2285,7 +3019,7 @@ class DescribeResourceTagsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Whether it is a COS resource ID
+         * Whether it is a COS resource (0 or 1). This parameter is required when the entered `ResourceId` is a COS resource.
          * @type {number || null}
          */
         this.CosResourceId = null;
@@ -2375,6 +3109,52 @@ class DescribeResourceTagsByResourceIdsSeqRequest extends  AbstractModel {
 }
 
 /**
+ * GetTagValues request structure.
+ * @class
+ */
+class GetTagValuesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+All tag values corresponding to the list of tag keys.
+Maximum length: 20
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
+        /**
+         * The token value of the next page obtained from the response of the previous page.
+Leave it empty for the first request.
+         * @type {string || null}
+         */
+        this.PaginationToken = null;
+
+        /**
+         * Number of data entries to return per page (up to 1,000).
+Default value: 50.
+         * @type {number || null}
+         */
+        this.MaxResults = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.PaginationToken = 'PaginationToken' in params ? params.PaginationToken : null;
+        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+
+    }
+}
+
+/**
  * Resource tag.
  * @class
  */
@@ -2444,9 +3224,13 @@ Note: This field may return null, indicating that no valid value is found.
 }
 
 module.exports = {
+    UnTagResourcesResponse: UnTagResourcesResponse,
     TagWithDelete: TagWithDelete,
     DetachResourcesTagRequest: DetachResourcesTagRequest,
+    GetTagValuesResponse: GetTagValuesResponse,
     AttachResourcesTagResponse: AttachResourcesTagResponse,
+    GetTagKeysResponse: GetTagKeysResponse,
+    GetResourcesRequest: GetResourcesRequest,
     DeleteTagRequest: DeleteTagRequest,
     DeleteResourceTagResponse: DeleteResourceTagResponse,
     DescribeResourceTagsByTagKeysRequest: DescribeResourceTagsByTagKeysRequest,
@@ -2454,20 +3238,26 @@ module.exports = {
     DescribeTagsRequest: DescribeTagsRequest,
     DescribeTagKeysResponse: DescribeTagKeysResponse,
     DescribeTagValuesRequest: DescribeTagValuesRequest,
-    ModifyResourceTagsRequest: ModifyResourceTagsRequest,
     DescribeResourcesByTagsUnionRequest: DescribeResourcesByTagsUnionRequest,
+    DeleteTagsResponse: DeleteTagsResponse,
+    ModifyResourcesTagValueResponse: ModifyResourcesTagValueResponse,
     DescribeTagsResponse: DescribeTagsResponse,
-    DescribeResourcesByTagsResponse: DescribeResourcesByTagsResponse,
+    DeleteTagsRequest: DeleteTagsRequest,
     DescribeTagKeysRequest: DescribeTagKeysRequest,
+    GetTagsRequest: GetTagsRequest,
+    UnTagResourcesRequest: UnTagResourcesRequest,
     DescribeTagsSeqResponse: DescribeTagsSeqResponse,
+    ModifyResourceTagsRequest: ModifyResourceTagsRequest,
     DescribeResourceTagsResponse: DescribeResourceTagsResponse,
     DescribeResourceTagsByResourceIdsRequest: DescribeResourceTagsByResourceIdsRequest,
     DescribeResourcesByTagsUnionResponse: DescribeResourcesByTagsUnionResponse,
     DescribeResourceTagsByResourceIdsResponse: DescribeResourceTagsByResourceIdsResponse,
+    GetTagsResponse: GetTagsResponse,
     ModifyResourcesTagValueRequest: ModifyResourcesTagValueRequest,
     TagResource: TagResource,
+    GetTagKeysRequest: GetTagKeysRequest,
     AddResourceTagResponse: AddResourceTagResponse,
-    ModifyResourcesTagValueResponse: ModifyResourcesTagValueResponse,
+    DescribeResourcesByTagsResponse: DescribeResourcesByTagsResponse,
     AddResourceTagRequest: AddResourceTagRequest,
     DescribeTagValuesSeqResponse: DescribeTagValuesSeqResponse,
     CreateTagRequest: CreateTagRequest,
@@ -2478,18 +3268,26 @@ module.exports = {
     Tag: Tag,
     AttachResourcesTagRequest: AttachResourcesTagRequest,
     CreateTagResponse: CreateTagResponse,
+    FailedResource: FailedResource,
+    ResourceTagMapping: ResourceTagMapping,
     DetachResourcesTagResponse: DetachResourcesTagResponse,
+    GetResourcesResponse: GetResourcesResponse,
     DescribeResourceTagsByResourceIdsSeqResponse: DescribeResourceTagsByResourceIdsSeqResponse,
     DeleteTagResponse: DeleteTagResponse,
     ResourceIdTag: ResourceIdTag,
     DescribeTagValuesSeqRequest: DescribeTagValuesSeqRequest,
     UpdateResourceTagValueRequest: UpdateResourceTagValueRequest,
+    TagResourcesResponse: TagResourcesResponse,
+    CreateTagsRequest: CreateTagsRequest,
+    CreateTagsResponse: CreateTagsResponse,
     DescribeResourcesByTagsRequest: DescribeResourcesByTagsRequest,
+    TagResourcesRequest: TagResourcesRequest,
     DeleteResourceTagRequest: DeleteResourceTagRequest,
     UpdateResourceTagValueResponse: UpdateResourceTagValueResponse,
     TagKeyObject: TagKeyObject,
     DescribeResourceTagsRequest: DescribeResourceTagsRequest,
     DescribeResourceTagsByResourceIdsSeqRequest: DescribeResourceTagsByResourceIdsSeqRequest,
+    GetTagValuesRequest: GetTagValuesRequest,
     ResourceTag: ResourceTag,
 
 }

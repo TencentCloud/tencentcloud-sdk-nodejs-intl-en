@@ -432,6 +432,34 @@ class BackupDownloadTaskStatus extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceNetworkAddress response structure.
+ * @class
+ */
+class ModifyDBInstanceNetworkAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateBackupDBInstance response structure.
  * @class
  */
@@ -2059,6 +2087,34 @@ class TagInfo extends  AbstractModel {
 }
 
 /**
+ * RenewDBInstances response structure.
+ * @class
+ */
+class RenewDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBInstances response structure.
  * @class
  */
@@ -3204,24 +3260,24 @@ class DescribeBackupAccessRequest extends  AbstractModel {
 }
 
 /**
- * RenameInstance request structure.
+ * Database IP to be modified
  * @class
  */
-class RenameInstanceRequest extends  AbstractModel {
+class ModifyNetworkAddress extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+         * New IP
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.NewIPAddress = null;
 
         /**
-         * Custom name of the instance, which can contain up to 60 letters, digits, or symbols (_-)
+         * Old IP
          * @type {string || null}
          */
-        this.NewName = null;
+        this.OldIpAddress = null;
 
     }
 
@@ -3232,8 +3288,8 @@ class RenameInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.NewName = 'NewName' in params ? params.NewName : null;
+        this.NewIPAddress = 'NewIPAddress' in params ? params.NewIPAddress : null;
+        this.OldIpAddress = 'OldIpAddress' in params ? params.OldIpAddress : null;
 
     }
 }
@@ -3267,18 +3323,24 @@ class DescribeSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * RenewDBInstances response structure.
+ * RenameInstance request structure.
  * @class
  */
-class RenewDBInstancesResponse extends  AbstractModel {
+class RenameInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Custom name of the instance, which can contain up to 60 letters, digits, or symbols (_-)
+         * @type {string || null}
+         */
+        this.NewName = null;
 
     }
 
@@ -3289,7 +3351,8 @@ class RenewDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NewName = 'NewName' in params ? params.NewName : null;
 
     }
 }
@@ -4169,6 +4232,70 @@ class SlowLogPattern extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceNetworkAddress request structure.
+ * @class
+ */
+class ModifyDBInstanceNetworkAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Old IP retention period in minutes. The old IP will be released after the specified time, and both the old and new IPs can be accessed before the release. The value `0` indicates that the old IP will be reclaimed immediately.
+         * @type {number || null}
+         */
+        this.OldIpExpiredTime = null;
+
+        /**
+         * ID of the VPC to which the new IP belongs after the switch. When it is classic network, this field will be empty.
+         * @type {string || null}
+         */
+        this.NewUniqVpcId = null;
+
+        /**
+         * ID of the subnet to which the new IP belongs after the switch. When it is classic network, this field will be empty.
+         * @type {string || null}
+         */
+        this.NewUniqSubnetId = null;
+
+        /**
+         * IP information to be modified
+         * @type {Array.<ModifyNetworkAddress> || null}
+         */
+        this.NetworkAddresses = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OldIpExpiredTime = 'OldIpExpiredTime' in params ? params.OldIpExpiredTime : null;
+        this.NewUniqVpcId = 'NewUniqVpcId' in params ? params.NewUniqVpcId : null;
+        this.NewUniqSubnetId = 'NewUniqSubnetId' in params ? params.NewUniqSubnetId : null;
+
+        if (params.NetworkAddresses) {
+            this.NetworkAddresses = new Array();
+            for (let z in params.NetworkAddresses) {
+                let obj = new ModifyNetworkAddress();
+                obj.deserialize(params.NetworkAddresses[z]);
+                this.NetworkAddresses.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateDBInstanceHour response structure.
  * @class
  */
@@ -4487,6 +4614,7 @@ module.exports = {
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
     BackupDownloadTaskStatus: BackupDownloadTaskStatus,
+    ModifyDBInstanceNetworkAddressResponse: ModifyDBInstanceNetworkAddressResponse,
     CreateBackupDBInstanceResponse: CreateBackupDBInstanceResponse,
     DBInstancePrice: DBInstancePrice,
     DescribeBackupAccessResponse: DescribeBackupAccessResponse,
@@ -4515,6 +4643,7 @@ module.exports = {
     InquirePriceRenewDBInstancesResponse: InquirePriceRenewDBInstancesResponse,
     ResetDBInstancePasswordRequest: ResetDBInstancePasswordRequest,
     TagInfo: TagInfo,
+    RenewDBInstancesResponse: RenewDBInstancesResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     OfflineIsolatedDBInstanceRequest: OfflineIsolatedDBInstanceRequest,
     InstanceIntegerParam: InstanceIntegerParam,
@@ -4535,9 +4664,9 @@ module.exports = {
     OfflineIsolatedDBInstanceResponse: OfflineIsolatedDBInstanceResponse,
     DescribeBackupDownloadTaskRequest: DescribeBackupDownloadTaskRequest,
     DescribeBackupAccessRequest: DescribeBackupAccessRequest,
-    RenameInstanceRequest: RenameInstanceRequest,
+    ModifyNetworkAddress: ModifyNetworkAddress,
     DescribeSecurityGroupRequest: DescribeSecurityGroupRequest,
-    RenewDBInstancesResponse: RenewDBInstancesResponse,
+    RenameInstanceRequest: RenameInstanceRequest,
     InstanceEnumParam: InstanceEnumParam,
     DescribeBackupDownloadTaskResponse: DescribeBackupDownloadTaskResponse,
     RenameInstanceResponse: RenameInstanceResponse,
@@ -4550,6 +4679,7 @@ module.exports = {
     InstanceDetail: InstanceDetail,
     ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
     SlowLogPattern: SlowLogPattern,
+    ModifyDBInstanceNetworkAddressRequest: ModifyDBInstanceNetworkAddressRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     CreateBackupDBInstanceRequest: CreateBackupDBInstanceRequest,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,

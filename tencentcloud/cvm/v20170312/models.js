@@ -17,41 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * Parameters related to the prepaid billing method, including the subscription period, the auto renewal logic, etc.
- * @class
- */
-class ChargePrepaid extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Purchased usage period, in month. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * Auto renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>Default value: NOTIFY_AND_AUTO_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
-         * @type {string || null}
-         */
-        this.RenewFlag = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Period = 'Period' in params ? params.Period : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
-
-    }
-}
-
-/**
  * Describes local disk specifications.
  * @class
  */
@@ -185,7 +150,7 @@ class ModifyInstancesProjectRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Project ID. You can create a project by using the [AddProject](https://intl.cloud.tencent.com/doc/api/403/4398?from_cn_redirect=1) API and obtain its ID from the response parameter `projectId` of the [`DescribeProject`](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. Subsequently, the project ID can be used to filter results when you query instances by calling the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API.
+         * Project ID. You can use the API `AddProject` to create projects, and obtain the `projectId` field in the response of the `DescribeProject` API. When using the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API to query instances later, you can filter the results by the project ID.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -1071,111 +1036,6 @@ class ResetInstanceRequest extends  AbstractModel {
 }
 
 /**
- * Instance launch template. This parameter enables you to create an instance using the preset parameters in the template.
- * @class
- */
-class LaunchTemplate extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance launch template ID. This parameter enables you to create an instance using the preset parameters in the template.
-         * @type {string || null}
-         */
-        this.LaunchTemplateId = null;
-
-        /**
-         * Instance launch template version number. If specified, this parameter will be used to create a new instance launch template.
-         * @type {number || null}
-         */
-        this.LaunchTemplateVersion = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LaunchTemplateId = 'LaunchTemplateId' in params ? params.LaunchTemplateId : null;
-        this.LaunchTemplateVersion = 'LaunchTemplateVersion' in params ? params.LaunchTemplateVersion : null;
-
-    }
-}
-
-/**
- * Describes the configurations of an instance model.
- * @class
- */
-class InstanceTypeConfig extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Availability zone.
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Instance model.
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * Instance model family.
-         * @type {string || null}
-         */
-        this.InstanceFamily = null;
-
-        /**
-         * Number of GPU cores.
-         * @type {number || null}
-         */
-        this.GPU = null;
-
-        /**
-         * Number of CPU cores.
-         * @type {number || null}
-         */
-        this.CPU = null;
-
-        /**
-         * Memory capacity; unit: `GB`.
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Number of FPGA cores; unit: core.
-         * @type {number || null}
-         */
-        this.FPGA = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
-        this.GPU = 'GPU' in params ? params.GPU : null;
-        this.CPU = 'CPU' in params ? params.CPU : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.FPGA = 'FPGA' in params ? params.FPGA : null;
-
-    }
-}
-
-/**
  * AllocateHosts request structure.
  * @class
  */
@@ -1819,22 +1679,18 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeInstanceTypeConfigs request structure.
+ * ModifyImageSharePermission response structure.
  * @class
  */
-class DescribeInstanceTypeConfigsRequest extends  AbstractModel {
+class ModifyImageSharePermissionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">Filter results by **<strong>availability zones</strong>**. For example, availability zone: ap-guangzhou-1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">list of availability zones</a></p>
-<li><strong>instance-family</strong></li>
-<p style="padding-left: 30px;">Filter results by **<strong>instance models</strong>**. For example, instance models: S1, I1 and M1.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Required: no</p>
-Each request can have up to 10 `Filters` and 1 `Filters.Values`.
-         * @type {Array.<Filter> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.RequestId = null;
 
     }
 
@@ -1845,15 +1701,7 @@ Each request can have up to 10 `Filters` and 1 `Filters.Values`.
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2141,34 +1989,6 @@ class DeleteKeyPairsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceVncUrl request structure.
- * @class
- */
-class DescribeInstanceVncUrlRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID. To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
  * ModifyImageSharePermission request structure.
  * @class
  */
@@ -2359,122 +2179,10 @@ class InquiryPriceResizeInstanceDisksRequest extends  AbstractModel {
 }
 
 /**
- * RunInstances response structure.
- * @class
- */
-class RunInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * If you use this API to create instance(s), this parameter will be returned, representing one or more instance `ID`s. Retuning the instance `ID` list does not necessarily mean that the instance(s) were created successfully. To check whether the instance(s) were created successfully, you can call [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and check the states of the instances in `InstancesSet` in the response. If the state of an instance changes from "pending" to "running", it means that the instance has been created successfully.
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIdSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Price of the reserved instance. Currently, RIs are only offered to beta users.
- * @class
- */
-class ReservedInstancePrice extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Original upfront payment, in USD.
-         * @type {number || null}
-         */
-        this.OriginalFixedPrice = null;
-
-        /**
-         * Discounted upfront payment, in USD.
-         * @type {number || null}
-         */
-        this.DiscountFixedPrice = null;
-
-        /**
-         * Original subsequent unit price, in USD/hr.
-         * @type {number || null}
-         */
-        this.OriginalUsagePrice = null;
-
-        /**
-         * Discounted subsequent unit price, in USD/hr.
-         * @type {number || null}
-         */
-        this.DiscountUsagePrice = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OriginalFixedPrice = 'OriginalFixedPrice' in params ? params.OriginalFixedPrice : null;
-        this.DiscountFixedPrice = 'DiscountFixedPrice' in params ? params.DiscountFixedPrice : null;
-        this.OriginalUsagePrice = 'OriginalUsagePrice' in params ? params.OriginalUsagePrice : null;
-        this.DiscountUsagePrice = 'DiscountUsagePrice' in params ? params.DiscountUsagePrice : null;
-
-    }
-}
-
-/**
  * ModifyInstancesAttribute response structure.
  * @class
  */
 class ModifyInstancesAttributeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyImageSharePermission response structure.
- * @class
- */
-class ModifyImageSharePermissionResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3224,216 +2932,6 @@ class ResetInstancesPasswordResponse extends  AbstractModel {
 }
 
 /**
- * InquiryPriceRunInstances request structure.
- * @class
- */
-class InquiryPriceRunInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone and project.
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
-         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For IDs of `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information; for IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * The instance [billing method](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1).<br><li>POSTPAID_BY_HOUR: hourly, pay-as-you-go<br>Default value: POSTPAID_BY_HOUR.
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
-         * Configuration of prepaid instances. You can use the parameter to specify the attributes of prepaid instances, such as the subscription period and the auto-renewal plan. This parameter is required for prepaid instances.
-         * @type {InstanceChargePrepaid || null}
-         */
-        this.InstanceChargePrepaid = null;
-
-        /**
-         * The instance model. Different resource specifications are specified for different models. For specific values, call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) to retrieve the latest specification list or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If the parameter is not specified, `S1.SMALL1` will be used by default.
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * System disk configuration of the instance. If this parameter is not specified, the default value will be used.
-         * @type {SystemDisk || null}
-         */
-        this.SystemDisk = null;
-
-        /**
-         * The configuration information of the instance data disk. If this parameter is not specified, no data disk will be purchased by default. When purchasing, you can specify 21 data disks, which can contain at most 1 LOCAL_BASIC data disk or LOCAL_SSD data disk, and at most 20 CLOUD_BASIC data disks, CLOUD_PREMIUM data disks, or CLOUD_SSD data disks.
-         * @type {Array.<DataDisk> || null}
-         */
-        this.DataDisks = null;
-
-        /**
-         * VPC configurations. You can use this parameter to specify the VPC ID, subnet ID, etc. If this parameter is not specified, the basic network will be used by default. If a VPC IP is specified in this parameter, the `InstanceCount` parameter can only be 1. 
-         * @type {VirtualPrivateCloud || null}
-         */
-        this.VirtualPrivateCloud = null;
-
-        /**
-         * Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
-         * @type {InternetAccessible || null}
-         */
-        this.InternetAccessible = null;
-
-        /**
-         * Number of instances to be purchased. Value range: [1, 100]; default value: 1. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on quota, see [CVM instance purchase limit](https://intl.cloud.tencent.com/document/product/213/2664).
-         * @type {number || null}
-         */
-        this.InstanceCount = null;
-
-        /**
-         * Instance name to be displayed.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and name them as `server_`, the instance names will be displayed as `server_1` and `server_2`.</li><li>The instance name contains up to 60 characters (including pattern strings).
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
-         * @type {LoginSettings || null}
-         */
-        this.LoginSettings = null;
-
-        /**
-         * Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response. If this parameter is not specified, the instance will not be associated with any security group by default.
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroupIds = null;
-
-        /**
-         * Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Monitor and Cloud Security. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
-         * @type {EnhancedService || null}
-         */
-        this.EnhancedService = null;
-
-        /**
-         * A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. <br>For more information, see 'How to ensure idempotency'.
-         * @type {string || null}
-         */
-        this.ClientToken = null;
-
-        /**
-         * Host name of the CVM. <br><li>Periods (.) or hyphens (-) cannot be the start or end of a host name or appear consecutively in a host name.<br><li>For Windows instances, the host name must be 2-15 characters long and can contain uppercase and lowercase letters, numbers, and hyphens (-). It cannot contain periods (.) or contain only numbers. <br><li>For other instances, such as Linux instances, the host name must be 2-30 characters long. It supports multiple periods (.) and allows uppercase and lowercase letters, numbers, and hyphens (-) between any two periods (.).
-         * @type {string || null}
-         */
-        this.HostName = null;
-
-        /**
-         * The tag description list. This parameter is used to bind a tag to a resource instance. A tag can only be bound to CVM instances.
-         * @type {Array.<TagSpecification> || null}
-         */
-        this.TagSpecification = null;
-
-        /**
-         * The market options of the instance.
-         * @type {InstanceMarketOptionsRequest || null}
-         */
-        this.InstanceMarketOptions = null;
-
-        /**
-         * HPC cluster ID.
-         * @type {string || null}
-         */
-        this.HpcClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-
-        if (params.InstanceChargePrepaid) {
-            let obj = new InstanceChargePrepaid();
-            obj.deserialize(params.InstanceChargePrepaid)
-            this.InstanceChargePrepaid = obj;
-        }
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-
-        if (params.SystemDisk) {
-            let obj = new SystemDisk();
-            obj.deserialize(params.SystemDisk)
-            this.SystemDisk = obj;
-        }
-
-        if (params.DataDisks) {
-            this.DataDisks = new Array();
-            for (let z in params.DataDisks) {
-                let obj = new DataDisk();
-                obj.deserialize(params.DataDisks[z]);
-                this.DataDisks.push(obj);
-            }
-        }
-
-        if (params.VirtualPrivateCloud) {
-            let obj = new VirtualPrivateCloud();
-            obj.deserialize(params.VirtualPrivateCloud)
-            this.VirtualPrivateCloud = obj;
-        }
-
-        if (params.InternetAccessible) {
-            let obj = new InternetAccessible();
-            obj.deserialize(params.InternetAccessible)
-            this.InternetAccessible = obj;
-        }
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-
-        if (params.LoginSettings) {
-            let obj = new LoginSettings();
-            obj.deserialize(params.LoginSettings)
-            this.LoginSettings = obj;
-        }
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
-
-        if (params.EnhancedService) {
-            let obj = new EnhancedService();
-            obj.deserialize(params.EnhancedService)
-            this.EnhancedService = obj;
-        }
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-        this.HostName = 'HostName' in params ? params.HostName : null;
-
-        if (params.TagSpecification) {
-            this.TagSpecification = new Array();
-            for (let z in params.TagSpecification) {
-                let obj = new TagSpecification();
-                obj.deserialize(params.TagSpecification[z]);
-                this.TagSpecification.push(obj);
-            }
-        }
-
-        if (params.InstanceMarketOptions) {
-            let obj = new InstanceMarketOptionsRequest();
-            obj.deserialize(params.InstanceMarketOptions)
-            this.InstanceMarketOptions = obj;
-        }
-        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
-
-    }
-}
-
-/**
  * Details about an image, including its state and attributes.
  * @class
  */
@@ -3740,56 +3238,6 @@ class DescribeReservedInstancesConfigInfosResponse extends  AbstractModel {
 }
 
 /**
- * DescribeReservedInstances response structure.
- * @class
- */
-class DescribeReservedInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The number of eligible reserved instances.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of eligible reserved instances.
-         * @type {Array.<ReservedInstances> || null}
-         */
-        this.ReservedInstancesSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.ReservedInstancesSet) {
-            this.ReservedInstancesSet = new Array();
-            for (let z in params.ReservedInstancesSet) {
-                let obj = new ReservedInstances();
-                obj.deserialize(params.ReservedInstancesSet[z]);
-                this.ReservedInstancesSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeImportImageOs response structure.
  * @class
  */
@@ -3921,7 +3369,8 @@ class DataDisk extends  AbstractModel {
         this.DiskType = null;
 
         /**
-         * Data disk ID. Data disks of the type `LOCAL_BASIC` or `LOCAL_SSD` do not have IDs and do not support this parameter.
+         * Data disk ID. Note that it’s not available for `LOCAL_BASIC` and `LOCAL_SSD` disks.
+This parameter is only available for the `DescribeInstances` API.
          * @type {string || null}
          */
         this.DiskId = null;
@@ -4015,9 +3464,9 @@ class DescribeKeyPairsRequest extends  AbstractModel {
         this.KeyIds = null;
 
         /**
-         * Filters.
-<li> `project-id` - Integer - Optional - Filter results by project ID. To view the list of project IDs, you can go to [Project Management](https://console.cloud.tencent.com/project), or call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) and look for `projectId` in the response. </li>
-<li> `key-name` - String - Optional - Filter results by key pair name. </li> You cannot specify `KeyIds` and `Filters` at the same time.
+         * Filters
+<li> `project-id` - Integer - Optional - Filter by project ID. To view the list of project IDs, you can go to [Project Management](https://console.cloud.tencent.com/project), or call the `DescribeProject` API and look for `projectId` in the response.</li>
+<li> `key-name` - String - Optional - Filter by key pair name.</li>You cannot specify `KeyIds` and `Filters` at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5201,7 +4650,7 @@ If the dry run succeeds, the RequestId will be returned.
         this.DryRun = null;
 
         /**
-         * CAM role name, which can be obtained from the `roleName` field in the response of the [`DescribeRoleList`](https://intl.cloud.tencent.com/document/product/598/13887?from_cn_redirect=1) API.
+         * CAM role name, which can be obtained from the `roleName` field in the response of the [`DescribeRoleList`](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.CamRoleName = null;
@@ -5429,41 +4878,6 @@ Note: This field may return `null`, indicating that no valid values can be obtai
                 this.LaunchTemplateSet.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeInstanceVncUrl response structure.
- * @class
- */
-class DescribeInstanceVncUrlResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance VNC URL.
-         * @type {string || null}
-         */
-        this.InstanceVncUrl = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceVncUrl = 'InstanceVncUrl' in params ? params.InstanceVncUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5727,275 +5141,6 @@ class ActionTimer extends  AbstractModel {
         }
         this.TimerAction = 'TimerAction' in params ? params.TimerAction : null;
         this.ActionTime = 'ActionTime' in params ? params.ActionTime : null;
-
-    }
-}
-
-/**
- * CreateLaunchTemplate request structure.
- * @class
- */
-class CreateLaunchTemplateRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance launch template name. It can include 2-128 characters.
-         * @type {string || null}
-         */
-        this.LaunchTemplateName = null;
-
-        /**
-         * Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone, project, and CDH (for dedicated CVMs)
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
-         * The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images (for Chinese mainland only)</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). For marketplace images, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * Description of instance launch template versions. This parameter can contain 2-256 characters.
-         * @type {string || null}
-         */
-        this.LaunchTemplateVersionDescription = null;
-
-        /**
-         * The instance model. Different resource specifications are specified for different instance models.
-<br><li>To view specific values for `PREPAID` or `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, the system will specify the default model according to the dynamic resource sales in the current region. <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, you need to specify this parameter as `CDH_1C1G`.
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * System disk configuration of the instance. If this parameter is not specified, the default value will be used.
-         * @type {SystemDisk || null}
-         */
-        this.SystemDisk = null;
-
-        /**
-         * The configuration information of instance data disks. If this parameter is not specified, no data disk will be purchased by default. When purchasing, you can specify 21 data disks, which can contain at most 1 LOCAL_BASIC or LOCAL_SSD data disk, and at most 20 CLOUD_BASIC, CLOUD_PREMIUM, or CLOUD_SSD data disks.
-         * @type {Array.<DataDisk> || null}
-         */
-        this.DataDisks = null;
-
-        /**
-         * Configuration information of VPC. This parameter is used to specify VPC ID and subnet ID, etc. If this parameter is not specified, the classic network is used by default. If a VPC IP is specified in this parameter, it indicates the primary ENI IP of each instance. The value of parameter InstanceCount must be same as the number of VPC IPs, which cannot be greater than 20.
-         * @type {VirtualPrivateCloud || null}
-         */
-        this.VirtualPrivateCloud = null;
-
-        /**
-         * Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
-         * @type {InternetAccessible || null}
-         */
-        this.InternetAccessible = null;
-
-        /**
-         * Number of instances to be purchased. Value range for monthly-subscribed instances: [1, 300]. Value range for pay-as-you-go instances: [1, 100]. Default value: 1. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on quota, see CVM instance [Purchase Limits](https://intl.cloud.tencent.com/document/product/213/2664).
-         * @type {number || null}
-         */
-        this.InstanceCount = null;
-
-        /**
-         * Instance name to be displayed. <br><li>If this parameter is not specified, "Unnamed" will be displayed by default. </li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`. </li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and the instance name body is `server_`, the instance names will be `server_1` and `server_2`. </li><li>This parameter can contain up to 60 characters, including the pattern string.
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
-         * @type {LoginSettings || null}
-         */
-        this.LoginSettings = null;
-
-        /**
-         * Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response. If this parameter is not specified, the instance will be associated with default security groups.
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroupIds = null;
-
-        /**
-         * Enhanced service. You can use this parameter to specify whether to enable services such as Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. However, for custom images and images from the marketplace, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
-         * @type {EnhancedService || null}
-         */
-        this.EnhancedService = null;
-
-        /**
-         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
-         * @type {string || null}
-         */
-        this.ClientToken = null;
-
-        /**
-         * Host name of the CVM. <br><li>Dots (.) or hyphens (-) cannot be the start or end of a host name or appear consecutively in a host name. <br><li>For Windows instances, the host name must be 2-15 characters long and can contain uppercase and lowercase letters, numbers, and hyphens (-). It cannot contain dots (.) or contain only numbers. <br><li>For other instances, such as Linux instances, the host name must be 2-60 characters long. It supports multiple dots (.) and allows uppercase and lowercase letters, numbers, and hyphens (-) between any two dots (.).
-         * @type {string || null}
-         */
-        this.HostName = null;
-
-        /**
-         * Scheduled tasks. You can use this parameter to specify scheduled tasks for the instance. Only scheduled termination is supported.
-         * @type {ActionTimer || null}
-         */
-        this.ActionTimer = null;
-
-        /**
-         * Placement group ID. You can only specify one.
-         * @type {Array.<string> || null}
-         */
-        this.DisasterRecoverGroupIds = null;
-
-        /**
-         * The tag description list. This parameter is used to bind a tag to a resource instance. A tag can only be bound to CVM instances.
-         * @type {Array.<TagSpecification> || null}
-         */
-        this.TagSpecification = null;
-
-        /**
-         * Market options of the instance, such as parameters related to spot instances. This parameter is required for spot instances.
-         * @type {InstanceMarketOptionsRequest || null}
-         */
-        this.InstanceMarketOptions = null;
-
-        /**
-         * User data provided to the instance. This parameter needs to be encoded in base64 format with the maximum size of 16KB. For more information on how to get the value of this parameter, see the commands you need to execute on startup for [Windows](https://intl.cloud.tencent.com/document/product/213/17526) or [Linux](https://intl.cloud.tencent.com/document/product/213/17525).
-         * @type {string || null}
-         */
-        this.UserData = null;
-
-        /**
-         * Whether the request is a dry run only.
-true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
-If the dry run fails, the corresponding error code will be returned.
-If the dry run succeeds, the RequestId will be returned.
-false (default value): send a normal request and create instance(s) if all the requirements are met.
-         * @type {boolean || null}
-         */
-        this.DryRun = null;
-
-        /**
-         * CAM role name, which can be obtained from the `roleName` field in the response of the [`DescribeRoleList`](https://intl.cloud.tencent.com/document/product/598/13887?from_cn_redirect=1) API.
-         * @type {string || null}
-         */
-        this.CamRoleName = null;
-
-        /**
-         * HPC cluster ID. The HPC cluster must and can only be specified for a high-performance computing instance.
-         * @type {string || null}
-         */
-        this.HpcClusterId = null;
-
-        /**
-         * Instance [Billing Mode](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1). Valid values: <br><li>`PREPAID`: prepaid, i.e., billed for monthly-subscribed instances <br><li>`POSTPAID_BY_HOUR`: pay-as-you-go on an hourly basis <br><li>`CDHPAID`: billed for CDH instances, not the CVMs running on the CDHs. <br><li>`SPOTPAID`: billed for spot instances. <br>Default value: POSTPAID_BY_HOUR.
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
-         * Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
-         * @type {InstanceChargePrepaid || null}
-         */
-        this.InstanceChargePrepaid = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LaunchTemplateName = 'LaunchTemplateName' in params ? params.LaunchTemplateName : null;
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.LaunchTemplateVersionDescription = 'LaunchTemplateVersionDescription' in params ? params.LaunchTemplateVersionDescription : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-
-        if (params.SystemDisk) {
-            let obj = new SystemDisk();
-            obj.deserialize(params.SystemDisk)
-            this.SystemDisk = obj;
-        }
-
-        if (params.DataDisks) {
-            this.DataDisks = new Array();
-            for (let z in params.DataDisks) {
-                let obj = new DataDisk();
-                obj.deserialize(params.DataDisks[z]);
-                this.DataDisks.push(obj);
-            }
-        }
-
-        if (params.VirtualPrivateCloud) {
-            let obj = new VirtualPrivateCloud();
-            obj.deserialize(params.VirtualPrivateCloud)
-            this.VirtualPrivateCloud = obj;
-        }
-
-        if (params.InternetAccessible) {
-            let obj = new InternetAccessible();
-            obj.deserialize(params.InternetAccessible)
-            this.InternetAccessible = obj;
-        }
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-
-        if (params.LoginSettings) {
-            let obj = new LoginSettings();
-            obj.deserialize(params.LoginSettings)
-            this.LoginSettings = obj;
-        }
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
-
-        if (params.EnhancedService) {
-            let obj = new EnhancedService();
-            obj.deserialize(params.EnhancedService)
-            this.EnhancedService = obj;
-        }
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-        this.HostName = 'HostName' in params ? params.HostName : null;
-
-        if (params.ActionTimer) {
-            let obj = new ActionTimer();
-            obj.deserialize(params.ActionTimer)
-            this.ActionTimer = obj;
-        }
-        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
-
-        if (params.TagSpecification) {
-            this.TagSpecification = new Array();
-            for (let z in params.TagSpecification) {
-                let obj = new TagSpecification();
-                obj.deserialize(params.TagSpecification[z]);
-                this.TagSpecification.push(obj);
-            }
-        }
-
-        if (params.InstanceMarketOptions) {
-            let obj = new InstanceMarketOptionsRequest();
-            obj.deserialize(params.InstanceMarketOptions)
-            this.InstanceMarketOptions = obj;
-        }
-        this.UserData = 'UserData' in params ? params.UserData : null;
-        this.DryRun = 'DryRun' in params ? params.DryRun : null;
-        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
-        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-
-        if (params.InstanceChargePrepaid) {
-            let obj = new InstanceChargePrepaid();
-            obj.deserialize(params.InstanceChargePrepaid)
-            this.InstanceChargePrepaid = obj;
-        }
 
     }
 }
@@ -6421,41 +5566,6 @@ class DescribeImportImageOsRequest extends  AbstractModel {
 }
 
 /**
- * CreateLaunchTemplate response structure.
- * @class
- */
-class CreateLaunchTemplateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The ID of successfully created instance launch template. This parameter will be returned when the instance launch template is created through the `CreateLaunchTemplate` API.
-         * @type {string || null}
-         */
-        this.LaunchTemplateId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LaunchTemplateId = 'LaunchTemplateId' in params ? params.LaunchTemplateId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateKeyPair request structure.
  * @class
  */
@@ -6776,283 +5886,6 @@ class InquiryPriceResetInstanceResponse extends  AbstractModel {
 }
 
 /**
- * RunInstances request structure.
- * @class
- */
-class RunInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance [billing type](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1). <br><li>POSTPAID_BY_HOUR: pay-as-you-go billing by hour <br><li>CDHPAID: Dedicated CVM (associated with a dedicated host. Resource usage of the dedicated host is free of charge.) <br><li>SPOTPAID: [spot instance] (https://intl.cloud.tencent.com/document/product/213/17817)<br> Default value: POSTPAID_BY_HOUR.
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
-         * Configuration of prepaid instances. You can use the parameter to specify the attributes of prepaid instances, such as the subscription period and the auto-renewal plan. This parameter is required for prepaid instances.
-         * @type {InstanceChargePrepaid || null}
-         */
-        this.InstanceChargePrepaid = null;
-
-        /**
-         * Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone, project, and CDH (for dedicated CVMs)
- <b>Note: `Zone` is required.</b>
-`Placement` is required when `LaunchTemplate` is not specified. If both the parameters are passed in, `Placement` prevails.
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
-         * The instance model. Different resource specifications are specified for different instance models.
-<br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, `S1.SMALL1` will be used by default.<br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images (for Chinese mainland only)</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). For marketplace images, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
-`ImageId` is required when `LaunchTemplate` is not specified. If both the parameters are passed in, `ImageId` prevails.
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * System disk configuration of the instance. If this parameter is not specified, the default value will be used.
-         * @type {SystemDisk || null}
-         */
-        this.SystemDisk = null;
-
-        /**
-         * The configuration information of instance data disks. If this parameter is not specified, no data disk will be purchased by default. When purchasing, you can specify 21 data disks, which can contain at most 1 LOCAL_BASIC data disk or LOCAL_SSD data disk, and at most 20 CLOUD_BASIC data disks, CLOUD_PREMIUM data disks, or CLOUD_SSD data disks.
-         * @type {Array.<DataDisk> || null}
-         */
-        this.DataDisks = null;
-
-        /**
-         * Configuration information of VPC. This parameter is used to specify VPC ID and subnet ID, etc. If this parameter is not specified, the classic network is used by default. If a VPC IP is specified in this parameter, it indicates the primary ENI IP of each instance. The value of parameter InstanceCount must be same as the number of VPC IPs, which cannot be greater than 20.
-         * @type {VirtualPrivateCloud || null}
-         */
-        this.VirtualPrivateCloud = null;
-
-        /**
-         * Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
-         * @type {InternetAccessible || null}
-         */
-        this.InternetAccessible = null;
-
-        /**
-         * The number of instances to be purchased. Value range: [1, 100]; default value: 1. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on the quota, see [CVM instance purchase limit](https://intl.cloud.tencent.com/document/product/213/2664).
-         * @type {number || null}
-         */
-        this.InstanceCount = null;
-
-        /**
-         * Instance name to be displayed.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and name them as `server_`, the instance names will be displayed as `server_1` and `server_2`.</li><li>The instance name contains up to 60 characters (including pattern strings).
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Instance login settings. You can use this parameter to set the login method, login password and SSH key, or keep the original login settings of the image. If it's not specified, the user needs to set the login password using the "Reset password" option in the CVM console or calling the API `ResetInstancesPassword` to complete the creation of the CVM instance(s).
-         * @type {LoginSettings || null}
-         */
-        this.LoginSettings = null;
-
-        /**
-         * Security groups to which the instance belongs. To obtain the security group IDs, you can call [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) and look for the `sgld` fields in the response. If this parameter is not specified, the instance will be associated with default security groups.
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroupIds = null;
-
-        /**
-         * Specifies whether to enable services such as Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. However, for custom images and images from the marketplace, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
-         * @type {EnhancedService || null}
-         */
-        this.EnhancedService = null;
-
-        /**
-         * A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. <br>For more information, see 'How to ensure idempotency'.
-         * @type {string || null}
-         */
-        this.ClientToken = null;
-
-        /**
-         * Instance hostname. <br><li>Dots (.) and dashes (-) can not be used as the first or last character of HostName nor used consecutively. <br<li>Windows instances: 2 to 15 characters, including English letters (case-insensitive), numbers and dashes (-). Dots and numeric-only names are not allowed. <br><li>Other instances (Linux, etc.): 2 to 60 characters, including English letters (case-insensitive), numbers, dashes (-) and dots. Note that consecutive dots are not allowed.<br><li>Batch naming: use `{R:x}` for batch naming if multiple instances are purchased. `x` is the serial number of the instance. It’s generated by [x, x+n-1], where `n` refers to the number of instances purchased. For example, if `server{R:3}` is input, if you purchase one instance, the hostname is `server3`. If you purchase two instances, the hostnames are `server3` and `server4` respectively. You can specify multiple pattern strings `{R:x}`. </li><br><li>Purchasing multiple instances: If no pattern string is specified, you shall add suffixes `1, 2...n` to the instance hostname. `n` represents the number of purchased instances. For example, if the instance hostname is `server`,  when two instances are purchased, the hostnames of instances purchased are respectively `server1` and `server2`.
-         * @type {string || null}
-         */
-        this.HostName = null;
-
-        /**
-         * Scheduled tasks. You can use this parameter to specify scheduled tasks for the instance. Only scheduled termination is supported.
-         * @type {ActionTimer || null}
-         */
-        this.ActionTimer = null;
-
-        /**
-         * Placement group ID. You can only specify one.
-         * @type {Array.<string> || null}
-         */
-        this.DisasterRecoverGroupIds = null;
-
-        /**
-         * Binds the tag with the specified resources (CVM and CLB) as well
-         * @type {Array.<TagSpecification> || null}
-         */
-        this.TagSpecification = null;
-
-        /**
-         * The market options of the instance.
-         * @type {InstanceMarketOptionsRequest || null}
-         */
-        this.InstanceMarketOptions = null;
-
-        /**
-         * User data provided to the instance, which needs to be encoded in base64 format with the maximum size of 16KB. For more information on how to get the value of this parameter, see the commands you need to execute on startup for [Windows](https://intl.cloud.tencent.com/document/product/213/17526) or [Linux](https://intl.cloud.tencent.com/document/product/213/17525).
-         * @type {string || null}
-         */
-        this.UserData = null;
-
-        /**
-         * Whether the request is a dry run only.
-true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
-If the dry run fails, the corresponding error code will be returned.
-If the dry run succeeds, the RequestId will be returned.
-false (default value): send a normal request and create instance(s) if all the requirements are met.
-         * @type {boolean || null}
-         */
-        this.DryRun = null;
-
-        /**
-         * CAM role name, which can be obtained from the `roleName` field in the response of the [`DescribeRoleList`](https://intl.cloud.tencent.com/document/product/598/13887?from_cn_redirect=1) API.
-         * @type {string || null}
-         */
-        this.CamRoleName = null;
-
-        /**
-         * HPC cluster ID. The HPC cluster must and can only be specified for a high-performance computing instance.
-         * @type {string || null}
-         */
-        this.HpcClusterId = null;
-
-        /**
-         * Instance launch template.
-         * @type {LaunchTemplate || null}
-         */
-        this.LaunchTemplate = null;
-
-        /**
-         * Specify the CHC physical server that used to create the CHC CVM.
-         * @type {Array.<string> || null}
-         */
-        this.ChcIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-
-        if (params.InstanceChargePrepaid) {
-            let obj = new InstanceChargePrepaid();
-            obj.deserialize(params.InstanceChargePrepaid)
-            this.InstanceChargePrepaid = obj;
-        }
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-
-        if (params.SystemDisk) {
-            let obj = new SystemDisk();
-            obj.deserialize(params.SystemDisk)
-            this.SystemDisk = obj;
-        }
-
-        if (params.DataDisks) {
-            this.DataDisks = new Array();
-            for (let z in params.DataDisks) {
-                let obj = new DataDisk();
-                obj.deserialize(params.DataDisks[z]);
-                this.DataDisks.push(obj);
-            }
-        }
-
-        if (params.VirtualPrivateCloud) {
-            let obj = new VirtualPrivateCloud();
-            obj.deserialize(params.VirtualPrivateCloud)
-            this.VirtualPrivateCloud = obj;
-        }
-
-        if (params.InternetAccessible) {
-            let obj = new InternetAccessible();
-            obj.deserialize(params.InternetAccessible)
-            this.InternetAccessible = obj;
-        }
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-
-        if (params.LoginSettings) {
-            let obj = new LoginSettings();
-            obj.deserialize(params.LoginSettings)
-            this.LoginSettings = obj;
-        }
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
-
-        if (params.EnhancedService) {
-            let obj = new EnhancedService();
-            obj.deserialize(params.EnhancedService)
-            this.EnhancedService = obj;
-        }
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-        this.HostName = 'HostName' in params ? params.HostName : null;
-
-        if (params.ActionTimer) {
-            let obj = new ActionTimer();
-            obj.deserialize(params.ActionTimer)
-            this.ActionTimer = obj;
-        }
-        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
-
-        if (params.TagSpecification) {
-            this.TagSpecification = new Array();
-            for (let z in params.TagSpecification) {
-                let obj = new TagSpecification();
-                obj.deserialize(params.TagSpecification[z]);
-                this.TagSpecification.push(obj);
-            }
-        }
-
-        if (params.InstanceMarketOptions) {
-            let obj = new InstanceMarketOptionsRequest();
-            obj.deserialize(params.InstanceMarketOptions)
-            this.InstanceMarketOptions = obj;
-        }
-        this.UserData = 'UserData' in params ? params.UserData : null;
-        this.DryRun = 'DryRun' in params ? params.DryRun : null;
-        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
-        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
-
-        if (params.LaunchTemplate) {
-            let obj = new LaunchTemplate();
-            obj.deserialize(params.LaunchTemplate)
-            this.LaunchTemplate = obj;
-        }
-        this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
-
-    }
-}
-
-/**
  * > Key-value pair filters used for conditional queries, such as filtering results by ID, name, and state.
 > * If there are multiple `Filter` parameters, they are evaluated using the logical `AND` operator.
 > * If a `Filter` contains multiple `Values`, they are evaluated using the logical `OR` operator.
@@ -7360,53 +6193,24 @@ class ModifyInstancesVpcAttributeRequest extends  AbstractModel {
 }
 
 /**
- * DescribeReservedInstances request structure.
+ * Parameters related to the prepaid billing method, including the subscription period, the auto renewal logic, etc.
  * @class
  */
-class DescribeReservedInstancesRequest extends  AbstractModel {
+class ChargePrepaid extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Dry run. The default is false.
-         * @type {boolean || null}
-         */
-        this.DryRun = null;
-
-        /**
-         * Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+         * Purchased usage period, in month. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36
          * @type {number || null}
          */
-        this.Offset = null;
+        this.Period = null;
 
         /**
-         * Number of returned results. The default value is 20. The maximum is 100. For more information on `Limit`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-         * @type {number || null}
+         * Auto renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>Default value: NOTIFY_AND_AUTO_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
+         * @type {string || null}
          */
-        this.Limit = null;
-
-        /**
-         * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">Filters by <strong>availability zone</strong> in which reserved instances can be purchased, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Availability Zones</a></p>
-<li><strong>duration</strong></li>
-<p style="padding-left: 30px;">Filters by <strong>validity period</strong> of the reserved instance, such as `31536000`.</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Unit: second</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: 31536000 (1 year)</p>
-<li><strong>instance-type</strong></li>
-<p style="padding-left: 30px;">Filters by <strong>specification of the reserved instance</strong>, such as `S3.MEDIUM4`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Types</a></p>
-<li><strong>instance-family</strong></li>
-<p style="padding-left: 30px;">Filters by <strong>type of the reserved instance</strong>, such as `S3`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Types</a></p>
-<li><strong>offering-type</strong></li>
-<li><strong>offering-type</strong></li>
-<p style="padding-left: 30px;">Filters by <strong>payment method</strong>, such as `All Upfront`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: All Upfront | Partial Upfront | No Upfront</p>
-<li><strong>product-description</strong></li>
-<p style="padding-left: 30px;">Filters by <strong>platform description</strong> (operating system) of the reserved instance, such as `linux`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid value: linux</p>
-<li><strong>reserved-instances-id</strong></li>
-<p style="padding-left: 30px;">Filters by <strong>reserved instance ID</strong> in the form of 650c138f-ae7e-4750-952a-96841d6e9fc1.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
-<li><strong>state</strong></li>
-<p style="padding-left: 30px;">Filters by <strong>reserved instance status</strong>, such as `active`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: active (created) | pending (waiting to be created) | retired (expired)</p>
-Each request can have up to 10 `Filters` and 5 `Filter.Values`.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
+        this.RenewFlag = null;
 
     }
 
@@ -7417,18 +6221,8 @@ Each request can have up to 10 `Filters` and 5 `Filter.Values`.
         if (!params) {
             return;
         }
-        this.DryRun = 'DryRun' in params ? params.DryRun : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -8123,24 +6917,36 @@ class RunAutomationServiceEnabled extends  AbstractModel {
 }
 
 /**
- * InquiryPriceRunInstances response structure.
+ * Price of the reserved instance. Currently, RIs are only offered to beta users.
  * @class
  */
-class InquiryPriceRunInstancesResponse extends  AbstractModel {
+class ReservedInstancePrice extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Price of the instance with the specified configurations.
-         * @type {Price || null}
+         * Original upfront payment, in USD.
+         * @type {number || null}
          */
-        this.Price = null;
+        this.OriginalFixedPrice = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Discounted upfront payment, in USD.
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.DiscountFixedPrice = null;
+
+        /**
+         * Original subsequent unit price, in USD/hr.
+         * @type {number || null}
+         */
+        this.OriginalUsagePrice = null;
+
+        /**
+         * Discounted subsequent unit price, in USD/hr.
+         * @type {number || null}
+         */
+        this.DiscountUsagePrice = null;
 
     }
 
@@ -8151,13 +6957,10 @@ class InquiryPriceRunInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Price) {
-            let obj = new Price();
-            obj.deserialize(params.Price)
-            this.Price = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.OriginalFixedPrice = 'OriginalFixedPrice' in params ? params.OriginalFixedPrice : null;
+        this.DiscountFixedPrice = 'DiscountFixedPrice' in params ? params.DiscountFixedPrice : null;
+        this.OriginalUsagePrice = 'OriginalUsagePrice' in params ? params.OriginalUsagePrice : null;
+        this.DiscountUsagePrice = 'DiscountUsagePrice' in params ? params.DiscountUsagePrice : null;
 
     }
 }
@@ -8172,16 +6975,16 @@ class DescribeHostsRequest extends  AbstractModel {
 
         /**
          * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">Filter results by **<strong>availability zones</strong>**. For example, availability zone: ap-guangzhou-1;</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p><p style="padding-left: 30px;">Valid values: <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">list of availability zones</a></p>
+<p style="padding-left: 30px;">Filter by the availability zone, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
 <li><strong>project-id</strong></li>
-<p style="padding-left: 30px;">Filter results by **<strong>project ID</strong>**. You can query the existing project list through the [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) API or [CVM console](https://console.cloud.tencent.com/cvm/index), or create a project by calling the [AddProject](https://intl.cloud.tencent.com/document/api/378/4398?from_cn_redirect=1) API. For example, project ID: 1002189;</p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Required: no</p>
+<p style="padding-left: 30px;">Filter by the project ID. You can query the list of created projects by calling `DescribeProject` or logging in to the [CVM console](https://console.cloud.tencent.com/cvm/index). You can also call `AddProject` to create projects. The project ID is like 1002189. </p><p style="padding-left: 30px;">Type: Integer</p><p style="padding-left: 30px;">Optional</p>
 <li><strong>host-id</strong></li>
-<p style="padding-left: 30px;">Filter results by **<strong>[CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) ID</strong>**. For example, [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) ID: host-xxxxxxxx;</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
-<li><strong>state</strong></li>
-<p style="padding-left: 30px;">Filter results by **<strong>CDH instance name</strong>**. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
-<li><strong>state</strong></li>
-<p style="padding-left: 30px;">Filter results by **<strong>CDH instance status </strong>**. (PENDING: creating | LAUNCH_FAILURE: creation failed | RUNNING: running | EXPIRED: expired)</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Required: no</p>
-Each request can have up to 10 `Filters` and 5 `Filters.Values`.
+<p style="padding-left: 30px;">Filter by the CDH instance ID. Format: host-xxxxxxxx. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+<li><strong>host-name</strong></li>
+<p style="padding-left: 30px;">Filter by the host name.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+<li><strong>host-state</strong></li>
+<p style="padding-left: 30px;">Filter by the CDH instance status. (`PENDING`: Creating | `LAUNCH_FAILURE`: Failed to create | `RUNNING`: Running | `EXPIRED`: Expired)</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+Each request can have up to 10 `Filters` and 5 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -8363,119 +7166,6 @@ class SharePermission extends  AbstractModel {
         }
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.AccountId = 'AccountId' in params ? params.AccountId : null;
-
-    }
-}
-
-/**
- * Describes the information of the reserved instances the user has purchased
- * @class
- */
-class ReservedInstances extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The ID of the purchased reserved instance, taking the form 650c138f-ae7e-4750-952a-96841d6e9fc1.
-         * @type {string || null}
-         */
-        this.ReservedInstancesId = null;
-
-        /**
-         * Reserved instance specification, such as `S3.MEDIUM4`.
-Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Specifications</a>
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * Availability zones in which the reserved instance can be purchased. For example, "ap-guangzhou-1".
-Returned values: <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">list of availability zones</a>
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Start time of the reserved instance billing, taking the form of 2019-10-23 00:00:00.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time of the reserved instance, taking the form of 2019-10-23 00:00:00
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * The **validity** of the reserved instance in seconds, which is the purchased usage period. For example, 31536000.
-Measurement unit: second.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * The number of reserved instances that have been purchased. For example, 10.
-         * @type {number || null}
-         */
-        this.InstanceCount = null;
-
-        /**
-         * The operating system of the reserved instance. For example, "linux".
-Returned value: linux.
-         * @type {string || null}
-         */
-        this.ProductDescription = null;
-
-        /**
-         * The status of the reserved instance. For example, "active".
-Returned value: "active" (created) | "pending" (waiting to be created) | "retired" (expired).
-         * @type {string || null}
-         */
-        this.State = null;
-
-        /**
-         * The currency in which the reserved instance is billed. The ISO 4217 standard currency codes are used. For example, USD.
-Returned value: USD.
-         * @type {string || null}
-         */
-        this.CurrencyCode = null;
-
-        /**
-         * The payment method of the reserved instance. For example, "All Upfront".
-Returned value: All Upfront.
-         * @type {string || null}
-         */
-        this.OfferingType = null;
-
-        /**
-         * Reserved instance type, such as `S3`.
-Valid values: please see <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved Instance Types</a>
-         * @type {string || null}
-         */
-        this.InstanceFamily = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ReservedInstancesId = 'ReservedInstancesId' in params ? params.ReservedInstancesId : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
-        this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
-        this.State = 'State' in params ? params.State : null;
-        this.CurrencyCode = 'CurrencyCode' in params ? params.CurrencyCode : null;
-        this.OfferingType = 'OfferingType' in params ? params.OfferingType : null;
-        this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
 
     }
 }
@@ -8804,21 +7494,21 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Filters.
-<li> `zone` - String - Optional - Filter results by availability zone.</li>
-<li> `project-id` - Integer - Optional - Filter results by project ID. You can call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) or log in to the [console](https://console.cloud.tencent.com/cvm/index) to view the list of existing projects. You can also create a new project by calling [AddProject](https://intl.cloud.tencent.com/document/api/378/4398?from_cn_redirect=1).</li>
-<li> `host-id` - String - Optional - Filter results by [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) ID. [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) ID format: `host-xxxxxxxx`.</li>
-</li>`vpc-id` - String - Optional - Filter results by VPC ID. VPC ID format: `vpc-xxxxxxxx`.</li>
-<li> `subnet-id` - String - Optional - Filter results by subnet ID. Subnet ID format: `subnet-xxxxxxxx`.</li>
-</li>`instance-id` - String - Optional - Filter results by instance ID. Instance ID format: `ins-xxxxxxxx`.</li>
-</li>`security-group-id` - String - Optional - Filter results by security group ID. Security group ID format: `sg-8jlk3f3r`.</li>
-</li>`instance-name` - String - Optional - Filter results by instance name.</li>
-</li>`instance-charge-type` - String - Optional - Filter results by instance billing method. `POSTPAID_BY_HOUR`: pay-as-you-go | `CDHPAID`: you are only billed for [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances, not the CVMs running on the [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances.</li>
-</li>`private-ip-address` - String - Optional - Filter results by the private IP address of the instance's primary ENI.</li>
-</li>`public-ip-address` - String - Optional - Filter results by the public IP address of the instance's primary ENI, including the IP addresses automatically assigned during the instance creation and the EIPs manually associated after the instance creation.</li>
-<li> `tag-key` - String - Optional - Filter results by tag key.</li>
-</li>`tag-value` - String - Optional - Filter results by tag value.</li>
-<li> `tag:tag-key` - String - Optional - Filter results by tag key-value pair. Replace `tag-key` with specific tag keys, as shown in example 2.</li>
+         * Filters
+<li> `zone` - String - Optional - Filter by the availability zone.</li>
+<li> `project-id` - Integer - Optional - Filter by the project ID. You can query the list of created projects by calling `DescribeProject` or logging in to the [CVM console](https://console.cloud.tencent.com/cvm/index). You can also call `AddProject` to create projects. </li>
+<li> `host-id` - String - Optional - Filter by the CDH instance ID. Format: `host-xxxxxxxx`.</li>
+</li>`vpc-id` - String - Optional - Filter by the VPC ID. Format: `vpc-xxxxxxxx`.</li>
+<li> `subnet-id` - String - Optional - Filter by the subnet ID. Format: `subnet-xxxxxxxx`.</li>
+</li>`instance-id` - String - Optional - Filter by the instance ID. Format: `ins-xxxxxxxx`.</li>
+</li>`security-group-id` - String - Optional - Filter by the security group ID. Format: `sg-8jlk3f3r`.</li>
+</li>`instance-name` - String - Optional - Filter by the instance name.</li>
+</li>`instance-charge-type` - String - Optional - Filter by the instance billing method. `POSTPAID_BY_HOUR`: pay-as-you-go | `CDHPAID`: You are only billed for [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances, not the CVMs running on the [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances.</li>
+</li>`private-ip-address` - String - Optional - Filter by the private IP address of the instance's primary ENI.</li>
+</li>`public-ip-address` - String - Optional - Filter by the public IP address of the instance's primary ENI, including the IP addresses automatically assigned during the instance creation and the EIPs manually associated after the instance creation.</li>
+<li> `tag-key` - String - Optional - Filter by the tag key.</li>
+</li>`tag-value` - String - Optional - Filter by the tag value.</li>
+<li> `tag:tag-key` - String - Optional - Filter by the tag key-value pair. Replace `tag-key` with the actual tag keys. See example 2.</li>
 Each request can have up to 10 `Filters` and 5 `Filters.Values`. You cannot specify `InstanceIds` and `Filters` at the same time.
          * @type {Array.<Filter> || null}
          */
@@ -9294,7 +7984,7 @@ class ModifyHostsAttributeRequest extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
-         * Project ID. You can create a project by using the [AddProject](https://intl.cloud.tencent.com/doc/api/403/4398?from_cn_redirect=1) API and obtain its ID from the response parameter `projectId` of the [`DescribeProject`](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. Subsequently, the project ID can be used to filter results when you query instances by calling the [DescribeHosts](https://intl.cloud.tencent.com/document/api/213/16474?from_cn_redirect=1) API.
+         * Project ID. You can use the `AddProject` API to create projects, and obtain the `projectId` field in the response of the `DescribeProject` API. When using the [DescribeHosts](https://intl.cloud.tencent.com/document/api/213/16474?from_cn_redirect=1) API to query instances later, you can filter the results by the project ID.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -9331,7 +8021,7 @@ class ImportKeyPairRequest extends  AbstractModel {
         this.KeyName = null;
 
         /**
-         * The ID of the [project](https://intl.cloud.tencent.com/document/product/378/10861?from_cn_redirect=1) to which the created key pair belongs.<br><br>You can retrieve the project ID in two ways:<br><li>Query the project ID in [Project Management](https://console.cloud.tencent.com/project).<br><li>Call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) and search for `projectId` in the response.
+         * The project ID to which the key pair belongs after it is created. <br><br>You can obtain the project ID in the following ways: <br><li>Check the project list in the [Project management](https://console.cloud.tencent.com/project) page.<br><li>Call the `DescribeProject` API and view the `projectId` in the response.
 
 If you want to use the default project, specify 0 for the parameter.
          * @type {number || null}
@@ -9671,49 +8361,6 @@ class ModifyDisasterRecoverGroupAttributeResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeInstanceTypeConfigs response structure.
- * @class
- */
-class DescribeInstanceTypeConfigsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of instance model families
-         * @type {Array.<InstanceTypeConfig> || null}
-         */
-        this.InstanceTypeConfigSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.InstanceTypeConfigSet) {
-            this.InstanceTypeConfigSet = new Array();
-            for (let z in params.InstanceTypeConfigSet) {
-                let obj = new InstanceTypeConfig();
-                obj.deserialize(params.InstanceTypeConfigSet[z]);
-                this.InstanceTypeConfigSet.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -10213,7 +8860,6 @@ class Price extends  AbstractModel {
 }
 
 module.exports = {
-    ChargePrepaid: ChargePrepaid,
     LocalDiskType: LocalDiskType,
     AssociateInstancesKeyPairsResponse: AssociateInstancesKeyPairsResponse,
     DescribeImageQuotaResponse: DescribeImageQuotaResponse,
@@ -10238,8 +8884,6 @@ module.exports = {
     DeleteKeyPairsRequest: DeleteKeyPairsRequest,
     SystemDisk: SystemDisk,
     ResetInstanceRequest: ResetInstanceRequest,
-    LaunchTemplate: LaunchTemplate,
-    InstanceTypeConfig: InstanceTypeConfig,
     AllocateHostsRequest: AllocateHostsRequest,
     LoginSettings: LoginSettings,
     DescribeRegionsResponse: DescribeRegionsResponse,
@@ -10252,7 +8896,7 @@ module.exports = {
     ZoneInfo: ZoneInfo,
     ModifyLaunchTemplateDefaultVersionResponse: ModifyLaunchTemplateDefaultVersionResponse,
     LaunchTemplateVersionInfo: LaunchTemplateVersionInfo,
-    DescribeInstanceTypeConfigsRequest: DescribeInstanceTypeConfigsRequest,
+    ModifyImageSharePermissionResponse: ModifyImageSharePermissionResponse,
     DescribeKeyPairsResponse: DescribeKeyPairsResponse,
     ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
     InternetChargeTypeConfig: InternetChargeTypeConfig,
@@ -10260,15 +8904,11 @@ module.exports = {
     ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
     CreateKeyPairResponse: CreateKeyPairResponse,
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
-    DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
     ModifyImageSharePermissionRequest: ModifyImageSharePermissionRequest,
     DisassociateInstancesKeyPairsResponse: DisassociateInstancesKeyPairsResponse,
     DescribeLaunchTemplateVersionsRequest: DescribeLaunchTemplateVersionsRequest,
     InquiryPriceResizeInstanceDisksRequest: InquiryPriceResizeInstanceDisksRequest,
-    RunInstancesResponse: RunInstancesResponse,
-    ReservedInstancePrice: ReservedInstancePrice,
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
-    ModifyImageSharePermissionResponse: ModifyImageSharePermissionResponse,
     DescribeInstancesOperationLimitResponse: DescribeInstancesOperationLimitResponse,
     SyncImagesResponse: SyncImagesResponse,
     DescribeZoneInstanceConfigInfosResponse: DescribeZoneInstanceConfigInfosResponse,
@@ -10289,13 +8929,11 @@ module.exports = {
     DescribeImageSharePermissionResponse: DescribeImageSharePermissionResponse,
     DeleteLaunchTemplateVersionsResponse: DeleteLaunchTemplateVersionsResponse,
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
-    InquiryPriceRunInstancesRequest: InquiryPriceRunInstancesRequest,
     Image: Image,
     DescribeDisasterRecoverGroupQuotaResponse: DescribeDisasterRecoverGroupQuotaResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     CreateDisasterRecoverGroupRequest: CreateDisasterRecoverGroupRequest,
     DescribeReservedInstancesConfigInfosResponse: DescribeReservedInstancesConfigInfosResponse,
-    DescribeReservedInstancesResponse: DescribeReservedInstancesResponse,
     DescribeImportImageOsResponse: DescribeImportImageOsResponse,
     InquirePricePurchaseReservedInstancesOfferingRequest: InquirePricePurchaseReservedInstancesOfferingRequest,
     DataDisk: DataDisk,
@@ -10311,13 +8949,11 @@ module.exports = {
     CreateLaunchTemplateVersionRequest: CreateLaunchTemplateVersionRequest,
     EnhancedService: EnhancedService,
     DescribeLaunchTemplatesResponse: DescribeLaunchTemplatesResponse,
-    DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     DescribeReservedInstancesOfferingsRequest: DescribeReservedInstancesOfferingsRequest,
     ReservedInstanceFamilyItem: ReservedInstanceFamilyItem,
     DescribeDisasterRecoverGroupsResponse: DescribeDisasterRecoverGroupsResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     ActionTimer: ActionTimer,
-    CreateLaunchTemplateRequest: CreateLaunchTemplateRequest,
     DescribeReservedInstancesConfigInfosRequest: DescribeReservedInstancesConfigInfosRequest,
     TagSpecification: TagSpecification,
     DescribeLaunchTemplatesRequest: DescribeLaunchTemplatesRequest,
@@ -10327,7 +8963,6 @@ module.exports = {
     ImportImageRequest: ImportImageRequest,
     SpotMarketOptions: SpotMarketOptions,
     DescribeImportImageOsRequest: DescribeImportImageOsRequest,
-    CreateLaunchTemplateResponse: CreateLaunchTemplateResponse,
     CreateKeyPairRequest: CreateKeyPairRequest,
     InstanceStatus: InstanceStatus,
     ReservedInstancePriceItem: ReservedInstancePriceItem,
@@ -10335,7 +8970,6 @@ module.exports = {
     DescribeImageSharePermissionRequest: DescribeImageSharePermissionRequest,
     DisasterRecoverGroup: DisasterRecoverGroup,
     InquiryPriceResetInstanceResponse: InquiryPriceResetInstanceResponse,
-    RunInstancesRequest: RunInstancesRequest,
     Filter: Filter,
     LaunchTemplateInfo: LaunchTemplateInfo,
     InquiryPriceResetInstancesInternetMaxBandwidthRequest: InquiryPriceResetInstancesInternetMaxBandwidthRequest,
@@ -10343,7 +8977,7 @@ module.exports = {
     DescribeDisasterRecoverGroupQuotaRequest: DescribeDisasterRecoverGroupQuotaRequest,
     StartInstancesResponse: StartInstancesResponse,
     ModifyInstancesVpcAttributeRequest: ModifyInstancesVpcAttributeRequest,
-    DescribeReservedInstancesRequest: DescribeReservedInstancesRequest,
+    ChargePrepaid: ChargePrepaid,
     DescribeInternetChargeTypeConfigsResponse: DescribeInternetChargeTypeConfigsResponse,
     DescribeZoneInstanceConfigInfosRequest: DescribeZoneInstanceConfigInfosRequest,
     DescribeZonesResponse: DescribeZonesResponse,
@@ -10352,13 +8986,12 @@ module.exports = {
     ImageOsList: ImageOsList,
     ReservedInstanceTypeItem: ReservedInstanceTypeItem,
     RunAutomationServiceEnabled: RunAutomationServiceEnabled,
-    InquiryPriceRunInstancesResponse: InquiryPriceRunInstancesResponse,
+    ReservedInstancePrice: ReservedInstancePrice,
     DescribeHostsRequest: DescribeHostsRequest,
     DescribeInstancesStatusRequest: DescribeInstancesStatusRequest,
     InquiryPriceResizeInstanceDisksResponse: InquiryPriceResizeInstanceDisksResponse,
     TerminateInstancesRequest: TerminateInstancesRequest,
     SharePermission: SharePermission,
-    ReservedInstances: ReservedInstances,
     DeleteImagesResponse: DeleteImagesResponse,
     ImportImageResponse: ImportImageResponse,
     ModifyDisasterRecoverGroupAttributeRequest: ModifyDisasterRecoverGroupAttributeRequest,
@@ -10388,7 +9021,6 @@ module.exports = {
     ResetInstanceResponse: ResetInstanceResponse,
     VirtualPrivateCloud: VirtualPrivateCloud,
     ModifyDisasterRecoverGroupAttributeResponse: ModifyDisasterRecoverGroupAttributeResponse,
-    DescribeInstanceTypeConfigsResponse: DescribeInstanceTypeConfigsResponse,
     ResizeInstanceDisksRequest: ResizeInstanceDisksRequest,
     DescribeInstanceFamilyConfigsRequest: DescribeInstanceFamilyConfigsRequest,
     PurchaseReservedInstancesOfferingResponse: PurchaseReservedInstancesOfferingResponse,

@@ -895,33 +895,24 @@ class RouteInfo extends  AbstractModel {
 }
 
 /**
- * ServiceAccount authentication configuration
+ * Resource usage details
  * @class
  */
-class ServiceAccountAuthenticationOptions extends  AbstractModel {
+class ResourceUsageDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * service-account-issuer
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Resource name
          * @type {string || null}
          */
-        this.Issuer = null;
+        this.Name = null;
 
         /**
-         * service-account-jwks-uri
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Resource usage
+         * @type {number || null}
          */
-        this.JWKSURI = null;
-
-        /**
-         * If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.AutoCreateDiscoveryAnonymousAuth = null;
+        this.Usage = null;
 
     }
 
@@ -932,9 +923,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.Issuer = 'Issuer' in params ? params.Issuer : null;
-        this.JWKSURI = 'JWKSURI' in params ? params.JWKSURI : null;
-        this.AutoCreateDiscoveryAnonymousAuth = 'AutoCreateDiscoveryAnonymousAuth' in params ? params.AutoCreateDiscoveryAnonymousAuth : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Usage = 'Usage' in params ? params.Usage : null;
 
     }
 }
@@ -1498,6 +1488,90 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Cluster model adjustment history
+ * @class
+ */
+class ClusterLevelChangeRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Record ID
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Status (valid values: `trading`, `upgrading`, `success`, `failed`)
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Status description
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Original model
+         * @type {string || null}
+         */
+        this.OldLevel = null;
+
+        /**
+         * New model
+         * @type {string || null}
+         */
+        this.NewLevel = null;
+
+        /**
+         * Trigger type (valid values: `manual`, `auto`)
+         * @type {string || null}
+         */
+        this.TriggerType = null;
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.StartedAt = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndedAt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.OldLevel = 'OldLevel' in params ? params.OldLevel : null;
+        this.NewLevel = 'NewLevel' in params ? params.NewLevel : null;
+        this.TriggerType = 'TriggerType' in params ? params.TriggerType : null;
+        this.StartedAt = 'StartedAt' in params ? params.StartedAt : null;
+        this.EndedAt = 'EndedAt' in params ? params.EndedAt : null;
 
     }
 }
@@ -2352,6 +2426,56 @@ class CreateClusterEndpointVipResponse extends  AbstractModel {
 }
 
 /**
+ * Cluster resource usage
+ * @class
+ */
+class ResourceUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource type
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Resource usage
+         * @type {number || null}
+         */
+        this.Usage = null;
+
+        /**
+         * Resource usage details
+         * @type {Array.<ResourceUsageDetail> || null}
+         */
+        this.Details = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Usage = 'Usage' in params ? params.Usage : null;
+
+        if (params.Details) {
+            this.Details = new Array();
+            for (let z in params.Details) {
+                let obj = new ResourceUsageDetail();
+                obj.deserialize(params.Details[z]);
+                this.Details.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeClusterRoutes response structure.
  * @class
  */
@@ -2656,54 +2780,18 @@ class DeletePrometheusAlertRuleRequest extends  AbstractModel {
 }
 
 /**
- * Region information
+ * DescribeResourceUsage request structure.
  * @class
  */
-class RegionInstance extends  AbstractModel {
+class DescribeResourceUsageRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region name
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cluster ID
          * @type {string || null}
          */
-        this.RegionName = null;
-
-        /**
-         * Region ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RegionId = null;
-
-        /**
-         * Region status
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Status of region-related features (return all attributes in JSON format)
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.FeatureGates = null;
-
-        /**
-         * Region abbreviation
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Alias = null;
-
-        /**
-         * Whitelisted location
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
+        this.ClusterId = null;
 
     }
 
@@ -2714,12 +2802,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.FeatureGates = 'FeatureGates' in params ? params.FeatureGates : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -2805,56 +2888,30 @@ Note: this field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * The alarm configuration
+ * DescribeClusterRouteTables response structure.
  * @class
  */
-class PrometheusAlertRuleDetail extends  AbstractModel {
+class DescribeClusterRouteTablesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Rule name
+         * Number of instances that match the filter condition(s).
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Object of cluster route table.
+         * @type {Array.<RouteTableInfo> || null}
+         */
+        this.RouteTableSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Rule list
-         * @type {Array.<PrometheusAlertRule> || null}
-         */
-        this.Rules = null;
-
-        /**
-         * Last modification time
-         * @type {string || null}
-         */
-        this.UpdatedAt = null;
-
-        /**
-         * Alarm delivery methods
-         * @type {PrometheusNotification || null}
-         */
-        this.Notification = null;
-
-        /**
-         * Alarm rule ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * If the alarm is delivered via a template, the TemplateId is the template ID.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.TemplateId = null;
-
-        /**
-         * Alarm interval
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.Interval = null;
+        this.RequestId = null;
 
     }
 
@@ -2865,26 +2922,17 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new PrometheusAlertRule();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
+        if (params.RouteTableSet) {
+            this.RouteTableSet = new Array();
+            for (let z in params.RouteTableSet) {
+                let obj = new RouteTableInfo();
+                obj.deserialize(params.RouteTableSet[z]);
+                this.RouteTableSet.push(obj);
             }
         }
-        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
-
-        if (params.Notification) {
-            let obj = new PrometheusNotification();
-            obj.deserialize(params.Notification)
-            this.Notification = obj;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3541,30 +3589,30 @@ class DescribeClusterStatusResponse extends  AbstractModel {
 }
 
 /**
- * DescribeClusterRouteTables response structure.
+ * DeleteClusterNodePool request structure.
  * @class
  */
-class DescribeClusterRouteTablesResponse extends  AbstractModel {
+class DeleteClusterNodePoolRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of instances that match the filter condition(s).
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Object of cluster route table.
-         * @type {Array.<RouteTableInfo> || null}
-         */
-        this.RouteTableSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * ClusterId of a node pool
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClusterId = null;
+
+        /**
+         * IDs of node pools to delete
+         * @type {Array.<string> || null}
+         */
+        this.NodePoolIds = null;
+
+        /**
+         * Indicates whether nodes in a node pool are retained when the node pool is deleted. (The nodes are removed from the cluster. However, the corresponding instances will not be terminated.)
+         * @type {boolean || null}
+         */
+        this.KeepInstance = null;
 
     }
 
@@ -3575,17 +3623,9 @@ class DescribeClusterRouteTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.RouteTableSet) {
-            this.RouteTableSet = new Array();
-            for (let z in params.RouteTableSet) {
-                let obj = new RouteTableInfo();
-                obj.deserialize(params.RouteTableSet[z]);
-                this.RouteTableSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolIds = 'NodePoolIds' in params ? params.NodePoolIds : null;
+        this.KeepInstance = 'KeepInstance' in params ? params.KeepInstance : null;
 
     }
 }
@@ -4210,6 +4250,34 @@ class AddNodeToNodePoolResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterLevelAttribute request structure.
+ * @class
+ */
+class DescribeClusterLevelAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID (available for cluster model adjustment)
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+
+    }
+}
+
+/**
  * DisableClusterDeletionProtection request structure.
  * @class
  */
@@ -4447,8 +4515,8 @@ Note: This field may return null, indicating that no valid value was found.
         this.MountTarget = null;
 
         /**
-         * The name of the device or partition to mount
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * Mounted device name or partition name (only required when adding an existing node)
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DiskPartition = null;
@@ -4931,6 +4999,48 @@ class DescribeClusterEndpointStatusRequest extends  AbstractModel {
 }
 
 /**
+ * GetClusterLevelPrice response structure.
+ * @class
+ */
+class GetClusterLevelPriceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Discount price (unit: US cent)
+         * @type {number || null}
+         */
+        this.Cost = null;
+
+        /**
+         * Original price (unit: US cent)
+         * @type {number || null}
+         */
+        this.TotalCost = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cost = 'Cost' in params ? params.Cost : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * PROM instance alarm rule
  * @class
  */
@@ -5027,30 +5137,42 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Describes the configuration of enhanced services, such as Cloud Security and Cloud Monitor.
+ * DescribeResourceUsage response structure.
  * @class
  */
-class EnhancedService extends  AbstractModel {
+class DescribeResourceUsageResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Enables cloud security service. If this parameter is not specified, the cloud security service will be enabled by default.
-         * @type {RunSecurityServiceEnabled || null}
+         * CRD usage
+         * @type {ResourceUsage || null}
          */
-        this.SecurityService = null;
+        this.CRDUsage = null;
 
         /**
-         * Enables cloud monitor service. If this parameter is not specified, the cloud monitor service will be enabled by default.
-         * @type {RunMonitorServiceEnabled || null}
+         * Pod usage
+         * @type {number || null}
          */
-        this.MonitorService = null;
+        this.PodUsage = null;
 
         /**
-         * Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
-         * @type {RunAutomationServiceEnabled || null}
+         * ConfigMap usage
+         * @type {number || null}
          */
-        this.AutomationService = null;
+        this.ConfigMapUsage = null;
+
+        /**
+         * Other resource usage
+         * @type {ResourceUsage || null}
+         */
+        this.OtherUsage = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -5062,23 +5184,20 @@ class EnhancedService extends  AbstractModel {
             return;
         }
 
-        if (params.SecurityService) {
-            let obj = new RunSecurityServiceEnabled();
-            obj.deserialize(params.SecurityService)
-            this.SecurityService = obj;
+        if (params.CRDUsage) {
+            let obj = new ResourceUsage();
+            obj.deserialize(params.CRDUsage)
+            this.CRDUsage = obj;
         }
+        this.PodUsage = 'PodUsage' in params ? params.PodUsage : null;
+        this.ConfigMapUsage = 'ConfigMapUsage' in params ? params.ConfigMapUsage : null;
 
-        if (params.MonitorService) {
-            let obj = new RunMonitorServiceEnabled();
-            obj.deserialize(params.MonitorService)
-            this.MonitorService = obj;
+        if (params.OtherUsage) {
+            let obj = new ResourceUsage();
+            obj.deserialize(params.OtherUsage)
+            this.OtherUsage = obj;
         }
-
-        if (params.AutomationService) {
-            let obj = new RunAutomationServiceEnabled();
-            obj.deserialize(params.AutomationService)
-            this.AutomationService = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5199,6 +5318,51 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ServiceAccount authentication configuration
+ * @class
+ */
+class ServiceAccountAuthenticationOptions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * service-account-issuer
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Issuer = null;
+
+        /**
+         * service-account-jwks-uri
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.JWKSURI = null;
+
+        /**
+         * If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.AutoCreateDiscoveryAnonymousAuth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Issuer = 'Issuer' in params ? params.Issuer : null;
+        this.JWKSURI = 'JWKSURI' in params ? params.JWKSURI : null;
+        this.AutoCreateDiscoveryAnonymousAuth = 'AutoCreateDiscoveryAnonymousAuth' in params ? params.AutoCreateDiscoveryAnonymousAuth : null;
 
     }
 }
@@ -5966,6 +6130,75 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Region information
+ * @class
+ */
+class RegionInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Region ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Region status
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Status of region-related features (return all attributes in JSON format)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FeatureGates = null;
+
+        /**
+         * Region abbreviation
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Whitelisted location
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FeatureGates = 'FeatureGates' in params ? params.FeatureGates : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
  * The model information and the maximum supported number of Pods in the VPC-CNI mode
  * @class
  */
@@ -6061,6 +6294,182 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The alarm configuration
+ * @class
+ */
+class PrometheusAlertRuleDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Rule list
+         * @type {Array.<PrometheusAlertRule> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * Last modification time
+         * @type {string || null}
+         */
+        this.UpdatedAt = null;
+
+        /**
+         * Alarm delivery methods
+         * @type {PrometheusNotification || null}
+         */
+        this.Notification = null;
+
+        /**
+         * Alarm rule ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * If the alarm is delivered via a template, the TemplateId is the template ID.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Alarm interval
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new PrometheusAlertRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+
+        if (params.Notification) {
+            let obj = new PrometheusNotification();
+            obj.deserialize(params.Notification)
+            this.Notification = obj;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusInstance response structure.
+ * @class
+ */
+class DescribePrometheusInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * COS bucket name
+         * @type {string || null}
+         */
+        this.COSBucket = null;
+
+        /**
+         * Data query address
+         * @type {string || null}
+         */
+        this.QueryAddress = null;
+
+        /**
+         * The grafana related information in the instance
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {PrometheusGrafanaInfo || null}
+         */
+        this.Grafana = null;
+
+        /**
+         * Custom alertmanager
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.AlertManagerUrl = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.COSBucket = 'COSBucket' in params ? params.COSBucket : null;
+        this.QueryAddress = 'QueryAddress' in params ? params.QueryAddress : null;
+
+        if (params.Grafana) {
+            let obj = new PrometheusGrafanaInfo();
+            obj.deserialize(params.Grafana)
+            this.Grafana = obj;
+        }
+        this.AlertManagerUrl = 'AlertManagerUrl' in params ? params.AlertManagerUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6301,6 +6710,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.OsName = 'OsName' in params ? params.OsName : null;
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+
+    }
+}
+
+/**
+ * GetClusterLevelPrice request structure.
+ * @class
+ */
+class GetClusterLevelPriceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The cluster model. It’s used for price query.
+         * @type {string || null}
+         */
+        this.ClusterLevel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
 
     }
 }
@@ -6640,48 +7077,6 @@ class AcquireClusterAdminRoleResponse extends  AbstractModel {
 }
 
 /**
- * DeleteClusterNodePool request structure.
- * @class
- */
-class DeleteClusterNodePoolRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ClusterId of a node pool
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * IDs of node pools to delete
-         * @type {Array.<string> || null}
-         */
-        this.NodePoolIds = null;
-
-        /**
-         * Indicates whether nodes in a node pool are retained when the node pool is deleted. (The nodes are removed from the cluster. However, the corresponding instances will not be terminated.)
-         * @type {boolean || null}
-         */
-        this.KeepInstance = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NodePoolIds = 'NodePoolIds' in params ? params.NodePoolIds : null;
-        this.KeepInstance = 'KeepInstance' in params ? params.KeepInstance : null;
-
-    }
-}
-
-/**
  * UpdateClusterVersion request structure.
  * @class
  */
@@ -6806,6 +7201,56 @@ class DeleteClusterEndpointVipRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterLevelChangeRecords response structure.
+ * @class
+ */
+class DescribeClusterLevelChangeRecordsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Cluster model
+         * @type {Array.<ClusterLevelChangeRecord> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ClusterLevelChangeRecord();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7005,13 +7450,15 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.EnableExternalNode = null;
 
         /**
-         * 
+         * Cluster models. It’s valid for managed clusters.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ClusterLevel = null;
 
         /**
-         * 
+         * The target cluster model for auto-upgrade
+Note: this field may return null, indicating that no valid value is obtained.
          * @type {boolean || null}
          */
         this.AutoUpgradeClusterLevel = null;
@@ -7560,62 +8007,24 @@ class ModifyClusterAsGroupOptionAttributeResponse extends  AbstractModel {
 }
 
 /**
- * DescribePrometheusInstance response structure.
+ * DescribeClusterLevelAttribute response structure.
  * @class
  */
-class DescribePrometheusInstanceResponse extends  AbstractModel {
+class DescribeClusterLevelAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * Total number
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.TotalCount = null;
 
         /**
-         * Instance name
-         * @type {string || null}
+         * Cluster model
+         * @type {Array.<ClusterLevelAttribute> || null}
          */
-        this.Name = null;
-
-        /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * COS bucket name
-         * @type {string || null}
-         */
-        this.COSBucket = null;
-
-        /**
-         * Data query address
-         * @type {string || null}
-         */
-        this.QueryAddress = null;
-
-        /**
-         * The grafana related information in the instance
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {PrometheusGrafanaInfo || null}
-         */
-        this.Grafana = null;
-
-        /**
-         * Custom alertmanager
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.AlertManagerUrl = null;
+        this.Items = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7632,19 +8041,16 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.COSBucket = 'COSBucket' in params ? params.COSBucket : null;
-        this.QueryAddress = 'QueryAddress' in params ? params.QueryAddress : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Grafana) {
-            let obj = new PrometheusGrafanaInfo();
-            obj.deserialize(params.Grafana)
-            this.Grafana = obj;
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ClusterLevelAttribute();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
         }
-        this.AlertManagerUrl = 'AlertManagerUrl' in params ? params.AlertManagerUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8275,24 +8681,61 @@ class DeleteClusterRouteRequest extends  AbstractModel {
 }
 
 /**
- * DeleteClusterEndpoint request structure.
+ * Information of the managed cluster model
  * @class
  */
-class DeleteClusterEndpointRequest extends  AbstractModel {
+class ClusterLevelAttribute extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
+         * Cluster model
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.Name = null;
 
         /**
-         * Whether public network access is enabled or not (True = public network access, FALSE = private network access, with the default value as FALSE).
+         * Model name
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Number of nodes
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * Number of Pods
+         * @type {number || null}
+         */
+        this.PodCount = null;
+
+        /**
+         * Number of ConfigMap
+         * @type {number || null}
+         */
+        this.ConfigMapCount = null;
+
+        /**
+         * Number of CRDs
+         * @type {number || null}
+         */
+        this.CRDCount = null;
+
+        /**
+         * Whether it is enabled
          * @type {boolean || null}
          */
-        this.IsExtranet = null;
+        this.Enable = null;
+
+        /**
+         * Number of other resources
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OtherCount = null;
 
     }
 
@@ -8303,8 +8746,71 @@ class DeleteClusterEndpointRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.PodCount = 'PodCount' in params ? params.PodCount : null;
+        this.ConfigMapCount = 'ConfigMapCount' in params ? params.ConfigMapCount : null;
+        this.CRDCount = 'CRDCount' in params ? params.CRDCount : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.OtherCount = 'OtherCount' in params ? params.OtherCount : null;
+
+    }
+}
+
+/**
+ * Describes the configuration of enhanced services, such as Cloud Security and Cloud Monitor.
+ * @class
+ */
+class EnhancedService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Enables cloud security service. If this parameter is not specified, the cloud security service will be enabled by default.
+         * @type {RunSecurityServiceEnabled || null}
+         */
+        this.SecurityService = null;
+
+        /**
+         * Enables cloud monitor service. If this parameter is not specified, the cloud monitor service will be enabled by default.
+         * @type {RunMonitorServiceEnabled || null}
+         */
+        this.MonitorService = null;
+
+        /**
+         * Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
+         * @type {RunAutomationServiceEnabled || null}
+         */
+        this.AutomationService = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SecurityService) {
+            let obj = new RunSecurityServiceEnabled();
+            obj.deserialize(params.SecurityService)
+            this.SecurityService = obj;
+        }
+
+        if (params.MonitorService) {
+            let obj = new RunMonitorServiceEnabled();
+            obj.deserialize(params.MonitorService)
+            this.MonitorService = obj;
+        }
+
+        if (params.AutomationService) {
+            let obj = new RunAutomationServiceEnabled();
+            obj.deserialize(params.AutomationService)
+            this.AutomationService = obj;
+        }
 
     }
 }
@@ -8645,6 +9151,62 @@ class TagSpecification extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeClusterLevelChangeRecords request structure.
+ * @class
+ */
+class DescribeClusterLevelChangeRecordsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.StartAt = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndAt = null;
+
+        /**
+         * Offset. Default value: `0`
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of output entries. Default value: `20`
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.StartAt = 'StartAt' in params ? params.StartAt : null;
+        this.EndAt = 'EndAt' in params ? params.EndAt : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -9133,6 +9695,41 @@ class UpdateClusterVersionResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteClusterEndpoint request structure.
+ * @class
+ */
+class DeleteClusterEndpointRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Whether public network access is enabled or not (True = public network access, FALSE = private network access, with the default value as FALSE).
+         * @type {boolean || null}
+         */
+        this.IsExtranet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
+
+    }
+}
+
+/**
  * CreateClusterNodePool response structure.
  * @class
  */
@@ -9615,7 +10212,7 @@ module.exports = {
     PrometheusNotification: PrometheusNotification,
     ClusterVersion: ClusterVersion,
     RouteInfo: RouteInfo,
-    ServiceAccountAuthenticationOptions: ServiceAccountAuthenticationOptions,
+    ResourceUsageDetail: ResourceUsageDetail,
     InstanceUpgradeProgressItem: InstanceUpgradeProgressItem,
     NodePool: NodePool,
     AutoUpgradeClusterLevel: AutoUpgradeClusterLevel,
@@ -9624,6 +10221,7 @@ module.exports = {
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     InstanceExtraArgs: InstanceExtraArgs,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    ClusterLevelChangeRecord: ClusterLevelChangeRecord,
     ModifyPrometheusAlertRuleResponse: ModifyPrometheusAlertRuleResponse,
     AddNodeToNodePoolRequest: AddNodeToNodePoolRequest,
     EnableVpcCniNetworkTypeResponse: EnableVpcCniNetworkTypeResponse,
@@ -9642,15 +10240,16 @@ module.exports = {
     DeleteClusterRouteResponse: DeleteClusterRouteResponse,
     ModifyClusterEndpointSPResponse: ModifyClusterEndpointSPResponse,
     CreateClusterEndpointVipResponse: CreateClusterEndpointVipResponse,
+    ResourceUsage: ResourceUsage,
     DescribeClusterRoutesResponse: DescribeClusterRoutesResponse,
     DescribeClustersRequest: DescribeClustersRequest,
     UpgradeClusterInstancesRequest: UpgradeClusterInstancesRequest,
     ExtensionAddon: ExtensionAddon,
     DeletePrometheusAlertRuleRequest: DeletePrometheusAlertRuleRequest,
-    RegionInstance: RegionInstance,
+    DescribeResourceUsageRequest: DescribeResourceUsageRequest,
     Label: Label,
     PodLimitsByType: PodLimitsByType,
-    PrometheusAlertRuleDetail: PrometheusAlertRuleDetail,
+    DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
     SetNodePoolNodeProtectionResponse: SetNodePoolNodeProtectionResponse,
     DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
@@ -9665,7 +10264,7 @@ module.exports = {
     DescribeClusterStatusRequest: DescribeClusterStatusRequest,
     VersionInstance: VersionInstance,
     DescribeClusterStatusResponse: DescribeClusterStatusResponse,
-    DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
+    DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
     DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
@@ -9678,6 +10277,7 @@ module.exports = {
     GetUpgradeInstanceProgressRequest: GetUpgradeInstanceProgressRequest,
     EnableClusterDeletionProtectionRequest: EnableClusterDeletionProtectionRequest,
     AddNodeToNodePoolResponse: AddNodeToNodePoolResponse,
+    DescribeClusterLevelAttributeRequest: DescribeClusterLevelAttributeRequest,
     DisableClusterDeletionProtectionRequest: DisableClusterDeletionProtectionRequest,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
@@ -9695,10 +10295,12 @@ module.exports = {
     CreateClusterNodePoolFromExistingAsgResponse: CreateClusterNodePoolFromExistingAsgResponse,
     DescribeEnableVpcCniProgressRequest: DescribeEnableVpcCniProgressRequest,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
+    GetClusterLevelPriceResponse: GetClusterLevelPriceResponse,
     PrometheusAlertRule: PrometheusAlertRule,
-    EnhancedService: EnhancedService,
+    DescribeResourceUsageResponse: DescribeResourceUsageResponse,
     CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
     DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
+    ServiceAccountAuthenticationOptions: ServiceAccountAuthenticationOptions,
     DescribeVersionsRequest: DescribeVersionsRequest,
     CreateClusterResponse: CreateClusterResponse,
     TaskStepInfo: TaskStepInfo,
@@ -9715,19 +10317,23 @@ module.exports = {
     DescribePrometheusInstanceRequest: DescribePrometheusInstanceRequest,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     InstanceAdvancedSettings: InstanceAdvancedSettings,
+    RegionInstance: RegionInstance,
     PodLimitsInstance: PodLimitsInstance,
     DescribeEnableVpcCniProgressResponse: DescribeEnableVpcCniProgressResponse,
+    PrometheusAlertRuleDetail: PrometheusAlertRuleDetail,
+    DescribePrometheusInstanceResponse: DescribePrometheusInstanceResponse,
     Filter: Filter,
     ModifyClusterNodePoolRequest: ModifyClusterNodePoolRequest,
     ImageInstance: ImageInstance,
+    GetClusterLevelPriceRequest: GetClusterLevelPriceRequest,
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
     CreateClusterNodePoolRequest: CreateClusterNodePoolRequest,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
-    DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
     UpdateClusterVersionRequest: UpdateClusterVersionRequest,
     ModifyClusterAuthenticationOptionsRequest: ModifyClusterAuthenticationOptionsRequest,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
+    DescribeClusterLevelChangeRecordsResponse: DescribeClusterLevelChangeRecordsResponse,
     CheckInstancesUpgradeAbleResponse: CheckInstancesUpgradeAbleResponse,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,
@@ -9741,7 +10347,7 @@ module.exports = {
     ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,
     ModifyClusterAsGroupOptionAttributeResponse: ModifyClusterAsGroupOptionAttributeResponse,
-    DescribePrometheusInstanceResponse: DescribePrometheusInstanceResponse,
+    DescribeClusterLevelAttributeResponse: DescribeClusterLevelAttributeResponse,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     DescribeTKEEdgeScriptRequest: DescribeTKEEdgeScriptRequest,
     ClusterAsGroupOption: ClusterAsGroupOption,
@@ -9753,7 +10359,8 @@ module.exports = {
     InstanceUpgradeClusterStatus: InstanceUpgradeClusterStatus,
     DescribeClusterRoutesRequest: DescribeClusterRoutesRequest,
     DeleteClusterRouteRequest: DeleteClusterRouteRequest,
-    DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
+    ClusterLevelAttribute: ClusterLevelAttribute,
+    EnhancedService: EnhancedService,
     DescribeClusterNodePoolDetailRequest: DescribeClusterNodePoolDetailRequest,
     SetNodePoolNodeProtectionRequest: SetNodePoolNodeProtectionRequest,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
@@ -9762,6 +10369,7 @@ module.exports = {
     DescribeImagesRequest: DescribeImagesRequest,
     DescribeAvailableClusterVersionResponse: DescribeAvailableClusterVersionResponse,
     TagSpecification: TagSpecification,
+    DescribeClusterLevelChangeRecordsRequest: DescribeClusterLevelChangeRecordsRequest,
     AddVpcCniSubnetsRequest: AddVpcCniSubnetsRequest,
     InstanceUpgradePreCheckResultItem: InstanceUpgradePreCheckResultItem,
     DescribeClusterCommonNamesResponse: DescribeClusterCommonNamesResponse,
@@ -9773,6 +10381,7 @@ module.exports = {
     DeleteClusterRequest: DeleteClusterRequest,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     UpdateClusterVersionResponse: UpdateClusterVersionResponse,
+    DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
     CreateClusterNodePoolResponse: CreateClusterNodePoolResponse,
     ManuallyAdded: ManuallyAdded,
     NodePoolOption: NodePoolOption,

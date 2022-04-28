@@ -888,6 +888,43 @@ class AcceptDirectConnectTunnelRequest extends  AbstractModel {
 }
 
 /**
+ * Tag key-value pair
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * CreateDirectConnectTunnel request structure.
  * @class
  */
@@ -1000,6 +1037,30 @@ Default value: Non-zero.
          */
         this.CloudAttachId = null;
 
+        /**
+         * Whether to enable BFD
+         * @type {number || null}
+         */
+        this.BfdEnable = null;
+
+        /**
+         * Whether to enable NQA
+         * @type {number || null}
+         */
+        this.NqaEnable = null;
+
+        /**
+         * BFD configuration information
+         * @type {BFDInfo || null}
+         */
+        this.BfdInfo = null;
+
+        /**
+         * NQA configuration information
+         * @type {NQAInfo || null}
+         */
+        this.NqaInfo = null;
+
     }
 
     /**
@@ -1038,6 +1099,20 @@ Default value: Non-zero.
         this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
         this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
         this.CloudAttachId = 'CloudAttachId' in params ? params.CloudAttachId : null;
+        this.BfdEnable = 'BfdEnable' in params ? params.BfdEnable : null;
+        this.NqaEnable = 'NqaEnable' in params ? params.NqaEnable : null;
+
+        if (params.BfdInfo) {
+            let obj = new BFDInfo();
+            obj.deserialize(params.BfdInfo)
+            this.BfdInfo = obj;
+        }
+
+        if (params.NqaInfo) {
+            let obj = new NQAInfo();
+            obj.deserialize(params.NqaInfo)
+            this.NqaInfo = obj;
+        }
 
     }
 }
@@ -1966,6 +2041,119 @@ class DeleteDirectConnectTunnelResponse extends  AbstractModel {
 }
 
 /**
+ * BFD configuration information
+ * @class
+ */
+class BFDInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of health checks
+         * @type {number || null}
+         */
+        this.ProbeFailedTimes = null;
+
+        /**
+         * Health check interval
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProbeFailedTimes = 'ProbeFailedTimes' in params ? params.ProbeFailedTimes : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+    }
+}
+
+/**
+ * DeleteDirectConnect request structure.
+ * @class
+ */
+class DeleteDirectConnectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Connection ID.
+         * @type {string || null}
+         */
+        this.DirectConnectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DirectConnectId = 'DirectConnectId' in params ? params.DirectConnectId : null;
+
+    }
+}
+
+/**
+ * DescribeDirectConnectTunnels response structure.
+ * @class
+ */
+class DescribeDirectConnectTunnelsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of dedicated tunnels.
+         * @type {Array.<DirectConnectTunnel> || null}
+         */
+        this.DirectConnectTunnelSet = null;
+
+        /**
+         * Number of eligible dedicated tunnels.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DirectConnectTunnelSet) {
+            this.DirectConnectTunnelSet = new Array();
+            for (let z in params.DirectConnectTunnelSet) {
+                let obj = new DirectConnectTunnel();
+                obj.deserialize(params.DirectConnectTunnelSet[z]);
+                this.DirectConnectTunnelSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Access point information.
  * @class
  */
@@ -2074,84 +2262,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DeleteDirectConnect request structure.
- * @class
- */
-class DeleteDirectConnectRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Connection ID.
-         * @type {string || null}
-         */
-        this.DirectConnectId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DirectConnectId = 'DirectConnectId' in params ? params.DirectConnectId : null;
-
-    }
-}
-
-/**
- * DescribeDirectConnectTunnels response structure.
- * @class
- */
-class DescribeDirectConnectTunnelsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of dedicated tunnels.
-         * @type {Array.<DirectConnectTunnel> || null}
-         */
-        this.DirectConnectTunnelSet = null;
-
-        /**
-         * Number of eligible dedicated tunnels.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.DirectConnectTunnelSet) {
-            this.DirectConnectTunnelSet = new Array();
-            for (let z in params.DirectConnectTunnelSet) {
-                let obj = new DirectConnectTunnel();
-                obj.deserialize(params.DirectConnectTunnelSet[z]);
-                this.DirectConnectTunnelSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeInternetAddressStatistics response structure.
  * @class
  */
@@ -2203,26 +2313,30 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Tag key-value pair
+ * NQA configuration information
  * @class
  */
-class Tag extends  AbstractModel {
+class NQAInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tag key
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Number of health checks
+         * @type {number || null}
          */
-        this.Key = null;
+        this.ProbeFailedTimes = null;
 
         /**
-         * Tag value
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Health check interval
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * IP address for the health check
          * @type {string || null}
          */
-        this.Value = null;
+        this.DestinationIp = null;
 
     }
 
@@ -2233,8 +2347,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.ProbeFailedTimes = 'ProbeFailedTimes' in params ? params.ProbeFailedTimes : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.DestinationIp = 'DestinationIp' in params ? params.DestinationIp : null;
 
     }
 }
@@ -2707,6 +2822,7 @@ module.exports = {
     RouteFilterPrefix: RouteFilterPrefix,
     ApplyInternetAddressResponse: ApplyInternetAddressResponse,
     AcceptDirectConnectTunnelRequest: AcceptDirectConnectTunnelRequest,
+    Tag: Tag,
     CreateDirectConnectTunnelRequest: CreateDirectConnectTunnelRequest,
     DeleteDirectConnectResponse: DeleteDirectConnectResponse,
     EnableInternetAddressResponse: EnableInternetAddressResponse,
@@ -2727,11 +2843,12 @@ module.exports = {
     RejectDirectConnectTunnelResponse: RejectDirectConnectTunnelResponse,
     CreateDirectConnectTunnelResponse: CreateDirectConnectTunnelResponse,
     DeleteDirectConnectTunnelResponse: DeleteDirectConnectTunnelResponse,
-    AccessPoint: AccessPoint,
+    BFDInfo: BFDInfo,
     DeleteDirectConnectRequest: DeleteDirectConnectRequest,
     DescribeDirectConnectTunnelsResponse: DescribeDirectConnectTunnelsResponse,
+    AccessPoint: AccessPoint,
     DescribeInternetAddressStatisticsResponse: DescribeInternetAddressStatisticsResponse,
-    Tag: Tag,
+    NQAInfo: NQAInfo,
     DescribeInternetAddressRequest: DescribeInternetAddressRequest,
     DescribeInternetAddressQuotaResponse: DescribeInternetAddressQuotaResponse,
     ReleaseInternetAddressResponse: ReleaseInternetAddressResponse,

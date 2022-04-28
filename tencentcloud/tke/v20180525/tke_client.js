@@ -36,7 +36,7 @@ const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
 const PrometheusNotification = models.PrometheusNotification;
 const ClusterVersion = models.ClusterVersion;
 const RouteInfo = models.RouteInfo;
-const ServiceAccountAuthenticationOptions = models.ServiceAccountAuthenticationOptions;
+const ResourceUsageDetail = models.ResourceUsageDetail;
 const InstanceUpgradeProgressItem = models.InstanceUpgradeProgressItem;
 const NodePool = models.NodePool;
 const AutoUpgradeClusterLevel = models.AutoUpgradeClusterLevel;
@@ -45,6 +45,7 @@ const DeleteClusterAsGroupsRequest = models.DeleteClusterAsGroupsRequest;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
 const InstanceExtraArgs = models.InstanceExtraArgs;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
+const ClusterLevelChangeRecord = models.ClusterLevelChangeRecord;
 const ModifyPrometheusAlertRuleResponse = models.ModifyPrometheusAlertRuleResponse;
 const AddNodeToNodePoolRequest = models.AddNodeToNodePoolRequest;
 const EnableVpcCniNetworkTypeResponse = models.EnableVpcCniNetworkTypeResponse;
@@ -63,15 +64,16 @@ const ModifyClusterAttributeRequest = models.ModifyClusterAttributeRequest;
 const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
 const ModifyClusterEndpointSPResponse = models.ModifyClusterEndpointSPResponse;
 const CreateClusterEndpointVipResponse = models.CreateClusterEndpointVipResponse;
+const ResourceUsage = models.ResourceUsage;
 const DescribeClusterRoutesResponse = models.DescribeClusterRoutesResponse;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const UpgradeClusterInstancesRequest = models.UpgradeClusterInstancesRequest;
 const ExtensionAddon = models.ExtensionAddon;
 const DeletePrometheusAlertRuleRequest = models.DeletePrometheusAlertRuleRequest;
-const RegionInstance = models.RegionInstance;
+const DescribeResourceUsageRequest = models.DescribeResourceUsageRequest;
 const Label = models.Label;
 const PodLimitsByType = models.PodLimitsByType;
-const PrometheusAlertRuleDetail = models.PrometheusAlertRuleDetail;
+const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
 const SetNodePoolNodeProtectionResponse = models.SetNodePoolNodeProtectionResponse;
 const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsRequest;
 const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;
@@ -86,7 +88,7 @@ const DescribeTKEEdgeScriptResponse = models.DescribeTKEEdgeScriptResponse;
 const DescribeClusterStatusRequest = models.DescribeClusterStatusRequest;
 const VersionInstance = models.VersionInstance;
 const DescribeClusterStatusResponse = models.DescribeClusterStatusResponse;
-const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
+const DeleteClusterNodePoolRequest = models.DeleteClusterNodePoolRequest;
 const DescribeClusterKubeconfigRequest = models.DescribeClusterKubeconfigRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
@@ -99,6 +101,7 @@ const UpgradeAbleInstancesItem = models.UpgradeAbleInstancesItem;
 const GetUpgradeInstanceProgressRequest = models.GetUpgradeInstanceProgressRequest;
 const EnableClusterDeletionProtectionRequest = models.EnableClusterDeletionProtectionRequest;
 const AddNodeToNodePoolResponse = models.AddNodeToNodePoolResponse;
+const DescribeClusterLevelAttributeRequest = models.DescribeClusterLevelAttributeRequest;
 const DisableClusterDeletionProtectionRequest = models.DisableClusterDeletionProtectionRequest;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
@@ -116,10 +119,12 @@ const ModifyNodePoolInstanceTypesResponse = models.ModifyNodePoolInstanceTypesRe
 const CreateClusterNodePoolFromExistingAsgResponse = models.CreateClusterNodePoolFromExistingAsgResponse;
 const DescribeEnableVpcCniProgressRequest = models.DescribeEnableVpcCniProgressRequest;
 const DescribeClusterEndpointStatusRequest = models.DescribeClusterEndpointStatusRequest;
+const GetClusterLevelPriceResponse = models.GetClusterLevelPriceResponse;
 const PrometheusAlertRule = models.PrometheusAlertRule;
-const EnhancedService = models.EnhancedService;
+const DescribeResourceUsageResponse = models.DescribeResourceUsageResponse;
 const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
 const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
+const ServiceAccountAuthenticationOptions = models.ServiceAccountAuthenticationOptions;
 const DescribeVersionsRequest = models.DescribeVersionsRequest;
 const CreateClusterResponse = models.CreateClusterResponse;
 const TaskStepInfo = models.TaskStepInfo;
@@ -136,19 +141,23 @@ const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const DescribePrometheusInstanceRequest = models.DescribePrometheusInstanceRequest;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
+const RegionInstance = models.RegionInstance;
 const PodLimitsInstance = models.PodLimitsInstance;
 const DescribeEnableVpcCniProgressResponse = models.DescribeEnableVpcCniProgressResponse;
+const PrometheusAlertRuleDetail = models.PrometheusAlertRuleDetail;
+const DescribePrometheusInstanceResponse = models.DescribePrometheusInstanceResponse;
 const Filter = models.Filter;
 const ModifyClusterNodePoolRequest = models.ModifyClusterNodePoolRequest;
 const ImageInstance = models.ImageInstance;
+const GetClusterLevelPriceRequest = models.GetClusterLevelPriceRequest;
 const CreateClusterEndpointResponse = models.CreateClusterEndpointResponse;
 const CreateClusterNodePoolRequest = models.CreateClusterNodePoolRequest;
 const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
 const AcquireClusterAdminRoleResponse = models.AcquireClusterAdminRoleResponse;
-const DeleteClusterNodePoolRequest = models.DeleteClusterNodePoolRequest;
 const UpdateClusterVersionRequest = models.UpdateClusterVersionRequest;
 const ModifyClusterAuthenticationOptionsRequest = models.ModifyClusterAuthenticationOptionsRequest;
 const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
+const DescribeClusterLevelChangeRecordsResponse = models.DescribeClusterLevelChangeRecordsResponse;
 const CheckInstancesUpgradeAbleResponse = models.CheckInstancesUpgradeAbleResponse;
 const Cluster = models.Cluster;
 const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
@@ -162,7 +171,7 @@ const DescribeClusterAsGroupOptionRequest = models.DescribeClusterAsGroupOptionR
 const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
 const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
 const ModifyClusterAsGroupOptionAttributeResponse = models.ModifyClusterAsGroupOptionAttributeResponse;
-const DescribePrometheusInstanceResponse = models.DescribePrometheusInstanceResponse;
+const DescribeClusterLevelAttributeResponse = models.DescribeClusterLevelAttributeResponse;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
 const DescribeTKEEdgeScriptRequest = models.DescribeTKEEdgeScriptRequest;
 const ClusterAsGroupOption = models.ClusterAsGroupOption;
@@ -174,7 +183,8 @@ const ExistedInstancesForNode = models.ExistedInstancesForNode;
 const InstanceUpgradeClusterStatus = models.InstanceUpgradeClusterStatus;
 const DescribeClusterRoutesRequest = models.DescribeClusterRoutesRequest;
 const DeleteClusterRouteRequest = models.DeleteClusterRouteRequest;
-const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
+const ClusterLevelAttribute = models.ClusterLevelAttribute;
+const EnhancedService = models.EnhancedService;
 const DescribeClusterNodePoolDetailRequest = models.DescribeClusterNodePoolDetailRequest;
 const SetNodePoolNodeProtectionRequest = models.SetNodePoolNodeProtectionRequest;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
@@ -183,6 +193,7 @@ const DescribeClusterAsGroupsRequest = models.DescribeClusterAsGroupsRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
 const DescribeAvailableClusterVersionResponse = models.DescribeAvailableClusterVersionResponse;
 const TagSpecification = models.TagSpecification;
+const DescribeClusterLevelChangeRecordsRequest = models.DescribeClusterLevelChangeRecordsRequest;
 const AddVpcCniSubnetsRequest = models.AddVpcCniSubnetsRequest;
 const InstanceUpgradePreCheckResultItem = models.InstanceUpgradePreCheckResultItem;
 const DescribeClusterCommonNamesResponse = models.DescribeClusterCommonNamesResponse;
@@ -194,6 +205,7 @@ const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
 const DeleteClusterRequest = models.DeleteClusterRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const UpdateClusterVersionResponse = models.UpdateClusterVersionResponse;
+const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
 const CreateClusterNodePoolResponse = models.CreateClusterNodePoolResponse;
 const ManuallyAdded = models.ManuallyAdded;
 const NodePoolOption = models.NodePoolOption;
@@ -390,6 +402,17 @@ class TkeClient extends AbstractClient {
     ModifyClusterAttribute(req, cb) {
         let resp = new ModifyClusterAttributeResponse();
         this.request("ModifyClusterAttribute", req, resp, cb);
+    }
+
+    /**
+     * Obtaining the price of specified cluster model
+     * @param {GetClusterLevelPriceRequest} req
+     * @param {function(string, GetClusterLevelPriceResponse):void} cb
+     * @public
+     */
+    GetClusterLevelPrice(req, cb) {
+        let resp = new GetClusterLevelPriceResponse();
+        this.request("GetClusterLevelPrice", req, resp, cb);
     }
 
     /**
@@ -657,6 +680,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the cluster model adjustment history.
+     * @param {DescribeClusterLevelChangeRecordsRequest} req
+     * @param {function(string, DescribeClusterLevelChangeRecordsResponse):void} cb
+     * @public
+     */
+    DescribeClusterLevelChangeRecords(req, cb) {
+        let resp = new DescribeClusterLevelChangeRecordsResponse();
+        this.request("DescribeClusterLevelChangeRecords", req, resp, cb);
+    }
+
+    /**
      * Create a cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
      * @param {CreateClusterEndpointRequest} req
      * @param {function(string, CreateClusterEndpointResponse):void} cb
@@ -687,6 +721,17 @@ class TkeClient extends AbstractClient {
     DescribeClusters(req, cb) {
         let resp = new DescribeClustersResponse();
         this.request("DescribeClusters", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query cluster version information.
+     * @param {DescribeVersionsRequest} req
+     * @param {function(string, DescribeVersionsResponse):void} cb
+     * @public
+     */
+    DescribeVersions(req, cb) {
+        let resp = new DescribeVersionsResponse();
+        this.request("DescribeVersions", req, resp, cb);
     }
 
     /**
@@ -800,14 +845,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query cluster version information.
-     * @param {DescribeVersionsRequest} req
-     * @param {function(string, DescribeVersionsResponse):void} cb
+     * This API is used to query the cluster resource usage.
+     * @param {DescribeResourceUsageRequest} req
+     * @param {function(string, DescribeResourceUsageResponse):void} cb
      * @public
      */
-    DescribeVersions(req, cb) {
-        let resp = new DescribeVersionsResponse();
-        this.request("DescribeVersions", req, resp, cb);
+    DescribeResourceUsage(req, cb) {
+        let resp = new DescribeResourceUsageResponse();
+        this.request("DescribeResourceUsage", req, resp, cb);
     }
 
     /**
@@ -819,6 +864,17 @@ class TkeClient extends AbstractClient {
     DeleteClusterEndpointVip(req, cb) {
         let resp = new DeleteClusterEndpointVipResponse();
         this.request("DeleteClusterEndpointVip", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the cluster model.
+     * @param {DescribeClusterLevelAttributeRequest} req
+     * @param {function(string, DescribeClusterLevelAttributeResponse):void} cb
+     * @public
+     */
+    DescribeClusterLevelAttribute(req, cb) {
+        let resp = new DescribeClusterLevelAttributeResponse();
+        this.request("DescribeClusterLevelAttribute", req, resp, cb);
     }
 
     /**

@@ -479,9 +479,9 @@ class DDoSGeoIPBlockConfig extends  AbstractModel {
 
         /**
          * Region type. Valid values:
-oversea: outside the Chinese mainland
-`china`: the Chinese mainland
-`customized`: custom region
+`oversea`: Outside the Chinese mainland
+`china`: The Chinese mainland
+`customized`: User-specified region
 ]
          * @type {string || null}
          */
@@ -1880,7 +1880,9 @@ class CreateSchedulingDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Indicates whether a hybrid cloud product is used.
+`hybrid`: Anti-DDoS Service Platform
+For other products, leave this field empty.
          * @type {string || null}
          */
         this.Product = null;
@@ -6286,28 +6288,10 @@ class NewL7RuleEntry extends  AbstractModel {
         super();
 
         /**
-         * Session persistence duration, in seconds.
-         * @type {number || null}
+         * Forwarding protocol. Valid values: `http` and `https`.
+         * @type {string || null}
          */
-        this.KeepTime = null;
-
-        /**
-         * Load balancing method. Valid value: `1` (weighed polling).
-         * @type {number || null}
-         */
-        this.LbType = null;
-
-        /**
-         * List of origins
-         * @type {Array.<L4RuleSource> || null}
-         */
-        this.SourceList = null;
-
-        /**
-         * Whether session persistence is enabled. Valid values: `0` (disabled) and `1` (enabled).
-         * @type {number || null}
-         */
-        this.KeepEnable = null;
+        this.Protocol = null;
 
         /**
          * Forwarding domain name.
@@ -6316,10 +6300,22 @@ class NewL7RuleEntry extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Forwarding protocol. Valid values: `http` and `https`.
-         * @type {string || null}
+         * Load balancing method. Valid value: `1` (weighed polling).
+         * @type {number || null}
          */
-        this.Protocol = null;
+        this.LbType = null;
+
+        /**
+         * Whether session persistence is enabled. Valid values: `0` (disabled) and `1` (enabled).
+         * @type {number || null}
+         */
+        this.KeepEnable = null;
+
+        /**
+         * Session persistence duration, in seconds.
+         * @type {number || null}
+         */
+        this.KeepTime = null;
 
         /**
          * Forwarding method. Valid values: `1` (by domain name); `2` (by IP).
@@ -6328,10 +6324,64 @@ class NewL7RuleEntry extends  AbstractModel {
         this.SourceType = null;
 
         /**
-         * Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disabled) and `1` (enabled). It defaults to `0`.
+         * List of origins
+         * @type {Array.<L4RuleSource> || null}
+         */
+        this.SourceList = null;
+
+        /**
+         * Region code.
          * @type {number || null}
          */
-        this.HttpsToHttpEnable = null;
+        this.Region = null;
+
+        /**
+         * Resource ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Anti-DDoS instance IP address.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Rule ID. This field is not required for adding a rule, but is required for modifying or deleting a rule.
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * Rule description.
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * Certificate source. When the forwarding protocol is HTTPS, this field must be set to `2` (Tencent Cloud managed certificate), and for HTTP protocol, it can be set to `0`.
+         * @type {number || null}
+         */
+        this.CertType = null;
+
+        /**
+         * When the certificate is managed by Tencent Cloud, this field must be set to the ID of the managed certificate.
+         * @type {string || null}
+         */
+        this.SSLId = null;
+
+        /**
+         * [Disused] When the certificate is an external certificate, the certificate content should be provided here. 
+         * @type {string || null}
+         */
+        this.Cert = null;
+
+        /**
+         * [Disused] When the certificate is an external certificate, the certificate key should be provided here. 
+         * @type {string || null}
+         */
+        this.PrivateKey = null;
 
         /**
          * Rule status. Valid values: `0` (the rule was successfully configured), `1` (configuring the rule), `2` (rule configuration failed), `3` (deleting the rule), `5` (failed to delete rule), `6` (rule awaiting configuration), `7` (rule awaiting deletion), and `8` (rule awaiting certificate configuration).
@@ -6340,10 +6390,10 @@ class NewL7RuleEntry extends  AbstractModel {
         this.Status = null;
 
         /**
-         * CC protection level based on HTTPS.
-         * @type {string || null}
+         * CC protection status. Valid values: `0` (disabled) and `1` (enabled).
+         * @type {number || null}
          */
-        this.CCLevel = null;
+        this.CCStatus = null;
 
         /**
          * CC protection status based on HTTPS. Valid values: `0` (disabled) and `1` (enabled).
@@ -6358,22 +6408,10 @@ class NewL7RuleEntry extends  AbstractModel {
         this.CCThreshold = null;
 
         /**
-         * Region code.
-         * @type {number || null}
-         */
-        this.Region = null;
-
-        /**
-         * Rule description.
+         * CC protection level based on HTTPS.
          * @type {string || null}
          */
-        this.RuleName = null;
-
-        /**
-         * [Disused] When the certificate is an external certificate, the certificate content should be provided here. 
-         * @type {string || null}
-         */
-        this.Cert = null;
+        this.CCLevel = null;
 
         /**
          * Modification time.
@@ -6382,28 +6420,10 @@ class NewL7RuleEntry extends  AbstractModel {
         this.ModifyTime = null;
 
         /**
-         * Rule ID. This field is not required for adding a rule, but is required for modifying or deleting a rule.
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * Anti-DDoS instance IP address.
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * [Disused] When the certificate is an external certificate, the certificate key should be provided here. 
-         * @type {string || null}
-         */
-        this.PrivateKey = null;
-
-        /**
-         * Certificate source. When the forwarding protocol is HTTPS, this field must be set to `2` (Tencent Cloud managed certificate), and for HTTP protocol, it can be set to `0`.
+         * Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disabled) and `1` (enabled). It defaults to `0`.
          * @type {number || null}
          */
-        this.CertType = null;
+        this.HttpsToHttpEnable = null;
 
         /**
          * Access port number.
@@ -6413,22 +6433,16 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.VirtualPort = null;
 
         /**
-         * CC protection status. Valid values: `0` (disabled) and `1` (enabled).
+         * Specifies whether to forcibly redirect HTTP to HTTPS. `1`: Enable. `0`: Disable.
          * @type {number || null}
          */
-        this.CCStatus = null;
+        this.RewriteHttps = null;
 
         /**
-         * When the certificate is managed by Tencent Cloud, this field must be set to the ID of the managed certificate.
-         * @type {string || null}
+         * Returns an error code when the rule configuration fails (only valid when `Status=2`). `1001`: The certificate does not exist. `1002`: Failed to obtain the certificate. `1003`: Failed to upload the certificate. `1004`: The certificate has expired.
+         * @type {number || null}
          */
-        this.SSLId = null;
-
-        /**
-         * Resource ID.
-         * @type {string || null}
-         */
-        this.Id = null;
+        this.ErrCode = null;
 
     }
 
@@ -6439,8 +6453,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.KeepTime = 'KeepTime' in params ? params.KeepTime : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
         this.LbType = 'LbType' in params ? params.LbType : null;
+        this.KeepEnable = 'KeepEnable' in params ? params.KeepEnable : null;
+        this.KeepTime = 'KeepTime' in params ? params.KeepTime : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
 
         if (params.SourceList) {
             this.SourceList = new Array();
@@ -6450,27 +6468,25 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.SourceList.push(obj);
             }
         }
-        this.KeepEnable = 'KeepEnable' in params ? params.KeepEnable : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.HttpsToHttpEnable = 'HttpsToHttpEnable' in params ? params.HttpsToHttpEnable : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.SSLId = 'SSLId' in params ? params.SSLId : null;
+        this.Cert = 'Cert' in params ? params.Cert : null;
+        this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
         this.Status = 'Status' in params ? params.Status : null;
-        this.CCLevel = 'CCLevel' in params ? params.CCLevel : null;
+        this.CCStatus = 'CCStatus' in params ? params.CCStatus : null;
         this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
         this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-        this.Cert = 'Cert' in params ? params.Cert : null;
+        this.CCLevel = 'CCLevel' in params ? params.CCLevel : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
-        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.HttpsToHttpEnable = 'HttpsToHttpEnable' in params ? params.HttpsToHttpEnable : null;
         this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
-        this.CCStatus = 'CCStatus' in params ? params.CCStatus : null;
-        this.SSLId = 'SSLId' in params ? params.SSLId : null;
-        this.Id = 'Id' in params ? params.Id : null;
+        this.RewriteHttps = 'RewriteHttps' in params ? params.RewriteHttps : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
 
     }
 }

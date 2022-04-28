@@ -737,6 +737,18 @@ class DeleteImagesRequest extends  AbstractModel {
          */
         this.ImageIds = null;
 
+        /**
+         * Whether to delete the snapshot associated with the image
+         * @type {boolean || null}
+         */
+        this.DeleteBindedSnap = null;
+
+        /**
+         * Check whether deleting an image is supported
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
     }
 
     /**
@@ -747,6 +759,8 @@ class DeleteImagesRequest extends  AbstractModel {
             return;
         }
         this.ImageIds = 'ImageIds' in params ? params.ImageIds : null;
+        this.DeleteBindedSnap = 'DeleteBindedSnap' in params ? params.DeleteBindedSnap : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
 
     }
 }
@@ -2607,6 +2621,12 @@ class SyncImagesRequest extends  AbstractModel {
          */
         this.DestinationRegions = null;
 
+        /**
+         * Checks whether image synchronization can be initiated 
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
     }
 
     /**
@@ -2618,6 +2638,7 @@ class SyncImagesRequest extends  AbstractModel {
         }
         this.ImageIds = 'ImageIds' in params ? params.ImageIds : null;
         this.DestinationRegions = 'DestinationRegions' in params ? params.DestinationRegions : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
 
     }
 }
@@ -3032,6 +3053,13 @@ Note: This field may return null, indicating that no valid value is found.
          */
         this.SnapshotSet = null;
 
+        /**
+         * The list of tags bound to the image.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -3062,6 +3090,15 @@ Note: This field may return null, indicating that no valid value is found.
                 let obj = new Snapshot();
                 obj.deserialize(params.SnapshotSet[z]);
                 this.SnapshotSet.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
 
@@ -7750,7 +7787,7 @@ class DescribeImagesRequest extends  AbstractModel {
         this.ImageIds = null;
 
         /**
-         * Filters. Each request can have up to 10 `Filters` and 5 `Filters.Values`. You cannot specify `ImageIds` and `Filters` at the same time. Specific filters:
+         * Filters. Each request can have up to 10 `Filters`, and 5 `Filters.Values` for each filter. `ImageIds` and `Filters` cannot be specified at the same time. See details:
 
 <li><strong>image-id</strong></li>
 <p style="padding-left: 30px;">Filter by the <strong>image ID</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
@@ -7759,9 +7796,11 @@ class DescribeImagesRequest extends  AbstractModel {
 <li><strong>image-name</strong></li>
 <p style="padding-left: 30px;">Filter by the <strong>image name</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 <li><strong>platform</strong></li>
-<p style="padding-left: 30px;">Filter by the <strong>image operating system</strong>, such as CentOS.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+<p style="padding-left: 30px;">Filter by the <strong>image operating system</strong>, such as `CentOS`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 <li><strong>tag-key</strong></li>
 <p style="padding-left: 30px;">Filter by the <strong>tag key</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+<li><strong>tag-value</strong></li>
+<p style="padding-left: 30px;">Filter by the <strong>tag value</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 <li><strong>tag:tag-key</strong></li>
 <p style="padding-left: 30px;">Filter by the <strong>tag key-value pair</strong>. Replace “tag-key” with the actual value. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
          * @type {Array.<Filter> || null}

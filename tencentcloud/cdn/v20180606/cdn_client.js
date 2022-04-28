@@ -18,10 +18,22 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const PurgePathCacheRequest = models.PurgePathCacheRequest;
 const PurgePathCacheResponse = models.PurgePathCacheResponse;
+const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
+const CdnData = models.CdnData;
 const PushUrlsCacheResponse = models.PushUrlsCacheResponse;
 const CreateScdnFailedLogTaskRequest = models.CreateScdnFailedLogTaskRequest;
+const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
+const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
+const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
+const TimestampData = models.TimestampData;
 const CreateScdnFailedLogTaskResponse = models.CreateScdnFailedLogTaskResponse;
 const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
+const ResourceOriginData = models.ResourceOriginData;
+const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
+const SummarizedData = models.SummarizedData;
+const ResourceData = models.ResourceData;
+const DescribeOriginDataResponse = models.DescribeOriginDataResponse;
+const ResourceBillingData = models.ResourceBillingData;
 
 
 /**
@@ -34,18 +46,6 @@ class CdnClient extends AbstractClient {
         super("cdn.tencentcloudapi.com", "2018-06-06", credential, region, profile);
     }
     
-    /**
-     * This API is used to submit multiple directory purge tasks, which are carried out according to the acceleration region of the domain names.
-By default, a maximum of 100 directories can be purged per day for acceleration regions either within or outside the Chinese mainland, and up to 500 tasks can be submitted at a time.
-     * @param {PurgePathCacheRequest} req
-     * @param {function(string, PurgePathCacheResponse):void} cb
-     * @public
-     */
-    PurgePathCache(req, cb) {
-        let resp = new PurgePathCacheResponse();
-        this.request("PurgePathCache", req, resp, cb);
-    }
-
     /**
      * This API is used to recreate a failed event log task.
      * @param {CreateScdnFailedLogTaskRequest} req
@@ -67,6 +67,73 @@ By default, a maximum of 1000 URLs can be prefetched per day for regions either 
     PushUrlsCache(req, cb) {
         let resp = new PushUrlsCacheResponse();
         this.request("PushUrlsCache", req, resp, cb);
+    }
+
+    /**
+     * This API is used to submit multiple directory purge tasks, which are carried out according to the acceleration region of the domain names.
+By default, a maximum of 100 directories can be purged per day for acceleration regions either within or outside the Chinese mainland, and up to 500 tasks can be submitted at a time.
+     * @param {PurgePathCacheRequest} req
+     * @param {function(string, PurgePathCacheResponse):void} cb
+     * @public
+     */
+    PurgePathCache(req, cb) {
+        let resp = new PurgePathCacheResponse();
+        this.request("PurgePathCache", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeOriginData) is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
+
++ Origin-pull traffic (in bytes)
++ Origin-pull bandwidth (in bps)
++ Number of origin-pull requests
++ Number of failed origin-pull requests
++ Origin-pull failure rate (in % with two decimal digits)
++ Aggregate list of 2xx origin-pull status codes and the details of origin-pull status codes starting with 2 (in entries)
++ Aggregate list of 3xx origin-pull status codes and the details of origin-pull status codes starting with 3 (in entries)
++ Aggregate list of 4xx origin-pull status codes and the details of origin-pull status codes starting with 4 (in entries)
++ Aggregate list of 5xx origin-pull status codes and the details of origin-pull status codes starting with 5 (in entries)
+     * @param {DescribeOriginDataRequest} req
+     * @param {function(string, DescribeOriginDataResponse):void} cb
+     * @public
+     */
+    DescribeOriginData(req, cb) {
+        let resp = new DescribeOriginDataResponse();
+        this.request("DescribeOriginData", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeCdnData) is used to query CDN real-time access monitoring data and supports the following metrics:
+
++ Traffic (in bytes)
++ Bandwidth (in bps)
++ Number of requests
++ Number of hit requests
++ Request hit rate (in %)
++ Hit traffic (in bytes)
++ Traffic hit rate (in %)
++ Aggregate list of 2xx status codes and the details of status codes starting with 2 (in entries)
++ Aggregate list of 3xx status codes and the details of status codes starting with 3 (in entries)
++ Aggregate list of 4xx status codes and the details of status codes starting with 4 (in entries)
++ Aggregate list of 5xx status codes and the details of status codes starting with 5 (in entries)
+     * @param {DescribeCdnDataRequest} req
+     * @param {function(string, DescribeCdnDataResponse):void} cb
+     * @public
+     */
+    DescribeCdnData(req, cb) {
+        let resp = new DescribeCdnDataResponse();
+        this.request("DescribeCdnData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query billing data details.
+     * @param {DescribeBillingDataRequest} req
+     * @param {function(string, DescribeBillingDataResponse):void} cb
+     * @public
+     */
+    DescribeBillingData(req, cb) {
+        let resp = new DescribeBillingDataResponse();
+        this.request("DescribeBillingData", req, resp, cb);
     }
 
 

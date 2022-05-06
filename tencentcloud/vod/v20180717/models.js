@@ -15180,6 +15180,18 @@ class DrmStreamingsInfo extends  AbstractModel {
          */
         this.SimpleAesDefinition = null;
 
+        /**
+         * The ID of the adaptive bitrate streaming template that encrypts the streams by Widewine.
+         * @type {number || null}
+         */
+        this.WidevineDefinition = null;
+
+        /**
+         * The ID of the adaptive bitrate streaming template that encrypts the streams by FairPlay.
+         * @type {number || null}
+         */
+        this.FairPlayDefinition = null;
+
     }
 
     /**
@@ -15190,6 +15202,8 @@ class DrmStreamingsInfo extends  AbstractModel {
             return;
         }
         this.SimpleAesDefinition = 'SimpleAesDefinition' in params ? params.SimpleAesDefinition : null;
+        this.WidevineDefinition = 'WidevineDefinition' in params ? params.WidevineDefinition : null;
+        this.FairPlayDefinition = 'FairPlayDefinition' in params ? params.FairPlayDefinition : null;
 
     }
 }
@@ -26425,6 +26439,18 @@ class DrmStreamingsInfoForUpdate extends  AbstractModel {
          */
         this.SimpleAesDefinition = null;
 
+        /**
+         * The ID of the adaptive bitrate streaming template that encrypts the streams by Widewine.
+         * @type {number || null}
+         */
+        this.WidevineDefinition = null;
+
+        /**
+         * The ID of the adaptive bitrate streaming template that encrypts the streams by FairPlay.
+         * @type {number || null}
+         */
+        this.FairPlayDefinition = null;
+
     }
 
     /**
@@ -26435,6 +26461,8 @@ class DrmStreamingsInfoForUpdate extends  AbstractModel {
             return;
         }
         this.SimpleAesDefinition = 'SimpleAesDefinition' in params ? params.SimpleAesDefinition : null;
+        this.WidevineDefinition = 'WidevineDefinition' in params ? params.WidevineDefinition : null;
+        this.FairPlayDefinition = 'FairPlayDefinition' in params ? params.FairPlayDefinition : null;
 
     }
 }
@@ -27971,8 +27999,8 @@ class SearchMediaRequest extends  AbstractModel {
         this.SourceTypes = null;
 
         /**
-         * [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) set. Any element in the set can be matched.
-<li>Array length limit: 10.</li>
+         * The live stream code array. A media file will be returned if it matches any element in the array.
+<li>Array length limit: 10</li>
          * @type {Array.<string> || null}
          */
         this.StreamIds = null;
@@ -28075,8 +28103,8 @@ Media file source. For valid values, please see [SourceType](https://intl.cloud.
         this.SourceType = null;
 
         /**
-         * (This is not recommended. `StreamIds` should be used instead)
-[Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1).
+         * (Not recommended. Consider using `StreamIds` instead.)
+The live stream code.
          * @type {string || null}
          */
         this.StreamId = null;

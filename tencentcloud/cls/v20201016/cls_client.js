@@ -24,6 +24,7 @@ const DeleteAlarmNoticeResponse = models.DeleteAlarmNoticeResponse;
 const DescribeLogHistogramRequest = models.DescribeLogHistogramRequest;
 const DescribeLogContextRequest = models.DescribeLogContextRequest;
 const DeleteShipperRequest = models.DeleteShipperRequest;
+const ModifyTopicRequest = models.ModifyTopicRequest;
 const DeleteLogsetResponse = models.DeleteLogsetResponse;
 const DescribeShipperTasksResponse = models.DescribeShipperTasksResponse;
 const CreateMachineGroupResponse = models.CreateMachineGroupResponse;
@@ -41,6 +42,7 @@ const DescribeShippersResponse = models.DescribeShippersResponse;
 const ModifyShipperResponse = models.ModifyShipperResponse;
 const RetryShipperTaskRequest = models.RetryShipperTaskRequest;
 const CallBackInfo = models.CallBackInfo;
+const OpenKafkaConsumerResponse = models.OpenKafkaConsumerResponse;
 const AlarmTargetInfo = models.AlarmTargetInfo;
 const DescribeIndexRequest = models.DescribeIndexRequest;
 const DescribeConfigsResponse = models.DescribeConfigsResponse;
@@ -77,6 +79,7 @@ const RetryShipperTaskResponse = models.RetryShipperTaskResponse;
 const SplitPartitionRequest = models.SplitPartitionRequest;
 const MachineGroupInfo = models.MachineGroupInfo;
 const DescribeLogHistogramResponse = models.DescribeLogHistogramResponse;
+const CloseKafkaConsumerResponse = models.CloseKafkaConsumerResponse;
 const RuleTagInfo = models.RuleTagInfo;
 const CreateIndexRequest = models.CreateIndexRequest;
 const DeleteConsumerResponse = models.DeleteConsumerResponse;
@@ -85,6 +88,7 @@ const GetAlarmLogResponse = models.GetAlarmLogResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
 const DescribeExportsRequest = models.DescribeExportsRequest;
 const AlarmTarget = models.AlarmTarget;
+const OpenKafkaConsumerRequest = models.OpenKafkaConsumerRequest;
 const DeleteConfigResponse = models.DeleteConfigResponse;
 const ModifyIndexResponse = models.ModifyIndexResponse;
 const DeleteConsumerRequest = models.DeleteConsumerRequest;
@@ -93,20 +97,24 @@ const DescribeConsumerResponse = models.DescribeConsumerResponse;
 const UploadLogRequest = models.UploadLogRequest;
 const ModifyConsumerResponse = models.ModifyConsumerResponse;
 const DescribeConfigsRequest = models.DescribeConfigsRequest;
+const LogsetInfo = models.LogsetInfo;
 const DeleteConfigRequest = models.DeleteConfigRequest;
 const AnalysisDimensional = models.AnalysisDimensional;
-const LogsetInfo = models.LogsetInfo;
+const CloseKafkaConsumerRequest = models.CloseKafkaConsumerRequest;
 const CreateExportRequest = models.CreateExportRequest;
 const DescribeAlarmNoticesResponse = models.DescribeAlarmNoticesResponse;
 const ModifyConfigRequest = models.ModifyConfigRequest;
 const DescribeLogsetsResponse = models.DescribeLogsetsResponse;
 const JsonInfo = models.JsonInfo;
+const CreateShipperRequest = models.CreateShipperRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
 const DeleteAlarmResponse = models.DeleteAlarmResponse;
 const WebCallback = models.WebCallback;
 const DescribeAlarmsResponse = models.DescribeAlarmsResponse;
 const CreateAlarmNoticeResponse = models.CreateAlarmNoticeResponse;
+const ModifyTopicResponse = models.ModifyTopicResponse;
 const CreateConfigRequest = models.CreateConfigRequest;
+const CreateShipperResponse = models.CreateShipperResponse;
 const DeleteIndexResponse = models.DeleteIndexResponse;
 const ModifyIndexRequest = models.ModifyIndexRequest;
 const Column = models.Column;
@@ -220,6 +228,17 @@ class ClsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify a log topic.
+     * @param {ModifyTopicRequest} req
+     * @param {function(string, ModifyTopicResponse):void} cb
+     * @public
+     */
+    ModifyTopic(req, cb) {
+        let resp = new ModifyTopicResponse();
+        this.request("ModifyTopic", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the index configuration.
 
      * @param {ModifyIndexRequest} req
@@ -306,6 +325,17 @@ class ClsClient extends AbstractClient {
     DeleteConfig(req, cb) {
         let resp = new DeleteConfigResponse();
         this.request("DeleteConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a shipping rule. Note: To use this API, you need to check whether you have configured the role and permission for COS shipping tasks. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
+     * @param {CreateShipperRequest} req
+     * @param {function(string, CreateShipperResponse):void} cb
+     * @public
+     */
+    CreateShipper(req, cb) {
+        let resp = new CreateShipperResponse();
+        this.request("CreateShipper", req, resp, cb);
     }
 
     /**
@@ -496,6 +526,17 @@ class ClsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent queries to the same log topic cannot exceed 15.
+     * @param {SearchLogRequest} req
+     * @param {function(string, SearchLogResponse):void} cb
+     * @public
+     */
+    SearchLog(req, cb) {
+        let resp = new SearchLogResponse();
+        this.request("SearchLog", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a notification group.
      * @param {ModifyAlarmNoticeRequest} req
      * @param {function(string, ModifyAlarmNoticeResponse):void} cb
@@ -507,14 +548,14 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent queries to the same log topic cannot exceed 15.
-     * @param {SearchLogRequest} req
-     * @param {function(string, SearchLogResponse):void} cb
+     * This API is used to enable the Kafka consumption feature.
+     * @param {OpenKafkaConsumerRequest} req
+     * @param {function(string, OpenKafkaConsumerResponse):void} cb
      * @public
      */
-    SearchLog(req, cb) {
-        let resp = new SearchLogResponse();
-        this.request("SearchLog", req, resp, cb);
+    OpenKafkaConsumer(req, cb) {
+        let resp = new OpenKafkaConsumerResponse();
+        this.request("OpenKafkaConsumer", req, resp, cb);
     }
 
     /**
@@ -794,6 +835,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
+     * This API is used to split a topic partition.
+     * @param {SplitPartitionRequest} req
+     * @param {function(string, SplitPartitionResponse):void} cb
+     * @public
+     */
+    SplitPartition(req, cb) {
+        let resp = new SplitPartitionResponse();
+        this.request("SplitPartition", req, resp, cb);
+    }
+
+    /**
      * This API is used to get a collection rule configuration.
      * @param {DescribeConfigsRequest} req
      * @param {function(string, DescribeConfigsResponse):void} cb
@@ -893,14 +945,14 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to split a topic partition.
-     * @param {SplitPartitionRequest} req
-     * @param {function(string, SplitPartitionResponse):void} cb
+     * This API is used to disable Kafka consumption.
+     * @param {CloseKafkaConsumerRequest} req
+     * @param {function(string, CloseKafkaConsumerResponse):void} cb
      * @public
      */
-    SplitPartition(req, cb) {
-        let resp = new SplitPartitionResponse();
-        this.request("SplitPartition", req, resp, cb);
+    CloseKafkaConsumer(req, cb) {
+        let resp = new CloseKafkaConsumerResponse();
+        this.request("CloseKafkaConsumer", req, resp, cb);
     }
 
 

@@ -515,7 +515,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * PostgreSQL version number. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created.
+         * PostgreSQL version. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created. You must pass in at least one of the following parameters: DBVersion, DBMajorVersion, DBKernelVersion.
          * @type {string || null}
          */
         this.DBVersion = null;
@@ -587,13 +587,13 @@ class CreateInstancesRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * PostgreSQL major version number. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created.
+         * PostgreSQL major version. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created. You must pass in at least one of the following parameters: DBMajorVersion, DBVersion, DBKernelVersion.
          * @type {string || null}
          */
         this.DBMajorVersion = null;
 
         /**
-         * PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
+         * PostgreSQL kernel version. If it is specified, an instance running the latest kernel of PostgreSQL `DBKernelVersion` will be created. You must pass in one of the following parameters: DBKernelVersion, DBVersion, DBMajorVersion.
          * @type {string || null}
          */
         this.DBKernelVersion = null;
@@ -603,6 +603,24 @@ class CreateInstancesRequest extends  AbstractModel {
          * @type {Array.<DBNode> || null}
          */
         this.DBNodeSet = null;
+
+        /**
+         * Whether to support transparent data encryption. Valid values: 1 (yes), 0 (no). Default value: 0.
+         * @type {number || null}
+         */
+        this.NeedSupportTDE = null;
+
+        /**
+         * KeyId of custom key, which is required if you select custom key encryption. It is also the unique CMK identifier.
+         * @type {string || null}
+         */
+        this.KMSKeyId = null;
+
+        /**
+         * The region where the KMS service is enabled. When “KMSRegion” is left empty, the “KMS” of the local domain will be enabled by default. If the local domain is not supported, you need to select another region supported by KMS.
+         * @type {string || null}
+         */
+        this.KMSRegion = null;
 
     }
 
@@ -653,6 +671,9 @@ class CreateInstancesRequest extends  AbstractModel {
                 this.DBNodeSet.push(obj);
             }
         }
+        this.NeedSupportTDE = 'NeedSupportTDE' in params ? params.NeedSupportTDE : null;
+        this.KMSKeyId = 'KMSKeyId' in params ? params.KMSKeyId : null;
+        this.KMSRegion = 'KMSRegion' in params ? params.KMSRegion : null;
 
     }
 }
@@ -739,6 +760,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.KernelVersion = null;
 
+        /**
+         * Whether TDE data encryption is supported. Valid values: 0 (no), 1 (yes)
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.IsSupportTDE = null;
+
     }
 
     /**
@@ -760,6 +788,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Type = 'Type' in params ? params.Type : null;
         this.MajorVersion = 'MajorVersion' in params ? params.MajorVersion : null;
         this.KernelVersion = 'KernelVersion' in params ? params.KernelVersion : null;
+        this.IsSupportTDE = 'IsSupportTDE' in params ? params.IsSupportTDE : null;
 
     }
 }
@@ -2983,6 +3012,13 @@ class SpecInfo extends  AbstractModel {
          */
         this.SpecItemInfoList = null;
 
+        /**
+         * Regions where KMS is supported
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<string> || null}
+         */
+        this.SupportKMSRegions = null;
+
     }
 
     /**
@@ -3003,6 +3039,7 @@ class SpecInfo extends  AbstractModel {
                 this.SpecItemInfoList.push(obj);
             }
         }
+        this.SupportKMSRegions = 'SupportKMSRegions' in params ? params.SupportKMSRegions : null;
 
     }
 }
@@ -5792,6 +5829,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.DBNodeSet = null;
 
+        /**
+         * Whether the instance supports TDE data encryption. Valid values: 0 (no), 1 (yes)
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsSupportTDE = null;
+
     }
 
     /**
@@ -5869,6 +5913,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.DBNodeSet.push(obj);
             }
         }
+        this.IsSupportTDE = 'IsSupportTDE' in params ? params.IsSupportTDE : null;
 
     }
 }
@@ -6437,7 +6482,7 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
         this.ReadOnlyGroupId = null;
 
         /**
-         * The information of tags to be associated with instances. This parameter is left empty by default.
+         * The information of tags to be bound with the purchased instance, which is left empty by default (type: tag array).
          * @type {Tag || null}
          */
         this.TagList = null;

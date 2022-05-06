@@ -284,6 +284,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.LogJson = null;
 
+        /**
+         * Source host name of logs
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.HostName = null;
+
     }
 
     /**
@@ -301,6 +308,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.PkgId = 'PkgId' in params ? params.PkgId : null;
         this.PkgLogId = 'PkgLogId' in params ? params.PkgLogId : null;
         this.LogJson = 'LogJson' in params ? params.LogJson : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
 
     }
 }
@@ -476,6 +484,84 @@ class DeleteShipperRequest extends  AbstractModel {
             return;
         }
         this.ShipperId = 'ShipperId' in params ? params.ShipperId : null;
+
+    }
+}
+
+/**
+ * ModifyTopic request structure.
+ * @class
+ */
+class ModifyTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Log topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Whether to start collection for this log topic
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+        /**
+         * Whether to enable automatic split
+         * @type {boolean || null}
+         */
+        this.AutoSplit = null;
+
+        /**
+         * Maximum number of partitions to split into for this topic if automatic split is enabled
+         * @type {number || null}
+         */
+        this.MaxSplitPartitions = null;
+
+        /**
+         * Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+         * @type {number || null}
+         */
+        this.Period = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AutoSplit = 'AutoSplit' in params ? params.AutoSplit : null;
+        this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -1205,6 +1291,41 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * OpenKafkaConsumer response structure.
+ * @class
+ */
+class OpenKafkaConsumerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `TopicId` to be consumed
+         * @type {string || null}
+         */
+        this.TopicID = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicID = 'TopicID' in params ? params.TopicID : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Alarm object
  * @class
  */
@@ -1249,13 +1370,13 @@ class AlarmTargetInfo extends  AbstractModel {
         this.Number = null;
 
         /**
-         * Offset of the query start time from the current time. The value cannot be positive. Value range: -1440–0.
+         * Offset of the query start time from the alarm execution time in minutes. The value cannot be positive. Value range: -1440–0.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * Offset of the query end time from the current time. The value cannot be positive and must be greater than `StartTimeOffset`. Value range: -1440–0.
+         * Offset of the query end time from the alarm execution time in minutes. The value cannot be positive and must be greater than `StartTimeOffset`. Value range: -1440–0.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -3210,6 +3331,34 @@ class DescribeLogHistogramResponse extends  AbstractModel {
 }
 
 /**
+ * CloseKafkaConsumer response structure.
+ * @class
+ */
+class CloseKafkaConsumerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Metafield index configuration
  * @class
  */
@@ -3278,6 +3427,18 @@ class CreateIndexRequest extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+         * @type {boolean || null}
+         */
+        this.IncludeInternalFields = null;
+
+        /**
+         * Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+         * @type {number || null}
+         */
+        this.MetadataFlag = null;
+
     }
 
     /**
@@ -3295,6 +3456,8 @@ class CreateIndexRequest extends  AbstractModel {
             this.Rule = obj;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.IncludeInternalFields = 'IncludeInternalFields' in params ? params.IncludeInternalFields : null;
+        this.MetadataFlag = 'MetadataFlag' in params ? params.MetadataFlag : null;
 
     }
 }
@@ -3644,13 +3807,13 @@ class AlarmTarget extends  AbstractModel {
         this.Number = null;
 
         /**
-         * Offset of the query start time from the current time in minutes. The value cannot be positive. Value range: -1440–0.
+         * Offset of the query start time from the alarm execution time in minutes. The value cannot be positive. Value range: -1440–0.
          * @type {number || null}
          */
         this.StartTimeOffset = null;
 
         /**
-         * Offset of the query end time from the current time in minutes. The value cannot be positive and must be greater than `StartTimeOffset`. Value range: -1440–0.
+         * Offset of the query end time from the alarm execution time in minutes. The value cannot be positive and must be greater than `StartTimeOffset`. Value range: -1440–0.
          * @type {number || null}
          */
         this.EndTimeOffset = null;
@@ -3676,6 +3839,34 @@ class AlarmTarget extends  AbstractModel {
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+
+    }
+}
+
+/**
+ * OpenKafkaConsumer request structure.
+ * @class
+ */
+class OpenKafkaConsumerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `TopicId` created by the CLS console
+         * @type {string || null}
+         */
+        this.FromTopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FromTopicId = 'FromTopicId' in params ? params.FromTopicId : null;
 
     }
 }
@@ -4002,6 +4193,78 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
 }
 
 /**
+ * Logset information
+ * @class
+ */
+class LogsetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logset ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Logset name
+         * @type {string || null}
+         */
+        this.LogsetName = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Tag bound to logset
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Number of log topics in logset
+         * @type {number || null}
+         */
+        this.TopicCount = null;
+
+        /**
+         * If `AssumerUin` is not empty, it indicates the service provider who creates the logset
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.TopicCount = 'TopicCount' in params ? params.TopicCount : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+    }
+}
+
+/**
  * DeleteConfig request structure.
  * @class
  */
@@ -4072,49 +4335,18 @@ class AnalysisDimensional extends  AbstractModel {
 }
 
 /**
- * Logset information
+ * CloseKafkaConsumer request structure.
  * @class
  */
-class LogsetInfo extends  AbstractModel {
+class CloseKafkaConsumerRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Logset ID
+         * CLS topic identifier
          * @type {string || null}
          */
-        this.LogsetId = null;
-
-        /**
-         * Logset name
-         * @type {string || null}
-         */
-        this.LogsetName = null;
-
-        /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Tag bound to logset
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Number of log topics in logset
-         * @type {number || null}
-         */
-        this.TopicCount = null;
-
-        /**
-         * If `AssumerUin` is not empty, it indicates the service provider who creates the logset
-         * @type {string || null}
-         */
-        this.RoleName = null;
+        this.FromTopicId = null;
 
     }
 
@@ -4125,20 +4357,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.TopicCount = 'TopicCount' in params ? params.TopicCount : null;
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.FromTopicId = 'FromTopicId' in params ? params.FromTopicId : null;
 
     }
 }
@@ -4441,6 +4660,115 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * CreateShipper request structure.
+ * @class
+ */
+class CreateShipperRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the log topic to which the shipping rule to be created belongs
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Destination bucket in the shipping rule to be created
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * Prefix of the shipping directory in the shipping rule to be created
+         * @type {string || null}
+         */
+        this.Prefix = null;
+
+        /**
+         * Shipping rule name
+         * @type {string || null}
+         */
+        this.ShipperName = null;
+
+        /**
+         * Interval between shipping tasks (in sec). Default value: 300. Value range: 300-900
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100-256
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+         * @type {Array.<FilterRuleInfo> || null}
+         */
+        this.FilterRules = null;
+
+        /**
+         * Rules for partitioning logs to be shipped. `strftime` can be used to define the presentation of time format.
+         * @type {string || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Compression configuration of shipped log
+         * @type {CompressInfo || null}
+         */
+        this.Compress = null;
+
+        /**
+         * Format configuration of shipped log content
+         * @type {ContentInfo || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Prefix = 'Prefix' in params ? params.Prefix : null;
+        this.ShipperName = 'ShipperName' in params ? params.ShipperName : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new FilterRuleInfo();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
+            }
+        }
+        this.Partition = 'Partition' in params ? params.Partition : null;
+
+        if (params.Compress) {
+            let obj = new CompressInfo();
+            obj.deserialize(params.Compress)
+            this.Compress = obj;
+        }
+
+        if (params.Content) {
+            let obj = new ContentInfo();
+            obj.deserialize(params.Content)
+            this.Content = obj;
+        }
+
+    }
+}
+
+/**
  * CreateTopic response structure.
  * @class
  */
@@ -4662,6 +4990,34 @@ class CreateAlarmNoticeResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyTopic response structure.
+ * @class
+ */
+class ModifyTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateConfig request structure.
  * @class
  */
@@ -4745,6 +5101,41 @@ class CreateConfigRequest extends  AbstractModel {
 }
 
 /**
+ * CreateShipper response structure.
+ * @class
+ */
+class CreateShipperResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Shipping rule ID
+         * @type {string || null}
+         */
+        this.ShipperId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShipperId = 'ShipperId' in params ? params.ShipperId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteIndex response structure.
  * @class
  */
@@ -4799,13 +5190,13 @@ class ModifyIndexRequest extends  AbstractModel {
         this.Rule = null;
 
         /**
-         * 
+         * Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
          * @type {boolean || null}
          */
         this.IncludeInternalFields = null;
 
         /**
-         * 
+         * Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
          * @type {number || null}
          */
         this.MetadataFlag = null;
@@ -5382,6 +5773,13 @@ class LogContextInfo extends  AbstractModel {
          */
         this.BTime = null;
 
+        /**
+         * Source host name of logs
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.HostName = null;
+
     }
 
     /**
@@ -5397,6 +5795,7 @@ class LogContextInfo extends  AbstractModel {
         this.PkgId = 'PkgId' in params ? params.PkgId : null;
         this.PkgLogId = 'PkgLogId' in params ? params.PkgLogId : null;
         this.BTime = 'BTime' in params ? params.BTime : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
 
     }
 }
@@ -7232,6 +7631,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ModifyTime = null;
 
         /**
+         * Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {boolean || null}
+         */
+        this.IncludeInternalFields = null;
+
+        /**
+         * Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.MetadataFlag = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -7255,6 +7668,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.Rule = obj;
         }
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.IncludeInternalFields = 'IncludeInternalFields' in params ? params.IncludeInternalFields : null;
+        this.MetadataFlag = 'MetadataFlag' in params ? params.MetadataFlag : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7727,6 +8142,7 @@ module.exports = {
     DescribeLogHistogramRequest: DescribeLogHistogramRequest,
     DescribeLogContextRequest: DescribeLogContextRequest,
     DeleteShipperRequest: DeleteShipperRequest,
+    ModifyTopicRequest: ModifyTopicRequest,
     DeleteLogsetResponse: DeleteLogsetResponse,
     DescribeShipperTasksResponse: DescribeShipperTasksResponse,
     CreateMachineGroupResponse: CreateMachineGroupResponse,
@@ -7744,6 +8160,7 @@ module.exports = {
     ModifyShipperResponse: ModifyShipperResponse,
     RetryShipperTaskRequest: RetryShipperTaskRequest,
     CallBackInfo: CallBackInfo,
+    OpenKafkaConsumerResponse: OpenKafkaConsumerResponse,
     AlarmTargetInfo: AlarmTargetInfo,
     DescribeIndexRequest: DescribeIndexRequest,
     DescribeConfigsResponse: DescribeConfigsResponse,
@@ -7780,6 +8197,7 @@ module.exports = {
     SplitPartitionRequest: SplitPartitionRequest,
     MachineGroupInfo: MachineGroupInfo,
     DescribeLogHistogramResponse: DescribeLogHistogramResponse,
+    CloseKafkaConsumerResponse: CloseKafkaConsumerResponse,
     RuleTagInfo: RuleTagInfo,
     CreateIndexRequest: CreateIndexRequest,
     DeleteConsumerResponse: DeleteConsumerResponse,
@@ -7788,6 +8206,7 @@ module.exports = {
     CreateTopicRequest: CreateTopicRequest,
     DescribeExportsRequest: DescribeExportsRequest,
     AlarmTarget: AlarmTarget,
+    OpenKafkaConsumerRequest: OpenKafkaConsumerRequest,
     DeleteConfigResponse: DeleteConfigResponse,
     ModifyIndexResponse: ModifyIndexResponse,
     DeleteConsumerRequest: DeleteConsumerRequest,
@@ -7796,20 +8215,24 @@ module.exports = {
     UploadLogRequest: UploadLogRequest,
     ModifyConsumerResponse: ModifyConsumerResponse,
     DescribeConfigsRequest: DescribeConfigsRequest,
+    LogsetInfo: LogsetInfo,
     DeleteConfigRequest: DeleteConfigRequest,
     AnalysisDimensional: AnalysisDimensional,
-    LogsetInfo: LogsetInfo,
+    CloseKafkaConsumerRequest: CloseKafkaConsumerRequest,
     CreateExportRequest: CreateExportRequest,
     DescribeAlarmNoticesResponse: DescribeAlarmNoticesResponse,
     ModifyConfigRequest: ModifyConfigRequest,
     DescribeLogsetsResponse: DescribeLogsetsResponse,
     JsonInfo: JsonInfo,
+    CreateShipperRequest: CreateShipperRequest,
     CreateTopicResponse: CreateTopicResponse,
     DeleteAlarmResponse: DeleteAlarmResponse,
     WebCallback: WebCallback,
     DescribeAlarmsResponse: DescribeAlarmsResponse,
     CreateAlarmNoticeResponse: CreateAlarmNoticeResponse,
+    ModifyTopicResponse: ModifyTopicResponse,
     CreateConfigRequest: CreateConfigRequest,
+    CreateShipperResponse: CreateShipperResponse,
     DeleteIndexResponse: DeleteIndexResponse,
     ModifyIndexRequest: ModifyIndexRequest,
     Column: Column,

@@ -38,6 +38,7 @@ const CreatePrivateCARequest = models.CreatePrivateCARequest;
 const DescribeProductResponse = models.DescribeProductResponse;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const DeviceLabel = models.DeviceLabel;
+const UpdateProductDynamicRegisterRequest = models.UpdateProductDynamicRegisterRequest;
 const CertInfo = models.CertInfo;
 const ProductMetadata = models.ProductMetadata;
 const DescribePrivateCAsRequest = models.DescribePrivateCAsRequest;
@@ -56,6 +57,7 @@ const DeletePrivateCARequest = models.DeletePrivateCARequest;
 const DeviceInfo = models.DeviceInfo;
 const ProductProperties = models.ProductProperties;
 const DescribeDeviceResponse = models.DescribeDeviceResponse;
+const UpdateProductDynamicRegisterResponse = models.UpdateProductDynamicRegisterResponse;
 
 
 /**
@@ -242,6 +244,17 @@ class IotcloudClient extends AbstractClient {
     UpdatePrivateCA(req, cb) {
         let resp = new UpdatePrivateCAResponse();
         this.request("UpdatePrivateCA", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the configuration of product dynamic registration. 
+     * @param {UpdateProductDynamicRegisterRequest} req
+     * @param {function(string, UpdateProductDynamicRegisterResponse):void} cb
+     * @public
+     */
+    UpdateProductDynamicRegister(req, cb) {
+        let resp = new UpdateProductDynamicRegisterResponse();
+        this.request("UpdateProductDynamicRegister", req, resp, cb);
     }
 
 

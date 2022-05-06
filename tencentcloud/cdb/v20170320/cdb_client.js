@@ -1296,7 +1296,7 @@ Note:
     }
 
     /**
-     * This API is used to query the information of database proxy.
+     * This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
      * @param {DescribeCDBProxyRequest} req
      * @param {function(string, DescribeCDBProxyResponse):void} cb
      * @public

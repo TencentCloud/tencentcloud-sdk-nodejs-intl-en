@@ -525,7 +525,7 @@ In API Gateway, you can bind a custom domain name to a service and map its paths
     }
 
     /**
-     * This API is used to query the list of upstreams.
+     * This API is used to query details of upstreams under the current account.
      * @param {DescribeUpstreamsRequest} req
      * @param {function(string, DescribeUpstreamsResponse):void} cb
      * @public
@@ -1006,7 +1006,7 @@ After binding a usage plan to environments, you can use this API to query all se
     }
 
     /**
-     * This API is used to delete an upstream. Note that you can only delete an upstream when it’s not bound with an API.
+     * This API is used to delete an upstream. Note that you can only delete an upstream when it’s not bound with any APIs.
      * @param {DeleteUpstreamRequest} req
      * @param {function(string, DeleteUpstreamResponse):void} cb
      * @public
@@ -1064,7 +1064,7 @@ After creating an API key, you can query its details by using this API.
     }
 
     /**
-     * This API is used to query the list of APIs bound with an upstream.
+     * This API is used to query APIs bound with an upstream.
      * @param {DescribeUpstreamBindApisRequest} req
      * @param {function(string, DescribeUpstreamBindApisResponse):void} cb
      * @public

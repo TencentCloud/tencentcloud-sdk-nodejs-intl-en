@@ -1968,7 +1968,7 @@ class DeleteUpstreamRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the upstream to delete
+         * ID of the upstream to be deleted
          * @type {string || null}
          */
         this.UpstreamId = null;
@@ -2127,31 +2127,37 @@ class ModifyUpstreamRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of the upstream
+         * Unique upstream ID
          * @type {string || null}
          */
         this.UpstreamId = null;
 
         /**
-         * Name of the upstream 
+         * Upstream name
          * @type {string || null}
          */
         this.UpstreamName = null;
 
         /**
-         * Description of the upstream
+         * Upstream description
          * @type {string || null}
          */
         this.UpstreamDescription = null;
 
         /**
-         * Backend protocol. Values: `HTTP`, `HTTPS`
+         * Backend protocol. Valid values: `HTTP`, `HTTPS`
          * @type {string || null}
          */
         this.Scheme = null;
 
         /**
-         * The balancing method can only be `ROUND_ROBIN`.
+         * Upstream access type. Valid values: `IP_PORT`, `K8S`
+         * @type {string || null}
+         */
+        this.UpstreamType = null;
+
+        /**
+         * Load balancing algorithm. Valid value: `ROUND_ROBIN`
          * @type {string || null}
          */
         this.Algorithm = null;
@@ -2169,7 +2175,7 @@ class ModifyUpstreamRequest extends  AbstractModel {
         this.Retries = null;
 
         /**
-         * The host header in the request sending to the backend
+         * Gateway forwarding to the upstream Host request header
          * @type {string || null}
          */
         this.UpstreamHost = null;
@@ -2181,7 +2187,13 @@ class ModifyUpstreamRequest extends  AbstractModel {
         this.Nodes = null;
 
         /**
-         * Configuration of K8s service
+         * Health check configuration
+         * @type {UpstreamHealthChecker || null}
+         */
+        this.HealthChecker = null;
+
+        /**
+         * Configuration of TKE service
          * @type {Array.<K8sService> || null}
          */
         this.K8sService = null;
@@ -2199,6 +2211,7 @@ class ModifyUpstreamRequest extends  AbstractModel {
         this.UpstreamName = 'UpstreamName' in params ? params.UpstreamName : null;
         this.UpstreamDescription = 'UpstreamDescription' in params ? params.UpstreamDescription : null;
         this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.UpstreamType = 'UpstreamType' in params ? params.UpstreamType : null;
         this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
         this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
         this.Retries = 'Retries' in params ? params.Retries : null;
@@ -2211,6 +2224,12 @@ class ModifyUpstreamRequest extends  AbstractModel {
                 obj.deserialize(params.Nodes[z]);
                 this.Nodes.push(obj);
             }
+        }
+
+        if (params.HealthChecker) {
+            let obj = new UpstreamHealthChecker();
+            obj.deserialize(params.HealthChecker)
+            this.HealthChecker = obj;
         }
 
         if (params.K8sService) {
@@ -2378,13 +2397,13 @@ class DescribeUpstreamBindApisRequest extends  AbstractModel {
         super();
 
         /**
-         * Number of results returned in a page
+         * Number of entries per page
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Page offset
+         * The starting position of paging
          * @type {number || null}
          */
         this.Offset = null;
@@ -2939,6 +2958,13 @@ class ServiceConfig extends  AbstractModel {
         this.Method = null;
 
         /**
+         * It’s required for `upstream`.
+Note: This field may return `NULL`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.UpstreamId = null;
+
+        /**
          * API backend COS configuration. It’s required if the `ServiceType` is ·`COS`.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {CosConfig || null}
@@ -2959,6 +2985,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Url = 'Url' in params ? params.Url : null;
         this.Path = 'Path' in params ? params.Path : null;
         this.Method = 'Method' in params ? params.Method : null;
+        this.UpstreamId = 'UpstreamId' in params ? params.UpstreamId : null;
 
         if (params.CosConfig) {
             let obj = new CosConfig();
@@ -3175,8 +3202,8 @@ Note: this field may return null, indicating that no valid values found.
         this.DeploymentType = null;
 
         /**
-         * Whether it’s for special usage
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether the service if for special usage. Valid values: `DEFAULT` (general usage), `HTTP_DNS`.
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.SpecialUse = null;
@@ -4601,7 +4628,7 @@ class UnBindEnvironmentRequest extends  AbstractModel {
 }
 
 /**
- * Information of the queried upstreams
+ * The returned result of upstream query
  * @class
  */
 class DescribeUpstreamInfo extends  AbstractModel {
@@ -5024,7 +5051,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Information of an upstream
+ * Upstream details
  * @class
  */
 class UpstreamInfo extends  AbstractModel {
@@ -5032,43 +5059,43 @@ class UpstreamInfo extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of the upstream
+         * Unique upstream ID
          * @type {string || null}
          */
         this.UpstreamId = null;
 
         /**
-         * Name of the upstream 
+         * Upstream name
          * @type {string || null}
          */
         this.UpstreamName = null;
 
         /**
-         * Description of the upstream
+         * Upstream description
          * @type {string || null}
          */
         this.UpstreamDescription = null;
 
         /**
-         * Protocol
+         * Backend protocol. Valid values: `HTTP`, `HTTPS`
          * @type {string || null}
          */
         this.Scheme = null;
 
         /**
-         * Load balancing algorithm
+         * Load balancing algorithm. Valid value: `ROUND_ROBIN`
          * @type {string || null}
          */
         this.Algorithm = null;
 
         /**
-         * Unique VPC ID.
+         * Unique VPC ID
          * @type {string || null}
          */
         this.UniqVpcId = null;
 
         /**
-         * Number of retried attempts
+         * Number of retry attempts
          * @type {number || null}
          */
         this.Retries = null;
@@ -5100,21 +5127,21 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.HealthChecker = null;
 
         /**
-         * Type of the upstream
+         * Upstream type. Valid values: `IP_PORT`, `K8S`
          * @type {string || null}
          */
         this.UpstreamType = null;
 
         /**
-         * Configuration of K8s service
-Note: This field may return `null`, indicating that no valid value was found.
+         * Configuration of TKE service
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {Array.<K8sService> || null}
          */
         this.K8sServices = null;
 
         /**
-         * Host of the upstream
-Note: This field may return `null`, indicating that no valid value was found.
+         * The Host header that the gateway forwards to the upstream
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.UpstreamHost = null;
@@ -6191,7 +6218,7 @@ class CreatePluginRequest extends  AbstractModel {
         this.PluginName = null;
 
         /**
-         * Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`, `Routing`, `TrafficControlByParameter`.
+         * Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`, `Routing`, `TrafficControlByParameter`, `CircuitBreaker`, `ProxyCache`
          * @type {string || null}
          */
         this.PluginType = null;
@@ -6208,6 +6235,12 @@ class CreatePluginRequest extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * Label
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -6221,6 +6254,15 @@ class CreatePluginRequest extends  AbstractModel {
         this.PluginType = 'PluginType' in params ? params.PluginType : null;
         this.PluginData = 'PluginData' in params ? params.PluginData : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -8004,6 +8046,12 @@ class CreateApiRequest extends  AbstractModel {
          */
         this.EIAMAppId = null;
 
+        /**
+         * Owner of the resource
+         * @type {string || null}
+         */
+        this.Owner = null;
+
     }
 
     /**
@@ -8143,6 +8191,7 @@ class CreateApiRequest extends  AbstractModel {
         this.EIAMAuthType = 'EIAMAuthType' in params ? params.EIAMAuthType : null;
         this.TokenTimeout = 'TokenTimeout' in params ? params.TokenTimeout : null;
         this.EIAMAppId = 'EIAMAppId' in params ? params.EIAMAppId : null;
+        this.Owner = 'Owner' in params ? params.Owner : null;
 
     }
 }
@@ -9009,13 +9058,13 @@ class CreateUpstreamRequest extends  AbstractModel {
         super();
 
         /**
-         * Backend protocol. Values: `HTTP`, `HTTPS`
+         * Backend protocol. Valid values: `HTTP`, `HTTPS`
          * @type {string || null}
          */
         this.Scheme = null;
 
         /**
-         * The balancing method can only be `ROUND_ROBIN`.
+         * Load balancing algorithm. Valid value: `ROUND-ROBIN`
          * @type {string || null}
          */
         this.Algorithm = null;
@@ -9027,16 +9076,22 @@ class CreateUpstreamRequest extends  AbstractModel {
         this.UniqVpcId = null;
 
         /**
-         * Name of the upstream 
+         * Upstream name
          * @type {string || null}
          */
         this.UpstreamName = null;
 
         /**
-         * Description of the upstream
+         * Upstream description
          * @type {string || null}
          */
         this.UpstreamDescription = null;
+
+        /**
+         * Upstream access type. Valid values: `IP_PORT`, `K8S`
+         * @type {string || null}
+         */
+        this.UpstreamType = null;
 
         /**
          * Retry attempts. It defaults to `3`.
@@ -9045,7 +9100,7 @@ class CreateUpstreamRequest extends  AbstractModel {
         this.Retries = null;
 
         /**
-         * The host header in the request sending to the backend
+         * The Host request header that forwarded from the gateway to backend
          * @type {string || null}
          */
         this.UpstreamHost = null;
@@ -9057,7 +9112,19 @@ class CreateUpstreamRequest extends  AbstractModel {
         this.Nodes = null;
 
         /**
-         * The location of K8s service
+         * Label
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Health check configuration
+         * @type {UpstreamHealthChecker || null}
+         */
+        this.HealthChecker = null;
+
+        /**
+         * Configuration of TKE service
          * @type {Array.<K8sService> || null}
          */
         this.K8sService = null;
@@ -9076,6 +9143,7 @@ class CreateUpstreamRequest extends  AbstractModel {
         this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
         this.UpstreamName = 'UpstreamName' in params ? params.UpstreamName : null;
         this.UpstreamDescription = 'UpstreamDescription' in params ? params.UpstreamDescription : null;
+        this.UpstreamType = 'UpstreamType' in params ? params.UpstreamType : null;
         this.Retries = 'Retries' in params ? params.Retries : null;
         this.UpstreamHost = 'UpstreamHost' in params ? params.UpstreamHost : null;
 
@@ -9086,6 +9154,21 @@ class CreateUpstreamRequest extends  AbstractModel {
                 obj.deserialize(params.Nodes[z]);
                 this.Nodes.push(obj);
             }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.HealthChecker) {
+            let obj = new UpstreamHealthChecker();
+            obj.deserialize(params.HealthChecker)
+            this.HealthChecker = obj;
         }
 
         if (params.K8sService) {
@@ -10033,19 +10116,19 @@ class DescribeUpstreamsRequest extends  AbstractModel {
         super();
 
         /**
-         * Number of results returned in a page
+         * Number of entries per page
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Page offset
+         * The starting position of paging
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Filters
+         * Filters. Valid values: `UpstreamId` and `UpstreamName`
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -10347,8 +10430,8 @@ class CreateUpstreamResponse extends  AbstractModel {
         super();
 
         /**
-         * The unique upstream IP returned
-Note: This field may return `null`, indicating that no valid value was found.
+         * The unique upstream ID returned
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.UpstreamId = null;
@@ -10682,7 +10765,7 @@ class DeletePluginResponse extends  AbstractModel {
 }
 
 /**
- * Querying the list of APIs bound with an upstream.
+ * Queries APIs bound with an upstream
  * @class
  */
 class DescribeUpstreamBindApis extends  AbstractModel {
@@ -12356,8 +12439,8 @@ class ModifyUpstreamResponse extends  AbstractModel {
         super();
 
         /**
-         * Information of the upstream after the modification
-Note: This field may return `null`, indicating that no valid value was found.
+         * Return modified upstream information
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {UpstreamInfo || null}
          */
         this.Result = null;
@@ -12633,7 +12716,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Metadata of backend nodes of the upstream
+ * Upstream node metadata
  * @class
  */
 class UpstreamNode extends  AbstractModel {
@@ -12641,7 +12724,7 @@ class UpstreamNode extends  AbstractModel {
         super();
 
         /**
-         * IP or domain name of the host
+         * IP or domain name
          * @type {string || null}
          */
         this.Host = null;
@@ -12659,8 +12742,8 @@ class UpstreamNode extends  AbstractModel {
         this.Weight = null;
 
         /**
-         * VM instance ID
-Note: This field may return `null`, indicating that no valid value was found.
+         * CVM Instance ID
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.VmInstanceId = null;
@@ -12673,22 +12756,22 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.Tags = null;
 
         /**
-         * Health status of the node. Value: `OFF`, `HEALTHY`, `UNHEALTHY` and `NO_DATA`. It’s not required for creating and editing actions.
-Note: This field may return `null`, indicating that no valid value was found.
+         * Health status of the node. Values: `OFF`, `HEALTHY`, `UNHEALTHY` and `NO_DATA`. It’s not required for creating and editing actions. It only supports VPC upstreams.
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.Healthy = null;
 
         /**
-         * The K8s service name
-Note: This field may return `null`, indicating that no valid value was found.
+         * TKE container name
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.ServiceName = null;
 
         /**
-         * K8s namespace
-Note: This field may return `null`, indicating that no valid value was found.
+         * TKE namespace
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.NameSpace = null;
@@ -12701,8 +12784,8 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.ClusterId = null;
 
         /**
-         * Source of the node
-Note: This field may return `null`, indicating that no valid value was found.
+         * Node source. Valid value: `K8S`
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.Source = null;
@@ -12791,8 +12874,8 @@ class DeleteUpstreamResponse extends  AbstractModel {
         super();
 
         /**
-         * ID of the upstream deleted
-Note: This field may return `null`, indicating that no valid value was found.
+         * ID of the deleted upstream
+Note: This field may return `NULL`, indicating that no valid value was found.
          * @type {string || null}
          */
         this.UpstreamId = null;
@@ -14338,7 +14421,7 @@ class RequestParameter extends  AbstractModel {
 }
 
 /**
- * Upstream health check configuration
+ * Upstream health check parameter configuration
  * @class
  */
 class UpstreamHealthChecker extends  AbstractModel {

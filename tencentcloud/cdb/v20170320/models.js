@@ -4697,7 +4697,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.CageId = null;
 
         /**
-         * Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+         * Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template). Default value: `HIGH_STABILITY`.
          * @type {string || null}
          */
         this.ParamTemplateType = null;
@@ -5098,6 +5098,12 @@ class BackupInfo extends  AbstractModel {
          */
         this.ManualBackupName = null;
 
+        /**
+         * Backup retention type. Valid values: `save_mode_regular` (non-archive backup), save_mode_period`(archive backup).
+         * @type {string || null}
+         */
+        this.SaveMode = null;
+
     }
 
     /**
@@ -5121,6 +5127,7 @@ class BackupInfo extends  AbstractModel {
         this.Method = 'Method' in params ? params.Method : null;
         this.Way = 'Way' in params ? params.Way : null;
         this.ManualBackupName = 'ManualBackupName' in params ? params.ManualBackupName : null;
+        this.SaveMode = 'SaveMode' in params ? params.SaveMode : null;
 
     }
 }
@@ -7670,6 +7677,36 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         this.BackupTimeWindow = null;
 
         /**
+         * Switch for archive backup retention. Valid values: `off` (disable), `on` (enable). Default value:`off`.
+         * @type {string || null}
+         */
+        this.EnableBackupPeriodSave = null;
+
+        /**
+         * Maximum days of archive backup retention. Valid range: 90-3650. Default value: 1080.
+         * @type {number || null}
+         */
+        this.BackupPeriodSaveDays = null;
+
+        /**
+         * Archive backup retention period. Valid values: `weekly` (a week), `monthly` (a month), `quarterly` (a quarter), `yearly` (a year). Default value: `monthly`.
+         * @type {string || null}
+         */
+        this.BackupPeriodSaveInterval = null;
+
+        /**
+         * Number of archive backups. Minimum value: `1`, Maximum value: Number of non-archive backups in archive backup retention period. Default value: `1`.
+         * @type {number || null}
+         */
+        this.BackupPeriodSaveCount = null;
+
+        /**
+         * The start time in the format: yyyy-mm-dd HH:MM:SS, which is used to enable archive backup retention policy.
+         * @type {string || null}
+         */
+        this.StartBackupPeriodSaveDate = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -7695,6 +7732,11 @@ class DescribeBackupConfigResponse extends  AbstractModel {
             obj.deserialize(params.BackupTimeWindow)
             this.BackupTimeWindow = obj;
         }
+        this.EnableBackupPeriodSave = 'EnableBackupPeriodSave' in params ? params.EnableBackupPeriodSave : null;
+        this.BackupPeriodSaveDays = 'BackupPeriodSaveDays' in params ? params.BackupPeriodSaveDays : null;
+        this.BackupPeriodSaveInterval = 'BackupPeriodSaveInterval' in params ? params.BackupPeriodSaveInterval : null;
+        this.BackupPeriodSaveCount = 'BackupPeriodSaveCount' in params ? params.BackupPeriodSaveCount : null;
+        this.StartBackupPeriodSaveDate = 'StartBackupPeriodSaveDate' in params ? params.StartBackupPeriodSaveDate : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10627,7 +10669,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Vport = null;
 
         /**
-         * Lock flag
+         * Whether the disk write is locked (It depends on whether the instance data in disk exceeds its quota). Valid values: `0` (unlocked), `1` (locked).
          * @type {number || null}
          */
         this.CdbError = null;
@@ -13019,7 +13061,7 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Backup file retention period in days. Value range: 7-732.
+         * Backup file retention period in days. Value range: 7-1830.
          * @type {number || null}
          */
         this.ExpireDays = null;
@@ -13037,7 +13079,7 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         this.BackupMethod = null;
 
         /**
-         * Binlog retention period in days. Value range: 7-732. It cannot be greater than the retention period of backup files.
+         * Binlog retention period in days. Value range: 7-1830. It can’t be greater than the retention period of backup files.
          * @type {number || null}
          */
         this.BinlogExpireDays = null;
@@ -13047,6 +13089,42 @@ class ModifyBackupConfigRequest extends  AbstractModel {
          * @type {CommonTimeWindow || null}
          */
         this.BackupTimeWindow = null;
+
+        /**
+         * Switch for archive backup retention. Valid values: `off` (disable), `on` (enable). Default value:`off`.
+         * @type {string || null}
+         */
+        this.EnableBackupPeriodSave = null;
+
+        /**
+         * Switch for long-term backup retention (This field can be ignored, for its feature hasn’t been launched). Valid values: `off` (disable), `on` (enable). Default value: `off`. Once enabled, the parameters (BackupPeriodSaveDays, BackupPeriodSaveInterval, and BackupPeriodSaveCount) will be invalid.
+         * @type {string || null}
+         */
+        this.EnableBackupPeriodLongTermSave = null;
+
+        /**
+         * Maximum days of archive backup retention. Valid range: 90-3650. Default value: 1080.
+         * @type {number || null}
+         */
+        this.BackupPeriodSaveDays = null;
+
+        /**
+         * Archive backup retention period. Valid values: `weekly` (a week), `monthly` (a month), `quarterly` (a quarter), `yearly` (a year). Default value: `monthly`.
+         * @type {string || null}
+         */
+        this.BackupPeriodSaveInterval = null;
+
+        /**
+         * Number of archive backups. Minimum value: `1`, Maximum value: Number of non-archive backups in archive backup retention period. Default value: `1`.
+         * @type {number || null}
+         */
+        this.BackupPeriodSaveCount = null;
+
+        /**
+         * The start time in the format of yyyy-mm-dd HH:MM:SS, which is used to enable archive backup retention policy.
+         * @type {string || null}
+         */
+        this.StartBackupPeriodSaveDate = null;
 
     }
 
@@ -13068,6 +13146,12 @@ class ModifyBackupConfigRequest extends  AbstractModel {
             obj.deserialize(params.BackupTimeWindow)
             this.BackupTimeWindow = obj;
         }
+        this.EnableBackupPeriodSave = 'EnableBackupPeriodSave' in params ? params.EnableBackupPeriodSave : null;
+        this.EnableBackupPeriodLongTermSave = 'EnableBackupPeriodLongTermSave' in params ? params.EnableBackupPeriodLongTermSave : null;
+        this.BackupPeriodSaveDays = 'BackupPeriodSaveDays' in params ? params.BackupPeriodSaveDays : null;
+        this.BackupPeriodSaveInterval = 'BackupPeriodSaveInterval' in params ? params.BackupPeriodSaveInterval : null;
+        this.BackupPeriodSaveCount = 'BackupPeriodSaveCount' in params ? params.BackupPeriodSaveCount : null;
+        this.StartBackupPeriodSaveDate = 'StartBackupPeriodSaveDate' in params ? params.StartBackupPeriodSaveDate : null;
 
     }
 }
@@ -14569,13 +14653,13 @@ class UpgradeCDBProxyRequest extends  AbstractModel {
         this.ProxyGroupId = null;
 
         /**
-         * The number of proxy nodes
+         * Number of proxy nodes
          * @type {number || null}
          */
         this.ProxyCount = null;
 
         /**
-         * The number of CPU cores per proxy node
+         * Number of CPU cores per proxy node
          * @type {number || null}
          */
         this.Cpu = null;

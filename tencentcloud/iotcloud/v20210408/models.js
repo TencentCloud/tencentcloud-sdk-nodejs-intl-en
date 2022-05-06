@@ -851,6 +851,48 @@ class DeviceLabel extends  AbstractModel {
 }
 
 /**
+ * UpdateProductDynamicRegister request structure.
+ * @class
+ */
+class UpdateProductDynamicRegisterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Product ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * Dynamic registration type. Valid values: 0 - disabled; 1 - pre-create device; 2 - auto-create device.
+         * @type {number || null}
+         */
+        this.RegisterType = null;
+
+        /**
+         * Maximum dynamically registered devices
+         * @type {number || null}
+         */
+        this.RegisterLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.RegisterType = 'RegisterType' in params ? params.RegisterType : null;
+        this.RegisterLimit = 'RegisterLimit' in params ? params.RegisterLimit : null;
+
+    }
+}
+
+/**
  * X.509 certificate information
  * @class
  */
@@ -2103,6 +2145,55 @@ Note: this field may return `null`, indicating that no valid values can be obtai
     }
 }
 
+/**
+ * UpdateProductDynamicRegister response structure.
+ * @class
+ */
+class UpdateProductDynamicRegisterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Dynamic registration type. Valid values: 0 - disabled; 1 - pre-create device; 2 - auto-create device.
+         * @type {number || null}
+         */
+        this.RegisterType = null;
+
+        /**
+         * Product key for dynamic registration
+         * @type {string || null}
+         */
+        this.ProductSecret = null;
+
+        /**
+         * Maximum dynamically registered devices
+         * @type {number || null}
+         */
+        this.RegisterLimit = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegisterType = 'RegisterType' in params ? params.RegisterType : null;
+        this.ProductSecret = 'ProductSecret' in params ? params.ProductSecret : null;
+        this.RegisterLimit = 'RegisterLimit' in params ? params.RegisterLimit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     DeleteProductRequest: DeleteProductRequest,
     DescribePrivateCABindedProductsRequest: DescribePrivateCABindedProductsRequest,
@@ -2126,6 +2217,7 @@ module.exports = {
     DescribeProductResponse: DescribeProductResponse,
     DescribeDeviceRequest: DescribeDeviceRequest,
     DeviceLabel: DeviceLabel,
+    UpdateProductDynamicRegisterRequest: UpdateProductDynamicRegisterRequest,
     CertInfo: CertInfo,
     ProductMetadata: ProductMetadata,
     DescribePrivateCAsRequest: DescribePrivateCAsRequest,
@@ -2144,5 +2236,6 @@ module.exports = {
     DeviceInfo: DeviceInfo,
     ProductProperties: ProductProperties,
     DescribeDeviceResponse: DescribeDeviceResponse,
+    UpdateProductDynamicRegisterResponse: UpdateProductDynamicRegisterResponse,
 
 }

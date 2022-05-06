@@ -4252,6 +4252,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.PhoneCallType = null;
 
+        /**
+         * Notification cycle. The values 1-7 indicate Monday to Sunday.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.Weekday = null;
+
     }
 
     /**
@@ -4273,6 +4280,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.PhoneCircleInterval = 'PhoneCircleInterval' in params ? params.PhoneCircleInterval : null;
         this.NeedPhoneArriveNotice = 'NeedPhoneArriveNotice' in params ? params.NeedPhoneArriveNotice : null;
         this.PhoneCallType = 'PhoneCallType' in params ? params.PhoneCallType : null;
+        this.Weekday = 'Weekday' in params ? params.Weekday : null;
 
     }
 }
@@ -7643,6 +7651,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.EndTime = null;
 
+        /**
+         * Notification cycle. The values 1-7 indicate Monday to Sunday.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.Weekday = null;
+
     }
 
     /**
@@ -7657,6 +7672,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ValidationCode = 'ValidationCode' in params ? params.ValidationCode : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Weekday = 'Weekday' in params ? params.Weekday : null;
 
     }
 }
@@ -9007,7 +9023,12 @@ class DescribeStatisticDataRequest extends  AbstractModel {
         this.Conditions = null;
 
         /**
-         * Statistical granularity in s. Default value: 300
+         * Statistical period in seconds. Default value: 300. Optional values: 60, 300, 3,600, and 86,400.
+Due to the storage period limit, the statistical period is subject to the time range of statistics:
+60s: The time range is less than 12 hours, and the timespan between `StartTime` and the current time cannot exceed 15 days.
+300s: The time range is less than three days, and the timespan between `StartTime` and the current time cannot exceed 31 days.
+3,600s: The time range is less than 30 days, and the timespan between `StartTime` and the current time cannot exceed 93 days.
+86,400s: The time range is less than 186 days, and the timespan between `StartTime` and the current time cannot exceed 186 days.
          * @type {number || null}
          */
         this.Period = null;

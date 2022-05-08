@@ -2810,7 +2810,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.UncleanLeaderElectionEnable = null;
 
         /**
-         * Message retention period in ms, which is optional. The current minimum value is 60,000 ms
+         * Message retention period in milliseconds, which is optional. Min value: 60,000 ms.
          * @type {number || null}
          */
         this.RetentionMs = null;
@@ -2820,6 +2820,12 @@ class CreateTopicRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.SegmentMs = null;
+
+        /**
+         * Max message size in bytes. Value range: 1,024 bytes (1 KB) to 8,388,608 bytes (8 MB).
+         * @type {number || null}
+         */
+        this.MaxMessageBytes = null;
 
         /**
          * Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
@@ -2866,6 +2872,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.UncleanLeaderElectionEnable = 'UncleanLeaderElectionEnable' in params ? params.UncleanLeaderElectionEnable : null;
         this.RetentionMs = 'RetentionMs' in params ? params.RetentionMs : null;
         this.SegmentMs = 'SegmentMs' in params ? params.SegmentMs : null;
+        this.MaxMessageBytes = 'MaxMessageBytes' in params ? params.MaxMessageBytes : null;
         this.EnableAclRule = 'EnableAclRule' in params ? params.EnableAclRule : null;
         this.AclRuleName = 'AclRuleName' in params ? params.AclRuleName : null;
         this.RetentionBytes = 'RetentionBytes' in params ? params.RetentionBytes : null;
@@ -5474,7 +5481,7 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
         this.TagKey = null;
 
         /**
-         * Filter.
+         * Filter. Valid values of `filter.Name` include `Ip`, `VpcId`, `SubNetId`, `InstanceType`, and `InstanceId`. Up to 10 values can be passed for `filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5484,6 +5491,12 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.InstanceIds = null;
+
+        /**
+         * Filter by instance ID.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdList = null;
 
     }
 
@@ -5510,6 +5523,7 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
             }
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
 
     }
 }
@@ -6581,7 +6595,7 @@ class Route extends  AbstractModel {
         this.RouteId = null;
 
         /**
-         * VIP network type (1: public network TGW; 2: classic network; 3: VPC; 4: supporting network (Standard Edition); 5: SSL public network access; 6: BM VPC; 7: supporting network (Pro Edition))
+         * VIP network type (1: Public network TGW; 2: Classic network; 3: VPC; 4: Supporting network (IDC environment); 5: SSL public network access; 6: BM VPC; 7: Supporting network (CVM environment)).
          * @type {number || null}
          */
         this.VipType = null;
@@ -6857,7 +6871,7 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         this.SegmentMs = null;
 
         /**
-         * Maximum topic message length in bytes. The maximum value is 8,388,608 bytes (i.e., 8 MB).
+         * Max message size in bytes. Max value: 8,388,608 bytes (8 MB).
          * @type {number || null}
          */
         this.MaxMessageBytes = null;

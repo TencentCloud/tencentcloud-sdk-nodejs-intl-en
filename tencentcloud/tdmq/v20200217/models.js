@@ -67,56 +67,6 @@ class DescribeRolesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBindClusters response structure.
- * @class
- */
-class DescribeBindClustersResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of dedicated clusters
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of dedicated clusters
-         * @type {Array.<BindCluster> || null}
-         */
-        this.ClusterSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.ClusterSet) {
-            this.ClusterSet = new Array();
-            for (let z in params.ClusterSet) {
-                let obj = new BindCluster();
-                obj.deserialize(params.ClusterSet[z]);
-                this.ClusterSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * cmq DeadLetterPolicy
  * @class
  */
@@ -165,134 +115,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Policy = 'Policy' in params ? params.Policy : null;
         this.MaxTimeToLive = 'MaxTimeToLive' in params ? params.MaxTimeToLive : null;
         this.MaxReceiveCount = 'MaxReceiveCount' in params ? params.MaxReceiveCount : null;
-
-    }
-}
-
-/**
- * RocketMQ namespace information
- * @class
- */
-class RocketMQNamespace extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * Retention period for unconsumed messages in milliseconds. Valid range: 60 seconds–15 days.
-         * @type {number || null}
-         */
-        this.Ttl = null;
-
-        /**
-         * Retention period for persisted messages in milliseconds
-         * @type {number || null}
-         */
-        this.RetentionTime = null;
-
-        /**
-         * Remarks
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.Ttl = 'Ttl' in params ? params.Ttl : null;
-        this.RetentionTime = 'RetentionTime' in params ? params.RetentionTime : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-
-    }
-}
-
-/**
- * DescribeSubscriptions request structure.
- * @class
- */
-class DescribeSubscriptionsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Fuzzy match by subscriber name.
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
-
-        /**
-         * Data filter.
-         * @type {Array.<FilterSubscription> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Pulsar cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new FilterSubscription();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -600,30 +422,36 @@ class CreateCmqTopicRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRocketMQNamespaces response structure.
+ * ReceiveMessage request structure.
  * @class
  */
-class DescribeRocketMQNamespacesResponse extends  AbstractModel {
+class ReceiveMessageRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of namespaces
-         * @type {Array.<RocketMQNamespace> || null}
+         * Name of the topic which receives the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
+         * @type {string || null}
          */
-        this.Namespaces = null;
+        this.Topic = null;
 
         /**
-         * Total number
+         * Subscriber name
+         * @type {string || null}
+         */
+        this.SubscriptionName = null;
+
+        /**
+         * Default value: 1000. Messages received by the consumer will first be stored in the `receiverQueueSize` queue to tune the message receiving rate.
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.ReceiverQueueSize = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Default value: Latest. It is used to determine the position where the consumer initially receives messages. Valid values: Earliest, Latest.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SubInitialPosition = null;
 
     }
 
@@ -634,45 +462,10 @@ class DescribeRocketMQNamespacesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Namespaces) {
-            this.Namespaces = new Array();
-            for (let z in params.Namespaces) {
-                let obj = new RocketMQNamespace();
-                obj.deserialize(params.Namespaces[z]);
-                this.Namespaces.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Dedicated cluster information
- * @class
- */
-class BindCluster extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Physical cluster name
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
+        this.ReceiverQueueSize = 'ReceiverQueueSize' in params ? params.ReceiverQueueSize : null;
+        this.SubInitialPosition = 'SubInitialPosition' in params ? params.SubInitialPosition : null;
 
     }
 }
@@ -757,57 +550,6 @@ class RocketMQClusterRecentStats extends  AbstractModel {
         this.ProducedMsgNum = 'ProducedMsgNum' in params ? params.ProducedMsgNum : null;
         this.ConsumedMsgNum = 'ConsumedMsgNum' in params ? params.ConsumedMsgNum : null;
         this.AccumulativeMsgNum = 'AccumulativeMsgNum' in params ? params.AccumulativeMsgNum : null;
-
-    }
-}
-
-/**
- * DescribeCmqQueues response structure.
- * @class
- */
-class DescribeCmqQueuesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Quantity
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of queues
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<CmqQueue> || null}
-         */
-        this.QueueList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.QueueList) {
-            this.QueueList = new Array();
-            for (let z in params.QueueList) {
-                let obj = new CmqQueue();
-                obj.deserialize(params.QueueList[z]);
-                this.QueueList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1146,121 +888,6 @@ class DeleteRocketMQGroupRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
-
-    }
-}
-
-/**
- * RocketMQ consumer group information
- * @class
- */
-class RocketMQGroup extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Consumer group name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Number of online consumers
-         * @type {number || null}
-         */
-        this.ConsumerNum = null;
-
-        /**
-         * Consumption TPS
-         * @type {number || null}
-         */
-        this.TPS = null;
-
-        /**
-         * Total number of retained messages
-         * @type {number || null}
-         */
-        this.TotalAccumulative = null;
-
-        /**
-         * 0: cluster consumption mode; 1: broadcast consumption mode; -1: unknown
-         * @type {number || null}
-         */
-        this.ConsumptionMode = null;
-
-        /**
-         * Whether to allow consumption
-         * @type {boolean || null}
-         */
-        this.ReadEnabled = null;
-
-        /**
-         * Number of partitions in the retry letter topic
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RetryPartitionNum = null;
-
-        /**
-         * Creation time in milliseconds
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Modification time in milliseconds
-         * @type {number || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Client protocol
-         * @type {string || null}
-         */
-        this.ClientProtocol = null;
-
-        /**
-         * Remarks
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Consumer type. Enumerated values: ACTIVELY, PASSIVELY
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConsumerType = null;
-
-        /**
-         * Whether to enable broadcast consumption
-         * @type {boolean || null}
-         */
-        this.BroadcastEnabled = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.ConsumerNum = 'ConsumerNum' in params ? params.ConsumerNum : null;
-        this.TPS = 'TPS' in params ? params.TPS : null;
-        this.TotalAccumulative = 'TotalAccumulative' in params ? params.TotalAccumulative : null;
-        this.ConsumptionMode = 'ConsumptionMode' in params ? params.ConsumptionMode : null;
-        this.ReadEnabled = 'ReadEnabled' in params ? params.ReadEnabled : null;
-        this.RetryPartitionNum = 'RetryPartitionNum' in params ? params.RetryPartitionNum : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.ClientProtocol = 'ClientProtocol' in params ? params.ClientProtocol : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ConsumerType = 'ConsumerType' in params ? params.ConsumerType : null;
-        this.BroadcastEnabled = 'BroadcastEnabled' in params ? params.BroadcastEnabled : null;
 
     }
 }
@@ -1681,6 +1308,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.MaxMsgBacklogSize = null;
 
+        /**
+         * Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RetentionSizeInMB = null;
+
     }
 
     /**
@@ -1746,6 +1380,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Status = 'Status' in params ? params.Status : null;
         this.MaxUnackedMsgNum = 'MaxUnackedMsgNum' in params ? params.MaxUnackedMsgNum : null;
         this.MaxMsgBacklogSize = 'MaxMsgBacklogSize' in params ? params.MaxMsgBacklogSize : null;
+        this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
 
     }
 }
@@ -1843,62 +1478,6 @@ class CreateSubscriptionResponse extends  AbstractModel {
 }
 
 /**
- * SendMsg response structure.
- * @class
- */
-class SendMsgResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyCmqTopicAttribute response structure.
- * @class
- */
-class ModifyCmqTopicAttributeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeCmqSubscriptionDetail request structure.
  * @class
  */
@@ -1948,176 +1527,78 @@ class DescribeCmqSubscriptionDetailRequest extends  AbstractModel {
 }
 
 /**
- * Topic instance
+ * Type of the tag key/value
  * @class
  */
-class Topic extends  AbstractModel {
+class Tag extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Average size of the messages published in the last interval in bytes.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Value of the tag key
          * @type {string || null}
          */
-        this.AverageMsgSize = null;
+        this.TagKey = null;
 
         /**
-         * Number of consumers.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Value of the tag value
          * @type {string || null}
          */
-        this.ConsumerCount = null;
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * Role instance
+ * @class
+ */
+class Role extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * Total number of recorded messages.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Role name.
          * @type {string || null}
          */
-        this.LastConfirmedEntry = null;
+        this.RoleName = null;
 
         /**
-         * Time when the last ledger was created.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Value of the role token.
          * @type {string || null}
          */
-        this.LastLedgerCreatedTimestamp = null;
+        this.Token = null;
 
         /**
-         * Number of messages published by local and replicated publishers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgRateIn = null;
-
-        /**
-         * Sum of the numbers of messages delivered by local and replicated consumers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgRateOut = null;
-
-        /**
-         * Number of bytes of messages published by local and replicated publishers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgThroughputIn = null;
-
-        /**
-         * Number of bytes of messages delivered by local and replicated consumers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgThroughputOut = null;
-
-        /**
-         * Total number of recorded messages.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NumberOfEntries = null;
-
-        /**
-         * Number of partitions ≤ 0: there are no subpartitions in the topic.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * Number of producers.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProducerCount = null;
-
-        /**
-         * Total amount of all stored messages in bytes.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TotalSize = null;
-
-        /**
-         * Subpartitions in a partitioned topic.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<PartitionsTopic> || null}
-         */
-        this.SubTopicSets = null;
-
-        /**
-         * Topic type description:
-0: general message;
-1: globally sequential message;
-2: partitionally sequential message;
-3: retry letter queue;
-4: dead letter queue;
-5: transaction message.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TopicType = null;
-
-        /**
-         * Environment (namespace) name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Remarks (up to 128 characters).
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Remarks.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
          * Creation time.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Modification time.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Update time.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
-        /**
-         * Maximum number of producers.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProducerLimit = null;
-
-        /**
-         * Maximum number of consumers.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConsumerLimit = null;
-
-        /**
-         * `0`: Non-persistent and non-partitioned
-`1`: Non-persistent and partitioned
-`2`: Persistent and non-partitioned
-`3`: Persistent and partitioned
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PulsarTopicType = null;
-
     }
 
     /**
@@ -2127,215 +1608,11 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
-        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
-        this.LastConfirmedEntry = 'LastConfirmedEntry' in params ? params.LastConfirmedEntry : null;
-        this.LastLedgerCreatedTimestamp = 'LastLedgerCreatedTimestamp' in params ? params.LastLedgerCreatedTimestamp : null;
-        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
-        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
-        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
-        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
-        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.ProducerCount = 'ProducerCount' in params ? params.ProducerCount : null;
-        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
-
-        if (params.SubTopicSets) {
-            this.SubTopicSets = new Array();
-            for (let z in params.SubTopicSets) {
-                let obj = new PartitionsTopic();
-                obj.deserialize(params.SubTopicSets[z]);
-                this.SubTopicSets.push(obj);
-            }
-        }
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Token = 'Token' in params ? params.Token : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.ProducerLimit = 'ProducerLimit' in params ? params.ProducerLimit : null;
-        this.ConsumerLimit = 'ConsumerLimit' in params ? params.ConsumerLimit : null;
-        this.PulsarTopicType = 'PulsarTopicType' in params ? params.PulsarTopicType : null;
-
-    }
-}
-
-/**
- * DescribeEnvironments request structure.
- * @class
- */
-class DescribeEnvironmentsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Fuzzy search by namespace name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Pulsar cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * * EnvironmentId
-Filter by namespace for exact query.
-Type: String
-Required: no
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DescribeRocketMQNamespaces request structure.
- * @class
- */
-class DescribeRocketMQNamespacesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum number
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Search by name
-         * @type {string || null}
-         */
-        this.NameKeyword = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.NameKeyword = 'NameKeyword' in params ? params.NameKeyword : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQTopics request structure.
- * @class
- */
-class DescribeRocketMQTopicsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Query offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Query limit
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Namespace
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * Filter by topic type. Valid values: Normal, GlobalOrder, PartitionedOrder, Transaction.
-         * @type {Array.<string> || null}
-         */
-        this.FilterType = null;
-
-        /**
-         * Search by topic name. Fuzzy query is supported.
-         * @type {string || null}
-         */
-        this.FilterName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.FilterType = 'FilterType' in params ? params.FilterType : null;
-        this.FilterName = 'FilterName' in params ? params.FilterName : null;
 
     }
 }
@@ -2470,18 +1747,77 @@ class CreateEnvironmentRequest extends  AbstractModel {
 }
 
 /**
- * DeleteTopics response structure.
+ * ClearCmqQueue request structure.
  * @class
  */
-class DeleteTopicsResponse extends  AbstractModel {
+class ClearCmqQueueRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array of deleted topics.
-         * @type {Array.<TopicRecord> || null}
+         * Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+         * @type {string || null}
          */
-        this.TopicSets = null;
+        this.QueueName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+
+    }
+}
+
+/**
+ * Cmq DeadLetterSource
+ * @class
+ */
+class CmqDeadLetterSource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message queue ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.QueueId = null;
+
+        /**
+         * Message queue name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.QueueName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueueId = 'QueueId' in params ? params.QueueId : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+
+    }
+}
+
+/**
+ * ModifyCmqTopicAttribute response structure.
+ * @class
+ */
+class ModifyCmqTopicAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2498,179 +1834,7 @@ class DeleteTopicsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TopicSets) {
-            this.TopicSets = new Array();
-            for (let z in params.TopicSets) {
-                let obj = new TopicRecord();
-                obj.deserialize(params.TopicSets[z]);
-                this.TopicSets.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeClusters request structure.
- * @class
- */
-class DescribeClustersRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Filter by list of cluster IDs
-         * @type {Array.<string> || null}
-         */
-        this.ClusterIdList = null;
-
-        /**
-         * Whether to filter by tag
-         * @type {boolean || null}
-         */
-        this.IsTagFilter = null;
-
-        /**
-         * Filter. Currently, you can filter only by tag.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ClusterIdList = 'ClusterIdList' in params ? params.ClusterIdList : null;
-        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * Subscription
- * @class
- */
-class SubscriptionTopic extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Subscription name.
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-
-    }
-}
-
-/**
- * RocketMQ topic information
- * @class
- */
-class RocketMQTopic extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Remarks
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Number of read/write partitions
-         * @type {number || null}
-         */
-        this.PartitionNum = null;
-
-        /**
-         * Creation time in milliseconds
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Creation time in milliseconds
-         * @type {number || null}
-         */
-        this.UpdateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -2856,41 +2020,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * RewindCmqQueue request structure.
- * @class
- */
-class RewindCmqQueueRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-        /**
-         * After this time is configured, the `(Batch)receiveMessage` API will consume the messages received after this timestamp in the order in which they are produced.
-         * @type {number || null}
-         */
-        this.StartConsumeTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-        this.StartConsumeTime = 'StartConsumeTime' in params ? params.StartConsumeTime : null;
-
-    }
-}
-
-/**
  * ModifyCluster request structure.
  * @class
  */
@@ -3054,56 +2183,6 @@ class AcknowledgeMessageRequest extends  AbstractModel {
         this.MessageId = 'MessageId' in params ? params.MessageId : null;
         this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
         this.SubName = 'SubName' in params ? params.SubName : null;
-
-    }
-}
-
-/**
- * DescribeTopics response structure.
- * @class
- */
-class DescribeTopicsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Array set of topics.
-         * @type {Array.<Topic> || null}
-         */
-        this.TopicSets = null;
-
-        /**
-         * Number of topics.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TopicSets) {
-            this.TopicSets = new Array();
-            for (let z in params.TopicSets) {
-                let obj = new Topic();
-                obj.deserialize(params.TopicSets[z]);
-                this.TopicSets.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3445,41 +2524,6 @@ class ModifyRoleResponse extends  AbstractModel {
 }
 
 /**
- * Type of the tag key/value
- * @class
- */
-class Tag extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Value of the tag key
-         * @type {string || null}
-         */
-        this.TagKey = null;
-
-        /**
-         * Value of the tag value
-         * @type {string || null}
-         */
-        this.TagValue = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
-
-    }
-}
-
-/**
  * DeleteCmqQueue response structure.
  * @class
  */
@@ -3648,201 +2692,6 @@ class DeleteRolesRequest extends  AbstractModel {
 }
 
 /**
- * Subscriber
- * @class
- */
-class Subscription extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * The time when the consumer started connecting.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConnectedSince = null;
-
-        /**
-         * Consumer address.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConsumerAddr = null;
-
-        /**
-         * Number of consumers.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConsumerCount = null;
-
-        /**
-         * Consumer name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConsumerName = null;
-
-        /**
-         * Number of retained messages.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgBacklog = null;
-
-        /**
-         * Proportion of messages under this subscription that were discarded but not sent after TTL.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgRateExpired = null;
-
-        /**
-         * Sum of the numbers of messages delivered by the consumer per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgRateOut = null;
-
-        /**
-         * Number of bytes of messages consumed by the consumer per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgThroughputOut = null;
-
-        /**
-         * Subscription name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
-
-        /**
-         * Set of consumers.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Consumer> || null}
-         */
-        this.ConsumerSets = null;
-
-        /**
-         * Whether it is online.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.IsOnline = null;
-
-        /**
-         * Set of consumption progress information.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ConsumersSchedule> || null}
-         */
-        this.ConsumersScheduleSets = null;
-
-        /**
-         * Remarks.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Creation time.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Modification time.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Subscription type. Valid values: `Exclusive`, `Shared`, `Failover`, and `Key_Shared`. An empty string or `NULL`: Unknown.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubType = null;
-
-        /**
-         * Whether messages are blocked as the limit of unacknowledged messages has been reached.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.BlockedSubscriptionOnUnackedMsgs = null;
-
-        /**
-         * Maximum number of unacknowledged messages.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MaxUnackedMsgNum = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.ConnectedSince = 'ConnectedSince' in params ? params.ConnectedSince : null;
-        this.ConsumerAddr = 'ConsumerAddr' in params ? params.ConsumerAddr : null;
-        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
-        this.ConsumerName = 'ConsumerName' in params ? params.ConsumerName : null;
-        this.MsgBacklog = 'MsgBacklog' in params ? params.MsgBacklog : null;
-        this.MsgRateExpired = 'MsgRateExpired' in params ? params.MsgRateExpired : null;
-        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
-        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-
-        if (params.ConsumerSets) {
-            this.ConsumerSets = new Array();
-            for (let z in params.ConsumerSets) {
-                let obj = new Consumer();
-                obj.deserialize(params.ConsumerSets[z]);
-                this.ConsumerSets.push(obj);
-            }
-        }
-        this.IsOnline = 'IsOnline' in params ? params.IsOnline : null;
-
-        if (params.ConsumersScheduleSets) {
-            this.ConsumersScheduleSets = new Array();
-            for (let z in params.ConsumersScheduleSets) {
-                let obj = new ConsumersSchedule();
-                obj.deserialize(params.ConsumersScheduleSets[z]);
-                this.ConsumersScheduleSets.push(obj);
-            }
-        }
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.SubType = 'SubType' in params ? params.SubType : null;
-        this.BlockedSubscriptionOnUnackedMsgs = 'BlockedSubscriptionOnUnackedMsgs' in params ? params.BlockedSubscriptionOnUnackedMsgs : null;
-        this.MaxUnackedMsgNum = 'MaxUnackedMsgNum' in params ? params.MaxUnackedMsgNum : null;
-
-    }
-}
-
-/**
  * CreateCmqSubscribe response structure.
  * @class
  */
@@ -3971,30 +2820,24 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeSubscriptions response structure.
+ * RewindCmqQueue request structure.
  * @class
  */
-class DescribeSubscriptionsResponse extends  AbstractModel {
+class RewindCmqQueueRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array set of subscribers.
-         * @type {Array.<Subscription> || null}
-         */
-        this.SubscriptionSets = null;
-
-        /**
-         * Quantity.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.QueueName = null;
+
+        /**
+         * After this time is configured, the `(Batch)receiveMessage` API will consume the messages received after this timestamp in the order in which they are produced.
+         * @type {number || null}
+         */
+        this.StartConsumeTime = null;
 
     }
 
@@ -4005,17 +2848,8 @@ class DescribeSubscriptionsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.SubscriptionSets) {
-            this.SubscriptionSets = new Array();
-            for (let z in params.SubscriptionSets) {
-                let obj = new Subscription();
-                obj.deserialize(params.SubscriptionSets[z]);
-                this.SubscriptionSets.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.StartConsumeTime = 'StartConsumeTime' in params ? params.StartConsumeTime : null;
 
     }
 }
@@ -4107,55 +2941,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ReceiveMessage request structure.
- * @class
- */
-class ReceiveMessageRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of the topic which receives the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Subscriber name
-         * @type {string || null}
-         */
-        this.SubscriptionName = null;
-
-        /**
-         * Default value: 1000. Messages received by the consumer will first be stored in the `receiverQueueSize` queue to tune the message receiving rate.
-         * @type {number || null}
-         */
-        this.ReceiverQueueSize = null;
-
-        /**
-         * Default value: Latest. It is used to determine the position where the consumer initially receives messages. Valid values: Earliest, Latest.
-         * @type {string || null}
-         */
-        this.SubInitialPosition = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-        this.ReceiverQueueSize = 'ReceiverQueueSize' in params ? params.ReceiverQueueSize : null;
-        this.SubInitialPosition = 'SubInitialPosition' in params ? params.SubInitialPosition : null;
-
-    }
-}
-
-/**
  * CreateTopic request structure.
  * @class
  */
@@ -4234,93 +3019,6 @@ class CreateTopicRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTopics request structure.
- * @class
- */
-class DescribeTopicsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Fuzzy match by topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Topic type description:
-0: general message;
-1: globally sequential message;
-2: partitionally sequential message;
-3: retry letter queue;
-4: dead letter queue;
-5: transaction message.
-         * @type {number || null}
-         */
-        this.TopicType = null;
-
-        /**
-         * Pulsar cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * * TopicName
-Query by topic name for exact search.
-Type: String
-Required: no
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * DeleteEnvironments response structure.
  * @class
  */
@@ -4351,84 +3049,6 @@ class DeleteEnvironmentsResponse extends  AbstractModel {
         }
         this.EnvironmentIds = 'EnvironmentIds' in params ? params.EnvironmentIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeEnvironmentRoles response structure.
- * @class
- */
-class DescribeEnvironmentRolesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of records.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Set of namespace roles.
-         * @type {Array.<EnvironmentRole> || null}
-         */
-        this.EnvironmentRoleSets = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.EnvironmentRoleSets) {
-            this.EnvironmentRoleSets = new Array();
-            for (let z in params.EnvironmentRoleSets) {
-                let obj = new EnvironmentRole();
-                obj.deserialize(params.EnvironmentRoleSets[z]);
-                this.EnvironmentRoleSets.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ClearCmqQueue request structure.
- * @class
- */
-class ClearCmqQueueRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
 
     }
 }
@@ -4492,106 +3112,6 @@ class ModifyRocketMQGroupRequest extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.ReadEnable = 'ReadEnable' in params ? params.ReadEnable : null;
         this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
-
-    }
-}
-
-/**
- * Filters subscriptions
- * @class
- */
-class FilterSubscription extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether to display only subscriptions that include real consumers.
-         * @type {boolean || null}
-         */
-        this.ConsumerHasCount = null;
-
-        /**
-         * Whether to display only subscriptions with retained messages.
-         * @type {boolean || null}
-         */
-        this.ConsumerHasBacklog = null;
-
-        /**
-         * Whether to display only subscriptions with messages discarded after expiration.
-         * @type {boolean || null}
-         */
-        this.ConsumerHasExpired = null;
-
-        /**
-         * Filter by subscription name for exact search.
-         * @type {Array.<string> || null}
-         */
-        this.SubscriptionNames = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ConsumerHasCount = 'ConsumerHasCount' in params ? params.ConsumerHasCount : null;
-        this.ConsumerHasBacklog = 'ConsumerHasBacklog' in params ? params.ConsumerHasBacklog : null;
-        this.ConsumerHasExpired = 'ConsumerHasExpired' in params ? params.ConsumerHasExpired : null;
-        this.SubscriptionNames = 'SubscriptionNames' in params ? params.SubscriptionNames : null;
-
-    }
-}
-
-/**
- * DescribeCmqTopics response structure.
- * @class
- */
-class DescribeCmqTopicsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of topics
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<CmqTopic> || null}
-         */
-        this.TopicList = null;
-
-        /**
-         * Total number of topics
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TopicList) {
-            this.TopicList = new Array();
-            for (let z in params.TopicList) {
-                let obj = new CmqTopic();
-                obj.deserialize(params.TopicList[z]);
-                this.TopicList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4732,6 +3252,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.NamespaceName = null;
 
+        /**
+         * Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -4763,6 +3290,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Trace = 'Trace' in params ? params.Trace : null;
         this.TenantId = 'TenantId' in params ? params.TenantId : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -4859,84 +3387,6 @@ class DeleteEnvironmentsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRocketMQClusters request structure.
- * @class
- */
-class DescribeRocketMQClustersRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum number
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Search by cluster ID
-         * @type {string || null}
-         */
-        this.IdKeyword = null;
-
-        /**
-         * Search by cluster name
-         * @type {string || null}
-         */
-        this.NameKeyword = null;
-
-        /**
-         * Filter by list of cluster IDs
-         * @type {Array.<string> || null}
-         */
-        this.ClusterIdList = null;
-
-        /**
-         * For filtering by tag, this must be configured to `true`
-         * @type {boolean || null}
-         */
-        this.IsTagFilter = null;
-
-        /**
-         * Filter. Currently, you can filter only by tag.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.IdKeyword = 'IdKeyword' in params ? params.IdKeyword : null;
-        this.NameKeyword = 'NameKeyword' in params ? params.NameKeyword : null;
-        this.ClusterIdList = 'ClusterIdList' in params ? params.ClusterIdList : null;
-        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * DescribeBindVpcs request structure.
  * @class
  */
@@ -4979,56 +3429,6 @@ class DescribeBindVpcsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeClusters response structure.
- * @class
- */
-class DescribeClustersResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of clusters
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of cluster information
-         * @type {Array.<Cluster> || null}
-         */
-        this.ClusterSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.ClusterSet) {
-            this.ClusterSet = new Array();
-            for (let z in params.ClusterSet) {
-                let obj = new Cluster();
-                obj.deserialize(params.ClusterSet[z]);
-                this.ClusterSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ClearCmqSubscriptionFilterTags request structure.
  * @class
  */
@@ -5059,41 +3459,6 @@ class ClearCmqSubscriptionFilterTagsRequest extends  AbstractModel {
         }
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
-
-    }
-}
-
-/**
- * Topic's key information
- * @class
- */
-class TopicRecord extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -5183,51 +3548,18 @@ class ModifyRocketMQNamespaceRequest extends  AbstractModel {
 }
 
 /**
- * DescribeEnvironmentRoles request structure.
+ * ModifyRocketMQTopic response structure.
  * @class
  */
-class DescribeEnvironmentRolesRequest extends  AbstractModel {
+class ModifyRocketMQTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Environment (namespace) name (required).
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EnvironmentId = null;
-
-        /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Pulsar cluster ID (required)
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Role name
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * * RoleName
-Filter by role name for exact query.
-Type: String
-Required: no
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
+        this.RequestId = null;
 
     }
 
@@ -5238,20 +3570,7 @@ Required: no
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5398,6 +3717,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.VpcEndPoint = null;
 
+        /**
+         * Whether the namespace access point is supported.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.SupportNamespaceEndpoint = null;
+
     }
 
     /**
@@ -5414,200 +3740,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.PublicEndPoint = 'PublicEndPoint' in params ? params.PublicEndPoint : null;
         this.VpcEndPoint = 'VpcEndPoint' in params ? params.VpcEndPoint : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQTopics response structure.
- * @class
- */
-class DescribeRocketMQTopicsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of records
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of topic information
-         * @type {Array.<RocketMQTopic> || null}
-         */
-        this.Topics = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Topics) {
-            this.Topics = new Array();
-            for (let z in params.Topics) {
-                let obj = new RocketMQTopic();
-                obj.deserialize(params.Topics[z]);
-                this.Topics.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Namespace information
- * @class
- */
-class Environment extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Namespace name
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Remarks
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds (i.e., 15 days)
-         * @type {number || null}
-         */
-        this.MsgTTL = null;
-
-        /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Modification time
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Namespace ID
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * Namespace name
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
-
-        /**
-         * Number of topics
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TopicNum = null;
-
-        /**
-         * Message retention policy
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {RetentionPolicy || null}
-         */
-        this.RetentionPolicy = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.MsgTTL = 'MsgTTL' in params ? params.MsgTTL : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.TopicNum = 'TopicNum' in params ? params.TopicNum : null;
-
-        if (params.RetentionPolicy) {
-            let obj = new RetentionPolicy();
-            obj.deserialize(params.RetentionPolicy)
-            this.RetentionPolicy = obj;
-        }
-
-    }
-}
-
-/**
- * Tenant RocketMQ cluster details
- * @class
- */
-class RocketMQClusterDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster's basic information
-         * @type {RocketMQClusterInfo || null}
-         */
-        this.Info = null;
-
-        /**
-         * Cluster configuration information
-         * @type {RocketMQClusterConfig || null}
-         */
-        this.Config = null;
-
-        /**
-         * Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Info) {
-            let obj = new RocketMQClusterInfo();
-            obj.deserialize(params.Info)
-            this.Info = obj;
-        }
-
-        if (params.Config) {
-            let obj = new RocketMQClusterConfig();
-            obj.deserialize(params.Config)
-            this.Config = obj;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
+        this.SupportNamespaceEndpoint = 'SupportNamespaceEndpoint' in params ? params.SupportNamespaceEndpoint : null;
 
     }
 }
@@ -5670,181 +3803,6 @@ class CreateCmqQueueResponse extends  AbstractModel {
             return;
         }
         this.QueueId = 'QueueId' in params ? params.QueueId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Partitioned topic
- * @class
- */
-class PartitionsTopic extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Average size of the messages published in the last interval in bytes.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AverageMsgSize = null;
-
-        /**
-         * Number of consumers.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConsumerCount = null;
-
-        /**
-         * Total number of recorded messages.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastConfirmedEntry = null;
-
-        /**
-         * Time when the last ledger was created.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.LastLedgerCreatedTimestamp = null;
-
-        /**
-         * Number of messages published by local and replicated publishers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgRateIn = null;
-
-        /**
-         * Sum of the numbers of messages delivered by local and replicated consumers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgRateOut = null;
-
-        /**
-         * Number of bytes of messages published by local and replicated publishers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgThroughputIn = null;
-
-        /**
-         * Number of bytes of messages delivered by local and replicated consumers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgThroughputOut = null;
-
-        /**
-         * Total number of recorded messages.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NumberOfEntries = null;
-
-        /**
-         * Subpartition ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * Number of producers.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProducerCount = null;
-
-        /**
-         * Total amount of all stored messages in bytes.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TotalSize = null;
-
-        /**
-         * Topic type description.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TopicType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
-        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
-        this.LastConfirmedEntry = 'LastConfirmedEntry' in params ? params.LastConfirmedEntry : null;
-        this.LastLedgerCreatedTimestamp = 'LastLedgerCreatedTimestamp' in params ? params.LastLedgerCreatedTimestamp : null;
-        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
-        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
-        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
-        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
-        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.ProducerCount = 'ProducerCount' in params ? params.ProducerCount : null;
-        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQGroups response structure.
- * @class
- */
-class DescribeRocketMQGroupsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * List of subscription groups
-         * @type {Array.<RocketMQGroup> || null}
-         */
-        this.Groups = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Groups) {
-            this.Groups = new Array();
-            for (let z in params.Groups) {
-                let obj = new RocketMQGroup();
-                obj.deserialize(params.Groups[z]);
-                this.Groups.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6001,73 +3959,6 @@ class DeleteRocketMQNamespaceRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-
-    }
-}
-
-/**
- * DescribeRoles request structure.
- * @class
- */
-class DescribeRolesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Fuzzy query by role name
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Cluster ID (required)
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * * RoleName
-Filter by role name for exact query.
-Type: String
-Required: no
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
 
     }
 }
@@ -6235,95 +4126,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeCmqQueues request structure.
+ * ResetRocketMQConsumerOffSet response structure.
  * @class
  */
-class DescribeCmqQueuesRequest extends  AbstractModel {
+class ResetRocketMQConsumerOffSetResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Starting position of the list of queues to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Filter by `QueueName`
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-        /**
-         * List of CMQ queue names
-         * @type {Array.<string> || null}
-         */
-        this.QueueNameList = null;
-
-        /**
-         * For filtering by tag, this must be configured to `true`.
-         * @type {boolean || null}
-         */
-        this.IsTagFilter = null;
-
-        /**
-         * Filter. Currently, you can filter only by tag.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
-        this.QueueNameList = 'QueueNameList' in params ? params.QueueNameList : null;
-        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DescribeEnvironments response structure.
- * @class
- */
-class DescribeEnvironmentsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of namespaces.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Array set of namespaces.
-         * @type {Array.<Environment> || null}
-         */
-        this.EnvironmentSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6339,16 +4147,6 @@ class DescribeEnvironmentsResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.EnvironmentSet) {
-            this.EnvironmentSet = new Array();
-            for (let z in params.EnvironmentSet) {
-                let obj = new Environment();
-                obj.deserialize(params.EnvironmentSet[z]);
-                this.EnvironmentSet.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -6591,26 +4389,30 @@ class CreateCmqTopicResponse extends  AbstractModel {
 }
 
 /**
- * Cmq DeadLetterSource
+ * DescribePublisherSummary request structure.
  * @class
  */
-class CmqDeadLetterSource extends  AbstractModel {
+class DescribePublisherSummaryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Message queue ID.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cluster ID.
          * @type {string || null}
          */
-        this.QueueId = null;
+        this.ClusterId = null;
 
         /**
-         * Message queue name.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Namespace name.
          * @type {string || null}
          */
-        this.QueueName = null;
+        this.Namespace = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.Topic = null;
 
     }
 
@@ -6621,8 +4423,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.QueueId = 'QueueId' in params ? params.QueueId : null;
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
 
     }
 }
@@ -6651,77 +4454,6 @@ class ClearCmqSubscriptionFilterTagsResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeCmqTopics request structure.
- * @class
- */
-class DescribeCmqTopicsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Starting position of the list of queues to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Fuzzy search by `TopicName`
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Filter by list of CMQ topic names
-         * @type {Array.<string> || null}
-         */
-        this.TopicNameList = null;
-
-        /**
-         * For filtering by tag, this must be configured to `true`.
-         * @type {boolean || null}
-         */
-        this.IsTagFilter = null;
-
-        /**
-         * Filter. Currently, you can filter only by tag.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.TopicNameList = 'TopicNameList' in params ? params.TopicNameList : null;
-        this.IsTagFilter = 'IsTagFilter' in params ? params.IsTagFilter : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
 
     }
 }
@@ -6757,63 +4489,6 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
-
-    }
-}
-
-/**
- * DeleteTopics request structure.
- * @class
- */
-class DeleteTopicsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Set of topics. Up to 20 topics can be deleted at a time.
-         * @type {Array.<TopicRecord> || null}
-         */
-        this.TopicSets = null;
-
-        /**
-         * Pulsar cluster ID.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Whether to force deletion. Default value: false
-         * @type {boolean || null}
-         */
-        this.Force = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TopicSets) {
-            this.TopicSets = new Array();
-            for (let z in params.TopicSets) {
-                let obj = new TopicRecord();
-                obj.deserialize(params.TopicSets[z]);
-                this.TopicSets.push(obj);
-            }
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }
@@ -6991,67 +4666,6 @@ class CreateEnvironmentRoleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- *  Consumer
- * @class
- */
-class Consumer extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The time when the consumer started connecting.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConnectedSince = null;
-
-        /**
-         * Consumer address.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConsumerAddr = null;
-
-        /**
-         * Consumer name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ConsumerName = null;
-
-        /**
-         * Consumer version.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ClientVersion = null;
-
-        /**
-         * Serial number of the topic partition connected to the consumer.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ConnectedSince = 'ConnectedSince' in params ? params.ConnectedSince : null;
-        this.ConsumerAddr = 'ConsumerAddr' in params ? params.ConsumerAddr : null;
-        this.ConsumerName = 'ConsumerName' in params ? params.ConsumerName : null;
-        this.ClientVersion = 'ClientVersion' in params ? params.ClientVersion : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
 
     }
 }
@@ -7276,18 +4890,12 @@ class DescribeCmqDeadLetterSourceQueuesResponse extends  AbstractModel {
 }
 
 /**
- * DeleteSubscriptions response structure.
+ * SendMsg response structure.
  * @class
  */
-class DeleteSubscriptionsResponse extends  AbstractModel {
+class SendMsgResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Array of successfully deleted subscriptions.
-         * @type {Array.<SubscriptionTopic> || null}
-         */
-        this.SubscriptionTopicSets = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7303,15 +4911,6 @@ class DeleteSubscriptionsResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.SubscriptionTopicSets) {
-            this.SubscriptionTopicSets = new Array();
-            for (let z in params.SubscriptionTopicSets) {
-                let obj = new SubscriptionTopic();
-                obj.deserialize(params.SubscriptionTopicSets[z]);
-                this.SubscriptionTopicSets.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -7356,73 +4955,6 @@ class DeleteRocketMQTopicRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.Topic = 'Topic' in params ? params.Topic : null;
-
-    }
-}
-
-/**
- * Consumption progress details
- * @class
- */
-class ConsumersSchedule extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Current partition ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * Number of messages.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.NumberOfEntries = null;
-
-        /**
-         * Number of retained messages.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MsgBacklog = null;
-
-        /**
-         * Sum of the numbers of messages delivered by the consumer per second.
-         * @type {string || null}
-         */
-        this.MsgRateOut = null;
-
-        /**
-         * Number of bytes of messages consumed by the consumer per second.
-         * @type {string || null}
-         */
-        this.MsgThroughputOut = null;
-
-        /**
-         * Percentage of messages discarded due to timeout.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MsgRateExpired = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
-        this.MsgBacklog = 'MsgBacklog' in params ? params.MsgBacklog : null;
-        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
-        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
-        this.MsgRateExpired = 'MsgRateExpired' in params ? params.MsgRateExpired : null;
 
     }
 }
@@ -7861,6 +5393,69 @@ class SendMsgRequest extends  AbstractModel {
 }
 
 /**
+ * ResetRocketMQConsumerOffSet request structure.
+ * @class
+ */
+class ResetRocketMQConsumerOffSetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Namespace name.
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Consumer group name.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Topic name.
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Reset method. 0: Start from the latest offset; 1: Start from specified time point.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * The specified timestamp that has been reset, in milliseconds. This parameter only takes effect when the value of `Type` is `1`.
+         * @type {number || null}
+         */
+        this.ResetTimestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ResetTimestamp = 'ResetTimestamp' in params ? params.ResetTimestamp : null;
+
+    }
+}
+
+/**
  * DescribeCmqQueueDetail request structure.
  * @class
  */
@@ -8100,27 +5695,6 @@ class ClearCmqQueueResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBindClusters request structure.
- * @class
- */
-class DescribeBindClustersRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
  * CreateRocketMQTopic response structure.
  * @class
  */
@@ -8207,48 +5781,66 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Set of environment roles
+ * SendBatchMessages request structure.
  * @class
  */
-class EnvironmentRole extends  AbstractModel {
+class SendBatchMessagesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Environment (namespace).
+         * Name of the topic to which to send the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.Topic = null;
 
         /**
-         * Role name.
+         * Content of the message to be sent
          * @type {string || null}
          */
-        this.RoleName = null;
+        this.Payload = null;
 
         /**
-         * Permissions, which is a non-empty string array of `produce` and `consume` at the most.
-         * @type {Array.<string> || null}
-         */
-        this.Permissions = null;
-
-        /**
-         * Role description.
+         * String-Type token, which is optional and will be automatically obtained by the system.
          * @type {string || null}
          */
-        this.RoleDescribe = null;
+        this.StringToken = null;
 
         /**
-         * Creation time.
+         * Producer name, which must be globally unique. If it is not configured, the system will automatically generate one.
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.ProducerName = null;
 
         /**
-         * Update time.
-         * @type {string || null}
+         * Message sending timeout period in seconds. Default value: 30s
+         * @type {number || null}
          */
-        this.UpdateTime = null;
+        this.SendTimeout = null;
+
+        /**
+         * Maximum number of produced messages which can be cached in the memory. Default value: 1000
+         * @type {number || null}
+         */
+        this.MaxPendingMessages = null;
+
+        /**
+         * Maximum number of messages in each batch. Default value: 1000 messages/batch
+         * @type {number || null}
+         */
+        this.BatchingMaxMessages = null;
+
+        /**
+         * Maximum wait time for each batch, after which the batch will be sent no matter whether the specified number or size of messages in the batch is reached. Default value: 10 ms
+         * @type {number || null}
+         */
+        this.BatchingMaxPublishDelay = null;
+
+        /**
+         * Maximum allowed size of messages in each batch. Default value: 128 KB
+         * @type {number || null}
+         */
+        this.BatchingMaxBytes = null;
 
     }
 
@@ -8259,12 +5851,15 @@ class EnvironmentRole extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Permissions = 'Permissions' in params ? params.Permissions : null;
-        this.RoleDescribe = 'RoleDescribe' in params ? params.RoleDescribe : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.StringToken = 'StringToken' in params ? params.StringToken : null;
+        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
+        this.SendTimeout = 'SendTimeout' in params ? params.SendTimeout : null;
+        this.MaxPendingMessages = 'MaxPendingMessages' in params ? params.MaxPendingMessages : null;
+        this.BatchingMaxMessages = 'BatchingMaxMessages' in params ? params.BatchingMaxMessages : null;
+        this.BatchingMaxPublishDelay = 'BatchingMaxPublishDelay' in params ? params.BatchingMaxPublishDelay : null;
+        this.BatchingMaxBytes = 'BatchingMaxBytes' in params ? params.BatchingMaxBytes : null;
 
     }
 }
@@ -8308,13 +5903,13 @@ class CreateCmqQueueRequest extends  AbstractModel {
         this.MaxMsgSize = null;
 
         /**
-         * Message retention period. Value range: 60–1296000 seconds (i.e., 1 minute–15 days). Default value: 345600 (i.e., 4 days).
+         * The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).
          * @type {number || null}
          */
         this.MsgRetentionSeconds = null;
 
         /**
-         * Whether to enable the message rewinding feature for a queue. Value range: 0–msgRetentionSeconds, where 0 means not to enable this feature, while `msgRetentionSeconds` indicates that the maximum rewindable period is the message retention period of the queue.
+         * Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
          * @type {number || null}
          */
         this.RewindSeconds = null;
@@ -8373,6 +5968,12 @@ class CreateCmqQueueRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+         * @type {number || null}
+         */
+        this.RetentionSizeInMB = null;
+
     }
 
     /**
@@ -8406,6 +6007,7 @@ class CreateCmqQueueRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
 
     }
 }
@@ -8462,141 +6064,6 @@ class DeleteCmqQueueRequest extends  AbstractModel {
             return;
         }
         this.QueueName = 'QueueName' in params ? params.QueueName : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQGroups request structure.
- * @class
- */
-class DescribeRocketMQGroupsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Namespace
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * Offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum number
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Topic name, which can be used to query all subscription groups under the topic
-         * @type {string || null}
-         */
-        this.FilterTopic = null;
-
-        /**
-         * Consumer group query by consumer group name. Fuzzy query is supported
-         * @type {string || null}
-         */
-        this.FilterGroup = null;
-
-        /**
-         * Sort by specified field. Valid values: tps, accumulative.
-         * @type {string || null}
-         */
-        this.SortedBy = null;
-
-        /**
-         * Sort in ascending or descending order. Valid values: asc, desc.
-         * @type {string || null}
-         */
-        this.SortOrder = null;
-
-        /**
-         * Subscription group name. After it is specified, only the information of the corresponding subscription group will be returned.
-         * @type {string || null}
-         */
-        this.FilterOneGroup = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.FilterTopic = 'FilterTopic' in params ? params.FilterTopic : null;
-        this.FilterGroup = 'FilterGroup' in params ? params.FilterGroup : null;
-        this.SortedBy = 'SortedBy' in params ? params.SortedBy : null;
-        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
-        this.FilterOneGroup = 'FilterOneGroup' in params ? params.FilterOneGroup : null;
-
-    }
-}
-
-/**
- * DescribeRocketMQClusters response structure.
- * @class
- */
-class DescribeRocketMQClustersResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster information
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RocketMQClusterDetail> || null}
-         */
-        this.ClusterList = null;
-
-        /**
-         * Total number
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ClusterList) {
-            this.ClusterList = new Array();
-            for (let z in params.ClusterList) {
-                let obj = new RocketMQClusterDetail();
-                obj.deserialize(params.ClusterList[z]);
-                this.ClusterList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8777,62 +6244,6 @@ class DescribeEnvironmentAttributesResponse extends  AbstractModel {
 }
 
 /**
- * Role instance
- * @class
- */
-class Role extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Role name.
-         * @type {string || null}
-         */
-        this.RoleName = null;
-
-        /**
-         * Value of the role token.
-         * @type {string || null}
-         */
-        this.Token = null;
-
-        /**
-         * Remarks.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Creation time.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Update time.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RoleName = 'RoleName' in params ? params.RoleName : null;
-        this.Token = 'Token' in params ? params.Token : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-
-    }
-}
-
-/**
  * Sort by field
  * @class
  */
@@ -8951,90 +6362,6 @@ class CreateRocketMQNamespaceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SendBatchMessages request structure.
- * @class
- */
-class SendBatchMessagesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Name of the topic to which to send the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Content of the message to be sent
-         * @type {string || null}
-         */
-        this.Payload = null;
-
-        /**
-         * String-Type token, which is optional and will be automatically obtained by the system.
-         * @type {string || null}
-         */
-        this.StringToken = null;
-
-        /**
-         * Producer name, which must be globally unique. If it is not configured, the system will automatically generate one.
-         * @type {string || null}
-         */
-        this.ProducerName = null;
-
-        /**
-         * Message sending timeout period in seconds. Default value: 30s
-         * @type {number || null}
-         */
-        this.SendTimeout = null;
-
-        /**
-         * Maximum number of produced messages which can be cached in the memory. Default value: 1000
-         * @type {number || null}
-         */
-        this.MaxPendingMessages = null;
-
-        /**
-         * Maximum number of messages in each batch. Default value: 1000 messages/batch
-         * @type {number || null}
-         */
-        this.BatchingMaxMessages = null;
-
-        /**
-         * Maximum wait time for each batch, after which the batch will be sent no matter whether the specified number or size of messages in the batch is reached. Default value: 10 ms
-         * @type {number || null}
-         */
-        this.BatchingMaxPublishDelay = null;
-
-        /**
-         * Maximum allowed size of messages in each batch. Default value: 128 KB
-         * @type {number || null}
-         */
-        this.BatchingMaxBytes = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
-        this.StringToken = 'StringToken' in params ? params.StringToken : null;
-        this.ProducerName = 'ProducerName' in params ? params.ProducerName : null;
-        this.SendTimeout = 'SendTimeout' in params ? params.SendTimeout : null;
-        this.MaxPendingMessages = 'MaxPendingMessages' in params ? params.MaxPendingMessages : null;
-        this.BatchingMaxMessages = 'BatchingMaxMessages' in params ? params.BatchingMaxMessages : null;
-        this.BatchingMaxPublishDelay = 'BatchingMaxPublishDelay' in params ? params.BatchingMaxPublishDelay : null;
-        this.BatchingMaxBytes = 'BatchingMaxBytes' in params ? params.BatchingMaxBytes : null;
 
     }
 }
@@ -9170,19 +6497,19 @@ class ModifyCmqQueueAttributeRequest extends  AbstractModel {
         this.VisibilityTimeout = null;
 
         /**
-         * Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
+         * Max message size, which defaults to 1,024 KB for the queue of TDMQ for CMQ and cannot be modified.
          * @type {number || null}
          */
         this.MaxMsgSize = null;
 
         /**
-         * Message retention period. Value range: 60–1296000 seconds (i.e., 1 minute–15 days). Default value: 345600 (i.e., 4 days).
+         * The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).
          * @type {number || null}
          */
         this.MsgRetentionSeconds = null;
 
         /**
-         * Maximum message rewindable period. Value range: 0–msgRetentionSeconds (maximum message retention period of the queue). 0 indicates not to enable message rewinding.
+         * Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
          * @type {number || null}
          */
         this.RewindSeconds = null;
@@ -9235,6 +6562,12 @@ class ModifyCmqQueueAttributeRequest extends  AbstractModel {
          */
         this.Transaction = null;
 
+        /**
+         * Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+         * @type {number || null}
+         */
+        this.RetentionSizeInMB = null;
+
     }
 
     /**
@@ -9259,6 +6592,7 @@ class ModifyCmqQueueAttributeRequest extends  AbstractModel {
         this.Policy = 'Policy' in params ? params.Policy : null;
         this.Trace = 'Trace' in params ? params.Trace : null;
         this.Transaction = 'Transaction' in params ? params.Transaction : null;
+        this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
 
     }
 }
@@ -9292,30 +6626,45 @@ class DeleteCmqSubscribeResponse extends  AbstractModel {
 }
 
 /**
- * DescribePublisherSummary request structure.
+ * DescribeRoles request structure.
  * @class
  */
-class DescribePublisherSummaryRequest extends  AbstractModel {
+class DescribeRolesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID.
+         * Fuzzy query by role name
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Offset. If this parameter is left empty, 0 will be used by default.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Cluster ID (required)
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Namespace name.
-         * @type {string || null}
+         * * RoleName
+Filter by role name for exact query.
+Type: String
+Required: no
+         * @type {Array.<Filter> || null}
          */
-        this.Namespace = null;
-
-        /**
-         * Topic name.
-         * @type {string || null}
-         */
-        this.Topic = null;
+        this.Filters = null;
 
     }
 
@@ -9326,66 +6675,19 @@ class DescribePublisherSummaryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
 
-    }
-}
-
-/**
- * DeleteSubscriptions request structure.
- * @class
- */
-class DeleteSubscriptionsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Set of subscriptions. Up to 20 subscriptions can be deleted at a time.
-         * @type {Array.<SubscriptionTopic> || null}
-         */
-        this.SubscriptionTopicSets = null;
-
-        /**
-         * Pulsar cluster ID.
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Environment (namespace) name.
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Whether to force deletion. Default value: false
-         * @type {boolean || null}
-         */
-        this.Force = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.SubscriptionTopicSets) {
-            this.SubscriptionTopicSets = new Array();
-            for (let z in params.SubscriptionTopicSets) {
-                let obj = new SubscriptionTopic();
-                obj.deserialize(params.SubscriptionTopicSets[z]);
-                this.SubscriptionTopicSets.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }
@@ -9570,58 +6872,24 @@ class CreateEnvironmentRoleRequest extends  AbstractModel {
     }
 }
 
-/**
- * ModifyRocketMQTopic response structure.
- * @class
- */
-class ModifyRocketMQTopicResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
 module.exports = {
     DescribeRolesResponse: DescribeRolesResponse,
-    DescribeBindClustersResponse: DescribeBindClustersResponse,
     CmqDeadLetterPolicy: CmqDeadLetterPolicy,
-    RocketMQNamespace: RocketMQNamespace,
-    DescribeSubscriptionsRequest: DescribeSubscriptionsRequest,
     CreateRocketMQGroupRequest: CreateRocketMQGroupRequest,
     ModifyEnvironmentAttributesRequest: ModifyEnvironmentAttributesRequest,
     DeleteClusterResponse: DeleteClusterResponse,
     SendBatchMessagesResponse: SendBatchMessagesResponse,
     ModifyCmqSubscriptionAttributeResponse: ModifyCmqSubscriptionAttributeResponse,
     CreateCmqTopicRequest: CreateCmqTopicRequest,
-    DescribeRocketMQNamespacesResponse: DescribeRocketMQNamespacesResponse,
-    BindCluster: BindCluster,
+    ReceiveMessageRequest: ReceiveMessageRequest,
     ModifyClusterResponse: ModifyClusterResponse,
     RocketMQClusterRecentStats: RocketMQClusterRecentStats,
-    DescribeCmqQueuesResponse: DescribeCmqQueuesResponse,
     PublishCmqMsgRequest: PublishCmqMsgRequest,
     CreateCmqSubscribeRequest: CreateCmqSubscribeRequest,
     RewindCmqQueueResponse: RewindCmqQueueResponse,
     DeleteClusterRequest: DeleteClusterRequest,
     CmqSubscription: CmqSubscription,
     DeleteRocketMQGroupRequest: DeleteRocketMQGroupRequest,
-    RocketMQGroup: RocketMQGroup,
     DeleteCmqTopicResponse: DeleteCmqTopicResponse,
     CreateSubscriptionRequest: CreateSubscriptionRequest,
     CreateRocketMQNamespaceRequest: CreateRocketMQNamespaceRequest,
@@ -9629,29 +6897,22 @@ module.exports = {
     CmqQueue: CmqQueue,
     CreateEnvironmentResponse: CreateEnvironmentResponse,
     CreateSubscriptionResponse: CreateSubscriptionResponse,
-    SendMsgResponse: SendMsgResponse,
-    ModifyCmqTopicAttributeResponse: ModifyCmqTopicAttributeResponse,
     DescribeCmqSubscriptionDetailRequest: DescribeCmqSubscriptionDetailRequest,
-    Topic: Topic,
-    DescribeEnvironmentsRequest: DescribeEnvironmentsRequest,
-    DescribeRocketMQNamespacesRequest: DescribeRocketMQNamespacesRequest,
-    DescribeRocketMQTopicsRequest: DescribeRocketMQTopicsRequest,
+    Tag: Tag,
+    Role: Role,
     ModifyRocketMQClusterResponse: ModifyRocketMQClusterResponse,
     DescribeCmqQueueDetailResponse: DescribeCmqQueueDetailResponse,
     CreateEnvironmentRequest: CreateEnvironmentRequest,
-    DeleteTopicsResponse: DeleteTopicsResponse,
-    DescribeClustersRequest: DescribeClustersRequest,
-    SubscriptionTopic: SubscriptionTopic,
-    RocketMQTopic: RocketMQTopic,
+    ClearCmqQueueRequest: ClearCmqQueueRequest,
+    CmqDeadLetterSource: CmqDeadLetterSource,
+    ModifyCmqTopicAttributeResponse: ModifyCmqTopicAttributeResponse,
     DescribeRocketMQClusterResponse: DescribeRocketMQClusterResponse,
     DescribeCmqSubscriptionDetailResponse: DescribeCmqSubscriptionDetailResponse,
     VpcBindRecord: VpcBindRecord,
-    RewindCmqQueueRequest: RewindCmqQueueRequest,
     ModifyClusterRequest: ModifyClusterRequest,
     DescribeEnvironmentAttributesRequest: DescribeEnvironmentAttributesRequest,
     ModifyRocketMQClusterRequest: ModifyRocketMQClusterRequest,
     AcknowledgeMessageRequest: AcknowledgeMessageRequest,
-    DescribeTopicsResponse: DescribeTopicsResponse,
     PublishCmqMsgResponse: PublishCmqMsgResponse,
     DescribePublishersRequest: DescribePublishersRequest,
     CreateRocketMQClusterRequest: CreateRocketMQClusterRequest,
@@ -9660,122 +6921,94 @@ module.exports = {
     DeleteEnvironmentRolesResponse: DeleteEnvironmentRolesResponse,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
     ModifyRoleResponse: ModifyRoleResponse,
-    Tag: Tag,
     DeleteCmqQueueResponse: DeleteCmqQueueResponse,
     DescribeRocketMQClusterRequest: DescribeRocketMQClusterRequest,
     DeleteRocketMQTopicResponse: DeleteRocketMQTopicResponse,
     ModifyCmqTopicAttributeRequest: ModifyCmqTopicAttributeRequest,
     DeleteRolesRequest: DeleteRolesRequest,
-    Subscription: Subscription,
     CreateCmqSubscribeResponse: CreateCmqSubscribeResponse,
     Publisher: Publisher,
-    DescribeSubscriptionsResponse: DescribeSubscriptionsResponse,
+    RewindCmqQueueRequest: RewindCmqQueueRequest,
     ModifyRoleRequest: ModifyRoleRequest,
     SendMessagesResponse: SendMessagesResponse,
-    ReceiveMessageRequest: ReceiveMessageRequest,
     CreateTopicRequest: CreateTopicRequest,
-    DescribeTopicsRequest: DescribeTopicsRequest,
     DeleteEnvironmentsResponse: DeleteEnvironmentsResponse,
-    DescribeEnvironmentRolesResponse: DescribeEnvironmentRolesResponse,
-    ClearCmqQueueRequest: ClearCmqQueueRequest,
     ModifyRocketMQGroupRequest: ModifyRocketMQGroupRequest,
-    FilterSubscription: FilterSubscription,
-    DescribeCmqTopicsResponse: DescribeCmqTopicsResponse,
     DescribeCmqTopicDetailRequest: DescribeCmqTopicDetailRequest,
     CmqTopic: CmqTopic,
     UnbindCmqDeadLetterResponse: UnbindCmqDeadLetterResponse,
     ModifyRocketMQNamespaceResponse: ModifyRocketMQNamespaceResponse,
     DeleteEnvironmentsRequest: DeleteEnvironmentsRequest,
-    DescribeRocketMQClustersRequest: DescribeRocketMQClustersRequest,
     DescribeBindVpcsRequest: DescribeBindVpcsRequest,
-    DescribeClustersResponse: DescribeClustersResponse,
     ClearCmqSubscriptionFilterTagsRequest: ClearCmqSubscriptionFilterTagsRequest,
-    TopicRecord: TopicRecord,
     CreateRocketMQGroupResponse: CreateRocketMQGroupResponse,
     ModifyRocketMQNamespaceRequest: ModifyRocketMQNamespaceRequest,
-    DescribeEnvironmentRolesRequest: DescribeEnvironmentRolesRequest,
+    ModifyRocketMQTopicResponse: ModifyRocketMQTopicResponse,
     DeleteRolesResponse: DeleteRolesResponse,
     ModifyRocketMQTopicRequest: ModifyRocketMQTopicRequest,
     RocketMQClusterInfo: RocketMQClusterInfo,
-    DescribeRocketMQTopicsResponse: DescribeRocketMQTopicsResponse,
-    Environment: Environment,
-    RocketMQClusterDetail: RocketMQClusterDetail,
     DeleteRocketMQGroupResponse: DeleteRocketMQGroupResponse,
     CreateCmqQueueResponse: CreateCmqQueueResponse,
-    PartitionsTopic: PartitionsTopic,
-    DescribeRocketMQGroupsResponse: DescribeRocketMQGroupsResponse,
     ResetMsgSubOffsetByTimestampResponse: ResetMsgSubOffsetByTimestampResponse,
     CreateClusterResponse: CreateClusterResponse,
     DescribeCmqDeadLetterSourceQueuesRequest: DescribeCmqDeadLetterSourceQueuesRequest,
     DeleteRocketMQNamespaceRequest: DeleteRocketMQNamespaceRequest,
-    DescribeRolesRequest: DescribeRolesRequest,
     CreateClusterRequest: CreateClusterRequest,
     ModifyCmqQueueAttributeResponse: ModifyCmqQueueAttributeResponse,
     CreateTopicResponse: CreateTopicResponse,
-    DescribeCmqQueuesRequest: DescribeCmqQueuesRequest,
-    DescribeEnvironmentsResponse: DescribeEnvironmentsResponse,
+    ResetRocketMQConsumerOffSetResponse: ResetRocketMQConsumerOffSetResponse,
     ModifyCmqSubscriptionAttributeRequest: ModifyCmqSubscriptionAttributeRequest,
     ModifyTopicResponse: ModifyTopicResponse,
     ReceiveMessageResponse: ReceiveMessageResponse,
     DeleteRocketMQClusterResponse: DeleteRocketMQClusterResponse,
     CreateCmqTopicResponse: CreateCmqTopicResponse,
-    CmqDeadLetterSource: CmqDeadLetterSource,
+    DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
     ClearCmqSubscriptionFilterTagsResponse: ClearCmqSubscriptionFilterTagsResponse,
-    DescribeCmqTopicsRequest: DescribeCmqTopicsRequest,
     Filter: Filter,
-    DeleteTopicsRequest: DeleteTopicsRequest,
     CmqTransactionPolicy: CmqTransactionPolicy,
     ModifyTopicRequest: ModifyTopicRequest,
     ResetMsgSubOffsetByTimestampRequest: ResetMsgSubOffsetByTimestampRequest,
     CreateEnvironmentRoleResponse: CreateEnvironmentRoleResponse,
-    Consumer: Consumer,
     DescribeBindVpcsResponse: DescribeBindVpcsResponse,
     DeleteCmqSubscribeRequest: DeleteCmqSubscribeRequest,
     RocketMQClusterConfig: RocketMQClusterConfig,
     DescribeCmqDeadLetterSourceQueuesResponse: DescribeCmqDeadLetterSourceQueuesResponse,
-    DeleteSubscriptionsResponse: DeleteSubscriptionsResponse,
+    SendMsgResponse: SendMsgResponse,
     DeleteRocketMQTopicRequest: DeleteRocketMQTopicRequest,
-    ConsumersSchedule: ConsumersSchedule,
     Cluster: Cluster,
     RetentionPolicy: RetentionPolicy,
     CreateRocketMQClusterResponse: CreateRocketMQClusterResponse,
     DeleteRocketMQNamespaceResponse: DeleteRocketMQNamespaceResponse,
     DescribePublishersResponse: DescribePublishersResponse,
     SendMsgRequest: SendMsgRequest,
+    ResetRocketMQConsumerOffSetRequest: ResetRocketMQConsumerOffSetRequest,
     DescribeCmqQueueDetailRequest: DescribeCmqQueueDetailRequest,
     CreateRocketMQTopicRequest: CreateRocketMQTopicRequest,
     CreateRoleResponse: CreateRoleResponse,
     DeleteRocketMQClusterRequest: DeleteRocketMQClusterRequest,
     DeleteEnvironmentRolesRequest: DeleteEnvironmentRolesRequest,
     ClearCmqQueueResponse: ClearCmqQueueResponse,
-    DescribeBindClustersRequest: DescribeBindClustersRequest,
     CreateRocketMQTopicResponse: CreateRocketMQTopicResponse,
     ModifyEnvironmentAttributesResponse: ModifyEnvironmentAttributesResponse,
-    EnvironmentRole: EnvironmentRole,
+    SendBatchMessagesRequest: SendBatchMessagesRequest,
     CreateCmqQueueRequest: CreateCmqQueueRequest,
     ModifyEnvironmentRoleResponse: ModifyEnvironmentRoleResponse,
     DeleteCmqQueueRequest: DeleteCmqQueueRequest,
-    DescribeRocketMQGroupsRequest: DescribeRocketMQGroupsRequest,
-    DescribeRocketMQClustersResponse: DescribeRocketMQClustersResponse,
     CreateRoleRequest: CreateRoleRequest,
     ModifyEnvironmentRoleRequest: ModifyEnvironmentRoleRequest,
     DescribeEnvironmentAttributesResponse: DescribeEnvironmentAttributesResponse,
-    Role: Role,
     Sort: Sort,
     DescribePublisherSummaryResponse: DescribePublisherSummaryResponse,
     CreateRocketMQNamespaceResponse: CreateRocketMQNamespaceResponse,
-    SendBatchMessagesRequest: SendBatchMessagesRequest,
     DeleteCmqTopicRequest: DeleteCmqTopicRequest,
     SendCmqMsgResponse: SendCmqMsgResponse,
     UnbindCmqDeadLetterRequest: UnbindCmqDeadLetterRequest,
     ModifyCmqQueueAttributeRequest: ModifyCmqQueueAttributeRequest,
     DeleteCmqSubscribeResponse: DeleteCmqSubscribeResponse,
-    DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
-    DeleteSubscriptionsRequest: DeleteSubscriptionsRequest,
+    DescribeRolesRequest: DescribeRolesRequest,
     ModifyRocketMQGroupResponse: ModifyRocketMQGroupResponse,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
     SendMessagesRequest: SendMessagesRequest,
     CreateEnvironmentRoleRequest: CreateEnvironmentRoleRequest,
-    ModifyRocketMQTopicResponse: ModifyRocketMQTopicResponse,
 
 }

@@ -42,6 +42,12 @@ class MountedSettingConf extends  AbstractModel {
          */
         this.Data = null;
 
+        /**
+         * Encrypt configuration name
+         * @type {string || null}
+         */
+        this.SecretDataName = null;
+
     }
 
     /**
@@ -62,6 +68,7 @@ class MountedSettingConf extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
+        this.SecretDataName = 'SecretDataName' in params ? params.SecretDataName : null;
 
     }
 }
@@ -103,55 +110,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DeleteApplication request structure.
- * @class
- */
-class DeleteApplicationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Service ID
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
-
-        /**
-         * Environment ID
-         * @type {string || null}
-         */
-        this.EnvironmentId = null;
-
-        /**
-         * Retain as default
-         * @type {number || null}
-         */
-        this.SourceChannel = null;
-
-        /**
-         * Whether to delete this application automatically when there is no running version.
-         * @type {boolean || null}
-         */
-        this.DeleteApplicationIfNoRunningVersion = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
-        this.DeleteApplicationIfNoRunningVersion = 'DeleteApplicationIfNoRunningVersion' in params ? params.DeleteApplicationIfNoRunningVersion : null;
-
-    }
-}
-
-/**
  * CreateResource request structure.
  * @class
  */
@@ -183,6 +141,18 @@ class CreateResourceRequest extends  AbstractModel {
          */
         this.SourceChannel = null;
 
+        /**
+         * Source of the resource. Values: `existing` (choose an existing resource), `creating` (create a new resource)
+         * @type {string || null}
+         */
+        this.ResourceFrom = null;
+
+        /**
+         * Resource extra configuration
+         * @type {string || null}
+         */
+        this.ResourceConfig = null;
+
     }
 
     /**
@@ -196,6 +166,8 @@ class CreateResourceRequest extends  AbstractModel {
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.ResourceFrom = 'ResourceFrom' in params ? params.ResourceFrom : null;
+        this.ResourceConfig = 'ResourceConfig' in params ? params.ResourceConfig : null;
 
     }
 }
@@ -1106,6 +1078,12 @@ If `konajdk` is selected, the value can be:
          */
         this.OsFlavour = null;
 
+        /**
+         * Specifies whether to enable Prometheus metric
+         * @type {EnablePrometheusConf || null}
+         */
+        this.EnablePrometheusConf = null;
+
     }
 
     /**
@@ -1238,6 +1216,12 @@ If `konajdk` is selected, the value can be:
         }
         this.OsFlavour = 'OsFlavour' in params ? params.OsFlavour : null;
 
+        if (params.EnablePrometheusConf) {
+            let obj = new EnablePrometheusConf();
+            obj.deserialize(params.EnablePrometheusConf)
+            this.EnablePrometheusConf = obj;
+        }
+
     }
 }
 
@@ -1321,6 +1305,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Mixed = null;
 
+        /**
+         * Redirection mode. Values:
+- `AUTO` (automatically redirect HTTP to HTTPS)
+- `NONE` (no redirection)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.RewriteType = null;
+
     }
 
     /**
@@ -1357,6 +1350,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Vip = 'Vip' in params ? params.Vip : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Mixed = 'Mixed' in params ? params.Mixed : null;
+        this.RewriteType = 'RewriteType' in params ? params.RewriteType : null;
 
     }
 }
@@ -1551,89 +1545,24 @@ class DescribeApplicationPodsRequest extends  AbstractModel {
 }
 
 /**
- * CreateApplication request structure.
+ * Enable Prometheus monitoring
  * @class
  */
-class CreateApplicationRequest extends  AbstractModel {
+class EnablePrometheusConf extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application name
-         * @type {string || null}
-         */
-        this.ApplicationName = null;
-
-        /**
-         * Description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Whether to use the default image service. 1: yes; 0: no
+         * The listening port of the applicaiton
          * @type {number || null}
          */
-        this.UseDefaultImageService = null;
+        this.Port = null;
 
         /**
-         * Type of the bound repository. 0: Personal Edition; 1: Enterprise Edition
-         * @type {number || null}
-         */
-        this.RepoType = null;
-
-        /**
-         * Instance ID of Enterprise Edition image service
+         * URL path for monitoring
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Address of the bound image server
-         * @type {string || null}
-         */
-        this.RepoServer = null;
-
-        /**
-         * Name of the bound image repository
-         * @type {string || null}
-         */
-        this.RepoName = null;
-
-        /**
-         * Source channel
-         * @type {number || null}
-         */
-        this.SourceChannel = null;
-
-        /**
-         * Application subnet
-         * @type {Array.<string> || null}
-         */
-        this.SubnetList = null;
-
-        /**
-         * Programming language 
-- JAVA
-- OTHER
-         * @type {string || null}
-         */
-        this.CodingLanguage = null;
-
-        /**
-         * Deployment mode 
-- IMAGE
-- JAR
-- WAR
-         * @type {string || null}
-         */
-        this.DeployMode = null;
-
-        /**
-         * Whether to enable the call chain feature
-         * @type {number || null}
-         */
-        this.EnableTracing = null;
+        this.Path = null;
 
     }
 
@@ -1644,18 +1573,8 @@ class CreateApplicationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.UseDefaultImageService = 'UseDefaultImageService' in params ? params.UseDefaultImageService : null;
-        this.RepoType = 'RepoType' in params ? params.RepoType : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.RepoServer = 'RepoServer' in params ? params.RepoServer : null;
-        this.RepoName = 'RepoName' in params ? params.RepoName : null;
-        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
-        this.SubnetList = 'SubnetList' in params ? params.SubnetList : null;
-        this.CodingLanguage = 'CodingLanguage' in params ? params.CodingLanguage : null;
-        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
-        this.EnableTracing = 'EnableTracing' in params ? params.EnableTracing : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Path = 'Path' in params ? params.Path : null;
 
     }
 }
@@ -2784,41 +2703,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DeleteApplication response structure.
- * @class
- */
-class DeleteApplicationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned result
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Ingress rule path configuration
  * @class
  */
@@ -2994,41 +2878,6 @@ class RestartApplicationRequest extends  AbstractModel {
 }
 
 /**
- * CreateApplication response structure.
- * @class
- */
-class CreateApplicationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Service code
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Auto scaling policy
  * @class
  */
@@ -3175,7 +3024,7 @@ class DeployStrategyConf extends  AbstractModel {
         this.BetaBatchNum = null;
 
         /**
-         * Batch deployment policy. `0`: automatically; `1`: manually; `2`: beta batch (manual)
+         * Batch deployment policy. `0`: automatically; `1`: manually; `2`: beta batch (manual), `3`: initial release
          * @type {number || null}
          */
         this.DeployStrategyType = null;
@@ -3736,6 +3585,13 @@ Note: This field may return `null`, indicating that no valid value can be found.
          */
         this.Config = null;
 
+        /**
+         * Encrypt configuration name
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Secret = null;
+
     }
 
     /**
@@ -3749,6 +3605,7 @@ Note: This field may return `null`, indicating that no valid value can be found.
         this.Value = 'Value' in params ? params.Value : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Config = 'Config' in params ? params.Config : null;
+        this.Secret = 'Secret' in params ? params.Secret : null;
 
     }
 }
@@ -3756,7 +3613,6 @@ Note: This field may return `null`, indicating that no valid value can be found.
 module.exports = {
     MountedSettingConf: MountedSettingConf,
     RestartApplicationPodResponse: RestartApplicationPodResponse,
-    DeleteApplicationRequest: DeleteApplicationRequest,
     CreateResourceRequest: CreateResourceRequest,
     RestartApplicationResponse: RestartApplicationResponse,
     StopApplicationRequest: StopApplicationRequest,
@@ -3776,7 +3632,7 @@ module.exports = {
     DescribeEnvironmentsResponse: DescribeEnvironmentsResponse,
     ModifyIngressRequest: ModifyIngressRequest,
     DescribeApplicationPodsRequest: DescribeApplicationPodsRequest,
-    CreateApplicationRequest: CreateApplicationRequest,
+    EnablePrometheusConf: EnablePrometheusConf,
     DescribeRelatedIngressesResponse: DescribeRelatedIngressesResponse,
     DescribeIngressesRequest: DescribeIngressesRequest,
     DescribeRunPodPage: DescribeRunPodPage,
@@ -3798,12 +3654,10 @@ module.exports = {
     CreateResourceResponse: CreateResourceResponse,
     ModifyApplicationInfoRequest: ModifyApplicationInfoRequest,
     ModifyApplicationInfoResponse: ModifyApplicationInfoResponse,
-    DeleteApplicationResponse: DeleteApplicationResponse,
     IngressRulePath: IngressRulePath,
     CreateEnvironmentResponse: CreateEnvironmentResponse,
     NamespacePage: NamespacePage,
     RestartApplicationRequest: RestartApplicationRequest,
-    CreateApplicationResponse: CreateApplicationResponse,
     HorizontalAutoscaler: HorizontalAutoscaler,
     StorageMountConf: StorageMountConf,
     PortMapping: PortMapping,

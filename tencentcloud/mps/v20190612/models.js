@@ -1462,7 +1462,7 @@ Default value: black.
 }
 
 /**
- * Input parameter type of an OCR-based politically sensitive information detection in text task during content audit
+ * The input parameters for OCR-based detection of politically sensitive information.
  * @class
  */
 class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
@@ -1470,7 +1470,7 @@ class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * ID of a politically sensitive information detection template.
+         * The template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -1777,7 +1777,7 @@ Default value: 0 px.
 }
 
 /**
- * Result type of an OCR-based politically sensitive information detection in text task during content audit
+ * The result of OCR-based detection of politically sensitive information.
  * @class
  */
 class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
@@ -1810,14 +1810,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * Input for an OCR-based politically sensitive information detection in text task during content audit.
+         * The input parameter for OCR-based detection of politically sensitive information.
          * @type {AiReviewPoliticalOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of an OCR-based politically sensitive information detection in text task during content audit.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The output of OCR-based detection of politically sensitive information.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {AiReviewPoliticalOcrTaskOutput || null}
          */
         this.Output = null;
@@ -2001,7 +2001,7 @@ class MediaSnapshotByTimePicInfoItem extends  AbstractModel {
         super();
 
         /**
-         * Time offset corresponding to the screenshot in the video in <font color=red>milliseconds</font>.
+         * The timestamp (seconds) of the screenshot.
          * @type {number || null}
          */
         this.TimeOffset = null;
@@ -2120,15 +2120,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PornConfigure = null;
 
         /**
-         * Terrorism information detection control parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The parameters for detecting sensitive information.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {TerrorismConfigureInfo || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * Politically sensitive information detection control parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The parameters for detecting sensitive information.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {PoliticalConfigureInfo || null}
          */
         this.PoliticalConfigure = null;
@@ -2328,7 +2328,7 @@ Default value: 10%.
 }
 
 /**
- * Input parameter type of a politically sensitive information detection task during content audit
+ * The input parameters for the detection of politically sensitive information.
  * @class
  */
 class AiReviewPoliticalTaskInput extends  AbstractModel {
@@ -2336,7 +2336,7 @@ class AiReviewPoliticalTaskInput extends  AbstractModel {
         super();
 
         /**
-         * ID of a politically sensitive information detection template.
+         * The template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -3158,7 +3158,7 @@ Default value: 0.
 }
 
 /**
- * Control parameter of a terrorism information detection in image task.
+ * The parameters for detecting sensitive information in images.
  * @class
  */
 class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -3166,24 +3166,24 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of a terrorism information detection in image task. Valid values:
-<li>ON: Enables a terrorism information detection in image task;</li>
-<li>OFF: Disables a terrorism information detection in image task.</li>
+         * Whether to detect sensitive information in images. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Filter tags for terrorism information detection in images. If a specified tag is detected, the tag is returned. If no filter tag is specified, all detected tags are returned. Valid values:
-<li>`guns`: weapons and guns</li>
-<li>`crowd`: crowds</li>
-<li>`bloody`: bloodiness</li>
-<li>`police`: police forces</li>
-<li>`banners`: terrorism flags</li>
-<li>`militant`: militants</li>
-<li>`explosion`: explosions and fires</li>
-<li>`terrorists`: terrorists</li>
-<li>`scenario`: terrorism images</li>
+         * The filter labels for sensitive information detection in images, which specify the types of sensitive information to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+<li>guns</li>
+<li>crowd</li>
+<li>bloody</li>
+<li>police</li>
+<li>banners (sensitive flags)</li>
+<li>militant</li>
+<li>explosion</li>
+<li>terrorists</li>
+<li>scenario (sensitive scenes) </li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -3335,7 +3335,7 @@ class TextWatermarkTemplateInputForUpdate extends  AbstractModel {
 }
 
 /**
- * Input parameter type of OCR-based terrorism information detection in text task in content audit
+ * The input parameter for OCR-based detection of sensitive information.
  * @class
  */
 class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
@@ -3343,7 +3343,7 @@ class AiReviewTerrorismOcrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * Terrorism information detection template ID.
+         * The template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -4555,7 +4555,7 @@ class EditMediaResponse extends  AbstractModel {
 }
 
 /**
- * Control parameter of a politically sensitive information detection in text task.
+ * The parameters for detecting sensitive information based on OCR.
  * @class
  */
 class PoliticalOcrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -4563,9 +4563,9 @@ class PoliticalOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of a politically sensitive information detection in text task. Valid values:
-<li>ON: Enables a politically sensitive information detection in text task;</li>
-<li>OFF: Disables a politically sensitive information detection in text task.</li>
+         * Whether to detect sensitive information based on OCR. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -5117,7 +5117,7 @@ class CreateWordSamplesRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of a politically sensitive information detection in speech task.
+ * The parameters for detecting sensitive information based on ASR.
  * @class
  */
 class PoliticalAsrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -5125,9 +5125,9 @@ class PoliticalAsrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of a politically sensitive information detection in speech task. Valid values:
-<li>ON: Enables a politically sensitive information detection in speech task;</li>
-<li>OFF: Disables a politically sensitive information detection in speech task.</li>
+         * Whether to detect sensitive information based on ASR. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -5257,7 +5257,7 @@ Default value: 0 px.
 }
 
 /**
- * Result type of OCR-based terrorism information detection in text task in content audit
+ * The result of OCR-based detection of terrorism content.
  * @class
  */
 class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
@@ -5292,13 +5292,14 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input of OCR-based terrorism information detection in text task in content audit.
+         * The input parameter for OCR-based detection of terrorism content.
          * @type {AiReviewTerrorismOcrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of OCR-based terrorism information detection in text task in content audit.
+         * The output of OCR-based detection of terrorism content.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {AiReviewTerrorismOcrTaskOutput || null}
          */
         this.Output = null;
@@ -6640,7 +6641,7 @@ It is not recommended to specify this parameter if there are no special requirem
 }
 
 /**
- * Control parameter of a politically sensitive information detection in text task
+ * The parameters for detecting sensitive information based on OCR.
  * @class
  */
 class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
@@ -6648,9 +6649,9 @@ class PoliticalOcrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of a politically sensitive information detection in text task. Valid values:
-<li>ON: Enables a politically sensitive information detection in text task;</li>
-<li>OFF: Disables a politically sensitive information detection in text task.</li>
+         * Whether to detect sensitive information based on OCR. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -8888,7 +8889,7 @@ class LiveStreamAiRecognitionResultInfo extends  AbstractModel {
 }
 
 /**
- * Result of politically sensitive information detection in image in AI-based live stream content audit
+ * The result of detecting sensitive information in live streaming videos.
  * @class
  */
 class LiveStreamAiReviewImagePoliticalResult extends  AbstractModel {
@@ -8908,7 +8909,7 @@ class LiveStreamAiReviewImagePoliticalResult extends  AbstractModel {
         this.EndPtsTime = null;
 
         /**
-         * Score of a suspected politically sensitive segment.
+         * The confidence score for the detected sensitive segments.
          * @type {number || null}
          */
         this.Confidence = null;
@@ -8923,21 +8924,21 @@ class LiveStreamAiReviewImagePoliticalResult extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Tag of the detected politically sensitive information in video. Valid values:
-<li>politician: Politically sensitive figure.</li>
-<li>violation_photo: Violating photo.</li>
+         * The labels for the detected sensitive information. Valid values:
+<li>politician</li>
+<li>violation_photo (banned icons)</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * Name of a politically sensitive figure or violating photo.
+         * The name of a sensitive person or banned icon.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Zone coordinates (at the pixel level) of a politically sensitive figure or violating photo: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
+         * The coordinates (pixel) of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -8978,7 +8979,7 @@ and will be deleted after `PicUrlExpireTime`).
 }
 
 /**
- * Control parameter of terrorism information detection in text task
+ * The parameters for detecting sensitive information based on OCR.
  * @class
  */
 class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -8986,9 +8987,9 @@ class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of terrorism information detection in text task. Valid values:
-<li>ON: enables terrorism information detection in text task;</li>
-<li>OFF: disables terrorism information detection in text task.</li>
+         * Whether to detect sensitive information based on OCR. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -9215,7 +9216,7 @@ Default value: 0 px.
 }
 
 /**
- * Control parameter of a terrorism information detection task.
+ * The parameters for detecting sensitive information.
  * @class
  */
 class TerrorismConfigureInfoForUpdate extends  AbstractModel {
@@ -9223,13 +9224,13 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of a terrorism information detection in image task.
+         * The parameters for detecting sensitive information in images.
          * @type {TerrorismImgReviewTemplateInfoForUpdate || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * Control parameter of terrorism information detection in text task.
+         * The parameters for detecting sensitive information based on OCR.
          * @type {TerrorismOcrReviewTemplateInfoForUpdate || null}
          */
         this.OcrReviewInfo = null;
@@ -9717,7 +9718,7 @@ class DeleteTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Terrorism information
+ * The information about the sensitive content detected.
  * @class
  */
 class AiReviewTerrorismTaskOutput extends  AbstractModel {
@@ -9725,37 +9726,37 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of the detected terrorism information in a video from 0 to 100.
+         * The confidence score for the detection of sensitive information. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for the detected terrorism information. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * The suggestion for handling the sensitive information detected. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * Tags for detected terrorism information in a video. Valid values:
-<li>`guns`: weapons and guns</li>
-<li>`crowd`: crowds</li>
-<li>`police`: police forces</li>
-<li>`bloody`: bloodiness</li>
-<li>`banners`: terrorism flags</li>
-<li>`militant`: militants</li>
-<li>`explosion`: explosions and fires</li>
-<li>`terrorists`: terrorists</li>
-<li>`scenario`: terrorism images</li>
+         * The labels for the detected sensitive content. Valid values:
+<li>guns</li>
+<li>crowd</li>
+<li>police</li>
+<li>bloody</li>
+<li>banners (sensitive flags)</li>
+<li>militant</li>
+<li>explosion</li>
+<li>terrorists</li>
+<li>scenario (sensitive scenes) </li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * List of video segments that contain the detected terrorism information.
+         * The video segments that contain sensitive information.
          * @type {Array.<MediaContentReviewSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -9831,7 +9832,7 @@ class ProhibitedConfigureInfo extends  AbstractModel {
 }
 
 /**
- * OCR-detected terrorism information in text
+ * The information about the sensitive content detected based on OCR.
  * @class
  */
 class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
@@ -9839,22 +9840,22 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of OCR-detected terrorism information in text between 0 and 100.
+         * The confidence score for the OCR-based detection of sensitive information. Value range: 1-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for OCR-detected terrorism information in text. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * The suggestion for handling the sensitive information detected based on OCR. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain OCR-detected terrorism information in text.
+         * The video segments that contain sensitive information detected based on OCR.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -10239,7 +10240,7 @@ class ResetWorkflowRequest extends  AbstractModel {
 }
 
 /**
- * Result type of a terrorism information detection task during content audit
+ * The result of sensitive information detection.
  * @class
  */
 class AiReviewTaskTerrorismResult extends  AbstractModel {
@@ -10271,14 +10272,14 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input for a terrorism information detection task during content audit.
+         * The input parameter for sensitive information detection.
          * @type {AiReviewTerrorismTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of a terrorism information detection task during content audit.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The output of sensitive information detection.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {AiReviewTerrorismTaskOutput || null}
          */
         this.Output = null;
@@ -10432,7 +10433,7 @@ class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
 }
 
 /**
- * Suspected politically sensitive segment identified during content audit
+ * The information about the sensitive segments detected.
  * @class
  */
 class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
@@ -10452,51 +10453,51 @@ class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
-         * Score of a suspected politically sensitive segment.
+         * The confidence score for the detected sensitive segments.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for politically sensitive information detection of a suspected segment. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * The suggestion for handling the sensitive segments. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * Name of a politically sensitive figure or violating photo.
+         * The name of a sensitive person or banned icon.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+         * The labels for the detected sensitive segments. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) is as follows:
 violation_photo:
-<li>violation_photo: violating photo.</li>
+<li>violation_photo (banned icons)</li>
 politician:
-<li>nation_politician: head of state/government;</li>
-<li>province_politician: province/state leader;</li>
-<li>bureau_politician: ministry leader;</li>
-<li>county_politician: county/city leader;</li>
-<li>rural_politician: town leader;</li>
-<li>sensitive_politician: politically sensitive figure.</li>
-<li>foreign_politician: head of a foreign country/government.</li>
+<li>nation_politician (state leader)</li>
+<li>province_politician (provincial officials)</li>
+<li>bureau_politician (bureau-level officials)</li>
+<li>county_politician (county-level officials)</li>
+<li>rural_politician (township-level officials)</li>
+<li>sensitive_politician (sensitive people)</li>
+<li>foreign_politician (state leaders of other countries)</li>
 entertainment:
-<li>sensitive_entertainment: sensitive entertainment celebrity.</li>
+<li>sensitive_entertainment (sensitive people in the entertainment industry</li>
 sport:
-<li>sensitive_sport: sensitive sports figure.</li>
+<li>sensitive_sport (sensitive sports celebrities)</li>
 entrepreneur:
-<li>sensitive_entrepreneur: sensitive business figure.</li>
+<li>sensitive_entrepreneur</li>
 scholar:
-<li>sensitive_scholar: sensitive educator.</li>
+<li>sensitive_scholar</li>
 celebrity:
-<li>sensitive_celebrity: sensitive well-known figure;</li>
-<li>historical_celebrity: well-known historical figure.</li>
+<li>sensitive_celebrity</li>
+<li>historical_celebrity (sensitive historical figures)</li>
 military:
-<li>sensitive_military: militarily sensitive figure.</li>
+<li>sensitive_military (sensitive people in military)</li>
          * @type {string || null}
          */
         this.Label = null;
@@ -10509,7 +10510,7 @@ military:
         this.Url = null;
 
         /**
-         * Zone coordinates (at the pixel level) of a politically sensitive figure or violating photo: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
+         * The coordinates (pixel) of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -11237,7 +11238,7 @@ class ProhibitedAsrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Input parameter type of an ASR-based politically sensitive information detection in text task during content audit
+ * The input parameters for ASR-based detection of politically sensitive information.
  * @class
  */
 class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
@@ -11245,7 +11246,7 @@ class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
         super();
 
         /**
-         * ID of a politically sensitive information detection template.
+         * The template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -11484,7 +11485,7 @@ class PornOcrReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Result type of an ASR-based politically sensitive information detection in text task during content audit
+ * The result of ASR-based detection of politically sensitive information.
  * @class
  */
 class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
@@ -11516,14 +11517,14 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input for an ASR-based politically sensitive information detection in text task during content audit.
+         * The input parameter for ASR-based detection of politically sensitive information.
          * @type {AiReviewPoliticalAsrTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of an ASR-based politically sensitive information detection in text task during content audit.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The output of ASR-based detection of politically sensitive information.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {AiReviewPoliticalAsrTaskOutput || null}
          */
         this.Output = null;
@@ -11685,7 +11686,7 @@ class AiReviewProhibitedAsrTaskInput extends  AbstractModel {
 }
 
 /**
- * Suspected porn/terrorism segment identified during content audit
+ * The information about the detected pornographic/sensitive segments.
  * @class
  */
 class MediaContentReviewSegmentItem extends  AbstractModel {
@@ -11759,7 +11760,7 @@ class MediaContentReviewSegmentItem extends  AbstractModel {
 }
 
 /**
- * Control parameter of terrorism information detection in text task
+ * The parameters for detecting sensitive information based on OCR.
  * @class
  */
 class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
@@ -11767,9 +11768,9 @@ class TerrorismOcrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of terrorism information detection in text task. Valid values:
-<li>ON: enables terrorism information detection in text task;</li>
-<li>OFF: disables terrorism information detection in text task.</li>
+         * Whether to detect sensitive information based on OCR. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -12243,7 +12244,7 @@ Default value: black.
 }
 
 /**
- * Control parameter of a politically sensitive information detection in image task.
+ * The parameters for detecting sensitive information in images.
  * @class
  */
 class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
@@ -12251,23 +12252,23 @@ class PoliticalImgReviewTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Switch of a politically sensitive information detection in image task. Valid values:
-<li>ON: Enables a politically sensitive information detection in image task;</li>
-<li>OFF: Disables a politically sensitive information detection in image task.</li>
+         * Whether to detect sensitive information in images. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>violation_photo: violating photo;</li>
-<li>politician: political figure;</li>
-<li>entertainment: entertainment celebrity;</li>
-<li>sport: sports figure;</li>
-<li>entrepreneur: business figure;</li>
-<li>scholar: educator;</li>
-<li>celebrity: well-known figure;</li>
-<li>military: military figure.</li>
+         * The filter labels for sensitive information detection in images, which specify the types of sensitive information to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+<li>violation_photo (banned icons)</li>
+<li>politician</li>
+<li>entertainment (people in the entertainment industry)</li>
+<li>sport (people in the sports industry)</li>
+<li>entrepreneur</li>
+<li>scholar</li>
+<li>celebrity</li>
+<li>military (people in military)</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -12998,7 +12999,7 @@ class CosFileUploadTrigger extends  AbstractModel {
 }
 
 /**
- * ASR-detected politically sensitive information in text
+ * The information about the sensitive content detected based on ASR.
  * @class
  */
 class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
@@ -13006,22 +13007,22 @@ class AiReviewPoliticalAsrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of the ASR-detected politically sensitive information in text from 0 to 100.
+         * The confidence score for the ASR-based detection of sensitive information. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for the ASR-detected politically sensitive information in text. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * The suggestion for handling the sensitive information detected based on ASR. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain ASR-detected politically sensitive information in text.
+         * The video segments that contain sensitive information detected based on ASR.
          * @type {Array.<MediaContentReviewAsrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -13639,7 +13640,7 @@ class ModifyAIRecognitionTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Control parameter of a politically sensitive information detection in image task
+ * The parameters for detecting sensitive information in images.
  * @class
  */
 class PoliticalImgReviewTemplateInfo extends  AbstractModel {
@@ -13647,23 +13648,23 @@ class PoliticalImgReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of a politically sensitive information detection in image task. Valid values:
-<li>ON: Enables a politically sensitive information detection in image task;</li>
-<li>OFF: Disables a politically sensitive information detection in image task.</li>
+         * Whether to detect sensitive information in images. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-<li>violation_photo: violating photo;</li>
-<li>politician: political figure;</li>
-<li>entertainment: entertainment celebrity;</li>
-<li>sport: sports figure;</li>
-<li>entrepreneur: business figure;</li>
-<li>scholar: educator;</li>
-<li>celebrity: well-known figure;</li>
-<li>military: military figure.</li>
+         * The filter labels for sensitive information detection in images, which specify the types of sensitive information to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+<li>violation_photo (banned icons)</li>
+<li>politician</li>
+<li>entertainment (people in the entertainment industry)</li>
+<li>sport (people in the sports industry)</li>
+<li>entrepreneur</li>
+<li>scholar</li>
+<li>celebrity</li>
+<li>military (people in military)</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -13698,7 +13699,7 @@ class PoliticalImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * Control parameter of a politically sensitive information detection task
+ * The parameters for detecting sensitive information.
  * @class
  */
 class PoliticalConfigureInfo extends  AbstractModel {
@@ -13706,22 +13707,19 @@ class PoliticalConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of politically sensitive information detection in image.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The parameters for detecting sensitive information in images.
          * @type {PoliticalImgReviewTemplateInfo || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * Control parameter of politically sensitive information detection in speech.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The parameters for detecting sensitive information based on ASR.
          * @type {PoliticalAsrReviewTemplateInfo || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * Control parameter of politically sensitive information detection in text.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The parameters for detecting sensitive information based on OCR.
          * @type {PoliticalOcrReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
@@ -14572,6 +14570,15 @@ It is not recommended to specify this parameter if there are no special requirem
          */
         this.Vcrf = null;
 
+        /**
+         * Whether to enable adaptive encoding. Valid values:
+<li>0: Disable</li>
+<li>1: Enable</li>
+Default value: 0. If this parameter is set to `1`, multiple streams with different resolutions and bitrates will be generated automatically. The highest resolution, bitrate, and quality of the streams are determined by the values of `width` and `height`, `Bitrate`, and `Vcrf` in `VideoTemplate` respectively. If these parameters are not set in `VideoTemplate`, the highest resolution generated will be the same as that of the source video, and the highest video quality will be close to VMAF 95. To use this parameter or learn about the billing details of adaptive encoding, please contact your sales rep.
+         * @type {number || null}
+         */
+        this.ContentAdaptStream = null;
+
     }
 
     /**
@@ -14590,6 +14597,7 @@ It is not recommended to specify this parameter if there are no special requirem
         this.Gop = 'Gop' in params ? params.Gop : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
+        this.ContentAdaptStream = 'ContentAdaptStream' in params ? params.ContentAdaptStream : null;
 
     }
 }
@@ -14932,7 +14940,7 @@ class TaskNotifyConfig extends  AbstractModel {
 }
 
 /**
- * Result type of a politically sensitive information detection task during content audit
+ * The result of sensitive information detection.
  * @class
  */
 class AiReviewTaskPoliticalResult extends  AbstractModel {
@@ -14964,14 +14972,14 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Input for a politically sensitive information detection task during content audit.
+         * The input parameter for sensitive information detection.
          * @type {AiReviewPoliticalTaskInput || null}
          */
         this.Input = null;
 
         /**
-         * Output of a politically sensitive information detection task during content audit.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The output of sensitive information detection.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {AiReviewPoliticalTaskOutput || null}
          */
         this.Output = null;
@@ -15647,7 +15655,7 @@ class AiRecognitionTaskFaceResultInput extends  AbstractModel {
 }
 
 /**
- * Politically sensitive information
+ * The sensitive information detected.
  * @class
  */
 class AiReviewPoliticalTaskOutput extends  AbstractModel {
@@ -15655,32 +15663,32 @@ class AiReviewPoliticalTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of the detected politically sensitive information in video from 0 to 100.
+         * The confidence score for the detection of sensitive information. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for the detected politically sensitive information. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * The suggestion for handling the sensitive information detected. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#AiReviewPoliticalTaskOutput) and this parameter is as follows:
+         * The labels for the detected sensitive content. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#AiReviewPoliticalTaskOutput) is as follows:
 violation_photo:
-<li>violation_photo: violating photo.</li>
+<li>violation_photo (banned icons)</li>
 Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
-<li>politician: political figure.</li>
+<li>politician</li>
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * List of video segments that contain the detected politically sensitive information.
+         * The video segments that contain sensitive information.
          * @type {Array.<MediaContentReviewPoliticalSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -15882,11 +15890,11 @@ class LiveStreamAiReviewResultItem extends  AbstractModel {
         super();
 
         /**
-         * Content audit type. Valid values:
-<li>ImagePorn: Porn information detection in image</li>
-<li>ImageTerrorism: Terrorism information detection in image</li>
-<li>ImagePolitical: Politically sensitive information detection in image</li>
-<li>PornVoice: Porn information detection in speech</li>
+         * The type of the moderation result. Valid values:
+<li>ImagePorn</li>
+<li>ImageTerrorism</li>
+<li>ImagePolitical</li>
+<li>PornVoice (pornographic content in speech)</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -15898,13 +15906,13 @@ class LiveStreamAiReviewResultItem extends  AbstractModel {
         this.ImagePornResultSet = null;
 
         /**
-         * Result of terrorism information detection in image, which is valid when `Type` is `ImageTerrorism`.
+         * The result of detecting sensitive information in images, which is valid if `Type` is `ImageTerrorism`.
          * @type {Array.<LiveStreamAiReviewImageTerrorismResult> || null}
          */
         this.ImageTerrorismResultSet = null;
 
         /**
-         * Result of politically sensitive information detection in image, which is valid when `Type` is `ImagePolitical`.
+         * The result of detecting sensitive information in images, which is valid if `Type` is `ImagePolitical`.
          * @type {Array.<LiveStreamAiReviewImagePoliticalResult> || null}
          */
         this.ImagePoliticalResultSet = null;
@@ -16421,10 +16429,10 @@ class FaceConfigureInfoForUpdate extends  AbstractModel {
         this.Score = null;
 
         /**
-         * Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the default figures will be returned. Valid values:
-<li>entertainment: Entertainment celebrity;</li>
-<li>sport: Sports celebrity;</li>
-<li>politician: Politically sensitive figure.</li>
+         * The default face filter labels, which specify the types of faces to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+<li>entertainment (people in the entertainment industry)</li>
+<li>sport (sports celebrities)</li>
+<li>politician</li>
          * @type {Array.<string> || null}
          */
         this.DefaultLibraryLabelSet = null;
@@ -16610,7 +16618,7 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Input parameter type of a terrorism information detection task during content audit
+ * The input parameter for the detection of sensitive information.
  * @class
  */
 class AiReviewTerrorismTaskInput extends  AbstractModel {
@@ -16618,7 +16626,7 @@ class AiReviewTerrorismTaskInput extends  AbstractModel {
         super();
 
         /**
-         * ID of a terrorism information detection template.
+         * The template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -16743,7 +16751,7 @@ Note: this field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * Result of terrorism information detection in image in AI-based live stream content audit
+ * The result of detecting sensitive information in live streaming videos.
  * @class
  */
 class LiveStreamAiReviewImageTerrorismResult extends  AbstractModel {
@@ -16763,13 +16771,13 @@ class LiveStreamAiReviewImageTerrorismResult extends  AbstractModel {
         this.EndPtsTime = null;
 
         /**
-         * Score of a suspected terrorism segment.
+         * The confidence score for the detected sensitive segments.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for terrorism information detection of a suspected segment. Valid values:
+         * The suggestion for handling the sensitive segments. Valid values:
 <li>pass</li>
 <li>review</li>
 <li>block</li>
@@ -16778,15 +16786,15 @@ class LiveStreamAiReviewImageTerrorismResult extends  AbstractModel {
         this.Suggestion = null;
 
         /**
-         * Tag of the detected terrorism information in a video. Valid values:
-<li>guns: Weapons and guns.</li>
-<li>crowd: Crowd.</li>
-<li>police: Police force.</li>
-<li>bloody: Bloody scenes.</li>
-<li>banners: Terrorism flags.</li>
-<li>militant: Militants.</li>
-<li>explosion: Explosions and fires.</li>
-<li>terrorists: Terrorists.</li>
+         * The labels for the detected sensitive content. Valid values:
+<li>guns</li>
+<li>crowd</li>
+<li>police</li>
+<li>bloody</li>
+<li>banners (sensitive flags)</li>
+<li>militant</li>
+<li>explosion</li>
+<li>terrorists</li>
          * @type {string || null}
          */
         this.Label = null;
@@ -17427,14 +17435,16 @@ class AiContentReviewResult extends  AbstractModel {
 
         /**
          * Task type. Valid values:
-<li>Porn: Porn information detection in image</li>
-<li>Terrorism: Terrorism information detection in image</li>
-<li>Political: Politically sensitive information detection in image</li>
-<li>Porn.Asr: ASR-based porn information detection in text</li>
-<li>Porn.Ocr: OCR-based porn information detection in text</li>
-<li>Porn.Voice: Porn information detection in speech</li>
-<li>Political.Asr: ASR-based politically sensitive information detection in text</li>
-<li>Political.Ocr: OCR-based politically sensitive information detection in text</li>
+<li>Porn (in images)</li>
+<li>Terrorism (in images)</li>
+<li>Political (in images)</li>
+<li>Porn.Asr</li>
+<li>Porn.Ocr</li>
+<li>Political.Asr</li>
+<li>Political.Ocr</li>
+<li>Terrorism.Ocr</li>
+<li>Prohibited.Asr</li>
+<li>Prohibited.Ocr</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -17459,15 +17469,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PornTask = null;
 
         /**
-         * Query result of an intelligent terrorism information detection in image task in video content audit, which is valid when task type is `Terrorism`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The result of detecting terrorism content in images, which is valid when the task type is `Terrorism`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {AiReviewTaskTerrorismResult || null}
          */
         this.TerrorismTask = null;
 
         /**
-         * Query result of an intelligent politically sensitive information detection in image task in video content audit, which is valid when task type is `Political`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The result of detecting politically sensitive information in images, which is valid when the task type is `Political`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {AiReviewTaskPoliticalResult || null}
          */
         this.PoliticalTask = null;
@@ -17487,21 +17497,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PornOcrTask = null;
 
         /**
-         * Query result of an ASR-based politically sensitive information detection in text task in video content audit, which is valid when task type is `Political.Asr`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The result of detecting politically sensitive information based on ASR, which is valid when the task type is `Political.Asr`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {AiReviewTaskPoliticalAsrResult || null}
          */
         this.PoliticalAsrTask = null;
 
         /**
-         * Query result of an OCR-based politically sensitive information detection in text task in video content audit, which is valid when task type is `Political.Ocr`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The result of detecting politically sensitive information based on OCR, which is valid when the task type is `Political.Ocr`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {AiReviewTaskPoliticalOcrResult || null}
          */
         this.PoliticalOcrTask = null;
 
         /**
-         * Query result of OCR-based terrorism information detection in text task in video content audit, which is valid if task type is `Terrorism.Ocr`.
+         * The result of detecting terrorism content based on OCR, which is valid when task type is `Terrorism.Ocr`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {AiReviewTaskTerrorismOcrResult || null}
          */
         this.TerrorismOcrTask = null;
@@ -17595,7 +17606,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of a terrorism information detection in image task
+ * The parameters for detecting sensitive information in images.
  * @class
  */
 class TerrorismImgReviewTemplateInfo extends  AbstractModel {
@@ -17603,24 +17614,24 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of a terrorism information detection in image task. Valid values:
-<li>ON: Enables a terrorism information detection in image task;</li>
-<li>OFF: Disables a terrorism information detection in image task.</li>
+         * Whether to detect sensitive information in images. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Filter tags for terrorism information detection in images. If a specified tag is detected, the tag is returned. If no filter tag is specified, all detected tags are returned. Valid values:
-<li>`guns`: weapons and guns</li>
-<li>`crowd`: crowds</li>
-<li>`bloody`: bloodiness</li>
-<li>`police`: police forces</li>
-<li>`banners`: terrorism flags</li>
-<li>`militant`: militants</li>
-<li>`explosion`: explosions and fires</li>
-<li>`terrorists`: terrorists</li>
-<li>`scenario`: terrorism images</li>
+         * The filter labels for sensitive information detection in images, which specify the types of sensitive information to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+<li>guns</li>
+<li>crowd</li>
+<li>bloody</li>
+<li>police</li>
+<li>banners (sensitive flags)</li>
+<li>militant</li>
+<li>explosion</li>
+<li>terrorists</li>
+<li>scenario (sensitive scenes) </li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -17752,7 +17763,7 @@ class DisableWorkflowRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of a politically sensitive information detection task.
+ * The parameters for detecting sensitive information.
  * @class
  */
 class PoliticalConfigureInfoForUpdate extends  AbstractModel {
@@ -17760,19 +17771,19 @@ class PoliticalConfigureInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of politically sensitive information detection in image.
+         * The parameters for detecting sensitive information in images.
          * @type {PoliticalImgReviewTemplateInfoForUpdate || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * Control parameter of politically sensitive information detection in speech.
+         * The parameters for detecting sensitive information based on ASR.
          * @type {PoliticalAsrReviewTemplateInfoForUpdate || null}
          */
         this.AsrReviewInfo = null;
 
         /**
-         * Control parameter of politically sensitive information detection in text.
+         * The parameters for detecting sensitive information based on OCR.
          * @type {PoliticalOcrReviewTemplateInfoForUpdate || null}
          */
         this.OcrReviewInfo = null;
@@ -18942,10 +18953,10 @@ class FaceConfigureInfo extends  AbstractModel {
         this.Score = null;
 
         /**
-         * Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the default figures will be returned. Valid values:
-<li>entertainment: Entertainment celebrity;</li>
-<li>sport: Sports celebrity;</li>
-<li>politician: Politically sensitive figure.</li>
+         * The default face filter labels, which specify the types of faces to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+<li>entertainment (people in the entertainment industry)</li>
+<li>sport (sports celebrities)</li>
+<li>politician</li>
          * @type {Array.<string> || null}
          */
         this.DefaultLibraryLabelSet = null;
@@ -19209,7 +19220,7 @@ class PornImgReviewTemplateInfo extends  AbstractModel {
 }
 
 /**
- * OCR-detected politically sensitive information in text
+ * The information about the sensitive content detected based on OCR.
  * @class
  */
 class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
@@ -19217,22 +19228,22 @@ class AiReviewPoliticalOcrTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * Score of the OCR-detected politically sensitive information in text from 0 to 100.
+         * The confidence score for the OCR-based detection of sensitive information. Value range: 0-100.
          * @type {number || null}
          */
         this.Confidence = null;
 
         /**
-         * Suggestion for the OCR-detected politically sensitive information in text. Valid values:
-<li>pass.</li>
-<li>review.</li>
-<li>block.</li>
+         * The suggestion for handling the sensitive information detected based on OCR. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * List of video segments that contain OCR-detected politically sensitive information in text.
+         * The video segments that contain sensitive information detected based on OCR.
          * @type {Array.<MediaContentReviewOcrTextSegmentItem> || null}
          */
         this.SegmentSet = null;
@@ -19567,7 +19578,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of a terrorism information detection task
+ * The parameters for detecting sensitive information.
  * @class
  */
 class TerrorismConfigureInfo extends  AbstractModel {
@@ -19575,14 +19586,13 @@ class TerrorismConfigureInfo extends  AbstractModel {
         super();
 
         /**
-         * Control parameter of a terrorism information detection in image task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The parameters for detecting sensitive information in images.
          * @type {TerrorismImgReviewTemplateInfo || null}
          */
         this.ImgReviewInfo = null;
 
         /**
-         * Control parameter of terrorism information detection in text task.
+         * The parameters for detecting sensitive information based on OCR.
          * @type {TerrorismOcrReviewTemplateInfo || null}
          */
         this.OcrReviewInfo = null;
@@ -19613,7 +19623,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of a politically sensitive information detection in speech task
+ * The parameters for detecting sensitive information based on ASR.
  * @class
  */
 class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
@@ -19621,9 +19631,9 @@ class PoliticalAsrReviewTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Switch of a politically sensitive information detection in speech task. Valid values:
-<li>ON: Enables a politically sensitive information detection in speech task;</li>
-<li>OFF: Disables a politically sensitive information detection in speech task.</li>
+         * Whether to detect sensitive information based on ASR. Valid values:
+<li>ON</li>
+<li>OFF</li>
          * @type {string || null}
          */
         this.Switch = null;

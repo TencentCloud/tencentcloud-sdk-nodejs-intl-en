@@ -2161,6 +2161,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.UpdateTime = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -2205,6 +2211,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -8938,7 +8945,7 @@ class LiveStreamAiReviewImagePoliticalResult extends  AbstractModel {
         this.Name = null;
 
         /**
-         * The coordinates (pixel) of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
+         * The pixel coordinates of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -10510,7 +10517,7 @@ military:
         this.Url = null;
 
         /**
-         * The coordinates (pixel) of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
+         * The pixel coordinates of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;

@@ -70,6 +70,7 @@ const DeleteMigrateJobRequest = models.DeleteMigrateJobRequest;
 const ActivateSubscribeResponse = models.ActivateSubscribeResponse;
 const CreateSubscribeResponse = models.CreateSubscribeResponse;
 const MigrateOption = models.MigrateOption;
+const SubsErr = models.SubsErr;
 const ErrorInfo = models.ErrorInfo;
 const StartMigrateJobResponse = models.StartMigrateJobResponse;
 const StartMigrateJobRequest = models.StartMigrateJobRequest;
@@ -203,8 +204,10 @@ For a finance zone linkage, please use the domain name dts.ap-shenzhen-fsi.tence
 
     /**
      * This API is used to create a migration check task.
-Before migration, you should call this API to create a check. Migration will start only if the check succeeds. You can view the check result through the DescribeMigrateCheckJob API.
+Before migration, you should call this API to create a check. Migration will start only if the check succeeds. You can view the check result through the `DescribeMigrateCheckJob` API.
 After successful check, if the migration task needs to be modified, a new check task should be created and migration will begin only after the new check succeeds.
+
+For a finance zone link, use the domain name https://dts.ap-shenzhen-fsi.tencentcloudapi.com.
      * @param {CreateMigrateCheckJobRequest} req
      * @param {function(string, CreateMigrateCheckJobResponse):void} cb
      * @public

@@ -17,24 +17,18 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribeAbnormalEvent response structure.
+ * CreateCloudRecording response structure.
  * @class
  */
-class DescribeAbnormalEventResponse extends  AbstractModel {
+class CreateCloudRecordingResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of returned data entries.
-         * @type {number || null}
+         * The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends. After a recording task starts, if you want to perform other actions on the task, you need to specify the task ID when making API requests.
+         * @type {string || null}
          */
-        this.Total = null;
-
-        /**
-         * Exceptional experience list.
-         * @type {Array.<AbnormalExperience> || null}
-         */
-        this.AbnormalExperienceList = null;
+        this.TaskId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -51,291 +45,56 @@ class DescribeAbnormalEventResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.AbnormalExperienceList) {
-            this.AbnormalExperienceList = new Array();
-            for (let z in params.AbnormalExperienceList) {
-                let obj = new AbnormalExperience();
-                obj.deserialize(params.AbnormalExperienceList[z]);
-                this.AbnormalExperienceList.push(obj);
-            }
-        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeAbnormalEvent request structure.
+ * The cloud storage information.
  * @class
  */
-class DescribeAbnormalEventRequest extends  AbstractModel {
+class CloudStorage extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * User `SDKAppID`, which can be used to query 20 exceptional experience events (in one or more rooms)
-         * @type {string || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Query start time (s) in the format of Unix timestamp, e.g., 1592448600
+         * The cloud storage provider.
+0: Tencent Cloud COS. The storage services of other providers are not supported currently.
          * @type {number || null}
          */
-        this.StartTime = null;
+        this.Vendor = null;
 
         /**
-         * Query end time (s) in the format of Unix timestamp, e.g., 1592449080
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Room ID, which can be used to query up to 20 exceptional experience events in a specific room
+         * The region of cloud storage.
          * @type {string || null}
          */
-        this.RoomId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-
-    }
-}
-
-/**
- * DescribeTrtcInteractiveTime response structure.
- * @class
- */
-class DescribeTrtcInteractiveTimeResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.Region = null;
 
         /**
-         * Duration statistics of the queried application(s)
-         * @type {Array.<OneSdkAppIdUsagesInfo> || null}
-         */
-        this.Usages = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The storage bucket.
          * @type {string || null}
          */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Usages) {
-            this.Usages = new Array();
-            for (let z in params.Usages) {
-                let obj = new OneSdkAppIdUsagesInfo();
-                obj.deserialize(params.Usages[z]);
-                this.Usages.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyPicture response structure.
- * @class
- */
-class ModifyPictureResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.Bucket = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The access_key of the cloud storage account.
          * @type {string || null}
          */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StartMCUMixTranscodeByStrRoomId request structure.
- * @class
- */
-class StartMCUMixTranscodeByStrRoomIdRequest extends  AbstractModel {
-    constructor(){
-        super();
+        this.AccessKey = null;
 
         /**
-         * `SDKAppId` of TRTC
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Room ID in string type
+         * The secret_key of the cloud storage account.
          * @type {string || null}
          */
-        this.StrRoomId = null;
+        this.SecretKey = null;
 
         /**
-         * On-Cloud MixTranscoding output parameters
-         * @type {OutputParams || null}
-         */
-        this.OutputParams = null;
-
-        /**
-         * On-Cloud MixTranscoding output encoding parameters
-         * @type {EncodeParams || null}
-         */
-        this.EncodeParams = null;
-
-        /**
-         * On-Cloud MixTranscoding output layout parameters
-         * @type {LayoutParams || null}
-         */
-        this.LayoutParams = null;
-
-        /**
-         * Relayed push parameters of a non-Tencent Cloud CDN
-         * @type {PublishCdnParams || null}
-         */
-        this.PublishCdnParams = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.StrRoomId = 'StrRoomId' in params ? params.StrRoomId : null;
-
-        if (params.OutputParams) {
-            let obj = new OutputParams();
-            obj.deserialize(params.OutputParams)
-            this.OutputParams = obj;
-        }
-
-        if (params.EncodeParams) {
-            let obj = new EncodeParams();
-            obj.deserialize(params.EncodeParams)
-            this.EncodeParams = obj;
-        }
-
-        if (params.LayoutParams) {
-            let obj = new LayoutParams();
-            obj.deserialize(params.LayoutParams)
-            this.LayoutParams = obj;
-        }
-
-        if (params.PublishCdnParams) {
-            let obj = new PublishCdnParams();
-            obj.deserialize(params.PublishCdnParams)
-            this.PublishCdnParams = obj;
-        }
-
-    }
-}
-
-/**
- * MCU On-Cloud MixTranscoding layout parameters
- * @class
- */
-class LayoutParams extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * On-cloud stream mix layout template ID. 0: floating template (default value); 1: grid template; 2: screen sharing template; 3: picture-in-picture template; 4: custom template.
-         * @type {number || null}
-         */
-        this.Template = null;
-
-        /**
-         * ID of the user in the big image, which takes effect in a screen sharing, floating, or picture-in-picture template.
-         * @type {string || null}
-         */
-        this.MainVideoUserId = null;
-
-        /**
-         * Stream type of the big image, which takes effect in a screen sharing, floating, or picture-in-picture template. 0: camera; 1: screen sharing. If a web user's stream is displayed in the big image on the left, enter 0 for this parameter.
-         * @type {number || null}
-         */
-        this.MainVideoStreamType = null;
-
-        /**
-         * Layout parameter of the small image, which takes effect in a picture-in-picture template.
-         * @type {SmallVideoLayoutParams || null}
-         */
-        this.SmallVideoLayoutParams = null;
-
-        /**
-         * You can set the layout parameter as 1 or 0 in the screen sharing template. 1: big image on the right and small images on the left, 0: big image on the left and small images on the right. The default value is 0. 
-         * @type {number || null}
-         */
-        this.MainVideoRightAlign = null;
-
-        /**
-         * A user list, which takes effect for floating, grid, or screen sharing templates. When the user list has been set, the stream mix output for users in this user list will include both audio and video; the stream mix output for users not in the list will only include audio. Up to 16 users can be set.
+         * The bucket to save data, which is an array of strings that can contain letters (a-z and A-Z) and numbers (0-9). For example, if the value of this parameter is `["prefix1", "prefix2"]`, the recording file `xxx.m3u8` will be saved as `prefix1/prefix2/TaskId/xxx.m3u8`.
          * @type {Array.<string> || null}
          */
-        this.MixVideoUids = null;
-
-        /**
-         * Valid in custom template, used to specify the video image position of a user in mixed streams.
-         * @type {Array.<PresetLayoutConfig> || null}
-         */
-        this.PresetLayoutConfig = null;
-
-        /**
-         * Valid in custom templates. 1: the placeholding feature is enabled; 0 (default): the feature is disabled. When the feature is enabled, but a user for whom a position is reserved is not sending video data, the position will show the corresponding placeholder image.
-         * @type {number || null}
-         */
-        this.PlaceHolderMode = null;
-
-        /**
-         * Whether an audio-only stream occupies an image spot, which takes effect in a floating, grid, or screen sharing template. Valid values: 0 (default): when a floating or grid template is used, users sending audio only occupy image spots; when a screen sharing template is used, users (except the user whose screen is shared) sending audio only do not occupy image spots; 1: users sending audio only occupy image spots; 2: users sending audio only do not occupy image spots.
-         * @type {number || null}
-         */
-        this.PureAudioHoldPlaceMode = null;
-
-        /**
-         * Watermark parameters
-         * @type {WaterMarkParams || null}
-         */
-        this.WaterMarkParams = null;
+        this.FileNamePrefix = null;
 
     }
 
@@ -346,248 +105,176 @@ class LayoutParams extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Template = 'Template' in params ? params.Template : null;
-        this.MainVideoUserId = 'MainVideoUserId' in params ? params.MainVideoUserId : null;
-        this.MainVideoStreamType = 'MainVideoStreamType' in params ? params.MainVideoStreamType : null;
+        this.Vendor = 'Vendor' in params ? params.Vendor : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.FileNamePrefix = 'FileNamePrefix' in params ? params.FileNamePrefix : null;
 
-        if (params.SmallVideoLayoutParams) {
-            let obj = new SmallVideoLayoutParams();
-            obj.deserialize(params.SmallVideoLayoutParams)
-            this.SmallVideoLayoutParams = obj;
+    }
+}
+
+/**
+ * The information of the recording files, which is returned by the `DescribeCloudRecording` API.
+ * @class
+ */
+class StorageFile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The user whose stream is recorded into the file. In the mixed-stream recording mode, this parameter will be empty.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * The filename.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * The type of the media recorded.
+video
+audio
+audio_video
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TrackType = null;
+
+        /**
+         * The start time (Unix timestamp) of the recording file.
+         * @type {number || null}
+         */
+        this.BeginTimeStamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.MainVideoRightAlign = 'MainVideoRightAlign' in params ? params.MainVideoRightAlign : null;
-        this.MixVideoUids = 'MixVideoUids' in params ? params.MixVideoUids : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.TrackType = 'TrackType' in params ? params.TrackType : null;
+        this.BeginTimeStamp = 'BeginTimeStamp' in params ? params.BeginTimeStamp : null;
 
-        if (params.PresetLayoutConfig) {
-            this.PresetLayoutConfig = new Array();
-            for (let z in params.PresetLayoutConfig) {
-                let obj = new PresetLayoutConfig();
-                obj.deserialize(params.PresetLayoutConfig[z]);
-                this.PresetLayoutConfig.push(obj);
+    }
+}
+
+/**
+ * The watermark layout.
+ * @class
+ */
+class WaterMark extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The watermark type. 0 (default): image; 1: text (not supported yet).
+         * @type {number || null}
+         */
+        this.WaterMarkType = null;
+
+        /**
+         * The information of watermark images. This parameter is required if the watermark type is image.
+         * @type {WaterMarkImage || null}
+         */
+        this.WaterMarkImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WaterMarkType = 'WaterMarkType' in params ? params.WaterMarkType : null;
+
+        if (params.WaterMarkImage) {
+            let obj = new WaterMarkImage();
+            obj.deserialize(params.WaterMarkImage)
+            this.WaterMarkImage = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeCloudRecording response structure.
+ * @class
+ */
+class DescribeCloudRecordingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the recording task.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The status of the on-cloud recording task.
+Idle: The task is idle.
+InProgress: The task is in progress.
+Exited: The task is being ended.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The information of the recording files.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<StorageFile> || null}
+         */
+        this.StorageFileList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.StorageFileList) {
+            this.StorageFileList = new Array();
+            for (let z in params.StorageFileList) {
+                let obj = new StorageFile();
+                obj.deserialize(params.StorageFileList[z]);
+                this.StorageFileList.push(obj);
             }
         }
-        this.PlaceHolderMode = 'PlaceHolderMode' in params ? params.PlaceHolderMode : null;
-        this.PureAudioHoldPlaceMode = 'PureAudioHoldPlaceMode' in params ? params.PureAudioHoldPlaceMode : null;
-
-        if (params.WaterMarkParams) {
-            let obj = new WaterMarkParams();
-            obj.deserialize(params.WaterMarkParams)
-            this.WaterMarkParams = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * Returned quality data in the format of time:value
+ * DismissRoomByStrRoomId request structure.
  * @class
  */
-class TimeValue extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Time in the format of UNIX timestamp, such as 1590065877s.
-         * @type {number || null}
-         */
-        this.Time = null;
-
-        /**
-         * Parameter value returned in the current time. For example, if `bigvCapFps` is set to 0 when the current time is 1590065877s (UNIX timestamp), the value of this parameter is 0.
-         * @type {number || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Time = 'Time' in params ? params.Time : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * CreatePicture request structure.
- * @class
- */
-class CreatePictureRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Application ID
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Base64-encoded image content
-         * @type {string || null}
-         */
-        this.Content = null;
-
-        /**
-         * Image file extension
-         * @type {string || null}
-         */
-        this.Suffix = null;
-
-        /**
-         * Image height
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Image width
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * X-axis value of the image’s position
-         * @type {number || null}
-         */
-        this.XPosition = null;
-
-        /**
-         * Y-axis value of the image’s position
-         * @type {number || null}
-         */
-        this.YPosition = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.Content = 'Content' in params ? params.Content : null;
-        this.Suffix = 'Suffix' in params ? params.Suffix : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.XPosition = 'XPosition' in params ? params.XPosition : null;
-        this.YPosition = 'YPosition' in params ? params.YPosition : null;
-
-    }
-}
-
-/**
- * DescribeTrtcMcuTranscodeTime request structure.
- * @class
- */
-class DescribeTrtcMcuTranscodeTimeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Query start date in the format of YYYY-MM-DD
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end date in the format of YYYY-MM-DD
-The period queried in a request cannot be longer than 31 days.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Application ID, which is optional. If it is specified, duration statistics for the specified application are returned; otherwise, the total durations of all applications are returned.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-
-    }
-}
-
-/**
- * Billable relaying and transcoding duration statistics
-If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
- * @class
- */
-class SdkAppIdTrtcMcuTranscodeTimeUsage extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Time point for the statistics. e.g., `2020-09-07` or `2020-09-07 00:05:05`
-         * @type {string || null}
-         */
-        this.TimeKey = null;
-
-        /**
-         * Audio duration (s)
-         * @type {number || null}
-         */
-        this.AudioTime = null;
-
-        /**
-         * SD video duration (s)
-         * @type {number || null}
-         */
-        this.VideoTimeSd = null;
-
-        /**
-         * HD video duration (s)
-         * @type {number || null}
-         */
-        this.VideoTimeHd = null;
-
-        /**
-         * FHD video duration (s)
-         * @type {number || null}
-         */
-        this.VideoTimeFhd = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
-        this.AudioTime = 'AudioTime' in params ? params.AudioTime : null;
-        this.VideoTimeSd = 'VideoTimeSd' in params ? params.VideoTimeSd : null;
-        this.VideoTimeHd = 'VideoTimeHd' in params ? params.VideoTimeHd : null;
-        this.VideoTimeFhd = 'VideoTimeFhd' in params ? params.VideoTimeFhd : null;
-
-    }
-}
-
-/**
- * RemoveUserByStrRoomId request structure.
- * @class
- */
-class RemoveUserByStrRoomIdRequest extends  AbstractModel {
+class DismissRoomByStrRoomIdRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -603,12 +290,6 @@ class RemoveUserByStrRoomIdRequest extends  AbstractModel {
          */
         this.RoomId = null;
 
-        /**
-         * List of up to 10 users to be removed
-         * @type {Array.<string> || null}
-         */
-        this.UserIds = null;
-
     }
 
     /**
@@ -620,7 +301,6 @@ class RemoveUserByStrRoomIdRequest extends  AbstractModel {
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
-        this.UserIds = 'UserIds' in params ? params.UserIds : null;
 
     }
 }
@@ -654,684 +334,80 @@ class DismissRoomResponse extends  AbstractModel {
 }
 
 /**
- * Event information, including event timestamp and event ID.
+ * The custom layout parameters.
  * @class
  */
-class EventMessage extends  AbstractModel {
+class MixLayout extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video stream type:
-0: non-video event;
-2: big image;
-3: small image;
-7: relayed stream image.
+         * The Y axis of the window’s top-left corner. Value range: [0, 1920]. The value cannot be larger than the canvas height.
          * @type {number || null}
          */
-        this.Type = null;
+        this.Top = null;
 
         /**
-         * Event reporting time in the format of UNIX timestamp, such as 1589891188801ms
+         * The X axis of the window’s top-left corner. Value range: [0, 1920]. The value cannot be larger than the canvas width.
          * @type {number || null}
          */
-        this.Time = null;
+        this.Left = null;
 
         /**
-         * Event ID. Events divide into SDK events and WebRTC events. For more information, please see Appendix - Event ID Mapping Table at https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
+         * The relative width of the window. Value range: [0, 1920]. The sum of the values of this parameter and `Left` cannot exceed the canvas width.
          * @type {number || null}
          */
-        this.EventId = null;
+        this.Width = null;
 
         /**
-         * First event parameter, such as video resolution width
+         * The relative height of the window. Value range: [0, 1920]. The sum of the values of this parameter and `Top` cannot exceed the canvas height.
          * @type {number || null}
          */
-        this.ParamOne = null;
+        this.Height = null;
 
         /**
-         * Second event parameter, such as video resolution height
-         * @type {number || null}
-         */
-        this.ParamTwo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
-        this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
-
-    }
-}
-
-/**
- * DescribeRecordStatistic request structure.
- * @class
- */
-class DescribeRecordStatisticRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Query start date in the format of YYYY-MM-DD
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end date in the format of YYYY-MM-DD
-The period queried in a request cannot be longer than 31 days.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Application ID, which is optional. If it is specified, duration statistics for the specified application are returned; otherwise, the total durations of all applications are returned.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-
-    }
-}
-
-/**
- * DescribeUserInformation request structure.
- * @class
- */
-class DescribeUserInformationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
-         * @type {string || null}
-         */
-        this.CommId = null;
-
-        /**
-         * Query start time (s) in the format of Unix timestamp (e.g., 1590065777), which must be a time point in the last 14 days
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end time (s) in the format of Unix timestamp (e.g., 1590065877)
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * `SDKAppID` of the users to query, e.g., 1400353843
-         * @type {string || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * The array of user IDs for query. You can enter up to 6 user IDs. If it is left empty, data of 6 users will be returned.
-         * @type {Array.<string> || null}
-         */
-        this.UserIds = null;
-
-        /**
-         * Page index starting from 0. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned.
-         * @type {string || null}
-         */
-        this.PageNumber = null;
-
-        /**
-         * Number of entries per page. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned. `PageSize` is up to 100.
-         * @type {string || null}
-         */
-        this.PageSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CommId = 'CommId' in params ? params.CommId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.UserIds = 'UserIds' in params ? params.UserIds : null;
-        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-
-    }
-}
-
-/**
- * DescribeCallDetail request structure.
- * @class
- */
-class DescribeCallDetailRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds, such as 1400353843_218695_1590065777. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
-         * @type {string || null}
-         */
-        this.CommId = null;
-
-        /**
-         * Query start time (s) in the format of Unix timestamp (e.g., 1590065777), which must be a time point in the last 14 days. The start and end time for query must not be more than 1 hour apart.
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end time (s) in the format of Unix timestamp, e.g., 1590065877
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * `SDKAppID` of the users to query, e.g., 1400353843
-         * @type {string || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * User array to query, which contains up to 6 users. If it is left empty, 6 users will be returned by default.
-         * @type {Array.<string> || null}
-         */
-        this.UserIds = null;
-
-        /**
-         * Metric to query. The user list will be returned if it is left empty; all metrics will be returned if its value is `all`.
-appCpu: CPU utilization of the application;
-sysCpu: CPU utilization of the system;
-aBit: upstream/downstream audio bitrate;
-aBlock: audio lag duration;
-bigvBit: upstream/downstream video bitrate;
-bigvCapFps: frame rate for capturing videos;
-bigvEncFps: frame rate for sending videos;
-bigvDecFps: rendering frame rate;
-bigvBlock: video lag duration;
-aLoss: upstream/downstream audio packet loss;
-bigvLoss: upstream/downstream video packet loss;
-bigvWidth: upstream/downstream resolution in width;
-bigvHeight: upstream/downstream resolution in height.
-         * @type {Array.<string> || null}
-         */
-        this.DataType = null;
-
-        /**
-         * Page index starting from 0. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned by default.
-         * @type {string || null}
-         */
-        this.PageNumber = null;
-
-        /**
-         * Number of entries per page. If either `PageNumber` or `PageSize` is left empty, 6 data entries will be returned by default. When either `DataType` or `UserId` is not null, `PageSize` is up to 6. When `DataType` and `UserId` are null, `PageSize` is up to 100.
-         * @type {string || null}
-         */
-        this.PageSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CommId = 'CommId' in params ? params.CommId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.UserIds = 'UserIds' in params ? params.UserIds : null;
-        this.DataType = 'DataType' in params ? params.DataType : null;
-        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-
-    }
-}
-
-/**
- * Historical scale information
- * @class
- */
-class ScaleInfomation extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Start time for each day
-         * @type {number || null}
-         */
-        this.Time = null;
-
-        /**
-         * Number of users in room. If a user enters the room for multiple times, the user will be counted as one user.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UserNumber = null;
-
-        /**
-         * Number of room entries. Every time when a user enters the room, it will be counted as one room entry.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UserCount = null;
-
-        /**
-         * Number of rooms under `sdkappid` on a day
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RoomNumbers = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Time = 'Time' in params ? params.Time : null;
-        this.UserNumber = 'UserNumber' in params ? params.UserNumber : null;
-        this.UserCount = 'UserCount' in params ? params.UserCount : null;
-        this.RoomNumbers = 'RoomNumbers' in params ? params.RoomNumbers : null;
-
-    }
-}
-
-/**
- * DescribeUserInformation response structure.
- * @class
- */
-class DescribeUserInformationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of users whose information will be returned
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * User information list
-Note: this field may return `null`, indicating that no valid value was found.
-         * @type {Array.<UserInformation> || null}
-         */
-        this.UserList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.UserList) {
-            this.UserList = new Array();
-            for (let z in params.UserList) {
-                let obj = new UserInformation();
-                obj.deserialize(params.UserList[z]);
-                this.UserList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Output stream encoding parameters for MCU On-Cloud MixTranscoding
- * @class
- */
-class EncodeParams extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Output audio sample rate (Hz) for On-Cloud MixTranscoding. Valid values: 48000, 44100, 32000, 24000, 16000, 8000
-         * @type {number || null}
-         */
-        this.AudioSampleRate = null;
-
-        /**
-         * Output audio bitrate (Kbps) for On-Cloud MixTranscoding. Value range: 8-500
-         * @type {number || null}
-         */
-        this.AudioBitrate = null;
-
-        /**
-         * Number of sound channels of output stream for On-Cloud MixTranscoding. Valid values: 1, 2. 1 represents mono-channel, and 2 represents dual-channel.
-         * @type {number || null}
-         */
-        this.AudioChannels = null;
-
-        /**
-         * Output stream width in pixels for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [0, 1920].
-         * @type {number || null}
-         */
-        this.VideoWidth = null;
-
-        /**
-         * Output stream height in pixels for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [0, 1080].
-         * @type {number || null}
-         */
-        this.VideoHeight = null;
-
-        /**
-         * Output bitrate (Kbps) for On-Cloud MixTranscoding, which is required for audio-video output. Value range: 1-10000
-         * @type {number || null}
-         */
-        this.VideoBitrate = null;
-
-        /**
-         * Output stream frame rate for On-Cloud MixTranscoding in FPS. This parameter is required for audio/video outputs. Value range: [1, 60].
-         * @type {number || null}
-         */
-        this.VideoFramerate = null;
-
-        /**
-         * Output stream GOP in seconds for On-Cloud MixTranscoding, which is required for audio/video output. Value range: [1, 5].
-         * @type {number || null}
-         */
-        this.VideoGop = null;
-
-        /**
-         * Output background color for On-Cloud MixTranscoding. Valid values: decimal integers. Commonly used colors include:
-Red: 0xff0000, whose decimal number is 16724736
-Yellow: 0xffff00, whose decimal number is 16776960
-Green: 0x33cc00, whose decimal number is 3394560
-Blue: 0x0066ff, whose decimal number is 26367
-Black: 0x000000, whose decimal number is 0
-White: 0xFFFFFF, whose decimal number is 16777215
-Grey: 0x999999, whose decimal number is 10066329
-         * @type {number || null}
-         */
-        this.BackgroundColor = null;
-
-        /**
-         * Output stream background image for stream mix. Its value is the ID of image uploaded through the TRTC Console.
-         * @type {number || null}
-         */
-        this.BackgroundImageId = null;
-
-        /**
-         * Output audio codec for On-Cloud MixTranscoding. Valid values: 0, 1, 2. 0 (default): LC-AAC; 1: HE-AAC; 2: HE-AACv2. If this parameter is set to 2 (HE-AACv2), On-Cloud MixTranscoding can produce only dual-channel streams. If it is set to 1 (HE-AAC) or 2 (HE-AACv2), the valid values for the audio sample rate of output streams are 48000, 44100, 32000, 24000, and 16000.
-         * @type {number || null}
-         */
-        this.AudioCodec = null;
-
-        /**
-         * URL of the background image for the mixed stream, which can be in PNG, JPG, JPEG, or BMP format and does not support the alpha channel. The URL must not exceed 512 bytes. When both `BackgroundImageUrl` and `BackgroundImageId` are specified, the former will be used. The background image must not exceed 10 MB.
-         * @type {string || null}
-         */
-        this.BackgroundImageUrl = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AudioSampleRate = 'AudioSampleRate' in params ? params.AudioSampleRate : null;
-        this.AudioBitrate = 'AudioBitrate' in params ? params.AudioBitrate : null;
-        this.AudioChannels = 'AudioChannels' in params ? params.AudioChannels : null;
-        this.VideoWidth = 'VideoWidth' in params ? params.VideoWidth : null;
-        this.VideoHeight = 'VideoHeight' in params ? params.VideoHeight : null;
-        this.VideoBitrate = 'VideoBitrate' in params ? params.VideoBitrate : null;
-        this.VideoFramerate = 'VideoFramerate' in params ? params.VideoFramerate : null;
-        this.VideoGop = 'VideoGop' in params ? params.VideoGop : null;
-        this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
-        this.BackgroundImageId = 'BackgroundImageId' in params ? params.BackgroundImageId : null;
-        this.AudioCodec = 'AudioCodec' in params ? params.AudioCodec : null;
-        this.BackgroundImageUrl = 'BackgroundImageUrl' in params ? params.BackgroundImageUrl : null;
-
-    }
-}
-
-/**
- * RemoveUserByStrRoomId response structure.
- * @class
- */
-class RemoveUserByStrRoomIdResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StartMCUMixTranscode request structure.
- * @class
- */
-class StartMCUMixTranscodeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * `SDKAppId` of TRTC.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Room ID.
-         * @type {number || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * On-Cloud MixTranscoding output control parameters.
-         * @type {OutputParams || null}
-         */
-        this.OutputParams = null;
-
-        /**
-         * On-Cloud MixTranscoding output encoding parameters.
-         * @type {EncodeParams || null}
-         */
-        this.EncodeParams = null;
-
-        /**
-         * On-Cloud MixTranscoding output layout parameters.
-         * @type {LayoutParams || null}
-         */
-        this.LayoutParams = null;
-
-        /**
-         * Relayed push parameters of a non-Tencent Cloud CDN
-         * @type {PublishCdnParams || null}
-         */
-        this.PublishCdnParams = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-
-        if (params.OutputParams) {
-            let obj = new OutputParams();
-            obj.deserialize(params.OutputParams)
-            this.OutputParams = obj;
-        }
-
-        if (params.EncodeParams) {
-            let obj = new EncodeParams();
-            obj.deserialize(params.EncodeParams)
-            this.EncodeParams = obj;
-        }
-
-        if (params.LayoutParams) {
-            let obj = new LayoutParams();
-            obj.deserialize(params.LayoutParams)
-            this.LayoutParams = obj;
-        }
-
-        if (params.PublishCdnParams) {
-            let obj = new PublishCdnParams();
-            obj.deserialize(params.PublishCdnParams)
-            this.PublishCdnParams = obj;
-        }
-
-    }
-}
-
-/**
- * StopMCUMixTranscode request structure.
- * @class
- */
-class StopMCUMixTranscodeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * `SDKAppId` of TRTC.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Room ID.
-         * @type {number || null}
-         */
-        this.RoomId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-
-    }
-}
-
-/**
- * User information, including when the user enters/exits a room
- * @class
- */
-class UserInformation extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Room ID
-         * @type {string || null}
-         */
-        this.RoomStr = null;
-
-        /**
-         * User ID
+         * The user ID (string) of the anchor whose video is shown in the window. If you do not set this parameter, anchors’ videos will be shown in their room entry sequence.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * The time when the user enters the room
+         * The degree of transparency of the canvas. Value range: [0, 255]. 0 means fully opaque, and 255 means fully transparent.
          * @type {number || null}
          */
-        this.JoinTs = null;
+        this.Alpha = null;
 
         /**
-         * The time when the user exits the room. If the user is still in the room, the current time will be returned
+         * 0: Stretch. In this mode, the image is stretched to fill the space available. The whole image is visible after scaling. However, if the original aspect ratio is different from the target, the image may be distorted.
+
+1: Crop (default). In this mode, if the original aspect ratio is different from the target, the image will be cropped according to the target before being stretched to fill the space available. The image will not be distorted.
+
+2: Blank. This mode stretches the image while keeping its original aspect ratio. If the original aspect ratio is different from the target, there may be blank spaces to the top and bottom or to the left and right of the window.
+
+3: Smart stretch. This mode is similar to the crop mode, except that it restricts cropping to 20% of the image’s width or height at most.
          * @type {number || null}
          */
-        this.LeaveTs = null;
+        this.RenderMode = null;
 
         /**
-         * Device type
+         * The type of the stream subscribed to.
+0: Primary stream (default)
+1: Substream
+         * @type {number || null}
+         */
+        this.MediaId = null;
+
+        /**
+         * The image layer. 0 is the default value and means the bottommost layer.
+         * @type {number || null}
+         */
+        this.ImageLayer = null;
+
+        /**
+         * The download URL of the background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
          * @type {string || null}
          */
-        this.DeviceType = null;
-
-        /**
-         * SDK version number
-         * @type {string || null}
-         */
-        this.SdkVersion = null;
-
-        /**
-         * Client IP
-         * @type {string || null}
-         */
-        this.ClientIp = null;
-
-        /**
-         * Determine whether a user has left the room
-         * @type {boolean || null}
-         */
-        this.Finished = null;
+        this.SubBackgroundImage = null;
 
     }
 
@@ -1342,197 +418,16 @@ class UserInformation extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RoomStr = 'RoomStr' in params ? params.RoomStr : null;
+        this.Top = 'Top' in params ? params.Top : null;
+        this.Left = 'Left' in params ? params.Left : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
-        this.JoinTs = 'JoinTs' in params ? params.JoinTs : null;
-        this.LeaveTs = 'LeaveTs' in params ? params.LeaveTs : null;
-        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
-        this.SdkVersion = 'SdkVersion' in params ? params.SdkVersion : null;
-        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
-        this.Finished = 'Finished' in params ? params.Finished : null;
-
-    }
-}
-
-/**
- * DescribeHistoryScale request structure.
- * @class
- */
-class DescribeHistoryScaleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * `SDKAppID` of the users to query, e.g., 1400188366
-         * @type {string || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Query start time (s) in the format of Unix timestamp (e.g., 1587571000), which must be a time point in the last 5 days
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end time (s) in the format of Unix timestamp, e.g., 1588034999
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-
-    }
-}
-
-/**
- * DeletePicture request structure.
- * @class
- */
-class DeletePictureRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Image ID
-         * @type {number || null}
-         */
-        this.PictureId = null;
-
-        /**
-         * Application ID
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PictureId = 'PictureId' in params ? params.PictureId : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-
-    }
-}
-
-/**
- * DescribeRoomInformation response structure.
- * @class
- */
-class DescribeRoomInformationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of data entries displayed on the current page
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * Room information list
-         * @type {Array.<RoomState> || null}
-         */
-        this.RoomList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.RoomList) {
-            this.RoomList = new Array();
-            for (let z in params.RoomList) {
-                let obj = new RoomState();
-                obj.deserialize(params.RoomList[z]);
-                this.RoomList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Recording duration statistics
- * @class
- */
-class RecordUsage extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Time point for the statistics, e.g., `2020-09-07` or `2020-09-07 00:05:05`
-         * @type {string || null}
-         */
-        this.TimeKey = null;
-
-        /**
-         * SD video duration (s)
-         * @type {number || null}
-         */
-        this.Class1VideoTime = null;
-
-        /**
-         * HD video duration (s)
-         * @type {number || null}
-         */
-        this.Class2VideoTime = null;
-
-        /**
-         * FHD video duration (s)
-         * @type {number || null}
-         */
-        this.Class3VideoTime = null;
-
-        /**
-         * Audio duration (s)
-         * @type {number || null}
-         */
-        this.AudioTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
-        this.Class1VideoTime = 'Class1VideoTime' in params ? params.Class1VideoTime : null;
-        this.Class2VideoTime = 'Class2VideoTime' in params ? params.Class2VideoTime : null;
-        this.Class3VideoTime = 'Class3VideoTime' in params ? params.Class3VideoTime : null;
-        this.AudioTime = 'AudioTime' in params ? params.AudioTime : null;
+        this.Alpha = 'Alpha' in params ? params.Alpha : null;
+        this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
+        this.MediaId = 'MediaId' in params ? params.MediaId : null;
+        this.ImageLayer = 'ImageLayer' in params ? params.ImageLayer : null;
+        this.SubBackgroundImage = 'SubBackgroundImage' in params ? params.SubBackgroundImage : null;
 
     }
 }
@@ -1580,211 +475,24 @@ class RemoveUserRequest extends  AbstractModel {
 }
 
 /**
- * MCU On-Cloud MixTranscoding output parameters
+ * The storage parameters.
  * @class
  */
-class OutputParams extends  AbstractModel {
+class StorageParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Custom live stream ID, which must be different from the ID of relayed stream.
-         * @type {string || null}
+         * The cloud storage information.
+         * @type {CloudStorage || null}
          */
-        this.StreamId = null;
+        this.CloudStorage = null;
 
         /**
-         * Value range: [0, 1]. If it is 0, live streams are audio and video; if it is 1, live streams are only audio. Default value: 0.
-         * @type {number || null}
+         * The VOD information.
+         * @type {CloudVod || null}
          */
-        this.PureAudioStream = null;
-
-        /**
-         * Prefix of custom recording file names. Please enable the recording feature in the TRTC console first. https://intl.cloud.tencent.com/document/product/647/50768?from_cn_redirect=1
-         * @type {string || null}
-         */
-        this.RecordId = null;
-
-        /**
-         * Whether to record audio only. Valid values: 0, 1. `0`: no meaning; `1`: records into MP3 files. This parameter is not recommended. Instead, you are advised to create an audio-only recording template in the TRTC console.
-         * @type {number || null}
-         */
-        this.RecordAudioOnly = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StreamId = 'StreamId' in params ? params.StreamId : null;
-        this.PureAudioStream = 'PureAudioStream' in params ? params.PureAudioStream : null;
-        this.RecordId = 'RecordId' in params ? params.RecordId : null;
-        this.RecordAudioOnly = 'RecordAudioOnly' in params ? params.RecordAudioOnly : null;
-
-    }
-}
-
-/**
- * ModifyPicture request structure.
- * @class
- */
-class ModifyPictureRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Image ID
-         * @type {number || null}
-         */
-        this.PictureId = null;
-
-        /**
-         * Application ID
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Image height
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Image width
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * X-axis value of the image’s position
-         * @type {number || null}
-         */
-        this.XPosition = null;
-
-        /**
-         * Y-axis value of the image’s position
-         * @type {number || null}
-         */
-        this.YPosition = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PictureId = 'PictureId' in params ? params.PictureId : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.XPosition = 'XPosition' in params ? params.XPosition : null;
-        this.YPosition = 'YPosition' in params ? params.YPosition : null;
-
-    }
-}
-
-/**
- * CreateTroubleInfo response structure.
- * @class
- */
-class CreateTroubleInfoResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StopMCUMixTranscodeByStrRoomId request structure.
- * @class
- */
-class StopMCUMixTranscodeByStrRoomIdRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * `SDKAppId` of TRTC
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Room ID in string type
-         * @type {string || null}
-         */
-        this.StrRoomId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.StrRoomId = 'StrRoomId' in params ? params.StrRoomId : null;
-
-    }
-}
-
-/**
- * Quality data returned by ES
- * @class
- */
-class QualityData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Data content
-         * @type {Array.<TimeValue> || null}
-         */
-        this.Content = null;
-
-        /**
-         * User ID
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * Peer ID. An empty value indicates that the returned data is upstream.
-         * @type {string || null}
-         */
-        this.PeerId = null;
-
-        /**
-         * Data type
-         * @type {string || null}
-         */
-        this.DataType = null;
+        this.CloudVod = null;
 
     }
 
@@ -1796,237 +504,17 @@ class QualityData extends  AbstractModel {
             return;
         }
 
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new TimeValue();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
-            }
-        }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.PeerId = 'PeerId' in params ? params.PeerId : null;
-        this.DataType = 'DataType' in params ? params.DataType : null;
-
-    }
-}
-
-/**
- * Types of exception events that can cause an exceptional experience
- * @class
- */
-class AbnormalEvent extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Exception event ID. For specific values, please see Appendix. Exceptional Experience ID Mapping Table.
-         * @type {number || null}
-         */
-        this.AbnormalEventId = null;
-
-        /**
-         * Remote user ID. If this parameter is left empty, it indicates that the exception event is not caused by the remote user.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PeerId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AbnormalEventId = 'AbnormalEventId' in params ? params.AbnormalEventId : null;
-        this.PeerId = 'PeerId' in params ? params.PeerId : null;
-
-    }
-}
-
-/**
- * StopMCUMixTranscodeByStrRoomId response structure.
- * @class
- */
-class StopMCUMixTranscodeByStrRoomIdResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeletePicture response structure.
- * @class
- */
-class DeletePictureResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateTroubleInfo request structure.
- * @class
- */
-class CreateTroubleInfoRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Application ID
-         * @type {string || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Room ID
-         * @type {string || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * Teacher user ID
-         * @type {string || null}
-         */
-        this.TeacherUserId = null;
-
-        /**
-         * Student user ID
-         * @type {string || null}
-         */
-        this.StudentUserId = null;
-
-        /**
-         * ID of the user (teacher or student) with exception.
-         * @type {string || null}
-         */
-        this.TroubleUserId = null;
-
-        /**
-         * Exception type.
-1: exceptional video
-2: exceptional audio
-3: exceptional video and audio
-5: exceptional room entry
-4: course switch
-6: help seeking
-7: problem feedback
-8: complaint
-         * @type {number || null}
-         */
-        this.TroubleType = null;
-
-        /**
-         * UNIX timestamp when the exception occurred in seconds.
-         * @type {number || null}
-         */
-        this.TroubleTime = null;
-
-        /**
-         * Exception details
-         * @type {string || null}
-         */
-        this.TroubleMsg = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-        this.TeacherUserId = 'TeacherUserId' in params ? params.TeacherUserId : null;
-        this.StudentUserId = 'StudentUserId' in params ? params.StudentUserId : null;
-        this.TroubleUserId = 'TroubleUserId' in params ? params.TroubleUserId : null;
-        this.TroubleType = 'TroubleType' in params ? params.TroubleType : null;
-        this.TroubleTime = 'TroubleTime' in params ? params.TroubleTime : null;
-        this.TroubleMsg = 'TroubleMsg' in params ? params.TroubleMsg : null;
-
-    }
-}
-
-/**
- * List of SDK or WebRTC events.
- * @class
- */
-class EventList extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Data content
-         * @type {Array.<EventMessage> || null}
-         */
-        this.Content = null;
-
-        /**
-         * Sender `userId`
-         * @type {string || null}
-         */
-        this.PeerId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.CloudStorage) {
+            let obj = new CloudStorage();
+            obj.deserialize(params.CloudStorage)
+            this.CloudStorage = obj;
         }
 
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new EventMessage();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
-            }
+        if (params.CloudVod) {
+            let obj = new CloudVod();
+            obj.deserialize(params.CloudVod)
+            this.CloudVod = obj;
         }
-        this.PeerId = 'PeerId' in params ? params.PeerId : null;
 
     }
 }
@@ -2067,18 +555,12 @@ class DismissRoomRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDetailEvent response structure.
+ * RemoveUserByStrRoomId response structure.
  * @class
  */
-class DescribeDetailEventResponse extends  AbstractModel {
+class RemoveUserByStrRoomIdResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * List of returned events. An empty array will be returned if no data can be found.
-         * @type {Array.<EventList> || null}
-         */
-        this.Data = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2095,25 +577,388 @@ class DescribeDetailEventResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new EventList();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DismissRoomByStrRoomId request structure.
+ * DescribeCloudRecording request structure.
  * @class
  */
-class DismissRoomByStrRoomIdRequest extends  AbstractModel {
+class DescribeCloudRecordingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The `SDKAppID` of the room whose streams are recorded.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The unique ID of the recording task, which is returned after recording starts successfully.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * The Tencent Cloud VOD parameters.
+ * @class
+ */
+class TencentVod extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The operation to perform on the media uploaded. The value of this parameter is the name of a task flow template. You can create a custom task flow template in Tencent Cloud VOD.
+         * @type {string || null}
+         */
+        this.Procedure = null;
+
+        /**
+         * The expiration time of the media file, which is a time period (seconds) from the current time. For example, `86400` means to save the media file for one day. To save the file permanently, set this parameter to `0`.
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * The storage region. Set this parameter if you have special requirements on the storage region.
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * The category ID, which is returned after you create a category by calling an API. You can use categories to manage media files.
+The default value is `0`, which means others.
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * The VOD subapplication ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The task flow context, which is passed through after the task is completed.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * The upload context, which is passed through after upload is completed.
+         * @type {string || null}
+         */
+        this.SourceContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Procedure = 'Procedure' in params ? params.Procedure : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+
+    }
+}
+
+/**
+ * The on-cloud recording parameters.
+ * @class
+ */
+class RecordParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The recording mode.
+1: Single-stream recording. Records the audio and video of each subscribed user (`UserId`) in a room and saves the recording files (M3U8/TS) to the cloud.
+2: Mixed-stream recording. Mixes the audios and videos of subscribed users (`UserId`) in a room, records the mixed stream, and saves the recording files (M3U8/TS) to the cloud.
+         * @type {number || null}
+         */
+        this.RecordMode = null;
+
+        /**
+         * The time period (seconds) to wait after there are no anchors in a room to stop recording automatically. The value cannot be smaller than 5 or larger than 86400 (24 hours). Default value: 30.
+         * @type {number || null}
+         */
+        this.MaxIdleTime = null;
+
+        /**
+         * The media type of the streams to record.
+0: Audio and video streams (default)
+1: Audio streams only
+2: Video streams only
+         * @type {number || null}
+         */
+        this.StreamType = null;
+
+        /**
+         * The allowlist/blocklist for stream subscription.
+         * @type {SubscribeStreamUserIds || null}
+         */
+        this.SubscribeStreamUserIds = null;
+
+        /**
+         * The format of recording files. 0 (default): HLS; 1: HLS + MP4 (recorded in HLS and converted to MP4).
+         * @type {number || null}
+         */
+        this.OutputFormat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RecordMode = 'RecordMode' in params ? params.RecordMode : null;
+        this.MaxIdleTime = 'MaxIdleTime' in params ? params.MaxIdleTime : null;
+        this.StreamType = 'StreamType' in params ? params.StreamType : null;
+
+        if (params.SubscribeStreamUserIds) {
+            let obj = new SubscribeStreamUserIds();
+            obj.deserialize(params.SubscribeStreamUserIds)
+            this.SubscribeStreamUserIds = obj;
+        }
+        this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
+
+    }
+}
+
+/**
+ * CreateCloudRecording request structure.
+ * @class
+ */
+class CreateCloudRecordingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The [room ID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include this user ID in the room ID.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * The signature (similar to login password) required for the recording robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104). |
+         * @type {string || null}
+         */
+        this.UserSig = null;
+
+        /**
+         * The on-cloud recording parameters.
+         * @type {RecordParams || null}
+         */
+        this.RecordParams = null;
+
+        /**
+         * The cloud storage parameters.
+         * @type {StorageParams || null}
+         */
+        this.StorageParams = null;
+
+        /**
+         * The type of the TRTC room ID, which must be the same as the ID type of the room whose streams are recorded.
+0: String
+1: 32-bit integer (default)
+         * @type {number || null}
+         */
+        this.RoomIdType = null;
+
+        /**
+         * The stream mixing parameters, which are valid if the mixed-stream recording mode is used.
+         * @type {MixTranscodeParams || null}
+         */
+        this.MixTranscodeParams = null;
+
+        /**
+         * The layout parameters, which are valid if the mixed-stream recording mode is used.
+         * @type {MixLayoutParams || null}
+         */
+        this.MixLayoutParams = null;
+
+        /**
+         * The amount of time (in hours) during which API requests can be made after recording starts. Calculation starts when a recording task is started (when the recording task ID is returned). Once the period elapses, the query, modification, and stop recording APIs can no longer be called, but the recording task will continue. The default value is `72` (three days), and the maximum and minimum values allowed are `720` (30 days) and `6` respectively. If you do not set this parameter, the query, modification, and stop recording APIs can be called within 72 hours after recording starts.
+         * @type {number || null}
+         */
+        this.ResourceExpiredHour = null;
+
+        /**
+         * The permission ticket for a TRTC room. This parameter is required if advanced permission control is enabled in the console, in which case the TRTC backend will verify users’ [PrivateMapKey](https://intl.cloud.tencent.com/document/product/647/32240?from_cn_redirect=1), which include an encrypted room ID and permission bit list. A user providing only `UserSig` and not `PrivateMapKey` will be unable to enter the room.
+         * @type {string || null}
+         */
+        this.PrivateMapKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserSig = 'UserSig' in params ? params.UserSig : null;
+
+        if (params.RecordParams) {
+            let obj = new RecordParams();
+            obj.deserialize(params.RecordParams)
+            this.RecordParams = obj;
+        }
+
+        if (params.StorageParams) {
+            let obj = new StorageParams();
+            obj.deserialize(params.StorageParams)
+            this.StorageParams = obj;
+        }
+        this.RoomIdType = 'RoomIdType' in params ? params.RoomIdType : null;
+
+        if (params.MixTranscodeParams) {
+            let obj = new MixTranscodeParams();
+            obj.deserialize(params.MixTranscodeParams)
+            this.MixTranscodeParams = obj;
+        }
+
+        if (params.MixLayoutParams) {
+            let obj = new MixLayoutParams();
+            obj.deserialize(params.MixLayoutParams)
+            this.MixLayoutParams = obj;
+        }
+        this.ResourceExpiredHour = 'ResourceExpiredHour' in params ? params.ResourceExpiredHour : null;
+        this.PrivateMapKey = 'PrivateMapKey' in params ? params.PrivateMapKey : null;
+
+    }
+}
+
+/**
+ * DeleteCloudRecording response structure.
+ * @class
+ */
+class DeleteCloudRecordingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The audio and video parameters for recording.
+ * @class
+ */
+class MixTranscodeParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The video transcoding parameters for recording. If you set this parameter, you must specify all its fields. If you do not set it, the default will be used.
+         * @type {VideoParams || null}
+         */
+        this.VideoParams = null;
+
+        /**
+         * The audio transcoding parameters for recording. If you set this parameter, you must specify all its fields. If you do not set it, the default will be used.
+         * @type {AudioParams || null}
+         */
+        this.AudioParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VideoParams) {
+            let obj = new VideoParams();
+            obj.deserialize(params.VideoParams)
+            this.VideoParams = obj;
+        }
+
+        if (params.AudioParams) {
+            let obj = new AudioParams();
+            obj.deserialize(params.AudioParams)
+            this.AudioParams = obj;
+        }
+
+    }
+}
+
+/**
+ * RemoveUserByStrRoomId request structure.
+ * @class
+ */
+class RemoveUserByStrRoomIdRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -2129,6 +974,12 @@ class DismissRoomByStrRoomIdRequest extends  AbstractModel {
          */
         this.RoomId = null;
 
+        /**
+         * List of up to 10 users to be removed
+         * @type {Array.<string> || null}
+         */
+        this.UserIds = null;
+
     }
 
     /**
@@ -2140,23 +991,42 @@ class DismissRoomByStrRoomIdRequest extends  AbstractModel {
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.UserIds = 'UserIds' in params ? params.UserIds : null;
 
     }
 }
 
 /**
- * StartMCUMixTranscode response structure.
+ * The allowlist/blocklist for stream subscription. You cannot set both an allowlist and blocklist for audio or video subscription. Up to 25 streams can be subscribed to at the same time. In the mixed-stream recording mode, up to 24 videos can be displayed.
  * @class
  */
-class StartMCUMixTranscodeResponse extends  AbstractModel {
+class SubscribeStreamUserIds extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * The allowlist for audio subscription. For example, `["1", "2", "3"]` means to subscribe to the audios of users 1, 2, and 3. If this parameter is left empty, the audios of all anchors (max 32) in the room will be received.
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.SubscribeAudioUserIds = null;
+
+        /**
+         * The blocklist for audio subscription. For example, `["1", "2", "3"]` means to not subscribe to the audios of users 1, 2, and 3. If this parameter is left empty, the audios of all anchors (max 32) in the room will be received.
+         * @type {Array.<string> || null}
+         */
+        this.UnSubscribeAudioUserIds = null;
+
+        /**
+         * The allowlist for video subscription. For example, `["1", "2", "3"]` means to subscribe to the videos of users 1, 2, and 3. If this parameter is left empty, the videos of all anchors (max 32) in the room will be received.
+         * @type {Array.<string> || null}
+         */
+        this.SubscribeVideoUserIds = null;
+
+        /**
+         * The blocklist for video subscription. For example, `["1", "2", "3"]` means to not subscribe to the videos of users 1, 2, and 3. If this parameter is left empty, the videos of all anchors (max 32) in the room will be received.
+         * @type {Array.<string> || null}
+         */
+        this.UnSubscribeVideoUserIds = null;
 
     }
 
@@ -2167,135 +1037,45 @@ class StartMCUMixTranscodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SubscribeAudioUserIds = 'SubscribeAudioUserIds' in params ? params.SubscribeAudioUserIds : null;
+        this.UnSubscribeAudioUserIds = 'UnSubscribeAudioUserIds' in params ? params.UnSubscribeAudioUserIds : null;
+        this.SubscribeVideoUserIds = 'SubscribeVideoUserIds' in params ? params.SubscribeVideoUserIds : null;
+        this.UnSubscribeVideoUserIds = 'UnSubscribeVideoUserIds' in params ? params.UnSubscribeVideoUserIds : null;
 
     }
 }
 
 /**
- * Relaying and transcoding duration statistics
+ * ModifyCloudRecording request structure.
  * @class
  */
-class OneSdkAppIdTranscodeTimeUsagesInfo extends  AbstractModel {
+class ModifyCloudRecordingRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array of relaying and transcoding durations
-         * @type {Array.<SdkAppIdTrtcMcuTranscodeTimeUsage> || null}
-         */
-        this.SdkAppIdTranscodeTimeUsages = null;
-
-        /**
-         * Number of records returned
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * ID of the application queried. Its value may be an application ID or `total`, which indicates that the total durations of all applications are queried.
-         * @type {string || null}
-         */
-        this.SdkAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.SdkAppIdTranscodeTimeUsages) {
-            this.SdkAppIdTranscodeTimeUsages = new Array();
-            for (let z in params.SdkAppIdTranscodeTimeUsages) {
-                let obj = new SdkAppIdTrtcMcuTranscodeTimeUsage();
-                obj.deserialize(params.SdkAppIdTranscodeTimeUsages[z]);
-                this.SdkAppIdTranscodeTimeUsages.push(obj);
-            }
-        }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-
-    }
-}
-
-/**
- * DescribeTrtcMcuTranscodeTime response structure.
- * @class
- */
-class DescribeTrtcMcuTranscodeTimeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Duration statistics of the queried application(s)
-         * @type {Array.<OneSdkAppIdTranscodeTimeUsagesInfo> || null}
-         */
-        this.Usages = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Usages) {
-            this.Usages = new Array();
-            for (let z in params.Usages) {
-                let obj = new OneSdkAppIdTranscodeTimeUsagesInfo();
-                obj.deserialize(params.Usages[z]);
-                this.Usages.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribePicture request structure.
- * @class
- */
-class DescribePictureRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Application ID
+         * The `SDKAppID` of the room whose streams are recorded.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Image ID. If it is left empty, the IDs of all images under the application are returned.
-         * @type {number || null}
+         * The unique ID of the recording task, which is returned after recording starts successfully.
+         * @type {string || null}
          */
-        this.PictureId = null;
+        this.TaskId = null;
 
         /**
-         * Number of records per page. `10` is used if it is left empty.
-         * @type {number || null}
+         * The new stream mixing layout to use.
+         * @type {MixLayoutParams || null}
          */
-        this.PageSize = null;
+        this.MixLayoutParams = null;
 
         /**
-         * Page number. `1` is used if it is left empty.
-         * @type {number || null}
+         * The allowlist/blocklist for stream subscription.
+         * @type {SubscribeStreamUserIds || null}
          */
-        this.PageNo = null;
+        this.SubscribeStreamUserIds = null;
 
     }
 
@@ -2307,32 +1087,310 @@ class DescribePictureRequest extends  AbstractModel {
             return;
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.PictureId = 'PictureId' in params ? params.PictureId : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.PageNo = 'PageNo' in params ? params.PageNo : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.MixLayoutParams) {
+            let obj = new MixLayoutParams();
+            obj.deserialize(params.MixLayoutParams)
+            this.MixLayoutParams = obj;
+        }
+
+        if (params.SubscribeStreamUserIds) {
+            let obj = new SubscribeStreamUserIds();
+            obj.deserialize(params.SubscribeStreamUserIds)
+            this.SubscribeStreamUserIds = obj;
+        }
 
     }
 }
 
 /**
- * Recording duration statistics of a specific application (`SdkAppId`)
+ * The video transcoding parameters for recording.
  * @class
  */
-class SdkAppIdRecordUsage extends  AbstractModel {
+class VideoParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID
+         * The video width in pixels. The value of this parameter cannot be larger than 1920, and the result of multiplying `Width` and `Height` cannot exceed 1920 x 1080. The default value is `360`.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * The video height in pixels. The value of this parameter cannot be larger than 1920, and the result of multiplying `Width` and `Height` cannot exceed 1920 x 1080. The default value is `640`.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * The video frame rate. Value range: [1, 60]. Default: 15.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * The video bitrate (bps). Value range: [64000, 8192000]. Default: 550000.
+         * @type {number || null}
+         */
+        this.BitRate = null;
+
+        /**
+         * The keyframe interval (seconds). Default value: 10.
+         * @type {number || null}
+         */
+        this.Gop = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.BitRate = 'BitRate' in params ? params.BitRate : null;
+        this.Gop = 'Gop' in params ? params.Gop : null;
+
+    }
+}
+
+/**
+ * The information of watermark images.
+ * @class
+ */
+class WaterMarkImage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The download URLs of the watermark images, which must be in JPG or PNG format and cannot be larger than 5 MB.
          * @type {string || null}
+         */
+        this.WaterMarkUrl = null;
+
+        /**
+         * The Y axis of the image's top-left corner. Value range: [0, 2560]. The value cannot be larger than the canvas height.
+         * @type {number || null}
+         */
+        this.Top = null;
+
+        /**
+         * The X axis of the image’s top-left corner. Value range: [0, 2560]. The value cannot be larger than the canvas width.
+         * @type {number || null}
+         */
+        this.Left = null;
+
+        /**
+         * The relative width of the image. Value range: [0, 2560]. The sum of the values of this parameter and `Left` cannot exceed the canvas width.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * The relative height of the image. Value range: [0, 2560]. The sum of the values of this parameter and `Top` cannot exceed the canvas height.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WaterMarkUrl = 'WaterMarkUrl' in params ? params.WaterMarkUrl : null;
+        this.Top = 'Top' in params ? params.Top : null;
+        this.Left = 'Left' in params ? params.Left : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
+ * The VOD parameters.
+ * @class
+ */
+class CloudVod extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Tencent Cloud VOD parameters.
+         * @type {TencentVod || null}
+         */
+        this.TencentVod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TencentVod) {
+            let obj = new TencentVod();
+            obj.deserialize(params.TencentVod)
+            this.TencentVod = obj;
+        }
+
+    }
+}
+
+/**
+ * The layout parameters for mixed-stream recording.
+
+ * @class
+ */
+class MixLayoutParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Layout mode:
+1: Floating
+2: Screen sharing
+3: Grid (default)
+4: Custom
+
+Floating: By default, the video of the first anchor (you can also specify an anchor) who enters the room is scaled to fill the screen. When other anchors enter the room, their videos appear smaller and are superimposed over the large video from left to right starting from the bottom of the canvas according to their room entry sequence. If the total number of videos is 17 or less, there will be four windows in each row (4 x 4); if it is greater than 17, there will be five windows in each row (5 x 5). Up to 25 videos can be displayed. A user who publishes only audio will still be displayed in one window.
+
+Screen sharing: The video of a specified anchor occupies a larger part of the canvas on the left side (if you do not specify an anchor, the left window will display the canvas background). The videos of other anchors are smaller and are positioned on the right side. If the total number of videos is 17 or less, the small videos are positioned from top to bottom in up to two columns on the right side, with eight videos per column at most. If there are more than 17 videos, the additional videos are positioned at the bottom of the canvas from left to right. Up to 25 videos can be displayed. A user who publishes only audio will still be displayed in one window.
+
+Grid: The videos of anchors are scaled and positioned automatically according to the total number of anchors in a room. Each video has the same size. Up to 25 videos can be displayed.
+
+Custom: Specify the layout of videos by using the `MixLayoutList` parameter.
+         * @type {number || null}
+         */
+        this.MixLayoutMode = null;
+
+        /**
+         * The custom layout details. This parameter is valid if `MixLayoutMode` is set to `4`. Up to 25 videos can be displayed.
+         * @type {Array.<MixLayout> || null}
+         */
+        this.MixLayoutList = null;
+
+        /**
+         * The background color, which is a hexadecimal value (starting with "#", followed by the color value) converted from an 8-bit RGB value. For example, the RGB value of orange is `R:255 G:165 B:0`, and its hexadecimal value is `#FFA500`. The default color is black.
+         * @type {string || null}
+         */
+        this.BackGroundColor = null;
+
+        /**
+         * The user whose video is displayed in the big window. This parameter is valid if `MixLayoutMode` is set to `1` (floating) or `2` (screen sharing). If it is left empty, the first anchor entering the room is displayed in the big window in the floating mode and the canvas background is displayed in the screen sharing mode.
+         * @type {string || null}
+         */
+        this.MaxResolutionUserId = null;
+
+        /**
+         * The stream type.
+0: Primary stream (default)
+1: Substream (screen sharing stream)
+This parameter specifies the type of the stream displayed in the big window. If it appears in `MixLayoutList`, it indicates the type of the stream of a specified user.
+         * @type {number || null}
+         */
+        this.MediaId = null;
+
+        /**
+         * The download URL of the background image for the canvas, which must be in JPG or PNG format and cannot be larger than 5 MB.
+         * @type {string || null}
+         */
+        this.BackgroundImageUrl = null;
+
+        /**
+         * `1` means to use placeholders, and `0` (default) means to not use placeholders. If this parameter is set to `1`, when a user is not publishing video, a placeholder image will be displayed in the window reserved for the user.
+         * @type {number || null}
+         */
+        this.PlaceHolderMode = null;
+
+        /**
+         * The render mode to use when the aspect ratio of a video is different from that of the window. This parameter is defined the same as `RenderMode` in `MixLayoufList`.
+         * @type {number || null}
+         */
+        this.BackgroundImageRenderMode = null;
+
+        /**
+         * The download URL of the default background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
+         * @type {string || null}
+         */
+        this.DefaultSubBackgroundImage = null;
+
+        /**
+         * The watermark layout. Up to 25 watermarks are supported.
+         * @type {Array.<WaterMark> || null}
+         */
+        this.WaterMarkList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MixLayoutMode = 'MixLayoutMode' in params ? params.MixLayoutMode : null;
+
+        if (params.MixLayoutList) {
+            this.MixLayoutList = new Array();
+            for (let z in params.MixLayoutList) {
+                let obj = new MixLayout();
+                obj.deserialize(params.MixLayoutList[z]);
+                this.MixLayoutList.push(obj);
+            }
+        }
+        this.BackGroundColor = 'BackGroundColor' in params ? params.BackGroundColor : null;
+        this.MaxResolutionUserId = 'MaxResolutionUserId' in params ? params.MaxResolutionUserId : null;
+        this.MediaId = 'MediaId' in params ? params.MediaId : null;
+        this.BackgroundImageUrl = 'BackgroundImageUrl' in params ? params.BackgroundImageUrl : null;
+        this.PlaceHolderMode = 'PlaceHolderMode' in params ? params.PlaceHolderMode : null;
+        this.BackgroundImageRenderMode = 'BackgroundImageRenderMode' in params ? params.BackgroundImageRenderMode : null;
+        this.DefaultSubBackgroundImage = 'DefaultSubBackgroundImage' in params ? params.DefaultSubBackgroundImage : null;
+
+        if (params.WaterMarkList) {
+            this.WaterMarkList = new Array();
+            for (let z in params.WaterMarkList) {
+                let obj = new WaterMark();
+                obj.deserialize(params.WaterMarkList[z]);
+                this.WaterMarkList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteCloudRecording request structure.
+ * @class
+ */
+class DeleteCloudRecordingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The `SDKAppID` of the room whose streams are recorded.
+         * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * Durations for the period queried
-         * @type {Array.<RecordUsage> || null}
+         * The unique ID of the recording task, which is returned after recording starts successfully.
+         * @type {string || null}
          */
-        this.Usages = null;
+        this.TaskId = null;
 
     }
 
@@ -2344,128 +1402,7 @@ class SdkAppIdRecordUsage extends  AbstractModel {
             return;
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-
-        if (params.Usages) {
-            this.Usages = new Array();
-            for (let z in params.Usages) {
-                let obj = new RecordUsage();
-                obj.deserialize(params.Usages[z]);
-                this.Usages.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * Array of billable audio/video interaction durations of a specific application (`SdkAppId`) and array length
- * @class
- */
-class OneSdkAppIdUsagesInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of records returned for the `SdkAppId`
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * Array of durations
-         * @type {Array.<SdkAppIdTrtcUsage> || null}
-         */
-        this.SdkAppIdTrtcTimeUsages = null;
-
-        /**
-         * Application ID
-         * @type {string || null}
-         */
-        this.SdkAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-
-        if (params.SdkAppIdTrtcTimeUsages) {
-            this.SdkAppIdTrtcTimeUsages = new Array();
-            for (let z in params.SdkAppIdTrtcTimeUsages) {
-                let obj = new SdkAppIdTrtcUsage();
-                obj.deserialize(params.SdkAppIdTrtcTimeUsages[z]);
-                this.SdkAppIdTrtcTimeUsages.push(obj);
-            }
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-
-    }
-}
-
-/**
- * Layout parameter of the small image, which takes effect in a picture-in-picture template
- * @class
- */
-class SmallVideoLayoutParams extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the user in the small image.
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * Stream type of the small image. 0: camera; 1: screen sharing. If a web user's stream is displayed in the small image, enter 0 for this parameter.
-         * @type {number || null}
-         */
-        this.StreamType = null;
-
-        /**
-         * Output width of the small image in pixels. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.ImageWidth = null;
-
-        /**
-         * Output height of the small image in pixels. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.ImageHeight = null;
-
-        /**
-         * Output X-axis offset of the small image in pixels. The sum of `LocationX` and `ImageWidth` cannot exceed the total width of the output mixed stream. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.LocationX = null;
-
-        /**
-         * Output Y-axis offset of the small image in pixels. The sum of `LocationY` and `ImageHeight` cannot exceed the total height of the output mixed stream. If this parameter is left empty, 0 will be used by default.
-         * @type {number || null}
-         */
-        this.LocationY = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.StreamType = 'StreamType' in params ? params.StreamType : null;
-        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
-        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
-        this.LocationX = 'LocationX' in params ? params.LocationX : null;
-        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -2499,72 +1436,35 @@ class RemoveUserResponse extends  AbstractModel {
 }
 
 /**
- * Valid in custom template, used to specify the video image position of a user in mixed streams.
+ * The audio transcoding parameters for recording.
  * @class
  */
-class PresetLayoutConfig extends  AbstractModel {
+class AudioParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Used to assign users to preset positions; if not assigned, users will occupy the positions set in `PresetLayoutConfig` in room entry sequence.
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * Stream type of the user when a specified user is assigned to the image. 0: camera; 1: screen sharing. Set this parameter to 0 when the small image is occupied by a web user.
+         * The audio sample rate.
+1: 48000 Hz (default)
+2: 44100 Hz
+3: 16000 Hz
          * @type {number || null}
          */
-        this.StreamType = null;
+        this.SampleRate = null;
 
         /**
-         * Width of the output image in pixels. If this parameter is not set, 0 is used by default.
+         * The number of sound channels.
+1: Mono-channel
+2: Dual-channel (default)
          * @type {number || null}
          */
-        this.ImageWidth = null;
+        this.Channel = null;
 
         /**
-         * Height of the output image in pixels. If this parameter is not set, 0 is used by default.
+         * The audio bitrate (bps). Value range: [32000, 128000]. Default: 64000.
          * @type {number || null}
          */
-        this.ImageHeight = null;
-
-        /**
-         * X offset of the output image in pixels. The sum of `LocationX` and `ImageWidth` cannot exceed the total width of the mixed stream. If this parameter is not set, 0 is used by default.
-         * @type {number || null}
-         */
-        this.LocationX = null;
-
-        /**
-         * Y offset of the output image in pixels. The sum of `LocationY` and `ImageHeight` cannot exceed the total height of the mixed stream. If this parameter is not set, 0 is used by default.
-         * @type {number || null}
-         */
-        this.LocationY = null;
-
-        /**
-         * Output order of the image. `0` is used if it is left empty.
-         * @type {number || null}
-         */
-        this.ZOrder = null;
-
-        /**
-         * Render mode of the output image. 0: cropping; 1: scaling; 2: scaling on a black background. If this parameter is not set, 0 is used by default.
-         * @type {number || null}
-         */
-        this.RenderMode = null;
-
-        /**
-         * Media type of the mixed stream of the user occupying the current position. 0 (default): audio and video; 1: audio; 2: video. You are advised to specify a user ID when using this parameter.
-         * @type {number || null}
-         */
-        this.MixInputType = null;
-
-        /**
-         * ID of the placeholder image. If the placeholding feature is enabled, and a user for whom an image position is reserved is not sending video data, the position will show the placeholder image. The ID is generated after the placeholder image is uploaded in the TRTC console. https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1
-         * @type {number || null}
-         */
-        this.PlaceImageId = null;
+        this.BitRate = null;
 
     }
 
@@ -2575,689 +1475,9 @@ class PresetLayoutConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.StreamType = 'StreamType' in params ? params.StreamType : null;
-        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
-        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
-        this.LocationX = 'LocationX' in params ? params.LocationX : null;
-        this.LocationY = 'LocationY' in params ? params.LocationY : null;
-        this.ZOrder = 'ZOrder' in params ? params.ZOrder : null;
-        this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
-        this.MixInputType = 'MixInputType' in params ? params.MixInputType : null;
-        this.PlaceImageId = 'PlaceImageId' in params ? params.PlaceImageId : null;
-
-    }
-}
-
-/**
- * StopMCUMixTranscode response structure.
- * @class
- */
-class StopMCUMixTranscodeResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeCallDetail response structure.
- * @class
- */
-class DescribeCallDetailResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of returned users
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * User information list
-         * @type {Array.<UserInformation> || null}
-         */
-        this.UserList = null;
-
-        /**
-         * Quality data
-         * @type {Array.<QualityData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.UserList) {
-            this.UserList = new Array();
-            for (let z in params.UserList) {
-                let obj = new UserInformation();
-                obj.deserialize(params.UserList[z]);
-                this.UserList.push(obj);
-            }
-        }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new QualityData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribePicture response structure.
- * @class
- */
-class DescribePictureResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of records returned
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * Image information list
-         * @type {Array.<PictureInfo> || null}
-         */
-        this.PictureInfo = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.PictureInfo) {
-            this.PictureInfo = new Array();
-            for (let z in params.PictureInfo) {
-                let obj = new PictureInfo();
-                obj.deserialize(params.PictureInfo[z]);
-                this.PictureInfo.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Audio/Video interaction duration statistics
-If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
- * @class
- */
-class SdkAppIdTrtcUsage extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Time point for the statistics. e.g., `2020-09-07` or `2020-09-07 00:05:05`
-         * @type {string || null}
-         */
-        this.TimeKey = null;
-
-        /**
-         * Audio duration (s)
-         * @type {number || null}
-         */
-        this.AudioTime = null;
-
-        /**
-         * Audio/Video duration (s)
-This parameter is returned only for users who signed up before October 11, 2019 and have not switched to the [new billing standards](https://intl.cloud.tencent.com/document/product/647/17157?from_cn_redirect=1).
-         * @type {number || null}
-         */
-        this.AudioVideoTime = null;
-
-        /**
-         * SD video duration (s)
-         * @type {number || null}
-         */
-        this.VideoTimeSd = null;
-
-        /**
-         * HD video duration (s)
-         * @type {number || null}
-         */
-        this.VideoTimeHd = null;
-
-        /**
-         * FHD video duration (s)
-         * @type {number || null}
-         */
-        this.VideoTimeHdp = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
-        this.AudioTime = 'AudioTime' in params ? params.AudioTime : null;
-        this.AudioVideoTime = 'AudioVideoTime' in params ? params.AudioVideoTime : null;
-        this.VideoTimeSd = 'VideoTimeSd' in params ? params.VideoTimeSd : null;
-        this.VideoTimeHd = 'VideoTimeHd' in params ? params.VideoTimeHd : null;
-        this.VideoTimeHdp = 'VideoTimeHdp' in params ? params.VideoTimeHdp : null;
-
-    }
-}
-
-/**
- * DescribeTrtcInteractiveTime request structure.
- * @class
- */
-class DescribeTrtcInteractiveTimeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Query start date in the format of YYYY-MM-DD
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end date in the format of YYYY-MM-DD
-The period queried in a request cannot be longer than 31 days.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Application ID, which is optional. If it is specified, duration statistics for the specified application are returned; otherwise, the total durations of all applications are returned.
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-
-    }
-}
-
-/**
- * Relayed push parameters of a non-Tencent Cloud CDN
- * @class
- */
-class PublishCdnParams extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Tencent Cloud LVB BizId
-         * @type {number || null}
-         */
-        this.BizId = null;
-
-        /**
-         * Destination of non-Tencent Cloud CDN relayed push. It is possible to push to only one non-Tencent Cloud CDN address at a time.
-         * @type {Array.<string> || null}
-         */
-        this.PublishCdnUrls = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BizId = 'BizId' in params ? params.BizId : null;
-        this.PublishCdnUrls = 'PublishCdnUrls' in params ? params.PublishCdnUrls : null;
-
-    }
-}
-
-/**
- * DescribeRoomInformation request structure.
- * @class
- */
-class DescribeRoomInformationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * User `sdkappid`
-         * @type {string || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Query start time (s) in the format of Unix timestamp (e.g., 1588031999), which must be a time point in the last 14 days
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end time (s) in the format of Unix timestamp, e.g., 1588034999
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Room ID in string type
-         * @type {string || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * Page index starting from 0 (if either `PageNumber` or `PageSize` is left empty, 10 data entries will be returned by default)
-         * @type {string || null}
-         */
-        this.PageNumber = null;
-
-        /**
-         * Number of entries per page (if either `PageNumber` or `PageSize` is left empty, 10 data entries will be returned by default. Maximum value: 100)
-         * @type {string || null}
-         */
-        this.PageSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-
-    }
-}
-
-/**
- * DescribeDetailEvent request structure.
- * @class
- */
-class DescribeDetailEventRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique ID of a call: sdkappid_roomgString_createTime. The `roomgString` refers to the room ID, and `createTime` refers to the creation time of a room in the format of UNIX timestamp in seconds. Its value can be obtained from the `DescribeRoomInformation` API (related document: https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1).
-         * @type {string || null}
-         */
-        this.CommId = null;
-
-        /**
-         * Query start time (s) in the format of Unix timestamp (e.g., 1588055615), which must be a time point in the last 14 days
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end time (s) in the format of Unix timestamp, e.g., 1588058615
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * User ID
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * Room ID
-         * @type {string || null}
-         */
-        this.RoomId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CommId = 'CommId' in params ? params.CommId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-
-    }
-}
-
-/**
- * Exceptional user experience and possible causes
- * @class
- */
-class AbnormalExperience extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * User ID
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * Exceptional experience ID
-         * @type {number || null}
-         */
-        this.ExperienceId = null;
-
-        /**
-         * Room ID in string type
-         * @type {string || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * Exception event array
-         * @type {Array.<AbnormalEvent> || null}
-         */
-        this.AbnormalEventList = null;
-
-        /**
-         * Report time of the exception event
-         * @type {number || null}
-         */
-        this.EventTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.ExperienceId = 'ExperienceId' in params ? params.ExperienceId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-
-        if (params.AbnormalEventList) {
-            this.AbnormalEventList = new Array();
-            for (let z in params.AbnormalEventList) {
-                let obj = new AbnormalEvent();
-                obj.deserialize(params.AbnormalEventList[z]);
-                this.AbnormalEventList.push(obj);
-            }
-        }
-        this.EventTime = 'EventTime' in params ? params.EventTime : null;
-
-    }
-}
-
-/**
- * Room information list
- * @class
- */
-class RoomState extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Call ID (unique call ID)
-         * @type {string || null}
-         */
-        this.CommId = null;
-
-        /**
-         * Room ID of string type
-         * @type {string || null}
-         */
-        this.RoomString = null;
-
-        /**
-         * Room creation time
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Room termination time
-         * @type {number || null}
-         */
-        this.DestroyTime = null;
-
-        /**
-         * Whether the room is terminated
-         * @type {boolean || null}
-         */
-        this.IsFinished = null;
-
-        /**
-         * Room creator ID
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CommId = 'CommId' in params ? params.CommId : null;
-        this.RoomString = 'RoomString' in params ? params.RoomString : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.DestroyTime = 'DestroyTime' in params ? params.DestroyTime : null;
-        this.IsFinished = 'IsFinished' in params ? params.IsFinished : null;
-        this.UserId = 'UserId' in params ? params.UserId : null;
-
-    }
-}
-
-/**
- * CreatePicture response structure.
- * @class
- */
-class CreatePictureResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Image ID
-         * @type {number || null}
-         */
-        this.PictureId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PictureId = 'PictureId' in params ? params.PictureId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Watermark parameters for On-Cloud MixTranscoding
- * @class
- */
-class WaterMarkParams extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Image ID of the watermark, which is generated after the image is uploaded to the TRTC console
-         * @type {number || null}
-         */
-        this.WaterMarkId = null;
-
-        /**
-         * Width (px) of the watermark for On-Cloud MixTranscoding
-         * @type {number || null}
-         */
-        this.WaterMarkWidth = null;
-
-        /**
-         * Height (px) of the watermark for On-Cloud MixTranscoding
-         * @type {number || null}
-         */
-        this.WaterMarkHeight = null;
-
-        /**
-         * Horizontal offset (px) of the watermark
-         * @type {number || null}
-         */
-        this.LocationX = null;
-
-        /**
-         * Vertical offset (px) of the watermark
-         * @type {number || null}
-         */
-        this.LocationY = null;
-
-        /**
-         * URL of the watermark image for the mixed stream, which can be in PNG, JPG, JPEG, or BMP format and does not support the alpha channel. The URL must not exceed 512 bytes. When both `WaterMarkUrl` and `WaterMarkId` are specified, the former will be used. The watermark image cannot exceed 10 MB.
-         * @type {string || null}
-         */
-        this.WaterMarkUrl = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.WaterMarkId = 'WaterMarkId' in params ? params.WaterMarkId : null;
-        this.WaterMarkWidth = 'WaterMarkWidth' in params ? params.WaterMarkWidth : null;
-        this.WaterMarkHeight = 'WaterMarkHeight' in params ? params.WaterMarkHeight : null;
-        this.LocationX = 'LocationX' in params ? params.LocationX : null;
-        this.LocationY = 'LocationY' in params ? params.LocationY : null;
-        this.WaterMarkUrl = 'WaterMarkUrl' in params ? params.WaterMarkUrl : null;
-
-    }
-}
-
-/**
- * DescribeRecordStatistic response structure.
- * @class
- */
-class DescribeRecordStatisticResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Duration statistics of the queried application(s)
-         * @type {Array.<SdkAppIdRecordUsage> || null}
-         */
-        this.SdkAppIdUsages = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.SdkAppIdUsages) {
-            this.SdkAppIdUsages = new Array();
-            for (let z in params.SdkAppIdUsages) {
-                let obj = new SdkAppIdRecordUsage();
-                obj.deserialize(params.SdkAppIdUsages[z]);
-                this.SdkAppIdUsages.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.BitRate = 'BitRate' in params ? params.BitRate : null;
 
     }
 }
@@ -3291,24 +1511,18 @@ class DismissRoomByStrRoomIdResponse extends  AbstractModel {
 }
 
 /**
- * DescribeHistoryScale response structure.
+ * ModifyCloudRecording response structure.
  * @class
  */
-class DescribeHistoryScaleResponse extends  AbstractModel {
+class ModifyCloudRecordingResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of returned data entries
-         * @type {number || null}
+         * The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends.
+         * @type {string || null}
          */
-        this.Total = null;
-
-        /**
-         * Returned data
-         * @type {Array.<ScaleInfomation> || null}
-         */
-        this.ScaleList = null;
+        this.TaskId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3325,179 +1539,42 @@ class DescribeHistoryScaleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.ScaleList) {
-            this.ScaleList = new Array();
-            for (let z in params.ScaleList) {
-                let obj = new ScaleInfomation();
-                obj.deserialize(params.ScaleList[z]);
-                this.ScaleList.push(obj);
-            }
-        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StartMCUMixTranscodeByStrRoomId response structure.
- * @class
- */
-class StartMCUMixTranscodeByStrRoomIdResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Image information list
- * @class
- */
-class PictureInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Image height
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Image width
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * X-axis value of the image’s position
-         * @type {number || null}
-         */
-        this.XPosition = null;
-
-        /**
-         * Y-axis value of the image’s position
-         * @type {number || null}
-         */
-        this.YPosition = null;
-
-        /**
-         * Application ID
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * Image ID
-         * @type {number || null}
-         */
-        this.PictureId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.XPosition = 'XPosition' in params ? params.XPosition : null;
-        this.YPosition = 'YPosition' in params ? params.YPosition : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.PictureId = 'PictureId' in params ? params.PictureId : null;
 
     }
 }
 
 module.exports = {
-    DescribeAbnormalEventResponse: DescribeAbnormalEventResponse,
-    DescribeAbnormalEventRequest: DescribeAbnormalEventRequest,
-    DescribeTrtcInteractiveTimeResponse: DescribeTrtcInteractiveTimeResponse,
-    ModifyPictureResponse: ModifyPictureResponse,
-    StartMCUMixTranscodeByStrRoomIdRequest: StartMCUMixTranscodeByStrRoomIdRequest,
-    LayoutParams: LayoutParams,
-    TimeValue: TimeValue,
-    CreatePictureRequest: CreatePictureRequest,
-    DescribeTrtcMcuTranscodeTimeRequest: DescribeTrtcMcuTranscodeTimeRequest,
-    SdkAppIdTrtcMcuTranscodeTimeUsage: SdkAppIdTrtcMcuTranscodeTimeUsage,
-    RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
-    DismissRoomResponse: DismissRoomResponse,
-    EventMessage: EventMessage,
-    DescribeRecordStatisticRequest: DescribeRecordStatisticRequest,
-    DescribeUserInformationRequest: DescribeUserInformationRequest,
-    DescribeCallDetailRequest: DescribeCallDetailRequest,
-    ScaleInfomation: ScaleInfomation,
-    DescribeUserInformationResponse: DescribeUserInformationResponse,
-    EncodeParams: EncodeParams,
-    RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
-    StartMCUMixTranscodeRequest: StartMCUMixTranscodeRequest,
-    StopMCUMixTranscodeRequest: StopMCUMixTranscodeRequest,
-    UserInformation: UserInformation,
-    DescribeHistoryScaleRequest: DescribeHistoryScaleRequest,
-    DeletePictureRequest: DeletePictureRequest,
-    DescribeRoomInformationResponse: DescribeRoomInformationResponse,
-    RecordUsage: RecordUsage,
-    RemoveUserRequest: RemoveUserRequest,
-    OutputParams: OutputParams,
-    ModifyPictureRequest: ModifyPictureRequest,
-    CreateTroubleInfoResponse: CreateTroubleInfoResponse,
-    StopMCUMixTranscodeByStrRoomIdRequest: StopMCUMixTranscodeByStrRoomIdRequest,
-    QualityData: QualityData,
-    AbnormalEvent: AbnormalEvent,
-    StopMCUMixTranscodeByStrRoomIdResponse: StopMCUMixTranscodeByStrRoomIdResponse,
-    DeletePictureResponse: DeletePictureResponse,
-    CreateTroubleInfoRequest: CreateTroubleInfoRequest,
-    EventList: EventList,
-    DismissRoomRequest: DismissRoomRequest,
-    DescribeDetailEventResponse: DescribeDetailEventResponse,
+    CreateCloudRecordingResponse: CreateCloudRecordingResponse,
+    CloudStorage: CloudStorage,
+    StorageFile: StorageFile,
+    WaterMark: WaterMark,
+    DescribeCloudRecordingResponse: DescribeCloudRecordingResponse,
     DismissRoomByStrRoomIdRequest: DismissRoomByStrRoomIdRequest,
-    StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
-    OneSdkAppIdTranscodeTimeUsagesInfo: OneSdkAppIdTranscodeTimeUsagesInfo,
-    DescribeTrtcMcuTranscodeTimeResponse: DescribeTrtcMcuTranscodeTimeResponse,
-    DescribePictureRequest: DescribePictureRequest,
-    SdkAppIdRecordUsage: SdkAppIdRecordUsage,
-    OneSdkAppIdUsagesInfo: OneSdkAppIdUsagesInfo,
-    SmallVideoLayoutParams: SmallVideoLayoutParams,
+    DismissRoomResponse: DismissRoomResponse,
+    MixLayout: MixLayout,
+    RemoveUserRequest: RemoveUserRequest,
+    StorageParams: StorageParams,
+    DismissRoomRequest: DismissRoomRequest,
+    RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
+    DescribeCloudRecordingRequest: DescribeCloudRecordingRequest,
+    TencentVod: TencentVod,
+    RecordParams: RecordParams,
+    CreateCloudRecordingRequest: CreateCloudRecordingRequest,
+    DeleteCloudRecordingResponse: DeleteCloudRecordingResponse,
+    MixTranscodeParams: MixTranscodeParams,
+    RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
+    SubscribeStreamUserIds: SubscribeStreamUserIds,
+    ModifyCloudRecordingRequest: ModifyCloudRecordingRequest,
+    VideoParams: VideoParams,
+    WaterMarkImage: WaterMarkImage,
+    CloudVod: CloudVod,
+    MixLayoutParams: MixLayoutParams,
+    DeleteCloudRecordingRequest: DeleteCloudRecordingRequest,
     RemoveUserResponse: RemoveUserResponse,
-    PresetLayoutConfig: PresetLayoutConfig,
-    StopMCUMixTranscodeResponse: StopMCUMixTranscodeResponse,
-    DescribeCallDetailResponse: DescribeCallDetailResponse,
-    DescribePictureResponse: DescribePictureResponse,
-    SdkAppIdTrtcUsage: SdkAppIdTrtcUsage,
-    DescribeTrtcInteractiveTimeRequest: DescribeTrtcInteractiveTimeRequest,
-    PublishCdnParams: PublishCdnParams,
-    DescribeRoomInformationRequest: DescribeRoomInformationRequest,
-    DescribeDetailEventRequest: DescribeDetailEventRequest,
-    AbnormalExperience: AbnormalExperience,
-    RoomState: RoomState,
-    CreatePictureResponse: CreatePictureResponse,
-    WaterMarkParams: WaterMarkParams,
-    DescribeRecordStatisticResponse: DescribeRecordStatisticResponse,
+    AudioParams: AudioParams,
     DismissRoomByStrRoomIdResponse: DismissRoomByStrRoomIdResponse,
-    DescribeHistoryScaleResponse: DescribeHistoryScaleResponse,
-    StartMCUMixTranscodeByStrRoomIdResponse: StartMCUMixTranscodeByStrRoomIdResponse,
-    PictureInfo: PictureInfo,
+    ModifyCloudRecordingResponse: ModifyCloudRecordingResponse,
 
 }

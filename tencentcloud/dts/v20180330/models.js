@@ -419,6 +419,18 @@ For databases with a database-schema-table structure:
          */
         this.Tags = null;
 
+        /**
+         * Source instance type. `simple`: Primary/Secondary node; `cluster`: Cluster node. If this field is left empty, the value defaults to primary/secondary node.
+         * @type {string || null}
+         */
+        this.SrcNodeType = null;
+
+        /**
+         * Source instance information, which is correlated with the migration task type.
+         * @type {Array.<SrcInfo> || null}
+         */
+        this.SrcInfoMulti = null;
+
     }
 
     /**
@@ -459,6 +471,16 @@ For databases with a database-schema-table structure:
                 let obj = new TagItem();
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
+            }
+        }
+        this.SrcNodeType = 'SrcNodeType' in params ? params.SrcNodeType : null;
+
+        if (params.SrcInfoMulti) {
+            this.SrcInfoMulti = new Array();
+            for (let z in params.SrcInfoMulti) {
+                let obj = new SrcInfo();
+                obj.deserialize(params.SrcInfoMulti[z]);
+                this.SrcInfoMulti.push(obj);
             }
         }
 
@@ -826,6 +848,19 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.AutoRenewFlag = null;
 
         /**
+         * Data subscription edition. `txdts`: Legacy edition; `kafka`: Kafka edition.
+         * @type {string || null}
+         */
+        this.SubscribeVersion = null;
+
+        /**
+         * Error message.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<SubsErr> || null}
+         */
+        this.Errors = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -882,6 +917,16 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.SubscribeVersion = 'SubscribeVersion' in params ? params.SubscribeVersion : null;
+
+        if (params.Errors) {
+            this.Errors = new Array();
+            for (let z in params.Errors) {
+                let obj = new SubsErr();
+                obj.deserialize(params.Errors[z]);
+                this.Errors.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1154,6 +1199,18 @@ This field does not need to be set when the entire instance is to be migrated
          */
         this.DatabaseInfo = null;
 
+        /**
+         * Source instance type. `simple`: Primary/Secondary node; `cluster`: Cluster node. If this field is left empty, the value defaults to primary/secondary node.
+         * @type {string || null}
+         */
+        this.SrcNodeType = null;
+
+        /**
+         * Source instance information, which is correlated with the migration task type.
+         * @type {Array.<SrcInfo> || null}
+         */
+        this.SrcInfoMulti = null;
+
     }
 
     /**
@@ -1186,6 +1243,16 @@ This field does not need to be set when the entire instance is to be migrated
             this.DstInfo = obj;
         }
         this.DatabaseInfo = 'DatabaseInfo' in params ? params.DatabaseInfo : null;
+        this.SrcNodeType = 'SrcNodeType' in params ? params.SrcNodeType : null;
+
+        if (params.SrcInfoMulti) {
+            this.SrcInfoMulti = new Array();
+            for (let z in params.SrcInfoMulti) {
+                let obj = new SrcInfo();
+                obj.deserialize(params.SrcInfoMulti[z]);
+                this.SrcInfoMulti.push(obj);
+            }
+        }
 
     }
 }
@@ -1234,6 +1301,12 @@ class CreateSubscribeRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * A custom instance name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
     }
 
     /**
@@ -1257,6 +1330,7 @@ class CreateSubscribeRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -2564,6 +2638,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Tags = null;
 
+        /**
+         * Information of the source instance, a cluster edition instance whose access type is not `cdb`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<SrcInfo> || null}
+         */
+        this.SrcInfoMulti = null;
+
     }
 
     /**
@@ -2624,6 +2705,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 let obj = new TagItem();
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
+            }
+        }
+
+        if (params.SrcInfoMulti) {
+            this.SrcInfoMulti = new Array();
+            for (let z in params.SrcInfoMulti) {
+                let obj = new SrcInfo();
+                obj.deserialize(params.SrcInfoMulti[z]);
+                this.SrcInfoMulti.push(obj);
             }
         }
 
@@ -3012,6 +3102,35 @@ MySQL currently does not support configuring additional parameters.
 }
 
 /**
+ * Error message displayed when the subscription configuration was queried.
+ * @class
+ */
+class SubsErr extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Error message.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
  * Message and prompt for migration task error
  * @class
  */
@@ -3157,6 +3276,7 @@ module.exports = {
     ActivateSubscribeResponse: ActivateSubscribeResponse,
     CreateSubscribeResponse: CreateSubscribeResponse,
     MigrateOption: MigrateOption,
+    SubsErr: SubsErr,
     ErrorInfo: ErrorInfo,
     StartMigrateJobResponse: StartMigrateJobResponse,
     StartMigrateJobRequest: StartMigrateJobRequest,

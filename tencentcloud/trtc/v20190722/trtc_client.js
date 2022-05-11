@@ -16,73 +16,36 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeAbnormalEventResponse = models.DescribeAbnormalEventResponse;
-const DescribeAbnormalEventRequest = models.DescribeAbnormalEventRequest;
-const DescribeTrtcInteractiveTimeResponse = models.DescribeTrtcInteractiveTimeResponse;
-const ModifyPictureResponse = models.ModifyPictureResponse;
-const StartMCUMixTranscodeByStrRoomIdRequest = models.StartMCUMixTranscodeByStrRoomIdRequest;
-const LayoutParams = models.LayoutParams;
-const TimeValue = models.TimeValue;
-const CreatePictureRequest = models.CreatePictureRequest;
-const DescribeTrtcMcuTranscodeTimeRequest = models.DescribeTrtcMcuTranscodeTimeRequest;
-const SdkAppIdTrtcMcuTranscodeTimeUsage = models.SdkAppIdTrtcMcuTranscodeTimeUsage;
-const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
-const DismissRoomResponse = models.DismissRoomResponse;
-const EventMessage = models.EventMessage;
-const DescribeRecordStatisticRequest = models.DescribeRecordStatisticRequest;
-const DescribeUserInformationRequest = models.DescribeUserInformationRequest;
-const DescribeCallDetailRequest = models.DescribeCallDetailRequest;
-const ScaleInfomation = models.ScaleInfomation;
-const DescribeUserInformationResponse = models.DescribeUserInformationResponse;
-const EncodeParams = models.EncodeParams;
-const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
-const StartMCUMixTranscodeRequest = models.StartMCUMixTranscodeRequest;
-const StopMCUMixTranscodeRequest = models.StopMCUMixTranscodeRequest;
-const UserInformation = models.UserInformation;
-const DescribeHistoryScaleRequest = models.DescribeHistoryScaleRequest;
-const DeletePictureRequest = models.DeletePictureRequest;
-const DescribeRoomInformationResponse = models.DescribeRoomInformationResponse;
-const RecordUsage = models.RecordUsage;
-const RemoveUserRequest = models.RemoveUserRequest;
-const OutputParams = models.OutputParams;
-const ModifyPictureRequest = models.ModifyPictureRequest;
-const CreateTroubleInfoResponse = models.CreateTroubleInfoResponse;
-const StopMCUMixTranscodeByStrRoomIdRequest = models.StopMCUMixTranscodeByStrRoomIdRequest;
-const QualityData = models.QualityData;
-const AbnormalEvent = models.AbnormalEvent;
-const StopMCUMixTranscodeByStrRoomIdResponse = models.StopMCUMixTranscodeByStrRoomIdResponse;
-const DeletePictureResponse = models.DeletePictureResponse;
-const CreateTroubleInfoRequest = models.CreateTroubleInfoRequest;
-const EventList = models.EventList;
-const DismissRoomRequest = models.DismissRoomRequest;
-const DescribeDetailEventResponse = models.DescribeDetailEventResponse;
+const CreateCloudRecordingResponse = models.CreateCloudRecordingResponse;
+const CloudStorage = models.CloudStorage;
+const StorageFile = models.StorageFile;
+const WaterMark = models.WaterMark;
+const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
 const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
-const StartMCUMixTranscodeResponse = models.StartMCUMixTranscodeResponse;
-const OneSdkAppIdTranscodeTimeUsagesInfo = models.OneSdkAppIdTranscodeTimeUsagesInfo;
-const DescribeTrtcMcuTranscodeTimeResponse = models.DescribeTrtcMcuTranscodeTimeResponse;
-const DescribePictureRequest = models.DescribePictureRequest;
-const SdkAppIdRecordUsage = models.SdkAppIdRecordUsage;
-const OneSdkAppIdUsagesInfo = models.OneSdkAppIdUsagesInfo;
-const SmallVideoLayoutParams = models.SmallVideoLayoutParams;
+const DismissRoomResponse = models.DismissRoomResponse;
+const MixLayout = models.MixLayout;
+const RemoveUserRequest = models.RemoveUserRequest;
+const StorageParams = models.StorageParams;
+const DismissRoomRequest = models.DismissRoomRequest;
+const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
+const DescribeCloudRecordingRequest = models.DescribeCloudRecordingRequest;
+const TencentVod = models.TencentVod;
+const RecordParams = models.RecordParams;
+const CreateCloudRecordingRequest = models.CreateCloudRecordingRequest;
+const DeleteCloudRecordingResponse = models.DeleteCloudRecordingResponse;
+const MixTranscodeParams = models.MixTranscodeParams;
+const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
+const SubscribeStreamUserIds = models.SubscribeStreamUserIds;
+const ModifyCloudRecordingRequest = models.ModifyCloudRecordingRequest;
+const VideoParams = models.VideoParams;
+const WaterMarkImage = models.WaterMarkImage;
+const CloudVod = models.CloudVod;
+const MixLayoutParams = models.MixLayoutParams;
+const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
 const RemoveUserResponse = models.RemoveUserResponse;
-const PresetLayoutConfig = models.PresetLayoutConfig;
-const StopMCUMixTranscodeResponse = models.StopMCUMixTranscodeResponse;
-const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
-const DescribePictureResponse = models.DescribePictureResponse;
-const SdkAppIdTrtcUsage = models.SdkAppIdTrtcUsage;
-const DescribeTrtcInteractiveTimeRequest = models.DescribeTrtcInteractiveTimeRequest;
-const PublishCdnParams = models.PublishCdnParams;
-const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
-const DescribeDetailEventRequest = models.DescribeDetailEventRequest;
-const AbnormalExperience = models.AbnormalExperience;
-const RoomState = models.RoomState;
-const CreatePictureResponse = models.CreatePictureResponse;
-const WaterMarkParams = models.WaterMarkParams;
-const DescribeRecordStatisticResponse = models.DescribeRecordStatisticResponse;
+const AudioParams = models.AudioParams;
 const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
-const DescribeHistoryScaleResponse = models.DescribeHistoryScaleResponse;
-const StartMCUMixTranscodeByStrRoomIdResponse = models.StartMCUMixTranscodeByStrRoomIdResponse;
-const PictureInfo = models.PictureInfo;
+const ModifyCloudRecordingResponse = models.ModifyCloudRecordingResponse;
 
 
 /**
@@ -96,101 +59,58 @@ class TrtcClient extends AbstractClient {
     }
     
     /**
-     * This API is used to enable On-Cloud MixTranscoding and specify the position of each channel of image in stream mixing.
-
-There may be multiple audio/video streams in a TRTC room. You can call this API to request the Tencent Cloud server to mix the audio and video and specify the position of each image to produce just one audio/video stream for recording and playback. The mixing stops automatically after a room is terminated.
-
-You can use this API to perform the following operations:
-- Set image and audio quality parameters of the final live stream, including video resolution, video bitrate, video frame rate, and audio quality.
-- Set the layout, i.e., the position of each image. You only need to set it once when enabling On-Cloud MixTranscoding, and the layout engine will automatically arrange images as configured.
-- Set the names of recording files for future playback.
-- Set the stream ID for CDN live streaming.
-
-Currently, On-Cloud MixTranscoding supports the following layout templates:
-- Floating: The entire screen is covered by the video image of the first user who enters the room, and the images of other users are displayed as small images in rows in the bottom-left corner in room entry sequence. The screen allows up to 4 rows of 4 small images, which float over the big image. Up to 1 big image and 15 small images can be displayed. A user sending audio only will still occupy an image spot.
-- Grid: The images of all users split the entire screen evenly. The more users, the smaller the image dimensions. Up to 16 images can be displayed. A user sending audio only will still occupy an image spot.
-- Screen sharing: This is designed for video conferencing and online education. The shared screen (or camera image of the anchor) is always displayed as the big image, which occupies the left half of the screen, and the images of other users occupy the right half in up to 2 columns of up to 8 small images each. Up to 1 big image and 15 small images can be displayed. If the upstream aspect ratio does not match the output, the big image on the left will be scaled and displayed in whole, while the small images on the right will be cropped.
-- Picture-in-picture: This template mixes the big and small images or big image of a user with the audio of other users. The small image floats over the big image. You can specify the user whose small and big images are displayed, as well as the position of the small image. This template can display at most 2 images.
-- Custom: This is designed for cases where you want to specify the image positions of users in the mixed stream or preset image positions. If users are assigned to preset positions, the layout engine will reserve the positions for the users; if not, users will occupy the positions in room entry sequence. Once all preset positions are occupied, TRTC will stop mixing the audio and video of other users. If the place-holding feature is enabled for a custom template (by setting `PlaceHolderMode` in `LayoutParams` to `1`) and a user for whom a place is held is not sending video, the position will show the specified placeholder image (`PlaceImageId`).
-
-Notes:
-1. **As On-Cloud MixTranscoding is a paid feature, you will be charged for calling this API. For details, see [Billing of On-Cloud MixTranscoding](https://intl.cloud.tencent.com/document/product/647/49446?from_cn_redirect=1).**
-2. You can call this API only if your application is created on or after January 9, 2020. Applications created before use the stream mixing service of CSS by default. If you want to switch to MCU On-Cloud MixTranscoding, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
-3. You cannot use the server and client stream mixing APIs at the same time.
-     * @param {StartMCUMixTranscodeRequest} req
-     * @param {function(string, StartMCUMixTranscodeResponse):void} cb
+     * This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
+     * @param {DismissRoomByStrRoomIdRequest} req
+     * @param {function(string, DismissRoomByStrRoomIdResponse):void} cb
      * @public
      */
-    StartMCUMixTranscode(req, cb) {
-        let resp = new StartMCUMixTranscodeResponse();
-        this.request("StartMCUMixTranscode", req, resp, cb);
+    DismissRoomByStrRoomId(req, cb) {
+        let resp = new DismissRoomByStrRoomIdResponse();
+        this.request("DismissRoomByStrRoomId", req, resp, cb);
     }
 
     /**
-     * This API is used to query the room list of an `SDKAppID` in the last 14 days. It returns 10 calls by default and can return up to 100 calls per query.
-**Note**: You can use this API to query or check historical data, but not for real-time key business logic.
-     * @param {DescribeRoomInformationRequest} req
-     * @param {function(string, DescribeRoomInformationResponse):void} cb
+     * This API is used to query the status of a recording task after it starts. It works only when a task is in progress. If the task has already ended when this API is called, an error will be returned.
+     * @param {DescribeCloudRecordingRequest} req
+     * @param {function(string, DescribeCloudRecordingResponse):void} cb
      * @public
      */
-    DescribeRoomInformation(req, cb) {
-        let resp = new DescribeRoomInformationResponse();
-        this.request("DescribeRoomInformation", req, resp, cb);
+    DescribeCloudRecording(req, cb) {
+        let resp = new DescribeCloudRecordingResponse();
+        this.request("DescribeCloudRecording", req, resp, cb);
     }
 
     /**
-     * This API is used to end On-Cloud MixTranscoding.
-     * @param {StopMCUMixTranscodeRequest} req
-     * @param {function(string, StopMCUMixTranscodeResponse):void} cb
+     * ### API description
+This API is used to start an on-cloud recording task. It records the audio and video streams in a room and saves them to the specified cloud storage. You can use this API to record the streams in a room separately, or you can mix the streams first and then record the mixed stream.
+
+### You can use this API to perform the following operations:
+* Specify the anchors whose streams you want or do not want to record by using the `RecordParams` parameter
+* Specify the storage service you want to save recording files to by using the `StorageParams` parameter
+* Specify transcoding settings for mixed-stream recording, including video resolution, video bitrate, frame rate, and audio quality, by using `MixTranscodeParams`
+* Specify the layout of different videos in mixed-stream recording mode or select an auto-arranged layout template
+
+### Key concepts
+* Single-stream recording: Record the audio and video of each subscribed user (`UserId`) in a room and save the recording files (M3U8/TS) to the cloud
+* Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files (M3U8/TS) to the cloud
+     * @param {CreateCloudRecordingRequest} req
+     * @param {function(string, CreateCloudRecordingResponse):void} cb
      * @public
      */
-    StopMCUMixTranscode(req, cb) {
-        let resp = new StopMCUMixTranscodeResponse();
-        this.request("StopMCUMixTranscode", req, resp, cb);
+    CreateCloudRecording(req, cb) {
+        let resp = new CreateCloudRecordingResponse();
+        this.request("CreateCloudRecording", req, resp, cb);
     }
 
     /**
-     * This API is used to create exception information.
-     * @param {CreateTroubleInfoRequest} req
-     * @param {function(string, CreateTroubleInfoResponse):void} cb
+     * This API is used to stop a recording task. It works only when a task is in progress. If the task has already ended when this API is called, an error will be returned. If a task is stopped successfully, but the uploading of recording files has not completed, the backend will continue to upload the files and will notify you via a callback when the upload is completed.
+     * @param {DeleteCloudRecordingRequest} req
+     * @param {function(string, DeleteCloudRecordingResponse):void} cb
      * @public
      */
-    CreateTroubleInfo(req, cb) {
-        let resp = new CreateTroubleInfoResponse();
-        this.request("CreateTroubleInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the daily numbers of rooms and users under a specified `SDKAppID`. It can query data once per minute for the last 14 days. If a day has not ended, the numbers of rooms and users on the day cannot be queried. 
-     * @param {DescribeHistoryScaleRequest} req
-     * @param {function(string, DescribeHistoryScaleResponse):void} cb
-     * @public
-     */
-    DescribeHistoryScale(req, cb) {
-        let resp = new DescribeHistoryScaleResponse();
-        this.request("DescribeHistoryScale", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete custom background or watermark images during [On-Cloud MixTranscoding](https://intl.cloud.tencent.com/document/product/647/16827?from_cn_redirect=1). If you do not need to delete such images frequently, we recommend you delete them in the console via **Application Management** > **[Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1)**.
-     * @param {DeletePictureRequest} req
-     * @param {function(string, DeletePictureResponse):void} cb
-     * @public
-     */
-    DeletePicture(req, cb) {
-        let resp = new DeletePictureResponse();
-        this.request("DeletePicture", req, resp, cb);
-    }
-
-    /**
-     * This API is used to add custom background or watermark images during [On-Cloud MixTranscoding](https://intl.cloud.tencent.com/document/product/647/16827?from_cn_redirect=1). If you do not need to add such images frequently, we recommend you add them in the console via **Application Management** > **[Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1)**.
-     * @param {CreatePictureRequest} req
-     * @param {function(string, CreatePictureResponse):void} cb
-     * @public
-     */
-    CreatePicture(req, cb) {
-        let resp = new CreatePictureResponse();
-        this.request("CreatePicture", req, resp, cb);
+    DeleteCloudRecording(req, cb) {
+        let resp = new DeleteCloudRecordingResponse();
+        this.request("DeleteCloudRecording", req, resp, cb);
     }
 
     /**
@@ -205,90 +125,14 @@ Notes:
     }
 
     /**
-     * This API is used to query the user list and call quality data of a specified time range in the last 14 days. When `DataType` is not null, data of up to 6 users during a period of up to 1 hour can be queried each time, and the period can start on one day and end on the next. When `DataType` and `UserIds` are null, 6 users are queried by default, and data of up to 100 users can be displayed on each page (`PageSize` set to 100 or smaller). This API is used to query call quality and is not recommended for billing.
-**Note**: You can use this API to query or check historical data, but not for real-time key business logic.
-     * @param {DescribeCallDetailRequest} req
-     * @param {function(string, DescribeCallDetailResponse):void} cb
+     * This API is used to modify a recording task. It works only when a task is in progress. If the task has already ended when this API is called, an error will be returned. You need to specify all the parameters for each request instead of just the ones you want to modify.
+     * @param {ModifyCloudRecordingRequest} req
+     * @param {function(string, ModifyCloudRecordingResponse):void} cb
      * @public
      */
-    DescribeCallDetail(req, cb) {
-        let resp = new DescribeCallDetailResponse();
-        this.request("DescribeCallDetail", req, resp, cb);
-    }
-
-    /**
-     * This API is used to stop On-Cloud MixTranscoding.
-     * @param {StopMCUMixTranscodeByStrRoomIdRequest} req
-     * @param {function(string, StopMCUMixTranscodeByStrRoomIdResponse):void} cb
-     * @public
-     */
-    StopMCUMixTranscodeByStrRoomId(req, cb) {
-        let resp = new StopMCUMixTranscodeByStrRoomIdResponse();
-        this.request("StopMCUMixTranscodeByStrRoomId", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify custom background or watermark images during [On-Cloud MixTranscoding](https://intl.cloud.tencent.com/document/product/647/16827?from_cn_redirect=1). If you do not need to modify such images frequently, we recommend you modify them in the console via **Application Management** > **[Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1)**.
-     * @param {ModifyPictureRequest} req
-     * @param {function(string, ModifyPictureResponse):void} cb
-     * @public
-     */
-    ModifyPicture(req, cb) {
-        let resp = new ModifyPictureResponse();
-        this.request("ModifyPicture", req, resp, cb);
-    }
-
-    /**
-     * This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
-     * @param {DismissRoomByStrRoomIdRequest} req
-     * @param {function(string, DismissRoomByStrRoomIdResponse):void} cb
-     * @public
-     */
-    DismissRoomByStrRoomId(req, cb) {
-        let resp = new DismissRoomByStrRoomIdResponse();
-        this.request("DismissRoomByStrRoomId", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query exception occurrences under a specified `SDKAppID` and return the exception IDs and possible causes. It queries data in last 15 days, and the query period is up to 1 hour, which can start and end on different days. For more information about exceptions, please see the exception event ID mapping table: https://intl.cloud.tencent.com/document/product/647/37906.
-     * @param {DescribeAbnormalEventRequest} req
-     * @param {function(string, DescribeAbnormalEventResponse):void} cb
-     * @public
-     */
-    DescribeAbnormalEvent(req, cb) {
-        let resp = new DescribeAbnormalEventResponse();
-        this.request("DescribeAbnormalEvent", req, resp, cb);
-    }
-
-    /**
-     * This API is used to enable On-Cloud MixTranscoding and specify the position of each channel of image in stream mixing.
-
-There may be multiple channels of audio/video streams in a TRTC room. You can call this API to request the Tencent Cloud server to mix multiple channels of video images and audio into one channel and specify the position of each image so as to produce only one channel of audio/video stream for recording and live streaming.
-
-You can use this API to perform the following operations:
-- Set image and audio quality parameters of the mixed stream, including video resolution, bitrate, frame rate, and audio quality.
-- Set the layout, i.e., the position of each channel of image. You only need to set it once when enabling On-Cloud MixTranscoding, and the layout engine will automatically arrange images as configured.
-- Set the names of recording files for future playback.
-- Set the stream ID for CDN live streaming.
-
-Currently, On-Cloud MixTranscoding supports the following layout templates:
-- Floating: the entire screen is covered by the video image of the first user who enters the room, and the images of other users are displayed as small images in horizontal rows in the bottom-left corner in room entry sequence. The screen can accommodate up to 4 rows of 4 small images, which float over the big image. Up to 1 big image and 15 small images can be displayed. A user sending audio only will still occupy an image spot.
-- Grid: the images of all users split the screen evenly. The more the users, the smaller the image dimensions. Up to 16 images can be displayed. A user sending audio only will still occupy an image spot.
-- Screen sharing: this template is designed for video conferencing and online classes. The shared screen (or camera image of the anchor) is always displayed as the big image, which occupies the left half of the screen, and the images of other users occupy the right half in up to 2 columns of a maximum of 8 small images each. Up to 1 big image and 15 small images can be displayed. If the aspect ratio of upstream images does not match that of output images, the big image on the left will be scaled and displayed in whole, while the small images on the right will be cropped.
-- Picture-in-picture: this template mixes the big and small images or big image of a user with the audio of other users. The small image floats over the big image. You can specify the user whose big and small images are displayed and the position of the small image.
-- Custom: you can use custom templates to specify the image positions of users in mixed streams or preset image positions. If users are assigned to preset positions, the layout engine will reserve the positions for the users; if not, users will occupy the positions in room entry sequence. Once all preset positions are occupied, TRTC will stop mixing the audio and images of other users. If the placeholding feature is enabled for a custom template (`PlaceHolderMode` in `LayoutParams` is set to 1), but a user for whom a place is reserved is not sending video data, the position will show the corresponding placeholder image (`PlaceImageId`).
-
-Notes:
-1. **As On-Cloud MixTranscoding is a paid feature, you will be charged for calling this API. For details, see [Billing of On-Cloud MixTranscoding](https://intl.cloud.tencent.com/document/product/647/49446?from_cn_redirect=1).**
-2. You can call this API only if your application is created on or after January 9, 2020. Applications created before use the stream mixing service of CSS by default. If you want to switch to MCU On-Cloud MixTranscoding, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).
-3. You cannot use the server and client stream mixing APIs at the same time.
-     * @param {StartMCUMixTranscodeByStrRoomIdRequest} req
-     * @param {function(string, StartMCUMixTranscodeByStrRoomIdResponse):void} cb
-     * @public
-     */
-    StartMCUMixTranscodeByStrRoomId(req, cb) {
-        let resp = new StartMCUMixTranscodeByStrRoomIdResponse();
-        this.request("StartMCUMixTranscodeByStrRoomId", req, resp, cb);
+    ModifyCloudRecording(req, cb) {
+        let resp = new ModifyCloudRecordingResponse();
+        this.request("ModifyCloudRecording", req, resp, cb);
     }
 
     /**
@@ -311,86 +155,6 @@ Notes:
     DismissRoom(req, cb) {
         let resp = new DismissRoomResponse();
         this.request("DismissRoom", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query billable on-cloud recording durations.
-
-- If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
-- The period queried in a request cannot be longer than 31 days.
-- If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
-- In the daily pay-as-you-go mode, bills for a day are generated the next morning. Therefore, we recommend you query the statistics after 9 AM the next day.
-     * @param {DescribeRecordStatisticRequest} req
-     * @param {function(string, DescribeRecordStatisticResponse):void} cb
-     * @public
-     */
-    DescribeRecordStatistic(req, cb) {
-        let resp = new DescribeRecordStatisticResponse();
-        this.request("DescribeRecordStatistic", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query billable relaying and transcoding durations.
-- If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
-- The period queried in a request cannot be longer than 31 days.
-- If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
-- In the daily pay-as-you-go mode, bills for a day are generated the next morning. Therefore, we recommend you query the statistics after 9 AM the next day.
-     * @param {DescribeTrtcMcuTranscodeTimeRequest} req
-     * @param {function(string, DescribeTrtcMcuTranscodeTimeResponse):void} cb
-     * @public
-     */
-    DescribeTrtcMcuTranscodeTime(req, cb) {
-        let resp = new DescribeTrtcMcuTranscodeTimeResponse();
-        this.request("DescribeTrtcMcuTranscodeTime", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query billable audio/video interaction durations.
-- If the period queried is 1 day or shorter, the statistics returned are on a 5-minute basis. If the period queried is longer than 1 day, the statistics returned are on a daily basis.
-- The period queried in a request cannot be longer than 31 days.
-- If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
-- In the daily pay-as-you-go mode, bills for a day are generated the next morning. Therefore, we recommend you query the statistics after 9 AM the next day.
-     * @param {DescribeTrtcInteractiveTimeRequest} req
-     * @param {function(string, DescribeTrtcInteractiveTimeResponse):void} cb
-     * @public
-     */
-    DescribeTrtcInteractiveTime(req, cb) {
-        let resp = new DescribeTrtcInteractiveTimeResponse();
-        this.request("DescribeTrtcInteractiveTime", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the information of custom background or watermark images during [On-Cloud MixTranscoding](https://intl.cloud.tencent.com/document/product/647/16827?from_cn_redirect=1). If you do not need to query such information frequently, we recommend you query it in the console via **Application Management** > **[Material Management](https://intl.cloud.tencent.com/document/product/647/50769?from_cn_redirect=1)**.
-     * @param {DescribePictureRequest} req
-     * @param {function(string, DescribePictureResponse):void} cb
-     * @public
-     */
-    DescribePicture(req, cb) {
-        let resp = new DescribePictureResponse();
-        this.request("DescribePicture", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query a user’s activity details such as room entry/exit and video enablement/disablement during a call. It can query data for the last 14 days.
-     * @param {DescribeDetailEventRequest} req
-     * @param {function(string, DescribeDetailEventResponse):void} cb
-     * @public
-     */
-    DescribeDetailEvent(req, cb) {
-        let resp = new DescribeDetailEventResponse();
-        this.request("DescribeDetailEvent", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the user list of a specified time range (up to 4 hours) in the last 14 days. Data of 6 users is displayed on each page by default, and data of up to 100 users can be displayed on each page (`PageSize` set to 100 or smaller).
-**Note**: You can use this API to query or check historical data, but not for real-time key business logic.
-     * @param {DescribeUserInformationRequest} req
-     * @param {function(string, DescribeUserInformationResponse):void} cb
-     * @public
-     */
-    DescribeUserInformation(req, cb) {
-        let resp = new DescribeUserInformationResponse();
-        this.request("DescribeUserInformation", req, resp, cb);
     }
 
 

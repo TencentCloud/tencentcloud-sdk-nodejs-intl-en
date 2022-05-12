@@ -17,42 +17,24 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * Region information
+ * ChangeReplicaToMaster request structure.
  * @class
  */
-class RegionConf extends  AbstractModel {
+class ChangeReplicaToMasterRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region ID
+         * Instance ID
          * @type {string || null}
          */
-        this.RegionId = null;
+        this.InstanceId = null;
 
         /**
-         * Region name
-         * @type {string || null}
+         * Replica group ID, which is required for multi-AZ instances.
+         * @type {number || null}
          */
-        this.RegionName = null;
-
-        /**
-         * Region abbreviation
-         * @type {string || null}
-         */
-        this.RegionShortName = null;
-
-        /**
-         * Name of the area where a region is located
-         * @type {string || null}
-         */
-        this.Area = null;
-
-        /**
-         * AZ information
-         * @type {Array.<ZoneCapacityConf> || null}
-         */
-        this.ZoneSet = null;
+        this.GroupId = null;
 
     }
 
@@ -63,72 +45,25 @@ class RegionConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.RegionShortName = 'RegionShortName' in params ? params.RegionShortName : null;
-        this.Area = 'Area' in params ? params.Area : null;
-
-        if (params.ZoneSet) {
-            this.ZoneSet = new Array();
-            for (let z in params.ZoneSet) {
-                let obj = new ZoneCapacityConf();
-                obj.deserialize(params.ZoneSet[z]);
-                this.ZoneSet.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
 
 /**
- * Product information in the availability zone
+ * ReleaseWanAddress request structure.
  * @class
  */
-class ZoneCapacityConf extends  AbstractModel {
+class ReleaseWanAddressRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * AZ ID, such as ap-guangzhou-3
+         * Instance ID.
          * @type {string || null}
          */
-        this.ZoneId = null;
-
-        /**
-         * AZ name
-         * @type {string || null}
-         */
-        this.ZoneName = null;
-
-        /**
-         * Whether a product is sold out in an AZ
-         * @type {boolean || null}
-         */
-        this.IsSaleout = null;
-
-        /**
-         * Whether it is a default AZ
-         * @type {boolean || null}
-         */
-        this.IsDefault = null;
-
-        /**
-         * Network type. basenet: basic network; vpcnet: VPC
-         * @type {Array.<string> || null}
-         */
-        this.NetWorkType = null;
-
-        /**
-         * Information of an AZ, such as product specifications in it
-         * @type {Array.<ProductConf> || null}
-         */
-        this.ProductSet = null;
-
-        /**
-         * AZ ID, such as 100003
-         * @type {number || null}
-         */
-        this.OldZoneId = null;
+        this.InstanceId = null;
 
     }
 
@@ -139,21 +74,36 @@ class ZoneCapacityConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.IsSaleout = 'IsSaleout' in params ? params.IsSaleout : null;
-        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
-        this.NetWorkType = 'NetWorkType' in params ? params.NetWorkType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
-        if (params.ProductSet) {
-            this.ProductSet = new Array();
-            for (let z in params.ProductSet) {
-                let obj = new ProductConf();
-                obj.deserialize(params.ProductSet[z]);
-                this.ProductSet.push(obj);
-            }
+    }
+}
+
+/**
+ * Proxy node information
+ * @class
+ */
+class ProxyNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.OldZoneId = 'OldZoneId' in params ? params.OldZoneId : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
 
     }
 }
@@ -357,16 +307,16 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeInstanceMonitorTopNCmd response structure.
+ * DescribeInstanceMonitorBigKeySizeDist response structure.
  * @class
  */
-class DescribeInstanceMonitorTopNCmdResponse extends  AbstractModel {
+class DescribeInstanceMonitorBigKeySizeDistResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Access command information
-         * @type {Array.<SourceCommand> || null}
+         * Big key size distribution details
+         * @type {Array.<DelayDistribution> || null}
          */
         this.Data = null;
 
@@ -389,7 +339,7 @@ class DescribeInstanceMonitorTopNCmdResponse extends  AbstractModel {
         if (params.Data) {
             this.Data = new Array();
             for (let z in params.Data) {
-                let obj = new SourceCommand();
+                let obj = new DelayDistribution();
                 obj.deserialize(params.Data[z]);
                 this.Data.push(obj);
             }
@@ -472,6 +422,34 @@ class DescribeInstanceMonitorHotKeyRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SpanType = 'SpanType' in params ? params.SpanType : null;
+
+    }
+}
+
+/**
+ * AllocateWanAddress request structure.
+ * @class
+ */
+class AllocateWanAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -689,6 +667,48 @@ class DescribeMaintenanceWindowResponse extends  AbstractModel {
 }
 
 /**
+ * ReleaseWanAddress response structure.
+ * @class
+ */
+class ReleaseWanAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Status of disabling public network access
+         * @type {string || null}
+         */
+        this.WanStatus = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Product information
  * @class
  */
@@ -850,6 +870,48 @@ class BigKeyTypeInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceNodeInfo request structure.
+ * @class
+ */
+class DescribeInstanceNodeInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * List size
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The offset value
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeMaintenanceWindow request structure.
  * @class
  */
@@ -987,6 +1049,55 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         }
         this.Price = 'Price' in params ? params.Price : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Redis node information
+ * @class
+ */
+class RedisNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+        /**
+         * Shard ID
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * AZ ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -1407,6 +1518,147 @@ class DescribeInstanceMonitorBigKeyTypeDistResponse extends  AbstractModel {
 }
 
 /**
+ * Tendis node information
+ * @class
+ */
+class TendisNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+
+    }
+}
+
+/**
+ * AllocateWanAddress response structure.
+ * @class
+ */
+class AllocateWanAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Status of enabling public network access
+         * @type {string || null}
+         */
+        this.WanStatus = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Region information
+ * @class
+ */
+class RegionConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region ID
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Region abbreviation
+         * @type {string || null}
+         */
+        this.RegionShortName = null;
+
+        /**
+         * Name of the area where a region is located
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * AZ information
+         * @type {Array.<ZoneCapacityConf> || null}
+         */
+        this.ZoneSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionShortName = 'RegionShortName' in params ? params.RegionShortName : null;
+        this.Area = 'Area' in params ? params.Area : null;
+
+        if (params.ZoneSet) {
+            this.ZoneSet = new Array();
+            for (let z in params.ZoneSet) {
+                let obj = new ZoneCapacityConf();
+                obj.deserialize(params.ZoneSet[z]);
+                this.ZoneSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Sub-account information
  * @class
  */
@@ -1497,16 +1749,16 @@ class DescribeProductInfoRequest extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceMonitorBigKeySizeDist response structure.
+ * DescribeInstanceMonitorTopNCmd response structure.
  * @class
  */
-class DescribeInstanceMonitorBigKeySizeDistResponse extends  AbstractModel {
+class DescribeInstanceMonitorTopNCmdResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Big key size distribution details
-         * @type {Array.<DelayDistribution> || null}
+         * Access command information
+         * @type {Array.<SourceCommand> || null}
          */
         this.Data = null;
 
@@ -1529,7 +1781,7 @@ class DescribeInstanceMonitorBigKeySizeDistResponse extends  AbstractModel {
         if (params.Data) {
             this.Data = new Array();
             for (let z in params.Data) {
-                let obj = new DelayDistribution();
+                let obj = new SourceCommand();
                 obj.deserialize(params.Data[z]);
                 this.Data.push(obj);
             }
@@ -2047,6 +2299,216 @@ class DescribeInstanceMonitorSIPRequest extends  AbstractModel {
 }
 
 /**
+ * ChangeReplicaToMaster response structure.
+ * @class
+ */
+class ChangeReplicaToMasterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Product information in the availability zone
+ * @class
+ */
+class ZoneCapacityConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ ID, such as ap-guangzhou-3
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * AZ name
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * Whether a product is sold out in an AZ
+         * @type {boolean || null}
+         */
+        this.IsSaleout = null;
+
+        /**
+         * Whether it is a default AZ
+         * @type {boolean || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * Network type. basenet: basic network; vpcnet: VPC
+         * @type {Array.<string> || null}
+         */
+        this.NetWorkType = null;
+
+        /**
+         * Information of an AZ, such as product specifications in it
+         * @type {Array.<ProductConf> || null}
+         */
+        this.ProductSet = null;
+
+        /**
+         * AZ ID, such as 100003
+         * @type {number || null}
+         */
+        this.OldZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.IsSaleout = 'IsSaleout' in params ? params.IsSaleout : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.NetWorkType = 'NetWorkType' in params ? params.NetWorkType : null;
+
+        if (params.ProductSet) {
+            this.ProductSet = new Array();
+            for (let z in params.ProductSet) {
+                let obj = new ProductConf();
+                obj.deserialize(params.ProductSet[z]);
+                this.ProductSet.push(obj);
+            }
+        }
+        this.OldZoneId = 'OldZoneId' in params ? params.OldZoneId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceNodeInfo response structure.
+ * @class
+ */
+class DescribeInstanceNodeInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of proxy nodes
+         * @type {number || null}
+         */
+        this.ProxyCount = null;
+
+        /**
+         * Proxy node information
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ProxyNodes> || null}
+         */
+        this.Proxy = null;
+
+        /**
+         * The number of redis nodes
+         * @type {number || null}
+         */
+        this.RedisCount = null;
+
+        /**
+         * Redis node information
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<RedisNodes> || null}
+         */
+        this.Redis = null;
+
+        /**
+         * The number of tendis nodes
+         * @type {number || null}
+         */
+        this.TendisCount = null;
+
+        /**
+         * Tendis node information
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TendisNodes> || null}
+         */
+        this.Tendis = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
+
+        if (params.Proxy) {
+            this.Proxy = new Array();
+            for (let z in params.Proxy) {
+                let obj = new ProxyNodes();
+                obj.deserialize(params.Proxy[z]);
+                this.Proxy.push(obj);
+            }
+        }
+        this.RedisCount = 'RedisCount' in params ? params.RedisCount : null;
+
+        if (params.Redis) {
+            this.Redis = new Array();
+            for (let z in params.Redis) {
+                let obj = new RedisNodes();
+                obj.deserialize(params.Redis[z]);
+                this.Redis.push(obj);
+            }
+        }
+        this.TendisCount = 'TendisCount' in params ? params.TendisCount : null;
+
+        if (params.Tendis) {
+            this.Tendis = new Array();
+            for (let z in params.Tendis) {
+                let obj = new TendisNodes();
+                obj.deserialize(params.Tendis[z]);
+                this.Tendis.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeReplicationGroup request structure.
  * @class
  */
@@ -2322,23 +2784,28 @@ class InstanceSlowlogDetail extends  AbstractModel {
 }
 
 module.exports = {
-    RegionConf: RegionConf,
-    ZoneCapacityConf: ZoneCapacityConf,
+    ChangeReplicaToMasterRequest: ChangeReplicaToMasterRequest,
+    ReleaseWanAddressRequest: ReleaseWanAddressRequest,
+    ProxyNodes: ProxyNodes,
     DescribeInstanceMonitorTopNCmdTookRequest: DescribeInstanceMonitorTopNCmdTookRequest,
     Instances: Instances,
-    DescribeInstanceMonitorTopNCmdResponse: DescribeInstanceMonitorTopNCmdResponse,
+    DescribeInstanceMonitorBigKeySizeDistResponse: DescribeInstanceMonitorBigKeySizeDistResponse,
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
     DescribeInstanceMonitorHotKeyRequest: DescribeInstanceMonitorHotKeyRequest,
+    AllocateWanAddressRequest: AllocateWanAddressRequest,
     DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     DescribeProductInfoResponse: DescribeProductInfoResponse,
     DescribeMaintenanceWindowResponse: DescribeMaintenanceWindowResponse,
+    ReleaseWanAddressResponse: ReleaseWanAddressResponse,
     ProductConf: ProductConf,
     BigKeyTypeInfo: BigKeyTypeInfo,
+    DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
     CommandTake: CommandTake,
     DescribeInstanceMonitorBigKeyResponse: DescribeInstanceMonitorBigKeyResponse,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
+    RedisNodes: RedisNodes,
     InquiryPriceUpgradeInstanceRequest: InquiryPriceUpgradeInstanceRequest,
     DelayDistribution: DelayDistribution,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
@@ -2347,9 +2814,12 @@ module.exports = {
     DescribeInstanceAccountResponse: DescribeInstanceAccountResponse,
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
     DescribeInstanceMonitorBigKeyTypeDistResponse: DescribeInstanceMonitorBigKeyTypeDistResponse,
+    TendisNodes: TendisNodes,
+    AllocateWanAddressResponse: AllocateWanAddressResponse,
+    RegionConf: RegionConf,
     Account: Account,
     DescribeProductInfoRequest: DescribeProductInfoRequest,
-    DescribeInstanceMonitorBigKeySizeDistResponse: DescribeInstanceMonitorBigKeySizeDistResponse,
+    DescribeInstanceMonitorTopNCmdResponse: DescribeInstanceMonitorTopNCmdResponse,
     SourceCommand: SourceCommand,
     HotKeyInfo: HotKeyInfo,
     BigKeyInfo: BigKeyInfo,
@@ -2362,6 +2832,9 @@ module.exports = {
     DescribeInstanceMonitorSIPResponse: DescribeInstanceMonitorSIPResponse,
     SourceInfo: SourceInfo,
     DescribeInstanceMonitorSIPRequest: DescribeInstanceMonitorSIPRequest,
+    ChangeReplicaToMasterResponse: ChangeReplicaToMasterResponse,
+    ZoneCapacityConf: ZoneCapacityConf,
+    DescribeInstanceNodeInfoResponse: DescribeInstanceNodeInfoResponse,
     DescribeReplicationGroupRequest: DescribeReplicationGroupRequest,
     DescribeReplicationGroupResponse: DescribeReplicationGroupResponse,
     DescribeInstanceMonitorHotKeyResponse: DescribeInstanceMonitorHotKeyResponse,

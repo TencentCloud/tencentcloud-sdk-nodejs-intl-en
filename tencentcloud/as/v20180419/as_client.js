@@ -16,22 +16,16 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DisableAutoScalingGroupResponse = models.DisableAutoScalingGroupResponse;
 const ModifyLaunchConfigurationAttributesRequest = models.ModifyLaunchConfigurationAttributesRequest;
-const DisableAutoScalingGroupRequest = models.DisableAutoScalingGroupRequest;
 const ModifyAutoScalingGroupRequest = models.ModifyAutoScalingGroupRequest;
-const ScaleOutInstancesRequest = models.ScaleOutInstancesRequest;
 const AutoScalingNotification = models.AutoScalingNotification;
 const ModifyScheduledActionRequest = models.ModifyScheduledActionRequest;
 const DescribeAutoScalingGroupsRequest = models.DescribeAutoScalingGroupsRequest;
-const LaunchConfiguration = models.LaunchConfiguration;
 const DescribeAccountLimitsResponse = models.DescribeAccountLimitsResponse;
-const CreateLaunchConfigurationResponse = models.CreateLaunchConfigurationResponse;
 const Advice = models.Advice;
 const CreateLifecycleHookResponse = models.CreateLifecycleHookResponse;
 const ClearLaunchConfigurationAttributesResponse = models.ClearLaunchConfigurationAttributesResponse;
 const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsResponse;
-const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
 const SystemDisk = models.SystemDisk;
 const SpotMarketOptions = models.SpotMarketOptions;
 const StopAutoScalingInstancesResponse = models.StopAutoScalingInstancesResponse;
@@ -47,7 +41,7 @@ const StartAutoScalingInstancesResponse = models.StartAutoScalingInstancesRespon
 const CompleteLifecycleActionRequest = models.CompleteLifecycleActionRequest;
 const CreateScalingPolicyResponse = models.CreateScalingPolicyResponse;
 const CreateNotificationConfigurationResponse = models.CreateNotificationConfigurationResponse;
-const DescribeLaunchConfigurationsResponse = models.DescribeLaunchConfigurationsResponse;
+const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
 const DeleteScalingPolicyResponse = models.DeleteScalingPolicyResponse;
 const Tag = models.Tag;
@@ -60,7 +54,6 @@ const SetInstancesProtectionRequest = models.SetInstancesProtectionRequest;
 const DeleteNotificationConfigurationResponse = models.DeleteNotificationConfigurationResponse;
 const DetachInstancesResponse = models.DetachInstancesResponse;
 const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
-const CreateLaunchConfigurationRequest = models.CreateLaunchConfigurationRequest;
 const AutoScalingGroup = models.AutoScalingGroup;
 const AttachInstancesResponse = models.AttachInstancesResponse;
 const DescribeAutoScalingGroupLastActivitiesResponse = models.DescribeAutoScalingGroupLastActivitiesResponse;
@@ -80,16 +73,14 @@ const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest
 const ModifyScalingPolicyRequest = models.ModifyScalingPolicyRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const UpgradeLifecycleHookResponse = models.UpgradeLifecycleHookResponse;
-const InstanceTag = models.InstanceTag;
+const ModifyLifecycleHookResponse = models.ModifyLifecycleHookResponse;
 const DescribeAutoScalingAdvicesResponse = models.DescribeAutoScalingAdvicesResponse;
 const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
 const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
-const UpgradeLaunchConfigurationRequest = models.UpgradeLaunchConfigurationRequest;
 const DescribeAutoScalingActivitiesResponse = models.DescribeAutoScalingActivitiesResponse;
 const DescribeNotificationConfigurationsResponse = models.DescribeNotificationConfigurationsResponse;
 const DataDisk = models.DataDisk;
 const DeleteScalingPolicyRequest = models.DeleteScalingPolicyRequest;
-const LoginSettings = models.LoginSettings;
 const CreateAutoScalingGroupFromInstanceResponse = models.CreateAutoScalingGroupFromInstanceResponse;
 const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
@@ -104,30 +95,25 @@ const ModifyDesiredCapacityRequest = models.ModifyDesiredCapacityRequest;
 const CreateScheduledActionResponse = models.CreateScheduledActionResponse;
 const CreateLifecycleHookRequest = models.CreateLifecycleHookRequest;
 const ScheduledAction = models.ScheduledAction;
+const ModifyLifecycleHookRequest = models.ModifyLifecycleHookRequest;
 const CompleteLifecycleActionResponse = models.CompleteLifecycleActionResponse;
-const ScaleOutInstancesResponse = models.ScaleOutInstancesResponse;
 const Filter = models.Filter;
 const DescribeLifecycleHooksRequest = models.DescribeLifecycleHooksRequest;
 const ServiceSettings = models.ServiceSettings;
 const CreateAutoScalingGroupResponse = models.CreateAutoScalingGroupResponse;
 const TargetAttribute = models.TargetAttribute;
 const ModifyNotificationConfigurationResponse = models.ModifyNotificationConfigurationResponse;
-const LimitedLoginSettings = models.LimitedLoginSettings;
 const DescribeLifecycleHooksResponse = models.DescribeLifecycleHooksResponse;
 const CreateScalingPolicyRequest = models.CreateScalingPolicyRequest;
-const ScaleInInstancesResponse = models.ScaleInInstancesResponse;
 const DescribeAutoScalingAdvicesRequest = models.DescribeAutoScalingAdvicesRequest;
 const DeleteNotificationConfigurationRequest = models.DeleteNotificationConfigurationRequest;
-const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
 const NotificationTarget = models.NotificationTarget;
 const ModifyLoadBalancerTargetAttributesRequest = models.ModifyLoadBalancerTargetAttributesRequest;
 const DeleteAutoScalingGroupResponse = models.DeleteAutoScalingGroupResponse;
 const LifecycleActionResultInfo = models.LifecycleActionResultInfo;
-const AutoScalingGroupAbstract = models.AutoScalingGroupAbstract;
 const EnableAutoScalingGroupRequest = models.EnableAutoScalingGroupRequest;
 const MetricAlarm = models.MetricAlarm;
 const DescribeNotificationConfigurationsRequest = models.DescribeNotificationConfigurationsRequest;
-const ScaleInInstancesRequest = models.ScaleInInstancesRequest;
 const LifecycleHook = models.LifecycleHook;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
 const ClearLaunchConfigurationAttributesRequest = models.ClearLaunchConfigurationAttributesRequest;
@@ -147,7 +133,6 @@ const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
 const CreateAutoScalingGroupFromInstanceRequest = models.CreateAutoScalingGroupFromInstanceRequest;
 const InternetAccessible = models.InternetAccessible;
 const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
-const UpgradeLaunchConfigurationResponse = models.UpgradeLaunchConfigurationResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const DeleteLifecycleHookResponse = models.DeleteLifecycleHookResponse;
 const ExecuteScalingPolicyRequest = models.ExecuteScalingPolicyRequest;
@@ -247,20 +232,6 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     }
 
     /**
-     * This API is used to add the specified number of instances to the scaling group, which returns the scaling activity ID `ActivityId`.
-* The scaling group is not active.
-* The desired capacity will be increased accordingly. The new desired capacity should be no more than the maximum capacity.
-* If the scale-out activity failed or partially succeeded, the final desired capacity only includes the instances that have been added successfully.
-     * @param {ScaleOutInstancesRequest} req
-     * @param {function(string, ScaleOutInstancesResponse):void} cb
-     * @public
-     */
-    ScaleOutInstances(req, cb) {
-        let resp = new ScaleOutInstancesResponse();
-        this.request("ScaleOutInstances", req, resp, cb);
-    }
-
-    /**
      * This API is used to start up CVM instances in a scaling group.
 * After startup, the instance will be in the `IN_SERVICE` status, which will increase the desired capacity. Please note that the desired capacity cannot exceed the maximum value.
 * This API supports batch operation. Up to 100 instances can be started up in each request.
@@ -274,17 +245,14 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     }
 
     /**
-     * This API (UpgradeLaunchConfiguration) is used to upgrade a launch configuration.
-
-* This API is used to upgrade a launch configuration in a "completely overriding" manner, i.e., it uniformly sets a new configuration according to the API parameters regardless of the original parameters. If optional fields are left empty, their default values will be used.
-* After the launch configuration is upgraded, the existing instances that have been created by it will not be changed, but new instances will be created according to the new configuration.
-     * @param {UpgradeLaunchConfigurationRequest} req
-     * @param {function(string, UpgradeLaunchConfigurationResponse):void} cb
+     * This API is used to modify the lifecycle hook.
+     * @param {ModifyLifecycleHookRequest} req
+     * @param {function(string, ModifyLifecycleHookResponse):void} cb
      * @public
      */
-    UpgradeLaunchConfiguration(req, cb) {
-        let resp = new UpgradeLaunchConfigurationResponse();
-        this.request("UpgradeLaunchConfiguration", req, resp, cb);
+    ModifyLifecycleHook(req, cb) {
+        let resp = new ModifyLifecycleHookResponse();
+        this.request("ModifyLifecycleHook", req, resp, cb);
     }
 
     /**
@@ -355,22 +323,6 @@ If the parameter is empty, a certain number (specified by `Limit` and 20 by defa
     DetachInstances(req, cb) {
         let resp = new DetachInstancesResponse();
         this.request("DetachInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to reduce the specified number of instances from the scaling group, which returns the scaling activity ID `ActivityId`.
-* The scaling group is not active.
-* The scale-in instances will be selected according to the `TerminationPolicies` policy as described in [Reducing Capacity](https://intl.cloud.tencent.com/document/product/377/8563?from_cn_redirect=1).
-* Only the `IN_SERVICE` instances will be reduced. To reduce instances in other statues, use the [`DetachInstances`](https://intl.cloud.tencent.com/document/api/377/20436?from_cn_redirect=1) or [`RemoveInstances`](https://intl.cloud.tencent.com/document/api/377/20431?from_cn_redirect=1) API.
-* The desired capacity will be reduced accordingly. The new desired capacity should be no less than the minimum capacity.
-* If the scale-in activity failed or partially succeeded, the final desired capacity only deducts the instances that have been reduced successfully.
-     * @param {ScaleInInstancesRequest} req
-     * @param {function(string, ScaleInInstancesResponse):void} cb
-     * @public
-     */
-    ScaleInInstances(req, cb) {
-        let resp = new ScaleInInstancesResponse();
-        this.request("ScaleInInstances", req, resp, cb);
     }
 
     /**
@@ -473,18 +425,6 @@ When scale-in protection is enabled, the instance will not be removed in scale-i
     }
 
     /**
-     * This API is used to modify a notification policy.
-* The receiver type of the notification policy cannot be modified.
-     * @param {ModifyNotificationConfigurationRequest} req
-     * @param {function(string, ModifyNotificationConfigurationResponse):void} cb
-     * @public
-     */
-    ModifyNotificationConfiguration(req, cb) {
-        let resp = new ModifyNotificationConfigurationResponse();
-        this.request("ModifyNotificationConfiguration", req, resp, cb);
-    }
-
-    /**
      * This API is used to shut down CVM instances in a scaling group.
 * Use the `SOFT_FIRST` shutdown, which means the CVM will be forcibly shut down if the soft shutdown fails.
 * Shutting down instances in the `IN_SERVICE` status will reduce the desired capacity, but the desired capacity cannot be less than the minimum value.
@@ -500,19 +440,15 @@ When scale-in protection is enabled, the instance will not be removed in scale-i
     }
 
     /**
-     * This API (CreateLaunchConfiguration) is used to create a launch configuration.
-
-* A few fields of a launch configuration can be modified through `ModifyLaunchConfigurationAttributes`. To use a new launch configuration, it is recommended to create it from scratch.
-
-* You can create up to 20 launch configurations for each project. For more information, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
-
-     * @param {CreateLaunchConfigurationRequest} req
-     * @param {function(string, CreateLaunchConfigurationResponse):void} cb
+     * This API is used to modify a notification policy.
+* The receiver type of the notification policy cannot be modified.
+     * @param {ModifyNotificationConfigurationRequest} req
+     * @param {function(string, ModifyNotificationConfigurationResponse):void} cb
      * @public
      */
-    CreateLaunchConfiguration(req, cb) {
-        let resp = new CreateLaunchConfigurationResponse();
-        this.request("CreateLaunchConfiguration", req, resp, cb);
+    ModifyNotificationConfiguration(req, cb) {
+        let resp = new ModifyNotificationConfigurationResponse();
+        this.request("ModifyNotificationConfiguration", req, resp, cb);
     }
 
     /**
@@ -632,31 +568,6 @@ Note: for a scaling group that is created based on a monthly-subscribed instance
     UpgradeLifecycleHook(req, cb) {
         let resp = new UpgradeLifecycleHookResponse();
         this.request("UpgradeLifecycleHook", req, resp, cb);
-    }
-
-    /**
-     * This API (DisableAutoScalingGroup) is used to disable the specified auto scaling group.
-     * @param {DisableAutoScalingGroupRequest} req
-     * @param {function(string, DisableAutoScalingGroupResponse):void} cb
-     * @public
-     */
-    DisableAutoScalingGroup(req, cb) {
-        let resp = new DisableAutoScalingGroupResponse();
-        this.request("DisableAutoScalingGroup", req, resp, cb);
-    }
-
-    /**
-     * This API (DescribeLaunchConfigurations) is used to query the information of launch configurations.
-
-* You can query the launch configuration details based on information such as launch configuration ID and name. For more information on filters, see `Filter`.
-* If the parameter is empty, a certain number (specified by `Limit` and 20 by default) of launch configurations of the current user will be returned.
-     * @param {DescribeLaunchConfigurationsRequest} req
-     * @param {function(string, DescribeLaunchConfigurationsResponse):void} cb
-     * @public
-     */
-    DescribeLaunchConfigurations(req, cb) {
-        let resp = new DescribeLaunchConfigurationsResponse();
-        this.request("DescribeLaunchConfigurations", req, resp, cb);
     }
 
     /**

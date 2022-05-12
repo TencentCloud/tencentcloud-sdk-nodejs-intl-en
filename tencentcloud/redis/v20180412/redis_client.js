@@ -16,23 +16,28 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const RegionConf = models.RegionConf;
-const ZoneCapacityConf = models.ZoneCapacityConf;
+const ChangeReplicaToMasterRequest = models.ChangeReplicaToMasterRequest;
+const ReleaseWanAddressRequest = models.ReleaseWanAddressRequest;
+const ProxyNodes = models.ProxyNodes;
 const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
 const Instances = models.Instances;
-const DescribeInstanceMonitorTopNCmdResponse = models.DescribeInstanceMonitorTopNCmdResponse;
+const DescribeInstanceMonitorBigKeySizeDistResponse = models.DescribeInstanceMonitorBigKeySizeDistResponse;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
 const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
+const AllocateWanAddressRequest = models.AllocateWanAddressRequest;
 const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowResponse;
+const ReleaseWanAddressResponse = models.ReleaseWanAddressResponse;
 const ProductConf = models.ProductConf;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
+const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const CommandTake = models.CommandTake;
 const DescribeInstanceMonitorBigKeyResponse = models.DescribeInstanceMonitorBigKeyResponse;
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
+const RedisNodes = models.RedisNodes;
 const InquiryPriceUpgradeInstanceRequest = models.InquiryPriceUpgradeInstanceRequest;
 const DelayDistribution = models.DelayDistribution;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
@@ -41,9 +46,12 @@ const DescribeInstanceMonitorTookDistResponse = models.DescribeInstanceMonitorTo
 const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
 const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
 const DescribeInstanceMonitorBigKeyTypeDistResponse = models.DescribeInstanceMonitorBigKeyTypeDistResponse;
+const TendisNodes = models.TendisNodes;
+const AllocateWanAddressResponse = models.AllocateWanAddressResponse;
+const RegionConf = models.RegionConf;
 const Account = models.Account;
 const DescribeProductInfoRequest = models.DescribeProductInfoRequest;
-const DescribeInstanceMonitorBigKeySizeDistResponse = models.DescribeInstanceMonitorBigKeySizeDistResponse;
+const DescribeInstanceMonitorTopNCmdResponse = models.DescribeInstanceMonitorTopNCmdResponse;
 const SourceCommand = models.SourceCommand;
 const HotKeyInfo = models.HotKeyInfo;
 const BigKeyInfo = models.BigKeyInfo;
@@ -56,6 +64,9 @@ const InquiryPriceUpgradeInstanceResponse = models.InquiryPriceUpgradeInstanceRe
 const DescribeInstanceMonitorSIPResponse = models.DescribeInstanceMonitorSIPResponse;
 const SourceInfo = models.SourceInfo;
 const DescribeInstanceMonitorSIPRequest = models.DescribeInstanceMonitorSIPRequest;
+const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
+const ZoneCapacityConf = models.ZoneCapacityConf;
+const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
 const DescribeReplicationGroupRequest = models.DescribeReplicationGroupRequest;
 const DescribeReplicationGroupResponse = models.DescribeReplicationGroupResponse;
 const DescribeInstanceMonitorHotKeyResponse = models.DescribeInstanceMonitorHotKeyResponse;
@@ -75,6 +86,17 @@ class RedisClient extends AbstractClient {
     }
     
     /**
+     * This API is used to change the Redis password.
+     * @param {ModfiyInstancePasswordRequest} req
+     * @param {function(string, ModfiyInstancePasswordResponse):void} cb
+     * @public
+     */
+    ModfiyInstancePassword(req, cb) {
+        let resp = new ModfiyInstancePasswordResponse();
+        this.request("ModfiyInstancePassword", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the global replication group.
      * @param {DescribeReplicationGroupRequest} req
      * @param {function(string, DescribeReplicationGroupResponse):void} cb
@@ -83,6 +105,17 @@ class RedisClient extends AbstractClient {
     DescribeReplicationGroup(req, cb) {
         let resp = new DescribeReplicationGroupResponse();
         this.request("DescribeReplicationGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query instance node information.
+     * @param {DescribeInstanceNodeInfoRequest} req
+     * @param {function(string, DescribeInstanceNodeInfoResponse):void} cb
+     * @public
+     */
+    DescribeInstanceNodeInfo(req, cb) {
+        let resp = new DescribeInstanceNodeInfoResponse();
+        this.request("DescribeInstanceNodeInfo", req, resp, cb);
     }
 
     /**
@@ -116,6 +149,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceMonitorSIP(req, cb) {
         let resp = new DescribeInstanceMonitorSIPResponse();
         this.request("DescribeInstanceMonitorSIP", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable public network access.
+     * @param {ReleaseWanAddressRequest} req
+     * @param {function(string, ReleaseWanAddressResponse):void} cb
+     * @public
+     */
+    ReleaseWanAddress(req, cb) {
+        let resp = new ReleaseWanAddressResponse();
+        this.request("ReleaseWanAddress", req, resp, cb);
     }
 
     /**
@@ -163,6 +207,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to enable public network access.
+     * @param {AllocateWanAddressRequest} req
+     * @param {function(string, AllocateWanAddressResponse):void} cb
+     * @public
+     */
+    AllocateWanAddress(req, cb) {
+        let resp = new AllocateWanAddressResponse();
+        this.request("AllocateWanAddress", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the big key type distribution of an instance
      * @param {DescribeInstanceMonitorBigKeyTypeDistRequest} req
      * @param {function(string, DescribeInstanceMonitorBigKeyTypeDistResponse):void} cb
@@ -207,14 +262,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change the Redis password.
-     * @param {ModfiyInstancePasswordRequest} req
-     * @param {function(string, ModfiyInstancePasswordResponse):void} cb
+     * This API is used to promote a replica node group of a multi-AZ deployed instance to master node group or a replica node of a single-AZ deployed instance to master node.
+     * @param {ChangeReplicaToMasterRequest} req
+     * @param {function(string, ChangeReplicaToMasterResponse):void} cb
      * @public
      */
-    ModfiyInstancePassword(req, cb) {
-        let resp = new ModfiyInstancePasswordResponse();
-        this.request("ModfiyInstancePassword", req, resp, cb);
+    ChangeReplicaToMaster(req, cb) {
+        let resp = new ChangeReplicaToMasterResponse();
+        this.request("ChangeReplicaToMaster", req, resp, cb);
     }
 
     /**

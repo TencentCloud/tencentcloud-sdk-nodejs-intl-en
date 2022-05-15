@@ -2422,6 +2422,34 @@ class DescribeOrdersResponse extends  AbstractModel {
 }
 
 /**
+ * OpenServerlessDBExtranetAccess response structure.
+ * @class
+ */
+class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InquiryPriceCreateDBInstances response structure.
  * @class
  */
@@ -4573,57 +4601,6 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeServerlessDBInstances response structure.
- * @class
- */
-class DescribeServerlessDBInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The number of query results
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Query results
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<ServerlessDBInstance> || null}
-         */
-        this.DBInstanceSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.DBInstanceSet) {
-            this.DBInstanceSet = new Array();
-            for (let z in params.DBInstanceSet) {
-                let obj = new ServerlessDBInstance();
-                obj.deserialize(params.DBInstanceSet[z]);
-                this.DBInstanceSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeParamsEvent response structure.
  * @class
  */
@@ -5169,18 +5146,54 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
 }
 
 /**
- * OpenServerlessDBExtranetAccess response structure.
+ * KMS key information
  * @class
  */
-class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
+class EncryptionKey extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Encrypted KeyId of KMS instance
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.KeyId = null;
+
+        /**
+         * Encryption key alias of KMS instance 
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.KeyAlias = null;
+
+        /**
+         * Instance DEK ciphertext
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.DEKCipherTextBlob = null;
+
+        /**
+         * Whether the key is enabled. Valid values: `1` (yes), `0` (no)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.IsEnabled = null;
+
+        /**
+         * Region where KMS key resides
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.KeyRegion = null;
+
+        /**
+         * DEK key creation time
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
 
     }
 
@@ -5191,7 +5204,12 @@ class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KeyAlias = 'KeyAlias' in params ? params.KeyAlias : null;
+        this.DEKCipherTextBlob = 'DEKCipherTextBlob' in params ? params.DEKCipherTextBlob : null;
+        this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
+        this.KeyRegion = 'KeyRegion' in params ? params.KeyRegion : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -5365,85 +5383,31 @@ class ErrLogDetail extends  AbstractModel {
 }
 
 /**
- * Database backup information
+ * DescribeServerlessDBInstances response structure.
  * @class
  */
-class DBBackup extends  AbstractModel {
+class DescribeServerlessDBInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique backup file ID
+         * The number of query results
          * @type {number || null}
          */
-        this.Id = null;
+        this.TotalCount = null;
 
         /**
-         * File generation start time
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * File generation end time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * File size in KB
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * Policy (0: instance backup, 1: multi-database backup)
-         * @type {number || null}
-         */
-        this.Strategy = null;
-
-        /**
-         * Type (0: scheduled)
-         * @type {number || null}
-         */
-        this.Way = null;
-
-        /**
-         * Backup mode (1: full)
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Status (1: creating, 2: success, 3: failure)
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * DB list
-         * @type {Array.<string> || null}
-         */
-        this.DbList = null;
-
-        /**
-         * Download address on private network
-         * @type {string || null}
-         */
-        this.InternalAddr = null;
-
-        /**
-         * Download address on public network
-         * @type {string || null}
-         */
-        this.ExternalAddr = null;
-
-        /**
-         * Backup set ID
+         * Query results
 Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ServerlessDBInstance> || null}
+         */
+        this.DBInstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.SetId = null;
+        this.RequestId = null;
 
     }
 
@@ -5454,18 +5418,17 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Strategy = 'Strategy' in params ? params.Strategy : null;
-        this.Way = 'Way' in params ? params.Way : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.DbList = 'DbList' in params ? params.DbList : null;
-        this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
-        this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
-        this.SetId = 'SetId' in params ? params.SetId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DBInstanceSet) {
+            this.DBInstanceSet = new Array();
+            for (let z in params.DBInstanceSet) {
+                let obj = new ServerlessDBInstance();
+                obj.deserialize(params.DBInstanceSet[z]);
+                this.DBInstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6722,6 +6685,48 @@ class DescribeOrdersRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyAccountRemark request structure.
+ * @class
+ */
+class ModifyAccountRemarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of postgres-4wdeb0zv
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Instance username
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * New remarks corresponding to user `UserName`
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
  * CloseDBExtranetAccess request structure.
  * @class
  */
@@ -6752,6 +6757,34 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
         this.IsIpv6 = 'IsIpv6' in params ? params.IsIpv6 : null;
+
+    }
+}
+
+/**
+ * DescribeEncryptionKeys request structure.
+ * @class
+ */
+class DescribeEncryptionKeysRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -7110,30 +7143,85 @@ class AccountInfo extends  AbstractModel {
 }
 
 /**
- * ModifyAccountRemark request structure.
+ * Database backup information
  * @class
  */
-class ModifyAccountRemarkRequest extends  AbstractModel {
+class DBBackup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of postgres-4wdeb0zv
-         * @type {string || null}
+         * Unique backup file ID
+         * @type {number || null}
          */
-        this.DBInstanceId = null;
+        this.Id = null;
 
         /**
-         * Instance username
+         * File generation start time
          * @type {string || null}
          */
-        this.UserName = null;
+        this.StartTime = null;
 
         /**
-         * New remarks corresponding to user `UserName`
+         * File generation end time
          * @type {string || null}
          */
-        this.Remark = null;
+        this.EndTime = null;
+
+        /**
+         * File size in KB
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * Policy (0: instance backup, 1: multi-database backup)
+         * @type {number || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * Type (0: scheduled)
+         * @type {number || null}
+         */
+        this.Way = null;
+
+        /**
+         * Backup mode (1: full)
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Status (1: creating, 2: success, 3: failure)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * DB list
+         * @type {Array.<string> || null}
+         */
+        this.DbList = null;
+
+        /**
+         * Download address on private network
+         * @type {string || null}
+         */
+        this.InternalAddr = null;
+
+        /**
+         * Download address on public network
+         * @type {string || null}
+         */
+        this.ExternalAddr = null;
+
+        /**
+         * Backup set ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SetId = null;
 
     }
 
@@ -7144,9 +7232,18 @@ class ModifyAccountRemarkRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.Way = 'Way' in params ? params.Way : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DbList = 'DbList' in params ? params.DbList : null;
+        this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
+        this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
+        this.SetId = 'SetId' in params ? params.SetId : null;
 
     }
 }
@@ -8325,6 +8422,50 @@ class DescribeDBXlogsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeEncryptionKeys response structure.
+ * @class
+ */
+class DescribeEncryptionKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance key list
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<EncryptionKey> || null}
+         */
+        this.EncryptionKeys = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EncryptionKeys) {
+            this.EncryptionKeys = new Array();
+            for (let z in params.EncryptionKeys) {
+                let obj = new EncryptionKey();
+                obj.deserialize(params.EncryptionKeys[z]);
+                this.EncryptionKeys.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBSlowlogs response structure.
  * @class
  */
@@ -8463,6 +8604,7 @@ module.exports = {
     DurationAnalysis: DurationAnalysis,
     DescribeDBInstanceParametersRequest: DescribeDBInstanceParametersRequest,
     DescribeOrdersResponse: DescribeOrdersResponse,
+    OpenServerlessDBExtranetAccessResponse: OpenServerlessDBExtranetAccessResponse,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
     CreateDBInstanceNetworkAccessRequest: CreateDBInstanceNetworkAccessRequest,
     ModifySwitchTimePeriodResponse: ModifySwitchTimePeriodResponse,
@@ -8499,7 +8641,6 @@ module.exports = {
     ServerlessDBInstance: ServerlessDBInstance,
     CreateReadOnlyGroupRequest: CreateReadOnlyGroupRequest,
     CreateReadOnlyGroupNetworkAccessResponse: CreateReadOnlyGroupNetworkAccessResponse,
-    DescribeServerlessDBInstancesResponse: DescribeServerlessDBInstancesResponse,
     DescribeParamsEventResponse: DescribeParamsEventResponse,
     CloseServerlessDBExtranetAccessResponse: CloseServerlessDBExtranetAccessResponse,
     EventItem: EventItem,
@@ -8511,11 +8652,11 @@ module.exports = {
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
     RebalanceReadOnlyGroupResponse: RebalanceReadOnlyGroupResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
-    OpenServerlessDBExtranetAccessResponse: OpenServerlessDBExtranetAccessResponse,
+    EncryptionKey: EncryptionKey,
     InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
     DescribeSlowQueryAnalysisRequest: DescribeSlowQueryAnalysisRequest,
     ErrLogDetail: ErrLogDetail,
-    DBBackup: DBBackup,
+    DescribeServerlessDBInstancesResponse: DescribeServerlessDBInstancesResponse,
     IsolateDBInstancesRequest: IsolateDBInstancesRequest,
     InitDBInstancesRequest: InitDBInstancesRequest,
     DeleteDBInstanceNetworkAccessRequest: DeleteDBInstanceNetworkAccessRequest,
@@ -8538,7 +8679,9 @@ module.exports = {
     CreateServerlessDBInstanceResponse: CreateServerlessDBInstanceResponse,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeOrdersRequest: DescribeOrdersRequest,
+    ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
+    DescribeEncryptionKeysRequest: DescribeEncryptionKeysRequest,
     ModifyBackupPlanResponse: ModifyBackupPlanResponse,
     CreateServerlessDBInstanceRequest: CreateServerlessDBInstanceRequest,
     InquiryPriceRenewDBInstanceRequest: InquiryPriceRenewDBInstanceRequest,
@@ -8547,7 +8690,7 @@ module.exports = {
     DeleteServerlessDBInstanceRequest: DeleteServerlessDBInstanceRequest,
     ModifyReadOnlyGroupConfigResponse: ModifyReadOnlyGroupConfigResponse,
     AccountInfo: AccountInfo,
-    ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
+    DBBackup: DBBackup,
     DescribeDBErrlogsResponse: DescribeDBErrlogsResponse,
     ModifyBackupPlanRequest: ModifyBackupPlanRequest,
     ParamEntry: ParamEntry,
@@ -8573,6 +8716,7 @@ module.exports = {
     DescribeDBInstanceAttributeResponse: DescribeDBInstanceAttributeResponse,
     ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
     DescribeDBXlogsResponse: DescribeDBXlogsResponse,
+    DescribeEncryptionKeysResponse: DescribeEncryptionKeysResponse,
     DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
     CreateDBInstancesResponse: CreateDBInstancesResponse,
 

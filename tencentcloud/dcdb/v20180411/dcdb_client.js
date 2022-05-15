@@ -33,11 +33,12 @@ const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const DestroyHourDCDBInstanceResponse = models.DestroyHourDCDBInstanceResponse;
+const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
 const CloneAccountResponse = models.CloneAccountResponse;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const DestroyDCDBInstanceRequest = models.DestroyDCDBInstanceRequest;
-const ParamConstraint = models.ParamConstraint;
+const BriefNodeInfo = models.BriefNodeInfo;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
 const DatabaseView = models.DatabaseView;
@@ -50,7 +51,7 @@ const ParamModifyResult = models.ParamModifyResult;
 const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DatabaseFunction = models.DatabaseFunction;
-const BriefNodeInfo = models.BriefNodeInfo;
+const ParamConstraint = models.ParamConstraint;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const DatabaseTable = models.DatabaseTable;
@@ -70,6 +71,7 @@ const SecurityGroup = models.SecurityGroup;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const DescribeDCDBInstanceNodeInfoResponse = models.DescribeDCDBInstanceNodeInfoResponse;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
+const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const TableColumn = models.TableColumn;
 const SecurityGroupBound = models.SecurityGroupBound;
@@ -515,6 +517,17 @@ Note: Accounts with the same username but different hosts are different accounts
     CloneAccount(req, cb) {
         let resp = new CloneAccountResponse();
         this.request("CloneAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance name.
+     * @param {ModifyDBInstanceNameRequest} req
+     * @param {function(string, ModifyDBInstanceNameResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceName(req, cb) {
+        let resp = new ModifyDBInstanceNameResponse();
+        this.request("ModifyDBInstanceName", req, resp, cb);
     }
 
     /**

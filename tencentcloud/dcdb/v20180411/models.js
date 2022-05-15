@@ -817,6 +817,41 @@ class DestroyHourDCDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceName response structure.
+ * @class
+ */
+class ModifyDBInstanceNameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeFlow response structure.
  * @class
  */
@@ -943,37 +978,30 @@ class DestroyDCDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * Parameter constraint
+ * Node information of a sharded database
  * @class
  */
-class ParamConstraint extends  AbstractModel {
+class BriefNodeInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Constraint type, such as `enum` and `section`
+         * Node ID
          * @type {string || null}
          */
-        this.Type = null;
+        this.NodeId = null;
 
         /**
-         * List of valid values when constraint type is `enum`
+         * Node role. Valid values: `master`, `slave`
          * @type {string || null}
          */
-        this.Enum = null;
+        this.Role = null;
 
         /**
-         * Range when constraint type is `section`
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {ConstraintRange || null}
-         */
-        this.Range = null;
-
-        /**
-         * List of valid values when constraint type is `string`
+         * The ID of the shard where the node resides
          * @type {string || null}
          */
-        this.String = null;
+        this.ShardId = null;
 
     }
 
@@ -984,15 +1012,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Enum = 'Enum' in params ? params.Enum : null;
-
-        if (params.Range) {
-            let obj = new ConstraintRange();
-            obj.deserialize(params.Range)
-            this.Range = obj;
-        }
-        this.String = 'String' in params ? params.String : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
 
     }
 }
@@ -1618,30 +1640,37 @@ class DatabaseFunction extends  AbstractModel {
 }
 
 /**
- * Node information of a sharded database
+ * Parameter constraint
  * @class
  */
-class BriefNodeInfo extends  AbstractModel {
+class ParamConstraint extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node ID
+         * Constraint type, such as `enum` and `section`
          * @type {string || null}
          */
-        this.NodeId = null;
+        this.Type = null;
 
         /**
-         * Node role. Valid values: `master`, `slave`
+         * List of valid values when constraint type is `enum`
          * @type {string || null}
          */
-        this.Role = null;
+        this.Enum = null;
 
         /**
-         * The ID of the shard where the node resides
+         * Range when constraint type is `section`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ConstraintRange || null}
+         */
+        this.Range = null;
+
+        /**
+         * List of valid values when constraint type is `string`
          * @type {string || null}
          */
-        this.ShardId = null;
+        this.String = null;
 
     }
 
@@ -1652,9 +1681,15 @@ class BriefNodeInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.Role = 'Role' in params ? params.Role : null;
-        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Enum = 'Enum' in params ? params.Enum : null;
+
+        if (params.Range) {
+            let obj = new ConstraintRange();
+            obj.deserialize(params.Range)
+            this.Range = obj;
+        }
+        this.String = 'String' in params ? params.String : null;
 
     }
 }
@@ -3097,6 +3132,41 @@ class DescribeDatabaseObjectsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceName request structure.
+ * @class
+ */
+class ModifyDBInstanceNameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of tdsql-hdaprz0v
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -5339,11 +5409,12 @@ module.exports = {
     CreateAccountRequest: CreateAccountRequest,
     DescribeDBParametersResponse: DescribeDBParametersResponse,
     DestroyHourDCDBInstanceResponse: DestroyHourDCDBInstanceResponse,
+    ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     DescribeFlowResponse: DescribeFlowResponse,
     CloneAccountResponse: CloneAccountResponse,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     DestroyDCDBInstanceRequest: DestroyDCDBInstanceRequest,
-    ParamConstraint: ParamConstraint,
+    BriefNodeInfo: BriefNodeInfo,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     DescribeDCDBInstanceNodeInfoRequest: DescribeDCDBInstanceNodeInfoRequest,
     DatabaseView: DatabaseView,
@@ -5356,7 +5427,7 @@ module.exports = {
     SwitchDBInstanceHAResponse: SwitchDBInstanceHAResponse,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     DatabaseFunction: DatabaseFunction,
-    BriefNodeInfo: BriefNodeInfo,
+    ParamConstraint: ParamConstraint,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
     DatabaseTable: DatabaseTable,
@@ -5376,6 +5447,7 @@ module.exports = {
     DescribeDatabaseTableRequest: DescribeDatabaseTableRequest,
     DescribeDCDBInstanceNodeInfoResponse: DescribeDCDBInstanceNodeInfoResponse,
     DescribeDatabaseObjectsResponse: DescribeDatabaseObjectsResponse,
+    ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     DescribeDcnDetailResponse: DescribeDcnDetailResponse,
     TableColumn: TableColumn,
     SecurityGroupBound: SecurityGroupBound,

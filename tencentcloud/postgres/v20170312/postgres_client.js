@@ -58,6 +58,7 @@ const DescribeAvailableRecoveryTimeRequest = models.DescribeAvailableRecoveryTim
 const DurationAnalysis = models.DurationAnalysis;
 const DescribeDBInstanceParametersRequest = models.DescribeDBInstanceParametersRequest;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
+const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAccessResponse;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
 const CreateDBInstanceNetworkAccessRequest = models.CreateDBInstanceNetworkAccessRequest;
 const ModifySwitchTimePeriodResponse = models.ModifySwitchTimePeriodResponse;
@@ -94,7 +95,6 @@ const DescribeSlowQueryListResponse = models.DescribeSlowQueryListResponse;
 const ServerlessDBInstance = models.ServerlessDBInstance;
 const CreateReadOnlyGroupRequest = models.CreateReadOnlyGroupRequest;
 const CreateReadOnlyGroupNetworkAccessResponse = models.CreateReadOnlyGroupNetworkAccessResponse;
-const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
 const DescribeParamsEventResponse = models.DescribeParamsEventResponse;
 const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
 const EventItem = models.EventItem;
@@ -106,11 +106,11 @@ const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const RebalanceReadOnlyGroupResponse = models.RebalanceReadOnlyGroupResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
-const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAccessResponse;
+const EncryptionKey = models.EncryptionKey;
 const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const DescribeSlowQueryAnalysisRequest = models.DescribeSlowQueryAnalysisRequest;
 const ErrLogDetail = models.ErrLogDetail;
-const DBBackup = models.DBBackup;
+const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
 const IsolateDBInstancesRequest = models.IsolateDBInstancesRequest;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const DeleteDBInstanceNetworkAccessRequest = models.DeleteDBInstanceNetworkAccessRequest;
@@ -133,7 +133,9 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const CreateServerlessDBInstanceResponse = models.CreateServerlessDBInstanceResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
+const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
+const DescribeEncryptionKeysRequest = models.DescribeEncryptionKeysRequest;
 const ModifyBackupPlanResponse = models.ModifyBackupPlanResponse;
 const CreateServerlessDBInstanceRequest = models.CreateServerlessDBInstanceRequest;
 const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
@@ -142,7 +144,7 @@ const DeleteDBInstanceNetworkAccessResponse = models.DeleteDBInstanceNetworkAcce
 const DeleteServerlessDBInstanceRequest = models.DeleteServerlessDBInstanceRequest;
 const ModifyReadOnlyGroupConfigResponse = models.ModifyReadOnlyGroupConfigResponse;
 const AccountInfo = models.AccountInfo;
-const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
+const DBBackup = models.DBBackup;
 const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
 const ModifyBackupPlanRequest = models.ModifyBackupPlanRequest;
 const ParamEntry = models.ParamEntry;
@@ -168,6 +170,7 @@ const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
+const DescribeEncryptionKeysResponse = models.DescribeEncryptionKeysResponse;
 const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
 const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
 
@@ -191,6 +194,17 @@ class PostgresClient extends AbstractClient {
     CreateReadOnlyGroupNetworkAccess(req, cb) {
         let resp = new CreateReadOnlyGroupNetworkAccessResponse();
         this.request("CreateReadOnlyGroupNetworkAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get instance key list.
+     * @param {DescribeEncryptionKeysRequest} req
+     * @param {function(string, DescribeEncryptionKeysResponse):void} cb
+     * @public
+     */
+    DescribeEncryptionKeys(req, cb) {
+        let resp = new DescribeEncryptionKeysResponse();
+        this.request("DescribeEncryptionKeys", req, resp, cb);
     }
 
     /**

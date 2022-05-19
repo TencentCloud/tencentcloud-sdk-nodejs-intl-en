@@ -17,53 +17,46 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const MultiDiskMC = models.MultiDiskMC;
+const ModifyResourceSchedulerRequest = models.ModifyResourceSchedulerRequest;
 const EmrProductConfigOutter = models.EmrProductConfigOutter;
 const LoginSettings = models.LoginSettings;
-const VPCSettings = models.VPCSettings;
-const PriceResource = models.PriceResource;
-const ScaleOutInstanceResponse = models.ScaleOutInstanceResponse;
+const TerminateTasksResponse = models.TerminateTasksResponse;
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const CustomServiceDefine = models.CustomServiceDefine;
 const Resource = models.Resource;
-const TerminateInstanceRequest = models.TerminateInstanceRequest;
-const PodVolume = models.PodVolume;
-const TerminateInstanceResponse = models.TerminateInstanceResponse;
+const ModifyResourceScheduleConfigRequest = models.ModifyResourceScheduleConfigRequest;
 const CreateInstanceResponse = models.CreateInstanceResponse;
-const PodSpec = models.PodSpec;
 const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceResponse;
 const TerminateTasksRequest = models.TerminateTasksRequest;
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
-const HostVolumeContext = models.HostVolumeContext;
 const ExternalService = models.ExternalService;
 const DescribeClusterNodesRequest = models.DescribeClusterNodesRequest;
 const PreExecuteFileSettings = models.PreExecuteFileSettings;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const ClusterExternalServiceInfo = models.ClusterExternalServiceInfo;
+const OutterResource = models.OutterResource;
+const DescribeResourceScheduleRequest = models.DescribeResourceScheduleRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const InquiryPriceScaleOutInstanceRequest = models.InquiryPriceScaleOutInstanceRequest;
+const UpdateInstanceSettings = models.UpdateInstanceSettings;
 const Tag = models.Tag;
 const Placement = models.Placement;
-const DynamicPodSpec = models.DynamicPodSpec;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const CustomMetaInfo = models.CustomMetaInfo;
-const PodParameter = models.PodParameter;
 const InquiryPriceUpdateInstanceRequest = models.InquiryPriceUpdateInstanceRequest;
 const COSSettings = models.COSSettings;
 const ClusterInstancesInfo = models.ClusterInstancesInfo;
 const MultiDisk = models.MultiDisk;
 const SearchItem = models.SearchItem;
-const InquiryPriceScaleOutInstanceResponse = models.InquiryPriceScaleOutInstanceResponse;
-const OutterResource = models.OutterResource;
-const UpdateInstanceSettings = models.UpdateInstanceSettings;
-const TerminateTasksResponse = models.TerminateTasksResponse;
+const ModifyResourceSchedulerResponse = models.ModifyResourceSchedulerResponse;
+const ModifyResourceScheduleConfigResponse = models.ModifyResourceScheduleConfigResponse;
+const VPCSettings = models.VPCSettings;
 const DescribeClusterNodesResponse = models.DescribeClusterNodesResponse;
 const NodeHardwareInfo = models.NodeHardwareInfo;
 const InquiryPriceUpdateInstanceResponse = models.InquiryPriceUpdateInstanceResponse;
 const NewResourceSpec = models.NewResourceSpec;
-const PersistentVolumeContext = models.PersistentVolumeContext;
 const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
+const DescribeResourceScheduleResponse = models.DescribeResourceScheduleResponse;
 const CdbInfo = models.CdbInfo;
-const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
 
 
 /**
@@ -76,17 +69,6 @@ class EmrClient extends AbstractClient {
         super("emr.tencentcloudapi.com", "2019-01-03", credential, region, profile);
     }
     
-    /**
-     * This API is used to terminate a task node.
-     * @param {TerminateTasksRequest} req
-     * @param {function(string, TerminateTasksResponse):void} cb
-     * @public
-     */
-    TerminateTasks(req, cb) {
-        let resp = new TerminateTasksResponse();
-        this.request("TerminateTasks", req, resp, cb);
-    }
-
     /**
      * This API is used to query EMR instances.
      * @param {DescribeInstancesRequest} req
@@ -118,6 +100,17 @@ class EmrClient extends AbstractClient {
     DescribeClusterNodes(req, cb) {
         let resp = new DescribeClusterNodesResponse();
         this.request("DescribeClusterNodes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the YARN resource scheduler (the change will take effect after you click Apply).
+     * @param {ModifyResourceSchedulerRequest} req
+     * @param {function(string, ModifyResourceSchedulerResponse):void} cb
+     * @public
+     */
+    ModifyResourceScheduler(req, cb) {
+        let resp = new ModifyResourceSchedulerResponse();
+        this.request("ModifyResourceScheduler", req, resp, cb);
     }
 
     /**
@@ -154,36 +147,36 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query price of scale-out.
-     * @param {InquiryPriceScaleOutInstanceRequest} req
-     * @param {function(string, InquiryPriceScaleOutInstanceResponse):void} cb
+     * This API is used to get data from the YARN Resource Scheduling page.
+     * @param {DescribeResourceScheduleRequest} req
+     * @param {function(string, DescribeResourceScheduleResponse):void} cb
      * @public
      */
-    InquiryPriceScaleOutInstance(req, cb) {
-        let resp = new InquiryPriceScaleOutInstanceResponse();
-        this.request("InquiryPriceScaleOutInstance", req, resp, cb);
+    DescribeResourceSchedule(req, cb) {
+        let resp = new DescribeResourceScheduleResponse();
+        this.request("DescribeResourceSchedule", req, resp, cb);
     }
 
     /**
-     * This API is used to scale out instance.
-     * @param {ScaleOutInstanceRequest} req
-     * @param {function(string, ScaleOutInstanceResponse):void} cb
+     * This API is used to modify the resource configuration of YARN Resource Scheduling.
+     * @param {ModifyResourceScheduleConfigRequest} req
+     * @param {function(string, ModifyResourceScheduleConfigResponse):void} cb
      * @public
      */
-    ScaleOutInstance(req, cb) {
-        let resp = new ScaleOutInstanceResponse();
-        this.request("ScaleOutInstance", req, resp, cb);
+    ModifyResourceScheduleConfig(req, cb) {
+        let resp = new ModifyResourceScheduleConfigResponse();
+        this.request("ModifyResourceScheduleConfig", req, resp, cb);
     }
 
     /**
-     * This API is used to terminate an EMR instance. It is only supported in the official paid edition of EMR.
-     * @param {TerminateInstanceRequest} req
-     * @param {function(string, TerminateInstanceResponse):void} cb
+     * This API is used to terminate a task node.
+     * @param {TerminateTasksRequest} req
+     * @param {function(string, TerminateTasksResponse):void} cb
      * @public
      */
-    TerminateInstance(req, cb) {
-        let resp = new TerminateInstanceResponse();
-        this.request("TerminateInstance", req, resp, cb);
+    TerminateTasks(req, cb) {
+        let resp = new TerminateTasksResponse();
+        this.request("TerminateTasks", req, resp, cb);
     }
 
 

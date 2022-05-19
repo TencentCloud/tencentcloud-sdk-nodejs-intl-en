@@ -62,6 +62,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyResourceScheduler request structure.
+ * @class
+ */
+class ModifyResourceSchedulerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * EMR cluster ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The original scheduler: `fair`
+         * @type {string || null}
+         */
+        this.OldValue = null;
+
+        /**
+         * The new scheduler: `capacity`
+         * @type {string || null}
+         */
+        this.NewValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OldValue = 'OldValue' in params ? params.OldValue : null;
+        this.NewValue = 'NewValue' in params ? params.NewValue : null;
+
+    }
+}
+
+/**
  * EMR product configuration
  * @class
  */
@@ -290,222 +332,12 @@ class LoginSettings extends  AbstractModel {
 }
 
 /**
- * VPC parameters
+ * TerminateTasks response structure.
  * @class
  */
-class VPCSettings extends  AbstractModel {
+class TerminateTasksResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * VPC ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-
-    }
-}
-
-/**
- * Resource queried for price
- * @class
- */
-class PriceResource extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Target specification
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Spec = null;
-
-        /**
-         * Disk type
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.StorageType = null;
-
-        /**
-         * Disk type
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * System disk size
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RootSize = null;
-
-        /**
-         * Memory size
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MemSize = null;
-
-        /**
-         * Number of cores
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Disk size
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * List of cloud disks
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MultiDisk> || null}
-         */
-        this.MultiDisks = null;
-
-        /**
-         * Number of disks
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DiskCnt = null;
-
-        /**
-         * Specification
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * Tag
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Number of disks
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DiskNum = null;
-
-        /**
-         * Number of local disks
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.LocalDiskNum = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Spec = 'Spec' in params ? params.Spec : null;
-        this.StorageType = 'StorageType' in params ? params.StorageType : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.RootSize = 'RootSize' in params ? params.RootSize : null;
-        this.MemSize = 'MemSize' in params ? params.MemSize : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-
-        if (params.MultiDisks) {
-            this.MultiDisks = new Array();
-            for (let z in params.MultiDisks) {
-                let obj = new MultiDisk();
-                obj.deserialize(params.MultiDisks[z]);
-                this.MultiDisks.push(obj);
-            }
-        }
-        this.DiskCnt = 'DiskCnt' in params ? params.DiskCnt : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
-        this.LocalDiskNum = 'LocalDiskNum' in params ? params.LocalDiskNum : null;
-
-    }
-}
-
-/**
- * ScaleOutInstance response structure.
- * @class
- */
-class ScaleOutInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Order number.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.DealNames = null;
-
-        /**
-         * Client token.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ClientToken = null;
-
-        /**
-         * Scaling workflow ID.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * Big order number.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.BillId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -522,11 +354,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.DealNames = 'DealNames' in params ? params.DealNames : null;
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.BillId = 'BillId' in params ? params.BillId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -886,24 +713,30 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * TerminateInstance request structure.
+ * ModifyResourceScheduleConfig request structure.
  * @class
  */
-class TerminateInstanceRequest extends  AbstractModel {
+class ModifyResourceScheduleConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
+         * EMR cluster ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * ID of terminated node. This parameter is reserved and does not need to be configured.
-         * @type {Array.<string> || null}
+         * Business identifier. `fair`: Edit fair configuration items; `fairPlan`: Edit the execution plan; `capacity`: Edit capacity configuration items.
+         * @type {string || null}
          */
-        this.ResourceIds = null;
+        this.Key = null;
+
+        /**
+         * Modified module information
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -915,90 +748,8 @@ class TerminateInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
-
-    }
-}
-
-/**
- * Pod storage device description.
- * @class
- */
-class PodVolume extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Storage type. Valid values: "pvc", "hostpath".
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VolumeType = null;
-
-        /**
-         * This field will take effect if `VolumeType` is `pvc`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {PersistentVolumeContext || null}
-         */
-        this.PVCVolume = null;
-
-        /**
-         * This field will take effect if `VolumeType` is `hostpath`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {HostVolumeContext || null}
-         */
-        this.HostVolume = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VolumeType = 'VolumeType' in params ? params.VolumeType : null;
-
-        if (params.PVCVolume) {
-            let obj = new PersistentVolumeContext();
-            obj.deserialize(params.PVCVolume)
-            this.PVCVolume = obj;
-        }
-
-        if (params.HostVolume) {
-            let obj = new HostVolumeContext();
-            obj.deserialize(params.HostVolume)
-            this.HostVolume = obj;
-        }
-
-    }
-}
-
-/**
- * TerminateInstance response structure.
- * @class
- */
-class TerminateInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1035,127 +786,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Resource description for container resource expansion
- * @class
- */
-class PodSpec extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Identifier of external resource provider, such as "cls-a1cd23fa".
-         * @type {string || null}
-         */
-        this.ResourceProviderIdentifier = null;
-
-        /**
-         * Type of external resource provider, such as "tke". Currently, only "tke" is supported.
-         * @type {string || null}
-         */
-        this.ResourceProviderType = null;
-
-        /**
-         * Purpose of the resource, i.e., node type, which currently can only be "TASK".
-         * @type {string || null}
-         */
-        this.NodeType = null;
-
-        /**
-         * Number of CPU cores.
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Memory size in GB.
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Mount point of resources for the host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod. (This parameter has been disused)
-         * @type {Array.<string> || null}
-         */
-        this.DataVolumes = null;
-
-        /**
-         * EKS cluster - CPU type. Valid values: "intel", "amd"
-         * @type {string || null}
-         */
-        this.CpuType = null;
-
-        /**
-         * Pod node data directory mounting information.
-         * @type {Array.<PodVolume> || null}
-         */
-        this.PodVolumes = null;
-
-        /**
-         * Whether floating specification is used. `1`: yes; `0`: no
-         * @type {number || null}
-         */
-        this.IsDynamicSpec = null;
-
-        /**
-         * Floating specification
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {DynamicPodSpec || null}
-         */
-        this.DynamicPodSpec = null;
-
-        /**
-         * Unique VPC ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Unique VPC subnet ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ResourceProviderIdentifier = 'ResourceProviderIdentifier' in params ? params.ResourceProviderIdentifier : null;
-        this.ResourceProviderType = 'ResourceProviderType' in params ? params.ResourceProviderType : null;
-        this.NodeType = 'NodeType' in params ? params.NodeType : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.DataVolumes = 'DataVolumes' in params ? params.DataVolumes : null;
-        this.CpuType = 'CpuType' in params ? params.CpuType : null;
-
-        if (params.PodVolumes) {
-            this.PodVolumes = new Array();
-            for (let z in params.PodVolumes) {
-                let obj = new PodVolume();
-                obj.deserialize(params.PodVolumes[z]);
-                this.PodVolumes.push(obj);
-            }
-        }
-        this.IsDynamicSpec = 'IsDynamicSpec' in params ? params.IsDynamicSpec : null;
-
-        if (params.DynamicPodSpec) {
-            let obj = new DynamicPodSpec();
-            obj.deserialize(params.DynamicPodSpec)
-            this.DynamicPodSpec = obj;
-        }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -1312,35 +942,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Pod `HostPath` mounting method description
- * @class
- */
-class HostVolumeContext extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Directory in the pod for mounting the host, which is the mount point of resources for the host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VolumePath = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VolumePath = 'VolumePath' in params ? params.VolumePath : null;
 
     }
 }
@@ -1962,6 +1563,127 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Resource details
+ * @class
+ */
+class OutterResource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specification
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Spec = null;
+
+        /**
+         * Specification name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+        /**
+         * Disk type
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * Disk type
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * System disk size
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RootSize = null;
+
+        /**
+         * Memory size
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * Number of CPUs
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Disk size
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Specification
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Spec = 'Spec' in params ? params.Spec : null;
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.RootSize = 'RootSize' in params ? params.RootSize : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+    }
+}
+
+/**
+ * DescribeResourceSchedule request structure.
+ * @class
+ */
+class DescribeResourceScheduleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * EMR cluster ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeInstances response structure.
  * @class
  */
@@ -2021,75 +1743,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * InquiryPriceScaleOutInstance request structure.
+ * Target resource specification
  * @class
  */
-class InquiryPriceScaleOutInstanceRequest extends  AbstractModel {
+class UpdateInstanceSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Time unit of scale-out. Valid values:
-<li>s: seconds. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
+         * Memory capacity in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.CPUCores = null;
+
+        /**
+         * Machine resource ID (EMR resource identifier)
          * @type {string || null}
          */
-        this.TimeUnit = null;
+        this.ResourceId = null;
 
         /**
-         * Duration of scale-out, which needs to be used together with `TimeUnit`.
-<li>When `PayMode` is 0, `TimeSpan` can only be 3,600.</li>
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * ID of the AZ where an instance resides.
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * Instance billing mode. Valid values:
-<li>0: pay-as-you-go.</li>
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * Instance ID.
+         * Target machine specification
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Number of core nodes added.
-         * @type {number || null}
-         */
-        this.CoreCount = null;
-
-        /**
-         * Number of task nodes added.
-         * @type {number || null}
-         */
-        this.TaskCount = null;
-
-        /**
-         * Currency.
-         * @type {string || null}
-         */
-        this.Currency = null;
-
-        /**
-         * Number of router nodes added.
-         * @type {number || null}
-         */
-        this.RouterCount = null;
-
-        /**
-         * Number of master nodes to add
-         * @type {number || null}
-         */
-        this.MasterCount = null;
+        this.InstanceType = null;
 
     }
 
@@ -2100,16 +1783,10 @@ class InquiryPriceScaleOutInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
-        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
-        this.Currency = 'Currency' in params ? params.Currency : null;
-        this.RouterCount = 'RouterCount' in params ? params.RouterCount : null;
-        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.CPUCores = 'CPUCores' in params ? params.CPUCores : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -2180,55 +1857,6 @@ class Placement extends  AbstractModel {
         }
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
-
-    }
-}
-
-/**
- * Pod floating specification
- * @class
- */
-class DynamicPodSpec extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Minimum number of CPU cores
-         * @type {number || null}
-         */
-        this.RequestCpu = null;
-
-        /**
-         * Maximum number of CPU cores
-         * @type {number || null}
-         */
-        this.LimitCpu = null;
-
-        /**
-         * Minimum memory in MB
-         * @type {number || null}
-         */
-        this.RequestMemory = null;
-
-        /**
-         * Maximum memory in MB
-         * @type {number || null}
-         */
-        this.LimitMemory = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestCpu = 'RequestCpu' in params ? params.RequestCpu : null;
-        this.LimitCpu = 'LimitCpu' in params ? params.LimitCpu : null;
-        this.RequestMemory = 'RequestMemory' in params ? params.RequestMemory : null;
-        this.LimitMemory = 'LimitMemory' in params ? params.LimitMemory : null;
 
     }
 }
@@ -2349,156 +1977,6 @@ class CustomMetaInfo extends  AbstractModel {
         this.MetaDataJdbcUrl = 'MetaDataJdbcUrl' in params ? params.MetaDataJdbcUrl : null;
         this.MetaDataUser = 'MetaDataUser' in params ? params.MetaDataUser : null;
         this.MetaDataPass = 'MetaDataPass' in params ? params.MetaDataPass : null;
-
-    }
-}
-
-/**
- * Custom pod permission and parameter
- * @class
- */
-class PodParameter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * TKE or EKS cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Custom permission
-Example:
-{
-  "apiVersion": "v1",
-  "clusters": [
-    {
-      "cluster": {
-        "certificate-authority-data": "xxxxxx==",
-        "server": "https://xxxxx.com"
-      },
-      "name": "cls-xxxxx"
-    }
-  ],
-  "contexts": [
-    {
-      "context": {
-        "cluster": "cls-xxxxx",
-        "user": "100014xxxxx"
-      },
-      "name": "cls-a44yhcxxxxxxxxxx"
-    }
-  ],
-  "current-context": "cls-a4xxxx-context-default",
-  "kind": "Config",
-  "preferences": {},
-  "users": [
-    {
-      "name": "100014xxxxx",
-      "user": {
-        "client-certificate-data": "xxxxxx",
-        "client-key-data": "xxxxxx"
-      }
-    }
-  ]
-}
-         * @type {string || null}
-         */
-        this.Config = null;
-
-        /**
-         * Custom parameter
-Example:
-{
-    "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": {
-      "name": "test-deployment",
-      "labels": {
-        "app": "test"
-      }
-    },
-    "spec": {
-      "replicas": 3,
-      "selector": {
-        "matchLabels": {
-          "app": "test-app"
-        }
-      },
-      "template": {
-        "metadata": {
-          "annotations": {
-            "your-organization.com/department-v1": "test-example-v1",
-            "your-organization.com/department-v2": "test-example-v2"
-          },
-          "labels": {
-            "app": "test-app",
-            "environment": "production"
-          }
-        },
-        "spec": {
-          "nodeSelector": {
-            "your-organization/node-test": "test-node"
-          },
-          "containers": [
-            {
-              "name": "nginx",
-              "image": "nginx:1.14.2",
-              "ports": [
-                {
-                  "containerPort": 80
-                }
-              ]
-            }
-          ],
-          "affinity": {
-            "nodeAffinity": {
-              "requiredDuringSchedulingIgnoredDuringExecution": {
-                "nodeSelectorTerms": [
-                  {
-                    "matchExpressions": [
-                      {
-                        "key": "disk-type",
-                        "operator": "In",
-                        "values": [
-                          "ssd",
-                          "sas"
-                        ]
-                      },
-                      {
-                        "key": "cpu-num",
-                        "operator": "Gt",
-                        "values": [
-                          "6"
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-         * @type {string || null}
-         */
-        this.Parameter = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Config = 'Config' in params ? params.Config : null;
-        this.Parameter = 'Parameter' in params ? params.Parameter : null;
 
     }
 }
@@ -3067,218 +2545,10 @@ class SearchItem extends  AbstractModel {
 }
 
 /**
- * InquiryPriceScaleOutInstance response structure.
+ * ModifyResourceScheduler response structure.
  * @class
  */
-class InquiryPriceScaleOutInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Original price.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OriginalCost = null;
-
-        /**
-         * Discounted price.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DiscountCost = null;
-
-        /**
-         * Time unit of scale-out. Valid values:
-<li>s: seconds.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Unit = null;
-
-        /**
-         * Node specification queried for price.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {PriceResource || null}
-         */
-        this.PriceSpec = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
-        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
-        this.Unit = 'Unit' in params ? params.Unit : null;
-
-        if (params.PriceSpec) {
-            let obj = new PriceResource();
-            obj.deserialize(params.PriceSpec)
-            this.PriceSpec = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Resource details
- * @class
- */
-class OutterResource extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Specification
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Spec = null;
-
-        /**
-         * Specification name
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SpecName = null;
-
-        /**
-         * Disk type
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.StorageType = null;
-
-        /**
-         * Disk type
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * System disk size
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RootSize = null;
-
-        /**
-         * Memory size
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MemSize = null;
-
-        /**
-         * Number of CPUs
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Disk size
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * Specification
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Spec = 'Spec' in params ? params.Spec : null;
-        this.SpecName = 'SpecName' in params ? params.SpecName : null;
-        this.StorageType = 'StorageType' in params ? params.StorageType : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.RootSize = 'RootSize' in params ? params.RootSize : null;
-        this.MemSize = 'MemSize' in params ? params.MemSize : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-
-    }
-}
-
-/**
- * Target resource specification
- * @class
- */
-class UpdateInstanceSettings extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Memory capacity in GB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Number of CPU cores
-         * @type {number || null}
-         */
-        this.CPUCores = null;
-
-        /**
-         * Machine resource ID (EMR resource identifier)
-         * @type {string || null}
-         */
-        this.ResourceId = null;
-
-        /**
-         * Target machine specification
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.CPUCores = 'CPUCores' in params ? params.CPUCores : null;
-        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-
-    }
-}
-
-/**
- * TerminateTasks response structure.
- * @class
- */
-class TerminateTasksResponse extends  AbstractModel {
+class ModifyResourceSchedulerResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3298,6 +2568,84 @@ class TerminateTasksResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyResourceScheduleConfig response structure.
+ * @class
+ */
+class ModifyResourceScheduleConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `true`: Draft, indicating the resource pool is not refreshed.
+         * @type {boolean || null}
+         */
+        this.IsDraft = null;
+
+        /**
+         * Verification error information. If it is not null, the verification fails and thus the configuration fails.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsDraft = 'IsDraft' in params ? params.IsDraft : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * VPC parameters
+ * @class
+ */
+class VPCSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -3890,51 +3238,6 @@ class NewResourceSpec extends  AbstractModel {
 }
 
 /**
- * Pod `PVC` storage method description
- * @class
- */
-class PersistentVolumeContext extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Disk size in GB
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * Disk type. Valid values: CLOUD_PREMIUM, CLOUD_SSD
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * Number of disks
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DiskNum = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
-
-    }
-}
-
-/**
  * InquiryPriceRenewInstance request structure.
  * @class
  */
@@ -4005,6 +3308,62 @@ class InquiryPriceRenewInstanceRequest extends  AbstractModel {
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.Currency = 'Currency' in params ? params.Currency : null;
         this.ModifyPayMode = 'ModifyPayMode' in params ? params.ModifyPayMode : null;
+
+    }
+}
+
+/**
+ * DescribeResourceSchedule response structure.
+ * @class
+ */
+class DescribeResourceScheduleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the resource scheduling feature
+         * @type {boolean || null}
+         */
+        this.OpenSwitch = null;
+
+        /**
+         * The resource scheduler in service
+         * @type {string || null}
+         */
+        this.Scheduler = null;
+
+        /**
+         * Fair Scheduler information
+         * @type {string || null}
+         */
+        this.FSInfo = null;
+
+        /**
+         * Capacity Scheduler information
+         * @type {string || null}
+         */
+        this.CSInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OpenSwitch = 'OpenSwitch' in params ? params.OpenSwitch : null;
+        this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.FSInfo = 'FSInfo' in params ? params.FSInfo : null;
+        this.CSInfo = 'CSInfo' in params ? params.CSInfo : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4150,263 +3509,47 @@ Note: this field may return null, indicating that no valid values can be obtaine
     }
 }
 
-/**
- * ScaleOutInstance request structure.
- * @class
- */
-class ScaleOutInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Time unit of scale-out. Valid values:
-<li>s: seconds. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
-<li>m: month. When `PayMode` is 1, `TimeUnit` can only be `m`.</li>
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
-
-        /**
-         * Duration of scale-out, which needs to be used together with `TimeUnit`.
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * Instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance billing mode. Valid values:
-<li>0: pay-as-you-go.</li>
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * Client token.
-         * @type {string || null}
-         */
-        this.ClientToken = null;
-
-        /**
-         * Bootstrap script settings.
-         * @type {Array.<PreExecuteFileSettings> || null}
-         */
-        this.PreExecutedFileSettings = null;
-
-        /**
-         * Number of task nodes added.
-         * @type {number || null}
-         */
-        this.TaskCount = null;
-
-        /**
-         * Number of core nodes added.
-         * @type {number || null}
-         */
-        this.CoreCount = null;
-
-        /**
-         * Process not required during scale-out.
-         * @type {Array.<number> || null}
-         */
-        this.UnNecessaryNodeList = null;
-
-        /**
-         * Number of router nodes added.
-         * @type {number || null}
-         */
-        this.RouterCount = null;
-
-        /**
-         * Deployed service.
-<li>`SoftDeployInfo` and `ServiceNodeInfo` are in the same group and mutually exclusive with `UnNecessaryNodeList`.</li>
-<li>The combination of `SoftDeployInfo` and `ServiceNodeInfo` is recommended.</li>
-         * @type {Array.<number> || null}
-         */
-        this.SoftDeployInfo = null;
-
-        /**
-         * Started process.
-         * @type {Array.<number> || null}
-         */
-        this.ServiceNodeInfo = null;
-
-        /**
-         * List of spread placement group IDs. Only one can be specified currently.
-         * @type {Array.<string> || null}
-         */
-        this.DisasterRecoverGroupIds = null;
-
-        /**
-         * List of tags bound to added nodes.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Resource type selected for scaling. Valid values: `host` (general CVM resource), `pod` (resource provided by TKE or EKS cluster)
-         * @type {string || null}
-         */
-        this.HardwareResourceType = null;
-
-        /**
-         * Specified information such as pod specification and source for expansion with pod resources
-         * @type {PodSpec || null}
-         */
-        this.PodSpec = null;
-
-        /**
-         * Machine group name selected for ClickHouse cluster scaling-out
-         * @type {string || null}
-         */
-        this.ClickHouseClusterName = null;
-
-        /**
-         * Machine group type selected for ClickHouse cluster scaling-out. new: creates a group; old: selects an existing group
-         * @type {string || null}
-         */
-        this.ClickHouseClusterType = null;
-
-        /**
-         * YARN node label specified for rule-based scaling-out
-         * @type {string || null}
-         */
-        this.YarnNodeLabel = null;
-
-        /**
-         * Custom pod permission and parameter
-         * @type {PodParameter || null}
-         */
-        this.PodParameter = null;
-
-        /**
-         * Number of master nodes to be added
-When a ClickHouse cluster is scaled, this parameter does not take effect.
-When a Kafka cluster is scaled, this parameter does not take effect.
-When `HardwareResourceType` is `pod`, this parameter does not take effect.
-         * @type {number || null}
-         */
-        this.MasterCount = null;
-
-        /**
-         * Whether to start the service after scaling. `true`: yes; `false`: no
-         * @type {string || null}
-         */
-        this.StartServiceAfterScaleOut = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-
-        if (params.PreExecutedFileSettings) {
-            this.PreExecutedFileSettings = new Array();
-            for (let z in params.PreExecutedFileSettings) {
-                let obj = new PreExecuteFileSettings();
-                obj.deserialize(params.PreExecutedFileSettings[z]);
-                this.PreExecutedFileSettings.push(obj);
-            }
-        }
-        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
-        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
-        this.UnNecessaryNodeList = 'UnNecessaryNodeList' in params ? params.UnNecessaryNodeList : null;
-        this.RouterCount = 'RouterCount' in params ? params.RouterCount : null;
-        this.SoftDeployInfo = 'SoftDeployInfo' in params ? params.SoftDeployInfo : null;
-        this.ServiceNodeInfo = 'ServiceNodeInfo' in params ? params.ServiceNodeInfo : null;
-        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
-
-        if (params.PodSpec) {
-            let obj = new PodSpec();
-            obj.deserialize(params.PodSpec)
-            this.PodSpec = obj;
-        }
-        this.ClickHouseClusterName = 'ClickHouseClusterName' in params ? params.ClickHouseClusterName : null;
-        this.ClickHouseClusterType = 'ClickHouseClusterType' in params ? params.ClickHouseClusterType : null;
-        this.YarnNodeLabel = 'YarnNodeLabel' in params ? params.YarnNodeLabel : null;
-
-        if (params.PodParameter) {
-            let obj = new PodParameter();
-            obj.deserialize(params.PodParameter)
-            this.PodParameter = obj;
-        }
-        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
-        this.StartServiceAfterScaleOut = 'StartServiceAfterScaleOut' in params ? params.StartServiceAfterScaleOut : null;
-
-    }
-}
-
 module.exports = {
     MultiDiskMC: MultiDiskMC,
+    ModifyResourceSchedulerRequest: ModifyResourceSchedulerRequest,
     EmrProductConfigOutter: EmrProductConfigOutter,
     LoginSettings: LoginSettings,
-    VPCSettings: VPCSettings,
-    PriceResource: PriceResource,
-    ScaleOutInstanceResponse: ScaleOutInstanceResponse,
+    TerminateTasksResponse: TerminateTasksResponse,
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     CustomServiceDefine: CustomServiceDefine,
     Resource: Resource,
-    TerminateInstanceRequest: TerminateInstanceRequest,
-    PodVolume: PodVolume,
-    TerminateInstanceResponse: TerminateInstanceResponse,
+    ModifyResourceScheduleConfigRequest: ModifyResourceScheduleConfigRequest,
     CreateInstanceResponse: CreateInstanceResponse,
-    PodSpec: PodSpec,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
     TerminateTasksRequest: TerminateTasksRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
-    HostVolumeContext: HostVolumeContext,
     ExternalService: ExternalService,
     DescribeClusterNodesRequest: DescribeClusterNodesRequest,
     PreExecuteFileSettings: PreExecuteFileSettings,
     CreateInstanceRequest: CreateInstanceRequest,
     ClusterExternalServiceInfo: ClusterExternalServiceInfo,
+    OutterResource: OutterResource,
+    DescribeResourceScheduleRequest: DescribeResourceScheduleRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
-    InquiryPriceScaleOutInstanceRequest: InquiryPriceScaleOutInstanceRequest,
+    UpdateInstanceSettings: UpdateInstanceSettings,
     Tag: Tag,
     Placement: Placement,
-    DynamicPodSpec: DynamicPodSpec,
     DescribeInstancesRequest: DescribeInstancesRequest,
     CustomMetaInfo: CustomMetaInfo,
-    PodParameter: PodParameter,
     InquiryPriceUpdateInstanceRequest: InquiryPriceUpdateInstanceRequest,
     COSSettings: COSSettings,
     ClusterInstancesInfo: ClusterInstancesInfo,
     MultiDisk: MultiDisk,
     SearchItem: SearchItem,
-    InquiryPriceScaleOutInstanceResponse: InquiryPriceScaleOutInstanceResponse,
-    OutterResource: OutterResource,
-    UpdateInstanceSettings: UpdateInstanceSettings,
-    TerminateTasksResponse: TerminateTasksResponse,
+    ModifyResourceSchedulerResponse: ModifyResourceSchedulerResponse,
+    ModifyResourceScheduleConfigResponse: ModifyResourceScheduleConfigResponse,
+    VPCSettings: VPCSettings,
     DescribeClusterNodesResponse: DescribeClusterNodesResponse,
     NodeHardwareInfo: NodeHardwareInfo,
     InquiryPriceUpdateInstanceResponse: InquiryPriceUpdateInstanceResponse,
     NewResourceSpec: NewResourceSpec,
-    PersistentVolumeContext: PersistentVolumeContext,
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
+    DescribeResourceScheduleResponse: DescribeResourceScheduleResponse,
     CdbInfo: CdbInfo,
-    ScaleOutInstanceRequest: ScaleOutInstanceRequest,
 
 }

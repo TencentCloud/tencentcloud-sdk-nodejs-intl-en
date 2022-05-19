@@ -25,13 +25,14 @@ const SetMfaFlagResponse = models.SetMfaFlagResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
 const DetachGroupPolicyRequest = models.DetachGroupPolicyRequest;
 const DescribeRoleListResponse = models.DescribeRoleListResponse;
-const CreatePolicyResponse = models.CreatePolicyResponse;
+const DeleteUserResponse = models.DeleteUserResponse;
 const GetRoleRequest = models.GetRoleRequest;
 const CreateServiceLinkedRoleRequest = models.CreateServiceLinkedRoleRequest;
 const ListAttachedGroupPoliciesRequest = models.ListAttachedGroupPoliciesRequest;
 const ListGroupsForUserRequest = models.ListGroupsForUserRequest;
 const AttachRolePolicyResponse = models.AttachRolePolicyResponse;
 const UpdatePolicyResponse = models.UpdatePolicyResponse;
+const DescribeOIDCConfigRequest = models.DescribeOIDCConfigRequest;
 const GetServiceLinkedRoleDeletionStatusResponse = models.GetServiceLinkedRoleDeletionStatusResponse;
 const GetSecurityLastUsedRequest = models.GetSecurityLastUsedRequest;
 const DescribeUserSAMLConfigResponse = models.DescribeUserSAMLConfigResponse;
@@ -39,10 +40,10 @@ const DeleteUserPermissionsBoundaryResponse = models.DeleteUserPermissionsBounda
 const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
 const GetAccountSummaryRequest = models.GetAccountSummaryRequest;
-const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
+const DeletePolicyResponse = models.DeletePolicyResponse;
 const GetUserAppIdResponse = models.GetUserAppIdResponse;
 const GetUserAppIdRequest = models.GetUserAppIdRequest;
-const ListGroupsResponse = models.ListGroupsResponse;
+const DescribeOIDCConfigResponse = models.DescribeOIDCConfigResponse;
 const ListPolicyVersionsRequest = models.ListPolicyVersionsRequest;
 const GetCustomMFATokenInfoRequest = models.GetCustomMFATokenInfoRequest;
 const DescribeRoleListRequest = models.DescribeRoleListRequest;
@@ -51,6 +52,7 @@ const PutRolePermissionsBoundaryRequest = models.PutRolePermissionsBoundaryReque
 const GetGroupRequest = models.GetGroupRequest;
 const DeleteRoleResponse = models.DeleteRoleResponse;
 const PolicyVersionItem = models.PolicyVersionItem;
+const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
 const DescribeSubAccountsRequest = models.DescribeSubAccountsRequest;
 const DeleteUserPermissionsBoundaryRequest = models.DeleteUserPermissionsBoundaryRequest;
 const ListSAMLProvidersRequest = models.ListSAMLProvidersRequest;
@@ -75,7 +77,7 @@ const CreateUserOIDCConfigResponse = models.CreateUserOIDCConfigResponse;
 const ListAttachedUserAllPoliciesResponse = models.ListAttachedUserAllPoliciesResponse;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const GetUserResponse = models.GetUserResponse;
-const DeleteUserResponse = models.DeleteUserResponse;
+const CreatePolicyResponse = models.CreatePolicyResponse;
 const DetachRolePolicyRequest = models.DetachRolePolicyRequest;
 const DeleteRolePermissionsBoundaryRequest = models.DeleteRolePermissionsBoundaryRequest;
 const StrategyInfo = models.StrategyInfo;
@@ -87,7 +89,7 @@ const UpdateAssumeRolePolicyRequest = models.UpdateAssumeRolePolicyRequest;
 const LoginActionFlag = models.LoginActionFlag;
 const DeleteRoleRequest = models.DeleteRoleRequest;
 const UpdateRoleConsoleLoginRequest = models.UpdateRoleConsoleLoginRequest;
-const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
+const UpdateUserResponse = models.UpdateUserResponse;
 const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
 const GetPolicyVersionRequest = models.GetPolicyVersionRequest;
 const CreateSAMLProviderResponse = models.CreateSAMLProviderResponse;
@@ -109,14 +111,17 @@ const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
 const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
+const ListGroupsResponse = models.ListGroupsResponse;
 const PutUserPermissionsBoundaryResponse = models.PutUserPermissionsBoundaryResponse;
-const DeletePolicyResponse = models.DeletePolicyResponse;
+const GetPolicyVersionResponse = models.GetPolicyVersionResponse;
+const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
 const DisableUserSSOResponse = models.DisableUserSSOResponse;
+const CreateOIDCConfigRequest = models.CreateOIDCConfigRequest;
 const AccessKey = models.AccessKey;
 const GetGroupResponse = models.GetGroupResponse;
+const UpdateOIDCConfigResponse = models.UpdateOIDCConfigResponse;
 const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
-const UpdateUserResponse = models.UpdateUserResponse;
 const GetAccountSummaryResponse = models.GetAccountSummaryResponse;
 const CreateServiceLinkedRoleResponse = models.CreateServiceLinkedRoleResponse;
 const ListUsersRequest = models.ListUsersRequest;
@@ -128,12 +133,14 @@ const ListEntitiesForPolicyRequest = models.ListEntitiesForPolicyRequest;
 const ListPoliciesRequest = models.ListPoliciesRequest;
 const GetServiceLinkedRoleDeletionStatusRequest = models.GetServiceLinkedRoleDeletionStatusRequest;
 const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
+const GroupMemberInfo = models.GroupMemberInfo;
 const CreatePolicyRequest = models.CreatePolicyRequest;
 const ListAttachedUserAllPoliciesRequest = models.ListAttachedUserAllPoliciesRequest;
 const DeletePolicyVersionRequest = models.DeletePolicyVersionRequest;
 const CreateUserSAMLConfigRequest = models.CreateUserSAMLConfigRequest;
 const UpdateGroupRequest = models.UpdateGroupRequest;
-const GetPolicyVersionResponse = models.GetPolicyVersionResponse;
+const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
+const UpdateOIDCConfigRequest = models.UpdateOIDCConfigRequest;
 const CreateRoleResponse = models.CreateRoleResponse;
 const GetSAMLProviderResponse = models.GetSAMLProviderResponse;
 const DescribeSafeAuthFlagIntlResponse = models.DescribeSafeAuthFlagIntlResponse;
@@ -145,6 +152,7 @@ const AddUserToGroupRequest = models.AddUserToGroupRequest;
 const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse;
 const DetachRolePolicyResponse = models.DetachRolePolicyResponse;
 const DescribeUserOIDCConfigRequest = models.DescribeUserOIDCConfigRequest;
+const CreateOIDCConfigResponse = models.CreateOIDCConfigResponse;
 const AttachedPolicyOfRole = models.AttachedPolicyOfRole;
 const PutUserPermissionsBoundaryRequest = models.PutUserPermissionsBoundaryRequest;
 const ListSAMLProvidersResponse = models.ListSAMLProvidersResponse;
@@ -156,12 +164,12 @@ const GetRoleResponse = models.GetRoleResponse;
 const CreateRoleRequest = models.CreateRoleRequest;
 const AttachedUserPolicy = models.AttachedUserPolicy;
 const DeleteServiceLinkedRoleResponse = models.DeleteServiceLinkedRoleResponse;
+const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
 const GetPolicyResponse = models.GetPolicyResponse;
 const DeleteGroupResponse = models.DeleteGroupResponse;
-const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
 const DeleteServiceLinkedRoleRequest = models.DeleteServiceLinkedRoleRequest;
 const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
-const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
+const DeleteOIDCConfigResponse = models.DeleteOIDCConfigResponse;
 const PolicyVersionDetail = models.PolicyVersionDetail;
 const AddUserResponse = models.AddUserResponse;
 const CreateUserSAMLConfigResponse = models.CreateUserSAMLConfigResponse;
@@ -179,7 +187,7 @@ const ListAccessKeysResponse = models.ListAccessKeysResponse;
 const GetSecurityLastUsedResponse = models.GetSecurityLastUsedResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const UpdatePolicyRequest = models.UpdatePolicyRequest;
-const GroupMemberInfo = models.GroupMemberInfo;
+const DeleteOIDCConfigRequest = models.DeleteOIDCConfigRequest;
 const CreateGroupResponse = models.CreateGroupResponse;
 
 
@@ -458,6 +466,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create a user OIDC configuration. Only one user OIDC IdP can be created, and the user SAML SSO IdP will be automatically disabled after it is created.
+     * @param {CreateUserOIDCConfigRequest} req
+     * @param {function(string, CreateUserOIDCConfigResponse):void} cb
+     * @public
+     */
+    CreateUserOIDCConfig(req, cb) {
+        let resp = new CreateUserOIDCConfigResponse();
+        this.request("CreateUserOIDCConfig", req, resp, cb);
+    }
+
+    /**
      * This API (GetPolicy) is used to query and view policy details.
      * @param {GetPolicyRequest} req
      * @param {function(string, GetPolicyResponse):void} cb
@@ -513,6 +532,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify role OIDC configurations.
+     * @param {UpdateOIDCConfigRequest} req
+     * @param {function(string, UpdateOIDCConfigResponse):void} cb
+     * @public
+     */
+    UpdateOIDCConfig(req, cb) {
+        let resp = new UpdateOIDCConfigResponse();
+        this.request("UpdateOIDCConfig", req, resp, cb);
+    }
+
+    /**
      * This API (DeleteRole) is used to delete a specified role.
      * @param {DeleteRoleRequest} req
      * @param {function(string, DeleteRoleResponse):void} cb
@@ -543,6 +573,17 @@ class CamClient extends AbstractClient {
     DeleteUserPermissionsBoundary(req, cb) {
         let resp = new DeleteUserPermissionsBoundaryResponse();
         this.request("DeleteUserPermissionsBoundary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query role OIDC configurations.
+     * @param {DescribeOIDCConfigRequest} req
+     * @param {function(string, DescribeOIDCConfigResponse):void} cb
+     * @public
+     */
+    DescribeOIDCConfig(req, cb) {
+        let resp = new DescribeOIDCConfigResponse();
+        this.request("DescribeOIDCConfig", req, resp, cb);
     }
 
     /**
@@ -590,14 +631,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query user group details.
-     * @param {GetGroupRequest} req
-     * @param {function(string, GetGroupResponse):void} cb
+     * This API is used to create role OIDC configurations.
+     * @param {CreateOIDCConfigRequest} req
+     * @param {function(string, CreateOIDCConfigResponse):void} cb
      * @public
      */
-    GetGroup(req, cb) {
-        let resp = new GetGroupResponse();
-        this.request("GetGroup", req, resp, cb);
+    CreateOIDCConfig(req, cb) {
+        let resp = new CreateOIDCConfigResponse();
+        this.request("CreateOIDCConfig", req, resp, cb);
     }
 
     /**
@@ -755,6 +796,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API (ListEntitiesForPolicy) is used to query the list of entities associated with a policy.
+     * @param {ListEntitiesForPolicyRequest} req
+     * @param {function(string, ListEntitiesForPolicyResponse):void} cb
+     * @public
+     */
+    ListEntitiesForPolicy(req, cb) {
+        let resp = new ListEntitiesForPolicyResponse();
+        this.request("ListEntitiesForPolicy", req, resp, cb);
+    }
+
+    /**
      * This API (ListAttachedUserPolicies) is used to query the list of policies associated with a sub-account.
      * @param {ListAttachedUserPoliciesRequest} req
      * @param {function(string, ListAttachedUserPoliciesResponse):void} cb
@@ -865,25 +917,25 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API (ListEntitiesForPolicy) is used to query the list of entities associated with a policy.
-     * @param {ListEntitiesForPolicyRequest} req
-     * @param {function(string, ListEntitiesForPolicyResponse):void} cb
+     * This API is used to query user group details.
+     * @param {GetGroupRequest} req
+     * @param {function(string, GetGroupResponse):void} cb
      * @public
      */
-    ListEntitiesForPolicy(req, cb) {
-        let resp = new ListEntitiesForPolicyResponse();
-        this.request("ListEntitiesForPolicy", req, resp, cb);
+    GetGroup(req, cb) {
+        let resp = new GetGroupResponse();
+        this.request("GetGroup", req, resp, cb);
     }
 
     /**
-     * This API is used to create a user OIDC configuration. Only one user OIDC IdP can be created, and the user SAML SSO IdP will be automatically disabled after it is created.
-     * @param {CreateUserOIDCConfigRequest} req
-     * @param {function(string, CreateUserOIDCConfigResponse):void} cb
+     * This API is used to delete OIDC IdPs.
+     * @param {DeleteOIDCConfigRequest} req
+     * @param {function(string, DeleteOIDCConfigResponse):void} cb
      * @public
      */
-    CreateUserOIDCConfig(req, cb) {
-        let resp = new CreateUserOIDCConfigResponse();
-        this.request("CreateUserOIDCConfig", req, resp, cb);
+    DeleteOIDCConfig(req, cb) {
+        let resp = new DeleteOIDCConfigResponse();
+        this.request("DeleteOIDCConfig", req, resp, cb);
     }
 
     /**

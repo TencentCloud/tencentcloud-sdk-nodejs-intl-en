@@ -63,6 +63,7 @@ const DeleteUserResponse = models.DeleteUserResponse;
 const CreateAclRequest = models.CreateAclRequest;
 const DescribeTopicSyncReplicaResponse = models.DescribeTopicSyncReplicaResponse;
 const DescribeAppInfoRequest = models.DescribeAppInfoRequest;
+const DeleteRouteResponse = models.DeleteRouteResponse;
 const Partitions = models.Partitions;
 const DescribeTopicResponse = models.DescribeTopicResponse;
 const ConsumerGroupResponse = models.ConsumerGroupResponse;
@@ -118,6 +119,7 @@ const Filter = models.Filter;
 const GroupOffsetResponse = models.GroupOffsetResponse;
 const BatchCreateAclResponse = models.BatchCreateAclResponse;
 const CreateUserRequest = models.CreateUserRequest;
+const DeleteRouteRequest = models.DeleteRouteRequest;
 const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const CreateConsumerRequest = models.CreateConsumerRequest;
@@ -231,6 +233,17 @@ class CkafkaClient extends AbstractClient {
     BatchModifyTopicAttributes(req, cb) {
         let resp = new BatchModifyTopicAttributesResponse();
         this.request("BatchModifyTopicAttributes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a route.
+     * @param {DeleteRouteRequest} req
+     * @param {function(string, DeleteRouteResponse):void} cb
+     * @public
+     */
+    DeleteRoute(req, cb) {
+        let resp = new DeleteRouteResponse();
+        this.request("DeleteRoute", req, resp, cb);
     }
 
     /**

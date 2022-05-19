@@ -580,7 +580,7 @@ class FetchMessageByOffsetRequest extends  AbstractModel {
         this.Partition = null;
 
         /**
-         * Offset information
+         * Offset information, which is required.
          * @type {number || null}
          */
         this.Offset = null;
@@ -2345,6 +2345,46 @@ class DescribeAppInfoRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DeleteRoute response structure.
+ * @class
+ */
+class DeleteRouteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result.
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5397,6 +5437,55 @@ class CreateUserRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteRoute request structure.
+ * @class
+ */
+class DeleteRouteRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Route ID.
+         * @type {number || null}
+         */
+        this.RouteId = null;
+
+        /**
+         * AppId of the caller.
+         * @type {number || null}
+         */
+        this.CallerAppid = null;
+
+        /**
+         * The time when a route was deleted.
+         * @type {string || null}
+         */
+        this.DeleteRouteTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+        this.CallerAppid = 'CallerAppid' in params ? params.CallerAppid : null;
+        this.DeleteRouteTime = 'DeleteRouteTime' in params ? params.DeleteRouteTime : null;
+
+    }
+}
+
+/**
  * DeleteTopicIpWhiteList response structure.
  * @class
  */
@@ -7690,6 +7779,7 @@ module.exports = {
     CreateAclRequest: CreateAclRequest,
     DescribeTopicSyncReplicaResponse: DescribeTopicSyncReplicaResponse,
     DescribeAppInfoRequest: DescribeAppInfoRequest,
+    DeleteRouteResponse: DeleteRouteResponse,
     Partitions: Partitions,
     DescribeTopicResponse: DescribeTopicResponse,
     ConsumerGroupResponse: ConsumerGroupResponse,
@@ -7745,6 +7835,7 @@ module.exports = {
     GroupOffsetResponse: GroupOffsetResponse,
     BatchCreateAclResponse: BatchCreateAclResponse,
     CreateUserRequest: CreateUserRequest,
+    DeleteRouteRequest: DeleteRouteRequest,
     DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
     CreateConsumerRequest: CreateConsumerRequest,

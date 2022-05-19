@@ -2944,6 +2944,20 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.FilterDimensionsParam = null;
 
+        /**
+         * Whether it is a quick alarm policy.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsOneClick = null;
+
+        /**
+         * Whether the quick alarm policy is enabled.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OneClickStatus = null;
+
     }
 
     /**
@@ -3022,6 +3036,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.FilterDimensionsParam = 'FilterDimensionsParam' in params ? params.FilterDimensionsParam : null;
+        this.IsOneClick = 'IsOneClick' in params ? params.IsOneClick : null;
+        this.OneClickStatus = 'OneClickStatus' in params ? params.OneClickStatus : null;
 
     }
 }
@@ -6564,6 +6580,12 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
          */
         this.TriggerTasks = null;
 
+        /**
+         * Filter by quick alarm policy. If this parameter is left empty, all policies are displayed. `ONECLICK`: Display quick alarm policies; `NOT_ONECLICK`: Display non-quick alarm policies.
+         * @type {Array.<string> || null}
+         */
+        this.OneClickPolicyType = null;
+
     }
 
     /**
@@ -6601,6 +6623,7 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
                 this.TriggerTasks.push(obj);
             }
         }
+        this.OneClickPolicyType = 'OneClickPolicyType' in params ? params.OneClickPolicyType : null;
 
     }
 }

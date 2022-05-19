@@ -45,6 +45,7 @@ const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateR
 const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
 const MediaInputInfo = models.MediaInputInfo;
 const CreateImageSpriteTask2017 = models.CreateImageSpriteTask2017;
+const ClipFileInfo2017 = models.ClipFileInfo2017;
 const TempCertificate = models.TempCertificate;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
 const ManageTaskRequest = models.ManageTaskRequest;
@@ -59,6 +60,7 @@ const AudioTransform = models.AudioTransform;
 const ResetProcedureTemplateRequest = models.ResetProcedureTemplateRequest;
 const ContentReviewOcrResult = models.ContentReviewOcrResult;
 const ComposeMediaResponse = models.ComposeMediaResponse;
+const DescribeLicenseUsageDataResponse = models.DescribeLicenseUsageDataResponse;
 const UrlSignatureAuthPolicy = models.UrlSignatureAuthPolicy;
 const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
 const DescribeStorageDataResponse = models.DescribeStorageDataResponse;
@@ -165,6 +167,7 @@ const SplitMediaTaskSegmentInfo = models.SplitMediaTaskSegmentInfo;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
+const AiAnalysisResult = models.AiAnalysisResult;
 const ConcatFileInfo2017 = models.ConcatFileInfo2017;
 const ContentReviewResult = models.ContentReviewResult;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
@@ -253,6 +256,7 @@ const DescribeStorageDataRequest = models.DescribeStorageDataRequest;
 const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
 const TEHDConfig = models.TEHDConfig;
+const ImageReviewUsageDataItem = models.ImageReviewUsageDataItem;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
@@ -289,7 +293,7 @@ const ResetProcedureTemplateResponse = models.ResetProcedureTemplateResponse;
 const ProhibitedConfigureInfo = models.ProhibitedConfigureInfo;
 const DrmStreamingsInfo = models.DrmStreamingsInfo;
 const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
-const AiAnalysisResult = models.AiAnalysisResult;
+const LicenseUsageDataItem = models.LicenseUsageDataItem;
 const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const MediaTranscodeInfo = models.MediaTranscodeInfo;
@@ -308,6 +312,7 @@ const OutputVideoStream = models.OutputVideoStream;
 const ProcedureTemplate = models.ProcedureTemplate;
 const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
 const ProcessMediaByUrlResponse = models.ProcessMediaByUrlResponse;
+const DescribeImageReviewUsageDataRequest = models.DescribeImageReviewUsageDataRequest;
 const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
 const DescribeCdnLogsResponse = models.DescribeCdnLogsResponse;
 const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPoliticalSegmentItem;
@@ -364,7 +369,7 @@ const DescribeStorageRegionsRequest = models.DescribeStorageRegionsRequest;
 const WechatPublishTask = models.WechatPublishTask;
 const DescribeCDNStatDetailsRequest = models.DescribeCDNStatDetailsRequest;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
-const ClipFileInfo2017 = models.ClipFileInfo2017;
+const DescribeImageReviewUsageDataResponse = models.DescribeImageReviewUsageDataResponse;
 const StatDataItem = models.StatDataItem;
 const CreateStorageRegionResponse = models.CreateStorageRegionResponse;
 const AccelerateAreaInfo = models.AccelerateAreaInfo;
@@ -440,6 +445,7 @@ const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
+const ReviewImageResponse = models.ReviewImageResponse;
 const DescribeStorageRegionsResponse = models.DescribeStorageRegionsResponse;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const ProcedureTask = models.ProcedureTask;
@@ -486,6 +492,7 @@ const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
 const ConfirmEventsResponse = models.ConfirmEventsResponse;
 const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const VideoTrackItem = models.VideoTrackItem;
+const DescribeLicenseUsageDataRequest = models.DescribeLicenseUsageDataRequest;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const MediaTranscodeItem = models.MediaTranscodeItem;
 const DescribePersonSamplesResponse = models.DescribePersonSamplesResponse;
@@ -525,6 +532,7 @@ const DeleteSnapshotByTimeOffsetTemplateRequest = models.DeleteSnapshotByTimeOff
 const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphicsTemplatesResponse;
 const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
+const ReviewImageRequest = models.ReviewImageRequest;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
@@ -902,6 +910,21 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
+     * This API is used to query daily playback license requests in a specified time period.
+   1. You can query statistics from the last 365 days.
+   2. The maximum query period is 90 days.
+   3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+
+     * @param {DescribeLicenseUsageDataRequest} req
+     * @param {function(string, DescribeLicenseUsageDataResponse):void} cb
+     * @public
+     */
+    DescribeLicenseUsageData(req, cb) {
+        let resp = new DescribeLicenseUsageDataResponse();
+        this.request("DescribeLicenseUsageData", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a custom image sprite generating template.
      * @param {ModifyImageSpriteTemplateRequest} req
      * @param {function(string, ModifyImageSpriteTemplateResponse):void} cb
@@ -1179,9 +1202,11 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     }
 
     /**
-     * This API is used to initiate an image processing task. Image processing operations include the following:
+     * This API is <font color='red'>no longer used</font>. To initiate image recognition tasks, please use [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
 
-1. Intelligent recognition of pornographic, terrorism, and politically sensitive content
+This API is used to initiate an image processing task. Image processing operations include the following:
+
+1. Intelligent recognition of pornographic, terroristic, and politically sensitive content
 
 ><li>File size: < 5 MB</li>
 ><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
@@ -1234,14 +1259,18 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     }
 
     /**
-     * This API is used to create a superplayer configuration. Up to 100 configurations can be created.
-     * @param {CreateSuperPlayerConfigRequest} req
-     * @param {function(string, CreateSuperPlayerConfigResponse):void} cb
+     * This API is used to query your daily usage of the image recognition feature in a specified time period.
+   1. You can query statistics from the last 365 days.
+   2. The maximum query period is 90 days.
+   3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+
+     * @param {DescribeImageReviewUsageDataRequest} req
+     * @param {function(string, DescribeImageReviewUsageDataResponse):void} cb
      * @public
      */
-    CreateSuperPlayerConfig(req, cb) {
-        let resp = new CreateSuperPlayerConfigResponse();
-        this.request("CreateSuperPlayerConfig", req, resp, cb);
+    DescribeImageReviewUsageData(req, cb) {
+        let resp = new DescribeImageReviewUsageDataResponse();
+        this.request("DescribeImageReviewUsageData", req, resp, cb);
     }
 
     /**
@@ -1289,6 +1318,17 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     DescribeStorageRegions(req, cb) {
         let resp = new DescribeStorageRegionsResponse();
         this.request("DescribeStorageRegions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a superplayer configuration. Up to 100 configurations can be created.
+     * @param {CreateSuperPlayerConfigRequest} req
+     * @param {function(string, CreateSuperPlayerConfigResponse):void} cb
+     * @public
+     */
+    CreateSuperPlayerConfig(req, cb) {
+        let resp = new CreateSuperPlayerConfigResponse();
+        this.request("CreateSuperPlayerConfig", req, resp, cb);
     }
 
     /**
@@ -1780,6 +1820,22 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     DescribeDailyPlayStatFileList(req, cb) {
         let resp = new DescribeDailyPlayStatFileListResponse();
         this.request("DescribeDailyPlayStatFileList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to initiate an image recognition task to identify pornographic, terroristic, and politically sensitive content in images saved in VOD.
+
+><li>File size: < 5 MB</li>
+><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
+><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
+
+     * @param {ReviewImageRequest} req
+     * @param {function(string, ReviewImageResponse):void} cb
+     * @public
+     */
+    ReviewImage(req, cb) {
+        let resp = new ReviewImageResponse();
+        this.request("ReviewImage", req, resp, cb);
     }
 
     /**

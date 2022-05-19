@@ -595,6 +595,49 @@ class DeleteLogsetResponse extends  AbstractModel {
 }
 
 /**
+ * `Parquet` content description
+ * @class
+ */
+class ParquetKeyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key name
+         * @type {string || null}
+         */
+        this.KeyName = null;
+
+        /**
+         * Supported data types: string, boolean, int32, int64, float, and double
+         * @type {string || null}
+         */
+        this.KeyType = null;
+
+        /**
+         * Assignment information returned upon resolution failure
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.KeyNonExistingField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyName = 'KeyName' in params ? params.KeyName : null;
+        this.KeyType = 'KeyType' in params ? params.KeyType : null;
+        this.KeyNonExistingField = 'KeyNonExistingField' in params ? params.KeyNonExistingField : null;
+
+    }
+}
+
+/**
  * DescribeShipperTasks response structure.
  * @class
  */
@@ -3499,7 +3542,7 @@ class DescribeTopicsRequest extends  AbstractModel {
         super();
 
         /**
-         * <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call DescribeLogsets to query the list of created logsets or log in to the console to view them. You can also call CreateLogset to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as tag:exampleKey. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (real-time storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
+         * <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call the `DescribeLogsets` API to query the list of created logsets or log in to the console to view them. You can also call the `CreateLogset` API to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as “tag:exampleKey”. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (STANDARD storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -3698,7 +3741,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.MaxSplitPartitions = null;
 
         /**
-         * Log topic storage type. Valid values: `hot` (real-time storage); `cold` (IA storage). Default value: `hot`.
+         * Log topic storage type. Valid values: `hot` (STANDARD storage); `cold` (IA storage). Default value: `hot`.
          * @type {string || null}
          */
         this.StorageType = null;
@@ -6288,6 +6331,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Json = null;
 
+        /**
+         * `Parquet` format description
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {ParquetInfo || null}
+         */
+        this.Parquet = null;
+
     }
 
     /**
@@ -6309,6 +6359,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             let obj = new JsonInfo();
             obj.deserialize(params.Json)
             this.Json = obj;
+        }
+
+        if (params.Parquet) {
+            let obj = new ParquetInfo();
+            obj.deserialize(params.Parquet)
+            this.Parquet = obj;
         }
 
     }
@@ -7920,6 +7976,42 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
 }
 
 /**
+ * `Parquet` contents
+ * @class
+ */
+class ParquetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `ParquetKeyInfo` array
+         * @type {Array.<ParquetKeyInfo> || null}
+         */
+        this.ParquetKeyInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ParquetKeyInfo) {
+            this.ParquetKeyInfo = new Array();
+            for (let z in params.ParquetKeyInfo) {
+                let obj = new ParquetKeyInfo();
+                obj.deserialize(params.ParquetKeyInfo[z]);
+                this.ParquetKeyInfo.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteTopic response structure.
  * @class
  */
@@ -8144,6 +8236,7 @@ module.exports = {
     DeleteShipperRequest: DeleteShipperRequest,
     ModifyTopicRequest: ModifyTopicRequest,
     DeleteLogsetResponse: DeleteLogsetResponse,
+    ParquetKeyInfo: ParquetKeyInfo,
     DescribeShipperTasksResponse: DescribeShipperTasksResponse,
     CreateMachineGroupResponse: CreateMachineGroupResponse,
     DescribeConfigMachineGroupsRequest: DescribeConfigMachineGroupsRequest,
@@ -8283,6 +8376,7 @@ module.exports = {
     ModifyLogsetRequest: ModifyLogsetRequest,
     DescribeMachineGroupsResponse: DescribeMachineGroupsResponse,
     DescribeLogsetsRequest: DescribeLogsetsRequest,
+    ParquetInfo: ParquetInfo,
     DeleteTopicResponse: DeleteTopicResponse,
     Filter: Filter,
     ConsumerContent: ConsumerContent,

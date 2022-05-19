@@ -413,18 +413,12 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * CreatePolicy response structure.
+ * DeleteUser response structure.
  * @class
  */
-class CreatePolicyResponse extends  AbstractModel {
+class DeleteUserResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * ID of newly added policy
-         * @type {number || null}
-         */
-        this.PolicyId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -441,7 +435,6 @@ class CreatePolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -682,6 +675,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeOIDCConfig request structure.
+ * @class
+ */
+class DescribeOIDCConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -935,24 +956,18 @@ class GetAccountSummaryRequest extends  AbstractModel {
 }
 
 /**
- * DetachUserPolicy request structure.
+ * DeletePolicy response structure.
  * @class
  */
-class DetachUserPolicyRequest extends  AbstractModel {
+class DeletePolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy ID
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.PolicyId = null;
-
-        /**
-         * Sub-account UIN
-         * @type {number || null}
-         */
-        this.DetachUin = null;
+        this.RequestId = null;
 
     }
 
@@ -963,8 +978,7 @@ class DetachUserPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.DetachUin = 'DetachUin' in params ? params.DetachUin : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1040,24 +1054,54 @@ class GetUserAppIdRequest extends  AbstractModel {
 }
 
 /**
- * ListGroups response structure.
+ * DescribeOIDCConfig response structure.
  * @class
  */
-class ListGroupsResponse extends  AbstractModel {
+class DescribeOIDCConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of User Groups
+         * IdP type. 11: Role IdP.
          * @type {number || null}
          */
-        this.TotalNum = null;
+        this.ProviderType = null;
 
         /**
-         * User group information array
-         * @type {Array.<GroupInfo> || null}
+         * IdP URL.
+         * @type {string || null}
          */
-        this.GroupInfo = null;
+        this.IdentityUrl = null;
+
+        /**
+         * Public key for signature.
+         * @type {string || null}
+         */
+        this.IdentityKey = null;
+
+        /**
+         * Client ID.
+         * @type {Array.<string> || null}
+         */
+        this.ClientId = null;
+
+        /**
+         * Status. 0: Not set; 2: Disabled; 11: Enabled.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Name.
+         * @type {string || null}
+         */
+        this.Name = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1074,16 +1118,13 @@ class ListGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-
-        if (params.GroupInfo) {
-            this.GroupInfo = new Array();
-            for (let z in params.GroupInfo) {
-                let obj = new GroupInfo();
-                obj.deserialize(params.GroupInfo[z]);
-                this.GroupInfo.push(obj);
-            }
-        }
+        this.ProviderType = 'ProviderType' in params ? params.ProviderType : null;
+        this.IdentityUrl = 'IdentityUrl' in params ? params.IdentityUrl : null;
+        this.IdentityKey = 'IdentityKey' in params ? params.IdentityKey : null;
+        this.ClientId = 'ClientId' in params ? params.ClientId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Name = 'Name' in params ? params.Name : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1340,6 +1381,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
         this.CreateDate = 'CreateDate' in params ? params.CreateDate : null;
         this.IsDefaultVersion = 'IsDefaultVersion' in params ? params.IsDefaultVersion : null;
+
+    }
+}
+
+/**
+ * DetachUserPolicy request structure.
+ * @class
+ */
+class DetachUserPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Sub-account UIN
+         * @type {number || null}
+         */
+        this.DetachUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.DetachUin = 'DetachUin' in params ? params.DetachUin : null;
 
     }
 }
@@ -2373,12 +2449,18 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DeleteUser response structure.
+ * CreatePolicy response structure.
  * @class
  */
-class DeleteUserResponse extends  AbstractModel {
+class CreatePolicyResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * ID of newly added policy
+         * @type {number || null}
+         */
+        this.PolicyId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2395,6 +2477,7 @@ class DeleteUserResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3061,18 +3144,12 @@ class UpdateRoleConsoleLoginRequest extends  AbstractModel {
 }
 
 /**
- * GetCustomMFATokenInfo response structure.
+ * UpdateUser response structure.
  * @class
  */
-class GetCustomMFATokenInfoResponse extends  AbstractModel {
+class UpdateUserResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Account ID corresponding to the custom multi-factor verification Token
-         * @type {number || null}
-         */
-        this.Uin = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3089,7 +3166,6 @@ class GetCustomMFATokenInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = 'Uin' in params ? params.Uin : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4010,6 +4086,56 @@ class ListAttachedUserPoliciesResponse extends  AbstractModel {
 }
 
 /**
+ * ListGroups response structure.
+ * @class
+ */
+class ListGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of User Groups
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * User group information array
+         * @type {Array.<GroupInfo> || null}
+         */
+        this.GroupInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+
+        if (params.GroupInfo) {
+            this.GroupInfo = new Array();
+            for (let z in params.GroupInfo) {
+                let obj = new GroupInfo();
+                obj.deserialize(params.GroupInfo[z]);
+                this.GroupInfo.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * PutUserPermissionsBoundary response structure.
  * @class
  */
@@ -4038,12 +4164,19 @@ class PutUserPermissionsBoundaryResponse extends  AbstractModel {
 }
 
 /**
- * DeletePolicy response structure.
+ * GetPolicyVersion response structure.
  * @class
  */
-class DeletePolicyResponse extends  AbstractModel {
+class GetPolicyVersionResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Policy version details
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {PolicyVersionDetail || null}
+         */
+        this.PolicyVersion = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4060,6 +4193,47 @@ class DeletePolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.PolicyVersion) {
+            let obj = new PolicyVersionDetail();
+            obj.deserialize(params.PolicyVersion)
+            this.PolicyVersion = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetCustomMFATokenInfo response structure.
+ * @class
+ */
+class GetCustomMFATokenInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account ID corresponding to the custom multi-factor verification Token
+         * @type {number || null}
+         */
+        this.Uin = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4089,6 +4263,62 @@ class DisableUserSSOResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateOIDCConfig request structure.
+ * @class
+ */
+class CreateOIDCConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IdP URL.
+         * @type {string || null}
+         */
+        this.IdentityUrl = null;
+
+        /**
+         * Public key for signature, which must be Base64-encoded.
+         * @type {string || null}
+         */
+        this.IdentityKey = null;
+
+        /**
+         * Client ID.
+         * @type {Array.<string> || null}
+         */
+        this.ClientId = null;
+
+        /**
+         * Name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdentityUrl = 'IdentityUrl' in params ? params.IdentityUrl : null;
+        this.IdentityKey = 'IdentityKey' in params ? params.IdentityKey : null;
+        this.ClientId = 'ClientId' in params ? params.ClientId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -4214,6 +4444,34 @@ class GetGroupResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateOIDCConfig response structure.
+ * @class
+ */
+class UpdateOIDCConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteSAMLProvider request structure.
  * @class
  */
@@ -4246,34 +4504,6 @@ class DeleteSAMLProviderRequest extends  AbstractModel {
  * @class
  */
 class DeleteSAMLProviderResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UpdateUser response structure.
- * @class
- */
-class UpdateUserResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4754,6 +4984,104 @@ class DetachGroupPolicyResponse extends  AbstractModel {
 }
 
 /**
+ * User Group user information
+ * @class
+ */
+class GroupMemberInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sub-user UID
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
+         * Sub-user UIN
+         * @type {number || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Sub-user name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Mobile number
+         * @type {string || null}
+         */
+        this.PhoneNum = null;
+
+        /**
+         * Mobile number country/area code
+         * @type {string || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * Whether the mobile phone has been verified. `0`: No; `1`: Yes.
+         * @type {number || null}
+         */
+        this.PhoneFlag = null;
+
+        /**
+         * Email address
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * Whether the email has been verified. `0`: No; `1`: Yes.
+         * @type {number || null}
+         */
+        this.EmailFlag = null;
+
+        /**
+         * User type. `1`: Global collaborator; `2`: Project collaborator; `3`: Message recipient.
+         * @type {number || null}
+         */
+        this.UserType = null;
+
+        /**
+         * Time policy created
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Whether the user is the primary message recipient. `0`: No; `1`: Yes.
+         * @type {number || null}
+         */
+        this.IsReceiverOwner = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.PhoneFlag = 'PhoneFlag' in params ? params.PhoneFlag : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.EmailFlag = 'EmailFlag' in params ? params.EmailFlag : null;
+        this.UserType = 'UserType' in params ? params.UserType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.IsReceiverOwner = 'IsReceiverOwner' in params ? params.IsReceiverOwner : null;
+
+    }
+}
+
+/**
  * CreatePolicy request structure.
  * @class
  */
@@ -4964,25 +5292,24 @@ class UpdateGroupRequest extends  AbstractModel {
 }
 
 /**
- * GetPolicyVersion response structure.
+ * AttachGroupPolicy request structure.
  * @class
  */
-class GetPolicyVersionResponse extends  AbstractModel {
+class AttachGroupPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy version details
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {PolicyVersionDetail || null}
+         * Policy ID
+         * @type {number || null}
          */
-        this.PolicyVersion = null;
+        this.PolicyId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * User Group ID
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.AttachGroupId = null;
 
     }
 
@@ -4993,13 +5320,64 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
 
-        if (params.PolicyVersion) {
-            let obj = new PolicyVersionDetail();
-            obj.deserialize(params.PolicyVersion)
-            this.PolicyVersion = obj;
+    }
+}
+
+/**
+ * UpdateOIDCConfig request structure.
+ * @class
+ */
+class UpdateOIDCConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IdP URL.
+         * @type {string || null}
+         */
+        this.IdentityUrl = null;
+
+        /**
+         * Public key for signature, which must be Base64-encoded.
+         * @type {string || null}
+         */
+        this.IdentityKey = null;
+
+        /**
+         * Client ID.
+         * @type {Array.<string> || null}
+         */
+        this.ClientId = null;
+
+        /**
+         * Name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.IdentityUrl = 'IdentityUrl' in params ? params.IdentityUrl : null;
+        this.IdentityKey = 'IdentityKey' in params ? params.IdentityKey : null;
+        this.ClientId = 'ClientId' in params ? params.ClientId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -5454,6 +5832,34 @@ class DescribeUserOIDCConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * CreateOIDCConfig response structure.
+ * @class
+ */
+class CreateOIDCConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5998,6 +6404,56 @@ class DeleteServiceLinkedRoleResponse extends  AbstractModel {
 }
 
 /**
+ * ListUsersForGroup response structure.
+ * @class
+ */
+class ListUsersForGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of users associated with the User Group
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * Sub-user information
+         * @type {Array.<GroupMemberInfo> || null}
+         */
+        this.UserInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+
+        if (params.UserInfo) {
+            this.UserInfo = new Array();
+            for (let z in params.UserInfo) {
+                let obj = new GroupMemberInfo();
+                obj.deserialize(params.UserInfo[z]);
+                this.UserInfo.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetPolicy response structure.
  * @class
  */
@@ -6118,41 +6574,6 @@ class DeleteGroupResponse extends  AbstractModel {
 }
 
 /**
- * AttachGroupPolicy request structure.
- * @class
- */
-class AttachGroupPolicyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Policy ID
-         * @type {number || null}
-         */
-        this.PolicyId = null;
-
-        /**
-         * User Group ID
-         * @type {number || null}
-         */
-        this.AttachGroupId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
-
-    }
-}
-
-/**
  * DeleteServiceLinkedRole request structure.
  * @class
  */
@@ -6240,24 +6661,12 @@ Note: this field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * ListUsersForGroup response structure.
+ * DeleteOIDCConfig response structure.
  * @class
  */
-class ListUsersForGroupResponse extends  AbstractModel {
+class DeleteOIDCConfigResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Total number of users associated with the User Group
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * Sub-user information
-         * @type {Array.<GroupMemberInfo> || null}
-         */
-        this.UserInfo = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6273,16 +6682,6 @@ class ListUsersForGroupResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-
-        if (params.UserInfo) {
-            this.UserInfo = new Array();
-            for (let z in params.UserInfo) {
-                let obj = new GroupMemberInfo();
-                obj.deserialize(params.UserInfo[z]);
-                this.UserInfo.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -7027,78 +7426,18 @@ class UpdatePolicyRequest extends  AbstractModel {
 }
 
 /**
- * User Group user information
+ * DeleteOIDCConfig request structure.
  * @class
  */
-class GroupMemberInfo extends  AbstractModel {
+class DeleteOIDCConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sub-user UID
-         * @type {number || null}
-         */
-        this.Uid = null;
-
-        /**
-         * Sub-user UIN
-         * @type {number || null}
-         */
-        this.Uin = null;
-
-        /**
-         * Sub-user name
+         * OIDC IdP name.
          * @type {string || null}
          */
         this.Name = null;
-
-        /**
-         * Mobile number
-         * @type {string || null}
-         */
-        this.PhoneNum = null;
-
-        /**
-         * Mobile number country/area code
-         * @type {string || null}
-         */
-        this.CountryCode = null;
-
-        /**
-         * Whether the mobile phone has been verified. `0`: No; `1`: Yes.
-         * @type {number || null}
-         */
-        this.PhoneFlag = null;
-
-        /**
-         * Email address
-         * @type {string || null}
-         */
-        this.Email = null;
-
-        /**
-         * Whether the email has been verified. `0`: No; `1`: Yes.
-         * @type {number || null}
-         */
-        this.EmailFlag = null;
-
-        /**
-         * User type. `1`: Global collaborator; `2`: Project collaborator; `3`: Message recipient.
-         * @type {number || null}
-         */
-        this.UserType = null;
-
-        /**
-         * Time policy created
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Whether the user is the primary message recipient. `0`: No; `1`: Yes.
-         * @type {number || null}
-         */
-        this.IsReceiverOwner = null;
 
     }
 
@@ -7109,17 +7448,7 @@ class GroupMemberInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uid = 'Uid' in params ? params.Uid : null;
-        this.Uin = 'Uin' in params ? params.Uin : null;
         this.Name = 'Name' in params ? params.Name : null;
-        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
-        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
-        this.PhoneFlag = 'PhoneFlag' in params ? params.PhoneFlag : null;
-        this.Email = 'Email' in params ? params.Email : null;
-        this.EmailFlag = 'EmailFlag' in params ? params.EmailFlag : null;
-        this.UserType = 'UserType' in params ? params.UserType : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.IsReceiverOwner = 'IsReceiverOwner' in params ? params.IsReceiverOwner : null;
 
     }
 }
@@ -7169,13 +7498,14 @@ module.exports = {
     DeleteUserRequest: DeleteUserRequest,
     DetachGroupPolicyRequest: DetachGroupPolicyRequest,
     DescribeRoleListResponse: DescribeRoleListResponse,
-    CreatePolicyResponse: CreatePolicyResponse,
+    DeleteUserResponse: DeleteUserResponse,
     GetRoleRequest: GetRoleRequest,
     CreateServiceLinkedRoleRequest: CreateServiceLinkedRoleRequest,
     ListAttachedGroupPoliciesRequest: ListAttachedGroupPoliciesRequest,
     ListGroupsForUserRequest: ListGroupsForUserRequest,
     AttachRolePolicyResponse: AttachRolePolicyResponse,
     UpdatePolicyResponse: UpdatePolicyResponse,
+    DescribeOIDCConfigRequest: DescribeOIDCConfigRequest,
     GetServiceLinkedRoleDeletionStatusResponse: GetServiceLinkedRoleDeletionStatusResponse,
     GetSecurityLastUsedRequest: GetSecurityLastUsedRequest,
     DescribeUserSAMLConfigResponse: DescribeUserSAMLConfigResponse,
@@ -7183,10 +7513,10 @@ module.exports = {
     ListUsersResponse: ListUsersResponse,
     UpdateRoleDescriptionResponse: UpdateRoleDescriptionResponse,
     GetAccountSummaryRequest: GetAccountSummaryRequest,
-    DetachUserPolicyRequest: DetachUserPolicyRequest,
+    DeletePolicyResponse: DeletePolicyResponse,
     GetUserAppIdResponse: GetUserAppIdResponse,
     GetUserAppIdRequest: GetUserAppIdRequest,
-    ListGroupsResponse: ListGroupsResponse,
+    DescribeOIDCConfigResponse: DescribeOIDCConfigResponse,
     ListPolicyVersionsRequest: ListPolicyVersionsRequest,
     GetCustomMFATokenInfoRequest: GetCustomMFATokenInfoRequest,
     DescribeRoleListRequest: DescribeRoleListRequest,
@@ -7195,6 +7525,7 @@ module.exports = {
     GetGroupRequest: GetGroupRequest,
     DeleteRoleResponse: DeleteRoleResponse,
     PolicyVersionItem: PolicyVersionItem,
+    DetachUserPolicyRequest: DetachUserPolicyRequest,
     DescribeSubAccountsRequest: DescribeSubAccountsRequest,
     DeleteUserPermissionsBoundaryRequest: DeleteUserPermissionsBoundaryRequest,
     ListSAMLProvidersRequest: ListSAMLProvidersRequest,
@@ -7219,7 +7550,7 @@ module.exports = {
     ListAttachedUserAllPoliciesResponse: ListAttachedUserAllPoliciesResponse,
     DeleteGroupRequest: DeleteGroupRequest,
     GetUserResponse: GetUserResponse,
-    DeleteUserResponse: DeleteUserResponse,
+    CreatePolicyResponse: CreatePolicyResponse,
     DetachRolePolicyRequest: DetachRolePolicyRequest,
     DeleteRolePermissionsBoundaryRequest: DeleteRolePermissionsBoundaryRequest,
     StrategyInfo: StrategyInfo,
@@ -7231,7 +7562,7 @@ module.exports = {
     LoginActionFlag: LoginActionFlag,
     DeleteRoleRequest: DeleteRoleRequest,
     UpdateRoleConsoleLoginRequest: UpdateRoleConsoleLoginRequest,
-    GetCustomMFATokenInfoResponse: GetCustomMFATokenInfoResponse,
+    UpdateUserResponse: UpdateUserResponse,
     UpdateAssumeRolePolicyResponse: UpdateAssumeRolePolicyResponse,
     GetPolicyVersionRequest: GetPolicyVersionRequest,
     CreateSAMLProviderResponse: CreateSAMLProviderResponse,
@@ -7253,14 +7584,17 @@ module.exports = {
     AttachUserPolicyRequest: AttachUserPolicyRequest,
     ListAttachedGroupPoliciesResponse: ListAttachedGroupPoliciesResponse,
     ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
+    ListGroupsResponse: ListGroupsResponse,
     PutUserPermissionsBoundaryResponse: PutUserPermissionsBoundaryResponse,
-    DeletePolicyResponse: DeletePolicyResponse,
+    GetPolicyVersionResponse: GetPolicyVersionResponse,
+    GetCustomMFATokenInfoResponse: GetCustomMFATokenInfoResponse,
     DisableUserSSOResponse: DisableUserSSOResponse,
+    CreateOIDCConfigRequest: CreateOIDCConfigRequest,
     AccessKey: AccessKey,
     GetGroupResponse: GetGroupResponse,
+    UpdateOIDCConfigResponse: UpdateOIDCConfigResponse,
     DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
-    UpdateUserResponse: UpdateUserResponse,
     GetAccountSummaryResponse: GetAccountSummaryResponse,
     CreateServiceLinkedRoleResponse: CreateServiceLinkedRoleResponse,
     ListUsersRequest: ListUsersRequest,
@@ -7272,12 +7606,14 @@ module.exports = {
     ListPoliciesRequest: ListPoliciesRequest,
     GetServiceLinkedRoleDeletionStatusRequest: GetServiceLinkedRoleDeletionStatusRequest,
     DetachGroupPolicyResponse: DetachGroupPolicyResponse,
+    GroupMemberInfo: GroupMemberInfo,
     CreatePolicyRequest: CreatePolicyRequest,
     ListAttachedUserAllPoliciesRequest: ListAttachedUserAllPoliciesRequest,
     DeletePolicyVersionRequest: DeletePolicyVersionRequest,
     CreateUserSAMLConfigRequest: CreateUserSAMLConfigRequest,
     UpdateGroupRequest: UpdateGroupRequest,
-    GetPolicyVersionResponse: GetPolicyVersionResponse,
+    AttachGroupPolicyRequest: AttachGroupPolicyRequest,
+    UpdateOIDCConfigRequest: UpdateOIDCConfigRequest,
     CreateRoleResponse: CreateRoleResponse,
     GetSAMLProviderResponse: GetSAMLProviderResponse,
     DescribeSafeAuthFlagIntlResponse: DescribeSafeAuthFlagIntlResponse,
@@ -7289,6 +7625,7 @@ module.exports = {
     RemoveUserFromGroupResponse: RemoveUserFromGroupResponse,
     DetachRolePolicyResponse: DetachRolePolicyResponse,
     DescribeUserOIDCConfigRequest: DescribeUserOIDCConfigRequest,
+    CreateOIDCConfigResponse: CreateOIDCConfigResponse,
     AttachedPolicyOfRole: AttachedPolicyOfRole,
     PutUserPermissionsBoundaryRequest: PutUserPermissionsBoundaryRequest,
     ListSAMLProvidersResponse: ListSAMLProvidersResponse,
@@ -7300,12 +7637,12 @@ module.exports = {
     CreateRoleRequest: CreateRoleRequest,
     AttachedUserPolicy: AttachedUserPolicy,
     DeleteServiceLinkedRoleResponse: DeleteServiceLinkedRoleResponse,
+    ListUsersForGroupResponse: ListUsersForGroupResponse,
     GetPolicyResponse: GetPolicyResponse,
     DeleteGroupResponse: DeleteGroupResponse,
-    AttachGroupPolicyRequest: AttachGroupPolicyRequest,
     DeleteServiceLinkedRoleRequest: DeleteServiceLinkedRoleRequest,
     AttachEntityOfPolicy: AttachEntityOfPolicy,
-    ListUsersForGroupResponse: ListUsersForGroupResponse,
+    DeleteOIDCConfigResponse: DeleteOIDCConfigResponse,
     PolicyVersionDetail: PolicyVersionDetail,
     AddUserResponse: AddUserResponse,
     CreateUserSAMLConfigResponse: CreateUserSAMLConfigResponse,
@@ -7323,7 +7660,7 @@ module.exports = {
     GetSecurityLastUsedResponse: GetSecurityLastUsedResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     UpdatePolicyRequest: UpdatePolicyRequest,
-    GroupMemberInfo: GroupMemberInfo,
+    DeleteOIDCConfigRequest: DeleteOIDCConfigRequest,
     CreateGroupResponse: CreateGroupResponse,
 
 }

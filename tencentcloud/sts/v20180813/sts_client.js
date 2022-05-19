@@ -18,13 +18,16 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AssumeRoleWithSAMLResponse = models.AssumeRoleWithSAMLResponse;
 const GetCallerIdentityResponse = models.GetCallerIdentityResponse;
-const AssumeRoleWithSAMLRequest = models.AssumeRoleWithSAMLRequest;
+const AssumeRoleWithWebIdentityRequest = models.AssumeRoleWithWebIdentityRequest;
+const AssumeRoleWithWebIdentityResponse = models.AssumeRoleWithWebIdentityResponse;
 const GetFederationTokenResponse = models.GetFederationTokenResponse;
 const AssumeRoleResponse = models.AssumeRoleResponse;
 const GetFederationTokenRequest = models.GetFederationTokenRequest;
+const Tag = models.Tag;
 const Credentials = models.Credentials;
 const AssumeRoleRequest = models.AssumeRoleRequest;
 const GetCallerIdentityRequest = models.GetCallerIdentityRequest;
+const AssumeRoleWithSAMLRequest = models.AssumeRoleWithSAMLRequest;
 
 
 /**
@@ -80,6 +83,17 @@ The persistent keys of the root account and sub-account as well as the temporary
     GetCallerIdentity(req, cb) {
         let resp = new GetCallerIdentityResponse();
         this.request("GetCallerIdentity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to apply for an OIDC role credential.
+     * @param {AssumeRoleWithWebIdentityRequest} req
+     * @param {function(string, AssumeRoleWithWebIdentityResponse):void} cb
+     * @public
+     */
+    AssumeRoleWithWebIdentity(req, cb) {
+        let resp = new AssumeRoleWithWebIdentityResponse();
+        this.request("AssumeRoleWithWebIdentity", req, resp, cb);
     }
 
 

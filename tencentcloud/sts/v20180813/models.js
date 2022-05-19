@@ -139,24 +139,24 @@ class GetCallerIdentityResponse extends  AbstractModel {
 }
 
 /**
- * AssumeRoleWithSAML request structure.
+ * AssumeRoleWithWebIdentity request structure.
  * @class
  */
-class AssumeRoleWithSAMLRequest extends  AbstractModel {
+class AssumeRoleWithWebIdentityRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Base64-encoded SAML assertion
+         * Identity provider name
          * @type {string || null}
          */
-        this.SAMLAssertion = null;
+        this.ProviderId = null;
 
         /**
-         * Principal access description name
+         * OIDC token issued by the IdP
          * @type {string || null}
          */
-        this.PrincipalArn = null;
+        this.WebIdentityToken = null;
 
         /**
          * Role access description name
@@ -171,7 +171,7 @@ class AssumeRoleWithSAMLRequest extends  AbstractModel {
         this.RoleSessionName = null;
 
         /**
-         * The validity period of the temporary credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
+         * The validity period of the temporary credential in seconds. Default value: 7,200s. Maximum value: 43,200s.
          * @type {number || null}
          */
         this.DurationSeconds = null;
@@ -185,11 +185,65 @@ class AssumeRoleWithSAMLRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SAMLAssertion = 'SAMLAssertion' in params ? params.SAMLAssertion : null;
-        this.PrincipalArn = 'PrincipalArn' in params ? params.PrincipalArn : null;
+        this.ProviderId = 'ProviderId' in params ? params.ProviderId : null;
+        this.WebIdentityToken = 'WebIdentityToken' in params ? params.WebIdentityToken : null;
         this.RoleArn = 'RoleArn' in params ? params.RoleArn : null;
         this.RoleSessionName = 'RoleSessionName' in params ? params.RoleSessionName : null;
         this.DurationSeconds = 'DurationSeconds' in params ? params.DurationSeconds : null;
+
+    }
+}
+
+/**
+ * AssumeRoleWithWebIdentity response structure.
+ * @class
+ */
+class AssumeRoleWithWebIdentityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Expiration time of the temporary credential (timestamp)
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * Expiration time of the temporary credential
+         * @type {string || null}
+         */
+        this.Expiration = null;
+
+        /**
+         * Temporary credential
+         * @type {Credentials || null}
+         */
+        this.Credentials = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.Expiration = 'Expiration' in params ? params.Expiration : null;
+
+        if (params.Credentials) {
+            let obj = new Credentials();
+            obj.deserialize(params.Credentials)
+            this.Credentials = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -350,6 +404,41 @@ Note:
 }
 
 /**
+ * Information on tags
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key. It’s up to 128 characters and case-sensitive.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value. It’s up to 256 characters and case-sensitive.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * Temporary credentials
  * @class
  */
@@ -439,6 +528,12 @@ It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:\/-
          */
         this.ExternalId = null;
 
+        /**
+         * List of session tags. Up to 50 tags are allowed. The tag keys can not duplicate.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -453,6 +548,15 @@ It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:\/-
         this.DurationSeconds = 'DurationSeconds' in params ? params.DurationSeconds : null;
         this.Policy = 'Policy' in params ? params.Policy : null;
         this.ExternalId = 'ExternalId' in params ? params.ExternalId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -478,15 +582,74 @@ class GetCallerIdentityRequest extends  AbstractModel {
     }
 }
 
+/**
+ * AssumeRoleWithSAML request structure.
+ * @class
+ */
+class AssumeRoleWithSAMLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Base64-encoded SAML assertion
+         * @type {string || null}
+         */
+        this.SAMLAssertion = null;
+
+        /**
+         * Principal access description name
+         * @type {string || null}
+         */
+        this.PrincipalArn = null;
+
+        /**
+         * Role access description name
+         * @type {string || null}
+         */
+        this.RoleArn = null;
+
+        /**
+         * Session name
+         * @type {string || null}
+         */
+        this.RoleSessionName = null;
+
+        /**
+         * The validity period of the temporary credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
+         * @type {number || null}
+         */
+        this.DurationSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SAMLAssertion = 'SAMLAssertion' in params ? params.SAMLAssertion : null;
+        this.PrincipalArn = 'PrincipalArn' in params ? params.PrincipalArn : null;
+        this.RoleArn = 'RoleArn' in params ? params.RoleArn : null;
+        this.RoleSessionName = 'RoleSessionName' in params ? params.RoleSessionName : null;
+        this.DurationSeconds = 'DurationSeconds' in params ? params.DurationSeconds : null;
+
+    }
+}
+
 module.exports = {
     AssumeRoleWithSAMLResponse: AssumeRoleWithSAMLResponse,
     GetCallerIdentityResponse: GetCallerIdentityResponse,
-    AssumeRoleWithSAMLRequest: AssumeRoleWithSAMLRequest,
+    AssumeRoleWithWebIdentityRequest: AssumeRoleWithWebIdentityRequest,
+    AssumeRoleWithWebIdentityResponse: AssumeRoleWithWebIdentityResponse,
     GetFederationTokenResponse: GetFederationTokenResponse,
     AssumeRoleResponse: AssumeRoleResponse,
     GetFederationTokenRequest: GetFederationTokenRequest,
+    Tag: Tag,
     Credentials: Credentials,
     AssumeRoleRequest: AssumeRoleRequest,
     GetCallerIdentityRequest: GetCallerIdentityRequest,
+    AssumeRoleWithSAMLRequest: AssumeRoleWithSAMLRequest,
 
 }

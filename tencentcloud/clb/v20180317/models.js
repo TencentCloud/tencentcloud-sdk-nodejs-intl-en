@@ -488,8 +488,8 @@ Note: if the name of the new CLB instance already exists, a default name will be
         this.Number = null;
 
         /**
-         * Sets the primary AZ ID for cross-AZ disaster recovery, such as 100001 or ap-guangzhou-1, which is applicable only to public network CLB.
-Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic by default and will be used only if the primary AZ becomes unavailable. The platform will automatically select the optimal secondary AZ. The list of primary AZs in a specific region can be queried through the DescribeMasterZones API.
+         * Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
+Note: By default, the traffic goes to the primary AZ. The secondary AZs only carry traffic when the primary AZ is unavailable. The optimal secondary AZ is chosen automatically. You can query the primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
          * @type {string || null}
          */
         this.MasterZoneId = null;
@@ -572,8 +572,8 @@ Note: A primary AZ carries traffic, while a secondary AZ does not carry traffic 
         this.ClusterTag = null;
 
         /**
-         * Sets the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB instances.
-Note: A secondary AZ will load traffic if the primary AZ has failures. The API `DescribeMasterZones` is used to query the primary and secondary AZ list of a region.
+         * Specifies the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`. It is applicable only to public network CLB.
+Note: The traffic only goes to the secondary AZ when the primary AZ is unavailable. You can query the list of primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SlaveZoneId = null;
@@ -801,14 +801,14 @@ Note: if the name of a new CLB instance already exists, a default name will be g
 
         /**
          * Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
-Note: A primary AZ carries traffic by default, while a secondary AZ does not. It only works when the primary AZ is faulty.
+Note: By default, the traffic goes to the primary AZ. The secondary AZs only carry traffic when the primary AZ is unavailable. The optimal secondary AZ is chosen automatically. You can query the primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
          * @type {string || null}
          */
         this.MasterZoneId = null;
 
         /**
-         * Sets the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB instances.
-Note: A secondary AZ carries traffic when the primary AZ fails. 
+         * Specifies the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`. It is applicable only to public network CLB.
+Note: The traffic only goes to the secondary AZ when the primary AZ is unavailable. You can query the list of primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
          * @type {string || null}
          */
         this.SlaveZoneId = null;
@@ -4092,11 +4092,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.HttpVersion = null;
 
         /**
-         * Specifies the type of IP for health check. `0` (default): Use the CLB VIP as the source IP. `1`: Use the IP range starting with 100.64 as the source IP.
+         * Specifies the type of IP for health check. `0` (default): CLB VIP. `1`: Use the IP range starting with 100.64 as the source IP.
 Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SourceIpType = null;
+
+        /**
+         * GRPC health check status code, which is only applicable to rules with GRPC as the backend forwarding protocol. It can be a single number (such as `20`), multiple numbers (such as `20,25`) or a range (such as `0-99`). The default value is `12`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExtendedCode = null;
 
     }
 
@@ -4123,6 +4130,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.CheckType = 'CheckType' in params ? params.CheckType : null;
         this.HttpVersion = 'HttpVersion' in params ? params.HttpVersion : null;
         this.SourceIpType = 'SourceIpType' in params ? params.SourceIpType : null;
+        this.ExtendedCode = 'ExtendedCode' in params ? params.ExtendedCode : null;
 
     }
 }
@@ -8904,6 +8912,8 @@ class CreateLoadBalancerResponse extends  AbstractModel {
 
         /**
          * Array of unique CLB instance IDs.
+This field may return `null` in some cases, such as there is delay during instance creation. You can query the IDs of the created instances by invoking `DescribeTaskStatus` with the `RequestId` or `DealName` returned by this API.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -8990,11 +9000,13 @@ class Quota extends  AbstractModel {
 
         /**
          * Quota name. Valid values:
-<li> TOTAL_OPEN_CLB_QUOTA: quota of public network CLB instances in the current region</li>
-<li> TOTAL_INTERNAL_CLB_QUOTA: quota of private network CLB instances in the current region</li>
-<li> TOTAL_LISTENER_QUOTA: quota of listeners under one CLB instance</li>
-<li> TOTAL_LISTENER_RULE_QUOTA: quota of forwarding rules under one listener</li>
-<li> TOTAL_TARGET_BIND_QUOTA: quota of CVM instances can be bound under one forwarding rule</li>
+<li> `TOTAL_OPEN_CLB_QUOTA`: Quota of public network CLB instances in the current region</li>
+<li> `TOTAL_INTERNAL_CLB_QUOTA`: Quota of private network CLB instances in the current region</li>
+<li> `TOTAL_LISTENER_QUOTA`: Quota of listeners under one CLB instance</li>
+<li> `TOTAL_LISTENER_RULE_QUOTA`: Quota of forwarding rules under one listener</li>
+<li> `TOTAL_TARGET_BIND_QUOTA`: Quota of CVM instances can be bound under one forwarding rule</li>
+<li> `TOTAL_SNAP_IP_QUOTA`: Quota of SNAT IPs for cross-region binding 2.0 under one CLB instance </li>
+<li> `TOTAL_ISP_CLB_QUOTA`: Quota of triple-ISP (CMCC/CUCC/CTCC) CLB instances in the current region</li>
          * @type {string || null}
          */
         this.QuotaId = null;

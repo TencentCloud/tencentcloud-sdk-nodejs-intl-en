@@ -4715,6 +4715,12 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.DryRun = null;
 
         /**
+         * Instance engine type. Valid values: `InnoDB` (default); `RocksDB`.
+         * @type {string || null}
+         */
+        this.EngineType = null;
+
+        /**
          * The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
          * @type {Array.<string> || null}
          */
@@ -4785,6 +4791,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.ParamTemplateType = 'ParamTemplateType' in params ? params.ParamTemplateType : null;
         this.AlarmPolicyIdList = 'AlarmPolicyIdList' in params ? params.AlarmPolicyIdList : null;
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
         this.Vips = 'Vips' in params ? params.Vips : null;
 
     }

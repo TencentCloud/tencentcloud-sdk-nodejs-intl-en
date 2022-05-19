@@ -26,6 +26,7 @@ const DescribeLogContextRequest = models.DescribeLogContextRequest;
 const DeleteShipperRequest = models.DeleteShipperRequest;
 const ModifyTopicRequest = models.ModifyTopicRequest;
 const DeleteLogsetResponse = models.DeleteLogsetResponse;
+const ParquetKeyInfo = models.ParquetKeyInfo;
 const DescribeShipperTasksResponse = models.DescribeShipperTasksResponse;
 const CreateMachineGroupResponse = models.CreateMachineGroupResponse;
 const DescribeConfigMachineGroupsRequest = models.DescribeConfigMachineGroupsRequest;
@@ -165,6 +166,7 @@ const DescribeMachineGroupConfigsRequest = models.DescribeMachineGroupConfigsReq
 const ModifyLogsetRequest = models.ModifyLogsetRequest;
 const DescribeMachineGroupsResponse = models.DescribeMachineGroupsResponse;
 const DescribeLogsetsRequest = models.DescribeLogsetsRequest;
+const ParquetInfo = models.ParquetInfo;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const Filter = models.Filter;
 const ConsumerContent = models.ConsumerContent;
@@ -934,7 +936,7 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to create a download task to export raw logs.
+     * This API is used to create a download task. To get the returned download address, call `DescribeExports` to view the task list. The `CosPath` parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
      * @param {CreateExportRequest} req
      * @param {function(string, CreateExportResponse):void} cb
      * @public

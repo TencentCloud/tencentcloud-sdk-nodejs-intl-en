@@ -2162,7 +2162,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UpdateTime = null;
 
         /**
-         * 
+         * The template type. Valid values:
+* Preset
+* Custom
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
@@ -2934,6 +2937,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.UpdateTime = null;
 
+        /**
+         * The template type. Valid values:
+* Preset
+* Custom
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -2978,6 +2990,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -9419,6 +9432,15 @@ class AIAnalysisTemplateItem extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * The template type. Valid values:
+* Preset
+* Custom
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -9457,6 +9479,7 @@ class AIAnalysisTemplateItem extends  AbstractModel {
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -9998,6 +10021,14 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * The filter for querying templates. If this parameter is left empty, both preset and custom templates are returned. Valid values:
+* Preset
+* Custom
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -10010,6 +10041,7 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -14733,6 +14765,14 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * The filter for querying templates. If this parameter is left empty, both preset and custom templates are returned. Valid values:
+* Preset
+* Custom
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -14745,6 +14785,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -20203,6 +20244,14 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * The filter for querying templates. If this parameter is left empty, both preset and custom templates are returned. Valid values:
+* Preset
+* Custom
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -20215,6 +20264,7 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }

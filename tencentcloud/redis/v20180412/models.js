@@ -667,6 +667,41 @@ class DescribeMaintenanceWindowResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceReadOnly response structure.
+ * @class
+ */
+class ModifyInstanceReadOnlyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ReleaseWanAddress response structure.
  * @class
  */
@@ -2721,6 +2756,41 @@ class ModfiyInstancePasswordResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceReadOnly request structure.
+ * @class
+ */
+class ModifyInstanceReadOnlyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance input mode. Valid values: `0` (read/write), `1` (read-only)
+         * @type {string || null}
+         */
+        this.InputMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InputMode = 'InputMode' in params ? params.InputMode : null;
+
+    }
+}
+
+/**
  * Slow log details
  * @class
  */
@@ -2797,6 +2867,7 @@ module.exports = {
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     DescribeProductInfoResponse: DescribeProductInfoResponse,
     DescribeMaintenanceWindowResponse: DescribeMaintenanceWindowResponse,
+    ModifyInstanceReadOnlyResponse: ModifyInstanceReadOnlyResponse,
     ReleaseWanAddressResponse: ReleaseWanAddressResponse,
     ProductConf: ProductConf,
     BigKeyTypeInfo: BigKeyTypeInfo,
@@ -2840,6 +2911,7 @@ module.exports = {
     DescribeInstanceMonitorHotKeyResponse: DescribeInstanceMonitorHotKeyResponse,
     DescribeInstanceMonitorTopNCmdRequest: DescribeInstanceMonitorTopNCmdRequest,
     ModfiyInstancePasswordResponse: ModfiyInstancePasswordResponse,
+    ModifyInstanceReadOnlyRequest: ModifyInstanceReadOnlyRequest,
     InstanceSlowlogDetail: InstanceSlowlogDetail,
 
 }

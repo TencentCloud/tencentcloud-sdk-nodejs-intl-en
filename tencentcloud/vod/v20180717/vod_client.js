@@ -328,6 +328,7 @@ const ImageSpriteTemplate = models.ImageSpriteTemplate;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
 const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
 const SegmentConfigureInfo = models.SegmentConfigureInfo;
+const FileDeleteResultItem = models.FileDeleteResultItem;
 const RefererAuthPolicy = models.RefererAuthPolicy;
 const TaskStatDataItem = models.TaskStatDataItem;
 const ParseStreamingManifestResponse = models.ParseStreamingManifestResponse;

@@ -5167,6 +5167,12 @@ class FileDeleteTask extends  AbstractModel {
          */
         this.FileIdSet = null;
 
+        /**
+         * The information of the files deleted.
+         * @type {Array.<FileDeleteResultItem> || null}
+         */
+        this.FileDeleteResultInfo = null;
+
     }
 
     /**
@@ -5177,6 +5183,15 @@ class FileDeleteTask extends  AbstractModel {
             return;
         }
         this.FileIdSet = 'FileIdSet' in params ? params.FileIdSet : null;
+
+        if (params.FileDeleteResultInfo) {
+            this.FileDeleteResultInfo = new Array();
+            for (let z in params.FileDeleteResultInfo) {
+                let obj = new FileDeleteResultItem();
+                obj.deserialize(params.FileDeleteResultInfo[z]);
+                this.FileDeleteResultInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -7980,7 +7995,7 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         super();
 
         /**
-         * [LVB code](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) of a stream.
+         * The live stream code.
          * @type {string || null}
          */
         this.StreamId = null;
@@ -17465,6 +17480,50 @@ class SegmentConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * The result of file deletion.
+ * @class
+ */
+class FileDeleteResultItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the file deleted.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * The type of the file deleted.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<MediaDeleteItem> || null}
+         */
+        this.DeleteParts = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+
+        if (params.DeleteParts) {
+            this.DeleteParts = new Array();
+            for (let z in params.DeleteParts) {
+                let obj = new MediaDeleteItem();
+                obj.deserialize(params.DeleteParts[z]);
+                this.DeleteParts.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Referer hotlink protection configuration
  * @class
  */
@@ -22771,11 +22830,14 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Video stream encoder. Valid values:
+         * The video codec. Valid values:
 <li>libx264: H.264</li>
 <li>libx265: H.265</li>
 <li>av1: AOMedia Video 1</li>
-Currently, a resolution within 640x480 must be specified for H.265. and the `av1` container only supports mp4.
+<li>H.266: H.266</li>
+<font color=red>Notes:</font>
+<li>The AOMedia Video 1 and H.266 codecs can only be used for MP4 files.</li>
+<li> Only CRF is supported for H.266 currently.</li>
          * @type {string || null}
          */
         this.Codec = null;
@@ -22829,8 +22891,12 @@ If the value is 0, the bitrate of the video will be the same as that of the sour
         this.FillType = null;
 
         /**
-         * Video Constant Rate Factor (CRF). Value range: 0-51. This parameter will be disabled if you enter 0.
-We don’t recommend specifying this parameter unless you have special requirements.
+         * The video constant rate factor (CRF). Value range: 1-51. `0` means to disable this parameter.
+
+<font color=red>Notes:</font>
+<li>If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.</li>
+<li>If `Codec` is `H.266`, this parameter is required (`28` is recommended).</li>
+<li>We don’t recommend using this parameter unless you have special requirements.</li>
          * @type {number || null}
          */
         this.Vcrf = null;
@@ -31656,6 +31722,7 @@ module.exports = {
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
     SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     SegmentConfigureInfo: SegmentConfigureInfo,
+    FileDeleteResultItem: FileDeleteResultItem,
     RefererAuthPolicy: RefererAuthPolicy,
     TaskStatDataItem: TaskStatDataItem,
     ParseStreamingManifestResponse: ParseStreamingManifestResponse,

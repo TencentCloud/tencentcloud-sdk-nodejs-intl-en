@@ -29,6 +29,7 @@ const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMoni
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowResponse;
+const ModifyInstanceReadOnlyResponse = models.ModifyInstanceReadOnlyResponse;
 const ReleaseWanAddressResponse = models.ReleaseWanAddressResponse;
 const ProductConf = models.ProductConf;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
@@ -72,6 +73,7 @@ const DescribeReplicationGroupResponse = models.DescribeReplicationGroupResponse
 const DescribeInstanceMonitorHotKeyResponse = models.DescribeInstanceMonitorHotKeyResponse;
 const DescribeInstanceMonitorTopNCmdRequest = models.DescribeInstanceMonitorTopNCmdRequest;
 const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
+const ModifyInstanceReadOnlyRequest = models.ModifyInstanceReadOnlyRequest;
 const InstanceSlowlogDetail = models.InstanceSlowlogDetail;
 
 
@@ -116,6 +118,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceNodeInfo(req, cb) {
         let resp = new DescribeInstanceNodeInfoResponse();
         this.request("DescribeInstanceNodeInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set instance input mode.
+     * @param {ModifyInstanceReadOnlyRequest} req
+     * @param {function(string, ModifyInstanceReadOnlyResponse):void} cb
+     * @public
+     */
+    ModifyInstanceReadOnly(req, cb) {
+        let resp = new ModifyInstanceReadOnlyResponse();
+        this.request("ModifyInstanceReadOnly", req, resp, cb);
     }
 
     /**

@@ -783,94 +783,6 @@ class DescribeVpcIpv6AddressesRequest extends  AbstractModel {
 }
 
 /**
- * SNAT rule of a NAT Gateway
- * @class
- */
-class SourceIpTranslationNatRule extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Resource ID
-         * @type {string || null}
-         */
-        this.ResourceId = null;
-
-        /**
-         * Resource type. Valid values: SUBNET, NETWORKINTERFACE
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ResourceType = null;
-
-        /**
-         * Source IP/IP range
-         * @type {string || null}
-         */
-        this.PrivateIpAddress = null;
-
-        /**
-         * Elastic IP address pool
-         * @type {Array.<string> || null}
-         */
-        this.PublicIpAddresses = null;
-
-        /**
-         * Description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * SNAT rule ID
-         * @type {string || null}
-         */
-        this.NatGatewaySnatId = null;
-
-        /**
-         * NAT Gateway ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.NatGatewayId = null;
-
-        /**
-         * VPC ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Creation time of a SNAT rule for a NAT Gateway
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
-        this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.NatGatewaySnatId = 'NatGatewaySnatId' in params ? params.NatGatewaySnatId : null;
-        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-
-    }
-}
-
-/**
  * DescribeCustomerGateways request structure.
  * @class
  */
@@ -1428,7 +1340,7 @@ class FlowLog extends  AbstractModel {
         this.FlowLogName = null;
 
         /**
-         * The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, and `CCN`.
+         * The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, `CCN`, `NAT`, and `DCG`.
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -2517,64 +2429,6 @@ class DisassociateNetworkInterfaceSecurityGroupsRequest extends  AbstractModel {
         }
         this.NetworkInterfaceIds = 'NetworkInterfaceIds' in params ? params.NetworkInterfaceIds : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
-
-    }
-}
-
-/**
- * Security group policy set
- * @class
- */
-class SecurityGroupPolicySet extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The version of the security group policy. The version number is automatically increased by one each time users update the security policy, to prevent the expiration of updated routing policies. Conflict is ignored if it is left empty.
-         * @type {string || null}
-         */
-        this.Version = null;
-
-        /**
-         * Outbound policy.
-         * @type {Array.<SecurityGroupPolicy> || null}
-         */
-        this.Egress = null;
-
-        /**
-         * Inbound policy.
-         * @type {Array.<SecurityGroupPolicy> || null}
-         */
-        this.Ingress = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Version = 'Version' in params ? params.Version : null;
-
-        if (params.Egress) {
-            this.Egress = new Array();
-            for (let z in params.Egress) {
-                let obj = new SecurityGroupPolicy();
-                obj.deserialize(params.Egress[z]);
-                this.Egress.push(obj);
-            }
-        }
-
-        if (params.Ingress) {
-            this.Ingress = new Array();
-            for (let z in params.Ingress) {
-                let obj = new SecurityGroupPolicy();
-                obj.deserialize(params.Ingress[z]);
-                this.Ingress.push(obj);
-            }
-        }
 
     }
 }
@@ -4945,49 +4799,6 @@ class DeleteAddressTemplateRequest extends  AbstractModel {
             return;
         }
         this.AddressTemplateId = 'AddressTemplateId' in params ? params.AddressTemplateId : null;
-
-    }
-}
-
-/**
- * CreateNatGatewaySourceIpTranslationNatRule request structure.
- * @class
- */
-class CreateNatGatewaySourceIpTranslationNatRuleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The ID of the NAT Gateway, such as `nat-df45454`
-         * @type {string || null}
-         */
-        this.NatGatewayId = null;
-
-        /**
-         * The SNAT forwarding rule of the NAT Gateway
-         * @type {Array.<SourceIpTranslationNatRule> || null}
-         */
-        this.SourceIpTranslationNatRules = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
-
-        if (params.SourceIpTranslationNatRules) {
-            this.SourceIpTranslationNatRules = new Array();
-            for (let z in params.SourceIpTranslationNatRules) {
-                let obj = new SourceIpTranslationNatRule();
-                obj.deserialize(params.SourceIpTranslationNatRules[z]);
-                this.SourceIpTranslationNatRules.push(obj);
-            }
-        }
 
     }
 }
@@ -9468,10 +9279,10 @@ class CreateAddressTemplateResponse extends  AbstractModel {
 }
 
 /**
- * CreateNatGatewayDestinationIpPortTranslationNatRule response structure.
+ * DeleteDirectConnectGateway response structure.
  * @class
  */
-class CreateNatGatewayDestinationIpPortTranslationNatRuleResponse extends  AbstractModel {
+class DeleteDirectConnectGatewayResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -10685,34 +10496,6 @@ class RenewVpnGatewayResponse extends  AbstractModel {
 }
 
 /**
- * DeleteDirectConnectGateway response structure.
- * @class
- */
-class DeleteDirectConnectGatewayResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyAddressesBandwidth request structure.
  * @class
  */
@@ -11179,6 +10962,34 @@ class HaVipDisassociateAddressIpRequest extends  AbstractModel {
             return;
         }
         this.HaVipId = 'HaVipId' in params ? params.HaVipId : null;
+
+    }
+}
+
+/**
+ * DisableFlowLogs response structure.
+ * @class
+ */
+class DisableFlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11769,34 +11580,6 @@ class GetCcnRegionBandwidthLimitsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-
-    }
-}
-
-/**
- * CreateNatGatewaySourceIpTranslationNatRule response structure.
- * @class
- */
-class CreateNatGatewaySourceIpTranslationNatRuleResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15041,24 +14824,18 @@ class DeleteDirectConnectGatewayCcnRoutesRequest extends  AbstractModel {
 }
 
 /**
- * CreateNatGatewayDestinationIpPortTranslationNatRule request structure.
+ * RemoveBandwidthPackageResources response structure.
  * @class
  */
-class CreateNatGatewayDestinationIpPortTranslationNatRuleRequest extends  AbstractModel {
+class RemoveBandwidthPackageResourcesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The ID of the NAT gateway, such as `nat-df45454`.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.NatGatewayId = null;
-
-        /**
-         * The port forwarding rules of the NAT gateway.
-         * @type {Array.<DestinationIpPortTranslationNatRule> || null}
-         */
-        this.DestinationIpPortTranslationNatRules = null;
+        this.RequestId = null;
 
     }
 
@@ -15069,16 +14846,7 @@ class CreateNatGatewayDestinationIpPortTranslationNatRuleRequest extends  Abstra
         if (!params) {
             return;
         }
-        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
-
-        if (params.DestinationIpPortTranslationNatRules) {
-            this.DestinationIpPortTranslationNatRules = new Array();
-            for (let z in params.DestinationIpPortTranslationNatRules) {
-                let obj = new DestinationIpPortTranslationNatRule();
-                obj.deserialize(params.DestinationIpPortTranslationNatRules[z]);
-                this.DestinationIpPortTranslationNatRules.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15098,7 +14866,7 @@ class CreateFlowLogRequest extends  AbstractModel {
         this.FlowLogName = null;
 
         /**
-         * The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, and `CCN`.
+         * The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, `CCN`, `NAT`, and `DCG`.
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -16085,6 +15853,34 @@ class DisassociateVpcEndPointSecurityGroupsRequest extends  AbstractModel {
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
         this.EndPointId = 'EndPointId' in params ? params.EndPointId : null;
+
+    }
+}
+
+/**
+ * EnableFlowLogs request structure.
+ * @class
+ */
+class EnableFlowLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow log ID.
+         * @type {Array.<string> || null}
+         */
+        this.FlowLogIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowLogIds = 'FlowLogIds' in params ? params.FlowLogIds : null;
 
     }
 }
@@ -17976,69 +17772,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * The port forwarding rules of the NAT gateway
- * @class
- */
-class DestinationIpPortTranslationNatRule extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Network protocol. Available choices: `TCP`, `UDP`.
-         * @type {string || null}
-         */
-        this.IpProtocol = null;
-
-        /**
-         * EIP.
-         * @type {string || null}
-         */
-        this.PublicIpAddress = null;
-
-        /**
-         * Public port.
-         * @type {number || null}
-         */
-        this.PublicPort = null;
-
-        /**
-         * Private network address.
-         * @type {string || null}
-         */
-        this.PrivateIpAddress = null;
-
-        /**
-         * Private network port.
-         * @type {number || null}
-         */
-        this.PrivatePort = null;
-
-        /**
-         * NAT gateway forwarding rule description.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
-        this.PublicIpAddress = 'PublicIpAddress' in params ? params.PublicIpAddress : null;
-        this.PublicPort = 'PublicPort' in params ? params.PublicPort : null;
-        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
-        this.PrivatePort = 'PrivatePort' in params ? params.PrivatePort : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-    }
-}
-
-/**
  * CreateDefaultVpc request structure.
  * @class
  */
@@ -19804,18 +19537,30 @@ class DescribeAddressQuotaRequest extends  AbstractModel {
 }
 
 /**
- * RemoveBandwidthPackageResources response structure.
+ * Security group policy set
  * @class
  */
-class RemoveBandwidthPackageResourcesResponse extends  AbstractModel {
+class SecurityGroupPolicySet extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The version of the security group policy. The version number is automatically increased by one each time users update the security policy, to prevent the expiration of updated routing policies. Conflict is ignored if it is left empty.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Version = null;
+
+        /**
+         * Outbound policy.
+         * @type {Array.<SecurityGroupPolicy> || null}
+         */
+        this.Egress = null;
+
+        /**
+         * Inbound policy.
+         * @type {Array.<SecurityGroupPolicy> || null}
+         */
+        this.Ingress = null;
 
     }
 
@@ -19826,7 +19571,25 @@ class RemoveBandwidthPackageResourcesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Version = 'Version' in params ? params.Version : null;
+
+        if (params.Egress) {
+            this.Egress = new Array();
+            for (let z in params.Egress) {
+                let obj = new SecurityGroupPolicy();
+                obj.deserialize(params.Egress[z]);
+                this.Egress.push(obj);
+            }
+        }
+
+        if (params.Ingress) {
+            this.Ingress = new Array();
+            for (let z in params.Ingress) {
+                let obj = new SecurityGroupPolicy();
+                obj.deserialize(params.Ingress[z]);
+                this.Ingress.push(obj);
+            }
+        }
 
     }
 }
@@ -21472,6 +21235,34 @@ class Ipv6SubnetCidrBlock extends  AbstractModel {
 }
 
 /**
+ * EnableFlowLogs response structure.
+ * @class
+ */
+class EnableFlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAddressQuota response structure.
  * @class
  */
@@ -22894,6 +22685,34 @@ class CreateVpcRequest extends  AbstractModel {
 }
 
 /**
+ * DisableFlowLogs request structure.
+ * @class
+ */
+class DisableFlowLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Flow log ID.
+         * @type {Array.<string> || null}
+         */
+        this.FlowLogIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowLogIds = 'FlowLogIds' in params ? params.FlowLogIds : null;
+
+    }
+}
+
+/**
  * DeleteServiceTemplate request structure.
  * @class
  */
@@ -23382,7 +23201,6 @@ module.exports = {
     DescribeVpnConnectionsRequest: DescribeVpnConnectionsRequest,
     DescribeNetworkInterfacesRequest: DescribeNetworkInterfacesRequest,
     DescribeVpcIpv6AddressesRequest: DescribeVpcIpv6AddressesRequest,
-    SourceIpTranslationNatRule: SourceIpTranslationNatRule,
     DescribeCustomerGatewaysRequest: DescribeCustomerGatewaysRequest,
     ModifyCcnRegionBandwidthLimitsTypeResponse: ModifyCcnRegionBandwidthLimitsTypeResponse,
     DescribeVpnGatewaysResponse: DescribeVpnGatewaysResponse,
@@ -23414,7 +23232,6 @@ module.exports = {
     ModifyBandwidthPackageAttributeRequest: ModifyBandwidthPackageAttributeRequest,
     TransformAddressResponse: TransformAddressResponse,
     DisassociateNetworkInterfaceSecurityGroupsRequest: DisassociateNetworkInterfaceSecurityGroupsRequest,
-    SecurityGroupPolicySet: SecurityGroupPolicySet,
     ModifyFlowLogAttributeRequest: ModifyFlowLogAttributeRequest,
     UnassignIpv6SubnetCidrBlockResponse: UnassignIpv6SubnetCidrBlockResponse,
     ModifyVpcEndPointServiceAttributeRequest: ModifyVpcEndPointServiceAttributeRequest,
@@ -23469,7 +23286,6 @@ module.exports = {
     DeleteAddressTemplateResponse: DeleteAddressTemplateResponse,
     ModifySubnetAttributeResponse: ModifySubnetAttributeResponse,
     DeleteAddressTemplateRequest: DeleteAddressTemplateRequest,
-    CreateNatGatewaySourceIpTranslationNatRuleRequest: CreateNatGatewaySourceIpTranslationNatRuleRequest,
     NetworkInterface: NetworkInterface,
     TransformAddressRequest: TransformAddressRequest,
     ReplaceDirectConnectGatewayCcnRoutesRequest: ReplaceDirectConnectGatewayCcnRoutesRequest,
@@ -23551,7 +23367,7 @@ module.exports = {
     CreateVpnGatewayRoutesResponse: CreateVpnGatewayRoutesResponse,
     CreateNetDetectRequest: CreateNetDetectRequest,
     CreateAddressTemplateResponse: CreateAddressTemplateResponse,
-    CreateNatGatewayDestinationIpPortTranslationNatRuleResponse: CreateNatGatewayDestinationIpPortTranslationNatRuleResponse,
+    DeleteDirectConnectGatewayResponse: DeleteDirectConnectGatewayResponse,
     DeleteAddressTemplateGroupRequest: DeleteAddressTemplateGroupRequest,
     DescribeNetworkInterfaceLimitRequest: DescribeNetworkInterfaceLimitRequest,
     CreateBandwidthPackageRequest: CreateBandwidthPackageRequest,
@@ -23578,13 +23394,13 @@ module.exports = {
     NetworkAclEntry: NetworkAclEntry,
     DescribeAssistantCidrRequest: DescribeAssistantCidrRequest,
     RenewVpnGatewayResponse: RenewVpnGatewayResponse,
-    DeleteDirectConnectGatewayResponse: DeleteDirectConnectGatewayResponse,
     ModifyAddressesBandwidthRequest: ModifyAddressesBandwidthRequest,
     ResetVpnGatewayInternetMaxBandwidthRequest: ResetVpnGatewayInternetMaxBandwidthRequest,
     EndPoint: EndPoint,
     DirectConnectGateway: DirectConnectGateway,
     Price: Price,
     HaVipDisassociateAddressIpRequest: HaVipDisassociateAddressIpRequest,
+    DisableFlowLogsResponse: DisableFlowLogsResponse,
     DescribeBandwidthPackageResourcesResponse: DescribeBandwidthPackageResourcesResponse,
     DescribeCrossBorderComplianceResponse: DescribeCrossBorderComplianceResponse,
     ModifyVpnGatewayAttributeResponse: ModifyVpnGatewayAttributeResponse,
@@ -23599,7 +23415,6 @@ module.exports = {
     ModifyVpcEndPointServiceWhiteListRequest: ModifyVpcEndPointServiceWhiteListRequest,
     CreateFlowLogResponse: CreateFlowLogResponse,
     GetCcnRegionBandwidthLimitsRequest: GetCcnRegionBandwidthLimitsRequest,
-    CreateNatGatewaySourceIpTranslationNatRuleResponse: CreateNatGatewaySourceIpTranslationNatRuleResponse,
     CcnAttachedInstance: CcnAttachedInstance,
     SecurityPolicyDatabase: SecurityPolicyDatabase,
     ResetVpnConnectionResponse: ResetVpnConnectionResponse,
@@ -23666,7 +23481,7 @@ module.exports = {
     DescribeVpcInstancesResponse: DescribeVpcInstancesResponse,
     AccountAttribute: AccountAttribute,
     DeleteDirectConnectGatewayCcnRoutesRequest: DeleteDirectConnectGatewayCcnRoutesRequest,
-    CreateNatGatewayDestinationIpPortTranslationNatRuleRequest: CreateNatGatewayDestinationIpPortTranslationNatRuleRequest,
+    RemoveBandwidthPackageResourcesResponse: RemoveBandwidthPackageResourcesResponse,
     CreateFlowLogRequest: CreateFlowLogRequest,
     InquirePriceCreateDirectConnectGatewayRequest: InquirePriceCreateDirectConnectGatewayRequest,
     AttachNetworkInterfaceResponse: AttachNetworkInterfaceResponse,
@@ -23691,6 +23506,7 @@ module.exports = {
     CreateNetDetectResponse: CreateNetDetectResponse,
     DeleteCcnRequest: DeleteCcnRequest,
     DisassociateVpcEndPointSecurityGroupsRequest: DisassociateVpcEndPointSecurityGroupsRequest,
+    EnableFlowLogsRequest: EnableFlowLogsRequest,
     ModifyVpnGatewayAttributeRequest: ModifyVpnGatewayAttributeRequest,
     DeleteNetDetectRequest: DeleteNetDetectRequest,
     IPSECOptionsSpecification: IPSECOptionsSpecification,
@@ -23728,7 +23544,6 @@ module.exports = {
     UnassignIpv6CidrBlockRequest: UnassignIpv6CidrBlockRequest,
     CCN: CCN,
     InquirePriceCreateDirectConnectGatewayResponse: InquirePriceCreateDirectConnectGatewayResponse,
-    DestinationIpPortTranslationNatRule: DestinationIpPortTranslationNatRule,
     CreateDefaultVpcRequest: CreateDefaultVpcRequest,
     DescribeSubnetsResponse: DescribeSubnetsResponse,
     DescribeCustomerGatewaysResponse: DescribeCustomerGatewaysResponse,
@@ -23771,7 +23586,7 @@ module.exports = {
     DeleteSecurityGroupResponse: DeleteSecurityGroupResponse,
     CreateNetworkInterfaceResponse: CreateNetworkInterfaceResponse,
     DescribeAddressQuotaRequest: DescribeAddressQuotaRequest,
-    RemoveBandwidthPackageResourcesResponse: RemoveBandwidthPackageResourcesResponse,
+    SecurityGroupPolicySet: SecurityGroupPolicySet,
     AssignIpv6AddressesResponse: AssignIpv6AddressesResponse,
     CreateRoutesResponse: CreateRoutesResponse,
     DescribeSecurityGroupsResponse: DescribeSecurityGroupsResponse,
@@ -23809,6 +23624,7 @@ module.exports = {
     ModifyNetDetectResponse: ModifyNetDetectResponse,
     CreateHaVipRequest: CreateHaVipRequest,
     Ipv6SubnetCidrBlock: Ipv6SubnetCidrBlock,
+    EnableFlowLogsResponse: EnableFlowLogsResponse,
     DescribeAddressQuotaResponse: DescribeAddressQuotaResponse,
     CreateCustomerGatewayRequest: CreateCustomerGatewayRequest,
     DeleteSecurityGroupRequest: DeleteSecurityGroupRequest,
@@ -23839,6 +23655,7 @@ module.exports = {
     DescribeServiceTemplateGroupsRequest: DescribeServiceTemplateGroupsRequest,
     CreateSecurityGroupWithPoliciesRequest: CreateSecurityGroupWithPoliciesRequest,
     CreateVpcRequest: CreateVpcRequest,
+    DisableFlowLogsRequest: DisableFlowLogsRequest,
     DeleteServiceTemplateRequest: DeleteServiceTemplateRequest,
     DescribeSecurityGroupAssociationStatisticsRequest: DescribeSecurityGroupAssociationStatisticsRequest,
     Route: Route,

@@ -554,36 +554,18 @@ class DescribeTopicAttributesRequest extends  AbstractModel {
 }
 
 /**
- * FetchMessageByOffset request structure.
+ * DescribeInstanceAttributes request structure.
  * @class
  */
-class FetchMessageByOffsetRequest extends  AbstractModel {
+class DescribeInstanceAttributesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * Topic name
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * Partition ID
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-        /**
-         * Offset information, which is required.
-         * @type {number || null}
-         */
-        this.Offset = null;
 
     }
 
@@ -595,9 +577,6 @@ class FetchMessageByOffsetRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -888,6 +867,62 @@ class BatchModifyTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
+ * Response structure of creating a prepaid instance
+ * @class
+ */
+class CreateInstancePreResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned code. 0: Normal; other values: Error.
+         * @type {string || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * The message indicating whether the operation is successful.
+         * @type {string || null}
+         */
+        this.ReturnMessage = null;
+
+        /**
+         * Data returned by the operation.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {CreateInstancePreData || null}
+         */
+        this.Data = null;
+
+        /**
+         * Deletion time.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeleteRouteTimestamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.ReturnMessage = 'ReturnMessage' in params ? params.ReturnMessage : null;
+
+        if (params.Data) {
+            let obj = new CreateInstancePreData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.DeleteRouteTimestamp = 'DeleteRouteTimestamp' in params ? params.DeleteRouteTimestamp : null;
+
+    }
+}
+
+/**
  * Internal topic object of `GroupInfo`
  * @class
  */
@@ -1051,6 +1086,55 @@ Note: `null` may be returned for this field, indicating that no valid values can
 }
 
 /**
+ * ModifyInstancePre request structure.
+ * @class
+ */
+class ModifyInstancePreRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Estimated disk capacity, which can be increased by increment.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * Estimated bandwidth, which can be increased by increment.
+         * @type {number || null}
+         */
+        this.BandWidth = null;
+
+        /**
+         * Estimated partition count, which can be increased by increment.
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.BandWidth = 'BandWidth' in params ? params.BandWidth : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+
+    }
+}
+
+/**
  * DescribeInstancesDetail response structure.
  * @class
  */
@@ -1086,6 +1170,51 @@ class DescribeInstancesDetailResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Data returned by the `CreateInstancePre` API.
+ * @class
+ */
+class CreateInstancePreData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value returned by `CreateInstancePre` is 0, which is fixed and cannot be used as the query condition of `CheckTaskStatus`. It is only used to ensure the consistency with the backend data structure.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * Order number list.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * Instance ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3115,18 +3244,36 @@ class InstanceDetailResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceAttributes request structure.
+ * FetchMessageByOffset request structure.
  * @class
  */
-class DescribeInstanceAttributesRequest extends  AbstractModel {
+class FetchMessageByOffsetRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Partition ID
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Offset information, which is required.
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -3138,6 +3285,9 @@ class DescribeInstanceAttributesRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -5389,6 +5539,46 @@ class BatchCreateAclResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstancePre response structure.
+ * @class
+ */
+class ModifyInstancePreResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response structure of modifying the configurations of a prepaid instance.
+         * @type {CreateInstancePreResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new CreateInstancePreResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7741,7 +7931,7 @@ module.exports = {
     DescribeACLRequest: DescribeACLRequest,
     BatchModifyTopicResultDTO: BatchModifyTopicResultDTO,
     DescribeTopicAttributesRequest: DescribeTopicAttributesRequest,
-    FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
+    DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
     ConsumerGroup: ConsumerGroup,
     Assignment: Assignment,
     DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
@@ -7749,10 +7939,13 @@ module.exports = {
     DescribeInstancesResponse: DescribeInstancesResponse,
     FetchMessageByOffsetResponse: FetchMessageByOffsetResponse,
     BatchModifyTopicAttributesResponse: BatchModifyTopicAttributesResponse,
+    CreateInstancePreResp: CreateInstancePreResp,
     GroupInfoTopics: GroupInfoTopics,
     TopicResult: TopicResult,
     Region: Region,
+    ModifyInstancePreRequest: ModifyInstancePreRequest,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
+    CreateInstancePreData: CreateInstancePreData,
     AclRule: AclRule,
     DescribeACLResponse: DescribeACLResponse,
     DynamicDiskConfig: DynamicDiskConfig,
@@ -7793,7 +7986,7 @@ module.exports = {
     DynamicRetentionTime: DynamicRetentionTime,
     DescribeTopicSubscribeGroupRequest: DescribeTopicSubscribeGroupRequest,
     InstanceDetailResponse: InstanceDetailResponse,
-    DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
+    FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
     TopicInSyncReplicaInfo: TopicInSyncReplicaInfo,
     DescribeRegionRequest: DescribeRegionRequest,
     InstanceConfigDO: InstanceConfigDO,
@@ -7834,6 +8027,7 @@ module.exports = {
     Filter: Filter,
     GroupOffsetResponse: GroupOffsetResponse,
     BatchCreateAclResponse: BatchCreateAclResponse,
+    ModifyInstancePreResponse: ModifyInstancePreResponse,
     CreateUserRequest: CreateUserRequest,
     DeleteRouteRequest: DeleteRouteRequest,
     DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,

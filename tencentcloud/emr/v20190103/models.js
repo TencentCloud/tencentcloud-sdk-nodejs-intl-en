@@ -62,6 +62,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * AddUsersForUserManager request structure.
+ * @class
+ */
+class AddUsersForUserManagerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User information list
+         * @type {Array.<UserInfoForUserManager> || null}
+         */
+        this.UserManagerUserList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.UserManagerUserList) {
+            this.UserManagerUserList = new Array();
+            for (let z in params.UserManagerUserList) {
+                let obj = new UserInfoForUserManager();
+                obj.deserialize(params.UserManagerUserList[z]);
+                this.UserManagerUserList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyResourceScheduler request structure.
  * @class
  */
@@ -332,6 +368,56 @@ class LoginSettings extends  AbstractModel {
 }
 
 /**
+ * DescribeInstancesList response structure.
+ * @class
+ */
+class DescribeInstancesListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible instances.
+         * @type {number || null}
+         */
+        this.TotalCnt = null;
+
+        /**
+         * Cluster instance list.
+         * @type {Array.<EmrListInstance> || null}
+         */
+        this.InstancesList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
+
+        if (params.InstancesList) {
+            this.InstancesList = new Array();
+            for (let z in params.InstancesList) {
+                let obj = new EmrListInstance();
+                obj.deserialize(params.InstancesList[z]);
+                this.InstancesList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * TerminateTasks response structure.
  * @class
  */
@@ -383,12 +469,6 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
         this.TimeSpan = null;
 
         /**
-         * Node specification queried for price.
-         * @type {NewResourceSpec || null}
-         */
-        this.ResourceSpec = null;
-
-        /**
          * Currency.
          * @type {string || null}
          */
@@ -418,6 +498,12 @@ class InquiryPriceCreateInstanceRequest extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.Software = null;
+
+        /**
+         * Node specification queried for price.
+         * @type {NewResourceSpec || null}
+         */
+        this.ResourceSpec = null;
 
         /**
          * Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
@@ -478,6 +564,18 @@ Hadoop-Hbase
          */
         this.ExternalService = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.VersionID = null;
+
+        /**
+         * AZ specs
+         * @type {Array.<MultiZoneSetting> || null}
+         */
+        this.MultiZoneSettings = null;
+
     }
 
     /**
@@ -489,16 +587,16 @@ Hadoop-Hbase
         }
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.SupportHA = 'SupportHA' in params ? params.SupportHA : null;
+        this.Software = 'Software' in params ? params.Software : null;
 
         if (params.ResourceSpec) {
             let obj = new NewResourceSpec();
             obj.deserialize(params.ResourceSpec)
             this.ResourceSpec = obj;
         }
-        this.Currency = 'Currency' in params ? params.Currency : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.SupportHA = 'SupportHA' in params ? params.SupportHA : null;
-        this.Software = 'Software' in params ? params.Software : null;
 
         if (params.Placement) {
             let obj = new Placement();
@@ -528,6 +626,16 @@ Hadoop-Hbase
                 let obj = new ExternalService();
                 obj.deserialize(params.ExternalService[z]);
                 this.ExternalService.push(obj);
+            }
+        }
+        this.VersionID = 'VersionID' in params ? params.VersionID : null;
+
+        if (params.MultiZoneSettings) {
+            this.MultiZoneSettings = new Array();
+            for (let z in params.MultiZoneSettings) {
+                let obj = new MultiZoneSetting();
+                obj.deserialize(params.MultiZoneSettings[z]);
+                this.MultiZoneSettings.push(obj);
             }
         }
 
@@ -708,6 +816,108 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.LocalDiskNum = 'LocalDiskNum' in params ? params.LocalDiskNum : null;
         this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
+
+    }
+}
+
+/**
+ * Parameter information of each AZ
+ * @class
+ */
+class MultiZoneSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * "master", "standby", "third-party"
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ZoneTag = null;
+
+        /**
+         * None
+         * @type {VPCSettings || null}
+         */
+        this.VPCSettings = null;
+
+        /**
+         * None
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * None
+         * @type {NewResourceSpec || null}
+         */
+        this.ResourceSpec = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneTag = 'ZoneTag' in params ? params.ZoneTag : null;
+
+        if (params.VPCSettings) {
+            let obj = new VPCSettings();
+            obj.deserialize(params.VPCSettings)
+            this.VPCSettings = obj;
+        }
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+
+        if (params.ResourceSpec) {
+            let obj = new NewResourceSpec();
+            obj.deserialize(params.ResourceSpec)
+            this.ResourceSpec = obj;
+        }
+
+    }
+}
+
+/**
+ * Subnet information
+ * @class
+ */
+class SubnetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subnet information (name)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * Subnet information (ID)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -1222,23 +1432,11 @@ class CreateInstanceRequest extends  AbstractModel {
         this.ProductId = null;
 
         /**
-         * Configuration information of VPC. This parameter is used to specify the VPC ID, subnet ID, etc.
-         * @type {VPCSettings || null}
-         */
-        this.VPCSettings = null;
-
-        /**
          * List of deployed components. The list of component options varies by EMR product ID (i.e., `ProductId`; for specific meanings, please see the `ProductId` input parameter). For more information, please see [Component Version](https://intl.cloud.tencent.com/document/product/589/20279?from_cn_redirect=1).
 Enter an instance value: `hive` or `flink`.
          * @type {Array.<string> || null}
          */
         this.Software = null;
-
-        /**
-         * Node resource specification.
-         * @type {NewResourceSpec || null}
-         */
-        this.ResourceSpec = null;
 
         /**
          * Whether to enable high node availability. Valid values:
@@ -1262,12 +1460,6 @@ Enter an instance value: `hive` or `flink`.
          * @type {number || null}
          */
         this.PayMode = null;
-
-        /**
-         * Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
-         * @type {Placement || null}
-         */
-        this.Placement = null;
 
         /**
          * Purchase duration of instance, which needs to be used together with `TimeUnit`.
@@ -1294,10 +1486,28 @@ Enter an instance value: `hive` or `flink`.
         this.LoginSettings = null;
 
         /**
+         * Configuration information of VPC. This parameter is used to specify the VPC ID, subnet ID, etc.
+         * @type {VPCSettings || null}
+         */
+        this.VPCSettings = null;
+
+        /**
+         * Node resource specification.
+         * @type {NewResourceSpec || null}
+         */
+        this.ResourceSpec = null;
+
+        /**
          * Parameter required for enabling COS access.
          * @type {COSSettings || null}
          */
         this.COSSettings = null;
+
+        /**
+         * Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
+         * @type {Placement || null}
+         */
+        this.Placement = null;
 
         /**
          * Security group to which an instance belongs in the format of `sg-xxxxxxxx`. This parameter can be obtained from the `SecurityGroupId` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) API.
@@ -1413,6 +1623,24 @@ Hadoop-Hbase
          */
         this.ExternalService = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.VersionID = null;
+
+        /**
+         * `true` indicates that the multi-AZ deployment mode is enabled. This parameter is available only in cluster creation and cannot be changed after setting.
+         * @type {boolean || null}
+         */
+        this.MultiZone = null;
+
+        /**
+         * Node resource specs. The actual number of AZs is set, with the first AZ as the primary AZ, the second as the backup AZ, and the third as the arbitrator AZ. If the multi-AZ mode is not enabled, set the value to `1`.
+         * @type {Array.<MultiZoneSetting> || null}
+         */
+        this.MultiZoneSettings = null;
+
     }
 
     /**
@@ -1423,28 +1651,10 @@ Hadoop-Hbase
             return;
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
-
-        if (params.VPCSettings) {
-            let obj = new VPCSettings();
-            obj.deserialize(params.VPCSettings)
-            this.VPCSettings = obj;
-        }
         this.Software = 'Software' in params ? params.Software : null;
-
-        if (params.ResourceSpec) {
-            let obj = new NewResourceSpec();
-            obj.deserialize(params.ResourceSpec)
-            this.ResourceSpec = obj;
-        }
         this.SupportHA = 'SupportHA' in params ? params.SupportHA : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
 
@@ -1454,10 +1664,28 @@ Hadoop-Hbase
             this.LoginSettings = obj;
         }
 
+        if (params.VPCSettings) {
+            let obj = new VPCSettings();
+            obj.deserialize(params.VPCSettings)
+            this.VPCSettings = obj;
+        }
+
+        if (params.ResourceSpec) {
+            let obj = new NewResourceSpec();
+            obj.deserialize(params.ResourceSpec)
+            this.ResourceSpec = obj;
+        }
+
         if (params.COSSettings) {
             let obj = new COSSettings();
             obj.deserialize(params.COSSettings)
             this.COSSettings = obj;
+        }
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
         }
         this.SgId = 'SgId' in params ? params.SgId : null;
 
@@ -1503,6 +1731,17 @@ Hadoop-Hbase
                 let obj = new ExternalService();
                 obj.deserialize(params.ExternalService[z]);
                 this.ExternalService.push(obj);
+            }
+        }
+        this.VersionID = 'VersionID' in params ? params.VersionID : null;
+        this.MultiZone = 'MultiZone' in params ? params.MultiZone : null;
+
+        if (params.MultiZoneSettings) {
+            this.MultiZoneSettings = new Array();
+            for (let z in params.MultiZoneSettings) {
+                let obj = new MultiZoneSetting();
+                obj.deserialize(params.MultiZoneSettings[z]);
+                this.MultiZoneSettings.push(obj);
             }
         }
 
@@ -1982,6 +2221,34 @@ class CustomMetaInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeUsersForUserManager request structure.
+ * @class
+ */
+class DescribeUsersForUserManagerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the Keytab file information is required. This field is only valid for clusters with Kerberos enabled and defaults to `false`.
+         * @type {boolean || null}
+         */
+        this.NeedKeytabInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NeedKeytabInfo = 'NeedKeytabInfo' in params ? params.NeedKeytabInfo : null;
+
+    }
+}
+
+/**
  * InquiryPriceUpdateInstance request structure.
  * @class
  */
@@ -2053,6 +2320,55 @@ class InquiryPriceUpdateInstanceRequest extends  AbstractModel {
             this.Placement = obj;
         }
         this.Currency = 'Currency' in params ? params.Currency : null;
+
+    }
+}
+
+/**
+ * Added user information list
+ * @class
+ */
+class UserInfoForUserManager extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Username
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * The group to which the user belongs
+         * @type {string || null}
+         */
+        this.UserGroup = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PassWord = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ReMark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.UserGroup = 'UserGroup' in params ? params.UserGroup : null;
+        this.PassWord = 'PassWord' in params ? params.PassWord : null;
+        this.ReMark = 'ReMark' in params ? params.ReMark : null;
 
     }
 }
@@ -2393,6 +2709,34 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.ClusterExternalServiceInfo = null;
 
+        /**
+         * The VPC ID string type of the cluster
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * The subnet ID string type of the cluster
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Node information
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TopologyInfo> || null}
+         */
+        this.TopologyInfoList = null;
+
+        /**
+         * Multi-AZ cluster
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsMultiZoneCluster = null;
+
     }
 
     /**
@@ -2460,6 +2804,89 @@ Note: This field may return `null`, indicating that no valid value was found.
                 this.ClusterExternalServiceInfo.push(obj);
             }
         }
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+
+        if (params.TopologyInfoList) {
+            this.TopologyInfoList = new Array();
+            for (let z in params.TopologyInfoList) {
+                let obj = new TopologyInfo();
+                obj.deserialize(params.TopologyInfoList[z]);
+                this.TopologyInfoList.push(obj);
+            }
+        }
+        this.IsMultiZoneCluster = 'IsMultiZoneCluster' in params ? params.IsMultiZoneCluster : null;
+
+    }
+}
+
+/**
+ * DescribeInstancesList request structure.
+ * @class
+ */
+class DescribeInstancesListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster filtering policy. Valid values: <li>clusterList: Queries the list of clusters excluding terminated ones.</li><li>monitorManage: Queries the list of clusters excluding those terminated, under creation and not successfully created.</li><li>cloudHardwareManage/componentManage: Two reserved values, which have the same implications as those of `monitorManage`.</li>
+         * @type {string || null}
+         */
+        this.DisplayStrategy = null;
+
+        /**
+         * Page number. Default value: `0`, indicating the first page.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results per page. Default value: `10`; maximum value: `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sorting field. Valid values: <li>clusterId: Sorting by instance ID. </li><li>addTime: Sorting by instance creation time.</li><li>status: Sorting by instance status code.</li>
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * Sort ascending or descending based on `OrderField`. Valid values:<li>0: Descending.</li><li>1: Ascending.</li>Default value: `0`.
+         * @type {number || null}
+         */
+        this.Asc = null;
+
+        /**
+         * Custom query
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DisplayStrategy = 'DisplayStrategy' in params ? params.DisplayStrategy : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Asc = 'Asc' in params ? params.Asc : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -2505,6 +2932,34 @@ class MultiDisk extends  AbstractModel {
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.Volume = 'Volume' in params ? params.Volume : null;
         this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * AddUsersForUserManager response structure.
+ * @class
+ */
+class AddUsersForUserManagerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2573,6 +3028,43 @@ class ModifyResourceSchedulerResponse extends  AbstractModel {
 }
 
 /**
+ * Node information
+ * @class
+ */
+class ShortNodeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node type: Master/Core/Task/Router/Common
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Number of nodes
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.NodeSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.NodeSize = 'NodeSize' in params ? params.NodeSize : null;
+
+    }
+}
+
+/**
  * ModifyResourceScheduleConfig response structure.
  * @class
  */
@@ -2611,6 +3103,75 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.IsDraft = 'IsDraft' in params ? params.IsDraft : null;
         this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Cluster node topology information
+ * @class
+ */
+class TopologyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * AZ information
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Subnet information
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<SubnetInfo> || null}
+         */
+        this.SubnetInfoList = null;
+
+        /**
+         * Node information
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<ShortNodeInfo> || null}
+         */
+        this.NodeInfoList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.SubnetInfoList) {
+            this.SubnetInfoList = new Array();
+            for (let z in params.SubnetInfoList) {
+                let obj = new SubnetInfo();
+                obj.deserialize(params.SubnetInfoList[z]);
+                this.SubnetInfoList.push(obj);
+            }
+        }
+
+        if (params.NodeInfoList) {
+            this.NodeInfoList = new Array();
+            for (let z in params.NodeInfoList) {
+                let obj = new ShortNodeInfo();
+                obj.deserialize(params.NodeInfoList[z]);
+                this.NodeInfoList.push(obj);
+            }
+        }
 
     }
 }
@@ -3005,6 +3566,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.SupportModifyPayMode = null;
 
+        /**
+         * System disk type
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RootStorageType = null;
+
+        /**
+         * AZ information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Subnet
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {SubnetInfo || null}
+         */
+        this.SubnetInfo = null;
+
+        /**
+         * Client
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Clients = null;
+
     }
 
     /**
@@ -3075,6 +3664,43 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.IsDynamicSpec = 'IsDynamicSpec' in params ? params.IsDynamicSpec : null;
         this.DynamicPodSpec = 'DynamicPodSpec' in params ? params.DynamicPodSpec : null;
         this.SupportModifyPayMode = 'SupportModifyPayMode' in params ? params.SupportModifyPayMode : null;
+        this.RootStorageType = 'RootStorageType' in params ? params.RootStorageType : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.SubnetInfo) {
+            let obj = new SubnetInfo();
+            obj.deserialize(params.SubnetInfo)
+            this.SubnetInfo = obj;
+        }
+        this.Clients = 'Clients' in params ? params.Clients : null;
+
+    }
+}
+
+/**
+ * DescribeUsersForUserManager response structure.
+ * @class
+ */
+class DescribeUsersForUserManagerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3233,6 +3859,276 @@ class NewResourceSpec extends  AbstractModel {
             this.CommonResourceSpec = obj;
         }
         this.CommonCount = 'CommonCount' in params ? params.CommonCount : null;
+
+    }
+}
+
+/**
+ * Custom query filter of the EMR cluster instance list
+ * @class
+ */
+class Filters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Field name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Filters by the field value
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * Returned cluster list sample
+ * @class
+ */
+class EmrListInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Status description
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Cluster region
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * User APPID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * Running time
+         * @type {string || null}
+         */
+        this.RunTime = null;
+
+        /**
+         * Cluster IP
+         * @type {string || null}
+         */
+        this.MasterIp = null;
+
+        /**
+         * Cluster version
+         * @type {string || null}
+         */
+        this.EmrVersion = null;
+
+        /**
+         * Cluster billing mode
+         * @type {number || null}
+         */
+        this.ChargeType = null;
+
+        /**
+         * EMR ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Product ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * Project ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Region
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Subnet ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * VPC ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Region
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Status code
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance tag
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Alarm information
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.AlarmInfo = null;
+
+        /**
+         * Whether it is a Woodpecker cluster
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.IsWoodpeckerCluster = null;
+
+        /**
+         * VPC name
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * Subnet name
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * VPC ID string
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Subnet ID string
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Cluster type
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterClass = null;
+
+        /**
+         * Whether it is a multi-AZ cluster
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsMultiZoneCluster = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.RunTime = 'RunTime' in params ? params.RunTime : null;
+        this.MasterIp = 'MasterIp' in params ? params.MasterIp : null;
+        this.EmrVersion = 'EmrVersion' in params ? params.EmrVersion : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.AlarmInfo = 'AlarmInfo' in params ? params.AlarmInfo : null;
+        this.IsWoodpeckerCluster = 'IsWoodpeckerCluster' in params ? params.IsWoodpeckerCluster : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.ClusterClass = 'ClusterClass' in params ? params.ClusterClass : null;
+        this.IsMultiZoneCluster = 'IsMultiZoneCluster' in params ? params.IsMultiZoneCluster : null;
 
     }
 }
@@ -3511,13 +4407,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
 module.exports = {
     MultiDiskMC: MultiDiskMC,
+    AddUsersForUserManagerRequest: AddUsersForUserManagerRequest,
     ModifyResourceSchedulerRequest: ModifyResourceSchedulerRequest,
     EmrProductConfigOutter: EmrProductConfigOutter,
     LoginSettings: LoginSettings,
+    DescribeInstancesListResponse: DescribeInstancesListResponse,
     TerminateTasksResponse: TerminateTasksResponse,
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     CustomServiceDefine: CustomServiceDefine,
     Resource: Resource,
+    MultiZoneSetting: MultiZoneSetting,
+    SubnetInfo: SubnetInfo,
     ModifyResourceScheduleConfigRequest: ModifyResourceScheduleConfigRequest,
     CreateInstanceResponse: CreateInstanceResponse,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
@@ -3536,18 +4436,27 @@ module.exports = {
     Placement: Placement,
     DescribeInstancesRequest: DescribeInstancesRequest,
     CustomMetaInfo: CustomMetaInfo,
+    DescribeUsersForUserManagerRequest: DescribeUsersForUserManagerRequest,
     InquiryPriceUpdateInstanceRequest: InquiryPriceUpdateInstanceRequest,
+    UserInfoForUserManager: UserInfoForUserManager,
     COSSettings: COSSettings,
     ClusterInstancesInfo: ClusterInstancesInfo,
+    DescribeInstancesListRequest: DescribeInstancesListRequest,
     MultiDisk: MultiDisk,
+    AddUsersForUserManagerResponse: AddUsersForUserManagerResponse,
     SearchItem: SearchItem,
     ModifyResourceSchedulerResponse: ModifyResourceSchedulerResponse,
+    ShortNodeInfo: ShortNodeInfo,
     ModifyResourceScheduleConfigResponse: ModifyResourceScheduleConfigResponse,
+    TopologyInfo: TopologyInfo,
     VPCSettings: VPCSettings,
     DescribeClusterNodesResponse: DescribeClusterNodesResponse,
     NodeHardwareInfo: NodeHardwareInfo,
+    DescribeUsersForUserManagerResponse: DescribeUsersForUserManagerResponse,
     InquiryPriceUpdateInstanceResponse: InquiryPriceUpdateInstanceResponse,
     NewResourceSpec: NewResourceSpec,
+    Filters: Filters,
+    EmrListInstance: EmrListInstance,
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
     DescribeResourceScheduleResponse: DescribeResourceScheduleResponse,
     CdbInfo: CdbInfo,

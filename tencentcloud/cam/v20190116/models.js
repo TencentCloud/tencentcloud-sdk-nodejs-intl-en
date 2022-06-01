@@ -501,6 +501,12 @@ class CreateServiceLinkedRoleRequest extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * Tags bound to the role.
+         * @type {Array.<RoleTags> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -513,6 +519,15 @@ class CreateServiceLinkedRoleRequest extends  AbstractModel {
         this.QCSServiceName = 'QCSServiceName' in params ? params.QCSServiceName : null;
         this.CustomSuffix = 'CustomSuffix' in params ? params.CustomSuffix : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new RoleTags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1206,6 +1221,12 @@ class DescribeRoleListRequest extends  AbstractModel {
          */
         this.Rp = null;
 
+        /**
+         * A parameter used to filter the list of roles under a tag.
+         * @type {Array.<RoleTags> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1217,6 +1238,15 @@ class DescribeRoleListRequest extends  AbstractModel {
         }
         this.Page = 'Page' in params ? params.Page : null;
         this.Rp = 'Rp' in params ? params.Rp : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new RoleTags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1308,6 +1338,141 @@ class GetGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * Policy information
+ * @class
+ */
+class StrategyInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Policy name
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * Time policy created
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * Policy type. 1: Custom policy; 2: Preset policy
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Policy description
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * How the policy was created: 1: Via console; 2: Via syntax
+         * @type {number || null}
+         */
+        this.CreateMode = null;
+
+        /**
+         * Number of associated users
+         * @type {number || null}
+         */
+        this.Attachments = null;
+
+        /**
+         * Product associated with the policy
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * This value should not be null when querying whether a marked entity has been associated with a policy. 0 indicates that no policy has been associated, while 1 indicates that a policy has been associated
+         * @type {number || null}
+         */
+        this.IsAttached = null;
+
+        /**
+         * Queries if the policy has been deactivated
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Deactived = null;
+
+        /**
+         * List of deprecated products
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
+
+        /**
+         * The deletion task identifier used to check the deletion status of the service-linked role
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsServiceLinkedPolicy = null;
+
+        /**
+         * The number of entities associated with the policy.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AttachEntityCount = null;
+
+        /**
+         * The number of entities associated with the permission boundary.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AttachEntityBoundaryCount = null;
+
+        /**
+         * The last edited time.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
+        this.Attachments = 'Attachments' in params ? params.Attachments : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.IsAttached = 'IsAttached' in params ? params.IsAttached : null;
+        this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
+        this.IsServiceLinkedPolicy = 'IsServiceLinkedPolicy' in params ? params.IsServiceLinkedPolicy : null;
+        this.AttachEntityCount = 'AttachEntityCount' in params ? params.AttachEntityCount : null;
+        this.AttachEntityBoundaryCount = 'AttachEntityBoundaryCount' in params ? params.AttachEntityBoundaryCount : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -2156,6 +2321,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.DeletionTaskId = null;
 
+        /**
+         * Tags.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<RoleTags> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2175,6 +2347,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.RoleType = 'RoleType' in params ? params.RoleType : null;
         this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
         this.DeletionTaskId = 'DeletionTaskId' in params ? params.DeletionTaskId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new RoleTags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2568,111 +2749,24 @@ class DeleteRolePermissionsBoundaryRequest extends  AbstractModel {
 }
 
 /**
- * Policy information
+ * Role tag type
  * @class
  */
-class StrategyInfo extends  AbstractModel {
+class RoleTags extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy ID
-         * @type {number || null}
-         */
-        this.PolicyId = null;
-
-        /**
-         * Policy name
+         * Tag key.
          * @type {string || null}
          */
-        this.PolicyName = null;
+        this.Key = null;
 
         /**
-         * Time policy created
-Note: This field may return null, indicating that no valid value was found.
+         * Tag value.
          * @type {string || null}
          */
-        this.AddTime = null;
-
-        /**
-         * Policy type. 1: Custom policy; 2: Preset policy
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Policy description
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * How the policy was created: 1: Via console; 2: Via syntax
-         * @type {number || null}
-         */
-        this.CreateMode = null;
-
-        /**
-         * Number of associated users
-         * @type {number || null}
-         */
-        this.Attachments = null;
-
-        /**
-         * Product associated with the policy
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.ServiceType = null;
-
-        /**
-         * This value should not be null when querying whether a marked entity has been associated with a policy. 0 indicates that no policy has been associated, while 1 indicates that a policy has been associated
-         * @type {number || null}
-         */
-        this.IsAttached = null;
-
-        /**
-         * Queries if the policy has been deactivated
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Deactived = null;
-
-        /**
-         * List of deprecated products
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.DeactivedDetail = null;
-
-        /**
-         * The deletion task identifier used to check the deletion status of the service-linked role
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsServiceLinkedPolicy = null;
-
-        /**
-         * The number of entities associated with the policy.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AttachEntityCount = null;
-
-        /**
-         * The number of entities associated with the permission boundary.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AttachEntityBoundaryCount = null;
-
-        /**
-         * The last edited time.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.Value = null;
 
     }
 
@@ -2683,21 +2777,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
-        this.AddTime = 'AddTime' in params ? params.AddTime : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
-        this.Attachments = 'Attachments' in params ? params.Attachments : null;
-        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
-        this.IsAttached = 'IsAttached' in params ? params.IsAttached : null;
-        this.Deactived = 'Deactived' in params ? params.Deactived : null;
-        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
-        this.IsServiceLinkedPolicy = 'IsServiceLinkedPolicy' in params ? params.IsServiceLinkedPolicy : null;
-        this.AttachEntityCount = 'AttachEntityCount' in params ? params.AttachEntityCount : null;
-        this.AttachEntityBoundaryCount = 'AttachEntityBoundaryCount' in params ? params.AttachEntityBoundaryCount : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -6255,6 +6336,12 @@ class CreateRoleRequest extends  AbstractModel {
          */
         this.SessionDuration = null;
 
+        /**
+         * Tags bound to the role.
+         * @type {Array.<RoleTags> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -6269,6 +6356,15 @@ class CreateRoleRequest extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
         this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new RoleTags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -7523,6 +7619,7 @@ module.exports = {
     DescribeUserSAMLConfigRequest: DescribeUserSAMLConfigRequest,
     PutRolePermissionsBoundaryRequest: PutRolePermissionsBoundaryRequest,
     GetGroupRequest: GetGroupRequest,
+    StrategyInfo: StrategyInfo,
     DeleteRoleResponse: DeleteRoleResponse,
     PolicyVersionItem: PolicyVersionItem,
     DetachUserPolicyRequest: DetachUserPolicyRequest,
@@ -7553,7 +7650,7 @@ module.exports = {
     CreatePolicyResponse: CreatePolicyResponse,
     DetachRolePolicyRequest: DetachRolePolicyRequest,
     DeleteRolePermissionsBoundaryRequest: DeleteRolePermissionsBoundaryRequest,
-    StrategyInfo: StrategyInfo,
+    RoleTags: RoleTags,
     DescribeUserOIDCConfigResponse: DescribeUserOIDCConfigResponse,
     DeletePolicyRequest: DeletePolicyRequest,
     GroupInfo: GroupInfo,

@@ -17,13 +17,17 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const MultiDiskMC = models.MultiDiskMC;
+const AddUsersForUserManagerRequest = models.AddUsersForUserManagerRequest;
 const ModifyResourceSchedulerRequest = models.ModifyResourceSchedulerRequest;
 const EmrProductConfigOutter = models.EmrProductConfigOutter;
 const LoginSettings = models.LoginSettings;
+const DescribeInstancesListResponse = models.DescribeInstancesListResponse;
 const TerminateTasksResponse = models.TerminateTasksResponse;
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const CustomServiceDefine = models.CustomServiceDefine;
 const Resource = models.Resource;
+const MultiZoneSetting = models.MultiZoneSetting;
+const SubnetInfo = models.SubnetInfo;
 const ModifyResourceScheduleConfigRequest = models.ModifyResourceScheduleConfigRequest;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceResponse;
@@ -42,18 +46,27 @@ const Tag = models.Tag;
 const Placement = models.Placement;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const CustomMetaInfo = models.CustomMetaInfo;
+const DescribeUsersForUserManagerRequest = models.DescribeUsersForUserManagerRequest;
 const InquiryPriceUpdateInstanceRequest = models.InquiryPriceUpdateInstanceRequest;
+const UserInfoForUserManager = models.UserInfoForUserManager;
 const COSSettings = models.COSSettings;
 const ClusterInstancesInfo = models.ClusterInstancesInfo;
+const DescribeInstancesListRequest = models.DescribeInstancesListRequest;
 const MultiDisk = models.MultiDisk;
+const AddUsersForUserManagerResponse = models.AddUsersForUserManagerResponse;
 const SearchItem = models.SearchItem;
 const ModifyResourceSchedulerResponse = models.ModifyResourceSchedulerResponse;
+const ShortNodeInfo = models.ShortNodeInfo;
 const ModifyResourceScheduleConfigResponse = models.ModifyResourceScheduleConfigResponse;
+const TopologyInfo = models.TopologyInfo;
 const VPCSettings = models.VPCSettings;
 const DescribeClusterNodesResponse = models.DescribeClusterNodesResponse;
 const NodeHardwareInfo = models.NodeHardwareInfo;
+const DescribeUsersForUserManagerResponse = models.DescribeUsersForUserManagerResponse;
 const InquiryPriceUpdateInstanceResponse = models.InquiryPriceUpdateInstanceResponse;
 const NewResourceSpec = models.NewResourceSpec;
+const Filters = models.Filters;
+const EmrListInstance = models.EmrListInstance;
 const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
 const DescribeResourceScheduleResponse = models.DescribeResourceScheduleResponse;
 const CdbInfo = models.CdbInfo;
@@ -103,14 +116,25 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the YARN resource scheduler (the change will take effect after you click Apply).
-     * @param {ModifyResourceSchedulerRequest} req
-     * @param {function(string, ModifyResourceSchedulerResponse):void} cb
+     * This API is used to export users in batches.
+     * @param {DescribeUsersForUserManagerRequest} req
+     * @param {function(string, DescribeUsersForUserManagerResponse):void} cb
      * @public
      */
-    ModifyResourceScheduler(req, cb) {
-        let resp = new ModifyResourceSchedulerResponse();
-        this.request("ModifyResourceScheduler", req, resp, cb);
+    DescribeUsersForUserManager(req, cb) {
+        let resp = new DescribeUsersForUserManagerResponse();
+        this.request("DescribeUsersForUserManager", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query EMR cluster instances.
+     * @param {DescribeInstancesListRequest} req
+     * @param {function(string, DescribeInstancesListResponse):void} cb
+     * @public
+     */
+    DescribeInstancesList(req, cb) {
+        let resp = new DescribeInstancesListResponse();
+        this.request("DescribeInstancesList", req, resp, cb);
     }
 
     /**
@@ -158,6 +182,17 @@ class EmrClient extends AbstractClient {
     }
 
     /**
+     * This API is used to add user lists (user management).
+     * @param {AddUsersForUserManagerRequest} req
+     * @param {function(string, AddUsersForUserManagerResponse):void} cb
+     * @public
+     */
+    AddUsersForUserManager(req, cb) {
+        let resp = new AddUsersForUserManagerResponse();
+        this.request("AddUsersForUserManager", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the resource configuration of YARN Resource Scheduling.
      * @param {ModifyResourceScheduleConfigRequest} req
      * @param {function(string, ModifyResourceScheduleConfigResponse):void} cb
@@ -166,6 +201,17 @@ class EmrClient extends AbstractClient {
     ModifyResourceScheduleConfig(req, cb) {
         let resp = new ModifyResourceScheduleConfigResponse();
         this.request("ModifyResourceScheduleConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the YARN resource scheduler (the change will take effect after you click Apply).
+     * @param {ModifyResourceSchedulerRequest} req
+     * @param {function(string, ModifyResourceSchedulerResponse):void} cb
+     * @public
+     */
+    ModifyResourceScheduler(req, cb) {
+        let resp = new ModifyResourceSchedulerResponse();
+        this.request("ModifyResourceScheduler", req, resp, cb);
     }
 
     /**

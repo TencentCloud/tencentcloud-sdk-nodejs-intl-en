@@ -25,7 +25,7 @@ const PartitionOffset = models.PartitionOffset;
 const DescribeACLRequest = models.DescribeACLRequest;
 const BatchModifyTopicResultDTO = models.BatchModifyTopicResultDTO;
 const DescribeTopicAttributesRequest = models.DescribeTopicAttributesRequest;
-const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
+const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesRequest;
 const ConsumerGroup = models.ConsumerGroup;
 const Assignment = models.Assignment;
 const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
@@ -33,10 +33,13 @@ const DeleteTopicRequest = models.DeleteTopicRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const FetchMessageByOffsetResponse = models.FetchMessageByOffsetResponse;
 const BatchModifyTopicAttributesResponse = models.BatchModifyTopicAttributesResponse;
+const CreateInstancePreResp = models.CreateInstancePreResp;
 const GroupInfoTopics = models.GroupInfoTopics;
 const TopicResult = models.TopicResult;
 const Region = models.Region;
+const ModifyInstancePreRequest = models.ModifyInstancePreRequest;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
+const CreateInstancePreData = models.CreateInstancePreData;
 const AclRule = models.AclRule;
 const DescribeACLResponse = models.DescribeACLResponse;
 const DynamicDiskConfig = models.DynamicDiskConfig;
@@ -77,7 +80,7 @@ const DeleteAclResponse = models.DeleteAclResponse;
 const DynamicRetentionTime = models.DynamicRetentionTime;
 const DescribeTopicSubscribeGroupRequest = models.DescribeTopicSubscribeGroupRequest;
 const InstanceDetailResponse = models.InstanceDetailResponse;
-const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesRequest;
+const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
 const TopicInSyncReplicaInfo = models.TopicInSyncReplicaInfo;
 const DescribeRegionRequest = models.DescribeRegionRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
@@ -118,6 +121,7 @@ const DescribeGroupRequest = models.DescribeGroupRequest;
 const Filter = models.Filter;
 const GroupOffsetResponse = models.GroupOffsetResponse;
 const BatchCreateAclResponse = models.BatchCreateAclResponse;
+const ModifyInstancePreResponse = models.ModifyInstancePreResponse;
 const CreateUserRequest = models.CreateUserRequest;
 const DeleteRouteRequest = models.DeleteRouteRequest;
 const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
@@ -222,6 +226,17 @@ class CkafkaClient extends AbstractClient {
     DescribeTopicSubscribeGroup(req, cb) {
         let resp = new DescribeTopicSubscribeGroupResponse();
         this.request("DescribeTopicSubscribeGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the configurations of a prepaid instance, such as disk capacity and bandwidth.
+     * @param {ModifyInstancePreRequest} req
+     * @param {function(string, ModifyInstancePreResponse):void} cb
+     * @public
+     */
+    ModifyInstancePre(req, cb) {
+        let resp = new ModifyInstancePreResponse();
+        this.request("ModifyInstancePre", req, resp, cb);
     }
 
     /**

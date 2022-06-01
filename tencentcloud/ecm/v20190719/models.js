@@ -3431,6 +3431,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.EcmRegion = null;
 
+        /**
+         * Type of the resource bound with an ENI. Valid values: `cvm` and `eks`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Business = null;
+
     }
 
     /**
@@ -3486,6 +3493,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.EniType = 'EniType' in params ? params.EniType : null;
         this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
+        this.Business = 'Business' in params ? params.Business : null;
 
     }
 }

@@ -298,7 +298,7 @@ class ModifyBackupStrategyRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Backup mode, which supports daily backup only. Valid value: daily.
+         * Backup type. Valid values: `weekly` (when length(BackupDay) <=7 && length(BackupDay) >=2), `daily` (when length(BackupDay)=1). Default value: `daily`.
          * @type {string || null}
          */
         this.BackupType = null;
@@ -321,6 +321,18 @@ class ModifyBackupStrategyRequest extends  AbstractModel {
          */
         this.BackupModel = null;
 
+        /**
+         * The days of the week on which backup will be performed when “BackupType” is `weekly`. If data backup retention period is less than 7 days, the values will be 1-7, indicating that backup will be performed everyday by default; if data backup retention period is greater than or equal to 7 days, the values will be at least any two days, indicating that backup will be performed at least twice in a week by default.
+         * @type {Array.<number> || null}
+         */
+        this.BackupCycle = null;
+
+        /**
+         * Data (log) backup retention period. Value range: 3-1830 days, default value: 7 days.
+         * @type {number || null}
+         */
+        this.BackupSaveDays = null;
+
     }
 
     /**
@@ -335,6 +347,8 @@ class ModifyBackupStrategyRequest extends  AbstractModel {
         this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
         this.BackupDay = 'BackupDay' in params ? params.BackupDay : null;
         this.BackupModel = 'BackupModel' in params ? params.BackupModel : null;
+        this.BackupCycle = 'BackupCycle' in params ? params.BackupCycle : null;
+        this.BackupSaveDays = 'BackupSaveDays' in params ? params.BackupSaveDays : null;
 
     }
 }
@@ -1277,6 +1291,18 @@ class DescribeBackupsRequest extends  AbstractModel {
          */
         this.Group = null;
 
+        /**
+         * Backup type. Valid values: `1` (data backup), `2` (log backup). Default value: `1`.
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Filter by backup file format. Valid values: `pkg` (archive file), `single` (Unarchived files).
+         * @type {string || null}
+         */
+        this.BackupFormat = null;
+
     }
 
     /**
@@ -1297,6 +1323,8 @@ class DescribeBackupsRequest extends  AbstractModel {
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
         this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
         this.Group = 'Group' in params ? params.Group : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.BackupFormat = 'BackupFormat' in params ? params.BackupFormat : null;
 
     }
 }
@@ -2901,6 +2929,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.UidSet = null;
 
+        /**
+         * Instance type. Valid values: `HA` (high-availability), `RO` (read-only), `SI` (basic edition), `BI` (business intelligence service).
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
     }
 
     /**
@@ -2925,6 +2959,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
         this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
         this.UidSet = 'UidSet' in params ? params.UidSet : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -4228,6 +4263,12 @@ class DescribeBackupFilesRequest extends  AbstractModel {
          */
         this.DatabaseName = null;
 
+        /**
+         * List items sorting by backup size. Valid values: `desc`(descending order), `asc` (ascending order). Default value: `desc`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
     }
 
     /**
@@ -4242,6 +4283,7 @@ class DescribeBackupFilesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
 
     }
 }
@@ -5012,6 +5054,18 @@ class AccountDetail extends  AbstractModel {
          */
         this.IsAdmin = null;
 
+        /**
+         * Valid values: `win-windows authentication`, `sql-sqlserver authentication`.
+         * @type {string || null}
+         */
+        this.Authentication = null;
+
+        /**
+         * The host required for `win-windows authentication` account
+         * @type {string || null}
+         */
+        this.Host = null;
+
     }
 
     /**
@@ -5038,6 +5092,8 @@ class AccountDetail extends  AbstractModel {
             }
         }
         this.IsAdmin = 'IsAdmin' in params ? params.IsAdmin : null;
+        this.Authentication = 'Authentication' in params ? params.Authentication : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -5354,6 +5410,37 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.BackupModel = null;
 
+        /**
+         * Instance backup info
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceNote = null;
+
+        /**
+         * Backup cycle
+         * @type {Array.<number> || null}
+         */
+        this.BackupCycle = null;
+
+        /**
+         * Backup cycle type. Valid values: `daily`, `weekly`, `monthly`.
+         * @type {string || null}
+         */
+        this.BackupCycleType = null;
+
+        /**
+         * Data (log) backup retention period
+         * @type {number || null}
+         */
+        this.BackupSaveDays = null;
+
+        /**
+         * Instance type. Valid values: `HA` (high-availability), `RO` (read-only), `SI` (basic edition), `BI` (business intelligence service).
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
     }
 
     /**
@@ -5409,6 +5496,11 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.BackupModel = 'BackupModel' in params ? params.BackupModel : null;
+        this.InstanceNote = 'InstanceNote' in params ? params.InstanceNote : null;
+        this.BackupCycle = 'BackupCycle' in params ? params.BackupCycle : null;
+        this.BackupCycleType = 'BackupCycleType' in params ? params.BackupCycleType : null;
+        this.BackupSaveDays = 'BackupSaveDays' in params ? params.BackupSaveDays : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -5904,6 +5996,12 @@ class Backup extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * Backup file format. Valid values:`pkg` (archive file), `single` (unarchived files).
+         * @type {string || null}
+         */
+        this.BackupFormat = null;
+
     }
 
     /**
@@ -5926,6 +6024,7 @@ class Backup extends  AbstractModel {
         this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
         this.BackupName = 'BackupName' in params ? params.BackupName : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.BackupFormat = 'BackupFormat' in params ? params.BackupFormat : null;
 
     }
 }
@@ -6132,6 +6231,12 @@ class AccountPrivilegeModifyInfo extends  AbstractModel {
          */
         this.DBPrivileges = null;
 
+        /**
+         * Whether it is an admin account
+         * @type {boolean || null}
+         */
+        this.IsAdmin = null;
+
     }
 
     /**
@@ -6151,6 +6256,7 @@ class AccountPrivilegeModifyInfo extends  AbstractModel {
                 this.DBPrivileges.push(obj);
             }
         }
+        this.IsAdmin = 'IsAdmin' in params ? params.IsAdmin : null;
 
     }
 }
@@ -6243,6 +6349,12 @@ class AccountCreateInfo extends  AbstractModel {
          */
         this.IsAdmin = null;
 
+        /**
+         * Valid values: `win-windows authentication`, `sql-sqlserver authentication`. Default value: `sql-sqlserver authentication`.
+         * @type {string || null}
+         */
+        this.Authentication = null;
+
     }
 
     /**
@@ -6265,6 +6377,7 @@ class AccountCreateInfo extends  AbstractModel {
         }
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.IsAdmin = 'IsAdmin' in params ? params.IsAdmin : null;
+        this.Authentication = 'Authentication' in params ? params.Authentication : null;
 
     }
 }
@@ -6331,6 +6444,12 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
          */
         this.MultiZones = null;
 
+        /**
+         * The time when configuration adjustment task is performed. Valid values: `0` (execute immediately), `1` (execute during maintenance time). Default value: `1`.
+         * @type {number || null}
+         */
+        this.WaitSwitch = null;
+
     }
 
     /**
@@ -6349,6 +6468,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.HAType = 'HAType' in params ? params.HAType : null;
         this.MultiZones = 'MultiZones' in params ? params.MultiZones : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
 
     }
 }

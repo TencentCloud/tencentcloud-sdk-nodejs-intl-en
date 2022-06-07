@@ -5502,11 +5502,18 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.TotalConcurrencyMem = null;
 
         /**
-         * Memory usage of the namespace
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Concurrency usage of the namespace
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.TotalAllocatedConcurrencyMem = null;
+
+        /**
+         * Provisioned concurrency usage of the namespace
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.TotalAllocatedProvisionedMem = null;
 
     }
 
@@ -5522,6 +5529,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.FunctionsCount = 'FunctionsCount' in params ? params.FunctionsCount : null;
         this.TotalConcurrencyMem = 'TotalConcurrencyMem' in params ? params.TotalConcurrencyMem : null;
         this.TotalAllocatedConcurrencyMem = 'TotalAllocatedConcurrencyMem' in params ? params.TotalAllocatedConcurrencyMem : null;
+        this.TotalAllocatedProvisionedMem = 'TotalAllocatedProvisionedMem' in params ? params.TotalAllocatedProvisionedMem : null;
 
     }
 }

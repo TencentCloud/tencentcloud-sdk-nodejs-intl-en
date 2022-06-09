@@ -48,6 +48,7 @@ const ListPolicyVersionsRequest = models.ListPolicyVersionsRequest;
 const GetCustomMFATokenInfoRequest = models.GetCustomMFATokenInfoRequest;
 const DescribeRoleListRequest = models.DescribeRoleListRequest;
 const DescribeUserSAMLConfigRequest = models.DescribeUserSAMLConfigRequest;
+const TagRoleResponse = models.TagRoleResponse;
 const PutRolePermissionsBoundaryRequest = models.PutRolePermissionsBoundaryRequest;
 const GetGroupRequest = models.GetGroupRequest;
 const StrategyInfo = models.StrategyInfo;
@@ -80,6 +81,7 @@ const DeleteGroupRequest = models.DeleteGroupRequest;
 const GetUserResponse = models.GetUserResponse;
 const CreatePolicyResponse = models.CreatePolicyResponse;
 const DetachRolePolicyRequest = models.DetachRolePolicyRequest;
+const UntagRoleResponse = models.UntagRoleResponse;
 const DeleteRolePermissionsBoundaryRequest = models.DeleteRolePermissionsBoundaryRequest;
 const RoleTags = models.RoleTags;
 const DescribeUserOIDCConfigResponse = models.DescribeUserOIDCConfigResponse;
@@ -131,6 +133,7 @@ const CreateUserOIDCConfigRequest = models.CreateUserOIDCConfigRequest;
 const AttachGroupPolicyResponse = models.AttachGroupPolicyResponse;
 const UpdateGroupResponse = models.UpdateGroupResponse;
 const ListEntitiesForPolicyRequest = models.ListEntitiesForPolicyRequest;
+const TagRoleRequest = models.TagRoleRequest;
 const ListPoliciesRequest = models.ListPoliciesRequest;
 const GetServiceLinkedRoleDeletionStatusRequest = models.GetServiceLinkedRoleDeletionStatusRequest;
 const DetachGroupPolicyResponse = models.DetachGroupPolicyResponse;
@@ -189,6 +192,7 @@ const GetSecurityLastUsedResponse = models.GetSecurityLastUsedResponse;
 const ListAttachedUserPoliciesRequest = models.ListAttachedUserPoliciesRequest;
 const UpdatePolicyRequest = models.UpdatePolicyRequest;
 const DeleteOIDCConfigRequest = models.DeleteOIDCConfigRequest;
+const UntagRoleRequest = models.UntagRoleRequest;
 const CreateGroupResponse = models.CreateGroupResponse;
 
 
@@ -742,6 +746,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API is used to unbind tags from a role.
+     * @param {UntagRoleRequest} req
+     * @param {function(string, UntagRoleResponse):void} cb
+     * @public
+     */
+    UntagRole(req, cb) {
+        let resp = new UntagRoleResponse();
+        this.request("UntagRole", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of policy versions.
      * @param {ListPolicyVersionsRequest} req
      * @param {function(string, ListPolicyVersionsResponse):void} cb
@@ -827,6 +842,17 @@ class CamClient extends AbstractClient {
     DeleteUser(req, cb) {
         let resp = new DeleteUserResponse();
         this.request("DeleteUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify user SAML configurations.
+     * @param {UpdateUserSAMLConfigRequest} req
+     * @param {function(string, UpdateUserSAMLConfigResponse):void} cb
+     * @public
+     */
+    UpdateUserSAMLConfig(req, cb) {
+        let resp = new UpdateUserSAMLConfigResponse();
+        this.request("UpdateUserSAMLConfig", req, resp, cb);
     }
 
     /**
@@ -940,14 +966,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify user SAML configurations.
-     * @param {UpdateUserSAMLConfigRequest} req
-     * @param {function(string, UpdateUserSAMLConfigResponse):void} cb
+     * This API is used to bind tags to a role.
+     * @param {TagRoleRequest} req
+     * @param {function(string, TagRoleResponse):void} cb
      * @public
      */
-    UpdateUserSAMLConfig(req, cb) {
-        let resp = new UpdateUserSAMLConfigResponse();
-        this.request("UpdateUserSAMLConfig", req, resp, cb);
+    TagRole(req, cb) {
+        let resp = new TagRoleResponse();
+        this.request("TagRole", req, resp, cb);
     }
 
     /**

@@ -2958,6 +2958,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.OneClickStatus = null;
 
+        /**
+         * The number of advanced metrics.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AdvancedMetricNumber = null;
+
     }
 
     /**
@@ -3038,6 +3045,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.FilterDimensionsParam = 'FilterDimensionsParam' in params ? params.FilterDimensionsParam : null;
         this.IsOneClick = 'IsOneClick' in params ? params.IsOneClick : null;
         this.OneClickStatus = 'OneClickStatus' in params ? params.OneClickStatus : null;
+        this.AdvancedMetricNumber = 'AdvancedMetricNumber' in params ? params.AdvancedMetricNumber : null;
 
     }
 }
@@ -3470,6 +3478,27 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.RuleType = null;
 
+        /**
+         * Whether it is an advanced metric. 0: No; 1: Yes.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsAdvanced = null;
+
+        /**
+         * Whether the advanced metric feature is enabled. 0: No; 1: Yes.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsOpen = null;
+
+        /**
+         * Integration center product ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
     }
 
     /**
@@ -3495,6 +3524,9 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.Description = 'Description' in params ? params.Description : null;
         this.Unit = 'Unit' in params ? params.Unit : null;
         this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.IsAdvanced = 'IsAdvanced' in params ? params.IsAdvanced : null;
+        this.IsOpen = 'IsOpen' in params ? params.IsOpen : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
 
     }
 }
@@ -3923,6 +3955,27 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.MetricConfig = null;
 
+        /**
+         * Whether it is an advanced metric. 1: Yes; 0: No.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsAdvanced = null;
+
+        /**
+         * Whether the advanced metric feature is enabled. 1: Yes; 0: No.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsOpen = null;
+
+        /**
+         * Integration center product ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProductId = null;
+
     }
 
     /**
@@ -3945,6 +3998,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.MetricConfig)
             this.MetricConfig = obj;
         }
+        this.IsAdvanced = 'IsAdvanced' in params ? params.IsAdvanced : null;
+        this.IsOpen = 'IsOpen' in params ? params.IsOpen : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
 
     }
 }

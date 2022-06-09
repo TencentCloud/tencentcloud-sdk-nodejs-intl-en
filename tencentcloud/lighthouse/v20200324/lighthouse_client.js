@@ -23,8 +23,7 @@ const DescribeInstancesTrafficPackagesResponse = models.DescribeInstancesTraffic
 const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
 const AttachCcnRequest = models.AttachCcnRequest;
-const CreateInstancesRequest = models.CreateInstancesRequest;
-const DescribeZonesRequest = models.DescribeZonesRequest;
+const DescribeSnapshotsDeniedActionsResponse = models.DescribeSnapshotsDeniedActionsResponse;
 const RegionInfo = models.RegionInfo;
 const DescribeBlueprintInstancesResponse = models.DescribeBlueprintInstancesResponse;
 const InstanceDeniedActions = models.InstanceDeniedActions;
@@ -32,15 +31,10 @@ const InquirePriceCreateDisksRequest = models.InquirePriceCreateDisksRequest;
 const ModifyBundle = models.ModifyBundle;
 const DetachCcnResponse = models.DetachCcnResponse;
 const CreateInstanceSnapshotResponse = models.CreateInstanceSnapshotResponse;
-const InquirePriceRenewInstancesResponse = models.InquirePriceRenewInstancesResponse;
 const DeleteFirewallRulesResponse = models.DeleteFirewallRulesResponse;
-const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
-const DescribeGeneralResourceQuotasRequest = models.DescribeGeneralResourceQuotasRequest;
 const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
-const SystemDisk = models.SystemDisk;
 const ResetInstanceBlueprint = models.ResetInstanceBlueprint;
 const DescribeBundlesResponse = models.DescribeBundlesResponse;
-const InquirePriceRenewInstancesRequest = models.InquirePriceRenewInstancesRequest;
 const DiscountDetail = models.DiscountDetail;
 const DescribeDiskConfigsRequest = models.DescribeDiskConfigsRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
@@ -76,8 +70,8 @@ const DescribeBlueprintsRequest = models.DescribeBlueprintsRequest;
 const InstanceReturnable = models.InstanceReturnable;
 const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
 const ModifyDisksAttributeRequest = models.ModifyDisksAttributeRequest;
-const DockerContainerPublishPort = models.DockerContainerPublishPort;
-const DescribeSnapshotsDeniedActionsResponse = models.DescribeSnapshotsDeniedActionsResponse;
+const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
+const DescribeZonesRequest = models.DescribeZonesRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
 const SnapshotDeniedActions = models.SnapshotDeniedActions;
 const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
@@ -88,12 +82,11 @@ const DescribeBundleDiscountResponse = models.DescribeBundleDiscountResponse;
 const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
 const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
-const DataDiskPrice = models.DataDiskPrice;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const DeleteBlueprintsResponse = models.DeleteBlueprintsResponse;
 const ModifyInstancesLoginKeyPairAttributeRequest = models.ModifyInstancesLoginKeyPairAttributeRequest;
 const StopInstancesResponse = models.StopInstancesResponse;
-const CreateInstancesResponse = models.CreateInstancesResponse;
+const FirewallRule = models.FirewallRule;
 const ModifyBlueprintAttributeResponse = models.ModifyBlueprintAttributeResponse;
 const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
@@ -105,9 +98,6 @@ const DescribeBlueprintsResponse = models.DescribeBlueprintsResponse;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
-const LoginSettings = models.LoginSettings;
-const Instance = models.Instance;
-const DockerContainerVolume = models.DockerContainerVolume;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const ModifyFirewallRulesResponse = models.ModifyFirewallRulesResponse;
@@ -126,7 +116,6 @@ const DescribeDiskDiscountResponse = models.DescribeDiskDiscountResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const DiskChargePrepaid = models.DiskChargePrepaid;
 const CreateKeyPairRequest = models.CreateKeyPairRequest;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DetachCcnRequest = models.DetachCcnRequest;
 const Filter = models.Filter;
 const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
@@ -139,20 +128,15 @@ const CreateFirewallRulesRequest = models.CreateFirewallRulesRequest;
 const Software = models.Software;
 const DescribeFirewallRulesResponse = models.DescribeFirewallRulesResponse;
 const DescribeInstancesReturnableResponse = models.DescribeInstancesReturnableResponse;
-const ContainerEnv = models.ContainerEnv;
-const FirewallRule = models.FirewallRule;
 const DeleteBlueprintsRequest = models.DeleteBlueprintsRequest;
 const FirewallRuleInfo = models.FirewallRuleInfo;
 const CreateFirewallRulesResponse = models.CreateFirewallRulesResponse;
 const DescribeDisksRequest = models.DescribeDisksRequest;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const CreateBlueprintResponse = models.CreateBlueprintResponse;
 const PolicyDetail = models.PolicyDetail;
 const DetachDisksResponse = models.DetachDisksResponse;
-const LoginConfiguration = models.LoginConfiguration;
 const DescribeResetInstanceBlueprintsRequest = models.DescribeResetInstanceBlueprintsRequest;
-const DockerContainerConfiguration = models.DockerContainerConfiguration;
 const ResetAttachCcnResponse = models.ResetAttachCcnResponse;
 const ModifyInstancesRenewFlagResponse = models.ModifyInstancesRenewFlagResponse;
 const ApplyInstanceSnapshotRequest = models.ApplyInstanceSnapshotRequest;
@@ -162,7 +146,6 @@ const RenewDiskChargePrepaid = models.RenewDiskChargePrepaid;
 const TerminateDisksRequest = models.TerminateDisksRequest;
 const ResetInstanceRequest = models.ResetInstanceRequest;
 const DescribeDiskConfigsResponse = models.DescribeDiskConfigsResponse;
-const InternetAccessible = models.InternetAccessible;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const DescribeDisksDeniedActionsResponse = models.DescribeDisksDeniedActionsResponse;
 const DescribeInstanceLoginKeyPairAttributeRequest = models.DescribeInstanceLoginKeyPairAttributeRequest;
@@ -170,14 +153,11 @@ const DescribeBundleDiscountRequest = models.DescribeBundleDiscountRequest;
 const Price = models.Price;
 const DescribeDisksReturnableResponse = models.DescribeDisksReturnableResponse;
 const BlueprintPrice = models.BlueprintPrice;
-const GeneralResourceQuota = models.GeneralResourceQuota;
 const DescribeResetInstanceBlueprintsResponse = models.DescribeResetInstanceBlueprintsResponse;
 const DescribeDisksReturnableRequest = models.DescribeDisksReturnableRequest;
 const SoftwareDetail = models.SoftwareDetail;
 const InstancePrice = models.InstancePrice;
-const Tag = models.Tag;
 const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
-const DescribeGeneralResourceQuotasResponse = models.DescribeGeneralResourceQuotasResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const StopInstancesRequest = models.StopInstancesRequest;
 const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
@@ -403,22 +383,6 @@ In the `FirewallRules` parameter:
     }
 
     /**
-     * This API is used to query the details of one or multiple instances.
-
-* You can query the details of an instance according to its ID, name, or private IP.
-* For more information on filters, please see [Filters](https://intl.cloud.tencent.com/document/product/1207/47576?from_cn_redirect=1#Filter).
-* If no parameter is defined, the status of a certain number of instances under the current account will be returned. The number is specified by `Limit` and is 20 by default.
-* The latest operation (LatestOperation) and the latest operation status (LatestOperationState) of the instance can be queried.
-     * @param {DescribeInstancesRequest} req
-     * @param {function(string, DescribeInstancesResponse):void} cb
-     * @public
-     */
-    DescribeInstances(req, cb) {
-        let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, cb);
-    }
-
-    /**
      * This API is used to import the specified key pair.
      * @param {ImportKeyPairRequest} req
      * @param {function(string, ImportKeyPairResponse):void} cb
@@ -610,17 +574,6 @@ Note: Just like powering off a physical PC, a forced shutdown may cause data los
     }
 
     /**
-     * This API is used to query the quota information of general resources.
-     * @param {DescribeGeneralResourceQuotasRequest} req
-     * @param {function(string, DescribeGeneralResourceQuotasResponse):void} cb
-     * @public
-     */
-    DescribeGeneralResourceQuotas(req, cb) {
-        let resp = new DescribeGeneralResourceQuotasResponse();
-        this.request("DescribeGeneralResourceQuotas", req, resp, cb);
-    }
-
-    /**
      * This API is used to modify an image attribute.
      * @param {ModifyBlueprintAttributeRequest} req
      * @param {function(string, ModifyBlueprintAttributeResponse):void} cb
@@ -640,17 +593,6 @@ Note: Just like powering off a physical PC, a forced shutdown may cause data los
     DescribeInstancesDeniedActions(req, cb) {
         let resp = new DescribeInstancesDeniedActionsResponse();
         this.request("DescribeInstancesDeniedActions", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the price of renewed instance.
-     * @param {InquirePriceRenewInstancesRequest} req
-     * @param {function(string, InquirePriceRenewInstancesResponse):void} cb
-     * @public
-     */
-    InquirePriceRenewInstances(req, cb) {
-        let resp = new InquirePriceRenewInstancesResponse();
-        this.request("InquirePriceRenewInstances", req, resp, cb);
     }
 
     /**
@@ -857,12 +799,22 @@ In the `FirewallRules` parameter:
     }
 
     /**
-     * This API is used to query the VNC URL of an instance, and the obtained address can be used for VNC login to the instance.
+     * This API is used to query the URL for VNC login.
 
-* This feature is available to instances in `RUNNING` status.
-* A VNC URL is only valid for 15 seconds. If you do not access the URL within 15 seconds, it will become invalid, and you will have to query another one.
-* Once the VNC URL is accessed, it will become invalid, and you will have to query another one if needed.
-* If the connection is interrupted, up to 30 reconnection requests per minute are allowed.
+* It does not support `STOPPED` CVMs.
+* A VNC URL is only valid for 15 seconds. If you do not access the URL within 15 seconds, you will need to query another one.
+* The VNC URL can be used once only. You need to query a new one if you want to log in again.
+* Up to 30 re-connection attempts allowed in one minute.
+After you get the value of `InstanceVncUrl`, you need to append `InstanceVncUrl=xxxx` to the end of the link `https://img.qcloud.com/qcloud/app/active_vnc/index.html?`.
+
+  - `InstanceVncUrl`: Its value will be returned after the API is successfully called.
+
+    The final URL can be in the following formats:
+
+```
+https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
+```
+
      * @param {DescribeInstanceVncUrlRequest} req
      * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
      * @public
@@ -1001,17 +953,6 @@ In the `FirewallRules` parameter:
     RebootInstances(req, cb) {
         let resp = new RebootInstancesResponse();
         this.request("RebootInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create one or more Lighthouse instances.
-     * @param {CreateInstancesRequest} req
-     * @param {function(string, CreateInstancesResponse):void} cb
-     * @public
-     */
-    CreateInstances(req, cb) {
-        let resp = new CreateInstancesResponse();
-        this.request("CreateInstances", req, resp, cb);
     }
 
     /**

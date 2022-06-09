@@ -1273,6 +1273,34 @@ class DescribeUserSAMLConfigRequest extends  AbstractModel {
 }
 
 /**
+ * TagRole response structure.
+ * @class
+ */
+class TagRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * PutRolePermissionsBoundary request structure.
  * @class
  */
@@ -2709,6 +2737,34 @@ class DetachRolePolicyRequest extends  AbstractModel {
         this.DetachRoleId = 'DetachRoleId' in params ? params.DetachRoleId : null;
         this.DetachRoleName = 'DetachRoleName' in params ? params.DetachRoleName : null;
         this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+
+    }
+}
+
+/**
+ * UntagRole response structure.
+ * @class
+ */
+class UntagRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4955,6 +5011,56 @@ class ListEntitiesForPolicyRequest extends  AbstractModel {
         this.Page = 'Page' in params ? params.Page : null;
         this.Rp = 'Rp' in params ? params.Rp : null;
         this.EntityFilter = 'EntityFilter' in params ? params.EntityFilter : null;
+
+    }
+}
+
+/**
+ * TagRole request structure.
+ * @class
+ */
+class TagRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag.
+         * @type {Array.<RoleTags> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Role name. Specify either the role name or role ID.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Role ID. Specify either the role ID or role name.
+         * @type {string || null}
+         */
+        this.RoleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new RoleTags();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
 
     }
 }
@@ -7550,6 +7656,48 @@ class DeleteOIDCConfigRequest extends  AbstractModel {
 }
 
 /**
+ * UntagRole request structure.
+ * @class
+ */
+class UntagRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
+        /**
+         * Role name. Specify either the role name or role ID.
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+        /**
+         * Role ID. Specify either the role ID or role name.
+         * @type {string || null}
+         */
+        this.RoleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+
+    }
+}
+
+/**
  * CreateGroup response structure.
  * @class
  */
@@ -7617,6 +7765,7 @@ module.exports = {
     GetCustomMFATokenInfoRequest: GetCustomMFATokenInfoRequest,
     DescribeRoleListRequest: DescribeRoleListRequest,
     DescribeUserSAMLConfigRequest: DescribeUserSAMLConfigRequest,
+    TagRoleResponse: TagRoleResponse,
     PutRolePermissionsBoundaryRequest: PutRolePermissionsBoundaryRequest,
     GetGroupRequest: GetGroupRequest,
     StrategyInfo: StrategyInfo,
@@ -7649,6 +7798,7 @@ module.exports = {
     GetUserResponse: GetUserResponse,
     CreatePolicyResponse: CreatePolicyResponse,
     DetachRolePolicyRequest: DetachRolePolicyRequest,
+    UntagRoleResponse: UntagRoleResponse,
     DeleteRolePermissionsBoundaryRequest: DeleteRolePermissionsBoundaryRequest,
     RoleTags: RoleTags,
     DescribeUserOIDCConfigResponse: DescribeUserOIDCConfigResponse,
@@ -7700,6 +7850,7 @@ module.exports = {
     AttachGroupPolicyResponse: AttachGroupPolicyResponse,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
+    TagRoleRequest: TagRoleRequest,
     ListPoliciesRequest: ListPoliciesRequest,
     GetServiceLinkedRoleDeletionStatusRequest: GetServiceLinkedRoleDeletionStatusRequest,
     DetachGroupPolicyResponse: DetachGroupPolicyResponse,
@@ -7758,6 +7909,7 @@ module.exports = {
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     UpdatePolicyRequest: UpdatePolicyRequest,
     DeleteOIDCConfigRequest: DeleteOIDCConfigRequest,
+    UntagRoleRequest: UntagRoleRequest,
     CreateGroupResponse: CreateGroupResponse,
 
 }

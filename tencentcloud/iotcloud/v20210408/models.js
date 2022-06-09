@@ -236,6 +236,62 @@ class DescribeProductCAResponse extends  AbstractModel {
 }
 
 /**
+ * SetProductsForbiddenStatus response structure.
+ * @class
+ */
+class SetProductsForbiddenStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdatePrivateCA response structure.
+ * @class
+ */
+class UpdatePrivateCAResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeletePrivateCA response structure.
  * @class
  */
@@ -447,18 +503,24 @@ class CreatePrivateCAResponse extends  AbstractModel {
 }
 
 /**
- * SetProductsForbiddenStatus response structure.
+ * DescribeProducts request structure.
  * @class
  */
-class SetProductsForbiddenStatusResponse extends  AbstractModel {
+class DescribeProductsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Offset, starting from 0
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Offset = null;
+
+        /**
+         * Number of entries returned per page. Valid range: 10–250.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -469,7 +531,8 @@ class SetProductsForbiddenStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -640,6 +703,65 @@ class SetProductsForbiddenStatusRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * Product details
+ * @class
+ */
+class ProductInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Product ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * Product name
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Product metadata
+         * @type {ProductMetadata || null}
+         */
+        this.ProductMetadata = null;
+
+        /**
+         * Product properties
+         * @type {ProductProperties || null}
+         */
+        this.ProductProperties = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+
+        if (params.ProductMetadata) {
+            let obj = new ProductMetadata();
+            obj.deserialize(params.ProductMetadata)
+            this.ProductMetadata = obj;
+        }
+
+        if (params.ProductProperties) {
+            let obj = new ProductProperties();
+            obj.deserialize(params.ProductProperties)
+            this.ProductProperties = obj;
+        }
 
     }
 }
@@ -1019,12 +1141,30 @@ class DescribePrivateCAsRequest extends  AbstractModel {
 }
 
 /**
- * UpdatePrivateCA response structure.
+ * CreateProduct response structure.
  * @class
  */
-class UpdatePrivateCAResponse extends  AbstractModel {
+class CreateProductResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Product name
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Product ID, the globally unique ID assigned by Tencent Cloud.
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * Product properties
+         * @type {ProductProperties || null}
+         */
+        this.ProductProperties = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1040,6 +1180,14 @@ class UpdatePrivateCAResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+
+        if (params.ProductProperties) {
+            let obj = new ProductProperties();
+            obj.deserialize(params.ProductProperties)
+            this.ProductProperties = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1472,6 +1620,103 @@ class DescribeProductRequest extends  AbstractModel {
             return;
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
+
+    }
+}
+
+/**
+ * DescribeProducts response structure.
+ * @class
+ */
+class DescribeProductsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of products
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of product details
+         * @type {Array.<ProductInfo> || null}
+         */
+        this.Products = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Products) {
+            this.Products = new Array();
+            for (let z in params.Products) {
+                let obj = new ProductInfo();
+                obj.deserialize(params.Products[z]);
+                this.Products.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateProduct request structure.
+ * @class
+ */
+class CreateProductRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Product name, which cannot be same as that of an existing product. Naming rule: [a-zA-Z0-9:_-]{1,32}.
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Product properties
+         * @type {ProductProperties || null}
+         */
+        this.ProductProperties = null;
+
+        /**
+         * Skey, which is required to create a CLAA product.
+         * @type {string || null}
+         */
+        this.Skey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+
+        if (params.ProductProperties) {
+            let obj = new ProductProperties();
+            obj.deserialize(params.ProductProperties)
+            this.ProductProperties = obj;
+        }
+        this.Skey = 'Skey' in params ? params.Skey : null;
 
     }
 }
@@ -2201,17 +2446,20 @@ module.exports = {
     UpdateDevicesEnableStateResponse: UpdateDevicesEnableStateResponse,
     DescribePrivateCARequest: DescribePrivateCARequest,
     DescribeProductCAResponse: DescribeProductCAResponse,
+    SetProductsForbiddenStatusResponse: SetProductsForbiddenStatusResponse,
+    UpdatePrivateCAResponse: UpdatePrivateCAResponse,
     DeletePrivateCAResponse: DeletePrivateCAResponse,
     UpdatePrivateCARequest: UpdatePrivateCARequest,
     DescribePrivateCABindedProductsResponse: DescribePrivateCABindedProductsResponse,
     DeleteDeviceRequest: DeleteDeviceRequest,
     DeleteProductResponse: DeleteProductResponse,
     CreatePrivateCAResponse: CreatePrivateCAResponse,
-    SetProductsForbiddenStatusResponse: SetProductsForbiddenStatusResponse,
+    DescribeProductsRequest: DescribeProductsRequest,
     BindProductInfo: BindProductInfo,
     DescribeDevicesResponse: DescribeDevicesResponse,
     DeviceTag: DeviceTag,
     SetProductsForbiddenStatusRequest: SetProductsForbiddenStatusRequest,
+    ProductInfo: ProductInfo,
     DescribeProductCARequest: DescribeProductCARequest,
     CreatePrivateCARequest: CreatePrivateCARequest,
     DescribeProductResponse: DescribeProductResponse,
@@ -2221,7 +2469,7 @@ module.exports = {
     CertInfo: CertInfo,
     ProductMetadata: ProductMetadata,
     DescribePrivateCAsRequest: DescribePrivateCAsRequest,
-    UpdatePrivateCAResponse: UpdatePrivateCAResponse,
+    CreateProductResponse: CreateProductResponse,
     DescribeDevicesRequest: DescribeDevicesRequest,
     UpdateDeviceLogLevelRequest: UpdateDeviceLogLevelRequest,
     DescribePrivateCAResponse: DescribePrivateCAResponse,
@@ -2230,6 +2478,8 @@ module.exports = {
     UpdateDevicesEnableStateRequest: UpdateDevicesEnableStateRequest,
     CreateDeviceRequest: CreateDeviceRequest,
     DescribeProductRequest: DescribeProductRequest,
+    DescribeProductsResponse: DescribeProductsResponse,
+    CreateProductRequest: CreateProductRequest,
     Attribute: Attribute,
     DeleteDeviceResponse: DeleteDeviceResponse,
     DeletePrivateCARequest: DeletePrivateCARequest,

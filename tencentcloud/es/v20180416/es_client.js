@@ -19,22 +19,28 @@ const AbstractClient = require('../../common/abstract_client')
 const WebNodeTypeInfo = models.WebNodeTypeInfo;
 const InstanceLog = models.InstanceLog;
 const LocalDiskInfo = models.LocalDiskInfo;
-const TaskDetail = models.TaskDetail;
+const IndexPolicyField = models.IndexPolicyField;
 const NodeInfo = models.NodeInfo;
-const GetRequestTargetNodeTypesRequest = models.GetRequestTargetNodeTypesRequest;
+const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
+const DescribeIndexMetaResponse = models.DescribeIndexMetaResponse;
 const UpdateInstanceResponse = models.UpdateInstanceResponse;
 const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
+const CreateIndexResponse = models.CreateIndexResponse;
 const OperationDetail = models.OperationDetail;
 const KibanaView = models.KibanaView;
 const EsPublicAcl = models.EsPublicAcl;
+const BackingIndexMetaField = models.BackingIndexMetaField;
 const DictInfo = models.DictInfo;
 const RestartInstanceResponse = models.RestartInstanceResponse;
 const RestartKibanaRequest = models.RestartKibanaRequest;
 const CreateInstanceResponse = models.CreateInstanceResponse;
+const IndexSettingsField = models.IndexSettingsField;
 const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
 const UpdateDictionariesRequest = models.UpdateDictionariesRequest;
+const ZoneDetail = models.ZoneDetail;
 const UpdateRequestTargetNodeTypesRequest = models.UpdateRequestTargetNodeTypesRequest;
 const NodeView = models.NodeView;
+const DescribeIndexListRequest = models.DescribeIndexListRequest;
 const CosBackup = models.CosBackup;
 const TagInfo = models.TagInfo;
 const KeyValue = models.KeyValue;
@@ -44,32 +50,42 @@ const InstanceInfo = models.InstanceInfo;
 const DeleteInstanceResponse = models.DeleteInstanceResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeInstanceLogsResponse = models.DescribeInstanceLogsResponse;
+const IndexMetaField = models.IndexMetaField;
 const UpdatePluginsResponse = models.UpdatePluginsResponse;
 const RestartInstanceRequest = models.RestartInstanceRequest;
-const ZoneDetail = models.ZoneDetail;
+const RestartKibanaResponse = models.RestartKibanaResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const CreateIndexRequest = models.CreateIndexRequest;
+const ClusterView = models.ClusterView;
 const UpdateInstanceRequest = models.UpdateInstanceRequest;
 const EsDictionaryInfo = models.EsDictionaryInfo;
 const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
 const RestartNodesRequest = models.RestartNodesRequest;
 const UpdatePluginsRequest = models.UpdatePluginsRequest;
-const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
+const GetRequestTargetNodeTypesRequest = models.GetRequestTargetNodeTypesRequest;
 const KibanaNodeInfo = models.KibanaNodeInfo;
 const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
 const EsAcl = models.EsAcl;
+const UpdateIndexRequest = models.UpdateIndexRequest;
 const MasterNodeInfo = models.MasterNodeInfo;
+const IndexOptionsField = models.IndexOptionsField;
+const TaskDetail = models.TaskDetail;
 const DeleteInstanceRequest = models.DeleteInstanceRequest;
-const SubTaskDetail = models.SubTaskDetail;
-const RestartNodesResponse = models.RestartNodesResponse;
-const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
-const ClusterView = models.ClusterView;
-const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeViewsResponse = models.DescribeViewsResponse;
+const RestartNodesResponse = models.RestartNodesResponse;
+const SubTaskDetail = models.SubTaskDetail;
+const DescribeIndexMetaRequest = models.DescribeIndexMetaRequest;
+const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const DeleteIndexResponse = models.DeleteIndexResponse;
+const DeleteIndexRequest = models.DeleteIndexRequest;
+const EsConfigSetInfo = models.EsConfigSetInfo;
 const DescribeViewsRequest = models.DescribeViewsRequest;
 const GetRequestTargetNodeTypesResponse = models.GetRequestTargetNodeTypesResponse;
-const RestartKibanaResponse = models.RestartKibanaResponse;
+const DescribeIndexListResponse = models.DescribeIndexListResponse;
 const Operation = models.Operation;
+const UpdateIndexResponse = models.UpdateIndexResponse;
 const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
+const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
 
 
 /**
@@ -82,6 +98,17 @@ class EsClient extends AbstractClient {
         super("es.tencentcloudapi.com", "2018-04-16", credential, region, profile);
     }
     
+    /**
+     * This API is used to delete indices.
+     * @param {DeleteIndexRequest} req
+     * @param {function(string, DeleteIndexResponse):void} cb
+     * @public
+     */
+    DeleteIndex(req, cb) {
+        let resp = new DeleteIndexResponse();
+        this.request("DeleteIndex", req, resp, cb);
+    }
+
     /**
      * This API is used to update the node types used to receive client requests.
      * @param {UpdateRequestTargetNodeTypesRequest} req
@@ -105,6 +132,17 @@ class EsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the eligible ES cluster logs in the current region.
+     * @param {DescribeInstanceLogsRequest} req
+     * @param {function(string, DescribeInstanceLogsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceLogs(req, cb) {
+        let resp = new DescribeInstanceLogsResponse();
+        this.request("DescribeInstanceLogs", req, resp, cb);
+    }
+
+    /**
      * This API is used to query all eligible instances in the current region under the current account.
      * @param {DescribeInstancesRequest} req
      * @param {function(string, DescribeInstancesResponse):void} cb
@@ -113,6 +151,17 @@ class EsClient extends AbstractClient {
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update indices.
+     * @param {UpdateIndexRequest} req
+     * @param {function(string, UpdateIndexResponse):void} cb
+     * @public
+     */
+    UpdateIndex(req, cb) {
+        let resp = new UpdateIndexResponse();
+        this.request("UpdateIndex", req, resp, cb);
     }
 
     /**
@@ -157,6 +206,28 @@ class EsClient extends AbstractClient {
     CreateInstance(req, cb) {
         let resp = new CreateInstanceResponse();
         this.request("CreateInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the index list.
+     * @param {DescribeIndexListRequest} req
+     * @param {function(string, DescribeIndexListResponse):void} cb
+     * @public
+     */
+    DescribeIndexList(req, cb) {
+        let resp = new DescribeIndexListResponse();
+        this.request("DescribeIndexList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restart an ES cluster instance (for operations such as system update). 
+     * @param {RestartInstanceRequest} req
+     * @param {function(string, RestartInstanceResponse):void} cb
+     * @public
+     */
+    RestartInstance(req, cb) {
+        let resp = new RestartInstanceResponse();
+        this.request("RestartInstance", req, resp, cb);
     }
 
     /**
@@ -211,14 +282,14 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to restart an ES cluster instance (for operations such as system update). 
-     * @param {RestartInstanceRequest} req
-     * @param {function(string, RestartInstanceResponse):void} cb
+     * This API is used to obtain index metadata.
+     * @param {DescribeIndexMetaRequest} req
+     * @param {function(string, DescribeIndexMetaResponse):void} cb
      * @public
      */
-    RestartInstance(req, cb) {
-        let resp = new RestartInstanceResponse();
-        this.request("RestartInstance", req, resp, cb);
+    DescribeIndexMeta(req, cb) {
+        let resp = new DescribeIndexMetaResponse();
+        this.request("DescribeIndexMeta", req, resp, cb);
     }
 
     /**
@@ -233,14 +304,14 @@ Only one of the parameters or parameter combinations above can be passed in at a
     }
 
     /**
-     * This API is used to query the eligible ES cluster logs in the current region.
-     * @param {DescribeInstanceLogsRequest} req
-     * @param {function(string, DescribeInstanceLogsResponse):void} cb
+     * This API is used to create indices.
+     * @param {CreateIndexRequest} req
+     * @param {function(string, CreateIndexResponse):void} cb
      * @public
      */
-    DescribeInstanceLogs(req, cb) {
-        let resp = new DescribeInstanceLogsResponse();
-        this.request("DescribeInstanceLogs", req, resp, cb);
+    CreateIndex(req, cb) {
+        let resp = new CreateIndexResponse();
+        this.request("CreateIndex", req, resp, cb);
     }
 
     /**

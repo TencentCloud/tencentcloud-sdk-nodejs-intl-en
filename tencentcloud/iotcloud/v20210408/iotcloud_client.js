@@ -22,17 +22,20 @@ const DescribePrivateCAsResponse = models.DescribePrivateCAsResponse;
 const UpdateDevicesEnableStateResponse = models.UpdateDevicesEnableStateResponse;
 const DescribePrivateCARequest = models.DescribePrivateCARequest;
 const DescribeProductCAResponse = models.DescribeProductCAResponse;
+const SetProductsForbiddenStatusResponse = models.SetProductsForbiddenStatusResponse;
+const UpdatePrivateCAResponse = models.UpdatePrivateCAResponse;
 const DeletePrivateCAResponse = models.DeletePrivateCAResponse;
 const UpdatePrivateCARequest = models.UpdatePrivateCARequest;
 const DescribePrivateCABindedProductsResponse = models.DescribePrivateCABindedProductsResponse;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const DeleteProductResponse = models.DeleteProductResponse;
 const CreatePrivateCAResponse = models.CreatePrivateCAResponse;
-const SetProductsForbiddenStatusResponse = models.SetProductsForbiddenStatusResponse;
+const DescribeProductsRequest = models.DescribeProductsRequest;
 const BindProductInfo = models.BindProductInfo;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
 const DeviceTag = models.DeviceTag;
 const SetProductsForbiddenStatusRequest = models.SetProductsForbiddenStatusRequest;
+const ProductInfo = models.ProductInfo;
 const DescribeProductCARequest = models.DescribeProductCARequest;
 const CreatePrivateCARequest = models.CreatePrivateCARequest;
 const DescribeProductResponse = models.DescribeProductResponse;
@@ -42,7 +45,7 @@ const UpdateProductDynamicRegisterRequest = models.UpdateProductDynamicRegisterR
 const CertInfo = models.CertInfo;
 const ProductMetadata = models.ProductMetadata;
 const DescribePrivateCAsRequest = models.DescribePrivateCAsRequest;
-const UpdatePrivateCAResponse = models.UpdatePrivateCAResponse;
+const CreateProductResponse = models.CreateProductResponse;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
 const UpdateDeviceLogLevelRequest = models.UpdateDeviceLogLevelRequest;
 const DescribePrivateCAResponse = models.DescribePrivateCAResponse;
@@ -51,6 +54,8 @@ const CreateDeviceResponse = models.CreateDeviceResponse;
 const UpdateDevicesEnableStateRequest = models.UpdateDevicesEnableStateRequest;
 const CreateDeviceRequest = models.CreateDeviceRequest;
 const DescribeProductRequest = models.DescribeProductRequest;
+const DescribeProductsResponse = models.DescribeProductsResponse;
+const CreateProductRequest = models.CreateProductRequest;
 const Attribute = models.Attribute;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
 const DeletePrivateCARequest = models.DeletePrivateCARequest;
@@ -71,14 +76,14 @@ class IotcloudClient extends AbstractClient {
     }
     
     /**
-     * This API is used to set the device log level.  
-     * @param {UpdateDeviceLogLevelRequest} req
-     * @param {function(string, UpdateDeviceLogLevelResponse):void} cb
+     * This API is used to obtain the product list. 
+     * @param {DescribeProductsRequest} req
+     * @param {function(string, DescribeProductsResponse):void} cb
      * @public
      */
-    UpdateDeviceLogLevel(req, cb) {
-        let resp = new UpdateDeviceLogLevelResponse();
-        this.request("UpdateDeviceLogLevel", req, resp, cb);
+    DescribeProducts(req, cb) {
+        let resp = new DescribeProductsResponse();
+        this.request("DescribeProducts", req, resp, cb);
     }
 
     /**
@@ -101,6 +106,17 @@ class IotcloudClient extends AbstractClient {
     DescribeDevices(req, cb) {
         let resp = new DescribeDevicesResponse();
         this.request("DescribeDevices", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a new IoT communication product. 
+     * @param {CreateProductRequest} req
+     * @param {function(string, CreateProductResponse):void} cb
+     * @public
+     */
+    CreateProduct(req, cb) {
+        let resp = new CreateProductResponse();
+        this.request("CreateProduct", req, resp, cb);
     }
 
     /**
@@ -244,6 +260,17 @@ class IotcloudClient extends AbstractClient {
     UpdatePrivateCA(req, cb) {
         let resp = new UpdatePrivateCAResponse();
         this.request("UpdatePrivateCA", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the device log level.  
+     * @param {UpdateDeviceLogLevelRequest} req
+     * @param {function(string, UpdateDeviceLogLevelResponse):void} cb
+     * @public
+     */
+    UpdateDeviceLogLevel(req, cb) {
+        let resp = new UpdateDeviceLogLevelResponse();
+        this.request("UpdateDeviceLogLevel", req, resp, cb);
     }
 
     /**

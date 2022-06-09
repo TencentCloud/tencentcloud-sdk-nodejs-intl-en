@@ -16,10 +16,14 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
+const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
+const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
 const LivenessCompareResponse = models.LivenessCompareResponse;
+const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
 const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
+const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
 const LivenessCompareRequest = models.LivenessCompareRequest;
+const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
 
 
 /**
@@ -42,6 +46,30 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     DetectReflectLivenessAndCompare(req, cb) {
         let resp = new DetectReflectLivenessAndCompareResponse();
         this.request("DetectReflectLivenessAndCompare", req, resp, cb);
+    }
+
+    /**
+     * This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the identity verification process.
+The data generated with the SDK must be stored in COS, and the region of the COS bucket must be same as that of requests made with this API. We recommend that you pass resources with upload link APIs.
+     * @param {GenerateReflectSequenceRequest} req
+     * @param {function(string, GenerateReflectSequenceResponse):void} cb
+     * @public
+     */
+    GenerateReflectSequence(req, cb) {
+        let resp = new GenerateReflectSequenceResponse();
+        this.request("GenerateReflectSequence", req, resp, cb);
+    }
+
+    /**
+     * This API is used to generate a temporary `UploadUrl` for uploading resource files (with the `HTTP PUT` method). After resource upload, `ResourceUrl` will be passed to the `TargetAction` API to complete the resource passing (specific fields vary by case). 
+The data will be stored in a COS bucket in the region specified by the parameter `Region` for two hours.
+     * @param {CreateUploadUrlRequest} req
+     * @param {function(string, CreateUploadUrlResponse):void} cb
+     * @public
+     */
+    CreateUploadUrl(req, cb) {
+        let resp = new CreateUploadUrlResponse();
+        this.request("CreateUploadUrl", req, resp, cb);
     }
 
     /**

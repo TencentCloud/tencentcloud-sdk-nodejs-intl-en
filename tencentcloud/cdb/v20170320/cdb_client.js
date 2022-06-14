@@ -315,6 +315,7 @@ const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResp
 const DescribeDBInstanceGTIDRequest = models.DescribeDBInstanceGTIDRequest;
 const RollbackDBName = models.RollbackDBName;
 const LocalBinlogConfig = models.LocalBinlogConfig;
+const Tag = models.Tag;
 
 
 /**

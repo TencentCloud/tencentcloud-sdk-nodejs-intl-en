@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ChangeReplicaToMasterRequest = models.ChangeReplicaToMasterRequest;
 const ReleaseWanAddressRequest = models.ReleaseWanAddressRequest;
+const UpgradeSmallVersionRequest = models.UpgradeSmallVersionRequest;
 const ProxyNodes = models.ProxyNodes;
 const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
 const Instances = models.Instances;
@@ -27,6 +28,7 @@ const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKe
 const AllocateWanAddressRequest = models.AllocateWanAddressRequest;
 const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
+const UpgradeSmallVersionResponse = models.UpgradeSmallVersionResponse;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowResponse;
 const ModifyInstanceReadOnlyResponse = models.ModifyInstanceReadOnlyResponse;
@@ -39,6 +41,7 @@ const CommandTake = models.CommandTake;
 const DescribeInstanceMonitorBigKeyResponse = models.DescribeInstanceMonitorBigKeyResponse;
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
 const RedisNodes = models.RedisNodes;
+const UpgradeProxyVersionResponse = models.UpgradeProxyVersionResponse;
 const InquiryPriceUpgradeInstanceRequest = models.InquiryPriceUpgradeInstanceRequest;
 const DelayDistribution = models.DelayDistribution;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
@@ -66,6 +69,7 @@ const DescribeInstanceMonitorSIPResponse = models.DescribeInstanceMonitorSIPResp
 const SourceInfo = models.SourceInfo;
 const DescribeInstanceMonitorSIPRequest = models.DescribeInstanceMonitorSIPRequest;
 const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
+const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
 const ZoneCapacityConf = models.ZoneCapacityConf;
 const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
 const DescribeReplicationGroupRequest = models.DescribeReplicationGroupRequest;
@@ -87,17 +91,6 @@ class RedisClient extends AbstractClient {
         super("redis.tencentcloudapi.com", "2018-04-12", credential, region, profile);
     }
     
-    /**
-     * This API is used to change the Redis password.
-     * @param {ModfiyInstancePasswordRequest} req
-     * @param {function(string, ModfiyInstancePasswordResponse):void} cb
-     * @public
-     */
-    ModfiyInstancePassword(req, cb) {
-        let resp = new ModfiyInstancePasswordResponse();
-        this.request("ModfiyInstancePassword", req, resp, cb);
-    }
-
     /**
      * This API is used to query the global replication group.
      * @param {DescribeReplicationGroupRequest} req
@@ -143,14 +136,58 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the price for scaling an instance.
-     * @param {InquiryPriceUpgradeInstanceRequest} req
-     * @param {function(string, InquiryPriceUpgradeInstanceResponse):void} cb
+     * This API is used to upgrade instance proxy version.
+     * @param {UpgradeProxyVersionRequest} req
+     * @param {function(string, UpgradeProxyVersionResponse):void} cb
      * @public
      */
-    InquiryPriceUpgradeInstance(req, cb) {
-        let resp = new InquiryPriceUpgradeInstanceResponse();
-        this.request("InquiryPriceUpgradeInstance", req, resp, cb);
+    UpgradeProxyVersion(req, cb) {
+        let resp = new UpgradeProxyVersionResponse();
+        this.request("UpgradeProxyVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view instance sub-account information.
+     * @param {DescribeInstanceAccountRequest} req
+     * @param {function(string, DescribeInstanceAccountResponse):void} cb
+     * @public
+     */
+    DescribeInstanceAccount(req, cb) {
+        let resp = new DescribeInstanceAccountResponse();
+        this.request("DescribeInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the instance CPU time.
+     * @param {DescribeInstanceMonitorTopNCmdTookRequest} req
+     * @param {function(string, DescribeInstanceMonitorTopNCmdTookResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorTopNCmdTook(req, cb) {
+        let resp = new DescribeInstanceMonitorTopNCmdTookResponse();
+        this.request("DescribeInstanceMonitorTopNCmdTook", req, resp, cb);
+    }
+
+    /**
+     * This API is used to promote a replica node group of a multi-AZ deployed instance to master node group or a replica node of a single-AZ deployed instance to master node.
+     * @param {ChangeReplicaToMasterRequest} req
+     * @param {function(string, ChangeReplicaToMasterResponse):void} cb
+     * @public
+     */
+    ChangeReplicaToMaster(req, cb) {
+        let resp = new ChangeReplicaToMasterResponse();
+        this.request("ChangeReplicaToMaster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query an instance access command.
+     * @param {DescribeInstanceMonitorTopNCmdRequest} req
+     * @param {function(string, DescribeInstanceMonitorTopNCmdResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorTopNCmd(req, cb) {
+        let resp = new DescribeInstanceMonitorTopNCmdResponse();
+        this.request("DescribeInstanceMonitorTopNCmd", req, resp, cb);
     }
 
     /**
@@ -165,6 +202,72 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the price for scaling an instance.
+     * @param {InquiryPriceUpgradeInstanceRequest} req
+     * @param {function(string, InquiryPriceUpgradeInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceUpgradeInstance(req, cb) {
+        let resp = new InquiryPriceUpgradeInstanceResponse();
+        this.request("InquiryPriceUpgradeInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the hot key of an instance.
+     * @param {DescribeInstanceMonitorHotKeyRequest} req
+     * @param {function(string, DescribeInstanceMonitorHotKeyResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorHotKey(req, cb) {
+        let resp = new DescribeInstanceMonitorHotKeyResponse();
+        this.request("DescribeInstanceMonitorHotKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the Redis password.
+     * @param {ModfiyInstancePasswordRequest} req
+     * @param {function(string, ModfiyInstancePasswordResponse):void} cb
+     * @public
+     */
+    ModfiyInstancePassword(req, cb) {
+        let resp = new ModfiyInstancePasswordResponse();
+        this.request("ModfiyInstancePassword", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the price for purchasing an instance.
+     * @param {InquiryPriceCreateInstanceRequest} req
+     * @param {function(string, InquiryPriceCreateInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceCreateInstance(req, cb) {
+        let resp = new InquiryPriceCreateInstanceResponse();
+        this.request("InquiryPriceCreateInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the big key of an instance.
+     * @param {DescribeInstanceMonitorBigKeyRequest} req
+     * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorBigKey(req, cb) {
+        let resp = new DescribeInstanceMonitorBigKeyResponse();
+        this.request("DescribeInstanceMonitorBigKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the big key type distribution of an instance
+     * @param {DescribeInstanceMonitorBigKeyTypeDistRequest} req
+     * @param {function(string, DescribeInstanceMonitorBigKeyTypeDistResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorBigKeyTypeDist(req, cb) {
+        let resp = new DescribeInstanceMonitorBigKeyTypeDistResponse();
+        this.request("DescribeInstanceMonitorBigKeyTypeDist", req, resp, cb);
+    }
+
+    /**
      * This API is used to disable public network access.
      * @param {ReleaseWanAddressRequest} req
      * @param {function(string, ReleaseWanAddressResponse):void} cb
@@ -173,6 +276,28 @@ class RedisClient extends AbstractClient {
     ReleaseWanAddress(req, cb) {
         let resp = new ReleaseWanAddressResponse();
         this.request("ReleaseWanAddress", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the purchasable capacity specifications of Redis instances in the specified AZ and instance type. If you are not in the allowlist for the AZ or instance type, you cannot view the details of the capacity specifications. To apply for the eligibility, please submit a ticket.
+     * @param {DescribeProductInfoRequest} req
+     * @param {function(string, DescribeProductInfoResponse):void} cb
+     * @public
+     */
+    DescribeProductInfo(req, cb) {
+        let resp = new DescribeProductInfoResponse();
+        this.request("DescribeProductInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade instance minor version.
+     * @param {UpgradeSmallVersionRequest} req
+     * @param {function(string, UpgradeSmallVersionResponse):void} cb
+     * @public
+     */
+    UpgradeSmallVersion(req, cb) {
+        let resp = new UpgradeSmallVersionResponse();
+        this.request("UpgradeSmallVersion", req, resp, cb);
     }
 
     /**
@@ -198,28 +323,6 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the big key of an instance.
-     * @param {DescribeInstanceMonitorBigKeyRequest} req
-     * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorBigKey(req, cb) {
-        let resp = new DescribeInstanceMonitorBigKeyResponse();
-        this.request("DescribeInstanceMonitorBigKey", req, resp, cb);
-    }
-
-    /**
-     * This API is used to view instance sub-account information.
-     * @param {DescribeInstanceAccountRequest} req
-     * @param {function(string, DescribeInstanceAccountResponse):void} cb
-     * @public
-     */
-    DescribeInstanceAccount(req, cb) {
-        let resp = new DescribeInstanceAccountResponse();
-        this.request("DescribeInstanceAccount", req, resp, cb);
-    }
-
-    /**
      * This API is used to enable public network access.
      * @param {AllocateWanAddressRequest} req
      * @param {function(string, AllocateWanAddressResponse):void} cb
@@ -231,72 +334,6 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the big key type distribution of an instance
-     * @param {DescribeInstanceMonitorBigKeyTypeDistRequest} req
-     * @param {function(string, DescribeInstanceMonitorBigKeyTypeDistResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorBigKeyTypeDist(req, cb) {
-        let resp = new DescribeInstanceMonitorBigKeyTypeDistResponse();
-        this.request("DescribeInstanceMonitorBigKeyTypeDist", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query an instance access command.
-     * @param {DescribeInstanceMonitorTopNCmdRequest} req
-     * @param {function(string, DescribeInstanceMonitorTopNCmdResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorTopNCmd(req, cb) {
-        let resp = new DescribeInstanceMonitorTopNCmdResponse();
-        this.request("DescribeInstanceMonitorTopNCmd", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the instance CPU time.
-     * @param {DescribeInstanceMonitorTopNCmdTookRequest} req
-     * @param {function(string, DescribeInstanceMonitorTopNCmdTookResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorTopNCmdTook(req, cb) {
-        let resp = new DescribeInstanceMonitorTopNCmdTookResponse();
-        this.request("DescribeInstanceMonitorTopNCmdTook", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the hot key of an instance.
-     * @param {DescribeInstanceMonitorHotKeyRequest} req
-     * @param {function(string, DescribeInstanceMonitorHotKeyResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorHotKey(req, cb) {
-        let resp = new DescribeInstanceMonitorHotKeyResponse();
-        this.request("DescribeInstanceMonitorHotKey", req, resp, cb);
-    }
-
-    /**
-     * This API is used to promote a replica node group of a multi-AZ deployed instance to master node group or a replica node of a single-AZ deployed instance to master node.
-     * @param {ChangeReplicaToMasterRequest} req
-     * @param {function(string, ChangeReplicaToMasterResponse):void} cb
-     * @public
-     */
-    ChangeReplicaToMaster(req, cb) {
-        let resp = new ChangeReplicaToMasterResponse();
-        this.request("ChangeReplicaToMaster", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the price for purchasing an instance.
-     * @param {InquiryPriceCreateInstanceRequest} req
-     * @param {function(string, InquiryPriceCreateInstanceResponse):void} cb
-     * @public
-     */
-    InquiryPriceCreateInstance(req, cb) {
-        let resp = new InquiryPriceCreateInstanceResponse();
-        this.request("InquiryPriceCreateInstance", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the distribution of instance access duration.
      * @param {DescribeInstanceMonitorTookDistRequest} req
      * @param {function(string, DescribeInstanceMonitorTookDistResponse):void} cb
@@ -305,17 +342,6 @@ class RedisClient extends AbstractClient {
     DescribeInstanceMonitorTookDist(req, cb) {
         let resp = new DescribeInstanceMonitorTookDistResponse();
         this.request("DescribeInstanceMonitorTookDist", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the purchasable capacity specifications of Redis instances in the specified AZ and instance type. If you are not in the allowlist for the AZ or instance type, you cannot view the details of the capacity specifications. To apply for the eligibility, please submit a ticket.
-     * @param {DescribeProductInfoRequest} req
-     * @param {function(string, DescribeProductInfoResponse):void} cb
-     * @public
-     */
-    DescribeProductInfo(req, cb) {
-        let resp = new DescribeProductInfoResponse();
-        this.request("DescribeProductInfo", req, resp, cb);
     }
 
 

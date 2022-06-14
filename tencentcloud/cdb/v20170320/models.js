@@ -1617,6 +1617,13 @@ Note: `null` may be returned for this field, indicating that no valid values can
          */
         this.DeviceTypeName = null;
 
+        /**
+         * Engine type. Valid values: `Innodb`,`RocksDB`.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.EngineType = null;
+
     }
 
     /**
@@ -1642,6 +1649,7 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.Tag = 'Tag' in params ? params.Tag : null;
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
         this.DeviceTypeName = 'DeviceTypeName' in params ? params.DeviceTypeName : null;
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
 
     }
 }
@@ -5545,6 +5553,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.UniqSubnetIds = null;
 
+        /**
+         * Tag key value
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -5585,6 +5599,15 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.TagValues = 'TagValues' in params ? params.TagValues : null;
         this.UniqueVpcIds = 'UniqueVpcIds' in params ? params.UniqueVpcIds : null;
         this.UniqSubnetIds = 'UniqSubnetIds' in params ? params.UniqSubnetIds : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -12524,7 +12547,7 @@ class ModifyAccountPrivilegesRequest extends  AbstractModel {
         this.Accounts = null;
 
         /**
-         * Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER", "CREATE USER", "RELOAD", "REPLICATION CLIENT", "REPLICATION SLAVE", "UPDATE".
+         * Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER", "CREATE USER", "RELOAD", "REPLICATION CLIENT", "REPLICATION SLAVE".
 Note: When “ModifyAction” is empty, if `GlobalPrivileges` is not passed in, it indicates the global permission will become ineffective.
          * @type {Array.<string> || null}
          */
@@ -15575,6 +15598,41 @@ class LocalBinlogConfig extends  AbstractModel {
     }
 }
 
+/**
+ * Tag structure
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
 module.exports = {
     ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     SellType: SellType,
@@ -15875,5 +15933,6 @@ module.exports = {
     DescribeDBInstanceGTIDRequest: DescribeDBInstanceGTIDRequest,
     RollbackDBName: RollbackDBName,
     LocalBinlogConfig: LocalBinlogConfig,
+    Tag: Tag,
 
 }

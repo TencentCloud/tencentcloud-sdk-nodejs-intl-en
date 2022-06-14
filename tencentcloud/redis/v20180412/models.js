@@ -80,6 +80,55 @@ class ReleaseWanAddressRequest extends  AbstractModel {
 }
 
 /**
+ * UpgradeSmallVersion request structure.
+ * @class
+ */
+class UpgradeSmallVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The current redis version
+         * @type {string || null}
+         */
+        this.CurrentRedisVersion = null;
+
+        /**
+         * Upgradeable redis version
+         * @type {string || null}
+         */
+        this.UpgradeRedisVersion = null;
+
+        /**
+         * `1` (upgrade immediately), `0` (upgrade during maintenance time)
+         * @type {number || null}
+         */
+        this.InstanceTypeUpgradeNow = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CurrentRedisVersion = 'CurrentRedisVersion' in params ? params.CurrentRedisVersion : null;
+        this.UpgradeRedisVersion = 'UpgradeRedisVersion' in params ? params.UpgradeRedisVersion : null;
+        this.InstanceTypeUpgradeNow = 'InstanceTypeUpgradeNow' in params ? params.InstanceTypeUpgradeNow : null;
+
+    }
+}
+
+/**
  * Proxy node information
  * @class
  */
@@ -577,6 +626,41 @@ If `TypeId` indicates the standard architecture, `MemSize` indicates the total m
         this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
         this.ReplicasReadonly = 'ReplicasReadonly' in params ? params.ReplicasReadonly : null;
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+
+    }
+}
+
+/**
+ * UpgradeSmallVersion response structure.
+ * @class
+ */
+class UpgradeSmallVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1133,6 +1217,41 @@ class RedisNodes extends  AbstractModel {
         this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+    }
+}
+
+/**
+ * UpgradeProxyVersion response structure.
+ * @class
+ */
+class UpgradeProxyVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2369,6 +2488,55 @@ class ChangeReplicaToMasterResponse extends  AbstractModel {
 }
 
 /**
+ * UpgradeProxyVersion request structure.
+ * @class
+ */
+class UpgradeProxyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The current proxy version
+         * @type {string || null}
+         */
+        this.CurrentProxyVersion = null;
+
+        /**
+         * Upgradeable redis version
+         * @type {string || null}
+         */
+        this.UpgradeProxyVersion = null;
+
+        /**
+         * `1` (upgrade immediately), `0` (upgrade during maintenance time)
+         * @type {number || null}
+         */
+        this.InstanceTypeUpgradeNow = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CurrentProxyVersion = 'CurrentProxyVersion' in params ? params.CurrentProxyVersion : null;
+        this.UpgradeProxyVersion = 'UpgradeProxyVersion' in params ? params.UpgradeProxyVersion : null;
+        this.InstanceTypeUpgradeNow = 'InstanceTypeUpgradeNow' in params ? params.InstanceTypeUpgradeNow : null;
+
+    }
+}
+
+/**
  * Product information in the availability zone
  * @class
  */
@@ -2856,6 +3024,7 @@ class InstanceSlowlogDetail extends  AbstractModel {
 module.exports = {
     ChangeReplicaToMasterRequest: ChangeReplicaToMasterRequest,
     ReleaseWanAddressRequest: ReleaseWanAddressRequest,
+    UpgradeSmallVersionRequest: UpgradeSmallVersionRequest,
     ProxyNodes: ProxyNodes,
     DescribeInstanceMonitorTopNCmdTookRequest: DescribeInstanceMonitorTopNCmdTookRequest,
     Instances: Instances,
@@ -2865,6 +3034,7 @@ module.exports = {
     AllocateWanAddressRequest: AllocateWanAddressRequest,
     DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
+    UpgradeSmallVersionResponse: UpgradeSmallVersionResponse,
     DescribeProductInfoResponse: DescribeProductInfoResponse,
     DescribeMaintenanceWindowResponse: DescribeMaintenanceWindowResponse,
     ModifyInstanceReadOnlyResponse: ModifyInstanceReadOnlyResponse,
@@ -2877,6 +3047,7 @@ module.exports = {
     DescribeInstanceMonitorBigKeyResponse: DescribeInstanceMonitorBigKeyResponse,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
     RedisNodes: RedisNodes,
+    UpgradeProxyVersionResponse: UpgradeProxyVersionResponse,
     InquiryPriceUpgradeInstanceRequest: InquiryPriceUpgradeInstanceRequest,
     DelayDistribution: DelayDistribution,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
@@ -2904,6 +3075,7 @@ module.exports = {
     SourceInfo: SourceInfo,
     DescribeInstanceMonitorSIPRequest: DescribeInstanceMonitorSIPRequest,
     ChangeReplicaToMasterResponse: ChangeReplicaToMasterResponse,
+    UpgradeProxyVersionRequest: UpgradeProxyVersionRequest,
     ZoneCapacityConf: ZoneCapacityConf,
     DescribeInstanceNodeInfoResponse: DescribeInstanceNodeInfoResponse,
     DescribeReplicationGroupRequest: DescribeReplicationGroupRequest,

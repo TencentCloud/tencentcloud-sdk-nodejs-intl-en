@@ -17,7 +17,6 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateLiveSnapshotRuleRequest = models.CreateLiveSnapshotRuleRequest;
-const BillDataInfo = models.BillDataInfo;
 const EnableLiveDomainResponse = models.EnableLiveDomainResponse;
 const CreateLiveCertRequest = models.CreateLiveCertRequest;
 const StopRecordTaskResponse = models.StopRecordTaskResponse;
@@ -25,6 +24,7 @@ const DescribeDeliverBandwidthListResponse = models.DescribeDeliverBandwidthList
 const DeleteLiveRecordRuleRequest = models.DeleteLiveRecordRuleRequest;
 const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
 const DeleteLiveTranscodeTemplateResponse = models.DeleteLiveTranscodeTemplateResponse;
+const FlvSpecialParam = models.FlvSpecialParam;
 const TemplateInfo = models.TemplateInfo;
 const DeleteLiveCallbackRuleResponse = models.DeleteLiveCallbackRuleResponse;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
@@ -37,7 +37,6 @@ const DescribeUploadStreamNumsResponse = models.DescribeUploadStreamNumsResponse
 const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
 const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
-const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ModifyLivePlayAuthKeyRequest = models.ModifyLivePlayAuthKeyRequest;
 const DescribeLiveDelayInfoListRequest = models.DescribeLiveDelayInfoListRequest;
 const DomainCertInfo = models.DomainCertInfo;
@@ -72,18 +71,17 @@ const DescribeLiveDomainCertResponse = models.DescribeLiveDomainCertResponse;
 const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateRequest;
 const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
-const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
+const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const DescribeDeliverBandwidthListRequest = models.DescribeDeliverBandwidthListRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
-const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
+const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
-const BillCountryInfo = models.BillCountryInfo;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
 const DescribeLiveWatermarkRequest = models.DescribeLiveWatermarkRequest;
 const ProIspPlayCodeDataInfo = models.ProIspPlayCodeDataInfo;
-const CommonMixLayoutParams = models.CommonMixLayoutParams;
+const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
 const DescribeLiveDomainCertRequest = models.DescribeLiveDomainCertRequest;
 const DescribeLiveStreamEventListRequest = models.DescribeLiveStreamEventListRequest;
 const CallBackTemplateInfo = models.CallBackTemplateInfo;
@@ -91,7 +89,6 @@ const DescribePlayErrorCodeSumInfoListResponse = models.DescribePlayErrorCodeSum
 const UnBindLiveDomainCertRequest = models.UnBindLiveDomainCertRequest;
 const DeleteLiveRecordResponse = models.DeleteLiveRecordResponse;
 const DescribeScreenShotSheetNumListRequest = models.DescribeScreenShotSheetNumListRequest;
-const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const DescribeLiveDomainsResponse = models.DescribeLiveDomainsResponse;
 const TimeValue = models.TimeValue;
 const StreamOnlineInfo = models.StreamOnlineInfo;
@@ -99,12 +96,11 @@ const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
 const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
-const BillAreaInfo = models.BillAreaInfo;
 const PlayDataInfoByStream = models.PlayDataInfoByStream;
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
 const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
-const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
+const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
 const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
@@ -114,7 +110,6 @@ const DescribeLiveCallbackTemplatesResponse = models.DescribeLiveCallbackTemplat
 const ModifyLivePlayAuthKeyResponse = models.ModifyLivePlayAuthKeyResponse;
 const CreateLiveCallbackTemplateRequest = models.CreateLiveCallbackTemplateRequest;
 const DescribeTopClientIpSumInfoListResponse = models.DescribeTopClientIpSumInfoListResponse;
-const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
 const StopLiveRecordRequest = models.StopLiveRecordRequest;
 const DeleteLiveWatermarkRuleRequest = models.DeleteLiveWatermarkRuleRequest;
@@ -123,12 +118,11 @@ const DeleteRecordTaskResponse = models.DeleteRecordTaskResponse;
 const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
-const DropLiveStreamRequest = models.DropLiveStreamRequest;
 const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
 const RefererAuthConfig = models.RefererAuthConfig;
 const CreateLiveCertResponse = models.CreateLiveCertResponse;
 const PushDataInfo = models.PushDataInfo;
-const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
+const CommonMixLayoutParams = models.CommonMixLayoutParams;
 const DescribeGroupProIspPlayInfoListRequest = models.DescribeGroupProIspPlayInfoListRequest;
 const DescribeStreamDayPlayInfoListRequest = models.DescribeStreamDayPlayInfoListRequest;
 const TranscodeDetailInfo = models.TranscodeDetailInfo;
@@ -146,33 +140,28 @@ const DescribeProvinceIspPlayInfoListRequest = models.DescribeProvinceIspPlayInf
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
-const DomainInfoList = models.DomainInfoList;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
-const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
 const DescribeLiveStreamPushInfoListRequest = models.DescribeLiveStreamPushInfoListRequest;
 const DescribeLiveWatermarksResponse = models.DescribeLiveWatermarksResponse;
 const WatermarkInfo = models.WatermarkInfo;
 const DescribeLiveForbidStreamListRequest = models.DescribeLiveForbidStreamListRequest;
-const DescribeLiveDomainPlayInfoListRequest = models.DescribeLiveDomainPlayInfoListRequest;
 const BindLiveDomainCertRequest = models.BindLiveDomainCertRequest;
 const DescribeTopClientIpSumInfoListRequest = models.DescribeTopClientIpSumInfoListRequest;
 const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
 const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
-const MonitorStreamPlayInfo = models.MonitorStreamPlayInfo;
 const DescribeLiveTranscodeDetailInfoRequest = models.DescribeLiveTranscodeDetailInfoRequest;
 const ModifyLiveDomainRefererResponse = models.ModifyLiveDomainRefererResponse;
 const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
 const DescribeLiveDomainsRequest = models.DescribeLiveDomainsRequest;
-const ProIspPlaySumInfo = models.ProIspPlaySumInfo;
+const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
 const SnapshotTemplateInfo = models.SnapshotTemplateInfo;
 const DeleteLiveSnapshotRuleResponse = models.DeleteLiveSnapshotRuleResponse;
 const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
 const ForbidLiveStreamResponse = models.ForbidLiveStreamResponse;
 const BandwidthInfo = models.BandwidthInfo;
 const CancelCommonMixStreamRequest = models.CancelCommonMixStreamRequest;
-const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
 const CertInfo = models.CertInfo;
 const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
 const DescribeLiveDelayInfoListResponse = models.DescribeLiveDelayInfoListResponse;
@@ -186,13 +175,13 @@ const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumI
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
 const CommonMixControlParams = models.CommonMixControlParams;
 const TranscodeTotalInfo = models.TranscodeTotalInfo;
-const DescribeAreaBillBandwidthAndFluxListResponse = models.DescribeAreaBillBandwidthAndFluxListResponse;
+const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
 const DescribePlayErrorCodeDetailInfoListResponse = models.DescribePlayErrorCodeDetailInfoListResponse;
 const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const RecordParam = models.RecordParam;
-const DomainDetailInfo = models.DomainDetailInfo;
+const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
 const HttpStatusInfo = models.HttpStatusInfo;
 const DeleteLiveRecordRequest = models.DeleteLiveRecordRequest;
 const DescribeLiveSnapshotTemplatesResponse = models.DescribeLiveSnapshotTemplatesResponse;
@@ -211,14 +200,13 @@ const PlayAuthKeyInfo = models.PlayAuthKeyInfo;
 const ModifyLiveTranscodeTemplateRequest = models.ModifyLiveTranscodeTemplateRequest;
 const ModifyLiveDomainCertResponse = models.ModifyLiveDomainCertResponse;
 const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
-const DescribeAllStreamPlayInfoListResponse = models.DescribeAllStreamPlayInfoListResponse;
 const DescribeLiveTranscodeTotalInfoResponse = models.DescribeLiveTranscodeTotalInfoResponse;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
 const CreateRecordTaskRequest = models.CreateRecordTaskRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
 const CreateLiveCallbackRuleResponse = models.CreateLiveCallbackRuleResponse;
 const DescribeLiveRecordTemplateResponse = models.DescribeLiveRecordTemplateResponse;
-const DescribeAreaBillBandwidthAndFluxListRequest = models.DescribeAreaBillBandwidthAndFluxListRequest;
+const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListResponse;
 const BindLiveDomainCertResponse = models.BindLiveDomainCertResponse;
 const CallBackRuleInfo = models.CallBackRuleInfo;
 const PlaySumStatInfo = models.PlaySumStatInfo;
@@ -226,7 +214,6 @@ const DescribeLiveTranscodeTemplatesRequest = models.DescribeLiveTranscodeTempla
 const HlsSpecialParam = models.HlsSpecialParam;
 const DescribeLiveRecordRulesResponse = models.DescribeLiveRecordRulesResponse;
 const CreateLiveSnapshotTemplateRequest = models.CreateLiveSnapshotTemplateRequest;
-const DescribeLiveDomainPlayInfoListResponse = models.DescribeLiveDomainPlayInfoListResponse;
 const HttpCodeValue = models.HttpCodeValue;
 const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListRequest;
 const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResponse;
@@ -247,12 +234,10 @@ const DeleteLiveWatermarkResponse = models.DeleteLiveWatermarkResponse;
 const DescribeLivePushAuthKeyResponse = models.DescribeLivePushAuthKeyResponse;
 const CreateLiveWatermarkRuleRequest = models.CreateLiveWatermarkRuleRequest;
 const DescribeLiveRecordTemplatesRequest = models.DescribeLiveRecordTemplatesRequest;
-const DescribeAllStreamPlayInfoListRequest = models.DescribeAllStreamPlayInfoListRequest;
 const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
 const DeleteRecordTaskRequest = models.DeleteRecordTaskRequest;
 const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const DescribeStreamDayPlayInfoListResponse = models.DescribeStreamDayPlayInfoListResponse;
-const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListResponse;
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
 const DelayInfo = models.DelayInfo;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
@@ -266,7 +251,6 @@ const GroupProIspDataInfo = models.GroupProIspDataInfo;
 const DeleteLiveDomainResponse = models.DeleteLiveDomainResponse;
 const CommonMixCropParams = models.CommonMixCropParams;
 const CreateLiveRecordTemplateRequest = models.CreateLiveRecordTemplateRequest;
-const DescribeProIspPlaySumInfoListResponse = models.DescribeProIspPlaySumInfoListResponse;
 const DeleteLiveCertRequest = models.DeleteLiveCertRequest;
 const DescribeHttpStatusInfoListResponse = models.DescribeHttpStatusInfoListResponse;
 const DeleteLiveRecordRuleResponse = models.DeleteLiveRecordRuleResponse;
@@ -282,17 +266,6 @@ class LiveClient extends AbstractClient {
         super("live.tencentcloudapi.com", "2018-08-01", credential, region, profile);
     }
     
-    /**
-     * This API is used to disconnect the push connection, which can be resumed.
-     * @param {DropLiveStreamRequest} req
-     * @param {function(string, DropLiveStreamResponse):void} cb
-     * @public
-     */
-    DropLiveStream(req, cb) {
-        let resp = new DropLiveStreamResponse();
-        this.request("DropLiveStream", req, resp, cb);
-    }
-
     /**
      * This API is used to query the watermark list.
      * @param {DescribeLiveWatermarksRequest} req
@@ -546,17 +519,6 @@ After the number of watermarks exceeds the upper limit of 100, to add a new wate
     AddLiveWatermark(req, cb) {
         let resp = new AddLiveWatermarkResponse();
         this.request("AddLiveWatermark", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the billable LVB bandwidth and traffic data outside Chinese mainland.
-     * @param {DescribeAreaBillBandwidthAndFluxListRequest} req
-     * @param {function(string, DescribeAreaBillBandwidthAndFluxListResponse):void} cb
-     * @public
-     */
-    DescribeAreaBillBandwidthAndFluxList(req, cb) {
-        let resp = new DescribeAreaBillBandwidthAndFluxListResponse();
-        this.request("DescribeAreaBillBandwidthAndFluxList", req, resp, cb);
     }
 
     /**
@@ -873,14 +835,14 @@ Note: at least enter one callback URL.
     }
 
     /**
-     * This API is used to query the average traffic per second, total traffic, and number of total requests by country/region, district, and ISP in a certain period of time.
-     * @param {DescribeProIspPlaySumInfoListRequest} req
-     * @param {function(string, DescribeProIspPlaySumInfoListResponse):void} cb
+     * This API is used to query the downstream playback data by district and ISP.
+     * @param {DescribeGroupProIspPlayInfoListRequest} req
+     * @param {function(string, DescribeGroupProIspPlayInfoListResponse):void} cb
      * @public
      */
-    DescribeProIspPlaySumInfoList(req, cb) {
-        let resp = new DescribeProIspPlaySumInfoListResponse();
-        this.request("DescribeProIspPlaySumInfoList", req, resp, cb);
+    DescribeGroupProIspPlayInfoList(req, cb) {
+        let resp = new DescribeGroupProIspPlayInfoListResponse();
+        this.request("DescribeGroupProIspPlayInfoList", req, resp, cb);
     }
 
     /**
@@ -1176,17 +1138,6 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     }
 
     /**
-     * This API is used to query the real-time downstream playback data at the domain name level. As it takes certain time to process data, the API queries quasi-real-time data generated 4 minutes ago by default.
-     * @param {DescribeLiveDomainPlayInfoListRequest} req
-     * @param {function(string, DescribeLiveDomainPlayInfoListResponse):void} cb
-     * @public
-     */
-    DescribeLiveDomainPlayInfoList(req, cb) {
-        let resp = new DescribeLiveDomainPlayInfoListResponse();
-        this.request("DescribeLiveDomainPlayInfoList", req, resp, cb);
-    }
-
-    /**
      * To create a recording rule, you need to first call the [CreateLiveRecordTemplate](https://intl.cloud.tencent.com/document/product/267/32614?from_cn_redirect=1) API to create a recording template and bind the returned template ID to the stream.
 <br>Recording-related document: [LVB Recording](https://intl.cloud.tencent.com/document/product/267/32739?from_cn_redirect=1).
      * @param {CreateLiveRecordRuleRequest} req
@@ -1288,28 +1239,6 @@ Note: only one screencapturing template can be associated with one domain name.
     CreateLiveSnapshotRule(req, cb) {
         let resp = new CreateLiveSnapshotRuleResponse();
         this.request("CreateLiveSnapshotRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the downstream playback data by district and ISP.
-     * @param {DescribeGroupProIspPlayInfoListRequest} req
-     * @param {function(string, DescribeGroupProIspPlayInfoListResponse):void} cb
-     * @public
-     */
-    DescribeGroupProIspPlayInfoList(req, cb) {
-        let resp = new DescribeGroupProIspPlayInfoListResponse();
-        this.request("DescribeGroupProIspPlayInfoList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the downstream information of all streams at a specified point in time (at a 1-minute granularity).
-     * @param {DescribeAllStreamPlayInfoListRequest} req
-     * @param {function(string, DescribeAllStreamPlayInfoListResponse):void} cb
-     * @public
-     */
-    DescribeAllStreamPlayInfoList(req, cb) {
-        let resp = new DescribeAllStreamPlayInfoListResponse();
-        this.request("DescribeAllStreamPlayInfoList", req, resp, cb);
     }
 
     /**

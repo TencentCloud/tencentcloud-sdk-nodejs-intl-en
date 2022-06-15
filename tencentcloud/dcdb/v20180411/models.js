@@ -402,6 +402,65 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBSecurityGroups response structure.
+ * @class
+ */
+class DescribeDBSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Security group details
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * Instance VIP
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VIP = null;
+
+        /**
+         * Instance Port
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.VPort = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.VIP = 'VIP' in params ? params.VIP : null;
+        this.VPort = 'VPort' in params ? params.VPort : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CancelDcnJob response structure.
  * @class
  */
@@ -1160,6 +1219,56 @@ class DescribeDBLogFilesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeOrders response structure.
+ * @class
+ */
+class DescribeOrdersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned number of orders
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Order information list
+         * @type {Array.<Deal> || null}
+         */
+        this.Deals = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Deals) {
+            this.Deals = new Array();
+            for (let z in params.Deals) {
+                let obj = new Deal();
+                obj.deserialize(params.Deals[z]);
+                this.Deals.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateHourDCDBInstance request structure.
  * @class
  */
@@ -1527,6 +1636,41 @@ class ParamModifyResult extends  AbstractModel {
 }
 
 /**
+ * DescribeDBSecurityGroups request structure.
+ * @class
+ */
+class DescribeDBSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engine name. Valid value: `dcdb`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * SwitchDBInstanceHA response structure.
  * @class
  */
@@ -1781,6 +1925,70 @@ class DatabaseTable extends  AbstractModel {
             return;
         }
         this.Table = 'Table' in params ? params.Table : null;
+
+    }
+}
+
+/**
+ * Order information
+ * @class
+ */
+class Deal extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * Account
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * Number of items
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * The associated process ID, which can be used to query the process execution status.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The ID of the created instance, which is required only for the order that creates an instance.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Billing mode. Valid values: `0` (postpaid), `1` (prepaid).
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }
@@ -3652,18 +3860,24 @@ class ShardInfo extends  AbstractModel {
 }
 
 /**
- * DestroyHourDCDBInstance request structure.
+ * ModifyDBInstancesProject request structure.
  * @class
  */
-class DestroyHourDCDBInstanceRequest extends  AbstractModel {
+class ModifyDBInstancesProjectRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of tdsqlshard-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
-         * @type {string || null}
+         * List of IDs of instances to be modified. Instance ID is in the format of dcdbt-ow728lmc.
+         * @type {Array.<string> || null}
          */
-        this.InstanceId = null;
+        this.InstanceIds = null;
+
+        /**
+         * ID of the project to be assigned, which can be obtained through the `DescribeProjects` API.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
 
     }
 
@@ -3674,7 +3888,8 @@ class DestroyHourDCDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -4140,6 +4355,34 @@ class DescribeDatabasesResponse extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeOrders request structure.
+ * @class
+ */
+class DescribeOrdersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of long order IDs to be queried, which are returned by the APIs for creating, renewing, or scaling instances.
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
 
     }
 }
@@ -5266,24 +5509,18 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstancesProject request structure.
+ * DestroyHourDCDBInstance request structure.
  * @class
  */
-class ModifyDBInstancesProjectRequest extends  AbstractModel {
+class DestroyHourDCDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of IDs of instances to be modified. Instance ID is in the format of dcdbt-ow728lmc.
-         * @type {Array.<string> || null}
+         * Instance ID in the format of tdsqlshard-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+         * @type {string || null}
          */
-        this.InstanceIds = null;
-
-        /**
-         * ID of the project to be assigned, which can be obtained through the `DescribeProjects` API.
-         * @type {number || null}
-         */
-        this.ProjectId = null;
+        this.InstanceId = null;
 
     }
 
@@ -5294,8 +5531,7 @@ class ModifyDBInstancesProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5401,6 +5637,7 @@ module.exports = {
     DescribeAccountsRequest: DescribeAccountsRequest,
     ActiveHourDCDBInstanceResponse: ActiveHourDCDBInstanceResponse,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
+    DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     CancelDcnJobResponse: CancelDcnJobResponse,
     DescribeFileDownloadUrlRequest: DescribeFileDownloadUrlRequest,
     DescribeDBSyncModeResponse: DescribeDBSyncModeResponse,
@@ -5419,11 +5656,13 @@ module.exports = {
     DescribeDCDBInstanceNodeInfoRequest: DescribeDCDBInstanceNodeInfoRequest,
     DatabaseView: DatabaseView,
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
+    DescribeOrdersResponse: DescribeOrdersResponse,
     CreateHourDCDBInstanceRequest: CreateHourDCDBInstanceRequest,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
     CloneAccountRequest: CloneAccountRequest,
     ParamModifyResult: ParamModifyResult,
+    DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     SwitchDBInstanceHAResponse: SwitchDBInstanceHAResponse,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     DatabaseFunction: DatabaseFunction,
@@ -5431,6 +5670,7 @@ module.exports = {
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
     DatabaseTable: DatabaseTable,
+    Deal: Deal,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
     DescribeDCDBShardsRequest: DescribeDCDBShardsRequest,
     SwitchDBInstanceHARequest: SwitchDBInstanceHARequest,
@@ -5459,13 +5699,14 @@ module.exports = {
     CancelDcnJobRequest: CancelDcnJobRequest,
     IsolateHourDCDBInstanceResponse: IsolateHourDCDBInstanceResponse,
     ShardInfo: ShardInfo,
-    DestroyHourDCDBInstanceRequest: DestroyHourDCDBInstanceRequest,
+    ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     DcnDetailItem: DcnDetailItem,
     DescribeDBSyncModeRequest: DescribeDBSyncModeRequest,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     SlowLogData: SlowLogData,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
+    DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     InitDCDBInstancesRequest: InitDCDBInstancesRequest,
@@ -5488,7 +5729,7 @@ module.exports = {
     DescribeDBSlowLogsResponse: DescribeDBSlowLogsResponse,
     DescribeDCDBInstancesRequest: DescribeDCDBInstancesRequest,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
-    ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
+    DestroyHourDCDBInstanceRequest: DestroyHourDCDBInstanceRequest,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     DeleteAccountResponse: DeleteAccountResponse,

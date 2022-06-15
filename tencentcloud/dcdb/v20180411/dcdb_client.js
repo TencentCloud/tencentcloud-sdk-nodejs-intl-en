@@ -25,6 +25,7 @@ const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const ActiveHourDCDBInstanceResponse = models.ActiveHourDCDBInstanceResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const CancelDcnJobResponse = models.CancelDcnJobResponse;
 const DescribeFileDownloadUrlRequest = models.DescribeFileDownloadUrlRequest;
 const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
@@ -43,11 +44,13 @@ const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse
 const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
 const DatabaseView = models.DatabaseView;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
+const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const CreateHourDCDBInstanceRequest = models.CreateHourDCDBInstanceRequest;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CloneAccountRequest = models.CloneAccountRequest;
 const ParamModifyResult = models.ParamModifyResult;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DatabaseFunction = models.DatabaseFunction;
@@ -55,6 +58,7 @@ const ParamConstraint = models.ParamConstraint;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const DatabaseTable = models.DatabaseTable;
+const Deal = models.Deal;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
 const SwitchDBInstanceHARequest = models.SwitchDBInstanceHARequest;
@@ -83,13 +87,14 @@ const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const CancelDcnJobRequest = models.CancelDcnJobRequest;
 const IsolateHourDCDBInstanceResponse = models.IsolateHourDCDBInstanceResponse;
 const ShardInfo = models.ShardInfo;
-const DestroyHourDCDBInstanceRequest = models.DestroyHourDCDBInstanceRequest;
+const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DcnDetailItem = models.DcnDetailItem;
 const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const SlowLogData = models.SlowLogData;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const InitDCDBInstancesRequest = models.InitDCDBInstancesRequest;
@@ -112,7 +117,7 @@ const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
-const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const DestroyHourDCDBInstanceRequest = models.DestroyHourDCDBInstanceRequest;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const DeleteAccountResponse = models.DeleteAccountResponse;
@@ -265,15 +270,14 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to grant permissions to a TencentDB account.
-Note: accounts with the same username but different hosts are different accounts.
-     * @param {GrantAccountPrivilegesRequest} req
-     * @param {function(string, GrantAccountPrivilegesResponse):void} cb
+     * This API is used to query TDSQL order information. You can pass in an order ID to query the TDSQL instance associated with the order and the corresponding task process ID.
+     * @param {DescribeOrdersRequest} req
+     * @param {function(string, DescribeOrdersResponse):void} cb
      * @public
      */
-    GrantAccountPrivileges(req, cb) {
-        let resp = new GrantAccountPrivilegesResponse();
-        this.request("GrantAccountPrivileges", req, resp, cb);
+    DescribeOrders(req, cb) {
+        let resp = new DescribeOrdersResponse();
+        this.request("DescribeOrders", req, resp, cb);
     }
 
     /**
@@ -442,6 +446,18 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to grant permissions to a TencentDB account.
+Note: accounts with the same username but different hosts are different accounts.
+     * @param {GrantAccountPrivilegesRequest} req
+     * @param {function(string, GrantAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    GrantAccountPrivileges(req, cb) {
+        let resp = new GrantAccountPrivilegesResponse();
+        this.request("GrantAccountPrivileges", req, resp, cb);
+    }
+
+    /**
      * This API is used to copy the permissions of a TencentDB account.
 Note: Accounts with the same username but different hosts are different accounts. Permissions can only be copied between accounts with the same `Readonly` attribute.
      * @param {CopyAccountPrivilegesRequest} req
@@ -484,6 +500,17 @@ Note: Accounts with the same username but different hosts are different accounts
     DestroyHourDCDBInstance(req, cb) {
         let resp = new DestroyHourDCDBInstanceResponse();
         this.request("DestroyHourDCDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the security group information of an instance.
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
     }
 
     /**

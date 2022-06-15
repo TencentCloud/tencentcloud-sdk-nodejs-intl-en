@@ -70,6 +70,12 @@ class AddUsersForUserManagerRequest extends  AbstractModel {
         super();
 
         /**
+         * Cluster string ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
          * User information list
          * @type {Array.<UserInfoForUserManager> || null}
          */
@@ -84,6 +90,7 @@ class AddUsersForUserManagerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
         if (params.UserManagerUserList) {
             this.UserManagerUserList = new Array();
@@ -2031,6 +2038,71 @@ class UpdateInstanceSettings extends  AbstractModel {
 }
 
 /**
+ * Brief user information in user management
+ * @class
+ */
+class UserManagerUserBriefInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Username
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * The group to which the user belongs
+         * @type {string || null}
+         */
+        this.UserGroup = null;
+
+        /**
+         * `Manager` represents an admin, and `NormalUser` represents a general user.
+         * @type {string || null}
+         */
+        this.UserType = null;
+
+        /**
+         * Account creation time
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Whether the corresponding Keytab file of the user is available for download. This parameter applies only to a Kerberos-enabled cluster.
+         * @type {boolean || null}
+         */
+        this.SupportDownLoadKeyTab = null;
+
+        /**
+         * Download link of the Keytab file
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.DownLoadKeyTabUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.UserGroup = 'UserGroup' in params ? params.UserGroup : null;
+        this.UserType = 'UserType' in params ? params.UserType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.SupportDownLoadKeyTab = 'SupportDownLoadKeyTab' in params ? params.SupportDownLoadKeyTab : null;
+        this.DownLoadKeyTabUrl = 'DownLoadKeyTabUrl' in params ? params.DownLoadKeyTabUrl : null;
+
+    }
+}
+
+/**
  * Tag
  * @class
  */
@@ -2096,6 +2168,35 @@ class Placement extends  AbstractModel {
         }
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
+ * User management list filter
+ * @class
+ */
+class UserManagerFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Username
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserName = 'UserName' in params ? params.UserName : null;
 
     }
 }
@@ -2229,6 +2330,30 @@ class DescribeUsersForUserManagerRequest extends  AbstractModel {
         super();
 
         /**
+         * Cluster instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.PageNo = null;
+
+        /**
+         * Page size
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * User list query filter
+         * @type {UserManagerFilter || null}
+         */
+        this.UserManagerFilter = null;
+
+        /**
          * Whether the Keytab file information is required. This field is only valid for clusters with Kerberos enabled and defaults to `false`.
          * @type {boolean || null}
          */
@@ -2242,6 +2367,15 @@ class DescribeUsersForUserManagerRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PageNo = 'PageNo' in params ? params.PageNo : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+        if (params.UserManagerFilter) {
+            let obj = new UserManagerFilter();
+            obj.deserialize(params.UserManagerFilter)
+            this.UserManagerFilter = obj;
         }
         this.NeedKeytabInfo = 'NeedKeytabInfo' in params ? params.NeedKeytabInfo : null;
 
@@ -2945,6 +3079,20 @@ class AddUsersForUserManagerResponse extends  AbstractModel {
         super();
 
         /**
+         * The user list that is successfully added
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SuccessUserList = null;
+
+        /**
+         * The user list that is not successfully added
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.FailedUserList = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2959,6 +3107,8 @@ class AddUsersForUserManagerResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SuccessUserList = 'SuccessUserList' in params ? params.SuccessUserList : null;
+        this.FailedUserList = 'FailedUserList' in params ? params.FailedUserList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3686,6 +3836,19 @@ class DescribeUsersForUserManagerResponse extends  AbstractModel {
         super();
 
         /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalCnt = null;
+
+        /**
+         * User information list
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<UserManagerUserBriefInfo> || null}
+         */
+        this.UserManagerUserList = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3699,6 +3862,16 @@ class DescribeUsersForUserManagerResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
+
+        if (params.UserManagerUserList) {
+            this.UserManagerUserList = new Array();
+            for (let z in params.UserManagerUserList) {
+                let obj = new UserManagerUserBriefInfo();
+                obj.deserialize(params.UserManagerUserList[z]);
+                this.UserManagerUserList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4432,8 +4605,10 @@ module.exports = {
     DescribeResourceScheduleRequest: DescribeResourceScheduleRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     UpdateInstanceSettings: UpdateInstanceSettings,
+    UserManagerUserBriefInfo: UserManagerUserBriefInfo,
     Tag: Tag,
     Placement: Placement,
+    UserManagerFilter: UserManagerFilter,
     DescribeInstancesRequest: DescribeInstancesRequest,
     CustomMetaInfo: CustomMetaInfo,
     DescribeUsersForUserManagerRequest: DescribeUsersForUserManagerRequest,

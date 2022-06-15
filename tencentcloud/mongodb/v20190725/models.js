@@ -1502,6 +1502,12 @@ class SpecificationInfo extends  AbstractModel {
          */
         this.SpecItems = null;
 
+        /**
+         * Whether cross-AZ deployment is supported. Valid values: `1` (yes), `0` (no).
+         * @type {number || null}
+         */
+        this.SupportMultiAZ = null;
+
     }
 
     /**
@@ -1522,6 +1528,7 @@ class SpecificationInfo extends  AbstractModel {
                 this.SpecItems.push(obj);
             }
         }
+        this.SupportMultiAZ = 'SupportMultiAZ' in params ? params.SupportMultiAZ : null;
 
     }
 }

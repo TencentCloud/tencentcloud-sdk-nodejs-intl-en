@@ -42,8 +42,10 @@ const OutterResource = models.OutterResource;
 const DescribeResourceScheduleRequest = models.DescribeResourceScheduleRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const UpdateInstanceSettings = models.UpdateInstanceSettings;
+const UserManagerUserBriefInfo = models.UserManagerUserBriefInfo;
 const Tag = models.Tag;
 const Placement = models.Placement;
+const UserManagerFilter = models.UserManagerFilter;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const CustomMetaInfo = models.CustomMetaInfo;
 const DescribeUsersForUserManagerRequest = models.DescribeUsersForUserManagerRequest;
@@ -116,7 +118,8 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to export users in batches.
+     * This API is available for clusters with OpenLDAP components configured.
+This API is used to export users in batches. For a Kerberos cluster, set `NeedKeytabInfo` to `true` to obtain the download link of the Keytab file. If `SupportDownLoadKeyTab` is `true`, but `DownLoadKeyTabUrl` is null, the Keytab file is not ready yet (being generated) in the backend.
      * @param {DescribeUsersForUserManagerRequest} req
      * @param {function(string, DescribeUsersForUserManagerResponse):void} cb
      * @public
@@ -182,7 +185,8 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add user lists (user management).
+     * This API is available for clusters with OpenLDAP components configured.
+This API is used to add user lists (user management).
      * @param {AddUsersForUserManagerRequest} req
      * @param {function(string, AddUsersForUserManagerResponse):void} cb
      * @public

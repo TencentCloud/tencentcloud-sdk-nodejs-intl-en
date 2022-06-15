@@ -67,90 +67,6 @@ class ListConnectionsResponse extends  AbstractModel {
 }
 
 /**
- * GetEventBus response structure.
- * @class
- */
-class GetEventBusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Update time
-         * @type {string || null}
-         */
-        this.ModTime = null;
-
-        /**
-         * Event bus description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.ClsTopicId = null;
-
-        /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.AddTime = null;
-
-        /**
-         * Logset ID
-         * @type {string || null}
-         */
-        this.ClsLogsetId = null;
-
-        /**
-         * Event bus name
-         * @type {string || null}
-         */
-        this.EventBusName = null;
-
-        /**
-         * Event bus ID
-         * @type {string || null}
-         */
-        this.EventBusId = null;
-
-        /**
-         * (Disused) Event bus type
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ModTime = 'ModTime' in params ? params.ModTime : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.ClsTopicId = 'ClsTopicId' in params ? params.ClsTopicId : null;
-        this.AddTime = 'AddTime' in params ? params.AddTime : null;
-        this.ClsLogsetId = 'ClsLogsetId' in params ? params.ClsLogsetId : null;
-        this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
-        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Description of CKafka delivery target retry policy
  * @class
  */
@@ -277,41 +193,6 @@ class ListConnectionsRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Order = 'Order' in params ? params.Order : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
- * DeleteRule request structure.
- * @class
- */
-class DeleteRuleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Event bus ID
-         * @type {string || null}
-         */
-        this.EventBusId = null;
-
-        /**
-         * Event rule ID
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -595,12 +476,24 @@ class CreateTargetResponse extends  AbstractModel {
 }
 
 /**
- * CheckRule request structure.
+ * DeleteRule request structure.
  * @class
  */
-class CheckRuleRequest extends  AbstractModel {
+class DeleteRuleRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Event bus ID
+         * @type {string || null}
+         */
+        this.EventBusId = null;
+
+        /**
+         * Event rule ID
+         * @type {string || null}
+         */
+        this.RuleId = null;
 
     }
 
@@ -611,6 +504,8 @@ class CheckRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -707,24 +602,42 @@ class GetRuleResponse extends  AbstractModel {
 }
 
 /**
- * CreateConnection response structure.
+ * UpdateRule request structure.
  * @class
  */
-class CreateConnectionResponse extends  AbstractModel {
+class UpdateRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Connector ID
+         * Event rule ID
          * @type {string || null}
          */
-        this.ConnectionId = null;
+        this.RuleId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Event bus ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EventBusId = null;
+
+        /**
+         * Switch.
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Rule description, which can contain up to 200 characters of any type.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Event rule name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+         * @type {string || null}
+         */
+        this.RuleName = null;
 
     }
 
@@ -735,8 +648,11 @@ class CreateConnectionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConnectionId = 'ConnectionId' in params ? params.ConnectionId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
 
     }
 }
@@ -1180,139 +1096,6 @@ class UpdateTransformationResponse extends  AbstractModel {
 }
 
 /**
- * UpdateEventBus request structure.
- * @class
- */
-class UpdateEventBusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Event bus ID
-         * @type {string || null}
-         */
-        this.EventBusId = null;
-
-        /**
-         * Event bus description, which can contain up to 200 characters of any type
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
-         * @type {string || null}
-         */
-        this.EventBusName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
-
-    }
-}
-
-/**
- * CreateEventBus request structure.
- * @class
- */
-class CreateEventBusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
-         * @type {string || null}
-         */
-        this.EventBusName = null;
-
-        /**
-         * Event bus description, which can contain up to 200 characters of any type
-         * @type {string || null}
-         */
-        this.Description = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-    }
-}
-
-/**
- * UpdateRule request structure.
- * @class
- */
-class UpdateRuleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Event rule ID
-         * @type {string || null}
-         */
-        this.RuleId = null;
-
-        /**
-         * Event bus ID
-         * @type {string || null}
-         */
-        this.EventBusId = null;
-
-        /**
-         * Switch.
-         * @type {boolean || null}
-         */
-        this.Enable = null;
-
-        /**
-         * Rule description, which can contain up to 200 characters of any type.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Event rule name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
-         * @type {string || null}
-         */
-        this.RuleName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-
-    }
-}
-
-/**
  * CreateRule request structure.
  * @class
  */
@@ -1661,34 +1444,6 @@ class CreateTransformationRequest extends  AbstractModel {
 }
 
 /**
- * Describes how to filter data
- * @class
- */
-class EtlFilter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The syntax is the same as that of `Rule`
-         * @type {string || null}
-         */
-        this.Filter = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Filter = 'Filter' in params ? params.Filter : null;
-
-    }
-}
-
-/**
  * CheckTransformation response structure.
  * @class
  */
@@ -1824,18 +1579,18 @@ class ListEventBusesResponse extends  AbstractModel {
 }
 
 /**
- * CheckRule response structure.
+ * Describes how to filter data
  * @class
  */
-class CheckRuleResponse extends  AbstractModel {
+class EtlFilter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The syntax is the same as that of `Rule`
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Filter = null;
 
     }
 
@@ -1846,7 +1601,7 @@ class CheckRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Filter = 'Filter' in params ? params.Filter : null;
 
     }
 }
@@ -1964,74 +1719,6 @@ class UpdateTargetResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateConnection request structure.
- * @class
- */
-class CreateConnectionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Connector description
-         * @type {ConnectionDescription || null}
-         */
-        this.ConnectionDescription = null;
-
-        /**
-         * Event bus ID
-         * @type {string || null}
-         */
-        this.EventBusId = null;
-
-        /**
-         * Connector name
-         * @type {string || null}
-         */
-        this.ConnectionName = null;
-
-        /**
-         * Description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Switch
-         * @type {boolean || null}
-         */
-        this.Enable = null;
-
-        /**
-         * Type
-         * @type {string || null}
-         */
-        this.Type = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ConnectionDescription) {
-            let obj = new ConnectionDescription();
-            obj.deserialize(params.ConnectionDescription)
-            this.ConnectionDescription = obj;
-        }
-        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
-        this.ConnectionName = 'ConnectionName' in params ? params.ConnectionName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
-        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -2238,48 +1925,12 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * Connection information
+ * DeleteTarget request structure.
  * @class
  */
-class Connection extends  AbstractModel {
+class DeleteTargetRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Status
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Update time
-         * @type {string || null}
-         */
-        this.ModTime = null;
-
-        /**
-         * Switch
-         * @type {boolean || null}
-         */
-        this.Enable = null;
-
-        /**
-         * Description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Creation time
-         * @type {string || null}
-         */
-        this.AddTime = null;
-
-        /**
-         * Connector ID
-         * @type {string || null}
-         */
-        this.ConnectionId = null;
 
         /**
          * Event bus ID
@@ -2288,22 +1939,16 @@ class Connection extends  AbstractModel {
         this.EventBusId = null;
 
         /**
-         * Connector description
-         * @type {ConnectionDescription || null}
-         */
-        this.ConnectionDescription = null;
-
-        /**
-         * Connector name
+         * Delivery target ID
          * @type {string || null}
          */
-        this.ConnectionName = null;
+        this.TargetId = null;
 
         /**
-         * Type
+         * Event rule ID
          * @type {string || null}
          */
-        this.Type = null;
+        this.RuleId = null;
 
     }
 
@@ -2314,21 +1959,9 @@ class Connection extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ModTime = 'ModTime' in params ? params.ModTime : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.AddTime = 'AddTime' in params ? params.AddTime : null;
-        this.ConnectionId = 'ConnectionId' in params ? params.ConnectionId : null;
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
-
-        if (params.ConnectionDescription) {
-            let obj = new ConnectionDescription();
-            obj.deserialize(params.ConnectionDescription)
-            this.ConnectionDescription = obj;
-        }
-        this.ConnectionName = 'ConnectionName' in params ? params.ConnectionName : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.TargetId = 'TargetId' in params ? params.TargetId : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -2399,41 +2032,6 @@ class GetTransformationRequest extends  AbstractModel {
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.TransformationId = 'TransformationId' in params ? params.TransformationId : null;
-
-    }
-}
-
-/**
- * CreateEventBus response structure.
- * @class
- */
-class CreateEventBusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Event bus ID
-         * @type {string || null}
-         */
-        this.EventBusId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2688,34 +2286,6 @@ class DeleteTransformationRequest extends  AbstractModel {
 }
 
 /**
- * GetEventBus request structure.
- * @class
- */
-class GetEventBusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Event bus ID
-         * @type {string || null}
-         */
-        this.EventBusId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
-
-    }
-}
-
-/**
  * UpdateConnection request structure.
  * @class
  */
@@ -2772,12 +2342,48 @@ class UpdateConnectionRequest extends  AbstractModel {
 }
 
 /**
- * DeleteTarget request structure.
+ * Connection information
  * @class
  */
-class DeleteTargetRequest extends  AbstractModel {
+class Connection extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Status
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Update time
+         * @type {string || null}
+         */
+        this.ModTime = null;
+
+        /**
+         * Switch
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * Connector ID
+         * @type {string || null}
+         */
+        this.ConnectionId = null;
 
         /**
          * Event bus ID
@@ -2786,16 +2392,22 @@ class DeleteTargetRequest extends  AbstractModel {
         this.EventBusId = null;
 
         /**
-         * Delivery target ID
-         * @type {string || null}
+         * Connector description
+         * @type {ConnectionDescription || null}
          */
-        this.TargetId = null;
+        this.ConnectionDescription = null;
 
         /**
-         * Event rule ID
+         * Connector name
          * @type {string || null}
          */
-        this.RuleId = null;
+        this.ConnectionName = null;
+
+        /**
+         * Type
+         * @type {string || null}
+         */
+        this.Type = null;
 
     }
 
@@ -2806,9 +2418,21 @@ class DeleteTargetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ModTime = 'ModTime' in params ? params.ModTime : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.ConnectionId = 'ConnectionId' in params ? params.ConnectionId : null;
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
-        this.TargetId = 'TargetId' in params ? params.TargetId : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+        if (params.ConnectionDescription) {
+            let obj = new ConnectionDescription();
+            obj.deserialize(params.ConnectionDescription)
+            this.ConnectionDescription = obj;
+        }
+        this.ConnectionName = 'ConnectionName' in params ? params.ConnectionName : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -3060,34 +2684,6 @@ class UpdateTargetRequest extends  AbstractModel {
 }
 
 /**
- * UpdateEventBus response structure.
- * @class
- */
-class UpdateEventBusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * `APIGWParams` description
  * @class
  */
@@ -3124,11 +2720,9 @@ class APIGWParams extends  AbstractModel {
 
 module.exports = {
     ListConnectionsResponse: ListConnectionsResponse,
-    GetEventBusResponse: GetEventBusResponse,
     RetryPolicy: RetryPolicy,
     CkafkaTargetParams: CkafkaTargetParams,
     ListConnectionsRequest: ListConnectionsRequest,
-    DeleteRuleRequest: DeleteRuleRequest,
     UpdateRuleResponse: UpdateRuleResponse,
     CreateTargetRequest: CreateTargetRequest,
     DeleteTargetResponse: DeleteTargetResponse,
@@ -3136,9 +2730,9 @@ module.exports = {
     TargetBrief: TargetBrief,
     ListRulesResponse: ListRulesResponse,
     CreateTargetResponse: CreateTargetResponse,
-    CheckRuleRequest: CheckRuleRequest,
+    DeleteRuleRequest: DeleteRuleRequest,
     GetRuleResponse: GetRuleResponse,
-    CreateConnectionResponse: CreateConnectionResponse,
+    UpdateRuleRequest: UpdateRuleRequest,
     EventBus: EventBus,
     ListTargetsRequest: ListTargetsRequest,
     Transformation: Transformation,
@@ -3147,9 +2741,6 @@ module.exports = {
     SCFParams: SCFParams,
     DeadLetterConfig: DeadLetterConfig,
     UpdateTransformationResponse: UpdateTransformationResponse,
-    UpdateEventBusRequest: UpdateEventBusRequest,
-    CreateEventBusRequest: CreateEventBusRequest,
-    UpdateRuleRequest: UpdateRuleRequest,
     CreateRuleRequest: CreateRuleRequest,
     TextParams: TextParams,
     DeleteConnectionResponse: DeleteConnectionResponse,
@@ -3157,40 +2748,35 @@ module.exports = {
     GetTransformationResponse: GetTransformationResponse,
     Rule: Rule,
     CreateTransformationRequest: CreateTransformationRequest,
-    EtlFilter: EtlFilter,
     CheckTransformationResponse: CheckTransformationResponse,
     ListTargetsResponse: ListTargetsResponse,
     ListEventBusesResponse: ListEventBusesResponse,
-    CheckRuleResponse: CheckRuleResponse,
+    EtlFilter: EtlFilter,
     ConnectionDescription: ConnectionDescription,
     CkafkaDeliveryParams: CkafkaDeliveryParams,
     UpdateTargetResponse: UpdateTargetResponse,
-    CreateConnectionRequest: CreateConnectionRequest,
     DeleteEventBusRequest: DeleteEventBusRequest,
     ListEventBusesRequest: ListEventBusesRequest,
     CreateTransformationResponse: CreateTransformationResponse,
     Transform: Transform,
     Filter: Filter,
-    Connection: Connection,
+    DeleteTargetRequest: DeleteTargetRequest,
     DeleteEventBusResponse: DeleteEventBusResponse,
     GetTransformationRequest: GetTransformationRequest,
-    CreateEventBusResponse: CreateEventBusResponse,
     DeleteConnectionRequest: DeleteConnectionRequest,
     UpdateTransformationRequest: UpdateTransformationRequest,
     CreateRuleResponse: CreateRuleResponse,
     TargetDescription: TargetDescription,
     DeleteTransformationResponse: DeleteTransformationResponse,
     DeleteTransformationRequest: DeleteTransformationRequest,
-    GetEventBusRequest: GetEventBusRequest,
     UpdateConnectionRequest: UpdateConnectionRequest,
-    DeleteTargetRequest: DeleteTargetRequest,
+    Connection: Connection,
     CkafkaParams: CkafkaParams,
     OutputStructParam: OutputStructParam,
     CheckTransformationRequest: CheckTransformationRequest,
     UpdateConnectionResponse: UpdateConnectionResponse,
     GetRuleRequest: GetRuleRequest,
     UpdateTargetRequest: UpdateTargetRequest,
-    UpdateEventBusResponse: UpdateEventBusResponse,
     APIGWParams: APIGWParams,
 
 }

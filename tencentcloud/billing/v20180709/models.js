@@ -375,6 +375,38 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RegionId = null;
 
+        /**
+         * The special instance (resource pack, reserved instance, savings plan, or spot instance) that is applied to deduction. Valid values:
+
+ri=Standard RI
+
+svp=Savings Plan
+
+si=Spot Instances
+
+rp=Resource Pack
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * The amount deducted by a reserved instance based on the original component cost.
+         * @type {string || null}
+         */
+        this.OriginalCostWithRI = null;
+
+        /**
+         * The savings plan deduction amount.
+         * @type {string || null}
+         */
+        this.SPDeduction = null;
+
+        /**
+         * The amount deducted by a savings plan based on the original component cost.
+         * @type {string || null}
+         */
+        this.OriginalCostWithSP = null;
+
     }
 
     /**
@@ -425,6 +457,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.OriginalCostWithRI = 'OriginalCostWithRI' in params ? params.OriginalCostWithRI : null;
+        this.SPDeduction = 'SPDeduction' in params ? params.SPDeduction : null;
+        this.OriginalCostWithSP = 'OriginalCostWithSP' in params ? params.OriginalCostWithSP : null;
 
     }
 }
@@ -1234,6 +1270,55 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ContractPrice = null;
 
+        /**
+         * The special instance (resource pack, reserved instance, savings plan, or spot instance) that is applied to deduction. Valid values:
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * The usage duration deducted by a reserved instance. The unit of measurement for deduction is the same as that for usage duration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.RiTimeSpan = null;
+
+        /**
+         * The amount deducted by a reserved instance based on the original component cost.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalCostWithRI = null;
+
+        /**
+         * The discount multiplier that applies to the component based on the remaining commitment of the savings plan.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SPDeductionRate = null;
+
+        /**
+         * The savings plan deduction amount.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SPDeduction = null;
+
+        /**
+         * The amount deducted by a savings plan based on the original component cost.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalCostWithSP = null;
+
+        /**
+         * The blended discount multiplier that combines the official website discount, reserved instance discount, and savings plan discount. If no reserved instance and savings plan discounts are available, the blended discount multiplier equals the discount multiplier.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.BlendedDiscount = null;
+
     }
 
     /**
@@ -1262,6 +1347,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ItemCode = 'ItemCode' in params ? params.ItemCode : null;
         this.ComponentCode = 'ComponentCode' in params ? params.ComponentCode : null;
         this.ContractPrice = 'ContractPrice' in params ? params.ContractPrice : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.RiTimeSpan = 'RiTimeSpan' in params ? params.RiTimeSpan : null;
+        this.OriginalCostWithRI = 'OriginalCostWithRI' in params ? params.OriginalCostWithRI : null;
+        this.SPDeductionRate = 'SPDeductionRate' in params ? params.SPDeductionRate : null;
+        this.SPDeduction = 'SPDeduction' in params ? params.SPDeduction : null;
+        this.OriginalCostWithSP = 'OriginalCostWithSP' in params ? params.OriginalCostWithSP : null;
+        this.BlendedDiscount = 'BlendedDiscount' in params ? params.BlendedDiscount : null;
 
     }
 }

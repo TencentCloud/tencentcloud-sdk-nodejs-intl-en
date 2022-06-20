@@ -6161,6 +6161,15 @@ class AssignIpv6AddressesRequest extends  AbstractModel {
          */
         this.Ipv6AddressCount = null;
 
+        /**
+         * Ipv6 ISP. Valid values:
+`CTCC`: China Telecom
+`CUCC`: China Unicom
+`CMCC`: China Mobile
+         * @type {string || null}
+         */
+        this.Ipv6ISP = null;
+
     }
 
     /**
@@ -6182,6 +6191,7 @@ class AssignIpv6AddressesRequest extends  AbstractModel {
             }
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
+        this.Ipv6ISP = 'Ipv6ISP' in params ? params.Ipv6ISP : null;
 
     }
 }

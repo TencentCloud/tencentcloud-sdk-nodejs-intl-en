@@ -476,15 +476,15 @@ class WorkflowInfo extends  AbstractModel {
         this.Trigger = null;
 
         /**
-         * Target storage of a video processing output file.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The location to save the media processing output file.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Parameter of a video processing task.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The media processing parameters to use.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {MediaProcessTaskInput || null}
          */
         this.MediaProcessTask = null;
@@ -523,7 +523,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TaskPriority = null;
 
         /**
-         * Target directory of a video processing output file, such as `/movie/201907/`.
+         * The directory to save the media processing output file, such as `/movie/201907/`.
          * @type {string || null}
          */
         this.OutputDir = null;
@@ -801,7 +801,7 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -1012,7 +1012,7 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -1300,7 +1300,7 @@ class AiAnalysisTaskCoverResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -1490,7 +1490,7 @@ class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
 }
 
 /**
- * Information of a video processing input object.
+ * The information of the object to process.
  * @class
  */
 class MediaInputInfo extends  AbstractModel {
@@ -1504,14 +1504,14 @@ class MediaInputInfo extends  AbstractModel {
         this.Type = null;
 
         /**
-         * This parameter is required and valid when `Type` is `COS`, indicating the information of a COS object for video processing.
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
          * @type {CosInputInfo || null}
          */
         this.CosInputInfo = null;
 
         /**
-         * This parameter is required and valid when `Type` is `URL`, indicating the information of a URL object for video processing.
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {UrlInputInfo || null}
          */
         this.UrlInputInfo = null;
@@ -1563,19 +1563,19 @@ class CreateWorkflowRequest extends  AbstractModel {
         this.Trigger = null;
 
         /**
-         * Storage location of a video processing output file. If this parameter is left empty, the storage location in `Trigger` will be inherited.
+         * The location to save the output file of media processing. If this parameter is left empty, the storage location in `Trigger` will be inherited.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Target directory of a video processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be outputted to the same directory where the source file is located.
+         * The directory to save the media processing output file, such as `/movie/201907/`. If this parameter is left empty, the output file will be saved to the same directory where the source file is located.
          * @type {string || null}
          */
         this.OutputDir = null;
 
         /**
-         * Parameter of a video processing task.
+         * The media processing parameters to use.
          * @type {MediaProcessTaskInput || null}
          */
         this.MediaProcessTask = null;
@@ -1791,7 +1791,7 @@ class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -2248,7 +2248,7 @@ class DeleteAIRecognitionTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Blur parameter type of video processing task
+ * The mosaic effect parameters to use in a media processing task.
  * @class
  */
 class MosaicInput extends  AbstractModel {
@@ -3038,7 +3038,7 @@ class AiRecognitionTaskFaceResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -3564,7 +3564,7 @@ class MediaAiAnalysisCoverItem extends  AbstractModel {
 }
 
 /**
- * Information of the COS object for video processing.
+ * The information of the COS object to process.
  * @class
  */
 class CosInputInfo extends  AbstractModel {
@@ -3572,19 +3572,19 @@ class CosInputInfo extends  AbstractModel {
         super();
 
         /**
-         * Name of the COS bucket where a video processing object file is located, such as `TopRankVideo-125xxx88`.
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * Region of the COS bucket where a video processing object file is located, such as `ap-chongqing`.
+         * The region of the COS bucket, such as `ap-chongqing`.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * Path to an input object file for video processing, such as `/movie/201907/WildAnimal.mov`.
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
          * @type {string || null}
          */
         this.Object = null;
@@ -4141,7 +4141,7 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -4742,7 +4742,7 @@ class AiRecognitionTaskAsrFullTextResultInput extends  AbstractModel {
 }
 
 /**
- * Type of a video processing task
+ * The type of media processing task.
  * @class
  */
 class MediaProcessTaskInput extends  AbstractModel {
@@ -4853,7 +4853,7 @@ class MediaProcessTaskInput extends  AbstractModel {
 }
 
 /**
- * Information of a COS output object generated from video processing.
+ * The information of the output COS object after media processing.
  * @class
  */
 class CosOutputStorage extends  AbstractModel {
@@ -4861,13 +4861,13 @@ class CosOutputStorage extends  AbstractModel {
         super();
 
         /**
-         * Name of the target bucket of a video processing output file, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the parameter of the upper folder will be inherited.
+         * The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
          * @type {string || null}
          */
         this.Bucket = null;
 
         /**
-         * Region of the target bucket of a video processing output file, such as `ap-chongqing`. If this parameter is left empty, the parameter of the upper folder will be inherited.
+         * The region of the output bucket, such as `ap-chongqing`. If this parameter is left empty, the value of the upper layer will be inherited.
          * @type {string || null}
          */
         this.Region = null;
@@ -5291,7 +5291,7 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -5368,7 +5368,7 @@ class AiRecognitionTaskOcrWordsResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -5745,13 +5745,13 @@ class EditMediaRequest extends  AbstractModel {
         this.FileInfos = null;
 
         /**
-         * Target storage of video processing output file.
+         * The storage location of the media processing output file.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Target path of video processing output file.
+         * The path to save the media processing output file.
          * @type {string || null}
          */
         this.OutputObjectPath = null;
@@ -5845,7 +5845,7 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -6036,7 +6036,7 @@ and will be deleted after `PicUrlExpireTime`).
 }
 
 /**
- * Information of a video processing URL object.
+ * The URL of the object to process.
  * @class
  */
 class UrlInputInfo extends  AbstractModel {
@@ -6274,7 +6274,7 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of an intelligent content recognition template
+         * The unique ID of the content moderation template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -6763,7 +6763,7 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -6904,7 +6904,7 @@ class DescribeWatermarkTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * Information of a video processing output object.
+ * The information of the media processing output object.
  * @class
  */
 class TaskOutputStorage extends  AbstractModel {
@@ -6912,14 +6912,14 @@ class TaskOutputStorage extends  AbstractModel {
         super();
 
         /**
-         * Storage location type of a video processing output object. Only COS is supported currently.
+         * The type of storage location for the media processing output object. Only COS is supported currently.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * This parameter is valid and required when `Type` is COS, indicating the location of an output COS object after video processing.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The location to save the output object in COS. This parameter is valid and required when `Type` is COS.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {CosOutputStorage || null}
          */
         this.CosOutputStorage = null;
@@ -7345,7 +7345,7 @@ class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -7419,7 +7419,7 @@ class AiAnalysisTaskTagResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -7522,25 +7522,25 @@ class ProcessMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * Input information of a file for video processing.
+         * The information of the file to process.
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
 
         /**
-         * Target bucket of a video processing output file. If this parameter is left empty, the storage location in `InputInfo` will be inherited.
+         * The storage location of the media processing output file. If this parameter is left empty, the storage location in `InputInfo` will be inherited.
          * @type {TaskOutputStorage || null}
          */
         this.OutputStorage = null;
 
         /**
-         * Target directory of a video processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be outputted to the same directory as that in `InputInfo`.
+         * The directory to save the media processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be saved to the directory in `InputInfo`.
          * @type {string || null}
          */
         this.OutputDir = null;
 
         /**
-         * Parameter of a video processing task.
+         * The media processing parameters to use.
          * @type {MediaProcessTaskInput || null}
          */
         this.MediaProcessTask = null;
@@ -7661,7 +7661,7 @@ class AiRecognitionTaskOcrFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -7735,7 +7735,7 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -8022,7 +8022,7 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -9351,7 +9351,7 @@ class DeleteContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of an intelligent content recognition template
+         * The unique ID of the content moderation template.
          * @type {number || null}
          */
         this.Definition = null;
@@ -10293,7 +10293,7 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -10654,19 +10654,19 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of an intelligent content recognition template
+         * The unique ID of the content moderation template.
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Name of an intelligent content recognition template. Length limit: 64 characters
+         * The name of the content moderation template. Length limit: 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of an intelligent content recognition template. Length limit: 256 characters
+         * The template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -10699,7 +10699,7 @@ Note: this parameter is not supported yet.
         this.ProhibitedConfigure = null;
 
         /**
-         * Control parameter for custom intelligent content recognition tasks
+         * Custom content moderation parameters.
          * @type {UserDefineConfigureInfoForUpdate || null}
          */
         this.UserDefineConfigure = null;
@@ -11538,7 +11538,7 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see the list of [Error Codes](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -11857,7 +11857,7 @@ class AiReviewTaskPornResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -12871,7 +12871,7 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -13419,7 +13419,7 @@ class AiAnalysisTaskFrameTagResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -13591,7 +13591,7 @@ class AiRecognitionTaskAsrFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -14082,7 +14082,7 @@ class DeleteWordSamplesResponse extends  AbstractModel {
 }
 
 /**
- * Watermark parameter type of a video processing task
+ * The watermark parameters to use in a media processing task.
  * @class
  */
 class WatermarkInput extends  AbstractModel {
@@ -14650,13 +14650,13 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Name of an intelligent content recognition template. Length limit: 64 characters
+         * The name of the content moderation template. Length limit: 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Description of an intelligent content recognition template. Length limit: 256 characters
+         * The template description. Length limit: 256 characters.
          * @type {string || null}
          */
         this.Comment = null;
@@ -14689,7 +14689,7 @@ Note: this parameter is not supported yet.
         this.ProhibitedConfigure = null;
 
         /**
-         * Control parameter for custom intelligent content recognition tasks
+         * Custom content moderation parameters.
          * @type {UserDefineConfigureInfo || null}
          */
         this.UserDefineConfigure = null;
@@ -14748,7 +14748,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID of intelligent content recognition templates as the filter. Array length limit: 50
+         * The IDs of the content moderation templates to query. Array length limit: 50.
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -14926,28 +14926,28 @@ class TaskNotifyConfig extends  AbstractModel {
         super();
 
         /**
-         * CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
+         * The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
          * @type {string || null}
          */
         this.CmqModel = null;
 
         /**
-         * CMQ region, such as `sh` and `bj`.
+         * The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
          * @type {string || null}
          */
         this.CmqRegion = null;
 
         /**
-         * This parameter is valid when the model is `Queue`, indicating the name of the CMQ queue for receiving event notifications.
-         * @type {string || null}
-         */
-        this.QueueName = null;
-
-        /**
-         * This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
+         * The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
          * @type {string || null}
          */
         this.TopicName = null;
+
+        /**
+         * The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+         * @type {string || null}
+         */
+        this.QueueName = null;
 
         /**
          * Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
@@ -14956,7 +14956,11 @@ class TaskNotifyConfig extends  AbstractModel {
         this.NotifyMode = null;
 
         /**
-         * Notification type, `CMQ` by default. If `URL` is passed in, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
+         * The notification type. Valid values:
+<li>CMQ: This value is no longer used. Please use `TDMQ-CMQ` instead.</li>
+<li>TDMQ-CMQ: Message queue</li>
+<li>URL: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
+Default value: `TDMQ-CMQ`.
          * @type {string || null}
          */
         this.NotifyType = null;
@@ -14978,8 +14982,8 @@ class TaskNotifyConfig extends  AbstractModel {
         }
         this.CmqModel = 'CmqModel' in params ? params.CmqModel : null;
         this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
-        this.QueueName = 'QueueName' in params ? params.QueueName : null;
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.QueueName = 'QueueName' in params ? params.QueueName : null;
         this.NotifyMode = 'NotifyMode' in params ? params.NotifyMode : null;
         this.NotifyType = 'NotifyType' in params ? params.NotifyType : null;
         this.NotifyUrl = 'NotifyUrl' in params ? params.NotifyUrl : null;
@@ -15002,7 +15006,7 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -17304,7 +17308,7 @@ class LiveStreamProcessTask extends  AbstractModel {
         super();
 
         /**
-         * Video processing task ID.
+         * The media processing task ID.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -18565,7 +18569,7 @@ class AiRecognitionTaskAsrWordsResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -18721,7 +18725,7 @@ Default value: black.
 }
 
 /**
- * Information of a video processing task
+ * The information of the media processing task.
  * @class
  */
 class WorkflowTask extends  AbstractModel {
@@ -18729,7 +18733,7 @@ class WorkflowTask extends  AbstractModel {
         super();
 
         /**
-         * Video processing task ID.
+         * The media processing task ID.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -18755,8 +18759,8 @@ class WorkflowTask extends  AbstractModel {
         this.Message = null;
 
         /**
-         * Information of a target file of video processing.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The information of the file processed.
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {MediaInputInfo || null}
          */
         this.InputInfo = null;
@@ -18769,7 +18773,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MetaData = null;
 
         /**
-         * Execution status and result of a video processing task.
+         * The execution status and result of the media processing task.
          * @type {Array.<MediaProcessTaskResult> || null}
          */
         this.MediaProcessResultSet = null;
@@ -18872,7 +18876,7 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -19764,7 +19768,7 @@ class AiAnalysisTaskClassificationResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; otherwise it is failed. For details about the values, see [Error Code List](https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
@@ -19999,6 +20003,75 @@ class AiRecognitionTaskFaceResultItem extends  AbstractModel {
          */
         this.SegmentSet = null;
 
+        /**
+         * The person’s gender.
+<li>Male</li>
+<li>Female</li>
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Gender = null;
+
+        /**
+         * The person’s birth date.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * The person’s job or job title.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Profession = null;
+
+        /**
+         * The college the person graduated from.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SchoolOfGraduation = null;
+
+        /**
+         * The person’s profile.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Abstract = null;
+
+        /**
+         * The person’s place of birth.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.PlaceOfBirth = null;
+
+        /**
+         * Whether the person is a politician or artist.
+<li>Politician</li>
+<li>Artist</li>
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.PersonType = null;
+
+        /**
+         * Sensitivity
+<li>Normal</li>
+<li>Sensitive</li>
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * The screenshot URL.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Url = null;
+
     }
 
     /**
@@ -20020,6 +20093,15 @@ class AiRecognitionTaskFaceResultItem extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Profession = 'Profession' in params ? params.Profession : null;
+        this.SchoolOfGraduation = 'SchoolOfGraduation' in params ? params.SchoolOfGraduation : null;
+        this.Abstract = 'Abstract' in params ? params.Abstract : null;
+        this.PlaceOfBirth = 'PlaceOfBirth' in params ? params.PlaceOfBirth : null;
+        this.PersonType = 'PersonType' in params ? params.PersonType : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }

@@ -6646,7 +6646,7 @@ If this field is not passed in, it indicates that the ForwardProtocol of the cor
         this.ForwardProtocol = null;
 
         /**
-         * The forwarding host. If it’s not specified, the default host is used, that is the host with which the client initiates HTTP requests.
+         * The host to which the acceleration connection forwards. If this parameter is not specified, the default host will be used, i.e., the host with which the client initiates HTTP requests.
          * @type {string || null}
          */
         this.ForwardHost = null;
@@ -10874,16 +10874,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Connection status. Valid values:
-`RUNNING`: running
-`CREATING`: creating
-`DESTROYING`: terminating
-`OPENING`: enabling
-`CLOSING`: disabling
-`CLOSED`: disabled
-`ADJUSTING`: adjusting configuration
-`ISOLATING`: isolating
-`ISOLATED`: isolated
-`CLONING`: copying
+`RUNNING`: Running
+`CREATING`: Creating
+`DESTROYING`: Terminating
+`OPENING`: Enabling
+`CLOSING`: Disabling
+`CLOSED`: Disabled
+`ADJUSTING`: Adjusting configuration
+`ISOLATING`: Isolating
+`ISOLATED`: Isolated
+`CLONING`: Copying
+`RECOVERING`: Maintaining
          * @type {string || null}
          */
         this.Status = null;
@@ -11016,8 +11017,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.IPAddressVersion = null;
 
         /**
-         * Network type. `normal`: general BGP; `cn2`: dedicated BGP; `triple`: Non-BGP (provided by the top 3 ISPs in the Chinese mainland).
-Note: this field may return `null`, indicating that no valid value can be obtained.
+         * Network type. `normal`: general BGP; `cn2`: dedicated BGP; `triple`: Non-BGP (provided by the top 3 ISPs in the Chinese mainland); `secure_eip`: custom security EIP.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.NetworkType = null;

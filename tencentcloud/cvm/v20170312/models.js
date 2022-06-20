@@ -199,7 +199,7 @@ class ResetInstancesTypeResponse extends  AbstractModel {
 }
 
 /**
- * Resource information of a CDH instance
+ * Resource information of the CDH instance
  * @class
  */
 class HostResource extends  AbstractModel {
@@ -219,34 +219,46 @@ class HostResource extends  AbstractModel {
         this.CpuAvailable = null;
 
         /**
-         * Total memory of the CDH instance; unit: GiB
+         * Total memory size of the CDH instance (unit: GiB)
          * @type {number || null}
          */
         this.MemTotal = null;
 
         /**
-         * Available memory of the CDH instance; unit: GiB
+         * Available memory size of the CDH instance (unit: GiB)
          * @type {number || null}
          */
         this.MemAvailable = null;
 
         /**
-         * Total disk size of the CDH instance; unit: GiB
+         * Total disk size of the CDH instance (unit: GiB)
          * @type {number || null}
          */
         this.DiskTotal = null;
 
         /**
-         * Avilable disk size of the CDH instance; unit: GiB
+         * Available disk size of the CDH instance (unit: GiB)
          * @type {number || null}
          */
         this.DiskAvailable = null;
 
         /**
-         * CDH instance disk type.
+         * Disk type of the CDH instance
          * @type {string || null}
          */
         this.DiskType = null;
+
+        /**
+         * Total number of GPU cards in the CDH instance
+         * @type {number || null}
+         */
+        this.GpuTotal = null;
+
+        /**
+         * Number of available GPU cards in the CDH instance
+         * @type {number || null}
+         */
+        this.GpuAvailable = null;
 
     }
 
@@ -264,6 +276,8 @@ class HostResource extends  AbstractModel {
         this.DiskTotal = 'DiskTotal' in params ? params.DiskTotal : null;
         this.DiskAvailable = 'DiskAvailable' in params ? params.DiskAvailable : null;
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.GpuTotal = 'GpuTotal' in params ? params.GpuTotal : null;
+        this.GpuAvailable = 'GpuAvailable' in params ? params.GpuAvailable : null;
 
     }
 }
@@ -2236,7 +2250,7 @@ class RunInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * If you use this API to create instance(s), this parameter will be returned, representing one or more instance `ID`s. Retuning the instance `ID` list does not necessarily mean that the instance(s) were created successfully. To check whether the instance(s) were created successfully, you can call [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and check the states of the instances in `InstancesSet` in the response. If the state of an instance changes from "pending" to "running", it means that the instance has been created successfully.
+         * If you use this API to create instance(s), this parameter will be returned, representing one or more instance IDs. Retuning the instance ID list does not necessarily mean that the instance(s) were created successfully. To check whether the instance(s) were created successfully, you can call [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and check the status of the instances in `InstancesSet` in the response. If the status of an instance changes from "preparing" to "running", it means that the instance has been created successfully.
          * @type {Array.<string> || null}
          */
         this.InstanceIdSet = null;
@@ -2432,10 +2446,24 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         this.SecurityGroups = null;
 
         /**
+         * The role bound with the instance. If it is not specified, it indicates to unbind the current role of the CVM.
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
+        /**
          * Whether the termination protection is enabled. Values: <br><li>`TRUE`: enable instance protection, which means that this instance can not be deleted by an API action.<br><li>`FALSE`: do not enable the instance protection.<br><br>Default Value: `FALSE`.
          * @type {boolean || null}
          */
         this.DisableApiTermination = null;
+
+        /**
+         * The role type, which is used in conjunction with `CamRoleName`. The value is obtained in `RoleType` field, returning by `CAM DescribeRoleList` and `GetRole` APIs. Valid value: `user`, `system` and `service_linked`.
+For example, when `LinkedRoleIn` is contained in `CamRoleName` (such as `TKE_QCSLinkedRoleInPrometheusService`), the returned `RoleType` of `DescribeRoleList` and `GetRoleis` is `service_linked`, and the `CamRoleType` `service_linked`.
+When the value obtained in `RoleType` is `user` (default) or `system`, `CamRoleType` can be left empty.
+         * @type {string || null}
+         */
+        this.CamRoleType = null;
 
     }
 
@@ -2449,7 +2477,9 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
         this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
+        this.CamRoleType = 'CamRoleType' in params ? params.CamRoleType : null;
 
     }
 }
@@ -2539,7 +2569,35 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * Describes the location of an instance, including its availability zone, project, host (for CDH products only), primary host IP, etc.
+ * Describes information related to the Cloud Security service.
+ * @class
+ */
+class RunSecurityServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable [Cloud Security](https://intl.cloud.tencent.com/document/product/296?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * Placement of an instance, including its availability zone, project, host (for CDH products only), master host IP, etc.
  * @class
  */
 class Placement extends  AbstractModel {
@@ -3130,6 +3188,12 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.Tags = null;
 
+        /**
+         * Image license type
+         * @type {string || null}
+         */
+        this.LicenseType = null;
+
     }
 
     /**
@@ -3171,6 +3235,7 @@ Note: This field may return `null`, indicating that no valid value was found.
                 this.Tags.push(obj);
             }
         }
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
 
     }
 }
@@ -4511,6 +4576,12 @@ Note: this field may return null, indicating that no valid value was found.
          */
         this.GPUInfo = null;
 
+        /**
+         * Instance OS license type. Default value: `TencentCloud`
+         * @type {string || null}
+         */
+        this.LicenseType = null;
+
     }
 
     /**
@@ -4601,6 +4672,7 @@ Note: this field may return null, indicating that no valid value was found.
             obj.deserialize(params.GPUInfo)
             this.GPUInfo = obj;
         }
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
 
     }
 }
@@ -4780,6 +4852,12 @@ If the dry run succeeds, the RequestId will be returned.
          */
         this.InstanceChargePrepaid = null;
 
+        /**
+         * Whether the termination protection is enabled. Values: <br><li>`TRUE`: Enable instance protection, which means that this instance can not be deleted by an API action.<br><li>`FALSE`: Do not enable the instance protection.<br><br>Default value: `FALSE`.
+         * @type {boolean || null}
+         */
+        this.DisableApiTermination = null;
+
     }
 
     /**
@@ -4877,6 +4955,7 @@ If the dry run succeeds, the RequestId will be returned.
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
 
     }
 }
@@ -5178,18 +5257,54 @@ class DescribeDisasterRecoverGroupsResponse extends  AbstractModel {
 }
 
 /**
- * Describes information related to the Cloud Security service.
+ * ExportImages request structure.
  * @class
  */
-class RunSecurityServiceEnabled extends  AbstractModel {
+class ExportImagesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable [Cloud Security](https://intl.cloud.tencent.com/document/product/296?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Security <br><li>FALSE: do not enable Cloud Security <br><br>Default value: TRUE.
+         * COS bucket name
+         * @type {string || null}
+         */
+        this.BucketName = null;
+
+        /**
+         * List of image IDs
+         * @type {Array.<string> || null}
+         */
+        this.ImageIds = null;
+
+        /**
+         * Format of the exported image file. Valid values: `RAW`, `QCOW2`, `VHD` and `VMDK`. Default value: `RAW`.
+         * @type {string || null}
+         */
+        this.ExportFormat = null;
+
+        /**
+         * Prefix list of the name of exported files
+         * @type {Array.<string> || null}
+         */
+        this.FileNamePrefixList = null;
+
+        /**
+         * Whether to export only the system disk
          * @type {boolean || null}
          */
-        this.Enabled = null;
+        this.OnlyExportRootDisk = null;
+
+        /**
+         * Check whether the image can be exported
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * Role name (Default: `CVM_QcsRole`). Before exporting the images, make sure the role exists, and it has write permission to COS.
+         * @type {string || null}
+         */
+        this.RoleName = null;
 
     }
 
@@ -5200,7 +5315,13 @@ class RunSecurityServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.ImageIds = 'ImageIds' in params ? params.ImageIds : null;
+        this.ExportFormat = 'ExportFormat' in params ? params.ExportFormat : null;
+        this.FileNamePrefixList = 'FileNamePrefixList' in params ? params.FileNamePrefixList : null;
+        this.OnlyExportRootDisk = 'OnlyExportRootDisk' in params ? params.OnlyExportRootDisk : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
     }
 }
@@ -5314,7 +5435,7 @@ class TagSpecification extends  AbstractModel {
         super();
 
         /**
-         * The type of resource that bound with the tag. Valid values: `instance` (for CVM) and `host` (for CDH).
+         * The type of resource that the tag is bound to. Valid values: `instance` (for CVM), `host` (for CDH) and `image` (for image).
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -6001,33 +6122,33 @@ class RunInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance [billing type](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1). <br><li>POSTPAID_BY_HOUR: pay-as-you-go billing by hour <br><li>CDHPAID: Dedicated CVM (associated with a dedicated host. Resource usage of the dedicated host is free of charge.) <br><li>SPOTPAID: [spot instance] (https://intl.cloud.tencent.com/document/product/213/17817)<br> Default value: POSTPAID_BY_HOUR.
+         * Instance [billing type](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1). <br><li>`POSTPAID_BY_HOUR`: Hourly-based pay-as-you-go <br><li>`CDHPAID`: Dedicated CVM (associated with a dedicated host. Resource usage of the dedicated host is free of charge.) <br><li>`SPOTPAID`: [Spot instance](https://intl.cloud.tencent.com/document/product/213/17817)<br>Default value: `POSTPAID_BY_HOUR`.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Configuration of prepaid instances. You can use the parameter to specify the attributes of prepaid instances, such as the subscription period and the auto-renewal plan. This parameter is required for prepaid instances.
+         * Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
 
         /**
-         * Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone, project, and CDH. You can specify a CDH for a CVM by creating the CVM on the CDH.
+         * Location of the instance. You can use this parameter to specify the availability zone, project, and CDH (for dedicated CVMs).
  <b>Note: `Placement` is required when `LaunchTemplate` is not specified. If both the parameters are passed in, `Placement` prevails.</b>
          * @type {Placement || null}
          */
         this.Placement = null;
 
         /**
-         * The instance model. Different resource specifications are specified for different instance models.
+         * The instance model. 
 <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, `S1.SMALL1` will be used by default.<br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images (for Chinese mainland only)</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). For marketplace images, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
+         * The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
  <b>Note: `ImageId` is required when `LaunchTemplate` is not specified. If both the parameters are passed in, `ImageId` prevails.</b>
          * @type {string || null}
          */
@@ -6040,7 +6161,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.SystemDisk = null;
 
         /**
-         * The configuration information of instance data disks. If this parameter is not specified, no data disk will be purchased by default. When purchasing, you can specify 21 data disks, which can contain at most 1 LOCAL_BASIC data disk or LOCAL_SSD data disk, and at most 20 CLOUD_BASIC data disks, CLOUD_PREMIUM data disks, or CLOUD_SSD data disks.
+         * The configuration information of instance data disks. If this parameter is not specified, no data disk will be purchased by default. When purchasing, you can specify 21 data disks, which can contain at most 1 LOCAL_BASIC or LOCAL_SSD data disk, and at most 20 CLOUD_BASIC, CLOUD_PREMIUM, or CLOUD_SSD data disks.
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -6058,19 +6179,19 @@ class RunInstancesRequest extends  AbstractModel {
         this.InternetAccessible = null;
 
         /**
-         * The number of instances to be purchased. Value range: [1, 100]; default value: 1. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on the quota, see [CVM instance purchase limit](https://intl.cloud.tencent.com/document/product/213/2664).
+         * The number of instances to be purchased. Value range for pay-as-you-go instances: [1, 100]. Default value: `1`. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on the quota, see [Quota for CVM Instances](https://intl.cloud.tencent.com/document/product/213/2664).
          * @type {number || null}
          */
         this.InstanceCount = null;
 
         /**
-         * Instance name to be displayed.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and name them as `server_`, the instance names will be displayed as `server_1` and `server_2`.</li><li>The instance name contains up to 60 characters (including pattern strings).
+         * Instance name to be displayed. <br><li>If this parameter is not specified, "Unnamed" will be displayed by default. </li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`. </li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and the instance name body is `server_`, the instance names will be `server_1` and `server_2`. </li><li>This parameter can contain up to 60 characters, including the pattern string.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Instance login settings. You can use this parameter to set the login method, login password and SSH key, or keep the original login settings of the image. If it's not specified, the user needs to set the login password using the "Reset password" option in the CVM console or calling the API `ResetInstancesPassword` to complete the creation of the CVM instance(s).
+         * Instance login settings. You can use this parameter to set the login method, password and key of the instance, or keep the original login settings of the image. If it's not specified, the user needs to set the login password using the "Reset password" option in the CVM console or calling the API `ResetInstancesPassword` to complete the creation of the CVM instance(s).
          * @type {LoginSettings || null}
          */
         this.LoginSettings = null;
@@ -6082,13 +6203,13 @@ class RunInstancesRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * Specifies whether to enable services such as Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. However, for custom images and images from the marketplace, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
+         * Enhanced service. You can use this parameter to specify whether to enable services such as Anti-DDoS and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Anti-DDoS are enabled for public images by default. However, for custom images and images from the marketplace, Anti-DDoS and Cloud Monitor are not enabled by default. The original services in the image will be retained.
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
 
         /**
-         * A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. <br>For more information, see 'How to ensure idempotency'.
+         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
          * @type {string || null}
          */
         this.ClientToken = null;
@@ -6112,7 +6233,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.DisasterRecoverGroupIds = null;
 
         /**
-         * Binds the tag with the specified resources (CVM and CLB) as well
+         * List of tag description. By specifying this parameter, the tag can be bound to the corresponding CVM and CBS instances at the same time.
          * @type {Array.<TagSpecification> || null}
          */
         this.TagSpecification = null;
@@ -6124,17 +6245,17 @@ class RunInstancesRequest extends  AbstractModel {
         this.InstanceMarketOptions = null;
 
         /**
-         * User data provided to the instance, which needs to be encoded in base64 format with the maximum size of 16KB. For more information on how to get the value of this parameter, see the commands you need to execute on startup for [Windows](https://intl.cloud.tencent.com/document/product/213/17526) or [Linux](https://intl.cloud.tencent.com/document/product/213/17525).
+         * User data provided to the instance. This parameter needs to be encoded in base64 format with the maximum size of 16 KB. For more information on how to get the value of this parameter, see the commands you need to execute on startup for [Windows](https://intl.cloud.tencent.com/document/product/213/17526) or [Linux](https://intl.cloud.tencent.com/document/product/213/17525).
          * @type {string || null}
          */
         this.UserData = null;
 
         /**
          * Whether the request is a dry run only.
-true: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
+`true`: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
 If the dry run fails, the corresponding error code will be returned.
 If the dry run succeeds, the RequestId will be returned.
-false (default value): send a normal request and create instance(s) if all the requirements are met.
+`false` (default value): Send a normal request and create instance(s) if all the requirements are met.
          * @type {boolean || null}
          */
         this.DryRun = null;
@@ -6158,13 +6279,19 @@ false (default value): send a normal request and create instance(s) if all the r
         this.LaunchTemplate = null;
 
         /**
+         * Specify the ID of the dedicated cluster where the CVM is created.
+         * @type {string || null}
+         */
+        this.DedicatedClusterId = null;
+
+        /**
          * Specify the CHC physical server that used to create the CHC CVM.
          * @type {Array.<string> || null}
          */
         this.ChcIds = null;
 
         /**
-         * 
+         * Whether the termination protection is enabled. Values: <br><li>`TRUE`: Enable instance protection, which means that this instance can not be deleted by an API action.<br><li>`FALSE`: Do not enable the instance protection.<br><br>Default value: `FALSE`.
          * @type {boolean || null}
          */
         this.DisableApiTermination = null;
@@ -6269,6 +6396,7 @@ false (default value): send a normal request and create instance(s) if all the r
             obj.deserialize(params.LaunchTemplate)
             this.LaunchTemplate = obj;
         }
+        this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
         this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
         this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
 
@@ -7279,18 +7407,24 @@ class ReservedInstanceTypeItem extends  AbstractModel {
 }
 
 /**
- * Describes the TAT service information.
+ * ExportImages response structure.
  * @class
  */
-class RunAutomationServiceEnabled extends  AbstractModel {
+class ExportImagesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable the TAT service. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
-         * @type {boolean || null}
+         * ID of the image export task
+         * @type {number || null}
          */
-        this.Enabled = null;
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -7301,7 +7435,8 @@ class RunAutomationServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8620,6 +8755,34 @@ class DescribeLaunchTemplateVersionsResponse extends  AbstractModel {
 }
 
 /**
+ * Describes the TAT service information.
+ * @class
+ */
+class RunAutomationServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the TAT service. Valid values: <br><li>`TRUE`: yes;<br><li>`FALSE`: no<br><br>Default: `FALSE`.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
  * Describes information related to the Cloud Monitor service.
  * @class
  */
@@ -9310,6 +9473,7 @@ module.exports = {
     DescribeZonesRequest: DescribeZonesRequest,
     StartInstancesRequest: StartInstancesRequest,
     Tag: Tag,
+    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     Placement: Placement,
     DescribeDisasterRecoverGroupsRequest: DescribeDisasterRecoverGroupsRequest,
     ModifyKeyPairAttributeResponse: ModifyKeyPairAttributeResponse,
@@ -9346,7 +9510,7 @@ module.exports = {
     DescribeReservedInstancesOfferingsRequest: DescribeReservedInstancesOfferingsRequest,
     ReservedInstanceFamilyItem: ReservedInstanceFamilyItem,
     DescribeDisasterRecoverGroupsResponse: DescribeDisasterRecoverGroupsResponse,
-    RunSecurityServiceEnabled: RunSecurityServiceEnabled,
+    ExportImagesRequest: ExportImagesRequest,
     ActionTimer: ActionTimer,
     DescribeReservedInstancesConfigInfosRequest: DescribeReservedInstancesConfigInfosRequest,
     TagSpecification: TagSpecification,
@@ -9380,7 +9544,7 @@ module.exports = {
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
     ImageOsList: ImageOsList,
     ReservedInstanceTypeItem: ReservedInstanceTypeItem,
-    RunAutomationServiceEnabled: RunAutomationServiceEnabled,
+    ExportImagesResponse: ExportImagesResponse,
     ReservedInstancePrice: ReservedInstancePrice,
     DescribeHostsRequest: DescribeHostsRequest,
     DescribeInstancesStatusRequest: DescribeInstancesStatusRequest,
@@ -9412,6 +9576,7 @@ module.exports = {
     KeyPair: KeyPair,
     DescribeReservedInstancesOfferingsResponse: DescribeReservedInstancesOfferingsResponse,
     DescribeLaunchTemplateVersionsResponse: DescribeLaunchTemplateVersionsResponse,
+    RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     ResetInstanceResponse: ResetInstanceResponse,
     VirtualPrivateCloud: VirtualPrivateCloud,

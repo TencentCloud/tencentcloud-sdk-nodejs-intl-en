@@ -74,6 +74,7 @@ const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
 const Tag = models.Tag;
+const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const Placement = models.Placement;
 const DescribeDisasterRecoverGroupsRequest = models.DescribeDisasterRecoverGroupsRequest;
 const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
@@ -110,7 +111,7 @@ const DescribeLaunchTemplatesResponse = models.DescribeLaunchTemplatesResponse;
 const DescribeReservedInstancesOfferingsRequest = models.DescribeReservedInstancesOfferingsRequest;
 const ReservedInstanceFamilyItem = models.ReservedInstanceFamilyItem;
 const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGroupsResponse;
-const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
+const ExportImagesRequest = models.ExportImagesRequest;
 const ActionTimer = models.ActionTimer;
 const DescribeReservedInstancesConfigInfosRequest = models.DescribeReservedInstancesConfigInfosRequest;
 const TagSpecification = models.TagSpecification;
@@ -144,7 +145,7 @@ const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
 const ImageOsList = models.ImageOsList;
 const ReservedInstanceTypeItem = models.ReservedInstanceTypeItem;
-const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
+const ExportImagesResponse = models.ExportImagesResponse;
 const ReservedInstancePrice = models.ReservedInstancePrice;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
@@ -176,6 +177,7 @@ const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const KeyPair = models.KeyPair;
 const DescribeReservedInstancesOfferingsResponse = models.DescribeReservedInstancesOfferingsResponse;
 const DescribeLaunchTemplateVersionsResponse = models.DescribeLaunchTemplateVersionsResponse;
+const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
@@ -488,10 +490,10 @@ If you currently use a password to log in, you will no longer be able to do so a
     /**
      * This API is used to create one or more instances with a specified configuration.
 
-* After an instance is created successfully, it will start up automatically, and the [instance state](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#instance_state) will become "Running".
-* If you create a pay-as-you-go instance billed on an hourly basis, an amount equivalent to the hourly rate will be frozen before the creation. Make sure your account balance is sufficient before calling this API.
-* The number of instances you can purchase through this API is subject to the [CVM instance purchase limit](https://intl.cloud.tencent.com/document/product/213/2664?from_cn_redirect=1). Both the instances created through this API and the console will be counted toward the quota.
-* This API is an async API. An instance `ID` list will be returned after you successfully make a creation request. However, it does not mean the creation has been completed. The state of the instance will be `Creating` during the creation. You can use [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) to query the status of the instance. If the status changes from `Creating` to `Running`, it means that the instance has been created successfully.
+* After an instance is created successfully, it will start up automatically, and the [instance status](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#instance_state) will become "Running".
+* If you create a pay-as-you-go instance billed on an hourly basis, an amount equivalent to the hourly rate will be frozen. Make sure your account balance is sufficient before calling this API.
+* The number of instances you can purchase through this API is subject to the [Quota for CVM Instances](https://intl.cloud.tencent.com/document/product/213/2664?from_cn_redirect=1). Instances created through this API and in the CVM console are counted toward the quota.
+* This API is an async API. An instance ID list is returned after the creation request is sent. However, it does not mean the creation has been completed. The status of the instance will be `Creating` during the creation. You can use [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) to query the status of the instance. If the status changes from `Creating` to `Running`, it means that the instance has been created successfully.
      * @param {RunInstancesRequest} req
      * @param {function(string, RunInstancesResponse):void} cb
      * @public
@@ -791,6 +793,17 @@ If you currently use a password to log in, you will no longer be able to do so a
     ResetInstancesInternetMaxBandwidth(req, cb) {
         let resp = new ResetInstancesInternetMaxBandwidthResponse();
         this.request("ResetInstancesInternetMaxBandwidth", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export custom images to the specified COS bucket.
+     * @param {ExportImagesRequest} req
+     * @param {function(string, ExportImagesResponse):void} cb
+     * @public
+     */
+    ExportImages(req, cb) {
+        let resp = new ExportImagesResponse();
+        this.request("ExportImages", req, resp, cb);
     }
 
     /**

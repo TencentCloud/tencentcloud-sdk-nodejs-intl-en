@@ -8633,6 +8633,13 @@ class KeyPair extends  AbstractModel {
          */
         this.CreatedTime = null;
 
+        /**
+         * The list of tags bound to the key.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -8650,6 +8657,15 @@ class KeyPair extends  AbstractModel {
         this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
         this.AssociatedInstanceIds = 'AssociatedInstanceIds' in params ? params.AssociatedInstanceIds : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }

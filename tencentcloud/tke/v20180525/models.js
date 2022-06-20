@@ -2156,6 +2156,13 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          */
         this.Subnets = null;
 
+        /**
+         * Whether to ignore ServiceCIDR conflict errors. It is only valid in VPC-CNI mode. Default value: `false`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.IgnoreServiceCIDRConflict = null;
+
     }
 
     /**
@@ -2175,6 +2182,7 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.KubeProxyMode = 'KubeProxyMode' in params ? params.KubeProxyMode : null;
         this.ServiceCIDR = 'ServiceCIDR' in params ? params.ServiceCIDR : null;
         this.Subnets = 'Subnets' in params ? params.Subnets : null;
+        this.IgnoreServiceCIDRConflict = 'IgnoreServiceCIDRConflict' in params ? params.IgnoreServiceCIDRConflict : null;
 
     }
 }
@@ -3101,7 +3109,7 @@ class ClusterBasicSettings extends  AbstractModel {
         this.OsCustomizeType = null;
 
         /**
-         * Whether to enable the node’s default security group (default: `No`, Aphla feature)
+         * Whether to enable the node’s default security group (default: `No`, Alpha feature)
          * @type {boolean || null}
          */
         this.NeedWorkSecurityGroup = null;
@@ -3539,56 +3547,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeClusterStatus response structure.
- * @class
- */
-class DescribeClusterStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster status list
-         * @type {Array.<ClusterStatus> || null}
-         */
-        this.ClusterStatusSet = null;
-
-        /**
-         * Number of clusters
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ClusterStatusSet) {
-            this.ClusterStatusSet = new Array();
-            for (let z in params.ClusterStatusSet) {
-                let obj = new ClusterStatus();
-                obj.deserialize(params.ClusterStatusSet[z]);
-                this.ClusterStatusSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DeleteClusterNodePool request structure.
  * @class
  */
@@ -3715,6 +3673,12 @@ class ClusterCIDRSettings extends  AbstractModel {
          */
         this.ClaimExpiredSeconds = null;
 
+        /**
+         * Whether to ignore ServiceCIDR conflict errors. It is only valid in VPC-CNI mode. Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.IgnoreServiceCIDRConflict = null;
+
     }
 
     /**
@@ -3731,6 +3695,7 @@ class ClusterCIDRSettings extends  AbstractModel {
         this.ServiceCIDR = 'ServiceCIDR' in params ? params.ServiceCIDR : null;
         this.EniSubnetIds = 'EniSubnetIds' in params ? params.EniSubnetIds : null;
         this.ClaimExpiredSeconds = 'ClaimExpiredSeconds' in params ? params.ClaimExpiredSeconds : null;
+        this.IgnoreServiceCIDRConflict = 'IgnoreServiceCIDRConflict' in params ? params.IgnoreServiceCIDRConflict : null;
 
     }
 }
@@ -5203,42 +5168,30 @@ class DescribeResourceUsageResponse extends  AbstractModel {
 }
 
 /**
- * CreateClusterAsGroup request structure.
+ * DescribeClusterStatus response structure.
  * @class
  */
-class CreateClusterAsGroupRequest extends  AbstractModel {
+class DescribeClusterStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
+         * Cluster status list
+         * @type {Array.<ClusterStatus> || null}
+         */
+        this.ClusterStatusSet = null;
+
+        /**
+         * Number of clusters
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ClusterId = null;
-
-        /**
-         * The pass-through parameters for scaling group creation, in the format of a JSON string. For more information, see the [CreateAutoScalingGroup](https://intl.cloud.tencent.com/document/api/377/20440?from_cn_redirect=1) API. The **LaunchConfigurationId** is created with the LaunchConfigurePara parameter, which does not support data entry.
-         * @type {string || null}
-         */
-        this.AutoScalingGroupPara = null;
-
-        /**
-         * The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://intl.cloud.tencent.com/document/api/377/20447?from_cn_redirect=1) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it's set through the **UserScript**.
-         * @type {string || null}
-         */
-        this.LaunchConfigurePara = null;
-
-        /**
-         * Advanced configuration information of the node
-         * @type {InstanceAdvancedSettings || null}
-         */
-        this.InstanceAdvancedSettings = null;
-
-        /**
-         * Node label array
-         * @type {Array.<Label> || null}
-         */
-        this.Labels = null;
+        this.RequestId = null;
 
     }
 
@@ -5249,24 +5202,17 @@ class CreateClusterAsGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.AutoScalingGroupPara = 'AutoScalingGroupPara' in params ? params.AutoScalingGroupPara : null;
-        this.LaunchConfigurePara = 'LaunchConfigurePara' in params ? params.LaunchConfigurePara : null;
 
-        if (params.InstanceAdvancedSettings) {
-            let obj = new InstanceAdvancedSettings();
-            obj.deserialize(params.InstanceAdvancedSettings)
-            this.InstanceAdvancedSettings = obj;
-        }
-
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new Label();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
+        if (params.ClusterStatusSet) {
+            this.ClusterStatusSet = new Array();
+            for (let z in params.ClusterStatusSet) {
+                let obj = new ClusterStatus();
+                obj.deserialize(params.ClusterStatusSet[z]);
+                this.ClusterStatusSet.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5770,48 +5716,6 @@ class AcquireClusterAdminRoleRequest extends  AbstractModel {
 }
 
 /**
- * CreateClusterAsGroup response structure.
- * @class
- */
-class CreateClusterAsGroupResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Launch configuration ID
-         * @type {string || null}
-         */
-        this.LaunchConfigurationId = null;
-
-        /**
-         * Scaling group ID
-         * @type {string || null}
-         */
-        this.AutoScalingGroupId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
-        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyClusterAuthenticationOptions response structure.
  * @class
  */
@@ -6086,6 +5990,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.PreStartUserScript = null;
 
+        /**
+         * Node taint
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
     }
 
     /**
@@ -6125,6 +6036,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
         this.PreStartUserScript = 'PreStartUserScript' in params ? params.PreStartUserScript : null;
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
 
     }
 }
@@ -6827,6 +6747,18 @@ class CreateClusterNodePoolRequest extends  AbstractModel {
         this.Taints = null;
 
         /**
+         * Node pool runtime type and version
+         * @type {string || null}
+         */
+        this.ContainerRuntime = null;
+
+        /**
+         * Runtime version
+         * @type {string || null}
+         */
+        this.RuntimeVersion = null;
+
+        /**
          * Operating system of the node pool
          * @type {string || null}
          */
@@ -6882,6 +6814,8 @@ class CreateClusterNodePoolRequest extends  AbstractModel {
                 this.Taints.push(obj);
             }
         }
+        this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
         this.NodePoolOs = 'NodePoolOs' in params ? params.NodePoolOs : null;
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
 
@@ -7962,6 +7896,24 @@ class CreateClusterEndpointRequest extends  AbstractModel {
          */
         this.IsExtranet = null;
 
+        /**
+         * The domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * The security group in use. Required only for public network access.
+         * @type {string || null}
+         */
+        this.SecurityGroup = null;
+
+        /**
+         * The LB parameter. Required only for public network access.
+         * @type {string || null}
+         */
+        this.ExtensiveParameters = null;
+
     }
 
     /**
@@ -7974,6 +7926,9 @@ class CreateClusterEndpointRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
+        this.ExtensiveParameters = 'ExtensiveParameters' in params ? params.ExtensiveParameters : null;
 
     }
 }
@@ -8126,6 +8081,12 @@ The array length of `InstanceAdvancedSettingsOverride` should be the same as the
          */
         this.InstanceAdvancedSettingsOverrides = null;
 
+        /**
+         * Node image (it is required when creating a node)
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
     }
 
     /**
@@ -8173,6 +8134,7 @@ The array length of `InstanceAdvancedSettingsOverride` should be the same as the
                 this.InstanceAdvancedSettingsOverrides.push(obj);
             }
         }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
 
     }
 }
@@ -10263,7 +10225,6 @@ module.exports = {
     DescribeTKEEdgeScriptResponse: DescribeTKEEdgeScriptResponse,
     DescribeClusterStatusRequest: DescribeClusterStatusRequest,
     VersionInstance: VersionInstance,
-    DescribeClusterStatusResponse: DescribeClusterStatusResponse,
     DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
     DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
@@ -10298,7 +10259,7 @@ module.exports = {
     GetClusterLevelPriceResponse: GetClusterLevelPriceResponse,
     PrometheusAlertRule: PrometheusAlertRule,
     DescribeResourceUsageResponse: DescribeResourceUsageResponse,
-    CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
+    DescribeClusterStatusResponse: DescribeClusterStatusResponse,
     DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
     ServiceAccountAuthenticationOptions: ServiceAccountAuthenticationOptions,
     DescribeVersionsRequest: DescribeVersionsRequest,
@@ -10310,7 +10271,6 @@ module.exports = {
     CreateClusterRequest: CreateClusterRequest,
     DeletePrometheusAlertRuleResponse: DeletePrometheusAlertRuleResponse,
     AcquireClusterAdminRoleRequest: AcquireClusterAdminRoleRequest,
-    CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     ModifyClusterAuthenticationOptionsResponse: ModifyClusterAuthenticationOptionsResponse,
     DescribeClusterAuthenticationOptionsResponse: DescribeClusterAuthenticationOptionsResponse,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,

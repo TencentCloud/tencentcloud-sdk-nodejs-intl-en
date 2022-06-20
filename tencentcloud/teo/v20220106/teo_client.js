@@ -17,15 +17,23 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreatePurgeTaskResponse = models.CreatePurgeTaskResponse;
+const DownloadL7LogsRequest = models.DownloadL7LogsRequest;
 const CreatePurgeTaskRequest = models.CreatePurgeTaskRequest;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
+const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
 const Zone = models.Zone;
+const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
+const DescribePrefetchTasksResponse = models.DescribePrefetchTasksResponse;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
+const Header = models.Header;
 const FailReason = models.FailReason;
 const Task = models.Task;
+const CreatePrefetchTaskRequest = models.CreatePrefetchTaskRequest;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
+const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
 const ZoneFilter = models.ZoneFilter;
+const L7OfflineLog = models.L7OfflineLog;
 
 
 /**
@@ -38,6 +46,17 @@ class TeoClient extends AbstractClient {
         super("teo.tencentcloudapi.com", "2022-01-06", credential, region, profile);
     }
     
+    /**
+     * This API is used to query layer-7 logs.
+     * @param {DownloadL7LogsRequest} req
+     * @param {function(string, DownloadL7LogsResponse):void} cb
+     * @public
+     */
+    DownloadL7Logs(req, cb) {
+        let resp = new DownloadL7LogsResponse();
+        this.request("DownloadL7Logs", req, resp, cb);
+    }
+
     /**
      * This API is used to create a cache purging task.
      * @param {CreatePurgeTaskRequest} req
@@ -58,6 +77,28 @@ class TeoClient extends AbstractClient {
     DescribePurgeTasks(req, cb) {
         let resp = new DescribePurgeTasksResponse();
         this.request("DescribePurgeTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the pre-warming task status.
+     * @param {DescribePrefetchTasksRequest} req
+     * @param {function(string, DescribePrefetchTasksResponse):void} cb
+     * @public
+     */
+    DescribePrefetchTasks(req, cb) {
+        let resp = new DescribePrefetchTasksResponse();
+        this.request("DescribePrefetchTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a pre-warming task.
+     * @param {CreatePrefetchTaskRequest} req
+     * @param {function(string, CreatePrefetchTaskResponse):void} cb
+     * @public
+     */
+    CreatePrefetchTask(req, cb) {
+        let resp = new CreatePrefetchTaskResponse();
+        this.request("CreatePrefetchTask", req, resp, cb);
     }
 
     /**

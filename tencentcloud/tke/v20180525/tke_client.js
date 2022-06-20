@@ -87,7 +87,6 @@ const DescribeClusterAuthenticationOptionsRequest = models.DescribeClusterAuthen
 const DescribeTKEEdgeScriptResponse = models.DescribeTKEEdgeScriptResponse;
 const DescribeClusterStatusRequest = models.DescribeClusterStatusRequest;
 const VersionInstance = models.VersionInstance;
-const DescribeClusterStatusResponse = models.DescribeClusterStatusResponse;
 const DeleteClusterNodePoolRequest = models.DeleteClusterNodePoolRequest;
 const DescribeClusterKubeconfigRequest = models.DescribeClusterKubeconfigRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
@@ -122,7 +121,7 @@ const DescribeClusterEndpointStatusRequest = models.DescribeClusterEndpointStatu
 const GetClusterLevelPriceResponse = models.GetClusterLevelPriceResponse;
 const PrometheusAlertRule = models.PrometheusAlertRule;
 const DescribeResourceUsageResponse = models.DescribeResourceUsageResponse;
-const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
+const DescribeClusterStatusResponse = models.DescribeClusterStatusResponse;
 const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
 const ServiceAccountAuthenticationOptions = models.ServiceAccountAuthenticationOptions;
 const DescribeVersionsRequest = models.DescribeVersionsRequest;
@@ -134,7 +133,6 @@ const DescribeAvailableClusterVersionRequest = models.DescribeAvailableClusterVe
 const CreateClusterRequest = models.CreateClusterRequest;
 const DeletePrometheusAlertRuleResponse = models.DeletePrometheusAlertRuleResponse;
 const AcquireClusterAdminRoleRequest = models.AcquireClusterAdminRoleRequest;
-const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
 const ModifyClusterAuthenticationOptionsResponse = models.ModifyClusterAuthenticationOptionsResponse;
 const DescribeClusterAuthenticationOptionsResponse = models.DescribeClusterAuthenticationOptionsResponse;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
@@ -512,17 +510,6 @@ class TkeClient extends AbstractClient {
     DescribeClusterCommonNames(req, cb) {
         let resp = new DescribeClusterCommonNamesResponse();
         this.request("DescribeClusterCommonNames", req, resp, cb);
-    }
-
-    /**
-     * Create a scaling group for an existing cluster
-     * @param {CreateClusterAsGroupRequest} req
-     * @param {function(string, CreateClusterAsGroupResponse):void} cb
-     * @public
-     */
-    CreateClusterAsGroup(req, cb) {
-        let resp = new CreateClusterAsGroupResponse();
-        this.request("CreateClusterAsGroup", req, resp, cb);
     }
 
     /**

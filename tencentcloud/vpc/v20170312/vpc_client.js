@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const CreateNetworkAclResponse = models.CreateNetworkAclResponse;
 const NetworkAcl = models.NetworkAcl;
 const ModifyAddressTemplateAttributeResponse = models.ModifyAddressTemplateAttributeResponse;
 const ServiceTemplateGroup = models.ServiceTemplateGroup;
@@ -27,19 +28,24 @@ const CreateServiceTemplateRequest = models.CreateServiceTemplateRequest;
 const IKEOptionsSpecification = models.IKEOptionsSpecification;
 const CreateCcnResponse = models.CreateCcnResponse;
 const DescribeVpnConnectionsRequest = models.DescribeVpnConnectionsRequest;
+const CreateAssistantCidrRequest = models.CreateAssistantCidrRequest;
 const DescribeNetworkInterfacesRequest = models.DescribeNetworkInterfacesRequest;
 const DescribeVpcIpv6AddressesRequest = models.DescribeVpcIpv6AddressesRequest;
+const SourceIpTranslationNatRule = models.SourceIpTranslationNatRule;
 const DescribeCustomerGatewaysRequest = models.DescribeCustomerGatewaysRequest;
+const ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse = models.ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse;
+const ModifyNatGatewaySourceIpTranslationNatRuleRequest = models.ModifyNatGatewaySourceIpTranslationNatRuleRequest;
 const ModifyCcnRegionBandwidthLimitsTypeResponse = models.ModifyCcnRegionBandwidthLimitsTypeResponse;
 const DescribeVpnGatewaysResponse = models.DescribeVpnGatewaysResponse;
 const ModifyServiceTemplateAttributeRequest = models.ModifyServiceTemplateAttributeRequest;
-const InquiryPriceRenewVpnGatewayResponse = models.InquiryPriceRenewVpnGatewayResponse;
+const DescribeIpGeolocationInfosRequest = models.DescribeIpGeolocationInfosRequest;
 const ResetAttachCcnInstancesResponse = models.ResetAttachCcnInstancesResponse;
 const DescribeServiceTemplateGroupsResponse = models.DescribeServiceTemplateGroupsResponse;
 const DescribeVpcEndPointRequest = models.DescribeVpcEndPointRequest;
 const DetachClassicLinkVpcRequest = models.DetachClassicLinkVpcRequest;
 const DescribeBandwidthPackageBillUsageResponse = models.DescribeBandwidthPackageBillUsageResponse;
 const DeleteBandwidthPackageResponse = models.DeleteBandwidthPackageResponse;
+const ModifyNatGatewayAttributeRequest = models.ModifyNatGatewayAttributeRequest;
 const DescribeLocalGatewayRequest = models.DescribeLocalGatewayRequest;
 const FlowLog = models.FlowLog;
 const ModifyDirectConnectGatewayAttributeRequest = models.ModifyDirectConnectGatewayAttributeRequest;
@@ -48,22 +54,28 @@ const AddBandwidthPackageResourcesRequest = models.AddBandwidthPackageResourcesR
 const AssignIpv6SubnetCidrBlockRequest = models.AssignIpv6SubnetCidrBlockRequest;
 const CreateVpcResponse = models.CreateVpcResponse;
 const AssistantCidr = models.AssistantCidr;
-const EndPointService = models.EndPointService;
+const ModifyNetworkAclEntriesRequest = models.ModifyNetworkAclEntriesRequest;
+const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddressesRequest;
 const AddressTemplate = models.AddressTemplate;
 const VpnGatewayQuota = models.VpnGatewayQuota;
 const DescribeBandwidthPackageBillUsageRequest = models.DescribeBandwidthPackageBillUsageRequest;
 const UnassignIpv6AddressesResponse = models.UnassignIpv6AddressesResponse;
 const DescribeFlowLogsRequest = models.DescribeFlowLogsRequest;
 const CloneSecurityGroupRequest = models.CloneSecurityGroupRequest;
-const DescribeFlowLogsResponse = models.DescribeFlowLogsResponse;
+const AssociateNatGatewayAddressRequest = models.AssociateNatGatewayAddressRequest;
+const CreateDirectConnectGatewayRequest = models.CreateDirectConnectGatewayRequest;
 const CreateVpcEndPointRequest = models.CreateVpcEndPointRequest;
 const ModifyBandwidthPackageAttributeRequest = models.ModifyBandwidthPackageAttributeRequest;
 const TransformAddressResponse = models.TransformAddressResponse;
 const DisassociateNetworkInterfaceSecurityGroupsRequest = models.DisassociateNetworkInterfaceSecurityGroupsRequest;
+const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
 const ModifyFlowLogAttributeRequest = models.ModifyFlowLogAttributeRequest;
 const UnassignIpv6SubnetCidrBlockResponse = models.UnassignIpv6SubnetCidrBlockResponse;
 const ModifyVpcEndPointServiceAttributeRequest = models.ModifyVpcEndPointServiceAttributeRequest;
 const DescribeIpGeolocationInfosResponse = models.DescribeIpGeolocationInfosResponse;
+const DescribeVpcTaskResultRequest = models.DescribeVpcTaskResultRequest;
+const AssociateNetworkAclSubnetsResponse = models.AssociateNetworkAclSubnetsResponse;
+const DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest = models.DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest;
 const ResetRoutesRequest = models.ResetRoutesRequest;
 const CheckNetDetectStateRequest = models.CheckNetDetectStateRequest;
 const RouteTableAssociation = models.RouteTableAssociation;
@@ -74,12 +86,16 @@ const DeleteVpcEndPointServiceRequest = models.DeleteVpcEndPointServiceRequest;
 const DeleteCcnResponse = models.DeleteCcnResponse;
 const ServiceTemplate = models.ServiceTemplate;
 const DescribeCcnAttachedInstancesRequest = models.DescribeCcnAttachedInstancesRequest;
+const DescribeNatGatewaySourceIpTranslationNatRulesRequest = models.DescribeNatGatewaySourceIpTranslationNatRulesRequest;
+const DescribeNatGatewaysRequest = models.DescribeNatGatewaysRequest;
 const ModifyFlowLogAttributeResponse = models.ModifyFlowLogAttributeResponse;
 const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesResponse;
 const DescribeDirectConnectGatewaysRequest = models.DescribeDirectConnectGatewaysRequest;
 const AssociateNetworkInterfaceSecurityGroupsResponse = models.AssociateNetworkInterfaceSecurityGroupsResponse;
 const CreateVpcEndPointServiceWhiteListResponse = models.CreateVpcEndPointServiceWhiteListResponse;
 const DescribeIpGeolocationDatabaseUrlResponse = models.DescribeIpGeolocationDatabaseUrlResponse;
+const DescribeNatGatewaySourceIpTranslationNatRulesResponse = models.DescribeNatGatewaySourceIpTranslationNatRulesResponse;
+const DescribeVpcsRequest = models.DescribeVpcsRequest;
 const AcceptAttachCcnInstancesRequest = models.AcceptAttachCcnInstancesRequest;
 const DescribeGatewayFlowMonitorDetailResponse = models.DescribeGatewayFlowMonitorDetailResponse;
 const IpGeolocationInfo = models.IpGeolocationInfo;
@@ -88,23 +104,31 @@ const NetDetectState = models.NetDetectState;
 const HaVipDisassociateAddressIpResponse = models.HaVipDisassociateAddressIpResponse;
 const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
 const ModifyAddressInternetChargeTypeResponse = models.ModifyAddressInternetChargeTypeResponse;
+const UnassignIpv6SubnetCidrBlockRequest = models.UnassignIpv6SubnetCidrBlockRequest;
 const DeleteVpcEndPointServiceResponse = models.DeleteVpcEndPointServiceResponse;
 const AssignIpv6CidrBlockRequest = models.AssignIpv6CidrBlockRequest;
 const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesResponse;
 const UnassignIpv6CidrBlockResponse = models.UnassignIpv6CidrBlockResponse;
 const ModifyVpnGatewayRoutesRequest = models.ModifyVpnGatewayRoutesRequest;
 const HaVipAssociateAddressIpRequest = models.HaVipAssociateAddressIpRequest;
+const DisassociateNatGatewayAddressResponse = models.DisassociateNatGatewayAddressResponse;
 const DeleteRoutesResponse = models.DeleteRoutesResponse;
 const DescribeCrossBorderComplianceRequest = models.DescribeCrossBorderComplianceRequest;
 const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
+const ModifyAssistantCidrResponse = models.ModifyAssistantCidrResponse;
 const CidrForCcn = models.CidrForCcn;
+const NatGatewayAddress = models.NatGatewayAddress;
 const DescribeVpcEndPointServiceResponse = models.DescribeVpcEndPointServiceResponse;
+const ModifyNetworkAclEntriesResponse = models.ModifyNetworkAclEntriesResponse;
 const ModifyVpcEndPointAttributeResponse = models.ModifyVpcEndPointAttributeResponse;
 const DescribeFlowLogRequest = models.DescribeFlowLogRequest;
 const DescribeAccountAttributesResponse = models.DescribeAccountAttributesResponse;
 const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
 const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
+const DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest = models.DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest;
+const ModifyNetworkAclAttributeResponse = models.ModifyNetworkAclAttributeResponse;
 const AddBandwidthPackageResourcesResponse = models.AddBandwidthPackageResourcesResponse;
+const DisassociateNetworkAclSubnetsResponse = models.DisassociateNetworkAclSubnetsResponse;
 const SetCcnRegionBandwidthLimitsRequest = models.SetCcnRegionBandwidthLimitsRequest;
 const ModifyAddressInternetChargeTypeRequest = models.ModifyAddressInternetChargeTypeRequest;
 const CreateLocalGatewayRequest = models.CreateLocalGatewayRequest;
@@ -113,12 +137,16 @@ const CreateVpnGatewayRoutesRequest = models.CreateVpnGatewayRoutesRequest;
 const CreateSecurityGroupWithPoliciesResponse = models.CreateSecurityGroupWithPoliciesResponse;
 const DeleteAddressTemplateResponse = models.DeleteAddressTemplateResponse;
 const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
+const ResetNatGatewayConnectionRequest = models.ResetNatGatewayConnectionRequest;
+const ModifyCcnAttachedInstancesAttributeRequest = models.ModifyCcnAttachedInstancesAttributeRequest;
 const DeleteAddressTemplateRequest = models.DeleteAddressTemplateRequest;
+const CreateNatGatewaySourceIpTranslationNatRuleRequest = models.CreateNatGatewaySourceIpTranslationNatRuleRequest;
 const NetworkInterface = models.NetworkInterface;
 const TransformAddressRequest = models.TransformAddressRequest;
 const ReplaceDirectConnectGatewayCcnRoutesRequest = models.ReplaceDirectConnectGatewayCcnRoutesRequest;
-const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddressesRequest;
+const ReferredSecurityGroup = models.ReferredSecurityGroup;
 const ModifyAddressTemplateAttributeRequest = models.ModifyAddressTemplateAttributeRequest;
+const CreateNatGatewayResponse = models.CreateNatGatewayResponse;
 const DescribeVpcsResponse = models.DescribeVpcsResponse;
 const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
 const ModifyNetDetectRequest = models.ModifyNetDetectRequest;
@@ -126,7 +154,7 @@ const DescribeNetDetectStatesResponse = models.DescribeNetDetectStatesResponse;
 const DescribeVpcResourceDashboardResponse = models.DescribeVpcResourceDashboardResponse;
 const DescribeNetDetectStatesRequest = models.DescribeNetDetectStatesRequest;
 const DescribeFlowLogResponse = models.DescribeFlowLogResponse;
-const HaVipAssociateAddressIpResponse = models.HaVipAssociateAddressIpResponse;
+const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGatewayConfigurationResponse;
 const DescribeBandwidthPackagesRequest = models.DescribeBandwidthPackagesRequest;
 const DeleteDirectConnectGatewayCcnRoutesResponse = models.DeleteDirectConnectGatewayCcnRoutesResponse;
 const DescribeAssistantCidrResponse = models.DescribeAssistantCidrResponse;
@@ -136,12 +164,14 @@ const CcnRoute = models.CcnRoute;
 const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
 const VpnConnection = models.VpnConnection;
 const DescribeCcnsRequest = models.DescribeCcnsRequest;
+const ModifyNatGatewayAttributeResponse = models.ModifyNatGatewayAttributeResponse;
 const DescribeNetDetectsRequest = models.DescribeNetDetectsRequest;
 const CreateAddressTemplateGroupRequest = models.CreateAddressTemplateGroupRequest;
 const DescribeCustomerGatewayVendorsResponse = models.DescribeCustomerGatewayVendorsResponse;
 const DeleteSubnetResponse = models.DeleteSubnetResponse;
 const Vpc = models.Vpc;
 const CreateVpnGatewayResponse = models.CreateVpnGatewayResponse;
+const DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse = models.DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse;
 const FlowLogStorage = models.FlowLogStorage;
 const DescribeVpcIpv6AddressesResponse = models.DescribeVpcIpv6AddressesResponse;
 const RejectAttachCcnInstancesRequest = models.RejectAttachCcnInstancesRequest;
@@ -150,20 +180,25 @@ const VpnGatewayRoute = models.VpnGatewayRoute;
 const DescribeVpcResourceDashboardRequest = models.DescribeVpcResourceDashboardRequest;
 const VpngwCcnRoutes = models.VpngwCcnRoutes;
 const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
+const AssociateNetworkAclSubnetsRequest = models.AssociateNetworkAclSubnetsRequest;
 const CheckAssistantCidrRequest = models.CheckAssistantCidrRequest;
 const RenewVpnGatewayRequest = models.RenewVpnGatewayRequest;
 const SecurityGroupPolicy = models.SecurityGroupPolicy;
+const NotifyRoutesRequest = models.NotifyRoutesRequest;
 const DeleteVpcRequest = models.DeleteVpcRequest;
 const ModifyServiceTemplateAttributeResponse = models.ModifyServiceTemplateAttributeResponse;
 const DescribeCcnsResponse = models.DescribeCcnsResponse;
 const CreateSubnetResponse = models.CreateSubnetResponse;
 const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
-const GetCcnRegionBandwidthLimitsResponse = models.GetCcnRegionBandwidthLimitsResponse;
+const DescribeGatewayFlowQosResponse = models.DescribeGatewayFlowQosResponse;
 const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
+const NatGateway = models.NatGateway;
 const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
 const CreateCustomerGatewayResponse = models.CreateCustomerGatewayResponse;
+const WithdrawNotifyRoutesRequest = models.WithdrawNotifyRoutesRequest;
 const DeleteServiceTemplateGroupResponse = models.DeleteServiceTemplateGroupResponse;
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
+const NetworkAclEntrySet = models.NetworkAclEntrySet;
 const DeleteVpnConnectionResponse = models.DeleteVpnConnectionResponse;
 const DescribeBandwidthPackageResourcesRequest = models.DescribeBandwidthPackageResourcesRequest;
 const EnableCcnRoutesRequest = models.EnableCcnRoutesRequest;
@@ -176,8 +211,8 @@ const FilterObject = models.FilterObject;
 const ModifyBandwidthPackageAttributeResponse = models.ModifyBandwidthPackageAttributeResponse;
 const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
 const ResetRoutesResponse = models.ResetRoutesResponse;
-const DescribeVpcsRequest = models.DescribeVpcsRequest;
-const UnassignIpv6SubnetCidrBlockRequest = models.UnassignIpv6SubnetCidrBlockRequest;
+const DeleteNetworkAclRequest = models.DeleteNetworkAclRequest;
+const NatGatewayDestinationIpPortTranslationNatRule = models.NatGatewayDestinationIpPortTranslationNatRule;
 const CloneSecurityGroupResponse = models.CloneSecurityGroupResponse;
 const CreateVpnConnectionResponse = models.CreateVpnConnectionResponse;
 const AddressTemplateSpecification = models.AddressTemplateSpecification;
@@ -191,11 +226,12 @@ const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyReque
 const ModifyVpcEndPointServiceAttributeResponse = models.ModifyVpcEndPointServiceAttributeResponse;
 const ResourceDashboard = models.ResourceDashboard;
 const DescribeVpcPrivateIpAddressesResponse = models.DescribeVpcPrivateIpAddressesResponse;
+const HaVipAssociateAddressIpResponse = models.HaVipAssociateAddressIpResponse;
 const DeleteCustomerGatewayResponse = models.DeleteCustomerGatewayResponse;
 const CreateVpnGatewayRoutesResponse = models.CreateVpnGatewayRoutesResponse;
 const CreateNetDetectRequest = models.CreateNetDetectRequest;
 const CreateAddressTemplateResponse = models.CreateAddressTemplateResponse;
-const DeleteDirectConnectGatewayResponse = models.DeleteDirectConnectGatewayResponse;
+const CreateNatGatewayDestinationIpPortTranslationNatRuleResponse = models.CreateNatGatewayDestinationIpPortTranslationNatRuleResponse;
 const DeleteAddressTemplateGroupRequest = models.DeleteAddressTemplateGroupRequest;
 const DescribeNetworkInterfaceLimitRequest = models.DescribeNetworkInterfaceLimitRequest;
 const CreateBandwidthPackageRequest = models.CreateBandwidthPackageRequest;
@@ -207,21 +243,23 @@ const CreateSubnetsRequest = models.CreateSubnetsRequest;
 const DescribeVpcEndPointServiceRequest = models.DescribeVpcEndPointServiceRequest;
 const AssociateAddressResponse = models.AssociateAddressResponse;
 const ModifyCcnAttachedInstancesAttributeResponse = models.ModifyCcnAttachedInstancesAttributeResponse;
+const CreateNetworkAclRequest = models.CreateNetworkAclRequest;
 const DescribeAddressesRequest = models.DescribeAddressesRequest;
 const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPoliciesRequest;
 const ModifyNetworkInterfaceAttributeResponse = models.ModifyNetworkInterfaceAttributeResponse;
 const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
 const DisassociateNetworkInterfaceSecurityGroupsResponse = models.DisassociateNetworkInterfaceSecurityGroupsResponse;
-const AddressInfo = models.AddressInfo;
+const ModifyGatewayFlowQosRequest = models.ModifyGatewayFlowQosRequest;
 const DescribeNetworkInterfaceLimitResponse = models.DescribeNetworkInterfaceLimitResponse;
 const AssignIpv6CidrBlockResponse = models.AssignIpv6CidrBlockResponse;
 const CreateCcnRequest = models.CreateCcnRequest;
 const DescribeIpGeolocationDatabaseUrlRequest = models.DescribeIpGeolocationDatabaseUrlRequest;
 const DescribeVpcEndPointResponse = models.DescribeVpcEndPointResponse;
-const EnableVpcEndPointConnectResponse = models.EnableVpcEndPointConnectResponse;
+const DeleteVpnConnectionRequest = models.DeleteVpnConnectionRequest;
 const NetworkAclEntry = models.NetworkAclEntry;
 const DescribeAssistantCidrRequest = models.DescribeAssistantCidrRequest;
 const RenewVpnGatewayResponse = models.RenewVpnGatewayResponse;
+const DeleteDirectConnectGatewayResponse = models.DeleteDirectConnectGatewayResponse;
 const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
 const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInternetMaxBandwidthRequest;
 const EndPoint = models.EndPoint;
@@ -233,16 +271,18 @@ const DescribeBandwidthPackageResourcesResponse = models.DescribeBandwidthPackag
 const DescribeCrossBorderComplianceResponse = models.DescribeCrossBorderComplianceResponse;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
 const AssociateDirectConnectGatewayNatGatewayResponse = models.AssociateDirectConnectGatewayNatGatewayResponse;
+const EndPointService = models.EndPointService;
 const DescribeVpnGatewayCcnRoutesRequest = models.DescribeVpnGatewayCcnRoutesRequest;
 const DisassociateDirectConnectGatewayNatGatewayResponse = models.DisassociateDirectConnectGatewayNatGatewayResponse;
 const CreateServiceTemplateGroupRequest = models.CreateServiceTemplateGroupRequest;
 const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstancesResponse;
-const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
 const DescribeVpnGatewayCcnRoutesResponse = models.DescribeVpnGatewayCcnRoutesResponse;
 const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
 const ModifyVpcEndPointServiceWhiteListRequest = models.ModifyVpcEndPointServiceWhiteListRequest;
 const CreateFlowLogResponse = models.CreateFlowLogResponse;
-const GetCcnRegionBandwidthLimitsRequest = models.GetCcnRegionBandwidthLimitsRequest;
+const DeleteDirectConnectGatewayRequest = models.DeleteDirectConnectGatewayRequest;
+const CreateNatGatewaySourceIpTranslationNatRuleResponse = models.CreateNatGatewaySourceIpTranslationNatRuleResponse;
+const DeleteNatGatewaySourceIpTranslationNatRuleResponse = models.DeleteNatGatewaySourceIpTranslationNatRuleResponse;
 const CcnAttachedInstance = models.CcnAttachedInstance;
 const SecurityPolicyDatabase = models.SecurityPolicyDatabase;
 const ResetVpnConnectionResponse = models.ResetVpnConnectionResponse;
@@ -251,7 +291,7 @@ const Ipv6Address = models.Ipv6Address;
 const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
 const BandwidthPackageBillBandwidth = models.BandwidthPackageBillBandwidth;
 const DeleteHaVipResponse = models.DeleteHaVipResponse;
-const CreateDirectConnectGatewayRequest = models.CreateDirectConnectGatewayRequest;
+const DescribeFlowLogsResponse = models.DescribeFlowLogsResponse;
 const VpcPrivateIpAddress = models.VpcPrivateIpAddress;
 const CvmInstance = models.CvmInstance;
 const DescribeNetworkAclsRequest = models.DescribeNetworkAclsRequest;
@@ -272,24 +312,32 @@ const DeleteVpcEndPointResponse = models.DeleteVpcEndPointResponse;
 const DeleteNetDetectResponse = models.DeleteNetDetectResponse;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
 const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
+const ModifyAssistantCidrRequest = models.ModifyAssistantCidrRequest;
+const ModifyGatewayFlowQosResponse = models.ModifyGatewayFlowQosResponse;
 const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
 const AssociateDirectConnectGatewayNatGatewayRequest = models.AssociateDirectConnectGatewayNatGatewayRequest;
 const AddressTemplateItem = models.AddressTemplateItem;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const AttachClassicLinkVpcRequest = models.AttachClassicLinkVpcRequest;
 const GatewayFlowMonitorDetail = models.GatewayFlowMonitorDetail;
+const DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse = models.DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse;
 const DeleteVpnGatewayRequest = models.DeleteVpnGatewayRequest;
 const ReplaceRouteTableAssociationResponse = models.ReplaceRouteTableAssociationResponse;
 const AttachCcnInstancesRequest = models.AttachCcnInstancesRequest;
 const DescribeDirectConnectGatewayCcnRoutesRequest = models.DescribeDirectConnectGatewayCcnRoutesRequest;
 const CcnInstance = models.CcnInstance;
 const DescribeLocalGatewayResponse = models.DescribeLocalGatewayResponse;
+const ItemPrice = models.ItemPrice;
+const DeleteNatGatewayRequest = models.DeleteNatGatewayRequest;
 const ModifyCustomerGatewayAttributeResponse = models.ModifyCustomerGatewayAttributeResponse;
 const ConflictItem = models.ConflictItem;
+const InquiryPriceRenewVpnGatewayResponse = models.InquiryPriceRenewVpnGatewayResponse;
 const AssignIpv6SubnetCidrBlockResponse = models.AssignIpv6SubnetCidrBlockResponse;
 const CreateVpcEndPointResponse = models.CreateVpcEndPointResponse;
+const DeleteAssistantCidrResponse = models.DeleteAssistantCidrResponse;
 const DescribeCcnRegionBandwidthLimitsResponse = models.DescribeCcnRegionBandwidthLimitsResponse;
 const DescribeAddressesResponse = models.DescribeAddressesResponse;
+const GatewayQos = models.GatewayQos;
 const ModifyIpv6AddressesAttributeRequest = models.ModifyIpv6AddressesAttributeRequest;
 const DescribeCustomerGatewayVendorsRequest = models.DescribeCustomerGatewayVendorsRequest;
 const DeleteLocalGatewayRequest = models.DeleteLocalGatewayRequest;
@@ -299,7 +347,7 @@ const DescribeVpnGatewayRoutesResponse = models.DescribeVpnGatewayRoutesResponse
 const DescribeNetworkAclsResponse = models.DescribeNetworkAclsResponse;
 const DeleteFlowLogResponse = models.DeleteFlowLogResponse;
 const AttachCcnInstancesResponse = models.AttachCcnInstancesResponse;
-const CreateDefaultVpcResponse = models.CreateDefaultVpcResponse;
+const DisassociateNetworkAclSubnetsRequest = models.DisassociateNetworkAclSubnetsRequest;
 const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
 const ModifyVpnConnectionAttributeResponse = models.ModifyVpnConnectionAttributeResponse;
 const PrivateIpAddressSpecification = models.PrivateIpAddressSpecification;
@@ -309,16 +357,17 @@ const DeleteRouteTableResponse = models.DeleteRouteTableResponse;
 const DescribeVpcInstancesResponse = models.DescribeVpcInstancesResponse;
 const AccountAttribute = models.AccountAttribute;
 const DeleteDirectConnectGatewayCcnRoutesRequest = models.DeleteDirectConnectGatewayCcnRoutesRequest;
-const RemoveBandwidthPackageResourcesResponse = models.RemoveBandwidthPackageResourcesResponse;
+const ModifyNatGatewaySourceIpTranslationNatRuleResponse = models.ModifyNatGatewaySourceIpTranslationNatRuleResponse;
+const CreateNatGatewayDestinationIpPortTranslationNatRuleRequest = models.CreateNatGatewayDestinationIpPortTranslationNatRuleRequest;
 const CreateFlowLogRequest = models.CreateFlowLogRequest;
 const InquirePriceCreateDirectConnectGatewayRequest = models.InquirePriceCreateDirectConnectGatewayRequest;
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
+const DisassociateNatGatewayAddressRequest = models.DisassociateNatGatewayAddressRequest;
 const DescribeServiceTemplatesResponse = models.DescribeServiceTemplatesResponse;
 const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const ResetAttachCcnInstancesRequest = models.ResetAttachCcnInstancesRequest;
 const CreateHaVipResponse = models.CreateHaVipResponse;
 const DescribeSecurityGroupReferencesRequest = models.DescribeSecurityGroupReferencesRequest;
-const DescribeIpGeolocationInfosRequest = models.DescribeIpGeolocationInfosRequest;
 const DisassociateDirectConnectGatewayNatGatewayRequest = models.DisassociateDirectConnectGatewayNatGatewayRequest;
 const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
@@ -328,14 +377,17 @@ const CreateRouteTableRequest = models.CreateRouteTableRequest;
 const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
 const DisableCcnRoutesRequest = models.DisableCcnRoutesRequest;
 const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
+const DeleteAssistantCidrRequest = models.DeleteAssistantCidrRequest;
 const ModifyVpcEndPointServiceWhiteListResponse = models.ModifyVpcEndPointServiceWhiteListResponse;
 const SubnetInput = models.SubnetInput;
-const DeleteVpnConnectionRequest = models.DeleteVpnConnectionRequest;
+const EnableVpcEndPointConnectResponse = models.EnableVpcEndPointConnectResponse;
 const CreateNetDetectResponse = models.CreateNetDetectResponse;
 const DeleteCcnRequest = models.DeleteCcnRequest;
+const ModifyLocalGatewayResponse = models.ModifyLocalGatewayResponse;
 const DisassociateVpcEndPointSecurityGroupsRequest = models.DisassociateVpcEndPointSecurityGroupsRequest;
 const EnableFlowLogsRequest = models.EnableFlowLogsRequest;
 const ModifyVpnGatewayAttributeRequest = models.ModifyVpnGatewayAttributeRequest;
+const CreateNatGatewayRequest = models.CreateNatGatewayRequest;
 const DeleteNetDetectRequest = models.DeleteNetDetectRequest;
 const IPSECOptionsSpecification = models.IPSECOptionsSpecification;
 const UnassignIpv6AddressesRequest = models.UnassignIpv6AddressesRequest;
@@ -343,48 +395,55 @@ const CreateAndAttachNetworkInterfaceResponse = models.CreateAndAttachNetworkInt
 const ModifyCcnAttributeRequest = models.ModifyCcnAttributeRequest;
 const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
 const CreateVpcEndPointServiceResponse = models.CreateVpcEndPointServiceResponse;
-const ReferredSecurityGroup = models.ReferredSecurityGroup;
+const ModifyNetworkAclAttributeRequest = models.ModifyNetworkAclAttributeRequest;
 const DeleteVpnGatewayResponse = models.DeleteVpnGatewayResponse;
 const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
 const UnassignPrivateIpAddressesResponse = models.UnassignPrivateIpAddressesResponse;
 const Address = models.Address;
 const VpnGateway = models.VpnGateway;
 const EnableVpcEndPointConnectRequest = models.EnableVpcEndPointConnectRequest;
+const EnableGatewayFlowMonitorResponse = models.EnableGatewayFlowMonitorResponse;
 const Resource = models.Resource;
 const CustomerGateway = models.CustomerGateway;
 const AllocateAddressesResponse = models.AllocateAddressesResponse;
 const BandwidthPackage = models.BandwidthPackage;
 const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
+const ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest = models.ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest;
 const CreateSecurityGroupPoliciesRequest = models.CreateSecurityGroupPoliciesRequest;
 const ModifyVpnGatewayRoutesResponse = models.ModifyVpnGatewayRoutesResponse;
 const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
 const DescribeSecurityGroupReferencesResponse = models.DescribeSecurityGroupReferencesResponse;
+const DisableGatewayFlowMonitorRequest = models.DisableGatewayFlowMonitorRequest;
 const CreateAddressTemplateGroupResponse = models.CreateAddressTemplateGroupResponse;
 const DescribeBandwidthPackageQuotaResponse = models.DescribeBandwidthPackageQuotaResponse;
 const DeleteServiceTemplateGroupRequest = models.DeleteServiceTemplateGroupRequest;
+const DeleteNatGatewayResponse = models.DeleteNatGatewayResponse;
 const CreateDirectConnectGatewayResponse = models.CreateDirectConnectGatewayResponse;
 const ModifyVpcEndPointAttributeRequest = models.ModifyVpcEndPointAttributeRequest;
 const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
-const ModifyCcnAttachedInstancesAttributeRequest = models.ModifyCcnAttachedInstancesAttributeRequest;
+const CreateDefaultVpcResponse = models.CreateDefaultVpcResponse;
 const ModifyAddressTemplateGroupAttributeRequest = models.ModifyAddressTemplateGroupAttributeRequest;
 const ModifyServiceTemplateGroupAttributeRequest = models.ModifyServiceTemplateGroupAttributeRequest;
 const DeleteVpcEndPointRequest = models.DeleteVpcEndPointRequest;
 const UnassignIpv6CidrBlockRequest = models.UnassignIpv6CidrBlockRequest;
 const CCN = models.CCN;
 const InquirePriceCreateDirectConnectGatewayResponse = models.InquirePriceCreateDirectConnectGatewayResponse;
+const DestinationIpPortTranslationNatRule = models.DestinationIpPortTranslationNatRule;
 const CreateDefaultVpcRequest = models.CreateDefaultVpcRequest;
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
 const DescribeCustomerGatewaysResponse = models.DescribeCustomerGatewaysResponse;
 const CheckAssistantCidrResponse = models.CheckAssistantCidrResponse;
 const InquiryPriceRenewVpnGatewayRequest = models.InquiryPriceRenewVpnGatewayRequest;
 const EnableCcnRoutesResponse = models.EnableCcnRoutesResponse;
+const ModifyVpnGatewayCcnRoutesResponse = models.ModifyVpnGatewayCcnRoutesResponse;
 const DetachCcnInstancesResponse = models.DetachCcnInstancesResponse;
 const ModifyServiceTemplateGroupAttributeResponse = models.ModifyServiceTemplateGroupAttributeResponse;
 const DeleteSubnetRequest = models.DeleteSubnetRequest;
 const DescribeAddressTemplateGroupsRequest = models.DescribeAddressTemplateGroupsRequest;
 const CheckNetDetectStateResponse = models.CheckNetDetectStateResponse;
 const DisassociateVpcEndPointSecurityGroupsResponse = models.DisassociateVpcEndPointSecurityGroupsResponse;
-const ModifyVpnGatewayCcnRoutesResponse = models.ModifyVpnGatewayCcnRoutesResponse;
+const DescribeVpcTaskResultResponse = models.DescribeVpcTaskResultResponse;
+const AssociateNatGatewayAddressResponse = models.AssociateNatGatewayAddressResponse;
 const RemoveBandwidthPackageResourcesRequest = models.RemoveBandwidthPackageResourcesRequest;
 const RouteTable = models.RouteTable;
 const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
@@ -394,6 +453,7 @@ const DeleteAddressTemplateGroupResponse = models.DeleteAddressTemplateGroupResp
 const ReplaceRoutesResponse = models.ReplaceRoutesResponse;
 const ModifyLocalGatewayRequest = models.ModifyLocalGatewayRequest;
 const DirectConnectGatewayCcnRoute = models.DirectConnectGatewayCcnRoute;
+const DeleteHaVipRequest = models.DeleteHaVipRequest;
 const CreateLocalGatewayResponse = models.CreateLocalGatewayResponse;
 const ServicesInfo = models.ServicesInfo;
 const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
@@ -408,32 +468,36 @@ const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
 const AuditCrossBorderComplianceResponse = models.AuditCrossBorderComplianceResponse;
 const InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest;
 const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
+const EnableGatewayFlowMonitorRequest = models.EnableGatewayFlowMonitorRequest;
 const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
 const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
 const CcnBandwidthInfo = models.CcnBandwidthInfo;
 const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
-const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
+const RemoveBandwidthPackageResourcesResponse = models.RemoveBandwidthPackageResourcesResponse;
 const AssignIpv6AddressesResponse = models.AssignIpv6AddressesResponse;
 const CreateRoutesResponse = models.CreateRoutesResponse;
 const DescribeSecurityGroupsResponse = models.DescribeSecurityGroupsResponse;
 const CreateVpcEndPointServiceWhiteListRequest = models.CreateVpcEndPointServiceWhiteListRequest;
+const DeleteNatGatewaySourceIpTranslationNatRuleRequest = models.DeleteNatGatewaySourceIpTranslationNatRuleRequest;
 const ModifyVpnGatewayCcnRoutesRequest = models.ModifyVpnGatewayCcnRoutesRequest;
-const ModifyLocalGatewayResponse = models.ModifyLocalGatewayResponse;
+const DescribeGatewayFlowQosRequest = models.DescribeGatewayFlowQosRequest;
 const ReplaceDirectConnectGatewayCcnRoutesResponse = models.ReplaceDirectConnectGatewayCcnRoutesResponse;
-const DownloadCustomerGatewayConfigurationResponse = models.DownloadCustomerGatewayConfigurationResponse;
 const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
 const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
 const AttachClassicLinkVpcResponse = models.AttachClassicLinkVpcResponse;
 const CreateAddressTemplateRequest = models.CreateAddressTemplateRequest;
+const DescribeNatGatewaysResponse = models.DescribeNatGatewaysResponse;
 const Subnet = models.Subnet;
 const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
 const DescribeCcnRoutesResponse = models.DescribeCcnRoutesResponse;
 const SecurityGroup = models.SecurityGroup;
+const DisableGatewayFlowMonitorResponse = models.DisableGatewayFlowMonitorResponse;
 const DisassociateAddressResponse = models.DisassociateAddressResponse;
 const DescribeVpnGatewayRoutesRequest = models.DescribeVpnGatewayRoutesRequest;
+const GetCcnRegionBandwidthLimitsResponse = models.GetCcnRegionBandwidthLimitsResponse;
 const DeleteRoutesRequest = models.DeleteRoutesRequest;
 const AssociateAddressRequest = models.AssociateAddressRequest;
 const CcnRegionBandwidthLimit = models.CcnRegionBandwidthLimit;
@@ -458,9 +522,10 @@ const CreateCustomerGatewayRequest = models.CreateCustomerGatewayRequest;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
 const CrossBorderCompliance = models.CrossBorderCompliance;
 const CreateRouteTableResponse = models.CreateRouteTableResponse;
-const ItemPrice = models.ItemPrice;
+const GetCcnRegionBandwidthLimitsRequest = models.GetCcnRegionBandwidthLimitsRequest;
 const DescribeDirectConnectGatewayCcnRoutesResponse = models.DescribeDirectConnectGatewayCcnRoutesResponse;
 const ModifyPrivateIpAddressesAttributeRequest = models.ModifyPrivateIpAddressesAttributeRequest;
+const ResetNatGatewayConnectionResponse = models.ResetNatGatewayConnectionResponse;
 const AssociateNetworkInterfaceSecurityGroupsRequest = models.AssociateNetworkInterfaceSecurityGroupsRequest;
 const DeleteVpnGatewayRoutesResponse = models.DeleteVpnGatewayRoutesResponse;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
@@ -470,6 +535,7 @@ const CreateServiceTemplateResponse = models.CreateServiceTemplateResponse;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
 const DisableCcnRoutesResponse = models.DisableCcnRoutesResponse;
 const DescribeCcnRegionBandwidthLimitsRequest = models.DescribeCcnRegionBandwidthLimitsRequest;
+const CreateAssistantCidrResponse = models.CreateAssistantCidrResponse;
 const CustomerGatewayVendor = models.CustomerGatewayVendor;
 const DescribeAddressTemplatesRequest = models.DescribeAddressTemplatesRequest;
 const ConflictSource = models.ConflictSource;
@@ -477,8 +543,9 @@ const DescribeVpnConnectionsResponse = models.DescribeVpnConnectionsResponse;
 const DeleteCustomerGatewayRequest = models.DeleteCustomerGatewayRequest;
 const DescribeAddressTemplatesResponse = models.DescribeAddressTemplatesResponse;
 const Quota = models.Quota;
+const WithdrawNotifyRoutesResponse = models.WithdrawNotifyRoutesResponse;
 const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
-const DeleteHaVipRequest = models.DeleteHaVipRequest;
+const DeleteNetworkAclResponse = models.DeleteNetworkAclResponse;
 const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
 const DescribeServiceTemplateGroupsRequest = models.DescribeServiceTemplateGroupsRequest;
 const CreateSecurityGroupWithPoliciesRequest = models.CreateSecurityGroupWithPoliciesRequest;
@@ -486,13 +553,15 @@ const CreateVpcRequest = models.CreateVpcRequest;
 const DisableFlowLogsRequest = models.DisableFlowLogsRequest;
 const DeleteServiceTemplateRequest = models.DeleteServiceTemplateRequest;
 const DescribeSecurityGroupAssociationStatisticsRequest = models.DescribeSecurityGroupAssociationStatisticsRequest;
+const NotifyRoutesResponse = models.NotifyRoutesResponse;
 const Route = models.Route;
 const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
 const DescribeBandwidthPackageQuotaRequest = models.DescribeBandwidthPackageQuotaRequest;
 const DeleteVpcResponse = models.DeleteVpcResponse;
+const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const DescribeVpcEndPointServiceWhiteListResponse = models.DescribeVpcEndPointServiceWhiteListResponse;
 const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse;
-const InstanceChargePrepaid = models.InstanceChargePrepaid;
+const AddressInfo = models.AddressInfo;
 const AuditCrossBorderComplianceRequest = models.AuditCrossBorderComplianceRequest;
 const DescribeNetDetectsResponse = models.DescribeNetDetectsResponse;
 
@@ -564,6 +633,17 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
+     * This API (ModifyNatGatewayAttribute) is used to modify the attributes of a NAT gateway.
+     * @param {ModifyNatGatewayAttributeRequest} req
+     * @param {function(string, ModifyNatGatewayAttributeResponse):void} cb
+     * @public
+     */
+    ModifyNatGatewayAttribute(req, cb) {
+        let resp = new ModifyNatGatewayAttributeResponse();
+        this.request("ModifyNatGatewayAttribute", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the EIP async job execution results.
      * @param {DescribeTaskResultRequest} req
      * @param {function(string, DescribeTaskResultResponse):void} cb
@@ -572,6 +652,18 @@ Only one policy in a single direction can be replaced in each request, and the P
     DescribeTaskResult(req, cb) {
         let resp = new DescribeTaskResultResponse();
         this.request("DescribeTaskResult", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a <a href="https://intl.cloud.tencent.com/document/product/215/20088?from_cn_redirect=1">network ACL</a>.
+* The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` after creation to set rules for the network ACL as needed.
+     * @param {CreateNetworkAclRequest} req
+     * @param {function(string, CreateNetworkAclResponse):void} cb
+     * @public
+     */
+    CreateNetworkAcl(req, cb) {
+        let resp = new CreateNetworkAclResponse();
+        this.request("CreateNetworkAcl", req, resp, cb);
     }
 
     /**
@@ -645,6 +737,17 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
+     * This API is used to delete a network ACL.
+     * @param {DeleteNetworkAclRequest} req
+     * @param {function(string, DeleteNetworkAclResponse):void} cb
+     * @public
+     */
+    DeleteNetworkAcl(req, cb) {
+        let resp = new DeleteNetworkAclResponse();
+        this.request("DeleteNetworkAcl", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete the endpoint service allowlist.
      * @param {DeleteVpcEndPointServiceWhiteListRequest} req
      * @param {function(string, DeleteVpcEndPointServiceWhiteListResponse):void} cb
@@ -656,15 +759,14 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     * This API (EnableCcnRoutes) is used to enable CCN routes that are already added.<br />
-This API is used to verify whether there will be conflict with an existing route after a CCN route is enabled. If there is a conflict, the route will not be enabled, and the process will fail. When a conflict occurs, you must disable the conflicting route before you can enable the desired route.
-     * @param {EnableCcnRoutesRequest} req
-     * @param {function(string, EnableCcnRoutesResponse):void} cb
+     * This API (DescribeNatGatewayDestinationIpPortTranslationNatRules) is used to query the array of objects of the port forwarding rules for a NAT gateway.
+     * @param {DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest} req
+     * @param {function(string, DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse):void} cb
      * @public
      */
-    EnableCcnRoutes(req, cb) {
-        let resp = new EnableCcnRoutesResponse();
-        this.request("EnableCcnRoutes", req, resp, cb);
+    DescribeNatGatewayDestinationIpPortTranslationNatRules(req, cb) {
+        let resp = new DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse();
+        this.request("DescribeNatGatewayDestinationIpPortTranslationNatRules", req, resp, cb);
     }
 
     /**
@@ -772,14 +874,14 @@ Note: When this API is called, all routing policies in the current route table a
     }
 
     /**
-     * This API (InquiryPriceRenewVpnGateway) is used to query the price for VPN gateway renewal. Currently, only querying prices for IPSEC-type gateways is supported.
-     * @param {InquiryPriceRenewVpnGatewayRequest} req
-     * @param {function(string, InquiryPriceRenewVpnGatewayResponse):void} cb
+     * This API (EnableGatewayFlowMonitor) is used to enable gateway flow monitor.
+     * @param {EnableGatewayFlowMonitorRequest} req
+     * @param {function(string, EnableGatewayFlowMonitorResponse):void} cb
      * @public
      */
-    InquiryPriceRenewVpnGateway(req, cb) {
-        let resp = new InquiryPriceRenewVpnGatewayResponse();
-        this.request("InquiryPriceRenewVpnGateway", req, resp, cb);
+    EnableGatewayFlowMonitor(req, cb) {
+        let resp = new EnableGatewayFlowMonitorResponse();
+        this.request("EnableGatewayFlowMonitor", req, resp, cb);
     }
 
     /**
@@ -862,6 +964,17 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     * This API is used to query the execution result of a VPC task.
+     * @param {DescribeVpcTaskResultRequest} req
+     * @param {function(string, DescribeVpcTaskResultResponse):void} cb
+     * @public
+     */
+    DescribeVpcTaskResult(req, cb) {
+        let resp = new DescribeVpcTaskResultResponse();
+        this.request("DescribeVpcTaskResult", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete the local gateway of a CDC instance.
      * @param {DeleteLocalGatewayRequest} req
      * @param {function(string, DeleteLocalGatewayResponse):void} cb
@@ -873,14 +986,14 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (ModifyServiceTemplateAttribute) is used to modify a protocol port template.
-     * @param {ModifyServiceTemplateAttributeRequest} req
-     * @param {function(string, ModifyServiceTemplateAttributeResponse):void} cb
+     * This API is used to modify (add or delete) the inbound and outbound rules of a network ACL.
+     * @param {ModifyNetworkAclEntriesRequest} req
+     * @param {function(string, ModifyNetworkAclEntriesResponse):void} cb
      * @public
      */
-    ModifyServiceTemplateAttribute(req, cb) {
-        let resp = new ModifyServiceTemplateAttributeResponse();
-        this.request("ModifyServiceTemplateAttribute", req, resp, cb);
+    ModifyNetworkAclEntries(req, cb) {
+        let resp = new ModifyNetworkAclEntriesResponse();
+        this.request("ModifyNetworkAclEntries", req, resp, cb);
     }
 
     /**
@@ -893,6 +1006,17 @@ After unbinding the network instance, the corresponding routing policy will also
     DetachCcnInstances(req, cb) {
         let resp = new DetachCcnInstancesResponse();
         this.request("DetachCcnInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind an EIP to NAT Gateway.
+     * @param {AssociateNatGatewayAddressRequest} req
+     * @param {function(string, AssociateNatGatewayAddressResponse):void} cb
+     * @public
+     */
+    AssociateNatGatewayAddress(req, cb) {
+        let resp = new AssociateNatGatewayAddressResponse();
+        this.request("AssociateNatGatewayAddress", req, resp, cb);
     }
 
     /**
@@ -1040,6 +1164,17 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
+     * This API (DescribeNatGateways) is used to query NAT gateways.
+     * @param {DescribeNatGatewaysRequest} req
+     * @param {function(string, DescribeNatGatewaysResponse):void} cb
+     * @public
+     */
+    DescribeNatGateways(req, cb) {
+        let resp = new DescribeNatGatewaysResponse();
+        this.request("DescribeNatGateways", req, resp, cb);
+    }
+
+    /**
      * This API is used to create subnets in batches.
 * You must create a VPC instance before creating a subnet.
 * After the subnet is successfully created, its IP address range cannot be modified. The subnet IP address range must fall within the VPC IP address range. They can be the same if the VPC has only one subnet. We recommend that you keep the subnet IP address range within the VPC IP address range to reserve IP address ranges for other subnets.
@@ -1148,14 +1283,14 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     *  This API (DescribeVpnConnections) is used to query the VPN tunnel list.
-     * @param {DescribeVpnConnectionsRequest} req
-     * @param {function(string, DescribeVpnConnectionsResponse):void} cb
+     * This API (CreateNatGatewayDestinationIpPortTranslationNatRule) is used to create a port forwarding rule for a NAT gateway.
+     * @param {CreateNatGatewayDestinationIpPortTranslationNatRuleRequest} req
+     * @param {function(string, CreateNatGatewayDestinationIpPortTranslationNatRuleResponse):void} cb
      * @public
      */
-    DescribeVpnConnections(req, cb) {
-        let resp = new DescribeVpnConnectionsResponse();
-        this.request("DescribeVpnConnections", req, resp, cb);
+    CreateNatGatewayDestinationIpPortTranslationNatRule(req, cb) {
+        let resp = new CreateNatGatewayDestinationIpPortTranslationNatRuleResponse();
+        this.request("CreateNatGatewayDestinationIpPortTranslationNatRule", req, resp, cb);
     }
 
     /**
@@ -1209,6 +1344,17 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     * This API (DescribeGatewayFlowQos) is used to query the QoS bandwidth limit of inbound IP flow in a gateway.
+     * @param {DescribeGatewayFlowQosRequest} req
+     * @param {function(string, DescribeGatewayFlowQosResponse):void} cb
+     * @public
+     */
+    DescribeGatewayFlowQos(req, cb) {
+        let resp = new DescribeGatewayFlowQosResponse();
+        this.request("DescribeGatewayFlowQos", req, resp, cb);
+    }
+
+    /**
      * This API is used to unbind a direct connect gateway from a NAT Gateway. After unbinding, the direct connect gateway cannot access internet through the NAT Gateway.
      * @param {DisassociateDirectConnectGatewayNatGatewayRequest} req
      * @param {function(string, DisassociateDirectConnectGatewayNatGatewayResponse):void} cb
@@ -1246,14 +1392,15 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (ModifyServiceTemplateGroupAttribute) is used to modify a protocol port template group.
-     * @param {ModifyServiceTemplateGroupAttributeRequest} req
-     * @param {function(string, ModifyServiceTemplateGroupAttributeResponse):void} cb
+     * This API (DeleteSecurityGroupPolicies) is used to delete security group policies (SecurityGroupPolicy).
+* SecurityGroupPolicySet.Version is used to specify the version of the security group you are operating. If the specified Version number differs from the latest version of the current security group, a failure will be returned. If Version is not specified, the policy of the specified PolicyIndex will be deleted directly.
+     * @param {DeleteSecurityGroupPoliciesRequest} req
+     * @param {function(string, DeleteSecurityGroupPoliciesResponse):void} cb
      * @public
      */
-    ModifyServiceTemplateGroupAttribute(req, cb) {
-        let resp = new ModifyServiceTemplateGroupAttributeResponse();
-        this.request("ModifyServiceTemplateGroupAttribute", req, resp, cb);
+    DeleteSecurityGroupPolicies(req, cb) {
+        let resp = new DeleteSecurityGroupPoliciesResponse();
+        this.request("DeleteSecurityGroupPolicies", req, resp, cb);
     }
 
     /**
@@ -1421,6 +1568,17 @@ Before deleting a subnet, you need to remove all resources in the subnet, includ
     AttachClassicLinkVpc(req, cb) {
         let resp = new AttachClassicLinkVpcResponse();
         this.request("AttachClassicLinkVpc", req, resp, cb);
+    }
+
+    /**
+     * This API (DisassociateNatGatewayAddress) is used to unbind an EIP from a NAT gateway.
+     * @param {DisassociateNatGatewayAddressRequest} req
+     * @param {function(string, DisassociateNatGatewayAddressResponse):void} cb
+     * @public
+     */
+    DisassociateNatGatewayAddress(req, cb) {
+        let resp = new DisassociateNatGatewayAddressResponse();
+        this.request("DisassociateNatGatewayAddress", req, resp, cb);
     }
 
     /**
@@ -1597,6 +1755,28 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     * This API (ModifyServiceTemplateGroupAttribute) is used to modify a protocol port template group.
+     * @param {ModifyServiceTemplateGroupAttributeRequest} req
+     * @param {function(string, ModifyServiceTemplateGroupAttributeResponse):void} cb
+     * @public
+     */
+    ModifyServiceTemplateGroupAttribute(req, cb) {
+        let resp = new ModifyServiceTemplateGroupAttributeResponse();
+        this.request("ModifyServiceTemplateGroupAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API (DeleteAssistantCidr) is used to delete secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+     * @param {DeleteAssistantCidrRequest} req
+     * @param {function(string, DeleteAssistantCidrResponse):void} cb
+     * @public
+     */
+    DeleteAssistantCidr(req, cb) {
+        let resp = new DeleteAssistantCidrResponse();
+        this.request("DeleteAssistantCidr", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete routes of a VPN gateway.
      * @param {DeleteVpnGatewayRoutesRequest} req
      * @param {function(string, DeleteVpnGatewayRoutesResponse):void} cb
@@ -1642,6 +1822,17 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     * This API is used to delete a SNAT forwarding rule of the NAT Gateway.
+     * @param {DeleteNatGatewaySourceIpTranslationNatRuleRequest} req
+     * @param {function(string, DeleteNatGatewaySourceIpTranslationNatRuleResponse):void} cb
+     * @public
+     */
+    DeleteNatGatewaySourceIpTranslationNatRule(req, cb) {
+        let resp = new DeleteNatGatewaySourceIpTranslationNatRuleResponse();
+        this.request("DeleteNatGatewaySourceIpTranslationNatRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete an ENI.
 * An ENI cannot be deleted when it’s bound to a CVM.
  * After the deletion, all of its private IP addresses will be released.
@@ -1668,6 +1859,17 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     *  This API (DescribeVpnConnections) is used to query the VPN tunnel list.
+     * @param {DescribeVpnConnectionsRequest} req
+     * @param {function(string, DescribeVpnConnectionsResponse):void} cb
+     * @public
+     */
+    DescribeVpnConnections(req, cb) {
+        let resp = new DescribeVpnConnectionsResponse();
+        this.request("DescribeVpnConnections", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the information of a flow log.
      * @param {DescribeFlowLogRequest} req
      * @param {function(string, DescribeFlowLogResponse):void} cb
@@ -1679,26 +1881,26 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (ReplaceRoutes) is used to modify a specified routing policy by its ID (RouteId). Batch modification is supported.
-     * @param {ReplaceRoutesRequest} req
-     * @param {function(string, ReplaceRoutesResponse):void} cb
+     * This API (ModifyGatewayFlowQos) is used to adjust the QoS bandwidth limit in a gateway.
+     * @param {ModifyGatewayFlowQosRequest} req
+     * @param {function(string, ModifyGatewayFlowQosResponse):void} cb
      * @public
      */
-    ReplaceRoutes(req, cb) {
-        let resp = new ReplaceRoutesResponse();
-        this.request("ReplaceRoutes", req, resp, cb);
+    ModifyGatewayFlowQos(req, cb) {
+        let resp = new ModifyGatewayFlowQosResponse();
+        this.request("ModifyGatewayFlowQos", req, resp, cb);
     }
 
     /**
-     * This API (UnassignIpv6SubnetCidrBlock) is used to release IPv6 subnet IP ranges.
-If the subnet IP range still has occupied IPs that are not yet repossessed, the subnet IP range cannot be released.
-     * @param {UnassignIpv6SubnetCidrBlockRequest} req
-     * @param {function(string, UnassignIpv6SubnetCidrBlockResponse):void} cb
+     * This API (DeleteNatGateway) is used to delete a NAT gateway.
+After the deletion of a NAT gateway, the system will automatically delete the routing entry that contains the NAT gateway from the route table. It will also unbind the Elastic IP.
+     * @param {DeleteNatGatewayRequest} req
+     * @param {function(string, DeleteNatGatewayResponse):void} cb
      * @public
      */
-    UnassignIpv6SubnetCidrBlock(req, cb) {
-        let resp = new UnassignIpv6SubnetCidrBlockResponse();
-        this.request("UnassignIpv6SubnetCidrBlock", req, resp, cb);
+    DeleteNatGateway(req, cb) {
+        let resp = new DeleteNatGatewayResponse();
+        this.request("DeleteNatGateway", req, resp, cb);
     }
 
     /**
@@ -1736,6 +1938,17 @@ If the subnet IP range still has occupied IPs that are not yet repossessed, the 
     DescribeCcnRegionBandwidthLimits(req, cb) {
         let resp = new DescribeCcnRegionBandwidthLimitsResponse();
         this.request("DescribeCcnRegionBandwidthLimits", req, resp, cb);
+    }
+
+    /**
+     * This API is used to withdraw a route from CCN. This can also be done by clicking the **Withdraw from CCN** button on the route table page.
+     * @param {WithdrawNotifyRoutesRequest} req
+     * @param {function(string, WithdrawNotifyRoutesResponse):void} cb
+     * @public
+     */
+    WithdrawNotifyRoutes(req, cb) {
+        let resp = new WithdrawNotifyRoutesResponse();
+        this.request("WithdrawNotifyRoutes", req, resp, cb);
     }
 
     /**
@@ -1786,14 +1999,25 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to create a network detection instance.
-     * @param {CreateNetDetectRequest} req
-     * @param {function(string, CreateNetDetectResponse):void} cb
+     * This API is used to query the maximum and used number of bandwidth packages under the account in the current region.
+     * @param {DescribeBandwidthPackageQuotaRequest} req
+     * @param {function(string, DescribeBandwidthPackageQuotaResponse):void} cb
      * @public
      */
-    CreateNetDetect(req, cb) {
-        let resp = new CreateNetDetectResponse();
-        this.request("CreateNetDetect", req, resp, cb);
+    DescribeBandwidthPackageQuota(req, cb) {
+        let resp = new DescribeBandwidthPackageQuotaResponse();
+        this.request("DescribeBandwidthPackageQuota", req, resp, cb);
+    }
+
+    /**
+     * This API (CreateAssistantCidr) is used to batch create secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+     * @param {CreateAssistantCidrRequest} req
+     * @param {function(string, CreateAssistantCidrResponse):void} cb
+     * @public
+     */
+    CreateAssistantCidr(req, cb) {
+        let resp = new CreateAssistantCidrResponse();
+        this.request("CreateAssistantCidr", req, resp, cb);
     }
 
     /**
@@ -1856,15 +2080,15 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (DeleteSecurityGroupPolicies) is used to delete security group policies (SecurityGroupPolicy).
-* SecurityGroupPolicySet.Version is used to specify the version of the security group you are operating. If the specified Version number differs from the latest version of the current security group, a failure will be returned. If Version is not specified, the policy of the specified PolicyIndex will be deleted directly.
-     * @param {DeleteSecurityGroupPoliciesRequest} req
-     * @param {function(string, DeleteSecurityGroupPoliciesResponse):void} cb
+     * This API is used to create a NAT Gateway.
+Before taking actions on a NAT Gateway, ensure that it has been successfully created, namely, the `State` field in the response of the `DescribeNatGateway` API is `AVAILABLE`.
+     * @param {CreateNatGatewayRequest} req
+     * @param {function(string, CreateNatGatewayResponse):void} cb
      * @public
      */
-    DeleteSecurityGroupPolicies(req, cb) {
-        let resp = new DeleteSecurityGroupPoliciesResponse();
-        this.request("DeleteSecurityGroupPolicies", req, resp, cb);
+    CreateNatGateway(req, cb) {
+        let resp = new CreateNatGatewayResponse();
+        this.request("CreateNatGateway", req, resp, cb);
     }
 
     /**
@@ -1901,6 +2125,17 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     * This API is used to publish a route to CCN. This can also be done by clicking the **Publish to CCN** button on the route table page.
+     * @param {NotifyRoutesRequest} req
+     * @param {function(string, NotifyRoutesResponse):void} cb
+     * @public
+     */
+    NotifyRoutes(req, cb) {
+        let resp = new NotifyRoutesResponse();
+        this.request("NotifyRoutes", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete an endpoint service.
 
 
@@ -1911,6 +2146,17 @@ This API is completed asynchronously. If you need to query the execution result 
     DeleteVpcEndPointService(req, cb) {
         let resp = new DeleteVpcEndPointServiceResponse();
         this.request("DeleteVpcEndPointService", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyAssistantCidr) is used to batch modify (e.g. add and delete) secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+     * @param {ModifyAssistantCidrRequest} req
+     * @param {function(string, ModifyAssistantCidrResponse):void} cb
+     * @public
+     */
+    ModifyAssistantCidr(req, cb) {
+        let resp = new ModifyAssistantCidrResponse();
+        this.request("ModifyAssistantCidr", req, resp, cb);
     }
 
     /**
@@ -1970,6 +2216,17 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
+     * This API (ModifyNetworkInterfaceAttribute) is used to modify ENI attributes.
+     * @param {ModifyNetworkInterfaceAttributeRequest} req
+     * @param {function(string, ModifyNetworkInterfaceAttributeResponse):void} cb
+     * @public
+     */
+    ModifyNetworkInterfaceAttribute(req, cb) {
+        let resp = new ModifyNetworkInterfaceAttributeResponse();
+        this.request("ModifyNetworkInterfaceAttribute", req, resp, cb);
+    }
+
+    /**
      * This API is used to disable flow log.
      * @param {DisableFlowLogsRequest} req
      * @param {function(string, DisableFlowLogsResponse):void} cb
@@ -1989,6 +2246,17 @@ This API is completed asynchronously. If you need to query the execution result 
     DescribeNetworkInterfaces(req, cb) {
         let resp = new DescribeNetworkInterfacesResponse();
         this.request("DescribeNetworkInterfaces", req, resp, cb);
+    }
+
+    /**
+     * This API (InquiryPriceRenewVpnGateway) is used to query the price for VPN gateway renewal. Currently, only querying prices for IPSEC-type gateways is supported.
+     * @param {InquiryPriceRenewVpnGatewayRequest} req
+     * @param {function(string, InquiryPriceRenewVpnGatewayResponse):void} cb
+     * @public
+     */
+    InquiryPriceRenewVpnGateway(req, cb) {
+        let resp = new InquiryPriceRenewVpnGatewayResponse();
+        this.request("InquiryPriceRenewVpnGateway", req, resp, cb);
     }
 
     /**
@@ -2059,17 +2327,6 @@ A service provider can query all review requests created by any `APPID` under it
     }
 
     /**
-     * This API is used to create an IP address template.
-     * @param {CreateAddressTemplateRequest} req
-     * @param {function(string, CreateAddressTemplateResponse):void} cb
-     * @public
-     */
-    CreateAddressTemplate(req, cb) {
-        let resp = new CreateAddressTemplateResponse();
-        this.request("CreateAddressTemplate", req, resp, cb);
-    }
-
-    /**
      * This API is used to create a security group (SecurityGroup).
 * Note the <a href="https://intl.cloud.tencent.com/document/product/213/12453?from_cn_redirect=1">maximum number of security groups</a> per project in each region under each account.
 * Both the inbound and outbound rules for a newly created security group are "Deny All" by default. You need to call CreateSecurityGroupPolicies to set security group rules based on your needs.
@@ -2097,14 +2354,14 @@ A service provider can query all review requests created by any `APPID` under it
     }
 
     /**
-     * This API (ModifyNetworkInterfaceAttribute) is used to modify ENI attributes.
-     * @param {ModifyNetworkInterfaceAttributeRequest} req
-     * @param {function(string, ModifyNetworkInterfaceAttributeResponse):void} cb
+     * This API is used to associate a network ACL with subnets in a VPC instance.
+     * @param {AssociateNetworkAclSubnetsRequest} req
+     * @param {function(string, AssociateNetworkAclSubnetsResponse):void} cb
      * @public
      */
-    ModifyNetworkInterfaceAttribute(req, cb) {
-        let resp = new ModifyNetworkInterfaceAttributeResponse();
-        this.request("ModifyNetworkInterfaceAttribute", req, resp, cb);
+    AssociateNetworkAclSubnets(req, cb) {
+        let resp = new AssociateNetworkAclSubnetsResponse();
+        this.request("AssociateNetworkAclSubnets", req, resp, cb);
     }
 
     /**
@@ -2270,6 +2527,17 @@ If the IP range still has occupied IPs that are not yet repossessed, the IP rang
     }
 
     /**
+     * This API (ModifyNatGatewayDestinationIpPortTranslationNatRule) is used to modify a port forwarding rule for a NAT gateway.
+     * @param {ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest} req
+     * @param {function(string, ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse):void} cb
+     * @public
+     */
+    ModifyNatGatewayDestinationIpPortTranslationNatRule(req, cb) {
+        let resp = new ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse();
+        this.request("ModifyNatGatewayDestinationIpPortTranslationNatRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind an EIP to an HAVIP. <br />
 This API is completed asynchronously. If you need to query the execution result of an async task, please use the `RequestId` returned by this API to poll the `DescribeVpcTaskResult` API.
      * @param {HaVipAssociateAddressIpRequest} req
@@ -2279,6 +2547,17 @@ This API is completed asynchronously. If you need to query the execution result 
     HaVipAssociateAddressIp(req, cb) {
         let resp = new HaVipAssociateAddressIpResponse();
         this.request("HaVipAssociateAddressIp", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a SNAT rule for the NAT Gateway.
+     * @param {CreateNatGatewaySourceIpTranslationNatRuleRequest} req
+     * @param {function(string, CreateNatGatewaySourceIpTranslationNatRuleResponse):void} cb
+     * @public
+     */
+    CreateNatGatewaySourceIpTranslationNatRule(req, cb) {
+        let resp = new CreateNatGatewaySourceIpTranslationNatRuleResponse();
+        this.request("CreateNatGatewaySourceIpTranslationNatRule", req, resp, cb);
     }
 
     /**
@@ -2338,14 +2617,14 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (DescribeAddressQuota) is used to query the quota information of your [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP) in the current region. For more information, see [EIP product introduction](https://intl.cloud.tencent.com/document/product/213/5733?from_cn_redirect=1).
-     * @param {DescribeAddressQuotaRequest} req
-     * @param {function(string, DescribeAddressQuotaResponse):void} cb
+     * This API is used to create an IP address template.
+     * @param {CreateAddressTemplateRequest} req
+     * @param {function(string, CreateAddressTemplateResponse):void} cb
      * @public
      */
-    DescribeAddressQuota(req, cb) {
-        let resp = new DescribeAddressQuotaResponse();
-        this.request("DescribeAddressQuota", req, resp, cb);
+    CreateAddressTemplate(req, cb) {
+        let resp = new CreateAddressTemplateResponse();
+        this.request("CreateAddressTemplate", req, resp, cb);
     }
 
     /**
@@ -2392,6 +2671,17 @@ This API is completed asynchronously. If you need to query the execution result 
     DescribeSubnets(req, cb) {
         let resp = new DescribeSubnetsResponse();
         this.request("DescribeSubnets", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeAddressQuota) is used to query the quota information of your [Elastic IP](https://intl.cloud.tencent.com/document/product/213/1941?from_cn_redirect=1) (EIP) in the current region. For more information, see [EIP product introduction](https://intl.cloud.tencent.com/document/product/213/5733?from_cn_redirect=1).
+     * @param {DescribeAddressQuotaRequest} req
+     * @param {function(string, DescribeAddressQuotaResponse):void} cb
+     * @public
+     */
+    DescribeAddressQuota(req, cb) {
+        let resp = new DescribeAddressQuotaResponse();
+        this.request("DescribeAddressQuota", req, resp, cb);
     }
 
     /**
@@ -2541,6 +2831,17 @@ Each account can only create a limited number of CCN instances. For more informa
     }
 
     /**
+     * This API (ModifyServiceTemplateAttribute) is used to modify a protocol port template.
+     * @param {ModifyServiceTemplateAttributeRequest} req
+     * @param {function(string, ModifyServiceTemplateAttributeResponse):void} cb
+     * @public
+     */
+    ModifyServiceTemplateAttribute(req, cb) {
+        let resp = new ModifyServiceTemplateAttributeResponse();
+        this.request("ModifyServiceTemplateAttribute", req, resp, cb);
+    }
+
+    /**
      * This API (DeleteSecurityGroup) is used to delete security groups (SecurityGroup).
 * Only security groups under the current account can be deleted.
 * A security group cannot be deleted directly if its instance ID is used in the policy of another security group. You need to modify the policy first and then delete the security group.
@@ -2555,6 +2856,40 @@ Each account can only create a limited number of CCN instances. For more informa
     }
 
     /**
+     * This API is used to disassociate a network ACL from subnets in a VPC instance.
+     * @param {DisassociateNetworkAclSubnetsRequest} req
+     * @param {function(string, DisassociateNetworkAclSubnetsResponse):void} cb
+     * @public
+     */
+    DisassociateNetworkAclSubnets(req, cb) {
+        let resp = new DisassociateNetworkAclSubnetsResponse();
+        this.request("DisassociateNetworkAclSubnets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the object arrays of SNAT forwarding rules of the NAT Gateway.
+     * @param {DescribeNatGatewaySourceIpTranslationNatRulesRequest} req
+     * @param {function(string, DescribeNatGatewaySourceIpTranslationNatRulesResponse):void} cb
+     * @public
+     */
+    DescribeNatGatewaySourceIpTranslationNatRules(req, cb) {
+        let resp = new DescribeNatGatewaySourceIpTranslationNatRulesResponse();
+        this.request("DescribeNatGatewaySourceIpTranslationNatRules", req, resp, cb);
+    }
+
+    /**
+     * This API (EnableCcnRoutes) is used to enable CCN routes that are already added.<br />
+This API is used to verify whether there will be conflict with an existing route after a CCN route is enabled. If there is a conflict, the route will not be enabled, and the process will fail. When a conflict occurs, you must disable the conflicting route before you can enable the desired route.
+     * @param {EnableCcnRoutesRequest} req
+     * @param {function(string, EnableCcnRoutesResponse):void} cb
+     * @public
+     */
+    EnableCcnRoutes(req, cb) {
+        let resp = new EnableCcnRoutesResponse();
+        this.request("EnableCcnRoutes", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyRouteTableAttribute) is used to modify the attributes of a route table.
      * @param {ModifyRouteTableAttributeRequest} req
      * @param {function(string, ModifyRouteTableAttributeResponse):void} cb
@@ -2566,6 +2901,17 @@ Each account can only create a limited number of CCN instances. For more informa
     }
 
     /**
+     * This API (ReplaceRoutes) is used to modify a specified routing policy by its ID (RouteId). Batch modification is supported.
+     * @param {ReplaceRoutesRequest} req
+     * @param {function(string, ReplaceRoutesResponse):void} cb
+     * @public
+     */
+    ReplaceRoutes(req, cb) {
+        let resp = new ReplaceRoutesResponse();
+        this.request("ReplaceRoutes", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyNetDetect) is used to modify network detection parameters.
      * @param {ModifyNetDetectRequest} req
      * @param {function(string, ModifyNetDetectResponse):void} cb
@@ -2574,6 +2920,28 @@ Each account can only create a limited number of CCN instances. For more informa
     ModifyNetDetect(req, cb) {
         let resp = new ModifyNetDetectResponse();
         this.request("ModifyNetDetect", req, resp, cb);
+    }
+
+    /**
+     * This API (DisableGatewayFlowMonitor) is used to disable gateway flow monitor.
+     * @param {DisableGatewayFlowMonitorRequest} req
+     * @param {function(string, DisableGatewayFlowMonitorResponse):void} cb
+     * @public
+     */
+    DisableGatewayFlowMonitor(req, cb) {
+        let resp = new DisableGatewayFlowMonitorResponse();
+        this.request("DisableGatewayFlowMonitor", req, resp, cb);
+    }
+
+    /**
+     * This API (DeleteNatGatewayDestinationIpPortTranslationNatRule) is used to delete a port forwarding rule for a NAT gateway.
+     * @param {DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest} req
+     * @param {function(string, DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse):void} cb
+     * @public
+     */
+    DeleteNatGatewayDestinationIpPortTranslationNatRule(req, cb) {
+        let resp = new DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse();
+        this.request("DeleteNatGatewayDestinationIpPortTranslationNatRule", req, resp, cb);
     }
 
     /**
@@ -2589,14 +2957,14 @@ Each account can only create a limited number of CCN instances. For more informa
     }
 
     /**
-     * This API is used to query the maximum and used number of bandwidth packages under the account in the current region.
-     * @param {DescribeBandwidthPackageQuotaRequest} req
-     * @param {function(string, DescribeBandwidthPackageQuotaResponse):void} cb
+     * This API is used to create a network detection instance.
+     * @param {CreateNetDetectRequest} req
+     * @param {function(string, CreateNetDetectResponse):void} cb
      * @public
      */
-    DescribeBandwidthPackageQuota(req, cb) {
-        let resp = new DescribeBandwidthPackageQuotaResponse();
-        this.request("DescribeBandwidthPackageQuota", req, resp, cb);
+    CreateNetDetect(req, cb) {
+        let resp = new CreateNetDetectResponse();
+        this.request("CreateNetDetect", req, resp, cb);
     }
 
     /**
@@ -2659,6 +3027,17 @@ Each account can only create a limited number of CCN instances. For more informa
     }
 
     /**
+     * This API is used to modify a SNAT forwarding rule of the NAT Gateway.
+     * @param {ModifyNatGatewaySourceIpTranslationNatRuleRequest} req
+     * @param {function(string, ModifyNatGatewaySourceIpTranslationNatRuleResponse):void} cb
+     * @public
+     */
+    ModifyNatGatewaySourceIpTranslationNatRule(req, cb) {
+        let resp = new ModifyNatGatewaySourceIpTranslationNatRuleResponse();
+        this.request("ModifyNatGatewaySourceIpTranslationNatRule", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyCcnAttribute) is used to modify CCN attributes.
      * @param {ModifyCcnAttributeRequest} req
      * @param {function(string, ModifyCcnAttributeResponse):void} cb
@@ -2689,6 +3068,18 @@ Each account can only create a limited number of CCN instances. For more informa
     DescribeSecurityGroupAssociationStatistics(req, cb) {
         let resp = new DescribeSecurityGroupAssociationStatisticsResponse();
         this.request("DescribeSecurityGroupAssociationStatistics", req, resp, cb);
+    }
+
+    /**
+     * This API (UnassignIpv6SubnetCidrBlock) is used to release IPv6 subnet IP ranges.
+If the subnet IP range still has occupied IPs that are not yet repossessed, the subnet IP range cannot be released.
+     * @param {UnassignIpv6SubnetCidrBlockRequest} req
+     * @param {function(string, UnassignIpv6SubnetCidrBlockResponse):void} cb
+     * @public
+     */
+    UnassignIpv6SubnetCidrBlock(req, cb) {
+        let resp = new UnassignIpv6SubnetCidrBlockResponse();
+        this.request("UnassignIpv6SubnetCidrBlock", req, resp, cb);
     }
 
     /**
@@ -2819,6 +3210,28 @@ For parameters of SecurityGroupPolicySet,
     CreateSecurityGroupPolicies(req, cb) {
         let resp = new CreateSecurityGroupPoliciesResponse();
         this.request("CreateSecurityGroupPolicies", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the attributes of a network ACL.
+     * @param {ModifyNetworkAclAttributeRequest} req
+     * @param {function(string, ModifyNetworkAclAttributeResponse):void} cb
+     * @public
+     */
+    ModifyNetworkAclAttribute(req, cb) {
+        let resp = new ModifyNetworkAclAttributeResponse();
+        this.request("ModifyNetworkAclAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API (ResetNatGatewayConnection) is used to adjust concurrent connection cap for the NAT gateway.
+     * @param {ResetNatGatewayConnectionRequest} req
+     * @param {function(string, ResetNatGatewayConnectionResponse):void} cb
+     * @public
+     */
+    ResetNatGatewayConnection(req, cb) {
+        let resp = new ResetNatGatewayConnectionResponse();
+        this.request("ResetNatGatewayConnection", req, resp, cb);
     }
 
     /**

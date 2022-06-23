@@ -821,6 +821,34 @@ class ModifyNewDomainRulesRequest extends  AbstractModel {
 }
 
 /**
+ * Region information.
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region name, such as `ap-guangzhou`
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
  * DescribeListProtocolBlockConfig response structure.
  * @class
  */
@@ -866,6 +894,90 @@ class DescribeListProtocolBlockConfigResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeListBGPInstances request structure.
+ * @class
+ */
+class DescribeListBGPInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Starting offset of the page. Value: (number of pages – 1) * items per page.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of items per page. The default value is 20 when `Limit = 0`. The maximum value is 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * IP filter
+         * @type {string || null}
+         */
+        this.FilterIp = null;
+
+        /**
+         * Anti-DDoS instance ID filter. For example, `bgp-00000001`.
+         * @type {string || null}
+         */
+        this.FilterInstanceId = null;
+
+        /**
+         * Region filter. For example, `ap-guangzhou`.
+         * @type {string || null}
+         */
+        this.FilterRegion = null;
+
+        /**
+         * Name filter
+         * @type {string || null}
+         */
+        this.FilterName = null;
+
+        /**
+         * Line filter. Valid values: 1: BGP; 2: Non-BGP.
+         * @type {number || null}
+         */
+        this.FilterLine = null;
+
+        /**
+         * Filters by instance status. `idle`: Running; `attacking`: Being attacked; `blocking`: Being blocked.
+         * @type {string || null}
+         */
+        this.FilterStatus = null;
+
+        /**
+         * Filters by binding status. `bounding`: the instance is bound; `failed`: the binding failed.
+         * @type {string || null}
+         */
+        this.FilterBoundStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.FilterIp = 'FilterIp' in params ? params.FilterIp : null;
+        this.FilterInstanceId = 'FilterInstanceId' in params ? params.FilterInstanceId : null;
+        this.FilterRegion = 'FilterRegion' in params ? params.FilterRegion : null;
+        this.FilterName = 'FilterName' in params ? params.FilterName : null;
+        this.FilterLine = 'FilterLine' in params ? params.FilterLine : null;
+        this.FilterStatus = 'FilterStatus' in params ? params.FilterStatus : null;
+        this.FilterBoundStatus = 'FilterBoundStatus' in params ? params.FilterBoundStatus : null;
 
     }
 }
@@ -1219,6 +1331,56 @@ class DeleteDDoSGeoIPBlockConfigRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCcBlackWhiteIpList response structure.
+ * @class
+ */
+class DescribeCcBlackWhiteIpListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of policy lists
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Information of the policy list
+         * @type {Array.<CcBlackWhiteIpPolicy> || null}
+         */
+        this.CcBlackWhiteIpList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.CcBlackWhiteIpList) {
+            this.CcBlackWhiteIpList = new Array();
+            for (let z in params.CcBlackWhiteIpList) {
+                let obj = new CcBlackWhiteIpPolicy();
+                obj.deserialize(params.CcBlackWhiteIpList[z]);
+                this.CcBlackWhiteIpList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateIPAlarmThresholdConfig request structure.
  * @class
  */
@@ -1462,6 +1624,97 @@ class ModifyNewDomainRulesResponse extends  AbstractModel {
             this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Layer-4 access control list
+ * @class
+ */
+class CcBlackWhiteIpPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * IP address
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Protocol
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * IP type. Valid values: `black` (blocklisted IP), `white`(allowlisted IP).
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Blocklist/Allowlist IP address
+         * @type {string || null}
+         */
+        this.BlackWhiteIp = null;
+
+        /**
+         * Mask
+         * @type {number || null}
+         */
+        this.Mask = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.BlackWhiteIp = 'BlackWhiteIp' in params ? params.BlackWhiteIp : null;
+        this.Mask = 'Mask' in params ? params.Mask : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -4312,6 +4565,98 @@ class CreateDDoSGeoIPBlockConfigResponse extends  AbstractModel {
 }
 
 /**
+ * CC precise protection policy information
+ * @class
+ */
+class CCPrecisionPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * IP address
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Protocol
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Action of limiting request frequency. Valid values: `alg` (limit request frequency via verification codes) and `drop`(drop requests).
+         * @type {string || null}
+         */
+        this.PolicyAction = null;
+
+        /**
+         * List of policies
+         * @type {Array.<CCPrecisionPlyRecord> || null}
+         */
+        this.PolicyList = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.PolicyAction = 'PolicyAction' in params ? params.PolicyAction : null;
+
+        if (params.PolicyList) {
+            this.PolicyList = new Array();
+            for (let z in params.PolicyList) {
+                let obj = new CCPrecisionPlyRecord();
+                obj.deserialize(params.PolicyList[z]);
+                this.PolicyList.push(obj);
+            }
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
  * CC protection thresholds of the domain name and protocol
  * @class
  */
@@ -4356,6 +4701,67 @@ class ListenerCcThreholdConfig extends  AbstractModel {
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
         this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
+
+    }
+}
+
+/**
+ * EIP association details
+ * @class
+ */
+class EipAddressRelation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region of the Anti-DDoS instance bound to the EIP. For example, hk indicates Hong Kong.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.EipAddressRegion = null;
+
+        /**
+         * ID of the bound resource. For example, an ID may be bound to an CVM instance.
+Note: This is field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.EipBoundRscIns = null;
+
+        /**
+         * ID of the bound ENI
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.EipBoundRscEni = null;
+
+        /**
+         * Private IP of the bound resource
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.EipBoundRscVip = null;
+
+        /**
+         * Modification time
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EipAddressRegion = 'EipAddressRegion' in params ? params.EipAddressRegion : null;
+        this.EipBoundRscIns = 'EipBoundRscIns' in params ? params.EipBoundRscIns : null;
+        this.EipBoundRscEni = 'EipBoundRscEni' in params ? params.EipBoundRscEni : null;
+        this.EipBoundRscVip = 'EipBoundRscVip' in params ? params.EipBoundRscVip : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -4468,47 +4874,66 @@ class IPLineInfo extends  AbstractModel {
 }
 
 /**
- * EIP association details
+ * DescribeCcBlackWhiteIpList request structure.
  * @class
  */
-class EipAddressRelation extends  AbstractModel {
+class DescribeCcBlackWhiteIpListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region of the Anti-DDoS instance bound to the EIP. For example, hk indicates Hong Kong.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Anti-DDoS service type. Valid values: `bgpip-multip` (Anti-DDoS Pro) and `bgpip` (Anti-DDoS Advanced).
          * @type {string || null}
          */
-        this.EipAddressRegion = null;
+        this.Business = null;
 
         /**
-         * ID of the bound resource. For example, an ID may be bound to an CVM instance.
-Note: This is field may return `null`, indicating that no valid value can be obtained.
+         * Instance ID
          * @type {string || null}
          */
-        this.EipBoundRscIns = null;
+        this.InstanceId = null;
 
         /**
-         * ID of the bound ENI
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
+         * Starting offset of the page. Value: (number of pages – 1) * items per page.
+         * @type {number || null}
          */
-        this.EipBoundRscEni = null;
+        this.Offset = null;
 
         /**
-         * Private IP of the bound resource
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
+         * Number of results returned in one page
+         * @type {number || null}
          */
-        this.EipBoundRscVip = null;
+        this.Limit = null;
 
         /**
-         * Modification time
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * IP address, which is required when an Anti-DDoS Advanced instance is used.
          * @type {string || null}
          */
-        this.ModifyTime = null;
+        this.Ip = null;
+
+        /**
+         * Domain name, which is required when an Anti-DDoS Advanced instance is used.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Protocol, which is required when an Anti-DDoS Advanced instance is used.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Specifies a blocklist/allowlist IP.
+         * @type {string || null}
+         */
+        this.FilterIp = null;
+
+        /**
+         * Specifies whether is an IP blocklist or IP allowlist.
+         * @type {string || null}
+         */
+        this.FilterType = null;
 
     }
 
@@ -4519,11 +4944,15 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.EipAddressRegion = 'EipAddressRegion' in params ? params.EipAddressRegion : null;
-        this.EipBoundRscIns = 'EipBoundRscIns' in params ? params.EipBoundRscIns : null;
-        this.EipBoundRscEni = 'EipBoundRscEni' in params ? params.EipBoundRscEni : null;
-        this.EipBoundRscVip = 'EipBoundRscVip' in params ? params.EipBoundRscVip : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.FilterIp = 'FilterIp' in params ? params.FilterIp : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
 
     }
 }
@@ -5145,6 +5574,97 @@ class DescribeListIPAlarmConfigResponse extends  AbstractModel {
 }
 
 /**
+ * Information of the policy list
+ * @class
+ */
+class CcGeoIpPolicyNew extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Policy ID
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * IP address
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Protocol. Valid values: `HTTP` and `HTTPS`.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Action. Valid values: `drop` and `alg`.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Region type. Valid values: `china`, `oversea` and `customized`.
+         * @type {string || null}
+         */
+        this.RegionType = null;
+
+        /**
+         * ID list of regions to be blocked
+         * @type {Array.<number> || null}
+         */
+        this.AreaList = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.RegionType = 'RegionType' in params ? params.RegionType : null;
+        this.AreaList = 'AreaList' in params ? params.AreaList : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
  * Return code, only used to report success.
  * @class
  */
@@ -5175,6 +5695,76 @@ class SuccessCode extends  AbstractModel {
         }
         this.Message = 'Message' in params ? params.Message : null;
         this.Code = 'Code' in params ? params.Code : null;
+
+    }
+}
+
+/**
+ * DescribeCCPrecisionPlyList request structure.
+ * @class
+ */
+class DescribeCCPrecisionPlyListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS service type. Valid values: `bgpip-multip` (Anti-DDoS Pro) and `bgpip` (Anti-DDoS Advanced).
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Starting offset of the page. Value: (number of pages – 1) * items per page.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results returned in one page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * IP address, which is required when an Anti-DDoS Advanced instance is used.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Domain name, which is required when an Anti-DDoS Advanced instance is used.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Protocol, which is required when an Anti-DDoS Advanced instance is used.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
 
     }
 }
@@ -5395,6 +5985,41 @@ class DescribeListIPAlarmConfigRequest extends  AbstractModel {
         this.FilterInstanceId = 'FilterInstanceId' in params ? params.FilterInstanceId : null;
         this.FilterAlarmType = 'FilterAlarmType' in params ? params.FilterAlarmType : null;
         this.FilterIp = 'FilterIp' in params ? params.FilterIp : null;
+
+    }
+}
+
+/**
+ * Port range information
+ * @class
+ */
+class PortSegment extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start port. Value range: 1–65535.
+         * @type {number || null}
+         */
+        this.BeginPort = null;
+
+        /**
+         * End port. The value should be in the range 1–65535 and cannot be less than that of the start port.
+         * @type {number || null}
+         */
+        this.EndPort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginPort = 'BeginPort' in params ? params.BeginPort : null;
+        this.EndPort = 'EndPort' in params ? params.EndPort : null;
 
     }
 }
@@ -5694,24 +6319,52 @@ class ForwardListener extends  AbstractModel {
 }
 
 /**
- * SwitchWaterPrintConfig request structure.
+ * Anti-DDoS Pro instance specifications
  * @class
  */
-class SwitchWaterPrintConfigRequest extends  AbstractModel {
+class BGPInstanceSpecification extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Anti-DDoS instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Watermark status. `1`: enabled; `0`: disabled.
+         * Base protection bandwidth (in Gbps)
          * @type {number || null}
          */
-        this.OpenStatus = null;
+        this.ProtectBandwidth = null;
+
+        /**
+         * Number of protection chances
+         * @type {number || null}
+         */
+        this.ProtectCountLimit = null;
+
+        /**
+         * Number of protection IPs
+         * @type {number || null}
+         */
+        this.ProtectIPNumberLimit = null;
+
+        /**
+         * Auto-renewal status. Valid values:
+`0`: disabled
+`1`: enabled
+]
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Protection type of Anti-DDoS Pro. Valid values: `0` (general protection) and `1` (Lighthouse-based protection).
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnionPackFlag = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ServiceBandWidth = null;
 
     }
 
@@ -5722,8 +6375,12 @@ class SwitchWaterPrintConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
+        this.ProtectBandwidth = 'ProtectBandwidth' in params ? params.ProtectBandwidth : null;
+        this.ProtectCountLimit = 'ProtectCountLimit' in params ? params.ProtectCountLimit : null;
+        this.ProtectIPNumberLimit = 'ProtectIPNumberLimit' in params ? params.ProtectIPNumberLimit : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.UnionPackFlag = 'UnionPackFlag' in params ? params.UnionPackFlag : null;
+        this.ServiceBandWidth = 'ServiceBandWidth' in params ? params.ServiceBandWidth : null;
 
     }
 }
@@ -6598,6 +7255,41 @@ class SpeedValue extends  AbstractModel {
 }
 
 /**
+ * SwitchWaterPrintConfig request structure.
+ * @class
+ */
+class SwitchWaterPrintConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Watermark status. `1`: enabled; `0`: disabled.
+         * @type {number || null}
+         */
+        this.OpenStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
+
+    }
+}
+
+/**
  * DescribeListSchedulingDomain response structure.
  * @class
  */
@@ -6902,24 +7594,46 @@ class CreateSchedulingDomainResponse extends  AbstractModel {
 }
 
 /**
- * Port range information
+ * Details of the cloud product used by the EIP
  * @class
  */
-class PortSegment extends  AbstractModel {
+class EipProductInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start port. Value range: 1–65535.
-         * @type {number || null}
+         * IP address
+         * @type {string || null}
          */
-        this.BeginPort = null;
+        this.Ip = null;
 
         /**
-         * End port. The value should be in the range 1–65535 and cannot be less than that of the start port.
-         * @type {number || null}
+         * Cloud product category. Valid values:
+`public`: CVM
+`bm`: BM
+`eni`: ENI
+`vpngw`: VPN gateway
+ `natgw`: NAT gateway
+`waf`: WAF
+`fpc`: financial products
+`gaap`: GAAP 
+`other`: hosted IP
+]
+         * @type {string || null}
          */
-        this.EndPort = null;
+        this.BizType = null;
+
+        /**
+         * Cloud sub-product category. Valid values: `cvm` (CVM), `lb` (Load balancer), `eni` (ENI), `vpngw` (VPN gateway), `natgw` (NAT gateway), `waf` (WAF), `fpc` (financial products), `gaap` (GAAP), `eip` (BM EIP) and `other` (hosted IP).
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * Cloud instance ID of the IP. This field InstanceId will be `eni-*` if the instance ID is bound to an ENI IP; `none` if there is no instance ID to bind to a hosted IP.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
 
     }
 
@@ -6930,8 +7644,10 @@ class PortSegment extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginPort = 'BeginPort' in params ? params.BeginPort : null;
-        this.EndPort = 'EndPort' in params ? params.EndPort : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.BizType = 'BizType' in params ? params.BizType : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -6967,6 +7683,56 @@ class DeleteCcBlackWhiteIpListRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+
+    }
+}
+
+/**
+ * DescribeCcGeoIPBlockConfigList response structure.
+ * @class
+ */
+class DescribeCcGeoIPBlockConfigListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of policy lists
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Information of the policy list
+         * @type {Array.<CcGeoIpPolicyNew> || null}
+         */
+        this.CcGeoIpPolicyList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.CcGeoIpPolicyList) {
+            this.CcGeoIpPolicyList = new Array();
+            for (let z in params.CcGeoIpPolicyList) {
+                let obj = new CcGeoIpPolicyNew();
+                obj.deserialize(params.CcGeoIpPolicyList[z]);
+                this.CcGeoIpPolicyList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7097,18 +7863,30 @@ class DescribeListProtocolBlockConfigRequest extends  AbstractModel {
 }
 
 /**
- * Region information.
+ * DescribeListBGPInstances response structure.
  * @class
  */
-class RegionInfo extends  AbstractModel {
+class DescribeListBGPInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Region name, such as `ap-guangzhou`
+         * Total number of lists
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of Anti-DDoS Pro instances
+         * @type {Array.<BGPInstance> || null}
+         */
+        this.InstanceList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Region = null;
+        this.RequestId = null;
 
     }
 
@@ -7119,7 +7897,17 @@ class RegionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new BGPInstance();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7294,6 +8082,163 @@ class CreateCcBlackWhiteIpListRequest extends  AbstractModel {
 }
 
 /**
+ * Anti-DDoS Pro instance details
+ * @class
+ */
+class BGPInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS instance details
+         * @type {InstanceRelation || null}
+         */
+        this.InstanceDetail = null;
+
+        /**
+         * Anti-DDoS instance specifications
+         * @type {BGPInstanceSpecification || null}
+         */
+        this.SpecificationLimit = null;
+
+        /**
+         * Anti-DDoS instance usage statistics
+         * @type {BGPInstanceUsages || null}
+         */
+        this.Usage = null;
+
+        /**
+         * Region of the Anti-DDoS instance
+         * @type {RegionInfo || null}
+         */
+        this.Region = null;
+
+        /**
+         * Status of the Anti-DDoS instance. Valid values:
+`idle`: running
+`attacking`: under attacks
+`blocking`: blocked
+`creating`: creating
+`deblocking`: unblocked
+`isolate`: isolated
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Purchase Time
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Expiration time
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * Name of the Anti-DDoS instance
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Package details of the Anti-DDoS instance.
+Note: This field is `null` for an Anti-DDoS instance without using a package.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {PackInfo || null}
+         */
+        this.PackInfo = null;
+
+        /**
+         * Details of the cloud product used by the EIP bound to the Anti-DDoS Pro instance
+         * @type {Array.<EipProductInfo> || null}
+         */
+        this.EipProductInfos = null;
+
+        /**
+         * Binding status of the Anti-DDoS Pro instance
+`idle`: the instance is bound.
+ `bounding`: the instance is in binding.
+`failed`: the binding failed.
+]
+         * @type {string || null}
+         */
+        this.BoundStatus = null;
+
+        /**
+         * Layer-4 protection level
+         * @type {string || null}
+         */
+        this.DDoSLevel = null;
+
+        /**
+         * CC protection switch
+         * @type {number || null}
+         */
+        this.CCEnable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceDetail) {
+            let obj = new InstanceRelation();
+            obj.deserialize(params.InstanceDetail)
+            this.InstanceDetail = obj;
+        }
+
+        if (params.SpecificationLimit) {
+            let obj = new BGPInstanceSpecification();
+            obj.deserialize(params.SpecificationLimit)
+            this.SpecificationLimit = obj;
+        }
+
+        if (params.Usage) {
+            let obj = new BGPInstanceUsages();
+            obj.deserialize(params.Usage)
+            this.Usage = obj;
+        }
+
+        if (params.Region) {
+            let obj = new RegionInfo();
+            obj.deserialize(params.Region)
+            this.Region = obj;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.PackInfo) {
+            let obj = new PackInfo();
+            obj.deserialize(params.PackInfo)
+            this.PackInfo = obj;
+        }
+
+        if (params.EipProductInfos) {
+            this.EipProductInfos = new Array();
+            for (let z in params.EipProductInfos) {
+                let obj = new EipProductInfo();
+                obj.deserialize(params.EipProductInfos[z]);
+                this.EipProductInfos.push(obj);
+            }
+        }
+        this.BoundStatus = 'BoundStatus' in params ? params.BoundStatus : null;
+        this.DDoSLevel = 'DDoSLevel' in params ? params.DDoSLevel : null;
+        this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
+
+    }
+}
+
+/**
  * CC precise protection configuration fields
  * @class
  */
@@ -7338,6 +8283,56 @@ class CCPrecisionPlyRecord extends  AbstractModel {
         this.FieldName = 'FieldName' in params ? params.FieldName : null;
         this.Value = 'Value' in params ? params.Value : null;
         this.ValueOperator = 'ValueOperator' in params ? params.ValueOperator : null;
+
+    }
+}
+
+/**
+ * DescribeCCPrecisionPlyList response structure.
+ * @class
+ */
+class DescribeCCPrecisionPlyListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of policy lists
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Information of the policy list
+         * @type {Array.<CCPrecisionPolicy> || null}
+         */
+        this.PrecisionPolicyList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.PrecisionPolicyList) {
+            this.PrecisionPolicyList = new Array();
+            for (let z in params.PrecisionPolicyList) {
+                let obj = new CCPrecisionPolicy();
+                obj.deserialize(params.PrecisionPolicyList[z]);
+                this.PrecisionPolicyList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7515,6 +8510,48 @@ class DescribeListWaterPrintConfigResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Anti-DDoS Pro instance usage statistics
+ * @class
+ */
+class BGPInstanceUsages extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of used protection chances
+         * @type {number || null}
+         */
+        this.ProtectCountUsage = null;
+
+        /**
+         * Number of protected IPs
+         * @type {number || null}
+         */
+        this.ProtectIPNumberUsage = null;
+
+        /**
+         * Number of attack times in the last 7 days
+         * @type {number || null}
+         */
+        this.Last7DayAttackCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProtectCountUsage = 'ProtectCountUsage' in params ? params.ProtectCountUsage : null;
+        this.ProtectIPNumberUsage = 'ProtectIPNumberUsage' in params ? params.ProtectIPNumberUsage : null;
+        this.Last7DayAttackCount = 'Last7DayAttackCount' in params ? params.Last7DayAttackCount : null;
 
     }
 }
@@ -8091,6 +9128,76 @@ class WaterPrintKey extends  AbstractModel {
 }
 
 /**
+ * DescribeCcGeoIPBlockConfigList request structure.
+ * @class
+ */
+class DescribeCcGeoIPBlockConfigListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS service type. Valid values: `bgpip-multip` (Anti-DDoS Pro) and `bgpip` (Anti-DDoS Advanced).
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Starting offset of the page. Value: (number of pages – 1) * items per page.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results returned in one page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * IP address, which is required when an Anti-DDoS Advanced instance is used.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Domain name, which is required when an Anti-DDoS Advanced instance is used.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Protocol, which is required when an Anti-DDoS Advanced instance is used.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+    }
+}
+
+/**
  * Feature filtering information
  * @class
  */
@@ -8273,7 +9380,9 @@ module.exports = {
     DescribeListDDoSSpeedLimitConfigRequest: DescribeListDDoSSpeedLimitConfigRequest,
     InstanceRelation: InstanceRelation,
     ModifyNewDomainRulesRequest: ModifyNewDomainRulesRequest,
+    RegionInfo: RegionInfo,
     DescribeListProtocolBlockConfigResponse: DescribeListProtocolBlockConfigResponse,
+    DescribeListBGPInstancesRequest: DescribeListBGPInstancesRequest,
     KeyValue: KeyValue,
     ModifyCcBlackWhiteIpListRequest: ModifyCcBlackWhiteIpListRequest,
     DeleteDDoSSpeedLimitConfigRequest: DeleteDDoSSpeedLimitConfigRequest,
@@ -8283,12 +9392,14 @@ module.exports = {
     CreateL7RuleCertsRequest: CreateL7RuleCertsRequest,
     CreateCCPrecisionPolicyResponse: CreateCCPrecisionPolicyResponse,
     DeleteDDoSGeoIPBlockConfigRequest: DeleteDDoSGeoIPBlockConfigRequest,
+    DescribeCcBlackWhiteIpListResponse: DescribeCcBlackWhiteIpListResponse,
     CreateIPAlarmThresholdConfigRequest: CreateIPAlarmThresholdConfigRequest,
     CreateCcBlackWhiteIpListResponse: CreateCcBlackWhiteIpListResponse,
     DescribeDefaultAlarmThresholdResponse: DescribeDefaultAlarmThresholdResponse,
     CreateDDoSAIRequest: CreateDDoSAIRequest,
     DescribeListProtectThresholdConfigRequest: DescribeListProtectThresholdConfigRequest,
     ModifyNewDomainRulesResponse: ModifyNewDomainRulesResponse,
+    CcBlackWhiteIpPolicy: CcBlackWhiteIpPolicy,
     DescribeCCLevelPolicyRequest: DescribeCCLevelPolicyRequest,
     CreateWaterPrintConfigResponse: CreateWaterPrintConfigResponse,
     DescribeListBGPIPInstancesRequest: DescribeListBGPIPInstancesRequest,
@@ -8352,11 +9463,13 @@ module.exports = {
     DDoSAIRelation: DDoSAIRelation,
     DescribeListDDoSSpeedLimitConfigResponse: DescribeListDDoSSpeedLimitConfigResponse,
     CreateDDoSGeoIPBlockConfigResponse: CreateDDoSGeoIPBlockConfigResponse,
+    CCPrecisionPolicy: CCPrecisionPolicy,
     ListenerCcThreholdConfig: ListenerCcThreholdConfig,
+    EipAddressRelation: EipAddressRelation,
     DescribeBasicDeviceStatusRequest: DescribeBasicDeviceStatusRequest,
     PackInfo: PackInfo,
     IPLineInfo: IPLineInfo,
-    EipAddressRelation: EipAddressRelation,
+    DescribeCcBlackWhiteIpListRequest: DescribeCcBlackWhiteIpListRequest,
     DescribeListListenerResponse: DescribeListListenerResponse,
     ProtectThresholdRelation: ProtectThresholdRelation,
     IpSegment: IpSegment,
@@ -8368,16 +9481,19 @@ module.exports = {
     CertIdInsL7Rules: CertIdInsL7Rules,
     CreateDefaultAlarmThresholdResponse: CreateDefaultAlarmThresholdResponse,
     DescribeListIPAlarmConfigResponse: DescribeListIPAlarmConfigResponse,
+    CcGeoIpPolicyNew: CcGeoIpPolicyNew,
     SuccessCode: SuccessCode,
+    DescribeCCPrecisionPlyListRequest: DescribeCCPrecisionPlyListRequest,
     ProtocolPort: ProtocolPort,
     DescribeCCLevelListRequest: DescribeCCLevelListRequest,
     DeleteCCPrecisionPolicyResponse: DeleteCCPrecisionPolicyResponse,
     DescribeListDDoSAIRequest: DescribeListDDoSAIRequest,
     DescribeListIPAlarmConfigRequest: DescribeListIPAlarmConfigRequest,
+    PortSegment: PortSegment,
     PacketFilterConfig: PacketFilterConfig,
     DefaultAlarmThreshold: DefaultAlarmThreshold,
     ForwardListener: ForwardListener,
-    SwitchWaterPrintConfigRequest: SwitchWaterPrintConfigRequest,
+    BGPInstanceSpecification: BGPInstanceSpecification,
     CCLevelPolicy: CCLevelPolicy,
     CreateWaterPrintKeyRequest: CreateWaterPrintKeyRequest,
     WaterPrintRelation: WaterPrintRelation,
@@ -8394,24 +9510,29 @@ module.exports = {
     DeleteCcBlackWhiteIpListResponse: DeleteCcBlackWhiteIpListResponse,
     CreateBoundIPResponse: CreateBoundIPResponse,
     SpeedValue: SpeedValue,
+    SwitchWaterPrintConfigRequest: SwitchWaterPrintConfigRequest,
     DescribeListSchedulingDomainResponse: DescribeListSchedulingDomainResponse,
     ModifyCCPrecisionPolicyRequest: ModifyCCPrecisionPolicyRequest,
     CCThresholdPolicy: CCThresholdPolicy,
     DescribeCCTrendResponse: DescribeCCTrendResponse,
     CreateSchedulingDomainResponse: CreateSchedulingDomainResponse,
-    PortSegment: PortSegment,
+    EipProductInfo: EipProductInfo,
     DeleteCcBlackWhiteIpListRequest: DeleteCcBlackWhiteIpListRequest,
+    DescribeCcGeoIPBlockConfigListResponse: DescribeCcGeoIPBlockConfigListResponse,
     CreateDDoSAIResponse: CreateDDoSAIResponse,
     DDoSGeoIPBlockConfigRelation: DDoSGeoIPBlockConfigRelation,
     DescribeListProtocolBlockConfigRequest: DescribeListProtocolBlockConfigRequest,
-    RegionInfo: RegionInfo,
+    DescribeListBGPInstancesResponse: DescribeListBGPInstancesResponse,
     DescribeDDoSTrendRequest: DescribeDDoSTrendRequest,
     ModifyDDoSGeoIPBlockConfigResponse: ModifyDDoSGeoIPBlockConfigResponse,
     CreateCcBlackWhiteIpListRequest: CreateCcBlackWhiteIpListRequest,
+    BGPInstance: BGPInstance,
     CCPrecisionPlyRecord: CCPrecisionPlyRecord,
+    DescribeCCPrecisionPlyListResponse: DescribeCCPrecisionPlyListResponse,
     DescribeBizTrendRequest: DescribeBizTrendRequest,
     DescribeCCLevelPolicyResponse: DescribeCCLevelPolicyResponse,
     DescribeListWaterPrintConfigResponse: DescribeListWaterPrintConfigResponse,
+    BGPInstanceUsages: BGPInstanceUsages,
     DeleteDDoSSpeedLimitConfigResponse: DeleteDDoSSpeedLimitConfigResponse,
     DeleteCCThresholdPolicyRequest: DeleteCCThresholdPolicyRequest,
     DescribeListListenerRequest: DescribeListListenerRequest,
@@ -8424,6 +9545,7 @@ module.exports = {
     SchedulingDomainInfo: SchedulingDomainInfo,
     DescribeDefaultAlarmThresholdRequest: DescribeDefaultAlarmThresholdRequest,
     WaterPrintKey: WaterPrintKey,
+    DescribeCcGeoIPBlockConfigListRequest: DescribeCcGeoIPBlockConfigListRequest,
     PacketFilterRelation: PacketFilterRelation,
     CreatePacketFilterConfigRequest: CreatePacketFilterConfigRequest,
     DescribeCCTrendRequest: DescribeCCTrendRequest,

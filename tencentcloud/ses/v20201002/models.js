@@ -667,6 +667,49 @@ class ListSendTasksRequest extends  AbstractModel {
 }
 
 /**
+ * GetSendEmailStatus response structure.
+ * @class
+ */
+class GetSendEmailStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Email sending status list
+         * @type {Array.<SendEmailStatus> || null}
+         */
+        this.EmailStatusList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EmailStatusList) {
+            this.EmailStatusList = new Array();
+            for (let z in params.EmailStatusList) {
+                let obj = new SendEmailStatus();
+                obj.deserialize(params.EmailStatusList[z]);
+                this.EmailStatusList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SendEmail request structure.
  * @class
  */
@@ -1607,6 +1650,138 @@ class UpdateEmailTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * Describes the email sending status.
+ * @class
+ */
+class SendEmailStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `MessageId` field returned by the `SendEmail` API
+         * @type {string || null}
+         */
+        this.MessageId = null;
+
+        /**
+         * Recipient email address
+         * @type {string || null}
+         */
+        this.ToEmailAddress = null;
+
+        /**
+         * Sender email address
+         * @type {string || null}
+         */
+        this.FromEmailAddress = null;
+
+        /**
+         * Tencent Cloud processing status:
+0: successful.
+1001: internal system exception.
+1002: internal system exception.
+1003: internal system exception.
+1003: internal system exception.
+1004: email sending timeout.
+1005: internal system exception.
+1006: you have sent too many emails to the same address in a short period.
+1007: the email address is in the blocklist.
+1009: internal system exception.
+1010: daily email sending limit exceeded.
+1011: no permission to send custom content. Use a template.
+2001: no results found.
+3007: invalid template ID or unavailable template.
+3008: template status exception.
+3009: no permission to use this template.
+3010: the format of the `TemplateData` field is incorrect. 
+3014: unable to send the email because the sender domain is not verified.
+3020: the recipient email address is in the blocklist.
+3024: failed to pre-check the email address format.
+3030: email sending is restricted temporarily due to high bounce rate.
+3033: the account has insufficient balance or overdue payment.
+         * @type {number || null}
+         */
+        this.SendStatus = null;
+
+        /**
+         * Recipient processing status:
+0: Tencent Cloud has accepted the request and added it to the send queue.
+1: the email is delivered successfully, `DeliverTime` indicates the time when the email is delivered successfully.
+2: the email is discarded. `DeliverMessage` indicates the reason for discarding.
+3: the recipient's ESP rejects the email, probably because the email address does not exist or due to other reasons.
+8: the email is delayed by the ESP. `DeliverMessage` indicates the reason for delay.
+         * @type {number || null}
+         */
+        this.DeliverStatus = null;
+
+        /**
+         * Description of the recipient processing status
+         * @type {string || null}
+         */
+        this.DeliverMessage = null;
+
+        /**
+         * Timestamp when the request arrives at Tencent Cloud
+         * @type {number || null}
+         */
+        this.RequestTime = null;
+
+        /**
+         * Timestamp when Tencent Cloud delivers the email
+         * @type {number || null}
+         */
+        this.DeliverTime = null;
+
+        /**
+         * Whether the recipient has opened the email
+         * @type {boolean || null}
+         */
+        this.UserOpened = null;
+
+        /**
+         * Whether the recipient has clicked the links in the email
+         * @type {boolean || null}
+         */
+        this.UserClicked = null;
+
+        /**
+         * Whether the recipient has unsubscribed from emails sent by the sender
+         * @type {boolean || null}
+         */
+        this.UserUnsubscribed = null;
+
+        /**
+         * Whether the recipient has reported the sender
+         * @type {boolean || null}
+         */
+        this.UserComplainted = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageId = 'MessageId' in params ? params.MessageId : null;
+        this.ToEmailAddress = 'ToEmailAddress' in params ? params.ToEmailAddress : null;
+        this.FromEmailAddress = 'FromEmailAddress' in params ? params.FromEmailAddress : null;
+        this.SendStatus = 'SendStatus' in params ? params.SendStatus : null;
+        this.DeliverStatus = 'DeliverStatus' in params ? params.DeliverStatus : null;
+        this.DeliverMessage = 'DeliverMessage' in params ? params.DeliverMessage : null;
+        this.RequestTime = 'RequestTime' in params ? params.RequestTime : null;
+        this.DeliverTime = 'DeliverTime' in params ? params.DeliverTime : null;
+        this.UserOpened = 'UserOpened' in params ? params.UserOpened : null;
+        this.UserClicked = 'UserClicked' in params ? params.UserClicked : null;
+        this.UserUnsubscribed = 'UserUnsubscribed' in params ? params.UserUnsubscribed : null;
+        this.UserComplainted = 'UserComplainted' in params ? params.UserComplainted : null;
+
+    }
+}
+
+/**
  * ListEmailTemplates request structure.
  * @class
  */
@@ -1835,6 +2010,62 @@ class ListBlackEmailAddressResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetSendEmailStatus request structure.
+ * @class
+ */
+class GetSendEmailStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sent date. This parameter is required. You can only query the sending status for a single date at a time.
+         * @type {string || null}
+         */
+        this.RequestDate = null;
+
+        /**
+         * Offset. Default value: `0`
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of pulled entries. The maximum value is `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * `MessageId` field returned by the `SendMail` API
+         * @type {string || null}
+         */
+        this.MessageId = null;
+
+        /**
+         * Recipient email address
+         * @type {string || null}
+         */
+        this.ToEmailAddress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestDate = 'RequestDate' in params ? params.RequestDate : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.MessageId = 'MessageId' in params ? params.MessageId : null;
+        this.ToEmailAddress = 'ToEmailAddress' in params ? params.ToEmailAddress : null;
 
     }
 }
@@ -2658,6 +2889,7 @@ module.exports = {
     Attachment: Attachment,
     Template: Template,
     ListSendTasksRequest: ListSendTasksRequest,
+    GetSendEmailStatusResponse: GetSendEmailStatusResponse,
     SendEmailRequest: SendEmailRequest,
     EmailSender: EmailSender,
     BatchSendEmailResponse: BatchSendEmailResponse,
@@ -2677,12 +2909,14 @@ module.exports = {
     DeleteEmailTemplateRequest: DeleteEmailTemplateRequest,
     DeleteBlackListResponse: DeleteBlackListResponse,
     UpdateEmailTemplateRequest: UpdateEmailTemplateRequest,
+    SendEmailStatus: SendEmailStatus,
     ListEmailTemplatesRequest: ListEmailTemplatesRequest,
     CreateReceiverRequest: CreateReceiverRequest,
     CreateReceiverDetailResponse: CreateReceiverDetailResponse,
     ListEmailTemplatesResponse: ListEmailTemplatesResponse,
     SendEmailResponse: SendEmailResponse,
     ListBlackEmailAddressResponse: ListBlackEmailAddressResponse,
+    GetSendEmailStatusRequest: GetSendEmailStatusRequest,
     Simple: Simple,
     DeleteReceiverRequest: DeleteReceiverRequest,
     ListEmailIdentitiesResponse: ListEmailIdentitiesResponse,

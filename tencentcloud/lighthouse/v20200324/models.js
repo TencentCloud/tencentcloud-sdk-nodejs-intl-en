@@ -249,24 +249,76 @@ class AttachCcnRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSnapshotsDeniedActions response structure.
+ * CreateInstances request structure.
  * @class
  */
-class DescribeSnapshotsDeniedActionsResponse extends  AbstractModel {
+class CreateInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of snapshot operation limit details.
-         * @type {Array.<SnapshotDeniedActions> || null}
-         */
-        this.SnapshotDeniedActionSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * ID of the Lighthouse package
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.BundleId = null;
+
+        /**
+         * ID of the Lighthouse image
+         * @type {string || null}
+         */
+        this.BlueprintId = null;
+
+        /**
+         * Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
+         * The display name of the Lighthouse instance
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Number of the Lighthouse instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * List of availability zones. A random AZ is selected by default.
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * Whether the request is a dry run only.
+`true`: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
+If the dry run fails, the corresponding error code will be returned.
+If the dry run succeeds, the RequestId will be returned.
+`false` (default value): send a normal request and create instance(s) if all the requirements are met.
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * Login password of the instance. It’s only available for Windows instances. If it’s not specified, it means that the user choose to set the login password after the instance creation.
+         * @type {LoginConfiguration || null}
+         */
+        this.LoginConfiguration = null;
+
+        /**
+         * Configuration of the containers to create
+         * @type {Array.<DockerContainerConfiguration> || null}
+         */
+        this.Containers = null;
 
     }
 
@@ -277,16 +329,75 @@ class DescribeSnapshotsDeniedActionsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.BundleId = 'BundleId' in params ? params.BundleId : null;
+        this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
 
-        if (params.SnapshotDeniedActionSet) {
-            this.SnapshotDeniedActionSet = new Array();
-            for (let z in params.SnapshotDeniedActionSet) {
-                let obj = new SnapshotDeniedActions();
-                obj.deserialize(params.SnapshotDeniedActionSet[z]);
-                this.SnapshotDeniedActionSet.push(obj);
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+        if (params.LoginConfiguration) {
+            let obj = new LoginConfiguration();
+            obj.deserialize(params.LoginConfiguration)
+            this.LoginConfiguration = obj;
+        }
+
+        if (params.Containers) {
+            this.Containers = new Array();
+            for (let z in params.Containers) {
+                let obj = new DockerContainerConfiguration();
+                obj.deserialize(params.Containers[z]);
+                this.Containers.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeZones request structure.
+ * @class
+ */
+class DescribeZonesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sorting field. Valid values:
+<li>`ZONE`: Sort by the availability zone.
+<li>`INSTANCE_DISPLAY_LABEL`: Sort by the labels of availability zones. Labels include `HIDDEN`, `NORMAL` and `SELECTED`.
+The default value is `ZONE`.
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * Specifies how availability zones are listed. Valid values:
+<li>ASC: Ascending sort. 
+<li>DESC: Descending sort.
+The default value is `ASC`.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -615,6 +726,62 @@ class CreateInstanceSnapshotResponse extends  AbstractModel {
 }
 
 /**
+ * InquirePriceRenewInstances response structure.
+ * @class
+ */
+class InquirePriceRenewInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Price query information.
+         * @type {Price || null}
+         */
+        this.Price = null;
+
+        /**
+         * List of data disk price information.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DataDiskPrice> || null}
+         */
+        this.DataDiskPriceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+
+        if (params.DataDiskPriceSet) {
+            this.DataDiskPriceSet = new Array();
+            for (let z in params.DataDiskPriceSet) {
+                let obj = new DataDiskPrice();
+                obj.deserialize(params.DataDiskPriceSet[z]);
+                this.DataDiskPriceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteFirewallRules response structure.
  * @class
  */
@@ -643,6 +810,69 @@ class DeleteFirewallRulesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstancesAttribute request structure.
+ * @class
+ */
+class ModifyInstancesAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Instance name, which is customizable and can contain up to 60 characters.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+
+    }
+}
+
+/**
+ * DescribeGeneralResourceQuotas request structure.
+ * @class
+ */
+class DescribeGeneralResourceQuotasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of resource names. Valid values: USER_KEY_PAIR, INSTANCE, SNAPSHOT.
+         * @type {Array.<string> || null}
+         */
+        this.ResourceNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceNames = 'ResourceNames' in params ? params.ResourceNames : null;
+
+    }
+}
+
+/**
  * DeleteKeyPairs request structure.
  * @class
  */
@@ -666,6 +896,51 @@ class DeleteKeyPairsRequest extends  AbstractModel {
             return;
         }
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+    }
+}
+
+/**
+ * Information of the block device where the OS is installed, namely, the system disk.
+ * @class
+ */
+class SystemDisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * System disk type.
+Valid values: 
+<li> LOCAL_BASIC: local disk</li><li> LOCAL_SSD: local SSD disk</li><li> CLOUD_BASIC: HDD cloud disk</li><li> CLOUD_SSD: SSD cloud disk</li><li> CLOUD_PREMIUM: Premium Cloud Storage</li>
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * System disk size in GB.
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * System disk ID.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
 
     }
 }
@@ -763,6 +1038,60 @@ class DescribeBundlesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquirePriceRenewInstances request structure.
+ * @class
+ */
+class InquirePriceRenewInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance to be renewed.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
+         * Whether to renew the data disk
+         * @type {boolean || null}
+         */
+        this.RenewDataDisk = null;
+
+        /**
+         * Whether the data disk has the same expiration time as the instance
+         * @type {boolean || null}
+         */
+        this.AlignInstanceExpiredTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+        this.RenewDataDisk = 'RenewDataDisk' in params ? params.RenewDataDisk : null;
+        this.AlignInstanceExpiredTime = 'AlignInstanceExpiredTime' in params ? params.AlignInstanceExpiredTime : null;
 
     }
 }
@@ -2353,24 +2682,38 @@ class ModifyDisksAttributeRequest extends  AbstractModel {
 }
 
 /**
- * ModifyInstancesAttribute request structure.
+ * Port mapping of the Docker container
  * @class
  */
-class ModifyInstancesAttributeRequest extends  AbstractModel {
+class DockerContainerPublishPort extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-         * @type {Array.<string> || null}
+         * Host port
+         * @type {number || null}
          */
-        this.InstanceIds = null;
+        this.HostPort = null;
 
         /**
-         * Instance name, which is customizable and can contain up to 60 characters.
+         * Container port
+         * @type {number || null}
+         */
+        this.ContainerPort = null;
+
+        /**
+         * External IP. It defaults to 0.0.0.0.
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {string || null}
          */
-        this.InstanceName = null;
+        this.Ip = null;
+
+        /**
+         * The protocol defaults to `tcp`. Valid values: `tcp`, `udp` and `sctp`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Protocol = null;
 
     }
 
@@ -2381,37 +2724,33 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.HostPort = 'HostPort' in params ? params.HostPort : null;
+        this.ContainerPort = 'ContainerPort' in params ? params.ContainerPort : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
 
     }
 }
 
 /**
- * DescribeZones request structure.
+ * DescribeSnapshotsDeniedActions response structure.
  * @class
  */
-class DescribeZonesRequest extends  AbstractModel {
+class DescribeSnapshotsDeniedActionsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sorting field. Valid values:
-<li>`ZONE`: Sort by the availability zone.
-<li>`INSTANCE_DISPLAY_LABEL`: Sort by the labels of availability zones. Labels include `HIDDEN`, `NORMAL` and `SELECTED`.
-The default value is `ZONE`.
-         * @type {string || null}
+         * List of snapshot operation limit details.
+         * @type {Array.<SnapshotDeniedActions> || null}
          */
-        this.OrderField = null;
+        this.SnapshotDeniedActionSet = null;
 
         /**
-         * Specifies how availability zones are listed. Valid values:
-<li>ASC: Ascending sort. 
-<li>DESC: Descending sort.
-The default value is `ASC`.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Order = null;
+        this.RequestId = null;
 
     }
 
@@ -2422,8 +2761,16 @@ The default value is `ASC`.
         if (!params) {
             return;
         }
-        this.OrderField = 'OrderField' in params ? params.OrderField : null;
-        this.Order = 'Order' in params ? params.Order : null;
+
+        if (params.SnapshotDeniedActionSet) {
+            this.SnapshotDeniedActionSet = new Array();
+            for (let z in params.SnapshotDeniedActionSet) {
+                let obj = new SnapshotDeniedActions();
+                obj.deserialize(params.SnapshotDeniedActionSet[z]);
+                this.SnapshotDeniedActionSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2789,6 +3136,62 @@ class DisassociateInstancesKeyPairsRequest extends  AbstractModel {
 }
 
 /**
+ * Data disk price
+ * @class
+ */
+class DataDiskPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cloud disk ID.
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * Cloud disk unit price.
+         * @type {number || null}
+         */
+        this.OriginalDiskPrice = null;
+
+        /**
+         * Total cloud disk price.
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Discount.
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * Discounted total price.
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.OriginalDiskPrice = 'OriginalDiskPrice' in params ? params.OriginalDiskPrice : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+    }
+}
+
+/**
  * ImportKeyPair request structure.
  * @class
  */
@@ -2915,42 +3318,26 @@ class StopInstancesResponse extends  AbstractModel {
 }
 
 /**
- * Firewall rule information.
+ * CreateInstances response structure.
  * @class
  */
-class FirewallRule extends  AbstractModel {
+class CreateInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Protocol. Valid values: TCP, UDP, ICMP, ALL.
-         * @type {string || null}
+         * List of IDs created by using this API. The returning of IDs does not mean that the instances are created successfully.
+
+You can call `DescribeInstances` API, and find the instance ID in the `InstancesSet` returned to check its status. If the `status` is `running`, the instance is created successfully.
+         * @type {Array.<string> || null}
          */
-        this.Protocol = null;
+        this.InstanceIdSet = null;
 
         /**
-         * Port. Valid values: ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Port = null;
-
-        /**
-         * IP range or IP (mutually exclusive). Default value: 0.0.0.0/0, which indicates all sources.
-         * @type {string || null}
-         */
-        this.CidrBlock = null;
-
-        /**
-         * Valid values: ACCEPT, DROP. Default value: ACCEPT.
-         * @type {string || null}
-         */
-        this.Action = null;
-
-        /**
-         * Firewall rule description.
-         * @type {string || null}
-         */
-        this.FirewallRuleDescription = null;
+        this.RequestId = null;
 
     }
 
@@ -2961,11 +3348,8 @@ class FirewallRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
-        this.Action = 'Action' in params ? params.Action : null;
-        this.FirewallRuleDescription = 'FirewallRuleDescription' in params ? params.FirewallRuleDescription : null;
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3409,6 +3793,312 @@ class ResetInstancesPasswordResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Instance login configuration and information.
+ * @class
+ */
+class LoginSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key ID list. After a key is associated, you can use it to access the instance. Note: this field may return [], indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+    }
+}
+
+/**
+ * Instance information.
+ * @class
+ */
+class Instance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Package ID.
+         * @type {string || null}
+         */
+        this.BundleId = null;
+
+        /**
+         * Image ID.
+         * @type {string || null}
+         */
+        this.BlueprintId = null;
+
+        /**
+         * Number of instance CPU cores.
+         * @type {number || null}
+         */
+        this.CPU = null;
+
+        /**
+         * Instance memory capacity in GB.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance name.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance billing mode. Valid values: 
+PREPAID: prepaid (i.e., monthly subscription).
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Instance system disk information.
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * Private IP of instance primary ENI. 
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.PrivateAddresses = null;
+
+        /**
+         * Public IP of instance primary ENI. 
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.PublicAddresses = null;
+
+        /**
+         * Instance bandwidth information.
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * Auto-Renewal flag. Valid values: 
+NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically  
+NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically.
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * Instance login settings.
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * Instance status. Valid values: 
+<li>PENDING: creating</li><li>LAUNCH_FAILED: creation failed</li><li>RUNNING: running</li><li>STOPPED: shut down</li><li>STARTING: starting</li><li>STOPPING: shutting down</li><li>REBOOTING: rebooting</li><li>SHUTDOWN: shut down and to be terminated</li><li>TERMINATING: terminating</li>
+         * @type {string || null}
+         */
+        this.InstanceState = null;
+
+        /**
+         * Globally unique ID of instance.
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * Last instance operation, such as `StopInstances` and `ResetInstance`. Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LatestOperation = null;
+
+        /**
+         * Last instance operation status. Valid values: 
+SUCCESS: operation succeeded 
+OPERATING: the operation is being executed 
+FAILED: operation failed 
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LatestOperationState = null;
+
+        /**
+         * Unique request ID for the last operation of the instance. 
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LatestOperationRequestId = null;
+
+        /**
+         * Isolation time according to ISO 8601 standard. UTC time is used. 
+Format: YYYY-MM-DDThh:mm:ssZ.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IsolatedTime = null;
+
+        /**
+         * Creation time according to ISO 8601 standard. UTC time is used. 
+Format: YYYY-MM-DDThh:mm:ssZ.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Expiration time according to ISO 8601 standard. UTC time is used. 
+Format: YYYY-MM-DDThh:mm:ssZ.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * OS type, such as LINUX_UNIX and WINDOWS.
+         * @type {string || null}
+         */
+        this.PlatformType = null;
+
+        /**
+         * OS type.
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * OS name.
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * AZ.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * The list of tags associated with the instance
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BundleId = 'BundleId' in params ? params.BundleId : null;
+        this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
+        this.CPU = 'CPU' in params ? params.CPU : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+        this.PrivateAddresses = 'PrivateAddresses' in params ? params.PrivateAddresses : null;
+        this.PublicAddresses = 'PublicAddresses' in params ? params.PublicAddresses : null;
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.LatestOperation = 'LatestOperation' in params ? params.LatestOperation : null;
+        this.LatestOperationState = 'LatestOperationState' in params ? params.LatestOperationState : null;
+        this.LatestOperationRequestId = 'LatestOperationRequestId' in params ? params.LatestOperationRequestId : null;
+        this.IsolatedTime = 'IsolatedTime' in params ? params.IsolatedTime : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.PlatformType = 'PlatformType' in params ? params.PlatformType : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Docker container mount volume
+ * @class
+ */
+class DockerContainerVolume extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Container path
+         * @type {string || null}
+         */
+        this.ContainerPath = null;
+
+        /**
+         * Host path
+         * @type {string || null}
+         */
+        this.HostPath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ContainerPath = 'ContainerPath' in params ? params.ContainerPath : null;
+        this.HostPath = 'HostPath' in params ? params.HostPath : null;
 
     }
 }
@@ -4355,6 +5045,79 @@ class CreateKeyPairRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeInstances request structure.
+ * @class
+ */
+class DescribeInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID list. Each request can contain up to 100 instances at a time.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Filter list
+<li>instance-name</li>Filter by the instance name
+Type: String
+Required: no
+<li>private-ip-address</li>Filter by the private IP of instance primary ENI
+Type: String
+Required: no
+<li>public-ip-address</li>Filter by the public IP of instance primary ENI
+Type: String
+Required: no
+<li>zone</li>Filter by the availability zone
+Type: String
+Required: no
+<li>instance-state</li>Filter by **instance status**.
+Type: String
+Required: no
+Each request can contain up to 10 filters, each of which can have 100 values. You cannot specify both `InstanceIds` and `Filters` at the same time.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * DetachCcn request structure.
  * @class
  */
@@ -4927,6 +5690,97 @@ class DescribeInstancesReturnableResponse extends  AbstractModel {
 }
 
 /**
+ * Container environment variables
+ * @class
+ */
+class ContainerEnv extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Environment variable key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Environment variable value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * Firewall rule information.
+ * @class
+ */
+class FirewallRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Protocol. Valid values: TCP, UDP, ICMP, ALL.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Port. Valid values: ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * IP range or IP (mutually exclusive). Default value: 0.0.0.0/0, which indicates all sources.
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * Valid values: ACCEPT, DROP. Default value: ACCEPT.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Firewall rule description.
+         * @type {string || null}
+         */
+        this.FirewallRuleDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.FirewallRuleDescription = 'FirewallRuleDescription' in params ? params.FirewallRuleDescription : null;
+
+    }
+}
+
+/**
  * DeleteBlueprints request structure.
  * @class
  */
@@ -5142,6 +5996,56 @@ Each request can contain up to 10 filters, each of which can have 5 values. You 
 }
 
 /**
+ * DescribeInstances response structure.
+ * @class
+ */
+class DescribeInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible instances.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of instance details.
+         * @type {Array.<Instance> || null}
+         */
+        this.InstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceSet) {
+            this.InstanceSet = new Array();
+            for (let z in params.InstanceSet) {
+                let obj = new Instance();
+                obj.deserialize(params.InstanceSet[z]);
+                this.InstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeZones response structure.
  * @class
  */
@@ -5297,6 +6201,27 @@ class DetachDisksResponse extends  AbstractModel {
 }
 
 /**
+ * Login password information
+ * @class
+ */
+class LoginConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeResetInstanceBlueprints request structure.
  * @class
  */
@@ -5368,6 +6293,93 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `BlueprintIds
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Configuration used to create Docker containers
+ * @class
+ */
+class DockerContainerConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Container image address
+         * @type {string || null}
+         */
+        this.ContainerImage = null;
+
+        /**
+         * Container name
+         * @type {string || null}
+         */
+        this.ContainerName = null;
+
+        /**
+         * List of environment variables
+         * @type {Array.<ContainerEnv> || null}
+         */
+        this.Envs = null;
+
+        /**
+         * List of mappings of container ports and host ports
+         * @type {Array.<DockerContainerPublishPort> || null}
+         */
+        this.PublishPorts = null;
+
+        /**
+         * List of container mount volumes
+         * @type {Array.<DockerContainerVolume> || null}
+         */
+        this.Volumes = null;
+
+        /**
+         * The command to run
+         * @type {string || null}
+         */
+        this.Command = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ContainerImage = 'ContainerImage' in params ? params.ContainerImage : null;
+        this.ContainerName = 'ContainerName' in params ? params.ContainerName : null;
+
+        if (params.Envs) {
+            this.Envs = new Array();
+            for (let z in params.Envs) {
+                let obj = new ContainerEnv();
+                obj.deserialize(params.Envs[z]);
+                this.Envs.push(obj);
+            }
+        }
+
+        if (params.PublishPorts) {
+            this.PublishPorts = new Array();
+            for (let z in params.PublishPorts) {
+                let obj = new DockerContainerPublishPort();
+                obj.deserialize(params.PublishPorts[z]);
+                this.PublishPorts.push(obj);
+            }
+        }
+
+        if (params.Volumes) {
+            this.Volumes = new Array();
+            for (let z in params.Volumes) {
+                let obj = new DockerContainerVolume();
+                obj.deserialize(params.Volumes[z]);
+                this.Volumes.push(obj);
+            }
+        }
+        this.Command = 'Command' in params ? params.Command : null;
 
     }
 }
@@ -5675,6 +6687,50 @@ class DescribeDiskConfigsResponse extends  AbstractModel {
 }
 
 /**
+ * Public network accessibility of the instance created by the launch configuration, public network usage billing mode of the instance, maximum bandwidth, etc.
+ * @class
+ */
+class InternetAccessible extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Network billing mode. Valid values:
+<li>Bill by traffic package: TRAFFIC_POSTPAID_BY_HOUR</li>
+<li>Bill by bandwidth: BANDWIDTH_POSTPAID_BY_HOUR</li>
+         * @type {string || null}
+         */
+        this.InternetChargeType = null;
+
+        /**
+         * Public network outbound bandwidth cap in Mbps.
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * Whether to assign a public IP.
+         * @type {boolean || null}
+         */
+        this.PublicIpAssigned = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
+
+    }
+}
+
+/**
  * RebootInstances response structure.
  * @class
  */
@@ -5934,6 +6990,50 @@ class BlueprintPrice extends  AbstractModel {
 }
 
 /**
+ * General resource quota information.
+
+
+ * @class
+ */
+class GeneralResourceQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource name.
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
+         * Number of available resources.
+         * @type {number || null}
+         */
+        this.ResourceQuotaAvailable = null;
+
+        /**
+         * Total number of resources.
+         * @type {number || null}
+         */
+        this.ResourceQuotaTotal = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
+        this.ResourceQuotaAvailable = 'ResourceQuotaAvailable' in params ? params.ResourceQuotaAvailable : null;
+        this.ResourceQuotaTotal = 'ResourceQuotaTotal' in params ? params.ResourceQuotaTotal : null;
+
+    }
+}
+
+/**
  * DescribeResetInstanceBlueprints response structure.
  * @class
  */
@@ -6117,6 +7217,41 @@ class InstancePrice extends  AbstractModel {
 }
 
 /**
+ * Information on tags
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * ModifySnapshotAttribute response structure.
  * @class
  */
@@ -6138,6 +7273,49 @@ class ModifySnapshotAttributeResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeGeneralResourceQuotas response structure.
+ * @class
+ */
+class DescribeGeneralResourceQuotasResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of general resource quota details.
+         * @type {Array.<GeneralResourceQuota> || null}
+         */
+        this.GeneralResourceQuotaSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GeneralResourceQuotaSet) {
+            this.GeneralResourceQuotaSet = new Array();
+            for (let z in params.GeneralResourceQuotaSet) {
+                let obj = new GeneralResourceQuota();
+                obj.deserialize(params.GeneralResourceQuotaSet[z]);
+                this.GeneralResourceQuotaSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -6862,7 +8040,8 @@ module.exports = {
     DescribeInstancesDeniedActionsRequest: DescribeInstancesDeniedActionsRequest,
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
     AttachCcnRequest: AttachCcnRequest,
-    DescribeSnapshotsDeniedActionsResponse: DescribeSnapshotsDeniedActionsResponse,
+    CreateInstancesRequest: CreateInstancesRequest,
+    DescribeZonesRequest: DescribeZonesRequest,
     RegionInfo: RegionInfo,
     DescribeBlueprintInstancesResponse: DescribeBlueprintInstancesResponse,
     InstanceDeniedActions: InstanceDeniedActions,
@@ -6870,10 +8049,15 @@ module.exports = {
     ModifyBundle: ModifyBundle,
     DetachCcnResponse: DetachCcnResponse,
     CreateInstanceSnapshotResponse: CreateInstanceSnapshotResponse,
+    InquirePriceRenewInstancesResponse: InquirePriceRenewInstancesResponse,
     DeleteFirewallRulesResponse: DeleteFirewallRulesResponse,
+    ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
+    DescribeGeneralResourceQuotasRequest: DescribeGeneralResourceQuotasRequest,
     DeleteKeyPairsRequest: DeleteKeyPairsRequest,
+    SystemDisk: SystemDisk,
     ResetInstanceBlueprint: ResetInstanceBlueprint,
     DescribeBundlesResponse: DescribeBundlesResponse,
+    InquirePriceRenewInstancesRequest: InquirePriceRenewInstancesRequest,
     DiscountDetail: DiscountDetail,
     DescribeDiskConfigsRequest: DescribeDiskConfigsRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
@@ -6909,8 +8093,8 @@ module.exports = {
     InstanceReturnable: InstanceReturnable,
     DescribeInstancesDeniedActionsResponse: DescribeInstancesDeniedActionsResponse,
     ModifyDisksAttributeRequest: ModifyDisksAttributeRequest,
-    ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
-    DescribeZonesRequest: DescribeZonesRequest,
+    DockerContainerPublishPort: DockerContainerPublishPort,
+    DescribeSnapshotsDeniedActionsResponse: DescribeSnapshotsDeniedActionsResponse,
     StartInstancesRequest: StartInstancesRequest,
     SnapshotDeniedActions: SnapshotDeniedActions,
     DeleteSnapshotsRequest: DeleteSnapshotsRequest,
@@ -6921,11 +8105,12 @@ module.exports = {
     DeleteSnapshotsResponse: DeleteSnapshotsResponse,
     ModifyDisksRenewFlagRequest: ModifyDisksRenewFlagRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
+    DataDiskPrice: DataDiskPrice,
     ImportKeyPairRequest: ImportKeyPairRequest,
     DeleteBlueprintsResponse: DeleteBlueprintsResponse,
     ModifyInstancesLoginKeyPairAttributeRequest: ModifyInstancesLoginKeyPairAttributeRequest,
     StopInstancesResponse: StopInstancesResponse,
-    FirewallRule: FirewallRule,
+    CreateInstancesResponse: CreateInstancesResponse,
     ModifyBlueprintAttributeResponse: ModifyBlueprintAttributeResponse,
     DescribeFirewallRulesTemplateResponse: DescribeFirewallRulesTemplateResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
@@ -6937,6 +8122,9 @@ module.exports = {
     DescribeKeyPairsRequest: DescribeKeyPairsRequest,
     DescribeCcnAttachedInstancesRequest: DescribeCcnAttachedInstancesRequest,
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
+    LoginSettings: LoginSettings,
+    Instance: Instance,
+    DockerContainerVolume: DockerContainerVolume,
     CreateKeyPairResponse: CreateKeyPairResponse,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     ModifyFirewallRulesResponse: ModifyFirewallRulesResponse,
@@ -6955,6 +8143,7 @@ module.exports = {
     ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
     DiskChargePrepaid: DiskChargePrepaid,
     CreateKeyPairRequest: CreateKeyPairRequest,
+    DescribeInstancesRequest: DescribeInstancesRequest,
     DetachCcnRequest: DetachCcnRequest,
     Filter: Filter,
     DescribeSnapshotsResponse: DescribeSnapshotsResponse,
@@ -6967,15 +8156,20 @@ module.exports = {
     Software: Software,
     DescribeFirewallRulesResponse: DescribeFirewallRulesResponse,
     DescribeInstancesReturnableResponse: DescribeInstancesReturnableResponse,
+    ContainerEnv: ContainerEnv,
+    FirewallRule: FirewallRule,
     DeleteBlueprintsRequest: DeleteBlueprintsRequest,
     FirewallRuleInfo: FirewallRuleInfo,
     CreateFirewallRulesResponse: CreateFirewallRulesResponse,
     DescribeDisksRequest: DescribeDisksRequest,
+    DescribeInstancesResponse: DescribeInstancesResponse,
     DescribeZonesResponse: DescribeZonesResponse,
     CreateBlueprintResponse: CreateBlueprintResponse,
     PolicyDetail: PolicyDetail,
     DetachDisksResponse: DetachDisksResponse,
+    LoginConfiguration: LoginConfiguration,
     DescribeResetInstanceBlueprintsRequest: DescribeResetInstanceBlueprintsRequest,
+    DockerContainerConfiguration: DockerContainerConfiguration,
     ResetAttachCcnResponse: ResetAttachCcnResponse,
     ModifyInstancesRenewFlagResponse: ModifyInstancesRenewFlagResponse,
     ApplyInstanceSnapshotRequest: ApplyInstanceSnapshotRequest,
@@ -6985,6 +8179,7 @@ module.exports = {
     TerminateDisksRequest: TerminateDisksRequest,
     ResetInstanceRequest: ResetInstanceRequest,
     DescribeDiskConfigsResponse: DescribeDiskConfigsResponse,
+    InternetAccessible: InternetAccessible,
     RebootInstancesResponse: RebootInstancesResponse,
     DescribeDisksDeniedActionsResponse: DescribeDisksDeniedActionsResponse,
     DescribeInstanceLoginKeyPairAttributeRequest: DescribeInstanceLoginKeyPairAttributeRequest,
@@ -6992,11 +8187,14 @@ module.exports = {
     Price: Price,
     DescribeDisksReturnableResponse: DescribeDisksReturnableResponse,
     BlueprintPrice: BlueprintPrice,
+    GeneralResourceQuota: GeneralResourceQuota,
     DescribeResetInstanceBlueprintsResponse: DescribeResetInstanceBlueprintsResponse,
     DescribeDisksReturnableRequest: DescribeDisksReturnableRequest,
     SoftwareDetail: SoftwareDetail,
     InstancePrice: InstancePrice,
+    Tag: Tag,
     ModifySnapshotAttributeResponse: ModifySnapshotAttributeResponse,
+    DescribeGeneralResourceQuotasResponse: DescribeGeneralResourceQuotasResponse,
     ModifyInstancesRenewFlagRequest: ModifyInstancesRenewFlagRequest,
     StopInstancesRequest: StopInstancesRequest,
     DescribeModifyInstanceBundlesRequest: DescribeModifyInstanceBundlesRequest,

@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const MountedSettingConf = models.MountedSettingConf;
 const RestartApplicationPodResponse = models.RestartApplicationPodResponse;
+const DeleteApplicationRequest = models.DeleteApplicationRequest;
 const CreateResourceRequest = models.CreateResourceRequest;
 const RestartApplicationResponse = models.RestartApplicationResponse;
 const StopApplicationRequest = models.StopApplicationRequest;
@@ -37,6 +38,7 @@ const ModifyIngressResponse = models.ModifyIngressResponse;
 const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
 const ModifyIngressRequest = models.ModifyIngressRequest;
 const DescribeApplicationPodsRequest = models.DescribeApplicationPodsRequest;
+const CreateApplicationRequest = models.CreateApplicationRequest;
 const EnablePrometheusConf = models.EnablePrometheusConf;
 const DescribeRelatedIngressesResponse = models.DescribeRelatedIngressesResponse;
 const DescribeIngressesRequest = models.DescribeIngressesRequest;
@@ -59,10 +61,12 @@ const IngressRuleValue = models.IngressRuleValue;
 const CreateResourceResponse = models.CreateResourceResponse;
 const ModifyApplicationInfoRequest = models.ModifyApplicationInfoRequest;
 const ModifyApplicationInfoResponse = models.ModifyApplicationInfoResponse;
+const DeleteApplicationResponse = models.DeleteApplicationResponse;
 const IngressRulePath = models.IngressRulePath;
 const CreateEnvironmentResponse = models.CreateEnvironmentResponse;
 const NamespacePage = models.NamespacePage;
 const RestartApplicationRequest = models.RestartApplicationRequest;
+const CreateApplicationResponse = models.CreateApplicationResponse;
 const HorizontalAutoscaler = models.HorizontalAutoscaler;
 const StorageMountConf = models.StorageMountConf;
 const PortMapping = models.PortMapping;
@@ -101,14 +105,14 @@ class TemClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restart an application pod.
-     * @param {RestartApplicationPodRequest} req
-     * @param {function(string, RestartApplicationPodResponse):void} cb
+     * This API is used to restart an application.
+     * @param {RestartApplicationRequest} req
+     * @param {function(string, RestartApplicationResponse):void} cb
      * @public
      */
-    RestartApplicationPod(req, cb) {
-        let resp = new RestartApplicationPodResponse();
-        this.request("RestartApplicationPod", req, resp, cb);
+    RestartApplication(req, cb) {
+        let resp = new RestartApplicationResponse();
+        this.request("RestartApplication", req, resp, cb);
     }
 
     /**
@@ -233,6 +237,17 @@ class TemClient extends AbstractClient {
     }
 
     /**
+     * This API is used to restart an application pod.
+     * @param {RestartApplicationPodRequest} req
+     * @param {function(string, RestartApplicationPodResponse):void} cb
+     * @public
+     */
+    RestartApplicationPod(req, cb) {
+        let resp = new RestartApplicationPodResponse();
+        this.request("RestartApplicationPod", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind a cloud resource.
      * @param {CreateResourceRequest} req
      * @param {function(string, CreateResourceResponse):void} cb
@@ -241,6 +256,20 @@ class TemClient extends AbstractClient {
     CreateResource(req, cb) {
         let resp = new CreateResourceResponse();
         this.request("CreateResource", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an application.
+  - Stop the application if it’s running
+  - Delete resources associated with this application
+  - Delele the application
+     * @param {DeleteApplicationRequest} req
+     * @param {function(string, DeleteApplicationResponse):void} cb
+     * @public
+     */
+    DeleteApplication(req, cb) {
+        let resp = new DeleteApplicationResponse();
+        this.request("DeleteApplication", req, resp, cb);
     }
 
     /**
@@ -255,14 +284,14 @@ class TemClient extends AbstractClient {
     }
 
     /**
-     * This API is used to restart an application.
-     * @param {RestartApplicationRequest} req
-     * @param {function(string, RestartApplicationResponse):void} cb
+     * This API is used to create an application.
+     * @param {CreateApplicationRequest} req
+     * @param {function(string, CreateApplicationResponse):void} cb
      * @public
      */
-    RestartApplication(req, cb) {
-        let resp = new RestartApplicationResponse();
-        this.request("RestartApplication", req, resp, cb);
+    CreateApplication(req, cb) {
+        let resp = new CreateApplicationResponse();
+        this.request("CreateApplication", req, resp, cb);
     }
 
     /**

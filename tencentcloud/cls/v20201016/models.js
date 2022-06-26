@@ -2322,7 +2322,9 @@ class FullTextInfo extends  AbstractModel {
         this.CaseSensitive = null;
 
         /**
-         * Full-Text index delimiter. Each character in the string represents a delimiter.
+         * Separator of the full-text index. Each character represents a separator;
+Supports only English punctuation marks and (\n\t\r);
+We recommend you use (@&?|#()='",;:<>[]{}/ \n\t\r\) as separators;
          * @type {string || null}
          */
         this.Tokenizer = null;
@@ -5345,7 +5347,10 @@ class ValueInfo extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Field delimiter, which is meaningful only if the field type is `text`. Each character in the entered string represents a delimiter.
+         * Separator of fields. Each character represents a separator;
+Supports only English punctuation marks and (\n\t\r);
+`long` and `double` fields need to be null;
+We recommend you use (@&?|#()='",;:<>[]{}/ \n\t\r\\) as separators for `text` fields;
          * @type {string || null}
          */
         this.Tokenizer = null;
@@ -8090,8 +8095,8 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.EnableTag = null;
 
         /**
-         * List of metadata to ship. Currently, only __SOURCE__, __FILENAME__, and __TIMESTAMP__ are supported.
-Note: This field may return `null`, indicating that no valid value was found.
+         * List of metadata to ship. Only \_\_SOURCE\_\_, \_\_FILENAME\_\_, and \_\_TIMESTAMP\_\_ are supported.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.MetaFields = null;
@@ -8102,6 +8107,13 @@ Note: This field may return `null`, indicating that no valid value was found.
          * @type {boolean || null}
          */
         this.TagJsonNotTiled = null;
+
+        /**
+         * Shipping timestamp precision in seconds (default) or milliseconds
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TimestampAccuracy = null;
 
     }
 
@@ -8115,6 +8127,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.EnableTag = 'EnableTag' in params ? params.EnableTag : null;
         this.MetaFields = 'MetaFields' in params ? params.MetaFields : null;
         this.TagJsonNotTiled = 'TagJsonNotTiled' in params ? params.TagJsonNotTiled : null;
+        this.TimestampAccuracy = 'TimestampAccuracy' in params ? params.TimestampAccuracy : null;
 
     }
 }

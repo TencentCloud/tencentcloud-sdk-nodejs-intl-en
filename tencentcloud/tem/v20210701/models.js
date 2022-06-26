@@ -110,6 +110,55 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DeleteApplication request structure.
+ * @class
+ */
+class DeleteApplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Environment ID
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Retain as default
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+        /**
+         * Whether to delete this application automatically when there is no running version.
+         * @type {boolean || null}
+         */
+        this.DeleteApplicationIfNoRunningVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.DeleteApplicationIfNoRunningVersion = 'DeleteApplicationIfNoRunningVersion' in params ? params.DeleteApplicationIfNoRunningVersion : null;
+
+    }
+}
+
+/**
  * CreateResource request structure.
  * @class
  */
@@ -1545,6 +1594,116 @@ class DescribeApplicationPodsRequest extends  AbstractModel {
 }
 
 /**
+ * CreateApplication request structure.
+ * @class
+ */
+class CreateApplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application name
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Whether to use the default image service. 1: yes; 0: no
+         * @type {number || null}
+         */
+        this.UseDefaultImageService = null;
+
+        /**
+         * Type of the bound repository. 0: Personal Edition; 1: Enterprise Edition
+         * @type {number || null}
+         */
+        this.RepoType = null;
+
+        /**
+         * Instance ID of Enterprise Edition image service
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Address of the bound image server
+         * @type {string || null}
+         */
+        this.RepoServer = null;
+
+        /**
+         * Name of the bound image repository
+         * @type {string || null}
+         */
+        this.RepoName = null;
+
+        /**
+         * Source channel
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+        /**
+         * Application subnet
+         * @type {Array.<string> || null}
+         */
+        this.SubnetList = null;
+
+        /**
+         * Programming language 
+- JAVA
+- OTHER
+         * @type {string || null}
+         */
+        this.CodingLanguage = null;
+
+        /**
+         * Deployment mode 
+- IMAGE
+- JAR
+- WAR
+         * @type {string || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * Whether to enable the call chain feature
+         * @type {number || null}
+         */
+        this.EnableTracing = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.UseDefaultImageService = 'UseDefaultImageService' in params ? params.UseDefaultImageService : null;
+        this.RepoType = 'RepoType' in params ? params.RepoType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RepoServer = 'RepoServer' in params ? params.RepoServer : null;
+        this.RepoName = 'RepoName' in params ? params.RepoName : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.SubnetList = 'SubnetList' in params ? params.SubnetList : null;
+        this.CodingLanguage = 'CodingLanguage' in params ? params.CodingLanguage : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.EnableTracing = 'EnableTracing' in params ? params.EnableTracing : null;
+
+    }
+}
+
+/**
  * Enable Prometheus monitoring
  * @class
  */
@@ -2703,6 +2862,41 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DeleteApplication response structure.
+ * @class
+ */
+class DeleteApplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Ingress rule path configuration
  * @class
  */
@@ -2873,6 +3067,41 @@ class RestartApplicationRequest extends  AbstractModel {
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
         this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+
+    }
+}
+
+/**
+ * CreateApplication response structure.
+ * @class
+ */
+class CreateApplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service code
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3613,6 +3842,7 @@ Note: This field may return `null`, indicating that no valid value was found.
 module.exports = {
     MountedSettingConf: MountedSettingConf,
     RestartApplicationPodResponse: RestartApplicationPodResponse,
+    DeleteApplicationRequest: DeleteApplicationRequest,
     CreateResourceRequest: CreateResourceRequest,
     RestartApplicationResponse: RestartApplicationResponse,
     StopApplicationRequest: StopApplicationRequest,
@@ -3632,6 +3862,7 @@ module.exports = {
     DescribeEnvironmentsResponse: DescribeEnvironmentsResponse,
     ModifyIngressRequest: ModifyIngressRequest,
     DescribeApplicationPodsRequest: DescribeApplicationPodsRequest,
+    CreateApplicationRequest: CreateApplicationRequest,
     EnablePrometheusConf: EnablePrometheusConf,
     DescribeRelatedIngressesResponse: DescribeRelatedIngressesResponse,
     DescribeIngressesRequest: DescribeIngressesRequest,
@@ -3654,10 +3885,12 @@ module.exports = {
     CreateResourceResponse: CreateResourceResponse,
     ModifyApplicationInfoRequest: ModifyApplicationInfoRequest,
     ModifyApplicationInfoResponse: ModifyApplicationInfoResponse,
+    DeleteApplicationResponse: DeleteApplicationResponse,
     IngressRulePath: IngressRulePath,
     CreateEnvironmentResponse: CreateEnvironmentResponse,
     NamespacePage: NamespacePage,
     RestartApplicationRequest: RestartApplicationRequest,
+    CreateApplicationResponse: CreateApplicationResponse,
     HorizontalAutoscaler: HorizontalAutoscaler,
     StorageMountConf: StorageMountConf,
     PortMapping: PortMapping,

@@ -67,6 +67,62 @@ Note: if this parameter is a non-empty string, the rule will take effect only fo
 }
 
 /**
+ * The time shifting billing data.
+ * @class
+ */
+class TimeShiftBillData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The push domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * The time-shift video length (minutes).
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * The time-shift days.
+         * @type {number || null}
+         */
+        this.StoragePeriod = null;
+
+        /**
+         * The time for the data returned. Format: YYYY-MM-DDThh:mm:ssZ.
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TotalDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.StoragePeriod = 'StoragePeriod' in params ? params.StoragePeriod : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.TotalDuration = 'TotalDuration' in params ? params.TotalDuration : null;
+
+    }
+}
+
+/**
  * EnableLiveDomain response structure.
  * @class
  */
@@ -4184,6 +4240,56 @@ Up to 16 bytes.
 }
 
 /**
+ * DescribeLiveTimeShiftBillInfoList request structure.
+ * @class
+ */
+class DescribeLiveTimeShiftBillInfoListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The start time for query. You can query data from the past three months. The longest time period that can be queried is one month.
+
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time for query. You can query data from the past three months. The longest time period that can be queried is one month.
+
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The push domains to query. If you leave this empty, the time shifting billing data of all push domains will be returned.
+         * @type {Array.<string> || null}
+         */
+        this.PushDomains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PushDomains = 'PushDomains' in params ? params.PushDomains : null;
+
+    }
+}
+
+/**
  * DescribeLiveCerts response structure.
  * @class
  */
@@ -6459,6 +6565,139 @@ class ResumeLiveStreamResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyLiveRecordTemplate request structure.
+ * @class
+ */
+class ModifyLiveRecordTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Template ID obtained through the `DescribeRecordTemplates` API.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Message description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * FLV recording parameter, which is set when FLV recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.FlvParam = null;
+
+        /**
+         * HLS recording parameter, which is set when HLS recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.HlsParam = null;
+
+        /**
+         * MP4 recording parameter, which is set when MP4 recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.Mp4Param = null;
+
+        /**
+         * AAC recording parameter, which is set when AAC recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.AacParam = null;
+
+        /**
+         * Custom HLS recording parameter.
+         * @type {HlsSpecialParam || null}
+         */
+        this.HlsSpecialParam = null;
+
+        /**
+         * MP3 recording parameter, which is set when MP3 recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.Mp3Param = null;
+
+        /**
+         * Whether to remove the watermark. This parameter is invalid if `IsDelayLive` is `1`.
+         * @type {boolean || null}
+         */
+        this.RemoveWatermark = null;
+
+        /**
+         * A special parameter for FLV recording.
+         * @type {FlvSpecialParam || null}
+         */
+        this.FlvSpecialParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.FlvParam) {
+            let obj = new RecordParam();
+            obj.deserialize(params.FlvParam)
+            this.FlvParam = obj;
+        }
+
+        if (params.HlsParam) {
+            let obj = new RecordParam();
+            obj.deserialize(params.HlsParam)
+            this.HlsParam = obj;
+        }
+
+        if (params.Mp4Param) {
+            let obj = new RecordParam();
+            obj.deserialize(params.Mp4Param)
+            this.Mp4Param = obj;
+        }
+
+        if (params.AacParam) {
+            let obj = new RecordParam();
+            obj.deserialize(params.AacParam)
+            this.AacParam = obj;
+        }
+
+        if (params.HlsSpecialParam) {
+            let obj = new HlsSpecialParam();
+            obj.deserialize(params.HlsSpecialParam)
+            this.HlsSpecialParam = obj;
+        }
+
+        if (params.Mp3Param) {
+            let obj = new RecordParam();
+            obj.deserialize(params.Mp3Param)
+            this.Mp3Param = obj;
+        }
+        this.RemoveWatermark = 'RemoveWatermark' in params ? params.RemoveWatermark : null;
+
+        if (params.FlvSpecialParam) {
+            let obj = new FlvSpecialParam();
+            obj.deserialize(params.FlvSpecialParam)
+            this.FlvSpecialParam = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeLiveStreamPushInfoList request structure.
  * @class
  */
@@ -7436,12 +7675,18 @@ In both scheduled and real-time video recording modes, this parameter is valid.
 }
 
 /**
- * ForbidLiveStream response structure.
+ * DescribeLiveTimeShiftBillInfoList response structure.
  * @class
  */
-class ForbidLiveStreamResponse extends  AbstractModel {
+class DescribeLiveTimeShiftBillInfoListResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The time shifting billing data.
+         * @type {Array.<TimeShiftBillData> || null}
+         */
+        this.DataInfoList = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7457,6 +7702,15 @@ class ForbidLiveStreamResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new TimeShiftBillData();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -8439,78 +8693,18 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
- * ModifyLiveRecordTemplate request structure.
+ * ForbidLiveStream response structure.
  * @class
  */
-class ModifyLiveRecordTemplateRequest extends  AbstractModel {
+class ForbidLiveStreamResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Template ID obtained through the `DescribeRecordTemplates` API.
-         * @type {number || null}
-         */
-        this.TemplateId = null;
-
-        /**
-         * Template name.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TemplateName = null;
-
-        /**
-         * Message description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * FLV recording parameter, which is set when FLV recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.FlvParam = null;
-
-        /**
-         * HLS recording parameter, which is set when HLS recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.HlsParam = null;
-
-        /**
-         * MP4 recording parameter, which is set when MP4 recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.Mp4Param = null;
-
-        /**
-         * AAC recording parameter, which is set when AAC recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.AacParam = null;
-
-        /**
-         * Custom HLS recording parameter.
-         * @type {HlsSpecialParam || null}
-         */
-        this.HlsSpecialParam = null;
-
-        /**
-         * MP3 recording parameter, which is set when MP3 recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.Mp3Param = null;
-
-        /**
-         * Whether to remove the watermark. This parameter is invalid if `IsDelayLive` is `1`.
-         * @type {boolean || null}
-         */
-        this.RemoveWatermark = null;
-
-        /**
-         * A special parameter for FLV recording.
-         * @type {FlvSpecialParam || null}
-         */
-        this.FlvSpecialParam = null;
+        this.RequestId = null;
 
     }
 
@@ -8521,52 +8715,7 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-        if (params.FlvParam) {
-            let obj = new RecordParam();
-            obj.deserialize(params.FlvParam)
-            this.FlvParam = obj;
-        }
-
-        if (params.HlsParam) {
-            let obj = new RecordParam();
-            obj.deserialize(params.HlsParam)
-            this.HlsParam = obj;
-        }
-
-        if (params.Mp4Param) {
-            let obj = new RecordParam();
-            obj.deserialize(params.Mp4Param)
-            this.Mp4Param = obj;
-        }
-
-        if (params.AacParam) {
-            let obj = new RecordParam();
-            obj.deserialize(params.AacParam)
-            this.AacParam = obj;
-        }
-
-        if (params.HlsSpecialParam) {
-            let obj = new HlsSpecialParam();
-            obj.deserialize(params.HlsSpecialParam)
-            this.HlsSpecialParam = obj;
-        }
-
-        if (params.Mp3Param) {
-            let obj = new RecordParam();
-            obj.deserialize(params.Mp3Param)
-            this.Mp3Param = obj;
-        }
-        this.RemoveWatermark = 'RemoveWatermark' in params ? params.RemoveWatermark : null;
-
-        if (params.FlvSpecialParam) {
-            let obj = new FlvSpecialParam();
-            obj.deserialize(params.FlvSpecialParam)
-            this.FlvSpecialParam = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11970,6 +12119,7 @@ class DeleteLiveRecordRuleResponse extends  AbstractModel {
 
 module.exports = {
     CreateLiveSnapshotRuleRequest: CreateLiveSnapshotRuleRequest,
+    TimeShiftBillData: TimeShiftBillData,
     EnableLiveDomainResponse: EnableLiveDomainResponse,
     CreateLiveCertRequest: CreateLiveCertRequest,
     StopRecordTaskResponse: StopRecordTaskResponse,
@@ -12054,6 +12204,7 @@ module.exports = {
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
     CancelCommonMixStreamResponse: CancelCommonMixStreamResponse,
     AddLiveWatermarkRequest: AddLiveWatermarkRequest,
+    DescribeLiveTimeShiftBillInfoListRequest: DescribeLiveTimeShiftBillInfoListRequest,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
     CommonMixInputParam: CommonMixInputParam,
     DescribeProvinceIspPlayInfoListResponse: DescribeProvinceIspPlayInfoListResponse,
@@ -12095,6 +12246,7 @@ module.exports = {
     DescribeVisitTopSumInfoListRequest: DescribeVisitTopSumInfoListRequest,
     DescribeLiveWatermarkResponse: DescribeLiveWatermarkResponse,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
+    ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
     DescribeLiveStreamPushInfoListRequest: DescribeLiveStreamPushInfoListRequest,
     DescribeLiveWatermarksResponse: DescribeLiveWatermarksResponse,
     WatermarkInfo: WatermarkInfo,
@@ -12112,7 +12264,7 @@ module.exports = {
     SnapshotTemplateInfo: SnapshotTemplateInfo,
     DeleteLiveSnapshotRuleResponse: DeleteLiveSnapshotRuleResponse,
     CreateLiveRecordRequest: CreateLiveRecordRequest,
-    ForbidLiveStreamResponse: ForbidLiveStreamResponse,
+    DescribeLiveTimeShiftBillInfoListResponse: DescribeLiveTimeShiftBillInfoListResponse,
     BandwidthInfo: BandwidthInfo,
     CancelCommonMixStreamRequest: CancelCommonMixStreamRequest,
     CertInfo: CertInfo,
@@ -12134,7 +12286,7 @@ module.exports = {
     DescribePlayErrorCodeDetailInfoListResponse: DescribePlayErrorCodeDetailInfoListResponse,
     CreateLiveRecordTemplateResponse: CreateLiveRecordTemplateResponse,
     RecordParam: RecordParam,
-    ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
+    ForbidLiveStreamResponse: ForbidLiveStreamResponse,
     HttpStatusInfo: HttpStatusInfo,
     DeleteLiveRecordRequest: DeleteLiveRecordRequest,
     DescribeLiveSnapshotTemplatesResponse: DescribeLiveSnapshotTemplatesResponse,

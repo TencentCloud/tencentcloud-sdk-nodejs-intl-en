@@ -755,18 +755,20 @@ class DescribeNetworkInterfacesRequest extends  AbstractModel {
         this.NetworkInterfaceIds = null;
 
         /**
-         * Filter condition. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
-<li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
-<li>subnet-id - String - (Filter condition) Subnet instance ID, such as `subnet-f49l6u0z`.</li>
-<li>network-interface-id - String - (Filter condition) ENI instance ID, such as `eni-5k56k7k7`.</li>
-<li>attachment.instance-id - String - (Filter condition) CVM instance ID, such as `ins-3nqpdn3i`.</li>
-<li>groups.security-group-id - String - (Filter condition) Instance ID of the security group, such as `sg-f9ekbxeq`.</li>
-<li>network-interface-name - String - (Filter condition) ENI instance name.</li>
-<li>network-interface-description - String - (Filter condition) ENI instance description.</li>
-<li>address-ip - String - (Filter condition) Private IPv4 address.</li>
-<li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
-<li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
-<li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is ‘true’, filter only the primary ENI. If the value is ‘false’, filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
+         * Filter. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
+<li>`vpc-id` - String - VPC instance ID, such as `vpc-f49l6u0z`.</li>
+<li>`subnet-id` - String - Subnet instance ID, such as `subnet-f49l6u0z`.</li>
+<li>`network-interface-id` - String - ENI instance ID, such as `eni-5k56k7k7`.</li>
+<li>`attachment.instance-id` - String - ID of the bound CVM instance, such as `ins-3nqpdn3i`.</li>
+<li>`groups.security-group-id` - String - ID of the bound security group, such as `sg-f9ekbxeq`.</li>
+<li>`network-interface-name` - String - ENI instance name.</li>
+<li>`network-interface-description` - String - ENI instance description.</li>
+<li>`address-ip` - String - Private IPv4 address. A single IP will be fuzzily matched with the suffix, while multiple IPs will be exactly matched. It can be used with `ip-exact-match` to query and exactly match a single IP.</li>
+<li>`ip-exact-match` - Boolean - Exact match by private IPv4 address. The first value will be returned if multiple values are found.</li>
+<li>`tag-key` - String - Optional - Filter by tag key. See Example 2 for the detailed usage.</li>
+<li>`tag:tag-key` - String - Optional - Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
+<li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. If the value is `true`, filter only the primary ENI. If the value is `false`, filter only the secondary ENI. If this parameter is not specified, filter the both.</li>
+<li>`eni-type` - String - Optional - Filter by ENI type. "0" - secondary ENI, "1" - primary ENI, "2": relayed ENI</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -873,7 +875,7 @@ class SourceIpTranslationNatRule extends  AbstractModel {
 
         /**
          * Resource type. Valid values: SUBNET, NETWORKINTERFACE
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -903,22 +905,22 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.NatGatewaySnatId = null;
 
         /**
-         * NAT Gateway ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * NAT gateway ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NatGatewayId = null;
 
         /**
-         * VPC ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * VPC ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Creation time of a SNAT rule for a NAT Gateway
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * The creation time of a NAT gateway's SNAT rule.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -1520,7 +1522,7 @@ class ModifyNatGatewayAttributeRequest extends  AbstractModel {
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * Whether to modify the security group bound to the NAT Gateway
+         * Whether to modify the security group bound to the NAT gateway
          * @type {boolean || null}
          */
         this.ModifySecurityGroup = null;
@@ -2484,7 +2486,7 @@ class AssociateNatGatewayAddressRequest extends  AbstractModel {
         this.NatGatewayId = null;
 
         /**
-         * The number of EIPs you want to apply for. The system will create the same number of EIPs as you require. Either `AddressCount` or `PublicAddresses` must be passed in.
+         * The number of EIPs you want to apply for. Either `AddressCount` or `PublicAddresses` must be passed in.
          * @type {number || null}
          */
         this.AddressCount = null;
@@ -2508,13 +2510,13 @@ class AssociateNatGatewayAddressRequest extends  AbstractModel {
         this.StockPublicIpAddressesBandwidthOut = null;
 
         /**
-         * The requested size of the public network IP bandwidth (in Mbps), which defaults to the maximum value applicable for the current user type.
+         * The size of the public network IP bandwidth to be applied for (in Mbps), which defaults to the maximum value applicable for the current user type.
          * @type {number || null}
          */
         this.PublicIpAddressesBandwidthOut = null;
 
         /**
-         * 
+         * Whether the public IP and the NAT gateway must be in the same availability zone. Valid values: `true` and `false`. This parameter is valid only when `Zone` is specified.
          * @type {boolean || null}
          */
         this.PublicIpFromSameZone = null;
@@ -3624,16 +3626,16 @@ class DescribeNatGatewaySourceIpTranslationNatRulesRequest extends  AbstractMode
         this.NatGatewayId = null;
 
         /**
-         * Filter conditions:
-<li> resource-id, the subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
-<li> public-ip-address, the EIP, such as `139.199.232.238`</li>
-<li>description, the rule description</li>
+         * Filter:
+<li>`resource-id`: The subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
+<li>`public-ip-address`: The EIP, such as `139.199.232.238`</li>
+<li>`description` The rule description</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * Offset. Default is 0.
+         * Offset. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -3684,23 +3686,23 @@ class DescribeNatGatewaysRequest extends  AbstractModel {
         this.NatGatewayIds = null;
 
         /**
-         * Filter condition. `NatGatewayIds` and `Filters` cannot be specified at the same time.
-<li>nat-gateway-id - String - (Filter condition) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
-<li>vpc-id - String - (Filter condition) The unique ID of the VPC, such as `vpc-123xx454`.</li>
-<li>nat-gateway-name - String - (Filter condition) The name of the protocol port template instance, such as `test_nat`.</li>
-<li>tag-key - String - (Filter condition) The tag key, such as `test-key`.</li>
+         * Filters. `NatGatewayIds` and `Filters` cannot be specified at the same time.
+<li>nat-gateway-id - String - (Filter) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
+<li>vpc-id - String - (Filter) The unique ID of the VPC, such as `vpc-123xx454`.</li>
+<li>nat-gateway-name - String - (Filter) The ID of the protocol port template instance, such as `test_nat`.</li>
+<li>tag-key - String - (Filter) The tag key, such as `test-key`.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * Offset. The default value is 0.
+         * Offset. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of values to be returned. The default value is 20. Maximum is 100.
+         * Number of returned results. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -3979,14 +3981,14 @@ class DescribeNatGatewaySourceIpTranslationNatRulesResponse extends  AbstractMod
         super();
 
         /**
-         * Object array of the SNAT rule for a NAT Gateway.
+         * Array of objects of a NAT gateway's SNAT rules.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<SourceIpTranslationNatRule> || null}
          */
         this.SourceIpTranslationNatRuleSet = null;
 
         /**
-         * The number of object arrays of eligible forwarding rules for a NAT Gateway
+         * The number of eligible object arrays of a NAT gateway's forwarding rules.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -5348,6 +5350,48 @@ class DescribeSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * RefreshDirectConnectGatewayRouteToNatGateway request structure.
+ * @class
+ */
+class RefreshDirectConnectGatewayRouteToNatGatewayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * The NAT gateway ID.
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * Whether it is pre-refresh. Valid values: `True` (yes) and `False` (no)
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+
+    }
+}
+
+/**
  * DescribeNatGatewayDestinationIpPortTranslationNatRules request structure.
  * @class
  */
@@ -5362,27 +5406,27 @@ class DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest extends  Abs
         this.NatGatewayIds = null;
 
         /**
-         * Filter conditions:
+         * Filters:
 `NatGatewayIds` and `Filters` cannot be specified at the same time.
-<li> nat-gateway-id, the NAT gateway ID, such as `nat-0yi4hekt`.</li>
-<li> vpc-id, the VPC ID, such as `vpc-0yi4hekt`.</li>
-<li> public-ip-address, the EIP, such as `139.199.232.238`.</li>
-<li>public-port, the public network port.</li>
-<li>private-ip-address, the private IP, such as `10.0.0.1`.</li>
-<li>private-port, the private network port.</li>
-<li>description, the rule description.</li>
+<li> `nat-gateway-id`: The NAT gateway ID, such as `nat-0yi4hekt`.</li>
+<li> `vpc-id`: The VPC ID, such as `vpc-0yi4hekt`.</li>
+<li> `public-ip-address`: The EIP, such as `139.199.232.238`.</li>
+<li>`public-port`: The public network port.</li>
+<li>`private-ip-address`: The private IP, such as `10.0.0.1`.</li>
+<li>`private-port`. The private network port.</li>
+<li>`description`. The rule description.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
 
         /**
-         * Offset. The default value is 0.
+         * Offset. Default value: 0.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of values to be returned. The default value is 20. Maximum is 100.
+         * Number of returned results. Default value: 20. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -5840,7 +5884,7 @@ class ResetNatGatewayConnectionRequest extends  AbstractModel {
         super();
 
         /**
-         * NAT gateway ID.
+         * The NAT gateway ID.
          * @type {string || null}
          */
         this.NatGatewayId = null;
@@ -6350,7 +6394,7 @@ class CreateNatGatewayResponse extends  AbstractModel {
         this.NatGatewaySet = null;
 
         /**
-         * The number of NAT gateway objects meeting the conditions.
+         * The number of eligible NAT gateway objects.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -7657,6 +7701,55 @@ class CreateAddressTemplateGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeNatGatewayDirectConnectGatewayRoute request structure.
+ * @class
+ */
+class DescribeNatGatewayDirectConnectGatewayRouteRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of the NAT gateway
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * Unique ID of VPC
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Valid range: 0-200
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Greater than 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeCustomerGatewayVendors response structure.
  * @class
  */
@@ -7911,7 +8004,7 @@ class DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse extends  Ab
         this.NatGatewayDestinationIpPortTranslationNatRuleSet = null;
 
         /**
-         * The number of object arrays of NAT port forwarding rules meeting the conditions.
+         * The number of eligible object arrays of NAT port forwarding rules.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -8866,8 +8959,8 @@ class NatGateway extends  AbstractModel {
 
         /**
          * The status of the NAT gateway.
- 'PENDING': Creating, 'DELETING': Deleting, 'AVAILABLE': Operating, 'UPDATING': Upgrading,
-‘FAILED’: Failed.
+ `PENDING`: Being created, `DELETING`: Being deleted, `AVAILABLE`: Running, `UPDATING`: Being upgraded,
+`FAILED`: Failed.
          * @type {string || null}
          */
         this.State = null;
@@ -8891,7 +8984,7 @@ class NatGateway extends  AbstractModel {
         this.PublicIpAddressSet = null;
 
         /**
-         * The NAT gateway status. `AVAILABLE`: Operating, `UNAVAILABLE`: Unavailable, `INSUFFICIENT`: Account is in arrears and the service is suspended.
+         * The NAT gateway status. `AVAILABLE`: Operating, `UNAVAILABLE`: Unavailable, `INSUFFICIENT`: Service suspended due to account overdue.
          * @type {string || null}
          */
         this.NetworkState = null;
@@ -8915,47 +9008,49 @@ class NatGateway extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * IDs of direct connect gateway associated.
+         * ID of the direct connect gateway bound.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.DirectConnectGatewayIds = null;
 
         /**
          * Subnet ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Tag key-value pair.
+         * Tag key-value pairs.
          * @type {Array.<Tag> || null}
          */
         this.TagSet = null;
 
         /**
          * The list of the security groups bound to the NAT Gateway
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupSet = null;
 
         /**
-         * SNAT forwarding rule of the NAT Gateway.
-Note: this field may return `null`, indicating that no valid value can be obtained.
+         * SNAT forwarding rule of the NAT gateway.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<SourceIpTranslationNatRule> || null}
          */
         this.SourceIpTranslationNatRuleSet = null;
 
         /**
-         * Whether the NAT Gateway is dedicated.
-Note: this field may return `null`, indicating that no valid value can be obtained.
+         * Whether the NAT gateway is dedicated.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsExclusive = null;
 
         /**
          * Bandwidth of the gateway cluster where the dedicated NAT Gateway resides. Unit: Mbps. This field does not exist when the `IsExclusive` field is set to `false`.
-Note: this field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ExclusiveGatewayBandwidth = null;
@@ -9800,13 +9895,13 @@ class NatGatewayDestinationIpPortTranslationNatRule extends  AbstractModel {
         this.PublicPort = null;
 
         /**
-         * Private network address.
+         * Private IP.
          * @type {string || null}
          */
         this.PrivateIpAddress = null;
 
         /**
-         * Private network port.
+         * Private port.
          * @type {number || null}
          */
         this.PrivatePort = null;
@@ -9819,21 +9914,21 @@ class NatGatewayDestinationIpPortTranslationNatRule extends  AbstractModel {
 
         /**
          * NAT gateway ID.
-Note: This field may return null, indicating no valid value.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NatGatewayId = null;
 
         /**
          * VPC ID.
-Note: This field may return null, indicating no valid value.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
          * The creation time of the NAT gateway forwarding rule.
-Note: This field may return null, indicating no valid value.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -11834,6 +11929,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ExtendEniPrivateIpAddressQuantity = null;
 
         /**
+         * The quota of relayed ENIs
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SubEniQuantity = null;
+
+        /**
+         * The quota of IPs that can be assigned to each relayed ENI.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SubEniPrivateIpAddressQuantity = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -11852,6 +11961,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.EniPrivateIpAddressQuantity = 'EniPrivateIpAddressQuantity' in params ? params.EniPrivateIpAddressQuantity : null;
         this.ExtendEniQuantity = 'ExtendEniQuantity' in params ? params.ExtendEniQuantity : null;
         this.ExtendEniPrivateIpAddressQuantity = 'ExtendEniPrivateIpAddressQuantity' in params ? params.ExtendEniPrivateIpAddressQuantity : null;
+        this.SubEniQuantity = 'SubEniQuantity' in params ? params.SubEniQuantity : null;
+        this.SubEniPrivateIpAddressQuantity = 'SubEniPrivateIpAddressQuantity' in params ? params.SubEniPrivateIpAddressQuantity : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13808,6 +13919,12 @@ class CreateNetworkInterfaceRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Configuration of the ENI trunking mode. Valid values: `Enable` and `Disable`. Default value: `Disable`.
+         * @type {string || null}
+         */
+        this.TrunkingFlag = null;
+
     }
 
     /**
@@ -13841,6 +13958,7 @@ class CreateNetworkInterfaceRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.TrunkingFlag = 'TrunkingFlag' in params ? params.TrunkingFlag : null;
 
     }
 }
@@ -17904,6 +18022,56 @@ class SubnetInput extends  AbstractModel {
 }
 
 /**
+ * DescribeNatGatewayDirectConnectGatewayRoute response structure.
+ * @class
+ */
+class DescribeNatGatewayDirectConnectGatewayRouteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Route data
+         * @type {Array.<NatDirectConnectGatewayRoute> || null}
+         */
+        this.NatDirectConnectGatewayRouteSet = null;
+
+        /**
+         * Total number of routes
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NatDirectConnectGatewayRouteSet) {
+            this.NatDirectConnectGatewayRouteSet = new Array();
+            for (let z in params.NatDirectConnectGatewayRouteSet) {
+                let obj = new NatDirectConnectGatewayRoute();
+                obj.deserialize(params.NatDirectConnectGatewayRouteSet[z]);
+                this.NatDirectConnectGatewayRouteSet.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * EnableVpcEndPointConnect response structure.
  * @class
  */
@@ -18147,31 +18315,31 @@ class CreateNatGatewayRequest extends  AbstractModel {
         this.NatGatewayName = null;
 
         /**
-         * The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+         * The ID of the VPC instance, which can be obtained from the `VpcId` field in response of the `DescribeVpcs` API.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * The maximum outbound bandwidth of the NAT gateway (unit: Mbps). Supported parameter values: `20, 50, 100, 200, 500, 1000, 2000, 5000`. Default: `100Mbps`.
+         * The maximum outbound bandwidth of the NAT gateway (unit: Mbps). Supported parameter values: `20, 50, 100, 200, 500, 1000, 2000, 5000`. Default: `100`.
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * The concurrent connection cap of the NAT gateway. Supported parameter values: `1000000, 3000000, 10000000`. The default value is `100000`.
+         * The concurrent connection cap of the NAT gateway. Values: `1000000, 3000000, 10000000`. The default value is `1000000`.
          * @type {number || null}
          */
         this.MaxConcurrentConnection = null;
 
         /**
-         * The number of EIPs that needs to be applied for. The system will create N number of EIPs according to your requirements. Either AddressCount or PublicAddresses must be passed in.
+         * The number of EIPs that you want to apply for. Either `AddressCount` or `PublicIpAddresses` must be passed in.
          * @type {number || null}
          */
         this.AddressCount = null;
 
         /**
-         * The EIP array bound to the NAT gateway. Either AddressCount or PublicAddresses must be passed in.
+         * The EIP array bound to the NAT gateway. Either AddressCount or PublicIpAddresses must be passed in.
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
@@ -18183,7 +18351,7 @@ class CreateNatGatewayRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -18201,13 +18369,13 @@ class CreateNatGatewayRequest extends  AbstractModel {
         this.StockPublicIpAddressesBandwidthOut = null;
 
         /**
-         * The requested size of the public network IP bandwidth (in Mbps), which defaults to the maximum value applicable for the current user type.
+         * The size of the public network IP bandwidth to be applied for (in Mbps), which defaults to the maximum value applicable for the current user type.
          * @type {number || null}
          */
         this.PublicIpAddressesBandwidthOut = null;
 
         /**
-         * 
+         * Whether the public IP and the NAT gateway must be in the same availability zone. Valid values: `true` and `false`. This parameter is valid only when `Zone` is specified.
          * @type {boolean || null}
          */
         this.PublicIpFromSameZone = null;
@@ -20234,7 +20402,7 @@ class DestinationIpPortTranslationNatRule extends  AbstractModel {
         super();
 
         /**
-         * Network protocol. Available choices: `TCP`, `UDP`.
+         * Network protocol. Valid values: `TCP`, `UDP`.
          * @type {string || null}
          */
         this.IpProtocol = null;
@@ -20246,7 +20414,7 @@ class DestinationIpPortTranslationNatRule extends  AbstractModel {
         this.PublicIpAddress = null;
 
         /**
-         * Public port.
+         * Public network port.
          * @type {number || null}
          */
         this.PublicPort = null;
@@ -20264,7 +20432,7 @@ class DestinationIpPortTranslationNatRule extends  AbstractModel {
         this.PrivatePort = null;
 
         /**
-         * NAT gateway forwarding rule description.
+         * Description of NAT gateway forwarding rules.
          * @type {string || null}
          */
         this.Description = null;
@@ -21509,6 +21677,49 @@ class DescribeServiceTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * RefreshDirectConnectGatewayRouteToNatGateway response structure.
+ * @class
+ */
+class RefreshDirectConnectGatewayRouteToNatGatewayResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDC subnet information
+         * @type {Array.<DirectConnectSubnet> || null}
+         */
+        this.DirectConnectSubnetSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DirectConnectSubnetSet) {
+            this.DirectConnectSubnetSet = new Array();
+            for (let z in params.DirectConnectSubnetSet) {
+                let obj = new DirectConnectSubnet();
+                obj.deserialize(params.DirectConnectSubnetSet[z]);
+                this.DirectConnectSubnetSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteRouteTable request structure.
  * @class
  */
@@ -22745,7 +22956,7 @@ class DescribeNatGatewaysResponse extends  AbstractModel {
         this.NatGatewaySet = null;
 
         /**
-         * The number of NAT gateway object sets meeting the conditions.
+         * The number of eligible NAT gateway objects.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -22776,6 +22987,63 @@ class DescribeNatGatewaysResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Query the returned object of a NAT route
+ * @class
+ */
+class NatDirectConnectGatewayRoute extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The `IPv4` `CIDR` of the subnet.
+         * @type {string || null}
+         */
+        this.DestinationCidrBlock = null;
+
+        /**
+         * The type of the next-hop gateway. Supported types:
+`DIRECTCONNECT`: Direct connect gateway
+         * @type {string || null}
+         */
+        this.GatewayType = null;
+
+        /**
+         * ID of the next-hop gateway
+         * @type {string || null}
+         */
+        this.GatewayId = null;
+
+        /**
+         * The creation time of the route
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The update time of the route
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DestinationCidrBlock = 'DestinationCidrBlock' in params ? params.DestinationCidrBlock : null;
+        this.GatewayType = 'GatewayType' in params ? params.GatewayType : null;
+        this.GatewayId = 'GatewayId' in params ? params.GatewayId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -23167,6 +23435,41 @@ class DisassociateAddressResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * IDC subnet information
+ * @class
+ */
+class DirectConnectSubnet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The direct connect gateway ID.
+         * @type {string || null}
+         */
+        this.DirectConnectGatewayId = null;
+
+        /**
+         * IDC subnet IP range
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
 
     }
 }
@@ -23636,6 +23939,12 @@ class ModifyNetworkInterfaceAttributeRequest extends  AbstractModel {
          */
         this.SecurityGroupIds = null;
 
+        /**
+         * Configuration of the ENI trunking mode. Valid values: `Enable` and `Disable`. Default value: `Disable`.
+         * @type {string || null}
+         */
+        this.TrunkingFlag = null;
+
     }
 
     /**
@@ -23649,6 +23958,7 @@ class ModifyNetworkInterfaceAttributeRequest extends  AbstractModel {
         this.NetworkInterfaceName = 'NetworkInterfaceName' in params ? params.NetworkInterfaceName : null;
         this.NetworkInterfaceDescription = 'NetworkInterfaceDescription' in params ? params.NetworkInterfaceDescription : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.TrunkingFlag = 'TrunkingFlag' in params ? params.TrunkingFlag : null;
 
     }
 }
@@ -26255,6 +26565,7 @@ module.exports = {
     DescribeAccountAttributesResponse: DescribeAccountAttributesResponse,
     AssignPrivateIpAddressesResponse: AssignPrivateIpAddressesResponse,
     DescribeSecurityGroupsRequest: DescribeSecurityGroupsRequest,
+    RefreshDirectConnectGatewayRouteToNatGatewayRequest: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
     DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest: DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest,
     ModifyNetworkAclAttributeResponse: ModifyNetworkAclAttributeResponse,
     AddBandwidthPackageResourcesResponse: AddBandwidthPackageResourcesResponse,
@@ -26297,6 +26608,7 @@ module.exports = {
     ModifyNatGatewayAttributeResponse: ModifyNatGatewayAttributeResponse,
     DescribeNetDetectsRequest: DescribeNetDetectsRequest,
     CreateAddressTemplateGroupRequest: CreateAddressTemplateGroupRequest,
+    DescribeNatGatewayDirectConnectGatewayRouteRequest: DescribeNatGatewayDirectConnectGatewayRouteRequest,
     DescribeCustomerGatewayVendorsResponse: DescribeCustomerGatewayVendorsResponse,
     DeleteSubnetResponse: DeleteSubnetResponse,
     Vpc: Vpc,
@@ -26510,6 +26822,7 @@ module.exports = {
     DeleteAssistantCidrRequest: DeleteAssistantCidrRequest,
     ModifyVpcEndPointServiceWhiteListResponse: ModifyVpcEndPointServiceWhiteListResponse,
     SubnetInput: SubnetInput,
+    DescribeNatGatewayDirectConnectGatewayRouteResponse: DescribeNatGatewayDirectConnectGatewayRouteResponse,
     EnableVpcEndPointConnectResponse: EnableVpcEndPointConnectResponse,
     CreateNetDetectResponse: CreateNetDetectResponse,
     DeleteCcnRequest: DeleteCcnRequest,
@@ -26588,6 +26901,7 @@ module.exports = {
     ServicesInfo: ServicesInfo,
     MigratePrivateIpAddressRequest: MigratePrivateIpAddressRequest,
     DescribeServiceTemplatesRequest: DescribeServiceTemplatesRequest,
+    RefreshDirectConnectGatewayRouteToNatGatewayResponse: RefreshDirectConnectGatewayRouteToNatGatewayResponse,
     DeleteRouteTableRequest: DeleteRouteTableRequest,
     CreateVpnGatewayRequest: CreateVpnGatewayRequest,
     DescribeVpcInstancesRequest: DescribeVpcInstancesRequest,
@@ -26620,12 +26934,14 @@ module.exports = {
     AttachClassicLinkVpcResponse: AttachClassicLinkVpcResponse,
     CreateAddressTemplateRequest: CreateAddressTemplateRequest,
     DescribeNatGatewaysResponse: DescribeNatGatewaysResponse,
+    NatDirectConnectGatewayRoute: NatDirectConnectGatewayRoute,
     Subnet: Subnet,
     AttachNetworkInterfaceRequest: AttachNetworkInterfaceRequest,
     DescribeCcnRoutesResponse: DescribeCcnRoutesResponse,
     SecurityGroup: SecurityGroup,
     DisableGatewayFlowMonitorResponse: DisableGatewayFlowMonitorResponse,
     DisassociateAddressResponse: DisassociateAddressResponse,
+    DirectConnectSubnet: DirectConnectSubnet,
     DescribeVpnGatewayRoutesRequest: DescribeVpnGatewayRoutesRequest,
     GetCcnRegionBandwidthLimitsResponse: GetCcnRegionBandwidthLimitsResponse,
     DeleteRoutesRequest: DeleteRoutesRequest,

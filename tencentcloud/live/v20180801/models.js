@@ -99,7 +99,7 @@ class TimeShiftBillData extends  AbstractModel {
         this.Time = null;
 
         /**
-         * 
+         * The total time-shift duration (minutes).
          * @type {number || null}
          */
         this.TotalDuration = null;
@@ -588,6 +588,20 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.ShortEdgeAsHeight = null;
 
+        /**
+         * The DRM encryption type. Valid values: fairplay, normalaes, widevine.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DRMType = null;
+
+        /**
+         * The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. Separate multiple tracks with “|”. You can choose only one video track (SD, HD, UHD1, or UHD2).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DRMTracks = null;
+
     }
 
     /**
@@ -618,6 +632,8 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.AiTransCode = 'AiTransCode' in params ? params.AiTransCode : null;
         this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
         this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
+        this.DRMType = 'DRMType' in params ? params.DRMType : null;
+        this.DRMTracks = 'DRMTracks' in params ? params.DRMTracks : null;
 
     }
 }
@@ -9199,6 +9215,20 @@ Value range: 0.0-0.5.
          */
         this.ShortEdgeAsHeight = null;
 
+        /**
+         * The DRM encryption type. Valid values: fairplay, normalaes, widevine.
+If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+         * @type {string || null}
+         */
+        this.DRMType = null;
+
+        /**
+         * The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. You can choose only one video track (SD, HD, UHD1, or UHD2).
+If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+         * @type {string || null}
+         */
+        this.DRMTracks = null;
+
     }
 
     /**
@@ -9228,6 +9258,8 @@ Value range: 0.0-0.5.
         this.AiTransCode = 'AiTransCode' in params ? params.AiTransCode : null;
         this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
         this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
+        this.DRMType = 'DRMType' in params ? params.DRMType : null;
+        this.DRMTracks = 'DRMTracks' in params ? params.DRMTracks : null;
 
     }
 }
@@ -9644,6 +9676,20 @@ Value range: 0.0-0.5.
          */
         this.ShortEdgeAsHeight = null;
 
+        /**
+         * The DRM encryption type. Valid values: fairplay, normalaes, widevine.
+If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+         * @type {string || null}
+         */
+        this.DRMType = null;
+
+        /**
+         * The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. You can choose only one video track (SD, HD, UHD1, or UHD2).
+If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+         * @type {string || null}
+         */
+        this.DRMTracks = null;
+
     }
 
     /**
@@ -9672,6 +9718,8 @@ Value range: 0.0-0.5.
         this.FpsToOrig = 'FpsToOrig' in params ? params.FpsToOrig : null;
         this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
         this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
+        this.DRMType = 'DRMType' in params ? params.DRMType : null;
+        this.DRMTracks = 'DRMTracks' in params ? params.DRMTracks : null;
 
     }
 }

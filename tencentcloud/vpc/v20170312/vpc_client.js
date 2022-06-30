@@ -125,6 +125,7 @@ const DescribeFlowLogRequest = models.DescribeFlowLogRequest;
 const DescribeAccountAttributesResponse = models.DescribeAccountAttributesResponse;
 const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
 const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
+const RefreshDirectConnectGatewayRouteToNatGatewayRequest = models.RefreshDirectConnectGatewayRouteToNatGatewayRequest;
 const DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest = models.DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest;
 const ModifyNetworkAclAttributeResponse = models.ModifyNetworkAclAttributeResponse;
 const AddBandwidthPackageResourcesResponse = models.AddBandwidthPackageResourcesResponse;
@@ -167,6 +168,7 @@ const DescribeCcnsRequest = models.DescribeCcnsRequest;
 const ModifyNatGatewayAttributeResponse = models.ModifyNatGatewayAttributeResponse;
 const DescribeNetDetectsRequest = models.DescribeNetDetectsRequest;
 const CreateAddressTemplateGroupRequest = models.CreateAddressTemplateGroupRequest;
+const DescribeNatGatewayDirectConnectGatewayRouteRequest = models.DescribeNatGatewayDirectConnectGatewayRouteRequest;
 const DescribeCustomerGatewayVendorsResponse = models.DescribeCustomerGatewayVendorsResponse;
 const DeleteSubnetResponse = models.DeleteSubnetResponse;
 const Vpc = models.Vpc;
@@ -380,6 +382,7 @@ const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
 const DeleteAssistantCidrRequest = models.DeleteAssistantCidrRequest;
 const ModifyVpcEndPointServiceWhiteListResponse = models.ModifyVpcEndPointServiceWhiteListResponse;
 const SubnetInput = models.SubnetInput;
+const DescribeNatGatewayDirectConnectGatewayRouteResponse = models.DescribeNatGatewayDirectConnectGatewayRouteResponse;
 const EnableVpcEndPointConnectResponse = models.EnableVpcEndPointConnectResponse;
 const CreateNetDetectResponse = models.CreateNetDetectResponse;
 const DeleteCcnRequest = models.DeleteCcnRequest;
@@ -458,6 +461,7 @@ const CreateLocalGatewayResponse = models.CreateLocalGatewayResponse;
 const ServicesInfo = models.ServicesInfo;
 const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
 const DescribeServiceTemplatesRequest = models.DescribeServiceTemplatesRequest;
+const RefreshDirectConnectGatewayRouteToNatGatewayResponse = models.RefreshDirectConnectGatewayRouteToNatGatewayResponse;
 const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
 const CreateVpnGatewayRequest = models.CreateVpnGatewayRequest;
 const DescribeVpcInstancesRequest = models.DescribeVpcInstancesRequest;
@@ -490,12 +494,14 @@ const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
 const AttachClassicLinkVpcResponse = models.AttachClassicLinkVpcResponse;
 const CreateAddressTemplateRequest = models.CreateAddressTemplateRequest;
 const DescribeNatGatewaysResponse = models.DescribeNatGatewaysResponse;
+const NatDirectConnectGatewayRoute = models.NatDirectConnectGatewayRoute;
 const Subnet = models.Subnet;
 const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
 const DescribeCcnRoutesResponse = models.DescribeCcnRoutesResponse;
 const SecurityGroup = models.SecurityGroup;
 const DisableGatewayFlowMonitorResponse = models.DisableGatewayFlowMonitorResponse;
 const DisassociateAddressResponse = models.DisassociateAddressResponse;
+const DirectConnectSubnet = models.DirectConnectSubnet;
 const DescribeVpnGatewayRoutesRequest = models.DescribeVpnGatewayRoutesRequest;
 const GetCcnRegionBandwidthLimitsResponse = models.GetCcnRegionBandwidthLimitsResponse;
 const DeleteRoutesRequest = models.DeleteRoutesRequest;
@@ -633,7 +639,7 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     * This API (ModifyNatGatewayAttribute) is used to modify the attributes of a NAT gateway.
+     * This API is used to modify the attributes of a NAT gateway.
      * @param {ModifyNatGatewayAttributeRequest} req
      * @param {function(string, ModifyNatGatewayAttributeResponse):void} cb
      * @public
@@ -759,7 +765,7 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
-     * This API (DescribeNatGatewayDestinationIpPortTranslationNatRules) is used to query the array of objects of the port forwarding rules for a NAT gateway.
+     * This API is used to query the array of objects of a NAT gateway's port forwarding rules.
      * @param {DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest} req
      * @param {function(string, DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse):void} cb
      * @public
@@ -850,14 +856,15 @@ Note: When this API is called, all routing policies in the current route table a
     }
 
     /**
-     * This API is used to query the price of creating a direct connect gateway.
-     * @param {InquirePriceCreateDirectConnectGatewayRequest} req
-     * @param {function(string, InquirePriceCreateDirectConnectGatewayResponse):void} cb
+     * This API (DescribeVpcPrivateIpAddresses) is used to query the private IP information of a VPC.<br />
+This API is used to query only the information of IP addresses that are already in use. When querying IPs that have not yet been used, this API will not report an error, but the IPs will not appear in the returned results.
+     * @param {DescribeVpcPrivateIpAddressesRequest} req
+     * @param {function(string, DescribeVpcPrivateIpAddressesResponse):void} cb
      * @public
      */
-    InquirePriceCreateDirectConnectGateway(req, cb) {
-        let resp = new InquirePriceCreateDirectConnectGatewayResponse();
-        this.request("InquirePriceCreateDirectConnectGateway", req, resp, cb);
+    DescribeVpcPrivateIpAddresses(req, cb) {
+        let resp = new DescribeVpcPrivateIpAddressesResponse();
+        this.request("DescribeVpcPrivateIpAddresses", req, resp, cb);
     }
 
     /**
@@ -1009,7 +1016,7 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API is used to bind an EIP to NAT Gateway.
+     * This API is used to bind an EIP to a NAT gateway.
      * @param {AssociateNatGatewayAddressRequest} req
      * @param {function(string, AssociateNatGatewayAddressResponse):void} cb
      * @public
@@ -1164,7 +1171,7 @@ After unbinding the network instance, the corresponding routing policy will also
     }
 
     /**
-     * This API (DescribeNatGateways) is used to query NAT gateways.
+     * This API is used to query NAT gateways.
      * @param {DescribeNatGatewaysRequest} req
      * @param {function(string, DescribeNatGatewaysResponse):void} cb
      * @public
@@ -1283,7 +1290,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (CreateNatGatewayDestinationIpPortTranslationNatRule) is used to create a port forwarding rule for a NAT gateway.
+     * This API is used to create the port forwarding rules of a NAT gateway.
      * @param {CreateNatGatewayDestinationIpPortTranslationNatRuleRequest} req
      * @param {function(string, CreateNatGatewayDestinationIpPortTranslationNatRuleResponse):void} cb
      * @public
@@ -1571,7 +1578,7 @@ Before deleting a subnet, you need to remove all resources in the subnet, includ
     }
 
     /**
-     * This API (DisassociateNatGatewayAddress) is used to unbind an EIP from a NAT gateway.
+     * This API is used to unbind an EIP from a NAT gateway.
      * @param {DisassociateNatGatewayAddressRequest} req
      * @param {function(string, DisassociateNatGatewayAddressResponse):void} cb
      * @public
@@ -1822,7 +1829,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to delete a SNAT forwarding rule of the NAT Gateway.
+     * This API is used to delete a SNAT forwarding rule of a NAT gateway.
      * @param {DeleteNatGatewaySourceIpTranslationNatRuleRequest} req
      * @param {function(string, DeleteNatGatewaySourceIpTranslationNatRuleResponse):void} cb
      * @public
@@ -1892,8 +1899,8 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (DeleteNatGateway) is used to delete a NAT gateway.
-After the deletion of a NAT gateway, the system will automatically delete the routing entry that contains the NAT gateway from the route table. It will also unbind the Elastic IP.
+     * This API is used to delete a NAT gateway.
+When a NAT gateway is deleted, all routes containing this gateway are deleted automatically, and the elastic IP is unbound.
      * @param {DeleteNatGatewayRequest} req
      * @param {function(string, DeleteNatGatewayResponse):void} cb
      * @public
@@ -2081,7 +2088,7 @@ This API is completed asynchronously. If you need to query the execution result 
 
     /**
      * This API is used to create a NAT Gateway.
-Before taking actions on a NAT Gateway, ensure that it has been successfully created, namely, the `State` field in the response of the `DescribeNatGateway` API is `AVAILABLE`.
+Before taking actions on a NAT gateway, ensure that it has been successfully created, namely, the `State` field in the response of the `DescribeNatGateway` API is `AVAILABLE`.
      * @param {CreateNatGatewayRequest} req
      * @param {function(string, CreateNatGatewayResponse):void} cb
      * @public
@@ -2409,15 +2416,14 @@ A service provider can query all review requests created by any `APPID` under it
     }
 
     /**
-     * This API (DescribeVpcPrivateIpAddresses) is used to query the private IP information of a VPC.<br />
-This API is used to query only the information of IP addresses that are already in use. When querying IPs that have not yet been used, this API will not report an error, but the IPs will not appear in the returned results.
-     * @param {DescribeVpcPrivateIpAddressesRequest} req
-     * @param {function(string, DescribeVpcPrivateIpAddressesResponse):void} cb
+     * This API is used to query the routes between a NAT gateway and Direct Connect.
+     * @param {DescribeNatGatewayDirectConnectGatewayRouteRequest} req
+     * @param {function(string, DescribeNatGatewayDirectConnectGatewayRouteResponse):void} cb
      * @public
      */
-    DescribeVpcPrivateIpAddresses(req, cb) {
-        let resp = new DescribeVpcPrivateIpAddressesResponse();
-        this.request("DescribeVpcPrivateIpAddresses", req, resp, cb);
+    DescribeNatGatewayDirectConnectGatewayRoute(req, cb) {
+        let resp = new DescribeNatGatewayDirectConnectGatewayRouteResponse();
+        this.request("DescribeNatGatewayDirectConnectGatewayRoute", req, resp, cb);
     }
 
     /**
@@ -2527,7 +2533,7 @@ If the IP range still has occupied IPs that are not yet repossessed, the IP rang
     }
 
     /**
-     * This API (ModifyNatGatewayDestinationIpPortTranslationNatRule) is used to modify a port forwarding rule for a NAT gateway.
+     * This API is used to modify the port forwarding rule of a NAT gateway.
      * @param {ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest} req
      * @param {function(string, ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse):void} cb
      * @public
@@ -2550,7 +2556,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to create a SNAT rule for the NAT Gateway.
+     * This API is used to create SNAT rules for a NAT gateway.
      * @param {CreateNatGatewaySourceIpTranslationNatRuleRequest} req
      * @param {function(string, CreateNatGatewaySourceIpTranslationNatRuleResponse):void} cb
      * @public
@@ -2558,6 +2564,17 @@ This API is completed asynchronously. If you need to query the execution result 
     CreateNatGatewaySourceIpTranslationNatRule(req, cb) {
         let resp = new CreateNatGatewaySourceIpTranslationNatRuleResponse();
         this.request("CreateNatGatewaySourceIpTranslationNatRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the price of creating a direct connect gateway.
+     * @param {InquirePriceCreateDirectConnectGatewayRequest} req
+     * @param {function(string, InquirePriceCreateDirectConnectGatewayResponse):void} cb
+     * @public
+     */
+    InquirePriceCreateDirectConnectGateway(req, cb) {
+        let resp = new InquirePriceCreateDirectConnectGatewayResponse();
+        this.request("InquirePriceCreateDirectConnectGateway", req, resp, cb);
     }
 
     /**
@@ -2809,6 +2826,17 @@ Each account can only create a limited number of CCN instances. For more informa
     }
 
     /**
+     * This API is used to refresh the route between a NAT gateway and  Direct Connect and update the associated route table.
+     * @param {RefreshDirectConnectGatewayRouteToNatGatewayRequest} req
+     * @param {function(string, RefreshDirectConnectGatewayRouteToNatGatewayResponse):void} cb
+     * @public
+     */
+    RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
+        let resp = new RefreshDirectConnectGatewayRouteToNatGatewayResponse();
+        this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, resp, cb);
+    }
+
+    /**
      * This API (SetCcnRegionBandwidthLimits) is used to set the outbound bandwidth cap for CCNs in each region. This API can only set the outbound bandwidth cap for regions in the network instances that have already been associated.
      * @param {SetCcnRegionBandwidthLimitsRequest} req
      * @param {function(string, SetCcnRegionBandwidthLimitsResponse):void} cb
@@ -2867,7 +2895,7 @@ Each account can only create a limited number of CCN instances. For more informa
     }
 
     /**
-     * This API is used to query the object arrays of SNAT forwarding rules of the NAT Gateway.
+     * This API is used to query the NAT gateway's SNAT forwarding rules.
      * @param {DescribeNatGatewaySourceIpTranslationNatRulesRequest} req
      * @param {function(string, DescribeNatGatewaySourceIpTranslationNatRulesResponse):void} cb
      * @public
@@ -2934,7 +2962,7 @@ This API is used to verify whether there will be conflict with an existing route
     }
 
     /**
-     * This API (DeleteNatGatewayDestinationIpPortTranslationNatRule) is used to delete a port forwarding rule for a NAT gateway.
+     * This API is used to delete the port forwarding rule of a NAT gateway.
      * @param {DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest} req
      * @param {function(string, DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse):void} cb
      * @public
@@ -3027,7 +3055,7 @@ This API is used to verify whether there will be conflict with an existing route
     }
 
     /**
-     * This API is used to modify a SNAT forwarding rule of the NAT Gateway.
+     * This API is used to modify a NAT gateway's SNAT forwarding rules.
      * @param {ModifyNatGatewaySourceIpTranslationNatRuleRequest} req
      * @param {function(string, ModifyNatGatewaySourceIpTranslationNatRuleResponse):void} cb
      * @public
@@ -3188,20 +3216,20 @@ Description:
     }
 
     /**
-     * This API is used to create a security group policy (SecurityGroupPolicy).
+     * This API is used to create security group policies.
 
 For parameters of SecurityGroupPolicySet,
 <ul>
-<li>`Version`: the version number of a security group policy, which automatically increases by one each time you update the security policy, to prevent expiration of the updated routing policies. If it is left empty, any conflicts will be ignored.</li>
-<li>When creating the `Egress` and `Ingress` policies,<ul>
-<li>`Protocol`: allows `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, or `ALL`.</li>
-<li>`CidrBlock`: a CIDR block in the correct format. In the classic network, if a `CidrBlock` contains private IPs of devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
-<li>`Ipv6CidrBlock`: an IPv6 CIDR block in the correct format. In a classic network, if an `Ipv6CidrBlock` contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
-<li>`SecurityGroupId`: ID of the security group. It can be the ID of security group to be modified, or the ID of another security group in the same project. All private IPs of all CVMs under the security group will be covered. If this field is used, the policy will automatically change according to the CVM associated with the group ID while being used to match network messages. You don’t need to change it manually.</li>
-<li>`Port`: a single port number such as 80, or a port range in the format of “8000-8010”. You may use this field only if the `Protocol` field takes the value `TCP` or `UDP`. Otherwise `Protocol` and `Port` are mutually exclusive.</li>
-<li>`Action`: only allows `ACCEPT` or `DROP`.</li>
+<li>`Version`: The version number of a security group policy, which automatically increases by one each time you update the security policy, to prevent expiration of the updated routing policies. If it is left empty, any conflicts will be ignored.</li>
+<li>When creating the `Egress` and `Ingress` polices,<ul>
+<li>`Protocol`: `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, or `ALL`.</li>
+<li>`CidrBlock`: A CIDR block in the correct format. </li>For 
+<li>`Ipv6CidrBlock`: An IPv6 CIDR block in the correct format. In a classic network, if an `Ipv6CidrBlock` contains private IPv6 addresses on Tencent Cloud for devices under your account other than CVMs, it does not mean this policy allows you to access these devices. The network isolation policies between tenants take priority over the private network policies in security groups.</li>
+<li>`SecurityGroupId`: ID of the security group. It can be the ID of security group to be modified, or the ID of other security group in the same project. All private IPs of all CVMs under the security group will be covered. If this field is used, the policy will automatically change according to the CVM associated with the group ID while being used to match network messages. You don’t need to change it manually.</li>
+<li>`Port`: A single port number such as 80, or a port range in the format of "8000-8010". This parameter is only available when the `Protocol` is `TCP` or `UDP`. Otherwise, `Protocol` and `Port` are mutually exclusive.</li>
+<li>`Action`: `ACCEPT` or `DROP`.</li>
 <li>`CidrBlock`, `Ipv6CidrBlock`, `SecurityGroupId`, and `AddressTemplate` are mutually exclusive. `Protocol` + `Port` and `ServiceTemplate` are mutually exclusive.</li>
-<li>You can only create policies in one direction in each request. To specify the `PolicyIndex` parameter, use the same index number in policies.</li>
+<li>You can only create policies in one direction in each request. To specify the `PolicyIndex` parameter, use the same index number in policies. If you want to insert a rule before the first rule, enter 0; if you want to add a rule after the last rule, leave it empty.</li>
 </ul></li></ul>
      * @param {CreateSecurityGroupPoliciesRequest} req
      * @param {function(string, CreateSecurityGroupPoliciesResponse):void} cb
@@ -3224,7 +3252,7 @@ For parameters of SecurityGroupPolicySet,
     }
 
     /**
-     * This API (ResetNatGatewayConnection) is used to adjust concurrent connection cap for the NAT gateway.
+     * This API is used to adjust concurrent connection cap for the NAT gateway.
      * @param {ResetNatGatewayConnectionRequest} req
      * @param {function(string, ResetNatGatewayConnectionResponse):void} cb
      * @public

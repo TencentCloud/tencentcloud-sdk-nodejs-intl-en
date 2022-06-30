@@ -79,6 +79,7 @@ const DescribeListPacketFilterConfigRequest = models.DescribeListPacketFilterCon
 const BGPIPInstanceUsages = models.BGPIPInstanceUsages;
 const ModifyPacketFilterConfigResponse = models.ModifyPacketFilterConfigResponse;
 const DescribeListDDoSGeoIPBlockConfigRequest = models.DescribeListDDoSGeoIPBlockConfigRequest;
+const DescribeOverviewDDoSEventListResponse = models.DescribeOverviewDDoSEventListResponse;
 const CreateCcGeoIPBlockConfigResponse = models.CreateCcGeoIPBlockConfigResponse;
 const Layer7Rule = models.Layer7Rule;
 const L4RuleSource = models.L4RuleSource;
@@ -117,6 +118,7 @@ const DDoSAIRelation = models.DDoSAIRelation;
 const DescribeListDDoSSpeedLimitConfigResponse = models.DescribeListDDoSSpeedLimitConfigResponse;
 const CreateDDoSGeoIPBlockConfigResponse = models.CreateDDoSGeoIPBlockConfigResponse;
 const CCPrecisionPolicy = models.CCPrecisionPolicy;
+const DescribeOverviewDDoSEventListRequest = models.DescribeOverviewDDoSEventListRequest;
 const ListenerCcThreholdConfig = models.ListenerCcThreholdConfig;
 const EipAddressRelation = models.EipAddressRelation;
 const DescribeBasicDeviceStatusRequest = models.DescribeBasicDeviceStatusRequest;
@@ -176,6 +178,7 @@ const CreateDDoSAIResponse = models.CreateDDoSAIResponse;
 const DDoSGeoIPBlockConfigRelation = models.DDoSGeoIPBlockConfigRelation;
 const DescribeListProtocolBlockConfigRequest = models.DescribeListProtocolBlockConfigRequest;
 const DescribeListBGPInstancesResponse = models.DescribeListBGPInstancesResponse;
+const TagInfo = models.TagInfo;
 const DescribeDDoSTrendRequest = models.DescribeDDoSTrendRequest;
 const ModifyDDoSGeoIPBlockConfigResponse = models.ModifyDDoSGeoIPBlockConfigResponse;
 const CreateCcBlackWhiteIpListRequest = models.CreateCcBlackWhiteIpListRequest;
@@ -183,8 +186,10 @@ const BGPInstance = models.BGPInstance;
 const CCPrecisionPlyRecord = models.CCPrecisionPlyRecord;
 const DescribeCCPrecisionPlyListResponse = models.DescribeCCPrecisionPlyListResponse;
 const DescribeBizTrendRequest = models.DescribeBizTrendRequest;
+const OverviewDDoSEvent = models.OverviewDDoSEvent;
 const DescribeCCLevelPolicyResponse = models.DescribeCCLevelPolicyResponse;
 const DescribeListWaterPrintConfigResponse = models.DescribeListWaterPrintConfigResponse;
+const TagFilter = models.TagFilter;
 const BGPInstanceUsages = models.BGPInstanceUsages;
 const DeleteDDoSSpeedLimitConfigResponse = models.DeleteDDoSSpeedLimitConfigResponse;
 const DeleteCCThresholdPolicyRequest = models.DeleteCCThresholdPolicyRequest;
@@ -200,6 +205,7 @@ const DescribeDefaultAlarmThresholdRequest = models.DescribeDefaultAlarmThreshol
 const WaterPrintKey = models.WaterPrintKey;
 const DescribeCcGeoIPBlockConfigListRequest = models.DescribeCcGeoIPBlockConfigListRequest;
 const PacketFilterRelation = models.PacketFilterRelation;
+const RuleInstanceRelation = models.RuleInstanceRelation;
 const CreatePacketFilterConfigRequest = models.CreatePacketFilterConfigRequest;
 const DescribeCCTrendRequest = models.DescribeCCTrendRequest;
 
@@ -333,6 +339,17 @@ class AntiddosClient extends AbstractClient {
     DescribeCCPrecisionPlyList(req, cb) {
         let resp = new DescribeCCPrecisionPlyListResponse();
         this.request("DescribeCCPrecisionPlyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the list of DDoS attacks.
+     * @param {DescribeOverviewDDoSEventListRequest} req
+     * @param {function(string, DescribeOverviewDDoSEventListResponse):void} cb
+     * @public
+     */
+    DescribeOverviewDDoSEventList(req, cb) {
+        let resp = new DescribeOverviewDDoSEventListResponse();
+        this.request("DescribeOverviewDDoSEventList", req, resp, cb);
     }
 
     /**

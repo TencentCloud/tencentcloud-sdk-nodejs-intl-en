@@ -58,7 +58,7 @@ const CompressionRule = models.CompressionRule;
 const GuetzliAdapter = models.GuetzliAdapter;
 const UpdateScdnDomainResponse = models.UpdateScdnDomainResponse;
 const Origin = models.Origin;
-const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
+const AdvancedAuthenticationTypeF = models.AdvancedAuthenticationTypeF;
 const TopData = models.TopData;
 const EnableCachesRequest = models.EnableCachesRequest;
 const Quota = models.Quota;
@@ -89,7 +89,6 @@ const DescribeIpVisitResponse = models.DescribeIpVisitResponse;
 const EnableClsLogTopicResponse = models.EnableClsLogTopicResponse;
 const ListClsLogTopicsResponse = models.ListClsLogTopicsResponse;
 const OverseaConfig = models.OverseaConfig;
-const AddCdnDomainRequest = models.AddCdnDomainRequest;
 const UserAgentFilterRule = models.UserAgentFilterRule;
 const UpdateDomainConfigRequest = models.UpdateDomainConfigRequest;
 const Tag = models.Tag;
@@ -97,7 +96,7 @@ const CacheConfigFollowOrigin = models.CacheConfigFollowOrigin;
 const MaxAgeRule = models.MaxAgeRule;
 const AdvancedAuthenticationTypeE = models.AdvancedAuthenticationTypeE;
 const DescribeCertDomainsRequest = models.DescribeCertDomainsRequest;
-const AdvancedAuthenticationTypeF = models.AdvancedAuthenticationTypeF;
+const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
 const AdvancedAuthenticationTypeA = models.AdvancedAuthenticationTypeA;
 const AdvancedCache = models.AdvancedCache;
 const AdvancedAuthenticationTypeC = models.AdvancedAuthenticationTypeC;
@@ -117,13 +116,12 @@ const OriginAuthenticationTypeA = models.OriginAuthenticationTypeA;
 const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
 const IpStatus = models.IpStatus;
-const AddCdnDomainResponse = models.AddCdnDomainResponse;
 const DomainAreaConfig = models.DomainAreaConfig;
 const ServerCert = models.ServerCert;
 const AccessControlRule = models.AccessControlRule;
 const HttpHeaderPathRule = models.HttpHeaderPathRule;
 const DisableCachesRequest = models.DisableCachesRequest;
-const ScdnAclRule = models.ScdnAclRule;
+const AddCLSTopicDomainsResponse = models.AddCLSTopicDomainsResponse;
 const SimpleCacheRule = models.SimpleCacheRule;
 const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
 const Hsts = models.Hsts;
@@ -138,6 +136,7 @@ const SummarizedData = models.SummarizedData;
 const UpdateScdnDomainRequest = models.UpdateScdnDomainRequest;
 const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
 const ManageClsTopicDomainsRequest = models.ManageClsTopicDomainsRequest;
+const AddCLSTopicDomainsRequest = models.AddCLSTopicDomainsRequest;
 const ScdnWafConfig = models.ScdnWafConfig;
 const CreateScdnFailedLogTaskRequest = models.CreateScdnFailedLogTaskRequest;
 const Cache = models.Cache;
@@ -251,6 +250,7 @@ const DescribeDomainsRequest = models.DescribeDomainsRequest;
 const OfflineCache = models.OfflineCache;
 const UrlRedirectRule = models.UrlRedirectRule;
 const IpFilterPathRule = models.IpFilterPathRule;
+const ScdnAclRule = models.ScdnAclRule;
 
 
 /**
@@ -263,6 +263,17 @@ class CdnClient extends AbstractClient {
         super("cdn.tencentcloudapi.com", "2018-06-06", credential, region, profile);
     }
     
+    /**
+     * This API is used to add one or more domains to a specified log topic.
+     * @param {AddCLSTopicDomainsRequest} req
+     * @param {function(string, AddCLSTopicDomainsResponse):void} cb
+     * @public
+     */
+    AddCLSTopicDomains(req, cb) {
+        let resp = new AddCLSTopicDomainsResponse();
+        this.request("AddCLSTopicDomains", req, resp, cb);
+    }
+
     /**
      * This API is used to query the status of the edge nodes and intermediate nodes. Note: Edge nodes are only available for beta users now.
 
@@ -332,17 +343,6 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add a CDN acceleration domain name.
-     * @param {AddCdnDomainRequest} req
-     * @param {function(string, AddCdnDomainResponse):void} cb
-     * @public
-     */
-    AddCdnDomain(req, cb) {
-        let resp = new AddCdnDomainResponse();
-        this.request("AddCdnDomain", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeIpVisit) is used to query the number of users who remain active for 5 minutes and the detailed number of daily active users.
 
 + Number of users who remain active for 5 minutes: Collects deduplicated statistics based on client IP addresses in the log with the 5-minute granularity.
@@ -357,7 +357,7 @@ class CdnClient extends AbstractClient {
     }
 
     /**
-     * This API (DescribeCdnData) is used to query CDN real-time access monitoring data and supports the following metrics:
+     * This API is used to query CDN real-time access monitoring data and supports the following metrics:
 
 + Traffic (in bytes)
 + Bandwidth (in bps)
@@ -488,7 +488,7 @@ Note: only data from the last 90 days will be queried.
     }
 
     /**
-     * This API (DescribeOriginData) is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
+     * This API is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
 
 + Origin-pull traffic (in bytes)
 + Origin-pull bandwidth (in bps)

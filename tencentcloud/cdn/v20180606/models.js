@@ -292,7 +292,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * This API is used to query an object and its access details
+ * This API is used to query an object and its access details.
  * @class
  */
 class ResourceData extends  AbstractModel {
@@ -300,11 +300,11 @@ class ResourceData extends  AbstractModel {
         super();
 
         /**
-         * Resource name, which is classified as follows based on different query filters:
-A single domain name: queries domain name details by a domain name. The details of the domain name will be displayed when the passed parameter `detail` is `true` (the `detail` parameter defaults to `false`).
-Multiple domain names: queries domain name details by multiple domain names. The aggregated details of the domain names will be displayed.
-Project ID: queries domain name details by a project ID. The aggregated details of the domain names of the project will be displayed.
-`all`: account-level data, which is aggregated details of all domain names of an account.
+         * Resource name. 
+A single domain name: Queries domain name details by a domain name. The details of the domain name will be displayed when the passed parameter `detail` is `true`.
+Multiple domain names: Queries domain name details by multiple domain names. The aggregated details of the domain names will be displayed.
+Project ID: Queries domain name details by a project ID. The aggregated details of the domain names of the project will be displayed.
+`all`: Account-level data, which is aggregated details of all domain names of an account.
          * @type {string || null}
          */
         this.Resource = null;
@@ -1521,11 +1521,11 @@ class DescribeCdnDataResponse extends  AbstractModel {
         super();
 
         /**
-         * Time granularity of the returned data. Specify one of the following during querying:
-min: 1 minute
-5min: 5 minutes
-hour: 1 hour
-day: 1 day
+         * Time granularity of the returned data. 
+`min`: 1 minute
+`5min`: 5 minutes
+`hour`: 1 hour
+`day`: 1 day
          * @type {string || null}
          */
         this.Interval = null;
@@ -2565,36 +2565,47 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeDomainsConfig request structure.
+ * Timestamp hotlink protection advanced authentication configuration mode F (TypeF)
  * @class
  */
-class DescribeDomainsConfigRequest extends  AbstractModel {
+class AdvancedAuthenticationTypeF extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Offset for paginated queries. Default value: 0
-         * @type {number || null}
+         * Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.SignParam = null;
 
         /**
-         * Limit on paginated queries. Default value: 100. Maximum value: 1000.
-         * @type {number || null}
+         * Time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.TimeParam = null;
 
         /**
-         * Query condition filter, complex type.
-         * @type {Array.<DomainFilter> || null}
+         * Transaction field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.TransactionParam = null;
 
         /**
-         * Sorting rules
-         * @type {Sort || null}
+         * CMK used for signature calculation, allowing 6 to 32 bytes of letters and digits.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Sort = null;
+        this.SecretKey = null;
+
+        /**
+         * Alternative key used for signature calculation, which is used after the CMK fails in authentication. It allows 6 to 32 bytes of letters and digits.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
 
     }
 
@@ -2605,23 +2616,11 @@ class DescribeDomainsConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new DomainFilter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-        if (params.Sort) {
-            let obj = new Sort();
-            obj.deserialize(params.Sort)
-            this.Sort = obj;
-        }
+        this.SignParam = 'SignParam' in params ? params.SignParam : null;
+        this.TimeParam = 'TimeParam' in params ? params.TimeParam : null;
+        this.TransactionParam = 'TransactionParam' in params ? params.TransactionParam : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
 
     }
 }
@@ -2803,17 +2802,17 @@ class DescribeBillingDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Query start time, e.g., 2018-09-04 10:40:00. The returned result will be later than or equal to the specified time
-The time will be rounded forward based on the granularity parameter `Interval`. For example, if the query start time is 2018-09-04 10:40:00 and the query time granularity is 1-hour, the time for the first returned entry will be 2018-09-04 10:00:00
-The range between the start time and end time should be less than or equal to 90 days
+         * Start time of the query, e.g., 2018-09-04 10:40:00.
+The specified start time will be rounded down based on the granularity parameter `Interval`. For example, if you set the start time to 2018-09-04 10:40:00 with 1-hour granularity, the time will be rounded down to 2018-09-04 10:00:00.
+The period between the start time and end time can be up to 90 days.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time, e.g. 2018-09-04 10:40:00. The returned result will be earlier than or equal to the specified time
-The time will be rounded forward based on the granularity parameter `Interval`. For example, if the query end time is 2018-09-04 10:40:00 and the query time granularity is 1-hour, the time for the last returned entry will be 2018-09-04 10:00:00
-The range between the start time and end time should be less than or equal to 90 days
+         * End time of the query, e.g. 2018-09-04 10:40:00.
+The specified end time will be rounded down based on the granularity parameter `Interval`. For example, if you set the end time to 2018-09-04 10:40:00 with 1-hour granularity, the time will be rounded down to 2018-09-04 10:00:00.
+The period between the start time and end time can be up to 90 days.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2825,7 +2824,7 @@ The range between the start time and end time should be less than or equal to 90
 `hour`: 1-hour granularity. The query period cannot exceed 31 days.
 `day`: 1-day granularity. The query period cannot exceed 31 days.
 
-Querying 1-minute granularity data is not supported if the `Area` field is `overseas`.
+`min` is not supported if the `Area` field is `overseas`.
          * @type {string || null}
          */
         this.Interval = null;
@@ -2837,16 +2836,16 @@ Querying 1-minute granularity data is not supported if the `Area` field is `over
         this.Domain = null;
 
         /**
-         * Project ID, which can be viewed [here](https://console.cloud.tencent.com/project)
-If the `Domain` parameter is populated with specific domain name information, then the billing data of this domain name instead of the specified project will be returned
+         * Specifies the project ID to be queried. [Check project ID in the console](https://console.cloud.tencent.com/project)
+If the `Domain` parameter is passed in, the `Proejct` parameter is ignored. Only the billing data of the specified domain name is returned. 
          * @type {number || null}
          */
         this.Project = null;
 
         /**
          * Acceleration region whose billing data is to be queried:
-mainland: in the mainland of China
-overseas: outside the mainland of China
+`mainland`: Regions within the Chinese mainland
+`overseas`: Regions outside the Chinese mainland
 If this parameter is left empty, `mainland` will be used by default
          * @type {string || null}
          */
@@ -2854,7 +2853,7 @@ If this parameter is left empty, `mainland` will be used by default
 
         /**
          * Country/region to be queried if `Area` is `overseas`
-For district or country/region codes, please see [District Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
+To view codes of provinces or countries/regions, see [Province Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
 If this parameter is left empty, all countries/regions will be queried
          * @type {number || null}
          */
@@ -2862,8 +2861,8 @@ If this parameter is left empty, all countries/regions will be queried
 
         /**
          * Billing statistics type
-flux: bill-by-traffic
-bandwidth: bill-by-bandwidth
+`flux`: Bill by traffic
+`bandwidth`: Bill by bandwidth
 Default value: `bandwidth`
          * @type {string || null}
          */
@@ -2874,6 +2873,12 @@ Default value: `bandwidth`
          * @type {string || null}
          */
         this.Product = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TimeZone = null;
 
     }
 
@@ -2893,6 +2898,7 @@ Default value: `bandwidth`
         this.District = 'District' in params ? params.District : null;
         this.Metric = 'Metric' in params ? params.Metric : null;
         this.Product = 'Product' in params ? params.Product : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
 
     }
 }
@@ -3502,8 +3508,8 @@ class TimestampData extends  AbstractModel {
         super();
 
         /**
-         * Statistical point in time in forward rounding mode
-Taking the 5-minute granularity as an example, 13:35:00 indicates that the statistical interval is between 13:35:00 and 13:39:59.
+         * The start point of the sampling period. 
+For example, if the time is set to 13:35:00, and `interval` is `5min`, the data returned is collected between 13:35:00 and 13:39:59
          * @type {string || null}
          */
         this.Time = null;
@@ -4592,452 +4598,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * AddCdnDomain request structure.
- * @class
- */
-class AddCdnDomainRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Domain name
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * Acceleration domain name service type
-`web`: Webpage file downloads
-`download`: Large file downloads
-`media`: Audio and video on demand acceleration
-`hybrid`: Dynamic and static content acceleration
-`dynamic`: Dynamic content acceleration
-         * @type {string || null}
-         */
-        this.ServiceType = null;
-
-        /**
-         * Origin server configuration
-         * @type {Origin || null}
-         */
-        this.Origin = null;
-
-        /**
-         * Project ID. Default value: 0, indicating `Default Project`
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * IP blocklist/allowlist configuration
-         * @type {IpFilter || null}
-         */
-        this.IpFilter = null;
-
-        /**
-         * IP access limit configuration
-         * @type {IpFreqLimit || null}
-         */
-        this.IpFreqLimit = null;
-
-        /**
-         * Status code cache configuration
-         * @type {StatusCodeCache || null}
-         */
-        this.StatusCodeCache = null;
-
-        /**
-         * Smart compression configuration
-         * @type {Compression || null}
-         */
-        this.Compression = null;
-
-        /**
-         * Bandwidth cap configuration
-         * @type {BandwidthAlert || null}
-         */
-        this.BandwidthAlert = null;
-
-        /**
-         * Range GETs configuration
-         * @type {RangeOriginPull || null}
-         */
-        this.RangeOriginPull = null;
-
-        /**
-         * 301/302 origin-pull follow-redirect configuration
-         * @type {FollowRedirect || null}
-         */
-        this.FollowRedirect = null;
-
-        /**
-         * Error code redirect configuration (This feature is in beta and not generally available yet.)
-         * @type {ErrorPage || null}
-         */
-        this.ErrorPage = null;
-
-        /**
-         * Request header configuration
-         * @type {RequestHeader || null}
-         */
-        this.RequestHeader = null;
-
-        /**
-         * Response header configuration
-         * @type {ResponseHeader || null}
-         */
-        this.ResponseHeader = null;
-
-        /**
-         * Download speed configuration
-         * @type {DownstreamCapping || null}
-         */
-        this.DownstreamCapping = null;
-
-        /**
-         * Node cache key configuration
-         * @type {CacheKey || null}
-         */
-        this.CacheKey = null;
-
-        /**
-         * Header cache configuration
-         * @type {ResponseHeaderCache || null}
-         */
-        this.ResponseHeaderCache = null;
-
-        /**
-         * Video dragging configuration
-         * @type {VideoSeek || null}
-         */
-        this.VideoSeek = null;
-
-        /**
-         * Cache expiration time configuration
-         * @type {Cache || null}
-         */
-        this.Cache = null;
-
-        /**
-         * Cross-border linkage optimization configuration
-         * @type {OriginPullOptimization || null}
-         */
-        this.OriginPullOptimization = null;
-
-        /**
-         * HTTPS acceleration configuration
-         * @type {Https || null}
-         */
-        this.Https = null;
-
-        /**
-         * Timestamp hotlink protection configuration
-         * @type {Authentication || null}
-         */
-        this.Authentication = null;
-
-        /**
-         * SEO configuration
-         * @type {Seo || null}
-         */
-        this.Seo = null;
-
-        /**
-         * Access protocol forced redirect configuration
-         * @type {ForceRedirect || null}
-         */
-        this.ForceRedirect = null;
-
-        /**
-         * Referer hotlink protection configuration
-         * @type {Referer || null}
-         */
-        this.Referer = null;
-
-        /**
-         * Browser cache configuration (This feature is in beta and not generally available yet.)
-         * @type {MaxAge || null}
-         */
-        this.MaxAge = null;
-
-        /**
-         * IPv6 configuration (This feature is in beta and not generally available yet.)
-         * @type {Ipv6 || null}
-         */
-        this.Ipv6 = null;
-
-        /**
-         * Specific region configuration
-Applicable to cases where the acceleration domain name configuration differs for regions in and outside mainland China.
-         * @type {SpecificConfig || null}
-         */
-        this.SpecificConfig = null;
-
-        /**
-         * Domain name acceleration region
-mainland: acceleration inside mainland China
-overseas: acceleration outside mainland China
-global: global acceleration
-Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
-         * @type {string || null}
-         */
-        this.Area = null;
-
-        /**
-         * Origin-pull timeout configuration
-         * @type {OriginPullTimeout || null}
-         */
-        this.OriginPullTimeout = null;
-
-        /**
-         * Tag configuration
-         * @type {Array.<Tag> || null}
-         */
-        this.Tag = null;
-
-        /**
-         * IPv6 access configuration
-         * @type {Ipv6Access || null}
-         */
-        this.Ipv6Access = null;
-
-        /**
-         * Offline cache
-         * @type {OfflineCache || null}
-         */
-        this.OfflineCache = null;
-
-        /**
-         * QUIC access, which is a paid service. You can check the product document and Billing Overview for more information.
-         * @type {Quic || null}
-         */
-        this.Quic = null;
-
-        /**
-         * Access authentication for S3 origin
-         * @type {AwsPrivateAccess || null}
-         */
-        this.AwsPrivateAccess = null;
-
-        /**
-         * Access authentication for OSS origin
-         * @type {OssPrivateAccess || null}
-         */
-        this.OssPrivateAccess = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
-
-        if (params.Origin) {
-            let obj = new Origin();
-            obj.deserialize(params.Origin)
-            this.Origin = obj;
-        }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-
-        if (params.IpFilter) {
-            let obj = new IpFilter();
-            obj.deserialize(params.IpFilter)
-            this.IpFilter = obj;
-        }
-
-        if (params.IpFreqLimit) {
-            let obj = new IpFreqLimit();
-            obj.deserialize(params.IpFreqLimit)
-            this.IpFreqLimit = obj;
-        }
-
-        if (params.StatusCodeCache) {
-            let obj = new StatusCodeCache();
-            obj.deserialize(params.StatusCodeCache)
-            this.StatusCodeCache = obj;
-        }
-
-        if (params.Compression) {
-            let obj = new Compression();
-            obj.deserialize(params.Compression)
-            this.Compression = obj;
-        }
-
-        if (params.BandwidthAlert) {
-            let obj = new BandwidthAlert();
-            obj.deserialize(params.BandwidthAlert)
-            this.BandwidthAlert = obj;
-        }
-
-        if (params.RangeOriginPull) {
-            let obj = new RangeOriginPull();
-            obj.deserialize(params.RangeOriginPull)
-            this.RangeOriginPull = obj;
-        }
-
-        if (params.FollowRedirect) {
-            let obj = new FollowRedirect();
-            obj.deserialize(params.FollowRedirect)
-            this.FollowRedirect = obj;
-        }
-
-        if (params.ErrorPage) {
-            let obj = new ErrorPage();
-            obj.deserialize(params.ErrorPage)
-            this.ErrorPage = obj;
-        }
-
-        if (params.RequestHeader) {
-            let obj = new RequestHeader();
-            obj.deserialize(params.RequestHeader)
-            this.RequestHeader = obj;
-        }
-
-        if (params.ResponseHeader) {
-            let obj = new ResponseHeader();
-            obj.deserialize(params.ResponseHeader)
-            this.ResponseHeader = obj;
-        }
-
-        if (params.DownstreamCapping) {
-            let obj = new DownstreamCapping();
-            obj.deserialize(params.DownstreamCapping)
-            this.DownstreamCapping = obj;
-        }
-
-        if (params.CacheKey) {
-            let obj = new CacheKey();
-            obj.deserialize(params.CacheKey)
-            this.CacheKey = obj;
-        }
-
-        if (params.ResponseHeaderCache) {
-            let obj = new ResponseHeaderCache();
-            obj.deserialize(params.ResponseHeaderCache)
-            this.ResponseHeaderCache = obj;
-        }
-
-        if (params.VideoSeek) {
-            let obj = new VideoSeek();
-            obj.deserialize(params.VideoSeek)
-            this.VideoSeek = obj;
-        }
-
-        if (params.Cache) {
-            let obj = new Cache();
-            obj.deserialize(params.Cache)
-            this.Cache = obj;
-        }
-
-        if (params.OriginPullOptimization) {
-            let obj = new OriginPullOptimization();
-            obj.deserialize(params.OriginPullOptimization)
-            this.OriginPullOptimization = obj;
-        }
-
-        if (params.Https) {
-            let obj = new Https();
-            obj.deserialize(params.Https)
-            this.Https = obj;
-        }
-
-        if (params.Authentication) {
-            let obj = new Authentication();
-            obj.deserialize(params.Authentication)
-            this.Authentication = obj;
-        }
-
-        if (params.Seo) {
-            let obj = new Seo();
-            obj.deserialize(params.Seo)
-            this.Seo = obj;
-        }
-
-        if (params.ForceRedirect) {
-            let obj = new ForceRedirect();
-            obj.deserialize(params.ForceRedirect)
-            this.ForceRedirect = obj;
-        }
-
-        if (params.Referer) {
-            let obj = new Referer();
-            obj.deserialize(params.Referer)
-            this.Referer = obj;
-        }
-
-        if (params.MaxAge) {
-            let obj = new MaxAge();
-            obj.deserialize(params.MaxAge)
-            this.MaxAge = obj;
-        }
-
-        if (params.Ipv6) {
-            let obj = new Ipv6();
-            obj.deserialize(params.Ipv6)
-            this.Ipv6 = obj;
-        }
-
-        if (params.SpecificConfig) {
-            let obj = new SpecificConfig();
-            obj.deserialize(params.SpecificConfig)
-            this.SpecificConfig = obj;
-        }
-        this.Area = 'Area' in params ? params.Area : null;
-
-        if (params.OriginPullTimeout) {
-            let obj = new OriginPullTimeout();
-            obj.deserialize(params.OriginPullTimeout)
-            this.OriginPullTimeout = obj;
-        }
-
-        if (params.Tag) {
-            this.Tag = new Array();
-            for (let z in params.Tag) {
-                let obj = new Tag();
-                obj.deserialize(params.Tag[z]);
-                this.Tag.push(obj);
-            }
-        }
-
-        if (params.Ipv6Access) {
-            let obj = new Ipv6Access();
-            obj.deserialize(params.Ipv6Access)
-            this.Ipv6Access = obj;
-        }
-
-        if (params.OfflineCache) {
-            let obj = new OfflineCache();
-            obj.deserialize(params.OfflineCache)
-            this.OfflineCache = obj;
-        }
-
-        if (params.Quic) {
-            let obj = new Quic();
-            obj.deserialize(params.Quic)
-            this.Quic = obj;
-        }
-
-        if (params.AwsPrivateAccess) {
-            let obj = new AwsPrivateAccess();
-            obj.deserialize(params.AwsPrivateAccess)
-            this.AwsPrivateAccess = obj;
-        }
-
-        if (params.OssPrivateAccess) {
-            let obj = new OssPrivateAccess();
-            obj.deserialize(params.OssPrivateAccess)
-            this.OssPrivateAccess = obj;
-        }
-
-    }
-}
-
-/**
  * `UserAgent` blocklist/allowlist rule configuration
  * @class
  */
@@ -5867,47 +5427,36 @@ class DescribeCertDomainsRequest extends  AbstractModel {
 }
 
 /**
- * Timestamp hotlink protection advanced authentication configuration mode F (TypeF)
+ * DescribeDomainsConfig request structure.
  * @class
  */
-class AdvancedAuthenticationTypeF extends  AbstractModel {
+class DescribeDomainsConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Signature field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Offset for paginated queries. Default value: 0
+         * @type {number || null}
          */
-        this.SignParam = null;
+        this.Offset = null;
 
         /**
-         * Time field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Limit on paginated queries. Default value: 100. Maximum value: 1000.
+         * @type {number || null}
          */
-        this.TimeParam = null;
+        this.Limit = null;
 
         /**
-         * Transaction field name in the URI string, starting with a letter, and consisting of letters, digits, and underscores.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Query condition filter, complex type.
+         * @type {Array.<DomainFilter> || null}
          */
-        this.TransactionParam = null;
+        this.Filters = null;
 
         /**
-         * CMK used for signature calculation, allowing 6 to 32 bytes of letters and digits.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Sorting rules
+         * @type {Sort || null}
          */
-        this.SecretKey = null;
-
-        /**
-         * Alternative key used for signature calculation, which is used after the CMK fails in authentication. It allows 6 to 32 bytes of letters and digits.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.BackupSecretKey = null;
+        this.Sort = null;
 
     }
 
@@ -5918,11 +5467,23 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.SignParam = 'SignParam' in params ? params.SignParam : null;
-        this.TimeParam = 'TimeParam' in params ? params.TimeParam : null;
-        this.TransactionParam = 'TransactionParam' in params ? params.TransactionParam : null;
-        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
-        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new DomainFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+        if (params.Sort) {
+            let obj = new Sort();
+            obj.deserialize(params.Sort)
+            this.Sort = obj;
+        }
 
     }
 }
@@ -6877,7 +6438,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * This API is used to query an object and its origin-pull details
+ * This API is used to query an object and its origin-pull details.
  * @class
  */
 class ResourceOriginData extends  AbstractModel {
@@ -6885,11 +6446,11 @@ class ResourceOriginData extends  AbstractModel {
         super();
 
         /**
-         * Resource name, which is classified as follows based on different query conditions:
-A specific domain name: This indicates the details of this domain name
-multiDomains: This indicates the aggregate details of multiple domain names
-Project ID: This displays the ID of the specifically queried project
-all: This indicates the details at the account level
+         * Resource name, which is classified as follows based on different query filters:
+A specific domain name: Details of the domain name
+`multiDomains`: Aggregated details of multiple domain names
+Project ID: ID of the specifically queried project
+`all`: Details at the account level
          * @type {string || null}
          */
         this.Resource = null;
@@ -6938,27 +6499,27 @@ class IpStatus extends  AbstractModel {
         this.Ip = null;
 
         /**
-         * Node region
+         * Region of the node
          * @type {string || null}
          */
         this.District = null;
 
         /**
-         * Node ISP
+         * ISP of the node
          * @type {string || null}
          */
         this.Isp = null;
 
         /**
-         * Node city
+         * City of the node
          * @type {string || null}
          */
         this.City = null;
 
         /**
-         * Node status
-online: the node is online; scheduling service running
-offline: the node is offline
+         * Status of the node
+`online`: The node is active and scheduling normally.
+`offline`: The node is inactive.
          * @type {string || null}
          */
         this.Status = null;
@@ -6982,35 +6543,7 @@ offline: the node is offline
 }
 
 /**
- * AddCdnDomain response structure.
- * @class
- */
-class AddCdnDomainResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Domain name region configuration
+ * Region configuration for domain names
  * @class
  */
 class DomainAreaConfig extends  AbstractModel {
@@ -7024,7 +6557,7 @@ class DomainAreaConfig extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Region list, where the element can be `mainland/overseas`
+         * Region list, where the element can be `mainland`/`overseas`
          * @type {Array.<string> || null}
          */
         this.Area = null;
@@ -7296,30 +6829,18 @@ Up to 100 entries can be submitted at a time and 3,000 entries per day.
 }
 
 /**
- * Precise access control match rule
+ * AddCLSTopicDomains response structure.
  * @class
  */
-class ScdnAclRule extends  AbstractModel {
+class AddCLSTopicDomainsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Keyword
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.MatchKey = null;
-
-        /**
-         * Logical operator. Valid values:
-         * @type {string || null}
-         */
-        this.LogiOperator = null;
-
-        /**
-         * Matched value
-         * @type {string || null}
-         */
-        this.MatchValue = null;
+        this.RequestId = null;
 
     }
 
@@ -7330,9 +6851,7 @@ class ScdnAclRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MatchKey = 'MatchKey' in params ? params.MatchKey : null;
-        this.LogiOperator = 'LogiOperator' in params ? params.LogiOperator : null;
-        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7478,18 +6997,18 @@ class DescribeIpStatusRequest extends  AbstractModel {
 
         /**
          * Node type.
-edge: edge server
-last: intermediate server
+`edge`: Edge server
+`last`: Intermediate server
 If this parameter is left empty, edge server information will be returned by default
          * @type {string || null}
          */
         this.Layer = null;
 
         /**
-         * Region to be queried.
-mainland: domestic nodes
-overseas: overseas nodes
-global: global nodes
+         * Specifies a region to query.
+`mainland`: Nodes in the Chinese mainland
+`overseas`: Nodes outside the Chinese mainland
+`global`: Global nodes
          * @type {string || null}
          */
         this.Area = null;
@@ -8517,7 +8036,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Aggregate values of details; each metric has different aggregation methods based on its characteristics
+ * Aggregated value, which is aggregated from all data of each metric. Aggregation methods are used depending on the metric attributes.
  * @class
  */
 class SummarizedData extends  AbstractModel {
@@ -8526,15 +8045,15 @@ class SummarizedData extends  AbstractModel {
 
         /**
          * Aggregation method, which can be:
-sum: aggregate summation
-max: maximum value; in bandwidth mode, the peak bandwidth is calculated based on the aggregate data with 5-minute granularity.
-avg: average value
+`sum`: Aggregate summation
+`max`: Maximum value. In bandwidth mode, the peak bandwidth is calculated based on the data aggregated in 5 minutes.
+`avg`: Average value
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Aggregate data value
+         * Aggregated value
          * @type {number || null}
          */
         this.Value = null;
@@ -8730,6 +8249,63 @@ class ManageClsTopicDomainsRequest extends  AbstractModel {
                 this.DomainAreaConfigs.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * AddCLSTopicDomains request structure.
+ * @class
+ */
+class AddCLSTopicDomainsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Logset ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * Log topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Region configuration for domains
+         * @type {Array.<DomainAreaConfig> || null}
+         */
+        this.DomainAreaConfigs = null;
+
+        /**
+         * Specifies whether to access CDN or ECDN. Valid values: `cdn` (default) and `ecdn`.
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+        if (params.DomainAreaConfigs) {
+            this.DomainAreaConfigs = new Array();
+            for (let z in params.DomainAreaConfigs) {
+                let obj = new DomainAreaConfig();
+                obj.deserialize(params.DomainAreaConfigs[z]);
+                this.DomainAreaConfigs.push(obj);
+            }
+        }
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -8998,58 +8574,58 @@ class DescribeOriginDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Query start time, such as 2018-09-04 10:40:00; the returned result is later than or equal to the specified time.
-According to the specified time granularity, forward rounding is applied; for example, if the query end time is 2018-09-04 10:40:00 and the query time granularity is 1 hour, the time for the first returned entry will be 2018-09-04 10:00:00.
-The gap between the start time and end time should be less than or equal to 90 days.
+         * Start time of the query, e.g., 2018-09-04 10:40:00.
+The specified start time will be rounded down based on the granularity parameter `Interval`. For example, if you set the start time to 2018-09-04 10:40:00 with 1-hour granularity, the time will be rounded down to 2018-09-04 10:00:00.
+The period between the start time and end time can be up to 90 days.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Query end time, such as 2018-09-04 10:40:00; the returned result is earlier than or equal to the specified time.
-According to the specified time granularity, forward rounding is applied; for example, if the query start time is 2018-09-04 10:40:00 and the query time granularity is 1 hour, the time for the last returned entry will be 2018-09-04 10:00:00.
-The gap between the start time and end time should be less than or equal to 90 days.
+         * End time of the query, e.g. 2018-09-04 10:40:00.
+The specified end time will be rounded down based on the granularity parameter `Interval`. For example, if you set the end time to 2018-09-04 10:40:00 with 1-hour granularity, the time will be rounded down to 2018-09-04 10:00:00.
+The period between the start time and end time can be up to 90 days.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Specifies the query metric, which can be:
-flux: origin-pull traffic (in bytes)
-bandwidth: origin-pull bandwidth (in bps)
-request: number of origin-pull requests
-failRequest: number of failed origin-pull requests
-failRate: origin-pull failure rate (in %)
-statusCode: origin-pull status code. The aggregate data for 2xx, 3xx, 4xx, and 5xx origin-pull status codes will be returned (in entries)
-2xx: Returns the aggregate list of 2xx origin-pull status codes and the data for origin-pull status codes starting with 2 (in entries)
-3xx: Returns the aggregate list of 3xx origin-pull status codes and the data for origin-pull status codes starting with 3 (in entries)
-4xx: Returns the aggregate list of 4xx origin-pull status codes and the data for origin-pull status codes starting with 4 (in entries)
-5xx: Returns the aggregate list of 5xx origin-pull status codes and the data for origin-pull status codes starting with 5 (in entries)
+         * Specifies the metric to query, which can be:
+`flux`: Origin-pull traffic (in bytes)
+`bandwidth`: Origin-pull bandwidth (in bps)
+`request`: Number of origin-pull requests
+`failRequest`: Number of failed origin-pull requests
+`failRate`: Origin-pull failure rate (in %)
+`statusCode`: Origin-pull status code. The aggregate data for 2xx, 3xx, 4xx, and 5xx origin-pull status codes will be returned (in entries)
+`2xx`: Returns the aggregate list of 2xx origin-pull status codes and the data for origin-pull status codes starting with 2 (in entries)
+`3xx`: Returns the aggregate list of 3xx origin-pull status codes and the data for origin-pull status codes starting with 3 (in entries)
+`4xx`: Returns the aggregate list of 4xx origin-pull status codes and the data for origin-pull status codes starting with 4 (in entries)
+`5xx`: Returns the aggregate list of 5xx origin-pull status codes and the data for origin-pull status codes starting with 5 (in entries)
 It is supported to specify a status code for query. The return will be empty if the status code has never been generated.
          * @type {string || null}
          */
         this.Metric = null;
 
         /**
-         * Specifies the list of domain names to be queried; up to 30 domain names can be queried at a time.
+         * Specifies the list of domain names to query. You can query up to 30 domain names at a time.
          * @type {Array.<string> || null}
          */
         this.Domains = null;
 
         /**
-         * Project ID, which can be viewed [here](https://console.cloud.tencent.com/project)
-If the domain name is not specified, the specified project will be queried. Up to 30 acceleration domain names can be queried at a time
-If the domain name information is specified, the domain name will prevail
+         * Specifies the project ID to be queried. [Check project ID in the console](https://console.cloud.tencent.com/project)
+If the domain name is not specified, the specified project will be queried. Up to 30 acceleration domain names can be queried at a time.
+If the domain name information is specified, this parameter can be ignored.
          * @type {number || null}
          */
         this.Project = null;
 
         /**
-         * Time granularity; valid values:
-`min`: data with 1-minute granularity is returned when the queried period is no longer than 24 hours. This value is not supported if the service region you want to query is outside Mainland China;
-`5min`: data with 5-minute granularity is returned when the queried period is no longer than 31 days;
-`hour`: data with 1-hour granularity is returned when the queried period is no longer than 31 days;
-`day`: data with 1-day granularity is returned when the queried period is longer than 31 days.
+         * Time granularity, which can be:
+`min`: Return data with 1-minute granularity. It’s available when the query period is  within 24 hours and `Area` is `mainland`.
+`5min`: Return data with 5-minute granularity. It’s available when the query period is within 31 days.
+`hour`: Return data with 1-hour granularity. It’s available when the query period is within 31 days.
+`day`: Return data with 1-day granularity. It’s available when the query period is longer than 31 days.
          * @type {string || null}
          */
         this.Interval = null;
@@ -9062,12 +8638,18 @@ You can set it to true to return the details for each Domain (the statusCode met
         this.Detail = null;
 
         /**
-         * Specifies a service region. If this value is left blank, CDN data within Mainland China will be queried.
-`mainland`: specifies to query CDN data within Mainland China;
-`overseas`: specifies to query CDN data outside Mainland China.
+         * Specifies the service region. If this value is left blank, it means to query CDN data within the Chinese mainland.
+`mainland`: Query CDN data in the Chinese mainland.
+`overseas`: Query CDN data outside the Chinese mainland.
          * @type {string || null}
          */
         this.Area = null;
+
+        /**
+         * Specifies a time zone to query. The default time zone is UTC+08:00.
+         * @type {string || null}
+         */
+        this.TimeZone = null;
 
     }
 
@@ -9086,6 +8668,7 @@ You can set it to true to return the details for each Domain (the statusCode met
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.Detail = 'Detail' in params ? params.Detail : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
 
     }
 }
@@ -9326,8 +8909,8 @@ Default value: `mainland`. You can prefetch a URL to nodes in a region provided 
         this.Area = null;
 
         /**
-         * If this parameter is `middle` or left empty, prefetch will be performed onto the intermediate node.
-Note: resources prefetched outside the Chinese mainland will be cached to CDN nodes outside the Chinese mainland and the traffic generated will incur costs.
+         * By default, prefetch for regions in the Chinese mainland is performed onto the intermediate nodes, while prefetch for regions outside the Chinese mainland is performed onto the edge nodes and the traffic generated will be billed.
+If this parameter is `middle` or left empty, prefetch will be performed onto the intermediate node.
          * @type {string || null}
          */
         this.Layer = null;
@@ -11277,10 +10860,10 @@ class DescribeBillingDataResponse extends  AbstractModel {
 
         /**
          * Time granularity, which is specified by the parameter passed in during the query:
-min: 1-minute
-5min: 5-minute
-hour: 1-hour
-day: 1-day
+`min`: 1 minute
+`5min`: 5 minutes
+`hour`: 1 hour
+`day`: 1 day
          * @type {string || null}
          */
         this.Interval = null;
@@ -12502,17 +12085,17 @@ class CdnData extends  AbstractModel {
         super();
 
         /**
-         * Queries the specified metric:
-flux: traffic (in bytes)
-bandwidth: bandwidth (in bps)
-request: number of requests
-fluxHitRate: traffic hit rate (in %)
-statusCode: status code. The aggregate data for 2xx, 3xx, 4xx, and 5xx status codes will be returned (in entries)
-2XX: Returns the aggregate list of 2xx status codes and the data for status codes starting with 2 (in entries)
-3XX: Returns the aggregate list of 3xx status codes and the data for status codes starting with 3 (in entries)
-4XX: Returns the aggregate list of 4xx status codes and the data for status codes starting with 4 (in entries)
-5XX: Returns the aggregate list of 5xx status codes and the data for status codes starting with 5 (in entries)
-Alternatively, you can specify a status code for querying.
+         * Queries by the specified metric:
+`flux`: Traffic (in bytes)
+`bandwidth`: Bandwidth (in bps)
+`request`: Number of requests
+`fluxHitRate`: Traffic hit rate (in %)
+`statusCode`: Status code. The aggregate data for 2xx, 3xx, 4xx, and 5xx status codes will be returned (in entries)
+`2XX`: Returns the aggregate list of 2xx status codes and the data for status codes starting with 2 (in entries)
+`3XX`: Returns the aggregate list of 3xx status codes and the data for status codes starting with 3 (in entries)
+`4XX`: Returns the aggregate list of 4xx status codes and the data for status codes starting with 4 (in entries)
+`5XX`: Returns the aggregate list of 5xx status codes and the data for status codes starting with 5 (in entries)
+You can also specify a status code for querying.
          * @type {string || null}
          */
         this.Metric = null;
@@ -12955,11 +12538,11 @@ class ResourceBillingData extends  AbstractModel {
         super();
 
         /**
-         * Resource name, which is categorized as follows based on different query conditions:
-Specific domain name: domain name details
-multiDomains: aggregated details of multiple domain names
-Project ID: displays the ID of the specified project to be queried
-all: the details at the account level
+         * Resource name, which is classified as follows based on different query filters:
+When a domain name is specified: Details of the domain name
+`multiDomains`: Aggregated details of multiple domain names
+A specific project ID: ID of the specifically queried project
+`all`: Details at the account level
          * @type {string || null}
          */
         this.Resource = null;
@@ -14426,7 +14009,7 @@ class DescribeOriginDataResponse extends  AbstractModel {
         super();
 
         /**
-         * Time granularity of data statistics, which supports min (1 minute), 5min (5 minutes), hour (1 hour), and day (1 day).
+         * Time granularity of data statistics, which supports `min` (1 minute), `5min` (5 minutes), `hour` (1 hour), and `day` (1 day).
          * @type {string || null}
          */
         this.Interval = null;
@@ -14717,132 +14300,132 @@ class DescribeCdnDataRequest extends  AbstractModel {
         super();
 
         /**
-         * Queries start time, such as 2018-09-04 10:40:00; the returned result is later than or equal to the specified time.
-According to the specified time granularity, forward rounding is applied; for example, if the query end time is 2018-09-04 10:40:00 and the query time granularity is 1 hour, the time for the first returned entry will be 2018-09-04 10:00:00.
-The gap between the start time and end time should be less than or equal to 90 days.
+         * Start time of the query, e.g., 2018-09-04 10:40:00.
+The specified start time will be rounded down based on the granularity parameter `Interval`. For example, if you set the start time to 2018-09-04 10:40:00 with 1-hour granularity, the time will be rounded down to 2018-09-04 10:00:00.
+The period between the start time and end time can be up to 90 days.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Queries end time, such as 2018-09-04 10:40:00; the returned result is earlier than or equal to the specified time.
-According to the specified time granularity, forward rounding is applied; for example, if the query start time is 2018-09-04 10:40:00 and the query time granularity is 1 hour, the time for the last returned entry will be 2018-09-04 10:00:00.
-The gap between the start time and end time should be less than or equal to 90 days.
+         * End time of the query, e.g. 2018-09-04 10:40:00.
+The specified end time will be rounded down based on the granularity parameter `Interval`. For example, if you set the end time to 2018-09-04 10:40:00 with 1-hour granularity, the time will be rounded down to 2018-09-04 10:00:00.
+The period between the start time and end time can be up to 90 days.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
          * Specifies the metric to query, which can be:
-`flux`: traffic (in bytes)
-`fluxIn`: upstream traffic (in bytes), only used for the `ecdn` product
-`fluxOut`: downstream traffic (in bytes), only used for the `ecdn` product
-`bandwidth`: bandwidth (in bps)
-`bandwidthIn`: upstream bandwidth (in bps), only used for the `ecdn` product
-`bandwidthOut`: downstream bandwidth (in bps), only used for the `ecdn` product
-`request`: number of requests
-`hitRequest`: number of hit requests
-`requestHitRate`: request hit rate (in % with two decimal digits)
-`hitFlux`: hit traffic (in bytes)
-`fluxHitRate`: traffic hit rate (in % with two decimal digits)
-`statusCode`: status code. Number of 2xx, 3xx, 4xx, and 5xx status codes returned during the queried period.
-`2xx`: lists the number of all status codes starting with **2** returned during the queried period based on the specified interval (if any)
-`3xx`: lists the number of all status codes starting with **3** returned during the queried period based on the specified interval (if any)
-`4xx`: lists the number of all status codes starting with **4** returned during the queried period based on the specified interval (if any)
-`5xx`: lists the number of all status codes starting with **5** returned during the queried period based on the specified interval (if any)
+`flux`: Traffic (in bytes)
+`fluxIn`: Upstream traffic (in bytes), only used for the `ecdn` product
+`fluxOut`: Downstream traffic (in bytes), only used for the `ecdn` product
+`bandwidth`: Bandwidth (in bps)
+`bandwidthIn`: Upstream bandwidth (in bps), only used for the `ecdn` product
+`bandwidthOut`: Downstream bandwidth (in bps), only used for the `ecdn` product
+`request`: Number of requests
+`hitRequest`: Number of hit requests
+`requestHitRate`: Request hit rate (in % with two decimal digits)
+`hitFlux`: Hit traffic (in bytes)
+`fluxHitRate`: Traffic hit rate (in % with two decimal digits)
+`statusCode`: Status code. The aggregate data for 2xx, 3xx, 4xx, and 5xx status codes will be returned (in entries)
+`2xx`: Returns the aggregate list of 2xx status codes and the data for status codes starting with 2 (in entries)
+`3xx`: Returns the aggregate list of 3xx status codes and the data for status codes starting with 3 (in entries)
+`4xx`: Returns the aggregate list of 4xx status codes and the data for status codes starting with 4 (in entries)
+`5xx`: Returns the aggregate list of 5xx status codes and the data for status codes starting with 5 (in entries)
 Specifies the status code to query. The return will be empty if the status code has never been generated.
          * @type {string || null}
          */
         this.Metric = null;
 
         /**
-         * Queries the information of specified domain names
-Specifies a domain name to query
-Specifies multiple domain names to query (30 at most at a time)
-Queries all Specifies an account to query all domain names
+         * Specifies the list of domain names to be queried
+You can specify one or more domain names.
+Up to 30 domain names can be queried in one request.
+If this parameter is not specified, it means to query all domain names under the current account.
          * @type {Array.<string> || null}
          */
         this.Domains = null;
 
         /**
-         * Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
-Please note that if domain names are specified, this parameter will be ignored.
+         * Specifies the project ID to be queried. [Check project ID in the console](https://console.cloud.tencent.com/project)
+Note that `Project` will be ignored if `Domains` is specified.
          * @type {number || null}
          */
         this.Project = null;
 
         /**
-         * Time granularity; valid values:
-`min`: data with 1-minute granularity is returned when the queried period is no longer than 24 hours. This value is not supported if the service region you want to query is outside Mainland China;
-`5min`: data with 5-minute granularity is returned when the queried period is no longer than 31 days;
-`hour`: data with 1-hour granularity is returned when the queried period is no longer than 31 days;
-`day`: data with 1-day granularity is returned when the queried period is longer than 31 days.
+         * Sampling interval. The available options vary for different query period. See below: 
+`min`: Return data with 1-minute granularity. It’s available when the query period is  within 24 hours and `Area` is `mainland`.
+`5min`: Return data with 5-minute granularity. It’s available when the query period is within 31 days.
+`hour`: Return data with 1-hour granularity. It’s available when the query period is within 31 days.
+`day`: Return data with 1-day granularity. It’s available when the query period is longer than 31 days.
          * @type {string || null}
          */
         this.Interval = null;
 
         /**
          * The aggregate data for multiple domain names is returned by default (false) during a multi-domain-name query.
-You can set it to true to return the details for each Domain (the statusCode metric is currently not supported)
+You can set it to true to return the details for each Domain (the statusCode metric is currently not supported).
          * @type {boolean || null}
          */
         this.Detail = null;
 
         /**
-         * Specifies an ISP when you query the CDN data within Mainland China. If this is left blank, all ISPs will be queried.
+         * Specifies an ISP when you query the CDN data within the Chinese mainland. If this is left blank, all ISPs will be queried.
 To view ISP codes, see [ISP Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
-If you have specified an ISP, you cannot specify a province or an IP protocol for the same query.
+Note that only one of `District`, `Isp` and `IpProtocol` can be specified.
          * @type {number || null}
          */
         this.Isp = null;
 
         /**
-         * Specifies a province when you query the CDN data within Mainland China. If this is left blank, all provinces will be queried.
-Specifies a country/region when you query the CDN data outside Mainland China. If this is left blank, all countries/regions will be queried.
-To view codes of provinces or countries/regions, see [Province Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
-If you have specified a province for your query on CDN data within mainland China, you cannot specify an ISP or an IP protocol for the same query.
+         * Specifies a province when you query the CDN data within the Chinese mainland. If this is left blank, all provinces will be queried.
+Specifies a country/region when you query the CDN data outside the Chinese mainland. If this is left blank, all countries/regions will be queried.
+To view codes of provinces or countries/regions, see [Province Code Mappings](https://intl.cloud.tencent.com/document/product/228/6316?from_cn_redirect=1#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8).
+When `Area` is `mainland`, you can query by the province. Note that only one of `District`, `Isp` and `IpProtocol` can be specified.
          * @type {number || null}
          */
         this.District = null;
 
         /**
          * Specifies the protocol to be queried; if you leave it blank, all protocols will be queried.
-all: All protocols
-http: specifies the HTTP metric to be queried
-https: specifies the HTTPS metric to be queried
+`all`: All protocols
+`http`: Query HTTP data
+`https`: Query HTTPS data
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * Specifies the data source to be queried, which can be seen as the allowlist function.
+         * Specifies the data source to be queried. It’s only open to beta users now. 
          * @type {string || null}
          */
         this.DataSource = null;
 
         /**
-         * Specified IP protocol to be queried. If this parameter is left empty, all protocols will be queried
-all: all protocols
-ipv4: specifies to query IPv4 metrics
-ipv6: specifies to query IPv6 metrics
-If the IP protocol to be queried is specified, the district and ISP cannot be specified at the same time
-Note: non-IPv6 allowlisted users cannot specify `ipv4` and `ipv6` for query
+         * Specifies the IP protocol to be queried. If it’s not specified, data of all IP protocols are returned.
+`all`: All protocols
+`ipv4`: Query IPv4 data
+`ipv6`: Query IPv6 data
+If `IpProtocol` is specified, `District` parameter can not be specified at the same time.
+Note: `ipv4` and `ipv6` are only available to beta users. 
          * @type {string || null}
          */
         this.IpProtocol = null;
 
         /**
-         * Specifies a service region. If this value is left blank, CDN data within Mainland China will be queried.
-`mainland`: specifies to query CDN data within Mainland China;
-`overseas`: specifies to query CDN data outside Mainland China.
+         * Specifies the service area. If it’s not specified, CDN data of the Chinese mainland are returned.
+`mainland`: Query CDN data in the Chinese mainland.
+`overseas`: Query CDN data outside the Chinese mainland.
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * Specifies a region type for your query on CDN data outside Mainland China. If this parameter is left blank, data on the service region will be queried. This parameter is valid only when `Area` is `overseas`.
-`server`: specifies to query data on the service region where Tencent Cloud CDN nodes are located;
-`client`: specifies to query data on the client region where the request devices are located.
+         * Specify whether to query by the region of the server or client. This parameter is valid only when `Area` is `overseas`.
+`server`: Query by the location of server (Tencent Cloud CDN nodes)
+`client`: Query by the location of the client (where the request devices are located)
          * @type {string || null}
          */
         this.AreaType = null;
@@ -14852,6 +14435,12 @@ Note: non-IPv6 allowlisted users cannot specify `ipv4` and `ipv6` for query
          * @type {string || null}
          */
         this.Product = null;
+
+        /**
+         * Specifies a time zone to query. The default time zone is UTC+08:00.
+         * @type {string || null}
+         */
+        this.TimeZone = null;
 
     }
 
@@ -14877,6 +14466,7 @@ Note: non-IPv6 allowlisted users cannot specify `ipv4` and `ipv6` for query
         this.Area = 'Area' in params ? params.Area : null;
         this.AreaType = 'AreaType' in params ? params.AreaType : null;
         this.Product = 'Product' in params ? params.Product : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
 
     }
 }
@@ -15197,6 +14787,48 @@ Note: this field may return `null`, indicating that no valid value is obtained.
     }
 }
 
+/**
+ * Precise access control match rule
+ * @class
+ */
+class ScdnAclRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Keyword
+         * @type {string || null}
+         */
+        this.MatchKey = null;
+
+        /**
+         * Logical operator. Valid values:
+         * @type {string || null}
+         */
+        this.LogiOperator = null;
+
+        /**
+         * Matched value
+         * @type {string || null}
+         */
+        this.MatchValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MatchKey = 'MatchKey' in params ? params.MatchKey : null;
+        this.LogiOperator = 'LogiOperator' in params ? params.LogiOperator : null;
+        this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
+
+    }
+}
+
 module.exports = {
     DescribeCdnDomainLogsResponse: DescribeCdnDomainLogsResponse,
     AdvancedAuthentication: AdvancedAuthentication,
@@ -15240,7 +14872,7 @@ module.exports = {
     GuetzliAdapter: GuetzliAdapter,
     UpdateScdnDomainResponse: UpdateScdnDomainResponse,
     Origin: Origin,
-    DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
+    AdvancedAuthenticationTypeF: AdvancedAuthenticationTypeF,
     TopData: TopData,
     EnableCachesRequest: EnableCachesRequest,
     Quota: Quota,
@@ -15271,7 +14903,6 @@ module.exports = {
     EnableClsLogTopicResponse: EnableClsLogTopicResponse,
     ListClsLogTopicsResponse: ListClsLogTopicsResponse,
     OverseaConfig: OverseaConfig,
-    AddCdnDomainRequest: AddCdnDomainRequest,
     UserAgentFilterRule: UserAgentFilterRule,
     UpdateDomainConfigRequest: UpdateDomainConfigRequest,
     Tag: Tag,
@@ -15279,7 +14910,7 @@ module.exports = {
     MaxAgeRule: MaxAgeRule,
     AdvancedAuthenticationTypeE: AdvancedAuthenticationTypeE,
     DescribeCertDomainsRequest: DescribeCertDomainsRequest,
-    AdvancedAuthenticationTypeF: AdvancedAuthenticationTypeF,
+    DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
     AdvancedAuthenticationTypeA: AdvancedAuthenticationTypeA,
     AdvancedCache: AdvancedCache,
     AdvancedAuthenticationTypeC: AdvancedAuthenticationTypeC,
@@ -15299,13 +14930,12 @@ module.exports = {
     DescribePushTasksResponse: DescribePushTasksResponse,
     ResourceOriginData: ResourceOriginData,
     IpStatus: IpStatus,
-    AddCdnDomainResponse: AddCdnDomainResponse,
     DomainAreaConfig: DomainAreaConfig,
     ServerCert: ServerCert,
     AccessControlRule: AccessControlRule,
     HttpHeaderPathRule: HttpHeaderPathRule,
     DisableCachesRequest: DisableCachesRequest,
-    ScdnAclRule: ScdnAclRule,
+    AddCLSTopicDomainsResponse: AddCLSTopicDomainsResponse,
     SimpleCacheRule: SimpleCacheRule,
     DisableClsLogTopicResponse: DisableClsLogTopicResponse,
     Hsts: Hsts,
@@ -15320,6 +14950,7 @@ module.exports = {
     UpdateScdnDomainRequest: UpdateScdnDomainRequest,
     UpdatePayTypeRequest: UpdatePayTypeRequest,
     ManageClsTopicDomainsRequest: ManageClsTopicDomainsRequest,
+    AddCLSTopicDomainsRequest: AddCLSTopicDomainsRequest,
     ScdnWafConfig: ScdnWafConfig,
     CreateScdnFailedLogTaskRequest: CreateScdnFailedLogTaskRequest,
     Cache: Cache,
@@ -15433,5 +15064,6 @@ module.exports = {
     OfflineCache: OfflineCache,
     UrlRedirectRule: UrlRedirectRule,
     IpFilterPathRule: IpFilterPathRule,
+    ScdnAclRule: ScdnAclRule,
 
 }

@@ -1080,13 +1080,13 @@ When the deployment type is `JAR` or `WAR`, this parameter indicates the package
         this.DeployStrategyConf = null;
 
         /**
-         * Auto scaling policy
+         * Auto scaling policy. (Disused. Please use APIs for auto scaling policy combinations)
          * @type {Array.<HorizontalAutoscaler> || null}
          */
         this.HorizontalAutoscaler = null;
 
         /**
-         * Scheduled auto scaling policy
+         * Scheduled scaling policy (Disused. Please use APIs for auto scaling policy combinations)
          * @type {Array.<CronHorizontalAutoscaler> || null}
          */
         this.CronHorizontalAutoscaler = null;
@@ -1132,6 +1132,12 @@ If `konajdk` is selected, the value can be:
          * @type {EnablePrometheusConf || null}
          */
         this.EnablePrometheusConf = null;
+
+        /**
+         * `1`: Enable APM collection; `0`: Disable APM collection
+         * @type {number || null}
+         */
+        this.EnableTracing = null;
 
     }
 
@@ -1270,6 +1276,7 @@ If `konajdk` is selected, the value can be:
             obj.deserialize(params.EnablePrometheusConf)
             this.EnablePrometheusConf = obj;
         }
+        this.EnableTracing = 'EnableTracing' in params ? params.EnableTracing : null;
 
     }
 }
@@ -3115,13 +3122,13 @@ class HorizontalAutoscaler extends  AbstractModel {
         super();
 
         /**
-         * Minimum number of instances
+         * (Optional) Minimum number of instances
          * @type {number || null}
          */
         this.MinReplicas = null;
 
         /**
-         * Maximum number of instances
+         * (Optional) Maximum number of instances
          * @type {number || null}
          */
         this.MaxReplicas = null;
@@ -3138,6 +3145,12 @@ class HorizontalAutoscaler extends  AbstractModel {
          */
         this.Threshold = null;
 
+        /**
+         * Whether it is enabled
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
     }
 
     /**
@@ -3151,6 +3164,7 @@ class HorizontalAutoscaler extends  AbstractModel {
         this.MaxReplicas = 'MaxReplicas' in params ? params.MaxReplicas : null;
         this.Metrics = 'Metrics' in params ? params.Metrics : null;
         this.Threshold = 'Threshold' in params ? params.Threshold : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }

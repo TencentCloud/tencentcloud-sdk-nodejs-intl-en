@@ -1696,6 +1696,13 @@ Note: this field may return `null`, indicating that no valid value can be found.
          */
         this.FlowLogStorage = null;
 
+        /**
+         * The region corresponding to the flow log storage ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CloudLogRegion = null;
+
     }
 
     /**
@@ -1732,6 +1739,7 @@ Note: this field may return `null`, indicating that no valid value can be found.
             obj.deserialize(params.FlowLogStorage)
             this.FlowLogStorage = obj;
         }
+        this.CloudLogRegion = 'CloudLogRegion' in params ? params.CloudLogRegion : null;
 
     }
 }
@@ -2384,6 +2392,12 @@ class DescribeFlowLogsRequest extends  AbstractModel {
          */
         this.Filters = null;
 
+        /**
+         * The region corresponding to the flow log storage ID.
+         * @type {string || null}
+         */
+        this.CloudLogRegion = null;
+
     }
 
     /**
@@ -2411,6 +2425,7 @@ class DescribeFlowLogsRequest extends  AbstractModel {
             obj.deserialize(params.Filters)
             this.Filters = obj;
         }
+        this.CloudLogRegion = 'CloudLogRegion' in params ? params.CloudLogRegion : null;
 
     }
 }
@@ -11665,13 +11680,13 @@ class DescribeAddressesRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * The Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
+         * The Offset. The default value is 0. For more information about `Offset`, see the relevant section in the API documentation.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of returned results. The default value is 20. The maximum is 100. For more information on `Limit`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
+         * Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API documentation.
          * @type {number || null}
          */
         this.Limit = null;
@@ -17191,6 +17206,12 @@ class CreateFlowLogRequest extends  AbstractModel {
          */
         this.FlowLogStorage = null;
 
+        /**
+         * The region corresponding to the flow log storage ID. If not passed in, this field defaults to the current region.
+         * @type {string || null}
+         */
+        this.CloudLogRegion = null;
+
     }
 
     /**
@@ -17223,6 +17244,7 @@ class CreateFlowLogRequest extends  AbstractModel {
             obj.deserialize(params.FlowLogStorage)
             this.FlowLogStorage = obj;
         }
+        this.CloudLogRegion = 'CloudLogRegion' in params ? params.CloudLogRegion : null;
 
     }
 }

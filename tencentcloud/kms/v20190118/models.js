@@ -238,6 +238,12 @@ class CreateKeyRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
+
     }
 
     /**
@@ -260,6 +266,7 @@ class CreateKeyRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
 
     }
 }
@@ -986,7 +993,7 @@ class GenerateDataKeyRequest extends  AbstractModel {
         this.EncryptionPublicKey = null;
 
         /**
-         * Asymmetric encryption algorithm. Valid values: `SM2(C1C3C2)`, `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used with `EncryptionPublicKey` for encryption. If it is left empty, a SM2 public key will be used by default.
+         * Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned)`, `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
          * @type {string || null}
          */
         this.EncryptionAlgorithm = null;
@@ -1958,6 +1965,12 @@ class ListKeyDetailRequest extends  AbstractModel {
          */
         this.TagFilters = null;
 
+        /**
+         * ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
+
     }
 
     /**
@@ -1984,6 +1997,7 @@ class ListKeyDetailRequest extends  AbstractModel {
                 this.TagFilters.push(obj);
             }
         }
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
 
     }
 }
@@ -2377,6 +2391,13 @@ class CreateKeyResponse extends  AbstractModel {
         this.TagMsg = null;
 
         /**
+         * ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2399,6 +2420,7 @@ class CreateKeyResponse extends  AbstractModel {
         this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
         this.TagCode = 'TagCode' in params ? params.TagCode : null;
         this.TagMsg = 'TagMsg' in params ? params.TagMsg : null;
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2634,6 +2656,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ProResourceId = null;
 
         /**
+         * Whether to activate Managed KMS
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.ExclusiveVSMEnabled = null;
+
+        /**
+         * Whether to activate Exclusive KMS
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
+         */
+        this.ExclusiveHSMEnabled = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2654,6 +2690,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ProExpireTime = 'ProExpireTime' in params ? params.ProExpireTime : null;
         this.ProRenewFlag = 'ProRenewFlag' in params ? params.ProRenewFlag : null;
         this.ProResourceId = 'ProResourceId' in params ? params.ProResourceId : null;
+        this.ExclusiveVSMEnabled = 'ExclusiveVSMEnabled' in params ? params.ExclusiveVSMEnabled : null;
+        this.ExclusiveHSMEnabled = 'ExclusiveHSMEnabled' in params ? params.ExclusiveHSMEnabled : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2861,6 +2899,12 @@ class ListKeysRequest extends  AbstractModel {
          */
         this.Role = null;
 
+        /**
+         * ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
+
     }
 
     /**
@@ -2873,6 +2917,7 @@ class ListKeysRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Role = 'Role' in params ? params.Role : null;
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
 
     }
 }
@@ -3005,6 +3050,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ResourceId = null;
 
+        /**
+         * ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.HsmClusterId = null;
+
     }
 
     /**
@@ -3029,6 +3081,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Origin = 'Origin' in params ? params.Origin : null;
         this.ValidTo = 'ValidTo' in params ? params.ValidTo : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.HsmClusterId = 'HsmClusterId' in params ? params.HsmClusterId : null;
 
     }
 }
@@ -3088,7 +3141,7 @@ class DecryptRequest extends  AbstractModel {
         this.EncryptionPublicKey = null;
 
         /**
-         * Asymmetric encryption algorithm. Valid values: `SM2(C1C3C2)`, `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, a SM2 public key will be used by default.
+         * Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned), `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
          * @type {string || null}
          */
         this.EncryptionAlgorithm = null;

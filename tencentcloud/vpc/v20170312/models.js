@@ -714,13 +714,13 @@ class CreateAssistantCidrRequest extends  AbstractModel {
         super();
 
         /**
-         * `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+         * `VPC` instance `ID`, such as `vpc-6v2ht8q5`.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+         * Array of CIDR blocks, such as ["10.0.0.0/16", "172.16.0.0/16"]
          * @type {Array.<string> || null}
          */
         this.CidrBlocks = null;
@@ -2076,13 +2076,13 @@ class ModifyNetworkAclEntriesRequest extends  AbstractModel {
         super();
 
         /**
-         * Network ACL instance ID. Example: acl-12345678.
+         * Network ACL instance ID, such as `acl-12345678`.
          * @type {string || null}
          */
         this.NetworkAclId = null;
 
         /**
-         * Network ACL rule set.
+         * Network ACL rule set. `NetworkAclEntrySet` and `NetworkAclQuintupleSet` cannot be entered at the same time.
          * @type {NetworkAclEntrySet || null}
          */
         this.NetworkAclEntrySet = null;
@@ -3890,18 +3890,24 @@ class DescribeDirectConnectGatewaysRequest extends  AbstractModel {
 }
 
 /**
- * AssociateNetworkInterfaceSecurityGroups response structure.
+ * DisassociateVpcEndPointSecurityGroups request structure.
  * @class
  */
-class AssociateNetworkInterfaceSecurityGroupsResponse extends  AbstractModel {
+class DisassociateVpcEndPointSecurityGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Array of security group IDs
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Endpoint ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EndPointId = null;
 
     }
 
@@ -3912,7 +3918,8 @@ class AssociateNetworkInterfaceSecurityGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.EndPointId = 'EndPointId' in params ? params.EndPointId : null;
 
     }
 }
@@ -4961,8 +4968,8 @@ class ModifyAssistantCidrResponse extends  AbstractModel {
         super();
 
         /**
-         * A set of secondary CIDR blocks.
-Note: This field may return null, indicating that no valid value was found.
+         * Array of secondary CIDR blocks.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssistantCidr> || null}
          */
         this.AssistantCidrSet = null;
@@ -8411,13 +8418,13 @@ class AssociateNetworkAclSubnetsRequest extends  AbstractModel {
         super();
 
         /**
-         * Network ACL instance ID. Example: acl-12345678.
+         * Network ACL instance ID, such as `acl-12345678`.
          * @type {string || null}
          */
         this.NetworkAclId = null;
 
         /**
-         * Array of subnet instance IDs. Example: [subnet-12345678]
+         * Array of subnet instance IDs, such as [subnet-12345678]
          * @type {Array.<string> || null}
          */
         this.SubnetIds = null;
@@ -8438,30 +8445,24 @@ class AssociateNetworkAclSubnetsRequest extends  AbstractModel {
 }
 
 /**
- * CheckAssistantCidr request structure.
+ * AdjustPublicAddress response structure.
  * @class
  */
-class CheckAssistantCidrRequest extends  AbstractModel {
+class AdjustPublicAddressResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+         * The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.VpcId = null;
-
-        /**
-         * Load CIDR blocks to add. CIDR block set; format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
-         * @type {Array.<string> || null}
-         */
-        this.NewCidrBlocks = null;
-
-        /**
-         * Load CIDR blocks to delete. CIDR block set; Format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
-         * @type {Array.<string> || null}
-         */
-        this.OldCidrBlocks = null;
+        this.RequestId = null;
 
     }
 
@@ -8472,9 +8473,8 @@ class CheckAssistantCidrRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.NewCidrBlocks = 'NewCidrBlocks' in params ? params.NewCidrBlocks : null;
-        this.OldCidrBlocks = 'OldCidrBlocks' in params ? params.OldCidrBlocks : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8643,7 +8643,7 @@ class NotifyRoutesRequest extends  AbstractModel {
         this.RouteTableId = null;
 
         /**
-         * The unique ID of the routing policy
+         * The unique ID of the route
          * @type {Array.<string> || null}
          */
         this.RouteItemIds = null;
@@ -8858,7 +8858,7 @@ class DescribeGatewayFlowQosResponse extends  AbstractModel {
         super();
 
         /**
-         * List of instance details.
+         * List of instance details
          * @type {Array.<GatewayQos> || null}
          */
         this.GatewayQosSet = null;
@@ -9864,7 +9864,7 @@ class DeleteNetworkAclRequest extends  AbstractModel {
         super();
 
         /**
-         * Network ACL instance ID. Example: acl-12345678.
+         * Network ACL instance ID, such as `acl-12345678`.
          * @type {string || null}
          */
         this.NetworkAclId = null;
@@ -11619,13 +11619,13 @@ class CreateNetworkAclRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of the DescribeVpcs API.
+         * VPC instance ID, which can be obtained from the `VpcId` field returned by `DescribeVpcs` API.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Name of the network ACL. The maximum length is 60 bytes.
+         * Network ACL name, which can contain up to 60 bytes.
          * @type {string || null}
          */
         this.NetworkAclName = null;
@@ -11873,16 +11873,16 @@ class ModifyGatewayFlowQosRequest extends  AbstractModel {
         super();
 
         /**
-         * Gateway instance ID, which currently supports these types:
-ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+         * Gateway instance ID. Supported types:
+Direct connect gateway instance, such as `dcg-ltjahce6`;
+NAT gateway instance, such as `nat-ltjahce6`;
+VPN gateway instance, such as `vpn-ltjahce6`.
          * @type {string || null}
          */
         this.GatewayId = null;
 
         /**
-         * Bandwidth limit value.
+         * Bandwidth limit value in Mbps. Valid values: >0: Set the limit to the specified value. 0: Block all traffic. -1: No bandwidth limit.
          * @type {number || null}
          */
         this.Bandwidth = null;
@@ -15360,19 +15360,19 @@ class ModifyAssistantCidrRequest extends  AbstractModel {
         super();
 
         /**
-         * `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+         * `VPC` instance `ID`, such as `vpc-6v2ht8q5`.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
+         * Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. At least one of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
          * @type {Array.<string> || null}
          */
         this.NewCidrBlocks = null;
 
         /**
-         * Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
+         * Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. At least one of `NewCidrBlocks` or `OldCidrBlocks` must be specified.
          * @type {Array.<string> || null}
          */
         this.OldCidrBlocks = null;
@@ -16325,7 +16325,7 @@ class DescribeAddressesResponse extends  AbstractModel {
 }
 
 /**
- * Gateway bandwidth limit information
+ * Information of the gateway bandwidth limit
  * @class
  */
 class GatewayQos extends  AbstractModel {
@@ -16351,7 +16351,7 @@ class GatewayQos extends  AbstractModel {
         this.Bandwidth = null;
 
         /**
-         * The creation time.
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -16700,13 +16700,13 @@ class DisassociateNetworkAclSubnetsRequest extends  AbstractModel {
         super();
 
         /**
-         * Network ACL instance ID. Example: acl-12345678.
+         * Network ACL instance ID, such as `acl-12345678`.
          * @type {string || null}
          */
         this.NetworkAclId = null;
 
         /**
-         * Array of subnet instance IDs. Example: [subnet-12345678].
+         * Array of subnet instance IDs, such as [subnet-12345678].
          * @type {Array.<string> || null}
          */
         this.SubnetIds = null;
@@ -17940,13 +17940,13 @@ class DeleteAssistantCidrRequest extends  AbstractModel {
         super();
 
         /**
-         * `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+         * `VPC` instance `ID`, such as `vpc-6v2ht8q5`.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+         * Array of CIDR blocks, such as ["10.0.0.0/16", "172.16.0.0/16"]
          * @type {Array.<string> || null}
          */
         this.CidrBlocks = null;
@@ -18218,24 +18218,18 @@ class ModifyLocalGatewayResponse extends  AbstractModel {
 }
 
 /**
- * DisassociateVpcEndPointSecurityGroups request structure.
+ * AssociateNetworkInterfaceSecurityGroups response structure.
  * @class
  */
-class DisassociateVpcEndPointSecurityGroupsRequest extends  AbstractModel {
+class AssociateNetworkInterfaceSecurityGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array of security group IDs
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroupIds = null;
-
-        /**
-         * Endpoint ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EndPointId = null;
+        this.RequestId = null;
 
     }
 
@@ -18246,8 +18240,7 @@ class DisassociateVpcEndPointSecurityGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
-        this.EndPointId = 'EndPointId' in params ? params.EndPointId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -18721,13 +18714,13 @@ class ModifyNetworkAclAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * Network ACL instance ID. Example: acl-12345678.
+         * Network ACL instance ID, such as `acl-12345678`.
          * @type {string || null}
          */
         this.NetworkAclId = null;
 
         /**
-         * Name of the network ACL. The maximum length is 60 bytes.
+         * Network ACL name, which can contain up to 60 bytes.
          * @type {string || null}
          */
         this.NetworkAclName = null;
@@ -19775,10 +19768,10 @@ class DisableGatewayFlowMonitorRequest extends  AbstractModel {
         super();
 
         /**
-         * Gateway instance ID, which currently supports these types:
-ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+         * Gateway instance ID. Supported types:
+Direct connect gateway instance, such as `dcg-ltjahce6`;
+NAT gateway instance, such as `nat-ltjahce6`;
+VPN gateway instance, such as `vpn-ltjahce6`.
          * @type {string || null}
          */
         this.GatewayId = null;
@@ -19932,6 +19925,41 @@ class DeleteNatGatewayResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AdjustPublicAddress request structure.
+ * @class
+ */
+class AdjustPublicAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the CVM instance, such as `ins-11112222`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The unique ID of the EIP, such as `eip-11112222`.
+         * @type {string || null}
+         */
+        this.AddressId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
 
     }
 }
@@ -20411,6 +20439,48 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckAssistantCidr request structure.
+ * @class
+ */
+class CheckAssistantCidrRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Load CIDR blocks to add. CIDR block set; format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+         * @type {Array.<string> || null}
+         */
+        this.NewCidrBlocks = null;
+
+        /**
+         * Load CIDR blocks to delete. CIDR block set; Format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+         * @type {Array.<string> || null}
+         */
+        this.OldCidrBlocks = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NewCidrBlocks = 'NewCidrBlocks' in params ? params.NewCidrBlocks : null;
+        this.OldCidrBlocks = 'OldCidrBlocks' in params ? params.OldCidrBlocks : null;
 
     }
 }
@@ -20968,7 +21038,7 @@ class DescribeVpcTaskResultResponse extends  AbstractModel {
         super();
 
         /**
-         * Execution result of an async task Valid values: `SUCCESS`: the task has been successfully executed; `FAILED`: the job execution failed; `RUNNING`: the job is executing.
+         * The execution results of an async task. Valid values: `SUCCESS`(task executed successfully), `FAILED` (task execution failed), and `RUNNING` (task in progress). 
          * @type {string || null}
          */
         this.Status = null;
@@ -22166,10 +22236,10 @@ class EnableGatewayFlowMonitorRequest extends  AbstractModel {
         super();
 
         /**
-         * Gateway instance ID, which currently supports these types:
-ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+         * Gateway instance ID. Supported types:
+Direct connect gateway instance, such as `dcg-ltjahce6`;
+NAT gateway instance, such as `nat-ltjahce6`;
+VPN gateway instance, such as `vpn-ltjahce6`.
          * @type {string || null}
          */
         this.GatewayId = null;
@@ -22716,10 +22786,10 @@ class DescribeGatewayFlowQosRequest extends  AbstractModel {
         super();
 
         /**
-         * Gateway instance ID, which currently supports these types:
-ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+         * Gateway instance ID. Supported types:
+Direct connect gateway instance, such as `dcg-ltjahce6`;
+NAT gateway instance, such as `nat-ltjahce6`;
+VPN gateway instance, such as `vpn-ltjahce6`.
          * @type {string || null}
          */
         this.GatewayId = null;
@@ -25227,8 +25297,8 @@ class CreateAssistantCidrResponse extends  AbstractModel {
         super();
 
         /**
-         * A set of secondary CIDR blocks.
-Note: This field may return null, indicating that no valid value was found.
+         * Array of secondary CIDR blocks.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AssistantCidr> || null}
          */
         this.AssistantCidrSet = null;
@@ -26553,7 +26623,7 @@ module.exports = {
     ModifyFlowLogAttributeResponse: ModifyFlowLogAttributeResponse,
     DescribeBandwidthPackagesResponse: DescribeBandwidthPackagesResponse,
     DescribeDirectConnectGatewaysRequest: DescribeDirectConnectGatewaysRequest,
-    AssociateNetworkInterfaceSecurityGroupsResponse: AssociateNetworkInterfaceSecurityGroupsResponse,
+    DisassociateVpcEndPointSecurityGroupsRequest: DisassociateVpcEndPointSecurityGroupsRequest,
     CreateVpcEndPointServiceWhiteListResponse: CreateVpcEndPointServiceWhiteListResponse,
     DescribeIpGeolocationDatabaseUrlResponse: DescribeIpGeolocationDatabaseUrlResponse,
     DescribeNatGatewaySourceIpTranslationNatRulesResponse: DescribeNatGatewaySourceIpTranslationNatRulesResponse,
@@ -26645,7 +26715,7 @@ module.exports = {
     VpngwCcnRoutes: VpngwCcnRoutes,
     ReplaceRouteTableAssociationRequest: ReplaceRouteTableAssociationRequest,
     AssociateNetworkAclSubnetsRequest: AssociateNetworkAclSubnetsRequest,
-    CheckAssistantCidrRequest: CheckAssistantCidrRequest,
+    AdjustPublicAddressResponse: AdjustPublicAddressResponse,
     RenewVpnGatewayRequest: RenewVpnGatewayRequest,
     SecurityGroupPolicy: SecurityGroupPolicy,
     NotifyRoutesRequest: NotifyRoutesRequest,
@@ -26849,7 +26919,7 @@ module.exports = {
     CreateNetDetectResponse: CreateNetDetectResponse,
     DeleteCcnRequest: DeleteCcnRequest,
     ModifyLocalGatewayResponse: ModifyLocalGatewayResponse,
-    DisassociateVpcEndPointSecurityGroupsRequest: DisassociateVpcEndPointSecurityGroupsRequest,
+    AssociateNetworkInterfaceSecurityGroupsResponse: AssociateNetworkInterfaceSecurityGroupsResponse,
     EnableFlowLogsRequest: EnableFlowLogsRequest,
     ModifyVpnGatewayAttributeRequest: ModifyVpnGatewayAttributeRequest,
     CreateNatGatewayRequest: CreateNatGatewayRequest,
@@ -26883,6 +26953,7 @@ module.exports = {
     DescribeBandwidthPackageQuotaResponse: DescribeBandwidthPackageQuotaResponse,
     DeleteServiceTemplateGroupRequest: DeleteServiceTemplateGroupRequest,
     DeleteNatGatewayResponse: DeleteNatGatewayResponse,
+    AdjustPublicAddressRequest: AdjustPublicAddressRequest,
     CreateDirectConnectGatewayResponse: CreateDirectConnectGatewayResponse,
     ModifyVpcEndPointAttributeRequest: ModifyVpcEndPointAttributeRequest,
     DescribeTaskResultResponse: DescribeTaskResultResponse,
@@ -26893,6 +26964,7 @@ module.exports = {
     UnassignIpv6CidrBlockRequest: UnassignIpv6CidrBlockRequest,
     CCN: CCN,
     InquirePriceCreateDirectConnectGatewayResponse: InquirePriceCreateDirectConnectGatewayResponse,
+    CheckAssistantCidrRequest: CheckAssistantCidrRequest,
     DestinationIpPortTranslationNatRule: DestinationIpPortTranslationNatRule,
     CreateDefaultVpcRequest: CreateDefaultVpcRequest,
     DescribeSubnetsResponse: DescribeSubnetsResponse,

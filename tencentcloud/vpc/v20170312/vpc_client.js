@@ -91,7 +91,7 @@ const DescribeNatGatewaysRequest = models.DescribeNatGatewaysRequest;
 const ModifyFlowLogAttributeResponse = models.ModifyFlowLogAttributeResponse;
 const DescribeBandwidthPackagesResponse = models.DescribeBandwidthPackagesResponse;
 const DescribeDirectConnectGatewaysRequest = models.DescribeDirectConnectGatewaysRequest;
-const AssociateNetworkInterfaceSecurityGroupsResponse = models.AssociateNetworkInterfaceSecurityGroupsResponse;
+const DisassociateVpcEndPointSecurityGroupsRequest = models.DisassociateVpcEndPointSecurityGroupsRequest;
 const CreateVpcEndPointServiceWhiteListResponse = models.CreateVpcEndPointServiceWhiteListResponse;
 const DescribeIpGeolocationDatabaseUrlResponse = models.DescribeIpGeolocationDatabaseUrlResponse;
 const DescribeNatGatewaySourceIpTranslationNatRulesResponse = models.DescribeNatGatewaySourceIpTranslationNatRulesResponse;
@@ -183,7 +183,7 @@ const DescribeVpcResourceDashboardRequest = models.DescribeVpcResourceDashboardR
 const VpngwCcnRoutes = models.VpngwCcnRoutes;
 const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
 const AssociateNetworkAclSubnetsRequest = models.AssociateNetworkAclSubnetsRequest;
-const CheckAssistantCidrRequest = models.CheckAssistantCidrRequest;
+const AdjustPublicAddressResponse = models.AdjustPublicAddressResponse;
 const RenewVpnGatewayRequest = models.RenewVpnGatewayRequest;
 const SecurityGroupPolicy = models.SecurityGroupPolicy;
 const NotifyRoutesRequest = models.NotifyRoutesRequest;
@@ -387,7 +387,7 @@ const EnableVpcEndPointConnectResponse = models.EnableVpcEndPointConnectResponse
 const CreateNetDetectResponse = models.CreateNetDetectResponse;
 const DeleteCcnRequest = models.DeleteCcnRequest;
 const ModifyLocalGatewayResponse = models.ModifyLocalGatewayResponse;
-const DisassociateVpcEndPointSecurityGroupsRequest = models.DisassociateVpcEndPointSecurityGroupsRequest;
+const AssociateNetworkInterfaceSecurityGroupsResponse = models.AssociateNetworkInterfaceSecurityGroupsResponse;
 const EnableFlowLogsRequest = models.EnableFlowLogsRequest;
 const ModifyVpnGatewayAttributeRequest = models.ModifyVpnGatewayAttributeRequest;
 const CreateNatGatewayRequest = models.CreateNatGatewayRequest;
@@ -421,6 +421,7 @@ const CreateAddressTemplateGroupResponse = models.CreateAddressTemplateGroupResp
 const DescribeBandwidthPackageQuotaResponse = models.DescribeBandwidthPackageQuotaResponse;
 const DeleteServiceTemplateGroupRequest = models.DeleteServiceTemplateGroupRequest;
 const DeleteNatGatewayResponse = models.DeleteNatGatewayResponse;
+const AdjustPublicAddressRequest = models.AdjustPublicAddressRequest;
 const CreateDirectConnectGatewayResponse = models.CreateDirectConnectGatewayResponse;
 const ModifyVpcEndPointAttributeRequest = models.ModifyVpcEndPointAttributeRequest;
 const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
@@ -431,6 +432,7 @@ const DeleteVpcEndPointRequest = models.DeleteVpcEndPointRequest;
 const UnassignIpv6CidrBlockRequest = models.UnassignIpv6CidrBlockRequest;
 const CCN = models.CCN;
 const InquirePriceCreateDirectConnectGatewayResponse = models.InquirePriceCreateDirectConnectGatewayResponse;
+const CheckAssistantCidrRequest = models.CheckAssistantCidrRequest;
 const DestinationIpPortTranslationNatRule = models.DestinationIpPortTranslationNatRule;
 const CreateDefaultVpcRequest = models.CreateDefaultVpcRequest;
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
@@ -628,6 +630,18 @@ Only one policy in a single direction can be replaced in each request, and the P
     }
 
     /**
+     * This API is used to change the IP address. It supports changing the common public IPs and EIPs billed by monthly subscribed bandwidth of a CVM instance.
+
+     * @param {AdjustPublicAddressRequest} req
+     * @param {function(string, AdjustPublicAddressResponse):void} cb
+     * @public
+     */
+    AdjustPublicAddress(req, cb) {
+        let resp = new AdjustPublicAddressResponse();
+        this.request("AdjustPublicAddress", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a flow log.
      * @param {CreateFlowLogRequest} req
      * @param {function(string, CreateFlowLogResponse):void} cb
@@ -662,7 +676,7 @@ Only one policy in a single direction can be replaced in each request, and the P
 
     /**
      * This API is used to create a <a href="https://intl.cloud.tencent.com/document/product/215/20088?from_cn_redirect=1">network ACL</a>.
-* The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` after creation to set rules for the network ACL as needed.
+* The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` to set rules for the new network ACL as needed.
      * @param {CreateNetworkAclRequest} req
      * @param {function(string, CreateNetworkAclResponse):void} cb
      * @public
@@ -881,7 +895,7 @@ This API is used to query only the information of IP addresses that are already 
     }
 
     /**
-     * This API (EnableGatewayFlowMonitor) is used to enable gateway flow monitor.
+     * This API is used to enable gateway traffic monitor.
      * @param {EnableGatewayFlowMonitorRequest} req
      * @param {function(string, EnableGatewayFlowMonitorResponse):void} cb
      * @public
@@ -993,7 +1007,9 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API is used to modify (add or delete) the inbound and outbound rules of a network ACL.
+     * This API is used to modify (add or delete) the inbound and outbound rules of a network ACL. In `NetworkAclEntrySet` parameters,
+* Passing in the new inbound/outbound rules will reset the original rules.
+* Passing in the inbound rules will only reset the original inbound rules and not affect the original outbound rules, and vice versa.
      * @param {ModifyNetworkAclEntriesRequest} req
      * @param {function(string, ModifyNetworkAclEntriesResponse):void} cb
      * @public
@@ -1351,7 +1367,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (DescribeGatewayFlowQos) is used to query the QoS bandwidth limit of inbound IP flow in a gateway.
+     * This API is used to query the inbound IP bandwidth limit of a gateway.
      * @param {DescribeGatewayFlowQosRequest} req
      * @param {function(string, DescribeGatewayFlowQosResponse):void} cb
      * @public
@@ -1773,7 +1789,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (DeleteAssistantCidr) is used to delete secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+     * This API is used to delete secondary CIDR blocks. This API is in beta test. To use it, please submit a ticket.
      * @param {DeleteAssistantCidrRequest} req
      * @param {function(string, DeleteAssistantCidrResponse):void} cb
      * @public
@@ -1888,7 +1904,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (ModifyGatewayFlowQos) is used to adjust the QoS bandwidth limit in a gateway.
+     * This API is used to adjust the bandwidth limit of a gateway.
      * @param {ModifyGatewayFlowQosRequest} req
      * @param {function(string, ModifyGatewayFlowQosResponse):void} cb
      * @public
@@ -1948,7 +1964,7 @@ When a NAT gateway is deleted, all routes containing this gateway are deleted au
     }
 
     /**
-     * This API is used to withdraw a route from CCN. This can also be done by clicking the **Withdraw from CCN** button on the route table page.
+     * This API is used to withdraw a route from CCN. 
      * @param {WithdrawNotifyRoutesRequest} req
      * @param {function(string, WithdrawNotifyRoutesResponse):void} cb
      * @public
@@ -2017,7 +2033,7 @@ This API is completed asynchronously. If you need to query the execution result 
     }
 
     /**
-     * This API (CreateAssistantCidr) is used to batch create secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+     * This API is used to batch create secondary CIDR blocks. This API is in beta test. To use it, please submit a ticket.
      * @param {CreateAssistantCidrRequest} req
      * @param {function(string, CreateAssistantCidrResponse):void} cb
      * @public
@@ -2132,7 +2148,7 @@ Before taking actions on a NAT gateway, ensure that it has been successfully cre
     }
 
     /**
-     * This API is used to publish a route to CCN. This can also be done by clicking the **Publish to CCN** button on the route table page.
+     * This API is used to publish a route to CCN. This can also be done by clicking "Publish to CCN" in the operation column on the page of route table list.
      * @param {NotifyRoutesRequest} req
      * @param {function(string, NotifyRoutesResponse):void} cb
      * @public
@@ -2156,7 +2172,7 @@ Before taking actions on a NAT gateway, ensure that it has been successfully cre
     }
 
     /**
-     * This API (ModifyAssistantCidr) is used to batch modify (e.g. add and delete) secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+     * This API is used to modify (add or delete) secondary CIDR blocks in batch. This API is in beta test. To use it, please submit a ticket.
      * @param {ModifyAssistantCidrRequest} req
      * @param {function(string, ModifyAssistantCidrResponse):void} cb
      * @public
@@ -2951,7 +2967,7 @@ This API is used to verify whether there will be conflict with an existing route
     }
 
     /**
-     * This API (DisableGatewayFlowMonitor) is used to disable gateway flow monitor.
+     * This API is used to disable gateway traffic monitor.
      * @param {DisableGatewayFlowMonitorRequest} req
      * @param {function(string, DisableGatewayFlowMonitorResponse):void} cb
      * @public

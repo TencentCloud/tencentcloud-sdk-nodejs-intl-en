@@ -862,6 +862,12 @@ class CreateReplicationInstanceRequest extends  AbstractModel {
          */
         this.ReplicationRegionName = null;
 
+        /**
+         * Whether to sync TCR cloud tags to the COS Bucket
+         * @type {boolean || null}
+         */
+        this.SyncTag = null;
+
     }
 
     /**
@@ -874,6 +880,7 @@ class CreateReplicationInstanceRequest extends  AbstractModel {
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
         this.ReplicationRegionId = 'ReplicationRegionId' in params ? params.ReplicationRegionId : null;
         this.ReplicationRegionName = 'ReplicationRegionName' in params ? params.ReplicationRegionName : null;
+        this.SyncTag = 'SyncTag' in params ? params.SyncTag : null;
 
     }
 }

@@ -116,13 +116,13 @@ class EnableReplicaReadonlyRequest extends  AbstractModel {
         super();
 
         /**
-         * Serial ID of an instance
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Account routing policy. If `master` or `replication` is entered, it means to route to the primary or secondary node; if this is left blank, it means to write into the primary node and read from the secondary node by default
+         * Account routing policy. If `master` or `replication` is entered, it means to route to the master or replica node; if this parameter is left empty, it means to write into the master node and read from the replica node by default.
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
@@ -163,7 +163,7 @@ class RedisBackupSet extends  AbstractModel {
         this.BackupId = null;
 
         /**
-         * Backup type. manualBackupInstance: manual backup initiated by user; systemBackupInstance: midnight backup initiated by system
+         * Backup type. 1: manual backup initiated by the user; 0: automatic backup in the early morning initiated by the system
          * @type {string || null}
          */
         this.BackupType = null;
@@ -181,10 +181,31 @@ class RedisBackupSet extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * Whether a backup is locked. 0: no; 1: yes
+         * Whether a backup is locked. 0: no; 1: yes.
          * @type {number || null}
          */
         this.Locked = null;
+
+        /**
+         * Internal field, which can be ignored.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BackupSize = null;
+
+        /**
+         * Internal field, which can be ignored.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FullBackup = null;
+
+        /**
+         * Internal field, which can be ignored.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InstanceType = null;
 
     }
 
@@ -201,6 +222,9 @@ class RedisBackupSet extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.Locked = 'Locked' in params ? params.Locked : null;
+        this.BackupSize = 'BackupSize' in params ? params.BackupSize : null;
+        this.FullBackup = 'FullBackup' in params ? params.FullBackup : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -257,7 +281,7 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Auto backup type: 1 "scheduled rollback"
+         * Automatic backup type: 1 (scheduled rollback)
          * @type {number || null}
          */
         this.AutoBackupType = null;
@@ -273,6 +297,12 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.TimePeriod = null;
+
+        /**
+         * Retention time of full backup files in days
+         * @type {number || null}
+         */
+        this.BackupStorageDays = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -292,6 +322,7 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
         this.AutoBackupType = 'AutoBackupType' in params ? params.AutoBackupType : null;
         this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
         this.TimePeriod = 'TimePeriod' in params ? params.TimePeriod : null;
+        this.BackupStorageDays = 'BackupStorageDays' in params ? params.BackupStorageDays : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -306,13 +337,13 @@ class RestoreInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the instance to be operated on, which can be obtained through the `redisId` field in the return value of the DescribeRedis API.
+         * ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstances` API.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Backup ID, which can be obtained through the `backupId` field in the return value of the GetRedisBackupList API
+         * Backup ID, which can be obtained through the `backupId` field in the return value of the `GetRedisBackupList` API.
          * @type {string || null}
          */
         this.BackupId = null;
@@ -376,13 +407,13 @@ class ApplyParamsTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID list
+         * List of instance IDs
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * The ID of the parameter template to be applied
+         * ID of the parameter template to be applied
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -446,105 +477,106 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance type. Valid values: 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture).
+         * Instance type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture).
          * @type {number || null}
          */
         this.TypeId = null;
 
         /**
-         * Instance capacity in MB. The value should be a multiple of 1,024 and is subject to the specifications returned by the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
+         * Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
+If `TypeId` is the standard architecture, `MemSize` indicates the total memory capacity of the instance; if `TypeId` is the cluster architecture, `MemSize` indicates the memory capacity per shard.
          * @type {number || null}
          */
         this.MemSize = null;
 
         /**
-         * Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
+         * Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * Purchased usage period in months. which is required when creating an instance. For pay-as-you-go instances, the valid value is 1; for monthly subscription instances, the value range is [1,2,3,4,5,6,7,8,9,10,11,12,24,36].
+         * Length of purchase in months, which is required when creating a monthly subscribed instance. Valid values: [1,2,3,4,5,6,7,8,9,10,11,12,24,36]. For pay-as-you-go instances, set the parameter to `1`.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Billing method. 0: pay as you go
+         * Billing mode. 0: pay-as-you-go
          * @type {number || null}
          */
         this.BillingMode = null;
 
         /**
-         * Availability zone ID of the instance. For more information, please see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+         * ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
          * Instance password. If the input parameter `NoAuth` is `true` and a VPC is used, the `Password` is optional; otherwise, it is required.
-If the instance type parameter `TypeId` indicates Redis 2.8, 4.0, or 5.0, the password cannot start with "/" and must contain 8-30 characters which are comprised of at least two of the following: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
-If the instance type parameter `TypeId` indicates CKV 3.2, the password contains 8-30 characters which must be comprised of only letters and digits.
+If the instance `TypeId` is Redis 2.8, 4.0, or 5.0, the password cannot start with "/" and must contain 8–30 characters in at least two of the following character types: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
+If the instance `TypeId` is CKV 3.2, the password can contain 8–30 letters and digits.
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * VPC ID, such as "vpc-sad23jfdfk". If this parameter is not passed in, the classic network will be selected by default. The parameter value can be queried by the `DescribeVpcs` API.
+         * VPC ID such as vpc-sad23jfdfk. If this parameter is not passed in, the classic network will be selected by default. Use the VPC list querying API to query.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * In a classic network, `subnetId` is invalid. In a VPC subnet, the value can be queried by the `DescribeSubnets` API, such as "subnet-fdj24n34j2".
+         * In the classic network, `subnetId` is invalid. In a VPC subnet, the value is the subnet ID, such as subnet-fdj24n34j2.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Project ID. The value is subject to the `projectId` returned by the `DescribeProject` API.
+         * Project ID. The value is subject to the `projectId` returned by user account > user account querying APIs > project list.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Auto-renewal flag. Valid values: 0 (default status, indicating manual renewal), 1 (auto-renewal enabled), 2 (auto-renewal disabled)
+         * Auto-renewal flag. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
          * @type {number || null}
          */
         this.AutoRenew = null;
 
         /**
-         * Array of security group IDs
+         * Array of security group IDs.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIdList = null;
 
         /**
-         * User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024, 65535].
+         * User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024,65535].
          * @type {number || null}
          */
         this.VPort = null;
 
         /**
-         * Number of shards in an instance. This parameter is required for instances in cluster architecture. Value range: [3,5,8,12,16,24,32,64,96,128].
+         * Number of shards in an instance. This parameter is required for Cluster Edition instances. Valid values: [3,5,8,12,16,24,32,64,96,128].
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * Number of replicas in an instance. Redis 2.8 standard edition and CKV standard edition support 1 replica. Standard/cluster edition 4.0 and 5.0 support 1-5 replicas.
+         * Number of replicas in the instance. Redis 2.8 Standard Edition and CKV Standard Edition support 1 replica. Standard/Cluster Edition 4.0 and 5.0 support 1–5 replicas.
          * @type {number || null}
          */
         this.RedisReplicasNum = null;
 
         /**
-         * Whether to support read-only replicas. Neither Redis 2.8 in standard architecture nor CKV in standard architecture supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the master node and read requests will be distributed on the replica nodes. To enable read-only replicas, we recommend that you create 2 or more replicas.
+         * Whether to support read-only replicas. Neither Redis 2.8 Standard Edition nor CKV Standard Edition supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the master node and read requests will be distributed to replica nodes. To enable read-only replicas, we recommend you create two or more replicas.
          * @type {boolean || null}
          */
         this.ReplicasReadonly = null;
 
         /**
-         * Instance name. It contains only letters, digits, and symbols (-_) with a length of up to 60 characters.
+         * Instance name, which can contain up to 60 letters, digits, underscores, or hyphens.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -556,13 +588,13 @@ If the instance type parameter `TypeId` indicates CKV 3.2, the password contains
         this.NoAuth = null;
 
         /**
-         * Node information of an instance. Currently, information about the node type (master or replica) and node availability zone can be passed in. This parameter is not required for instances deployed in a single availability zone.
+         * Node information of the instance. Currently, information about the node type (master or replica) and node AZ can be passed in. This parameter is not required for single-AZ deployed instances.
          * @type {Array.<RedisNodeInfo> || null}
          */
         this.NodeSet = null;
 
         /**
-         * The tag bound with the instance to be purchased
+         * Tag bound to the instance to be purchased
          * @type {Array.<ResourceTag> || null}
          */
         this.ResourceTags = null;
@@ -578,6 +610,12 @@ If the instance type parameter `TypeId` indicates CKV 3.2, the password contains
          * @type {string || null}
          */
         this.TemplateId = null;
+
+        /**
+         * false: send a normal request and create an instance directly after the check is passed (default value); true: send a check request without creating an instance.
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
 
     }
 
@@ -626,6 +664,7 @@ If the instance type parameter `TypeId` indicates CKV 3.2, the password contains
         }
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
 
     }
 }
@@ -860,7 +899,7 @@ class Inbound extends  AbstractModel {
         this.Desc = null;
 
         /**
-         * Network protocol, such as UDP and TCP, etc.
+         * Network protocol, such as UDP and TCP.
          * @type {string || null}
          */
         this.IpProtocol = null;
@@ -947,30 +986,90 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTaskList response structure.
+ * Instance node type
  * @class
  */
-class DescribeTaskListResponse extends  AbstractModel {
+class InstanceClusterNode extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of tasks
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Task details
-         * @type {Array.<TaskInfoDetail> || null}
-         */
-        this.Tasks = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Node name
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * ID of the runtime node of the instance
+         * @type {string || null}
+         */
+        this.RunId = null;
+
+        /**
+         * Cluster role. 0: master; 1: replica
+         * @type {number || null}
+         */
+        this.Role = null;
+
+        /**
+         * Node status. 0: readwrite; 1: read; 2: backup
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Service status. 0: down; 1: on
+         * @type {number || null}
+         */
+        this.Connected = null;
+
+        /**
+         * Node creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Node elimination time
+         * @type {string || null}
+         */
+        this.DownTime = null;
+
+        /**
+         * Distribution of node slots
+         * @type {string || null}
+         */
+        this.Slots = null;
+
+        /**
+         * Distribution of node keys
+         * @type {number || null}
+         */
+        this.Keys = null;
+
+        /**
+         * Node QPS
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * Node QPS slope
+         * @type {number || null}
+         */
+        this.QpsSlope = null;
+
+        /**
+         * Node storage
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Node storage slope
+         * @type {number || null}
+         */
+        this.StorageSlope = null;
 
     }
 
@@ -981,17 +1080,19 @@ class DescribeTaskListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Tasks) {
-            this.Tasks = new Array();
-            for (let z in params.Tasks) {
-                let obj = new TaskInfoDetail();
-                obj.deserialize(params.Tasks[z]);
-                this.Tasks.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RunId = 'RunId' in params ? params.RunId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Connected = 'Connected' in params ? params.Connected : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.DownTime = 'DownTime' in params ? params.DownTime : null;
+        this.Slots = 'Slots' in params ? params.Slots : null;
+        this.Keys = 'Keys' in params ? params.Keys : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.QpsSlope = 'QpsSlope' in params ? params.QpsSlope : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.StorageSlope = 'StorageSlope' in params ? params.StorageSlope : null;
 
     }
 }
@@ -1005,7 +1106,7 @@ class ModifyInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance modification type. rename: rename an instance; modifyProject: modify the project of an instance; modifyAutoRenew: modify the auto-renewal flag of an instance
+         * Instance modification type. rename: rename an instance; modifyProject: modify the project of an instance; modifyAutoRenew: modify the auto-renewal flag of an instance.
          * @type {string || null}
          */
         this.Operation = null;
@@ -1017,7 +1118,7 @@ class ModifyInstanceRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * New name of instance
+         * New name of the instance
          * @type {Array.<string> || null}
          */
         this.InstanceNames = null;
@@ -1029,7 +1130,7 @@ class ModifyInstanceRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Auto-renewal flag. 0: default status (manual renewal), 1: auto-renewal enabled, 2: auto-renewal disabled
+         * Auto-renewal flag. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
          * @type {Array.<number> || null}
          */
         this.AutoRenews = null;
@@ -1074,24 +1175,24 @@ class ModifyInstanceRequest extends  AbstractModel {
 }
 
 /**
- * KillMasterGroup response structure.
+ * Tendis node information
  * @class
  */
-class KillMasterGroupResponse extends  AbstractModel {
+class TendisNodes extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Node ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.NodeId = null;
+
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.NodeRole = null;
 
     }
 
@@ -1102,8 +1203,8 @@ class KillMasterGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
 
     }
 }
@@ -1202,7 +1303,7 @@ class DescribeCommonDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * List of instance VIPs
+         * List of VPC IDs
          * @type {Array.<number> || null}
          */
         this.VpcIds = null;
@@ -1214,7 +1315,7 @@ class DescribeCommonDBInstancesRequest extends  AbstractModel {
         this.SubnetIds = null;
 
         /**
-         * List of billing modes. Valid values: `0` (monthly subscription), `1` (pay-as-you-go)
+         * List of billing modes. 0: monthly subscription; 1: pay-as-you-go
          * @type {number || null}
          */
         this.PayMode = null;
@@ -1238,13 +1339,13 @@ class DescribeCommonDBInstancesRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Sort field
+         * Sorting field
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * Sort order
+         * Sorting order
          * @type {string || null}
          */
         this.OrderByType = null;
@@ -1268,7 +1369,7 @@ class DescribeCommonDBInstancesRequest extends  AbstractModel {
         this.UniqSubnetIds = null;
 
         /**
-         * Quantity limit. The default value `100` is recommended.
+         * Quantity limit. Recommended default value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -1314,10 +1415,22 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
         super();
 
         /**
-         * Security group rules.
+         * Security group rules
          * @type {Array.<SecurityGroup> || null}
          */
         this.Groups = null;
+
+        /**
+         * Private IP for which the security group takes effect
+         * @type {string || null}
+         */
+        this.VIP = null;
+
+        /**
+         * Private port for which the security group takes effect
+         * @type {string || null}
+         */
+        this.VPort = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1343,41 +1456,8 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * RestoreInstance response structure.
- * @class
- */
-class RestoreInstanceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Task ID, which can be used to query the task execution status through the DescribeTaskInfo API
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.VIP = 'VIP' in params ? params.VIP : null;
+        this.VPort = 'VPort' in params ? params.VPort : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1392,25 +1472,25 @@ class RedisNodeInfo extends  AbstractModel {
         super();
 
         /**
-         * Node type. Valid values: `0` (master node), `1` (replica node)
+         * Node type. 0: master node; 1: replica node
          * @type {number || null}
          */
         this.NodeType = null;
 
         /**
-         * ID of the master or replica node, which is not required upon creation of the instance
+         * ID of the master or replica node, which is not required during instance creation
          * @type {number || null}
          */
         this.NodeId = null;
 
         /**
-         * ID of the availability zone of the master or replica node
+         * AZ ID of the master or replica node
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * ID of the availability zone of the master or replica node
+         * AZ name of the master or replica node
          * @type {string || null}
          */
         this.ZoneName = null;
@@ -1554,13 +1634,13 @@ class DescribeInstanceZoneInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * The number of instance node groups
+         * Number of instance node groups
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * The list of instance node groups
+         * List of instance node groups
          * @type {Array.<ReplicaGroup> || null}
          */
         this.ReplicaGroups = null;
@@ -1697,7 +1777,7 @@ class InstanceProxySlowlogDetail extends  AbstractModel {
         this.CommandLine = null;
 
         /**
-         * Execution duration
+         * Execution time
          * @type {string || null}
          */
         this.ExecuteTime = null;
@@ -1721,7 +1801,7 @@ class InstanceProxySlowlogDetail extends  AbstractModel {
 }
 
 /**
- * Inbound and outbound rules of the security group
+ * Security group inbound/outbound rules
  * @class
  */
 class SecurityGroupsInboundAndOutbound extends  AbstractModel {
@@ -1735,7 +1815,7 @@ class SecurityGroupsInboundAndOutbound extends  AbstractModel {
         this.Action = null;
 
         /**
-         * IP address
+         * IP addresses
          * @type {string || null}
          */
         this.Ip = null;
@@ -1819,7 +1899,7 @@ class ClearInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Redis instance password (this parameter is not required for password-free instances but for password-enabled instances)
+         * Redis instance password (this parameter is required for password-enabled instances but not for password-free instances)
          * @type {string || null}
          */
         this.Password = null;
@@ -1848,13 +1928,13 @@ class UpgradeInstanceVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * The target instance type to which the instance will change. It is the same as the `TypeId` parameter in the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
+         * Target instance type after the change, which is the same as the `Type` of the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.TargetInstanceType = null;
 
         /**
-         * Switch mode. Valid values: 1 (switch during the maintenance window), 2 (switch immediately).
+         * Switch mode. Valid values: 1 (switch during the maintenance time), 2 (switch now).
          * @type {number || null}
          */
         this.SwitchOption = null;
@@ -2010,7 +2090,7 @@ class DescribeParamTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Array of instance types. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture).
+         * Array of instance types. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture).
          * @type {Array.<number> || null}
          */
         this.ProductTypes = null;
@@ -2178,7 +2258,7 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Date. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. However, this parameter is now invalid.
+         * Date. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter cannot be modified for now.
          * @type {Array.<string> || null}
          */
         this.WeekDays = null;
@@ -2190,7 +2270,7 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
         this.TimePeriod = null;
 
         /**
-         * Auto backup type: 1 "scheduled rollback"
+         * Automatic backup type: 1 (scheduled rollback)
          * @type {number || null}
          */
         this.AutoBackupType = null;
@@ -2213,7 +2293,7 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
 }
 
 /**
- * Description of an instance parameter in Multi type
+ * Description of the instance parameter in Multi type
  * @class
  */
 class InstanceMultiParam extends  AbstractModel {
@@ -2233,7 +2313,7 @@ class InstanceMultiParam extends  AbstractModel {
         this.ValueType = null;
 
         /**
-         * Whether restart is required after a modification is made. Value range: true, false
+         * Whether restart is required after a modification is made. Valid values: true, false
          * @type {string || null}
          */
         this.NeedRestart = null;
@@ -2245,7 +2325,7 @@ class InstanceMultiParam extends  AbstractModel {
         this.DefaultValue = null;
 
         /**
-         * Current value of a parameter
+         * Current value
          * @type {string || null}
          */
         this.CurrentValue = null;
@@ -2298,7 +2378,7 @@ class DescribeInstanceDealDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * Array of order IDs. It is the same as the response parameter `DealId` in the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
+         * Array of order transaction IDs, i.e., the `DealId` output parameter of the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
          * @type {Array.<string> || null}
          */
         this.DealIds = null;
@@ -2318,7 +2398,7 @@ class DescribeInstanceDealDetailRequest extends  AbstractModel {
 }
 
 /**
- * The operation information of Redis nodes
+ * Running information of Redis nodes
  * @class
  */
 class RedisNode extends  AbstractModel {
@@ -2326,7 +2406,7 @@ class RedisNode extends  AbstractModel {
         super();
 
         /**
-         * The number of keys on a node
+         * Number of keys on the node
          * @type {number || null}
          */
         this.Keys = null;
@@ -2409,7 +2489,7 @@ class DescribeProjectSecurityGroupRequest extends  AbstractModel {
 }
 
 /**
- * Details of the parameters in a parameter template
+ * Details of the parameters in the parameter template
  * @class
  */
 class ParameterDetail extends  AbstractModel {
@@ -2441,34 +2521,34 @@ class ParameterDetail extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Current value of the parameter
+         * Current value
          * @type {string || null}
          */
         this.CurrentValue = null;
 
         /**
-         * Whether the database needs to be restarted for the modified parameter to take effect. Valid values: `0` (no),`1` (yes)
+         * Whether the database needs to be restarted for the modified parameter to take effect. Valid values: 0 (no); 1 (yes).
          * @type {number || null}
          */
         this.NeedReboot = null;
 
         /**
          * Maximum value of the parameter
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Max = null;
 
         /**
          * Minimum value of the parameter
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Min = null;
 
         /**
-         * Enumerated values of the parameter. It is null if the parameter is non-enumerated
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Enumerated values of the parameter. It is null if the parameter is non-enumerated.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.EnumValue = null;
@@ -2609,99 +2689,6 @@ class ManualBackupInstanceResponse extends  AbstractModel {
 }
 
 /**
- * Task details
- * @class
- */
-class TaskInfoDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Task ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * Start time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Task type
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TaskType = null;
-
-        /**
-         * Instance name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Instance ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Project ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Task progress
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * End time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Task status
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Result = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.TaskType = 'TaskType' in params ? params.TaskType : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Result = 'Result' in params ? params.Result : null;
-
-    }
-}
-
-/**
  * DisableReplicaReadonly response structure.
  * @class
  */
@@ -2711,7 +2698,7 @@ class DisableReplicaReadonlyResponse extends  AbstractModel {
 
         /**
          * Task ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -2817,56 +2804,56 @@ class DescribeInstanceDTSInfoResponse extends  AbstractModel {
 
         /**
          * DTS task ID
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.JobId = null;
 
         /**
          * DTS task name
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.JobName = null;
 
         /**
          * Task status. Valid values: 1 (Creating), 3 (Checking), 4 (CheckPass), 5 (CheckNotPass), 7 (Running), 8 (ReadyComplete), 9 (Success), 10 (Failed), 11 (Stopping), 12 (Completing)
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
          * Status description
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StatusDesc = null;
 
         /**
-         * Synchronization latency in bytes
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Sync latency in bytes
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
          * Disconnection time
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CutDownTime = null;
 
         /**
          * Source instance information
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeInstanceDTSInstanceInfo || null}
          */
         this.SrcInfo = null;
 
         /**
          * Target instance information
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeInstanceDTSInstanceInfo || null}
          */
         this.DstInfo = null;
@@ -2953,31 +2940,31 @@ class SwitchInstanceVipRequest extends  AbstractModel {
         super();
 
         /**
-         * Source instance ID.
+         * Source instance ID
          * @type {string || null}
          */
         this.SrcInstanceId = null;
 
         /**
-         * Target instance ID.
+         * Target instance ID
          * @type {string || null}
          */
         this.DstInstanceId = null;
 
         /**
-         * The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than `TimeDelay`, the VIP will not be switched. We recommend setting an acceptable value based on the actual business conditions.
+         * The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than TimeDelay, the VIP will not be switched. We recommend you set an acceptable value based on the actual business conditions.
          * @type {number || null}
          */
         this.TimeDelay = null;
 
         /**
-         * Whether to force the switch when DTS is disconnected. Valid values: 1 (yes), 0 (no).
+         * Whether to force the switch when DTS is disconnected. 1: yes; 0: no.
          * @type {number || null}
          */
         this.ForceSwitch = null;
 
         /**
-         * Valid values: now (switch now), syncComplete (switch after sync is completed).
+         * now: switch now; syncComplete: switch after sync is completed
          * @type {string || null}
          */
         this.SwitchTime = null;
@@ -3093,7 +3080,7 @@ class ModifyInstanceResponse extends  AbstractModel {
 }
 
 /**
- * Information of an instance
+ * Instance information
  * @class
  */
 class RedisCommonInstanceList extends  AbstractModel {
@@ -3119,7 +3106,7 @@ class RedisCommonInstanceList extends  AbstractModel {
         this.AppId = null;
 
         /**
-         * Project ID of the instance
+         * Instance project ID
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -3131,7 +3118,7 @@ class RedisCommonInstanceList extends  AbstractModel {
         this.Region = null;
 
         /**
-         * Instance availability zone
+         * Instance AZ
          * @type {string || null}
          */
         this.Zone = null;
@@ -3149,7 +3136,7 @@ class RedisCommonInstanceList extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance status. Valid values: `1` (task running), `2` (instance running), `-2` (instance isolated), `-3` (instance being eliminated), `-4` (instance eliminated)
+         * Instance status. 1: task running; 2: instance running; -2: instance isolated; -3: instance being eliminated; -4: instance eliminated
          * @type {string || null}
          */
         this.Status = null;
@@ -3173,13 +3160,13 @@ class RedisCommonInstanceList extends  AbstractModel {
         this.Createtime = null;
 
         /**
-         * Billing mode. Valid values: `0` (pay-as-you-go), `1` (monthly subscription)
+         * Billing mode. 0: pay-as-you-go; 1: monthly subscription
          * @type {number || null}
          */
         this.PayMode = null;
 
         /**
-         * Network type. Valid values: `0` (classic network), `1` (VPC)
+         * Network type. Valid values: 0 (classic network); 1 (VPC).
          * @type {number || null}
          */
         this.NetType = null;
@@ -3365,13 +3352,13 @@ class CreateParamTemplateRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture). If `TempateId` is specified, this parameter can be left blank; otherwise, it is required.
+         * Instance type. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture). If `TempateId` is specified, this parameter can be left blank; otherwise, it is required.
          * @type {number || null}
          */
         this.ProductType = null;
 
         /**
-         * ID of the source parameter template. You can create a template by copying the source parameter template.
+         * ID of the source parameter template.
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -3516,7 +3503,7 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Sub-account name. If the root account is to be modified, enter `root`
+         * Sub-account name. If the root account is to be modified, enter `root`.
          * @type {string || null}
          */
         this.AccountName = null;
@@ -3534,19 +3521,19 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * Sub-account routing policy. Enter `master` to route to the primary node or `slave` to route to the secondary node
+         * Routing policy. Valid values: master (master node); replication (replica node)
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
 
         /**
-         * Sub-account read/write policy. Enter `r` for read-only, `w` for write-only, or `rw` for read/write
+         * Sub-account read/write policy. Valid values: r (read-only); w (write-only); rw (read/write).
          * @type {string || null}
          */
         this.Privilege = null;
 
         /**
-         * true: make the root account password-free. This is applicable to root accounts only; sub-accounts cannot be made password-free
+         * true: make the root account password-free. This is applicable to root accounts only. Sub-accounts cannot be made password-free.
          * @type {boolean || null}
          */
         this.NoAuth = null;
@@ -3572,30 +3559,24 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
 }
 
 /**
- * ModifyMaintenanceWindow request structure.
+ * RestoreInstance response structure.
  * @class
  */
-class ModifyMaintenanceWindowRequest extends  AbstractModel {
+class RestoreInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * Task ID, which can be used to query the task execution status through the `DescribeTaskInfo` API.
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.TaskId = null;
 
         /**
-         * Start time of the maintenance window, such as 17:00
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * End time of the maintenance window, such as 19:00
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.RequestId = null;
 
     }
 
@@ -3606,9 +3587,8 @@ class ModifyMaintenanceWindowRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3650,27 +3630,27 @@ class DescribeBackupUrlResponse extends  AbstractModel {
         super();
 
         /**
-         * Public network download address (valid for six hours). This field will be deprecated soon.
+         * Public network download address (valid for six hours). This field will be disused soon.
          * @type {Array.<string> || null}
          */
         this.DownloadUrl = null;
 
         /**
-         * Private network download address (valid for six hours). This field will be deprecated soon.
+         * Private network download address (valid for six hours). This field will be disused soon.
          * @type {Array.<string> || null}
          */
         this.InnerDownloadUrl = null;
 
         /**
-         * Filename. This field will be deprecated soon.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Filename. This field will be disused soon.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Filenames = null;
 
         /**
          * List of backup file information
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BackupDownloadInfo> || null}
          */
         this.BackupInfos = null;
@@ -3716,13 +3696,13 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * Database engine name. For this API, its value is `redis`.
+         * Database engine name, which is `redis` for this API.
          * @type {string || null}
          */
         this.Product = null;
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB Console.
+         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3779,7 +3759,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Security group information of an instance
+ * Security group information of the instance
  * @class
  */
 class InstanceSecurityGroupDetail extends  AbstractModel {
@@ -3877,7 +3857,7 @@ class ResetPasswordRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * Whether to switch to password-free instance mode. false: switch to password-enabled instance mode; true: switch to password-free instance mode. Default value: false
+         * Whether to switch to password-free instance mode. false: switch to password-enabled instance mode; true: switch to password-free instance mode. Default value: false.
          * @type {boolean || null}
          */
         this.NoAuth = null;
@@ -3996,7 +3976,7 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
-         * Total number of the security groups meeting the condition.
+         * Total number of eligible security groups.
          * @type {number || null}
          */
         this.Total = null;
@@ -4125,7 +4105,7 @@ class DescribeInstanceBackupsResponse extends  AbstractModel {
 }
 
 /**
- * Descriptions of integer parameters of the instance
+ * Description of the instance parameter in Integer type
  * @class
  */
 class InstanceIntegerParam extends  AbstractModel {
@@ -4145,7 +4125,7 @@ class InstanceIntegerParam extends  AbstractModel {
         this.ValueType = null;
 
         /**
-         * Whether restart is required after a modification is made. Value range: true, false
+         * Whether restart is required after a modification is made. Valid values: true, false
          * @type {string || null}
          */
         this.NeedRestart = null;
@@ -4157,7 +4137,7 @@ class InstanceIntegerParam extends  AbstractModel {
         this.DefaultValue = null;
 
         /**
-         * Current value of a parameter
+         * Current value
          * @type {string || null}
          */
         this.CurrentValue = null;
@@ -4169,13 +4149,13 @@ class InstanceIntegerParam extends  AbstractModel {
         this.Tips = null;
 
         /**
-         * Minimum value of a parameter
+         * Minimum value of the parameter
          * @type {string || null}
          */
         this.Min = null;
 
         /**
-         * Maximum value of a parameter
+         * Maximum value of the parameter
          * @type {string || null}
          */
         this.Max = null;
@@ -4188,7 +4168,7 @@ class InstanceIntegerParam extends  AbstractModel {
 
         /**
          * Parameter unit
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Unit = null;
@@ -4230,6 +4210,12 @@ class UpgradeVersionToMultiAvailabilityZonesRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Whether to upgrade the proxy and Redis kernel. After the upgrade, the "Read Local Nodes Only" feature can be supported.
+         * @type {boolean || null}
+         */
+        this.UpgradeProxyAndRedisServer = null;
+
     }
 
     /**
@@ -4240,6 +4226,7 @@ class UpgradeVersionToMultiAvailabilityZonesRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UpgradeProxyAndRedisServer = 'UpgradeProxyAndRedisServer' in params ? params.UpgradeProxyAndRedisServer : null;
 
     }
 }
@@ -4329,10 +4316,10 @@ class DescribeInstanceMonitorTookDistRequest extends  AbstractModel {
 }
 
 /**
- * KillMasterGroup request structure.
+ * ModifyMaintenanceWindow request structure.
  * @class
  */
-class KillMasterGroupRequest extends  AbstractModel {
+class ModifyMaintenanceWindowRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -4343,22 +4330,16 @@ class KillMasterGroupRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 1. The password must contain 8-30 characters. A password of 12 or more characters is recommended.
-2. The password cannot start with a slash (/).
-3. The password must contain at least two of the following four types:
-    a. Lowercase letters (a-z)
-    b. Uppercase letters (A-Z)
-    c. Digits (0-9)
-    d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+         * Maintenance start time, such as 17:00
          * @type {string || null}
          */
-        this.Password = null;
+        this.StartTime = null;
 
         /**
-         * Node information of a single-AZ deployed instance
-         * @type {Array.<number> || null}
+         * Maintenance end time, such as 19:00
+         * @type {string || null}
          */
-        this.ShardIds = null;
+        this.EndTime = null;
 
     }
 
@@ -4370,14 +4351,14 @@ class KillMasterGroupRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.ShardIds = 'ShardIds' in params ? params.ShardIds : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
 
 /**
- * Descriptions of text parameters of the instance
+ * Description of instance parameter in Char type
  * @class
  */
 class InstanceTextParam extends  AbstractModel {
@@ -4397,7 +4378,7 @@ class InstanceTextParam extends  AbstractModel {
         this.ValueType = null;
 
         /**
-         * Whether restart is required after a modification is made. Value range: true, false
+         * Whether restart is required after a modification is made. Valid values: true, false
          * @type {string || null}
          */
         this.NeedRestart = null;
@@ -4409,7 +4390,7 @@ class InstanceTextParam extends  AbstractModel {
         this.DefaultValue = null;
 
         /**
-         * Current value of a parameter
+         * Current value
          * @type {string || null}
          */
         this.CurrentValue = null;
@@ -4421,7 +4402,7 @@ class InstanceTextParam extends  AbstractModel {
         this.Tips = null;
 
         /**
-         * Value range of a parameter
+         * Valid values of the parameter
          * @type {Array.<string> || null}
          */
         this.TextValue = null;
@@ -4480,7 +4461,7 @@ class ParamTemplateInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture)
+         * Instance type. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture)
          * @type {number || null}
          */
         this.ProductType = null;
@@ -4637,13 +4618,13 @@ class DescribeInstanceParamRecordsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Number of entries per page
+         * Maximum number of results returned per page
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit`
+         * Offset, which is an integral multiple of `Limit`.
          * @type {number || null}
          */
         this.Offset = null;
@@ -4660,90 +4641,6 @@ class DescribeInstanceParamRecordsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
- * DescribeTaskList request structure.
- * @class
- */
-class DescribeTaskListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance name
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * Number of entries per page
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Offset, which is an integral multiple of `Limit` (rounded down automatically)
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Project ID
-         * @type {Array.<number> || null}
-         */
-        this.ProjectIds = null;
-
-        /**
-         * Task type
-         * @type {Array.<string> || null}
-         */
-        this.TaskTypes = null;
-
-        /**
-         * Start time
-         * @type {string || null}
-         */
-        this.BeginTime = null;
-
-        /**
-         * End time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Task status
-         * @type {Array.<number> || null}
-         */
-        this.TaskStatus = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
-        this.TaskTypes = 'TaskTypes' in params ? params.TaskTypes : null;
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
 
     }
 }
@@ -5036,19 +4933,19 @@ class ModifyNetworkConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Operation type. changeVip: modify the VIP of an instance; changeVpc: modify the subnet of an instance; changeBaseToVpc: change from basic network to VPC
+         * Operation type. changeVip: modify the VIP of an instance; changeVpc: modify the subnet of an instance; changeBaseToVpc: change from classic network to VPC
          * @type {string || null}
          */
         this.Operation = null;
 
         /**
-         * VIP address, which is required for the `changeVip` operation. If this parameter is left blank, a random one will be assigned by default
+         * VIP address, which is required for the `changeVip` operation. If this parameter is left blank, a random one will be assigned by default.
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * VPC ID, which is required for `changeVpc` and `changeBaseToVpc` operations
+         * VPC ID, which is required for `changeVpc` and `changeBaseToVpc` operations.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -5058,6 +4955,12 @@ class ModifyNetworkConfigRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.SubnetId = null;
+
+        /**
+         * Retention time of the original VIP in days. Note that this parameter works only in the latest SDK. In earlier SDKs, the original VIP is released immediately. To view the SDK version, go to [SDK Center](https://intl.cloud.tencent.com/document/sdk?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Recycle = null;
 
     }
 
@@ -5073,6 +4976,7 @@ class ModifyNetworkConfigRequest extends  AbstractModel {
         this.Vip = 'Vip' in params ? params.Vip : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Recycle = 'Recycle' in params ? params.Recycle : null;
 
     }
 }
@@ -5086,7 +4990,7 @@ class DescribeInstanceSecurityGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance list
+         * List of instances
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -5132,7 +5036,7 @@ class InstanceParamHistory extends  AbstractModel {
         this.NewValue = null;
 
         /**
-         * Status. 1: modifying parameter configuration; 2: parameter configuration modified successfully; 3: failed to modify parameter configuration
+         * Status. 1: modifying the parameter configuration; 2: modified the parameter configuration successfully; 3: failed to modify the parameter configuration
          * @type {number || null}
          */
         this.Status = null;
@@ -5239,13 +5143,13 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
         this.Product = null;
 
         /**
-         * The ID list of the security groups to be modified, which is an array of one or more security group IDs.
+         * ID list of the security groups to be modified, which is an array of one or more security group IDs.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB Console.
+         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5331,7 +5235,7 @@ class DescribeInstanceShardsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Whether to filter out the secondary node information
+         * Whether to filter out the replica node information
          * @type {boolean || null}
          */
         this.FilterSlave = null;
@@ -5384,7 +5288,7 @@ class Outbound extends  AbstractModel {
         this.Desc = null;
 
         /**
-         * Network protocol, such as UDP and TCP, etc.
+         * Network protocol, such as UDP and TCP.
          * @type {string || null}
          */
         this.IpProtocol = null;
@@ -5437,7 +5341,7 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Backup type. Auto backup type: 1 "scheduled rollback"
+         * Backup type. Automatic backup type: 1 (scheduled rollback)
          * @type {number || null}
          */
         this.AutoBackupType = null;
@@ -5453,6 +5357,18 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.TimePeriod = null;
+
+        /**
+         * Number of days to retain full backup files
+         * @type {number || null}
+         */
+        this.BackupStorageDays = null;
+
+        /**
+         * Number of days to retain Tendis binlog backup files
+         * @type {number || null}
+         */
+        this.BinlogStorageDays = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5472,6 +5388,8 @@ class DescribeAutoBackupConfigResponse extends  AbstractModel {
         this.AutoBackupType = 'AutoBackupType' in params ? params.AutoBackupType : null;
         this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
         this.TimePeriod = 'TimePeriod' in params ? params.TimePeriod : null;
+        this.BackupStorageDays = 'BackupStorageDays' in params ? params.BackupStorageDays : null;
+        this.BinlogStorageDays = 'BinlogStorageDays' in params ? params.BinlogStorageDays : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5581,7 +5499,7 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * The number of security groups to be pulled.
+         * Number of results to be pulled. Default value: 20
          * @type {number || null}
          */
         this.Limit = null;
@@ -5760,25 +5678,25 @@ class CreateInstanceAccountRequest extends  AbstractModel {
         this.AccountName = null;
 
         /**
-         * 1. The password must contain 8-30 characters. A password of 12 or more characters is recommended.
-2. The password cannot start with a slash (/).
-3. The password must contain at least two of the following four types:
-    a. Lowercase letters (a-z)
-    b. Uppercase letters (A-Z)
-    c. Digits (0-9)
+         * 1. The password must contain 8–30 characters. A password of 12 or more characters is recommended.
+2. It cannot start with a slash (/).
+3. It must contain characters in at least two of the following types:
+    a. Lowercase letters (a–z)
+    b. Uppercase letters (A–Z)
+    c. Digits (0–9)
     d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
          * @type {string || null}
          */
         this.AccountPassword = null;
 
         /**
-         * Routing policy. Enter `master` for primary node or `replication` for secondary node
+         * Routing policy. Valid values: master (master node); replication (replica node)
          * @type {Array.<string> || null}
          */
         this.ReadonlyPolicy = null;
 
         /**
-         * Read/write policy. Valid values: r (read-only), rw (read/write).
+         * Read/Write policy. Valid values: r (read-only); rw (read/write).
          * @type {string || null}
          */
         this.Privilege = null;
@@ -5817,15 +5735,15 @@ class EnableReplicaReadonlyResponse extends  AbstractModel {
         super();
 
         /**
-         * Valid values: `ERROR`, `OK`. This field has been deprecated.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Valid values: `ERROR`, `OK`. This field has been disused.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
          * Task ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TaskId = null;
@@ -5903,7 +5821,7 @@ class DescribeInstanceSecurityGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * Security group information of an instance
+         * Security group information of the instance
          * @type {Array.<InstanceSecurityGroupDetail> || null}
          */
         this.InstanceSecurityGroupsDetail = null;
@@ -6135,41 +6053,6 @@ class InstanceNode extends  AbstractModel {
 }
 
 /**
- * Tendis node information
- * @class
- */
-class TendisNodes extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Node ID
-         * @type {string || null}
-         */
-        this.NodeId = null;
-
-        /**
-         * Node role
-         * @type {string || null}
-         */
-        this.NodeRole = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
-
-    }
-}
-
-/**
  * StartupInstance response structure.
  * @class
  */
@@ -6205,7 +6088,7 @@ class StartupInstanceResponse extends  AbstractModel {
 }
 
 /**
- * Details of instances in a DTS task
+ * Details of instances in the DTS task
  * @class
  */
 class DescribeInstanceDTSInstanceInfo extends  AbstractModel {
@@ -6214,56 +6097,56 @@ class DescribeInstanceDTSInstanceInfo extends  AbstractModel {
 
         /**
          * Region ID
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RegionId = null;
 
         /**
          * Instance ID
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
          * Repository ID
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SetId = null;
 
         /**
-         * Availability zone ID
-Note: this field may return null, indicating that no valid values can be obtained.
+         * AZ ID
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
          * Instance type
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Type = null;
 
         /**
          * Instance name
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
          * Instance access address
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
          * Status
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
@@ -6290,7 +6173,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Order deal information
+ * Order transaction information
  * @class
  */
 class TradeDealDetail extends  AbstractModel {
@@ -6298,13 +6181,13 @@ class TradeDealDetail extends  AbstractModel {
         super();
 
         /**
-         * Order ID, which is used when a TencentCloud API is called
+         * Order ID, which is used when a TencentCloud API is called.
          * @type {string || null}
          */
         this.DealId = null;
 
         /**
-         * Long order ID, which is used when an order issue is submitted for assistance
+         * Long order ID, which is used when an order issue is submitted for assistance.
          * @type {string || null}
          */
         this.DealName = null;
@@ -6316,13 +6199,13 @@ class TradeDealDetail extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Number of instances associated with an order
+         * Number of instances associated with the order
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * Creates a user uin
+         * Creator UIN
          * @type {string || null}
          */
         this.Creater = null;
@@ -6358,7 +6241,7 @@ class TradeDealDetail extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Actual total price of an order in 0.01 CNY
+         * Actual total price of the order in 0.01 CNY
          * @type {number || null}
          */
         this.Price = null;
@@ -6437,25 +6320,25 @@ class ReplicaGroup extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * Node group name
+         * Node group name, which is empty for the master node
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * Node availability zone ID, such as ap-guangzhou-1
+         * Node AZ ID, such as ap-guangzhou-1
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * Node group type. Valid values: `master` (master node group), `replica` (replica node group)
+         * Node group type. Valid values: master (master node group); replica (replica node group)
          * @type {string || null}
          */
         this.Role = null;
 
         /**
-         * The list of nodes in a node group
+         * List of nodes in the node group
          * @type {Array.<RedisNode> || null}
          */
         this.RedisNodes = null;
@@ -6519,7 +6402,7 @@ class DescribeTaskInfoResponse extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Task message, which is displayed in case of an error. It will be blank if the status is running or succeeded
+         * Task message, which is displayed in case of an error. It will be blank if the status is running or succeeded.
          * @type {string || null}
          */
         this.TaskMessage = null;
@@ -6760,13 +6643,13 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance list size. Default value: 20
+         * Size of the instance list. If no value is specified for this parameter, it will be 20 by default. If the specified value is greater than the `DescribeInstancesPageLimit` configuration item in the specific configuration file `etc/conf/component.properties` (which is 1,000 by default if the configuration cannot be read), then the configuration item shall prevail.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit`
+         * Offset, which is an integral multiple of `Limit`.
          * @type {number || null}
          */
         this.Offset = null;
@@ -6790,19 +6673,19 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.OrderType = null;
 
         /**
-         * Array of VPC IDs such as 47525. The array subscript starts from 0. If this parameter is not passed in, the basic network will be selected by default
+         * Array of VPC IDs such as 47525. The array subscript starts from 0. If this parameter is not passed in, the classic network will be selected by default
          * @type {Array.<string> || null}
          */
         this.VpcIds = null;
 
         /**
-         * Array of subnet IDs such as 56854. The array subscript starts from 0
+         * Array of subnet IDs such as 56854. The array subscript starts from 0.
          * @type {Array.<string> || null}
          */
         this.SubnetIds = null;
 
         /**
-         * Array of project IDs. The array subscript starts from 0
+         * Array of project IDs. The array subscript starts from 0.
          * @type {Array.<number> || null}
          */
         this.ProjectIds = null;
@@ -6820,19 +6703,19 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * Array of VPC IDs such as vpc-sad23jfdfk. The array subscript starts from 0. If this parameter is not passed in, the basic network will be selected by default
+         * Array of VPC IDs such as vpc-sad23jfdfk. The array subscript starts from 0. If this parameter is not passed in, the classic network will be selected by default
          * @type {Array.<string> || null}
          */
         this.UniqVpcIds = null;
 
         /**
-         * Array of subnet IDs such as subnet-fdj24n34j2. The array subscript starts from 0
+         * Array of subnet IDs such as subnet-fdj24n34j2. The array subscript starts from 0.
          * @type {Array.<string> || null}
          */
         this.UniqSubnetIds = null;
 
         /**
-         * Region ID, which has already been disused. The corresponding region can be queried through the common parameter `Region`
+         * Region ID, which has already been disused. The corresponding region can be queried through the common parameter `Region`.
          * @type {Array.<number> || null}
          */
         this.RegionIds = null;
@@ -6844,7 +6727,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Type edition. 1: standalone edition; 2: primary-secondary edition; 3: cluster edition
+         * Type edition. 1: Standalone Edition; 2: Master-Replica Edition; 3: Cluster Edition
          * @type {number || null}
          */
         this.TypeVersion = null;
@@ -6862,34 +6745,46 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.AutoRenew = null;
 
         /**
-         * Billing method. postpaid: pay-as-you-go; prepaid: monthly subscription
+         * Billing mode. postpaid: pay-as-you-go; prepaid: monthly subscription
          * @type {string || null}
          */
         this.BillingMode = null;
 
         /**
-         * Instance type. 1: legacy Redis Cluster Edition, 2: Redis 2.8 Master-Slave Edition, 3: CKV Master-Slave Edition, 4: CKV Cluster Edition, 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Slave Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Slave Edition, 9: Redis 5.0 Cluster Edition,
+         * Instance type. 1: legacy Redis Cluster Edition, 2: Redis 2.8 Master-Replica Edition, 3: CKV Master-Replica Edition, 4: CKV Cluster Edition, 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Replica Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Replica Edition, 9: Redis 5.0 Cluster Edition
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Search keywords, which can be instance ID, instance name, or complete IP
+         * Search keywords, which can be instance ID, instance name, or complete IP.
          * @type {Array.<string> || null}
          */
         this.SearchKeys = null;
 
         /**
-         * Internal parameter, which can be ignored
+         * Internal parameter, which can be ignored.
          * @type {Array.<number> || null}
          */
         this.TypeList = null;
 
         /**
-         * Internal parameter, which can be ignored
+         * Internal parameter, which can be ignored.
          * @type {string || null}
          */
         this.MonitorVersion = null;
+
+        /**
+         * Filters resources by tag key and value. If this parameter is not specified or is an empty array, resources will not be filtered.
+         * @type {Array.<InstanceTagInfo> || null}
+         */
+        this.InstanceTags = null;
+
+        /**
+         * Filters resources by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
 
     }
 
@@ -6922,6 +6817,16 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.SearchKeys = 'SearchKeys' in params ? params.SearchKeys : null;
         this.TypeList = 'TypeList' in params ? params.TypeList : null;
         this.MonitorVersion = 'MonitorVersion' in params ? params.MonitorVersion : null;
+
+        if (params.InstanceTags) {
+            this.InstanceTags = new Array();
+            for (let z in params.InstanceTags) {
+                let obj = new InstanceTagInfo();
+                obj.deserialize(params.InstanceTags[z]);
+                this.InstanceTags.push(obj);
+            }
+        }
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
 
     }
 }
@@ -7272,7 +7177,7 @@ class ManualBackupInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the DescribeInstance API.
+         * ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7282,6 +7187,12 @@ class ManualBackupInstanceRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Remark = null;
+
+        /**
+         * Retention time in days. 0 indicates the default retention time.
+         * @type {number || null}
+         */
+        this.StorageDays = null;
 
     }
 
@@ -7294,6 +7205,7 @@ class ManualBackupInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.StorageDays = 'StorageDays' in params ? params.StorageDays : null;
 
     }
 }
@@ -7357,7 +7269,7 @@ class ModifyParamTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the parameter template to be modified.
+         * ID of the source parameter template.
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -7461,7 +7373,7 @@ class InstanceSet extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * User's Appid
+         * User `Appid`
          * @type {number || null}
          */
         this.Appid = null;
@@ -7473,7 +7385,7 @@ class InstanceSet extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Region ID. 1: Guangzhou; 4: Shanghai; 5: Hong Kong, China; 6: Toronto; 7: Shanghai Finance; 8: Beijing; 9: Singapore; 11: Shenzhen Finance; 15: West US (Silicon Valley); 16: Chengdu; 17: Germany; 18: South Korea; 19: Chongqing; 21: India; 22: East US (Virginia); 23: Thailand; 24: Russia; 25: Japan
+         * Region ID. 1: Guangzhou; 4: Shanghai; 5: Hong Kong (China); 6: Toronto; 7: Shanghai Finance; 8: Beijing; 9: Singapore; 11: Shenzhen Finance; 15: West US (Silicon Valley); 16: Chengdu; 17: Germany; 18: South Korea; 19: Chongqing; 21: India; 22: East US (Virginia); 23: Thailand; 24: Russia; 25: Japan
          * @type {number || null}
          */
         this.RegionId = null;
@@ -7509,7 +7421,7 @@ class InstanceSet extends  AbstractModel {
         this.WanIp = null;
 
         /**
-         * Port number of an instance
+         * Port number of the instance
          * @type {number || null}
          */
         this.Port = null;
@@ -7533,13 +7445,13 @@ class InstanceSet extends  AbstractModel {
         this.SizeUsed = null;
 
         /**
-         * Instance type. Valid values: 1 (Redis 2.8 Memory Edition in cluster architecture), 2 (Redis 2.8 Memory Edition in standard architecture), 3 (CKV 3.2 Memory Edition in standard architecture), 4 (CKV 3.2 Memory Edition in cluster architecture), 5 (Redis 2.8 Memory Edition in standalone architecture), 6 (Redis 4.0 Memory Edition in standard architecture), 7 (Redis 4.0 Memory Edition in cluster architecture), 8 (Redis 5.0 Memory Edition in standard architecture), 9 (Redis 5.0 Memory Edition in cluster architecture).
+         * Instance type. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture)
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Whether to set the auto-renewal flag for an instance. 1: auto-renewal set; 0: auto-renewal not set
+         * Whether to set the auto-renewal flag for the instance. 1: yes; 0: no
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
@@ -7551,13 +7463,13 @@ class InstanceSet extends  AbstractModel {
         this.DeadlineTime = null;
 
         /**
-         * Engine: Redis community edition, Tencent Cloud CKV
+         * Engine: Redis Community Edition, Tencent Cloud CKV
          * @type {string || null}
          */
         this.Engine = null;
 
         /**
-         * Instance type. Valid values: standalone (standard edition), cluster (cluster edition)
+         * Instance type. Valid values: standalone (Standard Edition); cluster (Cluster Edition)
          * @type {string || null}
          */
         this.ProductType = null;
@@ -7575,25 +7487,25 @@ class InstanceSet extends  AbstractModel {
         this.UniqSubnetId = null;
 
         /**
-         * Billing method. 0: pay-as-you-go; 1: monthly subscription
+         * Billing mode. 0: pay-as-you-go; 1: monthly subscription
          * @type {number || null}
          */
         this.BillingMode = null;
 
         /**
-         * Description of an instance status, such as "instance running"
+         * Description of the instance status, such as "instance running"
          * @type {string || null}
          */
         this.InstanceTitle = null;
 
         /**
-         * Scheduled deactivation time
+         * Planned elimination time
          * @type {string || null}
          */
         this.OfflineTime = null;
 
         /**
-         * Sub-status returned for an instance in process
+         * Sub-status returned for the instance in process
          * @type {number || null}
          */
         this.SubStatus = null;
@@ -7641,7 +7553,7 @@ class InstanceSet extends  AbstractModel {
         this.CloseTime = null;
 
         /**
-         * Read weight of a secondary node
+         * Read weight of the replica node
          * @type {number || null}
          */
         this.SlaveReadWeight = null;
@@ -7661,7 +7573,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ProjectName = null;
 
         /**
-         * Whether an instance is password-free. true: yes; false: no
+         * Whether the instance is password-free. true: yes; false: no.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
@@ -7669,91 +7581,91 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Number of client connections
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ClientLimit = null;
 
         /**
          * DTS status (internal parameter, which can be ignored)
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DtsStatus = null;
 
         /**
-         * Upper shard bandwidth limit in MB
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Shard bandwidth cap in MB
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.NetLimit = null;
 
         /**
          * Password-free instance flag (internal parameter, which can be ignored)
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PasswordFree = null;
 
         /**
          * Read-only instance flag (internal parameter, which can be ignored)
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ReadOnly = null;
 
         /**
-         * Internal parameter, which can be ignored
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Internal parameter, which can be ignored.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Vip6 = null;
 
         /**
-         * Internal parameter, which can be ignored
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Internal parameter, which can be ignored.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RemainBandwidthDuration = null;
 
         /**
          * Disk size of the Tendis instance
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * Monitoring granularity type. Valid values: 1m (monitoring at 1-minute granularity), 5s (monitoring at 5-second granularity)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Monitoring version. Valid values: 1m (monitoring at 1-minute granularity); 5s (monitoring at 5-second granularity)
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MonitorVersion = null;
 
         /**
-         * The minimum value of the range of maximum connections to the client
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Minimum value for the range of maximum connections to the client
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ClientLimitMin = null;
 
         /**
-         * The maximum value of the range of maximum connections to the client
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Maximum value for the range of maximum connections to the client
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ClientLimitMax = null;
 
         /**
          * Instance node details
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RedisNodeInfo> || null}
          */
         this.NodeSet = null;
 
         /**
-         * Region where the instance is deployed
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Instance region, such as ap-guangzhou
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Region = null;
@@ -7873,7 +7785,7 @@ class ReleaseWanAddressRequest extends  AbstractModel {
 }
 
 /**
- * The tag bound with the instance purchased via APIs
+ * Tag bound to the instance purchased via API
  * @class
  */
 class ResourceTag extends  AbstractModel {
@@ -8056,7 +7968,7 @@ class DescribeCommonDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Instance quantity
+         * Number of instances
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -8288,13 +8200,13 @@ class BackupDownloadInfo extends  AbstractModel {
         this.FileSize = null;
 
         /**
-         * Address (valid for 6 hours) used to download the backup file over a public network
+         * Address (valid for six hours) used to download the backup file over the public network
          * @type {string || null}
          */
         this.DownloadUrl = null;
 
         /**
-         * Address (valid for 6 hours) used to download the backup file over a private network
+         * Address (valid for six hours) used to download the backup file over the private network
          * @type {string || null}
          */
         this.InnerDownloadUrl = null;
@@ -8436,118 +8348,6 @@ class DescribeMaintenanceWindowRequest extends  AbstractModel {
 }
 
 /**
- * Instance node type
- * @class
- */
-class InstanceClusterNode extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Node name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * ID of the runtime node of an instance
-         * @type {string || null}
-         */
-        this.RunId = null;
-
-        /**
-         * Cluster role. 0: primary; 1: secondary
-         * @type {number || null}
-         */
-        this.Role = null;
-
-        /**
-         * Node status. 0: readwrite; 1: read; 2: backup
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Service status. 0: down; 1: on
-         * @type {number || null}
-         */
-        this.Connected = null;
-
-        /**
-         * Node creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Node deactivation time
-         * @type {string || null}
-         */
-        this.DownTime = null;
-
-        /**
-         * Distribution of node slots
-         * @type {string || null}
-         */
-        this.Slots = null;
-
-        /**
-         * Distribution of node keys
-         * @type {number || null}
-         */
-        this.Keys = null;
-
-        /**
-         * Node QPS
-         * @type {number || null}
-         */
-        this.Qps = null;
-
-        /**
-         * QPS slope of a node
-         * @type {number || null}
-         */
-        this.QpsSlope = null;
-
-        /**
-         * Node storage
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Storage slope of a node
-         * @type {number || null}
-         */
-        this.StorageSlope = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.RunId = 'RunId' in params ? params.RunId : null;
-        this.Role = 'Role' in params ? params.Role : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Connected = 'Connected' in params ? params.Connected : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.DownTime = 'DownTime' in params ? params.DownTime : null;
-        this.Slots = 'Slots' in params ? params.Slots : null;
-        this.Keys = 'Keys' in params ? params.Keys : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.QpsSlope = 'QpsSlope' in params ? params.QpsSlope : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.StorageSlope = 'StorageSlope' in params ? params.StorageSlope : null;
-
-    }
-}
-
-/**
  * DescribeTendisSlowLog request structure.
  * @class
  */
@@ -8580,13 +8380,13 @@ class DescribeTendisSlowLogRequest extends  AbstractModel {
         this.MinQueryTime = null;
 
         /**
-         * The maximum number of results returned per page. Default value: `20`
+         * Maximum number of results returned per page. Default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit`
+         * Offset, which is an integral multiple of `Limit`.
          * @type {number || null}
          */
         this.Offset = null;
@@ -8637,19 +8437,19 @@ class DescribeProxySlowLogRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Slow query threshold in microseconds
+         * Slow query threshold in milliseconds
          * @type {number || null}
          */
         this.MinQueryTime = null;
 
         /**
-         * Page size
+         * Maximum number of results returned per page
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit`
+         * Offset, which is an integral multiple of `Limit`.
          * @type {number || null}
          */
         this.Offset = null;
@@ -8861,7 +8661,7 @@ class DisableReplicaReadonlyRequest extends  AbstractModel {
         super();
 
         /**
-         * Serial ID of an instance
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8895,19 +8695,19 @@ class DescribeParamTemplateInfoResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Parameter template ID
+         * Parameter template ID.
          * @type {string || null}
          */
         this.TemplateId = null;
 
         /**
-         * Parameter template name
+         * Parameter template name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture)
+         * Instance type. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture)
          * @type {number || null}
          */
         this.ProductType = null;
@@ -9130,7 +8930,7 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
         this.SecurityGroupId = null;
 
         /**
-         * Instance ID list, which is an array of one or more instance IDs.
+         * List of instance IDs, which is an array of one or more instance IDs.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -9222,7 +9022,7 @@ class HotKeyInfo extends  AbstractModel {
 }
 
 /**
- * Descriptions of enumeration parameters of the instance
+ * Description of the instance parameter in Enum type
  * @class
  */
 class InstanceEnumParam extends  AbstractModel {
@@ -9242,7 +9042,7 @@ class InstanceEnumParam extends  AbstractModel {
         this.ValueType = null;
 
         /**
-         * Whether restart is required after a modification is made. Value range: true, false
+         * Whether restart is required after a modification is made. Valid values: true, false
          * @type {string || null}
          */
         this.NeedRestart = null;
@@ -9254,7 +9054,7 @@ class InstanceEnumParam extends  AbstractModel {
         this.DefaultValue = null;
 
         /**
-         * Current value of a parameter
+         * Current value
          * @type {string || null}
          */
         this.CurrentValue = null;
@@ -9266,7 +9066,7 @@ class InstanceEnumParam extends  AbstractModel {
         this.Tips = null;
 
         /**
-         * Value range of a parameter
+         * Valid values of the parameter
          * @type {Array.<string> || null}
          */
         this.EnumValue = null;
@@ -9342,7 +9142,7 @@ class DescribeInstanceBackupsRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the DescribeInstance API.
+         * ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -9354,7 +9154,7 @@ class DescribeInstanceBackupsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit`
+         * Offset, which is an integral multiple of `Limit`.
          * @type {number || null}
          */
         this.Offset = null;
@@ -9632,7 +9432,7 @@ class InstanceClusterShard extends  AbstractModel {
         this.StorageSlope = null;
 
         /**
-         * ID of the runtime node of an instance
+         * ID of the runtime node of the instance
          * @type {string || null}
          */
         this.Runid = null;
@@ -9869,19 +9669,19 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.MemSize = null;
 
         /**
-         * Shard quantity. This parameter is not required by standard architecture instances and cannot be passed in at the same time as `RedisReplicasNum`/`MemSize`.
+         * Number of shards. This parameter is not required by standard architecture instances and cannot be passed in at the same time as `RedisReplicasNum`/`MemSize`.
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * Replica quantity. This parameter cannot be passed in at the same time as `RedisShardNum`/`MemSize`. To modify the number of replicas in a multi-AZ instance, `NodeSet` must be passed in.
+         * Number of replicas. This parameter cannot be passed in at the same time as `RedisShardNum`/`MemSize`. To modify the number of replicas in a multi-AZ instance, `NodeSet` must be passed in.
          * @type {number || null}
          */
         this.RedisReplicasNum = null;
 
         /**
-         * The information of the replica to be added to a multi-AZ instance, such as replica availability zone and replica type (`NodeType` should be `1`). This parameter is required only when multi-AZ instances add replicas.
+         * Additional information for adding replicas for multi-AZ instances. This parameter is not required for single-AZ instances but is required when adding replicas for multi-AZ instances. It contains the information of the replicas to be added, including replica AZ and type (`NodeType` is 1).
          * @type {Array.<RedisNodeInfo> || null}
          */
         this.NodeSet = null;
@@ -10018,7 +9818,7 @@ class DescribeProjectSecurityGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * Security group of a project
+         * Security group of the project
          * @type {Array.<SecurityGroupDetail> || null}
          */
         this.SecurityGroupDetails = null;
@@ -10438,14 +10238,13 @@ module.exports = {
     DescribeInstanceMonitorBigKeyResponse: DescribeInstanceMonitorBigKeyResponse,
     Inbound: Inbound,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
-    DescribeTaskListResponse: DescribeTaskListResponse,
+    InstanceClusterNode: InstanceClusterNode,
     ModifyInstanceRequest: ModifyInstanceRequest,
-    KillMasterGroupResponse: KillMasterGroupResponse,
+    TendisNodes: TendisNodes,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
     DescribeCommonDBInstancesRequest: DescribeCommonDBInstancesRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
-    RestoreInstanceResponse: RestoreInstanceResponse,
     RedisNodeInfo: RedisNodeInfo,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
     DeleteParamTemplateResponse: DeleteParamTemplateResponse,
@@ -10472,7 +10271,6 @@ module.exports = {
     DescribeInstanceShardsResponse: DescribeInstanceShardsResponse,
     DestroyPrepaidInstanceRequest: DestroyPrepaidInstanceRequest,
     ManualBackupInstanceResponse: ManualBackupInstanceResponse,
-    TaskInfoDetail: TaskInfoDetail,
     DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     InstanceTagInfo: InstanceTagInfo,
@@ -10491,7 +10289,7 @@ module.exports = {
     DescribeTendisSlowLogResponse: DescribeTendisSlowLogResponse,
     DescribeProductInfoResponse: DescribeProductInfoResponse,
     ModifyInstanceAccountRequest: ModifyInstanceAccountRequest,
-    ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
+    RestoreInstanceResponse: RestoreInstanceResponse,
     DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
     DescribeBackupUrlResponse: DescribeBackupUrlResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
@@ -10508,14 +10306,13 @@ module.exports = {
     UpgradeVersionToMultiAvailabilityZonesRequest: UpgradeVersionToMultiAvailabilityZonesRequest,
     AllocateWanAddressResponse: AllocateWanAddressResponse,
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
-    KillMasterGroupRequest: KillMasterGroupRequest,
+    ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
     InstanceTextParam: InstanceTextParam,
     ParamTemplateInfo: ParamTemplateInfo,
     DescribeInstanceMonitorTopNCmdTookResponse: DescribeInstanceMonitorTopNCmdTookResponse,
     DescribeInstanceMonitorBigKeySizeDistRequest: DescribeInstanceMonitorBigKeySizeDistRequest,
     DescribeInstanceAccountRequest: DescribeInstanceAccountRequest,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
-    DescribeTaskListRequest: DescribeTaskListRequest,
     ChangeReplicaToMasterResponse: ChangeReplicaToMasterResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
@@ -10545,7 +10342,6 @@ module.exports = {
     ReleaseWanAddressResponse: ReleaseWanAddressResponse,
     ProductConf: ProductConf,
     InstanceNode: InstanceNode,
-    TendisNodes: TendisNodes,
     StartupInstanceResponse: StartupInstanceResponse,
     DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
     TradeDealDetail: TradeDealDetail,
@@ -10585,7 +10381,6 @@ module.exports = {
     BigKeyTypeInfo: BigKeyTypeInfo,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
-    InstanceClusterNode: InstanceClusterNode,
     DescribeTendisSlowLogRequest: DescribeTendisSlowLogRequest,
     DescribeProxySlowLogRequest: DescribeProxySlowLogRequest,
     DescribeProxySlowLogResponse: DescribeProxySlowLogResponse,

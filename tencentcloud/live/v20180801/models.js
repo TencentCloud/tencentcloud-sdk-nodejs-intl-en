@@ -792,6 +792,214 @@ class DescribeLiveCallbackTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * CreateLivePullStreamTask request structure.
+ * @class
+ */
+class CreateLivePullStreamTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The source type. Valid values:
+PullLivePushLive: Live streaming
+PullVodPushLive: Video files
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * The source URL(s).
+If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
+If `SourceType` is `PullVodPushLive`, you can specify at most 30 source URLs.
+Supported file formats: FLV, MP4, HLS.
+Supported protocols: HTTP, HTTPS, RTMP, RTMPS, RTSP, SRT.
+Notes:
+1. We recommend you use FLV files as the source. Poorly interleaved MP4 files may result in playback stuttering. You can also re-interleave your MP4 files before adding them as the source.
+2. Do not use private network domains or malicious URLs. CSS will block accounts that do.
+3. To avoid push and playback issues, make sure the source files are properly interleaved.
+4. Supported video coding formats: H.264, H.265.
+5. Supported audio coding format: AAC.
+6. Use small video files, preferably not longer than one hour. Large files may take a long time to load or resume after pause. Relay may fail if the time consumed exceeds 15 seconds.
+         * @type {Array.<string> || null}
+         */
+        this.SourceUrls = null;
+
+        /**
+         * The push domain name.
+The pulled stream is pushed to this domain.
+Use a push domain you have added in the CSS console.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * The application to push to.
+The pulled stream is pushed to this application.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * The stream name.
+The pulled stream is pushed under this name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * The start time.
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time. Notes:
+1. The end time must be later than the start time.
+2. The end time and start time must be later than the current time.
+3. The end time and start time must be less than seven days apart.
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The operator.
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * The push parameter.
+This is a custom parameter carried during push.
+Example:
+bak=1&test=2
+         * @type {string || null}
+         */
+        this.PushArgs = null;
+
+        /**
+         * The events to listen for. If you do not pass this parameter, all events will be listened for.
+TaskStart: Callback for starting a task
+TaskExit: Callback for ending a task
+VodSourceFileStart: Callback for starting to pull from video files
+VodSourceFileFinish: Callback for stopping pulling from video files
+ResetTaskConfig: Callback for modifying a task
+
+`TaskAlarm` indicates a warning event. `AlarmType` examples:
+PullFileUnstable: Pull from video files is unstable.
+PushStreamUnstable: Push is unstable.
+PullFileFailed: Error pulling from video files.
+PushStreamFailed: Push error.
+FileEndEarly: The video file ended prematurely.
+         * @type {Array.<string> || null}
+         */
+        this.CallbackEvents = null;
+
+        /**
+         * The number of times to loop video files. Default value: -1.
+-1: Loop indefinitely
+0: Do not loop
+> 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
+This parameter is valid only when the source is video files.
+         * @type {string || null}
+         */
+        this.VodLoopTimes = null;
+
+        /**
+         * The behavior after the source video files (`SourceUrls`) are changed.
+ImmediateNewSource: Play the new videos immediately
+ContinueBreakPoint: Play the new videos after the current video is finished playing (the remaining videos in the old playlist will not be played).
+
+This parameter is valid only if the source before the change is video files.
+         * @type {string || null}
+         */
+        this.VodRefreshType = null;
+
+        /**
+         * A custom callback URL.
+Callbacks about pull and relay events will be sent to this URL.
+         * @type {string || null}
+         */
+        this.CallbackUrl = null;
+
+        /**
+         * Other parameters.
+For example, you can use `ignore_region` to ignore the region passed in and assign a region based on load distribution.
+         * @type {string || null}
+         */
+        this.ExtraCmd = null;
+
+        /**
+         * The remarks for a task, not longer than 512 bytes.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * The complete destination URL.
+If you specify this parameter, make sure you pass in an empty string for `DomainName`, `AppName`, and `StreamName`.
+
+Note: Make sure that the expiration time of the signature is later than the task end time.
+         * @type {string || null}
+         */
+        this.ToUrl = null;
+
+        /**
+         * The backup source type.
+PullLivePushLive: Live streaming
+PullVodPushLive: Video files
+Notes:
+1. Backup sources are supported only if the primary source type is live streaming.
+2. When pull from the primary source is interrupted, the system will pull from the backup source.
+3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
+         * @type {string || null}
+         */
+        this.BackupSourceType = null;
+
+        /**
+         * The URL of the backup source.
+You can specify only one backup source URL.
+         * @type {string || null}
+         */
+        this.BackupSourceUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.SourceUrls = 'SourceUrls' in params ? params.SourceUrls : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.PushArgs = 'PushArgs' in params ? params.PushArgs : null;
+        this.CallbackEvents = 'CallbackEvents' in params ? params.CallbackEvents : null;
+        this.VodLoopTimes = 'VodLoopTimes' in params ? params.VodLoopTimes : null;
+        this.VodRefreshType = 'VodRefreshType' in params ? params.VodRefreshType : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.ExtraCmd = 'ExtraCmd' in params ? params.ExtraCmd : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.ToUrl = 'ToUrl' in params ? params.ToUrl : null;
+        this.BackupSourceType = 'BackupSourceType' in params ? params.BackupSourceType : null;
+        this.BackupSourceUrl = 'BackupSourceUrl' in params ? params.BackupSourceUrl : null;
+
+    }
+}
+
+/**
  * DeleteLiveSnapshotTemplate request structure.
  * @class
  */
@@ -1595,6 +1803,41 @@ class ModifyLiveSnapshotTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * CreateLivePullStreamTask response structure.
+ * @class
+ */
+class CreateLivePullStreamTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyLivePushAuthKey request structure.
  * @class
  */
@@ -2049,19 +2292,24 @@ Note: `EndTime` and `StartTime` only support querying data for the last day.
 }
 
 /**
- * Push time.
+ * DeleteLivePullStreamTask request structure.
  * @class
  */
-class PublishTime extends  AbstractModel {
+class DeleteLivePullStreamTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Push time.
-In UTC format, such as 2018-06-29T19:00:00Z.
+         * The task ID.
          * @type {string || null}
          */
-        this.PublishTime = null;
+        this.TaskId = null;
+
+        /**
+         * The operator.
+         * @type {string || null}
+         */
+        this.Operator = null;
 
     }
 
@@ -2072,7 +2320,8 @@ In UTC format, such as 2018-06-29T19:00:00Z.
         if (!params) {
             return;
         }
-        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
 
     }
 }
@@ -3825,6 +4074,168 @@ class TimeValue extends  AbstractModel {
 }
 
 /**
+ * ModifyLivePullStreamTask request structure.
+ * @class
+ */
+class ModifyLivePullStreamTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The operator.
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * The source URL(s).
+If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
+If `SourceType` is `PullVodPushLive`, you can specify at most 30 source URLs.
+         * @type {Array.<string> || null}
+         */
+        this.SourceUrls = null;
+
+        /**
+         * The start time.
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time. Notes:
+1. The end time must be later than the start time.
+2. The end time and start time must be later than the current time.
+3. The end time and start time must be less than seven days apart.
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The number of times to loop video files.
+-1: Loop indefinitely
+0: Do not loop
+> 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
+This parameter is valid only if the source is video files.
+         * @type {number || null}
+         */
+        this.VodLoopTimes = null;
+
+        /**
+         * The behavior after the source video files (`SourceUrls`) are changed.
+ImmediateNewSource: Play the new videos immediately
+ContinueBreakPoint: Finish the current video first and then pull from the new source.
+This parameter is valid only if the source is video files.
+         * @type {string || null}
+         */
+        this.VodRefreshType = null;
+
+        /**
+         * Whether to enable or pause the task. Valid values:
+enable
+pause
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The events to listen for. If you do not pass this parameter, all events will be listened for.
+TaskStart: Callback for starting a task
+TaskExit: Callback for ending a task
+VodSourceFileStart: Callback for starting to pull from video files
+VodSourceFileFinish: Callback for stopping pulling from video files
+ResetTaskConfig: Callback for modifying a task
+         * @type {Array.<string> || null}
+         */
+        this.CallbackEvents = null;
+
+        /**
+         * A custom callback URL.
+Callbacks will be sent to this URL.
+         * @type {string || null}
+         */
+        this.CallbackUrl = null;
+
+        /**
+         * The index of the video to start from.
+The value of this parameter cannot be smaller than 1 or larger than the number of elements in `SourceUrls`.
+         * @type {number || null}
+         */
+        this.FileIndex = null;
+
+        /**
+         * The playback offset (seconds).
+Notes:
+1. This parameter should be used together with `FileIndex`.
+         * @type {number || null}
+         */
+        this.OffsetTime = null;
+
+        /**
+         * The remarks for the task.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * The backup source type.
+PullLivePushLive: Live streaming
+PullVodPushLive: Video files
+Notes:
+1. Backup sources are supported only if the primary source type is live streaming.
+2. When pull from the primary source is interrupted, the system will pull from the backup source.
+3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
+         * @type {string || null}
+         */
+        this.BackupSourceType = null;
+
+        /**
+         * The URL of the backup source.
+You can specify only one backup source URL.
+         * @type {string || null}
+         */
+        this.BackupSourceUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.SourceUrls = 'SourceUrls' in params ? params.SourceUrls : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.VodLoopTimes = 'VodLoopTimes' in params ? params.VodLoopTimes : null;
+        this.VodRefreshType = 'VodRefreshType' in params ? params.VodRefreshType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CallbackEvents = 'CallbackEvents' in params ? params.CallbackEvents : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.FileIndex = 'FileIndex' in params ? params.FileIndex : null;
+        this.OffsetTime = 'OffsetTime' in params ? params.OffsetTime : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.BackupSourceType = 'BackupSourceType' in params ? params.BackupSourceType : null;
+        this.BackupSourceUrl = 'BackupSourceUrl' in params ? params.BackupSourceUrl : null;
+
+    }
+}
+
+/**
  * Queries active push information
  * @class
  */
@@ -5087,6 +5498,34 @@ class DescribeLiveWatermarkRulesRequest extends  AbstractModel {
 }
 
 /**
+ * StopLiveRecord response structure.
+ * @class
+ */
+class StopLiveRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateCommonMixStream request structure.
  * @class
  */
@@ -6031,6 +6470,51 @@ class DescribeLiveCertsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeLivePullStreamTasks request structure.
+ * @class
+ */
+class DescribeLivePullStreamTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID. 
+A task ID is returned by the `CreateLivePullStreamTask` API.
+If you do not pass this parameter, all tasks will be returned, sorted by last updated time in descending order.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The number of page to start from. Default value: 1.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * The maximum number of records per page. Default value: 10.
+Valid values: Any integer between 1 and 20.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
  * Downstream playback statistical metrics
  * @class
  */
@@ -6368,6 +6852,34 @@ class DescribeLivePlayAuthKeyRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteLivePullStreamTask response structure.
+ * @class
+ */
+class DeleteLivePullStreamTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLiveForbidStreamList response structure.
  * @class
  */
@@ -6508,6 +7020,84 @@ Default value: 20.
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.OrderParam = 'OrderParam' in params ? params.OrderParam : null;
+
+    }
+}
+
+/**
+ * DescribeLivePullStreamTasks response structure.
+ * @class
+ */
+class DescribeLivePullStreamTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The information of stream pulling tasks.
+         * @type {Array.<PullStreamTaskInfo> || null}
+         */
+        this.TaskInfos = null;
+
+        /**
+         * The page number.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * The number of records per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * The total number of records.
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * The total number of pages.
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * The maximum number of tasks allowed.
+         * @type {number || null}
+         */
+        this.LimitTaskNum = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TaskInfos) {
+            this.TaskInfos = new Array();
+            for (let z in params.TaskInfos) {
+                let obj = new PullStreamTaskInfo();
+                obj.deserialize(params.TaskInfos[z]);
+                this.TaskInfos.push(obj);
+            }
+        }
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+        this.LimitTaskNum = 'LimitTaskNum' in params ? params.LimitTaskNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7135,6 +7725,35 @@ class DeleteLiveWatermarkRuleResponse extends  AbstractModel {
 }
 
 /**
+ * Push time.
+ * @class
+ */
+class PublishTime extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Push time.
+In UTC format, such as 2018-06-29T19:00:00Z.
+         * @type {string || null}
+         */
+        this.PublishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PublishTime = 'PublishTime' in params ? params.PublishTime : null;
+
+    }
+}
+
+/**
  * ModifyLiveCert response structure.
  * @class
  */
@@ -7372,58 +7991,38 @@ class DescribeLiveDomainsRequest extends  AbstractModel {
 }
 
 /**
- * UpdateLiveWatermark request structure.
+ * The latest pull information.
  * @class
  */
-class UpdateLiveWatermarkRequest extends  AbstractModel {
+class RecentPullInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermark ID.
-Get the watermark ID in the returned value of the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API call.
-         * @type {number || null}
-         */
-        this.WatermarkId = null;
-
-        /**
-         * Watermark image URL.
-Unallowed characters in the URL:
- ;(){}$>`#"\'|
+         * The URL of the file currently pulled.
          * @type {string || null}
          */
-        this.PictureUrl = null;
+        this.FileUrl = null;
 
         /**
-         * Display position: X-axis offset in %. Default value: 0.
+         * The offset of the file currently pulled.
          * @type {number || null}
          */
-        this.XPosition = null;
+        this.OffsetTime = null;
 
         /**
-         * Display position: Y-axis offset in %. Default value: 0.
-         * @type {number || null}
-         */
-        this.YPosition = null;
-
-        /**
-         * Watermark name.
-Up to 16 bytes.
+         * The time when the offset is reported, in UTC format.
+Example: 2020-07-23T03:20:39Z
+Note: Beijing time is 8 hours ahead of UTC.
          * @type {string || null}
          */
-        this.WatermarkName = null;
+        this.ReportTime = null;
 
         /**
-         * Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
+         * The number of times looped.
          * @type {number || null}
          */
-        this.Width = null;
-
-        /**
-         * Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
-         * @type {number || null}
-         */
-        this.Height = null;
+        this.LoopedTimes = null;
 
     }
 
@@ -7434,13 +8033,10 @@ Up to 16 bytes.
         if (!params) {
             return;
         }
-        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
-        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
-        this.XPosition = 'XPosition' in params ? params.XPosition : null;
-        this.YPosition = 'YPosition' in params ? params.YPosition : null;
-        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.OffsetTime = 'OffsetTime' in params ? params.OffsetTime : null;
+        this.ReportTime = 'ReportTime' in params ? params.ReportTime : null;
+        this.LoopedTimes = 'LoopedTimes' in params ? params.LoopedTimes : null;
 
     }
 }
@@ -7795,6 +8391,80 @@ This value is the same as the `MixStreamSessionId` in `CreateCommonMixStream`.
             return;
         }
         this.MixStreamSessionId = 'MixStreamSessionId' in params ? params.MixStreamSessionId : null;
+
+    }
+}
+
+/**
+ * UpdateLiveWatermark request structure.
+ * @class
+ */
+class UpdateLiveWatermarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark ID.
+Get the watermark ID in the returned value of the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API call.
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
+
+        /**
+         * Watermark image URL.
+Unallowed characters in the URL:
+ ;(){}$>`#"\'|
+         * @type {string || null}
+         */
+        this.PictureUrl = null;
+
+        /**
+         * Display position: X-axis offset in %. Default value: 0.
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * Display position: Y-axis offset in %. Default value: 0.
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+        /**
+         * Watermark name.
+Up to 16 bytes.
+         * @type {string || null}
+         */
+        this.WatermarkName = null;
+
+        /**
+         * Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -11299,18 +11969,196 @@ class DeleteRecordTaskRequest extends  AbstractModel {
 }
 
 /**
- * StopLiveRecord response structure.
+ * The information of a stream pulling task.
  * @class
  */
-class StopLiveRecordResponse extends  AbstractModel {
+class PullStreamTaskInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The task ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TaskId = null;
+
+        /**
+         * The source type. Valid values:
+PullLivePushLive: Live streaming
+PullVodPushLive: Video files
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * The source URL(s).
+If `SourceType` is `PullLiveToLive`, there can be only one source URL.
+If `SourceType` is `PullVodToLive`, there can be at most 10 source URLs.
+         * @type {Array.<string> || null}
+         */
+        this.SourceUrls = null;
+
+        /**
+         * The push domain name.
+The pulled stream is pushed to this domain.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * The application to push to.
+The pulled stream is pushed to this application.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * The stream name.
+The pulled stream is pushed under this name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * The push parameter.
+A custom push parameter.
+         * @type {string || null}
+         */
+        this.PushArgs = null;
+
+        /**
+         * The start time.
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time. Notes:
+1. The end time must be later than the start time.
+2. The end time and start time must be later than the current time.
+3. The end time and start time must be less than seven days apart.
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The region of the source (please choose the nearest region).
+ap-beijing: North China (Beijing)
+ap-shanghai: East China (Shanghai)
+ap-guangzhou: South China (Guangzhou)
+ap-mumbai: India
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * The number of times to loop video files.
+-1: Loop indefinitely
+0: Do not loop
+> 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
+This parameter is valid only if the source is video files.
+         * @type {number || null}
+         */
+        this.VodLoopTimes = null;
+
+        /**
+         * The behavior after the source video files (`SourceUrls`) are changed.
+ImmediateNewSource: Play the new videos immediately
+ContinueBreakPoint: Finish the current video first and then pull from the new source.
+
+This parameter is valid only if the source is video files.
+         * @type {string || null}
+         */
+        this.VodRefreshType = null;
+
+        /**
+         * The task creation time.
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The last updated time.
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * The task creator.
+         * @type {string || null}
+         */
+        this.CreateBy = null;
+
+        /**
+         * The operator of the last update.
+         * @type {string || null}
+         */
+        this.UpdateBy = null;
+
+        /**
+         * The callback URL.
+         * @type {string || null}
+         */
+        this.CallbackUrl = null;
+
+        /**
+         * The events to listen for.
+TaskStart: Callback for starting a task
+TaskExit: Callback for ending a task
+VodSourceFileStart: Callback for starting to pull from video files
+VodSourceFileFinish: Callback for stopping pulling from video files
+ResetTaskConfig: Callback for modifying a task
+         * @type {Array.<string> || null}
+         */
+        this.CallbackEvents = null;
+
+        /**
+         * Note: This parameter is not returned currently.
+The information of the last callback.
+         * @type {string || null}
+         */
+        this.CallbackInfo = null;
+
+        /**
+         * Note: This parameter is not returned currently.
+Error message.
+         * @type {string || null}
+         */
+        this.ErrorInfo = null;
+
+        /**
+         * The task status.
+enable: Enabled
+pause: Paused
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Note: This parameter is returned only if one task is queried.
+The latest pull information.
+The information includes the source URL, offset, and report time.
+         * @type {RecentPullInfo || null}
+         */
+        this.RecentPullInfo = null;
+
+        /**
+         * The remarks for the task.
+         * @type {string || null}
+         */
+        this.Comment = null;
 
     }
 
@@ -11321,7 +12169,34 @@ class StopLiveRecordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.SourceUrls = 'SourceUrls' in params ? params.SourceUrls : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.PushArgs = 'PushArgs' in params ? params.PushArgs : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.VodLoopTimes = 'VodLoopTimes' in params ? params.VodLoopTimes : null;
+        this.VodRefreshType = 'VodRefreshType' in params ? params.VodRefreshType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CreateBy = 'CreateBy' in params ? params.CreateBy : null;
+        this.UpdateBy = 'UpdateBy' in params ? params.UpdateBy : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.CallbackEvents = 'CallbackEvents' in params ? params.CallbackEvents : null;
+        this.CallbackInfo = 'CallbackInfo' in params ? params.CallbackInfo : null;
+        this.ErrorInfo = 'ErrorInfo' in params ? params.ErrorInfo : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.RecentPullInfo) {
+            let obj = new RecentPullInfo();
+            obj.deserialize(params.RecentPullInfo)
+            this.RecentPullInfo = obj;
+        }
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }
@@ -11392,6 +12267,34 @@ class DescribeStreamDayPlayInfoListResponse extends  AbstractModel {
         this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyLivePullStreamTask response structure.
+ * @class
+ */
+class ModifyLivePullStreamTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12181,6 +13084,7 @@ module.exports = {
     ResumeDelayLiveStreamRequest: ResumeDelayLiveStreamRequest,
     DescribeLiveWatermarkRulesResponse: DescribeLiveWatermarkRulesResponse,
     DescribeLiveCallbackTemplateResponse: DescribeLiveCallbackTemplateResponse,
+    CreateLivePullStreamTaskRequest: CreateLivePullStreamTaskRequest,
     DeleteLiveSnapshotTemplateRequest: DeleteLiveSnapshotTemplateRequest,
     DescribeGroupProIspPlayInfoListResponse: DescribeGroupProIspPlayInfoListResponse,
     PushAuthKeyInfo: PushAuthKeyInfo,
@@ -12197,6 +13101,7 @@ module.exports = {
     DescribeStreamPlayInfoListResponse: DescribeStreamPlayInfoListResponse,
     DescribeScreenShotSheetNumListResponse: DescribeScreenShotSheetNumListResponse,
     ModifyLiveSnapshotTemplateResponse: ModifyLiveSnapshotTemplateResponse,
+    CreateLivePullStreamTaskResponse: CreateLivePullStreamTaskResponse,
     ModifyLivePushAuthKeyRequest: ModifyLivePushAuthKeyRequest,
     DeleteLiveCallbackTemplateRequest: DeleteLiveCallbackTemplateRequest,
     DescribeLiveStreamStateRequest: DescribeLiveStreamStateRequest,
@@ -12206,7 +13111,7 @@ module.exports = {
     DescribeLiveTranscodeRulesRequest: DescribeLiveTranscodeRulesRequest,
     DeleteLiveSnapshotRuleRequest: DeleteLiveSnapshotRuleRequest,
     DescribePlayErrorCodeDetailInfoListRequest: DescribePlayErrorCodeDetailInfoListRequest,
-    PublishTime: PublishTime,
+    DeleteLivePullStreamTaskRequest: DeleteLivePullStreamTaskRequest,
     CommonMixOutputParams: CommonMixOutputParams,
     DescribeUploadStreamNumsRequest: DescribeUploadStreamNumsRequest,
     DescribeLiveSnapshotRulesResponse: DescribeLiveSnapshotRulesResponse,
@@ -12242,6 +13147,7 @@ module.exports = {
     DescribeScreenShotSheetNumListRequest: DescribeScreenShotSheetNumListRequest,
     DescribeLiveDomainsResponse: DescribeLiveDomainsResponse,
     TimeValue: TimeValue,
+    ModifyLivePullStreamTaskRequest: ModifyLivePullStreamTaskRequest,
     StreamOnlineInfo: StreamOnlineInfo,
     CreateLiveRecordResponse: CreateLiveRecordResponse,
     RuleInfo: RuleInfo,
@@ -12270,6 +13176,7 @@ module.exports = {
     DescribeLiveWatermarksRequest: DescribeLiveWatermarksRequest,
     CreateLiveTranscodeRuleRequest: CreateLiveTranscodeRuleRequest,
     DescribeLiveWatermarkRulesRequest: DescribeLiveWatermarkRulesRequest,
+    StopLiveRecordResponse: StopLiveRecordResponse,
     CreateCommonMixStreamRequest: CreateCommonMixStreamRequest,
     RefererAuthConfig: RefererAuthConfig,
     CreateLiveCertResponse: CreateLiveCertResponse,
@@ -12284,14 +13191,17 @@ module.exports = {
     AddLiveDomainRequest: AddLiveDomainRequest,
     StreamName: StreamName,
     DescribeLiveCertsRequest: DescribeLiveCertsRequest,
+    DescribeLivePullStreamTasksRequest: DescribeLivePullStreamTasksRequest,
     CdnPlayStatData: CdnPlayStatData,
     AddLiveDomainResponse: AddLiveDomainResponse,
     DescribeHttpStatusInfoListRequest: DescribeHttpStatusInfoListRequest,
     ModifyLiveCallbackTemplateRequest: ModifyLiveCallbackTemplateRequest,
     DescribeProvinceIspPlayInfoListRequest: DescribeProvinceIspPlayInfoListRequest,
     DescribeLivePlayAuthKeyRequest: DescribeLivePlayAuthKeyRequest,
+    DeleteLivePullStreamTaskResponse: DeleteLivePullStreamTaskResponse,
     DescribeLiveForbidStreamListResponse: DescribeLiveForbidStreamListResponse,
     DescribeVisitTopSumInfoListRequest: DescribeVisitTopSumInfoListRequest,
+    DescribeLivePullStreamTasksResponse: DescribeLivePullStreamTasksResponse,
     DescribeLiveWatermarkResponse: DescribeLiveWatermarkResponse,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
     ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
@@ -12303,18 +13213,20 @@ module.exports = {
     DescribeTopClientIpSumInfoListRequest: DescribeTopClientIpSumInfoListRequest,
     CreateLiveCallbackRuleRequest: CreateLiveCallbackRuleRequest,
     DeleteLiveWatermarkRuleResponse: DeleteLiveWatermarkRuleResponse,
+    PublishTime: PublishTime,
     ModifyLiveCertResponse: ModifyLiveCertResponse,
     DescribeLiveTranscodeDetailInfoRequest: DescribeLiveTranscodeDetailInfoRequest,
     ModifyLiveDomainRefererResponse: ModifyLiveDomainRefererResponse,
     DeleteLiveWatermarkRequest: DeleteLiveWatermarkRequest,
     DescribeLiveDomainsRequest: DescribeLiveDomainsRequest,
-    UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
+    RecentPullInfo: RecentPullInfo,
     SnapshotTemplateInfo: SnapshotTemplateInfo,
     DeleteLiveSnapshotRuleResponse: DeleteLiveSnapshotRuleResponse,
     CreateLiveRecordRequest: CreateLiveRecordRequest,
     DescribeLiveTimeShiftBillInfoListResponse: DescribeLiveTimeShiftBillInfoListResponse,
     BandwidthInfo: BandwidthInfo,
     CancelCommonMixStreamRequest: CancelCommonMixStreamRequest,
+    UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
     CertInfo: CertInfo,
     ModifyLivePushAuthKeyResponse: ModifyLivePushAuthKeyResponse,
     DescribeLiveDelayInfoListResponse: DescribeLiveDelayInfoListResponse,
@@ -12389,8 +13301,9 @@ module.exports = {
     DescribeLiveRecordTemplatesRequest: DescribeLiveRecordTemplatesRequest,
     DescribeLiveDomainResponse: DescribeLiveDomainResponse,
     DeleteRecordTaskRequest: DeleteRecordTaskRequest,
-    StopLiveRecordResponse: StopLiveRecordResponse,
+    PullStreamTaskInfo: PullStreamTaskInfo,
     DescribeStreamDayPlayInfoListResponse: DescribeStreamDayPlayInfoListResponse,
+    ModifyLivePullStreamTaskResponse: ModifyLivePullStreamTaskResponse,
     CreateLiveSnapshotRuleResponse: CreateLiveSnapshotRuleResponse,
     DelayInfo: DelayInfo,
     DescribeLiveStreamEventListResponse: DescribeLiveStreamEventListResponse,

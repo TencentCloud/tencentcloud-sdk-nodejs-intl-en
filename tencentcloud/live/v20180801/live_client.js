@@ -31,6 +31,7 @@ const DeleteLiveCallbackRuleResponse = models.DeleteLiveCallbackRuleResponse;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
 const DescribeLiveWatermarkRulesResponse = models.DescribeLiveWatermarkRulesResponse;
 const DescribeLiveCallbackTemplateResponse = models.DescribeLiveCallbackTemplateResponse;
+const CreateLivePullStreamTaskRequest = models.CreateLivePullStreamTaskRequest;
 const DeleteLiveSnapshotTemplateRequest = models.DeleteLiveSnapshotTemplateRequest;
 const DescribeGroupProIspPlayInfoListResponse = models.DescribeGroupProIspPlayInfoListResponse;
 const PushAuthKeyInfo = models.PushAuthKeyInfo;
@@ -47,6 +48,7 @@ const ConcurrentRecordStreamNum = models.ConcurrentRecordStreamNum;
 const DescribeStreamPlayInfoListResponse = models.DescribeStreamPlayInfoListResponse;
 const DescribeScreenShotSheetNumListResponse = models.DescribeScreenShotSheetNumListResponse;
 const ModifyLiveSnapshotTemplateResponse = models.ModifyLiveSnapshotTemplateResponse;
+const CreateLivePullStreamTaskResponse = models.CreateLivePullStreamTaskResponse;
 const ModifyLivePushAuthKeyRequest = models.ModifyLivePushAuthKeyRequest;
 const DeleteLiveCallbackTemplateRequest = models.DeleteLiveCallbackTemplateRequest;
 const DescribeLiveStreamStateRequest = models.DescribeLiveStreamStateRequest;
@@ -56,7 +58,7 @@ const DomainInfo = models.DomainInfo;
 const DescribeLiveTranscodeRulesRequest = models.DescribeLiveTranscodeRulesRequest;
 const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
 const DescribePlayErrorCodeDetailInfoListRequest = models.DescribePlayErrorCodeDetailInfoListRequest;
-const PublishTime = models.PublishTime;
+const DeleteLivePullStreamTaskRequest = models.DeleteLivePullStreamTaskRequest;
 const CommonMixOutputParams = models.CommonMixOutputParams;
 const DescribeUploadStreamNumsRequest = models.DescribeUploadStreamNumsRequest;
 const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
@@ -92,6 +94,7 @@ const DeleteLiveRecordResponse = models.DeleteLiveRecordResponse;
 const DescribeScreenShotSheetNumListRequest = models.DescribeScreenShotSheetNumListRequest;
 const DescribeLiveDomainsResponse = models.DescribeLiveDomainsResponse;
 const TimeValue = models.TimeValue;
+const ModifyLivePullStreamTaskRequest = models.ModifyLivePullStreamTaskRequest;
 const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
 const RuleInfo = models.RuleInfo;
@@ -120,6 +123,7 @@ const DeleteRecordTaskResponse = models.DeleteRecordTaskResponse;
 const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
+const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
 const RefererAuthConfig = models.RefererAuthConfig;
 const CreateLiveCertResponse = models.CreateLiveCertResponse;
@@ -134,14 +138,17 @@ const DescribeLiveDomainRefererResponse = models.DescribeLiveDomainRefererRespon
 const AddLiveDomainRequest = models.AddLiveDomainRequest;
 const StreamName = models.StreamName;
 const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
+const DescribeLivePullStreamTasksRequest = models.DescribeLivePullStreamTasksRequest;
 const CdnPlayStatData = models.CdnPlayStatData;
 const AddLiveDomainResponse = models.AddLiveDomainResponse;
 const DescribeHttpStatusInfoListRequest = models.DescribeHttpStatusInfoListRequest;
 const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateRequest;
 const DescribeProvinceIspPlayInfoListRequest = models.DescribeProvinceIspPlayInfoListRequest;
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
+const DeleteLivePullStreamTaskResponse = models.DeleteLivePullStreamTaskResponse;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
+const DescribeLivePullStreamTasksResponse = models.DescribeLivePullStreamTasksResponse;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
@@ -153,18 +160,20 @@ const BindLiveDomainCertRequest = models.BindLiveDomainCertRequest;
 const DescribeTopClientIpSumInfoListRequest = models.DescribeTopClientIpSumInfoListRequest;
 const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
+const PublishTime = models.PublishTime;
 const ModifyLiveCertResponse = models.ModifyLiveCertResponse;
 const DescribeLiveTranscodeDetailInfoRequest = models.DescribeLiveTranscodeDetailInfoRequest;
 const ModifyLiveDomainRefererResponse = models.ModifyLiveDomainRefererResponse;
 const DeleteLiveWatermarkRequest = models.DeleteLiveWatermarkRequest;
 const DescribeLiveDomainsRequest = models.DescribeLiveDomainsRequest;
-const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
+const RecentPullInfo = models.RecentPullInfo;
 const SnapshotTemplateInfo = models.SnapshotTemplateInfo;
 const DeleteLiveSnapshotRuleResponse = models.DeleteLiveSnapshotRuleResponse;
 const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
 const DescribeLiveTimeShiftBillInfoListResponse = models.DescribeLiveTimeShiftBillInfoListResponse;
 const BandwidthInfo = models.BandwidthInfo;
 const CancelCommonMixStreamRequest = models.CancelCommonMixStreamRequest;
+const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
 const CertInfo = models.CertInfo;
 const ModifyLivePushAuthKeyResponse = models.ModifyLivePushAuthKeyResponse;
 const DescribeLiveDelayInfoListResponse = models.DescribeLiveDelayInfoListResponse;
@@ -239,8 +248,9 @@ const CreateLiveWatermarkRuleRequest = models.CreateLiveWatermarkRuleRequest;
 const DescribeLiveRecordTemplatesRequest = models.DescribeLiveRecordTemplatesRequest;
 const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
 const DeleteRecordTaskRequest = models.DeleteRecordTaskRequest;
-const StopLiveRecordResponse = models.StopLiveRecordResponse;
+const PullStreamTaskInfo = models.PullStreamTaskInfo;
 const DescribeStreamDayPlayInfoListResponse = models.DescribeStreamDayPlayInfoListResponse;
+const ModifyLivePullStreamTaskResponse = models.ModifyLivePullStreamTaskResponse;
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
 const DelayInfo = models.DelayInfo;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
@@ -724,6 +734,20 @@ If not or if the data of specified domains is queried, the data returned will be
     }
 
     /**
+     * This API is used to delete a task created by `CreateLivePullStreamTask`.
+Notes:
+1. For the `TaskId` request parameter, pass in the task ID returned by the `CreateLivePullStreamTask` API.
+2. You can query the ID of a task using the `DescribeLivePullStreamTasks` API.
+     * @param {DeleteLivePullStreamTaskRequest} req
+     * @param {function(string, DeleteLivePullStreamTaskResponse):void} cb
+     * @public
+     */
+    DeleteLivePullStreamTask(req, cb) {
+        let resp = new DeleteLivePullStreamTaskResponse();
+        this.request("DeleteLivePullStreamTask", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of disabled streams.
 
 Note: this API is used for query only and should not be relied too much upon in important business scenarios.
@@ -734,6 +758,24 @@ Note: this API is used for query only and should not be relied too much upon in 
     DescribeLiveForbidStreamList(req, cb) {
         let resp = new DescribeLiveForbidStreamListResponse();
         this.request("DescribeLiveForbidStreamList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to pull streams from video files or an external live streaming source and publish them to a specified destination URL.
+Notes:
+1. By default, you can have at most 20 stream pulling tasks at a time. You can submit a ticket to raise the limit.
+2. Only H.264 and H.265 are supported for video. If the source video is in a different format, please transcode it first.
+3. Only AAC is supported for audio. If the source audio is in a different format, please transcode it first.
+4. You can enable auto deletion in the console to delete expired tasks automatically.
+5. The pull and relay feature is a paid feature. For its billing details, see [Relay](https://intl.cloud.tencent.com/document/product/267/53308?from_cn_redirect=1).
+6. CSS is only responsible for pulling and relaying content. Please make sure that your content is authorized and complies with relevant laws and regulations. In case of copyright infringement or violation of laws or regulations, CSS will suspend its service for you and reserves the right to seek legal remedies.
+     * @param {CreateLivePullStreamTaskRequest} req
+     * @param {function(string, CreateLivePullStreamTaskResponse):void} cb
+     * @public
+     */
+    CreateLivePullStreamTask(req, cb) {
+        let resp = new CreateLivePullStreamTaskResponse();
+        this.request("CreateLivePullStreamTask", req, resp, cb);
     }
 
     /**
@@ -767,6 +809,19 @@ Note: this API is used for query only and should not be relied too much upon in 
     DescribeLiveDomains(req, cb) {
         let resp = new DescribeLiveDomainsResponse();
         this.request("DescribeLiveDomains", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a stream pulling task. 
+1. You cannot modify the destination URL. To publish to a new destination, please create a new task.
+2. You cannot modify the source type. To use a different source type, please create a new task.
+     * @param {ModifyLivePullStreamTaskRequest} req
+     * @param {function(string, ModifyLivePullStreamTaskResponse):void} cb
+     * @public
+     */
+    ModifyLivePullStreamTask(req, cb) {
+        let resp = new ModifyLivePullStreamTaskResponse();
+        this.request("ModifyLivePullStreamTask", req, resp, cb);
     }
 
     /**
@@ -835,6 +890,18 @@ Note: at least enter one callback URL.
     ModifyLiveCallbackTemplate(req, cb) {
         let resp = new ModifyLiveCallbackTemplateResponse();
         this.request("ModifyLiveCallbackTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the stream pulling tasks created by `CreateLivePullStreamTask`.
+The tasks returned are sorted by last updated time in descending order.
+     * @param {DescribeLivePullStreamTasksRequest} req
+     * @param {function(string, DescribeLivePullStreamTasksResponse):void} cb
+     * @public
+     */
+    DescribeLivePullStreamTasks(req, cb) {
+        let resp = new DescribeLivePullStreamTasksResponse();
+        this.request("DescribeLivePullStreamTasks", req, resp, cb);
     }
 
     /**

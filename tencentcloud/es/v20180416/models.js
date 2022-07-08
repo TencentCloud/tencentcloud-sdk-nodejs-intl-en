@@ -1814,6 +1814,12 @@ class InstanceInfo extends  AbstractModel {
         this.Status = null;
 
         /**
+         * This parameter is not used on the global website
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+        /**
          * Instance billing method. Valid values: POSTPAID_BY_HOUR (pay-as-you-go hourly); CDHPAID (billed based on CDH, i.e., only CDH is billed but not the instances on CDH)
          * @type {string || null}
          */
@@ -1824,12 +1830,6 @@ class InstanceInfo extends  AbstractModel {
          * @type {number || null}
          */
         this.ChargePeriod = null;
-
-        /**
-         * This parameter is not used on the global website
-         * @type {string || null}
-         */
-        this.RenewFlag = null;
 
         /**
          * Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
@@ -2241,6 +2241,13 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.EsPrivateDomain = null;
 
+        /**
+         * Configuration set info of the cluster.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<EsConfigSetInfo> || null}
+         */
+        this.EsConfigSets = null;
+
     }
 
     /**
@@ -2259,9 +2266,9 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.VpcUid = 'VpcUid' in params ? params.VpcUid : null;
         this.SubnetUid = 'SubnetUid' in params ? params.SubnetUid : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
         this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
         this.ChargePeriod = 'ChargePeriod' in params ? params.ChargePeriod : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
         this.NodeType = 'NodeType' in params ? params.NodeType : null;
         this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
         this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
@@ -2383,6 +2390,15 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
         this.EsPrivateUrl = 'EsPrivateUrl' in params ? params.EsPrivateUrl : null;
         this.EsPrivateDomain = 'EsPrivateDomain' in params ? params.EsPrivateDomain : null;
+
+        if (params.EsConfigSets) {
+            this.EsConfigSets = new Array();
+            for (let z in params.EsConfigSets) {
+                let obj = new EsConfigSetInfo();
+                obj.deserialize(params.EsConfigSets[z]);
+                this.EsConfigSets.push(obj);
+            }
+        }
 
     }
 }

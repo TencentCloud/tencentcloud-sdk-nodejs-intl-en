@@ -986,90 +986,30 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * Instance node type
+ * DescribeTaskList response structure.
  * @class
  */
-class InstanceClusterNode extends  AbstractModel {
+class DescribeTaskListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node name
+         * Total number of tasks
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Task details
+         * @type {Array.<TaskInfoDetail> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * ID of the runtime node of the instance
-         * @type {string || null}
-         */
-        this.RunId = null;
-
-        /**
-         * Cluster role. 0: master; 1: replica
-         * @type {number || null}
-         */
-        this.Role = null;
-
-        /**
-         * Node status. 0: readwrite; 1: read; 2: backup
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Service status. 0: down; 1: on
-         * @type {number || null}
-         */
-        this.Connected = null;
-
-        /**
-         * Node creation time
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Node elimination time
-         * @type {string || null}
-         */
-        this.DownTime = null;
-
-        /**
-         * Distribution of node slots
-         * @type {string || null}
-         */
-        this.Slots = null;
-
-        /**
-         * Distribution of node keys
-         * @type {number || null}
-         */
-        this.Keys = null;
-
-        /**
-         * Node QPS
-         * @type {number || null}
-         */
-        this.Qps = null;
-
-        /**
-         * Node QPS slope
-         * @type {number || null}
-         */
-        this.QpsSlope = null;
-
-        /**
-         * Node storage
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Node storage slope
-         * @type {number || null}
-         */
-        this.StorageSlope = null;
+        this.RequestId = null;
 
     }
 
@@ -1080,19 +1020,17 @@ class InstanceClusterNode extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.RunId = 'RunId' in params ? params.RunId : null;
-        this.Role = 'Role' in params ? params.Role : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Connected = 'Connected' in params ? params.Connected : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.DownTime = 'DownTime' in params ? params.DownTime : null;
-        this.Slots = 'Slots' in params ? params.Slots : null;
-        this.Keys = 'Keys' in params ? params.Keys : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.QpsSlope = 'QpsSlope' in params ? params.QpsSlope : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.StorageSlope = 'StorageSlope' in params ? params.StorageSlope : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new TaskInfoDetail();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1175,24 +1113,24 @@ class ModifyInstanceRequest extends  AbstractModel {
 }
 
 /**
- * Tendis node information
+ * KillMasterGroup response structure.
  * @class
  */
-class TendisNodes extends  AbstractModel {
+class KillMasterGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node ID
-         * @type {string || null}
+         * Async task ID
+         * @type {number || null}
          */
-        this.NodeId = null;
+        this.TaskId = null;
 
         /**
-         * Node role
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.NodeRole = null;
+        this.RequestId = null;
 
     }
 
@@ -1203,8 +1141,8 @@ class TendisNodes extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NodeId = 'NodeId' in params ? params.NodeId : null;
-        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1458,6 +1396,41 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
         }
         this.VIP = 'VIP' in params ? params.VIP : null;
         this.VPort = 'VPort' in params ? params.VPort : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RestoreInstance response structure.
+ * @class
+ */
+class RestoreInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID, which can be used to query the task execution status through the `DescribeTaskInfo` API.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2689,6 +2662,99 @@ class ManualBackupInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * Task details
+ * @class
+ */
+class TaskInfoDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Start time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Task type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * Instance name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Project ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Task progress
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * End time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Task status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Result = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Result = 'Result' in params ? params.Result : null;
+
+    }
+}
+
+/**
  * DisableReplicaReadonly response structure.
  * @class
  */
@@ -3559,24 +3625,30 @@ class ModifyInstanceAccountRequest extends  AbstractModel {
 }
 
 /**
- * RestoreInstance response structure.
+ * ModifyMaintenanceWindow request structure.
  * @class
  */
-class RestoreInstanceResponse extends  AbstractModel {
+class ModifyMaintenanceWindowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID, which can be used to query the task execution status through the `DescribeTaskInfo` API.
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Maintenance start time, such as 17:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Maintenance end time, such as 19:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -3587,8 +3659,9 @@ class RestoreInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -4316,10 +4389,10 @@ class DescribeInstanceMonitorTookDistRequest extends  AbstractModel {
 }
 
 /**
- * ModifyMaintenanceWindow request structure.
+ * KillMasterGroup request structure.
  * @class
  */
-class ModifyMaintenanceWindowRequest extends  AbstractModel {
+class KillMasterGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -4330,16 +4403,22 @@ class ModifyMaintenanceWindowRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Maintenance start time, such as 17:00
+         * 1. The password must contain 8–30 characters. A password of 12 or more characters is recommended.
+2. It cannot start with a slash (/).
+3. It must contain characters in at least two of the following types:
+    a. Lowercase letters (a–z)
+    b. Uppercase letters (A–Z)
+    c. Digits (0–9)
+    d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.Password = null;
 
         /**
-         * Maintenance end time, such as 19:00
-         * @type {string || null}
+         * Node information of a single-AZ deployed instance
+         * @type {Array.<number> || null}
          */
-        this.EndTime = null;
+        this.ShardIds = null;
 
     }
 
@@ -4351,8 +4430,8 @@ class ModifyMaintenanceWindowRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ShardIds = 'ShardIds' in params ? params.ShardIds : null;
 
     }
 }
@@ -4641,6 +4720,111 @@ class DescribeInstanceParamRecordsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeTaskList request structure.
+ * @class
+ */
+class DescribeTaskListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Maximum number of results returned per page. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset, which is an integral multiple of `Limit` (rounded down automatically).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Project ID
+         * @type {Array.<number> || null}
+         */
+        this.ProjectIds = null;
+
+        /**
+         * Task type
+         * @type {Array.<string> || null}
+         */
+        this.TaskTypes = null;
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Task status
+         * @type {Array.<number> || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * Task status
+         * @type {Array.<number> || null}
+         */
+        this.Result = null;
+
+        /**
+         * Operator UIN
+         * @type {Array.<number> || null}
+         */
+        this.OperatorUin = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.OperateUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
+        this.TaskTypes = 'TaskTypes' in params ? params.TaskTypes : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.OperatorUin = 'OperatorUin' in params ? params.OperatorUin : null;
+        this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
 
     }
 }
@@ -6048,6 +6232,41 @@ class InstanceNode extends  AbstractModel {
                 this.InstanceClusterNode.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Tendis node information
+ * @class
+ */
+class TendisNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * Node role
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
 
     }
 }
@@ -8348,6 +8567,118 @@ class DescribeMaintenanceWindowRequest extends  AbstractModel {
 }
 
 /**
+ * Instance node type
+ * @class
+ */
+class InstanceClusterNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * ID of the runtime node of the instance
+         * @type {string || null}
+         */
+        this.RunId = null;
+
+        /**
+         * Cluster role. 0: master; 1: replica
+         * @type {number || null}
+         */
+        this.Role = null;
+
+        /**
+         * Node status. 0: readwrite; 1: read; 2: backup
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Service status. 0: down; 1: on
+         * @type {number || null}
+         */
+        this.Connected = null;
+
+        /**
+         * Node creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Node elimination time
+         * @type {string || null}
+         */
+        this.DownTime = null;
+
+        /**
+         * Distribution of node slots
+         * @type {string || null}
+         */
+        this.Slots = null;
+
+        /**
+         * Distribution of node keys
+         * @type {number || null}
+         */
+        this.Keys = null;
+
+        /**
+         * Node QPS
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * Node QPS slope
+         * @type {number || null}
+         */
+        this.QpsSlope = null;
+
+        /**
+         * Node storage
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Node storage slope
+         * @type {number || null}
+         */
+        this.StorageSlope = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RunId = 'RunId' in params ? params.RunId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Connected = 'Connected' in params ? params.Connected : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.DownTime = 'DownTime' in params ? params.DownTime : null;
+        this.Slots = 'Slots' in params ? params.Slots : null;
+        this.Keys = 'Keys' in params ? params.Keys : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.QpsSlope = 'QpsSlope' in params ? params.QpsSlope : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.StorageSlope = 'StorageSlope' in params ? params.StorageSlope : null;
+
+    }
+}
+
+/**
  * DescribeTendisSlowLog request structure.
  * @class
  */
@@ -10238,13 +10569,14 @@ module.exports = {
     DescribeInstanceMonitorBigKeyResponse: DescribeInstanceMonitorBigKeyResponse,
     Inbound: Inbound,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
-    InstanceClusterNode: InstanceClusterNode,
+    DescribeTaskListResponse: DescribeTaskListResponse,
     ModifyInstanceRequest: ModifyInstanceRequest,
-    TendisNodes: TendisNodes,
+    KillMasterGroupResponse: KillMasterGroupResponse,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
     DescribeCommonDBInstancesRequest: DescribeCommonDBInstancesRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
+    RestoreInstanceResponse: RestoreInstanceResponse,
     RedisNodeInfo: RedisNodeInfo,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
     DeleteParamTemplateResponse: DeleteParamTemplateResponse,
@@ -10271,6 +10603,7 @@ module.exports = {
     DescribeInstanceShardsResponse: DescribeInstanceShardsResponse,
     DestroyPrepaidInstanceRequest: DestroyPrepaidInstanceRequest,
     ManualBackupInstanceResponse: ManualBackupInstanceResponse,
+    TaskInfoDetail: TaskInfoDetail,
     DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     InstanceTagInfo: InstanceTagInfo,
@@ -10289,7 +10622,7 @@ module.exports = {
     DescribeTendisSlowLogResponse: DescribeTendisSlowLogResponse,
     DescribeProductInfoResponse: DescribeProductInfoResponse,
     ModifyInstanceAccountRequest: ModifyInstanceAccountRequest,
-    RestoreInstanceResponse: RestoreInstanceResponse,
+    ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
     DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
     DescribeBackupUrlResponse: DescribeBackupUrlResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
@@ -10306,13 +10639,14 @@ module.exports = {
     UpgradeVersionToMultiAvailabilityZonesRequest: UpgradeVersionToMultiAvailabilityZonesRequest,
     AllocateWanAddressResponse: AllocateWanAddressResponse,
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
-    ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
+    KillMasterGroupRequest: KillMasterGroupRequest,
     InstanceTextParam: InstanceTextParam,
     ParamTemplateInfo: ParamTemplateInfo,
     DescribeInstanceMonitorTopNCmdTookResponse: DescribeInstanceMonitorTopNCmdTookResponse,
     DescribeInstanceMonitorBigKeySizeDistRequest: DescribeInstanceMonitorBigKeySizeDistRequest,
     DescribeInstanceAccountRequest: DescribeInstanceAccountRequest,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
+    DescribeTaskListRequest: DescribeTaskListRequest,
     ChangeReplicaToMasterResponse: ChangeReplicaToMasterResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
@@ -10342,6 +10676,7 @@ module.exports = {
     ReleaseWanAddressResponse: ReleaseWanAddressResponse,
     ProductConf: ProductConf,
     InstanceNode: InstanceNode,
+    TendisNodes: TendisNodes,
     StartupInstanceResponse: StartupInstanceResponse,
     DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
     TradeDealDetail: TradeDealDetail,
@@ -10381,6 +10716,7 @@ module.exports = {
     BigKeyTypeInfo: BigKeyTypeInfo,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
+    InstanceClusterNode: InstanceClusterNode,
     DescribeTendisSlowLogRequest: DescribeTendisSlowLogRequest,
     DescribeProxySlowLogRequest: DescribeProxySlowLogRequest,
     DescribeProxySlowLogResponse: DescribeProxySlowLogResponse,

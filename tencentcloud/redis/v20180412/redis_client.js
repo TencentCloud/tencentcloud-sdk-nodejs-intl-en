@@ -34,13 +34,14 @@ const CommandTake = models.CommandTake;
 const DescribeInstanceMonitorBigKeyResponse = models.DescribeInstanceMonitorBigKeyResponse;
 const Inbound = models.Inbound;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
-const InstanceClusterNode = models.InstanceClusterNode;
+const DescribeTaskListResponse = models.DescribeTaskListResponse;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
-const TendisNodes = models.TendisNodes;
+const KillMasterGroupResponse = models.KillMasterGroupResponse;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
 const DescribeCommonDBInstancesRequest = models.DescribeCommonDBInstancesRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const RedisNodeInfo = models.RedisNodeInfo;
 const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
@@ -67,6 +68,7 @@ const ParameterDetail = models.ParameterDetail;
 const DescribeInstanceShardsResponse = models.DescribeInstanceShardsResponse;
 const DestroyPrepaidInstanceRequest = models.DestroyPrepaidInstanceRequest;
 const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
+const TaskInfoDetail = models.TaskInfoDetail;
 const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const InstanceTagInfo = models.InstanceTagInfo;
@@ -85,7 +87,7 @@ const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const DescribeTendisSlowLogResponse = models.DescribeTendisSlowLogResponse;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const ModifyInstanceAccountRequest = models.ModifyInstanceAccountRequest;
-const RestoreInstanceResponse = models.RestoreInstanceResponse;
+const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
@@ -102,13 +104,14 @@ const InstanceIntegerParam = models.InstanceIntegerParam;
 const UpgradeVersionToMultiAvailabilityZonesRequest = models.UpgradeVersionToMultiAvailabilityZonesRequest;
 const AllocateWanAddressResponse = models.AllocateWanAddressResponse;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
-const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
+const KillMasterGroupRequest = models.KillMasterGroupRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const ParamTemplateInfo = models.ParamTemplateInfo;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
 const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
+const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
@@ -138,6 +141,7 @@ const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGro
 const ReleaseWanAddressResponse = models.ReleaseWanAddressResponse;
 const ProductConf = models.ProductConf;
 const InstanceNode = models.InstanceNode;
+const TendisNodes = models.TendisNodes;
 const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
 const TradeDealDetail = models.TradeDealDetail;
@@ -177,6 +181,7 @@ const BackupDownloadInfo = models.BackupDownloadInfo;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
+const InstanceClusterNode = models.InstanceClusterNode;
 const DescribeTendisSlowLogRequest = models.DescribeTendisSlowLogRequest;
 const DescribeProxySlowLogRequest = models.DescribeProxySlowLogRequest;
 const DescribeProxySlowLogResponse = models.DescribeProxySlowLogResponse;
@@ -312,6 +317,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to disable public network access.
+     * @param {ReleaseWanAddressRequest} req
+     * @param {function(string, ReleaseWanAddressResponse):void} cb
+     * @public
+     */
+    ReleaseWanAddress(req, cb) {
+        let resp = new ReleaseWanAddressResponse();
+        this.request("ReleaseWanAddress", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the slow log.
      * @param {DescribeSlowLogRequest} req
      * @param {function(string, DescribeSlowLogResponse):void} cb
@@ -320,6 +336,17 @@ class RedisClient extends AbstractClient {
     DescribeSlowLog(req, cb) {
         let resp = new DescribeSlowLogResponse();
         this.request("DescribeSlowLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of tasks.
+     * @param {DescribeTaskListRequest} req
+     * @param {function(string, DescribeTaskListResponse):void} cb
+     * @public
+     */
+    DescribeTaskList(req, cb) {
+        let resp = new DescribeTaskListResponse();
+        this.request("DescribeTaskList", req, resp, cb);
     }
 
     /**
@@ -785,14 +812,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to disable public network access.
-     * @param {ReleaseWanAddressRequest} req
-     * @param {function(string, ReleaseWanAddressResponse):void} cb
+     * This API is used to perform a failure simulation.
+     * @param {KillMasterGroupRequest} req
+     * @param {function(string, KillMasterGroupResponse):void} cb
      * @public
      */
-    ReleaseWanAddress(req, cb) {
-        let resp = new ReleaseWanAddressResponse();
-        this.request("ReleaseWanAddress", req, resp, cb);
+    KillMasterGroup(req, cb) {
+        let resp = new KillMasterGroupResponse();
+        this.request("KillMasterGroup", req, resp, cb);
     }
 
     /**

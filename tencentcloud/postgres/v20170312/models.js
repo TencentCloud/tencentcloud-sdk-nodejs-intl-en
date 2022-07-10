@@ -61,7 +61,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * PostgreSQL version number. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created.
+         * PostgreSQL version. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created. You must pass in at least one of the following parameters: DBVersion, DBMajorVersion, DBKernelVersion.
          * @type {string || null}
          */
         this.DBVersion = null;
@@ -133,13 +133,13 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * PostgreSQL major version number. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created.
+         * PostgreSQL major version. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created. You must pass in at least one of the following parameters: DBMajorVersion, DBVersion, DBKernelVersion.
          * @type {string || null}
          */
         this.DBMajorVersion = null;
 
         /**
-         * PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
+         * PostgreSQL kernel version. If it is specified, an instance running the latest kernel of PostgreSQL `DBKernelVersion` will be created. You must pass in one of the following parameters: DBKernelVersion, DBVersion, DBMajorVersion.
          * @type {string || null}
          */
         this.DBKernelVersion = null;
@@ -194,7 +194,7 @@ class SetAutoRenewFlagRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID array
+         * List of instance IDs. Note that currently you cannot manipulate multiple instances at the same time. Only one instance ID can be passed in here.
          * @type {Array.<string> || null}
          */
         this.DBInstanceIdSet = null;
@@ -375,13 +375,13 @@ class DescribeAccountsRequest extends  AbstractModel {
         this.DBInstanceId = null;
 
         /**
-         * Number of entries returned per page. Default value: 20. Value range: 1-100.
+         * Number of entries returned per page. Default value: 10. Value range: 1–100.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Page number for data return in paged query. Pagination starts from 0
+         * Data offset, which starts from 0.
          * @type {number || null}
          */
         this.Offset = null;
@@ -617,7 +617,7 @@ class CreateInstancesRequest extends  AbstractModel {
         this.KMSKeyId = null;
 
         /**
-         * The region where the KMS service is enabled. When “KMSRegion” is left empty, the “KMS” of the local domain will be enabled by default. If the local domain is not supported, you need to select another region supported by KMS.
+         * The region where the KMS service is enabled. When `KMSRegion` is left empty, the KMS of the current region will be enabled by default. If the current region is not supported, you need to select another region supported by KMS.
          * @type {string || null}
          */
         this.KMSRegion = null;
@@ -1653,19 +1653,19 @@ class ModifyDBInstanceDeploymentRequest extends  AbstractModel {
         this.DBNodeSet = null;
 
         /**
-         * Switch time. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+         * Switch time. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
          * @type {number || null}
          */
         this.SwitchTag = null;
 
         /**
-         * The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
+         * Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
          * @type {string || null}
          */
         this.SwitchStartTime = null;
 
         /**
-         * The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
+         * Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
          * @type {string || null}
          */
         this.SwitchEndTime = null;
@@ -2470,6 +2470,12 @@ class InquiryPriceCreateDBInstancesResponse extends  AbstractModel {
         this.Price = null;
 
         /**
+         * Currency, such as USD for US dollar.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2486,6 +2492,7 @@ class InquiryPriceCreateDBInstancesResponse extends  AbstractModel {
         }
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2584,7 +2591,7 @@ class DisIsolateDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Resource ID list
+         * List of resource IDs. Note that currently you cannot remove multiple instances from isolation at the same time. Only one instance ID can be passed in here.
          * @type {Array.<string> || null}
          */
         this.DBInstanceIdSet = null;
@@ -2754,16 +2761,16 @@ db-tag-key: filter by tag key (in string format)
         this.Limit = null;
 
         /**
+         * Data offset, which starts from 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
          * Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
          * @type {string || null}
          */
         this.OrderBy = null;
-
-        /**
-         * Pagination offset, starting from 0
-         * @type {number || null}
-         */
-        this.Offset = null;
 
         /**
          * Sorting order. Valid values: `asc` (ascending), `desc` (descending)
@@ -2790,8 +2797,8 @@ db-tag-key: filter by tag key (in string format)
             }
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
@@ -2842,19 +2849,19 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
         this.ActivityId = null;
 
         /**
-         * Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+         * Switch time after instance configurations are modified. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
          * @type {number || null}
          */
         this.SwitchTag = null;
 
         /**
-         * The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
+         * Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
          * @type {string || null}
          */
         this.SwitchStartTime = null;
 
         /**
-         * The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
+         * Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
          * @type {string || null}
          */
         this.SwitchEndTime = null;
@@ -5235,6 +5242,12 @@ class InquiryPriceRenewDBInstanceResponse extends  AbstractModel {
         this.Price = null;
 
         /**
+         * Currency, such as USD for US dollar.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -5251,6 +5264,7 @@ class InquiryPriceRenewDBInstanceResponse extends  AbstractModel {
         }
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5442,7 +5456,7 @@ class IsolateDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID set
+         * List of instance IDs. Note that currently you cannot isolate multiple instances at the same time. Only one instance ID can be passed in here.
          * @type {Array.<string> || null}
          */
         this.DBInstanceIdSet = null;
@@ -7410,6 +7424,12 @@ class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
         this.Price = null;
 
         /**
+         * Currency, such as USD for US dollar.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -7426,6 +7446,7 @@ class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
         }
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8158,13 +8179,13 @@ class ModifyDBInstancesProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * TencentDB for PostgreSQL instance ID array
+         * List of instance IDs. Note that currently you cannot manipulate multiple instances at the same time. Only one instance ID can be passed in here.
          * @type {Array.<string> || null}
          */
         this.DBInstanceIdSet = null;
 
         /**
-         * New project ID of TencentDB for PostgreSQL instance
+         * ID of the new project
          * @type {string || null}
          */
         this.ProjectId = null;

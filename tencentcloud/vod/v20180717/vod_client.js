@@ -52,13 +52,13 @@ const ManageTaskRequest = models.ManageTaskRequest;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
 const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
+const RefreshUrlCacheRequest = models.RefreshUrlCacheRequest;
 const ContentReviewTemplateItem = models.ContentReviewTemplateItem;
 const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateResponse;
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const AudioTransform = models.AudioTransform;
 const ResetProcedureTemplateRequest = models.ResetProcedureTemplateRequest;
-const ContentReviewOcrResult = models.ContentReviewOcrResult;
 const ComposeMediaResponse = models.ComposeMediaResponse;
 const DescribeLicenseUsageDataResponse = models.DescribeLicenseUsageDataResponse;
 const UrlSignatureAuthPolicy = models.UrlSignatureAuthPolicy;
@@ -101,6 +101,7 @@ const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const TagConfigureInfo = models.TagConfigureInfo;
 const ModifySuperPlayerConfigResponse = models.ModifySuperPlayerConfigResponse;
 const AiRecognitionTaskOcrWordsResultOutput = models.AiRecognitionTaskOcrWordsResultOutput;
+const RefreshUrlCacheResponse = models.RefreshUrlCacheResponse;
 const ConcatTask2017 = models.ConcatTask2017;
 const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateRequest;
 const FileUploadTask = models.FileUploadTask;
@@ -126,10 +127,10 @@ const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTempl
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
 const TaskOutputMediaInfo = models.TaskOutputMediaInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
-const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const PlayStatFileInfo = models.PlayStatFileInfo;
 const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
 const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
+const TraceWatermarkInput = models.TraceWatermarkInput;
 const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
 const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
 const MediaMetaData = models.MediaMetaData;
@@ -169,7 +170,6 @@ const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const AiAnalysisResult = models.AiAnalysisResult;
 const ConcatFileInfo2017 = models.ConcatFileInfo2017;
-const ContentReviewResult = models.ContentReviewResult;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
 const DeleteProcedureTemplateResponse = models.DeleteProcedureTemplateResponse;
@@ -224,11 +224,9 @@ const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const AiAnalysisTaskHighlightOutput = models.AiAnalysisTaskHighlightOutput;
 const MediaSubtitleInput = models.MediaSubtitleInput;
 const ProcessMediaRequest = models.ProcessMediaRequest;
-const PornImageResult = models.PornImageResult;
-const ProcessImageResponse = models.ProcessImageResponse;
-const ProcessImageRequest = models.ProcessImageRequest;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
+const RestoreMediaResponse = models.RestoreMediaResponse;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
 const AiSampleWord = models.AiSampleWord;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
@@ -246,7 +244,6 @@ const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
 const ModifySubAppIdStatusResponse = models.ModifySubAppIdStatusResponse;
 const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
 const MediaDeleteItem = models.MediaDeleteItem;
-const PoliticalImageResult = models.PoliticalImageResult;
 const AiSamplePerson = models.AiSamplePerson;
 const MediaAdaptiveDynamicStreamingInfo = models.MediaAdaptiveDynamicStreamingInfo;
 const DescribeDailyPlayStatFileListRequest = models.DescribeDailyPlayStatFileListRequest;
@@ -391,7 +388,6 @@ const ComposeMediaTaskOutput = models.ComposeMediaTaskOutput;
 const DescribeMediaInfosRequest = models.DescribeMediaInfosRequest;
 const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
-const TerrorismImageResult = models.TerrorismImageResult;
 const DeleteVodDomainRequest = models.DeleteVodDomainRequest;
 const CreateAIRecognitionTemplateRequest = models.CreateAIRecognitionTemplateRequest;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
@@ -399,7 +395,7 @@ const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationIt
 const AiAnalysisTaskFrameTagResult = models.AiAnalysisTaskFrameTagResult;
 const AiReviewPornTaskOutput = models.AiReviewPornTaskOutput;
 const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextResult;
-const ImageContentReviewInput = models.ImageContentReviewInput;
+const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const PlayStatInfo = models.PlayStatInfo;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
@@ -446,7 +442,6 @@ const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
-const ReviewImageResponse = models.ReviewImageResponse;
 const DescribeStorageRegionsResponse = models.DescribeStorageRegionsResponse;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const ProcedureTask = models.ProcedureTask;
@@ -500,6 +495,7 @@ const DescribePersonSamplesResponse = models.DescribePersonSamplesResponse;
 const SplitMediaTaskInput = models.SplitMediaTaskInput;
 const PornConfigureInfo = models.PornConfigureInfo;
 const AiRecognitionTaskObjectSeqmentItem = models.AiRecognitionTaskObjectSeqmentItem;
+const RestoreMediaRequest = models.RestoreMediaRequest;
 const PullEventsRequest = models.PullEventsRequest;
 const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
 const DescribeAIAnalysisTemplatesResponse = models.DescribeAIAnalysisTemplatesResponse;
@@ -533,7 +529,6 @@ const DeleteSnapshotByTimeOffsetTemplateRequest = models.DeleteSnapshotByTimeOff
 const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphicsTemplatesResponse;
 const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
-const ReviewImageRequest = models.ReviewImageRequest;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
@@ -1203,26 +1198,6 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     }
 
     /**
-     * This API is <font color='red'>no longer used</font>. To initiate image recognition tasks, please use [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
-
-This API is used to initiate an image processing task. Image processing operations include the following:
-
-1. Intelligent recognition of pornographic, terroristic, and politically sensitive content
-
-><li>File size: < 5 MB</li>
-><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
-><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
-
-     * @param {ProcessImageRequest} req
-     * @param {function(string, ProcessImageResponse):void} cb
-     * @public
-     */
-    ProcessImage(req, cb) {
-        let resp = new ProcessImageResponse();
-        this.request("ProcessImage", req, resp, cb);
-    }
-
-    /**
      * This API is used to create a custom task flow template. Up to 50 templates can be created.
      * @param {CreateProcedureTemplateRequest} req
      * @param {function(string, CreateProcedureTemplateResponse):void} cb
@@ -1237,6 +1212,7 @@ This API is used to initiate an image processing task. Image processing operatio
      * 1. This API is used to prefetch a list of specified URLs.
 2. The URL domain names must have already been registered with VOD.
 3. Up to 20 URLs can be specified in one request.
+4. By default, the maximum number of URLs that can be refreshed per day is 10,000.
      * @param {PushUrlCacheRequest} req
      * @param {function(string, PushUrlCacheResponse):void} cb
      * @public
@@ -1319,6 +1295,20 @@ This API is used to initiate an image processing task. Image processing operatio
     DescribeStorageRegions(req, cb) {
         let resp = new DescribeStorageRegionsResponse();
         this.request("DescribeStorageRegions", req, resp, cb);
+    }
+
+    /**
+     * 1. This API is used to purge URLs.
+2. The URL domain names must have already been registered with VOD.
+3. Up to 20 URLs can be specified in one request.
+4. By default, the maximum number of URLs allowed for purge per day is 100,000.
+     * @param {RefreshUrlCacheRequest} req
+     * @param {function(string, RefreshUrlCacheResponse):void} cb
+     * @public
+     */
+    RefreshUrlCache(req, cb) {
+        let resp = new RefreshUrlCacheResponse();
+        this.request("RefreshUrlCache", req, resp, cb);
     }
 
     /**
@@ -1824,22 +1814,6 @@ This API is used to initiate an image processing task. Image processing operatio
     }
 
     /**
-     * This API is used to initiate an image recognition task to identify pornographic, terroristic, and politically sensitive content in images saved in VOD.
-
-><li>File size: < 5 MB</li>
-><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
-><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
-
-     * @param {ReviewImageRequest} req
-     * @param {function(string, ReviewImageResponse):void} cb
-     * @public
-     */
-    ReviewImage(req, cb) {
-        let resp = new ReviewImageResponse();
-        this.request("ReviewImage", req, resp, cb);
-    }
-
-    /**
      * This API is used to delete a custom sampled screencapturing template.
      * @param {DeleteSampleSnapshotTemplateRequest} req
      * @param {function(string, DeleteSampleSnapshotTemplateResponse):void} cb
@@ -1930,6 +1904,12 @@ Clipping for temporary sharing is lightweight and incurs no additional storage f
 10. Recognition of opening and closing credits, faces, full text, text keywords, full speech, speech keywords, and objects
 
 If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+
+A digital watermark has the following restrictions:
+<li>Digital watermarks can only be image watermarks.</li>
+<li>Digital watermarks must be looped.</li>
+<li>If you use digital watermarks, the output video must be in HLS format.</li>
+<li>Digital watermarks can only be displayed in the upper half of a video.</li>
      * @param {ProcessMediaRequest} req
      * @param {function(string, ProcessMediaResponse):void} cb
      * @public
@@ -1970,6 +1950,17 @@ If event notifications are used, the event type is [ProcedureStateChanged](https
     DeleteImageSpriteTemplate(req, cb) {
         let resp = new DeleteImageSpriteTemplateResponse();
         this.request("DeleteImageSpriteTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restore files from ARCHIVE or DEEP ARCHIVE. Files stored in ARCHIVE or DEEP ARCHIVE must be restored before they can be accessed. Restored files are available for a limited period of time.
+     * @param {RestoreMediaRequest} req
+     * @param {function(string, RestoreMediaResponse):void} cb
+     * @public
+     */
+    RestoreMedia(req, cb) {
+        let resp = new RestoreMediaResponse();
+        this.request("RestoreMedia", req, resp, cb);
     }
 
 

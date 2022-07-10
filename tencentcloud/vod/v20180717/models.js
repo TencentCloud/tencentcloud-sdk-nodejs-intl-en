@@ -106,6 +106,12 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Watermarking template name. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -161,12 +167,6 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
          */
         this.SvgTemplate = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -177,6 +177,7 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
@@ -200,7 +201,6 @@ class ModifyWatermarkTemplateRequest extends  AbstractModel {
             obj.deserialize(params.SvgTemplate)
             this.SvgTemplate = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -220,7 +220,7 @@ class CreateStorageRegionRequest extends  AbstractModel {
         this.StorageRegion = null;
 
         /**
-         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -350,7 +350,7 @@ class DescribeAllClassRequest extends  AbstractModel {
         super();
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -463,6 +463,12 @@ class CreateTranscodeTemplateRequest extends  AbstractModel {
         this.Container = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Transcoding template name. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -510,12 +516,6 @@ Default value: 0.
          */
         this.TEHDConfig = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -526,6 +526,7 @@ Default value: 0.
             return;
         }
         this.Container = 'Container' in params ? params.Container : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
@@ -548,7 +549,6 @@ Default value: 0.
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -761,6 +761,12 @@ class DescribeAnimatedGraphicsTemplatesRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Unique ID filter of animated image generating templates. Array length limit: 100.
          * @type {Array.<number> || null}
          */
@@ -786,12 +792,6 @@ class DescribeAnimatedGraphicsTemplatesRequest extends  AbstractModel {
          */
         this.Type = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -801,11 +801,11 @@ class DescribeAnimatedGraphicsTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -1324,7 +1324,7 @@ class ModifyDefaultStorageRegionRequest extends  AbstractModel {
         this.StorageRegion = null;
 
         /**
-         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -1455,6 +1455,12 @@ class ModifySampleSnapshotTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Name of a sampled screencapturing template. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -1520,12 +1526,6 @@ Default value: open.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
 <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
@@ -1546,6 +1546,7 @@ Default value: black.
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
@@ -1554,7 +1555,6 @@ Default value: black.
         this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
@@ -1925,7 +1925,7 @@ class ManageTaskRequest extends  AbstractModel {
         this.OperationType = null;
 
         /**
-         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -1983,6 +1983,12 @@ class CreateImageSpriteTemplateRequest extends  AbstractModel {
         this.ColumnCount = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Name of an image sprite generating template. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -2034,12 +2040,6 @@ Default value: open.
          */
         this.ResolutionAdaptive = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -2053,13 +2053,13 @@ Default value: open.
         this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
         this.RowCount = 'RowCount' in params ? params.RowCount : null;
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -2157,6 +2157,41 @@ Up to 10 labels are allowed, each containing no more than 16 characters.
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * RefreshUrlCache request structure.
+ * @class
+ */
+class RefreshUrlCacheRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The URLs to purge. You can specify up to 20 URLs per request.
+         * @type {Array.<string> || null}
+         */
+        this.Urls = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Urls = 'Urls' in params ? params.Urls : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -2343,7 +2378,7 @@ class DeleteContentReviewTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -2524,58 +2559,6 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
 }
 
 /**
- * The result for OCR-based image recognition.
- * @class
- */
-class ContentReviewOcrResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The confidence score for the OCR-based recognition result. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * The suggestion for handling the suspicious content detected based on OCR. Valid values:
-<li>pass/li>
-<li>review</li>
-<li>block</li>
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * The list of suspicious keywords detected based on OCR.
-         * @type {Array.<string> || null}
-         */
-        this.KeywordSet = null;
-
-        /**
-         * The coordinates (pixel) of the top-left and bottom-right corners of the frame where a suspicious keyword appears. Format: [x1, y1, x2, y2].
-         * @type {Array.<number> || null}
-         */
-        this.AreaCoordSet = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
-        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
-
-    }
-}
-
-/**
  * ComposeMedia response structure.
  * @class
  */
@@ -2706,7 +2689,7 @@ class DeleteSampleSnapshotTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -2747,16 +2730,28 @@ class DescribeStorageDataResponse extends  AbstractModel {
         this.TotalStorage = null;
 
         /**
+         * Current Standard storage capacity in bytes.
+         * @type {number || null}
+         */
+        this.StandardStorage = null;
+
+        /**
          * Current Standard_IA storage capacity in bytes.
          * @type {number || null}
          */
         this.InfrequentStorage = null;
 
         /**
-         * Current Standard storage capacity in bytes.
+         * The current ARCHIVE storage usage in bytes.
          * @type {number || null}
          */
-        this.StandardStorage = null;
+        this.ArchiveStorage = null;
+
+        /**
+         * The current DEEP ARCHIVE storage usage in bytes.
+         * @type {number || null}
+         */
+        this.DeepArchiveStorage = null;
 
         /**
          * Storage usage by billing region.
@@ -2781,8 +2776,10 @@ class DescribeStorageDataResponse extends  AbstractModel {
         }
         this.MediaCount = 'MediaCount' in params ? params.MediaCount : null;
         this.TotalStorage = 'TotalStorage' in params ? params.TotalStorage : null;
-        this.InfrequentStorage = 'InfrequentStorage' in params ? params.InfrequentStorage : null;
         this.StandardStorage = 'StandardStorage' in params ? params.StandardStorage : null;
+        this.InfrequentStorage = 'InfrequentStorage' in params ? params.InfrequentStorage : null;
+        this.ArchiveStorage = 'ArchiveStorage' in params ? params.ArchiveStorage : null;
+        this.DeepArchiveStorage = 'DeepArchiveStorage' in params ? params.DeepArchiveStorage : null;
 
         if (params.StorageStat) {
             this.StorageStat = new Array();
@@ -2806,22 +2803,23 @@ class AudioTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Audio stream encoder.
-When the outer `Container` parameter is `mp3`, the valid value is:
-<li>libmp3lame.</li>
-When the outer `Container` parameter is `ogg` or `flac`, the valid value is:
-<li>flac.</li>
-When the outer `Container` parameter is `m4a`, the valid values include:
-<li>libfdk_aac;</li>
-<li>libmp3lame;</li>
-<li>ac3.</li>
-When the outer `Container` parameter is `mp4` or `flv`, the valid values include:
-<li>libfdk_aac: more suitable for mp4;</li>
-<li>libmp3lame: More suitable for flv;</li>
-<li>mp2.</li>
-When the outer `Container` parameter is `hls`, the valid values include:
-<li>libfdk_aac;</li>
-<li>libmp3lame.</li>
+         * The audio codec.
+If `Container` parameter is `mp3`, the valid value is:
+<li>libmp3lame</li>
+If `Container` is `ogg` or `flac`, the valid value is:
+<li>flac</li>
+If `Container` is `m4a`, the valid values are:
+<li>libfdk_aac</li>
+<li>libmp3lame</li>
+<li>ac3</li>
+If `Container` is `mp4` or `flv`, the valid values are:
+<li>libfdk_aac: more suitable for mp4</li>
+<li>libmp3lame: More suitable for flv</li>
+<li>mp2</li>
+If `Container` is `hls`, the valid values are:
+<li>libfdk_aac</li>
+If `Format` is `HLS` or `MPEG-DASH`, the valid values are:
+<li>libfdk_aac</li>
          * @type {string || null}
          */
         this.Codec = null;
@@ -2878,7 +2876,7 @@ class ModifySubAppIdInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Subapplication ID.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -2926,7 +2924,7 @@ class DeletePersonSampleRequest extends  AbstractModel {
         this.PersonId = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -3025,22 +3023,23 @@ class AudioTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Audio stream encoder.
-When the outer `Container` parameter is `mp3`, the valid value is:
-<li>libmp3lame.</li>
-When the outer `Container` parameter is `ogg` or `flac`, the valid value is:
-<li>flac.</li>
-When the outer `Container` parameter is `m4a`, the valid values include:
-<li>libfdk_aac;</li>
-<li>libmp3lame;</li>
-<li>ac3.</li>
-When the outer `Container` parameter is `mp4` or `flv`, the valid values include:
-<li>libfdk_aac: more suitable for mp4;</li>
-<li>libmp3lame: More suitable for flv;</li>
-<li>mp2.</li>
-When the outer `Container` parameter is `hls`, the valid values include:
-<li>libfdk_aac;</li>
-<li>libmp3lame.</li>
+         * The audio codec.
+If `Container` parameter is `mp3`, the valid value is:
+<li>libmp3lame</li>
+If `Container` is `ogg` or `flac`, the valid value is:
+<li>flac</li>
+If `Container` is `m4a`, the valid values are:
+<li>libfdk_aac</li>
+<li>libmp3lame</li>
+<li>ac3</li>
+If `Container` is `mp4` or `flv`, the valid values are:
+<li>libfdk_aac: more suitable for mp4</li>
+<li>libmp3lame: More suitable for flv</li>
+<li>mp2</li>
+If `Container` is `hls`, the valid values are:
+<li>libfdk_aac</li>
+If `Format` is `HLS` or `MPEG-DASH`, the valid values are:
+<li>libfdk_aac</li>
          * @type {string || null}
          */
         this.Codec = null;
@@ -3177,6 +3176,12 @@ class ComposeMediaRequest extends  AbstractModel {
         this.Output = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Canvas used for composing video file.
          * @type {Canvas || null}
          */
@@ -3193,12 +3198,6 @@ class ComposeMediaRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.SessionId = null;
-
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
 
     }
 
@@ -3224,6 +3223,7 @@ class ComposeMediaRequest extends  AbstractModel {
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
         if (params.Canvas) {
             let obj = new Canvas();
@@ -3232,7 +3232,6 @@ class ComposeMediaRequest extends  AbstractModel {
         }
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -3543,8 +3542,9 @@ class CreateAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * Adaptive bitstream format. Valid values:
-<li>HLS.</li>
+         * The adaptive bitrate streaming format. Valid values:
+<li>HLS</li>
+<li>MPEG-DASH</li>
          * @type {string || null}
          */
         this.Format = null;
@@ -3555,6 +3555,12 @@ Note: the frame rate of all substreams must be the same; otherwise, the frame ra
          * @type {Array.<AdaptiveStreamTemplate> || null}
          */
         this.StreamInfos = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
         /**
          * Template name. Length limit: 64 characters.
@@ -3596,12 +3602,6 @@ Default value: no.
          */
         this.Comment = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -3621,12 +3621,12 @@ Default value: no.
                 this.StreamInfos.push(obj);
             }
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.DrmType = 'DrmType' in params ? params.DrmType : null;
         this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
         this.DisableHigherVideoResolution = 'DisableHigherVideoResolution' in params ? params.DisableHigherVideoResolution : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -3809,6 +3809,12 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
          * @type {string || null}
          */
@@ -3860,12 +3866,6 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
          */
         this.TEHDConfig = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -3876,6 +3876,7 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Container = 'Container' in params ? params.Container : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
@@ -3899,7 +3900,6 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -4194,7 +4194,7 @@ class DeleteSuperPlayerConfigRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -4497,6 +4497,12 @@ class CreatePersonSampleRequest extends  AbstractModel {
         this.Usages = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Description of a sample. Length limit: 1024 characters.
          * @type {string || null}
          */
@@ -4517,12 +4523,6 @@ Note: the image must be a relatively clear full-face photo of a person and has a
          */
         this.Tags = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -4534,10 +4534,10 @@ Note: the image must be a relatively clear full-face photo of a person and has a
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Usages = 'Usages' in params ? params.Usages : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.FaceContents = 'FaceContents' in params ? params.FaceContents : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -4782,6 +4782,34 @@ class AiRecognitionTaskOcrWordsResultOutput extends  AbstractModel {
 }
 
 /**
+ * RefreshUrlCache response structure.
+ * @class
+ */
+class RefreshUrlCacheResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The details of a video splicing task. This parameter is only valid for tasks initiated by the v2017 video splicing API.
  * @class
  */
@@ -4839,7 +4867,7 @@ class DeleteAIRecognitionTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -5005,7 +5033,7 @@ class AttachMediaSubtitlesRequest extends  AbstractModel {
         this.SubtitleIds = null;
 
         /**
-         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access the resources in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -5511,7 +5539,7 @@ class ModifyVodDomainAccelerateConfigRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -5881,7 +5909,7 @@ class ForbidMediaDistributionRequest extends  AbstractModel {
         this.Operation = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -6153,34 +6181,6 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
 }
 
 /**
- * ModifyAIRecognitionTemplate response structure.
- * @class
- */
-class ModifyAIRecognitionTemplateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Information of a playback statistics file
  * @class
  */
@@ -6238,6 +6238,12 @@ class ModifyMediaInfoRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.FileId = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
         /**
          * Media filename, which can contain up to 64 characters.
@@ -6326,12 +6332,6 @@ In the same request, `ClearTags` and `AddTags` cannot be present at the same tim
          */
         this.ClearSubtitles = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -6342,6 +6342,7 @@ In the same request, `ClearTags` and `AddTags` cannot be present at the same tim
             return;
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.ClassId = 'ClassId' in params ? params.ClassId : null;
@@ -6372,7 +6373,6 @@ In the same request, `ClearTags` and `AddTags` cannot be present at the same tim
         }
         this.DeleteSubtitleIds = 'DeleteSubtitleIds' in params ? params.DeleteSubtitleIds : null;
         this.ClearSubtitles = 'ClearSubtitles' in params ? params.ClearSubtitles : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -6392,7 +6392,7 @@ class DeleteTranscodeTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -6408,6 +6408,34 @@ class DeleteTranscodeTemplateRequest extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * The information of a digital watermark.
+ * @class
+ */
+class TraceWatermarkInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The watermark template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -6944,6 +6972,12 @@ class CreateVodDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Region to enable acceleration. Valid values:
 <li>`Chinese Mainland`</li>
 <li>`Outside Chinese Mainland`</li>
@@ -6952,12 +6986,6 @@ If `AccelerateArea` is not specified, VOD will enable acceleration in or outside
          * @type {string || null}
          */
         this.AccelerateArea = null;
-
-        /**
-         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
 
     }
 
@@ -6969,8 +6997,8 @@ If `AccelerateArea` is not specified, VOD will enable acceleration in or outside
             return;
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
-        this.AccelerateArea = 'AccelerateArea' in params ? params.AccelerateArea : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.AccelerateArea = 'AccelerateArea' in params ? params.AccelerateArea : null;
 
     }
 }
@@ -7026,6 +7054,12 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
         this.ProcedureName = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
          * @type {number || null}
          */
@@ -7055,12 +7089,6 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
          */
         this.ExtInfo = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -7072,12 +7100,12 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.ProcedureName = 'ProcedureName' in params ? params.ProcedureName : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -7344,7 +7372,7 @@ class CreateWordSamplesRequest extends  AbstractModel {
         this.Words = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -8013,6 +8041,12 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Whether to clip persistently. 0: no, 1: yes. Default: no.
          * @type {number || null}
          */
@@ -8048,12 +8082,6 @@ class LiveRealTimeClipRequest extends  AbstractModel {
          */
         this.ExtInfo = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -8066,13 +8094,13 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.StreamId = 'StreamId' in params ? params.StreamId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.IsPersistence = 'IsPersistence' in params ? params.IsPersistence : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.Procedure = 'Procedure' in params ? params.Procedure : null;
         this.MetaDataRequired = 'MetaDataRequired' in params ? params.MetaDataRequired : null;
         this.Host = 'Host' in params ? params.Host : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -8092,7 +8120,7 @@ class DeleteAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -8352,7 +8380,7 @@ class DeleteAIAnalysisTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -8529,118 +8557,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.FileType = 'FileType' in params ? params.FileType : null;
-
-    }
-}
-
-/**
- * The result for intelligent image recognition.
- * @class
- */
-class ContentReviewResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The result type. Valid values:
-<li>Porn.Image: Recognition of pornographic content in the image</li>
-<li>Terrorism.Image: Recognition of terrorism content in the image</li>
-<li>Political.Image: Recognition of politically sensitive content in the image</li>
-<li>Porn.Ocr: OCR-based recognition of pornographic content in the image</li>
-<li>Terrorism.Ocr: OCR-based recognition of terrorism content in the image</li>
-<li>Political.Ocr: OCR-based recognition of politically sensitive content in the image</li>
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * The pornographic content detected in the image. This parameter is valid if `Type` is `Porn.Image`.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {PornImageResult || null}
-         */
-        this.PornImageResult = null;
-
-        /**
-         * The terrorism content detected in the image. This parameter is valid if `Type` is `Terrorism.Image`.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {TerrorismImageResult || null}
-         */
-        this.TerrorismImageResult = null;
-
-        /**
-         * The politically sensitive content detected in the image. This parameter is valid if `Type` is `Political.Image`.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {PoliticalImageResult || null}
-         */
-        this.PoliticalImageResult = null;
-
-        /**
-         * The pornographic content detected in the image based on OCR. This parameter is valid if `Type` is `Porn.Ocr`.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {ContentReviewOcrResult || null}
-         */
-        this.PornOcrResult = null;
-
-        /**
-         * The terrorism content detected in the image based on OCR. This parameter is valid if `Type` is `Terrorism.Ocr`.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {ContentReviewOcrResult || null}
-         */
-        this.TerrorismOcrResult = null;
-
-        /**
-         * The politically sensitive content detected in the image based on OCR. This parameter is valid if `Type` is `Political.Ocr`.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {ContentReviewOcrResult || null}
-         */
-        this.PoliticalOcrResult = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-
-        if (params.PornImageResult) {
-            let obj = new PornImageResult();
-            obj.deserialize(params.PornImageResult)
-            this.PornImageResult = obj;
-        }
-
-        if (params.TerrorismImageResult) {
-            let obj = new TerrorismImageResult();
-            obj.deserialize(params.TerrorismImageResult)
-            this.TerrorismImageResult = obj;
-        }
-
-        if (params.PoliticalImageResult) {
-            let obj = new PoliticalImageResult();
-            obj.deserialize(params.PoliticalImageResult)
-            this.PoliticalImageResult = obj;
-        }
-
-        if (params.PornOcrResult) {
-            let obj = new ContentReviewOcrResult();
-            obj.deserialize(params.PornOcrResult)
-            this.PornOcrResult = obj;
-        }
-
-        if (params.TerrorismOcrResult) {
-            let obj = new ContentReviewOcrResult();
-            obj.deserialize(params.TerrorismOcrResult)
-            this.TerrorismOcrResult = obj;
-        }
-
-        if (params.PoliticalOcrResult) {
-            let obj = new ContentReviewOcrResult();
-            obj.deserialize(params.PoliticalOcrResult)
-            this.PoliticalOcrResult = obj;
-        }
 
     }
 }
@@ -8965,6 +8881,12 @@ class DescribeAdaptiveDynamicStreamingTemplatesRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Unique ID filter of transcoding to adaptive bitrate streaming templates. Array length limit: 100.
          * @type {Array.<number> || null}
          */
@@ -8990,12 +8912,6 @@ class DescribeAdaptiveDynamicStreamingTemplatesRequest extends  AbstractModel {
          */
         this.Type = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -9005,11 +8921,11 @@ class DescribeAdaptiveDynamicStreamingTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -9424,6 +9340,12 @@ class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Name of an animated image generating template. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -9484,12 +9406,6 @@ Default value: open.
          */
         this.Comment = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -9500,6 +9416,7 @@ Default value: open.
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
@@ -9508,7 +9425,6 @@ Default value: open.
         this.Fps = 'Fps' in params ? params.Fps : null;
         this.Quality = 'Quality' in params ? params.Quality : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -9580,6 +9496,12 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Unique ID filter of time point screencapturing templates. Array length limit: 100.
          * @type {Array.<number> || null}
          */
@@ -9605,12 +9527,6 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
          */
         this.Type = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -9620,11 +9536,11 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -9739,7 +9655,7 @@ class DeleteWordSamplesRequest extends  AbstractModel {
         this.Keywords = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -10263,10 +10179,10 @@ class DescribeWatermarkTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * Unique ID filter of watermarking templates. Array length limit: 100.
-         * @type {Array.<number> || null}
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
          */
-        this.Definitions = null;
+        this.SubAppId = null;
 
         /**
          * Watermark type filter. Valid values:
@@ -10283,18 +10199,18 @@ class DescribeWatermarkTemplatesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
+         * Unique ID filter of watermarking templates. Array length limit: 100.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
          * Number of returned entries
 <li>Default value: 10;</li>
 <li>Maximum value: 100.</li>
          * @type {number || null}
          */
         this.Limit = null;
-
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
 
     }
 
@@ -10305,11 +10221,11 @@ class DescribeWatermarkTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -10769,14 +10685,21 @@ class ModifyAdaptiveDynamicStreamingTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Template name. Length limit: 64 characters.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Adaptive bitstream format. Valid values:
-<li>HLS.</li>
+         * The adaptive bitrate streaming format. Valid values:
+<li>HLS</li>
+<li>MPEG-DASH</li>
          * @type {string || null}
          */
         this.Format = null;
@@ -10810,12 +10733,6 @@ Note: the frame rate of all streams must be the same; otherwise, the frame rate 
          */
         this.Comment = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -10826,6 +10743,7 @@ Note: the frame rate of all streams must be the same; otherwise, the frame rate 
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
@@ -10840,7 +10758,6 @@ Note: the frame rate of all streams must be the same; otherwise, the frame rate 
             }
         }
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -11011,6 +10928,12 @@ class ModifyWordSampleRequest extends  AbstractModel {
         this.Keyword = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * <b>Keyword usage. Valid values:</b>
 1. Recognition.Ocr: OCR-based content recognition
 2. Recognition.Asr: ASR-based content recognition
@@ -11030,12 +10953,6 @@ class ModifyWordSampleRequest extends  AbstractModel {
          */
         this.TagOperationInfo = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -11046,6 +10963,7 @@ class ModifyWordSampleRequest extends  AbstractModel {
             return;
         }
         this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Usages = 'Usages' in params ? params.Usages : null;
 
         if (params.TagOperationInfo) {
@@ -11053,7 +10971,6 @@ class ModifyWordSampleRequest extends  AbstractModel {
             obj.deserialize(params.TagOperationInfo)
             this.TagOperationInfo = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -11387,7 +11304,7 @@ class ModifyMediaStorageClassRequest extends  AbstractModel {
         this.StorageClass = null;
 
         /**
-         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -11600,6 +11517,12 @@ class ProcessMediaRequest extends  AbstractModel {
         this.FileId = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Parameter of video processing task.
          * @type {MediaProcessTaskInput || null}
          */
@@ -11653,12 +11576,6 @@ class ProcessMediaRequest extends  AbstractModel {
          */
         this.ExtInfo = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -11669,6 +11586,7 @@ class ProcessMediaRequest extends  AbstractModel {
             return;
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
         if (params.MediaProcessTask) {
             let obj = new MediaProcessTaskInput();
@@ -11698,153 +11616,6 @@ class ProcessMediaRequest extends  AbstractModel {
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-
-    }
-}
-
-/**
- * The result for the recognition of pornographic content in the image.
- * @class
- */
-class PornImageResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The confidence score for the pornographic content recognition result. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * The suggestion for handling the detected pornographic content. Valid values:
-<li>pass/li>
-<li>review</li>
-<li>block</li>
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * The label for the detected pornographic content. Valid values:
-<li>porn</li>
-<li>sexy</li>
-<li>vulgar</li>
-<li>intimacy</li>
-         * @type {string || null}
-         */
-        this.Label = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Label = 'Label' in params ? params.Label : null;
-
-    }
-}
-
-/**
- * ProcessImage response structure.
- * @class
- */
-class ProcessImageResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The image recognition result.
-         * @type {Array.<ContentReviewResult> || null}
-         */
-        this.ContentReviewResultSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ContentReviewResultSet) {
-            this.ContentReviewResultSet = new Array();
-            for (let z in params.ContentReviewResultSet) {
-                let obj = new ContentReviewResult();
-                obj.deserialize(params.ContentReviewResultSet[z]);
-                this.ContentReviewResultSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ProcessImage request structure.
- * @class
- */
-class ProcessImageRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique ID of the media file. For this API to work, the file must be an image.
-         * @type {string || null}
-         */
-        this.FileId = null;
-
-        /**
-         * Operation. `ContentReview` is the only valid value currently.
-         * @type {string || null}
-         */
-        this.Operation = null;
-
-        /**
-         * Image recognition parameters. This parameter is valid if `Operation` is `ContentReview`.
-         * @type {ImageContentReviewInput || null}
-         */
-        this.ContentReviewInput = null;
-
-        /**
-         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
-
-        if (params.ContentReviewInput) {
-            let obj = new ImageContentReviewInput();
-            obj.deserialize(params.ContentReviewInput)
-            this.ContentReviewInput = obj;
-        }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -11970,6 +11741,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * RestoreMedia response structure.
+ * @class
+ */
+class RestoreMediaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12515,16 +12314,16 @@ class DeleteMediaRequest extends  AbstractModel {
         this.FileId = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Content to be deleted. The default value is "[]", which indicates to delete the media file and all its corresponding files generated by video processing.
          * @type {Array.<MediaDeleteItem> || null}
          */
         this.DeleteParts = null;
-
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
 
     }
 
@@ -12536,6 +12335,7 @@ class DeleteMediaRequest extends  AbstractModel {
             return;
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
         if (params.DeleteParts) {
             this.DeleteParts = new Array();
@@ -12545,7 +12345,6 @@ class DeleteMediaRequest extends  AbstractModel {
                 this.DeleteParts.push(obj);
             }
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -12563,6 +12362,12 @@ class CreateSuperPlayerConfigRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Name = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
         /**
          * Type of audio/video played. Valid values:
@@ -12647,12 +12452,6 @@ This parameter is required if `AudioVideoType` is `Transcode`.
          */
         this.Comment = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -12663,6 +12462,7 @@ This parameter is required if `AudioVideoType` is `Transcode`.
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.AudioVideoType = 'AudioVideoType' in params ? params.AudioVideoType : null;
         this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
         this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
@@ -12686,7 +12486,6 @@ This parameter is required if `AudioVideoType` is `Transcode`.
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Scheme = 'Scheme' in params ? params.Scheme : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -12857,6 +12656,12 @@ class SimpleHlsClipRequest extends  AbstractModel {
         this.Url = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Start offset time of clipping in seconds. Default value: 0, which means to clip from the beginning of the video. A negative number indicates how many seconds from the end of the video clipping will start at. For example, -10 means that clipping will start at the 10th second from the end.
          * @type {number || null}
          */
@@ -12874,12 +12679,6 @@ class SimpleHlsClipRequest extends  AbstractModel {
          */
         this.IsPersistence = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -12890,10 +12689,10 @@ class SimpleHlsClipRequest extends  AbstractModel {
             return;
         }
         this.Url = 'Url' in params ? params.Url : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.IsPersistence = 'IsPersistence' in params ? params.IsPersistence : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -12934,58 +12733,6 @@ Default value: 0, which indicates to delete all videos of the type specified by 
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Definition = 'Definition' in params ? params.Definition : null;
-
-    }
-}
-
-/**
- * The result for the recognition of politically sensitive content in the image.
- * @class
- */
-class PoliticalImageResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The confidence score for the politically sensitive content recognition result. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * The suggestion for handling the detected politically sensitive content. Valid values:
-<li>pass/li>
-<li>review</li>
-<li>block</li>
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * The name of the politically sensitive content or banned icon detected.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * The coordinates (pixel) of the top-left and bottom-right corners of the frame where politically sensitive content or a banned icon appears. Format: [x1, y1, x2, y2].
-         * @type {Array.<number> || null}
-         */
-        this.AreaCoordSet = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
 
     }
 }
@@ -13133,7 +12880,7 @@ class DescribeDailyPlayStatFileListRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -13251,7 +12998,7 @@ class DescribeStorageDataRequest extends  AbstractModel {
         super();
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -13804,6 +13551,12 @@ class CreateWatermarkTemplateRequest extends  AbstractModel {
         this.Type = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Watermarking template name. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -13862,12 +13615,6 @@ Default value: 0 px.
          */
         this.SvgTemplate = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -13878,6 +13625,7 @@ Default value: 0 px.
             return;
         }
         this.Type = 'Type' in params ? params.Type : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
@@ -13901,7 +13649,6 @@ Default value: 0 px.
             obj.deserialize(params.SvgTemplate)
             this.SvgTemplate = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -14782,6 +14529,12 @@ class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Unique ID filter of image sprite generating templates. Array length limit: 100.
          * @type {Array.<number> || null}
          */
@@ -14807,12 +14560,6 @@ class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
          */
         this.Type = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -14822,11 +14569,11 @@ class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -14881,6 +14628,12 @@ class ModifyVodDomainConfigRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/14046?from_cn_redirect=1) policy
          * @type {RefererAuthPolicy || null}
          */
@@ -14892,12 +14645,6 @@ class ModifyVodDomainConfigRequest extends  AbstractModel {
          */
         this.UrlSignatureAuthPolicy = null;
 
-        /**
-         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -14908,6 +14655,7 @@ class ModifyVodDomainConfigRequest extends  AbstractModel {
             return;
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
         if (params.RefererAuthPolicy) {
             let obj = new RefererAuthPolicy();
@@ -14920,7 +14668,6 @@ class ModifyVodDomainConfigRequest extends  AbstractModel {
             obj.deserialize(params.UrlSignatureAuthPolicy)
             this.UrlSignatureAuthPolicy = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -15172,7 +14919,7 @@ class ModifySubAppIdStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * Subapplication ID.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -15650,6 +15397,12 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Unique ID filter of video content analysis templates. Array length limit: 100.
          * @type {Array.<number> || null}
          */
@@ -15667,12 +15420,6 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -15682,10 +15429,10 @@ class DescribeAIAnalysisTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -16139,6 +15886,12 @@ class DescribeCdnLogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Maximum return results of pulling paginated queries. Default value: 100; maximum value: 1000
          * @type {number || null}
          */
@@ -16149,12 +15902,6 @@ class DescribeCdnLogsRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Offset = null;
-
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
 
     }
 
@@ -16168,9 +15915,9 @@ class DescribeCdnLogsRequest extends  AbstractModel {
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -16600,7 +16347,7 @@ class DescribeImageReviewUsageDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -16948,6 +16695,12 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Name of an intelligent content recognition template. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -17005,12 +16758,6 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
          */
         this.ReviewWallSwitch = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -17021,6 +16768,7 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
@@ -17055,7 +16803,6 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         }
         this.ScreenshotInterval = 'ScreenshotInterval' in params ? params.ScreenshotInterval : null;
         this.ReviewWallSwitch = 'ReviewWallSwitch' in params ? params.ReviewWallSwitch : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -17740,6 +17487,12 @@ class ApplyUploadRequest extends  AbstractModel {
         this.MediaType = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Media name.
          * @type {string || null}
          */
@@ -17794,12 +17547,6 @@ class ApplyUploadRequest extends  AbstractModel {
          */
         this.ExtInfo = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -17810,6 +17557,7 @@ class ApplyUploadRequest extends  AbstractModel {
             return;
         }
         this.MediaType = 'MediaType' in params ? params.MediaType : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.MediaName = 'MediaName' in params ? params.MediaName : null;
         this.CoverType = 'CoverType' in params ? params.CoverType : null;
         this.Procedure = 'Procedure' in params ? params.Procedure : null;
@@ -17819,7 +17567,6 @@ class ApplyUploadRequest extends  AbstractModel {
         this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -18126,11 +17873,17 @@ class PullUploadRequest extends  AbstractModel {
         super();
 
         /**
-         * URL of the media to be pulled. Supported media format: HLS; unsupported media format: DASH.
-For more information about supported extensions, please see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
+         * The URL of the media to pull, which can be in HLS format, but not DASH format.
+For more information about supported extensions, see [Media types](https://intl.cloud.tencent.com/document/product/266/9760#media-types). Please make sure the URL is accessible.
          * @type {string || null}
          */
         this.MediaUrl = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
         /**
          * Media name.
@@ -18189,12 +17942,6 @@ For more information about supported extensions, please see [Media Types](https:
         this.ExtInfo = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * Source context, which is used to pass through the user request information. The [upload callback](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) API will return the value of this field. It can contain up to 250 characters.
          * @type {string || null}
          */
@@ -18210,6 +17957,7 @@ For more information about supported extensions, please see [Media Types](https:
             return;
         }
         this.MediaUrl = 'MediaUrl' in params ? params.MediaUrl : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.MediaName = 'MediaName' in params ? params.MediaName : null;
         this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
         this.Procedure = 'Procedure' in params ? params.Procedure : null;
@@ -18219,7 +17967,6 @@ For more information about supported extensions, please see [Media Types](https:
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
 
     }
@@ -18476,6 +18223,13 @@ class DescribeCDNUsageDataRequest extends  AbstractModel {
         this.DataType = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+You can set this parameter to 1 to query the total usage of all applications (including the primary application) as an admin (only 1-day granularity is supported).</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Time granularity of usage data in minutes. Valid values:
 <li>5: 5-minute granularity. The data at 5-minute granularity in the query period will be returned.</li>
 <li>60: 1-hour granularity. The data at 1-hour granularity in the query period will be returned.</li>
@@ -18491,13 +18245,6 @@ Default value: 1440. Data at 1-day granularity will be returned.
          */
         this.DomainNames = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin. In this case, only 1-day granularity is supported.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -18510,9 +18257,9 @@ When the value of this field is 1, the total usage of all subapplications (inclu
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.DataType = 'DataType' in params ? params.DataType : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.DataInterval = 'DataInterval' in params ? params.DataInterval : null;
         this.DomainNames = 'DomainNames' in params ? params.DomainNames : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -18656,7 +18403,7 @@ class DescribeReviewDetailsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -19040,6 +18787,12 @@ class DescribeMediaPlayStatDetailsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Granularity. Valid values:
 <li>Hour</li>
 <li>Day</li>
@@ -19047,12 +18800,6 @@ The default value depends on the time period queried. If the time period is shor
          * @type {string || null}
          */
         this.Interval = null;
-
-        /**
-         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
 
     }
 
@@ -19066,8 +18813,8 @@ The default value depends on the time period queried. If the time period is shor
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Interval = 'Interval' in params ? params.Interval : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
 
     }
 }
@@ -19212,6 +18959,12 @@ class DescribeSampleSnapshotTemplatesRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Unique ID filter of sampled screencapturing templates. Array length limit: 100.
          * @type {Array.<number> || null}
          */
@@ -19237,12 +18990,6 @@ class DescribeSampleSnapshotTemplatesRequest extends  AbstractModel {
          */
         this.Type = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -19252,11 +18999,11 @@ class DescribeSampleSnapshotTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -19624,10 +19371,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.WatermarkSet = null;
 
         /**
-         * List of blurs. Up to 10 ones can be supported.
-         * @type {Array.<MosaicInput> || null}
+         * Digital watermark.
+         * @type {TraceWatermarkInput || null}
          */
-        this.MosaicSet = null;
+        this.TraceWatermark = null;
 
         /**
          * List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
@@ -19636,13 +19383,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.HeadTailSet = null;
 
         /**
-         * Start time offset of a transcoded video, in seconds.
-<li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
-<li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
-<li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
-         * @type {number || null}
+         * List of blurs. Up to 10 ones can be supported.
+         * @type {Array.<MosaicInput> || null}
          */
-        this.StartTimeOffset = null;
+        this.MosaicSet = null;
 
         /**
          * End time offset of a transcoded video, in seconds.
@@ -19652,6 +19396,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {number || null}
          */
         this.EndTimeOffset = null;
+
+        /**
+         * Start time offset of a transcoded video, in seconds.
+<li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
+<li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
+<li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
 
     }
 
@@ -19673,13 +19426,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
 
-        if (params.MosaicSet) {
-            this.MosaicSet = new Array();
-            for (let z in params.MosaicSet) {
-                let obj = new MosaicInput();
-                obj.deserialize(params.MosaicSet[z]);
-                this.MosaicSet.push(obj);
-            }
+        if (params.TraceWatermark) {
+            let obj = new TraceWatermarkInput();
+            obj.deserialize(params.TraceWatermark)
+            this.TraceWatermark = obj;
         }
 
         if (params.HeadTailSet) {
@@ -19690,8 +19440,17 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.HeadTailSet.push(obj);
             }
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+
+        if (params.MosaicSet) {
+            this.MosaicSet = new Array();
+            for (let z in params.MosaicSet) {
+                let obj = new MosaicInput();
+                obj.deserialize(params.MosaicSet[z]);
+                this.MosaicSet.push(obj);
+            }
+        }
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
 
     }
 }
@@ -19709,6 +19468,12 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Definition = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
         /**
          * Video content recognition template name. Length limit: 64 characters.
@@ -19776,12 +19541,6 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
          */
         this.ScreenshotInterval = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -19792,6 +19551,7 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
@@ -19843,7 +19603,6 @@ class ModifyAIRecognitionTemplateRequest extends  AbstractModel {
             this.ObjectConfigure = obj;
         }
         this.ScreenshotInterval = 'ScreenshotInterval' in params ? params.ScreenshotInterval : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -19857,7 +19616,7 @@ class DescribeStorageRegionsRequest extends  AbstractModel {
         super();
 
         /**
-         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -20014,6 +19773,12 @@ class DescribeCDNStatDetailsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * List of domain names. The usage data of up to 20 domain names can be queried at a time. The usage data of all domain names is returned by default.
          * @type {Array.<string> || null}
          */
@@ -20098,12 +19863,6 @@ If the difference between `StartTime` and `EndTime` is larger than 24 hours, the
          */
         this.DataInterval = null;
 
-        /**
-         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -20116,12 +19875,12 @@ If the difference between `StartTime` and `EndTime` is larger than 24 hours, the
         this.Metric = 'Metric' in params ? params.Metric : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.DomainNames = 'DomainNames' in params ? params.DomainNames : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.Districts = 'Districts' in params ? params.Districts : null;
         this.Isps = 'Isps' in params ? params.Isps : null;
         this.DataInterval = 'DataInterval' in params ? params.DataInterval : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -20412,7 +20171,7 @@ class PushUrlCacheRequest extends  AbstractModel {
         this.Urls = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -20971,7 +20730,7 @@ class ModifyClassRequest extends  AbstractModel {
         this.ClassName = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -21201,6 +20960,12 @@ class ModifyPersonSampleRequest extends  AbstractModel {
         this.PersonId = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Name. Length limit: 128 characters.
          * @type {string || null}
          */
@@ -21233,12 +20998,6 @@ class ModifyPersonSampleRequest extends  AbstractModel {
          */
         this.TagOperationInfo = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -21249,6 +21008,7 @@ class ModifyPersonSampleRequest extends  AbstractModel {
             return;
         }
         this.PersonId = 'PersonId' in params ? params.PersonId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.Usages = 'Usages' in params ? params.Usages : null;
@@ -21264,7 +21024,6 @@ class ModifyPersonSampleRequest extends  AbstractModel {
             obj.deserialize(params.TagOperationInfo)
             this.TagOperationInfo = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -21308,58 +21067,6 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
 }
 
 /**
- * The result for the recognition of terrorism content in the image.
- * @class
- */
-class TerrorismImageResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The confidence score for the terrorism content recognition result. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * The suggestion for handling the detected terrorism content. Valid values:
-<li>pass/li>
-<li>review</li>
-<li>block</li>
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * The label for the detected terrorism content. Valid values:
-<li>guns</li>
-<li>crowd</li>
-<li>police</li>
-<li>bloody</li>
-<li>banners</li>
-<li>explosion</li>
-<li>scenario (terrorist scenes) </li>
-         * @type {string || null}
-         */
-        this.Label = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Label = 'Label' in params ? params.Label : null;
-
-    }
-}
-
-/**
  * DeleteVodDomain request structure.
  * @class
  */
@@ -21374,7 +21081,7 @@ class DeleteVodDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -21401,6 +21108,12 @@ class DeleteVodDomainRequest extends  AbstractModel {
 class CreateAIRecognitionTemplateRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
         /**
          * Video content recognition template name. Length limit: 64 characters.
@@ -21468,12 +21181,6 @@ class CreateAIRecognitionTemplateRequest extends  AbstractModel {
          */
         this.ScreenshotInterval = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -21483,6 +21190,7 @@ class CreateAIRecognitionTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
@@ -21534,7 +21242,6 @@ class CreateAIRecognitionTemplateRequest extends  AbstractModel {
             this.ObjectConfigure = obj;
         }
         this.ScreenshotInterval = 'ScreenshotInterval' in params ? params.ScreenshotInterval : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -21837,19 +21544,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The request parameters for an image recognition task.
+ * ModifyAIRecognitionTemplate response structure.
  * @class
  */
-class ImageContentReviewInput extends  AbstractModel {
+class ModifyAIRecognitionTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The ID of the image recognition template to use. Valid values:
-<li>10: All recognition types enabled</li>
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Definition = null;
+        this.RequestId = null;
 
     }
 
@@ -21860,7 +21566,7 @@ class ImageContentReviewInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -22283,7 +21989,7 @@ class DeleteProcedureTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -22947,6 +22653,12 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         this.ReviewWallSwitch = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Name of an intelligent content recognition template. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -22996,12 +22708,6 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
          */
         this.ScreenshotInterval = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -23012,6 +22718,7 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
             return;
         }
         this.ReviewWallSwitch = 'ReviewWallSwitch' in params ? params.ReviewWallSwitch : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
@@ -23045,7 +22752,6 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
             this.UserDefineConfigure = obj;
         }
         this.ScreenshotInterval = 'ScreenshotInterval' in params ? params.ScreenshotInterval : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -23057,6 +22763,12 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
 class DescribeContentReviewTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
         /**
          * Unique IDs for filters of an intelligent content recognition template. Array length limit: 100.
@@ -23076,12 +22788,6 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -23091,10 +22797,10 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -23121,6 +22827,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.WatermarkSet = null;
 
         /**
+         * Digital watermark.
+         * @type {TraceWatermarkInput || null}
+         */
+        this.TraceWatermark = null;
+
+        /**
          * List of subtitle IDs (maximum: 16)
          * @type {Array.<string> || null}
          */
@@ -23144,6 +22856,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.WatermarkSet[z]);
                 this.WatermarkSet.push(obj);
             }
+        }
+
+        if (params.TraceWatermark) {
+            let obj = new TraceWatermarkInput();
+            obj.deserialize(params.TraceWatermark)
+            this.TraceWatermark = obj;
         }
         this.SubtitleSet = 'SubtitleSet' in params ? params.SubtitleSet : null;
 
@@ -23645,7 +23363,7 @@ class DeleteImageSpriteTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -23686,7 +23404,7 @@ class CreateClassRequest extends  AbstractModel {
         this.ClassName = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -24413,49 +24131,6 @@ Note: This field may return `null`, indicating that no valid value can be found.
 }
 
 /**
- * ReviewImage response structure.
- * @class
- */
-class ReviewImageResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The image recognition result.
-         * @type {Array.<ContentReviewResult> || null}
-         */
-        this.ReviewResultSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.ReviewResultSet) {
-            this.ReviewResultSet = new Array();
-            for (let z in params.ReviewResultSet) {
-                let obj = new ContentReviewResult();
-                obj.deserialize(params.ReviewResultSet[z]);
-                this.ReviewResultSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeStorageRegions response structure.
  * @class
  */
@@ -24513,6 +24188,12 @@ class ModifySnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Name of a time point screencapturing template. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -24562,12 +24243,6 @@ Default value: open.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
 <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
@@ -24588,13 +24263,13 @@ Default value: black.
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
@@ -25371,6 +25046,12 @@ class DescribeTasksRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
          * @type {string || null}
          */
@@ -25414,12 +25095,6 @@ class DescribeTasksRequest extends  AbstractModel {
          */
         this.ScrollToken = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -25429,6 +25104,7 @@ class DescribeTasksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.FileId = 'FileId' in params ? params.FileId : null;
 
@@ -25451,7 +25127,6 @@ class DescribeTasksRequest extends  AbstractModel {
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -25632,6 +25307,12 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Video content analysis template name. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -25673,12 +25354,6 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
          */
         this.HighlightConfigure = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -25688,6 +25363,7 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
@@ -25720,7 +25396,6 @@ class CreateAIAnalysisTemplateRequest extends  AbstractModel {
             obj.deserialize(params.HighlightConfigure)
             this.HighlightConfigure = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -25917,6 +25592,12 @@ class ModifyImageSpriteTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Name of an image sprite generating template. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -25986,12 +25667,6 @@ Default value: black.
          */
         this.Comment = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -26002,6 +25677,7 @@ Default value: black.
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
@@ -26012,7 +25688,6 @@ Default value: black.
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -26060,7 +25735,7 @@ class DeleteWatermarkTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -26161,6 +25836,12 @@ class DescribeWordSamplesRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * <b>Keyword usage. Valid values:</b>
 1. Recognition.Ocr: OCR-based content recognition
 2. Recognition.Asr: ASR-based content recognition
@@ -26198,12 +25879,6 @@ You can select multiple elements, which are connected by OR logic. If a use case
          */
         this.Limit = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -26213,12 +25888,12 @@ You can select multiple elements, which are connected by OR logic. If a use case
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Usages = 'Usages' in params ? params.Usages : null;
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -26302,6 +25977,12 @@ class ModifyAIAnalysisTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Video content analysis template name. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -26343,12 +26024,6 @@ class ModifyAIAnalysisTemplateRequest extends  AbstractModel {
          */
         this.HighlightConfigure = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -26359,6 +26034,7 @@ class ModifyAIAnalysisTemplateRequest extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
@@ -26391,7 +26067,6 @@ class ModifyAIAnalysisTemplateRequest extends  AbstractModel {
             obj.deserialize(params.HighlightConfigure)
             this.HighlightConfigure = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -26411,15 +26086,13 @@ class CommitUploadResponse extends  AbstractModel {
         this.FileId = null;
 
         /**
-         * Media playback address.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The media playback URL.
          * @type {string || null}
          */
         this.MediaUrl = null;
 
         /**
-         * Media cover address.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The thumbnail URL.
          * @type {string || null}
          */
         this.CoverUrl = null;
@@ -26810,7 +26483,7 @@ class DeleteClassRequest extends  AbstractModel {
         this.ClassId = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -26837,6 +26510,12 @@ class DeleteClassRequest extends  AbstractModel {
 class DescribeTranscodeTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
         /**
          * Unique ID filter of transcoding templates. Array length limit: 100.
@@ -26880,12 +26559,6 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -26895,13 +26568,13 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.ContainerType = 'ContainerType' in params ? params.ContainerType : null;
         this.TEHDType = 'TEHDType' in params ? params.TEHDType : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -27076,6 +26749,12 @@ class CreateAnimatedGraphicsTemplateRequest extends  AbstractModel {
         this.Fps = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Maximum value of the width (or long side) of an animated image in px. Value range: 0 and [128, 4,096].
 <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
 <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
@@ -27130,12 +26809,6 @@ Default value: open.
          */
         this.Comment = null;
 
-        /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -27146,6 +26819,7 @@ Default value: open.
             return;
         }
         this.Fps = 'Fps' in params ? params.Fps : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
@@ -27153,7 +26827,6 @@ Default value: open.
         this.Quality = 'Quality' in params ? params.Quality : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -27216,6 +26889,12 @@ class ExecuteFunctionRequest extends  AbstractModel {
         this.FunctionArg = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
          * @type {string || null}
          */
@@ -27233,12 +26912,6 @@ class ExecuteFunctionRequest extends  AbstractModel {
          */
         this.ExtInfo = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -27250,10 +26923,10 @@ class ExecuteFunctionRequest extends  AbstractModel {
         }
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.FunctionArg = 'FunctionArg' in params ? params.FunctionArg : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -27594,8 +27267,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Width = null;
 
         /**
-         * Total size of a media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The file size (bytes).
+<li>If the file is an HLS file, the value of this parameter is the sum of the size of the M3U8 and TS files.</li>
          * @type {number || null}
          */
         this.Size = null;
@@ -27608,13 +27281,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Duration = null;
 
         /**
-         * Container, such as m4a and mp4.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Container = null;
-
-        /**
          * MD5 value of video.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -27622,11 +27288,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Md5 = null;
 
         /**
-         * Audio stream information.
+         * Container, such as m4a and mp4.
 Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MediaAudioStreamItem> || null}
+         * @type {string || null}
          */
-        this.AudioStreamSet = null;
+        this.Container = null;
 
         /**
          * Video stream information.
@@ -27634,6 +27300,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {Array.<MediaVideoStreamItem> || null}
          */
         this.VideoStreamSet = null;
+
+        /**
+         * Audio stream information.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaAudioStreamItem> || null}
+         */
+        this.AudioStreamSet = null;
 
     }
 
@@ -27651,17 +27324,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Width = 'Width' in params ? params.Width : null;
         this.Size = 'Size' in params ? params.Size : null;
         this.Duration = 'Duration' in params ? params.Duration : null;
-        this.Container = 'Container' in params ? params.Container : null;
         this.Md5 = 'Md5' in params ? params.Md5 : null;
-
-        if (params.AudioStreamSet) {
-            this.AudioStreamSet = new Array();
-            for (let z in params.AudioStreamSet) {
-                let obj = new MediaAudioStreamItem();
-                obj.deserialize(params.AudioStreamSet[z]);
-                this.AudioStreamSet.push(obj);
-            }
-        }
+        this.Container = 'Container' in params ? params.Container : null;
 
         if (params.VideoStreamSet) {
             this.VideoStreamSet = new Array();
@@ -27669,6 +27333,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 let obj = new MediaVideoStreamItem();
                 obj.deserialize(params.VideoStreamSet[z]);
                 this.VideoStreamSet.push(obj);
+            }
+        }
+
+        if (params.AudioStreamSet) {
+            this.AudioStreamSet = new Array();
+            for (let z in params.AudioStreamSet) {
+                let obj = new MediaAudioStreamItem();
+                obj.deserialize(params.AudioStreamSet[z]);
+                this.AudioStreamSet.push(obj);
             }
         }
 
@@ -27902,6 +27575,61 @@ class AiRecognitionTaskObjectSeqmentItem extends  AbstractModel {
 }
 
 /**
+ * RestoreMedia request structure.
+ * @class
+ */
+class RestoreMediaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The IDs of media files.
+         * @type {Array.<string> || null}
+         */
+        this.FileIds = null;
+
+        /**
+         * The number of days during which the restored files will remain available.
+         * @type {number || null}
+         */
+        this.RestoreDay = null;
+
+        /**
+         * The retrieval mode. If the current storage class is ARCHIVE, the valid values for this parameter are as follows:
+<li>Expedited: The files are made available in five minutes.</li>
+<li>Standard: The files are made available in five hours.</li>
+<li>Bulk: The files are made available in 12 hours.</li>
+If the current storage class is DEEP ARCHIVE, the valid values for this parameter are as follows:
+<li>Standard: The files are made available in 24 hours.</li>
+<li>Bulk: The files are made available in 48 hours.</li>
+         * @type {string || null}
+         */
+        this.RestoreTier = null;
+
+        /**
+         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileIds = 'FileIds' in params ? params.FileIds : null;
+        this.RestoreDay = 'RestoreDay' in params ? params.RestoreDay : null;
+        this.RestoreTier = 'RestoreTier' in params ? params.RestoreTier : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * PullEvents request structure.
  * @class
  */
@@ -28060,6 +27788,12 @@ class CreateSnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Name of a time point screencapturing template. Length limit: 64 characters.
          * @type {string || null}
          */
@@ -28109,12 +27843,6 @@ Default value: open.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
 <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
@@ -28134,13 +27862,13 @@ Default value: black.
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
@@ -28314,6 +28042,12 @@ class SearchMediaRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * File ID set. Any element in the set can be matched.
 <li>Array length limit: 10.</li>
 <li>ID length limit: 40 characters.</li>
@@ -28353,8 +28087,8 @@ class SearchMediaRequest extends  AbstractModel {
         this.ClassIds = null;
 
         /**
-         * Tag set, which matches any element in the set.
-<li>Tag length limit: 8 characters.</li>
+         * The tag set. A file is considered a match if it has any of the tags in the tag set.
+<li>Tag length limit: 16 characters.</li>
 <li>Array length limit: 10.</li>
          * @type {Array.<string> || null}
          */
@@ -28451,12 +28185,6 @@ class SearchMediaRequest extends  AbstractModel {
         this.StorageRegions = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * An array of storage classes. Valid values:
 <li>STANDARD</li>
 <li>STANDARD_IA</li>
@@ -28523,6 +28251,7 @@ End time in the creation time range.
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.FileIds = 'FileIds' in params ? params.FileIds : null;
         this.Names = 'Names' in params ? params.Names : null;
         this.NamePrefixes = 'NamePrefixes' in params ? params.NamePrefixes : null;
@@ -28555,7 +28284,6 @@ End time in the creation time range.
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Filters = 'Filters' in params ? params.Filters : null;
         this.StorageRegions = 'StorageRegions' in params ? params.StorageRegions : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.StorageClasses = 'StorageClasses' in params ? params.StorageClasses : null;
         this.Text = 'Text' in params ? params.Text : null;
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
@@ -28590,6 +28318,12 @@ class CreateSampleSnapshotTemplateRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.SampleInterval = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
         /**
          * Name of a sampled screencapturing template. Length limit: 64 characters.
@@ -28641,12 +28375,6 @@ Default value: open.
         this.Comment = null;
 
         /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
 <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
@@ -28668,13 +28396,13 @@ Default value: black.
         }
         this.SampleType = 'SampleType' in params ? params.SampleType : null;
         this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
@@ -29498,7 +29226,7 @@ class CommitUploadRequest extends  AbstractModel {
         this.VodSessionKey = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -29740,7 +29468,7 @@ class DeleteAnimatedGraphicsTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -29775,7 +29503,7 @@ class DeleteSnapshotByTimeOffsetTemplateRequest extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -29928,48 +29656,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.WatermarkSet.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * ReviewImage request structure.
- * @class
- */
-class ReviewImageRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique ID of the media file. For this API to work, the file must be an image.
-         * @type {string || null}
-         */
-        this.FileId = null;
-
-        /**
-         * The ID of the image recognition template. Currently, this can only be `10`.
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -30310,6 +29996,12 @@ class DescribePersonSamplesRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Type of samples to pull. Valid values:
 <li>UserDefine: custom sample library</li>
 <li>Default: default sample library</li>
@@ -30350,12 +30042,6 @@ Note: samples from the default library can only be pulled by providing the name 
          */
         this.Limit = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -30365,13 +30051,13 @@ Note: samples from the default library can only be pulled by providing the name 
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.PersonIds = 'PersonIds' in params ? params.PersonIds : null;
         this.Names = 'Names' in params ? params.Names : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -30484,6 +30170,13 @@ class DescribeStorageDetailsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+You can set this parameter to 1 to query the total usage of all applications (including the primary application) as an admin.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Time granularity. Valid values:
 <li>Minute: 5-minute granularity</li>
 <li>Day: 1-day granularity</li>
@@ -30513,13 +30206,6 @@ Default value: `TotalStorage`
         this.StorageType = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
          * Storage region to query. Valid values:
 <li>Chinese Mainland</li>
 <li>Outside Chinese Mainland</li>
@@ -30539,9 +30225,9 @@ Default value: Chinese Mainland
         }
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.StorageType = 'StorageType' in params ? params.StorageType : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Area = 'Area' in params ? params.Area : null;
 
     }
@@ -31186,6 +30872,12 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Unique ID filter of video content recognition templates. Array length limit: 100.
          * @type {Array.<number> || null}
          */
@@ -31203,12 +30895,6 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -31218,10 +30904,10 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Definitions = 'Definitions' in params ? params.Definitions : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -31446,13 +31132,13 @@ module.exports = {
     CreateImageSpriteTemplateRequest: CreateImageSpriteTemplateRequest,
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
     UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
+    RefreshUrlCacheRequest: RefreshUrlCacheRequest,
     ContentReviewTemplateItem: ContentReviewTemplateItem,
     DeleteAIRecognitionTemplateResponse: DeleteAIRecognitionTemplateResponse,
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
     AudioTransform: AudioTransform,
     ResetProcedureTemplateRequest: ResetProcedureTemplateRequest,
-    ContentReviewOcrResult: ContentReviewOcrResult,
     ComposeMediaResponse: ComposeMediaResponse,
     DescribeLicenseUsageDataResponse: DescribeLicenseUsageDataResponse,
     UrlSignatureAuthPolicy: UrlSignatureAuthPolicy,
@@ -31495,6 +31181,7 @@ module.exports = {
     TagConfigureInfo: TagConfigureInfo,
     ModifySuperPlayerConfigResponse: ModifySuperPlayerConfigResponse,
     AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
+    RefreshUrlCacheResponse: RefreshUrlCacheResponse,
     ConcatTask2017: ConcatTask2017,
     DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
     FileUploadTask: FileUploadTask,
@@ -31520,10 +31207,10 @@ module.exports = {
     PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
     TaskOutputMediaInfo: TaskOutputMediaInfo,
     ProcessMediaByUrlRequest: ProcessMediaByUrlRequest,
-    ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,
     PlayStatFileInfo: PlayStatFileInfo,
     ModifyMediaInfoRequest: ModifyMediaInfoRequest,
     DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
+    TraceWatermarkInput: TraceWatermarkInput,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     MediaMetaData: MediaMetaData,
@@ -31563,7 +31250,6 @@ module.exports = {
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     AiAnalysisResult: AiAnalysisResult,
     ConcatFileInfo2017: ConcatFileInfo2017,
-    ContentReviewResult: ContentReviewResult,
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
     DescribeMediaInfosResponse: DescribeMediaInfosResponse,
     DeleteProcedureTemplateResponse: DeleteProcedureTemplateResponse,
@@ -31618,11 +31304,9 @@ module.exports = {
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
     MediaSubtitleInput: MediaSubtitleInput,
     ProcessMediaRequest: ProcessMediaRequest,
-    PornImageResult: PornImageResult,
-    ProcessImageResponse: ProcessImageResponse,
-    ProcessImageRequest: ProcessImageRequest,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
+    RestoreMediaResponse: RestoreMediaResponse,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
     AiSampleWord: AiSampleWord,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
@@ -31640,7 +31324,6 @@ module.exports = {
     ModifySubAppIdStatusResponse: ModifySubAppIdStatusResponse,
     SimpleHlsClipRequest: SimpleHlsClipRequest,
     MediaDeleteItem: MediaDeleteItem,
-    PoliticalImageResult: PoliticalImageResult,
     AiSamplePerson: AiSamplePerson,
     MediaAdaptiveDynamicStreamingInfo: MediaAdaptiveDynamicStreamingInfo,
     DescribeDailyPlayStatFileListRequest: DescribeDailyPlayStatFileListRequest,
@@ -31785,7 +31468,6 @@ module.exports = {
     DescribeMediaInfosRequest: DescribeMediaInfosRequest,
     ModifyPersonSampleRequest: ModifyPersonSampleRequest,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
-    TerrorismImageResult: TerrorismImageResult,
     DeleteVodDomainRequest: DeleteVodDomainRequest,
     CreateAIRecognitionTemplateRequest: CreateAIRecognitionTemplateRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
@@ -31793,7 +31475,7 @@ module.exports = {
     AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
     AiReviewPornTaskOutput: AiReviewPornTaskOutput,
     AiRecognitionTaskAsrFullTextResult: AiRecognitionTaskAsrFullTextResult,
-    ImageContentReviewInput: ImageContentReviewInput,
+    ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,
     PlayStatInfo: PlayStatInfo,
     PoliticalImgReviewTemplateInfo: PoliticalImgReviewTemplateInfo,
     PoliticalConfigureInfo: PoliticalConfigureInfo,
@@ -31840,7 +31522,6 @@ module.exports = {
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
-    ReviewImageResponse: ReviewImageResponse,
     DescribeStorageRegionsResponse: DescribeStorageRegionsResponse,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     ProcedureTask: ProcedureTask,
@@ -31894,6 +31575,7 @@ module.exports = {
     SplitMediaTaskInput: SplitMediaTaskInput,
     PornConfigureInfo: PornConfigureInfo,
     AiRecognitionTaskObjectSeqmentItem: AiRecognitionTaskObjectSeqmentItem,
+    RestoreMediaRequest: RestoreMediaRequest,
     PullEventsRequest: PullEventsRequest,
     FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
     DescribeAIAnalysisTemplatesResponse: DescribeAIAnalysisTemplatesResponse,
@@ -31927,7 +31609,6 @@ module.exports = {
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
     MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
-    ReviewImageRequest: ReviewImageRequest,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,

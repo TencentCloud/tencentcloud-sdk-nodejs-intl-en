@@ -1,2 +1,2 @@
-const sdkVersion = "3.0.475";
+const sdkVersion = "3.0.476";
 module.exports = sdkVersion

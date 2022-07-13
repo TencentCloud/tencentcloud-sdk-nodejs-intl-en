@@ -4793,13 +4793,13 @@ class DescribeTaskListRequest extends  AbstractModel {
         this.Result = null;
 
         /**
-         * Operator UIN
+         * The field `OperatorUin` has been disused and replaced by `OperateUin`.
          * @type {Array.<number> || null}
          */
         this.OperatorUin = null;
 
         /**
-         * 
+         * Operator Uin
          * @type {Array.<string> || null}
          */
         this.OperateUin = null;

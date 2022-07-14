@@ -351,8 +351,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Suggestion = null;
 
         /**
-         * This field is used to return the maliciousness tag in the detection result.<br>Returned values: **Normal**: normal; **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Label of the malicious content detected. <br>Values: **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<TaskLabel> || null}
          */
         this.Labels = null;
@@ -407,6 +407,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UpdatedAt = null;
 
         /**
+         * If the recognition result is normal, this parameter is returned with the value `Normal`. If malicious content is recognized, the tag with the highest priority in the result of `Labels` is returned.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -457,6 +464,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ErrorDescription = 'ErrorDescription' in params ? params.ErrorDescription : null;
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+        this.Label = 'Label' in params ? params.Label : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -883,6 +891,51 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Information of the category label
+ * @class
+ */
+class RecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Values: `Teenager`, `Gender`
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * List of recognized category labels
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Label = 'Label' in params ? params.Label : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CancelTask response structure.
  * @class
  */
@@ -1083,6 +1136,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SubLabel = null;
 
+        /**
+         * List of audio recognition results 
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<RecognitionResult> || null}
+         */
+        this.RecognitionResults = null;
+
     }
 
     /**
@@ -1128,6 +1188,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+
+        if (params.RecognitionResults) {
+            this.RecognitionResults = new Array();
+            for (let z in params.RecognitionResults) {
+                let obj = new RecognitionResult();
+                obj.deserialize(params.RecognitionResults[z]);
+                this.RecognitionResults.push(obj);
+            }
+        }
 
     }
 }
@@ -1374,6 +1443,61 @@ class MediaInfo extends  AbstractModel {
 }
 
 /**
+ * Tag of the audio slice
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value of this parameter varies by `Label`.
+When `Label` is `Teenager`, `Name` can be `Teenager`. 
+When `Label` is `Gender`, `Name` can be `Male` and `Female`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Confidence score. Value: 1 to 100. 
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * Start time for the recognition (ms)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time for the recognition (ms)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * Indicates audio segment information
  * @class
  */
@@ -1431,12 +1555,14 @@ module.exports = {
     InputInfo: InputInfo,
     DescribeTasksResponse: DescribeTasksResponse,
     AudioResultDetailLanguageResult: AudioResultDetailLanguageResult,
+    RecognitionResult: RecognitionResult,
     CancelTaskResponse: CancelTaskResponse,
     AudioResultDetailTextResult: AudioResultDetailTextResult,
     AudioResult: AudioResult,
     AudioResultDetailMoanResult: AudioResultDetailMoanResult,
     TaskData: TaskData,
     MediaInfo: MediaInfo,
+    Tag: Tag,
     AudioSegments: AudioSegments,
 
 }

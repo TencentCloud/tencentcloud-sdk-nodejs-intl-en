@@ -21,7 +21,7 @@ const RestartApplicationPodResponse = models.RestartApplicationPodResponse;
 const DeleteApplicationRequest = models.DeleteApplicationRequest;
 const CreateResourceRequest = models.CreateResourceRequest;
 const RestartApplicationResponse = models.RestartApplicationResponse;
-const StopApplicationRequest = models.StopApplicationRequest;
+const DescribeApplicationsStatusResponse = models.DescribeApplicationsStatusResponse;
 const HealthCheckConfig = models.HealthCheckConfig;
 const ModifyEnvironmentRequest = models.ModifyEnvironmentRequest;
 const EsInfo = models.EsInfo;
@@ -54,6 +54,7 @@ const DescribeIngressResponse = models.DescribeIngressResponse;
 const CreateCosTokenResponse = models.CreateCosTokenResponse;
 const IngressRule = models.IngressRule;
 const CronHorizontalAutoscaler = models.CronHorizontalAutoscaler;
+const DescribeApplicationsStatusRequest = models.DescribeApplicationsStatusRequest;
 const RollingUpdateApplicationByVersionResponse = models.RollingUpdateApplicationByVersionResponse;
 const RollingUpdateApplicationByVersionRequest = models.RollingUpdateApplicationByVersionRequest;
 const RunVersionPod = models.RunVersionPod;
@@ -71,6 +72,7 @@ const HorizontalAutoscaler = models.HorizontalAutoscaler;
 const StorageMountConf = models.StorageMountConf;
 const PortMapping = models.PortMapping;
 const DeployStrategyConf = models.DeployStrategyConf;
+const StopApplicationRequest = models.StopApplicationRequest;
 const DescribeIngressRequest = models.DescribeIngressRequest;
 const CreateCosTokenRequest = models.CreateCosTokenRequest;
 const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
@@ -79,6 +81,7 @@ const EksService = models.EksService;
 const CronHorizontalAutoscalerSchedule = models.CronHorizontalAutoscalerSchedule;
 const DeployApplicationResponse = models.DeployApplicationResponse;
 const StorageConf = models.StorageConf;
+const ServiceVersionBrief = models.ServiceVersionBrief;
 const CreateEnvironmentRequest = models.CreateEnvironmentRequest;
 const Pair = models.Pair;
 
@@ -102,6 +105,17 @@ class TemClient extends AbstractClient {
     DeployApplication(req, cb) {
         let resp = new DeployApplicationResponse();
         this.request("DeployApplication", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the status of all applications in an envrionment.
+     * @param {DescribeApplicationsStatusRequest} req
+     * @param {function(string, DescribeApplicationsStatusResponse):void} cb
+     * @public
+     */
+    DescribeApplicationsStatus(req, cb) {
+        let resp = new DescribeApplicationsStatusResponse();
+        this.request("DescribeApplicationsStatus", req, resp, cb);
     }
 
     /**

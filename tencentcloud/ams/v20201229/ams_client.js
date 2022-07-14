@@ -31,12 +31,14 @@ const TaskFilter = models.TaskFilter;
 const InputInfo = models.InputInfo;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const AudioResultDetailLanguageResult = models.AudioResultDetailLanguageResult;
+const RecognitionResult = models.RecognitionResult;
 const CancelTaskResponse = models.CancelTaskResponse;
 const AudioResultDetailTextResult = models.AudioResultDetailTextResult;
 const AudioResult = models.AudioResult;
 const AudioResultDetailMoanResult = models.AudioResultDetailMoanResult;
 const TaskData = models.TaskData;
 const MediaInfo = models.MediaInfo;
+const Tag = models.Tag;
 const AudioSegments = models.AudioSegments;
 
 

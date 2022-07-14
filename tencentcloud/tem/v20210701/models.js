@@ -257,30 +257,24 @@ class RestartApplicationResponse extends  AbstractModel {
 }
 
 /**
- * StopApplication request structure.
+ * DescribeApplicationsStatus response structure.
  * @class
  */
-class StopApplicationRequest extends  AbstractModel {
+class DescribeApplicationsStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID
-         * @type {string || null}
+         * Returned result.
+         * @type {Array.<ServiceVersionBrief> || null}
          */
-        this.ApplicationId = null;
+        this.Result = null;
 
         /**
-         * Retain as default
-         * @type {number || null}
-         */
-        this.SourceChannel = null;
-
-        /**
-         * Environment ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.RequestId = null;
 
     }
 
@@ -291,9 +285,16 @@ class StopApplicationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new ServiceVersionBrief();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2490,6 +2491,41 @@ Examples:
 }
 
 /**
+ * DescribeApplicationsStatus request structure.
+ * @class
+ */
+class DescribeApplicationsStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Source channel. Please keep the default value.
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+        /**
+         * Environment ID
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+
+    }
+}
+
+/**
  * RollingUpdateApplicationByVersion response structure.
  * @class
  */
@@ -3310,6 +3346,48 @@ class DeployStrategyConf extends  AbstractModel {
 }
 
 /**
+ * StopApplication request structure.
+ * @class
+ */
+class StopApplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Retain as default
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+        /**
+         * Environment ID
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+
+    }
+}
+
+/**
  * DescribeIngress request structure.
  * @class
  */
@@ -3725,6 +3803,139 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * List of application versions
+ * @class
+ */
+class ServiceVersionBrief extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Version name
+         * @type {string || null}
+         */
+        this.VersionName = null;
+
+        /**
+         * Status of version
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * (Disused) Whether to enable elastic scaling
+         * @type {number || null}
+         */
+        this.EnableEs = null;
+
+        /**
+         * Number of current instances
+         * @type {number || null}
+         */
+        this.CurrentInstances = null;
+
+        /**
+         * Version ID
+         * @type {string || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * (Disused) Log output configuration
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {LogOutputConf || null}
+         */
+        this.LogOutputConf = null;
+
+        /**
+         * Expected number of instances
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ExpectedInstances = null;
+
+        /**
+         * Deployment mode
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * Task ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BuildTaskId = null;
+
+        /**
+         * Environment ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Environment name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EnvironmentName = null;
+
+        /**
+         * Application ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Application name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * Whether the application is being deployed
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.UnderDeploying = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EnableEs = 'EnableEs' in params ? params.EnableEs : null;
+        this.CurrentInstances = 'CurrentInstances' in params ? params.CurrentInstances : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+        if (params.LogOutputConf) {
+            let obj = new LogOutputConf();
+            obj.deserialize(params.LogOutputConf)
+            this.LogOutputConf = obj;
+        }
+        this.ExpectedInstances = 'ExpectedInstances' in params ? params.ExpectedInstances : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.BuildTaskId = 'BuildTaskId' in params ? params.BuildTaskId : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.UnderDeploying = 'UnderDeploying' in params ? params.UnderDeploying : null;
+
+    }
+}
+
+/**
  * CreateEnvironment request structure.
  * @class
  */
@@ -3859,7 +4070,7 @@ module.exports = {
     DeleteApplicationRequest: DeleteApplicationRequest,
     CreateResourceRequest: CreateResourceRequest,
     RestartApplicationResponse: RestartApplicationResponse,
-    StopApplicationRequest: StopApplicationRequest,
+    DescribeApplicationsStatusResponse: DescribeApplicationsStatusResponse,
     HealthCheckConfig: HealthCheckConfig,
     ModifyEnvironmentRequest: ModifyEnvironmentRequest,
     EsInfo: EsInfo,
@@ -3892,6 +4103,7 @@ module.exports = {
     CreateCosTokenResponse: CreateCosTokenResponse,
     IngressRule: IngressRule,
     CronHorizontalAutoscaler: CronHorizontalAutoscaler,
+    DescribeApplicationsStatusRequest: DescribeApplicationsStatusRequest,
     RollingUpdateApplicationByVersionResponse: RollingUpdateApplicationByVersionResponse,
     RollingUpdateApplicationByVersionRequest: RollingUpdateApplicationByVersionRequest,
     RunVersionPod: RunVersionPod,
@@ -3909,6 +4121,7 @@ module.exports = {
     StorageMountConf: StorageMountConf,
     PortMapping: PortMapping,
     DeployStrategyConf: DeployStrategyConf,
+    StopApplicationRequest: StopApplicationRequest,
     DescribeIngressRequest: DescribeIngressRequest,
     CreateCosTokenRequest: CreateCosTokenRequest,
     DescribeEnvironmentsRequest: DescribeEnvironmentsRequest,
@@ -3917,6 +4130,7 @@ module.exports = {
     CronHorizontalAutoscalerSchedule: CronHorizontalAutoscalerSchedule,
     DeployApplicationResponse: DeployApplicationResponse,
     StorageConf: StorageConf,
+    ServiceVersionBrief: ServiceVersionBrief,
     CreateEnvironmentRequest: CreateEnvironmentRequest,
     Pair: Pair,
 

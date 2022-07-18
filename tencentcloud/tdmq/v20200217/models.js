@@ -75,7 +75,7 @@ class DescribeBindClustersResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of dedicated clusters
+         * The number of dedicated clusters
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -178,7 +178,7 @@ class RocketMQNamespace extends  AbstractModel {
         super();
 
         /**
-         * Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
+         * Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores.
          * @type {string || null}
          */
         this.NamespaceId = null;
@@ -190,17 +190,31 @@ class RocketMQNamespace extends  AbstractModel {
         this.Ttl = null;
 
         /**
-         * Retention period for persisted messages in milliseconds
+         * Retention period for persistently stored messages in milliseconds.
          * @type {number || null}
          */
         this.RetentionTime = null;
 
         /**
-         * Remarks
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Description.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
+
+        /**
+         * Public network access point address.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicEndpoint = null;
+
+        /**
+         * VPC access point address.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcEndpoint = null;
 
     }
 
@@ -215,6 +229,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Ttl = 'Ttl' in params ? params.Ttl : null;
         this.RetentionTime = 'RetentionTime' in params ? params.RetentionTime : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.PublicEndpoint = 'PublicEndpoint' in params ? params.PublicEndpoint : null;
+        this.VpcEndpoint = 'VpcEndpoint' in params ? params.VpcEndpoint : null;
 
     }
 }
@@ -240,13 +256,13 @@ class DescribeSubscriptionsRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
+         * Offset, which defaults to 0 if left empty.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
          * @type {number || null}
          */
         this.Limit = null;
@@ -375,7 +391,7 @@ class ModifyEnvironmentAttributesRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds.
+         * Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
          * @type {number || null}
          */
         this.MsgTTL = null;
@@ -614,7 +630,7 @@ class DescribeRocketMQNamespacesResponse extends  AbstractModel {
         this.Namespaces = null;
 
         /**
-         * Total number
+         * The total number of returned results.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -650,7 +666,7 @@ class DescribeRocketMQNamespacesResponse extends  AbstractModel {
 }
 
 /**
- * Dedicated cluster information
+ * Information of dedicated clusters
  * @class
  */
 class BindCluster extends  AbstractModel {
@@ -658,7 +674,7 @@ class BindCluster extends  AbstractModel {
         super();
 
         /**
-         * Physical cluster name
+         * Name of a physical cluster.
          * @type {string || null}
          */
         this.ClusterName = null;
@@ -770,14 +786,14 @@ class DescribeCmqQueuesResponse extends  AbstractModel {
         super();
 
         /**
-         * Quantity
+         * The number of queues.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List of queues
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Queue list.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CmqQueue> || null}
          */
         this.QueueList = null;
@@ -827,13 +843,13 @@ class PublishCmqMsgRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * Message content
+         * Message content. The total message size is up to 1,024 KB.
          * @type {string || null}
          */
         this.MsgContent = null;
 
         /**
-         * Message tag
+         * Message tag. You can pass in multiple tags or a single route. Each tag or route can contain up to 64 characters.
          * @type {Array.<string> || null}
          */
         this.MsgTag = null;
@@ -1159,82 +1175,82 @@ class RocketMQGroup extends  AbstractModel {
         super();
 
         /**
-         * Consumer group name
+         * Consumer group name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Number of online consumers
+         * The number of online consumers.
          * @type {number || null}
          */
         this.ConsumerNum = null;
 
         /**
-         * Consumption TPS
+         * Consumption TPS.
          * @type {number || null}
          */
         this.TPS = null;
 
         /**
-         * Total number of retained messages
+         * The total number of heaped messages.
          * @type {number || null}
          */
         this.TotalAccumulative = null;
 
         /**
-         * 0: cluster consumption mode; 1: broadcast consumption mode; -1: unknown
+         * 0: Cluster consumption mode; 1: Broadcast consumption mode; -1: Unknown.
          * @type {number || null}
          */
         this.ConsumptionMode = null;
 
         /**
-         * Whether to allow consumption
+         * Whether to allow consumption.
          * @type {boolean || null}
          */
         this.ReadEnabled = null;
 
         /**
-         * Number of partitions in the retry letter topic
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of partitions in a retry topic.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RetryPartitionNum = null;
 
         /**
-         * Creation time in milliseconds
+         * Creation time in milliseconds.
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * Modification time in milliseconds
+         * Modification time in milliseconds.
          * @type {number || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Client protocol
+         * Client protocol.
          * @type {string || null}
          */
         this.ClientProtocol = null;
 
         /**
-         * Remarks
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Description.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Consumer type. Enumerated values: ACTIVELY, PASSIVELY
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Consumer type. Enumerated values: `ACTIVELY` or `PASSIVELY`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConsumerType = null;
 
         /**
-         * Whether to enable broadcast consumption
+         * Whether to enable broadcast consumption.
          * @type {boolean || null}
          */
         this.BroadcastEnabled = null;
@@ -1965,153 +1981,153 @@ class Topic extends  AbstractModel {
 
         /**
          * Average size of the messages published in the last interval in bytes.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AverageMsgSize = null;
 
         /**
-         * Number of consumers.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of consumers.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConsumerCount = null;
 
         /**
-         * Total number of recorded messages.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The total number of recorded messages.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastConfirmedEntry = null;
 
         /**
          * Time when the last ledger was created.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastLedgerCreatedTimestamp = null;
 
         /**
-         * Number of messages published by local and replicated publishers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of messages published by local and replicated publishers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgRateIn = null;
 
         /**
-         * Sum of the numbers of messages delivered by local and replicated consumers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The total number of messages delivered by local and replicated consumers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgRateOut = null;
 
         /**
-         * Number of bytes of messages published by local and replicated publishers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The size (in bytes) of messages published by local and replicated publishers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgThroughputIn = null;
 
         /**
-         * Number of bytes of messages delivered by local and replicated consumers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The size (in bytes) of messages delivered by local and replicated consumers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgThroughputOut = null;
 
         /**
-         * Total number of recorded messages.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The total number of recorded messages.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NumberOfEntries = null;
 
         /**
-         * Number of partitions ≤ 0: there are no subpartitions in the topic.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Partition count ≤ 0: there are no subpartitions in the topic.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Partitions = null;
 
         /**
-         * Number of producers.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of producers.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProducerCount = null;
 
         /**
-         * Total amount of all stored messages in bytes.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The size of all stored messages in bytes.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TotalSize = null;
 
         /**
          * Subpartitions in a partitioned topic.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<PartitionsTopic> || null}
          */
         this.SubTopicSets = null;
 
         /**
          * Topic type description:
-0: general message;
-1: globally sequential message;
-2: partitionally sequential message;
-3: retry letter queue;
-4: dead letter queue;
-5: transaction message.
-Note: this field may return null, indicating that no valid values can be obtained.
+0: General message;
+1: Globally sequential message;
+2: Partitionally sequential message;
+3: Retry letter topic;
+4: Dead letter topic;
+5: Transaction message.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TopicType = null;
 
         /**
          * Environment (namespace) name.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.EnvironmentId = null;
 
         /**
          * Topic name.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TopicName = null;
 
         /**
          * Remarks (up to 128 characters).
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
          * Creation time.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Modification time.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Last modified.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Maximum number of producers.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The maximum number of producers.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProducerLimit = null;
 
         /**
-         * Maximum number of consumers.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The maximum number of consumers.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConsumerLimit = null;
@@ -2121,7 +2137,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 `1`: Non-persistent and partitioned
 `2`: Persistent and non-partitioned
 `3`: Persistent and partitioned
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PulsarTopicType = null;
@@ -2184,13 +2200,13 @@ class DescribeEnvironmentsRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
+         * Offset, which defaults to 0 if left empty.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
          * @type {number || null}
          */
         this.Limit = null;
@@ -2205,7 +2221,7 @@ class DescribeEnvironmentsRequest extends  AbstractModel {
          * * EnvironmentId
 Filter by namespace for exact query.
 Type: String
-Required: no
+Required: No
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2245,25 +2261,25 @@ class DescribeRocketMQNamespacesRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Offset
+         * Offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Maximum number
+         * The max number of returned results.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Search by name
+         * Search by name.
          * @type {string || null}
          */
         this.NameKeyword = null;
@@ -2294,31 +2310,31 @@ class DescribeRocketMQTopicsRequest extends  AbstractModel {
         super();
 
         /**
-         * Query offset
+         * Offset for query.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Query limit
+         * Query limit.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Namespace
+         * Namespace.
          * @type {string || null}
          */
         this.NamespaceId = null;
 
         /**
-         * Filter by topic type. Valid values: Normal, GlobalOrder, PartitionedOrder, Transaction.
+         * Filter by topic type. Valid values: `Normal`, `GlobalOrder`, `PartitionedOrder`, `Transaction`.
          * @type {Array.<string> || null}
          */
         this.FilterType = null;
@@ -2431,7 +2447,7 @@ class CreateEnvironmentRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * Unconsumed message expiration time in seconds. Minimum value: 60; maximum value: 1296000 (15 days).
+         * Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
          * @type {number || null}
          */
         this.MsgTTL = null;
@@ -2529,31 +2545,31 @@ class DescribeClustersRequest extends  AbstractModel {
         super();
 
         /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
+         * Start offset, which defaults to 0 if left empty.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Filter by list of cluster IDs
+         * Filter by cluster ID.
          * @type {Array.<string> || null}
          */
         this.ClusterIdList = null;
 
         /**
-         * Whether to filter by tag
+         * Whether to filter by tag.
          * @type {boolean || null}
          */
         this.IsTagFilter = null;
 
         /**
-         * Filter. Currently, you can filter only by tag.
+         * Filter. Currently, you can filter by tag.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2635,32 +2651,32 @@ class RocketMQTopic extends  AbstractModel {
         super();
 
         /**
-         * Topic name
+         * Topic name.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Remarks
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Description.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * Number of read/write partitions
+         * The number of read/write partitions.
          * @type {number || null}
          */
         this.PartitionNum = null;
 
         /**
-         * Creation time in milliseconds
+         * Creation time in milliseconds.
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * Creation time in milliseconds
+         * Creation time in milliseconds.
          * @type {number || null}
          */
         this.UpdateTime = null;
@@ -3103,13 +3119,13 @@ class DescribeTopicsResponse extends  AbstractModel {
         super();
 
         /**
-         * Array set of topics.
+         * Array of topic sets.
          * @type {Array.<Topic> || null}
          */
         this.TopicSets = null;
 
         /**
-         * Number of topics.
+         * The number of topics.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -3705,126 +3721,126 @@ class Subscription extends  AbstractModel {
 
         /**
          * The time when the consumer started connecting.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConnectedSince = null;
 
         /**
          * Consumer address.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConsumerAddr = null;
 
         /**
-         * Number of consumers.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of consumers.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConsumerCount = null;
 
         /**
          * Consumer name.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConsumerName = null;
 
         /**
-         * Number of retained messages.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of heaped messages.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgBacklog = null;
 
         /**
-         * Proportion of messages under this subscription that were discarded but not sent after TTL.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Percentage of messages under this subscription that were discarded but not sent after TTL.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgRateExpired = null;
 
         /**
-         * Sum of the numbers of messages delivered by the consumer per second.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The total number of messages delivered by the consumer per second.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgRateOut = null;
 
         /**
-         * Number of bytes of messages consumed by the consumer per second.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The size (in bytes) of messages consumed by the consumer per second.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgThroughputOut = null;
 
         /**
          * Subscription name.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubscriptionName = null;
 
         /**
          * Set of consumers.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Consumer> || null}
          */
         this.ConsumerSets = null;
 
         /**
-         * Whether it is online.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Whether the consumer is online.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsOnline = null;
 
         /**
          * Set of consumption progress information.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ConsumersSchedule> || null}
          */
         this.ConsumersScheduleSets = null;
 
         /**
          * Remarks.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
          * Creation time.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Modification time.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Last modified.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
          * Subscription type. Valid values: `Exclusive`, `Shared`, `Failover`, and `Key_Shared`. An empty string or `NULL`: Unknown.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubType = null;
 
         /**
          * Whether messages are blocked as the limit of unacknowledged messages has been reached.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.BlockedSubscriptionOnUnackedMsgs = null;
 
         /**
-         * Maximum number of unacknowledged messages.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * The maximum number of unacknowledged messages.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxUnackedMsgNum = null;
@@ -4015,13 +4031,13 @@ class DescribeSubscriptionsResponse extends  AbstractModel {
         super();
 
         /**
-         * Array set of subscribers.
+         * Array of subscriber sets.
          * @type {Array.<Subscription> || null}
          */
         this.SubscriptionSets = null;
 
         /**
-         * Quantity.
+         * The total number of returned results.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -4174,6 +4190,24 @@ class ReceiveMessageRequest extends  AbstractModel {
          */
         this.SubInitialPosition = null;
 
+        /**
+         * This parameter is used to specify the maximum number of received messages in a batch for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
+         * @type {number || null}
+         */
+        this.MaxNumMessages = null;
+
+        /**
+         * This parameter is used to specify the maximum body size (in bytes) of received messages in a batch for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
+         * @type {number || null}
+         */
+        this.MaxNumBytes = null;
+
+        /**
+         * This parameter is used to specify the maximum wait timeout (in milliseconds) for receiving a batch of messages for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
     }
 
     /**
@@ -4187,6 +4221,9 @@ class ReceiveMessageRequest extends  AbstractModel {
         this.SubscriptionName = 'SubscriptionName' in params ? params.SubscriptionName : null;
         this.ReceiverQueueSize = 'ReceiverQueueSize' in params ? params.ReceiverQueueSize : null;
         this.SubInitialPosition = 'SubInitialPosition' in params ? params.SubInitialPosition : null;
+        this.MaxNumMessages = 'MaxNumMessages' in params ? params.MaxNumMessages : null;
+        this.MaxNumBytes = 'MaxNumBytes' in params ? params.MaxNumBytes : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
 
     }
 }
@@ -4212,7 +4249,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * 0: non-partitioned topic; other values: number of partitions in the partitioned topic (up to 128).
+         * The value “1” indicates a non-partitioned topic (a topic with no partitions) will be created. A value between 1 (exclusive) and 128 (inclusive) indicates the partition count of a partitioned topic.
          * @type {number || null}
          */
         this.Partitions = null;
@@ -4224,11 +4261,12 @@ class CreateTopicRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * 0: general message;
-1: globally sequential message;
-2: partitionally sequential message;
-3: retry letter queue;
-4: dead letter queue.
+         * This input parameter will be disused soon. You can use `PulsarTopicType` instead.
+0: General message;
+1: Globally sequential message;
+2: Partitionally sequential message;
+3: Retry letter topic;
+4: Dead letter topic.
          * @type {number || null}
          */
         this.TopicType = null;
@@ -4290,31 +4328,29 @@ class DescribeTopicsRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
+         * Offset, which defaults to 0 if left empty.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
          * Topic type description:
-0: general message;
-1: globally sequential message;
-2: partitionally sequential message;
-3: retry letter queue;
-4: dead letter queue;
-5: transaction message.
+0: Non-persistent and non-partitioned topic;
+1: Non-persistent and partitioned topic;
+2: Persistent and non-partitioned topic;
+3: Persistent and partitioned topic.
          * @type {number || null}
          */
         this.TopicType = null;
 
         /**
-         * Pulsar cluster ID
+         * Pulsar cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
@@ -4323,10 +4359,18 @@ class DescribeTopicsRequest extends  AbstractModel {
          * * TopicName
 Query by topic name for exact search.
 Type: String
-Required: no
+Required: No
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
+
+        /**
+         * Topic creator:
+1: User
+2: System
+         * @type {number || null}
+         */
+        this.TopicCreator = null;
 
     }
 
@@ -4352,6 +4396,7 @@ Required: no
                 this.Filters.push(obj);
             }
         }
+        this.TopicCreator = 'TopicCreator' in params ? params.TopicCreator : null;
 
     }
 }
@@ -4400,13 +4445,13 @@ class DescribeEnvironmentRolesResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of records.
+         * The number of records.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Set of namespace roles.
+         * Namespace role set.
          * @type {Array.<EnvironmentRole> || null}
          */
         this.EnvironmentRoleSets = null;
@@ -4533,7 +4578,7 @@ class ModifyRocketMQGroupRequest extends  AbstractModel {
 }
 
 /**
- * Filters subscriptions
+ * Filter subscriptions
  * @class
  */
 class FilterSubscription extends  AbstractModel {
@@ -4541,25 +4586,25 @@ class FilterSubscription extends  AbstractModel {
         super();
 
         /**
-         * Whether to display only subscriptions that include real consumers.
+         * Whether to only display subscriptions that include real consumers.
          * @type {boolean || null}
          */
         this.ConsumerHasCount = null;
 
         /**
-         * Whether to display only subscriptions with retained messages.
+         * Whether to only display subscriptions with heaped messages.
          * @type {boolean || null}
          */
         this.ConsumerHasBacklog = null;
 
         /**
-         * Whether to display only subscriptions with messages discarded after expiration.
+         * Whether to only display subscriptions with messages discarded after expiration.
          * @type {boolean || null}
          */
         this.ConsumerHasExpired = null;
 
         /**
-         * Filter by subscription name for exact search.
+         * Filter by subscription name for exact query.
          * @type {Array.<string> || null}
          */
         this.SubscriptionNames = null;
@@ -4590,14 +4635,14 @@ class DescribeCmqTopicsResponse extends  AbstractModel {
         super();
 
         /**
-         * List of topics
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Topic list.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<CmqTopic> || null}
          */
         this.TopicList = null;
 
         /**
-         * Total number of topics
+         * The total number of topics.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -4911,37 +4956,37 @@ class DescribeRocketMQClustersRequest extends  AbstractModel {
         super();
 
         /**
-         * Offset
+         * Offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Maximum number
+         * The max number of returned results.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Search by cluster ID
+         * Search by cluster ID.
          * @type {string || null}
          */
         this.IdKeyword = null;
 
         /**
-         * Search by cluster name
+         * Search by cluster name.
          * @type {string || null}
          */
         this.NameKeyword = null;
 
         /**
-         * Filter by list of cluster IDs
+         * Filter by cluster ID.
          * @type {Array.<string> || null}
          */
         this.ClusterIdList = null;
 
         /**
-         * For filtering by tag, this must be configured to `true`
+         * For filtering by tag, this parameter must be set to `true`.
          * @type {boolean || null}
          */
         this.IsTagFilter = null;
@@ -5031,13 +5076,13 @@ class DescribeClustersResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of clusters
+         * The number of clusters.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * List of cluster information
+         * Cluster information list
          * @type {Array.<Cluster> || null}
          */
         this.ClusterSet = null;
@@ -5235,31 +5280,31 @@ class DescribeEnvironmentRolesRequest extends  AbstractModel {
         super();
 
         /**
-         * Environment (namespace) name (required).
+         * Environment/namespace name (required).
          * @type {string || null}
          */
         this.EnvironmentId = null;
 
         /**
-         * Offset. If this parameter is left empty, 0 will be used by default.
+         * Offset, which defaults to 0 if left empty.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+         * The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Pulsar cluster ID (required)
+         * Pulsar cluster ID (required).
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Role name
+         * Role name.
          * @type {string || null}
          */
         this.RoleName = null;
@@ -5268,7 +5313,7 @@ class DescribeEnvironmentRolesRequest extends  AbstractModel {
          * * RoleName
 Filter by role name for exact query.
 Type: String
-Required: no
+Required: No
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5479,7 +5524,7 @@ class DescribeRocketMQTopicsResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of records
+         * The total number of query records.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -5529,57 +5574,57 @@ class Environment extends  AbstractModel {
         super();
 
         /**
-         * Namespace name
+         * Namespace name.
          * @type {string || null}
          */
         this.EnvironmentId = null;
 
         /**
-         * Remarks
+         * Description.
          * @type {string || null}
          */
         this.Remark = null;
 
         /**
-         * TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds (i.e., 15 days)
+         * Retention period for unconsumed messages in seconds. Maximum value: 1,296,000 seconds (15 days).
          * @type {number || null}
          */
         this.MsgTTL = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Modification time
+         * Last modified.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Namespace ID
+         * Namespace ID.
          * @type {string || null}
          */
         this.NamespaceId = null;
 
         /**
-         * Namespace name
+         * Namespace name.
          * @type {string || null}
          */
         this.NamespaceName = null;
 
         /**
-         * Number of topics
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of topics.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TopicNum = null;
 
         /**
-         * Message retention policy
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Message retention policy.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {RetentionPolicy || null}
          */
         this.RetentionPolicy = null;
@@ -5612,7 +5657,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Tenant RocketMQ cluster details
+ * Details of the tenant’s RocketMQ cluster
  * @class
  */
 class RocketMQClusterDetail extends  AbstractModel {
@@ -5620,20 +5665,20 @@ class RocketMQClusterDetail extends  AbstractModel {
         super();
 
         /**
-         * Cluster's basic information
+         * Basic cluster information.
          * @type {RocketMQClusterInfo || null}
          */
         this.Info = null;
 
         /**
-         * Cluster configuration information
+         * Cluster configuration information.
          * @type {RocketMQClusterConfig || null}
          */
         this.Config = null;
 
         /**
-         * Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cluster status. 0: Creating; 1: Normal; 2: Terminating; 3: Deleted; 4. Isolated; 5. Creation failed; 6: Deletion failed.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
@@ -5737,91 +5782,91 @@ class PartitionsTopic extends  AbstractModel {
 
         /**
          * Average size of the messages published in the last interval in bytes.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AverageMsgSize = null;
 
         /**
-         * Number of consumers.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of consumers.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConsumerCount = null;
 
         /**
-         * Total number of recorded messages.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The total number of recorded messages.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastConfirmedEntry = null;
 
         /**
          * Time when the last ledger was created.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastLedgerCreatedTimestamp = null;
 
         /**
-         * Number of messages published by local and replicated publishers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of messages published by local and replicated publishers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgRateIn = null;
 
         /**
-         * Sum of the numbers of messages delivered by local and replicated consumers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The total number of messages delivered by local and replicated consumers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgRateOut = null;
 
         /**
-         * Number of bytes of messages published by local and replicated publishers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The size (in bytes) of messages published by local and replicated publishers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgThroughputIn = null;
 
         /**
-         * Number of bytes of messages delivered by local and replicated consumers per second.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The size (in bytes) of messages delivered by local and replicated consumers per second.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgThroughputOut = null;
 
         /**
-         * Total number of recorded messages.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The total number of recorded messages.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NumberOfEntries = null;
 
         /**
          * Subpartition ID.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Partitions = null;
 
         /**
-         * Number of producers.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of producers.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ProducerCount = null;
 
         /**
-         * Total amount of all stored messages in bytes.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Total size of all stored messages in bytes.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TotalSize = null;
 
         /**
          * Topic type description.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TopicType = null;
@@ -5861,7 +5906,7 @@ class DescribeRocketMQGroupsResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number
+         * The total number of subscription groups.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -6237,7 +6282,7 @@ class CreateTopicResponse extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * 0: non-partitioned topic; other values: number of partitions in the partitioned topic.
+         * Valid value: 0 or 1. Non-partitioned topic: No partitions. A value greater than 1: The partition count of a partitioned topic. `0` is returned for existing non-partitioned topics, and `1` is returned for incremental non-partitioned topics.
          * @type {number || null}
          */
         this.Partitions = null;
@@ -6250,13 +6295,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Remark = null;
 
         /**
-         * 0: general message;
-1: globally sequential message;
-2: partitionally sequential message;
-3: retry letter queue;
-4: dead letter queue;
-5: transaction message.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * 0: General message;
+1: Globally sequential message;
+2: Partitionally sequential message;
+3: Retry letter topic;
+4: Dead letter topic.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TopicType = null;
@@ -6295,13 +6339,13 @@ class DescribeCmqQueuesRequest extends  AbstractModel {
         super();
 
         /**
-         * Starting position of the list of queues to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
+         * Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` must be specified. If this parameter is left empty, 0 will be used by default.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
+         * The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
          * @type {number || null}
          */
         this.Limit = null;
@@ -6313,19 +6357,19 @@ class DescribeCmqQueuesRequest extends  AbstractModel {
         this.QueueName = null;
 
         /**
-         * List of CMQ queue names
+         * Filter by CMQ queue name.
          * @type {Array.<string> || null}
          */
         this.QueueNameList = null;
 
         /**
-         * For filtering by tag, this must be configured to `true`.
+         * For filtering by tag, this parameter must be set to `true`.
          * @type {boolean || null}
          */
         this.IsTagFilter = null;
 
         /**
-         * Filter. Currently, you can filter only by tag.
+         * Filter. Currently, you can filter by tag. The tag name must be prefixed with “tag:”, such as “tag: owner”, “tag: environment”, or “tag: business”.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6366,13 +6410,13 @@ class DescribeEnvironmentsResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of namespaces.
+         * The number of namespaces.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Array set of namespaces.
+         * Array of namespace sets.
          * @type {Array.<Environment> || null}
          */
         this.EnvironmentSet = null;
@@ -6555,6 +6599,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SubName = null;
 
         /**
+         * MessageIDs returned by `BatchReceivePolicy` at a time, which are separated by “###”.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MessageIDList = null;
+
+        /**
+         * Message contents returned by `BatchReceivePolicy` at a time, which are separated by “###”.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MessagesPayload = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -6574,6 +6632,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
         this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
         this.SubName = 'SubName' in params ? params.SubName : null;
+        this.MessageIDList = 'MessageIDList' in params ? params.MessageIDList : null;
+        this.MessagesPayload = 'MessagesPayload' in params ? params.MessagesPayload : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6716,13 +6776,13 @@ class DescribeCmqTopicsRequest extends  AbstractModel {
         super();
 
         /**
-         * Starting position of the list of queues to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
+         * Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` must be specified. If this parameter is left empty, 0 will be used by default.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
+         * The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
          * @type {number || null}
          */
         this.Limit = null;
@@ -6734,19 +6794,19 @@ class DescribeCmqTopicsRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * Filter by list of CMQ topic names
+         * Filter by CMQ topic name.
          * @type {Array.<string> || null}
          */
         this.TopicNameList = null;
 
         /**
-         * For filtering by tag, this must be configured to `true`.
+         * For filtering by tag, this parameter must be set to `true`.
          * @type {boolean || null}
          */
         this.IsTagFilter = null;
 
         /**
-         * Filter. Currently, you can filter only by tag.
+         * Filter. Currently, you can filter by tag. The tag name must be prefixed with “tag:”, such as “tag: owner”, “tag: environment”, or “tag: business”.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6822,7 +6882,7 @@ class DeleteTopicsRequest extends  AbstractModel {
         super();
 
         /**
-         * Set of topics. Up to 20 topics can be deleted at a time.
+         * Topic set. Up to 20 topics can be deleted at a time.
          * @type {Array.<TopicRecord> || null}
          */
         this.TopicSets = null;
@@ -6840,7 +6900,7 @@ class DeleteTopicsRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * Whether to force deletion. Default value: false
+         * Whether to forcibly delete a topic. Default value: `false`.
          * @type {boolean || null}
          */
         this.Force = null;
@@ -7057,35 +7117,35 @@ class Consumer extends  AbstractModel {
 
         /**
          * The time when the consumer started connecting.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConnectedSince = null;
 
         /**
          * Consumer address.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConsumerAddr = null;
 
         /**
          * Consumer name.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConsumerName = null;
 
         /**
          * Consumer version.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ClientVersion = null;
 
         /**
          * Serial number of the topic partition connected to the consumer.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Partition = null;
@@ -7421,41 +7481,41 @@ class ConsumersSchedule extends  AbstractModel {
         super();
 
         /**
-         * Current partition ID.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * ID of the current partition.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Partitions = null;
 
         /**
-         * Number of messages.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of messages.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.NumberOfEntries = null;
 
         /**
-         * Number of retained messages.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The number of heaped messages.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MsgBacklog = null;
 
         /**
-         * Sum of the numbers of messages delivered by the consumer per second.
+         * The total number of messages delivered by the consumer per second.
          * @type {string || null}
          */
         this.MsgRateOut = null;
 
         /**
-         * Number of bytes of messages consumed by the consumer per second.
+         * The size (in bytes) of messages consumed by the consumer per second.
          * @type {string || null}
          */
         this.MsgThroughputOut = null;
 
         /**
          * Percentage of messages discarded due to timeout.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MsgRateExpired = null;
@@ -8489,7 +8549,7 @@ class CreateCmqQueueRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+         * Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
          * @type {number || null}
          */
         this.RetentionSizeInMB = null;
@@ -8597,25 +8657,25 @@ class DescribeRocketMQGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * Cluster ID
+         * Cluster ID.
          * @type {string || null}
          */
         this.ClusterId = null;
 
         /**
-         * Namespace
+         * Namespace.
          * @type {string || null}
          */
         this.NamespaceId = null;
 
         /**
-         * Offset
+         * Offset.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Maximum number
+         * The max number of returned results.
          * @type {number || null}
          */
         this.Limit = null;
@@ -8633,19 +8693,19 @@ class DescribeRocketMQGroupsRequest extends  AbstractModel {
         this.FilterGroup = null;
 
         /**
-         * Sort by specified field. Valid values: tps, accumulative.
+         * Sort by specified field. Valid values: `tps`, `accumulative`.
          * @type {string || null}
          */
         this.SortedBy = null;
 
         /**
-         * Sort in ascending or descending order. Valid values: asc, desc.
+         * Sort in ascending or descending order. Valid values: `asc`, `desc`.
          * @type {string || null}
          */
         this.SortOrder = null;
 
         /**
-         * Subscription group name. After it is specified, only the information of the corresponding subscription group will be returned.
+         * Subscription group name. After it is specified, the information of only this subscription group will be returned.
          * @type {string || null}
          */
         this.FilterOneGroup = null;
@@ -8681,14 +8741,14 @@ class DescribeRocketMQClustersResponse extends  AbstractModel {
         super();
 
         /**
-         * Cluster information
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cluster information.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<RocketMQClusterDetail> || null}
          */
         this.ClusterList = null;
 
         /**
-         * Total number
+         * The total number of returned results.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -9358,7 +9418,7 @@ class ModifyCmqQueueAttributeRequest extends  AbstractModel {
         this.Transaction = null;
 
         /**
-         * Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+         * Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
          * @type {number || null}
          */
         this.RetentionSizeInMB = null;
@@ -9471,7 +9531,7 @@ class DeleteSubscriptionsRequest extends  AbstractModel {
         super();
 
         /**
-         * Set of subscriptions. Up to 20 subscriptions can be deleted at a time.
+         * Subscription set. Up to 20 subscriptions can be deleted at a time.
          * @type {Array.<SubscriptionTopic> || null}
          */
         this.SubscriptionTopicSets = null;
@@ -9489,7 +9549,7 @@ class DeleteSubscriptionsRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * Whether to force deletion. Default value: false
+         * Whether to forcibly delete a subscription. Default value: `false`.
          * @type {boolean || null}
          */
         this.Force = null;

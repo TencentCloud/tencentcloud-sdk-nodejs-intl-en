@@ -16,89 +16,107 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const AddInstancesResponse = models.AddInstancesResponse;
-const NetAddr = models.NetAddr;
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
-const Addr = models.Addr;
-const DescribeClustersRequest = models.DescribeClustersRequest;
-const NewAccount = models.NewAccount;
-const InstanceSpec = models.InstanceSpec;
-const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
-const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
-const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
-const BackupFileInfo = models.BackupFileInfo;
-const SecurityGroup = models.SecurityGroup;
-const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
+const ObjectTask = models.ObjectTask;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const ModifyMaintainPeriodConfigRequest = models.ModifyMaintainPeriodConfigRequest;
+const DescribeRollbackTimeRangeResponse = models.DescribeRollbackTimeRangeResponse;
+const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
+const QueryFilter = models.QueryFilter;
+const DescribeBinlogDownloadUrlRequest = models.DescribeBinlogDownloadUrlRequest;
+const CreateAccountsResponse = models.CreateAccountsResponse;
+const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const DescribeMaintainPeriodRequest = models.DescribeMaintainPeriodRequest;
+const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const ClusterInstanceDetail = models.ClusterInstanceDetail;
+const Account = models.Account;
+const IsolateInstanceResponse = models.IsolateInstanceResponse;
+const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
+const PauseServerlessRequest = models.PauseServerlessRequest;
+const CreateClustersResponse = models.CreateClustersResponse;
+const SetRenewFlagRequest = models.SetRenewFlagRequest;
+const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
+const SlowQueriesItem = models.SlowQueriesItem;
+const ActivateInstanceRequest = models.ActivateInstanceRequest;
+const DescribeClustersRequest = models.DescribeClustersRequest;
+const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeClusterInstanceGrpsRequest = models.DescribeClusterInstanceGrpsRequest;
 const DescribeResourcesByDealNameResponse = models.DescribeResourcesByDealNameResponse;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const ResumeServerlessResponse = models.ResumeServerlessResponse;
 const CreateAccountsRequest = models.CreateAccountsRequest;
 const IsolateInstanceRequest = models.IsolateInstanceRequest;
+const ExportInstanceSlowQueriesResponse = models.ExportInstanceSlowQueriesResponse;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
+const Tag = models.Tag;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const PauseServerlessResponse = models.PauseServerlessResponse;
+const OfflineClusterRequest = models.OfflineClusterRequest;
+const NewAccount = models.NewAccount;
+const BackupFileInfo = models.BackupFileInfo;
+const DescribeBinlogDownloadUrlResponse = models.DescribeBinlogDownloadUrlResponse;
+const DescribeBackupListRequest = models.DescribeBackupListRequest;
+const CynosdbInstance = models.CynosdbInstance;
+const IsolateClusterResponse = models.IsolateClusterResponse;
+const CreateClustersRequest = models.CreateClustersRequest;
+const DescribeClustersResponse = models.DescribeClustersResponse;
+const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const AddInstancesResponse = models.AddInstancesResponse;
+const Addr = models.Addr;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
+const SecurityGroup = models.SecurityGroup;
+const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest;
+const NetAddr = models.NetAddr;
+const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
+const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidityResponse;
+const DescribeInstanceSlowQueriesResponse = models.DescribeInstanceSlowQueriesResponse;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const DescribeBackupDownloadUrlResponse = models.DescribeBackupDownloadUrlResponse;
+const ResumeServerlessRequest = models.ResumeServerlessRequest;
+const BillingResourceInfo = models.BillingResourceInfo;
+const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
+const DescribeInstanceSpecsRequest = models.DescribeInstanceSpecsRequest;
+const ExportInstanceSlowQueriesRequest = models.ExportInstanceSlowQueriesRequest;
+const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
+const CynosdbCluster = models.CynosdbCluster;
+const BinlogItem = models.BinlogItem;
+const OfflineClusterResponse = models.OfflineClusterResponse;
+const InstanceSpec = models.InstanceSpec;
+const SetRenewFlagResponse = models.SetRenewFlagResponse;
+const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
 const DescribeBackupListResponse = models.DescribeBackupListResponse;
-const DescribeRollbackTimeRangeResponse = models.DescribeRollbackTimeRangeResponse;
-const ModifyMaintainPeriodConfigRequest = models.ModifyMaintainPeriodConfigRequest;
-const ResumeServerlessRequest = models.ResumeServerlessRequest;
-const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
+const DescribeBinlogSaveDaysRequest = models.DescribeBinlogSaveDaysRequest;
+const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const ActivateInstanceResponse = models.ActivateInstanceResponse;
-const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const DescribeRollbackTimeValidityRequest = models.DescribeRollbackTimeValidityRequest;
 const IsolateClusterRequest = models.IsolateClusterRequest;
 const DescribeClusterInstanceGrpsResponse = models.DescribeClusterInstanceGrpsResponse;
 const AddInstancesRequest = models.AddInstancesRequest;
-const CreateAccountsResponse = models.CreateAccountsResponse;
-const ModifyInstanceNameRequest = models.ModifyInstanceNameRequest;
-const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
-const Tag = models.Tag;
-const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const CynosdbInstanceDetail = models.CynosdbInstanceDetail;
-const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
-const DescribeMaintainPeriodRequest = models.DescribeMaintainPeriodRequest;
-const PauseServerlessResponse = models.PauseServerlessResponse;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const CynosdbClusterDetail = models.CynosdbClusterDetail;
-const ClusterInstanceDetail = models.ClusterInstanceDetail;
-const Account = models.Account;
-const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidityResponse;
 const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
 const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
-const IsolateInstanceResponse = models.IsolateInstanceResponse;
-const DescribeBackupListRequest = models.DescribeBackupListRequest;
-const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
-const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
-const QueryFilter = models.QueryFilter;
-const ObjectTask = models.ObjectTask;
+const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
+const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
 const ModifyClusterParamRequest = models.ModifyClusterParamRequest;
-const CynosdbInstance = models.CynosdbInstance;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
-const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
 const OfflineInstanceRequest = models.OfflineInstanceRequest;
-const BillingResourceInfo = models.BillingResourceInfo;
-const OfflineClusterResponse = models.OfflineClusterResponse;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
-const PauseServerlessRequest = models.PauseServerlessRequest;
-const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
-const SetRenewFlagResponse = models.SetRenewFlagResponse;
-const DescribeInstanceSpecsRequest = models.DescribeInstanceSpecsRequest;
-const ParamItem = models.ParamItem;
-const IsolateClusterResponse = models.IsolateClusterResponse;
-const SetRenewFlagRequest = models.SetRenewFlagRequest;
-const CynosdbCluster = models.CynosdbCluster;
-const OfflineClusterRequest = models.OfflineClusterRequest;
-const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const OfflineInstanceResponse = models.OfflineInstanceResponse;
-const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
-const DescribeClustersResponse = models.DescribeClustersResponse;
-const ActivateInstanceRequest = models.ActivateInstanceRequest;
-const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
+const ParamItem = models.ParamItem;
 const PolicyRule = models.PolicyRule;
-const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
-const ResumeServerlessResponse = models.ResumeServerlessResponse;
-const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
+const DescribeInstanceSlowQueriesRequest = models.DescribeInstanceSlowQueriesRequest;
+const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
+const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 
 
 /**
@@ -131,6 +149,28 @@ class CynosdbClient extends AbstractClient {
     DescribeBackupList(req, cb) {
         let resp = new DescribeBackupListResponse();
         this.request("DescribeBackupList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the security group information of a project.
+     * @param {DescribeProjectSecurityGroupsRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeProjectSecurityGroups(req, cb) {
+        let resp = new DescribeProjectSecurityGroupsResponse();
+        this.request("DescribeProjectSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the binlog retention period of a cluster in days.
+     * @param {DescribeBinlogSaveDaysRequest} req
+     * @param {function(string, DescribeBinlogSaveDaysResponse):void} cb
+     * @public
+     */
+    DescribeBinlogSaveDays(req, cb) {
+        let resp = new DescribeBinlogSaveDaysResponse();
+        this.request("DescribeBinlogSaveDays", req, resp, cb);
     }
 
     /**
@@ -299,14 +339,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the security group information of a project.
-     * @param {DescribeProjectSecurityGroupsRequest} req
-     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
+     * This API is used to query the download address of a cluster backup file.
+     * @param {DescribeBackupDownloadUrlRequest} req
+     * @param {function(string, DescribeBackupDownloadUrlResponse):void} cb
      * @public
      */
-    DescribeProjectSecurityGroups(req, cb) {
-        let resp = new DescribeProjectSecurityGroupsResponse();
-        this.request("DescribeProjectSecurityGroups", req, resp, cb);
+    DescribeBackupDownloadUrl(req, cb) {
+        let resp = new DescribeBackupDownloadUrlResponse();
+        this.request("DescribeBackupDownloadUrl", req, resp, cb);
     }
 
     /**
@@ -365,6 +405,39 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the slow query logs of an instance.
+     * @param {DescribeInstanceSlowQueriesRequest} req
+     * @param {function(string, DescribeInstanceSlowQueriesResponse):void} cb
+     * @public
+     */
+    DescribeInstanceSlowQueries(req, cb) {
+        let resp = new DescribeInstanceSlowQueriesResponse();
+        this.request("DescribeInstanceSlowQueries", req, resp, cb);
+    }
+
+    /**
+     * This API is used to rename a backup file.
+     * @param {ModifyBackupNameRequest} req
+     * @param {function(string, ModifyBackupNameResponse):void} cb
+     * @public
+     */
+    ModifyBackupName(req, cb) {
+        let resp = new ModifyBackupNameResponse();
+        this.request("ModifyBackupName", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the download address of a binlog.
+     * @param {DescribeBinlogDownloadUrlRequest} req
+     * @param {function(string, DescribeBinlogDownloadUrlResponse):void} cb
+     * @public
+     */
+    DescribeBinlogDownloadUrl(req, cb) {
+        let resp = new DescribeBinlogDownloadUrlResponse();
+        this.request("DescribeBinlogDownloadUrl", req, resp, cb);
+    }
+
+    /**
      * This API is used to query database management accounts.
      * @param {DescribeAccountsRequest} req
      * @param {function(string, DescribeAccountsResponse):void} cb
@@ -409,6 +482,28 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create a cluster.
+     * @param {CreateClustersRequest} req
+     * @param {function(string, CreateClustersResponse):void} cb
+     * @public
+     */
+    CreateClusters(req, cb) {
+        let resp = new CreateClustersResponse();
+        this.request("CreateClusters", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of binlogs in a cluster.
+     * @param {DescribeBinlogsRequest} req
+     * @param {function(string, DescribeBinlogsResponse):void} cb
+     * @public
+     */
+    DescribeBinlogs(req, cb) {
+        let resp = new DescribeBinlogsResponse();
+        this.request("DescribeBinlogs", req, resp, cb);
+    }
+
+    /**
      * This API is used to create an account.
      * @param {CreateAccountsRequest} req
      * @param {function(string, CreateAccountsResponse):void} cb
@@ -439,6 +534,17 @@ class CynosdbClient extends AbstractClient {
     DescribeDBSecurityGroups(req, cb) {
         let resp = new DescribeDBSecurityGroupsResponse();
         this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the slow logs of an instance.
+     * @param {ExportInstanceSlowQueriesRequest} req
+     * @param {function(string, ExportInstanceSlowQueriesResponse):void} cb
+     * @public
+     */
+    ExportInstanceSlowQueries(req, cb) {
+        let resp = new ExportInstanceSlowQueriesResponse();
+        this.request("ExportInstanceSlowQueries", req, resp, cb);
     }
 
     /**

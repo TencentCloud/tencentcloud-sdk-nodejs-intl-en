@@ -1931,6 +1931,42 @@ class DescribeBinlogsResponse extends  AbstractModel {
 }
 
 /**
+ * StopReplication response structure.
+ * @class
+ */
+class StopReplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ResetRootAccount response structure.
  * @class
  */
@@ -2217,6 +2253,42 @@ class DBSwitchInfo extends  AbstractModel {
         }
         this.SwitchTime = 'SwitchTime' in params ? params.SwitchTime : null;
         this.SwitchType = 'SwitchType' in params ? params.SwitchType : null;
+
+    }
+}
+
+/**
+ * StartReplication response structure.
+ * @class
+ */
+class StartReplicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4639,7 +4711,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.AutoRenewFlag = null;
 
         /**
-         * Instance name.
+         * Instance name. For multiple instances purchased at one time, they will be distinguished by the name suffix number, such as instnaceName=db and goodsNum=3, their instance name is db1, db2 respectively.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -6428,19 +6500,12 @@ class DeleteAccountsResponse extends  AbstractModel {
 }
 
 /**
- * StartReplication response structure.
+ * OpenAuditService response structure.
  * @class
  */
-class StartReplicationResponse extends  AbstractModel {
+class OpenAuditServiceResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Async task ID.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6457,7 +6522,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7459,25 +7523,42 @@ class DescribeTimeWindowResponse extends  AbstractModel {
 }
 
 /**
- * StopReplication response structure.
+ * OpenAuditService request structure.
  * @class
  */
-class StopReplicationResponse extends  AbstractModel {
+class OpenAuditServiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * TencentDB for MySQL instance ID
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.InstanceId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Retention period of audit logs. Valid values:
+7: seven days (a week);
+30: 30 days (a month);
+180: 180 days (six months);
+365: 365 days (a year);
+1095: 1095 days (three years);
+1825: 1825 days (five years).
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.LogExpireDay = null;
+
+        /**
+         * Retention period of high-frequency audit logs. Valid values:
+7: seven days (a week);
+30: 30 days (a month);
+180: 180 days (six months);
+365: 365 days (a year);
+1095: 1095 days (three years);
+1825: 1825 days (five years).
+         * @type {number || null}
+         */
+        this.HighLogExpireDay = null;
 
     }
 
@@ -7488,8 +7569,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.HighLogExpireDay = 'HighLogExpireDay' in params ? params.HighLogExpireDay : null;
 
     }
 }
@@ -8961,7 +9043,7 @@ class ModifyLocalBinlogConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Retention period of local binlog. Value range: [72,168].
+         * Retention period of local binlog. Value range: [120,168].
          * @type {number || null}
          */
         this.SaveHours = null;
@@ -15668,6 +15750,7 @@ module.exports = {
     ApplyCDBProxyResponse: ApplyCDBProxyResponse,
     MasterInfo: MasterInfo,
     DescribeBinlogsResponse: DescribeBinlogsResponse,
+    StopReplicationResponse: StopReplicationResponse,
     ResetRootAccountResponse: ResetRootAccountResponse,
     DeleteParamTemplateResponse: DeleteParamTemplateResponse,
     ProxyNodeInfo: ProxyNodeInfo,
@@ -15675,6 +15758,7 @@ module.exports = {
     DescribeDefaultParamsRequest: DescribeDefaultParamsRequest,
     RoGroupAttr: RoGroupAttr,
     DBSwitchInfo: DBSwitchInfo,
+    StartReplicationResponse: StartReplicationResponse,
     ModifyTimeWindowResponse: ModifyTimeWindowResponse,
     InitDBInstancesResponse: InitDBInstancesResponse,
     CloseCDBProxyResponse: CloseCDBProxyResponse,
@@ -15746,7 +15830,7 @@ module.exports = {
     ModifyInstanceTagRequest: ModifyInstanceTagRequest,
     CloseWanServiceRequest: CloseWanServiceRequest,
     DeleteAccountsResponse: DeleteAccountsResponse,
-    StartReplicationResponse: StartReplicationResponse,
+    OpenAuditServiceResponse: OpenAuditServiceResponse,
     DescribeDBInstanceCharsetResponse: DescribeDBInstanceCharsetResponse,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
@@ -15770,7 +15854,7 @@ module.exports = {
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
     DescribeTimeWindowResponse: DescribeTimeWindowResponse,
-    StopReplicationResponse: StopReplicationResponse,
+    OpenAuditServiceRequest: OpenAuditServiceRequest,
     BackupItem: BackupItem,
     ModifyCDBProxyVipVPortRequest: ModifyCDBProxyVipVPortRequest,
     DescribeCDBProxyRequest: DescribeCDBProxyRequest,

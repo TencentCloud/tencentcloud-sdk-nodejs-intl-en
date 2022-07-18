@@ -50,6 +50,7 @@ const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse
 const ApplyCDBProxyResponse = models.ApplyCDBProxyResponse;
 const MasterInfo = models.MasterInfo;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
+const StopReplicationResponse = models.StopReplicationResponse;
 const ResetRootAccountResponse = models.ResetRootAccountResponse;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const ProxyNodeInfo = models.ProxyNodeInfo;
@@ -57,6 +58,7 @@ const DescribeRoMinScaleRequest = models.DescribeRoMinScaleRequest;
 const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
 const RoGroupAttr = models.RoGroupAttr;
 const DBSwitchInfo = models.DBSwitchInfo;
+const StartReplicationResponse = models.StartReplicationResponse;
 const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const CloseCDBProxyResponse = models.CloseCDBProxyResponse;
@@ -128,7 +130,7 @@ const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse
 const ModifyInstanceTagRequest = models.ModifyInstanceTagRequest;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const DeleteAccountsResponse = models.DeleteAccountsResponse;
-const StartReplicationResponse = models.StartReplicationResponse;
+const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
 const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
@@ -152,7 +154,7 @@ const CreateRoInstanceIpRequest = models.CreateRoInstanceIpRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
-const StopReplicationResponse = models.StopReplicationResponse;
+const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const BackupItem = models.BackupItem;
 const ModifyCDBProxyVipVPortRequest = models.ModifyCDBProxyVipVPortRequest;
 const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
@@ -1068,6 +1070,17 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
+     * This API is used to start the data replication from the source instance to the read-only instance.
+     * @param {StartReplicationRequest} req
+     * @param {function(string, StartReplicationResponse):void} cb
+     * @public
+     */
+    StartReplication(req, cb) {
+        let resp = new StartReplicationResponse();
+        this.request("StartReplication", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyInstanceParam) is used to modify instance parameters.
      * @param {ModifyInstanceParamRequest} req
      * @param {function(string, ModifyInstanceParamResponse):void} cb
@@ -1331,14 +1344,14 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
-     * This API is used to start the data replication from the source instance to the read-only instance.
-     * @param {StartReplicationRequest} req
-     * @param {function(string, StartReplicationResponse):void} cb
+     * This API is used to enable the audit service.
+     * @param {OpenAuditServiceRequest} req
+     * @param {function(string, OpenAuditServiceResponse):void} cb
      * @public
      */
-    StartReplication(req, cb) {
-        let resp = new StartReplicationResponse();
-        this.request("StartReplication", req, resp, cb);
+    OpenAuditService(req, cb) {
+        let resp = new OpenAuditServiceResponse();
+        this.request("OpenAuditService", req, resp, cb);
     }
 
     /**

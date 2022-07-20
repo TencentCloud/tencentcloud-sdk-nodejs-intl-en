@@ -271,6 +271,20 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.DiskEncrypt = null;
 
+        /**
+         * CPU number
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CpuNum = null;
+
+        /**
+         * Memory size in GB
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
     }
 
     /**
@@ -293,6 +307,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
         this.DiskEncrypt = 'DiskEncrypt' in params ? params.DiskEncrypt : null;
+        this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
 
     }
 }

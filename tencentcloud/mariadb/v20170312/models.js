@@ -657,6 +657,18 @@ class CreateAccountRequest extends  AbstractModel {
          */
         this.DelayThresh = null;
 
+        /**
+         * Whether to specify a replica server for read-only account. Valid values: `0` (No replica server is specified, which means that the proxy will select another available replica server to keep connection with the client if the current replica server doesn’t meet the requirement). `1` (The replica server is specified, which means that the connection will be disconnected if the specified replica server doesn’t meet the requirement.)
+         * @type {number || null}
+         */
+        this.SlaveConst = null;
+
+        /**
+         * Maximum number of connections. If left empty or `0` is passed in, the connections will be unlimited. This parameter configuration is not supported for kernel version 10.1.
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
+
     }
 
     /**
@@ -673,6 +685,8 @@ class CreateAccountRequest extends  AbstractModel {
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.DelayThresh = 'DelayThresh' in params ? params.DelayThresh : null;
+        this.SlaveConst = 'SlaveConst' in params ? params.SlaveConst : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
 
     }
 }
@@ -1720,6 +1734,34 @@ class DescribeDatabaseObjectsRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.DbName = 'DbName' in params ? params.DbName : null;
+
+    }
+}
+
+/**
+ * DestroyDBInstance request structure.
+ * @class
+ */
+class DestroyDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of “tdsqlshard-c1nl9rpv”. It is the same as the instance ID displayed in the TencentDB for MariaDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4434,6 +4476,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.DelayThresh = null;
 
+        /**
+         * Whether to specify a replica server for read-only account. Valid values: `0` (No replica server is specified, which means that the proxy will select another available replica server to keep connection with the client if the current replica server doesn’t meet the requirement). `1` (The replica server is specified, which means that the connection will be disconnected if the specified replica server doesn’t meet the requirement.)
+         * @type {number || null}
+         */
+        this.SlaveConst = null;
+
     }
 
     /**
@@ -4450,6 +4498,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
         this.DelayThresh = 'DelayThresh' in params ? params.DelayThresh : null;
+        this.SlaveConst = 'SlaveConst' in params ? params.SlaveConst : null;
 
     }
 }
@@ -4911,6 +4960,48 @@ class ModifyDBInstancesProjectRequest extends  AbstractModel {
 }
 
 /**
+ * DestroyDBInstance response structure.
+ * @class
+ */
+class DestroyDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, which is the same as the request parameter `InstanceId`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/557/56485?from_cn_redirect=1) API to query the async task result.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBSyncMode response structure.
  * @class
  */
@@ -5089,6 +5180,7 @@ module.exports = {
     DatabaseFunction: DatabaseFunction,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
+    DestroyDBInstanceRequest: DestroyDBInstanceRequest,
     DatabaseTable: DatabaseTable,
     Deal: Deal,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
@@ -5142,6 +5234,7 @@ module.exports = {
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeDBSlowLogsResponse: DescribeDBSlowLogsResponse,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
+    DestroyDBInstanceResponse: DestroyDBInstanceResponse,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     DescribeInstanceNodeInfoResponse: DescribeInstanceNodeInfoResponse,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,

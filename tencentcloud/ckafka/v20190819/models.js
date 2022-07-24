@@ -1626,6 +1626,12 @@ class DescribeCkafkaZoneRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cloud Dedicated Cluster (CDC) business parameter.
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -1635,6 +1641,7 @@ class DescribeCkafkaZoneRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -3399,6 +3406,12 @@ class DescribeRegionRequest extends  AbstractModel {
          */
         this.Business = null;
 
+        /**
+         * CDC business field, which can be ignored.
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -3411,6 +3424,7 @@ class DescribeRegionRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Business = 'Business' in params ? params.Business : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -6593,7 +6607,7 @@ class SendMessageRequest extends  AbstractModel {
         this.DataHubId = null;
 
         /**
-         * Message content that is sent.
+         * Content of the message that has been sent. Up to 500 messages can be sent in a single request.
          * @type {Array.<BatchContent> || null}
          */
         this.Message = null;
@@ -7690,6 +7704,19 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.PublicNetwork = null;
 
+        /**
+         * Instance type.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Features = null;
+
     }
 
     /**
@@ -7745,6 +7772,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.PartitionNumber = 'PartitionNumber' in params ? params.PartitionNumber : null;
         this.PublicNetworkChargeType = 'PublicNetworkChargeType' in params ? params.PublicNetworkChargeType : null;
         this.PublicNetwork = 'PublicNetwork' in params ? params.PublicNetwork : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.Features = 'Features' in params ? params.Features : null;
 
     }
 }

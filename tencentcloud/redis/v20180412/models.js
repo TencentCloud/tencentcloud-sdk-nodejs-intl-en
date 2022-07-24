@@ -6862,7 +6862,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Size of the instance list. If no value is specified for this parameter, it will be 20 by default. If the specified value is greater than the `DescribeInstancesPageLimit` configuration item in the specific configuration file `etc/conf/component.properties` (which is 1,000 by default if the configuration cannot be read), then the configuration item shall prevail.
+         * Number of returned results. Default value: 20. Maximum value: 1000.
          * @type {number || null}
          */
         this.Limit = null;
@@ -7005,6 +7005,12 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.TagKeys = null;
 
+        /**
+         * Product editions to be filtered. Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). If this parameter is not passed in, the product will not be filtered by default.
+         * @type {Array.<string> || null}
+         */
+        this.ProductVersions = null;
+
     }
 
     /**
@@ -7046,6 +7052,7 @@ class DescribeInstancesRequest extends  AbstractModel {
             }
         }
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.ProductVersions = 'ProductVersions' in params ? params.ProductVersions : null;
 
     }
 }

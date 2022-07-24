@@ -53,6 +53,7 @@ const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGrou
 const DatabaseFunction = models.DatabaseFunction;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
+const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const DatabaseTable = models.DatabaseTable;
 const Deal = models.Deal;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
@@ -106,6 +107,7 @@ const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
@@ -177,6 +179,17 @@ Note: accounts with the same username but different hosts are different accounts
     ModifyAccountDescription(req, cb) {
         let resp = new ModifyAccountDescriptionResponse();
         this.request("ModifyAccountDescription", req, resp, cb);
+    }
+
+    /**
+     * This API is used to terminate an isolated monthly subscribed instance.
+     * @param {DestroyDBInstanceRequest} req
+     * @param {function(string, DestroyDBInstanceResponse):void} cb
+     * @public
+     */
+    DestroyDBInstance(req, cb) {
+        let resp = new DestroyDBInstanceResponse();
+        this.request("DestroyDBInstance", req, resp, cb);
     }
 
     /**

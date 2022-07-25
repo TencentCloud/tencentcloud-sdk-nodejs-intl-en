@@ -418,8 +418,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Status = null;
 
         /**
-         * This field is used to return the video moderation type passed in when the video moderation API is called. Valid values: **VIDEO** (video on demand), **LIVE_VIDEO** (video live streaming). Default value: VIDEO.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * This field is used to return the type of video for moderation. Valid values: `VIDEO` (video on demand), `LIVE_VIDEO` (video live streaming). Default value: `VIDEO`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Type = null;
@@ -432,8 +432,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Suggestion = null;
 
         /**
-         * This field is used to return the maliciousness tag in the detection result.<br>Returned values: **Normal**: normal; **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * This field is used to return the maliciousness tag in the detection result.<br>Values: `Normal`: normal; `Porn`: pornographic; `Abuse`: abusive; `Ad`: advertising; `Custom`: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<TaskLabel> || null}
          */
         this.Labels = null;
@@ -495,6 +495,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.ErrorDescription = null;
+
+        /**
+         * If the recognition result is normal, this parameter is returned with the value `Normal`. If malicious content is recognized, the tag with the highest priority in the result of `Labels` is returned.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Label = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -561,6 +568,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.ErrorType = 'ErrorType' in params ? params.ErrorType : null;
         this.ErrorDescription = 'ErrorDescription' in params ? params.ErrorDescription : null;
+        this.Label = 'Label' in params ? params.Label : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1158,6 +1166,51 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Information of the category label
+ * @class
+ */
+class RecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Values: `Teenager`, `Gender`
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * List of recognized category labels
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Label = 'Label' in params ? params.Label : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CancelTask response structure.
  * @class
  */
@@ -1364,6 +1417,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SubLabel = null;
 
+        /**
+         * List of recognized category labels
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<RecognitionResult> || null}
+         */
+        this.RecognitionResults = null;
+
     }
 
     /**
@@ -1409,6 +1469,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+
+        if (params.RecognitionResults) {
+            this.RecognitionResults = new Array();
+            for (let z in params.RecognitionResults) {
+                let obj = new RecognitionResult();
+                obj.deserialize(params.RecognitionResults[z]);
+                this.RecognitionResults.push(obj);
+            }
+        }
 
     }
 }
@@ -1622,6 +1691,61 @@ class MediaInfo extends  AbstractModel {
             return;
         }
         this.Duration = 'Duration' in params ? params.Duration : null;
+
+    }
+}
+
+/**
+ * Tag of the audio slice
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value of this parameter varies by `Label`.
+When `Label` is `Teenager`, `Name` can be `Teenager`. 
+When `Label` is `Gender`, `Name` can be `Male` and `Female`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Confidence rate. Value: 1 to 100. 
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * Start time for the recognition (ms)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time for the recognition (ms)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1842,12 +1966,14 @@ module.exports = {
     DescribeTasksResponse: DescribeTasksResponse,
     AudioResultDetailLanguageResult: AudioResultDetailLanguageResult,
     TaskFilter: TaskFilter,
+    RecognitionResult: RecognitionResult,
     CancelTaskResponse: CancelTaskResponse,
     AudioResultDetailTextResult: AudioResultDetailTextResult,
     AudioResult: AudioResult,
     AudioResultDetailMoanResult: AudioResultDetailMoanResult,
     TaskData: TaskData,
     MediaInfo: MediaInfo,
+    Tag: Tag,
     AudioSegments: AudioSegments,
     ImageResultsResultDetailLocation: ImageResultsResultDetailLocation,
     ImageResult: ImageResult,

@@ -278,7 +278,7 @@ class GaapClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete security policies.
+     * This API is used to delete a security policy.
      * @param {DeleteSecurityPolicyRequest} req
      * @param {function(string, DeleteSecurityPolicyResponse):void} cb
      * @public
@@ -356,7 +356,7 @@ Note: Grouped connections currently do not support HTTP/HTTPS listeners.
     }
 
     /**
-     * This API is used to disable security policies.
+     * This API is used to disable a security policy.
      * @param {CloseSecurityPolicyRequest} req
      * @param {function(string, CloseSecurityPolicyResponse):void} cb
      * @public
@@ -444,7 +444,7 @@ Note: Grouped connections currently do not support HTTP/HTTPS listeners.
     }
 
     /**
-     * This API is used to enable security policies.
+     * This API is used to enable a security policy.
      * @param {OpenSecurityPolicyRequest} req
      * @param {function(string, OpenSecurityPolicyResponse):void} cb
      * @public
@@ -533,7 +533,7 @@ Note: This API unbinds the previously bound origin servers, and binds the origin
     }
 
     /**
-     * This API (DeleteCertificate) is used to delete certificates.
+     * This API is used to delete a certificate.
      * @param {DeleteCertificateRequest} req
      * @param {function(string, DeleteCertificateResponse):void} cb
      * @public

@@ -16,13 +16,16 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const EnableVpcCniNetworkTypeRequest = models.EnableVpcCniNetworkTypeRequest;
 const DescribeClusterEndpointVipStatusRequest = models.DescribeClusterEndpointVipStatusRequest;
 const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
 const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const ModifyPrometheusAlertRuleRequest = models.ModifyPrometheusAlertRuleRequest;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
+const ServiceAccountAuthenticationOptions = models.ServiceAccountAuthenticationOptions;
+const DescribeEdgeCVMInstancesRequest = models.DescribeEdgeCVMInstancesRequest;
 const DescribeClusterKubeconfigResponse = models.DescribeClusterKubeconfigResponse;
-const RemoveNodeFromNodePoolResponse = models.RemoveNodeFromNodePoolResponse;
+const DescribeClusterAuthenticationOptionsRequest = models.DescribeClusterAuthenticationOptionsRequest;
 const DescribeClusterEndpointVipStatusResponse = models.DescribeClusterEndpointVipStatusResponse;
 const ModifyClusterEndpointSPRequest = models.ModifyClusterEndpointSPRequest;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
@@ -32,15 +35,24 @@ const CreatePrometheusAlertRuleRequest = models.CreatePrometheusAlertRuleRequest
 const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
 const DescribeClusterCommonNamesRequest = models.DescribeClusterCommonNamesRequest;
 const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
+const EdgeClusterPublicLB = models.EdgeClusterPublicLB;
 const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
 const PrometheusNotification = models.PrometheusNotification;
 const ClusterVersion = models.ClusterVersion;
 const RouteInfo = models.RouteInfo;
-const ResourceUsageDetail = models.ResourceUsageDetail;
+const ClusterCondition = models.ClusterCondition;
+const DescribeAvailableTKEEdgeVersionResponse = models.DescribeAvailableTKEEdgeVersionResponse;
 const InstanceUpgradeProgressItem = models.InstanceUpgradeProgressItem;
+const ModifyClusterEndpointSPResponse = models.ModifyClusterEndpointSPResponse;
 const NodePool = models.NodePool;
+const DescribeEdgeClusterInstancesResponse = models.DescribeEdgeClusterInstancesResponse;
+const IPAddress = models.IPAddress;
+const DescribeTKEEdgeClusterCredentialRequest = models.DescribeTKEEdgeClusterCredentialRequest;
 const AutoUpgradeClusterLevel = models.AutoUpgradeClusterLevel;
+const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
 const RunInstancesForNode = models.RunInstancesForNode;
+const DescribeTKEEdgeExternalKubeconfigRequest = models.DescribeTKEEdgeExternalKubeconfigRequest;
+const DescribeAvailableTKEEdgeVersionRequest = models.DescribeAvailableTKEEdgeVersionRequest;
 const DeleteClusterAsGroupsRequest = models.DeleteClusterAsGroupsRequest;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
 const InstanceExtraArgs = models.InstanceExtraArgs;
@@ -50,19 +62,23 @@ const ModifyPrometheusAlertRuleResponse = models.ModifyPrometheusAlertRuleRespon
 const AddNodeToNodePoolRequest = models.AddNodeToNodePoolRequest;
 const EnableVpcCniNetworkTypeResponse = models.EnableVpcCniNetworkTypeResponse;
 const RouteTableInfo = models.RouteTableInfo;
+const DescribeECMInstancesRequest = models.DescribeECMInstancesRequest;
 const EnableClusterDeletionProtectionResponse = models.EnableClusterDeletionProtectionResponse;
 const ClusterAsGroup = models.ClusterAsGroup;
 const Instance = models.Instance;
 const DescribeVpcCniPodLimitsResponse = models.DescribeVpcCniPodLimitsResponse;
 const DescribeVersionsResponse = models.DescribeVersionsResponse;
-const CreateClusterNodePoolFromExistingAsgRequest = models.CreateClusterNodePoolFromExistingAsgRequest;
+const DescribeEdgeClusterInstancesRequest = models.DescribeEdgeClusterInstancesRequest;
+const ECMRunMonitorServiceEnabled = models.ECMRunMonitorServiceEnabled;
+const DeleteEdgeClusterInstancesRequest = models.DeleteEdgeClusterInstancesRequest;
 const Tag = models.Tag;
+const ForwardTKEEdgeApplicationRequestV3Response = models.ForwardTKEEdgeApplicationRequestV3Response;
 const ClusterNetworkSettings = models.ClusterNetworkSettings;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const AutoScalingGroupRange = models.AutoScalingGroupRange;
 const ModifyClusterAttributeRequest = models.ModifyClusterAttributeRequest;
 const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
-const ModifyClusterEndpointSPResponse = models.ModifyClusterEndpointSPResponse;
+const EdgeClusterAdvancedSettings = models.EdgeClusterAdvancedSettings;
 const CreateClusterEndpointVipResponse = models.CreateClusterEndpointVipResponse;
 const ResourceUsage = models.ResourceUsage;
 const DescribeClusterRoutesResponse = models.DescribeClusterRoutesResponse;
@@ -71,19 +87,23 @@ const UpgradeClusterInstancesRequest = models.UpgradeClusterInstancesRequest;
 const ExtensionAddon = models.ExtensionAddon;
 const DeletePrometheusAlertRuleRequest = models.DeletePrometheusAlertRuleRequest;
 const DescribeResourceUsageRequest = models.DescribeResourceUsageRequest;
+const DescribeTKEEdgeClustersRequest = models.DescribeTKEEdgeClustersRequest;
+const ECMRunSecurityServiceEnabled = models.ECMRunSecurityServiceEnabled;
 const Label = models.Label;
 const PodLimitsByType = models.PodLimitsByType;
 const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
 const SetNodePoolNodeProtectionResponse = models.SetNodePoolNodeProtectionResponse;
+const ResourceUsageDetail = models.ResourceUsageDetail;
+const CreateTKEEdgeClusterRequest = models.CreateTKEEdgeClusterRequest;
 const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsRequest;
 const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;
 const ClusterBasicSettings = models.ClusterBasicSettings;
 const RouteTableConflict = models.RouteTableConflict;
 const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const UpgradeNodeResetParam = models.UpgradeNodeResetParam;
-const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
+const DescribeTKEEdgeClusterStatusResponse = models.DescribeTKEEdgeClusterStatusResponse;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
-const DescribeClusterAuthenticationOptionsRequest = models.DescribeClusterAuthenticationOptionsRequest;
+const CreateClusterNodePoolFromExistingAsgRequest = models.CreateClusterNodePoolFromExistingAsgRequest;
 const DescribeTKEEdgeScriptResponse = models.DescribeTKEEdgeScriptResponse;
 const DescribeClusterStatusRequest = models.DescribeClusterStatusRequest;
 const VersionInstance = models.VersionInstance;
@@ -93,26 +113,34 @@ const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
 const Taint = models.Taint;
 const CheckInstancesUpgradeAbleRequest = models.CheckInstancesUpgradeAbleRequest;
-const ExistedInstance = models.ExistedInstance;
-const ModifyNodePoolInstanceTypesRequest = models.ModifyNodePoolInstanceTypesRequest;
+const CreateECMInstancesResponse = models.CreateECMInstancesResponse;
+const ModifyClusterAsGroupOptionAttributeRequest = models.ModifyClusterAsGroupOptionAttributeRequest;
 const DescribeClusterNodePoolsResponse = models.DescribeClusterNodePoolsResponse;
 const UpgradeAbleInstancesItem = models.UpgradeAbleInstancesItem;
 const GetUpgradeInstanceProgressRequest = models.GetUpgradeInstanceProgressRequest;
 const EnableClusterDeletionProtectionRequest = models.EnableClusterDeletionProtectionRequest;
+const DescribeEdgeAvailableExtraArgsRequest = models.DescribeEdgeAvailableExtraArgsRequest;
+const ExistedInstance = models.ExistedInstance;
 const AddNodeToNodePoolResponse = models.AddNodeToNodePoolResponse;
+const ModifyNodePoolInstanceTypesRequest = models.ModifyNodePoolInstanceTypesRequest;
 const DescribeClusterLevelAttributeRequest = models.DescribeClusterLevelAttributeRequest;
 const DisableClusterDeletionProtectionRequest = models.DisableClusterDeletionProtectionRequest;
-const DescribeRegionsRequest = models.DescribeRegionsRequest;
+const NodePoolOption = models.NodePoolOption;
+const DescribeEdgeCVMInstancesResponse = models.DescribeEdgeCVMInstancesResponse;
+const CreateECMInstancesRequest = models.CreateECMInstancesRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
+const ClusterCredential = models.ClusterCredential;
 const DescribeVpcCniPodLimitsRequest = models.DescribeVpcCniPodLimitsRequest;
+const DescribeTKEEdgeScriptRequest = models.DescribeTKEEdgeScriptRequest;
 const ClusterExtraArgs = models.ClusterExtraArgs;
 const DataDisk = models.DataDisk;
+const DeleteEdgeCVMInstancesResponse = models.DeleteEdgeCVMInstancesResponse;
 const ModifyClusterNodePoolResponse = models.ModifyClusterNodePoolResponse;
 const GetUpgradeInstanceProgressResponse = models.GetUpgradeInstanceProgressResponse;
 const DescribeExistedInstancesResponse = models.DescribeExistedInstancesResponse;
-const EnableVpcCniNetworkTypeRequest = models.EnableVpcCniNetworkTypeRequest;
+const DescribeEdgeAvailableExtraArgsResponse = models.DescribeEdgeAvailableExtraArgsResponse;
 const CreatePrometheusAlertRuleResponse = models.CreatePrometheusAlertRuleResponse;
-const ResourceDeleteOption = models.ResourceDeleteOption;
+const ECMEnhancedService = models.ECMEnhancedService;
 const LoginSettings = models.LoginSettings;
 const ModifyNodePoolInstanceTypesResponse = models.ModifyNodePoolInstanceTypesResponse;
 const CreateClusterNodePoolFromExistingAsgResponse = models.CreateClusterNodePoolFromExistingAsgResponse;
@@ -123,7 +151,7 @@ const PrometheusAlertRule = models.PrometheusAlertRule;
 const DescribeResourceUsageResponse = models.DescribeResourceUsageResponse;
 const DescribeClusterStatusResponse = models.DescribeClusterStatusResponse;
 const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
-const ServiceAccountAuthenticationOptions = models.ServiceAccountAuthenticationOptions;
+const EdgeClusterInternalLB = models.EdgeClusterInternalLB;
 const DescribeVersionsRequest = models.DescribeVersionsRequest;
 const CreateClusterResponse = models.CreateClusterResponse;
 const TaskStepInfo = models.TaskStepInfo;
@@ -133,28 +161,36 @@ const DescribeAvailableClusterVersionRequest = models.DescribeAvailableClusterVe
 const CreateClusterRequest = models.CreateClusterRequest;
 const DeletePrometheusAlertRuleResponse = models.DeletePrometheusAlertRuleResponse;
 const AcquireClusterAdminRoleRequest = models.AcquireClusterAdminRoleRequest;
+const DeleteEdgeClusterInstancesResponse = models.DeleteEdgeClusterInstancesResponse;
+const DeleteTKEEdgeClusterRequest = models.DeleteTKEEdgeClusterRequest;
 const ModifyClusterAuthenticationOptionsResponse = models.ModifyClusterAuthenticationOptionsResponse;
 const DescribeClusterAuthenticationOptionsResponse = models.DescribeClusterAuthenticationOptionsResponse;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const DescribePrometheusInstanceRequest = models.DescribePrometheusInstanceRequest;
+const ECMZoneInstanceCountISP = models.ECMZoneInstanceCountISP;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
 const RegionInstance = models.RegionInstance;
+const EdgeClusterExtraArgs = models.EdgeClusterExtraArgs;
 const PodLimitsInstance = models.PodLimitsInstance;
 const DescribeEnableVpcCniProgressResponse = models.DescribeEnableVpcCniProgressResponse;
 const PrometheusAlertRuleDetail = models.PrometheusAlertRuleDetail;
 const DescribePrometheusInstanceResponse = models.DescribePrometheusInstanceResponse;
-const Filter = models.Filter;
+const DeleteEdgeCVMInstancesRequest = models.DeleteEdgeCVMInstancesRequest;
 const ModifyClusterNodePoolRequest = models.ModifyClusterNodePoolRequest;
 const ImageInstance = models.ImageInstance;
+const DescribeECMInstancesResponse = models.DescribeECMInstancesResponse;
 const GetClusterLevelPriceRequest = models.GetClusterLevelPriceRequest;
 const CreateClusterEndpointResponse = models.CreateClusterEndpointResponse;
+const DescribeTKEEdgeClusterStatusRequest = models.DescribeTKEEdgeClusterStatusRequest;
 const CreateClusterNodePoolRequest = models.CreateClusterNodePoolRequest;
-const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
+const CheckEdgeClusterCIDRResponse = models.CheckEdgeClusterCIDRResponse;
 const AcquireClusterAdminRoleResponse = models.AcquireClusterAdminRoleResponse;
+const EdgeAvailableExtraArgs = models.EdgeAvailableExtraArgs;
 const UpdateClusterVersionRequest = models.UpdateClusterVersionRequest;
 const ModifyClusterAuthenticationOptionsRequest = models.ModifyClusterAuthenticationOptionsRequest;
 const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
+const EdgeArgsFlag = models.EdgeArgsFlag;
 const DescribeClusterLevelChangeRecordsResponse = models.DescribeClusterLevelChangeRecordsResponse;
 const CheckInstancesUpgradeAbleResponse = models.CheckInstancesUpgradeAbleResponse;
 const Cluster = models.Cluster;
@@ -167,26 +203,31 @@ const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
 const DisableClusterDeletionProtectionResponse = models.DisableClusterDeletionProtectionResponse;
 const DescribeClusterAsGroupOptionRequest = models.DescribeClusterAsGroupOptionRequest;
 const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
+const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
+const DescribeTKEEdgeClustersResponse = models.DescribeTKEEdgeClustersResponse;
 const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
 const ModifyClusterAsGroupOptionAttributeResponse = models.ModifyClusterAsGroupOptionAttributeResponse;
 const DescribeClusterLevelAttributeResponse = models.DescribeClusterLevelAttributeResponse;
+const DescribeEdgeClusterExtraArgsRequest = models.DescribeEdgeClusterExtraArgsRequest;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
-const DescribeTKEEdgeScriptRequest = models.DescribeTKEEdgeScriptRequest;
+const DescribeTKEEdgeExternalKubeconfigResponse = models.DescribeTKEEdgeExternalKubeconfigResponse;
 const ClusterAsGroupOption = models.ClusterAsGroupOption;
 const AddVpcCniSubnetsResponse = models.AddVpcCniSubnetsResponse;
 const DescribeClusterNodePoolsRequest = models.DescribeClusterNodePoolsRequest;
 const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
-const ModifyClusterAsGroupOptionAttributeRequest = models.ModifyClusterAsGroupOptionAttributeRequest;
+const DeleteTKEEdgeClusterResponse = models.DeleteTKEEdgeClusterResponse;
 const ExistedInstancesForNode = models.ExistedInstancesForNode;
 const InstanceUpgradeClusterStatus = models.InstanceUpgradeClusterStatus;
 const DescribeClusterRoutesRequest = models.DescribeClusterRoutesRequest;
 const DeleteClusterRouteRequest = models.DeleteClusterRouteRequest;
+const DeleteECMInstancesRequest = models.DeleteECMInstancesRequest;
 const ClusterLevelAttribute = models.ClusterLevelAttribute;
+const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const EnhancedService = models.EnhancedService;
 const DescribeClusterNodePoolDetailRequest = models.DescribeClusterNodePoolDetailRequest;
 const SetNodePoolNodeProtectionRequest = models.SetNodePoolNodeProtectionRequest;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
-const RemoveNodeFromNodePoolRequest = models.RemoveNodeFromNodePoolRequest;
+const InstanceUpgradePreCheckResult = models.InstanceUpgradePreCheckResult;
 const DescribeClusterAsGroupsRequest = models.DescribeClusterAsGroupsRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
 const DescribeAvailableClusterVersionResponse = models.DescribeAvailableClusterVersionResponse;
@@ -199,20 +240,29 @@ const ExistedInstancesPara = models.ExistedInstancesPara;
 const CommonName = models.CommonName;
 const DescribeClusterAsGroupOptionResponse = models.DescribeClusterAsGroupOptionResponse;
 const ClusterAsGroupAttribute = models.ClusterAsGroupAttribute;
+const CreateTKEEdgeClusterResponse = models.CreateTKEEdgeClusterResponse;
 const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
+const DeleteECMInstancesResponse = models.DeleteECMInstancesResponse;
+const DescribeEdgeClusterExtraArgsResponse = models.DescribeEdgeClusterExtraArgsResponse;
 const DeleteClusterRequest = models.DeleteClusterRequest;
+const ForwardTKEEdgeApplicationRequestV3Request = models.ForwardTKEEdgeApplicationRequestV3Request;
+const ResourceDeleteOption = models.ResourceDeleteOption;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const UpdateClusterVersionResponse = models.UpdateClusterVersionResponse;
+const DescribeTKEEdgeClusterCredentialResponse = models.DescribeTKEEdgeClusterCredentialResponse;
 const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
 const CreateClusterNodePoolResponse = models.CreateClusterNodePoolResponse;
+const Filter = models.Filter;
 const ManuallyAdded = models.ManuallyAdded;
-const NodePoolOption = models.NodePoolOption;
+const CheckEdgeClusterCIDRRequest = models.CheckEdgeClusterCIDRRequest;
 const ModifyClusterAsGroupAttributeRequest = models.ModifyClusterAsGroupAttributeRequest;
 const PrometheusGrafanaInfo = models.PrometheusGrafanaInfo;
+const RemoveNodeFromNodePoolResponse = models.RemoveNodeFromNodePoolResponse;
 const InstanceDataDiskMountSetting = models.InstanceDataDiskMountSetting;
+const RemoveNodeFromNodePoolRequest = models.RemoveNodeFromNodePoolRequest;
 const NodeCountSummary = models.NodeCountSummary;
 const DescribeClusterAsGroupsResponse = models.DescribeClusterAsGroupsResponse;
-const InstanceUpgradePreCheckResult = models.InstanceUpgradePreCheckResult;
+const EdgeCluster = models.EdgeCluster;
 const DescribeClusterNodePoolDetailResponse = models.DescribeClusterNodePoolDetailResponse;
 
 
@@ -271,14 +321,25 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the information of clusters under the current account.
-     * @param {DescribeClusterStatusRequest} req
-     * @param {function(string, DescribeClusterStatusResponse):void} cb
+     * This API is used to delete one or more ECM instances.
+     * @param {DeleteECMInstancesRequest} req
+     * @param {function(string, DeleteECMInstancesResponse):void} cb
      * @public
      */
-    DescribeClusterStatus(req, cb) {
-        let resp = new DescribeClusterStatusResponse();
-        this.request("DescribeClusterStatus", req, resp, cb);
+    DeleteECMInstances(req, cb) {
+        let resp = new DeleteECMInstancesResponse();
+        this.request("DeleteECMInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the current status and process information of a TKE Edge cluster.
+     * @param {DescribeTKEEdgeClusterStatusRequest} req
+     * @param {function(string, DescribeTKEEdgeClusterStatusResponse):void} cb
+     * @public
+     */
+    DescribeTKEEdgeClusterStatus(req, cb) {
+        let resp = new DescribeTKEEdgeClusterStatusResponse();
+        this.request("DescribeTKEEdgeClusterStatus", req, resp, cb);
     }
 
     /**
@@ -392,6 +453,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to work with the add-ons of a TKE Edge cluster.
+     * @param {ForwardTKEEdgeApplicationRequestV3Request} req
+     * @param {function(string, ForwardTKEEdgeApplicationRequestV3Response):void} cb
+     * @public
+     */
+    ForwardTKEEdgeApplicationRequestV3(req, cb) {
+        let resp = new ForwardTKEEdgeApplicationRequestV3Response();
+        this.request("ForwardTKEEdgeApplicationRequestV3", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify cluster attributes.
      * @param {ModifyClusterAttributeRequest} req
      * @param {function(string, ModifyClusterAttributeResponse):void} cb
@@ -403,14 +475,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * Obtaining the price of specified cluster model
-     * @param {GetClusterLevelPriceRequest} req
-     * @param {function(string, GetClusterLevelPriceResponse):void} cb
+     * This API is used to create an ECM instance.
+     * @param {CreateECMInstancesRequest} req
+     * @param {function(string, CreateECMInstancesResponse):void} cb
      * @public
      */
-    GetClusterLevelPrice(req, cb) {
-        let resp = new GetClusterLevelPriceResponse();
-        this.request("GetClusterLevelPrice", req, resp, cb);
+    CreateECMInstances(req, cb) {
+        let resp = new CreateECMInstancesResponse();
+        this.request("CreateECMInstances", req, resp, cb);
     }
 
     /**
@@ -436,14 +508,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify an alarm rule. 
-     * @param {ModifyPrometheusAlertRuleRequest} req
-     * @param {function(string, ModifyPrometheusAlertRuleResponse):void} cb
+     * This API is used to delete one or more edge compute instances.
+     * @param {DeleteEdgeClusterInstancesRequest} req
+     * @param {function(string, DeleteEdgeClusterInstancesResponse):void} cb
      * @public
      */
-    ModifyPrometheusAlertRule(req, cb) {
-        let resp = new ModifyPrometheusAlertRuleResponse();
-        this.request("ModifyPrometheusAlertRule", req, resp, cb);
+    DeleteEdgeClusterInstances(req, cb) {
+        let resp = new DeleteEdgeClusterInstancesResponse();
+        this.request("DeleteEdgeClusterInstances", req, resp, cb);
     }
 
     /**
@@ -458,14 +530,25 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable removal protection for the nodes automatically created by the scaling group in a node pool.
-     * @param {SetNodePoolNodeProtectionRequest} req
-     * @param {function(string, SetNodePoolNodeProtectionResponse):void} cb
+     * This API is used to query the K8s versions supported by TKE Edge.
+     * @param {DescribeAvailableTKEEdgeVersionRequest} req
+     * @param {function(string, DescribeAvailableTKEEdgeVersionResponse):void} cb
      * @public
      */
-    SetNodePoolNodeProtection(req, cb) {
-        let resp = new SetNodePoolNodeProtectionResponse();
-        this.request("SetNodePoolNodeProtection", req, resp, cb);
+    DescribeAvailableTKEEdgeVersion(req, cb) {
+        let resp = new DescribeAvailableTKEEdgeVersionResponse();
+        this.request("DescribeAvailableTKEEdgeVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the model of instances in a node pool.
+     * @param {ModifyNodePoolInstanceTypesRequest} req
+     * @param {function(string, ModifyNodePoolInstanceTypesResponse):void} cb
+     * @public
+     */
+    ModifyNodePoolInstanceTypes(req, cb) {
+        let resp = new ModifyNodePoolInstanceTypesResponse();
+        this.request("ModifyNodePoolInstanceTypes", req, resp, cb);
     }
 
     /**
@@ -524,14 +607,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query one or more existing node and determine whether they can be added to a cluster.
-     * @param {DescribeExistedInstancesRequest} req
-     * @param {function(string, DescribeExistedInstancesResponse):void} cb
+     * This API is used to query the TKE Edge cluster node information.
+     * @param {DescribeEdgeClusterInstancesRequest} req
+     * @param {function(string, DescribeEdgeClusterInstancesResponse):void} cb
      * @public
      */
-    DescribeExistedInstances(req, cb) {
-        let resp = new DescribeExistedInstancesResponse();
-        this.request("DescribeExistedInstances", req, resp, cb);
+    DescribeEdgeClusterInstances(req, cb) {
+        let resp = new DescribeEdgeClusterInstancesResponse();
+        this.request("DescribeEdgeClusterInstances", req, resp, cb);
     }
 
     /**
@@ -546,6 +629,28 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to enable removal protection for the nodes automatically created by the scaling group in a node pool.
+     * @param {SetNodePoolNodeProtectionRequest} req
+     * @param {function(string, SetNodePoolNodeProtectionResponse):void} cb
+     * @public
+     */
+    SetNodePoolNodeProtection(req, cb) {
+        let resp = new SetNodePoolNodeProtectionResponse();
+        this.request("SetNodePoolNodeProtection", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an alarm rule. 
+     * @param {ModifyPrometheusAlertRuleRequest} req
+     * @param {function(string, ModifyPrometheusAlertRuleResponse):void} cb
+     * @public
+     */
+    ModifyPrometheusAlertRule(req, cb) {
+        let resp = new ModifyPrometheusAlertRuleResponse();
+        this.request("ModifyPrometheusAlertRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the node pool list
      * @param {DescribeClusterNodePoolsRequest} req
      * @param {function(string, DescribeClusterNodePoolsResponse):void} cb
@@ -554,6 +659,17 @@ class TkeClient extends AbstractClient {
     DescribeClusterNodePools(req, cb) {
         let resp = new DescribeClusterNodePoolsResponse();
         this.request("DescribeClusterNodePools", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the authentication information of a TKE Edge cluster.
+     * @param {DescribeTKEEdgeClusterCredentialRequest} req
+     * @param {function(string, DescribeTKEEdgeClusterCredentialResponse):void} cb
+     * @public
+     */
+    DescribeTKEEdgeClusterCredential(req, cb) {
+        let resp = new DescribeTKEEdgeClusterCredentialResponse();
+        this.request("DescribeTKEEdgeClusterCredential", req, resp, cb);
     }
 
     /**
@@ -598,6 +714,17 @@ class TkeClient extends AbstractClient {
     DescribeClusterAsGroupOption(req, cb) {
         let resp = new DescribeClusterAsGroupOptionResponse();
         this.request("DescribeClusterAsGroupOption", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete one or more edge CVM instances.
+     * @param {DeleteEdgeCVMInstancesRequest} req
+     * @param {function(string, DeleteEdgeCVMInstancesResponse):void} cb
+     * @public
+     */
+    DeleteEdgeCVMInstances(req, cb) {
+        let resp = new DeleteEdgeCVMInstancesResponse();
+        this.request("DeleteEdgeCVMInstances", req, resp, cb);
     }
 
     /**
@@ -656,14 +783,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade one or more work nodes in the cluster. 
-     * @param {UpgradeClusterInstancesRequest} req
-     * @param {function(string, UpgradeClusterInstancesResponse):void} cb
+     * This API is used to disable cluster deletion protection.
+     * @param {DisableClusterDeletionProtectionRequest} req
+     * @param {function(string, DisableClusterDeletionProtectionResponse):void} cb
      * @public
      */
-    UpgradeClusterInstances(req, cb) {
-        let resp = new UpgradeClusterInstancesResponse();
-        this.request("UpgradeClusterInstances", req, resp, cb);
+    DisableClusterDeletionProtection(req, cb) {
+        let resp = new DisableClusterDeletionProtectionResponse();
+        this.request("DisableClusterDeletionProtection", req, resp, cb);
     }
 
     /**
@@ -686,6 +813,17 @@ class TkeClient extends AbstractClient {
     CreateClusterEndpoint(req, cb) {
         let resp = new CreateClusterEndpointResponse();
         this.request("CreateClusterEndpoint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade one or more work nodes in the cluster. 
+     * @param {UpgradeClusterInstancesRequest} req
+     * @param {function(string, UpgradeClusterInstancesResponse):void} cb
+     * @public
+     */
+    UpgradeClusterInstances(req, cb) {
+        let resp = new UpgradeClusterInstancesResponse();
+        this.request("UpgradeClusterInstances", req, resp, cb);
     }
 
     /**
@@ -722,6 +860,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the information of clusters under the current account.
+     * @param {DescribeClusterStatusRequest} req
+     * @param {function(string, DescribeClusterStatusResponse):void} cb
+     * @public
+     */
+    DescribeClusterStatus(req, cb) {
+        let resp = new DescribeClusterStatusResponse();
+        this.request("DescribeClusterStatus", req, resp, cb);
+    }
+
+    /**
      * This API is used to query one or more cluster route tables.
      * @param {DescribeClusterRouteTablesRequest} req
      * @param {function(string, DescribeClusterRouteTablesResponse):void} cb
@@ -733,14 +882,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the model of instances in a node pool.
-     * @param {ModifyNodePoolInstanceTypesRequest} req
-     * @param {function(string, ModifyNodePoolInstanceTypesResponse):void} cb
+     * This API is used to query the list of TKE Edge clusters.
+     * @param {DescribeTKEEdgeClustersRequest} req
+     * @param {function(string, DescribeTKEEdgeClustersResponse):void} cb
      * @public
      */
-    ModifyNodePoolInstanceTypes(req, cb) {
-        let resp = new ModifyNodePoolInstanceTypesResponse();
-        this.request("ModifyNodePoolInstanceTypes", req, resp, cb);
+    DescribeTKEEdgeClusters(req, cb) {
+        let resp = new DescribeTKEEdgeClustersResponse();
+        this.request("DescribeTKEEdgeClusters", req, resp, cb);
     }
 
     /**
@@ -777,14 +926,47 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to disable cluster deletion protection.
-     * @param {DisableClusterDeletionProtectionRequest} req
-     * @param {function(string, DisableClusterDeletionProtectionResponse):void} cb
+     * This API is used to query custom parameters of an edge cluster.
+     * @param {DescribeEdgeClusterExtraArgsRequest} req
+     * @param {function(string, DescribeEdgeClusterExtraArgsResponse):void} cb
      * @public
      */
-    DisableClusterDeletionProtection(req, cb) {
-        let resp = new DisableClusterDeletionProtectionResponse();
-        this.request("DisableClusterDeletionProtection", req, resp, cb);
+    DescribeEdgeClusterExtraArgs(req, cb) {
+        let resp = new DescribeEdgeClusterExtraArgsResponse();
+        this.request("DescribeEdgeClusterExtraArgs", req, resp, cb);
+    }
+
+    /**
+     * Obtaining the price of specified cluster model
+     * @param {GetClusterLevelPriceRequest} req
+     * @param {function(string, GetClusterLevelPriceResponse):void} cb
+     * @public
+     */
+    GetClusterLevelPrice(req, cb) {
+        let resp = new GetClusterLevelPriceResponse();
+        this.request("GetClusterLevelPrice", req, resp, cb);
+    }
+
+    /**
+     * Modify the security policy of the external port of the managed cluster (the old way, only the external port of the managed cluster is supported)
+     * @param {ModifyClusterEndpointSPRequest} req
+     * @param {function(string, ModifyClusterEndpointSPResponse):void} cb
+     * @public
+     */
+    ModifyClusterEndpointSP(req, cb) {
+        let resp = new ModifyClusterEndpointSPResponse();
+        this.request("ModifyClusterEndpointSP", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the ECM instance information.
+     * @param {DescribeECMInstancesRequest} req
+     * @param {function(string, DescribeECMInstancesResponse):void} cb
+     * @public
+     */
+    DescribeECMInstances(req, cb) {
+        let resp = new DescribeECMInstancesResponse();
+        this.request("DescribeECMInstances", req, resp, cb);
     }
 
     /**
@@ -796,6 +978,17 @@ class TkeClient extends AbstractClient {
     DescribeClusterSecurity(req, cb) {
         let resp = new DescribeClusterSecurityResponse();
         this.request("DescribeClusterSecurity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the kubeconfig for access to a TKE Edge cluster through the public network.
+     * @param {DescribeTKEEdgeExternalKubeconfigRequest} req
+     * @param {function(string, DescribeTKEEdgeExternalKubeconfigResponse):void} cb
+     * @public
+     */
+    DescribeTKEEdgeExternalKubeconfig(req, cb) {
+        let resp = new DescribeTKEEdgeExternalKubeconfigResponse();
+        this.request("DescribeTKEEdgeExternalKubeconfig", req, resp, cb);
     }
 
     /**
@@ -829,6 +1022,28 @@ class TkeClient extends AbstractClient {
     DeleteClusterNodePool(req, cb) {
         let resp = new DeleteClusterNodePoolResponse();
         this.request("DeleteClusterNodePool", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a TKE Edge cluster.
+     * @param {CreateTKEEdgeClusterRequest} req
+     * @param {function(string, CreateTKEEdgeClusterResponse):void} cb
+     * @public
+     */
+    CreateTKEEdgeCluster(req, cb) {
+        let resp = new CreateTKEEdgeClusterResponse();
+        this.request("CreateTKEEdgeCluster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the edge CVM instance information.
+     * @param {DescribeEdgeCVMInstancesRequest} req
+     * @param {function(string, DescribeEdgeCVMInstancesResponse):void} cb
+     * @public
+     */
+    DescribeEdgeCVMInstances(req, cb) {
+        let resp = new DescribeEdgeCVMInstancesResponse();
+        this.request("DescribeEdgeCVMInstances", req, resp, cb);
     }
 
     /**
@@ -876,6 +1091,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to delete a TKE Edge cluster.
+     * @param {DeleteTKEEdgeClusterRequest} req
+     * @param {function(string, DeleteTKEEdgeClusterResponse):void} cb
+     * @public
+     */
+    DeleteTKEEdgeCluster(req, cb) {
+        let resp = new DeleteTKEEdgeClusterResponse();
+        this.request("DeleteTKEEdgeCluster", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain all versions that the cluster can upgrade to.
      * @param {DescribeAvailableClusterVersionRequest} req
      * @param {function(string, DescribeAvailableClusterVersionResponse):void} cb
@@ -884,6 +1110,17 @@ class TkeClient extends AbstractClient {
     DescribeAvailableClusterVersion(req, cb) {
         let resp = new DescribeAvailableClusterVersionResponse();
         this.request("DescribeAvailableClusterVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query one or more existing node and determine whether they can be added to a cluster.
+     * @param {DescribeExistedInstancesRequest} req
+     * @param {function(string, DescribeExistedInstancesResponse):void} cb
+     * @public
+     */
+    DescribeExistedInstances(req, cb) {
+        let resp = new DescribeExistedInstancesResponse();
+        this.request("DescribeExistedInstances", req, resp, cb);
     }
 
     /**
@@ -909,14 +1146,25 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * Modify the security policy of the external port of the managed cluster (the old way, only the external port of the managed cluster is supported)
-     * @param {ModifyClusterEndpointSPRequest} req
-     * @param {function(string, ModifyClusterEndpointSPResponse):void} cb
+     * This API is used to query the custom parameters available for an edge cluster.
+     * @param {DescribeEdgeAvailableExtraArgsRequest} req
+     * @param {function(string, DescribeEdgeAvailableExtraArgsResponse):void} cb
      * @public
      */
-    ModifyClusterEndpointSP(req, cb) {
-        let resp = new ModifyClusterEndpointSPResponse();
-        this.request("ModifyClusterEndpointSP", req, resp, cb);
+    DescribeEdgeAvailableExtraArgs(req, cb) {
+        let resp = new DescribeEdgeAvailableExtraArgsResponse();
+        this.request("DescribeEdgeAvailableExtraArgs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check if the CIDR block of a TKE Edge cluster conflicts with other CIDR blocks.
+     * @param {CheckEdgeClusterCIDRRequest} req
+     * @param {function(string, CheckEdgeClusterCIDRResponse):void} cb
+     * @public
+     */
+    CheckEdgeClusterCIDR(req, cb) {
+        let resp = new CheckEdgeClusterCIDRResponse();
+        this.request("CheckEdgeClusterCIDR", req, resp, cb);
     }
 
     /**
@@ -953,7 +1201,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the URL of TKE edge script.
+     * This API is used to query the URL of TKE edge script. You can add external nodes to a TKE Edge cluster by downloading the URL.
      * @param {DescribeTKEEdgeScriptRequest} req
      * @param {function(string, DescribeTKEEdgeScriptResponse):void} cb
      * @public

@@ -458,7 +458,7 @@ Note: if the name of the new CLB instance already exists, a default name will be
         this.LoadBalancerName = null;
 
         /**
-         * Network ID of the target CLB real server, such as `vpc-12345678`, which can be obtained through the [DescribeVpcEx](https://intl.cloud.tencent.com/document/product/215/1372?from_cn_redirect=1) API. If this parameter is not specified, it will default to `DefaultVPC`. This parameter is required for creating a CLB instance.
+         * Network ID of the target device on the CLB backend, such as `vpc-12345678`, which can be obtained through the `DescribeVpcEx` API. If this parameter is not entered, `DefaultVPC` is used by default. This parameter is required when creating a private network instance.
          * @type {string || null}
          */
         this.VpcId = null;
@@ -470,7 +470,7 @@ Note: if the name of the new CLB instance already exists, a default name will be
         this.SubnetId = null;
 
         /**
-         * Project ID of the CLB instance, which can be obtained through the [DescribeProject](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. If this parameter is not specified, it will default to the default project.
+         * ID of the project to which a CLB instance belongs, which can be obtained through the `DescribeProject` API. If this parameter is not entered, the default project will be used.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -513,7 +513,7 @@ Note: By default, the traffic goes to the primary AZ. The secondary AZs only car
         this.VipIsp = null;
 
         /**
-         * Tags a CLB instance when purchasing it.
+         * Tags the CLB instance when purchasing it. Up to 20 tag key value pairs are supported.
          * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
@@ -794,21 +794,21 @@ Note: if the name of a new CLB instance already exists, a default name will be g
         this.LoadBalancerName = null;
 
         /**
-         * Project ID of the CLB instance, which can be obtained through the [`DescribeProject`](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. If this field is not specified, it will default to the default project.
+         * ID of the project to which a CLB instance belongs, which can be obtained through the `DescribeProject` API. If this parameter is not passed in, the default project will be used.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
          * Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
-Note: By default, the traffic goes to the primary AZ. The secondary AZs only carry traffic when the primary AZ is unavailable. The optimal secondary AZ is chosen automatically. You can query the primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
+Note: A primary AZ loads traffic, while a secondary AZ does not load traffic by default and will be used only if the primary AZ becomes unavailable. The platform will automatically select the optimal secondary AZ. You can use the `DescribeResource` API to query the primary AZ list of a region.
          * @type {string || null}
          */
         this.MasterZoneId = null;
 
         /**
          * Specifies the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`. It is applicable only to public network CLB.
-Note: The traffic only goes to the secondary AZ when the primary AZ is unavailable. You can query the list of primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
+Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use the `DescribeMasterZones` API to query the primary and secondary AZ list of a region.
          * @type {string || null}
          */
         this.SlaveZoneId = null;
@@ -1793,6 +1793,7 @@ class DescribeTaskStatusRequest extends  AbstractModel {
 
         /**
          * Order ID.
+Note: Either `TaskId` or `DealName` is required.
          * @type {string || null}
          */
         this.DealName = null;
@@ -3452,6 +3453,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.DeregisterTargetRst = null;
 
+        /**
+         * Attribute of listener
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.AttrFlags = null;
+
     }
 
     /**
@@ -3502,6 +3510,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
         this.Toa = 'Toa' in params ? params.Toa : null;
         this.DeregisterTargetRst = 'DeregisterTargetRst' in params ? params.DeregisterTargetRst : null;
+        this.AttrFlags = 'AttrFlags' in params ? params.AttrFlags : null;
 
     }
 }

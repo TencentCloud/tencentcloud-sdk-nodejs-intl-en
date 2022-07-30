@@ -617,6 +617,18 @@ If the instance `TypeId` is CKV 3.2, the password can contain 8–30 letters and
          */
         this.DryRun = null;
 
+        /**
+         * Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). Default value: `local` (local disk edition)
+         * @type {string || null}
+         */
+        this.ProductVersion = null;
+
+        /**
+         * Dedicated cluster ID, which is required when `ProductVersion` is "cdc".
+         * @type {string || null}
+         */
+        this.RedisClusterId = null;
+
     }
 
     /**
@@ -665,6 +677,8 @@ If the instance `TypeId` is CKV 3.2, the password can contain 8–30 letters and
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.ProductVersion = 'ProductVersion' in params ? params.ProductVersion : null;
+        this.RedisClusterId = 'RedisClusterId' in params ? params.RedisClusterId : null;
 
     }
 }
@@ -8304,6 +8318,12 @@ If `TypeId` indicates the standard architecture, `MemSize` indicates the total m
          */
         this.ZoneName = null;
 
+        /**
+         * Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). Default value: `local` (local disk edition)
+         * @type {string || null}
+         */
+        this.ProductVersion = null;
+
     }
 
     /**
@@ -8323,6 +8343,7 @@ If `TypeId` indicates the standard architecture, `MemSize` indicates the total m
         this.RedisReplicasNum = 'RedisReplicasNum' in params ? params.RedisReplicasNum : null;
         this.ReplicasReadonly = 'ReplicasReadonly' in params ? params.ReplicasReadonly : null;
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ProductVersion = 'ProductVersion' in params ? params.ProductVersion : null;
 
     }
 }

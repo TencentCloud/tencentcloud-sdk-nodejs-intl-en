@@ -1140,7 +1140,7 @@ class CreatePrometheusScrapeJobResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * ID of a successfully created scrape task.
          * @type {string || null}
          */
         this.JobId = null;
@@ -5313,7 +5313,7 @@ class CreatePrometheusAgentResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * ID of a successfully created agent.
          * @type {string || null}
          */
         this.AgentId = null;
@@ -11153,7 +11153,7 @@ class CreateExporterIntegrationResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The list of successfully created integrations.
          * @type {Array.<string> || null}
          */
         this.Names = null;

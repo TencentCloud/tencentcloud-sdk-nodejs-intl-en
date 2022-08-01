@@ -76,6 +76,7 @@ module.exports = {
     tke: require("./tke"),
     tms: require("./tms"),
     trtc: require("./trtc"),
+    tts: require("./tts"),
     vm: require("./vm"),
     vod: require("./vod"),
     vpc: require("./vpc"),

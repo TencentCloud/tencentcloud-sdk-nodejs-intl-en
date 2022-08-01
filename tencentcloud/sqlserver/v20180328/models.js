@@ -418,6 +418,41 @@ class RestoreInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * The target region and status of cross-region backup
+ * @class
+ */
+class CrossRegionStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The target region of cross-region backup
+         * @type {string || null}
+         */
+        this.CrossRegion = null;
+
+        /**
+         * Synchronization status of cross-region backup. Valid values: `0` (creating), `1` (succeeded), `2`: (failed), `4` (syncing)
+         * @type {number || null}
+         */
+        this.CrossStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CrossRegion = 'CrossRegion' in params ? params.CrossRegion : null;
+        this.CrossStatus = 'CrossStatus' in params ? params.CrossStatus : null;
+
+    }
+}
+
+/**
  * DescribeAccounts request structure.
  * @class
  */
@@ -3810,48 +3845,6 @@ class ModifyDBNameRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDatabaseCDC request structure.
- * @class
- */
-class ModifyDatabaseCDCRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Array of database names
-         * @type {Array.<string> || null}
-         */
-        this.DBNames = null;
-
-        /**
-         * Enable or disable CDC. Valid values: `enable`, `disable`
-         * @type {string || null}
-         */
-        this.ModifyType = null;
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DBNames = 'DBNames' in params ? params.DBNames : null;
-        this.ModifyType = 'ModifyType' in params ? params.ModifyType : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
  * ModifyDatabaseMdf request structure.
  * @class
  */
@@ -4487,6 +4480,62 @@ class AccountPassword extends  AbstractModel {
 }
 
 /**
+ * DescribeSlowlogs request structure.
+ * @class
+ */
+class DescribeSlowlogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of mssql-k8voqdlz
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Query start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Query end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Number of results per page. Value range: 1-100. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DeleteMigration response structure.
  * @class
  */
@@ -4656,30 +4705,30 @@ class DescribeBackupUploadSizeResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceParams response structure.
+ * ModifyDatabaseCDC request structure.
  * @class
  */
-class DescribeInstanceParamsResponse extends  AbstractModel {
+class ModifyDatabaseCDCRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of instance parameters
-         * @type {number || null}
+         * Array of database names
+         * @type {Array.<string> || null}
          */
-        this.TotalCount = null;
+        this.DBNames = null;
 
         /**
-         * Parameter details
-         * @type {Array.<ParameterDetail> || null}
-         */
-        this.Items = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Enable or disable CDC. Valid values: `enable`, `disable`
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ModifyType = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
 
     }
 
@@ -4690,17 +4739,9 @@ class DescribeInstanceParamsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new ParameterDetail();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DBNames = 'DBNames' in params ? params.DBNames : null;
+        this.ModifyType = 'ModifyType' in params ? params.ModifyType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5441,6 +5482,36 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.InstanceType = null;
 
+        /**
+         * The target region of cross-region backup. If this parameter left empty, it indicates that cross-region backup is disabled.
+         * @type {Array.<string> || null}
+         */
+        this.CrossRegions = null;
+
+        /**
+         * Cross-region backup status. Valid values: `enable` (enabled), `disable` (disabed)
+         * @type {string || null}
+         */
+        this.CrossBackupEnabled = null;
+
+        /**
+         * The retention period of cross-region backup. Default value: 7 days
+         * @type {number || null}
+         */
+        this.CrossBackupSaveDays = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DnsPodDomain = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TgwWanVPort = null;
+
     }
 
     /**
@@ -5501,6 +5572,11 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.BackupCycleType = 'BackupCycleType' in params ? params.BackupCycleType : null;
         this.BackupSaveDays = 'BackupSaveDays' in params ? params.BackupSaveDays : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.CrossRegions = 'CrossRegions' in params ? params.CrossRegions : null;
+        this.CrossBackupEnabled = 'CrossBackupEnabled' in params ? params.CrossBackupEnabled : null;
+        this.CrossBackupSaveDays = 'CrossBackupSaveDays' in params ? params.CrossBackupSaveDays : null;
+        this.DnsPodDomain = 'DnsPodDomain' in params ? params.DnsPodDomain : null;
+        this.TgwWanVPort = 'TgwWanVPort' in params ? params.TgwWanVPort : null;
 
     }
 }
@@ -6002,6 +6078,24 @@ class Backup extends  AbstractModel {
          */
         this.BackupFormat = null;
 
+        /**
+         * The code of current region where the instance resides
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * The download address of cross-region backup in target region
+         * @type {Array.<CrossBackupAddr> || null}
+         */
+        this.CrossBackupAddr = null;
+
+        /**
+         * The target region and status of cross-region backup
+         * @type {Array.<CrossRegionStatus> || null}
+         */
+        this.CrossBackupStatus = null;
+
     }
 
     /**
@@ -6025,6 +6119,25 @@ class Backup extends  AbstractModel {
         this.BackupName = 'BackupName' in params ? params.BackupName : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.BackupFormat = 'BackupFormat' in params ? params.BackupFormat : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.CrossBackupAddr) {
+            this.CrossBackupAddr = new Array();
+            for (let z in params.CrossBackupAddr) {
+                let obj = new CrossBackupAddr();
+                obj.deserialize(params.CrossBackupAddr[z]);
+                this.CrossBackupAddr.push(obj);
+            }
+        }
+
+        if (params.CrossBackupStatus) {
+            this.CrossBackupStatus = new Array();
+            for (let z in params.CrossBackupStatus) {
+                let obj = new CrossRegionStatus();
+                obj.deserialize(params.CrossBackupStatus[z]);
+                this.CrossBackupStatus.push(obj);
+            }
+        }
 
     }
 }
@@ -6350,7 +6463,7 @@ class AccountCreateInfo extends  AbstractModel {
         this.IsAdmin = null;
 
         /**
-         * Valid values: `win-windows authentication`, `sql-sqlserver authentication`. Default value: `sql-sqlserver authentication`.
+         * Valid values: `win-windows authentication`, `sql-sqlserver authentication`. Default value: `sql-sqlserver authentication`
          * @type {string || null}
          */
         this.Authentication = null;
@@ -6847,6 +6960,18 @@ class BackupFile extends  AbstractModel {
          */
         this.DownloadLink = null;
 
+        /**
+         * The code of the region where current instance resides
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * The target region and download address of cross-region backup
+         * @type {Array.<CrossBackupAddr> || null}
+         */
+        this.CrossBackupAddr = null;
+
     }
 
     /**
@@ -6861,6 +6986,16 @@ class BackupFile extends  AbstractModel {
         this.Size = 'Size' in params ? params.Size : null;
         this.DBs = 'DBs' in params ? params.DBs : null;
         this.DownloadLink = 'DownloadLink' in params ? params.DownloadLink : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.CrossBackupAddr) {
+            this.CrossBackupAddr = new Array();
+            for (let z in params.CrossBackupAddr) {
+                let obj = new CrossBackupAddr();
+                obj.deserialize(params.CrossBackupAddr[z]);
+                this.CrossBackupAddr.push(obj);
+            }
+        }
 
     }
 }
@@ -7291,6 +7426,48 @@ class ModifyMigrationRequest extends  AbstractModel {
                 this.MigrateDBSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * All Download addresses of cross-region backup
+ * @class
+ */
+class CrossBackupAddr extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The target region of cross-region backup
+         * @type {string || null}
+         */
+        this.CrossRegion = null;
+
+        /**
+         * The address used to download the cross-region backup over a private network
+         * @type {string || null}
+         */
+        this.CrossInternalAddr = null;
+
+        /**
+         * The address used to download the cross-region backup over a public network
+         * @type {string || null}
+         */
+        this.CrossExternalAddr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CrossRegion = 'CrossRegion' in params ? params.CrossRegion : null;
+        this.CrossInternalAddr = 'CrossInternalAddr' in params ? params.CrossInternalAddr : null;
+        this.CrossExternalAddr = 'CrossExternalAddr' in params ? params.CrossExternalAddr : null;
 
     }
 }
@@ -7734,42 +7911,30 @@ class ResetAccountPasswordRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSlowlogs request structure.
+ * DescribeInstanceParams response structure.
  * @class
  */
-class DescribeSlowlogsRequest extends  AbstractModel {
+class DescribeInstanceParamsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of mssql-k8voqdlz
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Query start time
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Query end time
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Number of results per page. Value range: 1-100. Default value: 20
+         * Total number of instance parameters
          * @type {number || null}
          */
-        this.Limit = null;
+        this.TotalCount = null;
 
         /**
-         * Page number. Default value: 0
-         * @type {number || null}
+         * Parameter details
+         * @type {Array.<ParameterDetail> || null}
          */
-        this.Offset = null;
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -7780,11 +7945,17 @@ class DescribeSlowlogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ParameterDetail();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8435,6 +8606,7 @@ module.exports = {
     DealInfo: DealInfo,
     ModifyBackupStrategyRequest: ModifyBackupStrategyRequest,
     RestoreInstanceRequest: RestoreInstanceRequest,
+    CrossRegionStatus: CrossRegionStatus,
     DescribeAccountsRequest: DescribeAccountsRequest,
     CreateMigrationResponse: CreateMigrationResponse,
     DeleteBackupMigrationRequest: DeleteBackupMigrationRequest,
@@ -8500,7 +8672,6 @@ module.exports = {
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     DescribeDBsRequest: DescribeDBsRequest,
     ModifyDBNameRequest: ModifyDBNameRequest,
-    ModifyDatabaseCDCRequest: ModifyDatabaseCDCRequest,
     ModifyDatabaseMdfRequest: ModifyDatabaseMdfRequest,
     DescribeBackupsResponse: DescribeBackupsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
@@ -8518,10 +8689,11 @@ module.exports = {
     ModifyDBRemarkRequest: ModifyDBRemarkRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     AccountPassword: AccountPassword,
+    DescribeSlowlogsRequest: DescribeSlowlogsRequest,
     DeleteMigrationResponse: DeleteMigrationResponse,
     DescribeBackupMigrationRequest: DescribeBackupMigrationRequest,
     DescribeBackupUploadSizeResponse: DescribeBackupUploadSizeResponse,
-    DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
+    ModifyDatabaseCDCRequest: ModifyDatabaseCDCRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     StartIncrementalMigrationResponse: StartIncrementalMigrationResponse,
     DbRollbackTimeInfo: DbRollbackTimeInfo,
@@ -8567,6 +8739,7 @@ module.exports = {
     CloneDBRequest: CloneDBRequest,
     DescribeMigrationDetailResponse: DescribeMigrationDetailResponse,
     ModifyMigrationRequest: ModifyMigrationRequest,
+    CrossBackupAddr: CrossBackupAddr,
     Parameter: Parameter,
     CreateAccountResponse: CreateAccountResponse,
     DescribeBackupUploadSizeRequest: DescribeBackupUploadSizeRequest,
@@ -8577,7 +8750,7 @@ module.exports = {
     DescribeSlowlogsResponse: DescribeSlowlogsResponse,
     DBDetail: DBDetail,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
-    DescribeSlowlogsRequest: DescribeSlowlogsRequest,
+    DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
     MigrationStep: MigrationStep,
     TerminateDBInstanceResponse: TerminateDBInstanceResponse,

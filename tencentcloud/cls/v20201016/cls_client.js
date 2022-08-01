@@ -117,6 +117,7 @@ const ModifyTopicResponse = models.ModifyTopicResponse;
 const CreateConfigRequest = models.CreateConfigRequest;
 const CreateShipperResponse = models.CreateShipperResponse;
 const DeleteIndexResponse = models.DeleteIndexResponse;
+const AlarmAnalysisConfig = models.AlarmAnalysisConfig;
 const ModifyIndexRequest = models.ModifyIndexRequest;
 const Column = models.Column;
 const CompressInfo = models.CompressInfo;

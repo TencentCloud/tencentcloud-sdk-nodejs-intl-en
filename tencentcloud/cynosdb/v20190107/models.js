@@ -898,35 +898,35 @@ class CreateClustersResponse extends  AbstractModel {
 
         /**
          * Freezing transaction ID
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TranId = null;
 
         /**
          * Order ID
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.DealNames = null;
 
         /**
-         * List of resource IDs (This field has been deprecated. Please use `dealNames` in the `DescribeResourcesByDealName` API to get resource IDs.)
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * List of resource IDs (This field has been deprecated. You need to use `dealNames` in the `DescribeResourcesByDealName` API to get resource IDs.)
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
 
         /**
-         * List of cluster IDs (This field has been deprecated. Please use `dealNames` in the `DescribeResourcesByDealName` API to get cluster IDs.)
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * List of cluster IDs (This field has been deprecated. You need to use `dealNames` in the `DescribeResourcesByDealName` API to get cluster IDs.)
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.ClusterIds = null;
 
         /**
-         * Big order ID.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Big order ID
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.BigDealIds = null;
@@ -2439,20 +2439,20 @@ class CreateClustersRequest extends  AbstractModel {
 
         /**
          * Database version. Valid values: 
-<li> Valid values for `MYSQL`: 5.7 </li>
+<li> Valid values for `MYSQL`: 5.7 and 8.0 </li>
          * @type {string || null}
          */
         this.DbVersion = null;
 
         /**
-         * Project ID
+         * Project ID.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
          * It is required when `DbMode` is set to `NORMAL` or left empty.
-Number of CPU cores of a non-serverless instance
+Number of CPU cores of normal instance
          * @type {number || null}
          */
         this.Cpu = null;
@@ -2466,45 +2466,45 @@ Memory of a non-serverless instance in GB
 
         /**
          * This parameter has been deprecated.
-Storage capacity in GB.
+Storage capacity in GB
          * @type {number || null}
          */
         this.Storage = null;
 
         /**
-         * Cluster name
+         * Cluster name, which can contain less than 64 letters, digits, or symbols (-_.).
          * @type {string || null}
          */
         this.ClusterName = null;
 
         /**
-         * Account password (it must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).)
+         * Account password, which must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).
          * @type {string || null}
          */
         this.AdminPassword = null;
 
         /**
-         * Port. Default value: 5432
+         * Port. Valid range: [0, 65535). Default value: 3306
          * @type {number || null}
          */
         this.Port = null;
 
         /**
-         * Billing mode. 0: pay-as-you-go; 1: monthly subscription. Default value: 0
+         * Billing mode. `0`: pay-as-you-go; `1`: monthly subscription. Default value: `0`
          * @type {number || null}
          */
         this.PayMode = null;
 
         /**
-         * Number of purchased items. Currently, only 1 can be passed in. If this parameter is left empty, 1 will be used by default.
+         * Number of purchased clusters. Valid range: [1,50]. Default value: 1
          * @type {number || null}
          */
         this.Count = null;
 
         /**
          * Rollback type:
-noneRollback: no rollback
-snapRollback: rollback by snapshot
+noneRollback: no rollback;
+snapRollback: rollback by snapshot;
 timeRollback: rollback by time point
          * @type {string || null}
          */
@@ -2517,7 +2517,7 @@ timeRollback: rollback by time point
         this.RollbackId = null;
 
         /**
-         * Pass in the source cluster ID during rollback to find the source `poolId`
+         * The source cluster ID passed in during rollback to find the source `poolId`
          * @type {string || null}
          */
         this.OriginalClusterId = null;
@@ -2536,14 +2536,14 @@ Specified allowed time range for time point rollback
         this.ExpectTimeThresh = null;
 
         /**
-         * The maximum storage of a non-serverless instance in GB
-If `DbType` is `MYSQL` and the storage billing mode is prepaid, the parameter value cannot exceed the maximum storage corresponding to the CPU and memory specifications.
+         * Storage upper limit of normal instance in GB
+If `DbType` is `MYSQL` and the storage billing mode is monthly subscription, the parameter value can’t exceed the maximum storage corresponding to the CPU and memory specifications.
          * @type {number || null}
          */
         this.StorageLimit = null;
 
         /**
-         * Number of instances
+         * Number of Instances. Valid range: (0,16]
          * @type {number || null}
          */
         this.InstanceCount = null;
@@ -2555,19 +2555,19 @@ If `DbType` is `MYSQL` and the storage billing mode is prepaid, the parameter va
         this.TimeSpan = null;
 
         /**
-         * Purchase duration unit of monthly subscription plan
+         * Duration unit of monthly subscription. Valid values: `s`, `d`, `m`, `y`
          * @type {string || null}
          */
         this.TimeUnit = null;
 
         /**
-         * Whether auto-renewal is enabled for monthly subscription plan
+         * Whether auto-renewal is enabled for monthly subscription plan. Default value: `0`
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
+         * Whether to automatically select a voucher. `1`: yes; `0`: no. Default value: `0`
          * @type {number || null}
          */
         this.AutoVoucher = null;
@@ -2592,7 +2592,7 @@ If `DbType` is `MYSQL` and the storage billing mode is prepaid, the parameter va
 
         /**
          * Database type
-Valid values when `DbType` is `MYSQL` (default value: NORMAL):
+Valid values when `DbType` is `MYSQL` (default value: `NORMAL`):
 <li>NORMAL</li>
 <li>SERVERLESS</li>
          * @type {string || null}
@@ -2600,15 +2600,15 @@ Valid values when `DbType` is `MYSQL` (default value: NORMAL):
         this.DbMode = null;
 
         /**
-         * This parameter is required if `DbMode` is `SERVERLESS`
-Minimum number of CPU cores. For the value range, please see the returned result of `DescribeServerlessInstanceSpecs`
+         * This parameter is required if `DbMode` is `SERVERLESS`.
+Minimum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
          * @type {number || null}
          */
         this.MinCpu = null;
 
         /**
-         * This parameter is required if `DbMode` is `SERVERLESS`:
-Maximum number of CPU cores. For the value range, please see the returned result of `DescribeServerlessInstanceSpecs`
+         * This parameter is required if `DbMode` is `SERVERLESS`.
+Maximum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
          * @type {number || null}
          */
         this.MaxCpu = null;
@@ -2624,15 +2624,15 @@ Default value: yes
 
         /**
          * This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
-Default value: 600
+Default value: `600`
          * @type {number || null}
          */
         this.AutoPauseDelay = null;
 
         /**
-         * The billing mode of cluster storage. Valid values: `0` (postpaid), `1` (prepaid). Default value: `0`.
-If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be postpaid.
-Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
+         * The billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (monthly subscription). Default value: `0`.
+If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be pay-as-you-go.
+Clusters with storage billed in monthly subscription can’t be cloned or rolled back.
          * @type {number || null}
          */
         this.StoragePayMode = null;
@@ -2662,10 +2662,16 @@ Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
         this.DealMode = null;
 
         /**
-         * Parameter template ID
+         * Parameter template ID, which can be obtained by querying parameter template information “DescribeParamTemplates”
          * @type {number || null}
          */
         this.ParamTemplateId = null;
+
+        /**
+         * Multi-AZ address
+         * @type {string || null}
+         */
+        this.SlaveZone = null;
 
     }
 
@@ -2731,6 +2737,7 @@ Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
         }
         this.DealMode = 'DealMode' in params ? params.DealMode : null;
         this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
 
     }
 }
@@ -3241,10 +3248,16 @@ class DescribeResourcesByDealNameRequest extends  AbstractModel {
         super();
 
         /**
-         * Order ID. (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Please call the API again until it succeeds.)
+         * Order ID. (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Call the API again until it succeeds.)
          * @type {string || null}
          */
         this.DealName = null;
+
+        /**
+         * Order ID, which can be used to query the resource information of multiple orders ID (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Call the API again until it succeeds.)
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
 
     }
 
@@ -3256,6 +3269,7 @@ class DescribeResourcesByDealNameRequest extends  AbstractModel {
             return;
         }
         this.DealName = 'DealName' in params ? params.DealName : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
 
     }
 }
@@ -3545,6 +3559,12 @@ class BillingResourceInfo extends  AbstractModel {
          */
         this.InstanceIds = null;
 
+        /**
+         * Order ID
+         * @type {string || null}
+         */
+        this.DealName = null;
+
     }
 
     /**
@@ -3556,6 +3576,7 @@ class BillingResourceInfo extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
 
     }
 }
@@ -5366,7 +5387,7 @@ class ModifyClusterParamRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`.
+         * List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`. `ParamName` is the parameter name; `CurrentValue` is the current value; `OldValue` is the old value that doesn’t need to be verified.
          * @type {Array.<ParamItem> || null}
          */
         this.ParamList = null;

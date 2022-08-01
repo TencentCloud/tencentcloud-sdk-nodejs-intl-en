@@ -20,18 +20,19 @@ const LocalDiskType = models.LocalDiskType;
 const AssociateInstancesKeyPairsResponse = models.AssociateInstancesKeyPairsResponse;
 const DescribeImageQuotaResponse = models.DescribeImageQuotaResponse;
 const ModifyInstancesProjectRequest = models.ModifyInstancesProjectRequest;
+const ConfigureChcDeployVpcResponse = models.ConfigureChcDeployVpcResponse;
 const ResetInstancesTypeResponse = models.ResetInstancesTypeResponse;
 const HostResource = models.HostResource;
 const DeleteDisasterRecoverGroupsRequest = models.DeleteDisasterRecoverGroupsRequest;
 const DescribeInstancesOperationLimitRequest = models.DescribeInstancesOperationLimitRequest;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
-const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
+const DescribeZonesRequest = models.DescribeZonesRequest;
 const InquiryPriceResetInstancesInternetMaxBandwidthResponse = models.InquiryPriceResetInstancesInternetMaxBandwidthResponse;
 const ModifyKeyPairAttributeRequest = models.ModifyKeyPairAttributeRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const ResetInstancesTypeRequest = models.ResetInstancesTypeRequest;
-const InquiryPriceResetInstanceRequest = models.InquiryPriceResetInstanceRequest;
+const ChcHost = models.ChcHost;
 const DeleteLaunchTemplateVersionsRequest = models.DeleteLaunchTemplateVersionsRequest;
 const DeleteImagesRequest = models.DeleteImagesRequest;
 const DeleteLaunchTemplateRequest = models.DeleteLaunchTemplateRequest;
@@ -41,6 +42,7 @@ const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
 const ResetInstanceRequest = models.ResetInstanceRequest;
 const LaunchTemplate = models.LaunchTemplate;
+const DescribeChcHostsResponse = models.DescribeChcHostsResponse;
 const AllocateHostsRequest = models.AllocateHostsRequest;
 const LoginSettings = models.LoginSettings;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
@@ -56,11 +58,13 @@ const LaunchTemplateVersionInfo = models.LaunchTemplateVersionInfo;
 const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
+const RemoveChcAssistVpcResponse = models.RemoveChcAssistVpcResponse;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
+const TagSpecification = models.TagSpecification;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
 const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
 const DescribeLaunchTemplateVersionsRequest = models.DescribeLaunchTemplateVersionsRequest;
@@ -71,7 +75,8 @@ const DescribeInstancesOperationLimitResponse = models.DescribeInstancesOperatio
 const SyncImagesResponse = models.SyncImagesResponse;
 const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfigInfosResponse;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
-const DescribeZonesRequest = models.DescribeZonesRequest;
+const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
+const RemoveChcAssistVpcRequest = models.RemoveChcAssistVpcRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
 const Tag = models.Tag;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
@@ -81,6 +86,7 @@ const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
 const SyncImagesRequest = models.SyncImagesRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
 const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
+const ConfigureChcDeployVpcRequest = models.ConfigureChcDeployVpcRequest;
 const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfigsResponse;
 const CreateImageResponse = models.CreateImageResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
@@ -89,6 +95,7 @@ const DescribeImageSharePermissionResponse = models.DescribeImageSharePermission
 const DeleteLaunchTemplateVersionsResponse = models.DeleteLaunchTemplateVersionsResponse;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const Image = models.Image;
+const ChcDeployExtraConfig = models.ChcDeployExtraConfig;
 const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecoverGroupQuotaResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const CreateDisasterRecoverGroupRequest = models.CreateDisasterRecoverGroupRequest;
@@ -114,13 +121,15 @@ const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGrou
 const ExportImagesRequest = models.ExportImagesRequest;
 const ActionTimer = models.ActionTimer;
 const DescribeReservedInstancesConfigInfosRequest = models.DescribeReservedInstancesConfigInfosRequest;
-const TagSpecification = models.TagSpecification;
+const InquiryPriceResetInstanceRequest = models.InquiryPriceResetInstanceRequest;
 const DescribeLaunchTemplatesRequest = models.DescribeLaunchTemplatesRequest;
 const ResetInstancesInternetMaxBandwidthRequest = models.ResetInstancesInternetMaxBandwidthRequest;
 const InstanceFamilyConfig = models.InstanceFamilyConfig;
+const RemoveChcDeployVpcResponse = models.RemoveChcDeployVpcResponse;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const ImportImageRequest = models.ImportImageRequest;
 const SpotMarketOptions = models.SpotMarketOptions;
+const ConfigureChcAssistVpcRequest = models.ConfigureChcAssistVpcRequest;
 const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
 const CreateKeyPairRequest = models.CreateKeyPairRequest;
 const InstanceStatus = models.InstanceStatus;
@@ -134,6 +143,7 @@ const Filter = models.Filter;
 const LaunchTemplateInfo = models.LaunchTemplateInfo;
 const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
 const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
+const ModifyChcAttributeResponse = models.ModifyChcAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
 const StartInstancesResponse = models.StartInstancesResponse;
 const ModifyInstancesVpcAttributeRequest = models.ModifyInstancesVpcAttributeRequest;
@@ -146,8 +156,10 @@ const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
 const ImageOsList = models.ImageOsList;
 const ReservedInstanceTypeItem = models.ReservedInstanceTypeItem;
 const ExportImagesResponse = models.ExportImagesResponse;
+const RemoveChcDeployVpcRequest = models.RemoveChcDeployVpcRequest;
 const ReservedInstancePrice = models.ReservedInstancePrice;
 const DescribeHostsRequest = models.DescribeHostsRequest;
+const ModifyChcAttributeRequest = models.ModifyChcAttributeRequest;
 const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
 const InquiryPriceResizeInstanceDisksResponse = models.InquiryPriceResizeInstanceDisksResponse;
 const TerminateInstancesRequest = models.TerminateInstancesRequest;
@@ -155,7 +167,9 @@ const SharePermission = models.SharePermission;
 const DeleteImagesResponse = models.DeleteImagesResponse;
 const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
+const ConfigureChcAssistVpcResponse = models.ConfigureChcAssistVpcResponse;
 const RebootInstancesResponse = models.RebootInstancesResponse;
+const DescribeChcHostsRequest = models.DescribeChcHostsRequest;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
 const CreateLaunchTemplateVersionResponse = models.CreateLaunchTemplateVersionResponse;
 const OsVersion = models.OsVersion;
@@ -217,19 +231,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * This API is used to shut down instances.
-
-* You can only perform this operation on instances whose status is `RUNNING`.
-* The instance status will become `STOPPING` when the API is called successfully and `STOPPED` when the instance is successfully shut down.
-* Forced shutdown is supported. A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force shut down a CVM when it cannot be sht down normally.
-* Batch operations are supported. The maximum number of instances in each request is 100.
-     * @param {StopInstancesRequest} req
-     * @param {function(string, StopInstancesResponse):void} cb
+     * This API is used to remove the deployment network of a CHC host.
+     * @param {RemoveChcDeployVpcRequest} req
+     * @param {function(string, RemoveChcDeployVpcResponse):void} cb
      * @public
      */
-    StopInstances(req, cb) {
-        let resp = new StopInstancesResponse();
-        this.request("StopInstances", req, resp, cb);
+    RemoveChcDeployVpc(req, cb) {
+        let resp = new RemoveChcDeployVpcResponse();
+        this.request("RemoveChcDeployVpc", req, resp, cb);
     }
 
     /**
@@ -283,6 +292,17 @@ class CvmClient extends AbstractClient {
     ModifyLaunchTemplateDefaultVersion(req, cb) {
         let resp = new ModifyLaunchTemplateDefaultVersionResponse();
         this.request("ModifyLaunchTemplateDefaultVersion", req, resp, cb);
+    }
+
+    /**
+     * The API is used to import an image. The image imported can be used to create instances. Currently, this API can import images in formats like RAW, VHD, QCOW2, and VMDK.
+     * @param {ImportImageRequest} req
+     * @param {function(string, ImportImageResponse):void} cb
+     * @public
+     */
+    ImportImage(req, cb) {
+        let resp = new ImportImageResponse();
+        this.request("ImportImage", req, resp, cb);
     }
 
     /**
@@ -425,6 +445,17 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the CHC host attributes.
+     * @param {ModifyChcAttributeRequest} req
+     * @param {function(string, ModifyChcAttributeResponse):void} cb
+     * @public
+     */
+    ModifyChcAttribute(req, cb) {
+        let resp = new ModifyChcAttributeResponse();
+        this.request("ModifyChcAttribute", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a [spread placement group](https://intl.cloud.tencent.com/document/product/213/15486?from_cn_redirect=1). After you create one, you can specify it for an instance when you [create the instance](https://intl.cloud.tencent.com/document/api/213/15730?from_cn_redirect=1), 
      * @param {CreateDisasterRecoverGroupRequest} req
      * @param {function(string, CreateDisasterRecoverGroupResponse):void} cb
@@ -461,6 +492,22 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * This API is used to shut down instances.
+
+* You can only perform this operation on instances whose status is `RUNNING`.
+* The instance status will become `STOPPING` when the API is called successfully and `STOPPED` when the instance is successfully shut down.
+* Forced shutdown is supported. A forced shutdown is similar to switching off the power of a physical computer. It may cause data loss or file system corruption. Be sure to only force shut down a CVM when it cannot be sht down normally.
+* Batch operations are supported. The maximum number of instances in each request is 100.
+     * @param {StopInstancesRequest} req
+     * @param {function(string, StopInstancesResponse):void} cb
+     * @public
+     */
+    StopInstances(req, cb) {
+        let resp = new StopInstancesResponse();
+        this.request("StopInstances", req, resp, cb);
+    }
+
+    /**
      * This API is used to query availability zones.
      * @param {DescribeZonesRequest} req
      * @param {function(string, DescribeZonesResponse):void} cb
@@ -469,6 +516,19 @@ class CvmClient extends AbstractClient {
     DescribeZones(req, cb) {
         let resp = new DescribeZonesResponse();
         this.request("DescribeZones", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify image attributes.
+
+* Attributes of shared images cannot be modified.
+     * @param {ModifyImageAttributeRequest} req
+     * @param {function(string, ModifyImageAttributeResponse):void} cb
+     * @public
+     */
+    ModifyImageAttribute(req, cb) {
+        let resp = new ModifyImageAttributeResponse();
+        this.request("ModifyImageAttribute", req, resp, cb);
     }
 
     /**
@@ -663,14 +723,25 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to associate security groups with specified instances.
-     * @param {AssociateSecurityGroupsRequest} req
-     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * This API is used to remove the out-of-band network and deployment network of a CHC host.
+     * @param {RemoveChcAssistVpcRequest} req
+     * @param {function(string, RemoveChcAssistVpcResponse):void} cb
      * @public
      */
-    AssociateSecurityGroups(req, cb) {
-        let resp = new AssociateSecurityGroupsResponse();
-        this.request("AssociateSecurityGroups", req, resp, cb);
+    RemoveChcAssistVpc(req, cb) {
+        let resp = new RemoveChcAssistVpcResponse();
+        this.request("RemoveChcAssistVpc", req, resp, cb);
+    }
+
+    /**
+     * This API is used to configure the out-of-band network and deployment network of a CHC host.
+     * @param {ConfigureChcAssistVpcRequest} req
+     * @param {function(string, ConfigureChcAssistVpcResponse):void} cb
+     * @public
+     */
+    ConfigureChcAssistVpc(req, cb) {
+        let resp = new ConfigureChcAssistVpcResponse();
+        this.request("ConfigureChcAssistVpc", req, resp, cb);
     }
 
     /**
@@ -687,16 +758,14 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to modify image attributes.
-
-* Attributes of shared images cannot be modified.
-     * @param {ModifyImageAttributeRequest} req
-     * @param {function(string, ModifyImageAttributeResponse):void} cb
+     * This API is used to configure the deployment network of a CHC host.
+     * @param {ConfigureChcDeployVpcRequest} req
+     * @param {function(string, ConfigureChcDeployVpcResponse):void} cb
      * @public
      */
-    ModifyImageAttribute(req, cb) {
-        let resp = new ModifyImageAttributeResponse();
-        this.request("ModifyImageAttribute", req, resp, cb);
+    ConfigureChcDeployVpc(req, cb) {
+        let resp = new ConfigureChcDeployVpcResponse();
+        this.request("ConfigureChcDeployVpc", req, resp, cb);
     }
 
     /**
@@ -840,14 +909,14 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * The API is used to import an image. The image imported can be used to create instances. Currently, this API can import images in formats like RAW, VHD, QCOW2, and VMDK.
-     * @param {ImportImageRequest} req
-     * @param {function(string, ImportImageResponse):void} cb
+     * This API is used to disassociate security groups from instances.
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
      * @public
      */
-    ImportImage(req, cb) {
-        let resp = new ImportImageResponse();
-        this.request("ImportImage", req, resp, cb);
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -899,13 +968,12 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to change the project to which an instance belongs.
+     * This API is used to change the project to which an instance is assigned.
 
-* Project is a virtual concept. You can create multiple projects under one account, manage different resources in each project, and assign different instances to different projects. You may use the [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API to query instances and use the project ID to filter results.
-* You cannot modify the project of an instance that is bound to a load balancer. You need to firstly unbind the load balancer from the instance by using the [`DeregisterInstancesFromLoadBalancer`](https://intl.cloud.tencent.com/document/api/214/1258?from_cn_redirect=1) API.
-[^_^]: # (If you modify the project of an instance, security groups associated with the instance will be automatically disassociated. You can use the [`ModifyInstancesAttribute`](https://intl.cloud.tencent.com/document/api/213/15739?from_cn_redirect=1) API to associate the instance with the security groups again.
-* Batch operations are supported. You can operate up to 100 instances in each request.
-* You can call the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) API and find the result of the operation in the response parameter `LatestOperationState`. If the value is `SUCCESS`, the operation is successful.
+* Project is a virtual concept. You can create multiple projects under one account, manage different resources in each project, and assign different instances to different projects. You may use the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API to query instances and use the project ID to filter the results.
+* You cannot modify the project of an instance that is bound to a load balancer. You need to unbind the load balancer from the instance by using the [DeregisterInstancesFromLoadBalancer](https://intl.cloud.tencent.com/document/api/214/1258?from_cn_redirect=1) API before using this API.
+* Batch operations are supported. Up to 100 instances per request is allowed.
+* You can use the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) to query the operation result. If the `LatestOperationState` in the response is `SUCCESS`, the operation is successful.
      * @param {ModifyInstancesProjectRequest} req
      * @param {function(string, ModifyInstancesProjectResponse):void} cb
      * @public
@@ -1016,14 +1084,28 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to disassociate security groups from instances.
-     * @param {DisassociateSecurityGroupsRequest} req
-     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * This API is used to associate security groups with specified instances.
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
      * @public
      */
-    DisassociateSecurityGroups(req, cb) {
-        let resp = new DisassociateSecurityGroupsResponse();
-        this.request("DisassociateSecurityGroups", req, resp, cb);
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of one or more CHC host.
+
+* You can filter the query results with the instance ID, name or device type. See `Filter` for more information.
+* If no parameter is defined, a certain number of instances under the current account will be returned. The number is specified by `Limit` and is `20` by default.
+     * @param {DescribeChcHostsRequest} req
+     * @param {function(string, DescribeChcHostsResponse):void} cb
+     * @public
+     */
+    DescribeChcHosts(req, cb) {
+        let resp = new DescribeChcHostsResponse();
+        this.request("DescribeChcHosts", req, resp, cb);
     }
 
 

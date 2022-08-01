@@ -1780,6 +1780,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Backtracking = null;
 
+        /**
+         * Whether to be encoded in GBK format. Valid values: `0` (No) and `1` (Yes).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsGBK = null;
+
+        /**
+         * Whether to be formatted as JSON (standard). Valid values: `0` (No) and `1` (Yes).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.JsonStandard = null;
+
     }
 
     /**
@@ -1807,6 +1821,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.UnMatchUpLoadSwitch = 'UnMatchUpLoadSwitch' in params ? params.UnMatchUpLoadSwitch : null;
         this.UnMatchLogKey = 'UnMatchLogKey' in params ? params.UnMatchLogKey : null;
         this.Backtracking = 'Backtracking' in params ? params.Backtracking : null;
+        this.IsGBK = 'IsGBK' in params ? params.IsGBK : null;
+        this.JsonStandard = 'JsonStandard' in params ? params.JsonStandard : null;
 
     }
 }
@@ -4352,7 +4368,7 @@ class AnalysisDimensional extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Analysis type. Valid values: `query`, `field`
+         * Type of data being analyzed. Valid values: `query`; `field`; `original`
          * @type {string || null}
          */
         this.Type = null;
@@ -4362,6 +4378,12 @@ class AnalysisDimensional extends  AbstractModel {
          * @type {string || null}
          */
         this.Content = null;
+
+        /**
+         * Configuration
+         * @type {Array.<AlarmAnalysisConfig> || null}
+         */
+        this.ConfigInfo = null;
 
     }
 
@@ -4375,6 +4397,15 @@ class AnalysisDimensional extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Content = 'Content' in params ? params.Content : null;
+
+        if (params.ConfigInfo) {
+            this.ConfigInfo = new Array();
+            for (let z in params.ConfigInfo) {
+                let obj = new AlarmAnalysisConfig();
+                obj.deserialize(params.ConfigInfo[z]);
+                this.ConfigInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -5209,6 +5240,41 @@ class DeleteIndexResponse extends  AbstractModel {
 }
 
 /**
+ * Alarm configuration for the multidimensional analysis
+ * @class
+ */
+class AlarmAnalysisConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * ModifyIndex request structure.
  * @class
  */
@@ -5540,7 +5606,7 @@ class ExportInfo extends  AbstractModel {
         this.Count = null;
 
         /**
-         * Log download status. Valid values: `Processing`: exporting; `Complete`: completed; `Failed`: failed; `Expired`: expired (3-day validity period).
+         * Log download status. Valid values: `Processing`, `Completed`, `Failed`, `Expired` (three-day validity period), and `Queuing`.
          * @type {string || null}
          */
         this.Status = null;
@@ -7275,8 +7341,9 @@ Notes:
         this.Limit = null;
 
         /**
-         * You can pass through the `Context` value (validity: 1 hour) returned by the last API to continue to get logs, which can get up to 10,000 raw logs.
+         * You can pass through the `Context` value (validity: an hour) returned by the API last time to continue to get logs (up to 10,000 raw logs).
 Notes:
+* Do not modify any other parameters while passing through the `Context` parameter.
 * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
 * To continue to get analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
          * @type {string || null}
@@ -8340,6 +8407,7 @@ module.exports = {
     CreateConfigRequest: CreateConfigRequest,
     CreateShipperResponse: CreateShipperResponse,
     DeleteIndexResponse: DeleteIndexResponse,
+    AlarmAnalysisConfig: AlarmAnalysisConfig,
     ModifyIndexRequest: ModifyIndexRequest,
     Column: Column,
     CompressInfo: CompressInfo,

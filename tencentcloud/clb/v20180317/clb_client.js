@@ -336,7 +336,7 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to unbind layer-4 and layer-7 real servers in batches. Up to 500 servers can be unbound in a batch.
+     * This API is used to batch unbind real servers of the layer-4 and layer-7 VPC-based CLBs. Up to 500 real servers can be unbound in a batch.
      * @param {BatchDeregisterTargetsRequest} req
      * @param {function(string, BatchDeregisterTargetsResponse):void} cb
      * @public
@@ -675,7 +675,7 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to bind CVM instances or ENIs in batches. Up to 500 servers can be bound in a batch. It supports cross-region binding, and layer-4 and layer-7 (TCP/UDP/HTTP/HTTPS) protocols.
+     * This API is used to batch bind CVM instances or ENIs. Up to 500 servers can be bound in a batch. It supports cross-region binding, layer-4 and layer-7 (TCP/UDP/HTTP/HTTPS) protocols, and VPC-based CLBs only.
      * @param {BatchRegisterTargetsRequest} req
      * @param {function(string, BatchRegisterTargetsResponse):void} cb
      * @public

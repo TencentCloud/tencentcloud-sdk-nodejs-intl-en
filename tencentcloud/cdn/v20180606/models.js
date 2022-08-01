@@ -173,7 +173,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Custom HTTPS forwarding configuration
+ * Custom HTTPS configuration for origin-pull
  * @class
  */
 class AdvanceHttps extends  AbstractModel {
@@ -188,7 +188,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.CustomTlsStatus = null;
 
         /**
-         * Specifies the TLS version. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
+         * TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -202,24 +202,24 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Cipher = null;
 
         /**
-         * Origin authentication type
-`off`: disable authentication
-`oneWay`: authenticate the origin 
-`twoWay`: two-way authentication
+         * Origin-pull verification status
+`off`: Disables origin-pull verification
+`oneWay`: Only verify the origin
+`twoWay`: Enables two-way origin-pull verification
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VerifyOriginType = null;
 
         /**
-         * Information of the origin-pull certificate
+         * Configuration information of the origin-pull certificate
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {ServerCert || null}
          */
         this.CertInfo = null;
 
         /**
-         * Information of the origin server certificate
+         * Configuration information of the origin server certificate
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {ClientCert || null}
          */
@@ -264,14 +264,14 @@ class Revalidate extends  AbstractModel {
 
         /**
          * Whether to always forward to the origin server for verification. Valid values: on, off
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Forwards to the origin server for verification only for specific request path
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Path = null;
@@ -347,29 +347,29 @@ class UrlRecord extends  AbstractModel {
         super();
 
         /**
-         * Status (disable: blocked; enable: unblocked)
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Status. `disable`: Blocked; `enable`: Unblocked.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
          * Corresponding URL
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RealUrl = null;
 
         /**
          * Creation time
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Update time
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Update time.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -579,8 +579,8 @@ class Authentication extends  AbstractModel {
 
         /**
          * Hotlink protection configuration switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
 When this is enabled, one mode needs to be configured. Other modes need to be set to null.
          * @type {string || null}
          */
@@ -588,28 +588,28 @@ When this is enabled, one mode needs to be configured. Other modes need to be se
 
         /**
          * Timestamp hotlink protection mode A configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AuthenticationTypeA || null}
          */
         this.TypeA = null;
 
         /**
          * Timestamp hotlink protection mode B configuration (mode B is being upgraded and is currently not supported)
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AuthenticationTypeB || null}
          */
         this.TypeB = null;
 
         /**
          * Timestamp hotlink protection mode C configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AuthenticationTypeC || null}
          */
         this.TypeC = null;
 
         /**
          * Timestamp hotlink protection mode D configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AuthenticationTypeD || null}
          */
         this.TypeD = null;
@@ -653,7 +653,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * `ImageOptimization` configuration
+ * Image optimization configuration
  * @class
  */
 class ImageOptimization extends  AbstractModel {
@@ -662,21 +662,21 @@ class ImageOptimization extends  AbstractModel {
 
         /**
          * `WebpAdapter` configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {WebpAdapter || null}
          */
         this.WebpAdapter = null;
 
         /**
          * `TpgAdapter` configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {TpgAdapter || null}
          */
         this.TpgAdapter = null;
 
         /**
          * `GuetzliAdapter` configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {GuetzliAdapter || null}
          */
         this.GuetzliAdapter = null;
@@ -722,63 +722,63 @@ class Https extends  AbstractModel {
 
         /**
          * HTTPS configuration switch
-on: enabled
-off: disabled
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Enable
+`off`: Disable
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * HTTP2 configuration switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
 Enabling HTTPS acceleration for the first time will enable HTTP2 configuration by default.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Http2 = null;
 
         /**
          * OCSP configuration switch
-on: enabled
-off: disabled
-This is disabled by default
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Enable
+`off`: Disable
+It is disabled by default.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.OcspStapling = null;
 
         /**
          * Client certificate authentication feature
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
 This is disabled by default. The client certificate information is needed when enabled. This is still in beta and not generally available yet.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.VerifyClient = null;
 
         /**
          * Server certificate configuration information
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ServerCert || null}
          */
         this.CertInfo = null;
 
         /**
          * Client certificate configuration information
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ClientCert || null}
          */
         this.ClientCertInfo = null;
 
         /**
          * Spdy configuration switch
-on: enabled
-off: disabled
-This is disabled by default
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Enable
+`off`: Disable
+It is disabled by default.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Spdy = null;
@@ -789,20 +789,21 @@ closed: already closed
 deploying: in deployment
 deployed: successfully deployed
 failed: deployment failed
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.SslStatus = null;
 
         /**
          * HSTS configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Hsts || null}
          */
         this.Hsts = null;
 
         /**
          * TLS version settings, which only support certain advanced domain names. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.TlsVersion = null;
@@ -881,7 +882,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Cache configuration
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {RuleCacheConfig || null}
          */
         this.CacheConfig = null;
@@ -940,7 +941,7 @@ class DescribeCdnDomainLogsRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Limit on paged queries. Default value: 100. Maximum value: 1,000
+         * Limit on paginated queries. Default value: 100. Maximum value: 1,000
          * @type {number || null}
          */
         this.Limit = null;
@@ -992,7 +993,7 @@ class CreateClsLogTopicResponse extends  AbstractModel {
 
         /**
          * Topic ID
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.TopicId = null;
@@ -1110,15 +1111,15 @@ class Compression extends  AbstractModel {
 
         /**
          * Smart compression configuration switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Compression rules array
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<CompressionRule> || null}
          */
         this.CompressionRules = null;
@@ -1295,14 +1296,14 @@ class SpecificConfig extends  AbstractModel {
 
         /**
          * Specific configuration for domain name inside mainland China.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {MainlandConfig || null}
          */
         this.Mainland = null;
 
         /**
          * Specific configuration for domain name outside mainland China.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OverseaConfig || null}
          */
         this.Overseas = null;
@@ -1342,11 +1343,17 @@ class FollowRedirect extends  AbstractModel {
 
         /**
          * Origin-pull follow-redirect switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
+
+        /**
+         * 
+         * @type {RedirectConfig || null}
+         */
+        this.RedirectConfig = null;
 
     }
 
@@ -1358,6 +1365,12 @@ off: disabled
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.RedirectConfig) {
+            let obj = new RedirectConfig();
+            obj.deserialize(params.RedirectConfig)
+            this.RedirectConfig = obj;
+        }
 
     }
 }
@@ -1372,15 +1385,15 @@ class RequestHeader extends  AbstractModel {
 
         /**
          * Custom request header configuration switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Custom request header configuration rules
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<HttpHeaderPathRule> || null}
          */
         this.HeaderRules = null;
@@ -1430,7 +1443,7 @@ class DescribePurgeQuotaRequest extends  AbstractModel {
 }
 
 /**
- * Referer blocklist/allowlist configuration. This is disabled by default.
+ * Referer blacklist/whitelist configuration. This is disabled by default.
  * @class
  */
 class Referer extends  AbstractModel {
@@ -1438,16 +1451,16 @@ class Referer extends  AbstractModel {
         super();
 
         /**
-         * Referer blocklist/allowlist configuration switch
-on: enabled
-off: disabled
+         * Referer blacklist/whitelist configuration switch
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Referer blocklist/allowlist configuration rule
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Referer blacklist/whitelist configuration rule
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<RefererRule> || null}
          */
         this.RefererRules = null;
@@ -1484,7 +1497,7 @@ class PostSize extends  AbstractModel {
         super();
 
         /**
-         * Limit the size of a POST request. The default value is 32 MB.
+         * Limit the size of POST requests. The default value is 32 MB.
 off: Disable
 on: Enable
          * @type {string || null}
@@ -1617,9 +1630,9 @@ class CacheConfigNoCache extends  AbstractModel {
         super();
 
         /**
-         * No cache configuration switch
-on: enable
-off: disable
+         * No-cache configuration switch
+`on`: Enable
+`off`: Disable
 Note: this field may return null, indicating that no valid value is obtained.
          * @type {string || null}
          */
@@ -1627,10 +1640,10 @@ Note: this field may return null, indicating that no valid value is obtained.
 
         /**
          * Always forwards to the origin server for verification
-on: enable
-off: disable
-This is disabled by default.
-Note: this field may return null, indicating that no valid value is obtained.
+`on`: Enable
+`off`: Disable
+It is disabled by default.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Revalidate = null;
@@ -1651,7 +1664,7 @@ Note: this field may return null, indicating that no valid value is obtained.
 }
 
 /**
- * Merging pull requests configurations
+ * Merging pull requests configuration item
  * @class
  */
 class OriginCombine extends  AbstractModel {
@@ -1737,28 +1750,28 @@ When you change a daily billing mode to another, and there is network usage on t
         this.BillingCycle = null;
 
         /**
-         * `monthMax`: billed by the monthly average of daily peak traffic (monthly settlement)
-`day95`: billed by the daily 95th percentile bandwidth (monthly settlement)
-`month95`: billed by the monthly 95th percentile bandwidth (monthly settlement)
-`sum`: billed by the total traffic/total requests (daily or monthly settlement)
-`max`: billed by the peak bandwidth (daily settlement)
+         * `monthMax`: Billed by the monthly average of daily peak traffic (monthly settlement)
+`day95`: Billed by the daily 95th percentile bandwidth (monthly settlement)
+`month95`: Billed by the monthly 95th percentile bandwidth (monthly settlement)
+`sum`: Billed by the total traffic/total requests (daily or monthly settlement)
+`max`: Billed by the peak bandwidth (daily settlement)
          * @type {string || null}
          */
         this.StatType = null;
 
         /**
-         * Billing method outside Mainland China:
-`all`: unified billing for all regions
-`multiple`: separate billing for different regions
+         * Billing method for regions outside the Chinese mainland:
+`all`: Unified billing for all regions
+`multiple`: Region-specific billing
          * @type {string || null}
          */
         this.RegionType = null;
 
         /**
          * The current billing mode in effect:
-`flux`: Bill by traffic
-`bandwidth`: Bill by bandwidth
-`request`: Bill by the number of requests
+`flux`: Billed by traffic
+`bandwidth`: Billed by bandwidth
+`request`: Billed by the number of requests
 `flux_sep`: Disused field
 `bandwidth_sep`: Disused field
          * @type {string || null}
@@ -1800,9 +1813,9 @@ class PathRule extends  AbstractModel {
 
         /**
          * Whether to enable wildcard match (`*`).
-false: disable
-true: enable
-Note: this field may return `null`, indicating that no valid values can be obtained.
+`false`: disabled
+`true`: enabled
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {boolean || null}
          */
         this.Regex = null;
@@ -1829,9 +1842,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ServerName = null;
 
         /**
-         * Origin server region. Valid values: `CN` and `OV`.
-CN: the Chinese mainland
-OV: outside the Chinese mainland
+         * Region of the origin server. Valid values: `CN` and `OV`.
+`CN`: Within the Chinese mainland
+`OV`: Outside the Chinese mainland
 Default value: `CN`.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -1840,23 +1853,23 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Origin server URI path when the path matches, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the match path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ForwardUri = null;
 
         /**
          * Origin-pull header setting when the path matches.
-Note: this field may return `null`, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<HttpHeaderRule> || null}
          */
         this.RequestHeaders = null;
 
         /**
          * When `Regex` is `false`, this parameter should be `true`.
-`false`: disabled
+`false`: Disabled
 `true`: enabled
-Note: this field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {boolean || null}
          */
         this.FullMatch = null;
@@ -1901,8 +1914,8 @@ class ListTopDataRequest extends  AbstractModel {
         /**
          * Query start time in the format of `yyyy-MM-dd HH:mm:ss`
 Only supports data query at daily granularity. The date in the input parameter is used as the start date.
-Data generated after or at 00:00:00 on the start date will be returned
-Only data for the last 90 days can be queried
+If the specified start date is greater than 00:00:00, it will be rounded down to 00:00:00 on the date. For example, if `StartTime` is 2018-09-04 10:40:00, it will be rounded down to 2018-09-04 00:00:00.
+Only data from the last 90 days will be queried.
          * @type {string || null}
          */
         this.StartTime = null;
@@ -1910,19 +1923,19 @@ Only data for the last 90 days can be queried
         /**
          * Query end time in the format of `yyyy-MM-dd HH:mm:ss`
 Only supports data query at daily granularity. The date in the input parameter is used as the end date.
-Data generated before or at 23:59:59 on the end date will be returned
+If the specified end date is smaller than 23:59:59, it will be rounded up to 23:59:59 on the date. For example, if `EndTime` is 2018-09-05 22:40:00, it will be rounded up to 2018-09-05 23:59:59.
 `EndTime` must be later than or equal to `StartTime`
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Object representing the sort criteria. The following objects are supported:
-`url`: sorts by access URL (URLs carrying no parameters). Supported filters are `flux` and `request`.
-`district`: sorts by province, country, or region. Supported filters are `flux` and `request`.
-`isp`: sorts by ISP. Supported filters are `flux` and `request`.
-`host`: sorts by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, and `statusCode` (2XX, 3XX, 4XX, 5XX).
-`originHost`: sorts by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, and `OriginStatusCode` (origin_2XX, origin_3XX, origin_4XX, origin_5XX).
+         * Objects to be sorted. Valid values:
+`url`: Sort by access URL (URLs carrying no parameters). Supported filters are `flux` and `request`.
+`district`: sorts provinces or countries/regions. Supported filters are `flux` and `request`.
+`isp`: sorts ISPs. Supported filters are `flux` and `request`.
+`host`: Sort by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, and `statusCode` (2XX, 3XX, 4XX, 5XX).
+`originHost`: Sort by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, and `OriginStatusCode` (origin_2XX, origin_3XX, origin_4XX, origin_5XX).
          * @type {string || null}
          */
         this.Metric = null;
@@ -1961,7 +1974,7 @@ Please note that if domain names are specified, this parameter will be ignored.
         this.Project = null;
 
         /**
-         * Default is `false` for multi-domain name queries, which returns sorted results of all domain names. 
+         * The sorted results of all domain names are returned by default (false) during a multi-domain-name query
 If `Metric` is `url`, `path`, `district`, or `isp` and `Filter` is `flux` or `request`, it can be set to `true` to return the sorted results of each domain.
          * @type {boolean || null}
          */
@@ -1974,17 +1987,17 @@ If `Metric` is `url`, `path`, `district`, or `isp` and `Filter` is `flux` or `re
         this.Code = null;
 
         /**
-         * Specifies a service region for the query. If it is left blank, CDN data within Mainland China will be queried.
-`mainland`: specifies to query CDN data within Mainland China;
-`overseas`: specifies to query CDN data outside Mainland China. Supported metrics are `url`, `district`, `host`, and `originHost`. If `Metric` is `originHost`, supported filters are `flux`, `request`, and `bandwidth`.
+         * Specifies the service region. If this value is left blank, it means to query CDN data within the Chinese mainland.
+`mainland`: Query CDN data in the Chinese mainland.
+`overseas`: Query CDN data outside the Chinese mainland. Supported metrics are `url`, `district`, `host`, and `originHost`. If `Metric` is `originHost`, supported filters are `flux`, `request`, and `bandwidth`.
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * The region type can be specified only when you query CDN data outside Mainland China and `Metric` is `district` or `host`; if you leave it empty, data of the service region will be queried (only applicable when `Area` is `overseas` and `Metric` is `district` or `host`)
-server: specifies to query data of service region (where a CDN node is located)
-client: specifies to query data of the client region (where a user request device is located). If `Metric` is `host`, `Filter` can only be `flux`, `request`, or `bandwidth`
+         * Specifies a region type for the query. If it is left blank, data of the service region will be queried. This parameter is only valid when `Area` is `overseas` and `Metric` is `district` or `host`.
+`server`: Query by the location of server (Tencent Cloud CDN nodes).
+`client`: Query data of the client region where the request devices are located; if `Metric` is `host`, supported filters are `flux`, `request`, and `bandwidth`.
          * @type {string || null}
          */
         this.AreaType = null;
@@ -2230,52 +2243,52 @@ class CompressionRule extends  AbstractModel {
 
         /**
          * true: must be set as true, enables compression
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.Compress = null;
 
         /**
          * The minimum file size to trigger compression (in bytes)
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MinLength = null;
 
         /**
-         * The maximum file size to trigger compression (in bytes)
-The maximum value is 30 MB
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The maximum file size to trigger compression (in bytes).
+The maximum value is 30 MB.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.MaxLength = null;
 
         /**
          * File compression algorithm
-gzip: specifies Gzip compression
-brotli: specifies Brotli compression
-Note: this field may return null, indicating that no valid values can be obtained.
+`gzip`: Gzip compression
+`brotli`: Brotli compression
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.Algorithms = null;
 
         /**
-         * Compress according to the file suffix type
-Such as: jpg, txt
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Compress based on file suffix.
+File suffixes such as jpg and txt are supported.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.FileExtensions = null;
 
         /**
          * Rule types:
-`all`: effective for all files.
-`file`: effective for specified file suffixes.
-`directory`: effective for specified paths.
-`path`: effective for specified absolute paths.
-`contentType`: effective when the `ContentType` is specified
+`all`: Apply to all files.
+`file`: Apply to files with the specified suffixes.
+`directory`: Apply to specified paths.
+`path`: Apply to specified absolute paths.
+`contentType`: Apply when the `ContentType` is specified.
 If this field is specified, `FileExtensions` does not take effect.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RuleType = null;
@@ -2287,7 +2300,7 @@ For `file`, enter a suffix, e.g., `jpg` or `txt`.
 For `directory`, enter a path, e.g., `/xxx/test/`.
 For `path`, enter an absolute path, e.g., `/xxx/test.html`.
 For `contentType`, enter `text/html`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -2313,6 +2326,48 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * 
+ * @class
+ */
+class RedirectConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FollowRedirectHost = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FollowRedirectBackupHost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.FollowRedirectHost = 'FollowRedirectHost' in params ? params.FollowRedirectHost : null;
+        this.FollowRedirectBackupHost = 'FollowRedirectBackupHost' in params ? params.FollowRedirectBackupHost : null;
+
+    }
+}
+
+/**
  * Image optimization - `GuetzliAdapter` configuration
  * @class
  */
@@ -2322,7 +2377,7 @@ class GuetzliAdapter extends  AbstractModel {
 
         /**
          * Switch. Valid values: on, off
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -2392,54 +2447,55 @@ class Origin extends  AbstractModel {
         super();
 
         /**
-         * Master origin server list
+         * Primary origin server list
 When modifying the origin server, you need to enter the corresponding OriginType.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.Origins = null;
 
         /**
          * Primary origin server type
-Input:
-`domain`: Domain name
+The following types are supported for input parameters:
+`domain`: domain name
 `domainv6`: IPv6 domain name
-`cos`: COS bucket address
+cos: COS origin
 `ip`: IP address
-`ipv6`: A single IPv6 address
-`ip_ipv6`: Multiple IPv4 addresses and one IPv6 address
+ipv6: origin server list is a single IPv6 address
+`ip_ipv6`: multiple IPv4 addresses and one IPv6 address
 `ip_domain`: IP addresses and domain names (only available to beta users)
 `ip_domainv6`: Multiple IPv4 addresses and one IPv6 domain name
-`ipv6_domain`: Multiple IPv6 addresses and one domain name
+`ipv6_domain`: multiple IPv6 addresses and one domain name
 `ipv6_domainv6`: Multiple IPv6 addresses and one IPv6 domain name
 `domain_domainv6`: Multiple IPv4 domain names and one IPv6 domain name
-`ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name
+`ip_ipv6_domain`: multiple IPv4 and IPv6 addresses and one domain name
 `ip_ipv6_domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name
 `ip_domain_domainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name
 `ipv6_domain_domainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name
 `ip_ipv6_domain_domainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name
-Output: 
-`image`: Cloud Infinite origin
-`ftp`: FTP origin (disused)
-When modifying `Origins`, you need to enter the corresponding `OriginType`.
-The IPv6 feature is now only available to beta users. Please submit an application to use this feature.
-Note: This field may return `null`, indicating that no valid value was found.
+The following types of output parameters are added:
+image: Cloud Infinite origin
+ftp: legacy FTP origin, which is no longer maintained.
+When modifying `Origins`, you need to enter the corresponding OriginType.
+The IPv6 feature is not generally available yet. Please send in a whitelist application to use this feature.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+         * It is required when a COS origin or third-party origin is used for acceleration.
+Host header used when accessing the primary origin server. If it is left empty, the acceleration domain name will be used by default.
 If a wildcard domain name is accessed, then the sub-domain name during the access will be used by default.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ServerName = null;
 
         /**
          * When OriginType is COS, you can specify if access to private buckets is allowed.
-Note: to enable this configuration, you need to first grant CDN access to the private bucket.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: To enable this configuration, you need to first grant CDN access to the private bucket. Values: `on` and `off`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CosPrivateAccess = null;
@@ -2449,7 +2505,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 http: forced HTTP origin-pull
 follow: protocol follow origin-pull
 https: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.OriginPullProtocol = null;
@@ -2457,62 +2513,64 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * Backup origin server list
 When modifying the backup origin server, you need to enter the corresponding BackupOriginType.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.BackupOrigins = null;
 
         /**
-         * Secondary origin type. Values:
-`domain`: domain name
+         * Backup origin server type, which supports the following types:
+`domain`: Domain name
 `ip`: IP address
-When modifying `BackupOrigins`, you need to enter the corresponding `BackupOriginType`.
+When modifying BackupOrigins, you need to enter the corresponding BackupOriginType.
 The following backup origin servers are only available to beta users. Submit an application if you want to become a beta user.
-`ipv6_domain`: multiple IPv6 addresses and one domain name
-`ip_ipv6`: multiple IPv4 addresses and one IPv6 address
-`ipv6_domain`: multiple IPv6 addresses and one domain name
-`ip_ipv6_domain`: multiple IPv4 and IPv6 addresses and one domain name
-Note: this field may return `null`, indicating that no valid values can be obtained.
+`ipv6_domain`: Multiple IPv6 addresses and one domain name
+`ip_ipv6`: Multiple IPv4 addresses and one IPv6 address
+`ipv6_domain`: Multiple IPv6 addresses and one domain name
+`ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.BackupOriginType = null;
 
         /**
-         * Host header used when accessing the backup origin server. If left empty, the ServerName of master origin server will be used by default.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Host header used when accessing the backup origin server. If it is left empty, the `ServerName` of primary origin server will be used by default.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.BackupServerName = null;
 
         /**
-         * 
+         * Origin-pull path
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.BasePath = null;
 
         /**
-         * Origin URL rewrite rule configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Origin-pull path rewriting configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<PathRule> || null}
          */
         this.PathRules = null;
 
         /**
-         * Path-based origin-pull configurations
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Path-based origin-pull configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<PathBasedOriginRule> || null}
          */
         this.PathBasedOrigin = null;
 
         /**
-         * Advanced HTTPS forwarding configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * HTTPS advanced origin-pull configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AdvanceHttps || null}
          */
         this.AdvanceHttps = null;
 
         /**
-         * 
+         * Object storage vendor
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.OriginCompany = null;
@@ -2766,14 +2824,14 @@ class HeaderKey extends  AbstractModel {
 
         /**
          * Whether to use it as part of `CacheKey`
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Array of headers that make up the `CacheKey` (separated by ';')
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Value = null;
@@ -2916,55 +2974,55 @@ class SimpleCache extends  AbstractModel {
 
         /**
          * Cache expiration time rules
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<SimpleCacheRule> || null}
          */
         this.CacheRules = null;
 
         /**
          * Follows origin server Cache-Control: max-age configurations
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
 If this is enabled, resources that do not match CacheRules rules will be cached by the node according to the max-age value returned by the origin server. Resources that match CacheRules rules will be cached on the node according to the cache expiration time set in CacheRules.
 This conflicts with CompareMaxAge. The two cannot be enabled at the same time.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FollowOrigin = null;
 
         /**
          * Forced cache
-on: enable
-off: disable
+`on`: Enable
+`off`: Disable
 This is disabled by default. If enabled, the `no-store` and `no-cache` resources returned from the origin server will be cached according to `CacheRules` rules.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.IgnoreCacheControl = null;
 
         /**
          * Ignores the Set-Cookie header of the origin server
-on: enabled
-off: disabled
-This is disabled by default
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Enable
+`off`: Disable
+It is disabled by default.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.IgnoreSetCookie = null;
 
         /**
          * Advanced cache expiration configuration. If this is enabled, the max-age value returned by the origin server will be compared with the cache expiration time set in CacheRules, and the smallest value will be cached on the node.
-on: enabled
-off: disabled
-This is disabled by default
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Enable
+`off`: Disable
+It is disabled by default.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CompareMaxAge = null;
 
         /**
          * Always forwards to the origin server for verification
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Revalidate || null}
          */
         this.Revalidate = null;
@@ -3044,7 +3102,7 @@ class DeleteClsLogTopicRequest extends  AbstractModel {
 }
 
 /**
- * `UserAgent` blocklist/allowlist configuration
+ * `UserAgent` blacklist/whitelist configuration
  * @class
  */
 class UserAgentFilter extends  AbstractModel {
@@ -3053,14 +3111,14 @@ class UserAgentFilter extends  AbstractModel {
 
         /**
          * Switch. Valid values: on, off
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * UA blocklist/allowlist effect rule list
-Note: this field may return null, indicating that no valid values can be obtained.
+         * UA blacklist/whitelist effect rule list
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<UserAgentFilterRule> || null}
          */
         this.FilterRules = null;
@@ -3165,21 +3223,21 @@ class TopicInfo extends  AbstractModel {
 
         /**
          * Creation time
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
          * Either `cdn` or `ecdn`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Channel = null;
 
         /**
-         * Whether the log topic has been removed from CLS
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether the logset has been removed from CLS
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Deleted = null;
@@ -3310,7 +3368,7 @@ class DescribeDomainsConfigResponse extends  AbstractModel {
         this.Domains = null;
 
         /**
-         * The number of domain names that matched the query conditions
+         * Number of domain names that match the specified query conditions
 Used for paginated queries
          * @type {number || null}
          */
@@ -3380,10 +3438,10 @@ class BriefDomain extends  AbstractModel {
 
         /**
          * Acceleration service status
-rejected: the domain name is rejected due to expiration/deregistration of its ICP filing
-processing: deploying
-online: activated
-offline: disabled
+`rejected`: The domain name is rejected due to expiration/deregistration of its ICP filing
+`processing`: Deploying
+`online`: Activated
+`offline`: Disabled
          * @type {string || null}
          */
         this.Status = null;
@@ -3396,60 +3454,60 @@ offline: disabled
 
         /**
          * Domain name service type
-web: static acceleration
-download: download acceleration
-media: streaming VOD acceleration
+`web`: Static acceleration
+`download`: Download acceleration
+`media`: Streaming media VOD acceleration
          * @type {string || null}
          */
         this.ServiceType = null;
 
         /**
-         * Domain name creation time
+         * Domain name creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Last modified time of domain name
+         * Domain name update time.
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Origin server configuration details
+         * Origin server configuration details.
          * @type {Origin || null}
          */
         this.Origin = null;
 
         /**
          * Domain name block status
-normal: normal
-overdue: the domain name has been disabled due to account arrears. The acceleration service can be resumed after the account is topped up.
-malicious: the acceleration service has been forcibly disabled due to detection of malicious behavior.
-ddos: the acceleration service has been disabled due to large-scale DDoS attacks to the domain name
-idle: no operations or data has been detected for more than 90 days. The domain name is determined to be inactive which automatically disables the acceleration service. You can restart the service.
-unlicensed: the acceleration service has been automatically disabled as the domain name has no ICP filing or its ICP filing is deregistered. Service can be resumed after an ICP filing is obtained.
-capping: the configured upper limit for bandwidth has been reached.
-readonly: the domain name has a special configuration and has been locked.
+`normal`: Normal
+`overdue`: The domain name has been disabled due to account arrears. The acceleration service can be resumed after the account is topped up.
+`malicious`: The acceleration service has been forcibly disabled due to detection of malicious behavior.
+`ddos`: The acceleration service has been disabled due to large-scale DDoS attacks to the domain name
+`idle`: No operations or data has been detected for more than 90 days. The domain name is determined to be inactive which automatically disables the acceleration service. You can restart the service.
+`unlicensed`: The acceleration service has been automatically disabled as the domain name has no ICP filing or its ICP filing is deregistered. Service can be resumed after an ICP filing is obtained.
+`capping`: The configured upper limit for bandwidth has been reached.
+`readonly`: The domain name has a special configuration and has been locked.
          * @type {string || null}
          */
         this.Disable = null;
 
         /**
          * Acceleration region
-mainland: acceleration in Mainland China
-overseas: acceleration outside Mainland China
-global: global acceleration
+`mainland`: Acceleration inside the Chinese mainland
+`overseas`: Acceleration outside the Chinese mainland
+`global`: Acceleration over the globe
          * @type {string || null}
          */
         this.Area = null;
 
         /**
          * Domain name lock status
-normal: not locked
-mainland: locked in Mainland China
-overseas: locked outside Mainland China
-global: locked globally
+`normal`: Not locked
+`mainland`: Locked in the Chinese mainland
+overseas: Locked outside the Chinese mainland
+global: Locked globally
          * @type {string || null}
          */
         this.Readonly = null;
@@ -3544,8 +3602,8 @@ class TpgAdapter extends  AbstractModel {
         super();
 
         /**
-         * Switch. Valid values: on, off
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Switch. Valid values: `on`, `off`
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -3576,7 +3634,7 @@ class CacheConfigCache extends  AbstractModel {
          * Cache configuration switch
 on: enable
 off: disable
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -3584,27 +3642,27 @@ Note: this field may return null, indicating that no valid value is obtained.
         /**
          * Cache expiration time settings
 Unit: second. The maximum value is 365 days.
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.CacheTime = null;
 
         /**
          * Advanced cache expiration configuration. If this is enabled, the max-age value returned by the origin server will be compared with the cache expiration time set in CacheRules, and the smallest value will be cached on the node.
-on: enable
-off: disable
+`on`: Enable
+`off`: Disable
 This is disabled by default.
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CompareMaxAge = null;
 
         /**
          * Force cache
-on: enable
-off: disable
+`on`: Enable
+`off`: Disable
 This is disabled by default. If enabled, the `no-store` and `no-cache` resources returned from the origin server will be cached according to `CacheRules` rules.
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.IgnoreCacheControl = null;
@@ -3747,21 +3805,21 @@ class RuleCacheConfig extends  AbstractModel {
 
         /**
          * Cache configuration
-Note: this field may return `null`, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {CacheConfigCache || null}
          */
         this.Cache = null;
 
         /**
          * No cache configuration
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {CacheConfigNoCache || null}
          */
         this.NoCache = null;
 
         /**
          * Follows the origin server configuration
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {CacheConfigFollowOrigin || null}
          */
         this.FollowOrigin = null;
@@ -3843,7 +3901,7 @@ class ListClsTopicDomainsResponse extends  AbstractModel {
 
         /**
          * Last modified time of log topic
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -3917,14 +3975,14 @@ class BotCookie extends  AbstractModel {
 
         /**
          * Redirection target page
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RedirectUrl = null;
 
         /**
          * Update time
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -3986,7 +4044,7 @@ class Ipv6 extends  AbstractModel {
 
         /**
          * Whether to enable the IPv6 feature for a domain name. Values include `on` or `off`.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -4050,16 +4108,16 @@ class StatusCodeCache extends  AbstractModel {
 
         /**
          * Status code cache expiration configuration switch
-on: enabled
-off: disabled
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Status code cache expiration rules details
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<StatusCodeCacheRule> || null}
          */
         this.CacheRules = null;
@@ -4253,185 +4311,199 @@ class OverseaConfig extends  AbstractModel {
 
         /**
          * Timestamp hotlink protection configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Authentication || null}
          */
         this.Authentication = null;
 
         /**
          * Bandwidth cap configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {BandwidthAlert || null}
          */
         this.BandwidthAlert = null;
 
         /**
-         * Cache rules configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cache rule configuration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Cache || null}
          */
         this.Cache = null;
 
         /**
-         * Cache configurations.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cache configuration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {CacheKey || null}
          */
         this.CacheKey = null;
 
         /**
          * Smart compression configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Compression || null}
          */
         this.Compression = null;
 
         /**
          * Download speed limit configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {DownstreamCapping || null}
          */
         this.DownstreamCapping = null;
 
         /**
          * Error code redirect configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ErrorPage || null}
          */
         this.ErrorPage = null;
 
         /**
          * 301 and 302 automatic origin-pull follow-redirect configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {FollowRedirect || null}
          */
         this.FollowRedirect = null;
 
         /**
-         * Access protocol forced redirect configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Protocol redirect configuration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ForceRedirect || null}
          */
         this.ForceRedirect = null;
 
         /**
          * HTTPS configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Https || null}
          */
         this.Https = null;
 
         /**
          * IP blocklist/allowlist configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {IpFilter || null}
          */
         this.IpFilter = null;
 
         /**
          * IP access limit configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {IpFreqLimit || null}
          */
         this.IpFreqLimit = null;
 
         /**
          * Browser cache rules configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {MaxAge || null}
          */
         this.MaxAge = null;
 
         /**
          * Origin server configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Origin || null}
          */
         this.Origin = null;
 
         /**
          * Cross-border optimization configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OriginPullOptimization || null}
          */
         this.OriginPullOptimization = null;
 
         /**
          * Range GETs configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {RangeOriginPull || null}
          */
         this.RangeOriginPull = null;
 
         /**
          * Hotlink protection configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Referer || null}
          */
         this.Referer = null;
 
         /**
          * Origin-pull request header configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {RequestHeader || null}
          */
         this.RequestHeader = null;
 
         /**
          * Origin server response header configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ResponseHeader || null}
          */
         this.ResponseHeader = null;
 
         /**
          * Follows origin server cache header configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ResponseHeaderCache || null}
          */
         this.ResponseHeaderCache = null;
 
         /**
          * SEO configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Seo || null}
          */
         this.Seo = null;
 
         /**
-         * Domain name service type. `web`: static acceleration; `download`: download acceleration; `media`: streaming media acceleration.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Domain name service type. Values: `web` (static acceleration); `download` (download acceleration); `media` (streaming media acceleration).
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ServiceType = null;
 
         /**
          * Status code cache configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {StatusCodeCache || null}
          */
         this.StatusCodeCache = null;
 
         /**
          * Video dragging configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {VideoSeek || null}
          */
         this.VideoSeek = null;
 
         /**
-         * Private access for S3 origin
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Access authentication for S3 origin
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AwsPrivateAccess || null}
          */
         this.AwsPrivateAccess = null;
 
         /**
-         * Private access for OSS origin
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Access authentication for OSS origin
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OssPrivateAccess || null}
          */
         this.OssPrivateAccess = null;
+
+        /**
+         * Access authentication for Huawei Cloud OBS origin
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {HwPrivateAccess || null}
+         */
+        this.HwPrivateAccess = null;
+
+        /**
+         * Access authentication for QiNiu Cloud Kodo origin
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {QnPrivateAccess || null}
+         */
+        this.QnPrivateAccess = null;
 
     }
 
@@ -4594,11 +4666,23 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.OssPrivateAccess = obj;
         }
 
+        if (params.HwPrivateAccess) {
+            let obj = new HwPrivateAccess();
+            obj.deserialize(params.HwPrivateAccess)
+            this.HwPrivateAccess = obj;
+        }
+
+        if (params.QnPrivateAccess) {
+            let obj = new QnPrivateAccess();
+            obj.deserialize(params.QnPrivateAccess)
+            this.QnPrivateAccess = obj;
+        }
+
     }
 }
 
 /**
- * `UserAgent` blocklist/allowlist rule configuration
+ * `UserAgent` blacklist/whitelist rule configuration
  * @class
  */
 class UserAgentFilterRule extends  AbstractModel {
@@ -4607,32 +4691,32 @@ class UserAgentFilterRule extends  AbstractModel {
 
         /**
          * Effective access path type
-all: all access paths are effective
-file: effective by file extension
-directory: effective by directory
-path: effective by full access path
-Note: this field may return null, indicating that no valid values can be obtained.
+`all`: All access paths are effective
+`file`: Effective by file extension
+`directory`: Effective by directory
+`path`: Effective by full access path
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
          * Effective access paths
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
 
         /**
          * `UserAgent` list
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.UserAgents = null;
 
         /**
-         * blocklist or allowlist. Valid values: blacklist, whitelist
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Blocklist or allowlist. Valid values: `blacklist`, `whitelist`
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FilterType = null;
@@ -4795,13 +4879,13 @@ class UpdateDomainConfigRequest extends  AbstractModel {
         this.Seo = null;
 
         /**
-         * Access protocol forced redirect configuration
+         * Protocol redirect configuration
          * @type {ForceRedirect || null}
          */
         this.ForceRedirect = null;
 
         /**
-         * Referer hotlink protection configuration
+         * Referer configuration
          * @type {Referer || null}
          */
         this.Referer = null;
@@ -4813,27 +4897,27 @@ class UpdateDomainConfigRequest extends  AbstractModel {
         this.MaxAge = null;
 
         /**
-         * Domain name service type
-web: static acceleration
-download: download acceleration
-media: streaming media VOD acceleration
-         * @type {string || null}
-         */
-        this.ServiceType = null;
-
-        /**
-         * Specific region configuration
-Applicable to cases where the acceleration domain name configuration differs for regions in and outside mainland China.
+         * Specific-region special configuration
+Applicable to cases where the acceleration domain name configuration differs for regions in and outside the Chinese mainland.
          * @type {SpecificConfig || null}
          */
         this.SpecificConfig = null;
 
         /**
+         * Domain name service type
+`web`: Static acceleration
+`download`: Download acceleration
+`media`: Streaming media VOD acceleration
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
          * Domain name acceleration region
-`mainland`: acceleration inside the Chinese mainland
-`overseas`: acceleration outside the Chinese mainland
-`global`: global acceleration
-When you change it to from `mainland`/`overseas` to `global`, configurations of the domain name will be deployed to the region inside or outside the Chinese mainland. The deployment will take some time as this domain name has special settings.
+`mainland`: Acceleration inside the Chinese mainland
+`overseas`: Acceleration outside the Chinese mainland
+`global`: Acceleration over the globe
+After switching to global acceleration, configurations of the domain name will be deployed to the region inside or outside the Chinese mainland. The deployment will take some time as this domain name has special settings.
          * @type {string || null}
          */
         this.Area = null;
@@ -4845,13 +4929,13 @@ When you change it to from `mainland`/`overseas` to `global`, configurations of 
         this.OriginPullTimeout = null;
 
         /**
-         * Origin access authentication for S3 bucket
+         * Access authentication for S3 origin
          * @type {AwsPrivateAccess || null}
          */
         this.AwsPrivateAccess = null;
 
         /**
-         * UA blocklist/allowlist Configuration
+         * UA blocklist/allowlist configuration
          * @type {UserAgentFilter || null}
          */
         this.UserAgentFilter = null;
@@ -4863,7 +4947,7 @@ When you change it to from `mainland`/`overseas` to `global`, configurations of 
         this.AccessControl = null;
 
         /**
-         * Configuration of URL rewriting
+         * URL rewriting configuration
          * @type {UrlRedirect || null}
          */
         this.UrlRedirect = null;
@@ -4905,6 +4989,12 @@ When you change it to from `mainland`/`overseas` to `global`, configurations of 
         this.OriginCombine = null;
 
         /**
+         * Post transport configuration
+         * @type {PostSize || null}
+         */
+        this.PostMaxSize = null;
+
+        /**
          * QUIC access, which is a paid service. You can check the product document and Billing Overview for more information.
          * @type {Quic || null}
          */
@@ -4917,13 +5007,13 @@ When you change it to from `mainland`/`overseas` to `global`, configurations of 
         this.OssPrivateAccess = null;
 
         /**
-         * WebSocket configuration.
+         * WebSocket configuration
          * @type {WebSocket || null}
          */
         this.WebSocket = null;
 
         /**
-         * Configuration of remote authentication
+         * Remote authentication configuration
          * @type {RemoteAuthentication || null}
          */
         this.RemoteAuthentication = null;
@@ -4933,6 +5023,18 @@ When you change it to from `mainland`/`overseas` to `global`, configurations of 
          * @type {ShareCname || null}
          */
         this.ShareCname = null;
+
+        /**
+         * Access authentication for Huawei Cloud OBS origin
+         * @type {HwPrivateAccess || null}
+         */
+        this.HwPrivateAccess = null;
+
+        /**
+         * Access authentication for QiNiu Cloud Kodo origin
+         * @type {QnPrivateAccess || null}
+         */
+        this.QnPrivateAccess = null;
 
     }
 
@@ -5083,13 +5185,13 @@ When you change it to from `mainland`/`overseas` to `global`, configurations of 
             obj.deserialize(params.MaxAge)
             this.MaxAge = obj;
         }
-        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
 
         if (params.SpecificConfig) {
             let obj = new SpecificConfig();
             obj.deserialize(params.SpecificConfig)
             this.SpecificConfig = obj;
         }
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
         this.Area = 'Area' in params ? params.Area : null;
 
         if (params.OriginPullTimeout) {
@@ -5153,6 +5255,12 @@ When you change it to from `mainland`/`overseas` to `global`, configurations of 
             this.OriginCombine = obj;
         }
 
+        if (params.PostMaxSize) {
+            let obj = new PostSize();
+            obj.deserialize(params.PostMaxSize)
+            this.PostMaxSize = obj;
+        }
+
         if (params.Quic) {
             let obj = new Quic();
             obj.deserialize(params.Quic)
@@ -5183,6 +5291,18 @@ When you change it to from `mainland`/`overseas` to `global`, configurations of 
             this.ShareCname = obj;
         }
 
+        if (params.HwPrivateAccess) {
+            let obj = new HwPrivateAccess();
+            obj.deserialize(params.HwPrivateAccess)
+            this.HwPrivateAccess = obj;
+        }
+
+        if (params.QnPrivateAccess) {
+            let obj = new QnPrivateAccess();
+            obj.deserialize(params.QnPrivateAccess)
+            this.QnPrivateAccess = obj;
+        }
+
     }
 }
 
@@ -5196,14 +5316,14 @@ class Tag extends  AbstractModel {
 
         /**
          * Tag key
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * Tag value.
-Note: this field may return null, indicating that no valid value is obtained.
+         * Tag value
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.TagValue = null;
@@ -5233,11 +5353,18 @@ class CacheConfigFollowOrigin extends  AbstractModel {
 
         /**
          * Follow origin server switch configuration
-on: enable
-off: disable
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
+
+        /**
+         * Heuristic cache configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {HeuristicCache || null}
+         */
+        this.HeuristicCache = null;
 
     }
 
@@ -5249,6 +5376,12 @@ off: disable
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.HeuristicCache) {
+            let obj = new HeuristicCache();
+            obj.deserialize(params.HeuristicCache)
+            this.HeuristicCache = obj;
+        }
 
     }
 }
@@ -5275,25 +5408,25 @@ class MaxAgeRule extends  AbstractModel {
         /**
          * Content for each `MaxAgeType`:
 For `all`, enter a wildcard `*`.
-For `file`, enter a suffix, e.g., `jpg` or `txt`.
-For `directory`, enter a path, e.g., `/xxx/test/`.
-For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+For `file`, enter the suffix, e.g., `jpg` or `txt`.
+For `directory`, enter the path, e.g., `/xxx/test/`.
+For `path`, enter the absolute path, e.g., `/xxx/test.html`.
 For `index`, enter a forward slash `/`.
-Note: the rule `all` cannot be deleted. It follows origin by default and can be modified.
+Note: The rule `all` cannot be deleted. It follows origin by default and can be modified.
          * @type {Array.<string> || null}
          */
         this.MaxAgeContents = null;
 
         /**
          * MaxAge time (in seconds)
-Note: the value `0` means not to cache.
+Note: The value `0` means not to cache.
          * @type {number || null}
          */
         this.MaxAgeTime = null;
 
         /**
          * Whether to follow the origin server. Valid values: `on` and `off`. If it's on, `MaxAgeTime` is ignored.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FollowOrigin = null;
@@ -5596,7 +5729,7 @@ class AdvancedCache extends  AbstractModel {
 
         /**
          * Cache expiration rule
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<AdvanceCacheRule> || null}
          */
         this.CacheRules = null;
@@ -5607,17 +5740,17 @@ on: enabled
 off: disabled
 When this is enabled, if the origin server returns no-cache, no-store headers, node caching will still be performed according to the cache expiration rules.
 This is disabled by default
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.IgnoreCacheControl = null;
 
         /**
-         * Whether to cache the header and body on cache nodes if the origin server returns the header `Set-Cookie`.
-on: Enable; do not cache the header and body.
-off: Disable; follow the custom cache rules of cache nodes.
+         * Whether to ignore the header and body on cache nodes if the origin server returns the header `Set-Cookie`.
+`on`: Ignore; do not cache the header and body.
+`off`: Do not ignore; follow the custom cache rules of cache nodes.
 It is disabled by default.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.IgnoreSetCookie = null;
@@ -5782,7 +5915,7 @@ class WebpAdapter extends  AbstractModel {
 
         /**
          * Switch. Valid values: on, off
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -5831,7 +5964,7 @@ The domain name status should be `Disabled`
 }
 
 /**
- * 
+ * Access authentication for QiNiu Cloud Kodo origin
  * @class
  */
 class QnPrivateAccess extends  AbstractModel {
@@ -5839,19 +5972,20 @@ class QnPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Switch. Valid values: `on`, `off`.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Access ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.AccessKey = null;
 
         /**
-         * 
+         * Key
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -5883,13 +6017,13 @@ class WebSocket extends  AbstractModel {
         /**
          * Whether to enable custom WebSocket timeout setting. When it’s `off`: WebSocket connection is supported, and the default timeout period is 15 seconds. To change the timeout period, please set it to `on`.
 
-* WebSocket is now only available for beta users. To use it, please submit a ticket.
+* WebSocket is an ECDN feature. You can enable it in the ECDN domain name configuration.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * Sets the timeout period in seconds. Maximum value: 65.
+         * Sets timeout period in seconds. Maximum value: 300
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -5955,14 +6089,14 @@ class DescribeCertDomainsResponse extends  AbstractModel {
 
         /**
          * List of domain names connected to CDN
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.Domains = null;
 
         /**
          * List of CDN domain names with certificates configured
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.CertifiedDomains = null;
@@ -6053,7 +6187,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
  * Timestamp hotlink protection mode D configuration
 The access URL format of timestamp hotlink protection mode D is as follows: http://DomainName/FileName?sign=md5hash&t=timestamp
 Here, timestamp is a decimal or hexadecimal timestamp in Unix format;
-md5hash: MD5 (custom key + file path + timestamp)
+`md5hash`: MD5 (custom key + file path + timestamp)
  * @class
  */
 class AuthenticationTypeD extends  AbstractModel {
@@ -6062,8 +6196,8 @@ class AuthenticationTypeD extends  AbstractModel {
 
         /**
          * The key for signature calculation
-Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
-Note: this field may return null, indicating that no valid values can be obtained.
+6-32 characters. Only digits and letters are allowed. 
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -6083,8 +6217,8 @@ If it contains an asterisk (*), this indicates all files.
         this.FileExtensions = null;
 
         /**
-         * allowlist: indicates that all file types apart from the FileExtensions list are authenticated
-blacklist: indicates that only the file types in the FileExtensions list are authenticated
+         * `whitelist`: All file types apart from the FileExtensions list are authenticated.
+`blacklist`: Only the file types in the FileExtensions list are authenticated.
          * @type {string || null}
          */
         this.FilterType = null;
@@ -6105,8 +6239,8 @@ Only upper and lower-case letters, digits, and underscores (_) are allowed. It c
 
         /**
          * Timestamp settings
-dec: decimal
-hex: hexadecimal
+`dec`: Decimal
+`hex`: Hexadecimal
          * @type {string || null}
          */
         this.TimeFormat = null;
@@ -6114,7 +6248,7 @@ hex: hexadecimal
         /**
          * Backup key, which is used to calculate a signature.
 6-32 characters. Only digits and letters are allowed. 
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -6144,7 +6278,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
  * Timestamp hotlink protection mode C configuration
 The access URL format of timestamp hotlink protection mode C is as follows: http://DomainName/md5hash/timestamp/FileName
 Here, timestamp is a hexadecimal timestamp in Unix format;
-md5hash: MD5 (custom key + file path + timestamp)
+`md5hash`: MD5 (custom key + file path + timestamp)
  * @class
  */
 class AuthenticationTypeC extends  AbstractModel {
@@ -6153,8 +6287,8 @@ class AuthenticationTypeC extends  AbstractModel {
 
         /**
          * The key for signature calculation
-Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
-Note: this field may return null, indicating that no valid values can be obtained.
+6-32 characters. Only digits and letters are allowed. 
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -6174,17 +6308,17 @@ If it contains an asterisk (*), this indicates all files.
         this.FileExtensions = null;
 
         /**
-         * allowlist: indicates that all file types apart from the FileExtensions list are authenticated
-blacklist: indicates that only the file types in the FileExtensions list are authenticated
+         * `whitelist`: All file types apart from the FileExtensions list are authenticated.
+`blacklist`: Only the file types in the FileExtensions list are authenticated.
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
          * Timestamp settings
-dec: decimal
-hex: hexadecimal
-Note: this field may return `null`, indicating that no valid value is obtained.
+`dec`: Decimal
+`hex`: Hexadecimal
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.TimeFormat = null;
@@ -6192,7 +6326,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         /**
          * Backup key, which is used to calculate a signature.
 6-32 characters. Only digits and letters are allowed. 
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -6226,8 +6360,8 @@ class AuthenticationTypeB extends  AbstractModel {
 
         /**
          * The key for signature calculation
-Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
-Note: this field may return null, indicating that no valid values can be obtained.
+6-32 characters. Only digits and letters are allowed. 
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -6247,7 +6381,7 @@ If it contains an asterisk (*), this indicates all files.
         this.FileExtensions = null;
 
         /**
-         * allowlist: indicates that all file types apart from the FileExtensions list are authenticated
+         * whitelist: indicates that all file types apart from the FileExtensions list are authenticated
 blacklist: indicates that only the file types in the FileExtensions list are authenticated
          * @type {string || null}
          */
@@ -6256,7 +6390,7 @@ blacklist: indicates that only the file types in the FileExtensions list are aut
         /**
          * Backup key, which is used to calculate a signature.
 6-32 characters. Only digits and letters are allowed. 
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -6295,8 +6429,8 @@ class AuthenticationTypeA extends  AbstractModel {
 
         /**
          * The key for signature calculation
-Only digits, upper and lower-case letters are allowed. Length limit: 6-32 characters.
-Note: this field may return null, indicating that no valid values can be obtained.
+6-32 characters. Only digits and letters are allowed. 
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -6323,8 +6457,8 @@ If it contains an asterisk (*), this indicates all files.
         this.FileExtensions = null;
 
         /**
-         * allowlist: indicates that all file types apart from the FileExtensions list are authenticated
-blacklist: indicates that only the file types in the FileExtensions list are authenticated
+         * `whitelist`: All file types apart from the FileExtensions list are authenticated.
+`blacklist`: Only the file types in the FileExtensions list are authenticated.
          * @type {string || null}
          */
         this.FilterType = null;
@@ -6332,7 +6466,7 @@ blacklist: indicates that only the file types in the FileExtensions list are aut
         /**
          * Backup key, which is used to calculate a signature.
 6-32 characters. Only digits and letters are allowed. 
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -6395,14 +6529,14 @@ class DescribePushTasksResponse extends  AbstractModel {
 
         /**
          * Prefetch history
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<PushTask> || null}
          */
         this.PushLogs = null;
 
         /**
          * Total number of tasks, which is used for pagination.
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -6589,8 +6723,8 @@ class ServerCert extends  AbstractModel {
         super();
 
         /**
-         * Server certificate ID, which is auto-generated when the certificate is added to Tencent Cloud SSL Certificates
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Server certificate ID, which is auto-generated when the certificate is being managed by the SSL Certificate Service
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CertId = null;
@@ -6598,7 +6732,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         /**
          * Server certificate name
 This is auto-generated when the certificate is being hosted by the SSL Certificate Service
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CertName = null;
@@ -6606,7 +6740,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * Server certificate information
 This is required when uploading an external certificate, which should contain the complete certificate chain.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Certificate = null;
@@ -6614,15 +6748,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * Server key information
 This is required when uploading an external certificate.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.PrivateKey = null;
 
         /**
-         * Certificate expiration time
+         * Time when the certificate expires
 Can be left blank when used as an input parameter
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -6630,21 +6764,21 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * Certificate issuance time
 Can be left blank when used as an input parameter
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.DeployTime = null;
 
         /**
          * Certificate remarks
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
          * Certificate source
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.From = null;
@@ -6681,14 +6815,14 @@ class AccessControlRule extends  AbstractModel {
         /**
          * requestHeader: access control over request header
 url: access control over access URL
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
          * Blocked content
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RuleContent = null;
@@ -6696,14 +6830,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * on: regular match
 off: exact match
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Regex = null;
 
         /**
          * This parameter is required only if `RuleType` is `requestHeader`
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RuleHeader = null;
@@ -6745,7 +6879,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 
         /**
          * HTTP header name. Up to 100 characters can be set.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.HeaderName = null;
@@ -6754,29 +6888,29 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * HTTP header value. Up to 1000 characters can be set.
 Not required when Mode is del
 Required when Mode is add/set
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.HeaderValue = null;
 
         /**
          * Rule types:
-`all`: effective for all files
-`file`: effective for specified file suffixes
-`directory`: effective for specified paths
-`path`: effective for specified absolute paths
-Note: this field may return null, indicating that no valid values can be obtained.
+`all`: Apply to all files.
+`file`: Apply to files with the specified suffixes.
+`directory`: Apply to specified paths.
+`path`: Apply to specified absolute paths.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * Content for each RuleType:
-For `all`, enter an asterisk (*).
-For `file`, enter the suffix, such as jpg, txt.
-For `directory`, enter the path, such as /xxx/test/.
-For `path`, enter the corresponding absolute path, such as /xxx/test.html.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Content for each `RuleType`:
+For `all`, enter a wildcard `*`.
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -6866,22 +7000,22 @@ class SimpleCacheRule extends  AbstractModel {
 
         /**
          * Rule types:
-`all`: effective for all files
-`file`: effective for specified file suffixes
-`directory`: effective for specified paths
-`path`: effective for specified absolute paths
+`all`: Apply to all files.
+`file`: Apply to files with the specified suffixes.
+`directory`: Apply to specified paths.
+`path`: Apply to specified absolute paths.
 index: home page
          * @type {string || null}
          */
         this.CacheType = null;
 
         /**
-         * Content for each CacheType:
-Enter `*` for `all`
-Enter an extension for `file`, such as `jpg` or `txt`
-Enter a path for `directory`, such as `/xxx/test`
-Enter an absolute path for `path`, such as `/xxx/test.html`
-Enter `/` for `index`
+         * Content for each `CacheType`:
+For `all`, enter a wildcard `*`.
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+For `index`, enter a forward slash `/`.
          * @type {Array.<string> || null}
          */
         this.CacheContents = null;
@@ -6938,7 +7072,7 @@ class DisableClsLogTopicResponse extends  AbstractModel {
 }
 
 /**
- * `HSTS` configuration.
+ * HSTS configuration.
  * @class
  */
 class Hsts extends  AbstractModel {
@@ -6953,14 +7087,14 @@ class Hsts extends  AbstractModel {
 
         /**
          * `MaxAge` value.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.MaxAge = null;
 
         /**
          * Whether to include subdomain names. Valid values: on, off.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.IncludeSubDomains = null;
@@ -7057,24 +7191,24 @@ class DetailDomain extends  AbstractModel {
         this.AppId = null;
 
         /**
-         * Acceleration domain name
+         * Accelerated domain name.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
          * CNAME address of domain name
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Cname = null;
 
         /**
          * Acceleration service status
-rejected: the domain name is rejected due to expiration/deregistration of its ICP filing
-processing: deploying
-online: activated
-offline: disabled
+`rejected`: The domain name is rejected due to expiration/deregistration of its ICP filing
+`processing`: Deploying
+`online`: Enabled
+`offline`: Disabled
          * @type {string || null}
          */
         this.Status = null;
@@ -7103,402 +7237,408 @@ offline: disabled
         this.CreateTime = null;
 
         /**
-         * Last modified time of domain name
+         * Domain name update time
          * @type {string || null}
          */
         this.UpdateTime = null;
 
         /**
-         * Origin server configuration
+         * Origin server configuration.
          * @type {Origin || null}
          */
         this.Origin = null;
 
         /**
-         * IP blacklist/whitelist configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+         * IP blocklist/allowlist configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {IpFilter || null}
          */
         this.IpFilter = null;
 
         /**
-         * IP access frequency limit configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+         * IP access limit configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {IpFreqLimit || null}
          */
         this.IpFreqLimit = null;
 
         /**
-         * Status code cache configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Status code cache configuration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {StatusCodeCache || null}
          */
         this.StatusCodeCache = null;
 
         /**
-         * Smart compression configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Smart compression configuration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Compression || null}
          */
         this.Compression = null;
 
         /**
          * Bandwidth cap configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {BandwidthAlert || null}
          */
         this.BandwidthAlert = null;
 
         /**
          * Range GETs configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {RangeOriginPull || null}
          */
         this.RangeOriginPull = null;
 
         /**
          * 301/302 origin-pull follow-redirect configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {FollowRedirect || null}
          */
         this.FollowRedirect = null;
 
         /**
-         * Configuration of custom error page
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Custom error page configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ErrorPage || null}
          */
         this.ErrorPage = null;
 
         /**
          * Custom request header configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {RequestHeader || null}
          */
         this.RequestHeader = null;
 
         /**
          * Custom response header configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ResponseHeader || null}
          */
         this.ResponseHeader = null;
 
         /**
          * Single-link downstream speed limit configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {DownstreamCapping || null}
          */
         this.DownstreamCapping = null;
 
         /**
          * Configuration of cache with/without parameter
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {CacheKey || null}
          */
         this.CacheKey = null;
 
         /**
          * Origin server header cache configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ResponseHeaderCache || null}
          */
         this.ResponseHeaderCache = null;
 
         /**
-         * Video dragging configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Video dragging configuration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {VideoSeek || null}
          */
         this.VideoSeek = null;
 
         /**
          * Node cache expiration rule configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Cache || null}
          */
         this.Cache = null;
 
         /**
          * Cross-border linkage optimization configuration (in beta)
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OriginPullOptimization || null}
          */
         this.OriginPullOptimization = null;
 
         /**
-         * HTTPS acceleration configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+         * HTTPS Acceleration Configuration Guide
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Https || null}
          */
         this.Https = null;
 
         /**
-         * Timestamp hotlink protection configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Timestamp hotlink protection configuration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Authentication || null}
          */
         this.Authentication = null;
 
         /**
          * SEO configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Seo || null}
          */
         this.Seo = null;
 
         /**
          * Domain name block status
-normal: normal
-overdue: the domain name has been disabled due to account arrears. The acceleration service can be resumed after the account is topped up.
-malicious: the acceleration service has been forcibly disabled due to detection of malicious behavior.
-ddos: the acceleration service has been disabled due to large-scale DDoS attacks to the domain name
-idle: no operations or data has been detected for more than 90 days. The domain name is determined to be inactive which automatically disables the acceleration service. You can restart the service.
-unlicensed: the acceleration service has been automatically disabled as the domain name has no ICP filing or its ICP filing is deregistered. Service can be resumed after an ICP filing is obtained.
-capping: the configured upper limit for bandwidth has been reached.
-readonly: the domain name has a special configuration and has been locked.
-Note: this field may return null, indicating that no valid values can be obtained.
+`normal`: Normal
+`overdue`: The domain name has been disabled due to account arrears. The acceleration service can be resumed after the account is topped up.
+`malicious`: The acceleration service has been forcibly disabled due to detection of malicious behavior.
+`ddos`: The acceleration service has been disabled due to large-scale DDoS attacks to the domain name
+`idle`: No operations or data has been detected for more than 90 days. The domain name is determined to be inactive which automatically disables the acceleration service. You can restart the service.
+`unlicensed`: The acceleration service has been automatically disabled as the domain name has no ICP filing or its ICP filing is deregistered. Service can be resumed after an ICP filing is obtained.
+`capping`: The configured upper limit for bandwidth has been reached.
+`readonly`: The domain name has a special configuration and has been locked.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Disable = null;
 
         /**
          * Access protocol forced redirect configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ForceRedirect || null}
          */
         this.ForceRedirect = null;
 
         /**
-         * Referer hotlink protection configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Referer configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Referer || null}
          */
         this.Referer = null;
 
         /**
          * Browser cache expiration rule configuration (in beta)
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {MaxAge || null}
          */
         this.MaxAge = null;
 
         /**
          * IPv6 origin-pull configuration (in beta)
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Ipv6 || null}
          */
         this.Ipv6 = null;
 
         /**
          * Backwards compatibility configuration (compatibility field for internal use)
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Compatibility || null}
          */
         this.Compatibility = null;
 
         /**
          * Region-specific configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {SpecificConfig || null}
          */
         this.SpecificConfig = null;
 
         /**
          * Acceleration region
-mainland: acceleration in Mainland China
-overseas: acceleration outside Mainland China
-global: global acceleration
-Note: this field may return null, indicating that no valid values can be obtained.
+`mainland`: Acceleration inside the Chinese mainland
+`overseas`: Acceleration outside the Chinese mainland
+`global`: Acceleration over the globe
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Area = null;
 
         /**
          * Domain name lock status
-normal: not locked
-mainland: locked in Mainland China
-overseas: locked outside Mainland China
-global: locked globally
-Note: this field may return null, indicating that no valid values can be obtained.
+`normal`: Not locked
+`mainland`: Locked in the Chinese mainland
+`overseas`: Locked outside the Chinese mainland
+global: Locked globally
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Readonly = null;
 
         /**
          * Origin-pull timeout configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OriginPullTimeout || null}
          */
         this.OriginPullTimeout = null;
 
         /**
          * S3 bucket origin access authentication configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AwsPrivateAccess || null}
          */
         this.AwsPrivateAccess = null;
 
         /**
          * SCDN configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {SecurityConfig || null}
          */
         this.SecurityConfig = null;
 
         /**
-         * Image Optimization configuration
+         * Image optimization configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ImageOptimization || null}
          */
         this.ImageOptimization = null;
 
         /**
-         * `UA` blocklist/allowlist configuration
+         * UA blocklist/allowlist configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {UserAgentFilter || null}
          */
         this.UserAgentFilter = null;
 
         /**
          * Access control
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AccessControl || null}
          */
         this.AccessControl = null;
 
         /**
          * Whether to support advanced configuration items
-on: supported
-off: not supported
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Supported
+`off`: Not supported
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Advance = null;
 
         /**
          * URL redirect configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {UrlRedirect || null}
          */
         this.UrlRedirect = null;
 
         /**
          * Access port configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<number> || null}
          */
         this.AccessPort = null;
 
         /**
          * Tag configuration
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<Tag> || null}
          */
         this.Tag = null;
 
         /**
          * Timestamp hotlink protection advanced configuration (allowlist feature)
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AdvancedAuthentication || null}
          */
         this.AdvancedAuthentication = null;
 
         /**
          * Origin-pull authentication advanced configuration (allowlist feature)
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OriginAuthentication || null}
          */
         this.OriginAuthentication = null;
 
         /**
          * IPv6 access configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Ipv6Access || null}
          */
         this.Ipv6Access = null;
 
         /**
          * Advanced configuration settings
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<AdvanceConfig> || null}
          */
         this.AdvanceSet = null;
 
         /**
          * Offline cache (only available to beta users)
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OfflineCache || null}
          */
         this.OfflineCache = null;
 
         /**
          * Merging origin-pull requests (only available to beta users)
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OriginCombine || null}
          */
         this.OriginCombine = null;
 
         /**
          * POST request configuration item
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {PostSize || null}
          */
         this.PostMaxSize = null;
 
         /**
          * QUIC configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Quic || null}
          */
         this.Quic = null;
 
         /**
          * Access authentication for OSS origin
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OssPrivateAccess || null}
          */
         this.OssPrivateAccess = null;
 
         /**
          * WebSocket configuration.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {WebSocket || null}
          */
         this.WebSocket = null;
 
         /**
          * Remote authentication configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {RemoteAuthentication || null}
          */
         this.RemoteAuthentication = null;
 
         /**
          * Shared CNAME configuration (only available to beta users)
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ShareCname || null}
          */
         this.ShareCname = null;
 
         /**
          * Rule engine
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {RuleEngine || null}
          */
         this.RuleEngine = null;
 
         /**
          * Primary domain name
-Note: This field may return `null`, indicating that no valid value was found.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ParentHost = null;
 
         /**
-         * 
+         * Access authentication for Huawei Cloud OBS origin
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {HwPrivateAccess || null}
          */
         this.HwPrivateAccess = null;
 
         /**
-         * 
+         * Access authentication for QiNiu Cloud Kodo origin
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {QnPrivateAccess || null}
          */
         this.QnPrivateAccess = null;
@@ -7879,14 +8019,14 @@ class GetDisableRecordsResponse extends  AbstractModel {
 
         /**
          * Blocking history
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<UrlRecord> || null}
          */
         this.UrlRecordList = null;
 
         /**
-         * Total number of tasks, which is used for pagination
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Total number of tasks, which is used for pagination.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -7930,8 +8070,8 @@ class Ipv6Access extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable the IPv6 access feature for a domain name. Valid values: `on` and `off`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether to enable the IPv6 feature for a domain name. Values include `on` or `off`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -7951,6 +8091,47 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Heuristic cache configuration
+ * @class
+ */
+class HeuristicCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `on`: Enable
+`off`: Disable
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Heuristic cache validity configuration
+         * @type {CacheConfig || null}
+         */
+        this.CacheConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.CacheConfig) {
+            let obj = new CacheConfig();
+            obj.deserialize(params.CacheConfig)
+            this.CacheConfig = obj;
+        }
+
+    }
+}
+
+/**
  * Custom response header configuration. This is disabled by default.
  * @class
  */
@@ -7960,15 +8141,15 @@ class ResponseHeader extends  AbstractModel {
 
         /**
          * Custom response header switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Custom response header rules
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<HttpHeaderPathRule> || null}
          */
         this.HeaderRules = null;
@@ -8006,16 +8187,16 @@ class CdnIpHistory extends  AbstractModel {
 
         /**
          * Operation type
-online: node is online
-offline: node is offline
+`online`: Nodes activated
+`offline`: Nodes deactivated
          * @type {string || null}
          */
         this.Status = null;
 
         /**
          * Operation time corresponding to operation type
-If this value is null, there are no status change records
-Note: this field may return null, indicating that no valid values can be obtained.
+If its value is `null`, it means there is no status change record.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Datetime = null;
@@ -8170,13 +8351,13 @@ class UpdatePayTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * Billing region, which can be mainland or overseas.
+         * Billing region, which can be `mainland` or `overseas`.
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * Billing mode, which can be flux or bandwidth.
+         * Billing mode, which can be `flux` or `bandwidth`.
          * @type {string || null}
          */
         this.PayType = null;
@@ -8354,14 +8535,14 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * WAF rule level. Valid values: 100, 200, and 300.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Level = null;
 
         /**
          * WAF sub-rule switch
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<WafSubRuleStatus> || null}
          */
         this.SubRuleSwitch = null;
@@ -8454,21 +8635,21 @@ class Cache extends  AbstractModel {
 
         /**
          * Basic cache expiration time configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {SimpleCache || null}
          */
         this.SimpleCache = null;
 
         /**
          * (Disused) Advanced cache validity configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AdvancedCache || null}
          */
         this.AdvancedCache = null;
 
         /**
          * Advanced path cache configuration
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<RuleCache> || null}
          */
         this.RuleCache = null;
@@ -8517,9 +8698,9 @@ class ForceRedirect extends  AbstractModel {
 
         /**
          * Access forced redirect configuration switch
-on: enabled
-off: disabled
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -8528,7 +8709,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * Access forced redirect types
 http: forced HTTP redirect
 https: forced HTTPS redirect
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RedirectType = null;
@@ -8536,14 +8717,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * Status code returned for forced redirect 
 Supports 301, 302.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.RedirectStatusCode = null;
 
         /**
-         * Whether to return the added header in forced redirection.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether to return the newly added header during force redirection
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CarryHeaders = null;
@@ -8683,15 +8864,15 @@ class RangeOriginPull extends  AbstractModel {
 
         /**
          * Range GETs configuration switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Range GETs configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<RangeOriginPullRule> || null}
          */
         this.RangeRules = null;
@@ -8747,11 +8928,11 @@ class ViolationUrl extends  AbstractModel {
 
         /**
          * Current status of the resources in violation
-forbid: blocked
-release: unblocked
-delay: processing delayed 
-reject: appeal dismissed. The status is still blocked.
-complain: appeal in process
+`forbid`: Blocked
+`release`: Unblocked
+`delay`: Processing delayed
+`reject`: Appeal dismissed. The status is still blocked.
+`complain`: Appeal in process
          * @type {string || null}
          */
         this.UrlStatus = null;
@@ -8796,7 +8977,7 @@ class SearchClsLogResponse extends  AbstractModel {
         super();
 
         /**
-         * Query result
+         * Query results
          * @type {ClsSearchLogs || null}
          */
         this.Logs = null;
@@ -8828,7 +9009,7 @@ class SearchClsLogResponse extends  AbstractModel {
 }
 
 /**
- * Path-based origin-pull rules
+ * Path-based origin-pull rule
  * @class
  */
 class PathBasedOriginRule extends  AbstractModel {
@@ -8837,10 +9018,10 @@ class PathBasedOriginRule extends  AbstractModel {
 
         /**
          * Rule types:
-`file`: effective for files with specified suffixes.
-`directory`: effective for specified paths.
-`path`: effective for specified absolute paths.
-`index`: effective for specified homepages.
+`file`: Apply to files with the specified suffixes.
+`directory`: Apply to specified paths.
+`path`: Apply to specified absolute paths.
+`index`: Apply to specified homepages.
          * @type {string || null}
          */
         this.RuleType = null;
@@ -8856,7 +9037,7 @@ For `index`, enter a forward slash `/`.
         this.RulePaths = null;
 
         /**
-         * Origin server list. Domain names and IPv4 addresses are supported.
+         * Origin server list. Domain name and IPv4 addresses are supported.
          * @type {Array.<string> || null}
          */
         this.Origin = null;
@@ -8968,185 +9149,199 @@ class MainlandConfig extends  AbstractModel {
 
         /**
          * Timestamp hotlink protection configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Authentication || null}
          */
         this.Authentication = null;
 
         /**
          * Bandwidth cap configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {BandwidthAlert || null}
          */
         this.BandwidthAlert = null;
 
         /**
-         * Cache rules configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cache rule configuration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Cache || null}
          */
         this.Cache = null;
 
         /**
          * Cache configurations.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {CacheKey || null}
          */
         this.CacheKey = null;
 
         /**
          * Smart compression configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Compression || null}
          */
         this.Compression = null;
 
         /**
          * Download speed limit configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {DownstreamCapping || null}
          */
         this.DownstreamCapping = null;
 
         /**
          * Error code redirect configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ErrorPage || null}
          */
         this.ErrorPage = null;
 
         /**
          * 301 and 302 automatic origin-pull follow-redirect configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {FollowRedirect || null}
          */
         this.FollowRedirect = null;
 
         /**
-         * Access protocol forced redirect configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Force redirect by access protocol.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ForceRedirect || null}
          */
         this.ForceRedirect = null;
 
         /**
          * HTTPS configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Https || null}
          */
         this.Https = null;
 
         /**
          * IP blocklist/allowlist configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {IpFilter || null}
          */
         this.IpFilter = null;
 
         /**
-         * IP access limit configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * IP access limiting configuration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {IpFreqLimit || null}
          */
         this.IpFreqLimit = null;
 
         /**
          * Browser cache rules configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {MaxAge || null}
          */
         this.MaxAge = null;
 
         /**
          * Origin server configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Origin || null}
          */
         this.Origin = null;
 
         /**
          * Cross-border optimization configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OriginPullOptimization || null}
          */
         this.OriginPullOptimization = null;
 
         /**
          * Range GETs configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {RangeOriginPull || null}
          */
         this.RangeOriginPull = null;
 
         /**
          * Hotlink protection configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Referer || null}
          */
         this.Referer = null;
 
         /**
          * Origin-pull request header configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {RequestHeader || null}
          */
         this.RequestHeader = null;
 
         /**
          * Origin server response header configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ResponseHeader || null}
          */
         this.ResponseHeader = null;
 
         /**
          * Follows origin server cache header configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ResponseHeaderCache || null}
          */
         this.ResponseHeaderCache = null;
 
         /**
          * SEO configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Seo || null}
          */
         this.Seo = null;
 
         /**
-         * Domain name service type. `web`: static acceleration; `download`: download acceleration; `media`: streaming media acceleration.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Domain name service type. Values: `web` (static acceleration); `download` (download acceleration); `media` (streaming media acceleration).
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ServiceType = null;
 
         /**
          * Status code cache configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {StatusCodeCache || null}
          */
         this.StatusCodeCache = null;
 
         /**
          * Video dragging configuration.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {VideoSeek || null}
          */
         this.VideoSeek = null;
 
         /**
-         * Private access for S3 origin
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Access authentication for S3 origin
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AwsPrivateAccess || null}
          */
         this.AwsPrivateAccess = null;
 
         /**
-         * Private access for OSS origin
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Access authentication for OSS origin
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {OssPrivateAccess || null}
          */
         this.OssPrivateAccess = null;
+
+        /**
+         * Access authentication for Huawei Cloud OBS origin
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {HwPrivateAccess || null}
+         */
+        this.HwPrivateAccess = null;
+
+        /**
+         * Access authentication for QiNiu Cloud Kodo origin
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {QnPrivateAccess || null}
+         */
+        this.QnPrivateAccess = null;
 
     }
 
@@ -9309,6 +9504,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.OssPrivateAccess = obj;
         }
 
+        if (params.HwPrivateAccess) {
+            let obj = new HwPrivateAccess();
+            obj.deserialize(params.HwPrivateAccess)
+            this.HwPrivateAccess = obj;
+        }
+
+        if (params.QnPrivateAccess) {
+            let obj = new QnPrivateAccess();
+            obj.deserialize(params.QnPrivateAccess)
+            this.QnPrivateAccess = obj;
+        }
+
     }
 }
 
@@ -9322,9 +9529,9 @@ class DescribeReportDataRequest extends  AbstractModel {
 
         /**
          * Query the start time in the format of `yyyy-MM-dd`
-If the report type is `daily`, the start time and end time must be the same day.
+If the report type is `daily`, the start time and end time must be of the same day.
 If the report type is `weekly`, the start time must be Monday and the end time must be the Sunday of the same week.
-If the report type is `monthly`, the start time must be the first day of the calendar month and the end time must be the last day of the same calendar month.
+If the report type is `monthly`, the start time must be the first day of the month and the end time must be the last day of the same month.
          * @type {string || null}
          */
         this.StartTime = null;
@@ -9333,7 +9540,7 @@ If the report type is `monthly`, the start time must be the first day of the cal
          * Query the end time in the format of `yyyy-MM-dd`
 If the report type is `daily`, the start time and end time must be of the same day.
 If the report type is `weekly`, the start time must be Monday and the end time must be the Sunday of the same week.
-If the report type is `monthly`, the start time must be the first day of the calendar month and the end time must be the last day of the same calendar month.
+If the report type is `monthly`, the start time must be the first day of the month and the end time must be the last day of the same month.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -9349,8 +9556,8 @@ monthly: monthly report (calendar month)
 
         /**
          * Domain name acceleration region
-mainland: in Mainland China
-overseas: outside Mainland China
+`mainland`: Regions within the Chinese mainland
+`overseas`: Regions outside the Chinese mainland
          * @type {string || null}
          */
         this.Area = null;
@@ -9433,26 +9640,26 @@ You must specify either a task ID or a starting time.
         this.Offset = null;
 
         /**
-         * Limit on paged queries. Default value: 20
+         * Limit on paginated queries. Default value: 20
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
          * Specifies a region for your query:
-`mainland`: within Mainland China
-`overseas`: outside Mainland China
-`global`: global
+`mainland`: Chinese mainland
+`overseas`: Outside the Chinese mainland
+`global`: Globe
          * @type {string || null}
          */
         this.Area = null;
 
         /**
          * Queries the status of a specified task
-`fail`: prefetch failed
-`done`: prefetch succeeded
-`process`: prefetch in progress
-`invalid`: invalid prefetch with 4XX/5XX status code returned from the origin server
+`fail`: Prefetch failed
+`done`: Prefetch succeeded
+`process`: Prefetch in progress
+`invalid`: Invalid prefetch with 4XX/5XX status code returned from the origin server
          * @type {string || null}
          */
         this.Status = null;
@@ -9521,7 +9728,7 @@ class DescribeUrlViolationsRequest extends  AbstractModel {
 }
 
 /**
- * Referer blocklist/allowlist configuration rules, which is effective for specific resources.
+ * Referer blacklist/whitelist configuration rules, which is effective for specific resources.
  * @class
  */
 class RefererRule extends  AbstractModel {
@@ -9530,28 +9737,28 @@ class RefererRule extends  AbstractModel {
 
         /**
          * Rule types:
-`all`: effective for all files
-`file`: effective for specified file suffixes
-`directory`: effective for specified paths
-`path`: effective for specified absolute paths
+`all`: Apply to all files.
+`file`: Apply to files with the specified suffixes.
+`directory`: Apply to specified paths.
+`path`: Apply to specified absolute paths.
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * Content for each RuleType:
-For `all`, enter an asterisk (*).
-For `file`, enter the suffix, such as jpg, txt.
-For `directory`, enter the path, such as /xxx/test/.
-For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+         * Content for each `RuleType`:
+For `all`, enter a wildcard `*`.
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
 
         /**
          * Referer configuration types
-whitelist: allowlist
-blacklist: blocklist
+`whitelist`: Allowlist
+`blacklist`: Blocklist
          * @type {string || null}
          */
         this.RefererType = null;
@@ -9564,8 +9771,8 @@ blacklist: blocklist
 
         /**
          * Whether to allow empty referer
-true: allow empty referer
-false: do not allow empty referer
+`true`: Allow empty referer when `RefererType = whitelist`.
+`false`: Reject empty refer when `RefererType = blacklist`.
          * @type {boolean || null}
          */
         this.AllowEmpty = null;
@@ -9599,9 +9806,9 @@ class ScdnCCRules extends  AbstractModel {
         /**
          * Rule types:
 `all`: effective for all files.
-`file`: effective for specified file suffixes.
-`directory`: effective for specified paths.
-`path`: effective for specified absolute paths.
+`file`: Apply to files with the specified suffixes.
+`directory`: Apply to specified paths.
+`path`: Apply to specified absolute paths.
 `index`: effective for web homepages and root directories.
          * @type {string || null}
          */
@@ -9693,8 +9900,8 @@ class IpFreqLimit extends  AbstractModel {
 
         /**
          * IP access limit configuration switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -9702,7 +9909,7 @@ off: disabled
         /**
          * Sets the limited number of requests per second
 514 will be returned for requests that exceed the limit
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Qps = null;
@@ -9789,14 +9996,14 @@ class CacheOptResult extends  AbstractModel {
 
         /**
          * List of succeeded URLs
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.SuccessUrls = null;
 
         /**
          * List of failed URLs
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.FailUrls = null;
@@ -9860,15 +10067,15 @@ class DescribeMapInfoResponse extends  AbstractModel {
         this.MapInfoList = null;
 
         /**
-         * The relationship between server region ID and sub-region ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Mapping relationship between server region ID and sub-region ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<RegionMapRelation> || null}
          */
         this.ServerRegionRelation = null;
 
         /**
-         * The relationship between client region ID and sub-region ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Mapping relationship between client region ID and sub-region ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<RegionMapRelation> || null}
          */
         this.ClientRegionRelation = null;
@@ -9960,14 +10167,14 @@ class EnableCachesResponse extends  AbstractModel {
 
         /**
          * Result list
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {CacheOptResult || null}
          */
         this.CacheOptResult = null;
 
         /**
          * Task ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -10009,21 +10216,21 @@ class RuleQueryString extends  AbstractModel {
 
         /**
          * Whether to use `QueryString` as part of `CacheKey`. Valid values: on, off
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * `includeCustom` will retain partial query strings
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Action = null;
 
         /**
          * Array of included/excluded query strings (separated by ';')
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Value = null;
@@ -10062,27 +10269,27 @@ class AdvancedScdnAclRule extends  AbstractModel {
 `ipCountry`: country/region of the requester IP
 `ipArea`: region of the requester IP
 `xForwardFor`: X-Forward-For request header
-`directory`: path
-`index`: homepage
-`path`: full path of a file
-`file`: file extension
-`param`: request parameter
+`directory`: Path
+`index`: Homepage
+`path`: Full path of a file
+`file`: File extension
+`param`: Request parameter
 `referer`: Referer request header
 `cookie`: Cookie request header
 `userAgent`: User-Agent request header
-`head`: custom request header
+`head`: Custom request header
          * @type {string || null}
          */
         this.MatchKey = null;
 
         /**
          * Logical operator. Valid values:
-`exclude`: the keyword is not included
-`include`: the keyword is included
-`notequal`: not the same as the keyword
-`equal`: the same as the keyword
-`matching`: the prefix is matched
-`null`: empty or does not exist
+`exclude`: The keyword is not included
+`include`: The keyword is included
+`notequal`: Not the same as the keyword
+`equal`: The same as the keyword
+`matching`: The prefix is matched
+`null`: Empty or does not exist
          * @type {string || null}
          */
         this.LogicOperator = null;
@@ -10099,7 +10306,7 @@ When `MatchKey` is `method`,
 Values: `HEAD`, `GET`, `POST`, `PUT`, `OPTIONS`, `TRACE`, `DELETE`, `PATCH` and `CONNECT`.
 
 When `MatchKey` is `ipCountry`, valid values include:
-`OTHER`: other countries/regions
+`OTHER`: Other areas
 `VE`: Venezuela
 `UY`: Uruguay
 `SR`: Suriname
@@ -10373,7 +10580,7 @@ Please note that if domain names are specified, this parameter will be ignored.
         this.Project = null;
 
         /**
-         * Time granularity, which can be:
+         * Sampling interval in minutes. The available options vary for different query period. See below: 
 5min: 5 minutes. If the query period is within 24 hours, `5min` will be used by default.
 day: 1 day. If the query period is longer than 24 hours, `day` will be used by default.
          * @type {string || null}
@@ -10485,16 +10692,16 @@ class ClientCert extends  AbstractModel {
         super();
 
         /**
-         * Client Certificate
+         * Client certificate
 PEM format, requires Base64 encoding.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Certificate = null;
 
         /**
          * Client certificate name
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CertName = null;
@@ -10502,7 +10709,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * Certificate expiration time
 When this is used as an input parameter, it can be left blank.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -10510,7 +10717,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * Certificate issuance time
 When this is used as an input parameter, it can be left blank.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.DeployTime = null;
@@ -10555,7 +10762,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Advanced custom CC attack defense rule
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<AdvancedCCRules> || null}
          */
         this.AdvancedRules = null;
@@ -10620,8 +10827,8 @@ class DomainLog extends  AbstractModel {
 
         /**
          * Acceleration region corresponding to the log package
-`mainland`: within Mainland China
-`overseas`: outside Mainland China
+`mainland`: Within the Chinese mainland
+`overseas`: Outside the Chinese mainland
          * @type {string || null}
          */
         this.Area = null;
@@ -10671,7 +10878,7 @@ class GetDisableRecordsRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End time, such as 2018-12-14 10:24:00
+         * End time, such as `2018-12-14 10:24:00`
          * @type {string || null}
          */
         this.EndTime = null;
@@ -10691,7 +10898,7 @@ enable: The URL is enabled (unblocked) and can be normally accessed
         this.Offset = null;
 
         /**
-         * Limit on paged queries. Default value: 20
+         * Pagination limit. Default value: 20.
          * @type {number || null}
          */
         this.Limit = null;
@@ -10791,14 +10998,14 @@ class BotJavaScript extends  AbstractModel {
 
         /**
          * Redirection target page
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RedirectUrl = null;
 
         /**
          * Update time
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -10914,14 +11121,14 @@ class DisableCachesResponse extends  AbstractModel {
 
         /**
          * Submission result
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {CacheOptResult || null}
          */
         this.CacheOptResult = null;
 
         /**
-         * Task ID.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Task ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -10963,7 +11170,7 @@ class SchemeKey extends  AbstractModel {
 
         /**
          * Whether to use the scheme as part of the cache key. Valid values: on, off
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -10977,6 +11184,98 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * Usage limit configuration
+ * @class
+ */
+class StatisticItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of usage limit. `total`: Cumulative usage; `moment`: Instantaneous usage.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Unblocking time
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.UnBlockTime = null;
+
+        /**
+         * Bandwidth/Traffic threshold
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.BpsThreshold = null;
+
+        /**
+         * Specifies how to disable CDN service when the threshold is exceeded. `RETURN_404`: Return 404; `RESOLVE_DNS_TO_ORIGIN`: Forward to origin server.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CounterMeasure = null;
+
+        /**
+         * Threshold (in percentage) that triggers alarms
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.AlertPercentage = null;
+
+        /**
+         * Whether to enable the alarm threshold trigger. Values: `on`, `off`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.AlertSwitch = null;
+
+        /**
+         * Metric type. `flux`: Traffic; `bandwidth`: Bandwidth.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Metric = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Cycle = null;
+
+        /**
+         * Whether to enable usage limit configuration. Values: `on`, `off`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.UnBlockTime = 'UnBlockTime' in params ? params.UnBlockTime : null;
+        this.BpsThreshold = 'BpsThreshold' in params ? params.BpsThreshold : null;
+        this.CounterMeasure = 'CounterMeasure' in params ? params.CounterMeasure : null;
+        this.AlertPercentage = 'AlertPercentage' in params ? params.AlertPercentage : null;
+        this.AlertSwitch = 'AlertSwitch' in params ? params.AlertSwitch : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
+        this.Cycle = 'Cycle' in params ? params.Cycle : null;
         this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
@@ -11085,24 +11384,24 @@ class AdvanceCacheRule extends  AbstractModel {
 
         /**
          * Rule types:
-`all`: effective for all files
-`file`: effective for specified file suffixes
-`directory`: effective for specified paths
-`path`: effective for specified absolute paths
+`all`: Apply to all files.
+`file`: Apply to files with the specified suffixes.
+`directory`: Apply to specified paths.
+`path`: Apply to specified absolute paths.
 `default`: the cache rules when the origin server has not returned max-age
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CacheType = null;
 
         /**
          * Content for each CacheType:
-For `all`, enter an asterisk (*).
-For `file`, enter the suffix, such as jpg, txt.
-For `directory`, enter the path, such as /xxx/test/.
-For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+For `all`, enter a wildcard `*`.
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
 For `default`, enter "no max-age".
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.CacheContents = null;
@@ -11110,7 +11409,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         /**
          * Cache expiration time
 Unit: second. The maximum value is 365 days.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.CacheTime = null;
@@ -11197,14 +11496,14 @@ class AccessControl extends  AbstractModel {
 
         /**
          * Request header and request URL access rule
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<AccessControlRule> || null}
          */
         this.AccessControlRules = null;
 
         /**
-         * Returned status code
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Returns status code
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.ReturnCode = null;
@@ -11250,7 +11549,7 @@ class ScdnErrorPage extends  AbstractModel {
         this.RedirectCode = null;
 
         /**
-         * Redirection URL
+         * URL to be redirected
          * @type {string || null}
          */
         this.RedirectUrl = null;
@@ -11280,57 +11579,57 @@ class CacheKey extends  AbstractModel {
 
         /**
          * Whether to enable full-path cache
-`on`: enables full-path cache (i.e., disables Ignore Query String)
-`off`: disables full-path cache (i.e., enables Ignore Query String)
+`on`: Enable full-path cache (i.e., disable Ignore Query String)
+`off`: Disable full-path cache (i.e., enable Ignore Query String)
          * @type {string || null}
          */
         this.FullUrlCache = null;
 
         /**
-         * Whether caches are case insensitive
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specifies whether the cache key is case sensitive
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.IgnoreCase = null;
 
         /**
          * Request parameter contained in `CacheKey`
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {QueryStringKey || null}
          */
         this.QueryString = null;
 
         /**
          * Cookie contained in `CacheKey`
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {CookieKey || null}
          */
         this.Cookie = null;
 
         /**
          * Request header contained in `CacheKey`
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {HeaderKey || null}
          */
         this.Header = null;
 
         /**
          * Custom string contained in `CacheKey`
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {CacheTagKey || null}
          */
         this.CacheTag = null;
 
         /**
          * Request protocol contained in `CacheKey`
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {SchemeKey || null}
          */
         this.Scheme = null;
 
         /**
-         * Path-based cache key configuration
-Note: this field may return null, indicating that no valid value is obtained.
+         * Path-specific cache key configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<KeyRule> || null}
          */
         this.KeyRules = null;
@@ -11398,9 +11697,9 @@ class UrlRedirect extends  AbstractModel {
         super();
 
         /**
-         * Whether URL rewriting is enabled
-`on`: enabled
-`off`: disabled
+         * Whether to enable URL rewriting
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -11445,15 +11744,15 @@ class DownstreamCapping extends  AbstractModel {
 
         /**
          * Downstream speed configuration switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Downstream speed limiting rules
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<CappingRule> || null}
          */
         this.CappingRules = null;
@@ -11491,14 +11790,14 @@ class CookieKey extends  AbstractModel {
 
         /**
          * Whether to use `Cookie` as part of `CacheKey`. Valid values: on, off
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Used cookies (separated by ';')
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Value = null;
@@ -11585,52 +11884,52 @@ class KeyRule extends  AbstractModel {
 
         /**
          * Content for each CacheType:
-For `file`, enter the suffix, such as jpg, txt.
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
 For `directory`, enter the path, such as /xxx/test/.
-For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
 For `index`, enter a backslash (/).
-Note: this field may return null, indicating that no valid value is obtained.
+Note: this field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
 
         /**
          * Rule types:
-`file`: effective for specified file suffixes
-`directory`: effective for specified paths
-`path`: effective for specified absolute paths
+`file`: Apply to files with the specified suffixes.
+`directory`: Apply to specified paths.
+`path`: Apply to specified absolute paths.
 `index`: home page
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * Whether full-path cache is enaled
-`on`: enables full-path cache (i.e., disables ignore query string)
-`off`: disables full-path cache (i.e., enables ignore query string)
-Note: this field may return `null`, indicating that no valid value can be obtained.
+         * Whether to enable full-path cache
+`on`: Enable full-path cache (i.e., disable Ignore Query String).
+`off`: Disable full-path cache (i.e., enable Ignore Query String).
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FullUrlCache = null;
 
         /**
          * Whether caches are case insensitive
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.IgnoreCase = null;
 
         /**
          * Request parameter contained in `CacheKey`
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {RuleQueryString || null}
          */
         this.QueryString = null;
 
         /**
          * Path cache key tag, the value "user" is passed.
-Note: this field may return null, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RuleTag = null;
@@ -11669,20 +11968,20 @@ class CappingRule extends  AbstractModel {
 
         /**
          * Rule types:
-`all`: effective for all files
-`file`: effective for specified file suffixes
-`directory`: effective for specified paths
-`path`: effective for specified absolute paths
+`all`: Apply to all files.
+`file`: Apply to files with the specified suffixes.
+`directory`: Apply to specified paths.
+`path`: Apply to specified absolute paths.
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * Content for each RuleType: 
-For `all`, enter an asterisk (*).
-For `file`, enter the suffix, such as jpg, txt.
-For `directory`, enter the path, such as /xxx/test/.
-For `path`, enter the corresponding absolute path, such as /xxx/test.html.
+         * Content for each `RuleType`: 
+For `all`, enter a wildcard `*`.
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -11785,9 +12084,9 @@ class Seo extends  AbstractModel {
 
         /**
          * SEO configuration switch
-on: enabled
-off: disabled
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
@@ -11816,8 +12115,8 @@ class BandwidthAlert extends  AbstractModel {
 
         /**
          * Specifies whether to enable the bandwidth cap
-`on`: enable
-`off`: disable
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -11831,9 +12130,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Action taken when threshold is reached
-RESOLVE_DNS_TO_ORIGIN: requests will be forwarded to the origin server. This is only supported for domain names of external origin.
-RETURN_404: a 404 error will be returned for all requests.
-Note: this field may return null, indicating that no valid values can be obtained.
+`RESOLVE_DNS_TO_ORIGIN`: Requests will be forwarded to the origin server. This is only supported for domain names of external origin.
+`RETURN_404`: A 404 error will be returned for all requests.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CounterMeasure = null;
@@ -11847,8 +12146,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Indicates whether to trigger alerts when the upper limit is reached
-`on`: enable
-`off`: disable
+`on`: Enable
+`off`: Disable
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -11870,12 +12169,19 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Dimension of the usage limit
-`bandwidth`: bandwidth
-`flux`: traffic
-Note: this field may return `null`, indicating that no valid values can be obtained.
+`bandwidth`: Bandwidth
+`flux`: Traffic
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Metric = null;
+
+        /**
+         * Usage limit configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<StatisticItem> || null}
+         */
+        this.StatisticItems = null;
 
     }
 
@@ -11894,6 +12200,15 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.AlertPercentage = 'AlertPercentage' in params ? params.AlertPercentage : null;
         this.LastTriggerTimeOverseas = 'LastTriggerTimeOverseas' in params ? params.LastTriggerTimeOverseas : null;
         this.Metric = 'Metric' in params ? params.Metric : null;
+
+        if (params.StatisticItems) {
+            this.StatisticItems = new Array();
+            for (let z in params.StatisticItems) {
+                let obj = new StatisticItem();
+                obj.deserialize(params.StatisticItems[z]);
+                this.StatisticItems.push(obj);
+            }
+        }
 
     }
 }
@@ -12024,6 +12339,16 @@ class PurgePathCacheRequest extends  AbstractModel {
          */
         this.UrlEncode = null;
 
+        /**
+         * Region to purge
+The acceleration region of the acceleration domain name will be purged if this parameter is not passed in.
+If `mainland` is passed in, only the content cached on nodes in the Chinese mainland will be purged.
+If `overseas` is passed in, only the content cached on nodes outside the Chinese mainland will be purged.
+The specified region to purge should match the domain name’s acceleration region.
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -12036,6 +12361,7 @@ class PurgePathCacheRequest extends  AbstractModel {
         this.Paths = 'Paths' in params ? params.Paths : null;
         this.FlushType = 'FlushType' in params ? params.FlushType : null;
         this.UrlEncode = 'UrlEncode' in params ? params.UrlEncode : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -12157,16 +12483,16 @@ class PurgeUrlsCacheRequest extends  AbstractModel {
 
         /**
          * Purging region
-The acceleration region of the acceleration domain name will be purged if this parameter is not passed in
-If `mainland` is passed in, only the content cached on nodes in the Chinese mainland will be purged
-If `overseas` is passed in, only the content cached on nodes outside the Chinese mainland will be purged
-The specified purging region should match the domain name acceleration region
+The acceleration region of the acceleration domain name will be purged if this parameter is not passed in.
+If `mainland` is passed in, only the content cached on nodes in the Chinese mainland will be purged.
+If `overseas` is passed in, only the content cached on nodes outside the Chinese mainland will be purged.
+The specified purging region should match the domain name acceleration region.
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * Whether to encode Chinese characters before purge.
+         * Whether to encode Chinese characters for purge
          * @type {boolean || null}
          */
         this.UrlEncode = null;
@@ -12197,8 +12523,8 @@ class OriginPullOptimization extends  AbstractModel {
 
         /**
          * Cross-border origin-pull optimization configuration switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -12207,7 +12533,7 @@ off: disabled
          * Cross-border types
 OVToCN: origin-pull from outside mainland China to inside mainland China
 CNToOV: origin-pull from inside mainland China to outside mainland China
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.OptimizationType = null;
@@ -12237,16 +12563,16 @@ class ErrorPage extends  AbstractModel {
 
         /**
          * Status code redirect configuration switch
-on: enabled
-off: disabled
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Status code redirect rules configuration
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<ErrorPageRule> || null}
          */
         this.PageRules = null;
@@ -12296,10 +12622,10 @@ class PushTask extends  AbstractModel {
 
         /**
          * Prefetch task status
-`fail`: prefetch failed
-`done`: prefetch succeeded
-`process`: prefetch in progress
-`invalid`: invalid prefetch with 4XX/5XX status code returned from the origin server
+`fail`: Prefetch failed
+`done`: Prefetch succeeded
+`process`: Prefetch in progress
+`invalid`: Invalid prefetch with 4XX/5XX status code returned from the origin server
          * @type {string || null}
          */
         this.Status = null;
@@ -12318,16 +12644,16 @@ class PushTask extends  AbstractModel {
 
         /**
          * Prefetch region
-`mainland`: within Mainland China
-`overseas`: outside Mainland China
-`global`: global
+`mainland`: Within the Chinese mainland
+`overseas`: Outside the Chinese mainland
+`global`: Globe
          * @type {string || null}
          */
         this.Area = null;
 
         /**
          * Prefetch task update time
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -12509,8 +12835,8 @@ class ResponseHeaderCache extends  AbstractModel {
 
         /**
          * Origin server header cache switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -12594,7 +12920,7 @@ Default value: createTime.
         this.Key = null;
 
         /**
-         * `asc` or `desc`. Default: `desc`.
+         * asc/desc. Default value: desc.
          * @type {string || null}
          */
         this.Sequence = null;
@@ -12656,7 +12982,7 @@ You must specify either a task ID or a starting time for your query.
         this.Offset = null;
 
         /**
-         * Limit on paged queries. Default value: 20
+         * Limit on paginated queries. Default value: 20
          * @type {number || null}
          */
         this.Limit = null;
@@ -12708,7 +13034,7 @@ You must specify either a task ID or a starting time for your query.
 }
 
 /**
- * 
+ *  Access authentication for Huawei Cloud OBS origin
  * @class
  */
 class HwPrivateAccess extends  AbstractModel {
@@ -12716,25 +13042,28 @@ class HwPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable access authentication. Valid values: `on`, `off`.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Access ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.AccessKey = null;
 
         /**
-         * 
+         * Key
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * bucketname
+         * BucketName
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Bucket = null;
@@ -12752,6 +13081,42 @@ class HwPrivateAccess extends  AbstractModel {
         this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
         this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
         this.Bucket = 'Bucket' in params ? params.Bucket : null;
+
+    }
+}
+
+/**
+ * Heuristic cache validity configuration
+ * @class
+ */
+class CacheConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `on`: Enable
+`off`: Disable
+         * @type {string || null}
+         */
+        this.HeuristicCacheTimeSwitch = null;
+
+        /**
+         * Unit: Second
+         * @type {number || null}
+         */
+        this.HeuristicCacheTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HeuristicCacheTimeSwitch = 'HeuristicCacheTimeSwitch' in params ? params.HeuristicCacheTimeSwitch : null;
+        this.HeuristicCacheTime = 'HeuristicCacheTime' in params ? params.HeuristicCacheTime : null;
 
     }
 }
@@ -12829,28 +13194,28 @@ class QueryStringKey extends  AbstractModel {
 
         /**
          * Whether to use `QueryString` as part of `CacheKey`. Valid values: on, off
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Whether to sort again
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Reorder = null;
 
         /**
          * Include/exclude query parameters. Valid values: `includeAll`, `excludeAll`, `includeCustom`, `excludeAll`
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Action = null;
 
         /**
-         * Array of included/excluded URL parameters (separated by ';')
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Array of included/excluded query strings (separated by ';')
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Value = null;
@@ -12925,16 +13290,16 @@ class MaxAge extends  AbstractModel {
 
         /**
          * Browser cache configuration switch
-on: enabled
-off: disabled
-Note: this field may return null, indicating that no valid values can be obtained.
+`on`: Enable
+`off`: Disable
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * MaxAge rule
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<MaxAgeRule> || null}
          */
         this.MaxAgeRules = null;
@@ -13018,6 +13383,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.SecretKey = null;
 
+        /**
+         * Region
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * BucketName
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
     }
 
     /**
@@ -13030,6 +13409,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
         this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
 
     }
 }
@@ -13050,7 +13431,7 @@ class LogSetInfo extends  AbstractModel {
 
         /**
          * Channel
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Channel = null;
@@ -13080,7 +13461,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.LogsetSavePeriod = null;
 
         /**
-         * Creation date
+         * Creation time
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -13093,14 +13474,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Whether the logset has been removed from CLS
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Deleted = null;
 
         /**
          * Whether English is used in this region
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RegionEn = null;
@@ -13177,13 +13558,13 @@ class SearchClsLogRequest extends  AbstractModel {
         this.TopicIds = null;
 
         /**
-         * Start time of log to be queried in the format of `YYYY-mm-dd HH:MM:SS`
+         * Query start time in the format of YYYY-mm-dd HH:MM:SS
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time of log to be queried in the format of `YYYY-mm-dd HH:MM:SS`
+         * Query end time in the format of YYYY-mm-dd HH:MM:SS
          * @type {string || null}
          */
         this.EndTime = null;
@@ -13201,7 +13582,7 @@ class SearchClsLogRequest extends  AbstractModel {
         this.Channel = null;
 
         /**
-         * Content to be queried. For more information, please visit https://intl.cloud.tencent.com/document/product/614/16982?from_cn_redirect=1
+         * Query statement. For more details, see [https://intl.cloud.tencent.com/document/product/614/16982?from_cn_redirect=1].
          * @type {string || null}
          */
         this.Query = null;
@@ -13241,7 +13622,7 @@ class SearchClsLogRequest extends  AbstractModel {
 }
 
 /**
- * Advanced configuration set
+ * Advanced configuration settings
  * @class
  */
 class AdvanceConfig extends  AbstractModel {
@@ -13250,16 +13631,16 @@ class AdvanceConfig extends  AbstractModel {
 
         /**
          * Advanced configuration name
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Whether advanced configuration is supported:
-`on`: support
-`off`: do not support
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether to support advanced configuration
+`on`: Supported
+`off`: Not supported
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Value = null;
@@ -13295,17 +13676,31 @@ class AwsPrivateAccess extends  AbstractModel {
 
         /**
          * Access ID.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.AccessKey = null;
 
         /**
          * Key.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.SecretKey = null;
+
+        /**
+         * Region.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * BucketName
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Bucket = null;
 
     }
 
@@ -13319,6 +13714,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
         this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
 
     }
 }
@@ -13402,8 +13799,8 @@ class VideoSeek extends  AbstractModel {
 
         /**
          * Video dragging switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
@@ -13432,7 +13829,7 @@ class Compatibility extends  AbstractModel {
 
         /**
          * Compatibility flag status code.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.Code = null;
@@ -13506,14 +13903,14 @@ class ScdnAclGroup extends  AbstractModel {
         this.Result = null;
 
         /**
-         * Whether the rule is effective. Valid values: `active` and `inactive`.
+         * Whether the rule is activated. Valid values: `active` and `inactive`.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Error page configuration.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Error page configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ScdnErrorPage || null}
          */
         this.ErrorPage = null;
@@ -13644,7 +14041,7 @@ class DescribeUrlViolationsResponse extends  AbstractModel {
 
         /**
          * Details of URLs in violation
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<ViolationUrl> || null}
          */
         this.UrlRecordList = null;
@@ -13695,33 +14092,33 @@ class IpFilter extends  AbstractModel {
 
         /**
          * IP blocklist/allowlist configuration switch
-on: enabled
-off: disabled
+`on`: Enable
+`off`: Disable
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * IP blocklist/allowlist type
-whitelist: allowlist
-blacklist: blocklist
-Note: this field may return null, indicating that no valid values can be obtained.
+`whitelist`: IP allowlist
+`blacklist`: IP blocklist
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * IP blocklist/allowlist list
-Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
-Up to 50 allowlists or blocklists can be entered
-Note: this field may return null, indicating that no valid values can be obtained.
+         * IP blocklist/allowlist
+Supports IPs in X.X.X.X format, or IP ranges in /8, /16, /24 format.
+Up to 50 whitelists or blacklists can be entered
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.Filters = null;
 
         /**
          * IP blocklist/allowlist path-based configuration. This feature is only available to selected beta customers.
-Note: this field may return `null`, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<IpFilterPathRule> || null}
          */
         this.FilterRules = null;
@@ -13729,7 +14126,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         /**
          * HTTP code returned when the IP allowlist/blocklist verification fails
 Valid values: 400-499
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.ReturnCode = null;
@@ -13790,7 +14187,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * ACL rule group, which is required when the access control is on.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<AdvancedScdnAclGroup> || null}
          */
         this.AdvancedScriptData = null;
@@ -13871,14 +14268,14 @@ class DescribePurgeTasksResponse extends  AbstractModel {
 
         /**
          * Detailed purge record.
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<PurgeTask> || null}
          */
         this.PurgeLogs = null;
 
         /**
          * Total number of tasks, which is used for pagination.
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -14072,9 +14469,9 @@ class PurgeTask extends  AbstractModel {
 
         /**
          * Purge task status
-`fail`: purge failed
-`done`: purge succeeded
-`process`: purge in progress
+`fail`: Purge failed
+`done`: Purge succeeded
+`process`: Purge in progress
          * @type {string || null}
          */
         this.Status = null;
@@ -14090,7 +14487,7 @@ class PurgeTask extends  AbstractModel {
         /**
          * Purge method
 `flush`: purges updated resources; this type is available only for directory purges
-`delete`: purges all resources
+`delete`: Purge all resources
          * @type {string || null}
          */
         this.FlushType = null;
@@ -14130,14 +14527,14 @@ class OriginPullTimeout extends  AbstractModel {
 
         /**
          * The origin-pull connection timeout (in seconds). Valid range: 5-60.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.ConnectTimeout = null;
 
         /**
          * The origin-pull receipt timeout (in seconds). Valid range: 10-60.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.ReceiveTimeout = null;
@@ -14243,23 +14640,23 @@ unknown: unknown node location
         this.Location = null;
 
         /**
-         * Node activation and deactivation history
+         * Activation and deactivation history of the node.
          * @type {Array.<CdnIpHistory> || null}
          */
         this.History = null;
 
         /**
          * Node region
-mainland: cache node in Mainland China
-overseas: cache node outside Mainland China
-unknown: service region unknown
+`mainland`: Acceleration nodes inside the Chinese mainland
+`overseas`: Acceleration nodes outside the Chinese mainland
+`unknown`: Service region unknown
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * City where the node resides
-Note: this field may return `null`, indicating that no valid value is obtained.
+         * City where the nodes reside
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.City = null;
@@ -14531,14 +14928,14 @@ class CacheTagKey extends  AbstractModel {
 
         /**
          * Whether to use `CacheTag` as part of `CacheKey`
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
          * Value of custom `CacheTag`
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Value = null;
@@ -14607,7 +15004,7 @@ class DescribeDomainsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Query condition filter, complex type.
+         * Query condition filter, which supports complex type.
          * @type {Array.<DomainFilter> || null}
          */
         this.Filters = null;
@@ -14637,7 +15034,7 @@ class DescribeDomainsRequest extends  AbstractModel {
 }
 
 /**
- * Whether to enable offline cache
+ * Offline cache feature status switch.
  * @class
  */
 class OfflineCache extends  AbstractModel {
@@ -14692,14 +15089,14 @@ class UrlRedirectRule extends  AbstractModel {
 
         /**
          * Target host. It should be a standard domain name starting with `http://` or `https://`. If it is left empty, “http://[current domain name]” will be used by default.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RedirectHost = null;
 
         /**
          * Whether to use full-path matching or arbitrary matching
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {boolean || null}
          */
         this.FullMatch = null;
@@ -14734,7 +15131,7 @@ class IpFilterPathRule extends  AbstractModel {
          * IP blocklist/allowlist type
 `whitelist`: allowlist IPs
 `blacklist`: blocklist IPs
-Note: this field may return `null`, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.FilterType = null;
@@ -14743,18 +15140,18 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          * IP blocklist/allowlist list
 Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
 Up to 50 allowlists or blocklists can be entered.
-Note: this field may return `null`, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.Filters = null;
 
         /**
          * Rule types:
-`all`: effective for all files
-`file`: effective for specified file suffixes
-`directory`: effective for specified paths
-`path`: effective for specified absolute paths
-Note: this field may return `null`, indicating that no valid value is obtained.
+`all`: Effective for all files
+`file`: Effective for specified file suffixes
+`directory`: Effective for specified paths
+`path`: Effective for specified absolute paths
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.RuleType = null;
@@ -14765,7 +15162,7 @@ For `all`, enter an asterisk (*).
 For `file`, enter the suffix, such as jpg, txt.
 For `directory`, enter the path, such as /xxx/test/.
 For `path`, enter the corresponding absolute path, such as /xxx/test.html.
-Note: this field may return `null`, indicating that no valid value is obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -14869,6 +15266,7 @@ module.exports = {
     DescribePayTypeRequest: DescribePayTypeRequest,
     AdvancedAuthenticationTypeD: AdvancedAuthenticationTypeD,
     CompressionRule: CompressionRule,
+    RedirectConfig: RedirectConfig,
     GuetzliAdapter: GuetzliAdapter,
     UpdateScdnDomainResponse: UpdateScdnDomainResponse,
     Origin: Origin,
@@ -14944,6 +15342,7 @@ module.exports = {
     RuleEngine: RuleEngine,
     GetDisableRecordsResponse: GetDisableRecordsResponse,
     Ipv6Access: Ipv6Access,
+    HeuristicCache: HeuristicCache,
     ResponseHeader: ResponseHeader,
     CdnIpHistory: CdnIpHistory,
     SummarizedData: SummarizedData,
@@ -14989,6 +15388,7 @@ module.exports = {
     DescribeBillingDataResponse: DescribeBillingDataResponse,
     DisableCachesResponse: DisableCachesResponse,
     SchemeKey: SchemeKey,
+    StatisticItem: StatisticItem,
     RangeOriginPullRule: RangeOriginPullRule,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
     AdvanceCacheRule: AdvanceCacheRule,
@@ -15024,6 +15424,7 @@ module.exports = {
     Sort: Sort,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     HwPrivateAccess: HwPrivateAccess,
+    CacheConfig: CacheConfig,
     PushUrlsCacheResponse: PushUrlsCacheResponse,
     StopCdnDomainResponse: StopCdnDomainResponse,
     QueryStringKey: QueryStringKey,

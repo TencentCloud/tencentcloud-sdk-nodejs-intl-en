@@ -3105,8 +3105,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Unique ID of a CVM instance, which is required when binding a CVM instance. It can be obtained from the `InstanceId` field in the response of the `DescribeInstances` API. It indicates binding the primary IP of the primary ENI.
-Note: either `InstanceId` or `EniIp` must be passed in.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: Either `InstanceId` or `EniIp` can be passed in.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3119,8 +3119,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * It is required when binding an IP. ENI IPs and other private IPs are supported. To bind an ENI IP, the ENI should be bound to a CVM instance before being bound to a CLB instance.
-Note: either `InstanceId` or `EniIp` must be passed in. It is required when binding a dual-stack IPv6 CVM instance.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: Either `InstanceId` or `EniIp` can be passed in. `EniIp` is required in a cross-region binding or when the dual-stack IPV6 CVM is bound.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.EniIp = null;
@@ -3836,6 +3836,12 @@ They represent weighted round robin and least connections, respectively. Default
         this.SniSwitch = null;
 
         /**
+         * Target backend type. `NODE`: A single node; `TARGETGROUP`: A target group.
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
          * Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners.
          * @type {number || null}
          */
@@ -3880,6 +3886,7 @@ They represent weighted round robin and least connections, respectively. Default
         }
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
         this.DeregisterTargetRst = 'DeregisterTargetRst' in params ? params.DeregisterTargetRst : null;
         this.SessionType = 'SessionType' in params ? params.SessionType : null;

@@ -281,6 +281,47 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
+ * Frame interpolation configuration.
+ * @class
+ */
+class FrameRateConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The frame rate (Hz). Value range: [0, 100].
+Default value: 0.
+Note: For transcoding, this parameter will overwrite `Fps` of `VideoTemplate`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+
+    }
+}
+
+/**
  * Custom specification parameters for video processing, which are used to override corresponding parameters in templates.
  * @class
  */
@@ -664,6 +705,12 @@ Default value: 0.
          */
         this.TEHDConfig = null;
 
+        /**
+         * Audio/Video enhancement configuration.
+         * @type {EnhanceConfig || null}
+         */
+        this.EnhanceConfig = null;
+
     }
 
     /**
@@ -695,6 +742,12 @@ Default value: 0.
             let obj = new TEHDConfig();
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
+        }
+
+        if (params.EnhanceConfig) {
+            let obj = new EnhanceConfig();
+            obj.deserialize(params.EnhanceConfig)
+            this.EnhanceConfig = obj;
         }
 
     }
@@ -1490,6 +1543,40 @@ class AiReviewPoliticalOcrTaskInput extends  AbstractModel {
 }
 
 /**
+ * Audio/Video enhancement configuration.
+ * @class
+ */
+class EnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Video enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoEnhanceConfig || null}
+         */
+        this.VideoEnhance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.VideoEnhance) {
+            let obj = new VideoEnhanceConfig();
+            obj.deserialize(params.VideoEnhance)
+            this.VideoEnhance = obj;
+        }
+
+    }
+}
+
+/**
  * The information of the object to process.
  * @class
  */
@@ -2248,6 +2335,170 @@ class DeleteAIRecognitionTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Video enhancement configuration.
+ * @class
+ */
+class VideoEnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Frame interpolation configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {FrameRateConfig || null}
+         */
+        this.FrameRate = null;
+
+        /**
+         * Super resolution configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SuperResolutionConfig || null}
+         */
+        this.SuperResolution = null;
+
+        /**
+         * HDR configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {HdrConfig || null}
+         */
+        this.Hdr = null;
+
+        /**
+         * Image noise removal configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoDenoiseConfig || null}
+         */
+        this.Denoise = null;
+
+        /**
+         * Overall enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ImageQualityEnhanceConfig || null}
+         */
+        this.ImageQualityEnhance = null;
+
+        /**
+         * Color enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ColorEnhanceConfig || null}
+         */
+        this.ColorEnhance = null;
+
+        /**
+         * Detail enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SharpEnhanceConfig || null}
+         */
+        this.SharpEnhance = null;
+
+        /**
+         * Face enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {FaceEnhanceConfig || null}
+         */
+        this.FaceEnhance = null;
+
+        /**
+         * Low-light enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {LowLightEnhanceConfig || null}
+         */
+        this.LowLightEnhance = null;
+
+        /**
+         * Banding removal configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScratchRepairConfig || null}
+         */
+        this.ScratchRepair = null;
+
+        /**
+         * Artifact removal (smoothing) configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ArtifactRepairConfig || null}
+         */
+        this.ArtifactRepair = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FrameRate) {
+            let obj = new FrameRateConfig();
+            obj.deserialize(params.FrameRate)
+            this.FrameRate = obj;
+        }
+
+        if (params.SuperResolution) {
+            let obj = new SuperResolutionConfig();
+            obj.deserialize(params.SuperResolution)
+            this.SuperResolution = obj;
+        }
+
+        if (params.Hdr) {
+            let obj = new HdrConfig();
+            obj.deserialize(params.Hdr)
+            this.Hdr = obj;
+        }
+
+        if (params.Denoise) {
+            let obj = new VideoDenoiseConfig();
+            obj.deserialize(params.Denoise)
+            this.Denoise = obj;
+        }
+
+        if (params.ImageQualityEnhance) {
+            let obj = new ImageQualityEnhanceConfig();
+            obj.deserialize(params.ImageQualityEnhance)
+            this.ImageQualityEnhance = obj;
+        }
+
+        if (params.ColorEnhance) {
+            let obj = new ColorEnhanceConfig();
+            obj.deserialize(params.ColorEnhance)
+            this.ColorEnhance = obj;
+        }
+
+        if (params.SharpEnhance) {
+            let obj = new SharpEnhanceConfig();
+            obj.deserialize(params.SharpEnhance)
+            this.SharpEnhance = obj;
+        }
+
+        if (params.FaceEnhance) {
+            let obj = new FaceEnhanceConfig();
+            obj.deserialize(params.FaceEnhance)
+            this.FaceEnhance = obj;
+        }
+
+        if (params.LowLightEnhance) {
+            let obj = new LowLightEnhanceConfig();
+            obj.deserialize(params.LowLightEnhance)
+            this.LowLightEnhance = obj;
+        }
+
+        if (params.ScratchRepair) {
+            let obj = new ScratchRepairConfig();
+            obj.deserialize(params.ScratchRepair)
+            this.ScratchRepair = obj;
+        }
+
+        if (params.ArtifactRepair) {
+            let obj = new ArtifactRepairConfig();
+            obj.deserialize(params.ArtifactRepair)
+            this.ArtifactRepair = obj;
+        }
+
+    }
+}
+
+/**
  * The mosaic effect parameters to use in a media processing task.
  * @class
  */
@@ -2498,6 +2749,58 @@ When the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound chan
         this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
         this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
         this.AudioChannel = 'AudioChannel' in params ? params.AudioChannel : null;
+
+    }
+}
+
+/**
+ * Super resolution configuration.
+ * @class
+ */
+class SuperResolutionConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Valid values:
+<li>lq: For low-resolution videos with obvious noise</li>
+<li>hq: For high-resolution videos</li>
+Default value: lq.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The ratio of the target resolution to the original resolution. Valid values:
+<li>2</li>
+Default value: 2.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Size = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }
@@ -3467,6 +3770,129 @@ class AiReviewPornTaskInput extends  AbstractModel {
 }
 
 /**
+ * HDR configuration.
+ * @class
+ */
+class HdrConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Valid values:
+<li>HDR10</li>
+<li>HLG</li>
+Default value: HDR10.
+Note: The video codec must be `libx265`.
+Note: The bit depth for video encoding is 10 bits.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * The information of a scheme.
+ * @class
+ */
+class ScheduleTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scheme ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The scheme status. Valid values:
+<li>PROCESSING</li>
+<li>FINISH</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The information of the file processed.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaInputInfo || null}
+         */
+        this.InputInfo = null;
+
+        /**
+         * The metadata of the source video.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * The output of the scheme.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ActivityResult> || null}
+         */
+        this.ActivityResultSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+
+        if (params.ActivityResultSet) {
+            this.ActivityResultSet = new Array();
+            for (let z in params.ActivityResultSet) {
+                let obj = new ActivityResult();
+                obj.deserialize(params.ActivityResultSet[z]);
+                this.ActivityResultSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreatePersonSample request structure.
  * @class
  */
@@ -3913,6 +4339,12 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
          */
         this.TEHDConfig = null;
 
+        /**
+         * Audio/Video enhancement settings.
+         * @type {EnhanceConfig || null}
+         */
+        this.EnhanceConfig = null;
+
     }
 
     /**
@@ -3945,6 +4377,12 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
             let obj = new TEHDConfigForUpdate();
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
+        }
+
+        if (params.EnhanceConfig) {
+            let obj = new EnhanceConfig();
+            obj.deserialize(params.EnhanceConfig)
+            this.EnhanceConfig = obj;
         }
 
     }
@@ -4504,6 +4942,46 @@ class DescribeAIRecognitionTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * Banding removal configuration.
+ * @class
+ */
+class ScratchRepairConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Value range: 0.0-1.0
+Default value: 0.0
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Intensity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Intensity = 'Intensity' in params ? params.Intensity : null;
+
+    }
+}
+
+/**
  * Result of AI-based live stream audit
  * @class
  */
@@ -4709,6 +5187,83 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * The result of a content recognition task of a scheme.
+ * @class
+ */
+class ScheduleRecognitionTaskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * The error code. 0 indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The input of the content recognition task.
+         * @type {AiRecognitionTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * The output of the content recognition task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AiRecognitionResult> || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiRecognitionTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            this.Output = new Array();
+            for (let z in params.Output) {
+                let obj = new AiRecognitionResult();
+                obj.deserialize(params.Output[z]);
+                this.Output.push(obj);
+            }
+        }
 
     }
 }
@@ -5058,18 +5613,31 @@ class DeleteAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
 }
 
 /**
- * ParseNotification request structure.
+ * Artifact removal (smoothing) configuration.
  * @class
  */
-class ParseNotificationRequest extends  AbstractModel {
+class ArtifactRepairConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event notification obtained from CMQ.
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
          * @type {string || null}
          */
-        this.Content = null;
+        this.Switch = null;
+
+        /**
+         * The strength. Valid values:
+<li>weak</li>
+<li>strong</li>
+Default value: weak.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
 
     }
 
@@ -5080,7 +5648,8 @@ class ParseNotificationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Content = 'Content' in params ? params.Content : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -6559,33 +7128,37 @@ class VideoTemplateInfo extends  AbstractModel {
         super();
 
         /**
-         * Video stream codec. Valid values:
+         * The video codec. Valid values:
 <li>`libx264`: H.264</li>
 <li>`libx265`: H.265</li>
 <li>`av1`: AOMedia Video 1</li>
+Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.
+Note: You can only use the AOMedia Video 1 codec for MP4 files.
          * @type {string || null}
          */
         this.Codec = null;
 
         /**
-         * Video frame rate in Hz. Value range: [0, 100].
+         * The video frame rate (Hz). Value range: [0, 100].
 If the value is 0, the frame rate will be the same as that of the source video.
+Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * Video stream bitrate (Kbps). Valid values: `0`; [75, 35000]
-If the value is `0`, the original video bitrate will be used.
+         * The video bitrate (Kbps). Value range: 0 and [128, 35000].
+If the value is 0, the bitrate of the video will be the same as that of the source video.
          * @type {number || null}
          */
         this.Bitrate = null;
 
         /**
          * Resolution adaption. Valid values:
-<li>open: Enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-<li>close: Disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+<li>open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.</li>
+<li>close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.</li>
 Default value: open.
+Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -6620,12 +7193,13 @@ If this parameter is 0 or left empty, the system will automatically set the GOP 
         this.Gop = null;
 
         /**
-         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-<li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
-<li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+         * The fill mode, which indicates how a video is resized when the video’s original aspect ratio is different from the target aspect ratio. Valid values:
+<li>stretch: Stretch the image frame by frame to fill the entire screen. The video image may become "squashed" or "stretched" after transcoding.</li>
+<li>black: Keep the image's original aspect ratio and fill the blank space with black bars.</li>
+<li>white: Keep the image’s original aspect ratio and fill the blank space with white bars.</li>
+<li>gauss: Keep the image’s original aspect ratio and apply Gaussian blur to the blank space.</li>
 Default value: black.
+Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
          * @type {string || null}
          */
         this.FillType = null;
@@ -7000,6 +7574,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
         }
+
+    }
+}
+
+/**
+ * Color enhancement configuration.
+ * @class
+ */
+class ColorEnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Valid values:
+<li>weak</li>
+<li>normal</li>
+<li>strong</li>
+Default value: weak.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -7587,6 +8204,15 @@ class ProcessMediaRequest extends  AbstractModel {
          */
         this.SessionContext = null;
 
+        /**
+         * The scheme ID.
+Notes: 1. If output information is not specified for a scheme, the request parameters `OutputStorage` and `OutputDir` will be used.
+2. If a notification is not configured for a scheme, the request parameter `TaskNotifyConfig` will be used.
+3. The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+         * @type {number || null}
+         */
+        this.ScheduleId = null;
+
     }
 
     /**
@@ -7642,6 +8268,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
 
     }
 }
@@ -7790,6 +8417,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * Overall enhancement configuration.
+ * @class
+ */
+class ImageQualityEnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Valid values:
+<li>weak</li>
+<li>normal</li>
+<li>strong</li>
+Default value: weak.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -9236,6 +9906,83 @@ Default value: 0 px.
 }
 
 /**
+ * The result of a content analysis task of a scheme.
+ * @class
+ */
+class ScheduleAnalysisTaskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * The error code. 0 indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The input of the content analysis task.
+         * @type {AiAnalysisTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * The output of the content analysis task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AiAnalysisResult> || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            this.Output = new Array();
+            for (let z in params.Output) {
+                let obj = new AiAnalysisResult();
+                obj.deserialize(params.Output[z]);
+                this.Output.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * The parameters for detecting sensitive information.
  * @class
  */
@@ -9276,6 +10023,34 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
         }
+
+    }
+}
+
+/**
+ * ParseNotification request structure.
+ * @class
+ */
+class ParseNotificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event notification obtained from CMQ.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -11438,6 +12213,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.UpdateTime = null;
 
+        /**
+         * Audio/Video enhancement configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {EnhanceConfig || null}
+         */
+        this.EnhanceConfig = null;
+
     }
 
     /**
@@ -11475,6 +12257,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ContainerType = 'ContainerType' in params ? params.ContainerType : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.EnhanceConfig) {
+            let obj = new EnhanceConfig();
+            obj.deserialize(params.EnhanceConfig)
+            this.EnhanceConfig = obj;
+        }
 
     }
 }
@@ -12727,8 +13515,10 @@ class ParseNotificationResponse extends  AbstractModel {
         super();
 
         /**
-         * Supported event type. Valid values:
-<li>WorkflowTask: Video workflow processing task.</li>
+         * The event type. Valid values:
+<li>WorkflowTask</li>
+<li>EditMediaTask</li>
+<li>ScheduleTask (scheme)</li>
          * @type {string || null}
          */
         this.EventType = null;
@@ -12757,6 +13547,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.SessionContext = null;
+
+        /**
+         * The information of a scheme. This parameter is valid only if `TaskType` is `ScheduleTask`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScheduleTask || null}
+         */
+        this.ScheduleTaskEvent = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -12788,7 +13585,62 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+        if (params.ScheduleTaskEvent) {
+            let obj = new ScheduleTask();
+            obj.deserialize(params.ScheduleTaskEvent)
+            this.ScheduleTaskEvent = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The execution result of a scheme.
+ * @class
+ */
+class ActivityResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The type of the scheme’s subtask.
+<li>Transcode: Transcoding</li>
+<li>SampleSnapshot: Sampled screenshot</li>
+<li>AnimatedGraphics: Animated image generating</li>
+<li>SnapshotByTimeOffset: Time point screenshot</li>
+<li>ImageSprites: Image sprite generating</li>
+<li>AdaptiveDynamicStreaming: Adaptive bitrate streaming</li>
+<li>AiContentReview: Content moderation</li>
+<li>AIRecognition: Content recognition</li>
+<li>AIAnalysis: Content analysis</li>
+         * @type {string || null}
+         */
+        this.ActivityType = null;
+
+        /**
+         * The execution results of the subtasks of the scheme.
+         * @type {ActivityResItem || null}
+         */
+        this.ActivityResItem = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityType = 'ActivityType' in params ? params.ActivityType : null;
+
+        if (params.ActivityResItem) {
+            let obj = new ActivityResItem();
+            obj.deserialize(params.ActivityResItem)
+            this.ActivityResItem = obj;
+        }
 
     }
 }
@@ -14379,6 +15231,83 @@ class LiveStreamOcrFullTextRecognitionResult extends  AbstractModel {
 }
 
 /**
+ * The result of a content moderation task of a scheme.
+ * @class
+ */
+class ScheduleReviewTaskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * The error code. 0 indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The input of the content moderation task.
+         * @type {AiContentReviewTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * The output of the content moderation task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AiContentReviewResult> || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiContentReviewTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            this.Output = new Array();
+            for (let z in params.Output) {
+                let obj = new AiContentReviewResult();
+                obj.deserialize(params.Output[z]);
+                this.Output.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyTranscodeTemplate response structure.
  * @class
  */
@@ -14540,10 +15469,12 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         super();
 
         /**
-         * Video stream codec. Valid values:
+         * The video codec. Valid values:
 <li>libx264: H.264</li>
 <li>libx265: H.265</li>
-Currently, a resolution within 640*480p must be specified for H.265.
+<li>av1: AOMedia Video 1</li>
+Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.
+Note: You can only use the AOMedia Video 1 codec for MP4 files.
          * @type {string || null}
          */
         this.Codec = null;
@@ -14564,8 +15495,9 @@ If the value is 0, the bitrate of the video will be the same as that of the sour
 
         /**
          * Resolution adaption. Valid values:
-<li>open: Enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-<li>close: Disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+<li>open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.</li>
+<li>close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.</li>
+Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
          * @type {string || null}
          */
         this.ResolutionAdaptive = null;
@@ -14960,6 +15892,7 @@ class TaskNotifyConfig extends  AbstractModel {
 <li>CMQ: This value is no longer used. Please use `TDMQ-CMQ` instead.</li>
 <li>TDMQ-CMQ: Message queue</li>
 <li>URL: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
+<li>SCF: We do not recommend this notification type, which you need to configure in the SCF console.</li>
 Default value: `TDMQ-CMQ`.
          * @type {string || null}
          */
@@ -14987,6 +15920,46 @@ Default value: `TDMQ-CMQ`.
         this.NotifyMode = 'NotifyMode' in params ? params.NotifyMode : null;
         this.NotifyType = 'NotifyType' in params ? params.NotifyType : null;
         this.NotifyUrl = 'NotifyUrl' in params ? params.NotifyUrl : null;
+
+    }
+}
+
+/**
+ * Face enhancement configuration.
+ * @class
+ */
+class FaceEnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Value range: 0.0-1.0
+Default value: 0.0.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Intensity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Intensity = 'Intensity' in params ? params.Intensity : null;
 
     }
 }
@@ -15195,9 +16168,11 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * Task type. Currently valid values:
-<li>WorkflowTask: Video workflow processing task.</li>
-<li>LiveStreamProcessTask: Live stream processing task.</li>
+         * The task type. Valid values:
+<li>WorkflowTask</li>
+<li>EditMediaTask</li>
+<li>LiveStreamProcessTask</li>
+<li>ScheduleTask (scheme)</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -15230,17 +16205,17 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.FinishTime = null;
 
         /**
+         * Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
+         * @type {EditMediaTask || null}
+         */
+        this.EditMediaTask = null;
+
+        /**
          * Information of a video processing task. This field has a value only when `TaskType` is `WorkflowTask`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {WorkflowTask || null}
          */
         this.WorkflowTask = null;
-
-        /**
-         * Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
-         * @type {EditMediaTask || null}
-         */
-        this.EditMediaTask = null;
 
         /**
          * Information of a live stream processing task. This field has a value only when `TaskType` is `LiveStreamProcessTask`.
@@ -15281,6 +16256,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ExtInfo = null;
 
         /**
+         * The information of a scheme. This parameter is valid only if `TaskType` is `ScheduleTask`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScheduleTask || null}
+         */
+        this.ScheduleTask = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -15301,16 +16283,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
 
-        if (params.WorkflowTask) {
-            let obj = new WorkflowTask();
-            obj.deserialize(params.WorkflowTask)
-            this.WorkflowTask = obj;
-        }
-
         if (params.EditMediaTask) {
             let obj = new EditMediaTask();
             obj.deserialize(params.EditMediaTask)
             this.EditMediaTask = obj;
+        }
+
+        if (params.WorkflowTask) {
+            let obj = new WorkflowTask();
+            obj.deserialize(params.WorkflowTask)
+            this.WorkflowTask = obj;
         }
 
         if (params.LiveStreamProcessTask) {
@@ -15328,6 +16310,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+
+        if (params.ScheduleTask) {
+            let obj = new ScheduleTask();
+            obj.deserialize(params.ScheduleTask)
+            this.ScheduleTask = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -15571,6 +16559,46 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
+ * Detail enhancement configuration.
+ * @class
+ */
+class SharpEnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Value range: 0.0-1.0
+Default value: 0.0
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Intensity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Intensity = 'Intensity' in params ? params.Intensity : null;
+
+    }
+}
+
+/**
  * Control parameter of a full text recognition task
  * @class
  */
@@ -15649,6 +16677,12 @@ class DescribeTasksResponse extends  AbstractModel {
         this.ScrollToken = null;
 
         /**
+         * The total number of records that meet the conditions.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -15673,6 +16707,7 @@ class DescribeTasksResponse extends  AbstractModel {
             }
         }
         this.ScrollToken = 'ScrollToken' in params ? params.ScrollToken : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -17767,6 +18802,16 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * The template type (replacing `TEHDType`). Valid values:
+<li>Common: Common transcoding template</li>
+<li>TEHD: TESHD template</li>
+<li>Enhance: Audio/Video enhancement template.</li>
+This parameter is left empty by default, which indicates to return all types of templates.
+         * @type {string || null}
+         */
+        this.TranscodeType = null;
+
     }
 
     /**
@@ -17782,6 +18827,7 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
         this.TEHDType = 'TEHDType' in params ? params.TEHDType : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.TranscodeType = 'TranscodeType' in params ? params.TranscodeType : null;
 
     }
 }
@@ -18394,6 +19440,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
         }
+
+    }
+}
+
+/**
+ * Image noise removal configuration.
+ * @class
+ */
+class VideoDenoiseConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Valid values:
+<li>weak</li>
+<li>strong</li>
+Default value: weak.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -19553,6 +20641,144 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
 }
 
 /**
+ * The execution results of the subtasks of a scheme.
+ * @class
+ */
+class ActivityResItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The result of a transcoding task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaProcessTaskTranscodeResult || null}
+         */
+        this.TranscodeTask = null;
+
+        /**
+         * The result of an animated image generating task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaProcessTaskAnimatedGraphicResult || null}
+         */
+        this.AnimatedGraphicTask = null;
+
+        /**
+         * The result of a time point screenshot task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaProcessTaskSampleSnapshotResult || null}
+         */
+        this.SnapshotByTimeOffsetTask = null;
+
+        /**
+         * The result of a sampled screenshot task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaProcessTaskSampleSnapshotResult || null}
+         */
+        this.SampleSnapshotTask = null;
+
+        /**
+         * The result of an image sprite task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaProcessTaskImageSpriteResult || null}
+         */
+        this.ImageSpriteTask = null;
+
+        /**
+         * The result of an adaptive bitrate streaming task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaProcessTaskAdaptiveDynamicStreamingResult || null}
+         */
+        this.AdaptiveDynamicStreamingTask = null;
+
+        /**
+         * The result of a content recognition task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScheduleRecognitionTaskResult || null}
+         */
+        this.RecognitionTask = null;
+
+        /**
+         * The result of a content moderation task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScheduleReviewTaskResult || null}
+         */
+        this.ReviewTask = null;
+
+        /**
+         * The result of a content analysis task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScheduleAnalysisTaskResult || null}
+         */
+        this.AnalysisTask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TranscodeTask) {
+            let obj = new MediaProcessTaskTranscodeResult();
+            obj.deserialize(params.TranscodeTask)
+            this.TranscodeTask = obj;
+        }
+
+        if (params.AnimatedGraphicTask) {
+            let obj = new MediaProcessTaskAnimatedGraphicResult();
+            obj.deserialize(params.AnimatedGraphicTask)
+            this.AnimatedGraphicTask = obj;
+        }
+
+        if (params.SnapshotByTimeOffsetTask) {
+            let obj = new MediaProcessTaskSampleSnapshotResult();
+            obj.deserialize(params.SnapshotByTimeOffsetTask)
+            this.SnapshotByTimeOffsetTask = obj;
+        }
+
+        if (params.SampleSnapshotTask) {
+            let obj = new MediaProcessTaskSampleSnapshotResult();
+            obj.deserialize(params.SampleSnapshotTask)
+            this.SampleSnapshotTask = obj;
+        }
+
+        if (params.ImageSpriteTask) {
+            let obj = new MediaProcessTaskImageSpriteResult();
+            obj.deserialize(params.ImageSpriteTask)
+            this.ImageSpriteTask = obj;
+        }
+
+        if (params.AdaptiveDynamicStreamingTask) {
+            let obj = new MediaProcessTaskAdaptiveDynamicStreamingResult();
+            obj.deserialize(params.AdaptiveDynamicStreamingTask)
+            this.AdaptiveDynamicStreamingTask = obj;
+        }
+
+        if (params.RecognitionTask) {
+            let obj = new ScheduleRecognitionTaskResult();
+            obj.deserialize(params.RecognitionTask)
+            this.RecognitionTask = obj;
+        }
+
+        if (params.ReviewTask) {
+            let obj = new ScheduleReviewTaskResult();
+            obj.deserialize(params.ReviewTask)
+            this.ReviewTask = obj;
+        }
+
+        if (params.AnalysisTask) {
+            let obj = new ScheduleAnalysisTaskResult();
+            obj.deserialize(params.AnalysisTask)
+            this.AnalysisTask = obj;
+        }
+
+    }
+}
+
+/**
  * Input parameter type of a sampled screencapturing task.
  * @class
  */
@@ -20203,6 +21429,47 @@ class DeleteWatermarkTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * Low-light enhancement configuration.
+ * @class
+ */
+class LowLightEnhanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable the feature. Valid values:
+<li>ON</li>
+<li>OFF</li>
+Default value: ON.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The strength. Valid values:
+<li>normal</li>
+Default value: normal.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
  * DescribeMediaMetaData request structure.
  * @class
  */
@@ -20497,6 +21764,7 @@ module.exports = {
     ModifyWatermarkTemplateRequest: ModifyWatermarkTemplateRequest,
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
     UserDefineOcrTextReviewTemplateInfoForUpdate: UserDefineOcrTextReviewTemplateInfoForUpdate,
+    FrameRateConfig: FrameRateConfig,
     OverrideTranscodeParameter: OverrideTranscodeParameter,
     AiAnalysisTaskClassificationInput: AiAnalysisTaskClassificationInput,
     SvgWatermarkInput: SvgWatermarkInput,
@@ -20516,6 +21784,7 @@ module.exports = {
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
     AiReviewPoliticalOcrTaskInput: AiReviewPoliticalOcrTaskInput,
+    EnhanceConfig: EnhanceConfig,
     MediaInputInfo: MediaInputInfo,
     CreateWorkflowRequest: CreateWorkflowRequest,
     OcrWordsConfigureInfo: OcrWordsConfigureInfo,
@@ -20527,11 +21796,13 @@ module.exports = {
     UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
     ContentReviewTemplateItem: ContentReviewTemplateItem,
     DeleteAIRecognitionTemplateResponse: DeleteAIRecognitionTemplateResponse,
+    VideoEnhanceConfig: VideoEnhanceConfig,
     MosaicInput: MosaicInput,
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
     ClassificationConfigureInfo: ClassificationConfigureInfo,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
+    SuperResolutionConfig: SuperResolutionConfig,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
     MediaSampleSnapshotItem: MediaSampleSnapshotItem,
     ParseLiveStreamProcessNotificationResponse: ParseLiveStreamProcessNotificationResponse,
@@ -20551,6 +21822,8 @@ module.exports = {
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
     DeleteWorkflowResponse: DeleteWorkflowResponse,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
+    HdrConfig: HdrConfig,
+    ScheduleTask: ScheduleTask,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
     CosInputInfo: CosInputInfo,
@@ -20572,11 +21845,13 @@ module.exports = {
     TextWatermarkTemplateInput: TextWatermarkTemplateInput,
     ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
     DescribeAIRecognitionTemplatesResponse: DescribeAIRecognitionTemplatesResponse,
+    ScratchRepairConfig: ScratchRepairConfig,
     LiveStreamAiReviewResultInfo: LiveStreamAiReviewResultInfo,
     EditMediaResponse: EditMediaResponse,
     PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    ScheduleRecognitionTaskResult: ScheduleRecognitionTaskResult,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     MediaProcessTaskInput: MediaProcessTaskInput,
     CosOutputStorage: CosOutputStorage,
@@ -20585,7 +21860,7 @@ module.exports = {
     CreateWordSamplesResponse: CreateWordSamplesResponse,
     ClassificationConfigureInfoForUpdate: ClassificationConfigureInfoForUpdate,
     DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
-    ParseNotificationRequest: ParseNotificationRequest,
+    ArtifactRepairConfig: ArtifactRepairConfig,
     CreateWordSamplesRequest: CreateWordSamplesRequest,
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
     AiSampleFaceOperation: AiSampleFaceOperation,
@@ -20623,6 +21898,7 @@ module.exports = {
     DescribeWatermarkTemplatesRequest: DescribeWatermarkTemplatesRequest,
     TaskOutputStorage: TaskOutputStorage,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
+    ColorEnhanceConfig: ColorEnhanceConfig,
     AiReviewPornOcrTaskInput: AiReviewPornOcrTaskInput,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     ModifyAdaptiveDynamicStreamingTemplateRequest: ModifyAdaptiveDynamicStreamingTemplateRequest,
@@ -20634,6 +21910,7 @@ module.exports = {
     ProcessMediaRequest: ProcessMediaRequest,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
+    ImageQualityEnhanceConfig: ImageQualityEnhanceConfig,
     AiSampleWord: AiSampleWord,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     LiveStreamOcrWordsRecognitionResult: LiveStreamOcrWordsRecognitionResult,
@@ -20660,7 +21937,9 @@ module.exports = {
     UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
+    ScheduleAnalysisTaskResult: ScheduleAnalysisTaskResult,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
+    ParseNotificationRequest: ParseNotificationRequest,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
     AIAnalysisTemplateItem: AIAnalysisTemplateItem,
@@ -20720,6 +21999,7 @@ module.exports = {
     TranscodeTaskInput: TranscodeTaskInput,
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
     ParseNotificationResponse: ParseNotificationResponse,
+    ActivityResult: ActivityResult,
     ResetWorkflowResponse: ResetWorkflowResponse,
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
@@ -20749,6 +22029,7 @@ module.exports = {
     AdaptiveDynamicStreamingInfoItem: AdaptiveDynamicStreamingInfoItem,
     ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
     LiveStreamOcrFullTextRecognitionResult: LiveStreamOcrFullTextRecognitionResult,
+    ScheduleReviewTaskResult: ScheduleReviewTaskResult,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
     MediaMetaData: MediaMetaData,
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
@@ -20757,6 +22038,7 @@ module.exports = {
     AdaptiveDynamicStreamingTaskInput: AdaptiveDynamicStreamingTaskInput,
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
     TaskNotifyConfig: TaskNotifyConfig,
+    FaceEnhanceConfig: FaceEnhanceConfig,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
     AiAnalysisTaskFrameTagInput: AiAnalysisTaskFrameTagInput,
     MediaAiAnalysisFrameTagSegmentItem: MediaAiAnalysisFrameTagSegmentItem,
@@ -20766,6 +22048,7 @@ module.exports = {
     DeleteImageSpriteTemplateRequest: DeleteImageSpriteTemplateRequest,
     AiSampleFailFaceInfo: AiSampleFailFaceInfo,
     UserDefineFaceReviewTemplateInfoForUpdate: UserDefineFaceReviewTemplateInfoForUpdate,
+    SharpEnhanceConfig: SharpEnhanceConfig,
     OcrFullTextConfigureInfoForUpdate: OcrFullTextConfigureInfoForUpdate,
     AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
     DescribeTasksResponse: DescribeTasksResponse,
@@ -20813,6 +22096,7 @@ module.exports = {
     MediaTranscodeItem: MediaTranscodeItem,
     DescribePersonSamplesResponse: DescribePersonSamplesResponse,
     PornConfigureInfo: PornConfigureInfo,
+    VideoDenoiseConfig: VideoDenoiseConfig,
     DescribeAIAnalysisTemplatesResponse: DescribeAIAnalysisTemplatesResponse,
     CreateSnapshotByTimeOffsetTemplateRequest: CreateSnapshotByTimeOffsetTemplateRequest,
     ParseLiveStreamProcessNotificationRequest: ParseLiveStreamProcessNotificationRequest,
@@ -20833,6 +22117,7 @@ module.exports = {
     DeleteSnapshotByTimeOffsetTemplateRequest: DeleteSnapshotByTimeOffsetTemplateRequest,
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
     MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
+    ActivityResItem: ActivityResItem,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
@@ -20844,6 +22129,7 @@ module.exports = {
     AiAnalysisTaskCoverInput: AiAnalysisTaskCoverInput,
     EditMediaTaskOutput: EditMediaTaskOutput,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
+    LowLightEnhanceConfig: LowLightEnhanceConfig,
     DescribeMediaMetaDataRequest: DescribeMediaMetaDataRequest,
     FrameTagConfigureInfoForUpdate: FrameTagConfigureInfoForUpdate,
     CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,

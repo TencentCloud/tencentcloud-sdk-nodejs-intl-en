@@ -171,6 +171,34 @@ class ModifyInstancesProjectRequest extends  AbstractModel {
 }
 
 /**
+ * ConfigureChcDeployVpc response structure.
+ * @class
+ */
+class ConfigureChcDeployVpcResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ResetInstancesType response structure.
  * @class
  */
@@ -403,54 +431,12 @@ class ResetInstancesInternetMaxBandwidthResponse extends  AbstractModel {
 }
 
 /**
- * CreateDisasterRecoverGroup response structure.
+ * DescribeZones request structure.
  * @class
  */
-class CreateDisasterRecoverGroupResponse extends  AbstractModel {
+class DescribeZonesRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * List of spread placement group IDs.
-         * @type {string || null}
-         */
-        this.DisasterRecoverGroupId = null;
-
-        /**
-         * Type of the spread placement group. Valid values: <br><li>HOST: physical machine <br><li>SW: switch <br><li>RACK: rack.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Name of the spread placement group. The name must be 1-60 characters long and can contain both Chinese characters and English letters.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * The maximum number of CVMs in a placement group.
-         * @type {number || null}
-         */
-        this.CvmQuotaTotal = null;
-
-        /**
-         * The current number of CVMs in a placement group.
-         * @type {number || null}
-         */
-        this.CurrentNum = null;
-
-        /**
-         * Creation time of the placement group.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -461,13 +447,6 @@ class CreateDisasterRecoverGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DisasterRecoverGroupId = 'DisasterRecoverGroupId' in params ? params.DisasterRecoverGroupId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.CvmQuotaTotal = 'CvmQuotaTotal' in params ? params.CvmQuotaTotal : null;
-        this.CurrentNum = 'CurrentNum' in params ? params.CurrentNum : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -632,42 +611,168 @@ class ResetInstancesTypeRequest extends  AbstractModel {
 }
 
 /**
- * InquiryPriceResetInstance request structure.
+ * CHC host information
  * @class
  */
-class InquiryPriceResetInstanceRequest extends  AbstractModel {
+class ChcHost extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID. To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response.
+         * CHC host ID
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ChcId = null;
 
         /**
-         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For IDs of `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information; for IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
+         * Instance name
          * @type {string || null}
          */
-        this.ImageId = null;
+        this.InstanceName = null;
 
         /**
-         * Configuration of the system disk of the instance. For instances with a cloud disk as the system disk, you can expand the system disk by using this parameter to specify the new capacity after reinstallation. If the parameter is not specified, the system disk capacity remains unchanged by default. You can only expand the capacity of the system disk; reducing its capacity is not supported. When reinstalling the system, you can only modify the capacity of the system disk, not the type.
-         * @type {SystemDisk || null}
+         * Server serial number
+         * @type {string || null}
          */
-        this.SystemDisk = null;
+        this.SerialNumber = null;
 
         /**
-         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
-         * @type {LoginSettings || null}
+         * CHC host status<br/>
+<ul>
+<li>REGISTERED: The CHC host is registered, but the out-of-band network and deployment network are not configured.</li>
+<li>VPC_READY: The out-of-band network and deployment network are configured.</li>
+<li>PREPARED: It’s ready and can be associated with a CVM.</li>
+<li>ONLINE: It’s already associated with a CVM.</li>
+</ul>
+         * @type {string || null}
          */
-        this.LoginSettings = null;
+        this.InstanceState = null;
 
         /**
-         * Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Monitor and Cloud Security. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
-         * @type {EnhancedService || null}
+         * Device type
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.EnhancedService = null;
+        this.DeviceType = null;
+
+        /**
+         * Availability zone
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * Out-of-band network
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {VirtualPrivateCloud || null}
+         */
+        this.BmcVirtualPrivateCloud = null;
+
+        /**
+         * Out-of-band network IP
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BmcIp = null;
+
+        /**
+         * Out-of-band network security group ID
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.BmcSecurityGroupIds = null;
+
+        /**
+         * Deployment network
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {VirtualPrivateCloud || null}
+         */
+        this.DeployVirtualPrivateCloud = null;
+
+        /**
+         * Deployment network IP
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeployIp = null;
+
+        /**
+         * Deployment network security group ID
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.DeploySecurityGroupIds = null;
+
+        /**
+         * ID of the associated CVM
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CvmInstanceId = null;
+
+        /**
+         * Server creation time
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Instance hardware description, including CPU cores, memory capacity and disk capacity.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.HardwareDescription = null;
+
+        /**
+         * CPU cores of the CHC host
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CPU = null;
+
+        /**
+         * Memory capacity of the CHC host (unit: GB)
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Disk capacity of the CHC host
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Disk = null;
+
+        /**
+         * MAC address assigned under the out-of-band network
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BmcMAC = null;
+
+        /**
+         * MAC address assigned under the deployment network
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeployMAC = null;
+
+        /**
+         * Management type
+HOSTING: Hosting
+TENANT: Leasing
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TenantType = null;
+
+        /**
+         * CHC DHCP option, which is used for MiniOS debugging.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {ChcDeployExtraConfig || null}
+         */
+        this.DeployExtraConfig = null;
 
     }
 
@@ -678,25 +783,47 @@ class InquiryPriceResetInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ChcId = 'ChcId' in params ? params.ChcId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.SerialNumber = 'SerialNumber' in params ? params.SerialNumber : null;
+        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
-        if (params.SystemDisk) {
-            let obj = new SystemDisk();
-            obj.deserialize(params.SystemDisk)
-            this.SystemDisk = obj;
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
         }
 
-        if (params.LoginSettings) {
-            let obj = new LoginSettings();
-            obj.deserialize(params.LoginSettings)
-            this.LoginSettings = obj;
+        if (params.BmcVirtualPrivateCloud) {
+            let obj = new VirtualPrivateCloud();
+            obj.deserialize(params.BmcVirtualPrivateCloud)
+            this.BmcVirtualPrivateCloud = obj;
         }
+        this.BmcIp = 'BmcIp' in params ? params.BmcIp : null;
+        this.BmcSecurityGroupIds = 'BmcSecurityGroupIds' in params ? params.BmcSecurityGroupIds : null;
 
-        if (params.EnhancedService) {
-            let obj = new EnhancedService();
-            obj.deserialize(params.EnhancedService)
-            this.EnhancedService = obj;
+        if (params.DeployVirtualPrivateCloud) {
+            let obj = new VirtualPrivateCloud();
+            obj.deserialize(params.DeployVirtualPrivateCloud)
+            this.DeployVirtualPrivateCloud = obj;
+        }
+        this.DeployIp = 'DeployIp' in params ? params.DeployIp : null;
+        this.DeploySecurityGroupIds = 'DeploySecurityGroupIds' in params ? params.DeploySecurityGroupIds : null;
+        this.CvmInstanceId = 'CvmInstanceId' in params ? params.CvmInstanceId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.HardwareDescription = 'HardwareDescription' in params ? params.HardwareDescription : null;
+        this.CPU = 'CPU' in params ? params.CPU : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Disk = 'Disk' in params ? params.Disk : null;
+        this.BmcMAC = 'BmcMAC' in params ? params.BmcMAC : null;
+        this.DeployMAC = 'DeployMAC' in params ? params.DeployMAC : null;
+        this.TenantType = 'TenantType' in params ? params.TenantType : null;
+
+        if (params.DeployExtraConfig) {
+            let obj = new ChcDeployExtraConfig();
+            obj.deserialize(params.DeployExtraConfig)
+            this.DeployExtraConfig = obj;
         }
 
     }
@@ -950,7 +1077,8 @@ class SystemDisk extends  AbstractModel {
         this.DiskType = null;
 
         /**
-         * System disk ID. System disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter currently.
+         * System disk ID. System disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter.
+It is only used as a response parameter for APIs such as `DescribeInstances`, and cannot be used as a request parameter for APIs such as `RunInstances`.
          * @type {string || null}
          */
         this.DiskId = null;
@@ -1094,6 +1222,56 @@ class LaunchTemplate extends  AbstractModel {
         }
         this.LaunchTemplateId = 'LaunchTemplateId' in params ? params.LaunchTemplateId : null;
         this.LaunchTemplateVersion = 'LaunchTemplateVersion' in params ? params.LaunchTemplateVersion : null;
+
+    }
+}
+
+/**
+ * DescribeChcHosts response structure.
+ * @class
+ */
+class DescribeChcHostsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible instances
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of returned instances
+         * @type {Array.<ChcHost> || null}
+         */
+        this.ChcHostSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ChcHostSet) {
+            this.ChcHostSet = new Array();
+            for (let z in params.ChcHostSet) {
+                let obj = new ChcHost();
+                obj.deserialize(params.ChcHostSet[z]);
+                this.ChcHostSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1871,6 +2049,34 @@ For a Windows CVM, the password must be 12 to 30 characters in length. It cannot
 }
 
 /**
+ * RemoveChcAssistVpc response structure.
+ * @class
+ */
+class RemoveChcAssistVpcResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Describes network billing.
  * @class
  */
@@ -2047,6 +2253,49 @@ class DeleteKeyPairsResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Description of tags associated with resource instances during instance creation.
+ * @class
+ */
+class TagSpecification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The type of resource that the tag is bound to. Valid values: `instance` (for CVM), `host` (for CDH), `image` (for image), and `keypair` (for key).
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * List of tags
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2485,12 +2734,54 @@ When the value obtained in `RoleType` is `user` (default) or `system`, `CamRoleT
 }
 
 /**
- * DescribeZones request structure.
+ * CreateDisasterRecoverGroup response structure.
  * @class
  */
-class DescribeZonesRequest extends  AbstractModel {
+class CreateDisasterRecoverGroupResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * List of spread placement group IDs.
+         * @type {string || null}
+         */
+        this.DisasterRecoverGroupId = null;
+
+        /**
+         * Type of the spread placement group. Valid values: <br><li>HOST: physical machine <br><li>SW: switch <br><li>RACK: rack.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Name of the spread placement group. The name must be 1-60 characters long and can contain both Chinese characters and English letters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The maximum number of CVMs in a placement group.
+         * @type {number || null}
+         */
+        this.CvmQuotaTotal = null;
+
+        /**
+         * The current number of CVMs in a placement group.
+         * @type {number || null}
+         */
+        this.CurrentNum = null;
+
+        /**
+         * Creation time of the placement group.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2501,6 +2792,41 @@ class DescribeZonesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DisasterRecoverGroupId = 'DisasterRecoverGroupId' in params ? params.DisasterRecoverGroupId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CvmQuotaTotal = 'CvmQuotaTotal' in params ? params.CvmQuotaTotal : null;
+        this.CurrentNum = 'CurrentNum' in params ? params.CurrentNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RemoveChcAssistVpc request structure.
+ * @class
+ */
+class RemoveChcAssistVpcRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CHC ID
+         * @type {Array.<string> || null}
+         */
+        this.ChcIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
 
     }
 }
@@ -2830,6 +3156,53 @@ class DescribeImageQuotaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * ConfigureChcDeployVpc request structure.
+ * @class
+ */
+class ConfigureChcDeployVpcRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CHC instance ID
+         * @type {Array.<string> || null}
+         */
+        this.ChcIds = null;
+
+        /**
+         * Deployment network information
+         * @type {VirtualPrivateCloud || null}
+         */
+        this.DeployVirtualPrivateCloud = null;
+
+        /**
+         * Deployment network security group list
+         * @type {Array.<string> || null}
+         */
+        this.DeploySecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
+
+        if (params.DeployVirtualPrivateCloud) {
+            let obj = new VirtualPrivateCloud();
+            obj.deserialize(params.DeployVirtualPrivateCloud)
+            this.DeployVirtualPrivateCloud = obj;
+        }
+        this.DeploySecurityGroupIds = 'DeploySecurityGroupIds' in params ? params.DeploySecurityGroupIds : null;
 
     }
 }
@@ -3241,6 +3614,27 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * Configuration options for MiniOS of the CHC deployment network
+ * @class
+ */
+class ChcDeployExtraConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeDisasterRecoverGroupQuota response structure.
  * @class
  */
@@ -3542,7 +3936,7 @@ class DataDisk extends  AbstractModel {
 
         /**
          * Data disk ID. Note that it’s not available for `LOCAL_BASIC` and `LOCAL_SSD` disks.
-This parameter is only available for the `DescribeInstances` API.
+It is only used as a response parameter for APIs such as `DescribeInstances`, and cannot be used as a request parameter for APIs such as `RunInstances`.
          * @type {string || null}
          */
         this.DiskId = null;
@@ -5427,24 +5821,42 @@ Valid value: 31536000 (1 year)
 }
 
 /**
- * Description of tags associated with resource instances during instance creation.
+ * InquiryPriceResetInstance request structure.
  * @class
  */
-class TagSpecification extends  AbstractModel {
+class InquiryPriceResetInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The type of resource that the tag is bound to. Valid values: `instance` (for CVM), `host` (for CDH) and `image` (for image).
+         * Instance ID. To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response.
          * @type {string || null}
          */
-        this.ResourceType = null;
+        this.InstanceId = null;
 
         /**
-         * List of tags
-         * @type {Array.<Tag> || null}
+         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For IDs of `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information; for IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
+         * @type {string || null}
          */
-        this.Tags = null;
+        this.ImageId = null;
+
+        /**
+         * Configuration of the system disk of the instance. For instances with a cloud disk as the system disk, you can expand the system disk by using this parameter to specify the new capacity after reinstallation. If the parameter is not specified, the system disk capacity remains unchanged by default. You can only expand the capacity of the system disk; reducing its capacity is not supported. When reinstalling the system, you can only modify the capacity of the system disk, not the type.
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Monitor and Cloud Security. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
 
     }
 
@@ -5455,15 +5867,25 @@ class TagSpecification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
 
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
         }
 
     }
@@ -5484,7 +5906,7 @@ class DescribeLaunchTemplatesRequest extends  AbstractModel {
         this.LaunchTemplateIds = null;
 
         /**
-         * <p style="padding-left: 30px;">Filter by [<strong>LaunchTemplateNames</strong>].</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+         * <p style="padding-left: 30px;">Filter by [<strong>LaunchTemplateName</strong>].</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 The maximum number of `Filters` in each request is 10. The upper limit for `Filter.Values` is 5. This parameter cannot specify `LaunchTemplateIds` and `Filters` at the same time.
          * @type {Array.<Filter> || null}
          */
@@ -5613,6 +6035,34 @@ class InstanceFamilyConfig extends  AbstractModel {
         }
         this.InstanceFamilyName = 'InstanceFamilyName' in params ? params.InstanceFamilyName : null;
         this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+
+    }
+}
+
+/**
+ * RemoveChcDeployVpc response structure.
+ * @class
+ */
+class RemoveChcDeployVpcResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5773,6 +6223,72 @@ class SpotMarketOptions extends  AbstractModel {
 }
 
 /**
+ * ConfigureChcAssistVpc request structure.
+ * @class
+ */
+class ConfigureChcAssistVpcRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CHC host IDs
+         * @type {Array.<string> || null}
+         */
+        this.ChcIds = null;
+
+        /**
+         * Out-of-band network information
+         * @type {VirtualPrivateCloud || null}
+         */
+        this.BmcVirtualPrivateCloud = null;
+
+        /**
+         * Out-of-band network security group list
+         * @type {Array.<string> || null}
+         */
+        this.BmcSecurityGroupIds = null;
+
+        /**
+         * Deployment network information
+         * @type {VirtualPrivateCloud || null}
+         */
+        this.DeployVirtualPrivateCloud = null;
+
+        /**
+         * Deployment network security group list
+         * @type {Array.<string> || null}
+         */
+        this.DeploySecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
+
+        if (params.BmcVirtualPrivateCloud) {
+            let obj = new VirtualPrivateCloud();
+            obj.deserialize(params.BmcVirtualPrivateCloud)
+            this.BmcVirtualPrivateCloud = obj;
+        }
+        this.BmcSecurityGroupIds = 'BmcSecurityGroupIds' in params ? params.BmcSecurityGroupIds : null;
+
+        if (params.DeployVirtualPrivateCloud) {
+            let obj = new VirtualPrivateCloud();
+            obj.deserialize(params.DeployVirtualPrivateCloud)
+            this.DeployVirtualPrivateCloud = obj;
+        }
+        this.DeploySecurityGroupIds = 'DeploySecurityGroupIds' in params ? params.DeploySecurityGroupIds : null;
+
+    }
+}
+
+/**
  * DescribeImportImageOs request structure.
  * @class
  */
@@ -5816,6 +6332,12 @@ You can query the project IDs in two ways:
          */
         this.ProjectId = null;
 
+        /**
+         * Tag description list. This parameter is used to bind a tag to a key pair.
+         * @type {Array.<TagSpecification> || null}
+         */
+        this.TagSpecification = null;
+
     }
 
     /**
@@ -5827,6 +6349,15 @@ You can query the project IDs in two ways:
         }
         this.KeyName = 'KeyName' in params ? params.KeyName : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+        if (params.TagSpecification) {
+            this.TagSpecification = new Array();
+            for (let z in params.TagSpecification) {
+                let obj = new TagSpecification();
+                obj.deserialize(params.TagSpecification[z]);
+                this.TagSpecification.push(obj);
+            }
+        }
 
     }
 }
@@ -6584,6 +7115,34 @@ class InquiryPriceResetInstancesInternetMaxBandwidthRequest extends  AbstractMod
  * @class
  */
 class ModifyHostsAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyChcAttribute response structure.
+ * @class
+ */
+class ModifyChcAttributeResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -7442,6 +8001,34 @@ class ExportImagesResponse extends  AbstractModel {
 }
 
 /**
+ * RemoveChcDeployVpc request structure.
+ * @class
+ */
+class RemoveChcDeployVpcRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CHC ID
+         * @type {Array.<string> || null}
+         */
+        this.ChcIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
+
+    }
+}
+
+/**
  * Price of the reserved instance. Currently, RIs are only offered to beta users.
  * @class
  */
@@ -7546,6 +8133,69 @@ Each request can have up to 10 `Filters` and 5 `Filter.Values`.
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyChcAttribute request structure.
+ * @class
+ */
+class ModifyChcAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CHC host IDs
+         * @type {Array.<string> || null}
+         */
+        this.ChcIds = null;
+
+        /**
+         * CHC host name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Server type
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * Valid characters: Letters, numbers, hyphens and underscores
+         * @type {string || null}
+         */
+        this.BmcUser = null;
+
+        /**
+         * The password can contain 8 to 16 characters, including letters, numbers and special symbols (()`~!@#$%^&*-+=_|{}).
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * BMC network security group list
+         * @type {Array.<string> || null}
+         */
+        this.BmcSecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.BmcUser = 'BmcUser' in params ? params.BmcUser : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.BmcSecurityGroupIds = 'BmcSecurityGroupIds' in params ? params.BmcSecurityGroupIds : null;
 
     }
 }
@@ -7787,6 +8437,34 @@ class ModifyDisasterRecoverGroupAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * ConfigureChcAssistVpc response structure.
+ * @class
+ */
+class ConfigureChcAssistVpcResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RebootInstances response structure.
  * @class
  */
@@ -7810,6 +8488,74 @@ class RebootInstancesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeChcHosts request structure.
+ * @class
+ */
+class DescribeChcHostsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CHC host ID. Up to 100 instances per request is allowed. `ChcIds` and `Filters` cannot be specified at the same time.
+         * @type {Array.<string> || null}
+         */
+        this.ChcIds = null;
+
+        /**
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">Filter by the <strong>availability zone</strong>, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
+<li><strong>instance-name</strong></li>
+<p style="padding-left: 30px;">Filter by the <strong>instance name</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+<li><strong>instance-state</strong></li>
+<p style="padding-left: 30px;">Filter by the <strong>instance status</strong>. For status details, see [InstanceStatus](https://intl.cloud.tencent.com/document/api/213/15753?from_cn_redirect=1#InstanceStatus).</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+<li><strong>device-type</strong></li>
+<p style="padding-left: 30px;">Filter by the <strong>device type</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+<li><strong>vpc-id</strong></li>
+<p style="padding-left: 30px;">Filter by the <strong>unique VPC ID</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+<li><strong>subnet-id</strong></li>
+<p style="padding-left: 30px;">Filter by the <strong>unique VPC subnet ID</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The offset. Default value: `0`. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of returned results. Default value: `20`. Maximum value: `100`. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -8561,6 +9307,12 @@ If you want to use the default project, specify 0 for the parameter.
          */
         this.PublicKey = null;
 
+        /**
+         * Tag description list. This parameter is used to bind a tag to a key pair.
+         * @type {Array.<TagSpecification> || null}
+         */
+        this.TagSpecification = null;
+
     }
 
     /**
@@ -8573,6 +9325,15 @@ If you want to use the default project, specify 0 for the parameter.
         this.KeyName = 'KeyName' in params ? params.KeyName : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.PublicKey = 'PublicKey' in params ? params.PublicKey : null;
+
+        if (params.TagSpecification) {
+            this.TagSpecification = new Array();
+            for (let z in params.TagSpecification) {
+                let obj = new TagSpecification();
+                obj.deserialize(params.TagSpecification[z]);
+                this.TagSpecification.push(obj);
+            }
+        }
 
     }
 }
@@ -9435,18 +10196,19 @@ module.exports = {
     AssociateInstancesKeyPairsResponse: AssociateInstancesKeyPairsResponse,
     DescribeImageQuotaResponse: DescribeImageQuotaResponse,
     ModifyInstancesProjectRequest: ModifyInstancesProjectRequest,
+    ConfigureChcDeployVpcResponse: ConfigureChcDeployVpcResponse,
     ResetInstancesTypeResponse: ResetInstancesTypeResponse,
     HostResource: HostResource,
     DeleteDisasterRecoverGroupsRequest: DeleteDisasterRecoverGroupsRequest,
     DescribeInstancesOperationLimitRequest: DescribeInstancesOperationLimitRequest,
     TerminateInstancesResponse: TerminateInstancesResponse,
     ResetInstancesInternetMaxBandwidthResponse: ResetInstancesInternetMaxBandwidthResponse,
-    CreateDisasterRecoverGroupResponse: CreateDisasterRecoverGroupResponse,
+    DescribeZonesRequest: DescribeZonesRequest,
     InquiryPriceResetInstancesInternetMaxBandwidthResponse: InquiryPriceResetInstancesInternetMaxBandwidthResponse,
     ModifyKeyPairAttributeRequest: ModifyKeyPairAttributeRequest,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     ResetInstancesTypeRequest: ResetInstancesTypeRequest,
-    InquiryPriceResetInstanceRequest: InquiryPriceResetInstanceRequest,
+    ChcHost: ChcHost,
     DeleteLaunchTemplateVersionsRequest: DeleteLaunchTemplateVersionsRequest,
     DeleteImagesRequest: DeleteImagesRequest,
     DeleteLaunchTemplateRequest: DeleteLaunchTemplateRequest,
@@ -9456,6 +10218,7 @@ module.exports = {
     SystemDisk: SystemDisk,
     ResetInstanceRequest: ResetInstanceRequest,
     LaunchTemplate: LaunchTemplate,
+    DescribeChcHostsResponse: DescribeChcHostsResponse,
     AllocateHostsRequest: AllocateHostsRequest,
     LoginSettings: LoginSettings,
     DescribeRegionsResponse: DescribeRegionsResponse,
@@ -9471,11 +10234,13 @@ module.exports = {
     ModifyImageSharePermissionResponse: ModifyImageSharePermissionResponse,
     DescribeKeyPairsResponse: DescribeKeyPairsResponse,
     ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
+    RemoveChcAssistVpcResponse: RemoveChcAssistVpcResponse,
     InternetChargeTypeConfig: InternetChargeTypeConfig,
     DescribeImagesResponse: DescribeImagesResponse,
     ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
     CreateKeyPairResponse: CreateKeyPairResponse,
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
+    TagSpecification: TagSpecification,
     ModifyImageSharePermissionRequest: ModifyImageSharePermissionRequest,
     DisassociateInstancesKeyPairsResponse: DisassociateInstancesKeyPairsResponse,
     DescribeLaunchTemplateVersionsRequest: DescribeLaunchTemplateVersionsRequest,
@@ -9486,7 +10251,8 @@ module.exports = {
     SyncImagesResponse: SyncImagesResponse,
     DescribeZoneInstanceConfigInfosResponse: DescribeZoneInstanceConfigInfosResponse,
     ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
-    DescribeZonesRequest: DescribeZonesRequest,
+    CreateDisasterRecoverGroupResponse: CreateDisasterRecoverGroupResponse,
+    RemoveChcAssistVpcRequest: RemoveChcAssistVpcRequest,
     StartInstancesRequest: StartInstancesRequest,
     Tag: Tag,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
@@ -9496,6 +10262,7 @@ module.exports = {
     SyncImagesRequest: SyncImagesRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
     DescribeImageQuotaRequest: DescribeImageQuotaRequest,
+    ConfigureChcDeployVpcRequest: ConfigureChcDeployVpcRequest,
     DescribeInstanceFamilyConfigsResponse: DescribeInstanceFamilyConfigsResponse,
     CreateImageResponse: CreateImageResponse,
     StopInstancesResponse: StopInstancesResponse,
@@ -9504,6 +10271,7 @@ module.exports = {
     DeleteLaunchTemplateVersionsResponse: DeleteLaunchTemplateVersionsResponse,
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
     Image: Image,
+    ChcDeployExtraConfig: ChcDeployExtraConfig,
     DescribeDisasterRecoverGroupQuotaResponse: DescribeDisasterRecoverGroupQuotaResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     CreateDisasterRecoverGroupRequest: CreateDisasterRecoverGroupRequest,
@@ -9529,13 +10297,15 @@ module.exports = {
     ExportImagesRequest: ExportImagesRequest,
     ActionTimer: ActionTimer,
     DescribeReservedInstancesConfigInfosRequest: DescribeReservedInstancesConfigInfosRequest,
-    TagSpecification: TagSpecification,
+    InquiryPriceResetInstanceRequest: InquiryPriceResetInstanceRequest,
     DescribeLaunchTemplatesRequest: DescribeLaunchTemplatesRequest,
     ResetInstancesInternetMaxBandwidthRequest: ResetInstancesInternetMaxBandwidthRequest,
     InstanceFamilyConfig: InstanceFamilyConfig,
+    RemoveChcDeployVpcResponse: RemoveChcDeployVpcResponse,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     ImportImageRequest: ImportImageRequest,
     SpotMarketOptions: SpotMarketOptions,
+    ConfigureChcAssistVpcRequest: ConfigureChcAssistVpcRequest,
     DescribeImportImageOsRequest: DescribeImportImageOsRequest,
     CreateKeyPairRequest: CreateKeyPairRequest,
     InstanceStatus: InstanceStatus,
@@ -9549,6 +10319,7 @@ module.exports = {
     LaunchTemplateInfo: LaunchTemplateInfo,
     InquiryPriceResetInstancesInternetMaxBandwidthRequest: InquiryPriceResetInstancesInternetMaxBandwidthRequest,
     ModifyHostsAttributeResponse: ModifyHostsAttributeResponse,
+    ModifyChcAttributeResponse: ModifyChcAttributeResponse,
     DescribeDisasterRecoverGroupQuotaRequest: DescribeDisasterRecoverGroupQuotaRequest,
     StartInstancesResponse: StartInstancesResponse,
     ModifyInstancesVpcAttributeRequest: ModifyInstancesVpcAttributeRequest,
@@ -9561,8 +10332,10 @@ module.exports = {
     ImageOsList: ImageOsList,
     ReservedInstanceTypeItem: ReservedInstanceTypeItem,
     ExportImagesResponse: ExportImagesResponse,
+    RemoveChcDeployVpcRequest: RemoveChcDeployVpcRequest,
     ReservedInstancePrice: ReservedInstancePrice,
     DescribeHostsRequest: DescribeHostsRequest,
+    ModifyChcAttributeRequest: ModifyChcAttributeRequest,
     DescribeInstancesStatusRequest: DescribeInstancesStatusRequest,
     InquiryPriceResizeInstanceDisksResponse: InquiryPriceResizeInstanceDisksResponse,
     TerminateInstancesRequest: TerminateInstancesRequest,
@@ -9570,7 +10343,9 @@ module.exports = {
     DeleteImagesResponse: DeleteImagesResponse,
     ImportImageResponse: ImportImageResponse,
     ModifyDisasterRecoverGroupAttributeRequest: ModifyDisasterRecoverGroupAttributeRequest,
+    ConfigureChcAssistVpcResponse: ConfigureChcAssistVpcResponse,
     RebootInstancesResponse: RebootInstancesResponse,
+    DescribeChcHostsRequest: DescribeChcHostsRequest,
     InquiryPriceResetInstancesTypeResponse: InquiryPriceResetInstancesTypeResponse,
     CreateLaunchTemplateVersionResponse: CreateLaunchTemplateVersionResponse,
     OsVersion: OsVersion,

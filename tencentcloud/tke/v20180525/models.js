@@ -4720,7 +4720,7 @@ class ClusterCIDRSettings extends  AbstractModel {
         this.IgnoreClusterCIDRConflict = null;
 
         /**
-         * Maximum number of pods on each node in the cluster
+         * Maximum number of Pods on each node. Value range: 16 to 256. When its power is not 2, it will round upward to the closest power of 2.
          * @type {number || null}
          */
         this.MaxNodePodNum = null;
@@ -5296,6 +5296,14 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.InstanceChargeType = null;
 
+        /**
+         * IPv6 address of the instance
+Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.IPv6Addresses = null;
+
     }
 
     /**
@@ -5319,6 +5327,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.IPv6Addresses = 'IPv6Addresses' in params ? params.IPv6Addresses : null;
 
     }
 }

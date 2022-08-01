@@ -55,6 +55,7 @@ const DescribeDomainsResponse = models.DescribeDomainsResponse;
 const DescribePayTypeRequest = models.DescribePayTypeRequest;
 const AdvancedAuthenticationTypeD = models.AdvancedAuthenticationTypeD;
 const CompressionRule = models.CompressionRule;
+const RedirectConfig = models.RedirectConfig;
 const GuetzliAdapter = models.GuetzliAdapter;
 const UpdateScdnDomainResponse = models.UpdateScdnDomainResponse;
 const Origin = models.Origin;
@@ -130,6 +131,7 @@ const DetailDomain = models.DetailDomain;
 const RuleEngine = models.RuleEngine;
 const GetDisableRecordsResponse = models.GetDisableRecordsResponse;
 const Ipv6Access = models.Ipv6Access;
+const HeuristicCache = models.HeuristicCache;
 const ResponseHeader = models.ResponseHeader;
 const CdnIpHistory = models.CdnIpHistory;
 const SummarizedData = models.SummarizedData;
@@ -175,6 +177,7 @@ const DeleteClsLogTopicResponse = models.DeleteClsLogTopicResponse;
 const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const DisableCachesResponse = models.DisableCachesResponse;
 const SchemeKey = models.SchemeKey;
+const StatisticItem = models.StatisticItem;
 const RangeOriginPullRule = models.RangeOriginPullRule;
 const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
 const AdvanceCacheRule = models.AdvanceCacheRule;
@@ -210,6 +213,7 @@ const ResourceBillingData = models.ResourceBillingData;
 const Sort = models.Sort;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const HwPrivateAccess = models.HwPrivateAccess;
+const CacheConfig = models.CacheConfig;
 const PushUrlsCacheResponse = models.PushUrlsCacheResponse;
 const StopCdnDomainResponse = models.StopCdnDomainResponse;
 const QueryStringKey = models.QueryStringKey;
@@ -581,7 +585,6 @@ Note: if you need to update complex configuration items, you must pass all the a
 
     /**
      * This API is used to query the submission record and progress of prefetch tasks.
-This API is in beta test and not fully available yet. Please stay tuned.
      * @param {DescribePushTasksRequest} req
      * @param {function(string, DescribePushTasksResponse):void} cb
      * @public
@@ -592,7 +595,7 @@ This API is in beta test and not fully available yet. Please stay tuned.
     }
 
     /**
-     * This API is used to verify an SSL certificate and extract the domain names. It will then return the list of domain names connected to CDN and the list of domain names with the certificate configured.
+     * This API is used to verify a SSL certificate and obtain its domain names.
      * @param {DescribeCertDomainsRequest} req
      * @param {function(string, DescribeCertDomainsResponse):void} cb
      * @public
@@ -637,7 +640,7 @@ By default, a maximum of 1000 URLs can be prefetched per day for regions either 
     }
 
     /**
-     * This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5-15 minutes.
+     * This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5–15 minutes.
 
      * @param {DisableClsLogTopicRequest} req
      * @param {function(string, DisableClsLogTopicResponse):void} cb
@@ -682,7 +685,7 @@ By default, a maximum of 1000 URLs can be prefetched per day for regions either 
     }
 
     /**
-     * This API is used to delete a log topic. Note: when a log topic is deleted, all logs of the domain names bound to it will no longer be published to the topic, and the logs previously published to the topic will be deleted. This action will take effect within 5-15 minutes.
+     * This API is used to delete a log topic. Note: when a log topic is deleted, all logs of the domain names bound to it will no longer be published to the topic, and the logs previously published to the topic will be deleted. This action will take effect within 5–15 minutes.
      * @param {DeleteClsLogTopicRequest} req
      * @param {function(string, DeleteClsLogTopicResponse):void} cb
      * @public
@@ -693,7 +696,7 @@ By default, a maximum of 1000 URLs can be prefetched per day for regions either 
     }
 
     /**
-     * This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon. Please call `DescribeIpStatus` instead.
+     * This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon and no longer be maintained. Please call `DescribeIpStatus` instead.
      * @param {DescribeCdnOriginIpRequest} req
      * @param {function(string, DescribeCdnOriginIpResponse):void} cb
      * @public
@@ -726,7 +729,7 @@ By default, a maximum of 1000 URLs can be prefetched per day for regions either 
     }
 
     /**
-     * This API is used to start publishing to a log topic. Note: after a log topic is enabled, all logs of the domain names bound to the topic will be published to it. This action will take effect within 5-15 minutes.
+     * This API is used to start publishing to a log topic. Note: after a log topic is enabled, all logs of the domain names bound to the topic will be published to it. This action will take effect within 5–15 minutes.
      * @param {EnableClsLogTopicRequest} req
      * @param {function(string, EnableClsLogTopicResponse):void} cb
      * @public

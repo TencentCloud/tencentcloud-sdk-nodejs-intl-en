@@ -26,6 +26,7 @@ module.exports = {
     dcdb: require("./dcdb"),
     dlc: require("./dlc"),
     dms: require("./dms"),
+    dnspod: require("./dnspod"),
     dts: require("./dts"),
     eb: require("./eb"),
     ecdn: require("./ecdn"),

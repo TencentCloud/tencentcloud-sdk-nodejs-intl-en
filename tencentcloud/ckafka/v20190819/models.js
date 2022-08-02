@@ -7217,6 +7217,12 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
          */
         this.QuotaConsumerByteRate = null;
 
+        /**
+         * The number of topic replicas.
+         * @type {number || null}
+         */
+        this.ReplicaNum = null;
+
     }
 
     /**
@@ -7251,6 +7257,7 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
         }
         this.QuotaProducerByteRate = 'QuotaProducerByteRate' in params ? params.QuotaProducerByteRate : null;
         this.QuotaConsumerByteRate = 'QuotaConsumerByteRate' in params ? params.QuotaConsumerByteRate : null;
+        this.ReplicaNum = 'ReplicaNum' in params ? params.ReplicaNum : null;
 
     }
 }
@@ -7712,7 +7719,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ClusterType = null;
 
         /**
-         * 
+         * Instance feature list.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Features = null;

@@ -104,7 +104,7 @@ class GeneralBasicOCRResponse extends  AbstractModel {
         this.Language = null;
 
         /**
-         * Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>.
+         * Image rotation angle in degrees. 0°: The horizontal direction of the text on the image; a positive value: rotate clockwise; a negative value: rotate counterclockwise.
          * @type {number || null}
          */
         this.Angel = null;
@@ -178,146 +178,6 @@ class DetectedWords extends  AbstractModel {
         }
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.Character = 'Character' in params ? params.Character : null;
-
-    }
-}
-
-/**
- * Form recognition result.
- * @class
- */
-class TextTable extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Column index of the top-left corner of the cell.
-         * @type {number || null}
-         */
-        this.ColTl = null;
-
-        /**
-         * Row index of the top-left corner of the cell.
-         * @type {number || null}
-         */
-        this.RowTl = null;
-
-        /**
-         * Column index of the bottom-right corner of the cell.
-         * @type {number || null}
-         */
-        this.ColBr = null;
-
-        /**
-         * Row index of the bottom-right corner of the cell.
-         * @type {number || null}
-         */
-        this.RowBr = null;
-
-        /**
-         * Cell text
-         * @type {string || null}
-         */
-        this.Text = null;
-
-        /**
-         * Cell type. Valid values: body, header, footer
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Confidence. Value range: 0–100
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Text line coordinates, which are represented as 4 vertex coordinates.
-         * @type {Array.<Coord> || null}
-         */
-        this.Polygon = null;
-
-        /**
-         * Extended field
-         * @type {string || null}
-         */
-        this.AdvancedInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ColTl = 'ColTl' in params ? params.ColTl : null;
-        this.RowTl = 'RowTl' in params ? params.RowTl : null;
-        this.ColBr = 'ColBr' in params ? params.ColBr : null;
-        this.RowBr = 'RowBr' in params ? params.RowBr : null;
-        this.Text = 'Text' in params ? params.Text : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-
-        if (params.Polygon) {
-            this.Polygon = new Array();
-            for (let z in params.Polygon) {
-                let obj = new Coord();
-                obj.deserialize(params.Polygon[z]);
-                this.Polygon.push(obj);
-            }
-        }
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
-
-    }
-}
-
-/**
- * MLIDCardOCR request structure.
- * @class
- */
-class MLIDCardOCRRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Base64-encoded value of an image.
-Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-        /**
-         * URL of an image. (This field is not supported outside the Chinese mainland)
-Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
-The download speed and stability of non-Tencent Cloud URLs may be low.
-         * @type {string || null}
-         */
-        this.ImageUrl = null;
-
-        /**
-         * Whether to return an image
-         * @type {boolean || null}
-         */
-        this.RetImage = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.RetImage = 'RetImage' in params ? params.RetImage : null;
 
     }
 }
@@ -910,7 +770,7 @@ class GeneralAccurateOCRResponse extends  AbstractModel {
         this.TextDetections = null;
 
         /**
-         * Image rotation angle in degrees. 0° indicates horizontal text. A positive value indicates clockwise rotation. A negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>.
+         * Image rotation angle in degrees. 0°: The horizontal direction of the text on the image; a positive value: rotate clockwise; a negative value: rotate counterclockwise.
          * @type {number || null}
          */
         this.Angel = null;
@@ -1213,91 +1073,66 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * MLIDCardOCR response structure.
+ * Form recognition result.
  * @class
  */
-class MLIDCardOCRResponse extends  AbstractModel {
+class TextTable extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Identity card number
+         * Column index of the top-left corner of the cell.
+         * @type {number || null}
+         */
+        this.ColTl = null;
+
+        /**
+         * Row index of the top-left corner of the cell.
+         * @type {number || null}
+         */
+        this.RowTl = null;
+
+        /**
+         * Column index of the bottom-right corner of the cell.
+         * @type {number || null}
+         */
+        this.ColBr = null;
+
+        /**
+         * Row index of the bottom-right corner of the cell.
+         * @type {number || null}
+         */
+        this.RowBr = null;
+
+        /**
+         * Cell text
          * @type {string || null}
          */
-        this.ID = null;
+        this.Text = null;
 
         /**
-         * Name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Address
-         * @type {string || null}
-         */
-        this.Address = null;
-
-        /**
-         * Gender
-         * @type {string || null}
-         */
-        this.Sex = null;
-
-        /**
-         * Warning code
--9103 Warning for spoofed card
--9102 Warning for photocopied card
--9106 Warning for covered card
--9107 Warning for blurry image
-         * @type {Array.<number> || null}
-         */
-        this.Warn = null;
-
-        /**
-         * Identity photo
-         * @type {string || null}
-         */
-        this.Image = null;
-
-        /**
-         * Extended field:
-{
-    ID:{
-        Confidence:0.9999
-    },
-    Name:{
-        Confidence:0.9996
-    }
-}
-         * @type {string || null}
-         */
-        this.AdvancedInfo = null;
-
-        /**
-         * Certificate type
-MyKad  ID card
-MyPR    Permanent resident card
-MyTentera   Military identity card
-MyKAS    Temporary ID card
-POLIS  Police card
-IKAD   Work permit
-MyKid   Kid card
+         * Cell type. Valid values: body, header, footer
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Date of birth (currently, this field is only supported for IKAD).
-         * @type {string || null}
+         * Confidence. Value range: 0–100
+         * @type {number || null}
          */
-        this.Birthday = null;
+        this.Confidence = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Text line coordinates, which are represented as 4 vertex coordinates.
+         * @type {Array.<Coord> || null}
+         */
+        this.Polygon = null;
+
+        /**
+         * Extended field
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AdvancedInfo = null;
 
     }
 
@@ -1308,16 +1143,23 @@ MyKid   Kid card
         if (!params) {
             return;
         }
-        this.ID = 'ID' in params ? params.ID : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Address = 'Address' in params ? params.Address : null;
-        this.Sex = 'Sex' in params ? params.Sex : null;
-        this.Warn = 'Warn' in params ? params.Warn : null;
-        this.Image = 'Image' in params ? params.Image : null;
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+        this.ColTl = 'ColTl' in params ? params.ColTl : null;
+        this.RowTl = 'RowTl' in params ? params.RowTl : null;
+        this.ColBr = 'ColBr' in params ? params.ColBr : null;
+        this.RowBr = 'RowBr' in params ? params.RowBr : null;
+        this.Text = 'Text' in params ? params.Text : null;
         this.Type = 'Type' in params ? params.Type : null;
-        this.Birthday = 'Birthday' in params ? params.Birthday : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.Polygon) {
+            this.Polygon = new Array();
+            for (let z in params.Polygon) {
+                let obj = new Coord();
+                obj.deserialize(params.Polygon[z]);
+                this.Polygon.push(obj);
+            }
+        }
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
 
     }
 }
@@ -1424,8 +1266,6 @@ module.exports = {
     GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
     DetectedWords: DetectedWords,
-    TextTable: TextTable,
-    MLIDCardOCRRequest: MLIDCardOCRRequest,
     TableOCRRequest: TableOCRRequest,
     TableOCRResponse: TableOCRResponse,
     DetectedWordCoordPoint: DetectedWordCoordPoint,
@@ -1439,7 +1279,7 @@ module.exports = {
     TextDetection: TextDetection,
     MLIDPassportOCRRequest: MLIDPassportOCRRequest,
     HKIDCardOCRResponse: HKIDCardOCRResponse,
-    MLIDCardOCRResponse: MLIDCardOCRResponse,
+    TextTable: TextTable,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,
 
 }

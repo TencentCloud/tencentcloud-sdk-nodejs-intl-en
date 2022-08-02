@@ -19,8 +19,6 @@ const AbstractClient = require('../../common/abstract_client')
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
 const DetectedWords = models.DetectedWords;
-const TextTable = models.TextTable;
-const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
 const TableOCRRequest = models.TableOCRRequest;
 const TableOCRResponse = models.TableOCRResponse;
 const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
@@ -34,7 +32,7 @@ const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const TextDetection = models.TextDetection;
 const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
 const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
-const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
+const TextTable = models.TextTable;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 
 
@@ -72,19 +70,6 @@ This API is not fully available for the time being. For more information, please
     TableOCR(req, cb) {
         let resp = new TableOCRResponse();
         this.request("TableOCR", req, resp, cb);
-    }
-
-    /**
-     * This API is used to recognize a Malaysian identity card. Recognizable fields include identity card number, name, gender, and address. It has the features of cropping identity photos and alarming for photographed or photocopied documents.
-
-This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
-     * @param {MLIDCardOCRRequest} req
-     * @param {function(string, MLIDCardOCRResponse):void} cb
-     * @public
-     */
-    MLIDCardOCR(req, cb) {
-        let resp = new MLIDCardOCRResponse();
-        this.request("MLIDCardOCR", req, resp, cb);
     }
 
     /**

@@ -35,6 +35,7 @@ const CreateLogExportRequest = models.CreateLogExportRequest;
 const DescribePvListResponse = models.DescribePvListResponse;
 const RumUvInfo = models.RumUvInfo;
 const DescribeOfflineLogsRequest = models.DescribeOfflineLogsRequest;
+const DescribeScoresRequest = models.DescribeScoresRequest;
 const DescribeDataReportCountRequest = models.DescribeDataReportCountRequest;
 const DeleteOfflineLogRecordRequest = models.DeleteOfflineLogRecordRequest;
 const DescribeReleaseFilesRequest = models.DescribeReleaseFilesRequest;
@@ -90,11 +91,13 @@ const DeleteWhitelistRequest = models.DeleteWhitelistRequest;
 const DescribeDataLogUrlInfoResponse = models.DescribeDataLogUrlInfoResponse;
 const RumPvInfo = models.RumPvInfo;
 const DeleteReleaseFileResponse = models.DeleteReleaseFileResponse;
+const DescribeScoresResponse = models.DescribeScoresResponse;
 const DescribeOfflineLogConfigsResponse = models.DescribeOfflineLogConfigsResponse;
 const DeleteLogExportResponse = models.DeleteLogExportResponse;
 const DescribeReleaseFileSignResponse = models.DescribeReleaseFileSignResponse;
 const DescribeOfflineLogsResponse = models.DescribeOfflineLogsResponse;
 const DescribeTawAreasRequest = models.DescribeTawAreasRequest;
+const Filter = models.Filter;
 const DescribeDataLogUrlStatisticsRequest = models.DescribeDataLogUrlStatisticsRequest;
 const DeleteStarProjectResponse = models.DeleteStarProjectResponse;
 const DescribeDataPerformancePageResponse = models.DescribeDataPerformancePageResponse;
@@ -109,10 +112,13 @@ const DescribeReleaseFilesResponse = models.DescribeReleaseFilesResponse;
 const CreateOfflineLogConfigRequest = models.CreateOfflineLogConfigRequest;
 const DescribeDataStaticUrlResponse = models.DescribeDataStaticUrlResponse;
 const CreateWhitelistResponse = models.CreateWhitelistResponse;
+const ScoreInfo = models.ScoreInfo;
 const DescribeDataWebVitalsPageResponse = models.DescribeDataWebVitalsPageResponse;
+const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeDataEventUrlRequest = models.DescribeDataEventUrlRequest;
 const DescribeOfflineLogConfigsRequest = models.DescribeOfflineLogConfigsRequest;
 const DeleteOfflineLogConfigRequest = models.DeleteOfflineLogConfigRequest;
+const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const ModifyProjectResponse = models.ModifyProjectResponse;
 const DescribeLogExportsRequest = models.DescribeLogExportsRequest;
 const DescribeDataReportCountResponse = models.DescribeDataReportCountResponse;
@@ -125,6 +131,7 @@ const CreateReleaseFileResponse = models.CreateReleaseFileResponse;
 const CreateLogExportResponse = models.CreateLogExportResponse;
 const DescribeDataFetchProjectResponse = models.DescribeDataFetchProjectResponse;
 const Whitelist = models.Whitelist;
+const RumProject = models.RumProject;
 const DescribeDataSetUrlStatisticsResponse = models.DescribeDataSetUrlStatisticsResponse;
 
 
@@ -158,6 +165,17 @@ class RumClient extends AbstractClient {
     CreateReleaseFile(req, cb) {
         let resp = new CreateReleaseFileResponse();
         this.request("CreateReleaseFile", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of homepage scores.
+     * @param {DescribeScoresRequest} req
+     * @param {function(string, DescribeScoresResponse):void} cb
+     * @public
+     */
+    DescribeScores(req, cb) {
+        let resp = new DescribeScoresResponse();
+        this.request("DescribeScores", req, resp, cb);
     }
 
     /**
@@ -445,14 +463,14 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
-     * This API is used to modify a RUM project.
-     * @param {ModifyProjectRequest} req
-     * @param {function(string, ModifyProjectResponse):void} cb
+     * This API is used to get the list of projects (under teams created by an instance).
+     * @param {DescribeProjectsRequest} req
+     * @param {function(string, DescribeProjectsResponse):void} cb
      * @public
      */
-    ModifyProject(req, cb) {
-        let resp = new ModifyProjectResponse();
-        this.request("ModifyProject", req, resp, cb);
+    DescribeProjects(req, cb) {
+        let resp = new DescribeProjectsResponse();
+        this.request("DescribeProjects", req, resp, cb);
     }
 
     /**
@@ -497,6 +515,17 @@ Default API request rate limit: 20 requests/sec.
     StopInstance(req, cb) {
         let resp = new StopInstanceResponse();
         this.request("StopInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a RUM project.
+     * @param {ModifyProjectRequest} req
+     * @param {function(string, ModifyProjectResponse):void} cb
+     * @public
+     */
+    ModifyProject(req, cb) {
+        let resp = new ModifyProjectResponse();
+        this.request("ModifyProject", req, resp, cb);
     }
 
     /**

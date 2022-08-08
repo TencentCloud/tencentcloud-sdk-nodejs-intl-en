@@ -2576,6 +2576,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ResourceTags = null;
 
+        /**
+         * Database engine version
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DbVersionId = null;
+
     }
 
     /**
@@ -2650,6 +2657,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.ResourceTags.push(obj);
             }
         }
+        this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
 
     }
 }

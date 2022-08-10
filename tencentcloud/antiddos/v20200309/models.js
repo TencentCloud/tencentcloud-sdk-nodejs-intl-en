@@ -1889,10 +1889,16 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
         this.FilterInstanceIdList = null;
 
         /**
-         * 
+         * Searches by tag
          * @type {TagFilter || null}
          */
         this.FilterTag = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.FilterPackType = null;
 
     }
 
@@ -1922,6 +1928,7 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
             obj.deserialize(params.FilterTag)
             this.FilterTag = obj;
         }
+        this.FilterPackType = 'FilterPackType' in params ? params.FilterPackType : null;
 
     }
 }
@@ -2123,34 +2130,6 @@ class DescribeListPacketFilterConfigResponse extends  AbstractModel {
 }
 
 /**
- * DeleteBlackWhiteIpList response structure.
- * @class
- */
-class DeleteBlackWhiteIpListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateSchedulingDomain request structure.
  * @class
  */
@@ -2288,48 +2267,6 @@ class DeleteCCThresholdPolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteBlackWhiteIpList request structure.
- * @class
- */
-class DeleteBlackWhiteIpListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Anti-DDoS instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * List of IPs
-         * @type {Array.<string> || null}
-         */
-        this.IpList = null;
-
-        /**
-         * IP type. Valid values: `black` (blocklisted IP), `white`(allowlisted IP).
-         * @type {string || null}
-         */
-        this.Type = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.IpList = 'IpList' in params ? params.IpList : null;
-        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -2530,6 +2467,12 @@ class BlackWhiteIpRelation extends  AbstractModel {
          */
         this.Mask = null;
 
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
     }
 
     /**
@@ -2551,6 +2494,7 @@ class BlackWhiteIpRelation extends  AbstractModel {
             }
         }
         this.Mask = 'Mask' in params ? params.Mask : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -3105,7 +3049,7 @@ class DescribeCCLevelListResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * Details of level-defining policies
+         * Total number of level-defining policies
          * @type {Array.<CCLevelPolicy> || null}
          */
         this.LevelList = null;
@@ -4046,10 +3990,23 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.BGPIPChannelFlag = null;
 
         /**
-         * 
+         * Tag that the Anti-DDoS Advanced instance is associated with
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<TagInfo> || null}
          */
         this.TagInfoList = null;
+
+        /**
+         * 
+         * @type {AnycastOutPackRelation || null}
+         */
+        this.AnycastOutPackRelation = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InstanceVersion = null;
 
     }
 
@@ -4129,6 +4086,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
                 this.TagInfoList.push(obj);
             }
         }
+
+        if (params.AnycastOutPackRelation) {
+            let obj = new AnycastOutPackRelation();
+            obj.deserialize(params.AnycastOutPackRelation)
+            this.AnycastOutPackRelation = obj;
+        }
+        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
 
     }
 }
@@ -4856,7 +4820,7 @@ class ListenerCcThreholdConfig extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Protocol. Value: htttps
+         * Protocol. Value: `https`.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -5546,42 +5510,36 @@ Note: For custom protocol ranges, only protocol number is supported. Multiple ra
 }
 
 /**
- * AssociateDDoSEipLoadBalancer request structure.
+ * 
  * @class
  */
-class AssociateDDoSEipLoadBalancerRequest extends  AbstractModel {
+class AnycastOutPackRelation extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Anti-DDoS instance ID (only Anti-DDoS Advanced). For example, `bgpip-0000011x`.
-         * @type {string || null}
+         * 
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.NormalBandwidth = null;
 
         /**
-         * EIP of the Anti-DDoS instance ID.
-         * @type {string || null}
+         * 
+         * @type {number || null}
          */
-        this.Eip = null;
+        this.ForwardRulesLimit = null;
 
         /**
-         * ID of the CLB to bind, such as `lb-0000002i`. It can be queried in the console or obtained from `LoadBalancerId` returned by the `DescribeLoadBalancers` API.
-         * @type {string || null}
+         * 
+         * @type {number || null}
          */
-        this.LoadBalancerID = null;
+        this.AutoRenewFlag = null;
 
         /**
-         * Region of the CLB instance, such as `ap-hongkong`.
+         * 
          * @type {string || null}
          */
-        this.LoadBalancerRegion = null;
-
-        /**
-         * CLB private IP
-         * @type {string || null}
-         */
-        this.Vip = null;
+        this.CurDeadline = null;
 
     }
 
@@ -5592,11 +5550,10 @@ class AssociateDDoSEipLoadBalancerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Eip = 'Eip' in params ? params.Eip : null;
-        this.LoadBalancerID = 'LoadBalancerID' in params ? params.LoadBalancerID : null;
-        this.LoadBalancerRegion = 'LoadBalancerRegion' in params ? params.LoadBalancerRegion : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.NormalBandwidth = 'NormalBandwidth' in params ? params.NormalBandwidth : null;
+        this.ForwardRulesLimit = 'ForwardRulesLimit' in params ? params.ForwardRulesLimit : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.CurDeadline = 'CurDeadline' in params ? params.CurDeadline : null;
 
     }
 }
@@ -5716,6 +5673,56 @@ class CreateDefaultAlarmThresholdResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeListSchedulingDomain response structure.
+ * @class
+ */
+class DescribeListSchedulingDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of lists
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * List of scheduling domain names
+         * @type {Array.<SchedulingDomainInfo> || null}
+         */
+        this.DomainList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.DomainList) {
+            this.DomainList = new Array();
+            for (let z in params.DomainList) {
+                let obj = new SchedulingDomainInfo();
+                obj.deserialize(params.DomainList[z]);
+                this.DomainList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -7496,30 +7503,42 @@ class SwitchWaterPrintConfigRequest extends  AbstractModel {
 }
 
 /**
- * DescribeListSchedulingDomain response structure.
+ * AssociateDDoSEipLoadBalancer request structure.
  * @class
  */
-class DescribeListSchedulingDomainResponse extends  AbstractModel {
+class AssociateDDoSEipLoadBalancerRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of lists
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * List of scheduling domain names
-         * @type {Array.<SchedulingDomainInfo> || null}
-         */
-        this.DomainList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Anti-DDoS instance ID (only Anti-DDoS Advanced). For example, `bgpip-0000011x`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * EIP of the Anti-DDoS instance ID.
+         * @type {string || null}
+         */
+        this.Eip = null;
+
+        /**
+         * ID of the CLB to bind, such as `lb-0000002i`. It can be queried in the console or obtained from `LoadBalancerId` returned by the `DescribeLoadBalancers` API.
+         * @type {string || null}
+         */
+        this.LoadBalancerID = null;
+
+        /**
+         * Region of the CLB instance, such as `ap-hongkong`.
+         * @type {string || null}
+         */
+        this.LoadBalancerRegion = null;
+
+        /**
+         * CLB private IP
+         * @type {string || null}
+         */
+        this.Vip = null;
 
     }
 
@@ -7530,17 +7549,11 @@ class DescribeListSchedulingDomainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-
-        if (params.DomainList) {
-            this.DomainList = new Array();
-            for (let z in params.DomainList) {
-                let obj = new SchedulingDomainInfo();
-                obj.deserialize(params.DomainList[z]);
-                this.DomainList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Eip = 'Eip' in params ? params.Eip : null;
+        this.LoadBalancerID = 'LoadBalancerID' in params ? params.LoadBalancerID : null;
+        this.LoadBalancerRegion = 'LoadBalancerRegion' in params ? params.LoadBalancerRegion : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
 
     }
 }
@@ -8119,7 +8132,7 @@ class DescribeListBGPInstancesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Tag information, which is used to return the tag of the associated instance
  * @class
  */
 class TagInfo extends  AbstractModel {
@@ -8127,13 +8140,13 @@ class TagInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Tag key
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * 
+         * Tag value
          * @type {string || null}
          */
         this.TagValue = null;
@@ -8854,7 +8867,7 @@ class DescribeListWaterPrintConfigResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Tag type
  * @class
  */
 class TagFilter extends  AbstractModel {
@@ -8862,13 +8875,13 @@ class TagFilter extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Tag key
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
-         * 
+         * Tag value
          * @type {Array.<string> || null}
          */
         this.TagValue = null;
@@ -9263,6 +9276,12 @@ class CreateCCReqLimitPolicyRequest extends  AbstractModel {
          */
         this.Policy = null;
 
+        /**
+         * Whether it’s a global CC frequency limit
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
     }
 
     /**
@@ -9282,6 +9301,7 @@ class CreateCCReqLimitPolicyRequest extends  AbstractModel {
             obj.deserialize(params.Policy)
             this.Policy = obj;
         }
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
 
     }
 }
@@ -9591,6 +9611,12 @@ class PacketFilterRelation extends  AbstractModel {
          */
         this.InstanceDetailList = null;
 
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
     }
 
     /**
@@ -9615,6 +9641,7 @@ class PacketFilterRelation extends  AbstractModel {
                 this.InstanceDetailList.push(obj);
             }
         }
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
 
     }
 }
@@ -9823,12 +9850,10 @@ module.exports = {
     DescribeCCThresholdListResponse: DescribeCCThresholdListResponse,
     DescribeL7RulesBySSLCertIdRequest: DescribeL7RulesBySSLCertIdRequest,
     DescribeListPacketFilterConfigResponse: DescribeListPacketFilterConfigResponse,
-    DeleteBlackWhiteIpListResponse: DeleteBlackWhiteIpListResponse,
     CreateSchedulingDomainRequest: CreateSchedulingDomainRequest,
     BoundIpInfo: BoundIpInfo,
     DisassociateDDoSEipAddressResponse: DisassociateDDoSEipAddressResponse,
     DeleteCCThresholdPolicyResponse: DeleteCCThresholdPolicyResponse,
-    DeleteBlackWhiteIpListRequest: DeleteBlackWhiteIpListRequest,
     SourceServer: SourceServer,
     ModifyDomainUsrNameResponse: ModifyDomainUsrNameResponse,
     ModifyCcBlackWhiteIpListResponse: ModifyCcBlackWhiteIpListResponse,
@@ -9894,10 +9919,11 @@ module.exports = {
     CreateL7RuleCertsResponse: CreateL7RuleCertsResponse,
     CreateCCPrecisionPolicyRequest: CreateCCPrecisionPolicyRequest,
     DDoSSpeedLimitConfig: DDoSSpeedLimitConfig,
-    AssociateDDoSEipLoadBalancerRequest: AssociateDDoSEipLoadBalancerRequest,
+    AnycastOutPackRelation: AnycastOutPackRelation,
     DescribeListProtectThresholdConfigResponse: DescribeListProtectThresholdConfigResponse,
     CertIdInsL7Rules: CertIdInsL7Rules,
     CreateDefaultAlarmThresholdResponse: CreateDefaultAlarmThresholdResponse,
+    DescribeListSchedulingDomainResponse: DescribeListSchedulingDomainResponse,
     DescribeListIPAlarmConfigResponse: DescribeListIPAlarmConfigResponse,
     CcGeoIpPolicyNew: CcGeoIpPolicyNew,
     SuccessCode: SuccessCode,
@@ -9929,7 +9955,7 @@ module.exports = {
     CreateBoundIPResponse: CreateBoundIPResponse,
     SpeedValue: SpeedValue,
     SwitchWaterPrintConfigRequest: SwitchWaterPrintConfigRequest,
-    DescribeListSchedulingDomainResponse: DescribeListSchedulingDomainResponse,
+    AssociateDDoSEipLoadBalancerRequest: AssociateDDoSEipLoadBalancerRequest,
     ModifyCCPrecisionPolicyRequest: ModifyCCPrecisionPolicyRequest,
     CCThresholdPolicy: CCThresholdPolicy,
     DescribeCCTrendResponse: DescribeCCTrendResponse,

@@ -60,12 +60,10 @@ const StaticPackRelation = models.StaticPackRelation;
 const DescribeCCThresholdListResponse = models.DescribeCCThresholdListResponse;
 const DescribeL7RulesBySSLCertIdRequest = models.DescribeL7RulesBySSLCertIdRequest;
 const DescribeListPacketFilterConfigResponse = models.DescribeListPacketFilterConfigResponse;
-const DeleteBlackWhiteIpListResponse = models.DeleteBlackWhiteIpListResponse;
 const CreateSchedulingDomainRequest = models.CreateSchedulingDomainRequest;
 const BoundIpInfo = models.BoundIpInfo;
 const DisassociateDDoSEipAddressResponse = models.DisassociateDDoSEipAddressResponse;
 const DeleteCCThresholdPolicyResponse = models.DeleteCCThresholdPolicyResponse;
-const DeleteBlackWhiteIpListRequest = models.DeleteBlackWhiteIpListRequest;
 const SourceServer = models.SourceServer;
 const ModifyDomainUsrNameResponse = models.ModifyDomainUsrNameResponse;
 const ModifyCcBlackWhiteIpListResponse = models.ModifyCcBlackWhiteIpListResponse;
@@ -131,10 +129,11 @@ const IpSegment = models.IpSegment;
 const CreateL7RuleCertsResponse = models.CreateL7RuleCertsResponse;
 const CreateCCPrecisionPolicyRequest = models.CreateCCPrecisionPolicyRequest;
 const DDoSSpeedLimitConfig = models.DDoSSpeedLimitConfig;
-const AssociateDDoSEipLoadBalancerRequest = models.AssociateDDoSEipLoadBalancerRequest;
+const AnycastOutPackRelation = models.AnycastOutPackRelation;
 const DescribeListProtectThresholdConfigResponse = models.DescribeListProtectThresholdConfigResponse;
 const CertIdInsL7Rules = models.CertIdInsL7Rules;
 const CreateDefaultAlarmThresholdResponse = models.CreateDefaultAlarmThresholdResponse;
+const DescribeListSchedulingDomainResponse = models.DescribeListSchedulingDomainResponse;
 const DescribeListIPAlarmConfigResponse = models.DescribeListIPAlarmConfigResponse;
 const CcGeoIpPolicyNew = models.CcGeoIpPolicyNew;
 const SuccessCode = models.SuccessCode;
@@ -166,7 +165,7 @@ const DeleteCcBlackWhiteIpListResponse = models.DeleteCcBlackWhiteIpListResponse
 const CreateBoundIPResponse = models.CreateBoundIPResponse;
 const SpeedValue = models.SpeedValue;
 const SwitchWaterPrintConfigRequest = models.SwitchWaterPrintConfigRequest;
-const DescribeListSchedulingDomainResponse = models.DescribeListSchedulingDomainResponse;
+const AssociateDDoSEipLoadBalancerRequest = models.AssociateDDoSEipLoadBalancerRequest;
 const ModifyCCPrecisionPolicyRequest = models.ModifyCCPrecisionPolicyRequest;
 const CCThresholdPolicy = models.CCThresholdPolicy;
 const DescribeCCTrendResponse = models.DescribeCCTrendResponse;
@@ -541,7 +540,7 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of CC protection levels.
+     * Gets the list of CC protection levels
      * @param {DescribeCCLevelListRequest} req
      * @param {function(string, DescribeCCLevelListResponse):void} cb
      * @public
@@ -748,17 +747,6 @@ class AntiddosClient extends AbstractClient {
     CreateCCPrecisionPolicy(req, cb) {
         let resp = new CreateCCPrecisionPolicyResponse();
         this.request("CreateCCPrecisionPolicy", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete an Anti-DDoS IP blocklist/allowlist.
-     * @param {DeleteBlackWhiteIpListRequest} req
-     * @param {function(string, DeleteBlackWhiteIpListResponse):void} cb
-     * @public
-     */
-    DeleteBlackWhiteIpList(req, cb) {
-        let resp = new DeleteBlackWhiteIpListResponse();
-        this.request("DeleteBlackWhiteIpList", req, resp, cb);
     }
 
     /**

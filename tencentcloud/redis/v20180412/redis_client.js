@@ -73,6 +73,7 @@ const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const InstanceTagInfo = models.InstanceTagInfo;
 const DescribeInstanceDTSInfoResponse = models.DescribeInstanceDTSInfoResponse;
+const ChangeMasterInstanceResponse = models.ChangeMasterInstanceResponse;
 const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
 const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
 const ChangeReplicaToMasterRequest = models.ChangeReplicaToMasterRequest;
@@ -81,7 +82,7 @@ const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const RedisCommonInstanceList = models.RedisCommonInstanceList;
 const SourceInfo = models.SourceInfo;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
-const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
+const ChangeMasterInstanceRequest = models.ChangeMasterInstanceRequest;
 const DescribeInstanceDTSInfoRequest = models.DescribeInstanceDTSInfoRequest;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const DescribeTendisSlowLogResponse = models.DescribeTendisSlowLogResponse;
@@ -160,7 +161,9 @@ const DeleteParamTemplateRequest = models.DeleteParamTemplateRequest;
 const DescribeAutoBackupConfigRequest = models.DescribeAutoBackupConfigRequest;
 const DescribeInstanceMonitorSIPResponse = models.DescribeInstanceMonitorSIPResponse;
 const DestroyPostpaidInstanceRequest = models.DestroyPostpaidInstanceRequest;
+const ChangeInstanceRoleRequest = models.ChangeInstanceRoleRequest;
 const DeleteInstanceAccountRequest = models.DeleteInstanceAccountRequest;
+const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
 const DescribeReplicationGroupResponse = models.DescribeReplicationGroupResponse;
@@ -205,6 +208,7 @@ const DeleteInstanceAccountResponse = models.DeleteInstanceAccountResponse;
 const DescribeInstanceMonitorSIPRequest = models.DescribeInstanceMonitorSIPRequest;
 const InstanceClusterShard = models.InstanceClusterShard;
 const TendisSlowLogDetail = models.TendisSlowLogDetail;
+const ChangeInstanceRoleResponse = models.ChangeInstanceRoleResponse;
 const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
 const ZoneCapacityConf = models.ZoneCapacityConf;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
@@ -460,6 +464,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to deisolate an instance.
+     * @param {StartupInstanceRequest} req
+     * @param {function(string, StartupInstanceResponse):void} cb
+     * @public
+     */
+    StartupInstance(req, cb) {
+        let resp = new StartupInstanceResponse();
+        this.request("StartupInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of Redis instances.
      * @param {DescribeInstancesRequest} req
      * @param {function(string, DescribeInstancesResponse):void} cb
@@ -559,14 +574,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a Redis instance.
-     * @param {CreateInstancesRequest} req
-     * @param {function(string, CreateInstancesResponse):void} cb
+     * This API is used to clear the data of a Redis instance.
+     * @param {ClearInstanceRequest} req
+     * @param {function(string, ClearInstanceResponse):void} cb
      * @public
      */
-    CreateInstances(req, cb) {
-        let resp = new CreateInstancesResponse();
-        this.request("CreateInstances", req, resp, cb);
+    ClearInstance(req, cb) {
+        let resp = new ClearInstanceResponse();
+        this.request("ClearInstance", req, resp, cb);
     }
 
     /**
@@ -801,6 +816,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to switch with master instance in a replication group.
+     * @param {ChangeMasterInstanceRequest} req
+     * @param {function(string, ChangeMasterInstanceResponse):void} cb
+     * @public
+     */
+    ChangeMasterInstance(req, cb) {
+        let resp = new ChangeMasterInstanceResponse();
+        this.request("ChangeMasterInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to reset a password.
      * @param {ResetPasswordRequest} req
      * @param {function(string, ResetPasswordResponse):void} cb
@@ -955,14 +981,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to clear the data of a Redis instance.
-     * @param {ClearInstanceRequest} req
-     * @param {function(string, ClearInstanceResponse):void} cb
+     * This API is used to create a Redis instance.
+     * @param {CreateInstancesRequest} req
+     * @param {function(string, CreateInstancesResponse):void} cb
      * @public
      */
-    ClearInstance(req, cb) {
-        let resp = new ClearInstanceResponse();
-        this.request("ClearInstance", req, resp, cb);
+    CreateInstances(req, cb) {
+        let resp = new CreateInstancesResponse();
+        this.request("CreateInstances", req, resp, cb);
     }
 
     /**
@@ -1021,14 +1047,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to deisolate an instance.
-     * @param {StartupInstanceRequest} req
-     * @param {function(string, StartupInstanceResponse):void} cb
+     * This API is used to modify the role of an instance in a replication group.
+     * @param {ChangeInstanceRoleRequest} req
+     * @param {function(string, ChangeInstanceRoleResponse):void} cb
      * @public
      */
-    StartupInstance(req, cb) {
-        let resp = new StartupInstanceResponse();
-        this.request("StartupInstance", req, resp, cb);
+    ChangeInstanceRole(req, cb) {
+        let resp = new ChangeInstanceRoleResponse();
+        this.request("ChangeInstanceRole", req, resp, cb);
     }
 
     /**

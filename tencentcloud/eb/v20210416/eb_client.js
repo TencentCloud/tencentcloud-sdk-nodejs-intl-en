@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ListConnectionsResponse = models.ListConnectionsResponse;
+const ESTargetParams = models.ESTargetParams;
 const GetEventBusResponse = models.GetEventBusResponse;
 const RetryPolicy = models.RetryPolicy;
 const CkafkaTargetParams = models.CkafkaTargetParams;

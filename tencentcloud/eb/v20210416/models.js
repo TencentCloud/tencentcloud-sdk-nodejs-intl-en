@@ -67,6 +67,69 @@ class ListConnectionsResponse extends  AbstractModel {
 }
 
 /**
+ * ES rule targets
+ * @class
+ */
+class ESTargetParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Network connection type
+         * @type {string || null}
+         */
+        this.NetMode = null;
+
+        /**
+         * Index prefix
+         * @type {string || null}
+         */
+        this.IndexPrefix = null;
+
+        /**
+         * ES log rotation interval
+         * @type {string || null}
+         */
+        this.RotationInterval = null;
+
+        /**
+         * DTS event configuration
+         * @type {string || null}
+         */
+        this.OutputMode = null;
+
+        /**
+         * DTS indexing configuration
+         * @type {string || null}
+         */
+        this.IndexSuffixMode = null;
+
+        /**
+         * ES template type
+         * @type {string || null}
+         */
+        this.IndexTemplateType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NetMode = 'NetMode' in params ? params.NetMode : null;
+        this.IndexPrefix = 'IndexPrefix' in params ? params.IndexPrefix : null;
+        this.RotationInterval = 'RotationInterval' in params ? params.RotationInterval : null;
+        this.OutputMode = 'OutputMode' in params ? params.OutputMode : null;
+        this.IndexSuffixMode = 'IndexSuffixMode' in params ? params.IndexSuffixMode : null;
+        this.IndexTemplateType = 'IndexTemplateType' in params ? params.IndexTemplateType : null;
+
+    }
+}
+
+/**
  * GetEventBus response structure.
  * @class
  */
@@ -93,7 +156,7 @@ class GetEventBusResponse extends  AbstractModel {
         this.ClsTopicId = null;
 
         /**
-         * Creation time
+         * Creation time.
          * @type {string || null}
          */
         this.AddTime = null;
@@ -1194,13 +1257,13 @@ class UpdateEventBusRequest extends  AbstractModel {
         this.EventBusId = null;
 
         /**
-         * Event bus description, which can contain up to 200 characters of any type
+         * Event bus description, which can contain up to 200 characters of any type.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+         * Event bus name: it can contain 2-60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter.
          * @type {string || null}
          */
         this.EventBusName = null;
@@ -1230,13 +1293,13 @@ class CreateEventBusRequest extends  AbstractModel {
         super();
 
         /**
-         * Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+         * Event bus name: it can contain 2-60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter.
          * @type {string || null}
          */
         this.EventBusName = null;
 
         /**
-         * Event bus description, which can contain up to 200 characters of any type
+         * Event bus description, which can contain up to 200 characters of any type.
          * @type {string || null}
          */
         this.Description = null;
@@ -2001,13 +2064,13 @@ class CreateConnectionRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Switch
+         * Whether to enable
          * @type {boolean || null}
          */
         this.Enable = null;
 
         /**
-         * Type
+         * Type of the connector
          * @type {string || null}
          */
         this.Type = null;
@@ -2591,6 +2654,12 @@ class TargetDescription extends  AbstractModel {
          */
         this.CkafkaTargetParams = null;
 
+        /**
+         * ElasticSearch parameters
+         * @type {ESTargetParams || null}
+         */
+        this.ESTargetParams = null;
+
     }
 
     /**
@@ -2612,6 +2681,12 @@ class TargetDescription extends  AbstractModel {
             let obj = new CkafkaTargetParams();
             obj.deserialize(params.CkafkaTargetParams)
             this.CkafkaTargetParams = obj;
+        }
+
+        if (params.ESTargetParams) {
+            let obj = new ESTargetParams();
+            obj.deserialize(params.ESTargetParams)
+            this.ESTargetParams = obj;
         }
 
     }
@@ -3124,6 +3199,7 @@ class APIGWParams extends  AbstractModel {
 
 module.exports = {
     ListConnectionsResponse: ListConnectionsResponse,
+    ESTargetParams: ESTargetParams,
     GetEventBusResponse: GetEventBusResponse,
     RetryPolicy: RetryPolicy,
     CkafkaTargetParams: CkafkaTargetParams,

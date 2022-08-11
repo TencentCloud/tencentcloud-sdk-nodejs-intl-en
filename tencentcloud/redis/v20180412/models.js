@@ -2977,6 +2977,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ChangeMasterInstance response structure.
+ * @class
+ */
+class ChangeMasterInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DestroyPostpaidInstance response structure.
  * @class
  */
@@ -3349,24 +3384,24 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceMonitorHotKey request structure.
+ * ChangeMasterInstance request structure.
  * @class
  */
-class DescribeInstanceMonitorHotKeyRequest extends  AbstractModel {
+class ChangeMasterInstanceRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Replication group ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
 
         /**
          * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * Time span. 1: real time; 2: past 30 minutes; 3: past 6 hours; 4: past 24 hours
-         * @type {number || null}
-         */
-        this.SpanType = null;
 
     }
 
@@ -3377,8 +3412,8 @@ class DescribeInstanceMonitorHotKeyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.SpanType = 'SpanType' in params ? params.SpanType : null;
 
     }
 }
@@ -7025,6 +7060,12 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.ProductVersions = null;
 
+        /**
+         * The specified instances for batch query
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
     }
 
     /**
@@ -7067,6 +7108,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         }
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
         this.ProductVersions = 'ProductVersions' in params ? params.ProductVersions : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -7339,6 +7381,48 @@ class DestroyPostpaidInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * ChangeInstanceRole request structure.
+ * @class
+ */
+class ChangeInstanceRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Replication group ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance role. Valid values: `rw` (read-write), `r`( read-only).
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+
+    }
+}
+
+/**
  * DeleteInstanceAccount request structure.
  * @class
  */
@@ -7369,6 +7453,41 @@ class DeleteInstanceAccountRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.AccountName = 'AccountName' in params ? params.AccountName : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceMonitorHotKey request structure.
+ * @class
+ */
+class DescribeInstanceMonitorHotKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Time span. 1: real time; 2: past 30 minutes; 3: past 6 hours; 4: past 24 hours
+         * @type {number || null}
+         */
+        this.SpanType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SpanType = 'SpanType' in params ? params.SpanType : null;
 
     }
 }
@@ -9881,6 +10000,41 @@ class TendisSlowLogDetail extends  AbstractModel {
 }
 
 /**
+ * ChangeInstanceRole response structure.
+ * @class
+ */
+class ChangeInstanceRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpgradeProxyVersion request structure.
  * @class
  */
@@ -10636,6 +10790,7 @@ module.exports = {
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     InstanceTagInfo: InstanceTagInfo,
     DescribeInstanceDTSInfoResponse: DescribeInstanceDTSInfoResponse,
+    ChangeMasterInstanceResponse: ChangeMasterInstanceResponse,
     DestroyPostpaidInstanceResponse: DestroyPostpaidInstanceResponse,
     SwitchInstanceVipRequest: SwitchInstanceVipRequest,
     ChangeReplicaToMasterRequest: ChangeReplicaToMasterRequest,
@@ -10644,7 +10799,7 @@ module.exports = {
     RedisCommonInstanceList: RedisCommonInstanceList,
     SourceInfo: SourceInfo,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
-    DescribeInstanceMonitorHotKeyRequest: DescribeInstanceMonitorHotKeyRequest,
+    ChangeMasterInstanceRequest: ChangeMasterInstanceRequest,
     DescribeInstanceDTSInfoRequest: DescribeInstanceDTSInfoRequest,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
     DescribeTendisSlowLogResponse: DescribeTendisSlowLogResponse,
@@ -10723,7 +10878,9 @@ module.exports = {
     DescribeAutoBackupConfigRequest: DescribeAutoBackupConfigRequest,
     DescribeInstanceMonitorSIPResponse: DescribeInstanceMonitorSIPResponse,
     DestroyPostpaidInstanceRequest: DestroyPostpaidInstanceRequest,
+    ChangeInstanceRoleRequest: ChangeInstanceRoleRequest,
     DeleteInstanceAccountRequest: DeleteInstanceAccountRequest,
+    DescribeInstanceMonitorHotKeyRequest: DescribeInstanceMonitorHotKeyRequest,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     ManualBackupInstanceRequest: ManualBackupInstanceRequest,
     DescribeReplicationGroupResponse: DescribeReplicationGroupResponse,
@@ -10768,6 +10925,7 @@ module.exports = {
     DescribeInstanceMonitorSIPRequest: DescribeInstanceMonitorSIPRequest,
     InstanceClusterShard: InstanceClusterShard,
     TendisSlowLogDetail: TendisSlowLogDetail,
+    ChangeInstanceRoleResponse: ChangeInstanceRoleResponse,
     UpgradeProxyVersionRequest: UpgradeProxyVersionRequest,
     ZoneCapacityConf: ZoneCapacityConf,
     UpgradeInstanceRequest: UpgradeInstanceRequest,

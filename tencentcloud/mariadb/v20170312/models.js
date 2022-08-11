@@ -1310,6 +1310,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.InstanceIds = null;
 
         /**
+         * Async task ID, which can be used in the [DescribeFlow](https://www.tencentcloud.com/document/product/237/16177) API to query the async task result.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1326,6 +1333,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.DealName = 'DealName' in params ? params.DealName : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2998,6 +3006,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ResourceTags = null;
 
+        /**
+         * Database version
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DbVersionId = null;
+
     }
 
     /**
@@ -3066,6 +3081,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.ResourceTags.push(obj);
             }
         }
+        this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
 
     }
 }

@@ -3124,6 +3124,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.ServerNameIndication = null;
 
+        /**
+         * Forces requests to redirect to HTTPS. When `https:` is passed in, all requests are redirected to HTTPS.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ForcedRedirect = null;
+
     }
 
     /**
@@ -3160,6 +3167,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ForwardHost = 'ForwardHost' in params ? params.ForwardHost : null;
         this.ServerNameIndicationSwitch = 'ServerNameIndicationSwitch' in params ? params.ServerNameIndicationSwitch : null;
         this.ServerNameIndication = 'ServerNameIndication' in params ? params.ServerNameIndication : null;
+        this.ForcedRedirect = 'ForcedRedirect' in params ? params.ForcedRedirect : null;
 
     }
 }
@@ -4215,6 +4223,12 @@ If `ForwardHost=default`, the domain name configured with the forwarding rule wi
          */
         this.ServerNameIndication = null;
 
+        /**
+         * Enables HTTP-to-HTTPS force redirect for a forwarding rule. Enter a hostname and path of the current forwarding rule.
+         * @type {string || null}
+         */
+        this.ForcedRedirect = null;
+
     }
 
     /**
@@ -4239,6 +4253,7 @@ If `ForwardHost=default`, the domain name configured with the forwarding rule wi
         this.ForwardHost = 'ForwardHost' in params ? params.ForwardHost : null;
         this.ServerNameIndicationSwitch = 'ServerNameIndicationSwitch' in params ? params.ServerNameIndicationSwitch : null;
         this.ServerNameIndication = 'ServerNameIndication' in params ? params.ServerNameIndication : null;
+        this.ForcedRedirect = 'ForcedRedirect' in params ? params.ForcedRedirect : null;
 
     }
 }
@@ -6667,6 +6682,12 @@ If this field is not passed in, it indicates that the ForwardProtocol of the cor
          */
         this.ServerNameIndication = null;
 
+        /**
+         * Enables HTTP-to-HTTPS force redirect for a forwarding rule. Enter a hostname and path of the current forwarding rule.
+         * @type {string || null}
+         */
+        this.ForcedRedirect = null;
+
     }
 
     /**
@@ -6692,6 +6713,7 @@ If this field is not passed in, it indicates that the ForwardProtocol of the cor
         this.ForwardHost = 'ForwardHost' in params ? params.ForwardHost : null;
         this.ServerNameIndicationSwitch = 'ServerNameIndicationSwitch' in params ? params.ServerNameIndicationSwitch : null;
         this.ServerNameIndication = 'ServerNameIndication' in params ? params.ServerNameIndication : null;
+        this.ForcedRedirect = 'ForcedRedirect' in params ? params.ForcedRedirect : null;
 
     }
 }

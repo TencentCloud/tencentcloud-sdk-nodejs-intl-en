@@ -6157,6 +6157,15 @@ class ImportImageRequest extends  AbstractModel {
          */
         this.TagSpecification = null;
 
+        /**
+         * The license type used to activate the OS after importing an image.
+Valid values:
+`TencentCloud`: Tencent Cloud official license
+`BYOL`: Bring Your Own License
+         * @type {string || null}
+         */
+        this.LicenseType = null;
+
     }
 
     /**
@@ -6183,6 +6192,7 @@ class ImportImageRequest extends  AbstractModel {
                 this.TagSpecification.push(obj);
             }
         }
+        this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
 
     }
 }

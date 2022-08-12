@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
+const InquirePriceRenewRequest = models.InquirePriceRenewRequest;
 const ObjectTask = models.ObjectTask;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
@@ -36,6 +37,7 @@ const ClusterInstanceDetail = models.ClusterInstanceDetail;
 const Account = models.Account;
 const IsolateInstanceResponse = models.IsolateInstanceResponse;
 const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
+const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const PauseServerlessRequest = models.PauseServerlessRequest;
 const CreateClustersResponse = models.CreateClustersResponse;
 const SetRenewFlagRequest = models.SetRenewFlagRequest;
@@ -67,8 +69,10 @@ const CreateClustersRequest = models.CreateClustersRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const AddInstancesResponse = models.AddInstancesResponse;
 const Addr = models.Addr;
+const ParamTemplateListInfo = models.ParamTemplateListInfo;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
 const SecurityGroup = models.SecurityGroup;
@@ -80,6 +84,7 @@ const DescribeInstanceSlowQueriesResponse = models.DescribeInstanceSlowQueriesRe
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DescribeBackupDownloadUrlResponse = models.DescribeBackupDownloadUrlResponse;
 const ResumeServerlessRequest = models.ResumeServerlessRequest;
+const InquirePriceCreateRequest = models.InquirePriceCreateRequest;
 const BillingResourceInfo = models.BillingResourceInfo;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const DescribeInstanceSpecsRequest = models.DescribeInstanceSpecsRequest;
@@ -89,6 +94,7 @@ const CynosdbCluster = models.CynosdbCluster;
 const BinlogItem = models.BinlogItem;
 const OfflineClusterResponse = models.OfflineClusterResponse;
 const InstanceSpec = models.InstanceSpec;
+const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
 const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
@@ -109,6 +115,7 @@ const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
 const ModifyClusterParamRequest = models.ModifyClusterParamRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const OfflineInstanceRequest = models.OfflineInstanceRequest;
+const TradePrice = models.TradePrice;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
 const OfflineInstanceResponse = models.OfflineInstanceResponse;
 const ParamItem = models.ParamItem;
@@ -117,6 +124,7 @@ const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const DescribeInstanceSlowQueriesRequest = models.DescribeInstanceSlowQueriesRequest;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
+const InquirePriceRenewResponse = models.InquirePriceRenewResponse;
 
 
 /**
@@ -185,6 +193,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query all parameter templates information of a user-specified product.
+     * @param {DescribeParamTemplatesRequest} req
+     * @param {function(string, DescribeParamTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeParamTemplates(req, cb) {
+        let resp = new DescribeParamTemplatesResponse();
+        this.request("DescribeParamTemplates", req, resp, cb);
+    }
+
+    /**
      * This API is used to query instance groups.
      * @param {DescribeClusterInstanceGrpsRequest} req
      * @param {function(string, DescribeClusterInstanceGrpsResponse):void} cb
@@ -207,14 +226,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to pause a serverless cluster.
-     * @param {PauseServerlessRequest} req
-     * @param {function(string, PauseServerlessResponse):void} cb
+     * This API is used to rename a backup file.
+     * @param {ModifyBackupNameRequest} req
+     * @param {function(string, ModifyBackupNameResponse):void} cb
      * @public
      */
-    PauseServerless(req, cb) {
-        let resp = new PauseServerlessResponse();
-        this.request("PauseServerless", req, resp, cb);
+    ModifyBackupName(req, cb) {
+        let resp = new ModifyBackupNameResponse();
+        this.request("ModifyBackupName", req, resp, cb);
     }
 
     /**
@@ -339,6 +358,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the purchasable price of a cluster.
+     * @param {InquirePriceCreateRequest} req
+     * @param {function(string, InquirePriceCreateResponse):void} cb
+     * @public
+     */
+    InquirePriceCreate(req, cb) {
+        let resp = new InquirePriceCreateResponse();
+        this.request("InquirePriceCreate", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the download address of a cluster backup file.
      * @param {DescribeBackupDownloadUrlRequest} req
      * @param {function(string, DescribeBackupDownloadUrlResponse):void} cb
@@ -416,14 +446,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to rename a backup file.
-     * @param {ModifyBackupNameRequest} req
-     * @param {function(string, ModifyBackupNameResponse):void} cb
+     * This API is used to query the renewal price of a cluster.
+     * @param {InquirePriceRenewRequest} req
+     * @param {function(string, InquirePriceRenewResponse):void} cb
      * @public
      */
-    ModifyBackupName(req, cb) {
-        let resp = new ModifyBackupNameResponse();
-        this.request("ModifyBackupName", req, resp, cb);
+    InquirePriceRenew(req, cb) {
+        let resp = new InquirePriceRenewResponse();
+        this.request("InquirePriceRenew", req, resp, cb);
     }
 
     /**
@@ -457,6 +487,17 @@ class CynosdbClient extends AbstractClient {
     DescribeResourcesByDealName(req, cb) {
         let resp = new DescribeResourcesByDealNameResponse();
         this.request("DescribeResourcesByDealName", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pause a serverless cluster.
+     * @param {PauseServerlessRequest} req
+     * @param {function(string, PauseServerlessResponse):void} cb
+     * @public
+     */
+    PauseServerless(req, cb) {
+        let resp = new PauseServerlessResponse();
+        this.request("PauseServerless", req, resp, cb);
     }
 
     /**

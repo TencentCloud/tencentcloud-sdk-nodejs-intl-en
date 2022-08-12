@@ -534,6 +534,12 @@ It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:\/-
          */
         this.Tags = null;
 
+        /**
+         * UIN of the initiator
+         * @type {string || null}
+         */
+        this.SourceIdentity = null;
+
     }
 
     /**
@@ -557,6 +563,7 @@ It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:\/-
                 this.Tags.push(obj);
             }
         }
+        this.SourceIdentity = 'SourceIdentity' in params ? params.SourceIdentity : null;
 
     }
 }

@@ -80,6 +80,48 @@ class DescribeRollbackTimeRangeRequest extends  AbstractModel {
 }
 
 /**
+ * InquirePriceRenew request structure.
+ * @class
+ */
+class InquirePriceRenewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Validity period, which needs to be used together with `TimeUnit`.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Unit of validity period, which needs to be used together with `TimeSpan`. Valid values: `d` (day), `m` (month).
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+
+    }
+}
+
+/**
  * Task information
  * @class
  */
@@ -849,6 +891,27 @@ class ModifyInstanceNameResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeParamTemplates request structure.
+ * @class
+ */
+class DescribeParamTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -2900,6 +2963,56 @@ class ModifyDBInstanceSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeParamTemplates response structure.
+ * @class
+ */
+class DescribeParamTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of parameter templates
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Parameter template information
+         * @type {Array.<ParamTemplateListInfo> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ParamTemplateListInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AddInstances response structure.
  * @class
  */
@@ -2990,6 +3103,55 @@ class Addr extends  AbstractModel {
         }
         this.IP = 'IP' in params ? params.IP : null;
         this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * Parameter template information
+ * @class
+ */
+class ParamTemplateListInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter template ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Parameter template name
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Parameter template description
+         * @type {string || null}
+         */
+        this.TemplateDescription = null;
+
+        /**
+         * Engine version
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.TemplateDescription = 'TemplateDescription' in params ? params.TemplateDescription : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
 
     }
 }
@@ -3535,6 +3697,97 @@ class ResumeServerlessRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * InquirePriceCreate request structure.
+ * @class
+ */
+class InquirePriceCreateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Purchase quantity
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * Instance type for purchase. Valid values: `PREPAID`, `POSTPAID`, `SERVERLESS`.
+         * @type {string || null}
+         */
+        this.InstancePayMode = null;
+
+        /**
+         * Storage type for purchase. Valid values: `PREPAID`, `POSTPAID`.
+         * @type {string || null}
+         */
+        this.StoragePayMode = null;
+
+        /**
+         * Number of CPU cores, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Memory size in GB, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * CCU size, which is required when `InstancePayMode` is `SERVERLESS`.
+         * @type {number || null}
+         */
+        this.Ccu = null;
+
+        /**
+         * Storage size, which is required when `StoragePayMode` is `PREPAID`.
+         * @type {number || null}
+         */
+        this.StorageLimit = null;
+
+        /**
+         * Validity period, which is required when `InstancePayMode` is `PREPAID`.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Duration unit, which is required when `InstancePayMode` is `PREPAID`. Valid values: `m` (month), `d` (day).
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.InstancePayMode = 'InstancePayMode' in params ? params.InstancePayMode : null;
+        this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Ccu = 'Ccu' in params ? params.Ccu : null;
+        this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
 
     }
 }
@@ -4203,6 +4456,58 @@ class InstanceSpec extends  AbstractModel {
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.MaxStorageSize = 'MaxStorageSize' in params ? params.MaxStorageSize : null;
         this.MinStorageSize = 'MinStorageSize' in params ? params.MinStorageSize : null;
+
+    }
+}
+
+/**
+ * InquirePriceCreate response structure.
+ * @class
+ */
+class InquirePriceCreateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance price
+         * @type {TradePrice || null}
+         */
+        this.InstancePrice = null;
+
+        /**
+         * Storage price
+         * @type {TradePrice || null}
+         */
+        this.StoragePrice = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstancePrice) {
+            let obj = new TradePrice();
+            obj.deserialize(params.InstancePrice)
+            this.InstancePrice = obj;
+        }
+
+        if (params.StoragePrice) {
+            let obj = new TradePrice();
+            obj.deserialize(params.StoragePrice)
+            this.StoragePrice = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5501,6 +5806,73 @@ class OfflineInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Billing details
+ * @class
+ */
+class TradePrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The non-discounted total price of monthly subscribed resources (unit: US cent)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalPrice = null;
+
+        /**
+         * Total discount. `100` means no discount.
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * The discounted total price of monthly subscribed resources (unit: US cent). If a discount is applied, `TotalPriceDiscount` will be the product of `TotalPrice` and `Discount`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalPriceDiscount = null;
+
+        /**
+         * The non-discounted unit price of pay-as-you-go resources (unit: US cent)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * The discounted unit price of pay-as-you-go resources (unit: US cent). If a discount is applied, `UnitPriceDiscount` will be the product of `UnitPrice` and `Discount`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * Price unit
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalPrice = 'TotalPrice' in params ? params.TotalPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.TotalPriceDiscount = 'TotalPriceDiscount' in params ? params.TotalPriceDiscount : null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+
+    }
+}
+
+/**
  * DescribeInstanceSpecs response structure.
  * @class
  */
@@ -5935,9 +6307,81 @@ class ModifyBackupConfigResponse extends  AbstractModel {
     }
 }
 
+/**
+ * InquirePriceRenew response structure.
+ * @class
+ */
+class InquirePriceRenewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Instance ID list
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Price of instance specification in array
+         * @type {Array.<TradePrice> || null}
+         */
+        this.Prices = null;
+
+        /**
+         * Total renewal price of compute node
+         * @type {number || null}
+         */
+        this.InstanceRealTotalPrice = null;
+
+        /**
+         * Total renewal price of storage node
+         * @type {number || null}
+         */
+        this.StorageRealTotalPrice = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.Prices) {
+            this.Prices = new Array();
+            for (let z in params.Prices) {
+                let obj = new TradePrice();
+                obj.deserialize(params.Prices[z]);
+                this.Prices.push(obj);
+            }
+        }
+        this.InstanceRealTotalPrice = 'InstanceRealTotalPrice' in params ? params.InstanceRealTotalPrice : null;
+        this.StorageRealTotalPrice = 'StorageRealTotalPrice' in params ? params.StorageRealTotalPrice : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     ModifyClusterNameRequest: ModifyClusterNameRequest,
     DescribeRollbackTimeRangeRequest: DescribeRollbackTimeRangeRequest,
+    InquirePriceRenewRequest: InquirePriceRenewRequest,
     ObjectTask: ObjectTask,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
@@ -5956,6 +6400,7 @@ module.exports = {
     Account: Account,
     IsolateInstanceResponse: IsolateInstanceResponse,
     ModifyInstanceNameResponse: ModifyInstanceNameResponse,
+    DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
     PauseServerlessRequest: PauseServerlessRequest,
     CreateClustersResponse: CreateClustersResponse,
     SetRenewFlagRequest: SetRenewFlagRequest,
@@ -5987,8 +6432,10 @@ module.exports = {
     DescribeClustersResponse: DescribeClustersResponse,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
+    DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     AddInstancesResponse: AddInstancesResponse,
     Addr: Addr,
+    ParamTemplateListInfo: ParamTemplateListInfo,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     ModifyClusterParamResponse: ModifyClusterParamResponse,
     SecurityGroup: SecurityGroup,
@@ -6000,6 +6447,7 @@ module.exports = {
     DescribeInstancesRequest: DescribeInstancesRequest,
     DescribeBackupDownloadUrlResponse: DescribeBackupDownloadUrlResponse,
     ResumeServerlessRequest: ResumeServerlessRequest,
+    InquirePriceCreateRequest: InquirePriceCreateRequest,
     BillingResourceInfo: BillingResourceInfo,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
     DescribeInstanceSpecsRequest: DescribeInstanceSpecsRequest,
@@ -6009,6 +6457,7 @@ module.exports = {
     BinlogItem: BinlogItem,
     OfflineClusterResponse: OfflineClusterResponse,
     InstanceSpec: InstanceSpec,
+    InquirePriceCreateResponse: InquirePriceCreateResponse,
     SetRenewFlagResponse: SetRenewFlagResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
     DescribeMaintainPeriodResponse: DescribeMaintainPeriodResponse,
@@ -6029,6 +6478,7 @@ module.exports = {
     ModifyClusterParamRequest: ModifyClusterParamRequest,
     DescribeAccountsResponse: DescribeAccountsResponse,
     OfflineInstanceRequest: OfflineInstanceRequest,
+    TradePrice: TradePrice,
     DescribeInstanceSpecsResponse: DescribeInstanceSpecsResponse,
     OfflineInstanceResponse: OfflineInstanceResponse,
     ParamItem: ParamItem,
@@ -6037,5 +6487,6 @@ module.exports = {
     DescribeInstanceSlowQueriesRequest: DescribeInstanceSlowQueriesRequest,
     DescribeBinlogsRequest: DescribeBinlogsRequest,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
+    InquirePriceRenewResponse: InquirePriceRenewResponse,
 
 }

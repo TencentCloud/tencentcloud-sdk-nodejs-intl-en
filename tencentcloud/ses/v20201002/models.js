@@ -51,7 +51,7 @@ Tencent Cloud team <noreply@mail.qcloud.com>
         this.TaskType = null;
 
         /**
-         * Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will be sent to Tencent Cloud.
+         * Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
          * @type {string || null}
          */
         this.ReplyToAddresses = null;
@@ -63,7 +63,7 @@ Tencent Cloud team <noreply@mail.qcloud.com>
         this.Template = null;
 
         /**
-         * Email content when emails are sent by calling the API. This parameter is currently unavailable.
+         * Disused
          * @type {Simple || null}
          */
         this.Simple = null;
@@ -675,7 +675,7 @@ class GetSendEmailStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * Email sending status list
+         * Status of sent emails
          * @type {Array.<SendEmailStatus> || null}
          */
         this.EmailStatusList = null;
@@ -738,7 +738,7 @@ Sender <email address>
         this.Subject = null;
 
         /**
-         * Reply-to address. You can enter a valid personal email address that can receive emails. If this field is left empty, reply emails will be sent to Tencent Cloud.
+         * Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
          * @type {string || null}
          */
         this.ReplyToAddresses = null;
@@ -750,7 +750,7 @@ Sender <email address>
         this.Template = null;
 
         /**
-         * Email content when sending emails by calling the API.
+         * Disused
          * @type {Simple || null}
          */
         this.Simple = null;
@@ -1650,7 +1650,7 @@ class UpdateEmailTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Describes the email sending status.
+ * Describes the email sending status
  * @class
  */
 class SendEmailStatus extends  AbstractModel {
@@ -1658,7 +1658,7 @@ class SendEmailStatus extends  AbstractModel {
         super();
 
         /**
-         * `MessageId` field returned by the `SendEmail` API
+         * The `MessageId` field returned by the `SendEmail` API
          * @type {string || null}
          */
         this.MessageId = null;
@@ -1676,40 +1676,40 @@ class SendEmailStatus extends  AbstractModel {
         this.FromEmailAddress = null;
 
         /**
-         * Tencent Cloud processing status:
-0: successful.
-1001: internal system exception.
-1002: internal system exception.
-1003: internal system exception.
-1003: internal system exception.
-1004: email sending timeout.
-1005: internal system exception.
-1006: you have sent too many emails to the same address in a short period.
-1007: the email address is in the blocklist.
-1009: internal system exception.
-1010: daily email sending limit exceeded.
-1011: no permission to send custom content. Use a template.
-2001: no results found.
-3007: invalid template ID or unavailable template.
-3008: template status exception.
-3009: no permission to use this template.
-3010: the format of the `TemplateData` field is incorrect. 
-3014: unable to send the email because the sender domain is not verified.
-3020: the recipient email address is in the blocklist.
-3024: failed to pre-check the email address format.
-3030: email sending is restricted temporarily due to high bounce rate.
-3033: the account has insufficient balance or overdue payment.
+         * Tencent Cloud processing status
+0: Successful.
+1001: Internal system exception.
+1002: Internal system exception.
+1003: Internal system exception.
+1003: Internal system exception.
+1004: Email sending timed out.
+1005: Internal system exception.
+1006: You have sent too many emails to the same address in a short period.
+1007: The email address is in the blocklist.
+1009: Internal system exception.
+1010: The daily email sending limit is exceeded.
+1011: You have no permission to send custom content. Use a template.
+2001: No results were found.
+3007: The template ID is invalid or the template is unavailable.
+3008: Template status exception.
+3009: You have no permission to use this template.
+3010: The format of the `TemplateData` field is incorrect. 
+3014: The email cannot be sent because the sender domain is not verified.
+3020: The recipient email address is in the blocklist.
+3024: Failed to precheck the email address format.
+3030: Email sending is restricted temporarily due to high bounce rate.
+3033: The account has insufficient balance or overdue payment.
          * @type {number || null}
          */
         this.SendStatus = null;
 
         /**
-         * Recipient processing status:
+         * Recipient processing status
 0: Tencent Cloud has accepted the request and added it to the send queue.
-1: the email is delivered successfully, `DeliverTime` indicates the time when the email is delivered successfully.
-2: the email is discarded. `DeliverMessage` indicates the reason for discarding.
-3: the recipient's ESP rejects the email, probably because the email address does not exist or due to other reasons.
-8: the email is delayed by the ESP. `DeliverMessage` indicates the reason for delay.
+1: The email is delivered successfully. `DeliverTime` indicates the time when the email is delivered successfully.
+2: The email is discarded. `DeliverMessage` indicates the reason for discarding.
+3: The recipient's ESP rejects the email, probably because the email address does not exist or due to other reasons.
+8: The email is delayed by the ESP. `DeliverMessage` indicates the reason for delay.
          * @type {number || null}
          */
         this.DeliverStatus = null;
@@ -1745,7 +1745,7 @@ class SendEmailStatus extends  AbstractModel {
         this.UserClicked = null;
 
         /**
-         * Whether the recipient has unsubscribed from emails sent by the sender
+         * Whether the recipient has unsubscribed from the email sent by the sender
          * @type {boolean || null}
          */
         this.UserUnsubscribed = null;
@@ -1894,7 +1894,7 @@ class ListEmailTemplatesResponse extends  AbstractModel {
         this.TemplatesMetadata = null;
 
         /**
-         * Total number of templates.
+         * Total number of templates
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -2023,31 +2023,31 @@ class GetSendEmailStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * Sent date. This parameter is required. You can only query the sending status for a single date at a time.
+         * Date sent. This parameter is required. You can only query the sending status for a single date at a time.
          * @type {string || null}
          */
         this.RequestDate = null;
 
         /**
-         * Offset. Default value: `0`
+         * Offset. Default value: `0`.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Maximum number of pulled entries. The maximum value is `100`.
+         * Maximum number of pulled entries. Maximum value: `100`.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * `MessageId` field returned by the `SendMail` API
+         * The `MessageId` field returned by the `SendMail` API.
          * @type {string || null}
          */
         this.MessageId = null;
 
         /**
-         * Recipient email address
+         * Recipient email address.
          * @type {string || null}
          */
         this.ToEmailAddress = null;
@@ -2148,6 +2148,18 @@ class ListEmailIdentitiesResponse extends  AbstractModel {
         this.EmailIdentities = null;
 
         /**
+         * Maximum reputation level
+         * @type {number || null}
+         */
+        this.MaxReputationLevel = null;
+
+        /**
+         * Maximum number of emails sent per domain name
+         * @type {number || null}
+         */
+        this.MaxDailyQuota = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2171,6 +2183,8 @@ class ListEmailIdentitiesResponse extends  AbstractModel {
                 this.EmailIdentities.push(obj);
             }
         }
+        this.MaxReputationLevel = 'MaxReputationLevel' in params ? params.MaxReputationLevel : null;
+        this.MaxDailyQuota = 'MaxDailyQuota' in params ? params.MaxDailyQuota : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2348,6 +2362,18 @@ class EmailIdentity extends  AbstractModel {
          */
         this.SendingEnabled = null;
 
+        /**
+         * Current reputation level
+         * @type {number || null}
+         */
+        this.CurrentReputationLevel = null;
+
+        /**
+         * Maximum number of messages sent per day
+         * @type {number || null}
+         */
+        this.DailyQuota = null;
+
     }
 
     /**
@@ -2360,6 +2386,8 @@ class EmailIdentity extends  AbstractModel {
         this.IdentityName = 'IdentityName' in params ? params.IdentityName : null;
         this.IdentityType = 'IdentityType' in params ? params.IdentityType : null;
         this.SendingEnabled = 'SendingEnabled' in params ? params.SendingEnabled : null;
+        this.CurrentReputationLevel = 'CurrentReputationLevel' in params ? params.CurrentReputationLevel : null;
+        this.DailyQuota = 'DailyQuota' in params ? params.DailyQuota : null;
 
     }
 }
@@ -2829,6 +2857,12 @@ class GetEmailTemplateResponse extends  AbstractModel {
         this.TemplateContent = null;
 
         /**
+         * Template status. Valid values: `0` (approved); `1` (pending approval); `2` (rejected).
+         * @type {number || null}
+         */
+        this.TemplateStatus = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2849,6 +2883,7 @@ class GetEmailTemplateResponse extends  AbstractModel {
             obj.deserialize(params.TemplateContent)
             this.TemplateContent = obj;
         }
+        this.TemplateStatus = 'TemplateStatus' in params ? params.TemplateStatus : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

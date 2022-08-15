@@ -20,6 +20,7 @@ module.exports = {
     common: require("./common"),
     cvm: require("./cvm"),
     cynosdb: require("./cynosdb"),
+    dataintegration: require("./dataintegration"),
     dayu: require("./dayu"),
     dbbrain: require("./dbbrain"),
     dc: require("./dc"),

@@ -21,9 +21,12 @@ const CreateUploadUrlResponse = models.CreateUploadUrlResponse;
 const LivenessCompareResponse = models.LivenessCompareResponse;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
 const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
+const VideoLivenessCompareResponse = models.VideoLivenessCompareResponse;
 const DetectReflectLivenessAndCompareRequest = models.DetectReflectLivenessAndCompareRequest;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
+const FileInfo = models.FileInfo;
+const VideoLivenessCompareRequest = models.VideoLivenessCompareRequest;
 
 
 /**
@@ -46,6 +49,17 @@ The image and the data generated with the SDK must be stored in COS, and the reg
     DetectReflectLivenessAndCompare(req, cb) {
         let resp = new DetectReflectLivenessAndCompareResponse();
         this.request("DetectReflectLivenessAndCompare", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pass in URLs of a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
+     * @param {VideoLivenessCompareRequest} req
+     * @param {function(string, VideoLivenessCompareResponse):void} cb
+     * @public
+     */
+    VideoLivenessCompare(req, cb) {
+        let resp = new VideoLivenessCompareResponse();
+        this.request("VideoLivenessCompare", req, resp, cb);
     }
 
     /**

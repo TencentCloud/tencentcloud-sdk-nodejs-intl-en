@@ -279,6 +279,68 @@ class DetectReflectLivenessAndCompareResponse extends  AbstractModel {
 }
 
 /**
+ * VideoLivenessCompare response structure.
+ * @class
+ */
+class VideoLivenessCompareResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The similarity. Value range: [0.00, 100.00]. As a recommendation, when the similarity is greater than or equal to 70, it can be determined that the two persons are of the same person. You can adjust the threshold according to your specific scenario (the FARs at the thresholds of 70 and 80 are 0.1% and 0.01%, respectively).
+         * @type {number || null}
+         */
+        this.Sim = null;
+
+        /**
+         * The service error code. `Success` will be returned for success. For error information, see the `FailedOperation` section in the error code list below.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The service result description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * The best video screenshot after successful verification
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {FileInfo || null}
+         */
+        this.BestFrame = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.BestFrame) {
+            let obj = new FileInfo();
+            obj.deserialize(params.BestFrame)
+            this.BestFrame = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DetectReflectLivenessAndCompare request structure.
  * @class
  */
@@ -447,14 +509,129 @@ class CreateUploadUrlRequest extends  AbstractModel {
     }
 }
 
+/**
+ * The description of a file, including a download URL and the MD5 checksum and size of the file.
+ * @class
+ */
+class FileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The URL for downloading the file
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * The 32-bit MD5 checksum of the file
+         * @type {string || null}
+         */
+        this.MD5 = null;
+
+        /**
+         * The file size
+         * @type {number || null}
+         */
+        this.Size = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.MD5 = 'MD5' in params ? params.MD5 : null;
+        this.Size = 'Size' in params ? params.Size : null;
+
+    }
+}
+
+/**
+ * VideoLivenessCompare request structure.
+ * @class
+ */
+class VideoLivenessCompareRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The URL of the photo for face comparison. The downloaded image after Base64 encoding can be up to 3 MB and must be in JPG or PNG.
+
+The image must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate an image URL by using `CreateUploadUrl` or purchase the COS service.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * The 32-bit MD5 checksum of the image for comparison
+         * @type {string || null}
+         */
+        this.ImageMd5 = null;
+
+        /**
+         * The URL of the video for liveness detection. The downloaded video after Base64 encoding can be up to 8 MB and must be in MP4, AVI, or FLV. It takes no more than 4s to download the video.
+
+The video must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate a video URL by using `CreateUploadUrl` or purchase the COS service.
+         * @type {string || null}
+         */
+        this.VideoUrl = null;
+
+        /**
+         * The 32-bit MD5 checksum of the video
+         * @type {string || null}
+         */
+        this.VideoMd5 = null;
+
+        /**
+         * The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
+`LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
+         * @type {string || null}
+         */
+        this.LivenessType = null;
+
+        /**
+         * LIP parameter: Pass in a custom 4-digit verification code.
+ACTION parameter: Pass in a custom action sequence (`2,1` or `1,2`).
+SILENT parameter: Null.
+         * @type {string || null}
+         */
+        this.ValidateData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageMd5 = 'ImageMd5' in params ? params.ImageMd5 : null;
+        this.VideoUrl = 'VideoUrl' in params ? params.VideoUrl : null;
+        this.VideoMd5 = 'VideoMd5' in params ? params.VideoMd5 : null;
+        this.LivenessType = 'LivenessType' in params ? params.LivenessType : null;
+        this.ValidateData = 'ValidateData' in params ? params.ValidateData : null;
+
+    }
+}
+
 module.exports = {
     GenerateReflectSequenceResponse: GenerateReflectSequenceResponse,
     CreateUploadUrlResponse: CreateUploadUrlResponse,
     LivenessCompareResponse: LivenessCompareResponse,
     GenerateReflectSequenceRequest: GenerateReflectSequenceRequest,
     DetectReflectLivenessAndCompareResponse: DetectReflectLivenessAndCompareResponse,
+    VideoLivenessCompareResponse: VideoLivenessCompareResponse,
     DetectReflectLivenessAndCompareRequest: DetectReflectLivenessAndCompareRequest,
     LivenessCompareRequest: LivenessCompareRequest,
     CreateUploadUrlRequest: CreateUploadUrlRequest,
+    FileInfo: FileInfo,
+    VideoLivenessCompareRequest: VideoLivenessCompareRequest,
 
 }

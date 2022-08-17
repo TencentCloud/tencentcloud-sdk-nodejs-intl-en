@@ -670,7 +670,7 @@ class CreatePrivateZoneRequest extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED
+         * Whether to enable subdomain recursive DNS. Valid values: `ENABLED` (default) and `DISABLED`.
          * @type {string || null}
          */
         this.DnsForwardStatus = null;
@@ -686,6 +686,12 @@ class CreatePrivateZoneRequest extends  AbstractModel {
          * @type {Array.<AccountVpcInfo> || null}
          */
         this.AccountVpcSet = null;
+
+        /**
+         * Whether to enable CNAME flattening. Valid values: `ENABLED` (default) and `DISABLED`.
+         * @type {string || null}
+         */
+        this.CnameSpeedupStatus = null;
 
     }
 
@@ -735,6 +741,7 @@ class CreatePrivateZoneRequest extends  AbstractModel {
                 this.AccountVpcSet.push(obj);
             }
         }
+        this.CnameSpeedupStatus = 'CnameSpeedupStatus' in params ? params.CnameSpeedupStatus : null;
 
     }
 }
@@ -951,6 +958,12 @@ class ModifyPrivateZoneRequest extends  AbstractModel {
          */
         this.DnsForwardStatus = null;
 
+        /**
+         * Whether to enable CNAME flattening. Valid values: `ENABLED` and `DISABLED`.
+         * @type {string || null}
+         */
+        this.CnameSpeedupStatus = null;
+
     }
 
     /**
@@ -963,6 +976,7 @@ class ModifyPrivateZoneRequest extends  AbstractModel {
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.DnsForwardStatus = 'DnsForwardStatus' in params ? params.DnsForwardStatus : null;
+        this.CnameSpeedupStatus = 'CnameSpeedupStatus' in params ? params.CnameSpeedupStatus : null;
 
     }
 }

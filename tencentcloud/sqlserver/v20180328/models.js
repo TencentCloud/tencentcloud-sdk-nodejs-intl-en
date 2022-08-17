@@ -5501,16 +5501,28 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.CrossBackupSaveDays = null;
 
         /**
-         * 
+         * Domain name of the public network address
          * @type {string || null}
          */
         this.DnsPodDomain = null;
 
         /**
-         * 
+         * Port number of the public network
          * @type {number || null}
          */
         this.TgwWanVPort = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Collation = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TimeZone = null;
 
     }
 
@@ -5577,6 +5589,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.CrossBackupSaveDays = 'CrossBackupSaveDays' in params ? params.CrossBackupSaveDays : null;
         this.DnsPodDomain = 'DnsPodDomain' in params ? params.DnsPodDomain : null;
         this.TgwWanVPort = 'TgwWanVPort' in params ? params.TgwWanVPort : null;
+        this.Collation = 'Collation' in params ? params.Collation : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
 
     }
 }

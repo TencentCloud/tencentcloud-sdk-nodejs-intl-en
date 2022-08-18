@@ -539,6 +539,55 @@ class ModifyAccountMaxUserConnectionsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAccounts request structure.
+ * @class
+ */
+class DescribeAccountsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Record offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results to be returned for a single request. Value range: 1-100. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Regular expression for matching account names, which complies with the rules at MySQL official website.
+         * @type {string || null}
+         */
+        this.AccountRegexp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.AccountRegexp = 'AccountRegexp' in params ? params.AccountRegexp : null;
+
+    }
+}
+
+/**
  * StopDBImportJob request structure.
  * @class
  */
@@ -1239,30 +1288,24 @@ class ApplyCDBProxyRequest extends  AbstractModel {
 }
 
 /**
- * DescribeUploadedFiles request structure.
+ * CreateAccounts response structure.
  * @class
  */
-class DescribeUploadedFilesRequest extends  AbstractModel {
+class CreateAccountsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * File path. `OwnerUin` information of the root account should be entered in this field.
+         * Async task request ID, which can be used to query the execution result of an async task.
          * @type {string || null}
          */
-        this.Path = null;
+        this.AsyncRequestId = null;
 
         /**
-         * Record offset. Default value: 0.
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Offset = null;
-
-        /**
-         * Number of results to be returned for a single request. Default value: 20.
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -1273,9 +1316,8 @@ class DescribeUploadedFilesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Path = 'Path' in params ? params.Path : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2294,10 +2336,10 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * ModifyTimeWindow response structure.
+ * ModifyNameOrDescByDpId response structure.
  * @class
  */
-class ModifyTimeWindowResponse extends  AbstractModel {
+class ModifyNameOrDescByDpIdResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5720,6 +5762,42 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceVipVport response structure.
+ * @class
+ */
+class ModifyDBInstanceVipVportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID. (This returned field has been disused)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CloseCDBProxy request structure.
  * @class
  */
@@ -6437,18 +6515,24 @@ class ModifyInstanceTagRequest extends  AbstractModel {
 }
 
 /**
- * CloseWanService request structure.
+ * DescribeDBInstanceCharset response structure.
  * @class
  */
-class CloseWanServiceRequest extends  AbstractModel {
+class DescribeDBInstanceCharsetResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+         * Default character set of the instance, such as "latin1" and "utf8".
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Charset = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -6459,7 +6543,8 @@ class CloseWanServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Charset = 'Charset' in params ? params.Charset : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6528,24 +6613,18 @@ class OpenAuditServiceResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstanceCharset response structure.
+ * CloseWanService request structure.
  * @class
  */
-class DescribeDBInstanceCharsetResponse extends  AbstractModel {
+class CloseWanServiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Default character set of the instance, such as "latin1" and "utf8".
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
          * @type {string || null}
          */
-        this.Charset = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -6556,8 +6635,7 @@ class DescribeDBInstanceCharsetResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Charset = 'Charset' in params ? params.Charset : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -9043,7 +9121,7 @@ class ModifyLocalBinlogConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Retention period of local binlog. Value range: [120,168].
+         * Retention period of local binlog. Valid range: 72-168 hours. When there is disaster recovery instance, the valid range will be 120-168 hours.
          * @type {number || null}
          */
         this.SaveHours = null;
@@ -9303,6 +9381,48 @@ class DescribeAuditRulesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyNameOrDescByDpId request structure.
+ * @class
+ */
+class ModifyNameOrDescByDpIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of a placement group.
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
+        /**
+         * Name of a placement group, which can contain up to 60 characters. The placement group name and description cannot both be empty.
+         * @type {string || null}
+         */
+        this.DeployGroupName = null;
+
+        /**
+         * Description of a placement group, which can contain up to 200 characters. The placement group name and description cannot both be empty.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.DeployGroupName = 'DeployGroupName' in params ? params.DeployGroupName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * DescribeBackupOverview response structure.
  * @class
  */
@@ -9403,6 +9523,48 @@ class ColumnPrivilege extends  AbstractModel {
         this.Table = 'Table' in params ? params.Table : null;
         this.Column = 'Column' in params ? params.Column : null;
         this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
+ * DescribeUploadedFiles request structure.
+ * @class
+ */
+class DescribeUploadedFilesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File path. `OwnerUin` information of the root account should be entered in this field.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * Record offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of results to be returned for a single request. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -11655,6 +11817,49 @@ class InstanceRebootTime extends  AbstractModel {
 }
 
 /**
+ * ModifyInstancePasswordComplexity request structure.
+ * @class
+ */
+class ModifyInstancePasswordComplexityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID list
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * List of parameters to be modified. Every element is a pair of `Name` (parameter name) and `CurrentValue` (new value).
+         * @type {Array.<Parameter> || null}
+         */
+        this.ParamList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new Parameter();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * UpgradeDBInstance request structure.
  * @class
  */
@@ -12399,6 +12604,34 @@ You can use the `DescribeProxyConnectionPoolConf` API to query the connection po
 }
 
 /**
+ * ModifyTimeWindow response structure.
+ * @class
+ */
+class ModifyTimeWindowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Configuration information of the salve database
  * @class
  */
@@ -12464,6 +12697,70 @@ class ModifyAccountDescriptionResponse extends  AbstractModel {
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAccounts request structure.
+ * @class
+ */
+class CreateAccountsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * TencentDB account.
+         * @type {Array.<Account> || null}
+         */
+        this.Accounts = null;
+
+        /**
+         * Password of the new account
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Maximum connections of the new account. Default value: `10240`. Maximum value: `10240`.
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Accounts) {
+            this.Accounts = new Array();
+            for (let z in params.Accounts) {
+                let obj = new Account();
+                obj.deserialize(params.Accounts[z]);
+                this.Accounts.push(obj);
+            }
+        }
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
 
     }
 }
@@ -12878,6 +13175,76 @@ class CommonTimeWindow extends  AbstractModel {
 }
 
 /**
+ * Account details
+ * @class
+ */
+class AccountInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account remarks
+         * @type {string || null}
+         */
+        this.Notes = null;
+
+        /**
+         * Account domain name
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * Account name
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Account information modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * Password modification time
+         * @type {string || null}
+         */
+        this.ModifyPasswordTime = null;
+
+        /**
+         * This parameter is no longer supported.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The maximum number of instance connections supported by an account
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Notes = 'Notes' in params ? params.Notes : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.User = 'User' in params ? params.User : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.ModifyPasswordTime = 'ModifyPasswordTime' in params ? params.ModifyPasswordTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
+
+    }
+}
+
+/**
  * DescribeDBInstanceCharset request structure.
  * @class
  */
@@ -12934,18 +13301,24 @@ class DescribeTimeWindowRequest extends  AbstractModel {
 }
 
 /**
- * StopRollback request structure.
+ * ModifyInstancePasswordComplexity response structure.
  * @class
  */
-class StopRollbackRequest extends  AbstractModel {
+class ModifyInstancePasswordComplexityResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the instance whose rollback task is canceled
+         * Async task ID, which can be used to query task progress.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -12956,7 +13329,8 @@ class StopRollbackRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13203,7 +13577,7 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         this.BackupTimeWindow = null;
 
         /**
-         * Switch for archive backup retention. Valid values: `off` (disable), `on` (enable). Default value:`off`.
+         * Switch for periodic archive. Valid values: `off` (disable), `on` (enable). Default value:`off`. When you enable the periodic archive policy for the first time, you need to enter the `BackupPeriodSaveDays`, `BackupPeriodSaveInterval`, `BackupPeriodSaveCount`, and `StartBackupPeriodSaveDate` parameters; otherwise, the policy will not take effect.
          * @type {string || null}
          */
         this.EnableBackupPeriodSave = null;
@@ -13444,24 +13818,48 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
 }
 
 /**
- * ReleaseIsolatedDBInstances response structure.
+ * ModifyDBInstanceVipVport request structure.
  * @class
  */
-class ReleaseIsolatedDBInstancesResponse extends  AbstractModel {
+class ModifyDBInstanceVipVportRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Deisolation result set.
-         * @type {Array.<ReleaseResult> || null}
-         */
-        this.Items = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Destination IP. Either this parameter or `DstPort` must be passed in.
+         * @type {string || null}
+         */
+        this.DstIp = null;
+
+        /**
+         * Destination port number. Value range: [1024-65535]. Either this parameter or `DstIp` must be passed in.
+         * @type {number || null}
+         */
+        this.DstPort = null;
+
+        /**
+         * Unified VPC ID
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Unified subnet ID.
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Repossession duration in hours for old IP in the original network when changing from the basic network to VPC or changing the VPC subnet. Value range: 0-168 hours. Default value: 24 hours.
+         * @type {number || null}
+         */
+        this.ReleaseDuration = null;
 
     }
 
@@ -13472,16 +13870,12 @@ class ReleaseIsolatedDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new ReleaseResult();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DstIp = 'DstIp' in params ? params.DstIp : null;
+        this.DstPort = 'DstPort' in params ? params.DstPort : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.ReleaseDuration = 'ReleaseDuration' in params ? params.ReleaseDuration : null;
 
     }
 }
@@ -13983,6 +14377,49 @@ class DescribeBackupDownloadRestrictionRequest extends  AbstractModel {
 }
 
 /**
+ * ReleaseIsolatedDBInstances response structure.
+ * @class
+ */
+class ReleaseIsolatedDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Deisolation result set.
+         * @type {Array.<ReleaseResult> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ReleaseResult();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDataBackupOverview request structure.
  * @class
  */
@@ -14479,6 +14916,55 @@ Note: this field may return `null`, indicating that no valid value can be found.
 }
 
 /**
+ * Multi-AZ information
+ * @class
+ */
+class ZoneConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
+         * @type {Array.<number> || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * AZ where the primary instance is located
+         * @type {Array.<string> || null}
+         */
+        this.MasterZone = null;
+
+        /**
+         * AZ where salve database 1 is located when the instance is deployed in multi-AZ mode
+         * @type {Array.<string> || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * AZ where salve database 2 is located when the instance is deployed in multi-AZ mode
+         * @type {Array.<string> || null}
+         */
+        this.BackupZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.MasterZone = 'MasterZone' in params ? params.MasterZone : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
+
+    }
+}
+
+/**
  * Audit rule filters
  * @class
  */
@@ -14598,36 +15084,36 @@ class AddTimeWindowResponse extends  AbstractModel {
 }
 
 /**
- * Multi-AZ information
+ * DescribeAccounts response structure.
  * @class
  */
-class ZoneConf extends  AbstractModel {
+class DescribeAccountsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * AZ deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
-         * @type {Array.<number> || null}
+         * Number of eligible accounts.
+         * @type {number || null}
          */
-        this.DeployMode = null;
+        this.TotalCount = null;
 
         /**
-         * AZ where the primary instance is located
-         * @type {Array.<string> || null}
+         * Details of eligible accounts.
+         * @type {Array.<AccountInfo> || null}
          */
-        this.MasterZone = null;
+        this.Items = null;
 
         /**
-         * AZ where salve database 1 is located when the instance is deployed in multi-AZ mode
-         * @type {Array.<string> || null}
+         * The maximum number of instance connections (set by the MySQL parameter `max_connections`)
+         * @type {number || null}
          */
-        this.SlaveZone = null;
+        this.MaxUserConnections = null;
 
         /**
-         * AZ where salve database 2 is located when the instance is deployed in multi-AZ mode
-         * @type {Array.<string> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.BackupZone = null;
+        this.RequestId = null;
 
     }
 
@@ -14638,10 +15124,18 @@ class ZoneConf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
-        this.MasterZone = 'MasterZone' in params ? params.MasterZone : null;
-        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
-        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AccountInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14677,6 +15171,34 @@ class RollbackTimeRange extends  AbstractModel {
         }
         this.Begin = 'Begin' in params ? params.Begin : null;
         this.End = 'End' in params ? params.End : null;
+
+    }
+}
+
+/**
+ * StopRollback request structure.
+ * @class
+ */
+class StopRollbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance whose rollback task is canceled
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -15727,6 +16249,7 @@ module.exports = {
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
     ParamRecord: ParamRecord,
     ModifyAccountMaxUserConnectionsResponse: ModifyAccountMaxUserConnectionsResponse,
+    DescribeAccountsRequest: DescribeAccountsRequest,
     StopDBImportJobRequest: StopDBImportJobRequest,
     DescribeUploadedFilesResponse: DescribeUploadedFilesResponse,
     DescribeSlowLogDataResponse: DescribeSlowLogDataResponse,
@@ -15740,7 +16263,7 @@ module.exports = {
     Inbound: Inbound,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     ApplyCDBProxyRequest: ApplyCDBProxyRequest,
-    DescribeUploadedFilesRequest: DescribeUploadedFilesRequest,
+    CreateAccountsResponse: CreateAccountsResponse,
     RegionSellConf: RegionSellConf,
     InstanceRollbackRangeTime: InstanceRollbackRangeTime,
     SqlFileInfo: SqlFileInfo,
@@ -15759,7 +16282,7 @@ module.exports = {
     RoGroupAttr: RoGroupAttr,
     DBSwitchInfo: DBSwitchInfo,
     StartReplicationResponse: StartReplicationResponse,
-    ModifyTimeWindowResponse: ModifyTimeWindowResponse,
+    ModifyNameOrDescByDpIdResponse: ModifyNameOrDescByDpIdResponse,
     InitDBInstancesResponse: InitDBInstancesResponse,
     CloseCDBProxyResponse: CloseCDBProxyResponse,
     CustomConfig: CustomConfig,
@@ -15811,6 +16334,7 @@ module.exports = {
     CreateCloneInstanceRequest: CreateCloneInstanceRequest,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
+    ModifyDBInstanceVipVportResponse: ModifyDBInstanceVipVportResponse,
     CloseCDBProxyRequest: CloseCDBProxyRequest,
     DescribeDBSwitchRecordsResponse: DescribeDBSwitchRecordsResponse,
     ModifyCDBProxyConnectionPoolResponse: ModifyCDBProxyConnectionPoolResponse,
@@ -15828,10 +16352,10 @@ module.exports = {
     DescribeSupportedPrivilegesRequest: DescribeSupportedPrivilegesRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     ModifyInstanceTagRequest: ModifyInstanceTagRequest,
-    CloseWanServiceRequest: CloseWanServiceRequest,
+    DescribeDBInstanceCharsetResponse: DescribeDBInstanceCharsetResponse,
     DeleteAccountsResponse: DeleteAccountsResponse,
     OpenAuditServiceResponse: OpenAuditServiceResponse,
-    DescribeDBInstanceCharsetResponse: DescribeDBInstanceCharsetResponse,
+    CloseWanServiceRequest: CloseWanServiceRequest,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
     CreateAuditPolicyResponse: CreateAuditPolicyResponse,
@@ -15892,8 +16416,10 @@ module.exports = {
     BalanceRoGroupLoadRequest: BalanceRoGroupLoadRequest,
     QueryCDBProxyRequest: QueryCDBProxyRequest,
     DescribeAuditRulesRequest: DescribeAuditRulesRequest,
+    ModifyNameOrDescByDpIdRequest: ModifyNameOrDescByDpIdRequest,
     DescribeBackupOverviewResponse: DescribeBackupOverviewResponse,
     ColumnPrivilege: ColumnPrivilege,
+    DescribeUploadedFilesRequest: DescribeUploadedFilesRequest,
     ErrlogItem: ErrlogItem,
     DescribeTablesResponse: DescribeTablesResponse,
     DescribeDeviceMonitorInfoRequest: DescribeDeviceMonitorInfoRequest,
@@ -15934,6 +16460,7 @@ module.exports = {
     DescribeAuditPoliciesRequest: DescribeAuditPoliciesRequest,
     DescribeTablesRequest: DescribeTablesRequest,
     InstanceRebootTime: InstanceRebootTime,
+    ModifyInstancePasswordComplexityRequest: ModifyInstancePasswordComplexityRequest,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
@@ -15944,8 +16471,10 @@ module.exports = {
     BaseGroupInfo: BaseGroupInfo,
     DescribeBinlogBackupOverviewResponse: DescribeBinlogBackupOverviewResponse,
     ModifyCDBProxyConnectionPoolRequest: ModifyCDBProxyConnectionPoolRequest,
+    ModifyTimeWindowResponse: ModifyTimeWindowResponse,
     SlaveConfig: SlaveConfig,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
+    CreateAccountsRequest: CreateAccountsRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     ModifyBackupDownloadRestrictionResponse: ModifyBackupDownloadRestrictionResponse,
     ModifyTimeWindowRequest: ModifyTimeWindowRequest,
@@ -15954,9 +16483,10 @@ module.exports = {
     Account: Account,
     CreateBackupRequest: CreateBackupRequest,
     CommonTimeWindow: CommonTimeWindow,
+    AccountInfo: AccountInfo,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
     DescribeTimeWindowRequest: DescribeTimeWindowRequest,
-    StopRollbackRequest: StopRollbackRequest,
+    ModifyInstancePasswordComplexityResponse: ModifyInstancePasswordComplexityResponse,
     LocalBinlogConfigDefault: LocalBinlogConfigDefault,
     DeviceMemInfo: DeviceMemInfo,
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
@@ -15966,7 +16496,7 @@ module.exports = {
     DescribeSlowLogDataRequest: DescribeSlowLogDataRequest,
     DatabasesWithCharacterLists: DatabasesWithCharacterLists,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
-    ReleaseIsolatedDBInstancesResponse: ReleaseIsolatedDBInstancesResponse,
+    ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     DescribeDBImportRecordsRequest: DescribeDBImportRecordsRequest,
     CreateDBImportJobResponse: CreateDBImportJobResponse,
@@ -15979,6 +16509,7 @@ module.exports = {
     ModifyCDBProxyResponse: ModifyCDBProxyResponse,
     DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
     DescribeBackupDownloadRestrictionRequest: DescribeBackupDownloadRestrictionRequest,
+    ReleaseIsolatedDBInstancesResponse: ReleaseIsolatedDBInstancesResponse,
     DescribeDataBackupOverviewRequest: DescribeDataBackupOverviewRequest,
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     DescribeTasksResponse: DescribeTasksResponse,
@@ -15991,11 +16522,13 @@ module.exports = {
     DeleteAccountsRequest: DeleteAccountsRequest,
     SwitchDrInstanceToMasterResponse: SwitchDrInstanceToMasterResponse,
     Rule: Rule,
+    ZoneConf: ZoneConf,
     AuditFilter: AuditFilter,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     AddTimeWindowResponse: AddTimeWindowResponse,
-    ZoneConf: ZoneConf,
+    DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackTimeRange: RollbackTimeRange,
+    StopRollbackRequest: StopRollbackRequest,
     DeleteBackupRequest: DeleteBackupRequest,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
     UpgradeCDBProxyRequest: UpgradeCDBProxyRequest,

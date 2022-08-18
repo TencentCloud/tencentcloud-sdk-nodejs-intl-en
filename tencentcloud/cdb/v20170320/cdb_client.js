@@ -27,6 +27,7 @@ const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const ParamRecord = models.ParamRecord;
 const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const DescribeUploadedFilesResponse = models.DescribeUploadedFilesResponse;
 const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
@@ -40,7 +41,7 @@ const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const Inbound = models.Inbound;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const ApplyCDBProxyRequest = models.ApplyCDBProxyRequest;
-const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
+const CreateAccountsResponse = models.CreateAccountsResponse;
 const RegionSellConf = models.RegionSellConf;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
 const SqlFileInfo = models.SqlFileInfo;
@@ -59,7 +60,7 @@ const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
 const RoGroupAttr = models.RoGroupAttr;
 const DBSwitchInfo = models.DBSwitchInfo;
 const StartReplicationResponse = models.StartReplicationResponse;
-const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
+const ModifyNameOrDescByDpIdResponse = models.ModifyNameOrDescByDpIdResponse;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const CloseCDBProxyResponse = models.CloseCDBProxyResponse;
 const CustomConfig = models.CustomConfig;
@@ -111,6 +112,7 @@ const CloseWanServiceResponse = models.CloseWanServiceResponse;
 const CreateCloneInstanceRequest = models.CreateCloneInstanceRequest;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
 const CloseCDBProxyRequest = models.CloseCDBProxyRequest;
 const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
 const ModifyCDBProxyConnectionPoolResponse = models.ModifyCDBProxyConnectionPoolResponse;
@@ -128,10 +130,10 @@ const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
 const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const ModifyInstanceTagRequest = models.ModifyInstanceTagRequest;
-const CloseWanServiceRequest = models.CloseWanServiceRequest;
+const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
 const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
-const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
+const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
 const CreateAuditPolicyResponse = models.CreateAuditPolicyResponse;
@@ -192,8 +194,10 @@ const TablePrivilege = models.TablePrivilege;
 const BalanceRoGroupLoadRequest = models.BalanceRoGroupLoadRequest;
 const QueryCDBProxyRequest = models.QueryCDBProxyRequest;
 const DescribeAuditRulesRequest = models.DescribeAuditRulesRequest;
+const ModifyNameOrDescByDpIdRequest = models.ModifyNameOrDescByDpIdRequest;
 const DescribeBackupOverviewResponse = models.DescribeBackupOverviewResponse;
 const ColumnPrivilege = models.ColumnPrivilege;
+const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
 const ErrlogItem = models.ErrlogItem;
 const DescribeTablesResponse = models.DescribeTablesResponse;
 const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
@@ -234,6 +238,7 @@ const PoolConf = models.PoolConf;
 const DescribeAuditPoliciesRequest = models.DescribeAuditPoliciesRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const InstanceRebootTime = models.InstanceRebootTime;
+const ModifyInstancePasswordComplexityRequest = models.ModifyInstancePasswordComplexityRequest;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
@@ -244,8 +249,10 @@ const DescribeAuditRulesResponse = models.DescribeAuditRulesResponse;
 const BaseGroupInfo = models.BaseGroupInfo;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
 const ModifyCDBProxyConnectionPoolRequest = models.ModifyCDBProxyConnectionPoolRequest;
+const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
 const SlaveConfig = models.SlaveConfig;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
+const CreateAccountsRequest = models.CreateAccountsRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
 const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
@@ -254,9 +261,10 @@ const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const Account = models.Account;
 const CreateBackupRequest = models.CreateBackupRequest;
 const CommonTimeWindow = models.CommonTimeWindow;
+const AccountInfo = models.AccountInfo;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
-const StopRollbackRequest = models.StopRollbackRequest;
+const ModifyInstancePasswordComplexityResponse = models.ModifyInstancePasswordComplexityResponse;
 const LocalBinlogConfigDefault = models.LocalBinlogConfigDefault;
 const DeviceMemInfo = models.DeviceMemInfo;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
@@ -266,7 +274,7 @@ const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
 const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
-const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
+const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
@@ -279,6 +287,7 @@ const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const ModifyCDBProxyResponse = models.ModifyCDBProxyResponse;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
+const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
 const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewRequest;
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
@@ -291,11 +300,13 @@ const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsReque
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
 const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
 const Rule = models.Rule;
+const ZoneConf = models.ZoneConf;
 const AuditFilter = models.AuditFilter;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
-const ZoneConf = models.ZoneConf;
+const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackTimeRange = models.RollbackTimeRange;
+const StopRollbackRequest = models.StopRollbackRequest;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const UpgradeCDBProxyRequest = models.UpgradeCDBProxyRequest;
@@ -394,6 +405,21 @@ class CdbClient extends AbstractClient {
     IsolateDBInstance(req, cb) {
         let resp = new IsolateDBInstanceResponse();
         this.request("IsolateDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API (RestartDBInstances) is used to restart TencentDB instances.
+
+Note:
+1. This API only supports restarting primary instances.
+2. The instance status must be normal, and no other async tasks are in progress.
+     * @param {RestartDBInstancesRequest} req
+     * @param {function(string, RestartDBInstancesResponse):void} cb
+     * @public
+     */
+    RestartDBInstances(req, cb) {
+        let resp = new RestartDBInstancesResponse();
+        this.request("RestartDBInstances", req, resp, cb);
     }
 
     /**
@@ -688,6 +714,17 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
+     * This API is used to modify the password complexity of a TencentDB instance.
+     * @param {ModifyInstancePasswordComplexityRequest} req
+     * @param {function(string, ModifyInstancePasswordComplexityResponse):void} cb
+     * @public
+     */
+    ModifyInstancePasswordComplexity(req, cb) {
+        let resp = new ModifyInstancePasswordComplexityResponse();
+        this.request("ModifyInstancePasswordComplexity", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyTimeWindow) is used to update the maintenance time window of a TencentDB instance.
      * @param {ModifyTimeWindowRequest} req
      * @param {function(string, ModifyTimeWindowResponse):void} cb
@@ -806,6 +843,17 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
+     * This API (ModifyDBInstanceVipVport) is used to modify the IP and port number of a TencentDB instance, switch from the basic network to VPC, or change VPC subnets.
+     * @param {ModifyDBInstanceVipVportRequest} req
+     * @param {function(string, ModifyDBInstanceVipVportResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceVipVport(req, cb) {
+        let resp = new ModifyDBInstanceVipVportResponse();
+        this.request("ModifyDBInstanceVipVport", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeDBInstanceConfig) is used to query the configuration information of a TencentDB instance, such as its synchronization mode and deployment mode.
      * @param {DescribeDBInstanceConfigRequest} req
      * @param {function(string, DescribeDBInstanceConfigResponse):void} cb
@@ -913,6 +961,17 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     StopDBImportJob(req, cb) {
         let resp = new StopDBImportJobResponse();
         this.request("StopDBImportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create one or more TencentDB instance accounts. The account names, host addresses, and passwords are required, and account remarks and the maximum connections are optional.
+     * @param {CreateAccountsRequest} req
+     * @param {function(string, CreateAccountsResponse):void} cb
+     * @public
+     */
+    CreateAccounts(req, cb) {
+        let resp = new CreateAccountsResponse();
+        this.request("CreateAccounts", req, resp, cb);
     }
 
     /**
@@ -1240,18 +1299,14 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API (RestartDBInstances) is used to restart TencentDB instances.
-
-Note:
-1. This API only supports restarting primary instances.
-2. The instance status must be normal, and no other async tasks are in progress.
-     * @param {RestartDBInstancesRequest} req
-     * @param {function(string, RestartDBInstancesResponse):void} cb
+     * This API (DescribeAccounts) is used to query information of all TencentDB accounts.
+     * @param {DescribeAccountsRequest} req
+     * @param {function(string, DescribeAccountsResponse):void} cb
      * @public
      */
-    RestartDBInstances(req, cb) {
-        let resp = new RestartDBInstancesResponse();
-        this.request("RestartDBInstances", req, resp, cb);
+    DescribeAccounts(req, cb) {
+        let resp = new DescribeAccountsResponse();
+        this.request("DescribeAccounts", req, resp, cb);
     }
 
     /**
@@ -1530,6 +1585,17 @@ Note that before enabling public network access, you need to first [initialize t
     DescribeCloneList(req, cb) {
         let resp = new DescribeCloneListResponse();
         this.request("DescribeCloneList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the name or description of a placement group.
+     * @param {ModifyNameOrDescByDpIdRequest} req
+     * @param {function(string, ModifyNameOrDescByDpIdResponse):void} cb
+     * @public
+     */
+    ModifyNameOrDescByDpId(req, cb) {
+        let resp = new ModifyNameOrDescByDpIdResponse();
+        this.request("ModifyNameOrDescByDpId", req, resp, cb);
     }
 
     /**

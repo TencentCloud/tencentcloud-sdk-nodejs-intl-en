@@ -17,6 +17,34 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DisableAutoScalingGroup response structure.
+ * @class
+ */
+class DisableAutoScalingGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyLaunchConfigurationAttributes request structure.
  * @class
  */
@@ -231,6 +259,34 @@ This field requires passing in the `InstanceName` field. Other fields that are n
 }
 
 /**
+ * DisableAutoScalingGroup request structure.
+ * @class
+ */
+class DisableAutoScalingGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling group ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+
+    }
+}
+
+/**
  * ModifyAutoScalingGroup request structure.
  * @class
  */
@@ -433,6 +489,41 @@ This parameter is valid only when `InstanceAllocationPolicy` is set to `SPOT_MIX
             this.SpotMixedAllocationPolicy = obj;
         }
         this.CapacityRebalance = 'CapacityRebalance' in params ? params.CapacityRebalance : null;
+
+    }
+}
+
+/**
+ * ScaleOutInstances request structure.
+ * @class
+ */
+class ScaleOutInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling group ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * Number of instances to be added
+         * @type {number || null}
+         */
+        this.ScaleOutNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.ScaleOutNumber = 'ScaleOutNumber' in params ? params.ScaleOutNumber : null;
 
     }
 }
@@ -650,6 +741,309 @@ The maximum number of `Filters` in each request is 10. The upper limit for `Filt
 }
 
 /**
+ * Information set of eligible launch configurations.
+ * @class
+ */
+class LaunchConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID of the instance.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Launch configuration ID
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * Launch configuration name.
+         * @type {string || null}
+         */
+        this.LaunchConfigurationName = null;
+
+        /**
+         * Instance model.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Information of the instance's system disk configuration.
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * Information of the instance's data disk configuration.
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
+        /**
+         * Instance login settings.
+         * @type {LimitedLoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * Information of the public network bandwidth configuration.
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * Security group of the instance.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Auto scaling group associated with the launch configuration.
+         * @type {Array.<AutoScalingGroupAbstract> || null}
+         */
+        this.AutoScalingGroupAbstractSet = null;
+
+        /**
+         * Custom data.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserData = null;
+
+        /**
+         * Creation time of the launch configuration.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Conditions of enhancement services for the instance and their settings.
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
+
+        /**
+         * Image ID.
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * Current status of the launch configuration. Value range: <br><li>NORMAL: normal <br><li>IMAGE_ABNORMAL: Exception with the image of the launch configuration <br><li>CBS_SNAP_ABNORMAL: Exception with the data disk snapshot of the launch configuration <br><li>SECURITY_GROUP_ABNORMAL: Exception with the security group of the launch configuration<br>
+         * @type {string || null}
+         */
+        this.LaunchConfigurationStatus = null;
+
+        /**
+         * Instance billing mode. CVM instances take `POSTPAID_BY_HOUR` by default. Valid values:
+<br><li>POSTPAID_BY_HOUR: pay-as-you-go hourly
+<br><li>SPOTPAID: spot instance
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Market options of the instance, such as parameters related to spot instances. This parameter is required for spot instances.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {InstanceMarketOptionsRequest || null}
+         */
+        this.InstanceMarketOptions = null;
+
+        /**
+         * List of instance models.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
+        /**
+         * List of instance tags, which will be added to instances created by the scale-out activity. Up to 10 tags allowed.
+         * @type {Array.<InstanceTag> || null}
+         */
+        this.InstanceTags = null;
+
+        /**
+         * Tag list.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Version
+         * @type {number || null}
+         */
+        this.VersionNumber = null;
+
+        /**
+         * Update time
+         * @type {string || null}
+         */
+        this.UpdatedTime = null;
+
+        /**
+         * CAM role name. This parameter can be obtained from the `roleName` field returned by DescribeRoleList API.
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
+        /**
+         * Value of InstanceTypesCheckPolicy upon the last operation.
+         * @type {string || null}
+         */
+        this.LastOperationInstanceTypesCheckPolicy = null;
+
+        /**
+         * CVM hostname settings.
+         * @type {HostNameSettings || null}
+         */
+        this.HostNameSettings = null;
+
+        /**
+         * Settings of CVM instance names
+         * @type {InstanceNameSettings || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
+         * Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+<br><li>ORIGINAL: uses the configured cloud disk type
+<br><li>AUTOMATIC: automatically chooses an available cloud disk type in the current availability zone
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HpcClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+
+        if (params.LoginSettings) {
+            let obj = new LimitedLoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.AutoScalingGroupAbstractSet) {
+            this.AutoScalingGroupAbstractSet = new Array();
+            for (let z in params.AutoScalingGroupAbstractSet) {
+                let obj = new AutoScalingGroupAbstract();
+                obj.deserialize(params.AutoScalingGroupAbstractSet[z]);
+                this.AutoScalingGroupAbstractSet.push(obj);
+            }
+        }
+        this.UserData = 'UserData' in params ? params.UserData : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
+        }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.LaunchConfigurationStatus = 'LaunchConfigurationStatus' in params ? params.LaunchConfigurationStatus : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+
+        if (params.InstanceMarketOptions) {
+            let obj = new InstanceMarketOptionsRequest();
+            obj.deserialize(params.InstanceMarketOptions)
+            this.InstanceMarketOptions = obj;
+        }
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+
+        if (params.InstanceTags) {
+            this.InstanceTags = new Array();
+            for (let z in params.InstanceTags) {
+                let obj = new InstanceTag();
+                obj.deserialize(params.InstanceTags[z]);
+                this.InstanceTags.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+        this.LastOperationInstanceTypesCheckPolicy = 'LastOperationInstanceTypesCheckPolicy' in params ? params.LastOperationInstanceTypesCheckPolicy : null;
+
+        if (params.HostNameSettings) {
+            let obj = new HostNameSettings();
+            obj.deserialize(params.HostNameSettings)
+            this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
+        }
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
+        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
+
+    }
+}
+
+/**
  * DescribeAccountLimits response structure.
  * @class
  */
@@ -700,6 +1094,41 @@ class DescribeAccountLimitsResponse extends  AbstractModel {
         this.NumberOfLaunchConfigurations = 'NumberOfLaunchConfigurations' in params ? params.NumberOfLaunchConfigurations : null;
         this.MaxNumberOfAutoScalingGroups = 'MaxNumberOfAutoScalingGroups' in params ? params.MaxNumberOfAutoScalingGroups : null;
         this.NumberOfAutoScalingGroups = 'NumberOfAutoScalingGroups' in params ? params.NumberOfAutoScalingGroups : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateLaunchConfiguration response structure.
+ * @class
+ */
+class CreateLaunchConfigurationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * This parameter is returned when a launch configuration is created through this API, indicating the launch configuration ID.
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -856,6 +1285,83 @@ class DescribeAutoScalingGroupsResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateScheduledAction request structure.
+ * @class
+ */
+class CreateScheduledActionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Auto scaling group ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * Scheduled task name, which can only contain letters, numbers, underscores, hyphens ("-"), and decimal points with a maximum length of 60 bytes and must be unique in an auto scaling group.
+         * @type {string || null}
+         */
+        this.ScheduledActionName = null;
+
+        /**
+         * The maximum number of instances set for the auto scaling group when the scheduled task is triggered.
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * The minimum number of instances set for the auto scaling group when the scheduled task is triggered.
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * The desired number of instances set for the auto scaling group when the scheduled task is triggered.
+         * @type {number || null}
+         */
+        this.DesiredCapacity = null;
+
+        /**
+         * Initial triggered time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard. <br><br>This parameter and `Recurrence` need to be specified at the same time. After the end time, the scheduled task will no longer take effect.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Repeating mode of the scheduled task, which is in standard cron format. <br><br>This parameter and `EndTime` need to be specified at the same time.
+         * @type {string || null}
+         */
+        this.Recurrence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.ScheduledActionName = 'ScheduledActionName' in params ? params.ScheduledActionName : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Recurrence = 'Recurrence' in params ? params.Recurrence : null;
 
     }
 }
@@ -1450,60 +1956,30 @@ class CreateNotificationConfigurationResponse extends  AbstractModel {
 }
 
 /**
- * CreateScheduledAction request structure.
+ * DescribeLaunchConfigurations response structure.
  * @class
  */
-class CreateScheduledActionRequest extends  AbstractModel {
+class DescribeLaunchConfigurationsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Auto scaling group ID
-         * @type {string || null}
-         */
-        this.AutoScalingGroupId = null;
-
-        /**
-         * Scheduled task name, which can only contain letters, numbers, underscores, hyphens ("-"), and decimal points with a maximum length of 60 bytes and must be unique in an auto scaling group.
-         * @type {string || null}
-         */
-        this.ScheduledActionName = null;
-
-        /**
-         * The maximum number of instances set for the auto scaling group when the scheduled task is triggered.
+         * Number of eligible launch configurations.
          * @type {number || null}
          */
-        this.MaxSize = null;
+        this.TotalCount = null;
 
         /**
-         * The minimum number of instances set for the auto scaling group when the scheduled task is triggered.
-         * @type {number || null}
+         * List of launch configuration details.
+         * @type {Array.<LaunchConfiguration> || null}
          */
-        this.MinSize = null;
+        this.LaunchConfigurationSet = null;
 
         /**
-         * The desired number of instances set for the auto scaling group when the scheduled task is triggered.
-         * @type {number || null}
-         */
-        this.DesiredCapacity = null;
-
-        /**
-         * Initial triggered time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * End time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard. <br><br>This parameter and `Recurrence` need to be specified at the same time. After the end time, the scheduled task will no longer take effect.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Repeating mode of the scheduled task, which is in standard cron format. <br><br>This parameter and `EndTime` need to be specified at the same time.
-         * @type {string || null}
-         */
-        this.Recurrence = null;
+        this.RequestId = null;
 
     }
 
@@ -1514,14 +1990,17 @@ class CreateScheduledActionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
-        this.ScheduledActionName = 'ScheduledActionName' in params ? params.ScheduledActionName : null;
-        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
-        this.MinSize = 'MinSize' in params ? params.MinSize : null;
-        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Recurrence = 'Recurrence' in params ? params.Recurrence : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.LaunchConfigurationSet) {
+            this.LaunchConfigurationSet = new Array();
+            for (let z in params.LaunchConfigurationSet) {
+                let obj = new LaunchConfiguration();
+                obj.deserialize(params.LaunchConfigurationSet[z]);
+                this.LaunchConfigurationSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1993,6 +2472,265 @@ class ModifyLaunchConfigurationAttributesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateLaunchConfiguration request structure.
+ * @class
+ */
+class CreateLaunchConfigurationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Display name of the launch configuration, which can contain letters, digits, underscores and hyphens (-), and dots. Up to of 60 bytes allowed..
+         * @type {string || null}
+         */
+        this.LaunchConfigurationName = null;
+
+        /**
+         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * Project ID of the launch configuration. The default project is used if it’s left blank.
+Note that this project ID is not the same as the project ID of the scaling group. 
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Instance model. Different instance models specify different resource specifications. The specific value can be obtained by calling the [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) API to get the latest specification table or referring to the descriptions in [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
+`InstanceType` and `InstanceTypes` are mutually exclusive, and one and only one of them must be entered.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * System disk configuration of the instance. If this parameter is not specified, the default value will be used.
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * Information of the instance's data disk configuration. If this parameter is not specified, no data disk is purchased by default. Up to 11 data disks can be supported.
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
+        /**
+         * Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * The security group to which the instance belongs. This parameter can be obtained by calling the `SecurityGroupId` field in the returned value of [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1). If this parameter is not specified, no security group will be bound by default.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Security and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
+
+        /**
+         * Base64-encoded custom data of up to 16 KB.
+         * @type {string || null}
+         */
+        this.UserData = null;
+
+        /**
+         * Instance billing mode. CVM instances take `POSTPAID_BY_HOUR` by default. Valid values:
+<br><li>POSTPAID_BY_HOUR: pay-as-you-go hourly
+<br><li>SPOTPAID: spot instance
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Market options of the instance, such as parameters related to spot instances. This parameter is required for spot instances.
+         * @type {InstanceMarketOptionsRequest || null}
+         */
+        this.InstanceMarketOptions = null;
+
+        /**
+         * List of instance models. Different instance models specify different resource specifications. Up to 10 instance models can be supported.
+`InstanceType` and `InstanceTypes` are mutually exclusive, and one and only one of them must be entered.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
+        /**
+         * CAM role name. This parameter can be obtained from the `roleName` field returned by DescribeRoleList API.
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
+        /**
+         * Instance type verification policy. Value range: ALL, ANY. Default value: ANY.
+<br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
+<br><li> ANY: The verification will success if any instance type (InstanceType) is available; otherwise, an error will be reported.
+
+Common reasons why an instance type is unavailable include stock-out of the instance type or the corresponding cloud disk.
+If a model in InstanceTypes does not exist or has been discontinued, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
+         * @type {string || null}
+         */
+        this.InstanceTypesCheckPolicy = null;
+
+        /**
+         * List of tags. This parameter is used to bind up to 10 tags to newly added instances.
+         * @type {Array.<InstanceTag> || null}
+         */
+        this.InstanceTags = null;
+
+        /**
+         * List of tags. You can specify tags that you want to bind to the launch configuration. Each launch configuration can have up to 30 tags.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * CVM hostname settings.
+         * @type {HostNameSettings || null}
+         */
+        this.HostNameSettings = null;
+
+        /**
+         * Settings of CVM instance names
+If this field is configured in a launch configuration, the `InstanceName` of a CVM created by the scaling group will be generated according to the configuration; otherwise, it will be in the `as-{{AutoScalingGroupName }}` format.
+         * @type {InstanceNameSettings || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
+         * Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+<br><li>ORIGINAL: uses the configured cloud disk type
+<br><li>AUTOMATIC: automatically chooses an available cloud disk type
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HpcClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
+        }
+        this.UserData = 'UserData' in params ? params.UserData : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+
+        if (params.InstanceMarketOptions) {
+            let obj = new InstanceMarketOptionsRequest();
+            obj.deserialize(params.InstanceMarketOptions)
+            this.InstanceMarketOptions = obj;
+        }
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+        this.InstanceTypesCheckPolicy = 'InstanceTypesCheckPolicy' in params ? params.InstanceTypesCheckPolicy : null;
+
+        if (params.InstanceTags) {
+            this.InstanceTags = new Array();
+            for (let z in params.InstanceTags) {
+                let obj = new InstanceTag();
+                obj.deserialize(params.InstanceTags[z]);
+                this.InstanceTags.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.HostNameSettings) {
+            let obj = new HostNameSettings();
+            obj.deserialize(params.HostNameSettings)
+            this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
+        }
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
+        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
 
     }
 }
@@ -2927,6 +3665,75 @@ class DeleteLaunchConfigurationRequest extends  AbstractModel {
 }
 
 /**
+ * Result of the command execution
+ * @class
+ */
+class InvocationResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Execution activity ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InvocationId = null;
+
+        /**
+         * Execution task ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InvocationTaskId = null;
+
+        /**
+         * Command ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CommandId = null;
+
+        /**
+         * Execution Status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * Execution exception information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InvocationId = 'InvocationId' in params ? params.InvocationId : null;
+        this.InvocationTaskId = 'InvocationTaskId' in params ? params.InvocationTaskId : null;
+        this.CommandId = 'CommandId' in params ? params.CommandId : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+
+    }
+}
+
+/**
  * ModifyScalingPolicy request structure.
  * @class
  */
@@ -3067,6 +3874,41 @@ class UpgradeLifecycleHookResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Instance tag. This parameter is used to bind tags to newly added instances.
+ * @class
+ */
+class InstanceTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -3410,6 +4252,239 @@ class DeleteScheduledActionResponse extends  AbstractModel {
 }
 
 /**
+ * UpgradeLaunchConfiguration request structure.
+ * @class
+ */
+class UpgradeLaunchConfigurationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Launch configuration ID.
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * List of instance models. Different instance models specify different resource specifications. Up to 5 instance models can be supported.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
+        /**
+         * Display name of the launch configuration, which can contain letters, digits, underscores and hyphens (-), and dots. Up to of 60 bytes allowed..
+         * @type {string || null}
+         */
+        this.LaunchConfigurationName = null;
+
+        /**
+         * Information of the instance's data disk configuration. If this parameter is not specified, no data disk is purchased by default. Up to 11 data disks can be supported.
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
+        /**
+         * Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Security and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
+
+        /**
+         * Instance billing type. CVM instances are POSTPAID_BY_HOUR by default.
+<br><li>POSTPAID_BY_HOUR: Pay-as-you-go on an hourly basis
+<br><li>SPOTPAID: Bidding
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Market options of the instance, such as parameters related to spot instances. This parameter is required for spot instances.
+         * @type {InstanceMarketOptionsRequest || null}
+         */
+        this.InstanceMarketOptions = null;
+
+        /**
+         * Instance type verification policy. Value range: ALL, ANY. Default value: ANY.
+<br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
+<br><li> ANY: The verification will success if any instance type (InstanceType) is available; otherwise, an error will be reported.
+
+Common reasons why an instance type is unavailable include stock-out of the instance type or the corresponding cloud disk.
+If a model in InstanceTypes does not exist or has been discontinued, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
+         * @type {string || null}
+         */
+        this.InstanceTypesCheckPolicy = null;
+
+        /**
+         * Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * Project ID of the instance. Leave it blank as the default.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * The security group to which the instance belongs. This parameter can be obtained by calling the `SecurityGroupId` field in the returned value of [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1). If this parameter is not specified, no security group will be bound by default.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * System disk configuration of the instance. If this parameter is not specified, the default value will be used.
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * Base64-encoded custom data of up to 16 KB.
+         * @type {string || null}
+         */
+        this.UserData = null;
+
+        /**
+         * List of tags. This parameter is used to bind up to 10 tags to newly added instances.
+         * @type {Array.<InstanceTag> || null}
+         */
+        this.InstanceTags = null;
+
+        /**
+         * CAM role name, which can be obtained from the roleName field in the return value of the DescribeRoleList API.
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
+        /**
+         * CVM hostname settings.
+         * @type {HostNameSettings || null}
+         */
+        this.HostNameSettings = null;
+
+        /**
+         * Settings of CVM instance names
+         * @type {InstanceNameSettings || null}
+         */
+        this.InstanceNameSettings = null;
+
+        /**
+         * Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
+         * Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
+<br><li>ORIGINAL: uses the configured cloud disk type
+<br><li>AUTOMATIC: automatically chooses an available cloud disk type
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+        this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
+        }
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+
+        if (params.InstanceMarketOptions) {
+            let obj = new InstanceMarketOptionsRequest();
+            obj.deserialize(params.InstanceMarketOptions)
+            this.InstanceMarketOptions = obj;
+        }
+        this.InstanceTypesCheckPolicy = 'InstanceTypesCheckPolicy' in params ? params.InstanceTypesCheckPolicy : null;
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+        this.UserData = 'UserData' in params ? params.UserData : null;
+
+        if (params.InstanceTags) {
+            this.InstanceTags = new Array();
+            for (let z in params.InstanceTags) {
+                let obj = new InstanceTag();
+                obj.deserialize(params.InstanceTags[z]);
+                this.InstanceTags.push(obj);
+            }
+        }
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+
+        if (params.HostNameSettings) {
+            let obj = new HostNameSettings();
+            obj.deserialize(params.HostNameSettings)
+            this.HostNameSettings = obj;
+        }
+
+        if (params.InstanceNameSettings) {
+            let obj = new InstanceNameSettings();
+            obj.deserialize(params.InstanceNameSettings)
+            this.InstanceNameSettings = obj;
+        }
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
+
+    }
+}
+
+/**
  * DescribeAutoScalingActivities response structure.
  * @class
  */
@@ -3603,6 +4678,50 @@ class DeleteScalingPolicyRequest extends  AbstractModel {
             return;
         }
         this.AutoScalingPolicyId = 'AutoScalingPolicyId' in params ? params.AutoScalingPolicyId : null;
+
+    }
+}
+
+/**
+ * Describes login settings of an instance.
+ * @class
+ */
+class LoginSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-16 characters long and contain at least one character from two of the following categories: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-16 characters long and contain at least one character from three of the following categories: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+        /**
+         * Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.KeepImageLogin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Password = 'Password' in params ? params.Password : null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+        this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
 
     }
 }
@@ -4497,6 +5616,41 @@ class CompleteLifecycleActionResponse extends  AbstractModel {
 }
 
 /**
+ * ScaleOutInstances response structure.
+ * @class
+ */
+class ScaleOutInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling activity ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * > Describes key-value pair filters used for conditional queries, such as filtering results by ID, name and state.
 > * If there are multiple `Filter` parameters, the relationship among them will be logical `AND`.
 > * If there are multiple `Values` for the same `Filter`, the relationship among the `Values` for the same `Filter` will be logical `OR`.
@@ -4738,6 +5892,34 @@ class ModifyNotificationConfigurationResponse extends  AbstractModel {
 }
 
 /**
+ * This describes the configuration and information related to instance login. For security reasons, sensitive information is not described.
+ * @class
+ */
+class LimitedLoginSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of key IDs.
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+    }
+}
+
+/**
  * DescribeLifecycleHooks response structure.
  * @class
  */
@@ -4832,7 +6014,8 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.Cooldown = null;
 
         /**
-         * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
+         * This parameter is diused. Please use [CreateNotificationConfiguration](https://intl.cloud.tencent.com/document/api/377/33185?from_cn_redirect=1) instead.
+Notification group ID, which is the set of user group IDs.
          * @type {Array.<string> || null}
          */
         this.NotificationUserGroupIds = null;
@@ -4858,6 +6041,41 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         }
         this.Cooldown = 'Cooldown' in params ? params.Cooldown : null;
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
+
+    }
+}
+
+/**
+ * ScaleInInstances response structure.
+ * @class
+ */
+class ScaleInInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling activity ID
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4914,6 +6132,71 @@ class DeleteNotificationConfigurationRequest extends  AbstractModel {
             return;
         }
         this.AutoScalingNotificationId = 'AutoScalingNotificationId' in params ? params.AutoScalingNotificationId : null;
+
+    }
+}
+
+/**
+ * DescribeLaunchConfigurations request structure.
+ * @class
+ */
+class DescribeLaunchConfigurationsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Queries by one or more launch configuration IDs in the format of `asc-ouy1ax38`. The maximum quantity per request is 100. This parameter does not support specifying both `LaunchConfigurationIds` and `Filters` at the same time.
+         * @type {Array.<string> || null}
+         */
+        this.LaunchConfigurationIds = null;
+
+        /**
+         * Filters
+<li> `launch-configuration-id` - String - Required: No - Filter by launch configuration ID.</li>
+<li> `launch-configuration-name` - String - Required: No - Filter by launch configuration name.</li>
+<li> `launch-configuration-name` - String - Required: No - Fuzzy search by launch configuration name.</li>
+<li> `tag-key` - String - Required: No - Filter by the tag key.</li>
+<li> `tag-value` - String - Required: No - Filter by the tag value.</li>
+<li>tag:tag-key - String - Optional - Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
+</li>
+The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `LaunchConfigurationIds` and `Filters` at the same time.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The number of returned results. Default value: `20`. Maximum value: `100`. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The offset. Default value: `0`. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaunchConfigurationIds = 'LaunchConfigurationIds' in params ? params.LaunchConfigurationIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -5092,6 +6375,41 @@ class LifecycleActionResultInfo extends  AbstractModel {
 }
 
 /**
+ * Brief information of a scaling group.
+ * @class
+ */
+class AutoScalingGroupAbstract extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling group ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * Auto scaling group name.
+         * @type {string || null}
+         */
+        this.AutoScalingGroupName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
+
+    }
+}
+
+/**
  * EnableAutoScalingGroup request structure.
  * @class
  */
@@ -5238,6 +6556,41 @@ The maximum number of `Filters` per request is 10. The upper limit for `Filter.V
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * ScaleInInstances request structure.
+ * @class
+ */
+class ScaleInInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scaling group ID
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * Number of instances to be reduced
+         * @type {number || null}
+         */
+        this.ScaleInNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.ScaleInNumber = 'ScaleInNumber' in params ? params.ScaleInNumber : null;
 
     }
 }
@@ -5801,9 +7154,10 @@ class Activity extends  AbstractModel {
 
         /**
          * Type of the scaling activity. Valid values:<br>
-<li>SCALE_OUT: scales out. <li>SCALE_IN: scales in. <li>ATTACH_INSTANCES: adds an instance. <li>REMOVE_INSTANCES: terminates an instance. <li>DETACH_INSTANCES: removes an instance. <li>TERMINATE_INSTANCES_UNEXPECTEDLY: terminates an instance in the CVM console. <li>REPLACE_UNHEALTHY_INSTANCE: replaces an unhealthy instance.
-<li>START_INSTANCES: starts an instance.
-<li>STOP_INSTANCES: stops an instance.
+<li>`SCALE_OUT`: Scale out. <li>`SCALE_IN`: Scale in. <li>`ATTACH_INSTANCES`: Add instances. <li>`REMOVE_INSTANCES`: Terminate instances. <li>`DETACH_INSTANCES`: Remove instances. <li>`TERMINATE_INSTANCES_UNEXPECTEDLY`: Terminate instances in the CVM console. <li>`REPLACE_UNHEALTHY_INSTANCE`: Replace an unhealthy instance.
+<li>`START_INSTANCES`: Starts up instances.
+<li>`STOP_INSTANCES`: Shut down instances.
+<li>`INVOKE_COMMAND`: Execute commands
          * @type {string || null}
          */
         this.ActivityType = null;
@@ -5880,6 +7234,12 @@ class Activity extends  AbstractModel {
          */
         this.DetailedStatusMessageSet = null;
 
+        /**
+         * Result of the command execution
+         * @type {Array.<InvocationResult> || null}
+         */
+        this.InvocationResultSet = null;
+
     }
 
     /**
@@ -5925,6 +7285,15 @@ class Activity extends  AbstractModel {
                 let obj = new DetailedStatusMessage();
                 obj.deserialize(params.DetailedStatusMessageSet[z]);
                 this.DetailedStatusMessageSet.push(obj);
+            }
+        }
+
+        if (params.InvocationResultSet) {
+            this.InvocationResultSet = new Array();
+            for (let z in params.InvocationResultSet) {
+                let obj = new InvocationResult();
+                obj.deserialize(params.InvocationResultSet[z]);
+                this.InvocationResultSet.push(obj);
             }
         }
 
@@ -6279,6 +7648,34 @@ class EnableAutoScalingGroupResponse extends  AbstractModel {
 }
 
 /**
+ * UpgradeLaunchConfiguration response structure.
+ * @class
+ */
+class UpgradeLaunchConfigurationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * This API is used to describe the billing mode of an instance.
  * @class
  */
@@ -6384,16 +7781,22 @@ class ExecuteScalingPolicyRequest extends  AbstractModel {
 }
 
 module.exports = {
+    DisableAutoScalingGroupResponse: DisableAutoScalingGroupResponse,
     ModifyLaunchConfigurationAttributesRequest: ModifyLaunchConfigurationAttributesRequest,
+    DisableAutoScalingGroupRequest: DisableAutoScalingGroupRequest,
     ModifyAutoScalingGroupRequest: ModifyAutoScalingGroupRequest,
+    ScaleOutInstancesRequest: ScaleOutInstancesRequest,
     AutoScalingNotification: AutoScalingNotification,
     ModifyScheduledActionRequest: ModifyScheduledActionRequest,
     DescribeAutoScalingGroupsRequest: DescribeAutoScalingGroupsRequest,
+    LaunchConfiguration: LaunchConfiguration,
     DescribeAccountLimitsResponse: DescribeAccountLimitsResponse,
+    CreateLaunchConfigurationResponse: CreateLaunchConfigurationResponse,
     Advice: Advice,
     CreateLifecycleHookResponse: CreateLifecycleHookResponse,
     ClearLaunchConfigurationAttributesResponse: ClearLaunchConfigurationAttributesResponse,
     DescribeAutoScalingGroupsResponse: DescribeAutoScalingGroupsResponse,
+    CreateScheduledActionRequest: CreateScheduledActionRequest,
     SystemDisk: SystemDisk,
     SpotMarketOptions: SpotMarketOptions,
     StopAutoScalingInstancesResponse: StopAutoScalingInstancesResponse,
@@ -6409,7 +7812,7 @@ module.exports = {
     CompleteLifecycleActionRequest: CompleteLifecycleActionRequest,
     CreateScalingPolicyResponse: CreateScalingPolicyResponse,
     CreateNotificationConfigurationResponse: CreateNotificationConfigurationResponse,
-    CreateScheduledActionRequest: CreateScheduledActionRequest,
+    DescribeLaunchConfigurationsResponse: DescribeLaunchConfigurationsResponse,
     RemoveInstancesRequest: RemoveInstancesRequest,
     DeleteScalingPolicyResponse: DeleteScalingPolicyResponse,
     Tag: Tag,
@@ -6422,6 +7825,7 @@ module.exports = {
     DeleteNotificationConfigurationResponse: DeleteNotificationConfigurationResponse,
     DetachInstancesResponse: DetachInstancesResponse,
     ModifyLaunchConfigurationAttributesResponse: ModifyLaunchConfigurationAttributesResponse,
+    CreateLaunchConfigurationRequest: CreateLaunchConfigurationRequest,
     AutoScalingGroup: AutoScalingGroup,
     AttachInstancesResponse: AttachInstancesResponse,
     DescribeAutoScalingGroupLastActivitiesResponse: DescribeAutoScalingGroupLastActivitiesResponse,
@@ -6438,17 +7842,21 @@ module.exports = {
     ModifyLoadBalancerTargetAttributesResponse: ModifyLoadBalancerTargetAttributesResponse,
     ModifyAutoScalingGroupResponse: ModifyAutoScalingGroupResponse,
     DeleteLaunchConfigurationRequest: DeleteLaunchConfigurationRequest,
+    InvocationResult: InvocationResult,
     ModifyScalingPolicyRequest: ModifyScalingPolicyRequest,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     UpgradeLifecycleHookResponse: UpgradeLifecycleHookResponse,
+    InstanceTag: InstanceTag,
     ModifyLifecycleHookResponse: ModifyLifecycleHookResponse,
     DescribeAutoScalingAdvicesResponse: DescribeAutoScalingAdvicesResponse,
     CreateAutoScalingGroupRequest: CreateAutoScalingGroupRequest,
     DeleteScheduledActionResponse: DeleteScheduledActionResponse,
+    UpgradeLaunchConfigurationRequest: UpgradeLaunchConfigurationRequest,
     DescribeAutoScalingActivitiesResponse: DescribeAutoScalingActivitiesResponse,
     DescribeNotificationConfigurationsResponse: DescribeNotificationConfigurationsResponse,
     DataDisk: DataDisk,
     DeleteScalingPolicyRequest: DeleteScalingPolicyRequest,
+    LoginSettings: LoginSettings,
     CreateAutoScalingGroupFromInstanceResponse: CreateAutoScalingGroupFromInstanceResponse,
     DetachInstancesRequest: DetachInstancesRequest,
     Instance: Instance,
@@ -6465,23 +7873,29 @@ module.exports = {
     ScheduledAction: ScheduledAction,
     ModifyLifecycleHookRequest: ModifyLifecycleHookRequest,
     CompleteLifecycleActionResponse: CompleteLifecycleActionResponse,
+    ScaleOutInstancesResponse: ScaleOutInstancesResponse,
     Filter: Filter,
     DescribeLifecycleHooksRequest: DescribeLifecycleHooksRequest,
     ServiceSettings: ServiceSettings,
     CreateAutoScalingGroupResponse: CreateAutoScalingGroupResponse,
     TargetAttribute: TargetAttribute,
     ModifyNotificationConfigurationResponse: ModifyNotificationConfigurationResponse,
+    LimitedLoginSettings: LimitedLoginSettings,
     DescribeLifecycleHooksResponse: DescribeLifecycleHooksResponse,
     CreateScalingPolicyRequest: CreateScalingPolicyRequest,
+    ScaleInInstancesResponse: ScaleInInstancesResponse,
     DescribeAutoScalingAdvicesRequest: DescribeAutoScalingAdvicesRequest,
     DeleteNotificationConfigurationRequest: DeleteNotificationConfigurationRequest,
+    DescribeLaunchConfigurationsRequest: DescribeLaunchConfigurationsRequest,
     NotificationTarget: NotificationTarget,
     ModifyLoadBalancerTargetAttributesRequest: ModifyLoadBalancerTargetAttributesRequest,
     DeleteAutoScalingGroupResponse: DeleteAutoScalingGroupResponse,
     LifecycleActionResultInfo: LifecycleActionResultInfo,
+    AutoScalingGroupAbstract: AutoScalingGroupAbstract,
     EnableAutoScalingGroupRequest: EnableAutoScalingGroupRequest,
     MetricAlarm: MetricAlarm,
     DescribeNotificationConfigurationsRequest: DescribeNotificationConfigurationsRequest,
+    ScaleInInstancesRequest: ScaleInInstancesRequest,
     LifecycleHook: LifecycleHook,
     ForwardLoadBalancer: ForwardLoadBalancer,
     ClearLaunchConfigurationAttributesRequest: ClearLaunchConfigurationAttributesRequest,
@@ -6501,6 +7915,7 @@ module.exports = {
     CreateAutoScalingGroupFromInstanceRequest: CreateAutoScalingGroupFromInstanceRequest,
     InternetAccessible: InternetAccessible,
     EnableAutoScalingGroupResponse: EnableAutoScalingGroupResponse,
+    UpgradeLaunchConfigurationResponse: UpgradeLaunchConfigurationResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
     DeleteLifecycleHookResponse: DeleteLifecycleHookResponse,
     ExecuteScalingPolicyRequest: ExecuteScalingPolicyRequest,

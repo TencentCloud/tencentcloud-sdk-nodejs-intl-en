@@ -183,6 +183,146 @@ class DetectedWords extends  AbstractModel {
 }
 
 /**
+ * Form recognition result.
+ * @class
+ */
+class TextTable extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Column index of the top-left corner of the cell.
+         * @type {number || null}
+         */
+        this.ColTl = null;
+
+        /**
+         * Row index of the top-left corner of the cell.
+         * @type {number || null}
+         */
+        this.RowTl = null;
+
+        /**
+         * Column index of the bottom-right corner of the cell.
+         * @type {number || null}
+         */
+        this.ColBr = null;
+
+        /**
+         * Row index of the bottom-right corner of the cell.
+         * @type {number || null}
+         */
+        this.RowBr = null;
+
+        /**
+         * Cell text
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * Cell type. Valid values: body, header, footer
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Confidence. Value range: 0–100
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Text line coordinates, which are represented as 4 vertex coordinates.
+         * @type {Array.<Coord> || null}
+         */
+        this.Polygon = null;
+
+        /**
+         * Extended field
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ColTl = 'ColTl' in params ? params.ColTl : null;
+        this.RowTl = 'RowTl' in params ? params.RowTl : null;
+        this.ColBr = 'ColBr' in params ? params.ColBr : null;
+        this.RowBr = 'RowBr' in params ? params.RowBr : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.Polygon) {
+            this.Polygon = new Array();
+            for (let z in params.Polygon) {
+                let obj = new Coord();
+                obj.deserialize(params.Polygon[z]);
+                this.Polygon.push(obj);
+            }
+        }
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+    }
+}
+
+/**
+ * MLIDCardOCR request structure.
+ * @class
+ */
+class MLIDCardOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Base64-encoded value of an image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * The URL of an image. (This field is not available outside the Chinese mainland.)
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+For a non-Tencent Cloud URL, the download speed and stability may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * Whether to return an image. Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.RetImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.RetImage = 'RetImage' in params ? params.RetImage : null;
+
+    }
+}
+
+/**
  * TableOCR request structure.
  * @class
  */
@@ -1073,66 +1213,89 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Form recognition result.
+ * MLIDCardOCR response structure.
  * @class
  */
-class TextTable extends  AbstractModel {
+class MLIDCardOCRResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Column index of the top-left corner of the cell.
-         * @type {number || null}
-         */
-        this.ColTl = null;
-
-        /**
-         * Row index of the top-left corner of the cell.
-         * @type {number || null}
-         */
-        this.RowTl = null;
-
-        /**
-         * Column index of the bottom-right corner of the cell.
-         * @type {number || null}
-         */
-        this.ColBr = null;
-
-        /**
-         * Row index of the bottom-right corner of the cell.
-         * @type {number || null}
-         */
-        this.RowBr = null;
-
-        /**
-         * Cell text
+         * ID number
          * @type {string || null}
          */
-        this.Text = null;
+        this.ID = null;
 
         /**
-         * Cell type. Valid values: body, header, footer
+         * Full name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Address
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Gender
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Alarm codes
+-9103 Alarm for photographed certificate
+-9102 Alarm for photocopied certificate
+-9106 Alarm for covered certificate
+-9107 Alarm for blurry image
+         * @type {Array.<number> || null}
+         */
+        this.Warn = null;
+
+        /**
+         * Identity photo
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * This is an extended field, 
+with the confidence of a field recognition result returned in the following format.
+{
+  Field name:{
+    Confidence:0.9999
+  }
+}
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
+         * Certificate type
+MyKad  ID card
+MyPR    Permanent resident card
+MyTentera   Military identity card
+MyKAS    Temporary ID card
+POLIS  Police card
+IKAD   Work permit
+MyKid   Kid card
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * Confidence. Value range: 0–100
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Text line coordinates, which are represented as 4 vertex coordinates.
-         * @type {Array.<Coord> || null}
-         */
-        this.Polygon = null;
-
-        /**
-         * Extended field
+         * Date of birth. This field is available only for work permits (i-Kad) and ID cards (MyKad).
          * @type {string || null}
          */
-        this.AdvancedInfo = null;
+        this.Birthday = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1143,23 +1306,16 @@ class TextTable extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ColTl = 'ColTl' in params ? params.ColTl : null;
-        this.RowTl = 'RowTl' in params ? params.RowTl : null;
-        this.ColBr = 'ColBr' in params ? params.ColBr : null;
-        this.RowBr = 'RowBr' in params ? params.RowBr : null;
-        this.Text = 'Text' in params ? params.Text : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-
-        if (params.Polygon) {
-            this.Polygon = new Array();
-            for (let z in params.Polygon) {
-                let obj = new Coord();
-                obj.deserialize(params.Polygon[z]);
-                this.Polygon.push(obj);
-            }
-        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Warn = 'Warn' in params ? params.Warn : null;
+        this.Image = 'Image' in params ? params.Image : null;
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1266,6 +1422,8 @@ module.exports = {
     GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
     DetectedWords: DetectedWords,
+    TextTable: TextTable,
+    MLIDCardOCRRequest: MLIDCardOCRRequest,
     TableOCRRequest: TableOCRRequest,
     TableOCRResponse: TableOCRResponse,
     DetectedWordCoordPoint: DetectedWordCoordPoint,
@@ -1279,7 +1437,7 @@ module.exports = {
     TextDetection: TextDetection,
     MLIDPassportOCRRequest: MLIDPassportOCRRequest,
     HKIDCardOCRResponse: HKIDCardOCRResponse,
-    TextTable: TextTable,
+    MLIDCardOCRResponse: MLIDCardOCRResponse,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,
 
 }

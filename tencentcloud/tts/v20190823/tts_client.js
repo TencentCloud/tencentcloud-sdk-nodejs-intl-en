@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const TextToVoiceResponse = models.TextToVoiceResponse;
+const Subtitle = models.Subtitle;
 const TextToVoiceRequest = models.TextToVoiceRequest;
 
 

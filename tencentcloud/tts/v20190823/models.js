@@ -37,6 +37,12 @@ class TextToVoiceResponse extends  AbstractModel {
         this.SessionId = null;
 
         /**
+         * Timestamp information. If the timestamp feature is not enabled, an empty array will be returned.
+         * @type {Array.<Subtitle> || null}
+         */
+        this.Subtitles = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -53,7 +59,72 @@ class TextToVoiceResponse extends  AbstractModel {
         }
         this.Audio = 'Audio' in params ? params.Audio : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+
+        if (params.Subtitles) {
+            this.Subtitles = new Array();
+            for (let z in params.Subtitles) {
+                let obj = new Subtitle();
+                obj.deserialize(params.Subtitles[z]);
+                this.Subtitles.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The information about the timestamps.
+ * @class
+ */
+class Subtitle extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The word in the text that is sent.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * The start timestamp of the word in the synthesized audio data, in milliseconds.
+         * @type {number || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * The end timestamp of the word in the synthesized audio data, in milliseconds.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The start index of the character in the whole sentence, starting from 0.
+         * @type {number || null}
+         */
+        this.BeginIndex = null;
+
+        /**
+         * The end index of the character in the whole sentence, starting from 0.
+         * @type {number || null}
+         */
+        this.EndIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.BeginIndex = 'BeginIndex' in params ? params.BeginIndex : null;
+        this.EndIndex = 'EndIndex' in params ? params.EndIndex : null;
 
     }
 }
@@ -127,6 +198,12 @@ It can contain up to 150 Chinese characters (a full-width punctuation as a Chine
          */
         this.Codec = null;
 
+        /**
+         * Whether to enable the timestamp feature. Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.EnableSubtitle = null;
+
     }
 
     /**
@@ -146,12 +223,14 @@ It can contain up to 150 Chinese characters (a full-width punctuation as a Chine
         this.PrimaryLanguage = 'PrimaryLanguage' in params ? params.PrimaryLanguage : null;
         this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
         this.Codec = 'Codec' in params ? params.Codec : null;
+        this.EnableSubtitle = 'EnableSubtitle' in params ? params.EnableSubtitle : null;
 
     }
 }
 
 module.exports = {
     TextToVoiceResponse: TextToVoiceResponse,
+    Subtitle: Subtitle,
     TextToVoiceRequest: TextToVoiceRequest,
 
 }

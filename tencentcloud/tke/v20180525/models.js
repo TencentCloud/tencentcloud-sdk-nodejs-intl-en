@@ -312,33 +312,18 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
 }
 
 /**
- * ServiceAccount authentication configuration
+ * InstallEdgeLogAgent request structure.
  * @class
  */
-class ServiceAccountAuthenticationOptions extends  AbstractModel {
+class InstallEdgeLogAgentRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * service-account-issuer
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Cluster ID
          * @type {string || null}
          */
-        this.Issuer = null;
-
-        /**
-         * service-account-jwks-uri
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.JWKSURI = null;
-
-        /**
-         * If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.AutoCreateDiscoveryAnonymousAuth = null;
+        this.ClusterId = null;
 
     }
 
@@ -349,9 +334,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.Issuer = 'Issuer' in params ? params.Issuer : null;
-        this.JWKSURI = 'JWKSURI' in params ? params.JWKSURI : null;
-        this.AutoCreateDiscoveryAnonymousAuth = 'AutoCreateDiscoveryAnonymousAuth' in params ? params.AutoCreateDiscoveryAnonymousAuth : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -1077,6 +1060,34 @@ class RouteInfo extends  AbstractModel {
 }
 
 /**
+ * CreateEdgeLogConfig response structure.
+ * @class
+ */
+class CreateEdgeLogConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Cluster creation process
  * @class
  */
@@ -1487,6 +1498,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
+
+    }
+}
+
+/**
+ * InstallEdgeLogAgent response structure.
+ * @class
+ */
+class InstallEdgeLogAgentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3183,6 +3222,20 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.ExtraArgs = null;
 
+        /**
+         * Runtime type. Valid values: "docker" (default), "containerd".
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Runtime = null;
+
+        /**
+         * Forwarding mode of kube-proxy. Valid values: "iptables" (default), "ipvs".
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProxyMode = null;
+
     }
 
     /**
@@ -3198,6 +3251,53 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             obj.deserialize(params.ExtraArgs)
             this.ExtraArgs = obj;
         }
+        this.Runtime = 'Runtime' in params ? params.Runtime : null;
+        this.ProxyMode = 'ProxyMode' in params ? params.ProxyMode : null;
+
+    }
+}
+
+/**
+ * ServiceAccount authentication configuration
+ * @class
+ */
+class ServiceAccountAuthenticationOptions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * service-account-issuer
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Issuer = null;
+
+        /**
+         * service-account-jwks-uri
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.JWKSURI = null;
+
+        /**
+         * If it is set to `true`, a RABC rule is automatically created to allow anonymous users to access `/.well-known/openid-configuration` and `/openid/v1/jwks`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.AutoCreateDiscoveryAnonymousAuth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Issuer = 'Issuer' in params ? params.Issuer : null;
+        this.JWKSURI = 'JWKSURI' in params ? params.JWKSURI : null;
+        this.AutoCreateDiscoveryAnonymousAuth = 'AutoCreateDiscoveryAnonymousAuth' in params ? params.AutoCreateDiscoveryAnonymousAuth : null;
 
     }
 }
@@ -4079,6 +4179,48 @@ class DeleteClusterEndpointVipResponse extends  AbstractModel {
 }
 
 /**
+ * CreateEdgeLogConfig request structure.
+ * @class
+ */
+class CreateEdgeLogConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Log collection configuration in json form
+         * @type {string || null}
+         */
+        this.LogConfig = null;
+
+        /**
+         * CLS logset ID
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.LogConfig = 'LogConfig' in params ? params.LogConfig : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+
+    }
+}
+
+/**
  * Describes the basic configuration information of a cluster
  * @class
  */
@@ -4527,6 +4669,13 @@ class DescribeTKEEdgeScriptResponse extends  AbstractModel {
         this.Command = null;
 
         /**
+         * Version of edgectl script. The latest version is obtained by default.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ScriptVersion = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4544,6 +4693,7 @@ class DescribeTKEEdgeScriptResponse extends  AbstractModel {
         this.Link = 'Link' in params ? params.Link : null;
         this.Token = 'Token' in params ? params.Token : null;
         this.Command = 'Command' in params ? params.Command : null;
+        this.ScriptVersion = 'ScriptVersion' in params ? params.ScriptVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5136,10 +5286,10 @@ class GetUpgradeInstanceProgressRequest extends  AbstractModel {
 }
 
 /**
- * EnableClusterDeletionProtection request structure.
+ * DescribeClusterEndpoints request structure.
  * @class
  */
-class EnableClusterDeletionProtectionRequest extends  AbstractModel {
+class DescribeClusterEndpointsRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -5819,6 +5969,12 @@ class DescribeTKEEdgeScriptRequest extends  AbstractModel {
          */
         this.Config = null;
 
+        /**
+         * A legacy version of edgectl script can be downloaded. The latest version is downloaded by default. The version information can be checked in the script.
+         * @type {string || null}
+         */
+        this.ScriptVersion = null;
+
     }
 
     /**
@@ -5832,6 +5988,7 @@ class DescribeTKEEdgeScriptRequest extends  AbstractModel {
         this.Interface = 'Interface' in params ? params.Interface : null;
         this.NodeName = 'NodeName' in params ? params.NodeName : null;
         this.Config = 'Config' in params ? params.Config : null;
+        this.ScriptVersion = 'ScriptVersion' in params ? params.ScriptVersion : null;
 
     }
 }
@@ -5954,6 +6111,42 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.AutoFormatAndMount = 'AutoFormatAndMount' in params ? params.AutoFormatAndMount : null;
         this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
         this.DiskPartition = 'DiskPartition' in params ? params.DiskPartition : null;
+
+    }
+}
+
+/**
+ * DescribeEdgeLogSwitches response structure.
+ * @class
+ */
+class DescribeEdgeLogSwitchesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of TKE Edge cluster log switches
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SwitchSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SwitchSet = 'SwitchSet' in params ? params.SwitchSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7353,6 +7546,34 @@ class DeleteClusterAsGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * EnableClusterDeletionProtection request structure.
+ * @class
+ */
+class EnableClusterDeletionProtectionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * DescribePrometheusInstance request structure.
  * @class
  */
@@ -8198,40 +8419,18 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
 }
 
 /**
- * Image details
+ * DescribeEdgeLogSwitches request structure.
  * @class
  */
-class ImageInstance extends  AbstractModel {
+class DescribeEdgeLogSwitchesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Image alias
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * List of cluster IDs
+         * @type {Array.<string> || null}
          */
-        this.Alias = null;
-
-        /**
-         * Operating system name
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OsName = null;
-
-        /**
-         * Image ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * Container image tag, **DOCKER_CUSTOMIZE** (container customized tag), **GENERAL** (general tag, default value)
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OsCustomizeType = null;
+        this.ClusterIds = null;
 
     }
 
@@ -8242,10 +8441,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Alias = 'Alias' in params ? params.Alias : null;
-        this.OsName = 'OsName' in params ? params.OsName : null;
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
 
     }
 }
@@ -10389,6 +10585,34 @@ class InstanceUpgradeClusterStatus extends  AbstractModel {
 }
 
 /**
+ * UninstallEdgeLogAgent response structure.
+ * @class
+ */
+class UninstallEdgeLogAgentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClusterRoutes request structure.
  * @class
  */
@@ -10798,6 +11022,71 @@ class CreateClusterRouteTableRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterEndpoints response structure.
+ * @class
+ */
+class DescribeClusterEndpointsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CA certificate of cluster APIServer
+         * @type {string || null}
+         */
+        this.CertificationAuthority = null;
+
+        /**
+         * Public network access address of cluster APIServer
+         * @type {string || null}
+         */
+        this.ClusterExternalEndpoint = null;
+
+        /**
+         * Private network access address of cluster APIServer
+         * @type {string || null}
+         */
+        this.ClusterIntranetEndpoint = null;
+
+        /**
+         * Domain name of cluster APIServer
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterDomain = null;
+
+        /**
+         * Public network access ACL of cluster APIServer
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ClusterExternalACL = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificationAuthority = 'CertificationAuthority' in params ? params.CertificationAuthority : null;
+        this.ClusterExternalEndpoint = 'ClusterExternalEndpoint' in params ? params.ClusterExternalEndpoint : null;
+        this.ClusterIntranetEndpoint = 'ClusterIntranetEndpoint' in params ? params.ClusterIntranetEndpoint : null;
+        this.ClusterDomain = 'ClusterDomain' in params ? params.ClusterDomain : null;
+        this.ClusterExternalACL = 'ClusterExternalACL' in params ? params.ClusterExternalACL : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Pre-upgrade check result of a node
  * @class
  */
@@ -10913,6 +11202,34 @@ class DescribeImagesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * UninstallEdgeLogAgent request structure.
+ * @class
+ */
+class UninstallEdgeLogAgentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -12391,6 +12708,59 @@ class DescribeClusterAsGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * Image details
+ * @class
+ */
+class ImageInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image alias
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Operating system name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * Image ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * Container image tag, **DOCKER_CUSTOMIZE** (container customized tag), **GENERAL** (general tag, default value)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+
+    }
+}
+
+/**
  * Edge compute cluster information
  * @class
  */
@@ -12465,6 +12835,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.MaxNodePodNum = null;
 
+        /**
+         * Cluster advanced settings
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {EdgeClusterAdvancedSettings || null}
+         */
+        this.ClusterAdvancedSettings = null;
+
     }
 
     /**
@@ -12485,6 +12862,12 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.EdgeClusterVersion = 'EdgeClusterVersion' in params ? params.EdgeClusterVersion : null;
         this.MaxNodePodNum = 'MaxNodePodNum' in params ? params.MaxNodePodNum : null;
+
+        if (params.ClusterAdvancedSettings) {
+            let obj = new EdgeClusterAdvancedSettings();
+            obj.deserialize(params.ClusterAdvancedSettings)
+            this.ClusterAdvancedSettings = obj;
+        }
 
     }
 }
@@ -12536,7 +12919,7 @@ module.exports = {
     DescribeClusterSecurityRequest: DescribeClusterSecurityRequest,
     ModifyPrometheusAlertRuleRequest: ModifyPrometheusAlertRuleRequest,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
-    ServiceAccountAuthenticationOptions: ServiceAccountAuthenticationOptions,
+    InstallEdgeLogAgentRequest: InstallEdgeLogAgentRequest,
     DescribeEdgeCVMInstancesRequest: DescribeEdgeCVMInstancesRequest,
     DescribeClusterKubeconfigResponse: DescribeClusterKubeconfigResponse,
     DescribeClusterAuthenticationOptionsRequest: DescribeClusterAuthenticationOptionsRequest,
@@ -12554,11 +12937,13 @@ module.exports = {
     PrometheusNotification: PrometheusNotification,
     ClusterVersion: ClusterVersion,
     RouteInfo: RouteInfo,
+    CreateEdgeLogConfigResponse: CreateEdgeLogConfigResponse,
     ClusterCondition: ClusterCondition,
     DescribeAvailableTKEEdgeVersionResponse: DescribeAvailableTKEEdgeVersionResponse,
     InstanceUpgradeProgressItem: InstanceUpgradeProgressItem,
     ModifyClusterEndpointSPResponse: ModifyClusterEndpointSPResponse,
     NodePool: NodePool,
+    InstallEdgeLogAgentResponse: InstallEdgeLogAgentResponse,
     DescribeEdgeClusterInstancesResponse: DescribeEdgeClusterInstancesResponse,
     IPAddress: IPAddress,
     DescribeTKEEdgeClusterCredentialRequest: DescribeTKEEdgeClusterCredentialRequest,
@@ -12593,6 +12978,7 @@ module.exports = {
     ModifyClusterAttributeRequest: ModifyClusterAttributeRequest,
     DeleteClusterRouteResponse: DeleteClusterRouteResponse,
     EdgeClusterAdvancedSettings: EdgeClusterAdvancedSettings,
+    ServiceAccountAuthenticationOptions: ServiceAccountAuthenticationOptions,
     CreateClusterEndpointVipResponse: CreateClusterEndpointVipResponse,
     ResourceUsage: ResourceUsage,
     DescribeClusterRoutesResponse: DescribeClusterRoutesResponse,
@@ -12611,6 +12997,7 @@ module.exports = {
     CreateTKEEdgeClusterRequest: CreateTKEEdgeClusterRequest,
     DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
+    CreateEdgeLogConfigRequest: CreateEdgeLogConfigRequest,
     ClusterBasicSettings: ClusterBasicSettings,
     RouteTableConflict: RouteTableConflict,
     DeleteClusterInstancesRequest: DeleteClusterInstancesRequest,
@@ -12632,7 +13019,7 @@ module.exports = {
     DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
     UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
     GetUpgradeInstanceProgressRequest: GetUpgradeInstanceProgressRequest,
-    EnableClusterDeletionProtectionRequest: EnableClusterDeletionProtectionRequest,
+    DescribeClusterEndpointsRequest: DescribeClusterEndpointsRequest,
     DescribeEdgeAvailableExtraArgsRequest: DescribeEdgeAvailableExtraArgsRequest,
     ExistedInstance: ExistedInstance,
     AddNodeToNodePoolResponse: AddNodeToNodePoolResponse,
@@ -12648,6 +13035,7 @@ module.exports = {
     DescribeTKEEdgeScriptRequest: DescribeTKEEdgeScriptRequest,
     ClusterExtraArgs: ClusterExtraArgs,
     DataDisk: DataDisk,
+    DescribeEdgeLogSwitchesResponse: DescribeEdgeLogSwitchesResponse,
     DeleteEdgeCVMInstancesResponse: DeleteEdgeCVMInstancesResponse,
     ModifyClusterNodePoolResponse: ModifyClusterNodePoolResponse,
     GetUpgradeInstanceProgressResponse: GetUpgradeInstanceProgressResponse,
@@ -12680,6 +13068,7 @@ module.exports = {
     ModifyClusterAuthenticationOptionsResponse: ModifyClusterAuthenticationOptionsResponse,
     DescribeClusterAuthenticationOptionsResponse: DescribeClusterAuthenticationOptionsResponse,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
+    EnableClusterDeletionProtectionRequest: EnableClusterDeletionProtectionRequest,
     DescribePrometheusInstanceRequest: DescribePrometheusInstanceRequest,
     ECMZoneInstanceCountISP: ECMZoneInstanceCountISP,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
@@ -12692,7 +13081,7 @@ module.exports = {
     DescribePrometheusInstanceResponse: DescribePrometheusInstanceResponse,
     DeleteEdgeCVMInstancesRequest: DeleteEdgeCVMInstancesRequest,
     ModifyClusterNodePoolRequest: ModifyClusterNodePoolRequest,
-    ImageInstance: ImageInstance,
+    DescribeEdgeLogSwitchesRequest: DescribeEdgeLogSwitchesRequest,
     DescribeECMInstancesResponse: DescribeECMInstancesResponse,
     GetClusterLevelPriceRequest: GetClusterLevelPriceRequest,
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
@@ -12732,6 +13121,7 @@ module.exports = {
     DeleteTKEEdgeClusterResponse: DeleteTKEEdgeClusterResponse,
     ExistedInstancesForNode: ExistedInstancesForNode,
     InstanceUpgradeClusterStatus: InstanceUpgradeClusterStatus,
+    UninstallEdgeLogAgentResponse: UninstallEdgeLogAgentResponse,
     DescribeClusterRoutesRequest: DescribeClusterRoutesRequest,
     DeleteClusterRouteRequest: DeleteClusterRouteRequest,
     DeleteECMInstancesRequest: DeleteECMInstancesRequest,
@@ -12741,9 +13131,11 @@ module.exports = {
     DescribeClusterNodePoolDetailRequest: DescribeClusterNodePoolDetailRequest,
     SetNodePoolNodeProtectionRequest: SetNodePoolNodeProtectionRequest,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
+    DescribeClusterEndpointsResponse: DescribeClusterEndpointsResponse,
     InstanceUpgradePreCheckResult: InstanceUpgradePreCheckResult,
     DescribeClusterAsGroupsRequest: DescribeClusterAsGroupsRequest,
     DescribeImagesRequest: DescribeImagesRequest,
+    UninstallEdgeLogAgentRequest: UninstallEdgeLogAgentRequest,
     DescribeAvailableClusterVersionResponse: DescribeAvailableClusterVersionResponse,
     TagSpecification: TagSpecification,
     DescribeClusterLevelChangeRecordsRequest: DescribeClusterLevelChangeRecordsRequest,
@@ -12776,6 +13168,7 @@ module.exports = {
     RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
     NodeCountSummary: NodeCountSummary,
     DescribeClusterAsGroupsResponse: DescribeClusterAsGroupsResponse,
+    ImageInstance: ImageInstance,
     EdgeCluster: EdgeCluster,
     DescribeClusterNodePoolDetailResponse: DescribeClusterNodePoolDetailResponse,
 

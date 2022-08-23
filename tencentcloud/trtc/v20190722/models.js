@@ -903,18 +903,25 @@ class RemoveUserByStrRoomIdResponse extends  AbstractModel {
 }
 
 /**
- * RemoveUser response structure.
+ * The SEI parameters for audio volume layout. You can specify the `AppData` and `PayloadType`.
+This parameter may be empty, in which case the default SEI parameters for audio volume layout will be used.
  * @class
  */
-class RemoveUserResponse extends  AbstractModel {
+class McuLayoutVolume extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The application data, which will be embedded in the `app_data` field of the custom SEI. It must be shorter than 4,096 characters.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AppData = null;
+
+        /**
+         * The payload type of the SEI message. The default is 100. Value range: 100-254 (244 is used internally by Tencent Cloud for timestamps).
+         * @type {number || null}
+         */
+        this.PayloadType = null;
 
     }
 
@@ -925,7 +932,8 @@ class RemoveUserResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AppData = 'AppData' in params ? params.AppData : null;
+        this.PayloadType = 'PayloadType' in params ? params.PayloadType : null;
 
     }
 }
@@ -1046,8 +1054,8 @@ class RecordParams extends  AbstractModel {
 
         /**
          * The recording mode.
-1: Single-stream recording. Records the audio and video of each subscribed user (`UserId`) in a room and saves the recording files (M3U8/TS) to the cloud.
-2: Mixed-stream recording. Mixes the audios and videos of subscribed users (`UserId`) in a room, records the mixed stream, and saves the recording files (M3U8/TS) to the cloud.
+1: Single-stream recording. Records the audio and video of each subscribed user (`UserId`) in a room and saves the recording files to the cloud.
+2: Mixed-stream recording. Mixes the audios and videos of subscribed users (`UserId`) in a room, records the mixed stream, and saves the recording files to the cloud.
          * @type {number || null}
          */
         this.RecordMode = null;
@@ -1074,7 +1082,7 @@ class RecordParams extends  AbstractModel {
         this.SubscribeStreamUserIds = null;
 
         /**
-         * The format of recording files. 0 (default): HLS; 1: HLS + MP4 (recorded in HLS and converted to MP4).
+         * The format of recording files. 0 (default): HLS; 1: HLS + MP4 (recorded in HLS and converted to MP4). This parameter is invalid if recording files are saved to VOD.
          * @type {number || null}
          */
         this.OutputFormat = null;
@@ -1098,6 +1106,48 @@ class RecordParams extends  AbstractModel {
             this.SubscribeStreamUserIds = obj;
         }
         this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
+
+    }
+}
+
+/**
+ * The custom pass-through SEI.
+ * @class
+ */
+class McuPassThrough extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The payload of the pass-through SEI.
+         * @type {string || null}
+         */
+        this.PayloadContent = null;
+
+        /**
+         * The payload type of the SEI message. Value range: 5 and 100-254 (244 is used internally by Tencent Cloud for timestamps).
+         * @type {number || null}
+         */
+        this.PayloadType = null;
+
+        /**
+         * This parameter is required only if `PayloadType` is 5. It must be a 32-character hexadecimal string. If `PayloadType` is not 5, this parameter will be ignored.
+         * @type {string || null}
+         */
+        this.PayloadUuid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayloadContent = 'PayloadContent' in params ? params.PayloadContent : null;
+        this.PayloadType = 'PayloadType' in params ? params.PayloadType : null;
+        this.PayloadUuid = 'PayloadUuid' in params ? params.PayloadUuid : null;
 
     }
 }
@@ -1191,6 +1241,12 @@ class UpdatePublishCdnStreamRequest extends  AbstractModel {
          */
         this.PublishCdnParams = null;
 
+        /**
+         * The stream mixing SEI parameters.
+         * @type {McuSeiParams || null}
+         */
+        this.SeiParams = null;
+
     }
 
     /**
@@ -1230,6 +1286,12 @@ class UpdatePublishCdnStreamRequest extends  AbstractModel {
                 obj.deserialize(params.PublishCdnParams[z]);
                 this.PublishCdnParams.push(obj);
             }
+        }
+
+        if (params.SeiParams) {
+            let obj = new McuSeiParams();
+            obj.deserialize(params.SeiParams)
+            this.SeiParams = obj;
         }
 
     }
@@ -1312,13 +1374,13 @@ class CreateCloudRecordingRequest extends  AbstractModel {
         this.RoomId = null;
 
         /**
-         * The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include this user ID in the room ID.
+         * The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in the user ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * The signature (similar to login password) required for the recording robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104). |
+         * The signature (similar to a login password) required for the recording robot to enter the room. Each user ID corresponds to a signature. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104).
          * @type {string || null}
          */
         this.UserSig = null;
@@ -1330,7 +1392,7 @@ class CreateCloudRecordingRequest extends  AbstractModel {
         this.RecordParams = null;
 
         /**
-         * The cloud storage parameters.
+         * The cloud storage information of the recording file. Currently, you can only save recording files to Tencent Cloud VOD.
          * @type {StorageParams || null}
          */
         this.StorageParams = null;
@@ -1864,6 +1926,12 @@ class StartPublishCdnStreamRequest extends  AbstractModel {
          */
         this.PublishCdnParams = null;
 
+        /**
+         * The stream mixing SEI parameters.
+         * @type {McuSeiParams || null}
+         */
+        this.SeiParams = null;
+
     }
 
     /**
@@ -1909,6 +1977,12 @@ class StartPublishCdnStreamRequest extends  AbstractModel {
                 obj.deserialize(params.PublishCdnParams[z]);
                 this.PublishCdnParams.push(obj);
             }
+        }
+
+        if (params.SeiParams) {
+            let obj = new McuSeiParams();
+            obj.deserialize(params.SeiParams)
+            this.SeiParams = obj;
         }
 
     }
@@ -2001,6 +2075,34 @@ class DismissRoomRequest extends  AbstractModel {
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
+ * RemoveUser response structure.
+ * @class
+ */
+class RemoveUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2223,6 +2325,51 @@ Grey: 0x999999
         this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
         this.BackGroundColor = 'BackGroundColor' in params ? params.BackGroundColor : null;
         this.BackgroundImageUrl = 'BackgroundImageUrl' in params ? params.BackgroundImageUrl : null;
+
+    }
+}
+
+/**
+ * The stream mixing SEI parameters.
+ * @class
+ */
+class McuSeiParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The audio volume layout SEI.
+         * @type {McuLayoutVolume || null}
+         */
+        this.LayoutVolume = null;
+
+        /**
+         * The pass-through SEI.
+         * @type {McuPassThrough || null}
+         */
+        this.PassThrough = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LayoutVolume) {
+            let obj = new McuLayoutVolume();
+            obj.deserialize(params.LayoutVolume)
+            this.LayoutVolume = obj;
+        }
+
+        if (params.PassThrough) {
+            let obj = new McuPassThrough();
+            obj.deserialize(params.PassThrough)
+            this.PassThrough = obj;
+        }
 
     }
 }
@@ -2497,7 +2644,13 @@ class McuWaterMarkParams extends  AbstractModel {
         super();
 
         /**
-         * The information of the watermark image.
+         * The watermark type. The default is 0, which indicates an image watermark.
+         * @type {number || null}
+         */
+        this.WaterMarkType = null;
+
+        /**
+         * The watermark image information. This parameter is required if `WaterMarkType` is 0.
          * @type {McuWaterMarkImage || null}
          */
         this.WaterMarkImage = null;
@@ -2511,6 +2664,7 @@ class McuWaterMarkParams extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.WaterMarkType = 'WaterMarkType' in params ? params.WaterMarkType : null;
 
         if (params.WaterMarkImage) {
             let obj = new McuWaterMarkImage();
@@ -2660,10 +2814,11 @@ module.exports = {
     StorageParams: StorageParams,
     MaxVideoUser: MaxVideoUser,
     RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
-    RemoveUserResponse: RemoveUserResponse,
+    McuLayoutVolume: McuLayoutVolume,
     DescribeCloudRecordingRequest: DescribeCloudRecordingRequest,
     TencentVod: TencentVod,
     RecordParams: RecordParams,
+    McuPassThrough: McuPassThrough,
     McuUserInfoParams: McuUserInfoParams,
     UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
     VideoParams: VideoParams,
@@ -2681,10 +2836,12 @@ module.exports = {
     StartPublishCdnStreamRequest: StartPublishCdnStreamRequest,
     WaterMarkImage: WaterMarkImage,
     DismissRoomRequest: DismissRoomRequest,
+    RemoveUserResponse: RemoveUserResponse,
     CreateCloudRecordingResponse: CreateCloudRecordingResponse,
     VideoEncode: VideoEncode,
     DeleteCloudRecordingRequest: DeleteCloudRecordingRequest,
     McuLayout: McuLayout,
+    McuSeiParams: McuSeiParams,
     McuAudioParams: McuAudioParams,
     McuPublishCdnParam: McuPublishCdnParam,
     AudioParams: AudioParams,

@@ -5379,7 +5379,7 @@ class CompressInfo extends  AbstractModel {
         super();
 
         /**
-         * Compression format. Valid values: `gzip`, `lzop`, `none` (no compression)
+         * Compression format. Valid values: `gzip`; `lzop`; `snappy`; `none` (no compression)
          * @type {string || null}
          */
         this.Format = null;
@@ -6691,6 +6691,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.CreateTime = null;
 
+        /**
+         * Shipping file naming configuration. Valid values: `0` (by random number); `1` (by shipping time). Default value: `0`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FilenameMode = null;
+
     }
 
     /**
@@ -6731,6 +6738,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.Content = obj;
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.FilenameMode = 'FilenameMode' in params ? params.FilenameMode : null;
 
     }
 }

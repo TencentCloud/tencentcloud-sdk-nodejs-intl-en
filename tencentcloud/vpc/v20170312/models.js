@@ -106,6 +106,18 @@ class NetworkAcl extends  AbstractModel {
          */
         this.EgressEntries = null;
 
+        /**
+         * Network ACL type. Valid values: `TRIPLE` and `QUINTUPLE`.
+         * @type {string || null}
+         */
+        this.NetworkAclType = null;
+
+        /**
+         * Tag key-value pairs
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -144,6 +156,16 @@ class NetworkAcl extends  AbstractModel {
                 let obj = new NetworkAclEntry();
                 obj.deserialize(params.EgressEntries[z]);
                 this.EgressEntries.push(obj);
+            }
+        }
+        this.NetworkAclType = 'NetworkAclType' in params ? params.NetworkAclType : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
             }
         }
 
@@ -1154,6 +1176,46 @@ class DescribeVpnGatewaysResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyNetworkAclQuintupleEntries request structure.
+ * @class
+ */
+class ModifyNetworkAclQuintupleEntriesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Network ACL instance ID, such as `acl-12345678`.
+         * @type {string || null}
+         */
+        this.NetworkAclId = null;
+
+        /**
+         * Network ACL quintuple rule set.
+         * @type {NetworkAclQuintupleEntries || null}
+         */
+        this.NetworkAclQuintupleSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
+
+        if (params.NetworkAclQuintupleSet) {
+            let obj = new NetworkAclQuintupleEntries();
+            obj.deserialize(params.NetworkAclQuintupleSet)
+            this.NetworkAclQuintupleSet = obj;
+        }
+
+    }
+}
+
+/**
  * ModifyServiceTemplateAttribute request structure.
  * @class
  */
@@ -1385,6 +1447,56 @@ class DescribeVpcEndPointRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.EndPointId = 'EndPointId' in params ? params.EndPointId : null;
+
+    }
+}
+
+/**
+ * AssignPrivateIpAddresses request structure.
+ * @class
+ */
+class AssignPrivateIpAddressesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the ENI instance, such as `eni-m6dyj72l`.
+         * @type {string || null}
+         */
+        this.NetworkInterfaceId = null;
+
+        /**
+         * The information on private IP addresses, of which you can specify a maximum of 10 at a time. You should provide either this parameter or SecondaryPrivateIpAddressCount, or both.
+         * @type {Array.<PrivateIpAddressSpecification> || null}
+         */
+        this.PrivateIpAddresses = null;
+
+        /**
+         * The number of newly-applied private IP addresses. You should provide either this parameter or PrivateIpAddresses, or both. The total number of private IP addresses cannot exceed the quota. For more information, see<a href="/document/product/576/18527">ENI Use Limits</a>.
+         * @type {number || null}
+         */
+        this.SecondaryPrivateIpAddressCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+
+        if (params.PrivateIpAddresses) {
+            this.PrivateIpAddresses = new Array();
+            for (let z in params.PrivateIpAddresses) {
+                let obj = new PrivateIpAddressSpecification();
+                obj.deserialize(params.PrivateIpAddresses[z]);
+                this.PrivateIpAddresses.push(obj);
+            }
+        }
+        this.SecondaryPrivateIpAddressCount = 'SecondaryPrivateIpAddressCount' in params ? params.SecondaryPrivateIpAddressCount : null;
 
     }
 }
@@ -2087,6 +2199,12 @@ class ModifyNetworkAclEntriesRequest extends  AbstractModel {
          */
         this.NetworkAclEntrySet = null;
 
+        /**
+         * Network ACL quintuple rule set. `NetworkAclEntrySet` and `NetworkAclQuintupleSet` cannot be entered at the same time.
+         * @type {NetworkAclQuintupleEntries || null}
+         */
+        this.NetworkAclQuintupleSet = null;
+
     }
 
     /**
@@ -2102,6 +2220,12 @@ class ModifyNetworkAclEntriesRequest extends  AbstractModel {
             let obj = new NetworkAclEntrySet();
             obj.deserialize(params.NetworkAclEntrySet)
             this.NetworkAclEntrySet = obj;
+        }
+
+        if (params.NetworkAclQuintupleSet) {
+            let obj = new NetworkAclQuintupleEntries();
+            obj.deserialize(params.NetworkAclQuintupleSet)
+            this.NetworkAclQuintupleSet = obj;
         }
 
     }
@@ -4154,6 +4278,34 @@ class AcceptAttachCcnInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * CreateNetworkAclQuintupleEntries response structure.
+ * @class
+ */
+class CreateNetworkAclQuintupleEntriesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeGatewayFlowMonitorDetail response structure.
  * @class
  */
@@ -4513,6 +4665,34 @@ class UnassignIpv6SubnetCidrBlockRequest extends  AbstractModel {
  * @class
  */
 class DeleteVpcEndPointServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNetworkAclQuintupleEntries response structure.
+ * @class
+ */
+class ModifyNetworkAclQuintupleEntriesResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -10811,6 +10991,156 @@ class ResourceDashboard extends  AbstractModel {
 }
 
 /**
+ * Subnet object
+ * @class
+ */
+class Subnet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The `ID` of the `VPC` instance.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet instance `ID`, such as `subnet-bthucmmy`.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Subnet name.
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * The `IPv4` `CIDR` of the subnet.
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * Whether it is the default subnet.
+         * @type {boolean || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * Whether to enable broadcast.
+         * @type {boolean || null}
+         */
+        this.EnableBroadcast = null;
+
+        /**
+         * Availability Zone.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * The route table instance ID, such as `rtb-l2h8d7c2`.
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
+        /**
+         * Creation Time.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * The number of available IPv4 addresses
+         * @type {number || null}
+         */
+        this.AvailableIpAddressCount = null;
+
+        /**
+         * The `IPv6` `CIDR` of the subnet.
+         * @type {string || null}
+         */
+        this.Ipv6CidrBlock = null;
+
+        /**
+         * The associated `ACL`ID
+         * @type {string || null}
+         */
+        this.NetworkAclId = null;
+
+        /**
+         * Whether it is a `SNAT` address pool subnet.
+         * @type {boolean || null}
+         */
+        this.IsRemoteVpcSnat = null;
+
+        /**
+         * The total number of IPv4 addresses in the subnet.
+         * @type {number || null}
+         */
+        this.TotalIpAddressCount = null;
+
+        /**
+         * Tag key-value pairs
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * CDC instance ID
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
+        /**
+         * Whether it is a CDC subnet. Valid values: 0: no; 1: yes
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsCdcSubnet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.EnableBroadcast = 'EnableBroadcast' in params ? params.EnableBroadcast : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.AvailableIpAddressCount = 'AvailableIpAddressCount' in params ? params.AvailableIpAddressCount : null;
+        this.Ipv6CidrBlock = 'Ipv6CidrBlock' in params ? params.Ipv6CidrBlock : null;
+        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
+        this.IsRemoteVpcSnat = 'IsRemoteVpcSnat' in params ? params.IsRemoteVpcSnat : null;
+        this.TotalIpAddressCount = 'TotalIpAddressCount' in params ? params.TotalIpAddressCount : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
+        this.IsCdcSubnet = 'IsCdcSubnet' in params ? params.IsCdcSubnet : null;
+
+    }
+}
+
+/**
  * DescribeVpcPrivateIpAddresses response structure.
  * @class
  */
@@ -11630,6 +11960,18 @@ class CreateNetworkAclRequest extends  AbstractModel {
          */
         this.NetworkAclName = null;
 
+        /**
+         * Network ACL type. Valid values: `TRIPLE` and `QUINTUPLE`.
+         * @type {string || null}
+         */
+        this.NetworkAclType = null;
+
+        /**
+         * Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -11641,6 +11983,16 @@ class CreateNetworkAclRequest extends  AbstractModel {
         }
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.NetworkAclName = 'NetworkAclName' in params ? params.NetworkAclName : null;
+        this.NetworkAclType = 'NetworkAclType' in params ? params.NetworkAclType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -12163,6 +12515,70 @@ class DescribeVpcEndPointResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkAclQuintupleEntries request structure.
+ * @class
+ */
+class DescribeNetworkAclQuintupleEntriesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Network ACL instance ID, such as `acl-12345678`.
+         * @type {string || null}
+         */
+        this.NetworkAclId = null;
+
+        /**
+         * Offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Returned quantity. Default: 20. Value range: 1-100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter condition. `HaVipIds` and `Filters` cannot be specified at the same time.
+<li>`protocol` - String - Such as `TCP`</li>
+<li>`description` - String - Description</li>
+<li>`destination-cidr` - String - Destination CIDR block, such as `192.168.0.0/24`</li>
+<li>`source-cidr` - String - Source CIDR block, such as `192.168.0.0/24`</li>
+<li>`action` - String - ·Values: `ACCEPT`, `DROP`</li>
+<li>`network-acl-quintuple-entry-id` - String - Unique ID of the quintuple, such as `acli45-ahnu4rv5`</li>
+<li>`network-acl-direction` - String - Direction of the policy. Values: `INGRESS` or `EGRESS`.</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -13248,6 +13664,46 @@ class CreateServiceTemplateGroupRequest extends  AbstractModel {
 }
 
 /**
+ * CreateNetworkAclQuintupleEntries request structure.
+ * @class
+ */
+class CreateNetworkAclQuintupleEntriesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Network ACL instance ID, such as `acl-12345678`.
+         * @type {string || null}
+         */
+        this.NetworkAclId = null;
+
+        /**
+         * Network ACL quintuple rule set.
+         * @type {NetworkAclQuintupleEntries || null}
+         */
+        this.NetworkAclQuintupleSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
+
+        if (params.NetworkAclQuintupleSet) {
+            let obj = new NetworkAclQuintupleEntries();
+            obj.deserialize(params.NetworkAclQuintupleSet)
+            this.NetworkAclQuintupleSet = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeClassicLinkInstances response structure.
  * @class
  */
@@ -14294,6 +14750,56 @@ class DescribeNetworkAclsRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeNetworkAclQuintupleEntries response structure.
+ * @class
+ */
+class DescribeNetworkAclQuintupleEntriesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The list of the network ACL quintuple entries
+         * @type {Array.<NetworkAclQuintupleEntry> || null}
+         */
+        this.NetworkAclQuintupleSet = null;
+
+        /**
+         * Number of eligible instances.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NetworkAclQuintupleSet) {
+            this.NetworkAclQuintupleSet = new Array();
+            for (let z in params.NetworkAclQuintupleSet) {
+                let obj = new NetworkAclQuintupleEntry();
+                obj.deserialize(params.NetworkAclQuintupleSet[z]);
+                this.NetworkAclQuintupleSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16692,24 +17198,24 @@ class AttachCcnInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DisassociateNetworkAclSubnets request structure.
+ * CreateDefaultVpc response structure.
  * @class
  */
-class DisassociateNetworkAclSubnetsRequest extends  AbstractModel {
+class CreateDefaultVpcResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Network ACL instance ID, such as `acl-12345678`.
-         * @type {string || null}
+         * Default VPC and subnet IDs
+         * @type {DefaultVpcSubnet || null}
          */
-        this.NetworkAclId = null;
+        this.Vpc = null;
 
         /**
-         * Array of subnet instance IDs, such as [subnet-12345678].
-         * @type {Array.<string> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.SubnetIds = null;
+        this.RequestId = null;
 
     }
 
@@ -16720,8 +17226,13 @@ class DisassociateNetworkAclSubnetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
-        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+
+        if (params.Vpc) {
+            let obj = new DefaultVpcSubnet();
+            obj.deserialize(params.Vpc)
+            this.Vpc = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -20089,24 +20600,24 @@ class DescribeTaskResultResponse extends  AbstractModel {
 }
 
 /**
- * CreateDefaultVpc response structure.
+ * DisassociateNetworkAclSubnets request structure.
  * @class
  */
-class CreateDefaultVpcResponse extends  AbstractModel {
+class DisassociateNetworkAclSubnetsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Default VPC and subnet IDs
-         * @type {DefaultVpcSubnet || null}
-         */
-        this.Vpc = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Network ACL instance ID, such as `acl-12345678`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.NetworkAclId = null;
+
+        /**
+         * Array of subnet instance IDs, such as [subnet-12345678].
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
 
     }
 
@@ -20117,13 +20628,8 @@ class CreateDefaultVpcResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Vpc) {
-            let obj = new DefaultVpcSubnet();
-            obj.deserialize(params.Vpc)
-            this.Vpc = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
 
     }
 }
@@ -20395,6 +20901,104 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.RoutePriorityFlag = 'RoutePriorityFlag' in params ? params.RoutePriorityFlag : null;
         this.RouteTableCount = 'RouteTableCount' in params ? params.RouteTableCount : null;
         this.RouteTableFlag = 'RouteTableFlag' in params ? params.RouteTableFlag : null;
+
+    }
+}
+
+/**
+ * Network ACL quintuple entry
+ * @class
+ */
+class NetworkAclQuintupleEntry extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ALL`.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Source port. Valid values: all, single port, range. When `Protocol` is `ALL` or `ICMP`, `Port` cannot be specified.
+         * @type {string || null}
+         */
+        this.SourcePort = null;
+
+        /**
+         * Source CIDR block.
+         * @type {string || null}
+         */
+        this.SourceCidr = null;
+
+        /**
+         * Destination port. Valid values: all, single port, range. When `Protocol` is `ALL` or `ICMP`, `Port` cannot be specified.
+         * @type {string || null}
+         */
+        this.DestinationPort = null;
+
+        /**
+         * Destination CIDR block.
+         * @type {string || null}
+         */
+        this.DestinationCidr = null;
+
+        /**
+         * Action. Valid values: `ACCEPT` and `DROP`.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * Unique ID of a network ACL entry.
+         * @type {string || null}
+         */
+        this.NetworkAclQuintupleEntryId = null;
+
+        /**
+         * Priority. `1` refers to the highest priority.
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * Creation time. It’s returned by `DescribeNetworkAclQuintupleEntries`.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Direction of the rule. It’s returned by `DescribeNetworkAclQuintupleEntries`. Valid values: `INGRESS` and `EGRESS`.
+         * @type {string || null}
+         */
+        this.NetworkAclDirection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.SourcePort = 'SourcePort' in params ? params.SourcePort : null;
+        this.SourceCidr = 'SourceCidr' in params ? params.SourceCidr : null;
+        this.DestinationPort = 'DestinationPort' in params ? params.DestinationPort : null;
+        this.DestinationCidr = 'DestinationCidr' in params ? params.DestinationCidr : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.NetworkAclQuintupleEntryId = 'NetworkAclQuintupleEntryId' in params ? params.NetworkAclQuintupleEntryId : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.NetworkAclDirection = 'NetworkAclDirection' in params ? params.NetworkAclDirection : null;
 
     }
 }
@@ -20874,6 +21478,46 @@ class ModifyServiceTemplateGroupAttributeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteNetworkAclQuintupleEntries request structure.
+ * @class
+ */
+class DeleteNetworkAclQuintupleEntriesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Network ACL instance ID, such as `acl-12345678`.
+         * @type {string || null}
+         */
+        this.NetworkAclId = null;
+
+        /**
+         * Network ACL quintuple rule set.
+         * @type {NetworkAclQuintupleEntries || null}
+         */
+        this.NetworkAclQuintupleSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
+
+        if (params.NetworkAclQuintupleSet) {
+            let obj = new NetworkAclQuintupleEntries();
+            obj.deserialize(params.NetworkAclQuintupleSet)
+            this.NetworkAclQuintupleSet = obj;
+        }
 
     }
 }
@@ -23141,116 +23785,24 @@ class NatDirectConnectGatewayRoute extends  AbstractModel {
 }
 
 /**
- * Subnet object
+ * Network ACL quintuple
  * @class
  */
-class Subnet extends  AbstractModel {
+class NetworkAclQuintupleEntries extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The `ID` of the `VPC` instance.
-         * @type {string || null}
+         * Network ACL quintuple inbound rule.
+         * @type {Array.<NetworkAclQuintupleEntry> || null}
          */
-        this.VpcId = null;
+        this.Ingress = null;
 
         /**
-         * Subnet instance `ID`, such as `subnet-bthucmmy`.
-         * @type {string || null}
+         * Network ACL quintuple outbound rule.
+         * @type {Array.<NetworkAclQuintupleEntry> || null}
          */
-        this.SubnetId = null;
-
-        /**
-         * Subnet name.
-         * @type {string || null}
-         */
-        this.SubnetName = null;
-
-        /**
-         * The `IPv4` `CIDR` of the subnet.
-         * @type {string || null}
-         */
-        this.CidrBlock = null;
-
-        /**
-         * Whether it is the default subnet.
-         * @type {boolean || null}
-         */
-        this.IsDefault = null;
-
-        /**
-         * Whether to enable broadcast.
-         * @type {boolean || null}
-         */
-        this.EnableBroadcast = null;
-
-        /**
-         * Availability Zone.
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * The route table instance ID, such as `rtb-l2h8d7c2`.
-         * @type {string || null}
-         */
-        this.RouteTableId = null;
-
-        /**
-         * Creation Time.
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * The number of available IPv4 addresses
-         * @type {number || null}
-         */
-        this.AvailableIpAddressCount = null;
-
-        /**
-         * The `IPv6` `CIDR` of the subnet.
-         * @type {string || null}
-         */
-        this.Ipv6CidrBlock = null;
-
-        /**
-         * The associated `ACL`ID
-         * @type {string || null}
-         */
-        this.NetworkAclId = null;
-
-        /**
-         * Whether it is a `SNAT` address pool subnet.
-         * @type {boolean || null}
-         */
-        this.IsRemoteVpcSnat = null;
-
-        /**
-         * The total number of IPv4 addresses in the subnet.
-         * @type {number || null}
-         */
-        this.TotalIpAddressCount = null;
-
-        /**
-         * Tag key-value pairs
-         * @type {Array.<Tag> || null}
-         */
-        this.TagSet = null;
-
-        /**
-         * CDC instance ID
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CdcId = null;
-
-        /**
-         * Whether it is a CDC subnet. Valid values: 0: no; 1: yes
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsCdcSubnet = null;
+        this.Egress = null;
 
     }
 
@@ -23261,31 +23813,24 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
-        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
-        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
-        this.EnableBroadcast = 'EnableBroadcast' in params ? params.EnableBroadcast : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.AvailableIpAddressCount = 'AvailableIpAddressCount' in params ? params.AvailableIpAddressCount : null;
-        this.Ipv6CidrBlock = 'Ipv6CidrBlock' in params ? params.Ipv6CidrBlock : null;
-        this.NetworkAclId = 'NetworkAclId' in params ? params.NetworkAclId : null;
-        this.IsRemoteVpcSnat = 'IsRemoteVpcSnat' in params ? params.IsRemoteVpcSnat : null;
-        this.TotalIpAddressCount = 'TotalIpAddressCount' in params ? params.TotalIpAddressCount : null;
 
-        if (params.TagSet) {
-            this.TagSet = new Array();
-            for (let z in params.TagSet) {
-                let obj = new Tag();
-                obj.deserialize(params.TagSet[z]);
-                this.TagSet.push(obj);
+        if (params.Ingress) {
+            this.Ingress = new Array();
+            for (let z in params.Ingress) {
+                let obj = new NetworkAclQuintupleEntry();
+                obj.deserialize(params.Ingress[z]);
+                this.Ingress.push(obj);
             }
         }
-        this.CdcId = 'CdcId' in params ? params.CdcId : null;
-        this.IsCdcSubnet = 'IsCdcSubnet' in params ? params.IsCdcSubnet : null;
+
+        if (params.Egress) {
+            this.Egress = new Array();
+            for (let z in params.Egress) {
+                let obj = new NetworkAclQuintupleEntry();
+                obj.deserialize(params.Egress[z]);
+                this.Egress.push(obj);
+            }
+        }
 
     }
 }
@@ -25754,30 +26299,18 @@ class DeleteNetworkAclResponse extends  AbstractModel {
 }
 
 /**
- * AssignPrivateIpAddresses request structure.
+ * DeleteNetworkAclQuintupleEntries response structure.
  * @class
  */
-class AssignPrivateIpAddressesRequest extends  AbstractModel {
+class DeleteNetworkAclQuintupleEntriesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The ID of the ENI instance, such as `eni-m6dyj72l`.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.NetworkInterfaceId = null;
-
-        /**
-         * The information on private IP addresses, of which you can specify a maximum of 10 at a time. You should provide either this parameter or SecondaryPrivateIpAddressCount, or both.
-         * @type {Array.<PrivateIpAddressSpecification> || null}
-         */
-        this.PrivateIpAddresses = null;
-
-        /**
-         * The number of newly-applied private IP addresses. You should provide either this parameter or PrivateIpAddresses, or both. The total number of private IP addresses cannot exceed the quota. For more information, see<a href="/document/product/576/18527">ENI Use Limits</a>.
-         * @type {number || null}
-         */
-        this.SecondaryPrivateIpAddressCount = null;
+        this.RequestId = null;
 
     }
 
@@ -25788,17 +26321,7 @@ class AssignPrivateIpAddressesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
-
-        if (params.PrivateIpAddresses) {
-            this.PrivateIpAddresses = new Array();
-            for (let z in params.PrivateIpAddresses) {
-                let obj = new PrivateIpAddressSpecification();
-                obj.deserialize(params.PrivateIpAddresses[z]);
-                this.PrivateIpAddresses.push(obj);
-            }
-        }
-        this.SecondaryPrivateIpAddressCount = 'SecondaryPrivateIpAddressCount' in params ? params.SecondaryPrivateIpAddressCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -26569,11 +27092,13 @@ module.exports = {
     ModifyNatGatewaySourceIpTranslationNatRuleRequest: ModifyNatGatewaySourceIpTranslationNatRuleRequest,
     ModifyCcnRegionBandwidthLimitsTypeResponse: ModifyCcnRegionBandwidthLimitsTypeResponse,
     DescribeVpnGatewaysResponse: DescribeVpnGatewaysResponse,
+    ModifyNetworkAclQuintupleEntriesRequest: ModifyNetworkAclQuintupleEntriesRequest,
     ModifyServiceTemplateAttributeRequest: ModifyServiceTemplateAttributeRequest,
     DescribeIpGeolocationInfosRequest: DescribeIpGeolocationInfosRequest,
     ResetAttachCcnInstancesResponse: ResetAttachCcnInstancesResponse,
     DescribeServiceTemplateGroupsResponse: DescribeServiceTemplateGroupsResponse,
     DescribeVpcEndPointRequest: DescribeVpcEndPointRequest,
+    AssignPrivateIpAddressesRequest: AssignPrivateIpAddressesRequest,
     DetachClassicLinkVpcRequest: DetachClassicLinkVpcRequest,
     DescribeBandwidthPackageBillUsageResponse: DescribeBandwidthPackageBillUsageResponse,
     DeleteBandwidthPackageResponse: DeleteBandwidthPackageResponse,
@@ -26629,6 +27154,7 @@ module.exports = {
     DescribeNatGatewaySourceIpTranslationNatRulesResponse: DescribeNatGatewaySourceIpTranslationNatRulesResponse,
     DescribeVpcsRequest: DescribeVpcsRequest,
     AcceptAttachCcnInstancesRequest: AcceptAttachCcnInstancesRequest,
+    CreateNetworkAclQuintupleEntriesResponse: CreateNetworkAclQuintupleEntriesResponse,
     DescribeGatewayFlowMonitorDetailResponse: DescribeGatewayFlowMonitorDetailResponse,
     IpGeolocationInfo: IpGeolocationInfo,
     DeleteFlowLogRequest: DeleteFlowLogRequest,
@@ -26638,6 +27164,7 @@ module.exports = {
     ModifyAddressInternetChargeTypeResponse: ModifyAddressInternetChargeTypeResponse,
     UnassignIpv6SubnetCidrBlockRequest: UnassignIpv6SubnetCidrBlockRequest,
     DeleteVpcEndPointServiceResponse: DeleteVpcEndPointServiceResponse,
+    ModifyNetworkAclQuintupleEntriesResponse: ModifyNetworkAclQuintupleEntriesResponse,
     AssignIpv6CidrBlockRequest: AssignIpv6CidrBlockRequest,
     CreateSecurityGroupPoliciesResponse: CreateSecurityGroupPoliciesResponse,
     UnassignIpv6CidrBlockResponse: UnassignIpv6CidrBlockResponse,
@@ -26759,6 +27286,7 @@ module.exports = {
     ReplaceSecurityGroupPolicyRequest: ReplaceSecurityGroupPolicyRequest,
     ModifyVpcEndPointServiceAttributeResponse: ModifyVpcEndPointServiceAttributeResponse,
     ResourceDashboard: ResourceDashboard,
+    Subnet: Subnet,
     DescribeVpcPrivateIpAddressesResponse: DescribeVpcPrivateIpAddressesResponse,
     HaVipAssociateAddressIpResponse: HaVipAssociateAddressIpResponse,
     DeleteCustomerGatewayResponse: DeleteCustomerGatewayResponse,
@@ -26789,6 +27317,7 @@ module.exports = {
     CreateCcnRequest: CreateCcnRequest,
     DescribeIpGeolocationDatabaseUrlRequest: DescribeIpGeolocationDatabaseUrlRequest,
     DescribeVpcEndPointResponse: DescribeVpcEndPointResponse,
+    DescribeNetworkAclQuintupleEntriesRequest: DescribeNetworkAclQuintupleEntriesRequest,
     DeleteVpnConnectionRequest: DeleteVpnConnectionRequest,
     NetworkAclEntry: NetworkAclEntry,
     DescribeAssistantCidrRequest: DescribeAssistantCidrRequest,
@@ -26809,6 +27338,7 @@ module.exports = {
     DescribeVpnGatewayCcnRoutesRequest: DescribeVpnGatewayCcnRoutesRequest,
     DisassociateDirectConnectGatewayNatGatewayResponse: DisassociateDirectConnectGatewayNatGatewayResponse,
     CreateServiceTemplateGroupRequest: CreateServiceTemplateGroupRequest,
+    CreateNetworkAclQuintupleEntriesRequest: CreateNetworkAclQuintupleEntriesRequest,
     DescribeClassicLinkInstancesResponse: DescribeClassicLinkInstancesResponse,
     DescribeVpnGatewayCcnRoutesResponse: DescribeVpnGatewayCcnRoutesResponse,
     DetachCcnInstancesRequest: DetachCcnInstancesRequest,
@@ -26829,6 +27359,7 @@ module.exports = {
     VpcPrivateIpAddress: VpcPrivateIpAddress,
     CvmInstance: CvmInstance,
     DescribeNetworkAclsRequest: DescribeNetworkAclsRequest,
+    DescribeNetworkAclQuintupleEntriesResponse: DescribeNetworkAclQuintupleEntriesResponse,
     DescribeSubnetsRequest: DescribeSubnetsRequest,
     CreateSubnetRequest: CreateSubnetRequest,
     AddressTemplateGroup: AddressTemplateGroup,
@@ -26881,7 +27412,7 @@ module.exports = {
     DescribeNetworkAclsResponse: DescribeNetworkAclsResponse,
     DeleteFlowLogResponse: DeleteFlowLogResponse,
     AttachCcnInstancesResponse: AttachCcnInstancesResponse,
-    DisassociateNetworkAclSubnetsRequest: DisassociateNetworkAclSubnetsRequest,
+    CreateDefaultVpcResponse: CreateDefaultVpcResponse,
     ModifyVpcAttributeResponse: ModifyVpcAttributeResponse,
     ModifyVpnConnectionAttributeResponse: ModifyVpnConnectionAttributeResponse,
     PrivateIpAddressSpecification: PrivateIpAddressSpecification,
@@ -26957,12 +27488,13 @@ module.exports = {
     CreateDirectConnectGatewayResponse: CreateDirectConnectGatewayResponse,
     ModifyVpcEndPointAttributeRequest: ModifyVpcEndPointAttributeRequest,
     DescribeTaskResultResponse: DescribeTaskResultResponse,
-    CreateDefaultVpcResponse: CreateDefaultVpcResponse,
+    DisassociateNetworkAclSubnetsRequest: DisassociateNetworkAclSubnetsRequest,
     ModifyAddressTemplateGroupAttributeRequest: ModifyAddressTemplateGroupAttributeRequest,
     ModifyServiceTemplateGroupAttributeRequest: ModifyServiceTemplateGroupAttributeRequest,
     DeleteVpcEndPointRequest: DeleteVpcEndPointRequest,
     UnassignIpv6CidrBlockRequest: UnassignIpv6CidrBlockRequest,
     CCN: CCN,
+    NetworkAclQuintupleEntry: NetworkAclQuintupleEntry,
     InquirePriceCreateDirectConnectGatewayResponse: InquirePriceCreateDirectConnectGatewayResponse,
     CheckAssistantCidrRequest: CheckAssistantCidrRequest,
     DestinationIpPortTranslationNatRule: DestinationIpPortTranslationNatRule,
@@ -26975,6 +27507,7 @@ module.exports = {
     ModifyVpnGatewayCcnRoutesResponse: ModifyVpnGatewayCcnRoutesResponse,
     DetachCcnInstancesResponse: DetachCcnInstancesResponse,
     ModifyServiceTemplateGroupAttributeResponse: ModifyServiceTemplateGroupAttributeResponse,
+    DeleteNetworkAclQuintupleEntriesRequest: DeleteNetworkAclQuintupleEntriesRequest,
     DeleteSubnetRequest: DeleteSubnetRequest,
     DescribeAddressTemplateGroupsRequest: DescribeAddressTemplateGroupsRequest,
     CheckNetDetectStateResponse: CheckNetDetectStateResponse,
@@ -27029,7 +27562,7 @@ module.exports = {
     CreateAddressTemplateRequest: CreateAddressTemplateRequest,
     DescribeNatGatewaysResponse: DescribeNatGatewaysResponse,
     NatDirectConnectGatewayRoute: NatDirectConnectGatewayRoute,
-    Subnet: Subnet,
+    NetworkAclQuintupleEntries: NetworkAclQuintupleEntries,
     AttachNetworkInterfaceRequest: AttachNetworkInterfaceRequest,
     DescribeCcnRoutesResponse: DescribeCcnRoutesResponse,
     SecurityGroup: SecurityGroup,
@@ -27086,7 +27619,7 @@ module.exports = {
     WithdrawNotifyRoutesResponse: WithdrawNotifyRoutesResponse,
     DescribeNetworkInterfacesResponse: DescribeNetworkInterfacesResponse,
     DeleteNetworkAclResponse: DeleteNetworkAclResponse,
-    AssignPrivateIpAddressesRequest: AssignPrivateIpAddressesRequest,
+    DeleteNetworkAclQuintupleEntriesResponse: DeleteNetworkAclQuintupleEntriesResponse,
     DescribeServiceTemplateGroupsRequest: DescribeServiceTemplateGroupsRequest,
     CreateSecurityGroupWithPoliciesRequest: CreateSecurityGroupWithPoliciesRequest,
     CreateVpcRequest: CreateVpcRequest,

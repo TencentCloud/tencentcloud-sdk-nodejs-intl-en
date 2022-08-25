@@ -35,7 +35,7 @@ const FetchMessageByOffsetResponse = models.FetchMessageByOffsetResponse;
 const BatchModifyTopicAttributesResponse = models.BatchModifyTopicAttributesResponse;
 const CreateInstancePreResp = models.CreateInstancePreResp;
 const GroupInfoTopics = models.GroupInfoTopics;
-const TopicResult = models.TopicResult;
+const FetchMessageListByOffsetRequest = models.FetchMessageListByOffsetRequest;
 const Region = models.Region;
 const ModifyInstancePreRequest = models.ModifyInstancePreRequest;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
@@ -53,6 +53,7 @@ const Tag = models.Tag;
 const BatchModifyGroupOffsetsResponse = models.BatchModifyGroupOffsetsResponse;
 const GroupResponse = models.GroupResponse;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
+const FetchMessageListByOffsetResponse = models.FetchMessageListByOffsetResponse;
 const CreateConsumerResponse = models.CreateConsumerResponse;
 const RouteResponse = models.RouteResponse;
 const DescribeGroupResponse = models.DescribeGroupResponse;
@@ -139,6 +140,7 @@ const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
 const BatchModifyTopicInfo = models.BatchModifyTopicInfo;
 const DescribeRouteResponse = models.DescribeRouteResponse;
+const TopicResult = models.TopicResult;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
 const DescribeGroupOffsetsResponse = models.DescribeGroupOffsetsResponse;
 const SendMessageRequest = models.SendMessageRequest;
@@ -347,6 +349,17 @@ class CkafkaClient extends AbstractClient {
     DescribeUser(req, cb) {
         let resp = new DescribeUserResponse();
         this.request("DescribeUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the message list based on an offset.
+     * @param {FetchMessageListByOffsetRequest} req
+     * @param {function(string, FetchMessageListByOffsetResponse):void} cb
+     * @public
+     */
+    FetchMessageListByOffset(req, cb) {
+        let resp = new FetchMessageListByOffsetResponse();
+        this.request("FetchMessageListByOffset", req, resp, cb);
     }
 
     /**

@@ -151,50 +151,24 @@ class EnableLiveDomainResponse extends  AbstractModel {
 }
 
 /**
- * CreateLiveCert request structure.
+ * DescribeUploadStreamNums response structure.
  * @class
  */
-class CreateLiveCertRequest extends  AbstractModel {
+class DescribeUploadStreamNumsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Certificate type. 0: user-added certificate, 1: Tencent Cloud-hosted certificate.
-Note: if the certificate type is 0, `HttpsCrt` and `HttpsKey` are required;
-If the certificate type is 1, the certificate corresponding to `CloudCertId` will be used first. If `CloudCertId` is empty, `HttpsCrt` and `HttpsKey` will be used.
-         * @type {number || null}
+         * Detailed data.
+         * @type {Array.<ConcurrentRecordStreamNum> || null}
          */
-        this.CertType = null;
+        this.DataInfoList = null;
 
         /**
-         * Certificate name.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.CertName = null;
-
-        /**
-         * Certificate content, i.e., public key.
-         * @type {string || null}
-         */
-        this.HttpsCrt = null;
-
-        /**
-         * Private key.
-         * @type {string || null}
-         */
-        this.HttpsKey = null;
-
-        /**
-         * Description.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Tencent Cloud-hosted certificate ID.
-         * @type {string || null}
-         */
-        this.CloudCertId = null;
+        this.RequestId = null;
 
     }
 
@@ -205,12 +179,16 @@ If the certificate type is 1, the certificate corresponding to `CloudCertId` wil
         if (!params) {
             return;
         }
-        this.CertType = 'CertType' in params ? params.CertType : null;
-        this.CertName = 'CertName' in params ? params.CertName : null;
-        this.HttpsCrt = 'HttpsCrt' in params ? params.HttpsCrt : null;
-        this.HttpsKey = 'HttpsKey' in params ? params.HttpsKey : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.CloudCertId = 'CloudCertId' in params ? params.CloudCertId : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new ConcurrentRecordStreamNum();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -827,7 +805,7 @@ Notes:
         /**
          * The push domain name.
 The pulled stream is pushed to this domain.
-Use a push domain you have added in the CSS console.
+Note: If the destination is not a CSS address and its format is different from that of CSS addresses, pass the full address to `ToUrl`. For details, see the description of the `ToUrl` parameter.
          * @type {string || null}
          */
         this.DomainName = null;
@@ -968,6 +946,12 @@ You can specify only one backup source URL.
          */
         this.BackupSourceUrl = null;
 
+        /**
+         * 
+         * @type {Array.<PullPushWatermarkInfo> || null}
+         */
+        this.WatermarkList = null;
+
     }
 
     /**
@@ -995,6 +979,15 @@ You can specify only one backup source URL.
         this.ToUrl = 'ToUrl' in params ? params.ToUrl : null;
         this.BackupSourceType = 'BackupSourceType' in params ? params.BackupSourceType : null;
         this.BackupSourceUrl = 'BackupSourceUrl' in params ? params.BackupSourceUrl : null;
+
+        if (params.WatermarkList) {
+            this.WatermarkList = new Array();
+            for (let z in params.WatermarkList) {
+                let obj = new PullPushWatermarkInfo();
+                obj.deserialize(params.WatermarkList[z]);
+                this.WatermarkList.push(obj);
+            }
+        }
 
     }
 }
@@ -1030,24 +1023,36 @@ class DeleteLiveSnapshotTemplateRequest extends  AbstractModel {
 }
 
 /**
- * DescribeGroupProIspPlayInfoList response structure.
+ * DeleteLiveTranscodeRule request structure.
  * @class
  */
-class DescribeGroupProIspPlayInfoListResponse extends  AbstractModel {
+class DeleteLiveTranscodeRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Data content.
-         * @type {Array.<GroupProIspDataInfo> || null}
-         */
-        this.DataInfoList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Playback domain name.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DomainName = null;
+
+        /**
+         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * Template ID.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
 
     }
 
@@ -1058,16 +1063,10 @@ class DescribeGroupProIspPlayInfoListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.DataInfoList) {
-            this.DataInfoList = new Array();
-            for (let z in params.DataInfoList) {
-                let obj = new GroupProIspDataInfo();
-                obj.deserialize(params.DataInfoList[z]);
-                this.DataInfoList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -1124,49 +1123,6 @@ class PushAuthKeyInfo extends  AbstractModel {
         this.MasterAuthKey = 'MasterAuthKey' in params ? params.MasterAuthKey : null;
         this.BackupAuthKey = 'BackupAuthKey' in params ? params.BackupAuthKey : null;
         this.AuthDelta = 'AuthDelta' in params ? params.AuthDelta : null;
-
-    }
-}
-
-/**
- * DescribeUploadStreamNums response structure.
- * @class
- */
-class DescribeUploadStreamNumsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Detailed data.
-         * @type {Array.<ConcurrentRecordStreamNum> || null}
-         */
-        this.DataInfoList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.DataInfoList) {
-            this.DataInfoList = new Array();
-            for (let z in params.DataInfoList) {
-                let obj = new ConcurrentRecordStreamNum();
-                obj.deserialize(params.DataInfoList[z]);
-                this.DataInfoList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1897,20 +1853,18 @@ If this parameter is left empty, the current value will not be modified.
 }
 
 /**
- * DeleteLiveCallbackTemplate request structure.
+ * DeleteLiveSnapshotTemplate response structure.
  * @class
  */
-class DeleteLiveCallbackTemplateRequest extends  AbstractModel {
+class DeleteLiveSnapshotTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Template ID.
-1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API call.
-2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](https://intl.cloud.tencent.com/document/product/267/32632?from_cn_redirect=1) API.
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.TemplateId = null;
+        this.RequestId = null;
 
     }
 
@@ -1921,7 +1875,7 @@ class DeleteLiveCallbackTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2694,36 +2648,24 @@ Default value: 10
 }
 
 /**
- * DeleteLiveTranscodeRule request structure.
+ * DescribeGroupProIspPlayInfoList response structure.
  * @class
  */
-class DeleteLiveTranscodeRuleRequest extends  AbstractModel {
+class DescribeGroupProIspPlayInfoListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Playback domain name.
-         * @type {string || null}
+         * Data content.
+         * @type {Array.<GroupProIspDataInfo> || null}
          */
-        this.DomainName = null;
+        this.DataInfoList = null;
 
         /**
-         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.AppName = null;
-
-        /**
-         * Stream name.
-         * @type {string || null}
-         */
-        this.StreamName = null;
-
-        /**
-         * Template ID.
-         * @type {number || null}
-         */
-        this.TemplateId = null;
+        this.RequestId = null;
 
     }
 
@@ -2734,10 +2676,16 @@ class DeleteLiveTranscodeRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new GroupProIspDataInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2988,48 +2936,6 @@ class DescribeLiveRecordTemplateRequest extends  AbstractModel {
 }
 
 /**
- * ModifyLiveDomainCert request structure.
- * @class
- */
-class ModifyLiveDomainCertRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Playback domain name.
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-        /**
-         * Certificate ID.
-         * @type {number || null}
-         */
-        this.CertId = null;
-
-        /**
-         * Status. 0: off, 1: on.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.CertId = 'CertId' in params ? params.CertId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-
-    }
-}
-
-/**
  * CreateLiveWatermarkRule response structure.
  * @class
  */
@@ -3226,62 +3132,6 @@ class DescribeConcurrentRecordStreamNumResponse extends  AbstractModel {
                 obj.deserialize(params.DataInfoList[z]);
                 this.DataInfoList.push(obj);
             }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyLiveTranscodeTemplate response structure.
- * @class
- */
-class ModifyLiveTranscodeTemplateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyLiveRecordTemplate response structure.
- * @class
- */
-class ModifyLiveRecordTemplateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4008,6 +3858,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.CreateLimitCount = null;
 
         /**
+         * The number of domains accelerated in the Chinese mainland, globally, and outside the Chinese mainland respectively.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.PlayTypeCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4033,6 +3890,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.CreateLimitCount = 'CreateLimitCount' in params ? params.CreateLimitCount : null;
+        this.PlayTypeCount = 'PlayTypeCount' in params ? params.PlayTypeCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4074,138 +3932,31 @@ class TimeValue extends  AbstractModel {
 }
 
 /**
- * ModifyLivePullStreamTask request structure.
+ * ModifyLiveDomainCertBindings response structure.
  * @class
  */
-class ModifyLivePullStreamTaskRequest extends  AbstractModel {
+class ModifyLiveDomainCertBindingsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The task ID.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The operator.
-         * @type {string || null}
-         */
-        this.Operator = null;
-
-        /**
-         * The source URL(s).
-If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
-If `SourceType` is `PullVodPushLive`, you can specify at most 30 source URLs.
+         * The domains skipped due to certificate mismatch.
          * @type {Array.<string> || null}
          */
-        this.SourceUrls = null;
+        this.MismatchedDomainNames = null;
 
         /**
-         * The start time.
-It must be in UTC format.
-Example: 2019-01-08T10:00:00Z.
-Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * The domains that the API failed to bind, including those in `MismatchedDomainNames`, and the error information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<BatchDomainOperateErrors> || null}
+         */
+        this.Errors = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * The end time. Notes:
-1. The end time must be later than the start time.
-2. The end time and start time must be later than the current time.
-3. The end time and start time must be less than seven days apart.
-It must be in UTC format.
-Example: 2019-01-08T10:00:00Z.
-Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * The number of times to loop video files.
--1: Loop indefinitely
-0: Do not loop
-> 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
-This parameter is valid only if the source is video files.
-         * @type {number || null}
-         */
-        this.VodLoopTimes = null;
-
-        /**
-         * The behavior after the source video files (`SourceUrls`) are changed.
-ImmediateNewSource: Play the new videos immediately
-ContinueBreakPoint: Finish the current video first and then pull from the new source.
-This parameter is valid only if the source is video files.
-         * @type {string || null}
-         */
-        this.VodRefreshType = null;
-
-        /**
-         * Whether to enable or pause the task. Valid values:
-enable
-pause
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * The events to listen for. If you do not pass this parameter, all events will be listened for.
-TaskStart: Callback for starting a task
-TaskExit: Callback for ending a task
-VodSourceFileStart: Callback for starting to pull from video files
-VodSourceFileFinish: Callback for stopping pulling from video files
-ResetTaskConfig: Callback for modifying a task
-         * @type {Array.<string> || null}
-         */
-        this.CallbackEvents = null;
-
-        /**
-         * A custom callback URL.
-Callbacks will be sent to this URL.
-         * @type {string || null}
-         */
-        this.CallbackUrl = null;
-
-        /**
-         * The index of the video to start from.
-The value of this parameter cannot be smaller than 1 or larger than the number of elements in `SourceUrls`.
-         * @type {number || null}
-         */
-        this.FileIndex = null;
-
-        /**
-         * The playback offset (seconds).
-Notes:
-1. This parameter should be used together with `FileIndex`.
-         * @type {number || null}
-         */
-        this.OffsetTime = null;
-
-        /**
-         * The remarks for the task.
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * The backup source type.
-PullLivePushLive: Live streaming
-PullVodPushLive: Video files
-Notes:
-1. Backup sources are supported only if the primary source type is live streaming.
-2. When pull from the primary source is interrupted, the system will pull from the backup source.
-3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
-         * @type {string || null}
-         */
-        this.BackupSourceType = null;
-
-        /**
-         * The URL of the backup source.
-You can specify only one backup source URL.
-         * @type {string || null}
-         */
-        this.BackupSourceUrl = null;
+        this.RequestId = null;
 
     }
 
@@ -4216,21 +3967,17 @@ You can specify only one backup source URL.
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
-        this.SourceUrls = 'SourceUrls' in params ? params.SourceUrls : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.VodLoopTimes = 'VodLoopTimes' in params ? params.VodLoopTimes : null;
-        this.VodRefreshType = 'VodRefreshType' in params ? params.VodRefreshType : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CallbackEvents = 'CallbackEvents' in params ? params.CallbackEvents : null;
-        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
-        this.FileIndex = 'FileIndex' in params ? params.FileIndex : null;
-        this.OffsetTime = 'OffsetTime' in params ? params.OffsetTime : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.BackupSourceType = 'BackupSourceType' in params ? params.BackupSourceType : null;
-        this.BackupSourceUrl = 'BackupSourceUrl' in params ? params.BackupSourceUrl : null;
+        this.MismatchedDomainNames = 'MismatchedDomainNames' in params ? params.MismatchedDomainNames : null;
+
+        if (params.Errors) {
+            this.Errors = new Array();
+            for (let z in params.Errors) {
+                let obj = new BatchDomainOperateErrors();
+                obj.deserialize(params.Errors[z]);
+                this.Errors.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4419,6 +4166,74 @@ class UpdateLiveWatermarkResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyLiveDomainCertBindings request structure.
+ * @class
+ */
+class ModifyLiveDomainCertBindingsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The playback domains to bind and whether to enable HTTPS for them.
+If neither `CloudCertId` nor the public/private key is specified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain and, if the certificate is a self-owned certificate, upload it to Tencent Cloud.
+         * @type {Array.<LiveCertDomainInfo> || null}
+         */
+        this.DomainInfos = null;
+
+        /**
+         * The SSL certificate ID assigned by Tencent Cloud.
+For details, see https://intl.cloud.tencent.com/document/api/400/41665?from_cn_redirect=1
+         * @type {string || null}
+         */
+        this.CloudCertId = null;
+
+        /**
+         * The public key of the certificate.
+You can specify either `CloudCertId` or the public/private key. If both are specified, the private and public key parameters will be ignored. If you pass in only the public and private keys, the corresponding certificate will be uploaded to Tencent Cloud SSL Certificate Service, which will generate a `CloudCertId` for the certificate.
+         * @type {string || null}
+         */
+        this.CertificatePublicKey = null;
+
+        /**
+         * The private key of the certificate.
+You can specify either `CloudCertId` or the public/private key. If both are specified, the private and public key parameters will be ignored. If you pass in only the public and private keys, the corresponding certificate will be uploaded to Tencent Cloud SSL Certificate Service, which will generate a `CloudCertId` for the certificate.
+         * @type {string || null}
+         */
+        this.CertificatePrivateKey = null;
+
+        /**
+         * The remarks for the certificate in Tencent Cloud SSL Certificate Service. This parameter will be ignored if `CloudCertId` is specified.
+         * @type {string || null}
+         */
+        this.CertificateAlias = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomainInfos) {
+            this.DomainInfos = new Array();
+            for (let z in params.DomainInfos) {
+                let obj = new LiveCertDomainInfo();
+                obj.deserialize(params.DomainInfos[z]);
+                this.DomainInfos.push(obj);
+            }
+        }
+        this.CloudCertId = 'CloudCertId' in params ? params.CloudCertId : null;
+        this.CertificatePublicKey = 'CertificatePublicKey' in params ? params.CertificatePublicKey : null;
+        this.CertificatePrivateKey = 'CertificatePrivateKey' in params ? params.CertificatePrivateKey : null;
+        this.CertificateAlias = 'CertificateAlias' in params ? params.CertificateAlias : null;
+
+    }
+}
+
+/**
  * CreateLiveTranscodeTemplate response structure.
  * @class
  */
@@ -4454,24 +4269,27 @@ class CreateLiveTranscodeTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Playback information at the stream level.
+ * The domains to bind to a certificate.
  * @class
  */
-class PlayDataInfoByStream extends  AbstractModel {
+class LiveCertDomainInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Stream name.
+         * The domain name.
          * @type {string || null}
          */
-        this.StreamName = null;
+        this.DomainName = null;
 
         /**
-         * Total traffic in MB.
+         * Whether to enable HTTPS for the domain.
+1: Enable
+0: Disable
+-1: Keep the current configuration
          * @type {number || null}
          */
-        this.TotalFlux = null;
+        this.Status = null;
 
     }
 
@@ -4482,8 +4300,8 @@ class PlayDataInfoByStream extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.TotalFlux = 'TotalFlux' in params ? params.TotalFlux : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -4595,6 +4413,56 @@ class CancelCommonMixStreamResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLiveDomainCertBindings response structure.
+ * @class
+ */
+class DescribeLiveDomainCertBindingsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The information of domains that meet the query criteria.
+         * @type {Array.<LiveDomainCertBindings> || null}
+         */
+        this.LiveDomainCertBindings = null;
+
+        /**
+         * The number of records returned, which is needed for pagination.
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LiveDomainCertBindings) {
+            this.LiveDomainCertBindings = new Array();
+            for (let z in params.LiveDomainCertBindings) {
+                let obj = new LiveDomainCertBindings();
+                obj.deserialize(params.LiveDomainCertBindings[z]);
+                this.LiveDomainCertBindings.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4902,6 +4770,41 @@ class DescribeLiveRecordTemplatesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Playback information at the stream level.
+ * @class
+ */
+class PlayDataInfoByStream extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * Total traffic in MB.
+         * @type {number || null}
+         */
+        this.TotalFlux = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.TotalFlux = 'TotalFlux' in params ? params.TotalFlux : null;
 
     }
 }
@@ -5498,18 +5401,67 @@ class DescribeLiveWatermarkRulesRequest extends  AbstractModel {
 }
 
 /**
- * StopLiveRecord response structure.
+ * Watermark information
+
  * @class
  */
-class StopLiveRecordResponse extends  AbstractModel {
+class PullPushWatermarkInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Watermark ID.
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
+
+        /**
+         * Watermark image URL.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PictureUrl = null;
+
+        /**
+         * Display position: X-axis offset.
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * Display position: Y-axis offset.
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+        /**
+         * Watermark name.
+         * @type {string || null}
+         */
+        this.WatermarkName = null;
+
+        /**
+         * Current status. 0: not used. 1: in use.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Watermark width
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Watermark height
+         * @type {number || null}
+         */
+        this.Height = null;
 
     }
 
@@ -5520,7 +5472,15 @@ class StopLiveRecordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -5657,41 +5617,6 @@ class RefererAuthConfig extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.AllowEmpty = 'AllowEmpty' in params ? params.AllowEmpty : null;
         this.Rules = 'Rules' in params ? params.Rules : null;
-
-    }
-}
-
-/**
- * CreateLiveCert response structure.
- * @class
- */
-class CreateLiveCertResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Certificate ID
-         * @type {number || null}
-         */
-        this.CertId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertId = 'CertId' in params ? params.CertId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7357,6 +7282,34 @@ Default value: 200.
 }
 
 /**
+ * StopLiveRecord response structure.
+ * @class
+ */
+class StopLiveRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLiveWatermarks response structure.
  * @class
  */
@@ -7530,48 +7483,6 @@ Default value: 10.
         this.PageNum = 'PageNum' in params ? params.PageNum : null;
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
-
-    }
-}
-
-/**
- * BindLiveDomainCert request structure.
- * @class
- */
-class BindLiveDomainCertRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Certificate ID, which can be obtained through the `CreateLiveCert` API.
-         * @type {number || null}
-         */
-        this.CertId = null;
-
-        /**
-         * Playback domain name.
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-        /**
-         * HTTPS status. 0: disabled, 1: enabled.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertId = 'CertId' in params ? params.CertId : null;
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -7754,10 +7665,10 @@ In UTC format, such as 2018-06-29T19:00:00Z.
 }
 
 /**
- * ModifyLiveCert response structure.
+ * ModifyLiveTranscodeTemplate response structure.
  * @class
  */
-class ModifyLiveCertResponse extends  AbstractModel {
+class ModifyLiveTranscodeTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -7777,6 +7688,168 @@ class ModifyLiveCertResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyLivePullStreamTask request structure.
+ * @class
+ */
+class ModifyLivePullStreamTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The operator.
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * The source URL(s).
+If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
+If `SourceType` is `PullVodPushLive`, you can specify at most 30 source URLs.
+         * @type {Array.<string> || null}
+         */
+        this.SourceUrls = null;
+
+        /**
+         * The start time.
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time. Notes:
+1. The end time must be later than the start time.
+2. The end time and start time must be later than the current time.
+3. The end time and start time must be less than seven days apart.
+It must be in UTC format.
+Example: 2019-01-08T10:00:00Z.
+Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The number of times to loop video files.
+-1: Loop indefinitely
+0: Do not loop
+> 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
+This parameter is valid only if the source is video files.
+         * @type {number || null}
+         */
+        this.VodLoopTimes = null;
+
+        /**
+         * The behavior after the source video files (`SourceUrls`) are changed.
+ImmediateNewSource: Play the new videos immediately
+ContinueBreakPoint: Finish the current video first and then pull from the new source.
+This parameter is valid only if the source is video files.
+         * @type {string || null}
+         */
+        this.VodRefreshType = null;
+
+        /**
+         * Whether to enable or pause the task. Valid values:
+enable
+pause
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The events to listen for. If you do not pass this parameter, all events will be listened for.
+TaskStart: Callback for starting a task
+TaskExit: Callback for ending a task
+VodSourceFileStart: Callback for starting to pull from video files
+VodSourceFileFinish: Callback for stopping pulling from video files
+ResetTaskConfig: Callback for modifying a task
+         * @type {Array.<string> || null}
+         */
+        this.CallbackEvents = null;
+
+        /**
+         * A custom callback URL.
+Callbacks will be sent to this URL.
+         * @type {string || null}
+         */
+        this.CallbackUrl = null;
+
+        /**
+         * The index of the video to start from.
+The value of this parameter cannot be smaller than 1 or larger than the number of elements in `SourceUrls`.
+         * @type {number || null}
+         */
+        this.FileIndex = null;
+
+        /**
+         * The playback offset (seconds).
+Notes:
+1. This parameter should be used together with `FileIndex`.
+         * @type {number || null}
+         */
+        this.OffsetTime = null;
+
+        /**
+         * The remarks for the task.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * The backup source type.
+PullLivePushLive: Live streaming
+PullVodPushLive: Video files
+Notes:
+1. Backup sources are supported only if the primary source type is live streaming.
+2. When pull from the primary source is interrupted, the system will pull from the backup source.
+3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
+         * @type {string || null}
+         */
+        this.BackupSourceType = null;
+
+        /**
+         * The URL of the backup source.
+You can specify only one backup source URL.
+         * @type {string || null}
+         */
+        this.BackupSourceUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.SourceUrls = 'SourceUrls' in params ? params.SourceUrls : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.VodLoopTimes = 'VodLoopTimes' in params ? params.VodLoopTimes : null;
+        this.VodRefreshType = 'VodRefreshType' in params ? params.VodRefreshType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CallbackEvents = 'CallbackEvents' in params ? params.CallbackEvents : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.FileIndex = 'FileIndex' in params ? params.FileIndex : null;
+        this.OffsetTime = 'OffsetTime' in params ? params.OffsetTime : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.BackupSourceType = 'BackupSourceType' in params ? params.BackupSourceType : null;
+        this.BackupSourceUrl = 'BackupSourceUrl' in params ? params.BackupSourceUrl : null;
 
     }
 }
@@ -8948,48 +9021,18 @@ Note: `EndTime` and `StartTime` only support querying data for the last day.
 }
 
 /**
- * ModifyLiveCert request structure.
+ * ModifyLiveRecordTemplate response structure.
  * @class
  */
-class ModifyLiveCertRequest extends  AbstractModel {
+class ModifyLiveRecordTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Certificate ID.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.CertId = null;
-
-        /**
-         * Certificate type. 0: user-added certificate, 1: Tencent Cloud-hosted certificate.
-         * @type {number || null}
-         */
-        this.CertType = null;
-
-        /**
-         * Certificate name.
-         * @type {string || null}
-         */
-        this.CertName = null;
-
-        /**
-         * Certificate content, i.e., public key.
-         * @type {string || null}
-         */
-        this.HttpsCrt = null;
-
-        /**
-         * Private key.
-         * @type {string || null}
-         */
-        this.HttpsKey = null;
-
-        /**
-         * Description.
-         * @type {string || null}
-         */
-        this.Description = null;
+        this.RequestId = null;
 
     }
 
@@ -9000,12 +9043,7 @@ class ModifyLiveCertRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CertId = 'CertId' in params ? params.CertId : null;
-        this.CertType = 'CertType' in params ? params.CertType : null;
-        this.CertName = 'CertName' in params ? params.CertName : null;
-        this.HttpsCrt = 'HttpsCrt' in params ? params.HttpsCrt : null;
-        this.HttpsKey = 'HttpsKey' in params ? params.HttpsKey : null;
-        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9269,6 +9307,56 @@ class CreateLiveRecordTemplateResponse extends  AbstractModel {
         }
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Bandwidth, traffic, number of requests, and number of concurrent connections of an ISP in a district.
+ * @class
+ */
+class GroupProIspDataInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * District.
+         * @type {string || null}
+         */
+        this.ProvinceName = null;
+
+        /**
+         * ISP.
+         * @type {string || null}
+         */
+        this.IspName = null;
+
+        /**
+         * Detailed data at the minute level.
+         * @type {Array.<CdnPlayStatData> || null}
+         */
+        this.DetailInfoList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProvinceName = 'ProvinceName' in params ? params.ProvinceName : null;
+        this.IspName = 'IspName' in params ? params.IspName : null;
+
+        if (params.DetailInfoList) {
+            this.DetailInfoList = new Array();
+            for (let z in params.DetailInfoList) {
+                let obj = new CdnPlayStatData();
+                obj.deserialize(params.DetailInfoList[z]);
+                this.DetailInfoList.push(obj);
+            }
+        }
 
     }
 }
@@ -10205,6 +10293,48 @@ class PlayAuthKeyInfo extends  AbstractModel {
 }
 
 /**
+ * Error information for domains that a batch domain operation API fails to operate.
+ * @class
+ */
+class BatchDomainOperateErrors extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The domain that the API failed to operate.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * The API 3.0 error code.
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * The API 3.0 error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
  * ModifyLiveTranscodeTemplate request structure.
  * @class
  */
@@ -10390,34 +10520,6 @@ If you do not pass this parameter or pass in an empty string, the existing confi
         this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
         this.DRMType = 'DRMType' in params ? params.DRMType : null;
         this.DRMTracks = 'DRMTracks' in params ? params.DRMTracks : null;
-
-    }
-}
-
-/**
- * ModifyLiveDomainCert response structure.
- * @class
- */
-class ModifyLiveDomainCertResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10772,34 +10874,6 @@ Default value: 20.
                 obj.deserialize(params.DataInfoList[z]);
                 this.DataInfoList.push(obj);
             }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * BindLiveDomainCert response structure.
- * @class
- */
-class BindLiveDomainCertResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -11219,18 +11293,20 @@ Default value: 10.
 }
 
 /**
- * DeleteLiveSnapshotTemplate response structure.
+ * DeleteLiveCallbackTemplate request structure.
  * @class
  */
-class DeleteLiveSnapshotTemplateResponse extends  AbstractModel {
+class DeleteLiveCallbackTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Template ID.
+1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API call.
+2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](https://intl.cloud.tencent.com/document/product/267/32632?from_cn_redirect=1) API.
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.TemplateId = null;
 
     }
 
@@ -11241,7 +11317,7 @@ class DeleteLiveSnapshotTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -11276,18 +11352,65 @@ Template ID returned by the [CreateLiveSnapshotTemplate](https://intl.cloud.tenc
 }
 
 /**
- * DeleteLiveCert response structure.
+ * The domain and certificate information returned by `DescribeLiveDomainCertBindings` and `DescribeLiveDomainCertBindingsGray`.
  * @class
  */
-class DeleteLiveCertResponse extends  AbstractModel {
+class LiveDomainCertBindings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The domain name.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DomainName = null;
+
+        /**
+         * The remarks for the certificate. This parameter is the same as `CertName`.
+         * @type {string || null}
+         */
+        this.CertificateAlias = null;
+
+        /**
+         * The certificate type.
+0: Self-owned certificate
+1: Tencent Cloud-hosted certificate
+         * @type {number || null}
+         */
+        this.CertType = null;
+
+        /**
+         * Whether HTTPS is enabled.
+1: Enabled
+0: Disabled
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The expiration time of the certificate.
+         * @type {string || null}
+         */
+        this.CertExpireTime = null;
+
+        /**
+         * The certificate ID.
+         * @type {number || null}
+         */
+        this.CertId = null;
+
+        /**
+         * The SSL certificate ID assigned by Tencent Cloud.
+         * @type {string || null}
+         */
+        this.CloudCertId = null;
+
+        /**
+         * The last updated time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -11298,7 +11421,14 @@ class DeleteLiveCertResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.CertificateAlias = 'CertificateAlias' in params ? params.CertificateAlias : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CertExpireTime = 'CertExpireTime' in params ? params.CertExpireTime : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CloudCertId = 'CloudCertId' in params ? params.CloudCertId : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -12663,6 +12793,20 @@ class ForbidStreamInfo extends  AbstractModel {
          */
         this.ExpireTime = null;
 
+        /**
+         * The push path.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * The push domain name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
     }
 
     /**
@@ -12675,6 +12819,8 @@ class ForbidStreamInfo extends  AbstractModel {
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
 
     }
 }
@@ -12708,30 +12854,45 @@ class ResumeDelayLiveStreamResponse extends  AbstractModel {
 }
 
 /**
- * Bandwidth, traffic, number of requests, and number of concurrent connections of an ISP in a district.
+ * DescribeLiveDomainCertBindings request structure.
  * @class
  */
-class GroupProIspDataInfo extends  AbstractModel {
+class DescribeLiveDomainCertBindingsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * District.
+         * The keyword to use to search for domains.
          * @type {string || null}
          */
-        this.ProvinceName = null;
+        this.DomainSearch = null;
 
         /**
-         * ISP.
+         * The number of records to skip before starting to return any results. 0 means to start from the first record and is the default.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The maximum number of records to return. The default is 50.
+If this parameter is not specified, up to 50 records will be returned.
+         * @type {number || null}
+         */
+        this.Length = null;
+
+        /**
+         * The name of a particular domain to query.
          * @type {string || null}
          */
-        this.IspName = null;
+        this.DomainName = null;
 
         /**
-         * Detailed data at the minute level.
-         * @type {Array.<CdnPlayStatData> || null}
+         * Valid values:
+ExpireTimeAsc: Sort the records by certificate expiration time in ascending order.
+ExpireTimeDesc: Sort the records by certificate expiration time in descending order.
+         * @type {string || null}
          */
-        this.DetailInfoList = null;
+        this.OrderBy = null;
 
     }
 
@@ -12742,17 +12903,11 @@ class GroupProIspDataInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProvinceName = 'ProvinceName' in params ? params.ProvinceName : null;
-        this.IspName = 'IspName' in params ? params.IspName : null;
-
-        if (params.DetailInfoList) {
-            this.DetailInfoList = new Array();
-            for (let z in params.DetailInfoList) {
-                let obj = new CdnPlayStatData();
-                obj.deserialize(params.DetailInfoList[z]);
-                this.DetailInfoList.push(obj);
-            }
-        }
+        this.DomainSearch = 'DomainSearch' in params ? params.DomainSearch : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Length = 'Length' in params ? params.Length : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
 
     }
 }
@@ -12970,34 +13125,6 @@ class CreateLiveRecordTemplateRequest extends  AbstractModel {
 }
 
 /**
- * DeleteLiveCert request structure.
- * @class
- */
-class DeleteLiveCertRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Certificate ID obtained through the `DescribeLiveCerts` API.
-         * @type {number || null}
-         */
-        this.CertId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertId = 'CertId' in params ? params.CertId : null;
-
-    }
-}
-
-/**
  * DescribeHttpStatusInfoList response structure.
  * @class
  */
@@ -13072,7 +13199,7 @@ module.exports = {
     CreateLiveSnapshotRuleRequest: CreateLiveSnapshotRuleRequest,
     TimeShiftBillData: TimeShiftBillData,
     EnableLiveDomainResponse: EnableLiveDomainResponse,
-    CreateLiveCertRequest: CreateLiveCertRequest,
+    DescribeUploadStreamNumsResponse: DescribeUploadStreamNumsResponse,
     StopRecordTaskResponse: StopRecordTaskResponse,
     DescribeDeliverBandwidthListResponse: DescribeDeliverBandwidthListResponse,
     DeleteLiveRecordRuleRequest: DeleteLiveRecordRuleRequest,
@@ -13086,9 +13213,8 @@ module.exports = {
     DescribeLiveCallbackTemplateResponse: DescribeLiveCallbackTemplateResponse,
     CreateLivePullStreamTaskRequest: CreateLivePullStreamTaskRequest,
     DeleteLiveSnapshotTemplateRequest: DeleteLiveSnapshotTemplateRequest,
-    DescribeGroupProIspPlayInfoListResponse: DescribeGroupProIspPlayInfoListResponse,
+    DeleteLiveTranscodeRuleRequest: DeleteLiveTranscodeRuleRequest,
     PushAuthKeyInfo: PushAuthKeyInfo,
-    DescribeUploadStreamNumsResponse: DescribeUploadStreamNumsResponse,
     DeleteLiveRecordTemplateRequest: DeleteLiveRecordTemplateRequest,
     DeleteLiveCallbackTemplateResponse: DeleteLiveCallbackTemplateResponse,
     DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
@@ -13103,7 +13229,7 @@ module.exports = {
     ModifyLiveSnapshotTemplateResponse: ModifyLiveSnapshotTemplateResponse,
     CreateLivePullStreamTaskResponse: CreateLivePullStreamTaskResponse,
     ModifyLivePushAuthKeyRequest: ModifyLivePushAuthKeyRequest,
-    DeleteLiveCallbackTemplateRequest: DeleteLiveCallbackTemplateRequest,
+    DeleteLiveSnapshotTemplateResponse: DeleteLiveSnapshotTemplateResponse,
     DescribeLiveStreamStateRequest: DescribeLiveStreamStateRequest,
     DescribeLivePlayAuthKeyResponse: DescribeLivePlayAuthKeyResponse,
     DescribeLiveCallbackTemplatesRequest: DescribeLiveCallbackTemplatesRequest,
@@ -13118,21 +13244,18 @@ module.exports = {
     DescribeLiveTranscodeDetailInfoResponse: DescribeLiveTranscodeDetailInfoResponse,
     DescribeLiveDomainRequest: DescribeLiveDomainRequest,
     DescribeLiveStreamPublishedListRequest: DescribeLiveStreamPublishedListRequest,
-    DeleteLiveTranscodeRuleRequest: DeleteLiveTranscodeRuleRequest,
+    DescribeGroupProIspPlayInfoListResponse: DescribeGroupProIspPlayInfoListResponse,
     CreateLiveRecordRuleRequest: CreateLiveRecordRuleRequest,
     DescribeLiveSnapshotTemplatesRequest: DescribeLiveSnapshotTemplatesRequest,
     AddLiveWatermarkResponse: AddLiveWatermarkResponse,
     DescribeLiveStreamPushInfoListResponse: DescribeLiveStreamPushInfoListResponse,
     DescribeLiveDomainCertResponse: DescribeLiveDomainCertResponse,
     DescribeLiveRecordTemplateRequest: DescribeLiveRecordTemplateRequest,
-    ModifyLiveDomainCertRequest: ModifyLiveDomainCertRequest,
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
     ForbidLiveStreamRequest: ForbidLiveStreamRequest,
     DescribeDeliverBandwidthListRequest: DescribeDeliverBandwidthListRequest,
     PlayCodeTotalInfo: PlayCodeTotalInfo,
     DescribeConcurrentRecordStreamNumResponse: DescribeConcurrentRecordStreamNumResponse,
-    ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
-    ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     ModifyLivePlayDomainRequest: ModifyLivePlayDomainRequest,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
     DescribeLiveWatermarkRequest: DescribeLiveWatermarkRequest,
@@ -13147,22 +13270,25 @@ module.exports = {
     DescribeScreenShotSheetNumListRequest: DescribeScreenShotSheetNumListRequest,
     DescribeLiveDomainsResponse: DescribeLiveDomainsResponse,
     TimeValue: TimeValue,
-    ModifyLivePullStreamTaskRequest: ModifyLivePullStreamTaskRequest,
+    ModifyLiveDomainCertBindingsResponse: ModifyLiveDomainCertBindingsResponse,
     StreamOnlineInfo: StreamOnlineInfo,
     CreateLiveRecordResponse: CreateLiveRecordResponse,
     RuleInfo: RuleInfo,
     UpdateLiveWatermarkResponse: UpdateLiveWatermarkResponse,
+    ModifyLiveDomainCertBindingsRequest: ModifyLiveDomainCertBindingsRequest,
     CreateLiveTranscodeTemplateResponse: CreateLiveTranscodeTemplateResponse,
-    PlayDataInfoByStream: PlayDataInfoByStream,
+    LiveCertDomainInfo: LiveCertDomainInfo,
     DayStreamPlayInfo: DayStreamPlayInfo,
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
     CancelCommonMixStreamResponse: CancelCommonMixStreamResponse,
+    DescribeLiveDomainCertBindingsResponse: DescribeLiveDomainCertBindingsResponse,
     AddLiveWatermarkRequest: AddLiveWatermarkRequest,
     DescribeLiveTimeShiftBillInfoListRequest: DescribeLiveTimeShiftBillInfoListRequest,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
     CommonMixInputParam: CommonMixInputParam,
     DescribeProvinceIspPlayInfoListResponse: DescribeProvinceIspPlayInfoListResponse,
     DescribeLiveRecordTemplatesResponse: DescribeLiveRecordTemplatesResponse,
+    PlayDataInfoByStream: PlayDataInfoByStream,
     DescribeLiveCertRequest: DescribeLiveCertRequest,
     DescribeLiveCallbackTemplatesResponse: DescribeLiveCallbackTemplatesResponse,
     ModifyLivePlayAuthKeyResponse: ModifyLivePlayAuthKeyResponse,
@@ -13176,10 +13302,9 @@ module.exports = {
     DescribeLiveWatermarksRequest: DescribeLiveWatermarksRequest,
     CreateLiveTranscodeRuleRequest: CreateLiveTranscodeRuleRequest,
     DescribeLiveWatermarkRulesRequest: DescribeLiveWatermarkRulesRequest,
-    StopLiveRecordResponse: StopLiveRecordResponse,
+    PullPushWatermarkInfo: PullPushWatermarkInfo,
     CreateCommonMixStreamRequest: CreateCommonMixStreamRequest,
     RefererAuthConfig: RefererAuthConfig,
-    CreateLiveCertResponse: CreateLiveCertResponse,
     PushDataInfo: PushDataInfo,
     CommonMixLayoutParams: CommonMixLayoutParams,
     DescribeGroupProIspPlayInfoListRequest: DescribeGroupProIspPlayInfoListRequest,
@@ -13206,15 +13331,16 @@ module.exports = {
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
     ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
     DescribeLiveStreamPushInfoListRequest: DescribeLiveStreamPushInfoListRequest,
+    StopLiveRecordResponse: StopLiveRecordResponse,
     DescribeLiveWatermarksResponse: DescribeLiveWatermarksResponse,
     WatermarkInfo: WatermarkInfo,
     DescribeLiveForbidStreamListRequest: DescribeLiveForbidStreamListRequest,
-    BindLiveDomainCertRequest: BindLiveDomainCertRequest,
     DescribeTopClientIpSumInfoListRequest: DescribeTopClientIpSumInfoListRequest,
     CreateLiveCallbackRuleRequest: CreateLiveCallbackRuleRequest,
     DeleteLiveWatermarkRuleResponse: DeleteLiveWatermarkRuleResponse,
     PublishTime: PublishTime,
-    ModifyLiveCertResponse: ModifyLiveCertResponse,
+    ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
+    ModifyLivePullStreamTaskRequest: ModifyLivePullStreamTaskRequest,
     DescribeLiveTranscodeDetailInfoRequest: DescribeLiveTranscodeDetailInfoRequest,
     ModifyLiveDomainRefererResponse: ModifyLiveDomainRefererResponse,
     DeleteLiveWatermarkRequest: DeleteLiveWatermarkRequest,
@@ -13237,7 +13363,7 @@ module.exports = {
     CreateLiveSnapshotTemplateResponse: CreateLiveSnapshotTemplateResponse,
     DescribeConcurrentRecordStreamNumRequest: DescribeConcurrentRecordStreamNumRequest,
     DescribePlayErrorCodeSumInfoListRequest: DescribePlayErrorCodeSumInfoListRequest,
-    ModifyLiveCertRequest: ModifyLiveCertRequest,
+    ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     CommonMixControlParams: CommonMixControlParams,
     TranscodeTotalInfo: TranscodeTotalInfo,
     UnBindLiveDomainCertResponse: UnBindLiveDomainCertResponse,
@@ -13245,6 +13371,7 @@ module.exports = {
     DescribeLiveRecordRulesRequest: DescribeLiveRecordRulesRequest,
     DescribePlayErrorCodeDetailInfoListResponse: DescribePlayErrorCodeDetailInfoListResponse,
     CreateLiveRecordTemplateResponse: CreateLiveRecordTemplateResponse,
+    GroupProIspDataInfo: GroupProIspDataInfo,
     RecordParam: RecordParam,
     ForbidLiveStreamResponse: ForbidLiveStreamResponse,
     HttpStatusInfo: HttpStatusInfo,
@@ -13262,8 +13389,8 @@ module.exports = {
     DescribeLiveTranscodeTemplatesResponse: DescribeLiveTranscodeTemplatesResponse,
     DeleteLiveCallbackRuleRequest: DeleteLiveCallbackRuleRequest,
     PlayAuthKeyInfo: PlayAuthKeyInfo,
+    BatchDomainOperateErrors: BatchDomainOperateErrors,
     ModifyLiveTranscodeTemplateRequest: ModifyLiveTranscodeTemplateRequest,
-    ModifyLiveDomainCertResponse: ModifyLiveDomainCertResponse,
     EnableLiveDomainRequest: EnableLiveDomainRequest,
     DescribeLiveTranscodeTotalInfoResponse: DescribeLiveTranscodeTotalInfoResponse,
     DescribeLiveSnapshotRulesRequest: DescribeLiveSnapshotRulesRequest,
@@ -13272,7 +13399,6 @@ module.exports = {
     CreateLiveCallbackRuleResponse: CreateLiveCallbackRuleResponse,
     DescribeLiveRecordTemplateResponse: DescribeLiveRecordTemplateResponse,
     DescribeVisitTopSumInfoListResponse: DescribeVisitTopSumInfoListResponse,
-    BindLiveDomainCertResponse: BindLiveDomainCertResponse,
     CallBackRuleInfo: CallBackRuleInfo,
     PlaySumStatInfo: PlaySumStatInfo,
     DescribeLiveTranscodeTemplatesRequest: DescribeLiveTranscodeTemplatesRequest,
@@ -13281,9 +13407,9 @@ module.exports = {
     CreateLiveSnapshotTemplateRequest: CreateLiveSnapshotTemplateRequest,
     HttpCodeValue: HttpCodeValue,
     DescribeLiveStreamOnlineListRequest: DescribeLiveStreamOnlineListRequest,
-    DeleteLiveSnapshotTemplateResponse: DeleteLiveSnapshotTemplateResponse,
+    DeleteLiveCallbackTemplateRequest: DeleteLiveCallbackTemplateRequest,
     DescribeLiveSnapshotTemplateRequest: DescribeLiveSnapshotTemplateRequest,
-    DeleteLiveCertResponse: DeleteLiveCertResponse,
+    LiveDomainCertBindings: LiveDomainCertBindings,
     CreateCommonMixStreamResponse: CreateCommonMixStreamResponse,
     ModifyLiveDomainRefererRequest: ModifyLiveDomainRefererRequest,
     CreateLiveCallbackTemplateResponse: CreateLiveCallbackTemplateResponse,
@@ -13313,11 +13439,10 @@ module.exports = {
     CreateRecordTaskResponse: CreateRecordTaskResponse,
     ForbidStreamInfo: ForbidStreamInfo,
     ResumeDelayLiveStreamResponse: ResumeDelayLiveStreamResponse,
-    GroupProIspDataInfo: GroupProIspDataInfo,
+    DescribeLiveDomainCertBindingsRequest: DescribeLiveDomainCertBindingsRequest,
     DeleteLiveDomainResponse: DeleteLiveDomainResponse,
     CommonMixCropParams: CommonMixCropParams,
     CreateLiveRecordTemplateRequest: CreateLiveRecordTemplateRequest,
-    DeleteLiveCertRequest: DeleteLiveCertRequest,
     DescribeHttpStatusInfoListResponse: DescribeHttpStatusInfoListResponse,
     DeleteLiveRecordRuleResponse: DeleteLiveRecordRuleResponse,
 

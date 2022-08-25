@@ -37,6 +37,7 @@ const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObje
 const PutMonitorDataResponse = models.PutMonitorDataResponse;
 const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
 const UpdateAlertRuleStateResponse = models.UpdateAlertRuleStateResponse;
+const MonitorTypeInfo = models.MonitorTypeInfo;
 const CreatePrometheusScrapeJobResponse = models.CreatePrometheusScrapeJobResponse;
 const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
 const AlarmHistoryMetric = models.AlarmHistoryMetric;

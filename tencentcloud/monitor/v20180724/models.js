@@ -1132,6 +1132,48 @@ class UpdateAlertRuleStateResponse extends  AbstractModel {
 }
 
 /**
+ * Monitoring type details
+ * @class
+ */
+class MonitorTypeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Monitoring type ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Monitoring type
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Sort order
+         * @type {number || null}
+         */
+        this.SortId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SortId = 'SortId' in params ? params.SortId : null;
+
+    }
+}
+
+/**
  * CreatePrometheusScrapeJob response structure.
  * @class
  */
@@ -6871,6 +6913,12 @@ class DescribeMonitorTypesResponse extends  AbstractModel {
         this.MonitorTypes = null;
 
         /**
+         * Monitoring type details
+         * @type {Array.<MonitorTypeInfo> || null}
+         */
+        this.MonitorTypeInfos = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -6886,6 +6934,15 @@ class DescribeMonitorTypesResponse extends  AbstractModel {
             return;
         }
         this.MonitorTypes = 'MonitorTypes' in params ? params.MonitorTypes : null;
+
+        if (params.MonitorTypeInfos) {
+            this.MonitorTypeInfos = new Array();
+            for (let z in params.MonitorTypeInfos) {
+                let obj = new MonitorTypeInfo();
+                obj.deserialize(params.MonitorTypeInfos[z]);
+                this.MonitorTypeInfos.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13945,6 +14002,7 @@ module.exports = {
     PutMonitorDataResponse: PutMonitorDataResponse,
     DescribePolicyGroupInfoRequest: DescribePolicyGroupInfoRequest,
     UpdateAlertRuleStateResponse: UpdateAlertRuleStateResponse,
+    MonitorTypeInfo: MonitorTypeInfo,
     CreatePrometheusScrapeJobResponse: CreatePrometheusScrapeJobResponse,
     DescribePolicyGroupInfoCallback: DescribePolicyGroupInfoCallback,
     AlarmHistoryMetric: AlarmHistoryMetric,

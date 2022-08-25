@@ -1350,7 +1350,8 @@ class FollowRedirect extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * 
+         * Specifies a host header for 302 redirects. This feature is only available to beta users. To join the beta, please submit a ticket.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {RedirectConfig || null}
          */
         this.RedirectConfig = null;
@@ -2326,7 +2327,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * 
+ * Host header for 302 redirects
  * @class
  */
 class RedirectConfig extends  AbstractModel {
@@ -2334,19 +2335,19 @@ class RedirectConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Configuration switch
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * The custom host header that is sent when the primary origin server follows 302 redirects
          * @type {string || null}
          */
         this.FollowRedirectHost = null;
 
         /**
-         * 
+         * The custom host header that is sent when the secondary origin server follows 302 redirects
          * @type {string || null}
          */
         this.FollowRedirectBackupHost = null;

@@ -111,6 +111,7 @@ const ParamTemplateInfo = models.ParamTemplateInfo;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
 const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
+const SwitchProxyRequest = models.SwitchProxyRequest;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
@@ -143,6 +144,7 @@ const ReleaseWanAddressResponse = models.ReleaseWanAddressResponse;
 const ProductConf = models.ProductConf;
 const InstanceNode = models.InstanceNode;
 const TendisNodes = models.TendisNodes;
+const SwitchProxyResponse = models.SwitchProxyResponse;
 const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
 const TradeDealDetail = models.TradeDealDetail;
@@ -417,6 +419,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceMonitorTopNCmdTook(req, cb) {
         let resp = new DescribeInstanceMonitorTopNCmdTookResponse();
         this.request("DescribeInstanceMonitorTopNCmdTook", req, resp, cb);
+    }
+
+    /**
+     * This API is used to simulate the failure of a proxy node.
+     * @param {SwitchProxyRequest} req
+     * @param {function(string, SwitchProxyResponse):void} cb
+     * @public
+     */
+    SwitchProxy(req, cb) {
+        let resp = new SwitchProxyResponse();
+        this.request("SwitchProxy", req, resp, cb);
     }
 
     /**

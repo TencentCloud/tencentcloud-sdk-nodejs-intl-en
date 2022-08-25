@@ -3156,6 +3156,49 @@ class CoverConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeClientUploadAccelerationUsageData response structure.
+ * @class
+ */
+class DescribeClientUploadAccelerationUsageDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The usage of client upload acceleration.
+         * @type {Array.<StatDataItem> || null}
+         */
+        this.ClientUploadAccelerationUsageDataSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClientUploadAccelerationUsageDataSet) {
+            this.ClientUploadAccelerationUsageDataSet = new Array();
+            for (let z in params.ClientUploadAccelerationUsageDataSet) {
+                let obj = new StatDataItem();
+                obj.deserialize(params.ClientUploadAccelerationUsageDataSet[z]);
+                this.ClientUploadAccelerationUsageDataSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ComposeMedia request structure.
  * @class
  */
@@ -9905,25 +9948,23 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ResolutionAdaptive = null;
 
         /**
-         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+         * The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].
+<li>If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.</li>
+<li>If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.</li>
+<li>If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.</li>
+<li>If neither `Width` nor `Height` is 0, the specified width and height will be used.</li>
 Default value: 0.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+         * The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].
+<li>If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.</li>
+<li>If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.</li>
+<li>If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.</li>
+<li>If neither `Width` nor `Height` is 0, the specified width and height will be used.</li>
 Default value: 0.
-Note: this field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Height = null;
@@ -9957,6 +9998,15 @@ When this parameter is set to 0 or left empty, `Gop` will be automatically set.
          */
         this.Gop = null;
 
+        /**
+         * Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:
+<li>ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.</li>
+<li>OFF: Output an SDR video regardless of whether the source video is HDR.</li>
+Default value: OFF.
+         * @type {string || null}
+         */
+        this.PreserveHDRSwitch = null;
+
     }
 
     /**
@@ -9975,6 +10025,7 @@ When this parameter is set to 0 or left empty, `Gop` will be automatically set.
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
         this.Gop = 'Gop' in params ? params.Gop : null;
+        this.PreserveHDRSwitch = 'PreserveHDRSwitch' in params ? params.PreserveHDRSwitch : null;
 
     }
 }
@@ -14730,6 +14781,15 @@ class PlayerConfig extends  AbstractModel {
         this.Type = null;
 
         /**
+         * The type of audio/video played. Valid values:
+<li>AdaptiveDynamicStreaming: Adaptive bitrate stream</li>
+<li>Transcode: Transcoded stream</li>
+<li>Original: The original stream</li>
+         * @type {string || null}
+         */
+        this.AudioVideoType = null;
+
+        /**
          * Switch of DRM-protected adaptive bitstream playback:
 <li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
 <li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
@@ -14748,6 +14808,12 @@ class PlayerConfig extends  AbstractModel {
          * @type {DrmStreamingsInfo || null}
          */
         this.DrmStreamingsInfo = null;
+
+        /**
+         * The ID of the transcoding template allowed.
+         * @type {number || null}
+         */
+        this.TranscodeDefinition = null;
 
         /**
          * ID of the image sprite generating template that allows output.
@@ -14805,6 +14871,7 @@ class PlayerConfig extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.AudioVideoType = 'AudioVideoType' in params ? params.AudioVideoType : null;
         this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
         this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
 
@@ -14813,6 +14880,7 @@ class PlayerConfig extends  AbstractModel {
             obj.deserialize(params.DrmStreamingsInfo)
             this.DrmStreamingsInfo = obj;
         }
+        this.TranscodeDefinition = 'TranscodeDefinition' in params ? params.TranscodeDefinition : null;
         this.ImageSpriteDefinition = 'ImageSpriteDefinition' in params ? params.ImageSpriteDefinition : null;
 
         if (params.ResolutionNameSet) {
@@ -19456,6 +19524,58 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeClientUploadAccelerationUsageData request structure.
+ * @class
+ */
+class DescribeClientUploadAccelerationUsageDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The start date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The client upload acceleration type. Valid values:
+<li> AccelerationWithHTTP: Acceleration of HTTP transmission</li>
+<li> AccelerationWithQUIC: Acceleration of QUIC transmission</li>
+If you do not specify this parameter, the usage of both types will be queried.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
  * ModifyAIRecognitionTemplate request structure.
  * @class
  */
@@ -20272,21 +20392,21 @@ class EventContent extends  AbstractModel {
 
         /**
          * <b>Supported event types:</b>
-<li>NewFileUpload: finished video upload</li>
-<li>ProcedureStateChanged: task flow status changed</li>
-<li>FileDeleted: finished video deletion</li>
-<li>PullComplete: finished pulling for upload</li>
-<li>EditMediaComplete: finished video editing</li>
-<li>SplitMediaComplete: finished video splitting</li>
-<li>WechatPublishComplete: finished publishing on WeChat</li>
-<li>ComposeMediaComplete: finished producing the media file</li>
-<li>WechatMiniProgramPublishComplete: finished publishing on WeChat Mini Program</li>
-<b>Support v2017 task types:</b>
-<li>TranscodeComplete: finished video transcoding</li>
-<li>ConcatComplete: finished video splicing</li>
-<li>ClipComplete: finished video clipping</li>
-<li>CreateImageSpriteComplete: finished image sprite generation</li>
-<li>CreateSnapshotByTimeOffsetComplete: finished point-in-time screencapturing</li>
+<li>NewFileUpload: Video uploaded.</li>
+<li>ProcedureStateChanged: Task flow status changed.</li>
+<li>FileDeleted: Video deleted.</li>
+<li>PullComplete: Finished video pulling.</li>
+<li>EditMediaComplete: Finished video editing.</li>
+<li>SplitMediaComplete: Finished video splitting.</li>
+<li>WechatPublishComplete: Published to WeChat.</li>
+<li>ComposeMediaComplete: Finished composition.</li>
+<li>FastClipMediaComplete: Finished quick clipping.</li>
+<b>v2017 task types:</b>
+<li>TranscodeComplete: Finished video transcoding.</li>
+<li>ConcatComplete: Finished video splicing.</li>
+<li>ClipComplete: Finished video clipping.</li>
+<li>CreateImageSpriteComplete: Finished image sprite generation.</li>
+<li>CreateSnapshotByTimeOffsetComplete: Finished time point screencapturing.</li>
          * @type {string || null}
          */
         this.EventType = null;
@@ -22571,17 +22691,17 @@ If the value is 0, the bitrate of the video will be the same as that of the sour
         this.ResolutionAdaptive = null;
 
         /**
-         * Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+         * The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].
+<li>If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.</li>
+<li>If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.</li>
+<li>If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.</li>
+<li>If neither `Width` nor `Height` is 0, the specified width and height will be used.</li>
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
+         * The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].
          * @type {number || null}
          */
         this.Height = null;
@@ -22614,6 +22734,14 @@ When this parameter is set to 0 or left empty, `Gop` will be automatically set.
          */
         this.Gop = null;
 
+        /**
+         * Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:
+<li>ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.</li>
+<li>OFF: Output an SDR video regardless of whether the source video is HDR.</li>
+         * @type {string || null}
+         */
+        this.PreserveHDRSwitch = null;
+
     }
 
     /**
@@ -22632,6 +22760,7 @@ When this parameter is set to 0 or left empty, `Gop` will be automatically set.
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
         this.Gop = 'Gop' in params ? params.Gop : null;
+        this.PreserveHDRSwitch = 'PreserveHDRSwitch' in params ? params.PreserveHDRSwitch : null;
 
     }
 }
@@ -23630,6 +23759,12 @@ class DescribeSuperPlayerConfigsRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Player configuration name filter. Array length limit: 100.
          * @type {Array.<string> || null}
          */
@@ -23655,12 +23790,6 @@ class DescribeSuperPlayerConfigsRequest extends  AbstractModel {
          */
         this.Type = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -23670,11 +23799,11 @@ class DescribeSuperPlayerConfigsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Names = 'Names' in params ? params.Names : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -24482,6 +24611,12 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Type of audio/video played. Valid values:
 <li>AdaptiveDynamicStreaming</li>
 <li>Transcode</li>
@@ -24549,12 +24684,6 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
          */
         this.Comment = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -24565,6 +24694,7 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.AudioVideoType = 'AudioVideoType' in params ? params.AudioVideoType : null;
         this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
         this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
@@ -24588,7 +24718,6 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Scheme = 'Scheme' in params ? params.Scheme : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -25488,10 +25617,10 @@ class SubAppIdInfo extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * Subapplication name.
+         * The subapplication name.
          * @type {string || null}
          */
-        this.Name = null;
+        this.SubAppIdName = null;
 
         /**
          * Subapplication overview.
@@ -25515,6 +25644,12 @@ class SubAppIdInfo extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * The subapplication name. This parameter is not recommended. Please use `SubAppIdName` instead.
+         * @type {string || null}
+         */
+        this.Name = null;
+
     }
 
     /**
@@ -25525,10 +25660,11 @@ class SubAppIdInfo extends  AbstractModel {
             return;
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.Name = 'Name' in params ? params.Name : null;
+        this.SubAppIdName = 'SubAppIdName' in params ? params.SubAppIdName : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -29355,7 +29491,7 @@ class MediaClassInfo extends  AbstractModel {
         super();
 
         /**
-         * Category ID
+         * The category ID.
          * @type {number || null}
          */
         this.ClassId = null;
@@ -29367,10 +29503,10 @@ class MediaClassInfo extends  AbstractModel {
         this.ParentId = null;
 
         /**
-         * Category name
+         * The category name.
          * @type {string || null}
          */
-        this.ClassName = null;
+        this.Name = null;
 
         /**
          * Category level. 0 for first-level category, up to 3, i.e., up to 4 levels of categories are allowed.
@@ -29379,10 +29515,16 @@ class MediaClassInfo extends  AbstractModel {
         this.Level = null;
 
         /**
-         * Set of IDs of the immediate subcategories in current category
+         * The IDs of the immediate subcategories of the current category.
          * @type {Array.<number> || null}
          */
         this.SubClassIdSet = null;
+
+        /**
+         * The category name. This parameter is not recommended. Please use `Name` instead.
+         * @type {string || null}
+         */
+        this.ClassName = null;
 
     }
 
@@ -29395,9 +29537,10 @@ class MediaClassInfo extends  AbstractModel {
         }
         this.ClassId = 'ClassId' in params ? params.ClassId : null;
         this.ParentId = 'ParentId' in params ? params.ParentId : null;
-        this.ClassName = 'ClassName' in params ? params.ClassName : null;
+        this.Name = 'Name' in params ? params.Name : null;
         this.Level = 'Level' in params ? params.Level : null;
         this.SubClassIdSet = 'SubClassIdSet' in params ? params.SubClassIdSet : null;
+        this.ClassName = 'ClassName' in params ? params.ClassName : null;
 
     }
 }
@@ -31152,6 +31295,7 @@ module.exports = {
     AudioTemplateInfo: AudioTemplateInfo,
     ExecuteFunctionResponse: ExecuteFunctionResponse,
     CoverConfigureInfo: CoverConfigureInfo,
+    DescribeClientUploadAccelerationUsageDataResponse: DescribeClientUploadAccelerationUsageDataResponse,
     ComposeMediaRequest: ComposeMediaRequest,
     AIRecognitionTemplateItem: AIRecognitionTemplateItem,
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
@@ -31442,6 +31586,7 @@ module.exports = {
     DescribeVodDomainsResponse: DescribeVodDomainsResponse,
     AdaptiveStreamTemplate: AdaptiveStreamTemplate,
     TranscodeTaskInput: TranscodeTaskInput,
+    DescribeClientUploadAccelerationUsageDataRequest: DescribeClientUploadAccelerationUsageDataRequest,
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
     DescribeStorageRegionsRequest: DescribeStorageRegionsRequest,
     WechatPublishTask: WechatPublishTask,

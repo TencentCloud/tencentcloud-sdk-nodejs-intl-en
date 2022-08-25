@@ -4732,6 +4732,41 @@ class DescribeInstanceAccountRequest extends  AbstractModel {
 }
 
 /**
+ * SwitchProxy request structure.
+ * @class
+ */
+class SwitchProxyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance ProxyID
+         * @type {string || null}
+         */
+        this.ProxyID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ProxyID = 'ProxyID' in params ? params.ProxyID : null;
+
+    }
+}
+
+/**
  * DescribeInstanceParamRecords request structure.
  * @class
  */
@@ -6316,6 +6351,34 @@ class TendisNodes extends  AbstractModel {
         }
         this.NodeId = 'NodeId' in params ? params.NodeId : null;
         this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+
+    }
+}
+
+/**
+ * SwitchProxy response structure.
+ * @class
+ */
+class SwitchProxyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10828,6 +10891,7 @@ module.exports = {
     DescribeInstanceMonitorTopNCmdTookResponse: DescribeInstanceMonitorTopNCmdTookResponse,
     DescribeInstanceMonitorBigKeySizeDistRequest: DescribeInstanceMonitorBigKeySizeDistRequest,
     DescribeInstanceAccountRequest: DescribeInstanceAccountRequest,
+    SwitchProxyRequest: SwitchProxyRequest,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     DescribeTaskListRequest: DescribeTaskListRequest,
     ChangeReplicaToMasterResponse: ChangeReplicaToMasterResponse,
@@ -10860,6 +10924,7 @@ module.exports = {
     ProductConf: ProductConf,
     InstanceNode: InstanceNode,
     TendisNodes: TendisNodes,
+    SwitchProxyResponse: SwitchProxyResponse,
     StartupInstanceResponse: StartupInstanceResponse,
     DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
     TradeDealDetail: TradeDealDetail,

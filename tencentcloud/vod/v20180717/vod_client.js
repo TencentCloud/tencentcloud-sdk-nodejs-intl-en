@@ -72,6 +72,7 @@ const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
 const CoverConfigureInfo = models.CoverConfigureInfo;
+const DescribeClientUploadAccelerationUsageDataResponse = models.DescribeClientUploadAccelerationUsageDataResponse;
 const ComposeMediaRequest = models.ComposeMediaRequest;
 const AIRecognitionTemplateItem = models.AIRecognitionTemplateItem;
 const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
@@ -362,6 +363,7 @@ const UserDefineOcrTextReviewTemplateInfo = models.UserDefineOcrTextReviewTempla
 const DescribeVodDomainsResponse = models.DescribeVodDomainsResponse;
 const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const TranscodeTaskInput = models.TranscodeTaskInput;
+const DescribeClientUploadAccelerationUsageDataRequest = models.DescribeClientUploadAccelerationUsageDataRequest;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
 const DescribeStorageRegionsRequest = models.DescribeStorageRegionsRequest;
 const WechatPublishTask = models.WechatPublishTask;
@@ -955,14 +957,15 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to get the list of transcoding templates based on unique template ID. The return result includes all eligible custom and [preset transcoding templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
-     * @param {DescribeTranscodeTemplatesRequest} req
-     * @param {function(string, DescribeTranscodeTemplatesResponse):void} cb
+     * This API is used to delete an acceleration domain name from VOD.
+1. Before deleting a domain name, disable its acceleration in all regions.
+     * @param {DeleteVodDomainRequest} req
+     * @param {function(string, DeleteVodDomainResponse):void} cb
      * @public
      */
-    DescribeTranscodeTemplates(req, cb) {
-        let resp = new DescribeTranscodeTemplatesResponse();
-        this.request("DescribeTranscodeTemplates", req, resp, cb);
+    DeleteVodDomain(req, cb) {
+        let resp = new DeleteVodDomainResponse();
+        this.request("DeleteVodDomain", req, resp, cb);
     }
 
     /**
@@ -979,6 +982,17 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
+     * This API is used to get the list of transcoding templates based on unique template ID. The return result includes all eligible custom and [preset transcoding templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+     * @param {DescribeTranscodeTemplatesRequest} req
+     * @param {function(string, DescribeTranscodeTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeTranscodeTemplates(req, cb) {
+        let resp = new DescribeTranscodeTemplatesResponse();
+        this.request("DescribeTranscodeTemplates", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of time point screencapturing templates and supports paged queries by filters.
      * @param {DescribeSnapshotByTimeOffsetTemplatesRequest} req
      * @param {function(string, DescribeSnapshotByTimeOffsetTemplatesResponse):void} cb
@@ -990,11 +1004,18 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to compose a media file, including:
+     * This API is used to compose a media file. You can use it to do the following:
 
-1. Clipping a media file to generate a new media file;
-2. Clipping and splicing multiple media files to generate a new media file;
-3. Clipping and splicing the media streams of multiple media files to generate a new media file;
+1. **Rotation/Flipping**: Rotate a video or image by a specific angle or flip a video or image.
+2. **Audio control**: Increase/Lower the volume of an audio/video file or mute an audio/video file.
+3. **Overlaying**: Overlay videos/images in a specified sequence to achieve the picture-in-picture effect.
+4. **Audio mixing**: Mix the audios of audio/video files.
+5 **Audio extraction**: Extract audio from a video.
+6. **Clipping**: Clip segments from audio/video files according to a specified start and end time.
+7. **Splicing**: Splice videos/audios/images in a specified sequence.
+8. **Transition**: Add transition effects between video segments or images that are spliced together.
+
+The output file is in MP4 or MP3 format. In the callback for media composition, the event type is [ComposeMediaComplete](https://intl.cloud.tencent.com/document/product/266/43000?from_cn_redirect=1).
      * @param {ComposeMediaRequest} req
      * @param {function(string, ComposeMediaResponse):void} cb
      * @public
@@ -1152,8 +1173,8 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     }
 
     /**
-     * This API is used to delete a superplayer configuration.  
-*Note: preset player configurations cannot be deleted.*
+     * This API is used to delete a player configuration.  
+*Note: Preset player configurations cannot be deleted.*
      * @param {DeleteSuperPlayerConfigRequest} req
      * @param {function(string, DeleteSuperPlayerConfigResponse):void} cb
      * @public
@@ -1175,15 +1196,18 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     }
 
     /**
-     * This API is used to delete an acceleration domain name from VOD.
-1. Before deleting a domain name, disable its acceleration in all regions.
-     * @param {DeleteVodDomainRequest} req
-     * @param {function(string, DeleteVodDomainResponse):void} cb
+     * This API is used to query the usage of the client upload acceleration service in a specific time period.
+   1. You can query the usage of client upload acceleration in the last 365 days.
+   2. The maximum time period allowed for query is 90 days.
+   3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+
+     * @param {DescribeClientUploadAccelerationUsageDataRequest} req
+     * @param {function(string, DescribeClientUploadAccelerationUsageDataResponse):void} cb
      * @public
      */
-    DeleteVodDomain(req, cb) {
-        let resp = new DeleteVodDomainResponse();
-        this.request("DeleteVodDomain", req, resp, cb);
+    DescribeClientUploadAccelerationUsageData(req, cb) {
+        let resp = new DescribeClientUploadAccelerationUsageDataResponse();
+        this.request("DescribeClientUploadAccelerationUsageData", req, resp, cb);
     }
 
     /**
@@ -1312,7 +1336,7 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     }
 
     /**
-     * This API is used to create a superplayer configuration. Up to 100 configurations can be created.
+     * This API is used to create a player configuration. Up to 100 configurations can be created.
      * @param {CreateSuperPlayerConfigRequest} req
      * @param {function(string, CreateSuperPlayerConfigResponse):void} cb
      * @public
@@ -1518,7 +1542,7 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     }
 
     /**
-     * This API is used to modify a superplayer configuration.
+     * This API is used to modify a player configuration.
      * @param {ModifySuperPlayerConfigRequest} req
      * @param {function(string, ModifySuperPlayerConfigResponse):void} cb
      * @public
@@ -1920,7 +1944,7 @@ A digital watermark has the following restrictions:
     }
 
     /**
-     * This API is used to query the list of superplayer configurations and supports paginated queries by filters.
+     * This API is used to query player configurations. It supports pagination.
      * @param {DescribeSuperPlayerConfigsRequest} req
      * @param {function(string, DescribeSuperPlayerConfigsResponse):void} cb
      * @public

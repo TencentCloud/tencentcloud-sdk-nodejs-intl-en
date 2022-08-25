@@ -959,26 +959,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * `TopicResponse` returned uniformly
+ * FetchMessageListByOffset request structure.
  * @class
  */
-class TopicResult extends  AbstractModel {
+class FetchMessageListByOffsetRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of returned topic information
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Topic> || null}
+         * Instance ID
+         * @type {string || null}
          */
-        this.TopicList = null;
+        this.InstanceId = null;
 
         /**
-         * Number of eligible topics
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Topic name
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * Partition ID
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Partition = null;
+
+        /**
+         * Offset information
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The maximum number of messages that can be queried. Default value: 20. Maximum value: 20.
+         * @type {number || null}
+         */
+        this.SinglePartitionRecordNumber = null;
 
     }
 
@@ -989,16 +1005,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.TopicList) {
-            this.TopicList = new Array();
-            for (let z in params.TopicList) {
-                let obj = new Topic();
-                obj.deserialize(params.TopicList[z]);
-                this.TopicList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SinglePartitionRecordNumber = 'SinglePartitionRecordNumber' in params ? params.SinglePartitionRecordNumber : null;
 
     }
 }
@@ -1896,6 +1907,49 @@ class DescribeTopicAttributesResponse extends  AbstractModel {
             let obj = new TopicAttributesResponse();
             obj.deserialize(params.Result)
             this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * FetchMessageListByOffset response structure.
+ * @class
+ */
+class FetchMessageListByOffsetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result. Note: The returned list does not display the message content (key and value). To query the message content, call the `FetchMessageByOffset` API.
+         * @type {Array.<ConsumerRecord> || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new ConsumerRecord();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -6497,6 +6551,51 @@ class DescribeRouteResponse extends  AbstractModel {
 }
 
 /**
+ * `TopicResponse` returned uniformly
+ * @class
+ */
+class TopicResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of returned topic information
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Topic> || null}
+         */
+        this.TopicList = null;
+
+        /**
+         * Number of eligible topics
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopicList) {
+            this.TopicList = new Array();
+            for (let z in params.TopicList) {
+                let obj = new Topic();
+                obj.deserialize(params.TopicList[z]);
+                this.TopicList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
  * DescribeTopicDetail request structure.
  * @class
  */
@@ -7978,7 +8077,7 @@ module.exports = {
     BatchModifyTopicAttributesResponse: BatchModifyTopicAttributesResponse,
     CreateInstancePreResp: CreateInstancePreResp,
     GroupInfoTopics: GroupInfoTopics,
-    TopicResult: TopicResult,
+    FetchMessageListByOffsetRequest: FetchMessageListByOffsetRequest,
     Region: Region,
     ModifyInstancePreRequest: ModifyInstancePreRequest,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
@@ -7996,6 +8095,7 @@ module.exports = {
     BatchModifyGroupOffsetsResponse: BatchModifyGroupOffsetsResponse,
     GroupResponse: GroupResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
+    FetchMessageListByOffsetResponse: FetchMessageListByOffsetResponse,
     CreateConsumerResponse: CreateConsumerResponse,
     RouteResponse: RouteResponse,
     DescribeGroupResponse: DescribeGroupResponse,
@@ -8082,6 +8182,7 @@ module.exports = {
     CreateTopicResp: CreateTopicResp,
     BatchModifyTopicInfo: BatchModifyTopicInfo,
     DescribeRouteResponse: DescribeRouteResponse,
+    TopicResult: TopicResult,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
     SendMessageRequest: SendMessageRequest,

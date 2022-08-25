@@ -734,6 +734,12 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.TotalCost = null;
 
+        /**
+         * Payment by commission credits
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -752,6 +758,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }
@@ -1124,6 +1131,12 @@ Note: This field may return `null`, indicating that no valid value can be found.
          */
         this.TotalCost = null;
 
+        /**
+         * Payment by commission credits
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -1142,6 +1155,7 @@ Note: This field may return `null`, indicating that no valid value can be found.
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }
@@ -2321,6 +2335,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.TotalCost = null;
 
+        /**
+         * Payment by cash credits
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CashPayAmount = null;
+
+        /**
+         * Payment by free credits
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IncentivePayAmount = null;
+
+        /**
+         * Payment by vouchers
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * Payment by commission credits
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -2334,6 +2376,10 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
         this.RealTotalCostRatio = 'RealTotalCostRatio' in params ? params.RealTotalCostRatio : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
+        this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }
@@ -2400,6 +2446,12 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
          */
         this.TotalCost = null;
 
+        /**
+         * Payment by commission credits
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -2418,6 +2470,7 @@ class ProjectSummaryOverviewItem extends  AbstractModel {
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }
@@ -2679,6 +2732,12 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
          */
         this.TotalCost = null;
 
+        /**
+         * Payment by commission credits
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -2705,6 +2764,7 @@ class PayModeSummaryOverviewItem extends  AbstractModel {
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }
@@ -2747,6 +2807,12 @@ class BusinessSummaryTotal extends  AbstractModel {
          */
         this.TotalCost = null;
 
+        /**
+         * Payment by commission credits
+         * @type {string || null}
+         */
+        this.TransferPayAmount = null;
+
     }
 
     /**
@@ -2761,6 +2827,7 @@ class BusinessSummaryTotal extends  AbstractModel {
         this.IncentivePayAmount = 'IncentivePayAmount' in params ? params.IncentivePayAmount : null;
         this.CashPayAmount = 'CashPayAmount' in params ? params.CashPayAmount : null;
         this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+        this.TransferPayAmount = 'TransferPayAmount' in params ? params.TransferPayAmount : null;
 
     }
 }

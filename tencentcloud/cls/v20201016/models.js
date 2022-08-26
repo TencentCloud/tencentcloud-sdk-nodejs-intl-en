@@ -2095,6 +2095,12 @@ class ModifyConsumerRequest extends  AbstractModel {
          */
         this.Ckafka = null;
 
+        /**
+         * Compression mode. Valid values: `0` (no compression), `2` (snappy), `3` (LZ4).
+         * @type {number || null}
+         */
+        this.Compression = null;
+
     }
 
     /**
@@ -2119,6 +2125,7 @@ class ModifyConsumerRequest extends  AbstractModel {
             obj.deserialize(params.Ckafka)
             this.Ckafka = obj;
         }
+        this.Compression = 'Compression' in params ? params.Compression : null;
 
     }
 }
@@ -4078,6 +4085,13 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.Ckafka = null;
 
         /**
+         * Compression mode. Valid values: `0` (no compression), `2` (snappy), `3` (LZ4).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Compression = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4106,6 +4120,7 @@ Note: This field may return `null`, indicating that no valid value was found.
             obj.deserialize(params.Ckafka)
             this.Ckafka = obj;
         }
+        this.Compression = 'Compression' in params ? params.Compression : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6119,6 +6134,12 @@ class CreateConsumerRequest extends  AbstractModel {
          */
         this.Ckafka = null;
 
+        /**
+         * Compression mode. Valid values: `0` (no compression), `2` (snappy), `3` (LZ4).
+         * @type {number || null}
+         */
+        this.Compression = null;
+
     }
 
     /**
@@ -6142,6 +6163,7 @@ class CreateConsumerRequest extends  AbstractModel {
             obj.deserialize(params.Ckafka)
             this.Ckafka = obj;
         }
+        this.Compression = 'Compression' in params ? params.Compression : null;
 
     }
 }
@@ -8170,7 +8192,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.EnableTag = null;
 
         /**
-         * List of metadata to ship. Only \_\_SOURCE\_\_, \_\_FILENAME\_\_, and \_\_TIMESTAMP\_\_ are supported.
+         * List of metadata to ship. Supported metadata types: \_\_SOURCE\_\_, \_\_FILENAME\_\_, \_\_TIMESTAMP\_\_, \_\_HOSTNAME\_\_, and \_\_PKGID\_\_.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */

@@ -144,6 +144,18 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.ResourceTags = null;
 
+        /**
+         * Collation of system character sets. Default value: `Chinese_PRC_CI_AS`.
+         * @type {string || null}
+         */
+        this.Collation = null;
+
+        /**
+         * System time zone. Default value: `China Standard Time`.
+         * @type {string || null}
+         */
+        this.TimeZone = null;
+
     }
 
     /**
@@ -181,6 +193,8 @@ class CreateDBInstancesRequest extends  AbstractModel {
                 this.ResourceTags.push(obj);
             }
         }
+        this.Collation = 'Collation' in params ? params.Collation : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
 
     }
 }
@@ -5513,13 +5527,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.TgwWanVPort = null;
 
         /**
-         * 
+         * Collation of system character sets. Default value: `Chinese_PRC_CI_AS`.
          * @type {string || null}
          */
         this.Collation = null;
 
         /**
-         * 
+         * System time zone. Default value: `China Standard Time`.
          * @type {string || null}
          */
         this.TimeZone = null;

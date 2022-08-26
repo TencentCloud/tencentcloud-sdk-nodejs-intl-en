@@ -1071,7 +1071,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><br>The disk type currently in stock will be used by default. 
+         * System disk type. For more information about the limits of system disk types, please see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD cloud disk<br><li>CLOUD_PREMIUM: Premium cloud storage<br><li>CLOUD_BSSD: Balanced SSD<br><br>The disk currently in stock will be used by default.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -1628,18 +1628,18 @@ class DeleteLaunchTemplateResponse extends  AbstractModel {
 }
 
 /**
- * ImportKeyPair response structure.
+ * DescribeChcDeniedActions response structure.
  * @class
  */
-class ImportKeyPairResponse extends  AbstractModel {
+class DescribeChcDeniedActionsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Key pair ID
-         * @type {string || null}
+         * Actions not allowed for the CHC instance
+         * @type {Array.<ChcHostDeniedActions> || null}
          */
-        this.KeyId = null;
+        this.ChcHostDeniedActionSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1656,7 +1656,15 @@ class ImportKeyPairResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+        if (params.ChcHostDeniedActionSet) {
+            this.ChcHostDeniedActionSet = new Array();
+            for (let z in params.ChcHostDeniedActionSet) {
+                let obj = new ChcHostDeniedActions();
+                obj.deserialize(params.ChcHostDeniedActionSet[z]);
+                this.ChcHostDeniedActionSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1942,6 +1950,41 @@ class ModifyImageSharePermissionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ImportKeyPair response structure.
+ * @class
+ */
+class ImportKeyPairResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key pair ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2499,7 +2542,7 @@ class RunInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * If you use this API to create instance(s), this parameter will be returned, representing one or more instance IDs. Retuning the instance ID list does not necessarily mean that the instance(s) were created successfully. To check whether the instance(s) were created successfully, you can call [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and check the status of the instances in `InstancesSet` in the response. If the status of an instance changes from "preparing" to "running", it means that the instance has been created successfully.
+         * If you use this API to create instance(s), this parameter will be returned, representing one or more instance IDs. Retuning the instance ID list does not necessarily mean that the instance(s) were created successfully. To check whether the instance(s) were created successfully, you can call [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and check the status of the instances in `InstancesSet` in the response. If the status of an instance changes from "PENDING" to "RUNNING", it means that the instance has been created successfully.
          * @type {Array.<string> || null}
          */
         this.InstanceIdSet = null;
@@ -3929,7 +3972,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>LOCAL_NVME: local NVME disk, specified in the `InstanceType`<br><li>LOCAL_PRO: local HDD disk, specified in the `InstanceType`<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
+         * Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values: <br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>LOCAL_NVME: local NVME disk, specified in the `InstanceType`<br><li>LOCAL_PRO: local HDD disk, specified in the `InstanceType`<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD<br><li>CLOUD_BSSD: Balanced SSD<br><br>Default value: LOCAL_BASIC.<br><br>This parameter is invalid for the `ResizeInstanceDisk` API.
          * @type {string || null}
          */
         this.DiskType = null;
@@ -6708,7 +6751,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.DataDisks = null;
 
         /**
-         * Configuration information of VPC. This parameter is used to specify VPC ID and subnet ID, etc. If this parameter is not specified, the classic network is used by default. If a VPC IP is specified in this parameter, it indicates the primary ENI IP of each instance. The value of parameter InstanceCount must be same as the number of VPC IPs, which cannot be greater than 20.
+         * Configuration information of VPC. This parameter is used to specify VPC ID and subnet ID, etc. If a VPC IP is specified in this parameter, it indicates the primary ENI IP of each instance. The value of parameter InstanceCount must be the same as the number of VPC IPs, which cannot be greater than 20.
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
@@ -8875,6 +8918,34 @@ class RegionInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeChcDeniedActions request structure.
+ * @class
+ */
+class DescribeChcDeniedActionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CHC instance ID
+         * @type {Array.<string> || null}
+         */
+        this.ChcIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChcIds = 'ChcIds' in params ? params.ChcIds : null;
+
+    }
+}
+
+/**
  * InquiryPriceResetInstancesType request structure.
  * @class
  */
@@ -9800,6 +9871,48 @@ class DescribeInstanceFamilyConfigsRequest extends  AbstractModel {
 }
 
 /**
+ * Describe details of actions not allowed for a CHC instance
+ * @class
+ */
+class ChcHostDeniedActions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CHC instance ID
+         * @type {string || null}
+         */
+        this.ChcId = null;
+
+        /**
+         * CHC instance status
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Actions not allowed for the current CHC instance
+         * @type {Array.<string> || null}
+         */
+        this.DenyActions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChcId = 'ChcId' in params ? params.ChcId : null;
+        this.State = 'State' in params ? params.State : null;
+        this.DenyActions = 'DenyActions' in params ? params.DenyActions : null;
+
+    }
+}
+
+/**
  * PurchaseReservedInstancesOffering response structure.
  * @class
  */
@@ -10236,12 +10349,13 @@ module.exports = {
     RebootInstancesRequest: RebootInstancesRequest,
     AssociateInstancesKeyPairsRequest: AssociateInstancesKeyPairsRequest,
     DeleteLaunchTemplateResponse: DeleteLaunchTemplateResponse,
-    ImportKeyPairResponse: ImportKeyPairResponse,
+    DescribeChcDeniedActionsResponse: DescribeChcDeniedActionsResponse,
     DescribeInstancesStatusResponse: DescribeInstancesStatusResponse,
     ZoneInfo: ZoneInfo,
     ModifyLaunchTemplateDefaultVersionResponse: ModifyLaunchTemplateDefaultVersionResponse,
     LaunchTemplateVersionInfo: LaunchTemplateVersionInfo,
     ModifyImageSharePermissionResponse: ModifyImageSharePermissionResponse,
+    ImportKeyPairResponse: ImportKeyPairResponse,
     DescribeKeyPairsResponse: DescribeKeyPairsResponse,
     ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
     RemoveChcAssistVpcResponse: RemoveChcAssistVpcResponse,
@@ -10363,6 +10477,7 @@ module.exports = {
     GPUInfo: GPUInfo,
     DescribeInstancesRequest: DescribeInstancesRequest,
     RegionInfo: RegionInfo,
+    DescribeChcDeniedActionsRequest: DescribeChcDeniedActionsRequest,
     InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
     ModifyLaunchTemplateDefaultVersionRequest: ModifyLaunchTemplateDefaultVersionRequest,
     StopInstancesRequest: StopInstancesRequest,
@@ -10384,6 +10499,7 @@ module.exports = {
     ModifyDisasterRecoverGroupAttributeResponse: ModifyDisasterRecoverGroupAttributeResponse,
     ResizeInstanceDisksRequest: ResizeInstanceDisksRequest,
     DescribeInstanceFamilyConfigsRequest: DescribeInstanceFamilyConfigsRequest,
+    ChcHostDeniedActions: ChcHostDeniedActions,
     PurchaseReservedInstancesOfferingResponse: PurchaseReservedInstancesOfferingResponse,
     StorageBlock: StorageBlock,
     InternetAccessible: InternetAccessible,

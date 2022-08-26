@@ -240,6 +240,41 @@ Note: this field will take effect only when `SignPurpose` is 1 (for user by othe
 }
 
 /**
+ * Response for conversion rate reporting
+ * @class
+ */
+class ReportConversionStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Error code. `ok` is returned if the conversion rate is successfully reported.
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * Error code description.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
  * AddSmsSign request structure.
  * @class
  */
@@ -501,6 +536,46 @@ Note: this parameter is currently fixed at 0.
         this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
         this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * ReportConversion response structure.
+ * @class
+ */
+class ReportConversionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response packet for conversion rate reporting.
+         * @type {ReportConversionStatus || null}
+         */
+        this.ReportConversionStatus = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReportConversionStatus) {
+            let obj = new ReportConversionStatus();
+            obj.deserialize(params.ReportConversionStatus)
+            this.ReportConversionStatus = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1013,14 +1088,13 @@ For example, +8613711112222, which has a + sign followed by 86 (country/region c
         this.SmsSdkAppId = null;
 
         /**
-         * Template ID. You must enter the ID of an approved template, which can be viewed on the [Chinese Mainland SMS](https://console.cloud.tencent.com/smsv2/csms-template) or [Global SMS](https://console.cloud.tencent.com/smsv2/isms-template) body template management page. If you need to send SMS messages to global mobile numbers, you can only use a Global SMS template.
+         * Template ID, which can be viewed on the **Body Templates** page in [Global SMS](https://console.cloud.tencent.com/smsv2/isms-template). You must enter the ID of an approved template.
          * @type {string || null}
          */
         this.TemplateId = null;
 
         /**
-         * Content of the SMS signature, which should be encoded in UTF-8. You must enter an approved signature, such as Tencent Cloud. The signature information can be viewed on the [Chinese Mainland SMS](https://console.cloud.tencent.com/smsv2/csms-sign) or [Global SMS](https://console.cloud.tencent.com/smsv2/isms-sign) signature management page.
-<dx-alert infotype="notice" title="Note">This parameter is required for Chinese Mainland SMS.</dx-alert>
+         * SMS signature information which is encoded in UTF-8. You must enter an approved signature (such as Tencent Cloud). The signing information can be viewed on the **Signatures** page in [Global SMS](https://console.cloud.tencent.com/smsv2/isms-sign).
          * @type {string || null}
          */
         this.SignName = null;
@@ -1045,8 +1119,8 @@ For example, +8613711112222, which has a + sign followed by 86 (country/region c
         this.SessionContext = null;
 
         /**
-         * This parameter is not required for Chinese Mainland SMS. For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.
-Note: if your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+         * For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.
+Note: If your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
          * @type {string || null}
          */
         this.SenderId = null;
@@ -2142,6 +2216,48 @@ class ModifySmsSignResponse extends  AbstractModel {
 }
 
 /**
+ * ReportConversion request structure.
+ * @class
+ */
+class ReportConversionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The SMS SdkAppId generated after an application is created in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as “1400006666”.
+         * @type {string || null}
+         */
+        this.SmsSdkAppId = null;
+
+        /**
+         * The serial number returned for a message sent.
+         * @type {string || null}
+         */
+        this.SerialNo = null;
+
+        /**
+         * The recipient’s reply time in seconds in the format of UNIX timestamp.
+         * @type {number || null}
+         */
+        this.ConversionTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SmsSdkAppId = 'SmsSdkAppId' in params ? params.SmsSdkAppId : null;
+        this.SerialNo = 'SerialNo' in params ? params.SerialNo : null;
+        this.ConversionTime = 'ConversionTime' in params ? params.ConversionTime : null;
+
+    }
+}
+
+/**
  * Signature addition response 
  * @class
  */
@@ -2323,11 +2439,13 @@ module.exports = {
     DeleteSmsTemplateResponse: DeleteSmsTemplateResponse,
     ModifySmsTemplateResponse: ModifySmsTemplateResponse,
     ModifySmsSignRequest: ModifySmsSignRequest,
+    ReportConversionStatus: ReportConversionStatus,
     AddSmsSignRequest: AddSmsSignRequest,
     AddTemplateStatus: AddTemplateStatus,
     DescribeSmsTemplateListResponse: DescribeSmsTemplateListResponse,
     DescribePhoneNumberInfoRequest: DescribePhoneNumberInfoRequest,
     PullSmsSendStatusByPhoneNumberRequest: PullSmsSendStatusByPhoneNumberRequest,
+    ReportConversionResponse: ReportConversionResponse,
     AddSmsTemplateRequest: AddSmsTemplateRequest,
     ModifySmsTemplateRequest: ModifySmsTemplateRequest,
     PullSmsReplyStatus: PullSmsReplyStatus,
@@ -2360,6 +2478,7 @@ module.exports = {
     DeleteSmsSignRequest: DeleteSmsSignRequest,
     PullSmsReplyStatusByPhoneNumberRequest: PullSmsReplyStatusByPhoneNumberRequest,
     ModifySmsSignResponse: ModifySmsSignResponse,
+    ReportConversionRequest: ReportConversionRequest,
     AddSignStatus: AddSignStatus,
     ModifyTemplateStatus: ModifyTemplateStatus,
     PullSmsSendStatusResponse: PullSmsSendStatusResponse,

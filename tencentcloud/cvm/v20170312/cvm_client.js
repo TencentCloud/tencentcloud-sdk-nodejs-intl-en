@@ -50,12 +50,13 @@ const PurchaseReservedInstancesOfferingRequest = models.PurchaseReservedInstance
 const RebootInstancesRequest = models.RebootInstancesRequest;
 const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsRequest;
 const DeleteLaunchTemplateResponse = models.DeleteLaunchTemplateResponse;
-const ImportKeyPairResponse = models.ImportKeyPairResponse;
+const DescribeChcDeniedActionsResponse = models.DescribeChcDeniedActionsResponse;
 const DescribeInstancesStatusResponse = models.DescribeInstancesStatusResponse;
 const ZoneInfo = models.ZoneInfo;
 const ModifyLaunchTemplateDefaultVersionResponse = models.ModifyLaunchTemplateDefaultVersionResponse;
 const LaunchTemplateVersionInfo = models.LaunchTemplateVersionInfo;
 const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
+const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const RemoveChcAssistVpcResponse = models.RemoveChcAssistVpcResponse;
@@ -177,6 +178,7 @@ const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
 const GPUInfo = models.GPUInfo;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const RegionInfo = models.RegionInfo;
+const DescribeChcDeniedActionsRequest = models.DescribeChcDeniedActionsRequest;
 const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
 const ModifyLaunchTemplateDefaultVersionRequest = models.ModifyLaunchTemplateDefaultVersionRequest;
 const StopInstancesRequest = models.StopInstancesRequest;
@@ -198,6 +200,7 @@ const VirtualPrivateCloud = models.VirtualPrivateCloud;
 const ModifyDisasterRecoverGroupAttributeResponse = models.ModifyDisasterRecoverGroupAttributeResponse;
 const ResizeInstanceDisksRequest = models.ResizeInstanceDisksRequest;
 const DescribeInstanceFamilyConfigsRequest = models.DescribeInstanceFamilyConfigsRequest;
+const ChcHostDeniedActions = models.ChcHostDeniedActions;
 const PurchaseReservedInstancesOfferingResponse = models.PurchaseReservedInstancesOfferingResponse;
 const StorageBlock = models.StorageBlock;
 const InternetAccessible = models.InternetAccessible;
@@ -723,14 +726,14 @@ If you currently use a password to log in, you will no longer be able to do so a
     }
 
     /**
-     * This API is used to remove the out-of-band network and deployment network of a CHC host.
-     * @param {RemoveChcAssistVpcRequest} req
-     * @param {function(string, RemoveChcAssistVpcResponse):void} cb
+     * This API is used to query the actions not allowed for the specified CHC instances.
+     * @param {DescribeChcDeniedActionsRequest} req
+     * @param {function(string, DescribeChcDeniedActionsResponse):void} cb
      * @public
      */
-    RemoveChcAssistVpc(req, cb) {
-        let resp = new RemoveChcAssistVpcResponse();
-        this.request("RemoveChcAssistVpc", req, resp, cb);
+    DescribeChcDeniedActions(req, cb) {
+        let resp = new DescribeChcDeniedActionsResponse();
+        this.request("DescribeChcDeniedActions", req, resp, cb);
     }
 
     /**
@@ -1042,6 +1045,17 @@ If you currently use a password to log in, you will no longer be able to do so a
     DescribeHosts(req, cb) {
         let resp = new DescribeHostsResponse();
         this.request("DescribeHosts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove the out-of-band network and deployment network of a CHC host.
+     * @param {RemoveChcAssistVpcRequest} req
+     * @param {function(string, RemoveChcAssistVpcResponse):void} cb
+     * @public
+     */
+    RemoveChcAssistVpc(req, cb) {
+        let resp = new RemoveChcAssistVpcResponse();
+        this.request("RemoveChcAssistVpc", req, resp, cb);
     }
 
     /**

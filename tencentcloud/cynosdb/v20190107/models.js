@@ -3383,6 +3383,27 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.NetType = null;
 
+        /**
+         * Subnet ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * VPC ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Description
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
     }
 
     /**
@@ -3397,6 +3418,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.WanDomain = 'WanDomain' in params ? params.WanDomain : null;
         this.WanPort = 'WanPort' in params ? params.WanPort : null;
         this.NetType = 'NetType' in params ? params.NetType : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }

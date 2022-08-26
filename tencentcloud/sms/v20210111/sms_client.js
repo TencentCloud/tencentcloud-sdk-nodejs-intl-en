@@ -20,11 +20,13 @@ const PullSmsReplyStatusRequest = models.PullSmsReplyStatusRequest;
 const DeleteSmsTemplateResponse = models.DeleteSmsTemplateResponse;
 const ModifySmsTemplateResponse = models.ModifySmsTemplateResponse;
 const ModifySmsSignRequest = models.ModifySmsSignRequest;
+const ReportConversionStatus = models.ReportConversionStatus;
 const AddSmsSignRequest = models.AddSmsSignRequest;
 const AddTemplateStatus = models.AddTemplateStatus;
 const DescribeSmsTemplateListResponse = models.DescribeSmsTemplateListResponse;
 const DescribePhoneNumberInfoRequest = models.DescribePhoneNumberInfoRequest;
 const PullSmsSendStatusByPhoneNumberRequest = models.PullSmsSendStatusByPhoneNumberRequest;
+const ReportConversionResponse = models.ReportConversionResponse;
 const AddSmsTemplateRequest = models.AddSmsTemplateRequest;
 const ModifySmsTemplateRequest = models.ModifySmsTemplateRequest;
 const PullSmsReplyStatus = models.PullSmsReplyStatus;
@@ -57,6 +59,7 @@ const AddSmsSignResponse = models.AddSmsSignResponse;
 const DeleteSmsSignRequest = models.DeleteSmsSignRequest;
 const PullSmsReplyStatusByPhoneNumberRequest = models.PullSmsReplyStatusByPhoneNumberRequest;
 const ModifySmsSignResponse = models.ModifySmsSignResponse;
+const ReportConversionRequest = models.ReportConversionRequest;
 const AddSignStatus = models.AddSignStatus;
 const ModifyTemplateStatus = models.ModifyTemplateStatus;
 const PullSmsSendStatusResponse = models.PullSmsSendStatusResponse;
@@ -230,6 +233,18 @@ Currently, you can also [configure the callback](https://intl.cloud.tencent.com/
     PullSmsSendStatusByPhoneNumber(req, cb) {
         let resp = new PullSmsSendStatusByPhoneNumberResponse();
         this.request("PullSmsSendStatusByPhoneNumber", req, resp, cb);
+    }
+
+    /**
+     * This API is used to report the SMS conversion rate (SMS conversion rate = the number of returned verification codes / the number of verification codes sent) and report the serial numbers of received SMS messages to Tencent Cloud SMS.
+>- Note: To call this API, you need to be added to the allowlist first. If you have any questions, contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+     * @param {ReportConversionRequest} req
+     * @param {function(string, ReportConversionResponse):void} cb
+     * @public
+     */
+    ReportConversion(req, cb) {
+        let resp = new ReportConversionResponse();
+        this.request("ReportConversion", req, resp, cb);
     }
 
     /**

@@ -936,6 +936,15 @@ If this parameter is an empty string, it indicates that the video is not protect
         this.DrmType = null;
 
         /**
+         * The provider of the DRM key. Valid values:
+<li>SDMC</li>
+<li>VOD</li>
+The default is `VOD`.
+         * @type {string || null}
+         */
+        this.DrmKeyProvider = null;
+
+        /**
          * Parameter information of input stream for adaptive bitrate streaming. Up to 10 streams can be input.
          * @type {Array.<AdaptiveStreamTemplate> || null}
          */
@@ -984,6 +993,7 @@ If this parameter is an empty string, it indicates that the video is not protect
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.Format = 'Format' in params ? params.Format : null;
         this.DrmType = 'DrmType' in params ? params.DrmType : null;
+        this.DrmKeyProvider = 'DrmKeyProvider' in params ? params.DrmKeyProvider : null;
 
         if (params.StreamInfos) {
             this.StreamInfos = new Array();
@@ -1125,13 +1135,19 @@ class AiRecognitionTaskAsrFullTextResultOutput extends  AbstractModel {
         this.SegmentSetFileUrl = null;
 
         /**
-         * Expiration time of the URL to the file of the list for full-text speech recognition segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+         * The expiration time of the URLs of full-text speech recognition segments in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
          * @type {string || null}
          */
         this.SegmentSetFileUrlExpireTime = null;
 
         /**
-         * Subtitles file URL.
+         * The subtitle files generated, whose format is determined by the `SubtitleFormats` parameter of [AsrFullTextConfigureInfo](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#AsrFullTextConfigureInfo).
+         * @type {Array.<AiRecognitionTaskAsrFullTextResultOutputSubtitleItem> || null}
+         */
+        this.SubtitleSet = null;
+
+        /**
+         * The URLs of the subtitle files generated, whose format is determined by the `SubtitleFormats` parameter of [AsrFullTextConfigureInfo](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#AsrFullTextConfigureInfo).
          * @type {string || null}
          */
         this.SubtitleUrl = null;
@@ -1156,6 +1172,15 @@ class AiRecognitionTaskAsrFullTextResultOutput extends  AbstractModel {
         }
         this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
         this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
+
+        if (params.SubtitleSet) {
+            this.SubtitleSet = new Array();
+            for (let z in params.SubtitleSet) {
+                let obj = new AiRecognitionTaskAsrFullTextResultOutputSubtitleItem();
+                obj.deserialize(params.SubtitleSet[z]);
+                this.SubtitleSet.push(obj);
+            }
+        }
         this.SubtitleUrl = 'SubtitleUrl' in params ? params.SubtitleUrl : null;
 
     }
@@ -3622,6 +3647,15 @@ If this parameter is an empty string, it indicates that the video is not protect
         this.DrmType = null;
 
         /**
+         * The provider of the DRM key. Valid values:
+<li>SDMC</li>
+<li>VOD</li>
+The default is `VOD`.
+         * @type {string || null}
+         */
+        this.DrmKeyProvider = null;
+
+        /**
          * Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values:
 <li>0: no,</li>
 <li>1: yes.</li>
@@ -3667,6 +3701,7 @@ Default value: no.
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.DrmType = 'DrmType' in params ? params.DrmType : null;
+        this.DrmKeyProvider = 'DrmKeyProvider' in params ? params.DrmKeyProvider : null;
         this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
         this.DisableHigherVideoResolution = 'DisableHigherVideoResolution' in params ? params.DisableHigherVideoResolution : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
@@ -4581,6 +4616,107 @@ Note: the image must be a relatively clear full-face photo of a person and has a
         this.Description = 'Description' in params ? params.Description : null;
         this.FaceContents = 'FaceContents' in params ? params.FaceContents : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
+
+    }
+}
+
+/**
+ * The information of a watermark removal task. This parameter is valid only if `TaskType` is `RemoveWatermark`.
+ * @class
+ */
+class RemoveWatermarkTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The task flow status. Valid values:
+<li>PROCESSING</li>
+<li>FINISH</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0: Successful; other values: Failed.
+<li>40000: Invalid input parameter.</li>
+<li>60000: Source file error (e.g., video data is corrupted).</li>
+<li>70000: Internal server error. Please try again.</li>
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The input of a watermark removal task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RemoveWaterMarkTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * The output of a watermark removal task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RemoveWaterMarkTaskOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new RemoveWaterMarkTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new RemoveWaterMarkTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -6565,89 +6701,44 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * VOD media file metadata
+ * DescribeSnapshotByTimeOffsetTemplates request structure.
  * @class
  */
-class MediaMetaData extends  AbstractModel {
+class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Size of uploaded media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
-Note: this field may return null, indicating that no valid values can be obtained.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
-        this.Size = null;
+        this.SubAppId = null;
 
         /**
-         * Container, such as m4a and mp4.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Unique ID filter of time point screencapturing templates. Array length limit: 100.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * Paged offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned entries. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Template type filter. Valid values:
+<li>Preset: preset template;</li>
+<li>Custom: custom template.</li>
          * @type {string || null}
          */
-        this.Container = null;
-
-        /**
-         * Sum of the average bitrate of a video stream and that of an audio stream in bps.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Bitrate = null;
-
-        /**
-         * Maximum value of the height of a video stream in px.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Maximum value of the width of a video stream in px.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Video duration in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * Selected angle during video recording in degrees.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Rotate = null;
-
-        /**
-         * Video stream information.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MediaVideoStreamItem> || null}
-         */
-        this.VideoStreamSet = null;
-
-        /**
-         * Audio stream information.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<MediaAudioStreamItem> || null}
-         */
-        this.AudioStreamSet = null;
-
-        /**
-         * Video duration in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.VideoDuration = null;
-
-        /**
-         * Audio duration in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AudioDuration = null;
+        this.Type = null;
 
     }
 
@@ -6658,33 +6749,11 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Container = 'Container' in params ? params.Container : null;
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.Rotate = 'Rotate' in params ? params.Rotate : null;
-
-        if (params.VideoStreamSet) {
-            this.VideoStreamSet = new Array();
-            for (let z in params.VideoStreamSet) {
-                let obj = new MediaVideoStreamItem();
-                obj.deserialize(params.VideoStreamSet[z]);
-                this.VideoStreamSet.push(obj);
-            }
-        }
-
-        if (params.AudioStreamSet) {
-            this.AudioStreamSet = new Array();
-            for (let z in params.AudioStreamSet) {
-                let obj = new MediaAudioStreamItem();
-                obj.deserialize(params.AudioStreamSet[z]);
-                this.AudioStreamSet.push(obj);
-            }
-        }
-        this.VideoDuration = 'VideoDuration' in params ? params.VideoDuration : null;
-        this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -8108,6 +8177,26 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.Procedure = null;
 
         /**
+         * The ID of the media file’s category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+<li>The default value is `0`, which means the “Other” category.</li>
+This parameter is valid only if `IsPersistence` is `1`.
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The [NewFileUpload](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 250 characters and is valid only if `IsPersistence` is `1`.
+         * @type {string || null}
+         */
+        this.SourceContext = null;
+
+        /**
+         * The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
          * Whether the metadata of clipped video needs to be returned. 0: no, 1: yes. Default value: no.
          * @type {number || null}
          */
@@ -8118,6 +8207,14 @@ class LiveRealTimeClipRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.Host = null;
+
+        /**
+         * The information of the live stream to clip.
+<li>The video clip is cut from the original stream by default.</li>
+<li>If `Type` of `StreamInfo` is set to `Transcoding`, the video clip will be cut from the output stream of the transcoding template specified by `TemplateId`.</li>
+         * @type {LiveRealTimeClipStreamInfo || null}
+         */
+        this.StreamInfo = null;
 
         /**
          * Reserved field. Do not enter a value for it.
@@ -8141,8 +8238,17 @@ class LiveRealTimeClipRequest extends  AbstractModel {
         this.IsPersistence = 'IsPersistence' in params ? params.IsPersistence : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.Procedure = 'Procedure' in params ? params.Procedure : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.MetaDataRequired = 'MetaDataRequired' in params ? params.MetaDataRequired : null;
         this.Host = 'Host' in params ? params.Host : null;
+
+        if (params.StreamInfo) {
+            let obj = new LiveRealTimeClipStreamInfo();
+            obj.deserialize(params.StreamInfo)
+            this.StreamInfo = obj;
+        }
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
@@ -8355,6 +8461,43 @@ class AiReviewPornAsrTaskOutput extends  AbstractModel {
 }
 
 /**
+ * The subtitle information.
+ * @class
+ */
+class AiRecognitionTaskAsrFullTextResultOutputSubtitleItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The format of the subtitle files. Valid values:
+<li>vtt</li>
+<li>srt</li>
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * The URL of a subtitle file.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * SimpleHlsClip response structure.
  * @class
  */
@@ -8381,6 +8524,12 @@ class SimpleHlsClipResponse extends  AbstractModel {
         this.FileId = null;
 
         /**
+         * The ID of the task flow to execute on the video clipped for persistent storage.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -8403,6 +8552,7 @@ class SimpleHlsClipResponse extends  AbstractModel {
             this.MetaData = obj;
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9089,8 +9239,16 @@ class AsrFullTextConfigureInfoForUpdate extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Format of generated subtitles file. If an empty string is entered, no subtitles files will be generated. Valid values:
-<li>vtt: generates a WebVTT subtitles file.</li>
+         * The modification information of the subtitle format list.
+         * @type {SubtitleFormatsOperation || null}
+         */
+        this.SubtitleFormatsOperation = null;
+
+        /**
+         * The format of the subtitle file generated. <font color='red'>If you pass in an empty string</font>, no subtitle files will be generated. Valid values:
+<li>vtt</li>
+<li>srt</li>
+<font color='red'>Note: This parameter has been deprecated. Please use `SubtitleFormatsOperation` instead.</font>
          * @type {string || null}
          */
         this.SubtitleFormat = null;
@@ -9105,6 +9263,12 @@ class AsrFullTextConfigureInfoForUpdate extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.SubtitleFormatsOperation) {
+            let obj = new SubtitleFormatsOperation();
+            obj.deserialize(params.SubtitleFormatsOperation)
+            this.SubtitleFormatsOperation = obj;
+        }
         this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
 
     }
@@ -9180,6 +9344,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * RemoveWatermark response structure.
+ * @class
+ */
+class RemoveWatermarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9531,44 +9730,24 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSnapshotByTimeOffsetTemplates request structure.
+ * Control parameter of prohibited information detection task
  * @class
  */
-class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
+class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-         * @type {number || null}
+         * Control parameter of prohibited information detection in speech.
+         * @type {ProhibitedAsrReviewTemplateInfoForUpdate || null}
          */
-        this.SubAppId = null;
+        this.AsrReviewInfo = null;
 
         /**
-         * Unique ID filter of time point screencapturing templates. Array length limit: 100.
-         * @type {Array.<number> || null}
+         * Control parameter of prohibited information detection in text.
+         * @type {ProhibitedOcrReviewTemplateInfoForUpdate || null}
          */
-        this.Definitions = null;
-
-        /**
-         * Paged offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Number of returned entries. Default value: 10. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Template type filter. Valid values:
-<li>Preset: preset template;</li>
-<li>Custom: custom template.</li>
-         * @type {string || null}
-         */
-        this.Type = null;
+        this.OcrReviewInfo = null;
 
     }
 
@@ -9579,11 +9758,18 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.Definitions = 'Definitions' in params ? params.Definitions : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.AsrReviewInfo) {
+            let obj = new ProhibitedAsrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.AsrReviewInfo)
+            this.AsrReviewInfo = obj;
+        }
+
+        if (params.OcrReviewInfo) {
+            let obj = new ProhibitedOcrReviewTemplateInfoForUpdate();
+            obj.deserialize(params.OcrReviewInfo)
+            this.OcrReviewInfo = obj;
+        }
 
     }
 }
@@ -11331,6 +11517,46 @@ class SearchMediaResponse extends  AbstractModel {
 }
 
 /**
+ * The output of a watermark removal task.
+ * @class
+ */
+class RemoveWaterMarkTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The file ID of the video.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * The metadata of the video, including size, duration, video stream information, and audio stream information.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+
+    }
+}
+
+/**
  * ModifyMediaStorageClass request structure.
  * @class
  */
@@ -12730,6 +12956,38 @@ class SimpleHlsClipRequest extends  AbstractModel {
          */
         this.IsPersistence = null;
 
+        /**
+         * The expiration time of the video clip that is to be saved, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). `9999-12-31T23:59:59Z` is the default value, which means the video clip will never expire. After expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter is valid only if `IsPersistence` is 1.
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * The task flow to execute on the video clipped for persistent storage. For details, see [Upload from Server](https://intl.cloud.tencent.com/document/product/266/33912). This parameter is valid only if `IsPersistence` is 1.
+         * @type {string || null}
+         */
+        this.Procedure = null;
+
+        /**
+         * The ID of the media file’s category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+<li>The default value is `0`, which means the “Other” category.</li>
+This parameter is valid only if `IsPersistence` is `1`.
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The [NewFileUpload](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 250 characters and is valid only if `IsPersistence` is `1`.
+         * @type {string || null}
+         */
+        this.SourceContext = null;
+
+        /**
+         * The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
     }
 
     /**
@@ -12744,6 +13002,11 @@ class SimpleHlsClipRequest extends  AbstractModel {
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.IsPersistence = 'IsPersistence' in params ? params.IsPersistence : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.Procedure = 'Procedure' in params ? params.Procedure : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
     }
 }
@@ -13823,6 +14086,34 @@ FINISH: completed.
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.SourceDefinition = 'SourceDefinition' in params ? params.SourceDefinition : null;
         this.PublishResult = 'PublishResult' in params ? params.PublishResult : null;
+
+    }
+}
+
+/**
+ * DescribeDrmKeyProviderInfo request structure.
+ * @class
+ */
+class DescribeDrmKeyProviderInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -18451,6 +18742,55 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * The TRTC recording information.
+ * @class
+ */
+class TrtcRecordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The TRTC application ID.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The TRTC room ID.
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * The recording task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The IDs of users whose streams are mixed.
+         * @type {Array.<string> || null}
+         */
+        this.UserIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.UserIds = 'UserIds' in params ? params.UserIds : null;
+
+    }
+}
+
+/**
  * DescribeReviewDetails request structure.
  * @class
  */
@@ -20217,6 +20557,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SourceContext = null;
 
+        /**
+         * The TRTC recording information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TrtcRecordInfo || null}
+         */
+        this.TrtcRecordInfo = null;
+
     }
 
     /**
@@ -20228,6 +20575,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
         this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+
+        if (params.TrtcRecordInfo) {
+            let obj = new TrtcRecordInfo();
+            obj.deserialize(params.TrtcRecordInfo)
+            this.TrtcRecordInfo = obj;
+        }
 
     }
 }
@@ -20510,6 +20863,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.WechatMiniProgramPublishCompleteEvent = null;
 
         /**
+         * Watermark removal completion event. This parameter is valid only if `TaskType` is `RemoveWatermark`.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {RemoveWatermarkTask || null}
+         */
+        this.RemoveWatermarkCompleteEvent = null;
+
+        /**
          * Callback for video retrieval. This parameter is valid when the event type is `RestoreMediaComplete`.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {RestoreMediaTask || null}
@@ -20610,6 +20970,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             let obj = new WechatMiniProgramPublishTask();
             obj.deserialize(params.WechatMiniProgramPublishCompleteEvent)
             this.WechatMiniProgramPublishCompleteEvent = obj;
+        }
+
+        if (params.RemoveWatermarkCompleteEvent) {
+            let obj = new RemoveWatermarkTask();
+            obj.deserialize(params.RemoveWatermarkCompleteEvent)
+            this.RemoveWatermarkCompleteEvent = obj;
         }
 
         if (params.RestoreMediaCompleteEvent) {
@@ -21165,8 +21531,18 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * Format of generated subtitles file. If this parameter is left empty or a blank string is entered, no subtitles files will be generated. Valid value:
-<li>vtt: generates a WebVTT subtitles file.</li>
+         * The formats of the subtitle files generated. If this parameter is not passed or an empty string is passed in, no subtitles files will be generated. Valid values:
+<li>vtt</li>
+<li>srt</li>
+         * @type {Array.<string> || null}
+         */
+        this.SubtitleFormats = null;
+
+        /**
+         * The format of the subtitle file generated. If this parameter is not passed or an empty string is passed in, no subtitles files will be generated. Valid values:
+<li>vtt</li>
+<li>srt</li>
+<font color='red'>Note: This parameter has been deprecated. Please use `SubtitleFormats` instead.</font>
          * @type {string || null}
          */
         this.SubtitleFormat = null;
@@ -21181,6 +21557,7 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+        this.SubtitleFormats = 'SubtitleFormats' in params ? params.SubtitleFormats : null;
         this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
 
     }
@@ -21217,6 +21594,47 @@ class DeleteVodDomainRequest extends  AbstractModel {
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * DescribeDrmKeyProviderInfo response structure.
+ * @class
+ */
+class DescribeDrmKeyProviderInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The DRM key information provided by SDMC.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SDMCDrmKeyProviderInfo || null}
+         */
+        this.SDMCInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SDMCInfo) {
+            let obj = new SDMCDrmKeyProviderInfo();
+            obj.deserialize(params.SDMCInfo)
+            this.SDMCInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -21381,7 +21799,7 @@ class DescribeTaskDetailRequest extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -21585,6 +22003,55 @@ class AiReviewPornTaskOutput extends  AbstractModel {
         }
         this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
         this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
+
+    }
+}
+
+/**
+ * The DRM key information provided by SDMC.
+ * @class
+ */
+class SDMCDrmKeyProviderInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The user ID assigned by SDMC, which can contain up to 128 characters.
+         * @type {string || null}
+         */
+        this.Uid = null;
+
+        /**
+         * The secret ID assigned by SDMC, which can contain up to 128 characters.
+         * @type {string || null}
+         */
+        this.SecretId = null;
+
+        /**
+         * The secret key assigned by SDMC, which can contain up to 128 characters.
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * The URL of the FairPlay certificate issued by SDMC. It must be an HTTPS address and can contain up to 1,024 characters.
+         * @type {string || null}
+         */
+        this.FairPlayCertificateUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.SecretId = 'SecretId' in params ? params.SecretId : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.FairPlayCertificateUrl = 'FairPlayCertificateUrl' in params ? params.FairPlayCertificateUrl : null;
 
     }
 }
@@ -22290,6 +22757,44 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
 }
 
 /**
+ * The information of the live stream to clip.
+ * @class
+ */
+class LiveRealTimeClipStreamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The type of live stream to clip. Valid values:
+<li>Original (<b>default</b>)</li>
+<li>Transcoding</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The transcoding template ID.
+<b>This is required if `Type` is `Transcoding`.</b>
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
  * Control parameter of prohibited information detection in text task
  * @class
  */
@@ -22385,6 +22890,131 @@ class ModifyTranscodeTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * VOD media file metadata
+ * @class
+ */
+class MediaMetaData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Size of uploaded media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * Container, such as m4a and mp4.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * Sum of the average bitrate of a video stream and that of an audio stream in bps.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * Maximum value of the height of a video stream in px.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Maximum value of the width of a video stream in px.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Video duration in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Selected angle during video recording in degrees.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Rotate = null;
+
+        /**
+         * Video stream information.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaVideoStreamItem> || null}
+         */
+        this.VideoStreamSet = null;
+
+        /**
+         * Audio stream information.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaAudioStreamItem> || null}
+         */
+        this.AudioStreamSet = null;
+
+        /**
+         * Video duration in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VideoDuration = null;
+
+        /**
+         * Audio duration in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AudioDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Container = 'Container' in params ? params.Container : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Rotate = 'Rotate' in params ? params.Rotate : null;
+
+        if (params.VideoStreamSet) {
+            this.VideoStreamSet = new Array();
+            for (let z in params.VideoStreamSet) {
+                let obj = new MediaVideoStreamItem();
+                obj.deserialize(params.VideoStreamSet[z]);
+                this.VideoStreamSet.push(obj);
+            }
+        }
+
+        if (params.AudioStreamSet) {
+            this.AudioStreamSet = new Array();
+            for (let z in params.AudioStreamSet) {
+                let obj = new MediaAudioStreamItem();
+                obj.deserialize(params.AudioStreamSet[z]);
+                this.AudioStreamSet.push(obj);
+            }
+        }
+        this.VideoDuration = 'VideoDuration' in params ? params.VideoDuration : null;
+        this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
 
     }
 }
@@ -23218,16 +23848,9 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 <li>SplitMedia: Video splitting</li>
 <li>ComposeMedia: Media file producing</li>
 <li>WechatPublish: WeChat publishing</li>
-<li>WechatMiniProgramPublish: Publishing videos on WeChat Mini Program</li>
 <li>PullUpload: Pulling media files for upload</li>
 <li>FastClipMedia: Quick clipping</li>
-
-Task types for v2017:
-<li>Transcode: Transcoding</li>
-<li>SnapshotByTimeOffset: Screencapturing</li>
-<li>Concat: Video splicing</li>
-<li>Clip: Video clipping</li>
-<li>ImageSprites: Image sprite generating</li>
+<li>RemoveWatermarkTask: Watermark removal</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -23344,6 +23967,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SnapshotByTimeOffsetTask = null;
 
         /**
+         * The information of a watermark removal task. This parameter is valid only if `TaskType` is `RemoveWatermark`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RemoveWatermarkTask || null}
+         */
+        this.RemoveWatermarkTask = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -23434,6 +24064,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new SnapshotByTimeOffsetTask2017();
             obj.deserialize(params.SnapshotByTimeOffsetTask)
             this.SnapshotByTimeOffsetTask = obj;
+        }
+
+        if (params.RemoveWatermarkTask) {
+            let obj = new RemoveWatermarkTask();
+            obj.deserialize(params.RemoveWatermarkTask)
+            this.RemoveWatermarkTask = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -24927,6 +25563,46 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * SetDrmKeyProviderInfo request structure.
+ * @class
+ */
+class SetDrmKeyProviderInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The DRM key information provided by SDMC.
+         * @type {SDMCDrmKeyProviderInfo || null}
+         */
+        this.SDMCInfo = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SDMCInfo) {
+            let obj = new SDMCDrmKeyProviderInfo();
+            obj.deserialize(params.SDMCInfo)
+            this.SDMCInfo = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Details of a specified time point screencapturing template
  * @class
  */
@@ -25598,6 +26274,46 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
         this.SamplingRate = 'SamplingRate' in params ? params.SamplingRate : null;
         this.Codec = 'Codec' in params ? params.Codec : null;
+
+    }
+}
+
+/**
+ * The modification of the subtitle format list.
+ * @class
+ */
+class SubtitleFormatsOperation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The modification type. Valid values:
+<li>add: Add the formats specified by `Formats`.</li>
+<li>delete: Delete the formats specified by `Formats`.<l/i>
+<li>reset: Reset the format list to formats specified by `Formats`.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The subtitle format list. Valid values:
+<li>vtt</li>
+<li>srt</li>
+         * @type {Array.<string> || null}
+         */
+        this.Formats = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Formats = 'Formats' in params ? params.Formats : null;
 
     }
 }
@@ -27005,6 +27721,69 @@ class FrameTagConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * RemoveWatermark request structure.
+ * @class
+ */
+class RemoveWatermarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the media file.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * This parameter is invalid now.
+         * @type {string || null}
+         */
+        this.TasksNotifyMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
+
+    }
+}
+
+/**
  * ExecuteFunction request structure.
  * @class
  */
@@ -28331,6 +29110,21 @@ class SearchMediaRequest extends  AbstractModel {
         this.StorageClasses = null;
 
         /**
+         * The TRTC application IDs. Any file that matches one of the application IDs will be returned.
+<li>Array length limit: 10</li>
+         * @type {Array.<number> || null}
+         */
+        this.TrtcSdkAppIds = null;
+
+        /**
+         * The TRTC room IDs. Any file that matches one of the room IDs will be returned.
+<li>Element length limit: 64 characters.</li>
+<li>Array length limit: 10.</li>
+         * @type {Array.<string> || null}
+         */
+        this.TrtcRoomIds = null;
+
+        /**
          * (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
 Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
          * @type {string || null}
@@ -28421,6 +29215,8 @@ End time in the creation time range.
         this.Filters = 'Filters' in params ? params.Filters : null;
         this.StorageRegions = 'StorageRegions' in params ? params.StorageRegions : null;
         this.StorageClasses = 'StorageClasses' in params ? params.StorageClasses : null;
+        this.TrtcSdkAppIds = 'TrtcSdkAppIds' in params ? params.TrtcSdkAppIds : null;
+        this.TrtcRoomIds = 'TrtcRoomIds' in params ? params.TrtcRoomIds : null;
         this.Text = 'Text' in params ? params.Text : null;
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
         this.StreamId = 'StreamId' in params ? params.StreamId : null;
@@ -28885,6 +29681,34 @@ class PullUploadResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The input of a watermark removal task.
+ * @class
+ */
+class RemoveWaterMarkTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the media file.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
 
     }
 }
@@ -30293,6 +31117,34 @@ class AiAnalysisTaskCoverInput extends  AbstractModel {
 }
 
 /**
+ * SetDrmKeyProviderInfo response structure.
+ * @class
+ */
+class SetDrmKeyProviderInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeStorageDetails request structure.
  * @class
  */
@@ -30890,51 +31742,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Control parameter of prohibited information detection task
- * @class
- */
-class ProhibitedConfigureInfoForUpdate extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Control parameter of prohibited information detection in speech.
-         * @type {ProhibitedAsrReviewTemplateInfoForUpdate || null}
-         */
-        this.AsrReviewInfo = null;
-
-        /**
-         * Control parameter of prohibited information detection in text.
-         * @type {ProhibitedOcrReviewTemplateInfoForUpdate || null}
-         */
-        this.OcrReviewInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.AsrReviewInfo) {
-            let obj = new ProhibitedAsrReviewTemplateInfoForUpdate();
-            obj.deserialize(params.AsrReviewInfo)
-            this.AsrReviewInfo = obj;
-        }
-
-        if (params.OcrReviewInfo) {
-            let obj = new ProhibitedOcrReviewTemplateInfoForUpdate();
-            obj.deserialize(params.OcrReviewInfo)
-            this.OcrReviewInfo = obj;
-        }
-
-    }
-}
-
-/**
  * Control parameter of intelligent frame-specific tagging task
  * @class
  */
@@ -31319,6 +32126,7 @@ module.exports = {
     CreateProcedureTemplateRequest: CreateProcedureTemplateRequest,
     DescribeMediaProcessUsageDataRequest: DescribeMediaProcessUsageDataRequest,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
+    RemoveWatermarkTask: RemoveWatermarkTask,
     StorageRegionInfo: StorageRegionInfo,
     MediaTransitionItem: MediaTransitionItem,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
@@ -31357,7 +32165,7 @@ module.exports = {
     TraceWatermarkInput: TraceWatermarkInput,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
-    MediaMetaData: MediaMetaData,
+    DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
     CdnLogInfo: CdnLogInfo,
     MediaSubtitleInfo: MediaSubtitleInfo,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
@@ -31390,6 +32198,7 @@ module.exports = {
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
     SplitMediaTaskSegmentInfo: SplitMediaTaskSegmentInfo,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
+    AiRecognitionTaskAsrFullTextResultOutputSubtitleItem: AiRecognitionTaskAsrFullTextResultOutputSubtitleItem,
     SimpleHlsClipResponse: SimpleHlsClipResponse,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     AiAnalysisResult: AiAnalysisResult,
@@ -31406,12 +32215,13 @@ module.exports = {
     ObjectConfigureInfo: ObjectConfigureInfo,
     AsrFullTextConfigureInfoForUpdate: AsrFullTextConfigureInfoForUpdate,
     AiRecognitionTaskHeadTailResult: AiRecognitionTaskHeadTailResult,
+    RemoveWatermarkResponse: RemoveWatermarkResponse,
     TranscodeTask2017: TranscodeTask2017,
     CreatePersonSampleResponse: CreatePersonSampleResponse,
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
     ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
     DescribeProcedureTemplatesRequest: DescribeProcedureTemplatesRequest,
-    DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     MediaSampleSnapshotItem: MediaSampleSnapshotItem,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
     DeleteWordSamplesRequest: DeleteWordSamplesRequest,
@@ -31443,6 +32253,7 @@ module.exports = {
     AiRecognitionTaskObjectResult: AiRecognitionTaskObjectResult,
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     SearchMediaResponse: SearchMediaResponse,
+    RemoveWaterMarkTaskOutput: RemoveWaterMarkTaskOutput,
     ModifyMediaStorageClassRequest: ModifyMediaStorageClassRequest,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
@@ -31487,6 +32298,7 @@ module.exports = {
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
     WechatMiniProgramPublishTask: WechatMiniProgramPublishTask,
+    DescribeDrmKeyProviderInfoRequest: DescribeDrmKeyProviderInfoRequest,
     ModifyDefaultStorageRegionResponse: ModifyDefaultStorageRegionResponse,
     ComposeMediaTask: ComposeMediaTask,
     HeadTailConfigureInfoForUpdate: HeadTailConfigureInfoForUpdate,
@@ -31567,6 +32379,7 @@ module.exports = {
     DescribeCDNUsageDataRequest: DescribeCDNUsageDataRequest,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
+    TrtcRecordInfo: TrtcRecordInfo,
     DescribeReviewDetailsRequest: DescribeReviewDetailsRequest,
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
     AiReviewProhibitedAsrTaskInput: AiReviewProhibitedAsrTaskInput,
@@ -31614,11 +32427,13 @@ module.exports = {
     ModifyPersonSampleRequest: ModifyPersonSampleRequest,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
     DeleteVodDomainRequest: DeleteVodDomainRequest,
+    DescribeDrmKeyProviderInfoResponse: DescribeDrmKeyProviderInfoResponse,
     CreateAIRecognitionTemplateRequest: CreateAIRecognitionTemplateRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     AiAnalysisTaskFrameTagResult: AiAnalysisTaskFrameTagResult,
     AiReviewPornTaskOutput: AiReviewPornTaskOutput,
+    SDMCDrmKeyProviderInfo: SDMCDrmKeyProviderInfo,
     AiRecognitionTaskAsrFullTextResult: AiRecognitionTaskAsrFullTextResult,
     ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,
     PlayStatInfo: PlayStatInfo,
@@ -31632,9 +32447,11 @@ module.exports = {
     WatermarkInput: WatermarkInput,
     AiSampleWordInfo: AiSampleWordInfo,
     AdaptiveDynamicStreamingInfoItem: AdaptiveDynamicStreamingInfoItem,
+    LiveRealTimeClipStreamInfo: LiveRealTimeClipStreamInfo,
     ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
     DeleteClassResponse: DeleteClassResponse,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
+    MediaMetaData: MediaMetaData,
     MediaSampleSnapshotInfo: MediaSampleSnapshotInfo,
     DescribeSubAppIdsResponse: DescribeSubAppIdsResponse,
     MediaInfo: MediaInfo,
@@ -31674,6 +32491,7 @@ module.exports = {
     TaskSimpleInfo: TaskSimpleInfo,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
     MediaVideoStreamItem: MediaVideoStreamItem,
+    SetDrmKeyProviderInfoRequest: SetDrmKeyProviderInfoRequest,
     SnapshotByTimeOffsetTemplate: SnapshotByTimeOffsetTemplate,
     DeleteSnapshotByTimeOffsetTemplateResponse: DeleteSnapshotByTimeOffsetTemplateResponse,
     ProhibitedOcrReviewTemplateInfoForUpdate: ProhibitedOcrReviewTemplateInfoForUpdate,
@@ -31686,6 +32504,7 @@ module.exports = {
     CreateAIAnalysisTemplateRequest: CreateAIAnalysisTemplateRequest,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
     MediaAudioStreamItem: MediaAudioStreamItem,
+    SubtitleFormatsOperation: SubtitleFormatsOperation,
     SubAppIdInfo: SubAppIdInfo,
     DescribeAllClassResponse: DescribeAllClassResponse,
     ModifyImageSpriteTemplateRequest: ModifyImageSpriteTemplateRequest,
@@ -31709,6 +32528,7 @@ module.exports = {
     ImageTransform: ImageTransform,
     CreateAnimatedGraphicsTemplateRequest: CreateAnimatedGraphicsTemplateRequest,
     FrameTagConfigureInfo: FrameTagConfigureInfo,
+    RemoveWatermarkRequest: RemoveWatermarkRequest,
     ExecuteFunctionRequest: ExecuteFunctionRequest,
     ConfirmEventsResponse: ConfirmEventsResponse,
     ModifyPersonSampleResponse: ModifyPersonSampleResponse,
@@ -31737,6 +32557,7 @@ module.exports = {
     EditMediaFileInfo: EditMediaFileInfo,
     ProcessMediaByProcedureResponse: ProcessMediaByProcedureResponse,
     PullUploadResponse: PullUploadResponse,
+    RemoveWaterMarkTaskInput: RemoveWaterMarkTaskInput,
     FaceConfigureInfo: FaceConfigureInfo,
     AiRecognitionTaskFaceResultOutput: AiRecognitionTaskFaceResultOutput,
     PornImgReviewTemplateInfoForUpdate: PornImgReviewTemplateInfoForUpdate,
@@ -31762,6 +32583,7 @@ module.exports = {
     DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,
     AiAnalysisTaskCoverInput: AiAnalysisTaskCoverInput,
+    SetDrmKeyProviderInfoResponse: SetDrmKeyProviderInfoResponse,
     DescribeStorageDetailsRequest: DescribeStorageDetailsRequest,
     MediaTrack: MediaTrack,
     StorageStatData: StorageStatData,
@@ -31771,7 +32593,6 @@ module.exports = {
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
     ComposeMediaOutput: ComposeMediaOutput,
     PullUploadTask: PullUploadTask,
-    ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     FrameTagConfigureInfoForUpdate: FrameTagConfigureInfoForUpdate,
     CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,
     DescribeAIRecognitionTemplatesRequest: DescribeAIRecognitionTemplatesRequest,

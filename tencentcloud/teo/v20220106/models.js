@@ -2266,32 +2266,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Paused = null;
 
         /**
-         * Site creation date
-         * @type {string || null}
-         */
-        this.CreatedOn = null;
-
-        /**
-         * Site modification date
-         * @type {string || null}
-         */
-        this.ModifiedOn = null;
-
-        /**
-         * User-defined name server information
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {VanityNameServers || null}
-         */
-        this.VanityNameServers = null;
-
-        /**
-         * User-defined name server IP information
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<VanityNameServersIps> || null}
-         */
-        this.VanityNameServersIps = null;
-
-        /**
          * Specifies whether to enable CNAME acceleration
 - `enabled`: Enable
 - `disabled`: Disable
@@ -2307,6 +2281,52 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          * @type {string || null}
          */
         this.CnameStatus = null;
+
+        /**
+         * Resource tag
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Billable resource
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Resource> || null}
+         */
+        this.Resources = null;
+
+        /**
+         * Site modification date
+         * @type {string || null}
+         */
+        this.ModifiedOn = null;
+
+        /**
+         * Site creation date
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * User-defined name server information
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {VanityNameServers || null}
+         */
+        this.VanityNameServers = null;
+
+        /**
+         * User-defined name server IP information
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<VanityNameServersIps> || null}
+         */
+        this.VanityNameServersIps = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2330,8 +2350,29 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Status = 'Status' in params ? params.Status : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Paused = 'Paused' in params ? params.Paused : null;
-        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.CnameSpeedUp = 'CnameSpeedUp' in params ? params.CnameSpeedUp : null;
+        this.CnameStatus = 'CnameStatus' in params ? params.CnameStatus : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Area = 'Area' in params ? params.Area : null;
+
+        if (params.Resources) {
+            this.Resources = new Array();
+            for (let z in params.Resources) {
+                let obj = new Resource();
+                obj.deserialize(params.Resources[z]);
+                this.Resources.push(obj);
+            }
+        }
         this.ModifiedOn = 'ModifiedOn' in params ? params.ModifiedOn : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
 
         if (params.VanityNameServers) {
             let obj = new VanityNameServers();
@@ -2347,8 +2388,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
                 this.VanityNameServersIps.push(obj);
             }
         }
-        this.CnameSpeedUp = 'CnameSpeedUp' in params ? params.CnameSpeedUp : null;
-        this.CnameStatus = 'CnameStatus' in params ? params.CnameStatus : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3543,24 +3582,26 @@ class DeleteOriginGroupRequest extends  AbstractModel {
 }
 
 /**
- * The structure used to sort the top data
+ * Tag configuration
  * @class
  */
-class TopDetailData extends  AbstractModel {
+class Tag extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Field name
+         * Tag key
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Key = null;
+        this.TagKey = null;
 
         /**
-         * Field value
-         * @type {number || null}
+         * Tag value
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Value = null;
+        this.TagValue = null;
 
     }
 
@@ -3571,8 +3612,8 @@ class TopDetailData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -4086,6 +4127,38 @@ class Zone extends  AbstractModel {
         this.Paused = null;
 
         /**
+         * Specifies whether to enable CNAME acceleration
+- `enabled`: Enable
+- `disabled`: Disable
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CnameSpeedUp = null;
+
+        /**
+         * Ownership verification status of the site when it is connected to EdgeOne via CNAME.
+- `finished`: The site is verified.
+- `pending`: Verifying the ownership of the site.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CnameStatus = null;
+
+        /**
+         * Resource tag
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Billable resource
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Resource> || null}
+         */
+        this.Resources = null;
+
+        /**
          * Site creation date
          * @type {string || null}
          */
@@ -4098,13 +4171,10 @@ class Zone extends  AbstractModel {
         this.ModifiedOn = null;
 
         /**
-         * Ownership verification status of the site when it is connected to EdgeOne via CNAME.
-- `finished`: The site is verified.
-- `pending`: Verifying the ownership of the site.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
-        this.CnameStatus = null;
+        this.Area = null;
 
     }
 
@@ -4122,9 +4192,29 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Status = 'Status' in params ? params.Status : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Paused = 'Paused' in params ? params.Paused : null;
+        this.CnameSpeedUp = 'CnameSpeedUp' in params ? params.CnameSpeedUp : null;
+        this.CnameStatus = 'CnameStatus' in params ? params.CnameStatus : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.Resources) {
+            this.Resources = new Array();
+            for (let z in params.Resources) {
+                let obj = new Resource();
+                obj.deserialize(params.Resources[z]);
+                this.Resources.push(obj);
+            }
+        }
         this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
         this.ModifiedOn = 'ModifiedOn' in params ? params.ModifiedOn : null;
-        this.CnameStatus = 'CnameStatus' in params ? params.CnameStatus : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -4141,6 +4231,8 @@ class ZoneFilter extends  AbstractModel {
          * Filters by the field name. Vaules:
 - `name`: Site name.
 - `status`: Site status.
+- `tagKey`: Tag key.
+- `tagValue`: Tag value.
          * @type {string || null}
          */
         this.Name = null;
@@ -5589,6 +5681,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * The structure used to sort the top data
+ * @class
+ */
+class TopDetailData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Field name
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Field value
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * CreatePrefetchTask request structure.
  * @class
  */
@@ -6360,7 +6487,7 @@ class CreateLoadBalancingRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Subdomain name. You can use @ to represent the root domain.
+         * Subdomain name
          * @type {string || null}
          */
         this.Host = null;
@@ -7877,6 +8004,12 @@ class CreateZoneRequest extends  AbstractModel {
          */
         this.JumpStart = null;
 
+        /**
+         * Resource tag
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -7889,6 +8022,15 @@ class CreateZoneRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.JumpStart = 'JumpStart' in params ? params.JumpStart : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -14774,6 +14916,109 @@ Note that if it’s enabled, the purging is based on the converted URLs.
 }
 
 /**
+ * Billable resource
+ * @class
+ */
+class Resource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Billing mode
+`0`: Pay-as-you-go
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Effective time
+         * @type {string || null}
+         */
+        this.EnableTime = null;
+
+        /**
+         * Expiration time
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Status of the plan
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Pricing query parameter
+         * @type {Array.<Sv> || null}
+         */
+        this.Sv = null;
+
+        /**
+         * Specifies whether to enable auto-renewal
+`0`: Default
+`1`: Enable auto-renewal
+`2`: Disable auto-renewal
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * ID of the plan
+         * @type {string || null}
+         */
+        this.PlanId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Area = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.EnableTime = 'EnableTime' in params ? params.EnableTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Sv) {
+            this.Sv = new Array();
+            for (let z in params.Sv) {
+                let obj = new Sv();
+                obj.deserialize(params.Sv[z]);
+                this.Sv.push(obj);
+            }
+        }
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
  * DeleteDnsRecords response structure.
  * @class
  */
@@ -16860,6 +17105,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Pricing query parameter
+ * @class
+ */
+class Sv extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Parameter value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * Bot security configuration
  * @class
  */
@@ -17142,7 +17422,7 @@ module.exports = {
     TimingDataRecord: TimingDataRecord,
     DdosAcls: DdosAcls,
     DeleteOriginGroupRequest: DeleteOriginGroupRequest,
-    TopDetailData: TopDetailData,
+    Tag: Tag,
     ModifyHostsCertificateResponse: ModifyHostsCertificateResponse,
     CreateDnsRecordRequest: CreateDnsRecordRequest,
     IpTableRule: IpTableRule,
@@ -17177,6 +17457,7 @@ module.exports = {
     DescribeWebManagedRulesLogResponse: DescribeWebManagedRulesLogResponse,
     OriginRecord: OriginRecord,
     WebLogs: WebLogs,
+    TopDetailData: TopDetailData,
     CreatePrefetchTaskRequest: CreatePrefetchTaskRequest,
     DeleteApplicationProxyRuleRequest: DeleteApplicationProxyRuleRequest,
     CacheConfigFollowOrigin: CacheConfigFollowOrigin,
@@ -17334,6 +17615,7 @@ module.exports = {
     DDoSFeaturesFilter: DDoSFeaturesFilter,
     DescribeWebProtectionAttackEventsResponse: DescribeWebProtectionAttackEventsResponse,
     CreatePurgeTaskRequest: CreatePurgeTaskRequest,
+    Resource: Resource,
     DeleteDnsRecordsResponse: DeleteDnsRecordsResponse,
     DescribeBotLogRequest: DescribeBotLogRequest,
     DownloadL7LogsResponse: DownloadL7LogsResponse,
@@ -17368,6 +17650,7 @@ module.exports = {
     DescribeOriginGroupDetailRequest: DescribeOriginGroupDetailRequest,
     DescribeDDosAttackEventDetailRequest: DescribeDDosAttackEventDetailRequest,
     DescribeTimingL4DataResponse: DescribeTimingL4DataResponse,
+    Sv: Sv,
     BotConfig: BotConfig,
     TimingTypeValue: TimingTypeValue,
     DescribeBotManagedRulesRequest: DescribeBotManagedRulesRequest,

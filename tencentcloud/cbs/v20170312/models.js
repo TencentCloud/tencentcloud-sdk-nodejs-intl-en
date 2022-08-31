@@ -631,7 +631,7 @@ class AttachDisksResponse extends  AbstractModel {
 }
 
 /**
- * Describes the execution policy for scheduled snapshots. This can be understood as that, on the days specified by DayOfWeek, the scheduled snapshot policy is executed at the hour specified by Hour.
+ * Execution policy for scheduled snapshot. It indicates that a scheduled snapshot policy is executed at the specified `Hour` in the days specified by `DayOfWeek` or `DayOfMonth` or once every `IntervalDays` days. Note: `DayOfWeek`, `DayOfMonth`, and `IntervalDays` are mutually exclusive, and only one policy rule can be set.
  * @class
  */
 class Policy extends  AbstractModel {
@@ -639,16 +639,16 @@ class Policy extends  AbstractModel {
         super();
 
         /**
-         * Specifies the days of the week, from Monday to Sunday, on which a scheduled snapshot will be triggered. Value range: [0, 6]. 0 indicates triggering on Sunday, 1-6 indicate triggering on Monday-Saturday.
-         * @type {Array.<number> || null}
-         */
-        this.DayOfWeek = null;
-
-        /**
          * Specifies the time that that the scheduled snapshot policy will be triggered. The unit is hour. The value range is [0-23]. 00:00-23:00 is a total of 24 time points that can be selected. 1 indicates 01:00, and so on.
          * @type {Array.<number> || null}
          */
         this.Hour = null;
+
+        /**
+         * Specifies the days of the week, from Monday to Sunday, on which a scheduled snapshot will be triggered. Value range: [0, 6]. 0 indicates triggering on Sunday, 1-6 indicate triggering on Monday-Saturday.
+         * @type {Array.<number> || null}
+         */
+        this.DayOfWeek = null;
 
     }
 
@@ -659,8 +659,8 @@ class Policy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DayOfWeek = 'DayOfWeek' in params ? params.DayOfWeek : null;
         this.Hour = 'Hour' in params ? params.Hour : null;
+        this.DayOfWeek = 'DayOfWeek' in params ? params.DayOfWeek : null;
 
     }
 }
@@ -1108,40 +1108,43 @@ class DiskConfig extends  AbstractModel {
         this.Available = null;
 
         /**
-         * Type of cloud disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * Cloud disk type. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
-         * @type {string || null}
-         */
-        this.DiskUsage = null;
-
-        /**
          * Billing method. Value range: <br><li>PREPAID: Prepaid, that is, monthly subscription<br><li>POSTPAID_BY_HOUR: Postpaid, that is, pay as you go.
          * @type {string || null}
          */
         this.DiskChargeType = null;
 
         /**
-         * The maximum configurable cloud disk size (in GB).
-         * @type {number || null}
-         */
-        this.MaxDiskSize = null;
-
-        /**
-         * The minimum configurable cloud disk size (in GB).
-         * @type {number || null}
-         */
-        this.MinDiskSize = null;
-
-        /**
          * The [Availability Region](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) of the cloud drive.
          * @type {string || null}
          */
         this.Zone = null;
+
+        /**
+         * Instance model series. For more information, please see [Instance Models](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1)
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.InstanceFamily = null;
+
+        /**
+         * Type of cloud disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Minimum increment of cloud disk size adjustment in GB.
+Note: This field might return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StepSize = null;
+
+        /**
+         * Additional performance range.
+Note: This field might return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.ExtraPerformanceRange = null;
 
         /**
          * Instance model.
@@ -1151,11 +1154,22 @@ Note: This field may return null, indicating that no valid value was found.
         this.DeviceClass = null;
 
         /**
-         * Instance model series. For more information, please see [Instance Models](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1)
-Note: This field may return null, indicating that no valid value was found.
+         * Cloud disk type. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
          * @type {string || null}
          */
-        this.InstanceFamily = null;
+        this.DiskUsage = null;
+
+        /**
+         * The minimum configurable cloud disk size (in GB).
+         * @type {number || null}
+         */
+        this.MinDiskSize = null;
+
+        /**
+         * The maximum configurable cloud disk size (in GB).
+         * @type {number || null}
+         */
+        this.MaxDiskSize = null;
 
     }
 
@@ -1167,14 +1181,16 @@ Note: This field may return null, indicating that no valid value was found.
             return;
         }
         this.Available = 'Available' in params ? params.Available : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
         this.DiskChargeType = 'DiskChargeType' in params ? params.DiskChargeType : null;
-        this.MaxDiskSize = 'MaxDiskSize' in params ? params.MaxDiskSize : null;
-        this.MinDiskSize = 'MinDiskSize' in params ? params.MinDiskSize : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
-        this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
         this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.StepSize = 'StepSize' in params ? params.StepSize : null;
+        this.ExtraPerformanceRange = 'ExtraPerformanceRange' in params ? params.ExtraPerformanceRange : null;
+        this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.MinDiskSize = 'MinDiskSize' in params ? params.MinDiskSize : null;
+        this.MaxDiskSize = 'MaxDiskSize' in params ? params.MaxDiskSize : null;
 
     }
 }
@@ -2154,82 +2170,10 @@ class Snapshot extends  AbstractModel {
         super();
 
         /**
-         * Snapshot ID.
-         * @type {string || null}
-         */
-        this.SnapshotId = null;
-
-        /**
          * Location of the snapshot.
          * @type {Placement || null}
          */
         this.Placement = null;
-
-        /**
-         * The type of the cloud disk used to create the snapshot. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
-         * @type {string || null}
-         */
-        this.DiskUsage = null;
-
-        /**
-         * ID of the cloud disk used to create this snapshot.
-         * @type {string || null}
-         */
-        this.DiskId = null;
-
-        /**
-         * Size of the cloud disk used to create this snapshot (in GB).
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * Snapshot status. Valid values: <br><li>NORMAL: normal <br><li>CREATING: creating<br><li>ROLLBACKING: rolling back<br><li>COPYING_FROM_REMOTE: cross-region replicating<li>CHECKING_COPIED: verifying the cross-region replicated data<br><li>TORECYCLE: to be repossessed.
-         * @type {string || null}
-         */
-        this.SnapshotState = null;
-
-        /**
-         * Snapshot name, the user-defined snapshot alias. Call [ModifySnapshotAttribute](https://intl.cloud.tencent.com/document/product/362/15650?from_cn_redirect=1) to modify this field.
-         * @type {string || null}
-         */
-        this.SnapshotName = null;
-
-        /**
-         * The progress percentage for snapshot creation. This field is always 100 after the snapshot is created successfully.
-         * @type {number || null}
-         */
-        this.Percent = null;
-
-        /**
-         * Creation time of the snapshot.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * The expiration time of the snapshot. If the snapshot is permanently retained, this field is blank.
-         * @type {string || null}
-         */
-        this.DeadlineTime = null;
-
-        /**
-         * Whether the snapshot is created from an encrypted disk. Value range: <br><li>true: Yes <br><li>false: No.
-         * @type {boolean || null}
-         */
-        this.Encrypt = null;
-
-        /**
-         * Whether it is a permanent snapshot. Value range: <br><li>true: Permanent snapshot <br><li>false: Non-permanent snapshot.
-         * @type {boolean || null}
-         */
-        this.IsPermanent = null;
-
-        /**
-         * The destination region to which the snapshot is being replicated. Default value is [ ].
-         * @type {Array.<string> || null}
-         */
-        this.CopyingToRegions = null;
 
         /**
          * Whether the snapshot is replicated across regions. Value range: <br><li>true: Indicates that the snapshot is replicated across regions. <br><li>false: Indicates that the snapshot belongs to the local region.
@@ -2238,22 +2182,40 @@ class Snapshot extends  AbstractModel {
         this.CopyFromRemote = null;
 
         /**
+         * Snapshot status. Valid values: <br><li>NORMAL: normal <br><li>CREATING: creating<br><li>ROLLBACKING: rolling back<br><li>COPYING_FROM_REMOTE: cross-region replicating<li>CHECKING_COPIED: verifying the cross-region replicated data<br><li>TORECYCLE: to be repossessed.
+         * @type {string || null}
+         */
+        this.SnapshotState = null;
+
+        /**
+         * Whether it is a permanent snapshot. Value range: <br><li>true: Permanent snapshot <br><li>false: Non-permanent snapshot.
+         * @type {boolean || null}
+         */
+        this.IsPermanent = null;
+
+        /**
+         * Snapshot name, the user-defined snapshot alias. Call [ModifySnapshotAttribute](https://intl.cloud.tencent.com/document/product/362/15650?from_cn_redirect=1) to modify this field.
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * The expiration time of the snapshot. If the snapshot is permanently retained, this field is blank.
+         * @type {string || null}
+         */
+        this.DeadlineTime = null;
+
+        /**
+         * The progress percentage for snapshot creation. This field is always 100 after the snapshot is created successfully.
+         * @type {number || null}
+         */
+        this.Percent = null;
+
+        /**
          * List of images associated with snapshot.
          * @type {Array.<Image> || null}
          */
         this.Images = null;
-
-        /**
-         * Number of images associated with snapshot.
-         * @type {number || null}
-         */
-        this.ImageCount = null;
-
-        /**
-         * Snapshot type. This value can currently be either PRIVATE_SNAPSHOT or SHARED_SNAPSHOT.
-         * @type {string || null}
-         */
-        this.SnapshotType = null;
 
         /**
          * Number of snapshots currently shared
@@ -2262,10 +2224,70 @@ class Snapshot extends  AbstractModel {
         this.ShareReference = null;
 
         /**
+         * Snapshot type. This value can currently be either PRIVATE_SNAPSHOT or SHARED_SNAPSHOT.
+         * @type {string || null}
+         */
+        this.SnapshotType = null;
+
+        /**
+         * Size of the cloud disk used to create this snapshot (in GB).
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * ID of the cloud disk used to create this snapshot.
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * The destination region to which the snapshot is being replicated. Default value is [ ].
+         * @type {Array.<string> || null}
+         */
+        this.CopyingToRegions = null;
+
+        /**
+         * Whether the snapshot is created from an encrypted disk. Value range: <br><li>true: Yes <br><li>false: No.
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
+        /**
+         * Creation time of the snapshot.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Number of images associated with snapshot.
+         * @type {number || null}
+         */
+        this.ImageCount = null;
+
+        /**
+         * The type of the cloud disk used to create the snapshot. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
+         * @type {string || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * Snapshot ID.
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
          * The time when the snapshot sharing starts
          * @type {string || null}
          */
         this.TimeStartShare = null;
+
+        /**
+         * List of tags associated with the snapshot.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -2276,25 +2298,18 @@ class Snapshot extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
 
         if (params.Placement) {
             let obj = new Placement();
             obj.deserialize(params.Placement)
             this.Placement = obj;
         }
-        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
-        this.DiskId = 'DiskId' in params ? params.DiskId : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.SnapshotState = 'SnapshotState' in params ? params.SnapshotState : null;
-        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
-        this.Percent = 'Percent' in params ? params.Percent : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
-        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
-        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
-        this.CopyingToRegions = 'CopyingToRegions' in params ? params.CopyingToRegions : null;
         this.CopyFromRemote = 'CopyFromRemote' in params ? params.CopyFromRemote : null;
+        this.SnapshotState = 'SnapshotState' in params ? params.SnapshotState : null;
+        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
 
         if (params.Images) {
             this.Images = new Array();
@@ -2304,10 +2319,26 @@ class Snapshot extends  AbstractModel {
                 this.Images.push(obj);
             }
         }
-        this.ImageCount = 'ImageCount' in params ? params.ImageCount : null;
-        this.SnapshotType = 'SnapshotType' in params ? params.SnapshotType : null;
         this.ShareReference = 'ShareReference' in params ? params.ShareReference : null;
+        this.SnapshotType = 'SnapshotType' in params ? params.SnapshotType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.CopyingToRegions = 'CopyingToRegions' in params ? params.CopyingToRegions : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ImageCount = 'ImageCount' in params ? params.ImageCount : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.TimeStartShare = 'TimeStartShare' in params ? params.TimeStartShare : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2430,22 +2461,10 @@ class AutoSnapshotPolicy extends  AbstractModel {
         super();
 
         /**
-         * Scheduled snapshot policy ID.
-         * @type {string || null}
+         * The list of cloud disk IDs that the current scheduled snapshot policy is bound to.
+         * @type {Array.<string> || null}
          */
-        this.AutoSnapshotPolicyId = null;
-
-        /**
-         * Scheduled snapshot policy name.
-         * @type {string || null}
-         */
-        this.AutoSnapshotPolicyName = null;
-
-        /**
-         * Scheduled snapshot policy state. Value range:<br><li>NORMAL: Normal<br><li>ISOLATED: Isolated.
-         * @type {string || null}
-         */
-        this.AutoSnapshotPolicyState = null;
+        this.DiskIdSet = null;
 
         /**
          * Whether scheduled snapshot policy is activated.
@@ -2454,22 +2473,23 @@ class AutoSnapshotPolicy extends  AbstractModel {
         this.IsActivated = null;
 
         /**
+         * Scheduled snapshot policy state. Value range:<br><li>NORMAL: Normal<br><li>ISOLATED: Isolated.
+         * @type {string || null}
+         */
+        this.AutoSnapshotPolicyState = null;
+
+        /**
+         * Whether it is to replicate a snapshot across accounts. `1`: yes, `0`: no.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsCopyToRemote = null;
+
+        /**
          * Whether the snapshot created by this scheduled snapshot policy is retained permanently.
          * @type {boolean || null}
          */
         this.IsPermanent = null;
-
-        /**
-         * Number of days the snapshot created by this scheduled snapshot policy is retained.
-         * @type {number || null}
-         */
-        this.RetentionDays = null;
-
-        /**
-         * The time the scheduled snapshot policy was created.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
 
         /**
          * The time the scheduled snapshot will be triggered again.
@@ -2478,16 +2498,48 @@ class AutoSnapshotPolicy extends  AbstractModel {
         this.NextTriggerTime = null;
 
         /**
+         * Scheduled snapshot policy name.
+         * @type {string || null}
+         */
+        this.AutoSnapshotPolicyName = null;
+
+        /**
+         * Scheduled snapshot policy ID.
+         * @type {string || null}
+         */
+        this.AutoSnapshotPolicyId = null;
+
+        /**
          * The policy for executing the scheduled snapshot.
          * @type {Array.<Policy> || null}
          */
         this.Policy = null;
 
         /**
-         * The list of cloud disk IDs that the current scheduled snapshot policy is bound to.
+         * The time the scheduled snapshot policy was created.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Number of days the snapshot created by this scheduled snapshot policy is retained.
+         * @type {number || null}
+         */
+        this.RetentionDays = null;
+
+        /**
+         * ID of the replication target account
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CopyToAccountUin = null;
+
+        /**
+         * List of IDs of the instances associated with the scheduled snapshot policy.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
-        this.DiskIdSet = null;
+        this.InstanceIdSet = null;
 
     }
 
@@ -2498,14 +2550,14 @@ class AutoSnapshotPolicy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AutoSnapshotPolicyId = 'AutoSnapshotPolicyId' in params ? params.AutoSnapshotPolicyId : null;
-        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
-        this.AutoSnapshotPolicyState = 'AutoSnapshotPolicyState' in params ? params.AutoSnapshotPolicyState : null;
+        this.DiskIdSet = 'DiskIdSet' in params ? params.DiskIdSet : null;
         this.IsActivated = 'IsActivated' in params ? params.IsActivated : null;
+        this.AutoSnapshotPolicyState = 'AutoSnapshotPolicyState' in params ? params.AutoSnapshotPolicyState : null;
+        this.IsCopyToRemote = 'IsCopyToRemote' in params ? params.IsCopyToRemote : null;
         this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
-        this.RetentionDays = 'RetentionDays' in params ? params.RetentionDays : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.NextTriggerTime = 'NextTriggerTime' in params ? params.NextTriggerTime : null;
+        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
+        this.AutoSnapshotPolicyId = 'AutoSnapshotPolicyId' in params ? params.AutoSnapshotPolicyId : null;
 
         if (params.Policy) {
             this.Policy = new Array();
@@ -2515,7 +2567,10 @@ class AutoSnapshotPolicy extends  AbstractModel {
                 this.Policy.push(obj);
             }
         }
-        this.DiskIdSet = 'DiskIdSet' in params ? params.DiskIdSet : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RetentionDays = 'RetentionDays' in params ? params.RetentionDays : null;
+        this.CopyToAccountUin = 'CopyToAccountUin' in params ? params.CopyToAccountUin : null;
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
 
     }
 }
@@ -3735,7 +3790,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.RenewFlag = null;
 
         /**
-         * Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
+         * Cloud disk types. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium Cloud Disk <br><li>CLOUD_BSSD: General Purpose SSD <br><li>CLOUD_SSD: SSD <br><li>CLOUD_HSSD: Enhanced SSD <br><li>CLOUD_TSSD: Tremendous SSD
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3949,6 +4004,18 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.DeleteSnapshot = null;
 
+        /**
+         * Number of used cloud disk backups.
+         * @type {number || null}
+         */
+        this.DiskBackupCount = null;
+
+        /**
+         * Type of the instance mounted to the cloud disk. Valid values: <br><li>CVM<br><li>EKS
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
     }
 
     /**
@@ -4007,6 +4074,8 @@ Note: This field may return null, indicating that no valid value was found.
         this.Shareable = 'Shareable' in params ? params.Shareable : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.DeleteSnapshot = 'DeleteSnapshot' in params ? params.DeleteSnapshot : null;
+        this.DiskBackupCount = 'DiskBackupCount' in params ? params.DiskBackupCount : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -4026,18 +4095,6 @@ class ModifyAutoSnapshotPolicyAttributeRequest extends  AbstractModel {
         this.AutoSnapshotPolicyId = null;
 
         /**
-         * The policy for executing the scheduled snapshot.
-         * @type {Array.<Policy> || null}
-         */
-        this.Policy = null;
-
-        /**
-         * The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
-         * @type {string || null}
-         */
-        this.AutoSnapshotPolicyName = null;
-
-        /**
          * Whether or not the scheduled snapshot policy is activated. FALSE: Not activated. TRUE: Activated. The default value is TRUE.
          * @type {boolean || null}
          */
@@ -4050,7 +4107,19 @@ class ModifyAutoSnapshotPolicyAttributeRequest extends  AbstractModel {
         this.IsPermanent = null;
 
         /**
-         * The number of days for which snapshots created by this policy are retained. This parameter cannot clash with `IsPermanent`, which is, if the scheduled snapshot policy is configured to retain permanently, `RetentionDays` must be 0.
+         * The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
+         * @type {string || null}
+         */
+        this.AutoSnapshotPolicyName = null;
+
+        /**
+         * The policy for executing the scheduled snapshot.
+         * @type {Array.<Policy> || null}
+         */
+        this.Policy = null;
+
+        /**
+         * Number of days to retain the snapshots created according to this scheduled snapshot policy. If this parameter is specified, `IsPermanent` cannot be specified as `TRUE`; otherwise, they will conflict with each other.
          * @type {number || null}
          */
         this.RetentionDays = null;
@@ -4065,6 +4134,9 @@ class ModifyAutoSnapshotPolicyAttributeRequest extends  AbstractModel {
             return;
         }
         this.AutoSnapshotPolicyId = 'AutoSnapshotPolicyId' in params ? params.AutoSnapshotPolicyId : null;
+        this.IsActivated = 'IsActivated' in params ? params.IsActivated : null;
+        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
+        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
 
         if (params.Policy) {
             this.Policy = new Array();
@@ -4074,9 +4146,6 @@ class ModifyAutoSnapshotPolicyAttributeRequest extends  AbstractModel {
                 this.Policy.push(obj);
             }
         }
-        this.AutoSnapshotPolicyName = 'AutoSnapshotPolicyName' in params ? params.AutoSnapshotPolicyName : null;
-        this.IsActivated = 'IsActivated' in params ? params.IsActivated : null;
-        this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
         this.RetentionDays = 'RetentionDays' in params ? params.RetentionDays : null;
 
     }

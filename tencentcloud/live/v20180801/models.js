@@ -947,7 +947,11 @@ You can specify only one backup source URL.
         this.BackupSourceUrl = null;
 
         /**
-         * 
+         * The information of watermarks to add.
+Notes:
+1. You can add up to four watermarks to different locations of the video.
+2. Make sure you use publicly accessible URLs for the watermark images.
+3. Supported image formats include PNG, JPG, and GIF.
          * @type {Array.<PullPushWatermarkInfo> || null}
          */
         this.WatermarkList = null;
@@ -5401,8 +5405,7 @@ class DescribeLiveWatermarkRulesRequest extends  AbstractModel {
 }
 
 /**
- * Watermark information
-
+ * The watermark configuration for a relay task.
  * @class
  */
 class PullPushWatermarkInfo extends  AbstractModel {
@@ -5410,58 +5413,46 @@ class PullPushWatermarkInfo extends  AbstractModel {
         super();
 
         /**
-         * Watermark ID.
-         * @type {number || null}
-         */
-        this.WatermarkId = null;
-
-        /**
-         * Watermark image URL.
+         * The watermark image URL.
+Characters not allowed:
+;(){}$>`#"'|
          * @type {string || null}
          */
         this.PictureUrl = null;
 
         /**
-         * Display position: X-axis offset.
+         * The horizontal offset (%) of the watermark. The default value is 0.
          * @type {number || null}
          */
         this.XPosition = null;
 
         /**
-         * Display position: Y-axis offset.
+         * The vertical offset (%) of the watermark. The default value is 0.
          * @type {number || null}
          */
         this.YPosition = null;
 
         /**
-         * Watermark name.
-         * @type {string || null}
-         */
-        this.WatermarkName = null;
-
-        /**
-         * Current status. 0: not used. 1: in use.
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Creation time.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Watermark width
+         * The watermark width as a percentage of the video width. To avoid distorted images, we recommend you specify only the width or height so that the other side can be scaled proportionally. By default, the original width of the watermark image is used.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * Watermark height
+         * The watermark height as a percentage of the video height. To avoid distorted images, we recommend you specify only the width or height so that the other side can be scaled proportionally. By default, the original height of the watermark image is used.
          * @type {number || null}
          */
         this.Height = null;
+
+        /**
+         * The origin. The default value is 0.
+0: Top left corner
+1: Top right corner
+2: Bottom right corner
+3: Bottom left corner
+         * @type {number || null}
+         */
+        this.Location = null;
 
     }
 
@@ -5472,15 +5463,12 @@ class PullPushWatermarkInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
         this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
         this.XPosition = 'XPosition' in params ? params.XPosition : null;
         this.YPosition = 'YPosition' in params ? params.YPosition : null;
-        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.Location = 'Location' in params ? params.Location : null;
 
     }
 }
@@ -7826,6 +7814,20 @@ You can specify only one backup source URL.
          */
         this.BackupSourceUrl = null;
 
+        /**
+         * The information of watermarks to add.
+Notes:
+1. You can add up to four watermarks to different locations of the video.
+2. Make sure you use publicly accessible URLs for the watermark images.
+3. Supported image formats include PNG and JPG.
+4. If you change the watermark configuration of a task whose source is a list of video files, the new configuration will take effect for the next file in the list.
+5. If you change the watermark configuration of a task whose source is a live stream, the new configuration will take effect immediately.
+6. If you want to stop using watermarks, pass in an empty array.
+7. Currently, animated watermarks are not supported.
+         * @type {Array.<PullPushWatermarkInfo> || null}
+         */
+        this.WatermarkList = null;
+
     }
 
     /**
@@ -7850,6 +7852,15 @@ You can specify only one backup source URL.
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.BackupSourceType = 'BackupSourceType' in params ? params.BackupSourceType : null;
         this.BackupSourceUrl = 'BackupSourceUrl' in params ? params.BackupSourceUrl : null;
+
+        if (params.WatermarkList) {
+            this.WatermarkList = new Array();
+            for (let z in params.WatermarkList) {
+                let obj = new PullPushWatermarkInfo();
+                obj.deserialize(params.WatermarkList[z]);
+                this.WatermarkList.push(obj);
+            }
+        }
 
     }
 }
@@ -12290,6 +12301,29 @@ The information includes the source URL, offset, and report time.
          */
         this.Comment = null;
 
+        /**
+         * The backup source type. Valid values:
+PullLivePushLive: Live streaming
+PullVodPushLive: Video files
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupSourceType = null;
+
+        /**
+         * The URL of the backup source.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupSourceUrl = null;
+
+        /**
+         * The information of watermarks to add.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PullPushWatermarkInfo> || null}
+         */
+        this.WatermarkList = null;
+
     }
 
     /**
@@ -12327,6 +12361,17 @@ The information includes the source URL, offset, and report time.
             this.RecentPullInfo = obj;
         }
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.BackupSourceType = 'BackupSourceType' in params ? params.BackupSourceType : null;
+        this.BackupSourceUrl = 'BackupSourceUrl' in params ? params.BackupSourceUrl : null;
+
+        if (params.WatermarkList) {
+            this.WatermarkList = new Array();
+            for (let z in params.WatermarkList) {
+                let obj = new PullPushWatermarkInfo();
+                obj.deserialize(params.WatermarkList[z]);
+                this.WatermarkList.push(obj);
+            }
+        }
 
     }
 }

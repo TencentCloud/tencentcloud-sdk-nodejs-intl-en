@@ -102,6 +102,36 @@ class QueryCustomersCreditRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Search condition type. You can only search by UIN, name, or remarks.
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * Search condition
+         * @type {string || null}
+         */
+        this.Filter = null;
+
+        /**
+         * A pagination parameter that specifies the current page number, with a value starting from 1.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * A pagination parameter that specifies the number of entries per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * A sort parameter that specifies the sort order. Valid values: `desc` (descending order), or `asc` (ascending order) based on `AssociationTime`. The value will be `desc` if left empty.
+         * @type {string || null}
+         */
+        this.Order = null;
+
     }
 
     /**
@@ -111,6 +141,11 @@ class QueryCustomersCreditRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.Filter = 'Filter' in params ? params.Filter : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -451,6 +486,12 @@ class QueryCreditAllocationHistoryData extends  AbstractModel {
          */
         this.Credit = null;
 
+        /**
+         * The allocated total credit
+         * @type {number || null}
+         */
+        this.AllocatedCredit = null;
+
     }
 
     /**
@@ -463,6 +504,7 @@ class QueryCreditAllocationHistoryData extends  AbstractModel {
         this.AllocatedTime = 'AllocatedTime' in params ? params.AllocatedTime : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
         this.Credit = 'Credit' in params ? params.Credit : null;
+        this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
 
     }
 }
@@ -474,6 +516,18 @@ class QueryCreditAllocationHistoryData extends  AbstractModel {
 class AllocateCustomerCreditResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The updated total credit
+         * @type {number || null}
+         */
+        this.TotalCredit = null;
+
+        /**
+         * The updated available credit
+         * @type {number || null}
+         */
+        this.RemainingCredit = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -490,6 +544,8 @@ class AllocateCustomerCreditResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCredit = 'TotalCredit' in params ? params.TotalCredit : null;
+        this.RemainingCredit = 'RemainingCredit' in params ? params.RemainingCredit : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -563,6 +619,24 @@ class QueryCustomersCreditData extends  AbstractModel {
          */
         this.RemainingCredit = null;
 
+        /**
+         * 0: Identity not verified; 1: Individual identity verified; 2: Enterprise identity verified.
+         * @type {number || null}
+         */
+        this.IdentifyType = null;
+
+        /**
+         * Customer remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Forced status
+         * @type {number || null}
+         */
+        this.Force = null;
+
     }
 
     /**
@@ -582,6 +656,9 @@ class QueryCustomersCreditData extends  AbstractModel {
         this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
         this.Credit = 'Credit' in params ? params.Credit : null;
         this.RemainingCredit = 'RemainingCredit' in params ? params.RemainingCredit : null;
+        this.IdentifyType = 'IdentifyType' in params ? params.IdentifyType : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }

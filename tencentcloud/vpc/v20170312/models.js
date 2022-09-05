@@ -7651,6 +7651,40 @@ class VpnConnection extends  AbstractModel {
          */
         this.HealthCheckStatus = null;
 
+        /**
+         * Whether to enable DPD. Values: `0` (Disable) and `1` (Enable)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DpdEnable = null;
+
+        /**
+         * DPD timeout period. 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DpdTimeout = null;
+
+        /**
+         * The action to take in case of DPD timeout. Values: `clear` (Disconnect) and `restart` (retry). This parameter only takes effect when `DpdEnable` is set to `1`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DpdAction = null;
+
+        /**
+         * Array of tag key-value pairs
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * Negotiation type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NegotiationType = null;
+
     }
 
     /**
@@ -7697,6 +7731,19 @@ class VpnConnection extends  AbstractModel {
         this.HealthCheckLocalIp = 'HealthCheckLocalIp' in params ? params.HealthCheckLocalIp : null;
         this.HealthCheckRemoteIp = 'HealthCheckRemoteIp' in params ? params.HealthCheckRemoteIp : null;
         this.HealthCheckStatus = 'HealthCheckStatus' in params ? params.HealthCheckStatus : null;
+        this.DpdEnable = 'DpdEnable' in params ? params.DpdEnable : null;
+        this.DpdTimeout = 'DpdTimeout' in params ? params.DpdTimeout : null;
+        this.DpdAction = 'DpdAction' in params ? params.DpdAction : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
+        this.NegotiationType = 'NegotiationType' in params ? params.NegotiationType : null;
 
     }
 }

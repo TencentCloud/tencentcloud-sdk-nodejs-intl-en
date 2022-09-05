@@ -59,7 +59,7 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         this.LaunchConfigurationId = null;
 
         /**
-         * Valid [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-8toqc6s3`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the image IDs; for `marketplace images`, query the image IDs through [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>This value can be obtained from the `ImageId` field in the return value of the [DescribeImages API](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1).</li>
+         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
          * @type {string || null}
          */
         this.ImageId = null;
@@ -184,6 +184,13 @@ This field requires passing in the `InstanceName` field. Other fields that are n
          */
         this.CamRoleName = null;
 
+        /**
+         * HPC ID<br>
+Note: This field is default to empty
+         * @type {string || null}
+         */
+        this.HpcClusterId = null;
+
     }
 
     /**
@@ -254,6 +261,7 @@ This field requires passing in the `InstanceName` field. Other fields that are n
             this.EnhancedService = obj;
         }
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
 
     }
 }
@@ -924,7 +932,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DiskTypePolicy = null;
 
         /**
-         * 
+         * HPC ID<br>
+Note: This field is default to empty
          * @type {string || null}
          */
         this.HpcClusterId = null;
@@ -2630,7 +2639,8 @@ If this field is configured in a launch configuration, the `InstanceName` of a C
         this.DiskTypePolicy = null;
 
         /**
-         * 
+         * HPC ID<br>
+Note: This field is default to empty
          * @type {string || null}
          */
         this.HpcClusterId = null;

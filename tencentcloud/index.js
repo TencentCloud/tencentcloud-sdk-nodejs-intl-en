@@ -6,6 +6,7 @@ module.exports = {
     batch: require("./batch"),
     billing: require("./billing"),
     cam: require("./cam"),
+    car: require("./car"),
     cbs: require("./cbs"),
     cdb: require("./cdb"),
     cdn: require("./cdn"),

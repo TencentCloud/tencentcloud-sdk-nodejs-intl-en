@@ -1247,6 +1247,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.SubLabel = null;
 
+        /**
+         * This field returns the suggested action according to the check result. <br>Values: `Block`, `Review`, `Pass`.
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
     }
 
     /**
@@ -1262,6 +1268,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.SubLabelCode = 'SubLabelCode' in params ? params.SubLabelCode : null;
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
 
     }
 }

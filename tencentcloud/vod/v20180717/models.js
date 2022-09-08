@@ -6664,6 +6664,118 @@ class PornAsrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * The suspicious segment detected.
+ * @class
+ */
+class ReviewAudioVideoSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The start time offset (seconds) of the segment.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * The end time offset (seconds) of the segment.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * The confidence score of the segment.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The processing suggestion for the segment. Valid values:
+<li>review: The content may be non-compliant. Please review it.</li>
+<li>block: The content is non-compliant. We recommend you block it.</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The most likely label for the segment. Valid values:
+<li>Porn</li>
+<li>Terrorism</li>
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * The sublabel for the segment. This parameter is valid only if `Form` is `Image` or `Voice`.
+Valid values when `Form` is `Image` and `Label` is `Porn`:
+<li>porn</li>
+<li>vulgar</li>
+
+Valid values when `Form` is `Image` and `Label` is `Terrorism`:
+<li>guns</li>
+<li>bloody</li>
+<li>banners</li>
+<li>scenario (terrorist scenes)</li>
+<li>explosion</li>
+
+Valid values when `Form` is `Voice` and `Label` is `Porn`:
+<li>moan</li>
+         * @type {string || null}
+         */
+        this.SubLabel = null;
+
+        /**
+         * The format of the suspicious segment detected. Valid values:
+<li>Image</li>
+<li>OCR</li>
+<li>ASR</li>
+<li>Voice</li>
+         * @type {string || null}
+         */
+        this.Form = null;
+
+        /**
+         * The pixel coordinates ([x1, y1, x2, y2]) of the top-left corner and bottom-right corner of the suspicious text. This parameter is valid only if `Form` is `OCR`.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+        /**
+         * The content of the suspicious text detected. This parameter is valid only if `Form` is `OCR` or `ASR`.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * The keywords that match the suspicious text. This parameter is valid only if `Form` is `OCR` or `ASR`.
+         * @type {Array.<string> || null}
+         */
+        this.KeywordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Form = 'Form' in params ? params.Form : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
+
+    }
+}
+
+/**
  * Result information of animated image generating in VOD file
  * @class
  */
@@ -11512,6 +11624,87 @@ class SearchMediaResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The output of a moderation task.
+ * @class
+ */
+class ReviewAudioVideoTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The handling suggestion. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The most likely label for the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
+<li>Porn</li>
+<li>Terrorism</li>
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * The most likely format of the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
+<li>Image</li>
+<li>OCR</li>
+<li>ASR</li>
+<li>Voice</li>
+         * @type {string || null}
+         */
+        this.Form = null;
+
+        /**
+         * A list of the suspicious segments detected.
+<font color=red>Note</font>: Only the first 10 results will be returned at most. You can get all the results from the file specified by `SegmentSetFileUrl`.
+         * @type {Array.<ReviewAudioVideoSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+        /**
+         * The URL of the file that contains suspicious segments. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time (`SegmentSetFileUrlExpireTime`).
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * The expiration time of the file that contains suspicious segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Form = 'Form' in params ? params.Form : null;
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new ReviewAudioVideoSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -20752,8 +20945,9 @@ class EventContent extends  AbstractModel {
 <li>EditMediaComplete: Finished video editing.</li>
 <li>SplitMediaComplete: Finished video splitting.</li>
 <li>WechatPublishComplete: Published to WeChat.</li>
-<li>ComposeMediaComplete: Finished composition.</li>
+<li>ComposeMediaComplete: Finished producing the media file.</li>
 <li>FastClipMediaComplete: Finished quick clipping.</li>
+<li>ReviewAudioVideoComplete: Finished moderation</li>
 <b>v2017 task types:</b>
 <li>TranscodeComplete: Finished video transcoding.</li>
 <li>ConcatComplete: Finished video splicing.</li>
@@ -20876,6 +21070,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.RestoreMediaCompleteEvent = null;
 
+        /**
+         * The callback for the completion of the moderation task. This parameter is valid only if `EventType` is `ReviewAudioVideoComplete`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReviewAudioVideoTask || null}
+         */
+        this.ReviewAudioVideoCompleteEvent = null;
+
     }
 
     /**
@@ -20982,6 +21183,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             let obj = new RestoreMediaTask();
             obj.deserialize(params.RestoreMediaCompleteEvent)
             this.RestoreMediaCompleteEvent = obj;
+        }
+
+        if (params.ReviewAudioVideoCompleteEvent) {
+            let obj = new ReviewAudioVideoTask();
+            obj.deserialize(params.ReviewAudioVideoCompleteEvent)
+            this.ReviewAudioVideoCompleteEvent = obj;
         }
 
     }
@@ -23846,11 +24053,12 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 <li>Procedure: Video processing</li>
 <li>EditMedia: Video editing</li>
 <li>SplitMedia: Video splitting</li>
-<li>ComposeMedia: Media file producing</li>
+<li>ComposeMedia: Media file production</li>
 <li>WechatPublish: WeChat publishing</li>
 <li>PullUpload: Pulling media files for upload</li>
 <li>FastClipMedia: Quick clipping</li>
 <li>RemoveWatermarkTask: Watermark removal</li>
+<li> ReviewAudioVideo: Moderation</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -23974,6 +24182,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RemoveWatermarkTask = null;
 
         /**
+         * The information of a moderation task. This parameter is valid only if `TaskType` is `ReviewAudioVideo`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReviewAudioVideoTask || null}
+         */
+        this.ReviewAudioVideoTask = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -24070,6 +24285,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new RemoveWatermarkTask();
             obj.deserialize(params.RemoveWatermarkTask)
             this.RemoveWatermarkTask = obj;
+        }
+
+        if (params.ReviewAudioVideoTask) {
+            let obj = new ReviewAudioVideoTask();
+            obj.deserialize(params.ReviewAudioVideoTask)
+            this.ReviewAudioVideoTask = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -25445,6 +25666,84 @@ Task types compatible with v2017:
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+    }
+}
+
+/**
+ * The information of a moderation task.
+ * @class
+ */
+class ReviewAudioVideoTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The task status. Valid values:
+<li>PROCESSING</li>
+<li>FINISH</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; other values indicate that the task failed. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The output of a moderation task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReviewAudioVideoTaskOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Output) {
+            let obj = new ReviewAudioVideoTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
@@ -32164,6 +32463,7 @@ module.exports = {
     DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     TraceWatermarkInput: TraceWatermarkInput,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
+    ReviewAudioVideoSegmentItem: ReviewAudioVideoSegmentItem,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
     CdnLogInfo: CdnLogInfo,
@@ -32253,6 +32553,7 @@ module.exports = {
     AiRecognitionTaskObjectResult: AiRecognitionTaskObjectResult,
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     SearchMediaResponse: SearchMediaResponse,
+    ReviewAudioVideoTaskOutput: ReviewAudioVideoTaskOutput,
     RemoveWaterMarkTaskOutput: RemoveWaterMarkTaskOutput,
     ModifyMediaStorageClassRequest: ModifyMediaStorageClassRequest,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
@@ -32489,6 +32790,7 @@ module.exports = {
     ProcedureTask: ProcedureTask,
     ModifySuperPlayerConfigRequest: ModifySuperPlayerConfigRequest,
     TaskSimpleInfo: TaskSimpleInfo,
+    ReviewAudioVideoTask: ReviewAudioVideoTask,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
     MediaVideoStreamItem: MediaVideoStreamItem,
     SetDrmKeyProviderInfoRequest: SetDrmKeyProviderInfoRequest,

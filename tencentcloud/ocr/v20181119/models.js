@@ -817,7 +817,7 @@ class MLIDPassportOCRResponse extends  AbstractModel {
         this.IssuingCountry = null;
 
         /**
-         * Nationality
+         * Country/region code
          * @type {string || null}
          */
         this.Nationality = null;

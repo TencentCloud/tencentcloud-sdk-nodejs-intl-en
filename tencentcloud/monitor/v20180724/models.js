@@ -3290,6 +3290,12 @@ class CreateSSOAccountResponse extends  AbstractModel {
         super();
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3304,6 +3310,7 @@ class CreateSSOAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.UserId = 'UserId' in params ? params.UserId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4552,7 +4559,7 @@ class UpdateGrafanaNotificationChannelRequest extends  AbstractModel {
         this.ChannelId = null;
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4575,6 +4582,12 @@ class UpdateGrafanaNotificationChannelRequest extends  AbstractModel {
          */
         this.ExtraOrgIds = null;
 
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.OrganizationIds = null;
+
     }
 
     /**
@@ -4589,6 +4602,7 @@ class UpdateGrafanaNotificationChannelRequest extends  AbstractModel {
         this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
         this.Receivers = 'Receivers' in params ? params.Receivers : null;
         this.ExtraOrgIds = 'ExtraOrgIds' in params ? params.ExtraOrgIds : null;
+        this.OrganizationIds = 'OrganizationIds' in params ? params.OrganizationIds : null;
 
     }
 }
@@ -5010,7 +5024,7 @@ class DescribeGrafanaEnvironmentsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5985,7 +5999,7 @@ class DescribeGrafanaNotificationChannelsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6164,6 +6178,12 @@ class InstallPluginsResponse extends  AbstractModel {
         super();
 
         /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.PluginIds = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -6178,6 +6198,7 @@ class InstallPluginsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.PluginIds = 'PluginIds' in params ? params.PluginIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6475,7 +6496,7 @@ class CreateGrafanaIntegrationRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7104,7 +7125,7 @@ class CreateGrafanaNotificationChannelRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -7133,6 +7154,12 @@ class CreateGrafanaNotificationChannelRequest extends  AbstractModel {
          */
         this.ExtraOrgIds = null;
 
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.OrganizationIds = null;
+
     }
 
     /**
@@ -7147,6 +7174,7 @@ class CreateGrafanaNotificationChannelRequest extends  AbstractModel {
         this.OrgId = 'OrgId' in params ? params.OrgId : null;
         this.Receivers = 'Receivers' in params ? params.Receivers : null;
         this.ExtraOrgIds = 'ExtraOrgIds' in params ? params.ExtraOrgIds : null;
+        this.OrganizationIds = 'OrganizationIds' in params ? params.OrganizationIds : null;
 
     }
 }
@@ -7711,7 +7739,7 @@ class UpgradeGrafanaInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8017,6 +8045,12 @@ class CreateGrafanaIntegrationResponse extends  AbstractModel {
         super();
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.IntegrationId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -8031,6 +8065,7 @@ class CreateGrafanaIntegrationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.IntegrationId = 'IntegrationId' in params ? params.IntegrationId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9578,7 +9613,7 @@ class DescribeGrafanaWhiteListRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -11741,6 +11776,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.PolicyIds = null;
 
         /**
+         * Backend AMP consumer ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AMPConsumerId = null;
+
+        /**
          * Channel to push alarm notifications to CLS.
 Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<CLSNotice> || null}
@@ -11782,6 +11824,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.IsPreset = 'IsPreset' in params ? params.IsPreset : null;
         this.NoticeLanguage = 'NoticeLanguage' in params ? params.NoticeLanguage : null;
         this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
+        this.AMPConsumerId = 'AMPConsumerId' in params ? params.AMPConsumerId : null;
 
         if (params.CLSNotices) {
             this.CLSNotices = new Array();
@@ -12367,7 +12410,7 @@ class UpdateDNSConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -12541,7 +12584,7 @@ class UpdateGrafanaConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * None
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -12576,7 +12619,7 @@ class UpdateGrafanaEnvironmentsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -12611,7 +12654,7 @@ class DescribeGrafanaIntegrationsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -13211,7 +13254,7 @@ class DescribePolicyGroupInfoReceiverInfo extends  AbstractModel {
         this.ReceiverUserList = null;
 
         /**
-         * Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates '10:0:0'.
+         * Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates “10:0:0”.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -14013,7 +14056,7 @@ class DescribeGrafanaConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * None
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -14548,6 +14591,12 @@ class CreateGrafanaNotificationChannelResponse extends  AbstractModel {
         super();
 
         /**
+         * 
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -14562,6 +14611,7 @@ class CreateGrafanaNotificationChannelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -14766,7 +14816,7 @@ class CleanGrafanaInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -15312,7 +15362,7 @@ class ReceiverInfo extends  AbstractModel {
         super();
 
         /**
-         * Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates '10:0:0'.
+         * Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates “10:0:0”.
          * @type {number || null}
          */
         this.StartTime = null;
@@ -15348,7 +15398,7 @@ class ReceiverInfo extends  AbstractModel {
         this.SendFor = null;
 
         /**
-         * Uid of the alarm call recipient.
+         * UID of the phone call alarm.
          * @type {Array.<number> || null}
          */
         this.UidList = null;
@@ -15384,13 +15434,13 @@ class ReceiverInfo extends  AbstractModel {
         this.NeedSendNotice = null;
 
         /**
-         * Recipient group list. The list of recipient group IDs that is queried by a platform API.
+         * Recipient group list. The list of recipient group IDs that is queried by API.
          * @type {Array.<number> || null}
          */
         this.ReceiverGroupList = null;
 
         /**
-         * Recipient list. The list of recipient IDs that is queried by a platform API.
+         * Recipient list. The list of recipient IDs that is queried by API.
          * @type {Array.<number> || null}
          */
         this.ReceiverUserList = null;
@@ -15976,7 +16026,7 @@ class DescribeDNSConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * Instance ID.
          * @type {string || null}
          */
         this.InstanceId = null;

@@ -4675,6 +4675,12 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
          */
         this.DynamicDiskConfig = null;
 
+        /**
+         * The size of a single message in bytes at the instance level.
+         * @type {number || null}
+         */
+        this.MaxMessageByte = null;
+
     }
 
     /**
@@ -4707,6 +4713,7 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
             obj.deserialize(params.DynamicDiskConfig)
             this.DynamicDiskConfig = obj;
         }
+        this.MaxMessageByte = 'MaxMessageByte' in params ? params.MaxMessageByte : null;
 
     }
 }

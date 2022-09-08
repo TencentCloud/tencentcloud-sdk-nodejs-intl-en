@@ -330,7 +330,7 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain a CC precise protection policy.
+     * This API is used to obtain the list of CC precise protection policies.
      * @param {DescribeCCPrecisionPlyListRequest} req
      * @param {function(string, DescribeCCPrecisionPlyListResponse):void} cb
      * @public
@@ -441,7 +441,7 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain a layer-4 access control list.
+     * This API is used to obtain the layer-4 access control list.
      * @param {DescribeCcBlackWhiteIpListRequest} req
      * @param {function(string, DescribeCcBlackWhiteIpListResponse):void} cb
      * @public

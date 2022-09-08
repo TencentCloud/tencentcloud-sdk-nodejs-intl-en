@@ -919,7 +919,7 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * IP filter
+         * Filters by IP.
          * @type {string || null}
          */
         this.FilterIp = null;
@@ -931,13 +931,13 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
         this.FilterInstanceId = null;
 
         /**
-         * Region filter. For example, `ap-guangzhou`.
+         * Filters by region. For example, `ap-guangzhou`.
          * @type {string || null}
          */
         this.FilterRegion = null;
 
         /**
-         * Name filter
+         * Filters by name.
          * @type {string || null}
          */
         this.FilterName = null;
@@ -955,10 +955,28 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
         this.FilterStatus = null;
 
         /**
-         * Filters by binding status. `bounding`: the instance is bound; `failed`: the binding failed.
+         * Filters by binding status. `bounding`: The instance is bound; `failed`: The binding failed.
          * @type {string || null}
          */
         this.FilterBoundStatus = null;
+
+        /**
+         * Array of instance IDs
+         * @type {Array.<string> || null}
+         */
+        this.FilterInstanceIdList = null;
+
+        /**
+         * Filters by Enterprise edition
+         * @type {number || null}
+         */
+        this.FilterEnterpriseFlag = null;
+
+        /**
+         * Filters by tag
+         * @type {TagFilter || null}
+         */
+        this.FilterTag = null;
 
     }
 
@@ -978,6 +996,14 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
         this.FilterLine = 'FilterLine' in params ? params.FilterLine : null;
         this.FilterStatus = 'FilterStatus' in params ? params.FilterStatus : null;
         this.FilterBoundStatus = 'FilterBoundStatus' in params ? params.FilterBoundStatus : null;
+        this.FilterInstanceIdList = 'FilterInstanceIdList' in params ? params.FilterInstanceIdList : null;
+        this.FilterEnterpriseFlag = 'FilterEnterpriseFlag' in params ? params.FilterEnterpriseFlag : null;
+
+        if (params.FilterTag) {
+            let obj = new TagFilter();
+            obj.deserialize(params.FilterTag)
+            this.FilterTag = obj;
+        }
 
     }
 }
@@ -1895,7 +1921,7 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
         this.FilterTag = null;
 
         /**
-         * 
+         * Filters by package type.
          * @type {Array.<string> || null}
          */
         this.FilterPackType = null;
@@ -2186,7 +2212,7 @@ class BoundIpInfo extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Sub-product category. Valid values: `cvm` (CVM), `lb` (Load balancer), `eni` (ENI), `vpngw` (VPN gateway), `natgw` (NAT gateway), `waf` (WAF), `fpc` (financial products), `gaap` (GAAP), `eip` (BM EIP) and `other` (hosted IP). This field is required when you perform binding.
+         * Sub-product category. Valid values: `cvm` (CVM), `lb` (Load balancer), `eni` (ENI), `vpngw` (VPN gateway), `natgw` (NAT gateway), `waf` (WAF), `fpc` (financial products), `gaap` (GAAP), `eip` (BM EIP) and `other` (managed IP). This field is required when you perform binding.
          * @type {string || null}
          */
         this.DeviceType = null;
@@ -3997,7 +4023,9 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.TagInfoList = null;
 
         /**
-         * 
+         * All-out package details of the instance
+When an all-out package is not used by the instance, this field is `null`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {AnycastOutPackRelation || null}
          */
         this.AnycastOutPackRelation = null;
@@ -5510,7 +5538,7 @@ Note: For custom protocol ranges, only protocol number is supported. Multiple ra
 }
 
 /**
- * 
+ * Details of the Anycast package
  * @class
  */
 class AnycastOutPackRelation extends  AbstractModel {
@@ -5518,25 +5546,29 @@ class AnycastOutPackRelation extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Application bandwidth (in Mbps).
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.NormalBandwidth = null;
 
         /**
-         * 
+         * Number of forwarding rules
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ForwardRulesLimit = null;
 
         /**
-         * 
+         * Auto-renewal flag
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
 
         /**
-         * 
+         * Expiration date
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CurDeadline = null;
@@ -6552,15 +6584,15 @@ class BGPInstanceSpecification extends  AbstractModel {
         this.ProtectCountLimit = null;
 
         /**
-         * Number of protection IPs
+         * Number of protected IPs
          * @type {number || null}
          */
         this.ProtectIPNumberLimit = null;
 
         /**
-         * Auto-renewal status. Valid values:
-`0`: disabled
-`1`: enabled
+         * Auto-renewal status. Values:
+`0`: Disabled
+`1`: Enabled
 ]
          * @type {number || null}
          */
@@ -6568,16 +6600,45 @@ class BGPInstanceSpecification extends  AbstractModel {
 
         /**
          * Protection type of Anti-DDoS Pro. Valid values: `0` (general protection) and `1` (Lighthouse-based protection).
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.UnionPackFlag = null;
 
         /**
-         * 
+         * Application bandwidth
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ServiceBandWidth = null;
+
+        /**
+         * Whether it’s an Anti-DDoS Pro Premium edition. Values: `0` (General edition); `1` (Premium edition).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BattleEditionFlag = null;
+
+        /**
+         * Whether it’s an Anti-DDoS Pro Standard edition. Values: `0` (General edition); `1` (Standard edition).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ChannelEditionFlag = null;
+
+        /**
+         * Whether it’s an Anti-DDoS Pro Enterprise edition. Values: `0` (General edition); `1` (Enterprise edition).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EnterpriseFlag = null;
+
+        /**
+         * Elastic bandwidth threshold of the Anti-DDoS Pro Enterprise edition.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ElasticLimit = null;
 
     }
 
@@ -6594,6 +6655,10 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.UnionPackFlag = 'UnionPackFlag' in params ? params.UnionPackFlag : null;
         this.ServiceBandWidth = 'ServiceBandWidth' in params ? params.ServiceBandWidth : null;
+        this.BattleEditionFlag = 'BattleEditionFlag' in params ? params.BattleEditionFlag : null;
+        this.ChannelEditionFlag = 'ChannelEditionFlag' in params ? params.ChannelEditionFlag : null;
+        this.EnterpriseFlag = 'EnterpriseFlag' in params ? params.EnterpriseFlag : null;
+        this.ElasticLimit = 'ElasticLimit' in params ? params.ElasticLimit : null;
 
     }
 }
@@ -8090,7 +8155,7 @@ class DescribeListBGPInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of lists
+         * Total number of Anti-DDoS Pro instances
          * @type {number || null}
          */
         this.Total = null;
@@ -8336,7 +8401,7 @@ class CreateCcBlackWhiteIpListRequest extends  AbstractModel {
 }
 
 /**
- * Anti-DDoS Pro instance details
+ * Details of the Anti-DDoS Pro instance
  * @class
  */
 class BGPInstance extends  AbstractModel {
@@ -8344,43 +8409,43 @@ class BGPInstance extends  AbstractModel {
         super();
 
         /**
-         * Anti-DDoS instance details
+         * Details of the Anti-DDoS Pro instance
          * @type {InstanceRelation || null}
          */
         this.InstanceDetail = null;
 
         /**
-         * Anti-DDoS instance specifications
+         * Specifications of the Anti-DDoS Pro instance
          * @type {BGPInstanceSpecification || null}
          */
         this.SpecificationLimit = null;
 
         /**
-         * Anti-DDoS instance usage statistics
+         * Usage statistics of the Anti-DDoS Pro instance
          * @type {BGPInstanceUsages || null}
          */
         this.Usage = null;
 
         /**
-         * Region of the Anti-DDoS instance
+         * Region of the Anti-DDoS Pro instance
          * @type {RegionInfo || null}
          */
         this.Region = null;
 
         /**
-         * Status of the Anti-DDoS instance. Valid values:
-`idle`: running
-`attacking`: under attacks
-`blocking`: blocked
-`creating`: creating
-`deblocking`: unblocked
-`isolate`: isolated
+         * Status of the Anti-DDoS Pro instance. Valid values:
+`idle`: The instance is running normally.
+`attacking`: The instance is under attack.
+`blocking`: The instance is blocked.
+`creating`: The instance is being created.
+`deblocking`: Unblocking the instance
+`isolate`: The instance is being isolated.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Purchase Time
+         * Purchase time
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -8392,14 +8457,14 @@ class BGPInstance extends  AbstractModel {
         this.ExpiredTime = null;
 
         /**
-         * Name of the Anti-DDoS instance
+         * Name of the Anti-DDoS Pro instance
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Package details of the Anti-DDoS instance.
-Note: This field is `null` for an Anti-DDoS instance without using a package.
+         * Details of the package to which the Anti-DDoS Pro instance belongs.
+When the package provided is not used by the instance, this field is `null`.
 Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {PackInfo || null}
          */
@@ -8413,9 +8478,9 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 
         /**
          * Binding status of the Anti-DDoS Pro instance
-`idle`: the instance is bound.
- `bounding`: the instance is in binding.
-`failed`: the binding failed.
+`idle`: The instance is bound.
+ `bounding`: Binding the instance.
+`failed`: Failed to bind
 ]
          * @type {string || null}
          */
@@ -8428,10 +8493,22 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.DDoSLevel = null;
 
         /**
-         * CC protection switch
+         * Status of CC protection
          * @type {number || null}
          */
         this.CCEnable = null;
+
+        /**
+         * Tags associated with the resource
+         * @type {Array.<TagInfo> || null}
+         */
+        this.TagInfoList = null;
+
+        /**
+         * New edition of Anti-DDoS Pro
+         * @type {number || null}
+         */
+        this.IpCountNewFlag = null;
 
     }
 
@@ -8488,6 +8565,16 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.BoundStatus = 'BoundStatus' in params ? params.BoundStatus : null;
         this.DDoSLevel = 'DDoSLevel' in params ? params.DDoSLevel : null;
         this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
+
+        if (params.TagInfoList) {
+            this.TagInfoList = new Array();
+            for (let z in params.TagInfoList) {
+                let obj = new TagInfo();
+                obj.deserialize(params.TagInfoList[z]);
+                this.TagInfoList.push(obj);
+            }
+        }
+        this.IpCountNewFlag = 'IpCountNewFlag' in params ? params.IpCountNewFlag : null;
 
     }
 }

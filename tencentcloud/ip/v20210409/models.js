@@ -338,13 +338,13 @@ A global mobile number within 1-32 digits is allowed, such as 18888888888.
         this.PhoneNum = null;
 
         /**
-         * Country code, which can be obtained via the `GetCountryCodes` API, such as 852.
+         * Customer’s country/region code, which can be obtained via the `GetCountryCodes` API, such as “852”.
          * @type {string || null}
          */
         this.CountryCode = null;
 
         /**
-         * ISO2 standard country code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field.
+         * Customer’s ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
          * @type {string || null}
          */
         this.Area = null;

@@ -1136,6 +1136,56 @@ class UpdateRequestTargetNodeTypesRequest extends  AbstractModel {
 }
 
 /**
+ * The maintenance time slot of the cluster
+ * @class
+ */
+class OperationDuration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Maintenance period, which can be one or more days from Monday to Sunday. Valid values: [0, 6].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.Periods = null;
+
+        /**
+         * The maintenance start time
+         * @type {string || null}
+         */
+        this.TimeStart = null;
+
+        /**
+         * The maintenance end time
+         * @type {string || null}
+         */
+        this.TimeEnd = null;
+
+        /**
+         * The time zone expressed in UTC.
+         * @type {string || null}
+         */
+        this.TimeZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Periods = 'Periods' in params ? params.Periods : null;
+        this.TimeStart = 'TimeStart' in params ? params.TimeStart : null;
+        this.TimeEnd = 'TimeEnd' in params ? params.TimeEnd : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+
+    }
+}
+
+/**
  * Node view data
  * @class
  */
@@ -1667,6 +1717,18 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
          */
         this.Protocol = null;
 
+        /**
+         * The maintenance time slot
+         * @type {OperationDuration || null}
+         */
+        this.OperationDuration = null;
+
+        /**
+         * Whether to enable the storage-computing separation feature.
+         * @type {boolean || null}
+         */
+        this.EnableHybridStorage = null;
+
     }
 
     /**
@@ -1735,6 +1797,13 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
             this.WebNodeTypeInfo = obj;
         }
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+        if (params.OperationDuration) {
+            let obj = new OperationDuration();
+            obj.deserialize(params.OperationDuration)
+            this.OperationDuration = obj;
+        }
+        this.EnableHybridStorage = 'EnableHybridStorage' in params ? params.EnableHybridStorage : null;
 
     }
 }
@@ -2264,6 +2333,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.EsConfigSets = null;
 
+        /**
+         * The maintenance time slot of the cluster
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {OperationDuration || null}
+         */
+        this.OperationDuration = null;
+
+        /**
+         * Web node list
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<OptionalWebServiceInfo> || null}
+         */
+        this.OptionalWebServiceInfos = null;
+
+        /**
+         * Autonomous index option
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.AutoIndexEnabled = null;
+
+        /**
+         * Whether the storage-computing separation feature is enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.EnableHybridStorage = null;
+
     }
 
     /**
@@ -2415,6 +2512,23 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.EsConfigSets.push(obj);
             }
         }
+
+        if (params.OperationDuration) {
+            let obj = new OperationDuration();
+            obj.deserialize(params.OperationDuration)
+            this.OperationDuration = obj;
+        }
+
+        if (params.OptionalWebServiceInfos) {
+            this.OptionalWebServiceInfos = new Array();
+            for (let z in params.OptionalWebServiceInfos) {
+                let obj = new OptionalWebServiceInfo();
+                obj.deserialize(params.OptionalWebServiceInfos[z]);
+                this.OptionalWebServiceInfos.push(obj);
+            }
+        }
+        this.AutoIndexEnabled = 'AutoIndexEnabled' in params ? params.AutoIndexEnabled : null;
+        this.EnableHybridStorage = 'EnableHybridStorage' in params ? params.EnableHybridStorage : null;
 
     }
 }
@@ -2867,6 +2981,12 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.HealthStatus = null;
 
+        /**
+         * VPC IDs
+         * @type {Array.<string> || null}
+         */
+        this.VpcIds = null;
+
     }
 
     /**
@@ -2895,6 +3015,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.IpList = 'IpList' in params ? params.IpList : null;
         this.ZoneList = 'ZoneList' in params ? params.ZoneList : null;
         this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
+        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
 
     }
 }
@@ -3333,6 +3454,12 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
          */
         this.EsConfigSet = null;
 
+        /**
+         * The maintenance time slot
+         * @type {OperationDurationUpdated || null}
+         */
+        this.OperationDuration = null;
+
     }
 
     /**
@@ -3412,6 +3539,12 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
             let obj = new EsConfigSetInfo();
             obj.deserialize(params.EsConfigSet)
             this.EsConfigSet = obj;
+        }
+
+        if (params.OperationDuration) {
+            let obj = new OperationDurationUpdated();
+            obj.deserialize(params.OperationDuration)
+            this.OperationDuration = obj;
         }
 
     }
@@ -3752,6 +3885,62 @@ class KibanaNodeInfo extends  AbstractModel {
 }
 
 /**
+ * The maintenance time slot of the cluster
+ * @class
+ */
+class OperationDurationUpdated extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Maintenance period, which can be one or more days from Monday to Sunday. Valid values: [0, 6].
+         * @type {Array.<number> || null}
+         */
+        this.Periods = null;
+
+        /**
+         * The maintenance start time
+         * @type {string || null}
+         */
+        this.TimeStart = null;
+
+        /**
+         * The maintenance end time
+         * @type {string || null}
+         */
+        this.TimeEnd = null;
+
+        /**
+         * The time zone expressed in UTC.
+         * @type {string || null}
+         */
+        this.TimeZone = null;
+
+        /**
+         * The array of ES cluster IDs
+         * @type {Array.<string> || null}
+         */
+        this.MoreInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Periods = 'Periods' in params ? params.Periods : null;
+        this.TimeStart = 'TimeStart' in params ? params.TimeStart : null;
+        this.TimeEnd = 'TimeEnd' in params ? params.TimeEnd : null;
+        this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+        this.MoreInstances = 'MoreInstances' in params ? params.MoreInstances : null;
+
+    }
+}
+
+/**
  * UpgradeLicense response structure.
  * @class
  */
@@ -3823,6 +4012,34 @@ class EsAcl extends  AbstractModel {
 }
 
 /**
+ * UpdateRequestTargetNodeTypes response structure.
+ * @class
+ */
+class UpdateRequestTargetNodeTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateIndex request structure.
  * @class
  */
@@ -3866,6 +4083,12 @@ class UpdateIndexRequest extends  AbstractModel {
          */
         this.Password = null;
 
+        /**
+         * Whether to roll over the backup index
+         * @type {boolean || null}
+         */
+        this.RolloverBackingIndex = null;
+
     }
 
     /**
@@ -3881,6 +4104,7 @@ class UpdateIndexRequest extends  AbstractModel {
         this.UpdateMetaJson = 'UpdateMetaJson' in params ? params.UpdateMetaJson : null;
         this.Username = 'Username' in params ? params.Username : null;
         this.Password = 'Password' in params ? params.Password : null;
+        this.RolloverBackingIndex = 'RolloverBackingIndex' in params ? params.RolloverBackingIndex : null;
 
     }
 }
@@ -4837,18 +5061,61 @@ class UpgradeLicenseRequest extends  AbstractModel {
 }
 
 /**
- * UpdateRequestTargetNodeTypes response structure.
+ * The information of optional web components
  * @class
  */
-class UpdateRequestTargetNodeTypesResponse extends  AbstractModel {
+class OptionalWebServiceInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Type
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Type = null;
+
+        /**
+         * Status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Public URL
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicUrl = null;
+
+        /**
+         * Private URL
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PrivateUrl = null;
+
+        /**
+         * Public network access
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PublicAccess = null;
+
+        /**
+         * Private network access
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PrivateAccess = null;
+
+        /**
+         * Version
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Version = null;
 
     }
 
@@ -4859,7 +5126,13 @@ class UpdateRequestTargetNodeTypesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PublicUrl = 'PublicUrl' in params ? params.PublicUrl : null;
+        this.PrivateUrl = 'PrivateUrl' in params ? params.PrivateUrl : null;
+        this.PublicAccess = 'PublicAccess' in params ? params.PublicAccess : null;
+        this.PrivateAccess = 'PrivateAccess' in params ? params.PrivateAccess : null;
+        this.Version = 'Version' in params ? params.Version : null;
 
     }
 }
@@ -4888,6 +5161,7 @@ module.exports = {
     UpdateDictionariesRequest: UpdateDictionariesRequest,
     ZoneDetail: ZoneDetail,
     UpdateRequestTargetNodeTypesRequest: UpdateRequestTargetNodeTypesRequest,
+    OperationDuration: OperationDuration,
     NodeView: NodeView,
     DescribeIndexListRequest: DescribeIndexListRequest,
     CosBackup: CosBackup,
@@ -4913,8 +5187,10 @@ module.exports = {
     UpdatePluginsRequest: UpdatePluginsRequest,
     GetRequestTargetNodeTypesRequest: GetRequestTargetNodeTypesRequest,
     KibanaNodeInfo: KibanaNodeInfo,
+    OperationDurationUpdated: OperationDurationUpdated,
     UpgradeLicenseResponse: UpgradeLicenseResponse,
     EsAcl: EsAcl,
+    UpdateRequestTargetNodeTypesResponse: UpdateRequestTargetNodeTypesResponse,
     UpdateIndexRequest: UpdateIndexRequest,
     MasterNodeInfo: MasterNodeInfo,
     IndexOptionsField: IndexOptionsField,
@@ -4934,6 +5210,6 @@ module.exports = {
     Operation: Operation,
     UpdateIndexResponse: UpdateIndexResponse,
     UpgradeLicenseRequest: UpgradeLicenseRequest,
-    UpdateRequestTargetNodeTypesResponse: UpdateRequestTargetNodeTypesResponse,
+    OptionalWebServiceInfo: OptionalWebServiceInfo,
 
 }

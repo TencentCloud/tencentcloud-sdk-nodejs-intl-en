@@ -39,6 +39,7 @@ const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
 const UpdateDictionariesRequest = models.UpdateDictionariesRequest;
 const ZoneDetail = models.ZoneDetail;
 const UpdateRequestTargetNodeTypesRequest = models.UpdateRequestTargetNodeTypesRequest;
+const OperationDuration = models.OperationDuration;
 const NodeView = models.NodeView;
 const DescribeIndexListRequest = models.DescribeIndexListRequest;
 const CosBackup = models.CosBackup;
@@ -64,8 +65,10 @@ const RestartNodesRequest = models.RestartNodesRequest;
 const UpdatePluginsRequest = models.UpdatePluginsRequest;
 const GetRequestTargetNodeTypesRequest = models.GetRequestTargetNodeTypesRequest;
 const KibanaNodeInfo = models.KibanaNodeInfo;
+const OperationDurationUpdated = models.OperationDurationUpdated;
 const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
 const EsAcl = models.EsAcl;
+const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
 const UpdateIndexRequest = models.UpdateIndexRequest;
 const MasterNodeInfo = models.MasterNodeInfo;
 const IndexOptionsField = models.IndexOptionsField;
@@ -85,7 +88,7 @@ const DescribeIndexListResponse = models.DescribeIndexListResponse;
 const Operation = models.Operation;
 const UpdateIndexResponse = models.UpdateIndexResponse;
 const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
-const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
+const OptionalWebServiceInfo = models.OptionalWebServiceInfo;
 
 
 /**

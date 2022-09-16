@@ -22,6 +22,7 @@ const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
 const CreateStorageRegionRequest = models.CreateStorageRegionRequest;
 const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullTextSegmentItem;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
+const ReviewAudioVideoTaskInput = models.ReviewAudioVideoTaskInput;
 const DescribeAllClassRequest = models.DescribeAllClassRequest;
 const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
 const SvgWatermarkInput = models.SvgWatermarkInput;

@@ -342,6 +342,34 @@ Up to 10 labels are allowed, each containing no more than 16 characters.
 }
 
 /**
+ * The input of a moderation task.
+ * @class
+ */
+class ReviewAudioVideoTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the media file.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+
+    }
+}
+
+/**
  * DescribeAllClass request structure.
  * @class
  */
@@ -25707,6 +25735,13 @@ class ReviewAudioVideoTask extends  AbstractModel {
         this.Message = null;
 
         /**
+         * The input of a moderation task.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {ReviewAudioVideoTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
          * The output of a moderation task.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ReviewAudioVideoTaskOutput || null}
@@ -25720,7 +25755,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SessionId = null;
 
         /**
-         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * The source context, which is used to pass through user request information. The `ReviewAudioVideoComplete` callback will return the value of this parameter. It can contain up to 1,000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
@@ -25738,6 +25773,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Status = 'Status' in params ? params.Status : null;
         this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new ReviewAudioVideoTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
 
         if (params.Output) {
             let obj = new ReviewAudioVideoTaskOutput();
@@ -32351,6 +32392,7 @@ module.exports = {
     CreateStorageRegionRequest: CreateStorageRegionRequest,
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
     UserDefineOcrTextReviewTemplateInfoForUpdate: UserDefineOcrTextReviewTemplateInfoForUpdate,
+    ReviewAudioVideoTaskInput: ReviewAudioVideoTaskInput,
     DescribeAllClassRequest: DescribeAllClassRequest,
     AiAnalysisTaskClassificationInput: AiAnalysisTaskClassificationInput,
     SvgWatermarkInput: SvgWatermarkInput,

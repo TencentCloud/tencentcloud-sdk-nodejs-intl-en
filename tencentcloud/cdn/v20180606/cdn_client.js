@@ -253,6 +253,7 @@ const Quic = models.Quic;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
 const OfflineCache = models.OfflineCache;
 const UrlRedirectRule = models.UrlRedirectRule;
+const HTTPHeader = models.HTTPHeader;
 const IpFilterPathRule = models.IpFilterPathRule;
 const ScdnAclRule = models.ScdnAclRule;
 

@@ -71,6 +71,7 @@ const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPai
 const DescribeLaunchTemplateVersionsRequest = models.DescribeLaunchTemplateVersionsRequest;
 const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstanceDisksRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
+const ReservedInstancePrice = models.ReservedInstancePrice;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const DescribeInstancesOperationLimitResponse = models.DescribeInstancesOperationLimitResponse;
 const SyncImagesResponse = models.SyncImagesResponse;
@@ -95,6 +96,7 @@ const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const DescribeImageSharePermissionResponse = models.DescribeImageSharePermissionResponse;
 const DeleteLaunchTemplateVersionsResponse = models.DeleteLaunchTemplateVersionsResponse;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
+const InquiryPriceRunInstancesRequest = models.InquiryPriceRunInstancesRequest;
 const Image = models.Image;
 const ChcDeployExtraConfig = models.ChcDeployExtraConfig;
 const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecoverGroupQuotaResponse;
@@ -158,7 +160,7 @@ const ImageOsList = models.ImageOsList;
 const ReservedInstanceTypeItem = models.ReservedInstanceTypeItem;
 const ExportImagesResponse = models.ExportImagesResponse;
 const RemoveChcDeployVpcRequest = models.RemoveChcDeployVpcRequest;
-const ReservedInstancePrice = models.ReservedInstancePrice;
+const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const ModifyChcAttributeRequest = models.ModifyChcAttributeRequest;
 const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
@@ -309,18 +311,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the attributes of key pairs.
-
-* This API modifies the name and description of the key pair identified by the key pair ID.
-* The name of the key pair must be unique.
-* Key pair ID is the unique identifier of a key pair and cannot be modified.
-     * @param {ModifyKeyPairAttributeRequest} req
-     * @param {function(string, ModifyKeyPairAttributeResponse):void} cb
+     * This API is used to query the price of creating instances. You can only use this API for instances whose configuration is within the purchase limit. For more information, see [RunInstances](https://intl.cloud.tencent.com/document/api/213/15730?from_cn_redirect=1).
+     * @param {InquiryPriceRunInstancesRequest} req
+     * @param {function(string, InquiryPriceRunInstancesResponse):void} cb
      * @public
      */
-    ModifyKeyPairAttribute(req, cb) {
-        let resp = new ModifyKeyPairAttributeResponse();
-        this.request("ModifyKeyPairAttribute", req, resp, cb);
+    InquiryPriceRunInstances(req, cb) {
+        let resp = new InquiryPriceRunInstancesResponse();
+        this.request("InquiryPriceRunInstances", req, resp, cb);
     }
 
     /**
@@ -909,6 +907,21 @@ If you currently use a password to log in, you will no longer be able to do so a
     SyncImages(req, cb) {
         let resp = new SyncImagesResponse();
         this.request("SyncImages", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the attributes of key pairs.
+
+* This API modifies the name and description of the key pair identified by the key pair ID.
+* The name of the key pair must be unique.
+* Key pair ID is the unique identifier of a key pair and cannot be modified.
+     * @param {ModifyKeyPairAttributeRequest} req
+     * @param {function(string, ModifyKeyPairAttributeResponse):void} cb
+     * @public
+     */
+    ModifyKeyPairAttribute(req, cb) {
+        let resp = new ModifyKeyPairAttributeResponse();
+        this.request("ModifyKeyPairAttribute", req, resp, cb);
     }
 
     /**

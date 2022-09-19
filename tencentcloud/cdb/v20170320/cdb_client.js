@@ -17,7 +17,6 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
-const SellType = models.SellType;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeProxyConnectionPoolConfRequest = models.DescribeProxyConnectionPoolConfRequest;
 const DeviceDiskInfo = models.DeviceDiskInfo;
@@ -42,11 +41,10 @@ const Inbound = models.Inbound;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const ApplyCDBProxyRequest = models.ApplyCDBProxyRequest;
 const CreateAccountsResponse = models.CreateAccountsResponse;
-const RegionSellConf = models.RegionSellConf;
+const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
 const SqlFileInfo = models.SqlFileInfo;
 const DescribeProxyCustomConfRequest = models.DescribeProxyCustomConfRequest;
-const SellConfig = models.SellConfig;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const ApplyCDBProxyResponse = models.ApplyCDBProxyResponse;
 const MasterInfo = models.MasterInfo;
@@ -61,8 +59,9 @@ const RoGroupAttr = models.RoGroupAttr;
 const DBSwitchInfo = models.DBSwitchInfo;
 const StartReplicationResponse = models.StartReplicationResponse;
 const ModifyNameOrDescByDpIdResponse = models.ModifyNameOrDescByDpIdResponse;
-const InitDBInstancesResponse = models.InitDBInstancesResponse;
+const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
 const CloseCDBProxyResponse = models.CloseCDBProxyResponse;
+const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
 const CustomConfig = models.CustomConfig;
 const ConnectionPoolInfo = models.ConnectionPoolInfo;
 const DescribeBackupOverviewRequest = models.DescribeBackupOverviewRequest;
@@ -71,7 +70,6 @@ const DescribeAuditPoliciesResponse = models.DescribeAuditPoliciesResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const DescribeDBInstanceGTIDResponse = models.DescribeDBInstanceGTIDResponse;
 const OpenDBInstanceGTIDResponse = models.OpenDBInstanceGTIDResponse;
-const DescribeDBZoneConfigRequest = models.DescribeDBZoneConfigRequest;
 const DescribeDBInstanceRebootTimeResponse = models.DescribeDBInstanceRebootTimeResponse;
 const SwitchDrInstanceToMasterRequest = models.SwitchDrInstanceToMasterRequest;
 const DeleteParamTemplateRequest = models.DeleteParamTemplateRequest;
@@ -94,6 +92,7 @@ const BinlogInfo = models.BinlogInfo;
 const CloneItem = models.CloneItem;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const SlaveConfig = models.SlaveConfig;
 const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
 const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ModifyCDBProxyDescResponse = models.ModifyCDBProxyDescResponse;
@@ -160,7 +159,6 @@ const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const BackupItem = models.BackupItem;
 const ModifyCDBProxyVipVPortRequest = models.ModifyCDBProxyVipVPortRequest;
 const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
-const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
 const TagInfoItem = models.TagInfoItem;
@@ -201,7 +199,7 @@ const DescribeUploadedFilesRequest = models.DescribeUploadedFilesRequest;
 const ErrlogItem = models.ErrlogItem;
 const DescribeTablesResponse = models.DescribeTablesResponse;
 const DescribeDeviceMonitorInfoRequest = models.DescribeDeviceMonitorInfoRequest;
-const InitDBInstancesRequest = models.InitDBInstancesRequest;
+const DescribeDBPriceRequest = models.DescribeDBPriceRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const QueryCDBProxyResponse = models.QueryCDBProxyResponse;
 const DescribeLocalBinlogConfigRequest = models.DescribeLocalBinlogConfigRequest;
@@ -244,13 +242,12 @@ const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const DescribeCloneListResponse = models.DescribeCloneListResponse;
 const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
-const ZoneSellConf = models.ZoneSellConf;
 const DescribeAuditRulesResponse = models.DescribeAuditRulesResponse;
 const BaseGroupInfo = models.BaseGroupInfo;
 const DescribeBinlogBackupOverviewResponse = models.DescribeBinlogBackupOverviewResponse;
 const ModifyCDBProxyConnectionPoolRequest = models.ModifyCDBProxyConnectionPoolRequest;
 const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
-const SlaveConfig = models.SlaveConfig;
+const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const CreateAccountsRequest = models.CreateAccountsRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
@@ -287,20 +284,18 @@ const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const ModifyCDBProxyResponse = models.ModifyCDBProxyResponse;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
-const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
+const InitDBInstancesResponse = models.InitDBInstancesResponse;
 const DescribeDataBackupOverviewRequest = models.DescribeDataBackupOverviewRequest;
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const RestartDBInstancesRequest = models.RestartDBInstancesRequest;
 const DescribeDBInstanceInfoRequest = models.DescribeDBInstanceInfoRequest;
 const BackupLimitVpcItem = models.BackupLimitVpcItem;
-const DescribeDBZoneConfigResponse = models.DescribeDBZoneConfigResponse;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
 const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
 const Rule = models.Rule;
-const ZoneConf = models.ZoneConf;
 const AuditFilter = models.AuditFilter;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
@@ -843,7 +838,7 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API (ModifyDBInstanceVipVport) is used to modify the IP and port number of a TencentDB instance, switch from the basic network to VPC, or change VPC subnets.
+     * This API is used to modify the IP and port number of a TencentDB instance, switch from classic network to VPC, or change VPC subnets.
      * @param {ModifyDBInstanceVipVportRequest} req
      * @param {function(string, ModifyDBInstanceVipVportResponse):void} cb
      * @public
@@ -964,7 +959,7 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API is used to create one or more TencentDB instance accounts. The account names, host addresses, and passwords are required, and account remarks and the maximum connections are optional.
+     * This API is used to create a TencentDB account. The account name, host address, and password are required. Account remarks and maximum connections can also be configured.
      * @param {CreateAccountsRequest} req
      * @param {function(string, CreateAccountsResponse):void} cb
      * @public
@@ -1173,17 +1168,6 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API (DescribeDBZoneConfig) is used to query the specifications of TencentDB instances purchasable in a region.
-     * @param {DescribeDBZoneConfigRequest} req
-     * @param {function(string, DescribeDBZoneConfigResponse):void} cb
-     * @public
-     */
-    DescribeDBZoneConfig(req, cb) {
-        let resp = new DescribeDBZoneConfigResponse();
-        this.request("DescribeDBZoneConfig", req, resp, cb);
-    }
-
-    /**
      * This API (DescribeDBInstanceRebootTime) is used to query the estimated time needed for a TencentDB instance to restart.
      * @param {DescribeDBInstanceRebootTimeRequest} req
      * @param {function(string, DescribeDBInstanceRebootTimeResponse):void} cb
@@ -1299,7 +1283,7 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API (DescribeAccounts) is used to query information of all TencentDB accounts.
+     * This API is used to query information of all TencentDB accounts.
      * @param {DescribeAccountsRequest} req
      * @param {function(string, DescribeAccountsResponse):void} cb
      * @public
@@ -1440,6 +1424,19 @@ Note: the HTTP response packet will be very large if it contain a single large s
     DescribeAuditRules(req, cb) {
         let resp = new DescribeAuditRulesResponse();
         this.request("DescribeAuditRules", req, resp, cb);
+    }
+
+    /**
+     * This API (DescribeDBPrice) is used to query the prices of pay-as-you-go or monthly subscribed TencentDB instances by passing in information such as instance type, purchased duration, number of purchased instances, memory size, disk size, and AZ.
+
+Note: To query prices in a specific region, please use the access point of the region. For more information on access points, see <a href="https://cloud.tencent.com/document/api/236/15832">Service Addresses</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
+     * @param {DescribeDBPriceRequest} req
+     * @param {function(string, DescribeDBPriceResponse):void} cb
+     * @public
+     */
+    DescribeDBPrice(req, cb) {
+        let resp = new DescribeDBPriceResponse();
+        this.request("DescribeDBPrice", req, resp, cb);
     }
 
     /**

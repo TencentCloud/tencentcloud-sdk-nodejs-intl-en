@@ -508,6 +508,12 @@ class ModifyClusterEndpointSPRequest extends  AbstractModel {
          */
         this.SecurityPolicies = null;
 
+        /**
+         * Modify public network security group
+         * @type {string || null}
+         */
+        this.SecurityGroup = null;
+
     }
 
     /**
@@ -519,6 +525,7 @@ class ModifyClusterEndpointSPRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.SecurityPolicies = 'SecurityPolicies' in params ? params.SecurityPolicies : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
 
     }
 }
@@ -1671,132 +1678,35 @@ class AutoUpgradeClusterLevel extends  AbstractModel {
 }
 
 /**
- * Cluster advanced configurations
+ * CheckEdgeClusterCIDR response structure.
  * @class
  */
-class ClusterAdvancedSettings extends  AbstractModel {
+class CheckEdgeClusterCIDRResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether IPVS is enabled
-         * @type {boolean || null}
-         */
-        this.IPVS = null;
-
-        /**
-         * Whether auto-scaling is enabled for nodes in the cluster (Enabling this function is not supported when you create a cluster)
-         * @type {boolean || null}
-         */
-        this.AsEnabled = null;
-
-        /**
-         * Type of runtime component used by the cluster. The types include "docker" and "containerd". Default value: docker
-         * @type {string || null}
-         */
-        this.ContainerRuntime = null;
-
-        /**
-         * NodeName type for a node in a cluster (This includes the two forms of **hostname** and **lan-ip**, with the default as **lan-ip**. If **hostname** is used, you need to set the HostName parameter when creating a node, and the InstanceName needs to be the same as the HostName.)
-         * @type {string || null}
-         */
-        this.NodeNameType = null;
-
-        /**
-         * Cluster custom parameter
-         * @type {ClusterExtraArgs || null}
-         */
-        this.ExtraArgs = null;
-
-        /**
-         * Cluster network type, which can be GR (Global Router) or VPC-CNI. The default value is GR.
-         * @type {string || null}
-         */
-        this.NetworkType = null;
-
-        /**
-         * Whether a cluster in VPC-CNI mode uses dynamic IP addresses. The default value is FALSE, which indicates that static IP addresses are used.
-         * @type {boolean || null}
-         */
-        this.IsNonStaticIpMode = null;
-
-        /**
-         * Indicates whether to enable cluster deletion protection.
-         * @type {boolean || null}
-         */
-        this.DeletionProtection = null;
-
-        /**
-         * Cluster network proxy model, which is only used when ipvs-bpf mode is used. At present, TKE cluster supports three network proxy modes including `iptables`, `ipvs` and `ipvs-bpf` and their parameter setting relationships are as follows:
-`iptables`: do not set IPVS and KubeProxyMode.
-`ipvs`: set IPVS to `true` and do not set KubeProxyMode.
-`ipvs-bpf`: set KubeProxyMode to `kube-proxy-bpf`.
-The following conditions are required to use ipvs-bpf network mode:
-1. The cluster version must be v1.14 or later.
-2. The system image must be Tencent Linux 2.4.
-         * @type {string || null}
-         */
-        this.KubeProxyMode = null;
-
-        /**
-         * Indicates whether to enable auditing
-         * @type {boolean || null}
-         */
-        this.AuditEnabled = null;
-
-        /**
-         * Specifies the ID of logset to which the audit logs are uploaded.
-         * @type {string || null}
-         */
-        this.AuditLogsetId = null;
-
-        /**
-         * Specifies the ID of topic to which the audit logs are uploaded.
-         * @type {string || null}
-         */
-        this.AuditLogTopicId = null;
-
-        /**
-         * Specifies the ENI type. Values: `tke-route-eni` (multi-IP shared ENI); `tke-direct-eni` (independent ENI). It defaults to `tke-route-eni`.
-         * @type {string || null}
-         */
-        this.VpcCniType = null;
-
-        /**
-         * Runtime version
-         * @type {string || null}
-         */
-        this.RuntimeVersion = null;
-
-        /**
-         * Indicates whether to enable the custom mode for the node’s pod CIDR range
-         * @type {boolean || null}
-         */
-        this.EnableCustomizedPodCIDR = null;
-
-        /**
-         * The basic number of Pods in custom mode
+         * Return code. Valid values:
+-1: Internal error
+0: No conflict
+1: Conflict between VPC and serviceCIDR
+2: Conflict between VPC and podCIDR
+3: Conflict between serviceCIDR and podCIDR
          * @type {number || null}
          */
-        this.BasePodNumber = null;
+        this.ConflictCode = null;
 
         /**
-         * Specifies whether to enable Cilium. If it’s left empty, Cilium is not enabled. If `clusterIP` is passed in, it means to enable Cilium to support the clusterIP service type.
+         * CIDR block conflict description
          * @type {string || null}
          */
-        this.CiliumMode = null;
+        this.ConflictMsg = null;
 
         /**
-         * Whether it is a dual-stack cluster in VPC-CNI mode. Default value: `false`, which indicates it is not a dual-stack cluster.
-         * @type {boolean || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.IsDualStack = null;
-
-        /**
-         * Whether to enable qGPU Sharing
-         * @type {boolean || null}
-         */
-        this.QGPUShareEnable = null;
+        this.RequestId = null;
 
     }
 
@@ -1807,30 +1717,9 @@ The following conditions are required to use ipvs-bpf network mode:
         if (!params) {
             return;
         }
-        this.IPVS = 'IPVS' in params ? params.IPVS : null;
-        this.AsEnabled = 'AsEnabled' in params ? params.AsEnabled : null;
-        this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
-        this.NodeNameType = 'NodeNameType' in params ? params.NodeNameType : null;
-
-        if (params.ExtraArgs) {
-            let obj = new ClusterExtraArgs();
-            obj.deserialize(params.ExtraArgs)
-            this.ExtraArgs = obj;
-        }
-        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
-        this.IsNonStaticIpMode = 'IsNonStaticIpMode' in params ? params.IsNonStaticIpMode : null;
-        this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
-        this.KubeProxyMode = 'KubeProxyMode' in params ? params.KubeProxyMode : null;
-        this.AuditEnabled = 'AuditEnabled' in params ? params.AuditEnabled : null;
-        this.AuditLogsetId = 'AuditLogsetId' in params ? params.AuditLogsetId : null;
-        this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
-        this.VpcCniType = 'VpcCniType' in params ? params.VpcCniType : null;
-        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
-        this.EnableCustomizedPodCIDR = 'EnableCustomizedPodCIDR' in params ? params.EnableCustomizedPodCIDR : null;
-        this.BasePodNumber = 'BasePodNumber' in params ? params.BasePodNumber : null;
-        this.CiliumMode = 'CiliumMode' in params ? params.CiliumMode : null;
-        this.IsDualStack = 'IsDualStack' in params ? params.IsDualStack : null;
-        this.QGPUShareEnable = 'QGPUShareEnable' in params ? params.QGPUShareEnable : null;
+        this.ConflictCode = 'ConflictCode' in params ? params.ConflictCode : null;
+        this.ConflictMsg = 'ConflictMsg' in params ? params.ConflictMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2860,6 +2749,48 @@ class Tag extends  AbstractModel {
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * The options for adding the existing node to the node pool
+ * @class
+ */
+class NodePoolOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to add to the node pool.
+         * @type {boolean || null}
+         */
+        this.AddToNodePool = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Whether to inherit the node pool configuration.
+         * @type {boolean || null}
+         */
+        this.InheritConfigurationFromNodePool = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddToNodePool = 'AddToNodePool' in params ? params.AddToNodePool : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InheritConfigurationFromNodePool = 'InheritConfigurationFromNodePool' in params ? params.InheritConfigurationFromNodePool : null;
 
     }
 }
@@ -4083,6 +4014,24 @@ class CreateTKEEdgeClusterRequest extends  AbstractModel {
          */
         this.PublicLB = null;
 
+        /**
+         * Cluster specification level
+         * @type {string || null}
+         */
+        this.ClusterLevel = null;
+
+        /**
+         * Whether auto upgrade is supported
+         * @type {boolean || null}
+         */
+        this.AutoUpgradeClusterLevel = null;
+
+        /**
+         * Cluster billing mode
+         * @type {string || null}
+         */
+        this.ChargeType = null;
+
     }
 
     /**
@@ -4111,6 +4060,9 @@ class CreateTKEEdgeClusterRequest extends  AbstractModel {
             obj.deserialize(params.PublicLB)
             this.PublicLB = obj;
         }
+        this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
+        this.AutoUpgradeClusterLevel = 'AutoUpgradeClusterLevel' in params ? params.AutoUpgradeClusterLevel : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
 
     }
 }
@@ -5150,6 +5102,41 @@ class ModifyClusterAsGroupOptionAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * The policy to deal with resources in the cluster when the cluster is deleted.
+ * @class
+ */
+class ResourceDeleteOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource type, for example `CBS`
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Specifies the policy to deal with resources in the cluster when the cluster is deleted. It can be `terminate` or `retain`.
+         * @type {string || null}
+         */
+        this.DeleteMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.DeleteMode = 'DeleteMode' in params ? params.DeleteMode : null;
+
+    }
+}
+
+/**
  * DescribeClusterNodePools response structure.
  * @class
  */
@@ -5483,6 +5470,76 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * CreateEdgeCVMInstances request structure.
+ * @class
+ */
+class CreateEdgeCVMInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Pass-through parameter for CVM creation in the format of a JSON string. To ensure the idempotency of requests for adding cluster nodes, you need to add the `ClientToken` field in this parameter. For more information, see the documentation for [RunInstances](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.RunInstancePara = null;
+
+        /**
+         * Region of the CVM instances to create
+         * @type {string || null}
+         */
+        this.CvmRegion = null;
+
+        /**
+         * Quantity of CVM instances to create
+         * @type {number || null}
+         */
+        this.CvmCount = null;
+
+        /**
+         * Instance extension information
+         * @type {string || null}
+         */
+        this.External = null;
+
+        /**
+         * Custom script
+         * @type {string || null}
+         */
+        this.UserScript = null;
+
+        /**
+         * Whether to enable ENI
+         * @type {boolean || null}
+         */
+        this.EnableEni = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.RunInstancePara = 'RunInstancePara' in params ? params.RunInstancePara : null;
+        this.CvmRegion = 'CvmRegion' in params ? params.CvmRegion : null;
+        this.CvmCount = 'CvmCount' in params ? params.CvmCount : null;
+        this.External = 'External' in params ? params.External : null;
+        this.UserScript = 'UserScript' in params ? params.UserScript : null;
+        this.EnableEni = 'EnableEni' in params ? params.EnableEni : null;
+
+    }
+}
+
+/**
  * AddNodeToNodePool response structure.
  * @class
  */
@@ -5609,30 +5666,24 @@ class DisableClusterDeletionProtectionRequest extends  AbstractModel {
 }
 
 /**
- * The options for adding the existing node to the node pool
+ * Version information of GPU driver and CUDA
  * @class
  */
-class NodePoolOption extends  AbstractModel {
+class DriverVersion extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to add to the node pool.
-         * @type {boolean || null}
-         */
-        this.AddToNodePool = null;
-
-        /**
-         * Node pool ID
+         * Version of GPU driver or CUDA
          * @type {string || null}
          */
-        this.NodePoolId = null;
+        this.Version = null;
 
         /**
-         * Whether to inherit the node pool configuration.
-         * @type {boolean || null}
+         * Name of GPU driver or CUDA
+         * @type {string || null}
          */
-        this.InheritConfigurationFromNodePool = null;
+        this.Name = null;
 
     }
 
@@ -5643,9 +5694,8 @@ class NodePoolOption extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddToNodePool = 'AddToNodePool' in params ? params.AddToNodePool : null;
-        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
-        this.InheritConfigurationFromNodePool = 'InheritConfigurationFromNodePool' in params ? params.InheritConfigurationFromNodePool : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -5806,6 +5856,55 @@ class CreateECMInstancesRequest extends  AbstractModel {
         this.UserData = 'UserData' in params ? params.UserData : null;
         this.External = 'External' in params ? params.External : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
+ * cuDNN version information
+ * @class
+ */
+class CUDNN extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cuDNN version
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * cuDNN name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Doc name of cuDNN
+         * @type {string || null}
+         */
+        this.DocName = null;
+
+        /**
+         * Dev name of cuDNN
+         * @type {string || null}
+         */
+        this.DevName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Version = 'Version' in params ? params.Version : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DocName = 'DocName' in params ? params.DocName : null;
+        this.DevName = 'DevName' in params ? params.DevName : null;
 
     }
 }
@@ -5994,40 +6093,19 @@ class DescribeTKEEdgeScriptRequest extends  AbstractModel {
 }
 
 /**
- * Cluster master custom parameter
+ * Custom driver information
  * @class
  */
-class ClusterExtraArgs extends  AbstractModel {
+class CustomDriver extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * kube-apiserver custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {Array.<string> || null}
+         * URL of custom GPU driver address
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.KubeAPIServer = null;
-
-        /**
-         * kube-controller-manager custom parameter
-Note: this field may return null, indicating that no valid value is obtained.
-         * @type {Array.<string> || null}
-         */
-        this.KubeControllerManager = null;
-
-        /**
-         * kube-scheduler custom parameter
-Note: this field may return null, indicating that no valid value is obtained.
-         * @type {Array.<string> || null}
-         */
-        this.KubeScheduler = null;
-
-        /**
-         * etcd custom parameter, which is only effective for self-deployed cluster.
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {Array.<string> || null}
-         */
-        this.Etcd = null;
+        this.Address = null;
 
     }
 
@@ -6038,10 +6116,42 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         if (!params) {
             return;
         }
-        this.KubeAPIServer = 'KubeAPIServer' in params ? params.KubeAPIServer : null;
-        this.KubeControllerManager = 'KubeControllerManager' in params ? params.KubeControllerManager : null;
-        this.KubeScheduler = 'KubeScheduler' in params ? params.KubeScheduler : null;
-        this.Etcd = 'Etcd' in params ? params.Etcd : null;
+        this.Address = 'Address' in params ? params.Address : null;
+
+    }
+}
+
+/**
+ * CreateEdgeCVMInstances response structure.
+ * @class
+ */
+class CreateEdgeCVMInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of CVM IDs
+         * @type {Array.<string> || null}
+         */
+        this.CvmIdSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CvmIdSet = 'CvmIdSet' in params ? params.CvmIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6341,32 +6451,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeEdgeAvailableExtraArgs response structure.
+ * DescribeClusterAsGroupOption request structure.
  * @class
  */
-class DescribeEdgeAvailableExtraArgsResponse extends  AbstractModel {
+class DescribeClusterAsGroupOptionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster version
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Cluster ID
          * @type {string || null}
          */
-        this.ClusterVersion = null;
-
-        /**
-         * Available custom parameters
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {EdgeAvailableExtraArgs || null}
-         */
-        this.AvailableExtraArgs = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.ClusterId = null;
 
     }
 
@@ -6377,14 +6473,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
-
-        if (params.AvailableExtraArgs) {
-            let obj = new EdgeAvailableExtraArgs();
-            obj.deserialize(params.AvailableExtraArgs)
-            this.AvailableExtraArgs = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -7779,6 +7868,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.DesiredPodNumber = null;
 
         /**
+         * GPU driver parameters
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {GPUArgs || null}
+         */
+        this.GPUArgs = null;
+
+        /**
          * Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -7830,6 +7926,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             this.ExtraArgs = obj;
         }
         this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
+
+        if (params.GPUArgs) {
+            let obj = new GPUArgs();
+            obj.deserialize(params.GPUArgs)
+            this.GPUArgs = obj;
+        }
         this.PreStartUserScript = 'PreStartUserScript' in params ? params.PreStartUserScript : null;
 
         if (params.Taints) {
@@ -8721,35 +8823,132 @@ class CreateClusterNodePoolRequest extends  AbstractModel {
 }
 
 /**
- * CheckEdgeClusterCIDR response structure.
+ * Cluster advanced configurations
  * @class
  */
-class CheckEdgeClusterCIDRResponse extends  AbstractModel {
+class ClusterAdvancedSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Return code. Valid values:
--1: Internal error
-0: No conflict
-1: Conflict between VPC and serviceCIDR
-2: Conflict between VPC and podCIDR
-3: Conflict between serviceCIDR and podCIDR
+         * Whether IPVS is enabled
+         * @type {boolean || null}
+         */
+        this.IPVS = null;
+
+        /**
+         * Whether auto-scaling is enabled for nodes in the cluster (Enabling this function is not supported when you create a cluster)
+         * @type {boolean || null}
+         */
+        this.AsEnabled = null;
+
+        /**
+         * Type of runtime component used by the cluster. The types include "docker" and "containerd". Default value: docker
+         * @type {string || null}
+         */
+        this.ContainerRuntime = null;
+
+        /**
+         * NodeName type for a node in a cluster (This includes the two forms of **hostname** and **lan-ip**, with the default as **lan-ip**. If **hostname** is used, you need to set the HostName parameter when creating a node, and the InstanceName needs to be the same as the HostName.)
+         * @type {string || null}
+         */
+        this.NodeNameType = null;
+
+        /**
+         * Cluster custom parameter
+         * @type {ClusterExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
+        /**
+         * Cluster network type, which can be GR (Global Router) or VPC-CNI. The default value is GR.
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * Whether a cluster in VPC-CNI mode uses dynamic IP addresses. The default value is FALSE, which indicates that static IP addresses are used.
+         * @type {boolean || null}
+         */
+        this.IsNonStaticIpMode = null;
+
+        /**
+         * Indicates whether to enable cluster deletion protection.
+         * @type {boolean || null}
+         */
+        this.DeletionProtection = null;
+
+        /**
+         * Cluster network proxy model, which is only used when ipvs-bpf mode is used. At present, TKE cluster supports three network proxy modes including `iptables`, `ipvs` and `ipvs-bpf` and their parameter setting relationships are as follows:
+`iptables`: do not set IPVS and KubeProxyMode.
+`ipvs`: set IPVS to `true` and do not set KubeProxyMode.
+`ipvs-bpf`: set KubeProxyMode to `kube-proxy-bpf`.
+The following conditions are required to use ipvs-bpf network mode:
+1. The cluster version must be v1.14 or later.
+2. The system image must be Tencent Linux 2.4.
+         * @type {string || null}
+         */
+        this.KubeProxyMode = null;
+
+        /**
+         * Indicates whether to enable auditing
+         * @type {boolean || null}
+         */
+        this.AuditEnabled = null;
+
+        /**
+         * Specifies the ID of logset to which the audit logs are uploaded.
+         * @type {string || null}
+         */
+        this.AuditLogsetId = null;
+
+        /**
+         * Specifies the ID of topic to which the audit logs are uploaded.
+         * @type {string || null}
+         */
+        this.AuditLogTopicId = null;
+
+        /**
+         * Specifies the ENI type. Values: `tke-route-eni` (multi-IP shared ENI); `tke-direct-eni` (independent ENI). It defaults to `tke-route-eni`.
+         * @type {string || null}
+         */
+        this.VpcCniType = null;
+
+        /**
+         * Runtime version
+         * @type {string || null}
+         */
+        this.RuntimeVersion = null;
+
+        /**
+         * Indicates whether to enable the custom mode for the node’s pod CIDR range
+         * @type {boolean || null}
+         */
+        this.EnableCustomizedPodCIDR = null;
+
+        /**
+         * The basic number of Pods in custom mode
          * @type {number || null}
          */
-        this.ConflictCode = null;
+        this.BasePodNumber = null;
 
         /**
-         * CIDR block conflict description
+         * Specifies whether to enable Cilium. If it’s left empty, Cilium is not enabled. If `clusterIP` is passed in, it means to enable Cilium to support the clusterIP service type.
          * @type {string || null}
          */
-        this.ConflictMsg = null;
+        this.CiliumMode = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Whether it is a dual-stack cluster in VPC-CNI mode. Default value: `false`, which indicates it is not a dual-stack cluster.
+         * @type {boolean || null}
          */
-        this.RequestId = null;
+        this.IsDualStack = null;
+
+        /**
+         * Whether to enable qGPU Sharing
+         * @type {boolean || null}
+         */
+        this.QGPUShareEnable = null;
 
     }
 
@@ -8760,9 +8959,30 @@ class CheckEdgeClusterCIDRResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConflictCode = 'ConflictCode' in params ? params.ConflictCode : null;
-        this.ConflictMsg = 'ConflictMsg' in params ? params.ConflictMsg : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.IPVS = 'IPVS' in params ? params.IPVS : null;
+        this.AsEnabled = 'AsEnabled' in params ? params.AsEnabled : null;
+        this.ContainerRuntime = 'ContainerRuntime' in params ? params.ContainerRuntime : null;
+        this.NodeNameType = 'NodeNameType' in params ? params.NodeNameType : null;
+
+        if (params.ExtraArgs) {
+            let obj = new ClusterExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
+        }
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.IsNonStaticIpMode = 'IsNonStaticIpMode' in params ? params.IsNonStaticIpMode : null;
+        this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
+        this.KubeProxyMode = 'KubeProxyMode' in params ? params.KubeProxyMode : null;
+        this.AuditEnabled = 'AuditEnabled' in params ? params.AuditEnabled : null;
+        this.AuditLogsetId = 'AuditLogsetId' in params ? params.AuditLogsetId : null;
+        this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
+        this.VpcCniType = 'VpcCniType' in params ? params.VpcCniType : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
+        this.EnableCustomizedPodCIDR = 'EnableCustomizedPodCIDR' in params ? params.EnableCustomizedPodCIDR : null;
+        this.BasePodNumber = 'BasePodNumber' in params ? params.BasePodNumber : null;
+        this.CiliumMode = 'CiliumMode' in params ? params.CiliumMode : null;
+        this.IsDualStack = 'IsDualStack' in params ? params.IsDualStack : null;
+        this.QGPUShareEnable = 'QGPUShareEnable' in params ? params.QGPUShareEnable : null;
 
     }
 }
@@ -9335,6 +9555,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.QGPUShareEnable = null;
 
+        /**
+         * Runtime version
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.RuntimeVersion = null;
+
     }
 
     /**
@@ -9379,6 +9606,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
         this.AutoUpgradeClusterLevel = 'AutoUpgradeClusterLevel' in params ? params.AutoUpgradeClusterLevel : null;
         this.QGPUShareEnable = 'QGPUShareEnable' in params ? params.QGPUShareEnable : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
 
     }
 }
@@ -9709,10 +9937,10 @@ class DisableClusterDeletionProtectionResponse extends  AbstractModel {
 }
 
 /**
- * DescribeClusterAsGroupOption request structure.
+ * DeleteCluster request structure.
  * @class
  */
-class DescribeClusterAsGroupOptionRequest extends  AbstractModel {
+class DeleteClusterRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -9721,6 +9949,18 @@ class DescribeClusterAsGroupOptionRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ClusterId = null;
+
+        /**
+         * Policy used to delete an instance in the cluster: terminate (terminates the instance. Only available for instances on pay-as-you-go CVMs); retain (only removes it from the cluster. The instance will be retained.)
+         * @type {string || null}
+         */
+        this.InstanceDeleteMode = null;
+
+        /**
+         * Specifies the policy to deal with resources in the cluster when the cluster is deleted. It only supports CBS now. The default policy is to retain CBS disks.
+         * @type {Array.<ResourceDeleteOption> || null}
+         */
+        this.ResourceDeleteOptions = null;
 
     }
 
@@ -9732,6 +9972,16 @@ class DescribeClusterAsGroupOptionRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceDeleteMode = 'InstanceDeleteMode' in params ? params.InstanceDeleteMode : null;
+
+        if (params.ResourceDeleteOptions) {
+            this.ResourceDeleteOptions = new Array();
+            for (let z in params.ResourceDeleteOptions) {
+                let obj = new ResourceDeleteOption();
+                obj.deserialize(params.ResourceDeleteOptions[z]);
+                this.ResourceDeleteOptions.push(obj);
+            }
+        }
 
     }
 }
@@ -11062,6 +11312,27 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.ClusterExternalACL = null;
 
         /**
+         * Public network domain name
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterExternalDomain = null;
+
+        /**
+         * Private network domain name
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterIntranetDomain = null;
+
+        /**
+         * Public network security group
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SecurityGroup = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -11081,6 +11352,9 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.ClusterIntranetEndpoint = 'ClusterIntranetEndpoint' in params ? params.ClusterIntranetEndpoint : null;
         this.ClusterDomain = 'ClusterDomain' in params ? params.ClusterDomain : null;
         this.ClusterExternalACL = 'ClusterExternalACL' in params ? params.ClusterExternalACL : null;
+        this.ClusterExternalDomain = 'ClusterExternalDomain' in params ? params.ClusterExternalDomain : null;
+        this.ClusterIntranetDomain = 'ClusterIntranetDomain' in params ? params.ClusterIntranetDomain : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11381,6 +11655,55 @@ class DescribeClusterLevelChangeRecordsRequest extends  AbstractModel {
         this.EndAt = 'EndAt' in params ? params.EndAt : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeEdgeAvailableExtraArgs response structure.
+ * @class
+ */
+class DescribeEdgeAvailableExtraArgsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster version
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
+        /**
+         * Available custom parameters
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {EdgeAvailableExtraArgs || null}
+         */
+        this.AvailableExtraArgs = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+
+        if (params.AvailableExtraArgs) {
+            let obj = new EdgeAvailableExtraArgs();
+            obj.deserialize(params.AvailableExtraArgs)
+            this.AvailableExtraArgs = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11867,56 +12190,6 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DeleteCluster request structure.
- * @class
- */
-class DeleteClusterRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Policy used to delete an instance in the cluster: terminate (terminates the instance. Only available for instances on pay-as-you-go CVMs); retain (only removes it from the cluster. The instance will be retained.)
-         * @type {string || null}
-         */
-        this.InstanceDeleteMode = null;
-
-        /**
-         * Specifies the policy to deal with resources in the cluster when the cluster is deleted. It only supports CBS now. The default policy is to retain CBS disks.
-         * @type {Array.<ResourceDeleteOption> || null}
-         */
-        this.ResourceDeleteOptions = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.InstanceDeleteMode = 'InstanceDeleteMode' in params ? params.InstanceDeleteMode : null;
-
-        if (params.ResourceDeleteOptions) {
-            this.ResourceDeleteOptions = new Array();
-            for (let z in params.ResourceDeleteOptions) {
-                let obj = new ResourceDeleteOption();
-                obj.deserialize(params.ResourceDeleteOptions[z]);
-                this.ResourceDeleteOptions.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * ForwardTKEEdgeApplicationRequestV3 request structure.
  * @class
  */
@@ -11987,24 +12260,46 @@ class ForwardTKEEdgeApplicationRequestV3Request extends  AbstractModel {
 }
 
 /**
- * The policy to deal with resources in the cluster when the cluster is deleted.
+ * GPU parameters, including GPU driver version, CDUA version, cuDNN version and whether to enable MIG.
  * @class
  */
-class ResourceDeleteOption extends  AbstractModel {
+class GPUArgs extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Resource type, for example `CBS`
-         * @type {string || null}
+         * Whether to enable MIG
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
          */
-        this.ResourceType = null;
+        this.MIGEnable = null;
 
         /**
-         * Specifies the policy to deal with resources in the cluster when the cluster is deleted. It can be `terminate` or `retain`.
-         * @type {string || null}
+         * GPU driver version
+         * @type {DriverVersion || null}
          */
-        this.DeleteMode = null;
+        this.Driver = null;
+
+        /**
+         * CUDA version
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {DriverVersion || null}
+         */
+        this.CUDA = null;
+
+        /**
+         * cuDNN version
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {CUDNN || null}
+         */
+        this.CUDNN = null;
+
+        /**
+         * Custom GPU driver
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {CustomDriver || null}
+         */
+        this.CustomDriver = null;
 
     }
 
@@ -12015,25 +12310,70 @@ class ResourceDeleteOption extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-        this.DeleteMode = 'DeleteMode' in params ? params.DeleteMode : null;
+        this.MIGEnable = 'MIGEnable' in params ? params.MIGEnable : null;
+
+        if (params.Driver) {
+            let obj = new DriverVersion();
+            obj.deserialize(params.Driver)
+            this.Driver = obj;
+        }
+
+        if (params.CUDA) {
+            let obj = new DriverVersion();
+            obj.deserialize(params.CUDA)
+            this.CUDA = obj;
+        }
+
+        if (params.CUDNN) {
+            let obj = new CUDNN();
+            obj.deserialize(params.CUDNN)
+            this.CUDNN = obj;
+        }
+
+        if (params.CustomDriver) {
+            let obj = new CustomDriver();
+            obj.deserialize(params.CustomDriver)
+            this.CustomDriver = obj;
+        }
 
     }
 }
 
 /**
- * Describes information related to the Cloud Monitor service.
+ * Cluster master custom parameter
  * @class
  */
-class RunMonitorServiceEnabled extends  AbstractModel {
+class ClusterExtraArgs extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable [Cloud Monitor](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
-         * @type {boolean || null}
+         * kube-apiserver custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"].
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
          */
-        this.Enabled = null;
+        this.KubeAPIServer = null;
+
+        /**
+         * kube-controller-manager custom parameter
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.KubeControllerManager = null;
+
+        /**
+         * kube-scheduler custom parameter
+Note: this field may return null, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.KubeScheduler = null;
+
+        /**
+         * etcd custom parameter, which is only effective for self-deployed cluster.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Etcd = null;
 
     }
 
@@ -12044,7 +12384,10 @@ class RunMonitorServiceEnabled extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.KubeAPIServer = 'KubeAPIServer' in params ? params.KubeAPIServer : null;
+        this.KubeControllerManager = 'KubeControllerManager' in params ? params.KubeControllerManager : null;
+        this.KubeScheduler = 'KubeScheduler' in params ? params.KubeScheduler : null;
+        this.Etcd = 'Etcd' in params ? params.Etcd : null;
 
     }
 }
@@ -12912,6 +13255,34 @@ class DescribeClusterNodePoolDetailResponse extends  AbstractModel {
     }
 }
 
+/**
+ * Describes information related to the Cloud Monitor service.
+ * @class
+ */
+class RunMonitorServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable [Cloud Monitor](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1). Valid values: <br><li>TRUE: enable Cloud Monitor <br><li>FALSE: do not enable Cloud Monitor <br><br>Default value: TRUE.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
 module.exports = {
     EnableVpcCniNetworkTypeRequest: EnableVpcCniNetworkTypeRequest,
     DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
@@ -12948,7 +13319,7 @@ module.exports = {
     IPAddress: IPAddress,
     DescribeTKEEdgeClusterCredentialRequest: DescribeTKEEdgeClusterCredentialRequest,
     AutoUpgradeClusterLevel: AutoUpgradeClusterLevel,
-    ClusterAdvancedSettings: ClusterAdvancedSettings,
+    CheckEdgeClusterCIDRResponse: CheckEdgeClusterCIDRResponse,
     RunInstancesForNode: RunInstancesForNode,
     DescribeTKEEdgeExternalKubeconfigRequest: DescribeTKEEdgeExternalKubeconfigRequest,
     DescribeAvailableTKEEdgeVersionRequest: DescribeAvailableTKEEdgeVersionRequest,
@@ -12971,6 +13342,7 @@ module.exports = {
     ECMRunMonitorServiceEnabled: ECMRunMonitorServiceEnabled,
     DeleteEdgeClusterInstancesRequest: DeleteEdgeClusterInstancesRequest,
     Tag: Tag,
+    NodePoolOption: NodePoolOption,
     ForwardTKEEdgeApplicationRequestV3Response: ForwardTKEEdgeApplicationRequestV3Response,
     ClusterNetworkSettings: ClusterNetworkSettings,
     DescribeImagesResponse: DescribeImagesResponse,
@@ -13016,31 +13388,35 @@ module.exports = {
     CheckInstancesUpgradeAbleRequest: CheckInstancesUpgradeAbleRequest,
     CreateECMInstancesResponse: CreateECMInstancesResponse,
     ModifyClusterAsGroupOptionAttributeRequest: ModifyClusterAsGroupOptionAttributeRequest,
+    ResourceDeleteOption: ResourceDeleteOption,
     DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
     UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
     GetUpgradeInstanceProgressRequest: GetUpgradeInstanceProgressRequest,
     DescribeClusterEndpointsRequest: DescribeClusterEndpointsRequest,
     DescribeEdgeAvailableExtraArgsRequest: DescribeEdgeAvailableExtraArgsRequest,
     ExistedInstance: ExistedInstance,
+    CreateEdgeCVMInstancesRequest: CreateEdgeCVMInstancesRequest,
     AddNodeToNodePoolResponse: AddNodeToNodePoolResponse,
     ModifyNodePoolInstanceTypesRequest: ModifyNodePoolInstanceTypesRequest,
     DescribeClusterLevelAttributeRequest: DescribeClusterLevelAttributeRequest,
     DisableClusterDeletionProtectionRequest: DisableClusterDeletionProtectionRequest,
-    NodePoolOption: NodePoolOption,
+    DriverVersion: DriverVersion,
     DescribeEdgeCVMInstancesResponse: DescribeEdgeCVMInstancesResponse,
     CreateECMInstancesRequest: CreateECMInstancesRequest,
+    CUDNN: CUDNN,
     DescribeClustersResponse: DescribeClustersResponse,
     ClusterCredential: ClusterCredential,
     DescribeVpcCniPodLimitsRequest: DescribeVpcCniPodLimitsRequest,
     DescribeTKEEdgeScriptRequest: DescribeTKEEdgeScriptRequest,
-    ClusterExtraArgs: ClusterExtraArgs,
+    CustomDriver: CustomDriver,
+    CreateEdgeCVMInstancesResponse: CreateEdgeCVMInstancesResponse,
     DataDisk: DataDisk,
     DescribeEdgeLogSwitchesResponse: DescribeEdgeLogSwitchesResponse,
     DeleteEdgeCVMInstancesResponse: DeleteEdgeCVMInstancesResponse,
     ModifyClusterNodePoolResponse: ModifyClusterNodePoolResponse,
     GetUpgradeInstanceProgressResponse: GetUpgradeInstanceProgressResponse,
     DescribeExistedInstancesResponse: DescribeExistedInstancesResponse,
-    DescribeEdgeAvailableExtraArgsResponse: DescribeEdgeAvailableExtraArgsResponse,
+    DescribeClusterAsGroupOptionRequest: DescribeClusterAsGroupOptionRequest,
     CreatePrometheusAlertRuleResponse: CreatePrometheusAlertRuleResponse,
     ECMEnhancedService: ECMEnhancedService,
     LoginSettings: LoginSettings,
@@ -13087,7 +13463,7 @@ module.exports = {
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
     DescribeTKEEdgeClusterStatusRequest: DescribeTKEEdgeClusterStatusRequest,
     CreateClusterNodePoolRequest: CreateClusterNodePoolRequest,
-    CheckEdgeClusterCIDRResponse: CheckEdgeClusterCIDRResponse,
+    ClusterAdvancedSettings: ClusterAdvancedSettings,
     AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
     EdgeAvailableExtraArgs: EdgeAvailableExtraArgs,
     UpdateClusterVersionRequest: UpdateClusterVersionRequest,
@@ -13104,7 +13480,7 @@ module.exports = {
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,
     CreateClusterInstancesResponse: CreateClusterInstancesResponse,
     DisableClusterDeletionProtectionResponse: DisableClusterDeletionProtectionResponse,
-    DescribeClusterAsGroupOptionRequest: DescribeClusterAsGroupOptionRequest,
+    DeleteClusterRequest: DeleteClusterRequest,
     ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     DescribeTKEEdgeClustersResponse: DescribeTKEEdgeClustersResponse,
@@ -13139,6 +13515,7 @@ module.exports = {
     DescribeAvailableClusterVersionResponse: DescribeAvailableClusterVersionResponse,
     TagSpecification: TagSpecification,
     DescribeClusterLevelChangeRecordsRequest: DescribeClusterLevelChangeRecordsRequest,
+    DescribeEdgeAvailableExtraArgsResponse: DescribeEdgeAvailableExtraArgsResponse,
     AddVpcCniSubnetsRequest: AddVpcCniSubnetsRequest,
     InstanceUpgradePreCheckResultItem: InstanceUpgradePreCheckResultItem,
     DescribeClusterCommonNamesResponse: DescribeClusterCommonNamesResponse,
@@ -13150,10 +13527,9 @@ module.exports = {
     DeleteClusterNodePoolResponse: DeleteClusterNodePoolResponse,
     DeleteECMInstancesResponse: DeleteECMInstancesResponse,
     DescribeEdgeClusterExtraArgsResponse: DescribeEdgeClusterExtraArgsResponse,
-    DeleteClusterRequest: DeleteClusterRequest,
     ForwardTKEEdgeApplicationRequestV3Request: ForwardTKEEdgeApplicationRequestV3Request,
-    ResourceDeleteOption: ResourceDeleteOption,
-    RunMonitorServiceEnabled: RunMonitorServiceEnabled,
+    GPUArgs: GPUArgs,
+    ClusterExtraArgs: ClusterExtraArgs,
     UpdateClusterVersionResponse: UpdateClusterVersionResponse,
     DescribeTKEEdgeClusterCredentialResponse: DescribeTKEEdgeClusterCredentialResponse,
     DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
@@ -13171,5 +13547,6 @@ module.exports = {
     ImageInstance: ImageInstance,
     EdgeCluster: EdgeCluster,
     DescribeClusterNodePoolDetailResponse: DescribeClusterNodePoolDetailResponse,
+    RunMonitorServiceEnabled: RunMonitorServiceEnabled,
 
 }

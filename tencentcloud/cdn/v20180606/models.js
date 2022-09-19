@@ -3325,6 +3325,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Configure = null;
 
+        /**
+         * Whether to enable the rule. Values: `on` (enable), `off` (disable).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
     }
 
     /**
@@ -3350,6 +3357,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.Configure.push(obj);
             }
         }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -9115,6 +9123,18 @@ This feature is in beta test.
          */
         this.DisableRange = null;
 
+        /**
+         * 
+         * @type {Array.<HTTPHeader> || null}
+         */
+        this.Headers = null;
+
+        /**
+         * Whether to encode the URL
+         * @type {boolean || null}
+         */
+        this.UrlEncode = null;
+
     }
 
     /**
@@ -9130,6 +9150,16 @@ This feature is in beta test.
         this.Layer = 'Layer' in params ? params.Layer : null;
         this.ParseM3U8 = 'ParseM3U8' in params ? params.ParseM3U8 : null;
         this.DisableRange = 'DisableRange' in params ? params.DisableRange : null;
+
+        if (params.Headers) {
+            this.Headers = new Array();
+            for (let z in params.Headers) {
+                let obj = new HTTPHeader();
+                obj.deserialize(params.Headers[z]);
+                this.Headers.push(obj);
+            }
+        }
+        this.UrlEncode = 'UrlEncode' in params ? params.UrlEncode : null;
 
     }
 }
@@ -10768,6 +10798,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.AdvancedRules = null;
 
+        /**
+         * Global advanced CC protection rules
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<AdvancedCCRules> || null}
+         */
+        this.GlobalAdvancedRules = null;
+
     }
 
     /**
@@ -10794,6 +10831,15 @@ Note: This field may return `null`, indicating that no valid value can be obtain
                 let obj = new AdvancedCCRules();
                 obj.deserialize(params.AdvancedRules[z]);
                 this.AdvancedRules.push(obj);
+            }
+        }
+
+        if (params.GlobalAdvancedRules) {
+            this.GlobalAdvancedRules = new Array();
+            for (let z in params.GlobalAdvancedRules) {
+                let obj = new AdvancedCCRules();
+                obj.deserialize(params.GlobalAdvancedRules[z]);
+                this.GlobalAdvancedRules.push(obj);
             }
         }
 
@@ -15121,6 +15167,41 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * 
+ * @class
+ */
+class HTTPHeader extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * IP blocklist/allowlist path-based configuration
  * @class
  */
@@ -15465,6 +15546,7 @@ module.exports = {
     DescribeDomainsRequest: DescribeDomainsRequest,
     OfflineCache: OfflineCache,
     UrlRedirectRule: UrlRedirectRule,
+    HTTPHeader: HTTPHeader,
     IpFilterPathRule: IpFilterPathRule,
     ScdnAclRule: ScdnAclRule,
 

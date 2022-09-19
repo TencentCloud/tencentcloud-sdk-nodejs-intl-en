@@ -1401,6 +1401,43 @@ class ActivateInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Database table information
+ * @class
+ */
+class DatabaseTables extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Table name list
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Tables = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Tables = 'Tables' in params ? params.Tables : null;
+
+    }
+}
+
+/**
  * AddClusterSlaveZone request structure.
  * @class
  */
@@ -3828,6 +3865,41 @@ class DescribeResourcesByDealNameRequest extends  AbstractModel {
 }
 
 /**
+ * CreateBackup response structure.
+ * @class
+ */
+class CreateBackupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRollbackTimeValidity response structure.
  * @class
  */
@@ -4107,7 +4179,7 @@ class InquirePriceCreateRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Purchase quantity
+         * Number of compute node to purchase
          * @type {number || null}
          */
         this.GoodsNum = null;
@@ -5041,6 +5113,70 @@ class Account extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.Host = 'Host' in params ? params.Host : null;
+
+    }
+}
+
+/**
+ * CreateBackup request structure.
+ * @class
+ */
+class CreateBackupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Backup type. Valid values: `logic` (logic backup), `snapshot` (physical backup)
+         * @type {string || null}
+         */
+        this.BackupType = null;
+
+        /**
+         * Backup database, which is valid when `BackupType` is `logic`.
+         * @type {Array.<string> || null}
+         */
+        this.BackupDatabases = null;
+
+        /**
+         * Backup table, which is valid when `BackupType` is `logic`.
+         * @type {Array.<DatabaseTables> || null}
+         */
+        this.BackupTables = null;
+
+        /**
+         * Backup name
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.BackupDatabases = 'BackupDatabases' in params ? params.BackupDatabases : null;
+
+        if (params.BackupTables) {
+            this.BackupTables = new Array();
+            for (let z in params.BackupTables) {
+                let obj = new DatabaseTables();
+                obj.deserialize(params.BackupTables[z]);
+                this.BackupTables.push(obj);
+            }
+        }
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
 
     }
 }
@@ -7047,6 +7183,7 @@ module.exports = {
     CynosdbInstanceGrp: CynosdbInstanceGrp,
     SlowQueriesItem: SlowQueriesItem,
     ActivateInstanceRequest: ActivateInstanceRequest,
+    DatabaseTables: DatabaseTables,
     AddClusterSlaveZoneRequest: AddClusterSlaveZoneRequest,
     DescribeClustersRequest: DescribeClustersRequest,
     DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
@@ -7088,6 +7225,7 @@ module.exports = {
     DescribeBackupDownloadUrlRequest: DescribeBackupDownloadUrlRequest,
     NetAddr: NetAddr,
     DescribeResourcesByDealNameRequest: DescribeResourcesByDealNameRequest,
+    CreateBackupResponse: CreateBackupResponse,
     DescribeRollbackTimeValidityResponse: DescribeRollbackTimeValidityResponse,
     DescribeInstanceSlowQueriesResponse: DescribeInstanceSlowQueriesResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
@@ -7106,6 +7244,7 @@ module.exports = {
     InquirePriceCreateResponse: InquirePriceCreateResponse,
     SetRenewFlagResponse: SetRenewFlagResponse,
     Account: Account,
+    CreateBackupRequest: CreateBackupRequest,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
     DescribeMaintainPeriodResponse: DescribeMaintainPeriodResponse,
     DescribeBackupListResponse: DescribeBackupListResponse,

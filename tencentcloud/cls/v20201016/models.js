@@ -533,7 +533,7 @@ class ModifyTopicRequest extends  AbstractModel {
         this.MaxSplitPartitions = null;
 
         /**
-         * Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+         * Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
          * @type {number || null}
          */
         this.Period = null;
@@ -3925,6 +3925,12 @@ class OpenKafkaConsumerRequest extends  AbstractModel {
          */
         this.FromTopicId = null;
 
+        /**
+         * Compression mode. Valid values: `0` (no compression); `2` (snappy); `3` (LZ4)
+         * @type {number || null}
+         */
+        this.Compression = null;
+
     }
 
     /**
@@ -3935,6 +3941,7 @@ class OpenKafkaConsumerRequest extends  AbstractModel {
             return;
         }
         this.FromTopicId = 'FromTopicId' in params ? params.FromTopicId : null;
+        this.Compression = 'Compression' in params ? params.Compression : null;
 
     }
 }
@@ -4729,8 +4736,8 @@ class JsonInfo extends  AbstractModel {
         this.EnableTag = null;
 
         /**
-         * Metadata information list. Valid values: __SOURCE__; __FILENAME__; __TIMESTAMP__
-Note: This field may return `null`, indicating that no valid value was found.
+         * List of metadata. Supported metadata types: __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.MetaFields = null;
@@ -4818,6 +4825,12 @@ class CreateShipperRequest extends  AbstractModel {
          */
         this.Content = null;
 
+        /**
+         * Naming a shipping file. Valid values: `0` (by random number); `1` (by shipping time). Default value: `0`.
+         * @type {number || null}
+         */
+        this.FilenameMode = null;
+
     }
 
     /**
@@ -4855,6 +4868,7 @@ class CreateShipperRequest extends  AbstractModel {
             obj.deserialize(params.Content)
             this.Content = obj;
         }
+        this.FilenameMode = 'FilenameMode' in params ? params.FilenameMode : null;
 
     }
 }
@@ -6003,6 +6017,12 @@ class ModifyShipperRequest extends  AbstractModel {
          */
         this.Content = null;
 
+        /**
+         * Naming a shipping file. Valid values: `0` (by random number), `1` (by shipping time). Default value: `0`.
+         * @type {number || null}
+         */
+        this.FilenameMode = null;
+
     }
 
     /**
@@ -6041,6 +6061,7 @@ class ModifyShipperRequest extends  AbstractModel {
             obj.deserialize(params.Content)
             this.Content = obj;
         }
+        this.FilenameMode = 'FilenameMode' in params ? params.FilenameMode : null;
 
     }
 }

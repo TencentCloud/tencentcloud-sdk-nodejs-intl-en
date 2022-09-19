@@ -4774,6 +4774,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.TxhBackupExpireDay = null;
 
+        /**
+         * Cached information of the table
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SyncTableInfo || null}
+         */
+        this.SyncTableInfo = null;
+
     }
 
     /**
@@ -4824,6 +4831,12 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.SortRule = 'SortRule' in params ? params.SortRule : null;
         this.DbClusterInfoStruct = 'DbClusterInfoStruct' in params ? params.DbClusterInfoStruct : null;
         this.TxhBackupExpireDay = 'TxhBackupExpireDay' in params ? params.TxhBackupExpireDay : null;
+
+        if (params.SyncTableInfo) {
+            let obj = new SyncTableInfo();
+            obj.deserialize(params.SyncTableInfo)
+            this.SyncTableInfo = obj;
+        }
 
     }
 }
@@ -4915,6 +4928,120 @@ class TaskInfoNew extends  AbstractModel {
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
         this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * TcaplusDB cache table information
+ * @class
+ */
+class SyncTableInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sharded table quantity of the target cache table
+         * @type {number || null}
+         */
+        this.TargetTableSplitNum = null;
+
+        /**
+         * Prefix of the target cache table name
+         * @type {Array.<string> || null}
+         */
+        this.TargetTableNamePrefix = null;
+
+        /**
+         * Instance ID of the cache database
+         * @type {string || null}
+         */
+        this.TargetSyncDBInstanceId = null;
+
+        /**
+         * Name of the database where the cache table resides
+         * @type {string || null}
+         */
+        this.TargetDatabaseName = null;
+
+        /**
+         * Caching status. Valid values: `0` (creating), `1` (caching), `2` (disabled), `-1` (deleted).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * ID of cluster where the table resides
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * The ID of the table group where the table resides
+         * @type {number || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Table ID
+         * @type {string || null}
+         */
+        this.TableId = null;
+
+        /**
+         * Mapping from the primary key field of the TcaplusDB table to the field of the target cache table
+         * @type {Array.<SyncTableField> || null}
+         */
+        this.KeyFieldMapping = null;
+
+        /**
+         * Mapping of TcaplusDB table field to target cache table field
+         * @type {Array.<SyncTableField> || null}
+         */
+        this.ValueFieldMapping = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetTableSplitNum = 'TargetTableSplitNum' in params ? params.TargetTableSplitNum : null;
+        this.TargetTableNamePrefix = 'TargetTableNamePrefix' in params ? params.TargetTableNamePrefix : null;
+        this.TargetSyncDBInstanceId = 'TargetSyncDBInstanceId' in params ? params.TargetSyncDBInstanceId : null;
+        this.TargetDatabaseName = 'TargetDatabaseName' in params ? params.TargetDatabaseName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.TableId = 'TableId' in params ? params.TableId : null;
+
+        if (params.KeyFieldMapping) {
+            this.KeyFieldMapping = new Array();
+            for (let z in params.KeyFieldMapping) {
+                let obj = new SyncTableField();
+                obj.deserialize(params.KeyFieldMapping[z]);
+                this.KeyFieldMapping.push(obj);
+            }
+        }
+
+        if (params.ValueFieldMapping) {
+            this.ValueFieldMapping = new Array();
+            for (let z in params.ValueFieldMapping) {
+                let obj = new SyncTableField();
+                obj.deserialize(params.ValueFieldMapping[z]);
+                this.ValueFieldMapping.push(obj);
+            }
+        }
 
     }
 }
@@ -7324,6 +7451,41 @@ class ImportSnapshotsRequest extends  AbstractModel {
 }
 
 /**
+ * Mapping of cache table field name
+ * @class
+ */
+class SyncTableField extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Field name of TcaplusDB table
+         * @type {string || null}
+         */
+        this.SourceName = null;
+
+        /**
+         * Field name of the target cache table
+         * @type {string || null}
+         */
+        this.TargetName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceName = 'SourceName' in params ? params.SourceName : null;
+        this.TargetName = 'TargetName' in params ? params.TargetName : null;
+
+    }
+}
+
+/**
  * Describes the details of errors that may occur during the processing of each instance (application, region, or table).
  * @class
  */
@@ -7502,6 +7664,7 @@ module.exports = {
     ServerDetailInfo: ServerDetailInfo,
     TableInfoNew: TableInfoNew,
     TaskInfoNew: TaskInfoNew,
+    SyncTableInfo: SyncTableInfo,
     DeleteIdlFilesRequest: DeleteIdlFilesRequest,
     CreateBackupResponse: CreateBackupResponse,
     KeyFile: KeyFile,
@@ -7546,6 +7709,7 @@ module.exports = {
     Filter: Filter,
     ModifySnapshotsRequest: ModifySnapshotsRequest,
     ImportSnapshotsRequest: ImportSnapshotsRequest,
+    SyncTableField: SyncTableField,
     ErrorInfo: ErrorInfo,
     TableGroupInfo: TableGroupInfo,
 

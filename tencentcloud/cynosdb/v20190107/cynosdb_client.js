@@ -46,6 +46,7 @@ const SetRenewFlagRequest = models.SetRenewFlagRequest;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
 const SlowQueriesItem = models.SlowQueriesItem;
 const ActivateInstanceRequest = models.ActivateInstanceRequest;
+const DatabaseTables = models.DatabaseTables;
 const AddClusterSlaveZoneRequest = models.AddClusterSlaveZoneRequest;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
@@ -87,6 +88,7 @@ const SecurityGroup = models.SecurityGroup;
 const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest;
 const NetAddr = models.NetAddr;
 const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
+const CreateBackupResponse = models.CreateBackupResponse;
 const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidityResponse;
 const DescribeInstanceSlowQueriesResponse = models.DescribeInstanceSlowQueriesResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
@@ -105,6 +107,7 @@ const InstanceSpec = models.InstanceSpec;
 const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
 const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const Account = models.Account;
+const CreateBackupRequest = models.CreateBackupRequest;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
 const DescribeBackupListResponse = models.DescribeBackupListResponse;
@@ -357,6 +360,17 @@ class CynosdbClient extends AbstractClient {
     DescribeClusterParams(req, cb) {
         let resp = new DescribeClusterParamsResponse();
         this.request("DescribeClusterParams", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create manual backup.
+     * @param {CreateBackupRequest} req
+     * @param {function(string, CreateBackupResponse):void} cb
+     * @public
+     */
+    CreateBackup(req, cb) {
+        let resp = new CreateBackupResponse();
+        this.request("CreateBackup", req, resp, cb);
     }
 
     /**

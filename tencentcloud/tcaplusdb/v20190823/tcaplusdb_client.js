@@ -103,6 +103,7 @@ const DescribeClustersRequest = models.DescribeClustersRequest;
 const ServerDetailInfo = models.ServerDetailInfo;
 const TableInfoNew = models.TableInfoNew;
 const TaskInfoNew = models.TaskInfoNew;
+const SyncTableInfo = models.SyncTableInfo;
 const DeleteIdlFilesRequest = models.DeleteIdlFilesRequest;
 const CreateBackupResponse = models.CreateBackupResponse;
 const KeyFile = models.KeyFile;
@@ -147,6 +148,7 @@ const ModifyClusterMachineRequest = models.ModifyClusterMachineRequest;
 const Filter = models.Filter;
 const ModifySnapshotsRequest = models.ModifySnapshotsRequest;
 const ImportSnapshotsRequest = models.ImportSnapshotsRequest;
+const SyncTableField = models.SyncTableField;
 const ErrorInfo = models.ErrorInfo;
 const TableGroupInfo = models.TableGroupInfo;
 

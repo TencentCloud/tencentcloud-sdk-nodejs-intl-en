@@ -23,6 +23,7 @@ const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
 const McuLayoutParams = models.McuLayoutParams;
 const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const MixUserInfo = models.MixUserInfo;
+const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
 const MixLayoutParams = models.MixLayoutParams;
 const DismissRoomResponse = models.DismissRoomResponse;
 const MixLayout = models.MixLayout;
@@ -38,7 +39,7 @@ const TencentVod = models.TencentVod;
 const RecordParams = models.RecordParams;
 const McuPassThrough = models.McuPassThrough;
 const McuUserInfoParams = models.McuUserInfoParams;
-const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
+const McuCustomCrop = models.McuCustomCrop;
 const VideoParams = models.VideoParams;
 const CreateCloudRecordingRequest = models.CreateCloudRecordingRequest;
 const DeleteCloudRecordingResponse = models.DeleteCloudRecordingResponse;
@@ -111,13 +112,13 @@ This API is used to start an on-cloud recording task. It records the audio and v
 
 You can use this API to perform the following operations:
 * Specify the anchors whose streams you want or do not want to record by using the `RecordParams` parameter
-* Specify the storage service you want to save recording files to by using the `StorageParams` parameter
+* Specify the storage service you want to save recording files to by using the `StorageParams` parameter. Currently, you can only save recording files to VOD (`CloudVod`).
 * Specify transcoding settings for mixed-stream recording, including video resolution, video bitrate, frame rate, and audio quality, by using `MixTranscodeParams`
 * Specify the layout of different videos in mixed-stream recording mode or select an auto-arranged layout template
 
 Key concepts:
 * Single-stream recording: Record the audio and video of each subscribed user (`UserId`) in a room and save the recording files to VOD.
-* Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files to VOD.
+* Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files to VOD. After a recording task ends, you can go to the VOD console (https://console.cloud.tencent.com/vod/media) to view the recording files.
      * @param {CreateCloudRecordingRequest} req
      * @param {function(string, CreateCloudRecordingResponse):void} cb
      * @public

@@ -375,6 +375,118 @@ class MixUserInfo extends  AbstractModel {
 }
 
 /**
+ * UpdatePublishCdnStream request structure.
+ * @class
+ */
+class UpdatePublishCdnStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The sequence of a request. This parameter ensures the requests to change the parameters of the same relaying task are in the correct order. It increases each time a new request is made.
+         * @type {number || null}
+         */
+        this.SequenceNumber = null;
+
+        /**
+         * Whether to transcode the streams. 0: No; 1: Yes.
+         * @type {number || null}
+         */
+        this.WithTranscoding = null;
+
+        /**
+         * Pass this parameter to change the users whose audios are mixed. If you do not pass this parameter, no changes will be made.
+         * @type {McuAudioParams || null}
+         */
+        this.AudioParams = null;
+
+        /**
+         * Pass this parameter to change video parameters other than the codec, including the video layout, background image, background color, and watermark information. This parameter is valid only if streams are transcoded. If you do not pass it, no changes will be made.
+         * @type {McuVideoParams || null}
+         */
+        this.VideoParams = null;
+
+        /**
+         * Pass this parameter to change the single stream that is relayed. This parameter is valid only if streams are not transcoded. If you do not pass this parameter, no changes will be made.
+         * @type {SingleSubscribeParams || null}
+         */
+        this.SingleSubscribeParams = null;
+
+        /**
+         * Pass this parameter to change the CDNs to relay to. If you do not pass this parameter, no changes will be made.
+         * @type {Array.<McuPublishCdnParam> || null}
+         */
+        this.PublishCdnParams = null;
+
+        /**
+         * The stream mixing SEI parameters.
+         * @type {McuSeiParams || null}
+         */
+        this.SeiParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.SequenceNumber = 'SequenceNumber' in params ? params.SequenceNumber : null;
+        this.WithTranscoding = 'WithTranscoding' in params ? params.WithTranscoding : null;
+
+        if (params.AudioParams) {
+            let obj = new McuAudioParams();
+            obj.deserialize(params.AudioParams)
+            this.AudioParams = obj;
+        }
+
+        if (params.VideoParams) {
+            let obj = new McuVideoParams();
+            obj.deserialize(params.VideoParams)
+            this.VideoParams = obj;
+        }
+
+        if (params.SingleSubscribeParams) {
+            let obj = new SingleSubscribeParams();
+            obj.deserialize(params.SingleSubscribeParams)
+            this.SingleSubscribeParams = obj;
+        }
+
+        if (params.PublishCdnParams) {
+            this.PublishCdnParams = new Array();
+            for (let z in params.PublishCdnParams) {
+                let obj = new McuPublishCdnParam();
+                obj.deserialize(params.PublishCdnParams[z]);
+                this.PublishCdnParams.push(obj);
+            }
+        }
+
+        if (params.SeiParams) {
+            let obj = new McuSeiParams();
+            obj.deserialize(params.SeiParams)
+            this.SeiParams = obj;
+        }
+
+    }
+}
+
+/**
  * The layout parameters for mixed-stream recording.
 
  * @class
@@ -805,7 +917,7 @@ class StorageParams extends  AbstractModel {
         super();
 
         /**
-         * The cloud storage information.
+         * The third-party cloud storage information (not supported currently).
          * @type {CloudStorage || null}
          */
         this.CloudStorage = null;
@@ -1024,6 +1136,12 @@ The default value is `0`, which means others.
          */
         this.SourceContext = null;
 
+        /**
+         * The format of recording files saved to VOD. 0 (default): MP4; 1: HLS.
+         * @type {number || null}
+         */
+        this.MediaType = null;
+
     }
 
     /**
@@ -1040,6 +1158,7 @@ The default value is `0`, which means others.
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
+        this.MediaType = 'MediaType' in params ? params.MediaType : null;
 
     }
 }
@@ -1082,10 +1201,16 @@ class RecordParams extends  AbstractModel {
         this.SubscribeStreamUserIds = null;
 
         /**
-         * The format of recording files. 0 (default): HLS; 1: HLS + MP4 (recorded in HLS and converted to MP4). This parameter is invalid if recording files are saved to VOD.
+         * The output format. 0 (default): HLS; 1: HLS + MP4 (recorded in HLS and converted to MP4). This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
          * @type {number || null}
          */
         this.OutputFormat = null;
+
+        /**
+         * Whether to merge the audio and video of a user in the single-stream recording mode. 0 (default): Do not mix the audio and video; 1: Mix the audio and video into one TS file. You don’t need to specify this parameter for mixed-stream recording, which merges audios and videos by default.
+         * @type {number || null}
+         */
+        this.AvMerge = null;
 
     }
 
@@ -1106,6 +1231,7 @@ class RecordParams extends  AbstractModel {
             this.SubscribeStreamUserIds = obj;
         }
         this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
+        this.AvMerge = 'AvMerge' in params ? params.AvMerge : null;
 
     }
 }
@@ -1186,66 +1312,36 @@ class McuUserInfoParams extends  AbstractModel {
 }
 
 /**
- * UpdatePublishCdnStream request structure.
+ * The cropping parameters for mixed videos.
  * @class
  */
-class UpdatePublishCdnStreamRequest extends  AbstractModel {
+class McuCustomCrop extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+         * The horizontal offset (pixels) of the starting point for cropping. This parameter must be greater than 0.
          * @type {number || null}
          */
-        this.SdkAppId = null;
+        this.LocationX = null;
 
         /**
-         * The task ID.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The sequence of a request. This parameter ensures the requests to change the parameters of the same relaying task are in the correct order. It increases each time a new request is made.
+         * The vertical offset (pixels) of the starting point for cropping. This parameter must be greater than 0.
          * @type {number || null}
          */
-        this.SequenceNumber = null;
+        this.LocationY = null;
 
         /**
-         * Whether to transcode the streams. 0: No; 1: Yes.
+         * The video width (pixels) after cropping. The sum of this parameter and `LocationX` cannot be greater than 10000.
          * @type {number || null}
          */
-        this.WithTranscoding = null;
+        this.Width = null;
 
         /**
-         * Pass this parameter to change the users whose audios are mixed. If you do not pass this parameter, no changes will be made.
-         * @type {McuAudioParams || null}
+         * The video height (pixels) after cropping. The sum of this parameter and `LocationY` cannot be greater than 10000.
+         * @type {number || null}
          */
-        this.AudioParams = null;
-
-        /**
-         * Pass this parameter to change video parameters other than the codec, including the video layout, background image, background color, and watermark information. This parameter is valid only if streams are transcoded. If you do not pass it, no changes will be made.
-         * @type {McuVideoParams || null}
-         */
-        this.VideoParams = null;
-
-        /**
-         * Pass this parameter to change the single stream that is relayed. This parameter is valid only if streams are not transcoded. If you do not pass this parameter, no changes will be made.
-         * @type {SingleSubscribeParams || null}
-         */
-        this.SingleSubscribeParams = null;
-
-        /**
-         * Pass this parameter to change the CDNs to relay to. If you do not pass this parameter, no changes will be made.
-         * @type {Array.<McuPublishCdnParam> || null}
-         */
-        this.PublishCdnParams = null;
-
-        /**
-         * The stream mixing SEI parameters.
-         * @type {McuSeiParams || null}
-         */
-        this.SeiParams = null;
+        this.Height = null;
 
     }
 
@@ -1256,43 +1352,10 @@ class UpdatePublishCdnStreamRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.SequenceNumber = 'SequenceNumber' in params ? params.SequenceNumber : null;
-        this.WithTranscoding = 'WithTranscoding' in params ? params.WithTranscoding : null;
-
-        if (params.AudioParams) {
-            let obj = new McuAudioParams();
-            obj.deserialize(params.AudioParams)
-            this.AudioParams = obj;
-        }
-
-        if (params.VideoParams) {
-            let obj = new McuVideoParams();
-            obj.deserialize(params.VideoParams)
-            this.VideoParams = obj;
-        }
-
-        if (params.SingleSubscribeParams) {
-            let obj = new SingleSubscribeParams();
-            obj.deserialize(params.SingleSubscribeParams)
-            this.SingleSubscribeParams = obj;
-        }
-
-        if (params.PublishCdnParams) {
-            this.PublishCdnParams = new Array();
-            for (let z in params.PublishCdnParams) {
-                let obj = new McuPublishCdnParam();
-                obj.deserialize(params.PublishCdnParams[z]);
-                this.PublishCdnParams.push(obj);
-            }
-        }
-
-        if (params.SeiParams) {
-            let obj = new McuSeiParams();
-            obj.deserialize(params.SeiParams)
-            this.SeiParams = obj;
-        }
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -1374,7 +1437,7 @@ class CreateCloudRecordingRequest extends  AbstractModel {
         this.RoomId = null;
 
         /**
-         * The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in the user ID.
+         * The [user ID](https://www.tencentcloud.com/document/product/647/37714#userid) of the recording robot in the TRTC room, which cannot be identical to the user IDs of anchors in the room or other recording robots. To distinguish this user ID from others, we recommend you include the room ID in the user ID.
          * @type {string || null}
          */
         this.UserId = null;
@@ -2302,6 +2365,12 @@ Grey: 0x999999
          */
         this.BackgroundImageUrl = null;
 
+        /**
+         * Custom cropping.
+         * @type {McuCustomCrop || null}
+         */
+        this.CustomCrop = null;
+
     }
 
     /**
@@ -2325,6 +2394,12 @@ Grey: 0x999999
         this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
         this.BackGroundColor = 'BackGroundColor' in params ? params.BackGroundColor : null;
         this.BackgroundImageUrl = 'BackgroundImageUrl' in params ? params.BackgroundImageUrl : null;
+
+        if (params.CustomCrop) {
+            let obj = new McuCustomCrop();
+            obj.deserialize(params.CustomCrop)
+            this.CustomCrop = obj;
+        }
 
     }
 }
@@ -2805,6 +2880,7 @@ module.exports = {
     McuLayoutParams: McuLayoutParams,
     DismissRoomByStrRoomIdRequest: DismissRoomByStrRoomIdRequest,
     MixUserInfo: MixUserInfo,
+    UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
     MixLayoutParams: MixLayoutParams,
     DismissRoomResponse: DismissRoomResponse,
     MixLayout: MixLayout,
@@ -2820,7 +2896,7 @@ module.exports = {
     RecordParams: RecordParams,
     McuPassThrough: McuPassThrough,
     McuUserInfoParams: McuUserInfoParams,
-    UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
+    McuCustomCrop: McuCustomCrop,
     VideoParams: VideoParams,
     CreateCloudRecordingRequest: CreateCloudRecordingRequest,
     DeleteCloudRecordingResponse: DeleteCloudRecordingResponse,

@@ -20,6 +20,7 @@ const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeProxyConnectionPoolConfRequest = models.DescribeProxyConnectionPoolConfRequest;
 const DeviceDiskInfo = models.DeviceDiskInfo;
+const CdbZoneSellConf = models.CdbZoneSellConf;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
@@ -32,6 +33,7 @@ const DescribeUploadedFilesResponse = models.DescribeUploadedFilesResponse;
 const DescribeSlowLogDataResponse = models.DescribeSlowLogDataResponse;
 const StopDBImportJobResponse = models.StopDBImportJobResponse;
 const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
+const SlaveInstanceInfo = models.SlaveInstanceInfo;
 const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
 const Parameter = models.Parameter;
 const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
@@ -44,6 +46,7 @@ const CreateAccountsResponse = models.CreateAccountsResponse;
 const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
 const SqlFileInfo = models.SqlFileInfo;
+const CdbSellType = models.CdbSellType;
 const DescribeProxyCustomConfRequest = models.DescribeProxyCustomConfRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const ApplyCDBProxyResponse = models.ApplyCDBProxyResponse;
@@ -83,6 +86,7 @@ const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const ModifyBackupDownloadRestrictionRequest = models.ModifyBackupDownloadRestrictionRequest;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const DescribeCloneListResponse = models.DescribeCloneListResponse;
 const ModifyAccountMaxUserConnectionsRequest = models.ModifyAccountMaxUserConnectionsRequest;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const SlowLogItem = models.SlowLogItem;
@@ -120,6 +124,7 @@ const RollbackTableName = models.RollbackTableName;
 const DeleteBackupResponse = models.DeleteBackupResponse;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const CdbRegionSellConf = models.CdbRegionSellConf;
 const UploadInfo = models.UploadInfo;
 const ModifyLocalBinlogConfigResponse = models.ModifyLocalBinlogConfigResponse;
 const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
@@ -158,7 +163,7 @@ const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
 const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const BackupItem = models.BackupItem;
 const ModifyCDBProxyVipVPortRequest = models.ModifyCDBProxyVipVPortRequest;
-const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
+const AuditFilter = models.AuditFilter;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
 const TagInfoItem = models.TagInfoItem;
@@ -166,7 +171,7 @@ const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGro
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
 const Outbound = models.Outbound;
-const SlaveInstanceInfo = models.SlaveInstanceInfo;
+const CdbSellConfig = models.CdbSellConfig;
 const RoWeightValue = models.RoWeightValue;
 const ModifyParamTemplateResponse = models.ModifyParamTemplateResponse;
 const ParamInfo = models.ParamInfo;
@@ -181,6 +186,7 @@ const TagInfo = models.TagInfo;
 const ModifyCDBProxyVipVPortResponse = models.ModifyCDBProxyVipVPortResponse;
 const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
 const CreateCloneInstanceResponse = models.CreateCloneInstanceResponse;
+const DescribeCdbZoneConfigRequest = models.DescribeCdbZoneConfigRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const TagInfoUnit = models.TagInfoUnit;
 const OpenDBInstanceGTIDRequest = models.OpenDBInstanceGTIDRequest;
@@ -220,6 +226,7 @@ const DeviceCpuInfo = models.DeviceCpuInfo;
 const AuditPolicy = models.AuditPolicy;
 const ModifyRoGroupInfoResponse = models.ModifyRoGroupInfoResponse;
 const DescribeDBInstanceConfigRequest = models.DescribeDBInstanceConfigRequest;
+const CdbZoneDataResult = models.CdbZoneDataResult;
 const InstanceInfo = models.InstanceInfo;
 const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse;
 const DatabasePrivilege = models.DatabasePrivilege;
@@ -229,6 +236,7 @@ const DescribeProxyCustomConfResponse = models.DescribeProxyCustomConfResponse;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const UpgradeCDBProxyVersionResponse = models.UpgradeCDBProxyVersionResponse;
 const RoVipInfo = models.RoVipInfo;
+const DescribeCdbZoneConfigResponse = models.DescribeCdbZoneConfigResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
 const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
@@ -240,7 +248,7 @@ const ModifyInstancePasswordComplexityRequest = models.ModifyInstancePasswordCom
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
-const DescribeCloneListResponse = models.DescribeCloneListResponse;
+const AddTimeWindowResponse = models.AddTimeWindowResponse;
 const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
 const DescribeAuditRulesResponse = models.DescribeAuditRulesResponse;
 const BaseGroupInfo = models.BaseGroupInfo;
@@ -295,10 +303,10 @@ const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
 const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
-const Rule = models.Rule;
-const AuditFilter = models.AuditFilter;
+const ZoneConf = models.ZoneConf;
+const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
-const AddTimeWindowResponse = models.AddTimeWindowResponse;
+const Rule = models.Rule;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackTimeRange = models.RollbackTimeRange;
 const StopRollbackRequest = models.StopRollbackRequest;
@@ -470,6 +478,17 @@ Note:
     ModifyDBInstanceName(req, cb) {
         let resp = new ModifyDBInstanceNameResponse();
         this.request("ModifyDBInstanceName", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the purchasable specifications of TencentDB instances in a region.
+     * @param {DescribeCdbZoneConfigRequest} req
+     * @param {function(string, DescribeCdbZoneConfigResponse):void} cb
+     * @public
+     */
+    DescribeCdbZoneConfig(req, cb) {
+        let resp = new DescribeCdbZoneConfigResponse();
+        this.request("DescribeCdbZoneConfig", req, resp, cb);
     }
 
     /**
@@ -1427,9 +1446,9 @@ Note: the HTTP response packet will be very large if it contain a single large s
     }
 
     /**
-     * This API (DescribeDBPrice) is used to query the prices of pay-as-you-go or monthly subscribed TencentDB instances by passing in information such as instance type, purchased duration, number of purchased instances, memory size, disk size, and AZ.
+     * This API is used to query the purchase or renewal price of a pay-as-you-go or monthly subscribed TencentDB instance by passing in information such as instance type, purchase duration, number of instances to purchase, memory size, disk size, and AZ. For the price of instance renewal, you can pass in instance name to query.
 
-Note: To query prices in a specific region, please use the access point of the region. For more information on access points, see <a href="https://cloud.tencent.com/document/api/236/15832">Service Addresses</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
+Note: To query prices in a specific region, you need to use the access point of the region. For more information on access points, see <a href="https://www.tencentcloud.com/document/product/236/15832">Service Address</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
      * @param {DescribeDBPriceRequest} req
      * @param {function(string, DescribeDBPriceResponse):void} cb
      * @public

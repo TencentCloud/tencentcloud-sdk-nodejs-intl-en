@@ -17,6 +17,119 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Voucher information.
+ * @class
+ */
+class VoucherInfos extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The owner of the voucher.
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * The status of the voucher: `unUsed`, `used`, `delivered`, `cancel`, `overdue`
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The value of the voucher. The value of this parameter is the voucher value (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+         * @type {number || null}
+         */
+        this.NominalValue = null;
+
+        /**
+         * The balance left. The value of this parameter is the balance left (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+         * @type {number || null}
+         */
+        this.Balance = null;
+
+        /**
+         * The voucher ID.
+         * @type {string || null}
+         */
+        this.VoucherId = null;
+
+        /**
+         * `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all.
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
+         * @type {string || null}
+         */
+        this.PayScene = null;
+
+        /**
+         * The start time of the validity period.
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * The end time of the validity period.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The products that are applicable.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {ApplicableProducts || null}
+         */
+        this.ApplicableProducts = null;
+
+        /**
+         * The products that are not applicable.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<ExcludedProducts> || null}
+         */
+        this.ExcludedProducts = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NominalValue = 'NominalValue' in params ? params.NominalValue : null;
+        this.Balance = 'Balance' in params ? params.Balance : null;
+        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PayScene = 'PayScene' in params ? params.PayScene : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.ApplicableProducts) {
+            let obj = new ApplicableProducts();
+            obj.deserialize(params.ApplicableProducts)
+            this.ApplicableProducts = obj;
+        }
+
+        if (params.ExcludedProducts) {
+            this.ExcludedProducts = new Array();
+            for (let z in params.ExcludedProducts) {
+                let obj = new ExcludedProducts();
+                obj.deserialize(params.ExcludedProducts[z]);
+                this.ExcludedProducts.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * The product purchased.
  * @class
  */
@@ -764,6 +877,27 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * DescribeAccountBalance request structure.
+ * @class
+ */
+class DescribeAccountBalanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeBillDetail request structure.
  * @class
  */
@@ -956,80 +1090,96 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * Voucher information.
+ * DescribeAccountBalance response structure.
  * @class
  */
-class VoucherInfos extends  AbstractModel {
+class DescribeAccountBalanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The owner of the voucher.
-         * @type {string || null}
-         */
-        this.OwnerUin = null;
-
-        /**
-         * The status of the voucher: `unUsed`, `used`, `delivered`, `cancel`, `overdue`
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * The value of the voucher. The value of this parameter is the voucher value (USD, rounded to 8 decimal places) multiplied by 100,000,000.
-         * @type {number || null}
-         */
-        this.NominalValue = null;
-
-        /**
-         * The balance left. The value of this parameter is the balance left (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+         * Available account balance in cents, which takes the same calculation rules as `RealBalance`, `CreditBalance`, and `RealCreditBalance`.
          * @type {number || null}
          */
         this.Balance = null;
 
         /**
-         * The voucher ID.
+         * The UIN to query.
+         * @type {number || null}
+         */
+        this.Uin = null;
+
+        /**
+         * Available account balance in cents, which takes the same calculation rules as `Balance`, `CreditBalance`, and `RealCreditBalance`.
+         * @type {number || null}
+         */
+        this.RealBalance = null;
+
+        /**
+         * Cash account balance in cents. Currently, this field is not applied.
+         * @type {number || null}
+         */
+        this.CashAccountBalance = null;
+
+        /**
+         * Income account balance in cents. Currently, this field is not applied.
+         * @type {number || null}
+         */
+        this.IncomeIntoAccountBalance = null;
+
+        /**
+         * Present account balance in cents. Currently, this field is not applied.
+         * @type {number || null}
+         */
+        this.PresentAccountBalance = null;
+
+        /**
+         * Frozen amount in cents.
+         * @type {number || null}
+         */
+        this.FreezeAmount = null;
+
+        /**
+         * Overdue amount in cents, which is when the available credit balance is negative.
+         * @type {number || null}
+         */
+        this.OweAmount = null;
+
+        /**
+         * Whether overdue payments are allowed. Currently, this field is not applied.
+         * @type {boolean || null}
+         */
+        this.IsAllowArrears = null;
+
+        /**
+         * Whether you have a credit limit. Currently, this field is not applied.
+         * @type {boolean || null}
+         */
+        this.IsCreditLimited = null;
+
+        /**
+         * Credit limit. Credit limit－available credit balance = consumption amount
+         * @type {number || null}
+         */
+        this.CreditAmount = null;
+
+        /**
+         * Available credit balance in cents, which takes the same calculation rules as `Balance`, `RealBalance`, and `RealCreditBalance`.
+         * @type {number || null}
+         */
+        this.CreditBalance = null;
+
+        /**
+         * Available account balance in cents, which takes the same calculation rules as `Balance`, `RealBalance`, and `CreditBalance`.
+         * @type {number || null}
+         */
+        this.RealCreditBalance = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.VoucherId = null;
-
-        /**
-         * `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all.
-         * @type {string || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
-         * @type {string || null}
-         */
-        this.PayScene = null;
-
-        /**
-         * The start time of the validity period.
-         * @type {string || null}
-         */
-        this.BeginTime = null;
-
-        /**
-         * The end time of the validity period.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * The products that are applicable.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {ApplicableProducts || null}
-         */
-        this.ApplicableProducts = null;
-
-        /**
-         * The products that are not applicable.
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {Array.<ExcludedProducts> || null}
-         */
-        this.ExcludedProducts = null;
+        this.RequestId = null;
 
     }
 
@@ -1040,30 +1190,20 @@ Note: This field may return `null`, indicating that no valid value was found.
         if (!params) {
             return;
         }
-        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.NominalValue = 'NominalValue' in params ? params.NominalValue : null;
         this.Balance = 'Balance' in params ? params.Balance : null;
-        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.PayScene = 'PayScene' in params ? params.PayScene : null;
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-
-        if (params.ApplicableProducts) {
-            let obj = new ApplicableProducts();
-            obj.deserialize(params.ApplicableProducts)
-            this.ApplicableProducts = obj;
-        }
-
-        if (params.ExcludedProducts) {
-            this.ExcludedProducts = new Array();
-            for (let z in params.ExcludedProducts) {
-                let obj = new ExcludedProducts();
-                obj.deserialize(params.ExcludedProducts[z]);
-                this.ExcludedProducts.push(obj);
-            }
-        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.RealBalance = 'RealBalance' in params ? params.RealBalance : null;
+        this.CashAccountBalance = 'CashAccountBalance' in params ? params.CashAccountBalance : null;
+        this.IncomeIntoAccountBalance = 'IncomeIntoAccountBalance' in params ? params.IncomeIntoAccountBalance : null;
+        this.PresentAccountBalance = 'PresentAccountBalance' in params ? params.PresentAccountBalance : null;
+        this.FreezeAmount = 'FreezeAmount' in params ? params.FreezeAmount : null;
+        this.OweAmount = 'OweAmount' in params ? params.OweAmount : null;
+        this.IsAllowArrears = 'IsAllowArrears' in params ? params.IsAllowArrears : null;
+        this.IsCreditLimited = 'IsCreditLimited' in params ? params.IsCreditLimited : null;
+        this.CreditAmount = 'CreditAmount' in params ? params.CreditAmount : null;
+        this.CreditBalance = 'CreditBalance' in params ? params.CreditBalance : null;
+        this.RealCreditBalance = 'RealCreditBalance' in params ? params.RealCreditBalance : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2833,6 +2973,7 @@ class BusinessSummaryTotal extends  AbstractModel {
 }
 
 module.exports = {
+    VoucherInfos: VoucherInfos,
     UsageDetails: UsageDetails,
     DescribeBillSummaryByTagResponse: DescribeBillSummaryByTagResponse,
     DescribeBillSummaryByPayModeResponse: DescribeBillSummaryByPayModeResponse,
@@ -2842,9 +2983,10 @@ module.exports = {
     BillTagInfo: BillTagInfo,
     DescribeBillSummaryByRegionResponse: DescribeBillSummaryByRegionResponse,
     RegionSummaryOverviewItem: RegionSummaryOverviewItem,
+    DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
     DescribeBillDetailRequest: DescribeBillDetailRequest,
     DescribeVoucherInfoResponse: DescribeVoucherInfoResponse,
-    VoucherInfos: VoucherInfos,
+    DescribeAccountBalanceResponse: DescribeAccountBalanceResponse,
     BusinessSummaryOverviewItem: BusinessSummaryOverviewItem,
     BillDetailComponent: BillDetailComponent,
     DescribeBillSummaryByRegionRequest: DescribeBillSummaryByRegionRequest,

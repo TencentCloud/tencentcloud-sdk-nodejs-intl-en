@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const VoucherInfos = models.VoucherInfos;
 const UsageDetails = models.UsageDetails;
 const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
@@ -25,9 +26,10 @@ const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProduct
 const BillTagInfo = models.BillTagInfo;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
+const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
 const DescribeVoucherInfoResponse = models.DescribeVoucherInfoResponse;
-const VoucherInfos = models.VoucherInfos;
+const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const BillDetailComponent = models.BillDetailComponent;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
@@ -63,6 +65,17 @@ class BillingClient extends AbstractClient {
         super("billing.tencentcloudapi.com", "2018-07-09", credential, region, profile);
     }
     
+    /**
+     * This API is used to check the Tencent Cloud account balance.
+     * @param {DescribeAccountBalanceRequest} req
+     * @param {function(string, DescribeAccountBalanceResponse):void} cb
+     * @public
+     */
+    DescribeAccountBalance(req, cb) {
+        let resp = new DescribeAccountBalanceResponse();
+        this.request("DescribeAccountBalance", req, resp, cb);
+    }
+
     /**
      * This API is used to query vouchers.
      * @param {DescribeVoucherInfoRequest} req

@@ -33,6 +33,7 @@ const DeleteSparkAppResponse = models.DeleteSparkAppResponse;
 const CreateSparkAppResponse = models.CreateSparkAppResponse;
 const TaskResultInfo = models.TaskResultInfo;
 const DescribeSparkAppJobsResponse = models.DescribeSparkAppJobsResponse;
+const TasksOverview = models.TasksOverview;
 const DeleteSparkAppRequest = models.DeleteSparkAppRequest;
 const DescribeSparkAppJobsRequest = models.DescribeSparkAppJobsRequest;
 const CreateTasksResponse = models.CreateTasksResponse;

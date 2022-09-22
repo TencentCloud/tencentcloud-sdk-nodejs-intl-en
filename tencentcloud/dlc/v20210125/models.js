@@ -540,7 +540,7 @@ class CancelTaskRequest extends  AbstractModel {
 }
 
 /**
- * Task instance
+ * The task instance.
  * @class
  */
 class TaskResponseInfo extends  AbstractModel {
@@ -566,7 +566,7 @@ class TaskResponseInfo extends  AbstractModel {
         this.Id = null;
 
         /**
-         * Computing time in ms
+         * The compute time in ms.
          * @type {number || null}
          */
         this.UsedTime = null;
@@ -742,6 +742,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.UiUrl = null;
 
+        /**
+         * The task time in ms.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalTime = null;
+
+        /**
+         * The program entry parameter for running a task under a Spark job.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CmdArgs = null;
+
     }
 
     /**
@@ -781,6 +795,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SparkJobId = 'SparkJobId' in params ? params.SparkJobId : null;
         this.SparkJobFile = 'SparkJobFile' in params ? params.SparkJobFile : null;
         this.UiUrl = 'UiUrl' in params ? params.UiUrl : null;
+        this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
+        this.CmdArgs = 'CmdArgs' in params ? params.CmdArgs : null;
 
     }
 }
@@ -932,7 +948,7 @@ class CreateSparkAppResponse extends  AbstractModel {
 }
 
 /**
- * Task result information
+ * The task result information.
  * @class
  */
 class TaskResultInfo extends  AbstractModel {
@@ -984,7 +1000,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DataAmount = null;
 
         /**
-         * Task execution time in seconds
+         * The compute time in ms.
          * @type {number || null}
          */
         this.UsedTime = null;
@@ -1051,6 +1067,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.DisplayFormat = null;
 
+        /**
+         * The task time in ms.
+         * @type {number || null}
+         */
+        this.TotalTime = null;
+
     }
 
     /**
@@ -1086,6 +1108,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Percentage = 'Percentage' in params ? params.Percentage : null;
         this.ProgressDetail = 'ProgressDetail' in params ? params.ProgressDetail : null;
         this.DisplayFormat = 'DisplayFormat' in params ? params.DisplayFormat : null;
+        this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
 
     }
 }
@@ -1136,6 +1159,55 @@ class DescribeSparkAppJobsResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The task overview.
+ * @class
+ */
+class TasksOverview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of tasks in queue.
+         * @type {number || null}
+         */
+        this.TaskQueuedCount = null;
+
+        /**
+         * The number of initialized tasks.
+         * @type {number || null}
+         */
+        this.TaskInitCount = null;
+
+        /**
+         * The number of tasks in progress.
+         * @type {number || null}
+         */
+        this.TaskRunningCount = null;
+
+        /**
+         * The total number of tasks in this time range.
+         * @type {number || null}
+         */
+        this.TotalTaskCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskQueuedCount = 'TaskQueuedCount' in params ? params.TaskQueuedCount : null;
+        this.TaskInitCount = 'TaskInitCount' in params ? params.TaskInitCount : null;
+        this.TaskRunningCount = 'TaskRunningCount' in params ? params.TaskRunningCount : null;
+        this.TotalTaskCount = 'TotalTaskCount' in params ? params.TotalTaskCount : null;
 
     }
 }
@@ -1309,6 +1381,13 @@ class DescribeTasksResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
+         * The task overview.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TasksOverview || null}
+         */
+        this.TasksOverview = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1333,6 +1412,12 @@ class DescribeTasksResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TasksOverview) {
+            let obj = new TasksOverview();
+            obj.deserialize(params.TasksOverview)
+            this.TasksOverview = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1699,7 +1784,7 @@ class DescribeTaskResultRequest extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * Pagination information returned by the last response. This parameter can be omitted for the first response, where the data will be returned from the beginning. 1,000 rows of data are returned each time.
+         * The pagination information returned by the last response. This parameter can be omitted for the first response, where the data will be returned from the beginning. The data with a volume set by the `MaxResults` field is returned each time.
          * @type {string || null}
          */
         this.NextToken = null;
@@ -2513,6 +2598,7 @@ module.exports = {
     CreateSparkAppResponse: CreateSparkAppResponse,
     TaskResultInfo: TaskResultInfo,
     DescribeSparkAppJobsResponse: DescribeSparkAppJobsResponse,
+    TasksOverview: TasksOverview,
     DeleteSparkAppRequest: DeleteSparkAppRequest,
     DescribeSparkAppJobsRequest: DescribeSparkAppJobsRequest,
     CreateTasksResponse: CreateTasksResponse,

@@ -171,6 +171,199 @@ class DeviceDiskInfo extends  AbstractModel {
 }
 
 /**
+ * Purchasable specifications in an AZ
+ * @class
+ */
+class CdbZoneSellConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ status, which is used to indicate whether instances are purchasable. Valid values: `1` (purchasable), `3` (not purchasable), `4` (AZ not displayed)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * AZ name
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * Whether it is a custom instance type
+         * @type {boolean || null}
+         */
+        this.IsCustom = null;
+
+        /**
+         * Whether disaster recovery is supported
+         * @type {boolean || null}
+         */
+        this.IsSupportDr = null;
+
+        /**
+         * Whether VPC is supported
+         * @type {boolean || null}
+         */
+        this.IsSupportVpc = null;
+
+        /**
+         * Maximum purchasable quantity of hourly billed instances
+         * @type {number || null}
+         */
+        this.HourInstanceSaleMaxNum = null;
+
+        /**
+         * Whether it is a default AZ
+         * @type {boolean || null}
+         */
+        this.IsDefaultZone = null;
+
+        /**
+         * Whether it is a BM zone
+         * @type {boolean || null}
+         */
+        this.IsBm = null;
+
+        /**
+         * Supported billing method. Valid values: `0` (monthly subscribed), `1` (hourly billed), `2` (pay-as-you-go)
+         * @type {Array.<string> || null}
+         */
+        this.PayType = null;
+
+        /**
+         * Data replication type. Valid values: `0` (async), `1` (semi-sync), `2` (strong sync)
+         * @type {Array.<string> || null}
+         */
+        this.ProtectMode = null;
+
+        /**
+         * AZ name
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Multi-AZ information
+         * @type {ZoneConf || null}
+         */
+        this.ZoneConf = null;
+
+        /**
+         * Information of supported disaster recovery AZs
+         * @type {Array.<string> || null}
+         */
+        this.DrZone = null;
+
+        /**
+         * Whether cross-AZ read-only access is supported
+         * @type {boolean || null}
+         */
+        this.IsSupportRemoteRo = null;
+
+        /**
+         * Information of supported cross-AZ read-only zone
+         * @type {Array.<string> || null}
+         */
+        this.RemoteRoZone = null;
+
+        /**
+         * AZ status, which is used to indicate whether dedicated instances are purchasable. Valid values: `1 (purchasable), `3` (not purchasable), `4` (AZ not displayed)
+         * @type {number || null}
+         */
+        this.ExClusterStatus = null;
+
+        /**
+         * Information of cross-AZ read-only zones supported by a dedicated instance
+         * @type {Array.<string> || null}
+         */
+        this.ExClusterRemoteRoZone = null;
+
+        /**
+         * AZ information of a multi-AZ deployed dedicated instance.
+         * @type {ZoneConf || null}
+         */
+        this.ExClusterZoneConf = null;
+
+        /**
+         * Array of purchasable instance types. The value of `configIds` and `configs` have a one-to-one correspondence.
+         * @type {Array.<CdbSellType> || null}
+         */
+        this.SellType = null;
+
+        /**
+         * AZ ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Whether IPv6 is supported
+         * @type {boolean || null}
+         */
+        this.IsSupportIpv6 = null;
+
+        /**
+         * Supported engine types for purchasable database
+         * @type {Array.<string> || null}
+         */
+        this.EngineType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.IsCustom = 'IsCustom' in params ? params.IsCustom : null;
+        this.IsSupportDr = 'IsSupportDr' in params ? params.IsSupportDr : null;
+        this.IsSupportVpc = 'IsSupportVpc' in params ? params.IsSupportVpc : null;
+        this.HourInstanceSaleMaxNum = 'HourInstanceSaleMaxNum' in params ? params.HourInstanceSaleMaxNum : null;
+        this.IsDefaultZone = 'IsDefaultZone' in params ? params.IsDefaultZone : null;
+        this.IsBm = 'IsBm' in params ? params.IsBm : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.ZoneConf) {
+            let obj = new ZoneConf();
+            obj.deserialize(params.ZoneConf)
+            this.ZoneConf = obj;
+        }
+        this.DrZone = 'DrZone' in params ? params.DrZone : null;
+        this.IsSupportRemoteRo = 'IsSupportRemoteRo' in params ? params.IsSupportRemoteRo : null;
+        this.RemoteRoZone = 'RemoteRoZone' in params ? params.RemoteRoZone : null;
+        this.ExClusterStatus = 'ExClusterStatus' in params ? params.ExClusterStatus : null;
+        this.ExClusterRemoteRoZone = 'ExClusterRemoteRoZone' in params ? params.ExClusterRemoteRoZone : null;
+
+        if (params.ExClusterZoneConf) {
+            let obj = new ZoneConf();
+            obj.deserialize(params.ExClusterZoneConf)
+            this.ExClusterZoneConf = obj;
+        }
+
+        if (params.SellType) {
+            this.SellType = new Array();
+            for (let z in params.SellType) {
+                let obj = new CdbSellType();
+                obj.deserialize(params.SellType[z]);
+                this.SellType.push(obj);
+            }
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.IsSupportIpv6 = 'IsSupportIpv6' in params ? params.IsSupportIpv6 : null;
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
+
+    }
+}
+
+/**
  * DescribeAccountPrivileges response structure.
  * @class
  */
@@ -763,6 +956,55 @@ Note: this field may return `null`, indicating that no valid value can be found.
         this.KeyRegion = 'KeyRegion' in params ? params.KeyRegion : null;
         this.DefaultKmsRegion = 'DefaultKmsRegion' in params ? params.DefaultKmsRegion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Slave server information
+ * @class
+ */
+class SlaveInstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Port number
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Region information
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Virtual IP information
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * AZ information
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -1428,6 +1670,48 @@ class SqlFileInfo extends  AbstractModel {
         this.FileSize = 'FileSize' in params ? params.FileSize : null;
         this.IsUploadFinished = 'IsUploadFinished' in params ? params.IsUploadFinished : null;
         this.FileId = 'FileId' in params ? params.FileId : null;
+
+    }
+}
+
+/**
+ * Purchasable instance type
+ * @class
+ */
+class CdbSellType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the purchasable instance
+         * @type {string || null}
+         */
+        this.TypeName = null;
+
+        /**
+         * Engine version number
+         * @type {Array.<string> || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * Purchasable specifications ID
+         * @type {Array.<number> || null}
+         */
+        this.ConfigIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TypeName = 'TypeName' in params ? params.TypeName : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.ConfigIds = 'ConfigIds' in params ? params.ConfigIds : null;
 
     }
 }
@@ -2150,16 +2434,22 @@ class DescribeDBPriceResponse extends  AbstractModel {
         super();
 
         /**
-         * Price of the instance in 0.01 CNY.
+         * Instance price. If `Currency` is set to `CNY`, the unit will be 0.01 CNY. If `Currency` is set to `USD`, the unit will be US Cent.
          * @type {number || null}
          */
         this.Price = null;
 
         /**
-         * Original price of the instance in 0.01 CNY
+         * Original price of the instance. If `Currency` is set to `CNY`, the unit will be 0.01 CNY. If `Currency` is set to `USD`, the unit will be US Cent.
          * @type {number || null}
          */
         this.OriginalPrice = null;
+
+        /**
+         * Currency: `CNY`, `USD`.
+         * @type {string || null}
+         */
+        this.Currency = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2178,6 +2468,7 @@ class DescribeDBPriceResponse extends  AbstractModel {
         }
         this.Price = 'Price' in params ? params.Price : null;
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2973,6 +3264,18 @@ class DescribeDataBackupOverviewResponse extends  AbstractModel {
         this.ManualBackupCount = null;
 
         /**
+         * Total capacity of remote backups in the current region
+         * @type {number || null}
+         */
+        this.RemoteBackupVolume = null;
+
+        /**
+         * Total number of remote backups in the current region
+         * @type {number || null}
+         */
+        this.RemoteBackupCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2993,6 +3296,8 @@ class DescribeDataBackupOverviewResponse extends  AbstractModel {
         this.AutoBackupCount = 'AutoBackupCount' in params ? params.AutoBackupCount : null;
         this.ManualBackupVolume = 'ManualBackupVolume' in params ? params.ManualBackupVolume : null;
         this.ManualBackupCount = 'ManualBackupCount' in params ? params.ManualBackupCount : null;
+        this.RemoteBackupVolume = 'RemoteBackupVolume' in params ? params.RemoteBackupVolume : null;
+        this.RemoteBackupCount = 'RemoteBackupCount' in params ? params.RemoteBackupCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3379,6 +3684,56 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         }
         this.DealIds = 'DealIds' in params ? params.DealIds : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCloneList response structure.
+ * @class
+ */
+class DescribeCloneListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of results which meet the conditions
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Clone task list
+         * @type {Array.<CloneItem> || null}
+         */
+        this.Items = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new CloneItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6003,6 +6358,70 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * The purchasable configuration in a region
+ * @class
+ */
+class CdbRegionSellConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * Area
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Whether it is a default region
+         * @type {number || null}
+         */
+        this.IsDefaultRegion = null;
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * The purchasable configuration in an AZ in a region
+         * @type {Array.<CdbZoneSellConf> || null}
+         */
+        this.RegionConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.IsDefaultRegion = 'IsDefaultRegion' in params ? params.IsDefaultRegion : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.RegionConfig) {
+            this.RegionConfig = new Array();
+            for (let z in params.RegionConfig) {
+                let obj = new CdbZoneSellConf();
+                obj.deserialize(params.RegionConfig[z]);
+                this.RegionConfig.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * File upload description
  * @class
  */
@@ -7595,24 +8014,37 @@ class ModifyCDBProxyVipVPortRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCDBProxy request structure.
+ * Audit rule filters
  * @class
  */
-class DescribeCDBProxyRequest extends  AbstractModel {
+class AuditFilter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Filter parameter names. Valid values:
+SrcIp: Client IP;
+User: Database account;
+DB: Database name.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Type = null;
 
         /**
-         * Proxy group ID
+         * Filter match type. Valid value:
+`INC`: Include;
+`EXC`: Exclude;
+`EQ`: Equal to;
+`NEQ`: Not equal to.
          * @type {string || null}
          */
-        this.ProxyGroupId = null;
+        this.Compare = null;
+
+        /**
+         * Filter match value
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -7623,8 +8055,9 @@ class DescribeCDBProxyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Compare = 'Compare' in params ? params.Compare : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -8023,36 +8456,79 @@ class Outbound extends  AbstractModel {
 }
 
 /**
- * Slave server information
+ * The details of purchasable configuration
  * @class
  */
-class SlaveInstanceInfo extends  AbstractModel {
+class CdbSellConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Port number
+         * Memory size in MB
          * @type {number || null}
          */
-        this.Vport = null;
+        this.Memory = null;
 
         /**
-         * Region information
-         * @type {string || null}
+         * CPU core count
+         * @type {number || null}
          */
-        this.Region = null;
+        this.Cpu = null;
 
         /**
-         * Virtual IP information
-         * @type {string || null}
+         * Minimum disk size in GB
+         * @type {number || null}
          */
-        this.Vip = null;
+        this.VolumeMin = null;
 
         /**
-         * AZ information
+         * Maximum disk size in GB
+         * @type {number || null}
+         */
+        this.VolumeMax = null;
+
+        /**
+         * Disk capacity increment in GB
+         * @type {number || null}
+         */
+        this.VolumeStep = null;
+
+        /**
+         * IO operations per second
+         * @type {number || null}
+         */
+        this.Iops = null;
+
+        /**
+         * Application scenario description
          * @type {string || null}
          */
-        this.Zone = null;
+        this.Info = null;
+
+        /**
+         * Status. The value `0` indicates that this specification is available.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * Engine type description. Valid values: `Innodb`, `RocksDB`.
+         * @type {string || null}
+         */
+        this.EngineType = null;
+
+        /**
+         * Purchasable specifications ID
+         * @type {number || null}
+         */
+        this.Id = null;
 
     }
 
@@ -8063,10 +8539,17 @@ class SlaveInstanceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Vport = 'Vport' in params ? params.Vport : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.VolumeMin = 'VolumeMin' in params ? params.VolumeMin : null;
+        this.VolumeMax = 'VolumeMax' in params ? params.VolumeMax : null;
+        this.VolumeStep = 'VolumeStep' in params ? params.VolumeStep : null;
+        this.Iops = 'Iops' in params ? params.Iops : null;
+        this.Info = 'Info' in params ? params.Info : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -8776,6 +9259,27 @@ class CreateCloneInstanceResponse extends  AbstractModel {
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCdbZoneConfig request structure.
+ * @class
+ */
+class DescribeCdbZoneConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -9499,52 +10003,82 @@ class DescribeDBPriceRequest extends  AbstractModel {
         super();
 
         /**
-         * AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> API to query the values that can be set.
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * Number of instances. Value range: 1-100. Default value: 1.
-         * @type {number || null}
-         */
-        this.GoodsNum = null;
-
-        /**
-         * Instance memory size in MB.
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Instance disk size in GB.
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-        /**
-         * Billing method. Value range: PRE_PAID (monthly subscribed), HOUR_PAID (pay-as-you-go).
-         * @type {string || null}
-         */
-        this.PayType = null;
-
-        /**
-         * Instance validity period in months. Value range: 1-36. This field is invalid when querying prices of pay-as-you-go instances.
+         * Instance validity period in months. Value range: 1-36. This field is invalid when querying the prices of pay-as-you-go instances.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Instance type. Value range: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+         * AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Number of instances. Value range: 1-100. Default value: 1. This parameter is required when `InstanceId` is empty.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * Instance memory size in MB. This parameter is required when `InstanceId` is empty.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance disk size in GB. This parameter is required when `InstanceId` is empty.
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * Instance type. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance). Default value: `master`. This parameter is required when `InstanceId` is empty.
          * @type {string || null}
          */
         this.InstanceRole = null;
 
         /**
-         * Data replication mode. Value range: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0.
+         * Billing mode. Valid values: `PRE_PAID` (monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
+         * @type {string || null}
+         */
+        this.PayType = null;
+
+        /**
+         * Data replication mode. Valid values: `0` (async), 1 (semi-sync), `2` (strong sync). Default value: `0`.
          * @type {number || null}
          */
         this.ProtectMode = null;
+
+        /**
+         * Instance isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * The number of the instance. Valid values: `1` (for read-only and basic instances), `2` (for other source instances). To query the price of a three-node instance, set this value to `3`.
+         * @type {number || null}
+         */
+        this.InstanceNodes = null;
+
+        /**
+         * CPU core count of the price-queried instance. To ensure that the CPU value to be passed in is valid, use the [DescribeDBZoneConfig](https://www.tencentcloud.com/document/product/236/17229) API to query the number of purchasable cores. If this value is not specified, a default value based on memory size will be set.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Instance ID for querying renewal price. To query the renewal price of the instance, pass in the values of `InstanceId` and `Period`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Tiered pay-as-you-go pricing, which is valid only when `PayType` is set to `HOUR_PAID`. Valid values: `1`, `2`, `3`. For more information on tiered duration, visit https://intl.cloud.tencent.com/document/product/236/18335.?from_cn_redirect=1
+         * @type {number || null}
+         */
+        this.Ladder = null;
 
     }
 
@@ -9555,14 +10089,19 @@ class DescribeDBPriceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Period = 'Period' in params ? params.Period : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.Volume = 'Volume' in params ? params.Volume : null;
-        this.PayType = 'PayType' in params ? params.PayType : null;
-        this.Period = 'Period' in params ? params.Period : null;
         this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
         this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.InstanceNodes = 'InstanceNodes' in params ? params.InstanceNodes : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ladder = 'Ladder' in params ? params.Ladder : null;
 
     }
 }
@@ -10571,6 +11110,57 @@ class DescribeDBInstanceConfigRequest extends  AbstractModel {
 }
 
 /**
+ * The purchasable specifications in a region
+ * @class
+ */
+class CdbZoneDataResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of purchasable specifications
+         * @type {Array.<CdbSellConfig> || null}
+         */
+        this.Configs = null;
+
+        /**
+         * List of AZs in purchasable regions
+         * @type {Array.<CdbRegionSellConf> || null}
+         */
+        this.Regions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Configs) {
+            this.Configs = new Array();
+            for (let z in params.Configs) {
+                let obj = new CdbSellConfig();
+                obj.deserialize(params.Configs[z]);
+                this.Configs.push(obj);
+            }
+        }
+
+        if (params.Regions) {
+            this.Regions = new Array();
+            for (let z in params.Regions) {
+                let obj = new CdbRegionSellConf();
+                obj.deserialize(params.Regions[z]);
+                this.Regions.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Instance details
  * @class
  */
@@ -10845,6 +11435,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.TagList = null;
 
+        /**
+         * Engine type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EngineType = null;
+
+        /**
+         * Maximum delay threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxDelayTime = null;
+
     }
 
     /**
@@ -10936,6 +11540,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.TagList.push(obj);
             }
         }
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
 
     }
 }
@@ -11283,6 +11889,46 @@ class RoVipInfo extends  AbstractModel {
         this.RoVpcId = 'RoVpcId' in params ? params.RoVpcId : null;
         this.RoVport = 'RoVport' in params ? params.RoVport : null;
         this.RoVip = 'RoVip' in params ? params.RoVip : null;
+
+    }
+}
+
+/**
+ * DescribeCdbZoneConfig response structure.
+ * @class
+ */
+class DescribeCdbZoneConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of purchasable specification and region information
+         * @type {CdbZoneDataResult || null}
+         */
+        this.DataResult = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DataResult) {
+            let obj = new CdbZoneDataResult();
+            obj.deserialize(params.DataResult)
+            this.DataResult = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11934,24 +12580,12 @@ class ModifyParamTemplateRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCloneList response structure.
+ * AddTimeWindow response structure.
  * @class
  */
-class DescribeCloneListResponse extends  AbstractModel {
+class AddTimeWindowResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * The number of results which meet the conditions
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Clone task list
-         * @type {Array.<CloneItem> || null}
-         */
-        this.Items = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -11967,16 +12601,6 @@ class DescribeCloneListResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new CloneItem();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -12171,16 +12795,28 @@ class DescribeBinlogBackupOverviewResponse extends  AbstractModel {
         super();
 
         /**
-         * Total capacity of log backups in bytes.
+         * Total capacity of log backups in bytes (including remote log backups)
          * @type {number || null}
          */
         this.BinlogBackupVolume = null;
 
         /**
-         * Total number of log backups.
+         * Total number of log backups (include remote log backups)
          * @type {number || null}
          */
         this.BinlogBackupCount = null;
+
+        /**
+         * Capacity of remote log backups in bytes
+         * @type {number || null}
+         */
+        this.RemoteBinlogVolume = null;
+
+        /**
+         * Number of remote backups
+         * @type {number || null}
+         */
+        this.RemoteBinlogCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -12199,6 +12835,8 @@ class DescribeBinlogBackupOverviewResponse extends  AbstractModel {
         }
         this.BinlogBackupVolume = 'BinlogBackupVolume' in params ? params.BinlogBackupVolume : null;
         this.BinlogBackupCount = 'BinlogBackupCount' in params ? params.BinlogBackupCount : null;
+        this.RemoteBinlogVolume = 'RemoteBinlogVolume' in params ? params.RemoteBinlogVolume : null;
+        this.RemoteBinlogCount = 'RemoteBinlogCount' in params ? params.RemoteBinlogCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -14495,26 +15133,36 @@ class SwitchDrInstanceToMasterResponse extends  AbstractModel {
 }
 
 /**
- * Weight rule
+ * Multi-AZ information
  * @class
  */
-class Rule extends  AbstractModel {
+class ZoneConf extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The maximum weight
-Note: this field may return `null`, indicating that no valid value can be found.
-         * @type {number || null}
+         * AZ deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
+         * @type {Array.<number> || null}
          */
-        this.LessThan = null;
+        this.DeployMode = null;
 
         /**
-         * Weight
-Note: this field may return `null`, indicating that no valid value can be found.
-         * @type {number || null}
+         * AZ where the primary instance is located
+         * @type {Array.<string> || null}
          */
-        this.Weight = null;
+        this.MasterZone = null;
+
+        /**
+         * AZ where salve database 1 is located when the instance is deployed in multi-AZ mode
+         * @type {Array.<string> || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * AZ where salve database 2 is located when the instance is deployed in multi-AZ mode
+         * @type {Array.<string> || null}
+         */
+        this.BackupZone = null;
 
     }
 
@@ -14525,44 +15173,33 @@ Note: this field may return `null`, indicating that no valid value can be found.
         if (!params) {
             return;
         }
-        this.LessThan = 'LessThan' in params ? params.LessThan : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.MasterZone = 'MasterZone' in params ? params.MasterZone : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
 
     }
 }
 
 /**
- * Audit rule filters
+ * DescribeCDBProxy request structure.
  * @class
  */
-class AuditFilter extends  AbstractModel {
+class DescribeCDBProxyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter parameter names. Valid values:
-SrcIp: Client IP;
-User: Database account;
-DB: Database name.
+         * Instance ID
          * @type {string || null}
          */
-        this.Type = null;
+        this.InstanceId = null;
 
         /**
-         * Filter match type. Valid value:
-`INC`: Include;
-`EXC`: Exclude;
-`EQ`: Equal to;
-`NEQ`: Not equal to.
+         * Proxy group ID
          * @type {string || null}
          */
-        this.Compare = null;
-
-        /**
-         * Filter match value
-         * @type {string || null}
-         */
-        this.Value = null;
+        this.ProxyGroupId = null;
 
     }
 
@@ -14573,9 +15210,8 @@ DB: Database name.
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Compare = 'Compare' in params ? params.Compare : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
 
     }
 }
@@ -14623,18 +15259,26 @@ class DescribeAccountPrivilegesRequest extends  AbstractModel {
 }
 
 /**
- * AddTimeWindow response structure.
+ * Weight rule
  * @class
  */
-class AddTimeWindowResponse extends  AbstractModel {
+class Rule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * The maximum weight
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.LessThan = null;
+
+        /**
+         * Weight
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {number || null}
+         */
+        this.Weight = null;
 
     }
 
@@ -14645,7 +15289,8 @@ class AddTimeWindowResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LessThan = 'LessThan' in params ? params.LessThan : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -15830,6 +16475,7 @@ module.exports = {
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     DescribeProxyConnectionPoolConfRequest: DescribeProxyConnectionPoolConfRequest,
     DeviceDiskInfo: DeviceDiskInfo,
+    CdbZoneSellConf: CdbZoneSellConf,
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     CreateDBImportJobRequest: CreateDBImportJobRequest,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
@@ -15842,6 +16488,7 @@ module.exports = {
     DescribeSlowLogDataResponse: DescribeSlowLogDataResponse,
     StopDBImportJobResponse: StopDBImportJobResponse,
     DescribeDBInstanceInfoResponse: DescribeDBInstanceInfoResponse,
+    SlaveInstanceInfo: SlaveInstanceInfo,
     DescribeErrorLogDataRequest: DescribeErrorLogDataRequest,
     Parameter: Parameter,
     DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
@@ -15854,6 +16501,7 @@ module.exports = {
     SwitchDBInstanceMasterSlaveResponse: SwitchDBInstanceMasterSlaveResponse,
     InstanceRollbackRangeTime: InstanceRollbackRangeTime,
     SqlFileInfo: SqlFileInfo,
+    CdbSellType: CdbSellType,
     DescribeProxyCustomConfRequest: DescribeProxyCustomConfRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     ApplyCDBProxyResponse: ApplyCDBProxyResponse,
@@ -15893,6 +16541,7 @@ module.exports = {
     ModifyBackupDownloadRestrictionRequest: ModifyBackupDownloadRestrictionRequest,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    DescribeCloneListResponse: DescribeCloneListResponse,
     ModifyAccountMaxUserConnectionsRequest: ModifyAccountMaxUserConnectionsRequest,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     SlowLogItem: SlowLogItem,
@@ -15930,6 +16579,7 @@ module.exports = {
     DeleteBackupResponse: DeleteBackupResponse,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
+    CdbRegionSellConf: CdbRegionSellConf,
     UploadInfo: UploadInfo,
     ModifyLocalBinlogConfigResponse: ModifyLocalBinlogConfigResponse,
     DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
@@ -15968,7 +16618,7 @@ module.exports = {
     OpenAuditServiceRequest: OpenAuditServiceRequest,
     BackupItem: BackupItem,
     ModifyCDBProxyVipVPortRequest: ModifyCDBProxyVipVPortRequest,
-    DescribeCDBProxyRequest: DescribeCDBProxyRequest,
+    AuditFilter: AuditFilter,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     DescribeRollbackTaskDetailRequest: DescribeRollbackTaskDetailRequest,
     TagInfoItem: TagInfoItem,
@@ -15976,7 +16626,7 @@ module.exports = {
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
     Outbound: Outbound,
-    SlaveInstanceInfo: SlaveInstanceInfo,
+    CdbSellConfig: CdbSellConfig,
     RoWeightValue: RoWeightValue,
     ModifyParamTemplateResponse: ModifyParamTemplateResponse,
     ParamInfo: ParamInfo,
@@ -15991,6 +16641,7 @@ module.exports = {
     ModifyCDBProxyVipVPortResponse: ModifyCDBProxyVipVPortResponse,
     DescribeSupportedPrivilegesResponse: DescribeSupportedPrivilegesResponse,
     CreateCloneInstanceResponse: CreateCloneInstanceResponse,
+    DescribeCdbZoneConfigRequest: DescribeCdbZoneConfigRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     TagInfoUnit: TagInfoUnit,
     OpenDBInstanceGTIDRequest: OpenDBInstanceGTIDRequest,
@@ -16030,6 +16681,7 @@ module.exports = {
     AuditPolicy: AuditPolicy,
     ModifyRoGroupInfoResponse: ModifyRoGroupInfoResponse,
     DescribeDBInstanceConfigRequest: DescribeDBInstanceConfigRequest,
+    CdbZoneDataResult: CdbZoneDataResult,
     InstanceInfo: InstanceInfo,
     OfflineIsolatedInstancesResponse: OfflineIsolatedInstancesResponse,
     DatabasePrivilege: DatabasePrivilege,
@@ -16039,6 +16691,7 @@ module.exports = {
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     UpgradeCDBProxyVersionResponse: UpgradeCDBProxyVersionResponse,
     RoVipInfo: RoVipInfo,
+    DescribeCdbZoneConfigResponse: DescribeCdbZoneConfigResponse,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     DescribeBackupDownloadRestrictionResponse: DescribeBackupDownloadRestrictionResponse,
     ModifyAccountPasswordRequest: ModifyAccountPasswordRequest,
@@ -16050,7 +16703,7 @@ module.exports = {
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
-    DescribeCloneListResponse: DescribeCloneListResponse,
+    AddTimeWindowResponse: AddTimeWindowResponse,
     DescribeRoGroupsResponse: DescribeRoGroupsResponse,
     DescribeAuditRulesResponse: DescribeAuditRulesResponse,
     BaseGroupInfo: BaseGroupInfo,
@@ -16105,10 +16758,10 @@ module.exports = {
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     DeleteAccountsRequest: DeleteAccountsRequest,
     SwitchDrInstanceToMasterResponse: SwitchDrInstanceToMasterResponse,
-    Rule: Rule,
-    AuditFilter: AuditFilter,
+    ZoneConf: ZoneConf,
+    DescribeCDBProxyRequest: DescribeCDBProxyRequest,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
-    AddTimeWindowResponse: AddTimeWindowResponse,
+    Rule: Rule,
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackTimeRange: RollbackTimeRange,
     StopRollbackRequest: StopRollbackRequest,

@@ -49,13 +49,16 @@ const DescribeCcBlackWhiteIpListResponse = models.DescribeCcBlackWhiteIpListResp
 const CreateIPAlarmThresholdConfigRequest = models.CreateIPAlarmThresholdConfigRequest;
 const CreateCcBlackWhiteIpListResponse = models.CreateCcBlackWhiteIpListResponse;
 const DescribeDefaultAlarmThresholdResponse = models.DescribeDefaultAlarmThresholdResponse;
+const CreateNewL7RulesResponse = models.CreateNewL7RulesResponse;
 const CreateDDoSAIRequest = models.CreateDDoSAIRequest;
 const DescribeListProtectThresholdConfigRequest = models.DescribeListProtectThresholdConfigRequest;
 const ModifyNewDomainRulesResponse = models.ModifyNewDomainRulesResponse;
 const CcBlackWhiteIpPolicy = models.CcBlackWhiteIpPolicy;
+const L7RuleHealth = models.L7RuleHealth;
 const DescribeCCLevelPolicyRequest = models.DescribeCCLevelPolicyRequest;
 const CreateWaterPrintConfigResponse = models.CreateWaterPrintConfigResponse;
 const DescribeListBGPIPInstancesRequest = models.DescribeListBGPIPInstancesRequest;
+const DescribeNewL7RulesResponse = models.DescribeNewL7RulesResponse;
 const StaticPackRelation = models.StaticPackRelation;
 const DescribeCCThresholdListResponse = models.DescribeCCThresholdListResponse;
 const DescribeL7RulesBySSLCertIdRequest = models.DescribeL7RulesBySSLCertIdRequest;
@@ -63,6 +66,7 @@ const DescribeListPacketFilterConfigResponse = models.DescribeListPacketFilterCo
 const CreateSchedulingDomainRequest = models.CreateSchedulingDomainRequest;
 const BoundIpInfo = models.BoundIpInfo;
 const DisassociateDDoSEipAddressResponse = models.DisassociateDDoSEipAddressResponse;
+const DescribeBgpBizTrendRequest = models.DescribeBgpBizTrendRequest;
 const DeleteCCThresholdPolicyResponse = models.DeleteCCThresholdPolicyResponse;
 const SourceServer = models.SourceServer;
 const ModifyDomainUsrNameResponse = models.ModifyDomainUsrNameResponse;
@@ -72,6 +76,7 @@ const SwitchWaterPrintConfigResponse = models.SwitchWaterPrintConfigResponse;
 const BlackWhiteIpRelation = models.BlackWhiteIpRelation;
 const DeleteWaterPrintKeyResponse = models.DeleteWaterPrintKeyResponse;
 const EipAddressPackRelation = models.EipAddressPackRelation;
+const DescribeNewL7RulesRequest = models.DescribeNewL7RulesRequest;
 const ProtocolBlockRelation = models.ProtocolBlockRelation;
 const DescribeListPacketFilterConfigRequest = models.DescribeListPacketFilterConfigRequest;
 const BGPIPInstanceUsages = models.BGPIPInstanceUsages;
@@ -98,7 +103,7 @@ const CreateDDoSSpeedLimitConfigResponse = models.CreateDDoSSpeedLimitConfigResp
 const DeletePacketFilterConfigRequest = models.DeletePacketFilterConfigRequest;
 const DescribeListDDoSGeoIPBlockConfigResponse = models.DescribeListDDoSGeoIPBlockConfigResponse;
 const DescribeBasicDeviceStatusResponse = models.DescribeBasicDeviceStatusResponse;
-const WaterPrintConfig = models.WaterPrintConfig;
+const DescribeBgpBizTrendResponse = models.DescribeBgpBizTrendResponse;
 const ProtocolBlockConfig = models.ProtocolBlockConfig;
 const DeleteCCPrecisionPolicyRequest = models.DeleteCCPrecisionPolicyRequest;
 const BGPIPInstance = models.BGPIPInstance;
@@ -144,6 +149,7 @@ const DeleteCCPrecisionPolicyResponse = models.DeleteCCPrecisionPolicyResponse;
 const DescribeListDDoSAIRequest = models.DescribeListDDoSAIRequest;
 const DescribeListIPAlarmConfigRequest = models.DescribeListIPAlarmConfigRequest;
 const PortSegment = models.PortSegment;
+const CreateNewL7RulesRequest = models.CreateNewL7RulesRequest;
 const PacketFilterConfig = models.PacketFilterConfig;
 const DefaultAlarmThreshold = models.DefaultAlarmThreshold;
 const ForwardListener = models.ForwardListener;
@@ -168,6 +174,7 @@ const SwitchWaterPrintConfigRequest = models.SwitchWaterPrintConfigRequest;
 const AssociateDDoSEipLoadBalancerRequest = models.AssociateDDoSEipLoadBalancerRequest;
 const ModifyCCPrecisionPolicyRequest = models.ModifyCCPrecisionPolicyRequest;
 const CCThresholdPolicy = models.CCThresholdPolicy;
+const WaterPrintConfig = models.WaterPrintConfig;
 const DescribeCCTrendResponse = models.DescribeCCTrendResponse;
 const CreateSchedulingDomainResponse = models.CreateSchedulingDomainResponse;
 const EipProductInfo = models.EipProductInfo;
@@ -193,6 +200,7 @@ const BGPInstanceUsages = models.BGPInstanceUsages;
 const DeleteDDoSSpeedLimitConfigResponse = models.DeleteDDoSSpeedLimitConfigResponse;
 const DeleteCCThresholdPolicyRequest = models.DeleteCCThresholdPolicyRequest;
 const DescribeListListenerRequest = models.DescribeListListenerRequest;
+const L7RuleEntry = models.L7RuleEntry;
 const CreateWaterPrintKeyResponse = models.CreateWaterPrintKeyResponse;
 const DeleteDDoSGeoIPBlockConfigResponse = models.DeleteDDoSGeoIPBlockConfigResponse;
 const DescribeDDoSTrendResponse = models.DescribeDDoSTrendResponse;
@@ -253,14 +261,14 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify layer-7 forwarding rules.
-     * @param {ModifyNewDomainRulesRequest} req
-     * @param {function(string, ModifyNewDomainRulesResponse):void} cb
+     * This API is used to obtain layer-7 forwarding rules.
+     * @param {DescribeNewL7RulesRequest} req
+     * @param {function(string, DescribeNewL7RulesResponse):void} cb
      * @public
      */
-    ModifyNewDomainRules(req, cb) {
-        let resp = new ModifyNewDomainRulesResponse();
-        this.request("ModifyNewDomainRules", req, resp, cb);
+    DescribeNewL7Rules(req, cb) {
+        let resp = new DescribeNewL7RulesResponse();
+        this.request("DescribeNewL7Rules", req, resp, cb);
     }
 
     /**
@@ -474,6 +482,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify layer-7 forwarding rules.
+     * @param {ModifyNewDomainRulesRequest} req
+     * @param {function(string, ModifyNewDomainRulesResponse):void} cb
+     * @public
+     */
+    ModifyNewDomainRules(req, cb) {
+        let resp = new ModifyNewDomainRulesResponse();
+        this.request("ModifyNewDomainRules", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind an IP to an Anti-DDoS Pro instance Both single IP instances and multi-IP instances are available. Note that you should wait until the current binding or unbinding completes before using this async API for new operations.
      * @param {CreateBoundIPRequest} req
      * @param {function(string, CreateBoundIPResponse):void} cb
@@ -551,14 +570,14 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get a list of Anti-DDoS AI protection switches.
-     * @param {DescribeListDDoSAIRequest} req
-     * @param {function(string, DescribeListDDoSAIResponse):void} cb
+     * This API is used to obtain Anti-DDoS Pro traffic data.
+     * @param {DescribeBgpBizTrendRequest} req
+     * @param {function(string, DescribeBgpBizTrendResponse):void} cb
      * @public
      */
-    DescribeListDDoSAI(req, cb) {
-        let resp = new DescribeListDDoSAIResponse();
-        this.request("DescribeListDDoSAI", req, resp, cb);
+    DescribeBgpBizTrend(req, cb) {
+        let resp = new DescribeBgpBizTrendResponse();
+        this.request("DescribeBgpBizTrend", req, resp, cb);
     }
 
     /**
@@ -706,6 +725,17 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get a list of Anti-DDoS AI protection switches.
+     * @param {DescribeListDDoSAIRequest} req
+     * @param {function(string, DescribeListDDoSAIResponse):void} cb
+     * @public
+     */
+    DescribeListDDoSAI(req, cb) {
+        let resp = new DescribeListDDoSAIResponse();
+        this.request("DescribeListDDoSAI", req, resp, cb);
+    }
+
+    /**
      * This API is used to bind an Anti-DDoS EIP to the specified private IP of a CLB instance.
      * @param {AssociateDDoSEipLoadBalancerRequest} req
      * @param {function(string, AssociateDDoSEipLoadBalancerResponse):void} cb
@@ -725,6 +755,17 @@ class AntiddosClient extends AbstractClient {
     CreateBlackWhiteIpList(req, cb) {
         let resp = new CreateBlackWhiteIpListResponse();
         this.request("CreateBlackWhiteIpList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add layer-7 forwarding rules.
+     * @param {CreateNewL7RulesRequest} req
+     * @param {function(string, CreateNewL7RulesResponse):void} cb
+     * @public
+     */
+    CreateNewL7Rules(req, cb) {
+        let resp = new CreateNewL7RulesResponse();
+        this.request("CreateNewL7Rules", req, resp, cb);
     }
 
     /**

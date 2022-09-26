@@ -2180,37 +2180,37 @@ class BackupFileInfo extends  AbstractModel {
         super();
 
         /**
-         * Snapshot file ID used for rollback
+         * Snapshot file ID, which is deprecated. You need to use `BackupId`.
          * @type {number || null}
          */
         this.SnapshotId = null;
 
         /**
-         * Snapshot file name
+         * Backup file name
          * @type {string || null}
          */
         this.FileName = null;
 
         /**
-         * Snapshot file size
+         * Backup file size
          * @type {number || null}
          */
         this.FileSize = null;
 
         /**
-         * Snapshot backup start time
+         * Backup start time
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Snapshot backup end time
+         * Backup end time
          * @type {string || null}
          */
         this.FinishTime = null;
 
         /**
-         * Backup type. snapshot: snapshot backup; timepoint: time point backup
+         * Backup type. Valid values: `snapshot` (snapshot backup), `logic` (logic backup).
          * @type {string || null}
          */
         this.BackupType = null;
@@ -2233,6 +2233,26 @@ class BackupFileInfo extends  AbstractModel {
          */
         this.SnapshotTime = null;
 
+        /**
+         * Backup ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BackupId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SnapShotType = null;
+
+        /**
+         * Backup file alias
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
     }
 
     /**
@@ -2251,6 +2271,9 @@ class BackupFileInfo extends  AbstractModel {
         this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
         this.BackupStatus = 'BackupStatus' in params ? params.BackupStatus : null;
         this.SnapshotTime = 'SnapshotTime' in params ? params.SnapshotTime : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.SnapShotType = 'SnapShotType' in params ? params.SnapShotType : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
 
     }
 }
@@ -2305,13 +2328,13 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Backup file list offset
+         * The number of results to be returned. Value range: (0,100]
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Backup file list start
+         * Record offset. Value range: [0,INF)
          * @type {number || null}
          */
         this.Offset = null;
@@ -2322,6 +2345,54 @@ class DescribeBackupListRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.DbType = null;
+
+        /**
+         * Backup ID
+         * @type {Array.<number> || null}
+         */
+        this.BackupIds = null;
+
+        /**
+         * Backup type. Valid values: `snapshot` (snapshot backup), `logic` (logic backup).
+         * @type {string || null}
+         */
+        this.BackupType = null;
+
+        /**
+         * Back mode. Valid values: `auto` (automatic backup), `manual` (manual backup)
+         * @type {string || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SnapShotType = null;
+
+        /**
+         * Backup start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Backup end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.FileNames = null;
+
+        /**
+         * Backup alias, which supports fuzzy query.
+         * @type {Array.<string> || null}
+         */
+        this.BackupNames = null;
 
     }
 
@@ -2336,6 +2407,14 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.DbType = 'DbType' in params ? params.DbType : null;
+        this.BackupIds = 'BackupIds' in params ? params.BackupIds : null;
+        this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.SnapShotType = 'SnapShotType' in params ? params.SnapShotType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.FileNames = 'FileNames' in params ? params.FileNames : null;
+        this.BackupNames = 'BackupNames' in params ? params.BackupNames : null;
 
     }
 }

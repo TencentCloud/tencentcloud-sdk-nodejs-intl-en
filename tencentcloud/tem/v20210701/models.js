@@ -118,7 +118,7 @@ class DeleteApplicationRequest extends  AbstractModel {
         super();
 
         /**
-         * Service ID
+         * Application ID.
          * @type {string || null}
          */
         this.ApplicationId = null;
@@ -130,7 +130,7 @@ class DeleteApplicationRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * Retain as default
+         * Source channel. Please keep the default value.
          * @type {number || null}
          */
         this.SourceChannel = null;
@@ -1135,10 +1135,35 @@ If `konajdk` is selected, the value can be:
         this.EnablePrometheusConf = null;
 
         /**
-         * `1`: Enable APM collection; `0`: Disable APM collection
+         * `1`: Enable APM tracing (Skywalking)
+`0`: Disable APM tracing
          * @type {number || null}
          */
         this.EnableTracing = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.EnableMetrics = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TcrInstanceId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RepoServer = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RepoType = null;
 
     }
 
@@ -1278,6 +1303,10 @@ If `konajdk` is selected, the value can be:
             this.EnablePrometheusConf = obj;
         }
         this.EnableTracing = 'EnableTracing' in params ? params.EnableTracing : null;
+        this.EnableMetrics = 'EnableMetrics' in params ? params.EnableMetrics : null;
+        this.TcrInstanceId = 'TcrInstanceId' in params ? params.TcrInstanceId : null;
+        this.RepoServer = 'RepoServer' in params ? params.RepoServer : null;
+        this.RepoType = 'RepoType' in params ? params.RepoType : null;
 
     }
 }
@@ -1622,19 +1651,19 @@ class CreateApplicationRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Whether to use the default image service. 1: yes; 0: no
+         * Whether to use the default image service. `1`: yes; `0`: no
          * @type {number || null}
          */
         this.UseDefaultImageService = null;
 
         /**
-         * Type of the bound repository. 0: Personal Edition; 1: Enterprise Edition
+         * Type of the bound repository. `0`: TCR Personal; `1`: TCR Enterprise
          * @type {number || null}
          */
         this.RepoType = null;
 
         /**
-         * Instance ID of Enterprise Edition image service
+         * TCR Enterprise instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1681,10 +1710,16 @@ class CreateApplicationRequest extends  AbstractModel {
         this.DeployMode = null;
 
         /**
-         * Whether to enable the call chain feature
+         * Whether to enable APM tracing for the Java application. `1`: Enable, `0`: Disable
          * @type {number || null}
          */
         this.EnableTracing = null;
+
+        /**
+         * Parameters of the default image service
+         * @type {UseDefaultRepoParameters || null}
+         */
+        this.UseDefaultImageServiceParameters = null;
 
     }
 
@@ -1707,6 +1742,12 @@ class CreateApplicationRequest extends  AbstractModel {
         this.CodingLanguage = 'CodingLanguage' in params ? params.CodingLanguage : null;
         this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
         this.EnableTracing = 'EnableTracing' in params ? params.EnableTracing : null;
+
+        if (params.UseDefaultImageServiceParameters) {
+            let obj = new UseDefaultRepoParameters();
+            obj.deserialize(params.UseDefaultImageServiceParameters)
+            this.UseDefaultImageServiceParameters = obj;
+        }
 
     }
 }
@@ -2076,6 +2117,41 @@ class DeleteIngressResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DestroyEnvironment request structure.
+ * @class
+ */
+class DestroyEnvironmentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Namespace ID.
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * Namespace
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
 
     }
 }
@@ -2846,7 +2922,7 @@ class ModifyApplicationInfoRequest extends  AbstractModel {
         this.SourceChannel = null;
 
         /**
-         * Whether to enable the call chain. Valid values: `0`: disable; `1`: enable
+         * (Disused) Whether to enable the call chain. 
          * @type {number || null}
          */
         this.EnableTracing = null;
@@ -2913,7 +2989,7 @@ class DeleteApplicationResponse extends  AbstractModel {
         super();
 
         /**
-         * Returned result
+         * Returned result.
          * @type {boolean || null}
          */
         this.Result = null;
@@ -3073,30 +3149,24 @@ class NamespacePage extends  AbstractModel {
 }
 
 /**
- * RestartApplication request structure.
+ * DestroyEnvironment response structure.
  * @class
  */
-class RestartApplicationRequest extends  AbstractModel {
+class DestroyEnvironmentResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID
-         * @type {string || null}
+         * Returned result.
+         * @type {boolean || null}
          */
-        this.ApplicationId = null;
+        this.Result = null;
 
         /**
-         * Retain as default
-         * @type {number || null}
-         */
-        this.SourceChannel = null;
-
-        /**
-         * Environment ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EnvironmentId = null;
+        this.RequestId = null;
 
     }
 
@@ -3107,9 +3177,8 @@ class RestartApplicationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
-        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3123,7 +3192,7 @@ class CreateApplicationResponse extends  AbstractModel {
         super();
 
         /**
-         * Service code
+         * ID of the created application
          * @type {string || null}
          */
         this.Result = null;
@@ -3241,6 +3310,48 @@ class StorageMountConf extends  AbstractModel {
 }
 
 /**
+ * RestartApplication request structure.
+ * @class
+ */
+class RestartApplicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * Retain as default
+         * @type {number || null}
+         */
+        this.SourceChannel = null;
+
+        /**
+         * Environment ID
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+
+    }
+}
+
+/**
  * Service port mapping
  * @class
  */
@@ -3266,6 +3377,12 @@ class PortMapping extends  AbstractModel {
          */
         this.Protocol = null;
 
+        /**
+         * K8s service name
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
     }
 
     /**
@@ -3278,6 +3395,52 @@ class PortMapping extends  AbstractModel {
         this.Port = 'Port' in params ? params.Port : null;
         this.TargetPort = 'TargetPort' in params ? params.TargetPort : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+
+    }
+}
+
+/**
+ * Repository parameters 
+ * @class
+ */
+class UseDefaultRepoParameters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TCR Enterprise instance name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EnterpriseInstanceName = null;
+
+        /**
+         * TCR Enterprise billing mode. `0`: Pay-as-you-go 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EnterpriseInstanceChargeType = null;
+
+        /**
+         * Edition of the TCR Enterprise. Values: `basic`, `standard`, `premium` (Advanced edition)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EnterpriseInstanceType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnterpriseInstanceName = 'EnterpriseInstanceName' in params ? params.EnterpriseInstanceName : null;
+        this.EnterpriseInstanceChargeType = 'EnterpriseInstanceChargeType' in params ? params.EnterpriseInstanceChargeType : null;
+        this.EnterpriseInstanceType = 'EnterpriseInstanceType' in params ? params.EnterpriseInstanceType : null;
 
     }
 }
@@ -4096,6 +4259,7 @@ module.exports = {
     LogOutputConf: LogOutputConf,
     DescribeIngressesResponse: DescribeIngressesResponse,
     DeleteIngressResponse: DeleteIngressResponse,
+    DestroyEnvironmentRequest: DestroyEnvironmentRequest,
     TemNamespaceInfo: TemNamespaceInfo,
     GenerateApplicationPackageDownloadUrlResponse: GenerateApplicationPackageDownloadUrlResponse,
     IngressRuleBackend: IngressRuleBackend,
@@ -4115,11 +4279,13 @@ module.exports = {
     IngressRulePath: IngressRulePath,
     CreateEnvironmentResponse: CreateEnvironmentResponse,
     NamespacePage: NamespacePage,
-    RestartApplicationRequest: RestartApplicationRequest,
+    DestroyEnvironmentResponse: DestroyEnvironmentResponse,
     CreateApplicationResponse: CreateApplicationResponse,
     HorizontalAutoscaler: HorizontalAutoscaler,
     StorageMountConf: StorageMountConf,
+    RestartApplicationRequest: RestartApplicationRequest,
     PortMapping: PortMapping,
+    UseDefaultRepoParameters: UseDefaultRepoParameters,
     DeployStrategyConf: DeployStrategyConf,
     StopApplicationRequest: StopApplicationRequest,
     DescribeIngressRequest: DescribeIngressRequest,

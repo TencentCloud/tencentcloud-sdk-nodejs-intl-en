@@ -1626,6 +1626,18 @@ Note: only the above values are supported for the time being. Entering other val
          */
         this.SearchFields = null;
 
+        /**
+         * None
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * None
+         * @type {number || null}
+         */
+        this.Asc = null;
+
     }
 
     /**
@@ -1649,6 +1661,8 @@ Note: only the above values are supported for the time being. Entering other val
                 this.SearchFields.push(obj);
             }
         }
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Asc = 'Asc' in params ? params.Asc : null;
 
     }
 }
@@ -4833,6 +4847,34 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.Clients = null;
 
+        /**
+         * The current system time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CurrentTime = null;
+
+        /**
+         * Whether the hardware node is used in a federation. Valid values: `0` (no), `1` (yes).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsFederation = null;
+
+        /**
+         * Device name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * Service
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServiceClient = null;
+
     }
 
     /**
@@ -4912,6 +4954,10 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             this.SubnetInfo = obj;
         }
         this.Clients = 'Clients' in params ? params.Clients : null;
+        this.CurrentTime = 'CurrentTime' in params ? params.CurrentTime : null;
+        this.IsFederation = 'IsFederation' in params ? params.IsFederation : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.ServiceClient = 'ServiceClient' in params ? params.ServiceClient : null;
 
     }
 }

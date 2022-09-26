@@ -304,7 +304,7 @@ class CreateAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * Account type of a new customer. Valid value: `business`.
+         * Account type of a new customer. Valid values: `personal`, `company`.
          * @type {string || null}
          */
         this.AccountType = null;

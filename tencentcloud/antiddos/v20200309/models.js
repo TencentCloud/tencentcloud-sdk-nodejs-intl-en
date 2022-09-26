@@ -1514,6 +1514,46 @@ class DescribeDefaultAlarmThresholdResponse extends  AbstractModel {
 }
 
 /**
+ * CreateNewL7Rules response structure.
+ * @class
+ */
+class CreateNewL7RulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Success code
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateDDoSAI request structure.
  * @class
  */
@@ -1746,6 +1786,132 @@ class CcBlackWhiteIpPolicy extends  AbstractModel {
 }
 
 /**
+ * Health check parameters of layer-7 forwarding rules
+ * @class
+ */
+class L7RuleHealth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration status. Values: `0` (normal), `1` (configuration in progress) and `2` (configuration failed).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Switch. Values: `1`: Enable; `0`: Disable.
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * ID of the rule
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * HTTP request path. The default value is /.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Health check interval. Unit: second.
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * Healthy threshold, which specifies the number of consecutive successful health checks.
+         * @type {number || null}
+         */
+        this.AliveNum = null;
+
+        /**
+         * Unhealthy threshold, which specifies the number of consecutive failed health checks.
+         * @type {number || null}
+         */
+        this.KickNum = null;
+
+        /**
+         * HTTP request method. Values: `HEAD` and `GET`.
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * Status code that signifies a normal state. Values: `1` (1xx), `2` (2xx), `4` (3xx), `8` (4xx), and `16` (5xx).
+         * @type {number || null}
+         */
+        this.StatusCode = null;
+
+        /**
+         * Whether to deploy both HTTP and HTTPS health check rules
+         * @type {number || null}
+         */
+        this.ProtocolFlag = null;
+
+        /**
+         * Enables passive detection. Values: `1` (enable) and `0` (disable).
+         * @type {number || null}
+         */
+        this.PassiveEnable = null;
+
+        /**
+         * Blocking period in the passive detection configuration
+         * @type {number || null}
+         */
+        this.BlockInter = null;
+
+        /**
+         * Time interval between passive detections
+         * @type {number || null}
+         */
+        this.FailedCountInter = null;
+
+        /**
+         * Unhealthy threshold in the passive detection configuration
+         * @type {number || null}
+         */
+        this.FailedThreshold = null;
+
+        /**
+         * Status code that signals that the passive detection considers the status normal. Values: `1` (1xx), `2` (2xx), `4` (3xx), `8` (4xx), and `16` (5xx).
+         * @type {number || null}
+         */
+        this.PassiveStatusCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.AliveNum = 'AliveNum' in params ? params.AliveNum : null;
+        this.KickNum = 'KickNum' in params ? params.KickNum : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
+        this.ProtocolFlag = 'ProtocolFlag' in params ? params.ProtocolFlag : null;
+        this.PassiveEnable = 'PassiveEnable' in params ? params.PassiveEnable : null;
+        this.BlockInter = 'BlockInter' in params ? params.BlockInter : null;
+        this.FailedCountInter = 'FailedCountInter' in params ? params.FailedCountInter : null;
+        this.FailedThreshold = 'FailedThreshold' in params ? params.FailedThreshold : null;
+        this.PassiveStatusCode = 'PassiveStatusCode' in params ? params.PassiveStatusCode : null;
+
+    }
+}
+
+/**
  * DescribeCCLevelPolicy request structure.
  * @class
  */
@@ -1955,6 +2121,71 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
             this.FilterTag = obj;
         }
         this.FilterPackType = 'FilterPackType' in params ? params.FilterPackType : null;
+
+    }
+}
+
+/**
+ * DescribeNewL7Rules response structure.
+ * @class
+ */
+class DescribeNewL7RulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of forwarding rules
+         * @type {Array.<NewL7RuleEntry> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * List of health check settings
+         * @type {Array.<L7RuleHealth> || null}
+         */
+        this.Healths = null;
+
+        /**
+         * Total number of rules
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new NewL7RuleEntry();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+
+        if (params.Healths) {
+            this.Healths = new Array();
+            for (let z in params.Healths) {
+                let obj = new L7RuleHealth();
+                obj.deserialize(params.Healths[z]);
+                this.Healths.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2265,6 +2496,69 @@ class DisassociateDDoSEipAddressResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBgpBizTrend request structure.
+ * @class
+ */
+class DescribeBgpBizTrendRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS service code. `bgp-multip` indicates Anti-DDos Pro.
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Beginning of the time range for the query, such as `2020-09-22 00:00:00`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End of the time range for the query, such as `2020-09-22 00:00:00`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Statistical metric. Values: `intraffic`, `outtraffic`, `inpkg`, and `outpkg`.
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * `0`: Fixed time. `1`: Custom time.
+         * @type {number || null}
+         */
+        this.Flag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
 
     }
 }
@@ -2591,6 +2885,83 @@ class EipAddressPackRelation extends  AbstractModel {
         this.IpCount = 'IpCount' in params ? params.IpCount : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.CurDeadline = 'CurDeadline' in params ? params.CurDeadline : null;
+
+    }
+}
+
+/**
+ * DescribeNewL7Rules request structure.
+ * @class
+ */
+class DescribeNewL7RulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * (Optional) Searches by rule status. Valid values: `0` (Successfully configured), `1` (Being configured), `2` (Configuration failed), `3` (Being deleted), `5` (Deletion failed), `6` (awaiting configuration), `7` (awaiting deletion), and `8` (awaiting certificate configuration).
+         * @type {Array.<number> || null}
+         */
+        this.StatusList = null;
+
+        /**
+         * (Optional) Searches by domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * (Optional) Searches by IP.
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Number of items in a page. Returned results are not paged if you enter “0”.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Starting offset of the page. Value: (number of pages – 1) * items per page.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * (Optional) Searches by forwarding protocol. Values: [http, https, http/https]
+         * @type {Array.<string> || null}
+         */
+        this.ProtocolList = null;
+
+        /**
+         * CNAME of the Anti-DDoS Advanced instance
+         * @type {string || null}
+         */
+        this.Cname = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.StatusList = 'StatusList' in params ? params.StatusList : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ProtocolList = 'ProtocolList' in params ? params.ProtocolList : null;
+        this.Cname = 'Cname' in params ? params.Cname : null;
 
     }
 }
@@ -3004,6 +3375,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Port = null;
 
+        /**
+         * Secondary origin server. `1`: secondary origin server; `0`: general origin server.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Backup = null;
+
     }
 
     /**
@@ -3016,6 +3394,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Source = 'Source' in params ? params.Source : null;
         this.Weight = 'Weight' in params ? params.Weight : null;
         this.Port = 'Port' in params ? params.Port : null;
+        this.Backup = 'Backup' in params ? params.Backup : null;
 
     }
 }
@@ -3698,48 +4077,42 @@ class DescribeBasicDeviceStatusResponse extends  AbstractModel {
 }
 
 /**
- * Watermark configuration
+ * DescribeBgpBizTrend response structure.
  * @class
  */
-class WaterPrintConfig extends  AbstractModel {
+class DescribeBgpBizTrendResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermark offset. Value range: [0, 100).
+         * Values of the samples
+         * @type {Array.<number> || null}
+         */
+        this.DataList = null;
+
+        /**
+         * Number of samples
          * @type {number || null}
          */
-        this.Offset = null;
+        this.Total = null;
 
         /**
-         * Start status. Valid values:
-`0`: manual start
-`1`: instant start
-]
-         * @type {number || null}
-         */
-        this.OpenStatus = null;
-
-        /**
-         * List of forwarding listeners configured
-         * @type {Array.<ForwardListener> || null}
-         */
-        this.Listeners = null;
-
-        /**
-         * A list of watermark keys is generated after a watermark is added successfully. Each watermark can have up to 2 keys. When there is only one valid key, it cannot be deleted.
-         * @type {Array.<WaterPrintKey> || null}
-         */
-        this.Keys = null;
-
-        /**
-         * Watermark checking mode, which can be:
-`checkall`: normal mode
-`shortfpcheckall`: compact mode
-]
+         * Statistical metric
          * @type {string || null}
          */
-        this.Verify = null;
+        this.MetricName = null;
+
+        /**
+         * Maximum value of the arrays returned
+         * @type {number || null}
+         */
+        this.MaxData = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -3750,27 +4123,11 @@ class WaterPrintConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
-
-        if (params.Listeners) {
-            this.Listeners = new Array();
-            for (let z in params.Listeners) {
-                let obj = new ForwardListener();
-                obj.deserialize(params.Listeners[z]);
-                this.Listeners.push(obj);
-            }
-        }
-
-        if (params.Keys) {
-            this.Keys = new Array();
-            for (let z in params.Keys) {
-                let obj = new WaterPrintKey();
-                obj.deserialize(params.Keys[z]);
-                this.Keys.push(obj);
-            }
-        }
-        this.Verify = 'Verify' in params ? params.Verify : null;
+        this.DataList = 'DataList' in params ? params.DataList : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.MaxData = 'MaxData' in params ? params.MaxData : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4031,7 +4388,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.AnycastOutPackRelation = null;
 
         /**
-         * 
+         * Edition of the instance
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.InstanceVersion = null;
@@ -6270,6 +6628,63 @@ class PortSegment extends  AbstractModel {
 }
 
 /**
+ * CreateNewL7Rules request structure.
+ * @class
+ */
+class CreateNewL7RulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of rules
+         * @type {Array.<L7RuleEntry> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * List of resource IDs
+         * @type {Array.<string> || null}
+         */
+        this.IdList = null;
+
+        /**
+         * List of resource IPs
+         * @type {Array.<string> || null}
+         */
+        this.VipList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new L7RuleEntry();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.IdList = 'IdList' in params ? params.IdList : null;
+        this.VipList = 'VipList' in params ? params.VipList : null;
+
+    }
+}
+
+/**
  * Feature filtering configuration
  * @class
  */
@@ -7751,6 +8166,84 @@ class CCThresholdPolicy extends  AbstractModel {
 }
 
 /**
+ * Watermark configuration
+ * @class
+ */
+class WaterPrintConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark offset. Value range: [0, 100).
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Start status. Valid values:
+`0`: manual start
+`1`: instant start
+]
+         * @type {number || null}
+         */
+        this.OpenStatus = null;
+
+        /**
+         * List of forwarding listeners configured
+         * @type {Array.<ForwardListener> || null}
+         */
+        this.Listeners = null;
+
+        /**
+         * A list of watermark keys is generated after a watermark is added successfully. Each watermark can have up to 2 keys. When there is only one valid key, it cannot be deleted.
+         * @type {Array.<WaterPrintKey> || null}
+         */
+        this.Keys = null;
+
+        /**
+         * Watermark checking mode, which can be:
+`checkall`: normal mode
+`shortfpcheckall`: compact mode
+]
+         * @type {string || null}
+         */
+        this.Verify = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
+
+        if (params.Listeners) {
+            this.Listeners = new Array();
+            for (let z in params.Listeners) {
+                let obj = new ForwardListener();
+                obj.deserialize(params.Listeners[z]);
+                this.Listeners.push(obj);
+            }
+        }
+
+        if (params.Keys) {
+            this.Keys = new Array();
+            for (let z in params.Keys) {
+                let obj = new WaterPrintKey();
+                obj.deserialize(params.Keys[z]);
+                this.Keys.push(obj);
+            }
+        }
+        this.Verify = 'Verify' in params ? params.Verify : null;
+
+    }
+}
+
+/**
  * DescribeCCTrend response structure.
  * @class
  */
@@ -9129,6 +9622,191 @@ class DescribeListListenerRequest extends  AbstractModel {
 }
 
 /**
+ * Layer-7 forwarding rule.
+ * @class
+ */
+class L7RuleEntry extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Session persistence duration, in seconds.
+         * @type {number || null}
+         */
+        this.KeepTime = null;
+
+        /**
+         * Forwarding domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Forwarding protocol. Valid values: `http` and `https`.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Forwarding method. Valid values: `1` (by domain name); `2` (by IP).
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * Load balancing method. Valid value: `1` (weighed polling).
+         * @type {number || null}
+         */
+        this.LbType = null;
+
+        /**
+         * List of origins
+         * @type {Array.<L4RuleSource> || null}
+         */
+        this.SourceList = null;
+
+        /**
+         * Whether session persistence is enabled. Valid values: `0` (disabled) and `1` (enabled).
+         * @type {number || null}
+         */
+        this.KeepEnable = null;
+
+        /**
+         * Rule status. Valid values: `0` (the rule was successfully configured), `1` (configuring the rule), `2` (rule configuration failed), `3` (deleting the rule), `5` (failed to delete rule), `6` (rule awaiting configuration), `7` (rule awaiting deletion), and `8` (rule awaiting certificate configuration).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Rule ID. This field is not required for adding a rule, but is required for modifying or deleting a rule.
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * CC protection threshold based on HTTPS.
+         * @type {number || null}
+         */
+        this.CCThreshold = null;
+
+        /**
+         * [Disused] When the certificate is an external certificate, the certificate key should be provided here. 
+         * @type {string || null}
+         */
+        this.PrivateKey = null;
+
+        /**
+         * CC protection status based on HTTPS. Valid values: `0` (disabled) and `1` (enabled).
+         * @type {number || null}
+         */
+        this.CCEnable = null;
+
+        /**
+         * Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disable) and `1` (enable). It defaults to `0`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.HttpsToHttpEnable = null;
+
+        /**
+         * Certificate source. When the forwarding protocol is HTTPS, this field must be set to `2` (Tencent Cloud managed certificate), and for HTTP protocol, it can be set to `0`.
+         * @type {number || null}
+         */
+        this.CertType = null;
+
+        /**
+         * [Disused] When the certificate is an external certificate, the certificate content should be provided here. 
+         * @type {string || null}
+         */
+        this.Cert = null;
+
+        /**
+         * CC protection level based on HTTPS.
+         * @type {string || null}
+         */
+        this.CCLevel = null;
+
+        /**
+         * Rule description.
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * CC protection status. Valid values: `0` (disabled) and `1` (enabled).
+         * @type {number || null}
+         */
+        this.CCStatus = null;
+
+        /**
+         * Access port number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VirtualPort = null;
+
+        /**
+         * When the certificate is managed by Tencent Cloud, this field must be set to the ID of the managed certificate.
+         * @type {string || null}
+         */
+        this.SSLId = null;
+
+        /**
+         * ID of the rule
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Intelligent CC protection status. Valid values: `0` (disabled) and `1` (enabled).
+         * @type {number || null}
+         */
+        this.CCAIEnable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeepTime = 'KeepTime' in params ? params.KeepTime : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.LbType = 'LbType' in params ? params.LbType : null;
+
+        if (params.SourceList) {
+            this.SourceList = new Array();
+            for (let z in params.SourceList) {
+                let obj = new L4RuleSource();
+                obj.deserialize(params.SourceList[z]);
+                this.SourceList.push(obj);
+            }
+        }
+        this.KeepEnable = 'KeepEnable' in params ? params.KeepEnable : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
+        this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
+        this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
+        this.HttpsToHttpEnable = 'HttpsToHttpEnable' in params ? params.HttpsToHttpEnable : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.Cert = 'Cert' in params ? params.Cert : null;
+        this.CCLevel = 'CCLevel' in params ? params.CCLevel : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.CCStatus = 'CCStatus' in params ? params.CCStatus : null;
+        this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
+        this.SSLId = 'SSLId' in params ? params.SSLId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.CCAIEnable = 'CCAIEnable' in params ? params.CCAIEnable : null;
+
+    }
+}
+
+/**
  * CreateWaterPrintKey response structure.
  * @class
  */
@@ -9926,13 +10604,16 @@ module.exports = {
     CreateIPAlarmThresholdConfigRequest: CreateIPAlarmThresholdConfigRequest,
     CreateCcBlackWhiteIpListResponse: CreateCcBlackWhiteIpListResponse,
     DescribeDefaultAlarmThresholdResponse: DescribeDefaultAlarmThresholdResponse,
+    CreateNewL7RulesResponse: CreateNewL7RulesResponse,
     CreateDDoSAIRequest: CreateDDoSAIRequest,
     DescribeListProtectThresholdConfigRequest: DescribeListProtectThresholdConfigRequest,
     ModifyNewDomainRulesResponse: ModifyNewDomainRulesResponse,
     CcBlackWhiteIpPolicy: CcBlackWhiteIpPolicy,
+    L7RuleHealth: L7RuleHealth,
     DescribeCCLevelPolicyRequest: DescribeCCLevelPolicyRequest,
     CreateWaterPrintConfigResponse: CreateWaterPrintConfigResponse,
     DescribeListBGPIPInstancesRequest: DescribeListBGPIPInstancesRequest,
+    DescribeNewL7RulesResponse: DescribeNewL7RulesResponse,
     StaticPackRelation: StaticPackRelation,
     DescribeCCThresholdListResponse: DescribeCCThresholdListResponse,
     DescribeL7RulesBySSLCertIdRequest: DescribeL7RulesBySSLCertIdRequest,
@@ -9940,6 +10621,7 @@ module.exports = {
     CreateSchedulingDomainRequest: CreateSchedulingDomainRequest,
     BoundIpInfo: BoundIpInfo,
     DisassociateDDoSEipAddressResponse: DisassociateDDoSEipAddressResponse,
+    DescribeBgpBizTrendRequest: DescribeBgpBizTrendRequest,
     DeleteCCThresholdPolicyResponse: DeleteCCThresholdPolicyResponse,
     SourceServer: SourceServer,
     ModifyDomainUsrNameResponse: ModifyDomainUsrNameResponse,
@@ -9949,6 +10631,7 @@ module.exports = {
     BlackWhiteIpRelation: BlackWhiteIpRelation,
     DeleteWaterPrintKeyResponse: DeleteWaterPrintKeyResponse,
     EipAddressPackRelation: EipAddressPackRelation,
+    DescribeNewL7RulesRequest: DescribeNewL7RulesRequest,
     ProtocolBlockRelation: ProtocolBlockRelation,
     DescribeListPacketFilterConfigRequest: DescribeListPacketFilterConfigRequest,
     BGPIPInstanceUsages: BGPIPInstanceUsages,
@@ -9975,7 +10658,7 @@ module.exports = {
     DeletePacketFilterConfigRequest: DeletePacketFilterConfigRequest,
     DescribeListDDoSGeoIPBlockConfigResponse: DescribeListDDoSGeoIPBlockConfigResponse,
     DescribeBasicDeviceStatusResponse: DescribeBasicDeviceStatusResponse,
-    WaterPrintConfig: WaterPrintConfig,
+    DescribeBgpBizTrendResponse: DescribeBgpBizTrendResponse,
     ProtocolBlockConfig: ProtocolBlockConfig,
     DeleteCCPrecisionPolicyRequest: DeleteCCPrecisionPolicyRequest,
     BGPIPInstance: BGPIPInstance,
@@ -10021,6 +10704,7 @@ module.exports = {
     DescribeListDDoSAIRequest: DescribeListDDoSAIRequest,
     DescribeListIPAlarmConfigRequest: DescribeListIPAlarmConfigRequest,
     PortSegment: PortSegment,
+    CreateNewL7RulesRequest: CreateNewL7RulesRequest,
     PacketFilterConfig: PacketFilterConfig,
     DefaultAlarmThreshold: DefaultAlarmThreshold,
     ForwardListener: ForwardListener,
@@ -10045,6 +10729,7 @@ module.exports = {
     AssociateDDoSEipLoadBalancerRequest: AssociateDDoSEipLoadBalancerRequest,
     ModifyCCPrecisionPolicyRequest: ModifyCCPrecisionPolicyRequest,
     CCThresholdPolicy: CCThresholdPolicy,
+    WaterPrintConfig: WaterPrintConfig,
     DescribeCCTrendResponse: DescribeCCTrendResponse,
     CreateSchedulingDomainResponse: CreateSchedulingDomainResponse,
     EipProductInfo: EipProductInfo,
@@ -10070,6 +10755,7 @@ module.exports = {
     DeleteDDoSSpeedLimitConfigResponse: DeleteDDoSSpeedLimitConfigResponse,
     DeleteCCThresholdPolicyRequest: DeleteCCThresholdPolicyRequest,
     DescribeListListenerRequest: DescribeListListenerRequest,
+    L7RuleEntry: L7RuleEntry,
     CreateWaterPrintKeyResponse: CreateWaterPrintKeyResponse,
     DeleteDDoSGeoIPBlockConfigResponse: DeleteDDoSGeoIPBlockConfigResponse,
     DescribeDDoSTrendResponse: DescribeDDoSTrendResponse,

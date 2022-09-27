@@ -257,13 +257,13 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the Lighthouse package
+         * Bundle ID.
          * @type {string || null}
          */
         this.BundleId = null;
 
         /**
-         * ID of the Lighthouse image
+         * Image ID
          * @type {string || null}
          */
         this.BlueprintId = null;
@@ -275,13 +275,13 @@ class CreateInstancesRequest extends  AbstractModel {
         this.InstanceChargePrepaid = null;
 
         /**
-         * The display name of the Lighthouse instance
+         * Instance display name.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Number of the Lighthouse instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
+         * Number of the instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
          * @type {number || null}
          */
         this.InstanceCount = null;
@@ -320,6 +320,12 @@ If the dry run succeeds, the RequestId will be returned.
          */
         this.Containers = null;
 
+        /**
+         * Whether to use the vouchers automatically. It defaults to No.
+         * @type {boolean || null}
+         */
+        this.AutoVoucher = null;
+
     }
 
     /**
@@ -357,6 +363,7 @@ If the dry run succeeds, the RequestId will be returned.
                 this.Containers.push(obj);
             }
         }
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
 
     }
 }
@@ -372,7 +379,7 @@ class DescribeZonesRequest extends  AbstractModel {
         /**
          * Sorting field. Valid values:
 <li>`ZONE`: Sort by the availability zone.
-<li>`INSTANCE_DISPLAY_LABEL`: Sort by the labels of availability zones. Labels include `HIDDEN`, `NORMAL` and `SELECTED`.
+<li>`INSTANCE_DISPLAY_LABEL`: Sort by visibility labels (`HIDDEN`, `NORMAL` and `SELECTED`). Default: ['HIDDEN', 'NORMAL', 'SELECTED'].
 The default value is `ZONE`.
          * @type {string || null}
          */
@@ -577,6 +584,12 @@ class InquirePriceCreateDisksRequest extends  AbstractModel {
          */
         this.DiskCount = null;
 
+        /**
+         * Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+         * @type {number || null}
+         */
+        this.DiskBackupQuota = null;
+
     }
 
     /**
@@ -595,6 +608,7 @@ class InquirePriceCreateDisksRequest extends  AbstractModel {
             this.DiskChargePrepaid = obj;
         }
         this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
+        this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
 
     }
 }
@@ -741,7 +755,7 @@ class InquirePriceRenewInstancesResponse extends  AbstractModel {
 
         /**
          * List of data disk price information.
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DataDiskPrice> || null}
          */
         this.DataDiskPriceSet = null;
@@ -853,7 +867,18 @@ class DescribeGeneralResourceQuotasRequest extends  AbstractModel {
         super();
 
         /**
-         * List of resource names. Valid values: USER_KEY_PAIR, INSTANCE, SNAPSHOT.
+         * Resource name list. Values:
+- `GENERAL_BUNDLE_INSTANCE`: General bundle
+- `STORAGE_BUNDLE_INSTANCE`:  Storage bundle 
+- `ENTERPRISE_BUNDLE_INSTANCE`: Enterprise bundle 
+- `EXCLUSIVE_BUNDLE_INSTANCE`： Dedicated bundle
+- `BEFAST_BUNDLE_INSTANCE`: BeFast bundle
+- `USER_KEY_PAIR`: Key pair
+- `SNAPSHOT`: Snapshot
+- `BLUEPRINT`: Custom image
+- `FREE_BLUEPRINT`: Free custom image
+- `DATA_DISK`: Data disk
+- `FIREWALL_RULE`: Firewall rules
          * @type {Array.<string> || null}
          */
         this.ResourceNames = null;
@@ -901,7 +926,7 @@ class DeleteKeyPairsRequest extends  AbstractModel {
 }
 
 /**
- * Information of the block device where the OS is installed, namely, the system disk.
+ * Information on the block device where the operating system is installed, namely the system disk.
  * @class
  */
 class SystemDisk extends  AbstractModel {
@@ -1830,7 +1855,17 @@ class Disk extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
-         * Disk status
+         * Disk status. Values: 
+<li>`PENDING`: Creating</li>
+<li>`UNATTACHED`: Not attached</li>
+<li>`ATTACHING`: Attaching</li>
+<li>`ATTACHED`: Attached</li>
+<li>`DETACHING`: Detaching</li>
+<li>`SHUTDOWN`: Isolated</li>
+<li>`CREATED_FAILED`: Failed to create</li>
+<li>`TERMINATING`: Terminating</li>
+<li>`DELETING`: Deleting</li>
+<li>`FREEZING`: Freezing</li>
          * @type {string || null}
          */
         this.DiskState = null;
@@ -1866,24 +1901,39 @@ class Disk extends  AbstractModel {
         this.LatestOperationRequestId = null;
 
         /**
-         * Creation time
+         * Creation time according to ISO 8601 standard. UTC time is used. 
+Format: YYYY-MM-DDThh:mm:ssZ.
          * @type {string || null}
          */
         this.CreatedTime = null;
 
         /**
-         * Expiration date
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Expiration time according to ISO 8601 standard. UTC time is used. 
+Format: YYYY-MM-DDThh:mm:ssZ.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExpiredTime = null;
 
         /**
-         * Isolation time
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Isolation time according to ISO 8601 standard. UTC time is used. 
+Format: YYYY-MM-DDThh:mm:ssZ.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IsolatedTime = null;
+
+        /**
+         * Total disk backups
+         * @type {number || null}
+         */
+        this.DiskBackupCount = null;
+
+        /**
+         * Disk backup quota
+         * @type {number || null}
+         */
+        this.DiskBackupQuota = null;
 
     }
 
@@ -1912,6 +1962,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
         this.IsolatedTime = 'IsolatedTime' in params ? params.IsolatedTime : null;
+        this.DiskBackupCount = 'DiskBackupCount' in params ? params.DiskBackupCount : null;
+        this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
 
     }
 }
@@ -2479,6 +2531,64 @@ class DescribeInstancesDiskNumRequest extends  AbstractModel {
 }
 
 /**
+ * Billable items
+ * @class
+ */
+class DetailPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Values: 
+<li>"DiskSpace": Cloud disk space</li>
+<li>"DiskBackupQuota": Cloud disk backups</li>
+         * @type {string || null}
+         */
+        this.PriceName = null;
+
+        /**
+         * Official unit price of the billable item
+         * @type {number || null}
+         */
+        this.OriginUnitPrice = null;
+
+        /**
+         * Official total price of the billable item
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Discount of the billable item
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * Discounted total price of the billable item
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PriceName = 'PriceName' in params ? params.PriceName : null;
+        this.OriginUnitPrice = 'OriginUnitPrice' in params ? params.OriginUnitPrice : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+    }
+}
+
+/**
  * DescribeBlueprints request structure.
  * @class
  */
@@ -2510,17 +2620,20 @@ class DescribeBlueprintsRequest extends  AbstractModel {
 Type: String
 Required: no
 <li>blueprint-type</li>Filter by **image type**.
-Valid values: `APP_OS`: application image; `PURE_OS`: system image; `PRIVATE`: custom image; `SHARED`: shared image
+Valid values: `APP_OS` (application image); `PURE_OS` (system image); `PRIVATE` (custom image) and `SHARED` (shared image)
 Type: String
 Required: no
-<li>platform-type</li>Filter by **image platform type**.
-Valid values: `LINUX_UNIX`: Linux or Unix; `WINDOWS`: Windows
+<li>platform-type</li>Filter by **image operating system**.
+Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 Type: String
 Required: no
 <li>blueprint-name</li>Filter by **image name**.
 Type: String
 Required: no
 <li>blueprint-state</li>Filter by **image status**.
+Type: String
+Required: no
+<li>scene-id</li>Filter by **scene ID**.
 Type: String
 Required: no
 
@@ -2703,14 +2816,14 @@ class DockerContainerPublishPort extends  AbstractModel {
 
         /**
          * External IP. It defaults to 0.0.0.0.
-Note: This field may return `null`, indicating that no valid value was found.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
          * The protocol defaults to `tcp`. Valid values: `tcp`, `udp` and `sctp`.
-Note: This field may return `null`, indicating that no valid value was found.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -3156,7 +3269,7 @@ class DataDiskPrice extends  AbstractModel {
         this.OriginalDiskPrice = null;
 
         /**
-         * Total cloud disk price.
+         * Total price of cloud disk
          * @type {number || null}
          */
         this.OriginalPrice = null;
@@ -3798,7 +3911,7 @@ class ResetInstancesPasswordResponse extends  AbstractModel {
 }
 
 /**
- * Instance login configuration and information.
+ * Describes login settings of an instance.
  * @class
  */
 class LoginSettings extends  AbstractModel {
@@ -3918,7 +4031,7 @@ NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically.
 
         /**
          * Instance status. Valid values: 
-<li>PENDING: creating</li><li>LAUNCH_FAILED: creation failed</li><li>RUNNING: running</li><li>STOPPED: shut down</li><li>STARTING: starting</li><li>STOPPING: shutting down</li><li>REBOOTING: rebooting</li><li>SHUTDOWN: shut down and to be terminated</li><li>TERMINATING: terminating</li>
+<li>PENDING: Creating</li><li>LAUNCH_FAILED: Failed to create</li><li>RUNNING: Running</li><li>STOPPED: Shut down</li><li>STARTING: Starting up</li><li>STOPPING: Shutting down</li><li>REBOOTING: Restarting</li><li>SHUTDOWN: Shutdown and to be terminated</li><li>TERMINATING: Terminating</li><li>DELETING: Deleting</li><li>FREEZING: Frozen</li><li>ENTER_RESCUE_MODE: Entering the rescue mode</li><li>RESCUE_MODE: Rescue mode</li><li>EXIT_RESCUE_MODE: Exiting from the rescue mode</li>
          * @type {string || null}
          */
         this.InstanceState = null;
@@ -4006,6 +4119,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Tags = null;
 
+        /**
+         * Obtain instance status
+<li>NORMAL: The instance is normal</li><li>NETWORK_RESTRICT: The instance is blocked from the network.</li>
+         * @type {string || null}
+         */
+        this.InstanceRestrictState = null;
+
     }
 
     /**
@@ -4064,6 +4184,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.Tags.push(obj);
             }
         }
+        this.InstanceRestrictState = 'InstanceRestrictState' in params ? params.InstanceRestrictState : null;
 
     }
 }
@@ -4238,6 +4359,12 @@ class DiskPrice extends  AbstractModel {
          */
         this.DiscountPrice = null;
 
+        /**
+         * Detailed billing items
+         * @type {Array.<DetailPrice> || null}
+         */
+        this.DetailPrices = null;
+
     }
 
     /**
@@ -4251,6 +4378,15 @@ class DiskPrice extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Discount = 'Discount' in params ? params.Discount : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+        if (params.DetailPrices) {
+            this.DetailPrices = new Array();
+            for (let z in params.DetailPrices) {
+                let obj = new DetailPrice();
+                obj.deserialize(params.DetailPrices[z]);
+                this.DetailPrices.push(obj);
+            }
+        }
 
     }
 }
@@ -4478,6 +4614,25 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ImageId = null;
 
+        /**
+         * URL of official website of the open-source project
+         * @type {string || null}
+         */
+        this.CommunityUrl = null;
+
+        /**
+         * Guide documentation URL
+         * @type {string || null}
+         */
+        this.GuideUrl = null;
+
+        /**
+         * Array of IDs of scenes associated with an image
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SceneIdSet = null;
+
     }
 
     /**
@@ -4503,6 +4658,9 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.SupportAutomationTools = 'SupportAutomationTools' in params ? params.SupportAutomationTools : null;
         this.RequiredMemorySize = 'RequiredMemorySize' in params ? params.RequiredMemorySize : null;
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.CommunityUrl = 'CommunityUrl' in params ? params.CommunityUrl : null;
+        this.GuideUrl = 'GuideUrl' in params ? params.GuideUrl : null;
+        this.SceneIdSet = 'SceneIdSet' in params ? params.SceneIdSet : null;
 
     }
 }
@@ -5059,14 +5217,14 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Filter list
-<li>instance-name</li>Filter by the instance name
+         * Filter list.
+<li>instance-name</li>Filter by **instance name**.
 Type: String
 Required: no
-<li>private-ip-address</li>Filter by the private IP of instance primary ENI
+<li>private-ip-address</li>Filter by **private IP of instance primary ENI**.
 Type: String
 Required: no
-<li>public-ip-address</li>Filter by the public IP of instance primary ENI
+<li>public-ip-address</li>Filter by **public IP of instance primary ENI**.
 Type: String
 Required: no
 <li>zone</li>Filter by the availability zone
@@ -5075,7 +5233,7 @@ Required: no
 <li>instance-state</li>Filter by **instance status**.
 Type: String
 Required: no
-Each request can contain up to 10 filters, each of which can have 100 values. You cannot specify both `InstanceIds` and `Filters` at the same time.
+Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5397,6 +5555,12 @@ class DescribeDiskDiscountRequest extends  AbstractModel {
          */
         this.DiskSize = null;
 
+        /**
+         * Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+         * @type {number || null}
+         */
+        this.DiskBackupQuota = null;
+
     }
 
     /**
@@ -5408,6 +5572,7 @@ class DescribeDiskDiscountRequest extends  AbstractModel {
         }
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
 
     }
 }
@@ -5690,7 +5855,7 @@ class DescribeInstancesReturnableResponse extends  AbstractModel {
 }
 
 /**
- * Container environment variables
+ * Container environment variable
  * @class
  */
 class ContainerEnv extends  AbstractModel {
@@ -5914,32 +6079,34 @@ class DescribeDisksRequest extends  AbstractModel {
         this.DiskIds = null;
 
         /**
-         * Filter list.
+         * Filter list
 disk-id
 Filter by **cloud disk ID**.
 Type: String
-Required: no
+Required: No
 instance-id
 Filter by **instance ID**.
 Type: String
-Required: no
+Required: No
 disk-name
 Filter by **cloud disk name**.
 Type: String
-Required: no
+Required: No
 zone
 Filter by **availability zone**.
 Type: String
-Required: no
+Required: No
 disk-usage
 Filter by **cloud disk type**.
 Type: String
-Required: no
+Required: No
+Values: `SYSTEM_DISK` and `DATA_DISK`
 disk-state
 Filter by **cloud disk status**.
 Type: String
-Required: no
-Each request can contain up to 10 filters, each of which can have 5 values. You cannot specify both `DiskIds` and `Filters` at the same time.
+Required: No
+Values: See `DiskState` in [Disk](https://intl.cloud.tencent.com/document/api/1207/47576?from_cn_redirect=1#Disk)
+Each request can contain up to 10 `Filters` and 100 `Filter.Values`. `DiskIds` and `Filters` cannot be specified at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6010,7 +6177,7 @@ class DescribeInstancesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * List of instance details.
+         * List of instance details
          * @type {Array.<Instance> || null}
          */
         this.InstanceSet = null;
@@ -6208,6 +6375,24 @@ class LoginConfiguration extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * <li>`YES`: Random password. In this case, `Password` cannot be specified. </li>
+<li>`No`: Custom. `Password` must be specified. </li>
+         * @type {string || null}
+         */
+        this.AutoGeneratePassword = null;
+
+        /**
+         * Instace login password.
+For Windows instances, the password must contain 12 to 30 characters of the following types. It cannot start with “/” and cannot include the username.
+<li>[a-z]</li>
+<li>[A-Z]</li>
+<li>[0-9]</li>
+<li>[()`~!@#$%^&*-+=_|{}[]:;' <>,.?/]</li>
+         * @type {string || null}
+         */
+        this.Password = null;
+
     }
 
     /**
@@ -6217,6 +6402,8 @@ class LoginConfiguration extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.AutoGeneratePassword = 'AutoGeneratePassword' in params ? params.AutoGeneratePassword : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -6687,7 +6874,7 @@ class DescribeDiskConfigsResponse extends  AbstractModel {
 }
 
 /**
- * Public network accessibility of the instance created by the launch configuration, public network usage billing mode of the instance, maximum bandwidth, etc.
+ * This describes the internet accessibility of the instance created by a launch configuration and declares the internet usage billing method of the instance and the maximum bandwidth
  * @class
  */
 class InternetAccessible extends  AbstractModel {
@@ -7225,13 +7412,13 @@ class Tag extends  AbstractModel {
         super();
 
         /**
-         * Tag key.
+         * Tag key
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Tag value.
+         * Tag value
          * @type {string || null}
          */
         this.Value = null;
@@ -8089,6 +8276,7 @@ module.exports = {
     TerminateInstancesResponse: TerminateInstancesResponse,
     TrafficPackage: TrafficPackage,
     DescribeInstancesDiskNumRequest: DescribeInstancesDiskNumRequest,
+    DetailPrice: DetailPrice,
     DescribeBlueprintsRequest: DescribeBlueprintsRequest,
     InstanceReturnable: InstanceReturnable,
     DescribeInstancesDeniedActionsResponse: DescribeInstancesDeniedActionsResponse,

@@ -1481,6 +1481,12 @@ You can also specify a custom KMS CMK created in the same region for encryption.
          */
         this.Tags = null;
 
+        /**
+         * Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
+         * @type {string || null}
+         */
+        this.SSHKeyName = null;
+
     }
 
     /**
@@ -1503,6 +1509,7 @@ You can also specify a custom KMS CMK created in the same region for encryption.
                 this.Tags.push(obj);
             }
         }
+        this.SSHKeyName = 'SSHKeyName' in params ? params.SSHKeyName : null;
 
     }
 }
@@ -2002,8 +2009,8 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.InvalidType = null;
 
         /**
-         * `true`: allow SSM to manage Tencent Cloud API key secrets.
-`false`: forbid SSM to manage Tencent Cloud API key secrets.
+         * `true`: Allow SSM to manage Tencent Cloud API key secrets.
+`false`: Forbid SSM to manage Tencent Cloud API key secrets.
          * @type {boolean || null}
          */
         this.AccessKeyEscrowEnabled = null;

@@ -59,6 +59,7 @@ const DeleteAIRecognitionTemplateResponse = models.DeleteAIRecognitionTemplateRe
 const DeleteContentReviewTemplateRequest = models.DeleteContentReviewTemplateRequest;
 const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const AudioTransform = models.AudioTransform;
+const ModifySuperPlayerConfigRequest = models.ModifySuperPlayerConfigRequest;
 const ResetProcedureTemplateRequest = models.ResetProcedureTemplateRequest;
 const ComposeMediaResponse = models.ComposeMediaResponse;
 const DescribeLicenseUsageDataResponse = models.DescribeLicenseUsageDataResponse;
@@ -176,6 +177,7 @@ const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const AiAnalysisResult = models.AiAnalysisResult;
 const ConcatFileInfo2017 = models.ConcatFileInfo2017;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
+const ReduceMediaBitrateTask = models.ReduceMediaBitrateTask;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
 const DeleteProcedureTemplateResponse = models.DeleteProcedureTemplateResponse;
 const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
@@ -241,6 +243,7 @@ const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsRe
 const ModifyAdaptiveDynamicStreamingTemplateResponse = models.ModifyAdaptiveDynamicStreamingTemplateResponse;
 const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
 const DomainDetailInfo = models.DomainDetailInfo;
+const ExtractTraceWatermarkTask = models.ExtractTraceWatermarkTask;
 const AiRecognitionTaskSegmentResultOutput = models.AiRecognitionTaskSegmentResultOutput;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const ObjectConfigureInfoForUpdate = models.ObjectConfigureInfoForUpdate;
@@ -267,6 +270,7 @@ const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplat
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const AiRecognitionTaskHeadTailResultOutput = models.AiRecognitionTaskHeadTailResultOutput;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
+const ExtractTraceWatermarkTaskOutput = models.ExtractTraceWatermarkTaskOutput;
 const MediaProcessTaskCoverBySnapshotResult = models.MediaProcessTaskCoverBySnapshotResult;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
@@ -300,6 +304,7 @@ const ProhibitedConfigureInfo = models.ProhibitedConfigureInfo;
 const DrmStreamingsInfo = models.DrmStreamingsInfo;
 const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
 const LicenseUsageDataItem = models.LicenseUsageDataItem;
+const ReduceMediaBitrateAdaptiveDynamicStreamingResult = models.ReduceMediaBitrateAdaptiveDynamicStreamingResult;
 const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
 const MediaTranscodeInfo = models.MediaTranscodeInfo;
@@ -390,6 +395,7 @@ const HeadTailConfigureInfo = models.HeadTailConfigureInfo;
 const EventContent = models.EventContent;
 const HighlightsConfigureInfoForUpdate = models.HighlightsConfigureInfoForUpdate;
 const UserDefineConfigureInfoForUpdate = models.UserDefineConfigureInfoForUpdate;
+const ExtractTraceWatermarkTaskInput = models.ExtractTraceWatermarkTaskInput;
 const AiReviewPoliticalAsrTaskOutput = models.AiReviewPoliticalAsrTaskOutput;
 const OutputAudioStream = models.OutputAudioStream;
 const ModifyClassRequest = models.ModifyClassRequest;
@@ -401,6 +407,7 @@ const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
 const DeleteVodDomainRequest = models.DeleteVodDomainRequest;
 const DescribeDrmKeyProviderInfoResponse = models.DescribeDrmKeyProviderInfoResponse;
+const ExtractTraceWatermarkResponse = models.ExtractTraceWatermarkResponse;
 const CreateAIRecognitionTemplateRequest = models.CreateAIRecognitionTemplateRequest;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
 const MediaAiAnalysisClassificationItem = models.MediaAiAnalysisClassificationItem;
@@ -447,6 +454,7 @@ const CreateProcedureTemplateResponse = models.CreateProcedureTemplateResponse;
 const DomainHTTPSConfig = models.DomainHTTPSConfig;
 const DescribeMediaProcessUsageDataResponse = models.DescribeMediaProcessUsageDataResponse;
 const DescribeSuperPlayerConfigsRequest = models.DescribeSuperPlayerConfigsRequest;
+const ReduceMediaBitrateMediaProcessTaskResult = models.ReduceMediaBitrateMediaProcessTaskResult;
 const HeadTailTaskInput = models.HeadTailTaskInput;
 const SplitMediaOutputConfig = models.SplitMediaOutputConfig;
 const CreateVodDomainResponse = models.CreateVodDomainResponse;
@@ -460,7 +468,7 @@ const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
 const DescribeStorageRegionsResponse = models.DescribeStorageRegionsResponse;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const ProcedureTask = models.ProcedureTask;
-const ModifySuperPlayerConfigRequest = models.ModifySuperPlayerConfigRequest;
+const ExtractTraceWatermarkRequest = models.ExtractTraceWatermarkRequest;
 const TaskSimpleInfo = models.TaskSimpleInfo;
 const ReviewAudioVideoTask = models.ReviewAudioVideoTask;
 const DescribeSnapshotByTimeOffsetTemplatesResponse = models.DescribeSnapshotByTimeOffsetTemplatesResponse;
@@ -570,6 +578,7 @@ const PullUploadTask = models.PullUploadTask;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
 const DescribeAIRecognitionTemplatesRequest = models.DescribeAIRecognitionTemplatesRequest;
+const ReduceMediaBitrateTranscodeResult = models.ReduceMediaBitrateTranscodeResult;
 const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
 const AiRecognitionResult = models.AiRecognitionResult;
 
@@ -604,6 +613,17 @@ class VodClient extends AbstractClient {
     ModifyDefaultStorageRegion(req, cb) {
         let resp = new ModifyDefaultStorageRegionResponse();
         this.request("ModifyDefaultStorageRegion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to extract the user ID of a user that distributed a video containing a digital watermark.
+     * @param {ExtractTraceWatermarkRequest} req
+     * @param {function(string, ExtractTraceWatermarkResponse):void} cb
+     * @public
+     */
+    ExtractTraceWatermark(req, cb) {
+        let resp = new ExtractTraceWatermarkResponse();
+        this.request("ExtractTraceWatermark", req, resp, cb);
     }
 
     /**

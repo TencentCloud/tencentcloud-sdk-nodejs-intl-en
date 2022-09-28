@@ -2522,6 +2522,132 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifySuperPlayerConfig request structure.
+ * @class
+ */
+class ModifySuperPlayerConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Player configuration name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * Type of audio/video played. Valid values:
+<li>AdaptiveDynamicStreaming</li>
+<li>Transcode</li>
+<li>Original</li>
+         * @type {string || null}
+         */
+        this.AudioVideoType = null;
+
+        /**
+         * Switch of DRM-protected adaptive bitstream playback:
+<li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
+<li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
+         * @type {string || null}
+         */
+        this.DrmSwitch = null;
+
+        /**
+         * ID of the unencrypted adaptive bitrate streaming template that allows output.
+         * @type {number || null}
+         */
+        this.AdaptiveDynamicStreamingDefinition = null;
+
+        /**
+         * Content of the DRM-protected adaptive bitrate streaming template that allows output.
+         * @type {DrmStreamingsInfoForUpdate || null}
+         */
+        this.DrmStreamingsInfo = null;
+
+        /**
+         * ID of the transcoding template allowed for playback
+         * @type {number || null}
+         */
+        this.TranscodeDefinition = null;
+
+        /**
+         * ID of the image sprite generating template that allows output.
+         * @type {number || null}
+         */
+        this.ImageSpriteDefinition = null;
+
+        /**
+         * Display name of player for substreams with different resolutions.
+         * @type {Array.<ResolutionNameInfo> || null}
+         */
+        this.ResolutionNames = null;
+
+        /**
+         * Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Scheme used for playback. Valid values:
+<li>Default: the scheme configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used;</li>
+<li>HTTP;</li>
+<li>HTTPS.</li>
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * Template description. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.AudioVideoType = 'AudioVideoType' in params ? params.AudioVideoType : null;
+        this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
+        this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
+
+        if (params.DrmStreamingsInfo) {
+            let obj = new DrmStreamingsInfoForUpdate();
+            obj.deserialize(params.DrmStreamingsInfo)
+            this.DrmStreamingsInfo = obj;
+        }
+        this.TranscodeDefinition = 'TranscodeDefinition' in params ? params.TranscodeDefinition : null;
+        this.ImageSpriteDefinition = 'ImageSpriteDefinition' in params ? params.ImageSpriteDefinition : null;
+
+        if (params.ResolutionNames) {
+            this.ResolutionNames = new Array();
+            for (let z in params.ResolutionNames) {
+                let obj = new ResolutionNameInfo();
+                obj.deserialize(params.ResolutionNames[z]);
+                this.ResolutionNames.push(obj);
+            }
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+    }
+}
+
+/**
  * ResetProcedureTemplate request structure.
  * @class
  */
@@ -6628,7 +6754,15 @@ class TraceWatermarkInput extends  AbstractModel {
         super();
 
         /**
-         * The watermark template ID.
+         * Whether to use digital watermarks. This parameter is required. Valid values:
+<li>ON</li>
+<li>OFF</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * This parameter has been deprecated.
          * @type {number || null}
          */
         this.Definition = null;
@@ -6642,6 +6776,7 @@ class TraceWatermarkInput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Switch = 'Switch' in params ? params.Switch : null;
         this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
@@ -8965,6 +9100,122 @@ Note: this field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * The information of a bitrate reduction task.
+ * @class
+ */
+class ReduceMediaBitrateTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The task flow status. Valid values:
+<li>PROCESSING</li>
+<li>FINISH</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The ID of the media file.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * The name of the media file.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * The address of the media file.
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * The metadata of the source video.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * The execution status and result of the bitrate reduction task.
+         * @type {Array.<ReduceMediaBitrateMediaProcessTaskResult> || null}
+         */
+        this.MediaProcessResultSet = null;
+
+        /**
+         * The task priority, which can be a value from -10 to 10.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * The notification mode for the change of task status. Valid values:
+<li>Finish: Send a notification after the task is completed.</li>
+<li>None: Do not send status change notifications for this task.</li>
+         * @type {string || null}
+         */
+        this.TasksNotifyMode = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+
+        if (params.MediaProcessResultSet) {
+            this.MediaProcessResultSet = new Array();
+            for (let z in params.MediaProcessResultSet) {
+                let obj = new ReduceMediaBitrateMediaProcessTaskResult();
+                obj.deserialize(params.MediaProcessResultSet[z]);
+                this.MediaProcessResultSet.push(obj);
+            }
+        }
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
     }
 }
@@ -12679,6 +12930,105 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * A digital watermark extraction task.
+ * @class
+ */
+class ExtractTraceWatermarkTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The task status. Valid values:
+<li>PROCESSING</li>
+<li>FINISH</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. `0` indicates the task is successful. Other values indicate that the task failed.
+<li>40000: Invalid input parameter.</li>
+<li>60000: Source file error (e.g., video data is corrupted).</li>
+<li>70000: Internal server error. Please try again.</li>
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; other values indicate that the task failed. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * The information of a digital watermark extraction task.
+         * @type {ExtractTraceWatermarkTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * The output of a digital watermark extraction task.
+         * @type {ExtractTraceWatermarkTaskOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+
+        if (params.Input) {
+            let obj = new ExtractTraceWatermarkTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new ExtractTraceWatermarkTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+    }
+}
+
+/**
  * Output of video splitting.
  * @class
  */
@@ -13990,6 +14340,41 @@ class ModifyImageSpriteTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The output of digital watermark extraction.
+ * @class
+ */
+class ExtractTraceWatermarkTaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The distributor’s user ID, which is a six-digit hex number. This parameter is relevant when [digital watermarks](https://intl.cloud.tencent.com/document/product/266/75789?from_cn_redirect=1) are used.
+         * @type {string || null}
+         */
+        this.Uv = null;
+
+        /**
+         * This parameter has been deprecated.
+         * @type {string || null}
+         */
+        this.Uid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uv = 'Uv' in params ? params.Uv : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
 
     }
 }
@@ -15908,6 +16293,72 @@ class LicenseUsageDataItem extends  AbstractModel {
         }
         this.Time = 'Time' in params ? params.Time : null;
         this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * The information of an adaptive bitrate (bitrate reduction) task.
+ * @class
+ */
+class ReduceMediaBitrateAdaptiveDynamicStreamingResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; other values indicate that the task failed. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The input of an adaptive bitrate task.
+         * @type {AdaptiveDynamicStreamingTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * The output of an adaptive bitrate task.
+         * @type {AdaptiveDynamicStreamingInfoItem || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AdaptiveDynamicStreamingTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AdaptiveDynamicStreamingInfoItem();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -20974,8 +21425,10 @@ class EventContent extends  AbstractModel {
 <li>SplitMediaComplete: Finished video splitting.</li>
 <li>WechatPublishComplete: Published to WeChat.</li>
 <li>ComposeMediaComplete: Finished producing the media file.</li>
+<li>WechatMiniProgramPublishComplete: Finished publishing on WeChat Mini Program</li>
 <li>FastClipMediaComplete: Finished quick clipping.</li>
-<li>ReviewAudioVideoComplete: Finished moderation</li>
+<li>ReviewAudioVideoComplete: Finished moderation.</li>
+<li>ExtractTraceWatermarkComplete: Finished digital watermark extraction.</li>
 <b>v2017 task types:</b>
 <li>TranscodeComplete: Finished video transcoding.</li>
 <li>ConcatComplete: Finished video splicing.</li>
@@ -21099,11 +21552,25 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.RestoreMediaCompleteEvent = null;
 
         /**
+         * The callback for the completion of digital watermark extraction. This parameter is valid only if `EventType` is `ExtractTraceWatermarkComplete`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ExtractTraceWatermarkTask || null}
+         */
+        this.ExtractTraceWatermarkCompleteEvent = null;
+
+        /**
          * The callback for the completion of the moderation task. This parameter is valid only if `EventType` is `ReviewAudioVideoComplete`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ReviewAudioVideoTask || null}
          */
         this.ReviewAudioVideoCompleteEvent = null;
+
+        /**
+         * The callback for the completion of bitrate reduction. This parameter is valid only if `EventType` is `ReduceMediaBitrateComplete`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReduceMediaBitrateTask || null}
+         */
+        this.ReduceMediaBitrateCompleteEvent = null;
 
     }
 
@@ -21213,10 +21680,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.RestoreMediaCompleteEvent = obj;
         }
 
+        if (params.ExtractTraceWatermarkCompleteEvent) {
+            let obj = new ExtractTraceWatermarkTask();
+            obj.deserialize(params.ExtractTraceWatermarkCompleteEvent)
+            this.ExtractTraceWatermarkCompleteEvent = obj;
+        }
+
         if (params.ReviewAudioVideoCompleteEvent) {
             let obj = new ReviewAudioVideoTask();
             obj.deserialize(params.ReviewAudioVideoCompleteEvent)
             this.ReviewAudioVideoCompleteEvent = obj;
+        }
+
+        if (params.ReduceMediaBitrateCompleteEvent) {
+            let obj = new ReduceMediaBitrateTask();
+            obj.deserialize(params.ReduceMediaBitrateCompleteEvent)
+            this.ReduceMediaBitrateCompleteEvent = obj;
         }
 
     }
@@ -21305,6 +21784,34 @@ class UserDefineConfigureInfoForUpdate extends  AbstractModel {
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
         }
+
+    }
+}
+
+/**
+ * The input of digital watermark extraction.
+ * @class
+ */
+class ExtractTraceWatermarkTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The URL of the media on which digital watermark extraction is to be performed.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -21869,6 +22376,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.SDMCInfo)
             this.SDMCInfo = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ExtractTraceWatermark response structure.
+ * @class
+ */
+class ExtractTraceWatermarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -22973,6 +23515,14 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
          */
         this.Size = null;
 
+        /**
+         * The watermark type. Valid values:
+<li>Trace: Digital watermark</li>
+<li>None: Regular watermark</li>
+         * @type {string || null}
+         */
+        this.DigitalWatermarkType = null;
+
     }
 
     /**
@@ -22987,6 +23537,7 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
         this.DrmType = 'DrmType' in params ? params.DrmType : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.Size = 'Size' in params ? params.Size : null;
+        this.DigitalWatermarkType = 'DigitalWatermarkType' in params ? params.DigitalWatermarkType : null;
 
     }
 }
@@ -24083,10 +24634,12 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 <li>SplitMedia: Video splitting</li>
 <li>ComposeMedia: Media file production</li>
 <li>WechatPublish: WeChat publishing</li>
+<li>WechatMiniProgramPublish: Publishing videos on WeChat Mini Program</li>
 <li>PullUpload: Pulling media files for upload</li>
 <li>FastClipMedia: Quick clipping</li>
 <li>RemoveWatermarkTask: Watermark removal</li>
 <li> ReviewAudioVideo: Moderation</li>
+<li> ReduceMediaBitrate: Bitrate reduction</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -24210,11 +24763,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RemoveWatermarkTask = null;
 
         /**
+         * The information of a digital watermark extraction task. This parameter is valid only if `TaskType` is `ExtractTraceWatermark`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ExtractTraceWatermarkTask || null}
+         */
+        this.ExtractTraceWatermarkTask = null;
+
+        /**
          * The information of a moderation task. This parameter is valid only if `TaskType` is `ReviewAudioVideo`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ReviewAudioVideoTask || null}
          */
         this.ReviewAudioVideoTask = null;
+
+        /**
+         * The information of a bitrate reduction task. This parameter is valid only if `TaskType` is `ReduceMediaBitrate`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReduceMediaBitrateTask || null}
+         */
+        this.ReduceMediaBitrateTask = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -24315,10 +24882,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.RemoveWatermarkTask = obj;
         }
 
+        if (params.ExtractTraceWatermarkTask) {
+            let obj = new ExtractTraceWatermarkTask();
+            obj.deserialize(params.ExtractTraceWatermarkTask)
+            this.ExtractTraceWatermarkTask = obj;
+        }
+
         if (params.ReviewAudioVideoTask) {
             let obj = new ReviewAudioVideoTask();
             obj.deserialize(params.ReviewAudioVideoTask)
             this.ReviewAudioVideoTask = obj;
+        }
+
+        if (params.ReduceMediaBitrateTask) {
+            let obj = new ReduceMediaBitrateTask();
+            obj.deserialize(params.ReduceMediaBitrateTask)
+            this.ReduceMediaBitrateTask = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -24689,6 +25268,62 @@ class DescribeSuperPlayerConfigsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * The result of a bitrate reduction task.
+ * @class
+ */
+class ReduceMediaBitrateMediaProcessTaskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task type. Valid values:
+<li>Transcode</li>
+<li>AdaptiveDynamicStreaming</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The result of a transcoding task. This parameter is valid if `Type` is `Transcode`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReduceMediaBitrateTranscodeResult || null}
+         */
+        this.TranscodeTask = null;
+
+        /**
+         * The result of an adaptive bitrate task. This parameter is valid if `Type` is `AdaptiveDynamicStreaming`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReduceMediaBitrateAdaptiveDynamicStreamingResult || null}
+         */
+        this.AdaptiveDynamicStreamingTask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.TranscodeTask) {
+            let obj = new ReduceMediaBitrateTranscodeResult();
+            obj.deserialize(params.TranscodeTask)
+            this.TranscodeTask = obj;
+        }
+
+        if (params.AdaptiveDynamicStreamingTask) {
+            let obj = new ReduceMediaBitrateAdaptiveDynamicStreamingResult();
+            obj.deserialize(params.AdaptiveDynamicStreamingTask)
+            this.AdaptiveDynamicStreamingTask = obj;
+        }
 
     }
 }
@@ -25482,18 +26117,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifySuperPlayerConfig request structure.
+ * ExtractTraceWatermark request structure.
  * @class
  */
-class ModifySuperPlayerConfigRequest extends  AbstractModel {
+class ExtractTraceWatermarkRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Player configuration name.
+         * The URL of the media on which digital watermark extraction is to be performed.
          * @type {string || null}
          */
-        this.Name = null;
+        this.Url = null;
 
         /**
          * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
@@ -25502,72 +26137,28 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * Type of audio/video played. Valid values:
-<li>AdaptiveDynamicStreaming</li>
-<li>Transcode</li>
-<li>Original</li>
+         * The source context, which is used to pass through user request information. The `ExtractTraceWatermarkComplete` callback and the `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
          * @type {string || null}
          */
-        this.AudioVideoType = null;
+        this.SessionContext = null;
 
         /**
-         * Switch of DRM-protected adaptive bitstream playback:
-<li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
-<li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
          * @type {string || null}
          */
-        this.DrmSwitch = null;
+        this.SessionId = null;
 
         /**
-         * ID of the unencrypted adaptive bitrate streaming template that allows output.
+         * The task priority, which can be a value from -10 to 10. The higher the value, the higher the priority. If this parameter is left empty, 0 will be used.
          * @type {number || null}
          */
-        this.AdaptiveDynamicStreamingDefinition = null;
+        this.TasksPriority = null;
 
         /**
-         * Content of the DRM-protected adaptive bitrate streaming template that allows output.
-         * @type {DrmStreamingsInfoForUpdate || null}
-         */
-        this.DrmStreamingsInfo = null;
-
-        /**
-         * ID of the transcoding template allowed for playback
-         * @type {number || null}
-         */
-        this.TranscodeDefinition = null;
-
-        /**
-         * ID of the image sprite generating template that allows output.
-         * @type {number || null}
-         */
-        this.ImageSpriteDefinition = null;
-
-        /**
-         * Display name of player for substreams with different resolutions.
-         * @type {Array.<ResolutionNameInfo> || null}
-         */
-        this.ResolutionNames = null;
-
-        /**
-         * Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
+         * A reserved parameter.
          * @type {string || null}
          */
-        this.Domain = null;
-
-        /**
-         * Scheme used for playback. Valid values:
-<li>Default: the scheme configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used;</li>
-<li>HTTP;</li>
-<li>HTTPS.</li>
-         * @type {string || null}
-         */
-        this.Scheme = null;
-
-        /**
-         * Template description. Length limit: 256 characters.
-         * @type {string || null}
-         */
-        this.Comment = null;
+        this.ExtInfo = null;
 
     }
 
@@ -25578,31 +26169,12 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
+        this.Url = 'Url' in params ? params.Url : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-        this.AudioVideoType = 'AudioVideoType' in params ? params.AudioVideoType : null;
-        this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
-        this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
-
-        if (params.DrmStreamingsInfo) {
-            let obj = new DrmStreamingsInfoForUpdate();
-            obj.deserialize(params.DrmStreamingsInfo)
-            this.DrmStreamingsInfo = obj;
-        }
-        this.TranscodeDefinition = 'TranscodeDefinition' in params ? params.TranscodeDefinition : null;
-        this.ImageSpriteDefinition = 'ImageSpriteDefinition' in params ? params.ImageSpriteDefinition : null;
-
-        if (params.ResolutionNames) {
-            this.ResolutionNames = new Array();
-            for (let z in params.ResolutionNames) {
-                let obj = new ResolutionNameInfo();
-                obj.deserialize(params.ResolutionNames[z]);
-                this.ResolutionNames.push(obj);
-            }
-        }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Scheme = 'Scheme' in params ? params.Scheme : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -25634,16 +26206,17 @@ class TaskSimpleInfo extends  AbstractModel {
         this.FileId = null;
 
         /**
-         * Task type. Valid values:
-<li>Procedure: video processing task;</li>
-<li>EditMedia: video editing task</li>
-<li>WechatDistribute: release on WeChat task.</li>
-Task types compatible with v2017:
-<li>Transcode: transcoding task;</li>
-<li>SnapshotByTimeOffset: video screencapturing task</li>
-<li>Concat: video splicing task;</li>
-<li>Clip: video clipping task;</li>
-<li>ImageSprites: image sprite generating task.</li>
+         * The task type. Valid values:
+<li>Procedure: Video processing</li>
+<li>EditMedia: Video editing</li>
+<li> ReduceMediaBitrate: Bitrate reduction</li>
+<li>WechatDistribute: Publishing to WeChat</li>
+Task types for v2017:
+<li>Transcode: Transcoding</li>
+<li>SnapshotByTimeOffset: Screencapturing</li>
+<li>Concat: Video splicing</li>
+<li>Clip: Video clipping</li>
+<li>ImageSprites: Image sprite generating</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -28563,6 +29136,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.AudioStreamSet = null;
 
+        /**
+         * The watermark type. Valid values:
+<li>Trace: Digital watermark</li>
+<li>None: Regular watermark</li>
+         * @type {string || null}
+         */
+        this.DigitalWatermarkType = null;
+
     }
 
     /**
@@ -28599,6 +29180,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.AudioStreamSet.push(obj);
             }
         }
+        this.DigitalWatermarkType = 'DigitalWatermarkType' in params ? params.DigitalWatermarkType : null;
 
     }
 }
@@ -32203,6 +32785,94 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * The information of a transcoding (bitrate reduction) task.
+ * @class
+ */
+class ReduceMediaBitrateTranscodeResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; other values indicate that the task failed. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The input of a transcoding task.
+         * @type {TranscodeTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * The output of a transcoding task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MediaTranscodeItem || null}
+         */
+        this.Output = null;
+
+        /**
+         * The transcoding progress. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * The start time of the transcoding task, in [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
+         */
+        this.BeginProcessTime = null;
+
+        /**
+         * The end time of the transcoding task, in [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new TranscodeTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new MediaTranscodeItem();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+    }
+}
+
+/**
  * ModifyWatermarkTemplate response structure.
  * @class
  */
@@ -32429,6 +33099,7 @@ module.exports = {
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
     AudioTransform: AudioTransform,
+    ModifySuperPlayerConfigRequest: ModifySuperPlayerConfigRequest,
     ResetProcedureTemplateRequest: ResetProcedureTemplateRequest,
     ComposeMediaResponse: ComposeMediaResponse,
     DescribeLicenseUsageDataResponse: DescribeLicenseUsageDataResponse,
@@ -32546,6 +33217,7 @@ module.exports = {
     AiAnalysisResult: AiAnalysisResult,
     ConcatFileInfo2017: ConcatFileInfo2017,
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
+    ReduceMediaBitrateTask: ReduceMediaBitrateTask,
     DescribeMediaInfosResponse: DescribeMediaInfosResponse,
     DeleteProcedureTemplateResponse: DeleteProcedureTemplateResponse,
     DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
@@ -32611,6 +33283,7 @@ module.exports = {
     ModifyAdaptiveDynamicStreamingTemplateResponse: ModifyAdaptiveDynamicStreamingTemplateResponse,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
     DomainDetailInfo: DomainDetailInfo,
+    ExtractTraceWatermarkTask: ExtractTraceWatermarkTask,
     AiRecognitionTaskSegmentResultOutput: AiRecognitionTaskSegmentResultOutput,
     ImageSpriteTaskInput: ImageSpriteTaskInput,
     ObjectConfigureInfoForUpdate: ObjectConfigureInfoForUpdate,
@@ -32637,6 +33310,7 @@ module.exports = {
     UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
     AiRecognitionTaskHeadTailResultOutput: AiRecognitionTaskHeadTailResultOutput,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
+    ExtractTraceWatermarkTaskOutput: ExtractTraceWatermarkTaskOutput,
     MediaProcessTaskCoverBySnapshotResult: MediaProcessTaskCoverBySnapshotResult,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
@@ -32670,6 +33344,7 @@ module.exports = {
     DrmStreamingsInfo: DrmStreamingsInfo,
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
     LicenseUsageDataItem: LicenseUsageDataItem,
+    ReduceMediaBitrateAdaptiveDynamicStreamingResult: ReduceMediaBitrateAdaptiveDynamicStreamingResult,
     ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
     MediaTranscodeInfo: MediaTranscodeInfo,
@@ -32760,6 +33435,7 @@ module.exports = {
     EventContent: EventContent,
     HighlightsConfigureInfoForUpdate: HighlightsConfigureInfoForUpdate,
     UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
+    ExtractTraceWatermarkTaskInput: ExtractTraceWatermarkTaskInput,
     AiReviewPoliticalAsrTaskOutput: AiReviewPoliticalAsrTaskOutput,
     OutputAudioStream: OutputAudioStream,
     ModifyClassRequest: ModifyClassRequest,
@@ -32771,6 +33447,7 @@ module.exports = {
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
     DeleteVodDomainRequest: DeleteVodDomainRequest,
     DescribeDrmKeyProviderInfoResponse: DescribeDrmKeyProviderInfoResponse,
+    ExtractTraceWatermarkResponse: ExtractTraceWatermarkResponse,
     CreateAIRecognitionTemplateRequest: CreateAIRecognitionTemplateRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
@@ -32817,6 +33494,7 @@ module.exports = {
     DomainHTTPSConfig: DomainHTTPSConfig,
     DescribeMediaProcessUsageDataResponse: DescribeMediaProcessUsageDataResponse,
     DescribeSuperPlayerConfigsRequest: DescribeSuperPlayerConfigsRequest,
+    ReduceMediaBitrateMediaProcessTaskResult: ReduceMediaBitrateMediaProcessTaskResult,
     HeadTailTaskInput: HeadTailTaskInput,
     SplitMediaOutputConfig: SplitMediaOutputConfig,
     CreateVodDomainResponse: CreateVodDomainResponse,
@@ -32830,7 +33508,7 @@ module.exports = {
     DescribeStorageRegionsResponse: DescribeStorageRegionsResponse,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     ProcedureTask: ProcedureTask,
-    ModifySuperPlayerConfigRequest: ModifySuperPlayerConfigRequest,
+    ExtractTraceWatermarkRequest: ExtractTraceWatermarkRequest,
     TaskSimpleInfo: TaskSimpleInfo,
     ReviewAudioVideoTask: ReviewAudioVideoTask,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
@@ -32940,6 +33618,7 @@ module.exports = {
     FrameTagConfigureInfoForUpdate: FrameTagConfigureInfoForUpdate,
     CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,
     DescribeAIRecognitionTemplatesRequest: DescribeAIRecognitionTemplatesRequest,
+    ReduceMediaBitrateTranscodeResult: ReduceMediaBitrateTranscodeResult,
     ModifyWatermarkTemplateResponse: ModifyWatermarkTemplateResponse,
     AiRecognitionResult: AiRecognitionResult,
 

@@ -80,6 +80,7 @@ module.exports = {
     tiw: require("./tiw"),
     tke: require("./tke"),
     tms: require("./tms"),
+    tmt: require("./tmt"),
     trtc: require("./trtc"),
     tts: require("./tts"),
     vm: require("./vm"),

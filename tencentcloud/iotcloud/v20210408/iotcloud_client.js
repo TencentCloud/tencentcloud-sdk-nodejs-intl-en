@@ -22,9 +22,10 @@ const DescribePrivateCAsResponse = models.DescribePrivateCAsResponse;
 const UpdateDevicesEnableStateResponse = models.UpdateDevicesEnableStateResponse;
 const DescribePrivateCARequest = models.DescribePrivateCARequest;
 const DescribeProductCAResponse = models.DescribeProductCAResponse;
-const SetProductsForbiddenStatusResponse = models.SetProductsForbiddenStatusResponse;
+const DeleteDeviceShadowResponse = models.DeleteDeviceShadowResponse;
 const UpdatePrivateCAResponse = models.UpdatePrivateCAResponse;
 const DeletePrivateCAResponse = models.DeletePrivateCAResponse;
+const DeviceTag = models.DeviceTag;
 const UpdatePrivateCARequest = models.UpdatePrivateCARequest;
 const DescribePrivateCABindedProductsResponse = models.DescribePrivateCABindedProductsResponse;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
@@ -33,13 +34,14 @@ const CreatePrivateCAResponse = models.CreatePrivateCAResponse;
 const DescribeProductsRequest = models.DescribeProductsRequest;
 const BindProductInfo = models.BindProductInfo;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
-const DeviceTag = models.DeviceTag;
+const DeleteDeviceShadowRequest = models.DeleteDeviceShadowRequest;
 const SetProductsForbiddenStatusRequest = models.SetProductsForbiddenStatusRequest;
 const ProductInfo = models.ProductInfo;
 const DescribeProductCARequest = models.DescribeProductCARequest;
 const CreatePrivateCARequest = models.CreatePrivateCARequest;
 const DescribeProductResponse = models.DescribeProductResponse;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
+const SetProductsForbiddenStatusResponse = models.SetProductsForbiddenStatusResponse;
 const DeviceLabel = models.DeviceLabel;
 const UpdateProductDynamicRegisterRequest = models.UpdateProductDynamicRegisterRequest;
 const CertInfo = models.CertInfo;
@@ -117,6 +119,17 @@ class IotcloudClient extends AbstractClient {
     CreateProduct(req, cb) {
         let resp = new CreateProductResponse();
         this.request("CreateProduct", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a device shadow. 
+     * @param {DeleteDeviceShadowRequest} req
+     * @param {function(string, DeleteDeviceShadowResponse):void} cb
+     * @public
+     */
+    DeleteDeviceShadow(req, cb) {
+        let resp = new DeleteDeviceShadowResponse();
+        this.request("DeleteDeviceShadow", req, resp, cb);
     }
 
     /**

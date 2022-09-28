@@ -1352,6 +1352,12 @@ class UpdateRuleRequest extends  AbstractModel {
         this.Description = null;
 
         /**
+         * See [CKafka Target](https://intl.cloud.tencent.com/document/product/1359/56084?from_cn_redirect=1)
+         * @type {string || null}
+         */
+        this.EventPattern = null;
+
+        /**
          * Event rule name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
          * @type {string || null}
          */
@@ -1370,6 +1376,7 @@ class UpdateRuleRequest extends  AbstractModel {
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.EventPattern = 'EventPattern' in params ? params.EventPattern : null;
         this.RuleName = 'RuleName' in params ? params.RuleName : null;
 
     }

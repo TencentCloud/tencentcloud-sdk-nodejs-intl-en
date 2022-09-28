@@ -236,10 +236,10 @@ class DescribeProductCAResponse extends  AbstractModel {
 }
 
 /**
- * SetProductsForbiddenStatus response structure.
+ * DeleteDeviceShadow response structure.
  * @class
  */
-class SetProductsForbiddenStatusResponse extends  AbstractModel {
+class DeleteDeviceShadowResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -315,6 +315,56 @@ class DeletePrivateCAResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Device attribute
+ * @class
+ */
+class DeviceTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Attribute name
+         * @type {string || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Attribute value type. `1`: integer; `2`: string
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Attribute value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Attribute description
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Tag = 'Tag' in params ? params.Tag : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -623,37 +673,24 @@ class DescribeDevicesResponse extends  AbstractModel {
 }
 
 /**
- * Device attribute
+ * DeleteDeviceShadow request structure.
  * @class
  */
-class DeviceTag extends  AbstractModel {
+class DeleteDeviceShadowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Attribute name
+         * Product ID
          * @type {string || null}
          */
-        this.Tag = null;
+        this.ProductId = null;
 
         /**
-         * Attribute value type. `1`: integer; `2`: string
-         * @type {number || null}
-         */
-        this.Type = null;
-
-        /**
-         * Attribute value
+         * Device name
          * @type {string || null}
          */
-        this.Value = null;
-
-        /**
-         * Attribute description
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {string || null}
-         */
-        this.Name = null;
+        this.DeviceName = null;
 
     }
 
@@ -664,10 +701,8 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         if (!params) {
             return;
         }
-        this.Tag = 'Tag' in params ? params.Tag : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Name = 'Name' in params ? params.Name : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
 
     }
 }
@@ -933,6 +968,34 @@ class DescribeDeviceRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * SetProductsForbiddenStatus response structure.
+ * @class
+ */
+class SetProductsForbiddenStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2446,9 +2509,10 @@ module.exports = {
     UpdateDevicesEnableStateResponse: UpdateDevicesEnableStateResponse,
     DescribePrivateCARequest: DescribePrivateCARequest,
     DescribeProductCAResponse: DescribeProductCAResponse,
-    SetProductsForbiddenStatusResponse: SetProductsForbiddenStatusResponse,
+    DeleteDeviceShadowResponse: DeleteDeviceShadowResponse,
     UpdatePrivateCAResponse: UpdatePrivateCAResponse,
     DeletePrivateCAResponse: DeletePrivateCAResponse,
+    DeviceTag: DeviceTag,
     UpdatePrivateCARequest: UpdatePrivateCARequest,
     DescribePrivateCABindedProductsResponse: DescribePrivateCABindedProductsResponse,
     DeleteDeviceRequest: DeleteDeviceRequest,
@@ -2457,13 +2521,14 @@ module.exports = {
     DescribeProductsRequest: DescribeProductsRequest,
     BindProductInfo: BindProductInfo,
     DescribeDevicesResponse: DescribeDevicesResponse,
-    DeviceTag: DeviceTag,
+    DeleteDeviceShadowRequest: DeleteDeviceShadowRequest,
     SetProductsForbiddenStatusRequest: SetProductsForbiddenStatusRequest,
     ProductInfo: ProductInfo,
     DescribeProductCARequest: DescribeProductCARequest,
     CreatePrivateCARequest: CreatePrivateCARequest,
     DescribeProductResponse: DescribeProductResponse,
     DescribeDeviceRequest: DescribeDeviceRequest,
+    SetProductsForbiddenStatusResponse: SetProductsForbiddenStatusResponse,
     DeviceLabel: DeviceLabel,
     UpdateProductDynamicRegisterRequest: UpdateProductDynamicRegisterRequest,
     CertInfo: CertInfo,

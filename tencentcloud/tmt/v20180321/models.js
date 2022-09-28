@@ -74,7 +74,7 @@ class TextTranslateRequest extends  AbstractModel {
         super();
 
         /**
-         * The pure texts to be translated. It must be encoded in UTF-8 and can contain up to 2,000 characters in a request. For non-pure texts such as those with HTML tags, the translation may fail.
+         * The texts to be translated, which must be encoded in UTF-8 and can contain up to 2,000 characters in a request. For non-pure texts such as those with HTML tags, the translation may fail.
          * @type {string || null}
          */
         this.SourceText = null;

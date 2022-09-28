@@ -3636,6 +3636,24 @@ class RumAreaInfo extends  AbstractModel {
          */
         this.AreaKey = null;
 
+        /**
+         * Region ID.
+         * @type {string || null}
+         */
+        this.AreaRegionID = null;
+
+        /**
+         * Region code, such as “ap-xxx” (xxx is the region name).
+         * @type {string || null}
+         */
+        this.AreaRegionCode = null;
+
+        /**
+         * Region abbreviation.
+         * @type {string || null}
+         */
+        this.AreaAbbr = null;
+
     }
 
     /**
@@ -3649,6 +3667,9 @@ class RumAreaInfo extends  AbstractModel {
         this.AreaStatus = 'AreaStatus' in params ? params.AreaStatus : null;
         this.AreaName = 'AreaName' in params ? params.AreaName : null;
         this.AreaKey = 'AreaKey' in params ? params.AreaKey : null;
+        this.AreaRegionID = 'AreaRegionID' in params ? params.AreaRegionID : null;
+        this.AreaRegionCode = 'AreaRegionCode' in params ? params.AreaRegionCode : null;
+        this.AreaAbbr = 'AreaAbbr' in params ? params.AreaAbbr : null;
 
     }
 }

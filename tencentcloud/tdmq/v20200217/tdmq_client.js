@@ -31,6 +31,7 @@ const DescribeRocketMQNamespacesResponse = models.DescribeRocketMQNamespacesResp
 const BindCluster = models.BindCluster;
 const ModifyClusterResponse = models.ModifyClusterResponse;
 const RocketMQClusterRecentStats = models.RocketMQClusterRecentStats;
+const RocketMQVipInstance = models.RocketMQVipInstance;
 const DescribeCmqQueuesResponse = models.DescribeCmqQueuesResponse;
 const PublishCmqMsgRequest = models.PublishCmqMsgRequest;
 const CreateCmqSubscribeRequest = models.CreateCmqSubscribeRequest;
@@ -134,6 +135,7 @@ const DescribeCmqQueuesRequest = models.DescribeCmqQueuesRequest;
 const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
 const ModifyCmqSubscriptionAttributeRequest = models.ModifyCmqSubscriptionAttributeRequest;
 const ModifyTopicResponse = models.ModifyTopicResponse;
+const DescribeRocketMQVipInstancesRequest = models.DescribeRocketMQVipInstancesRequest;
 const ReceiveMessageResponse = models.ReceiveMessageResponse;
 const DeleteRocketMQClusterResponse = models.DeleteRocketMQClusterResponse;
 const CreateCmqTopicResponse = models.CreateCmqTopicResponse;
@@ -192,6 +194,7 @@ const DeleteCmqSubscribeResponse = models.DeleteCmqSubscribeResponse;
 const DescribePublisherSummaryRequest = models.DescribePublisherSummaryRequest;
 const DeleteSubscriptionsRequest = models.DeleteSubscriptionsRequest;
 const ModifyRocketMQGroupResponse = models.ModifyRocketMQGroupResponse;
+const DescribeRocketMQVipInstancesResponse = models.DescribeRocketMQVipInstancesResponse;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const SendMessagesRequest = models.SendMessagesRequest;
 const CreateEnvironmentRoleRequest = models.CreateEnvironmentRoleRequest;
@@ -737,11 +740,11 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to receive messages sent to a specified topic. If this API is called when there are no messages in the topic, the `ReceiveTimeout` exception will be reported.
+     * Currently, the `ReceiveMessage` API only supports partitioned topics. It is used to receive messages sent to a specified partitioned topic. If it is called when there are no messages in the partitioned topic, the `ReceiveTimeout` exception will be reported.
 
 Instructions on how to use `BatchReceivePolicy`:
 
-`BatchReceive` has the three parameters:
+`BatchReceive` has three parameters:
 
 ● `MaxNumMessages`: The maximum number of messages returned by `Receive` when `BatchReceive` is used.
 ● `MaxNumBytes`: The maximum size (in bytes) of the message returned by `Receive` when `BatchReceive` is used.
@@ -1020,6 +1023,17 @@ Note: the batch message sending API in TDMQ is to package messages into a batch 
     ModifyEnvironmentRole(req, cb) {
         let resp = new ModifyEnvironmentRoleResponse();
         this.request("ModifyEnvironmentRole", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of the purchased TDMQ for RocketMQ exclusive instances.
+     * @param {DescribeRocketMQVipInstancesRequest} req
+     * @param {function(string, DescribeRocketMQVipInstancesResponse):void} cb
+     * @public
+     */
+    DescribeRocketMQVipInstances(req, cb) {
+        let resp = new DescribeRocketMQVipInstancesResponse();
+        this.request("DescribeRocketMQVipInstances", req, resp, cb);
     }
 
     /**

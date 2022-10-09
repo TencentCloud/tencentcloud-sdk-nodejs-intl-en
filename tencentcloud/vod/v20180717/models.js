@@ -4669,24 +4669,27 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * The type of media processing task. Valid values:
-<li>Transcoding: General transcoding</li>
-<li>Transcoding-TESHD: TESHD transcoding</li>
-<li>Editing: Video editing</li>
-<li>Editing-TESHD: TESHD editing</li>
-<li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
-<li>ContentAudit: Content moderation</li>
-<li>RemoveWatermark: Watermark removal</li>
-<li>Transcode: Transcoding, including general transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
          * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
          * @type {number || null}
          */
         this.SubAppId = null;
+
+        /**
+         * The type of media processing task. Valid values:
+<li>Transcoding: General transcoding</li>
+<li>Transcoding-TESHD: Top Speed Codec transcoding</li>
+<li>Editing: Video editing</li>
+<li>Editing-TESHD: Top Speed Codec editing</li>
+<li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
+<li>ContentAudit: Content moderation</li>
+<li> ContentRecognition: Content recognition</li>
+<li>RemoveWatermark: Watermark removal</li>
+<li> ExtractTraceWatermark: Digital watermark extraction</li>
+<li> AddTraceWatermark: Digital watermarking</li>
+<li>Transcode: Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
 
     }
 
@@ -4699,8 +4702,8 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
         }
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Type = 'Type' in params ? params.Type : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -4871,6 +4874,69 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+    }
+}
+
+/**
+ * ReviewAudioVideo request structure.
+ * @class
+ */
+class ReviewAudioVideoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The media file ID, which is assigned after upload and uniquely identifies a file in VOD. You can view the ID of a file in the [NewFileUpload](https://www.tencentcloud.com/document/product/266/33950) callback or in the [VOD console](https://console.tencentcloud.com/vod/media).
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * <b>The VOD [subapplication](https://www.tencentcloud.com/document/product/266/33987) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The `ReviewAudioVideoComplete` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * The session ID, which is used to identify duplicate requests. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * A reserved parameter.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -6899,6 +6965,7 @@ Valid values when `Form` is `Voice` and `Label` is `Porn`:
 
         /**
          * The pixel coordinates ([x1, y1, x2, y2]) of the top-left corner and bottom-right corner of the suspicious text. This parameter is valid only if `Form` is `OCR`.
+<font color=red>Note</font>: This parameter is not supported currently.
          * @type {Array.<number> || null}
          */
         this.AreaCoordSet = null;
@@ -7238,13 +7305,16 @@ class TaskStatData extends  AbstractModel {
         /**
          * The task type.
 <li>Transcoding: General transcoding</li>
-<li>Transcoding-TESHD: TESHD transcoding</li>
+<li>Transcoding-TESHD: Top Speed Codec transcoding</li>
 <li>Editing: Video editing</li>
-<li>Editing-TESHD: TESHD editing</li>
+<li>Editing-TESHD: Top Speed Codec editing</li>
 <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
 <li>ContentAudit: Content moderation</li>
+<li> ContentRecognition: Content recognition</li>
 <li>RemoveWatermark: Watermark removal</li>
-<li>Transcode: Transcoding, including general transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
+<li> ExtractTraceWatermark: Digital watermark extraction</li>
+<li> AddTraceWatermark: Digital watermarking</li>
+<li>Transcode: Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -28234,6 +28304,41 @@ class DrmStreamingsInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * ReviewAudioVideo response structure.
+ * @class
+ */
+class ReviewAudioVideoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteClass request structure.
  * @class
  */
@@ -33139,6 +33244,7 @@ module.exports = {
     DescribeMediaProcessUsageDataRequest: DescribeMediaProcessUsageDataRequest,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
     RemoveWatermarkTask: RemoveWatermarkTask,
+    ReviewAudioVideoRequest: ReviewAudioVideoRequest,
     StorageRegionInfo: StorageRegionInfo,
     MediaTransitionItem: MediaTransitionItem,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
@@ -33543,6 +33649,7 @@ module.exports = {
     AiContentReviewResult: AiContentReviewResult,
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,
     DrmStreamingsInfoForUpdate: DrmStreamingsInfoForUpdate,
+    ReviewAudioVideoResponse: ReviewAudioVideoResponse,
     DeleteClassRequest: DeleteClassRequest,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,

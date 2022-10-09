@@ -4788,6 +4788,12 @@ class CreateParamTemplateRequest extends  AbstractModel {
          */
         this.TemplateType = null;
 
+        /**
+         * Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+         * @type {string || null}
+         */
+        this.EngineType = null;
+
     }
 
     /**
@@ -4811,6 +4817,7 @@ class CreateParamTemplateRequest extends  AbstractModel {
             }
         }
         this.TemplateType = 'TemplateType' in params ? params.TemplateType : null;
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
 
     }
 }
@@ -14576,7 +14583,7 @@ class DescribeDBInstancesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * Instance details.
+         * List of instance details
          * @type {Array.<InstanceInfo> || null}
          */
         this.Items = null;

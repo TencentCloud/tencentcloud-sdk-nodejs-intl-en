@@ -6204,6 +6204,12 @@ class EditMediaOutputConfig extends  AbstractModel {
          */
         this.Container = null;
 
+        /**
+         * The editing mode. Valid values are `normal` and `fast`. The default is `normal`, which indicates precise editing.
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -6214,6 +6220,7 @@ class EditMediaOutputConfig extends  AbstractModel {
             return;
         }
         this.Container = 'Container' in params ? params.Container : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -17100,6 +17107,12 @@ class TaskSimpleInfo extends  AbstractModel {
          */
         this.FinishTime = null;
 
+        /**
+         * The subtask type.
+         * @type {Array.<string> || null}
+         */
+        this.SubTaskTypes = null;
+
     }
 
     /**
@@ -17114,6 +17127,7 @@ class TaskSimpleInfo extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.SubTaskTypes = 'SubTaskTypes' in params ? params.SubTaskTypes : null;
 
     }
 }
@@ -19835,13 +19849,13 @@ class WorkflowTask extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Disused. Please use `ErrCode` of each specific task.
+         * If the value returned is not 0, there was a source error. If 0 is returned, refer to the error codes of the corresponding task type.
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * Disused. Please use `Message` of each specific task.
+         * Except those for source errors, error messages vary with task type.
          * @type {string || null}
          */
         this.Message = null;

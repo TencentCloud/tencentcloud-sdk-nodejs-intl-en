@@ -23,9 +23,12 @@ const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const CrossRegionStatus = models.CrossRegionStatus;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const CreateBusinessIntelligenceFileRequest = models.CreateBusinessIntelligenceFileRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
 const DeleteBackupMigrationRequest = models.DeleteBackupMigrationRequest;
 const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const DeleteBusinessIntelligenceFileRequest = models.DeleteBusinessIntelligenceFileRequest;
+const CreateBusinessDBInstancesResponse = models.CreateBusinessDBInstancesResponse;
 const StartBackupMigrationResponse = models.StartBackupMigrationResponse;
 const RegionInfo = models.RegionInfo;
 const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
@@ -33,13 +36,16 @@ const ModifyIncrementalMigrationRequest = models.ModifyIncrementalMigrationReque
 const MigrateDetail = models.MigrateDetail;
 const CreateIncrementalMigrationRequest = models.CreateIncrementalMigrationRequest;
 const RunMigrationRequest = models.RunMigrationRequest;
-const RunMigrationResponse = models.RunMigrationResponse;
+const DescribeDBInstanceInterResponse = models.DescribeDBInstanceInterResponse;
+const CreateBusinessIntelligenceFileResponse = models.CreateBusinessIntelligenceFileResponse;
+const OpenInterCommunicationRequest = models.OpenInterCommunicationRequest;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const ParamRecord = models.ParamRecord;
 const RollbackInstanceResponse = models.RollbackInstanceResponse;
 const DeleteIncrementalMigrationRequest = models.DeleteIncrementalMigrationRequest;
 const DBRemark = models.DBRemark;
+const CloseInterCommunicationRequest = models.CloseInterCommunicationRequest;
 const MigrateDB = models.MigrateDB;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const DescribeBackupsRequest = models.DescribeBackupsRequest;
@@ -47,8 +53,9 @@ const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const DescribeIncrementalMigrationRequest = models.DescribeIncrementalMigrationRequest;
-const RestoreInstanceResponse = models.RestoreInstanceResponse;
+const DeleteBusinessIntelligenceFileResponse = models.DeleteBusinessIntelligenceFileResponse;
 const ParameterDetail = models.ParameterDetail;
+const DescribeBusinessIntelligenceFileResponse = models.DescribeBusinessIntelligenceFileResponse;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
@@ -56,12 +63,14 @@ const Migration = models.Migration;
 const ModifyDBInstanceNetworkRequest = models.ModifyDBInstanceNetworkRequest;
 const MigrationDetail = models.MigrationDetail;
 const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
+const BusinessIntelligenceFile = models.BusinessIntelligenceFile;
 const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const MigrateTask = models.MigrateTask;
 const SpecInfo = models.SpecInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
+const OpenInterCommunicationResponse = models.OpenInterCommunicationResponse;
 const ModifyAccountPrivilegeResponse = models.ModifyAccountPrivilegeResponse;
 const DBCreateInfo = models.DBCreateInfo;
 const AccountPrivilege = models.AccountPrivilege;
@@ -88,7 +97,7 @@ const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsR
 const DescribeDBsRequest = models.DescribeDBsRequest;
 const ModifyDBNameRequest = models.ModifyDBNameRequest;
 const ModifyDatabaseMdfRequest = models.ModifyDatabaseMdfRequest;
-const DescribeBackupsResponse = models.DescribeBackupsResponse;
+const DeleteIncrementalMigrationResponse = models.DeleteIncrementalMigrationResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
 const DeleteMigrationRequest = models.DeleteMigrationRequest;
@@ -102,6 +111,7 @@ const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
 const RenameRestoreDatabase = models.RenameRestoreDatabase;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
+const DescribeBusinessIntelligenceFileRequest = models.DescribeBusinessIntelligenceFileRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const AccountPassword = models.AccountPassword;
 const DescribeSlowlogsRequest = models.DescribeSlowlogsRequest;
@@ -111,6 +121,7 @@ const DescribeBackupUploadSizeResponse = models.DescribeBackupUploadSizeResponse
 const ModifyDatabaseCDCRequest = models.ModifyDatabaseCDCRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const StartIncrementalMigrationResponse = models.StartIncrementalMigrationResponse;
+const InterInstanceFlow = models.InterInstanceFlow;
 const DbRollbackTimeInfo = models.DbRollbackTimeInfo;
 const ModifyDBInstanceNetworkResponse = models.ModifyDBInstanceNetworkResponse;
 const DbNormalDetail = models.DbNormalDetail;
@@ -119,9 +130,11 @@ const ModifyDatabaseMdfResponse = models.ModifyDatabaseMdfResponse;
 const CreateBackupResponse = models.CreateBackupResponse;
 const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
-const DescribeBackupCommandResponse = models.DescribeBackupCommandResponse;
+const DescribeRollbackTimeRequest = models.DescribeRollbackTimeRequest;
 const DescribeUploadBackupInfoResponse = models.DescribeUploadBackupInfoResponse;
 const CreateMigrationRequest = models.CreateMigrationRequest;
+const DescribeDBInstanceInterRequest = models.DescribeDBInstanceInterRequest;
+const InterInstance = models.InterInstance;
 const DescribeUploadBackupInfoRequest = models.DescribeUploadBackupInfoRequest;
 const ModifyDBNameResponse = models.ModifyDBNameResponse;
 const CosUploadBackupFile = models.CosUploadBackupFile;
@@ -132,13 +145,15 @@ const AccountRemark = models.AccountRemark;
 const ModifyDatabaseCDCResponse = models.ModifyDatabaseCDCResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CreateIncrementalMigrationResponse = models.CreateIncrementalMigrationResponse;
+const RunMigrationResponse = models.RunMigrationResponse;
 const AccountPrivilegeModifyInfo = models.AccountPrivilegeModifyInfo;
 const DescribeBackupMigrationResponse = models.DescribeBackupMigrationResponse;
 const AccountCreateInfo = models.AccountCreateInfo;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DBPrivilege = models.DBPrivilege;
+const FileAction = models.FileAction;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
-const DeleteIncrementalMigrationResponse = models.DeleteIncrementalMigrationResponse;
+const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const ResourceTag = models.ResourceTag;
 const CreateBackupMigrationResponse = models.CreateBackupMigrationResponse;
 const RecycleDBInstanceResponse = models.RecycleDBInstanceResponse;
@@ -153,6 +168,7 @@ const MigrationAction = models.MigrationAction;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const CloneDBRequest = models.CloneDBRequest;
 const DescribeMigrationDetailResponse = models.DescribeMigrationDetailResponse;
+const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyMigrationRequest = models.ModifyMigrationRequest;
 const CrossBackupAddr = models.CrossBackupAddr;
 const Parameter = models.Parameter;
@@ -160,7 +176,9 @@ const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeBackupUploadSizeRequest = models.DescribeBackupUploadSizeRequest;
 const DeleteDBResponse = models.DeleteDBResponse;
 const CreateDBResponse = models.CreateDBResponse;
+const CloseInterCommunicationResponse = models.CloseInterCommunicationResponse;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
+const CreateBusinessDBInstancesRequest = models.CreateBusinessDBInstancesRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const DescribeSlowlogsResponse = models.DescribeSlowlogsResponse;
 const DBDetail = models.DBDetail;
@@ -171,8 +189,8 @@ const MigrationStep = models.MigrationStep;
 const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackInstanceRequest = models.RollbackInstanceRequest;
-const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
-const DescribeRollbackTimeRequest = models.DescribeRollbackTimeRequest;
+const RestoreInstanceResponse = models.RestoreInstanceResponse;
+const DescribeBackupCommandResponse = models.DescribeBackupCommandResponse;
 const ModifyDatabaseCTResponse = models.ModifyDatabaseCTResponse;
 const DescribeIncrementalMigrationResponse = models.DescribeIncrementalMigrationResponse;
 const ModifyDBRemarkResponse = models.ModifyDBRemarkResponse;
@@ -249,6 +267,28 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to isolate an instance to move it into a recycle bin.
+     * @param {TerminateDBInstanceRequest} req
+     * @param {function(string, TerminateDBInstanceResponse):void} cb
+     * @public
+     */
+    TerminateDBInstance(req, cb) {
+        let resp = new TerminateDBInstanceResponse();
+        this.request("TerminateDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query purchasable specification configuration.
+     * @param {DescribeProductConfigRequest} req
+     * @param {function(string, DescribeProductConfigResponse):void} cb
+     * @public
+     */
+    DescribeProductConfig(req, cb) {
+        let resp = new DescribeProductConfigResponse();
+        this.request("DescribeProductConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the database character sets supported by an instance.
      * @param {DescribeDBCharsetsRequest} req
      * @param {function(string, DescribeDBCharsetsResponse):void} cb
@@ -271,6 +311,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query migration task details.
+     * @param {DescribeMigrationDetailRequest} req
+     * @param {function(string, DescribeMigrationDetailResponse):void} cb
+     * @public
+     */
+    DescribeMigrationDetail(req, cb) {
+        let resp = new DescribeMigrationDetailResponse();
+        this.request("DescribeMigrationDetail", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify instance account permissions.
      * @param {ModifyAccountPrivilegeRequest} req
      * @param {function(string, ModifyAccountPrivilegeResponse):void} cb
@@ -282,14 +333,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * This API is used to return a deactivated SQL Server instance.
-     * @param {RecycleDBInstanceRequest} req
-     * @param {function(string, RecycleDBInstanceResponse):void} cb
+     * This API is used to modify database remarks.
+     * @param {ModifyDBRemarkRequest} req
+     * @param {function(string, ModifyDBRemarkResponse):void} cb
      * @public
      */
-    RecycleDBInstance(req, cb) {
-        let resp = new RecycleDBInstanceResponse();
-        this.request("RecycleDBInstance", req, resp, cb);
+    ModifyDBRemark(req, cb) {
+        let resp = new ModifyDBRemarkResponse();
+        this.request("ModifyDBRemark", req, resp, cb);
     }
 
     /**
@@ -460,14 +511,14 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to isolate an instance to move it into a recycle bin.
-     * @param {TerminateDBInstanceRequest} req
-     * @param {function(string, TerminateDBInstanceResponse):void} cb
+     * This API is used to enable instance interconnection, which can interconnect business intelligence services.
+     * @param {OpenInterCommunicationRequest} req
+     * @param {function(string, OpenInterCommunicationResponse):void} cb
      * @public
      */
-    TerminateDBInstance(req, cb) {
-        let resp = new TerminateDBInstanceResponse();
-        this.request("TerminateDBInstance", req, resp, cb);
+    OpenInterCommunication(req, cb) {
+        let resp = new OpenInterCommunicationResponse();
+        this.request("OpenInterCommunication", req, resp, cb);
     }
 
     /**
@@ -504,14 +555,14 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to query the list of databases
-     * @param {DescribeDBsRequest} req
-     * @param {function(string, DescribeDBsResponse):void} cb
+     * This API is used to create a migration task.
+     * @param {CreateMigrationRequest} req
+     * @param {function(string, CreateMigrationResponse):void} cb
      * @public
      */
-    DescribeDBs(req, cb) {
-        let resp = new DescribeDBsResponse();
-        this.request("DescribeDBs", req, resp, cb);
+    CreateMigration(req, cb) {
+        let resp = new CreateMigrationResponse();
+        this.request("CreateMigration", req, resp, cb);
     }
 
     /**
@@ -523,6 +574,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     DescribeBackupMigration(req, cb) {
         let resp = new DescribeBackupMigrationResponse();
         this.request("DescribeBackupMigration", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a business intelligence service file.
+     * @param {DeleteBusinessIntelligenceFileRequest} req
+     * @param {function(string, DeleteBusinessIntelligenceFileResponse):void} cb
+     * @public
+     */
+    DeleteBusinessIntelligenceFile(req, cb) {
+        let resp = new DeleteBusinessIntelligenceFileResponse();
+        this.request("DeleteBusinessIntelligenceFile", req, resp, cb);
     }
 
     /**
@@ -559,14 +621,14 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to modify database remarks.
-     * @param {ModifyDBRemarkRequest} req
-     * @param {function(string, ModifyDBRemarkResponse):void} cb
+     * This API is used to query the files required by business intelligence service.
+     * @param {DescribeBusinessIntelligenceFileRequest} req
+     * @param {function(string, DescribeBusinessIntelligenceFileResponse):void} cb
      * @public
      */
-    ModifyDBRemark(req, cb) {
-        let resp = new ModifyDBRemarkResponse();
-        this.request("ModifyDBRemark", req, resp, cb);
+    DescribeBusinessIntelligenceFile(req, cb) {
+        let resp = new DescribeBusinessIntelligenceFileResponse();
+        this.request("DescribeBusinessIntelligenceFile", req, resp, cb);
     }
 
     /**
@@ -658,14 +720,14 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to create a migration task.
-     * @param {CreateMigrationRequest} req
-     * @param {function(string, CreateMigrationResponse):void} cb
+     * This API is used to query the list of databases
+     * @param {DescribeDBsRequest} req
+     * @param {function(string, DescribeDBsResponse):void} cb
      * @public
      */
-    CreateMigration(req, cb) {
-        let resp = new CreateMigrationResponse();
-        this.request("CreateMigration", req, resp, cb);
+    DescribeDBs(req, cb) {
+        let resp = new DescribeDBsResponse();
+        this.request("DescribeDBs", req, resp, cb);
     }
 
     /**
@@ -812,14 +874,14 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to query migration task details.
-     * @param {DescribeMigrationDetailRequest} req
-     * @param {function(string, DescribeMigrationDetailResponse):void} cb
+     * This API is used to create a business intelligence service instance.
+     * @param {CreateBusinessDBInstancesRequest} req
+     * @param {function(string, CreateBusinessDBInstancesResponse):void} cb
      * @public
      */
-    DescribeMigrationDetail(req, cb) {
-        let resp = new DescribeMigrationDetailResponse();
-        this.request("DescribeMigrationDetail", req, resp, cb);
+    CreateBusinessDBInstances(req, cb) {
+        let resp = new CreateBusinessDBInstancesResponse();
+        this.request("CreateBusinessDBInstances", req, resp, cb);
     }
 
     /**
@@ -867,6 +929,50 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to query the information of the interconnected instances.
+     * @param {DescribeDBInstanceInterRequest} req
+     * @param {function(string, DescribeDBInstanceInterResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceInter(req, cb) {
+        let resp = new DescribeDBInstanceInterResponse();
+        this.request("DescribeDBInstanceInter", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add a business intelligence service file.
+     * @param {CreateBusinessIntelligenceFileRequest} req
+     * @param {function(string, CreateBusinessIntelligenceFileResponse):void} cb
+     * @public
+     */
+    CreateBusinessIntelligenceFile(req, cb) {
+        let resp = new CreateBusinessIntelligenceFileResponse();
+        this.request("CreateBusinessIntelligenceFile", req, resp, cb);
+    }
+
+    /**
+     * This API is used to return a deactivated SQL Server instance.
+     * @param {RecycleDBInstanceRequest} req
+     * @param {function(string, RecycleDBInstanceResponse):void} cb
+     * @public
+     */
+    RecycleDBInstance(req, cb) {
+        let resp = new RecycleDBInstanceResponse();
+        this.request("RecycleDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable instance interconnection.
+     * @param {CloseInterCommunicationRequest} req
+     * @param {function(string, CloseInterCommunicationResponse):void} cb
+     * @public
+     */
+    CloseInterCommunication(req, cb) {
+        let resp = new CloseInterCommunicationResponse();
+        this.request("CloseInterCommunication", req, resp, cb);
+    }
+
+    /**
      * This API is used to enable or disable the change data capture (CDC) feature.
      * @param {ModifyDatabaseCDCRequest} req
      * @param {function(string, ModifyDatabaseCDCResponse):void} cb
@@ -875,17 +981,6 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     ModifyDatabaseCDC(req, cb) {
         let resp = new ModifyDatabaseCDCResponse();
         this.request("ModifyDatabaseCDC", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query purchasable specification configuration.
-     * @param {DescribeProductConfigRequest} req
-     * @param {function(string, DescribeProductConfigResponse):void} cb
-     * @public
-     */
-    DescribeProductConfig(req, cb) {
-        let resp = new DescribeProductConfigResponse();
-        this.request("DescribeProductConfig", req, resp, cb);
     }
 
 

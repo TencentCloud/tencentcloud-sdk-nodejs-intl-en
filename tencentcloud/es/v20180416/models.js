@@ -3460,6 +3460,12 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
          */
         this.OperationDuration = null;
 
+        /**
+         * Whether to enable the option for sending alerting messages over the public network.
+         * @type {string || null}
+         */
+        this.KibanaAlteringPublicAccess = null;
+
     }
 
     /**
@@ -3546,6 +3552,7 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
             obj.deserialize(params.OperationDuration)
             this.OperationDuration = obj;
         }
+        this.KibanaAlteringPublicAccess = 'KibanaAlteringPublicAccess' in params ? params.KibanaAlteringPublicAccess : null;
 
     }
 }
@@ -4288,6 +4295,13 @@ class TaskDetail extends  AbstractModel {
          */
         this.SubTasks = null;
 
+        /**
+         * The task time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ElapsedTime = null;
+
     }
 
     /**
@@ -4309,6 +4323,7 @@ class TaskDetail extends  AbstractModel {
                 this.SubTasks.push(obj);
             }
         }
+        this.ElapsedTime = 'ElapsedTime' in params ? params.ElapsedTime : null;
 
     }
 }
@@ -4625,6 +4640,12 @@ class UpgradeInstanceRequest extends  AbstractModel {
          */
         this.CosBackup = null;
 
+        /**
+         * Whether to skip the check and perform a force restart in the rolling mode. Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.SkipCheckForceRestart = null;
+
     }
 
     /**
@@ -4641,6 +4662,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
         this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
         this.CosBackup = 'CosBackup' in params ? params.CosBackup : null;
+        this.SkipCheckForceRestart = 'SkipCheckForceRestart' in params ? params.SkipCheckForceRestart : null;
 
     }
 }

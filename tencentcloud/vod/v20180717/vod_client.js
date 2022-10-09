@@ -99,6 +99,7 @@ const CreateProcedureTemplateRequest = models.CreateProcedureTemplateRequest;
 const DescribeMediaProcessUsageDataRequest = models.DescribeMediaProcessUsageDataRequest;
 const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
 const RemoveWatermarkTask = models.RemoveWatermarkTask;
+const ReviewAudioVideoRequest = models.ReviewAudioVideoRequest;
 const StorageRegionInfo = models.StorageRegionInfo;
 const MediaTransitionItem = models.MediaTransitionItem;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
@@ -503,6 +504,7 @@ const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
 const AiContentReviewResult = models.AiContentReviewResult;
 const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
 const DrmStreamingsInfoForUpdate = models.DrmStreamingsInfoForUpdate;
+const ReviewAudioVideoResponse = models.ReviewAudioVideoResponse;
 const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
@@ -1221,6 +1223,20 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     DeleteSuperPlayerConfig(req, cb) {
         let resp = new DeleteSuperPlayerConfigResponse();
         this.request("DeleteSuperPlayerConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start a moderation task on a file stored in VOD to detect non-compliant content in images, text, and speech.
+
+If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+
+     * @param {ReviewAudioVideoRequest} req
+     * @param {function(string, ReviewAudioVideoResponse):void} cb
+     * @public
+     */
+    ReviewAudioVideo(req, cb) {
+        let resp = new ReviewAudioVideoResponse();
+        this.request("ReviewAudioVideo", req, resp, cb);
     }
 
     /**

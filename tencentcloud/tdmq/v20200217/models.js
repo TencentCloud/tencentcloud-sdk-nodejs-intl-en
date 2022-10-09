@@ -391,7 +391,7 @@ class ModifyEnvironmentAttributesRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
+         * Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s (or 15 days).
          * @type {number || null}
          */
         this.MsgTTL = null;
@@ -773,6 +773,127 @@ class RocketMQClusterRecentStats extends  AbstractModel {
         this.ProducedMsgNum = 'ProducedMsgNum' in params ? params.ProducedMsgNum : null;
         this.ConsumedMsgNum = 'ConsumedMsgNum' in params ? params.ConsumedMsgNum : null;
         this.AccumulativeMsgNum = 'AccumulativeMsgNum' in params ? params.AccumulativeMsgNum : null;
+
+    }
+}
+
+/**
+ * Information of TDMQ for RocketMQ exclusive instances
+ * @class
+ */
+class RocketMQVipInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance version
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceVersion = null;
+
+        /**
+         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Number of nodes
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * Instance specification name
+         * @type {string || null}
+         */
+        this.ConfigDisplay = null;
+
+        /**
+         * Peak TPS
+         * @type {number || null}
+         */
+        this.MaxTps = null;
+
+        /**
+         * Peak bandwidth in Mbps
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+        /**
+         * Storage capacity in GB
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * Instance expiration time in milliseconds
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Payment mode. 0: Postpaid; 1: Prepaid.
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Remarks
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Instance specification ID
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
+        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
 
     }
 }
@@ -2447,7 +2568,7 @@ class CreateEnvironmentRequest extends  AbstractModel {
         this.EnvironmentId = null;
 
         /**
-         * Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
+         * Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s (or 15 days).
          * @type {number || null}
          */
         this.MsgTTL = null;
@@ -4185,7 +4306,7 @@ class ReceiveMessageRequest extends  AbstractModel {
         this.ReceiverQueueSize = null;
 
         /**
-         * Default value: Latest. It is used to determine the position where the consumer initially receives messages. Valid values: Earliest, Latest.
+         * A parameter used to determine the position where the consumer initially receives messages. Valid values: `Earliest` (default), `Latest`.
          * @type {string || null}
          */
         this.SubInitialPosition = null;
@@ -6554,6 +6675,56 @@ class ModifyTopicResponse extends  AbstractModel {
         this.Partitions = 'Partitions' in params ? params.Partitions : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRocketMQVipInstances request structure.
+ * @class
+ */
+class DescribeRocketMQVipInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query condition filter
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The maximum number of queried items, which defaults to 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Start offset for query
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -9608,6 +9779,56 @@ class ModifyRocketMQGroupResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRocketMQVipInstances response structure.
+ * @class
+ */
+class DescribeRocketMQVipInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of unpaginated items
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Instance information list
+         * @type {Array.<RocketMQVipInstance> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new RocketMQVipInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClusterDetail response structure.
  * @class
  */
@@ -9674,7 +9895,8 @@ class SendMessagesRequest extends  AbstractModel {
         this.StringToken = null;
 
         /**
-         * Producer name, which must be globally unique. If it is not configured, the system will randomly generate one.
+         * Producer name, which is randomly generated and must be globally unique. If you set the producer name manually, the producer may fail to be created, causing message sending failure.
+This parameter is used only when a specific producer is allowed to produce messages. It won’t be used in most cases.
          * @type {string || null}
          */
         this.ProducerName = null;
@@ -9803,6 +10025,7 @@ module.exports = {
     BindCluster: BindCluster,
     ModifyClusterResponse: ModifyClusterResponse,
     RocketMQClusterRecentStats: RocketMQClusterRecentStats,
+    RocketMQVipInstance: RocketMQVipInstance,
     DescribeCmqQueuesResponse: DescribeCmqQueuesResponse,
     PublishCmqMsgRequest: PublishCmqMsgRequest,
     CreateCmqSubscribeRequest: CreateCmqSubscribeRequest,
@@ -9906,6 +10129,7 @@ module.exports = {
     DescribeEnvironmentsResponse: DescribeEnvironmentsResponse,
     ModifyCmqSubscriptionAttributeRequest: ModifyCmqSubscriptionAttributeRequest,
     ModifyTopicResponse: ModifyTopicResponse,
+    DescribeRocketMQVipInstancesRequest: DescribeRocketMQVipInstancesRequest,
     ReceiveMessageResponse: ReceiveMessageResponse,
     DeleteRocketMQClusterResponse: DeleteRocketMQClusterResponse,
     CreateCmqTopicResponse: CreateCmqTopicResponse,
@@ -9964,6 +10188,7 @@ module.exports = {
     DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
     DeleteSubscriptionsRequest: DeleteSubscriptionsRequest,
     ModifyRocketMQGroupResponse: ModifyRocketMQGroupResponse,
+    DescribeRocketMQVipInstancesResponse: DescribeRocketMQVipInstancesResponse,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
     SendMessagesRequest: SendMessagesRequest,
     CreateEnvironmentRoleRequest: CreateEnvironmentRoleRequest,

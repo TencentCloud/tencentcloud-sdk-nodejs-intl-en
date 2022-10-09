@@ -509,6 +509,55 @@ class DescribeAccountsRequest extends  AbstractModel {
 }
 
 /**
+ * CreateBusinessIntelligenceFile request structure.
+ * @class
+ */
+class CreateBusinessIntelligenceFileRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FileURL = null;
+
+        /**
+         * File type. Valid values: `FLAT` (flat file as data source), `SSIS` (.ispac SSIS package file)
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FileURL = 'FileURL' in params ? params.FileURL : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
  * CreateMigration response structure.
  * @class
  */
@@ -602,6 +651,76 @@ class RestartDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DeleteBusinessIntelligenceFile request structure.
+ * @class
+ */
+class DeleteBusinessIntelligenceFileRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * File name set
+         * @type {Array.<string> || null}
+         */
+        this.FileNameSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FileNameSet = 'FileNameSet' in params ? params.FileNameSet : null;
+
+    }
+}
+
+/**
+ * CreateBusinessDBInstances response structure.
+ * @class
+ */
+class CreateBusinessDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order name
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -901,18 +1020,24 @@ class RunMigrationRequest extends  AbstractModel {
 }
 
 /**
- * RunMigration response structure.
+ * DescribeDBInstanceInter response structure.
  * @class
  */
-class RunMigrationResponse extends  AbstractModel {
+class DescribeDBInstanceInterResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * After the migration task starts, the flow ID will be returned
+         * Number of records returned
          * @type {number || null}
          */
-        this.FlowId = null;
+        this.TotalCount = null;
+
+        /**
+         * Details of instance in the interworking group
+         * @type {Array.<InterInstance> || null}
+         */
+        this.InterInstanceSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -929,8 +1054,80 @@ class RunMigrationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InterInstanceSet) {
+            this.InterInstanceSet = new Array();
+            for (let z in params.InterInstanceSet) {
+                let obj = new InterInstance();
+                obj.deserialize(params.InterInstanceSet[z]);
+                this.InterInstanceSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateBusinessIntelligenceFile response structure.
+ * @class
+ */
+class CreateBusinessIntelligenceFileResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File name
+         * @type {string || null}
+         */
+        this.FileTaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileTaskId = 'FileTaskId' in params ? params.FileTaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenInterCommunication request structure.
+ * @class
+ */
+class OpenInterCommunicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of instances with interwoking group enabled
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
 
     }
 }
@@ -1184,6 +1381,34 @@ class DBRemark extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * CloseInterCommunication request structure.
+ * @class
+ */
+class CloseInterCommunicationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of instances with interconnection disabled
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
 
     }
 }
@@ -1591,18 +1816,12 @@ class DescribeIncrementalMigrationRequest extends  AbstractModel {
 }
 
 /**
- * RestoreInstance response structure.
+ * DeleteBusinessIntelligenceFile response structure.
  * @class
  */
-class RestoreInstanceResponse extends  AbstractModel {
+class DeleteBusinessIntelligenceFileResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Async flow task ID, which can be used to call the `DescribeFlowStatus` API to get the task execution status
-         * @type {number || null}
-         */
-        this.FlowId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1619,7 +1838,6 @@ class RestoreInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1712,6 +1930,56 @@ class ParameterDetail extends  AbstractModel {
         this.Min = 'Min' in params ? params.Min : null;
         this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeBusinessIntelligenceFile response structure.
+ * @class
+ */
+class DescribeBusinessIntelligenceFileResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of file deployment tasks
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * File deployment task set
+         * @type {Array.<BusinessIntelligenceFile> || null}
+         */
+        this.BackupMigrationSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BackupMigrationSet) {
+            this.BackupMigrationSet = new Array();
+            for (let z in params.BackupMigrationSet) {
+                let obj = new BusinessIntelligenceFile();
+                obj.deserialize(params.BackupMigrationSet[z]);
+                this.BackupMigrationSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2201,6 +2469,130 @@ class RecycleDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Business intelligence service file type
+ * @class
+ */
+class BusinessIntelligenceFile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * File name
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * File type
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * File COS_URL
+         * @type {string || null}
+         */
+        this.FileURL = null;
+
+        /**
+         * The file path on the server
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+        /**
+         * File size in bytes
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * File MD5 value
+         * @type {string || null}
+         */
+        this.FileMd5 = null;
+
+        /**
+         * File deployment status. Valid values: `1`(Initialize to be deployed), `2` (Deploying), `3` (Deployment successful), `4` (Deployment failed).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * File creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Start time of file deployment
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of file deployment
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Returned error message
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Business intelligence instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Operation information
+         * @type {FileAction || null}
+         */
+        this.Action = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.FileURL = 'FileURL' in params ? params.FileURL : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.FileMd5 = 'FileMd5' in params ? params.FileMd5 : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Action) {
+            let obj = new FileAction();
+            obj.deserialize(params.Action)
+            this.Action = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeFlowStatus request structure.
  * @class
  */
@@ -2601,6 +2993,49 @@ class InquiryPriceCreateDBInstancesResponse extends  AbstractModel {
         }
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenInterCommunication response structure.
+ * @class
+ */
+class OpenInterCommunicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of instance and async task
+         * @type {Array.<InterInstanceFlow> || null}
+         */
+        this.InterInstanceFlowSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InterInstanceFlowSet) {
+            this.InterInstanceFlowSet = new Array();
+            for (let z in params.InterInstanceFlowSet) {
+                let obj = new InterInstanceFlow();
+                obj.deserialize(params.InterInstanceFlowSet[z]);
+                this.InterInstanceFlowSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3894,24 +4329,12 @@ class ModifyDatabaseMdfRequest extends  AbstractModel {
 }
 
 /**
- * DescribeBackups response structure.
+ * DeleteIncrementalMigration response structure.
  * @class
  */
-class DescribeBackupsResponse extends  AbstractModel {
+class DeleteIncrementalMigrationResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Total number of backups
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Backup list details
-         * @type {Array.<Backup> || null}
-         */
-        this.Backups = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3927,16 +4350,6 @@ class DescribeBackupsResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Backups) {
-            this.Backups = new Array();
-            for (let z in params.Backups) {
-                let obj = new Backup();
-                obj.deserialize(params.Backups[z]);
-                this.Backups.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4424,6 +4837,83 @@ class ModifyDBRemarkRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeBusinessIntelligenceFile request structure.
+ * @class
+ */
+class DescribeBusinessIntelligenceFileRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * File name
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Migration task status set. Valid values: `1` (Initialize to be deployed), `2` (Deploying), `3` (Deployment successful), `4` (Deployment failed)
+         * @type {Array.<number> || null}
+         */
+        this.StatusSet = null;
+
+        /**
+         * File type. Valid values: `FLAT` (flat files), `SSIS` (project file for business intelligence service).
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * The maximum number of results returned per page. Value range: 1-100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting field. Valid values: `file_name`, `create_time`, `start_time`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order: Valid values: `desc`, `asc`.
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.StatusSet = 'StatusSet' in params ? params.StatusSet : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceName request structure.
  * @class
  */
@@ -4819,6 +5309,41 @@ class StartIncrementalMigrationResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Instance status after enabling or disabling the interworking group
+ * @class
+ */
+class InterInstanceFlow extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID, such as mssql-sdf32n1d.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance task ID for enabling or disabling the interworking group. When `FlowId` is less than 0, the interworking group will be enabled or disabled successfully; otherwise, the operation failed.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
     }
 }
@@ -5660,24 +6185,24 @@ class DescribeProductConfigResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBackupCommand response structure.
+ * DescribeRollbackTime request structure.
  * @class
  */
-class DescribeBackupCommandResponse extends  AbstractModel {
+class DescribeRollbackTimeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Create a backup command
+         * Instance ID
          * @type {string || null}
          */
-        this.Command = null;
+        this.InstanceId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * List of databases to be queried
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.DBs = null;
 
     }
 
@@ -5688,8 +6213,8 @@ class DescribeBackupCommandResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Command = 'Command' in params ? params.Command : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DBs = 'DBs' in params ? params.DBs : null;
 
     }
 }
@@ -5870,6 +6395,167 @@ class CreateMigrationRequest extends  AbstractModel {
                 this.RenameRestore.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeDBInstanceInter request structure.
+ * @class
+ */
+class DescribeDBInstanceInterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The maximum number of results returned per page. Value range: 1-100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter by instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Filter by status. Valid values: `1` (Enabling interworking IP), `2` (Enabled interworking IP), `3` (Adding to interworking group), `4` (Added to interworking group), `5` (Reclaiming interworking IP), `6` (Reclaimed interworking IP), `7` (Removing from interworking group), `8` (Removed from interworking group).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The list of instance version numbers
+         * @type {Array.<string> || null}
+         */
+        this.VersionSet = null;
+
+        /**
+         * Instance AZ ID in the format of ap-guangzhou-2
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Page number. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.VersionSet = 'VersionSet' in params ? params.VersionSet : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * Details of instances in the interwoking group
+ * @class
+ */
+class InterInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance interworking IP, which can be accessed after the instance is added to the interworking group.
+         * @type {string || null}
+         */
+        this.InterVip = null;
+
+        /**
+         * Instance interworking port, which can be accessed after the instance is added to the interworking group.
+         * @type {number || null}
+         */
+        this.InterPort = null;
+
+        /**
+         * Instance interworking status. Valid values: `1` (Enabling interworking IP), `2` (Enabled interworking IP), `3` (Adding to interworking group), `4` (Added to interworking group), `5` (Reclaiming interworking IP), `6`(Reclaimed interworking IP), `7` (Removing from interworking group), `8` (Removed from interworking group).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance region, such as ap-guangzhou.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Instance AZ name, such as ap-guangzhou-1.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Instance version code
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * Instance version
+         * @type {string || null}
+         */
+        this.VersionName = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Instance access IP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Instance access port
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InterVip = 'InterVip' in params ? params.InterVip : null;
+        this.InterPort = 'InterPort' in params ? params.InterPort : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
 
     }
 }
@@ -6353,6 +7039,41 @@ class CreateIncrementalMigrationResponse extends  AbstractModel {
 }
 
 /**
+ * RunMigration response structure.
+ * @class
+ */
+class RunMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * After the migration task starts, the flow ID will be returned
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Database account permission change information
  * @class
  */
@@ -6650,6 +7371,41 @@ class DBPrivilege extends  AbstractModel {
 }
 
 /**
+ * Information of allowed operation
+ * @class
+ */
+class FileAction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Allowed operations. Valid values: `view` (view list), `remark` (modify remark), `deploy` (deploy files), `delete` (delete files).
+         * @type {Array.<string> || null}
+         */
+        this.AllAction = null;
+
+        /**
+         * Operation allowed in the current status. If the subset of `AllAction` is empty, no operations will be allowed.
+         * @type {Array.<string> || null}
+         */
+        this.AllowedAction = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllAction = 'AllAction' in params ? params.AllAction : null;
+        this.AllowedAction = 'AllowedAction' in params ? params.AllowedAction : null;
+
+    }
+}
+
+/**
  * DescribeOrders request structure.
  * @class
  */
@@ -6678,12 +7434,24 @@ class DescribeOrdersRequest extends  AbstractModel {
 }
 
 /**
- * DeleteIncrementalMigration response structure.
+ * DescribeBackups response structure.
  * @class
  */
-class DeleteIncrementalMigrationResponse extends  AbstractModel {
+class DescribeBackupsResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Total number of backups
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Backup list details
+         * @type {Array.<Backup> || null}
+         */
+        this.Backups = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6699,6 +7467,16 @@ class DeleteIncrementalMigrationResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Backups) {
+            this.Backups = new Array();
+            for (let z in params.Backups) {
+                let obj = new Backup();
+                obj.deserialize(params.Backups[z]);
+                this.Backups.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -7371,6 +8149,41 @@ class DescribeMigrationDetailResponse extends  AbstractModel {
 }
 
 /**
+ * UpgradeDBInstance response structure.
+ * @class
+ */
+class UpgradeDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order name
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyMigration request structure.
  * @class
  */
@@ -7683,6 +8496,49 @@ class CreateDBResponse extends  AbstractModel {
 }
 
 /**
+ * CloseInterCommunication response structure.
+ * @class
+ */
+class CloseInterCommunicationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of instance and async task
+         * @type {Array.<InterInstanceFlow> || null}
+         */
+        this.InterInstanceFlowSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InterInstanceFlowSet) {
+            this.InterInstanceFlowSet = new Array();
+            for (let z in params.InterInstanceFlowSet) {
+                let obj = new InterInstanceFlow();
+                obj.deserialize(params.InterInstanceFlowSet[z]);
+                this.InterInstanceFlowSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RestartDBInstance response structure.
  * @class
  */
@@ -7713,6 +8569,140 @@ class RestartDBInstanceResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateBusinessDBInstances request structure.
+ * @class
+ */
+class CreateBusinessDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Instance memory size in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance disk size in GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * The number of CPU cores of the instance you want to purchase.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * The host type of purchased instance. Valid values: `CLOUD_PREMIUM` (virtual machine with premium cloud disk), `CLOUD_SSD` (virtual machine with SSD).
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Number of instances purchased this time. Default value: `1`.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * VPC subnet ID in the format of subnet-bdoe83fa. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * VPC ID in the format of vpc-dsp338hz. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * - Supported versions of business intelligence server. Valid values: `201603` (SQL Server 2016 Integration Services), `201703` (SQL Server 2017 Integration Services), `201903` (SQL Server 2019 Integration Services). Default value: `201903`. As the purchasable versions are region-specific, you can use the `DescribeProductConfig` API to query the information of purchasable versions in each region.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * Security group list, which contains security group IDs in the format of sg-xxx.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupList = null;
+
+        /**
+         * Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: `1` (Monday), `2` (Tuesday), `3` (Wednesday), `4` (Thursday), `5` (Friday), `6` (Saturday), `7` (Sunday).
+         * @type {Array.<number> || null}
+         */
+        this.Weekly = null;
+
+        /**
+         * Configuration of the maintenance window, which specifies the start time of daily maintenance.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Configuration of the maintenance window, which specifies the maintenance duration in hours.
+         * @type {number || null}
+         */
+        this.Span = null;
+
+        /**
+         * Tags associated with the instances to be created
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.SecurityGroupList = 'SecurityGroupList' in params ? params.SecurityGroupList : null;
+        this.Weekly = 'Weekly' in params ? params.Weekly : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Span = 'Span' in params ? params.Span : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -8229,18 +9219,18 @@ class RollbackInstanceRequest extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstance response structure.
+ * RestoreInstance response structure.
  * @class
  */
-class UpgradeDBInstanceResponse extends  AbstractModel {
+class RestoreInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Order name
-         * @type {string || null}
+         * Async flow task ID, which can be used to call the `DescribeFlowStatus` API to get the task execution status
+         * @type {number || null}
          */
-        this.DealName = null;
+        this.FlowId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8257,31 +9247,31 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeRollbackTime request structure.
+ * DescribeBackupCommand response structure.
  * @class
  */
-class DescribeRollbackTimeRequest extends  AbstractModel {
+class DescribeBackupCommandResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Create a backup command
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Command = null;
 
         /**
-         * List of databases to be queried
-         * @type {Array.<string> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.DBs = null;
+        this.RequestId = null;
 
     }
 
@@ -8292,8 +9282,8 @@ class DescribeRollbackTimeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.DBs = 'DBs' in params ? params.DBs : null;
+        this.Command = 'Command' in params ? params.Command : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8636,9 +9626,12 @@ module.exports = {
     RestoreInstanceRequest: RestoreInstanceRequest,
     CrossRegionStatus: CrossRegionStatus,
     DescribeAccountsRequest: DescribeAccountsRequest,
+    CreateBusinessIntelligenceFileRequest: CreateBusinessIntelligenceFileRequest,
     CreateMigrationResponse: CreateMigrationResponse,
     DeleteBackupMigrationRequest: DeleteBackupMigrationRequest,
     RestartDBInstanceRequest: RestartDBInstanceRequest,
+    DeleteBusinessIntelligenceFileRequest: DeleteBusinessIntelligenceFileRequest,
+    CreateBusinessDBInstancesResponse: CreateBusinessDBInstancesResponse,
     StartBackupMigrationResponse: StartBackupMigrationResponse,
     RegionInfo: RegionInfo,
     ModifyBackupStrategyResponse: ModifyBackupStrategyResponse,
@@ -8646,13 +9639,16 @@ module.exports = {
     MigrateDetail: MigrateDetail,
     CreateIncrementalMigrationRequest: CreateIncrementalMigrationRequest,
     RunMigrationRequest: RunMigrationRequest,
-    RunMigrationResponse: RunMigrationResponse,
+    DescribeDBInstanceInterResponse: DescribeDBInstanceInterResponse,
+    CreateBusinessIntelligenceFileResponse: CreateBusinessIntelligenceFileResponse,
+    OpenInterCommunicationRequest: OpenInterCommunicationRequest,
     DescribeProductConfigRequest: DescribeProductConfigRequest,
     CreateAccountRequest: CreateAccountRequest,
     ParamRecord: ParamRecord,
     RollbackInstanceResponse: RollbackInstanceResponse,
     DeleteIncrementalMigrationRequest: DeleteIncrementalMigrationRequest,
     DBRemark: DBRemark,
+    CloseInterCommunicationRequest: CloseInterCommunicationRequest,
     MigrateDB: MigrateDB,
     DescribeRegionsResponse: DescribeRegionsResponse,
     DescribeBackupsRequest: DescribeBackupsRequest,
@@ -8660,8 +9656,9 @@ module.exports = {
     DescribeRollbackTimeResponse: DescribeRollbackTimeResponse,
     DescribeInstanceParamRecordsResponse: DescribeInstanceParamRecordsResponse,
     DescribeIncrementalMigrationRequest: DescribeIncrementalMigrationRequest,
-    RestoreInstanceResponse: RestoreInstanceResponse,
+    DeleteBusinessIntelligenceFileResponse: DeleteBusinessIntelligenceFileResponse,
     ParameterDetail: ParameterDetail,
+    DescribeBusinessIntelligenceFileResponse: DescribeBusinessIntelligenceFileResponse,
     ZoneInfo: ZoneInfo,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
@@ -8669,12 +9666,14 @@ module.exports = {
     ModifyDBInstanceNetworkRequest: ModifyDBInstanceNetworkRequest,
     MigrationDetail: MigrationDetail,
     RecycleDBInstanceRequest: RecycleDBInstanceRequest,
+    BusinessIntelligenceFile: BusinessIntelligenceFile,
     DescribeFlowStatusRequest: DescribeFlowStatusRequest,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     MigrateTask: MigrateTask,
     SpecInfo: SpecInfo,
     DescribeOrdersResponse: DescribeOrdersResponse,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
+    OpenInterCommunicationResponse: OpenInterCommunicationResponse,
     ModifyAccountPrivilegeResponse: ModifyAccountPrivilegeResponse,
     DBCreateInfo: DBCreateInfo,
     AccountPrivilege: AccountPrivilege,
@@ -8701,7 +9700,7 @@ module.exports = {
     DescribeDBsRequest: DescribeDBsRequest,
     ModifyDBNameRequest: ModifyDBNameRequest,
     ModifyDatabaseMdfRequest: ModifyDatabaseMdfRequest,
-    DescribeBackupsResponse: DescribeBackupsResponse,
+    DeleteIncrementalMigrationResponse: DeleteIncrementalMigrationResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeFlowStatusResponse: DescribeFlowStatusResponse,
     DeleteMigrationRequest: DeleteMigrationRequest,
@@ -8715,6 +9714,7 @@ module.exports = {
     RenameRestoreDatabase: RenameRestoreDatabase,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
     ModifyDBRemarkRequest: ModifyDBRemarkRequest,
+    DescribeBusinessIntelligenceFileRequest: DescribeBusinessIntelligenceFileRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     AccountPassword: AccountPassword,
     DescribeSlowlogsRequest: DescribeSlowlogsRequest,
@@ -8724,6 +9724,7 @@ module.exports = {
     ModifyDatabaseCDCRequest: ModifyDatabaseCDCRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     StartIncrementalMigrationResponse: StartIncrementalMigrationResponse,
+    InterInstanceFlow: InterInstanceFlow,
     DbRollbackTimeInfo: DbRollbackTimeInfo,
     ModifyDBInstanceNetworkResponse: ModifyDBInstanceNetworkResponse,
     DbNormalDetail: DbNormalDetail,
@@ -8732,9 +9733,11 @@ module.exports = {
     CreateBackupResponse: CreateBackupResponse,
     DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,
-    DescribeBackupCommandResponse: DescribeBackupCommandResponse,
+    DescribeRollbackTimeRequest: DescribeRollbackTimeRequest,
     DescribeUploadBackupInfoResponse: DescribeUploadBackupInfoResponse,
     CreateMigrationRequest: CreateMigrationRequest,
+    DescribeDBInstanceInterRequest: DescribeDBInstanceInterRequest,
+    InterInstance: InterInstance,
     DescribeUploadBackupInfoRequest: DescribeUploadBackupInfoRequest,
     ModifyDBNameResponse: ModifyDBNameResponse,
     CosUploadBackupFile: CosUploadBackupFile,
@@ -8745,13 +9748,15 @@ module.exports = {
     ModifyDatabaseCDCResponse: ModifyDatabaseCDCResponse,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     CreateIncrementalMigrationResponse: CreateIncrementalMigrationResponse,
+    RunMigrationResponse: RunMigrationResponse,
     AccountPrivilegeModifyInfo: AccountPrivilegeModifyInfo,
     DescribeBackupMigrationResponse: DescribeBackupMigrationResponse,
     AccountCreateInfo: AccountCreateInfo,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DBPrivilege: DBPrivilege,
+    FileAction: FileAction,
     DescribeOrdersRequest: DescribeOrdersRequest,
-    DeleteIncrementalMigrationResponse: DeleteIncrementalMigrationResponse,
+    DescribeBackupsResponse: DescribeBackupsResponse,
     ResourceTag: ResourceTag,
     CreateBackupMigrationResponse: CreateBackupMigrationResponse,
     RecycleDBInstanceResponse: RecycleDBInstanceResponse,
@@ -8766,6 +9771,7 @@ module.exports = {
     InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
     CloneDBRequest: CloneDBRequest,
     DescribeMigrationDetailResponse: DescribeMigrationDetailResponse,
+    UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     ModifyMigrationRequest: ModifyMigrationRequest,
     CrossBackupAddr: CrossBackupAddr,
     Parameter: Parameter,
@@ -8773,7 +9779,9 @@ module.exports = {
     DescribeBackupUploadSizeRequest: DescribeBackupUploadSizeRequest,
     DeleteDBResponse: DeleteDBResponse,
     CreateDBResponse: CreateDBResponse,
+    CloseInterCommunicationResponse: CloseInterCommunicationResponse,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
+    CreateBusinessDBInstancesRequest: CreateBusinessDBInstancesRequest,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     DescribeSlowlogsResponse: DescribeSlowlogsResponse,
     DBDetail: DBDetail,
@@ -8784,8 +9792,8 @@ module.exports = {
     TerminateDBInstanceResponse: TerminateDBInstanceResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackInstanceRequest: RollbackInstanceRequest,
-    UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
-    DescribeRollbackTimeRequest: DescribeRollbackTimeRequest,
+    RestoreInstanceResponse: RestoreInstanceResponse,
+    DescribeBackupCommandResponse: DescribeBackupCommandResponse,
     ModifyDatabaseCTResponse: ModifyDatabaseCTResponse,
     DescribeIncrementalMigrationResponse: DescribeIncrementalMigrationResponse,
     ModifyDBRemarkResponse: ModifyDBRemarkResponse,

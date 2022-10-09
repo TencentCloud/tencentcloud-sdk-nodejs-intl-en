@@ -687,24 +687,63 @@ class ResumeDelayLiveStreamRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLiveWatermarkRules response structure.
+ * DescribeLiveStreamPublishedList request structure.
  * @class
  */
-class DescribeLiveWatermarkRulesResponse extends  AbstractModel {
+class DescribeLiveStreamPublishedListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermarking rule list.
-         * @type {Array.<RuleInfo> || null}
-         */
-        this.Rules = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Your push domain name.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DomainName = null;
+
+        /**
+         * End time.
+In UTC format, such as 2016-06-30T19:00:00Z.
+This cannot be after the current time.
+Note: The difference between EndTime and StartTime cannot be greater than 30 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Start time. 
+In UTC format, such as 2016-06-29T19:00:00Z.
+This supports querying data in the past 60 days.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. Fuzzy match is not supported.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Page number to get.
+Default value: 1.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Number of entries per page.
+Maximum value: 100
+Valid values: integers between 10 and 100
+Default value: 10
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Stream name, which supports fuzzy match.
+         * @type {string || null}
+         */
+        this.StreamName = null;
 
     }
 
@@ -715,16 +754,13 @@ class DescribeLiveWatermarkRulesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new RuleInfo();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
 
     }
 }
@@ -2573,63 +2609,41 @@ class DescribeLiveDomainRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLiveStreamPublishedList request structure.
+ * AuthenticateDomainOwner response structure.
  * @class
  */
-class DescribeLiveStreamPublishedListRequest extends  AbstractModel {
+class AuthenticateDomainOwnerResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Your push domain name.
+         * The content verified.
+If `VerifyType` is `dnsCheck`, this is the TXT record that should be added for verification.
+If `VerifyType` is `fileCheck`, this is the file that should be uploaded for verification.
          * @type {string || null}
          */
-        this.DomainName = null;
+        this.Content = null;
 
         /**
-         * End time.
-In UTC format, such as 2016-06-30T19:00:00Z.
-This cannot be after the current time.
-Note: The difference between EndTime and StartTime cannot be greater than 30 days.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Start time. 
-In UTC format, such as 2016-06-29T19:00:00Z.
-This supports querying data in the past 60 days.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. Fuzzy match is not supported.
-         * @type {string || null}
-         */
-        this.AppName = null;
-
-        /**
-         * Page number to get.
-Default value: 1.
+         * The verification status.
+If the value of this parameter is 0 or greater, the domain has been verified.
+If the value of this parameter is smaller than 0, the domain has not been verified.
          * @type {number || null}
          */
-        this.PageNum = null;
+        this.Status = null;
 
         /**
-         * Number of entries per page.
-Maximum value: 100
-Valid values: integers between 10 and 100
-Default value: 10
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * Stream name, which supports fuzzy match.
+         * The primary domain of the domain verified.
+Verification is not required if another domain under the same primary domain has been successfully verified.
          * @type {string || null}
          */
-        this.StreamName = null;
+        this.MainDomain = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2640,13 +2654,10 @@ Default value: 10
         if (!params) {
             return;
         }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.MainDomain = 'MainDomain' in params ? params.MainDomain : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3138,6 +3149,48 @@ class DescribeConcurrentRecordStreamNumResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The number of tasks.
+ * @class
+ */
+class TranscodeTaskNum extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The time of query.
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * The bitrate.
+         * @type {number || null}
+         */
+        this.CodeRate = null;
+
+        /**
+         * The number of tasks.
+         * @type {number || null}
+         */
+        this.Num = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.CodeRate = 'CodeRate' in params ? params.CodeRate : null;
+        this.Num = 'Num' in params ? params.Num : null;
 
     }
 }
@@ -4686,24 +4739,18 @@ The value can be a random name for identification, such as `Canvas1` or `Picture
 }
 
 /**
- * DescribeProvinceIspPlayInfoList response structure.
+ * DescribeLiveWatermarkRules response structure.
  * @class
  */
-class DescribeProvinceIspPlayInfoListResponse extends  AbstractModel {
+class DescribeLiveWatermarkRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Playback information list.
-         * @type {Array.<PlayStatInfo> || null}
+         * Watermarking rule list.
+         * @type {Array.<RuleInfo> || null}
          */
-        this.DataInfoList = null;
-
-        /**
-         * Statistics type, which is the same as the input parameter.
-         * @type {string || null}
-         */
-        this.StatType = null;
+        this.Rules = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4721,15 +4768,14 @@ class DescribeProvinceIspPlayInfoListResponse extends  AbstractModel {
             return;
         }
 
-        if (params.DataInfoList) {
-            this.DataInfoList = new Array();
-            for (let z in params.DataInfoList) {
-                let obj = new PlayStatInfo();
-                obj.deserialize(params.DataInfoList[z]);
-                this.DataInfoList.push(obj);
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new RuleInfo();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
             }
         }
-        this.StatType = 'StatType' in params ? params.StatType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5469,6 +5515,56 @@ Characters not allowed:
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.Location = 'Location' in params ? params.Location : null;
+
+    }
+}
+
+/**
+ * DescribeProvinceIspPlayInfoList response structure.
+ * @class
+ */
+class DescribeProvinceIspPlayInfoListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Playback information list.
+         * @type {Array.<PlayStatInfo> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * Statistics type, which is the same as the input parameter.
+         * @type {string || null}
+         */
+        this.StatType = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new PlayStatInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.StatType = 'StatType' in params ? params.StatType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6257,6 +6353,17 @@ Default value: 0.
          */
         this.IsMiniProgramLive = null;
 
+        /**
+         * The domain verification type.
+Valid values (the value of this parameter must be the same as `VerifyType` of the `AuthenticateDomainOwner` API):
+dnsCheck: Check immediately whether the verification DNS record has been added successfully. If so, record this verification result.
+fileCheck: Check immediately whether the verification HTML file has been uploaded successfully. If so, record this verification result.
+dbCheck: Check whether the domain has already been verified.
+If you do not pass a value, `dbCheck` will be used.
+         * @type {string || null}
+         */
+        this.VerifyOwnerType = null;
+
     }
 
     /**
@@ -6271,6 +6378,7 @@ Default value: 0.
         this.PlayType = 'PlayType' in params ? params.PlayType : null;
         this.IsDelayLive = 'IsDelayLive' in params ? params.IsDelayLive : null;
         this.IsMiniProgramLive = 'IsMiniProgramLive' in params ? params.IsMiniProgramLive : null;
+        this.VerifyOwnerType = 'VerifyOwnerType' in params ? params.VerifyOwnerType : null;
 
     }
 }
@@ -6788,6 +6896,44 @@ class DeleteLivePullStreamTaskResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AuthenticateDomainOwner request structure.
+ * @class
+ */
+class AuthenticateDomainOwnerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The domain to verify.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * The verification type. Valid values:
+dnsCheck: Check immediately whether the verification DNS record has been added successfully. If so, record this verification result.
+fileCheck: Check immediately whether the verification HTML file has been uploaded successfully. If so, record this verification result.
+dbCheck: Check whether the domain has already been successfully verified.
+         * @type {string || null}
+         */
+        this.VerifyType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.VerifyType = 'VerifyType' in params ? params.VerifyType : null;
 
     }
 }
@@ -9161,6 +9307,49 @@ Example: 540*480
 }
 
 /**
+ * DescribeTranscodeTaskNum response structure.
+ * @class
+ */
+class DescribeTranscodeTaskNumResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of tasks.
+         * @type {Array.<TranscodeTaskNum> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new TranscodeTaskNum();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UnBindLiveDomainCert response structure.
  * @class
  */
@@ -9777,8 +9966,8 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
-The start time and end time cannot be more than 24 hours apart and must be within the last 15 days.
+         * The end time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS.
+The start time and end time cannot be more than 24 hours apart and must be within the past month.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -11672,6 +11861,28 @@ class ModifyLiveSnapshotTemplateRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
+         * The COS application ID.
+**Please note that this parameter is required now**.
+         * @type {number || null}
+         */
+        this.CosAppId = null;
+
+        /**
+         * The COS bucket name.
+Note: Do not include the `-[appid]` part in the value of `CosBucket`.
+**Please note that this parameter is required now**.
+         * @type {string || null}
+         */
+        this.CosBucket = null;
+
+        /**
+         * The COS region.
+**Please note that this parameter is required now**.
+         * @type {string || null}
+         */
+        this.CosRegion = null;
+
+        /**
          * Template name.
 Maximum length: 255 bytes.
          * @type {string || null}
@@ -11713,25 +11924,6 @@ Value range: 5-300s.
         this.PornFlag = null;
 
         /**
-         * COS application ID.
-         * @type {number || null}
-         */
-        this.CosAppId = null;
-
-        /**
-         * COS bucket name.
-Note: the value of `CosBucket` cannot contain `-[appid]`.
-         * @type {string || null}
-         */
-        this.CosBucket = null;
-
-        /**
-         * COS region.
-         * @type {string || null}
-         */
-        this.CosRegion = null;
-
-        /**
          * COS bucket folder prefix.
          * @type {string || null}
          */
@@ -11753,15 +11945,15 @@ Note: the value of `CosBucket` cannot contain `-[appid]`.
             return;
         }
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.CosAppId = 'CosAppId' in params ? params.CosAppId : null;
+        this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
+        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
         this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.SnapshotInterval = 'SnapshotInterval' in params ? params.SnapshotInterval : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.PornFlag = 'PornFlag' in params ? params.PornFlag : null;
-        this.CosAppId = 'CosAppId' in params ? params.CosAppId : null;
-        this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
-        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
         this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
         this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
 
@@ -12680,6 +12872,48 @@ class ForbidLiveDomainResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTranscodeTaskNum request structure.
+ * @class
+ */
+class DescribeTranscodeTaskNumRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The start time in the format of yyyy-mm-dd HH:MM:SS.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time in the format of yyyy-mm-dd HH:MM:SS.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The push domains to query. If you do not pass a value, all push domains will be queried.
+         * @type {Array.<string> || null}
+         */
+        this.PushDomains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PushDomains = 'PushDomains' in params ? params.PushDomains : null;
+
+    }
+}
+
+/**
  * DescribeLiveCallbackRules response structure.
  * @class
  */
@@ -13254,7 +13488,7 @@ module.exports = {
     TemplateInfo: TemplateInfo,
     DeleteLiveCallbackRuleResponse: DeleteLiveCallbackRuleResponse,
     ResumeDelayLiveStreamRequest: ResumeDelayLiveStreamRequest,
-    DescribeLiveWatermarkRulesResponse: DescribeLiveWatermarkRulesResponse,
+    DescribeLiveStreamPublishedListRequest: DescribeLiveStreamPublishedListRequest,
     DescribeLiveCallbackTemplateResponse: DescribeLiveCallbackTemplateResponse,
     CreateLivePullStreamTaskRequest: CreateLivePullStreamTaskRequest,
     DeleteLiveSnapshotTemplateRequest: DeleteLiveSnapshotTemplateRequest,
@@ -13288,7 +13522,7 @@ module.exports = {
     DescribeLiveSnapshotRulesResponse: DescribeLiveSnapshotRulesResponse,
     DescribeLiveTranscodeDetailInfoResponse: DescribeLiveTranscodeDetailInfoResponse,
     DescribeLiveDomainRequest: DescribeLiveDomainRequest,
-    DescribeLiveStreamPublishedListRequest: DescribeLiveStreamPublishedListRequest,
+    AuthenticateDomainOwnerResponse: AuthenticateDomainOwnerResponse,
     DescribeGroupProIspPlayInfoListResponse: DescribeGroupProIspPlayInfoListResponse,
     CreateLiveRecordRuleRequest: CreateLiveRecordRuleRequest,
     DescribeLiveSnapshotTemplatesRequest: DescribeLiveSnapshotTemplatesRequest,
@@ -13301,6 +13535,7 @@ module.exports = {
     DescribeDeliverBandwidthListRequest: DescribeDeliverBandwidthListRequest,
     PlayCodeTotalInfo: PlayCodeTotalInfo,
     DescribeConcurrentRecordStreamNumResponse: DescribeConcurrentRecordStreamNumResponse,
+    TranscodeTaskNum: TranscodeTaskNum,
     ModifyLivePlayDomainRequest: ModifyLivePlayDomainRequest,
     DeleteLiveRecordTemplateResponse: DeleteLiveRecordTemplateResponse,
     DescribeLiveWatermarkRequest: DescribeLiveWatermarkRequest,
@@ -13331,7 +13566,7 @@ module.exports = {
     DescribeLiveTimeShiftBillInfoListRequest: DescribeLiveTimeShiftBillInfoListRequest,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
     CommonMixInputParam: CommonMixInputParam,
-    DescribeProvinceIspPlayInfoListResponse: DescribeProvinceIspPlayInfoListResponse,
+    DescribeLiveWatermarkRulesResponse: DescribeLiveWatermarkRulesResponse,
     DescribeLiveRecordTemplatesResponse: DescribeLiveRecordTemplatesResponse,
     PlayDataInfoByStream: PlayDataInfoByStream,
     DescribeLiveCertRequest: DescribeLiveCertRequest,
@@ -13348,6 +13583,7 @@ module.exports = {
     CreateLiveTranscodeRuleRequest: CreateLiveTranscodeRuleRequest,
     DescribeLiveWatermarkRulesRequest: DescribeLiveWatermarkRulesRequest,
     PullPushWatermarkInfo: PullPushWatermarkInfo,
+    DescribeProvinceIspPlayInfoListResponse: DescribeProvinceIspPlayInfoListResponse,
     CreateCommonMixStreamRequest: CreateCommonMixStreamRequest,
     RefererAuthConfig: RefererAuthConfig,
     PushDataInfo: PushDataInfo,
@@ -13369,6 +13605,7 @@ module.exports = {
     DescribeProvinceIspPlayInfoListRequest: DescribeProvinceIspPlayInfoListRequest,
     DescribeLivePlayAuthKeyRequest: DescribeLivePlayAuthKeyRequest,
     DeleteLivePullStreamTaskResponse: DeleteLivePullStreamTaskResponse,
+    AuthenticateDomainOwnerRequest: AuthenticateDomainOwnerRequest,
     DescribeLiveForbidStreamListResponse: DescribeLiveForbidStreamListResponse,
     DescribeVisitTopSumInfoListRequest: DescribeVisitTopSumInfoListRequest,
     DescribeLivePullStreamTasksResponse: DescribeLivePullStreamTasksResponse,
@@ -13411,6 +13648,7 @@ module.exports = {
     ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     CommonMixControlParams: CommonMixControlParams,
     TranscodeTotalInfo: TranscodeTotalInfo,
+    DescribeTranscodeTaskNumResponse: DescribeTranscodeTaskNumResponse,
     UnBindLiveDomainCertResponse: UnBindLiveDomainCertResponse,
     ForbidLiveDomainRequest: ForbidLiveDomainRequest,
     DescribeLiveRecordRulesRequest: DescribeLiveRecordRulesRequest,
@@ -13479,6 +13717,7 @@ module.exports = {
     DelayInfo: DelayInfo,
     DescribeLiveStreamEventListResponse: DescribeLiveStreamEventListResponse,
     ForbidLiveDomainResponse: ForbidLiveDomainResponse,
+    DescribeTranscodeTaskNumRequest: DescribeTranscodeTaskNumRequest,
     DescribeLiveCallbackRulesResponse: DescribeLiveCallbackRulesResponse,
     DescribeLiveTranscodeTotalInfoRequest: DescribeLiveTranscodeTotalInfoRequest,
     CreateRecordTaskResponse: CreateRecordTaskResponse,

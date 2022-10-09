@@ -29,7 +29,7 @@ const FlvSpecialParam = models.FlvSpecialParam;
 const TemplateInfo = models.TemplateInfo;
 const DeleteLiveCallbackRuleResponse = models.DeleteLiveCallbackRuleResponse;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
-const DescribeLiveWatermarkRulesResponse = models.DescribeLiveWatermarkRulesResponse;
+const DescribeLiveStreamPublishedListRequest = models.DescribeLiveStreamPublishedListRequest;
 const DescribeLiveCallbackTemplateResponse = models.DescribeLiveCallbackTemplateResponse;
 const CreateLivePullStreamTaskRequest = models.CreateLivePullStreamTaskRequest;
 const DeleteLiveSnapshotTemplateRequest = models.DeleteLiveSnapshotTemplateRequest;
@@ -63,7 +63,7 @@ const DescribeUploadStreamNumsRequest = models.DescribeUploadStreamNumsRequest;
 const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
 const DescribeLiveTranscodeDetailInfoResponse = models.DescribeLiveTranscodeDetailInfoResponse;
 const DescribeLiveDomainRequest = models.DescribeLiveDomainRequest;
-const DescribeLiveStreamPublishedListRequest = models.DescribeLiveStreamPublishedListRequest;
+const AuthenticateDomainOwnerResponse = models.AuthenticateDomainOwnerResponse;
 const DescribeGroupProIspPlayInfoListResponse = models.DescribeGroupProIspPlayInfoListResponse;
 const CreateLiveRecordRuleRequest = models.CreateLiveRecordRuleRequest;
 const DescribeLiveSnapshotTemplatesRequest = models.DescribeLiveSnapshotTemplatesRequest;
@@ -76,6 +76,7 @@ const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
 const DescribeDeliverBandwidthListRequest = models.DescribeDeliverBandwidthListRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
 const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
+const TranscodeTaskNum = models.TranscodeTaskNum;
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
 const DescribeLiveWatermarkRequest = models.DescribeLiveWatermarkRequest;
@@ -106,7 +107,7 @@ const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const DescribeLiveTimeShiftBillInfoListRequest = models.DescribeLiveTimeShiftBillInfoListRequest;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
-const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
+const DescribeLiveWatermarkRulesResponse = models.DescribeLiveWatermarkRulesResponse;
 const DescribeLiveRecordTemplatesResponse = models.DescribeLiveRecordTemplatesResponse;
 const PlayDataInfoByStream = models.PlayDataInfoByStream;
 const DescribeLiveCertRequest = models.DescribeLiveCertRequest;
@@ -123,6 +124,7 @@ const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
 const PullPushWatermarkInfo = models.PullPushWatermarkInfo;
+const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
 const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
 const RefererAuthConfig = models.RefererAuthConfig;
 const PushDataInfo = models.PushDataInfo;
@@ -144,6 +146,7 @@ const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateReque
 const DescribeProvinceIspPlayInfoListRequest = models.DescribeProvinceIspPlayInfoListRequest;
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DeleteLivePullStreamTaskResponse = models.DeleteLivePullStreamTaskResponse;
+const AuthenticateDomainOwnerRequest = models.AuthenticateDomainOwnerRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
 const DescribeLivePullStreamTasksResponse = models.DescribeLivePullStreamTasksResponse;
@@ -186,6 +189,7 @@ const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumI
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const CommonMixControlParams = models.CommonMixControlParams;
 const TranscodeTotalInfo = models.TranscodeTotalInfo;
+const DescribeTranscodeTaskNumResponse = models.DescribeTranscodeTaskNumResponse;
 const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
@@ -254,6 +258,7 @@ const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
 const DelayInfo = models.DelayInfo;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
 const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
+const DescribeTranscodeTaskNumRequest = models.DescribeTranscodeTaskNumRequest;
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
 const DescribeLiveTranscodeTotalInfoRequest = models.DescribeLiveTranscodeTotalInfoRequest;
 const CreateRecordTaskResponse = models.CreateRecordTaskResponse;
@@ -488,6 +493,17 @@ Referer information is included in HTTP requests. After you enable referer confi
     }
 
     /**
+     * This API is used to verify the ownership of a domain.
+     * @param {AuthenticateDomainOwnerRequest} req
+     * @param {function(string, AuthenticateDomainOwnerResponse):void} cb
+     * @public
+     */
+    AuthenticateDomainOwner(req, cb) {
+        let resp = new AuthenticateDomainOwnerResponse();
+        this.request("AuthenticateDomainOwner", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the information of the top n domain names or stream IDs in a certain period of time (top 1,000 is supported currently).
      * @param {DescribeVisitTopSumInfoListRequest} req
      * @param {function(string, DescribeVisitTopSumInfoListResponse):void} cb
@@ -544,8 +560,8 @@ After the number of watermarks exceeds the upper limit of 100, to add a new wate
     }
 
     /**
-     * After a screencapturing template is created and a template ID is successfully returned, you need to call the [CreateLiveSnapshotRule](https://intl.cloud.tencent.com/document/product/267/32625?from_cn_redirect=1) API and bind the template ID to the stream.
-<br>Screencapturing-related document: [LVB Screencapturing](https://intl.cloud.tencent.com/document/product/267/32737?from_cn_redirect=1).
+     * This API is used to create a screencapture template. After a template ID is returned, you need to call the [CreateLiveSnapshotRule](https://intl.cloud.tencent.com/document/product/267/32625?from_cn_redirect=1) API to bind the template ID to a stream. You can create up to 50 screencapture templates.
+<br>To learn more about the live screencapture feature, see [Live Screencapture](https://intl.cloud.tencent.com/document/product/267/32737?from_cn_redirect=1).
      * @param {CreateLiveSnapshotTemplateRequest} req
      * @param {function(string, CreateLiveSnapshotTemplateResponse):void} cb
      * @public
@@ -707,10 +723,10 @@ Note: if you are to set the delay before stream push, set it at least 5 minutes 
     }
 
     /**
-     * This API is used to query your total usage of the transcoding service in the last 30 days.
+     * This API is used to query transcoding usage. You can use it to query data in the past three months.
 Notes:
 If the start time and end time are on the same day, the data returned will be on a 5-minute basis.
-If not or if the data of specified domains is queried, the data returned will be on an hourly basis.
+If the start time and end time are not on the same day or if the data of specified domains is queried, the data returned will be on an hourly basis.
      * @param {DescribeLiveTranscodeTotalInfoRequest} req
      * @param {function(string, DescribeLiveTranscodeTotalInfoResponse):void} cb
      * @public
@@ -1415,6 +1431,17 @@ Referer information is included in HTTP requests. After you enable referer confi
     CancelCommonMixStream(req, cb) {
         let resp = new CancelCommonMixStreamResponse();
         this.request("CancelCommonMixStream", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the number of transcoding tasks.
+     * @param {DescribeTranscodeTaskNumRequest} req
+     * @param {function(string, DescribeTranscodeTaskNumResponse):void} cb
+     * @public
+     */
+    DescribeTranscodeTaskNum(req, cb) {
+        let resp = new DescribeTranscodeTaskNumResponse();
+        this.request("DescribeTranscodeTaskNum", req, resp, cb);
     }
 
     /**

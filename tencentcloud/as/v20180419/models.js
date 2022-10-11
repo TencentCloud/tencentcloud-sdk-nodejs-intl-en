@@ -3164,13 +3164,13 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * Additional information of a notification that Auto Scaling sends to targets. This parameter is left empty by default.
+         * Additional information of a notification that Auto Scaling sends to targets. This parameter is set when you configure a notification (default value: "").
          * @type {string || null}
          */
         this.NotificationMetadata = null;
 
         /**
-         * Notification target
+         * Notification result. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
          * @type {NotificationTarget || null}
          */
         this.NotificationTarget = null;
@@ -3180,6 +3180,12 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.LifecycleTransitionType = null;
+
+        /**
+         * Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+         * @type {LifecycleCommand || null}
+         */
+        this.LifecycleCommand = null;
 
     }
 
@@ -3203,6 +3209,12 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
             this.NotificationTarget = obj;
         }
         this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
+
+        if (params.LifecycleCommand) {
+            let obj = new LifecycleCommand();
+            obj.deserialize(params.LifecycleCommand)
+            this.LifecycleCommand = obj;
+        }
 
     }
 }
@@ -3947,6 +3959,46 @@ class ModifyLifecycleHookResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Remote command execution object.
+ * @class
+ */
+class LifecycleCommand extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Remote command ID. It’s required to execute a command.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CommandId = null;
+
+        /**
+         * Custom parameter. The field type is JSON encoded string. For example, {"varA": "222"}.
+`key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
+If this parameter is not specified, the `DefaultParameters` of `Command` is used.
+Up to 20 customer parameters allowed. The parameter name can contain up to 64 characters, including [a-z], [A-Z], [0-9] and [-_].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Parameters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CommandId = 'CommandId' in params ? params.CommandId : null;
+        this.Parameters = 'Parameters' in params ? params.Parameters : null;
 
     }
 }
@@ -5370,13 +5422,13 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * Additional information of a notification that Auto Scaling sends to targets. This parameter is left empty by default. Up to 1024 characters are allowed.
+         * Additional information of a notification that Auto Scaling sends to targets. This parameter is set when you configure a notification (default value: ""). Up to 1024 characters are allowed.
          * @type {string || null}
          */
         this.NotificationMetadata = null;
 
         /**
-         * Notification target
+         * Notification target. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
          * @type {NotificationTarget || null}
          */
         this.NotificationTarget = null;
@@ -5386,6 +5438,12 @@ class CreateLifecycleHookRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.LifecycleTransitionType = null;
+
+        /**
+         * Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+         * @type {LifecycleCommand || null}
+         */
+        this.LifecycleCommand = null;
 
     }
 
@@ -5409,6 +5467,12 @@ class CreateLifecycleHookRequest extends  AbstractModel {
             this.NotificationTarget = obj;
         }
         this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
+
+        if (params.LifecycleCommand) {
+            let obj = new LifecycleCommand();
+            obj.deserialize(params.LifecycleCommand)
+            this.LifecycleCommand = obj;
+        }
 
     }
 }
@@ -5571,6 +5635,12 @@ class ModifyLifecycleHookRequest extends  AbstractModel {
          */
         this.NotificationTarget = null;
 
+        /**
+         * Remote command execution object.
+         * @type {LifecycleCommand || null}
+         */
+        this.LifecycleCommand = null;
+
     }
 
     /**
@@ -5592,6 +5662,12 @@ class ModifyLifecycleHookRequest extends  AbstractModel {
             let obj = new NotificationTarget();
             obj.deserialize(params.NotificationTarget)
             this.NotificationTarget = obj;
+        }
+
+        if (params.LifecycleCommand) {
+            let obj = new LifecycleCommand();
+            obj.deserialize(params.LifecycleCommand)
+            this.LifecycleCommand = obj;
         }
 
     }
@@ -6349,7 +6425,25 @@ class LifecycleActionResultInfo extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Whether the notification is sent to CMQ successfully
+         * Execution task ID. You can query the result by using the [DescribeInvocations](https://intl.cloud.tencent.com/document/api/1340/52679?from_cn_redirect=1) API of TAT. 
+         * @type {string || null}
+         */
+        this.InvocationId = null;
+
+        /**
+         * Result of command invocation,
+<li>`SUCCESSFUL`: Successful command invocation. It does mean that the task is successfully. You can query the task result with the `InvocationId.</li>
+<li>`FAILED`: Failed to invoke the command</li>
+<li>`NONE`</li>
+         * @type {string || null}
+         */
+        this.InvokeCommandResult = null;
+
+        /**
+         * Notification result, which indicates whether it is successful to notify CMQ/TDMQ.<br>
+<li>SUCCESSFUL: It is successful to notify CMQ/TDMQ.</li>
+<li>FAILED: It is failed to notify CMQ/TDMQ.</li>
+<li>NONE</li>
          * @type {string || null}
          */
         this.NotificationResult = null;
@@ -6361,7 +6455,15 @@ class LifecycleActionResultInfo extends  AbstractModel {
         this.LifecycleActionResult = null;
 
         /**
-         * Cause of the result
+         * Reason of the result <br>
+<li>`HEARTBEAT_TIMEOUT`: Heartbeat timed out. The setting of `DefaultResult` is used.</li>
+<li>`NOTIFICATION_FAILURE`: Failed to send the notification. The setting of `DefaultResult` is used.</li>
+<li>`CALL_INTERFACE`: Calls the `CompleteLifecycleAction` to set the result</li>
+<li>ANOTHER_ACTION_ABANDON: It has been set to `ABANDON` by another operation.</li>
+<li>COMMAND_CALL_FAILURE: Failed to call the command. The DefaultResult is applied.</li>
+<li>COMMAND_EXEC_FINISH: Command completed</li>
+<li>COMMAND_CALL_FAILURE: Failed to execute the command. The DefaultResult is applied.</li>
+<li>COMMAND_EXEC_RESULT_CHECK_FAILURE: Failed to check the command result. The DefaultResult is applied.</li>
          * @type {string || null}
          */
         this.ResultReason = null;
@@ -6377,6 +6479,8 @@ class LifecycleActionResultInfo extends  AbstractModel {
         }
         this.LifecycleHookId = 'LifecycleHookId' in params ? params.LifecycleHookId : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InvocationId = 'InvocationId' in params ? params.InvocationId : null;
+        this.InvokeCommandResult = 'InvokeCommandResult' in params ? params.InvokeCommandResult : null;
         this.NotificationResult = 'NotificationResult' in params ? params.NotificationResult : null;
         this.LifecycleActionResult = 'LifecycleActionResult' in params ? params.LifecycleActionResult : null;
         this.ResultReason = 'ResultReason' in params ? params.ResultReason : null;
@@ -6673,6 +6777,13 @@ class LifecycleHook extends  AbstractModel {
          */
         this.LifecycleTransitionType = null;
 
+        /**
+         * Remote command execution object.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {LifecycleCommand || null}
+         */
+        this.LifecycleCommand = null;
+
     }
 
     /**
@@ -6697,6 +6808,12 @@ class LifecycleHook extends  AbstractModel {
             this.NotificationTarget = obj;
         }
         this.LifecycleTransitionType = 'LifecycleTransitionType' in params ? params.LifecycleTransitionType : null;
+
+        if (params.LifecycleCommand) {
+            let obj = new LifecycleCommand();
+            obj.deserialize(params.LifecycleCommand)
+            this.LifecycleCommand = obj;
+        }
 
     }
 }
@@ -7858,6 +7975,7 @@ module.exports = {
     UpgradeLifecycleHookResponse: UpgradeLifecycleHookResponse,
     InstanceTag: InstanceTag,
     ModifyLifecycleHookResponse: ModifyLifecycleHookResponse,
+    LifecycleCommand: LifecycleCommand,
     DescribeAutoScalingAdvicesResponse: DescribeAutoScalingAdvicesResponse,
     CreateAutoScalingGroupRequest: CreateAutoScalingGroupRequest,
     DeleteScheduledActionResponse: DeleteScheduledActionResponse,

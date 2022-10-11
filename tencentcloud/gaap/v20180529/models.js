@@ -185,8 +185,8 @@ class DeleteProxyGroupRequest extends  AbstractModel {
 
         /**
          * Whether to enable forced deletion. Valid values:
-0: no;
-1: yes.
+`0`: No;
+`1`: Yes.
 Default value: 0. If there is a connection or listener/rule bound to an origin server in the connection group and `Force` is 0, the operation will return a failure.
          * @type {number || null}
          */
@@ -662,13 +662,13 @@ class AccessConfiguration extends  AbstractModel {
         this.AccessRegion = null;
 
         /**
-         * Connection bandwidth upper limit in Mbps.
+         * Connection bandwidth cap. Unit: Mbps.
          * @type {number || null}
          */
         this.Bandwidth = null;
 
         /**
-         * Concurrent connection upper limit in 10,000 connections, which indicates the allowed number of concurrently online connections.
+         * Connection concurrence cap, which indicates the maximum number of simultaneous online connections. Unit: 10,000 connections.
          * @type {number || null}
          */
         this.Concurrent = null;
@@ -2185,7 +2185,7 @@ class CreateTCPListenersRequest extends  AbstractModel {
         this.Ports = null;
 
         /**
-         * Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -2197,7 +2197,7 @@ class CreateTCPListenersRequest extends  AbstractModel {
         this.HealthCheck = null;
 
         /**
-         * The origin server type of listeners, supporting IP or DOMAIN type. The DOMAIN origin servers do not support the weighted round robin.
+         * The origin server type. Values: `IP` (IP address); `DOMAIN` (domain name).
          * @type {string || null}
          */
         this.RealServerType = null;
@@ -2955,7 +2955,7 @@ class CreateProxyGroupRequest extends  AbstractModel {
         this.RealServerRegion = null;
 
         /**
-         * Tag list
+         * List of tags
          * @type {Array.<TagPair> || null}
          */
         this.TagSet = null;
@@ -2979,11 +2979,7 @@ class CreateProxyGroupRequest extends  AbstractModel {
         this.PackageType = null;
 
         /**
-         * Specifies whether to enable HTTP3. Valid values:
-`0`: disable HTTP3;
-`1`: enable HTTP3.
-Note that if HTTP3 is enabled for a connection, TCP/UDP access will not be allowed.
-After the connection is created, you cannot change your HTTP3 setting.
+         * (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
          * @type {number || null}
          */
         this.Http3Supported = null;
@@ -3064,7 +3060,7 @@ class RuleInfo extends  AbstractModel {
         this.RealServerType = null;
 
         /**
-         * Forwarding policy of the origin server
+         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -4099,13 +4095,13 @@ class CreateUDPListenersRequest extends  AbstractModel {
         this.Ports = null;
 
         /**
-         * Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
          * @type {string || null}
          */
         this.Scheduler = null;
 
         /**
-         * Origin server type of listeners, which supports IP or DOMAIN type.
+         * The origin server type. Values: `IP` (IP address); `DOMAIN` (domain name).
          * @type {string || null}
          */
         this.RealServerType = null;
@@ -4128,6 +4124,72 @@ class CreateUDPListenersRequest extends  AbstractModel {
          */
         this.RealServerPorts = null;
 
+        /**
+         * Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+         * @type {number || null}
+         */
+        this.DelayLoop = null;
+
+        /**
+         * Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+         * @type {number || null}
+         */
+        this.ConnectTimeout = null;
+
+        /**
+         * Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+         * @type {number || null}
+         */
+        this.HealthyThreshold = null;
+
+        /**
+         * Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+         * @type {number || null}
+         */
+        this.UnhealthyThreshold = null;
+
+        /**
+         * Whether to enable the primary/secondary origin server mode for failover. Values: `1` (enabled); `0` (disabled). It’s not available if the origin type is `DOMAIN`.
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
+        /**
+         * Whether the health check is enabled for the origin server. Values: `1` (enabled); `0` (disabled).
+         * @type {number || null}
+         */
+        this.HealthCheck = null;
+
+        /**
+         * The health check type. Values: `PORT` (port); `PING` (ping).
+         * @type {string || null}
+         */
+        this.CheckType = null;
+
+        /**
+         * The health probe port.
+         * @type {number || null}
+         */
+        this.CheckPort = null;
+
+        /**
+         * The UDP message type. Values: `TEXT` (text). This parameter is used only when `CheckType = PORT`.
+         * @type {string || null}
+         */
+        this.ContextType = null;
+
+        /**
+         * The UDP message sent by the health probe port. This parameter is used only when `CheckType = PORT`.
+         * @type {string || null}
+         */
+        this.SendContext = null;
+
+        /**
+         * The UDP message received by the health probe port. This parameter is used only when `CheckType = PORT`.
+         * @type {string || null}
+         */
+        this.RecvContext = null;
+
     }
 
     /**
@@ -4144,6 +4206,17 @@ class CreateUDPListenersRequest extends  AbstractModel {
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.RealServerPorts = 'RealServerPorts' in params ? params.RealServerPorts : null;
+        this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
+        this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
+        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
+        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.HealthCheck = 'HealthCheck' in params ? params.HealthCheck : null;
+        this.CheckType = 'CheckType' in params ? params.CheckType : null;
+        this.CheckPort = 'CheckPort' in params ? params.CheckPort : null;
+        this.ContextType = 'ContextType' in params ? params.ContextType : null;
+        this.SendContext = 'SendContext' in params ? params.SendContext : null;
+        this.RecvContext = 'RecvContext' in params ? params.RecvContext : null;
 
     }
 }
@@ -4169,10 +4242,7 @@ class ModifyRuleAttributeRequest extends  AbstractModel {
         this.RuleId = null;
 
         /**
-         * Scheduling policy:
-rr: round robin;
-wrr: weighted round robin;
-lc: least connections.
+         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -4350,10 +4420,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ListenerStatus = null;
 
         /**
-         * Origin server access policy of listeners:
-`rr`: Round robin
-`wrr`: Weighted round robin
-`lc`: Least connection
+         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -4841,6 +4908,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.PolyClientCertificateAliasInfo = null;
 
+        /**
+         * Whether to support HTTP3. Values:
+`0`: Do not support HTTP3 access;
+`1`: Support HTTP3 access.
+If HTTP3 is supported for a connection, the listener will use the port that is originally accessed to UDP, and a UDP listener with the same port cannot be created.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Http3Supported = null;
+
     }
 
     /**
@@ -4871,6 +4948,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.PolyClientCertificateAliasInfo.push(obj);
             }
         }
+        this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
 
     }
 }
@@ -5219,7 +5297,7 @@ class ModifyTCPListenerAttributeRequest extends  AbstractModel {
         this.ListenerName = null;
 
         /**
-         * Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -5887,6 +5965,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Http3Supported = null;
 
+        /**
+         * Feature bitmap. Valid values:
+`0`: Feature not supported
+`1`: Feature supported
+Each bit in the bitmap represents a feature:
+1st bit: Layer-4 acceleration;
+2nd bit: Layer-7 acceleration;
+3rd bit: HTTP3 access;
+4th bit: IPv6;
+5th bit: Dedicated BGP access;
+6th bit: Non-BGP access;
+7th bit: QoS acceleration.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FeatureBitmap = null;
+
     }
 
     /**
@@ -5920,6 +6016,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
         this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
+        this.FeatureBitmap = 'FeatureBitmap' in params ? params.FeatureBitmap : null;
 
     }
 }
@@ -6291,7 +6388,7 @@ class CreateProxyRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Connection name.
+         * Name of the connection
          * @type {string || null}
          */
         this.ProxyName = null;
@@ -6321,7 +6418,7 @@ class CreateProxyRequest extends  AbstractModel {
         this.RealServerRegion = null;
 
         /**
-         * A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
 For more information, please see How to Ensure Idempotence.
          * @type {string || null}
          */
@@ -6371,7 +6468,7 @@ The connection is to be replicated if this parameter is set.
         this.PackageType = null;
 
         /**
-         * Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+         * (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
          * @type {number || null}
          */
         this.Http3Supported = null;
@@ -6640,7 +6737,7 @@ class CreateRuleRequest extends  AbstractModel {
         this.RealServerType = null;
 
         /**
-         * Forwarding rules of origin server, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -7001,6 +7098,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Http3Supported = null;
 
+        /**
+         * Feature bitmap. Valid values:
+`0`: Feature not supported
+`1`: Feature supported
+Each bit in the bitmap represents a feature:
+1st bit: Layer-4 acceleration;
+2nd bit: Layer-7 acceleration;
+3rd bit: HTTP3 access;
+4th bit: IPv6;
+5th bit: Dedicated BGP access;
+6th bit: Non-BGP access;
+7th bit: QoS acceleration.
+Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FeatureBitmap = null;
+
     }
 
     /**
@@ -7042,6 +7157,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IPAddressVersion = 'IPAddressVersion' in params ? params.IPAddressVersion : null;
         this.PackageType = 'PackageType' in params ? params.PackageType : null;
         this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
+        this.FeatureBitmap = 'FeatureBitmap' in params ? params.FeatureBitmap : null;
 
     }
 }
@@ -7213,7 +7329,7 @@ class AddRealServersResponse extends  AbstractModel {
         super();
 
         /**
-         * Origin server information list
+         * An information list of origin server
          * @type {Array.<NewRealServer> || null}
          */
         this.RealServerSet = null;
@@ -8537,6 +8653,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.DownIPList = null;
 
+        /**
+         * Role of the origin server. Values: `master` (primary origin server); `slave` (secondary origin server). This parameter only takes effect when origin failover is enabled for the listener.
+         * @type {string || null}
+         */
+        this.RealServerFailoverRole = null;
+
     }
 
     /**
@@ -8552,6 +8674,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RealServerStatus = 'RealServerStatus' in params ? params.RealServerStatus : null;
         this.RealServerPort = 'RealServerPort' in params ? params.RealServerPort : null;
         this.DownIPList = 'DownIPList' in params ? params.DownIPList : null;
+        this.RealServerFailoverRole = 'RealServerFailoverRole' in params ? params.RealServerFailoverRole : null;
 
     }
 }
@@ -8615,7 +8738,7 @@ class CreateProxyGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * Connection Group ID
+         * ID of the connection group
          * @type {string || null}
          */
         this.GroupId = null;
@@ -8793,10 +8916,76 @@ class ModifyUDPListenerAttributeRequest extends  AbstractModel {
         this.ListenerName = null;
 
         /**
-         * Origin server scheduling policy of listeners
+         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
          * @type {string || null}
          */
         this.Scheduler = null;
+
+        /**
+         * Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+         * @type {number || null}
+         */
+        this.DelayLoop = null;
+
+        /**
+         * Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+         * @type {number || null}
+         */
+        this.ConnectTimeout = null;
+
+        /**
+         * Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+         * @type {number || null}
+         */
+        this.HealthyThreshold = null;
+
+        /**
+         * Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+         * @type {number || null}
+         */
+        this.UnhealthyThreshold = null;
+
+        /**
+         * Whether to enable the primary/secondary origin server mode for failover. Values: `1` (enabled); `0` (disabled). It’s not available if the origin type is `DOMAIN`.
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
+        /**
+         * Whether the health check is enabled for the origin server. Values: `1` (enabled); `0` (disabled).
+         * @type {number || null}
+         */
+        this.HealthCheck = null;
+
+        /**
+         * The health check type. Values: `PORT` (port); `PING` (ping).
+         * @type {string || null}
+         */
+        this.CheckType = null;
+
+        /**
+         * The health probe port.
+         * @type {number || null}
+         */
+        this.CheckPort = null;
+
+        /**
+         * The UDP message type. Values: `TEXT` (text). This parameter is used only when `CheckType = PORT`.
+         * @type {string || null}
+         */
+        this.ContextType = null;
+
+        /**
+         * The UDP message sent by the health probe port. This parameter is used only when `CheckType = PORT`.
+         * @type {string || null}
+         */
+        this.SendContext = null;
+
+        /**
+         * The UDP message received by the health probe port. This parameter is used only when `CheckType = PORT`.
+         * @type {string || null}
+         */
+        this.RecvContext = null;
 
     }
 
@@ -8812,6 +9001,17 @@ class ModifyUDPListenerAttributeRequest extends  AbstractModel {
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
         this.ListenerName = 'ListenerName' in params ? params.ListenerName : null;
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
+        this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
+        this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
+        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
+        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.HealthCheck = 'HealthCheck' in params ? params.HealthCheck : null;
+        this.CheckType = 'CheckType' in params ? params.CheckType : null;
+        this.CheckPort = 'CheckPort' in params ? params.CheckPort : null;
+        this.ContextType = 'ContextType' in params ? params.ContextType : null;
+        this.SendContext = 'SendContext' in params ? params.SendContext : null;
+        this.RecvContext = 'RecvContext' in params ? params.RecvContext : null;
 
     }
 }
@@ -9922,7 +10122,7 @@ class CheckProxyCreateRequest extends  AbstractModel {
         this.PackageType = null;
 
         /**
-         * Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+         * (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
          * @type {number || null}
          */
         this.Http3Supported = null;
@@ -10005,13 +10205,13 @@ class AddRealServersRequest extends  AbstractModel {
         this.RealServerIP = null;
 
         /**
-         * Origin server name
+         * Name of the origin server
          * @type {string || null}
          */
         this.RealServerName = null;
 
         /**
-         * Tag list
+         * List of tags
          * @type {Array.<TagPair> || null}
          */
         this.TagSet = null;
@@ -10636,7 +10836,7 @@ class InquiryPriceCreateProxyRequest extends  AbstractModel {
         this.PackageType = null;
 
         /**
-         * Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+         * (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
          * @type {number || null}
          */
         this.Http3Supported = null;
@@ -10790,7 +10990,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ListenerStatus = null;
 
         /**
-         * Origin server access policy of listeners
+         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -10819,6 +11019,83 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {number || null}
          */
         this.SessionPersist = null;
+
+        /**
+         * Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.DelayLoop = null;
+
+        /**
+         * Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.ConnectTimeout = null;
+
+        /**
+         * Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.HealthyThreshold = null;
+
+        /**
+         * Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.UnhealthyThreshold = null;
+
+        /**
+         * Whether to enable the primary/secondary origin server mode for failover. Values: `1` (enabled); `0` (disabled). It’s not available if the origin type is `DOMAIN`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
+        /**
+         * Whether the health check is enabled for the origin server. Values: `1` (enabled); `0` (disabled).
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.HealthCheck = null;
+
+        /**
+         * The health check type. Values: `PORT` (port); `PING` (ping).
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CheckType = null;
+
+        /**
+         * The health probe port.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.CheckPort = null;
+
+        /**
+         * The UDP message type. Values: `TEXT` (text). This parameter is used only when `CheckType = PORT`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ContextType = null;
+
+        /**
+         * The UDP message sent by the health probe port. This parameter is used only when `CheckType = PORT`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SendContext = null;
+
+        /**
+         * The UDP message received by the health probe port. This parameter is used only when `CheckType = PORT`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RecvContext = null;
 
     }
 
@@ -10849,6 +11126,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
+        this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
+        this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
+        this.HealthyThreshold = 'HealthyThreshold' in params ? params.HealthyThreshold : null;
+        this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
+        this.HealthCheck = 'HealthCheck' in params ? params.HealthCheck : null;
+        this.CheckType = 'CheckType' in params ? params.CheckType : null;
+        this.CheckPort = 'CheckPort' in params ? params.CheckPort : null;
+        this.ContextType = 'ContextType' in params ? params.ContextType : null;
+        this.SendContext = 'SendContext' in params ? params.SendContext : null;
+        this.RecvContext = 'RecvContext' in params ? params.RecvContext : null;
 
     }
 }
@@ -10905,7 +11193,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Bandwidth = null;
 
         /**
-         * Concurrence. Unit: requests/second.
+         * Concurrence. Unit: 10K requests/second.
          * @type {number || null}
          */
         this.Concurrent = null;
@@ -11099,6 +11387,24 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.InBanBlacklist = null;
 
+        /**
+         * Feature bitmap. Valid values:
+`0`: Feature not supported
+`1`: Feature supported
+Each bit in the bitmap represents a feature:
+1st bit: Layer-4 acceleration;
+2nd bit: Layer-7 acceleration;
+3rd bit: HTTP3 access;
+4th bit: IPv6;
+5th bit: Dedicated BGP access;
+6th bit: Non-BGP access;
+7th bit: QoS acceleration.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.FeatureBitmap = null;
+
     }
 
     /**
@@ -11168,6 +11474,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         }
         this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
         this.InBanBlacklist = 'InBanBlacklist' in params ? params.InBanBlacklist : null;
+        this.FeatureBitmap = 'FeatureBitmap' in params ? params.FeatureBitmap : null;
 
     }
 }
@@ -11261,7 +11568,7 @@ class RealServerBindSetReq extends  AbstractModel {
         this.RealServerWeight = null;
 
         /**
-         * Origin server role: master (primary origin server); slave (secondary origin server). This parameter is applicable when the primary/secondary origin server mode is enabled for a TCP listener.
+         * Role of the origin server. Values: `master` (primary origin server); `slave` (secondary origin server). This parameter only takes effect when origin failover is enabled for the listener.
          * @type {string || null}
          */
         this.RealServerFailoverRole = null;

@@ -731,7 +731,7 @@ Note: This API unbinds the previously bound origin servers, and binds the origin
     }
 
     /**
-     * This API (CreateProxy) is used to create an acceleration connection with specified configuration.
+     * This API is used to create/replicate an acceleration connection with the specified configuration. To replicate a connection, the basic configuration parameters need to be set for the new connection, and `ClonedProxyId` is needed to identify the replicated connection.
      * @param {CreateProxyRequest} req
      * @param {function(string, CreateProxyResponse):void} cb
      * @public

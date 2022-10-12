@@ -1794,6 +1794,32 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.JsonStandard = null;
 
+        /**
+         * Syslog protocol. Valid values: `tcp`, `udp`.
+This field can be used when you create/modify collection rule configurations.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Listening address and port specified by the syslog collection. Format: [ip]:[port]. Example: 127.0.0.1:9000.
+This field can be used when you create/modify collection rule configurations.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * `rfc3164`: Resolve logs by using the RFC3164 protocol during the syslog collection.
+`rfc5424`: Resolve logs by using the RFC5424 protocol during the syslog collection.
+`auto`: Automatically match either the RFC3164 or RFC5424 protocol.
+This field can be used when you create/modify collection rule configurations.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ParseProtocol = null;
+
     }
 
     /**
@@ -1823,6 +1849,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Backtracking = 'Backtracking' in params ? params.Backtracking : null;
         this.IsGBK = 'IsGBK' in params ? params.IsGBK : null;
         this.JsonStandard = 'JsonStandard' in params ? params.JsonStandard : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.ParseProtocol = 'ParseProtocol' in params ? params.ParseProtocol : null;
 
     }
 }

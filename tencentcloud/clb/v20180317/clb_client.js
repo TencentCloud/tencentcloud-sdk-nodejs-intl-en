@@ -39,6 +39,7 @@ const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
 const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
 const DescribeTargetGroupInstancesRequest = models.DescribeTargetGroupInstancesRequest;
+const DescribeIdleLoadBalancersResponse = models.DescribeIdleLoadBalancersResponse;
 const AssociateTargetGroupsRequest = models.AssociateTargetGroupsRequest;
 const ClassicalTarget = models.ClassicalTarget;
 const ListenerItem = models.ListenerItem;
@@ -53,6 +54,8 @@ const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInst
 const CreateRuleResponse = models.CreateRuleResponse;
 const CrossTargets = models.CrossTargets;
 const RuleHealth = models.RuleHealth;
+const ModifyDomainRequest = models.ModifyDomainRequest;
+const IdleLoadBalancer = models.IdleLoadBalancer;
 const RegisterTargetGroupInstancesResponse = models.RegisterTargetGroupInstancesResponse;
 const ClassicalTargetInfo = models.ClassicalTargetInfo;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
@@ -108,7 +111,7 @@ const ModifyBlockIPListRequest = models.ModifyBlockIPListRequest;
 const ModifyBlockIPListResponse = models.ModifyBlockIPListResponse;
 const ExclusiveCluster = models.ExclusiveCluster;
 const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
-const ModifyDomainRequest = models.ModifyDomainRequest;
+const DescribeListenersRequest = models.DescribeListenersRequest;
 const CreateClsLogSetResponse = models.CreateClsLogSetResponse;
 const DescribeCrossTargetsRequest = models.DescribeCrossTargetsRequest;
 const LBChargePrepaid = models.LBChargePrepaid;
@@ -189,7 +192,7 @@ const Quota = models.Quota;
 const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
 const LBItem = models.LBItem;
 const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
-const DescribeListenersRequest = models.DescribeListenersRequest;
+const DescribeIdleLoadBalancersRequest = models.DescribeIdleLoadBalancersRequest;
 const DeleteLoadBalancerSnatIpsRequest = models.DeleteLoadBalancerSnatIpsRequest;
 const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
 const DescribeClassicalLBTargetsResponse = models.DescribeClassicalLBTargetsResponse;
@@ -1015,6 +1018,17 @@ This API is only available for beta users. If you want to try it out, please [su
     }
 
     /**
+     * After the original access address and the address to be redirected are configured manually, the system will automatically redirect requests made to the original access address to the target address of the corresponding path. Multiple paths can be configured as a redirection policy under one domain name to achieve automatic redirection between HTTP and HTTPS. A redirection policy should meet the following rules: if A has already been redirected to B, then it cannot be redirected to C (unless the original redirection relationship is deleted and a new one is created), and B cannot be redirected to any other addresses.
+     * @param {ManualRewriteRequest} req
+     * @param {function(string, ManualRewriteResponse):void} cb
+     * @public
+     */
+    ManualRewrite(req, cb) {
+        let resp = new ManualRewriteResponse();
+        this.request("ManualRewrite", req, resp, cb);
+    }
+
+    /**
      * This API (CreateLoadBalancer) is used to create a CLB instance. To use the CLB service, you first need to purchase one or more instances. After this API is called successfully, a unique instance ID will be returned. There are two types of instances: public network and private network. For more information, see the product types in the product documentation.
 Note: (1) To apply for a CLB instance in the specified AZ and cross-AZ disaster recovery, please [submit a ticket](https://console.cloud.tencent.com/workorder/category); (2) Currently, IPv6 is supported only in Beijing, Shanghai, and Guangzhou regions.
 This is an async API. After it is returned successfully, you can call the DescribeLoadBalancers API to query the status of the instance (such as creating and normal) to check whether it is successfully created.
@@ -1028,14 +1042,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * After the original access address and the address to be redirected are configured manually, the system will automatically redirect requests made to the original access address to the target address of the corresponding path. Multiple paths can be configured as a redirection policy under one domain name to achieve automatic redirection between HTTP and HTTPS. A redirection policy should meet the following rules: if A has already been redirected to B, then it cannot be redirected to C (unless the original redirection relationship is deleted and a new one is created), and B cannot be redirected to any other addresses.
-     * @param {ManualRewriteRequest} req
-     * @param {function(string, ManualRewriteResponse):void} cb
+     * Idle CLB instances are pay-as-you-go load balancers that, within seven days after the creation, do not have rules configured or the configured rules are not associated with any servers. 
+     * @param {DescribeIdleLoadBalancersRequest} req
+     * @param {function(string, DescribeIdleLoadBalancersResponse):void} cb
      * @public
      */
-    ManualRewrite(req, cb) {
-        let resp = new ManualRewriteResponse();
-        this.request("ManualRewrite", req, resp, cb);
+    DescribeIdleLoadBalancers(req, cb) {
+        let resp = new DescribeIdleLoadBalancersResponse();
+        this.request("DescribeIdleLoadBalancers", req, resp, cb);
     }
 
 

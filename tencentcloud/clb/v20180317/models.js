@@ -736,13 +736,13 @@ class DeleteRuleRequest extends  AbstractModel {
         this.LocationIds = null;
 
         /**
-         * Specifies the target domain name. Only one domain name is allowed. This field is invalid when `LocationIds` is specified.
+         * The domain name associated with the forwarding rule to delete. If the rule is associated with multiple domain names, specify any one of them.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Forwarding path of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified.
+         * The forwarding path of the forwarding rule to delete.
          * @type {string || null}
          */
         this.Url = null;
@@ -1383,6 +1383,57 @@ class DescribeTargetGroupInstancesRequest extends  AbstractModel {
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeIdleLoadBalancers response structure.
+ * @class
+ */
+class DescribeIdleLoadBalancersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of idle CLBs
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<IdleLoadBalancer> || null}
+         */
+        this.IdleLoadBalancers = null;
+
+        /**
+         * Total number of idle CLB instances
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.IdleLoadBalancers) {
+            this.IdleLoadBalancers = new Array();
+            for (let z in params.IdleLoadBalancers) {
+                let obj = new IdleLoadBalancer();
+                obj.deserialize(params.IdleLoadBalancers[z]);
+                this.IdleLoadBalancers.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2075,6 +2126,126 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.Targets.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyDomain request structure.
+ * @class
+ */
+class ModifyDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID.
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLB listener ID.
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * Legacy domain name under a listener.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * New domain name. 	Length limit: 1-120. There are three usage formats: non-regular expression, wildcard, and regular expression. A non-regular expression can only contain letters, digits, "-", and ".". In a wildcard, "*" can only be at the beginning or the end. A regular expressions must begin with a "~".
+         * @type {string || null}
+         */
+        this.NewDomain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.NewDomain = 'NewDomain' in params ? params.NewDomain : null;
+
+    }
+}
+
+/**
+ * ID of the idle CLB instance
+ * @class
+ */
+class IdleLoadBalancer extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLB instance name
+         * @type {string || null}
+         */
+        this.LoadBalancerName = null;
+
+        /**
+         * CLB instance region
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * CLB instance VIP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * The reason why the load balancer is considered idle. `NO_RULES`: No rules configured. `NO_RS`: The rules are not associated with servers.
+         * @type {string || null}
+         */
+        this.IdleReason = null;
+
+        /**
+         * CLB instance status, including:
+`0`: Creating; `1`: Running.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * CLB type. Value range: `1` (CLB); `0` (classic CLB).
+         * @type {number || null}
+         */
+        this.Forward = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.IdleReason = 'IdleReason' in params ? params.IdleReason : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Forward = 'Forward' in params ? params.Forward : null;
 
     }
 }
@@ -4038,8 +4209,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Health check status code (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners). Value range: 1-31. Default value: 31.
-1 means that the return value of 1xx after detection means healthy, 2 for returning 2xx for healthy, 4 for returning 3xx for healthy, 8 for returning 4xx for healthy, and 16 for returning 5xx for healthy. If you want multiple return codes to represent healthy, sum up the corresponding values. Note: The HTTP health check mode of TCP listeners only supports specifying one kind of health check status code.
-Note: This field may return null, indicating that no valid values can be obtained.
+`1`: Returns code 1xx for healthy status. `2`: Returns code 2xx for healthy status. `4`: Returns code 3xx for healthy status. `8`: Returns code 4xx for healthy status. `16`: Returns code 5xx for healthy status. If you want multiple return codes to represent healthy, sum up the corresponding values. 
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.HttpCode = null;
@@ -4052,8 +4223,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.HttpCheckPath = null;
 
         /**
-         * Health check domain name (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The target domain name for health check. It’s applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners. It’s required for TCP listeners.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpCheckDomain = null;
@@ -4211,6 +4382,12 @@ class CreateTopicRequest extends  AbstractModel {
          */
         this.Period = null;
 
+        /**
+         * Log topic storage type. Valid values: `hot` (STANDARD storage); `cold` (IA storage). Default value: `hot`.
+         * @type {string || null}
+         */
+        this.StorageType = null;
+
     }
 
     /**
@@ -4224,6 +4401,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
         this.TopicType = 'TopicType' in params ? params.TopicType : null;
         this.Period = 'Period' in params ? params.Period : null;
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
 
     }
 }
@@ -4876,10 +5054,10 @@ class DescribeClassicalLBHealthStatusRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDomain request structure.
+ * DescribeListeners request structure.
  * @class
  */
-class ModifyDomainRequest extends  AbstractModel {
+class DescribeListenersRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -4890,22 +5068,22 @@ class ModifyDomainRequest extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * CLB listener ID.
-         * @type {string || null}
+         * Array of CLB listener IDs to query (100 IDs at most).
+         * @type {Array.<string> || null}
          */
-        this.ListenerId = null;
+        this.ListenerIds = null;
 
         /**
-         * Legacy domain name under a listener.
+         * Type of the listener protocols to be queried. Valid values: TCP, UDP, HTTP, HTTPS, and TCP_SSL.
          * @type {string || null}
          */
-        this.Domain = null;
+        this.Protocol = null;
 
         /**
-         * New domain name. 	Length limit: 1-120. There are three usage formats: non-regular expression, wildcard, and regular expression. A non-regular expression can only contain letters, digits, "-", and ".". In a wildcard, "*" can only be at the beginning or the end. A regular expressions must begin with a "~".
-         * @type {string || null}
+         * Port of the listeners to be queried
+         * @type {number || null}
          */
-        this.NewDomain = null;
+        this.Port = null;
 
     }
 
@@ -4917,9 +5095,9 @@ class ModifyDomainRequest extends  AbstractModel {
             return;
         }
         this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.NewDomain = 'NewDomain' in params ? params.NewDomain : null;
+        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
     }
 }
@@ -9198,36 +9376,30 @@ class DeleteLoadBalancerListenersResponse extends  AbstractModel {
 }
 
 /**
- * DescribeListeners request structure.
+ * DescribeIdleLoadBalancers request structure.
  * @class
  */
-class DescribeListenersRequest extends  AbstractModel {
+class DescribeIdleLoadBalancersRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CLB instance ID.
-         * @type {string || null}
-         */
-        this.LoadBalancerId = null;
-
-        /**
-         * Array of CLB listener IDs to query (100 IDs at most).
-         * @type {Array.<string> || null}
-         */
-        this.ListenerIds = null;
-
-        /**
-         * Type of the listener protocols to be queried. Valid values: TCP, UDP, HTTP, HTTPS, and TCP_SSL.
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * Port of the listeners to be queried
+         * Data offset. Default value: 0.
          * @type {number || null}
          */
-        this.Port = null;
+        this.Offset = null;
+
+        /**
+         * Number of returned CLB instances. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * CLB instance region
+         * @type {string || null}
+         */
+        this.LoadBalancerRegion = null;
 
     }
 
@@ -9238,10 +9410,9 @@ class DescribeListenersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.LoadBalancerRegion = 'LoadBalancerRegion' in params ? params.LoadBalancerRegion : null;
 
     }
 }
@@ -10758,6 +10929,7 @@ module.exports = {
     DescribeRewriteRequest: DescribeRewriteRequest,
     ModifyLoadBalancerAttributesResponse: ModifyLoadBalancerAttributesResponse,
     DescribeTargetGroupInstancesRequest: DescribeTargetGroupInstancesRequest,
+    DescribeIdleLoadBalancersResponse: DescribeIdleLoadBalancersResponse,
     AssociateTargetGroupsRequest: AssociateTargetGroupsRequest,
     ClassicalTarget: ClassicalTarget,
     ListenerItem: ListenerItem,
@@ -10772,6 +10944,8 @@ module.exports = {
     CreateRuleResponse: CreateRuleResponse,
     CrossTargets: CrossTargets,
     RuleHealth: RuleHealth,
+    ModifyDomainRequest: ModifyDomainRequest,
+    IdleLoadBalancer: IdleLoadBalancer,
     RegisterTargetGroupInstancesResponse: RegisterTargetGroupInstancesResponse,
     ClassicalTargetInfo: ClassicalTargetInfo,
     DescribeTargetsRequest: DescribeTargetsRequest,
@@ -10827,7 +11001,7 @@ module.exports = {
     ModifyBlockIPListResponse: ModifyBlockIPListResponse,
     ExclusiveCluster: ExclusiveCluster,
     DescribeClassicalLBHealthStatusRequest: DescribeClassicalLBHealthStatusRequest,
-    ModifyDomainRequest: ModifyDomainRequest,
+    DescribeListenersRequest: DescribeListenersRequest,
     CreateClsLogSetResponse: CreateClsLogSetResponse,
     DescribeCrossTargetsRequest: DescribeCrossTargetsRequest,
     LBChargePrepaid: LBChargePrepaid,
@@ -10908,7 +11082,7 @@ module.exports = {
     SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
     LBItem: LBItem,
     DeleteLoadBalancerListenersResponse: DeleteLoadBalancerListenersResponse,
-    DescribeListenersRequest: DescribeListenersRequest,
+    DescribeIdleLoadBalancersRequest: DescribeIdleLoadBalancersRequest,
     DeleteLoadBalancerSnatIpsRequest: DeleteLoadBalancerSnatIpsRequest,
     SetLoadBalancerSecurityGroupsRequest: SetLoadBalancerSecurityGroupsRequest,
     DescribeClassicalLBTargetsResponse: DescribeClassicalLBTargetsResponse,

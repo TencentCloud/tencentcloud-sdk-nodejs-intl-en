@@ -516,6 +516,46 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ImportOpenApi response structure.
+ * @class
+ */
+class ImportOpenApiResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The result of importing the OpenAPI
+         * @type {CreateApiRspSet || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new CreateApiRspSet();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DisableApiKey response structure.
  * @class
  */
@@ -1046,6 +1086,49 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.VersionName = 'VersionName' in params ? params.VersionName : null;
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
         this.MaxStrategy = 'MaxStrategy' in params ? params.MaxStrategy : null;
+
+    }
+}
+
+/**
+ * Information of the APIs created
+ * @class
+ */
+class CreateApiRspSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of APIs
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Information of created APIs
+         * @type {Array.<CreateApiRsp> || null}
+         */
+        this.ApiSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ApiSet) {
+            this.ApiSet = new Array();
+            for (let z in params.ApiSet) {
+                let obj = new CreateApiRsp();
+                obj.deserialize(params.ApiSet[z]);
+                this.ApiSet.push(obj);
+            }
+        }
 
     }
 }
@@ -12675,6 +12758,55 @@ class DescribeUsagePlanEnvironmentsRequest extends  AbstractModel {
 }
 
 /**
+ * ImportOpenApi request structure.
+ * @class
+ */
+class ImportOpenApiRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the service associated with the API
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Content of the openAPI
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * Format of the content. Values: `YAML` (default), `JSON`
+         * @type {string || null}
+         */
+        this.EncodeType = null;
+
+        /**
+         * Version of the content. It can only be `openAPI` for now.
+         * @type {string || null}
+         */
+        this.ContentVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.EncodeType = 'EncodeType' in params ? params.EncodeType : null;
+        this.ContentVersion = 'ContentVersion' in params ? params.ContentVersion : null;
+
+    }
+}
+
+/**
  * DescribeServiceReleaseVersion response structure.
  * @class
  */
@@ -14724,6 +14856,7 @@ module.exports = {
     AttachedApiSummary: AttachedApiSummary,
     DescribeUsagePlanRequest: DescribeUsagePlanRequest,
     DeleteUsagePlanResponse: DeleteUsagePlanResponse,
+    ImportOpenApiResponse: ImportOpenApiResponse,
     DisableApiKeyResponse: DisableApiKeyResponse,
     DescribeApiResponse: DescribeApiResponse,
     UnReleaseServiceRequest: UnReleaseServiceRequest,
@@ -14735,6 +14868,7 @@ module.exports = {
     DescribeApiAppBindApisStatusRequest: DescribeApiAppBindApisStatusRequest,
     ModifyApiResponse: ModifyApiResponse,
     ServiceEnvironmentStrategy: ServiceEnvironmentStrategy,
+    CreateApiRspSet: CreateApiRspSet,
     ApiInfo: ApiInfo,
     TargetServicesReq: TargetServicesReq,
     DescribeUsagePlansStatusRequest: DescribeUsagePlansStatusRequest,
@@ -14939,6 +15073,7 @@ module.exports = {
     DescribeApiForApiAppResponse: DescribeApiForApiAppResponse,
     EnvironmentStrategy: EnvironmentStrategy,
     DescribeUsagePlanEnvironmentsRequest: DescribeUsagePlanEnvironmentsRequest,
+    ImportOpenApiRequest: ImportOpenApiRequest,
     DescribeServiceReleaseVersionResponse: DescribeServiceReleaseVersionResponse,
     UpstreamNode: UpstreamNode,
     ApiAppApiInfos: ApiAppApiInfos,

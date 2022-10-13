@@ -6289,6 +6289,18 @@ class ModifyInstanceParamRequest extends  AbstractModel {
          */
         this.WaitSwitch = null;
 
+        /**
+         * Whether to sync the parameters to read-only instance of the source instance. Valid values: `true` (not sync), `false` (sync). Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.NotSyncRo = null;
+
+        /**
+         * Whether to sync the parameters to disaster recovery instance of the source instance. Valid values: `true` (not sync), `false` (sync). Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.NotSyncDr = null;
+
     }
 
     /**
@@ -6310,6 +6322,8 @@ class ModifyInstanceParamRequest extends  AbstractModel {
         }
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+        this.NotSyncRo = 'NotSyncRo' in params ? params.NotSyncRo : null;
+        this.NotSyncDr = 'NotSyncDr' in params ? params.NotSyncDr : null;
 
     }
 }

@@ -26,6 +26,7 @@ const ModifyAPIDocResponse = models.ModifyAPIDocResponse;
 const AttachedApiSummary = models.AttachedApiSummary;
 const DescribeUsagePlanRequest = models.DescribeUsagePlanRequest;
 const DeleteUsagePlanResponse = models.DeleteUsagePlanResponse;
+const ImportOpenApiResponse = models.ImportOpenApiResponse;
 const DisableApiKeyResponse = models.DisableApiKeyResponse;
 const DescribeApiResponse = models.DescribeApiResponse;
 const UnReleaseServiceRequest = models.UnReleaseServiceRequest;
@@ -37,6 +38,7 @@ const DescribeServiceEnvironmentListResponse = models.DescribeServiceEnvironment
 const DescribeApiAppBindApisStatusRequest = models.DescribeApiAppBindApisStatusRequest;
 const ModifyApiResponse = models.ModifyApiResponse;
 const ServiceEnvironmentStrategy = models.ServiceEnvironmentStrategy;
+const CreateApiRspSet = models.CreateApiRspSet;
 const ApiInfo = models.ApiInfo;
 const TargetServicesReq = models.TargetServicesReq;
 const DescribeUsagePlansStatusRequest = models.DescribeUsagePlansStatusRequest;
@@ -241,6 +243,7 @@ const DescribeIPStrategyRequest = models.DescribeIPStrategyRequest;
 const DescribeApiForApiAppResponse = models.DescribeApiForApiAppResponse;
 const EnvironmentStrategy = models.EnvironmentStrategy;
 const DescribeUsagePlanEnvironmentsRequest = models.DescribeUsagePlanEnvironmentsRequest;
+const ImportOpenApiRequest = models.ImportOpenApiRequest;
 const DescribeServiceReleaseVersionResponse = models.DescribeServiceReleaseVersionResponse;
 const UpstreamNode = models.UpstreamNode;
 const ApiAppApiInfos = models.ApiAppApiInfos;
@@ -1072,6 +1075,17 @@ After creating an API key, you can query its details by using this API.
     DescribeUpstreamBindApis(req, cb) {
         let resp = new DescribeUpstreamBindApisResponse();
         this.request("DescribeUpstreamBindApis", req, resp, cb);
+    }
+
+    /**
+     * This API is used to import an OpenAPI to API gateway. 
+     * @param {ImportOpenApiRequest} req
+     * @param {function(string, ImportOpenApiResponse):void} cb
+     * @public
+     */
+    ImportOpenApi(req, cb) {
+        let resp = new ImportOpenApiResponse();
+        this.request("ImportOpenApi", req, resp, cb);
     }
 
     /**

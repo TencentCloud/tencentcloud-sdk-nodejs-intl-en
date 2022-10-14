@@ -74,13 +74,13 @@ class ModifyInstanceParamsResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether a modification is successfully made.
+         * Whether the parameter is modified successfully. <br><li>`True`: Yes<br><li>`False`: No<br>
          * @type {boolean || null}
          */
         this.Changed = null;
 
         /**
-         * Task ID
+         * ID of the task
          * @type {number || null}
          */
         this.TaskId = null;
@@ -477,7 +477,7 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture).
+         * Instance type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture), `15` (Redis 6.0 Memory Edition in standard architecture), `16` (Redis 6.0 Memory Edition in cluster architecture)
          * @type {number || null}
          */
         this.TypeId = null;
@@ -1205,13 +1205,13 @@ class DescribeSlowLogResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of slow logs
+         * Total number of slow queries
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Slow log details
+         * Slow query details
          * @type {Array.<InstanceSlowlogDetail> || null}
          */
         this.InstanceSlowlogDetail = null;
@@ -7268,34 +7268,40 @@ class DescribeSlowLogRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Start time
+         * The start time
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * End time
+         * The end time
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Slow log threshold in microseconds
+         * The average execution time threshold of slow query in microseconds
          * @type {number || null}
          */
         this.MinQueryTime = null;
 
         /**
-         * Number of entries per page
+         * Number of slow queries displayed per page. Default value: `20`.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit`
+         * Slow query offset, which is an integral multiple of `Limit`.
          * @type {number || null}
          */
         this.Offset = null;
+
+        /**
+         * Node role. <ul><li>`Master`: Master node</li><li>`Slave`: Replica node</li></ul>
+         * @type {string || null}
+         */
+        this.Role = null;
 
     }
 
@@ -7312,6 +7318,7 @@ class DescribeSlowLogRequest extends  AbstractModel {
         this.MinQueryTime = 'MinQueryTime' in params ? params.MinQueryTime : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Role = 'Role' in params ? params.Role : null;
 
     }
 }
@@ -10643,13 +10650,13 @@ class InstanceParam extends  AbstractModel {
         super();
 
         /**
-         * Sets a parameter name
+         * Parameter name, such as “timeout”. For supported custom parameters, see <a href="https://www.tencentcloud.com/document/product/239/39796">Setting Instance Parameters</a>
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Sets a parameter value
+         * Current parameter value. For example, if you set the current value of “timeout” to 120 (in seconds), the client connections that remain idle longer than 120 seconds will be closed. For more information on parameter values, see <a href="https://www.tencentcloud.com/document/product/239/39796">Setting Instance Parameters</a>
          * @type {string || null}
          */
         this.Value = null;

@@ -334,7 +334,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the slow log.
+     * This API is used to query the records of slow query.
      * @param {DescribeSlowLogRequest} req
      * @param {function(string, DescribeSlowLogResponse):void} cb
      * @public
@@ -719,7 +719,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify instance parameters.
+     * This API is used to modify the parameters of TencentDB for Redis instances
      * @param {ModifyInstanceParamsRequest} req
      * @param {function(string, ModifyInstanceParamsResponse):void} cb
      * @public

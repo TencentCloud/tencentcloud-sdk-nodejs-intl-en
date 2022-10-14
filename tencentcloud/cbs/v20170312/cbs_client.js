@@ -16,87 +16,98 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const AutoMountConfiguration = models.AutoMountConfiguration;
-const DetachDisksRequest = models.DetachDisksRequest;
-const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
-const ResizeDiskRequest = models.ResizeDiskRequest;
-const ModifyDiskAttributesRequest = models.ModifyDiskAttributesRequest;
-const Price = models.Price;
-const DescribeSnapshotSharePermissionResponse = models.DescribeSnapshotSharePermissionResponse;
-const SharePermission = models.SharePermission;
-const InitializeDisksRequest = models.InitializeDisksRequest;
+const SnapshotOperationLog = models.SnapshotOperationLog;
+const ModifyDiskExtraPerformanceRequest = models.ModifyDiskExtraPerformanceRequest;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
-const TerminateDisksRequest = models.TerminateDisksRequest;
-const DescribeDisksRequest = models.DescribeDisksRequest;
-const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
-const AttachDisksResponse = models.AttachDisksResponse;
-const Policy = models.Policy;
-const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
-const InquirePriceModifyDiskExtraPerformanceRequest = models.InquirePriceModifyDiskExtraPerformanceRequest;
-const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
+const DescribeDiskBackupsRequest = models.DescribeDiskBackupsRequest;
+const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
-const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
-const DescribeSnapshotSharePermissionRequest = models.DescribeSnapshotSharePermissionRequest;
 const CopySnapshotCrossRegionsResponse = models.CopySnapshotCrossRegionsResponse;
 const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
-const ModifyDiskExtraPerformanceResponse = models.ModifyDiskExtraPerformanceResponse;
-const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
-const SnapshotCopyResult = models.SnapshotCopyResult;
+const ModifyDiskBackupQuotaRequest = models.ModifyDiskBackupQuotaRequest;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
-const DiskConfig = models.DiskConfig;
 const BindAutoSnapshotPolicyRequest = models.BindAutoSnapshotPolicyRequest;
 const CreateSnapshotResponse = models.CreateSnapshotResponse;
-const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
-const DescribeDiskConfigQuotaRequest = models.DescribeDiskConfigQuotaRequest;
-const DeleteAutoSnapshotPoliciesRequest = models.DeleteAutoSnapshotPoliciesRequest;
-const DiskChargePrepaid = models.DiskChargePrepaid;
-const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
 const DescribeAutoSnapshotPoliciesRequest = models.DescribeAutoSnapshotPoliciesRequest;
+const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
+const DeleteDiskBackupsRequest = models.DeleteDiskBackupsRequest;
+const InitializeDisksResponse = models.InitializeDisksResponse;
+const DeleteDiskBackupsResponse = models.DeleteDiskBackupsResponse;
+const DescribeDiskBackupsResponse = models.DescribeDiskBackupsResponse;
+const SnapshotCopyResult = models.SnapshotCopyResult;
+const InquirePriceModifyDiskExtraPerformanceResponse = models.InquirePriceModifyDiskExtraPerformanceResponse;
+const CreateDisksRequest = models.CreateDisksRequest;
+const AttachDisksRequest = models.AttachDisksRequest;
+const DescribeDiskAssociatedAutoSnapshotPolicyRequest = models.DescribeDiskAssociatedAutoSnapshotPolicyRequest;
+const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
+const ModifyAutoSnapshotPolicyAttributeRequest = models.ModifyAutoSnapshotPolicyAttributeRequest;
+const DescribeDiskConfigQuotaResponse = models.DescribeDiskConfigQuotaResponse;
+const ApplyDiskBackupResponse = models.ApplyDiskBackupResponse;
+const InquiryPriceResizeDiskResponse = models.InquiryPriceResizeDiskResponse;
+const Tag = models.Tag;
+const ResizeDiskResponse = models.ResizeDiskResponse;
+const Disk = models.Disk;
 const TerminateDisksResponse = models.TerminateDisksResponse;
-const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
 const ApplySnapshotResponse = models.ApplySnapshotResponse;
+const DetachDisksRequest = models.DetachDisksRequest;
+const CreateSnapshotRequest = models.CreateSnapshotRequest;
+const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
+const DescribeSnapshotSharePermissionResponse = models.DescribeSnapshotSharePermissionResponse;
+const ModifyDiskBackupQuotaResponse = models.ModifyDiskBackupQuotaResponse;
+const DescribeSnapshotSharePermissionRequest = models.DescribeSnapshotSharePermissionRequest;
+const InquirePriceModifyDiskBackupQuotaRequest = models.InquirePriceModifyDiskBackupQuotaRequest;
+const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
+const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
 const DeleteAutoSnapshotPoliciesResponse = models.DeleteAutoSnapshotPoliciesResponse;
 const DescribeDisksResponse = models.DescribeDisksResponse;
-const CopySnapshotCrossRegionsRequest = models.CopySnapshotCrossRegionsRequest;
-const PrepayPrice = models.PrepayPrice;
-const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
+const Placement = models.Placement;
 const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
-const DetachDisksResponse = models.DetachDisksResponse;
-const ModifyDiskExtraPerformanceRequest = models.ModifyDiskExtraPerformanceRequest;
+const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
+const ModifyDiskAttributesRequest = models.ModifyDiskAttributesRequest;
+const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
+const Image = models.Image;
+const TerminateDisksRequest = models.TerminateDisksRequest;
+const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
+const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
+const ResizeDiskRequest = models.ResizeDiskRequest;
+const ApplyDiskBackupRequest = models.ApplyDiskBackupRequest;
+const InitializeDisksRequest = models.InitializeDisksRequest;
+const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
+const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
+const DiskConfig = models.DiskConfig;
+const InquirePriceModifyDiskBackupQuotaResponse = models.InquirePriceModifyDiskBackupQuotaResponse;
+const DeleteAutoSnapshotPoliciesRequest = models.DeleteAutoSnapshotPoliciesRequest;
+const DiskChargePrepaid = models.DiskChargePrepaid;
 const Filter = models.Filter;
 const InquiryPriceCreateDisksRequest = models.InquiryPriceCreateDisksRequest;
 const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
 const Snapshot = models.Snapshot;
-const SnapshotOperationLog = models.SnapshotOperationLog;
 const CreateDisksResponse = models.CreateDisksResponse;
-const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
-const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
+const AttachDisksResponse = models.AttachDisksResponse;
 const ModifySnapshotsSharePermissionRequest = models.ModifySnapshotsSharePermissionRequest;
 const DiskOperationLog = models.DiskOperationLog;
-const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
-const DescribeDiskOperationLogsRequest = models.DescribeDiskOperationLogsRequest;
-const InquirePriceModifyDiskExtraPerformanceResponse = models.InquirePriceModifyDiskExtraPerformanceResponse;
 const BindAutoSnapshotPolicyResponse = models.BindAutoSnapshotPolicyResponse;
-const CreateDisksRequest = models.CreateDisksRequest;
-const AttachDisksRequest = models.AttachDisksRequest;
-const DescribeAutoSnapshotPoliciesResponse = models.DescribeAutoSnapshotPoliciesResponse;
-const DescribeDiskAssociatedAutoSnapshotPolicyRequest = models.DescribeDiskAssociatedAutoSnapshotPolicyRequest;
-const DescribeDiskAssociatedAutoSnapshotPolicyResponse = models.DescribeDiskAssociatedAutoSnapshotPolicyResponse;
-const Image = models.Image;
-const DescribeDiskConfigQuotaResponse = models.DescribeDiskConfigQuotaResponse;
-const InitializeDisksResponse = models.InitializeDisksResponse;
-const CreateSnapshotRequest = models.CreateSnapshotRequest;
-const AttachDetail = models.AttachDetail;
-const InquiryPriceResizeDiskResponse = models.InquiryPriceResizeDiskResponse;
-const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
-const ResizeDiskResponse = models.ResizeDiskResponse;
-const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
-const Placement = models.Placement;
-const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
+const DescribeDiskOperationLogsRequest = models.DescribeDiskOperationLogsRequest;
+const DiskBackup = models.DiskBackup;
+const DescribeDisksRequest = models.DescribeDisksRequest;
+const DetachDisksResponse = models.DetachDisksResponse;
+const SharePermission = models.SharePermission;
+const Policy = models.Policy;
+const ModifyDiskExtraPerformanceResponse = models.ModifyDiskExtraPerformanceResponse;
+const InquirePriceModifyDiskExtraPerformanceRequest = models.InquirePriceModifyDiskExtraPerformanceRequest;
 const InquiryPriceResizeDiskRequest = models.InquiryPriceResizeDiskRequest;
-const Disk = models.Disk;
-const ModifyAutoSnapshotPolicyAttributeRequest = models.ModifyAutoSnapshotPolicyAttributeRequest;
-const Tag = models.Tag;
+const DescribeDiskConfigQuotaRequest = models.DescribeDiskConfigQuotaRequest;
+const DescribeDiskAssociatedAutoSnapshotPolicyResponse = models.DescribeDiskAssociatedAutoSnapshotPolicyResponse;
+const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
+const AutoMountConfiguration = models.AutoMountConfiguration;
+const CopySnapshotCrossRegionsRequest = models.CopySnapshotCrossRegionsRequest;
+const PrepayPrice = models.PrepayPrice;
+const DescribeAutoSnapshotPoliciesResponse = models.DescribeAutoSnapshotPoliciesResponse;
+const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
+const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
+const AttachDetail = models.AttachDetail;
+const CreateAutoSnapshotPolicyRequest = models.CreateAutoSnapshotPolicyRequest;
+const Price = models.Price;
 const ApplySnapshotRequest = models.ApplySnapshotRequest;
 
 
@@ -121,6 +132,21 @@ class CbsClient extends AbstractClient {
     ModifyDiskExtraPerformance(req, cb) {
         let resp = new ModifyDiskExtraPerformanceResponse();
         this.request("ModifyDiskExtraPerformance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to roll back a backup point to the original cloud disk.
+
+* Only rollback to the original cloud disk is supported. For a data disk backup point, if you want to copy the backup point data to another cloud disk, use the `CreateSnapshot` API to convert the backup point into a snapshot, use the `CreateDisks` API to create an elastic cloud disk, and then copy the snapshot data to it.
+* Only backup points in `NORMAL` status can be rolled back. To query the status of a backup point, call the `DescribeDiskBackups` API and see the `BackupState` field in the response.
+* For an elastic cloud disk, it must be in unattached status. To query the status of the cloud disk, call the `DescribeDisks` API and see the `Attached` field in the response. For a non-elastic cloud disk purchased together with an instance, the instance must be in shutdown status, which can be queried through the `DescribeInstancesStatus` API.
+     * @param {ApplyDiskBackupRequest} req
+     * @param {function(string, ApplyDiskBackupResponse):void} cb
+     * @public
+     */
+    ApplyDiskBackup(req, cb) {
+        let resp = new ApplyDiskBackupResponse();
+        this.request("ApplyDiskBackup", req, resp, cb);
     }
 
     /**
@@ -202,6 +228,28 @@ class CbsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the price of a cloud disk after its backup point quota is modified.
+     * @param {InquirePriceModifyDiskBackupQuotaRequest} req
+     * @param {function(string, InquirePriceModifyDiskBackupQuotaResponse):void} cb
+     * @public
+     */
+    InquirePriceModifyDiskBackupQuota(req, cb) {
+        let resp = new InquirePriceModifyDiskBackupQuotaResponse();
+        this.request("InquirePriceModifyDiskBackupQuota", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the backup points of the specified cloud disk in batches.
+     * @param {DeleteDiskBackupsRequest} req
+     * @param {function(string, DeleteDiskBackupsResponse):void} cb
+     * @public
+     */
+    DeleteDiskBackups(req, cb) {
+        let resp = new DeleteDiskBackupsResponse();
+        this.request("DeleteDiskBackups", req, resp, cb);
+    }
+
+    /**
      * This API (ModifyAutoSnapshotPolicyAttribute) is used to modify the attributes of an automatic snapshot policy.
 
 * You can use this API to modify the attributes of a scheduled snapshot policy, including the execution policy, name, and activation.
@@ -216,9 +264,9 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * This API (InquiryPriceCreateDisks) is used to inquire the price for cloud disk creation.
+     * This API is used to query the price of creating cloud disks.
 
-* It supports inquiring the price for the creation of multiple cloud disks. The total price for the creation is returned.
+* You can query the price of creating multiple cloud disks in a single request. In this case, the price returned will be the total price.
      * @param {InquiryPriceCreateDisksRequest} req
      * @param {function(string, InquiryPriceCreateDisksResponse):void} cb
      * @public
@@ -226,6 +274,20 @@ class CbsClient extends AbstractClient {
     InquiryPriceCreateDisks(req, cb) {
         let resp = new InquiryPriceCreateDisksResponse();
         this.request("InquiryPriceCreateDisks", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of backup points.
+
+You can filter results by backup point ID. You can also look for certain backup points by specifying the ID or type of the cloud disk for which the backup points are created. The relationship between different filters is logical `AND`. For more information on filters, see `Filter`.
+If the parameter is empty, a certain number (as specified by `Limit` and 20 by default) of backup points will be returned.
+     * @param {DescribeDiskBackupsRequest} req
+     * @param {function(string, DescribeDiskBackupsResponse):void} cb
+     * @public
+     */
+    DescribeDiskBackups(req, cb) {
+        let resp = new DescribeDiskBackupsResponse();
+        this.request("DescribeDiskBackups", req, resp, cb);
     }
 
     /**
@@ -256,17 +318,18 @@ This can be filtered according to the cloud disk ID. The format of cloud disk ID
     }
 
     /**
-     * This API (CreateAutoSnapshotPolicy) is used to create a scheduled snapshot policy.
-
-* For the limits on the number of scheduled snapshot policies that can be created in each region, see [Scheduled Snapshots](https://intl.cloud.tencent.com/document/product/362/8191?from_cn_redirect=1).
-* The quantity and capacity of the snapshots that can be created in each region are limited. For more information, see the **Snapshots** page on the Tencent Cloud Console. If the number of snapshots exceeds the quota, the creation of the scheduled snapshots will fail.
-     * @param {CreateAutoSnapshotPolicyRequest} req
-     * @param {function(string, CreateAutoSnapshotPolicyResponse):void} cb
+     * This API is used to reinitialize the cloud disks. Note the following when reinitializing the cloud disks:
+1. For a cloud disk created from a snapshot, it is rolled back to the state of the snapshot;
+2. For a cloud disk created from the scratch, all data are cleared. Please check and back up the necessary data before the reinitialization;
+3. Currently, you can only re-initialize a cloud disk when it’s not attached to a resource and not shared by others;
+4. For a cloud disk created from a snapshot, if the snapshot has been deleted, it cannot be reinitialized.
+     * @param {InitializeDisksRequest} req
+     * @param {function(string, InitializeDisksResponse):void} cb
      * @public
      */
-    CreateAutoSnapshotPolicy(req, cb) {
-        let resp = new CreateAutoSnapshotPolicyResponse();
-        this.request("CreateAutoSnapshotPolicy", req, resp, cb);
+    InitializeDisks(req, cb) {
+        let resp = new InitializeDisksResponse();
+        this.request("InitializeDisks", req, resp, cb);
     }
 
     /**
@@ -284,10 +347,21 @@ This can be filtered according to the cloud disk ID. The format of cloud disk ID
     }
 
     /**
-     * This API is used to create one or more cloud disks.
+     * This API is used to modify the cloud disk backup point quota.
+     * @param {ModifyDiskBackupQuotaRequest} req
+     * @param {function(string, ModifyDiskBackupQuotaResponse):void} cb
+     * @public
+     */
+    ModifyDiskBackupQuota(req, cb) {
+        let resp = new ModifyDiskBackupQuotaResponse();
+        this.request("ModifyDiskBackupQuota", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create cloud disks.
 
 * This API supports creating a cloud disk with a data disk snapshot so that the snapshot data can be copied to the purchased cloud disk.
-* This API is an async API. A cloud disk ID list will be returned when a request is made successfully, but it does not mean that the creation has been completed. You can call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API to query cloud disks by `DiskId`. If a new cloud disk can be found and its state is 'UNATTACHED' or 'ATTACHED', it means that the cloud disk has been created successfully.
+* This API is async. A cloud disk ID list will be returned when a request is made successfully, but it does not mean that the creation has been completed. You can call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API to query cloud disks by `DiskId`. If a new cloud disk can be found and its status is `UNATTACHED` or `ATTACHED`, the cloud disk has been created successfully.
      * @param {CreateDisksRequest} req
      * @param {function(string, CreateDisksResponse):void} cb
      * @public
@@ -389,18 +463,17 @@ This can be filtered according to the cloud disk ID. The format of cloud disk ID
     }
 
     /**
-     * This API is used to reinitialize the cloud disks. Note the following when reinitializing the cloud disks:
-1. For a cloud disk created from a snapshot, it is rolled back to the state of the snapshot;
-2. For a cloud disk created from the scratch, all data are cleared. Please check and back up the necessary data before the reinitialization;
-3. Currently, you can only re-initialize a cloud disk when it’s not attached to a resource and not shared by others;
-4. For a cloud disk created from a snapshot, if the snapshot has been deleted, it cannot be reinitialized.
-     * @param {InitializeDisksRequest} req
-     * @param {function(string, InitializeDisksResponse):void} cb
+     * This API (CreateAutoSnapshotPolicy) is used to create a scheduled snapshot policy.
+
+* For the limits on the number of scheduled snapshot policies that can be created in each region, see [Scheduled Snapshots](https://intl.cloud.tencent.com/document/product/362/8191?from_cn_redirect=1).
+* The quantity and capacity of the snapshots that can be created in each region are limited. For more information, see the **Snapshots** page on the Tencent Cloud Console. If the number of snapshots exceeds the quota, the creation of the scheduled snapshots will fail.
+     * @param {CreateAutoSnapshotPolicyRequest} req
+     * @param {function(string, CreateAutoSnapshotPolicyResponse):void} cb
      * @public
      */
-    InitializeDisks(req, cb) {
-        let resp = new InitializeDisksResponse();
-        this.request("InitializeDisks", req, resp, cb);
+    CreateAutoSnapshotPolicy(req, cb) {
+        let resp = new CreateAutoSnapshotPolicyResponse();
+        this.request("CreateAutoSnapshotPolicy", req, resp, cb);
     }
 
     /**
@@ -490,10 +563,11 @@ After snapshots are shared, the accounts they are shared to can use the snapshot
     }
 
     /**
-     * This API (CreateSnapshot) is used to create a snapshot of a specified cloud disk.
+     * This API is used to create a snapshot for the specified cloud disk.
 
-* Snapshots can only be created for cloud disks with the snapshot capability. To check whether a cloud disk has the snapshot capability, see the SnapshotAbility field returned by the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1).
-* For the number of snapshots that can be created, please see [Product Usage Restriction](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
+* You can only create snapshots for cloud disks with the snapshot capability. To check whether a cloud disk is snapshot-enabled, call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API and see the `SnapshotAbility` field in the response.
+* For the maximum number of snapshots that can be created, see [Use Limits](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
+* Currently, you can convert backup points into general snapshots. After the conversion, snapshot usage fees may be charged, backup points will not be retained, and the occupied backup point quota will be released.
      * @param {CreateSnapshotRequest} req
      * @param {function(string, CreateSnapshotResponse):void} cb
      * @public

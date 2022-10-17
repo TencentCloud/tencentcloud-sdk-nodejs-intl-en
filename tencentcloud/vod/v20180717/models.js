@@ -10654,6 +10654,15 @@ Default value: OFF.
          */
         this.PreserveHDRSwitch = null;
 
+        /**
+         * The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:
+<li>hvc1</li>
+<li>hev1</li>
+Default value: hvc1.
+         * @type {string || null}
+         */
+        this.CodecTag = null;
+
     }
 
     /**
@@ -10673,6 +10682,7 @@ Default value: OFF.
         this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
         this.Gop = 'Gop' in params ? params.Gop : null;
         this.PreserveHDRSwitch = 'PreserveHDRSwitch' in params ? params.PreserveHDRSwitch : null;
+        this.CodecTag = 'CodecTag' in params ? params.CodecTag : null;
 
     }
 }
@@ -24228,6 +24238,15 @@ When this parameter is set to 0 or left empty, `Gop` will be automatically set.
          */
         this.PreserveHDRSwitch = null;
 
+        /**
+         * The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:
+<li>hvc1</li>
+<li>hev1</li>
+Default value: hvc1.
+         * @type {string || null}
+         */
+        this.CodecTag = null;
+
     }
 
     /**
@@ -24247,6 +24266,7 @@ When this parameter is set to 0 or left empty, `Gop` will be automatically set.
         this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
         this.Gop = 'Gop' in params ? params.Gop : null;
         this.PreserveHDRSwitch = 'PreserveHDRSwitch' in params ? params.PreserveHDRSwitch : null;
+        this.CodecTag = 'CodecTag' in params ? params.CodecTag : null;
 
     }
 }
@@ -26527,6 +26547,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Fps = null;
 
+        /**
+         * The codec tag. This parameter is valid only if `Codec` is `hevc`.
+         * @type {string || null}
+         */
+        this.CodecTag = null;
+
     }
 
     /**
@@ -26541,6 +26567,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Width = 'Width' in params ? params.Width : null;
         this.Codec = 'Codec' in params ? params.Codec : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
+        this.CodecTag = 'CodecTag' in params ? params.CodecTag : null;
 
     }
 }

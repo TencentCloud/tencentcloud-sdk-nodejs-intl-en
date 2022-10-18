@@ -21,7 +21,9 @@ const AppStatisticsItem = models.AppStatisticsItem;
 const ModifyAppStatusRequest = models.ModifyAppStatusRequest;
 const DescribeScanResultListResponse = models.DescribeScanResultListResponse;
 const DescribeApplicationDataRequest = models.DescribeApplicationDataRequest;
+const Task = models.Task;
 const VoiceMessageStatisticsItem = models.VoiceMessageStatisticsItem;
+const DeleteRoomMemberRequest = models.DeleteRoomMemberRequest;
 const DescribeScanResultListRequest = models.DescribeScanResultListRequest;
 const RealTimeSpeechStatisticsItem = models.RealTimeSpeechStatisticsItem;
 const Tag = models.Tag;
@@ -30,9 +32,10 @@ const ApplicationDataStatistics = models.ApplicationDataStatistics;
 const ModifyAppStatusResp = models.ModifyAppStatusResp;
 const DescribeAppStatisticsResponse = models.DescribeAppStatisticsResponse;
 const DescribeApplicationDataResponse = models.DescribeApplicationDataResponse;
-const Task = models.Task;
+const DeleteRoomMemberResponse = models.DeleteRoomMemberResponse;
 const VoiceFilterStatisticsItem = models.VoiceFilterStatisticsItem;
 const CreateAppResp = models.CreateAppResp;
+const DeleteResult = models.DeleteResult;
 const DescribeScanResult = models.DescribeScanResult;
 const ScanDetail = models.ScanDetail;
 const CreateAppRequest = models.CreateAppRequest;
@@ -79,6 +82,17 @@ class GmeClient extends AbstractClient {
     DescribeScanResultList(req, cb) {
         let resp = new DescribeScanResultListResponse();
         this.request("DescribeScanResultList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a room or remove members from the room.
+     * @param {DeleteRoomMemberRequest} req
+     * @param {function(string, DeleteRoomMemberResponse):void} cb
+     * @public
+     */
+    DeleteRoomMember(req, cb) {
+        let resp = new DeleteRoomMemberResponse();
+        this.request("DeleteRoomMember", req, resp, cb);
     }
 
     /**

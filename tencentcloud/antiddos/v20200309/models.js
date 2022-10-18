@@ -3941,6 +3941,56 @@ class CreateDDoSSpeedLimitConfigResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeNewL7RulesErrHealth response structure.
+ * @class
+ */
+class DescribeNewL7RulesErrHealthResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of rules with exceptions. `Key`: Rule ID, `Value`: Exception IPs and error message. 
+         * @type {Array.<KeyValue> || null}
+         */
+        this.ErrHealths = null;
+
+        /**
+         * Total number of rules with exceptions
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ErrHealths) {
+            this.ErrHealths = new Array();
+            for (let z in params.ErrHealths) {
+                let obj = new KeyValue();
+                obj.deserialize(params.ErrHealths[z]);
+                this.ErrHealths.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeletePacketFilterConfig request structure.
  * @class
  */
@@ -7345,6 +7395,41 @@ class DescribeListDDoSAIResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeNewL7RulesErrHealth request structure.
+ * @class
+ */
+class DescribeNewL7RulesErrHealthRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * List of rule IDs
+         * @type {Array.<string> || null}
+         */
+        this.RuleIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.RuleIdList = 'RuleIdList' in params ? params.RuleIdList : null;
+
+    }
+}
+
+/**
  * ModifyCCPrecisionPolicy response structure.
  * @class
  */
@@ -9003,6 +9088,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.IpCountNewFlag = null;
 
+        /**
+         * The version of attack defense package
+         * @type {number || null}
+         */
+        this.VitalityVersion = null;
+
     }
 
     /**
@@ -9068,6 +9159,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             }
         }
         this.IpCountNewFlag = 'IpCountNewFlag' in params ? params.IpCountNewFlag : null;
+        this.VitalityVersion = 'VitalityVersion' in params ? params.VitalityVersion : null;
 
     }
 }
@@ -10655,6 +10747,7 @@ module.exports = {
     CreateCcGeoIPBlockConfigRequest: CreateCcGeoIPBlockConfigRequest,
     ModifyDomainUsrNameRequest: ModifyDomainUsrNameRequest,
     CreateDDoSSpeedLimitConfigResponse: CreateDDoSSpeedLimitConfigResponse,
+    DescribeNewL7RulesErrHealthResponse: DescribeNewL7RulesErrHealthResponse,
     DeletePacketFilterConfigRequest: DeletePacketFilterConfigRequest,
     DescribeListDDoSGeoIPBlockConfigResponse: DescribeListDDoSGeoIPBlockConfigResponse,
     DescribeBasicDeviceStatusResponse: DescribeBasicDeviceStatusResponse,
@@ -10714,6 +10807,7 @@ module.exports = {
     WaterPrintRelation: WaterPrintRelation,
     InsL7Rules: InsL7Rules,
     DescribeListDDoSAIResponse: DescribeListDDoSAIResponse,
+    DescribeNewL7RulesErrHealthRequest: DescribeNewL7RulesErrHealthRequest,
     ModifyCCPrecisionPolicyResponse: ModifyCCPrecisionPolicyResponse,
     CcGeoIPBlockConfig: CcGeoIPBlockConfig,
     ModifyDDoSSpeedLimitConfigRequest: ModifyDDoSSpeedLimitConfigRequest,

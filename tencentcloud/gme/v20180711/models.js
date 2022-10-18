@@ -249,6 +249,55 @@ class DescribeApplicationDataRequest extends  AbstractModel {
 }
 
 /**
+ * Speech detection task list
+ * @class
+ */
+class Task extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique data ID
+         * @type {string || null}
+         */
+        this.DataId = null;
+
+        /**
+         * URL-encoded data file URL, which is a pull address if the detected speech is a stream
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * GME voice chat room ID, which is entered during speech detection by GME voice chat
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * GME voice chat user ID, which is entered during speech detection by GME voice chat
+         * @type {string || null}
+         */
+        this.OpenId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataId = 'DataId' in params ? params.DataId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.OpenId = 'OpenId' in params ? params.OpenId : null;
+
+    }
+}
+
+/**
  * Voice messaging usage statistics
  * @class
  */
@@ -272,6 +321,55 @@ class VoiceMessageStatisticsItem extends  AbstractModel {
             return;
         }
         this.Dau = 'Dau' in params ? params.Dau : null;
+
+    }
+}
+
+/**
+ * DeleteRoomMember request structure.
+ * @class
+ */
+class DeleteRoomMemberRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the target room
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * List of the members to remove
+         * @type {Array.<string> || null}
+         */
+        this.Uids = null;
+
+        /**
+         * Operation type. `1`: Delete a room; `2`: Remove members
+         * @type {number || null}
+         */
+        this.DeleteType = null;
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.Uids = 'Uids' in params ? params.Uids : null;
+        this.DeleteType = 'DeleteType' in params ? params.DeleteType : null;
+        this.BizId = 'BizId' in params ? params.BizId : null;
 
     }
 }
@@ -753,36 +851,24 @@ class DescribeApplicationDataResponse extends  AbstractModel {
 }
 
 /**
- * Speech detection task list
+ * DeleteRoomMember response structure.
  * @class
  */
-class Task extends  AbstractModel {
+class DeleteRoomMemberResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique data ID
-         * @type {string || null}
+         * Result of the operation to delete a room or remove a member
+         * @type {DeleteResult || null}
          */
-        this.DataId = null;
+        this.DeleteResult = null;
 
         /**
-         * URL-encoded data file URL, which is a pull address if the detected speech is a stream
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Url = null;
-
-        /**
-         * GME voice chat room ID, which is entered during speech detection by GME voice chat
-         * @type {string || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * GME voice chat user ID, which is entered during speech detection by GME voice chat
-         * @type {string || null}
-         */
-        this.OpenId = null;
+        this.RequestId = null;
 
     }
 
@@ -793,10 +879,13 @@ class Task extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DataId = 'DataId' in params ? params.DataId : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-        this.OpenId = 'OpenId' in params ? params.OpenId : null;
+
+        if (params.DeleteResult) {
+            let obj = new DeleteResult();
+            obj.deserialize(params.DeleteResult)
+            this.DeleteResult = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -917,6 +1006,41 @@ class CreateAppResp extends  AbstractModel {
             obj.deserialize(params.VoiceFilterConf)
             this.VoiceFilterConf = obj;
         }
+
+    }
+}
+
+/**
+ * Result of the operation to delete a room or remove members
+ * @class
+ */
+class DeleteResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Status code. `0`: Succeeded. Others: Failed\
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
 
     }
 }
@@ -1686,7 +1810,9 @@ module.exports = {
     ModifyAppStatusRequest: ModifyAppStatusRequest,
     DescribeScanResultListResponse: DescribeScanResultListResponse,
     DescribeApplicationDataRequest: DescribeApplicationDataRequest,
+    Task: Task,
     VoiceMessageStatisticsItem: VoiceMessageStatisticsItem,
+    DeleteRoomMemberRequest: DeleteRoomMemberRequest,
     DescribeScanResultListRequest: DescribeScanResultListRequest,
     RealTimeSpeechStatisticsItem: RealTimeSpeechStatisticsItem,
     Tag: Tag,
@@ -1695,9 +1821,10 @@ module.exports = {
     ModifyAppStatusResp: ModifyAppStatusResp,
     DescribeAppStatisticsResponse: DescribeAppStatisticsResponse,
     DescribeApplicationDataResponse: DescribeApplicationDataResponse,
-    Task: Task,
+    DeleteRoomMemberResponse: DeleteRoomMemberResponse,
     VoiceFilterStatisticsItem: VoiceFilterStatisticsItem,
     CreateAppResp: CreateAppResp,
+    DeleteResult: DeleteResult,
     DescribeScanResult: DescribeScanResult,
     ScanDetail: ScanDetail,
     CreateAppRequest: CreateAppRequest,

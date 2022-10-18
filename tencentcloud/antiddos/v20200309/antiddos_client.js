@@ -100,6 +100,7 @@ const DescribeBlackWhiteIpListRequest = models.DescribeBlackWhiteIpListRequest;
 const CreateCcGeoIPBlockConfigRequest = models.CreateCcGeoIPBlockConfigRequest;
 const ModifyDomainUsrNameRequest = models.ModifyDomainUsrNameRequest;
 const CreateDDoSSpeedLimitConfigResponse = models.CreateDDoSSpeedLimitConfigResponse;
+const DescribeNewL7RulesErrHealthResponse = models.DescribeNewL7RulesErrHealthResponse;
 const DeletePacketFilterConfigRequest = models.DeletePacketFilterConfigRequest;
 const DescribeListDDoSGeoIPBlockConfigResponse = models.DescribeListDDoSGeoIPBlockConfigResponse;
 const DescribeBasicDeviceStatusResponse = models.DescribeBasicDeviceStatusResponse;
@@ -159,6 +160,7 @@ const CreateWaterPrintKeyRequest = models.CreateWaterPrintKeyRequest;
 const WaterPrintRelation = models.WaterPrintRelation;
 const InsL7Rules = models.InsL7Rules;
 const DescribeListDDoSAIResponse = models.DescribeListDDoSAIResponse;
+const DescribeNewL7RulesErrHealthRequest = models.DescribeNewL7RulesErrHealthRequest;
 const ModifyCCPrecisionPolicyResponse = models.ModifyCCPrecisionPolicyResponse;
 const CcGeoIPBlockConfig = models.CcGeoIPBlockConfig;
 const ModifyDDoSSpeedLimitConfigRequest = models.ModifyDDoSSpeedLimitConfigRequest;
@@ -239,14 +241,14 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify intelligent scheduling domain names.
-     * @param {ModifyDomainUsrNameRequest} req
-     * @param {function(string, ModifyDomainUsrNameResponse):void} cb
+     * This API is used to getting the exception results of the health check on layer-7 forwarding rules.
+     * @param {DescribeNewL7RulesErrHealthRequest} req
+     * @param {function(string, DescribeNewL7RulesErrHealthResponse):void} cb
      * @public
      */
-    ModifyDomainUsrName(req, cb) {
-        let resp = new ModifyDomainUsrNameResponse();
-        this.request("ModifyDomainUsrName", req, resp, cb);
+    DescribeNewL7RulesErrHealth(req, cb) {
+        let resp = new DescribeNewL7RulesErrHealthResponse();
+        this.request("DescribeNewL7RulesErrHealth", req, resp, cb);
     }
 
     /**
@@ -280,6 +282,17 @@ class AntiddosClient extends AbstractClient {
     CreateCcBlackWhiteIpList(req, cb) {
         let resp = new CreateCcBlackWhiteIpListResponse();
         this.request("CreateCcBlackWhiteIpList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify Anti-DDoS feature filtering rules.
+     * @param {ModifyPacketFilterConfigRequest} req
+     * @param {function(string, ModifyPacketFilterConfigResponse):void} cb
+     * @public
+     */
+    ModifyPacketFilterConfig(req, cb) {
+        let resp = new ModifyPacketFilterConfigResponse();
+        this.request("ModifyPacketFilterConfig", req, resp, cb);
     }
 
     /**
@@ -327,14 +340,14 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify Anti-DDoS feature filtering rules.
-     * @param {ModifyPacketFilterConfigRequest} req
-     * @param {function(string, ModifyPacketFilterConfigResponse):void} cb
+     * This API is used to modify intelligent scheduling domain names.
+     * @param {ModifyDomainUsrNameRequest} req
+     * @param {function(string, ModifyDomainUsrNameResponse):void} cb
      * @public
      */
-    ModifyPacketFilterConfig(req, cb) {
-        let resp = new ModifyPacketFilterConfigResponse();
-        this.request("ModifyPacketFilterConfig", req, resp, cb);
+    ModifyDomainUsrName(req, cb) {
+        let resp = new ModifyDomainUsrNameResponse();
+        this.request("ModifyDomainUsrName", req, resp, cb);
     }
 
     /**

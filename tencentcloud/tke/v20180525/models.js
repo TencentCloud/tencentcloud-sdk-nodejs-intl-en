@@ -1176,6 +1176,20 @@ class DescribeAvailableTKEEdgeVersionResponse extends  AbstractModel {
         this.Versions = null;
 
         /**
+         * Latest version of the edge cluster
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.EdgeVersionLatest = null;
+
+        /**
+         * Current version of the edge cluster
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.EdgeVersionCurrent = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1191,6 +1205,8 @@ class DescribeAvailableTKEEdgeVersionResponse extends  AbstractModel {
             return;
         }
         this.Versions = 'Versions' in params ? params.Versions : null;
+        this.EdgeVersionLatest = 'EdgeVersionLatest' in params ? params.EdgeVersionLatest : null;
+        this.EdgeVersionCurrent = 'EdgeVersionCurrent' in params ? params.EdgeVersionCurrent : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1810,6 +1826,12 @@ class DescribeAvailableTKEEdgeVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * You can enter the `ClusterId` to query the current and latest versions of all cluster components.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
     }
 
     /**
@@ -1819,6 +1841,7 @@ class DescribeAvailableTKEEdgeVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -4032,6 +4055,18 @@ class CreateTKEEdgeClusterRequest extends  AbstractModel {
          */
         this.ChargeType = null;
 
+        /**
+         * Edge cluster version. It is the set of versions of all cluster components.
+         * @type {string || null}
+         */
+        this.EdgeVersion = null;
+
+        /**
+         * Prefix of the image registry of an edge component
+         * @type {string || null}
+         */
+        this.RegistryPrefix = null;
+
     }
 
     /**
@@ -4063,6 +4098,8 @@ class CreateTKEEdgeClusterRequest extends  AbstractModel {
         this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
         this.AutoUpgradeClusterLevel = 'AutoUpgradeClusterLevel' in params ? params.AutoUpgradeClusterLevel : null;
         this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.EdgeVersion = 'EdgeVersion' in params ? params.EdgeVersion : null;
+        this.RegistryPrefix = 'RegistryPrefix' in params ? params.RegistryPrefix : null;
 
     }
 }
@@ -10178,7 +10215,7 @@ class CreateClusterEndpointRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * The security group in use. Required only for public network access.
+         * The security group in use, which must be passed in when public access is enabled.
          * @type {string || null}
          */
         this.SecurityGroup = null;

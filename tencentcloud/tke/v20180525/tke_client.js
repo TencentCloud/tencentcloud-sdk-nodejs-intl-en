@@ -436,7 +436,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the K8s versions supported by TKE Edge.
+     * This API is used to check the edge component versions and K8s versions supported by TKE Edge.
      * @param {DescribeAvailableTKEEdgeVersionRequest} req
      * @param {function(string, DescribeAvailableTKEEdgeVersionResponse):void} cb
      * @public
@@ -942,7 +942,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * Create a cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
+     * This API is used to create a cluster access endpoint.
      * @param {CreateClusterEndpointRequest} req
      * @param {function(string, CreateClusterEndpointResponse):void} cb
      * @public
@@ -1129,7 +1129,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * Delete the cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
+     * This API is used to delete a cluster access endpoint.
      * @param {DeleteClusterEndpointRequest} req
      * @param {function(string, DeleteClusterEndpointResponse):void} cb
      * @public

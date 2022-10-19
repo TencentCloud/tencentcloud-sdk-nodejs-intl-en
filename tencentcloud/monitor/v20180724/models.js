@@ -62,6 +62,48 @@ Default value: 2 (enabled).
 }
 
 /**
+ * 
+ * @class
+ */
+class AlarmHierarchicalValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Remind = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Warn = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Serious = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Remind = 'Remind' in params ? params.Remind : null;
+        this.Warn = 'Warn' in params ? params.Warn : null;
+        this.Serious = 'Serious' in params ? params.Serious : null;
+
+    }
+}
+
+/**
  * Instance tag information of the alarm policy
  * @class
  */
@@ -1080,6 +1122,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Log alarm search condition structure
+ * @class
+ */
+class LogFilterInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Field name
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Comparison operator
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Field value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * prometheus agent
  * @class
  */
@@ -1529,6 +1613,19 @@ class GrafanaAccountInfo extends  AbstractModel {
          */
         this.CreateAt = null;
 
+        /**
+         * Instance ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * User’s root account UIN
+         * @type {string || null}
+         */
+        this.Uin = null;
+
     }
 
     /**
@@ -1550,6 +1647,8 @@ class GrafanaAccountInfo extends  AbstractModel {
         }
         this.Notes = 'Notes' in params ? params.Notes : null;
         this.CreateAt = 'CreateAt' in params ? params.CreateAt : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
 
     }
 }
@@ -1814,6 +1913,18 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
          */
         this.GroupBy = null;
 
+        /**
+         * Tags bound to a template
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Log alarm information
+         * @type {LogAlarmReq || null}
+         */
+        this.LogAlarmReqInfo = null;
+
     }
 
     /**
@@ -1860,6 +1971,21 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
             this.Filter = obj;
         }
         this.GroupBy = 'GroupBy' in params ? params.GroupBy : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.LogAlarmReqInfo) {
+            let obj = new LogAlarmReq();
+            obj.deserialize(params.LogAlarmReqInfo)
+            this.LogAlarmReqInfo = obj;
+        }
 
     }
 }
@@ -2585,6 +2711,12 @@ class DescribeConditionsTemplateListRequest extends  AbstractModel {
          */
         this.UpdateTimeOrder = null;
 
+        /**
+         * Sorting order based on the number of associated policies. Valid values: `asc` (ascending order), `desc` (descending order).
+         * @type {string || null}
+         */
+        this.PolicyCountOrder = null;
+
     }
 
     /**
@@ -2601,6 +2733,7 @@ class DescribeConditionsTemplateListRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.UpdateTimeOrder = 'UpdateTimeOrder' in params ? params.UpdateTimeOrder : null;
+        this.PolicyCountOrder = 'PolicyCountOrder' in params ? params.PolicyCountOrder : null;
 
     }
 }
@@ -3290,7 +3423,7 @@ class CreateSSOAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The added user UIN
          * @type {string || null}
          */
         this.UserId = null;
@@ -4387,6 +4520,13 @@ class GrafanaIntegrationConfig extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * Grafana redirection address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GrafanaURL = null;
+
     }
 
     /**
@@ -4400,6 +4540,7 @@ class GrafanaIntegrationConfig extends  AbstractModel {
         this.Kind = 'Kind' in params ? params.Kind : null;
         this.Content = 'Content' in params ? params.Content : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.GrafanaURL = 'GrafanaURL' in params ? params.GrafanaURL : null;
 
     }
 }
@@ -4577,13 +4718,13 @@ class UpdateGrafanaNotificationChannelRequest extends  AbstractModel {
         this.Receivers = null;
 
         /**
-         * Array of extra organization IDs
+         * This parameter has been deprecated. Please use `OrganizationIds` instead.
          * @type {Array.<string> || null}
          */
         this.ExtraOrgIds = null;
 
         /**
-         * 
+         * Array of valid organization IDs
          * @type {Array.<string> || null}
          */
         this.OrganizationIds = null;
@@ -5418,6 +5559,20 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.AdvancedMetricNumber = null;
 
+        /**
+         * Whether the policy is associated with all objects
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsBindAll = null;
+
+        /**
+         * Policy tag
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -5499,6 +5654,16 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.IsOneClick = 'IsOneClick' in params ? params.IsOneClick : null;
         this.OneClickStatus = 'OneClickStatus' in params ? params.OneClickStatus : null;
         this.AdvancedMetricNumber = 'AdvancedMetricNumber' in params ? params.AdvancedMetricNumber : null;
+        this.IsBindAll = 'IsBindAll' in params ? params.IsBindAll : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -5963,6 +6128,70 @@ class ModifyPrometheusInstanceAttributesResponse extends  AbstractModel {
 }
 
 /**
+ * Grafana alert channel
+ * @class
+ */
+class GrafanaChannel extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Channel ID
+         * @type {string || null}
+         */
+        this.ChannelId = null;
+
+        /**
+         * Channel name
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * Array of alert channel template IDs
+         * @type {Array.<string> || null}
+         */
+        this.Receivers = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreatedAt = null;
+
+        /**
+         * Update time
+         * @type {string || null}
+         */
+        this.UpdatedAt = null;
+
+        /**
+         * All valid organizations in an alert channel
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.OrganizationIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChannelId = 'ChannelId' in params ? params.ChannelId : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.Receivers = 'Receivers' in params ? params.Receivers : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+        this.OrganizationIds = 'OrganizationIds' in params ? params.OrganizationIds : null;
+
+    }
+}
+
+/**
  * DeleteAlarmNotices response structure.
  * @class
  */
@@ -6178,7 +6407,8 @@ class InstallPluginsResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * ID of the installed plugin
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.PluginIds = null;
@@ -6420,6 +6650,26 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.ProductId = null;
 
+        /**
+         * Maximum value
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ValueMax = null;
+
+        /**
+         * Minimum value
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ValueMin = null;
+
+        /**
+         * 
+         * @type {AlarmHierarchicalValue || null}
+         */
+        this.HierarchicalValue = null;
+
     }
 
     /**
@@ -6448,6 +6698,14 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.IsAdvanced = 'IsAdvanced' in params ? params.IsAdvanced : null;
         this.IsOpen = 'IsOpen' in params ? params.IsOpen : null;
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ValueMax = 'ValueMax' in params ? params.ValueMax : null;
+        this.ValueMin = 'ValueMin' in params ? params.ValueMin : null;
+
+        if (params.HierarchicalValue) {
+            let obj = new AlarmHierarchicalValue();
+            obj.deserialize(params.HierarchicalValue)
+            this.HierarchicalValue = obj;
+        }
 
     }
 }
@@ -6673,6 +6931,34 @@ Note: This field may return null, indicating that no valid value was found.
  * @class
  */
 class ModifyAlarmPolicyConditionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateSSOAccount response structure.
+ * @class
+ */
+class UpdateSSOAccountResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -6997,25 +7283,60 @@ class DescribeBindingPolicyObjectListInstance extends  AbstractModel {
 }
 
 /**
- * Monitoring data point
+ * Modification of the metric threshold condition passed in by the alarm policy group.
  * @class
  */
-class Point extends  AbstractModel {
+class ModifyPolicyGroupCondition extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Time point when this monitoring data point is generated
+         * Metric ID.
          * @type {number || null}
          */
-        this.Timestamp = null;
+        this.MetricId = null;
 
         /**
-         * Monitoring data point value
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Comparative type. The value 1 indicates greater than. The value 2 indicates greater than or equal to. The value 3 indicates smaller than. The value 4 indicates smaller than or equal to. The value 5 indicates equal to. The value 6 indicates not equal to.
          * @type {number || null}
          */
-        this.Value = null;
+        this.CalcType = null;
+
+        /**
+         * Threshold.
+         * @type {string || null}
+         */
+        this.CalcValue = null;
+
+        /**
+         * Data period of the detected metric.
+         * @type {number || null}
+         */
+        this.CalcPeriod = null;
+
+        /**
+         * Number of consecutive periods.
+         * @type {number || null}
+         */
+        this.ContinuePeriod = null;
+
+        /**
+         * Alarm sending and convergence type. The value 0 indicates that alarms are sent consecutively. The value 1 indicates that alarms are sent exponentially.
+         * @type {number || null}
+         */
+        this.AlarmNotifyType = null;
+
+        /**
+         * Alarm sending period in seconds. If the value is less than 0, no alarm will be triggered. If the value is 0, an alarm will be triggered only once. If the value is greater than 0, an alarm will be triggered at the interval of triggerTime.
+         * @type {number || null}
+         */
+        this.AlarmNotifyPeriod = null;
+
+        /**
+         * Rule ID. No filling means new addition while filling in ruleId means to modify existing rules.
+         * @type {number || null}
+         */
+        this.RuleId = null;
 
     }
 
@@ -7026,8 +7347,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.MetricId = 'MetricId' in params ? params.MetricId : null;
+        this.CalcType = 'CalcType' in params ? params.CalcType : null;
+        this.CalcValue = 'CalcValue' in params ? params.CalcValue : null;
+        this.CalcPeriod = 'CalcPeriod' in params ? params.CalcPeriod : null;
+        this.ContinuePeriod = 'ContinuePeriod' in params ? params.ContinuePeriod : null;
+        this.AlarmNotifyType = 'AlarmNotifyType' in params ? params.AlarmNotifyType : null;
+        this.AlarmNotifyPeriod = 'AlarmNotifyPeriod' in params ? params.AlarmNotifyPeriod : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -7137,7 +7464,7 @@ class CreateGrafanaNotificationChannelRequest extends  AbstractModel {
         this.ChannelName = null;
 
         /**
-         * Organization ID
+         * Default value: `1`. This parameter has been deprecated. Please use `OrganizationIds` instead.
          * @type {number || null}
          */
         this.OrgId = null;
@@ -7149,13 +7476,13 @@ class CreateGrafanaNotificationChannelRequest extends  AbstractModel {
         this.Receivers = null;
 
         /**
-         * Array of extra organization IDs
+         * Array of extra organization IDs. This parameter has been deprecated. Please use `OrganizationIds` instead.
          * @type {Array.<string> || null}
          */
         this.ExtraOrgIds = null;
 
         /**
-         * 
+         * Array of all valid organization IDs. Default value: `1`.
          * @type {Array.<string> || null}
          */
         this.OrganizationIds = null;
@@ -7915,6 +8242,12 @@ class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
          */
         this.GroupBy = null;
 
+        /**
+         * Log alarm creation request parameters
+         * @type {LogAlarmReq || null}
+         */
+        this.LogAlarmReqInfo = null;
+
     }
 
     /**
@@ -7946,6 +8279,12 @@ class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
             this.Filter = obj;
         }
         this.GroupBy = 'GroupBy' in params ? params.GroupBy : null;
+
+        if (params.LogAlarmReqInfo) {
+            let obj = new LogAlarmReq();
+            obj.deserialize(params.LogAlarmReqInfo)
+            this.LogAlarmReqInfo = obj;
+        }
 
     }
 }
@@ -8045,7 +8384,8 @@ class CreateGrafanaIntegrationResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Integration ID
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IntegrationId = null;
@@ -8617,6 +8957,49 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * DescribeGrafanaChannels response structure.
+ * @class
+ */
+class DescribeGrafanaChannelsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of alert channels
+         * @type {Array.<GrafanaChannel> || null}
+         */
+        this.NotificationChannelSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NotificationChannelSet) {
+            this.NotificationChannelSet = new Array();
+            for (let z in params.NotificationChannelSet) {
+                let obj = new GrafanaChannel();
+                obj.deserialize(params.NotificationChannelSet[z]);
+                this.NotificationChannelSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAlarmPolicy response structure.
  * @class
  */
@@ -8680,6 +9063,63 @@ class DeleteExporterIntegrationResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Log alarm request information
+ * @class
+ */
+class LogAlarmReq extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * APM instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Search condition
+         * @type {Array.<LogFilterInfo> || null}
+         */
+        this.Filter = null;
+
+        /**
+         * The switch to enable/disable alarm merging
+         * @type {string || null}
+         */
+        this.AlarmMerge = null;
+
+        /**
+         * Alarm merging time
+         * @type {string || null}
+         */
+        this.AlarmMergeTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new LogFilterInfo();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
+        this.AlarmMerge = 'AlarmMerge' in params ? params.AlarmMerge : null;
+        this.AlarmMergeTime = 'AlarmMergeTime' in params ? params.AlarmMergeTime : null;
 
     }
 }
@@ -9425,6 +9865,12 @@ class DescribeInstalledPluginsRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Filter by plugin ID
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
     }
 
     /**
@@ -9435,6 +9881,7 @@ class DescribeInstalledPluginsRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
 
     }
 }
@@ -9517,8 +9964,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.CalcValue = null;
 
         /**
-         * Duration.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Duration in seconds.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ContinueTime = null;
@@ -9553,6 +10000,25 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.Unit = null;
 
+        /**
+         * Whether it is an advanced metric. Valid values: `0` (no), `1` (yes).
+         * @type {number || null}
+         */
+        this.IsAdvanced = null;
+
+        /**
+         * Whether the advance metric feature is enabled. Valid values: `0` (no), `1` (yes).
+         * @type {number || null}
+         */
+        this.IsOpen = null;
+
+        /**
+         * Product ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
     }
 
     /**
@@ -9572,6 +10038,9 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Period = 'Period' in params ? params.Period : null;
         this.RuleID = 'RuleID' in params ? params.RuleID : null;
         this.Unit = 'Unit' in params ? params.Unit : null;
+        this.IsAdvanced = 'IsAdvanced' in params ? params.IsAdvanced : null;
+        this.IsOpen = 'IsOpen' in params ? params.IsOpen : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
 
     }
 }
@@ -11307,6 +11776,24 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
          */
         this.OneClickPolicyType = null;
 
+        /**
+         * Whether the returned result filters policies associated with all objects. Valid values: `1` (Yes), `0` (No).
+         * @type {number || null}
+         */
+        this.NotBindAll = null;
+
+        /**
+         * Whether the returned result filters policies associated with instance groups. Valid values: `1` (Yes), `0` (No).
+         * @type {number || null}
+         */
+        this.NotInstanceGroup = null;
+
+        /**
+         * Filter policies by tag
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -11345,6 +11832,17 @@ It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent
             }
         }
         this.OneClickPolicyType = 'OneClickPolicyType' in params ? params.OneClickPolicyType : null;
+        this.NotBindAll = 'NotBindAll' in params ? params.NotBindAll : null;
+        this.NotInstanceGroup = 'NotInstanceGroup' in params ? params.NotInstanceGroup : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -11789,6 +12287,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.CLSNotices = null;
 
+        /**
+         * Tags bound to a notification template
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -11832,6 +12337,15 @@ Note: This field may return `null`, indicating that no valid values can be obtai
                 let obj = new CLSNotice();
                 obj.deserialize(params.CLSNotices[z]);
                 this.CLSNotices.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
 
@@ -13531,7 +14045,7 @@ class RecordingRuleSet extends  AbstractModel {
         this.RuleState = null;
 
         /**
-         * Rule name
+         * Group name
          * @type {string || null}
          */
         this.Name = null;
@@ -13560,6 +14074,13 @@ class RecordingRuleSet extends  AbstractModel {
          */
         this.UpdatedAt = null;
 
+        /**
+         * Rule name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
     }
 
     /**
@@ -13576,6 +14097,7 @@ class RecordingRuleSet extends  AbstractModel {
         this.Total = 'Total' in params ? params.Total : null;
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
 
     }
 }
@@ -13616,36 +14138,48 @@ class CreateExporterIntegrationResponse extends  AbstractModel {
 }
 
 /**
- * DescribePolicyConditionList.EventMetric
+ * DescribeGrafanaChannels request structure.
  * @class
  */
-class DescribePolicyConditionListEventMetric extends  AbstractModel {
+class DescribeGrafanaChannelsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event ID.
-         * @type {number || null}
-         */
-        this.EventId = null;
-
-        /**
-         * Event name.
+         * Instance ID
          * @type {string || null}
          */
-        this.EventShowName = null;
+        this.InstanceId = null;
 
         /**
-         * Whether to recover.
-         * @type {boolean || null}
-         */
-        this.NeedRecovered = null;
-
-        /**
-         * Event type, which is a reserved field. Currently, it is fixed to 2.
+         * Offset.
          * @type {number || null}
          */
-        this.Type = null;
+        this.Offset = null;
+
+        /**
+         * Number of items to be queried
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Channel name
+         * @type {string || null}
+         */
+        this.ChannelName = null;
+
+        /**
+         * Channel ID.
+         * @type {Array.<string> || null}
+         */
+        this.ChannelIds = null;
+
+        /**
+         * Channel status
+         * @type {number || null}
+         */
+        this.ChannelState = null;
 
     }
 
@@ -13656,10 +14190,12 @@ class DescribePolicyConditionListEventMetric extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.EventShowName = 'EventShowName' in params ? params.EventShowName : null;
-        this.NeedRecovered = 'NeedRecovered' in params ? params.NeedRecovered : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ChannelName = 'ChannelName' in params ? params.ChannelName : null;
+        this.ChannelIds = 'ChannelIds' in params ? params.ChannelIds : null;
+        this.ChannelState = 'ChannelState' in params ? params.ChannelState : null;
 
     }
 }
@@ -14024,6 +14560,12 @@ class DescribeAlarmNoticesRequest extends  AbstractModel {
          */
         this.NoticeIds = null;
 
+        /**
+         * Filter templates by tag
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -14043,6 +14585,15 @@ class DescribeAlarmNoticesRequest extends  AbstractModel {
         this.UserIds = 'UserIds' in params ? params.UserIds : null;
         this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
         this.NoticeIds = 'NoticeIds' in params ? params.NoticeIds : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -14591,7 +15142,8 @@ class CreateGrafanaNotificationChannelResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Channel ID.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ChannelId = null;
@@ -14912,6 +15464,12 @@ class DescribeSSOAccountRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Filter by account UIN
+         * @type {string || null}
+         */
+        this.UserId = null;
+
     }
 
     /**
@@ -14922,6 +15480,42 @@ class DescribeSSOAccountRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * Tag
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Tag value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -15051,6 +15645,33 @@ class GrafanaNotificationChannel extends  AbstractModel {
          */
         this.UpdatedAt = null;
 
+        /**
+         * Default valid organization. This parameter has been deprecated. Please use `OrganizationIds` instead.
+         * @type {string || null}
+         */
+        this.OrgId = null;
+
+        /**
+         * Extra valid organization. This parameter has been deprecated. Please use `OrganizationIds` instead.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ExtraOrgIds = null;
+
+        /**
+         * Valid organization. This parameter has been deprecated. Please use `OrganizationIds` instead.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OrgIds = null;
+
+        /**
+         * All valid organizations in an alert channel
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OrganizationIds = null;
+
     }
 
     /**
@@ -15065,6 +15686,10 @@ class GrafanaNotificationChannel extends  AbstractModel {
         this.Receivers = 'Receivers' in params ? params.Receivers : null;
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+        this.OrgId = 'OrgId' in params ? params.OrgId : null;
+        this.ExtraOrgIds = 'ExtraOrgIds' in params ? params.ExtraOrgIds : null;
+        this.OrgIds = 'OrgIds' in params ? params.OrgIds : null;
+        this.OrganizationIds = 'OrganizationIds' in params ? params.OrganizationIds : null;
 
     }
 }
@@ -15203,6 +15828,12 @@ class CreateAlarmNoticeRequest extends  AbstractModel {
          */
         this.CLSNotices = null;
 
+        /**
+         * Tags bound to a template
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -15241,6 +15872,15 @@ class CreateAlarmNoticeRequest extends  AbstractModel {
                 let obj = new CLSNotice();
                 obj.deserialize(params.CLSNotices[z]);
                 this.CLSNotices.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
 
@@ -15941,60 +16581,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Modification of the metric threshold condition passed in by the alarm policy group.
+ * DescribePolicyConditionList.EventMetric
  * @class
  */
-class ModifyPolicyGroupCondition extends  AbstractModel {
+class DescribePolicyConditionListEventMetric extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Metric ID.
+         * Event ID.
          * @type {number || null}
          */
-        this.MetricId = null;
+        this.EventId = null;
 
         /**
-         * Comparative type. The value 1 indicates greater than. The value 2 indicates greater than or equal to. The value 3 indicates smaller than. The value 4 indicates smaller than or equal to. The value 5 indicates equal to. The value 6 indicates not equal to.
-         * @type {number || null}
-         */
-        this.CalcType = null;
-
-        /**
-         * Threshold.
+         * Event name.
          * @type {string || null}
          */
-        this.CalcValue = null;
+        this.EventShowName = null;
 
         /**
-         * Data period of the detected metric.
-         * @type {number || null}
+         * Whether to recover.
+         * @type {boolean || null}
          */
-        this.CalcPeriod = null;
+        this.NeedRecovered = null;
 
         /**
-         * Number of consecutive periods.
+         * Event type, which is a reserved field. Currently, it is fixed to 2.
          * @type {number || null}
          */
-        this.ContinuePeriod = null;
-
-        /**
-         * Alarm sending and convergence type. The value 0 indicates that alarms are sent consecutively. The value 1 indicates that alarms are sent exponentially.
-         * @type {number || null}
-         */
-        this.AlarmNotifyType = null;
-
-        /**
-         * Alarm sending period in seconds. If the value is less than 0, no alarm will be triggered. If the value is 0, an alarm will be triggered only once. If the value is greater than 0, an alarm will be triggered at the interval of triggerTime.
-         * @type {number || null}
-         */
-        this.AlarmNotifyPeriod = null;
-
-        /**
-         * Rule ID. No filling means new addition while filling in ruleId means to modify existing rules.
-         * @type {number || null}
-         */
-        this.RuleId = null;
+        this.Type = null;
 
     }
 
@@ -16005,14 +16621,10 @@ class ModifyPolicyGroupCondition extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MetricId = 'MetricId' in params ? params.MetricId : null;
-        this.CalcType = 'CalcType' in params ? params.CalcType : null;
-        this.CalcValue = 'CalcValue' in params ? params.CalcValue : null;
-        this.CalcPeriod = 'CalcPeriod' in params ? params.CalcPeriod : null;
-        this.ContinuePeriod = 'ContinuePeriod' in params ? params.ContinuePeriod : null;
-        this.AlarmNotifyType = 'AlarmNotifyType' in params ? params.AlarmNotifyType : null;
-        this.AlarmNotifyPeriod = 'AlarmNotifyPeriod' in params ? params.AlarmNotifyPeriod : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.EventShowName = 'EventShowName' in params ? params.EventShowName : null;
+        this.NeedRecovered = 'NeedRecovered' in params ? params.NeedRecovered : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -16433,6 +17045,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.GrafanaInstanceId = null;
 
+        /**
+         * The alert rule limit
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AlertRuleLimit = null;
+
+        /**
+         * The recording rule limit
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RecordingRuleLimit = null;
+
     }
 
     /**
@@ -16482,6 +17108,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             this.Grant = obj;
         }
         this.GrafanaInstanceId = 'GrafanaInstanceId' in params ? params.GrafanaInstanceId : null;
+        this.AlertRuleLimit = 'AlertRuleLimit' in params ? params.AlertRuleLimit : null;
+        this.RecordingRuleLimit = 'RecordingRuleLimit' in params ? params.RecordingRuleLimit : null;
 
     }
 }
@@ -16515,18 +17143,25 @@ class DeleteAlarmPolicyResponse extends  AbstractModel {
 }
 
 /**
- * UpdateSSOAccount response structure.
+ * Monitoring data point
  * @class
  */
-class UpdateSSOAccountResponse extends  AbstractModel {
+class Point extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Time point when this monitoring data point is generated
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Timestamp = null;
+
+        /**
+         * Monitoring data point value
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Value = null;
 
     }
 
@@ -16537,7 +17172,8 @@ class UpdateSSOAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -17037,6 +17673,7 @@ class BindingPolicyObjectResponse extends  AbstractModel {
 
 module.exports = {
     UpdateAlertRuleStateRequest: UpdateAlertRuleStateRequest,
+    AlarmHierarchicalValue: AlarmHierarchicalValue,
     TagInstance: TagInstance,
     DescribePolicyConditionListConfigManual: DescribePolicyConditionListConfigManual,
     InstallPluginsRequest: InstallPluginsRequest,
@@ -17056,6 +17693,7 @@ module.exports = {
     DescribeAlertRulesRequest: DescribeAlertRulesRequest,
     DescribePrometheusInstancesResponse: DescribePrometheusInstancesResponse,
     DescribePolicyGroupListResponse: DescribePolicyGroupListResponse,
+    LogFilterInfo: LogFilterInfo,
     PrometheusAgent: PrometheusAgent,
     BindingPolicyObjectRequest: BindingPolicyObjectRequest,
     CreateServiceDiscoveryResponse: CreateServiceDiscoveryResponse,
@@ -17146,6 +17784,7 @@ module.exports = {
     DescribeAllNamespacesResponse: DescribeAllNamespacesResponse,
     GetPrometheusAgentManagementCommandRequest: GetPrometheusAgentManagementCommandRequest,
     ModifyPrometheusInstanceAttributesResponse: ModifyPrometheusInstanceAttributesResponse,
+    GrafanaChannel: GrafanaChannel,
     DeleteAlarmNoticesResponse: DeleteAlarmNoticesResponse,
     DescribeGrafanaNotificationChannelsRequest: DescribeGrafanaNotificationChannelsRequest,
     TerminatePrometheusInstancesRequest: TerminatePrometheusInstancesRequest,
@@ -17161,12 +17800,13 @@ module.exports = {
     DescribeExporterIntegrationsRequest: DescribeExporterIntegrationsRequest,
     DescribeProductEventListEventsDimensions: DescribeProductEventListEventsDimensions,
     ModifyAlarmPolicyConditionResponse: ModifyAlarmPolicyConditionResponse,
+    UpdateSSOAccountResponse: UpdateSSOAccountResponse,
     DestroyPrometheusInstanceRequest: DestroyPrometheusInstanceRequest,
     PrometheusInstanceGrantInfo: PrometheusInstanceGrantInfo,
     UnbindPrometheusManagedGrafanaRequest: UnbindPrometheusManagedGrafanaRequest,
     TemplateGroup: TemplateGroup,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
-    Point: Point,
+    ModifyPolicyGroupCondition: ModifyPolicyGroupCondition,
     UpdateAlertRuleResponse: UpdateAlertRuleResponse,
     ModifyPolicyGroupEventCondition: ModifyPolicyGroupEventCondition,
     CreateGrafanaNotificationChannelRequest: CreateGrafanaNotificationChannelRequest,
@@ -17197,8 +17837,10 @@ module.exports = {
     BindingPolicyObjectDimension: BindingPolicyObjectDimension,
     UnbindPrometheusManagedGrafanaResponse: UnbindPrometheusManagedGrafanaResponse,
     DescribeBasicAlarmListAlarms: DescribeBasicAlarmListAlarms,
+    DescribeGrafanaChannelsResponse: DescribeGrafanaChannelsResponse,
     DescribeAlarmPolicyResponse: DescribeAlarmPolicyResponse,
     DeleteExporterIntegrationResponse: DeleteExporterIntegrationResponse,
+    LogAlarmReq: LogAlarmReq,
     DescribeMonitorTypesResponse: DescribeMonitorTypesResponse,
     GrafanaInstanceInfo: GrafanaInstanceInfo,
     Dimension: Dimension,
@@ -17281,7 +17923,7 @@ module.exports = {
     CreatePrometheusScrapeJobRequest: CreatePrometheusScrapeJobRequest,
     RecordingRuleSet: RecordingRuleSet,
     CreateExporterIntegrationResponse: CreateExporterIntegrationResponse,
-    DescribePolicyConditionListEventMetric: DescribePolicyConditionListEventMetric,
+    DescribeGrafanaChannelsRequest: DescribeGrafanaChannelsRequest,
     DescribePolicyGroupListRequest: DescribePolicyGroupListRequest,
     DescribeBasicAlarmListRequest: DescribeBasicAlarmListRequest,
     ManagementCommand: ManagementCommand,
@@ -17302,6 +17944,7 @@ module.exports = {
     UpgradeGrafanaInstanceResponse: UpgradeGrafanaInstanceResponse,
     DeleteAlertRulesRequest: DeleteAlertRulesRequest,
     DescribeSSOAccountRequest: DescribeSSOAccountRequest,
+    Tag: Tag,
     DescribeAlarmNoticeRequest: DescribeAlarmNoticeRequest,
     UninstallGrafanaDashboardRequest: UninstallGrafanaDashboardRequest,
     GrafanaNotificationChannel: GrafanaNotificationChannel,
@@ -17321,14 +17964,14 @@ module.exports = {
     DescribeGrafanaWhiteListResponse: DescribeGrafanaWhiteListResponse,
     UpdateRecordingRuleRequest: UpdateRecordingRuleRequest,
     AlarmPolicyCondition: AlarmPolicyCondition,
-    ModifyPolicyGroupCondition: ModifyPolicyGroupCondition,
+    DescribePolicyConditionListEventMetric: DescribePolicyConditionListEventMetric,
     DescribeDNSConfigRequest: DescribeDNSConfigRequest,
     UpdateDNSConfigResponse: UpdateDNSConfigResponse,
     DescribePolicyConditionListCondition: DescribePolicyConditionListCondition,
     UpdateGrafanaWhiteListRequest: UpdateGrafanaWhiteListRequest,
     PrometheusInstancesItem: PrometheusInstancesItem,
     DeleteAlarmPolicyResponse: DeleteAlarmPolicyResponse,
-    UpdateSSOAccountResponse: UpdateSSOAccountResponse,
+    Point: Point,
     DescribeInstalledPluginsResponse: DescribeInstalledPluginsResponse,
     UpdateGrafanaConfigResponse: UpdateGrafanaConfigResponse,
     DeleteSSOAccountResponse: DeleteSSOAccountResponse,

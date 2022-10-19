@@ -21,6 +21,7 @@ const DescribeUserByIdRequest = models.DescribeUserByIdRequest;
 const ListUserRequest = models.ListUserRequest;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const ErrorDetails = models.ErrorDetails;
+const DescribeUserRequest = models.DescribeUserRequest;
 const DeleteUsersRequest = models.DeleteUsersRequest;
 const ImportUser = models.ImportUser;
 const UpdateUserStatusResponse = models.UpdateUserStatusResponse;
@@ -35,6 +36,7 @@ const DescribeUserByIdResponse = models.DescribeUserByIdResponse;
 const Job = models.Job;
 const CreateFileExportUserJobRequest = models.CreateFileExportUserJobRequest;
 const User = models.User;
+const Sort = models.Sort;
 const Pageable = models.Pageable;
 const ResetPasswordResponse = models.ResetPasswordResponse;
 const UpdateUserResponse = models.UpdateUserResponse;
@@ -54,6 +56,8 @@ const LinkAccountRequest = models.LinkAccountRequest;
 const ListLogMessageByConditionRequest = models.ListLogMessageByConditionRequest;
 const SaltLocationRule = models.SaltLocationRule;
 const MemberMap = models.MemberMap;
+const QueryUserFilter = models.QueryUserFilter;
+const DescribeUserResponse = models.DescribeUserResponse;
 const ListUserResponse = models.ListUserResponse;
 const LogMessage = models.LogMessage;
 const ListLogMessageByConditionResponse = models.ListLogMessageByConditionResponse;
@@ -100,6 +104,17 @@ class CiamClient extends AbstractClient {
     UpdateUser(req, cb) {
         let resp = new UpdateUserResponse();
         this.request("UpdateUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the user information with multiple conditions.
+     * @param {DescribeUserRequest} req
+     * @param {function(string, DescribeUserResponse):void} cb
+     * @public
+     */
+    DescribeUser(req, cb) {
+        let resp = new DescribeUserResponse();
+        this.request("DescribeUser", req, resp, cb);
     }
 
     /**

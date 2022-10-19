@@ -730,11 +730,10 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Switch = null;
 
         /**
-         * HTTP2 configuration switch
+         * Whether to enable HTTP2
 `on`: Enable
 `off`: Disable
-Enabling HTTPS acceleration for the first time will enable HTTP2 configuration by default.
-Note: This field may return `null`, indicating that no valid value can be obtained.
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Http2 = null;
@@ -6724,7 +6723,6 @@ class DomainAreaConfig extends  AbstractModel {
  * HTTPS acceleration server certificate configuration:
 + Supports deployment with certificates that are being hosted by the SSL Certificate Services
 + Supports uploading certificates of PEM format for deployment
-Note: when uploading certificates of PEM format, the Base64 encoding is required.
  * @class
  */
 class ServerCert extends  AbstractModel {
@@ -9124,7 +9122,7 @@ This feature is in beta test.
         this.DisableRange = null;
 
         /**
-         * 
+         * Custom HTTP request headers (Up to 20). `Name`: Up to 128 characters. `Value`: Up to 1024 characters.
          * @type {Array.<HTTPHeader> || null}
          */
         this.Headers = null;
@@ -12177,7 +12175,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Action taken when threshold is reached
-`RESOLVE_DNS_TO_ORIGIN`: Requests will be forwarded to the origin server. This is only supported for domain names of external origin.
 `RETURN_404`: A 404 error will be returned for all requests.
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -15167,7 +15164,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * 
+ * HTTP request header
  * @class
  */
 class HTTPHeader extends  AbstractModel {
@@ -15175,13 +15172,13 @@ class HTTPHeader extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Request header name
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 
+         * Request header value
          * @type {string || null}
          */
         this.Value = null;

@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const UpdateAlertRuleStateRequest = models.UpdateAlertRuleStateRequest;
+const AlarmHierarchicalValue = models.AlarmHierarchicalValue;
 const TagInstance = models.TagInstance;
 const DescribePolicyConditionListConfigManual = models.DescribePolicyConditionListConfigManual;
 const InstallPluginsRequest = models.InstallPluginsRequest;
@@ -36,6 +37,7 @@ const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetr
 const DescribeAlertRulesRequest = models.DescribeAlertRulesRequest;
 const DescribePrometheusInstancesResponse = models.DescribePrometheusInstancesResponse;
 const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse;
+const LogFilterInfo = models.LogFilterInfo;
 const PrometheusAgent = models.PrometheusAgent;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
 const CreateServiceDiscoveryResponse = models.CreateServiceDiscoveryResponse;
@@ -126,6 +128,7 @@ const PrometheusRuleSet = models.PrometheusRuleSet;
 const DescribeAllNamespacesResponse = models.DescribeAllNamespacesResponse;
 const GetPrometheusAgentManagementCommandRequest = models.GetPrometheusAgentManagementCommandRequest;
 const ModifyPrometheusInstanceAttributesResponse = models.ModifyPrometheusInstanceAttributesResponse;
+const GrafanaChannel = models.GrafanaChannel;
 const DeleteAlarmNoticesResponse = models.DeleteAlarmNoticesResponse;
 const DescribeGrafanaNotificationChannelsRequest = models.DescribeGrafanaNotificationChannelsRequest;
 const TerminatePrometheusInstancesRequest = models.TerminatePrometheusInstancesRequest;
@@ -141,12 +144,13 @@ const CreatePrometheusAgentResponse = models.CreatePrometheusAgentResponse;
 const DescribeExporterIntegrationsRequest = models.DescribeExporterIntegrationsRequest;
 const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
 const ModifyAlarmPolicyConditionResponse = models.ModifyAlarmPolicyConditionResponse;
+const UpdateSSOAccountResponse = models.UpdateSSOAccountResponse;
 const DestroyPrometheusInstanceRequest = models.DestroyPrometheusInstanceRequest;
 const PrometheusInstanceGrantInfo = models.PrometheusInstanceGrantInfo;
 const UnbindPrometheusManagedGrafanaRequest = models.UnbindPrometheusManagedGrafanaRequest;
 const TemplateGroup = models.TemplateGroup;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
-const Point = models.Point;
+const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
 const UpdateAlertRuleResponse = models.UpdateAlertRuleResponse;
 const ModifyPolicyGroupEventCondition = models.ModifyPolicyGroupEventCondition;
 const CreateGrafanaNotificationChannelRequest = models.CreateGrafanaNotificationChannelRequest;
@@ -177,8 +181,10 @@ const CreateGrafanaInstanceRequest = models.CreateGrafanaInstanceRequest;
 const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
 const UnbindPrometheusManagedGrafanaResponse = models.UnbindPrometheusManagedGrafanaResponse;
 const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms;
+const DescribeGrafanaChannelsResponse = models.DescribeGrafanaChannelsResponse;
 const DescribeAlarmPolicyResponse = models.DescribeAlarmPolicyResponse;
 const DeleteExporterIntegrationResponse = models.DeleteExporterIntegrationResponse;
+const LogAlarmReq = models.LogAlarmReq;
 const DescribeMonitorTypesResponse = models.DescribeMonitorTypesResponse;
 const GrafanaInstanceInfo = models.GrafanaInstanceInfo;
 const Dimension = models.Dimension;
@@ -261,7 +267,7 @@ const DescribeStatisticDataResponse = models.DescribeStatisticDataResponse;
 const CreatePrometheusScrapeJobRequest = models.CreatePrometheusScrapeJobRequest;
 const RecordingRuleSet = models.RecordingRuleSet;
 const CreateExporterIntegrationResponse = models.CreateExporterIntegrationResponse;
-const DescribePolicyConditionListEventMetric = models.DescribePolicyConditionListEventMetric;
+const DescribeGrafanaChannelsRequest = models.DescribeGrafanaChannelsRequest;
 const DescribePolicyGroupListRequest = models.DescribePolicyGroupListRequest;
 const DescribeBasicAlarmListRequest = models.DescribeBasicAlarmListRequest;
 const ManagementCommand = models.ManagementCommand;
@@ -282,6 +288,7 @@ const CleanGrafanaInstanceRequest = models.CleanGrafanaInstanceRequest;
 const UpgradeGrafanaInstanceResponse = models.UpgradeGrafanaInstanceResponse;
 const DeleteAlertRulesRequest = models.DeleteAlertRulesRequest;
 const DescribeSSOAccountRequest = models.DescribeSSOAccountRequest;
+const Tag = models.Tag;
 const DescribeAlarmNoticeRequest = models.DescribeAlarmNoticeRequest;
 const UninstallGrafanaDashboardRequest = models.UninstallGrafanaDashboardRequest;
 const GrafanaNotificationChannel = models.GrafanaNotificationChannel;
@@ -301,14 +308,14 @@ const ModifyAlarmPolicyStatusResponse = models.ModifyAlarmPolicyStatusResponse;
 const DescribeGrafanaWhiteListResponse = models.DescribeGrafanaWhiteListResponse;
 const UpdateRecordingRuleRequest = models.UpdateRecordingRuleRequest;
 const AlarmPolicyCondition = models.AlarmPolicyCondition;
-const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
+const DescribePolicyConditionListEventMetric = models.DescribePolicyConditionListEventMetric;
 const DescribeDNSConfigRequest = models.DescribeDNSConfigRequest;
 const UpdateDNSConfigResponse = models.UpdateDNSConfigResponse;
 const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition;
 const UpdateGrafanaWhiteListRequest = models.UpdateGrafanaWhiteListRequest;
 const PrometheusInstancesItem = models.PrometheusInstancesItem;
 const DeleteAlarmPolicyResponse = models.DeleteAlarmPolicyResponse;
-const UpdateSSOAccountResponse = models.UpdateSSOAccountResponse;
+const Point = models.Point;
 const DescribeInstalledPluginsResponse = models.DescribeInstalledPluginsResponse;
 const UpdateGrafanaConfigResponse = models.UpdateGrafanaConfigResponse;
 const DeleteSSOAccountResponse = models.DeleteSSOAccountResponse;
@@ -697,6 +704,17 @@ Note that alert object and alert message are special fields of Prometheus Rule A
     UpgradeGrafanaInstance(req, cb) {
         let resp = new UpgradeGrafanaInstanceResponse();
         this.request("UpgradeGrafanaInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to list all Grafana alert channels.
+     * @param {DescribeGrafanaChannelsRequest} req
+     * @param {function(string, DescribeGrafanaChannelsResponse):void} cb
+     * @public
+     */
+    DescribeGrafanaChannels(req, cb) {
+        let resp = new DescribeGrafanaChannelsResponse();
+        this.request("DescribeGrafanaChannels", req, resp, cb);
     }
 
     /**
@@ -1312,10 +1330,13 @@ Alarm policies in the same type under the project will be set as non-default.
     }
 
     /**
-     * This API is used to get the monitoring data of Tencent Cloud services except TKE. To pull TKE’s monitoring data, please use the API [DescribeStatisticData](https://intl.cloud.tencent.com/document/product/248/51845?from_cn_redirect=1).
+     * This API is used to get the monitoring data of Tencent Cloud services except TKE. To pull TKE’s monitoring data, use the [DescribeStatisticData](https://www.tencentcloud.com/document/product/248/39481) API.
 You can get the monitoring data of a Tencent Cloud service by passing in its namespace, object dimension description, and monitoring metrics.
 API call rate limit: 20 calls/second (1,200 calls/minute). A single request can get the data of up to 10 instances for up to 1,440 data points.
 If you need to call a large number of APIs to pull metrics or objects at a time, some APIs may fail to be called due to the rate limit. We suggest you evenly arrange API calls at a time granularity.
+
+>?
+>- Cloud Monitor has started billing the `GetMonitorData` API on September 1, 2022. Each root account has a free tier of one million call requests a month. If you want to call this API after the free tier is exceeded, you need to enable [pay-as-you-go billing for API requests](https://buy.cloud.tencent.com/APIRequestBuy). For billing rules, see [API billing documentation](https://intl.cloud.tencent.com/document/product/248/77914?from_cn_redirect=1).
      * @param {GetMonitorDataRequest} req
      * @param {function(string, GetMonitorDataResponse):void} cb
      * @public

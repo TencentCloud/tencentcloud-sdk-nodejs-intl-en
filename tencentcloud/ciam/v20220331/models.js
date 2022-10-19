@@ -84,6 +84,36 @@ class UpdateUserRequest extends  AbstractModel {
          */
         this.CustomizationAttributes = null;
 
+        /**
+         * Index field 1
+         * @type {string || null}
+         */
+        this.IndexedAttribute1 = null;
+
+        /**
+         * Index field 2
+         * @type {string || null}
+         */
+        this.IndexedAttribute2 = null;
+
+        /**
+         * Index field 3
+         * @type {string || null}
+         */
+        this.IndexedAttribute3 = null;
+
+        /**
+         * Index field 4
+         * @type {string || null}
+         */
+        this.IndexedAttribute4 = null;
+
+        /**
+         * Index field 5
+         * @type {string || null}
+         */
+        this.IndexedAttribute5 = null;
+
     }
 
     /**
@@ -111,6 +141,11 @@ class UpdateUserRequest extends  AbstractModel {
                 this.CustomizationAttributes.push(obj);
             }
         }
+        this.IndexedAttribute1 = 'IndexedAttribute1' in params ? params.IndexedAttribute1 : null;
+        this.IndexedAttribute2 = 'IndexedAttribute2' in params ? params.IndexedAttribute2 : null;
+        this.IndexedAttribute3 = 'IndexedAttribute3' in params ? params.IndexedAttribute3 : null;
+        this.IndexedAttribute4 = 'IndexedAttribute4' in params ? params.IndexedAttribute4 : null;
+        this.IndexedAttribute5 = 'IndexedAttribute5' in params ? params.IndexedAttribute5 : null;
 
     }
 }
@@ -136,7 +171,10 @@ class DescribeUserByIdRequest extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * 
+         * Whether the content is passed through
+
+<li> **false** </li>Default. The returned information is desensitized.
+<li> **true** </li>Return the original content.
          * @type {boolean || null}
          */
         this.Original = null;
@@ -187,7 +225,7 @@ class ListUserRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 
+         * Whether the content is passed through
          * @type {boolean || null}
          */
         this.Original = null;
@@ -289,6 +327,80 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.Error = 'Error' in params ? params.Error : null;
+
+    }
+}
+
+/**
+ * DescribeUser request structure.
+ * @class
+ */
+class DescribeUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User directory ID
+         * @type {string || null}
+         */
+        this.UserStoreId = null;
+
+        /**
+         * Pagination data
+         * @type {Pageable || null}
+         */
+        this.Pageable = null;
+
+        /**
+         * Query condition (`propertycode` and `propertykey`)
+         * @type {Array.<QueryUserFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Whether the plaintext is returned
+         * @type {boolean || null}
+         */
+        this.Original = null;
+
+        /**
+         * Sorting configuration
+         * @type {Sort || null}
+         */
+        this.Sort = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserStoreId = 'UserStoreId' in params ? params.UserStoreId : null;
+
+        if (params.Pageable) {
+            let obj = new Pageable();
+            obj.deserialize(params.Pageable)
+            this.Pageable = obj;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new QueryUserFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Original = 'Original' in params ? params.Original : null;
+
+        if (params.Sort) {
+            let obj = new Sort();
+            obj.deserialize(params.Sort)
+            this.Sort = obj;
+        }
 
     }
 }
@@ -498,6 +610,36 @@ class ImportUser extends  AbstractModel {
          */
         this.PasswordEncryptTypeEnum = null;
 
+        /**
+         * Index field 1
+         * @type {string || null}
+         */
+        this.IndexedAttribute1 = null;
+
+        /**
+         * Index field 2
+         * @type {string || null}
+         */
+        this.IndexedAttribute2 = null;
+
+        /**
+         * Index field 3
+         * @type {string || null}
+         */
+        this.IndexedAttribute3 = null;
+
+        /**
+         * Index field 4
+         * @type {string || null}
+         */
+        this.IndexedAttribute4 = null;
+
+        /**
+         * Index field 5
+         * @type {string || null}
+         */
+        this.IndexedAttribute5 = null;
+
     }
 
     /**
@@ -546,6 +688,11 @@ class ImportUser extends  AbstractModel {
             this.Salt = obj;
         }
         this.PasswordEncryptTypeEnum = 'PasswordEncryptTypeEnum' in params ? params.PasswordEncryptTypeEnum : null;
+        this.IndexedAttribute1 = 'IndexedAttribute1' in params ? params.IndexedAttribute1 : null;
+        this.IndexedAttribute2 = 'IndexedAttribute2' in params ? params.IndexedAttribute2 : null;
+        this.IndexedAttribute3 = 'IndexedAttribute3' in params ? params.IndexedAttribute3 : null;
+        this.IndexedAttribute4 = 'IndexedAttribute4' in params ? params.IndexedAttribute4 : null;
+        this.IndexedAttribute5 = 'IndexedAttribute5' in params ? params.IndexedAttribute5 : null;
 
     }
 }
@@ -645,7 +792,7 @@ class ListUserByPropertyRequest extends  AbstractModel {
         this.PropertyValue = null;
 
         /**
-         * 
+         * Whether the content is passed through
          * @type {boolean || null}
          */
         this.Original = null;
@@ -941,10 +1088,9 @@ class Job extends  AbstractModel {
         /**
          * Data type of the task
 
-<li> **JSON** </li>  JSON
 <li> **NDJSON** </li>  New-line Delimited JSON
 <li> **CSV** </li>  Comma-Separated Values
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Format = null;
@@ -1024,7 +1170,6 @@ class CreateFileExportUserJobRequest extends  AbstractModel {
         /**
          * Exported data type
 
-<li> **JSON** </li>  JSON
 <li> **NDJSON** </li>  New-line Delimited JSON
 <li> **CSV** </li>  Comma-Separated Values
          * @type {string || null}
@@ -1335,6 +1480,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.LockTime = null;
 
+        /**
+         * Index field 1
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IndexedAttribute1 = null;
+
+        /**
+         * Index field 2
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IndexedAttribute2 = null;
+
+        /**
+         * Index field 3
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IndexedAttribute3 = null;
+
+        /**
+         * Index field 4
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IndexedAttribute4 = null;
+
+        /**
+         * Index field 5
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IndexedAttribute5 = null;
+
     }
 
     /**
@@ -1388,6 +1568,46 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Version = 'Version' in params ? params.Version : null;
         this.LockType = 'LockType' in params ? params.LockType : null;
         this.LockTime = 'LockTime' in params ? params.LockTime : null;
+        this.IndexedAttribute1 = 'IndexedAttribute1' in params ? params.IndexedAttribute1 : null;
+        this.IndexedAttribute2 = 'IndexedAttribute2' in params ? params.IndexedAttribute2 : null;
+        this.IndexedAttribute3 = 'IndexedAttribute3' in params ? params.IndexedAttribute3 : null;
+        this.IndexedAttribute4 = 'IndexedAttribute4' in params ? params.IndexedAttribute4 : null;
+        this.IndexedAttribute5 = 'IndexedAttribute5' in params ? params.IndexedAttribute5 : null;
+
+    }
+}
+
+/**
+ * Sorting of the result of user query
+ * @class
+ */
+class Sort extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key for sorting. See custom attributes
+         * @type {string || null}
+         */
+        this.PropertyKey = null;
+
+        /**
+         * `ASC` or `DESC`
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PropertyKey = 'PropertyKey' in params ? params.PropertyKey : null;
+        this.Order = 'Order' in params ? params.Order : null;
 
     }
 }
@@ -1806,6 +2026,36 @@ class CreateUserRequest extends  AbstractModel {
          */
         this.CustomizationAttributes = null;
 
+        /**
+         * Index field 1
+         * @type {string || null}
+         */
+        this.IndexedAttribute1 = null;
+
+        /**
+         * Index field 2
+         * @type {string || null}
+         */
+        this.IndexedAttribute2 = null;
+
+        /**
+         * Index field 3
+         * @type {string || null}
+         */
+        this.IndexedAttribute3 = null;
+
+        /**
+         * Index field 4
+         * @type {string || null}
+         */
+        this.IndexedAttribute4 = null;
+
+        /**
+         * Index field 5
+         * @type {string || null}
+         */
+        this.IndexedAttribute5 = null;
+
     }
 
     /**
@@ -1833,6 +2083,11 @@ class CreateUserRequest extends  AbstractModel {
                 this.CustomizationAttributes.push(obj);
             }
         }
+        this.IndexedAttribute1 = 'IndexedAttribute1' in params ? params.IndexedAttribute1 : null;
+        this.IndexedAttribute2 = 'IndexedAttribute2' in params ? params.IndexedAttribute2 : null;
+        this.IndexedAttribute3 = 'IndexedAttribute3' in params ? params.IndexedAttribute3 : null;
+        this.IndexedAttribute4 = 'IndexedAttribute4' in params ? params.IndexedAttribute4 : null;
+        this.IndexedAttribute5 = 'IndexedAttribute5' in params ? params.IndexedAttribute5 : null;
 
     }
 }
@@ -2216,6 +2471,120 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Conditions to query the user information 
+ * @class
+ */
+class QueryUserFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Property key
+         * @type {string || null}
+         */
+        this.PropertyKey = null;
+
+        /**
+         * Property value
+         * @type {string || null}
+         */
+        this.PropertyValue = null;
+
+        /**
+         * Logic value. `True` or `False`
+         * @type {boolean || null}
+         */
+        this.Logic = null;
+
+        /**
+         * Operator. Values: `>`, `<`, `=`, `>=`, `<=`, `!=` and `between`. 
+         * @type {string || null}
+         */
+        this.OperateLogic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PropertyKey = 'PropertyKey' in params ? params.PropertyKey : null;
+        this.PropertyValue = 'PropertyValue' in params ? params.PropertyValue : null;
+        this.Logic = 'Logic' in params ? params.Logic : null;
+        this.OperateLogic = 'OperateLogic' in params ? params.OperateLogic : null;
+
+    }
+}
+
+/**
+ * DescribeUser response structure.
+ * @class
+ */
+class DescribeUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of returned results.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Pagination object
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Pageable || null}
+         */
+        this.Pageable = null;
+
+        /**
+         * User List
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<User> || null}
+         */
+        this.Content = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Pageable) {
+            let obj = new Pageable();
+            obj.deserialize(params.Pageable)
+            this.Pageable = obj;
+        }
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new User();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListUser response structure.
  * @class
  */
@@ -2508,6 +2877,7 @@ module.exports = {
     ListUserRequest: ListUserRequest,
     ResetPasswordRequest: ResetPasswordRequest,
     ErrorDetails: ErrorDetails,
+    DescribeUserRequest: DescribeUserRequest,
     DeleteUsersRequest: DeleteUsersRequest,
     ImportUser: ImportUser,
     UpdateUserStatusResponse: UpdateUserStatusResponse,
@@ -2522,6 +2892,7 @@ module.exports = {
     Job: Job,
     CreateFileExportUserJobRequest: CreateFileExportUserJobRequest,
     User: User,
+    Sort: Sort,
     Pageable: Pageable,
     ResetPasswordResponse: ResetPasswordResponse,
     UpdateUserResponse: UpdateUserResponse,
@@ -2541,6 +2912,8 @@ module.exports = {
     ListLogMessageByConditionRequest: ListLogMessageByConditionRequest,
     SaltLocationRule: SaltLocationRule,
     MemberMap: MemberMap,
+    QueryUserFilter: QueryUserFilter,
+    DescribeUserResponse: DescribeUserResponse,
     ListUserResponse: ListUserResponse,
     LogMessage: LogMessage,
     ListLogMessageByConditionResponse: ListLogMessageByConditionResponse,

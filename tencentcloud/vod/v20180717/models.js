@@ -12308,7 +12308,7 @@ For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
         this.Content = null;
 
         /**
-         * Subtitle ID. Its length cannot exceed 16 characters. Uppercase and lowercase letters, numbers, underscores (_), and hyphens (-) are supported. It cannot be the same as the IDs of the existing subtitles in the media file.
+         * The subtitle ID. It can be up to 16 characters long, can contain letters, numbers, underscores (_), and hyphens (-), and cannot be identical to an existing subtitle ID.
          * @type {string || null}
          */
         this.Id = null;

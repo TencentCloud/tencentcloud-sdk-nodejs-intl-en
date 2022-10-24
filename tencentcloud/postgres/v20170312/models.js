@@ -622,6 +622,30 @@ class CreateInstancesRequest extends  AbstractModel {
          */
         this.KMSRegion = null;
 
+        /**
+         * Database engine. Valid values:
+1. `postgresql` (TencentDB for PostgreSQL)
+2. `mssql_compatible`（MSSQL compatible-TencentDB for PostgreSQL)
+Default value: `postgresql`
+         * @type {string || null}
+         */
+        this.DBEngine = null;
+
+        /**
+         * Configuration information of database engine in the following format:
+{"$key1":"$value1", "$key2":"$value2"}
+
+Valid values:
+1. mssql_compatible engine：
+`migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
+`defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
+"af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN".
+`serverCollationName`: Name of collation rule, which can’t be modified after the initialization. Default value: `sql_latin1_general_cp1_ci_as`. Valid values:
+"bbf_unicode_general_ci_as", "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as".
+         * @type {string || null}
+         */
+        this.DBEngineConfig = null;
+
     }
 
     /**
@@ -674,6 +698,8 @@ class CreateInstancesRequest extends  AbstractModel {
         this.NeedSupportTDE = 'NeedSupportTDE' in params ? params.NeedSupportTDE : null;
         this.KMSKeyId = 'KMSKeyId' in params ? params.KMSKeyId : null;
         this.KMSRegion = 'KMSRegion' in params ? params.KMSRegion : null;
+        this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
+        this.DBEngineConfig = 'DBEngineConfig' in params ? params.DBEngineConfig : null;
 
     }
 }
@@ -735,7 +761,7 @@ class SpecItemInfo extends  AbstractModel {
         this.Qps = null;
 
         /**
-         * Billing ID for this specification
+         * (Disused)
          * @type {number || null}
          */
         this.Pid = null;
@@ -1384,6 +1410,15 @@ class DescribeProductConfigRequest extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * Database engines. Valid values:
+1. `postgresql` (TencentDB for PostgreSQL)
+2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL)
+Default value: `postgresql`
+         * @type {string || null}
+         */
+        this.DBEngine = null;
+
     }
 
     /**
@@ -1394,6 +1429,7 @@ class DescribeProductConfigRequest extends  AbstractModel {
             return;
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
 
     }
 }
@@ -1848,7 +1884,7 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
+         * [Disused] Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
          * @type {number || null}
          */
         this.Pid = null;
@@ -1858,6 +1894,20 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.InstanceChargeType = null;
+
+        /**
+         * Instance type. Default value: `primary`. Valid values:
+`primary` (dual-server high-availability, one-primary-one-standby)
+`readonly` (read-only instance)
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DBEngine = null;
 
     }
 
@@ -1875,6 +1925,8 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         this.Period = 'Period' in params ? params.Period : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
 
     }
 }
@@ -2126,6 +2178,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.BillId = null;
 
         /**
+         * ID of the cloned instance, which will be returned only when the instance is pay-as-you-go.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2142,6 +2201,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         }
         this.DealName = 'DealName' in params ? params.DealName : null;
         this.BillId = 'BillId' in params ? params.BillId : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2458,19 +2518,19 @@ class InquiryPriceCreateDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Original price in 0.01 CNY.
+         * Published price in US Cent
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * Discounted price in 0.01 CNY.
+         * Discounted total amount in US Cent
          * @type {number || null}
          */
         this.Price = null;
 
         /**
-         * Currency, such as USD for US dollar.
+         * Currency, such as USD.
          * @type {string || null}
          */
         this.Currency = null;
@@ -5242,7 +5302,7 @@ class InquiryPriceRenewDBInstanceResponse extends  AbstractModel {
         this.Price = null;
 
         /**
-         * Currency, such as USD for US dollar.
+         * Currency, such as USD.
          * @type {string || null}
          */
         this.Currency = null;
@@ -5813,6 +5873,19 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.IsSupportTDE = null;
 
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DBEngine = null;
+
+        /**
+         * Configuration information of database engine
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBEngineConfig = null;
+
     }
 
     /**
@@ -5891,6 +5964,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.IsSupportTDE = 'IsSupportTDE' in params ? params.IsSupportTDE : null;
+        this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
+        this.DBEngineConfig = 'DBEngineConfig' in params ? params.DBEngineConfig : null;
 
     }
 }
@@ -6357,12 +6432,6 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
         this.SpecCode = null;
 
         /**
-         * PostgreSQL kernel version, which must be the same as that of the primary instance
-         * @type {string || null}
-         */
-        this.DBVersion = null;
-
-        /**
          * Instance storage capacity in GB
          * @type {number || null}
          */
@@ -6399,7 +6468,13 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+         * (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * Instance billing mode. Valid value: `POSTPAID_BY_HOUR` (pay-as-you-go). If the source instance is pay-as-you-go, so is the read-only instance.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -6480,13 +6555,13 @@ class CreateReadOnlyDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
-        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.MasterDBInstanceId = 'MasterDBInstanceId' in params ? params.MasterDBInstanceId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
@@ -7418,13 +7493,13 @@ class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
         this.OriginalPrice = null;
 
         /**
-         * Actual amount payable
+         * Discounted total amount
          * @type {number || null}
          */
         this.Price = null;
 
         /**
-         * Currency, such as USD for US dollar.
+         * Currency, such as USD.
          * @type {string || null}
          */
         this.Currency = null;

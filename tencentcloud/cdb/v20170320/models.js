@@ -3264,16 +3264,28 @@ class DescribeDataBackupOverviewResponse extends  AbstractModel {
         this.ManualBackupCount = null;
 
         /**
-         * Total capacity of remote backups in the current region
+         * Total capacity of remote backups
          * @type {number || null}
          */
         this.RemoteBackupVolume = null;
 
         /**
-         * Total number of remote backups in the current region
+         * Total number of remote backups
          * @type {number || null}
          */
         this.RemoteBackupCount = null;
+
+        /**
+         * Total capacity of archive backups in the current region
+         * @type {number || null}
+         */
+        this.DataBackupArchiveVolume = null;
+
+        /**
+         * Total number of archive backups in the current region
+         * @type {number || null}
+         */
+        this.DataBackupArchiveCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3298,6 +3310,8 @@ class DescribeDataBackupOverviewResponse extends  AbstractModel {
         this.ManualBackupCount = 'ManualBackupCount' in params ? params.ManualBackupCount : null;
         this.RemoteBackupVolume = 'RemoteBackupVolume' in params ? params.RemoteBackupVolume : null;
         this.RemoteBackupCount = 'RemoteBackupCount' in params ? params.RemoteBackupCount : null;
+        this.DataBackupArchiveVolume = 'DataBackupArchiveVolume' in params ? params.DataBackupArchiveVolume : null;
+        this.DataBackupArchiveCount = 'DataBackupArchiveCount' in params ? params.DataBackupArchiveCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4124,6 +4138,36 @@ class BinlogInfo extends  AbstractModel {
          */
         this.BinlogFinishTime = null;
 
+        /**
+         * The region where the binlog file resides
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Backup task status. Valid values: `SUCCESS` (backup succeeded), `FAILED` (backup failed), `RUNNING` (backup is in progress).
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The detailed information of remote binlog backups
+         * @type {Array.<RemoteBackupInfo> || null}
+         */
+        this.RemoteInfo = null;
+
+        /**
+         * Storage method. Valid values: `0` (regular storage), `1`(archive storage). Default value: `0`.
+         * @type {number || null}
+         */
+        this.CosStorageType = null;
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
     }
 
     /**
@@ -4141,6 +4185,19 @@ class BinlogInfo extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.BinlogStartTime = 'BinlogStartTime' in params ? params.BinlogStartTime : null;
         this.BinlogFinishTime = 'BinlogFinishTime' in params ? params.BinlogFinishTime : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.RemoteInfo) {
+            this.RemoteInfo = new Array();
+            for (let z in params.RemoteInfo) {
+                let obj = new RemoteBackupInfo();
+                obj.deserialize(params.RemoteInfo[z]);
+                this.RemoteInfo.push(obj);
+            }
+        }
+        this.CosStorageType = 'CosStorageType' in params ? params.CosStorageType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5124,6 +5181,69 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
 }
 
 /**
+ * Information of the remote backup
+ * @class
+ */
+class RemoteBackupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the remote backup subtask
+         * @type {Array.<number> || null}
+         */
+        this.SubBackupId = null;
+
+        /**
+         * The region where the remote backup resides
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Backup task status. Valid values: `SUCCESS` (backup succeeded), `FAILED` (backup failed), `RUNNING` (backup is in progress).
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The start time of remote backup
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time of remote backup
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * The download address
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubBackupId = 'SubBackupId' in params ? params.SubBackupId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * Information of instances in the proxy group
  * @class
  */
@@ -5437,6 +5557,30 @@ class BackupInfo extends  AbstractModel {
          */
         this.SaveMode = null;
 
+        /**
+         * The region where local backup resides
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Detailed information of remote backups
+         * @type {Array.<RemoteBackupInfo> || null}
+         */
+        this.RemoteInfo = null;
+
+        /**
+         * Storage method. Valid values: `0` (regular storage), `1`(archive storage). Default value: `0`.
+         * @type {number || null}
+         */
+        this.CosStorageType = null;
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
     }
 
     /**
@@ -5461,6 +5605,18 @@ class BackupInfo extends  AbstractModel {
         this.Way = 'Way' in params ? params.Way : null;
         this.ManualBackupName = 'ManualBackupName' in params ? params.ManualBackupName : null;
         this.SaveMode = 'SaveMode' in params ? params.SaveMode : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.RemoteInfo) {
+            this.RemoteInfo = new Array();
+            for (let z in params.RemoteInfo) {
+                let obj = new RemoteBackupInfo();
+                obj.deserialize(params.RemoteInfo[z]);
+                this.RemoteInfo.push(obj);
+            }
+        }
+        this.CosStorageType = 'CosStorageType' in params ? params.CosStorageType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -8158,6 +8314,30 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         this.StartBackupPeriodSaveDate = null;
 
         /**
+         * Whether to enable the archive backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+         * @type {string || null}
+         */
+        this.EnableBackupArchive = null;
+
+        /**
+         * The period (in days) of how long a data backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
+         * @type {number || null}
+         */
+        this.BackupArchiveDays = null;
+
+        /**
+         * Whether to enable the archive backup of logs. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+         * @type {string || null}
+         */
+        this.EnableBinlogArchive = null;
+
+        /**
+         * The period (in days) of how long a log backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
+         * @type {number || null}
+         */
+        this.BinlogArchiveDays = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -8188,6 +8368,10 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         this.BackupPeriodSaveInterval = 'BackupPeriodSaveInterval' in params ? params.BackupPeriodSaveInterval : null;
         this.BackupPeriodSaveCount = 'BackupPeriodSaveCount' in params ? params.BackupPeriodSaveCount : null;
         this.StartBackupPeriodSaveDate = 'StartBackupPeriodSaveDate' in params ? params.StartBackupPeriodSaveDate : null;
+        this.EnableBackupArchive = 'EnableBackupArchive' in params ? params.EnableBackupArchive : null;
+        this.BackupArchiveDays = 'BackupArchiveDays' in params ? params.BackupArchiveDays : null;
+        this.EnableBinlogArchive = 'EnableBinlogArchive' in params ? params.EnableBinlogArchive : null;
+        this.BinlogArchiveDays = 'BinlogArchiveDays' in params ? params.BinlogArchiveDays : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9787,6 +9971,20 @@ class DescribeBackupOverviewResponse extends  AbstractModel {
         this.FreeVolume = null;
 
         /**
+         * Total capacity of backups of a user in the current region
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.RemoteBackupVolume = null;
+
+        /**
+         * Archive backup capacity, which includes data backups and log backups.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.BackupArchiveVolume = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -9805,6 +10003,8 @@ class DescribeBackupOverviewResponse extends  AbstractModel {
         this.BackupVolume = 'BackupVolume' in params ? params.BackupVolume : null;
         this.BillingVolume = 'BillingVolume' in params ? params.BillingVolume : null;
         this.FreeVolume = 'FreeVolume' in params ? params.FreeVolume : null;
+        this.RemoteBackupVolume = 'RemoteBackupVolume' in params ? params.RemoteBackupVolume : null;
+        this.BackupArchiveVolume = 'BackupArchiveVolume' in params ? params.BackupArchiveVolume : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12840,6 +13040,18 @@ class DescribeBinlogBackupOverviewResponse extends  AbstractModel {
         this.RemoteBinlogCount = null;
 
         /**
+         * Capacity of archive log backups in bytes
+         * @type {number || null}
+         */
+        this.BinlogArchiveVolume = null;
+
+        /**
+         * Number of archived log backups
+         * @type {number || null}
+         */
+        this.BinlogArchiveCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -12858,6 +13070,8 @@ class DescribeBinlogBackupOverviewResponse extends  AbstractModel {
         this.BinlogBackupCount = 'BinlogBackupCount' in params ? params.BinlogBackupCount : null;
         this.RemoteBinlogVolume = 'RemoteBinlogVolume' in params ? params.RemoteBinlogVolume : null;
         this.RemoteBinlogCount = 'RemoteBinlogCount' in params ? params.RemoteBinlogCount : null;
+        this.BinlogArchiveVolume = 'BinlogArchiveVolume' in params ? params.BinlogArchiveVolume : null;
+        this.BinlogArchiveCount = 'BinlogArchiveCount' in params ? params.BinlogArchiveCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13945,6 +14159,30 @@ class ModifyBackupConfigRequest extends  AbstractModel {
          */
         this.StartBackupPeriodSaveDate = null;
 
+        /**
+         * Whether to enable the archive backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+         * @type {string || null}
+         */
+        this.EnableBackupArchive = null;
+
+        /**
+         * The period (in days) of how long a data backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
+         * @type {number || null}
+         */
+        this.BackupArchiveDays = null;
+
+        /**
+         * The period (in days) of how long a log backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
+         * @type {number || null}
+         */
+        this.BinlogArchiveDays = null;
+
+        /**
+         * Whether to enable the archive backup of the log. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+         * @type {string || null}
+         */
+        this.EnableBinlogArchive = null;
+
     }
 
     /**
@@ -13971,6 +14209,10 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         this.BackupPeriodSaveInterval = 'BackupPeriodSaveInterval' in params ? params.BackupPeriodSaveInterval : null;
         this.BackupPeriodSaveCount = 'BackupPeriodSaveCount' in params ? params.BackupPeriodSaveCount : null;
         this.StartBackupPeriodSaveDate = 'StartBackupPeriodSaveDate' in params ? params.StartBackupPeriodSaveDate : null;
+        this.EnableBackupArchive = 'EnableBackupArchive' in params ? params.EnableBackupArchive : null;
+        this.BackupArchiveDays = 'BackupArchiveDays' in params ? params.BackupArchiveDays : null;
+        this.BinlogArchiveDays = 'BinlogArchiveDays' in params ? params.BinlogArchiveDays : null;
+        this.EnableBinlogArchive = 'EnableBinlogArchive' in params ? params.EnableBinlogArchive : null;
 
     }
 }
@@ -16581,6 +16823,7 @@ module.exports = {
     DescribeRollbackTaskDetailResponse: DescribeRollbackTaskDetailResponse,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
+    RemoteBackupInfo: RemoteBackupInfo,
     RWInstanceInfo: RWInstanceInfo,
     DescribeSlowLogsResponse: DescribeSlowLogsResponse,
     RollbackInstancesInfo: RollbackInstancesInfo,

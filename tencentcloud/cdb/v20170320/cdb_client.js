@@ -105,6 +105,7 @@ const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
 const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResponse;
 const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
+const RemoteBackupInfo = models.RemoteBackupInfo;
 const RWInstanceInfo = models.RWInstanceInfo;
 const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const RollbackInstancesInfo = models.RollbackInstancesInfo;

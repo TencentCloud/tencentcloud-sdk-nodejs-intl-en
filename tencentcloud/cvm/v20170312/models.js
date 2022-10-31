@@ -1380,8 +1380,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Password = null;
 
         /**
-         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
-Note: this field may return null, indicating that no valid value is obtained.
+         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. You cannot specify a key and a password at the same time. Windows instances do not support keys.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.KeyIds = null;
@@ -2798,6 +2798,12 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         this.CamRoleName = null;
 
         /**
+         * Host name of the instance. <br><li>Hyphens (-) cannot be the start or end of a host name or appear consecutively in a host name. <br><li>Windows: 2-15 characters, including [a-z], [A-Z], [0-9] and hyphens (-). Digit-only strings are not allowed. <br><li>Other OS: 2-60 characters, including [a-z], [A-Z], [0-9] and [.-]. Separate characters with dots. 
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
          * Whether the termination protection is enabled. Values: <br><li>`TRUE`: enable instance protection, which means that this instance can not be deleted by an API action.<br><li>`FALSE`: do not enable the instance protection.<br><br>Default Value: `FALSE`.
          * @type {boolean || null}
          */
@@ -2824,6 +2830,7 @@ When the value obtained in `RoleType` is `user` (default) or `system`, `CamRoleT
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+        this.HostName = 'HostName' in params ? params.HostName : null;
         this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
         this.CamRoleType = 'CamRoleType' in params ? params.CamRoleType : null;
 
@@ -3167,9 +3174,7 @@ class SyncImagesRequest extends  AbstractModel {
         this.ImageIds = null;
 
         /**
-         * List of destination regions for synchronization. Limits:<br><li>It cannot be the same as the source region.<br><li>The Region parameter is correct. See [Region](https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1).<br><li>Image synchronization is only available in limited regions.<br>
-
-For a shared image, the destination region must be the source region, which indicates to create a copy of the image as a custom image in the same region.
+         * List of destination regions for synchronization. Limits:<br><li>It must be a valid region.<br><li>For a custom image, the destination region cannot be the source region.<br><li>For a shared image, the destination region must be the source region, which indicates to create a copy of the image as a custom image in the same region.<br><li>Image synchronization is only available in limited regions.<br>See [Region](https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1).
          * @type {Array.<string> || null}
          */
         this.DestinationRegions = null;
@@ -3575,20 +3580,20 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.Placement = null;
 
         /**
-         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are four types of images: <br/><li>Public images</li><li>Custom images</li><li>Shared images</li><li>Marketplace images</li><br/>You can obtain the available image IDs in the following ways: <br/><li>For IDs of `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information; for IDs of `marketplace images`, go to [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
+         * [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images</li><li>Custom images</li><li>Shared images</li><br/>You can obtain the available image IDs in the following ways: <br/><li>For IDs of `public images`, `custom images`, and `shared images`, log in to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the information. </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
  <b>Note: `ImageId` is required when `LaunchTemplate` is not specified. If both the parameters are passed in, `ImageId` prevails.</b>
          * @type {string || null}
          */
         this.ImageId = null;
 
         /**
-         * The instance [billing method](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1).<br><li>POSTPAID_BY_HOUR: hourly, pay-as-you-go<br>Default value: POSTPAID_BY_HOUR.
+         * The instance [billing method](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1).<br><li>POSTPAID_BY_HOUR: Pay-as-you-go on an hourly basis<br>Default value: POSTPAID_BY_HOUR.
          * @type {string || null}
          */
         this.InstanceChargeType = null;
 
         /**
-         * Configuration of prepaid instances. You can use the parameter to specify the attributes of prepaid instances, such as the subscription period and the auto-renewal plan. This parameter is required for prepaid instances.
+         * Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`. 
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
@@ -3606,37 +3611,37 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.SystemDisk = null;
 
         /**
-         * The configuration information of the instance data disk. If this parameter is not specified, no data disk will be purchased by default. When purchasing, you can specify 21 data disks, which can contain at most 1 LOCAL_BASIC data disk or LOCAL_SSD data disk, and at most 20 CLOUD_BASIC data disks, CLOUD_PREMIUM data disks, or CLOUD_SSD data disks.
+         * Data disk configuration of the instance. If the parameter is not specified, no data disk will be purchased by default. If you want to purchase data disks, you can specify 21 data disks, including up to 1 `LOCAL_BASIC` data disk or `LOCAL_SSD` data disk and up to 20 `CLOUD_BASIC` data disks, `CLOUD_PREMIUM` data disks, or `CLOUD_SSD` data disks.
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
 
         /**
-         * VPC configurations. You can use this parameter to specify the VPC ID, subnet ID, etc. If this parameter is not specified, the basic network will be used by default. If a VPC IP is specified in this parameter, the `InstanceCount` parameter can only be 1. 
+         * VPC configurations (VPC ID, subnet ID, etc). If it’s not specified, the classic network will be used by default. If a VPC IP is specified in this parameter, the `InstanceCount` can only be 1.
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
 
         /**
-         * Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
+         * Configuration of public network bandwidth. If it’s not specified, 0 Mbps is used by default.
          * @type {InternetAccessible || null}
          */
         this.InternetAccessible = null;
 
         /**
-         * Number of instances to be purchased. Value range: [1, 100]; default value: 1. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on quota, see [CVM instance purchase limit](https://intl.cloud.tencent.com/document/product/213/2664).
+         * Number of instances to purchase. Value range: 1 (default) to 100. It cannot exceed the remaining CVM quota of the user. For more information on quota, see [Restrictions on CVM Instance Purchase](https://intl.cloud.tencent.com/document/product/213/2664).
          * @type {number || null}
          */
         this.InstanceCount = null;
 
         /**
-         * Instance name to be displayed.<br><li>If this parameter is not specified, "Unnamed" will be displayed by default.</li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`.</li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and name them as `server_`, the instance names will be displayed as `server_1` and `server_2`.</li><li>The instance name contains up to 60 characters (including pattern strings).
+         * Instance name (up to 60 characters)<br><li>If this parameter is not specified, **Unnamed** will be displayed by default. </li><li>If you purchase multiple instances at the same time and specify a pattern string `{R:x}`, numbers `[x, x+n-1]` will be generated, where `n` represents the number of instances purchased. For example, you specify a pattern string, `server_{R:3}`. If you only purchase 1 instance, the instance will be named `server_3`; if you purchase 2, they will be named `server_3` and `server_4`. You can specify multiple pattern strings in the format of `{R:x}`. </li><li>If you purchase multiple instances at the same time and do not specify a pattern string, the instance names will be suffixed by `1, 2...n`, where `n` represents the number of instances purchased. For example, if you purchase 2 instances and the instance name body is `server_`, the instance names will be `server_1` and `server_2`. </li>
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
+         * Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance, or keep the original login settings of the image. By default, a random password will be generated and sent to you via the Message Center.
          * @type {LoginSettings || null}
          */
         this.LoginSettings = null;
@@ -3648,19 +3653,19 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Monitor and Cloud Security. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
+         * Enhanced services. You can use this parameter to specify whether to enable services such as Cloud Security and Cloud Monitor. If this parameter is not specified, Cloud Monitor and Cloud Security will be enabled by default.
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
 
         /**
-         * A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. <br>For more information, see 'How to ensure idempotency'.
+         * A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.<br>For more information, see Ensuring Idempotency.
          * @type {string || null}
          */
         this.ClientToken = null;
 
         /**
-         * Host name of the CVM. <br><li>Periods (.) or hyphens (-) cannot be the start or end of a host name or appear consecutively in a host name.<br><li>For Windows instances, the host name must be 2-15 characters long and can contain uppercase and lowercase letters, numbers, and hyphens (-). It cannot contain periods (.) or contain only numbers. <br><li>For other instances, such as Linux instances, the host name must be 2-30 characters long. It supports multiple periods (.) and allows uppercase and lowercase letters, numbers, and hyphens (-) between any two periods (.).
+         * Host name of the CVM. <br><li>Periods (.) or hyphens (-) cannot be the start or end of a host name or appear consecutively in a host name.<br><li>Windows: 2-15 characters, containing [a-z], [A-Z], [0-9] and hyphens (-). Digit-only strings are not allowed.<br><li>For other instances, such as Linux instances, the host name must be 2-30 characters long. It supports multiple periods (.) and allows uppercase and lowercase letters, numbers, and hyphens (-) between any two periods (.).
          * @type {string || null}
          */
         this.HostName = null;
@@ -4793,7 +4798,7 @@ class DeleteDisasterRecoverGroupsResponse extends  AbstractModel {
 }
 
 /**
- * Details about a CDH instance
+ * CDH instance details
  * @class
  */
 class HostItem extends  AbstractModel {
@@ -4801,7 +4806,7 @@ class HostItem extends  AbstractModel {
         super();
 
         /**
-         * Location of the CDH instance. You can use this parameter to specify the attributes of the instance, such as its availability zone and project.
+         * CDH instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
          * @type {Placement || null}
          */
         this.Placement = null;
@@ -4825,37 +4830,37 @@ class HostItem extends  AbstractModel {
         this.HostName = null;
 
         /**
-         * Billing method of the CDH instance
+         * CDH instance billing mode
          * @type {string || null}
          */
         this.HostChargeType = null;
 
         /**
-         * Auto renewal flag of the CDH instance
+         * CDH instance renewal flag
          * @type {string || null}
          */
         this.RenewFlag = null;
 
         /**
-         * Creation time of the CDH instance
+         * CDH instance creation time
          * @type {string || null}
          */
         this.CreatedTime = null;
 
         /**
-         * Expiration time of the CDH instance
+         * CDH instance expiry time
          * @type {string || null}
          */
         this.ExpiredTime = null;
 
         /**
-         * List of IDs of CVM instances created on the CDH
+         * List of IDs of CVMs created on a CDH instance
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * CDH instance state
+         * CDH instance status
          * @type {string || null}
          */
         this.HostState = null;
@@ -4867,7 +4872,7 @@ class HostItem extends  AbstractModel {
         this.HostIp = null;
 
         /**
-         * Resource information of the CDH instance
+         * CDH instance resource information
          * @type {HostResource || null}
          */
         this.HostResource = null;
@@ -5294,6 +5299,12 @@ Note: this field may return null, indicating that no valid value was found.
          */
         this.LicenseType = null;
 
+        /**
+         * Whether the termination protection is enabled. Values: <br><li>`TRUE`: Enable instance protection, which means that this instance can not be deleted by an API action.<br><li>`FALSE`: Do not enable the instance protection.<br><br>Default value: `FALSE`.
+         * @type {boolean || null}
+         */
+        this.DisableApiTermination = null;
+
     }
 
     /**
@@ -5385,6 +5396,7 @@ Note: this field may return null, indicating that no valid value was found.
             this.GPUInfo = obj;
         }
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
 
     }
 }

@@ -1214,7 +1214,8 @@ If the current storage class is DEEP ARCHIVE, it can be changed to the following
     }
 
     /**
-     * This API is used to delete a player configuration.  
+     * We have <font color='red'>stopped updating</font> this API. Currently, you no longer need a player configuration to use player signatures. For details, see [Player Signature](https://intl.cloud.tencent.com/document/product/266/45554?from_cn_redirect=1).
+This API is used to delete a player configuration.  
 *Note: Preset player configurations cannot be deleted.*
      * @param {DeleteSuperPlayerConfigRequest} req
      * @param {function(string, DeleteSuperPlayerConfigResponse):void} cb
@@ -1391,7 +1392,8 @@ If event notifications are used, the event type is [ReviewAudioVideoComplete](ht
     }
 
     /**
-     * This API is used to create a player configuration. Up to 100 configurations can be created.
+     * We have <font color='red'>stopped updating</font> this API. Currently, you no longer need a player configuration to use player signatures. For details, see [Player Signature](https://intl.cloud.tencent.com/document/product/266/45554?from_cn_redirect=1).
+This API is used to create a player configuration. Up to 100 configurations can be created.
      * @param {CreateSuperPlayerConfigRequest} req
      * @param {function(string, CreateSuperPlayerConfigResponse):void} cb
      * @public
@@ -1597,7 +1599,8 @@ If event notifications are used, the event type is [ReviewAudioVideoComplete](ht
     }
 
     /**
-     * This API is used to modify a player configuration.
+     * We have <font color='red'>stopped updating</font> this API. Currently, you no longer need a player configuration to use player signatures. For details, see [Player Signature](https://intl.cloud.tencent.com/document/product/266/45554?from_cn_redirect=1).
+This API is used to modify a player configuration.
      * @param {ModifySuperPlayerConfigRequest} req
      * @param {function(string, ModifySuperPlayerConfigResponse):void} cb
      * @public
@@ -2026,7 +2029,8 @@ A digital watermark has the following restrictions:
     }
 
     /**
-     * This API is used to query player configurations. It supports pagination.
+     * We have <font color='red'>stopped updating</font> this API. Currently, you no longer need a player configuration to use player signatures. For details, see [Player Signature](https://intl.cloud.tencent.com/document/product/266/45554?from_cn_redirect=1).
+This API is used to query player configurations. It supports pagination.
      * @param {DescribeSuperPlayerConfigsRequest} req
      * @param {function(string, DescribeSuperPlayerConfigsResponse):void} cb
      * @public

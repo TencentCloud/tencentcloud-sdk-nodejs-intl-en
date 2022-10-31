@@ -544,6 +544,15 @@ Default value: 0.
          */
         this.TEHDConfig = null;
 
+        /**
+         * The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
+<li>ts: TS segment</li>
+<li>fmp4: fMP4 segment</li>
+Default: ts
+         * @type {string || null}
+         */
+        this.SegmentType = null;
+
     }
 
     /**
@@ -577,6 +586,7 @@ Default value: 0.
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
         }
+        this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
 
     }
 }
@@ -1006,6 +1016,12 @@ The default is `VOD`.
          */
         this.UpdateTime = null;
 
+        /**
+         * The segment type. This parameter is valid only if `Format` is `HLS`.
+         * @type {string || null}
+         */
+        this.SegmentType = null;
+
     }
 
     /**
@@ -1035,6 +1051,7 @@ The default is `VOD`.
         this.DisableHigherVideoResolution = 'DisableHigherVideoResolution' in params ? params.DisableHigherVideoResolution : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
 
     }
 }
@@ -3833,6 +3850,15 @@ Default value: no.
          */
         this.Comment = null;
 
+        /**
+         * The segment type. This parameter is valid only if `Format` is `HLS`. Valid values:
+<li>ts: TS segment</li>
+<li>fmp4: fMP4 segment</li>
+Default: ts
+         * @type {string || null}
+         */
+        this.SegmentType = null;
+
     }
 
     /**
@@ -3859,6 +3885,7 @@ Default value: no.
         this.DisableHigherVideoBitrate = 'DisableHigherVideoBitrate' in params ? params.DisableHigherVideoBitrate : null;
         this.DisableHigherVideoResolution = 'DisableHigherVideoResolution' in params ? params.DisableHigherVideoResolution : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
 
     }
 }
@@ -4098,6 +4125,14 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
          */
         this.TEHDConfig = null;
 
+        /**
+         * The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
+<li>ts: TS segment</li>
+<li>fmp4: fMP4 segment</li>
+         * @type {string || null}
+         */
+        this.SegmentType = null;
+
     }
 
     /**
@@ -4132,6 +4167,7 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
         }
+        this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
 
     }
 }
@@ -11441,6 +11477,14 @@ Note: the frame rate of all streams must be the same; otherwise, the frame rate 
          */
         this.Comment = null;
 
+        /**
+         * The segment type. This parameter is valid only if `Format` is `HLS`. Valid values:
+<li>ts: TS segment</li>
+<li>fmp4: fMP4 segment</li>
+         * @type {string || null}
+         */
+        this.SegmentType = null;
+
     }
 
     /**
@@ -11466,6 +11510,7 @@ Note: the frame rate of all streams must be the same; otherwise, the frame rate 
             }
         }
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
 
     }
 }
@@ -19264,6 +19309,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.UpdateTime = null;
 
+        /**
+         * The segment type. This parameter is valid only if `Container` is `hls`
+         * @type {string || null}
+         */
+        this.SegmentType = null;
+
     }
 
     /**
@@ -19301,6 +19352,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ContainerType = 'ContainerType' in params ? params.ContainerType : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
 
     }
 }
@@ -21185,11 +21237,12 @@ class StatDataItem extends  AbstractModel {
         this.Time = null;
 
         /**
-         * Data size.
+         * The data size.
 <li>Storage capacity in bytes.</li>
 <li>Transcoding duration in seconds.</li>
 <li>Traffic in bytes.</li>
 <li>Bandwidth in bps.</li>
+<li>Live stream clip duration in seconds.</li>
          * @type {number || null}
          */
         this.Value = null;

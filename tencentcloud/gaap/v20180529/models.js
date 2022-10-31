@@ -4501,6 +4501,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.SessionPersist = null;
 
+        /**
+         * Connection ID of the listener. A null value is returned if the listener is associated with the connection group.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * Connection group ID of the listener. A null value is returned if the listener is associated with a specific connection.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -4537,6 +4551,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UnhealthyThreshold = 'UnhealthyThreshold' in params ? params.UnhealthyThreshold : null;
         this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
         this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -4918,6 +4934,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Http3Supported = null;
 
+        /**
+         * Connection ID of the listener. A null value is returned if the listener is associated with the connection group.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * Connection group ID of the listener. A null value is returned if the listener is associated with a specific connection.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -4949,6 +4979,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.Http3Supported = 'Http3Supported' in params ? params.Http3Supported : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -6942,6 +6974,20 @@ class HTTPListener extends  AbstractModel {
          */
         this.ListenerStatus = null;
 
+        /**
+         * Connection ID of the listener. A null value is returned if the listener is associated with the connection group.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * Connection group ID of the listener. A null value is returned if the listener is associated with a specific connection.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -6957,6 +7003,8 @@ class HTTPListener extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.ListenerStatus = 'ListenerStatus' in params ? params.ListenerStatus : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -11097,6 +11145,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RecvContext = null;
 
+        /**
+         * Connection ID of the listener. A null value is returned if the listener is associated with the connection group.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProxyId = null;
+
+        /**
+         * Connection group ID of the listener. A null value is returned if the listener is associated with a specific connection.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -11137,6 +11199,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ContextType = 'ContextType' in params ? params.ContextType : null;
         this.SendContext = 'SendContext' in params ? params.SendContext : null;
         this.RecvContext = 'RecvContext' in params ? params.RecvContext : null;
+        this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }

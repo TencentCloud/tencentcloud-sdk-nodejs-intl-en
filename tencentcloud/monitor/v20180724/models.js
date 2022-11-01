@@ -15961,6 +15961,12 @@ class GetMonitorDataResponse extends  AbstractModel {
         this.EndTime = null;
 
         /**
+         * Returned message
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -15988,6 +15994,7 @@ class GetMonitorDataResponse extends  AbstractModel {
         }
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -17059,6 +17066,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RecordingRuleLimit = null;
 
+        /**
+         * Migration status. 0: Not migrating; 1: Migrating from source instance; 2: Migrating to target instance.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MigrationType = null;
+
     }
 
     /**
@@ -17110,6 +17124,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.GrafanaInstanceId = 'GrafanaInstanceId' in params ? params.GrafanaInstanceId : null;
         this.AlertRuleLimit = 'AlertRuleLimit' in params ? params.AlertRuleLimit : null;
         this.RecordingRuleLimit = 'RecordingRuleLimit' in params ? params.RecordingRuleLimit : null;
+        this.MigrationType = 'MigrationType' in params ? params.MigrationType : null;
 
     }
 }

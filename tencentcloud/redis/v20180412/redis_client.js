@@ -109,6 +109,7 @@ const KillMasterGroupRequest = models.KillMasterGroupRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const ParamTemplateInfo = models.ParamTemplateInfo;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
+const CloseSSLRequest = models.CloseSSLRequest;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
 const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
 const SwitchProxyRequest = models.SwitchProxyRequest;
@@ -148,6 +149,7 @@ const SwitchProxyResponse = models.SwitchProxyResponse;
 const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
 const TradeDealDetail = models.TradeDealDetail;
+const ResourceTag = models.ResourceTag;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const ReplicaGroup = models.ReplicaGroup;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
@@ -173,7 +175,7 @@ const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
 const InstanceSet = models.InstanceSet;
 const ReleaseWanAddressRequest = models.ReleaseWanAddressRequest;
-const ResourceTag = models.ResourceTag;
+const CloseSSLResponse = models.CloseSSLResponse;
 const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
 const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
 const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
@@ -182,6 +184,7 @@ const DescribeCommonDBInstancesResponse = models.DescribeCommonDBInstancesRespon
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const UpgradeSmallVersionResponse = models.UpgradeSmallVersionResponse;
 const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
+const OpenSSLRequest = models.OpenSSLRequest;
 const BackupDownloadInfo = models.BackupDownloadInfo;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
@@ -209,6 +212,7 @@ const InquiryPriceUpgradeInstanceResponse = models.InquiryPriceUpgradeInstanceRe
 const DeleteInstanceAccountResponse = models.DeleteInstanceAccountResponse;
 const DescribeInstanceMonitorSIPRequest = models.DescribeInstanceMonitorSIPRequest;
 const InstanceClusterShard = models.InstanceClusterShard;
+const OpenSSLResponse = models.OpenSSLResponse;
 const TendisSlowLogDetail = models.TendisSlowLogDetail;
 const ChangeInstanceRoleResponse = models.ChangeInstanceRoleResponse;
 const UpgradeProxyVersionRequest = models.UpgradeProxyVersionRequest;
@@ -554,6 +558,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to enable SSL.
+     * @param {OpenSSLRequest} req
+     * @param {function(string, OpenSSLResponse):void} cb
+     * @public
+     */
+    OpenSSL(req, cb) {
+        let resp = new OpenSSLResponse();
+        this.request("OpenSSL", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the DTS task details of an instance.
      * @param {DescribeInstanceDTSInfoRequest} req
      * @param {function(string, DescribeInstanceDTSInfoResponse):void} cb
@@ -642,14 +657,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the hot key of an instance.
-     * @param {DescribeInstanceMonitorHotKeyRequest} req
-     * @param {function(string, DescribeInstanceMonitorHotKeyResponse):void} cb
+     * This API has been disused. It was used to query the list of Redis instance information.
+     * @param {DescribeCommonDBInstancesRequest} req
+     * @param {function(string, DescribeCommonDBInstancesResponse):void} cb
      * @public
      */
-    DescribeInstanceMonitorHotKey(req, cb) {
-        let resp = new DescribeInstanceMonitorHotKeyResponse();
-        this.request("DescribeInstanceMonitorHotKey", req, resp, cb);
+    DescribeCommonDBInstances(req, cb) {
+        let resp = new DescribeCommonDBInstancesResponse();
+        this.request("DescribeCommonDBInstances", req, resp, cb);
     }
 
     /**
@@ -664,14 +679,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable public network access.
-     * @param {AllocateWanAddressRequest} req
-     * @param {function(string, AllocateWanAddressResponse):void} cb
+     * This API is used to query the download address of a backup RDB (it is in beta test and can be used only after you apply for the eligibility).
+     * @param {DescribeBackupUrlRequest} req
+     * @param {function(string, DescribeBackupUrlResponse):void} cb
      * @public
      */
-    AllocateWanAddress(req, cb) {
-        let resp = new AllocateWanAddressResponse();
-        this.request("AllocateWanAddress", req, resp, cb);
+    DescribeBackupUrl(req, cb) {
+        let resp = new DescribeBackupUrlResponse();
+        this.request("DescribeBackupUrl", req, resp, cb);
     }
 
     /**
@@ -873,14 +888,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API has been disused. It was used to query the list of Redis instance information.
-     * @param {DescribeCommonDBInstancesRequest} req
-     * @param {function(string, DescribeCommonDBInstancesResponse):void} cb
+     * This API is used to enable public network access.
+     * @param {AllocateWanAddressRequest} req
+     * @param {function(string, AllocateWanAddressResponse):void} cb
      * @public
      */
-    DescribeCommonDBInstances(req, cb) {
-        let resp = new DescribeCommonDBInstancesResponse();
-        this.request("DescribeCommonDBInstances", req, resp, cb);
+    AllocateWanAddress(req, cb) {
+        let resp = new AllocateWanAddressResponse();
+        this.request("AllocateWanAddress", req, resp, cb);
     }
 
     /**
@@ -895,14 +910,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to renew an instance.
-     * @param {RenewInstanceRequest} req
-     * @param {function(string, RenewInstanceResponse):void} cb
+     * This API is used to query the hot key of an instance.
+     * @param {DescribeInstanceMonitorHotKeyRequest} req
+     * @param {function(string, DescribeInstanceMonitorHotKeyResponse):void} cb
      * @public
      */
-    RenewInstance(req, cb) {
-        let resp = new RenewInstanceResponse();
-        this.request("RenewInstance", req, resp, cb);
+    DescribeInstanceMonitorHotKey(req, cb) {
+        let resp = new DescribeInstanceMonitorHotKeyResponse();
+        this.request("DescribeInstanceMonitorHotKey", req, resp, cb);
     }
 
     /**
@@ -1027,6 +1042,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to disable SSL.
+     * @param {CloseSSLRequest} req
+     * @param {function(string, CloseSSLResponse):void} cb
+     * @public
+     */
+    CloseSSL(req, cb) {
+        let resp = new CloseSSLResponse();
+        this.request("CloseSSL", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete an instance sub-account.
      * @param {DeleteInstanceAccountRequest} req
      * @param {function(string, DeleteInstanceAccountResponse):void} cb
@@ -1060,14 +1086,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the role of an instance in a replication group.
-     * @param {ChangeInstanceRoleRequest} req
-     * @param {function(string, ChangeInstanceRoleResponse):void} cb
+     * This API is used to renew an instance.
+     * @param {RenewInstanceRequest} req
+     * @param {function(string, RenewInstanceResponse):void} cb
      * @public
      */
-    ChangeInstanceRole(req, cb) {
-        let resp = new ChangeInstanceRoleResponse();
-        this.request("ChangeInstanceRole", req, resp, cb);
+    RenewInstance(req, cb) {
+        let resp = new RenewInstanceResponse();
+        this.request("RenewInstance", req, resp, cb);
     }
 
     /**
@@ -1093,14 +1119,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the download address of a backup RDB (it is in beta test and can be used only after you apply for the eligibility).
-     * @param {DescribeBackupUrlRequest} req
-     * @param {function(string, DescribeBackupUrlResponse):void} cb
+     * This API is used to modify the role of an instance in a replication group.
+     * @param {ChangeInstanceRoleRequest} req
+     * @param {function(string, ChangeInstanceRoleResponse):void} cb
      * @public
      */
-    DescribeBackupUrl(req, cb) {
-        let resp = new DescribeBackupUrlResponse();
-        this.request("DescribeBackupUrl", req, resp, cb);
+    ChangeInstanceRole(req, cb) {
+        let resp = new ChangeInstanceRoleResponse();
+        this.request("ChangeInstanceRole", req, resp, cb);
     }
 
 

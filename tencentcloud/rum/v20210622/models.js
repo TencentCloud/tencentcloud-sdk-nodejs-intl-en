@@ -664,31 +664,31 @@ class DescribeLogListRequest extends  AbstractModel {
         super();
 
         /**
-         * Sorting order. Valid values: desc, asc
+         * Sorting order (required). Valid values: `desc`, `asc`.
          * @type {string || null}
          */
         this.Sort = null;
 
         /**
-         * searchlog  histogram
+         * This parameter is required. Valid values: `searchlog`, `histogram`.
          * @type {string || null}
          */
         this.ActionType = null;
 
         /**
-         * Project ID
+         * Project ID (required)
          * @type {number || null}
          */
         this.ID = null;
 
         /**
-         * Start time
+         * Start time (required)
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Number of raw logs returned in a single query. Maximum value: 100
+         * The number of raw logs returned for a single query. This parameter is required. Maximum value: 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -700,13 +700,13 @@ class DescribeLogListRequest extends  AbstractModel {
         this.Context = null;
 
         /**
-         * Query statement, which can contain up to 4,096 characters.
+         * Query statement, which is required and can contain up to 4,096 characters.
          * @type {string || null}
          */
         this.Query = null;
 
         /**
-         * End time
+         * End time (required)
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2348,6 +2348,12 @@ class DescribeDataPerformancePageRequest extends  AbstractModel {
          */
         this.Env = null;
 
+        /**
+         * Network status
+         * @type {string || null}
+         */
+        this.NetStatus = null;
+
     }
 
     /**
@@ -2379,6 +2385,7 @@ class DescribeDataPerformancePageRequest extends  AbstractModel {
         this.From = 'From' in params ? params.From : null;
         this.CostType = 'CostType' in params ? params.CostType : null;
         this.Env = 'Env' in params ? params.Env : null;
+        this.NetStatus = 'NetStatus' in params ? params.NetStatus : null;
 
     }
 }
@@ -2597,6 +2604,12 @@ class DescribeDataFetchUrlRequest extends  AbstractModel {
          */
         this.Ret = null;
 
+        /**
+         * Network status
+         * @type {string || null}
+         */
+        this.NetStatus = null;
+
     }
 
     /**
@@ -2631,6 +2644,7 @@ class DescribeDataFetchUrlRequest extends  AbstractModel {
         this.Env = 'Env' in params ? params.Env : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Ret = 'Ret' in params ? params.Ret : null;
+        this.NetStatus = 'NetStatus' in params ? params.NetStatus : null;
 
     }
 }

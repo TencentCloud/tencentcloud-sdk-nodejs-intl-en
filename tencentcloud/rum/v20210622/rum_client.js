@@ -201,7 +201,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the DescribeDataFetchProject information.
+     * This API is used to get the `DescribeDataFetchProject` information and has been deprecated. Use `DescribeDataFetchUrl` instead.
      * @param {DescribeDataFetchProjectRequest} req
      * @param {function(string, DescribeDataFetchProjectResponse):void} cb
      * @public

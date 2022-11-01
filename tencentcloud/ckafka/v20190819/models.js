@@ -3854,7 +3854,7 @@ class DescribeTopicRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20
+         * The number of results to be returned, which defaults to 20 if left empty. The maximum value is 50.
          * @type {number || null}
          */
         this.Limit = null;

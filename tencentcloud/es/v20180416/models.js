@@ -192,6 +192,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.FrozenMinAge = null;
 
+        /**
+         * /
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ColdAction = null;
+
     }
 
     /**
@@ -207,6 +214,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ColdMinAge = 'ColdMinAge' in params ? params.ColdMinAge : null;
         this.FrozenEnable = 'FrozenEnable' in params ? params.FrozenEnable : null;
         this.FrozenMinAge = 'FrozenMinAge' in params ? params.FrozenMinAge : null;
+        this.ColdAction = 'ColdAction' in params ? params.ColdAction : null;
 
     }
 }
@@ -285,6 +293,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.MemSize = null;
 
+        /**
+         * /
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiskEnhance = null;
+
     }
 
     /**
@@ -309,6 +324,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DiskEncrypt = 'DiskEncrypt' in params ? params.DiskEncrypt : null;
         this.CpuNum = 'CpuNum' in params ? params.CpuNum : null;
         this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.DiskEnhance = 'DiskEnhance' in params ? params.DiskEnhance : null;
 
     }
 }
@@ -1729,6 +1745,12 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
          */
         this.EnableHybridStorage = null;
 
+        /**
+         * Whether to enable enhanced SSD
+         * @type {number || null}
+         */
+        this.DiskEnhance = null;
+
     }
 
     /**
@@ -1804,6 +1826,7 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
             this.OperationDuration = obj;
         }
         this.EnableHybridStorage = 'EnableHybridStorage' in params ? params.EnableHybridStorage : null;
+        this.DiskEnhance = 'DiskEnhance' in params ? params.DiskEnhance : null;
 
     }
 }
@@ -1893,7 +1916,7 @@ class InstanceInfo extends  AbstractModel {
         this.SubnetUid = null;
 
         /**
-         * Instance status. 0: processing; 1: normal; -1: stopped; -2: terminating; -3: terminated
+         * Instance status. `0`: Processing; `1`: Normal; `-1`: `Stopped`; `-2`: Being terminated; `-3`: Terminated; `2`: Initializing during the cluster creation.
          * @type {number || null}
          */
         this.Status = null;
@@ -2361,6 +2384,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.EnableHybridStorage = null;
 
+        /**
+         * The process progress
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProcessPercent = null;
+
+        /**
+         * The alerting policy of Kibana over the public network. <li>`OPEN`: Enable the policy;</li><li>`CLOSE`: Disable the policy.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KibanaAlteringPublicAccess = null;
+
     }
 
     /**
@@ -2529,6 +2566,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.AutoIndexEnabled = 'AutoIndexEnabled' in params ? params.AutoIndexEnabled : null;
         this.EnableHybridStorage = 'EnableHybridStorage' in params ? params.EnableHybridStorage : null;
+        this.ProcessPercent = 'ProcessPercent' in params ? params.ProcessPercent : null;
+        this.KibanaAlteringPublicAccess = 'KibanaAlteringPublicAccess' in params ? params.KibanaAlteringPublicAccess : null;
 
     }
 }

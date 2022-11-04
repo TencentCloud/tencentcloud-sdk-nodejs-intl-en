@@ -1829,6 +1829,79 @@ class ModifyTargetWeightResponse extends  AbstractModel {
 }
 
 /**
+ * List of AZs
+ * @class
+ */
+class ZoneResource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Primary AZ, such as "ap-guangzhou-1".
+         * @type {string || null}
+         */
+        this.MasterZone = null;
+
+        /**
+         * List of resources
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Resource> || null}
+         */
+        this.ResourceSet = null;
+
+        /**
+         * Secondary AZ, such as "ap-guangzhou-2". 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * IP version. Values: `IPv4`, `IPv6`, and `IPv6_Nat`.
+         * @type {string || null}
+         */
+        this.IPVersion = null;
+
+        /**
+         * Region of the AZ, such as `ap-guangzhou`.
+         * @type {string || null}
+         */
+        this.ZoneRegion = null;
+
+        /**
+         * Whether the AZ is a `LocalZone`. Values: `true`, `false`.
+         * @type {boolean || null}
+         */
+        this.LocalZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MasterZone = 'MasterZone' in params ? params.MasterZone : null;
+
+        if (params.ResourceSet) {
+            this.ResourceSet = new Array();
+            for (let z in params.ResourceSet) {
+                let obj = new Resource();
+                obj.deserialize(params.ResourceSet[z]);
+                this.ResourceSet.push(obj);
+            }
+        }
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.IPVersion = 'IPVersion' in params ? params.IPVersion : null;
+        this.ZoneRegion = 'ZoneRegion' in params ? params.ZoneRegion : null;
+        this.LocalZone = 'LocalZone' in params ? params.LocalZone : null;
+
+    }
+}
+
+/**
  * DescribeTaskStatus request structure.
  * @class
  */
@@ -4821,6 +4894,56 @@ class DescribeClassicalLBByInstanceIdRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeResources response structure.
+ * @class
+ */
+class DescribeResourcesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of resources supported by the AZ
+         * @type {Array.<ZoneResource> || null}
+         */
+        this.ZoneResourceSet = null;
+
+        /**
+         * Number of entries in the AZ resource list.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ZoneResourceSet) {
+            this.ZoneResourceSet = new Array();
+            for (let z in params.ZoneResourceSet) {
+                let obj = new ZoneResource();
+                obj.deserialize(params.ZoneResourceSet[z]);
+                this.ZoneResourceSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ManualRewrite response structure.
  * @class
  */
@@ -5526,6 +5649,62 @@ class DescribeCustomizedConfigAssociateListResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetCustomizedConfigForLoadBalancer request structure.
+ * @class
+ */
+class SetCustomizedConfigForLoadBalancerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Operation type: `ADD`, `DELETE`, `UPDATE`, `BIND`, `UNBIND`
+         * @type {string || null}
+         */
+        this.OperationType = null;
+
+        /**
+         * This field is required except for creating custom configurations, such as "pz-1234abcd".
+         * @type {string || null}
+         */
+        this.UconfigId = null;
+
+        /**
+         * This field is required when creating or modifying custom configurations.
+         * @type {string || null}
+         */
+        this.ConfigContent = null;
+
+        /**
+         * This field is required when creating or renaming custom configurations.
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
+        /**
+         * This field is required when binding/unbinding resources.
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
+        this.UconfigId = 'UconfigId' in params ? params.UconfigId : null;
+        this.ConfigContent = 'ConfigContent' in params ? params.ConfigContent : null;
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
 
     }
 }
@@ -6956,7 +7135,7 @@ class DescribeLoadBalancersRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance ID
+         * CLB instance IDs. There can be up to 20 IDs.
          * @type {Array.<string> || null}
          */
         this.LoadBalancerIds = null;
@@ -7108,6 +7287,41 @@ Basic network does not support queries by VpcId.
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * SetCustomizedConfigForLoadBalancer response structure.
+ * @class
+ */
+class SetCustomizedConfigForLoadBalancerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration ID, such as "pz-1234abcd"
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8961,6 +9175,58 @@ class DescribeBlockIPTaskResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeResources request structure.
+ * @class
+ */
+class DescribeResourcesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of returned AZ resources. Default value: 20. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Starting offset of the returned AZ resource list. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter to query the list of AZ resources as detailed below:
+<li> `zone` - String - Optional - Filter by AZ, such as "ap-guangzhou-1".</li>
+<li> `isp` -- String - Optional - Filter by the ISP. Values: `BGP`, `CMCC`, `CUCC` and `CTCC`.</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeClassicalLBListeners response structure.
  * @class
  */
@@ -9092,6 +9358,41 @@ class DescribeBlockIPTaskRequest extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * Resource details
+ * @class
+ */
+class Resource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specific ISP resource information, Vaules: `CMCC`, `CUCC`, `CTCC`, `BGP`, and `INTERNAL`.
+         * @type {Array.<string> || null}
+         */
+        this.Type = null;
+
+        /**
+         * ISP information, such as `CMCC`, `CUCC`, `CTCC`, `BGP`, and `INTERNAL`.
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
 
     }
 }
@@ -10938,6 +11239,7 @@ module.exports = {
     SetSecurityGroupForLoadbalancersResponse: SetSecurityGroupForLoadbalancersResponse,
     BasicTargetGroupInfo: BasicTargetGroupInfo,
     ModifyTargetWeightResponse: ModifyTargetWeightResponse,
+    ZoneResource: ZoneResource,
     DescribeTaskStatusRequest: DescribeTaskStatusRequest,
     TargetGroupInstance: TargetGroupInstance,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
@@ -10996,6 +11298,7 @@ module.exports = {
     DescribeLoadBalancersDetailRequest: DescribeLoadBalancersDetailRequest,
     TargetGroupBackend: TargetGroupBackend,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
+    DescribeResourcesResponse: DescribeResourcesResponse,
     ManualRewriteResponse: ManualRewriteResponse,
     ModifyBlockIPListRequest: ModifyBlockIPListRequest,
     ModifyBlockIPListResponse: ModifyBlockIPListResponse,
@@ -11009,6 +11312,7 @@ module.exports = {
     DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
     CertificateInput: CertificateInput,
     DescribeCustomizedConfigAssociateListResponse: DescribeCustomizedConfigAssociateListResponse,
+    SetCustomizedConfigForLoadBalancerRequest: SetCustomizedConfigForLoadBalancerRequest,
     CreateListenerResponse: CreateListenerResponse,
     CreateTargetGroupResponse: CreateTargetGroupResponse,
     MigrateClassicalLoadBalancersResponse: MigrateClassicalLoadBalancersResponse,
@@ -11038,6 +11342,7 @@ module.exports = {
     RegisterTargetsResponse: RegisterTargetsResponse,
     DeregisterTargetsFromClassicalLBResponse: DeregisterTargetsFromClassicalLBResponse,
     DescribeLoadBalancersRequest: DescribeLoadBalancersRequest,
+    SetCustomizedConfigForLoadBalancerResponse: SetCustomizedConfigForLoadBalancerResponse,
     DeleteLoadBalancerResponse: DeleteLoadBalancerResponse,
     AutoRewriteResponse: AutoRewriteResponse,
     DeregisterTargetsResponse: DeregisterTargetsResponse,
@@ -11072,10 +11377,12 @@ module.exports = {
     TagInfo: TagInfo,
     SnatIp: SnatIp,
     DescribeBlockIPTaskResponse: DescribeBlockIPTaskResponse,
+    DescribeResourcesRequest: DescribeResourcesRequest,
     DescribeClassicalLBListenersResponse: DescribeClassicalLBListenersResponse,
     ModifyTargetGroupAttributeResponse: ModifyTargetGroupAttributeResponse,
     ModifyLoadBalancerSlaRequest: ModifyLoadBalancerSlaRequest,
     DescribeBlockIPTaskRequest: DescribeBlockIPTaskRequest,
+    Resource: Resource,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
     DescribeRewriteResponse: DescribeRewriteResponse,
     Quota: Quota,

@@ -436,6 +436,12 @@ class UpdatePublishCdnStreamRequest extends  AbstractModel {
          */
         this.SeiParams = null;
 
+        /**
+         * The information of the room to which streams are relayed.
+         * @type {Array.<McuFeedBackRoomParams> || null}
+         */
+        this.FeedBackRoomParams = null;
+
     }
 
     /**
@@ -481,6 +487,15 @@ class UpdatePublishCdnStreamRequest extends  AbstractModel {
             let obj = new McuSeiParams();
             obj.deserialize(params.SeiParams)
             this.SeiParams = obj;
+        }
+
+        if (params.FeedBackRoomParams) {
+            this.FeedBackRoomParams = new Array();
+            for (let z in params.FeedBackRoomParams) {
+                let obj = new McuFeedBackRoomParams();
+                obj.deserialize(params.FeedBackRoomParams[z]);
+                this.FeedBackRoomParams.push(obj);
+            }
         }
 
     }
@@ -605,6 +620,55 @@ This parameter specifies the type of the stream displayed in the big window. If 
                 this.WaterMarkList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Parameters for relaying to a TRTC room.
+ * @class
+ */
+class McuFeedBackRoomParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The room ID.
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * The ID type of the room to which streams are relayed. `0` indicates integer, and `1` indicates string.
+         * @type {number || null}
+         */
+        this.RoomIdType = null;
+
+        /**
+         * The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the relaying robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in this user ID.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * The signature (similar to login password) required for the relaying robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104).
+         * @type {string || null}
+         */
+        this.UserSig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.RoomIdType = 'RoomIdType' in params ? params.RoomIdType : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserSig = 'UserSig' in params ? params.UserSig : null;
 
     }
 }
@@ -1995,6 +2059,12 @@ class StartPublishCdnStreamRequest extends  AbstractModel {
          */
         this.SeiParams = null;
 
+        /**
+         * The information of the room to which streams are relayed.
+         * @type {Array.<McuFeedBackRoomParams> || null}
+         */
+        this.FeedBackRoomParams = null;
+
     }
 
     /**
@@ -2046,6 +2116,15 @@ class StartPublishCdnStreamRequest extends  AbstractModel {
             let obj = new McuSeiParams();
             obj.deserialize(params.SeiParams)
             this.SeiParams = obj;
+        }
+
+        if (params.FeedBackRoomParams) {
+            this.FeedBackRoomParams = new Array();
+            for (let z in params.FeedBackRoomParams) {
+                let obj = new McuFeedBackRoomParams();
+                obj.deserialize(params.FeedBackRoomParams[z]);
+                this.FeedBackRoomParams.push(obj);
+            }
         }
 
     }
@@ -2464,10 +2543,18 @@ class McuAudioParams extends  AbstractModel {
         this.AudioEncode = null;
 
         /**
-         * The users whose audios are mixed. For the `StartPublishCdnStream` API, if you do not pass this parameter or leave it empty, the audios of all anchors will be mixed. For the `UpdatePublishCdnStream` API, if you do not pass this parameter, TRTC will not change the users whose audios are mixed; if you pass in an empty string, the audios of all anchors will be mixed.
+         * The audio mix allowlist. For the `StartPublishCdnStream` API, if you do not pass this parameter or leave it empty, the audios of all anchors will be mixed. For the `UpdatePublishCdnStream` API, if you do not pass this parameter, no changes will be made to the current allowlist; if you pass in an empty string, the audios of all anchors will be mixed.
+In cases where `SubscribeAudioList` and `UnSubscribeAudioList` are used at the same time, you need to specify both parameters. If you pass neither `SubscribeAudioList` nor `UnSubscribeAudioList`, no changes will be made. If a user is included in both parameters, the user’s audio will not be mixed.
          * @type {Array.<McuUserInfoParams> || null}
          */
         this.SubscribeAudioList = null;
+
+        /**
+         * The audio mix blocklist. If you do not pass this parameter or leave it empty, there won’t be a blocklist. For the `UpdatePublishCdnStream` API, if you do not pass this parameter, no changes will be made to the current blocklist; if you pass in an empty string, the blocklist will be reset.
+In cases where `SubscribeAudioList` and `UnSubscribeAudioList` are used at the same time, you need to specify both parameters. If you pass neither `SubscribeAudioList` nor `UnSubscribeAudioList`, no changes will be made. If a user is included in both parameters, the user’s audio will not be mixed.
+         * @type {Array.<McuUserInfoParams> || null}
+         */
+        this.UnSubscribeAudioList = null;
 
     }
 
@@ -2494,6 +2581,15 @@ class McuAudioParams extends  AbstractModel {
             }
         }
 
+        if (params.UnSubscribeAudioList) {
+            this.UnSubscribeAudioList = new Array();
+            for (let z in params.UnSubscribeAudioList) {
+                let obj = new McuUserInfoParams();
+                obj.deserialize(params.UnSubscribeAudioList[z]);
+                this.UnSubscribeAudioList.push(obj);
+            }
+        }
+
     }
 }
 
@@ -2512,7 +2608,7 @@ class McuPublishCdnParam extends  AbstractModel {
         this.PublishCdnUrl = null;
 
         /**
-         * Whether to relay to Tencent Cloud’s CDN. 0 (default): Third-party CDN; 1: Tencent Cloud’s CDN. Note: Relaying to a third-party CDN will incur fees. If you are relaying to Tencent Cloud’s CDN, to avoid incurring fees, be sure to set this parameter to `1`. For details, see the API document.
+         * Whether to relay to Tencent Cloud’s CDN. 0: Third-party CDN; 1 (default): Tencent Cloud’s CDN. Relaying to a third-party CDN will incur fees. To avoid unexpected charges, we recommend you pass in a specific value. For details, see the API document.
          * @type {number || null}
          */
         this.IsTencentCdn = null;
@@ -2882,6 +2978,7 @@ module.exports = {
     MixUserInfo: MixUserInfo,
     UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
     MixLayoutParams: MixLayoutParams,
+    McuFeedBackRoomParams: McuFeedBackRoomParams,
     DismissRoomResponse: DismissRoomResponse,
     MixLayout: MixLayout,
     McuVideoParams: McuVideoParams,

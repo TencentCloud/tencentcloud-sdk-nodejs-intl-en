@@ -48,6 +48,7 @@ const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClas
 const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadbalancersResponse;
 const BasicTargetGroupInfo = models.BasicTargetGroupInfo;
 const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
+const ZoneResource = models.ZoneResource;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const TargetGroupInstance = models.TargetGroupInstance;
 const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
@@ -106,6 +107,7 @@ const MigrateClassicalLoadBalancersRequest = models.MigrateClassicalLoadBalancer
 const DescribeLoadBalancersDetailRequest = models.DescribeLoadBalancersDetailRequest;
 const TargetGroupBackend = models.TargetGroupBackend;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
+const DescribeResourcesResponse = models.DescribeResourcesResponse;
 const ManualRewriteResponse = models.ManualRewriteResponse;
 const ModifyBlockIPListRequest = models.ModifyBlockIPListRequest;
 const ModifyBlockIPListResponse = models.ModifyBlockIPListResponse;
@@ -119,6 +121,7 @@ const ClassicalListener = models.ClassicalListener;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const CertificateInput = models.CertificateInput;
 const DescribeCustomizedConfigAssociateListResponse = models.DescribeCustomizedConfigAssociateListResponse;
+const SetCustomizedConfigForLoadBalancerRequest = models.SetCustomizedConfigForLoadBalancerRequest;
 const CreateListenerResponse = models.CreateListenerResponse;
 const CreateTargetGroupResponse = models.CreateTargetGroupResponse;
 const MigrateClassicalLoadBalancersResponse = models.MigrateClassicalLoadBalancersResponse;
@@ -148,6 +151,7 @@ const ModifyDomainResponse = models.ModifyDomainResponse;
 const RegisterTargetsResponse = models.RegisterTargetsResponse;
 const DeregisterTargetsFromClassicalLBResponse = models.DeregisterTargetsFromClassicalLBResponse;
 const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
+const SetCustomizedConfigForLoadBalancerResponse = models.SetCustomizedConfigForLoadBalancerResponse;
 const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
 const AutoRewriteResponse = models.AutoRewriteResponse;
 const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
@@ -182,10 +186,12 @@ const RuleInput = models.RuleInput;
 const TagInfo = models.TagInfo;
 const SnatIp = models.SnatIp;
 const DescribeBlockIPTaskResponse = models.DescribeBlockIPTaskResponse;
+const DescribeResourcesRequest = models.DescribeResourcesRequest;
 const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
 const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
 const ModifyLoadBalancerSlaRequest = models.ModifyLoadBalancerSlaRequest;
 const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
+const Resource = models.Resource;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
 const DescribeRewriteResponse = models.DescribeRewriteResponse;
 const Quota = models.Quota;
@@ -238,14 +244,15 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to upgrade shared CLB instances to LCU-supported CLB instances.
-     * @param {ModifyLoadBalancerSlaRequest} req
-     * @param {function(string, ModifyLoadBalancerSlaResponse):void} cb
+     * This API is used to modify the domain name-level attributes of a layer-7 listener's forwarding rule, such as modifying the domain name, changing the DefaultServer, enabling/disabling HTTP/2, and modifying certificates.
+This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestId as an input parameter to check whether this task is successful.
+     * @param {ModifyDomainAttributesRequest} req
+     * @param {function(string, ModifyDomainAttributesResponse):void} cb
      * @public
      */
-    ModifyLoadBalancerSla(req, cb) {
-        let resp = new ModifyLoadBalancerSlaResponse();
-        this.request("ModifyLoadBalancerSla", req, resp, cb);
+    ModifyDomainAttributes(req, cb) {
+        let resp = new ModifyDomainAttributesResponse();
+        this.request("ModifyDomainAttributes", req, resp, cb);
     }
 
     /**
@@ -456,6 +463,17 @@ During an unbinding operation, the input parameters need to be all the security 
     }
 
     /**
+     * This API is used to upgrade shared CLB instances to LCU-supported CLB instances.
+     * @param {ModifyLoadBalancerSlaRequest} req
+     * @param {function(string, ModifyLoadBalancerSlaResponse):void} cb
+     * @public
+     */
+    ModifyLoadBalancerSla(req, cb) {
+        let resp = new ModifyLoadBalancerSlaResponse();
+        this.request("ModifyLoadBalancerSla", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the client IP blocklist of a CLB instance. One forwarding rule supports blocking up to 2,000,000 IPs. One blocklist can contain up to 2,000,000 entries.
 (This API is in beta test. To use it, please submit a ticket.)
      * @param {ModifyBlockIPListRequest} req
@@ -513,15 +531,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API is used to modify the domain name-level attributes of a layer-7 listener's forwarding rule, such as modifying the domain name, changing the DefaultServer, enabling/disabling HTTP/2, and modifying certificates.
-This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestId as an input parameter to check whether this task is successful.
-     * @param {ModifyDomainAttributesRequest} req
-     * @param {function(string, ModifyDomainAttributesResponse):void} cb
+     * This API is used to query the list of AZs and resources supported for the user in the current region.
+     * @param {DescribeResourcesRequest} req
+     * @param {function(string, DescribeResourcesResponse):void} cb
      * @public
      */
-    ModifyDomainAttributes(req, cb) {
-        let resp = new ModifyDomainAttributesResponse();
-        this.request("ModifyDomainAttributes", req, resp, cb);
+    DescribeResources(req, cb) {
+        let resp = new DescribeResourcesResponse();
+        this.request("DescribeResources", req, resp, cb);
     }
 
     /**
@@ -731,6 +748,17 @@ This is an async API. After it is returned successfully, you can call the Descri
     DescribeTaskStatus(req, cb) {
         let resp = new DescribeTaskStatusResponse();
         this.request("DescribeTaskStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create or manage a user-defined CLB configuration template.
+     * @param {SetCustomizedConfigForLoadBalancerRequest} req
+     * @param {function(string, SetCustomizedConfigForLoadBalancerResponse):void} cb
+     * @public
+     */
+    SetCustomizedConfigForLoadBalancer(req, cb) {
+        let resp = new SetCustomizedConfigForLoadBalancerResponse();
+        this.request("SetCustomizedConfigForLoadBalancer", req, resp, cb);
     }
 
     /**

@@ -292,6 +292,55 @@ class AccountVpcInfoOutput extends  AbstractModel {
 }
 
 /**
+ * ModifyRecordsStatus response structure.
+ * @class
+ */
+class ModifyRecordsStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The private domain ID
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The DNS record IDs.
+         * @type {Array.<number> || null}
+         */
+        this.RecordIds = null;
+
+        /**
+         * `enabled`: Enabled; `disabled`: Disabled.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.RecordIds = 'RecordIds' in params ? params.RecordIds : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Time statistics
  * @class
  */
@@ -1447,6 +1496,48 @@ class Filter extends  AbstractModel {
 }
 
 /**
+ * ModifyRecordsStatus request structure.
+ * @class
+ */
+class ModifyRecordsStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The private domain ID
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The DNS record IDs.
+         * @type {Array.<number> || null}
+         */
+        this.RecordIds = null;
+
+        /**
+         * `enabled`: Enable; `disabled`: Disable.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.RecordIds = 'RecordIds' in params ? params.RecordIds : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * CreatePrivateDNSAccount request structure.
  * @class
  */
@@ -1505,6 +1596,13 @@ class MetricData extends  AbstractModel {
          */
         this.DataSet = null;
 
+        /**
+         * The total number of requests within the query scope.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.MetricCount = null;
+
     }
 
     /**
@@ -1525,6 +1623,7 @@ class MetricData extends  AbstractModel {
                 this.DataSet.push(obj);
             }
         }
+        this.MetricCount = 'MetricCount' in params ? params.MetricCount : null;
 
     }
 }
@@ -1882,6 +1981,7 @@ module.exports = {
     DescribePrivateDNSAccountListResponse: DescribePrivateDNSAccountListResponse,
     PrivateDNSAccount: PrivateDNSAccount,
     AccountVpcInfoOutput: AccountVpcInfoOutput,
+    ModifyRecordsStatusResponse: ModifyRecordsStatusResponse,
     DatePoint: DatePoint,
     DescribeAccountVpcListResponse: DescribeAccountVpcListResponse,
     AuditLogInfo: AuditLogInfo,
@@ -1908,6 +2008,7 @@ module.exports = {
     SubscribePrivateZoneServiceResponse: SubscribePrivateZoneServiceResponse,
     AccountVpcInfoOut: AccountVpcInfoOut,
     Filter: Filter,
+    ModifyRecordsStatusRequest: ModifyRecordsStatusRequest,
     CreatePrivateDNSAccountRequest: CreatePrivateDNSAccountRequest,
     MetricData: MetricData,
     DescribePrivateZoneServiceRequest: DescribePrivateZoneServiceRequest,

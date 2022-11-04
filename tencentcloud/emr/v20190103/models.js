@@ -4855,7 +4855,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CurrentTime = null;
 
         /**
-         * Whether the hardware node is used in a federation. Valid values: `0` (no), `1` (yes).
+         * Whether it is used in a federation. Valid values: `0` (no), `1` (yes).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -5438,6 +5438,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.IsMultiZoneCluster = null;
 
+        /**
+         * Whether it is a manually deployed cluster
+Note: This field may return null, indicating that no valid value can be obtained. 
+         * @type {boolean || null}
+         */
+        this.IsHandsCluster = null;
+
     }
 
     /**
@@ -5482,6 +5489,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
         this.ClusterClass = 'ClusterClass' in params ? params.ClusterClass : null;
         this.IsMultiZoneCluster = 'IsMultiZoneCluster' in params ? params.IsMultiZoneCluster : null;
+        this.IsHandsCluster = 'IsHandsCluster' in params ? params.IsHandsCluster : null;
 
     }
 }
@@ -5924,6 +5932,12 @@ When `HardwareResourceType` is `pod`, this parameter does not take effect.
          */
         this.ScaleOutServiceConfAssign = null;
 
+        /**
+         * Whether to enable auto-renewal. Valid values: `0` (no), `1` (yes).
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
+
     }
 
     /**
@@ -5984,6 +5998,7 @@ When `HardwareResourceType` is `pod`, this parameter does not take effect.
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.ScaleOutServiceConfAssign = 'ScaleOutServiceConfAssign' in params ? params.ScaleOutServiceConfAssign : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
 
     }
 }

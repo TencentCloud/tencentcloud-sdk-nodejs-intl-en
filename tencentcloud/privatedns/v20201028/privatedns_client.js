@@ -22,6 +22,7 @@ const DescribeAuditLogResponse = models.DescribeAuditLogResponse;
 const DescribePrivateDNSAccountListResponse = models.DescribePrivateDNSAccountListResponse;
 const PrivateDNSAccount = models.PrivateDNSAccount;
 const AccountVpcInfoOutput = models.AccountVpcInfoOutput;
+const ModifyRecordsStatusResponse = models.ModifyRecordsStatusResponse;
 const DatePoint = models.DatePoint;
 const DescribeAccountVpcListResponse = models.DescribeAccountVpcListResponse;
 const AuditLogInfo = models.AuditLogInfo;
@@ -48,6 +49,7 @@ const AuditLog = models.AuditLog;
 const SubscribePrivateZoneServiceResponse = models.SubscribePrivateZoneServiceResponse;
 const AccountVpcInfoOut = models.AccountVpcInfoOut;
 const Filter = models.Filter;
+const ModifyRecordsStatusRequest = models.ModifyRecordsStatusRequest;
 const CreatePrivateDNSAccountRequest = models.CreatePrivateDNSAccountRequest;
 const MetricData = models.MetricData;
 const DescribePrivateZoneServiceRequest = models.DescribePrivateZoneServiceRequest;
@@ -144,6 +146,17 @@ class PrivatednsClient extends AbstractClient {
     CreatePrivateZoneRecord(req, cb) {
         let resp = new CreatePrivateZoneRecordResponse();
         this.request("CreatePrivateZoneRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the DNS record status.
+     * @param {ModifyRecordsStatusRequest} req
+     * @param {function(string, ModifyRecordsStatusResponse):void} cb
+     * @public
+     */
+    ModifyRecordsStatus(req, cb) {
+        let resp = new ModifyRecordsStatusResponse();
+        this.request("ModifyRecordsStatus", req, resp, cb);
     }
 
     /**

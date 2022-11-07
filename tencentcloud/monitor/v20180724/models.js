@@ -62,7 +62,7 @@ Default value: 2 (enabled).
 }
 
 /**
- * 
+ * The configuration of alarm level threshold
  * @class
  */
 class AlarmHierarchicalValue extends  AbstractModel {
@@ -70,19 +70,22 @@ class AlarmHierarchicalValue extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Threshold for the `Remind` level
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remind = null;
 
         /**
-         * 
+         * Threshold for the `Warn` level
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Warn = null;
 
         /**
-         * 
+         * Threshold for the `Serious` level
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Serious = null;
@@ -1925,6 +1928,18 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
          */
         this.LogAlarmReqInfo = null;
 
+        /**
+         * Notification rules for different alarm levels
+         * @type {Array.<AlarmHierarchicalNotice> || null}
+         */
+        this.HierarchicalNotices = null;
+
+        /**
+         * A dedicated field for migration policies. 0: Implement authentication logic; 1: Skip authentication logic.
+         * @type {number || null}
+         */
+        this.MigrateFlag = null;
+
     }
 
     /**
@@ -1986,6 +2001,16 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
             obj.deserialize(params.LogAlarmReqInfo)
             this.LogAlarmReqInfo = obj;
         }
+
+        if (params.HierarchicalNotices) {
+            this.HierarchicalNotices = new Array();
+            for (let z in params.HierarchicalNotices) {
+                let obj = new AlarmHierarchicalNotice();
+                obj.deserialize(params.HierarchicalNotices[z]);
+                this.HierarchicalNotices.push(obj);
+            }
+        }
+        this.MigrateFlag = 'MigrateFlag' in params ? params.MigrateFlag : null;
 
     }
 }
@@ -6665,7 +6690,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ValueMin = null;
 
         /**
-         * 
+         * The configuration of alarm level threshold
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AlarmHierarchicalValue || null}
          */
         this.HierarchicalValue = null;
@@ -8475,18 +8501,26 @@ class ResumeGrafanaInstanceResponse extends  AbstractModel {
 }
 
 /**
- * UpdateAlertRuleState response structure.
+ * Notification template ID and the list of alarm notification levels. The values `Remind` and `Serious` indicate that the notification template only sends alarms at the `Remind` and `Serious` levels.
  * @class
  */
-class UpdateAlertRuleStateResponse extends  AbstractModel {
+class AlarmHierarchicalNotice extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Notification template ID
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.NoticeId = null;
+
+        /**
+         * The list of alarm notification levels. The values `Remind` and `Serious` indicate that the notification template only sends alarms at the `Remind` and `Serious` levels.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Classification = null;
 
     }
 
@@ -8497,7 +8531,8 @@ class UpdateAlertRuleStateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.NoticeId = 'NoticeId' in params ? params.NoticeId : null;
+        this.Classification = 'Classification' in params ? params.Classification : null;
 
     }
 }
@@ -8669,6 +8704,34 @@ class CreateGrafanaInstanceRequest extends  AbstractModel {
                 this.TagSpecification.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * UpdateAlertRuleState response structure.
+ * @class
+ */
+class UpdateAlertRuleStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17845,10 +17908,11 @@ module.exports = {
     CreateGrafanaIntegrationResponse: CreateGrafanaIntegrationResponse,
     BindPrometheusManagedGrafanaRequest: BindPrometheusManagedGrafanaRequest,
     ResumeGrafanaInstanceResponse: ResumeGrafanaInstanceResponse,
-    UpdateAlertRuleStateResponse: UpdateAlertRuleStateResponse,
+    AlarmHierarchicalNotice: AlarmHierarchicalNotice,
     Instance: Instance,
     DescribeProductEventListResponse: DescribeProductEventListResponse,
     CreateGrafanaInstanceRequest: CreateGrafanaInstanceRequest,
+    UpdateAlertRuleStateResponse: UpdateAlertRuleStateResponse,
     BindingPolicyObjectDimension: BindingPolicyObjectDimension,
     UnbindPrometheusManagedGrafanaResponse: UnbindPrometheusManagedGrafanaResponse,
     DescribeBasicAlarmListAlarms: DescribeBasicAlarmListAlarms,

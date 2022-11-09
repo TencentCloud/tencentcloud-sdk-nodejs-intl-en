@@ -695,6 +695,14 @@ Note: when a download URL of other media files is used as the material source an
         this.Duration = null;
 
         /**
+         * The target audio duration, in seconds.
+<li>If `TargetDuration` is empty or `0`, the target duration is the same as `Duration`.</li>
+<li>If `TargetDuration` is a value greater than 0, the playback speed will be changed to make the final audio duration the same as the value of `TargetDuration`.</li>
+         * @type {number || null}
+         */
+        this.TargetDuration = null;
+
+        /**
          * Operation on audio segment, such as volume adjustment.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AudioTransform> || null}
@@ -713,6 +721,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SourceMedia = 'SourceMedia' in params ? params.SourceMedia : null;
         this.SourceMediaStartTime = 'SourceMediaStartTime' in params ? params.SourceMediaStartTime : null;
         this.Duration = 'Duration' in params ? params.Duration : null;
+        this.TargetDuration = 'TargetDuration' in params ? params.TargetDuration : null;
 
         if (params.AudioOperations) {
             this.AudioOperations = new Array();
@@ -13717,10 +13726,11 @@ class MediaDeleteItem extends  AbstractModel {
         super();
 
         /**
-         * Type of files to delete. If this parameter is left empty, it will be invalid. Valid values:
-<li>`OriginalFiles`: original files. You cannot initiate transcoding, publishing on WeChat, or other video processing operations after deleting the original files.</li>
-<li>`TranscodeFiles`: transcoded files</li>
-<li>`WechatPublishFiles`: files for publishing on WeChat</li>
+         * The type of files to delete. If this parameter is left empty, it will be invalid. Valid values:
+<li>`OriginalFiles`: The original file. After deleting an original file, you can no longer perform operations such as transcoding or WeChat publishing on the file ID.</li>
+<li>`TranscodeFiles`: Transcoding outputs</li>
+<li>`AdaptiveDynamicStreamingFiles`: Adaptive bitrate outputs</li>
+<li>`WechatPublishFiles`: The file for WeChat publishing</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -29058,6 +29068,14 @@ Note: when a download URL of other media files is used as the material source an
         this.Duration = null;
 
         /**
+         * The target video duration, in seconds.
+<li>If `TargetDuration` is empty or `0`, the target duration is the same as `Duration`.</li>
+<li>If `TargetDuration` is a value greater than 0, the playback speed will be changed to make the final video duration the same as the value of `TargetDuration`.</li>
+         * @type {number || null}
+         */
+        this.TargetDuration = null;
+
+        /**
          * Video origin position. Valid values:
 <li> Center: the origin of coordinates is the center position, such as the center of canvas.</li>
 Default value: Center.
@@ -29106,18 +29124,18 @@ Default value: 0 px.
         this.Height = null;
 
         /**
-         * Operation on video image such as image rotation.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ImageTransform> || null}
-         */
-        this.ImageOperations = null;
-
-        /**
          * Operation on audio such as muting.
 Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AudioTransform> || null}
          */
         this.AudioOperations = null;
+
+        /**
+         * Operation on video image such as image rotation.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ImageTransform> || null}
+         */
+        this.ImageOperations = null;
 
     }
 
@@ -29131,20 +29149,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SourceMedia = 'SourceMedia' in params ? params.SourceMedia : null;
         this.SourceMediaStartTime = 'SourceMediaStartTime' in params ? params.SourceMediaStartTime : null;
         this.Duration = 'Duration' in params ? params.Duration : null;
+        this.TargetDuration = 'TargetDuration' in params ? params.TargetDuration : null;
         this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
         this.XPos = 'XPos' in params ? params.XPos : null;
         this.YPos = 'YPos' in params ? params.YPos : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
-
-        if (params.ImageOperations) {
-            this.ImageOperations = new Array();
-            for (let z in params.ImageOperations) {
-                let obj = new ImageTransform();
-                obj.deserialize(params.ImageOperations[z]);
-                this.ImageOperations.push(obj);
-            }
-        }
 
         if (params.AudioOperations) {
             this.AudioOperations = new Array();
@@ -29152,6 +29162,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 let obj = new AudioTransform();
                 obj.deserialize(params.AudioOperations[z]);
                 this.AudioOperations.push(obj);
+            }
+        }
+
+        if (params.ImageOperations) {
+            this.ImageOperations = new Array();
+            for (let z in params.ImageOperations) {
+                let obj = new ImageTransform();
+                obj.deserialize(params.ImageOperations[z]);
+                this.ImageOperations.push(obj);
             }
         }
 
@@ -30140,13 +30159,6 @@ class SearchMediaRequest extends  AbstractModel {
         this.StreamIds = null;
 
         /**
-         * Unique ID of LVB recording file. Any element in the set can be matched.
-<li>Array length limit: 10.</li>
-         * @type {Array.<string> || null}
-         */
-        this.Vids = null;
-
-        /**
          * Matches files created within the time period.
 <li>Includes specified start and end points in time.</li>
          * @type {TimeRange || null}
@@ -30253,13 +30265,6 @@ The live stream code.
         this.StreamId = null;
 
         /**
-         * (This is not recommended. `Vids` should be used instead)
-Unique ID of LVB recording file.
-         * @type {string || null}
-         */
-        this.Vid = null;
-
-        /**
          * (This is not recommended. `CreateTime` should be used instead)
 Start time in the creation time range.
 <li>After or at the start time.</li>
@@ -30278,6 +30283,18 @@ End time in the creation time range.
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * This parameter is invalid now.
+         * @type {Array.<string> || null}
+         */
+        this.Vids = null;
+
+        /**
+         * This parameter is invalid now.
+         * @type {string || null}
+         */
+        this.Vid = null;
 
     }
 
@@ -30298,7 +30315,6 @@ End time in the creation time range.
         this.Categories = 'Categories' in params ? params.Categories : null;
         this.SourceTypes = 'SourceTypes' in params ? params.SourceTypes : null;
         this.StreamIds = 'StreamIds' in params ? params.StreamIds : null;
-        this.Vids = 'Vids' in params ? params.Vids : null;
 
         if (params.CreateTime) {
             let obj = new TimeRange();
@@ -30327,9 +30343,10 @@ End time in the creation time range.
         this.Text = 'Text' in params ? params.Text : null;
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
         this.StreamId = 'StreamId' in params ? params.StreamId : null;
-        this.Vid = 'Vid' in params ? params.Vid : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Vids = 'Vids' in params ? params.Vids : null;
+        this.Vid = 'Vid' in params ? params.Vid : null;
 
     }
 }

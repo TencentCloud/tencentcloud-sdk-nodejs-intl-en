@@ -454,6 +454,12 @@ class QueryFilter extends  AbstractModel {
          */
         this.Name = null;
 
+        /**
+         * Operator
+         * @type {string || null}
+         */
+        this.Operator = null;
+
     }
 
     /**
@@ -467,6 +473,7 @@ class QueryFilter extends  AbstractModel {
         this.Values = 'Values' in params ? params.Values : null;
         this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
 
     }
 }
@@ -1942,6 +1949,34 @@ class DescribeClusterDetailRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DeleteBackup response structure.
+ * @class
+ */
+class DeleteBackupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3819,6 +3854,41 @@ class DescribeBackupDownloadUrlRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
+
+    }
+}
+
+/**
+ * OfflineInstance request structure.
+ * @class
+ */
+class OfflineInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Instance ID array
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
 
     }
 }
@@ -6561,10 +6631,10 @@ class RollbackTimeRange extends  AbstractModel {
 }
 
 /**
- * OfflineInstance request structure.
+ * DeleteBackup request structure.
  * @class
  */
-class OfflineInstanceRequest extends  AbstractModel {
+class DeleteBackupRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -6575,10 +6645,10 @@ class OfflineInstanceRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * Instance ID array
-         * @type {Array.<string> || null}
+         * Backup file ID
+         * @type {Array.<number> || null}
          */
-        this.InstanceIdList = null;
+        this.SnapshotIdList = null;
 
     }
 
@@ -6590,7 +6660,7 @@ class OfflineInstanceRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+        this.SnapshotIdList = 'SnapshotIdList' in params ? params.SnapshotIdList : null;
 
     }
 }
@@ -7276,6 +7346,7 @@ module.exports = {
     SwitchClusterZoneRequest: SwitchClusterZoneRequest,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
+    DeleteBackupResponse: DeleteBackupResponse,
     Tag: Tag,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     RemoveClusterSlaveZoneResponse: RemoveClusterSlaveZoneResponse,
@@ -7302,6 +7373,7 @@ module.exports = {
     ModifyClusterParamResponse: ModifyClusterParamResponse,
     SecurityGroup: SecurityGroup,
     DescribeBackupDownloadUrlRequest: DescribeBackupDownloadUrlRequest,
+    OfflineInstanceRequest: OfflineInstanceRequest,
     NetAddr: NetAddr,
     DescribeResourcesByDealNameRequest: DescribeResourcesByDealNameRequest,
     CreateBackupResponse: CreateBackupResponse,
@@ -7344,7 +7416,7 @@ module.exports = {
     ModifyClusterParamRequest: ModifyClusterParamRequest,
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackTimeRange: RollbackTimeRange,
-    OfflineInstanceRequest: OfflineInstanceRequest,
+    DeleteBackupRequest: DeleteBackupRequest,
     TradePrice: TradePrice,
     DescribeClusterParamsRequest: DescribeClusterParamsRequest,
     DescribeInstanceSpecsResponse: DescribeInstanceSpecsResponse,

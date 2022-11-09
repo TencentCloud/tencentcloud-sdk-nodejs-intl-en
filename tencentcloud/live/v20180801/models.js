@@ -5131,6 +5131,34 @@ class DescribeTopClientIpSumInfoListResponse extends  AbstractModel {
 }
 
 /**
+ * DropLiveStream response structure.
+ * @class
+ */
+class DropLiveStreamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLiveStreamState response structure.
  * @class
  */
@@ -5446,6 +5474,48 @@ class DescribeLiveWatermarkRulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DropLiveStream request structure.
+ * @class
+ */
+class DropLiveStreamRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * Your push domain.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
 
     }
 }
@@ -6141,7 +6211,7 @@ topspeed_H265: top speed codec - H265.
         this.Bitrate = null;
 
         /**
-         * Type. Valid values: Transcode, MixStream, WaterMark.
+         * The task type. Valid values: Transcode, MixStream, WaterMark, Webrtc.
          * @type {string || null}
          */
         this.Type = null;
@@ -6157,6 +6227,14 @@ topspeed_H265: top speed codec - H265.
          * @type {string || null}
          */
         this.Resolution = null;
+
+        /**
+         * The region. Valid values:
+`Mainland`: Inside the Chinese mainland.
+`Overseas`: Outside the Chinese mainland.
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
 
     }
 
@@ -6176,6 +6254,7 @@ topspeed_H265: top speed codec - H265.
         this.Type = 'Type' in params ? params.Type : null;
         this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
         this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
 
     }
 }
@@ -13574,6 +13653,7 @@ module.exports = {
     ModifyLivePlayAuthKeyResponse: ModifyLivePlayAuthKeyResponse,
     CreateLiveCallbackTemplateRequest: CreateLiveCallbackTemplateRequest,
     DescribeTopClientIpSumInfoListResponse: DescribeTopClientIpSumInfoListResponse,
+    DropLiveStreamResponse: DropLiveStreamResponse,
     DescribeLiveStreamStateResponse: DescribeLiveStreamStateResponse,
     StopLiveRecordRequest: StopLiveRecordRequest,
     DeleteLiveWatermarkRuleRequest: DeleteLiveWatermarkRuleRequest,
@@ -13582,6 +13662,7 @@ module.exports = {
     DescribeLiveWatermarksRequest: DescribeLiveWatermarksRequest,
     CreateLiveTranscodeRuleRequest: CreateLiveTranscodeRuleRequest,
     DescribeLiveWatermarkRulesRequest: DescribeLiveWatermarkRulesRequest,
+    DropLiveStreamRequest: DropLiveStreamRequest,
     PullPushWatermarkInfo: PullPushWatermarkInfo,
     DescribeProvinceIspPlayInfoListResponse: DescribeProvinceIspPlayInfoListResponse,
     CreateCommonMixStreamRequest: CreateCommonMixStreamRequest,

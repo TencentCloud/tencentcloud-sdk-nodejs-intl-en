@@ -60,6 +60,7 @@ const ExportInstanceSlowQueriesResponse = models.ExportInstanceSlowQueriesRespon
 const SwitchClusterZoneRequest = models.SwitchClusterZoneRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
+const DeleteBackupResponse = models.DeleteBackupResponse;
 const Tag = models.Tag;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const RemoveClusterSlaveZoneResponse = models.RemoveClusterSlaveZoneResponse;
@@ -86,6 +87,7 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
 const SecurityGroup = models.SecurityGroup;
 const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest;
+const OfflineInstanceRequest = models.OfflineInstanceRequest;
 const NetAddr = models.NetAddr;
 const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
 const CreateBackupResponse = models.CreateBackupResponse;
@@ -128,7 +130,7 @@ const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
 const ModifyClusterParamRequest = models.ModifyClusterParamRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackTimeRange = models.RollbackTimeRange;
-const OfflineInstanceRequest = models.OfflineInstanceRequest;
+const DeleteBackupRequest = models.DeleteBackupRequest;
 const TradePrice = models.TradePrice;
 const DescribeClusterParamsRequest = models.DescribeClusterParamsRequest;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
@@ -220,14 +222,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to set auto-renewal for an instance.
-     * @param {SetRenewFlagRequest} req
-     * @param {function(string, SetRenewFlagResponse):void} cb
+     * This API is used to delete the manual backup for a cluster. It cannot be used to delete the automatic backup.
+     * @param {DeleteBackupRequest} req
+     * @param {function(string, DeleteBackupResponse):void} cb
      * @public
      */
-    SetRenewFlag(req, cb) {
-        let resp = new SetRenewFlagResponse();
-        this.request("SetRenewFlag", req, resp, cb);
+    DeleteBackup(req, cb) {
+        let resp = new DeleteBackupResponse();
+        this.request("DeleteBackup", req, resp, cb);
     }
 
     /**
@@ -261,6 +263,17 @@ class CynosdbClient extends AbstractClient {
     OfflineCluster(req, cb) {
         let resp = new OfflineClusterResponse();
         this.request("OfflineCluster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set auto-renewal for an instance.
+     * @param {SetRenewFlagRequest} req
+     * @param {function(string, SetRenewFlagResponse):void} cb
+     * @public
+     */
+    SetRenewFlag(req, cb) {
+        let resp = new SetRenewFlagResponse();
+        this.request("SetRenewFlag", req, resp, cb);
     }
 
     /**

@@ -115,6 +115,7 @@ const DescribeLiveCallbackTemplatesResponse = models.DescribeLiveCallbackTemplat
 const ModifyLivePlayAuthKeyResponse = models.ModifyLivePlayAuthKeyResponse;
 const CreateLiveCallbackTemplateRequest = models.CreateLiveCallbackTemplateRequest;
 const DescribeTopClientIpSumInfoListResponse = models.DescribeTopClientIpSumInfoListResponse;
+const DropLiveStreamResponse = models.DropLiveStreamResponse;
 const DescribeLiveStreamStateResponse = models.DescribeLiveStreamStateResponse;
 const StopLiveRecordRequest = models.StopLiveRecordRequest;
 const DeleteLiveWatermarkRuleRequest = models.DeleteLiveWatermarkRuleRequest;
@@ -123,6 +124,7 @@ const DeleteRecordTaskResponse = models.DeleteRecordTaskResponse;
 const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
+const DropLiveStreamRequest = models.DropLiveStreamRequest;
 const PullPushWatermarkInfo = models.PullPushWatermarkInfo;
 const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
 const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
@@ -282,6 +284,18 @@ class LiveClient extends AbstractClient {
         super("live.tencentcloudapi.com", "2018-08-01", credential, region, profile);
     }
     
+    /**
+     * This API is used to pause a live stream. The stream can be resumed if it is paused.
+Note: If you call this API to pause an inactive stream, the request will be considered successful.
+     * @param {DropLiveStreamRequest} req
+     * @param {function(string, DropLiveStreamResponse):void} cb
+     * @public
+     */
+    DropLiveStream(req, cb) {
+        let resp = new DropLiveStreamResponse();
+        this.request("DropLiveStream", req, resp, cb);
+    }
+
     /**
      * This API is used to query the watermark list.
      * @param {DescribeLiveWatermarksRequest} req

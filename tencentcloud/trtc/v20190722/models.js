@@ -81,6 +81,55 @@ class CloudStorage extends  AbstractModel {
 }
 
 /**
+ * SetUserBlocked request structure.
+ * @class
+ */
+class SetUserBlockedRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The application ID.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The room ID (number).
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * The user ID.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+         * @type {number || null}
+         */
+        this.IsMute = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.IsMute = 'IsMute' in params ? params.IsMute : null;
+
+    }
+}
+
+/**
  * The information of the recording files, which is returned by the `DescribeCloudRecording` API.
  * @class
  */
@@ -250,7 +299,7 @@ class McuLayoutParams extends  AbstractModel {
         this.MixLayoutMode = null;
 
         /**
-         * Whether to display users who publish only audio. 0: Yes; 1: No. This parameter is valid only if dynamic layouts are used. If you do not pass this parameter, 0 will be used.
+         * Whether to display users who publish only audio. 0: No; 1: Yes. This parameter is valid only if a dynamic layout is used. If you do not pass this parameter, 0 will be used.
          * @type {number || null}
          */
         this.PureAudioHoldPlaceMode = null;
@@ -1051,6 +1100,34 @@ class MaxVideoUser extends  AbstractModel {
 }
 
 /**
+ * SetUserBlocked response structure.
+ * @class
+ */
+class SetUserBlockedResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RemoveUserByStrRoomId response structure.
  * @class
  */
@@ -1788,6 +1865,34 @@ class RemoveUserByStrRoomIdRequest extends  AbstractModel {
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.RoomId = 'RoomId' in params ? params.RoomId : null;
         this.UserIds = 'UserIds' in params ? params.UserIds : null;
+
+    }
+}
+
+/**
+ * SetUserBlockedByStrRoomId response structure.
+ * @class
+ */
+class SetUserBlockedByStrRoomIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2629,6 +2734,55 @@ class McuPublishCdnParam extends  AbstractModel {
 }
 
 /**
+ * SetUserBlockedByStrRoomId request structure.
+ * @class
+ */
+class SetUserBlockedByStrRoomIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The application ID.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The room ID (string).
+         * @type {string || null}
+         */
+        this.StrRoomId = null;
+
+        /**
+         * The user ID.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+         * @type {number || null}
+         */
+        this.IsMute = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StrRoomId = 'StrRoomId' in params ? params.StrRoomId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.IsMute = 'IsMute' in params ? params.IsMute : null;
+
+    }
+}
+
+/**
  * The audio transcoding parameters for recording.
  * @class
  */
@@ -2970,6 +3124,7 @@ class ModifyCloudRecordingRequest extends  AbstractModel {
 
 module.exports = {
     CloudStorage: CloudStorage,
+    SetUserBlockedRequest: SetUserBlockedRequest,
     StorageFile: StorageFile,
     WaterMark: WaterMark,
     DescribeCloudRecordingResponse: DescribeCloudRecordingResponse,
@@ -2986,6 +3141,7 @@ module.exports = {
     RemoveUserRequest: RemoveUserRequest,
     StorageParams: StorageParams,
     MaxVideoUser: MaxVideoUser,
+    SetUserBlockedResponse: SetUserBlockedResponse,
     RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
     McuLayoutVolume: McuLayoutVolume,
     DescribeCloudRecordingRequest: DescribeCloudRecordingRequest,
@@ -3001,6 +3157,7 @@ module.exports = {
     MixTranscodeParams: MixTranscodeParams,
     StopPublishCdnStreamResponse: StopPublishCdnStreamResponse,
     RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
+    SetUserBlockedByStrRoomIdResponse: SetUserBlockedByStrRoomIdResponse,
     StopPublishCdnStreamRequest: StopPublishCdnStreamRequest,
     SubscribeStreamUserIds: SubscribeStreamUserIds,
     AgentParams: AgentParams,
@@ -3017,6 +3174,7 @@ module.exports = {
     McuSeiParams: McuSeiParams,
     McuAudioParams: McuAudioParams,
     McuPublishCdnParam: McuPublishCdnParam,
+    SetUserBlockedByStrRoomIdRequest: SetUserBlockedByStrRoomIdRequest,
     AudioParams: AudioParams,
     McuWaterMarkImage: McuWaterMarkImage,
     StartPublishCdnStreamResponse: StartPublishCdnStreamResponse,

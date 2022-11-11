@@ -16,26 +16,30 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ModifyDomainStatusResponse = models.ModifyDomainStatusResponse;
 const CreateRecordRequest = models.CreateRecordRequest;
 const DeleteDomainRequest = models.DeleteDomainRequest;
-const ModifyDomainRemarkResponse = models.ModifyDomainRemarkResponse;
-const DescribeRecordResponse = models.DescribeRecordResponse;
+const RecordListItem = models.RecordListItem;
+const DescribeRecordListResponse = models.DescribeRecordListResponse;
 const CreateDomainRequest = models.CreateDomainRequest;
-const ModifyRecordResponse = models.ModifyRecordResponse;
-const CreateRecordResponse = models.CreateRecordResponse;
-const DeleteRecordResponse = models.DeleteRecordResponse;
 const DomainCreateInfo = models.DomainCreateInfo;
-const RecordInfo = models.RecordInfo;
 const ModifyDomainStatusRequest = models.ModifyDomainStatusRequest;
-const DeleteDomainResponse = models.DeleteDomainResponse;
-const CreateDomainResponse = models.CreateDomainResponse;
-const DescribeDomainRequest = models.DescribeDomainRequest;
+const ModifyDomainStatusResponse = models.ModifyDomainStatusResponse;
 const ModifyDomainRemarkRequest = models.ModifyDomainRemarkRequest;
 const DescribeRecordRequest = models.DescribeRecordRequest;
 const DescribeDomainResponse = models.DescribeDomainResponse;
 const DomainInfo = models.DomainInfo;
 const DeleteRecordRequest = models.DeleteRecordRequest;
+const DescribeRecordListRequest = models.DescribeRecordListRequest;
+const DescribeDomainRequest = models.DescribeDomainRequest;
+const CreateRecordResponse = models.CreateRecordResponse;
+const DescribeRecordResponse = models.DescribeRecordResponse;
+const RecordInfo = models.RecordInfo;
+const ModifyRecordResponse = models.ModifyRecordResponse;
+const ModifyDomainRemarkResponse = models.ModifyDomainRemarkResponse;
+const DeleteRecordResponse = models.DeleteRecordResponse;
+const DeleteDomainResponse = models.DeleteDomainResponse;
+const CreateDomainResponse = models.CreateDomainResponse;
+const RecordCountInfo = models.RecordCountInfo;
 const ModifyRecordRequest = models.ModifyRecordRequest;
 
 
@@ -103,6 +107,17 @@ class DnspodClient extends AbstractClient {
     CreateRecord(req, cb) {
         let resp = new CreateRecordResponse();
         this.request("CreateRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get DNS records of a domain.
+     * @param {DescribeRecordListRequest} req
+     * @param {function(string, DescribeRecordListResponse):void} cb
+     * @public
+     */
+    DescribeRecordList(req, cb) {
+        let resp = new DescribeRecordListResponse();
+        this.request("DescribeRecordList", req, resp, cb);
     }
 
     /**

@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CloudStorage = models.CloudStorage;
+const SetUserBlockedRequest = models.SetUserBlockedRequest;
 const StorageFile = models.StorageFile;
 const WaterMark = models.WaterMark;
 const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
@@ -33,6 +34,7 @@ const AudioEncode = models.AudioEncode;
 const RemoveUserRequest = models.RemoveUserRequest;
 const StorageParams = models.StorageParams;
 const MaxVideoUser = models.MaxVideoUser;
+const SetUserBlockedResponse = models.SetUserBlockedResponse;
 const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
 const McuLayoutVolume = models.McuLayoutVolume;
 const DescribeCloudRecordingRequest = models.DescribeCloudRecordingRequest;
@@ -48,6 +50,7 @@ const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
 const MixTranscodeParams = models.MixTranscodeParams;
 const StopPublishCdnStreamResponse = models.StopPublishCdnStreamResponse;
 const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
+const SetUserBlockedByStrRoomIdResponse = models.SetUserBlockedByStrRoomIdResponse;
 const StopPublishCdnStreamRequest = models.StopPublishCdnStreamRequest;
 const SubscribeStreamUserIds = models.SubscribeStreamUserIds;
 const AgentParams = models.AgentParams;
@@ -64,6 +67,7 @@ const McuLayout = models.McuLayout;
 const McuSeiParams = models.McuSeiParams;
 const McuAudioParams = models.McuAudioParams;
 const McuPublishCdnParam = models.McuPublishCdnParam;
+const SetUserBlockedByStrRoomIdRequest = models.SetUserBlockedByStrRoomIdRequest;
 const AudioParams = models.AudioParams;
 const McuWaterMarkImage = models.McuWaterMarkImage;
 const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
@@ -84,6 +88,17 @@ class TrtcClient extends AbstractClient {
         super("trtc.tencentcloudapi.com", "2019-07-22", credential, region, profile);
     }
     
+    /**
+     * This API is used to disable or enable the audio and video of a user. It can be used by an anchor, room owner, or admin to block or unblock a user. It supports platforms including Android, iOS, Windows, macOS, web, and WeChat Mini Program. Use this API if the room ID is a number.
+     * @param {SetUserBlockedRequest} req
+     * @param {function(string, SetUserBlockedResponse):void} cb
+     * @public
+     */
+    SetUserBlocked(req, cb) {
+        let resp = new SetUserBlockedResponse();
+        this.request("SetUserBlocked", req, resp, cb);
+    }
+
     /**
      * This API is used to remove all users from a room and close the room. It works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
      * @param {DismissRoomByStrRoomIdRequest} req
@@ -150,6 +165,17 @@ Note: If `WithTranscoding` is not changed, you can pass in only the parameters y
     DeleteCloudRecording(req, cb) {
         let resp = new DeleteCloudRecordingResponse();
         this.request("DeleteCloudRecording", req, resp, cb);
+    }
+
+    /**
+     * This API allows an anchor, room owner, admin to mute/unmute a user. It can be used on platforms including Android, iOS, Windows, macOS, web, and WeChat Mini Program. Use this API when the room ID is a string.
+     * @param {SetUserBlockedByStrRoomIdRequest} req
+     * @param {function(string, SetUserBlockedByStrRoomIdResponse):void} cb
+     * @public
+     */
+    SetUserBlockedByStrRoomId(req, cb) {
+        let resp = new SetUserBlockedByStrRoomIdResponse();
+        this.request("SetUserBlockedByStrRoomId", req, resp, cb);
     }
 
     /**

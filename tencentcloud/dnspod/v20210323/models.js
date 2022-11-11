@@ -17,34 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * ModifyDomainStatus response structure.
- * @class
- */
-class ModifyDomainStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateRecord request structure.
  * @class
  */
@@ -178,18 +150,92 @@ class DeleteDomainRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDomainRemark response structure.
+ * Record list elements
  * @class
  */
-class ModifyDomainRemarkResponse extends  AbstractModel {
+class RecordListItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The record ID.
+         * @type {number || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * The record value.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Value = null;
+
+        /**
+         * The record status. Valid values: `ENABLE` (enabled), `DISABLE` (disabled).
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The update time.
+         * @type {string || null}
+         */
+        this.UpdatedOn = null;
+
+        /**
+         * The host name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The record split zone.
+         * @type {string || null}
+         */
+        this.Line = null;
+
+        /**
+         * The split zone ID.
+         * @type {string || null}
+         */
+        this.LineId = null;
+
+        /**
+         * The record type.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The record weight, which is required for round-robin DNS records.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * The monitoring status of the record. Valid values: `OK` (normal), `WARN` (warning), and `DOWN` (downtime). It is empty if no monitoring is set or the monitoring is suspended.
+         * @type {string || null}
+         */
+        this.MonitorStatus = null;
+
+        /**
+         * The record remarks.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * The record cache time.
+         * @type {number || null}
+         */
+        this.TTL = null;
+
+        /**
+         * The MX value, applicable to the MX record only.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MX = null;
 
     }
 
@@ -200,24 +246,42 @@ class ModifyDomainRemarkResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.UpdatedOn = 'UpdatedOn' in params ? params.UpdatedOn : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Line = 'Line' in params ? params.Line : null;
+        this.LineId = 'LineId' in params ? params.LineId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.MonitorStatus = 'MonitorStatus' in params ? params.MonitorStatus : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.TTL = 'TTL' in params ? params.TTL : null;
+        this.MX = 'MX' in params ? params.MX : null;
 
     }
 }
 
 /**
- * DescribeRecord response structure.
+ * DescribeRecordList response structure.
  * @class
  */
-class DescribeRecordResponse extends  AbstractModel {
+class DescribeRecordListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Record information
-         * @type {RecordInfo || null}
+         * The record count info.
+         * @type {RecordCountInfo || null}
          */
-        this.RecordInfo = null;
+        this.RecordCountInfo = null;
+
+        /**
+         * The record list result.
+         * @type {Array.<RecordListItem> || null}
+         */
+        this.RecordList = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -235,10 +299,19 @@ class DescribeRecordResponse extends  AbstractModel {
             return;
         }
 
-        if (params.RecordInfo) {
-            let obj = new RecordInfo();
-            obj.deserialize(params.RecordInfo)
-            this.RecordInfo = obj;
+        if (params.RecordCountInfo) {
+            let obj = new RecordCountInfo();
+            obj.deserialize(params.RecordCountInfo)
+            this.RecordCountInfo = obj;
+        }
+
+        if (params.RecordList) {
+            this.RecordList = new Array();
+            for (let z in params.RecordList) {
+                let obj = new RecordListItem();
+                obj.deserialize(params.RecordList[z]);
+                this.RecordList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -283,104 +356,6 @@ class CreateDomainRequest extends  AbstractModel {
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.IsMark = 'IsMark' in params ? params.IsMark : null;
-
-    }
-}
-
-/**
- * ModifyRecord response structure.
- * @class
- */
-class ModifyRecordResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Record ID
-         * @type {number || null}
-         */
-        this.RecordId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RecordId = 'RecordId' in params ? params.RecordId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateRecord response structure.
- * @class
- */
-class CreateRecordResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Record ID
-         * @type {number || null}
-         */
-        this.RecordId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RecordId = 'RecordId' in params ? params.RecordId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteRecord response structure.
- * @class
- */
-class DeleteRecordResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -435,131 +410,6 @@ class DomainCreateInfo extends  AbstractModel {
 }
 
 /**
- * Record information
- * @class
- */
-class RecordInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Record ID.
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * Subdomain (host record).
-         * @type {string || null}
-         */
-        this.SubDomain = null;
-
-        /**
-         * Record type. For more information, see the `DescribeRecordType` API.
-         * @type {string || null}
-         */
-        this.RecordType = null;
-
-        /**
-         * Split zone of the DNS record. For more information, see the `DescribeRecordLineList` API.
-         * @type {string || null}
-         */
-        this.RecordLine = null;
-
-        /**
-         * Split zone ID of the DNS record. For more information, see the `DescribeRecordLineList` API.
-         * @type {string || null}
-         */
-        this.RecordLineId = null;
-
-        /**
-         * Record value.
-         * @type {string || null}
-         */
-        this.Value = null;
-
-        /**
-         * Record weight.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Weight = null;
-
-        /**
-         * MX record value. It is 0 by default for non-MX records.
-         * @type {number || null}
-         */
-        this.MX = null;
-
-        /**
-         * TTL value of the record.
-         * @type {number || null}
-         */
-        this.TTL = null;
-
-        /**
-         * Record status. Valid values: 0 (disabled); 1 (enabled).
-         * @type {number || null}
-         */
-        this.Enabled = null;
-
-        /**
-         * D-Monitor status of the record.
-"Ok" : The server is normal.
-"Warn" : There is an alarm on this record, and the server returns 4XX.
-"Down" : The server is down.
-"" : D-Monitor is disabled for this record.
-         * @type {string || null}
-         */
-        this.MonitorStatus = null;
-
-        /**
-         * Record remarks.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * Last update time of the record.
-         * @type {string || null}
-         */
-        this.UpdatedOn = null;
-
-        /**
-         * Domain ID.
-         * @type {number || null}
-         */
-        this.DomainId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
-        this.RecordType = 'RecordType' in params ? params.RecordType : null;
-        this.RecordLine = 'RecordLine' in params ? params.RecordLine : null;
-        this.RecordLineId = 'RecordLineId' in params ? params.RecordLineId : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
-        this.MX = 'MX' in params ? params.MX : null;
-        this.TTL = 'TTL' in params ? params.TTL : null;
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
-        this.MonitorStatus = 'MonitorStatus' in params ? params.MonitorStatus : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.UpdatedOn = 'UpdatedOn' in params ? params.UpdatedOn : null;
-        this.DomainId = 'DomainId' in params ? params.DomainId : null;
-
-    }
-}
-
-/**
  * ModifyDomainStatus request structure.
  * @class
  */
@@ -602,10 +452,10 @@ class ModifyDomainStatusRequest extends  AbstractModel {
 }
 
 /**
- * DeleteDomain response structure.
+ * ModifyDomainStatus response structure.
  * @class
  */
-class DeleteDomainResponse extends  AbstractModel {
+class ModifyDomainStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -625,81 +475,6 @@ class DeleteDomainResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateDomain response structure.
- * @class
- */
-class CreateDomainResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Domain information
-         * @type {DomainCreateInfo || null}
-         */
-        this.DomainInfo = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.DomainInfo) {
-            let obj = new DomainCreateInfo();
-            obj.deserialize(params.DomainInfo)
-            this.DomainInfo = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeDomain request structure.
- * @class
- */
-class DescribeDomainRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Domain
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
-         * @type {number || null}
-         */
-        this.DomainId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.DomainId = 'DomainId' in params ? params.DomainId : null;
 
     }
 }
@@ -1056,6 +831,547 @@ class DeleteRecordRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRecordList request structure.
+ * @class
+ */
+class DescribeRecordListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The domain for which DNS records are to be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * The ID of the domain for which DNS records are to be obtained. If `DomainId` is passed in, the system will omit the parameter `Domain`.
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+        /**
+         * The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.
+         * @type {string || null}
+         */
+        this.Subdomain = null;
+
+        /**
+         * The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
+        /**
+         * The split zone name.
+         * @type {string || null}
+         */
+        this.RecordLine = null;
+
+        /**
+         * The split zone ID. If `RecordLineId` is passed in, the system will omit the parameter `RecordLine`.
+         * @type {string || null}
+         */
+        this.RecordLineId = null;
+
+        /**
+         * The group ID.
+         * @type {number || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * The keyword for searching for DNS records. Host headers and record values are supported.
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * The sorting field. Available values: `name`, `line`, `type`, `value`, `weight`, `mx`, and `ttl,updated_on`.
+         * @type {string || null}
+         */
+        this.SortField = null;
+
+        /**
+         * The sorting type. Valid values: `ASC` (ascending, default), `DESC` (descending).
+         * @type {string || null}
+         */
+        this.SortType = null;
+
+        /**
+         * The offset. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The limit. It defaults to 100 and can be up to 3,000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.Subdomain = 'Subdomain' in params ? params.Subdomain : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
+        this.RecordLine = 'RecordLine' in params ? params.RecordLine : null;
+        this.RecordLineId = 'RecordLineId' in params ? params.RecordLineId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.SortField = 'SortField' in params ? params.SortField : null;
+        this.SortType = 'SortType' in params ? params.SortType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeDomain request structure.
+ * @class
+ */
+class DescribeDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * CreateRecord response structure.
+ * @class
+ */
+class CreateRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Record ID
+         * @type {number || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRecord response structure.
+ * @class
+ */
+class DescribeRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Record information
+         * @type {RecordInfo || null}
+         */
+        this.RecordInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RecordInfo) {
+            let obj = new RecordInfo();
+            obj.deserialize(params.RecordInfo)
+            this.RecordInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Record information
+ * @class
+ */
+class RecordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Record ID.
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Subdomain (host record).
+         * @type {string || null}
+         */
+        this.SubDomain = null;
+
+        /**
+         * Record type. For more information, see the `DescribeRecordType` API.
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
+        /**
+         * Split zone of the DNS record. For more information, see the `DescribeRecordLineList` API.
+         * @type {string || null}
+         */
+        this.RecordLine = null;
+
+        /**
+         * Split zone ID of the DNS record. For more information, see the `DescribeRecordLineList` API.
+         * @type {string || null}
+         */
+        this.RecordLineId = null;
+
+        /**
+         * Record value.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Record weight.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * MX record value. It is 0 by default for non-MX records.
+         * @type {number || null}
+         */
+        this.MX = null;
+
+        /**
+         * TTL value of the record.
+         * @type {number || null}
+         */
+        this.TTL = null;
+
+        /**
+         * Record status. Valid values: 0 (disabled); 1 (enabled).
+         * @type {number || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * D-Monitor status of the record.
+"Ok" : The server is normal.
+"Warn" : There is an alarm on this record, and the server returns 4XX.
+"Down" : The server is down.
+"" : D-Monitor is disabled for this record.
+         * @type {string || null}
+         */
+        this.MonitorStatus = null;
+
+        /**
+         * Record remarks.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Last update time of the record.
+         * @type {string || null}
+         */
+        this.UpdatedOn = null;
+
+        /**
+         * Domain ID.
+         * @type {number || null}
+         */
+        this.DomainId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
+        this.RecordLine = 'RecordLine' in params ? params.RecordLine : null;
+        this.RecordLineId = 'RecordLineId' in params ? params.RecordLineId : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.MX = 'MX' in params ? params.MX : null;
+        this.TTL = 'TTL' in params ? params.TTL : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.MonitorStatus = 'MonitorStatus' in params ? params.MonitorStatus : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.UpdatedOn = 'UpdatedOn' in params ? params.UpdatedOn : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+
+    }
+}
+
+/**
+ * ModifyRecord response structure.
+ * @class
+ */
+class ModifyRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Record ID
+         * @type {number || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDomainRemark response structure.
+ * @class
+ */
+class ModifyDomainRemarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRecord response structure.
+ * @class
+ */
+class DeleteRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteDomain response structure.
+ * @class
+ */
+class DeleteDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateDomain response structure.
+ * @class
+ */
+class CreateDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain information
+         * @type {DomainCreateInfo || null}
+         */
+        this.DomainInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomainInfo) {
+            let obj = new DomainCreateInfo();
+            obj.deserialize(params.DomainInfo)
+            this.DomainInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Count info of the queried record list
+ * @class
+ */
+class RecordCountInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The subdomain count.
+         * @type {number || null}
+         */
+        this.SubdomainCount = null;
+
+        /**
+         * The count of records returned in the list.
+         * @type {number || null}
+         */
+        this.ListCount = null;
+
+        /**
+         * The total record count.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubdomainCount = 'SubdomainCount' in params ? params.SubdomainCount : null;
+        this.ListCount = 'ListCount' in params ? params.ListCount : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
  * ModifyRecord request structure.
  * @class
  */
@@ -1161,26 +1477,30 @@ class ModifyRecordRequest extends  AbstractModel {
 }
 
 module.exports = {
-    ModifyDomainStatusResponse: ModifyDomainStatusResponse,
     CreateRecordRequest: CreateRecordRequest,
     DeleteDomainRequest: DeleteDomainRequest,
-    ModifyDomainRemarkResponse: ModifyDomainRemarkResponse,
-    DescribeRecordResponse: DescribeRecordResponse,
+    RecordListItem: RecordListItem,
+    DescribeRecordListResponse: DescribeRecordListResponse,
     CreateDomainRequest: CreateDomainRequest,
-    ModifyRecordResponse: ModifyRecordResponse,
-    CreateRecordResponse: CreateRecordResponse,
-    DeleteRecordResponse: DeleteRecordResponse,
     DomainCreateInfo: DomainCreateInfo,
-    RecordInfo: RecordInfo,
     ModifyDomainStatusRequest: ModifyDomainStatusRequest,
-    DeleteDomainResponse: DeleteDomainResponse,
-    CreateDomainResponse: CreateDomainResponse,
-    DescribeDomainRequest: DescribeDomainRequest,
+    ModifyDomainStatusResponse: ModifyDomainStatusResponse,
     ModifyDomainRemarkRequest: ModifyDomainRemarkRequest,
     DescribeRecordRequest: DescribeRecordRequest,
     DescribeDomainResponse: DescribeDomainResponse,
     DomainInfo: DomainInfo,
     DeleteRecordRequest: DeleteRecordRequest,
+    DescribeRecordListRequest: DescribeRecordListRequest,
+    DescribeDomainRequest: DescribeDomainRequest,
+    CreateRecordResponse: CreateRecordResponse,
+    DescribeRecordResponse: DescribeRecordResponse,
+    RecordInfo: RecordInfo,
+    ModifyRecordResponse: ModifyRecordResponse,
+    ModifyDomainRemarkResponse: ModifyDomainRemarkResponse,
+    DeleteRecordResponse: DeleteRecordResponse,
+    DeleteDomainResponse: DeleteDomainResponse,
+    CreateDomainResponse: CreateDomainResponse,
+    RecordCountInfo: RecordCountInfo,
     ModifyRecordRequest: ModifyRecordRequest,
 
 }

@@ -18,10 +18,13 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
-const CreateAccountResponse = models.CreateAccountResponse;
+const ParamDesc = models.ParamDesc;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const ModifyInstanceNetworkResponse = models.ModifyInstanceNetworkResponse;
+const ModifyInstanceVportResponse = models.ModifyInstanceVportResponse;
 const DestroyHourDBInstanceRequest = models.DestroyHourDBInstanceRequest;
+const ModifyInstanceVipResponse = models.ModifyInstanceVipResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const CancelDcnJobResponse = models.CancelDcnJobResponse;
@@ -77,6 +80,7 @@ const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const CancelDcnJobRequest = models.CancelDcnJobRequest;
+const ModifyInstanceVipRequest = models.ModifyInstanceVipRequest;
 const DatabasePrivilege = models.DatabasePrivilege;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const FunctionPrivilege = models.FunctionPrivilege;
@@ -94,7 +98,9 @@ const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const CloneAccountRequest = models.CloneAccountRequest;
-const ParamDesc = models.ParamDesc;
+const CreateAccountResponse = models.CreateAccountResponse;
+const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
+const ModifyInstanceNetworkRequest = models.ModifyInstanceNetworkRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const ConstraintRange = models.ConstraintRange;
 const LogFileInfo = models.LogFileInfo;
@@ -106,11 +112,13 @@ const DescribeDatabaseTableResponse = models.DescribeDatabaseTableResponse;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
+const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const ModifyInstanceVportRequest = models.ModifyInstanceVportRequest;
 const DeleteAccountResponse = models.DeleteAccountResponse;
 
 
@@ -148,14 +156,14 @@ Note: Accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to query TencentDB order information. You can pass in an order ID to query the TencentDB instance associated with the order and the corresponding task process ID.
-     * @param {DescribeOrdersRequest} req
-     * @param {function(string, DescribeOrdersResponse):void} cb
+     * This API is used to query the information of primary and replica nodes of an instance.
+     * @param {DescribeInstanceNodeInfoRequest} req
+     * @param {function(string, DescribeInstanceNodeInfoResponse):void} cb
      * @public
      */
-    DescribeOrders(req, cb) {
-        let resp = new DescribeOrdersResponse();
-        this.request("DescribeOrders", req, resp, cb);
+    DescribeInstanceNodeInfo(req, cb) {
+        let resp = new DescribeInstanceNodeInfoResponse();
+        this.request("DescribeInstanceNodeInfo", req, resp, cb);
     }
 
     /**
@@ -238,14 +246,14 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to query the information of primary and replica nodes of an instance.
-     * @param {DescribeInstanceNodeInfoRequest} req
-     * @param {function(string, DescribeInstanceNodeInfoResponse):void} cb
+     * This API is used to query TencentDB order information. You can pass in an order ID to query the TencentDB instance associated with the order and the corresponding task process ID.
+     * @param {DescribeOrdersRequest} req
+     * @param {function(string, DescribeOrdersResponse):void} cb
      * @public
      */
-    DescribeInstanceNodeInfo(req, cb) {
-        let resp = new DescribeInstanceNodeInfoResponse();
-        this.request("DescribeInstanceNodeInfo", req, resp, cb);
+    DescribeOrders(req, cb) {
+        let resp = new DescribeOrdersResponse();
+        this.request("DescribeOrders", req, resp, cb);
     }
 
     /**
@@ -282,6 +290,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to modify instance VIP.
+     * @param {ModifyInstanceVipRequest} req
+     * @param {function(string, ModifyInstanceVipResponse):void} cb
+     * @public
+     */
+    ModifyInstanceVip(req, cb) {
+        let resp = new ModifyInstanceVipResponse();
+        this.request("ModifyInstanceVip", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of various logs of a database, including cold backups, binlogs, errlogs, and slowlogs.
      * @param {DescribeDBLogFilesRequest} req
      * @param {function(string, DescribeDBLogFilesResponse):void} cb
@@ -290,6 +309,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeDBLogFiles(req, cb) {
         let resp = new DescribeDBLogFilesResponse();
         this.request("DescribeDBLogFiles", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance network.
+     * @param {ModifyInstanceNetworkRequest} req
+     * @param {function(string, ModifyInstanceNetworkResponse):void} cb
+     * @public
+     */
+    ModifyInstanceNetwork(req, cb) {
+        let resp = new ModifyInstanceNetworkResponse();
+        this.request("ModifyInstanceNetwork", req, resp, cb);
     }
 
     /**
@@ -455,6 +485,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to modify instance Vport.
+     * @param {ModifyInstanceVportRequest} req
+     * @param {function(string, ModifyInstanceVportResponse):void} cb
+     * @public
+     */
+    ModifyInstanceVport(req, cb) {
+        let resp = new ModifyInstanceVportResponse();
+        this.request("ModifyInstanceVport", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the security group details of an instance.
      * @param {DescribeDBSecurityGroupsRequest} req
      * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
@@ -496,6 +537,17 @@ Note: accounts with the same username but different hosts are different accounts
     CloneAccount(req, cb) {
         let resp = new CloneAccountResponse();
         this.request("CloneAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view the configured number of days for retention of database backup logs.
+     * @param {DescribeLogFileRetentionPeriodRequest} req
+     * @param {function(string, DescribeLogFileRetentionPeriodResponse):void} cb
+     * @public
+     */
+    DescribeLogFileRetentionPeriod(req, cb) {
+        let resp = new DescribeLogFileRetentionPeriodResponse();
+        this.request("DescribeLogFileRetentionPeriod", req, resp, cb);
     }
 
     /**

@@ -101,42 +101,56 @@ class DescribeDatabasesRequest extends  AbstractModel {
 }
 
 /**
- * CreateAccount response structure.
+ * Database parameter description
  * @class
  */
-class CreateAccountResponse extends  AbstractModel {
+class ParamDesc extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID, which is passed through from the input parameters.
+         * Parameter name
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Param = null;
 
         /**
-         * Username, which is passed through from the input parameters.
+         * Current parameter value
          * @type {string || null}
          */
-        this.UserName = null;
+        this.Value = null;
 
         /**
-         * Host allowed for access, which is passed through from the input parameters.
+         * Previously set value, which is the same as `value` after the parameter takes effect.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Host = null;
+        this.SetValue = null;
 
         /**
-         * Passed through from the input parameters.
-         * @type {number || null}
-         */
-        this.ReadOnly = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Default value
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Default = null;
+
+        /**
+         * Parameter constraint
+         * @type {ParamConstraint || null}
+         */
+        this.Constraint = null;
+
+        /**
+         * Whether a value has been set. false: no, true: yes
+         * @type {boolean || null}
+         */
+        this.HaveSetValue = null;
+
+        /**
+         * Whether restart is required. false: no;
+true: yes.
+         * @type {boolean || null}
+         */
+        this.NeedRestart = null;
 
     }
 
@@ -147,11 +161,18 @@ class CreateAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Param = 'Param' in params ? params.Param : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.SetValue = 'SetValue' in params ? params.SetValue : null;
+        this.Default = 'Default' in params ? params.Default : null;
+
+        if (params.Constraint) {
+            let obj = new ParamConstraint();
+            obj.deserialize(params.Constraint)
+            this.Constraint = obj;
+        }
+        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
 
     }
 }
@@ -213,6 +234,69 @@ class DescribeAccountsRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceNetwork response structure.
+ * @class
+ */
+class ModifyInstanceNetworkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID, which can be used to query the task status through `DescribeFlow` API.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceVport response structure.
+ * @class
+ */
+class ModifyInstanceVportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DestroyHourDBInstance request structure.
  * @class
  */
@@ -236,6 +320,41 @@ class DestroyHourDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceVip response structure.
+ * @class
+ */
+class ModifyInstanceVipResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3206,6 +3325,55 @@ class CancelDcnJobRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceVip request structure.
+ * @class
+ */
+class ModifyInstanceVipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance VIP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * IPv6 flag
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+        /**
+         * VIP retention period in hours. Value range: 0-168. Default value: `24`. `0` indicates that the VIP will be released immediately, but there will be 1-minute delay.
+         * @type {number || null}
+         */
+        this.VipReleaseDelay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+        this.VipReleaseDelay = 'VipReleaseDelay' in params ? params.VipReleaseDelay : null;
+
+    }
+}
+
+/**
  * Database permission
  * @class
  */
@@ -4147,56 +4315,42 @@ class CloneAccountRequest extends  AbstractModel {
 }
 
 /**
- * Database parameter description
+ * CreateAccount response structure.
  * @class
  */
-class ParamDesc extends  AbstractModel {
+class CreateAccountResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
+         * Instance ID, which is passed through from the input parameters.
          * @type {string || null}
          */
-        this.Param = null;
+        this.InstanceId = null;
 
         /**
-         * Current parameter value
+         * Username, which is passed through from the input parameters.
          * @type {string || null}
          */
-        this.Value = null;
+        this.UserName = null;
 
         /**
-         * Previously set value, which is the same as `value` after the parameter takes effect.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Host allowed for access, which is passed through from the input parameters.
          * @type {string || null}
          */
-        this.SetValue = null;
+        this.Host = null;
 
         /**
-         * Default value
+         * Passed through from the input parameters.
+         * @type {number || null}
+         */
+        this.ReadOnly = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Default = null;
-
-        /**
-         * Parameter constraint
-         * @type {ParamConstraint || null}
-         */
-        this.Constraint = null;
-
-        /**
-         * Whether a value has been set. false: no, true: yes
-         * @type {boolean || null}
-         */
-        this.HaveSetValue = null;
-
-        /**
-         * Whether restart is required. false: no;
-true: yes.
-         * @type {boolean || null}
-         */
-        this.NeedRestart = null;
+        this.RequestId = null;
 
     }
 
@@ -4207,18 +4361,116 @@ true: yes.
         if (!params) {
             return;
         }
-        this.Param = 'Param' in params ? params.Param : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.SetValue = 'SetValue' in params ? params.SetValue : null;
-        this.Default = 'Default' in params ? params.Default : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.Constraint) {
-            let obj = new ParamConstraint();
-            obj.deserialize(params.Constraint)
-            this.Constraint = obj;
+    }
+}
+
+/**
+ * DescribeLogFileRetentionPeriod response structure.
+ * @class
+ */
+class DescribeLogFileRetentionPeriodResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `tdsql-ow728lmc`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Backup log retention days
+         * @type {number || null}
+         */
+        this.Days = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
-        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Days = 'Days' in params ? params.Days : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceNetwork request structure.
+ * @class
+ */
+class ModifyInstanceNetworkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * VpcId, ID of the desired VPC network.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * SubnetId, subnet ID of the desired VPC network.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * The field is required to specify VIP.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * The field is required to specify VIPv6.
+         * @type {string || null}
+         */
+        this.Vipv6 = null;
+
+        /**
+         * VIP retention period in hours. Value range: 0-168. Default value: `24`. `0` indicates that the VIP will be released immediately, but there will be 1-minute delay.
+         * @type {number || null}
+         */
+        this.VipReleaseDelay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
+        this.VipReleaseDelay = 'VipReleaseDelay' in params ? params.VipReleaseDelay : null;
 
     }
 }
@@ -4941,6 +5193,34 @@ class DescribeDBSlowLogsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeLogFileRetentionPeriod request structure.
+ * @class
+ */
+class DescribeLogFileRetentionPeriodRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `tdsql-ow728lmc`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstancesProject request structure.
  * @class
  */
@@ -5131,6 +5411,41 @@ class DisassociateSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceVport request structure.
+ * @class
+ */
+class ModifyInstanceVportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance Vport
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+
+    }
+}
+
+/**
  * DeleteAccount response structure.
  * @class
  */
@@ -5161,10 +5476,13 @@ class DeleteAccountResponse extends  AbstractModel {
 module.exports = {
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
-    CreateAccountResponse: CreateAccountResponse,
+    ParamDesc: ParamDesc,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
+    ModifyInstanceNetworkResponse: ModifyInstanceNetworkResponse,
+    ModifyInstanceVportResponse: ModifyInstanceVportResponse,
     DestroyHourDBInstanceRequest: DestroyHourDBInstanceRequest,
+    ModifyInstanceVipResponse: ModifyInstanceVipResponse,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     CancelDcnJobResponse: CancelDcnJobResponse,
@@ -5220,6 +5538,7 @@ module.exports = {
     Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     CancelDcnJobRequest: CancelDcnJobRequest,
+    ModifyInstanceVipRequest: ModifyInstanceVipRequest,
     DatabasePrivilege: DatabasePrivilege,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     FunctionPrivilege: FunctionPrivilege,
@@ -5237,7 +5556,9 @@ module.exports = {
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     CloneAccountRequest: CloneAccountRequest,
-    ParamDesc: ParamDesc,
+    CreateAccountResponse: CreateAccountResponse,
+    DescribeLogFileRetentionPeriodResponse: DescribeLogFileRetentionPeriodResponse,
+    ModifyInstanceNetworkRequest: ModifyInstanceNetworkRequest,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     ConstraintRange: ConstraintRange,
     LogFileInfo: LogFileInfo,
@@ -5249,11 +5570,13 @@ module.exports = {
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeDBSlowLogsResponse: DescribeDBSlowLogsResponse,
+    DescribeLogFileRetentionPeriodRequest: DescribeLogFileRetentionPeriodRequest,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     DestroyDBInstanceResponse: DestroyDBInstanceResponse,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     DescribeInstanceNodeInfoResponse: DescribeInstanceNodeInfoResponse,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
+    ModifyInstanceVportRequest: ModifyInstanceVportRequest,
     DeleteAccountResponse: DeleteAccountResponse,
 
 }

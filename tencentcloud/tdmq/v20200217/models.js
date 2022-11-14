@@ -899,6 +899,127 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * TDMQ for RabbitMQ exclusive instance information
+ * @class
+ */
+class RabbitMQVipInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance version
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceVersion = null;
+
+        /**
+         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Number of nodes
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * Instance specification name
+         * @type {string || null}
+         */
+        this.ConfigDisplay = null;
+
+        /**
+         * Peak TPS
+         * @type {number || null}
+         */
+        this.MaxTps = null;
+
+        /**
+         * Peak bandwidth in Mbps
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+        /**
+         * Storage capacity in GB
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * Instance expiration time in milliseconds
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Payment mode. `0`: Postpaid; `1`: Prepaid.
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Remarks
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Instance specification ID
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
+        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+
+    }
+}
+
+/**
  * DescribeCmqQueues response structure.
  * @class
  */
@@ -945,6 +1066,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQNodeList request structure.
+ * @class
+ */
+class DescribeRabbitMQNodeListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TDMQ for RabbitMQ cluster ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The maximum entries per page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1451,7 +1614,7 @@ class CreateSubscriptionRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * Subscriber name, which can contain up to 150 letters, digits, hyphens, and underscores.
+         * Subscriber name, which can contain up to 128 characters.
          * @type {string || null}
          */
         this.SubscriptionName = null;
@@ -3781,6 +3944,56 @@ class ModifyCmqTopicAttributeRequest extends  AbstractModel {
         this.MaxMsgSize = 'MaxMsgSize' in params ? params.MaxMsgSize : null;
         this.MsgRetentionSeconds = 'MsgRetentionSeconds' in params ? params.MsgRetentionSeconds : null;
         this.Trace = 'Trace' in params ? params.Trace : null;
+
+    }
+}
+
+/**
+ * DescribeRabbitMQVipInstances response structure.
+ * @class
+ */
+class DescribeRabbitMQVipInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of unpaginated items
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Instance information list
+         * @type {Array.<RabbitMQVipInstance> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new RabbitMQVipInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9421,6 +9634,57 @@ class DeleteCmqTopicRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRabbitMQNodeList response structure.
+ * @class
+ */
+class DescribeRabbitMQNodeListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of clusters
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Cluster list
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<RabbitMQPrivateNode> || null}
+         */
+        this.NodeList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.NodeList) {
+            this.NodeList = new Array();
+            for (let z in params.NodeList) {
+                let obj = new RabbitMQPrivateNode();
+                obj.deserialize(params.NodeList[z]);
+                this.NodeList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SendCmqMsg response structure.
  * @class
  */
@@ -9619,6 +9883,35 @@ class ModifyCmqQueueAttributeRequest extends  AbstractModel {
         this.Trace = 'Trace' in params ? params.Trace : null;
         this.Transaction = 'Transaction' in params ? params.Transaction : null;
         this.RetentionSizeInMB = 'RetentionSizeInMB' in params ? params.RetentionSizeInMB : null;
+
+    }
+}
+
+/**
+ * TDMQ for RabbitMQ node information
+ * @class
+ */
+class RabbitMQPrivateNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node name
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
 
     }
 }
@@ -9829,6 +10122,56 @@ class DescribeRocketMQVipInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRabbitMQVipInstances request structure.
+ * @class
+ */
+class DescribeRabbitMQVipInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query condition filter
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The maximum number of queried items, which defaults to 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Start offset for query
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeClusterDetail response structure.
  * @class
  */
@@ -10026,7 +10369,9 @@ module.exports = {
     ModifyClusterResponse: ModifyClusterResponse,
     RocketMQClusterRecentStats: RocketMQClusterRecentStats,
     RocketMQVipInstance: RocketMQVipInstance,
+    RabbitMQVipInstance: RabbitMQVipInstance,
     DescribeCmqQueuesResponse: DescribeCmqQueuesResponse,
+    DescribeRabbitMQNodeListRequest: DescribeRabbitMQNodeListRequest,
     PublishCmqMsgRequest: PublishCmqMsgRequest,
     CreateCmqSubscribeRequest: CreateCmqSubscribeRequest,
     RewindCmqQueueResponse: RewindCmqQueueResponse,
@@ -10078,6 +10423,7 @@ module.exports = {
     DescribeRocketMQClusterRequest: DescribeRocketMQClusterRequest,
     DeleteRocketMQTopicResponse: DeleteRocketMQTopicResponse,
     ModifyCmqTopicAttributeRequest: ModifyCmqTopicAttributeRequest,
+    DescribeRabbitMQVipInstancesResponse: DescribeRabbitMQVipInstancesResponse,
     DeleteRolesRequest: DeleteRolesRequest,
     Subscription: Subscription,
     CreateCmqSubscribeResponse: CreateCmqSubscribeResponse,
@@ -10181,14 +10527,17 @@ module.exports = {
     CreateRocketMQNamespaceResponse: CreateRocketMQNamespaceResponse,
     SendBatchMessagesRequest: SendBatchMessagesRequest,
     DeleteCmqTopicRequest: DeleteCmqTopicRequest,
+    DescribeRabbitMQNodeListResponse: DescribeRabbitMQNodeListResponse,
     SendCmqMsgResponse: SendCmqMsgResponse,
     UnbindCmqDeadLetterRequest: UnbindCmqDeadLetterRequest,
     ModifyCmqQueueAttributeRequest: ModifyCmqQueueAttributeRequest,
+    RabbitMQPrivateNode: RabbitMQPrivateNode,
     DeleteCmqSubscribeResponse: DeleteCmqSubscribeResponse,
     DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
     DeleteSubscriptionsRequest: DeleteSubscriptionsRequest,
     ModifyRocketMQGroupResponse: ModifyRocketMQGroupResponse,
     DescribeRocketMQVipInstancesResponse: DescribeRocketMQVipInstancesResponse,
+    DescribeRabbitMQVipInstancesRequest: DescribeRabbitMQVipInstancesRequest,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
     SendMessagesRequest: SendMessagesRequest,
     CreateEnvironmentRoleRequest: CreateEnvironmentRoleRequest,

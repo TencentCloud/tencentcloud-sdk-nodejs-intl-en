@@ -24,6 +24,8 @@ const DestroyDCDBInstanceResponse = models.DestroyDCDBInstanceResponse;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const ActiveHourDCDBInstanceResponse = models.ActiveHourDCDBInstanceResponse;
+const ModifyInstanceVportResponse = models.ModifyInstanceVportResponse;
+const ModifyInstanceVipResponse = models.ModifyInstanceVipResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const CancelDcnJobResponse = models.CancelDcnJobResponse;
@@ -49,9 +51,10 @@ const CreateHourDCDBInstanceRequest = models.CreateHourDCDBInstanceRequest;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CloneAccountRequest = models.CloneAccountRequest;
-const ParamModifyResult = models.ParamModifyResult;
+const ModifyInstanceNetworkResponse = models.ModifyInstanceNetworkResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
+const ParamModifyResult = models.ParamModifyResult;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DatabaseFunction = models.DatabaseFunction;
 const ParamConstraint = models.ParamConstraint;
@@ -87,6 +90,7 @@ const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const CancelDcnJobRequest = models.CancelDcnJobRequest;
 const IsolateHourDCDBInstanceResponse = models.IsolateHourDCDBInstanceResponse;
 const ShardInfo = models.ShardInfo;
+const ModifyInstanceVipRequest = models.ModifyInstanceVipRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DcnDetailItem = models.DcnDetailItem;
 const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
@@ -105,6 +109,7 @@ const DescribeFlowRequest = models.DescribeFlowRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
+const ModifyInstanceNetworkRequest = models.ModifyInstanceNetworkRequest;
 const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
 const ConstraintRange = models.ConstraintRange;
 const LogFileInfo = models.LogFileInfo;
@@ -120,6 +125,7 @@ const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGr
 const DestroyHourDCDBInstanceRequest = models.DestroyHourDCDBInstanceRequest;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const ModifyInstanceVportRequest = models.ModifyInstanceVportRequest;
 const DeleteAccountResponse = models.DeleteAccountResponse;
 
 
@@ -314,6 +320,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to modify instance VIP.
+     * @param {ModifyInstanceVipRequest} req
+     * @param {function(string, ModifyInstanceVipResponse):void} cb
+     * @public
+     */
+    ModifyInstanceVip(req, cb) {
+        let resp = new ModifyInstanceVipResponse();
+        this.request("ModifyInstanceVip", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of various logs of a database, including cold backups, binlogs, errlogs, and slowlogs.
      * @param {DescribeDBLogFilesRequest} req
      * @param {function(string, DescribeDBLogFilesResponse):void} cb
@@ -377,6 +394,17 @@ Note: accounts with the same username but different hosts are different accounts
     CreateAccount(req, cb) {
         let resp = new CreateAccountResponse();
         this.request("CreateAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance network.
+     * @param {ModifyInstanceNetworkRequest} req
+     * @param {function(string, ModifyInstanceNetworkResponse):void} cb
+     * @public
+     */
+    ModifyInstanceNetwork(req, cb) {
+        let resp = new ModifyInstanceNetworkResponse();
+        this.request("ModifyInstanceNetwork", req, resp, cb);
     }
 
     /**
@@ -500,6 +528,17 @@ Note: Accounts with the same username but different hosts are different accounts
     DestroyHourDCDBInstance(req, cb) {
         let resp = new DestroyHourDCDBInstanceResponse();
         this.request("DestroyHourDCDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance Vport.
+     * @param {ModifyInstanceVportRequest} req
+     * @param {function(string, ModifyInstanceVportResponse):void} cb
+     * @public
+     */
+    ModifyInstanceVport(req, cb) {
+        let resp = new ModifyInstanceVportResponse();
+        this.request("ModifyInstanceVport", req, resp, cb);
     }
 
     /**

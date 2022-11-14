@@ -12,6 +12,7 @@ module.exports = {
     cdb: require("./cdb"),
     cdn: require("./cdn"),
     cfs: require("./cfs"),
+    cfw: require("./cfw"),
     chdfs: require("./chdfs"),
     ciam: require("./ciam"),
     ckafka: require("./ckafka"),

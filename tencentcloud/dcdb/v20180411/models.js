@@ -360,6 +360,69 @@ class ActiveHourDCDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceVport response structure.
+ * @class
+ */
+class ModifyInstanceVportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceVip response structure.
+ * @class
+ */
+class ModifyInstanceVipResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AssociateSecurityGroups request structure.
  * @class
  */
@@ -1615,24 +1678,24 @@ class CloneAccountRequest extends  AbstractModel {
 }
 
 /**
- * Parameter modification result
+ * ModifyInstanceNetwork response structure.
  * @class
  */
-class ParamModifyResult extends  AbstractModel {
+class ModifyInstanceNetworkResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Renames parameter
-         * @type {string || null}
-         */
-        this.Param = null;
-
-        /**
-         * Result of parameter modification. 0: success; -1: failure; -2: invalid parameter value
+         * Async task ID, which can be used to query the task status through `DescribeFlow` API.
          * @type {number || null}
          */
-        this.Code = null;
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1643,8 +1706,8 @@ class ParamModifyResult extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Param = 'Param' in params ? params.Param : null;
-        this.Code = 'Code' in params ? params.Code : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1715,6 +1778,41 @@ class SwitchDBInstanceHAResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Parameter modification result
+ * @class
+ */
+class ParamModifyResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Renames parameter
+         * @type {string || null}
+         */
+        this.Param = null;
+
+        /**
+         * Result of parameter modification. 0: success; -1: failure; -2: invalid parameter value
+         * @type {number || null}
+         */
+        this.Code = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Param = 'Param' in params ? params.Param : null;
+        this.Code = 'Code' in params ? params.Code : null;
 
     }
 }
@@ -3882,6 +3980,55 @@ class ShardInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceVip request structure.
+ * @class
+ */
+class ModifyInstanceVipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance VIP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * IPv6 flag
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+        /**
+         * VIP retention period in hours. Value range: 0-168. Default value: `24`. `0` indicates that the VIP will be released immediately, but there will be 1-minute delay.
+         * @type {number || null}
+         */
+        this.VipReleaseDelay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+        this.VipReleaseDelay = 'VipReleaseDelay' in params ? params.VipReleaseDelay : null;
+
+    }
+}
+
+/**
  * ModifyDBInstancesProject request structure.
  * @class
  */
@@ -4847,6 +4994,69 @@ class CreateAccountResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceNetwork request structure.
+ * @class
+ */
+class ModifyInstanceNetworkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The ID of the desired VPC network
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * The subnet ID of the desired VPC network
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * The field is required to specify VIP.
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * The field is required to specify VIPv6.
+         * @type {string || null}
+         */
+        this.Vipv6 = null;
+
+        /**
+         * VIP retention period in hours. Value range: 0-168. Default value: `24`. `0` indicates that the VIP will be released immediately, but there will be 1-minute delay.
+         * @type {number || null}
+         */
+        this.VipReleaseDelay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
+        this.VipReleaseDelay = 'VipReleaseDelay' in params ? params.VipReleaseDelay : null;
+
+    }
+}
+
+/**
  * IsolateHourDCDBInstance request structure.
  * @class
  */
@@ -5629,6 +5839,41 @@ class DisassociateSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceVport request structure.
+ * @class
+ */
+class ModifyInstanceVportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance Vport
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+
+    }
+}
+
+/**
  * DeleteAccount response structure.
  * @class
  */
@@ -5665,6 +5910,8 @@ module.exports = {
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     ActiveHourDCDBInstanceResponse: ActiveHourDCDBInstanceResponse,
+    ModifyInstanceVportResponse: ModifyInstanceVportResponse,
+    ModifyInstanceVipResponse: ModifyInstanceVipResponse,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     CancelDcnJobResponse: CancelDcnJobResponse,
@@ -5690,9 +5937,10 @@ module.exports = {
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
     CloneAccountRequest: CloneAccountRequest,
-    ParamModifyResult: ParamModifyResult,
+    ModifyInstanceNetworkResponse: ModifyInstanceNetworkResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     SwitchDBInstanceHAResponse: SwitchDBInstanceHAResponse,
+    ParamModifyResult: ParamModifyResult,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     DatabaseFunction: DatabaseFunction,
     ParamConstraint: ParamConstraint,
@@ -5728,6 +5976,7 @@ module.exports = {
     CancelDcnJobRequest: CancelDcnJobRequest,
     IsolateHourDCDBInstanceResponse: IsolateHourDCDBInstanceResponse,
     ShardInfo: ShardInfo,
+    ModifyInstanceVipRequest: ModifyInstanceVipRequest,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     DcnDetailItem: DcnDetailItem,
     DescribeDBSyncModeRequest: DescribeDBSyncModeRequest,
@@ -5746,6 +5995,7 @@ module.exports = {
     DatabaseProcedure: DatabaseProcedure,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     CreateAccountResponse: CreateAccountResponse,
+    ModifyInstanceNetworkRequest: ModifyInstanceNetworkRequest,
     IsolateHourDCDBInstanceRequest: IsolateHourDCDBInstanceRequest,
     ConstraintRange: ConstraintRange,
     LogFileInfo: LogFileInfo,
@@ -5761,6 +6011,7 @@ module.exports = {
     DestroyHourDCDBInstanceRequest: DestroyHourDCDBInstanceRequest,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
+    ModifyInstanceVportRequest: ModifyInstanceVportRequest,
     DeleteAccountResponse: DeleteAccountResponse,
 
 }

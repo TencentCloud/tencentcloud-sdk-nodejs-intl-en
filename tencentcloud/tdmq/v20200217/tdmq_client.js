@@ -32,7 +32,9 @@ const BindCluster = models.BindCluster;
 const ModifyClusterResponse = models.ModifyClusterResponse;
 const RocketMQClusterRecentStats = models.RocketMQClusterRecentStats;
 const RocketMQVipInstance = models.RocketMQVipInstance;
+const RabbitMQVipInstance = models.RabbitMQVipInstance;
 const DescribeCmqQueuesResponse = models.DescribeCmqQueuesResponse;
+const DescribeRabbitMQNodeListRequest = models.DescribeRabbitMQNodeListRequest;
 const PublishCmqMsgRequest = models.PublishCmqMsgRequest;
 const CreateCmqSubscribeRequest = models.CreateCmqSubscribeRequest;
 const RewindCmqQueueResponse = models.RewindCmqQueueResponse;
@@ -84,6 +86,7 @@ const DeleteCmqQueueResponse = models.DeleteCmqQueueResponse;
 const DescribeRocketMQClusterRequest = models.DescribeRocketMQClusterRequest;
 const DeleteRocketMQTopicResponse = models.DeleteRocketMQTopicResponse;
 const ModifyCmqTopicAttributeRequest = models.ModifyCmqTopicAttributeRequest;
+const DescribeRabbitMQVipInstancesResponse = models.DescribeRabbitMQVipInstancesResponse;
 const DeleteRolesRequest = models.DeleteRolesRequest;
 const Subscription = models.Subscription;
 const CreateCmqSubscribeResponse = models.CreateCmqSubscribeResponse;
@@ -187,14 +190,17 @@ const DescribePublisherSummaryResponse = models.DescribePublisherSummaryResponse
 const CreateRocketMQNamespaceResponse = models.CreateRocketMQNamespaceResponse;
 const SendBatchMessagesRequest = models.SendBatchMessagesRequest;
 const DeleteCmqTopicRequest = models.DeleteCmqTopicRequest;
+const DescribeRabbitMQNodeListResponse = models.DescribeRabbitMQNodeListResponse;
 const SendCmqMsgResponse = models.SendCmqMsgResponse;
 const UnbindCmqDeadLetterRequest = models.UnbindCmqDeadLetterRequest;
 const ModifyCmqQueueAttributeRequest = models.ModifyCmqQueueAttributeRequest;
+const RabbitMQPrivateNode = models.RabbitMQPrivateNode;
 const DeleteCmqSubscribeResponse = models.DeleteCmqSubscribeResponse;
 const DescribePublisherSummaryRequest = models.DescribePublisherSummaryRequest;
 const DeleteSubscriptionsRequest = models.DeleteSubscriptionsRequest;
 const ModifyRocketMQGroupResponse = models.ModifyRocketMQGroupResponse;
 const DescribeRocketMQVipInstancesResponse = models.DescribeRocketMQVipInstancesResponse;
+const DescribeRabbitMQVipInstancesRequest = models.DescribeRabbitMQVipInstancesRequest;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const SendMessagesRequest = models.SendMessagesRequest;
 const CreateEnvironmentRoleRequest = models.CreateEnvironmentRoleRequest;
@@ -399,6 +405,17 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the list of TDMQ for RabbitMQ exclusive cluster nodes.
+     * @param {DescribeRabbitMQNodeListRequest} req
+     * @param {function(string, DescribeRabbitMQNodeListResponse):void} cb
+     * @public
+     */
+    DescribeRabbitMQNodeList(req, cb) {
+        let resp = new DescribeRabbitMQNodeListResponse();
+        this.request("DescribeRabbitMQNodeList", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of RocketMQ namespaces.
      * @param {DescribeRocketMQNamespacesRequest} req
      * @param {function(string, DescribeRocketMQNamespacesResponse):void} cb
@@ -498,14 +515,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update a RocketMQ namespace.
-     * @param {ModifyRocketMQNamespaceRequest} req
-     * @param {function(string, ModifyRocketMQNamespaceResponse):void} cb
+     * This API is used to query the list of the purchased TDMQ for RabbitMQ exclusive instances.
+     * @param {DescribeRabbitMQVipInstancesRequest} req
+     * @param {function(string, DescribeRabbitMQVipInstancesResponse):void} cb
      * @public
      */
-    ModifyRocketMQNamespace(req, cb) {
-        let resp = new ModifyRocketMQNamespaceResponse();
-        this.request("ModifyRocketMQNamespace", req, resp, cb);
+    DescribeRabbitMQVipInstances(req, cb) {
+        let resp = new DescribeRabbitMQVipInstancesResponse();
+        this.request("DescribeRabbitMQVipInstances", req, resp, cb);
     }
 
     /**
@@ -737,6 +754,17 @@ class TdmqClient extends AbstractClient {
     DeleteRoles(req, cb) {
         let resp = new DeleteRolesResponse();
         this.request("DeleteRoles", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a RocketMQ namespace.
+     * @param {ModifyRocketMQNamespaceRequest} req
+     * @param {function(string, ModifyRocketMQNamespaceResponse):void} cb
+     * @public
+     */
+    ModifyRocketMQNamespace(req, cb) {
+        let resp = new ModifyRocketMQNamespaceResponse();
+        this.request("ModifyRocketMQNamespace", req, resp, cb);
     }
 
     /**

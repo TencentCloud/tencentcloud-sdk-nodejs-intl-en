@@ -2872,6 +2872,12 @@ class GetEmailTemplateResponse extends  AbstractModel {
         this.TemplateStatus = null;
 
         /**
+         * Template name
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2893,6 +2899,7 @@ class GetEmailTemplateResponse extends  AbstractModel {
             this.TemplateContent = obj;
         }
         this.TemplateStatus = 'TemplateStatus' in params ? params.TemplateStatus : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

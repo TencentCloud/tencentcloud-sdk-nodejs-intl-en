@@ -45,6 +45,7 @@ module.exports = {
     gse: require("./gse"),
     iai: require("./iai"),
     ims: require("./ims"),
+    intlpartnersmgt: require("./intlpartnersmgt"),
     iotcloud: require("./iotcloud"),
     ip: require("./ip"),
     kms: require("./kms"),

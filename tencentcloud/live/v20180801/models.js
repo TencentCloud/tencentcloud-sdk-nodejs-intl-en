@@ -817,6 +817,7 @@ class CreateLivePullStreamTaskRequest extends  AbstractModel {
          * The source type. Valid values:
 PullLivePushLive: Live streaming
 PullVodPushLive: Video files
+PullPicPushLive: Images
          * @type {string || null}
          */
         this.SourceType = null;
@@ -992,6 +993,15 @@ Notes:
          */
         this.WatermarkList = null;
 
+        /**
+         * Whether to use local mode when the source type is video files. The default is `0`.
+0: Do not use local mode
+1: Use local mode
+Note: If you enable local mode, MP4 files will be downloaded to local storage, and the local files will be used for push. This ensures more reliable push. Pushing a local file will incur additional fees.
+         * @type {number || null}
+         */
+        this.VodLocalMode = null;
+
     }
 
     /**
@@ -1028,6 +1038,7 @@ Notes:
                 this.WatermarkList.push(obj);
             }
         }
+        this.VodLocalMode = 'VodLocalMode' in params ? params.VodLocalMode : null;
 
     }
 }
@@ -8026,8 +8037,9 @@ PullLivePushLive: Live streaming
 PullVodPushLive: Video files
 Notes:
 1. Backup sources are supported only if the primary source type is live streaming.
-2. When pull from the primary source is interrupted, the system will pull from the backup source.
-3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
+2. Leaving this parameter empty will reset the backup source.
+3. When pull from the primary source is interrupted, the system will pull from the backup source.
+4. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
          * @type {string || null}
          */
         this.BackupSourceType = null;
@@ -8052,6 +8064,15 @@ Notes:
          * @type {Array.<PullPushWatermarkInfo> || null}
          */
         this.WatermarkList = null;
+
+        /**
+         * Whether to use local mode when the source type is video files. The default is `0`.
+0: Do not use local mode
+1: Use local mode
+Note: If you enable local mode, MP4 files will be downloaded to local storage, and the local files will be used for push. This ensures more reliable push. Pushing a local file will incur additional fees.
+         * @type {number || null}
+         */
+        this.VodLocalMode = null;
 
     }
 
@@ -8086,6 +8107,7 @@ Notes:
                 this.WatermarkList.push(obj);
             }
         }
+        this.VodLocalMode = 'VodLocalMode' in params ? params.VodLocalMode : null;
 
     }
 }
@@ -12398,6 +12420,7 @@ class PullStreamTaskInfo extends  AbstractModel {
          * The source type. Valid values:
 PullLivePushLive: Live streaming
 PullVodPushLive: Video files
+PullPicPushLive: Images
          * @type {string || null}
          */
         this.SourceType = null;
@@ -12595,6 +12618,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.WatermarkList = null;
 
+        /**
+         * Whether to use local mode when the source type is video files. The default is `0`.
+0: Do not use local mode
+1: Use local mode
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.VodLocalMode = null;
+
     }
 
     /**
@@ -12643,6 +12675,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.WatermarkList.push(obj);
             }
         }
+        this.VodLocalMode = 'VodLocalMode' in params ? params.VodLocalMode : null;
 
     }
 }

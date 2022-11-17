@@ -80,7 +80,7 @@ const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteAclResponse = models.DeleteAclResponse;
 const DynamicRetentionTime = models.DynamicRetentionTime;
 const DescribeTopicSubscribeGroupRequest = models.DescribeTopicSubscribeGroupRequest;
-const InstanceDetailResponse = models.InstanceDetailResponse;
+const DeleteInstancePreResponse = models.DeleteInstancePreResponse;
 const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
 const TopicInSyncReplicaInfo = models.TopicInSyncReplicaInfo;
 const DescribeRegionRequest = models.DescribeRegionRequest;
@@ -104,6 +104,7 @@ const Instance = models.Instance;
 const DescribeInstanceAttributesResponse = models.DescribeInstanceAttributesResponse;
 const ModifyPasswordResponse = models.ModifyPasswordResponse;
 const TopicDetailResponse = models.TopicDetailResponse;
+const DeleteInstancePreRequest = models.DeleteInstancePreRequest;
 const TopicSubscribeGroup = models.TopicSubscribeGroup;
 const Config = models.Config;
 const ModifyPasswordRequest = models.ModifyPasswordRequest;
@@ -124,6 +125,7 @@ const GroupOffsetResponse = models.GroupOffsetResponse;
 const BatchCreateAclResponse = models.BatchCreateAclResponse;
 const ModifyInstancePreResponse = models.ModifyInstancePreResponse;
 const CreateUserRequest = models.CreateUserRequest;
+const InstanceDetailResponse = models.InstanceDetailResponse;
 const DeleteRouteRequest = models.DeleteRouteRequest;
 const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
@@ -493,6 +495,17 @@ class CkafkaClient extends AbstractClient {
     DescribeTopicAttributes(req, cb) {
         let resp = new DescribeTopicAttributesResponse();
         this.request("DescribeTopicAttributes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a monthly subscribed (prepaid) instance.
+     * @param {DeleteInstancePreRequest} req
+     * @param {function(string, DeleteInstancePreResponse):void} cb
+     * @public
+     */
+    DeleteInstancePre(req, cb) {
+        let resp = new DeleteInstancePreResponse();
+        this.request("DeleteInstancePre", req, resp, cb);
     }
 
     /**

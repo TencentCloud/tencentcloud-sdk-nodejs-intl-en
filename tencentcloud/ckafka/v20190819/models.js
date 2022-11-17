@@ -3262,24 +3262,24 @@ class DescribeTopicSubscribeGroupRequest extends  AbstractModel {
 }
 
 /**
- * Returned result of instance details
+ * DeleteInstancePre response structure.
  * @class
  */
-class InstanceDetailResponse extends  AbstractModel {
+class DeleteInstancePreResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of eligible instances
-         * @type {number || null}
+         * Returned result
+         * @type {CreateInstancePreResp || null}
          */
-        this.TotalCount = null;
+        this.Result = null;
 
         /**
-         * List of eligible instance details
-         * @type {Array.<InstanceDetail> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.InstanceList = null;
+        this.RequestId = null;
 
     }
 
@@ -3290,16 +3290,13 @@ class InstanceDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.InstanceList) {
-            this.InstanceList = new Array();
-            for (let z in params.InstanceList) {
-                let obj = new InstanceDetail();
-                obj.deserialize(params.InstanceList[z]);
-                this.InstanceList.push(obj);
-            }
+        if (params.Result) {
+            let obj = new CreateInstancePreResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4421,6 +4418,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
+ * DeleteInstancePre request structure.
+ * @class
+ */
+class DeleteInstancePreRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5697,6 +5722,49 @@ class CreateUserRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * Returned result of instance details
+ * @class
+ */
+class InstanceDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of eligible instances
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of eligible instance details
+         * @type {Array.<InstanceDetail> || null}
+         */
+        this.InstanceList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceList) {
+            this.InstanceList = new Array();
+            for (let z in params.InstanceList) {
+                let obj = new InstanceDetail();
+                obj.deserialize(params.InstanceList[z]);
+                this.InstanceList.push(obj);
+            }
+        }
 
     }
 }
@@ -8129,7 +8197,7 @@ module.exports = {
     DeleteAclResponse: DeleteAclResponse,
     DynamicRetentionTime: DynamicRetentionTime,
     DescribeTopicSubscribeGroupRequest: DescribeTopicSubscribeGroupRequest,
-    InstanceDetailResponse: InstanceDetailResponse,
+    DeleteInstancePreResponse: DeleteInstancePreResponse,
     FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
     TopicInSyncReplicaInfo: TopicInSyncReplicaInfo,
     DescribeRegionRequest: DescribeRegionRequest,
@@ -8153,6 +8221,7 @@ module.exports = {
     DescribeInstanceAttributesResponse: DescribeInstanceAttributesResponse,
     ModifyPasswordResponse: ModifyPasswordResponse,
     TopicDetailResponse: TopicDetailResponse,
+    DeleteInstancePreRequest: DeleteInstancePreRequest,
     TopicSubscribeGroup: TopicSubscribeGroup,
     Config: Config,
     ModifyPasswordRequest: ModifyPasswordRequest,
@@ -8173,6 +8242,7 @@ module.exports = {
     BatchCreateAclResponse: BatchCreateAclResponse,
     ModifyInstancePreResponse: ModifyInstancePreResponse,
     CreateUserRequest: CreateUserRequest,
+    InstanceDetailResponse: InstanceDetailResponse,
     DeleteRouteRequest: DeleteRouteRequest,
     DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,

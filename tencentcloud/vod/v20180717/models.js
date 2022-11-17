@@ -4995,13 +4995,13 @@ class StorageRegionInfo extends  AbstractModel {
         super();
 
         /**
-         * Storage region.
+         * The storage region.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * Description of the storage region.
+         * The description of the storage region.
          * @type {string || null}
          */
         this.Description = null;
@@ -5020,6 +5020,14 @@ class StorageRegionInfo extends  AbstractModel {
          */
         this.IsDefault = null;
 
+        /**
+         * Whether the storage region is inside or outside the Chinese mainland. Valid values:
+<li>Chinese Mainland</li>
+<li>Outside Chinese Mainland</li>
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -5033,6 +5041,7 @@ class StorageRegionInfo extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -6038,6 +6047,12 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
         this.Message = null;
 
         /**
+         * The progress of the adaptive bitrate task. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
          * Input of adaptive bitrate streaming task.
          * @type {AdaptiveDynamicStreamingTaskInput || null}
          */
@@ -6062,6 +6077,7 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
         this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
         if (params.Input) {
             let obj = new AdaptiveDynamicStreamingTaskInput();

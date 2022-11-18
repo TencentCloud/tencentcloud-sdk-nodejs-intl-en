@@ -39,6 +39,7 @@ const DestroyHourDCDBInstanceResponse = models.DestroyHourDCDBInstanceResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
 const CloneAccountResponse = models.CloneAccountResponse;
+const IsolateDedicatedDBInstanceRequest = models.IsolateDedicatedDBInstanceRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const DestroyDCDBInstanceRequest = models.DestroyDCDBInstanceRequest;
 const BriefNodeInfo = models.BriefNodeInfo;
@@ -77,6 +78,7 @@ const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const DescribeDCDBInstanceNodeInfoResponse = models.DescribeDCDBInstanceNodeInfoResponse;
+const TerminateDedicatedDBInstanceRequest = models.TerminateDedicatedDBInstanceRequest;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
@@ -109,6 +111,8 @@ const DescribeFlowRequest = models.DescribeFlowRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
+const IsolateDedicatedDBInstanceResponse = models.IsolateDedicatedDBInstanceResponse;
+const TerminateDedicatedDBInstanceResponse = models.TerminateDedicatedDBInstanceResponse;
 const ModifyInstanceNetworkRequest = models.ModifyInstanceNetworkRequest;
 const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
 const ConstraintRange = models.ConstraintRange;
@@ -273,6 +277,17 @@ Note: accounts with the same username but different hosts are different accounts
     InitDCDBInstances(req, cb) {
         let resp = new InitDCDBInstancesResponse();
         this.request("InitDCDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to isolate a dedicated TencentDB instance.
+     * @param {IsolateDedicatedDBInstanceRequest} req
+     * @param {function(string, IsolateDedicatedDBInstanceResponse):void} cb
+     * @public
+     */
+    IsolateDedicatedDBInstance(req, cb) {
+        let resp = new IsolateDedicatedDBInstanceResponse();
+        this.request("IsolateDedicatedDBInstance", req, resp, cb);
     }
 
     /**
@@ -572,6 +587,17 @@ Note: Accounts with the same username but different hosts are different accounts
     CancelDcnJob(req, cb) {
         let resp = new CancelDcnJobResponse();
         this.request("CancelDcnJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to terminate the isolated dedicated TDSQL instance.
+     * @param {TerminateDedicatedDBInstanceRequest} req
+     * @param {function(string, TerminateDedicatedDBInstanceResponse):void} cb
+     * @public
+     */
+    TerminateDedicatedDBInstance(req, cb) {
+        let resp = new TerminateDedicatedDBInstanceResponse();
+        this.request("TerminateDedicatedDBInstance", req, resp, cb);
     }
 
     /**

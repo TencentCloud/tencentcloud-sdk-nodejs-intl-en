@@ -60,7 +60,7 @@ class IntlpartnersmgtClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query a customer’s credit.
+     * This API is used to query the credits of direct customers.
      * @param {QueryDirectCustomersCreditRequest} req
      * @param {function(string, QueryDirectCustomersCreditResponse):void} cb
      * @public
@@ -134,7 +134,7 @@ Notes:<br>
     }
 
     /**
-     * This API is used for a partner to query a customer's credit and basic information.
+     * This API is used for a partner to the credits and basic information of cutomers.
      * @param {QueryCustomersCreditRequest} req
      * @param {function(string, QueryCustomersCreditResponse):void} cb
      * @public

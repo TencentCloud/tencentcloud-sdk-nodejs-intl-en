@@ -1058,6 +1058,34 @@ class CloneAccountResponse extends  AbstractModel {
 }
 
 /**
+ * IsolateDedicatedDBInstance request structure.
+ * @class
+ */
+class IsolateDedicatedDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `dcdbt-ow728lmc`
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * ModifyAccountDescription response structure.
  * @class
  */
@@ -3363,6 +3391,34 @@ class DescribeDCDBInstanceNodeInfoResponse extends  AbstractModel {
 }
 
 /**
+ * TerminateDedicatedDBInstance request structure.
+ * @class
+ */
+class TerminateDedicatedDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `dcdbt-ow728lmc`
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeDatabaseObjects response structure.
  * @class
  */
@@ -4994,6 +5050,69 @@ class CreateAccountResponse extends  AbstractModel {
 }
 
 /**
+ * IsolateDedicatedDBInstance response structure.
+ * @class
+ */
+class IsolateDedicatedDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TerminateDedicatedDBInstance response structure.
+ * @class
+ */
+class TerminateDedicatedDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyInstanceNetwork request structure.
  * @class
  */
@@ -5925,6 +6044,7 @@ module.exports = {
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     DescribeFlowResponse: DescribeFlowResponse,
     CloneAccountResponse: CloneAccountResponse,
+    IsolateDedicatedDBInstanceRequest: IsolateDedicatedDBInstanceRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     DestroyDCDBInstanceRequest: DestroyDCDBInstanceRequest,
     BriefNodeInfo: BriefNodeInfo,
@@ -5963,6 +6083,7 @@ module.exports = {
     SecurityGroup: SecurityGroup,
     DescribeDatabaseTableRequest: DescribeDatabaseTableRequest,
     DescribeDCDBInstanceNodeInfoResponse: DescribeDCDBInstanceNodeInfoResponse,
+    TerminateDedicatedDBInstanceRequest: TerminateDedicatedDBInstanceRequest,
     DescribeDatabaseObjectsResponse: DescribeDatabaseObjectsResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     DescribeDcnDetailResponse: DescribeDcnDetailResponse,
@@ -5995,6 +6116,8 @@ module.exports = {
     DatabaseProcedure: DatabaseProcedure,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     CreateAccountResponse: CreateAccountResponse,
+    IsolateDedicatedDBInstanceResponse: IsolateDedicatedDBInstanceResponse,
+    TerminateDedicatedDBInstanceResponse: TerminateDedicatedDBInstanceResponse,
     ModifyInstanceNetworkRequest: ModifyInstanceNetworkRequest,
     IsolateHourDCDBInstanceRequest: IsolateHourDCDBInstanceRequest,
     ConstraintRange: ConstraintRange,

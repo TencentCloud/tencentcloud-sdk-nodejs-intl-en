@@ -861,6 +861,48 @@ class DescribeDBParametersResponse extends  AbstractModel {
 }
 
 /**
+ * IsolateDBInstance response structure.
+ * @class
+ */
+class IsolateDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of isolated instances
+         * @type {Array.<string> || null}
+         */
+        this.SuccessInstanceIds = null;
+
+        /**
+         * IDs of instances failed to be isolated
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessInstanceIds = 'SuccessInstanceIds' in params ? params.SuccessInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CloneAccount response structure.
  * @class
  */
@@ -891,6 +933,34 @@ class CloneAccountResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * IsolateDedicatedDBInstance request structure.
+ * @class
+ */
+class IsolateDedicatedDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `tdsql-ow728lmc`
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2456,6 +2526,34 @@ class DescribeDatabaseTableRequest extends  AbstractModel {
 }
 
 /**
+ * TerminateDedicatedDBInstance request structure.
+ * @class
+ */
+class TerminateDedicatedDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `tdsql-ow728lmc`
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeDatabaseObjects response structure.
  * @class
  */
@@ -4000,6 +4098,34 @@ class DeleteAccountRequest extends  AbstractModel {
 }
 
 /**
+ * IsolateDBInstance request structure.
+ * @class
+ */
+class IsolateDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `tdsql-dasjkhd`. It is the same as the instance ID displayed on the TencentDB console. You can use the `DescribeDBInstances` API to query the ID, which is the value of the `InstanceId` output parameter.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * ModifyAccountPrivileges request structure.
  * @class
  */
@@ -4371,6 +4497,34 @@ class CreateAccountResponse extends  AbstractModel {
 }
 
 /**
+ * IsolateDedicatedDBInstance response structure.
+ * @class
+ */
+class IsolateDedicatedDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLogFileRetentionPeriod response structure.
  * @class
  */
@@ -4379,7 +4533,7 @@ class DescribeLogFileRetentionPeriodResponse extends  AbstractModel {
         super();
 
         /**
-         * Instance ID in the format of `tdsql-ow728lmc`.
+         * Instance ID in the format of `tdsql-ow728lmc`
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4407,6 +4561,41 @@ class DescribeLogFileRetentionPeriodResponse extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Days = 'Days' in params ? params.Days : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TerminateDedicatedDBInstance response structure.
+ * @class
+ */
+class TerminateDedicatedDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5201,7 +5390,7 @@ class DescribeLogFileRetentionPeriodRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID in the format of `tdsql-ow728lmc`.
+         * Instance ID in the format of `tdsql-ow728lmc`
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5493,7 +5682,9 @@ module.exports = {
     DescribeDBSlowLogsRequest: DescribeDBSlowLogsRequest,
     CreateAccountRequest: CreateAccountRequest,
     DescribeDBParametersResponse: DescribeDBParametersResponse,
+    IsolateDBInstanceResponse: IsolateDBInstanceResponse,
     CloneAccountResponse: CloneAccountResponse,
+    IsolateDedicatedDBInstanceRequest: IsolateDedicatedDBInstanceRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     ParamConstraint: ParamConstraint,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
@@ -5526,6 +5717,7 @@ module.exports = {
     CopyAccountPrivilegesRequest: CopyAccountPrivilegesRequest,
     SecurityGroup: SecurityGroup,
     DescribeDatabaseTableRequest: DescribeDatabaseTableRequest,
+    TerminateDedicatedDBInstanceRequest: TerminateDedicatedDBInstanceRequest,
     DescribeDatabaseObjectsResponse: DescribeDatabaseObjectsResponse,
     DescribeDcnDetailResponse: DescribeDcnDetailResponse,
     TableColumn: TableColumn,
@@ -5551,13 +5743,16 @@ module.exports = {
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     ResourceTag: ResourceTag,
     DeleteAccountRequest: DeleteAccountRequest,
+    IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     DatabaseProcedure: DatabaseProcedure,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     CloneAccountRequest: CloneAccountRequest,
     CreateAccountResponse: CreateAccountResponse,
+    IsolateDedicatedDBInstanceResponse: IsolateDedicatedDBInstanceResponse,
     DescribeLogFileRetentionPeriodResponse: DescribeLogFileRetentionPeriodResponse,
+    TerminateDedicatedDBInstanceResponse: TerminateDedicatedDBInstanceResponse,
     ModifyInstanceNetworkRequest: ModifyInstanceNetworkRequest,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     ConstraintRange: ConstraintRange,

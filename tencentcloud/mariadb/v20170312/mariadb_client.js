@@ -35,7 +35,9 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const CloneAccountResponse = models.CloneAccountResponse;
+const IsolateDedicatedDBInstanceRequest = models.IsolateDedicatedDBInstanceRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const ParamConstraint = models.ParamConstraint;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
@@ -68,6 +70,7 @@ const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
+const TerminateDedicatedDBInstanceRequest = models.TerminateDedicatedDBInstanceRequest;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const TableColumn = models.TableColumn;
@@ -93,13 +96,16 @@ const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const ResourceTag = models.ResourceTag;
 const DeleteAccountRequest = models.DeleteAccountRequest;
+const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const CloneAccountRequest = models.CloneAccountRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
+const IsolateDedicatedDBInstanceResponse = models.IsolateDedicatedDBInstanceResponse;
 const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
+const TerminateDedicatedDBInstanceResponse = models.TerminateDedicatedDBInstanceResponse;
 const ModifyInstanceNetworkRequest = models.ModifyInstanceNetworkRequest;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const ConstraintRange = models.ConstraintRange;
@@ -301,6 +307,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to isolate a monthly subscribed TencentDB instance, which will no longer be accessible via IP and port. The isolated instance can be started up in the recycle bin. If it is isolated due to overdue payments, top up your account as soon as possible.
+     * @param {IsolateDBInstanceRequest} req
+     * @param {function(string, IsolateDBInstanceResponse):void} cb
+     * @public
+     */
+    IsolateDBInstance(req, cb) {
+        let resp = new IsolateDBInstanceResponse();
+        this.request("IsolateDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of various logs of a database, including cold backups, binlogs, errlogs, and slowlogs.
      * @param {DescribeDBLogFilesRequest} req
      * @param {function(string, DescribeDBLogFilesResponse):void} cb
@@ -485,6 +502,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to isolate a dedicated TencentDB instance.
+     * @param {IsolateDedicatedDBInstanceRequest} req
+     * @param {function(string, IsolateDedicatedDBInstanceResponse):void} cb
+     * @public
+     */
+    IsolateDedicatedDBInstance(req, cb) {
+        let resp = new IsolateDedicatedDBInstanceResponse();
+        this.request("IsolateDedicatedDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify instance Vport.
      * @param {ModifyInstanceVportRequest} req
      * @param {function(string, ModifyInstanceVportResponse):void} cb
@@ -529,6 +557,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to terminate the isolated dedicated TencentDB instance.
+     * @param {TerminateDedicatedDBInstanceRequest} req
+     * @param {function(string, TerminateDedicatedDBInstanceResponse):void} cb
+     * @public
+     */
+    TerminateDedicatedDBInstance(req, cb) {
+        let resp = new TerminateDedicatedDBInstanceResponse();
+        this.request("TerminateDedicatedDBInstance", req, resp, cb);
+    }
+
+    /**
      * This API is used to clone an instance account.
      * @param {CloneAccountRequest} req
      * @param {function(string, CloneAccountResponse):void} cb
@@ -540,7 +579,7 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to view the configured number of days for retention of database backup logs.
+     * This API is used to view the backup log retention days.
      * @param {DescribeLogFileRetentionPeriodRequest} req
      * @param {function(string, DescribeLogFileRetentionPeriodResponse):void} cb
      * @public

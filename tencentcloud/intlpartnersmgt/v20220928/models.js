@@ -338,13 +338,13 @@ A global mobile number within 1-32 digits is allowed, such as 18888888888.
         this.PhoneNum = null;
 
         /**
-         * Customer’s country/region code, which can be obtained via the `GetCountryCodes` API, such as “852”.
+         * Customer's country/region code, which can be obtained via the `GetCountryCodes` API, such as "852".
          * @type {string || null}
          */
         this.CountryCode = null;
 
         /**
-         * Customer’s ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
+         * Customer's ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
          * @type {string || null}
          */
         this.Area = null;
@@ -385,7 +385,7 @@ class QueryDirectCustomersCreditResponse extends  AbstractModel {
         super();
 
         /**
-         * Customer information list
+         * Direct customer information list
          * @type {Array.<QueryDirectCustomersCreditData> || null}
          */
         this.Data = null;
@@ -687,7 +687,7 @@ class QueryPartnerCreditResponse extends  AbstractModel {
 }
 
 /**
- * A customer’s credit information
+ * The credit information of direct customers
  * @class
  */
 class QueryDirectCustomersCreditData extends  AbstractModel {

@@ -85,7 +85,7 @@ const CreatePersonSampleRequest = models.CreatePersonSampleRequest;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const CosInputInfo = models.CosInputInfo;
 const TagConfigureInfo = models.TagConfigureInfo;
-const AiRecognitionTaskOcrWordsResultOutput = models.AiRecognitionTaskOcrWordsResultOutput;
+const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
 const AiSampleFaceInfo = models.AiSampleFaceInfo;
 const DeleteAIRecognitionTemplateRequest = models.DeleteAIRecognitionTemplateRequest;
 const NumberFormat = models.NumberFormat;
@@ -94,7 +94,7 @@ const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOu
 const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
 const EditMediaTaskInput = models.EditMediaTaskInput;
 const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTemplateInfo;
-const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
+const AiRecognitionTaskOcrWordsResultOutput = models.AiRecognitionTaskOcrWordsResultOutput;
 const AiAnalysisTaskFrameTagOutput = models.AiAnalysisTaskFrameTagOutput;
 const MediaProcessTaskAdaptiveDynamicStreamingResult = models.MediaProcessTaskAdaptiveDynamicStreamingResult;
 const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
@@ -167,6 +167,7 @@ const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const ProcessMediaRequest = models.ProcessMediaRequest;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
+const AiRecognitionTaskTransTextResultInput = models.AiRecognitionTaskTransTextResultInput;
 const ImageQualityEnhanceConfig = models.ImageQualityEnhanceConfig;
 const AiSampleWord = models.AiSampleWord;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
@@ -239,6 +240,7 @@ const TranscodeTemplate = models.TranscodeTemplate;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
 const AiReviewTaskPoliticalAsrResult = models.AiReviewTaskPoliticalAsrResult;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
+const SubtitleTemplate = models.SubtitleTemplate;
 const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
 const AiReviewProhibitedAsrTaskInput = models.AiReviewProhibitedAsrTaskInput;
 const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
@@ -280,6 +282,7 @@ const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTempl
 const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSegmentItem;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
+const LiveStreamTransTextRecognitionResult = models.LiveStreamTransTextRecognitionResult;
 const WatermarkInput = models.WatermarkInput;
 const EnableWorkflowResponse = models.EnableWorkflowResponse;
 const AiSampleWordInfo = models.AiSampleWordInfo;
@@ -312,6 +315,7 @@ const DescribeTasksResponse = models.DescribeTasksResponse;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const LiveStreamAiReviewImagePornResult = models.LiveStreamAiReviewImagePornResult;
+const AiRecognitionTaskTransTextResultOutput = models.AiRecognitionTaskTransTextResultOutput;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const LiveStreamAiReviewResultItem = models.LiveStreamAiReviewResultItem;
 const TaskSimpleInfo = models.TaskSimpleInfo;
@@ -384,6 +388,7 @@ const MediaImageSpriteItem = models.MediaImageSpriteItem;
 const DescribePersonSamplesRequest = models.DescribePersonSamplesRequest;
 const AiRecognitionTaskFaceResultItem = models.AiRecognitionTaskFaceResultItem;
 const AiAnalysisTaskCoverInput = models.AiAnalysisTaskCoverInput;
+const AiRecognitionTaskTransTextResult = models.AiRecognitionTaskTransTextResult;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
 const LowLightEnhanceConfig = models.LowLightEnhanceConfig;
@@ -391,6 +396,7 @@ const DescribeMediaMetaDataRequest = models.DescribeMediaMetaDataRequest;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
 const DescribeAIRecognitionTemplatesRequest = models.DescribeAIRecognitionTemplatesRequest;
+const AiRecognitionTaskTransTextSegmentItem = models.AiRecognitionTaskTransTextSegmentItem;
 const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
 const AiRecognitionResult = models.AiRecognitionResult;
 
@@ -970,10 +976,10 @@ Note: A workflow is disabled upon creation. You need to manually enable it.
     /**
      * This API is used to initiate live stream processing tasks. Such tasks may include the following:
 
-* Intelligent content moderation (detection of pornographic content in images and speech, detection of sensitive information)
-* Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
+* Intelligent content moderation (detection of pornographic content in images and audio, detection of sensitive information)
+* Intelligent content recognition (face, full text, text keyword, and speech keyword recognition; real-time speech translation)
 
-Live stream processing event notifications are written into specified CMQ queues in real time. Users need to obtain event notification results from such CMQ queues. Output files of the processing tasks are written into destination buckets specified by users.
+Live stream processing notifications are written into the specified CMQ queue in real time. You need to obtain the processing results from the CMQ queue. The output files of processing tasks are saved to the specified bucket.
      * @param {ProcessLiveStreamRequest} req
      * @param {function(string, ProcessLiveStreamResponse):void} cb
      * @public
@@ -995,16 +1001,16 @@ Live stream processing event notifications are written into specified CMQ queues
     }
 
     /**
-     * This API is used to initiate processing tasks for media files in COS. Such tasks may include the following:
-1. Video transcoding (with watermark)
+     * This API is used to initiate processing tasks for media specified by a URL or in COS. Such tasks may include the following:
+1. Video transcoding (general transcoding, Top Speed Codec, audio/video enhancement)
 2. Animated image generating
 3. Time point screencapturing
 4. Sampled screencapturing
 5. Image sprite generating
 6. Adaptive bitrate streaming
 7. Intelligent content moderation (detection of pornographic and sensitive content)
-8. Intelligent content analysis (labeling, categorization, thumbnail generation, frame-specific labeling)
-9. Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
+8. Intelligent content analysis (labeling, categorization, thumbnail generation, labeling by frame, splitting, highlight generation, opening and closing segment recognition)
+9. Intelligent content recognition (face, full text, text keyword, full speech, speech keyword, speech translation, object recognition)
      * @param {ProcessMediaRequest} req
      * @param {function(string, ProcessMediaResponse):void} cb
      * @public

@@ -5154,6 +5154,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.Status = null;
 
+        /**
+         * Valid values: `0` (Pulsar), `1` (RocketMQ).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BrokerType = null;
+
     }
 
     /**
@@ -5186,6 +5193,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.TenantId = 'TenantId' in params ? params.TenantId : null;
         this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.BrokerType = 'BrokerType' in params ? params.BrokerType : null;
 
     }
 }

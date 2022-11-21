@@ -369,6 +369,12 @@ class OverrideTranscodeParameter extends  AbstractModel {
          */
         this.TEHDConfig = null;
 
+        /**
+         * The subtitle settings.
+         * @type {SubtitleTemplate || null}
+         */
+        this.SubtitleTemplate = null;
+
     }
 
     /**
@@ -398,6 +404,12 @@ class OverrideTranscodeParameter extends  AbstractModel {
             let obj = new TEHDConfigForUpdate();
             obj.deserialize(params.TEHDConfig)
             this.TEHDConfig = obj;
+        }
+
+        if (params.SubtitleTemplate) {
+            let obj = new SubtitleTemplate();
+            obj.deserialize(params.SubtitleTemplate)
+            this.SubtitleTemplate = obj;
         }
 
     }
@@ -1469,7 +1481,7 @@ Default value: open.
         this.SampleInterval = null;
 
         /**
-         * Image format. Valid values: jpg; png.
+         * The image format. Valid values: jpg, png, webp.
          * @type {string || null}
          */
         this.Format = null;
@@ -2056,6 +2068,12 @@ Default value: black.
          */
         this.Comment = null;
 
+        /**
+         * The image format. Valid values: jpg (default), png, webp.
+         * @type {string || null}
+         */
+        this.Format = null;
+
     }
 
     /**
@@ -2075,6 +2093,7 @@ Default value: black.
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Format = 'Format' in params ? params.Format : null;
 
     }
 }
@@ -2736,6 +2755,12 @@ When the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound chan
          */
         this.AudioChannel = null;
 
+        /**
+         * The audio tracks to retain. All audio tracks are retained by default.
+         * @type {Array.<number> || null}
+         */
+        this.StreamSelects = null;
+
     }
 
     /**
@@ -2749,6 +2774,7 @@ When the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound chan
         this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
         this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
         this.AudioChannel = 'AudioChannel' in params ? params.AudioChannel : null;
+        this.StreamSelects = 'StreamSelects' in params ? params.StreamSelects : null;
 
     }
 }
@@ -4062,18 +4088,32 @@ class TagConfigureInfo extends  AbstractModel {
 }
 
 /**
- * Output of text keyword recognition.
+ * DescribeWordSamples response structure.
  * @class
  */
-class AiRecognitionTaskOcrWordsResultOutput extends  AbstractModel {
+class DescribeWordSamplesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Text keyword recognition result set.
-         * @type {Array.<AiRecognitionTaskOcrWordsResultItem> || null}
+         * Number of eligible entries.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.ResultSet = null;
+        this.TotalCount = null;
+
+        /**
+         * Keyword information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AiSampleWord> || null}
+         */
+        this.WordSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4084,15 +4124,17 @@ class AiRecognitionTaskOcrWordsResultOutput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.ResultSet) {
-            this.ResultSet = new Array();
-            for (let z in params.ResultSet) {
-                let obj = new AiRecognitionTaskOcrWordsResultItem();
-                obj.deserialize(params.ResultSet[z]);
-                this.ResultSet.push(obj);
+        if (params.WordSet) {
+            this.WordSet = new Array();
+            for (let z in params.WordSet) {
+                let obj = new AiSampleWord();
+                obj.deserialize(params.WordSet[z]);
+                this.WordSet.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4477,32 +4519,18 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
- * DescribeWordSamples response structure.
+ * Output of text keyword recognition.
  * @class
  */
-class DescribeWordSamplesResponse extends  AbstractModel {
+class AiRecognitionTaskOcrWordsResultOutput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of eligible entries.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Text keyword recognition result set.
+         * @type {Array.<AiRecognitionTaskOcrWordsResultItem> || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * Keyword information.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<AiSampleWord> || null}
-         */
-        this.WordSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.ResultSet = null;
 
     }
 
@@ -4513,17 +4541,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.WordSet) {
-            this.WordSet = new Array();
-            for (let z in params.WordSet) {
-                let obj = new AiSampleWord();
-                obj.deserialize(params.WordSet[z]);
-                this.WordSet.push(obj);
+        if (params.ResultSet) {
+            this.ResultSet = new Array();
+            for (let z in params.ResultSet) {
+                let obj = new AiRecognitionTaskOcrWordsResultItem();
+                obj.deserialize(params.ResultSet[z]);
+                this.ResultSet.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8213,9 +8239,12 @@ class ProcessMediaRequest extends  AbstractModel {
 
         /**
          * The scheme ID.
-Notes: 1. If output information is not specified for a scheme, the request parameters `OutputStorage` and `OutputDir` will be used.
-2. If a notification is not configured for a scheme, the request parameter `TaskNotifyConfig` will be used.
-3. The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+Note 1: About `OutputStorage` and `OutputDir`
+<li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
+<li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
+Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
+
+Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
          * @type {number || null}
          */
         this.ScheduleId = null;
@@ -8424,6 +8453,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Output)
             this.Output = obj;
         }
+
+    }
+}
+
+/**
+ * The translation input.
+ * @class
+ */
+class AiRecognitionTaskTransTextResultInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The translation template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -11808,6 +11865,12 @@ Default value: black.
          */
         this.Comment = null;
 
+        /**
+         * The image format.
+         * @type {string || null}
+         */
+        this.Format = null;
+
     }
 
     /**
@@ -11831,6 +11894,7 @@ Default value: black.
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Format = 'Format' in params ? params.Format : null;
 
     }
 }
@@ -12430,6 +12494,77 @@ class AiRecognitionTaskAsrWordsSegmentItem extends  AbstractModel {
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * The subtitle settings.
+ * @class
+ */
+class SubtitleTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The URL of the subtitles to add to the video.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
+         * @type {number || null}
+         */
+        this.StreamIndex = null;
+
+        /**
+         * The font. Valid values:
+<li>hei.ttf</li>
+<li>song.ttf</li>
+<li>simkai.ttf</li>
+<li>arial.ttf (for English only)</li>
+The default is `hei.ttf`.
+         * @type {string || null}
+         */
+        this.FontType = null;
+
+        /**
+         * The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
+         * @type {string || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+         * @type {string || null}
+         */
+        this.FontColor = null;
+
+        /**
+         * The text transparency. Value range: 0-1.
+<li>0: Completely transparent</li>
+<li>1: Completely opaque</li>
+Default value: 1.
+         * @type {number || null}
+         */
+        this.FontAlpha = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Path = 'Path' in params ? params.Path : null;
+        this.StreamIndex = 'StreamIndex' in params ? params.StreamIndex : null;
+        this.FontType = 'FontType' in params ? params.FontType : null;
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.FontColor = 'FontColor' in params ? params.FontColor : null;
+        this.FontAlpha = 'FontAlpha' in params ? params.FontAlpha : null;
 
     }
 }
@@ -13531,14 +13666,15 @@ class ParseNotificationResponse extends  AbstractModel {
         this.EventType = null;
 
         /**
-         * Information of a video processing task. This field has a value only when `TaskType` is `WorkflowTask`.
+         * The information of a video processing task. Information will be returned only if `EventType` is `WorkflowTask`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {WorkflowTask || null}
          */
         this.WorkflowTaskEvent = null;
 
         /**
-         * Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
+         * The information of a video editing task. Information will be returned only if `EventType` is `EditMediaTask`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {EditMediaTask || null}
          */
         this.EditMediaTaskEvent = null;
@@ -13556,7 +13692,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SessionContext = null;
 
         /**
-         * The information of a scheme. This parameter is valid only if `TaskType` is `ScheduleTask`.
+         * The information of a scheme. Information will be returned only if `EventType` is `ScheduleTask`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ScheduleTask || null}
          */
@@ -14936,6 +15072,62 @@ class DeleteWordSamplesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The live stream translation result.
+ * @class
+ */
+class LiveStreamTransTextRecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The text transcript.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * The PTS (seconds) of the start of a segment.
+         * @type {number || null}
+         */
+        this.StartPtsTime = null;
+
+        /**
+         * The PTS (seconds) of the end of a segment.
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * The confidence score for a segment. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The translation.
+         * @type {string || null}
+         */
+        this.Trans = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Trans = 'Trans' in params ? params.Trans : null;
 
     }
 }
@@ -16337,12 +16529,13 @@ class LiveStreamAiRecognitionResultItem extends  AbstractModel {
         super();
 
         /**
-         * Result type. Valid values:
-<li>FaceRecognition: face recognition,</li>
-<li>AsrWordsRecognition: speech keyword recognition,</li>
-<li>OcrWordsRecognition: text keyword recognition,</li>
-<li>AsrFullTextRecognition: full speech recognition,</li>
-<li>OcrFullTextRecognition: full text recognition.</li>
+         * The result type. Valid values:
+<li>FaceRecognition: Face recognition</li>
+<li>AsrWordsRecognition: Speech keyword recognition</li>
+<li>OcrWordsRecognition: Text keyword recognition</li>
+<li>AsrFullTextRecognition: Full speech recognition</li>
+<li>OcrFullTextRecognition: Full text recognition</li>
+<li>TransTextRecognition: Speech translation</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -16381,6 +16574,12 @@ class LiveStreamAiRecognitionResultItem extends  AbstractModel {
          * @type {Array.<LiveStreamOcrFullTextRecognitionResult> || null}
          */
         this.OcrFullTextRecognitionResultSet = null;
+
+        /**
+         * The translation result. This parameter is valid only if `Type` is `TransTextRecognition`.
+         * @type {Array.<LiveStreamTransTextRecognitionResult> || null}
+         */
+        this.TransTextRecognitionResultSet = null;
 
     }
 
@@ -16435,6 +16634,15 @@ class LiveStreamAiRecognitionResultItem extends  AbstractModel {
                 let obj = new LiveStreamOcrFullTextRecognitionResult();
                 obj.deserialize(params.OcrFullTextRecognitionResultSet[z]);
                 this.OcrFullTextRecognitionResultSet.push(obj);
+            }
+        }
+
+        if (params.TransTextRecognitionResultSet) {
+            this.TransTextRecognitionResultSet = new Array();
+            for (let z in params.TransTextRecognitionResultSet) {
+                let obj = new LiveStreamTransTextRecognitionResult();
+                obj.deserialize(params.TransTextRecognitionResultSet[z]);
+                this.TransTextRecognitionResultSet.push(obj);
             }
         }
 
@@ -16891,6 +17099,61 @@ and will be deleted after `PicUrlExpireTime`).
 }
 
 /**
+ * The translation result.
+ * @class
+ */
+class AiRecognitionTaskTransTextResultOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The translated segments.
+         * @type {Array.<AiRecognitionTaskTransTextSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+        /**
+         * The subtitle URL.
+         * @type {string || null}
+         */
+        this.SubtitlePath = null;
+
+        /**
+         * The subtitle storage location.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new AiRecognitionTaskTransTextSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+        this.SubtitlePath = 'SubtitlePath' in params ? params.SubtitlePath : null;
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+
+    }
+}
+
+/**
  * ModifySnapshotByTimeOffsetTemplate request structure.
  * @class
  */
@@ -16932,7 +17195,7 @@ Default value: open.
         this.ResolutionAdaptive = null;
 
         /**
-         * Image format. Valid values: jpg, png.
+         * The image format. Valid values: jpg, png, webp.
          * @type {string || null}
          */
         this.Format = null;
@@ -18114,6 +18377,12 @@ Default value: black.
          */
         this.Comment = null;
 
+        /**
+         * The image format. Valid values: jpg, png, webp.
+         * @type {string || null}
+         */
+        this.Format = null;
+
     }
 
     /**
@@ -18134,6 +18403,7 @@ Default value: black.
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Format = 'Format' in params ? params.Format : null;
 
     }
 }
@@ -19586,7 +19856,7 @@ Default value: open.
         this.ResolutionAdaptive = null;
 
         /**
-         * Image format. Valid values: jpg; png. Default value: jpg.
+         * The image format. Valid values: jpg (default), png, webp.
          * @type {string || null}
          */
         this.Format = null;
@@ -19782,7 +20052,7 @@ Default value: open.
         this.ResolutionAdaptive = null;
 
         /**
-         * Image format. Valid values: jpg; png. Default value: jpg.
+         * The image format. Valid values: jpg (default), png, webp.
          * @type {string || null}
          */
         this.Format = null;
@@ -21375,6 +21645,80 @@ class AiAnalysisTaskCoverInput extends  AbstractModel {
 }
 
 /**
+ * The translation result.
+ * @class
+ */
+class AiRecognitionTaskTransTextResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; any other value indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * The error code. `0` indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The input of the translation task.
+         * @type {AiRecognitionTaskTransTextResultInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * The output of the translation task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiRecognitionTaskTransTextResultOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiRecognitionTaskTransTextResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiRecognitionTaskTransTextResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
  * Output of video editing task
  * @class
  */
@@ -21633,6 +21977,62 @@ class DescribeAIRecognitionTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * The translated segments.
+ * @class
+ */
+class AiRecognitionTaskTransTextSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The confidence score for a segment. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The start time offset (seconds) of a segment.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * The end time offset (seconds) of a segment.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * The text transcript.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * The translation.
+         * @type {string || null}
+         */
+        this.Trans = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Trans = 'Trans' in params ? params.Trans : null;
+
+    }
+}
+
+/**
  * ModifyWatermarkTemplate response structure.
  * @class
  */
@@ -21676,14 +22076,13 @@ class AiRecognitionResult extends  AbstractModel {
         super();
 
         /**
-         * Task type. Valid values:
-<li>FaceRecognition: Face recognition,</li>
-<li>AsrWordsRecognition: Speech keyword recognition,</li>
-<li>OcrWordsRecognition: Text keyword recognition,</li>
-<li>AsrFullTextRecognition: Full speech recognition,</li>
-<li>OcrFullTextRecognition: Full text recognition,</li>
-<li>HeadTailRecognition: Video opening and ending credits recognition,</li>
-<li>ObjectRecognition: Object recognition.</li>
+         * The task type. Valid values:
+<li>FaceRecognition: Face recognition</li>
+<li>AsrWordsRecognition: Speech keyword recognition</li>
+<li>OcrWordsRecognition: Text keyword recognition</li>
+<li>AsrFullTextRecognition: Full speech recognition</li>
+<li>OcrFullTextRecognition: Full text recognition</li>
+<li>TransTextRecognition: Speech translation</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -21728,6 +22127,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.OcrFullTextTask = null;
 
+        /**
+         * The translation result. This parameter is valid only if `Type` is
+ `TransTextRecognition`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiRecognitionTaskTransTextResult || null}
+         */
+        this.TransTextTask = null;
+
     }
 
     /**
@@ -21767,6 +22174,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new AiRecognitionTaskOcrFullTextResult();
             obj.deserialize(params.OcrFullTextTask)
             this.OcrFullTextTask = obj;
+        }
+
+        if (params.TransTextTask) {
+            let obj = new AiRecognitionTaskTransTextResult();
+            obj.deserialize(params.TransTextTask)
+            this.TransTextTask = obj;
         }
 
     }
@@ -21842,7 +22255,7 @@ module.exports = {
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
     CosInputInfo: CosInputInfo,
     TagConfigureInfo: TagConfigureInfo,
-    AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
+    DescribeWordSamplesResponse: DescribeWordSamplesResponse,
     AiSampleFaceInfo: AiSampleFaceInfo,
     DeleteAIRecognitionTemplateRequest: DeleteAIRecognitionTemplateRequest,
     NumberFormat: NumberFormat,
@@ -21851,7 +22264,7 @@ module.exports = {
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     EditMediaTaskInput: EditMediaTaskInput,
     UserDefineAsrTextReviewTemplateInfo: UserDefineAsrTextReviewTemplateInfo,
-    DescribeWordSamplesResponse: DescribeWordSamplesResponse,
+    AiRecognitionTaskOcrWordsResultOutput: AiRecognitionTaskOcrWordsResultOutput,
     AiAnalysisTaskFrameTagOutput: AiAnalysisTaskFrameTagOutput,
     MediaProcessTaskAdaptiveDynamicStreamingResult: MediaProcessTaskAdaptiveDynamicStreamingResult,
     OcrWordsConfigureInfoForUpdate: OcrWordsConfigureInfoForUpdate,
@@ -21924,6 +22337,7 @@ module.exports = {
     ProcessMediaRequest: ProcessMediaRequest,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
+    AiRecognitionTaskTransTextResultInput: AiRecognitionTaskTransTextResultInput,
     ImageQualityEnhanceConfig: ImageQualityEnhanceConfig,
     AiSampleWord: AiSampleWord,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
@@ -21996,6 +22410,7 @@ module.exports = {
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
     AiReviewTaskPoliticalAsrResult: AiReviewTaskPoliticalAsrResult,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
+    SubtitleTemplate: SubtitleTemplate,
     PornConfigureInfoForUpdate: PornConfigureInfoForUpdate,
     AiReviewProhibitedAsrTaskInput: AiReviewProhibitedAsrTaskInput,
     MediaContentReviewSegmentItem: MediaContentReviewSegmentItem,
@@ -22037,6 +22452,7 @@ module.exports = {
     AiRecognitionTaskOcrWordsSegmentItem: AiRecognitionTaskOcrWordsSegmentItem,
     MediaProcessTaskResult: MediaProcessTaskResult,
     DeleteWordSamplesResponse: DeleteWordSamplesResponse,
+    LiveStreamTransTextRecognitionResult: LiveStreamTransTextRecognitionResult,
     WatermarkInput: WatermarkInput,
     EnableWorkflowResponse: EnableWorkflowResponse,
     AiSampleWordInfo: AiSampleWordInfo,
@@ -22069,6 +22485,7 @@ module.exports = {
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     LiveStreamAiReviewImagePornResult: LiveStreamAiReviewImagePornResult,
+    AiRecognitionTaskTransTextResultOutput: AiRecognitionTaskTransTextResultOutput,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     LiveStreamAiReviewResultItem: LiveStreamAiReviewResultItem,
     TaskSimpleInfo: TaskSimpleInfo,
@@ -22141,6 +22558,7 @@ module.exports = {
     DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,
     AiAnalysisTaskCoverInput: AiAnalysisTaskCoverInput,
+    AiRecognitionTaskTransTextResult: AiRecognitionTaskTransTextResult,
     EditMediaTaskOutput: EditMediaTaskOutput,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
     LowLightEnhanceConfig: LowLightEnhanceConfig,
@@ -22148,6 +22566,7 @@ module.exports = {
     FrameTagConfigureInfoForUpdate: FrameTagConfigureInfoForUpdate,
     CreateImageSpriteTemplateResponse: CreateImageSpriteTemplateResponse,
     DescribeAIRecognitionTemplatesRequest: DescribeAIRecognitionTemplatesRequest,
+    AiRecognitionTaskTransTextSegmentItem: AiRecognitionTaskTransTextSegmentItem,
     ModifyWatermarkTemplateResponse: ModifyWatermarkTemplateResponse,
     AiRecognitionResult: AiRecognitionResult,
 

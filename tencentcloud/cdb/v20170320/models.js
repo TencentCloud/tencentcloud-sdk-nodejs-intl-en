@@ -5403,6 +5403,12 @@ class ReloadBalanceProxyNodeRequest extends  AbstractModel {
          */
         this.ProxyGroupId = null;
 
+        /**
+         * Address ID of the proxy group
+         * @type {string || null}
+         */
+        this.ProxyAddressId = null;
+
     }
 
     /**
@@ -5413,6 +5419,7 @@ class ReloadBalanceProxyNodeRequest extends  AbstractModel {
             return;
         }
         this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.ProxyAddressId = 'ProxyAddressId' in params ? params.ProxyAddressId : null;
 
     }
 }

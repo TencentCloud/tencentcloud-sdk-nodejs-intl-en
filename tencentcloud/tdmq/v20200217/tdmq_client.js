@@ -198,6 +198,7 @@ const RabbitMQPrivateNode = models.RabbitMQPrivateNode;
 const DeleteCmqSubscribeResponse = models.DeleteCmqSubscribeResponse;
 const DescribePublisherSummaryRequest = models.DescribePublisherSummaryRequest;
 const DeleteSubscriptionsRequest = models.DeleteSubscriptionsRequest;
+const VpcConfig = models.VpcConfig;
 const ModifyRocketMQGroupResponse = models.ModifyRocketMQGroupResponse;
 const DescribeRocketMQVipInstancesResponse = models.DescribeRocketMQVipInstancesResponse;
 const DescribeRabbitMQVipInstancesRequest = models.DescribeRabbitMQVipInstancesRequest;

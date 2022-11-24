@@ -5836,6 +5836,20 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.SupportNamespaceEndpoint = null;
 
+        /**
+         * VPC Information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<VpcConfig> || null}
+         */
+        this.Vpcs = null;
+
+        /**
+         * Whether it is an exclusive instance
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsVip = null;
+
     }
 
     /**
@@ -5853,6 +5867,16 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.PublicEndPoint = 'PublicEndPoint' in params ? params.PublicEndPoint : null;
         this.VpcEndPoint = 'VpcEndPoint' in params ? params.VpcEndPoint : null;
         this.SupportNamespaceEndpoint = 'SupportNamespaceEndpoint' in params ? params.SupportNamespaceEndpoint : null;
+
+        if (params.Vpcs) {
+            this.Vpcs = new Array();
+            for (let z in params.Vpcs) {
+                let obj = new VpcConfig();
+                obj.deserialize(params.Vpcs[z]);
+                this.Vpcs.push(obj);
+            }
+        }
+        this.IsVip = 'IsVip' in params ? params.IsVip : null;
 
     }
 }
@@ -10052,6 +10076,41 @@ class DeleteSubscriptionsRequest extends  AbstractModel {
 }
 
 /**
+ * VPC configuration information
+ * @class
+ */
+class VpcConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
  * ModifyRocketMQGroup response structure.
  * @class
  */
@@ -10543,6 +10602,7 @@ module.exports = {
     DeleteCmqSubscribeResponse: DeleteCmqSubscribeResponse,
     DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
     DeleteSubscriptionsRequest: DeleteSubscriptionsRequest,
+    VpcConfig: VpcConfig,
     ModifyRocketMQGroupResponse: ModifyRocketMQGroupResponse,
     DescribeRocketMQVipInstancesResponse: DescribeRocketMQVipInstancesResponse,
     DescribeRabbitMQVipInstancesRequest: DescribeRabbitMQVipInstancesRequest,

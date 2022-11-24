@@ -3760,6 +3760,18 @@ class RestartNodesRequest extends  AbstractModel {
          */
         this.ForceRestart = null;
 
+        /**
+         * The restart mode. Valid values: `in-place` (default), `blue-green`.
+         * @type {string || null}
+         */
+        this.RestartMode = null;
+
+        /**
+         * The node status, applicable in the blue/green mode. The blue/green restart is risky if the node is offline.
+         * @type {boolean || null}
+         */
+        this.IsOffline = null;
+
     }
 
     /**
@@ -3772,6 +3784,8 @@ class RestartNodesRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.NodeNames = 'NodeNames' in params ? params.NodeNames : null;
         this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+        this.RestartMode = 'RestartMode' in params ? params.RestartMode : null;
+        this.IsOffline = 'IsOffline' in params ? params.IsOffline : null;
 
     }
 }

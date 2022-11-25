@@ -20,6 +20,7 @@ const UnBindSubDomainResponse = models.UnBindSubDomainResponse;
 const UpdateApiKeyRequest = models.UpdateApiKeyRequest;
 const Service = models.Service;
 const DeleteAPIDocRequest = models.DeleteAPIDocRequest;
+const AttachedPluginInfo = models.AttachedPluginInfo;
 const ApiUsagePlanSet = models.ApiUsagePlanSet;
 const DescribeAPIDocDetailRequest = models.DescribeAPIDocDetailRequest;
 const ModifyAPIDocResponse = models.ModifyAPIDocResponse;
@@ -56,6 +57,7 @@ const DeleteIPStrategyRequest = models.DeleteIPStrategyRequest;
 const DescribeApiAppRequest = models.DescribeApiAppRequest;
 const DescribePluginResponse = models.DescribePluginResponse;
 const DescribeUpstreamBindApisRequest = models.DescribeUpstreamBindApisRequest;
+const DescribePluginsByApiResponse = models.DescribePluginsByApiResponse;
 const DomainSets = models.DomainSets;
 const K8sService = models.K8sService;
 const DeleteUsagePlanRequest = models.DeleteUsagePlanRequest;
@@ -157,6 +159,7 @@ const DeleteServiceResponse = models.DeleteServiceResponse;
 const DescribeServiceEnvironmentReleaseHistoryResponse = models.DescribeServiceEnvironmentReleaseHistoryResponse;
 const Environment = models.Environment;
 const DescribeAPIDocsRequest = models.DescribeAPIDocsRequest;
+const DescribePluginsByApiRequest = models.DescribePluginsByApiRequest;
 const UsagePlanStatusInfo = models.UsagePlanStatusInfo;
 const ServiceReleaseHistoryInfo = models.ServiceReleaseHistoryInfo;
 const CreatePluginResponse = models.CreatePluginResponse;
@@ -195,7 +198,7 @@ const UsagePlanEnvironment = models.UsagePlanEnvironment;
 const ModifyIPStrategyRequest = models.ModifyIPStrategyRequest;
 const ModifyPluginResponse = models.ModifyPluginResponse;
 const UnBindSecretIdsRequest = models.UnBindSecretIdsRequest;
-const DescribeApiRequest = models.DescribeApiRequest;
+const ApiEnvironmentStrategy = models.ApiEnvironmentStrategy;
 const CreateUpstreamResponse = models.CreateUpstreamResponse;
 const ResetAPIDocPasswordRequest = models.ResetAPIDocPasswordRequest;
 const ApiUsagePlan = models.ApiUsagePlan;
@@ -226,8 +229,9 @@ const BuildAPIDocResponse = models.BuildAPIDocResponse;
 const ErrorCodes = models.ErrorCodes;
 const DescribeServiceEnvironmentListRequest = models.DescribeServiceEnvironmentListRequest;
 const ServiceEnvironmentStrategyStatus = models.ServiceEnvironmentStrategyStatus;
-const DescribeApiEnvironmentStrategyResponse = models.DescribeApiEnvironmentStrategyResponse;
 const MicroService = models.MicroService;
+const DescribeApiEnvironmentStrategyResponse = models.DescribeApiEnvironmentStrategyResponse;
+const DescribeApiRequest = models.DescribeApiRequest;
 const ApiEnvironmentStrategyStataus = models.ApiEnvironmentStrategyStataus;
 const ApiAppInfo = models.ApiAppInfo;
 const DeleteIPStrategyResponse = models.DeleteIPStrategyResponse;
@@ -267,7 +271,7 @@ const DescribeServiceUsagePlanResponse = models.DescribeServiceUsagePlanResponse
 const CreateApiAppResponse = models.CreateApiAppResponse;
 const DescribeApiUsagePlanRequest = models.DescribeApiUsagePlanRequest;
 const UnBindSubDomainRequest = models.UnBindSubDomainRequest;
-const ApiEnvironmentStrategy = models.ApiEnvironmentStrategy;
+const AttachedPluginSummary = models.AttachedPluginSummary;
 const DescribeIPStrategysStatusResponse = models.DescribeIPStrategysStatusResponse;
 const UpdateApiAppKeyResponse = models.UpdateApiAppKeyResponse;
 const UnBindSecretIdsResponse = models.UnBindSecretIdsResponse;
@@ -403,6 +407,17 @@ In API Gateway, a usage plan can be bound to multiple key pairs. You can use thi
     DeleteApiApp(req, cb) {
         let resp = new DeleteApiAppResponse();
         this.request("DeleteApiApp", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query all plug-ins bound with the API.
+     * @param {DescribePluginsByApiRequest} req
+     * @param {function(string, DescribePluginsByApiResponse):void} cb
+     * @public
+     */
+    DescribePluginsByApi(req, cb) {
+        let resp = new DescribePluginsByApiResponse();
+        this.request("DescribePluginsByApi", req, resp, cb);
     }
 
     /**

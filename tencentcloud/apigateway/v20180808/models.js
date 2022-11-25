@@ -296,6 +296,76 @@ class DeleteAPIDocRequest extends  AbstractModel {
 }
 
 /**
+ * Information of bound plug-ins
+ * @class
+ */
+class AttachedPluginInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Plugin ID
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * Environment information
+         * @type {string || null}
+         */
+        this.Environment = null;
+
+        /**
+         * Binding time
+         * @type {string || null}
+         */
+        this.AttachedTime = null;
+
+        /**
+         * Plugin name
+         * @type {string || null}
+         */
+        this.PluginName = null;
+
+        /**
+         * Plugin type
+         * @type {string || null}
+         */
+        this.PluginType = null;
+
+        /**
+         * Plugin description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Plugin definition statement
+         * @type {string || null}
+         */
+        this.PluginData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.Environment = 'Environment' in params ? params.Environment : null;
+        this.AttachedTime = 'AttachedTime' in params ? params.AttachedTime : null;
+        this.PluginName = 'PluginName' in params ? params.PluginName : null;
+        this.PluginType = 'PluginType' in params ? params.PluginType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.PluginData = 'PluginData' in params ? params.PluginData : null;
+
+    }
+}
+
+/**
  * List of usage plans bound to API
  * @class
  */
@@ -2529,6 +2599,46 @@ class DescribeUpstreamBindApisRequest extends  AbstractModel {
 }
 
 /**
+ * DescribePluginsByApi response structure.
+ * @class
+ */
+class DescribePluginsByApiResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of plug-ins bound with the API
+         * @type {AttachedPluginSummary || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new AttachedPluginSummary();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Custom service domain name information
  * @class
  */
@@ -4154,7 +4264,7 @@ class DescribeApisStatusRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * API filter. Valid values: ApiId, ApiName, ApiPath, ApiType, AuthRelationApiId, AuthType, ApiBuniessType, NotUsagePlanId, Environment, Tags (whose values are the list of `$tag_key:tag_value`), TagKeys (whose values are the list of tag keys).
+         * API filter. Valid values: `ApiId`, `ApiName`, `ApiPath`, `ApiType`, `AuthRelationApiId`, `AuthType`, `ApiBuniessType`, `NotUsagePlanId`, `Environment`, `Tags` (whose values are the list of `$tag_key:tag_value`), `TagKeys` (whose values are the list of tag keys). Note that `NotUsagePlanId` and `Environment` must be used in the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -8572,6 +8682,62 @@ class DescribeAPIDocsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribePluginsByApi request structure.
+ * @class
+ */
+class DescribePluginsByApiRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the API to query
+         * @type {string || null}
+         */
+        this.ApiId = null;
+
+        /**
+         * ID of the service to query
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * Environment information
+         * @type {string || null}
+         */
+        this.EnvironmentName = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiId = 'ApiId' in params ? params.ApiId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * Usage plan list display.
  * @class
  */
@@ -10470,24 +10636,42 @@ class UnBindSecretIdsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeApi request structure.
+ * API environment binding policy
  * @class
  */
-class DescribeApiRequest extends  AbstractModel {
+class ApiEnvironmentStrategy extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Unique service ID of API.
-         * @type {string || null}
-         */
-        this.ServiceId = null;
 
         /**
          * Unique API ID.
          * @type {string || null}
          */
         this.ApiId = null;
+
+        /**
+         * Custom API name.
+         * @type {string || null}
+         */
+        this.ApiName = null;
+
+        /**
+         * API path, such as `/path`.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * API method, such as `GET`.
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * Environment throttling information.
+         * @type {Array.<EnvironmentStrategy> || null}
+         */
+        this.EnvironmentStrategySet = null;
 
     }
 
@@ -10498,8 +10682,19 @@ class DescribeApiRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.ApiId = 'ApiId' in params ? params.ApiId : null;
+        this.ApiName = 'ApiName' in params ? params.ApiName : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Method = 'Method' in params ? params.Method : null;
+
+        if (params.EnvironmentStrategySet) {
+            this.EnvironmentStrategySet = new Array();
+            for (let z in params.EnvironmentStrategySet) {
+                let obj = new EnvironmentStrategy();
+                obj.deserialize(params.EnvironmentStrategySet[z]);
+                this.EnvironmentStrategySet.push(obj);
+            }
+        }
 
     }
 }
@@ -11887,6 +12082,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Information of microservice bound to API.
+ * @class
+ */
+class MicroService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Microservice cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Microservice namespace ID.
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * Microservice name.
+         * @type {string || null}
+         */
+        this.MicroServiceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.MicroServiceName = 'MicroServiceName' in params ? params.MicroServiceName : null;
+
+    }
+}
+
+/**
  * DescribeApiEnvironmentStrategy response structure.
  * @class
  */
@@ -11928,30 +12165,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Information of microservice bound to API.
+ * DescribeApi request structure.
  * @class
  */
-class MicroService extends  AbstractModel {
+class DescribeApiRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Microservice cluster ID.
+         * Unique service ID of API.
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.ServiceId = null;
 
         /**
-         * Microservice namespace ID.
+         * Unique API ID.
          * @type {string || null}
          */
-        this.NamespaceId = null;
-
-        /**
-         * Microservice name.
-         * @type {string || null}
-         */
-        this.MicroServiceName = null;
+        this.ApiId = null;
 
     }
 
@@ -11962,9 +12193,8 @@ class MicroService extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.MicroServiceName = 'MicroServiceName' in params ? params.MicroServiceName : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ApiId = 'ApiId' in params ? params.ApiId : null;
 
     }
 }
@@ -14160,42 +14390,24 @@ class UnBindSubDomainRequest extends  AbstractModel {
 }
 
 /**
- * API environment binding policy
+ * Information of bound plug-ins
  * @class
  */
-class ApiEnvironmentStrategy extends  AbstractModel {
+class AttachedPluginSummary extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique API ID.
-         * @type {string || null}
+         * Total number of bound plug-ins
+         * @type {number || null}
          */
-        this.ApiId = null;
+        this.TotalCount = null;
 
         /**
-         * Custom API name.
-         * @type {string || null}
+         * Information of bound plug-ins
+         * @type {Array.<AttachedPluginInfo> || null}
          */
-        this.ApiName = null;
-
-        /**
-         * API path, such as `/path`.
-         * @type {string || null}
-         */
-        this.Path = null;
-
-        /**
-         * API method, such as `GET`.
-         * @type {string || null}
-         */
-        this.Method = null;
-
-        /**
-         * Environment throttling information.
-         * @type {Array.<EnvironmentStrategy> || null}
-         */
-        this.EnvironmentStrategySet = null;
+        this.PluginSummary = null;
 
     }
 
@@ -14206,17 +14418,14 @@ class ApiEnvironmentStrategy extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApiId = 'ApiId' in params ? params.ApiId : null;
-        this.ApiName = 'ApiName' in params ? params.ApiName : null;
-        this.Path = 'Path' in params ? params.Path : null;
-        this.Method = 'Method' in params ? params.Method : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.EnvironmentStrategySet) {
-            this.EnvironmentStrategySet = new Array();
-            for (let z in params.EnvironmentStrategySet) {
-                let obj = new EnvironmentStrategy();
-                obj.deserialize(params.EnvironmentStrategySet[z]);
-                this.EnvironmentStrategySet.push(obj);
+        if (params.PluginSummary) {
+            this.PluginSummary = new Array();
+            for (let z in params.PluginSummary) {
+                let obj = new AttachedPluginInfo();
+                obj.deserialize(params.PluginSummary[z]);
+                this.PluginSummary.push(obj);
             }
         }
 
@@ -14850,6 +15059,7 @@ module.exports = {
     UpdateApiKeyRequest: UpdateApiKeyRequest,
     Service: Service,
     DeleteAPIDocRequest: DeleteAPIDocRequest,
+    AttachedPluginInfo: AttachedPluginInfo,
     ApiUsagePlanSet: ApiUsagePlanSet,
     DescribeAPIDocDetailRequest: DescribeAPIDocDetailRequest,
     ModifyAPIDocResponse: ModifyAPIDocResponse,
@@ -14886,6 +15096,7 @@ module.exports = {
     DescribeApiAppRequest: DescribeApiAppRequest,
     DescribePluginResponse: DescribePluginResponse,
     DescribeUpstreamBindApisRequest: DescribeUpstreamBindApisRequest,
+    DescribePluginsByApiResponse: DescribePluginsByApiResponse,
     DomainSets: DomainSets,
     K8sService: K8sService,
     DeleteUsagePlanRequest: DeleteUsagePlanRequest,
@@ -14987,6 +15198,7 @@ module.exports = {
     DescribeServiceEnvironmentReleaseHistoryResponse: DescribeServiceEnvironmentReleaseHistoryResponse,
     Environment: Environment,
     DescribeAPIDocsRequest: DescribeAPIDocsRequest,
+    DescribePluginsByApiRequest: DescribePluginsByApiRequest,
     UsagePlanStatusInfo: UsagePlanStatusInfo,
     ServiceReleaseHistoryInfo: ServiceReleaseHistoryInfo,
     CreatePluginResponse: CreatePluginResponse,
@@ -15025,7 +15237,7 @@ module.exports = {
     ModifyIPStrategyRequest: ModifyIPStrategyRequest,
     ModifyPluginResponse: ModifyPluginResponse,
     UnBindSecretIdsRequest: UnBindSecretIdsRequest,
-    DescribeApiRequest: DescribeApiRequest,
+    ApiEnvironmentStrategy: ApiEnvironmentStrategy,
     CreateUpstreamResponse: CreateUpstreamResponse,
     ResetAPIDocPasswordRequest: ResetAPIDocPasswordRequest,
     ApiUsagePlan: ApiUsagePlan,
@@ -15056,8 +15268,9 @@ module.exports = {
     ErrorCodes: ErrorCodes,
     DescribeServiceEnvironmentListRequest: DescribeServiceEnvironmentListRequest,
     ServiceEnvironmentStrategyStatus: ServiceEnvironmentStrategyStatus,
-    DescribeApiEnvironmentStrategyResponse: DescribeApiEnvironmentStrategyResponse,
     MicroService: MicroService,
+    DescribeApiEnvironmentStrategyResponse: DescribeApiEnvironmentStrategyResponse,
+    DescribeApiRequest: DescribeApiRequest,
     ApiEnvironmentStrategyStataus: ApiEnvironmentStrategyStataus,
     ApiAppInfo: ApiAppInfo,
     DeleteIPStrategyResponse: DeleteIPStrategyResponse,
@@ -15097,7 +15310,7 @@ module.exports = {
     CreateApiAppResponse: CreateApiAppResponse,
     DescribeApiUsagePlanRequest: DescribeApiUsagePlanRequest,
     UnBindSubDomainRequest: UnBindSubDomainRequest,
-    ApiEnvironmentStrategy: ApiEnvironmentStrategy,
+    AttachedPluginSummary: AttachedPluginSummary,
     DescribeIPStrategysStatusResponse: DescribeIPStrategysStatusResponse,
     UpdateApiAppKeyResponse: UpdateApiAppKeyResponse,
     UnBindSecretIdsResponse: UnBindSecretIdsResponse,

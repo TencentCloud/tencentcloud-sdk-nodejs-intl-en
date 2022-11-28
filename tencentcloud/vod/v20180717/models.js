@@ -2119,6 +2119,16 @@ Default value: open.
          */
         this.ResolutionAdaptive = null;
 
+        /**
+         * The image format. Valid values:
+<li> jpg</li>
+<li> png</li>
+<li> webp</li>
+Default: jpg
+         * @type {string || null}
+         */
+        this.Format = null;
+
     }
 
     /**
@@ -2139,6 +2149,7 @@ Default value: open.
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
         this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Format = 'Format' in params ? params.Format : null;
 
     }
 }
@@ -6755,7 +6766,7 @@ In the same request, `ClearKeyFrameDescs` and `AddKeyFrameDescs` cannot be prese
         this.ClearKeyFrameDescs = null;
 
         /**
-         * Set of tags to be added. Up to 16 tags can be added to one media file, and one tag can contain up to 16 characters. In the same request, the parameters of `AddTags` must be different from those of `DeleteTags`.
+         * The tags to add. Each file can have up to 16 tags. A tag can contain at most 32 characters. You cannot include the same tag in `AddTags` and `DeleteTags` at the same time.
          * @type {Array.<string> || null}
          */
         this.AddTags = null;
@@ -18248,6 +18259,12 @@ Default value: black.
          */
         this.Comment = null;
 
+        /**
+         * The image format.
+         * @type {string || null}
+         */
+        this.Format = null;
+
     }
 
     /**
@@ -18271,6 +18288,7 @@ Default value: black.
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Format = 'Format' in params ? params.Format : null;
 
     }
 }
@@ -19074,7 +19092,7 @@ For more information about supported extensions, see [Media types](https://intl.
         this.MediaName = null;
 
         /**
-         * URL of video cover to be pulled. Only gif, jpeg, and png formats are supported.
+         * The URL of the video to pull. Supported formats include GIF, JPEG (JPG), and PNG.
          * @type {string || null}
          */
         this.CoverUrl = null;
@@ -27608,6 +27626,15 @@ Default value: black.
          */
         this.Comment = null;
 
+        /**
+         * The image format. Valid values:
+<li> jpg</li>
+<li> png</li>
+<li> webp</li>
+         * @type {string || null}
+         */
+        this.Format = null;
+
     }
 
     /**
@@ -27629,6 +27656,7 @@ Default value: black.
         this.ColumnCount = 'ColumnCount' in params ? params.ColumnCount : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Format = 'Format' in params ? params.Format : null;
 
     }
 }

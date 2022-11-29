@@ -584,15 +584,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * Origin-pull protocol configuration. Values:
 <li>`http`: Force HTTP for origin-pull.</li>
 <li>`follow`: Follow protocol.</li>
-<li>`https`: Force HTTPS for origin-pull. This only supports port 443 on the origin server.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+<li>`https`: Force HTTPS for origin-pull.</li>
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.OriginPullProtocol = null;
 
         /**
-         * When OriginType is COS, you can specify if access to private buckets is allowed.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to allow private access to buckets when `OriginType=cos`. Values:
+<li>`on`: Allow private access.</li>
+<li>`off`: Allow public access.</li>
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.CosPrivateAccess = null;
@@ -788,61 +790,31 @@ class DDoSAttackEventDetailData extends  AbstractModel {
 }
 
 /**
- * DescribeBillingData request structure.
+ * DescribeBotData response structure.
  * @class
  */
-class DescribeBillingDataRequest extends  AbstractModel {
+class DescribeBotDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time.
-         * @type {string || null}
+         * The list of bot attack data.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SecEntry> || null}
          */
-        this.StartTime = null;
+        this.Data = null;
 
         /**
-         * End time.
-         * @type {string || null}
+         * Total number of query results.
+         * @type {number || null}
          */
-        this.EndTime = null;
+        this.TotalCount = null;
 
         /**
-         * Time granularity. Values:
-<ul>
-<li>`min`: One minute</li>
-<li>`5min`: Five minutes</li>
-<li>`hour`: One hour</li>
-<li>`day`: One day</li>
-</ul>
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Interval = null;
-
-        /**
-         * Metric item. Values:
-<ul>
-<li>`acc_flux`: Content acceleration traffic;</li>
-<li>`quic_request`: QUIC requests;</li>
-<li>`sec_flux`: Security traffic;</li>
-<li>`sec_request_clean`: Clean security requests.</li>
-</ul>
-         * @type {string || null}
-         */
-        this.MetricName = null;
-
-        /**
-         * Filter item. Values:
-<ul>
-<li>`zone`: Site;</li>
-<li>`plan`: Service plan;</li>
-<li>`service`: L4 or L7;</li>
-<li>`tagKey`: Tag key;</li>
-<li>`tagValue`: Tag value.</li>
-</ul>
-         * @type {Array.<BillingDataFilter> || null}
-         */
-        this.Filters = null;
+        this.RequestId = null;
 
     }
 
@@ -853,19 +825,17 @@ class DescribeBillingDataRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Interval = 'Interval' in params ? params.Interval : null;
-        this.MetricName = 'MetricName' in params ? params.MetricName : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new BillingDataFilter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SecEntry();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1119,7 +1089,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Area = null;
 
         /**
-         * 
+         * Type of the shipping task. Values:
+<li>`cls`: Ship logs to CLS.</li>
+<li>`custom_endpoint`: Ship logs to custom APIs.</li>
          * @type {string || null}
          */
         this.LogSetType = null;
@@ -1222,6 +1194,65 @@ class WafConfig extends  AbstractModel {
             obj.deserialize(params.AiRule)
             this.AiRule = obj;
         }
+
+    }
+}
+
+/**
+ * CreateAliasDomain request structure.
+ * @class
+ */
+class CreateAliasDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The alias domain name.
+         * @type {string || null}
+         */
+        this.AliasName = null;
+
+        /**
+         * The target domain name.
+         * @type {string || null}
+         */
+        this.TargetName = null;
+
+        /**
+         * Certificate configuration. Values:
+<li>`none`: Off</li>
+<li>`hosting`: Managed SSL certificate</li>
+<li>`apply`: Free certificate</li>Default value: none
+         * @type {string || null}
+         */
+        this.CertType = null;
+
+        /**
+         * The certificate ID. This field is required when `CertType=hosting`.
+         * @type {Array.<string> || null}
+         */
+        this.CertId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.AliasName = 'AliasName' in params ? params.AliasName : null;
+        this.TargetName = 'TargetName' in params ? params.TargetName : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
 
     }
 }
@@ -1565,13 +1596,13 @@ class IdentifyZoneResponse extends  AbstractModel {
         super();
 
         /**
-         * The site ownership information.
+         * Details of the DNS record.
          * @type {AscriptionInfo || null}
          */
         this.Ascription = null;
 
         /**
-         * 
+         * Details of the verification file.
          * @type {FileAscriptionInfo || null}
          */
         this.FileAscription = null;
@@ -1890,6 +1921,56 @@ class DDoSAntiPly extends  AbstractModel {
 }
 
 /**
+ * DescribeAliasDomains response structure.
+ * @class
+ */
+class DescribeAliasDomainsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total eligible alias domain names.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Information of the eligible alias domain names.
+         * @type {Array.<AliasDomain> || null}
+         */
+        this.AliasDomains = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AliasDomains) {
+            this.AliasDomains = new Array();
+            for (let z in params.AliasDomains) {
+                let obj = new AliasDomain();
+                obj.deserialize(params.AliasDomains[z]);
+                this.AliasDomains.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * EdgeOne plan information
  * @class
  */
@@ -1923,15 +2004,19 @@ class PlanInfo extends  AbstractModel {
         this.Frequency = null;
 
         /**
-         * Plan option. Values:
-<li>`sta`: Standard plan that supports content delivery network outside Chinese mainland;</li>
-<li>`sta_with_bot`: Standard plan that supports content delivery network outside Chinese mainland and bot management;</li>
-<li>`sta_cm`: Standard plan that supports content delivery network inside Chinese mainland;</li>
-<li>`sta_cm_with_bot`: Standard plan that supports content delivery network inside Chinese mainland and bot management;</li>
-<li>`ent`: Enterprise plan that supports content delivery network outside Chinese mainland;</li>
-<li>`ent_with_bot`: Enterprise plan that supports content delivery network outside Chinese mainland and bot management;</li>
-<li>`ent_cm`: Enterprise plan that supports content delivery network inside Chinese mainland;</li>
-<li>`ent_cm_with_bot`: Enterprise plan that supports content delivery network inside Chinese mainland and bot management.</li>
+         * The plan option. Values:
+<li>`sta`: Standard plan that supports content delivery network outside the Chinese mainland.</li>
+<li>`sta_with_bot`: Standard plan that supports content delivery network outside the Chinese mainland and bot management.</li>
+<li>`sta_cm`: Standard plan that supports content delivery network inside the Chinese mainland.</li>
+<li>`sta_cm_with_bot`: Standard plan that supports content delivery network inside the Chinese mainland and bot management.</li>
+<li>`sta`: Standard plan that supports content delivery network over the globe.</li>
+<li>`sta_global_with_bot`: Standard plan that supports content delivery network over the globe and bot management.</li>
+<li>`ent`: Enterprise plan that supports content delivery network outside the Chinese mainland.</li>
+<li>`ent_with_bot`: Enterprise plan that supports content delivery network outside the Chinese mainland and bot management.</li>
+<li>`ent_cm`: Enterprise plan that supports content delivery network inside the Chinese mainland.</li>
+<li>`ent_cm_with_bot`: Enterprise plan that supports content delivery network inside the Chinese mainland and bot management.</li>
+<li>`ent_global`: Enterprise plan that supports content delivery network over the globe.</li>
+<li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>
          * @type {string || null}
          */
         this.PlanType = null;
@@ -1955,9 +2040,10 @@ class PlanInfo extends  AbstractModel {
         this.SiteNumber = null;
 
         /**
-         * Acceleration region. Values:
-<li>`mainland`: Chinese mainland;</li>
-<li>`overseas`: Global (Chinese mainland not included).</li>
+         * The acceleration region. Values:
+<li>`mainland`: Chinese mainland</li>
+<li>`overseas`: Global (Chinese mainland not included)</li>
+<li>`global`: Global (Chinese mainland included)</li>
          * @type {string || null}
          */
         this.Area = null;
@@ -2429,7 +2515,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Origin-pull condition
  * @class
  */
 class OriginGroupCondition extends  AbstractModel {
@@ -2437,19 +2523,22 @@ class OriginGroupCondition extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Match type. Values:
+<li>`url`: Partial URL path under the current site, such as "/example" and "/example/foo.jpg". You can use an asterisk (*) to indicate all values and a question mark (?) to indicate any single character.
+</li>
          * @type {string || null}
          */
         this.Target = null;
 
         /**
-         * 
+         * The operator. Values:
+<li>`equal`: Equals</li>
          * @type {string || null}
          */
         this.Operator = null;
 
         /**
-         * 
+         * Values of the match type.
          * @type {Array.<string> || null}
          */
         this.Values = null;
@@ -2854,14 +2943,12 @@ class ExceptUserRule extends  AbstractModel {
 
         /**
          * The rule name.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleName = null;
 
         /**
          * The rule action. It only supports the value `skip`, which indicates skipping all managed rules.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Action = null;
@@ -2870,21 +2957,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * The rule status. Values:
 <li>`on`: Enabled</li>
 <li>`off`: Disabled</li>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RuleStatus = null;
 
         /**
-         * The rule ID, which is only used as an output parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The rule ID, which is automatically created and only used as an output parameter.
          * @type {number || null}
          */
         this.RuleID = null;
 
         /**
-         * The update time, which is only used as an output parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The update time. If it is null, the current date and time is recorded.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -2904,8 +2989,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ExceptUserRuleScope = null;
 
         /**
-         * The rule priority. Value range: 0-100.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The rule priority. Value range: 0-100. If it is null, it defaults to 0.
          * @type {number || null}
          */
         this.RulePriority = null;
@@ -2981,6 +3065,58 @@ class SecEntry extends  AbstractModel {
                 let obj = new SecEntryValue();
                 obj.deserialize(params.Value[z]);
                 this.Value.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Nested rule settings
+ * @class
+ */
+class SubRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The condition that determines if a feature should run.
+Note: If any condition in the array is met, the feature will run.
+         * @type {Array.<RuleAndConditions> || null}
+         */
+        this.Conditions = null;
+
+        /**
+         * The feature to be executed.
+         * @type {Array.<Action> || null}
+         */
+        this.Actions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Conditions) {
+            this.Conditions = new Array();
+            for (let z in params.Conditions) {
+                let obj = new RuleAndConditions();
+                obj.deserialize(params.Conditions[z]);
+                this.Conditions.push(obj);
+            }
+        }
+
+        if (params.Actions) {
+            this.Actions = new Array();
+            for (let z in params.Actions) {
+                let obj = new Action();
+                obj.deserialize(params.Actions[z]);
+                this.Actions.push(obj);
             }
         }
 
@@ -3116,6 +3252,12 @@ class Rule extends  AbstractModel {
         super();
 
         /**
+         * Feature to be executed.
+         * @type {Array.<Action> || null}
+         */
+        this.Actions = null;
+
+        /**
          * Feature execution conditions.
 Note: If any condition in the array is met, the feature will run.
          * @type {Array.<RuleAndConditions> || null}
@@ -3123,10 +3265,10 @@ Note: If any condition in the array is met, the feature will run.
         this.Conditions = null;
 
         /**
-         * Feature to be executed.
-         * @type {Array.<Action> || null}
+         * The nested rule.
+         * @type {Array.<SubRuleItem> || null}
          */
-        this.Actions = null;
+        this.SubRules = null;
 
     }
 
@@ -3138,6 +3280,15 @@ Note: If any condition in the array is met, the feature will run.
             return;
         }
 
+        if (params.Actions) {
+            this.Actions = new Array();
+            for (let z in params.Actions) {
+                let obj = new Action();
+                obj.deserialize(params.Actions[z]);
+                this.Actions.push(obj);
+            }
+        }
+
         if (params.Conditions) {
             this.Conditions = new Array();
             for (let z in params.Conditions) {
@@ -3147,12 +3298,12 @@ Note: If any condition in the array is met, the feature will run.
             }
         }
 
-        if (params.Actions) {
-            this.Actions = new Array();
-            for (let z in params.Actions) {
-                let obj = new Action();
-                obj.deserialize(params.Actions[z]);
-                this.Actions.push(obj);
+        if (params.SubRules) {
+            this.SubRules = new Array();
+            for (let z in params.SubRules) {
+                let obj = new SubRuleItem();
+                obj.deserialize(params.SubRules[z]);
+                this.SubRules.push(obj);
             }
         }
 
@@ -3445,31 +3596,70 @@ class SecurityEntity extends  AbstractModel {
 }
 
 /**
- * CreatePrefetchTask response structure.
+ * ModifyDnsRecord request structure.
  * @class
  */
-class CreatePrefetchTaskResponse extends  AbstractModel {
+class ModifyDnsRecordRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the task.
+         * The record ID.
          * @type {string || null}
          */
-        this.JobId = null;
+        this.DnsRecordId = null;
 
         /**
-         * List of failed tasks.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<FailReason> || null}
-         */
-        this.FailedList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The site ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ZoneId = null;
+
+        /**
+         * The DNS record type. Values:
+<li>`A`: Point a domain name to an IPv4 address, such as 8.8.8.8.</li>
+<li>`AAAA`: Point a domain name to an IPv6 address.</li>
+<li>`MX`: It is used for email servers. The record value and priority parameters are provided by email service providers. If there are multiple MX records, the lower the priority value, the higher the priority.</li>
+<li>`CNAME`: Point a domain name to another domain name that can be resolved to an IP address.</li>
+<li>`TXT`: Identify and describe a domain name. It is usually used for domain verification and as SPF records (for anti-spam).</li>
+<li>`NS`: If you need to authorize a subdomain name to another DNS service provider for DNS resolution, you need to add an NS record. You cannot add an NS record for a root domain name.</li>
+<li>`CAA`: Specify CAs to issue certificates for sites.</li>
+<li>`SRV`: Identify a service used by a server. It is commonly used in Microsoft directory management.</li>
+         * @type {string || null}
+         */
+        this.DnsRecordType = null;
+
+        /**
+         * The record name, which consists of the host record and site name. Note that the original configuration will be used if this field is not specified.
+         * @type {string || null}
+         */
+        this.DnsRecordName = null;
+
+        /**
+         * The record content. Note that the original configuration will be used if this field is not specified.
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * TTL (in seconds). The smaller the value, the faster the record changes take effect. Default value: 300. Note that the original configuration will be used if this field is not specified.
+         * @type {number || null}
+         */
+        this.TTL = null;
+
+        /**
+         * Specifies a value in the range 1–50 when you make changes to the MX records. A smaller value indicates higher priority. Note that the default value 0 will be used if this field is not specified.
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * The proxy mode. Values:
+<li>`dns_only`: Only DNS</li>
+<li>`proxied`: Proxied</li></li>The original configuration will apply if this field is not specified.
+         * @type {string || null}
+         */
+        this.Mode = null;
 
     }
 
@@ -3480,17 +3670,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-
-        if (params.FailedList) {
-            this.FailedList = new Array();
-            for (let z in params.FailedList) {
-                let obj = new FailReason();
-                obj.deserialize(params.FailedList[z]);
-                this.FailedList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DnsRecordId = 'DnsRecordId' in params ? params.DnsRecordId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.DnsRecordType = 'DnsRecordType' in params ? params.DnsRecordType : null;
+        this.DnsRecordName = 'DnsRecordName' in params ? params.DnsRecordName : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.TTL = 'TTL' in params ? params.TTL : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
 
     }
 }
@@ -3564,28 +3751,25 @@ class CreateApplicationProxyRuleRequest extends  AbstractModel {
         this.Proto = null;
 
         /**
-         * The origin type. Values:
-<li>`custom`: Specified origins</li>
-<li>`origins`: Origin group</li>
+         * The access port, which can be:
+<li>A single port, such as 80</li>
+<li>A port range, such as 81-90</li>
          * @type {Array.<string> || null}
          */
         this.Port = null;
 
         /**
          * The origin type. Values:
-`custom`: Origin server, which is formatted as "IP:Port" or "Domain name:Port"
-`origins`: Origin group
+<li>`custom`: Specified origins</li>
+<li>`origins`: Origin group</li>
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
          * Origin server information:
-When `OriginType=custom`, it indicates one or more origin servers. Example:
-OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-OriginValue=["test.com:80"];
-When `OriginType=origins`, it indicates an origin group ID. Example:
-OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
+<li>When `OriginType=custom`, it indicates one or more origin servers, such as ["8.8.8.8","9.9.9.9"] or ["test.com"].</li>
+<li>When `OriginType=origins`, it indicates an origin group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
          * @type {Array.<string> || null}
          */
         this.OriginValue = null;
@@ -3608,6 +3792,14 @@ OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
          */
         this.SessionPersist = null;
 
+        /**
+         * The origin port, which can be:
+<li>A single port, such as 80</li>
+<li>A port range, such as 81-82</li>
+         * @type {string || null}
+         */
+        this.OriginPort = null;
+
     }
 
     /**
@@ -3625,6 +3817,7 @@ OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
         this.OriginValue = 'OriginValue' in params ? params.OriginValue : null;
         this.ForwardClientIp = 'ForwardClientIp' in params ? params.ForwardClientIp : null;
         this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
+        this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
 
     }
 }
@@ -3784,45 +3977,6 @@ class DescribeDDoSMajorAttackEventRequest extends  AbstractModel {
 }
 
 /**
- * A parameter that filters DNS data
- * @class
- */
-class BillingDataFilter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Parameter name. Valid values:
-`zone`: Site name
-`host`: Domain name
-`proxy`: L4 proxy
-`plan`: Plan type
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Parameter value
-         * @type {string || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
  * DescribeSecurityPolicyList request structure.
  * @class
  */
@@ -3960,7 +4114,7 @@ class Header extends  AbstractModel {
         super();
 
         /**
-         * HTTP header name
+         * HTTP header name.
          * @type {string || null}
          */
         this.Name = null;
@@ -4318,6 +4472,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.DropPageConfig = null;
 
+        /**
+         * Security template settings
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {TemplateConfig || null}
+         */
+        this.TemplateConfig = null;
+
     }
 
     /**
@@ -4374,6 +4535,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new DropPageConfig();
             obj.deserialize(params.DropPageConfig)
             this.DropPageConfig = obj;
+        }
+
+        if (params.TemplateConfig) {
+            let obj = new TemplateConfig();
+            obj.deserialize(params.TemplateConfig)
+            this.TemplateConfig = obj;
         }
 
     }
@@ -4488,7 +4655,7 @@ class FailReason extends  AbstractModel {
         this.Reason = null;
 
         /**
-         * List of resources failed to be processed.
+         * List of resources failed to be processed. 
          * @type {Array.<string> || null}
          */
         this.Targets = null;
@@ -4815,7 +4982,7 @@ class CreateOriginGroupRequest extends  AbstractModel {
         this.OriginRecords = null;
 
         /**
-         * 
+         * The origin domain. This field can be specified only when `OriginType=self`.
          * @type {string || null}
          */
         this.HostHeader = null;
@@ -4938,13 +5105,16 @@ Value range: 60-86400 (in seconds). If it's not specified, the default value 600
         this.TTL = null;
 
         /**
-         * 
+         * The origin-pull type. Values:
+<li>`normal`: Primary/Secondary origin-pull</li>
+<li>`advanced`: Advanced origin-pull (only used when `Type=proxied`)</li>If it is left empty, primary/secondary origin-pull is applied.
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * 
+         * Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
+If it is left empty, this configuration is not used.
          * @type {Array.<AdvancedOriginGroup> || null}
          */
         this.AdvancedOriginGroups = null;
@@ -5193,7 +5363,9 @@ class RateLimitTemplate extends  AbstractModel {
         this.Mode = null;
 
         /**
-         * 
+         * The action. Values:
+<li>`alg`: JavaScript challenge</li>
+<li>`monitor`: Observe</li>If it is left empty, the default value `alg` is used.
          * @type {string || null}
          */
         this.Action = null;
@@ -5410,9 +5582,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Deployment status. Values:
-<li>`processing`: Deployment in progress;</li>
-<li>`deployed`: Deployed.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+<li>`processing`: Deployment in progress</li>
+<li>`deployed`: Deployed</li>
+<li>`failed`: Deployment failed</li>
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Status = null;
@@ -5425,7 +5598,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Message = null;
 
         /**
-         * 
+         * Certificate algorithm.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.SignAlgo = null;
@@ -5590,6 +5764,13 @@ class SecRuleRelatedInfo extends  AbstractModel {
          */
         this.RuleTypeName = null;
 
+        /**
+         * The attack content.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AttackContent = null;
+
     }
 
     /**
@@ -5605,6 +5786,7 @@ class SecRuleRelatedInfo extends  AbstractModel {
         this.RuleLevel = 'RuleLevel' in params ? params.RuleLevel : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.RuleTypeName = 'RuleTypeName' in params ? params.RuleTypeName : null;
+        this.AttackContent = 'AttackContent' in params ? params.AttackContent : null;
 
     }
 }
@@ -5705,13 +5887,12 @@ class ExceptUserRuleCondition extends  AbstractModel {
 <li>`method`: Request method</li>
 <li>`header`: Request header</li>
 <li>`sip_proto`: Network layer protocol</li>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MatchFrom = null;
 
         /**
-         * The parameter of the field. When `MatchFrom = header`, the key contained in the header can be passed.
+         * The parameter of the field. Only when `MatchFrom = header`, the key contained in the header can be passed.
          * @type {string || null}
          */
         this.MatchParam = null;
@@ -5734,14 +5915,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
 <li>`match_prefix`: Prefix matches</li>
 <li>`match_suffix`: Suffix matches</li>
 <li>`wildcard`: Wildcard</li>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Operator = null;
 
         /**
          * The value of the parameter.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MatchContent = null;
@@ -6026,6 +6205,12 @@ class ModifyRuleRequest extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * Tag of the rule.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -6048,6 +6233,7 @@ class ModifyRuleRequest extends  AbstractModel {
         }
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
 
     }
 }
@@ -6202,6 +6388,57 @@ class DescribeWebManagedRulesHitRuleDetailRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeBotClientIpList response structure.
+ * @class
+ */
+class DescribeBotClientIpListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The list of client IP data.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SecClientIp> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number of query results.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SecClientIp();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifySecurityWafGroupPolicy request structure.
  * @class
  */
@@ -6210,13 +6447,13 @@ class ModifySecurityWafGroupPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
+         * The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * The subdomain name.
+         * The subdomain name. You must specify either "ZoneId+Entity" or "TemplateId". 
          * @type {string || null}
          */
         this.Entity = null;
@@ -6266,6 +6503,12 @@ class ModifySecurityWafGroupPolicyRequest extends  AbstractModel {
          */
         this.WafGroups = null;
 
+        /**
+         * The template ID. You must specify either this field or "ZoneId+Entity".
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
     }
 
     /**
@@ -6301,6 +6544,7 @@ class ModifySecurityWafGroupPolicyRequest extends  AbstractModel {
                 this.WafGroups.push(obj);
             }
         }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -6348,16 +6592,22 @@ class ModifySecurityPolicyRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * The subdomain name/layer-4 proxy.
+         * Security configuration.
+         * @type {SecurityConfig || null}
+         */
+        this.SecurityConfig = null;
+
+        /**
+         * The subdomain name/L4 proxy. You must specify either "Entity" or "TemplateId".
          * @type {string || null}
          */
         this.Entity = null;
 
         /**
-         * Security configuration.
-         * @type {SecurityConfig || null}
+         * The template ID. You must specify either this field or "Entity".
+         * @type {string || null}
          */
-        this.SecurityConfig = null;
+        this.TemplateId = null;
 
     }
 
@@ -6369,13 +6619,14 @@ class ModifySecurityPolicyRequest extends  AbstractModel {
             return;
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Entity = 'Entity' in params ? params.Entity : null;
 
         if (params.SecurityConfig) {
             let obj = new SecurityConfig();
             obj.deserialize(params.SecurityConfig)
             this.SecurityConfig = obj;
         }
+        this.Entity = 'Entity' in params ? params.Entity : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -6863,6 +7114,41 @@ class ModifyDDoSPolicyHostRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteAliasDomain request structure.
+ * @class
+ */
+class DeleteAliasDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The alias domain name to be deleted. If it is left empty, the delete operation is not performed.
+         * @type {Array.<string> || null}
+         */
+        this.AliasNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.AliasNames = 'AliasNames' in params ? params.AliasNames : null;
+
+    }
+}
+
+/**
  * DescribeIdentifications response structure.
  * @class
  */
@@ -6987,6 +7273,41 @@ class DeleteApplicationProxyRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReclaimAliasDomain request structure.
+ * @class
+ */
+class ReclaimAliasDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The site name.
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
     }
 }
@@ -7140,31 +7461,169 @@ class DeleteOriginGroupRequest extends  AbstractModel {
 }
 
 /**
- * DescribeWebProtectionHitRuleDetail response structure.
+ * Domain name configuration information
  * @class
  */
-class DescribeWebProtectionHitRuleDetailResponse extends  AbstractModel {
+class DetailHost extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The list of hit CC protection rules.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<SecHitRuleInfo> || null}
-         */
-        this.Data = null;
-
-        /**
-         * Total number of query results.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The site ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ZoneId = null;
+
+        /**
+         * The acceleration status. Values:
+<li>`process`: In progress</li>
+<li>`online`: Enabled</li>
+<li>`offline`: Disabled</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The domain name.
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * Name of the site
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * The assigned CNAME
+         * @type {string || null}
+         */
+        this.Cname = null;
+
+        /**
+         * The resource ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * The instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The lock status.
+         * @type {number || null}
+         */
+        this.Lock = null;
+
+        /**
+         * The domain name status.
+         * @type {number || null}
+         */
+        this.Mode = null;
+
+        /**
+         * The acceleration area of the domain name. Values:
+<li>`global`: Global.</li>
+<li>`mainland`: Chinese mainland.</li>
+<li>`overseas`: Outside the Chinese mainland.</li>
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * The acceleration type configuration item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AccelerateType || null}
+         */
+        this.AccelerateType = null;
+
+        /**
+         * The HTTPS configuration item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Https || null}
+         */
+        this.Https = null;
+
+        /**
+         * The cache configuration item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CacheConfig || null}
+         */
+        this.CacheConfig = null;
+
+        /**
+         * The origin configuration item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Origin || null}
+         */
+        this.Origin = null;
+
+        /**
+         * The security type.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SecurityType || null}
+         */
+        this.SecurityType = null;
+
+        /**
+         * The cache key configuration item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CacheKey || null}
+         */
+        this.CacheKey = null;
+
+        /**
+         * The smart compression configuration item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Compression || null}
+         */
+        this.Compression = null;
+
+        /**
+         * The WAF protection configuration item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Waf || null}
+         */
+        this.Waf = null;
+
+        /**
+         * The CC protection configuration item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CC || null}
+         */
+        this.CC = null;
+
+        /**
+         * DDoS mitigation configuration
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DDoS || null}
+         */
+        this.DDoS = null;
+
+        /**
+         * The smart routing configuration item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SmartRouting || null}
+         */
+        this.SmartRouting = null;
+
+        /**
+         * The IPv6 access configuration item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Ipv6 || null}
+         */
+        this.Ipv6 = null;
+
+        /**
+         * Whether to carry the location information of the client IP during origin-pull.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {ClientIpCountry || null}
+         */
+        this.ClientIpCountry = null;
 
     }
 
@@ -7175,17 +7634,94 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.Cname = 'Cname' in params ? params.Cname : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Lock = 'Lock' in params ? params.Lock : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new SecHitRuleInfo();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
+        if (params.AccelerateType) {
+            let obj = new AccelerateType();
+            obj.deserialize(params.AccelerateType)
+            this.AccelerateType = obj;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Https) {
+            let obj = new Https();
+            obj.deserialize(params.Https)
+            this.Https = obj;
+        }
+
+        if (params.CacheConfig) {
+            let obj = new CacheConfig();
+            obj.deserialize(params.CacheConfig)
+            this.CacheConfig = obj;
+        }
+
+        if (params.Origin) {
+            let obj = new Origin();
+            obj.deserialize(params.Origin)
+            this.Origin = obj;
+        }
+
+        if (params.SecurityType) {
+            let obj = new SecurityType();
+            obj.deserialize(params.SecurityType)
+            this.SecurityType = obj;
+        }
+
+        if (params.CacheKey) {
+            let obj = new CacheKey();
+            obj.deserialize(params.CacheKey)
+            this.CacheKey = obj;
+        }
+
+        if (params.Compression) {
+            let obj = new Compression();
+            obj.deserialize(params.Compression)
+            this.Compression = obj;
+        }
+
+        if (params.Waf) {
+            let obj = new Waf();
+            obj.deserialize(params.Waf)
+            this.Waf = obj;
+        }
+
+        if (params.CC) {
+            let obj = new CC();
+            obj.deserialize(params.CC)
+            this.CC = obj;
+        }
+
+        if (params.DDoS) {
+            let obj = new DDoS();
+            obj.deserialize(params.DDoS)
+            this.DDoS = obj;
+        }
+
+        if (params.SmartRouting) {
+            let obj = new SmartRouting();
+            obj.deserialize(params.SmartRouting)
+            this.SmartRouting = obj;
+        }
+
+        if (params.Ipv6) {
+            let obj = new Ipv6();
+            obj.deserialize(params.Ipv6)
+            this.Ipv6 = obj;
+        }
+
+        if (params.ClientIpCountry) {
+            let obj = new ClientIpCountry();
+            obj.deserialize(params.ClientIpCountry)
+            this.ClientIpCountry = obj;
+        }
 
     }
 }
@@ -7444,9 +7980,9 @@ class ApplicationProxyRule extends  AbstractModel {
         this.Proto = null;
 
         /**
-         * The port, which can be specified in the following formats:
-Single port, such as 80.
-Port range, such as 81-82.
+         * The access port, which can be:
+<li>A single port, such as 80</li>
+<li>A port range, such as 81-82</li>
 Note that each rule can have up to 20 ports.
          * @type {Array.<string> || null}
          */
@@ -7461,12 +7997,9 @@ Note that each rule can have up to 20 ports.
         this.OriginType = null;
 
         /**
-         * Origin server information.
-When `OriginType=custom`, it indicates one or more origin servers. Example:
-OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-OriginValue=["test.com:80"];
-When `OriginType=origins`, it indicates an origin group ID. Example:
-OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
+         * Origin server information:
+<li>When `OriginType=custom`, it indicates one or more origin servers, such as ["8.8.8.8","9.9.9.9"] or ["test.com"].</li>
+<li>When `OriginType=origins`, it indicates an origin group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
          * @type {Array.<string> || null}
          */
         this.OriginValue = null;
@@ -7506,6 +8039,14 @@ OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
          */
         this.SessionPersist = null;
 
+        /**
+         * The origin port, which can be:
+<li>A single port, such as 80</li>
+<li>A port range, such as 81-82</li>
+         * @type {string || null}
+         */
+        this.OriginPort = null;
+
     }
 
     /**
@@ -7523,6 +8064,7 @@ OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
         this.Status = 'Status' in params ? params.Status : null;
         this.ForwardClientIp = 'ForwardClientIp' in params ? params.ForwardClientIp : null;
         this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
+        this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
 
     }
 }
@@ -7627,9 +8169,9 @@ class Zone extends  AbstractModel {
         this.Paused = null;
 
         /**
-         * Whether CNAME flattening is enabled. Valid values:
-<li>`enabled`: Enabled.</li>
-<li>`disabled`: Disabled.</li>
+         * Whether CNAME acceleration is enabled. Values:
+<li>`enabled`: Enabled</li>
+<li>`disabled`: Disabled</li>
          * @type {string || null}
          */
         this.CnameSpeedUp = null;
@@ -7689,6 +8231,22 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.VanityNameServersIps = null;
 
+        /**
+         * Status of the proxy. Values:
+<li>`active`: Enabled</li>
+<li>`inactive`: Not activated</li>
+<li>`paused`: Disabled</li>
+         * @type {string || null}
+         */
+        this.ActiveStatus = null;
+
+        /**
+         * The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AliasZoneName = null;
+
     }
 
     /**
@@ -7743,6 +8301,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.VanityNameServersIps.push(obj);
             }
         }
+        this.ActiveStatus = 'ActiveStatus' in params ? params.ActiveStatus : null;
+        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
 
     }
 }
@@ -8098,10 +8658,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Type of the certificate. Values:
-<li>`default`: Default certificate;</lil>
-<li>`upload`: Custom certificate;</li>
-<li>`managed`: Tencent Cloud-managed certificate.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+<li>`default`: Default certificate</lil>
+<li>`upload`: Specified certificate</li>
+<li>`managed`: Tencent Cloud-managed certificate</li>
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Type = null;
@@ -8127,6 +8687,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.SignAlgo = null;
 
+        /**
+         * Domain name of the certificate.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CommonName = null;
+
     }
 
     /**
@@ -8142,6 +8709,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.DeployTime = 'DeployTime' in params ? params.DeployTime : null;
         this.SignAlgo = 'SignAlgo' in params ? params.SignAlgo : null;
+        this.CommonName = 'CommonName' in params ? params.CommonName : null;
 
     }
 }
@@ -8168,10 +8736,30 @@ class DescribeZonesRequest extends  AbstractModel {
 
         /**
          * Filter criteria. Each filter criteria can have up to 20 entries.
-<li>`zone-name`:<br>   Filter by <strong>site name</strong><br>   Type: String<br>   Required: No<li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No<li>`status`:<br>   Filter by <strong>site status</strong><br>   Type: String<br>   Required: No<li>`tag-key`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No<li>`tag-value`:<br>   Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No<li>`Fuzzy`:<br>   Filter by <strong>values in fuzzy query</strong> (only `zone-name` allowed). Values limit: 1<br>   Type: Boolean<br>   Required: No<br>   Default value: false
+<li>`zone-name`:<br>   Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No</li><li>`status`:<br>   Filter by <strong>site status</strong><br>   Type: String<br>   Required: No</li><li>`tag-key`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No</li><li>`tag-value`:<br>   Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No</li>Only `zone-name` supports fuzzy query.
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
+
+        /**
+         * The sorting field. Values:
+<li>`type`: Access mode</li>
+<li>`area`: Acceleration region</li>
+<li>`create-time`: Creation date</li>
+<li>`zone-name`: Site name</li>
+<li>`use-time`: Last used date</li>
+<li>`active-status`: Activation status</li>If it is left empty, the default value `create-time` is used.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * The sorting direction. Values:
+<li>`asc`: From smallest to largest</li>
+<li>`desc`: From largest to smallest</li>If it is left empty, the default value `desc` is used.
+         * @type {string || null}
+         */
+        this.Direction = null;
 
     }
 
@@ -8193,6 +8781,8 @@ class DescribeZonesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
 
     }
 }
@@ -8298,7 +8888,7 @@ Whether the origin group is private. Values:
 }
 
 /**
- * 
+ * Advanced origin-pull configuration
  * @class
  */
 class AdvancedOriginGroup extends  AbstractModel {
@@ -8306,19 +8896,19 @@ class AdvancedOriginGroup extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Matching condition. The "Target" field must be unique.
          * @type {Array.<OriginGroupCondition> || null}
          */
         this.OriginGroupConditions = null;
 
         /**
-         * 
+         * ID of the primary origin server.
          * @type {string || null}
          */
         this.OriginGroupId = null;
 
         /**
-         * 
+         * ID of the secondary origin server.
          * @type {string || null}
          */
         this.BackupOriginGroupId = null;
@@ -8397,7 +8987,7 @@ class DeleteLogTopicTaskRequest extends  AbstractModel {
         this.TopicId = null;
 
         /**
-         * Region of the logset.
+         * Region of the logset to be shipped. This field is only required when you configure CLS shipping tasks.
          * @type {string || null}
          */
         this.LogSetRegion = null;
@@ -8548,70 +9138,31 @@ class DescribeDnsRecordsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDnsRecord request structure.
+ * CreatePrefetchTask response structure.
  * @class
  */
-class ModifyDnsRecordRequest extends  AbstractModel {
+class CreatePrefetchTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The record ID.
+         * ID of the task.
          * @type {string || null}
          */
-        this.DnsRecordId = null;
+        this.JobId = null;
 
         /**
-         * The site ID.
+         * List of failed tasks.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<FailReason> || null}
+         */
+        this.FailedList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ZoneId = null;
-
-        /**
-         * The DNS record type. Values:
-<li>`A`: Point a domain name to an IPv4 address, such as 8.8.8.8.</li>
-<li>`AAAA`: Point a domain name to an IPv6 address.</li>
-<li>`MX`: It is used for email servers. The record value and priority parameters are provided by email service providers. If there are multiple MX records, the lower the priority value, the higher the priority.</li>
-<li>`CNAME`: Point a domain name to another domain name that can be resolved to an IP address.</li>
-<li>`TXT`: Identify and describe a domain name. It is usually used for domain verification and as SPF records (for anti-spam).</li>
-<li>`NS`: If you need to authorize a subdomain name to another DNS service provider for DNS resolution, you need to add an NS record. You cannot add an NS record for a root domain name.</li>
-<li>`CAA`: Specify CAs to issue certificates for sites.</li>
-<li>`SRV`: Identify a service used by a server. It is commonly used in Microsoft directory management.</li>
-         * @type {string || null}
-         */
-        this.DnsRecordType = null;
-
-        /**
-         * The record name, which consists of the host record and site name. Note that the original configuration will be used if this field is not specified.
-         * @type {string || null}
-         */
-        this.DnsRecordName = null;
-
-        /**
-         * The record content. Note that the original configuration will be used if this field is not specified.
-         * @type {string || null}
-         */
-        this.Content = null;
-
-        /**
-         * TTL (in seconds). The smaller the value, the faster the record changes take effect. Default value: 300. Note that the original configuration will be used if this field is not specified.
-         * @type {number || null}
-         */
-        this.TTL = null;
-
-        /**
-         * Specifies a value in the range 1–50 when you make changes to the MX records. A smaller value indicates higher priority. Note that the default value 0 will be used if this field is not specified.
-         * @type {number || null}
-         */
-        this.Priority = null;
-
-        /**
-         * The proxy mode. Values:
-<li>`dns_only`: Only DNS</li>
-<li>`proxied`: Proxied</li></li>The original configuration will apply if this field is not specified.
-         * @type {string || null}
-         */
-        this.Mode = null;
+        this.RequestId = null;
 
     }
 
@@ -8622,14 +9173,17 @@ class ModifyDnsRecordRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DnsRecordId = 'DnsRecordId' in params ? params.DnsRecordId : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.DnsRecordType = 'DnsRecordType' in params ? params.DnsRecordType : null;
-        this.DnsRecordName = 'DnsRecordName' in params ? params.DnsRecordName : null;
-        this.Content = 'Content' in params ? params.Content : null;
-        this.TTL = 'TTL' in params ? params.TTL : null;
-        this.Priority = 'Priority' in params ? params.Priority : null;
-        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+        if (params.FailedList) {
+            this.FailedList = new Array();
+            for (let z in params.FailedList) {
+                let obj = new FailReason();
+                obj.deserialize(params.FailedList[z]);
+                this.FailedList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8644,7 +9198,7 @@ class DescribeDefaultCertificatesRequest extends  AbstractModel {
 
         /**
          * Filter criteria. Each filter criteria can have up to 5 entries.
-<li>`zone-id`: <br>Filter by <strong>site ID</strong>. Format: zone-xxx
+<li>`zone-id`: <br>Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -9085,6 +9639,12 @@ class RuleItem extends  AbstractModel {
          */
         this.RulePriority = null;
 
+        /**
+         * Tag of the rule.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -9107,6 +9667,7 @@ class RuleItem extends  AbstractModel {
             }
         }
         this.RulePriority = 'RulePriority' in params ? params.RulePriority : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
 
     }
 }
@@ -9303,168 +9864,31 @@ class DescribeBotHitRuleDetailRequest extends  AbstractModel {
 }
 
 /**
- * Domain name configuration information
+ * DescribeWebProtectionHitRuleDetail response structure.
  * @class
  */
-class DetailHost extends  AbstractModel {
+class DescribeWebProtectionHitRuleDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The site ID.
-         * @type {string || null}
+         * The list of hit CC protection rules.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SecHitRuleInfo> || null}
          */
-        this.ZoneId = null;
+        this.Data = null;
 
         /**
-         * The acceleration status. Values:
-<li>`process`: In progress</li>
-<li>`online`: Enabled</li>
-<li>`offline`: Disabled</li>
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * The domain name.
-         * @type {string || null}
-         */
-        this.Host = null;
-
-        /**
-         * Name of the site
-         * @type {string || null}
-         */
-        this.ZoneName = null;
-
-        /**
-         * The assigned CNAME
-         * @type {string || null}
-         */
-        this.Cname = null;
-
-        /**
-         * The resource ID.
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * The instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * The lock status.
+         * Total number of query results.
          * @type {number || null}
          */
-        this.Lock = null;
+        this.TotalCount = null;
 
         /**
-         * The domain name status.
-         * @type {number || null}
-         */
-        this.Mode = null;
-
-        /**
-         * The acceleration area of the domain name. Values:
-<li>`global`: Global.</li>
-<li>`mainland`: Chinese mainland.</li>
-<li>`overseas`: Outside the Chinese mainland.</li>
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Area = null;
-
-        /**
-         * The acceleration type configuration item.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {AccelerateType || null}
-         */
-        this.AccelerateType = null;
-
-        /**
-         * The HTTPS configuration item.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Https || null}
-         */
-        this.Https = null;
-
-        /**
-         * The cache configuration item.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {CacheConfig || null}
-         */
-        this.CacheConfig = null;
-
-        /**
-         * The origin configuration item.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Origin || null}
-         */
-        this.Origin = null;
-
-        /**
-         * The security type.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {SecurityType || null}
-         */
-        this.SecurityType = null;
-
-        /**
-         * The cache key configuration item.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {CacheKey || null}
-         */
-        this.CacheKey = null;
-
-        /**
-         * The smart compression configuration item.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Compression || null}
-         */
-        this.Compression = null;
-
-        /**
-         * The WAF protection configuration item.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Waf || null}
-         */
-        this.Waf = null;
-
-        /**
-         * The CC protection configuration item.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {CC || null}
-         */
-        this.CC = null;
-
-        /**
-         * DDoS mitigation configuration
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {DDoS || null}
-         */
-        this.DDoS = null;
-
-        /**
-         * The smart routing configuration item.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {SmartRouting || null}
-         */
-        this.SmartRouting = null;
-
-        /**
-         * The IPv6 access configuration item.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Ipv6 || null}
-         */
-        this.Ipv6 = null;
-
-        /**
-         * 
-         * @type {ClientIpCountry || null}
-         */
-        this.ClientIpCountry = null;
+        this.RequestId = null;
 
     }
 
@@ -9475,94 +9899,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.Cname = 'Cname' in params ? params.Cname : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Lock = 'Lock' in params ? params.Lock : null;
-        this.Mode = 'Mode' in params ? params.Mode : null;
-        this.Area = 'Area' in params ? params.Area : null;
 
-        if (params.AccelerateType) {
-            let obj = new AccelerateType();
-            obj.deserialize(params.AccelerateType)
-            this.AccelerateType = obj;
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SecHitRuleInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
         }
-
-        if (params.Https) {
-            let obj = new Https();
-            obj.deserialize(params.Https)
-            this.Https = obj;
-        }
-
-        if (params.CacheConfig) {
-            let obj = new CacheConfig();
-            obj.deserialize(params.CacheConfig)
-            this.CacheConfig = obj;
-        }
-
-        if (params.Origin) {
-            let obj = new Origin();
-            obj.deserialize(params.Origin)
-            this.Origin = obj;
-        }
-
-        if (params.SecurityType) {
-            let obj = new SecurityType();
-            obj.deserialize(params.SecurityType)
-            this.SecurityType = obj;
-        }
-
-        if (params.CacheKey) {
-            let obj = new CacheKey();
-            obj.deserialize(params.CacheKey)
-            this.CacheKey = obj;
-        }
-
-        if (params.Compression) {
-            let obj = new Compression();
-            obj.deserialize(params.Compression)
-            this.Compression = obj;
-        }
-
-        if (params.Waf) {
-            let obj = new Waf();
-            obj.deserialize(params.Waf)
-            this.Waf = obj;
-        }
-
-        if (params.CC) {
-            let obj = new CC();
-            obj.deserialize(params.CC)
-            this.CC = obj;
-        }
-
-        if (params.DDoS) {
-            let obj = new DDoS();
-            obj.deserialize(params.DDoS)
-            this.DDoS = obj;
-        }
-
-        if (params.SmartRouting) {
-            let obj = new SmartRouting();
-            obj.deserialize(params.SmartRouting)
-            this.SmartRouting = obj;
-        }
-
-        if (params.Ipv6) {
-            let obj = new Ipv6();
-            obj.deserialize(params.Ipv6)
-            this.Ipv6 = obj;
-        }
-
-        if (params.ClientIpCountry) {
-            let obj = new ClientIpCountry();
-            obj.deserialize(params.ClientIpCountry)
-            this.ClientIpCountry = obj;
-        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9596,6 +9943,34 @@ class DescribeSpeedTestingMetricDataRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyLogTopicTask response structure.
+ * @class
+ */
+class ModifyLogTopicTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Rule engine condition parameters
  * @class
  */
@@ -9605,35 +9980,61 @@ class RuleCondition extends  AbstractModel {
 
         /**
          * Operator. Valid values:
-<li>equal: Equal to.</li>
-<li>notequal: Not equal to.</li>
+<li>`equals`: Equals</li>
+<li>`notEquals`: Does not equal</li>
+<li>`exist`: Exists</li>
+<li>`notexist`: Does not exist</li>
          * @type {string || null}
          */
         this.Operator = null;
 
         /**
          * Match type. Valid values:
-<li>`host`: All</li>
 <li>`filename`: File name</li>
 <li>`extension`: File extension</li>
-<li>`host`: HOST: .</li>
-<li>`full_url`: The full URL of the current site. It must contain the HTTP protocol, host, and path.</li>
-<li>`url`: The URL path of the current site.</li>
+<li>`host`: Host</li>
+<li>`full_url`: Full URL, which indicates the complete URL path under the current site and must contain the HTTP protocol, host, and path.</li>
+<li>`url`: Partial URL under the current site</li><li>`client_country`: Country/Region of the client</li>
+<li>`query_string`: Query string in the URL</li>
+<li>`request_header`: HTTP request header</li>
          * @type {string || null}
          */
         this.Target = null;
 
         /**
-         * Parameter values of the match type. Each match type has the following valid values:
-<li>`Target=extension`:  The extension of the file, such as `jpg` and `txt`.</li>
-<li>`Target=filename`: The file name without the extension.</li>
-<li>`Target=host`: Values can be `all` 
-or a host, such as `www.maxx55.com`.</li>
-<li>`Target=url`: A URL request path under the current site, such as `/example`.</li>
-<li>`Target=full_url`: A complete URL request under the current site. It must contain the protocol, host, and path, such as `https://www.maxx55.cn/example`.</li>
+         * The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+<li>When `Target=extension`, enter the file extension, such as "jpg" and "txt".</li>
+<li>When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".</li>
+<li>When `Target=all`, it indicates any site request.</li>
+<li>When `Target=host`, enter the host under the current site, such as "www.maxx55.com".</li>
+<li>When `Target=url`, enter the partial URL path under the current site, such as "/example".</li>
+<li>When `Target=full_url`, enter the complete URL  under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".</li>
+<li>When `Target=client_country`, enter the ISO-3166 country/region code.</li>
+<li>When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".</li>
+<li>When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.</li>
          * @type {Array.<string> || null}
          */
         this.Values = null;
+
+        /**
+         * Whether the parameter value is case insensitive. Default value: false.
+         * @type {boolean || null}
+         */
+        this.IgnoreCase = null;
+
+        /**
+         * The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
+<li>`query_string`: Name of the query string, such as "lang" and "version" in "lang=cn&version=1".</li>
+<li>`request_header`: Name of the HTTP request header, such as "Accept-Language" in the "Accept-Language:zh-CN,zh;q=0.9" header.</li>
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IgnoreNameCase = null;
 
     }
 
@@ -9647,6 +10048,9 @@ or a host, such as `www.maxx55.com`.</li>
         this.Operator = 'Operator' in params ? params.Operator : null;
         this.Target = 'Target' in params ? params.Target : null;
         this.Values = 'Values' in params ? params.Values : null;
+        this.IgnoreCase = 'IgnoreCase' in params ? params.IgnoreCase : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.IgnoreNameCase = 'IgnoreNameCase' in params ? params.IgnoreNameCase : null;
 
     }
 }
@@ -9717,10 +10121,16 @@ class DescribeSecurityPolicyRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * The subdomain name/layer-4 proxy.
+         * The subdomain name/L4 proxy. You must specify either "Entity" or "TemplateId".
          * @type {string || null}
          */
         this.Entity = null;
+
+        /**
+         * The template ID. You must specify either this field or "Entity".
+         * @type {string || null}
+         */
+        this.TemplateId = null;
 
     }
 
@@ -9733,6 +10143,7 @@ class DescribeSecurityPolicyRequest extends  AbstractModel {
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Entity = 'Entity' in params ? params.Entity : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -9824,9 +10235,8 @@ class RateLimitUserRule extends  AbstractModel {
 
         /**
          * The rule status. Values:
-<li>`on`: Enable</li>
-<li>`off`: Disable</li>
-<li>Default value: on</li>
+<li>`on`: Enabled</li>
+<li>`off`: Disabled</li>Default value: on
          * @type {string || null}
          */
         this.RuleStatus = null;
@@ -9852,7 +10262,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * The filter. Values:
-<li>`host`: Domain name</li>
 <li>`sip`: Client IP</li>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
@@ -9865,6 +10274,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.UpdateTime = null;
+
+        /**
+         * The statistical dimension. Values:
+<li>`source_to_eo`: Responses from the origin server to EdgeOne</li>
+<li>`client_to_eo`: Requests from the client to EdgeOne</li>
+Note: A null value indicates responses from the origin server to EdgeOne are recorded.
+         * @type {Array.<string> || null}
+         */
+        this.FreqScope = null;
 
     }
 
@@ -9895,6 +10313,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RuleID = 'RuleID' in params ? params.RuleID : null;
         this.FreqFields = 'FreqFields' in params ? params.FreqFields : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FreqScope = 'FreqScope' in params ? params.FreqScope : null;
 
     }
 }
@@ -9942,15 +10361,19 @@ class CreatePlanForZoneRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Plan options available for purchase. Values:
-<li>`sta`: Standard plan for global areas except Chinese mainland;</li>
-<li>`sta_with_bot`: Standard plan for global areas except Chinese mainland, with extra bot management;</li>
-<li>`sta_cm`: Standard plan for Chinese mainland;</li>
-<li>`sta_cm_with_bot`: Standard plan for Chinese mainland, with extra bot management;</li>
-<li>`ent`: Enterprise plan for global areas except Chinese mainland;</li>
-<li>`ent_with_bot`: Enterprise plan for global areas except Chinese mainland, with extra bot management;</li>
-<li>`ent_cm`: Enterprise plan for Chinese mainland;</li>
-<li>`ent_cm_with_bot`: Enterprise plan for Chinese mainland, with extra bot management.</li>To get the available plan options for your account, view the output from <a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>.
+         * The plan option. Values:
+<li>`sta`: Standard plan that supports content delivery network outside the Chinese mainland.</li>
+<li>`sta_with_bot`: Standard plan that supports content delivery network outside the Chinese mainland and bot management.</li>
+<li>`sta_cm`: Standard plan that supports content delivery network inside the Chinese mainland.</li>
+<li>`sta_cm_with_bot`: Standard plan that supports content delivery network inside the Chinese mainland and bot management.</li>
+<li>`sta_global`: Standard plan that supports content delivery network over the globe.</li>
+<li>`sta_global_with_bot`: Standard plan that supports content delivery network over the globe and bot management.</li>
+<li>`ent`: Enterprise plan that supports content delivery network outside the Chinese mainland.</li>
+<li>`ent_with_bot`: Enterprise plan that supports content delivery network outside the Chinese mainland and bot management.</li>
+<li>`ent_cm`: Enterprise plan that supports content delivery network inside the Chinese mainland.</li>
+<li>`ent_cm_with_bot`: Enterprise plan that supports content delivery network inside the Chinese mainland and bot management.</li>
+<li>`ent_global`: Enterprise plan that supports content delivery network over the globe.</li>
+<li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>To get the available plan options for your account, view the output from <a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>.
          * @type {string || null}
          */
         this.PlanType = null;
@@ -10338,7 +10761,7 @@ class DescribeIdentificationsRequest extends  AbstractModel {
 
         /**
          * Filter criteria. Each filter criteria can have up to 20 entries.
-<li>`zone-name`: <br>Filter by <strong>site name</strong><br>   Type: String<br>   Required: No
+<li>`zone-name`: <br>Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -10514,6 +10937,41 @@ class NormalAction extends  AbstractModel {
 }
 
 /**
+ * The top-ranked data details
+ * @class
+ */
+class TopDetailData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The field name.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * The field value.
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeZoneSetting response structure.
  * @class
  */
@@ -10608,7 +11066,7 @@ class DescribePurgeTasksRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the site.
+         * Disused. Use "zone-id" in "Filters" instead.
          * @type {string || null}
          */
         this.ZoneId = null;
@@ -10638,8 +11096,7 @@ class DescribePurgeTasksRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter criteria. Each filter criteria can have up to 20 entries.
-<li>`job-id`:<br> Filter by the <strong>Task ID</strong>, such as 1379afjk91u32h. Only one ID can be specified.<br>Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`target`:<br>   Filter by the <strong>resource address</strong>, such as http://www.qq.com/1.txt. Only one entry allowed.<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`domains`:<br>   Filter by the <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`statuses`:<br>   Filter by the <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: Tasks in progress<br>   `success`: Succeeded tasks<br>   `failed`: Failed tasks<br>   `timeout`: Timed-out tasks<li>`type`:<br>   Filter by the <strong>purging mode</strong>. Only one value allowed.<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge URLs.<br>   `purge_prefix`: Purge prefixes.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge hostnames.
+         * Filter criteria. Each filter criteria can have up to 20 entries. <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt and tag1<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.<li>`type`:<br>   Filter by <strong>purging mode</strong> (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge by URL.<br>   `purge_prefix`: Purge by prefix.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge by hostname.<br>   `purge_cache_tag`: Purge by cache tag.</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -11500,6 +11957,17 @@ class SecHitRuleInfo extends  AbstractModel {
          */
         this.Domain = null;
 
+        /**
+         * The bot tag. Values:
+<li>`evil_bot`: Malicious bot</li>
+<li>`suspect_bot`: Suspected bot</li>
+<li>`good_bot`: Good bot</li>
+<li>`normal`: Normal request</li>
+<li>`none`: Uncategorized</li>
+         * @type {string || null}
+         */
+        this.BotLabel = null;
+
     }
 
     /**
@@ -11516,6 +11984,7 @@ class SecHitRuleInfo extends  AbstractModel {
         this.RequestNum = 'RequestNum' in params ? params.RequestNum : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
+        this.BotLabel = 'BotLabel' in params ? params.BotLabel : null;
 
     }
 }
@@ -11810,6 +12279,64 @@ class CreateCredentialResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAliasDomains request structure.
+ * @class
+ */
+class DescribeAliasDomainsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The page offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The paginated query limit. Default value: 20. Maximum value: 1000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter criteria. Each filter criteria can have up to 20 entries.
+<li>`target-name`:<br>   Filter by <strong>target domain name</strong><br>   Type: String<br>   Required: No</li><li>`alias-name`:<br>   Filter by <strong>alias domain name</strong><br>   Type: String<br>   Required: No</li>Only `alias-name` supports fuzzy query.
+         * @type {Array.<AdvancedFilter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AdvancedFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * SwitchLogTopicTask request structure.
  * @class
  */
@@ -11955,26 +12482,33 @@ class ExceptUserRuleScope extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Exception mode. Values:
+<li>`complete`: Skip the exception rule for full requests.</li>
+<li>`partial`: Skip the exception rule for partial requests.</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * The module that applies. Only WAF managed rules are supported currently.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The module to be activated. Values:
+<li>`waf`: Managed rules</li>
+<li>`cc`: Rate limiting rules</li>
+<li>`bot`: bot protection</li>
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.Modules = null;
 
         /**
-         * 
+         * Module settings of the exception rule. If it is null, the settings that were last configured will be used.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<PartialModule> || null}
          */
         this.PartialModules = null;
 
         /**
-         * 
+         * Condition settings of the exception rule. If it is null, the settings that were last configured will be used.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<SkipCondition> || null}
          */
         this.SkipConditions = null;
@@ -12013,10 +12547,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeSecurityPortraitRules request structure.
+ * ModifyAliasDomain request structure.
  * @class
  */
-class DescribeSecurityPortraitRulesRequest extends  AbstractModel {
+class ModifyAliasDomainRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -12027,10 +12561,75 @@ class DescribeSecurityPortraitRulesRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Subdomain name/Application name
+         * The alias domain name.
+         * @type {string || null}
+         */
+        this.AliasName = null;
+
+        /**
+         * The target domain name.
+         * @type {string || null}
+         */
+        this.TargetName = null;
+
+        /**
+         * Certificate configuration. Values:
+<li>`none`: Off</li>
+<li>`hosting`: Managed SSL certificate</li>
+<li>`apply`: Free certificate</li>The original configuration will apply if this field is not specified.
+         * @type {string || null}
+         */
+        this.CertType = null;
+
+        /**
+         * The certificate ID. This field is required when `CertType=hosting`.
+         * @type {Array.<string> || null}
+         */
+        this.CertId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.AliasName = 'AliasName' in params ? params.AliasName : null;
+        this.TargetName = 'TargetName' in params ? params.TargetName : null;
+        this.CertType = 'CertType' in params ? params.CertType : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+
+    }
+}
+
+/**
+ * DescribeSecurityPortraitRules request structure.
+ * @class
+ */
+class DescribeSecurityPortraitRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
          * @type {string || null}
          */
         this.Entity = null;
+
+        /**
+         * The template ID. You must specify either this field or "ZoneId+Entity". 
+         * @type {string || null}
+         */
+        this.TemplateId = null;
 
     }
 
@@ -12043,6 +12642,7 @@ class DescribeSecurityPortraitRulesRequest extends  AbstractModel {
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.Entity = 'Entity' in params ? params.Entity : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -12291,6 +12891,34 @@ class CreateRuleResponse extends  AbstractModel {
 }
 
 /**
+ * BindZoneToPlan response structure.
+ * @class
+ */
+class BindZoneToPlanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateDnsRecord request structure.
  * @class
  */
@@ -12487,18 +13115,32 @@ The original configuration will apply if this field is not specified.
 }
 
 /**
- * ModifyLogTopicTask response structure.
+ * ModifyAliasDomainStatus request structure.
  * @class
  */
-class ModifyLogTopicTaskResponse extends  AbstractModel {
+class ModifyAliasDomainStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The site ID.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ZoneId = null;
+
+        /**
+         * Status of the alias domain name. Values:
+<li>`false`: Enable the alias domain name.</li>
+<li>`true`: Disable the alias domain name.</li>
+         * @type {boolean || null}
+         */
+        this.Paused = null;
+
+        /**
+         * The alias domain name you want to modify its status. If it is left empty, the modify operation is not performed.
+         * @type {Array.<string> || null}
+         */
+        this.AliasNames = null;
 
     }
 
@@ -12509,7 +13151,9 @@ class ModifyLogTopicTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Paused = 'Paused' in params ? params.Paused : null;
+        this.AliasNames = 'AliasNames' in params ? params.AliasNames : null;
 
     }
 }
@@ -12699,9 +13343,9 @@ class ModifyApplicationProxyRuleRequest extends  AbstractModel {
         this.OriginType = null;
 
         /**
-         * The port, which can be specified in the following formats:
-Single port, such as 80.
-Port range, such as 81-90. The original configuration will apply if this field is not specified.
+         * The access port, which can be:
+<li>A single port, such as 80</li>
+<li>A port range, such as 81-90</li>
          * @type {Array.<string> || null}
          */
         this.Port = null;
@@ -12716,11 +13360,9 @@ Port range, such as 81-90. The original configuration will apply if this field i
 
         /**
          * Origin server information:
-When `OriginType=custom`, it indicates one or more origin servers. Example:
-OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-OriginValue=["test.com:80"];
-When `OriginType=origins`, it indicates an origin group ID. Example:
-OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]
+<li>When `OriginType=custom`, it indicates one or more origin servers, such as ["8.8.8.8","9.9.9.9"] or ["test.com"].</li>
+<li>When `OriginType=origins`, it indicates an origin group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
+
 The original configuration will apply if this field is not specified.
          * @type {Array.<string> || null}
          */
@@ -12739,10 +13381,18 @@ The original configuration will apply if this field is not specified.
         /**
          * Whether to enable session persistence. Values:
 <li>`true`: Enable</li>
-<li>`false`: Disable</li>The original configuration will apply if this field is not specified.
+<li>`false`: Disable</li>If it is left empty, the default value `false` is used.
          * @type {boolean || null}
          */
         this.SessionPersist = null;
+
+        /**
+         * The origin port, which can be:
+<li>A single port, such as 80</li>
+<li>A port range, such as 81-82</li>
+         * @type {string || null}
+         */
+        this.OriginPort = null;
 
     }
 
@@ -12762,6 +13412,7 @@ The original configuration will apply if this field is not specified.
         this.OriginValue = 'OriginValue' in params ? params.OriginValue : null;
         this.ForwardClientIp = 'ForwardClientIp' in params ? params.ForwardClientIp : null;
         this.SessionPersist = 'SessionPersist' in params ? params.SessionPersist : null;
+        this.OriginPort = 'OriginPort' in params ? params.OriginPort : null;
 
     }
 }
@@ -12838,6 +13489,49 @@ class AclConfig extends  AbstractModel {
                 this.AclUserRules.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Rule engine nested rule
+ * @class
+ */
+class SubRuleItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Nested rule settings
+         * @type {Array.<SubRule> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * Tag of the rule.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new SubRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.Tags = 'Tags' in params ? params.Tags : null;
 
     }
 }
@@ -12954,7 +13648,35 @@ class WafGroupDetail extends  AbstractModel {
 }
 
 /**
- * 
+ * CreateAliasDomain response structure.
+ * @class
+ */
+class CreateAliasDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Location information of the client IP carried in origin-pull. It is formatted as a two-letter ISO-3166-1 country/region code.
  * @class
  */
 class ClientIpCountry extends  AbstractModel {
@@ -12962,13 +13684,16 @@ class ClientIpCountry extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Whether to enable configuration. Values:
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Header name of ClientIpCountry. This field is valid only when `Switch=on`.
+If it is left empty, the default value `EO-Client-IPCountry` will be used.
          * @type {string || null}
          */
         this.HeaderName = null;
@@ -13061,13 +13786,16 @@ class LoadBalancing extends  AbstractModel {
         this.UpdateTime = null;
 
         /**
-         * 
+         * The origin-pull type. Values:
+<li>`normal`: Primary/Secondary origin-pull</li>
+<li>`advanced`: Advanced origin-pull</li>
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * 
+         * Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<AdvancedOriginGroup> || null}
          */
         this.AdvancedOriginGroups = null;
@@ -13148,7 +13876,7 @@ class DeleteApplicationProxyRuleRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Verification file, used to verify site ownership
  * @class
  */
 class FileAscriptionInfo extends  AbstractModel {
@@ -13156,13 +13884,13 @@ class FileAscriptionInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Directory of the verification file.
          * @type {string || null}
          */
         this.IdentifyPath = null;
 
         /**
-         * 
+         * Content of the verification file.
          * @type {string || null}
          */
         this.IdentifyContent = null;
@@ -13421,13 +14149,15 @@ Value range: 60-86400 (in seconds). If it's not specified, the default value 600
         this.TTL = null;
 
         /**
-         * 
+         * The origin-pull type. Values:
+<li>`normal`: Primary/Secondary origin-pull</li>
+<li>`advanced`: Advanced origin-pull (only used when `Type=proxied`)</li>If it is left empty, primary/secondary origin-pull is applied.
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * 
+         * Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
          * @type {Array.<AdvancedOriginGroup> || null}
          */
         this.AdvancedOriginGroups = null;
@@ -13584,6 +14314,34 @@ Note: If `Type` is `CUSTOM_NUM` or `CUSTOM_STRING`, this parameter will be an em
  * @class
  */
 class ModifyAlarmConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAliasDomainStatus response structure.
+ * @class
+ */
+class ModifyAliasDomainStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -13796,13 +14554,13 @@ class DescribeSecurityGroupManagedRulesRequest extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
+         * The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * The subdomain name/layer-4 proxy.
+         * The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
          * @type {string || null}
          */
         this.Entity = null;
@@ -13819,6 +14577,12 @@ class DescribeSecurityGroupManagedRulesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * The template ID. You must specify either this field or ZoneId+Entity".
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
     }
 
     /**
@@ -13832,6 +14596,7 @@ class DescribeSecurityGroupManagedRulesRequest extends  AbstractModel {
         this.Entity = 'Entity' in params ? params.Entity : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -13914,6 +14679,20 @@ class CreateZoneRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Whether to allow duplicate sites. Values:
+<li>`true`: Duplicate sites are allowed.</li>
+<li>`false`: Duplicate sites are not allowed.</li>If it is left empty, the default value `false` is used.
+         * @type {boolean || null}
+         */
+        this.AllowDuplicates = null;
+
+        /**
+         * The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
+         * @type {string || null}
+         */
+        this.AliasZoneName = null;
+
     }
 
     /**
@@ -13935,6 +14714,8 @@ class CreateZoneRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.AllowDuplicates = 'AllowDuplicates' in params ? params.AllowDuplicates : null;
+        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
 
     }
 }
@@ -13977,57 +14758,6 @@ class AscriptionInfo extends  AbstractModel {
         this.Subdomain = 'Subdomain' in params ? params.Subdomain : null;
         this.RecordType = 'RecordType' in params ? params.RecordType : null;
         this.RecordValue = 'RecordValue' in params ? params.RecordValue : null;
-
-    }
-}
-
-/**
- * DescribeBotData response structure.
- * @class
- */
-class DescribeBotDataResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The list of bot attack data.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<SecEntry> || null}
-         */
-        this.Data = null;
-
-        /**
-         * Total number of query results.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new SecEntry();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14533,7 +15263,7 @@ class DescribeApplicationProxiesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter criteria. Each filter criteria can have up to 20 entries. <li>`proxy-id`:<br>   Filter by <strong>proxy ID</strong>, such as proxy-ev2sawbwfd<br>   Type: String<br>   Required: No<li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-vawer2vadg<br>   Type: String<br>   Required: No
+         * Filter criteria. Each filter criteria can have up to 20 entries. <li>`proxy-id`:<br>   Filter by <strong>proxy ID</strong>, such as proxy-ev2sawbwfd<br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-vawer2vadg<br>   Type: String<br>   Required: No</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -14745,6 +15475,12 @@ class CreateRuleRequest extends  AbstractModel {
          */
         this.Rules = null;
 
+        /**
+         * Tag of the rule.
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -14766,6 +15502,42 @@ class CreateRuleRequest extends  AbstractModel {
                 this.Rules.push(obj);
             }
         }
+        this.Tags = 'Tags' in params ? params.Tags : null;
+
+    }
+}
+
+/**
+ * Security template settings
+ * @class
+ */
+class TemplateConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The template ID.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * The template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
 
     }
 }
@@ -14829,7 +15601,7 @@ class RateLimitTemplateDetail extends  AbstractModel {
 <li>`normal`: Moderate</li>
 <li>`strict`: Strict</li>
 <li>`close`: Off</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Mode = null;
@@ -14841,15 +15613,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ID = null;
 
         /**
-         * The action, which will be triggered when the specified threshold reaches.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The action. Values:
+<li>`alg`: JavaScript challenge</li>
+<li>`monitor`: Observe</li>
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.Action = null;
 
         /**
-         * The amount of time taken to perform the action. Value range: 0-172800 seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The blocking duration, in seconds. Value range: 0-172800.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */
         this.PunishTime = null;
@@ -15243,30 +16017,31 @@ class Action extends  AbstractModel {
 
         /**
          * Common feature operation. Features of this type include:
-<li>`AccessUrlRedirect`: Access URL rewrite.</li>
-<li>`UpstreamUrlRedirect`: Origin-pull URL rewrite.</li>
-<li>`QUIC`: QUIC.</li>
-<li>`WebSocket`: WebSocket.</li>
-<li>`VideoSeek`: Video dragging.</li>
-<li>`Authentication`: Token authentication.</li>
-<li>`CacheKey`: Custom cache key.</li>
-<li>`Cache`: Node cache TTL.</li>
-<li>`MaxAge`: Browser cache TTL.</li>
-<li>`OfflineCache`: Offline cache.</li>
-<li>`SmartRouting`: Smart acceleration.</li>
-<li>`RangeOriginPull`: Range GETs.</li>
-<li>`UpstreamHttp2`: HTTP/2 forwarding.</li>
-<li>`HostHeader`: Host header rewrite.</li>
-<li>`ForceRedirect`: Force HTTPS.</li>
-<li>`OriginPullProtocol`: Origin-pull HTTPS.</li>
-<li>`CachePrefresh`: Cache prefresh.</li>
-<li>`Compression`: Smart compression.</li>
-<li>`Hsts`.</li>
-<li>`ClientIpHeader`.</li>
-<li>`TlsVersion`.</li>
-<li>`OcspStapling`.</li>
-<li>`Http2`: HTTP/2 access.</li>
-Note: This field may return null, indicating that no valid values can be obtained.
+<li>`AccessUrlRedirect`: Access URL rewrite</li>
+<li>`UpstreamUrlRedirect`: Origin-pull URL rewrite</li>
+<li>`QUIC`: QUIC</li>
+<li>`WebSocket`: WebSocket</li>
+<li>`VideoSeek`: Video dragging</li>
+<li>`Authentication`: Token authentication</li>
+<li>`CacheKey`: Custom cache key</li>
+<li>`Cache`: Node cache TTL</li>
+<li>`MaxAge`: Browser cache TTL</li>
+<li>`OfflineCache`: Offline cache</li>
+<li>`SmartRouting`: Smart acceleration</li>
+<li>`RangeOriginPull`: Range GETs</li>
+<li>`UpstreamHttp2`: HTTP/2 forwarding</li>
+<li>`HostHeader`: Host header rewrite</li>
+<li>`ForceRedirect`: Force HTTPS</li>
+<li>`OriginPullProtocol`: Origin-pull HTTPS</li>
+<li>`CachePrefresh`: Cache prefresh</li>
+<li>`Compression`: Smart compression</li>
+<li>`Hsts`</li>
+<li>`ClientIpHeader`</li>
+<li>`TlsVersion`</li>
+<li>`OcspStapling`</li>
+<li>`Http2`: HTTP/2 access</li>
+<li>`UpstreamFollowRedirect: Follow origin redirect</li>
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {NormalAction || null}
          */
         this.NormalAction = null;
@@ -15790,7 +16565,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Https = null;
 
         /**
-         * 
+         * Whether to carry the location information of the client IP during origin-pull.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {ClientIpCountry || null}
          */
         this.ClientIpCountry = null;
@@ -16005,7 +16781,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Module settings of the exception rule
  * @class
  */
 class PartialModule extends  AbstractModel {
@@ -16013,13 +16789,15 @@ class PartialModule extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The module. Values:
+<li>`waf`: Managed rules</li>
          * @type {string || null}
          */
         this.Module = null;
 
         /**
-         * 
+         * List of managed rule IDs to be skipped.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<number> || null}
          */
         this.Include = null;
@@ -16218,6 +16996,20 @@ class FollowOrigin extends  AbstractModel {
          */
         this.Switch = null;
 
+        /**
+         * Sets the default cache time when the origin server does not return the Cache-Control header.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.DefaultCacheTime = null;
+
+        /**
+         * Specifies whether to enable cache when the origin server does not return the Cache-Control header.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.DefaultCache = null;
+
     }
 
     /**
@@ -16228,6 +17020,8 @@ class FollowOrigin extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+        this.DefaultCacheTime = 'DefaultCacheTime' in params ? params.DefaultCacheTime : null;
+        this.DefaultCache = 'DefaultCache' in params ? params.DefaultCache : null;
 
     }
 }
@@ -16375,14 +17169,14 @@ class QueryCondition extends  AbstractModel {
 
         /**
          * The conditional operator. Values:
-<li>`equals`: Equal to;</li>
-<li>`notEquals`: Not equal to;</li>
-<li>`include`: Contain;</li>
-<li>`notInclude`: Not contain;</li>
-<li>`startWith`: Start with;</li>
-<li>`notStartWith`: Not start with;</li>
-<li>`endWith`: End with;</li>
-<li>`notEndWith`: Not end with.</li>
+<li>`equals`: Equals</li>
+<li>`notEquals`: Does not equal</li>
+<li>`include`: Contains</li>
+<li>`notInclude`: Does not contain</li>
+<li>`startWith`: Starts with</li>
+<li>`notStartWith`: Does not start with</li>
+<li>`endWith`: Ends with</li>
+<li>`notEndWith`: Does not end with</li>
          * @type {string || null}
          */
         this.Operator = null;
@@ -16455,25 +17249,12 @@ class RuleRewriteActionParams extends  AbstractModel {
 }
 
 /**
- * DescribeBotClientIpList response structure.
+ * ModifyAliasDomain response structure.
  * @class
  */
-class DescribeBotClientIpListResponse extends  AbstractModel {
+class ModifyAliasDomainResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * The list of client IP data.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<SecClientIp> || null}
-         */
-        this.Data = null;
-
-        /**
-         * Total number of query results.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -16490,16 +17271,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new SecClientIp();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -16698,6 +17469,14 @@ class ModifyHostsCertificateRequest extends  AbstractModel {
          */
         this.ServerCertInfo = null;
 
+        /**
+         * Whether the certificate is managed by EdgeOne. Values:
+<li>`apply`: Managed by EdgeOne</li>
+<li>`none`: Not managed by EdgeOne</li>If it is left empty, the default value `apply` is used.
+         * @type {string || null}
+         */
+        this.ApplyType = null;
+
     }
 
     /**
@@ -16718,6 +17497,7 @@ class ModifyHostsCertificateRequest extends  AbstractModel {
                 this.ServerCertInfo.push(obj);
             }
         }
+        this.ApplyType = 'ApplyType' in params ? params.ApplyType : null;
 
     }
 }
@@ -16990,7 +17770,7 @@ class DescribeHostsSettingRequest extends  AbstractModel {
 
         /**
          * Filter criteria. Each filter criteria can have up to 20 entries.
-<li>`host`:<br>   Filter by <strong>domain name </strong><br>   Type: String<br>   Required: No
+<li>`host`:<br>   Filter by <strong>domain name </strong><br>   Type: String<br>   Required: No</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -17199,7 +17979,8 @@ class OriginGroup extends  AbstractModel {
         this.UpdateTime = null;
 
         /**
-         * 
+         * The origin domain when `OriginType=self`.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.HostHeader = null;
@@ -17388,7 +18169,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Exception rule conditions, used to filter requests by specific fields
  * @class
  */
 class SkipCondition extends  AbstractModel {
@@ -17396,37 +18177,56 @@ class SkipCondition extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The field type. Values:
+<li>`header_fields`: HTTP request header</li>
+<li>`cookie`: HTTP request cookie</li>
+<li>`query_string`: Query string in the HTTP request URL</li>
+<li>`uri`: HTTP request URI</li>
+<li>`body_raw`: HTTP request body</li>
+<li>`body_json`: JSON HTTP request body</li>
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 
+         * The specific field. Values:
+<li>`args`: Query parameter in the URI, such as "?name1=jack&age=12"</li>
+<li>`path`: Partial path in the URI, such as "/path/to/resource.jpg"</li>
+<li>`full`: Full path in the URI, such as "example.com/path/to/resource.jpg?name1=jack&age=12"</li>
+<li>`upload_filename`: File path segment</li>
+<li>`keys`: All keys</li>
+<li>`values`: Values of all keys</li>
+<li>`key_value`: Key and its value</li>
          * @type {string || null}
          */
         this.Selector = null;
 
         /**
-         * 
+         * The match method used to match the key. Values:
+<li>`equal`: Exact match</li>
+<li>`wildcard`: Wildcard match (only asterisks)</li>
          * @type {string || null}
          */
         this.MatchFromType = null;
 
         /**
-         * 
+         * The value that matches the key.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.MatchFrom = null;
 
         /**
-         * 
+         * The match method used to match the content.
+<li>`equal`: Exact match</li>
+<li>`wildcard`: Wildcard match (only asterisks)</li>
          * @type {string || null}
          */
         this.MatchContentType = null;
 
         /**
-         * 
+         * The value that matches the content.
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.MatchContent = null;
@@ -17560,6 +18360,62 @@ class UpstreamHttp2 extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * ReclaimAliasDomain response structure.
+ * @class
+ */
+class ReclaimAliasDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAliasDomain response structure.
+ * @class
+ */
+class DeleteAliasDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17918,6 +18774,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.CertInfo = null;
 
+        /**
+         * Whether the certificate is managed by EdgeOne. Values:
+<li>`apply`: Managed by EdgeOne.</li>
+<li>`none`: Not managed by EdgeOne.</li>If it is left empty, the default value `none` is used.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ApplyType = null;
+
     }
 
     /**
@@ -17945,6 +18810,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.CertInfo.push(obj);
             }
         }
+        this.ApplyType = 'ApplyType' in params ? params.ApplyType : null;
 
     }
 }
@@ -18263,7 +19129,8 @@ The original configuration will apply if this field is not specified.
         this.Ipv6 = null;
 
         /**
-         * 
+         * Whether to carry the location information of the client IP during origin-pull.
+The original configuration will apply if this field is not specified.
          * @type {ClientIpCountry || null}
          */
         this.ClientIpCountry = null;
@@ -18566,6 +19433,12 @@ class ModifyZoneRequest extends  AbstractModel {
          */
         this.VanityNameServers = null;
 
+        /**
+         * The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
+         * @type {string || null}
+         */
+        this.AliasZoneName = null;
+
     }
 
     /**
@@ -18583,6 +19456,7 @@ class ModifyZoneRequest extends  AbstractModel {
             obj.deserialize(params.VanityNameServers)
             this.VanityNameServers = obj;
         }
+        this.AliasZoneName = 'AliasZoneName' in params ? params.AliasZoneName : null;
 
     }
 }
@@ -18944,24 +19818,61 @@ class DescribeBotClientIpListRequest extends  AbstractModel {
 }
 
 /**
- * Rule engine action for the HTTP request/response header
+ * Information of the alias domain name
  * @class
  */
-class RewriteAction extends  AbstractModel {
+class AliasDomain extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
+         * The alias domain name.
          * @type {string || null}
          */
-        this.Action = null;
+        this.AliasName = null;
 
         /**
-         * Parameter
-         * @type {Array.<RuleRewriteActionParams> || null}
+         * The site ID.
+         * @type {string || null}
          */
-        this.Parameters = null;
+        this.ZoneId = null;
+
+        /**
+         * The target domain name.
+         * @type {string || null}
+         */
+        this.TargetName = null;
+
+        /**
+         * Status of the alias domain name. Values:
+<li>`active`: Activated</li>
+<li>`pending`: Deploying</li>
+<li>`conflict`: Reclaimed</li>
+<li>`stop`: Stopped</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The blocking mode. Values:
+<li>`0`: Not blocked</li>
+<li>`11`: Blocked due to regulatory compliance</li>
+<li>`14`: Blocked due to ICP filing not obtained</li>
+         * @type {number || null}
+         */
+        this.ForbidMode = null;
+
+        /**
+         * Creation time of the alias domain name.
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * Modification time of the alias domain name.
+         * @type {string || null}
+         */
+        this.ModifiedOn = null;
 
     }
 
@@ -18972,16 +19883,13 @@ class RewriteAction extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Action = 'Action' in params ? params.Action : null;
-
-        if (params.Parameters) {
-            this.Parameters = new Array();
-            for (let z in params.Parameters) {
-                let obj = new RuleRewriteActionParams();
-                obj.deserialize(params.Parameters[z]);
-                this.Parameters.push(obj);
-            }
-        }
+        this.AliasName = 'AliasName' in params ? params.AliasName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.TargetName = 'TargetName' in params ? params.TargetName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ForbidMode = 'ForbidMode' in params ? params.ForbidMode : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.ModifiedOn = 'ModifiedOn' in params ? params.ModifiedOn : null;
 
     }
 }
@@ -19029,6 +19937,15 @@ class IpTableRule extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * The rule status. A null value indicates that the rule is enabled. Values:
+<li>`on`: Enabled</li>
+<li>`off`: Disabled</li>
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -19043,6 +19960,7 @@ class IpTableRule extends  AbstractModel {
         this.MatchContent = 'MatchContent' in params ? params.MatchContent : null;
         this.RuleID = 'RuleID' in params ? params.RuleID : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -19685,24 +20603,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The top-ranked data details
+ * Rule engine action for the HTTP request/response header
  * @class
  */
-class TopDetailData extends  AbstractModel {
+class RewriteAction extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The field name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          * @type {string || null}
          */
-        this.Key = null;
+        this.Action = null;
 
         /**
-         * The field value.
-         * @type {number || null}
+         * Parameter
+         * @type {Array.<RuleRewriteActionParams> || null}
          */
-        this.Value = null;
+        this.Parameters = null;
 
     }
 
@@ -19713,8 +20631,16 @@ class TopDetailData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.Action = 'Action' in params ? params.Action : null;
+
+        if (params.Parameters) {
+            this.Parameters = new Array();
+            for (let z in params.Parameters) {
+                let obj = new RuleRewriteActionParams();
+                obj.deserialize(params.Parameters[z]);
+                this.Parameters.push(obj);
+            }
+        }
 
     }
 }
@@ -20193,7 +21119,7 @@ class DescribePrefetchTasksRequest extends  AbstractModel {
 
         /**
          * Filter criteria. Each filter criteria can have up to 20 entries.
-<li>`zone-id`:<br>   Filter by the <strong>site ID</strong>, such as zone-1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.
+<li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -20490,6 +21416,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ResponseTime = 'ResponseTime' in params ? params.ResponseTime : null;
         this.FileDownloadTime = 'FileDownloadTime' in params ? params.FileDownloadTime : null;
         this.LoadTime = 'LoadTime' in params ? params.LoadTime : null;
+
+    }
+}
+
+/**
+ * BindZoneToPlan request structure.
+ * @class
+ */
+class BindZoneToPlanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site to be bound.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * ID of the target plan.
+         * @type {string || null}
+         */
+        this.PlanId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
 
     }
 }
@@ -20836,7 +21797,7 @@ class Identification extends  AbstractModel {
         this.Status = null;
 
         /**
-         * The site ownership information.
+         * Details of the DNS record.
          * @type {AscriptionInfo || null}
          */
         this.Ascription = null;
@@ -20849,7 +21810,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.OriginalNameServers = null;
 
         /**
-         * 
+         * Details of the verification file.
          * @type {FileAscriptionInfo || null}
          */
         this.FileAscription = null;
@@ -21205,58 +22166,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeBillingData response structure.
- * @class
- */
-class DescribeBillingDataResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Data of the sampling point
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<DnsData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * Time granularity of sampling
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Interval = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new DnsData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.Interval = 'Interval' in params ? params.Interval : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Key-value pair filters for conditional filtering queries, such as filtering ID, name, and status.
 If more than one filter exists, the logical relationship between these filters is `AND`.
 If multiple values exist in one filter, the logical relationship between these values under the same filter is `OR`.
@@ -21435,7 +22344,8 @@ class ModifyOriginGroupRequest extends  AbstractModel {
         this.OriginRecords = null;
 
         /**
-         * 
+         * The origin domain. This field can be specified only when `OriginType=self`.
+If it is left empty, the existing configuration is used.
          * @type {string || null}
          */
         this.HostHeader = null;
@@ -21830,8 +22740,8 @@ class DescribeLoadBalancingRequest extends  AbstractModel {
         /**
          * Filter criteria. Each filter criteria can have up to 20 entries.
 <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1a8df68z<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
-<li>`load-balancing-id`<br>   Filter by <strong>load balancer ID</strong>, such as lb-d21bfaf7-8d72-11ec-841d-00ff977fb3c8<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
-<li>`host`:<br>   Filter by <strong>load balancing hostname</strong>, such as lb.tencent.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one hostname allowed in a query)
+</li><li>`load-balancing-id`<br>   Filter by <strong>load balancer ID</strong>, such as lb-d21bfaf7-8d72-11ec-841d-00ff977fb3c8<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
+</li><li>`host`:<br>   Filter by <strong>load balancing hostname</strong>, such as lb.tencent.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one hostname allowed in a query)</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -21938,11 +22848,12 @@ class Quota extends  AbstractModel {
         this.DailyAvailable = null;
 
         /**
-         * Quota type. Values:
-<li>`purge_prefix`: Purge prefixes;</li>
-<li>`purge_url`: Purge URLs;</li>
-<li>`purge_host`: Purge hostnames;</li>
-<li>`purge_all`: Purge all caches.</li>
+         * Type of cache purging/pre-warming. Values:
+<li>`purge_prefix`: Purge by prefix</li>
+<li>`purge_url`: Purge by URL</li>
+<li>`purge_host`: Purge by hostname</li>
+<li>`purge_all`: Purge all caches</li>
+<li>`purge_cache_tag`: Purge by cache tag</li><li>`prefetch_url`: Pre-warm by URL</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -22117,11 +23028,12 @@ class CreatePurgeTaskRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Purging mode. Values:
-<li>`purge_url`: Purge URLs;</li>
-<li>`purge_prefix`: Purge prefixes;</li>
-<li>`purge_host`: Purge hostnames;</li>
-<li>`purge_all`: Purge all caches.</li>
+         * Mode of cache purging. Values:
+<li>`purge_url`: Purge by URL</li>
+<li>`purge_prefix`: Purge by prefix</li>
+<li>`purge_host`: Purge by hostname</li>
+<li>`purge_all`: Purge all caches</li>
+<li>`purge_cache_tag`: Purge by cache tag</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -22129,13 +23041,15 @@ class CreatePurgeTaskRequest extends  AbstractModel {
         /**
          * Target resource to be purged, which depends on the `Type` field.
 1. When `Type = purge_host`:
-Hostnames are purged, such as www.example.com and foo.bar.example.com.
+Enter the hostname, such as www.example.com and foo.bar.example.com.
 2. When `Type = purge_prefix`:
-Prefixes are purged, such as http://www.example.com/example.
+Enter the prefix, such as http://www.example.com/example.
 3. When `Type = purge_url`:
-URLs are purged, such as https://www.example.com/example.jpg.
-4. When `Type = purge_all`: All types of resources are purged.
-`Targets` is not a required field.
+Enter the URL, such as https://www.example.com/example.jpg.
+4. When `Type = purge_all`:
+This field can be left empty.
+5. When `Type = purge_cache_tag`:
+Enter the cache tag, such as tag1.
          * @type {Array.<string> || null}
          */
         this.Targets = null;
@@ -22680,18 +23594,6 @@ class DescribeBotManagedRulesRequest extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
-         * @type {string || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * The subdomain name.
-         * @type {string || null}
-         */
-        this.Entity = null;
-
-        /**
          * The page offset. Default value: 0
          * @type {number || null}
          */
@@ -22704,6 +23606,18 @@ class DescribeBotManagedRulesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
+         * The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
+         * @type {string || null}
+         */
+        this.Entity = null;
+
+        /**
          * The rule type. Values:
 <li>`idcid`</li>
 <li>`sipbot`</li>
@@ -22711,6 +23625,12 @@ class DescribeBotManagedRulesRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.RuleType = null;
+
+        /**
+         * The template ID. You must specify either "ZoneId+Entity" or "TemplateId".
+         * @type {string || null}
+         */
+        this.TemplateId = null;
 
     }
 
@@ -22721,11 +23641,12 @@ class DescribeBotManagedRulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Entity = 'Entity' in params ? params.Entity : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Entity = 'Entity' in params ? params.Entity : null;
         this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -22744,12 +23665,13 @@ module.exports = {
     DescribeRulesResponse: DescribeRulesResponse,
     TimingDataRecord: TimingDataRecord,
     DDoSAttackEventDetailData: DDoSAttackEventDetailData,
-    DescribeBillingDataRequest: DescribeBillingDataRequest,
+    DescribeBotDataResponse: DescribeBotDataResponse,
     Tag: Tag,
     RateLimitConfig: RateLimitConfig,
     RuleExtraParameter: RuleExtraParameter,
     ClsLogTopicInfo: ClsLogTopicInfo,
     WafConfig: WafConfig,
+    CreateAliasDomainRequest: CreateAliasDomainRequest,
     CreatePrefetchTaskRequest: CreatePrefetchTaskRequest,
     DescribeApplicationProxiesResponse: DescribeApplicationProxiesResponse,
     DescribeTopL7AnalysisDataRequest: DescribeTopL7AnalysisDataRequest,
@@ -22761,6 +23683,7 @@ module.exports = {
     BotManagedRuleDetail: BotManagedRuleDetail,
     DescribeDDoSAttackSourceEventResponse: DescribeDDoSAttackSourceEventResponse,
     DDoSAntiPly: DDoSAntiPly,
+    DescribeAliasDomainsResponse: DescribeAliasDomainsResponse,
     PlanInfo: PlanInfo,
     DescribeTimingL7CacheDataRequest: DescribeTimingL7CacheDataRequest,
     DescribeSecurityPolicyListResponse: DescribeSecurityPolicyListResponse,
@@ -22779,6 +23702,7 @@ module.exports = {
     ModifyDDoSPolicyHostResponse: ModifyDDoSPolicyHostResponse,
     ExceptUserRule: ExceptUserRule,
     SecEntry: SecEntry,
+    SubRule: SubRule,
     DDoSPacketFilter: DDoSPacketFilter,
     DescribeSpeedTestingMetricDataResponse: DescribeSpeedTestingMetricDataResponse,
     Sv: Sv,
@@ -22789,12 +23713,11 @@ module.exports = {
     DescribeDnssecResponse: DescribeDnssecResponse,
     ModifyZoneCnameSpeedUpRequest: ModifyZoneCnameSpeedUpRequest,
     SecurityEntity: SecurityEntity,
-    CreatePrefetchTaskResponse: CreatePrefetchTaskResponse,
+    ModifyDnsRecordRequest: ModifyDnsRecordRequest,
     DescribeDDoSPolicyResponse: DescribeDDoSPolicyResponse,
     CreateApplicationProxyRuleRequest: CreateApplicationProxyRuleRequest,
     DescribeDDoSBlockListRequest: DescribeDDoSBlockListRequest,
     DescribeDDoSMajorAttackEventRequest: DescribeDDoSMajorAttackEventRequest,
-    BillingDataFilter: BillingDataFilter,
     DescribeSecurityPolicyListRequest: DescribeSecurityPolicyListRequest,
     DescribeTimingL7CacheDataResponse: DescribeTimingL7CacheDataResponse,
     DescribeZonesResponse: DescribeZonesResponse,
@@ -22840,6 +23763,7 @@ module.exports = {
     ModifyRuleRequest: ModifyRuleRequest,
     DescribePrefetchTasksResponse: DescribePrefetchTasksResponse,
     DescribeWebManagedRulesHitRuleDetailRequest: DescribeWebManagedRulesHitRuleDetailRequest,
+    DescribeBotClientIpListResponse: DescribeBotClientIpListResponse,
     ModifySecurityWafGroupPolicyRequest: ModifySecurityWafGroupPolicyRequest,
     DescribeZoneSettingRequest: DescribeZoneSettingRequest,
     ModifySecurityPolicyRequest: ModifySecurityPolicyRequest,
@@ -22851,13 +23775,15 @@ module.exports = {
     DistrictStatistics: DistrictStatistics,
     CreateIpTableListRequest: CreateIpTableListRequest,
     ModifyDDoSPolicyHostRequest: ModifyDDoSPolicyHostRequest,
+    DeleteAliasDomainRequest: DeleteAliasDomainRequest,
     DescribeIdentificationsResponse: DescribeIdentificationsResponse,
     CreatePurgeTaskResponse: CreatePurgeTaskResponse,
     DeleteApplicationProxyRuleResponse: DeleteApplicationProxyRuleResponse,
+    ReclaimAliasDomainRequest: ReclaimAliasDomainRequest,
     CreateSecurityDropPageRequest: CreateSecurityDropPageRequest,
     ExceptConfig: ExceptConfig,
     DeleteOriginGroupRequest: DeleteOriginGroupRequest,
-    DescribeWebProtectionHitRuleDetailResponse: DescribeWebProtectionHitRuleDetailResponse,
+    DetailHost: DetailHost,
     AclCondition: AclCondition,
     PortraitManagedRuleDetail: PortraitManagedRuleDetail,
     L7OfflineLog: L7OfflineLog,
@@ -22879,7 +23805,7 @@ module.exports = {
     DeleteLogTopicTaskRequest: DeleteLogTopicTaskRequest,
     VanityNameServers: VanityNameServers,
     DescribeDnsRecordsRequest: DescribeDnsRecordsRequest,
-    ModifyDnsRecordRequest: ModifyDnsRecordRequest,
+    CreatePrefetchTaskResponse: CreatePrefetchTaskResponse,
     DescribeDefaultCertificatesRequest: DescribeDefaultCertificatesRequest,
     ModifyApplicationProxyRuleResponse: ModifyApplicationProxyRuleResponse,
     DescribeWebProtectionHitRuleDetailRequest: DescribeWebProtectionHitRuleDetailRequest,
@@ -22892,8 +23818,9 @@ module.exports = {
     DescribeAddableEntityListResponse: DescribeAddableEntityListResponse,
     Cache: Cache,
     DescribeBotHitRuleDetailRequest: DescribeBotHitRuleDetailRequest,
-    DetailHost: DetailHost,
+    DescribeWebProtectionHitRuleDetailResponse: DescribeWebProtectionHitRuleDetailResponse,
     DescribeSpeedTestingMetricDataRequest: DescribeSpeedTestingMetricDataRequest,
+    ModifyLogTopicTaskResponse: ModifyLogTopicTaskResponse,
     RuleCondition: RuleCondition,
     DescribeOverviewL7DataResponse: DescribeOverviewL7DataResponse,
     DescribeSecurityPolicyRequest: DescribeSecurityPolicyRequest,
@@ -22913,6 +23840,7 @@ module.exports = {
     CreateLogSetRequest: CreateLogSetRequest,
     CreateIpTableListResponse: CreateIpTableListResponse,
     NormalAction: NormalAction,
+    TopDetailData: TopDetailData,
     DescribeZoneSettingResponse: DescribeZoneSettingResponse,
     DDoSAllowBlock: DDoSAllowBlock,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
@@ -22936,29 +23864,34 @@ module.exports = {
     DescribeDDoSAttackEventDetailResponse: DescribeDDoSAttackEventDetailResponse,
     SingleTypeValue: SingleTypeValue,
     CreateCredentialResponse: CreateCredentialResponse,
+    DescribeAliasDomainsRequest: DescribeAliasDomainsRequest,
     SwitchLogTopicTaskRequest: SwitchLogTopicTaskRequest,
     DeleteApplicationProxyRequest: DeleteApplicationProxyRequest,
     ModifyZoneStatusRequest: ModifyZoneStatusRequest,
     ModifyOriginGroupResponse: ModifyOriginGroupResponse,
     ExceptUserRuleScope: ExceptUserRuleScope,
+    ModifyAliasDomainRequest: ModifyAliasDomainRequest,
     DescribeSecurityPortraitRulesRequest: DescribeSecurityPortraitRulesRequest,
     ReclaimZoneResponse: ReclaimZoneResponse,
     DescribeSecurityPolicyRegionsResponse: DescribeSecurityPolicyRegionsResponse,
     DescribeBotTopDataRequest: DescribeBotTopDataRequest,
     DeleteZoneResponse: DeleteZoneResponse,
     CreateRuleResponse: CreateRuleResponse,
+    BindZoneToPlanResponse: BindZoneToPlanResponse,
     CreateDnsRecordRequest: CreateDnsRecordRequest,
     WafRule: WafRule,
     ModifyApplicationProxyRequest: ModifyApplicationProxyRequest,
-    ModifyLogTopicTaskResponse: ModifyLogTopicTaskResponse,
+    ModifyAliasDomainStatusRequest: ModifyAliasDomainStatusRequest,
     RulesSettingAction: RulesSettingAction,
     Ipv6: Ipv6,
     ModifyAlarmDefaultThresholdRequest: ModifyAlarmDefaultThresholdRequest,
     ModifyApplicationProxyRuleRequest: ModifyApplicationProxyRuleRequest,
     DDoSStatusInfo: DDoSStatusInfo,
     AclConfig: AclConfig,
+    SubRuleItem: SubRuleItem,
     DescribeSpeedTestingDetailsResponse: DescribeSpeedTestingDetailsResponse,
     WafGroupDetail: WafGroupDetail,
+    CreateAliasDomainResponse: CreateAliasDomainResponse,
     ClientIpCountry: ClientIpCountry,
     LoadBalancing: LoadBalancing,
     DeleteApplicationProxyRuleRequest: DeleteApplicationProxyRuleRequest,
@@ -22970,6 +23903,7 @@ module.exports = {
     DescribeDnssecRequest: DescribeDnssecRequest,
     RuleChoicePropertiesItem: RuleChoicePropertiesItem,
     ModifyAlarmConfigResponse: ModifyAlarmConfigResponse,
+    ModifyAliasDomainStatusResponse: ModifyAliasDomainStatusResponse,
     DescribeTimingL7AnalysisDataRequest: DescribeTimingL7AnalysisDataRequest,
     NoCache: NoCache,
     GeoIp: GeoIp,
@@ -22977,7 +23911,6 @@ module.exports = {
     ModifyApplicationProxyStatusRequest: ModifyApplicationProxyStatusRequest,
     CreateZoneRequest: CreateZoneRequest,
     AscriptionInfo: AscriptionInfo,
-    DescribeBotDataResponse: DescribeBotDataResponse,
     DescribeLogSetsResponse: DescribeLogSetsResponse,
     DescribeClientRuleListResponse: DescribeClientRuleListResponse,
     Waf: Waf,
@@ -22993,6 +23926,7 @@ module.exports = {
     DescribeWebProtectionAttackEventsRequest: DescribeWebProtectionAttackEventsRequest,
     Hsts: Hsts,
     CreateRuleRequest: CreateRuleRequest,
+    TemplateConfig: TemplateConfig,
     DescribeRateLimitIntelligenceRuleResponse: DescribeRateLimitIntelligenceRuleResponse,
     RateLimitTemplateDetail: RateLimitTemplateDetail,
     CreateApplicationProxyRuleResponse: CreateApplicationProxyRuleResponse,
@@ -23018,7 +23952,7 @@ module.exports = {
     CreateLogTopicTaskRequest: CreateLogTopicTaskRequest,
     QueryCondition: QueryCondition,
     RuleRewriteActionParams: RuleRewriteActionParams,
-    DescribeBotClientIpListResponse: DescribeBotClientIpListResponse,
+    ModifyAliasDomainResponse: ModifyAliasDomainResponse,
     DeleteDnsRecordsRequest: DeleteDnsRecordsRequest,
     DescribeBotLogRequest: DescribeBotLogRequest,
     DDoSGeoIp: DDoSGeoIp,
@@ -23037,6 +23971,8 @@ module.exports = {
     SkipCondition: SkipCondition,
     DnssecInfo: DnssecInfo,
     UpstreamHttp2: UpstreamHttp2,
+    ReclaimAliasDomainResponse: ReclaimAliasDomainResponse,
+    DeleteAliasDomainResponse: DeleteAliasDomainResponse,
     BotConfig: BotConfig,
     CreateReplayTaskResponse: CreateReplayTaskResponse,
     SingleDataRecord: SingleDataRecord,
@@ -23058,7 +23994,7 @@ module.exports = {
     DDoSAclRule: DDoSAclRule,
     DescribeBotTopDataResponse: DescribeBotTopDataResponse,
     DescribeBotClientIpListRequest: DescribeBotClientIpListRequest,
-    RewriteAction: RewriteAction,
+    AliasDomain: AliasDomain,
     IpTableRule: IpTableRule,
     DescribeDDoSAttackTopDataRequest: DescribeDDoSAttackTopDataRequest,
     Quic: Quic,
@@ -23071,7 +24007,7 @@ module.exports = {
     DnsData: DnsData,
     DescribeWebManagedRulesLogResponse: DescribeWebManagedRulesLogResponse,
     AclUserRule: AclUserRule,
-    TopDetailData: TopDetailData,
+    RewriteAction: RewriteAction,
     DescribeOverviewL7DataRequest: DescribeOverviewL7DataRequest,
     WebSocket: WebSocket,
     DescribeWebProtectionTopDataRequest: DescribeWebProtectionTopDataRequest,
@@ -23083,6 +24019,7 @@ module.exports = {
     DnsRecord: DnsRecord,
     ModifyRulePriorityRequest: ModifyRulePriorityRequest,
     SpeedTestingStatistics: SpeedTestingStatistics,
+    BindZoneToPlanRequest: BindZoneToPlanRequest,
     SecurityType: SecurityType,
     ModifyRuleResponse: ModifyRuleResponse,
     CheckCertificateResponse: CheckCertificateResponse,
@@ -23099,7 +24036,6 @@ module.exports = {
     IntelligenceRuleItem: IntelligenceRuleItem,
     DescribeLogTopicTaskDetailResponse: DescribeLogTopicTaskDetailResponse,
     PostMaxSize: PostMaxSize,
-    DescribeBillingDataResponse: DescribeBillingDataResponse,
     Filter: Filter,
     CreateZoneResponse: CreateZoneResponse,
     DescribeSpeedTestingQuotaRequest: DescribeSpeedTestingQuotaRequest,

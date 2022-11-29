@@ -29,12 +29,13 @@ const Origin = models.Origin;
 const DescribeRulesResponse = models.DescribeRulesResponse;
 const TimingDataRecord = models.TimingDataRecord;
 const DDoSAttackEventDetailData = models.DDoSAttackEventDetailData;
-const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
+const DescribeBotDataResponse = models.DescribeBotDataResponse;
 const Tag = models.Tag;
 const RateLimitConfig = models.RateLimitConfig;
 const RuleExtraParameter = models.RuleExtraParameter;
 const ClsLogTopicInfo = models.ClsLogTopicInfo;
 const WafConfig = models.WafConfig;
+const CreateAliasDomainRequest = models.CreateAliasDomainRequest;
 const CreatePrefetchTaskRequest = models.CreatePrefetchTaskRequest;
 const DescribeApplicationProxiesResponse = models.DescribeApplicationProxiesResponse;
 const DescribeTopL7AnalysisDataRequest = models.DescribeTopL7AnalysisDataRequest;
@@ -46,6 +47,7 @@ const SpeedTestingDetailData = models.SpeedTestingDetailData;
 const BotManagedRuleDetail = models.BotManagedRuleDetail;
 const DescribeDDoSAttackSourceEventResponse = models.DescribeDDoSAttackSourceEventResponse;
 const DDoSAntiPly = models.DDoSAntiPly;
+const DescribeAliasDomainsResponse = models.DescribeAliasDomainsResponse;
 const PlanInfo = models.PlanInfo;
 const DescribeTimingL7CacheDataRequest = models.DescribeTimingL7CacheDataRequest;
 const DescribeSecurityPolicyListResponse = models.DescribeSecurityPolicyListResponse;
@@ -64,6 +66,7 @@ const RuleCodeActionParams = models.RuleCodeActionParams;
 const ModifyDDoSPolicyHostResponse = models.ModifyDDoSPolicyHostResponse;
 const ExceptUserRule = models.ExceptUserRule;
 const SecEntry = models.SecEntry;
+const SubRule = models.SubRule;
 const DDoSPacketFilter = models.DDoSPacketFilter;
 const DescribeSpeedTestingMetricDataResponse = models.DescribeSpeedTestingMetricDataResponse;
 const Sv = models.Sv;
@@ -74,12 +77,11 @@ const CreateCustomErrorPageRequest = models.CreateCustomErrorPageRequest;
 const DescribeDnssecResponse = models.DescribeDnssecResponse;
 const ModifyZoneCnameSpeedUpRequest = models.ModifyZoneCnameSpeedUpRequest;
 const SecurityEntity = models.SecurityEntity;
-const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
+const ModifyDnsRecordRequest = models.ModifyDnsRecordRequest;
 const DescribeDDoSPolicyResponse = models.DescribeDDoSPolicyResponse;
 const CreateApplicationProxyRuleRequest = models.CreateApplicationProxyRuleRequest;
 const DescribeDDoSBlockListRequest = models.DescribeDDoSBlockListRequest;
 const DescribeDDoSMajorAttackEventRequest = models.DescribeDDoSMajorAttackEventRequest;
-const BillingDataFilter = models.BillingDataFilter;
 const DescribeSecurityPolicyListRequest = models.DescribeSecurityPolicyListRequest;
 const DescribeTimingL7CacheDataResponse = models.DescribeTimingL7CacheDataResponse;
 const DescribeZonesResponse = models.DescribeZonesResponse;
@@ -125,6 +127,7 @@ const CreateCredentialRequest = models.CreateCredentialRequest;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribePrefetchTasksResponse = models.DescribePrefetchTasksResponse;
 const DescribeWebManagedRulesHitRuleDetailRequest = models.DescribeWebManagedRulesHitRuleDetailRequest;
+const DescribeBotClientIpListResponse = models.DescribeBotClientIpListResponse;
 const ModifySecurityWafGroupPolicyRequest = models.ModifySecurityWafGroupPolicyRequest;
 const DescribeZoneSettingRequest = models.DescribeZoneSettingRequest;
 const ModifySecurityPolicyRequest = models.ModifySecurityPolicyRequest;
@@ -136,13 +139,15 @@ const BotLog = models.BotLog;
 const DistrictStatistics = models.DistrictStatistics;
 const CreateIpTableListRequest = models.CreateIpTableListRequest;
 const ModifyDDoSPolicyHostRequest = models.ModifyDDoSPolicyHostRequest;
+const DeleteAliasDomainRequest = models.DeleteAliasDomainRequest;
 const DescribeIdentificationsResponse = models.DescribeIdentificationsResponse;
 const CreatePurgeTaskResponse = models.CreatePurgeTaskResponse;
 const DeleteApplicationProxyRuleResponse = models.DeleteApplicationProxyRuleResponse;
+const ReclaimAliasDomainRequest = models.ReclaimAliasDomainRequest;
 const CreateSecurityDropPageRequest = models.CreateSecurityDropPageRequest;
 const ExceptConfig = models.ExceptConfig;
 const DeleteOriginGroupRequest = models.DeleteOriginGroupRequest;
-const DescribeWebProtectionHitRuleDetailResponse = models.DescribeWebProtectionHitRuleDetailResponse;
+const DetailHost = models.DetailHost;
 const AclCondition = models.AclCondition;
 const PortraitManagedRuleDetail = models.PortraitManagedRuleDetail;
 const L7OfflineLog = models.L7OfflineLog;
@@ -164,7 +169,7 @@ const CreateLoadBalancingResponse = models.CreateLoadBalancingResponse;
 const DeleteLogTopicTaskRequest = models.DeleteLogTopicTaskRequest;
 const VanityNameServers = models.VanityNameServers;
 const DescribeDnsRecordsRequest = models.DescribeDnsRecordsRequest;
-const ModifyDnsRecordRequest = models.ModifyDnsRecordRequest;
+const CreatePrefetchTaskResponse = models.CreatePrefetchTaskResponse;
 const DescribeDefaultCertificatesRequest = models.DescribeDefaultCertificatesRequest;
 const ModifyApplicationProxyRuleResponse = models.ModifyApplicationProxyRuleResponse;
 const DescribeWebProtectionHitRuleDetailRequest = models.DescribeWebProtectionHitRuleDetailRequest;
@@ -177,8 +182,9 @@ const RuleItem = models.RuleItem;
 const DescribeAddableEntityListResponse = models.DescribeAddableEntityListResponse;
 const Cache = models.Cache;
 const DescribeBotHitRuleDetailRequest = models.DescribeBotHitRuleDetailRequest;
-const DetailHost = models.DetailHost;
+const DescribeWebProtectionHitRuleDetailResponse = models.DescribeWebProtectionHitRuleDetailResponse;
 const DescribeSpeedTestingMetricDataRequest = models.DescribeSpeedTestingMetricDataRequest;
+const ModifyLogTopicTaskResponse = models.ModifyLogTopicTaskResponse;
 const RuleCondition = models.RuleCondition;
 const DescribeOverviewL7DataResponse = models.DescribeOverviewL7DataResponse;
 const DescribeSecurityPolicyRequest = models.DescribeSecurityPolicyRequest;
@@ -198,6 +204,7 @@ const ModifyHostsCertificateResponse = models.ModifyHostsCertificateResponse;
 const CreateLogSetRequest = models.CreateLogSetRequest;
 const CreateIpTableListResponse = models.CreateIpTableListResponse;
 const NormalAction = models.NormalAction;
+const TopDetailData = models.TopDetailData;
 const DescribeZoneSettingResponse = models.DescribeZoneSettingResponse;
 const DDoSAllowBlock = models.DDoSAllowBlock;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
@@ -221,29 +228,34 @@ const DescribeLogTopicTasksRequest = models.DescribeLogTopicTasksRequest;
 const DescribeDDoSAttackEventDetailResponse = models.DescribeDDoSAttackEventDetailResponse;
 const SingleTypeValue = models.SingleTypeValue;
 const CreateCredentialResponse = models.CreateCredentialResponse;
+const DescribeAliasDomainsRequest = models.DescribeAliasDomainsRequest;
 const SwitchLogTopicTaskRequest = models.SwitchLogTopicTaskRequest;
 const DeleteApplicationProxyRequest = models.DeleteApplicationProxyRequest;
 const ModifyZoneStatusRequest = models.ModifyZoneStatusRequest;
 const ModifyOriginGroupResponse = models.ModifyOriginGroupResponse;
 const ExceptUserRuleScope = models.ExceptUserRuleScope;
+const ModifyAliasDomainRequest = models.ModifyAliasDomainRequest;
 const DescribeSecurityPortraitRulesRequest = models.DescribeSecurityPortraitRulesRequest;
 const ReclaimZoneResponse = models.ReclaimZoneResponse;
 const DescribeSecurityPolicyRegionsResponse = models.DescribeSecurityPolicyRegionsResponse;
 const DescribeBotTopDataRequest = models.DescribeBotTopDataRequest;
 const DeleteZoneResponse = models.DeleteZoneResponse;
 const CreateRuleResponse = models.CreateRuleResponse;
+const BindZoneToPlanResponse = models.BindZoneToPlanResponse;
 const CreateDnsRecordRequest = models.CreateDnsRecordRequest;
 const WafRule = models.WafRule;
 const ModifyApplicationProxyRequest = models.ModifyApplicationProxyRequest;
-const ModifyLogTopicTaskResponse = models.ModifyLogTopicTaskResponse;
+const ModifyAliasDomainStatusRequest = models.ModifyAliasDomainStatusRequest;
 const RulesSettingAction = models.RulesSettingAction;
 const Ipv6 = models.Ipv6;
 const ModifyAlarmDefaultThresholdRequest = models.ModifyAlarmDefaultThresholdRequest;
 const ModifyApplicationProxyRuleRequest = models.ModifyApplicationProxyRuleRequest;
 const DDoSStatusInfo = models.DDoSStatusInfo;
 const AclConfig = models.AclConfig;
+const SubRuleItem = models.SubRuleItem;
 const DescribeSpeedTestingDetailsResponse = models.DescribeSpeedTestingDetailsResponse;
 const WafGroupDetail = models.WafGroupDetail;
+const CreateAliasDomainResponse = models.CreateAliasDomainResponse;
 const ClientIpCountry = models.ClientIpCountry;
 const LoadBalancing = models.LoadBalancing;
 const DeleteApplicationProxyRuleRequest = models.DeleteApplicationProxyRuleRequest;
@@ -255,6 +267,7 @@ const CreateLoadBalancingRequest = models.CreateLoadBalancingRequest;
 const DescribeDnssecRequest = models.DescribeDnssecRequest;
 const RuleChoicePropertiesItem = models.RuleChoicePropertiesItem;
 const ModifyAlarmConfigResponse = models.ModifyAlarmConfigResponse;
+const ModifyAliasDomainStatusResponse = models.ModifyAliasDomainStatusResponse;
 const DescribeTimingL7AnalysisDataRequest = models.DescribeTimingL7AnalysisDataRequest;
 const NoCache = models.NoCache;
 const GeoIp = models.GeoIp;
@@ -262,7 +275,6 @@ const DescribeSecurityGroupManagedRulesRequest = models.DescribeSecurityGroupMan
 const ModifyApplicationProxyStatusRequest = models.ModifyApplicationProxyStatusRequest;
 const CreateZoneRequest = models.CreateZoneRequest;
 const AscriptionInfo = models.AscriptionInfo;
-const DescribeBotDataResponse = models.DescribeBotDataResponse;
 const DescribeLogSetsResponse = models.DescribeLogSetsResponse;
 const DescribeClientRuleListResponse = models.DescribeClientRuleListResponse;
 const Waf = models.Waf;
@@ -278,6 +290,7 @@ const DescribeContentQuotaRequest = models.DescribeContentQuotaRequest;
 const DescribeWebProtectionAttackEventsRequest = models.DescribeWebProtectionAttackEventsRequest;
 const Hsts = models.Hsts;
 const CreateRuleRequest = models.CreateRuleRequest;
+const TemplateConfig = models.TemplateConfig;
 const DescribeRateLimitIntelligenceRuleResponse = models.DescribeRateLimitIntelligenceRuleResponse;
 const RateLimitTemplateDetail = models.RateLimitTemplateDetail;
 const CreateApplicationProxyRuleResponse = models.CreateApplicationProxyRuleResponse;
@@ -303,7 +316,7 @@ const DescribeSpeedTestingDetailsRequest = models.DescribeSpeedTestingDetailsReq
 const CreateLogTopicTaskRequest = models.CreateLogTopicTaskRequest;
 const QueryCondition = models.QueryCondition;
 const RuleRewriteActionParams = models.RuleRewriteActionParams;
-const DescribeBotClientIpListResponse = models.DescribeBotClientIpListResponse;
+const ModifyAliasDomainResponse = models.ModifyAliasDomainResponse;
 const DeleteDnsRecordsRequest = models.DeleteDnsRecordsRequest;
 const DescribeBotLogRequest = models.DescribeBotLogRequest;
 const DDoSGeoIp = models.DDoSGeoIp;
@@ -322,6 +335,8 @@ const WebLogs = models.WebLogs;
 const SkipCondition = models.SkipCondition;
 const DnssecInfo = models.DnssecInfo;
 const UpstreamHttp2 = models.UpstreamHttp2;
+const ReclaimAliasDomainResponse = models.ReclaimAliasDomainResponse;
+const DeleteAliasDomainResponse = models.DeleteAliasDomainResponse;
 const BotConfig = models.BotConfig;
 const CreateReplayTaskResponse = models.CreateReplayTaskResponse;
 const SingleDataRecord = models.SingleDataRecord;
@@ -343,7 +358,7 @@ const WafGroupRule = models.WafGroupRule;
 const DDoSAclRule = models.DDoSAclRule;
 const DescribeBotTopDataResponse = models.DescribeBotTopDataResponse;
 const DescribeBotClientIpListRequest = models.DescribeBotClientIpListRequest;
-const RewriteAction = models.RewriteAction;
+const AliasDomain = models.AliasDomain;
 const IpTableRule = models.IpTableRule;
 const DescribeDDoSAttackTopDataRequest = models.DescribeDDoSAttackTopDataRequest;
 const Quic = models.Quic;
@@ -356,7 +371,7 @@ const DownloadL7LogsResponse = models.DownloadL7LogsResponse;
 const DnsData = models.DnsData;
 const DescribeWebManagedRulesLogResponse = models.DescribeWebManagedRulesLogResponse;
 const AclUserRule = models.AclUserRule;
-const TopDetailData = models.TopDetailData;
+const RewriteAction = models.RewriteAction;
 const DescribeOverviewL7DataRequest = models.DescribeOverviewL7DataRequest;
 const WebSocket = models.WebSocket;
 const DescribeWebProtectionTopDataRequest = models.DescribeWebProtectionTopDataRequest;
@@ -368,6 +383,7 @@ const DescribePrefetchTasksRequest = models.DescribePrefetchTasksRequest;
 const DnsRecord = models.DnsRecord;
 const ModifyRulePriorityRequest = models.ModifyRulePriorityRequest;
 const SpeedTestingStatistics = models.SpeedTestingStatistics;
+const BindZoneToPlanRequest = models.BindZoneToPlanRequest;
 const SecurityType = models.SecurityType;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const CheckCertificateResponse = models.CheckCertificateResponse;
@@ -384,7 +400,6 @@ const DescribeRulesSettingResponse = models.DescribeRulesSettingResponse;
 const IntelligenceRuleItem = models.IntelligenceRuleItem;
 const DescribeLogTopicTaskDetailResponse = models.DescribeLogTopicTaskDetailResponse;
 const PostMaxSize = models.PostMaxSize;
-const DescribeBillingDataResponse = models.DescribeBillingDataResponse;
 const Filter = models.Filter;
 const CreateZoneResponse = models.CreateZoneResponse;
 const DescribeSpeedTestingQuotaRequest = models.DescribeSpeedTestingQuotaRequest;
@@ -715,6 +730,17 @@ class TeoClient extends AbstractClient {
     }
 
     /**
+     * To reclaim a site and its associated alias domain names, specify the "ZoneId" field; to reclaim an alias domain name that is already added, specify the "ZoneName" filed.
+     * @param {ReclaimAliasDomainRequest} req
+     * @param {function(string, ReclaimAliasDomainResponse):void} cb
+     * @public
+     */
+    ReclaimAliasDomain(req, cb) {
+        let resp = new ReclaimAliasDomainResponse();
+        this.request("ReclaimAliasDomain", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify alarm configuration.
      * @param {ModifyAlarmConfigRequest} req
      * @param {function(string, ModifyAlarmConfigResponse):void} cb
@@ -748,14 +774,14 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the details of a shipping task.
-     * @param {DescribeLogTopicTaskDetailRequest} req
-     * @param {function(string, DescribeLogTopicTaskDetailResponse):void} cb
+     * This API is used to delete an alias domain name.
+     * @param {DeleteAliasDomainRequest} req
+     * @param {function(string, DeleteAliasDomainResponse):void} cb
      * @public
      */
-    DescribeLogTopicTaskDetail(req, cb) {
-        let resp = new DescribeLogTopicTaskDetailResponse();
-        this.request("DescribeLogTopicTaskDetail", req, resp, cb);
+    DeleteAliasDomain(req, cb) {
+        let resp = new DeleteAliasDomainResponse();
+        this.request("DeleteAliasDomain", req, resp, cb);
     }
 
     /**
@@ -1001,6 +1027,17 @@ class TeoClient extends AbstractClient {
     }
 
     /**
+     * This API is used to create an alias domain name.
+     * @param {CreateAliasDomainRequest} req
+     * @param {function(string, CreateAliasDomainResponse):void} cb
+     * @public
+     */
+    CreateAliasDomain(req, cb) {
+        let resp = new CreateAliasDomainResponse();
+        this.request("CreateAliasDomain", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the details of a hit CC protection rule.
      * @param {DescribeWebProtectionHitRuleDetailRequest} req
      * @param {function(string, DescribeWebProtectionHitRuleDetailResponse):void} cb
@@ -1009,6 +1046,17 @@ class TeoClient extends AbstractClient {
     DescribeWebProtectionHitRuleDetail(req, cb) {
         let resp = new DescribeWebProtectionHitRuleDetailResponse();
         this.request("DescribeWebProtectionHitRuleDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the status of an alias domain name.
+     * @param {ModifyAliasDomainStatusRequest} req
+     * @param {function(string, ModifyAliasDomainStatusResponse):void} cb
+     * @public
+     */
+    ModifyAliasDomainStatus(req, cb) {
+        let resp = new ModifyAliasDomainStatusResponse();
+        this.request("ModifyAliasDomainStatus", req, resp, cb);
     }
 
     /**
@@ -1078,6 +1126,17 @@ class TeoClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get the details of a shipping task.
+     * @param {DescribeLogTopicTaskDetailRequest} req
+     * @param {function(string, DescribeLogTopicTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeLogTopicTaskDetail(req, cb) {
+        let resp = new DescribeLogTopicTaskDetailResponse();
+        this.request("DescribeLogTopicTaskDetail", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the priority of a rule in the rule engine.
      * @param {ModifyRulePriorityRequest} req
      * @param {function(string, ModifyRulePriorityResponse):void} cb
@@ -1086,6 +1145,17 @@ class TeoClient extends AbstractClient {
     ModifyRulePriority(req, cb) {
         let resp = new ModifyRulePriorityResponse();
         this.request("ModifyRulePriority", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind a site to a plan.
+     * @param {BindZoneToPlanRequest} req
+     * @param {function(string, BindZoneToPlanResponse):void} cb
+     * @public
+     */
+    BindZoneToPlan(req, cb) {
+        let resp = new BindZoneToPlanResponse();
+        this.request("BindZoneToPlan", req, resp, cb);
     }
 
     /**
@@ -1386,7 +1456,7 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the security protection configuration.
+     * This API is used to query the security protection configuration. You must either specify "ZoneId+Entity" or "TemplateId".
      * @param {DescribeSecurityPolicyRequest} req
      * @param {function(string, DescribeSecurityPolicyResponse):void} cb
      * @public
@@ -1460,6 +1530,17 @@ class TeoClient extends AbstractClient {
     SwitchLogTopicTask(req, cb) {
         let resp = new SwitchLogTopicTaskResponse();
         this.request("SwitchLogTopicTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an alias domain name.
+     * @param {ModifyAliasDomainRequest} req
+     * @param {function(string, ModifyAliasDomainResponse):void} cb
+     * @public
+     */
+    ModifyAliasDomain(req, cb) {
+        let resp = new ModifyAliasDomainResponse();
+        this.request("ModifyAliasDomain", req, resp, cb);
     }
 
     /**
@@ -1716,14 +1797,14 @@ class TeoClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the billing data.
-     * @param {DescribeBillingDataRequest} req
-     * @param {function(string, DescribeBillingDataResponse):void} cb
+     * This API is used to query the information of alias domain names.
+     * @param {DescribeAliasDomainsRequest} req
+     * @param {function(string, DescribeAliasDomainsResponse):void} cb
      * @public
      */
-    DescribeBillingData(req, cb) {
-        let resp = new DescribeBillingDataResponse();
-        this.request("DescribeBillingData", req, resp, cb);
+    DescribeAliasDomains(req, cb) {
+        let resp = new DescribeAliasDomainsResponse();
+        this.request("DescribeAliasDomains", req, resp, cb);
     }
 
     /**

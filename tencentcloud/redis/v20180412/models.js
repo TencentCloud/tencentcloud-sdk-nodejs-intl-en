@@ -2119,7 +2119,7 @@ class RenewInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Length of purchase in months
+         * Validity period in months
          * @type {number || null}
          */
         this.Period = null;
@@ -2129,6 +2129,12 @@ class RenewInstanceRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * The parameter used to determine whether to modify the billing mode. <ul><li>If you want to change the billing mode from pay-as-you-go to monthly subscription, specify this parameter as <b>prepaid</b>. </li><li>If the current instance is monthly subscribed, this parameter is not required. </li></ul>
+         * @type {string || null}
+         */
+        this.ModifyPayMode = null;
 
     }
 
@@ -2141,6 +2147,7 @@ class RenewInstanceRequest extends  AbstractModel {
         }
         this.Period = 'Period' in params ? params.Period : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ModifyPayMode = 'ModifyPayMode' in params ? params.ModifyPayMode : null;
 
     }
 }
@@ -3147,10 +3154,17 @@ class ProxyNodes extends  AbstractModel {
 
         /**
          * Node ID
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NodeId = null;
+
+        /**
+         * AZ ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ZoneId = null;
 
     }
 
@@ -3162,6 +3176,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -10422,31 +10437,31 @@ class UpgradeInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * The ID of instance to be modified.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Shard size in MB. This parameter cannot be passed in at the same time as `RedisShardNum`/`RedisReplicasNum`.
+         * New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>
          * @type {number || null}
          */
         this.MemSize = null;
 
         /**
-         * Number of shards. This parameter is not required by standard architecture instances and cannot be passed in at the same time as `RedisReplicasNum`/`MemSize`.
+         * New number of instance shards. <ul><li>This parameter is not required for standard architecture instances, but for cluster architecture instances. </li><li>For cluster architecture, you can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * Number of replicas. This parameter cannot be passed in at the same time as `RedisShardNum`/`MemSize`. To modify the number of replicas in a multi-AZ instance, `NodeSet` must be passed in.
+         * New replica quantity. <ul><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>To modify the number of replicas in a multi-AZ instance, `NodeSet` must be passed in.</li></ul>
          * @type {number || null}
          */
         this.RedisReplicasNum = null;
 
         /**
-         * Additional information for adding replicas for multi-AZ instances. This parameter is not required for single-AZ instances but is required when adding replicas for multi-AZ instances. It contains the information of the replicas to be added, including replica AZ and type (`NodeType` is 1).
+         * Additional information for adding replicas for multi-AZ instances, including replica AZ and type (`NodeType` is `1`). This parameter is not required for single-AZ instances.
          * @type {Array.<RedisNodeInfo> || null}
          */
         this.NodeSet = null;

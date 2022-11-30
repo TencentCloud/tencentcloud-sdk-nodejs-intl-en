@@ -91,7 +91,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.VoucherIds = null;
 
         /**
-         * SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). The version purchasable varies by region and can be queried by calling the `DescribeProductConfig` API. If this parameter is left empty, 2008R2 will be used by default.
+         * SQL Server version. Valid values: `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard). Default value: `2008R2`. The available version varies by region, and you can pull the version information by calling the `DescribeProductConfig` API.
          * @type {string || null}
          */
         this.DBVersion = null;
@@ -347,6 +347,36 @@ class ModifyBackupStrategyRequest extends  AbstractModel {
          */
         this.BackupSaveDays = null;
 
+        /**
+         * Archive backup status. Valid values: `enable` (enabled); `disable` (disabled). Default value: `disable`.
+         * @type {string || null}
+         */
+        this.RegularBackupEnable = null;
+
+        /**
+         * Archive backup retention days. Value range: 90–3650 days. Default value: 365 days.
+         * @type {number || null}
+         */
+        this.RegularBackupSaveDays = null;
+
+        /**
+         * Archive backup policy. Valid values: `years` (yearly); `quarters (quarterly); `months` (monthly); Default value: `months`.
+         * @type {string || null}
+         */
+        this.RegularBackupStrategy = null;
+
+        /**
+         * The number of retained archive backups. Default value: `1`.
+         * @type {number || null}
+         */
+        this.RegularBackupCounts = null;
+
+        /**
+         * Archive backup start date in YYYY-MM-DD format, which is the current time by default.
+         * @type {string || null}
+         */
+        this.RegularBackupStartTime = null;
+
     }
 
     /**
@@ -363,6 +393,11 @@ class ModifyBackupStrategyRequest extends  AbstractModel {
         this.BackupModel = 'BackupModel' in params ? params.BackupModel : null;
         this.BackupCycle = 'BackupCycle' in params ? params.BackupCycle : null;
         this.BackupSaveDays = 'BackupSaveDays' in params ? params.BackupSaveDays : null;
+        this.RegularBackupEnable = 'RegularBackupEnable' in params ? params.RegularBackupEnable : null;
+        this.RegularBackupSaveDays = 'RegularBackupSaveDays' in params ? params.RegularBackupSaveDays : null;
+        this.RegularBackupStrategy = 'RegularBackupStrategy' in params ? params.RegularBackupStrategy : null;
+        this.RegularBackupCounts = 'RegularBackupCounts' in params ? params.RegularBackupCounts : null;
+        this.RegularBackupStartTime = 'RegularBackupStartTime' in params ? params.RegularBackupStartTime : null;
 
     }
 }
@@ -1542,7 +1577,7 @@ class DescribeBackupsRequest extends  AbstractModel {
         this.Strategy = null;
 
         /**
-         * Filter by backup mode. Valid values: 0 (automatic backup on a regular basis), 1 (manual backup performed by the user at any time). If this parameter is left empty, backup mode will not be used in filtering.
+         * Filter by backup mode. Valid values: `0` (scheduled backup); `1` (manual backup); `2` (archive backup). Default value: `2`.
          * @type {number || null}
          */
         this.BackupWay = null;
@@ -6769,7 +6804,7 @@ class Backup extends  AbstractModel {
         this.Strategy = null;
 
         /**
-         * Backup mode. 0: scheduled, 1: manual
+         * Backup Mode. Valid values: `0` (scheduled backup); `1` (manual backup); `2` (archive backup).
          * @type {number || null}
          */
         this.BackupWay = null;

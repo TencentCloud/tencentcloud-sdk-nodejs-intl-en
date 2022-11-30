@@ -360,7 +360,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade an instance.
+     * This API is used to modify the instance configuration.
      * @param {UpgradeInstanceRequest} req
      * @param {function(string, UpgradeInstanceResponse):void} cb
      * @public

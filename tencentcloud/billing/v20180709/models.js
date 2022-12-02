@@ -2035,6 +2035,48 @@ class DescribeVoucherUsageDetailsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDosageCosDetailByDate request structure.
+ * @class
+ */
+class DescribeDosageCosDetailByDateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The start date of the usage query
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * The end date of the usage query (end date must be in the same month as the start date)
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * Bucket name. You can use `Get Service` to query the list of all buckets under a requester account. For details, see [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291).
+         * @type {string || null}
+         */
+        this.BucketName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+
+    }
+}
+
+/**
  * DescribeBillResourceSummary request structure.
  * @class
  */
@@ -2440,6 +2482,49 @@ Note: This field may return `null`, indicating that no valid value can be found.
 }
 
 /**
+ * DescribeDosageCosDetailByDate response structure.
+ * @class
+ */
+class DescribeDosageCosDetailByDateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of usage
+         * @type {Array.<CosDetailSets> || null}
+         */
+        this.DetailSets = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DetailSets) {
+            this.DetailSets = new Array();
+            for (let z in params.DetailSets) {
+                let obj = new CosDetailSets();
+                obj.deserialize(params.DetailSets[z]);
+                this.DetailSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Details about cost distribution over different tags.
  * @class
  */
@@ -2725,6 +2810,76 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * Information about the data structure of the returned COS usage details
+ * @class
+ */
+class CosDetailSets extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Bucket name
+         * @type {string || null}
+         */
+        this.BucketName = null;
+
+        /**
+         * The start time of the usage
+         * @type {string || null}
+         */
+        this.DosageBeginTime = null;
+
+        /**
+         * The end time of the usage
+         * @type {string || null}
+         */
+        this.DosageEndTime = null;
+
+        /**
+         * Sub-product name
+         * @type {string || null}
+         */
+        this.SubProductCodeName = null;
+
+        /**
+         * Billable item name
+         * @type {string || null}
+         */
+        this.BillingItemCodeName = null;
+
+        /**
+         * Usage
+         * @type {string || null}
+         */
+        this.DosageValue = null;
+
+        /**
+         * Unit of the billable item
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.DosageBeginTime = 'DosageBeginTime' in params ? params.DosageBeginTime : null;
+        this.DosageEndTime = 'DosageEndTime' in params ? params.DosageEndTime : null;
+        this.SubProductCodeName = 'SubProductCodeName' in params ? params.SubProductCodeName : null;
+        this.BillingItemCodeName = 'BillingItemCodeName' in params ? params.BillingItemCodeName : null;
+        this.DosageValue = 'DosageValue' in params ? params.DosageValue : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+
+    }
+}
+
+/**
  * DescribeBillSummaryByProject response structure.
  * @class
  */
@@ -2998,14 +3153,17 @@ module.exports = {
     ApplicableProducts: ApplicableProducts,
     DescribeBillSummaryByProjectRequest: DescribeBillSummaryByProjectRequest,
     DescribeVoucherUsageDetailsRequest: DescribeVoucherUsageDetailsRequest,
+    DescribeDosageCosDetailByDateRequest: DescribeDosageCosDetailByDateRequest,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
     DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
     SummaryTotal: SummaryTotal,
     BillDetail: BillDetail,
+    DescribeDosageCosDetailByDateResponse: DescribeDosageCosDetailByDateResponse,
     TagSummaryOverviewItem: TagSummaryOverviewItem,
     ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
     DescribeBillDetailResponse: DescribeBillDetailResponse,
     DescribeVoucherUsageDetailsResponse: DescribeVoucherUsageDetailsResponse,
+    CosDetailSets: CosDetailSets,
     DescribeBillSummaryByProjectResponse: DescribeBillSummaryByProjectResponse,
     ExcludedProducts: ExcludedProducts,
     PayModeSummaryOverviewItem: PayModeSummaryOverviewItem,

@@ -41,14 +41,17 @@ const DescribeVoucherInfoRequest = models.DescribeVoucherInfoRequest;
 const ApplicableProducts = models.ApplicableProducts;
 const DescribeBillSummaryByProjectRequest = models.DescribeBillSummaryByProjectRequest;
 const DescribeVoucherUsageDetailsRequest = models.DescribeVoucherUsageDetailsRequest;
+const DescribeDosageCosDetailByDateRequest = models.DescribeDosageCosDetailByDateRequest;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
 const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const SummaryTotal = models.SummaryTotal;
 const BillDetail = models.BillDetail;
+const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
 const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
 const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
 const DescribeVoucherUsageDetailsResponse = models.DescribeVoucherUsageDetailsResponse;
+const CosDetailSets = models.CosDetailSets;
 const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProjectResponse;
 const ExcludedProducts = models.ExcludedProducts;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
@@ -85,6 +88,17 @@ class BillingClient extends AbstractClient {
     DescribeVoucherInfo(req, cb) {
         let resp = new DescribeVoucherInfoResponse();
         this.request("DescribeVoucherInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query COS usage details.
+     * @param {DescribeDosageCosDetailByDateRequest} req
+     * @param {function(string, DescribeDosageCosDetailByDateResponse):void} cb
+     * @public
+     */
+    DescribeDosageCosDetailByDate(req, cb) {
+        let resp = new DescribeDosageCosDetailByDateResponse();
+        this.request("DescribeDosageCosDetailByDate", req, resp, cb);
     }
 
     /**

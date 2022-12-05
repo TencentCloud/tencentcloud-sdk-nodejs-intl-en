@@ -973,6 +973,18 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
         this.FilterEnterpriseFlag = null;
 
         /**
+         * Whether it’s a Lighthouse edition
+         * @type {number || null}
+         */
+        this.FilterLightFlag = null;
+
+        /**
+         * Whether it’s a Channel edition
+         * @type {number || null}
+         */
+        this.FilterChannelFlag = null;
+
+        /**
          * Filters by tag
          * @type {TagFilter || null}
          */
@@ -998,6 +1010,8 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
         this.FilterBoundStatus = 'FilterBoundStatus' in params ? params.FilterBoundStatus : null;
         this.FilterInstanceIdList = 'FilterInstanceIdList' in params ? params.FilterInstanceIdList : null;
         this.FilterEnterpriseFlag = 'FilterEnterpriseFlag' in params ? params.FilterEnterpriseFlag : null;
+        this.FilterLightFlag = 'FilterLightFlag' in params ? params.FilterLightFlag : null;
+        this.FilterChannelFlag = 'FilterChannelFlag' in params ? params.FilterChannelFlag : null;
 
         if (params.FilterTag) {
             let obj = new TagFilter();
@@ -4183,6 +4197,69 @@ class DescribeBgpBizTrendResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePendingRiskInfo response structure.
+ * @class
+ */
+class DescribePendingRiskInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the user is a paid user
+         * @type {boolean || null}
+         */
+        this.IsPaidUsr = null;
+
+        /**
+         * Number of resources being attacked
+         * @type {number || null}
+         */
+        this.AttackingCount = null;
+
+        /**
+         * Number of resource blocked
+         * @type {number || null}
+         */
+        this.BlockingCount = null;
+
+        /**
+         * Number of expired resources
+         * @type {number || null}
+         */
+        this.ExpiredCount = null;
+
+        /**
+         * Total pending risk events
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsPaidUsr = 'IsPaidUsr' in params ? params.IsPaidUsr : null;
+        this.AttackingCount = 'AttackingCount' in params ? params.AttackingCount : null;
+        this.BlockingCount = 'BlockingCount' in params ? params.BlockingCount : null;
+        this.ExpiredCount = 'ExpiredCount' in params ? params.ExpiredCount : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Protocol blocking configuration
  * @class
  */
@@ -4220,6 +4297,18 @@ class ProtocolBlockConfig extends  AbstractModel {
          */
         this.CheckExceptNullConnect = null;
 
+        /**
+         * PoD protection. Values: `0` (disable), `1` (enable).
+         * @type {number || null}
+         */
+        this.PingOfDeath = null;
+
+        /**
+         * Teardrop protection. Values: `0` (disable), `1` (enable).
+         * @type {number || null}
+         */
+        this.TearDrop = null;
+
     }
 
     /**
@@ -4234,6 +4323,8 @@ class ProtocolBlockConfig extends  AbstractModel {
         this.DropIcmp = 'DropIcmp' in params ? params.DropIcmp : null;
         this.DropOther = 'DropOther' in params ? params.DropOther : null;
         this.CheckExceptNullConnect = 'CheckExceptNullConnect' in params ? params.CheckExceptNullConnect : null;
+        this.PingOfDeath = 'PingOfDeath' in params ? params.PingOfDeath : null;
+        this.TearDrop = 'TearDrop' in params ? params.TearDrop : null;
 
     }
 }
@@ -5615,64 +5706,12 @@ class DescribeListListenerResponse extends  AbstractModel {
 }
 
 /**
- * Protection threshold configuration information
+ * DescribePendingRiskInfo request structure.
  * @class
  */
-class ProtectThresholdRelation extends  AbstractModel {
+class DescribePendingRiskInfoRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * DDoS protection level:
-`low`: loose protection
-`middle`: medium protection
-`high`: strict protection
-]
-         * @type {string || null}
-         */
-        this.DDoSLevel = null;
-
-        /**
-         * DDoS cleansing threshold (in Mbps)
-         * @type {number || null}
-         */
-        this.DDoSThreshold = null;
-
-        /**
-         * DDoS AI protection switch:
-`on`: enabled
-`off`: disabled
-]
-         * @type {string || null}
-         */
-        this.DDoSAI = null;
-
-        /**
-         * CC cleansing switch
-`0`: disabled
-`1`: enabled
-]
-         * @type {number || null}
-         */
-        this.CCEnable = null;
-
-        /**
-         * CC cleansing threshold (in QPS)
-         * @type {number || null}
-         */
-        this.CCThreshold = null;
-
-        /**
-         * Anti-DDoS instance configured
-         * @type {Array.<InstanceRelation> || null}
-         */
-        this.InstanceDetailList = null;
-
-        /**
-         * Domain name and protocol protection thresholds
-         * @type {Array.<ListenerCcThreholdConfig> || null}
-         */
-        this.ListenerCcThresholdList = null;
 
     }
 
@@ -5682,29 +5721,6 @@ class ProtectThresholdRelation extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.DDoSLevel = 'DDoSLevel' in params ? params.DDoSLevel : null;
-        this.DDoSThreshold = 'DDoSThreshold' in params ? params.DDoSThreshold : null;
-        this.DDoSAI = 'DDoSAI' in params ? params.DDoSAI : null;
-        this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
-        this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
-
-        if (params.InstanceDetailList) {
-            this.InstanceDetailList = new Array();
-            for (let z in params.InstanceDetailList) {
-                let obj = new InstanceRelation();
-                obj.deserialize(params.InstanceDetailList[z]);
-                this.InstanceDetailList.push(obj);
-            }
-        }
-
-        if (params.ListenerCcThresholdList) {
-            this.ListenerCcThresholdList = new Array();
-            for (let z in params.ListenerCcThresholdList) {
-                let obj = new ListenerCcThreholdConfig();
-                obj.deserialize(params.ListenerCcThresholdList[z]);
-                this.ListenerCcThresholdList.push(obj);
-            }
         }
 
     }
@@ -5994,6 +6010,182 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ForwardRulesLimit = 'ForwardRulesLimit' in params ? params.ForwardRulesLimit : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.CurDeadline = 'CurDeadline' in params ? params.CurDeadline : null;
+
+    }
+}
+
+/**
+ * Protection threshold configuration information
+ * @class
+ */
+class ProtectThresholdRelation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DDoS protection level:
+`low`: loose protection
+`middle`: medium protection
+`high`: strict protection
+]
+         * @type {string || null}
+         */
+        this.DDoSLevel = null;
+
+        /**
+         * DDoS cleansing threshold (in Mbps)
+         * @type {number || null}
+         */
+        this.DDoSThreshold = null;
+
+        /**
+         * DDoS AI protection switch:
+`on`: enabled
+`off`: disabled
+]
+         * @type {string || null}
+         */
+        this.DDoSAI = null;
+
+        /**
+         * CC cleansing switch
+`0`: disabled
+`1`: enabled
+]
+         * @type {number || null}
+         */
+        this.CCEnable = null;
+
+        /**
+         * CC cleansing threshold (in QPS)
+         * @type {number || null}
+         */
+        this.CCThreshold = null;
+
+        /**
+         * Anti-DDoS instance configured
+         * @type {Array.<InstanceRelation> || null}
+         */
+        this.InstanceDetailList = null;
+
+        /**
+         * Domain name and protocol protection thresholds
+         * @type {Array.<ListenerCcThreholdConfig> || null}
+         */
+        this.ListenerCcThresholdList = null;
+
+        /**
+         * SYN traffic threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SynFloodThreshold = null;
+
+        /**
+         * SYN packet threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SynFloodPktThreshold = null;
+
+        /**
+         * UDP traffic threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UdpFloodThreshold = null;
+
+        /**
+         * UDP packet threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UdpFloodPktThreshold = null;
+
+        /**
+         * ACK traffic threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AckFloodThreshold = null;
+
+        /**
+         * ACK packet threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AckFloodPktThreshold = null;
+
+        /**
+         * SYNACK traffic threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SynAckFloodThreshold = null;
+
+        /**
+         * SYNACK packet threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SynAckFloodPktThreshold = null;
+
+        /**
+         * RST traffic threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RstFloodThreshold = null;
+
+        /**
+         * RST packet threshold
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RstFloodPktThreshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DDoSLevel = 'DDoSLevel' in params ? params.DDoSLevel : null;
+        this.DDoSThreshold = 'DDoSThreshold' in params ? params.DDoSThreshold : null;
+        this.DDoSAI = 'DDoSAI' in params ? params.DDoSAI : null;
+        this.CCEnable = 'CCEnable' in params ? params.CCEnable : null;
+        this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
+
+        if (params.InstanceDetailList) {
+            this.InstanceDetailList = new Array();
+            for (let z in params.InstanceDetailList) {
+                let obj = new InstanceRelation();
+                obj.deserialize(params.InstanceDetailList[z]);
+                this.InstanceDetailList.push(obj);
+            }
+        }
+
+        if (params.ListenerCcThresholdList) {
+            this.ListenerCcThresholdList = new Array();
+            for (let z in params.ListenerCcThresholdList) {
+                let obj = new ListenerCcThreholdConfig();
+                obj.deserialize(params.ListenerCcThresholdList[z]);
+                this.ListenerCcThresholdList.push(obj);
+            }
+        }
+        this.SynFloodThreshold = 'SynFloodThreshold' in params ? params.SynFloodThreshold : null;
+        this.SynFloodPktThreshold = 'SynFloodPktThreshold' in params ? params.SynFloodPktThreshold : null;
+        this.UdpFloodThreshold = 'UdpFloodThreshold' in params ? params.UdpFloodThreshold : null;
+        this.UdpFloodPktThreshold = 'UdpFloodPktThreshold' in params ? params.UdpFloodPktThreshold : null;
+        this.AckFloodThreshold = 'AckFloodThreshold' in params ? params.AckFloodThreshold : null;
+        this.AckFloodPktThreshold = 'AckFloodPktThreshold' in params ? params.AckFloodPktThreshold : null;
+        this.SynAckFloodThreshold = 'SynAckFloodThreshold' in params ? params.SynAckFloodThreshold : null;
+        this.SynAckFloodPktThreshold = 'SynAckFloodPktThreshold' in params ? params.SynAckFloodPktThreshold : null;
+        this.RstFloodThreshold = 'RstFloodThreshold' in params ? params.RstFloodThreshold : null;
+        this.RstFloodPktThreshold = 'RstFloodPktThreshold' in params ? params.RstFloodPktThreshold : null;
 
     }
 }
@@ -6910,6 +7102,12 @@ When the `MatchType` is `pcre`, enter a regular expression.
          */
         this.Id = null;
 
+        /**
+         * Byte threshold of the packet. Packets larger than the specified size are not returned. It must be an integer larger than 1.
+         * @type {number || null}
+         */
+        this.PktLenGT = null;
+
     }
 
     /**
@@ -6941,6 +7139,7 @@ When the `MatchType` is `pcre`, enter a regular expression.
         this.Offset2 = 'Offset2' in params ? params.Offset2 : null;
         this.IsNot2 = 'IsNot2' in params ? params.IsNot2 : null;
         this.Id = 'Id' in params ? params.Id : null;
+        this.PktLenGT = 'PktLenGT' in params ? params.PktLenGT : null;
 
     }
 }
@@ -10752,6 +10951,7 @@ module.exports = {
     DescribeListDDoSGeoIPBlockConfigResponse: DescribeListDDoSGeoIPBlockConfigResponse,
     DescribeBasicDeviceStatusResponse: DescribeBasicDeviceStatusResponse,
     DescribeBgpBizTrendResponse: DescribeBgpBizTrendResponse,
+    DescribePendingRiskInfoResponse: DescribePendingRiskInfoResponse,
     ProtocolBlockConfig: ProtocolBlockConfig,
     DeleteCCPrecisionPolicyRequest: DeleteCCPrecisionPolicyRequest,
     BGPIPInstance: BGPIPInstance,
@@ -10777,12 +10977,13 @@ module.exports = {
     IPLineInfo: IPLineInfo,
     DescribeCcBlackWhiteIpListRequest: DescribeCcBlackWhiteIpListRequest,
     DescribeListListenerResponse: DescribeListListenerResponse,
-    ProtectThresholdRelation: ProtectThresholdRelation,
+    DescribePendingRiskInfoRequest: DescribePendingRiskInfoRequest,
     IpSegment: IpSegment,
     CreateL7RuleCertsResponse: CreateL7RuleCertsResponse,
     CreateCCPrecisionPolicyRequest: CreateCCPrecisionPolicyRequest,
     DDoSSpeedLimitConfig: DDoSSpeedLimitConfig,
     AnycastOutPackRelation: AnycastOutPackRelation,
+    ProtectThresholdRelation: ProtectThresholdRelation,
     DescribeListProtectThresholdConfigResponse: DescribeListProtectThresholdConfigResponse,
     CertIdInsL7Rules: CertIdInsL7Rules,
     CreateDefaultAlarmThresholdResponse: CreateDefaultAlarmThresholdResponse,

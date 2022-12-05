@@ -192,6 +192,7 @@ const InquirePricePurchaseReservedInstancesOfferingResponse = models.InquirePric
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
+const SyncImage = models.SyncImage;
 const KeyPair = models.KeyPair;
 const DescribeReservedInstancesOfferingsResponse = models.DescribeReservedInstancesOfferingsResponse;
 const DescribeLaunchTemplateVersionsResponse = models.DescribeLaunchTemplateVersionsResponse;
@@ -375,7 +376,7 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * (Suspended) This API is used to query the information of regions. Due to platform policy, the update of this API has been temporarily stopped. Please try the new one as described in https://intl.cloud.tencent.com/document/product/1278/55255?from_cn_redirect=1
+     * This API is suspended. To query the information of regions, use [DescribeZones](https://intl.cloud.tencent.com/document/product/1596/77929?from_cn_redirect=1).
      * @param {DescribeRegionsRequest} req
      * @param {function(string, DescribeRegionsResponse):void} cb
      * @public

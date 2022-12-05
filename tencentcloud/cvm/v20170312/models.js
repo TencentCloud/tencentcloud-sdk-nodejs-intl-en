@@ -1157,6 +1157,12 @@ class ResetInstanceRequest extends  AbstractModel {
          */
         this.HostName = null;
 
+        /**
+         * User data provided to the instance. This parameter needs to be encoded in base64 format with the maximum size of 16 KB. For more information on how to get the value of this parameter, see the commands you need to execute on startup for [Windows](https://intl.cloud.tencent.com/document/product/213/17526) or [Linux](https://intl.cloud.tencent.com/document/product/213/17525).
+         * @type {string || null}
+         */
+        this.UserData = null;
+
     }
 
     /**
@@ -1187,6 +1193,7 @@ class ResetInstanceRequest extends  AbstractModel {
             this.EnhancedService = obj;
         }
         this.HostName = 'HostName' in params ? params.HostName : null;
+        this.UserData = 'UserData' in params ? params.UserData : null;
 
     }
 }
@@ -2702,6 +2709,12 @@ class SyncImagesResponse extends  AbstractModel {
         super();
 
         /**
+         * 
+         * @type {Array.<SyncImage> || null}
+         */
+        this.ImageSet = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2715,6 +2728,15 @@ class SyncImagesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.ImageSet) {
+            this.ImageSet = new Array();
+            for (let z in params.ImageSet) {
+                let obj = new SyncImage();
+                obj.deserialize(params.ImageSet[z]);
+                this.ImageSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3041,7 +3063,7 @@ class Placement extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * ID of the project to which the instance belongs. To obtain the project IDs, you can call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) and look for the `projectId` fields in the response. If this parameter is not specified, the default project will be used.
+         * ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` returned by [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1). If this is left empty, the default project is used.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -5705,7 +5727,7 @@ class EnhancedService extends  AbstractModel {
         this.MonitorService = null;
 
         /**
-         * Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
+         * Whether to enable the TAT service. If this parameter is not specified, the TAT service is enabled for public images and disabled for other images by default.
          * @type {RunAutomationServiceEnabled || null}
          */
         this.AutomationService = null;
@@ -9698,6 +9720,41 @@ If you want to use the default project, specify 0 for the parameter.
 }
 
 /**
+ * 
+ * @class
+ */
+class SyncImage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
  * Describes key pair information.
  * @class
  */
@@ -10769,6 +10826,7 @@ module.exports = {
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,
     ImportKeyPairRequest: ImportKeyPairRequest,
+    SyncImage: SyncImage,
     KeyPair: KeyPair,
     DescribeReservedInstancesOfferingsResponse: DescribeReservedInstancesOfferingsResponse,
     DescribeLaunchTemplateVersionsResponse: DescribeLaunchTemplateVersionsResponse,

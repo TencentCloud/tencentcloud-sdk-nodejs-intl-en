@@ -25,7 +25,8 @@ class DescribeCdnDomainLogsResponse extends  AbstractModel {
         super();
 
         /**
-         * Download link of the log package
+         * Download link of the log package.
+You can open the link to download a .gz log package that contains all log files without extension.
          * @type {Array.<DomainLog> || null}
          */
         this.DomainLogs = null;
@@ -681,6 +682,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.GuetzliAdapter = null;
 
+        /**
+         * AVIF adapter configuration
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {AvifAdapter || null}
+         */
+        this.AvifAdapter = null;
+
     }
 
     /**
@@ -707,6 +715,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             let obj = new GuetzliAdapter();
             obj.deserialize(params.GuetzliAdapter)
             this.GuetzliAdapter = obj;
+        }
+
+        if (params.AvifAdapter) {
+            let obj = new AvifAdapter();
+            obj.deserialize(params.AvifAdapter)
+            this.AvifAdapter = obj;
         }
 
     }
@@ -956,8 +970,8 @@ Default value: `mainland`.
         this.Area = null;
 
         /**
-         * The type of log to be downloaded.
-access: access logs
+         * Specifies the type of logs to download (only access logs supported).
+`access`: Access logs.
          * @type {string || null}
          */
         this.LogType = null;
@@ -978,6 +992,35 @@ access: access logs
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.LogType = 'LogType' in params ? params.LogType : null;
+
+    }
+}
+
+/**
+ * AVIF adapter, used for image optimization
+ * @class
+ */
+class AvifAdapter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch. Valid values: `on`, `off`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -1019,67 +1062,25 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * Remote authentication rule
+ * MaxAge status code
  * @class
  */
-class RemoteAuthenticationRule extends  AbstractModel {
+class MaxAgeCodeRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Remote authentication server
-The server configured in `RemoteAutherntication` is used by default.
+         * Action to execute.
+`clear`: Clear the cache-control header.
          * @type {string || null}
          */
-        this.Server = null;
+        this.Action = null;
 
         /**
-         * HTTP method used by the remote authentication server. Valid values: `get`, `post`, `head`, and `all`. 
-`all`: the remote authentication server follows the client request method.
-Default: `all`
-         * @type {string || null}
-         */
-        this.AuthMethod = null;
-
-        /**
-         * Rule types:
-`all`: apply to all files
-`file`: apply to files with the specified suffixes
-`directory`: apply to the specified directories
-`path`: apply to the specified absolute paths
-Default: `all`.
-         * @type {string || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * Content for each `RuleType`:
-For `all`, enter a wildcard `*`.
-For `file`, enter a suffix, e.g., `jpg` or `txt`.
-For `directory`, enter a path, e.g., `/xxx/test/`.
-For `path`, enter an absolute path, e.g., `/xxx/test.html`.
-For `index`, enter a forward slash `/`.
-Default: `*`
+         * Specifies the HTTP status code in the range 400-599.
          * @type {Array.<string> || null}
          */
-        this.RulePaths = null;
-
-        /**
-         * Timeout period of the remote authentication server. Unit: ms.
-Value range: [1, 30,000]
-Default: 20000
-         * @type {number || null}
-         */
-        this.AuthTimeout = null;
-
-        /**
-         * Whether to deny or allow the request when the remote authentication server is timed out:
-`RETURN_200`: the request is allowed when the remote authentication server is timed out.
-`RETURN_403`: the request is denied when the remote authentication server is timed out.
-Default: `RETURN_200`
-         * @type {string || null}
-         */
-        this.AuthTimeoutAction = null;
+        this.StatusCodes = null;
 
     }
 
@@ -1090,12 +1091,8 @@ Default: `RETURN_200`
         if (!params) {
             return;
         }
-        this.Server = 'Server' in params ? params.Server : null;
-        this.AuthMethod = 'AuthMethod' in params ? params.AuthMethod : null;
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
-        this.AuthTimeout = 'AuthTimeout' in params ? params.AuthTimeout : null;
-        this.AuthTimeoutAction = 'AuthTimeoutAction' in params ? params.AuthTimeoutAction : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.StatusCodes = 'StatusCodes' in params ? params.StatusCodes : null;
 
     }
 }
@@ -4299,6 +4296,88 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Remote authentication rule
+ * @class
+ */
+class RemoteAuthenticationRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Remote authentication server
+The server configured in `RemoteAutherntication` is used by default.
+         * @type {string || null}
+         */
+        this.Server = null;
+
+        /**
+         * HTTP method used by the remote authentication server. Valid values: `get`, `post`, `head`, and `all`. 
+`all`: the remote authentication server follows the client request method.
+Default: `all`
+         * @type {string || null}
+         */
+        this.AuthMethod = null;
+
+        /**
+         * Rule types:
+`all`: apply to all files
+`file`: apply to files with the specified suffixes
+`directory`: apply to the specified directories
+`path`: apply to the specified absolute paths
+Default: `all`.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Content for each `RuleType`:
+For `all`, enter a wildcard `*`.
+For `file`, enter a suffix, e.g., `jpg` or `txt`.
+For `directory`, enter a path, e.g., `/xxx/test/`.
+For `path`, enter an absolute path, e.g., `/xxx/test.html`.
+For `index`, enter a forward slash `/`.
+Default: `*`
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+        /**
+         * Timeout period of the remote authentication server. Unit: ms.
+Value range: [1, 30,000]
+Default: 20000
+         * @type {number || null}
+         */
+        this.AuthTimeout = null;
+
+        /**
+         * Whether to deny or allow the request when the remote authentication server is timed out:
+`RETURN_200`: the request is allowed when the remote authentication server is timed out.
+`RETURN_403`: the request is denied when the remote authentication server is timed out.
+Default: `RETURN_200`
+         * @type {string || null}
+         */
+        this.AuthTimeoutAction = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Server = 'Server' in params ? params.Server : null;
+        this.AuthMethod = 'AuthMethod' in params ? params.AuthMethod : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.AuthTimeout = 'AuthTimeout' in params ? params.AuthTimeout : null;
+        this.AuthTimeoutAction = 'AuthTimeoutAction' in params ? params.AuthTimeoutAction : null;
 
     }
 }
@@ -13348,6 +13427,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.MaxAgeRules = null;
 
+        /**
+         * MaxAge status code
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {MaxAgeCodeRule || null}
+         */
+        this.MaxAgeCodeRule = null;
+
     }
 
     /**
@@ -13366,6 +13452,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
                 obj.deserialize(params.MaxAgeRules[z]);
                 this.MaxAgeRules.push(obj);
             }
+        }
+
+        if (params.MaxAgeCodeRule) {
+            let obj = new MaxAgeCodeRule();
+            obj.deserialize(params.MaxAgeCodeRule)
+            this.MaxAgeCodeRule = obj;
         }
 
     }
@@ -15320,8 +15412,9 @@ module.exports = {
     Https: Https,
     RuleCache: RuleCache,
     DescribeCdnDomainLogsRequest: DescribeCdnDomainLogsRequest,
+    AvifAdapter: AvifAdapter,
     CreateClsLogTopicResponse: CreateClsLogTopicResponse,
-    RemoteAuthenticationRule: RemoteAuthenticationRule,
+    MaxAgeCodeRule: MaxAgeCodeRule,
     Compression: Compression,
     PurgePathCacheResponse: PurgePathCacheResponse,
     DomainFilter: DomainFilter,
@@ -15379,6 +15472,7 @@ module.exports = {
     DescribeIpVisitResponse: DescribeIpVisitResponse,
     EnableClsLogTopicResponse: EnableClsLogTopicResponse,
     ListClsLogTopicsResponse: ListClsLogTopicsResponse,
+    RemoteAuthenticationRule: RemoteAuthenticationRule,
     OverseaConfig: OverseaConfig,
     UserAgentFilterRule: UserAgentFilterRule,
     UpdateDomainConfigRequest: UpdateDomainConfigRequest,

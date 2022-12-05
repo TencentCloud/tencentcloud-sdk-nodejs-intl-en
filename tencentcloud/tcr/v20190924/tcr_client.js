@@ -459,7 +459,7 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of all instance namespaces.
+     * This API is used to query the list of all namespaces in an instance.
      * @param {DescribeInstanceAllNamespacesRequest} req
      * @param {function(string, DescribeInstanceAllNamespacesResponse):void} cb
      * @public

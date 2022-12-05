@@ -105,6 +105,7 @@ const DeletePacketFilterConfigRequest = models.DeletePacketFilterConfigRequest;
 const DescribeListDDoSGeoIPBlockConfigResponse = models.DescribeListDDoSGeoIPBlockConfigResponse;
 const DescribeBasicDeviceStatusResponse = models.DescribeBasicDeviceStatusResponse;
 const DescribeBgpBizTrendResponse = models.DescribeBgpBizTrendResponse;
+const DescribePendingRiskInfoResponse = models.DescribePendingRiskInfoResponse;
 const ProtocolBlockConfig = models.ProtocolBlockConfig;
 const DeleteCCPrecisionPolicyRequest = models.DeleteCCPrecisionPolicyRequest;
 const BGPIPInstance = models.BGPIPInstance;
@@ -130,12 +131,13 @@ const PackInfo = models.PackInfo;
 const IPLineInfo = models.IPLineInfo;
 const DescribeCcBlackWhiteIpListRequest = models.DescribeCcBlackWhiteIpListRequest;
 const DescribeListListenerResponse = models.DescribeListListenerResponse;
-const ProtectThresholdRelation = models.ProtectThresholdRelation;
+const DescribePendingRiskInfoRequest = models.DescribePendingRiskInfoRequest;
 const IpSegment = models.IpSegment;
 const CreateL7RuleCertsResponse = models.CreateL7RuleCertsResponse;
 const CreateCCPrecisionPolicyRequest = models.CreateCCPrecisionPolicyRequest;
 const DDoSSpeedLimitConfig = models.DDoSSpeedLimitConfig;
 const AnycastOutPackRelation = models.AnycastOutPackRelation;
+const ProtectThresholdRelation = models.ProtectThresholdRelation;
 const DescribeListProtectThresholdConfigResponse = models.DescribeListProtectThresholdConfigResponse;
 const CertIdInsL7Rules = models.CertIdInsL7Rules;
 const CreateDefaultAlarmThresholdResponse = models.CreateDefaultAlarmThresholdResponse;
@@ -307,14 +309,14 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify Anti-DDoS access rate limit configurations.
-     * @param {ModifyDDoSSpeedLimitConfigRequest} req
-     * @param {function(string, ModifyDDoSSpeedLimitConfigResponse):void} cb
+     * This API is used to query the information of pending risks at the account level.
+     * @param {DescribePendingRiskInfoRequest} req
+     * @param {function(string, DescribePendingRiskInfoResponse):void} cb
      * @public
      */
-    ModifyDDoSSpeedLimitConfig(req, cb) {
-        let resp = new ModifyDDoSSpeedLimitConfigResponse();
-        this.request("ModifyDDoSSpeedLimitConfig", req, resp, cb);
+    DescribePendingRiskInfo(req, cb) {
+        let resp = new DescribePendingRiskInfoResponse();
+        this.request("DescribePendingRiskInfo", req, resp, cb);
     }
 
     /**
@@ -525,6 +527,17 @@ class AntiddosClient extends AbstractClient {
     DescribeListSchedulingDomain(req, cb) {
         let resp = new DescribeListSchedulingDomainResponse();
         this.request("DescribeListSchedulingDomain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify Anti-DDoS access rate limit configurations.
+     * @param {ModifyDDoSSpeedLimitConfigRequest} req
+     * @param {function(string, ModifyDDoSSpeedLimitConfigResponse):void} cb
+     * @public
+     */
+    ModifyDDoSSpeedLimitConfig(req, cb) {
+        let resp = new ModifyDDoSSpeedLimitConfigResponse();
+        this.request("ModifyDDoSSpeedLimitConfig", req, resp, cb);
     }
 
     /**

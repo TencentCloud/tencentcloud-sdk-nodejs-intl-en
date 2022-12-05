@@ -1629,6 +1629,18 @@ class DescribeInstanceAllNamespacesRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Number of entries per page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Start position offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
     }
 
     /**
@@ -1638,6 +1650,8 @@ class DescribeInstanceAllNamespacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -6988,6 +7002,12 @@ class DescribeImagesRequest extends  AbstractModel {
          */
         this.Digest = null;
 
+        /**
+         * Whether to use exact matching. Valid values: `true` (exact matching), `null` (fuzzy matching).
+         * @type {boolean || null}
+         */
+        this.ExactMatch = null;
+
     }
 
     /**
@@ -7004,6 +7024,7 @@ class DescribeImagesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Digest = 'Digest' in params ? params.Digest : null;
+        this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
 
     }
 }

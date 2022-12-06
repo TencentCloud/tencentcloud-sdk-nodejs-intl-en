@@ -2141,7 +2141,7 @@ class DetachLoadBalancersRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * List of application CLB IDs. Up to 50 IDs are allowed. `LoadBalancerIds` and `ForwardLoadBalancerIdentifications` cannot be specified at the same time.
+         * List of application CLB IDs. Up to 100 IDs are allowed. `LoadBalancerIds` and `ForwardLoadBalancerIdentifications` cannot be specified at the same time.
          * @type {Array.<ForwardLoadBalancerIdentification> || null}
          */
         this.ForwardLoadBalancerIdentifications = null;
@@ -2251,7 +2251,7 @@ class ModifyLoadBalancersRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * List of application CLBs. Up to 50 CLBs are allowed. You cannot specify `loadBalancerIds` and `ForwardLoadBalancers` at the same time.
+         * List of application CLBs. Up to 100 CLBs are allowed. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -4109,7 +4109,7 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * List of application CLBs. Up to 50 CLBs are allowed. You cannot specify `loadBalancerIds` and `ForwardLoadBalancers` at the same time.
+         * List of application CLBs. Up to 100 CLBs are allowed. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -5053,6 +5053,18 @@ class EnhancedService extends  AbstractModel {
          */
         this.MonitorService = null;
 
+        /**
+         * Deprecated parameter.
+         * @type {Array.<RunAutomationServiceEnabled> || null}
+         */
+        this.AutomationService = null;
+
+        /**
+         * 
+         * @type {RunAutomationServiceEnabled || null}
+         */
+        this.AutomationToolsService = null;
+
     }
 
     /**
@@ -5074,6 +5086,50 @@ class EnhancedService extends  AbstractModel {
             obj.deserialize(params.MonitorService)
             this.MonitorService = obj;
         }
+
+        if (params.AutomationService) {
+            this.AutomationService = new Array();
+            for (let z in params.AutomationService) {
+                let obj = new RunAutomationServiceEnabled();
+                obj.deserialize(params.AutomationService[z]);
+                this.AutomationService.push(obj);
+            }
+        }
+
+        if (params.AutomationToolsService) {
+            let obj = new RunAutomationServiceEnabled();
+            obj.deserialize(params.AutomationToolsService)
+            this.AutomationToolsService = obj;
+        }
+
+    }
+}
+
+/**
+ * Status of TAT service.
+ * @class
+ */
+class RunAutomationServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable [TencentCloud Automation Tools](https://intl.cloud.tencent.com/document/product/1340?from_cn_redirect=1). Valid values:<br><li>`TRUE`: Enable<br><li>`FALSE`: Not enable.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
 
     }
 }
@@ -6348,7 +6404,7 @@ class ModifyLoadBalancerTargetAttributesRequest extends  AbstractModel {
         this.AutoScalingGroupId = null;
 
         /**
-         * List of application CLBs to modify. Up to 50 CLBs allowed.
+         * List of application CLBs to modify. Up to 100 CLBs allowed.
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -7120,7 +7176,7 @@ class AttachLoadBalancersRequest extends  AbstractModel {
         this.LoadBalancerIds = null;
 
         /**
-         * List of application CLBs. Up to 50 application CLBs can be bound to a security group. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
+         * List of application CLBs. Up to 100 application CLBs can be bound to a scaling group. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
          * @type {Array.<ForwardLoadBalancer> || null}
          */
         this.ForwardLoadBalancers = null;
@@ -7990,6 +8046,7 @@ module.exports = {
     Instance: Instance,
     DescribeAutoScalingInstancesResponse: DescribeAutoScalingInstancesResponse,
     EnhancedService: EnhancedService,
+    RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     DeleteLaunchConfigurationResponse: DeleteLaunchConfigurationResponse,
     DescribeScheduledActionsRequest: DescribeScheduledActionsRequest,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,

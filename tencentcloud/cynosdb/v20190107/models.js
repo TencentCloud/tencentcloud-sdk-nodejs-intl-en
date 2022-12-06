@@ -989,6 +989,72 @@ class DescribeParamTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Database engine version number
+         * @type {Array.<string> || null}
+         */
+        this.EngineVersions = null;
+
+        /**
+         * Template name
+         * @type {Array.<string> || null}
+         */
+        this.TemplateNames = null;
+
+        /**
+         * Template ID
+         * @type {Array.<number> || null}
+         */
+        this.TemplateIds = null;
+
+        /**
+         * Database Type. Valid values: `NORMAL`, `SERVERLESS`.
+         * @type {Array.<string> || null}
+         */
+        this.DbModes = null;
+
+        /**
+         * Offset for query
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit on queries
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Product type of the queried template
+         * @type {Array.<string> || null}
+         */
+        this.Products = null;
+
+        /**
+         * Template type
+         * @type {Array.<string> || null}
+         */
+        this.TemplateTypes = null;
+
+        /**
+         * Version type
+         * @type {Array.<string> || null}
+         */
+        this.EngineTypes = null;
+
+        /**
+         * The sorting order of the returned results
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `desc`, `asc `.
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
     }
 
     /**
@@ -998,6 +1064,17 @@ class DescribeParamTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.EngineVersions = 'EngineVersions' in params ? params.EngineVersions : null;
+        this.TemplateNames = 'TemplateNames' in params ? params.TemplateNames : null;
+        this.TemplateIds = 'TemplateIds' in params ? params.TemplateIds : null;
+        this.DbModes = 'DbModes' in params ? params.DbModes : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Products = 'Products' in params ? params.Products : null;
+        this.TemplateTypes = 'TemplateTypes' in params ? params.TemplateTypes : null;
+        this.EngineTypes = 'EngineTypes' in params ? params.EngineTypes : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -3558,6 +3635,19 @@ class ParamTemplateListInfo extends  AbstractModel {
          */
         this.EngineVersion = null;
 
+        /**
+         * Database Type. Valid values: `NORMAL`, `SERVERLESS`.
+         * @type {string || null}
+         */
+        this.DbMode = null;
+
+        /**
+         * Parameter template details
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TemplateParamInfo> || null}
+         */
+        this.ParamInfoSet = null;
+
     }
 
     /**
@@ -3571,6 +3661,16 @@ class ParamTemplateListInfo extends  AbstractModel {
         this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
         this.TemplateDescription = 'TemplateDescription' in params ? params.TemplateDescription : null;
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.DbMode = 'DbMode' in params ? params.DbMode : null;
+
+        if (params.ParamInfoSet) {
+            this.ParamInfoSet = new Array();
+            for (let z in params.ParamInfoSet) {
+                let obj = new TemplateParamInfo();
+                obj.deserialize(params.ParamInfoSet[z]);
+                this.ParamInfoSet.push(obj);
+            }
+        }
 
     }
 }
@@ -3974,6 +4074,93 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
         this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * Parameter template details
+ * @class
+ */
+class TemplateParamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Current value
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Default value
+         * @type {string || null}
+         */
+        this.Default = null;
+
+        /**
+         * The collection of valid value types when parameter type is `enum`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+        /**
+         * Maximum value when parameter type is `float` or `integer`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Max = null;
+
+        /**
+         * Minimum value when parameter type is `float` or `integer`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Min = null;
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * Whether to restart the instance for the parameter to take effect
+         * @type {number || null}
+         */
+        this.NeedReboot = null;
+
+        /**
+         * Parameter description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Parameter type. Valid value: `integer`, `float`, `string`, `enum`.
+         * @type {string || null}
+         */
+        this.ParamType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.Default = 'Default' in params ? params.Default : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.NeedReboot = 'NeedReboot' in params ? params.NeedReboot : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.ParamType = 'ParamType' in params ? params.ParamType : null;
 
     }
 }
@@ -7375,6 +7562,7 @@ module.exports = {
     DescribeBackupDownloadUrlRequest: DescribeBackupDownloadUrlRequest,
     OfflineInstanceRequest: OfflineInstanceRequest,
     NetAddr: NetAddr,
+    TemplateParamInfo: TemplateParamInfo,
     DescribeResourcesByDealNameRequest: DescribeResourcesByDealNameRequest,
     CreateBackupResponse: CreateBackupResponse,
     DescribeRollbackTimeValidityResponse: DescribeRollbackTimeValidityResponse,

@@ -25,8 +25,8 @@ class ScanVoiceResponse extends  AbstractModel {
         super();
 
         /**
-         * Speech detection return. The `Data` field is a JSON array where each element contains: <li>DataId: corresponding `DataId` in request.</li>
-<li>TaskID: detection task ID, which is used to poll the speech detection result.</li>
+         * Voice moderation result. <li>`DataId`: Corresponding `DataId` in request.</li>
+<li>`TaskID`: Moderation task ID, which is used to poll the voice detection result.</li>
          * @type {Array.<ScanVoiceResult> || null}
          */
         this.Data = null;
@@ -69,31 +69,59 @@ class AppStatisticsItem extends  AbstractModel {
         super();
 
         /**
-         * Voice chat statistics
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Voice Chat statistics
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {RealTimeSpeechStatisticsItem || null}
          */
         this.RealtimeSpeechStatisticsItem = null;
 
         /**
-         * Voice messaging statistics
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Voice Message statistics
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {VoiceMessageStatisticsItem || null}
          */
         this.VoiceMessageStatisticsItem = null;
 
         /**
-         * Phrase filtering statistics
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Phrase Filtering statistics
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {VoiceFilterStatisticsItem || null}
          */
         this.VoiceFilterStatisticsItem = null;
 
         /**
-         * Statistical period
+         * Reference period
          * @type {string || null}
          */
         this.Date = null;
+
+        /**
+         * Recording-to-Text usage statistics
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {AudioTextStatisticsItem || null}
+         */
+        this.AudioTextStatisticsItem = null;
+
+        /**
+         * Stream-to-Text usage statistics
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {StreamTextStatisticsItem || null}
+         */
+        this.StreamTextStatisticsItem = null;
+
+        /**
+         * Usage statistics of Voice-to-Text of outside-MLC requests
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {OverseaTextStatisticsItem || null}
+         */
+        this.OverseaTextStatisticsItem = null;
+
+        /**
+         * Real-time Voice-to-Text usage statistics
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {RealtimeTextStatisticsItem || null}
+         */
+        this.RealtimeTextStatisticsItem = null;
 
     }
 
@@ -124,6 +152,30 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Date = 'Date' in params ? params.Date : null;
 
+        if (params.AudioTextStatisticsItem) {
+            let obj = new AudioTextStatisticsItem();
+            obj.deserialize(params.AudioTextStatisticsItem)
+            this.AudioTextStatisticsItem = obj;
+        }
+
+        if (params.StreamTextStatisticsItem) {
+            let obj = new StreamTextStatisticsItem();
+            obj.deserialize(params.StreamTextStatisticsItem)
+            this.StreamTextStatisticsItem = obj;
+        }
+
+        if (params.OverseaTextStatisticsItem) {
+            let obj = new OverseaTextStatisticsItem();
+            obj.deserialize(params.OverseaTextStatisticsItem)
+            this.OverseaTextStatisticsItem = obj;
+        }
+
+        if (params.RealtimeTextStatisticsItem) {
+            let obj = new RealtimeTextStatisticsItem();
+            obj.deserialize(params.RealtimeTextStatisticsItem)
+            this.RealtimeTextStatisticsItem = obj;
+        }
+
     }
 }
 
@@ -136,13 +188,13 @@ class ModifyAppStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID, which is generated and returned by the backend after application creation.
+         * Application ID, which is generated and returned by the backend after the application creation.
          * @type {number || null}
          */
         this.BizId = null;
 
         /**
-         * Application status. Valid values: open, close
+         * Application status. Valid values: `open`, `close`.
          * @type {string || null}
          */
         this.Status = null;
@@ -171,8 +223,8 @@ class DescribeScanResultListResponse extends  AbstractModel {
         super();
 
         /**
-         * Result of the speech detection task to be queried
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Result of the voice detection task to be queried
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<DescribeScanResult> || null}
          */
         this.Data = null;
@@ -221,13 +273,13 @@ class DescribeApplicationDataRequest extends  AbstractModel {
         this.BizId = null;
 
         /**
-         * Data start date in the format of yyyy-mm-dd, such as 2018-07-13
+         * Data start date in the format of yyyy-mm-dd, such as 2018-07-13.
          * @type {string || null}
          */
         this.StartDate = null;
 
         /**
-         * Data end date in the format of yyyy-mm-dd, such as 2018-07-13
+         * Data end date in the format of yyyy-mm-dd, such as 2018-07-13.
          * @type {string || null}
          */
         this.EndDate = null;
@@ -249,7 +301,7 @@ class DescribeApplicationDataRequest extends  AbstractModel {
 }
 
 /**
- * Speech detection task list
+ * Voice detection task list
  * @class
  */
 class Task extends  AbstractModel {
@@ -263,19 +315,19 @@ class Task extends  AbstractModel {
         this.DataId = null;
 
         /**
-         * URL-encoded data file URL, which is a pull address if the detected speech is a stream
+         * URL-encoded data file URL, which is a pull address if the detected voice is a stream.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * GME voice chat room ID, which is entered during speech detection by GME voice chat
+         * GME Voice Chat room ID, which is entered during voice analysis by GME Voice Chat.
          * @type {string || null}
          */
         this.RoomId = null;
 
         /**
-         * GME voice chat user ID, which is entered during speech detection by GME voice chat
+         * GME Voice Chat user ID, which is entered during voice analysis by GME Voice Chat.
          * @type {string || null}
          */
         this.OpenId = null;
@@ -298,7 +350,7 @@ class Task extends  AbstractModel {
 }
 
 /**
- * Voice messaging usage statistics
+ * Voice Message Service usage statistics
  * @class
  */
 class VoiceMessageStatisticsItem extends  AbstractModel {
@@ -306,7 +358,7 @@ class VoiceMessageStatisticsItem extends  AbstractModel {
         super();
 
         /**
-         * DAU of voice messaging and speech-to-text
+         * DAUs of Voice Message Service
          * @type {number || null}
          */
         this.Dau = null;
@@ -383,7 +435,7 @@ class DescribeScanResultListRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID, which is the `AppID` obtained when you create an application in the [console](https://console.cloud.tencent.com/gamegme)
+         * Application ID, which is obtained when you create an application in the [GME console](https://console.cloud.tencent.com/gamegme).
          * @type {number || null}
          */
         this.BizId = null;
@@ -395,7 +447,7 @@ class DescribeScanResultListRequest extends  AbstractModel {
         this.TaskIdList = null;
 
         /**
-         * Number of task results to be returned. Default value: 10. Maximum value: 500. This parameter will be ignored for large file tasks where all results will be returned
+         * Number of task results to be returned. Default value: 10. Maximum value: 500. This parameter will be ignored for large file tasks where all results will be returned.
          * @type {number || null}
          */
         this.Limit = null;
@@ -417,7 +469,7 @@ class DescribeScanResultListRequest extends  AbstractModel {
 }
 
 /**
- * Voice chat usage statistics
+ * Voice Chat usage statistics
  * @class
  */
 class RealTimeSpeechStatisticsItem extends  AbstractModel {
@@ -425,37 +477,37 @@ class RealTimeSpeechStatisticsItem extends  AbstractModel {
         super();
 
         /**
-         * DAU in Mainland China
+         * DAUs in the Chinese mainland
          * @type {number || null}
          */
         this.MainLandDau = null;
 
         /**
-         * PCU in Mainland China
+         * PCUs in the Chinese mainland
          * @type {number || null}
          */
         this.MainLandPcu = null;
 
         /**
-         * Total duration of use in Mainland China in minutes
+         * Total duration of use in the Chinese mainland (in minutes)
          * @type {number || null}
          */
         this.MainLandDuration = null;
 
         /**
-         * DAU outside Mainland China
+         * DAUs outside the Chinese mainland
          * @type {number || null}
          */
         this.OverseaDau = null;
 
         /**
-         * PCU outside Mainland China
+         * PCUs outside the Chinese mainland
          * @type {number || null}
          */
         this.OverseaPcu = null;
 
         /**
-         * Total duration of use outside Mainland China in minutes
+         * Total duration of use outside the Chinese mainland (in minutes)
          * @type {number || null}
          */
         this.OverseaDuration = null;
@@ -480,6 +532,35 @@ class RealTimeSpeechStatisticsItem extends  AbstractModel {
 }
 
 /**
+ * Stream-to-Text usage statistics
+ * @class
+ */
+class StreamTextStatisticsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Usage of the service (in seconds)
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
  * Tag list
  * @class
  */
@@ -489,14 +570,14 @@ class Tag extends  AbstractModel {
 
         /**
          * Tag key
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TagKey = null;
 
         /**
          * Tag value
-Note: This field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TagValue = null;
@@ -517,7 +598,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Configuration information of voice messaging and speech-to-text
+ * Configuration information of Voice Message Service
  * @class
  */
 class VoiceMessageConf extends  AbstractModel {
@@ -525,13 +606,13 @@ class VoiceMessageConf extends  AbstractModel {
         super();
 
         /**
-         * Voice messaging and speech-to-text status. Valid values: open, close
+         * Voice Message Service status. Valid values: `open`, `close`.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Language supported for voice messaging and speech-to-text. Valid values: all (all languages), cnen (Chinese and English). Default value: cnen
+         * Language supported for Voice Message Service. Valid values: `all` (all languages), `cnen` (Chinese and English). Default value: `cnen`.
          * @type {string || null}
          */
         this.Language = null;
@@ -552,6 +633,35 @@ class VoiceMessageConf extends  AbstractModel {
 }
 
 /**
+ * Recording-to-Text usage statistics
+ * @class
+ */
+class AudioTextStatisticsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Statistical value (in seconds)
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
  * Application statistics
  * @class
  */
@@ -566,73 +676,73 @@ class ApplicationDataStatistics extends  AbstractModel {
         this.BizId = null;
 
         /**
-         * DAU data
+         * Number of DAU metrics
          * @type {number || null}
          */
         this.DauDataNum = null;
 
         /**
-         * DAU in Chinese mainland
+         * DAUs in the Chinese mainland
          * @type {Array.<StatisticsItem> || null}
          */
         this.DauDataMainland = null;
 
         /**
-         * DAU outside Chinese mainland
+         * DAUs outside the Chinese mainland
          * @type {Array.<StatisticsItem> || null}
          */
         this.DauDataOversea = null;
 
         /**
-         * Total DAU
+         * Total DAUs
          * @type {Array.<StatisticsItem> || null}
          */
         this.DauDataSum = null;
 
         /**
-         * Number of voice chat metrics
+         * Number of Voice Chat metrics
          * @type {number || null}
          */
         this.DurationDataNum = null;
 
         /**
-         * Duration of voice chat in Chinese mainland in minutes
+         * Duration of Voice Chat in the Chinese mainland (in minutes)
          * @type {Array.<StatisticsItem> || null}
          */
         this.DurationDataMainland = null;
 
         /**
-         * Duration of voice chat outside Chinese mainland in minutes
+         * Duration of Voice Chat outside the Chinese mainland (in minutes)
          * @type {Array.<StatisticsItem> || null}
          */
         this.DurationDataOversea = null;
 
         /**
-         * Total duration of voice chat in minutes
+         * Total duration of Voice Chat (in minutes)
          * @type {Array.<StatisticsItem> || null}
          */
         this.DurationDataSum = null;
 
         /**
-         * PCU data
+         * Number of PCU metrics
          * @type {number || null}
          */
         this.PcuDataNum = null;
 
         /**
-         * PCU in Chinese mainland
+         * PCUs in the Chinese mainland
          * @type {Array.<StatisticsItem> || null}
          */
         this.PcuDataMainland = null;
 
         /**
-         * PCU outside Chinese mainland
+         * PCUs outside the Chinese mainland
          * @type {Array.<StatisticsItem> || null}
          */
         this.PcuDataOversea = null;
 
         /**
-         * Total PCU
+         * Total PCUs
          * @type {Array.<StatisticsItem> || null}
          */
         this.PcuDataSum = null;
@@ -744,13 +854,13 @@ class ModifyAppStatusResp extends  AbstractModel {
         super();
 
         /**
-         * GME app ID
+         * GME application ID
          * @type {number || null}
          */
         this.BizId = null;
 
         /**
-         * App status. Valid values: `open`, `close`
+         * Application status. Valid values: `open`, `close`.
          * @type {string || null}
          */
         this.Status = null;
@@ -779,7 +889,7 @@ class DescribeAppStatisticsResponse extends  AbstractModel {
         super();
 
         /**
-         * App usage statistics
+         * Application usage statistics
          * @type {DescribeAppStatisticsResp || null}
          */
         this.Data = null;
@@ -891,7 +1001,7 @@ class DeleteRoomMemberResponse extends  AbstractModel {
 }
 
 /**
- * Phrase filtering usage statistics
+ * Phrase Filtering usage statistics
  * @class
  */
 class VoiceFilterStatisticsItem extends  AbstractModel {
@@ -899,7 +1009,7 @@ class VoiceFilterStatisticsItem extends  AbstractModel {
         super();
 
         /**
-         * Total duration of phrase filtering
+         * Total duration of phrase filtering (in minutes)
          * @type {number || null}
          */
         this.Duration = null;
@@ -927,13 +1037,13 @@ class CreateAppResp extends  AbstractModel {
         super();
 
         /**
-         * App ID, automatically generated by the backend.
+         * Application ID, automatically generated by the backend.
          * @type {number || null}
          */
         this.BizId = null;
 
         /**
-         * App name, the input of `AppName`.
+         * Application name, the input of `AppName`.
          * @type {string || null}
          */
         this.AppName = null;
@@ -945,7 +1055,7 @@ class CreateAppResp extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * App key, used to initialize GME SDK.
+         * Application key, used to initialize GME SDK.
          * @type {string || null}
          */
         this.SecretKey = null;
@@ -957,19 +1067,19 @@ class CreateAppResp extends  AbstractModel {
         this.CreateTime = null;
 
         /**
-         * Configuration information of voice chat
+         * Configuration information of Voice Chat
          * @type {RealtimeSpeechConf || null}
          */
         this.RealtimeSpeechConf = null;
 
         /**
-         * Configuration information of voice messaging and speech-to-text
+         * Configuration information of Voice Message Service
          * @type {VoiceMessageConf || null}
          */
         this.VoiceMessageConf = null;
 
         /**
-         * Configuration information of phrase analysis
+         * Configuration information of Voice Analysis Service
          * @type {VoiceFilterConf || null}
          */
         this.VoiceFilterConf = null;
@@ -1011,6 +1121,35 @@ class CreateAppResp extends  AbstractModel {
 }
 
 /**
+ * Real-time Voice-to-Text usage statistics
+ * @class
+ */
+class RealtimeTextStatisticsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Statistical value (in seconds)
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
  * Result of the operation to delete a room or remove members
  * @class
  */
@@ -1046,7 +1185,36 @@ class DeleteResult extends  AbstractModel {
 }
 
 /**
- * Returned speech detection result
+ * Usage statistics of Voice-to-Text of outside-MLC requests
+ * @class
+ */
+class OverseaTextStatisticsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Statistical value (in seconds)
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
+ * Returned voice detection result
  * @class
  */
 class DescribeScanResult extends  AbstractModel {
@@ -1085,14 +1253,14 @@ class DescribeScanResult extends  AbstractModel {
 
         /**
          * Business return description
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Msg = null;
 
         /**
          * Detection result, which will be returned if `Code` is 0
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<ScanPiece> || null}
          */
         this.ScanPiece = null;
@@ -1104,13 +1272,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ScanStartTime = null;
 
         /**
-         * Speech detection scenario, which corresponds to the `Scene` at the time of request
+         * Voice detection scenario, which corresponds to the `Scene` at the time of request
          * @type {Array.<string> || null}
          */
         this.Scenes = null;
 
         /**
-         * Speech detection task ID, which is assigned by the backend
+         * Voice detection task ID, which is assigned by the backend
          * @type {string || null}
          */
         this.TaskId = null;
@@ -1122,10 +1290,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Url = null;
 
         /**
-         * Detection task execution result task. Valid values:
-<li>Start: task started</li>
-<li>Success: task ended successfully</li>
-<li>Error: exceptional</li>
+         * Detection task execution result status. Valid values:
+<li>Start: Task started</li>
+<li>Success: Task ended successfully</li>
+<li>Error: An exception occurs</li>
          * @type {string || null}
          */
         this.Status = null;
@@ -1171,7 +1339,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Speech detection details
+ * Voice detection details
  * @class
  */
 class ScanDetail extends  AbstractModel {
@@ -1179,13 +1347,13 @@ class ScanDetail extends  AbstractModel {
         super();
 
         /**
-         * Violation scenario. For more information, please see the definition of <a href="https://intl.cloud.tencent.com/document/product/607/37622?from_cn_redirect=1#Label_Value">Label</a>
+         * Violation scenario. For more information, please see the definition of <a href="https://intl.cloud.tencent.com/document/product/607/37622?from_cn_redirect=1#Label_Value">Label</a>.
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * Confidence score in scenario. Value range: [0.00,100.00]. The higher the score, the more likely the content is non-compliant
+         * Confidence score in scenario. Value range: [0.00,100.00]. The higher the score, the more likely the content is non-compliant.
          * @type {string || null}
          */
         this.Rate = null;
@@ -1197,13 +1365,13 @@ class ScanDetail extends  AbstractModel {
         this.KeyWord = null;
 
         /**
-         * Start time offset in milliseconds from 0 of keyword in audio
+         * Start time offset of keyword from 0 in audio (in milliseconds)
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * End time offset in milliseconds from 0 of keyword in audio
+         * End time offset of keyword from 0 in audio (in milliseconds)
          * @type {number || null}
          */
         this.EndTime = null;
@@ -1241,7 +1409,7 @@ class CreateAppRequest extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * Tencent Cloud project ID. Default value: 0, which means the default project
+         * Tencent Cloud project ID. Default value: 0, which means that the default project is used.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -1259,19 +1427,19 @@ class CreateAppRequest extends  AbstractModel {
         this.RegionList = null;
 
         /**
-         * Configuration information of voice chat
+         * Configuration information of Voice Chat
          * @type {RealtimeSpeechConf || null}
          */
         this.RealtimeSpeechConf = null;
 
         /**
-         * Configuration information of voice messaging and speech-to-text
+         * Configuration information of Voice Message Service
          * @type {VoiceMessageConf || null}
          */
         this.VoiceMessageConf = null;
 
         /**
-         * Configuration information of phrase analysis
+         * Configuration information of Voice Analysis Service
          * @type {VoiceFilterConf || null}
          */
         this.VoiceFilterConf = null;
@@ -1327,7 +1495,7 @@ class CreateAppRequest extends  AbstractModel {
 }
 
 /**
- * Configuration information of voice chat
+ * Configuration information of Voice Chat
  * @class
  */
 class RealtimeSpeechConf extends  AbstractModel {
@@ -1335,13 +1503,13 @@ class RealtimeSpeechConf extends  AbstractModel {
         super();
 
         /**
-         * Voice chat status. Valid values: open, close
+         * Voice Chat status. Valid values: `open`, `close`.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Voice chat sound quality. Valid value: `high`
+         * Voice Chat sound quality. Valid value: `high`.
          * @type {string || null}
          */
         this.Quality = null;
@@ -1362,7 +1530,7 @@ class RealtimeSpeechConf extends  AbstractModel {
 }
 
 /**
- * Output parameters of app usage statistics
+ * Output parameters of application usage statistics
  * @class
  */
 class DescribeAppStatisticsResp extends  AbstractModel {
@@ -1370,7 +1538,7 @@ class DescribeAppStatisticsResp extends  AbstractModel {
         super();
 
         /**
-         * App usage statistics
+         * Application usage statistics
          * @type {Array.<AppStatisticsItem> || null}
          */
         this.AppStatistics = null;
@@ -1398,7 +1566,7 @@ class DescribeAppStatisticsResp extends  AbstractModel {
 }
 
 /**
- * Returned result of speech detection
+ * Result of voice moderation
  * @class
  */
 class ScanVoiceResult extends  AbstractModel {
@@ -1487,19 +1655,19 @@ class DescribeAppStatisticsRequest extends  AbstractModel {
         this.BizId = null;
 
         /**
-         * Data start date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13
+         * Data start date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13.
          * @type {string || null}
          */
         this.StartDate = null;
 
         /**
-         * Data end date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13
+         * Data end date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13.
          * @type {string || null}
          */
         this.EndDate = null;
 
         /**
-         * List of services to be queried. Valid values: RealTimeSpeech, VoiceMessage, VoiceFilter
+         * List of services to be queried. Valid values: `RealTimeSpeech`, `VoiceMessage`, `VoiceFilter`, `SpeechToText`.
          * @type {Array.<string> || null}
          */
         this.Services = null;
@@ -1522,7 +1690,7 @@ class DescribeAppStatisticsRequest extends  AbstractModel {
 }
 
 /**
- * Speech detection result, which will be returned if `Code` is 0
+ * Voice detection result, which will be returned if `Code` is 0.
  * @class
  */
 class ScanPiece extends  AbstractModel {
@@ -1530,8 +1698,8 @@ class ScanPiece extends  AbstractModel {
         super();
 
         /**
-         * Audio retention address, which will be returned for stream detection. The audio will be retained for 30 minutes
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Audio retention address, which will be returned for stream detection. The audio will be retained for 30 minutes.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DumpUrl = null;
@@ -1544,55 +1712,55 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Main non-compliant content type
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MainType = null;
 
         /**
-         * Speech detection details
+         * Voice detection details
          * @type {Array.<ScanDetail> || null}
          */
         this.ScanDetail = null;
 
         /**
-         * GME voice chat room ID, which is the `RoomId` passed through when the task was submitted
-Note: this field may return null, indicating that no valid values can be obtained.
+         * GME Voice Chat room ID, which is the `RoomId` passed through when the task was submitted.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RoomId = null;
 
         /**
-         * GME voice chat user ID, which is the `OpenId` passed through when the task was submitted
-Note: this field may return null, indicating that no valid values can be obtained.
+         * GME Voice Chat user ID, which is the `OpenId` passed through when the task was submitted.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OpenId = null;
 
         /**
          * Remarks
-Note: this field may return null, indicating that no valid values can be obtained.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Info = null;
 
         /**
-         * Offset time in milliseconds of segment in stream during stream detection
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Offset time of multipart in stream during stream detection (in milliseconds)
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Segment duration during stream detection
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Multipart duration during stream detection
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Duration = null;
 
         /**
-         * Segment detection start time
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Multipart detection start time
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.PieceStartTime = null;
@@ -1669,7 +1837,7 @@ class ModifyAppStatusResponse extends  AbstractModel {
 }
 
 /**
- * Configuration information of phrase filtering
+ * Configuration information of Phrase Filtering
  * @class
  */
 class VoiceFilterConf extends  AbstractModel {
@@ -1677,7 +1845,7 @@ class VoiceFilterConf extends  AbstractModel {
         super();
 
         /**
-         * Phrase filtering status. Valid values: open, close
+         * Phrase Filtering status. Valid values: `open`, `close`.
          * @type {string || null}
          */
         this.Status = null;
@@ -1697,7 +1865,7 @@ class VoiceFilterConf extends  AbstractModel {
 }
 
 /**
- * Usage data
+ * Usage data unit
  * @class
  */
 class StatisticsItem extends  AbstractModel {
@@ -1711,7 +1879,7 @@ class StatisticsItem extends  AbstractModel {
         this.StatDate = null;
 
         /**
-         * Statistics
+         * Statistical value
          * @type {number || null}
          */
         this.Data = null;
@@ -1740,39 +1908,39 @@ class ScanVoiceRequest extends  AbstractModel {
         super();
 
         /**
-         * Application ID, which is the `AppID` obtained when you create an application in [Console > Service Management](https://console.cloud.tencent.com/gamegme)
+         * Application ID, which is obtained when you create an application in the [GME console - Service Management](https://console.cloud.tencent.com/gamegme).
          * @type {number || null}
          */
         this.BizId = null;
 
         /**
-         * Speech detection scenario. The value of this parameter is currently required to be `default`. Preset scenarios: abusive, pornographic, advertising, and other prohibited scenarios. For specific values, please see the <a href="#Label_Value">Label description</a> above.
+         * Voice detection scenario. It must be `default`. See the <a href="#Label_Value">Label description</a> as the result.
          * @type {Array.<string> || null}
          */
         this.Scenes = null;
 
         /**
-         * Whether it is a live stream. false: audio file detection, true: audio stream detection.
+         * Whether it is a live stream. Values: `false` (voice file), `true` (live stream).
          * @type {boolean || null}
          */
         this.Live = null;
 
         /**
-         * Speech detection task list. Up to 100 tasks can be added in the list. The structure contains:
-<li>DataId: unique data ID</li>
-<li>Url: URL-encoded data file URL, which is a pull address if the detected speech is a stream</li>
+         * Voice detection task list. Up to 100 tasks can be added in the list. 
+<li>`DataId`: Unique data ID</li>
+<li>`Url`: URL-encoded data file URL, which is a pull address if the detected voice is a stream</li>
          * @type {Array.<Task> || null}
          */
         this.Tasks = null;
 
         /**
-         * Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">callback description</a> above. (Note: if this field is empty, the detection result can only be obtained by calling the `DescribeScanResultList` API.)
+         * Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">Callback description</a> above. (Note: If this field is empty, the detection result can only be queried by calling the `DescribeScanResultList` API.)
          * @type {string || null}
          */
         this.Callback = null;
 
         /**
-         * The language. `jp` represents Japanese
+         * Language. `jp`: Japanese
          * @type {string || null}
          */
         this.Lang = null;
@@ -1815,8 +1983,10 @@ module.exports = {
     DeleteRoomMemberRequest: DeleteRoomMemberRequest,
     DescribeScanResultListRequest: DescribeScanResultListRequest,
     RealTimeSpeechStatisticsItem: RealTimeSpeechStatisticsItem,
+    StreamTextStatisticsItem: StreamTextStatisticsItem,
     Tag: Tag,
     VoiceMessageConf: VoiceMessageConf,
+    AudioTextStatisticsItem: AudioTextStatisticsItem,
     ApplicationDataStatistics: ApplicationDataStatistics,
     ModifyAppStatusResp: ModifyAppStatusResp,
     DescribeAppStatisticsResponse: DescribeAppStatisticsResponse,
@@ -1824,7 +1994,9 @@ module.exports = {
     DeleteRoomMemberResponse: DeleteRoomMemberResponse,
     VoiceFilterStatisticsItem: VoiceFilterStatisticsItem,
     CreateAppResp: CreateAppResp,
+    RealtimeTextStatisticsItem: RealtimeTextStatisticsItem,
     DeleteResult: DeleteResult,
+    OverseaTextStatisticsItem: OverseaTextStatisticsItem,
     DescribeScanResult: DescribeScanResult,
     ScanDetail: ScanDetail,
     CreateAppRequest: CreateAppRequest,

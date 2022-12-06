@@ -98,6 +98,7 @@ const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
 const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstancesResponse;
 const EnhancedService = models.EnhancedService;
+const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const DeleteLaunchConfigurationResponse = models.DeleteLaunchConfigurationResponse;
 const DescribeScheduledActionsRequest = models.DescribeScheduledActionsRequest;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;

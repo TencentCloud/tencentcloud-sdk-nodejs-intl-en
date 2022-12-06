@@ -89,6 +89,7 @@ const SecurityGroup = models.SecurityGroup;
 const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest;
 const OfflineInstanceRequest = models.OfflineInstanceRequest;
 const NetAddr = models.NetAddr;
+const TemplateParamInfo = models.TemplateParamInfo;
 const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
 const CreateBackupResponse = models.CreateBackupResponse;
 const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidityResponse;

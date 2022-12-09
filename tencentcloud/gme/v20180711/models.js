@@ -1940,7 +1940,7 @@ class ScanVoiceRequest extends  AbstractModel {
         this.Callback = null;
 
         /**
-         * Language. `jp`: Japanese
+         * Language. Chinese will be used if it is left empty.
          * @type {string || null}
          */
         this.Lang = null;

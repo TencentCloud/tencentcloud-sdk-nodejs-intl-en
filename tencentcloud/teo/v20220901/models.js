@@ -7321,13 +7321,13 @@ class CreateSecurityDropPageRequest extends  AbstractModel {
         super();
 
         /**
-         * The site ID.
+         * The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
          * @type {string || null}
          */
         this.ZoneId = null;
 
         /**
-         * The subdomain name.
+         * The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
          * @type {string || null}
          */
         this.Entity = null;
@@ -7360,6 +7360,12 @@ class CreateSecurityDropPageRequest extends  AbstractModel {
          */
         this.Module = null;
 
+        /**
+         * The template ID. You must specify either this field or "ZoneId+Entity".
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
     }
 
     /**
@@ -7375,6 +7381,7 @@ class CreateSecurityDropPageRequest extends  AbstractModel {
         this.Content = 'Content' in params ? params.Content : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Module = 'Module' in params ? params.Module : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -9989,13 +9996,13 @@ class RuleCondition extends  AbstractModel {
         this.Operator = null;
 
         /**
-         * Match type. Valid values:
+         * The match type. Values:
 <li>`filename`: File name</li>
 <li>`extension`: File extension</li>
 <li>`host`: Host</li>
 <li>`full_url`: Full URL, which indicates the complete URL path under the current site and must contain the HTTP protocol, host, and path.</li>
 <li>`url`: Partial URL under the current site</li><li>`client_country`: Country/Region of the client</li>
-<li>`query_string`: Query string in the URL</li>
+<li>`query_string`: Query string in the request URL</li>
 <li>`request_header`: HTTP request header</li>
          * @type {string || null}
          */
@@ -10008,7 +10015,7 @@ class RuleCondition extends  AbstractModel {
 <li>When `Target=all`, it indicates any site request.</li>
 <li>When `Target=host`, enter the host under the current site, such as "www.maxx55.com".</li>
 <li>When `Target=url`, enter the partial URL path under the current site, such as "/example".</li>
-<li>When `Target=full_url`, enter the complete URL  under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".</li>
+<li>When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".</li>
 <li>When `Target=client_country`, enter the ISO-3166 country/region code.</li>
 <li>When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".</li>
 <li>When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.</li>
@@ -10031,7 +10038,8 @@ class RuleCondition extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 
+         * Whether the parameter name is case insensitive. Default value: `false`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IgnoreNameCase = null;
@@ -14662,7 +14670,7 @@ class CreateZoneRequest extends  AbstractModel {
         /**
          * The access mode. Values:
 <li>`full`: Access through a name server.</li>
-<li>`partial`: Access through a CNAME record.</li>This field will be set to the default value `full` if not specified.
+<li>`partial`: Access through a CNAME record. Note that you should verify your site with the IdentifyZone API before starting site access.</li>If it is left empty, the default value `full` is used.
          * @type {string || null}
          */
         this.Type = null;

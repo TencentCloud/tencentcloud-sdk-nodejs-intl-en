@@ -129,7 +129,7 @@ class DeleteDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+         * The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
          * @type {number || null}
          */
         this.DomainId = null;
@@ -333,7 +333,7 @@ class CreateDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Domain group ID
+         * The group ID of the domain. You can view the group information of this domain via the `DescribeDomainGroupList` API.
          * @type {number || null}
          */
         this.GroupId = null;
@@ -430,7 +430,7 @@ class ModifyDomainStatusRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+         * The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
          * @type {number || null}
          */
         this.DomainId = null;
@@ -494,7 +494,7 @@ class ModifyDomainRemarkRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+         * The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
          * @type {number || null}
          */
         this.DomainId = null;
@@ -536,13 +536,13 @@ class DescribeRecordRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Record ID.
+         * The record ID. You can view all DNS records and their IDs via the `DescribeRecordList` API.
          * @type {number || null}
          */
         this.RecordId = null;
 
         /**
-         * Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+         * The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
          * @type {number || null}
          */
         this.DomainId = null;
@@ -803,13 +803,13 @@ class DeleteRecordRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Record ID.
+         * The record ID. You can view all DNS records and their IDs via the `DescribeRecordList` API.
          * @type {number || null}
          */
         this.RecordId = null;
 
         /**
-         * Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+         * The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
          * @type {number || null}
          */
         this.DomainId = null;
@@ -845,7 +845,7 @@ class DescribeRecordListRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * The ID of the domain for which DNS records are to be obtained. If `DomainId` is passed in, the system will omit the parameter `Domain`.
+         * The ID of the domain whose DNS records are requested. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
          * @type {number || null}
          */
         this.DomainId = null;
@@ -863,19 +863,19 @@ class DescribeRecordListRequest extends  AbstractModel {
         this.RecordType = null;
 
         /**
-         * The split zone name.
+         * The name of the split zone for which DNS records are requested. You can view split zones allowed by this domain via the `DescribeRecordLineList` API.
          * @type {string || null}
          */
         this.RecordLine = null;
 
         /**
-         * The split zone ID. If `RecordLineId` is passed in, the system will omit the parameter `RecordLine`.
+         * The ID of the split zone for which DNS records are requested. If `RecordLineId` is passed in, `RecordLine` is ignored. You can view split zones allowed by this domain via the `DescribeRecordLineList` API.
          * @type {string || null}
          */
         this.RecordLineId = null;
 
         /**
-         * The group ID.
+         * The group ID passed in to get DNS records in the group.
          * @type {number || null}
          */
         this.GroupId = null;
@@ -950,7 +950,7 @@ class DescribeDomainRequest extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+         * The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
          * @type {number || null}
          */
         this.DomainId = null;
@@ -1404,13 +1404,13 @@ class ModifyRecordRequest extends  AbstractModel {
         this.Value = null;
 
         /**
-         * Record ID.
+         * The record ID. You can view all DNS records and their IDs via the `DescribeRecordList` API.
          * @type {number || null}
          */
         this.RecordId = null;
 
         /**
-         * Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+         * The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
          * @type {number || null}
          */
         this.DomainId = null;

@@ -110,7 +110,7 @@ class DnspodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get DNS records of a domain.
+     * This API is used to get the DNS records of a domain.
      * @param {DescribeRecordListRequest} req
      * @param {function(string, DescribeRecordListResponse):void} cb
      * @public

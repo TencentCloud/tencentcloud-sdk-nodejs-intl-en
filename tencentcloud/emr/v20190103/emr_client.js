@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
 const MultiDiskMC = models.MultiDiskMC;
 const AddUsersForUserManagerRequest = models.AddUsersForUserManagerRequest;
 const ModifyResourceSchedulerRequest = models.ModifyResourceSchedulerRequest;
@@ -87,7 +88,7 @@ const EmrListInstance = models.EmrListInstance;
 const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
 const DescribeResourceScheduleResponse = models.DescribeResourceScheduleResponse;
 const CdbInfo = models.CdbInfo;
-const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
+const PriceDetail = models.PriceDetail;
 
 
 /**
@@ -112,7 +113,7 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query EMR instances.
+     * This API is used to query the information of instances in a cluster.
      * @param {DescribeInstancesRequest} req
      * @param {function(string, DescribeInstancesResponse):void} cb
      * @public
@@ -134,7 +135,7 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the information of a hardware node.
+     * This API is used to query the information of nodes in a cluster.
      * @param {DescribeClusterNodesRequest} req
      * @param {function(string, DescribeClusterNodesResponse):void} cb
      * @public
@@ -157,7 +158,7 @@ This API is used to export users in batches. For a Kerberos cluster, set `NeedKe
     }
 
     /**
-     * This API is used to query EMR cluster instances.
+     * This API is used to query the cluster list.
      * @param {DescribeInstancesListRequest} req
      * @param {function(string, DescribeInstancesListResponse):void} cb
      * @public
@@ -201,7 +202,7 @@ This API is used to export users in batches. For a Kerberos cluster, set `NeedKe
     }
 
     /**
-     * This API is used to get data from the YARN Resource Scheduling page.
+     * This API is used to query the data of YARN Resource Scheduling.
      * @param {DescribeResourceScheduleRequest} req
      * @param {function(string, DescribeResourceScheduleResponse):void} cb
      * @public

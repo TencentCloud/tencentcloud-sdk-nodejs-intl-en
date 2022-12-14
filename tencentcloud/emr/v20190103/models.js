@@ -17,6 +17,243 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ScaleOutInstance request structure.
+ * @class
+ */
+class ScaleOutInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time unit of scale-out. Valid values:
+<li>s: Second. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
+<li>m: Month. When `PayMode` is 1, `TimeUnit` can only be `m`.</li>
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * Time span of scale-out, which needs to be used together with `TimeUnit`.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance billing mode. Valid value:
+<li>0: Pay-as-you-go.</li>
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Client token.
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * Bootstrap script settings.
+         * @type {Array.<PreExecuteFileSettings> || null}
+         */
+        this.PreExecutedFileSettings = null;
+
+        /**
+         * Number of task nodes to be added.
+         * @type {number || null}
+         */
+        this.TaskCount = null;
+
+        /**
+         * Number of core nodes to be added.
+         * @type {number || null}
+         */
+        this.CoreCount = null;
+
+        /**
+         * Processes unnecessary for scale-out.
+         * @type {Array.<number> || null}
+         */
+        this.UnNecessaryNodeList = null;
+
+        /**
+         * Number of router nodes to be added.
+         * @type {number || null}
+         */
+        this.RouterCount = null;
+
+        /**
+         * Deployed service.
+<li>`SoftDeployInfo` and `ServiceNodeInfo` are in the same group and mutually exclusive with `UnNecessaryNodeList`.</li>
+<li>The combination of `SoftDeployInfo` and `ServiceNodeInfo` is recommended.</li>
+         * @type {Array.<number> || null}
+         */
+        this.SoftDeployInfo = null;
+
+        /**
+         * Started process.
+         * @type {Array.<number> || null}
+         */
+        this.ServiceNodeInfo = null;
+
+        /**
+         * List of spread placement group IDs. Only one can be specified currently.
+         * @type {Array.<string> || null}
+         */
+        this.DisasterRecoverGroupIds = null;
+
+        /**
+         * List of tags bound to added nodes.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Resource type selected for scaling. Valid values: `host` (general CVM resource) and `pod` (resource provided by TKE or EKS cluster).
+         * @type {string || null}
+         */
+        this.HardwareResourceType = null;
+
+        /**
+         * Specified information such as pod specification and source for scale-out with pod resources.
+         * @type {PodSpec || null}
+         */
+        this.PodSpec = null;
+
+        /**
+         * Server group name selected for ClickHouse cluster scale-out.
+         * @type {string || null}
+         */
+        this.ClickHouseClusterName = null;
+
+        /**
+         * Server group type selected for ClickHouse cluster scale-out. Valid values: `new` (create a group) and `old` (select an existing group).
+         * @type {string || null}
+         */
+        this.ClickHouseClusterType = null;
+
+        /**
+         * Yarn node label specified for rule-based scale-out.
+         * @type {string || null}
+         */
+        this.YarnNodeLabel = null;
+
+        /**
+         * Custom pod permission and parameter
+         * @type {PodParameter || null}
+         */
+        this.PodParameter = null;
+
+        /**
+         * Number of master nodes to be added.
+When a ClickHouse cluster is scaled, this parameter does not take effect.
+When a Kafka cluster is scaled, this parameter does not take effect.
+When `HardwareResourceType` is `pod`, this parameter does not take effect.
+         * @type {number || null}
+         */
+        this.MasterCount = null;
+
+        /**
+         * Whether to start the service after scale-out. `true`: Yes; `false`: No.
+         * @type {string || null}
+         */
+        this.StartServiceAfterScaleOut = null;
+
+        /**
+         * AZ, which defaults to the primary AZ of the cluster.
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Subnet, which defaults to the subnet used when the cluster is created.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Pre-defined configuration set
+         * @type {string || null}
+         */
+        this.ScaleOutServiceConfAssign = null;
+
+        /**
+         * Whether to enable auto-renewal. Valid values: `0` (no), `1` (yes).
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+        if (params.PreExecutedFileSettings) {
+            this.PreExecutedFileSettings = new Array();
+            for (let z in params.PreExecutedFileSettings) {
+                let obj = new PreExecuteFileSettings();
+                obj.deserialize(params.PreExecutedFileSettings[z]);
+                this.PreExecutedFileSettings.push(obj);
+            }
+        }
+        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
+        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
+        this.UnNecessaryNodeList = 'UnNecessaryNodeList' in params ? params.UnNecessaryNodeList : null;
+        this.RouterCount = 'RouterCount' in params ? params.RouterCount : null;
+        this.SoftDeployInfo = 'SoftDeployInfo' in params ? params.SoftDeployInfo : null;
+        this.ServiceNodeInfo = 'ServiceNodeInfo' in params ? params.ServiceNodeInfo : null;
+        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
+
+        if (params.PodSpec) {
+            let obj = new PodSpec();
+            obj.deserialize(params.PodSpec)
+            this.PodSpec = obj;
+        }
+        this.ClickHouseClusterName = 'ClickHouseClusterName' in params ? params.ClickHouseClusterName : null;
+        this.ClickHouseClusterType = 'ClickHouseClusterType' in params ? params.ClickHouseClusterType : null;
+        this.YarnNodeLabel = 'YarnNodeLabel' in params ? params.YarnNodeLabel : null;
+
+        if (params.PodParameter) {
+            let obj = new PodParameter();
+            obj.deserialize(params.PodParameter)
+            this.PodParameter = obj;
+        }
+        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
+        this.StartServiceAfterScaleOut = 'StartServiceAfterScaleOut' in params ? params.StartServiceAfterScaleOut : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ScaleOutServiceConfAssign = 'ScaleOutServiceConfAssign' in params ? params.ScaleOutServiceConfAssign : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+
+    }
+}
+
+/**
  * Multi-cloud disk parameters
  * @class
  */
@@ -1781,27 +2018,19 @@ class CreateInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Product ID. Different product IDs represent different EMR product versions. Valid values:
-<li>1: EMR v1.3.1</li>
-<li>2: EMR v2.0.1</li>
-<li>4: EMR v2.1.0</li>
-<li>7: EMR v3.0.0</li>
-<li>9: EMR v2.2.0</li>
-<li>11: ClickHouse v1.0.0</li>
-<li>13: Druid v1.0.0</li>
-<li>15: EMR v2.2.1</li>
+         * The product ID. Different product IDs represent different EMR product versions. Valid values:
 <li>16: EMR v2.3.0</li>
-<li>17: ClickHouse v1.1.0</li>
-<li>19: EMR v2.4.0</li>
 <li>20: EMR v2.5.0</li>
-<li>22: ClickHouse v1.2.0</li>
-<li>24: EMR TianQiong v1.0.0</li>
 <li>25: EMR v3.1.0</li>
-<li>26: Doris v1.0.0</li>
 <li>27: Kafka v1.0.0</li>
-<li>28: EMR v3.2.0</li>
-<li>29: EMR v2.5.1</li>
 <li>30: EMR v2.6.0</li>
+<li>33: EMR v3.2.1</li>
+<li>34: EMR v3.3.0</li>
+<li>36: StarRocks v1.0.0</li>
+<li>37: EMR v3.4.0</li>
+<li>38: EMR v2.7.0</li>
+<li>39: StarRocks v1.1.0</li>
+<li>41: Druid v1.1.0</li>
          * @type {number || null}
          */
         this.ProductId = null;
@@ -2559,16 +2788,16 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` field in the return value of the `DescribeProject` API. If 0 is entered, the default project will be used.
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * AZ where the instance resides, such as ap-guangzhou-1. You can call the `DescribeZones` API and see the `Zone` field to get the value of this parameter.
+         * The ID of the availability zone where the instance resides, such as `ap-guangzhou-1`. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain this ID from the `Zone` field in the response.
          * @type {string || null}
          */
         this.Zone = null;
+
+        /**
+         * The ID of the project to which the instance belongs. You can call the [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1) and obtain this ID from the `projectId` field in the response. If this is left empty, the ID of the default project is used.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
 
     }
 
@@ -2579,8 +2808,8 @@ class Placement extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -3263,6 +3492,12 @@ class InquiryPriceUpdateInstanceRequest extends  AbstractModel {
          */
         this.Currency = null;
 
+        /**
+         * The resource ID list for batch configuration change.
+         * @type {Array.<string> || null}
+         */
+        this.ResourceIdList = null;
+
     }
 
     /**
@@ -3288,6 +3523,7 @@ class InquiryPriceUpdateInstanceRequest extends  AbstractModel {
             this.Placement = obj;
         }
         this.Currency = 'Currency' in params ? params.Currency : null;
+        this.ResourceIdList = 'ResourceIdList' in params ? params.ResourceIdList : null;
 
     }
 }
@@ -3301,13 +3537,13 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * Password
+         * The login password of the instance, which contains 8 to 16 uppercase letters, lowercase letters, digits, and special characters (only !@%^*) and cannot start with a special character.
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * Public Key
+         * The key ID. After an instance is associated with a key, you can access it with the private key in the key pair. You can call [DescribeKeyPairs](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `PublicKeyId`.
          * @type {string || null}
          */
         this.PublicKeyId = null;
@@ -4276,6 +4512,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ErrorMsg = null;
 
         /**
+         * The response data.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -4292,6 +4535,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         }
         this.IsDraft = 'IsDraft' in params ? params.IsDraft : null;
         this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.Data = 'Data' in params ? params.Data : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4875,6 +5119,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ServiceClient = null;
 
+        /**
+         * Enabling instance protection for this instance. Valid values: `true` (enable) and `false` (disable).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.DisableApiTermination = null;
+
+        /**
+         * The billing version. Valid values: `0` (original billing) and `1` (new billing)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TradeVersion = null;
+
     }
 
     /**
@@ -4958,6 +5216,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsFederation = 'IsFederation' in params ? params.IsFederation : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
         this.ServiceClient = 'ServiceClient' in params ? params.ServiceClient : null;
+        this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
+        this.TradeVersion = 'TradeVersion' in params ? params.TradeVersion : null;
 
     }
 }
@@ -5051,6 +5311,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TimeSpan = null;
 
         /**
+         * Pricing details
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PriceDetail> || null}
+         */
+        this.PriceDetail = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -5069,6 +5336,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+
+        if (params.PriceDetail) {
+            this.PriceDetail = new Array();
+            for (let z in params.PriceDetail) {
+                let obj = new PriceDetail();
+                obj.deserialize(params.PriceDetail[z]);
+                this.PriceDetail.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5767,176 +6043,36 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ScaleOutInstance request structure.
+ * Pricing details
  * @class
  */
-class ScaleOutInstanceRequest extends  AbstractModel {
+class PriceDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Time unit of scale-out. Valid values:
-<li>s: Second. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
-<li>m: Month. When `PayMode` is 1, `TimeUnit` can only be `m`.</li>
+         * The node ID
          * @type {string || null}
          */
-        this.TimeUnit = null;
+        this.ResourceId = null;
 
         /**
-         * Time span of scale-out, which needs to be used together with `TimeUnit`.
+         * The price formula
+         * @type {string || null}
+         */
+        this.Formula = null;
+
+        /**
+         * The original price
          * @type {number || null}
          */
-        this.TimeSpan = null;
+        this.OriginalCost = null;
 
         /**
-         * Instance ID.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance billing mode. Valid value:
-<li>0: Pay-as-you-go.</li>
+         * The discount price
          * @type {number || null}
          */
-        this.PayMode = null;
-
-        /**
-         * Client token.
-         * @type {string || null}
-         */
-        this.ClientToken = null;
-
-        /**
-         * Bootstrap script settings.
-         * @type {Array.<PreExecuteFileSettings> || null}
-         */
-        this.PreExecutedFileSettings = null;
-
-        /**
-         * Number of task nodes to be added.
-         * @type {number || null}
-         */
-        this.TaskCount = null;
-
-        /**
-         * Number of core nodes to be added.
-         * @type {number || null}
-         */
-        this.CoreCount = null;
-
-        /**
-         * Processes unnecessary for scale-out.
-         * @type {Array.<number> || null}
-         */
-        this.UnNecessaryNodeList = null;
-
-        /**
-         * Number of router nodes to be added.
-         * @type {number || null}
-         */
-        this.RouterCount = null;
-
-        /**
-         * Deployed service.
-<li>`SoftDeployInfo` and `ServiceNodeInfo` are in the same group and mutually exclusive with `UnNecessaryNodeList`.</li>
-<li>The combination of `SoftDeployInfo` and `ServiceNodeInfo` is recommended.</li>
-         * @type {Array.<number> || null}
-         */
-        this.SoftDeployInfo = null;
-
-        /**
-         * Started process.
-         * @type {Array.<number> || null}
-         */
-        this.ServiceNodeInfo = null;
-
-        /**
-         * List of spread placement group IDs. Only one can be specified currently.
-         * @type {Array.<string> || null}
-         */
-        this.DisasterRecoverGroupIds = null;
-
-        /**
-         * List of tags bound to added nodes.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Resource type selected for scaling. Valid values: `host` (general CVM resource) and `pod` (resource provided by TKE or EKS cluster).
-         * @type {string || null}
-         */
-        this.HardwareResourceType = null;
-
-        /**
-         * Specified information such as pod specification and source for scale-out with pod resources.
-         * @type {PodSpec || null}
-         */
-        this.PodSpec = null;
-
-        /**
-         * Server group name selected for ClickHouse cluster scale-out.
-         * @type {string || null}
-         */
-        this.ClickHouseClusterName = null;
-
-        /**
-         * Server group type selected for ClickHouse cluster scale-out. Valid values: `new` (create a group) and `old` (select an existing group).
-         * @type {string || null}
-         */
-        this.ClickHouseClusterType = null;
-
-        /**
-         * Yarn node label specified for rule-based scale-out.
-         * @type {string || null}
-         */
-        this.YarnNodeLabel = null;
-
-        /**
-         * Custom pod permission and parameter
-         * @type {PodParameter || null}
-         */
-        this.PodParameter = null;
-
-        /**
-         * Number of master nodes to be added.
-When a ClickHouse cluster is scaled, this parameter does not take effect.
-When a Kafka cluster is scaled, this parameter does not take effect.
-When `HardwareResourceType` is `pod`, this parameter does not take effect.
-         * @type {number || null}
-         */
-        this.MasterCount = null;
-
-        /**
-         * Whether to start the service after scale-out. `true`: Yes; `false`: No.
-         * @type {string || null}
-         */
-        this.StartServiceAfterScaleOut = null;
-
-        /**
-         * AZ, which defaults to the primary AZ of the cluster.
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * Subnet, which defaults to the subnet used when the cluster is created.
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Pre-defined configuration set
-         * @type {string || null}
-         */
-        this.ScaleOutServiceConfAssign = null;
-
-        /**
-         * Whether to enable auto-renewal. Valid values: `0` (no), `1` (yes).
-         * @type {number || null}
-         */
-        this.AutoRenew = null;
+        this.DiscountCost = null;
 
     }
 
@@ -5947,63 +6083,16 @@ When `HardwareResourceType` is `pod`, this parameter does not take effect.
         if (!params) {
             return;
         }
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
-
-        if (params.PreExecutedFileSettings) {
-            this.PreExecutedFileSettings = new Array();
-            for (let z in params.PreExecutedFileSettings) {
-                let obj = new PreExecuteFileSettings();
-                obj.deserialize(params.PreExecutedFileSettings[z]);
-                this.PreExecutedFileSettings.push(obj);
-            }
-        }
-        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
-        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
-        this.UnNecessaryNodeList = 'UnNecessaryNodeList' in params ? params.UnNecessaryNodeList : null;
-        this.RouterCount = 'RouterCount' in params ? params.RouterCount : null;
-        this.SoftDeployInfo = 'SoftDeployInfo' in params ? params.SoftDeployInfo : null;
-        this.ServiceNodeInfo = 'ServiceNodeInfo' in params ? params.ServiceNodeInfo : null;
-        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
-
-        if (params.PodSpec) {
-            let obj = new PodSpec();
-            obj.deserialize(params.PodSpec)
-            this.PodSpec = obj;
-        }
-        this.ClickHouseClusterName = 'ClickHouseClusterName' in params ? params.ClickHouseClusterName : null;
-        this.ClickHouseClusterType = 'ClickHouseClusterType' in params ? params.ClickHouseClusterType : null;
-        this.YarnNodeLabel = 'YarnNodeLabel' in params ? params.YarnNodeLabel : null;
-
-        if (params.PodParameter) {
-            let obj = new PodParameter();
-            obj.deserialize(params.PodParameter)
-            this.PodParameter = obj;
-        }
-        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
-        this.StartServiceAfterScaleOut = 'StartServiceAfterScaleOut' in params ? params.StartServiceAfterScaleOut : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.ScaleOutServiceConfAssign = 'ScaleOutServiceConfAssign' in params ? params.ScaleOutServiceConfAssign : null;
-        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Formula = 'Formula' in params ? params.Formula : null;
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
 
     }
 }
 
 module.exports = {
+    ScaleOutInstanceRequest: ScaleOutInstanceRequest,
     MultiDiskMC: MultiDiskMC,
     AddUsersForUserManagerRequest: AddUsersForUserManagerRequest,
     ModifyResourceSchedulerRequest: ModifyResourceSchedulerRequest,
@@ -6075,6 +6164,6 @@ module.exports = {
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
     DescribeResourceScheduleResponse: DescribeResourceScheduleResponse,
     CdbInfo: CdbInfo,
-    ScaleOutInstanceRequest: ScaleOutInstanceRequest,
+    PriceDetail: PriceDetail,
 
 }

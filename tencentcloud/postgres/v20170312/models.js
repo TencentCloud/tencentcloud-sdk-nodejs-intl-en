@@ -1648,6 +1648,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.SubnetId = null;
 
+        /**
+         * Database connection protocol type. Valid values: `postgresql`, `mssql` (MSSQL-compatible)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProtocolType = null;
+
     }
 
     /**
@@ -1664,6 +1671,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Status = 'Status' in params ? params.Status : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ProtocolType = 'ProtocolType' in params ? params.ProtocolType : null;
 
     }
 }
@@ -3140,6 +3148,83 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * Parameter information of each version
+ * @class
+ */
+class ParamVersionRelation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The kernel version that corresponds to the parameter information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
+        /**
+         * Default parameter value under the kernel version and specification of the instance
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Unit of the parameter value. If the parameter has no unit, this field will return null.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+        /**
+         * The maximum value of the `integer` or `real` parameter
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Max = null;
+
+        /**
+         * The minimum value of the `integer` or `real` parameter
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Min = null;
+
+        /**
+         * Value range of the enum parameter
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
+
+    }
+}
+
+/**
  * DescribeReadOnlyGroups response structure.
  * @class
  */
@@ -3539,6 +3624,83 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.NetworkAccessList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Parameter information of each specification
+ * @class
+ */
+class ParamSpecRelation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Parameter name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The specification that corresponds to the parameter information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Memory = null;
+
+        /**
+         * The default parameter value under this specification
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Unit of the parameter value. If the parameter has no unit, this field will return null.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+        /**
+         * The maximum value of the `integer` or `real` parameter
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Max = null;
+
+        /**
+         * The minimum value of the `integer` or `real` parameter
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Min = null;
+
+        /**
+         * Value range of the enum parameter
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+        this.Max = 'Max' in params ? params.Max : null;
+        this.Min = 'Min' in params ? params.Min : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
 
     }
 }
@@ -4859,8 +5021,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ParamValueType = null;
 
         /**
-         * Value unit of the parameter. If the parameter has no unit, this field will return an empty string.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Unit of the parameter value. If the parameter has no unit, this field will return null.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Unit = null;
@@ -4880,18 +5042,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.CurrentValue = null;
 
         /**
-         * Value range of the enum parameter
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.EnumValue = null;
-
-        /**
          * The maximum value of the `integer` or `real` parameter
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Max = null;
+
+        /**
+         * Value range of the enum parameter
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.EnumValue = null;
 
         /**
          * The minimum value of the `integer` or `real` parameter
@@ -4956,6 +5118,27 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.LastModifyTime = null;
 
+        /**
+         * Primary-standby constraint. Valid values: `0` (no constraint), `1` (The parameter value of the standby server must be greater than that of the primary server), `2` (The parameter value of the primary server must be greater than that of the standby server.)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StandbyRelated = null;
+
+        /**
+         * Associated parameter version information, which refers to the detailed parameter information of the kernel version.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ParamVersionRelation> || null}
+         */
+        this.VersionRelationSet = null;
+
+        /**
+         * Associated parameter specification information, which refers to the detailed parameter information of the specifications.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ParamSpecRelation> || null}
+         */
+        this.SpecRelationSet = null;
+
     }
 
     /**
@@ -4971,8 +5154,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Unit = 'Unit' in params ? params.Unit : null;
         this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
         this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
-        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
         this.Max = 'Max' in params ? params.Max : null;
+        this.EnumValue = 'EnumValue' in params ? params.EnumValue : null;
         this.Min = 'Min' in params ? params.Min : null;
         this.ParamDescriptionCH = 'ParamDescriptionCH' in params ? params.ParamDescriptionCH : null;
         this.ParamDescriptionEN = 'ParamDescriptionEN' in params ? params.ParamDescriptionEN : null;
@@ -4982,6 +5165,25 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.SpecRelated = 'SpecRelated' in params ? params.SpecRelated : null;
         this.Advanced = 'Advanced' in params ? params.Advanced : null;
         this.LastModifyTime = 'LastModifyTime' in params ? params.LastModifyTime : null;
+        this.StandbyRelated = 'StandbyRelated' in params ? params.StandbyRelated : null;
+
+        if (params.VersionRelationSet) {
+            this.VersionRelationSet = new Array();
+            for (let z in params.VersionRelationSet) {
+                let obj = new ParamVersionRelation();
+                obj.deserialize(params.VersionRelationSet[z]);
+                this.VersionRelationSet.push(obj);
+            }
+        }
+
+        if (params.SpecRelationSet) {
+            this.SpecRelationSet = new Array();
+            for (let z in params.SpecRelationSet) {
+                let obj = new ParamSpecRelation();
+                obj.deserialize(params.SpecRelationSet[z]);
+                this.SpecRelationSet.push(obj);
+            }
+        }
 
     }
 }
@@ -5290,13 +5492,13 @@ class InquiryPriceRenewDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * Total cost before discount; for example, 24650 indicates 246.5 CNY
+         * Published price in cents. For example, 24650 indicates 246.5 USD.
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * Actual amount payable; for example, 24650 indicates 246.5 CNY
+         * Discounted total amount. For example, 24650 indicates 246.5 USD.
          * @type {number || null}
          */
         this.Price = null;
@@ -8713,12 +8915,14 @@ module.exports = {
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeZonesRequest: DescribeZonesRequest,
     SpecInfo: SpecInfo,
+    ParamVersionRelation: ParamVersionRelation,
     DescribeReadOnlyGroupsResponse: DescribeReadOnlyGroupsResponse,
     SetAutoRenewFlagResponse: SetAutoRenewFlagResponse,
     NetworkAccess: NetworkAccess,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     ReadOnlyGroup: ReadOnlyGroup,
+    ParamSpecRelation: ParamSpecRelation,
     PgDeal: PgDeal,
     DeleteReadOnlyGroupNetworkAccessResponse: DeleteReadOnlyGroupNetworkAccessResponse,
     DescribeDBErrlogsRequest: DescribeDBErrlogsRequest,

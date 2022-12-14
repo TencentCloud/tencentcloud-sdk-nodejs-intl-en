@@ -32,14 +32,16 @@ const InquirePriceCreateDisksRequest = models.InquirePriceCreateDisksRequest;
 const ModifyBundle = models.ModifyBundle;
 const DetachCcnResponse = models.DetachCcnResponse;
 const CreateInstanceSnapshotResponse = models.CreateInstanceSnapshotResponse;
+const DescribeScenesResponse = models.DescribeScenesResponse;
 const InquirePriceRenewInstancesResponse = models.InquirePriceRenewInstancesResponse;
 const DeleteFirewallRulesResponse = models.DeleteFirewallRulesResponse;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
-const DescribeGeneralResourceQuotasRequest = models.DescribeGeneralResourceQuotasRequest;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
 const ResetInstanceBlueprint = models.ResetInstanceBlueprint;
 const DescribeBundlesResponse = models.DescribeBundlesResponse;
+const InstancePriceDetail = models.InstancePriceDetail;
 const InquirePriceRenewInstancesRequest = models.InquirePriceRenewInstancesRequest;
 const DiscountDetail = models.DiscountDetail;
 const DescribeDiskConfigsRequest = models.DescribeDiskConfigsRequest;
@@ -84,19 +86,21 @@ const SnapshotDeniedActions = models.SnapshotDeniedActions;
 const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
 const ModifyDisksRenewFlagResponse = models.ModifyDisksRenewFlagResponse;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
+const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
 const DescribeDisksResponse = models.DescribeDisksResponse;
 const DescribeBundleDiscountResponse = models.DescribeBundleDiscountResponse;
-const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
+const DescribeAllScenesRequest = models.DescribeAllScenesRequest;
 const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
 const DataDiskPrice = models.DataDiskPrice;
+const SceneInfo = models.SceneInfo;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const DeleteBlueprintsResponse = models.DeleteBlueprintsResponse;
 const ModifyInstancesLoginKeyPairAttributeRequest = models.ModifyInstancesLoginKeyPairAttributeRequest;
 const StopInstancesResponse = models.StopInstancesResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const ModifyBlueprintAttributeResponse = models.ModifyBlueprintAttributeResponse;
-const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
+const DescribeScenesRequest = models.DescribeScenesRequest;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeInstancesDiskNumResponse = models.DescribeInstancesDiskNumResponse;
 const InquirePriceCreateBlueprintResponse = models.InquirePriceCreateBlueprintResponse;
@@ -116,7 +120,9 @@ const DiskPrice = models.DiskPrice;
 const DescribeCcnAttachedInstancesResponse = models.DescribeCcnAttachedInstancesResponse;
 const DescribeBundlesRequest = models.DescribeBundlesRequest;
 const Blueprint = models.Blueprint;
+const TotalPrice = models.TotalPrice;
 const DeniedAction = models.DeniedAction;
+const DescribeAllScenesResponse = models.DescribeAllScenesResponse;
 const ModifyInstancesLoginKeyPairAttributeResponse = models.ModifyInstancesLoginKeyPairAttributeResponse;
 const InquirePriceRenewDisksResponse = models.InquirePriceRenewDisksResponse;
 const Bundle = models.Bundle;
@@ -146,7 +152,7 @@ const DeleteBlueprintsRequest = models.DeleteBlueprintsRequest;
 const FirewallRuleInfo = models.FirewallRuleInfo;
 const CreateFirewallRulesResponse = models.CreateFirewallRulesResponse;
 const DescribeDisksRequest = models.DescribeDisksRequest;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const DescribeGeneralResourceQuotasRequest = models.DescribeGeneralResourceQuotasRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const CreateBlueprintResponse = models.CreateBlueprintResponse;
 const PolicyDetail = models.PolicyDetail;
@@ -181,11 +187,13 @@ const ModifySnapshotAttributeResponse = models.ModifySnapshotAttributeResponse;
 const DescribeGeneralResourceQuotasResponse = models.DescribeGeneralResourceQuotasResponse;
 const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const StopInstancesRequest = models.StopInstancesRequest;
+const DescribeFirewallRulesTemplateResponse = models.DescribeFirewallRulesTemplateResponse;
 const DescribeModifyInstanceBundlesRequest = models.DescribeModifyInstanceBundlesRequest;
 const ResetInstanceResponse = models.ResetInstanceResponse;
 const DescribeFirewallRulesRequest = models.DescribeFirewallRulesRequest;
 const DiskDeniedActions = models.DiskDeniedActions;
 const InquirePriceCreateInstancesRequest = models.InquirePriceCreateInstancesRequest;
+const Scene = models.Scene;
 const CcnAttachedInstance = models.CcnAttachedInstance;
 const DescribeModifyInstanceBundlesResponse = models.DescribeModifyInstanceBundlesResponse;
 const AttachDetail = models.AttachDetail;
@@ -255,14 +263,14 @@ In the `FirewallRule` parameter:
     }
 
     /**
-     * This API is used to query the number of cloud disks attached to instances.
-     * @param {DescribeInstancesDiskNumRequest} req
-     * @param {function(string, DescribeInstancesDiskNumResponse):void} cb
+     * This API is used to query the list of scenes in all regions.
+     * @param {DescribeAllScenesRequest} req
+     * @param {function(string, DescribeAllScenesResponse):void} cb
      * @public
      */
-    DescribeInstancesDiskNum(req, cb) {
-        let resp = new DescribeInstancesDiskNumResponse();
-        this.request("DescribeInstancesDiskNum", req, resp, cb);
+    DescribeAllScenes(req, cb) {
+        let resp = new DescribeAllScenesResponse();
+        this.request("DescribeAllScenes", req, resp, cb);
     }
 
     /**
@@ -368,6 +376,17 @@ In the `FirewallRules` parameter:
     DescribeBundles(req, cb) {
         let resp = new DescribeBundlesResponse();
         this.request("DescribeBundles", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the number of cloud disks attached to instances.
+     * @param {DescribeInstancesDiskNumRequest} req
+     * @param {function(string, DescribeInstancesDiskNumResponse):void} cb
+     * @public
+     */
+    DescribeInstancesDiskNum(req, cb) {
+        let resp = new DescribeInstancesDiskNumResponse();
+        this.request("DescribeInstancesDiskNum", req, resp, cb);
     }
 
     /**
@@ -931,14 +950,14 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     }
 
     /**
-     * This API is used to query the list of operation limits of one or more snapshots.
-     * @param {DescribeSnapshotsDeniedActionsRequest} req
-     * @param {function(string, DescribeSnapshotsDeniedActionsResponse):void} cb
+     * This API is used to query the list of scenes.
+     * @param {DescribeScenesRequest} req
+     * @param {function(string, DescribeScenesResponse):void} cb
      * @public
      */
-    DescribeSnapshotsDeniedActions(req, cb) {
-        let resp = new DescribeSnapshotsDeniedActionsResponse();
-        this.request("DescribeSnapshotsDeniedActions", req, resp, cb);
+    DescribeScenes(req, cb) {
+        let resp = new DescribeScenesResponse();
+        this.request("DescribeScenes", req, resp, cb);
     }
 
     /**
@@ -1032,6 +1051,17 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     CreateBlueprint(req, cb) {
         let resp = new CreateBlueprintResponse();
         this.request("CreateBlueprint", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of operation limits of one or more snapshots.
+     * @param {DescribeSnapshotsDeniedActionsRequest} req
+     * @param {function(string, DescribeSnapshotsDeniedActionsResponse):void} cb
+     * @public
+     */
+    DescribeSnapshotsDeniedActions(req, cb) {
+        let resp = new DescribeSnapshotsDeniedActionsResponse();
+        this.request("DescribeSnapshotsDeniedActions", req, resp, cb);
     }
 
     /**

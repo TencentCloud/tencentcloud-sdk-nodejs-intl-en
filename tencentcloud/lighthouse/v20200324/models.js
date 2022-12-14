@@ -740,6 +740,56 @@ class CreateInstanceSnapshotResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeScenes response structure.
+ * @class
+ */
+class DescribeScenesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of scenes
+         * @type {Array.<Scene> || null}
+         */
+        this.SceneSet = null;
+
+        /**
+         * Total number of scenes
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SceneSet) {
+            this.SceneSet = new Array();
+            for (let z in params.SceneSet) {
+                let obj = new Scene();
+                obj.deserialize(params.SceneSet[z]);
+                this.SceneSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InquirePriceRenewInstances response structure.
  * @class
  */
@@ -748,7 +798,7 @@ class InquirePriceRenewInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Price query information.
+         * Price information. It defaults to the price information of the first instance in the list.
          * @type {Price || null}
          */
         this.Price = null;
@@ -759,6 +809,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {Array.<DataDiskPrice> || null}
          */
         this.DataDiskPriceSet = null;
+
+        /**
+         * Price list of the instances to be renewed.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<InstancePriceDetail> || null}
+         */
+        this.InstancePriceDetailSet = null;
+
+        /**
+         * Total price
+         * @type {TotalPrice || null}
+         */
+        this.TotalPrice = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -789,6 +852,21 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.DataDiskPriceSet[z]);
                 this.DataDiskPriceSet.push(obj);
             }
+        }
+
+        if (params.InstancePriceDetailSet) {
+            this.InstancePriceDetailSet = new Array();
+            for (let z in params.InstancePriceDetailSet) {
+                let obj = new InstancePriceDetail();
+                obj.deserialize(params.InstancePriceDetailSet[z]);
+                this.InstancePriceDetailSet.push(obj);
+            }
+        }
+
+        if (params.TotalPrice) {
+            let obj = new TotalPrice();
+            obj.deserialize(params.TotalPrice)
+            this.TotalPrice = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -859,29 +937,30 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
 }
 
 /**
- * DescribeGeneralResourceQuotas request structure.
+ * DescribeInstances response structure.
  * @class
  */
-class DescribeGeneralResourceQuotasRequest extends  AbstractModel {
+class DescribeInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Resource name list. Values:
-- `GENERAL_BUNDLE_INSTANCE`: General bundle
-- `STORAGE_BUNDLE_INSTANCE`:  Storage bundle 
-- `ENTERPRISE_BUNDLE_INSTANCE`: Enterprise bundle 
-- `EXCLUSIVE_BUNDLE_INSTANCE`： Dedicated bundle
-- `BEFAST_BUNDLE_INSTANCE`: BeFast bundle
-- `USER_KEY_PAIR`: Key pair
-- `SNAPSHOT`: Snapshot
-- `BLUEPRINT`: Custom image
-- `FREE_BLUEPRINT`: Free custom image
-- `DATA_DISK`: Data disk
-- `FIREWALL_RULE`: Firewall rules
-         * @type {Array.<string> || null}
+         * Number of eligible instances.
+         * @type {number || null}
          */
-        this.ResourceNames = null;
+        this.TotalCount = null;
+
+        /**
+         * List of instance details
+         * @type {Array.<Instance> || null}
+         */
+        this.InstanceSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -892,7 +971,17 @@ class DescribeGeneralResourceQuotasRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceNames = 'ResourceNames' in params ? params.ResourceNames : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceSet) {
+            this.InstanceSet = new Array();
+            for (let z in params.InstanceSet) {
+                let obj = new Instance();
+                obj.deserialize(params.InstanceSet[z]);
+                this.InstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1068,6 +1157,63 @@ class DescribeBundlesResponse extends  AbstractModel {
 }
 
 /**
+ * Instance price details
+ * @class
+ */
+class InstancePriceDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Price query information.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {InstancePrice || null}
+         */
+        this.InstancePrice = null;
+
+        /**
+         * 
+         * @type {Array.<DiscountDetail> || null}
+         */
+        this.DiscountDetail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.InstancePrice) {
+            let obj = new InstancePrice();
+            obj.deserialize(params.InstancePrice)
+            this.InstancePrice = obj;
+        }
+
+        if (params.DiscountDetail) {
+            this.DiscountDetail = new Array();
+            for (let z in params.DiscountDetail) {
+                let obj = new DiscountDetail();
+                obj.deserialize(params.DiscountDetail[z]);
+                this.DiscountDetail.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * InquirePriceRenewInstances request structure.
  * @class
  */
@@ -1076,7 +1222,7 @@ class InquirePriceRenewInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance to be renewed.
+         * IDs of the instances to be renewed. Each request can contain up to 50 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1088,13 +1234,13 @@ class InquirePriceRenewInstancesRequest extends  AbstractModel {
         this.InstanceChargePrepaid = null;
 
         /**
-         * Whether to renew the data disk
+         * Whether to renew the data disk. Default: `false`.
          * @type {boolean || null}
          */
         this.RenewDataDisk = null;
 
         /**
-         * Whether the data disk has the same expiration time as the instance
+         * Whether to align the data disk expiration with the instance expiration time. Default: `false`.
          * @type {boolean || null}
          */
         this.AlignInstanceExpiredTime = null;
@@ -2616,28 +2762,28 @@ class DescribeBlueprintsRequest extends  AbstractModel {
 
         /**
          * Filter list
-<li>blueprint-id</li>Filter by **image ID**.
+<li>blueprint-id</li>Filter by the **image ID**.
 Type: String
 Required: no
-<li>blueprint-type</li>Filter by **image type**.
+<li>blueprint-type</li>Filter by the **image type**.
 Valid values: `APP_OS` (application image); `PURE_OS` (system image); `PRIVATE` (custom image) and `SHARED` (shared image)
 Type: String
 Required: no
-<li>platform-type</li>Filter by **image operating system**.
+<li>platform-type</li>Filter by the **image operating system**.
 Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 Type: String
 Required: no
-<li>blueprint-name</li>Filter by **image name**.
+<li>blueprint-name</li>Filter by the **image name**.
 Type: String
 Required: no
-<li>blueprint-state</li>Filter by **image status**.
+<li>blueprint-state</li>Filter by the **image status**.
 Type: String
 Required: no
-<li>scene-id</li>Filter by **scene ID**.
+<li>scene-id</li>Filter by the **scene ID**.
 Type: String
 Required: no
 
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
+Each request can contain up to 10 `Filters`, each of which can contain up to 00 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -3051,6 +3197,34 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteSnapshots response structure.
+ * @class
+ */
+class DeleteSnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDisks response structure.
  * @class
  */
@@ -3151,18 +3325,30 @@ class DescribeBundleDiscountResponse extends  AbstractModel {
 }
 
 /**
- * DeleteSnapshots response structure.
+ * DescribeAllScenes request structure.
  * @class
  */
-class DeleteSnapshotsResponse extends  AbstractModel {
+class DescribeAllScenesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * List of scene IDs
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.SceneIds = null;
+
+        /**
+         * Offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Number of returned results. Default value: 20. Maximum value: 100
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -3173,7 +3359,9 @@ class DeleteSnapshotsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SceneIds = 'SceneIds' in params ? params.SceneIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3286,6 +3474,13 @@ class DataDiskPrice extends  AbstractModel {
          */
         this.DiscountPrice = null;
 
+        /**
+         * ID of the instance to which the data disk is mounted.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
     }
 
     /**
@@ -3300,6 +3495,49 @@ class DataDiskPrice extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Discount = 'Discount' in params ? params.Discount : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Scene information
+ * @class
+ */
+class SceneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scene ID
+         * @type {string || null}
+         */
+        this.SceneId = null;
+
+        /**
+         * Display name of the scene
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * Scene description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SceneId = 'SceneId' in params ? params.SceneId : null;
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -3496,30 +3734,30 @@ class ModifyBlueprintAttributeResponse extends  AbstractModel {
 }
 
 /**
- * DescribeFirewallRulesTemplate response structure.
+ * DescribeScenes request structure.
  * @class
  */
-class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
+class DescribeScenesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of eligible firewall rules.
+         * List of scene IDs
+         * @type {Array.<string> || null}
+         */
+        this.SceneIds = null;
+
+        /**
+         * Offset. Default value: 0
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Offset = null;
 
         /**
-         * Firewall rule details list.
-         * @type {Array.<FirewallRuleInfo> || null}
+         * Number of returned results. Default value: 20. Maximum value: 100
+         * @type {number || null}
          */
-        this.FirewallRuleSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Limit = null;
 
     }
 
@@ -3530,17 +3768,9 @@ class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.FirewallRuleSet) {
-            this.FirewallRuleSet = new Array();
-            for (let z in params.FirewallRuleSet) {
-                let obj = new FirewallRuleInfo();
-                obj.deserialize(params.FirewallRuleSet[z]);
-                this.FirewallRuleSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SceneIds = 'SceneIds' in params ? params.SceneIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3824,14 +4054,14 @@ class DescribeKeyPairsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter list
+         * Filter list.
 <li>key-id</li>Filter by **key pair ID**.
 Type: String
 Required: no
-<li>key-name</li>Filter by **key pair name**.
+<li>key-name</li>Filter by the **key pair name**. Fuzzy match is supported.
 Type: String
 Required: no
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `KeyIds` and `Filters` cannot be specified at the same time.
+Each request can contain up to 10 `Filters` and up to 5 `Filter.Values` for each filter. `KeyIds` and `Filters` cannot be specified at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4462,15 +4692,23 @@ class DescribeBundlesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter list.
-<li>bundle-id</li>Filter by **package ID**.
+         * Filter list
+<li>bundle-id</li>Filter by the **bundle ID**.
 Type: String
-Required: no
-<li>support-platform-type</li>Filter by **system type**.
-Valid values: LINUX_UNIX (Linux/Unix), WINDOWS ( Windows)
+Required: No
+<li>support-platform-type</li>Filter by the **OS type**.
+Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 Type: String
-Required: no
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `BundleIds` and `Filters` at the same time.
+Required: No
+<li>bundle-type</li>Filter by the **bundle type**.
+Valid values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle)
+Type: String
+Required: No
+<li>bundle-state</li>Filter by the **bundle status**.
+Valid values: `ONLINE`, `OFFLINE`
+Type: String
+Required: No
+Each request can contain up to 10 `Filters`, and up to 5 `Filter.Values` for each filter. You cannot specify both `BundleIds` and `Filters` at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4666,6 +4904,43 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Total price information
+ * @class
+ */
+class TotalPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total original price
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Total discounted price
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+    }
+}
+
+/**
  * Restricted operation.
  * @class
  */
@@ -4703,6 +4978,56 @@ class DeniedAction extends  AbstractModel {
         this.Action = 'Action' in params ? params.Action : null;
         this.Code = 'Code' in params ? params.Code : null;
         this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * DescribeAllScenes response structure.
+ * @class
+ */
+class DescribeAllScenesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of scenes
+         * @type {Array.<SceneInfo> || null}
+         */
+        this.SceneInfoSet = null;
+
+        /**
+         * Total count of scenes
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SceneInfoSet) {
+            this.SceneInfoSet = new Array();
+            for (let z in params.SceneInfoSet) {
+                let obj = new SceneInfo();
+                obj.deserialize(params.SceneInfoSet[z]);
+                this.SceneInfoSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6163,30 +6488,29 @@ Each request can contain up to 10 `Filters` and 100 `Filter.Values`. `DiskIds` a
 }
 
 /**
- * DescribeInstances response structure.
+ * DescribeGeneralResourceQuotas request structure.
  * @class
  */
-class DescribeInstancesResponse extends  AbstractModel {
+class DescribeGeneralResourceQuotasRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of eligible instances.
-         * @type {number || null}
+         * Resource name list. Values:
+- `GENERAL_BUNDLE_INSTANCE`: General bundle
+- `STORAGE_BUNDLE_INSTANCE`:  Storage bundle 
+- `ENTERPRISE_BUNDLE_INSTANCE`: Enterprise bundle 
+- `EXCLUSIVE_BUNDLE_INSTANCE`： Dedicated bundle
+- `BEFAST_BUNDLE_INSTANCE`: BeFast bundle
+- `USER_KEY_PAIR`: Key pair
+- `SNAPSHOT`: Snapshot
+- `BLUEPRINT`: Custom image
+- `FREE_BLUEPRINT`: Free custom image
+- `DATA_DISK`: Data disk
+- `FIREWALL_RULE`: Firewall rules
+         * @type {Array.<string> || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * List of instance details
-         * @type {Array.<Instance> || null}
-         */
-        this.InstanceSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.ResourceNames = null;
 
     }
 
@@ -6197,17 +6521,7 @@ class DescribeInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.InstanceSet) {
-            this.InstanceSet = new Array();
-            for (let z in params.InstanceSet) {
-                let obj = new Instance();
-                obj.deserialize(params.InstanceSet[z]);
-                this.InstanceSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ResourceNames = 'ResourceNames' in params ? params.ResourceNames : null;
 
     }
 }
@@ -7573,6 +7887,56 @@ class StopInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeFirewallRulesTemplate response structure.
+ * @class
+ */
+class DescribeFirewallRulesTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible firewall rules.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Firewall rule details list.
+         * @type {Array.<FirewallRuleInfo> || null}
+         */
+        this.FirewallRuleSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.FirewallRuleSet) {
+            this.FirewallRuleSet = new Array();
+            for (let z in params.FirewallRuleSet) {
+                let obj = new FirewallRuleInfo();
+                obj.deserialize(params.FirewallRuleSet[z]);
+                this.FirewallRuleSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeModifyInstanceBundles request structure.
  * @class
  */
@@ -7587,15 +7951,23 @@ class DescribeModifyInstanceBundlesRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Filter list.
-<li>bundle-id</li>Filter by **package ID**.
+         * Filter list
+<li>bundle-id</li>Filter by the **bundle ID**.
 Type: String
-Required: no
-<li>support-platform-type</li>Filter by **system type**.
-Valid values: LINUX_UNIX (Linux/Unix), WINDOWS ( Windows)
+Required: No
+<li>support-platform-type</li>Filter by the **OS type**.
+Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 Type: String
-Required: no
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+Required: No
+<li>bundle-type</li>Filter by the **bundle type**.
+Valid values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle)
+Type: String
+Required: No
+<li>bundle-state</li>Filter by the **bundle status**.
+Valid values: `ONLINE`, `OFFLINE`
+Type: String
+Required: No
+Each request can contain up to 10 `Filters`, and each filter can have up to 5 `Filter.Values`.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -7800,6 +8172,48 @@ class InquirePriceCreateInstancesRequest extends  AbstractModel {
             this.InstanceChargePrepaid = obj;
         }
         this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
+
+    }
+}
+
+/**
+ * Scene information
+ * @class
+ */
+class Scene extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Scene ID
+         * @type {string || null}
+         */
+        this.SceneId = null;
+
+        /**
+         * Display name of the scene
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * Scene description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SceneId = 'SceneId' in params ? params.SceneId : null;
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -8236,14 +8650,16 @@ module.exports = {
     ModifyBundle: ModifyBundle,
     DetachCcnResponse: DetachCcnResponse,
     CreateInstanceSnapshotResponse: CreateInstanceSnapshotResponse,
+    DescribeScenesResponse: DescribeScenesResponse,
     InquirePriceRenewInstancesResponse: InquirePriceRenewInstancesResponse,
     DeleteFirewallRulesResponse: DeleteFirewallRulesResponse,
     ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
-    DescribeGeneralResourceQuotasRequest: DescribeGeneralResourceQuotasRequest,
+    DescribeInstancesResponse: DescribeInstancesResponse,
     DeleteKeyPairsRequest: DeleteKeyPairsRequest,
     SystemDisk: SystemDisk,
     ResetInstanceBlueprint: ResetInstanceBlueprint,
     DescribeBundlesResponse: DescribeBundlesResponse,
+    InstancePriceDetail: InstancePriceDetail,
     InquirePriceRenewInstancesRequest: InquirePriceRenewInstancesRequest,
     DiscountDetail: DiscountDetail,
     DescribeDiskConfigsRequest: DescribeDiskConfigsRequest,
@@ -8288,19 +8704,21 @@ module.exports = {
     DeleteSnapshotsRequest: DeleteSnapshotsRequest,
     ModifyDisksRenewFlagResponse: ModifyDisksRenewFlagResponse,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
+    DeleteSnapshotsResponse: DeleteSnapshotsResponse,
     DescribeDisksResponse: DescribeDisksResponse,
     DescribeBundleDiscountResponse: DescribeBundleDiscountResponse,
-    DeleteSnapshotsResponse: DeleteSnapshotsResponse,
+    DescribeAllScenesRequest: DescribeAllScenesRequest,
     ModifyDisksRenewFlagRequest: ModifyDisksRenewFlagRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
     DataDiskPrice: DataDiskPrice,
+    SceneInfo: SceneInfo,
     ImportKeyPairRequest: ImportKeyPairRequest,
     DeleteBlueprintsResponse: DeleteBlueprintsResponse,
     ModifyInstancesLoginKeyPairAttributeRequest: ModifyInstancesLoginKeyPairAttributeRequest,
     StopInstancesResponse: StopInstancesResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     ModifyBlueprintAttributeResponse: ModifyBlueprintAttributeResponse,
-    DescribeFirewallRulesTemplateResponse: DescribeFirewallRulesTemplateResponse,
+    DescribeScenesRequest: DescribeScenesRequest,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeInstancesDiskNumResponse: DescribeInstancesDiskNumResponse,
     InquirePriceCreateBlueprintResponse: InquirePriceCreateBlueprintResponse,
@@ -8320,7 +8738,9 @@ module.exports = {
     DescribeCcnAttachedInstancesResponse: DescribeCcnAttachedInstancesResponse,
     DescribeBundlesRequest: DescribeBundlesRequest,
     Blueprint: Blueprint,
+    TotalPrice: TotalPrice,
     DeniedAction: DeniedAction,
+    DescribeAllScenesResponse: DescribeAllScenesResponse,
     ModifyInstancesLoginKeyPairAttributeResponse: ModifyInstancesLoginKeyPairAttributeResponse,
     InquirePriceRenewDisksResponse: InquirePriceRenewDisksResponse,
     Bundle: Bundle,
@@ -8350,7 +8770,7 @@ module.exports = {
     FirewallRuleInfo: FirewallRuleInfo,
     CreateFirewallRulesResponse: CreateFirewallRulesResponse,
     DescribeDisksRequest: DescribeDisksRequest,
-    DescribeInstancesResponse: DescribeInstancesResponse,
+    DescribeGeneralResourceQuotasRequest: DescribeGeneralResourceQuotasRequest,
     DescribeZonesResponse: DescribeZonesResponse,
     CreateBlueprintResponse: CreateBlueprintResponse,
     PolicyDetail: PolicyDetail,
@@ -8385,11 +8805,13 @@ module.exports = {
     DescribeGeneralResourceQuotasResponse: DescribeGeneralResourceQuotasResponse,
     ModifyInstancesRenewFlagRequest: ModifyInstancesRenewFlagRequest,
     StopInstancesRequest: StopInstancesRequest,
+    DescribeFirewallRulesTemplateResponse: DescribeFirewallRulesTemplateResponse,
     DescribeModifyInstanceBundlesRequest: DescribeModifyInstanceBundlesRequest,
     ResetInstanceResponse: ResetInstanceResponse,
     DescribeFirewallRulesRequest: DescribeFirewallRulesRequest,
     DiskDeniedActions: DiskDeniedActions,
     InquirePriceCreateInstancesRequest: InquirePriceCreateInstancesRequest,
+    Scene: Scene,
     CcnAttachedInstance: CcnAttachedInstance,
     DescribeModifyInstanceBundlesResponse: DescribeModifyInstanceBundlesResponse,
     AttachDetail: AttachDetail,

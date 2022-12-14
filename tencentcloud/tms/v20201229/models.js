@@ -139,8 +139,8 @@ Note: This field may return `null`, indicating that no valid value can be found.
         this.Suggestion = null;
 
         /**
-         * This field returns the matched keywords. This parameter can include multiple returned values, which means multiple keywords are matched. If no keyword is returned but there is a `Score`, it means that the result of `Label` is determined by a semantic model.
-Note: This field may return `null`, indicating that no valid value can be found.
+         * Returns the information of keywords hit in the text. When no value is returned and `Score` is not empty, it means the `Label` is determined by the semantic-based detection model.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
@@ -180,6 +180,13 @@ Note: This field may return `null`, indicating that no valid value can be found.
          */
         this.SubLabel = null;
 
+        /**
+         * Returns the keywords, label, sub-label and the score.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -197,6 +204,60 @@ Note: This field may return `null`, indicating that no valid value can be found.
         this.LibId = 'LibId' in params ? params.LibId : null;
         this.LibName = 'LibName' in params ? params.LibName : null;
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Returns the keywords, label, sub-label and the score.
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returns the hit keywords.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * Returns the sub-tags.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubLabel = null;
+
+        /**
+         * Returns the score for the sub-label
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Score = 'Score' in params ? params.Score : null;
 
     }
 }
@@ -269,6 +330,24 @@ Note: Up to 5 MB is supported, and the minimum resolution is 256 x 256. When it 
          */
         this.Desc = null;
 
+        /**
+         * Room ID of the group chat.
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * Receiver ID.
+         * @type {string || null}
+         */
+        this.ReceiverId = null;
+
+        /**
+         * Generation time of the message, in ms.
+         * @type {number || null}
+         */
+        this.SendTime = null;
+
     }
 
     /**
@@ -287,6 +366,9 @@ Note: Up to 5 MB is supported, and the minimum resolution is 256 x 256. When it 
         this.Phone = 'Phone' in params ? params.Phone : null;
         this.HeadUrl = 'HeadUrl' in params ? params.HeadUrl : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.ReceiverId = 'ReceiverId' in params ? params.ReceiverId : null;
+        this.SendTime = 'SendTime' in params ? params.SendTime : null;
 
     }
 }
@@ -438,6 +520,13 @@ Note: This field may return `null`, indicating that no valid value can be found.
         this.SubLabel = null;
 
         /**
+         * Returns the context text.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ContextText = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -478,6 +567,7 @@ Note: This field may return `null`, indicating that no valid value can be found.
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.DataId = 'DataId' in params ? params.DataId : null;
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.ContextText = 'ContextText' in params ? params.ContextText : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -487,6 +577,7 @@ module.exports = {
     RiskDetails: RiskDetails,
     TextModerationRequest: TextModerationRequest,
     DetailResults: DetailResults,
+    Tag: Tag,
     User: User,
     Device: Device,
     TextModerationResponse: TextModerationResponse,

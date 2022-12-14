@@ -4942,7 +4942,7 @@ class UpdateDomainConfigRequest extends  AbstractModel {
         this.Cache = null;
 
         /**
-         * Cross-border linkage optimization configuration
+         * (Disused) Cross-border linkage optimization\
          * @type {OriginPullOptimization || null}
          */
         this.OriginPullOptimization = null;
@@ -7239,6 +7239,18 @@ If this parameter is left empty, edge server information will be returned by def
          */
         this.Segment = null;
 
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.ShowIpv6 = null;
+
+        /**
+         * Whether to abbreviate the IPv6 address.
+         * @type {boolean || null}
+         */
+        this.AbbreviationIpv6 = null;
+
     }
 
     /**
@@ -7252,6 +7264,8 @@ If this parameter is left empty, edge server information will be returned by def
         this.Layer = 'Layer' in params ? params.Layer : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.Segment = 'Segment' in params ? params.Segment : null;
+        this.ShowIpv6 = 'ShowIpv6' in params ? params.ShowIpv6 : null;
+        this.AbbreviationIpv6 = 'AbbreviationIpv6' in params ? params.AbbreviationIpv6 : null;
 
     }
 }
@@ -12637,7 +12651,7 @@ The specified purging region should match the domain name acceleration region.
 }
 
 /**
- * Cross-border origin-pull optimization configuration. This is disabled by default. (This feature is in beta and not generally available yet.)
+ * (Disused) Cross-border origin-pull optimization
  * @class
  */
 class OriginPullOptimization extends  AbstractModel {
@@ -14669,7 +14683,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ConnectTimeout = null;
 
         /**
-         * The origin-pull receipt timeout (in seconds). Valid range: 10-60.
+         * The origin-pull receipt timeout (in seconds). Valid range: 10-300.
 Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {number || null}
          */

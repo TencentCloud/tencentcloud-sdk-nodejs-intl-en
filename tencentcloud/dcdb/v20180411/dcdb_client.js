@@ -42,6 +42,7 @@ const CloneAccountResponse = models.CloneAccountResponse;
 const IsolateDedicatedDBInstanceRequest = models.IsolateDedicatedDBInstanceRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const DestroyDCDBInstanceRequest = models.DestroyDCDBInstanceRequest;
+const CreateDCDBInstanceResponse = models.CreateDCDBInstanceResponse;
 const BriefNodeInfo = models.BriefNodeInfo;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
 const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
@@ -78,6 +79,7 @@ const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const DescribeDCDBInstanceNodeInfoResponse = models.DescribeDCDBInstanceNodeInfoResponse;
+const KillSessionRequest = models.KillSessionRequest;
 const TerminateDedicatedDBInstanceRequest = models.TerminateDedicatedDBInstanceRequest;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
@@ -98,6 +100,7 @@ const DcnDetailItem = models.DcnDetailItem;
 const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const KillSessionResponse = models.KillSessionResponse;
 const SlowLogData = models.SlowLogData;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
@@ -108,6 +111,7 @@ const ResourceTag = models.ResourceTag;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeDCDBInstancesResponse = models.DescribeDCDBInstancesResponse;
 const DescribeFlowRequest = models.DescribeFlowRequest;
+const CreateDCDBInstanceRequest = models.CreateDCDBInstanceRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
@@ -346,6 +350,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to kill the specified session.
+     * @param {KillSessionRequest} req
+     * @param {function(string, KillSessionResponse):void} cb
+     * @public
+     */
+    KillSession(req, cb) {
+        let resp = new KillSessionResponse();
+        this.request("KillSession", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of various logs of a database, including cold backups, binlogs, errlogs, and slowlogs.
      * @param {DescribeDBLogFilesRequest} req
      * @param {function(string, DescribeDBLogFilesResponse):void} cb
@@ -532,6 +547,17 @@ Note: Accounts with the same username but different hosts are different accounts
     DescribeDatabases(req, cb) {
         let resp = new DescribeDatabasesResponse();
         this.request("DescribeDatabases", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a monthly subscribed TencentDB instance by passing in information such as instance specifications, database version number, and purchased duration.
+     * @param {CreateDCDBInstanceRequest} req
+     * @param {function(string, CreateDCDBInstanceResponse):void} cb
+     * @public
+     */
+    CreateDCDBInstance(req, cb) {
+        let resp = new CreateDCDBInstanceResponse();
+        this.request("CreateDCDBInstance", req, resp, cb);
     }
 
     /**

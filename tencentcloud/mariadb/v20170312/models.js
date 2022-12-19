@@ -1368,6 +1368,26 @@ class DcnDetailItem extends  AbstractModel {
          */
         this.InstanceType = null;
 
+        /**
+         * Configuration information of DCN replication. This field is null for a primary instance.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DCNReplicaConfig || null}
+         */
+        this.ReplicaConfig = null;
+
+        /**
+         * DCN replication status. This field is null for the primary instance.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DCNReplicaStatus || null}
+         */
+        this.ReplicaStatus = null;
+
+        /**
+         * Whether KMS is enabled.
+         * @type {number || null}
+         */
+        this.EncryptStatus = null;
+
     }
 
     /**
@@ -1395,6 +1415,19 @@ class DcnDetailItem extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.ReplicaConfig) {
+            let obj = new DCNReplicaConfig();
+            obj.deserialize(params.ReplicaConfig)
+            this.ReplicaConfig = obj;
+        }
+
+        if (params.ReplicaStatus) {
+            let obj = new DCNReplicaStatus();
+            obj.deserialize(params.ReplicaStatus)
+            this.ReplicaStatus = obj;
+        }
+        this.EncryptStatus = 'EncryptStatus' in params ? params.EncryptStatus : null;
 
     }
 }
@@ -1477,6 +1510,42 @@ class CopyAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
+ * DCN status information
+ * @class
+ */
+class DCNReplicaStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DCN running status. Valid values: `START` (running), `STOP` (pause).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The current delay, which takes the delay value of the replica instance.
+         * @type {number || null}
+         */
+        this.Delay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Delay = 'Delay' in params ? params.Delay : null;
+
+    }
+}
+
+/**
  * CreateHourDBInstance response structure.
  * @class
  */
@@ -1524,6 +1593,88 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePrice request structure.
+ * @class
+ */
+class DescribePriceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ ID of the purchased instance.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Number of instance nodes, which can be obtained 
+ by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * Memory size in GB, which can be obtained 
+ by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Storage capacity in GB. The maximum and minimum storage space can be obtained 
+ by querying instance specification through the `DescribeDBInstanceSpecs` API.
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Purchase period in months
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * The number of instances to be purchased. Only one instance is queried for price by default.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Billing type. Valid values: `postpaid` (pay-as-you-go), `prepaid` (monthly subscription).
+         * @type {string || null}
+         */
+        this.Paymode = null;
+
+        /**
+         * Price unit. Valid values:   
+`* pent` (cent), 
+`* microPent` (microcent).
+         * @type {string || null}
+         */
+        this.AmountUnit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Paymode = 'Paymode' in params ? params.Paymode : null;
+        this.AmountUnit = 'AmountUnit' in params ? params.AmountUnit : null;
 
     }
 }
@@ -2024,7 +2175,7 @@ class Deal extends  AbstractModel {
         this.FlowId = null;
 
         /**
-         * This field is populated only for orders that create instances, indicating the ID of the created instance.
+         * The ID of the created instance, which is required only for the order that creates an instance.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -3304,6 +3455,52 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribePrice response structure.
+ * @class
+ */
+class DescribePriceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Original price  
+* Unit: Cent (default). If the request parameter contains `AmountUnit`, see `AmountUnit` description.
+* Currency: CNY (Chinese site), USD (international site)
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * The actual price may be different from the original price due to discounts. 
+* Unit: Cent (default). If the request parameter contains `AmountUnit`, see `AmountUnit` description.
+* Currency: CNY (Chinese site), USD (international site)
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAccountPrivileges response structure.
  * @class
  */
@@ -4121,6 +4318,59 @@ class IsolateDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * DCN configuration
+ * @class
+ */
+class DCNReplicaConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DCN running status. Valid values: `START` (running), `STOP` (pause)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RoReplicationMode = null;
+
+        /**
+         * Delayed replication type. Valid values: `DEFAULT` (no delay), `DUE_TIME` (specified replication time)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DelayReplicationType = null;
+
+        /**
+         * Specified time for delayed replication
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DueTime = null;
+
+        /**
+         * The number of seconds to delay the replication
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ReplicationDelay = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoReplicationMode = 'RoReplicationMode' in params ? params.RoReplicationMode : null;
+        this.DelayReplicationType = 'DelayReplicationType' in params ? params.DelayReplicationType : null;
+        this.DueTime = 'DueTime' in params ? params.DueTime : null;
+        this.ReplicationDelay = 'ReplicationDelay' in params ? params.ReplicationDelay : null;
 
     }
 }
@@ -5696,7 +5946,9 @@ module.exports = {
     DcnDetailItem: DcnDetailItem,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     CopyAccountPrivilegesResponse: CopyAccountPrivilegesResponse,
+    DCNReplicaStatus: DCNReplicaStatus,
     CreateHourDBInstanceResponse: CreateHourDBInstanceResponse,
+    DescribePriceRequest: DescribePriceRequest,
     ParamModifyResult: ParamModifyResult,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
@@ -5726,6 +5978,7 @@ module.exports = {
     ModifySyncTaskAttributeRequest: ModifySyncTaskAttributeRequest,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     DBInstance: DBInstance,
+    DescribePriceResponse: DescribePriceResponse,
     ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
     Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
@@ -5744,6 +5997,7 @@ module.exports = {
     ResourceTag: ResourceTag,
     DeleteAccountRequest: DeleteAccountRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
+    DCNReplicaConfig: DCNReplicaConfig,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     DatabaseProcedure: DatabaseProcedure,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,

@@ -223,6 +223,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.HelpDoc = null;
 
+        /**
+         * Whether the current step is skipped
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SkipInfo = null;
+
     }
 
     /**
@@ -236,6 +243,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Message = 'Message' in params ? params.Message : null;
         this.Solution = 'Solution' in params ? params.Solution : null;
         this.HelpDoc = 'HelpDoc' in params ? params.HelpDoc : null;
+        this.SkipInfo = 'SkipInfo' in params ? params.SkipInfo : null;
 
     }
 }
@@ -987,14 +995,14 @@ class DdlOption extends  AbstractModel {
         super();
 
         /**
-         * DDL type, such as database, table, and view.
+         * DDL type, such as database, table, view, and index.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DdlObject = null;
 
         /**
-         * Specific DDL value, such as `Create` or `Drop`.
+         * DDL value. Valid values: [Create,Drop,Alter] for database <br>[Create,Drop,Alter,Truncate,Rename] for table <br/>[Create,Drop] for view <br/>[Create,Drop] for index
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -1177,7 +1185,7 @@ class CreateMigrationServiceRequest extends  AbstractModel {
         this.DstRegion = null;
 
         /**
-         * Instance specification. Valid values: `micro`, `small`, `medium`, `large`, `xlarge`, `2xlarge`.
+         * Instance specification. Valid values: `small`, `medium`, `large`, `xlarge`, `2xlarge`.
          * @type {string || null}
          */
         this.InstanceClass = null;
@@ -2948,6 +2956,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.TmpToken = null;
 
+        /**
+         * External role ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RoleExternalId = null;
+
     }
 
     /**
@@ -2979,6 +2994,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TmpSecretId = 'TmpSecretId' in params ? params.TmpSecretId : null;
         this.TmpSecretKey = 'TmpSecretKey' in params ? params.TmpSecretKey : null;
         this.TmpToken = 'TmpToken' in params ? params.TmpToken : null;
+        this.RoleExternalId = 'RoleExternalId' in params ? params.RoleExternalId : null;
 
     }
 }
@@ -3936,7 +3952,7 @@ class DescribeSyncJobsRequest extends  AbstractModel {
         super();
 
         /**
-         * Sync task ID
+         * Sync task ID, such as `sync-werwfs23`.
          * @type {string || null}
          */
         this.JobId = null;
@@ -6000,7 +6016,7 @@ class SyncJobInfo extends  AbstractModel {
         super();
 
         /**
-         * Sync task ID
+         * Sync task ID, such as `sync-btso140`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6014,21 +6030,21 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.JobName = null;
 
         /**
-         * Billing mode
+         * Billing mode. Valid values: `PostPay` (pay-as-you-go); `PrePay` (monthly subscription).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PayMode = null;
 
         /**
-         * Running mode
+         * Running mode. Valid values: `Immediate`, `Timed`. Default value: `Immediate`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RunMode = null;
 
         /**
-         * Expected execution time
+         * Expected execution time in the format of `yyyy-mm-dd hh:mm:ss`
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6070,28 +6086,28 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Specification = null;
 
         /**
-         * Expiration time
+         * Expiration time in the format of `yyyy-mm-dd hh:mm:ss`
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExpireTime = null;
 
         /**
-         * Source database region
+         * Source database region, such as `ap-guangzhou`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SrcRegion = null;
 
         /**
-         * Source database type
+         * Source database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, and `tdsqlmysql`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SrcDatabaseType = null;
 
         /**
-         * Source database access type
+         * Source database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6105,21 +6121,21 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SrcInfo = null;
 
         /**
-         * Target database region
+         * Target database region, such as `ap-guangzhou`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DstRegion = null;
 
         /**
-         * Target database type
+         * Target database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, and `tdsqlmysql`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DstDatabaseType = null;
 
         /**
-         * Target database access type
+         * Target database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -6133,35 +6149,35 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DstInfo = null;
 
         /**
-         * Creation time
+         * Creation time in the format of `yyyy-mm-dd hh:mm:ss`
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Start time
+         * Start time in the format of `yyyy-mm-dd hh:mm:ss`
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Task status
+         * Task status. Valid values: `UnInitialized`, `Initialized`, `Checking`, `CheckPass`, `CheckNotPass`, `ReadyRunning`, `Running`, `Pausing`, `Paused`, `Stopping`, `Stopped`, `ResumableErr`, `Resuming`, `Failed`, `Released`, `Resetting`, `Unknown`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Tag
+         * End time in the format of `yyyy-mm-dd hh:mm:ss`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Tag information
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<TagItem> || null}
          */
@@ -6173,6 +6189,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {SyncDetailInfo || null}
          */
         this.Detail = null;
+
+        /**
+         * Billing status. Valid values: `Normal`, `Resizing`, `Renewing`, `Isolating`, `Isolated`, `Offlining`, `Offlined`, `NotBilled`, `Recovering`, `PostPay2Prepaying`, `PrePay2Postpaying`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TradeStatus = null;
+
+        /**
+         * Sync link specification, such as `micro`, `small`, `medium`, and `large`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceClass = null;
+
+        /**
+         * Auto-renewal flag, which takes effect if `PayMode` is `PrePay`. Valid values: `1` (auto-renewal enabled); `0` (auto-renewal disabled).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
+
+        /**
+         * Deletion time in the format of `yyyy-mm-dd hh:mm:ss`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OfflineTime = null;
 
     }
 
@@ -6224,8 +6268,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -6241,6 +6285,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.Detail)
             this.Detail = obj;
         }
+        this.TradeStatus = 'TradeStatus' in params ? params.TradeStatus : null;
+        this.InstanceClass = 'InstanceClass' in params ? params.InstanceClass : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
 
     }
 }
@@ -6471,31 +6519,31 @@ class CreateSyncJobRequest extends  AbstractModel {
         this.Specification = null;
 
         /**
-         * Tag
+         * Tag information
          * @type {Array.<TagItem> || null}
          */
         this.Tags = null;
 
         /**
-         * Number of sync tasks
+         * The number of sync tasks purchased at a time. Value range: [1, 10]. Default value: `1`.
          * @type {number || null}
          */
         this.Count = null;
 
         /**
-         * Auto-renewal flag
+         * Auto-renewal flag, which takes effect if `PayMode` is `PrePay`. Valid values: `1` (auto-renewal enabled); `0` (auto-renewal disabled). Default value: `0`.
          * @type {number || null}
          */
         this.AutoRenew = null;
 
         /**
-         * Sync link specification
+         * Sync link specification, such as `micro`, `small`, `medium`, and `large`. Default value: `medium`.
          * @type {string || null}
          */
         this.InstanceClass = null;
 
         /**
-         * Sync link name
+         * Sync task name
          * @type {string || null}
          */
         this.JobName = null;

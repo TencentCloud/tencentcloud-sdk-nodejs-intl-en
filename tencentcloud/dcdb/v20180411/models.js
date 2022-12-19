@@ -1142,6 +1142,50 @@ class DestroyDCDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * CreateDCDBInstance response structure.
+ * @class
+ */
+class CreateDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Long order ID, which is used to call the `DescribeOrders` API.
+ The parameter can be used to either query order details or call the user account APIs to make another payment when this payment fails.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * IDs of the instances you have purchased in this order. If no instance IDs are returned, you can query them with the `DescribeOrders` API. You can also use the `DescribeDBInstances` API to check whether an instance has been created successfully.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Node information of a sharded database
  * @class
  */
@@ -3391,6 +3435,55 @@ class DescribeDCDBInstanceNodeInfoResponse extends  AbstractModel {
 }
 
 /**
+ * KillSession request structure.
+ * @class
+ */
+class KillSessionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * List of session IDs
+         * @type {Array.<number> || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * Shard ID. Either `ShardId` or `ShardSerialId` is required.
+         * @type {string || null}
+         */
+        this.ShardId = null;
+
+        /**
+         * Shard sequence ID. Either `ShardId` or `ShardSerialId` is required.
+         * @type {string || null}
+         */
+        this.ShardSerialId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.ShardSerialId = 'ShardSerialId' in params ? params.ShardSerialId : null;
+
+    }
+}
+
+/**
  * TerminateDedicatedDBInstance request structure.
  * @class
  */
@@ -4379,6 +4472,41 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
 }
 
 /**
+ * KillSession response structure.
+ * @class
+ */
+class KillSessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Information of a slow query that has been logged
  * @class
  */
@@ -4926,6 +5054,205 @@ class DescribeFlowRequest extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
+ * CreateDCDBInstance request structure.
+ * @class
+ */
+class CreateDCDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZs to deploy shard nodes. You can specify up to two AZs. When the shard specification is 1-source-2-replica, two of the nodes are deployed in the first AZ.
+The current purchasable AZ needs be pulled through `DescribeDCDBSaleInfo` API.
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * Validity period in months
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Shard memory size in GB, which can be obtained 
+ by querying the instance specification through `DescribeShardSpec` API.
+         * @type {number || null}
+         */
+        this.ShardMemory = null;
+
+        /**
+         * Shard storage size in GB, which can be obtained
+ by querying the instance specification through `DescribeShardSpec` API.
+         * @type {number || null}
+         */
+        this.ShardStorage = null;
+
+        /**
+         * Number of nodes in a single shard, which can be obtained
+ by querying the instance specification through `DescribeShardSpec` API.
+         * @type {number || null}
+         */
+        this.ShardNodeCount = null;
+
+        /**
+         * The number of shards in the instance. Value range: 2-8. You can increase up to 64 shards by upgrading your instance.
+         * @type {number || null}
+         */
+        this.ShardCount = null;
+
+        /**
+         * The number of instances to be purchased
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Project ID, which can be obtained through the `DescribeProjects` API. If this parameter is not passed in, the instance will be associated with the default project.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * VPC ID. If this parameter is left empty or not passed in, the instance will be created on the classic network.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC subnet ID, which is required when `VpcId` is specified.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Database engine version. Valid values: 8.0.18, 10.1.9, 5.7.17.
+8.0.18 - MySQL 8.0.18；
+10.1.9: MariaDB 10.1.9;
+5.7.17: Percona 5.7.17.
+If this parameter is left empty, `5.7.17` will be used.
+         * @type {string || null}
+         */
+        this.DbVersionId = null;
+
+        /**
+         * Whether to automatically use vouchers. This option is disabled by default.
+         * @type {boolean || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID list. Currently, you can specify only one voucher.
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * Security group ID
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * Custom name of the instance
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Whether IPv6 is supported
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+        /**
+         * Array of tag key-value pairs
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * List of parameters. Valid values: `character_set_server` (character set; required); `lower_case_table_names` (table name case sensitivity; required; `0`: case-sensitive; `1`: case-insensitive); `innodb_page_size` (InnoDB data page size; default size: 16 KB); `sync_mode` (sync mode; `0`: async; `1`: strong sync; `2`: downgradable strong sync; default value: `2`).
+         * @type {Array.<DBParamValue> || null}
+         */
+        this.InitParams = null;
+
+        /**
+         * DCN source region
+         * @type {string || null}
+         */
+        this.DcnRegion = null;
+
+        /**
+         * DCN source instance ID
+         * @type {string || null}
+         */
+        this.DcnInstanceId = null;
+
+        /**
+         * Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users). If no renewal is required, set it to `0`.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Security group IDs in array. This parameter is compatible with the old parameter `SecurityGroupId`.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
+        this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
+        this.ShardNodeCount = 'ShardNodeCount' in params ? params.ShardNodeCount : null;
+        this.ShardCount = 'ShardCount' in params ? params.ShardCount : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+
+        if (params.InitParams) {
+            this.InitParams = new Array();
+            for (let z in params.InitParams) {
+                let obj = new DBParamValue();
+                obj.deserialize(params.InitParams[z]);
+                this.InitParams.push(obj);
+            }
+        }
+        this.DcnRegion = 'DcnRegion' in params ? params.DcnRegion : null;
+        this.DcnInstanceId = 'DcnInstanceId' in params ? params.DcnInstanceId : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -6047,6 +6374,7 @@ module.exports = {
     IsolateDedicatedDBInstanceRequest: IsolateDedicatedDBInstanceRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     DestroyDCDBInstanceRequest: DestroyDCDBInstanceRequest,
+    CreateDCDBInstanceResponse: CreateDCDBInstanceResponse,
     BriefNodeInfo: BriefNodeInfo,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     DescribeDCDBInstanceNodeInfoRequest: DescribeDCDBInstanceNodeInfoRequest,
@@ -6083,6 +6411,7 @@ module.exports = {
     SecurityGroup: SecurityGroup,
     DescribeDatabaseTableRequest: DescribeDatabaseTableRequest,
     DescribeDCDBInstanceNodeInfoResponse: DescribeDCDBInstanceNodeInfoResponse,
+    KillSessionRequest: KillSessionRequest,
     TerminateDedicatedDBInstanceRequest: TerminateDedicatedDBInstanceRequest,
     DescribeDatabaseObjectsResponse: DescribeDatabaseObjectsResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
@@ -6103,6 +6432,7 @@ module.exports = {
     DescribeDBSyncModeRequest: DescribeDBSyncModeRequest,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
+    KillSessionResponse: KillSessionResponse,
     SlowLogData: SlowLogData,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeOrdersRequest: DescribeOrdersRequest,
@@ -6113,6 +6443,7 @@ module.exports = {
     DeleteAccountRequest: DeleteAccountRequest,
     DescribeDCDBInstancesResponse: DescribeDCDBInstancesResponse,
     DescribeFlowRequest: DescribeFlowRequest,
+    CreateDCDBInstanceRequest: CreateDCDBInstanceRequest,
     DatabaseProcedure: DatabaseProcedure,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     CreateAccountResponse: CreateAccountResponse,

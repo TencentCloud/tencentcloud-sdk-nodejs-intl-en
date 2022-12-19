@@ -49,7 +49,9 @@ const ModifySyncTaskAttributeResponse = models.ModifySyncTaskAttributeResponse;
 const DcnDetailItem = models.DcnDetailItem;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
+const DCNReplicaStatus = models.DCNReplicaStatus;
 const CreateHourDBInstanceResponse = models.CreateHourDBInstanceResponse;
+const DescribePriceRequest = models.DescribePriceRequest;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
@@ -79,6 +81,7 @@ const ColumnPrivilege = models.ColumnPrivilege;
 const ModifySyncTaskAttributeRequest = models.ModifySyncTaskAttributeRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DBInstance = models.DBInstance;
+const DescribePriceResponse = models.DescribePriceResponse;
 const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
@@ -97,6 +100,7 @@ const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const ResourceTag = models.ResourceTag;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const DCNReplicaConfig = models.DCNReplicaConfig;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
@@ -249,6 +253,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeDBSlowLogs(req, cb) {
         let resp = new DescribeDBSlowLogsResponse();
         this.request("DescribeDBSlowLogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to isolate a dedicated TencentDB instance.
+     * @param {IsolateDedicatedDBInstanceRequest} req
+     * @param {function(string, IsolateDedicatedDBInstanceResponse):void} cb
+     * @public
+     */
+    IsolateDedicatedDBInstance(req, cb) {
+        let resp = new IsolateDedicatedDBInstanceResponse();
+        this.request("IsolateDedicatedDBInstance", req, resp, cb);
     }
 
     /**
@@ -502,14 +517,14 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to isolate a dedicated TencentDB instance.
-     * @param {IsolateDedicatedDBInstanceRequest} req
-     * @param {function(string, IsolateDedicatedDBInstanceResponse):void} cb
+     * This API is used to query the instance price before you purchase it.
+     * @param {DescribePriceRequest} req
+     * @param {function(string, DescribePriceResponse):void} cb
      * @public
      */
-    IsolateDedicatedDBInstance(req, cb) {
-        let resp = new IsolateDedicatedDBInstanceResponse();
-        this.request("IsolateDedicatedDBInstance", req, resp, cb);
+    DescribePrice(req, cb) {
+        let resp = new DescribePriceResponse();
+        this.request("DescribePrice", req, resp, cb);
     }
 
     /**

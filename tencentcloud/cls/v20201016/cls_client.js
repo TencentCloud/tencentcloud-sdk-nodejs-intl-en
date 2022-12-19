@@ -518,7 +518,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to build a histogram.
+     * This API is used to get a log count histogram. 
      * @param {DescribeLogHistogramRequest} req
      * @param {function(string, DescribeLogHistogramResponse):void} cb
      * @public

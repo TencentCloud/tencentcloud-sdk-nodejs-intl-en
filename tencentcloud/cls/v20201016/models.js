@@ -374,7 +374,7 @@ class DescribeLogHistogramRequest extends  AbstractModel {
         this.Query = null;
 
         /**
-         * Time interval in milliseconds
+         * Interval in milliseconds. Condition: (To – From) / Interval ≤ 200
          * @type {number || null}
          */
         this.Interval = null;
@@ -1796,7 +1796,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Syslog protocol. Valid values: `tcp`, `udp`.
-This field can be used when you create/modify collection rule configurations.
+This field can be used when you create or modify collection rule configurations.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1804,17 +1804,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * Listening address and port specified by the syslog collection. Format: [ip]:[port]. Example: 127.0.0.1:9000.
-This field can be used when you create/modify collection rule configurations.
+This field can be used when you create or modify collection rule configurations.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Address = null;
 
         /**
-         * `rfc3164`: Resolve logs by using the RFC3164 protocol during the syslog collection.
-`rfc5424`: Resolve logs by using the RFC5424 protocol during the syslog collection.
-`auto`: Automatically match either the RFC3164 or RFC5424 protocol.
-This field can be used when you create/modify collection rule configurations.
+         * `rfc3164`: Resolve logs by using the RFC 3164 protocol during the syslog collection.
+`rfc5424`: Resolve logs by using the RFC 5424 protocol during the syslog collection.
+`auto`: Automatically match either the RFC 3164 or RFC 5424 protocol.
+This field can be used when you create or modify collection rule configurations.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1895,6 +1895,13 @@ class TopicInfo extends  AbstractModel {
         this.Index = null;
 
         /**
+         * Cloud product identifier. If the log topic is created by another cloud product, this field returns the name of the cloud product, such as `CDN` or `TKE`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssumerName = null;
+
+        /**
          * Creation time
          * @type {string || null}
          */
@@ -1941,6 +1948,20 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.Period = null;
 
+        /**
+         * Cloud product sub-identifier. If the log topic is created by another cloud product, this field returns the name of the cloud product and its log type, such as `TKE-Audit` or `TKE-Event`. Some products only return the cloud product identifier (`AssumerName`), without this field.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubAssumerName = null;
+
+        /**
+         * Log topic description
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Describes = null;
+
     }
 
     /**
@@ -1955,6 +1976,7 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
         this.Index = 'Index' in params ? params.Index : null;
+        this.AssumerName = 'AssumerName' in params ? params.AssumerName : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Status = 'Status' in params ? params.Status : null;
 
@@ -1970,6 +1992,8 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
         this.StorageType = 'StorageType' in params ? params.StorageType : null;
         this.Period = 'Period' in params ? params.Period : null;
+        this.SubAssumerName = 'SubAssumerName' in params ? params.SubAssumerName : null;
+        this.Describes = 'Describes' in params ? params.Describes : null;
 
     }
 }
@@ -3801,7 +3825,7 @@ class CreateTopicRequest extends  AbstractModel {
         this.StorageType = null;
 
         /**
-         * Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+         * Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
          * @type {number || null}
          */
         this.Period = null;
@@ -4331,6 +4355,13 @@ class LogsetInfo extends  AbstractModel {
         this.CreateTime = null;
 
         /**
+         * Cloud product identifier. If the logset is created by another cloud product, this field returns the name of the cloud product, such as `CDN` or `TKE`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AssumerName = null;
+
+        /**
          * Tag bound to logset
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<Tag> || null}
@@ -4344,7 +4375,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.TopicCount = null;
 
         /**
-         * If `AssumerUin` is not empty, it indicates the service provider who creates the logset
+         * If `AssumerName` is not empty, it indicates the service provider who creates the logset.
          * @type {string || null}
          */
         this.RoleName = null;
@@ -4361,6 +4392,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
         this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.AssumerName = 'AssumerName' in params ? params.AssumerName : null;
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -5734,6 +5766,13 @@ class ConfigInfo extends  AbstractModel {
         this.ConfigId = null;
 
         /**
+         * Name of the collection rule configuration
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
          * Log formatting method
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -5804,6 +5843,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+        this.Name = 'Name' in params ? params.Name : null;
         this.LogFormat = 'LogFormat' in params ? params.LogFormat : null;
         this.Path = 'Path' in params ? params.Path : null;
         this.LogType = 'LogType' in params ? params.LogType : null;
@@ -7447,6 +7487,16 @@ The two response methods differ slightly in terms of encoding format. You are ad
          */
         this.UseNewAnalysis = null;
 
+        /**
+         * Indicates whether to sample raw logs before statistical analysis (`Query` includes SQL statements).
+`0`: Auto-sample.
+`0–1`: Sample by the specified sample rate, such as `0.02`.
+`1`: Precise analysis without sampling.
+Default value: `1`
+         * @type {number || null}
+         */
+        this.SamplingRate = null;
+
     }
 
     /**
@@ -7464,6 +7514,7 @@ The two response methods differ slightly in terms of encoding format. You are ad
         this.Context = 'Context' in params ? params.Context : null;
         this.Sort = 'Sort' in params ? params.Sort : null;
         this.UseNewAnalysis = 'UseNewAnalysis' in params ? params.UseNewAnalysis : null;
+        this.SamplingRate = 'SamplingRate' in params ? params.SamplingRate : null;
 
     }
 }

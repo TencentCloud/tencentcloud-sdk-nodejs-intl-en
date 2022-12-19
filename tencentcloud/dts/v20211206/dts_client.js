@@ -215,7 +215,7 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a data consistency check task.
+     * This API is used to delete a data consistency check task, which can be called when the task status is `success`, `failed`, or `canceled`.
      * @param {DeleteCompareTaskRequest} req
      * @param {function(string, DeleteCompareTaskResponse):void} cb
      * @public
@@ -237,7 +237,7 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to stop a sync task.
+     * This API is used to stop a sync task. After calling this API, you can call the `DescribeSyncJobs` API to query the latest task status.
      * @param {StopSyncJobRequest} req
      * @param {function(string, StopSyncJobResponse):void} cb
      * @public
@@ -248,7 +248,7 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to verify a sync task by checking required parameters and peripheral information.
+     * This API is used to verify a sync task by checking required parameters and peripheral configuration.
      * @param {CreateCheckSyncJobRequest} req
      * @param {function(string, CreateCheckSyncJobResponse):void} cb
      * @public
@@ -303,7 +303,7 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to retry a failed Redis data migration task. Note that this operation will skip the check stage and directly start the task, just like by calling `StartMigrationJob`. After calling this API, you can call the `DescribeMigrationJobs` API to query the latest task status.
+     * This API is used to retry an abnormal or failed Redis data migration task. Note that this operation will skip the check stage and directly start the task, just like by calling `StartMigrationJob`. After calling this API, you can call the `DescribeMigrationJobs` API to query the latest task status.
      * @param {ResumeMigrateJobRequest} req
      * @param {function(string, ResumeMigrateJobResponse):void} cb
      * @public
@@ -439,7 +439,7 @@ After successful check, if the migration task needs to be modified, a new check 
     }
 
     /**
-     * This API is used to query the details of a data migration task.
+     * This API is used to query the details of a migration task.
      * @param {DescribeMigrationDetailRequest} req
      * @param {function(string, DescribeMigrationDetailResponse):void} cb
      * @public

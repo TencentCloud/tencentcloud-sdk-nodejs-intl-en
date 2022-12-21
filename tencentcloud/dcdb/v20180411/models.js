@@ -360,6 +360,52 @@ class ActiveHourDCDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDCDBPrice response structure.
+ * @class
+ */
+class DescribeDCDBPriceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Original price  
+* Unit: Cent (default). If the request parameter contains `AmountUnit`, see `AmountUnit` description.
+* Currency: CNY (Chinese site), USD (international site)
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * The actual price may be different from the original price due to discounts. 
+* Unit: Cent (default). If the request parameter contains `AmountUnit`, see `AmountUnit` description.
+* Currency: CNY (Chinese site), USD (international site)
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyInstanceVport response structure.
  * @class
  */
@@ -911,30 +957,18 @@ class DescribeDBParametersResponse extends  AbstractModel {
 }
 
 /**
- * DestroyHourDCDBInstance response structure.
+ * IsolateHourDCDBInstance request structure.
  * @class
  */
-class DestroyHourDCDBInstanceResponse extends  AbstractModel {
+class IsolateHourDCDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/557/56485?from_cn_redirect=1) API to query the async task result.
-         * @type {number || null}
+         * Instance uuid list
+         * @type {Array.<string> || null}
          */
-        this.FlowId = null;
-
-        /**
-         * Instance ID, which is the same as the request parameter `InstanceId`.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.InstanceIds = null;
 
     }
 
@@ -945,9 +979,7 @@ class DestroyHourDCDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1820,6 +1852,95 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDCDBPrice request structure.
+ * @class
+ */
+class DescribeDCDBPriceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ ID of the purchased instance.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * The number of instances to be purchased. You can purchase 1-10 instances.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Validity period in months
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Number of nodes in a single shard, which can be obtained
+ by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+         * @type {number || null}
+         */
+        this.ShardNodeCount = null;
+
+        /**
+         * Shard memory size in GB, which can be obtained 
+ by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+         * @type {number || null}
+         */
+        this.ShardMemory = null;
+
+        /**
+         * Shard storage size in GB, which can be obtained
+ by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+         * @type {number || null}
+         */
+        this.ShardStorage = null;
+
+        /**
+         * The number of shards in the instance. Value range: 2-8. Upgrade your instance to have up to 64 shards if you require more.
+         * @type {number || null}
+         */
+        this.ShardCount = null;
+
+        /**
+         * Billing type. Valid values: `postpaid` (pay-as-you-go), `prepaid` (monthly subscription).
+         * @type {string || null}
+         */
+        this.Paymode = null;
+
+        /**
+         * Price unit. Valid values:   
+`* pent` (cent), 
+`* microPent` (microcent).
+         * @type {string || null}
+         */
+        this.AmountUnit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.ShardNodeCount = 'ShardNodeCount' in params ? params.ShardNodeCount : null;
+        this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
+        this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
+        this.ShardCount = 'ShardCount' in params ? params.ShardCount : null;
+        this.Paymode = 'Paymode' in params ? params.Paymode : null;
+        this.AmountUnit = 'AmountUnit' in params ? params.AmountUnit : null;
+
+    }
+}
+
+/**
  * SwitchDBInstanceHA response structure.
  * @class
  */
@@ -1885,6 +2006,48 @@ class ParamModifyResult extends  AbstractModel {
         }
         this.Param = 'Param' in params ? params.Param : null;
         this.Code = 'Code' in params ? params.Code : null;
+
+    }
+}
+
+/**
+ * Table permission
+ * @class
+ */
+class TablePrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
 
     }
 }
@@ -2147,7 +2310,7 @@ class Deal extends  AbstractModel {
 
         /**
          * The ID of the created instance, which is required only for the order that creates an instance.
-Note: This field may return null, indicating that no valid value can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3776,6 +3939,55 @@ class SecurityGroupBound extends  AbstractModel {
 }
 
 /**
+ * Column permission information
+ * @class
+ */
+class ColumnPrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * Column name
+         * @type {string || null}
+         */
+        this.Column = null;
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Column = 'Column' in params ? params.Column : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
  * AssociateSecurityGroups response structure.
  * @class
  */
@@ -4178,6 +4390,41 @@ class ModifyInstanceVipRequest extends  AbstractModel {
 }
 
 /**
+ * Database permission
+ * @class
+ */
+class DatabasePrivilege extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+        this.Database = 'Database' in params ? params.Database : null;
+
+    }
+}
+
+/**
  * ModifyDBInstancesProject request structure.
  * @class
  */
@@ -4328,6 +4575,12 @@ class DcnDetailItem extends  AbstractModel {
          */
         this.InstanceType = null;
 
+        /**
+         * Whether KMS is enabled.
+         * @type {number || null}
+         */
+        this.EncryptStatus = null;
+
     }
 
     /**
@@ -4355,6 +4608,7 @@ class DcnDetailItem extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.EncryptStatus = 'EncryptStatus' in params ? params.EncryptStatus : null;
 
     }
 }
@@ -4713,6 +4967,48 @@ class DescribeDatabasesResponse extends  AbstractModel {
 }
 
 /**
+ * View permission information
+ * @class
+ */
+class ViewPrivileges extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * View name
+         * @type {string || null}
+         */
+        this.View = null;
+
+        /**
+         * Permission information
+         * @type {Array.<string> || null}
+         */
+        this.Privileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+        this.View = 'View' in params ? params.View : null;
+        this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
  * DescribeOrders request structure.
  * @class
  */
@@ -5031,6 +5327,41 @@ class DescribeDCDBInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyAccountPrivileges response structure.
+ * @class
+ */
+class ModifyAccountPrivilegesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID, which can be used in the [DescribeFlow](https://www.tencentcloud.com/document/product/237/16177) API to query the async task result.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeFlow request structure.
  * @class
  */
@@ -5054,6 +5385,156 @@ class DescribeFlowRequest extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
+ * ModifyAccountPrivileges request structure.
+ * @class
+ */
+class ModifyAccountPrivilegesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of tdsql-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Database account, including username and host address.
+         * @type {Array.<Account> || null}
+         */
+        this.Accounts = null;
+
+        /**
+         * Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".
+Note: If the parameter is left empty, no change will be made to the granted global permissions. To clear the granted global permissions, set the parameter to an empty array.
+         * @type {Array.<string> || null}
+         */
+        this.GlobalPrivileges = null;
+
+        /**
+         * Database permission. Value range: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "REFERENCES", "INDEX", "ALTER", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".	
+Note: If the parameter is not passed in, no change will be made to the granted stored procedure permissions. To clear the granted database permissions, set `Privileges` to an empty array.
+         * @type {Array.<DatabasePrivilege> || null}
+         */
+        this.DatabasePrivileges = null;
+
+        /**
+         * Database table permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
+Note: If the parameter is not passed in, no change will be made to the granted view permissions. To clear the granted table permissions, set `Privileges` to an empty array.
+         * @type {Array.<TablePrivilege> || null}
+         */
+        this.TablePrivileges = null;
+
+        /**
+         * Column permission in the table. Valid values: "SELECT", "INSERT", "UPDATE", "REFERENCES".
+Note: If the parameter is not passed in, no change will be made to the granted column permissions. To clear the granted column permissions, set `Privileges` to an empty array.
+         * @type {Array.<ColumnPrivilege> || null}
+         */
+        this.ColumnPrivileges = null;
+
+        /**
+         * Database view permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
+Note: If the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted view permissions, set `Privileges` to an empty array.
+         * @type {Array.<ViewPrivileges> || null}
+         */
+        this.ViewPrivileges = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Accounts) {
+            this.Accounts = new Array();
+            for (let z in params.Accounts) {
+                let obj = new Account();
+                obj.deserialize(params.Accounts[z]);
+                this.Accounts.push(obj);
+            }
+        }
+        this.GlobalPrivileges = 'GlobalPrivileges' in params ? params.GlobalPrivileges : null;
+
+        if (params.DatabasePrivileges) {
+            this.DatabasePrivileges = new Array();
+            for (let z in params.DatabasePrivileges) {
+                let obj = new DatabasePrivilege();
+                obj.deserialize(params.DatabasePrivileges[z]);
+                this.DatabasePrivileges.push(obj);
+            }
+        }
+
+        if (params.TablePrivileges) {
+            this.TablePrivileges = new Array();
+            for (let z in params.TablePrivileges) {
+                let obj = new TablePrivilege();
+                obj.deserialize(params.TablePrivileges[z]);
+                this.TablePrivileges.push(obj);
+            }
+        }
+
+        if (params.ColumnPrivileges) {
+            this.ColumnPrivileges = new Array();
+            for (let z in params.ColumnPrivileges) {
+                let obj = new ColumnPrivilege();
+                obj.deserialize(params.ColumnPrivileges[z]);
+                this.ColumnPrivileges.push(obj);
+            }
+        }
+
+        if (params.ViewPrivileges) {
+            this.ViewPrivileges = new Array();
+            for (let z in params.ViewPrivileges) {
+                let obj = new ViewPrivileges();
+                obj.deserialize(params.ViewPrivileges[z]);
+                this.ViewPrivileges.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * TencentDB account information
+ * @class
+ */
+class Account extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account name
+         * @type {string || null}
+         */
+        this.User = null;
+
+        /**
+         * Host address
+         * @type {string || null}
+         */
+        this.Host = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.User = 'User' in params ? params.User : null;
+        this.Host = 'Host' in params ? params.Host : null;
 
     }
 }
@@ -5503,18 +5984,30 @@ class ModifyInstanceNetworkRequest extends  AbstractModel {
 }
 
 /**
- * IsolateHourDCDBInstance request structure.
+ * DestroyHourDCDBInstance response structure.
  * @class
  */
-class IsolateHourDCDBInstanceRequest extends  AbstractModel {
+class DestroyHourDCDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance uuid list
-         * @type {Array.<string> || null}
+         * Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/557/56485?from_cn_redirect=1) API to query the async task result.
+         * @type {number || null}
          */
-        this.InstanceIds = null;
+        this.FlowId = null;
+
+        /**
+         * Instance ID, which is the same as the request parameter `InstanceId`.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -5525,7 +6018,9 @@ class IsolateHourDCDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6356,6 +6851,7 @@ module.exports = {
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     ActiveHourDCDBInstanceResponse: ActiveHourDCDBInstanceResponse,
+    DescribeDCDBPriceResponse: DescribeDCDBPriceResponse,
     ModifyInstanceVportResponse: ModifyInstanceVportResponse,
     ModifyInstanceVipResponse: ModifyInstanceVipResponse,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
@@ -6367,7 +6863,7 @@ module.exports = {
     DescribeDBSlowLogsRequest: DescribeDBSlowLogsRequest,
     CreateAccountRequest: CreateAccountRequest,
     DescribeDBParametersResponse: DescribeDBParametersResponse,
-    DestroyHourDCDBInstanceResponse: DestroyHourDCDBInstanceResponse,
+    IsolateHourDCDBInstanceRequest: IsolateHourDCDBInstanceRequest,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     DescribeFlowResponse: DescribeFlowResponse,
     CloneAccountResponse: CloneAccountResponse,
@@ -6387,8 +6883,10 @@ module.exports = {
     CloneAccountRequest: CloneAccountRequest,
     ModifyInstanceNetworkResponse: ModifyInstanceNetworkResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
+    DescribeDCDBPriceRequest: DescribeDCDBPriceRequest,
     SwitchDBInstanceHAResponse: SwitchDBInstanceHAResponse,
     ParamModifyResult: ParamModifyResult,
+    TablePrivilege: TablePrivilege,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     DatabaseFunction: DatabaseFunction,
     ParamConstraint: ParamConstraint,
@@ -6418,6 +6916,7 @@ module.exports = {
     DescribeDcnDetailResponse: DescribeDcnDetailResponse,
     TableColumn: TableColumn,
     SecurityGroupBound: SecurityGroupBound,
+    ColumnPrivilege: ColumnPrivilege,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     DescribeDCDBShardsResponse: DescribeDCDBShardsResponse,
     CreateHourDCDBInstanceResponse: CreateHourDCDBInstanceResponse,
@@ -6427,6 +6926,7 @@ module.exports = {
     IsolateHourDCDBInstanceResponse: IsolateHourDCDBInstanceResponse,
     ShardInfo: ShardInfo,
     ModifyInstanceVipRequest: ModifyInstanceVipRequest,
+    DatabasePrivilege: DatabasePrivilege,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     DcnDetailItem: DcnDetailItem,
     DescribeDBSyncModeRequest: DescribeDBSyncModeRequest,
@@ -6435,6 +6935,7 @@ module.exports = {
     KillSessionResponse: KillSessionResponse,
     SlowLogData: SlowLogData,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
+    ViewPrivileges: ViewPrivileges,
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
@@ -6442,7 +6943,10 @@ module.exports = {
     ResourceTag: ResourceTag,
     DeleteAccountRequest: DeleteAccountRequest,
     DescribeDCDBInstancesResponse: DescribeDCDBInstancesResponse,
+    ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
     DescribeFlowRequest: DescribeFlowRequest,
+    ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
+    Account: Account,
     CreateDCDBInstanceRequest: CreateDCDBInstanceRequest,
     DatabaseProcedure: DatabaseProcedure,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
@@ -6450,7 +6954,7 @@ module.exports = {
     IsolateDedicatedDBInstanceResponse: IsolateDedicatedDBInstanceResponse,
     TerminateDedicatedDBInstanceResponse: TerminateDedicatedDBInstanceResponse,
     ModifyInstanceNetworkRequest: ModifyInstanceNetworkRequest,
-    IsolateHourDCDBInstanceRequest: IsolateHourDCDBInstanceRequest,
+    DestroyHourDCDBInstanceResponse: DestroyHourDCDBInstanceResponse,
     ConstraintRange: ConstraintRange,
     LogFileInfo: LogFileInfo,
     ActiveHourDCDBInstanceRequest: ActiveHourDCDBInstanceRequest,

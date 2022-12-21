@@ -41,7 +41,7 @@ const TaskDetail = models.TaskDetail;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const Inbound = models.Inbound;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
-const ApplyCDBProxyRequest = models.ApplyCDBProxyRequest;
+const TagInfoItem = models.TagInfoItem;
 const CreateAccountsResponse = models.CreateAccountsResponse;
 const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
@@ -49,7 +49,6 @@ const SqlFileInfo = models.SqlFileInfo;
 const CdbSellType = models.CdbSellType;
 const DescribeProxyCustomConfRequest = models.DescribeProxyCustomConfRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
-const ApplyCDBProxyResponse = models.ApplyCDBProxyResponse;
 const MasterInfo = models.MasterInfo;
 const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
 const StopReplicationResponse = models.StopReplicationResponse;
@@ -89,7 +88,6 @@ const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const DescribeCloneListResponse = models.DescribeCloneListResponse;
 const ModifyAccountMaxUserConnectionsRequest = models.ModifyAccountMaxUserConnectionsRequest;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
-const SlowLogItem = models.SlowLogItem;
 const ReleaseIsolatedDBInstancesRequest = models.ReleaseIsolatedDBInstancesRequest;
 const ProxyGroup = models.ProxyGroup;
 const BinlogInfo = models.BinlogInfo;
@@ -164,10 +162,9 @@ const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
 const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const BackupItem = models.BackupItem;
 const ModifyCDBProxyVipVPortRequest = models.ModifyCDBProxyVipVPortRequest;
-const AuditFilter = models.AuditFilter;
+const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
-const TagInfoItem = models.TagInfoItem;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
@@ -290,7 +287,6 @@ const OpenWanServiceRequest = models.OpenWanServiceRequest;
 const DeleteTimeWindowRequest = models.DeleteTimeWindowRequest;
 const Address = models.Address;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const ModifyCDBProxyResponse = models.ModifyCDBProxyResponse;
 const DescribeParamTemplateInfoRequest = models.DescribeParamTemplateInfoRequest;
 const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
 const InitDBInstancesResponse = models.InitDBInstancesResponse;
@@ -305,7 +301,7 @@ const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsReque
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
 const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
 const ZoneConf = models.ZoneConf;
-const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
+const AuditFilter = models.AuditFilter;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const Rule = models.Rule;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
@@ -315,7 +311,7 @@ const DeleteBackupRequest = models.DeleteBackupRequest;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const UpgradeCDBProxyRequest = models.UpgradeCDBProxyRequest;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
-const RoWeight = models.RoWeight;
+const SlowLogItem = models.SlowLogItem;
 const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoResponse;
 const DescribeRollbackRangeTimeResponse = models.DescribeRollbackRangeTimeResponse;
 const ModifyRoGroupInfoRequest = models.ModifyRoGroupInfoRequest;
@@ -323,7 +319,6 @@ const DescribeRollbackRangeTimeRequest = models.DescribeRollbackRangeTimeRequest
 const ReleaseResult = models.ReleaseResult;
 const ProxyGroups = models.ProxyGroups;
 const OpenWanServiceResponse = models.OpenWanServiceResponse;
-const ModifyCDBProxyRequest = models.ModifyCDBProxyRequest;
 const DescribeTagsOfInstanceIdsResponse = models.DescribeTagsOfInstanceIdsResponse;
 const ModifyAccountPasswordResponse = models.ModifyAccountPasswordResponse;
 const AuditRule = models.AuditRule;
@@ -946,17 +941,6 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API is used to configure read/write separation of database proxy.
-     * @param {ModifyCDBProxyRequest} req
-     * @param {function(string, ModifyCDBProxyResponse):void} cb
-     * @public
-     */
-    ModifyCDBProxy(req, cb) {
-        let resp = new ModifyCDBProxyResponse();
-        this.request("ModifyCDBProxy", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the proxy configuration.
      * @param {DescribeProxyCustomConfRequest} req
      * @param {function(string, DescribeProxyCustomConfResponse):void} cb
@@ -1422,17 +1406,6 @@ Note: the HTTP response packet will be very large if it contain a single large s
     ModifyBackupConfig(req, cb) {
         let resp = new ModifyBackupConfigResponse();
         this.request("ModifyBackupConfig", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a database proxy group for a source instance.
-     * @param {ApplyCDBProxyRequest} req
-     * @param {function(string, ApplyCDBProxyResponse):void} cb
-     * @public
-     */
-    ApplyCDBProxy(req, cb) {
-        let resp = new ApplyCDBProxyResponse();
-        this.request("ApplyCDBProxy", req, resp, cb);
     }
 
     /**

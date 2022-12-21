@@ -24,6 +24,7 @@ const DestroyDCDBInstanceResponse = models.DestroyDCDBInstanceResponse;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const ActiveHourDCDBInstanceResponse = models.ActiveHourDCDBInstanceResponse;
+const DescribeDCDBPriceResponse = models.DescribeDCDBPriceResponse;
 const ModifyInstanceVportResponse = models.ModifyInstanceVportResponse;
 const ModifyInstanceVipResponse = models.ModifyInstanceVipResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
@@ -35,7 +36,7 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
-const DestroyHourDCDBInstanceResponse = models.DestroyHourDCDBInstanceResponse;
+const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
 const CloneAccountResponse = models.CloneAccountResponse;
@@ -55,8 +56,10 @@ const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CloneAccountRequest = models.CloneAccountRequest;
 const ModifyInstanceNetworkResponse = models.ModifyInstanceNetworkResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const DescribeDCDBPriceRequest = models.DescribeDCDBPriceRequest;
 const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
 const ParamModifyResult = models.ParamModifyResult;
+const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DatabaseFunction = models.DatabaseFunction;
 const ParamConstraint = models.ParamConstraint;
@@ -86,6 +89,7 @@ const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const TableColumn = models.TableColumn;
 const SecurityGroupBound = models.SecurityGroupBound;
+const ColumnPrivilege = models.ColumnPrivilege;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
 const CreateHourDCDBInstanceResponse = models.CreateHourDCDBInstanceResponse;
@@ -95,6 +99,7 @@ const CancelDcnJobRequest = models.CancelDcnJobRequest;
 const IsolateHourDCDBInstanceResponse = models.IsolateHourDCDBInstanceResponse;
 const ShardInfo = models.ShardInfo;
 const ModifyInstanceVipRequest = models.ModifyInstanceVipRequest;
+const DatabasePrivilege = models.DatabasePrivilege;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DcnDetailItem = models.DcnDetailItem;
 const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
@@ -103,6 +108,7 @@ const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const KillSessionResponse = models.KillSessionResponse;
 const SlowLogData = models.SlowLogData;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
+const ViewPrivileges = models.ViewPrivileges;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
@@ -110,7 +116,10 @@ const InitDCDBInstancesRequest = models.InitDCDBInstancesRequest;
 const ResourceTag = models.ResourceTag;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeDCDBInstancesResponse = models.DescribeDCDBInstancesResponse;
+const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const DescribeFlowRequest = models.DescribeFlowRequest;
+const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
+const Account = models.Account;
 const CreateDCDBInstanceRequest = models.CreateDCDBInstanceRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
@@ -118,7 +127,7 @@ const CreateAccountResponse = models.CreateAccountResponse;
 const IsolateDedicatedDBInstanceResponse = models.IsolateDedicatedDBInstanceResponse;
 const TerminateDedicatedDBInstanceResponse = models.TerminateDedicatedDBInstanceResponse;
 const ModifyInstanceNetworkRequest = models.ModifyInstanceNetworkRequest;
-const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
+const DestroyHourDCDBInstanceResponse = models.DestroyHourDCDBInstanceResponse;
 const ConstraintRange = models.ConstraintRange;
 const LogFileInfo = models.LogFileInfo;
 const ActiveHourDCDBInstanceRequest = models.ActiveHourDCDBInstanceRequest;
@@ -226,6 +235,17 @@ Note: accounts with the same username but different hosts are different accounts
     ResetAccountPassword(req, cb) {
         let resp = new ResetAccountPasswordResponse();
         this.request("ResetAccountPassword", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the price of an instance before you purchase it.
+     * @param {DescribeDCDBPriceRequest} req
+     * @param {function(string, DescribeDCDBPriceResponse):void} cb
+     * @public
+     */
+    DescribeDCDBPrice(req, cb) {
+        let resp = new DescribeDCDBPriceResponse();
+        this.request("DescribeDCDBPrice", req, resp, cb);
     }
 
     /**
@@ -435,6 +455,22 @@ Note: accounts with the same username but different hosts are different accounts
     ModifyInstanceNetwork(req, cb) {
         let resp = new ModifyInstanceNetworkResponse();
         this.request("ModifyInstanceNetwork", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the permissions of a TencentDB instance account.
+
+**Notes**
+- Only the SELECT permission (that is, set the permission parameter to `["SELECT"]`) of the system database `mysql` can be granted.
+- An error will be reported if read-write permissions are granted to a read-only account.
+- If the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
+     * @param {ModifyAccountPrivilegesRequest} req
+     * @param {function(string, ModifyAccountPrivilegesResponse):void} cb
+     * @public
+     */
+    ModifyAccountPrivileges(req, cb) {
+        let resp = new ModifyAccountPrivilegesResponse();
+        this.request("ModifyAccountPrivileges", req, resp, cb);
     }
 
     /**

@@ -1403,60 +1403,26 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * ApplyCDBProxy request structure.
+ * Tag information
  * @class
  */
-class ApplyCDBProxyRequest extends  AbstractModel {
+class TagInfoItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of the source instance
+         * Tag key
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.TagKey = null;
 
         /**
-         * VPC ID
+         * Tag value
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.UniqVpcId = null;
-
-        /**
-         * VPC subnet ID
-         * @type {string || null}
-         */
-        this.UniqSubnetId = null;
-
-        /**
-         * Number of nodes in the proxy group
-         * @type {number || null}
-         */
-        this.ProxyCount = null;
-
-        /**
-         * Number of CPU cores
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Memory
-         * @type {number || null}
-         */
-        this.Mem = null;
-
-        /**
-         * Security group
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroup = null;
-
-        /**
-         * Description (up to 256 characters)
-         * @type {string || null}
-         */
-        this.Desc = null;
+        this.TagValue = null;
 
     }
 
@@ -1467,14 +1433,8 @@ class ApplyCDBProxyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
-        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
-        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Mem = 'Mem' in params ? params.Mem : null;
-        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
-        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -1796,42 +1756,6 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ApplyCDBProxy response structure.
- * @class
- */
-class ApplyCDBProxyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Async request ID
-Note: this field may return `null`, indicating that no valid value can be found.
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3854,115 +3778,6 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
 }
 
 /**
- * Structured slow log details
- * @class
- */
-class SlowLogItem extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * SQL execution time.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Timestamp = null;
-
-        /**
-         * SQL execution duration in seconds.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.QueryTime = null;
-
-        /**
-         * SQL statement.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SqlText = null;
-
-        /**
-         * Client address.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UserHost = null;
-
-        /**
-         * Username.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * Database name.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Database = null;
-
-        /**
-         * Lock duration in seconds.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.LockTime = null;
-
-        /**
-         * Number of scanned rows.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RowsExamined = null;
-
-        /**
-         * Number of rows in result set.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.RowsSent = null;
-
-        /**
-         * SQL template.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SqlTemplate = null;
-
-        /**
-         * SQL statement MD5.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Md5 = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
-        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
-        this.SqlText = 'SqlText' in params ? params.SqlText : null;
-        this.UserHost = 'UserHost' in params ? params.UserHost : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Database = 'Database' in params ? params.Database : null;
-        this.LockTime = 'LockTime' in params ? params.LockTime : null;
-        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
-        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
-        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
-        this.Md5 = 'Md5' in params ? params.Md5 : null;
-
-    }
-}
-
-/**
  * ReleaseIsolatedDBInstances request structure.
  * @class
  */
@@ -5588,6 +5403,13 @@ class BackupInfo extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Whether the backup file is encrypted. Valid values: `on` (encrypted), `off` (unencrypted).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EncryptionFlag = null;
+
     }
 
     /**
@@ -5624,6 +5446,7 @@ class BackupInfo extends  AbstractModel {
         }
         this.CosStorageType = 'CosStorageType' in params ? params.CosStorageType : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EncryptionFlag = 'EncryptionFlag' in params ? params.EncryptionFlag : null;
 
     }
 }
@@ -8198,37 +8021,24 @@ class ModifyCDBProxyVipVPortRequest extends  AbstractModel {
 }
 
 /**
- * Audit rule filters
+ * DescribeCDBProxy request structure.
  * @class
  */
-class AuditFilter extends  AbstractModel {
+class DescribeCDBProxyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter parameter names. Valid values:
-SrcIp: Client IP;
-User: Database account;
-DB: Database name.
+         * Instance ID
          * @type {string || null}
          */
-        this.Type = null;
+        this.InstanceId = null;
 
         /**
-         * Filter match type. Valid value:
-`INC`: Include;
-`EXC`: Exclude;
-`EQ`: Equal to;
-`NEQ`: Not equal to.
+         * Proxy group ID
          * @type {string || null}
          */
-        this.Compare = null;
-
-        /**
-         * Filter match value
-         * @type {string || null}
-         */
-        this.Value = null;
+        this.ProxyGroupId = null;
 
     }
 
@@ -8239,9 +8049,8 @@ DB: Database name.
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Compare = 'Compare' in params ? params.Compare : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
 
     }
 }
@@ -8429,43 +8238,6 @@ class DescribeRollbackTaskDetailRequest extends  AbstractModel {
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
- * Tag information
- * @class
- */
-class TagInfoItem extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Tag key
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TagKey = null;
-
-        /**
-         * Tag value
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TagValue = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -8724,7 +8496,7 @@ class CdbSellConfig extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Instance type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
+         * Instance type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance), `BASIC_V2` (basic v2 instance).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -12532,7 +12304,7 @@ class ModifyInstancePasswordComplexityRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * List of parameters to be modified. Every element is a pair of `Name` (parameter name) and `CurrentValue` (new value).
+         * List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value). Valid values for `Name` of version 8.0: `validate_password.policy`, `validate_password.lengt`, `validate_password.mixed_case_coun`, `validate_password.number_coun`, `validate_password.special_char_count`. Valid values for `Name` of version 5.6 and 5.7: `validate_password_polic`, `validate_password_lengt` `validate_password_mixed_case_coun`, `validate_password_number_coun`, `validate_password_special_char_coun`.
          * @type {Array.<Parameter> || null}
          */
         this.ParamList = null;
@@ -14882,34 +14654,6 @@ class DescribeDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * ModifyCDBProxy response structure.
- * @class
- */
-class ModifyCDBProxyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeParamTemplateInfo request structure.
  * @class
  */
@@ -15452,24 +15196,37 @@ class ZoneConf extends  AbstractModel {
 }
 
 /**
- * DescribeCDBProxy request structure.
+ * Audit rule filters
  * @class
  */
-class DescribeCDBProxyRequest extends  AbstractModel {
+class AuditFilter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Filter parameter names. Valid values:
+SrcIp: Client IP;
+User: Database account;
+DB: Database name.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Type = null;
 
         /**
-         * Proxy group ID
+         * Filter match type. Valid value:
+`INC`: Include;
+`EXC`: Exclude;
+`EQ`: Equal to;
+`NEQ`: Not equal to.
          * @type {string || null}
          */
-        this.ProxyGroupId = null;
+        this.Compare = null;
+
+        /**
+         * Filter match value
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -15480,8 +15237,9 @@ class DescribeCDBProxyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Compare = 'Compare' in params ? params.Compare : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -15868,12 +15626,89 @@ class DescribeInstanceParamsRequest extends  AbstractModel {
 }
 
 /**
- * Instance weight
+ * Structured slow log details
  * @class
  */
-class RoWeight extends  AbstractModel {
+class SlowLogItem extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * SQL execution time.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * SQL execution duration in seconds.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.QueryTime = null;
+
+        /**
+         * SQL statement.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SqlText = null;
+
+        /**
+         * Client address.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserHost = null;
+
+        /**
+         * Username.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Database name.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Lock duration in seconds.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LockTime = null;
+
+        /**
+         * Number of scanned rows.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RowsExamined = null;
+
+        /**
+         * Number of rows in result set.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RowsSent = null;
+
+        /**
+         * SQL template.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SqlTemplate = null;
+
+        /**
+         * SQL statement MD5.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Md5 = null;
 
     }
 
@@ -15884,6 +15719,17 @@ class RoWeight extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+        this.SqlText = 'SqlText' in params ? params.SqlText : null;
+        this.UserHost = 'UserHost' in params ? params.UserHost : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.LockTime = 'LockTime' in params ? params.LockTime : null;
+        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
+        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
+        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
     }
 }
@@ -16276,88 +16122,6 @@ class OpenWanServiceResponse extends  AbstractModel {
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyCDBProxy request structure.
- * @class
- */
-class ModifyCDBProxyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique ID of the database proxy group
-         * @type {string || null}
-         */
-        this.ProxyGroupId = null;
-
-        /**
-         * Whether to remove delayed read-only instances from the proxy group. Valid values: `true`, `false`. Default value: `false`.
-         * @type {boolean || null}
-         */
-        this.IsKickout = null;
-
-        /**
-         * The minimum number of read-only instances allowed by the proxy group. Minimum value: 1; maximum value: The number of instances.
-         * @type {number || null}
-         */
-        this.MinCount = null;
-
-        /**
-         * Delay threshold. If `IsKickOut` is set to `true`, this parameter is required.
-         * @type {number || null}
-         */
-        this.MaxDelay = null;
-
-        /**
-         * Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
-         * @type {string || null}
-         */
-        this.WeightMode = null;
-
-        /**
-         * Read-Only weight of an instance
-         * @type {RoWeight || null}
-         */
-        this.RoWeightValues = null;
-
-        /**
-         * Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`. Default value: `false`.
-         * @type {boolean || null}
-         */
-        this.FailOver = null;
-
-        /**
-         * Whether to automatically add newly created read-only instances to the proxy group. Valid values: `true`, `false` Default value: `false`.
-         * @type {boolean || null}
-         */
-        this.AutoAddRo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
-        this.IsKickout = 'IsKickout' in params ? params.IsKickout : null;
-        this.MinCount = 'MinCount' in params ? params.MinCount : null;
-        this.MaxDelay = 'MaxDelay' in params ? params.MaxDelay : null;
-        this.WeightMode = 'WeightMode' in params ? params.WeightMode : null;
-
-        if (params.RoWeightValues) {
-            let obj = new RoWeight();
-            obj.deserialize(params.RoWeightValues)
-            this.RoWeightValues = obj;
-        }
-        this.FailOver = 'FailOver' in params ? params.FailOver : null;
-        this.AutoAddRo = 'AutoAddRo' in params ? params.AutoAddRo : null;
 
     }
 }
@@ -16766,7 +16530,7 @@ module.exports = {
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     Inbound: Inbound,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
-    ApplyCDBProxyRequest: ApplyCDBProxyRequest,
+    TagInfoItem: TagInfoItem,
     CreateAccountsResponse: CreateAccountsResponse,
     SwitchDBInstanceMasterSlaveResponse: SwitchDBInstanceMasterSlaveResponse,
     InstanceRollbackRangeTime: InstanceRollbackRangeTime,
@@ -16774,7 +16538,6 @@ module.exports = {
     CdbSellType: CdbSellType,
     DescribeProxyCustomConfRequest: DescribeProxyCustomConfRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
-    ApplyCDBProxyResponse: ApplyCDBProxyResponse,
     MasterInfo: MasterInfo,
     DescribeBinlogsResponse: DescribeBinlogsResponse,
     StopReplicationResponse: StopReplicationResponse,
@@ -16814,7 +16577,6 @@ module.exports = {
     DescribeCloneListResponse: DescribeCloneListResponse,
     ModifyAccountMaxUserConnectionsRequest: ModifyAccountMaxUserConnectionsRequest,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
-    SlowLogItem: SlowLogItem,
     ReleaseIsolatedDBInstancesRequest: ReleaseIsolatedDBInstancesRequest,
     ProxyGroup: ProxyGroup,
     BinlogInfo: BinlogInfo,
@@ -16889,10 +16651,9 @@ module.exports = {
     OpenAuditServiceRequest: OpenAuditServiceRequest,
     BackupItem: BackupItem,
     ModifyCDBProxyVipVPortRequest: ModifyCDBProxyVipVPortRequest,
-    AuditFilter: AuditFilter,
+    DescribeCDBProxyRequest: DescribeCDBProxyRequest,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     DescribeRollbackTaskDetailRequest: DescribeRollbackTaskDetailRequest,
-    TagInfoItem: TagInfoItem,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
@@ -17015,7 +16776,6 @@ module.exports = {
     DeleteTimeWindowRequest: DeleteTimeWindowRequest,
     Address: Address,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
-    ModifyCDBProxyResponse: ModifyCDBProxyResponse,
     DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
     DescribeBackupDownloadRestrictionRequest: DescribeBackupDownloadRestrictionRequest,
     InitDBInstancesResponse: InitDBInstancesResponse,
@@ -17030,7 +16790,7 @@ module.exports = {
     DeleteAccountsRequest: DeleteAccountsRequest,
     SwitchDrInstanceToMasterResponse: SwitchDrInstanceToMasterResponse,
     ZoneConf: ZoneConf,
-    DescribeCDBProxyRequest: DescribeCDBProxyRequest,
+    AuditFilter: AuditFilter,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     Rule: Rule,
     DescribeAccountsResponse: DescribeAccountsResponse,
@@ -17040,7 +16800,7 @@ module.exports = {
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
     UpgradeCDBProxyRequest: UpgradeCDBProxyRequest,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
-    RoWeight: RoWeight,
+    SlowLogItem: SlowLogItem,
     DescribeDeviceMonitorInfoResponse: DescribeDeviceMonitorInfoResponse,
     DescribeRollbackRangeTimeResponse: DescribeRollbackRangeTimeResponse,
     ModifyRoGroupInfoRequest: ModifyRoGroupInfoRequest,
@@ -17048,7 +16808,6 @@ module.exports = {
     ReleaseResult: ReleaseResult,
     ProxyGroups: ProxyGroups,
     OpenWanServiceResponse: OpenWanServiceResponse,
-    ModifyCDBProxyRequest: ModifyCDBProxyRequest,
     DescribeTagsOfInstanceIdsResponse: DescribeTagsOfInstanceIdsResponse,
     ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
     AuditRule: AuditRule,

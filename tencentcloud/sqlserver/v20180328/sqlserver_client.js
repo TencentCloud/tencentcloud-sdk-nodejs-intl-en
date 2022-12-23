@@ -32,6 +32,7 @@ const CreateBusinessDBInstancesResponse = models.CreateBusinessDBInstancesRespon
 const StartBackupMigrationResponse = models.StartBackupMigrationResponse;
 const RegionInfo = models.RegionInfo;
 const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
+const SlaveZones = models.SlaveZones;
 const ModifyIncrementalMigrationRequest = models.ModifyIncrementalMigrationRequest;
 const MigrateDetail = models.MigrateDetail;
 const CreateIncrementalMigrationRequest = models.CreateIncrementalMigrationRequest;

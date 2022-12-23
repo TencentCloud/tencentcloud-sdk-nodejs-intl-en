@@ -527,6 +527,24 @@ class DescribeAccountsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * Account ID
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Sorting by `createTime`, `updateTime`, or `passTime`. Default value: `createTime` (desc).
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting rule. Valid values: `desc` (descending order), `asc` (ascending order). Default value: `desc`.
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
     }
 
     /**
@@ -539,6 +557,9 @@ class DescribeAccountsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
 }
@@ -882,6 +903,41 @@ class ModifyBackupStrategyResponse extends  AbstractModel {
         this.Errno = 'Errno' in params ? params.Errno : null;
         this.Msg = 'Msg' in params ? params.Msg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Replica AZ information
+ * @class
+ */
+class SlaveZones extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Replica AZ region code
+         * @type {string || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * Replica AZ
+         * @type {string || null}
+         */
+        this.SlaveZoneName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.SlaveZoneName = 'SlaveZoneName' in params ? params.SlaveZoneName : null;
 
     }
 }
@@ -4270,6 +4326,18 @@ class DescribeDBsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Sorting rule. Valid values: `desc` (descending order), `asc` (ascending order). Default value: `desc`.
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
     }
 
     /**
@@ -4282,6 +4350,8 @@ class DescribeDBsRequest extends  AbstractModel {
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
 }
@@ -6098,6 +6168,19 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.TimeZone = null;
 
+        /**
+         * Whether the instance is deployed across AZs
+         * @type {boolean || null}
+         */
+        this.IsDrZone = null;
+
+        /**
+         * Replica AZ information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SlaveZones || null}
+         */
+        this.SlaveZones = null;
+
     }
 
     /**
@@ -6165,6 +6248,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.TgwWanVPort = 'TgwWanVPort' in params ? params.TgwWanVPort : null;
         this.Collation = 'Collation' in params ? params.Collation : null;
         this.TimeZone = 'TimeZone' in params ? params.TimeZone : null;
+        this.IsDrZone = 'IsDrZone' in params ? params.IsDrZone : null;
+
+        if (params.SlaveZones) {
+            let obj = new SlaveZones();
+            obj.deserialize(params.SlaveZones)
+            this.SlaveZones = obj;
+        }
 
     }
 }
@@ -9670,6 +9760,7 @@ module.exports = {
     StartBackupMigrationResponse: StartBackupMigrationResponse,
     RegionInfo: RegionInfo,
     ModifyBackupStrategyResponse: ModifyBackupStrategyResponse,
+    SlaveZones: SlaveZones,
     ModifyIncrementalMigrationRequest: ModifyIncrementalMigrationRequest,
     MigrateDetail: MigrateDetail,
     CreateIncrementalMigrationRequest: CreateIncrementalMigrationRequest,

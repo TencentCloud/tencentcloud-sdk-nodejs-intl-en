@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const ParamDesc = models.ParamDesc;
@@ -60,6 +61,7 @@ const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGrou
 const DatabaseFunction = models.DatabaseFunction;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
+const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const DatabaseTable = models.DatabaseTable;
 const Deal = models.Deal;
@@ -72,9 +74,10 @@ const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
 const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
+const KillSessionRequest = models.KillSessionRequest;
 const TerminateDedicatedDBInstanceRequest = models.TerminateDedicatedDBInstanceRequest;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
-const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
+const DeleteAccountRequest = models.DeleteAccountRequest;
 const TableColumn = models.TableColumn;
 const SecurityGroupBound = models.SecurityGroupBound;
 const ColumnPrivilege = models.ColumnPrivilege;
@@ -91,6 +94,7 @@ const DatabasePrivilege = models.DatabasePrivilege;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const FunctionPrivilege = models.FunctionPrivilege;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const KillSessionResponse = models.KillSessionResponse;
 const SlowLogData = models.SlowLogData;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ViewPrivileges = models.ViewPrivileges;
@@ -98,7 +102,7 @@ const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const ResourceTag = models.ResourceTag;
-const DeleteAccountRequest = models.DeleteAccountRequest;
+const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const DCNReplicaConfig = models.DCNReplicaConfig;
 const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
@@ -245,6 +249,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to kill the specified session.
+     * @param {KillSessionRequest} req
+     * @param {function(string, KillSessionResponse):void} cb
+     * @public
+     */
+    KillSession(req, cb) {
+        let resp = new KillSessionResponse();
+        this.request("KillSession", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of slow query logs.
      * @param {DescribeDBSlowLogsRequest} req
      * @param {function(string, DescribeDBSlowLogsResponse):void} cb
@@ -275,6 +290,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
         this.request("DescribeOrders", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify sync task attributes (currently, only the task name can be modified).
+     * @param {ModifySyncTaskAttributeRequest} req
+     * @param {function(string, ModifySyncTaskAttributeResponse):void} cb
+     * @public
+     */
+    ModifySyncTaskAttribute(req, cb) {
+        let resp = new ModifySyncTaskAttributeResponse();
+        this.request("ModifySyncTaskAttribute", req, resp, cb);
     }
 
     /**
@@ -411,14 +437,14 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     }
 
     /**
-     * This API is used to modify sync task attributes (currently, only the task name can be modified).
-     * @param {ModifySyncTaskAttributeRequest} req
-     * @param {function(string, ModifySyncTaskAttributeResponse):void} cb
+     * This API is used to create a monthly subscribed TencentDB instance by passing in information such as instance specifications, database version number, validity period, and quantity.
+     * @param {CreateDBInstanceRequest} req
+     * @param {function(string, CreateDBInstanceResponse):void} cb
      * @public
      */
-    ModifySyncTaskAttribute(req, cb) {
-        let resp = new ModifySyncTaskAttributeResponse();
-        this.request("ModifySyncTaskAttribute", req, resp, cb);
+    CreateDBInstance(req, cb) {
+        let resp = new CreateDBInstanceResponse();
+        this.request("CreateDBInstance", req, resp, cb);
     }
 
     /**

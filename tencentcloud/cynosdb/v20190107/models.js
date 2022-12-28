@@ -122,47 +122,12 @@ class InquirePriceRenewRequest extends  AbstractModel {
 }
 
 /**
- * Task information
+ * Details of whether the parameter can be modified
  * @class
  */
-class ObjectTask extends  AbstractModel {
+class ModifiableInfo extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Auto-Incrementing task ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * Task type
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TaskType = null;
-
-        /**
-         * Task status
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TaskStatus = null;
-
-        /**
-         * Task ID (cluster ID | instance group ID | instance ID)
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ObjectId = null;
-
-        /**
-         * Task type
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ObjectType = null;
 
     }
 
@@ -173,11 +138,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.TaskType = 'TaskType' in params ? params.TaskType : null;
-        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
-        this.ObjectId = 'ObjectId' in params ? params.ObjectId : null;
-        this.ObjectType = 'ObjectType' in params ? params.ObjectType : null;
 
     }
 }
@@ -233,9 +193,28 @@ class DescribeAccountsRequest extends  AbstractModel {
         /**
          * Database type. Valid values: 
 <li> MYSQL </li>
+This parameter has been disused.
          * @type {string || null}
          */
         this.DbType = null;
+
+        /**
+         * List of accounts to be filtered
+         * @type {Array.<string> || null}
+         */
+        this.Hosts = null;
+
+        /**
+         * Maximum entries returned per page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -249,6 +228,9 @@ class DescribeAccountsRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.AccountNames = 'AccountNames' in params ? params.AccountNames : null;
         this.DbType = 'DbType' in params ? params.DbType : null;
+        this.Hosts = 'Hosts' in params ? params.Hosts : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -312,12 +294,14 @@ class DescribeRollbackTimeRangeResponse extends  AbstractModel {
 
         /**
          * Start time of valid rollback time range (disused)
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TimeRangeStart = null;
 
         /**
          * End time of valid rollback time range (disused)
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TimeRangeEnd = null;
@@ -876,6 +860,7 @@ class DescribeClusterParamsResponse extends  AbstractModel {
 
         /**
          * Instance parameter list
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<ParamInfo> || null}
          */
         this.Items = null;
@@ -1080,6 +1065,58 @@ class DescribeParamTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * SearchClusterTables request structure.
+ * @class
+ */
+class SearchClusterTablesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Data table name
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * Data table type. Valid values:
+`view`: Only return to view,
+`base_table`: Only return to basic table,
+`all`: Return to view and table.
+         * @type {string || null}
+         */
+        this.TableType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.TableType = 'TableType' in params ? params.TableType : null;
+
+    }
+}
+
+/**
  * PauseServerless request structure.
  * @class
  */
@@ -1110,6 +1147,67 @@ class PauseServerlessRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.ForcePause = 'ForcePause' in params ? params.ForcePause : null;
+
+    }
+}
+
+/**
+ * Task information
+ * @class
+ */
+class ObjectTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Auto-Incrementing task ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task type
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * Task status
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * Task ID (cluster ID | instance group ID | instance ID)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ObjectId = null;
+
+        /**
+         * Task type
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ObjectType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.ObjectId = 'ObjectId' in params ? params.ObjectId : null;
+        this.ObjectType = 'ObjectType' in params ? params.ObjectType : null;
 
     }
 }
@@ -2003,6 +2101,55 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class InstanceInitInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+
+    }
+}
+
+/**
  * DescribeClusterDetail request structure.
  * @class
  */
@@ -2108,6 +2255,12 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
         this.Groups = null;
 
         /**
+         * The total number of groups
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2131,6 +2284,7 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
                 this.Groups.push(obj);
             }
         }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2230,6 +2384,34 @@ class OfflineClusterRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * ResetAccountPassword response structure.
+ * @class
+ */
+class ResetAccountPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2506,6 +2688,12 @@ class DescribeBackupListRequest extends  AbstractModel {
          */
         this.BackupNames = null;
 
+        /**
+         * ID list of the snapshot backup
+         * @type {Array.<number> || null}
+         */
+        this.SnapshotIdList = null;
+
     }
 
     /**
@@ -2527,6 +2715,51 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.FileNames = 'FileNames' in params ? params.FileNames : null;
         this.BackupNames = 'BackupNames' in params ? params.BackupNames : null;
+        this.SnapshotIdList = 'SnapshotIdList' in params ? params.SnapshotIdList : null;
+
+    }
+}
+
+/**
+ * SearchClusterDatabases request structure.
+ * @class
+ */
+class SearchClusterDatabasesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Database name
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * Whether to search exactly
+Valid values: `0` (fuzzy search), `1` (exact search). 
+Default value: `0`.
+         * @type {number || null}
+         */
+        this.MatchType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.MatchType = 'MatchType' in params ? params.MatchType : null;
 
     }
 }
@@ -2794,6 +3027,40 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          */
         this.StoragePayMode = null;
 
+        /**
+         * Physical zone
+         * @type {string || null}
+         */
+        this.PhysicalZone = null;
+
+        /**
+         * Business type
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.BusinessType = null;
+
+        /**
+         * Task
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ObjectTask> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * Whether to freeze
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IsFreeze = null;
+
+        /**
+         * The resource tag
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -2845,6 +3112,27 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         this.ServerlessStatus = 'ServerlessStatus' in params ? params.ServerlessStatus : null;
         this.StorageId = 'StorageId' in params ? params.StorageId : null;
         this.StoragePayMode = 'StoragePayMode' in params ? params.StoragePayMode : null;
+        this.PhysicalZone = 'PhysicalZone' in params ? params.PhysicalZone : null;
+        this.BusinessType = 'BusinessType' in params ? params.BusinessType : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new ObjectTask();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
+        this.IsFreeze = 'IsFreeze' in params ? params.IsFreeze : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new Tag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -3209,7 +3497,7 @@ Clusters with storage billed in monthly subscription can’t be cloned or rolled
         this.AlarmPolicyIds = null;
 
         /**
-         * Array of parameters
+         * Array of parameters. Valid values: `character_set_server` (utf8｜latin1｜gbk｜utf8mb4), `lower_case_table_names`. 0: case-sensitive; 1: case-insensitive).
          * @type {Array.<ParamItem> || null}
          */
         this.ClusterParams = null;
@@ -3231,6 +3519,12 @@ Clusters with storage billed in monthly subscription can’t be cloned or rolled
          * @type {string || null}
          */
         this.SlaveZone = null;
+
+        /**
+         * 
+         * @type {Array.<InstanceInitInfo> || null}
+         */
+        this.InstanceInitInfos = null;
 
     }
 
@@ -3297,6 +3591,15 @@ Clusters with storage billed in monthly subscription can’t be cloned or rolled
         this.DealMode = 'DealMode' in params ? params.DealMode : null;
         this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
         this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+
+        if (params.InstanceInitInfos) {
+            this.InstanceInitInfos = new Array();
+            for (let z in params.InstanceInitInfos) {
+                let obj = new InstanceInitInfo();
+                obj.deserialize(params.InstanceInitInfos[z]);
+                this.InstanceInitInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -3750,6 +4053,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Description = null;
 
+        /**
+         * Whether it is global parameter
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * Whether the parameter can be modified
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ModifiableInfo || null}
+         */
+        this.ModifiableInfo = null;
+
+        /**
+         * Whether it is a function
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsFunc = null;
+
+        /**
+         * Function
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Func = null;
+
     }
 
     /**
@@ -3770,6 +4101,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MatchType = 'MatchType' in params ? params.MatchType : null;
         this.MatchValue = 'MatchValue' in params ? params.MatchValue : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+
+        if (params.ModifiableInfo) {
+            let obj = new ModifiableInfo();
+            obj.deserialize(params.ModifiableInfo)
+            this.ModifiableInfo = obj;
+        }
+        this.IsFunc = 'IsFunc' in params ? params.IsFunc : null;
+        this.Func = 'Func' in params ? params.Func : null;
 
     }
 }
@@ -3788,6 +4128,24 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
          */
         this.ProjectId = null;
 
+        /**
+         * Maximum entries returned per page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Search by keyword
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
     }
 
     /**
@@ -3798,6 +4156,9 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
             return;
         }
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
 
     }
 }
@@ -5183,6 +5544,42 @@ class BinlogItem extends  AbstractModel {
 }
 
 /**
+ * SearchClusterDatabases response structure.
+ * @class
+ */
+class SearchClusterDatabasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database List
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Databases = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Databases = 'Databases' in params ? params.Databases : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * OfflineCluster response structure.
  * @class
  */
@@ -5192,6 +5589,41 @@ class OfflineClusterResponse extends  AbstractModel {
 
         /**
          * Task flow ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SwitchProxyVpc response structure.
+ * @class
+ */
+class SwitchProxyVpcResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
          * @type {number || null}
          */
         this.FlowId = null;
@@ -5435,6 +5867,12 @@ class Account extends  AbstractModel {
          */
         this.Host = null;
 
+        /**
+         * The max connections
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
+
     }
 
     /**
@@ -5449,6 +5887,7 @@ class Account extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.Host = 'Host' in params ? params.Host : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
 
     }
 }
@@ -5518,6 +5957,50 @@ class CreateBackupRequest extends  AbstractModel {
 }
 
 /**
+ * SearchClusterTables response structure.
+ * @class
+ */
+class SearchClusterTablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data table list
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DatabaseTables> || null}
+         */
+        this.Tables = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Tables) {
+            this.Tables = new Array();
+            for (let z in params.Tables) {
+                let obj = new DatabaseTables();
+                obj.deserialize(params.Tables[z]);
+                this.Tables.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpgradeInstance request structure.
  * @class
  */
@@ -5573,6 +6056,12 @@ class UpgradeInstanceRequest extends  AbstractModel {
          */
         this.DealMode = null;
 
+        /**
+         * Valid values: `NormalUpgrade` (Normal mode), `FastUpgrade` (QuickChange). If the system detects that the configuration modification process will cause a momentary disconnection, the process will be terminated.
+         * @type {string || null}
+         */
+        this.UpgradeMode = null;
+
     }
 
     /**
@@ -5590,6 +6079,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.DbType = 'DbType' in params ? params.DbType : null;
         this.DealMode = 'DealMode' in params ? params.DealMode : null;
+        this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
 
     }
 }
@@ -5639,6 +6129,62 @@ class DescribeMaintainPeriodResponse extends  AbstractModel {
         this.MaintainStartTime = 'MaintainStartTime' in params ? params.MaintainStartTime : null;
         this.MaintainDuration = 'MaintainDuration' in params ? params.MaintainDuration : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SwitchProxyVpc request structure.
+ * @class
+ */
+class SwitchProxyVpcRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * VPC ID in string
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Subnet ID in string
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Valid hours of old IP
+         * @type {number || null}
+         */
+        this.OldIpReserveHours = null;
+
+        /**
+         * Database proxy group ID (required), which can be obtained through the `DescribeProxies` API.
+         * @type {string || null}
+         */
+        this.ProxyGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.OldIpReserveHours = 'OldIpReserveHours' in params ? params.OldIpReserveHours : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
 
     }
 }
@@ -6557,6 +7103,55 @@ pausing
 }
 
 /**
+ * ResetAccountPassword request structure.
+ * @class
+ */
+class ResetAccountPasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database account name
+         * @type {string || null}
+         */
+        this.AccountName = null;
+
+        /**
+         * New password of the database account
+         * @type {string || null}
+         */
+        this.AccountPassword = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Host. Default value: `%`
+         * @type {string || null}
+         */
+        this.Host = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountName = 'AccountName' in params ? params.AccountName : null;
+        this.AccountPassword = 'AccountPassword' in params ? params.AccountPassword : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Host = 'Host' in params ? params.Host : null;
+
+    }
+}
+
+/**
  * DescribeInstanceDetail request structure.
  * @class
  */
@@ -6749,9 +7344,16 @@ class DescribeAccountsResponse extends  AbstractModel {
 
         /**
          * Database account list
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Account> || null}
          */
         this.AccountSet = null;
+
+        /**
+         * Total number of accounts
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6777,6 +7379,7 @@ class DescribeAccountsResponse extends  AbstractModel {
                 this.AccountSet.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6933,6 +7536,12 @@ class DescribeClusterParamsRequest extends  AbstractModel {
          */
         this.ClusterId = null;
 
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
     }
 
     /**
@@ -6943,6 +7552,7 @@ class DescribeClusterParamsRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
 
     }
 }
@@ -7492,7 +8102,7 @@ module.exports = {
     ModifyClusterNameRequest: ModifyClusterNameRequest,
     DescribeRollbackTimeRangeRequest: DescribeRollbackTimeRangeRequest,
     InquirePriceRenewRequest: InquirePriceRenewRequest,
-    ObjectTask: ObjectTask,
+    ModifiableInfo: ModifiableInfo,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     ModifyMaintainPeriodConfigRequest: ModifyMaintainPeriodConfigRequest,
@@ -7513,7 +8123,9 @@ module.exports = {
     IsolateInstanceResponse: IsolateInstanceResponse,
     ModifyInstanceNameResponse: ModifyInstanceNameResponse,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
+    SearchClusterTablesRequest: SearchClusterTablesRequest,
     PauseServerlessRequest: PauseServerlessRequest,
+    ObjectTask: ObjectTask,
     CreateClustersResponse: CreateClustersResponse,
     SetRenewFlagRequest: SetRenewFlagRequest,
     CynosdbInstanceGrp: CynosdbInstanceGrp,
@@ -7532,6 +8144,7 @@ module.exports = {
     ExportInstanceSlowQueriesResponse: ExportInstanceSlowQueriesResponse,
     SwitchClusterZoneRequest: SwitchClusterZoneRequest,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
+    InstanceInitInfo: InstanceInitInfo,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
     DeleteBackupResponse: DeleteBackupResponse,
     Tag: Tag,
@@ -7539,10 +8152,12 @@ module.exports = {
     RemoveClusterSlaveZoneResponse: RemoveClusterSlaveZoneResponse,
     PauseServerlessResponse: PauseServerlessResponse,
     OfflineClusterRequest: OfflineClusterRequest,
+    ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     NewAccount: NewAccount,
     BackupFileInfo: BackupFileInfo,
     DescribeBinlogDownloadUrlResponse: DescribeBinlogDownloadUrlResponse,
     DescribeBackupListRequest: DescribeBackupListRequest,
+    SearchClusterDatabasesRequest: SearchClusterDatabasesRequest,
     CynosdbInstance: CynosdbInstance,
     ModifyClusterSlaveZoneResponse: ModifyClusterSlaveZoneResponse,
     RemoveClusterSlaveZoneRequest: RemoveClusterSlaveZoneRequest,
@@ -7578,14 +8193,18 @@ module.exports = {
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     CynosdbCluster: CynosdbCluster,
     BinlogItem: BinlogItem,
+    SearchClusterDatabasesResponse: SearchClusterDatabasesResponse,
     OfflineClusterResponse: OfflineClusterResponse,
+    SwitchProxyVpcResponse: SwitchProxyVpcResponse,
     InstanceSpec: InstanceSpec,
     InquirePriceCreateResponse: InquirePriceCreateResponse,
     SetRenewFlagResponse: SetRenewFlagResponse,
     Account: Account,
     CreateBackupRequest: CreateBackupRequest,
+    SearchClusterTablesResponse: SearchClusterTablesResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
     DescribeMaintainPeriodResponse: DescribeMaintainPeriodResponse,
+    SwitchProxyVpcRequest: SwitchProxyVpcRequest,
     DescribeBackupListResponse: DescribeBackupListResponse,
     DescribeBinlogSaveDaysRequest: DescribeBinlogSaveDaysRequest,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
@@ -7597,6 +8216,7 @@ module.exports = {
     ModifyClusterSlaveZoneRequest: ModifyClusterSlaveZoneRequest,
     CynosdbInstanceDetail: CynosdbInstanceDetail,
     CynosdbClusterDetail: CynosdbClusterDetail,
+    ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     DescribeInstanceDetailRequest: DescribeInstanceDetailRequest,
     ModifyMaintainPeriodConfigResponse: ModifyMaintainPeriodConfigResponse,
     ModifyBackupNameRequest: ModifyBackupNameRequest,

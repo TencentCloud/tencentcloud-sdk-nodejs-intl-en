@@ -19,7 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
 const InquirePriceRenewRequest = models.InquirePriceRenewRequest;
-const ObjectTask = models.ObjectTask;
+const ModifiableInfo = models.ModifiableInfo;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const ModifyMaintainPeriodConfigRequest = models.ModifyMaintainPeriodConfigRequest;
@@ -40,7 +40,9 @@ const DescribeClusterParamsResponse = models.DescribeClusterParamsResponse;
 const IsolateInstanceResponse = models.IsolateInstanceResponse;
 const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
+const SearchClusterTablesRequest = models.SearchClusterTablesRequest;
 const PauseServerlessRequest = models.PauseServerlessRequest;
+const ObjectTask = models.ObjectTask;
 const CreateClustersResponse = models.CreateClustersResponse;
 const SetRenewFlagRequest = models.SetRenewFlagRequest;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
@@ -59,6 +61,7 @@ const IsolateInstanceRequest = models.IsolateInstanceRequest;
 const ExportInstanceSlowQueriesResponse = models.ExportInstanceSlowQueriesResponse;
 const SwitchClusterZoneRequest = models.SwitchClusterZoneRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const InstanceInitInfo = models.InstanceInitInfo;
 const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
 const DeleteBackupResponse = models.DeleteBackupResponse;
 const Tag = models.Tag;
@@ -66,10 +69,12 @@ const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGrou
 const RemoveClusterSlaveZoneResponse = models.RemoveClusterSlaveZoneResponse;
 const PauseServerlessResponse = models.PauseServerlessResponse;
 const OfflineClusterRequest = models.OfflineClusterRequest;
+const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const NewAccount = models.NewAccount;
 const BackupFileInfo = models.BackupFileInfo;
 const DescribeBinlogDownloadUrlResponse = models.DescribeBinlogDownloadUrlResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
+const SearchClusterDatabasesRequest = models.SearchClusterDatabasesRequest;
 const CynosdbInstance = models.CynosdbInstance;
 const ModifyClusterSlaveZoneResponse = models.ModifyClusterSlaveZoneResponse;
 const RemoveClusterSlaveZoneRequest = models.RemoveClusterSlaveZoneRequest;
@@ -105,14 +110,18 @@ const ExportInstanceSlowQueriesRequest = models.ExportInstanceSlowQueriesRequest
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const CynosdbCluster = models.CynosdbCluster;
 const BinlogItem = models.BinlogItem;
+const SearchClusterDatabasesResponse = models.SearchClusterDatabasesResponse;
 const OfflineClusterResponse = models.OfflineClusterResponse;
+const SwitchProxyVpcResponse = models.SwitchProxyVpcResponse;
 const InstanceSpec = models.InstanceSpec;
 const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
 const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const Account = models.Account;
 const CreateBackupRequest = models.CreateBackupRequest;
+const SearchClusterTablesResponse = models.SearchClusterTablesResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
+const SwitchProxyVpcRequest = models.SwitchProxyVpcRequest;
 const DescribeBackupListResponse = models.DescribeBackupListResponse;
 const DescribeBinlogSaveDaysRequest = models.DescribeBinlogSaveDaysRequest;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
@@ -124,6 +133,7 @@ const AddInstancesRequest = models.AddInstancesRequest;
 const ModifyClusterSlaveZoneRequest = models.ModifyClusterSlaveZoneRequest;
 const CynosdbInstanceDetail = models.CynosdbInstanceDetail;
 const CynosdbClusterDetail = models.CynosdbClusterDetail;
+const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
 const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
 const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
@@ -198,6 +208,17 @@ class CynosdbClient extends AbstractClient {
     DescribeBinlogSaveDays(req, cb) {
         let resp = new DescribeBinlogSaveDaysResponse();
         this.request("DescribeBinlogSaveDays", req, resp, cb);
+    }
+
+    /**
+     * This API is used to search the list of cluster data tables.
+     * @param {SearchClusterTablesRequest} req
+     * @param {function(string, SearchClusterTablesResponse):void} cb
+     * @public
+     */
+    SearchClusterTables(req, cb) {
+        let resp = new SearchClusterTablesResponse();
+        this.request("SearchClusterTables", req, resp, cb);
     }
 
     /**
@@ -300,6 +321,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to reset the password of a TencentDB instance account.
+     * @param {ResetAccountPasswordRequest} req
+     * @param {function(string, ResetAccountPasswordResponse):void} cb
+     * @public
+     */
+    ResetAccountPassword(req, cb) {
+        let resp = new ResetAccountPasswordResponse();
+        this.request("ResetAccountPassword", req, resp, cb);
+    }
+
+    /**
      * This API is used to query instance details.
      * @param {DescribeInstanceDetailRequest} req
      * @param {function(string, DescribeInstanceDetailResponse):void} cb
@@ -366,6 +398,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to search the list of cluster databases.
+     * @param {SearchClusterDatabasesRequest} req
+     * @param {function(string, SearchClusterDatabasesResponse):void} cb
+     * @public
+     */
+    SearchClusterDatabases(req, cb) {
+        let resp = new SearchClusterDatabasesResponse();
+        this.request("SearchClusterDatabases", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the parameters of a cluster.
      * @param {DescribeClusterParamsRequest} req
      * @param {function(string, DescribeClusterParamsResponse):void} cb
@@ -418,6 +461,17 @@ class CynosdbClient extends AbstractClient {
     DescribeMaintainPeriod(req, cb) {
         let resp = new DescribeMaintainPeriodResponse();
         this.request("DescribeMaintainPeriod", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the database proxy VPC.
+     * @param {SwitchProxyVpcRequest} req
+     * @param {function(string, SwitchProxyVpcResponse):void} cb
+     * @public
+     */
+    SwitchProxyVpc(req, cb) {
+        let resp = new SwitchProxyVpcResponse();
+        this.request("SwitchProxyVpc", req, resp, cb);
     }
 
     /**

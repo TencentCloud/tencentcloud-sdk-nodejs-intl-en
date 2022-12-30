@@ -179,6 +179,7 @@ const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const AiRecognitionTaskAsrFullTextResultOutputSubtitleItem = models.AiRecognitionTaskAsrFullTextResultOutputSubtitleItem;
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
+const DescribeFileAttributesResponse = models.DescribeFileAttributesResponse;
 const AiAnalysisResult = models.AiAnalysisResult;
 const ConcatFileInfo2017 = models.ConcatFileInfo2017;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
@@ -583,6 +584,7 @@ const SetDrmKeyProviderInfoResponse = models.SetDrmKeyProviderInfoResponse;
 const DescribeStorageDetailsRequest = models.DescribeStorageDetailsRequest;
 const MediaTrack = models.MediaTrack;
 const StorageStatData = models.StorageStatData;
+const DescribeFileAttributesRequest = models.DescribeFileAttributesRequest;
 const MediaOutputInfo = models.MediaOutputInfo;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const HighlightSegmentItem = models.HighlightSegmentItem;
@@ -649,6 +651,19 @@ class VodClient extends AbstractClient {
     ExtractTraceWatermark(req, cb) {
         let resp = new ExtractTraceWatermarkResponse();
         this.request("ExtractTraceWatermark", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get file attributes asynchronously.
+- Currently, this API can only get the MD5 hash of a file.
+- If the file queried is in HLS or DASH format, the attributes of the index file will be returned.
+     * @param {DescribeFileAttributesRequest} req
+     * @param {function(string, DescribeFileAttributesResponse):void} cb
+     * @public
+     */
+    DescribeFileAttributes(req, cb) {
+        let resp = new DescribeFileAttributesResponse();
+        this.request("DescribeFileAttributes", req, resp, cb);
     }
 
     /**

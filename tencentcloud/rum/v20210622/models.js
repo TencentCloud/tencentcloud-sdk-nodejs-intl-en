@@ -78,6 +78,18 @@ class CreateTawInstanceRequest extends  AbstractModel {
          */
         this.BuyingChannel = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ResourcePackageType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ResourcePackageNum = null;
+
     }
 
     /**
@@ -104,6 +116,8 @@ class CreateTawInstanceRequest extends  AbstractModel {
         this.CountNum = 'CountNum' in params ? params.CountNum : null;
         this.PeriodRetain = 'PeriodRetain' in params ? params.PeriodRetain : null;
         this.BuyingChannel = 'BuyingChannel' in params ? params.BuyingChannel : null;
+        this.ResourcePackageType = 'ResourcePackageType' in params ? params.ResourcePackageType : null;
+        this.ResourcePackageNum = 'ResourcePackageNum' in params ? params.ResourcePackageNum : null;
 
     }
 }
@@ -700,7 +714,7 @@ class DescribeLogListRequest extends  AbstractModel {
         this.Context = null;
 
         /**
-         * Query statement, which is required and can contain up to 4,096 characters.
+         * Query statement, which is required and can contain up to 4,096 characters, such as "id:120001 AND type:\"log\"".
          * @type {string || null}
          */
         this.Query = null;
@@ -5496,6 +5510,12 @@ class CreateWhitelistResponse extends  AbstractModel {
         this.Msg = null;
 
         /**
+         * Allowlist ID
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -5511,6 +5531,7 @@ class CreateWhitelistResponse extends  AbstractModel {
             return;
         }
         this.Msg = 'Msg' in params ? params.Msg : null;
+        this.ID = 'ID' in params ? params.ID : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

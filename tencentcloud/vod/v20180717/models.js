@@ -290,7 +290,7 @@ class AiRecognitionTaskAsrFullTextSegmentItem extends  AbstractModel {
 }
 
 /**
- * 
+ * The information of a task to get file attributes.
  * @class
  */
 class DescribeFileAttributesTask extends  AbstractModel {
@@ -298,61 +298,65 @@ class DescribeFileAttributesTask extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The task ID.
          * @type {string || null}
          */
         this.TaskId = null;
 
         /**
-         * 
+         * The task status. Valid values: PROCESSING, SUCCESS, FAIL.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * The error code. `0` indicates the task is successful. Other values indicate that the task failed.
+<li>`40000`: Invalid input parameter.</li>
+<li>`60000`: Source file error (e.g., video data is corrupted).</li>
+<li>`70000`: Internal server error. Please try again.</li>
          * @type {number || null}
          */
         this.ErrCode = null;
 
         /**
-         * 
+         * The error code. An empty string indicates the task is successful; other values indicate that the task failed. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
          * @type {string || null}
          */
         this.ErrCodeExt = null;
 
         /**
-         * 
+         * The error message.
          * @type {string || null}
          */
         this.Message = null;
 
         /**
-         * 
+         * The task progress. Value range: 0-100.
          * @type {number || null}
          */
         this.Progress = null;
 
         /**
-         * 
+         * The file ID
          * @type {string || null}
          */
         this.FileId = null;
 
         /**
-         * 
+         * The output of the task to get file attributes.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeFileAttributesTaskOutput || null}
          */
         this.Output = null;
 
         /**
-         * 
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
          * @type {string || null}
          */
         this.SessionId = null;
 
         /**
-         * 
+         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
@@ -399,6 +403,12 @@ class ReviewAudioVideoTaskInput extends  AbstractModel {
          */
         this.FileId = null;
 
+        /**
+         * The moderation template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
     }
 
     /**
@@ -409,6 +419,7 @@ class ReviewAudioVideoTaskInput extends  AbstractModel {
             return;
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -5243,6 +5254,13 @@ class ReviewAudioVideoRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
+         * The moderation template ID. Valid values:
+<li>`10` (default): The preset template, which can detect inappropriate information with labels including pornographic (`Porn`), terrorist (`Terror`), and politically sensitive (`Polity`).</li>
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
          * The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
          * @type {number || null}
          */
@@ -5277,6 +5295,7 @@ class ReviewAudioVideoRequest extends  AbstractModel {
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
@@ -7349,6 +7368,19 @@ Valid values when `Form` is `Voice` and `Label` is `Porn`:
          */
         this.KeywordSet = null;
 
+        /**
+         * The URL of a suspected image (which will be deleted
+ after `PicUrlExpireTime`).
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * The expiration time of the suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.PicUrlExpireTime = null;
+
     }
 
     /**
@@ -7368,6 +7400,8 @@ Valid values when `Form` is `Voice` and `Label` is `Porn`:
         this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
         this.Text = 'Text' in params ? params.Text : null;
         this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
 
     }
 }
@@ -9329,6 +9363,41 @@ class DeleteAIAnalysisTemplateRequest extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * DescribeFileAttributes response structure.
+ * @class
+ */
+class DescribeFileAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -20281,7 +20350,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * The output of a task to get file attributes.
  * @class
  */
 class DescribeFileAttributesTaskOutput extends  AbstractModel {
@@ -20289,7 +20358,7 @@ class DescribeFileAttributesTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The MD5 hash of the file.
          * @type {string || null}
          */
         this.Md5 = null;
@@ -22327,24 +22396,25 @@ class EventContent extends  AbstractModel {
 
         /**
          * <b>Supported event types:</b>
-<li>NewFileUpload: Video uploaded.</li>
-<li>ProcedureStateChanged: Task flow status changed.</li>
-<li>FileDeleted: Video deleted.</li>
-<li>PullComplete: Finished video pulling.</li>
-<li>EditMediaComplete: Finished video editing.</li>
-<li>SplitMediaComplete: Finished video splitting.</li>
-<li>WechatPublishComplete: Published to WeChat.</li>
-<li>ComposeMediaComplete: Finished producing the media file.</li>
-<li>WechatMiniProgramPublishComplete: Finished publishing on WeChat Mini Program</li>
-<li>FastClipMediaComplete: Finished quick clipping.</li>
-<li>ReviewAudioVideoComplete: Finished moderation.</li>
-<li>ExtractTraceWatermarkComplete: Finished digital watermark extraction.</li>
+<li>`NewFileUpload`: Video uploaded.</li>
+<li>`ProcedureStateChanged`: Task flow status changed.</li>
+<li>`FileDeleted`: Video deleted.</li>
+<li>`PullComplete`: Finished video pulling.</li>
+<li>`EditMediaComplete`: Finished video editing.</li>
+<li>`SplitMediaComplete`: Finished video splitting.</li>
+<li>`WechatPublishComplete`: Published to WeChat.</li>
+<li>`ComposeMediaComplete`: Finished producing the media file.</li>
+<li>`WechatMiniProgramPublishComplete`: Finished publishing on WeChat Mini Program.</li>
+<li>`FastClipMediaComplete`: Finished quick clipping.</li>
+<li>`ReviewAudioVideoComplete`: Finished moderation.</li>
+<li>`ExtractTraceWatermarkComplete`: Finished digital watermark extraction.</li>
+<li>`DescribeFileAttributesComplete`: Finished getting file attributes.</li>
 <b>v2017 task types:</b>
-<li>TranscodeComplete: Finished video transcoding.</li>
-<li>ConcatComplete: Finished video splicing.</li>
-<li>ClipComplete: Finished video clipping.</li>
-<li>CreateImageSpriteComplete: Finished image sprite generation.</li>
-<li>CreateSnapshotByTimeOffsetComplete: Finished time point screencapturing.</li>
+<li>`TranscodeComplete`: Finished video transcoding.</li>
+<li>`ConcatComplete`: Finished video splicing.</li>
+<li>`ClipComplete`: Finished video clipping.</li>
+<li>`CreateImageSpriteComplete`: Finished image sprite generation.</li>
+<li>`CreateSnapshotByTimeOffsetComplete`: Finished time point screencapturing.</li>
          * @type {string || null}
          */
         this.EventType = null;
@@ -22483,7 +22553,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ReduceMediaBitrateCompleteEvent = null;
 
         /**
-         * 
+         * The event of finishing getting file attributes. This parameter is valid only if `EventType` is `DescribeFileAttributesComplete`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeFileAttributesTask || null}
          */
         this.DescribeFileAttributesCompleteEvent = null;
@@ -24694,6 +24765,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.AudioDuration = null;
 
+        /**
+         * The MD5 hash of the file.
+<li><font color=red>Note</font>: To get the MD5 hash of a file, call the `DescribeFileAttributes` API. The information will be returned after the task is completed.</li>
+         * @type {string || null}
+         */
+        this.Md5 = null;
+
     }
 
     /**
@@ -24730,6 +24808,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.VideoDuration = 'VideoDuration' in params ? params.VideoDuration : null;
         this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
     }
 }
@@ -25559,16 +25638,17 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 
         /**
          * The task type. Valid values:
-<li>Procedure: Video processing</li>
-<li>EditMedia: Video editing</li>
-<li>SplitMedia: Video splitting</li>
-<li>ComposeMedia: Media file production</li>
-<li>WechatPublish: WeChat publishing</li>
-<li>WechatMiniProgramPublish: Publishing videos on WeChat Mini Program</li>
-<li>PullUpload: Pulling media files for upload</li>
-<li>FastClipMedia: Quick clipping</li>
-<li>RemoveWatermarkTask: Watermark removal</li>
-<li> ReviewAudioVideo: Moderation</li>
+<li>`Procedure`: Video processing</li>
+<li>`EditMedia`: Video editing</li>
+<li>`SplitMedia`: Video splitting</li>
+<li>`ComposeMedia`: Media file production</li>
+<li>`WechatPublish`: WeChat publishing</li>
+<li>`WechatMiniProgramPublish`: Publishing videos on WeChat Mini Program</li>
+<li>`PullUpload`: Pulling media files for upload</li>
+<li>`FastClipMedia`: Quick clipping</li>
+<li>`RemoveWatermarkTask`: Watermark removal</li>
+<li>`DescribeFileAttributesTask`: Getting file attributes</li>
+<li> `ReviewAudioVideo`: Moderation</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -25713,7 +25793,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ReduceMediaBitrateTask = null;
 
         /**
-         * 
+         * The information of a task to get file attributes. This parameter is valid only if `TaskType` is `DescribeFileAttributes`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {DescribeFileAttributesTask || null}
          */
         this.DescribeFileAttributesTask = null;
@@ -33367,6 +33448,69 @@ class StorageStatData extends  AbstractModel {
 }
 
 /**
+ * DescribeFileAttributes request structure.
+ * @class
+ */
+class DescribeFileAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The file ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * The task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * A reserved parameter.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+
+    }
+}
+
+/**
  * Information parameter of file output by video processing
  * @class
  */
@@ -34328,6 +34472,7 @@ module.exports = {
     AiRecognitionTaskAsrFullTextResultOutputSubtitleItem: AiRecognitionTaskAsrFullTextResultOutputSubtitleItem,
     SimpleHlsClipResponse: SimpleHlsClipResponse,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
+    DescribeFileAttributesResponse: DescribeFileAttributesResponse,
     AiAnalysisResult: AiAnalysisResult,
     ConcatFileInfo2017: ConcatFileInfo2017,
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
@@ -34732,6 +34877,7 @@ module.exports = {
     DescribeStorageDetailsRequest: DescribeStorageDetailsRequest,
     MediaTrack: MediaTrack,
     StorageStatData: StorageStatData,
+    DescribeFileAttributesRequest: DescribeFileAttributesRequest,
     MediaOutputInfo: MediaOutputInfo,
     EditMediaTaskOutput: EditMediaTaskOutput,
     HighlightSegmentItem: HighlightSegmentItem,

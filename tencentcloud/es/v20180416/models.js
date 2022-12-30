@@ -2799,6 +2799,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.AppId = null;
 
+        /**
+         * The number of index docs.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IndexDocs = null;
+
     }
 
     /**
@@ -2844,6 +2851,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             this.IndexSettingsField = obj;
         }
         this.AppId = 'AppId' in params ? params.AppId : null;
+        this.IndexDocs = 'IndexDocs' in params ? params.IndexDocs : null;
 
     }
 }
@@ -2985,7 +2993,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Sort by field <li>1: instance ID </li><li>2: instance name </li><li>3: AZ </li><li>4: creation time </li>If `orderKey` is not passed in, sort by creation time in descending order
+         * The sorting field. <li>1: Instance ID </li><li>2: Instance name </li><li>3: AZ </li><li>4: Creation time </li>If `OrderByKey` is not passed in, sorting is performed by creation time in descending order.
          * @type {number || null}
          */
         this.OrderByKey = null;
@@ -3015,7 +3023,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.ZoneList = null;
 
         /**
-         * Health status filter list
+         * The health status filter. Valid values: `0` (green), `1` (yellow), `2` (red), `-1` (unknown).
          * @type {Array.<number> || null}
          */
         this.HealthStatus = null;
@@ -3339,7 +3347,7 @@ Number of nodes (2-50)
         this.Password = null;
 
         /**
-         * Access control list
+         * The policy for visual component (Kibana and Cerebro) access over public network.
          * @type {EsAcl || null}
          */
         this.EsAcl = null;
@@ -3398,7 +3406,9 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
         this.NodeInfoList = null;
 
         /**
-         * Public network access status
+         * The status of ES cluster access over public network.
+`OPEN`: Enabled.
+`CLOSE`: Disabled.
          * @type {string || null}
          */
         this.PublicAccess = null;
@@ -3410,13 +3420,17 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
         this.EsPublicAcl = null;
 
         /**
-         * Public network access status of Kibana
+         * The status of Kibana access over public network.
+`OPEN`: Enabled.
+`CLOSE`: Disabled.
          * @type {string || null}
          */
         this.KibanaPublicAccess = null;
 
         /**
-         * Private network access status of Kibana
+         * The status of Kibana access over private network.
+`OPEN`: Enabled.
+`CLOSE`: Disabled.
          * @type {string || null}
          */
         this.KibanaPrivateAccess = null;
@@ -3476,13 +3490,17 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
         this.EnableCerebro = null;
 
         /**
-         * Cerebro public network access status
+         * The status of Cerebro access over public network.
+`OPEN`: Enabled.
+`CLOSE`: Disabled.
          * @type {string || null}
          */
         this.CerebroPublicAccess = null;
 
         /**
-         * Cerebro private network access status
+         * The status of Cerebro access over private network.
+`OPEN`: Enabled.
+`CLOSE`: Disabled.
          * @type {string || null}
          */
         this.CerebroPrivateAccess = null;
@@ -3501,6 +3519,8 @@ Dedicated primary node disk size in GB. This is 50 GB by default and currently c
 
         /**
          * Whether to enable the option for sending alerting messages over the public network.
+`OPEN`: Enabled.
+`CLOSE`: Disabled.
          * @type {string || null}
          */
         this.KibanaAlteringPublicAccess = null;

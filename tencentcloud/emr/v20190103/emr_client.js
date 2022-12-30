@@ -16,79 +16,97 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
-const MultiDiskMC = models.MultiDiskMC;
-const AddUsersForUserManagerRequest = models.AddUsersForUserManagerRequest;
-const ModifyResourceSchedulerRequest = models.ModifyResourceSchedulerRequest;
-const CustomMetaInfo = models.CustomMetaInfo;
-const ApplicationStatics = models.ApplicationStatics;
-const VPCSettings = models.VPCSettings;
-const DescribeInstancesListResponse = models.DescribeInstancesListResponse;
-const PriceResource = models.PriceResource;
+const PodSpecInfo = models.PodSpecInfo;
 const ScaleOutInstanceResponse = models.ScaleOutInstanceResponse;
-const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
-const CustomServiceDefine = models.CustomServiceDefine;
-const Resource = models.Resource;
-const MultiZoneSetting = models.MultiZoneSetting;
 const PodVolume = models.PodVolume;
-const SubnetInfo = models.SubnetInfo;
-const ModifyResourceScheduleConfigRequest = models.ModifyResourceScheduleConfigRequest;
+const DescribeClusterNodesResponse = models.DescribeClusterNodesResponse;
 const CreateInstanceResponse = models.CreateInstanceResponse;
-const PodSpec = models.PodSpec;
-const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceResponse;
 const TerminateTasksRequest = models.TerminateTasksRequest;
-const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
 const HostVolumeContext = models.HostVolumeContext;
-const TerminateInstanceRequest = models.TerminateInstanceRequest;
-const ExternalService = models.ExternalService;
-const DescribeClusterNodesRequest = models.DescribeClusterNodesRequest;
-const PreExecuteFileSettings = models.PreExecuteFileSettings;
-const CreateInstanceRequest = models.CreateInstanceRequest;
-const ClusterExternalServiceInfo = models.ClusterExternalServiceInfo;
-const OutterResource = models.OutterResource;
-const DescribeResourceScheduleRequest = models.DescribeResourceScheduleRequest;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const InquiryPriceScaleOutInstanceRequest = models.InquiryPriceScaleOutInstanceRequest;
-const UserManagerUserBriefInfo = models.UserManagerUserBriefInfo;
-const Tag = models.Tag;
-const Placement = models.Placement;
+const ScaleOutClusterRequest = models.ScaleOutClusterRequest;
+const DiskSpecInfo = models.DiskSpecInfo;
+const SubnetInfo = models.SubnetInfo;
 const UserManagerFilter = models.UserManagerFilter;
-const DescribeEmrApplicationStaticsResponse = models.DescribeEmrApplicationStaticsResponse;
 const DynamicPodSpec = models.DynamicPodSpec;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const EmrProductConfigOutter = models.EmrProductConfigOutter;
-const PodParameter = models.PodParameter;
-const DescribeUsersForUserManagerRequest = models.DescribeUsersForUserManagerRequest;
-const InquiryPriceUpdateInstanceRequest = models.InquiryPriceUpdateInstanceRequest;
-const LoginSettings = models.LoginSettings;
-const TerminateInstanceResponse = models.TerminateInstanceResponse;
 const COSSettings = models.COSSettings;
 const ClusterInstancesInfo = models.ClusterInstancesInfo;
-const DescribeInstancesListRequest = models.DescribeInstancesListRequest;
-const MultiDisk = models.MultiDisk;
-const AddUsersForUserManagerResponse = models.AddUsersForUserManagerResponse;
-const SearchItem = models.SearchItem;
-const InquiryPriceScaleOutInstanceResponse = models.InquiryPriceScaleOutInstanceResponse;
-const UserInfoForUserManager = models.UserInfoForUserManager;
-const ModifyResourceSchedulerResponse = models.ModifyResourceSchedulerResponse;
-const UpdateInstanceSettings = models.UpdateInstanceSettings;
-const TerminateTasksResponse = models.TerminateTasksResponse;
-const ShortNodeInfo = models.ShortNodeInfo;
+const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
+const PodNewSpec = models.PodNewSpec;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const NodeResourceSpec = models.NodeResourceSpec;
 const ModifyResourceScheduleConfigResponse = models.ModifyResourceScheduleConfigResponse;
 const TopologyInfo = models.TopologyInfo;
-const DescribeEmrApplicationStaticsRequest = models.DescribeEmrApplicationStaticsRequest;
-const DescribeClusterNodesResponse = models.DescribeClusterNodesResponse;
-const NodeHardwareInfo = models.NodeHardwareInfo;
-const DescribeUsersForUserManagerResponse = models.DescribeUsersForUserManagerResponse;
+const Tag = models.Tag;
+const EmrListInstance = models.EmrListInstance;
+const AddUsersForUserManagerResponse = models.AddUsersForUserManagerResponse;
+const EmrProductConfigOutter = models.EmrProductConfigOutter;
+const DescribeInstancesListResponse = models.DescribeInstancesListResponse;
+const TerminateTasksResponse = models.TerminateTasksResponse;
+const DependService = models.DependService;
+const PodSpec = models.PodSpec;
+const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceResponse;
+const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
+const DescribeResourceScheduleRequest = models.DescribeResourceScheduleRequest;
+const Placement = models.Placement;
+const PodParameter = models.PodParameter;
+const AllNodeResourceSpec = models.AllNodeResourceSpec;
+const DescribeUsersForUserManagerRequest = models.DescribeUsersForUserManagerRequest;
+const MultiDisk = models.MultiDisk;
+const PodNewParameter = models.PodNewParameter;
+const SearchItem = models.SearchItem;
+const MultiZoneSetting = models.MultiZoneSetting;
+const TerminateInstanceResponse = models.TerminateInstanceResponse;
 const InquiryPriceUpdateInstanceResponse = models.InquiryPriceUpdateInstanceResponse;
 const NewResourceSpec = models.NewResourceSpec;
 const PersistentVolumeContext = models.PersistentVolumeContext;
-const Filters = models.Filters;
-const EmrListInstance = models.EmrListInstance;
-const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
+const ScaleOutNodeConfig = models.ScaleOutNodeConfig;
 const DescribeResourceScheduleResponse = models.DescribeResourceScheduleResponse;
+const ModifyResourceSchedulerRequest = models.ModifyResourceSchedulerRequest;
+const LoginSettings = models.LoginSettings;
+const PriceResource = models.PriceResource;
+const CustomServiceDefine = models.CustomServiceDefine;
+const CreateClusterResponse = models.CreateClusterResponse;
+const CreateClusterRequest = models.CreateClusterRequest;
+const DescribeClusterNodesRequest = models.DescribeClusterNodesRequest;
+const CreateInstanceRequest = models.CreateInstanceRequest;
+const UpdateInstanceSettings = models.UpdateInstanceSettings;
+const ScriptBootstrapActionConfig = models.ScriptBootstrapActionConfig;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const InquiryPriceUpdateInstanceRequest = models.InquiryPriceUpdateInstanceRequest;
+const DescribeInstancesListRequest = models.DescribeInstancesListRequest;
+const OutterResource = models.OutterResource;
+const VPCSettings = models.VPCSettings;
+const DescribeEmrApplicationStaticsRequest = models.DescribeEmrApplicationStaticsRequest;
+const DescribeUsersForUserManagerResponse = models.DescribeUsersForUserManagerResponse;
+const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
 const CdbInfo = models.CdbInfo;
 const PriceDetail = models.PriceDetail;
+const MultiDiskMC = models.MultiDiskMC;
+const AddUsersForUserManagerRequest = models.AddUsersForUserManagerRequest;
+const ZoneResourceConfiguration = models.ZoneResourceConfiguration;
+const CustomMetaInfo = models.CustomMetaInfo;
+const ApplicationStatics = models.ApplicationStatics;
+const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
+const TerminateInstanceRequest = models.TerminateInstanceRequest;
+const ModifyResourceScheduleConfigRequest = models.ModifyResourceScheduleConfigRequest;
+const UserInfoForUserManager = models.UserInfoForUserManager;
+const ExternalService = models.ExternalService;
+const PreExecuteFileSettings = models.PreExecuteFileSettings;
+const ClusterExternalServiceInfo = models.ClusterExternalServiceInfo;
+const InquiryPriceScaleOutInstanceRequest = models.InquiryPriceScaleOutInstanceRequest;
+const Resource = models.Resource;
+const DescribeEmrApplicationStaticsResponse = models.DescribeEmrApplicationStaticsResponse;
+const CustomMetaDBInfo = models.CustomMetaDBInfo;
+const UserManagerUserBriefInfo = models.UserManagerUserBriefInfo;
+const InquiryPriceScaleOutInstanceResponse = models.InquiryPriceScaleOutInstanceResponse;
+const ModifyResourceSchedulerResponse = models.ModifyResourceSchedulerResponse;
+const VirtualPrivateCloud = models.VirtualPrivateCloud;
+const SceneSoftwareConfig = models.SceneSoftwareConfig;
+const ShortNodeInfo = models.ShortNodeInfo;
+const NodeHardwareInfo = models.NodeHardwareInfo;
+const ScaleOutClusterResponse = models.ScaleOutClusterResponse;
+const Filters = models.Filters;
+const InstanceChargePrepaid = models.InstanceChargePrepaid;
 
 
 /**
@@ -102,14 +120,14 @@ class EmrClient extends AbstractClient {
     }
     
     /**
-     * This API is used to terminate a task node.
-     * @param {TerminateTasksRequest} req
-     * @param {function(string, TerminateTasksResponse):void} cb
+     * This API is used to scale out instances.
+     * @param {ScaleOutInstanceRequest} req
+     * @param {function(string, ScaleOutInstanceResponse):void} cb
      * @public
      */
-    TerminateTasks(req, cb) {
-        let resp = new TerminateTasksResponse();
-        this.request("TerminateTasks", req, resp, cb);
+    ScaleOutInstance(req, cb) {
+        let resp = new ScaleOutInstanceResponse();
+        this.request("ScaleOutInstance", req, resp, cb);
     }
 
     /**
@@ -146,15 +164,14 @@ class EmrClient extends AbstractClient {
     }
 
     /**
-     * This API is available for clusters with OpenLDAP components configured.
-This API is used to export users in batches. For a Kerberos cluster, set `NeedKeytabInfo` to `true` to obtain the download link of the Keytab file. If `SupportDownLoadKeyTab` is `true`, but `DownLoadKeyTabUrl` is null, the Keytab file is not ready yet (being generated) in the backend.
-     * @param {DescribeUsersForUserManagerRequest} req
-     * @param {function(string, DescribeUsersForUserManagerResponse):void} cb
+     * This API is used to create an EMR cluster instance.
+     * @param {CreateClusterRequest} req
+     * @param {function(string, CreateClusterResponse):void} cb
      * @public
      */
-    DescribeUsersForUserManager(req, cb) {
-        let resp = new DescribeUsersForUserManagerResponse();
-        this.request("DescribeUsersForUserManager", req, resp, cb);
+    CreateCluster(req, cb) {
+        let resp = new CreateClusterResponse();
+        this.request("CreateCluster", req, resp, cb);
     }
 
     /**
@@ -236,6 +253,17 @@ This API is used to add user lists (user management).
     }
 
     /**
+     * This API is used to terminate a task node.
+     * @param {TerminateTasksRequest} req
+     * @param {function(string, TerminateTasksResponse):void} cb
+     * @public
+     */
+    TerminateTasks(req, cb) {
+        let resp = new TerminateTasksResponse();
+        this.request("TerminateTasks", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the resource configuration of YARN Resource Scheduling.
      * @param {ModifyResourceScheduleConfigRequest} req
      * @param {function(string, ModifyResourceScheduleConfigResponse):void} cb
@@ -258,14 +286,26 @@ This API is used to add user lists (user management).
     }
 
     /**
-     * This API is used to scale out instances.
-     * @param {ScaleOutInstanceRequest} req
-     * @param {function(string, ScaleOutInstanceResponse):void} cb
+     * This API is available for clusters with OpenLDAP components configured.
+This API is used to export users in batches. For a Kerberos cluster, set `NeedKeytabInfo` to `true` to obtain the download link of the Keytab file. If `SupportDownLoadKeyTab` is `true`, but `DownLoadKeyTabUrl` is null, the Keytab file is not ready yet (being generated) in the backend.
+     * @param {DescribeUsersForUserManagerRequest} req
+     * @param {function(string, DescribeUsersForUserManagerResponse):void} cb
      * @public
      */
-    ScaleOutInstance(req, cb) {
-        let resp = new ScaleOutInstanceResponse();
-        this.request("ScaleOutInstance", req, resp, cb);
+    DescribeUsersForUserManager(req, cb) {
+        let resp = new DescribeUsersForUserManagerResponse();
+        this.request("DescribeUsersForUserManager", req, resp, cb);
+    }
+
+    /**
+     * This API is used to scale out a cluster.
+     * @param {ScaleOutClusterRequest} req
+     * @param {function(string, ScaleOutClusterResponse):void} cb
+     * @public
+     */
+    ScaleOutCluster(req, cb) {
+        let resp = new ScaleOutClusterResponse();
+        this.request("ScaleOutCluster", req, resp, cb);
     }
 
     /**

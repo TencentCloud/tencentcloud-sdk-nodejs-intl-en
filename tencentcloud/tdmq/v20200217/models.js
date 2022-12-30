@@ -5850,6 +5850,37 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.IsVip = null;
 
+        /**
+         * TDMQ for RocketMQ cluster type flag
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.RocketMQFlag = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.IsolateTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HttpPublicEndpoint = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HttpVpcEndpoint = null;
+
     }
 
     /**
@@ -5877,6 +5908,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.IsVip = 'IsVip' in params ? params.IsVip : null;
+        this.RocketMQFlag = 'RocketMQFlag' in params ? params.RocketMQFlag : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+        this.HttpPublicEndpoint = 'HttpPublicEndpoint' in params ? params.HttpPublicEndpoint : null;
+        this.HttpVpcEndpoint = 'HttpVpcEndpoint' in params ? params.HttpVpcEndpoint : null;
 
     }
 }

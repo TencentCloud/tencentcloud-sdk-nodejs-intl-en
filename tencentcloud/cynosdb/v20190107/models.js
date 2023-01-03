@@ -2101,7 +2101,7 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Instance initialization configuration information
  * @class
  */
 class InstanceInitInfo extends  AbstractModel {
@@ -2109,25 +2109,25 @@ class InstanceInitInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Instance CPU
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 
+         * Instance memory
          * @type {number || null}
          */
         this.Memory = null;
 
         /**
-         * 
+         * Instance type. Valid values:`rw`, `ro`.
          * @type {string || null}
          */
         this.InstanceType = null;
 
         /**
-         * 
+         * Number of the instances. Value range: 1-15.
          * @type {number || null}
          */
         this.InstanceCount = null;
@@ -3521,7 +3521,7 @@ Clusters with storage billed in monthly subscription can’t be cloned or rolled
         this.SlaveZone = null;
 
         /**
-         * 
+         * Instance initialization configuration information, which is used to select instances with different specifications when purchasing a cluster.
          * @type {Array.<InstanceInitInfo> || null}
          */
         this.InstanceInitInfos = null;

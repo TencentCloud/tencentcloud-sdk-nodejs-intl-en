@@ -1074,36 +1074,24 @@ class DeleteLiveSnapshotTemplateRequest extends  AbstractModel {
 }
 
 /**
- * DeleteLiveTranscodeRule request structure.
+ * DescribeGroupProIspPlayInfoList response structure.
  * @class
  */
-class DeleteLiveTranscodeRuleRequest extends  AbstractModel {
+class DescribeGroupProIspPlayInfoListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Playback domain name.
-         * @type {string || null}
+         * Data content.
+         * @type {Array.<GroupProIspDataInfo> || null}
          */
-        this.DomainName = null;
+        this.DataInfoList = null;
 
         /**
-         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.AppName = null;
-
-        /**
-         * Stream name.
-         * @type {string || null}
-         */
-        this.StreamName = null;
-
-        /**
-         * Template ID.
-         * @type {number || null}
-         */
-        this.TemplateId = null;
+        this.RequestId = null;
 
     }
 
@@ -1114,10 +1102,16 @@ class DeleteLiveTranscodeRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.StreamName = 'StreamName' in params ? params.StreamName : null;
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new GroupProIspDataInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1301,6 +1295,189 @@ class DescribeLiveStreamOnlineListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The push data of a stream.
+ * @class
+ */
+class PushQualityData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The time of the data in the format of “%Y-%m-%d %H:%M:%S.%ms” (accurate to the millisecond).
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * The push domain.
+         * @type {string || null}
+         */
+        this.PushDomain = null;
+
+        /**
+         * The push path.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * The IP address of the push client.
+         * @type {string || null}
+         */
+        this.ClientIp = null;
+
+        /**
+         * The push start time in the format of “%Y-%m-%d %H:%M:%S.%ms” (accurate to the millisecond).
+         * @type {string || null}
+         */
+        this.BeginPushTime = null;
+
+        /**
+         * The resolution.
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * The video codec.
+         * @type {string || null}
+         */
+        this.VCodec = null;
+
+        /**
+         * The audio codec.
+         * @type {string || null}
+         */
+        this.ACodec = null;
+
+        /**
+         * The push sequence number, which uniquely identifies a push.
+         * @type {string || null}
+         */
+        this.Sequence = null;
+
+        /**
+         * The video frame rate.
+         * @type {number || null}
+         */
+        this.VideoFps = null;
+
+        /**
+         * The video bitrate (bps).
+         * @type {number || null}
+         */
+        this.VideoRate = null;
+
+        /**
+         * The audio frame rate.
+         * @type {number || null}
+         */
+        this.AudioFps = null;
+
+        /**
+         * The audio bitrate (bps).
+         * @type {number || null}
+         */
+        this.AudioRate = null;
+
+        /**
+         * The local elapsed time (milliseconds). The greater the difference between the local elapsed time and audio/video elapsed time, the poorer the push quality and the more severe the upstream lag.
+         * @type {number || null}
+         */
+        this.LocalTs = null;
+
+        /**
+         * The video elapsed time (milliseconds).
+         * @type {number || null}
+         */
+        this.VideoTs = null;
+
+        /**
+         * The audio elapsed time (milliseconds).
+         * @type {number || null}
+         */
+        this.AudioTs = null;
+
+        /**
+         * The video bitrate (Kbps) in the metadata.
+         * @type {number || null}
+         */
+        this.MetaVideoRate = null;
+
+        /**
+         * The audio bitrate (Kbps) in the metadata.
+         * @type {number || null}
+         */
+        this.MetaAudioRate = null;
+
+        /**
+         * The frame rate in the metadata.
+         * @type {number || null}
+         */
+        this.MateFps = null;
+
+        /**
+         * The push parameter.
+         * @type {string || null}
+         */
+        this.StreamParam = null;
+
+        /**
+         * The bandwidth (Mbps).
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * The traffic (MB).
+         * @type {number || null}
+         */
+        this.Flux = null;
+
+        /**
+         * The IP address of the push client.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ServerIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+        this.BeginPushTime = 'BeginPushTime' in params ? params.BeginPushTime : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.VCodec = 'VCodec' in params ? params.VCodec : null;
+        this.ACodec = 'ACodec' in params ? params.ACodec : null;
+        this.Sequence = 'Sequence' in params ? params.Sequence : null;
+        this.VideoFps = 'VideoFps' in params ? params.VideoFps : null;
+        this.VideoRate = 'VideoRate' in params ? params.VideoRate : null;
+        this.AudioFps = 'AudioFps' in params ? params.AudioFps : null;
+        this.AudioRate = 'AudioRate' in params ? params.AudioRate : null;
+        this.LocalTs = 'LocalTs' in params ? params.LocalTs : null;
+        this.VideoTs = 'VideoTs' in params ? params.VideoTs : null;
+        this.AudioTs = 'AudioTs' in params ? params.AudioTs : null;
+        this.MetaVideoRate = 'MetaVideoRate' in params ? params.MetaVideoRate : null;
+        this.MetaAudioRate = 'MetaAudioRate' in params ? params.MetaAudioRate : null;
+        this.MateFps = 'MateFps' in params ? params.MateFps : null;
+        this.StreamParam = 'StreamParam' in params ? params.StreamParam : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.Flux = 'Flux' in params ? params.Flux : null;
+        this.ServerIp = 'ServerIp' in params ? params.ServerIp : null;
 
     }
 }
@@ -2674,24 +2851,36 @@ Verification is not required if another domain under the same primary domain has
 }
 
 /**
- * DescribeGroupProIspPlayInfoList response structure.
+ * DeleteLiveTranscodeRule request structure.
  * @class
  */
-class DescribeGroupProIspPlayInfoListResponse extends  AbstractModel {
+class DeleteLiveTranscodeRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Data content.
-         * @type {Array.<GroupProIspDataInfo> || null}
-         */
-        this.DataInfoList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Playback domain name.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DomainName = null;
+
+        /**
+         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * Template ID.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
 
     }
 
@@ -2702,16 +2891,10 @@ class DescribeGroupProIspPlayInfoListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.DataInfoList) {
-            this.DataInfoList = new Array();
-            for (let z in params.DataInfoList) {
-                let obj = new GroupProIspDataInfo();
-                obj.deserialize(params.DataInfoList[z]);
-                this.DataInfoList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -2957,6 +3140,76 @@ class DescribeLiveRecordTemplateRequest extends  AbstractModel {
             return;
         }
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * The playback data.
+ * @class
+ */
+class MonitorStreamPlayInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The playback domain.
+         * @type {string || null}
+         */
+        this.PlayDomain = null;
+
+        /**
+         * The stream ID.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * The playback bitrate. `0` indicates the original bitrate.
+         * @type {number || null}
+         */
+        this.Rate = null;
+
+        /**
+         * The playback protocol. Valid values: `Unknown`, `Flv`, `Hls`, `Rtmp`, `Huyap2p`.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * The bandwidth (Mbps).
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * The number of online users, which is represented by the number of TCP connections (data collected every minute).
+         * @type {number || null}
+         */
+        this.Online = null;
+
+        /**
+         * The number of requests.
+         * @type {number || null}
+         */
+        this.Request = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlayDomain = 'PlayDomain' in params ? params.PlayDomain : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.Online = 'Online' in params ? params.Online : null;
+        this.Request = 'Request' in params ? params.Request : null;
 
     }
 }
@@ -3631,6 +3884,13 @@ class CallBackTemplateInfo extends  AbstractModel {
          */
         this.CallbackKey = null;
 
+        /**
+         * The push error callback URL.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PushExceptionNotifyUrl = null;
+
     }
 
     /**
@@ -3650,6 +3910,7 @@ class CallBackTemplateInfo extends  AbstractModel {
         this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
         this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
         this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
+        this.PushExceptionNotifyUrl = 'PushExceptionNotifyUrl' in params ? params.PushExceptionNotifyUrl : null;
 
     }
 }
@@ -4375,6 +4636,80 @@ class LiveCertDomainInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeVisitTopSumInfoList request structure.
+ * @class
+ */
+class DescribeVisitTopSumInfoListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start point in time in the format of `yyyy-mm-dd HH:MM:SS`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End point in time in the format of `yyyy-mm-dd HH:MM:SS`
+The time span is (0,4 hours]. Data for the last day can be queried.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Bandwidth metric. Valid values: "Domain", "StreamId".
+         * @type {string || null}
+         */
+        this.TopIndex = null;
+
+        /**
+         * Playback domain name. If this parameter is left empty, full data will be queried by default.
+         * @type {Array.<string> || null}
+         */
+        this.PlayDomains = null;
+
+        /**
+         * Page number,
+Value range: [1,1000],
+Default value: 1.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Number of entries per page. Value range: [1,1000].
+Default value: 20.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Sorting metric. Valid values: "AvgFluxPerSecond", "TotalRequest" (default), "TotalFlux".
+         * @type {string || null}
+         */
+        this.OrderParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TopIndex = 'TopIndex' in params ? params.TopIndex : null;
+        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.OrderParam = 'OrderParam' in params ? params.OrderParam : null;
+
+    }
+}
+
+/**
  * Stream playback information
  * @class
  */
@@ -5041,6 +5376,12 @@ Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/d
          */
         this.StreamMixNotifyUrl = null;
 
+        /**
+         * The push error callback URL.
+         * @type {string || null}
+         */
+        this.PushExceptionNotifyUrl = null;
+
     }
 
     /**
@@ -5059,6 +5400,7 @@ Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/d
         this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
         this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
         this.StreamMixNotifyUrl = 'StreamMixNotifyUrl' in params ? params.StreamMixNotifyUrl : null;
+        this.PushExceptionNotifyUrl = 'PushExceptionNotifyUrl' in params ? params.PushExceptionNotifyUrl : null;
 
     }
 }
@@ -6817,6 +7159,12 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
          */
         this.CallbackKey = null;
 
+        /**
+         * The push error callback URL.
+         * @type {string || null}
+         */
+        this.PushExceptionNotifyUrl = null;
+
     }
 
     /**
@@ -6835,6 +7183,7 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
         this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
         this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
         this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
+        this.PushExceptionNotifyUrl = 'PushExceptionNotifyUrl' in params ? params.PushExceptionNotifyUrl : null;
 
     }
 }
@@ -7100,58 +7449,42 @@ class DescribeLiveForbidStreamListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVisitTopSumInfoList request structure.
+ * DescribeStreamPushInfoList request structure.
  * @class
  */
-class DescribeVisitTopSumInfoListRequest extends  AbstractModel {
+class DescribeStreamPushInfoListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start point in time in the format of `yyyy-mm-dd HH:MM:SS`.
+         * The stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * The start time (UTC+8) in the format of “yyyy-mm-dd HH:MM:SS”.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End point in time in the format of `yyyy-mm-dd HH:MM:SS`
-The time span is (0,4 hours]. Data for the last day can be queried.
+         * The end time (UTC+8) in the format of “yyyy-mm-dd HH:MM:SS”. You can query data from the past seven days for a period of preferably not longer than three hours.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Bandwidth metric. Valid values: "Domain", "StreamId".
+         * The push domain.
          * @type {string || null}
          */
-        this.TopIndex = null;
+        this.PushDomain = null;
 
         /**
-         * Playback domain name. If this parameter is left empty, full data will be queried by default.
-         * @type {Array.<string> || null}
-         */
-        this.PlayDomains = null;
-
-        /**
-         * Page number,
-Value range: [1,1000],
-Default value: 1.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * Number of entries per page. Value range: [1,1000].
-Default value: 20.
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * Sorting metric. Valid values: "AvgFluxPerSecond", "TotalRequest" (default), "TotalFlux".
+         * The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
          * @type {string || null}
          */
-        this.OrderParam = null;
+        this.AppName = null;
 
     }
 
@@ -7162,13 +7495,11 @@ Default value: 20.
         if (!params) {
             return;
         }
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.TopIndex = 'TopIndex' in params ? params.TopIndex : null;
-        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.OrderParam = 'OrderParam' in params ? params.OrderParam : null;
+        this.PushDomain = 'PushDomain' in params ? params.PushDomain : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
 
     }
 }
@@ -7448,6 +7779,49 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
             obj.deserialize(params.FlvSpecialParam)
             this.FlvSpecialParam = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeStreamPushInfoList response structure.
+ * @class
+ */
+class DescribeStreamPushInfoListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned data list.
+         * @type {Array.<PushQualityData> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new PushQualityData();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10854,6 +11228,56 @@ class EnableLiveDomainRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAllStreamPlayInfoList response structure.
+ * @class
+ */
+class DescribeAllStreamPlayInfoListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The time point queried, whose value is the same as that of the corresponding request parameter.
+         * @type {string || null}
+         */
+        this.QueryTime = null;
+
+        /**
+         * The playback data.
+         * @type {Array.<MonitorStreamPlayInfo> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new MonitorStreamPlayInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLiveTranscodeTotalInfo response structure.
  * @class
  */
@@ -12334,6 +12758,41 @@ class DescribeLiveRecordTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAllStreamPlayInfoList request structure.
+ * @class
+ */
+class DescribeAllStreamPlayInfoListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The time point to query in the format of “yyyy-mm-dd HH:MM:00”(accurate to the minute). You can query data from the last month. Because there is a five-minute delay in the data, if you want to get the latest data, we recommend you pass in a time point five minutes earlier than the current time.
+         * @type {string || null}
+         */
+        this.QueryTime = null;
+
+        /**
+         * The playback domains to query. If you leave this empty, all playback domains will be queried.
+         * @type {Array.<string> || null}
+         */
+        this.PlayDomains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
+
+    }
+}
+
+/**
  * DescribeLiveDomain response structure.
  * @class
  */
@@ -12483,11 +12942,19 @@ Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.c
         this.EndTime = null;
 
         /**
-         * The region of the source (please choose the nearest region).
-ap-beijing: North China (Beijing)
-ap-shanghai: East China (Shanghai)
-ap-guangzhou: South China (Guangzhou)
-ap-mumbai: India
+         * The region where the task was created.
+`ap-beijing`: North China (Beijing)
+`ap-shanghai`: East China (Shanghai)
+`ap-guangzhou`: South China (Guangzhou)
+`ap-mumbai`: India
+`ap-hongkong`: Hong Kong
+`eu-frankfurt`: Germany
+`ap-seoul`: Korea
+`ap-bangkok`: Thailand
+`ap-singapore`: Singapore
+`na-siliconvalley`: Western US
+`na-ashburn`: Eastern US
+`ap-tokyo`: Japan
          * @type {string || null}
          */
         this.Region = null;
@@ -13604,11 +14071,12 @@ module.exports = {
     DescribeLiveCallbackTemplateResponse: DescribeLiveCallbackTemplateResponse,
     CreateLivePullStreamTaskRequest: CreateLivePullStreamTaskRequest,
     DeleteLiveSnapshotTemplateRequest: DeleteLiveSnapshotTemplateRequest,
-    DeleteLiveTranscodeRuleRequest: DeleteLiveTranscodeRuleRequest,
+    DescribeGroupProIspPlayInfoListResponse: DescribeGroupProIspPlayInfoListResponse,
     PushAuthKeyInfo: PushAuthKeyInfo,
     DeleteLiveRecordTemplateRequest: DeleteLiveRecordTemplateRequest,
     DeleteLiveCallbackTemplateResponse: DeleteLiveCallbackTemplateResponse,
     DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
+    PushQualityData: PushQualityData,
     ModifyLivePlayAuthKeyRequest: ModifyLivePlayAuthKeyRequest,
     DescribeLiveDelayInfoListRequest: DescribeLiveDelayInfoListRequest,
     DomainCertInfo: DomainCertInfo,
@@ -13635,13 +14103,14 @@ module.exports = {
     DescribeLiveTranscodeDetailInfoResponse: DescribeLiveTranscodeDetailInfoResponse,
     DescribeLiveDomainRequest: DescribeLiveDomainRequest,
     AuthenticateDomainOwnerResponse: AuthenticateDomainOwnerResponse,
-    DescribeGroupProIspPlayInfoListResponse: DescribeGroupProIspPlayInfoListResponse,
+    DeleteLiveTranscodeRuleRequest: DeleteLiveTranscodeRuleRequest,
     CreateLiveRecordRuleRequest: CreateLiveRecordRuleRequest,
     DescribeLiveSnapshotTemplatesRequest: DescribeLiveSnapshotTemplatesRequest,
     AddLiveWatermarkResponse: AddLiveWatermarkResponse,
     DescribeLiveStreamPushInfoListResponse: DescribeLiveStreamPushInfoListResponse,
     DescribeLiveDomainCertResponse: DescribeLiveDomainCertResponse,
     DescribeLiveRecordTemplateRequest: DescribeLiveRecordTemplateRequest,
+    MonitorStreamPlayInfo: MonitorStreamPlayInfo,
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
     ForbidLiveStreamRequest: ForbidLiveStreamRequest,
     DescribeDeliverBandwidthListRequest: DescribeDeliverBandwidthListRequest,
@@ -13670,6 +14139,7 @@ module.exports = {
     ModifyLiveDomainCertBindingsRequest: ModifyLiveDomainCertBindingsRequest,
     CreateLiveTranscodeTemplateResponse: CreateLiveTranscodeTemplateResponse,
     LiveCertDomainInfo: LiveCertDomainInfo,
+    DescribeVisitTopSumInfoListRequest: DescribeVisitTopSumInfoListRequest,
     DayStreamPlayInfo: DayStreamPlayInfo,
     ModifyLivePlayDomainResponse: ModifyLivePlayDomainResponse,
     CancelCommonMixStreamResponse: CancelCommonMixStreamResponse,
@@ -13721,11 +14191,12 @@ module.exports = {
     DeleteLivePullStreamTaskResponse: DeleteLivePullStreamTaskResponse,
     AuthenticateDomainOwnerRequest: AuthenticateDomainOwnerRequest,
     DescribeLiveForbidStreamListResponse: DescribeLiveForbidStreamListResponse,
-    DescribeVisitTopSumInfoListRequest: DescribeVisitTopSumInfoListRequest,
+    DescribeStreamPushInfoListRequest: DescribeStreamPushInfoListRequest,
     DescribeLivePullStreamTasksResponse: DescribeLivePullStreamTasksResponse,
     DescribeLiveWatermarkResponse: DescribeLiveWatermarkResponse,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
     ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
+    DescribeStreamPushInfoListResponse: DescribeStreamPushInfoListResponse,
     DescribeLiveStreamPushInfoListRequest: DescribeLiveStreamPushInfoListRequest,
     StopLiveRecordResponse: StopLiveRecordResponse,
     DescribeLiveWatermarksResponse: DescribeLiveWatermarksResponse,
@@ -13789,6 +14260,7 @@ module.exports = {
     BatchDomainOperateErrors: BatchDomainOperateErrors,
     ModifyLiveTranscodeTemplateRequest: ModifyLiveTranscodeTemplateRequest,
     EnableLiveDomainRequest: EnableLiveDomainRequest,
+    DescribeAllStreamPlayInfoListResponse: DescribeAllStreamPlayInfoListResponse,
     DescribeLiveTranscodeTotalInfoResponse: DescribeLiveTranscodeTotalInfoResponse,
     DescribeLiveSnapshotRulesRequest: DescribeLiveSnapshotRulesRequest,
     CreateRecordTaskRequest: CreateRecordTaskRequest,
@@ -13822,6 +14294,7 @@ module.exports = {
     DescribeLivePushAuthKeyResponse: DescribeLivePushAuthKeyResponse,
     CreateLiveWatermarkRuleRequest: CreateLiveWatermarkRuleRequest,
     DescribeLiveRecordTemplatesRequest: DescribeLiveRecordTemplatesRequest,
+    DescribeAllStreamPlayInfoListRequest: DescribeAllStreamPlayInfoListRequest,
     DescribeLiveDomainResponse: DescribeLiveDomainResponse,
     DeleteRecordTaskRequest: DeleteRecordTaskRequest,
     PullStreamTaskInfo: PullStreamTaskInfo,

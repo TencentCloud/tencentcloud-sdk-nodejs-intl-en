@@ -860,10 +860,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * StopDBImportJob response structure.
+ * ModifyRemoteBackupConfig response structure.
  * @class
  */
-class StopDBImportJobResponse extends  AbstractModel {
+class ModifyRemoteBackupConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1643,7 +1643,7 @@ class CdbSellType extends  AbstractModel {
         super();
 
         /**
-         * Name of the purchasable instance
+         * Name of the purchasable instance. Valid values: `Z3` (High-availability instance. `DeviceType`:`UNIVERSAL`, `EXCLUSIVE`; `CVM` (basic instance. `DeviceType`: `BASIC`); `TKE` (basic v2 instance. `DeviceType`: `BASIC_V2`).
          * @type {string || null}
          */
         this.TypeName = null;
@@ -2051,53 +2051,24 @@ class DeleteParamTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Node information of the proxy
+ * Instance parameter information
  * @class
  */
-class ProxyNodeInfo extends  AbstractModel {
+class ParamInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Proxy node ID
-Note: this field may return `null`, indicating that no valid value can be found.
+         * Parameter name
          * @type {string || null}
          */
-        this.ProxyNodeId = null;
+        this.Name = null;
 
         /**
-         * Current number of connections to the node
-Note: this field may return `null`, indicating that no valid value can be found.
-         * @type {number || null}
-         */
-        this.ProxyNodeConnections = null;
-
-        /**
-         * CPU
-Note: this field may return `null`, indicating that no valid value can be found.
-         * @type {number || null}
-         */
-        this.ProxyNodeCpu = null;
-
-        /**
-         * Memory
-Note: this field may return `null`, indicating that no valid value can be found.
-         * @type {number || null}
-         */
-        this.ProxyNodeMem = null;
-
-        /**
-         * Node status:
-init (applying)
-online (active)
-offline (inactive)
-destroy (destroyed)
-recovering (recovering from fault)
-error (failed)
-Note: this field may return `null`, indicating that no valid value can be found.
+         * Parameter value
          * @type {string || null}
          */
-        this.ProxyStatus = null;
+        this.Value = null;
 
     }
 
@@ -2108,11 +2079,8 @@ Note: this field may return `null`, indicating that no valid value can be found.
         if (!params) {
             return;
         }
-        this.ProxyNodeId = 'ProxyNodeId' in params ? params.ProxyNodeId : null;
-        this.ProxyNodeConnections = 'ProxyNodeConnections' in params ? params.ProxyNodeConnections : null;
-        this.ProxyNodeCpu = 'ProxyNodeCpu' in params ? params.ProxyNodeCpu : null;
-        this.ProxyNodeMem = 'ProxyNodeMem' in params ? params.ProxyNodeMem : null;
-        this.ProxyStatus = 'ProxyStatus' in params ? params.ProxyStatus : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -2326,6 +2294,34 @@ Note: this field may return `null`, indicating that no valid values can be obtai
  * @class
  */
 class ModifyNameOrDescByDpIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopDBImportJob response structure.
+ * @class
+ */
+class StopDBImportJobResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3212,6 +3208,18 @@ class DescribeDataBackupOverviewResponse extends  AbstractModel {
         this.DataBackupArchiveCount = null;
 
         /**
+         * Total backup capacity of standard storage in current region
+         * @type {number || null}
+         */
+        this.DataBackupStandbyVolume = null;
+
+        /**
+         * Total number of standard storage backups in current region
+         * @type {number || null}
+         */
+        this.DataBackupStandbyCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3236,6 +3244,8 @@ class DescribeDataBackupOverviewResponse extends  AbstractModel {
         this.RemoteBackupCount = 'RemoteBackupCount' in params ? params.RemoteBackupCount : null;
         this.DataBackupArchiveVolume = 'DataBackupArchiveVolume' in params ? params.DataBackupArchiveVolume : null;
         this.DataBackupArchiveCount = 'DataBackupArchiveCount' in params ? params.DataBackupArchiveCount : null;
+        this.DataBackupStandbyVolume = 'DataBackupStandbyVolume' in params ? params.DataBackupStandbyVolume : null;
+        this.DataBackupStandbyCount = 'DataBackupStandbyCount' in params ? params.DataBackupStandbyCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4012,6 +4022,34 @@ class BinlogInfo extends  AbstractModel {
             }
         }
         this.CosStorageType = 'CosStorageType' in params ? params.CosStorageType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * StopRollback request structure.
+ * @class
+ */
+class StopRollbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance whose rollback task is canceled
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
@@ -6548,24 +6586,53 @@ class DescribeBackupSummariesRequest extends  AbstractModel {
 }
 
 /**
- * StartBatchRollback response structure.
+ * Node information of the proxy
  * @class
  */
-class StartBatchRollbackResponse extends  AbstractModel {
+class ProxyNodeInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task request ID, which can be used to query the execution result of an async task.
+         * Proxy node ID
+Note: this field may return `null`, indicating that no valid value can be found.
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.ProxyNodeId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Current number of connections to the node
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {number || null}
+         */
+        this.ProxyNodeConnections = null;
+
+        /**
+         * CPU
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {number || null}
+         */
+        this.ProxyNodeCpu = null;
+
+        /**
+         * Memory
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {number || null}
+         */
+        this.ProxyNodeMem = null;
+
+        /**
+         * Node status:
+init (applying)
+online (active)
+offline (inactive)
+destroy (destroyed)
+recovering (recovering from fault)
+error (failed)
+Note: this field may return `null`, indicating that no valid value can be found.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ProxyStatus = null;
 
     }
 
@@ -6576,8 +6643,11 @@ class StartBatchRollbackResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ProxyNodeId = 'ProxyNodeId' in params ? params.ProxyNodeId : null;
+        this.ProxyNodeConnections = 'ProxyNodeConnections' in params ? params.ProxyNodeConnections : null;
+        this.ProxyNodeCpu = 'ProxyNodeCpu' in params ? params.ProxyNodeCpu : null;
+        this.ProxyNodeMem = 'ProxyNodeMem' in params ? params.ProxyNodeMem : null;
+        this.ProxyStatus = 'ProxyStatus' in params ? params.ProxyStatus : null;
 
     }
 }
@@ -6995,6 +7065,34 @@ class CreateRoInstanceIpResponse extends  AbstractModel {
         this.RoVip = 'RoVip' in params ? params.RoVip : null;
         this.RoVport = 'RoVport' in params ? params.RoVport : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTimeWindow request structure.
+ * @class
+ */
+class DescribeTimeWindowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -8154,6 +8252,30 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         this.BinlogArchiveDays = null;
 
         /**
+         * Whether to enable the standard storage policy for data backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+         * @type {string || null}
+         */
+        this.EnableBackupStandby = null;
+
+        /**
+         * The period (in days) of how long a data backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
+         * @type {number || null}
+         */
+        this.BackupStandbyDays = null;
+
+        /**
+         * Whether to enable the standard storage policy for log backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+         * @type {string || null}
+         */
+        this.EnableBinlogStandby = null;
+
+        /**
+         * The period (in days) of how long a log backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
+         * @type {number || null}
+         */
+        this.BinlogStandbyDays = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -8188,6 +8310,10 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         this.BackupArchiveDays = 'BackupArchiveDays' in params ? params.BackupArchiveDays : null;
         this.EnableBinlogArchive = 'EnableBinlogArchive' in params ? params.EnableBinlogArchive : null;
         this.BinlogArchiveDays = 'BinlogArchiveDays' in params ? params.BinlogArchiveDays : null;
+        this.EnableBackupStandby = 'EnableBackupStandby' in params ? params.EnableBackupStandby : null;
+        this.BackupStandbyDays = 'BackupStandbyDays' in params ? params.BackupStandbyDays : null;
+        this.EnableBinlogStandby = 'EnableBinlogStandby' in params ? params.EnableBinlogStandby : null;
+        this.BinlogStandbyDays = 'BinlogStandbyDays' in params ? params.BinlogStandbyDays : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8602,24 +8728,18 @@ class ModifyParamTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Instance parameter information
+ * ModifyDBInstanceSecurityGroups response structure.
  * @class
  */
-class ParamInfo extends  AbstractModel {
+class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * Parameter value
-         * @type {string || null}
-         */
-        this.Value = null;
+        this.RequestId = null;
 
     }
 
@@ -8630,8 +8750,7 @@ class ParamInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9764,6 +9883,13 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.BackupArchiveVolume = null;
 
         /**
+         * Backup capacity of standard storage, which includes data backups and log backups.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.BackupStandbyVolume = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -9784,6 +9910,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.FreeVolume = 'FreeVolume' in params ? params.FreeVolume : null;
         this.RemoteBackupVolume = 'RemoteBackupVolume' in params ? params.RemoteBackupVolume : null;
         this.BackupArchiveVolume = 'BackupArchiveVolume' in params ? params.BackupArchiveVolume : null;
+        this.BackupStandbyVolume = 'BackupStandbyVolume' in params ? params.BackupStandbyVolume : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11774,10 +11901,10 @@ Note: this field may return `null`, indicating that no valid value can be found.
 }
 
 /**
- * ModifyDBInstanceSecurityGroups response structure.
+ * ModifyBackupConfig response structure.
  * @class
  */
-class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
+class ModifyBackupConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -12831,6 +12958,18 @@ class DescribeBinlogBackupOverviewResponse extends  AbstractModel {
         this.BinlogArchiveCount = null;
 
         /**
+         * Log backup capacity of standard storage in bytes
+         * @type {number || null}
+         */
+        this.BinlogStandbyVolume = null;
+
+        /**
+         * Number of log backups of standard storage
+         * @type {number || null}
+         */
+        this.BinlogStandbyCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -12851,6 +12990,8 @@ class DescribeBinlogBackupOverviewResponse extends  AbstractModel {
         this.RemoteBinlogCount = 'RemoteBinlogCount' in params ? params.RemoteBinlogCount : null;
         this.BinlogArchiveVolume = 'BinlogArchiveVolume' in params ? params.BinlogArchiveVolume : null;
         this.BinlogArchiveCount = 'BinlogArchiveCount' in params ? params.BinlogArchiveCount : null;
+        this.BinlogStandbyVolume = 'BinlogStandbyVolume' in params ? params.BinlogStandbyVolume : null;
+        this.BinlogStandbyCount = 'BinlogStandbyCount' in params ? params.BinlogStandbyCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13431,6 +13572,41 @@ For example, if you want to backup tb1 and tb2 in db1 and the entire db2, you sh
 }
 
 /**
+ * StartBatchRollback response structure.
+ * @class
+ */
+class StartBatchRollbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task request ID, which can be used to query the execution result of an async task.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Common time window
  * @class
  */
@@ -13599,18 +13775,48 @@ class DescribeDBInstanceCharsetRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTimeWindow request structure.
+ * DescribeRemoteBackupConfig response structure.
  * @class
  */
-class DescribeTimeWindowRequest extends  AbstractModel {
+class DescribeRemoteBackupConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * Remote backup retention period in days
+         * @type {number || null}
+         */
+        this.ExpireDays = null;
+
+        /**
+         * Remote data backup. Valid values:`off` (disable), `on` (enable).
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.RemoteBackupSave = null;
+
+        /**
+         * Remote log backup. Valid values: `off` (disable), `on` (enable). Only when the parameter `RemoteBackupSave` is `on`, the `RemoteBinlogSave` parameter can be set to `on`.
+         * @type {string || null}
+         */
+        this.RemoteBinlogSave = null;
+
+        /**
+         * List of configured remote backup regions
+         * @type {Array.<string> || null}
+         */
+        this.RemoteRegion = null;
+
+        /**
+         * List of remote backup regions
+         * @type {Array.<string> || null}
+         */
+        this.RegionList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -13621,7 +13827,12 @@ class DescribeTimeWindowRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ExpireDays = 'ExpireDays' in params ? params.ExpireDays : null;
+        this.RemoteBackupSave = 'RemoteBackupSave' in params ? params.RemoteBackupSave : null;
+        this.RemoteBinlogSave = 'RemoteBinlogSave' in params ? params.RemoteBinlogSave : null;
+        this.RemoteRegion = 'RemoteRegion' in params ? params.RemoteRegion : null;
+        this.RegionList = 'RegionList' in params ? params.RegionList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13962,6 +14173,30 @@ class ModifyBackupConfigRequest extends  AbstractModel {
          */
         this.EnableBinlogArchive = null;
 
+        /**
+         * Whether to enable the standard storage policy for data backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+         * @type {string || null}
+         */
+        this.EnableBackupStandby = null;
+
+        /**
+         * The period (in days) of how long a data backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
+         * @type {number || null}
+         */
+        this.BackupStandbyDays = null;
+
+        /**
+         * Whether to enable the standard storage policy for log backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+         * @type {string || null}
+         */
+        this.EnableBinlogStandby = null;
+
+        /**
+         * The period (in days) of how long a log backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
+         * @type {number || null}
+         */
+        this.BinlogStandbyDays = null;
+
     }
 
     /**
@@ -13992,6 +14227,10 @@ class ModifyBackupConfigRequest extends  AbstractModel {
         this.BackupArchiveDays = 'BackupArchiveDays' in params ? params.BackupArchiveDays : null;
         this.BinlogArchiveDays = 'BinlogArchiveDays' in params ? params.BinlogArchiveDays : null;
         this.EnableBinlogArchive = 'EnableBinlogArchive' in params ? params.EnableBinlogArchive : null;
+        this.EnableBackupStandby = 'EnableBackupStandby' in params ? params.EnableBackupStandby : null;
+        this.BackupStandbyDays = 'BackupStandbyDays' in params ? params.BackupStandbyDays : null;
+        this.EnableBinlogStandby = 'EnableBinlogStandby' in params ? params.EnableBinlogStandby : null;
+        this.BinlogStandbyDays = 'BinlogStandbyDays' in params ? params.BinlogStandbyDays : null;
 
     }
 }
@@ -14235,18 +14474,18 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
 }
 
 /**
- * ModifyBackupConfig response structure.
+ * DescribeRemoteBackupConfig request structure.
  * @class
  */
-class ModifyBackupConfigResponse extends  AbstractModel {
+class DescribeRemoteBackupConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -14257,7 +14496,7 @@ class ModifyBackupConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -15416,18 +15655,42 @@ class RollbackTimeRange extends  AbstractModel {
 }
 
 /**
- * StopRollback request structure.
+ * ModifyRemoteBackupConfig request structure.
  * @class
  */
-class StopRollbackRequest extends  AbstractModel {
+class ModifyRemoteBackupConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the instance whose rollback task is canceled
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * Remote data backup. Valid values:`off` (disable), `on` (enable).
+         * @type {string || null}
+         */
+        this.RemoteBackupSave = null;
+
+        /**
+         * Remote log backup. Valid values: `off` (disable), `on` (enable). Only when the parameter `RemoteBackupSave` is `on`, the `RemoteBinlogSave` parameter can be set to `on`.
+         * @type {string || null}
+         */
+        this.RemoteBinlogSave = null;
+
+        /**
+         * The custom backup region list
+         * @type {Array.<string> || null}
+         */
+        this.RemoteRegion = null;
+
+        /**
+         * Remote backup retention period in days
+         * @type {number || null}
+         */
+        this.ExpireDays = null;
 
     }
 
@@ -15439,6 +15702,10 @@ class StopRollbackRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RemoteBackupSave = 'RemoteBackupSave' in params ? params.RemoteBackupSave : null;
+        this.RemoteBinlogSave = 'RemoteBinlogSave' in params ? params.RemoteBinlogSave : null;
+        this.RemoteRegion = 'RemoteRegion' in params ? params.RemoteRegion : null;
+        this.ExpireDays = 'ExpireDays' in params ? params.ExpireDays : null;
 
     }
 }
@@ -16520,7 +16787,7 @@ module.exports = {
     StopDBImportJobRequest: StopDBImportJobRequest,
     DescribeUploadedFilesResponse: DescribeUploadedFilesResponse,
     DescribeSlowLogDataResponse: DescribeSlowLogDataResponse,
-    StopDBImportJobResponse: StopDBImportJobResponse,
+    ModifyRemoteBackupConfigResponse: ModifyRemoteBackupConfigResponse,
     DescribeDBInstanceInfoResponse: DescribeDBInstanceInfoResponse,
     SlaveInstanceInfo: SlaveInstanceInfo,
     DescribeErrorLogDataRequest: DescribeErrorLogDataRequest,
@@ -16543,13 +16810,14 @@ module.exports = {
     StopReplicationResponse: StopReplicationResponse,
     ResetRootAccountResponse: ResetRootAccountResponse,
     DeleteParamTemplateResponse: DeleteParamTemplateResponse,
-    ProxyNodeInfo: ProxyNodeInfo,
+    ParamInfo: ParamInfo,
     DescribeRoMinScaleRequest: DescribeRoMinScaleRequest,
     DescribeDefaultParamsRequest: DescribeDefaultParamsRequest,
     RoGroupAttr: RoGroupAttr,
     DBSwitchInfo: DBSwitchInfo,
     StartReplicationResponse: StartReplicationResponse,
     ModifyNameOrDescByDpIdResponse: ModifyNameOrDescByDpIdResponse,
+    StopDBImportJobResponse: StopDBImportJobResponse,
     DescribeDBPriceResponse: DescribeDBPriceResponse,
     CloseCDBProxyResponse: CloseCDBProxyResponse,
     ReleaseIsolatedDBInstancesResponse: ReleaseIsolatedDBInstancesResponse,
@@ -16580,6 +16848,7 @@ module.exports = {
     ReleaseIsolatedDBInstancesRequest: ReleaseIsolatedDBInstancesRequest,
     ProxyGroup: ProxyGroup,
     BinlogInfo: BinlogInfo,
+    StopRollbackRequest: StopRollbackRequest,
     CloneItem: CloneItem,
     DescribeTasksRequest: DescribeTasksRequest,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
@@ -16616,7 +16885,7 @@ module.exports = {
     UploadInfo: UploadInfo,
     ModifyLocalBinlogConfigResponse: ModifyLocalBinlogConfigResponse,
     DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
-    StartBatchRollbackResponse: StartBatchRollbackResponse,
+    ProxyNodeInfo: ProxyNodeInfo,
     DescribeRoGroupsRequest: DescribeRoGroupsRequest,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
     DescribeSupportedPrivilegesRequest: DescribeSupportedPrivilegesRequest,
@@ -16628,6 +16897,7 @@ module.exports = {
     CloseWanServiceRequest: CloseWanServiceRequest,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
+    DescribeTimeWindowRequest: DescribeTimeWindowRequest,
     CreateAuditPolicyResponse: CreateAuditPolicyResponse,
     SwitchForUpgradeResponse: SwitchForUpgradeResponse,
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
@@ -16661,7 +16931,7 @@ module.exports = {
     CdbSellConfig: CdbSellConfig,
     RoWeightValue: RoWeightValue,
     ModifyParamTemplateResponse: ModifyParamTemplateResponse,
-    ParamInfo: ParamInfo,
+    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     RoInstanceInfo: RoInstanceInfo,
     SecurityGroup: SecurityGroup,
@@ -16720,7 +16990,7 @@ module.exports = {
     SlaveInfo: SlaveInfo,
     UpgradeCDBProxyVersionRequest: UpgradeCDBProxyVersionRequest,
     DescribeProxyCustomConfResponse: DescribeProxyCustomConfResponse,
-    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
+    ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     UpgradeCDBProxyVersionResponse: UpgradeCDBProxyVersionResponse,
     RoVipInfo: RoVipInfo,
     DescribeCdbZoneConfigResponse: DescribeCdbZoneConfigResponse,
@@ -16752,10 +17022,11 @@ module.exports = {
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     Account: Account,
     CreateBackupRequest: CreateBackupRequest,
+    StartBatchRollbackResponse: StartBatchRollbackResponse,
     CommonTimeWindow: CommonTimeWindow,
     AccountInfo: AccountInfo,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
-    DescribeTimeWindowRequest: DescribeTimeWindowRequest,
+    DescribeRemoteBackupConfigResponse: DescribeRemoteBackupConfigResponse,
     ModifyInstancePasswordComplexityResponse: ModifyInstancePasswordComplexityResponse,
     LocalBinlogConfigDefault: LocalBinlogConfigDefault,
     DeviceMemInfo: DeviceMemInfo,
@@ -16767,7 +17038,7 @@ module.exports = {
     DatabasesWithCharacterLists: DatabasesWithCharacterLists,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,
-    ModifyBackupConfigResponse: ModifyBackupConfigResponse,
+    DescribeRemoteBackupConfigRequest: DescribeRemoteBackupConfigRequest,
     DescribeDBImportRecordsRequest: DescribeDBImportRecordsRequest,
     CreateDBImportJobResponse: CreateDBImportJobResponse,
     DescribeTagsOfInstanceIdsRequest: DescribeTagsOfInstanceIdsRequest,
@@ -16795,7 +17066,7 @@ module.exports = {
     Rule: Rule,
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackTimeRange: RollbackTimeRange,
-    StopRollbackRequest: StopRollbackRequest,
+    ModifyRemoteBackupConfigRequest: ModifyRemoteBackupConfigRequest,
     DeleteBackupRequest: DeleteBackupRequest,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
     UpgradeCDBProxyRequest: UpgradeCDBProxyRequest,

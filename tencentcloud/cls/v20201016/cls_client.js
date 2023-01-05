@@ -47,10 +47,11 @@ const OpenKafkaConsumerResponse = models.OpenKafkaConsumerResponse;
 const AlarmTargetInfo = models.AlarmTargetInfo;
 const DescribeIndexRequest = models.DescribeIndexRequest;
 const DescribeConfigsResponse = models.DescribeConfigsResponse;
+const DeleteMachineGroupInfoRequest = models.DeleteMachineGroupInfoRequest;
 const CreateLogsetResponse = models.CreateLogsetResponse;
 const DeleteMachineGroupResponse = models.DeleteMachineGroupResponse;
 const Tag = models.Tag;
-const DescribeMachineGroupsRequest = models.DescribeMachineGroupsRequest;
+const DescribeExportsRequest = models.DescribeExportsRequest;
 const ExtractRuleInfo = models.ExtractRuleInfo;
 const TopicInfo = models.TopicInfo;
 const DescribeConsumerRequest = models.DescribeConsumerRequest;
@@ -83,11 +84,12 @@ const DescribeLogHistogramResponse = models.DescribeLogHistogramResponse;
 const CloseKafkaConsumerResponse = models.CloseKafkaConsumerResponse;
 const RuleTagInfo = models.RuleTagInfo;
 const CreateIndexRequest = models.CreateIndexRequest;
+const DescribeLogsetsResponse = models.DescribeLogsetsResponse;
 const DeleteConsumerResponse = models.DeleteConsumerResponse;
 const DescribeTopicsRequest = models.DescribeTopicsRequest;
 const GetAlarmLogResponse = models.GetAlarmLogResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
-const DescribeExportsRequest = models.DescribeExportsRequest;
+const DescribeMachineGroupsRequest = models.DescribeMachineGroupsRequest;
 const AlarmTarget = models.AlarmTarget;
 const OpenKafkaConsumerRequest = models.OpenKafkaConsumerRequest;
 const DeleteConfigResponse = models.DeleteConfigResponse;
@@ -104,8 +106,9 @@ const AnalysisDimensional = models.AnalysisDimensional;
 const CloseKafkaConsumerRequest = models.CloseKafkaConsumerRequest;
 const CreateExportRequest = models.CreateExportRequest;
 const DescribeAlarmNoticesResponse = models.DescribeAlarmNoticesResponse;
+const DescribeMachineGroupsResponse = models.DescribeMachineGroupsResponse;
 const ModifyConfigRequest = models.ModifyConfigRequest;
-const DescribeLogsetsResponse = models.DescribeLogsetsResponse;
+const AddMachineGroupInfoRequest = models.AddMachineGroupInfoRequest;
 const JsonInfo = models.JsonInfo;
 const CreateShipperRequest = models.CreateShipperRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
@@ -144,11 +147,12 @@ const MachineGroupTypeInfo = models.MachineGroupTypeInfo;
 const DeleteConfigFromMachineGroupRequest = models.DeleteConfigFromMachineGroupRequest;
 const ShipperInfo = models.ShipperInfo;
 const KeyValueInfo = models.KeyValueInfo;
+const AddMachineGroupInfoResponse = models.AddMachineGroupInfoResponse;
 const ModifyMachineGroupRequest = models.ModifyMachineGroupRequest;
 const DescribeAlarmNoticesRequest = models.DescribeAlarmNoticesRequest;
 const NoticeReceiver = models.NoticeReceiver;
 const Ckafka = models.Ckafka;
-const CreateExportResponse = models.CreateExportResponse;
+const DescribeMachinesRequest = models.DescribeMachinesRequest;
 const DeleteAlarmNoticeRequest = models.DeleteAlarmNoticeRequest;
 const DeleteLogsetRequest = models.DeleteLogsetRequest;
 const MachineInfo = models.MachineInfo;
@@ -165,13 +169,13 @@ const DescribeIndexResponse = models.DescribeIndexResponse;
 const HistogramInfo = models.HistogramInfo;
 const DescribeMachineGroupConfigsRequest = models.DescribeMachineGroupConfigsRequest;
 const ModifyLogsetRequest = models.ModifyLogsetRequest;
-const DescribeMachineGroupsResponse = models.DescribeMachineGroupsResponse;
+const DeleteMachineGroupInfoResponse = models.DeleteMachineGroupInfoResponse;
 const DescribeLogsetsRequest = models.DescribeLogsetsRequest;
 const ParquetInfo = models.ParquetInfo;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const Filter = models.Filter;
 const ConsumerContent = models.ConsumerContent;
-const DescribeMachinesRequest = models.DescribeMachinesRequest;
+const CreateExportResponse = models.CreateExportResponse;
 const KeyRegexInfo = models.KeyRegexInfo;
 const MergePartitionResponse = models.MergePartitionResponse;
 
@@ -198,14 +202,14 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of machine groups.
-     * @param {DescribeMachineGroupsRequest} req
-     * @param {function(string, DescribeMachineGroupsResponse):void} cb
+     * This API is used to delete machine group information.
+     * @param {DeleteMachineGroupInfoRequest} req
+     * @param {function(string, DeleteMachineGroupInfoResponse):void} cb
      * @public
      */
-    DescribeMachineGroups(req, cb) {
-        let resp = new DescribeMachineGroupsResponse();
-        this.request("DescribeMachineGroups", req, resp, cb);
+    DeleteMachineGroupInfo(req, cb) {
+        let resp = new DeleteMachineGroupInfoResponse();
+        this.request("DeleteMachineGroupInfo", req, resp, cb);
     }
 
     /**
@@ -471,6 +475,17 @@ class ClsClient extends AbstractClient {
     DescribeAlarms(req, cb) {
         let resp = new DescribeAlarmsResponse();
         this.request("DescribeAlarms", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add machine group information.
+     * @param {AddMachineGroupInfoRequest} req
+     * @param {function(string, AddMachineGroupInfoResponse):void} cb
+     * @public
+     */
+    AddMachineGroupInfo(req, cb) {
+        let resp = new AddMachineGroupInfoResponse();
+        this.request("AddMachineGroupInfo", req, resp, cb);
     }
 
     /**
@@ -856,6 +871,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     DescribeConfigs(req, cb) {
         let resp = new DescribeConfigsResponse();
         this.request("DescribeConfigs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of machine groups.
+     * @param {DescribeMachineGroupsRequest} req
+     * @param {function(string, DescribeMachineGroupsResponse):void} cb
+     * @public
+     */
+    DescribeMachineGroups(req, cb) {
+        let resp = new DescribeMachineGroupsResponse();
+        this.request("DescribeMachineGroups", req, resp, cb);
     }
 
     /**

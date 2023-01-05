@@ -70,6 +70,7 @@ const CreateAlertRuleResponse = models.CreateAlertRuleResponse;
 const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
 const ModifyAlarmPolicyTasksResponse = models.ModifyAlarmPolicyTasksResponse;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
+const PrometheusZoneItem = models.PrometheusZoneItem;
 const DimensionNew = models.DimensionNew;
 const CreatePrometheusMultiTenantInstancePostPayModeRequest = models.CreatePrometheusMultiTenantInstancePostPayModeRequest;
 const MetricDataPoint = models.MetricDataPoint;
@@ -148,6 +149,7 @@ const UpdateSSOAccountResponse = models.UpdateSSOAccountResponse;
 const DestroyPrometheusInstanceRequest = models.DestroyPrometheusInstanceRequest;
 const PrometheusInstanceGrantInfo = models.PrometheusInstanceGrantInfo;
 const UnbindPrometheusManagedGrafanaRequest = models.UnbindPrometheusManagedGrafanaRequest;
+const DescribePrometheusZonesRequest = models.DescribePrometheusZonesRequest;
 const TemplateGroup = models.TemplateGroup;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
 const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
@@ -195,12 +197,13 @@ const CreateAlarmNoticeResponse = models.CreateAlarmNoticeResponse;
 const DescribeAlarmHistoriesRequest = models.DescribeAlarmHistoriesRequest;
 const MetricObjectMeaning = models.MetricObjectMeaning;
 const DeletePolicyGroupRequest = models.DeletePolicyGroupRequest;
-const EnableSSOCamCheckRequest = models.EnableSSOCamCheckRequest;
+const DescribePrometheusZonesResponse = models.DescribePrometheusZonesResponse;
 const ModifyPolicyGroupResponse = models.ModifyPolicyGroupResponse;
 const DeleteGrafanaIntegrationResponse = models.DeleteGrafanaIntegrationResponse;
 const DescribeInstalledPluginsRequest = models.DescribeInstalledPluginsRequest;
 const DescribeAlarmMetricsResponse = models.DescribeAlarmMetricsResponse;
 const Condition = models.Condition;
+const EnableSSOCamCheckRequest = models.EnableSSOCamCheckRequest;
 const DeleteGrafanaInstanceResponse = models.DeleteGrafanaInstanceResponse;
 const DescribeGrafanaWhiteListRequest = models.DescribeGrafanaWhiteListRequest;
 const PutMonitorDataRequest = models.PutMonitorDataRequest;
@@ -441,6 +444,17 @@ Note that alert object and alert message are special fields of Prometheus Rule A
     UpdateSSOAccount(req, cb) {
         let resp = new UpdateSSOAccountResponse();
         this.request("UpdateSSOAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to list the AZs of Tencent Managed Service for Prometheus (TMP).
+     * @param {DescribePrometheusZonesRequest} req
+     * @param {function(string, DescribePrometheusZonesResponse):void} cb
+     * @public
+     */
+    DescribePrometheusZones(req, cb) {
+        let resp = new DescribePrometheusZonesResponse();
+        this.request("DescribePrometheusZones", req, resp, cb);
     }
 
     /**

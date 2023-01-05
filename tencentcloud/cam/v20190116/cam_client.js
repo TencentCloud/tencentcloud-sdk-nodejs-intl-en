@@ -26,6 +26,7 @@ const DeleteUserRequest = models.DeleteUserRequest;
 const DetachGroupPolicyRequest = models.DetachGroupPolicyRequest;
 const DescribeRoleListResponse = models.DescribeRoleListResponse;
 const DeleteUserResponse = models.DeleteUserResponse;
+const TagRoleResponse = models.TagRoleResponse;
 const GetRoleRequest = models.GetRoleRequest;
 const CreateServiceLinkedRoleRequest = models.CreateServiceLinkedRoleRequest;
 const ListAttachedGroupPoliciesRequest = models.ListAttachedGroupPoliciesRequest;
@@ -48,7 +49,7 @@ const ListPolicyVersionsRequest = models.ListPolicyVersionsRequest;
 const GetCustomMFATokenInfoRequest = models.GetCustomMFATokenInfoRequest;
 const DescribeRoleListRequest = models.DescribeRoleListRequest;
 const DescribeUserSAMLConfigRequest = models.DescribeUserSAMLConfigRequest;
-const TagRoleResponse = models.TagRoleResponse;
+const DeleteAccessKeyResponse = models.DeleteAccessKeyResponse;
 const PutRolePermissionsBoundaryRequest = models.PutRolePermissionsBoundaryRequest;
 const GetGroupRequest = models.GetGroupRequest;
 const StrategyInfo = models.StrategyInfo;
@@ -58,8 +59,9 @@ const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
 const DescribeSubAccountsRequest = models.DescribeSubAccountsRequest;
 const DeleteUserPermissionsBoundaryRequest = models.DeleteUserPermissionsBoundaryRequest;
 const ListSAMLProvidersRequest = models.ListSAMLProvidersRequest;
-const ListGroupsRequest = models.ListGroupsRequest;
+const CreateAccessKeyResponse = models.CreateAccessKeyResponse;
 const DeletePolicyVersionResponse = models.DeletePolicyVersionResponse;
+const CreateAccessKeyRequest = models.CreateAccessKeyRequest;
 const UpdateSAMLProviderRequest = models.UpdateSAMLProviderRequest;
 const AttachedUserPolicyGroupInfo = models.AttachedUserPolicyGroupInfo;
 const ListGroupsForUserResponse = models.ListGroupsForUserResponse;
@@ -67,6 +69,8 @@ const ListUsersForGroupRequest = models.ListUsersForGroupRequest;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
 const CreatePolicyVersionResponse = models.CreatePolicyVersionResponse;
 const ListPoliciesResponse = models.ListPoliciesResponse;
+const DeleteAccessKeyRequest = models.DeleteAccessKeyRequest;
+const AccessKeyDetail = models.AccessKeyDetail;
 const OffsiteFlag = models.OffsiteFlag;
 const GroupIdOfUidInfo = models.GroupIdOfUidInfo;
 const UpdateRoleDescriptionRequest = models.UpdateRoleDescriptionRequest;
@@ -75,6 +79,7 @@ const SetDefaultPolicyVersionRequest = models.SetDefaultPolicyVersionRequest;
 const RoleInfo = models.RoleInfo;
 const CreatePolicyVersionRequest = models.CreatePolicyVersionRequest;
 const SecretIdLastUsed = models.SecretIdLastUsed;
+const UpdateAccessKeyResponse = models.UpdateAccessKeyResponse;
 const CreateUserOIDCConfigResponse = models.CreateUserOIDCConfigResponse;
 const ListAttachedUserAllPoliciesResponse = models.ListAttachedUserAllPoliciesResponse;
 const DeleteGroupRequest = models.DeleteGroupRequest;
@@ -104,6 +109,7 @@ const CreateGroupRequest = models.CreateGroupRequest;
 const SAMLProviderInfo = models.SAMLProviderInfo;
 const DisableUserSSORequest = models.DisableUserSSORequest;
 const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse;
+const UpdateAccessKeyRequest = models.UpdateAccessKeyRequest;
 const UpdateUserRequest = models.UpdateUserRequest;
 const CreateSAMLProviderRequest = models.CreateSAMLProviderRequest;
 const AttachPolicyInfo = models.AttachPolicyInfo;
@@ -123,7 +129,7 @@ const CreateOIDCConfigRequest = models.CreateOIDCConfigRequest;
 const AccessKey = models.AccessKey;
 const GetGroupResponse = models.GetGroupResponse;
 const UpdateOIDCConfigResponse = models.UpdateOIDCConfigResponse;
-const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
+const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
 const DeleteSAMLProviderResponse = models.DeleteSAMLProviderResponse;
 const GetAccountSummaryResponse = models.GetAccountSummaryResponse;
 const CreateServiceLinkedRoleResponse = models.CreateServiceLinkedRoleResponse;
@@ -143,11 +149,12 @@ const ListAttachedUserAllPoliciesRequest = models.ListAttachedUserAllPoliciesReq
 const DeletePolicyVersionRequest = models.DeletePolicyVersionRequest;
 const CreateUserSAMLConfigRequest = models.CreateUserSAMLConfigRequest;
 const UpdateGroupRequest = models.UpdateGroupRequest;
-const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
+const DeleteSAMLProviderRequest = models.DeleteSAMLProviderRequest;
 const UpdateOIDCConfigRequest = models.UpdateOIDCConfigRequest;
 const CreateRoleResponse = models.CreateRoleResponse;
 const GetSAMLProviderResponse = models.GetSAMLProviderResponse;
 const DescribeSafeAuthFlagIntlResponse = models.DescribeSafeAuthFlagIntlResponse;
+const ListGroupsRequest = models.ListGroupsRequest;
 const ListPolicyVersionsResponse = models.ListPolicyVersionsResponse;
 const GetPolicyRequest = models.GetPolicyRequest;
 const DescribeSafeAuthFlagIntlRequest = models.DescribeSafeAuthFlagIntlRequest;
@@ -449,14 +456,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a SAML identity provider.
-     * @param {DeleteSAMLProviderRequest} req
-     * @param {function(string, DeleteSAMLProviderResponse):void} cb
+     * This API is used to verify a custom multi-factor Token.
+     * @param {ConsumeCustomMFATokenRequest} req
+     * @param {function(string, ConsumeCustomMFATokenResponse):void} cb
      * @public
      */
-    DeleteSAMLProvider(req, cb) {
-        let resp = new DeleteSAMLProviderResponse();
-        this.request("DeleteSAMLProvider", req, resp, cb);
+    ConsumeCustomMFAToken(req, cb) {
+        let resp = new ConsumeCustomMFATokenResponse();
+        this.request("ConsumeCustomMFAToken", req, resp, cb);
     }
 
     /**
@@ -625,14 +632,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to verify a custom multi-factor Token.
-     * @param {ConsumeCustomMFATokenRequest} req
-     * @param {function(string, ConsumeCustomMFATokenResponse):void} cb
+     * This API is used to delete a SAML identity provider.
+     * @param {DeleteSAMLProviderRequest} req
+     * @param {function(string, DeleteSAMLProviderResponse):void} cb
      * @public
      */
-    ConsumeCustomMFAToken(req, cb) {
-        let resp = new ConsumeCustomMFATokenResponse();
-        this.request("ConsumeCustomMFAToken", req, resp, cb);
+    DeleteSAMLProvider(req, cb) {
+        let resp = new DeleteSAMLProviderResponse();
+        this.request("DeleteSAMLProvider", req, resp, cb);
     }
 
     /**
@@ -669,6 +676,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * This API is used to update an access key for a CAM user.
+     * @param {UpdateAccessKeyRequest} req
+     * @param {function(string, UpdateAccessKeyResponse):void} cb
+     * @public
+     */
+    UpdateAccessKey(req, cb) {
+        let resp = new UpdateAccessKeyResponse();
+        this.request("UpdateAccessKey", req, resp, cb);
+    }
+
+    /**
      * This API is used to list policies associated with the user (including those inherited from the user group).
      * @param {ListAttachedUserAllPoliciesRequest} req
      * @param {function(string, ListAttachedUserAllPoliciesResponse):void} cb
@@ -688,6 +706,17 @@ class CamClient extends AbstractClient {
     CreateUserSAMLConfig(req, cb) {
         let resp = new CreateUserSAMLConfigResponse();
         this.request("CreateUserSAMLConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an access key for a CAM user.
+     * @param {CreateAccessKeyRequest} req
+     * @param {function(string, CreateAccessKeyResponse):void} cb
+     * @public
+     */
+    CreateAccessKey(req, cb) {
+        let resp = new CreateAccessKeyResponse();
+        this.request("CreateAccessKey", req, resp, cb);
     }
 
     /**
@@ -1029,6 +1058,18 @@ class CamClient extends AbstractClient {
     CreatePolicy(req, cb) {
         let resp = new CreatePolicyResponse();
         this.request("CreatePolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an access key for a CAM user.
+Calling this API is a high-risk operation because the key cannot be recovered once deleted and Tencent Cloud will deny all requests that use this key. Proceed with caution.
+     * @param {DeleteAccessKeyRequest} req
+     * @param {function(string, DeleteAccessKeyResponse):void} cb
+     * @public
+     */
+    DeleteAccessKey(req, cb) {
+        let resp = new DeleteAccessKeyResponse();
+        this.request("DeleteAccessKey", req, resp, cb);
     }
 
     /**

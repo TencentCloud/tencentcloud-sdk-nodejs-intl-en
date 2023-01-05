@@ -143,12 +143,73 @@ class GetAttributeKeyRequest extends  AbstractModel {
 }
 
 /**
+ * Tracking set storage information
+ * @class
+ */
+class Storage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Storage type (Valid values: cos, cls)
+         * @type {string || null}
+         */
+        this.StorageType = null;
+
+        /**
+         * Storage region
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * Storage name. For COS, the storage name is the custom bucket name, which can contain up to 50 lowercase letters, digits, and hyphens. It cannot contain "-APPID" and cannot start or end with a hyphen. For CLS, the storage name is the log topic ID, which can contain 1-50 characters.
+         * @type {string || null}
+         */
+        this.StorageName = null;
+
+        /**
+         * Storage directory prefix. The COS log file prefix can only contain 3-40 letters and digits.
+         * @type {string || null}
+         */
+        this.StoragePrefix = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageType = 'StorageType' in params ? params.StorageType : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.StorageName = 'StorageName' in params ? params.StorageName : null;
+        this.StoragePrefix = 'StoragePrefix' in params ? params.StoragePrefix : null;
+
+    }
+}
+
+/**
  * DescribeAuditTracks response structure.
  * @class
  */
 class DescribeAuditTracksResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Tracking set list
+         * @type {Array.<Tracks> || null}
+         */
+        this.Tracks = null;
+
+        /**
+         * Total number of tracking sets
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -165,7 +226,45 @@ class DescribeAuditTracksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.Tracks) {
+            this.Tracks = new Array();
+            for (let z in params.Tracks) {
+                let obj = new Tracks();
+                obj.deserialize(params.Tracks[z]);
+                this.Tracks.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartLogging request structure.
+ * @class
+ */
+class StartLoggingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tracking set name
+         * @type {string || null}
+         */
+        this.AuditName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditName = 'AuditName' in params ? params.AuditName : null;
 
     }
 }
@@ -263,7 +362,7 @@ class DescribeEventsResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether the logset ends.
+         * Whether the log list has come to an end. `true`: Yes. Pagination is not required.
          * @type {boolean || null}
          */
         this.ListOver = null;
@@ -282,8 +381,8 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.Events = null;
 
         /**
-         * Total number of events.
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * This parameter has been deprecated. Please use `ListOver` and `NextToken` for pagination, and read data of the next page when the value of `ListOver` is `false`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -435,18 +534,18 @@ class LookUpEventsRequest extends  AbstractModel {
 }
 
 /**
- * StartLogging request structure.
+ * DescribeAuditTrack request structure.
  * @class
  */
-class StartLoggingRequest extends  AbstractModel {
+class DescribeAuditTrackRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Tracking set name
-         * @type {string || null}
+         * Tracking set ID
+         * @type {number || null}
          */
-        this.AuditName = null;
+        this.TrackId = null;
 
     }
 
@@ -457,7 +556,7 @@ class StartLoggingRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AuditName = 'AuditName' in params ? params.AuditName : null;
+        this.TrackId = 'TrackId' in params ? params.TrackId : null;
 
     }
 }
@@ -582,6 +681,18 @@ class DescribeAuditTracksRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * The number of tracking sets per page
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
     }
 
     /**
@@ -591,6 +702,90 @@ class DescribeAuditTracksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * Tracking set list
+ * @class
+ */
+class Tracks extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tracking set name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * The product to which the tracking set event belongs, such as `cos`, or `*` that indicates all products
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Tracking set status (0: Not enabled; 1: Enabled)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The list of API names of tracking set events (`*`: All)
+         * @type {Array.<string> || null}
+         */
+        this.EventNames = null;
+
+        /**
+         * Storage type of shipped data. Valid values: `cos`, `cls`.
+         * @type {Storage || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Creation time of the tracking set
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Tracking set ID
+         * @type {number || null}
+         */
+        this.TrackId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventNames = 'EventNames' in params ? params.EventNames : null;
+
+        if (params.Storage) {
+            let obj = new Storage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.TrackId = 'TrackId' in params ? params.TrackId : null;
 
     }
 }
@@ -638,6 +833,12 @@ class DeleteAuditTrackRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Tracking set ID
+         * @type {number || null}
+         */
+        this.TrackId = null;
+
     }
 
     /**
@@ -647,6 +848,7 @@ class DeleteAuditTrackRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TrackId = 'TrackId' in params ? params.TrackId : null;
 
     }
 }
@@ -779,6 +981,12 @@ class CreateAuditTrackResponse extends  AbstractModel {
         super();
 
         /**
+         * Tracking set ID
+         * @type {number || null}
+         */
+        this.TrackId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -793,6 +1001,7 @@ class CreateAuditTrackResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TrackId = 'TrackId' in params ? params.TrackId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -863,6 +1072,54 @@ class ModifyAuditTrackRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Tracking set ID
+         * @type {number || null}
+         */
+        this.TrackId = null;
+
+        /**
+         * Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * The product to which the tracking set event belongs. The value can be a single product such as `cos`, or `*` that indicates all products.
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Tracking set status (0: Not enabled; 1: Enabled)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The list of API names of tracking set events. When `ResourceType` is `*`, the value of `EventNames` must be `*`. When `ResourceType` is a specified product, the value of `EventNames` can be `*`. When `ResourceType` is `cos` or `cls`, up to 10 APIs are supported.
+         * @type {Array.<string> || null}
+         */
+        this.EventNames = null;
+
+        /**
+         * Storage type of shipped data. Valid values: `cos`, `cls`.
+         * @type {Storage || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account)
+         * @type {number || null}
+         */
+        this.TrackForAllMembers = null;
+
     }
 
     /**
@@ -872,6 +1129,19 @@ class ModifyAuditTrackRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TrackId = 'TrackId' in params ? params.TrackId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventNames = 'EventNames' in params ? params.EventNames : null;
+
+        if (params.Storage) {
+            let obj = new Storage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
+        }
+        this.TrackForAllMembers = 'TrackForAllMembers' in params ? params.TrackForAllMembers : null;
 
     }
 }
@@ -919,6 +1189,48 @@ class CreateAuditTrackRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * The product to which the tracking set event belongs. The value can be a single product such as `cos`, or `*` that indicates all products.
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Tracking set status (0: Not enabled; 1: Enabled)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The list of API names of tracking set events. When `ResourceType` is `*`, the value of `EventNames` must be `*`. When `ResourceType` is a specified product, the value of `EventNames` can be `*`. When `ResourceType` is `cos` or `cls`, up to 10 APIs are supported.
+         * @type {Array.<string> || null}
+         */
+        this.EventNames = null;
+
+        /**
+         * Storage type of shipped data. Valid values: `cos`, `cls`.
+         * @type {Storage || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account)
+         * @type {number || null}
+         */
+        this.TrackForAllMembers = null;
+
     }
 
     /**
@@ -928,6 +1240,18 @@ class CreateAuditTrackRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventNames = 'EventNames' in params ? params.EventNames : null;
+
+        if (params.Storage) {
+            let obj = new Storage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
+        }
+        this.TrackForAllMembers = 'TrackForAllMembers' in params ? params.TrackForAllMembers : null;
 
     }
 }
@@ -1046,7 +1370,7 @@ class DescribeEventsRequest extends  AbstractModel {
         this.MaxResults = null;
 
         /**
-         * Search criterion. Valid values: RequestId, EventName, ActionType (write/read), PrincipalId (sub-account), ResourceType, ResourceName, AccessKeyId, SensitiveAction, ApiErrorCode, and CamErrorCode.
+         * Search condition. Valid values: `RequestId`, `EventName`, `ActionType` (write/read), `PrincipalId` (sub-account), `ResourceType`, `ResourceName`, `AccessKeyId`, `SensitiveAction`, `ApiErrorCode`, `CamErrorCode`, and `Tags` (Format of AttributeValue: [{"key":"*","value":"*"}])
          * @type {Array.<LookupAttribute> || null}
          */
         this.LookupAttributes = null;
@@ -1525,6 +1849,96 @@ class CosRegionInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditTrack response structure.
+ * @class
+ */
+class DescribeAuditTrackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tracking set name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * The product to which the tracking set event belongs, such as `cos`, or `*` that indicates all products
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Tracking set status (0: Not enabled; 1: Enabled)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The list of API names of tracking set events (`*`: All)
+         * @type {Array.<string> || null}
+         */
+        this.EventNames = null;
+
+        /**
+         * Storage type of shipped data. Valid values: `cos`, `cls`.
+         * @type {Storage || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Creation time of the tracking set
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TrackForAllMembers = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.EventNames = 'EventNames' in params ? params.EventNames : null;
+
+        if (params.Storage) {
+            let obj = new Storage();
+            obj.deserialize(params.Storage)
+            this.Storage = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.TrackForAllMembers = 'TrackForAllMembers' in params ? params.TrackForAllMembers : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAudit response structure.
  * @class
  */
@@ -1844,16 +2258,19 @@ module.exports = {
     StopLoggingRequest: StopLoggingRequest,
     CmqRegionInfo: CmqRegionInfo,
     GetAttributeKeyRequest: GetAttributeKeyRequest,
+    Storage: Storage,
     DescribeAuditTracksResponse: DescribeAuditTracksResponse,
+    StartLoggingRequest: StartLoggingRequest,
     DeleteAuditResponse: DeleteAuditResponse,
     ModifyAuditTrackResponse: ModifyAuditTrackResponse,
     InquireAuditCreditRequest: InquireAuditCreditRequest,
     DescribeEventsResponse: DescribeEventsResponse,
     ListCosEnableRegionResponse: ListCosEnableRegionResponse,
     LookUpEventsRequest: LookUpEventsRequest,
-    StartLoggingRequest: StartLoggingRequest,
+    DescribeAuditTrackRequest: DescribeAuditTrackRequest,
     UpdateAuditRequest: UpdateAuditRequest,
     DescribeAuditTracksRequest: DescribeAuditTracksRequest,
+    Tracks: Tracks,
     CreateAuditResponse: CreateAuditResponse,
     DeleteAuditTrackRequest: DeleteAuditTrackRequest,
     StartLoggingResponse: StartLoggingResponse,
@@ -1878,6 +2295,7 @@ module.exports = {
     LookUpEventsResponse: LookUpEventsResponse,
     DeleteAuditTrackResponse: DeleteAuditTrackResponse,
     CosRegionInfo: CosRegionInfo,
+    DescribeAuditTrackResponse: DescribeAuditTrackResponse,
     DescribeAuditResponse: DescribeAuditResponse,
     Event: Event,
     AuditSummary: AuditSummary,

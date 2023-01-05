@@ -223,24 +223,53 @@ class DescribeClusterSecurityRequest extends  AbstractModel {
 }
 
 /**
- * ModifyPrometheusAlertRule request structure.
+ * DescribeEdgeClusterUpgradeInfo response structure.
  * @class
  */
-class ModifyPrometheusAlertRuleRequest extends  AbstractModel {
+class DescribeEdgeClusterUpgradeInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Upgradeable cluster component
+Note: This field may return `null`, indicating that no valid value can be obtained.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ComponentVersion = null;
 
         /**
-         * Alarm configurations
-         * @type {PrometheusAlertRuleDetail || null}
+         * Current version of the edge cluster
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
          */
-        this.AlertRule = null;
+        this.EdgeVersionCurrent = null;
+
+        /**
+         * Prefix of the image registry of an edge component (including domain name and namespace)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.RegistryPrefix = null;
+
+        /**
+         * Cluster upgrade status. Valid values: `Running`, `Updating`, `Failed`
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterUpgradeStatus = null;
+
+        /**
+         * Reason for `Updating` or `Failed`
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterUpgradeStatusReason = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -251,13 +280,12 @@ class ModifyPrometheusAlertRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.AlertRule) {
-            let obj = new PrometheusAlertRuleDetail();
-            obj.deserialize(params.AlertRule)
-            this.AlertRule = obj;
-        }
+        this.ComponentVersion = 'ComponentVersion' in params ? params.ComponentVersion : null;
+        this.EdgeVersionCurrent = 'EdgeVersionCurrent' in params ? params.EdgeVersionCurrent : null;
+        this.RegistryPrefix = 'RegistryPrefix' in params ? params.RegistryPrefix : null;
+        this.ClusterUpgradeStatus = 'ClusterUpgradeStatus' in params ? params.ClusterUpgradeStatus : null;
+        this.ClusterUpgradeStatusReason = 'ClusterUpgradeStatusReason' in params ? params.ClusterUpgradeStatusReason : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -419,18 +447,18 @@ class DescribeClusterKubeconfigResponse extends  AbstractModel {
 }
 
 /**
- * DescribeClusterAuthenticationOptions request structure.
+ * RemoveNodeFromNodePool response structure.
  * @class
  */
-class DescribeClusterAuthenticationOptionsRequest extends  AbstractModel {
+class RemoveNodeFromNodePoolResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.RequestId = null;
 
     }
 
@@ -441,7 +469,7 @@ class DescribeClusterAuthenticationOptionsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -791,43 +819,6 @@ class RunAutomationServiceEnabled extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
-
-    }
-}
-
-/**
- * Edge compute cluster public LB information
- * @class
- */
-class EdgeClusterPublicLB extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Whether the public LB is enabled
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {boolean || null}
-         */
-        this.Enabled = null;
-
-        /**
-         * Public network CIDR block allowed to access
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.AllowFromCidrs = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
-        this.AllowFromCidrs = 'AllowFromCidrs' in params ? params.AllowFromCidrs : null;
 
     }
 }
@@ -2003,6 +1994,34 @@ Note: this field may return `null`, indicating that no valid value is obtained.
 }
 
 /**
+ * UpdateEdgeClusterVersion response structure.
+ * @class
+ */
+class UpdateEdgeClusterVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRegions response structure.
  * @class
  */
@@ -2513,6 +2532,59 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.LanIP = 'LanIP' in params ? params.LanIP : null;
         this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
         this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+
+    }
+}
+
+/**
+ * Image details
+ * @class
+ */
+class ImageInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Image alias
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * Operating system name
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * Image ID
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * Container image tag, **DOCKER_CUSTOMIZE** (container customized tag), **GENERAL** (general tag, default value)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
 
     }
 }
@@ -4140,6 +4212,91 @@ class DescribeRouteTableConflictsRequest extends  AbstractModel {
 }
 
 /**
+ * The alarm configuration
+ * @class
+ */
+class PrometheusAlertRuleDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Rule list
+         * @type {Array.<PrometheusAlertRule> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * Last modification time
+         * @type {string || null}
+         */
+        this.UpdatedAt = null;
+
+        /**
+         * Alarm delivery methods
+         * @type {PrometheusNotification || null}
+         */
+        this.Notification = null;
+
+        /**
+         * Alarm rule ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * If the alarm is delivered via a template, the TemplateId is the template ID.
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Alarm interval
+Note: this field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new PrometheusAlertRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+
+        if (params.Notification) {
+            let obj = new PrometheusNotification();
+            obj.deserialize(params.Notification)
+            this.Notification = obj;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+    }
+}
+
+/**
  * DeleteClusterEndpointVip response structure.
  * @class
  */
@@ -4218,7 +4375,7 @@ class ClusterBasicSettings extends  AbstractModel {
         super();
 
         /**
-         * Cluster operating system. Public image (enter the image ID) and custom image (enter the image name) are supported. For details, see https://intl.cloud.tencent.com/document/product/457/68289?from_cn_redirect=1
+         * Cluster operating system. Public image (enter the image name) and custom image (enter the image ID) are supported. For details, see https://intl.cloud.tencent.com/document/product/457/68289?from_cn_redirect=1
          * @type {string || null}
          */
         this.ClusterOs = null;
@@ -4597,10 +4754,10 @@ class CreateClusterInstancesRequest extends  AbstractModel {
 }
 
 /**
- * CreateClusterNodePoolFromExistingAsg request structure.
+ * DescribeClusterAuthenticationOptions request structure.
  * @class
  */
-class CreateClusterNodePoolFromExistingAsgRequest extends  AbstractModel {
+class DescribeClusterAuthenticationOptionsRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -4609,12 +4766,6 @@ class CreateClusterNodePoolFromExistingAsgRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ClusterId = null;
-
-        /**
-         * Scaling group ID
-         * @type {string || null}
-         */
-        this.AutoscalingGroupId = null;
 
     }
 
@@ -4626,7 +4777,6 @@ class CreateClusterNodePoolFromExistingAsgRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
 
     }
 }
@@ -6611,8 +6761,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Password = null;
 
         /**
-         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
-Note: this field may return null, indicating that no valid value is obtained.
+         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. You cannot specify a key and a password at the same time. Windows instances do not support keys.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.KeyIds = null;
@@ -6669,24 +6819,26 @@ class ModifyNodePoolInstanceTypesResponse extends  AbstractModel {
 }
 
 /**
- * CreateClusterNodePoolFromExistingAsg response structure.
+ * Edge compute cluster public LB information
  * @class
  */
-class CreateClusterNodePoolFromExistingAsgResponse extends  AbstractModel {
+class EdgeClusterPublicLB extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Node pool ID
-         * @type {string || null}
+         * Whether the public LB is enabled
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
          */
-        this.NodePoolId = null;
+        this.Enabled = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Public network CIDR block allowed to access
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.AllowFromCidrs = null;
 
     }
 
@@ -6697,8 +6849,8 @@ class CreateClusterNodePoolFromExistingAsgResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.AllowFromCidrs = 'AllowFromCidrs' in params ? params.AllowFromCidrs : null;
 
     }
 }
@@ -7617,6 +7769,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.LatestOperationState = null;
 
         /**
+         * OIDC authentication configurations
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {OIDCConfigAuthenticationOptions || null}
+         */
+        this.OIDCConfig = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -7638,6 +7797,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.ServiceAccounts = obj;
         }
         this.LatestOperationState = 'LatestOperationState' in params ? params.LatestOperationState : null;
+
+        if (params.OIDCConfig) {
+            let obj = new OIDCConfigAuthenticationOptions();
+            obj.deserialize(params.OIDCConfig)
+            this.OIDCConfig = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8199,56 +8364,33 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * The alarm configuration
+ * OIDC authentication related configurations
  * @class
  */
-class PrometheusAlertRuleDetail extends  AbstractModel {
+class OIDCConfigAuthenticationOptions extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Rule name
-         * @type {string || null}
+         * Creating an identity provider
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
          */
-        this.Name = null;
+        this.AutoCreateOIDCConfig = null;
 
         /**
-         * Rule list
-         * @type {Array.<PrometheusAlertRule> || null}
+         * Creating ClientId of the identity provider
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
          */
-        this.Rules = null;
+        this.AutoCreateClientId = null;
 
         /**
-         * Last modification time
-         * @type {string || null}
+         * Creating the PodIdentityWebhook component
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {boolean || null}
          */
-        this.UpdatedAt = null;
-
-        /**
-         * Alarm delivery methods
-         * @type {PrometheusNotification || null}
-         */
-        this.Notification = null;
-
-        /**
-         * Alarm rule ID
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * If the alarm is delivered via a template, the TemplateId is the template ID.
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.TemplateId = null;
-
-        /**
-         * Alarm interval
-Note: this field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.Interval = null;
+        this.AutoInstallPodIdentityWebhookAddon = null;
 
     }
 
@@ -8259,26 +8401,9 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-
-        if (params.Rules) {
-            this.Rules = new Array();
-            for (let z in params.Rules) {
-                let obj = new PrometheusAlertRule();
-                obj.deserialize(params.Rules[z]);
-                this.Rules.push(obj);
-            }
-        }
-        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
-
-        if (params.Notification) {
-            let obj = new PrometheusNotification();
-            obj.deserialize(params.Notification)
-            this.Notification = obj;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.AutoCreateOIDCConfig = 'AutoCreateOIDCConfig' in params ? params.AutoCreateOIDCConfig : null;
+        this.AutoCreateClientId = 'AutoCreateClientId' in params ? params.AutoCreateClientId : null;
+        this.AutoInstallPodIdentityWebhookAddon = 'AutoInstallPodIdentityWebhookAddon' in params ? params.AutoInstallPodIdentityWebhookAddon : null;
 
     }
 }
@@ -8478,6 +8603,24 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
         this.OsCustomizeType = null;
 
         /**
+         * GPU driver version, CUDA version, cuDNN version and wether to enable MIG
+         * @type {GPUArgs || null}
+         */
+        this.GPUArgs = null;
+
+        /**
+         * Base64-encoded custom script
+         * @type {string || null}
+         */
+        this.UserScript = null;
+
+        /**
+         * Ignore existing nodes when update `Label` and `Taint`
+         * @type {boolean || null}
+         */
+        this.IgnoreExistedNode = null;
+
+        /**
          * Node custom parameter
          * @type {InstanceExtraArgs || null}
          */
@@ -8500,6 +8643,12 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
          * @type {boolean || null}
          */
         this.DeletionProtection = null;
+
+        /**
+         * Specified value of dockerd --graph. Default value: /var/lib/docker
+         * @type {string || null}
+         */
+        this.DockerGraphPath = null;
 
     }
 
@@ -8537,6 +8686,14 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
         this.OsName = 'OsName' in params ? params.OsName : null;
         this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
 
+        if (params.GPUArgs) {
+            let obj = new GPUArgs();
+            obj.deserialize(params.GPUArgs)
+            this.GPUArgs = obj;
+        }
+        this.UserScript = 'UserScript' in params ? params.UserScript : null;
+        this.IgnoreExistedNode = 'IgnoreExistedNode' in params ? params.IgnoreExistedNode : null;
+
         if (params.ExtraArgs) {
             let obj = new InstanceExtraArgs();
             obj.deserialize(params.ExtraArgs)
@@ -8553,6 +8710,7 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
         }
         this.Unschedulable = 'Unschedulable' in params ? params.Unschedulable : null;
         this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
+        this.DockerGraphPath = 'DockerGraphPath' in params ? params.DockerGraphPath : null;
 
     }
 }
@@ -8726,13 +8884,13 @@ class CreateClusterNodePoolRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * AS group parameters
+         * AS group parameters. For details, see https://intl.cloud.tencent.com/document/product/377/20440?from_cn_redirect=1
          * @type {string || null}
          */
         this.AutoScalingGroupPara = null;
 
         /**
-         * Running parameters
+         * Running parameters. For details, see https://intl.cloud.tencent.com/document/product/377/20447?from_cn_redirect=1
          * @type {string || null}
          */
         this.LaunchConfigurePara = null;
@@ -9138,6 +9296,95 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * UpdateEdgeClusterVersion request structure.
+ * @class
+ */
+class UpdateEdgeClusterVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Target version
+         * @type {string || null}
+         */
+        this.EdgeVersion = null;
+
+        /**
+         * Prefix of the image repository of a custom edge component
+         * @type {string || null}
+         */
+        this.RegistryPrefix = null;
+
+        /**
+         * Whether to skip precheck
+         * @type {boolean || null}
+         */
+        this.SkipPreCheck = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EdgeVersion = 'EdgeVersion' in params ? params.EdgeVersion : null;
+        this.RegistryPrefix = 'RegistryPrefix' in params ? params.RegistryPrefix : null;
+        this.SkipPreCheck = 'SkipPreCheck' in params ? params.SkipPreCheck : null;
+
+    }
+}
+
+/**
+ * ModifyPrometheusAlertRule request structure.
+ * @class
+ */
+class ModifyPrometheusAlertRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Alarm configurations
+         * @type {PrometheusAlertRuleDetail || null}
+         */
+        this.AlertRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.AlertRule) {
+            let obj = new PrometheusAlertRuleDetail();
+            obj.deserialize(params.AlertRule)
+            this.AlertRule = obj;
+        }
+
+    }
+}
+
+/**
  * UpdateClusterVersion request structure.
  * @class
  */
@@ -9218,6 +9465,12 @@ class ModifyClusterAuthenticationOptionsRequest extends  AbstractModel {
          */
         this.ServiceAccounts = null;
 
+        /**
+         * OIDC authentication configurations
+         * @type {OIDCConfigAuthenticationOptions || null}
+         */
+        this.OIDCConfig = null;
+
     }
 
     /**
@@ -9233,6 +9486,12 @@ class ModifyClusterAuthenticationOptionsRequest extends  AbstractModel {
             let obj = new ServiceAccountAuthenticationOptions();
             obj.deserialize(params.ServiceAccounts)
             this.ServiceAccounts = obj;
+        }
+
+        if (params.OIDCConfig) {
+            let obj = new OIDCConfigAuthenticationOptions();
+            obj.deserialize(params.OIDCConfig)
+            this.OIDCConfig = obj;
         }
 
     }
@@ -11139,7 +11398,7 @@ class EnhancedService extends  AbstractModel {
         this.MonitorService = null;
 
         /**
-         * Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
+         * Whether to enable the TAT service. If this parameter is not specified, the TAT service is enabled for public images and disabled for other images by default.
          * @type {RunAutomationServiceEnabled || null}
          */
         this.AutomationService = null;
@@ -12871,34 +13130,6 @@ class PrometheusGrafanaInfo extends  AbstractModel {
 }
 
 /**
- * RemoveNodeFromNodePool response structure.
- * @class
- */
-class RemoveNodeFromNodePoolResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Mounting configuration of the CVM instance data disk
  * @class
  */
@@ -13088,40 +13319,24 @@ class DescribeClusterAsGroupsResponse extends  AbstractModel {
 }
 
 /**
- * Image details
+ * DescribeEdgeClusterUpgradeInfo request structure.
  * @class
  */
-class ImageInstance extends  AbstractModel {
+class DescribeEdgeClusterUpgradeInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Image alias
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cluster ID
          * @type {string || null}
          */
-        this.Alias = null;
+        this.ClusterId = null;
 
         /**
-         * Operating system name
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Target TKEEdge version
          * @type {string || null}
          */
-        this.OsName = null;
-
-        /**
-         * Image ID
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
-         * Container image tag, **DOCKER_CUSTOMIZE** (container customized tag), **GENERAL** (general tag, default value)
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OsCustomizeType = null;
+        this.EdgeVersion = null;
 
     }
 
@@ -13132,10 +13347,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Alias = 'Alias' in params ? params.Alias : null;
-        this.OsName = 'OsName' in params ? params.OsName : null;
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EdgeVersion = 'EdgeVersion' in params ? params.EdgeVersion : null;
 
     }
 }
@@ -13222,6 +13435,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.ClusterAdvancedSettings = null;
 
+        /**
+         * TKE edge cluster level
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Level = null;
+
     }
 
     /**
@@ -13248,6 +13468,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             obj.deserialize(params.ClusterAdvancedSettings)
             this.ClusterAdvancedSettings = obj;
         }
+        this.Level = 'Level' in params ? params.Level : null;
 
     }
 }
@@ -13325,12 +13546,12 @@ module.exports = {
     DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
     DescribeClusterSecurityResponse: DescribeClusterSecurityResponse,
     DescribeClusterSecurityRequest: DescribeClusterSecurityRequest,
-    ModifyPrometheusAlertRuleRequest: ModifyPrometheusAlertRuleRequest,
+    DescribeEdgeClusterUpgradeInfoResponse: DescribeEdgeClusterUpgradeInfoResponse,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
     InstallEdgeLogAgentRequest: InstallEdgeLogAgentRequest,
     DescribeEdgeCVMInstancesRequest: DescribeEdgeCVMInstancesRequest,
     DescribeClusterKubeconfigResponse: DescribeClusterKubeconfigResponse,
-    DescribeClusterAuthenticationOptionsRequest: DescribeClusterAuthenticationOptionsRequest,
+    RemoveNodeFromNodePoolResponse: RemoveNodeFromNodePoolResponse,
     DescribeClusterEndpointVipStatusResponse: DescribeClusterEndpointVipStatusResponse,
     ModifyClusterEndpointSPRequest: ModifyClusterEndpointSPRequest,
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
@@ -13340,7 +13561,6 @@ module.exports = {
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
     DescribeClusterCommonNamesRequest: DescribeClusterCommonNamesRequest,
     RunAutomationServiceEnabled: RunAutomationServiceEnabled,
-    EdgeClusterPublicLB: EdgeClusterPublicLB,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
     PrometheusNotification: PrometheusNotification,
     ClusterVersion: ClusterVersion,
@@ -13363,6 +13583,7 @@ module.exports = {
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     InstanceExtraArgs: InstanceExtraArgs,
+    UpdateEdgeClusterVersionResponse: UpdateEdgeClusterVersionResponse,
     DescribeRegionsResponse: DescribeRegionsResponse,
     ClusterLevelChangeRecord: ClusterLevelChangeRecord,
     ModifyPrometheusAlertRuleResponse: ModifyPrometheusAlertRuleResponse,
@@ -13373,6 +13594,7 @@ module.exports = {
     EnableClusterDeletionProtectionResponse: EnableClusterDeletionProtectionResponse,
     ClusterAsGroup: ClusterAsGroup,
     Instance: Instance,
+    ImageInstance: ImageInstance,
     DescribeVpcCniPodLimitsResponse: DescribeVpcCniPodLimitsResponse,
     DescribeVersionsResponse: DescribeVersionsResponse,
     DescribeEdgeClusterInstancesRequest: DescribeEdgeClusterInstancesRequest,
@@ -13405,6 +13627,7 @@ module.exports = {
     ResourceUsageDetail: ResourceUsageDetail,
     CreateTKEEdgeClusterRequest: CreateTKEEdgeClusterRequest,
     DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
+    PrometheusAlertRuleDetail: PrometheusAlertRuleDetail,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
     CreateEdgeLogConfigRequest: CreateEdgeLogConfigRequest,
     ClusterBasicSettings: ClusterBasicSettings,
@@ -13413,7 +13636,7 @@ module.exports = {
     UpgradeNodeResetParam: UpgradeNodeResetParam,
     DescribeTKEEdgeClusterStatusResponse: DescribeTKEEdgeClusterStatusResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
-    CreateClusterNodePoolFromExistingAsgRequest: CreateClusterNodePoolFromExistingAsgRequest,
+    DescribeClusterAuthenticationOptionsRequest: DescribeClusterAuthenticationOptionsRequest,
     DescribeTKEEdgeScriptResponse: DescribeTKEEdgeScriptResponse,
     DescribeClusterStatusRequest: DescribeClusterStatusRequest,
     VersionInstance: VersionInstance,
@@ -13458,7 +13681,7 @@ module.exports = {
     ECMEnhancedService: ECMEnhancedService,
     LoginSettings: LoginSettings,
     ModifyNodePoolInstanceTypesResponse: ModifyNodePoolInstanceTypesResponse,
-    CreateClusterNodePoolFromExistingAsgResponse: CreateClusterNodePoolFromExistingAsgResponse,
+    EdgeClusterPublicLB: EdgeClusterPublicLB,
     DescribeEnableVpcCniProgressRequest: DescribeEnableVpcCniProgressRequest,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
     GetClusterLevelPriceResponse: GetClusterLevelPriceResponse,
@@ -13490,7 +13713,7 @@ module.exports = {
     EdgeClusterExtraArgs: EdgeClusterExtraArgs,
     PodLimitsInstance: PodLimitsInstance,
     DescribeEnableVpcCniProgressResponse: DescribeEnableVpcCniProgressResponse,
-    PrometheusAlertRuleDetail: PrometheusAlertRuleDetail,
+    OIDCConfigAuthenticationOptions: OIDCConfigAuthenticationOptions,
     DescribePrometheusInstanceResponse: DescribePrometheusInstanceResponse,
     DeleteEdgeCVMInstancesRequest: DeleteEdgeCVMInstancesRequest,
     ModifyClusterNodePoolRequest: ModifyClusterNodePoolRequest,
@@ -13503,6 +13726,8 @@ module.exports = {
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
     EdgeAvailableExtraArgs: EdgeAvailableExtraArgs,
+    UpdateEdgeClusterVersionRequest: UpdateEdgeClusterVersionRequest,
+    ModifyPrometheusAlertRuleRequest: ModifyPrometheusAlertRuleRequest,
     UpdateClusterVersionRequest: UpdateClusterVersionRequest,
     ModifyClusterAuthenticationOptionsRequest: ModifyClusterAuthenticationOptionsRequest,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
@@ -13576,12 +13801,11 @@ module.exports = {
     CheckEdgeClusterCIDRRequest: CheckEdgeClusterCIDRRequest,
     ModifyClusterAsGroupAttributeRequest: ModifyClusterAsGroupAttributeRequest,
     PrometheusGrafanaInfo: PrometheusGrafanaInfo,
-    RemoveNodeFromNodePoolResponse: RemoveNodeFromNodePoolResponse,
     InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
     RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
     NodeCountSummary: NodeCountSummary,
     DescribeClusterAsGroupsResponse: DescribeClusterAsGroupsResponse,
-    ImageInstance: ImageInstance,
+    DescribeEdgeClusterUpgradeInfoRequest: DescribeEdgeClusterUpgradeInfoRequest,
     EdgeCluster: EdgeCluster,
     DescribeClusterNodePoolDetailResponse: DescribeClusterNodePoolDetailResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,

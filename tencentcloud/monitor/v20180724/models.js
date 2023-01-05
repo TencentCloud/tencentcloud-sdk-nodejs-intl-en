@@ -2969,6 +2969,62 @@ class DescribeBaseMetricsResponse extends  AbstractModel {
 }
 
 /**
+ * Region information returned by `PrometheusZoneItem`
+ * @class
+ */
+class PrometheusZoneItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * AZ ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * AZ status. Valid values: `0`(Unavailable), `1` (Available).
+         * @type {number || null}
+         */
+        this.ZoneState = null;
+
+        /**
+         * Region ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * AZ name
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+
+    }
+}
+
+/**
  * Dimension information of the policy type
  * @class
  */
@@ -7135,6 +7191,34 @@ class UnbindPrometheusManagedGrafanaRequest extends  AbstractModel {
 }
 
 /**
+ * DescribePrometheusZones request structure.
+ * @class
+ */
+class DescribePrometheusZonesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+
+    }
+}
+
+/**
  * Template list
  * @class
  */
@@ -9817,24 +9901,25 @@ class DeletePolicyGroupRequest extends  AbstractModel {
 }
 
 /**
- * EnableSSOCamCheck request structure.
+ * DescribePrometheusZones response structure.
  * @class
  */
-class EnableSSOCamCheckRequest extends  AbstractModel {
+class DescribePrometheusZonesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * Region list
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PrometheusZoneItem> || null}
          */
-        this.InstanceId = null;
+        this.ZoneSet = null;
 
         /**
-         * Whether to enable CAM authentication
-         * @type {boolean || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.EnableSSOCamCheck = null;
+        this.RequestId = null;
 
     }
 
@@ -9845,8 +9930,16 @@ class EnableSSOCamCheckRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.EnableSSOCamCheck = 'EnableSSOCamCheck' in params ? params.EnableSSOCamCheck : null;
+
+        if (params.ZoneSet) {
+            this.ZoneSet = new Array();
+            for (let z in params.ZoneSet) {
+                let obj = new PrometheusZoneItem();
+                obj.deserialize(params.ZoneSet[z]);
+                this.ZoneSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10104,6 +10197,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IsAdvanced = 'IsAdvanced' in params ? params.IsAdvanced : null;
         this.IsOpen = 'IsOpen' in params ? params.IsOpen : null;
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
+
+    }
+}
+
+/**
+ * EnableSSOCamCheck request structure.
+ * @class
+ */
+class EnableSSOCamCheckRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Whether to enable CAM authentication
+         * @type {boolean || null}
+         */
+        this.EnableSSOCamCheck = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EnableSSOCamCheck = 'EnableSSOCamCheck' in params ? params.EnableSSOCamCheck : null;
 
     }
 }
@@ -17804,6 +17932,7 @@ module.exports = {
     CreatePolicyGroupResponse: CreatePolicyGroupResponse,
     ModifyAlarmPolicyTasksResponse: ModifyAlarmPolicyTasksResponse,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
+    PrometheusZoneItem: PrometheusZoneItem,
     DimensionNew: DimensionNew,
     CreatePrometheusMultiTenantInstancePostPayModeRequest: CreatePrometheusMultiTenantInstancePostPayModeRequest,
     MetricDataPoint: MetricDataPoint,
@@ -17882,6 +18011,7 @@ module.exports = {
     DestroyPrometheusInstanceRequest: DestroyPrometheusInstanceRequest,
     PrometheusInstanceGrantInfo: PrometheusInstanceGrantInfo,
     UnbindPrometheusManagedGrafanaRequest: UnbindPrometheusManagedGrafanaRequest,
+    DescribePrometheusZonesRequest: DescribePrometheusZonesRequest,
     TemplateGroup: TemplateGroup,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
     ModifyPolicyGroupCondition: ModifyPolicyGroupCondition,
@@ -17929,12 +18059,13 @@ module.exports = {
     DescribeAlarmHistoriesRequest: DescribeAlarmHistoriesRequest,
     MetricObjectMeaning: MetricObjectMeaning,
     DeletePolicyGroupRequest: DeletePolicyGroupRequest,
-    EnableSSOCamCheckRequest: EnableSSOCamCheckRequest,
+    DescribePrometheusZonesResponse: DescribePrometheusZonesResponse,
     ModifyPolicyGroupResponse: ModifyPolicyGroupResponse,
     DeleteGrafanaIntegrationResponse: DeleteGrafanaIntegrationResponse,
     DescribeInstalledPluginsRequest: DescribeInstalledPluginsRequest,
     DescribeAlarmMetricsResponse: DescribeAlarmMetricsResponse,
     Condition: Condition,
+    EnableSSOCamCheckRequest: EnableSSOCamCheckRequest,
     DeleteGrafanaInstanceResponse: DeleteGrafanaInstanceResponse,
     DescribeGrafanaWhiteListRequest: DescribeGrafanaWhiteListRequest,
     PutMonitorDataRequest: PutMonitorDataRequest,

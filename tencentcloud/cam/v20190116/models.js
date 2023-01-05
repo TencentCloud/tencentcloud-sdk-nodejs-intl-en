@@ -441,6 +441,34 @@ class DeleteUserResponse extends  AbstractModel {
 }
 
 /**
+ * TagRole response structure.
+ * @class
+ */
+class TagRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetRole request structure.
  * @class
  */
@@ -1273,10 +1301,10 @@ class DescribeUserSAMLConfigRequest extends  AbstractModel {
 }
 
 /**
- * TagRole response structure.
+ * DeleteAccessKey response structure.
  * @class
  */
-class TagRoleResponse extends  AbstractModel {
+class DeleteAccessKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1691,30 +1719,25 @@ class ListSAMLProvidersRequest extends  AbstractModel {
 }
 
 /**
- * ListGroups request structure.
+ * CreateAccessKey response structure.
  * @class
  */
-class ListGroupsRequest extends  AbstractModel {
+class CreateAccessKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Page number; default is 1
-         * @type {number || null}
+         * Access key
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AccessKeyDetail || null}
          */
-        this.Page = null;
+        this.AccessKey = null;
 
         /**
-         * Number of entries per page; default is 20
-         * @type {number || null}
-         */
-        this.Rp = null;
-
-        /**
-         * Filter by User Group name
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Keyword = null;
+        this.RequestId = null;
 
     }
 
@@ -1725,9 +1748,13 @@ class ListGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Page = 'Page' in params ? params.Page : null;
-        this.Rp = 'Rp' in params ? params.Rp : null;
-        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+
+        if (params.AccessKey) {
+            let obj = new AccessKeyDetail();
+            obj.deserialize(params.AccessKey)
+            this.AccessKey = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1756,6 +1783,34 @@ class DeletePolicyVersionResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAccessKey request structure.
+ * @class
+ */
+class CreateAccessKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * UIN of the specified user. If this parameter is left empty, the access key will be created for the current user by default.
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
 
     }
 }
@@ -2064,6 +2119,90 @@ Note: This field may return null, indicating that no valid value was found.
         }
         this.ServiceTypeList = 'ServiceTypeList' in params ? params.ServiceTypeList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAccessKey request structure.
+ * @class
+ */
+class DeleteAccessKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the specified access key that needs to be deleted
+         * @type {string || null}
+         */
+        this.AccessKeyId = null;
+
+        /**
+         * UIN of the specified user. If this parameter is left empty, the access key will be deleted for the current user by default.
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+
+    }
+}
+
+/**
+ * Access key
+ * @class
+ */
+class AccessKeyDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Access key ID
+         * @type {string || null}
+         */
+        this.AccessKeyId = null;
+
+        /**
+         * Access key, which is visible only when it is created. Keep it properly.
+         * @type {string || null}
+         */
+        this.SecretAccessKey = null;
+
+        /**
+         * Key status. Valid values: `Active` (activated), `Inactive` (not activated).
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+        this.SecretAccessKey = 'SecretAccessKey' in params ? params.SecretAccessKey : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -2467,6 +2606,34 @@ Note: this field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * UpdateAccessKey response structure.
+ * @class
+ */
+class UpdateAccessKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateUserOIDCConfig response structure.
  * @class
  */
@@ -2707,13 +2874,13 @@ class DetachRolePolicyRequest extends  AbstractModel {
         this.PolicyId = null;
 
         /**
-         * Role ID, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
+         * Role ID, which is used to specify a role. The input parameter is either `DetachRoleId` or `DetachRoleName`.
          * @type {string || null}
          */
         this.DetachRoleId = null;
 
         /**
-         * Role name, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
+         * Role name, which is used to specify a role. The input parameter is either `DetachRoleId` or `DetachRoleName`.
          * @type {string || null}
          */
         this.DetachRoleName = null;
@@ -3731,6 +3898,48 @@ class UpdateSAMLProviderResponse extends  AbstractModel {
 }
 
 /**
+ * UpdateAccessKey request structure.
+ * @class
+ */
+class UpdateAccessKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the specified access key that needs to be updated
+         * @type {string || null}
+         */
+        this.AccessKeyId = null;
+
+        /**
+         * Key status. Valid values: `Active` (activated), `Inactive` (not activated).
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * UIN of the specified user. If this parameter is left empty, the access key will be updated for the current user by default.
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+
+    }
+}
+
+/**
  * UpdateUser request structure.
  * @class
  */
@@ -4609,18 +4818,24 @@ class UpdateOIDCConfigResponse extends  AbstractModel {
 }
 
 /**
- * DeleteSAMLProvider request structure.
+ * AttachGroupPolicy request structure.
  * @class
  */
-class DeleteSAMLProviderRequest extends  AbstractModel {
+class AttachGroupPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * SAML identity provider name
-         * @type {string || null}
+         * Policy ID
+         * @type {number || null}
          */
-        this.Name = null;
+        this.PolicyId = null;
+
+        /**
+         * User Group ID
+         * @type {number || null}
+         */
+        this.AttachGroupId = null;
 
     }
 
@@ -4631,7 +4846,8 @@ class DeleteSAMLProviderRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
 
     }
 }
@@ -5479,24 +5695,18 @@ class UpdateGroupRequest extends  AbstractModel {
 }
 
 /**
- * AttachGroupPolicy request structure.
+ * DeleteSAMLProvider request structure.
  * @class
  */
-class AttachGroupPolicyRequest extends  AbstractModel {
+class DeleteSAMLProviderRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy ID
-         * @type {number || null}
+         * SAML identity provider name
+         * @type {string || null}
          */
-        this.PolicyId = null;
-
-        /**
-         * User Group ID
-         * @type {number || null}
-         */
-        this.AttachGroupId = null;
+        this.Name = null;
 
     }
 
@@ -5507,8 +5717,7 @@ class AttachGroupPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -5728,6 +5937,48 @@ class DescribeSafeAuthFlagIntlResponse extends  AbstractModel {
             this.OffsiteFlag = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListGroups request structure.
+ * @class
+ */
+class ListGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Page number; default is 1
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Number of entries per page; default is 20
+         * @type {number || null}
+         */
+        this.Rp = null;
+
+        /**
+         * Filter by User Group name
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Rp = 'Rp' in params ? params.Rp : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
 
     }
 }
@@ -7743,6 +7994,7 @@ module.exports = {
     DetachGroupPolicyRequest: DetachGroupPolicyRequest,
     DescribeRoleListResponse: DescribeRoleListResponse,
     DeleteUserResponse: DeleteUserResponse,
+    TagRoleResponse: TagRoleResponse,
     GetRoleRequest: GetRoleRequest,
     CreateServiceLinkedRoleRequest: CreateServiceLinkedRoleRequest,
     ListAttachedGroupPoliciesRequest: ListAttachedGroupPoliciesRequest,
@@ -7765,7 +8017,7 @@ module.exports = {
     GetCustomMFATokenInfoRequest: GetCustomMFATokenInfoRequest,
     DescribeRoleListRequest: DescribeRoleListRequest,
     DescribeUserSAMLConfigRequest: DescribeUserSAMLConfigRequest,
-    TagRoleResponse: TagRoleResponse,
+    DeleteAccessKeyResponse: DeleteAccessKeyResponse,
     PutRolePermissionsBoundaryRequest: PutRolePermissionsBoundaryRequest,
     GetGroupRequest: GetGroupRequest,
     StrategyInfo: StrategyInfo,
@@ -7775,8 +8027,9 @@ module.exports = {
     DescribeSubAccountsRequest: DescribeSubAccountsRequest,
     DeleteUserPermissionsBoundaryRequest: DeleteUserPermissionsBoundaryRequest,
     ListSAMLProvidersRequest: ListSAMLProvidersRequest,
-    ListGroupsRequest: ListGroupsRequest,
+    CreateAccessKeyResponse: CreateAccessKeyResponse,
     DeletePolicyVersionResponse: DeletePolicyVersionResponse,
+    CreateAccessKeyRequest: CreateAccessKeyRequest,
     UpdateSAMLProviderRequest: UpdateSAMLProviderRequest,
     AttachedUserPolicyGroupInfo: AttachedUserPolicyGroupInfo,
     ListGroupsForUserResponse: ListGroupsForUserResponse,
@@ -7784,6 +8037,8 @@ module.exports = {
     RemoveUserFromGroupRequest: RemoveUserFromGroupRequest,
     CreatePolicyVersionResponse: CreatePolicyVersionResponse,
     ListPoliciesResponse: ListPoliciesResponse,
+    DeleteAccessKeyRequest: DeleteAccessKeyRequest,
+    AccessKeyDetail: AccessKeyDetail,
     OffsiteFlag: OffsiteFlag,
     GroupIdOfUidInfo: GroupIdOfUidInfo,
     UpdateRoleDescriptionRequest: UpdateRoleDescriptionRequest,
@@ -7792,6 +8047,7 @@ module.exports = {
     RoleInfo: RoleInfo,
     CreatePolicyVersionRequest: CreatePolicyVersionRequest,
     SecretIdLastUsed: SecretIdLastUsed,
+    UpdateAccessKeyResponse: UpdateAccessKeyResponse,
     CreateUserOIDCConfigResponse: CreateUserOIDCConfigResponse,
     ListAttachedUserAllPoliciesResponse: ListAttachedUserAllPoliciesResponse,
     DeleteGroupRequest: DeleteGroupRequest,
@@ -7821,6 +8077,7 @@ module.exports = {
     SAMLProviderInfo: SAMLProviderInfo,
     DisableUserSSORequest: DisableUserSSORequest,
     UpdateSAMLProviderResponse: UpdateSAMLProviderResponse,
+    UpdateAccessKeyRequest: UpdateAccessKeyRequest,
     UpdateUserRequest: UpdateUserRequest,
     CreateSAMLProviderRequest: CreateSAMLProviderRequest,
     AttachPolicyInfo: AttachPolicyInfo,
@@ -7840,7 +8097,7 @@ module.exports = {
     AccessKey: AccessKey,
     GetGroupResponse: GetGroupResponse,
     UpdateOIDCConfigResponse: UpdateOIDCConfigResponse,
-    DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
+    AttachGroupPolicyRequest: AttachGroupPolicyRequest,
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     GetAccountSummaryResponse: GetAccountSummaryResponse,
     CreateServiceLinkedRoleResponse: CreateServiceLinkedRoleResponse,
@@ -7860,11 +8117,12 @@ module.exports = {
     DeletePolicyVersionRequest: DeletePolicyVersionRequest,
     CreateUserSAMLConfigRequest: CreateUserSAMLConfigRequest,
     UpdateGroupRequest: UpdateGroupRequest,
-    AttachGroupPolicyRequest: AttachGroupPolicyRequest,
+    DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
     UpdateOIDCConfigRequest: UpdateOIDCConfigRequest,
     CreateRoleResponse: CreateRoleResponse,
     GetSAMLProviderResponse: GetSAMLProviderResponse,
     DescribeSafeAuthFlagIntlResponse: DescribeSafeAuthFlagIntlResponse,
+    ListGroupsRequest: ListGroupsRequest,
     ListPolicyVersionsResponse: ListPolicyVersionsResponse,
     GetPolicyRequest: GetPolicyRequest,
     DescribeSafeAuthFlagIntlRequest: DescribeSafeAuthFlagIntlRequest,

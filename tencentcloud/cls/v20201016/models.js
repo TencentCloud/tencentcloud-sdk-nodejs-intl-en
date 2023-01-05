@@ -1525,6 +1525,47 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DeleteMachineGroupInfo request structure.
+ * @class
+ */
+class DeleteMachineGroupInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Machine group ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Machine group type
+Supported types: `ip` and `label`
+         * @type {MachineGroupTypeInfo || null}
+         */
+        this.MachineGroupType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+        if (params.MachineGroupType) {
+            let obj = new MachineGroupTypeInfo();
+            obj.deserialize(params.MachineGroupType)
+            this.MachineGroupType = obj;
+        }
+
+    }
+}
+
+/**
  * CreateLogset response structure.
  * @class
  */
@@ -1623,48 +1664,18 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * DescribeMachineGroups request structure.
+ * DescribeExports request structure.
  * @class
  */
-class DescribeMachineGroupsRequest extends  AbstractModel {
+class DescribeExportsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <br><li> machineGroupName
-
-Filter by **machine group name**.
-Type: String
-
-Required: no
-
-<br><li> machineGroupId
-
-Filter by **machine group ID**.
-Type: String
-
-Required: no
-
-<br><li> tagKey
-
-Filter by **tag key**.
-
-Type: String
-
-Required: no
-
-<br><li> tag:tagKey
-
-Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
-Type: String
-
-Required: no
-
-
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
-         * @type {Array.<Filter> || null}
+         * Log topic ID
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.TopicId = null;
 
         /**
          * Page offset. Default value: 0
@@ -1687,15 +1698,7 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
@@ -2398,9 +2401,9 @@ class FullTextInfo extends  AbstractModel {
         this.CaseSensitive = null;
 
         /**
-         * Separator of the full-text index. Each character represents a separator;
-Supports only English punctuation marks and (\n\t\r);
-We recommend you use (@&?|#()='",;:<>[]{}/ \n\t\r\) as separators;
+         * Separator of the full-text index. Each character represents a separator.
+Only symbols, \n\t\r, and escape character \ are supported.
+Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping.
          * @type {string || null}
          */
         this.Tokenizer = null;
@@ -3584,6 +3587,56 @@ class CreateIndexRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeLogsets response structure.
+ * @class
+ */
+class DescribeLogsetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of pages
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Logset list
+         * @type {Array.<LogsetInfo> || null}
+         */
+        this.Logsets = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Logsets) {
+            this.Logsets = new Array();
+            for (let z in params.Logsets) {
+                let obj = new LogsetInfo();
+                obj.deserialize(params.Logsets[z]);
+                this.Logsets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteConsumer response structure.
  * @class
  */
@@ -3860,18 +3913,48 @@ class CreateTopicRequest extends  AbstractModel {
 }
 
 /**
- * DescribeExports request structure.
+ * DescribeMachineGroups request structure.
  * @class
  */
-class DescribeExportsRequest extends  AbstractModel {
+class DescribeMachineGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log topic ID
-         * @type {string || null}
+         * <br><li> machineGroupName
+
+Filter by **machine group name**.
+Type: String
+
+Required: no
+
+<br><li> machineGroupId
+
+Filter by **machine group ID**.
+Type: String
+
+Required: no
+
+<br><li> tagKey
+
+Filter by **tag key**.
+
+Type: String
+
+Required: no
+
+<br><li> tag:tagKey
+
+Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
+Type: String
+
+Required: no
+
+
+Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+         * @type {Array.<Filter> || null}
          */
-        this.TopicId = null;
+        this.Filters = null;
 
         /**
          * Page offset. Default value: 0
@@ -3894,7 +3977,15 @@ class DescribeExportsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
@@ -4643,6 +4734,57 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DescribeMachineGroups response structure.
+ * @class
+ */
+class DescribeMachineGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Machine group information list
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<MachineGroupInfo> || null}
+         */
+        this.MachineGroups = null;
+
+        /**
+         * Total number of pages
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MachineGroups) {
+            this.MachineGroups = new Array();
+            for (let z in params.MachineGroups) {
+                let obj = new MachineGroupInfo();
+                obj.deserialize(params.MachineGroups[z]);
+                this.MachineGroups.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyConfig request structure.
  * @class
  */
@@ -4733,30 +4875,25 @@ class ModifyConfigRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLogsets response structure.
+ * AddMachineGroupInfo request structure.
  * @class
  */
-class DescribeLogsetsResponse extends  AbstractModel {
+class AddMachineGroupInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of pages
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Logset list
-         * @type {Array.<LogsetInfo> || null}
-         */
-        this.Logsets = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Machine group ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.GroupId = null;
+
+        /**
+         * Machine group type
+Supported types: `ip` and `label`
+         * @type {MachineGroupTypeInfo || null}
+         */
+        this.MachineGroupType = null;
 
     }
 
@@ -4767,17 +4904,13 @@ class DescribeLogsetsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
-        if (params.Logsets) {
-            this.Logsets = new Array();
-            for (let z in params.Logsets) {
-                let obj = new LogsetInfo();
-                obj.deserialize(params.Logsets[z]);
-                this.Logsets.push(obj);
-            }
+        if (params.MachineGroupType) {
+            let obj = new MachineGroupTypeInfo();
+            obj.deserialize(params.MachineGroupType)
+            this.MachineGroupType = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5503,10 +5636,10 @@ class ValueInfo extends  AbstractModel {
         this.Type = null;
 
         /**
-         * Separator of fields. Each character represents a separator;
-Supports only English punctuation marks and (\n\t\r);
-`long` and `double` fields need to be null;
-We recommend you use (@&?|#()='",;:<>[]{}/ \n\t\r\\) as separators for `text` fields;
+         * Separator of fields. Each character represents a separator.
+Only symbols, \n\t\r, and escape character \ are supported.
+`long` and `double` fields need to be null.
+Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping.
          * @type {string || null}
          */
         this.Tokenizer = null;
@@ -6896,6 +7029,34 @@ class KeyValueInfo extends  AbstractModel {
 }
 
 /**
+ * AddMachineGroupInfo response structure.
+ * @class
+ */
+class AddMachineGroupInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyMachineGroup request structure.
  * @class
  */
@@ -7186,24 +7347,18 @@ class Ckafka extends  AbstractModel {
 }
 
 /**
- * CreateExport response structure.
+ * DescribeMachines request structure.
  * @class
  */
-class CreateExportResponse extends  AbstractModel {
+class DescribeMachinesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log export ID.
+         * ID of the machine group to be queried
          * @type {string || null}
          */
-        this.ExportId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.GroupId = null;
 
     }
 
@@ -7214,8 +7369,7 @@ class CreateExportResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ExportId = 'ExportId' in params ? params.ExportId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -8048,25 +8202,12 @@ class ModifyLogsetRequest extends  AbstractModel {
 }
 
 /**
- * DescribeMachineGroups response structure.
+ * DeleteMachineGroupInfo response structure.
  * @class
  */
-class DescribeMachineGroupsResponse extends  AbstractModel {
+class DeleteMachineGroupInfoResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Machine group information list
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<MachineGroupInfo> || null}
-         */
-        this.MachineGroups = null;
-
-        /**
-         * Total number of pages
-         * @type {number || null}
-         */
-        this.TotalCount = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8083,16 +8224,6 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-
-        if (params.MachineGroups) {
-            this.MachineGroups = new Array();
-            for (let z in params.MachineGroups) {
-                let obj = new MachineGroupInfo();
-                obj.deserialize(params.MachineGroups[z]);
-                this.MachineGroups.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8331,18 +8462,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeMachines request structure.
+ * CreateExport response structure.
  * @class
  */
-class DescribeMachinesRequest extends  AbstractModel {
+class CreateExportResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the machine group to be queried
+         * Log export ID.
          * @type {string || null}
          */
-        this.GroupId = null;
+        this.ExportId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -8353,7 +8490,8 @@ class DescribeMachinesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.ExportId = 'ExportId' in params ? params.ExportId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8468,10 +8606,11 @@ module.exports = {
     AlarmTargetInfo: AlarmTargetInfo,
     DescribeIndexRequest: DescribeIndexRequest,
     DescribeConfigsResponse: DescribeConfigsResponse,
+    DeleteMachineGroupInfoRequest: DeleteMachineGroupInfoRequest,
     CreateLogsetResponse: CreateLogsetResponse,
     DeleteMachineGroupResponse: DeleteMachineGroupResponse,
     Tag: Tag,
-    DescribeMachineGroupsRequest: DescribeMachineGroupsRequest,
+    DescribeExportsRequest: DescribeExportsRequest,
     ExtractRuleInfo: ExtractRuleInfo,
     TopicInfo: TopicInfo,
     DescribeConsumerRequest: DescribeConsumerRequest,
@@ -8504,11 +8643,12 @@ module.exports = {
     CloseKafkaConsumerResponse: CloseKafkaConsumerResponse,
     RuleTagInfo: RuleTagInfo,
     CreateIndexRequest: CreateIndexRequest,
+    DescribeLogsetsResponse: DescribeLogsetsResponse,
     DeleteConsumerResponse: DeleteConsumerResponse,
     DescribeTopicsRequest: DescribeTopicsRequest,
     GetAlarmLogResponse: GetAlarmLogResponse,
     CreateTopicRequest: CreateTopicRequest,
-    DescribeExportsRequest: DescribeExportsRequest,
+    DescribeMachineGroupsRequest: DescribeMachineGroupsRequest,
     AlarmTarget: AlarmTarget,
     OpenKafkaConsumerRequest: OpenKafkaConsumerRequest,
     DeleteConfigResponse: DeleteConfigResponse,
@@ -8525,8 +8665,9 @@ module.exports = {
     CloseKafkaConsumerRequest: CloseKafkaConsumerRequest,
     CreateExportRequest: CreateExportRequest,
     DescribeAlarmNoticesResponse: DescribeAlarmNoticesResponse,
+    DescribeMachineGroupsResponse: DescribeMachineGroupsResponse,
     ModifyConfigRequest: ModifyConfigRequest,
-    DescribeLogsetsResponse: DescribeLogsetsResponse,
+    AddMachineGroupInfoRequest: AddMachineGroupInfoRequest,
     JsonInfo: JsonInfo,
     CreateShipperRequest: CreateShipperRequest,
     CreateTopicResponse: CreateTopicResponse,
@@ -8565,11 +8706,12 @@ module.exports = {
     DeleteConfigFromMachineGroupRequest: DeleteConfigFromMachineGroupRequest,
     ShipperInfo: ShipperInfo,
     KeyValueInfo: KeyValueInfo,
+    AddMachineGroupInfoResponse: AddMachineGroupInfoResponse,
     ModifyMachineGroupRequest: ModifyMachineGroupRequest,
     DescribeAlarmNoticesRequest: DescribeAlarmNoticesRequest,
     NoticeReceiver: NoticeReceiver,
     Ckafka: Ckafka,
-    CreateExportResponse: CreateExportResponse,
+    DescribeMachinesRequest: DescribeMachinesRequest,
     DeleteAlarmNoticeRequest: DeleteAlarmNoticeRequest,
     DeleteLogsetRequest: DeleteLogsetRequest,
     MachineInfo: MachineInfo,
@@ -8586,13 +8728,13 @@ module.exports = {
     HistogramInfo: HistogramInfo,
     DescribeMachineGroupConfigsRequest: DescribeMachineGroupConfigsRequest,
     ModifyLogsetRequest: ModifyLogsetRequest,
-    DescribeMachineGroupsResponse: DescribeMachineGroupsResponse,
+    DeleteMachineGroupInfoResponse: DeleteMachineGroupInfoResponse,
     DescribeLogsetsRequest: DescribeLogsetsRequest,
     ParquetInfo: ParquetInfo,
     DeleteTopicResponse: DeleteTopicResponse,
     Filter: Filter,
     ConsumerContent: ConsumerContent,
-    DescribeMachinesRequest: DescribeMachinesRequest,
+    CreateExportResponse: CreateExportResponse,
     KeyRegexInfo: KeyRegexInfo,
     MergePartitionResponse: MergePartitionResponse,
 

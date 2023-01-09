@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const TopicDetail = models.TopicDetail;
 const DeleteAclRequest = models.DeleteAclRequest;
+const CreateInstancePostResponse = models.CreateInstancePostResponse;
 const GroupInfoMember = models.GroupInfoMember;
 const BatchCreateAclRequest = models.BatchCreateAclRequest;
 const DeleteUserRequest = models.DeleteUserRequest;
@@ -29,6 +30,8 @@ const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesReque
 const ConsumerGroup = models.ConsumerGroup;
 const Assignment = models.Assignment;
 const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
+const InquiryDetailPrice = models.InquiryDetailPrice;
+const InquireCkafkaPriceResp = models.InquireCkafkaPriceResp;
 const DeleteTopicRequest = models.DeleteTopicRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const FetchMessageByOffsetResponse = models.FetchMessageByOffsetResponse;
@@ -43,7 +46,7 @@ const CreateInstancePreData = models.CreateInstancePreData;
 const AclRule = models.AclRule;
 const DescribeACLResponse = models.DescribeACLResponse;
 const DynamicDiskConfig = models.DynamicDiskConfig;
-const JgwOperateResponse = models.JgwOperateResponse;
+const InquireCkafkaPriceRequest = models.InquireCkafkaPriceRequest;
 const ZoneInfo = models.ZoneInfo;
 const DescribeTopicSubscribeGroupResponse = models.DescribeTopicSubscribeGroupResponse;
 const DescribeCkafkaZoneRequest = models.DescribeCkafkaZoneRequest;
@@ -52,6 +55,7 @@ const Topic = models.Topic;
 const Tag = models.Tag;
 const BatchModifyGroupOffsetsResponse = models.BatchModifyGroupOffsetsResponse;
 const GroupResponse = models.GroupResponse;
+const InstanceChargeParam = models.InstanceChargeParam;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
 const FetchMessageListByOffsetResponse = models.FetchMessageListByOffsetResponse;
 const CreateConsumerResponse = models.CreateConsumerResponse;
@@ -82,6 +86,7 @@ const DynamicRetentionTime = models.DynamicRetentionTime;
 const DescribeTopicSubscribeGroupRequest = models.DescribeTopicSubscribeGroupRequest;
 const DeleteInstancePreResponse = models.DeleteInstancePreResponse;
 const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
+const InquiryPublicNetworkParam = models.InquiryPublicNetworkParam;
 const TopicInSyncReplicaInfo = models.TopicInSyncReplicaInfo;
 const DescribeRegionRequest = models.DescribeRegionRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
@@ -119,6 +124,7 @@ const DeleteTopicResponse = models.DeleteTopicResponse;
 const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InstanceAttributesResponse = models.InstanceAttributesResponse;
+const CreateInstancePostRequest = models.CreateInstancePostRequest;
 const DescribeGroupRequest = models.DescribeGroupRequest;
 const Filter = models.Filter;
 const GroupOffsetResponse = models.GroupOffsetResponse;
@@ -130,18 +136,22 @@ const DeleteRouteRequest = models.DeleteRouteRequest;
 const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const CreateConsumerRequest = models.CreateConsumerRequest;
+const InquireCkafkaPriceResponse = models.InquireCkafkaPriceResponse;
 const DescribeRouteRequest = models.DescribeRouteRequest;
 const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
 const SendMessageResponse = models.SendMessageResponse;
+const InquiryBasePrice = models.InquiryBasePrice;
 const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const BatchModifyGroupOffsetsRequest = models.BatchModifyGroupOffsetsRequest;
 const TopicAttributesResponse = models.TopicAttributesResponse;
 const InstanceResponse = models.InstanceResponse;
+const JgwOperateResponse = models.JgwOperateResponse;
 const DescribeGroup = models.DescribeGroup;
 const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
 const BatchModifyTopicInfo = models.BatchModifyTopicInfo;
 const DescribeRouteResponse = models.DescribeRouteResponse;
+const InquiryPrice = models.InquiryPrice;
 const TopicResult = models.TopicResult;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
 const DescribeGroupOffsetsResponse = models.DescribeGroupOffsetsResponse;
@@ -159,6 +169,7 @@ const CreateTopicResponse = models.CreateTopicResponse;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
 const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
 const DescribeUserRequest = models.DescribeUserRequest;
+const InquiryDiskParam = models.InquiryDiskParam;
 const DescribeTopicSyncReplicaRequest = models.DescribeTopicSyncReplicaRequest;
 const InstanceDetail = models.InstanceDetail;
 const InstanceQuotaConfigResp = models.InstanceQuotaConfigResp;
@@ -219,6 +230,17 @@ class CkafkaClient extends AbstractClient {
     DescribeConsumerGroup(req, cb) {
         let resp = new DescribeConsumerGroupResponse();
         this.request("DescribeConsumerGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a pay-as-you-go instance.
+     * @param {CreateInstancePostRequest} req
+     * @param {function(string, CreateInstancePostResponse):void} cb
+     * @public
+     */
+    CreateInstancePost(req, cb) {
+        let resp = new CreateInstancePostResponse();
+        this.request("CreateInstancePost", req, resp, cb);
     }
 
     /**
@@ -639,6 +661,17 @@ This API is used to get the list of topics in a CKafka instance of a user.
     DeleteTopic(req, cb) {
         let resp = new DeleteTopicResponse();
         this.request("DeleteTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to purchase a CKafka instance or query the instance renewal price.
+     * @param {InquireCkafkaPriceRequest} req
+     * @param {function(string, InquireCkafkaPriceResponse):void} cb
+     * @public
+     */
+    InquireCkafkaPrice(req, cb) {
+        let resp = new InquireCkafkaPriceResponse();
+        this.request("InquireCkafkaPrice", req, resp, cb);
     }
 
 

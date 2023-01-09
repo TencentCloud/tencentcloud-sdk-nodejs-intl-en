@@ -16,26 +16,35 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const GetCountryCodesRequest = models.GetCountryCodesRequest;
+const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
+const QueryVoucherListByUinRequest = models.QueryVoucherListByUinRequest;
+const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
+const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
+const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
 const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
-const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
-const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
-const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
-const CreateAccountRequest = models.CreateAccountRequest;
-const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
 const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
-const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
-const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
 const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
-const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
-const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
-const QueryCustomersCreditData = models.QueryCustomersCreditData;
-const GetCountryCodesRequest = models.GetCountryCodesRequest;
+const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
+const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
+const CreateAccountRequest = models.CreateAccountRequest;
 const QueryDirectCustomersCreditRequest = models.QueryDirectCustomersCreditRequest;
+const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
+const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
+const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
+const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
+const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const CountryCodeItem = models.CountryCodeItem;
+const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
+const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
+const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
+const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
+const QueryCustomersCreditData = models.QueryCustomersCreditData;
+const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
 
 
 /**
@@ -57,6 +66,17 @@ class IntlpartnersmgtClient extends AbstractClient {
     QueryCreditByUinList(req, cb) {
         let resp = new QueryCreditByUinListResponse();
         this.request("QueryCreditByUinList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the voucher quota pool.
+     * @param {QueryVoucherPoolRequest} req
+     * @param {function(string, QueryVoucherPoolResponse):void} cb
+     * @public
+     */
+    QueryVoucherPool(req, cb) {
+        let resp = new QueryVoucherPoolResponse();
+        this.request("QueryVoucherPool", req, resp, cb);
     }
 
     /**
@@ -83,6 +103,17 @@ Notes:<br>
     CreateAccount(req, cb) {
         let resp = new CreateAccountResponse();
         this.request("CreateAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the voucher list based on the customer UIN.
+     * @param {QueryVoucherListByUinRequest} req
+     * @param {function(string, QueryVoucherListByUinResponse):void} cb
+     * @public
+     */
+    QueryVoucherListByUin(req, cb) {
+        let resp = new QueryVoucherListByUinResponse();
+        this.request("QueryVoucherListByUin", req, resp, cb);
     }
 
     /**
@@ -142,6 +173,17 @@ Notes:<br>
     QueryCustomersCredit(req, cb) {
         let resp = new QueryCustomersCreditResponse();
         this.request("QueryCustomersCredit", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the voucher quota based on the customer UIN.
+     * @param {QueryVoucherAmountByUinRequest} req
+     * @param {function(string, QueryVoucherAmountByUinResponse):void} cb
+     * @public
+     */
+    QueryVoucherAmountByUin(req, cb) {
+        let resp = new QueryVoucherAmountByUinResponse();
+        this.request("QueryVoucherAmountByUin", req, resp, cb);
     }
 
 

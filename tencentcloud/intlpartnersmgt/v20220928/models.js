@@ -17,6 +17,245 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * GetCountryCodes request structure.
+ * @class
+ */
+class GetCountryCodesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * QueryPartnerCredit response structure.
+ * @class
+ */
+class QueryPartnerCreditResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Allocated credit
+         * @type {number || null}
+         */
+        this.AllocatedCredit = null;
+
+        /**
+         * Total credit
+         * @type {number || null}
+         */
+        this.TotalCredit = null;
+
+        /**
+         * Remaining credit
+         * @type {number || null}
+         */
+        this.RemainingCredit = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
+        this.TotalCredit = 'TotalCredit' in params ? params.TotalCredit : null;
+        this.RemainingCredit = 'RemainingCredit' in params ? params.RemainingCredit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryVoucherListByUin request structure.
+ * @class
+ */
+class QueryVoucherListByUinRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer UIN list
+         * @type {Array.<number> || null}
+         */
+        this.ClientUins = null;
+
+        /**
+         * Voucher status. If this parameter is not passed in, all status will be queried by default. Valid values: `Unused`, `Used`, `Expired`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUins = 'ClientUins' in params ? params.ClientUins : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * QueryVoucherAmountByUin response structure.
+ * @class
+ */
+class QueryVoucherAmountByUinResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer voucher quota information
+         * @type {Array.<QueryVoucherAmountByUinItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new QueryVoucherAmountByUinItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Customer voucher quota
+ * @class
+ */
+class QueryVoucherAmountByUinItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.ClientUin = null;
+
+        /**
+         * Voucher quota
+         * @type {number || null}
+         */
+        this.TotalAmount = null;
+
+        /**
+         * Voucher amount
+         * @type {number || null}
+         */
+        this.RemainAmount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.TotalAmount = 'TotalAmount' in params ? params.TotalAmount : null;
+        this.RemainAmount = 'RemainAmount' in params ? params.RemainAmount : null;
+
+    }
+}
+
+/**
+ * Returned information for querying the customer credit allocation records
+ * @class
+ */
+class QueryCreditAllocationHistoryData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Allocation time
+         * @type {string || null}
+         */
+        this.AllocatedTime = null;
+
+        /**
+         * Operator
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * Allocated credit value
+         * @type {number || null}
+         */
+        this.Credit = null;
+
+        /**
+         * The allocated total credit
+         * @type {number || null}
+         */
+        this.AllocatedCredit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllocatedTime = 'AllocatedTime' in params ? params.AllocatedTime : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Credit = 'Credit' in params ? params.Credit : null;
+        this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
+
+    }
+}
+
+/**
  * AllocateCustomerCredit request structure.
  * @class
  */
@@ -151,6 +390,196 @@ class QueryCustomersCreditRequest extends  AbstractModel {
 }
 
 /**
+ * QueryCreditByUinList request structure.
+ * @class
+ */
+class QueryCreditByUinListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User list
+         * @type {Array.<number> || null}
+         */
+        this.UinList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UinList = 'UinList' in params ? params.UinList : null;
+
+    }
+}
+
+/**
+ * CreateAccount response structure.
+ * @class
+ */
+class CreateAccountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Account UIN
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryPartnerCredit request structure.
+ * @class
+ */
+class QueryPartnerCreditRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * QueryCreditByUinList response structure.
+ * @class
+ */
+class QueryCreditByUinListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User information list
+         * @type {Array.<QueryDirectCustomersCreditData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new QueryDirectCustomersCreditData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryVoucherPool response structure.
+ * @class
+ */
+class QueryVoucherPoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Reseller name
+         * @type {string || null}
+         */
+        this.AgentName = null;
+
+        /**
+         * Reseller role type (1: Reseller; 2: Distributor; 3: Second-level reseller)
+         * @type {number || null}
+         */
+        this.AccountType = null;
+
+        /**
+         * Total quota
+         * @type {number || null}
+         */
+        this.TotalQuota = null;
+
+        /**
+         * Remaining quota
+         * @type {number || null}
+         */
+        this.RemainingQuota = null;
+
+        /**
+         * The number of issued vouchers
+         * @type {number || null}
+         */
+        this.IssuedNum = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AgentName = 'AgentName' in params ? params.AgentName : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
+        this.TotalQuota = 'TotalQuota' in params ? params.TotalQuota : null;
+        this.RemainingQuota = 'RemainingQuota' in params ? params.RemainingQuota : null;
+        this.IssuedNum = 'IssuedNum' in params ? params.IssuedNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * QueryCreditAllocationHistory response structure.
  * @class
  */
@@ -197,99 +626,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.History.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * QueryCreditAllocationHistory request structure.
- * @class
- */
-class QueryCreditAllocationHistoryRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Customer UIN
-         * @type {number || null}
-         */
-        this.ClientUin = null;
-
-        /**
-         * Page number
-         * @type {number || null}
-         */
-        this.Page = null;
-
-        /**
-         * Number of data entries per page
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
-        this.Page = 'Page' in params ? params.Page : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-
-    }
-}
-
-/**
- * QueryCustomersCredit response structure.
- * @class
- */
-class QueryCustomersCreditResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The list of queried customers
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<QueryCustomersCreditData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * Number of customers
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new QueryCustomersCreditData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -377,24 +713,12 @@ A global mobile number within 1-32 digits is allowed, such as 18888888888.
 }
 
 /**
- * QueryDirectCustomersCredit response structure.
+ * QueryDirectCustomersCredit request structure.
  * @class
  */
-class QueryDirectCustomersCreditResponse extends  AbstractModel {
+class QueryDirectCustomersCreditRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Direct customer information list
-         * @type {Array.<QueryDirectCustomersCreditData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -405,128 +729,6 @@ class QueryDirectCustomersCreditResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new QueryDirectCustomersCreditData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * QueryCreditByUinList request structure.
- * @class
- */
-class QueryCreditByUinListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * User list
-         * @type {Array.<number> || null}
-         */
-        this.UinList = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UinList = 'UinList' in params ? params.UinList : null;
-
-    }
-}
-
-/**
- * CreateAccount response structure.
- * @class
- */
-class CreateAccountResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Account UIN
-         * @type {string || null}
-         */
-        this.Uin = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Returned information for querying the customer credit allocation records
- * @class
- */
-class QueryCreditAllocationHistoryData extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Allocation time
-         * @type {string || null}
-         */
-        this.AllocatedTime = null;
-
-        /**
-         * Operator
-         * @type {string || null}
-         */
-        this.Operator = null;
-
-        /**
-         * Allocated credit value
-         * @type {number || null}
-         */
-        this.Credit = null;
-
-        /**
-         * The allocated total credit
-         * @type {number || null}
-         */
-        this.AllocatedCredit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AllocatedTime = 'AllocatedTime' in params ? params.AllocatedTime : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
-        this.Credit = 'Credit' in params ? params.Credit : null;
-        this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
 
     }
 }
@@ -574,12 +776,36 @@ class AllocateCustomerCreditResponse extends  AbstractModel {
 }
 
 /**
- * QueryPartnerCredit request structure.
+ * Customer voucher information
  * @class
  */
-class QueryPartnerCreditRequest extends  AbstractModel {
+class QueryVoucherListByUinVoucherItem extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Voucher ID
+         * @type {string || null}
+         */
+        this.VoucherId = null;
+
+        /**
+         * Voucher status
+         * @type {string || null}
+         */
+        this.VoucherStatus = null;
+
+        /**
+         * Voucher value
+         * @type {number || null}
+         */
+        this.TotalAmount = null;
+
+        /**
+         * Balance
+         * @type {number || null}
+         */
+        this.RemainAmount = null;
 
     }
 
@@ -590,29 +816,27 @@ class QueryPartnerCreditRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.VoucherId = 'VoucherId' in params ? params.VoucherId : null;
+        this.VoucherStatus = 'VoucherStatus' in params ? params.VoucherStatus : null;
+        this.TotalAmount = 'TotalAmount' in params ? params.TotalAmount : null;
+        this.RemainAmount = 'RemainAmount' in params ? params.RemainAmount : null;
 
     }
 }
 
 /**
- * QueryCreditByUinList response structure.
+ * QueryVoucherAmountByUin request structure.
  * @class
  */
-class QueryCreditByUinListResponse extends  AbstractModel {
+class QueryVoucherAmountByUinRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * User information list
-         * @type {Array.<QueryDirectCustomersCreditData> || null}
+         * Customer UIN list
+         * @type {Array.<number> || null}
          */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.ClientUins = null;
 
     }
 
@@ -623,65 +847,7 @@ class QueryCreditByUinListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new QueryDirectCustomersCreditData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * QueryPartnerCredit response structure.
- * @class
- */
-class QueryPartnerCreditResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Allocated credit
-         * @type {number || null}
-         */
-        this.AllocatedCredit = null;
-
-        /**
-         * Total credit
-         * @type {number || null}
-         */
-        this.TotalCredit = null;
-
-        /**
-         * Remaining credit
-         * @type {number || null}
-         */
-        this.RemainingCredit = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
-        this.TotalCredit = 'TotalCredit' in params ? params.TotalCredit : null;
-        this.RemainingCredit = 'RemainingCredit' in params ? params.RemainingCredit : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClientUins = 'ClientUins' in params ? params.ClientUins : null;
 
     }
 }
@@ -724,6 +890,261 @@ class QueryDirectCustomersCreditData extends  AbstractModel {
         this.Uin = 'Uin' in params ? params.Uin : null;
         this.TotalCredit = 'TotalCredit' in params ? params.TotalCredit : null;
         this.RemainingCredit = 'RemainingCredit' in params ? params.RemainingCredit : null;
+
+    }
+}
+
+/**
+ * QueryCreditAllocationHistory request structure.
+ * @class
+ */
+class QueryCreditAllocationHistoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.ClientUin = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Number of data entries per page
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * Element type of the `GetCountryCodes` API
+ * @class
+ */
+class CountryCodeItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Country/region name in English
+         * @type {string || null}
+         */
+        this.EnName = null;
+
+        /**
+         * Country/region name in Chinese
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IOS2 = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IOS3 = null;
+
+        /**
+         * International dialing code
+         * @type {string || null}
+         */
+        this.Code = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnName = 'EnName' in params ? params.EnName : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.IOS2 = 'IOS2' in params ? params.IOS2 : null;
+        this.IOS3 = 'IOS3' in params ? params.IOS3 : null;
+        this.Code = 'Code' in params ? params.Code : null;
+
+    }
+}
+
+/**
+ * QueryDirectCustomersCredit response structure.
+ * @class
+ */
+class QueryDirectCustomersCreditResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Direct customer information list
+         * @type {Array.<QueryDirectCustomersCreditData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new QueryDirectCustomersCreditData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryVoucherListByUin response structure.
+ * @class
+ */
+class QueryVoucherListByUinResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer voucher information
+         * @type {Array.<QueryVoucherListByUinItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new QueryVoucherListByUinItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryVoucherPool request structure.
+ * @class
+ */
+class QueryVoucherPoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * Voucher information of a single customer
+ * @class
+ */
+class QueryVoucherListByUinItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.ClientUin = null;
+
+        /**
+         * The total number of vouchers
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Voucher details
+         * @type {Array.<QueryVoucherListByUinVoucherItem> || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new QueryVoucherListByUinVoucherItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
 
     }
 }
@@ -841,12 +1262,31 @@ class QueryCustomersCreditData extends  AbstractModel {
 }
 
 /**
- * GetCountryCodes request structure.
+ * QueryCustomersCredit response structure.
  * @class
  */
-class GetCountryCodesRequest extends  AbstractModel {
+class QueryCustomersCreditResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The list of queried customers
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<QueryCustomersCreditData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Number of customers
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -858,106 +1298,49 @@ class GetCountryCodesRequest extends  AbstractModel {
             return;
         }
 
-    }
-}
-
-/**
- * QueryDirectCustomersCredit request structure.
- * @class
- */
-class QueryDirectCustomersCreditRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new QueryCustomersCreditData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
         }
-
-    }
-}
-
-/**
- * Element type of the `GetCountryCodes` API
- * @class
- */
-class CountryCodeItem extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Country/region name in English
-         * @type {string || null}
-         */
-        this.EnName = null;
-
-        /**
-         * Country/region name in Chinese
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.IOS2 = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.IOS3 = null;
-
-        /**
-         * International dialing code
-         * @type {string || null}
-         */
-        this.Code = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnName = 'EnName' in params ? params.EnName : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.IOS2 = 'IOS2' in params ? params.IOS2 : null;
-        this.IOS3 = 'IOS3' in params ? params.IOS3 : null;
-        this.Code = 'Code' in params ? params.Code : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 module.exports = {
+    GetCountryCodesRequest: GetCountryCodesRequest,
+    QueryPartnerCreditResponse: QueryPartnerCreditResponse,
+    QueryVoucherListByUinRequest: QueryVoucherListByUinRequest,
+    QueryVoucherAmountByUinResponse: QueryVoucherAmountByUinResponse,
+    QueryVoucherAmountByUinItem: QueryVoucherAmountByUinItem,
+    QueryCreditAllocationHistoryData: QueryCreditAllocationHistoryData,
     AllocateCustomerCreditRequest: AllocateCustomerCreditRequest,
     GetCountryCodesResponse: GetCountryCodesResponse,
     QueryCustomersCreditRequest: QueryCustomersCreditRequest,
-    QueryCreditAllocationHistoryResponse: QueryCreditAllocationHistoryResponse,
-    QueryCreditAllocationHistoryRequest: QueryCreditAllocationHistoryRequest,
-    QueryCustomersCreditResponse: QueryCustomersCreditResponse,
-    CreateAccountRequest: CreateAccountRequest,
-    QueryDirectCustomersCreditResponse: QueryDirectCustomersCreditResponse,
     QueryCreditByUinListRequest: QueryCreditByUinListRequest,
     CreateAccountResponse: CreateAccountResponse,
-    QueryCreditAllocationHistoryData: QueryCreditAllocationHistoryData,
-    AllocateCustomerCreditResponse: AllocateCustomerCreditResponse,
     QueryPartnerCreditRequest: QueryPartnerCreditRequest,
     QueryCreditByUinListResponse: QueryCreditByUinListResponse,
-    QueryPartnerCreditResponse: QueryPartnerCreditResponse,
-    QueryDirectCustomersCreditData: QueryDirectCustomersCreditData,
-    QueryCustomersCreditData: QueryCustomersCreditData,
-    GetCountryCodesRequest: GetCountryCodesRequest,
+    QueryVoucherPoolResponse: QueryVoucherPoolResponse,
+    QueryCreditAllocationHistoryResponse: QueryCreditAllocationHistoryResponse,
+    CreateAccountRequest: CreateAccountRequest,
     QueryDirectCustomersCreditRequest: QueryDirectCustomersCreditRequest,
+    AllocateCustomerCreditResponse: AllocateCustomerCreditResponse,
+    QueryVoucherListByUinVoucherItem: QueryVoucherListByUinVoucherItem,
+    QueryVoucherAmountByUinRequest: QueryVoucherAmountByUinRequest,
+    QueryDirectCustomersCreditData: QueryDirectCustomersCreditData,
+    QueryCreditAllocationHistoryRequest: QueryCreditAllocationHistoryRequest,
     CountryCodeItem: CountryCodeItem,
+    QueryDirectCustomersCreditResponse: QueryDirectCustomersCreditResponse,
+    QueryVoucherListByUinResponse: QueryVoucherListByUinResponse,
+    QueryVoucherPoolRequest: QueryVoucherPoolRequest,
+    QueryVoucherListByUinItem: QueryVoucherListByUinItem,
+    QueryCustomersCreditData: QueryCustomersCreditData,
+    QueryCustomersCreditResponse: QueryCustomersCreditResponse,
 
 }

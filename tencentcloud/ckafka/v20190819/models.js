@@ -221,6 +221,46 @@ class DeleteAclRequest extends  AbstractModel {
 }
 
 /**
+ * CreateInstancePost response structure.
+ * @class
+ */
+class CreateInstancePostResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Consumer information
  * @class
  */
@@ -704,6 +744,139 @@ class DescribeConsumerGroupResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Prices of different purchased items
+ * @class
+ */
+class InquiryDetailPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Price of additional private network bandwidth
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {InquiryBasePrice || null}
+         */
+        this.BandwidthPrice = null;
+
+        /**
+         * Disk price
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {InquiryBasePrice || null}
+         */
+        this.DiskPrice = null;
+
+        /**
+         * Price of additional partitions
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {InquiryBasePrice || null}
+         */
+        this.PartitionPrice = null;
+
+        /**
+         * Price of additional topics
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {InquiryBasePrice || null}
+         */
+        this.TopicPrice = null;
+
+        /**
+         * Instance package price
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {InquiryBasePrice || null}
+         */
+        this.InstanceTypePrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BandwidthPrice) {
+            let obj = new InquiryBasePrice();
+            obj.deserialize(params.BandwidthPrice)
+            this.BandwidthPrice = obj;
+        }
+
+        if (params.DiskPrice) {
+            let obj = new InquiryBasePrice();
+            obj.deserialize(params.DiskPrice)
+            this.DiskPrice = obj;
+        }
+
+        if (params.PartitionPrice) {
+            let obj = new InquiryBasePrice();
+            obj.deserialize(params.PartitionPrice)
+            this.PartitionPrice = obj;
+        }
+
+        if (params.TopicPrice) {
+            let obj = new InquiryBasePrice();
+            obj.deserialize(params.TopicPrice)
+            this.TopicPrice = obj;
+        }
+
+        if (params.InstanceTypePrice) {
+            let obj = new InquiryBasePrice();
+            obj.deserialize(params.InstanceTypePrice)
+            this.InstanceTypePrice = obj;
+        }
+
+    }
+}
+
+/**
+ * Values returned by the `InquireCkafkaPrice` API
+ * @class
+ */
+class InquireCkafkaPriceResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance price
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {InquiryPrice || null}
+         */
+        this.InstancePrice = null;
+
+        /**
+         * Public network bandwidth price
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {InquiryPrice || null}
+         */
+        this.PublicNetworkBandwidthPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstancePrice) {
+            let obj = new InquiryPrice();
+            obj.deserialize(params.InstancePrice)
+            this.InstancePrice = obj;
+        }
+
+        if (params.PublicNetworkBandwidthPrice) {
+            let obj = new InquiryPrice();
+            obj.deserialize(params.PublicNetworkBandwidthPrice)
+            this.PublicNetworkBandwidthPrice = obj;
+        }
 
     }
 }
@@ -1449,31 +1622,90 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Returned result value of operation
+ * InquireCkafkaPrice request structure.
  * @class
  */
-class JgwOperateResponse extends  AbstractModel {
+class InquireCkafkaPriceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned code. 0: normal, other values: error
+         * `standard`: Standard Edition; `profession`: Pro Edition
          * @type {string || null}
          */
-        this.ReturnCode = null;
+        this.InstanceType = null;
 
         /**
-         * Success message
+         * Billing mode for instance purchase/renewal. If this parameter is left empty when you purchase an instance, the fees for one month under the monthly subscription mode will be displayed by default.
+         * @type {InstanceChargeParam || null}
+         */
+        this.InstanceChargeParam = null;
+
+        /**
+         * The number of instances to be purchased or renewed. If this parameter is left empty, the default value is `1`.
+         * @type {number || null}
+         */
+        this.InstanceNum = null;
+
+        /**
+         * Private network bandwidth in MB/sec, which is required when you purchase an instance.
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * Disk type and size, which is required when you purchase an instance.
+         * @type {InquiryDiskParam || null}
+         */
+        this.InquiryDiskParam = null;
+
+        /**
+         * Message retention period in hours, which is required when you purchase an instance.
+         * @type {number || null}
+         */
+        this.MessageRetention = null;
+
+        /**
+         * The number of instance topics to be purchased, which is required when you purchase an instance.
+         * @type {number || null}
+         */
+        this.Topic = null;
+
+        /**
+         * The number of instance partitions to be purchased, which is required when you purchase an instance.
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * The region for instance purchase, which can be obtained via the `DescribeCkafkaZone` API.
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * Operation type flag. `purchase`: Making new purchases; `renew`: Renewing an instance. The default value is `purchase` if this parameter is left empty.
          * @type {string || null}
          */
-        this.ReturnMessage = null;
+        this.CategoryAction = null;
 
         /**
-         * Data returned by an operation, which may contain `flowId`, etc.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {OperateResponseData || null}
+         * This field is not required.
+         * @type {string || null}
          */
-        this.Data = null;
+        this.BillType = null;
+
+        /**
+         * Billing mode for public network bandwidth, which is required when you purchase public network bandwidth. Currently, public network bandwidth is only supported for Pro Edition.
+         * @type {InquiryPublicNetworkParam || null}
+         */
+        this.PublicNetworkParam = null;
+
+        /**
+         * ID of the instance to be renewed, which is required when you renew an instance.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
 
     }
 
@@ -1484,14 +1716,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
-        this.ReturnMessage = 'ReturnMessage' in params ? params.ReturnMessage : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
-        if (params.Data) {
-            let obj = new OperateResponseData();
-            obj.deserialize(params.Data)
-            this.Data = obj;
+        if (params.InstanceChargeParam) {
+            let obj = new InstanceChargeParam();
+            obj.deserialize(params.InstanceChargeParam)
+            this.InstanceChargeParam = obj;
         }
+        this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+
+        if (params.InquiryDiskParam) {
+            let obj = new InquiryDiskParam();
+            obj.deserialize(params.InquiryDiskParam)
+            this.InquiryDiskParam = obj;
+        }
+        this.MessageRetention = 'MessageRetention' in params ? params.MessageRetention : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.CategoryAction = 'CategoryAction' in params ? params.CategoryAction : null;
+        this.BillType = 'BillType' in params ? params.BillType : null;
+
+        if (params.PublicNetworkParam) {
+            let obj = new InquiryPublicNetworkParam();
+            obj.deserialize(params.PublicNetworkParam)
+            this.PublicNetworkParam = obj;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1869,6 +2121,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.GroupList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Instance billing parameters
+ * @class
+ */
+class InstanceChargeParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance billing mode (`PREPAID`: Monthly subscription; `POSTPAID_BY_HOUR`: Pay-as-you-go)
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Validity period, which is only required for the monthly subscription billing mode
+         * @type {number || null}
+         */
+        this.InstanceChargePeriod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.InstanceChargePeriod = 'InstanceChargePeriod' in params ? params.InstanceChargePeriod : null;
 
     }
 }
@@ -3346,6 +3633,41 @@ class FetchMessageByOffsetRequest extends  AbstractModel {
         this.Topic = 'Topic' in params ? params.Topic : null;
         this.Partition = 'Partition' in params ? params.Partition : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * Public network bandwidth parameters
+ * @class
+ */
+class InquiryPublicNetworkParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Public network bandwidth billing mode (`BANDWIDTH_PREPAID`: Monthly subscription; `BANDWIDTH_POSTPAID_BY_HOUR`: Bill-by-hour)
+         * @type {string || null}
+         */
+        this.PublicNetworkChargeType = null;
+
+        /**
+         * Public network bandwidth in MB
+         * @type {number || null}
+         */
+        this.PublicNetworkMonthly = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PublicNetworkChargeType = 'PublicNetworkChargeType' in params ? params.PublicNetworkChargeType : null;
+        this.PublicNetworkMonthly = 'PublicNetworkMonthly' in params ? params.PublicNetworkMonthly : null;
 
     }
 }
@@ -5477,6 +5799,76 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * CreateInstancePost request structure.
+ * @class
+ */
+class CreateInstancePostRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance name, which is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance bandwidth
+         * @type {number || null}
+         */
+        this.BandWidth = null;
+
+        /**
+         * VPC ID. If this parameter is left empty, the classic network will be used by default.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID, which is required for a VPC but not for the classic network.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * The maximum retention period for instance logs in minutes. Default value: 1,440 minutes (1 day). Max value: 12960 minutes (90 days). This parameter is optional.
+         * @type {number || null}
+         */
+        this.MsgRetentionTime = null;
+
+        /**
+         * AZ
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Cluster ID, which can be selected when you create an instance.
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.BandWidth = 'BandWidth' in params ? params.BandWidth : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.MsgRetentionTime = 'MsgRetentionTime' in params ? params.MsgRetentionTime : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * DescribeGroup request structure.
  * @class
  */
@@ -6000,6 +6392,46 @@ class CreateConsumerRequest extends  AbstractModel {
 }
 
 /**
+ * InquireCkafkaPrice response structure.
+ * @class
+ */
+class InquireCkafkaPriceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Output parameters
+         * @type {InquireCkafkaPriceResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new InquireCkafkaPriceResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRoute request structure.
  * @class
  */
@@ -6101,6 +6533,115 @@ class SendMessageResponse extends  AbstractModel {
         }
         this.MessageId = 'MessageId' in params ? params.MessageId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Response parameters for instance price query
+ * @class
+ */
+class InquiryBasePrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Original unit price
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * Discounted unit price
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * Original price in total
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Discounted price in total
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * Discount (%)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * Number of purchased items
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * Currency for payment
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * Dedicated disk response parameter
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Validity period
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Unit of the validity period (`m`: Month; `h`: Hour)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * Purchase quantity
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -6376,6 +6917,54 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Returned result value of operation
+ * @class
+ */
+class JgwOperateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned code. 0: normal, other values: error
+         * @type {string || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * Success message
+         * @type {string || null}
+         */
+        this.ReturnMessage = null;
+
+        /**
+         * Data returned by an operation, which may contain `flowId`, etc.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {OperateResponseData || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.ReturnMessage = 'ReturnMessage' in params ? params.ReturnMessage : null;
+
+        if (params.Data) {
+            let obj = new OperateResponseData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+
+    }
+}
+
+/**
  * `DescribeGroup` response entity
  * @class
  */
@@ -6621,6 +7210,128 @@ class DescribeRouteResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Response parameters for instance price query
+ * @class
+ */
+class InquiryPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Original unit price
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * Discounted unit price
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * Original price in total
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Discounted price in total
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * Discount (%)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * Number of purchased items
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * Currency for payment
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * Dedicated disk response parameter
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Validity period
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * Unit of the validity period (`m`: Month; `h`: Hour)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * Purchase quantity
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Value = null;
+
+        /**
+         * Prices of different purchased items
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {InquiryDetailPrice || null}
+         */
+        this.DetailPrices = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+        if (params.DetailPrices) {
+            let obj = new InquiryDetailPrice();
+            obj.deserialize(params.DetailPrices)
+            this.DetailPrices = obj;
+        }
 
     }
 }
@@ -7631,6 +8342,41 @@ class DescribeUserRequest extends  AbstractModel {
 }
 
 /**
+ * Disk purchase parameters
+ * @class
+ */
+class InquiryDiskParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Disk type. Valid values: `SSD` (SSD), `CLOUD_SSD` (SSD cloud disk), `CLOUD_PREMIUM` (Premium cloud disk), `CLOUD_BASIC` (Cloud disk).
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Size of the purchased disk in GB
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+
+    }
+}
+
+/**
  * DescribeTopicSyncReplica request structure.
  * @class
  */
@@ -8135,6 +8881,7 @@ class Price extends  AbstractModel {
 module.exports = {
     TopicDetail: TopicDetail,
     DeleteAclRequest: DeleteAclRequest,
+    CreateInstancePostResponse: CreateInstancePostResponse,
     GroupInfoMember: GroupInfoMember,
     BatchCreateAclRequest: BatchCreateAclRequest,
     DeleteUserRequest: DeleteUserRequest,
@@ -8146,6 +8893,8 @@ module.exports = {
     ConsumerGroup: ConsumerGroup,
     Assignment: Assignment,
     DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
+    InquiryDetailPrice: InquiryDetailPrice,
+    InquireCkafkaPriceResp: InquireCkafkaPriceResp,
     DeleteTopicRequest: DeleteTopicRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     FetchMessageByOffsetResponse: FetchMessageByOffsetResponse,
@@ -8160,7 +8909,7 @@ module.exports = {
     AclRule: AclRule,
     DescribeACLResponse: DescribeACLResponse,
     DynamicDiskConfig: DynamicDiskConfig,
-    JgwOperateResponse: JgwOperateResponse,
+    InquireCkafkaPriceRequest: InquireCkafkaPriceRequest,
     ZoneInfo: ZoneInfo,
     DescribeTopicSubscribeGroupResponse: DescribeTopicSubscribeGroupResponse,
     DescribeCkafkaZoneRequest: DescribeCkafkaZoneRequest,
@@ -8169,6 +8918,7 @@ module.exports = {
     Tag: Tag,
     BatchModifyGroupOffsetsResponse: BatchModifyGroupOffsetsResponse,
     GroupResponse: GroupResponse,
+    InstanceChargeParam: InstanceChargeParam,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
     FetchMessageListByOffsetResponse: FetchMessageListByOffsetResponse,
     CreateConsumerResponse: CreateConsumerResponse,
@@ -8199,6 +8949,7 @@ module.exports = {
     DescribeTopicSubscribeGroupRequest: DescribeTopicSubscribeGroupRequest,
     DeleteInstancePreResponse: DeleteInstancePreResponse,
     FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
+    InquiryPublicNetworkParam: InquiryPublicNetworkParam,
     TopicInSyncReplicaInfo: TopicInSyncReplicaInfo,
     DescribeRegionRequest: DescribeRegionRequest,
     InstanceConfigDO: InstanceConfigDO,
@@ -8236,6 +8987,7 @@ module.exports = {
     DeleteRouteTriggerTimeRequest: DeleteRouteTriggerTimeRequest,
     DescribeInstancesRequest: DescribeInstancesRequest,
     InstanceAttributesResponse: InstanceAttributesResponse,
+    CreateInstancePostRequest: CreateInstancePostRequest,
     DescribeGroupRequest: DescribeGroupRequest,
     Filter: Filter,
     GroupOffsetResponse: GroupOffsetResponse,
@@ -8247,18 +8999,22 @@ module.exports = {
     DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
     CreateConsumerRequest: CreateConsumerRequest,
+    InquireCkafkaPriceResponse: InquireCkafkaPriceResponse,
     DescribeRouteRequest: DescribeRouteRequest,
     TopicInSyncReplicaResult: TopicInSyncReplicaResult,
     SendMessageResponse: SendMessageResponse,
+    InquiryBasePrice: InquiryBasePrice,
     DescribeCkafkaZoneResponse: DescribeCkafkaZoneResponse,
     BatchModifyGroupOffsetsRequest: BatchModifyGroupOffsetsRequest,
     TopicAttributesResponse: TopicAttributesResponse,
     InstanceResponse: InstanceResponse,
+    JgwOperateResponse: JgwOperateResponse,
     DescribeGroup: DescribeGroup,
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
     BatchModifyTopicInfo: BatchModifyTopicInfo,
     DescribeRouteResponse: DescribeRouteResponse,
+    InquiryPrice: InquiryPrice,
     TopicResult: TopicResult,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
@@ -8276,6 +9032,7 @@ module.exports = {
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
     DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
     DescribeUserRequest: DescribeUserRequest,
+    InquiryDiskParam: InquiryDiskParam,
     DescribeTopicSyncReplicaRequest: DescribeTopicSyncReplicaRequest,
     InstanceDetail: InstanceDetail,
     InstanceQuotaConfigResp: InstanceQuotaConfigResp,

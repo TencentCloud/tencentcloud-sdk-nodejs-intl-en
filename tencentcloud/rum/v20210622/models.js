@@ -79,13 +79,13 @@ class CreateTawInstanceRequest extends  AbstractModel {
         this.BuyingChannel = null;
 
         /**
-         * 
+         * Type of prepaid resource pack (only required for prepaid mode)
          * @type {number || null}
          */
         this.ResourcePackageType = null;
 
         /**
-         * 
+         * The number of prepaid resource packs (only required for prepaid mode)
          * @type {number || null}
          */
         this.ResourcePackageNum = null;
@@ -368,6 +368,13 @@ class CreateTawInstanceResponse extends  AbstractModel {
         this.InstanceId = null;
 
         /**
+         * ID of prepaid order
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -383,6 +390,7 @@ class CreateTawInstanceResponse extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

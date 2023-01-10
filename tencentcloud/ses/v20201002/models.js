@@ -370,6 +370,34 @@ class ListEmailAddressRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateEmailSmtpPassWord response structure.
+ * @class
+ */
+class UpdateEmailSmtpPassWordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListReceivers request structure.
  * @class
  */
@@ -1420,6 +1448,41 @@ class CreateEmailIdentityRequest extends  AbstractModel {
             return;
         }
         this.EmailIdentity = 'EmailIdentity' in params ? params.EmailIdentity : null;
+
+    }
+}
+
+/**
+ * UpdateEmailSmtpPassWord request structure.
+ * @class
+ */
+class UpdateEmailSmtpPassWordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SMTP password. Length limit: 64.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Email address. Length limit: 128.
+         * @type {string || null}
+         */
+        this.EmailAddress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Password = 'Password' in params ? params.Password : null;
+        this.EmailAddress = 'EmailAddress' in params ? params.EmailAddress : null;
 
     }
 }
@@ -2934,6 +2997,7 @@ module.exports = {
     CreateEmailTemplateRequest: CreateEmailTemplateRequest,
     ListEmailAddressResponse: ListEmailAddressResponse,
     ListEmailAddressRequest: ListEmailAddressRequest,
+    UpdateEmailSmtpPassWordResponse: UpdateEmailSmtpPassWordResponse,
     ListReceiversRequest: ListReceiversRequest,
     GetEmailIdentityResponse: GetEmailIdentityResponse,
     ListBlackEmailAddressRequest: ListBlackEmailAddressRequest,
@@ -2955,6 +3019,7 @@ module.exports = {
     DeleteEmailTemplateResponse: DeleteEmailTemplateResponse,
     Volume: Volume,
     CreateEmailIdentityRequest: CreateEmailIdentityRequest,
+    UpdateEmailSmtpPassWordRequest: UpdateEmailSmtpPassWordRequest,
     ReceiverData: ReceiverData,
     UpdateEmailIdentityResponse: UpdateEmailIdentityResponse,
     DeleteEmailTemplateRequest: DeleteEmailTemplateRequest,

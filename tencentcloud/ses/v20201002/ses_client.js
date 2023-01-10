@@ -23,6 +23,7 @@ const CreateReceiverResponse = models.CreateReceiverResponse;
 const CreateEmailTemplateRequest = models.CreateEmailTemplateRequest;
 const ListEmailAddressResponse = models.ListEmailAddressResponse;
 const ListEmailAddressRequest = models.ListEmailAddressRequest;
+const UpdateEmailSmtpPassWordResponse = models.UpdateEmailSmtpPassWordResponse;
 const ListReceiversRequest = models.ListReceiversRequest;
 const GetEmailIdentityResponse = models.GetEmailIdentityResponse;
 const ListBlackEmailAddressRequest = models.ListBlackEmailAddressRequest;
@@ -44,6 +45,7 @@ const TemplatesMetadata = models.TemplatesMetadata;
 const DeleteEmailTemplateResponse = models.DeleteEmailTemplateResponse;
 const Volume = models.Volume;
 const CreateEmailIdentityRequest = models.CreateEmailIdentityRequest;
+const UpdateEmailSmtpPassWordRequest = models.UpdateEmailSmtpPassWordRequest;
 const ReceiverData = models.ReceiverData;
 const UpdateEmailIdentityResponse = models.UpdateEmailIdentityResponse;
 const DeleteEmailTemplateRequest = models.DeleteEmailTemplateRequest;
@@ -245,6 +247,17 @@ Note: Only an approved template can be used to send emails.
     BatchSendEmail(req, cb) {
         let resp = new BatchSendEmailResponse();
         this.request("BatchSendEmail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the SMTP password. Initially, no SMTP password is set for your email address, so emails cannot be sent over SMTP. To send emails over SMTP, you must set the SMTP password. The set password can be changed subsequently.
+     * @param {UpdateEmailSmtpPassWordRequest} req
+     * @param {function(string, UpdateEmailSmtpPassWordResponse):void} cb
+     * @public
+     */
+    UpdateEmailSmtpPassWord(req, cb) {
+        let resp = new UpdateEmailSmtpPassWordResponse();
+        this.request("UpdateEmailSmtpPassWord", req, resp, cb);
     }
 
     /**

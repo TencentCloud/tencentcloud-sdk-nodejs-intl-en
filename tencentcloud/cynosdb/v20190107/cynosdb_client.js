@@ -19,13 +19,17 @@ const AbstractClient = require('../../common/abstract_client')
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
 const InquirePriceRenewRequest = models.InquirePriceRenewRequest;
+const InstanceAuditRule = models.InstanceAuditRule;
 const ModifiableInfo = models.ModifiableInfo;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
+const ModifyAuditRuleTemplatesRequest = models.ModifyAuditRuleTemplatesRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const ModifyMaintainPeriodConfigRequest = models.ModifyMaintainPeriodConfigRequest;
 const DescribeRollbackTimeRangeResponse = models.DescribeRollbackTimeRangeResponse;
+const BillingResourceInfo = models.BillingResourceInfo;
 const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
 const SwitchClusterZoneResponse = models.SwitchClusterZoneResponse;
+const ModifyParamItem = models.ModifyParamItem;
 const QueryFilter = models.QueryFilter;
 const DescribeBinlogDownloadUrlRequest = models.DescribeBinlogDownloadUrlRequest;
 const CreateAccountsResponse = models.CreateAccountsResponse;
@@ -36,6 +40,7 @@ const DescribeBinlogsResponse = models.DescribeBinlogsResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const ClusterInstanceDetail = models.ClusterInstanceDetail;
 const AddClusterSlaveZoneResponse = models.AddClusterSlaveZoneResponse;
+const OldAddrInfo = models.OldAddrInfo;
 const DescribeClusterParamsResponse = models.DescribeClusterParamsResponse;
 const IsolateInstanceResponse = models.IsolateInstanceResponse;
 const ModifyInstanceNameResponse = models.ModifyInstanceNameResponse;
@@ -50,6 +55,7 @@ const SlowQueriesItem = models.SlowQueriesItem;
 const ActivateInstanceRequest = models.ActivateInstanceRequest;
 const DatabaseTables = models.DatabaseTables;
 const AddClusterSlaveZoneRequest = models.AddClusterSlaveZoneRequest;
+const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
@@ -57,10 +63,10 @@ const DescribeClusterInstanceGrpsRequest = models.DescribeClusterInstanceGrpsReq
 const DescribeResourcesByDealNameResponse = models.DescribeResourcesByDealNameResponse;
 const ResumeServerlessResponse = models.ResumeServerlessResponse;
 const CreateAccountsRequest = models.CreateAccountsRequest;
-const IsolateInstanceRequest = models.IsolateInstanceRequest;
-const ExportInstanceSlowQueriesResponse = models.ExportInstanceSlowQueriesResponse;
+const DeleteAuditRuleTemplatesRequest = models.DeleteAuditRuleTemplatesRequest;
+const DescribeAuditRuleTemplatesResponse = models.DescribeAuditRuleTemplatesResponse;
 const SwitchClusterZoneRequest = models.SwitchClusterZoneRequest;
-const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const Ability = models.Ability;
 const InstanceInitInfo = models.InstanceInitInfo;
 const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
 const DeleteBackupResponse = models.DeleteBackupResponse;
@@ -73,17 +79,21 @@ const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const NewAccount = models.NewAccount;
 const BackupFileInfo = models.BackupFileInfo;
 const DescribeBinlogDownloadUrlResponse = models.DescribeBinlogDownloadUrlResponse;
+const DescribeAuditRuleWithInstanceIdsResponse = models.DescribeAuditRuleWithInstanceIdsResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
 const SearchClusterDatabasesRequest = models.SearchClusterDatabasesRequest;
 const CynosdbInstance = models.CynosdbInstance;
+const DescribeAuditRuleWithInstanceIdsRequest = models.DescribeAuditRuleWithInstanceIdsRequest;
 const ModifyClusterSlaveZoneResponse = models.ModifyClusterSlaveZoneResponse;
 const RemoveClusterSlaveZoneRequest = models.RemoveClusterSlaveZoneRequest;
-const IsolateClusterResponse = models.IsolateClusterResponse;
+const BinlogItem = models.BinlogItem;
+const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
 const CreateClustersRequest = models.CreateClustersRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
+const CloseAuditServiceRequest = models.CloseAuditServiceRequest;
 const AddInstancesResponse = models.AddInstancesResponse;
 const Addr = models.Addr;
 const ParamTemplateListInfo = models.ParamTemplateListInfo;
@@ -93,38 +103,45 @@ const ModifyClusterParamResponse = models.ModifyClusterParamResponse;
 const SecurityGroup = models.SecurityGroup;
 const DescribeBackupDownloadUrlRequest = models.DescribeBackupDownloadUrlRequest;
 const OfflineInstanceRequest = models.OfflineInstanceRequest;
+const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const NetAddr = models.NetAddr;
 const TemplateParamInfo = models.TemplateParamInfo;
 const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
 const CreateBackupResponse = models.CreateBackupResponse;
 const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidityResponse;
+const AuditRuleTemplateInfo = models.AuditRuleTemplateInfo;
 const DescribeInstanceSlowQueriesResponse = models.DescribeInstanceSlowQueriesResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DescribeBackupDownloadUrlResponse = models.DescribeBackupDownloadUrlResponse;
 const ResumeServerlessRequest = models.ResumeServerlessRequest;
 const InquirePriceCreateRequest = models.InquirePriceCreateRequest;
-const BillingResourceInfo = models.BillingResourceInfo;
+const CreateAuditRuleTemplateRequest = models.CreateAuditRuleTemplateRequest;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const DescribeInstanceSpecsRequest = models.DescribeInstanceSpecsRequest;
 const ExportInstanceSlowQueriesRequest = models.ExportInstanceSlowQueriesRequest;
-const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
+const ParamItem = models.ParamItem;
 const CynosdbCluster = models.CynosdbCluster;
-const BinlogItem = models.BinlogItem;
+const CreateAuditRuleTemplateResponse = models.CreateAuditRuleTemplateResponse;
+const IsolateClusterResponse = models.IsolateClusterResponse;
 const SearchClusterDatabasesResponse = models.SearchClusterDatabasesResponse;
+const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
 const OfflineClusterResponse = models.OfflineClusterResponse;
 const SwitchProxyVpcResponse = models.SwitchProxyVpcResponse;
+const DescribeAuditRuleTemplatesRequest = models.DescribeAuditRuleTemplatesRequest;
 const InstanceSpec = models.InstanceSpec;
 const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
+const IsolateInstanceRequest = models.IsolateInstanceRequest;
 const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const Account = models.Account;
 const CreateBackupRequest = models.CreateBackupRequest;
+const ExportInstanceSlowQueriesResponse = models.ExportInstanceSlowQueriesResponse;
 const SearchClusterTablesResponse = models.SearchClusterTablesResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
 const SwitchProxyVpcRequest = models.SwitchProxyVpcRequest;
 const DescribeBackupListResponse = models.DescribeBackupListResponse;
 const DescribeBinlogSaveDaysRequest = models.DescribeBinlogSaveDaysRequest;
-const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
+const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const ActivateInstanceResponse = models.ActivateInstanceResponse;
 const DescribeRollbackTimeValidityRequest = models.DescribeRollbackTimeValidityRequest;
 const IsolateClusterRequest = models.IsolateClusterRequest;
@@ -132,11 +149,13 @@ const DescribeClusterInstanceGrpsResponse = models.DescribeClusterInstanceGrpsRe
 const AddInstancesRequest = models.AddInstancesRequest;
 const ModifyClusterSlaveZoneRequest = models.ModifyClusterSlaveZoneRequest;
 const CynosdbInstanceDetail = models.CynosdbInstanceDetail;
+const RuleFilters = models.RuleFilters;
 const CynosdbClusterDetail = models.CynosdbClusterDetail;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
 const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
 const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
+const AuditRuleFilters = models.AuditRuleFilters;
 const DescribeBinlogSaveDaysResponse = models.DescribeBinlogSaveDaysResponse;
 const ModifyClusterParamRequest = models.ModifyClusterParamRequest;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
@@ -144,16 +163,20 @@ const RollbackTimeRange = models.RollbackTimeRange;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const TradePrice = models.TradePrice;
 const DescribeClusterParamsRequest = models.DescribeClusterParamsRequest;
+const CloseAuditServiceResponse = models.CloseAuditServiceResponse;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const OfflineInstanceResponse = models.OfflineInstanceResponse;
-const ParamItem = models.ParamItem;
+const ModifyAuditServiceResponse = models.ModifyAuditServiceResponse;
+const DeleteAuditRuleTemplatesResponse = models.DeleteAuditRuleTemplatesResponse;
 const PolicyRule = models.PolicyRule;
-const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
+const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const DescribeInstanceSlowQueriesRequest = models.DescribeInstanceSlowQueriesRequest;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const ZoneStockInfo = models.ZoneStockInfo;
 const InquirePriceRenewResponse = models.InquirePriceRenewResponse;
+const ModifyAuditRuleTemplatesResponse = models.ModifyAuditRuleTemplatesResponse;
 
 
 /**
@@ -175,6 +198,17 @@ class CynosdbClient extends AbstractClient {
     ResumeServerless(req, cb) {
         let resp = new ResumeServerlessResponse();
         this.request("ResumeServerless", req, resp, cb);
+    }
+
+    /**
+     * This API is used to deactivate an instance.
+     * @param {OfflineInstanceRequest} req
+     * @param {function(string, OfflineInstanceResponse):void} cb
+     * @public
+     */
+    OfflineInstance(req, cb) {
+        let resp = new OfflineInstanceResponse();
+        this.request("OfflineInstance", req, resp, cb);
     }
 
     /**
@@ -211,17 +245,6 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to search the list of cluster data tables.
-     * @param {SearchClusterTablesRequest} req
-     * @param {function(string, SearchClusterTablesResponse):void} cb
-     * @public
-     */
-    SearchClusterTables(req, cb) {
-        let resp = new SearchClusterTablesResponse();
-        this.request("SearchClusterTables", req, resp, cb);
-    }
-
-    /**
      * This API is used to query instance specifications.
      * @param {DescribeInstanceSpecsRequest} req
      * @param {function(string, DescribeInstanceSpecsResponse):void} cb
@@ -230,6 +253,17 @@ class CynosdbClient extends AbstractClient {
     DescribeInstanceSpecs(req, cb) {
         let resp = new DescribeInstanceSpecsResponse();
         this.request("DescribeInstanceSpecs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add the replica AZ.
+     * @param {AddClusterSlaveZoneRequest} req
+     * @param {function(string, AddClusterSlaveZoneResponse):void} cb
+     * @public
+     */
+    AddClusterSlaveZone(req, cb) {
+        let resp = new AddClusterSlaveZoneResponse();
+        this.request("AddClusterSlaveZone", req, resp, cb);
     }
 
     /**
@@ -266,17 +300,6 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add the replica AZ.
-     * @param {AddClusterSlaveZoneRequest} req
-     * @param {function(string, AddClusterSlaveZoneResponse):void} cb
-     * @public
-     */
-    AddClusterSlaveZone(req, cb) {
-        let resp = new AddClusterSlaveZoneResponse();
-        this.request("AddClusterSlaveZone", req, resp, cb);
-    }
-
-    /**
      * This API is used to deactivate a cluster.
      * @param {OfflineClusterRequest} req
      * @param {function(string, OfflineClusterResponse):void} cb
@@ -296,6 +319,17 @@ class CynosdbClient extends AbstractClient {
     SetRenewFlag(req, cb) {
         let resp = new SetRenewFlagResponse();
         this.request("SetRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an audit rule template.
+     * @param {CreateAuditRuleTemplateRequest} req
+     * @param {function(string, CreateAuditRuleTemplateResponse):void} cb
+     * @public
+     */
+    CreateAuditRuleTemplate(req, cb) {
+        let resp = new CreateAuditRuleTemplateResponse();
+        this.request("CreateAuditRuleTemplate", req, resp, cb);
     }
 
     /**
@@ -343,6 +377,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query audit rule templates.
+     * @param {DescribeAuditRuleTemplatesRequest} req
+     * @param {function(string, DescribeAuditRuleTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeAuditRuleTemplates(req, cb) {
+        let resp = new DescribeAuditRuleTemplatesResponse();
+        this.request("DescribeAuditRuleTemplates", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the valid rollback time range for the specified cluster.
      * @param {DescribeRollbackTimeRangeRequest} req
      * @param {function(string, DescribeRollbackTimeRangeResponse):void} cb
@@ -373,6 +418,17 @@ class CynosdbClient extends AbstractClient {
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an audit rule template.
+     * @param {DeleteAuditRuleTemplatesRequest} req
+     * @param {function(string, DeleteAuditRuleTemplatesResponse):void} cb
+     * @public
+     */
+    DeleteAuditRuleTemplates(req, cb) {
+        let resp = new DeleteAuditRuleTemplatesResponse();
+        this.request("DeleteAuditRuleTemplates", req, resp, cb);
     }
 
     /**
@@ -431,14 +487,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to deactivate an instance.
-     * @param {OfflineInstanceRequest} req
-     * @param {function(string, OfflineInstanceResponse):void} cb
+     * This API is used to disable the audit service for a TDSQL-C for MySQL instance.
+     * @param {CloseAuditServiceRequest} req
+     * @param {function(string, CloseAuditServiceResponse):void} cb
      * @public
      */
-    OfflineInstance(req, cb) {
-        let resp = new OfflineInstanceResponse();
-        this.request("OfflineInstance", req, resp, cb);
+    CloseAuditService(req, cb) {
+        let resp = new CloseAuditServiceResponse();
+        this.request("CloseAuditService", req, resp, cb);
     }
 
     /**
@@ -486,6 +542,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to search the list of cluster data tables.
+     * @param {SearchClusterTablesRequest} req
+     * @param {function(string, SearchClusterTablesResponse):void} cb
+     * @public
+     */
+    SearchClusterTables(req, cb) {
+        let resp = new SearchClusterTablesResponse();
+        this.request("SearchClusterTables", req, resp, cb);
+    }
+
+    /**
      * This API is used to isolate a cluster.
      * @param {IsolateClusterRequest} req
      * @param {function(string, IsolateClusterResponse):void} cb
@@ -530,7 +597,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to display cluster details.
+     * This API is used to show the details of an instance.
      * @param {DescribeClusterDetailRequest} req
      * @param {function(string, DescribeClusterDetailResponse):void} cb
      * @public
@@ -541,14 +608,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the security groups bound to an instance.
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * This API is used to get the audit rule templates of an instance.
+     * @param {DescribeAuditRuleWithInstanceIdsRequest} req
+     * @param {function(string, DescribeAuditRuleWithInstanceIdsResponse):void} cb
      * @public
      */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    DescribeAuditRuleWithInstanceIds(req, cb) {
+        let resp = new DescribeAuditRuleWithInstanceIdsResponse();
+        this.request("DescribeAuditRuleWithInstanceIds", req, resp, cb);
     }
 
     /**
@@ -626,6 +693,17 @@ class CynosdbClient extends AbstractClient {
     DescribeResourcesByDealName(req, cb) {
         let resp = new DescribeResourcesByDealNameResponse();
         this.request("DescribeResourcesByDealName", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the audit configurations of an instance, such as audit log retention period and audit rule.
+     * @param {ModifyAuditServiceRequest} req
+     * @param {function(string, ModifyAuditServiceResponse):void} cb
+     * @public
+     */
+    ModifyAuditService(req, cb) {
+        let resp = new ModifyAuditServiceResponse();
+        this.request("ModifyAuditService", req, resp, cb);
     }
 
     /**
@@ -717,6 +795,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to enable the audit service for a TDSQL-C for MySQL instance.
+     * @param {OpenAuditServiceRequest} req
+     * @param {function(string, OpenAuditServiceResponse):void} cb
+     * @public
+     */
+    OpenAuditService(req, cb) {
+        let resp = new OpenAuditServiceResponse();
+        this.request("OpenAuditService", req, resp, cb);
+    }
+
+    /**
      * This API is used to export the slow logs of an instance.
      * @param {ExportInstanceSlowQueriesRequest} req
      * @param {function(string, ExportInstanceSlowQueriesResponse):void} cb
@@ -725,6 +814,17 @@ class CynosdbClient extends AbstractClient {
     ExportInstanceSlowQueries(req, cb) {
         let resp = new ExportInstanceSlowQueriesResponse();
         this.request("ExportInstanceSlowQueries", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an audit rule template.
+     * @param {ModifyAuditRuleTemplatesRequest} req
+     * @param {function(string, ModifyAuditRuleTemplatesResponse):void} cb
+     * @public
+     */
+    ModifyAuditRuleTemplates(req, cb) {
+        let resp = new ModifyAuditRuleTemplatesResponse();
+        this.request("ModifyAuditRuleTemplates", req, resp, cb);
     }
 
     /**
@@ -747,6 +847,17 @@ class CynosdbClient extends AbstractClient {
     DescribeRollbackTimeValidity(req, cb) {
         let resp = new DescribeRollbackTimeValidityResponse();
         this.request("DescribeRollbackTimeValidity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the security groups bound to an instance.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
     /**

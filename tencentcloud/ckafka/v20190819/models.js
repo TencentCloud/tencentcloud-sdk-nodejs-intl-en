@@ -5011,7 +5011,7 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
         this.RebalanceTime = null;
 
         /**
-         * Timestamp
+         * Public network bandwidth
          * @type {number || null}
          */
         this.PublicNetwork = null;

@@ -360,7 +360,6 @@ class ScaleOutClusterRequest extends  AbstractModel {
 
         /**
          * The node billing mode. Valid values:
-<li>`PREPAID`：The prepaid mode, namely monthly subscription.</li>
 <li>`POSTPAID_BY_HOUR`: The postpaid mode by hour.</li>
 <li>`SPOTPAID`: The spot instance mode (for task nodes only).</li>
          * @type {string || null}
@@ -1406,6 +1405,50 @@ When `HardwareResourceType` is `pod`, this parameter does not take effect.
 }
 
 /**
+ * Price details by AZ, used for creating the cluster price list
+ * @class
+ */
+class ZoneDetailPriceResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Price details by node
+         * @type {Array.<NodeDetailPriceResult> || null}
+         */
+        this.NodeDetailPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+        if (params.NodeDetailPrice) {
+            this.NodeDetailPrice = new Array();
+            for (let z in params.NodeDetailPrice) {
+                let obj = new NodeDetailPriceResult();
+                obj.deserialize(params.NodeDetailPrice[z]);
+                this.NodeDetailPrice.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Resource descriptions for container resource scale-out
  * @class
  */
@@ -1802,6 +1845,50 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * Price details by node, used for creating the cluster price list
+ * @class
+ */
+class NodeDetailPriceResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The node type. Valid values: `master`, `core`, `task`, `common`, `router`, `mysql`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * Price details by node part
+         * @type {Array.<PartDetailPriceItem> || null}
+         */
+        this.PartDetailPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+
+        if (params.PartDetailPrice) {
+            this.PartDetailPrice = new Array();
+            for (let z in params.PartDetailPrice) {
+                let obj = new PartDetailPriceItem();
+                obj.deserialize(params.PartDetailPrice[z]);
+                this.PartDetailPrice.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Tag
  * @class
  */
@@ -2030,6 +2117,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.IsHandsCluster = null;
 
+        /**
+         * Client component information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SoftDependInfo> || null}
+         */
+        this.OutSideSoftInfo = null;
+
     }
 
     /**
@@ -2075,6 +2169,15 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.ClusterClass = 'ClusterClass' in params ? params.ClusterClass : null;
         this.IsMultiZoneCluster = 'IsMultiZoneCluster' in params ? params.IsMultiZoneCluster : null;
         this.IsHandsCluster = 'IsHandsCluster' in params ? params.IsHandsCluster : null;
+
+        if (params.OutSideSoftInfo) {
+            this.OutSideSoftInfo = new Array();
+            for (let z in params.OutSideSoftInfo) {
+                let obj = new SoftDependInfo();
+                obj.deserialize(params.OutSideSoftInfo[z]);
+                this.OutSideSoftInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -2395,6 +2498,75 @@ class TerminateTasksResponse extends  AbstractModel {
 }
 
 /**
+ * Price details by node part, used for creating the cluster price list
+ * @class
+ */
+class PartDetailPriceItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The type. Valid values: `node` (node); `rootDisk` (system disk); `dataDisk` and `metaDB` (cloud data disk)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Rate (original)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * Rate (discounted)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RealCost = null;
+
+        /**
+         * Total price (discounted)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * Discount
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Policy = null;
+
+        /**
+         * Quantity
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.RealCost = 'RealCost' in params ? params.RealCost : null;
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.Policy = 'Policy' in params ? params.Policy : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+
+    }
+}
+
+/**
  * Shared component information
  * @class
  */
@@ -2656,6 +2828,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.TimeSpan = null;
 
         /**
+         * The price list.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ZoneDetailPriceResult> || null}
+         */
+        this.PriceList = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2674,6 +2853,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+
+        if (params.PriceList) {
+            this.PriceList = new Array();
+            for (let z in params.PriceList) {
+                let obj = new ZoneDetailPriceResult();
+                obj.deserialize(params.PriceList[z]);
+                this.PriceList.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2722,7 +2910,7 @@ class Placement extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * The ID of the project to which the instance belongs. You can call the [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1) and obtain this ID from the `projectId` field in the response. If this is left empty, the ID of the default project is used.
+         * Project ID of the instance. If no ID is passed in, the default project ID is used.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -3459,60 +3647,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Resource description
+ * Client component dependencies
  * @class
  */
-class NewResourceSpec extends  AbstractModel {
+class SoftDependInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Describes master node resource
-         * @type {Resource || null}
+         * The component name.
+         * @type {string || null}
          */
-        this.MasterResourceSpec = null;
+        this.SoftName = null;
 
         /**
-         * Describes core node resource
-         * @type {Resource || null}
+         * Whether the component is required.
+         * @type {boolean || null}
          */
-        this.CoreResourceSpec = null;
-
-        /**
-         * Describes task node resource
-         * @type {Resource || null}
-         */
-        this.TaskResourceSpec = null;
-
-        /**
-         * Number of master nodes
-         * @type {number || null}
-         */
-        this.MasterCount = null;
-
-        /**
-         * Number of core nodes
-         * @type {number || null}
-         */
-        this.CoreCount = null;
-
-        /**
-         * Number of task nodes
-         * @type {number || null}
-         */
-        this.TaskCount = null;
-
-        /**
-         * Describes common node resource
-         * @type {Resource || null}
-         */
-        this.CommonResourceSpec = null;
-
-        /**
-         * Number of common nodes
-         * @type {number || null}
-         */
-        this.CommonCount = null;
+        this.Required = null;
 
     }
 
@@ -3523,34 +3675,8 @@ class NewResourceSpec extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.MasterResourceSpec) {
-            let obj = new Resource();
-            obj.deserialize(params.MasterResourceSpec)
-            this.MasterResourceSpec = obj;
-        }
-
-        if (params.CoreResourceSpec) {
-            let obj = new Resource();
-            obj.deserialize(params.CoreResourceSpec)
-            this.CoreResourceSpec = obj;
-        }
-
-        if (params.TaskResourceSpec) {
-            let obj = new Resource();
-            obj.deserialize(params.TaskResourceSpec)
-            this.TaskResourceSpec = obj;
-        }
-        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
-        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
-        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
-
-        if (params.CommonResourceSpec) {
-            let obj = new Resource();
-            obj.deserialize(params.CommonResourceSpec)
-            this.CommonResourceSpec = obj;
-        }
-        this.CommonCount = 'CommonCount' in params ? params.CommonCount : null;
+        this.SoftName = 'SoftName' in params ? params.SoftName : null;
+        this.Required = 'Required' in params ? params.Required : null;
 
     }
 }
@@ -4016,7 +4142,6 @@ class CreateClusterRequest extends  AbstractModel {
 
         /**
          * The instance billing mode. Valid values:
-<li>`PREPAID`: The prepaid mode, namely monthly subscription.</li>
 <li>`POSTPAID_BY_HOUR`: The postpaid mode by hour.</li>
          * @type {string || null}
          */
@@ -6344,6 +6469,103 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Resource description
+ * @class
+ */
+class NewResourceSpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Describes master node resource
+         * @type {Resource || null}
+         */
+        this.MasterResourceSpec = null;
+
+        /**
+         * Describes core node resource
+         * @type {Resource || null}
+         */
+        this.CoreResourceSpec = null;
+
+        /**
+         * Describes task node resource
+         * @type {Resource || null}
+         */
+        this.TaskResourceSpec = null;
+
+        /**
+         * Number of master nodes
+         * @type {number || null}
+         */
+        this.MasterCount = null;
+
+        /**
+         * Number of core nodes
+         * @type {number || null}
+         */
+        this.CoreCount = null;
+
+        /**
+         * Number of task nodes
+         * @type {number || null}
+         */
+        this.TaskCount = null;
+
+        /**
+         * Describes common node resource
+         * @type {Resource || null}
+         */
+        this.CommonResourceSpec = null;
+
+        /**
+         * Number of common nodes
+         * @type {number || null}
+         */
+        this.CommonCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MasterResourceSpec) {
+            let obj = new Resource();
+            obj.deserialize(params.MasterResourceSpec)
+            this.MasterResourceSpec = obj;
+        }
+
+        if (params.CoreResourceSpec) {
+            let obj = new Resource();
+            obj.deserialize(params.CoreResourceSpec)
+            this.CoreResourceSpec = obj;
+        }
+
+        if (params.TaskResourceSpec) {
+            let obj = new Resource();
+            obj.deserialize(params.TaskResourceSpec)
+            this.TaskResourceSpec = obj;
+        }
+        this.MasterCount = 'MasterCount' in params ? params.MasterCount : null;
+        this.CoreCount = 'CoreCount' in params ? params.CoreCount : null;
+        this.TaskCount = 'TaskCount' in params ? params.TaskCount : null;
+
+        if (params.CommonResourceSpec) {
+            let obj = new Resource();
+            obj.deserialize(params.CommonResourceSpec)
+            this.CommonResourceSpec = obj;
+        }
+        this.CommonCount = 'CommonCount' in params ? params.CommonCount : null;
+
+    }
+}
+
+/**
  * InquiryPriceScaleOutInstance request structure.
  * @class
  */
@@ -6813,6 +7035,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PriceSpec = null;
 
         /**
+         * The inquiry results corresponding to the specs specified by the input parameter `MultipleResources`, with the result of the first spec returned by other output parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<EmrPrice> || null}
+         */
+        this.MultipleEmrPrice = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -6835,6 +7064,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new PriceResource();
             obj.deserialize(params.PriceSpec)
             this.PriceSpec = obj;
+        }
+
+        if (params.MultipleEmrPrice) {
+            this.MultipleEmrPrice = new Array();
+            for (let z in params.MultipleEmrPrice) {
+                let obj = new EmrPrice();
+                obj.deserialize(params.MultipleEmrPrice[z]);
+                this.MultipleEmrPrice.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -6978,6 +7216,72 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         }
         this.NodeType = 'NodeType' in params ? params.NodeType : null;
         this.NodeSize = 'NodeSize' in params ? params.NodeSize : null;
+
+    }
+}
+
+/**
+ * EMR inquiry description
+ * @class
+ */
+class EmrPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The published price.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalCost = null;
+
+        /**
+         * The discounted price.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiscountCost = null;
+
+        /**
+         * The unit of the billable item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+        /**
+         * The queried spec.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PriceResource || null}
+         */
+        this.PriceSpec = null;
+
+        /**
+         * Whether spot instances are supported.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.SupportSpotPaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+        this.DiscountCost = 'DiscountCost' in params ? params.DiscountCost : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
+
+        if (params.PriceSpec) {
+            let obj = new PriceResource();
+            obj.deserialize(params.PriceSpec)
+            this.PriceSpec = obj;
+        }
+        this.SupportSpotPaid = 'SupportSpotPaid' in params ? params.SupportSpotPaid : null;
 
     }
 }
@@ -7570,17 +7874,20 @@ module.exports = {
     COSSettings: COSSettings,
     ClusterInstancesInfo: ClusterInstancesInfo,
     ScaleOutInstanceRequest: ScaleOutInstanceRequest,
+    ZoneDetailPriceResult: ZoneDetailPriceResult,
     PodNewSpec: PodNewSpec,
     DescribeInstancesResponse: DescribeInstancesResponse,
     NodeResourceSpec: NodeResourceSpec,
     ModifyResourceScheduleConfigResponse: ModifyResourceScheduleConfigResponse,
     TopologyInfo: TopologyInfo,
+    NodeDetailPriceResult: NodeDetailPriceResult,
     Tag: Tag,
     EmrListInstance: EmrListInstance,
     AddUsersForUserManagerResponse: AddUsersForUserManagerResponse,
     EmrProductConfigOutter: EmrProductConfigOutter,
     DescribeInstancesListResponse: DescribeInstancesListResponse,
     TerminateTasksResponse: TerminateTasksResponse,
+    PartDetailPriceItem: PartDetailPriceItem,
     DependService: DependService,
     PodSpec: PodSpec,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
@@ -7596,7 +7903,7 @@ module.exports = {
     MultiZoneSetting: MultiZoneSetting,
     TerminateInstanceResponse: TerminateInstanceResponse,
     InquiryPriceUpdateInstanceResponse: InquiryPriceUpdateInstanceResponse,
-    NewResourceSpec: NewResourceSpec,
+    SoftDependInfo: SoftDependInfo,
     PersistentVolumeContext: PersistentVolumeContext,
     ScaleOutNodeConfig: ScaleOutNodeConfig,
     DescribeResourceScheduleResponse: DescribeResourceScheduleResponse,
@@ -7632,6 +7939,7 @@ module.exports = {
     ExternalService: ExternalService,
     PreExecuteFileSettings: PreExecuteFileSettings,
     ClusterExternalServiceInfo: ClusterExternalServiceInfo,
+    NewResourceSpec: NewResourceSpec,
     InquiryPriceScaleOutInstanceRequest: InquiryPriceScaleOutInstanceRequest,
     Resource: Resource,
     DescribeEmrApplicationStaticsResponse: DescribeEmrApplicationStaticsResponse,
@@ -7642,6 +7950,7 @@ module.exports = {
     VirtualPrivateCloud: VirtualPrivateCloud,
     SceneSoftwareConfig: SceneSoftwareConfig,
     ShortNodeInfo: ShortNodeInfo,
+    EmrPrice: EmrPrice,
     NodeHardwareInfo: NodeHardwareInfo,
     ScaleOutClusterResponse: ScaleOutClusterResponse,
     Filters: Filters,

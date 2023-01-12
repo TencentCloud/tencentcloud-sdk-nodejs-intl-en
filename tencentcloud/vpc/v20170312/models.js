@@ -778,19 +778,21 @@ class DescribeNetworkInterfacesRequest extends  AbstractModel {
 
         /**
          * Filter. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
-<li>`vpc-id` - String - VPC instance ID, such as `vpc-f49l6u0z`.</li>
-<li>`subnet-id` - String - Subnet instance ID, such as `subnet-f49l6u0z`.</li>
-<li>`network-interface-id` - String - ENI instance ID, such as `eni-5k56k7k7`.</li>
-<li>`attachment.instance-id` - String - ID of the bound CVM instance, such as `ins-3nqpdn3i`.</li>
-<li>`groups.security-group-id` - String - ID of the bound security group, such as `sg-f9ekbxeq`.</li>
+<li>`vpc-id` - String - VPC ID, such as `vpc-f49l6u0z`.</li>
+<li>`subnet-id` - String - Subnet ID, such as `subnet-f49l6u0z`.</li>
+<li>`network-interface-id` - String - ENI ID, such as `eni-5k56k7k7`.</li>
+<li>`attachment.instance-id` - String - ID of the bound CVM, such as `ins-3nqpdn3i`.</li>
+<li>`groups.security-group-id` - String - IDs of associated security groups, such as `sg-f9ekbxeq`.</li>
 <li>`network-interface-name` - String - ENI instance name.</li>
 <li>`network-interface-description` - String - ENI instance description.</li>
 <li>`address-ip` - String - Private IPv4 address. A single IP will be fuzzily matched with the suffix, while multiple IPs will be exactly matched. It can be used with `ip-exact-match` to query and exactly match a single IP.</li>
 <li>`ip-exact-match` - Boolean - Exact match by private IPv4 address. The first value will be returned if multiple values are found.</li>
-<li>`tag-key` - String - Optional - Filter by tag key. See Example 2 for the detailed usage.</li>
-<li>`tag:tag-key` - String - Optional - Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
-<li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. If the value is `true`, filter only the primary ENI. If the value is `false`, filter only the secondary ENI. If this parameter is not specified, filter the both.</li>
-<li>`eni-type` - String - Optional - Filter by ENI type. "0" - secondary ENI, "1" - primary ENI, "2": relayed ENI</li>
+<li>`tag-key` - String - Optional - Filter by the tag key. See Example 2 for the detailed usage.</li>
+<li>`tag:tag-key` - String - Optional - Filter by the tag key pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
+<li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. Values: `true`, `false`. If this parameter is not specified, filter the both.</li>
+<li>`eni-type` - String - Optional - Filter by the ENI type. Values: `0` (Secondary ENI), `1` (Primary ENI), `2` (Relayed ENI)</li>
+<li>`eni-qos` - String - Optional - Filter by the ENI service level. Values: `AG` (Bronze), `AU` (Silver)</li>
+<li>`address-ipv6` - String - Optional - Filter by the private IPv6 address. Multiple IPv6 addresses can be used for query. If this field is used together with `address-ip`, their intersection will be used.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1093,6 +1095,49 @@ class ModifyNatGatewaySourceIpTranslationNatRuleRequest extends  AbstractModel {
             obj.deserialize(params.SourceIpTranslationNatRule)
             this.SourceIpTranslationNatRule = obj;
         }
+
+    }
+}
+
+/**
+ * SetVpnGatewaysRenewFlag request structure.
+ * @class
+ */
+class SetVpnGatewaysRenewFlagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPN gateway IDs
+         * @type {Array.<string> || null}
+         */
+        this.VpnGatewayIds = null;
+
+        /**
+         * Status of auto-renewal
+Values: `0` (Follow original), `1` (Enable auto-renewal), `2` (Disable auto-renewal) 
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * VPNGW type: `IPSEC`, `SSL`
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpnGatewayIds = 'VpnGatewayIds' in params ? params.VpnGatewayIds : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -2839,16 +2884,11 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
         this.BandwidthPackageName = null;
 
         /**
-         * The billing mode of the bandwidth package.
+         * The billing mode of the bandwidth package. Values: 
+`TOP5_POSTPAID_BY_MONTH`: Bill by the top 5 bandwidth value of the current month in a postpaid manner
          * @type {string || null}
          */
         this.ChargeType = null;
-
-        /**
-         * When a monthly-subscribed bandwidth package is returned, whether to convert it to a pay-as-you-go bandwidth packages. Default value: `No`
-         * @type {boolean || null}
-         */
-        this.MigrateOnRefund = null;
 
     }
 
@@ -2862,7 +2902,6 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
         this.BandwidthPackageName = 'BandwidthPackageName' in params ? params.BandwidthPackageName : null;
         this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
-        this.MigrateOnRefund = 'MigrateOnRefund' in params ? params.MigrateOnRefund : null;
 
     }
 }
@@ -2874,6 +2913,18 @@ class ModifyBandwidthPackageAttributeRequest extends  AbstractModel {
 class TransformAddressResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AddressId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2890,6 +2941,8 @@ class TransformAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5659,6 +5712,34 @@ class DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest extends  Abs
 }
 
 /**
+ * ReturnNormalAddresses request structure.
+ * @class
+ */
+class ReturnNormalAddressesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 1
+         * @type {Array.<string> || null}
+         */
+        this.AddressIps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddressIps = 'AddressIps' in params ? params.AddressIps : null;
+
+    }
+}
+
+/**
  * ModifyNetworkAclAttribute response structure.
  * @class
  */
@@ -6357,6 +6438,24 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.AttachType = null;
 
+        /**
+         * The ID of resource to retain the ENI primary IP. It’s used as the request parameters for deleting an ENI.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * Service level
+<li>`DEFAULT`: Default level</lil>
+<li>`PT`: Gold</li>
+<li>`AU`: Silver</li>
+<li>`AG`: Bronze</li>
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.QosLevel = null;
+
     }
 
     /**
@@ -6414,6 +6513,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Business = 'Business' in params ? params.Business : null;
         this.CdcId = 'CdcId' in params ? params.CdcId : null;
         this.AttachType = 'AttachType' in params ? params.AttachType : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.QosLevel = 'QosLevel' in params ? params.QosLevel : null;
 
     }
 }
@@ -7485,6 +7586,66 @@ class CcnRoute extends  AbstractModel {
         this.IsBgp = 'IsBgp' in params ? params.IsBgp : null;
         this.RoutePriority = 'RoutePriority' in params ? params.RoutePriority : null;
         this.InstanceExtraName = 'InstanceExtraName' in params ? params.InstanceExtraName : null;
+
+    }
+}
+
+/**
+ * DescribeTrafficPackages request structure.
+ * @class
+ */
+class DescribeTrafficPackagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Traffic package IDs. Multiple values can be used.
+         * @type {Array.<string> || null}
+         */
+        this.TrafficPackageIds = null;
+
+        /**
+         * Each request can have up to 10 `Filters`. `TrafficPackageIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
+<li> `traffic-package_id` - String - Optional - Filter by the traffic package ID.</li>
+<li> `traffic-package-name` - String - Optional - Filter by the traffic package name. Fuzzy match is not supported.</li>
+<li> `status` - String - Optional - Filter by the traffic package status. Values: [AVAILABLE|EXPIRED|EXHAUSTED].</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Pagination parameter
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Pagination parameter
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TrafficPackageIds = 'TrafficPackageIds' in params ? params.TrafficPackageIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -9297,6 +9458,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.ExclusiveGatewayBandwidth = null;
 
+        /**
+         * Whether the NAT gateway is blocked. Values: `NORMAL`, `RESTRICTED`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RestrictState = null;
+
     }
 
     /**
@@ -9356,6 +9524,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         }
         this.IsExclusive = 'IsExclusive' in params ? params.IsExclusive : null;
         this.ExclusiveGatewayBandwidth = 'ExclusiveGatewayBandwidth' in params ? params.ExclusiveGatewayBandwidth : null;
+        this.RestrictState = 'RestrictState' in params ? params.RestrictState : null;
 
     }
 }
@@ -9439,6 +9608,107 @@ class CreateCustomerGatewayResponse extends  AbstractModel {
             this.CustomerGateway = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information of a traffic package
+ * @class
+ */
+class TrafficPackage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique traffic package ID
+         * @type {string || null}
+         */
+        this.TrafficPackageId = null;
+
+        /**
+         * Traffic package name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TrafficPackageName = null;
+
+        /**
+         * Traffic package size in GB
+         * @type {number || null}
+         */
+        this.TotalAmount = null;
+
+        /**
+         * Traffic package balance in GB
+         * @type {number || null}
+         */
+        this.RemainingAmount = null;
+
+        /**
+         * Traffic package status. Valid values: `AVAILABLE`, `EXPIRED`, `EXHAUSTED`, `REFUNDED`, `DELETED`
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Traffic package creation time
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Traffic package expiration time
+         * @type {string || null}
+         */
+        this.Deadline = null;
+
+        /**
+         * Used traffic in GB
+         * @type {number || null}
+         */
+        this.UsedAmount = null;
+
+        /**
+         * Traffic package tag
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * Traffic package type (idle-time or full-time)
+         * @type {string || null}
+         */
+        this.DeductType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TrafficPackageId = 'TrafficPackageId' in params ? params.TrafficPackageId : null;
+        this.TrafficPackageName = 'TrafficPackageName' in params ? params.TrafficPackageName : null;
+        this.TotalAmount = 'TotalAmount' in params ? params.TotalAmount : null;
+        this.RemainingAmount = 'RemainingAmount' in params ? params.RemainingAmount : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
+        this.UsedAmount = 'UsedAmount' in params ? params.UsedAmount : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
+        this.DeductType = 'DeductType' in params ? params.DeductType : null;
 
     }
 }
@@ -12130,16 +12400,16 @@ class DescribeSecurityGroupPoliciesRequest extends  AbstractModel {
         this.SecurityGroupId = null;
 
         /**
-         * Filter conditions. `SecurityGroupId` and `Filters` cannot be specified at the same time.
-<li>security-group-id - String - Security group ID.</li>
-<li>ip - String - IP. IPV4 and IPV6 fuzzy matching is supported.</li>
-<li>address-module - String - IP address or address group template ID.</li>
-<li>service-module - String - Protocol port or port group template ID.</li>
-<li>protocol-type - String - Protocol supported by the security group policy. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`.</li>
-<li>port - String - Optional - Protocol port. Fuzzy matching is supported. Query all ports when the protocol value is `ALL`.</li>
-<li>poly - String - Protocol policy. Valid values: `ALL` (means "all policies"), `ACCEPT` (means "allow") and `DROP` (means "reject").</li>
-<li>direction - String - Protocol rule. Valid values: `ALL` (means "all rules"), `INBOUND`(means "inbound rules") and `OUTBOUND` (means "outbound rules").</li>
-<li>description - String - Protocol description. Fuzzy matching is supported in this filter condition.</li>
+         * Filters
+<li>`security-group-id` - String - Security group ID in the rule.</li>
+<li>`ip` - String - IP. IPV4 and IPV6 fuzzy matching is supported.</li>
+<li>`address-module` - String - IP address or address group template ID.</li>
+<li>`service-module` - String - Protocol port or port group template ID.</li>
+<li>`protocol-type` - String - Protocol supported by the security group policy. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`.</li>
+<li>`port` - String - Optional - Port. Fuzzy matching is supported. Query all ports when the protocol value is `ALL`.</li>
+<li>`poly` - String - Policy type. Valid values: `ALL`, `ACCEPT` and `DROP`.</li>
+<li>`direction` - String - Direction of the rule. Valid values: `ALL`, `INBOUND` and `OUTBOUND`.</li>
+<li>`description` - String - Policy description. Fuzzy matching is supported.</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -13321,6 +13591,34 @@ class HaVipDisassociateAddressIpRequest extends  AbstractModel {
 }
 
 /**
+ * ReturnNormalAddresses response structure.
+ * @class
+ */
+class ReturnNormalAddressesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DisableFlowLogs response structure.
  * @class
  */
@@ -13574,6 +13872,12 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.CreateTime = null;
 
+        /**
+         * Mounted PaaS service type. Values: `CLB`, `CDB`, `CRS`
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
     }
 
     /**
@@ -13601,6 +13905,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
 
     }
 }
@@ -14291,10 +14596,16 @@ class CreateVpcEndPointServiceRequest extends  AbstractModel {
         this.ServiceInstanceId = null;
 
         /**
-         * Whether it is of the type `PassService`. Valid values: true: yes; false: no. Default value: false
+         * (Disused) Whether it’s a PaaS service
          * @type {boolean || null}
          */
         this.IsPassService = null;
+
+        /**
+         * Mounted PaaS service type. Values: `CLB` (default), `CDB`, `CRS`
+         * @type {string || null}
+         */
+        this.ServiceType = null;
 
     }
 
@@ -14310,6 +14621,7 @@ class CreateVpcEndPointServiceRequest extends  AbstractModel {
         this.AutoAcceptFlag = 'AutoAcceptFlag' in params ? params.AutoAcceptFlag : null;
         this.ServiceInstanceId = 'ServiceInstanceId' in params ? params.ServiceInstanceId : null;
         this.IsPassService = 'IsPassService' in params ? params.IsPassService : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
 
     }
 }
@@ -15737,6 +16049,12 @@ Whether the Anycast EIP can be bound to CLB instances.
          */
         this.AddressName = null;
 
+        /**
+         * Network egress. It defaults to `center_egress1`.
+         * @type {string || null}
+         */
+        this.Egress = null;
+
     }
 
     /**
@@ -15770,6 +16088,7 @@ Whether the Anycast EIP can be bound to CLB instances.
         }
         this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
         this.AddressName = 'AddressName' in params ? params.AddressName : null;
+        this.Egress = 'Egress' in params ? params.Egress : null;
 
     }
 }
@@ -17892,6 +18211,56 @@ class DisassociateNatGatewayAddressRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTrafficPackages response structure.
+ * @class
+ */
+class DescribeTrafficPackagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible traffic packages
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Traffic package information
+         * @type {Array.<TrafficPackage> || null}
+         */
+        this.TrafficPackageSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TrafficPackageSet) {
+            this.TrafficPackageSet = new Array();
+            for (let z in params.TrafficPackageSet) {
+                let obj = new TrafficPackage();
+                obj.deserialize(params.TrafficPackageSet[z]);
+                this.TrafficPackageSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeServiceTemplates response structure.
  * @class
  */
@@ -19299,6 +19668,34 @@ class ModifyNetworkAclAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * SetVpnGatewaysRenewFlag response structure.
+ * @class
+ */
+class SetVpnGatewaysRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteVpnGateway response structure.
  * @class
  */
@@ -19492,7 +19889,7 @@ class Address extends  AbstractModel {
         this.IsEipDirectConnection = null;
 
         /**
-         * EIP resource type. Valid values: `CalcIP` (device IP), `WanIP` (public network IP), `EIP` (elastic IP) and `AnycastEIP` (accelerated EIP).
+         * IP type. Valid values: `CalcIP` (device IP), `WanIP` (public network IP), `EIP` (general elastic IP), `AnycastEIP` (accelerated EIP), and `AntiDDoSEIP` (Anti DDoS EIP).
          * @type {string || null}
          */
         this.AddressType = null;
@@ -24325,7 +24722,7 @@ class AssociateAddressRequest extends  AbstractModel {
         this.AddressId = null;
 
         /**
-         * The ID of the instance to be bound, such as `ins-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API.
+         * The ID of the instance to be bound, such as `ins-11112222`, `lb-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -26494,7 +26891,7 @@ class CreateVpcRequest extends  AbstractModel {
         this.VpcName = null;
 
         /**
-         * VPC CIDR blocks, which must fall within the following three private network IP ranges: 10.0.0.0/16, 172.16.0.0/16 and 192.168.0.0/16.
+         * VPC CIDR block, which must fall within the following three private network IP ranges: 10.0.0.0/12, 172.16.0.0/12, and 192.168.0.0/16.
          * @type {string || null}
          */
         this.CidrBlock = null;
@@ -26693,7 +27090,6 @@ class Route extends  AbstractModel {
 
         /**
          * Next hop address. You simply need to specify the gateway ID of a different next hop type, and the system will automatically match the next hop address.
-Important note: When the GatewayType is EIP, the GatewayId has a fixed value `0`
          * @type {string || null}
          */
         this.GatewayId = null;
@@ -27137,6 +27533,7 @@ module.exports = {
     DescribeCustomerGatewaysRequest: DescribeCustomerGatewaysRequest,
     ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse: ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse,
     ModifyNatGatewaySourceIpTranslationNatRuleRequest: ModifyNatGatewaySourceIpTranslationNatRuleRequest,
+    SetVpnGatewaysRenewFlagRequest: SetVpnGatewaysRenewFlagRequest,
     ModifyCcnRegionBandwidthLimitsTypeResponse: ModifyCcnRegionBandwidthLimitsTypeResponse,
     DescribeVpnGatewaysResponse: DescribeVpnGatewaysResponse,
     ModifyNetworkAclQuintupleEntriesRequest: ModifyNetworkAclQuintupleEntriesRequest,
@@ -27233,6 +27630,7 @@ module.exports = {
     DescribeSecurityGroupsRequest: DescribeSecurityGroupsRequest,
     RefreshDirectConnectGatewayRouteToNatGatewayRequest: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
     DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest: DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest,
+    ReturnNormalAddressesRequest: ReturnNormalAddressesRequest,
     ModifyNetworkAclAttributeResponse: ModifyNetworkAclAttributeResponse,
     AddBandwidthPackageResourcesResponse: AddBandwidthPackageResourcesResponse,
     DisassociateNetworkAclSubnetsResponse: DisassociateNetworkAclSubnetsResponse,
@@ -27268,6 +27666,7 @@ module.exports = {
     InstanceStatistic: InstanceStatistic,
     CreateVpnConnectionRequest: CreateVpnConnectionRequest,
     CcnRoute: CcnRoute,
+    DescribeTrafficPackagesRequest: DescribeTrafficPackagesRequest,
     DeleteSecurityGroupPoliciesRequest: DeleteSecurityGroupPoliciesRequest,
     VpnConnection: VpnConnection,
     DescribeCcnsRequest: DescribeCcnsRequest,
@@ -27303,6 +27702,7 @@ module.exports = {
     NatGateway: NatGateway,
     ReplaceRoutesRequest: ReplaceRoutesRequest,
     CreateCustomerGatewayResponse: CreateCustomerGatewayResponse,
+    TrafficPackage: TrafficPackage,
     WithdrawNotifyRoutesRequest: WithdrawNotifyRoutesRequest,
     DeleteServiceTemplateGroupResponse: DeleteServiceTemplateGroupResponse,
     DisassociateAddressRequest: DisassociateAddressRequest,
@@ -27376,6 +27776,7 @@ module.exports = {
     DirectConnectGateway: DirectConnectGateway,
     Price: Price,
     HaVipDisassociateAddressIpRequest: HaVipDisassociateAddressIpRequest,
+    ReturnNormalAddressesResponse: ReturnNormalAddressesResponse,
     DisableFlowLogsResponse: DisableFlowLogsResponse,
     DescribeBandwidthPackageResourcesResponse: DescribeBandwidthPackageResourcesResponse,
     DescribeCrossBorderComplianceResponse: DescribeCrossBorderComplianceResponse,
@@ -27475,6 +27876,7 @@ module.exports = {
     InquirePriceCreateDirectConnectGatewayRequest: InquirePriceCreateDirectConnectGatewayRequest,
     AttachNetworkInterfaceResponse: AttachNetworkInterfaceResponse,
     DisassociateNatGatewayAddressRequest: DisassociateNatGatewayAddressRequest,
+    DescribeTrafficPackagesResponse: DescribeTrafficPackagesResponse,
     DescribeServiceTemplatesResponse: DescribeServiceTemplatesResponse,
     DescribeRouteTablesRequest: DescribeRouteTablesRequest,
     ResetAttachCcnInstancesRequest: ResetAttachCcnInstancesRequest,
@@ -27509,6 +27911,7 @@ module.exports = {
     DeleteSecurityGroupPoliciesResponse: DeleteSecurityGroupPoliciesResponse,
     CreateVpcEndPointServiceResponse: CreateVpcEndPointServiceResponse,
     ModifyNetworkAclAttributeRequest: ModifyNetworkAclAttributeRequest,
+    SetVpnGatewaysRenewFlagResponse: SetVpnGatewaysRenewFlagResponse,
     DeleteVpnGatewayResponse: DeleteVpnGatewayResponse,
     DescribeHaVipsRequest: DescribeHaVipsRequest,
     UnassignPrivateIpAddressesResponse: UnassignPrivateIpAddressesResponse,

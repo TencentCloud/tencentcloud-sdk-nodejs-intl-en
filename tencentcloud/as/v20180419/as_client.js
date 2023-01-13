@@ -100,6 +100,7 @@ const DescribeAutoScalingInstancesResponse = models.DescribeAutoScalingInstances
 const EnhancedService = models.EnhancedService;
 const RunAutomationServiceEnabled = models.RunAutomationServiceEnabled;
 const DeleteLaunchConfigurationResponse = models.DeleteLaunchConfigurationResponse;
+const IPv6InternetAccessible = models.IPv6InternetAccessible;
 const DescribeScheduledActionsRequest = models.DescribeScheduledActionsRequest;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const DeleteScheduledActionRequest = models.DeleteScheduledActionRequest;

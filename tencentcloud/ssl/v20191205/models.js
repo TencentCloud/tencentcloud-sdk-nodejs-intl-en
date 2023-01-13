@@ -407,8 +407,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Alias = null;
 
         /**
-         * Status value. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: OV/EV certificate, information to be submitted; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Status. `0`: Reviewing; `1`: Approved; `2`: Unapproved; `3`: Expired; `4`: DNS record added for domain names of the DNS_AUTO verification type; `5`: Enterprise-grade certificate, pending submission; `6`: Canceling order; `7`: Canceled; `8`: Information submitted, pending confirmation letter upload; `9`: Revoking certificate; `10`: Revoked; `11`: Reissuing; `12`: Pending revocation confirmation letter upload; `13`: Pending information submission for the free certificate; `14`: Refunded.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
@@ -560,6 +560,62 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Tags = null;
 
+        /**
+         * Whether the expiration notification was ignored
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsIgnore = null;
+
+        /**
+         * Whether the certificate is a Chinese SM certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsSM = null;
+
+        /**
+         * Certificate algorithm
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EncryptAlgorithm = null;
+
+        /**
+         * Encryption algorithm of the uploaded CA certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.CAEncryptAlgorithms = null;
+
+        /**
+         * Expiration time of the uploaded CA certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.CAEndTimes = null;
+
+        /**
+         * Generic name of the uploaded CA certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.CACommonNames = null;
+
+        /**
+         * Prereview information of the certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PreAuditInfo || null}
+         */
+        this.PreAuditInfo = null;
+
+        /**
+         * Whether auto-renewal is enabled.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
     }
 
     /**
@@ -617,6 +673,19 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.Tags.push(obj);
             }
         }
+        this.IsIgnore = 'IsIgnore' in params ? params.IsIgnore : null;
+        this.IsSM = 'IsSM' in params ? params.IsSM : null;
+        this.EncryptAlgorithm = 'EncryptAlgorithm' in params ? params.EncryptAlgorithm : null;
+        this.CAEncryptAlgorithms = 'CAEncryptAlgorithms' in params ? params.CAEncryptAlgorithms : null;
+        this.CAEndTimes = 'CAEndTimes' in params ? params.CAEndTimes : null;
+        this.CACommonNames = 'CACommonNames' in params ? params.CACommonNames : null;
+
+        if (params.PreAuditInfo) {
+            let obj = new PreAuditInfo();
+            obj.deserialize(params.PreAuditInfo)
+            this.PreAuditInfo = obj;
+        }
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -1025,6 +1094,51 @@ class OperationLog extends  AbstractModel {
 }
 
 /**
+ * Root certificate
+ * @class
+ */
+class RootCertificates extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Chinese SM signature certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Sign = null;
+
+        /**
+         * Chinese SM encryption certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Encrypt = null;
+
+        /**
+         * Standard certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Standard = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sign = 'Sign' in params ? params.Sign : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
+        this.Standard = 'Standard' in params ? params.Standard : null;
+
+    }
+}
+
+/**
  * UploadCertificate request structure.
  * @class
  */
@@ -1230,6 +1344,18 @@ class ApplyCertificateRequest extends  AbstractModel {
          */
         this.OldCertificateId = null;
 
+        /**
+         * Benefit package ID, which is used to expand the free certificate package
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * Whether to delete the automatic domain name verification record after issuance, which is no by default. This parameter can be passed in only for domain names of the DNS_AUTO verification type.
+         * @type {boolean || null}
+         */
+        this.DeleteDnsAutoRecord = null;
+
     }
 
     /**
@@ -1251,6 +1377,8 @@ class ApplyCertificateRequest extends  AbstractModel {
         this.CsrKeyPassword = 'CsrKeyPassword' in params ? params.CsrKeyPassword : null;
         this.Alias = 'Alias' in params ? params.Alias : null;
         this.OldCertificateId = 'OldCertificateId' in params ? params.OldCertificateId : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.DeleteDnsAutoRecord = 'DeleteDnsAutoRecord' in params ? params.DeleteDnsAutoRecord : null;
 
     }
 }
@@ -2100,15 +2228,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.StatusName = null;
 
         /**
-         * Domain names associated with the certificate (including the primary domain name)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Multiple domain names included in the certificate (excluding the primary domain name, which uses the `Domain` field)
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.SubjectAltName = null;
 
         /**
-         * Whether the customer is a VIP customer
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Whether the certificate is a paid one.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IsVip = null;
@@ -2142,8 +2270,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SubmittedData = null;
 
         /**
-         * Whether the certificate can be reissued
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Whether the certificate can be renewed.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.RenewAble = null;
@@ -2161,6 +2289,48 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          * @type {Array.<Tags> || null}
          */
         this.Tags = null;
+
+        /**
+         * Root certificate.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RootCertificates || null}
+         */
+        this.RootCert = null;
+
+        /**
+         * Chinese SM encryption certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EncryptCert = null;
+
+        /**
+         * Private key of Chinese SM encryption
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EncryptPrivateKey = null;
+
+        /**
+         * SHA1 fingerprint of the signature certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CertFingerprint = null;
+
+        /**
+         * SHA1 fingerprint of the encryption certificate (for Chinese SM certificates only)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EncryptCertFingerprint = null;
+
+        /**
+         * Certificate algorithm
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EncryptAlgorithm = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2234,6 +2404,17 @@ Note: this field may return `null`, indicating that no valid values can be obtai
                 this.Tags.push(obj);
             }
         }
+
+        if (params.RootCert) {
+            let obj = new RootCertificates();
+            obj.deserialize(params.RootCert)
+            this.RootCert = obj;
+        }
+        this.EncryptCert = 'EncryptCert' in params ? params.EncryptCert : null;
+        this.EncryptPrivateKey = 'EncryptPrivateKey' in params ? params.EncryptPrivateKey : null;
+        this.CertFingerprint = 'CertFingerprint' in params ? params.CertFingerprint : null;
+        this.EncryptCertFingerprint = 'EncryptCertFingerprint' in params ? params.EncryptCertFingerprint : null;
+        this.EncryptAlgorithm = 'EncryptAlgorithm' in params ? params.EncryptAlgorithm : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2713,7 +2894,7 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * Number of certificates on each page. The default value is 20.
+         * Number of entries per page. Default value: `20`. Maximum value: `1000`.
          * @type {number || null}
          */
         this.Limit = null;
@@ -2743,7 +2924,7 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.ExpirationSort = null;
 
         /**
-         * Certificate status
+         * Certificate status. `0`: Reviewing; `1`: Approved; `2`: Unapproved; `3`: Expired; `4`: DNS record added; `5`: Enterprise-grade certificate, pending submission; `6`: Canceling order; `7`: Canceled; `8`: Information submitted, pending confirmation letter upload; `9`: Revoking certificate; `10`: Revoked; `11`: Reissuing; `12`: Pending revocation confirmation letter upload; `13`: Pending information submission for the free certificate.
          * @type {Array.<number> || null}
          */
         this.CertificateStatus = null;
@@ -2753,6 +2934,36 @@ class DescribeCertificatesRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Deployable = null;
+
+        /**
+         * Whether to filter uploaded hosted certificates. `1`: Yes; `0`: No.
+         * @type {number || null}
+         */
+        this.Upload = null;
+
+        /**
+         * Whether to filter renewable certificates. `1`: Yes; `0`: No.
+         * @type {number || null}
+         */
+        this.Renew = null;
+
+        /**
+         * Filter by source. `upload`: Uploaded certificate; `buy`: Tencent Cloud certificate. If this parameter is left empty, all certificates will be queried.
+         * @type {string || null}
+         */
+        this.FilterSource = null;
+
+        /**
+         * Whether to filter Chinese SM certificates. `1`: Yes; `0`: No.
+         * @type {number || null}
+         */
+        this.IsSM = null;
+
+        /**
+         * Whether to filter expiring certificates. `1`: Yes; `0`: No.
+         * @type {number || null}
+         */
+        this.FilterExpiring = null;
 
     }
 
@@ -2771,6 +2982,56 @@ class DescribeCertificatesRequest extends  AbstractModel {
         this.ExpirationSort = 'ExpirationSort' in params ? params.ExpirationSort : null;
         this.CertificateStatus = 'CertificateStatus' in params ? params.CertificateStatus : null;
         this.Deployable = 'Deployable' in params ? params.Deployable : null;
+        this.Upload = 'Upload' in params ? params.Upload : null;
+        this.Renew = 'Renew' in params ? params.Renew : null;
+        this.FilterSource = 'FilterSource' in params ? params.FilterSource : null;
+        this.IsSM = 'IsSM' in params ? params.IsSM : null;
+        this.FilterExpiring = 'FilterExpiring' in params ? params.FilterExpiring : null;
+
+    }
+}
+
+/**
+ * List of prereview information
+ * @class
+ */
+class PreAuditInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of years of the certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalPeriod = null;
+
+        /**
+         * Current year of the certificate
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.NowPeriod = null;
+
+        /**
+         * Certificate prereview manager ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ManagerId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalPeriod = 'TotalPeriod' in params ? params.TotalPeriod : null;
+        this.NowPeriod = 'NowPeriod' in params ? params.NowPeriod : null;
+        this.ManagerId = 'ManagerId' in params ? params.ManagerId : null;
 
     }
 }
@@ -2789,6 +3050,7 @@ module.exports = {
     CertificateExtra: CertificateExtra,
     DescribeCertificateResponse: DescribeCertificateResponse,
     OperationLog: OperationLog,
+    RootCertificates: RootCertificates,
     UploadCertificateRequest: UploadCertificateRequest,
     DescribeCertificateDetailRequest: DescribeCertificateDetailRequest,
     Tags: Tags,
@@ -2812,5 +3074,6 @@ module.exports = {
     SubmitCertificateInformationRequest: SubmitCertificateInformationRequest,
     SubmittedData: SubmittedData,
     DescribeCertificatesRequest: DescribeCertificatesRequest,
+    PreAuditInfo: PreAuditInfo,
 
 }

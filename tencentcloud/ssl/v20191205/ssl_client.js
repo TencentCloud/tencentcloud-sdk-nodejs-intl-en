@@ -29,6 +29,7 @@ const Certificates = models.Certificates;
 const CertificateExtra = models.CertificateExtra;
 const DescribeCertificateResponse = models.DescribeCertificateResponse;
 const OperationLog = models.OperationLog;
+const RootCertificates = models.RootCertificates;
 const UploadCertificateRequest = models.UploadCertificateRequest;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
 const Tags = models.Tags;
@@ -52,6 +53,7 @@ const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
 const SubmitCertificateInformationRequest = models.SubmitCertificateInformationRequest;
 const SubmittedData = models.SubmittedData;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
+const PreAuditInfo = models.PreAuditInfo;
 
 
 /**

@@ -191,6 +191,12 @@ Note: This field is default to empty
          */
         this.HpcClusterId = null;
 
+        /**
+         * IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+         * @type {IPv6InternetAccessible || null}
+         */
+        this.IPv6InternetAccessible = null;
+
     }
 
     /**
@@ -262,6 +268,12 @@ Note: This field is default to empty
         }
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
         this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
+
+        if (params.IPv6InternetAccessible) {
+            let obj = new IPv6InternetAccessible();
+            obj.deserialize(params.IPv6InternetAccessible)
+            this.IPv6InternetAccessible = obj;
+        }
 
     }
 }
@@ -938,6 +950,12 @@ Note: This field is default to empty
          */
         this.HpcClusterId = null;
 
+        /**
+         * IPv6 public network bandwidth configuration.
+         * @type {IPv6InternetAccessible || null}
+         */
+        this.IPv6InternetAccessible = null;
+
     }
 
     /**
@@ -1048,6 +1066,12 @@ Note: This field is default to empty
         }
         this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
         this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
+
+        if (params.IPv6InternetAccessible) {
+            let obj = new IPv6InternetAccessible();
+            obj.deserialize(params.IPv6InternetAccessible)
+            this.IPv6InternetAccessible = obj;
+        }
 
     }
 }
@@ -2645,6 +2669,12 @@ Note: This field is default to empty
          */
         this.HpcClusterId = null;
 
+        /**
+         * IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+         * @type {IPv6InternetAccessible || null}
+         */
+        this.IPv6InternetAccessible = null;
+
     }
 
     /**
@@ -2741,6 +2771,12 @@ Note: This field is default to empty
         }
         this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
         this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
+
+        if (params.IPv6InternetAccessible) {
+            let obj = new IPv6InternetAccessible();
+            obj.deserialize(params.IPv6InternetAccessible)
+            this.IPv6InternetAccessible = obj;
+        }
 
     }
 }
@@ -4456,6 +4492,12 @@ If a model in InstanceTypes does not exist or has been discontinued, a verificat
          */
         this.DiskTypePolicy = null;
 
+        /**
+         * IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+         * @type {IPv6InternetAccessible || null}
+         */
+        this.IPv6InternetAccessible = null;
+
     }
 
     /**
@@ -4542,6 +4584,12 @@ If a model in InstanceTypes does not exist or has been discontinued, a verificat
             this.InstanceChargePrepaid = obj;
         }
         this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
+
+        if (params.IPv6InternetAccessible) {
+            let obj = new IPv6InternetAccessible();
+            obj.deserialize(params.IPv6InternetAccessible)
+            this.IPv6InternetAccessible = obj;
+        }
 
     }
 }
@@ -5034,7 +5082,7 @@ class DescribeAutoScalingInstancesResponse extends  AbstractModel {
 }
 
 /**
- * This describes the conditions of enhancement services for the instance and their settings, such as the Agent of Cloud Security or Cloud Monitor.
+ * This describes the conditions and configurations of the enhanced services of the instance, such as cloud security, cloud monitor, TencentCloud Automation Tools, and other instance agents.
  * @class
  */
 class EnhancedService extends  AbstractModel {
@@ -5060,7 +5108,7 @@ class EnhancedService extends  AbstractModel {
         this.AutomationService = null;
 
         /**
-         * 
+         * Enable TAT service. If this parameter is not specified, the default logic is the same as that of the CVM instance. Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {RunAutomationServiceEnabled || null}
          */
         this.AutomationToolsService = null;
@@ -5158,6 +5206,53 @@ class DeleteLaunchConfigurationResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * This describes the IPv6 address public network accessibility of the instance created by a launch configuration and declares the public network usage billing method of the IPv6 address and the maximum bandwidth.
+ * @class
+ */
+class IPv6InternetAccessible extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Network billing mode. Valid values: TRAFFIC_POSTPAID_BY_HOUR, BANDWIDTH_PACKAGE. Default value: TRAFFIC_POSTPAID_BY_HOUR. For the current account type, see [Account Type Description](https://intl.cloud.tencent.com/document/product/1199/49090?from_cn_redirect=1#judge).
+<br><li> IPv6 supports `TRAFFIC_POSTPAID_BY_HOUR` under a bill-by-IP account.
+<br><li> IPv6 supports `BANDWIDTH_PACKAGE` under a bill-by-CVM account.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InternetChargeType = null;
+
+        /**
+         * Maximum outbound bandwidth of the public network, in Mbps. <br>The default value is 0, and no public network bandwidth is allocated to IPv6. The maximum bandwidth varies with the model, availability zone and billing mode. For more information, see [Public Network Bandwidth Cap](https://intl.cloud.tencent.com/document/product/213/12523?from_cn_redirect=1).
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * Bandwidth package ID. You can obtain the ID from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://intl.cloud.tencent.com/document/api/215/19209?from_cn_redirect=1) API.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BandwidthPackageId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.BandwidthPackageId = 'BandwidthPackageId' in params ? params.BandwidthPackageId : null;
 
     }
 }
@@ -8048,6 +8143,7 @@ module.exports = {
     EnhancedService: EnhancedService,
     RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     DeleteLaunchConfigurationResponse: DeleteLaunchConfigurationResponse,
+    IPv6InternetAccessible: IPv6InternetAccessible,
     DescribeScheduledActionsRequest: DescribeScheduledActionsRequest,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     DeleteScheduledActionRequest: DeleteScheduledActionRequest,

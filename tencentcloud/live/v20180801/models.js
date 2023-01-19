@@ -1590,7 +1590,8 @@ class DomainCertInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Creation time in UTC format.
+         * The creation time in UTC format.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -1610,7 +1611,8 @@ class DomainCertInfo extends  AbstractModel {
         this.CertType = null;
 
         /**
-         * Certificate expiration time in UTC format.
+         * The certificate expiration time in UTC format.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.CertExpireTime = null;
@@ -2242,7 +2244,8 @@ class DomainInfo extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Creation time.
+         * The time when the domain was added.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -2291,7 +2294,8 @@ class DomainInfo extends  AbstractModel {
         this.RentTag = null;
 
         /**
-         * Disused parameter, which can be ignored.
+         * A disused parameter.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.RentExpireTime = null;
@@ -4412,13 +4416,15 @@ class RuleInfo extends  AbstractModel {
         super();
 
         /**
-         * Rule creation time.
+         * The rule creation time.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Rule update time.
+         * The rule update time.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -8002,7 +8008,8 @@ class WatermarkInfo extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Creation time.
+         * The time when the watermark was added.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -9201,7 +9208,8 @@ class CertInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Creation time in UTC format.
+         * The creation time in UTC format.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.CreateTime = null;
@@ -9221,7 +9229,8 @@ class CertInfo extends  AbstractModel {
         this.CertType = null;
 
         /**
-         * Certificate expiration time in UTC format.
+         * The certificate expiration time in UTC format.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.CertExpireTime = null;
@@ -11614,13 +11623,15 @@ class CallBackRuleInfo extends  AbstractModel {
         super();
 
         /**
-         * Rule creation time.
+         * The rule creation time.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Rule update time.
+         * The rule update time.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -12113,7 +12124,8 @@ class LiveDomainCertBindings extends  AbstractModel {
         this.Status = null;
 
         /**
-         * The expiration time of the certificate.
+         * The certificate expiration time.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.CertExpireTime = null;
@@ -12132,6 +12144,7 @@ class LiveDomainCertBindings extends  AbstractModel {
 
         /**
          * The last updated time.
+Note: Beijing time (UTC+8) is used.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -13640,13 +13653,15 @@ class ForbidStreamInfo extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * Creation time.
+         * The creation time.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Forbidding expiration time.
+         * The end time.
+Note: Beijing time (UTC+8) is used.
          * @type {string || null}
          */
         this.ExpireTime = null;

@@ -52,7 +52,7 @@ const CreateImageSpriteTask2017 = models.CreateImageSpriteTask2017;
 const ClipFileInfo2017 = models.ClipFileInfo2017;
 const TempCertificate = models.TempCertificate;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
-const ManageTaskRequest = models.ManageTaskRequest;
+const AiSampleWord = models.AiSampleWord;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
 const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
@@ -64,6 +64,7 @@ const AiReviewPoliticalTaskInput = models.AiReviewPoliticalTaskInput;
 const AudioTransform = models.AudioTransform;
 const ModifySuperPlayerConfigRequest = models.ModifySuperPlayerConfigRequest;
 const ResetProcedureTemplateRequest = models.ResetProcedureTemplateRequest;
+const ContentReviewOcrResult = models.ContentReviewOcrResult;
 const ComposeMediaResponse = models.ComposeMediaResponse;
 const DescribeLicenseUsageDataResponse = models.DescribeLicenseUsageDataResponse;
 const UrlSignatureAuthPolicy = models.UrlSignatureAuthPolicy;
@@ -72,6 +73,7 @@ const DescribeStorageDataResponse = models.DescribeStorageDataResponse;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
 const ModifySubAppIdInfoRequest = models.ModifySubAppIdInfoRequest;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
+const ProcedureReviewAudioVideoTaskInput = models.ProcedureReviewAudioVideoTaskInput;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AudioTemplateInfo = models.AudioTemplateInfo;
@@ -128,6 +130,7 @@ const AiSampleFaceInfo = models.AiSampleFaceInfo;
 const ModifyVodDomainAccelerateConfigRequest = models.ModifyVodDomainAccelerateConfigRequest;
 const MediaProcessTaskAdaptiveDynamicStreamingResult = models.MediaProcessTaskAdaptiveDynamicStreamingResult;
 const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
+const FileReviewInfo = models.FileReviewInfo;
 const WatermarkTemplate = models.WatermarkTemplate;
 const CoverBySnapshotTaskOutput = models.CoverBySnapshotTaskOutput;
 const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
@@ -180,12 +183,16 @@ const AiRecognitionTaskAsrFullTextResultOutputSubtitleItem = models.AiRecognitio
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
 const DescribeFileAttributesResponse = models.DescribeFileAttributesResponse;
-const AiAnalysisResult = models.AiAnalysisResult;
+const LicenseUsageDataItem = models.LicenseUsageDataItem;
+const ReviewImageSegmentItem = models.ReviewImageSegmentItem;
 const ConcatFileInfo2017 = models.ConcatFileInfo2017;
+const ContentReviewResult = models.ContentReviewResult;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
 const ReduceMediaBitrateTask = models.ReduceMediaBitrateTask;
+const CreateReviewTemplateRequest = models.CreateReviewTemplateRequest;
 const DescribeMediaInfosResponse = models.DescribeMediaInfosResponse;
 const DeleteProcedureTemplateResponse = models.DeleteProcedureTemplateResponse;
+const DescribeReviewTemplatesResponse = models.DescribeReviewTemplatesResponse;
 const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
 const MediaMiniProgramReviewInfo = models.MediaMiniProgramReviewInfo;
 const ForbidMediaDistributionResponse = models.ForbidMediaDistributionResponse;
@@ -223,6 +230,7 @@ const AiReviewPornOcrTaskInput = models.AiReviewPornOcrTaskInput;
 const OcrWordsConfigureInfo = models.OcrWordsConfigureInfo;
 const CreateSuperPlayerConfigResponse = models.CreateSuperPlayerConfigResponse;
 const AiAnalysisTaskFrameTagOutput = models.AiAnalysisTaskFrameTagOutput;
+const DeleteReviewTemplateResponse = models.DeleteReviewTemplateResponse;
 const ModifyAdaptiveDynamicStreamingTemplateRequest = models.ModifyAdaptiveDynamicStreamingTemplateRequest;
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
 const DescribeCDNUsageDataResponse = models.DescribeCDNUsageDataResponse;
@@ -240,11 +248,13 @@ const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const AiAnalysisTaskHighlightOutput = models.AiAnalysisTaskHighlightOutput;
 const MediaSubtitleInput = models.MediaSubtitleInput;
 const ProcessMediaRequest = models.ProcessMediaRequest;
+const PornImageResult = models.PornImageResult;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
+const ModifyReviewTemplateRequest = models.ModifyReviewTemplateRequest;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
 const RestoreMediaResponse = models.RestoreMediaResponse;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
-const AiSampleWord = models.AiSampleWord;
+const ManageTaskRequest = models.ManageTaskRequest;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
 const ModifyAdaptiveDynamicStreamingTemplateResponse = models.ModifyAdaptiveDynamicStreamingTemplateResponse;
 const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
@@ -254,6 +264,7 @@ const ImageProcessingTemplate = models.ImageProcessingTemplate;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const ObjectConfigureInfoForUpdate = models.ObjectConfigureInfoForUpdate;
 const DeleteMediaRequest = models.DeleteMediaRequest;
+const DescribeReviewTemplatesRequest = models.DescribeReviewTemplatesRequest;
 const CreateSuperPlayerConfigRequest = models.CreateSuperPlayerConfigRequest;
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const ModifySubAppIdInfoResponse = models.ModifySubAppIdInfoResponse;
@@ -261,6 +272,7 @@ const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
 const ModifySubAppIdStatusResponse = models.ModifySubAppIdStatusResponse;
 const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
 const MediaDeleteItem = models.MediaDeleteItem;
+const PoliticalImageResult = models.PoliticalImageResult;
 const AiSamplePerson = models.AiSamplePerson;
 const MediaAdaptiveDynamicStreamingInfo = models.MediaAdaptiveDynamicStreamingInfo;
 const DescribeDailyPlayStatFileListRequest = models.DescribeDailyPlayStatFileListRequest;
@@ -308,12 +320,13 @@ const ModifySubAppIdStatusRequest = models.ModifySubAppIdStatusRequest;
 const CreateSubAppIdResponse = models.CreateSubAppIdResponse;
 const CreateWatermarkTemplateResponse = models.CreateWatermarkTemplateResponse;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
+const ModifyReviewTemplateResponse = models.ModifyReviewTemplateResponse;
 const DescribeImageProcessingTemplatesRequest = models.DescribeImageProcessingTemplatesRequest;
 const ResetProcedureTemplateResponse = models.ResetProcedureTemplateResponse;
 const ProhibitedConfigureInfo = models.ProhibitedConfigureInfo;
 const DrmStreamingsInfo = models.DrmStreamingsInfo;
 const AiReviewTerrorismOcrTaskOutput = models.AiReviewTerrorismOcrTaskOutput;
-const LicenseUsageDataItem = models.LicenseUsageDataItem;
+const AiAnalysisResult = models.AiAnalysisResult;
 const ReduceMediaBitrateAdaptiveDynamicStreamingResult = models.ReduceMediaBitrateAdaptiveDynamicStreamingResult;
 const ImageWatermarkInputForUpdate = models.ImageWatermarkInputForUpdate;
 const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesRequest;
@@ -321,6 +334,7 @@ const MediaTranscodeInfo = models.MediaTranscodeInfo;
 const ResolutionNameInfo = models.ResolutionNameInfo;
 const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResultItem;
 const ParseStreamingManifestRequest = models.ParseStreamingManifestRequest;
+const ReviewImageResult = models.ReviewImageResult;
 const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
 const AiAnalysisTaskTagInput = models.AiAnalysisTaskTagInput;
 const MediaTrackItem = models.MediaTrackItem;
@@ -340,6 +354,7 @@ const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPolitica
 const DeletePersonSampleResponse = models.DeletePersonSampleResponse;
 const CreateSnapshotByTimeOffsetTemplateResponse = models.CreateSnapshotByTimeOffsetTemplateResponse;
 const ModifyContentReviewTemplateRequest = models.ModifyContentReviewTemplateRequest;
+const DeleteReviewTemplateRequest = models.DeleteReviewTemplateRequest;
 const AttachMediaSubtitlesResponse = models.AttachMediaSubtitlesResponse;
 const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
 const CreateAdaptiveDynamicStreamingTemplateResponse = models.CreateAdaptiveDynamicStreamingTemplateResponse;
@@ -417,6 +432,7 @@ const ComposeMediaTaskOutput = models.ComposeMediaTaskOutput;
 const DescribeMediaInfosRequest = models.DescribeMediaInfosRequest;
 const ModifyPersonSampleRequest = models.ModifyPersonSampleRequest;
 const AsrFullTextConfigureInfo = models.AsrFullTextConfigureInfo;
+const TerrorismImageResult = models.TerrorismImageResult;
 const DeleteVodDomainRequest = models.DeleteVodDomainRequest;
 const DescribeDrmKeyProviderInfoResponse = models.DescribeDrmKeyProviderInfoResponse;
 const ExtractTraceWatermarkResponse = models.ExtractTraceWatermarkResponse;
@@ -477,6 +493,7 @@ const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
 const AiReviewPoliticalTaskOutput = models.AiReviewPoliticalTaskOutput;
 const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
+const ReviewImageResponse = models.ReviewImageResponse;
 const DescribeStorageRegionsResponse = models.DescribeStorageRegionsResponse;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const ProcedureTask = models.ProcedureTask;
@@ -518,6 +535,7 @@ const DrmStreamingsInfoForUpdate = models.DrmStreamingsInfoForUpdate;
 const ReviewAudioVideoResponse = models.ReviewAudioVideoResponse;
 const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
+const ReviewTemplate = models.ReviewTemplate;
 const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
 const ImageTransform = models.ImageTransform;
@@ -544,6 +562,7 @@ const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
 const CreateSubAppIdRequest = models.CreateSubAppIdRequest;
 const DescribeProcedureTemplatesResponse = models.DescribeProcedureTemplatesResponse;
 const SearchMediaRequest = models.SearchMediaRequest;
+const DynamicRangeInfo = models.DynamicRangeInfo;
 const CreateSampleSnapshotTemplateRequest = models.CreateSampleSnapshotTemplateRequest;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
 const AudioVolumeParam = models.AudioVolumeParam;
@@ -564,6 +583,7 @@ const OcrFullTextConfigureInfo = models.OcrFullTextConfigureInfo;
 const CommitUploadRequest = models.CommitUploadRequest;
 const WatermarkCycleConfigForUpdate = models.WatermarkCycleConfigForUpdate;
 const SnapshotByTimeOffsetTask2017 = models.SnapshotByTimeOffsetTask2017;
+const ReviewInfo = models.ReviewInfo;
 const MediaClassInfo = models.MediaClassInfo;
 const DescribeTranscodeTemplatesResponse = models.DescribeTranscodeTemplatesResponse;
 const DeleteAnimatedGraphicsTemplateRequest = models.DeleteAnimatedGraphicsTemplateRequest;
@@ -572,6 +592,7 @@ const DescribeAnimatedGraphicsTemplatesResponse = models.DescribeAnimatedGraphic
 const MediaAiAnalysisFrameTagItem = models.MediaAiAnalysisFrameTagItem;
 const DescribeImageProcessingTemplatesResponse = models.DescribeImageProcessingTemplatesResponse;
 const SampleSnapshotTaskInput = models.SampleSnapshotTaskInput;
+const ReviewImageRequest = models.ReviewImageRequest;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
@@ -588,6 +609,7 @@ const DescribeFileAttributesRequest = models.DescribeFileAttributesRequest;
 const MediaOutputInfo = models.MediaOutputInfo;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const HighlightSegmentItem = models.HighlightSegmentItem;
+const CreateReviewTemplateResponse = models.CreateReviewTemplateResponse;
 const DeleteWatermarkTemplateResponse = models.DeleteWatermarkTemplateResponse;
 const ComposeMediaOutput = models.ComposeMediaOutput;
 const PullUploadTask = models.PullUploadTask;
@@ -728,10 +750,12 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to initiate a processing task for a VOD video with a task flow template.
+     * This API is used to start a task flow on a video.
 There are two ways to create a task flow template:
 1. Create and modify a task flow template in the console;
-2. Create a task flow template through the task flow template API.
+2. Create a task flow template using the `CreateProcedureTemplate` API.
+
+If event notifications are used, the event type for moderation tasks is [ReviewAudioVideoComplete](https://intl.cloud.tencent.com/document/product/266/81258?from_cn_redirect=1), and that for other tasks is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
      * @param {ProcessMediaByProcedureRequest} req
      * @param {function(string, ProcessMediaByProcedureResponse):void} cb
      * @public
@@ -802,16 +826,14 @@ This API returns the video content duration for intelligent recognition in secon
     }
 
     /**
-     * This API is used to modify a custom video content analysis template.
-
-Note: templates with an ID below 10000 are preset and cannot be modified.
-     * @param {ModifyAIAnalysisTemplateRequest} req
-     * @param {function(string, ModifyAIAnalysisTemplateResponse):void} cb
+     * This API is used to query image processing templates. You can specify the filters as well as the offset to start returning records from.
+     * @param {DescribeImageProcessingTemplatesRequest} req
+     * @param {function(string, DescribeImageProcessingTemplatesResponse):void} cb
      * @public
      */
-    ModifyAIAnalysisTemplate(req, cb) {
-        let resp = new ModifyAIAnalysisTemplateResponse();
-        this.request("ModifyAIAnalysisTemplate", req, resp, cb);
+    DescribeImageProcessingTemplates(req, cb) {
+        let resp = new DescribeImageProcessingTemplatesResponse();
+        this.request("DescribeImageProcessingTemplates", req, resp, cb);
     }
 
     /**
@@ -932,7 +954,7 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to reset a custom task flow template.  
+     * This API is used to modify a custom task flow template.
      * @param {ResetProcedureTemplateRequest} req
      * @param {function(string, ResetProcedureTemplateResponse):void} cb
      * @public
@@ -997,6 +1019,18 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
+     * This API is used to modify a custom moderation template.
+> The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+     * @param {ModifyReviewTemplateRequest} req
+     * @param {function(string, ModifyReviewTemplateResponse):void} cb
+     * @public
+     */
+    ModifyReviewTemplate(req, cb) {
+        let resp = new ModifyReviewTemplateResponse();
+        this.request("ModifyReviewTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to query daily playback license requests in a specified time period.
    1. You can query statistics from the last 365 days.
    2. The maximum query period is 90 days.
@@ -1046,15 +1080,15 @@ Note: templates with an ID below 10000 are preset and cannot be modified.
     }
 
     /**
-     * This API is used to delete an acceleration domain name from VOD.
-1. Before deleting a domain name, disable its acceleration in all regions.
-     * @param {DeleteVodDomainRequest} req
-     * @param {function(string, DeleteVodDomainResponse):void} cb
+     * This API is used to delete a custom moderation template.
+> The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+     * @param {DeleteReviewTemplateRequest} req
+     * @param {function(string, DeleteReviewTemplateResponse):void} cb
      * @public
      */
-    DeleteVodDomain(req, cb) {
-        let resp = new DeleteVodDomainResponse();
-        this.request("DeleteVodDomain", req, resp, cb);
+    DeleteReviewTemplate(req, cb) {
+        let resp = new DeleteReviewTemplateResponse();
+        this.request("DeleteReviewTemplate", req, resp, cb);
     }
 
     /**
@@ -1115,7 +1149,8 @@ The output file is in MP4 or MP3 format. In the callback for media composition, 
     }
 
     /**
-     * This API is used to create custom intelligent video content recognition templates. Up to 50 templates can be created.
+     * We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [CreateReviewTemplate](https://intl.cloud.tencent.com/document/api/266/84391?from_cn_redirect=1).
+This API is used to create a custom audio/video moderation template. Up to 50 templates can be created in total.
      * @param {CreateContentReviewTemplateRequest} req
      * @param {function(string, CreateContentReviewTemplateResponse):void} cb
      * @public
@@ -1268,7 +1303,6 @@ This API is used to delete a player configuration.
      * This API is used to start a moderation task on a file stored in VOD to detect non-compliant content in images, text, speech, and voice.
 
 If event notifications are used, the event type is [ReviewAudioVideoComplete](https://intl.cloud.tencent.com/document/product/266/81258?from_cn_redirect=1).
-
      * @param {ReviewAudioVideoRequest} req
      * @param {function(string, ReviewAudioVideoResponse):void} cb
      * @public
@@ -1380,7 +1414,8 @@ If event notifications are used, the event type is [ReviewAudioVideoComplete](ht
     }
 
     /**
-     * This API is used to delete custom intelligent video content recognition templates.
+     * We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [DeleteReviewTemplate](https://intl.cloud.tencent.com/document/api/266/84390?from_cn_redirect=1).
+This API is used to delete a custom audio/video moderation template.
      * @param {DeleteContentReviewTemplateRequest} req
      * @param {function(string, DeleteContentReviewTemplateResponse):void} cb
      * @public
@@ -1489,7 +1524,8 @@ This API is used to create a player configuration. Up to 100 configurations can 
     }
 
     /**
-     * This API is used to get the list of intelligent video content recognition template details according to unique template IDs. The return result includes all eligible custom and [preset intelligent video content recognition templates](https://intl.cloud.tencent.com/document/product/266/33932).
+     * We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [DescribeReviewTemplates](https://intl.cloud.tencent.com/document/api/266/84389?from_cn_redirect=1).
+This API is used to get the information of custom and [preset](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.AE.A1.E6.A0.B8.E6.A8.A1.E6.9D.BF) audio/video moderation templates based on template IDs.
      * @param {DescribeContentReviewTemplatesRequest} req
      * @param {function(string, DescribeContentReviewTemplatesResponse):void} cb
      * @public
@@ -1508,6 +1544,29 @@ This API is used to create a player configuration. Up to 100 configurations can 
     DeleteImageProcessingTemplate(req, cb) {
         let resp = new DeleteImageProcessingTemplateResponse();
         this.request("DeleteImageProcessingTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to initiate a media processing task on a VOD file. The task may include:
+1. Video transcoding (with watermark)
+2. Animated image generating
+3. Time point screenshot
+4. Sampled screenshot
+5. Image sprite generating
+6. Taking a screenshot to use as the thumbnail
+7. Adaptive bitrate streaming and encryption
+8. Moderation (pornographic, terrorist, and politically sensitive content). We <font color=red>do not recommend</font> using this API to initiate a moderation task. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+9. Content analysis for labeling, categorization, thumbnail generation, or labeling by frame.
+10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
+
+If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+     * @param {ProcessMediaRequest} req
+     * @param {function(string, ProcessMediaResponse):void} cb
+     * @public
+     */
+    ProcessMedia(req, cb) {
+        let resp = new ProcessMediaResponse();
+        this.request("ProcessMedia", req, resp, cb);
     }
 
     /**
@@ -1637,14 +1696,16 @@ This API is used to create a player configuration. Up to 100 configurations can 
     }
 
     /**
-     * This API is used to query image processing templates. You can specify the filters as well as the offset to start returning records from.
-     * @param {DescribeImageProcessingTemplatesRequest} req
-     * @param {function(string, DescribeImageProcessingTemplatesResponse):void} cb
+     * This API is used to modify a custom video content analysis template.
+
+Note: templates with an ID below 10000 are preset and cannot be modified.
+     * @param {ModifyAIAnalysisTemplateRequest} req
+     * @param {function(string, ModifyAIAnalysisTemplateResponse):void} cb
      * @public
      */
-    DescribeImageProcessingTemplates(req, cb) {
-        let resp = new DescribeImageProcessingTemplatesResponse();
-        this.request("DescribeImageProcessingTemplates", req, resp, cb);
+    ModifyAIAnalysisTemplate(req, cb) {
+        let resp = new ModifyAIAnalysisTemplateResponse();
+        this.request("ModifyAIAnalysisTemplate", req, resp, cb);
     }
 
     /**
@@ -1784,6 +1845,18 @@ This API is used to modify a player configuration.
     }
 
     /**
+     * This API is used to create a custom moderation template. Up to 50 templates can be created in total.
+> The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+     * @param {CreateReviewTemplateRequest} req
+     * @param {function(string, CreateReviewTemplateResponse):void} cb
+     * @public
+     */
+    CreateReviewTemplate(req, cb) {
+        let resp = new CreateReviewTemplateResponse();
+        this.request("CreateReviewTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of video content recognition templates based on unique template ID. The return result includes all eligible custom and [preset video content recognition templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E8.AF.86.E5.88.AB.E6.A8.A1.E6.9D.BF).
      * @param {DescribeAIRecognitionTemplatesRequest} req
      * @param {function(string, DescribeAIRecognitionTemplatesResponse):void} cb
@@ -1814,6 +1887,18 @@ This API is used to modify a player configuration.
     DescribeSubAppIds(req, cb) {
         let resp = new DescribeSubAppIdsResponse();
         this.request("DescribeSubAppIds", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the information of moderation templates.
+> The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+     * @param {DescribeReviewTemplatesRequest} req
+     * @param {function(string, DescribeReviewTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeReviewTemplates(req, cb) {
+        let resp = new DescribeReviewTemplatesResponse();
+        this.request("DescribeReviewTemplates", req, resp, cb);
     }
 
     /**
@@ -1960,6 +2045,17 @@ This API is used to modify a player configuration.
     }
 
     /**
+     * This API is used to moderate an image stored in VOD (detect pornographic and terrorist content).><li>The image file must be smaller than 5 MB.</li> ><li>To ensure the accuracy of moderation results, the image resolution must be higher than 256 x 256 px.</li> ><li>The format must be PNG, JPG, JPEG, BMP, GIF, or WEBP.</li>
+     * @param {ReviewImageRequest} req
+     * @param {function(string, ReviewImageResponse):void} cb
+     * @public
+     */
+    ReviewImage(req, cb) {
+        let resp = new ReviewImageResponse();
+        this.request("ReviewImage", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a custom sampled screencapturing template.
      * @param {DeleteSampleSnapshotTemplateRequest} req
      * @param {function(string, DeleteSampleSnapshotTemplateResponse):void} cb
@@ -2004,17 +2100,18 @@ Clipping for temporary sharing is lightweight and incurs no additional storage f
     }
 
     /**
-     * 1. This API can get multiple types of information of multiple media files, including:
-    1. Basic information (basicInfo): media name, category, playback address, cover image, etc.
-    2. Metadata (metaData): size, duration, video stream information, audio stream information, etc.
-    3. Information of the transcoding result (transcodeInfo): addresses, video stream parameters, and audio stream parameters of the media files with various specifications generated by transcoding a media file.
-    4. Information of the animated image generating result (animatedGraphicsInfo): information of an animated image (such as .gif) generated from a video.
-    5. Information of a sampled screenshot (sampleSnapshotInfo): information of a sampled screenshot of a video.
-    6. Information of an image sprite (imageSpriteInfo): information of an image sprite generated from a video.
-    7. Information of a time point screenshot (snapshotByTimeOffsetInfo): information of a time point screenshot of a video.
-    8. Information of a timestamp (keyFrameDescInfo): information of a timestamp set for a video.
-    9. Information of transcoding to adaptive bitrate streaming (adaptiveDynamicStreamingInfo): specification, encryption type, container format, etc.
-2. The return packet can be configured to only contain certain information.
+     * 1. This API is used to get the information of multiple media files. Specifically, the information returned is as follows:
+    1. `basicInfo`: Basic information including the file name, category, playback URL, and thumbnail.
+    2. `metaData`: Metadata including the file size, duration, video stream information, and audio stream information.
+    3. `transcodeInfo`: Transcoding information including the URLs, video stream parameters, and audio stream parameters of transcoding outputs.
+    4. `animatedGraphicsInfo`: The information of the animated images (such as GIF images) generated.
+    5. `sampleSnapshotInfo`: The information of the sampled screenshots generated.
+    6. `imageSpriteInfo`: The information of the image sprites generated.
+    7. `snapshotByTimeOffsetInfo`: The information of the time point screenshots generated.
+    8. `keyFrameDescInfo`: The video timestamp information.
+    9. `adaptiveDynamicStreamingInfo`: Adaptive bitrate information including the specifications, encryption type, and formats of the streams.
+    10. `reviewInfo`: Moderation details for audio/video content and thumbnails.
+2. You can specify what information to return.
      * @param {DescribeMediaInfosRequest} req
      * @param {function(string, DescribeMediaInfosResponse):void} cb
      * @public
@@ -2047,7 +2144,8 @@ Clipping for temporary sharing is lightweight and incurs no additional storage f
     }
 
     /**
-     * This API is used to modify custom intelligent video content recognition templates.
+     * We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [ModifyReviewTemplate](https://intl.cloud.tencent.com/document/api/266/84388?from_cn_redirect=1).
+This API is used to modify a custom audio/video moderation template.
      * @param {ModifyContentReviewTemplateRequest} req
      * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
      * @public
@@ -2058,26 +2156,15 @@ Clipping for temporary sharing is lightweight and incurs no additional storage f
     }
 
     /**
-     * This API is used to initiate a media processing task on a VOD file. The task may include:
-1. Video transcoding (with watermark)
-2. Animated image generating
-3. Time point screenshot
-4. Sampled screenshot
-5. Image sprite generating
-6. Taking a screenshot to use as the thumbnail
-7. Adaptive bitrate streaming and encryption
-8. Detecting pornographic, terrorist, and politically sensitive content
-9. Content analysis for labeling, categorization, thumbnail generation, or frame-specific labeling
-10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
-
-If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
-     * @param {ProcessMediaRequest} req
-     * @param {function(string, ProcessMediaResponse):void} cb
+     * This API is used to delete an acceleration domain name from VOD.
+1. Before deleting a domain name, disable its acceleration in all regions.
+     * @param {DeleteVodDomainRequest} req
+     * @param {function(string, DeleteVodDomainResponse):void} cb
      * @public
      */
-    ProcessMedia(req, cb) {
-        let resp = new ProcessMediaResponse();
-        this.request("ProcessMedia", req, resp, cb);
+    DeleteVodDomain(req, cb) {
+        let resp = new DeleteVodDomainResponse();
+        this.request("DeleteVodDomain", req, resp, cb);
     }
 
     /**

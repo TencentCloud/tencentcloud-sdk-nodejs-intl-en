@@ -409,6 +409,14 @@ class ReviewAudioVideoTaskInput extends  AbstractModel {
          */
         this.Definition = null;
 
+        /**
+         * The type of moderated content. Valid values:
+<li>`Media`: The original audio/video.</li>
+<li>`Cover`: Thumbnails.</li>
+         * @type {Array.<string> || null}
+         */
+        this.ReviewContents = null;
+
     }
 
     /**
@@ -420,6 +428,7 @@ class ReviewAudioVideoTaskInput extends  AbstractModel {
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ReviewContents = 'ReviewContents' in params ? params.ReviewContents : null;
 
     }
 }
@@ -2226,31 +2235,42 @@ Note: This field may return `null`, indicating that no valid value can be found.
 }
 
 /**
- * ManageTask request structure.
+ * AI-based sample management - keyword output information.
  * @class
  */
-class ManageTaskRequest extends  AbstractModel {
+class AiSampleWord extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video processing task ID.
+         * Keyword.
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.Keyword = null;
 
         /**
-         * Operation type. Valid value:
-<li>Abort: terminate a task. You can only terminate initiated tasks in `WAITING` status.</li>
+         * Keyword tag.
+         * @type {Array.<string> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * Keyword use case.
+         * @type {Array.<string> || null}
+         */
+        this.UsageSet = null;
+
+        /**
+         * Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
-        this.OperationType = null;
+        this.CreateTime = null;
 
         /**
-         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-         * @type {number || null}
+         * Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
          */
-        this.SubAppId = null;
+        this.UpdateTime = null;
 
     }
 
@@ -2261,9 +2281,11 @@ class ManageTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.OperationType = 'OperationType' in params ? params.OperationType : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.TagSet = 'TagSet' in params ? params.TagSet : null;
+        this.UsageSet = 'UsageSet' in params ? params.UsageSet : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -2942,6 +2964,12 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
@@ -2954,7 +2982,8 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
         this.MediaProcessTask = null;
 
         /**
-         * Parameter of AI-based content audit task.
+         * The information of an intelligent moderation task\*.
+<font color=red>\*: This parameter is used by our old moderation templates and is not recommended. Please use `ReviewAudioVideoTask` instead.</font> 
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
@@ -2972,10 +3001,10 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
         this.AiRecognitionTask = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
+         * The information of the moderation task.
+         * @type {ProcedureReviewAudioVideoTaskInput || null}
          */
-        this.SubAppId = null;
+        this.ReviewAudioVideoTask = null;
 
     }
 
@@ -2987,6 +3016,7 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
         if (params.MediaProcessTask) {
@@ -3012,7 +3042,64 @@ class ResetProcedureTemplateRequest extends  AbstractModel {
             obj.deserialize(params.AiRecognitionTask)
             this.AiRecognitionTask = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+        if (params.ReviewAudioVideoTask) {
+            let obj = new ProcedureReviewAudioVideoTaskInput();
+            obj.deserialize(params.ReviewAudioVideoTask)
+            this.ReviewAudioVideoTask = obj;
+        }
+
+    }
+}
+
+/**
+ * The result for OCR-based image moderation.
+ * @class
+ */
+class ContentReviewOcrResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The confidence score for the OCR-based moderation result. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The suggestion for handling the suspicious content detected based on OCR. Valid values:
+<li>pass/li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The list of suspicious keywords detected based on OCR.
+         * @type {Array.<string> || null}
+         */
+        this.KeywordSet = null;
+
+        /**
+         * The coordinates (pixel) of the top-left and bottom-right corners of the frame where a suspicious keyword appears. Format: [x1, y1, x2, y2].
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
 
     }
 }
@@ -3399,6 +3486,44 @@ class DeletePersonSampleRequest extends  AbstractModel {
         }
         this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * The moderation task details of a task flow template.
+ * @class
+ */
+class ProcedureReviewAudioVideoTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The moderation template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The type of moderated content. Valid values:
+<li>`Media`: The original audio/video.</li>
+<li>`Cover`: Thumbnails.</li>
+If this parameter is not specified or an empty array is passed in, `Media` will be used.
+         * @type {Array.<string> || null}
+         */
+        this.ReviewContents = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ReviewContents = 'ReviewContents' in params ? params.ReviewContents : null;
 
     }
 }
@@ -4928,6 +5053,12 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
+         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Template description. Length limit: 256 characters.
          * @type {string || null}
          */
@@ -4940,7 +5071,8 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         this.MediaProcessTask = null;
 
         /**
-         * Intelligent recognition task
+         * The information of the intelligent moderation task\*.
+<font color=red>\*: This parameter is used by our old moderation templates and is not recommended. Please use `ReviewAudioVideoTask` instead.</font> 
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
@@ -4958,10 +5090,10 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
         this.AiRecognitionTask = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
+         * The information of the moderation task.
+         * @type {ProcedureReviewAudioVideoTaskInput || null}
          */
-        this.SubAppId = null;
+        this.ReviewAudioVideoTask = null;
 
     }
 
@@ -4973,6 +5105,7 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
         if (params.MediaProcessTask) {
@@ -4998,7 +5131,12 @@ class CreateProcedureTemplateRequest extends  AbstractModel {
             obj.deserialize(params.AiRecognitionTask)
             this.AiRecognitionTask = obj;
         }
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+        if (params.ReviewAudioVideoTask) {
+            let obj = new ProcedureReviewAudioVideoTaskInput();
+            obj.deserialize(params.ReviewAudioVideoTask)
+            this.ReviewAudioVideoTask = obj;
+        }
 
     }
 }
@@ -5254,8 +5392,16 @@ class ReviewAudioVideoRequest extends  AbstractModel {
         this.SubAppId = null;
 
         /**
-         * The moderation template ID. Valid values:
-<li>`10` (default): The preset template, which can detect inappropriate information with labels including pornographic (`Porn`), terrorist (`Terror`), and politically sensitive (`Polity`).</li>
+         * The type of moderated content. Valid values:
+<li>`Media`: The original audio/video.</li>
+<li>`Cover`: Thumbnails.</li>
+If this parameter is not specified or an empty array is passed in, `Media` will be used.
+         * @type {Array.<string> || null}
+         */
+        this.ReviewContents = null;
+
+        /**
+         * The moderation template ID. Valid values: <li>10 (default): The preset template, whose violation labels are `Porn` and `Terror`.</li>
          * @type {number || null}
          */
         this.Definition = null;
@@ -5295,6 +5441,7 @@ class ReviewAudioVideoRequest extends  AbstractModel {
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.ReviewContents = 'ReviewContents' in params ? params.ReviewContents : null;
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
@@ -5679,11 +5826,16 @@ class FileUploadTask extends  AbstractModel {
         this.MediaBasicInfo = null;
 
         /**
-         * If a video processing flow is specified when a video is uploaded, this field will be the ID of the task flow.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The task ID for the task type `Procedure`. If a task flow is specified for [uploaded media](https://intl.cloud.tencent.com/document/product/266/33475?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E5.8F.91.E8.B5.B7), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
          * @type {string || null}
          */
         this.ProcedureTaskId = null;
+
+        /**
+         * The task ID for the task type `ReviewAudioVideo`. If a task flow is specified for [uploaded media](https://intl.cloud.tencent.com/document/product/266/33475?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E5.8F.91.E8.B5.B7), and the task flow includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+         * @type {string || null}
+         */
+        this.ReviewAudioVideoTaskId = null;
 
         /**
          * Metadata, such as size, duration, video stream information, audio stream information, etc.
@@ -5709,6 +5861,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.MediaBasicInfo = obj;
         }
         this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
+        this.ReviewAudioVideoTaskId = 'ReviewAudioVideoTaskId' in params ? params.ReviewAudioVideoTaskId : null;
 
         if (params.MetaData) {
             let obj = new MediaMetaData();
@@ -6453,6 +6606,57 @@ There can be up to 10 tags, each with a length limit of 16 characters.
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+
+    }
+}
+
+/**
+ * File moderation information.
+ * @class
+ */
+class FileReviewInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Audio/Video moderation details\*.
+
+\* This parameter only contains the information of moderation tasks initiated by the [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) API.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReviewInfo || null}
+         */
+        this.MediaReviewInfo = null;
+
+        /**
+         * Thumbnail moderation details\*.
+
+\* This parameter only contains the information of moderation tasks initiated by the [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) API.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReviewInfo || null}
+         */
+        this.CoverReviewInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MediaReviewInfo) {
+            let obj = new ReviewInfo();
+            obj.deserialize(params.MediaReviewInfo)
+            this.MediaReviewInfo = obj;
+        }
+
+        if (params.CoverReviewInfo) {
+            let obj = new ReviewInfo();
+            obj.deserialize(params.CoverReviewInfo)
+            this.CoverReviewInfo = obj;
+        }
 
     }
 }
@@ -9135,10 +9339,16 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Output = null;
 
         /**
-         * If a video processing flow is specified when a video splitting task is initiated, this field will be the task flow ID.
+         * The task ID for the task type `Procedure`. If a task flow (`ProcedureName`) is specified by [SplitMedia](https://intl.cloud.tencent.com/document/api/266/51098?from_cn_redirect=1), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
          * @type {string || null}
          */
         this.ProcedureTaskId = null;
+
+        /**
+         * The task ID for the task type `ReviewAudioVideo`. If a task flow (`ProcedureName`) is specified by [SplitMedia](https://intl.cloud.tencent.com/document/api/266/51098?from_cn_redirect=1), and the task flow includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+         * @type {string || null}
+         */
+        this.ReviewAudioVideoTaskId = null;
 
     }
 
@@ -9162,6 +9372,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
             this.Output = obj;
         }
         this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
+        this.ReviewAudioVideoTaskId = 'ReviewAudioVideoTaskId' in params ? params.ReviewAudioVideoTaskId : null;
 
     }
 }
@@ -9403,58 +9614,24 @@ class DescribeFileAttributesResponse extends  AbstractModel {
 }
 
 /**
- * Intelligent analysis result
+ * The license request statistics.
  * @class
  */
-class AiAnalysisResult extends  AbstractModel {
+class LicenseUsageDataItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task type. Valid values:
-<li>Classification: intelligent categorization</li>
-<li>Cover: intelligent cover generating</li>
-<li>Tag: intelligent tagging</li>
-<li>FrameTag: intelligent frame tagging</li>
-<li>Highlight: intelligent highlight generating</li>
+         * The start time (in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)) of the data returned. For example, if the granularity is a day, `2018-12-01T00:00:00+08:00` indicates that the data is for the whole day of December 1, 2018.
          * @type {string || null}
          */
-        this.Type = null;
+        this.Time = null;
 
         /**
-         * Query result of intelligent categorization task in video content analysis, which is valid if task type is `Classification`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiAnalysisTaskClassificationResult || null}
+         * The number of license requests.
+         * @type {number || null}
          */
-        this.ClassificationTask = null;
-
-        /**
-         * Query result of intelligent cover generating task in video content analysis, which is valid if task type is `Cover`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiAnalysisTaskCoverResult || null}
-         */
-        this.CoverTask = null;
-
-        /**
-         * Query result of intelligent tagging task in video content analysis, which is valid if task type is `Tag`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiAnalysisTaskTagResult || null}
-         */
-        this.TagTask = null;
-
-        /**
-         * Query result of intelligent frame-specific tagging task in video content analysis, which is valid if task type is `FrameTag`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiAnalysisTaskFrameTagResult || null}
-         */
-        this.FrameTagTask = null;
-
-        /**
-         * Query result of an intelligent highlight generating task in video content analysis, which is valid when task type is `Highlight`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiAnalysisTaskHighlightResult || null}
-         */
-        this.HighlightTask = null;
+        this.Count = null;
 
     }
 
@@ -9465,37 +9642,89 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
-        if (params.ClassificationTask) {
-            let obj = new AiAnalysisTaskClassificationResult();
-            obj.deserialize(params.ClassificationTask)
-            this.ClassificationTask = obj;
-        }
+    }
+}
 
-        if (params.CoverTask) {
-            let obj = new AiAnalysisTaskCoverResult();
-            obj.deserialize(params.CoverTask)
-            this.CoverTask = obj;
-        }
+/**
+ * The information of an image moderation segment.
+ * @class
+ */
+class ReviewImageSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
 
-        if (params.TagTask) {
-            let obj = new AiAnalysisTaskTagResult();
-            obj.deserialize(params.TagTask)
-            this.TagTask = obj;
-        }
+        /**
+         * The confidence score for the suspicious segment.
+         * @type {number || null}
+         */
+        this.Confidence = null;
 
-        if (params.FrameTagTask) {
-            let obj = new AiAnalysisTaskFrameTagResult();
-            obj.deserialize(params.FrameTagTask)
-            this.FrameTagTask = obj;
-        }
+        /**
+         * The suggestion. Valid values:
+<li>`review`: The content may be non-compliant and needs to be reviewed.</li>
+<li>`block`: The content is non-compliant and should be blocked.</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
 
-        if (params.HighlightTask) {
-            let obj = new AiAnalysisTaskHighlightResult();
-            obj.deserialize(params.HighlightTask)
-            this.HighlightTask = obj;
+        /**
+         * The most likely label for the suspicious content. Valid values: <li>`Porn`</li> <li>`Terror`</li>
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * The sub-label.
+         * @type {string || null}
+         */
+        this.SubLabel = null;
+
+        /**
+         * The type of the suspicious segment. Valid values:
+<li>`Image` (people or icons in images)</li>
+<li>`OCR` (text in images)</li>
+         * @type {string || null}
+         */
+        this.Form = null;
+
+        /**
+         * The pixel coordinates of the suspicious people, icons, or text. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+        /**
+         * The content of the suspicious text detected. This parameter is valid only if `Form` is `OCR`.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * The keywords that match the suspicious text. This parameter is valid only if `Form` is `OCR`.
+         * @type {Array.<string> || null}
+         */
+        this.KeywordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+        this.Form = 'Form' in params ? params.Form : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
 
     }
 }
@@ -9559,6 +9788,118 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.FileType = 'FileType' in params ? params.FileType : null;
+
+    }
+}
+
+/**
+ * The result for intelligent image moderation.
+ * @class
+ */
+class ContentReviewResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The result type. Valid values:
+<li>Porn.Image: Pornographic content in the image</li>
+<li>Terrorism.Image: Terrorist content in the image</li>
+<li>Political.Image: Politically sensitive content in the image</li>
+<li>Porn.Ocr: Pornographic content in the image based on OCR</li>
+<li>Terrorism.Ocr: Terrorist content in the image based on OCR</li>
+<li>Political.Ocr: Politically sensitive content in the image based on OCR</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The pornographic content detected in the image. This parameter is valid if `Type` is `Porn.Image`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {PornImageResult || null}
+         */
+        this.PornImageResult = null;
+
+        /**
+         * The terrorist content detected in the image. This parameter is valid if `Type` is `Terrorism.Image`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {TerrorismImageResult || null}
+         */
+        this.TerrorismImageResult = null;
+
+        /**
+         * The politically sensitive content detected in the image. This parameter is valid if `Type` is `Political.Image`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {PoliticalImageResult || null}
+         */
+        this.PoliticalImageResult = null;
+
+        /**
+         * The pornographic content detected in the image based on OCR. This parameter is valid if `Type` is `Porn.Ocr`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {ContentReviewOcrResult || null}
+         */
+        this.PornOcrResult = null;
+
+        /**
+         * The terrorist content detected in the image based on OCR. This parameter is valid if `Type` is `Terrorism.Ocr`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {ContentReviewOcrResult || null}
+         */
+        this.TerrorismOcrResult = null;
+
+        /**
+         * The politically sensitive content detected in the image based on OCR. This parameter is valid if `Type` is `Political.Ocr`.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {ContentReviewOcrResult || null}
+         */
+        this.PoliticalOcrResult = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.PornImageResult) {
+            let obj = new PornImageResult();
+            obj.deserialize(params.PornImageResult)
+            this.PornImageResult = obj;
+        }
+
+        if (params.TerrorismImageResult) {
+            let obj = new TerrorismImageResult();
+            obj.deserialize(params.TerrorismImageResult)
+            this.TerrorismImageResult = obj;
+        }
+
+        if (params.PoliticalImageResult) {
+            let obj = new PoliticalImageResult();
+            obj.deserialize(params.PoliticalImageResult)
+            this.PoliticalImageResult = obj;
+        }
+
+        if (params.PornOcrResult) {
+            let obj = new ContentReviewOcrResult();
+            obj.deserialize(params.PornOcrResult)
+            this.PornOcrResult = obj;
+        }
+
+        if (params.TerrorismOcrResult) {
+            let obj = new ContentReviewOcrResult();
+            obj.deserialize(params.TerrorismOcrResult)
+            this.TerrorismOcrResult = obj;
+        }
+
+        if (params.PoliticalOcrResult) {
+            let obj = new ContentReviewOcrResult();
+            obj.deserialize(params.PoliticalOcrResult)
+            this.PoliticalOcrResult = obj;
+        }
 
     }
 }
@@ -9762,6 +10103,55 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreateReviewTemplate request structure.
+ * @class
+ */
+class CreateReviewTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>Polity: Politically sensitive content</li> <li>`Moan`: Moaning</li>
+         * @type {Array.<string> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+    }
+}
+
+/**
  * DescribeMediaInfos response structure.
  * @class
  */
@@ -9833,6 +10223,56 @@ class DeleteProcedureTemplateResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReviewTemplates response structure.
+ * @class
+ */
+class DescribeReviewTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of records that meet the conditions.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The details of the moderation templates.
+         * @type {Array.<ReviewTemplate> || null}
+         */
+        this.ReviewTemplateSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ReviewTemplateSet) {
+            this.ReviewTemplateSet = new Array();
+            for (let z in params.ReviewTemplateSet) {
+                let obj = new ReviewTemplate();
+                obj.deserialize(params.ReviewTemplateSet[z]);
+                this.ReviewTemplateSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -10619,6 +11059,12 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
         super();
 
         /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
          * Name filter of task flow template. Array length limit: 100.
          * @type {Array.<string> || null}
          */
@@ -10644,12 +11090,6 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
     }
 
     /**
@@ -10659,11 +11099,11 @@ class DescribeProcedureTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.Names = 'Names' in params ? params.Names : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -11864,6 +12304,34 @@ class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
 }
 
 /**
+ * DeleteReviewTemplate response structure.
+ * @class
+ */
+class DeleteReviewTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAdaptiveDynamicStreamingTemplate request structure.
  * @class
  */
@@ -12549,6 +13017,13 @@ class ReviewAudioVideoTaskOutput extends  AbstractModel {
          */
         this.SegmentSetFileUrlExpireTime = null;
 
+        /**
+         * The thumbnail moderation result.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReviewImageResult || null}
+         */
+        this.CoverReviewResult = null;
+
     }
 
     /**
@@ -12572,6 +13047,12 @@ class ReviewAudioVideoTaskOutput extends  AbstractModel {
         }
         this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
         this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
+
+        if (params.CoverReviewResult) {
+            let obj = new ReviewImageResult();
+            obj.deserialize(params.CoverReviewResult)
+            this.CoverReviewResult = obj;
+        }
 
     }
 }
@@ -12866,7 +13347,8 @@ class ProcessMediaRequest extends  AbstractModel {
         this.MediaProcessTask = null;
 
         /**
-         * Parameters for intelligent recognition
+         * The information of the audio/video moderation task\*.
+This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
@@ -12958,6 +13440,55 @@ class ProcessMediaRequest extends  AbstractModel {
 }
 
 /**
+ * The moderation result for pornographic content in an image.
+ * @class
+ */
+class PornImageResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The confidence score for the moderation result. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The suggestion for handling the detected pornographic content. Valid values:
+<li>pass/li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The label for the detected pornographic content. Valid values:
+<li>porn</li>
+<li>sexy</li>
+<li>vulgar</li>
+<li>intimacy</li>
+         * @type {string || null}
+         */
+        this.Label = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+
+    }
+}
+
+/**
  * ModifyMediaInfo response structure.
  * @class
  */
@@ -13004,6 +13535,62 @@ class ModifyMediaInfoResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyReviewTemplate request structure.
+ * @class
+ */
+class ModifyReviewTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>Polity: Politically sensitive content</li> <li>`Moan`: Moaning</li>
+         * @type {Array.<string> || null}
+         */
+        this.Labels = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
 
     }
 }
@@ -13200,42 +13787,31 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * AI-based sample management - keyword output information.
+ * ManageTask request structure.
  * @class
  */
-class AiSampleWord extends  AbstractModel {
+class ManageTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Keyword.
+         * Video processing task ID.
          * @type {string || null}
          */
-        this.Keyword = null;
+        this.TaskId = null;
 
         /**
-         * Keyword tag.
-         * @type {Array.<string> || null}
-         */
-        this.TagSet = null;
-
-        /**
-         * Keyword use case.
-         * @type {Array.<string> || null}
-         */
-        this.UsageSet = null;
-
-        /**
-         * Creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * Operation type. Valid value:
+<li>Abort: terminate a task. You can only terminate initiated tasks in `WAITING` status.</li>
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.OperationType = null;
 
         /**
-         * Last modified time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
-         * @type {string || null}
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
          */
-        this.UpdateTime = null;
+        this.SubAppId = null;
 
     }
 
@@ -13246,11 +13822,9 @@ class AiSampleWord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Keyword = 'Keyword' in params ? params.Keyword : null;
-        this.TagSet = 'TagSet' in params ? params.TagSet : null;
-        this.UsageSet = 'UsageSet' in params ? params.UsageSet : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -13823,6 +14397,64 @@ class DeleteMediaRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeReviewTemplates request structure.
+ * @class
+ */
+class DescribeReviewTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The IDs of the moderation templates to query. Array length limit: 100.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * The template type. Valid values:
+<li>Preset</li>
+<li>Custom</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of records to return. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * CreateSuperPlayerConfig request structure.
  * @class
  */
@@ -14244,6 +14876,58 @@ Default value: 0, which indicates to delete all videos of the type specified by 
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * The moderation result for politically sensitive content in an image.
+ * @class
+ */
+class PoliticalImageResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The confidence score for the moderation result. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The suggestion for handling the detected politically sensitive content. Valid values:
+<li>pass/li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The name of the politically sensitive content or banned icon detected.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The coordinates (pixel) of the top-left and bottom-right corners of the frame where the politically sensitive content or banned icon appears. Format: [x1, y1, x2, y2].
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
 
     }
 }
@@ -16877,6 +17561,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyReviewTemplate response structure.
+ * @class
+ */
+class ModifyReviewTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeImageProcessingTemplates request structure.
  * @class
  */
@@ -17120,24 +17832,58 @@ class AiReviewTerrorismOcrTaskOutput extends  AbstractModel {
 }
 
 /**
- * The license request statistics.
+ * Intelligent analysis result
  * @class
  */
-class LicenseUsageDataItem extends  AbstractModel {
+class AiAnalysisResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The start time (in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)) of the data returned. For example, if the granularity is a day, `2018-12-01T00:00:00+08:00` indicates that the data is for the whole day of December 1, 2018.
+         * Task type. Valid values:
+<li>Classification: intelligent categorization</li>
+<li>Cover: intelligent cover generating</li>
+<li>Tag: intelligent tagging</li>
+<li>FrameTag: intelligent frame tagging</li>
+<li>Highlight: intelligent highlight generating</li>
          * @type {string || null}
          */
-        this.Time = null;
+        this.Type = null;
 
         /**
-         * The number of license requests.
-         * @type {number || null}
+         * Query result of intelligent categorization task in video content analysis, which is valid if task type is `Classification`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskClassificationResult || null}
          */
-        this.Count = null;
+        this.ClassificationTask = null;
+
+        /**
+         * Query result of intelligent cover generating task in video content analysis, which is valid if task type is `Cover`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskCoverResult || null}
+         */
+        this.CoverTask = null;
+
+        /**
+         * Query result of intelligent tagging task in video content analysis, which is valid if task type is `Tag`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskTagResult || null}
+         */
+        this.TagTask = null;
+
+        /**
+         * Query result of intelligent frame-specific tagging task in video content analysis, which is valid if task type is `FrameTag`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskFrameTagResult || null}
+         */
+        this.FrameTagTask = null;
+
+        /**
+         * Query result of an intelligent highlight generating task in video content analysis, which is valid when task type is `Highlight`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskHighlightResult || null}
+         */
+        this.HighlightTask = null;
 
     }
 
@@ -17148,8 +17894,37 @@ class LicenseUsageDataItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Time = 'Time' in params ? params.Time : null;
-        this.Count = 'Count' in params ? params.Count : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.ClassificationTask) {
+            let obj = new AiAnalysisTaskClassificationResult();
+            obj.deserialize(params.ClassificationTask)
+            this.ClassificationTask = obj;
+        }
+
+        if (params.CoverTask) {
+            let obj = new AiAnalysisTaskCoverResult();
+            obj.deserialize(params.CoverTask)
+            this.CoverTask = obj;
+        }
+
+        if (params.TagTask) {
+            let obj = new AiAnalysisTaskTagResult();
+            obj.deserialize(params.TagTask)
+            this.TagTask = obj;
+        }
+
+        if (params.FrameTagTask) {
+            let obj = new AiAnalysisTaskFrameTagResult();
+            obj.deserialize(params.FrameTagTask)
+            this.FrameTagTask = obj;
+        }
+
+        if (params.HighlightTask) {
+            let obj = new AiAnalysisTaskHighlightResult();
+            obj.deserialize(params.HighlightTask)
+            this.HighlightTask = obj;
+        }
 
     }
 }
@@ -17473,6 +18248,83 @@ class ParseStreamingManifestRequest extends  AbstractModel {
         }
         this.MediaManifestContent = 'MediaManifestContent' in params ? params.MediaManifestContent : null;
         this.ManifestType = 'ManifestType' in params ? params.ManifestType : null;
+
+    }
+}
+
+/**
+ * Image moderation results.
+ * @class
+ */
+class ReviewImageResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The suggestion. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The most likely label for the suspicious content. This parameter is valid if `Suggestion` is `review` or `block`. Valid values: <li>`Porn`</li> <li>`Terror`</li>
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * The most likely type of the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
+<li>`Image` (people or icons in images)</li>
+<li>`OCR` (text in images)</li>
+         * @type {string || null}
+         */
+        this.Form = null;
+
+        /**
+         * A list of the suspicious segments detected.
+<font color=red>Note</font>: Only the first 10 results will be returned at most. You can get all the results from the file specified by `SegmentSetFileUrl`.
+         * @type {Array.<ReviewImageSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+        /**
+         * The URL of the file that contains suspicious segments. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time (`SegmentSetFileUrlExpireTime`).
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrl = null;
+
+        /**
+         * The expiration time of the file that contains suspicious segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+         * @type {string || null}
+         */
+        this.SegmentSetFileUrlExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Form = 'Form' in params ? params.Form : null;
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new ReviewImageSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+        this.SegmentSetFileUrl = 'SegmentSetFileUrl' in params ? params.SegmentSetFileUrl : null;
+        this.SegmentSetFileUrlExpireTime = 'SegmentSetFileUrlExpireTime' in params ? params.SegmentSetFileUrlExpireTime : null;
 
     }
 }
@@ -18017,8 +18869,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MediaProcessTask = null;
 
         /**
-         * Intelligent recognition task
-Note: This field may return `null`, indicating that no valid value can be found.
+         * The information of the intelligent moderation task\*.
+<font color=red>\*: This parameter is used by our old moderation templates and is not recommended. Please use `ReviewAudioVideoTask` instead.</font> 
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {AiContentReviewTaskInput || null}
          */
         this.AiContentReviewTask = null;
@@ -18043,6 +18896,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {WechatMiniProgramPublishTaskInput || null}
          */
         this.MiniProgramPublishTask = null;
+
+        /**
+         * The information of the moderation task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ProcedureReviewAudioVideoTaskInput || null}
+         */
+        this.ReviewAudioVideoTask = null;
 
         /**
          * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
@@ -18097,6 +18957,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new WechatMiniProgramPublishTaskInput();
             obj.deserialize(params.MiniProgramPublishTask)
             this.MiniProgramPublishTask = obj;
+        }
+
+        if (params.ReviewAudioVideoTask) {
+            let obj = new ProcedureReviewAudioVideoTaskInput();
+            obj.deserialize(params.ReviewAudioVideoTask)
+            this.ReviewAudioVideoTask = obj;
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
@@ -18698,6 +19564,41 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         }
         this.ScreenshotInterval = 'ScreenshotInterval' in params ? params.ScreenshotInterval : null;
         this.ReviewWallSwitch = 'ReviewWallSwitch' in params ? params.ReviewWallSwitch : null;
+
+    }
+}
+
+/**
+ * DeleteReviewTemplate request structure.
+ * @class
+ */
+class DeleteReviewTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the moderation template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -23129,26 +24030,28 @@ class DescribeMediaInfosRequest extends  AbstractModel {
         this.FileIds = null;
 
         /**
-         * Specifies information entry that needs to be returned by all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
-<li>basicInfo (basic video information).</li>
-<li>metaData (video metadata).</li>
-<li>transcodeInfo (result information of video transcoding).</li>
-<li>animatedGraphicsInfo (result information of animated image generating task).</li>
-<li>imageSpriteInfo (image sprite information).</li>
-<li>snapshotByTimeOffsetInfo (time point screenshot information).</li>
-<li>sampleSnapshotInfo (sampled screenshot information).</li>
-<li>keyFrameDescInfo (timestamp information).</li>
-<li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
-<li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
-         * @type {Array.<string> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
+
+        /**
+         * The types of information to return. You can specify multiple information types. `N` starts from 0. If you do not specify this parameter, all information will be returned. The supported information types are as follows:
+<li>`basicInfo` (basic information)</li>
+<li>`metaData` (video metadata)</li>
+<li>`transcodeInfo` (transcoding information)</li>
+<li>`animatedGraphicsInfo` (animated image information)</li>
+<li>`imageSpriteInfo` (image sprite information)</li>
+<li>`snapshotByTimeOffsetInfo` (time point screenshot information)</li>
+<li>`sampleSnapshotInfo` (sampled screenshot information)</li>
+<li>`keyFrameDescInfo` (timestamp information)</li>
+<li>`adaptiveDynamicStreamingInfo` (adaptive bitrate information)</li>
+<li>`miniProgramReviewInfo` (WeChat Mini Program moderation information)</li>
+<li>`subtitleInfo` (subtitle information)</li>
+<li>`reviewInfo` (moderation information)</li>
+         * @type {Array.<string> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -23160,8 +24063,8 @@ class DescribeMediaInfosRequest extends  AbstractModel {
             return;
         }
         this.FileIds = 'FileIds' in params ? params.FileIds : null;
-        this.Filters = 'Filters' in params ? params.Filters : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Filters = 'Filters' in params ? params.Filters : null;
 
     }
 }
@@ -23294,6 +24197,58 @@ class AsrFullTextConfigureInfo extends  AbstractModel {
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.SubtitleFormats = 'SubtitleFormats' in params ? params.SubtitleFormats : null;
         this.SubtitleFormat = 'SubtitleFormat' in params ? params.SubtitleFormat : null;
+
+    }
+}
+
+/**
+ * The moderation result for terrorist content in an image.
+ * @class
+ */
+class TerrorismImageResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The confidence score for the moderation result. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The suggestion for handling the detected terrorist content. Valid values:
+<li>pass/li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The label for the detected terrorist content. Valid values:
+<li>`guns`</li>
+<li>`crowd`</li>
+<li>`police`</li>
+<li>`bloody`</li>
+<li>`banners`</li>
+<li>`explosion`</li>
+<li>`scenario` (terrorist scenes) </li>
+         * @type {string || null}
+         */
+        this.Label = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
 
     }
 }
@@ -24991,6 +25946,13 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.FileId = null;
 
+        /**
+         * Moderation details.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {FileReviewInfo || null}
+         */
+        this.ReviewInfo = null;
+
     }
 
     /**
@@ -25067,6 +26029,12 @@ Note: this field may return `null`, indicating that no valid value is obtained.
             this.SubtitleInfo = obj;
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
+
+        if (params.ReviewInfo) {
+            let obj = new FileReviewInfo();
+            obj.deserialize(params.ReviewInfo)
+            this.ReviewInfo = obj;
+        }
 
     }
 }
@@ -26809,6 +27777,62 @@ Note: This field may return `null`, indicating that no valid value can be found.
 }
 
 /**
+ * ReviewImage response structure.
+ * @class
+ */
+class ReviewImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The image moderation result. <font color=red>Note: This parameter is no longer used. Please use `MediaReviewResult` instead.</font>
+         * @type {Array.<ContentReviewResult> || null}
+         */
+        this.ReviewResultSet = null;
+
+        /**
+         * The image moderation result.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ReviewImageResult || null}
+         */
+        this.MediaReviewResult = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReviewResultSet) {
+            this.ReviewResultSet = new Array();
+            for (let z in params.ReviewResultSet) {
+                let obj = new ContentReviewResult();
+                obj.deserialize(params.ReviewResultSet[z]);
+                this.ReviewResultSet.push(obj);
+            }
+        }
+
+        if (params.MediaReviewResult) {
+            let obj = new ReviewImageResult();
+            obj.deserialize(params.MediaReviewResult)
+            this.MediaReviewResult = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeStorageRegions response structure.
  * @class
  */
@@ -27176,6 +28200,13 @@ class ExtractTraceWatermarkRequest extends  AbstractModel {
         this.Url = null;
 
         /**
+         * The ID of the file specified by `Url`.
+<li><font color=red>Note</font>: This parameter is required.</li>
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
          * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
@@ -27215,6 +28246,7 @@ class ExtractTraceWatermarkRequest extends  AbstractModel {
             return;
         }
         this.Url = 'Url' in params ? params.Url : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
@@ -27252,16 +28284,17 @@ class TaskSimpleInfo extends  AbstractModel {
 
         /**
          * The task type. Valid values:
-<li>Procedure: Video processing</li>
-<li>EditMedia: Video editing</li>
-<li> ReduceMediaBitrate: Bitrate reduction</li>
-<li>WechatDistribute: Publishing to WeChat</li>
+<li>`Procedure`: Video processing</li>
+<li>`EditMedia`: Video editing</li>
+<li>`ReduceMediaBitrate`: Bitrate reduction</li>
+<li>`WechatDistribute`: Publishing to Weixin</li>
+<li> `ReviewAudioVideo`: Moderation</li>
 Task types for v2017:
-<li>Transcode: Transcoding</li>
-<li>SnapshotByTimeOffset: Screencapturing</li>
-<li>Concat: Video splicing</li>
-<li>Clip: Video clipping</li>
-<li>ImageSprites: Image sprite generating</li>
+<li>`Transcode`: Transcoding</li>
+<li>`SnapshotByTimeOffset`: Screencapturing</li>
+<li>`Concat`: Video splicing</li>
+<li>`Clip`: Video clipping</li>
+<li>`ImageSprites`: Image sprite generating</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -27508,6 +28541,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.CodecTag = null;
 
+        /**
+         * Dynamic range information.
+<li><font color=red>Note</font>: This parameter is valid for transcoding files generated after 2023-01-10T00:00:00Z.</li>
+         * @type {DynamicRangeInfo || null}
+         */
+        this.DynamicRangeInfo = null;
+
     }
 
     /**
@@ -27523,6 +28563,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Codec = 'Codec' in params ? params.Codec : null;
         this.Fps = 'Fps' in params ? params.Fps : null;
         this.CodecTag = 'CodecTag' in params ? params.CodecTag : null;
+
+        if (params.DynamicRangeInfo) {
+            let obj = new DynamicRangeInfo();
+            obj.deserialize(params.DynamicRangeInfo)
+            this.DynamicRangeInfo = obj;
+        }
 
     }
 }
@@ -29429,6 +30475,78 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * The details of a moderation template.
+ * @class
+ */
+class ReviewTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the moderation template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The template name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The template description.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * The template type. Valid values:
+<li>Preset</li>
+<li>Custom</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The violation labels used.
+         * @type {Array.<string> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * The template creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The last updated time of the template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * Parameters for recognition of politically sensitive content
  * @class
  */
@@ -30993,16 +32111,16 @@ class SearchMediaRequest extends  AbstractModel {
         this.FileIds = null;
 
         /**
-         * Filename set. Filenames of media files are fuzzily matched. The higher the match rate, the higher-ranked the result.
-<li>Filename length limit: 40 characters.</li>
-<li>Array length limit: 10.</li>
+         * The file names to use for fuzzy search, which are sorted by relevance in descending order.
+<li>Name length limit: 100 characters.</li>
+<li>Array length limit: 10</li>
          * @type {Array.<string> || null}
          */
         this.Names = null;
 
         /**
-         * Filename prefix, which matches the filenames of media files.
-<li>Filename prefix length limit: 20 characters.</li>
+         * The file name prefixes to search.
+<li>Prefix length limit: 100 characters.</li>
 <li>Array length limit: 10.</li>
          * @type {Array.<string> || null}
          */
@@ -31024,9 +32142,9 @@ class SearchMediaRequest extends  AbstractModel {
         this.ClassIds = null;
 
         /**
-         * The tag set. A file is considered a match if it has any of the tags in the tag set.
-<li>Tag length limit: 16 characters.</li>
-<li>Array length limit: 10.</li>
+         * The tags to search. A file is considered a match if it has any of the tags specified.
+<li>Tag length limit: 32 characters.</li>
+<li>Array length limit: 16.</li>
          * @type {Array.<string> || null}
          */
         this.Tags = null;
@@ -31243,6 +32361,45 @@ End time in the creation time range.
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Vids = 'Vids' in params ? params.Vids : null;
         this.Vid = 'Vid' in params ? params.Vid : null;
+
+    }
+}
+
+/**
+ * Dynamic range information.
+ * @class
+ */
+class DynamicRangeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The dynamic range information. Valid values:
+<li>`SDR`: Standard Dynamic Range</li>
+<li>`HDR`: High Dynamic Range</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The HDR type. This parameter is valid only if `Type` is `HDR`. Valid values:
+<li>`hdr10`</li>
+<li>`hlg`</li>
+         * @type {string || null}
+         */
+        this.HDRType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.HDRType = 'HDRType' in params ? params.HDRType : null;
 
     }
 }
@@ -31651,10 +32808,16 @@ class ProcessMediaByProcedureResponse extends  AbstractModel {
         super();
 
         /**
-         * Task ID.
+         * The task ID for the task type `Procedure`, if the task flow specified by `ProcedureName` includes one or more of `MediaProcessTask`, `AiAnalysisTask`, `AiRecognitionTask`, the task specified by this parameter will be executed.
          * @type {string || null}
          */
         this.TaskId = null;
+
+        /**
+         * The task ID for the task type `ReviewAudioVideo`, if the task flow specified by `ProcedureName` includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+         * @type {string || null}
+         */
+        this.ReviewAudioVideoTaskId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -31672,6 +32835,7 @@ class ProcessMediaByProcedureResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ReviewAudioVideoTaskId = 'ReviewAudioVideoTaskId' in params ? params.ReviewAudioVideoTaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -32013,11 +33177,16 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MetaData = null;
 
         /**
-         * If a video processing flow is specified when a video editing task is initiated, this field will be the ID of the task flow.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The task ID for the task type `Procedure`. If a task flow (`ProcedureName`) is specified by [EditMedia](https://intl.cloud.tencent.com/document/api/266/34783?from_cn_redirect=1), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
          * @type {string || null}
          */
         this.ProcedureTaskId = null;
+
+        /**
+         * The task ID for the task type `ReviewAudioVideo`. If a task flow (`ProcedureName`) is specified by [EditMedia](https://intl.cloud.tencent.com/document/api/266/34783?from_cn_redirect=1), and the task flow includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+         * @type {string || null}
+         */
+        this.ReviewAudioVideoTaskId = null;
 
         /**
          * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
@@ -32067,6 +33236,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.MetaData = obj;
         }
         this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
+        this.ReviewAudioVideoTaskId = 'ReviewAudioVideoTaskId' in params ? params.ReviewAudioVideoTaskId : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
 
@@ -32357,6 +33527,72 @@ class SnapshotByTimeOffsetTask2017 extends  AbstractModel {
                 this.SnapshotInfoSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Moderation details.
+ * @class
+ */
+class ReviewInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The moderation template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The suggestion. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * The moderation type in the format of `Form.Label`. This parameter is valid if `Suggestion` is `review` or `block`.
+`Form` indicates the type of inappropriate content detected. Valid values:
+<li>`Image` (people or icons in images)</li>
+<li>`OCR` (text in images)</li>
+<li>`ASR` (speech)</li>
+<li>`Voice`</li>
+`Label` indicates the violation label. Valid values:
+<li>`Porn` (pornographic content)</li>
+<li>`Terror` (terrorist content)</li>
+<li>Polity (politically sensitive content)</li>
+<li>`Ad`</li>
+<li>`Illegal` (illegal content)</li>
+<li>`Religion`</li>
+<li>`Abuse`</li>
+<li>`Moan`</li>
+         * @type {Array.<string> || null}
+         */
+        this.TypeSet = null;
+
+        /**
+         * The moderation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.ReviewTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.TypeSet = 'TypeSet' in params ? params.TypeSet : null;
+        this.ReviewTime = 'ReviewTime' in params ? params.ReviewTime : null;
 
     }
 }
@@ -32728,6 +33964,48 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.WatermarkSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ReviewImage request structure.
+ * @class
+ */
+class ReviewImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of the media file. For this API to work, the file must be an image.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * The image moderation template ID. Valid values: <li>10: The preset template, whose violation labels are `Porn` and `Terror`.</li>
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>	
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -33665,6 +34943,41 @@ class HighlightSegmentItem extends  AbstractModel {
 }
 
 /**
+ * CreateReviewTemplate response structure.
+ * @class
+ */
+class CreateReviewTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteWatermarkTemplate response structure.
  * @class
  */
@@ -33796,7 +35109,7 @@ Default value: 0.
 }
 
 /**
- * Video pull for upload task information
+ * The information of a pull and upload task.
  * @class
  */
 class PullUploadTask extends  AbstractModel {
@@ -33804,7 +35117,7 @@ class PullUploadTask extends  AbstractModel {
         super();
 
         /**
-         * Pull for upload task ID.
+         * The task ID.
          * @type {string || null}
          */
         this.TaskId = null;
@@ -33833,14 +35146,14 @@ class PullUploadTask extends  AbstractModel {
         this.Message = null;
 
         /**
-         * ID of video generated after pull for upload is completed.
+         * The ID of the uploaded file.
          * @type {string || null}
          */
         this.FileId = null;
 
         /**
-         * Basic information of media file generated after pull for upload is completed.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The basic information of the uploaded file.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaBasicInfo || null}
          */
         this.MediaBasicInfo = null;
@@ -33852,19 +35165,25 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.MetaData = null;
 
         /**
-         * Playback address generated after pull for upload is completed.
+         * The playback address of the uploaded file.
          * @type {string || null}
          */
         this.FileUrl = null;
 
         /**
-         * If a video processing flow is specified when a video is pulled for upload, this parameter will be the ID of the task flow.
+         * The task ID for the task type `Procedure`. If a task flow is specified by [PullUpload](https://intl.cloud.tencent.com/document/api/266/35575?from_cn_redirect=1), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
          * @type {string || null}
          */
         this.ProcedureTaskId = null;
 
         /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+         * The task ID for the task type `ReviewAudioVideo`. If a task flow is specified by [PullUpload](https://intl.cloud.tencent.com/document/api/266/35575?from_cn_redirect=1), and the task flow includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+         * @type {string || null}
+         */
+        this.ReviewAudioVideoTaskId = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The [PullComplete](https://intl.cloud.tencent.com/document/product/266/7831?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters.
          * @type {string || null}
          */
         this.SessionContext = null;
@@ -33876,7 +35195,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SessionId = null;
 
         /**
-         * The progress of a pull and upload task. Value range: 0-100.
+         * The progress of the pull and upload task. Value range: 1-100.
          * @type {number || null}
          */
         this.Progress = null;
@@ -33909,6 +35228,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
         this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
+        this.ReviewAudioVideoTaskId = 'ReviewAudioVideoTaskId' in params ? params.ReviewAudioVideoTaskId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.Progress = 'Progress' in params ? params.Progress : null;
@@ -34345,7 +35665,7 @@ module.exports = {
     ClipFileInfo2017: ClipFileInfo2017,
     TempCertificate: TempCertificate,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
-    ManageTaskRequest: ManageTaskRequest,
+    AiSampleWord: AiSampleWord,
     CreateImageSpriteTemplateRequest: CreateImageSpriteTemplateRequest,
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
     UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
@@ -34357,6 +35677,7 @@ module.exports = {
     AudioTransform: AudioTransform,
     ModifySuperPlayerConfigRequest: ModifySuperPlayerConfigRequest,
     ResetProcedureTemplateRequest: ResetProcedureTemplateRequest,
+    ContentReviewOcrResult: ContentReviewOcrResult,
     ComposeMediaResponse: ComposeMediaResponse,
     DescribeLicenseUsageDataResponse: DescribeLicenseUsageDataResponse,
     UrlSignatureAuthPolicy: UrlSignatureAuthPolicy,
@@ -34365,6 +35686,7 @@ module.exports = {
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
     ModifySubAppIdInfoRequest: ModifySubAppIdInfoRequest,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
+    ProcedureReviewAudioVideoTaskInput: ProcedureReviewAudioVideoTaskInput,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
     AudioTemplateInfo: AudioTemplateInfo,
@@ -34421,6 +35743,7 @@ module.exports = {
     ModifyVodDomainAccelerateConfigRequest: ModifyVodDomainAccelerateConfigRequest,
     MediaProcessTaskAdaptiveDynamicStreamingResult: MediaProcessTaskAdaptiveDynamicStreamingResult,
     OcrWordsConfigureInfoForUpdate: OcrWordsConfigureInfoForUpdate,
+    FileReviewInfo: FileReviewInfo,
     WatermarkTemplate: WatermarkTemplate,
     CoverBySnapshotTaskOutput: CoverBySnapshotTaskOutput,
     TextWatermarkTemplateInput: TextWatermarkTemplateInput,
@@ -34473,12 +35796,16 @@ module.exports = {
     SimpleHlsClipResponse: SimpleHlsClipResponse,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     DescribeFileAttributesResponse: DescribeFileAttributesResponse,
-    AiAnalysisResult: AiAnalysisResult,
+    LicenseUsageDataItem: LicenseUsageDataItem,
+    ReviewImageSegmentItem: ReviewImageSegmentItem,
     ConcatFileInfo2017: ConcatFileInfo2017,
+    ContentReviewResult: ContentReviewResult,
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
     ReduceMediaBitrateTask: ReduceMediaBitrateTask,
+    CreateReviewTemplateRequest: CreateReviewTemplateRequest,
     DescribeMediaInfosResponse: DescribeMediaInfosResponse,
     DeleteProcedureTemplateResponse: DeleteProcedureTemplateResponse,
+    DescribeReviewTemplatesResponse: DescribeReviewTemplatesResponse,
     DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
     MediaMiniProgramReviewInfo: MediaMiniProgramReviewInfo,
     ForbidMediaDistributionResponse: ForbidMediaDistributionResponse,
@@ -34516,6 +35843,7 @@ module.exports = {
     OcrWordsConfigureInfo: OcrWordsConfigureInfo,
     CreateSuperPlayerConfigResponse: CreateSuperPlayerConfigResponse,
     AiAnalysisTaskFrameTagOutput: AiAnalysisTaskFrameTagOutput,
+    DeleteReviewTemplateResponse: DeleteReviewTemplateResponse,
     ModifyAdaptiveDynamicStreamingTemplateRequest: ModifyAdaptiveDynamicStreamingTemplateRequest,
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
     DescribeCDNUsageDataResponse: DescribeCDNUsageDataResponse,
@@ -34533,11 +35861,13 @@ module.exports = {
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
     MediaSubtitleInput: MediaSubtitleInput,
     ProcessMediaRequest: ProcessMediaRequest,
+    PornImageResult: PornImageResult,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
+    ModifyReviewTemplateRequest: ModifyReviewTemplateRequest,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     RestoreMediaResponse: RestoreMediaResponse,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
-    AiSampleWord: AiSampleWord,
+    ManageTaskRequest: ManageTaskRequest,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     ModifyAdaptiveDynamicStreamingTemplateResponse: ModifyAdaptiveDynamicStreamingTemplateResponse,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
@@ -34547,6 +35877,7 @@ module.exports = {
     ImageSpriteTaskInput: ImageSpriteTaskInput,
     ObjectConfigureInfoForUpdate: ObjectConfigureInfoForUpdate,
     DeleteMediaRequest: DeleteMediaRequest,
+    DescribeReviewTemplatesRequest: DescribeReviewTemplatesRequest,
     CreateSuperPlayerConfigRequest: CreateSuperPlayerConfigRequest,
     ImageWatermarkTemplate: ImageWatermarkTemplate,
     ModifySubAppIdInfoResponse: ModifySubAppIdInfoResponse,
@@ -34554,6 +35885,7 @@ module.exports = {
     ModifySubAppIdStatusResponse: ModifySubAppIdStatusResponse,
     SimpleHlsClipRequest: SimpleHlsClipRequest,
     MediaDeleteItem: MediaDeleteItem,
+    PoliticalImageResult: PoliticalImageResult,
     AiSamplePerson: AiSamplePerson,
     MediaAdaptiveDynamicStreamingInfo: MediaAdaptiveDynamicStreamingInfo,
     DescribeDailyPlayStatFileListRequest: DescribeDailyPlayStatFileListRequest,
@@ -34601,12 +35933,13 @@ module.exports = {
     CreateSubAppIdResponse: CreateSubAppIdResponse,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
+    ModifyReviewTemplateResponse: ModifyReviewTemplateResponse,
     DescribeImageProcessingTemplatesRequest: DescribeImageProcessingTemplatesRequest,
     ResetProcedureTemplateResponse: ResetProcedureTemplateResponse,
     ProhibitedConfigureInfo: ProhibitedConfigureInfo,
     DrmStreamingsInfo: DrmStreamingsInfo,
     AiReviewTerrorismOcrTaskOutput: AiReviewTerrorismOcrTaskOutput,
-    LicenseUsageDataItem: LicenseUsageDataItem,
+    AiAnalysisResult: AiAnalysisResult,
     ReduceMediaBitrateAdaptiveDynamicStreamingResult: ReduceMediaBitrateAdaptiveDynamicStreamingResult,
     ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
     DescribeAIAnalysisTemplatesRequest: DescribeAIAnalysisTemplatesRequest,
@@ -34614,6 +35947,7 @@ module.exports = {
     ResolutionNameInfo: ResolutionNameInfo,
     AiRecognitionTaskOcrWordsResultItem: AiRecognitionTaskOcrWordsResultItem,
     ParseStreamingManifestRequest: ParseStreamingManifestRequest,
+    ReviewImageResult: ReviewImageResult,
     DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
     AiAnalysisTaskTagInput: AiAnalysisTaskTagInput,
     MediaTrackItem: MediaTrackItem,
@@ -34633,6 +35967,7 @@ module.exports = {
     DeletePersonSampleResponse: DeletePersonSampleResponse,
     CreateSnapshotByTimeOffsetTemplateResponse: CreateSnapshotByTimeOffsetTemplateResponse,
     ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
+    DeleteReviewTemplateRequest: DeleteReviewTemplateRequest,
     AttachMediaSubtitlesResponse: AttachMediaSubtitlesResponse,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
@@ -34710,6 +36045,7 @@ module.exports = {
     DescribeMediaInfosRequest: DescribeMediaInfosRequest,
     ModifyPersonSampleRequest: ModifyPersonSampleRequest,
     AsrFullTextConfigureInfo: AsrFullTextConfigureInfo,
+    TerrorismImageResult: TerrorismImageResult,
     DeleteVodDomainRequest: DeleteVodDomainRequest,
     DescribeDrmKeyProviderInfoResponse: DescribeDrmKeyProviderInfoResponse,
     ExtractTraceWatermarkResponse: ExtractTraceWatermarkResponse,
@@ -34770,6 +36106,7 @@ module.exports = {
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
+    ReviewImageResponse: ReviewImageResponse,
     DescribeStorageRegionsResponse: DescribeStorageRegionsResponse,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     ProcedureTask: ProcedureTask,
@@ -34811,6 +36148,7 @@ module.exports = {
     ReviewAudioVideoResponse: ReviewAudioVideoResponse,
     DeleteClassRequest: DeleteClassRequest,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
+    ReviewTemplate: ReviewTemplate,
     PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,
     DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
     ImageTransform: ImageTransform,
@@ -34837,6 +36175,7 @@ module.exports = {
     CreateSubAppIdRequest: CreateSubAppIdRequest,
     DescribeProcedureTemplatesResponse: DescribeProcedureTemplatesResponse,
     SearchMediaRequest: SearchMediaRequest,
+    DynamicRangeInfo: DynamicRangeInfo,
     CreateSampleSnapshotTemplateRequest: CreateSampleSnapshotTemplateRequest,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
     AudioVolumeParam: AudioVolumeParam,
@@ -34857,6 +36196,7 @@ module.exports = {
     CommitUploadRequest: CommitUploadRequest,
     WatermarkCycleConfigForUpdate: WatermarkCycleConfigForUpdate,
     SnapshotByTimeOffsetTask2017: SnapshotByTimeOffsetTask2017,
+    ReviewInfo: ReviewInfo,
     MediaClassInfo: MediaClassInfo,
     DescribeTranscodeTemplatesResponse: DescribeTranscodeTemplatesResponse,
     DeleteAnimatedGraphicsTemplateRequest: DeleteAnimatedGraphicsTemplateRequest,
@@ -34865,6 +36205,7 @@ module.exports = {
     MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
     DescribeImageProcessingTemplatesResponse: DescribeImageProcessingTemplatesResponse,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
+    ReviewImageRequest: ReviewImageRequest,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
@@ -34881,6 +36222,7 @@ module.exports = {
     MediaOutputInfo: MediaOutputInfo,
     EditMediaTaskOutput: EditMediaTaskOutput,
     HighlightSegmentItem: HighlightSegmentItem,
+    CreateReviewTemplateResponse: CreateReviewTemplateResponse,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
     ComposeMediaOutput: ComposeMediaOutput,
     PullUploadTask: PullUploadTask,

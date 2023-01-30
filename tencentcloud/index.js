@@ -77,6 +77,7 @@ module.exports = {
     tat: require("./tat"),
     tcaplusdb: require("./tcaplusdb"),
     tcr: require("./tcr"),
+    tcss: require("./tcss"),
     tdmq: require("./tdmq"),
     tem: require("./tem"),
     teo: require("./teo"),

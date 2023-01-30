@@ -1,0 +1,4437 @@
+/*
+ * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+const models = require("./models");
+const AbstractClient = require('../../common/abstract_client')
+const CreateVirusScanAgainRequest = models.CreateVirusScanAgainRequest;
+const DescribeSecLogDeliveryKafkaSettingRequest = models.DescribeSecLogDeliveryKafkaSettingRequest;
+const DescribeSearchTemplatesResponse = models.DescribeSearchTemplatesResponse;
+const ScanIgnoreVul = models.ScanIgnoreVul;
+const UpdateImageRegistryTimingScanTaskResponse = models.UpdateImageRegistryTimingScanTaskResponse;
+const DescribeScanIgnoreVulListResponse = models.DescribeScanIgnoreVulListResponse;
+const ModifyVulDefenceEventStatusRequest = models.ModifyVulDefenceEventStatusRequest;
+const ModifyVirusAutoIsolateExampleSwitchResponse = models.ModifyVirusAutoIsolateExampleSwitchResponse;
+const CKafkaTopicInfo = models.CKafkaTopicInfo;
+const CreateVulExportJobResponse = models.CreateVulExportJobResponse;
+const DescribeUnfinishRefreshTaskResponse = models.DescribeUnfinishRefreshTaskResponse;
+const CreateComponentExportJobRequest = models.CreateComponentExportJobRequest;
+const ComplianceBenchmarkStandardEnable = models.ComplianceBenchmarkStandardEnable;
+const CreateNetworkFirewallUndoPublishRequest = models.CreateNetworkFirewallUndoPublishRequest;
+const CreateRefreshTaskResponse = models.CreateRefreshTaskResponse;
+const CreateVulDefenceHostExportJobResponse = models.CreateVulDefenceHostExportJobResponse;
+const ImageVul = models.ImageVul;
+const CreateVulImageExportJobResponse = models.CreateVulImageExportJobResponse;
+const AbnormalProcessEventDescription = models.AbnormalProcessEventDescription;
+const CompliancePeriodTaskRule = models.CompliancePeriodTaskRule;
+const DescribeVirusScanTimeoutSettingResponse = models.DescribeVirusScanTimeoutSettingResponse;
+const CreateVulExportJobRequest = models.CreateVulExportJobRequest;
+const DescribeNetworkFirewallNamespaceLabelListResponse = models.DescribeNetworkFirewallNamespaceLabelListResponse;
+const ClusterCreateComponentItem = models.ClusterCreateComponentItem;
+const DescribeAssetComponentListResponse = models.DescribeAssetComponentListResponse;
+const DescribeVulImageListRequest = models.DescribeVulImageListRequest;
+const DescribeAssetImageRegistryVulListResponse = models.DescribeAssetImageRegistryVulListResponse;
+const VulScanImageInfo = models.VulScanImageInfo;
+const AddAssetImageRegistryRegistryDetailResponse = models.AddAssetImageRegistryRegistryDetailResponse;
+const DeleteCompliancePolicyItemFromWhitelistRequest = models.DeleteCompliancePolicyItemFromWhitelistRequest;
+const DescribeAssetImageDetailRequest = models.DescribeAssetImageDetailRequest;
+const VulIgnoreLocalImage = models.VulIgnoreLocalImage;
+const ModifyK8sApiAbnormalRuleInfoResponse = models.ModifyK8sApiAbnormalRuleInfoResponse;
+const ModifyAssetImageScanStopResponse = models.ModifyAssetImageScanStopResponse;
+const AddAssetImageRegistryRegistryDetailRequest = models.AddAssetImageRegistryRegistryDetailRequest;
+const AddIgnoreVulResponse = models.AddIgnoreVulResponse;
+const DescribeNetworkFirewallClusterRefreshStatusRequest = models.DescribeNetworkFirewallClusterRefreshStatusRequest;
+const DescribeAssetImageRegistryVirusListExportResponse = models.DescribeAssetImageRegistryVirusListExportResponse;
+const DescribeSecEventsTendencyResponse = models.DescribeSecEventsTendencyResponse;
+const DescribeAccessControlEventsExportResponse = models.DescribeAccessControlEventsExportResponse;
+const DescribeImageRiskSummaryResponse = models.DescribeImageRiskSummaryResponse;
+const DescribeNetworkFirewallPolicyDetailRequest = models.DescribeNetworkFirewallPolicyDetailRequest;
+const DescribeComplianceTaskAssetSummaryRequest = models.DescribeComplianceTaskAssetSummaryRequest;
+const ModifyAssetImageRegistryScanStopResponse = models.ModifyAssetImageRegistryScanStopResponse;
+const DescribeAssetImageRegistryRiskListExportRequest = models.DescribeAssetImageRegistryRiskListExportRequest;
+const SetCheckModeResponse = models.SetCheckModeResponse;
+const SecLogJoinObjectInfo = models.SecLogJoinObjectInfo;
+const DescribeVulImageSummaryRequest = models.DescribeVulImageSummaryRequest;
+const DescribeAssetImageScanStatusResponse = models.DescribeAssetImageScanStatusResponse;
+const DescribeVirusAutoIsolateSampleDetailResponse = models.DescribeVirusAutoIsolateSampleDetailResponse;
+const DescribeVulDefenceEventTendencyRequest = models.DescribeVulDefenceEventTendencyRequest;
+const DescribeAbnormalProcessRulesExportRequest = models.DescribeAbnormalProcessRulesExportRequest;
+const DescribePurchaseStateInfoResponse = models.DescribePurchaseStateInfoResponse;
+const SoftQuotaDayInfo = models.SoftQuotaDayInfo;
+const DescribeVulDefencePluginResponse = models.DescribeVulDefencePluginResponse;
+const DescribeAssetImageRegistryRegistryDetailResponse = models.DescribeAssetImageRegistryRegistryDetailResponse;
+const RunTimeFilters = models.RunTimeFilters;
+const DescribeVirusDetailRequest = models.DescribeVirusDetailRequest;
+const DeleteEscapeWhiteListRequest = models.DeleteEscapeWhiteListRequest;
+const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
+const ModifyK8sApiAbnormalRuleInfoRequest = models.ModifyK8sApiAbnormalRuleInfoRequest;
+const UpdateAndPublishNetworkFirewallPolicyDetailResponse = models.UpdateAndPublishNetworkFirewallPolicyDetailResponse;
+const DescribeAssetImageListRequest = models.DescribeAssetImageListRequest;
+const DescribeSecLogDeliveryClsOptionsRequest = models.DescribeSecLogDeliveryClsOptionsRequest;
+const DescribeRiskSyscallWhiteListDetailRequest = models.DescribeRiskSyscallWhiteListDetailRequest;
+const DescribeK8sApiAbnormalRuleScopeListResponse = models.DescribeK8sApiAbnormalRuleScopeListResponse;
+const ModifyAbnormalProcessRuleStatusRequest = models.ModifyAbnormalProcessRuleStatusRequest;
+const DescribeVulTendencyResponse = models.DescribeVulTendencyResponse;
+const ProcessDetailInfo = models.ProcessDetailInfo;
+const DescribeAutoAuthorizedRuleHostRequest = models.DescribeAutoAuthorizedRuleHostRequest;
+const ScanCompliancePolicyItemsRequest = models.ScanCompliancePolicyItemsRequest;
+const DescribeAgentDaemonSetCmdResponse = models.DescribeAgentDaemonSetCmdResponse;
+const DescribeAssetImageVirusListExportRequest = models.DescribeAssetImageVirusListExportRequest;
+const CreateAssetImageScanTaskResponse = models.CreateAssetImageScanTaskResponse;
+const DescribeTaskResultSummaryRequest = models.DescribeTaskResultSummaryRequest;
+const DeleteAccessControlRulesRequest = models.DeleteAccessControlRulesRequest;
+const DeleteRiskSyscallEventsResponse = models.DeleteRiskSyscallEventsResponse;
+const OpenTcssTrialResponse = models.OpenTcssTrialResponse;
+const DescribeSearchExportListResponse = models.DescribeSearchExportListResponse;
+const CreateVulScanTaskRequest = models.CreateVulScanTaskRequest;
+const ComplianceK8SDetailInfo = models.ComplianceK8SDetailInfo;
+const AccessControlEventDescription = models.AccessControlEventDescription;
+const DescribeAccessControlEventsResponse = models.DescribeAccessControlEventsResponse;
+const SecLogDeliveryKafkaSettingInfo = models.SecLogDeliveryKafkaSettingInfo;
+const DescribeRiskSyscallWhiteListsResponse = models.DescribeRiskSyscallWhiteListsResponse;
+const CreateNetworkFirewallPolicyDiscoverResponse = models.CreateNetworkFirewallPolicyDiscoverResponse;
+const ComplianceAssetDetailInfo = models.ComplianceAssetDetailInfo;
+const UnauthorizedCoresTendency = models.UnauthorizedCoresTendency;
+const DescribeRiskSyscallEventsResponse = models.DescribeRiskSyscallEventsResponse;
+const AssetClusterListItem = models.AssetClusterListItem;
+const NetworkPolicyInfoItem = models.NetworkPolicyInfoItem;
+const DescribeAssetImageRiskListResponse = models.DescribeAssetImageRiskListResponse;
+const CreateEmergencyVulExportJobResponse = models.CreateEmergencyVulExportJobResponse;
+const CreateVulDefenceEventExportJobRequest = models.CreateVulDefenceEventExportJobRequest;
+const DescribeNetworkFirewallPolicyListRequest = models.DescribeNetworkFirewallPolicyListRequest;
+const DeleteIgnoreVulRequest = models.DeleteIgnoreVulRequest;
+const DescribeReverseShellEventsResponse = models.DescribeReverseShellEventsResponse;
+const ImageSimpleInfo = models.ImageSimpleInfo;
+const DescribeComplianceAssetDetailInfoRequest = models.DescribeComplianceAssetDetailInfoRequest;
+const NetworkPeer = models.NetworkPeer;
+const DescribeESAggregationsResponse = models.DescribeESAggregationsResponse;
+const CreateExportComplianceStatusListJobResponse = models.CreateExportComplianceStatusListJobResponse;
+const DescribeAssetAppServiceListResponse = models.DescribeAssetAppServiceListResponse;
+const DescribeAssetSyncLastTimeRequest = models.DescribeAssetSyncLastTimeRequest;
+const ImageComponent = models.ImageComponent;
+const ComplianceBenchmarkStandard = models.ComplianceBenchmarkStandard;
+const DescribeEscapeRuleInfoResponse = models.DescribeEscapeRuleInfoResponse;
+const VulTendencyInfo = models.VulTendencyInfo;
+const DescribePurchaseStateInfoRequest = models.DescribePurchaseStateInfoRequest;
+const AddCompliancePolicyItemToWhitelistRequest = models.AddCompliancePolicyItemToWhitelistRequest;
+const ComplianceAssetSummary = models.ComplianceAssetSummary;
+const AbnormalProcessEventTendencyInfo = models.AbnormalProcessEventTendencyInfo;
+const DescribeAssetClusterListResponse = models.DescribeAssetClusterListResponse;
+const EscapeRule = models.EscapeRule;
+const CompliancePeriodTask = models.CompliancePeriodTask;
+const DescribeAssetImageRegistryRiskListExportResponse = models.DescribeAssetImageRegistryRiskListExportResponse;
+const SecLogAlertMsgInfo = models.SecLogAlertMsgInfo;
+const AutoAuthorizedImageInfo = models.AutoAuthorizedImageInfo;
+const UpdateAssetImageRegistryRegistryDetailResponse = models.UpdateAssetImageRegistryRegistryDetailResponse;
+const ModifySecLogDeliveryKafkaSettingResponse = models.ModifySecLogDeliveryKafkaSettingResponse;
+const DeleteAbnormalProcessRulesResponse = models.DeleteAbnormalProcessRulesResponse;
+const RuleBaseInfo = models.RuleBaseInfo;
+const ProcessInfo = models.ProcessInfo;
+const ImageInfo = models.ImageInfo;
+const DescribeReverseShellDetailRequest = models.DescribeReverseShellDetailRequest;
+const ModifyReverseShellStatusRequest = models.ModifyReverseShellStatusRequest;
+const DescribePublicKeyResponse = models.DescribePublicKeyResponse;
+const SetCheckModeRequest = models.SetCheckModeRequest;
+const DescribeAssetImageRiskListExportRequest = models.DescribeAssetImageRiskListExportRequest;
+const DescribeAffectedWorkloadListRequest = models.DescribeAffectedWorkloadListRequest;
+const DescribeVulDefenceHostRequest = models.DescribeVulDefenceHostRequest;
+const EmergencyVulInfo = models.EmergencyVulInfo;
+const ExportVirusListRequest = models.ExportVirusListRequest;
+const CreateWebVulExportJobRequest = models.CreateWebVulExportJobRequest;
+const CreateK8sApiAbnormalEventExportJobRequest = models.CreateK8sApiAbnormalEventExportJobRequest;
+const DescribeK8sApiAbnormalTendencyResponse = models.DescribeK8sApiAbnormalTendencyResponse;
+const K8sApiAbnormalEventListItem = models.K8sApiAbnormalEventListItem;
+const SecLogJoinInfo = models.SecLogJoinInfo;
+const PromotionActivityContent = models.PromotionActivityContent;
+const DescribeAffectedClusterCountRequest = models.DescribeAffectedClusterCountRequest;
+const DescribeAssetImageRegistryVulListExportRequest = models.DescribeAssetImageRegistryVulListExportRequest;
+const AddEditRiskSyscallWhiteListRequest = models.AddEditRiskSyscallWhiteListRequest;
+const K8sApiAbnormalRuleInfo = models.K8sApiAbnormalRuleInfo;
+const ReverseShellEventInfo = models.ReverseShellEventInfo;
+const DescribeSecLogJoinObjectListResponse = models.DescribeSecLogJoinObjectListResponse;
+const CreateSystemVulExportJobRequest = models.CreateSystemVulExportJobRequest;
+const DescribeVulScanInfoRequest = models.DescribeVulScanInfoRequest;
+const DescribeRiskSyscallDetailRequest = models.DescribeRiskSyscallDetailRequest;
+const ScanComplianceAssetsByPolicyItemRequest = models.ScanComplianceAssetsByPolicyItemRequest;
+const DescribeAbnormalProcessRulesRequest = models.DescribeAbnormalProcessRulesRequest;
+const DescribeAssetImageRegistryListResponse = models.DescribeAssetImageRegistryListResponse;
+const DescribeVirusAutoIsolateSampleDetailRequest = models.DescribeVirusAutoIsolateSampleDetailRequest;
+const DescribeAssetImageVirusListResponse = models.DescribeAssetImageVirusListResponse;
+const DeleteComplianceAssetPolicySetFromWhitelistResponse = models.DeleteComplianceAssetPolicySetFromWhitelistResponse;
+const DescribeK8sApiAbnormalSummaryResponse = models.DescribeK8sApiAbnormalSummaryResponse;
+const DescribeSecLogJoinTypeListResponse = models.DescribeSecLogJoinTypeListResponse;
+const DescribeAssetSyncLastTimeResponse = models.DescribeAssetSyncLastTimeResponse;
+const CreateAssetImageScanSettingRequest = models.CreateAssetImageScanSettingRequest;
+const EscapeWhiteListInfo = models.EscapeWhiteListInfo;
+const CreateNetworkFirewallUndoPublishResponse = models.CreateNetworkFirewallUndoPublishResponse;
+const DescribeIndexListResponse = models.DescribeIndexListResponse;
+const ModifyVulDefenceSettingRequest = models.ModifyVulDefenceSettingRequest;
+const DescribeAssetSummaryResponse = models.DescribeAssetSummaryResponse;
+const CreateNetworkFirewallClusterRefreshResponse = models.CreateNetworkFirewallClusterRefreshResponse;
+const CreateComponentExportJobResponse = models.CreateComponentExportJobResponse;
+const DescribeReverseShellWhiteListsResponse = models.DescribeReverseShellWhiteListsResponse;
+const DescribeVulContainerListRequest = models.DescribeVulContainerListRequest;
+const DeleteReverseShellEventsRequest = models.DeleteReverseShellEventsRequest;
+const ClsLogsetInfo = models.ClsLogsetInfo;
+const ModifyEscapeEventStatusResponse = models.ModifyEscapeEventStatusResponse;
+const CheckRepeatAssetImageRegistryResponse = models.CheckRepeatAssetImageRegistryResponse;
+const VulDefenceEvent = models.VulDefenceEvent;
+const DescribeAccessControlEventsExportRequest = models.DescribeAccessControlEventsExportRequest;
+const ExportVirusListResponse = models.ExportVirusListResponse;
+const DeleteReverseShellWhiteListsResponse = models.DeleteReverseShellWhiteListsResponse;
+const DescribeNetworkFirewallAuditRecordResponse = models.DescribeNetworkFirewallAuditRecordResponse;
+const DescribeSecLogCleanSettingInfoResponse = models.DescribeSecLogCleanSettingInfoResponse;
+const UpdateNetworkFirewallPolicyYamlDetailResponse = models.UpdateNetworkFirewallPolicyYamlDetailResponse;
+const DescribeAssetImageBindRuleInfoResponse = models.DescribeAssetImageBindRuleInfoResponse;
+const DescribeESHitsRequest = models.DescribeESHitsRequest;
+const DescribeTcssSummaryResponse = models.DescribeTcssSummaryResponse;
+const DeleteRiskSyscallEventsRequest = models.DeleteRiskSyscallEventsRequest;
+const DescribeAssetContainerListRequest = models.DescribeAssetContainerListRequest;
+const DescribeEscapeSafeStateResponse = models.DescribeEscapeSafeStateResponse;
+const DescribeImageRiskSummaryRequest = models.DescribeImageRiskSummaryRequest;
+const CreateDefenceVulExportJobResponse = models.CreateDefenceVulExportJobResponse;
+const AbnormalProcessRuleInfo = models.AbnormalProcessRuleInfo;
+const ScanComplianceAssetsByPolicyItemResponse = models.ScanComplianceAssetsByPolicyItemResponse;
+const CreateRiskDnsEventExportJobRequest = models.CreateRiskDnsEventExportJobRequest;
+const ComplianceWhitelistItem = models.ComplianceWhitelistItem;
+const DescribeAssetPortListRequest = models.DescribeAssetPortListRequest;
+const DescribeComplianceTaskPolicyItemSummaryListResponse = models.DescribeComplianceTaskPolicyItemSummaryListResponse;
+const ComplianceContainerDetailInfo = models.ComplianceContainerDetailInfo;
+const DescribeReverseShellEventsRequest = models.DescribeReverseShellEventsRequest;
+const AddNetworkFirewallPolicyDetailResponse = models.AddNetworkFirewallPolicyDetailResponse;
+const DescribeNetworkFirewallPolicyStatusRequest = models.DescribeNetworkFirewallPolicyStatusRequest;
+const DescribeSecLogKafkaUINResponse = models.DescribeSecLogKafkaUINResponse;
+const DescribeAbnormalProcessRuleDetailRequest = models.DescribeAbnormalProcessRuleDetailRequest;
+const DescribeLogStorageStatisticRequest = models.DescribeLogStorageStatisticRequest;
+const VirusInfo = models.VirusInfo;
+const DescribeVulIgnoreRegistryImageListRequest = models.DescribeVulIgnoreRegistryImageListRequest;
+const AddEditImageAutoAuthorizedRuleResponse = models.AddEditImageAutoAuthorizedRuleResponse;
+const ClusterCheckTaskItem = models.ClusterCheckTaskItem;
+const DescribeVirusAutoIsolateSampleListRequest = models.DescribeVirusAutoIsolateSampleListRequest;
+const ModifySecLogJoinObjectsResponse = models.ModifySecLogJoinObjectsResponse;
+const DescribeAffectedClusterCountResponse = models.DescribeAffectedClusterCountResponse;
+const RenewImageAuthorizeStateRequest = models.RenewImageAuthorizeStateRequest;
+const DescribeVirusAutoIsolateSettingRequest = models.DescribeVirusAutoIsolateSettingRequest;
+const CreateAssetImageRegistryScanTaskOneKeyRequest = models.CreateAssetImageRegistryScanTaskOneKeyRequest;
+const RemoveAssetImageRegistryRegistryDetailRequest = models.RemoveAssetImageRegistryRegistryDetailRequest;
+const NetworkCustomPolicy = models.NetworkCustomPolicy;
+const DeleteNetworkFirewallPolicyDetailRequest = models.DeleteNetworkFirewallPolicyDetailRequest;
+const ModifyEscapeEventStatusRequest = models.ModifyEscapeEventStatusRequest;
+const ImagesBindRuleInfo = models.ImagesBindRuleInfo;
+const ImageHost = models.ImageHost;
+const AddComplianceAssetPolicySetToWhitelistResponse = models.AddComplianceAssetPolicySetToWhitelistResponse;
+const DescribeUnauthorizedCoresTendencyResponse = models.DescribeUnauthorizedCoresTendencyResponse;
+const DescribeNetworkFirewallPolicyStatusResponse = models.DescribeNetworkFirewallPolicyStatusResponse;
+const DescribeAssetContainerListResponse = models.DescribeAssetContainerListResponse;
+const ModifyContainerNetStatusRequest = models.ModifyContainerNetStatusRequest;
+const DescribeVulIgnoreLocalImageListRequest = models.DescribeVulIgnoreLocalImageListRequest;
+const DescribeVirusMonitorSettingResponse = models.DescribeVirusMonitorSettingResponse;
+const DescribeSystemVulListRequest = models.DescribeSystemVulListRequest;
+const DescribeContainerSecEventSummaryRequest = models.DescribeContainerSecEventSummaryRequest;
+const DescribeAssetImageRegistrySummaryResponse = models.DescribeAssetImageRegistrySummaryResponse;
+const DescribeSecLogCleanSettingInfoRequest = models.DescribeSecLogCleanSettingInfoRequest;
+const DescribeVulScanAuthorizedImageSummaryResponse = models.DescribeVulScanAuthorizedImageSummaryResponse;
+const DescribeImageAuthorizedInfoResponse = models.DescribeImageAuthorizedInfoResponse;
+const DescribeAbnormalProcessEventsRequest = models.DescribeAbnormalProcessEventsRequest;
+const ModifyAbnormalProcessRuleStatusResponse = models.ModifyAbnormalProcessRuleStatusResponse;
+const DescribeVirusListRequest = models.DescribeVirusListRequest;
+const DescribeComplianceAssetListRequest = models.DescribeComplianceAssetListRequest;
+const ModifyVirusScanSettingResponse = models.ModifyVirusScanSettingResponse;
+const ImagesVul = models.ImagesVul;
+const DescribePromotionActivityResponse = models.DescribePromotionActivityResponse;
+const ModifyVirusMonitorSettingRequest = models.ModifyVirusMonitorSettingRequest;
+const ModifyEscapeWhiteListRequest = models.ModifyEscapeWhiteListRequest;
+const AddAndPublishNetworkFirewallPolicyDetailResponse = models.AddAndPublishNetworkFirewallPolicyDetailResponse;
+const DescribeSearchExportListRequest = models.DescribeSearchExportListRequest;
+const DescribeReverseShellWhiteListDetailRequest = models.DescribeReverseShellWhiteListDetailRequest;
+const AddCompliancePolicyAssetSetToWhitelistResponse = models.AddCompliancePolicyAssetSetToWhitelistResponse;
+const DescribeVulContainerListResponse = models.DescribeVulContainerListResponse;
+const DescribeRiskSyscallNamesRequest = models.DescribeRiskSyscallNamesRequest;
+const ModifyVulDefenceEventStatusResponse = models.ModifyVulDefenceEventStatusResponse;
+const DescribeEscapeEventInfoResponse = models.DescribeEscapeEventInfoResponse;
+const DescribeK8sApiAbnormalRuleInfoResponse = models.DescribeK8sApiAbnormalRuleInfoResponse;
+const DescribeESHitsResponse = models.DescribeESHitsResponse;
+const DescribeImageRegistryTimingScanTaskResponse = models.DescribeImageRegistryTimingScanTaskResponse;
+const ClusterInfoItem = models.ClusterInfoItem;
+const DescribeComplianceScanFailedAssetListResponse = models.DescribeComplianceScanFailedAssetListResponse;
+const ModifyReverseShellStatusResponse = models.ModifyReverseShellStatusResponse;
+const DeleteMachineResponse = models.DeleteMachineResponse;
+const AddCompliancePolicyAssetSetToWhitelistRequest = models.AddCompliancePolicyAssetSetToWhitelistRequest;
+const DescribeEscapeWhiteListResponse = models.DescribeEscapeWhiteListResponse;
+const DescribeAssetImageHostListRequest = models.DescribeAssetImageHostListRequest;
+const AbnormalProcessEventInfo = models.AbnormalProcessEventInfo;
+const DescribeCompliancePeriodTaskListResponse = models.DescribeCompliancePeriodTaskListResponse;
+const DescribeAssetImageScanSettingRequest = models.DescribeAssetImageScanSettingRequest;
+const AccessControlSystemChildRuleInfo = models.AccessControlSystemChildRuleInfo;
+const DescribeSecLogAlertMsgResponse = models.DescribeSecLogAlertMsgResponse;
+const DescribeInspectionReportRequest = models.DescribeInspectionReportRequest;
+const DescribeAgentDaemonSetCmdRequest = models.DescribeAgentDaemonSetCmdRequest;
+const DescribeSecLogAlertMsgRequest = models.DescribeSecLogAlertMsgRequest;
+const AddNetworkFirewallPolicyYamlDetailResponse = models.AddNetworkFirewallPolicyYamlDetailResponse;
+const AccessControlEventInfo = models.AccessControlEventInfo;
+const DescribeClusterSummaryResponse = models.DescribeClusterSummaryResponse;
+const DescribeSecLogDeliveryClsOptionsResponse = models.DescribeSecLogDeliveryClsOptionsResponse;
+const DeleteMachineRequest = models.DeleteMachineRequest;
+const CreateVulImageExportJobRequest = models.CreateVulImageExportJobRequest;
+const DescribeValueAddedSrvInfoRequest = models.DescribeValueAddedSrvInfoRequest;
+const DescribeCompliancePolicyItemAffectedSummaryResponse = models.DescribeCompliancePolicyItemAffectedSummaryResponse;
+const ModifyRiskSyscallStatusResponse = models.ModifyRiskSyscallStatusResponse;
+const DescribeVulSummaryRequest = models.DescribeVulSummaryRequest;
+const DescribeAutoAuthorizedRuleHostResponse = models.DescribeAutoAuthorizedRuleHostResponse;
+const DeleteIgnoreVulResponse = models.DeleteIgnoreVulResponse;
+const ModifyAssetImageRegistryScanStopOneKeyRequest = models.ModifyAssetImageRegistryScanStopOneKeyRequest;
+const DeleteSearchTemplateRequest = models.DeleteSearchTemplateRequest;
+const SwitchImageAutoAuthorizedRuleResponse = models.SwitchImageAutoAuthorizedRuleResponse;
+const DescribeExportJobResultRequest = models.DescribeExportJobResultRequest;
+const DescribeNetworkFirewallNamespaceLabelListRequest = models.DescribeNetworkFirewallNamespaceLabelListRequest;
+const DescribeK8sApiAbnormalEventListRequest = models.DescribeK8sApiAbnormalEventListRequest;
+const DescribeAffectedWorkloadListResponse = models.DescribeAffectedWorkloadListResponse;
+const CreateComplianceTaskResponse = models.CreateComplianceTaskResponse;
+const DescribeAssetImageRegistryListRequest = models.DescribeAssetImageRegistryListRequest;
+const VulDefencePlugin = models.VulDefencePlugin;
+const DescribeAbnormalProcessEventTendencyResponse = models.DescribeAbnormalProcessEventTendencyResponse;
+const DescribeScanIgnoreVulListRequest = models.DescribeScanIgnoreVulListRequest;
+const DescribeReverseShellWhiteListsRequest = models.DescribeReverseShellWhiteListsRequest;
+const CheckNetworkFirewallPolicyYamlRequest = models.CheckNetworkFirewallPolicyYamlRequest;
+const DescribeRiskListRequest = models.DescribeRiskListRequest;
+const VulDefenceHost = models.VulDefenceHost;
+const ModifyAccessControlStatusResponse = models.ModifyAccessControlStatusResponse;
+const DeleteReverseShellWhiteListsRequest = models.DeleteReverseShellWhiteListsRequest;
+const DescribeEmergencyVulListResponse = models.DescribeEmergencyVulListResponse;
+const DescribeAssetAppServiceListRequest = models.DescribeAssetAppServiceListRequest;
+const ModifyImageAuthorizedResponse = models.ModifyImageAuthorizedResponse;
+const NetworkClusterInfoItem = models.NetworkClusterInfoItem;
+const AddEscapeWhiteListResponse = models.AddEscapeWhiteListResponse;
+const ModifySecLogCleanSettingInfoResponse = models.ModifySecLogCleanSettingInfoResponse;
+const DescribeWebVulListRequest = models.DescribeWebVulListRequest;
+const ModifyVirusScanSettingRequest = models.ModifyVirusScanSettingRequest;
+const DescribeVulDefenceEventRequest = models.DescribeVulDefenceEventRequest;
+const DescribeVirusSummaryResponse = models.DescribeVirusSummaryResponse;
+const DescribeAssetDBServiceListRequest = models.DescribeAssetDBServiceListRequest;
+const UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest = models.UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest;
+const DescribeProVersionInfoResponse = models.DescribeProVersionInfoResponse;
+const AddEditAbnormalProcessRuleResponse = models.AddEditAbnormalProcessRuleResponse;
+const ScanComplianceScanFailedAssetsRequest = models.ScanComplianceScanFailedAssetsRequest;
+const ModifySecLogDeliveryClsSettingResponse = models.ModifySecLogDeliveryClsSettingResponse;
+const CreateCheckComponentResponse = models.CreateCheckComponentResponse;
+const DescribeImageRegistryTimingScanTaskRequest = models.DescribeImageRegistryTimingScanTaskRequest;
+const DescribeRiskSyscallWhiteListDetailResponse = models.DescribeRiskSyscallWhiteListDetailResponse;
+const AddNetworkFirewallPolicyYamlDetailRequest = models.AddNetworkFirewallPolicyYamlDetailRequest;
+const DescribeVulLevelImageSummaryResponse = models.DescribeVulLevelImageSummaryResponse;
+const ScanComplianceAssetsResponse = models.ScanComplianceAssetsResponse;
+const DescribeCompliancePeriodTaskListRequest = models.DescribeCompliancePeriodTaskListRequest;
+const CreateAssetImageVirusExportJobResponse = models.CreateAssetImageVirusExportJobResponse;
+const DescribeIndexListRequest = models.DescribeIndexListRequest;
+const CreateWebVulExportJobResponse = models.CreateWebVulExportJobResponse;
+const DescribeReverseShellWhiteListDetailResponse = models.DescribeReverseShellWhiteListDetailResponse;
+const DescribeUnauthorizedCoresTendencyRequest = models.DescribeUnauthorizedCoresTendencyRequest;
+const DescribeAssetImageVulListExportResponse = models.DescribeAssetImageVulListExportResponse;
+const VulTopRankingInfo = models.VulTopRankingInfo;
+const DescribeProVersionInfoRequest = models.DescribeProVersionInfoRequest;
+const DescribeVulLevelSummaryRequest = models.DescribeVulLevelSummaryRequest;
+const EscapeEventDescription = models.EscapeEventDescription;
+const DescribeAssetImageDetailResponse = models.DescribeAssetImageDetailResponse;
+const CreateAssetImageRegistryScanTaskOneKeyResponse = models.CreateAssetImageRegistryScanTaskOneKeyResponse;
+const AbnormalProcessSystemChildRuleInfo = models.AbnormalProcessSystemChildRuleInfo;
+const DescribeAssetImageVulListExportRequest = models.DescribeAssetImageVulListExportRequest;
+const DescribeExportJobResultResponse = models.DescribeExportJobResultResponse;
+const ReverseShellWhiteListBaseInfo = models.ReverseShellWhiteListBaseInfo;
+const AccessControlRuleInfo = models.AccessControlRuleInfo;
+const DescribeAssetHostListResponse = models.DescribeAssetHostListResponse;
+const DescribeABTestConfigRequest = models.DescribeABTestConfigRequest;
+const K8sApiAbnormalRuleScopeInfo = models.K8sApiAbnormalRuleScopeInfo;
+const StopVulScanTaskRequest = models.StopVulScanTaskRequest;
+const ImageRepoInfo = models.ImageRepoInfo;
+const CreateAssetImageRegistryScanTaskResponse = models.CreateAssetImageRegistryScanTaskResponse;
+const DescribePublicKeyRequest = models.DescribePublicKeyRequest;
+const PortInfo = models.PortInfo;
+const DescribeAssetImageRegistrySummaryRequest = models.DescribeAssetImageRegistrySummaryRequest;
+const DescribeVirusManualScanEstimateTimeoutResponse = models.DescribeVirusManualScanEstimateTimeoutResponse;
+const DescribeTaskResultSummaryResponse = models.DescribeTaskResultSummaryResponse;
+const HostInfo = models.HostInfo;
+const DescribeVirusScanTimeoutSettingRequest = models.DescribeVirusScanTimeoutSettingRequest;
+const ModifySecLogJoinStateResponse = models.ModifySecLogJoinStateResponse;
+const ModifyAccessControlRuleStatusResponse = models.ModifyAccessControlRuleStatusResponse;
+const ModifyAssetImageScanStopRequest = models.ModifyAssetImageScanStopRequest;
+const CreateRefreshTaskRequest = models.CreateRefreshTaskRequest;
+const DescribeK8sApiAbnormalEventListResponse = models.DescribeK8sApiAbnormalEventListResponse;
+const DescribeNewestVulRequest = models.DescribeNewestVulRequest;
+const DescribeAbnormalProcessLevelSummaryResponse = models.DescribeAbnormalProcessLevelSummaryResponse;
+const AddEscapeWhiteListRequest = models.AddEscapeWhiteListRequest;
+const DescribeESAggregationsRequest = models.DescribeESAggregationsRequest;
+const NetworkClusterPodInfo = models.NetworkClusterPodInfo;
+const DescribeAssetImageRiskListExportResponse = models.DescribeAssetImageRiskListExportResponse;
+const ModifySecLogCleanSettingInfoRequest = models.ModifySecLogCleanSettingInfoRequest;
+const DescribeAccessControlEventsRequest = models.DescribeAccessControlEventsRequest;
+const DescribeAccessControlRuleDetailRequest = models.DescribeAccessControlRuleDetailRequest;
+const ModifyVirusScanTimeoutSettingRequest = models.ModifyVirusScanTimeoutSettingRequest;
+const CreateProcessEventsExportJobResponse = models.CreateProcessEventsExportJobResponse;
+const ImageRiskInfo = models.ImageRiskInfo;
+const DescribeRiskSyscallDetailResponse = models.DescribeRiskSyscallDetailResponse;
+const DeleteK8sApiAbnormalRuleResponse = models.DeleteK8sApiAbnormalRuleResponse;
+const ComplianceHostDetailInfo = models.ComplianceHostDetailInfo;
+const VulAffectedImageComponentInfo = models.VulAffectedImageComponentInfo;
+const DescribePromotionActivityRequest = models.DescribePromotionActivityRequest;
+const AccessControlChildRuleInfo = models.AccessControlChildRuleInfo;
+const DescribeSecLogKafkaUINRequest = models.DescribeSecLogKafkaUINRequest;
+const CreateSystemVulExportJobResponse = models.CreateSystemVulExportJobResponse;
+const DescribeRiskSyscallNamesResponse = models.DescribeRiskSyscallNamesResponse;
+const AddEditReverseShellWhiteListResponse = models.AddEditReverseShellWhiteListResponse;
+const DescribeAbnormalProcessEventsResponse = models.DescribeAbnormalProcessEventsResponse;
+const InitializeUserComplianceEnvironmentResponse = models.InitializeUserComplianceEnvironmentResponse;
+const ReverseShellEventDescription = models.ReverseShellEventDescription;
+const DescribeImageRegistryNamespaceListResponse = models.DescribeImageRegistryNamespaceListResponse;
+const VulAffectedImageInfo = models.VulAffectedImageInfo;
+const TagInfo = models.TagInfo;
+const DescribeK8sApiAbnormalRuleListResponse = models.DescribeK8sApiAbnormalRuleListResponse;
+const DeleteCompliancePolicyAssetSetFromWhitelistResponse = models.DeleteCompliancePolicyAssetSetFromWhitelistResponse;
+const DescribeVirusTaskListResponse = models.DescribeVirusTaskListResponse;
+const DescribeAssetHostDetailResponse = models.DescribeAssetHostDetailResponse;
+const CKafkaInstanceInfo = models.CKafkaInstanceInfo;
+const DescribeAffectedNodeListResponse = models.DescribeAffectedNodeListResponse;
+const DeleteK8sApiAbnormalRuleRequest = models.DeleteK8sApiAbnormalRuleRequest;
+const ModifyVirusFileStatusResponse = models.ModifyVirusFileStatusResponse;
+const DescribeAbnormalProcessRulesExportResponse = models.DescribeAbnormalProcessRulesExportResponse;
+const SyncAssetImageRegistryAssetResponse = models.SyncAssetImageRegistryAssetResponse;
+const DescribeAbnormalProcessEventTendencyRequest = models.DescribeAbnormalProcessEventTendencyRequest;
+const DescribeEscapeEventDetailResponse = models.DescribeEscapeEventDetailResponse;
+const ScanCompliancePolicyItemsResponse = models.ScanCompliancePolicyItemsResponse;
+const DeleteAccessControlRulesResponse = models.DeleteAccessControlRulesResponse;
+const DescribeVulImageSummaryResponse = models.DescribeVulImageSummaryResponse;
+const DescribeEscapeRuleInfoRequest = models.DescribeEscapeRuleInfoRequest;
+const VirusTendencyInfo = models.VirusTendencyInfo;
+const DescribeComplianceWhitelistItemListResponse = models.DescribeComplianceWhitelistItemListResponse;
+const DescribeAssetWebServiceListRequest = models.DescribeAssetWebServiceListRequest;
+const UpdateImageRegistryTimingScanTaskRequest = models.UpdateImageRegistryTimingScanTaskRequest;
+const DescribeEscapeEventTendencyRequest = models.DescribeEscapeEventTendencyRequest;
+const DescribeInspectionReportResponse = models.DescribeInspectionReportResponse;
+const SecLogDeliveryClsSettingInfo = models.SecLogDeliveryClsSettingInfo;
+const DescribeVirusScanTaskStatusRequest = models.DescribeVirusScanTaskStatusRequest;
+const CreateAssetImageScanSettingResponse = models.CreateAssetImageScanSettingResponse;
+const DescribeVulDefenceEventDetailRequest = models.DescribeVulDefenceEventDetailRequest;
+const DescribeVirusAutoIsolateSampleListResponse = models.DescribeVirusAutoIsolateSampleListResponse;
+const DescribeVirusEventTendencyRequest = models.DescribeVirusEventTendencyRequest;
+const DescribeAssetImageRegistryVulListExportResponse = models.DescribeAssetImageRegistryVulListExportResponse;
+const StopVirusScanTaskRequest = models.StopVirusScanTaskRequest;
+const DescribeAssetContainerDetailRequest = models.DescribeAssetContainerDetailRequest;
+const ModifyAccessControlStatusRequest = models.ModifyAccessControlStatusRequest;
+const CreateProcessEventsExportJobRequest = models.CreateProcessEventsExportJobRequest;
+const DescribeVulDetailResponse = models.DescribeVulDetailResponse;
+const ModifyCompliancePeriodTaskResponse = models.ModifyCompliancePeriodTaskResponse;
+const RiskSyscallEventInfo = models.RiskSyscallEventInfo;
+const DescribeEscapeEventTendencyResponse = models.DescribeEscapeEventTendencyResponse;
+const ClusterCheckItem = models.ClusterCheckItem;
+const DescribeAssetImageVulListResponse = models.DescribeAssetImageVulListResponse;
+const DescribeK8sApiAbnormalSummaryRequest = models.DescribeK8sApiAbnormalSummaryRequest;
+const DescribeAbnormalProcessLevelSummaryRequest = models.DescribeAbnormalProcessLevelSummaryRequest;
+const AssetFilters = models.AssetFilters;
+const ModifyK8sApiAbnormalRuleStatusRequest = models.ModifyK8sApiAbnormalRuleStatusRequest;
+const DescribeNetworkFirewallPolicyDetailResponse = models.DescribeNetworkFirewallPolicyDetailResponse;
+const DescribePostPayDetailResponse = models.DescribePostPayDetailResponse;
+const DescribeK8sApiAbnormalEventInfoResponse = models.DescribeK8sApiAbnormalEventInfoResponse;
+const DescribeNetworkFirewallPodLabelsListResponse = models.DescribeNetworkFirewallPodLabelsListResponse;
+const VulAffectedComponentInfo = models.VulAffectedComponentInfo;
+const DescribeAssetImageScanStatusRequest = models.DescribeAssetImageScanStatusRequest;
+const DescribeCheckItemListResponse = models.DescribeCheckItemListResponse;
+const ComplianceScanFailedAsset = models.ComplianceScanFailedAsset;
+const ScanComplianceAssetsRequest = models.ScanComplianceAssetsRequest;
+const DescribeAbnormalProcessRuleDetailResponse = models.DescribeAbnormalProcessRuleDetailResponse;
+const ModifyVirusFileStatusRequest = models.ModifyVirusFileStatusRequest;
+const CreateVulContainerExportJobResponse = models.CreateVulContainerExportJobResponse;
+const DescribeAssetImageRegistryListExportRequest = models.DescribeAssetImageRegistryListExportRequest;
+const CreateK8sApiAbnormalRuleInfoResponse = models.CreateK8sApiAbnormalRuleInfoResponse;
+const ProcessBaseInfo = models.ProcessBaseInfo;
+const ModifyEscapeRuleRequest = models.ModifyEscapeRuleRequest;
+const K8sApiAbnormalTendencyItem = models.K8sApiAbnormalTendencyItem;
+const DescribeAbnormalProcessRulesResponse = models.DescribeAbnormalProcessRulesResponse;
+const ModifyVulDefenceSettingResponse = models.ModifyVulDefenceSettingResponse;
+const SupportDefenceVul = models.SupportDefenceVul;
+const DescribeCheckItemListRequest = models.DescribeCheckItemListRequest;
+const DescribeImageComponentListResponse = models.DescribeImageComponentListResponse;
+const DescribeVulImageListResponse = models.DescribeVulImageListResponse;
+const DescribeSecLogDeliveryKafkaOptionsRequest = models.DescribeSecLogDeliveryKafkaOptionsRequest;
+const DescribeVirusScanSettingResponse = models.DescribeVirusScanSettingResponse;
+const DescribeAccessControlRuleDetailResponse = models.DescribeAccessControlRuleDetailResponse;
+const CreateNetworkFirewallPublishRequest = models.CreateNetworkFirewallPublishRequest;
+const CreateHostExportJobResponse = models.CreateHostExportJobResponse;
+const DescribeNetworkFirewallPolicyDiscoverRequest = models.DescribeNetworkFirewallPolicyDiscoverRequest;
+const DescribeNetworkFirewallPolicyYamlDetailResponse = models.DescribeNetworkFirewallPolicyYamlDetailResponse;
+const CreateOrModifyPostPayCoresRequest = models.CreateOrModifyPostPayCoresRequest;
+const ModifyImageAuthorizedRequest = models.ModifyImageAuthorizedRequest;
+const DescribeAssetImageScanTaskRequest = models.DescribeAssetImageScanTaskRequest;
+const DescribeSecLogDeliveryClsSettingRequest = models.DescribeSecLogDeliveryClsSettingRequest;
+const UpdateNetworkFirewallPolicyDetailResponse = models.UpdateNetworkFirewallPolicyDetailResponse;
+const ModifySecLogKafkaUINResponse = models.ModifySecLogKafkaUINResponse;
+const DescribeNetworkFirewallPodLabelsListRequest = models.DescribeNetworkFirewallPodLabelsListRequest;
+const CreateVirusScanTaskResponse = models.CreateVirusScanTaskResponse;
+const DescribeNetworkFirewallAuditRecordRequest = models.DescribeNetworkFirewallAuditRecordRequest;
+const DescribeAssetProcessListRequest = models.DescribeAssetProcessListRequest;
+const DescribeAssetProcessListResponse = models.DescribeAssetProcessListResponse;
+const EscapeEventInfo = models.EscapeEventInfo;
+const ModifyVirusScanTimeoutSettingResponse = models.ModifyVirusScanTimeoutSettingResponse;
+const CreateAssetImageVirusExportJobRequest = models.CreateAssetImageVirusExportJobRequest;
+const DescribeAssetImageRegistryDetailRequest = models.DescribeAssetImageRegistryDetailRequest;
+const CreateAssetImageRegistryScanTaskRequest = models.CreateAssetImageRegistryScanTaskRequest;
+const DescribeAssetClusterListRequest = models.DescribeAssetClusterListRequest;
+const DescribeAssetImageListExportResponse = models.DescribeAssetImageListExportResponse;
+const WarningRule = models.WarningRule;
+const VulAffectedContainerInfo = models.VulAffectedContainerInfo;
+const DescribeLogStorageStatisticResponse = models.DescribeLogStorageStatisticResponse;
+const CreateSearchTemplateResponse = models.CreateSearchTemplateResponse;
+const DescribeAssetContainerDetailResponse = models.DescribeAssetContainerDetailResponse;
+const DescribeVulDefenceSettingResponse = models.DescribeVulDefenceSettingResponse;
+const DescribeImageComponentListRequest = models.DescribeImageComponentListRequest;
+const AbnormalProcessChildRuleInfo = models.AbnormalProcessChildRuleInfo;
+const DescribeNetworkFirewallPolicyListResponse = models.DescribeNetworkFirewallPolicyListResponse;
+const DescribeAgentInstallCommandRequest = models.DescribeAgentInstallCommandRequest;
+const ResetSecLogTopicConfigRequest = models.ResetSecLogTopicConfigRequest;
+const DescribeAssetImageVirusListExportResponse = models.DescribeAssetImageVirusListExportResponse;
+const DescribeVirusScanSettingRequest = models.DescribeVirusScanSettingRequest;
+const SecTendencyEventInfo = models.SecTendencyEventInfo;
+const VirusAutoIsolateSampleInfo = models.VirusAutoIsolateSampleInfo;
+const DescribeExportJobDownloadURLRequest = models.DescribeExportJobDownloadURLRequest;
+const DescribeImageAutoAuthorizedRuleRequest = models.DescribeImageAutoAuthorizedRuleRequest;
+const DescribeVulIgnoreRegistryImageListResponse = models.DescribeVulIgnoreRegistryImageListResponse;
+const UpdateAndPublishNetworkFirewallPolicyDetailRequest = models.UpdateAndPublishNetworkFirewallPolicyDetailRequest;
+const DescribeAssetPortListResponse = models.DescribeAssetPortListResponse;
+const DescribeRefreshTaskRequest = models.DescribeRefreshTaskRequest;
+const CreateClusterCheckTaskResponse = models.CreateClusterCheckTaskResponse;
+const ClsTopicInfo = models.ClsTopicInfo;
+const DescribeCompliancePolicyItemAffectedAssetListRequest = models.DescribeCompliancePolicyItemAffectedAssetListRequest;
+const DescribeImageRiskTendencyRequest = models.DescribeImageRiskTendencyRequest;
+const CreateOrModifyPostPayCoresResponse = models.CreateOrModifyPostPayCoresResponse;
+const ComplianceAffectedAsset = models.ComplianceAffectedAsset;
+const DescribeVirusMonitorSettingRequest = models.DescribeVirusMonitorSettingRequest;
+const DescribeAssetImageHostListResponse = models.DescribeAssetImageHostListResponse;
+const ModifySecLogKafkaUINRequest = models.ModifySecLogKafkaUINRequest;
+const ModifyVirusAutoIsolateSettingRequest = models.ModifyVirusAutoIsolateSettingRequest;
+const DescribeNetworkFirewallClusterListResponse = models.DescribeNetworkFirewallClusterListResponse;
+const EscapeEventTendencyInfo = models.EscapeEventTendencyInfo;
+const DescribeImageRiskTendencyResponse = models.DescribeImageRiskTendencyResponse;
+const CompliancePolicyAssetSetItem = models.CompliancePolicyAssetSetItem;
+const SyncAssetImageRegistryAssetRequest = models.SyncAssetImageRegistryAssetRequest;
+const DescribeComplianceScanFailedAssetListRequest = models.DescribeComplianceScanFailedAssetListRequest;
+const DescribeSearchLogsRequest = models.DescribeSearchLogsRequest;
+const DescribeEscapeEventTypeSummaryResponse = models.DescribeEscapeEventTypeSummaryResponse;
+const DescribeAssetImageRegistryVulListRequest = models.DescribeAssetImageRegistryVulListRequest;
+const DescribeImageSimpleListResponse = models.DescribeImageSimpleListResponse;
+const DescribeVirusManualScanEstimateTimeoutRequest = models.DescribeVirusManualScanEstimateTimeoutRequest;
+const CreateK8sApiAbnormalEventExportJobResponse = models.CreateK8sApiAbnormalEventExportJobResponse;
+const DescribeUserClusterResponse = models.DescribeUserClusterResponse;
+const DescribeAssetImageRegistryRegistryListRequest = models.DescribeAssetImageRegistryRegistryListRequest;
+const DescribeVulDefenceHostResponse = models.DescribeVulDefenceHostResponse;
+const CreateImageExportJobRequest = models.CreateImageExportJobRequest;
+const CreateEmergencyVulExportJobRequest = models.CreateEmergencyVulExportJobRequest;
+const K8sApiAbnormalRuleListItem = models.K8sApiAbnormalRuleListItem;
+const DescribeVirusScanTaskStatusResponse = models.DescribeVirusScanTaskStatusResponse;
+const DescribeEscapeEventsExportResponse = models.DescribeEscapeEventsExportResponse;
+const ComplianceImageDetailInfo = models.ComplianceImageDetailInfo;
+const DescribeVulScanLocalImageListResponse = models.DescribeVulScanLocalImageListResponse;
+const DescribeComplianceWhitelistItemListRequest = models.DescribeComplianceWhitelistItemListRequest;
+const DescribeAccessControlDetailRequest = models.DescribeAccessControlDetailRequest;
+const ClusterRiskItem = models.ClusterRiskItem;
+const DescribeVirusListResponse = models.DescribeVirusListResponse;
+const DescribeAbnormalProcessEventsExportRequest = models.DescribeAbnormalProcessEventsExportRequest;
+const DescribeVulSummaryResponse = models.DescribeVulSummaryResponse;
+const DescribeAssetComponentListRequest = models.DescribeAssetComponentListRequest;
+const DescribeEmergencyVulListRequest = models.DescribeEmergencyVulListRequest;
+const DeleteReverseShellEventsResponse = models.DeleteReverseShellEventsResponse;
+const DescribeAbnormalProcessDetailResponse = models.DescribeAbnormalProcessDetailResponse;
+const DescribeAssetImageListExportRequest = models.DescribeAssetImageListExportRequest;
+const ModifyAssetImageRegistryScanStopOneKeyResponse = models.ModifyAssetImageRegistryScanStopOneKeyResponse;
+const VulDefenceEventDetail = models.VulDefenceEventDetail;
+const UpdateNetworkFirewallPolicyYamlDetailRequest = models.UpdateNetworkFirewallPolicyYamlDetailRequest;
+const DescribeK8sApiAbnormalRuleInfoRequest = models.DescribeK8sApiAbnormalRuleInfoRequest;
+const RunTimeEventBaseInfo = models.RunTimeEventBaseInfo;
+const DescribeSystemVulListResponse = models.DescribeSystemVulListResponse;
+const ModifyIgnoreVul = models.ModifyIgnoreVul;
+const DescribeAssetImageRegistryVirusListResponse = models.DescribeAssetImageRegistryVirusListResponse;
+const DescribeAssetImageSimpleListRequest = models.DescribeAssetImageSimpleListRequest;
+const DescribeAssetDBServiceListResponse = models.DescribeAssetDBServiceListResponse;
+const DescribeSecLogJoinTypeListRequest = models.DescribeSecLogJoinTypeListRequest;
+const DescribeImageSimpleListRequest = models.DescribeImageSimpleListRequest;
+const CreateNetworkFirewallPolicyDiscoverRequest = models.CreateNetworkFirewallPolicyDiscoverRequest;
+const ImageRiskTendencyInfo = models.ImageRiskTendencyInfo;
+const DescribeVulTopRankingResponse = models.DescribeVulTopRankingResponse;
+const DescribeAssetWebServiceListResponse = models.DescribeAssetWebServiceListResponse;
+const VulDetailInfo = models.VulDetailInfo;
+const DescribeVulLevelSummaryResponse = models.DescribeVulLevelSummaryResponse;
+const AddNetworkFirewallPolicyDetailRequest = models.AddNetworkFirewallPolicyDetailRequest;
+const DescribeComplianceTaskPolicyItemSummaryListRequest = models.DescribeComplianceTaskPolicyItemSummaryListRequest;
+const CompliancePolicyItemSummary = models.CompliancePolicyItemSummary;
+const DescribeAssetImageVulListRequest = models.DescribeAssetImageVulListRequest;
+const ModifyRiskSyscallStatusRequest = models.ModifyRiskSyscallStatusRequest;
+const DescribeVulDefenceEventResponse = models.DescribeVulDefenceEventResponse;
+const DescribeVirusEventTendencyResponse = models.DescribeVirusEventTendencyResponse;
+const AddEditImageAutoAuthorizedRuleRequest = models.AddEditImageAutoAuthorizedRuleRequest;
+const SwitchImageAutoAuthorizedRuleRequest = models.SwitchImageAutoAuthorizedRuleRequest;
+const DescribeVirusSampleDownloadUrlResponse = models.DescribeVirusSampleDownloadUrlResponse;
+const DescribeValueAddedSrvInfoResponse = models.DescribeValueAddedSrvInfoResponse;
+const RunTimeRiskInfo = models.RunTimeRiskInfo;
+const CreateVirusScanTaskRequest = models.CreateVirusScanTaskRequest;
+const DescribeAbnormalProcessDetailRequest = models.DescribeAbnormalProcessDetailRequest;
+const DescribeAssetImageScanTaskResponse = models.DescribeAssetImageScanTaskResponse;
+const AddEditAccessControlRuleRequest = models.AddEditAccessControlRuleRequest;
+const DescribeVulTopRankingRequest = models.DescribeVulTopRankingRequest;
+const ConfirmNetworkFirewallPolicyRequest = models.ConfirmNetworkFirewallPolicyRequest;
+const ContainerMount = models.ContainerMount;
+const DeleteSearchTemplateResponse = models.DeleteSearchTemplateResponse;
+const AddComplianceAssetPolicySetToWhitelistRequest = models.AddComplianceAssetPolicySetToWhitelistRequest;
+const DescribeVirusAutoIsolateSampleDownloadURLResponse = models.DescribeVirusAutoIsolateSampleDownloadURLResponse;
+const DescribeSecLogVasInfoRequest = models.DescribeSecLogVasInfoRequest;
+const DescribeNetworkFirewallPolicyDiscoverResponse = models.DescribeNetworkFirewallPolicyDiscoverResponse;
+const DescribeAssetImageSimpleListResponse = models.DescribeAssetImageSimpleListResponse;
+const DescribeComplianceAssetPolicyItemListResponse = models.DescribeComplianceAssetPolicyItemListResponse;
+const ComplianceFilters = models.ComplianceFilters;
+const ImageVirusInfo = models.ImageVirusInfo;
+const StopVulScanTaskResponse = models.StopVulScanTaskResponse;
+const ModifyEscapeWhiteListResponse = models.ModifyEscapeWhiteListResponse;
+const NetworkClusterNamespaceLabelInfo = models.NetworkClusterNamespaceLabelInfo;
+const ImagesInfo = models.ImagesInfo;
+const ModifyVirusAutoIsolateExampleSwitchRequest = models.ModifyVirusAutoIsolateExampleSwitchRequest;
+const ImageVirus = models.ImageVirus;
+const ModifySecLogDeliveryKafkaSettingRequest = models.ModifySecLogDeliveryKafkaSettingRequest;
+const DescribeReverseShellEventsExportRequest = models.DescribeReverseShellEventsExportRequest;
+const ModifyK8sApiAbnormalEventStatusRequest = models.ModifyK8sApiAbnormalEventStatusRequest;
+const ModifySecLogJoinObjectsRequest = models.ModifySecLogJoinObjectsRequest;
+const DescribeK8sApiAbnormalRuleListRequest = models.DescribeK8sApiAbnormalRuleListRequest;
+const DescribeAccessControlDetailResponse = models.DescribeAccessControlDetailResponse;
+const CreateImageExportJobResponse = models.CreateImageExportJobResponse;
+const ProjectInfo = models.ProjectInfo;
+const DescribeAffectedNodeListRequest = models.DescribeAffectedNodeListRequest;
+const DescribeAssetImageRegistryAssetStatusResponse = models.DescribeAssetImageRegistryAssetStatusResponse;
+const ContainerNetwork = models.ContainerNetwork;
+const DescribeSecLogDeliveryKafkaSettingResponse = models.DescribeSecLogDeliveryKafkaSettingResponse;
+const CreateHostExportJobRequest = models.CreateHostExportJobRequest;
+const AddEditRiskSyscallWhiteListResponse = models.AddEditRiskSyscallWhiteListResponse;
+const DescribeVirusAutoIsolateSampleDownloadURLRequest = models.DescribeVirusAutoIsolateSampleDownloadURLRequest;
+const ModifyAbnormalProcessStatusRequest = models.ModifyAbnormalProcessStatusRequest;
+const DescribeVulDetailRequest = models.DescribeVulDetailRequest;
+const CreateEscapeWhiteListExportJobRequest = models.CreateEscapeWhiteListExportJobRequest;
+const DescribeSecLogJoinObjectListRequest = models.DescribeSecLogJoinObjectListRequest;
+const ImageRisk = models.ImageRisk;
+const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
+const ComplianceAssetPolicyItem = models.ComplianceAssetPolicyItem;
+const InitializeUserComplianceEnvironmentRequest = models.InitializeUserComplianceEnvironmentRequest;
+const DescribeSupportDefenceVulResponse = models.DescribeSupportDefenceVulResponse;
+const DescribeAssetImageRiskListRequest = models.DescribeAssetImageRiskListRequest;
+const DescribeEscapeSafeStateRequest = models.DescribeEscapeSafeStateRequest;
+const NetworkPorts = models.NetworkPorts;
+const CreateVulScanTaskResponse = models.CreateVulScanTaskResponse;
+const DescribeTcssSummaryRequest = models.DescribeTcssSummaryRequest;
+const ModifyContainerNetStatusResponse = models.ModifyContainerNetStatusResponse;
+const DescribeEscapeEventDetailRequest = models.DescribeEscapeEventDetailRequest;
+const DescribeSupportDefenceVulRequest = models.DescribeSupportDefenceVulRequest;
+const DeleteCompliancePolicyAssetSetFromWhitelistRequest = models.DeleteCompliancePolicyAssetSetFromWhitelistRequest;
+const DescribeExportJobManageListRequest = models.DescribeExportJobManageListRequest;
+const DescribeVirusSummaryRequest = models.DescribeVirusSummaryRequest;
+const DescribeNetworkFirewallPolicyYamlDetailRequest = models.DescribeNetworkFirewallPolicyYamlDetailRequest;
+const ModifySecLogJoinStateRequest = models.ModifySecLogJoinStateRequest;
+const ABTestConfig = models.ABTestConfig;
+const RiskSyscallWhiteListBaseInfo = models.RiskSyscallWhiteListBaseInfo;
+const DeleteAbnormalProcessRulesRequest = models.DeleteAbnormalProcessRulesRequest;
+const CreateNetworkFirewallClusterRefreshRequest = models.CreateNetworkFirewallClusterRefreshRequest;
+const ModifyCompliancePeriodTaskRequest = models.ModifyCompliancePeriodTaskRequest;
+const DescribeRiskSyscallEventsRequest = models.DescribeRiskSyscallEventsRequest;
+const DescribeRiskListResponse = models.DescribeRiskListResponse;
+const ModifyAssetRequest = models.ModifyAssetRequest;
+const RegionInfo = models.RegionInfo;
+const DescribeEscapeWhiteListRequest = models.DescribeEscapeWhiteListRequest;
+const VulDefenceEventTendency = models.VulDefenceEventTendency;
+const ComponentInfo = models.ComponentInfo;
+const ConfirmNetworkFirewallPolicyResponse = models.ConfirmNetworkFirewallPolicyResponse;
+const CreateNetworkFirewallPublishResponse = models.CreateNetworkFirewallPublishResponse;
+const DescribeAssetSummaryRequest = models.DescribeAssetSummaryRequest;
+const CreateClusterCheckTaskRequest = models.CreateClusterCheckTaskRequest;
+const RaspInfo = models.RaspInfo;
+const DescribeNetworkFirewallClusterListRequest = models.DescribeNetworkFirewallClusterListRequest;
+const CreateVulDefenceEventExportJobResponse = models.CreateVulDefenceEventExportJobResponse;
+const AutoAuthorizedRuleHostInfo = models.AutoAuthorizedRuleHostInfo;
+const CreateExportComplianceStatusListJobRequest = models.CreateExportComplianceStatusListJobRequest;
+const DescribeImageAutoAuthorizedTaskListRequest = models.DescribeImageAutoAuthorizedTaskListRequest;
+const DescribeVirusSampleDownloadUrlRequest = models.DescribeVirusSampleDownloadUrlRequest;
+const AddAndPublishNetworkFirewallPolicyYamlDetailResponse = models.AddAndPublishNetworkFirewallPolicyYamlDetailResponse;
+const AddAndPublishNetworkFirewallPolicyDetailRequest = models.AddAndPublishNetworkFirewallPolicyDetailRequest;
+const DescribeEscapeEventInfoRequest = models.DescribeEscapeEventInfoRequest;
+const UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse = models.UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse;
+const DescribeExportJobManageListResponse = models.DescribeExportJobManageListResponse;
+const DescribeRiskSyscallEventsExportResponse = models.DescribeRiskSyscallEventsExportResponse;
+const DescribeUnfinishRefreshTaskRequest = models.DescribeUnfinishRefreshTaskRequest;
+const DescribeAssetImageRegistryRiskInfoListRequest = models.DescribeAssetImageRegistryRiskInfoListRequest;
+const DescribeImageRegistryNamespaceListRequest = models.DescribeImageRegistryNamespaceListRequest;
+const DescribeAssetImageRegistryScanStatusOneKeyRequest = models.DescribeAssetImageRegistryScanStatusOneKeyRequest;
+const ModifyAccessControlRuleStatusRequest = models.ModifyAccessControlRuleStatusRequest;
+const DescribeVulScanAuthorizedImageSummaryRequest = models.DescribeVulScanAuthorizedImageSummaryRequest;
+const DescribeWarningRulesRequest = models.DescribeWarningRulesRequest;
+const RunTimeTendencyInfo = models.RunTimeTendencyInfo;
+const DescribeContainerAssetSummaryRequest = models.DescribeContainerAssetSummaryRequest;
+const CkafkaRouteInfo = models.CkafkaRouteInfo;
+const ComponentsInfo = models.ComponentsInfo;
+const DescribeImageAutoAuthorizedLogListResponse = models.DescribeImageAutoAuthorizedLogListResponse;
+const DeleteComplianceAssetPolicySetFromWhitelistRequest = models.DeleteComplianceAssetPolicySetFromWhitelistRequest;
+const DeleteRiskSyscallWhiteListsResponse = models.DeleteRiskSyscallWhiteListsResponse;
+const DescribeAssetImageVirusListRequest = models.DescribeAssetImageVirusListRequest;
+const DescribeAssetImageScanSettingResponse = models.DescribeAssetImageScanSettingResponse;
+const DescribeReverseShellDetailResponse = models.DescribeReverseShellDetailResponse;
+const DescribeClusterSummaryRequest = models.DescribeClusterSummaryRequest;
+const AddIgnoreVulRequest = models.AddIgnoreVulRequest;
+const CreateEscapeWhiteListExportJobResponse = models.CreateEscapeWhiteListExportJobResponse;
+const DescribeAccessControlRulesExportResponse = models.DescribeAccessControlRulesExportResponse;
+const ModifyAbnormalProcessStatusResponse = models.ModifyAbnormalProcessStatusResponse;
+const DescribeAbnormalProcessEventsExportResponse = models.DescribeAbnormalProcessEventsExportResponse;
+const ExportJobInfo = models.ExportJobInfo;
+const DescribeContainerAssetSummaryResponse = models.DescribeContainerAssetSummaryResponse;
+const CreateAssetImageScanTaskRequest = models.CreateAssetImageScanTaskRequest;
+const CreateSearchTemplateRequest = models.CreateSearchTemplateRequest;
+const DescribeEscapeEventsExportRequest = models.DescribeEscapeEventsExportRequest;
+const AddEditAbnormalProcessRuleRequest = models.AddEditAbnormalProcessRuleRequest;
+const CheckRepeatAssetImageRegistryRequest = models.CheckRepeatAssetImageRegistryRequest;
+const AffectedNodeItem = models.AffectedNodeItem;
+const CreateCheckComponentRequest = models.CreateCheckComponentRequest;
+const DescribeAgentInstallCommandResponse = models.DescribeAgentInstallCommandResponse;
+const DeleteRiskSyscallWhiteListsRequest = models.DeleteRiskSyscallWhiteListsRequest;
+const ModifyK8sApiAbnormalRuleStatusResponse = models.ModifyK8sApiAbnormalRuleStatusResponse;
+const DescribeImageAuthorizedInfoRequest = models.DescribeImageAuthorizedInfoRequest;
+const DescribeExportJobDownloadURLResponse = models.DescribeExportJobDownloadURLResponse;
+const DescribeAssetImageRegistryRiskInfoListResponse = models.DescribeAssetImageRegistryRiskInfoListResponse;
+const DescribeVulIgnoreLocalImageListResponse = models.DescribeVulIgnoreLocalImageListResponse;
+const DescribeAssetImageRegistryDetailResponse = models.DescribeAssetImageRegistryDetailResponse;
+const AddCompliancePolicyItemToWhitelistResponse = models.AddCompliancePolicyItemToWhitelistResponse;
+const ComplianceAssetPolicySetItem = models.ComplianceAssetPolicySetItem;
+const DescribeAccessControlRulesRequest = models.DescribeAccessControlRulesRequest;
+const StopVirusScanTaskResponse = models.StopVirusScanTaskResponse;
+const K8sApiAbnormalEventInfo = models.K8sApiAbnormalEventInfo;
+const DescribeVulDefenceEventTendencyResponse = models.DescribeVulDefenceEventTendencyResponse;
+const CreateK8sApiAbnormalRuleInfoRequest = models.CreateK8sApiAbnormalRuleInfoRequest;
+const CreateK8sApiAbnormalRuleExportJobResponse = models.CreateK8sApiAbnormalRuleExportJobResponse;
+const RenewImageAuthorizeStateResponse = models.RenewImageAuthorizeStateResponse;
+const ImageAutoAuthorizedTask = models.ImageAutoAuthorizedTask;
+const AddEditWarningRulesRequest = models.AddEditWarningRulesRequest;
+const DescribeSearchLogsResponse = models.DescribeSearchLogsResponse;
+const ModifyAssetResponse = models.ModifyAssetResponse;
+const DescribeReverseShellEventsExportResponse = models.DescribeReverseShellEventsExportResponse;
+const DescribeAssetImageBindRuleInfoRequest = models.DescribeAssetImageBindRuleInfoRequest;
+const DescribeAssetImageListResponse = models.DescribeAssetImageListResponse;
+const DescribeVulDefenceEventDetailResponse = models.DescribeVulDefenceEventDetailResponse;
+const ComplianceAssetInfo = models.ComplianceAssetInfo;
+const DescribeAssetImageRegistryVirusListRequest = models.DescribeAssetImageRegistryVirusListRequest;
+const CreateEscapeEventsExportJobRequest = models.CreateEscapeEventsExportJobRequest;
+const ModifyVirusMonitorSettingResponse = models.ModifyVirusMonitorSettingResponse;
+const CheckNetworkFirewallPolicyYamlResponse = models.CheckNetworkFirewallPolicyYamlResponse;
+const DescribeComplianceTaskAssetSummaryResponse = models.DescribeComplianceTaskAssetSummaryResponse;
+const DescribeWarningRulesResponse = models.DescribeWarningRulesResponse;
+const DescribeUserClusterRequest = models.DescribeUserClusterRequest;
+const DescribeNetworkFirewallClusterRefreshStatusResponse = models.DescribeNetworkFirewallClusterRefreshStatusResponse;
+const VirusTaskInfo = models.VirusTaskInfo;
+const AffectedWorkloadItem = models.AffectedWorkloadItem;
+const AddAndPublishNetworkFirewallPolicyYamlDetailRequest = models.AddAndPublishNetworkFirewallPolicyYamlDetailRequest;
+const CreateComplianceTaskRequest = models.CreateComplianceTaskRequest;
+const DescribeAccessControlRulesExportRequest = models.DescribeAccessControlRulesExportRequest;
+const OpenTcssTrialRequest = models.OpenTcssTrialRequest;
+const CreateEscapeEventsExportJobResponse = models.CreateEscapeEventsExportJobResponse;
+const RiskSyscallEventDescription = models.RiskSyscallEventDescription;
+const DescribeImageAutoAuthorizedRuleResponse = models.DescribeImageAutoAuthorizedRuleResponse;
+const AddEditWarningRulesResponse = models.AddEditWarningRulesResponse;
+const DescribeVulDefenceSettingRequest = models.DescribeVulDefenceSettingRequest;
+const DescribeVirusAutoIsolateSettingResponse = models.DescribeVirusAutoIsolateSettingResponse;
+const VulInfo = models.VulInfo;
+const DescribeAssetImageRegistryRegistryListResponse = models.DescribeAssetImageRegistryRegistryListResponse;
+const DescribeAssetImageRegistryAssetStatusRequest = models.DescribeAssetImageRegistryAssetStatusRequest;
+const DescribeVulScanLocalImageListRequest = models.DescribeVulScanLocalImageListRequest;
+const ImageProgress = models.ImageProgress;
+const CreateK8sApiAbnormalRuleExportJobRequest = models.CreateK8sApiAbnormalRuleExportJobRequest;
+const CreateVirusScanAgainResponse = models.CreateVirusScanAgainResponse;
+const CreateDefenceVulExportJobRequest = models.CreateDefenceVulExportJobRequest;
+const ModifySecLogDeliveryClsSettingRequest = models.ModifySecLogDeliveryClsSettingRequest;
+const AddEditAccessControlRuleResponse = models.AddEditAccessControlRuleResponse;
+const DescribeEscapeEventTypeSummaryRequest = models.DescribeEscapeEventTypeSummaryRequest;
+const DescribeVulLevelImageSummaryRequest = models.DescribeVulLevelImageSummaryRequest;
+const DeleteCompliancePolicyItemFromWhitelistResponse = models.DeleteCompliancePolicyItemFromWhitelistResponse;
+const DescribeSecEventsTendencyRequest = models.DescribeSecEventsTendencyRequest;
+const ResetSecLogTopicConfigResponse = models.ResetSecLogTopicConfigResponse;
+const DescribeAccessControlRulesResponse = models.DescribeAccessControlRulesResponse;
+const ModifyEscapeRuleResponse = models.ModifyEscapeRuleResponse;
+const DescribeSecLogVasInfoResponse = models.DescribeSecLogVasInfoResponse;
+const ModifyVirusAutoIsolateSettingResponse = models.ModifyVirusAutoIsolateSettingResponse;
+const AssetSimpleImageInfo = models.AssetSimpleImageInfo;
+const DescribeCompliancePolicyItemAffectedSummaryRequest = models.DescribeCompliancePolicyItemAffectedSummaryRequest;
+const DescribeVirusDetailResponse = models.DescribeVirusDetailResponse;
+const DescribeImageAutoAuthorizedTaskListResponse = models.DescribeImageAutoAuthorizedTaskListResponse;
+const DescribeComplianceAssetListResponse = models.DescribeComplianceAssetListResponse;
+const CreateVulContainerExportJobRequest = models.CreateVulContainerExportJobRequest;
+const DescribeSecLogDeliveryClsSettingResponse = models.DescribeSecLogDeliveryClsSettingResponse;
+const DescribeComplianceAssetDetailInfoResponse = models.DescribeComplianceAssetDetailInfoResponse;
+const DeleteEscapeWhiteListResponse = models.DeleteEscapeWhiteListResponse;
+const RemoveAssetImageRegistryRegistryDetailResponse = models.RemoveAssetImageRegistryRegistryDetailResponse;
+const ScanComplianceScanFailedAssetsResponse = models.ScanComplianceScanFailedAssetsResponse;
+const ModifyAssetImageRegistryScanStopRequest = models.ModifyAssetImageRegistryScanStopRequest;
+const DeleteNetworkFirewallPolicyDetailResponse = models.DeleteNetworkFirewallPolicyDetailResponse;
+const DescribeK8sApiAbnormalTendencyRequest = models.DescribeK8sApiAbnormalTendencyRequest;
+const RiskSyscallWhiteListInfo = models.RiskSyscallWhiteListInfo;
+const DescribeNewestVulResponse = models.DescribeNewestVulResponse;
+const DescribeCompliancePolicyItemAffectedAssetListResponse = models.DescribeCompliancePolicyItemAffectedAssetListResponse;
+const DescribeComplianceAssetPolicyItemListRequest = models.DescribeComplianceAssetPolicyItemListRequest;
+const DescribeABTestConfigResponse = models.DescribeABTestConfigResponse;
+const SearchTemplate = models.SearchTemplate;
+const DescribeContainerSecEventSummaryResponse = models.DescribeContainerSecEventSummaryResponse;
+const ProcessDetailBaseInfo = models.ProcessDetailBaseInfo;
+const DescribeAssetHostListRequest = models.DescribeAssetHostListRequest;
+const CreateVulDefenceHostExportJobRequest = models.CreateVulDefenceHostExportJobRequest;
+const DescribeImageAutoAuthorizedLogListRequest = models.DescribeImageAutoAuthorizedLogListRequest;
+const DescribeRiskSyscallEventsExportRequest = models.DescribeRiskSyscallEventsExportRequest;
+const DescribeRiskSyscallWhiteListsRequest = models.DescribeRiskSyscallWhiteListsRequest;
+const DescribeVulDefencePluginRequest = models.DescribeVulDefencePluginRequest;
+const ContainerInfo = models.ContainerInfo;
+const DescribeAssetImageRegistryScanStatusOneKeyResponse = models.DescribeAssetImageRegistryScanStatusOneKeyResponse;
+const DescribeAssetImageRegistryRegistryDetailRequest = models.DescribeAssetImageRegistryRegistryDetailRequest;
+const NetworkAuditRecord = models.NetworkAuditRecord;
+const UpdateAssetImageRegistryRegistryDetailRequest = models.UpdateAssetImageRegistryRegistryDetailRequest;
+const DescribeK8sApiAbnormalRuleScopeListRequest = models.DescribeK8sApiAbnormalRuleScopeListRequest;
+const ServiceInfo = models.ServiceInfo;
+const AddEditReverseShellWhiteListRequest = models.AddEditReverseShellWhiteListRequest;
+const VulIgnoreRegistryImage = models.VulIgnoreRegistryImage;
+const DescribeVirusTaskListRequest = models.DescribeVirusTaskListRequest;
+const CreateRiskDnsEventExportJobResponse = models.CreateRiskDnsEventExportJobResponse;
+const DescribeAssetImageRegistryVirusListExportRequest = models.DescribeAssetImageRegistryVirusListExportRequest;
+const DescribeWebVulListResponse = models.DescribeWebVulListResponse;
+const DescribeVulScanInfoResponse = models.DescribeVulScanInfoResponse;
+const DescribeAssetImageRegistryListExportResponse = models.DescribeAssetImageRegistryListExportResponse;
+const FileAttributeInfo = models.FileAttributeInfo;
+const DescribeVulTendencyRequest = models.DescribeVulTendencyRequest;
+const DescribePostPayDetailRequest = models.DescribePostPayDetailRequest;
+const ModifyK8sApiAbnormalEventStatusResponse = models.ModifyK8sApiAbnormalEventStatusResponse;
+const DescribeSecLogDeliveryKafkaOptionsResponse = models.DescribeSecLogDeliveryKafkaOptionsResponse;
+const DescribeAssetHostDetailRequest = models.DescribeAssetHostDetailRequest;
+const DescribeRefreshTaskResponse = models.DescribeRefreshTaskResponse;
+const ReverseShellWhiteListInfo = models.ReverseShellWhiteListInfo;
+const UpdateNetworkFirewallPolicyDetailRequest = models.UpdateNetworkFirewallPolicyDetailRequest;
+const EscapeRuleEnabled = models.EscapeRuleEnabled;
+const DescribeK8sApiAbnormalEventInfoRequest = models.DescribeK8sApiAbnormalEventInfoRequest;
+const DescribeSearchTemplatesRequest = models.DescribeSearchTemplatesRequest;
+
+
+/**
+ * tcss client
+ * @class
+ */
+class TcssClient extends AbstractClient {
+
+    constructor(credential, region, profile) {
+        super("tcss.tencentcloudapi.com", "2020-11-01", credential, region, profile);
+    }
+    
+    /**
+     * This API is used to query the image licensing information.
+     * @param {DescribeImageAuthorizedInfoRequest} req
+     * @param {function(string, DescribeImageAuthorizedInfoResponse):void} cb
+     * @public
+     */
+    DescribeImageAuthorizedInfo(req, cb) {
+        let resp = new DescribeImageAuthorizedInfoResponse();
+        this.request("DescribeImageAuthorizedInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create K8sApi abnormal event export jobs.
+     * @param {CreateK8sApiAbnormalEventExportJobRequest} req
+     * @param {function(string, CreateK8sApiAbnormalEventExportJobResponse):void} cb
+     * @public
+     */
+    CreateK8sApiAbnormalEventExportJob(req, cb) {
+        let resp = new CreateK8sApiAbnormalEventExportJobResponse();
+        this.request("CreateK8sApiAbnormalEventExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the configuration of security log delivery to CLS.
+     * @param {ModifySecLogDeliveryClsSettingRequest} req
+     * @param {function(string, ModifySecLogDeliveryClsSettingResponse):void} cb
+     * @public
+     */
+    ModifySecLogDeliveryClsSetting(req, cb) {
+        let resp = new ModifySecLogDeliveryClsSettingResponse();
+        this.request("ModifySecLogDeliveryClsSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query and export the list of abnormal process events at runtime.
+     * @param {DescribeAbnormalProcessEventsExportRequest} req
+     * @param {function(string, DescribeAbnormalProcessEventsExportResponse):void} cb
+     * @public
+     */
+    DescribeAbnormalProcessEventsExport(req, cb) {
+        let resp = new DescribeAbnormalProcessEventsExportResponse();
+        this.request("DescribeAbnormalProcessEventsExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the timeout settings of a file scan at runtime.
+     * @param {DescribeVirusScanTimeoutSettingRequest} req
+     * @param {function(string, DescribeVirusScanTimeoutSettingResponse):void} cb
+     * @public
+     */
+    DescribeVirusScanTimeoutSetting(req, cb) {
+        let resp = new DescribeVirusScanTimeoutSettingResponse();
+        this.request("DescribeVirusScanTimeoutSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the trojan overview at runtime.
+     * @param {DescribeVirusSummaryRequest} req
+     * @param {function(string, DescribeVirusSummaryResponse):void} cb
+     * @public
+     */
+    DescribeVirusSummary(req, cb) {
+        let resp = new DescribeVirusSummaryResponse();
+        this.request("DescribeVirusSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to edit the exploit prevention settings.
+     * @param {ModifyVulDefenceSettingRequest} req
+     * @param {function(string, ModifyVulDefenceSettingResponse):void} cb
+     * @public
+     */
+    ModifyVulDefenceSetting(req, cb) {
+        let resp = new ModifyVulDefenceSettingResponse();
+        this.request("ModifyVulDefenceSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of top vulnerabilities.
+     * @param {DescribeVulTopRankingRequest} req
+     * @param {function(string, DescribeVulTopRankingResponse):void} cb
+     * @public
+     */
+    DescribeVulTopRanking(req, cb) {
+        let resp = new DescribeVulTopRankingResponse();
+        this.request("DescribeVulTopRanking", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of servers.
+     * @param {DescribeAssetHostListRequest} req
+     * @param {function(string, DescribeAssetHostListResponse):void} cb
+     * @public
+     */
+    DescribeAssetHostList(req, cb) {
+        let resp = new DescribeAssetHostListResponse();
+        this.request("DescribeAssetHostList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check all the failed check items of the specified asset again and return the ID of the created compliance check task.
+     * @param {ScanComplianceScanFailedAssetsRequest} req
+     * @param {function(string, ScanComplianceScanFailedAssetsResponse):void} cb
+     * @public
+     */
+    ScanComplianceScanFailedAssets(req, cb) {
+        let resp = new ScanComplianceScanFailedAssetsResponse();
+        this.request("ScanComplianceScanFailedAssets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the index list.
+     * @param {DescribeIndexListRequest} req
+     * @param {function(string, DescribeIndexListResponse):void} cb
+     * @public
+     */
+    DescribeIndexList(req, cb) {
+        let resp = new DescribeIndexListResponse();
+        this.request("DescribeIndexList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the public key.
+     * @param {DescribePublicKeyRequest} req
+     * @param {function(string, DescribePublicKeyResponse):void} cb
+     * @public
+     */
+    DescribePublicKey(req, cb) {
+        let resp = new DescribePublicKeyResponse();
+        this.request("DescribePublicKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an access control event at runtime.
+     * @param {DescribeAccessControlDetailRequest} req
+     * @param {function(string, DescribeAccessControlDetailResponse):void} cb
+     * @public
+     */
+    DescribeAccessControlDetail(req, cb) {
+        let resp = new DescribeAccessControlDetailResponse();
+        this.request("DescribeAccessControlDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an automatically isolated trojan sample.
+     * @param {DescribeVirusAutoIsolateSampleDetailRequest} req
+     * @param {function(string, DescribeVirusAutoIsolateSampleDetailResponse):void} cb
+     * @public
+     */
+    DescribeVirusAutoIsolateSampleDetail(req, cb) {
+        let resp = new DescribeVirusAutoIsolateSampleDetailResponse();
+        this.request("DescribeVirusAutoIsolateSampleDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query and export the list of abnormal process policies at runtime.
+     * @param {DescribeAbnormalProcessRulesExportRequest} req
+     * @param {function(string, DescribeAbnormalProcessRulesExportResponse):void} cb
+     * @public
+     */
+    DescribeAbnormalProcessRulesExport(req, cb) {
+        let resp = new DescribeAbnormalProcessRulesExportResponse();
+        this.request("DescribeAbnormalProcessRulesExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the execution status of a network policy in the container network.
+     * @param {DescribeNetworkFirewallPolicyStatusRequest} req
+     * @param {function(string, DescribeNetworkFirewallPolicyStatusResponse):void} cb
+     * @public
+     */
+    DescribeNetworkFirewallPolicyStatus(req, cb) {
+        let resp = new DescribeNetworkFirewallPolicyStatusResponse();
+        this.request("DescribeNetworkFirewallPolicyStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the statistics of K8sApi abnormal events.
+     * @param {DescribeK8sApiAbnormalSummaryRequest} req
+     * @param {function(string, DescribeK8sApiAbnormalSummaryResponse):void} cb
+     * @public
+     */
+    DescribeK8sApiAbnormalSummary(req, cb) {
+        let resp = new DescribeK8sApiAbnormalSummaryResponse();
+        this.request("DescribeK8sApiAbnormalSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an exploit prevention event export task.
+     * @param {CreateVulDefenceEventExportJobRequest} req
+     * @param {function(string, CreateVulDefenceEventExportJobResponse):void} cb
+     * @public
+     */
+    CreateVulDefenceEventExportJob(req, cb) {
+        let resp = new CreateVulDefenceEventExportJobResponse();
+        this.request("CreateVulDefenceEventExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of application services.
+     * @param {DescribeAssetAppServiceListRequest} req
+     * @param {function(string, DescribeAssetAppServiceListResponse):void} cb
+     * @public
+     */
+    DescribeAssetAppServiceList(req, cb) {
+        let resp = new DescribeAssetAppServiceListResponse();
+        this.request("DescribeAssetAppServiceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a search template.
+     * @param {DeleteSearchTemplateRequest} req
+     * @param {function(string, DeleteSearchTemplateResponse):void} cb
+     * @public
+     */
+    DeleteSearchTemplate(req, cb) {
+        let resp = new DeleteSearchTemplateResponse();
+        this.request("DeleteSearchTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export images affected by vulnerabilities.
+     * @param {CreateVulImageExportJobRequest} req
+     * @param {function(string, CreateVulImageExportJobResponse):void} cb
+     * @public
+     */
+    CreateVulImageExportJob(req, cb) {
+        let resp = new CreateVulImageExportJobResponse();
+        this.request("CreateVulImageExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to count the number of licensed but not scanned images on the vulnerability scanning page.
+     * @param {DescribeVulScanAuthorizedImageSummaryRequest} req
+     * @param {function(string, DescribeVulScanAuthorizedImageSummaryResponse):void} cb
+     * @public
+     */
+    DescribeVulScanAuthorizedImageSummary(req, cb) {
+        let resp = new DescribeVulScanAuthorizedImageSummaryResponse();
+        this.request("DescribeVulScanAuthorizedImageSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the details of an image repository.
+     * @param {RemoveAssetImageRegistryRegistryDetailRequest} req
+     * @param {function(string, RemoveAssetImageRegistryRegistryDetailResponse):void} cb
+     * @public
+     */
+    RemoveAssetImageRegistryRegistryDetail(req, cb) {
+        let resp = new RemoveAssetImageRegistryRegistryDetailResponse();
+        this.request("RemoveAssetImageRegistryRegistryDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to distribute a task to refresh the asset information.
+     * @param {CreateRefreshTaskRequest} req
+     * @param {function(string, CreateRefreshTaskResponse):void} cb
+     * @public
+     */
+    CreateRefreshTask(req, cb) {
+        let resp = new CreateRefreshTaskResponse();
+        this.request("CreateRefreshTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of ES query files.
+     * @param {DescribeSearchExportListRequest} req
+     * @param {function(string, DescribeSearchExportListResponse):void} cb
+     * @public
+     */
+    DescribeSearchExportList(req, cb) {
+        let resp = new DescribeSearchExportListResponse();
+        this.request("DescribeSearchExportList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the UIN of a Kafka security log.
+     * @param {ModifySecLogKafkaUINRequest} req
+     * @param {function(string, ModifySecLogKafkaUINResponse):void} cb
+     * @public
+     */
+    ModifySecLogKafkaUIN(req, cb) {
+        let resp = new ModifySecLogKafkaUINResponse();
+        this.request("ModifySecLogKafkaUIN", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop a quick image scan task for an image repository.
+     * @param {ModifyAssetImageRegistryScanStopOneKeyRequest} req
+     * @param {function(string, ModifyAssetImageRegistryScanStopOneKeyResponse):void} cb
+     * @public
+     */
+    ModifyAssetImageRegistryScanStopOneKey(req, cb) {
+        let resp = new ModifyAssetImageRegistryScanStopOneKeyResponse();
+        this.request("ModifyAssetImageRegistryScanStopOneKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the allowlist of reverse shells at runtime.
+     * @param {DescribeReverseShellWhiteListsRequest} req
+     * @param {function(string, DescribeReverseShellWhiteListsResponse):void} cb
+     * @public
+     */
+    DescribeReverseShellWhiteLists(req, cb) {
+        let resp = new DescribeReverseShellWhiteListsResponse();
+        this.request("DescribeReverseShellWhiteLists", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of components in a local image.
+     * @param {CreateComponentExportJobRequest} req
+     * @param {function(string, CreateComponentExportJobResponse):void} cb
+     * @public
+     */
+    CreateComponentExportJob(req, cb) {
+        let resp = new CreateComponentExportJobResponse();
+        this.request("CreateComponentExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the download URL of an automatically isolated trojan sample.
+     * @param {DescribeVirusAutoIsolateSampleDownloadURLRequest} req
+     * @param {function(string, DescribeVirusAutoIsolateSampleDownloadURLResponse):void} cb
+     * @public
+     */
+    DescribeVirusAutoIsolateSampleDownloadURL(req, cb) {
+        let resp = new DescribeVirusAutoIsolateSampleDownloadURLResponse();
+        this.request("DescribeVirusAutoIsolateSampleDownloadURL", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of namespaces for an image repository.
+     * @param {DescribeImageRegistryNamespaceListRequest} req
+     * @param {function(string, DescribeImageRegistryNamespaceListResponse):void} cb
+     * @public
+     */
+    DescribeImageRegistryNamespaceList(req, cb) {
+        let resp = new DescribeImageRegistryNamespaceListResponse();
+        this.request("DescribeImageRegistryNamespaceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of vulnerabilities ignored in a scan.
+     * @param {DescribeScanIgnoreVulListRequest} req
+     * @param {function(string, DescribeScanIgnoreVulListResponse):void} cb
+     * @public
+     */
+    DescribeScanIgnoreVulList(req, cb) {
+        let resp = new DescribeScanIgnoreVulListResponse();
+        this.request("DescribeScanIgnoreVulList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of accessed security log objects.
+     * @param {DescribeSecLogJoinObjectListRequest} req
+     * @param {function(string, DescribeSecLogJoinObjectListResponse):void} cb
+     * @public
+     */
+    DescribeSecLogJoinObjectList(req, cb) {
+        let resp = new DescribeSecLogJoinObjectListResponse();
+        this.request("DescribeSecLogJoinObjectList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of container components.
+     * @param {DescribeAssetComponentListRequest} req
+     * @param {function(string, DescribeAssetComponentListResponse):void} cb
+     * @public
+     */
+    DescribeAssetComponentList(req, cb) {
+        let resp = new DescribeAssetComponentListResponse();
+        this.request("DescribeAssetComponentList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the image scanning status.
+     * @param {DescribeAssetImageScanStatusRequest} req
+     * @param {function(string, DescribeAssetImageScanStatusResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageScanStatus(req, cb) {
+        let resp = new DescribeAssetImageScanStatusResponse();
+        this.request("DescribeAssetImageScanStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query parallel container installation commands.
+     * @param {DescribeAgentDaemonSetCmdRequest} req
+     * @param {function(string, DescribeAgentDaemonSetCmdResponse):void} cb
+     * @public
+     */
+    DescribeAgentDaemonSetCmd(req, cb) {
+        let resp = new DescribeAgentDaemonSetCmdResponse();
+        this.request("DescribeAgentDaemonSetCmd", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export rules of K8sApi exceptions. 
+     * @param {CreateK8sApiAbnormalRuleExportJobRequest} req
+     * @param {function(string, CreateK8sApiAbnormalRuleExportJobResponse):void} cb
+     * @public
+     */
+    CreateK8sApiAbnormalRuleExportJob(req, cb) {
+        let resp = new CreateK8sApiAbnormalRuleExportJobResponse();
+        this.request("CreateK8sApiAbnormalRuleExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to sync a network policy from the container network cluster.
+     * @param {CreateNetworkFirewallPolicyDiscoverRequest} req
+     * @param {function(string, CreateNetworkFirewallPolicyDiscoverResponse):void} cb
+     * @public
+     */
+    CreateNetworkFirewallPolicyDiscover(req, cb) {
+        let resp = new CreateNetworkFirewallPolicyDiscoverResponse();
+        this.request("CreateNetworkFirewallPolicyDiscover", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a cluster check task to check it for risk items.
+     * @param {CreateClusterCheckTaskRequest} req
+     * @param {function(string, CreateClusterCheckTaskResponse):void} cb
+     * @public
+     */
+    CreateClusterCheckTask(req, cb) {
+        let resp = new CreateClusterCheckTaskResponse();
+        this.request("CreateClusterCheckTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of access control events at runtime.
+     * @param {DescribeAccessControlEventsRequest} req
+     * @param {function(string, DescribeAccessControlEventsResponse):void} cb
+     * @public
+     */
+    DescribeAccessControlEvents(req, cb) {
+        let resp = new DescribeAccessControlEventsResponse();
+        this.request("DescribeAccessControlEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable/disable automatic licensing for local images.
+     * @param {SwitchImageAutoAuthorizedRuleRequest} req
+     * @param {function(string, SwitchImageAutoAuthorizedRuleResponse):void} cb
+     * @public
+     */
+    SwitchImageAutoAuthorizedRule(req, cb) {
+        let resp = new SwitchImageAutoAuthorizedRuleResponse();
+        this.request("SwitchImageAutoAuthorizedRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update virus scanning settings at runtime.
+     * @param {ModifyVirusScanSettingRequest} req
+     * @param {function(string, ModifyVirusScanSettingResponse):void} cb
+     * @public
+     */
+    ModifyVirusScanSetting(req, cb) {
+        let resp = new ModifyVirusScanSettingResponse();
+        this.request("ModifyVirusScanSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the options of security log delivery to Kafka.
+     * @param {DescribeSecLogDeliveryKafkaOptionsRequest} req
+     * @param {function(string, DescribeSecLogDeliveryKafkaOptionsResponse):void} cb
+     * @public
+     */
+    DescribeSecLogDeliveryKafkaOptions(req, cb) {
+        let resp = new DescribeSecLogDeliveryKafkaOptionsResponse();
+        this.request("DescribeSecLogDeliveryKafkaOptions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of trojan information for an image repository.
+     * @param {DescribeAssetImageRegistryVirusListExportRequest} req
+     * @param {function(string, DescribeAssetImageRegistryVirusListExportResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryVirusListExport(req, cb) {
+        let resp = new DescribeAssetImageRegistryVirusListExportResponse();
+        this.request("DescribeAssetImageRegistryVirusListExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to confirm a network policy in the container network.
+     * @param {ConfirmNetworkFirewallPolicyRequest} req
+     * @param {function(string, ConfirmNetworkFirewallPolicyResponse):void} cb
+     * @public
+     */
+    ConfirmNetworkFirewallPolicy(req, cb) {
+        let resp = new ConfirmNetworkFirewallPolicyResponse();
+        this.request("ConfirmNetworkFirewallPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unignore the specified asset IDs and check item IDs so as to show the assets contained in the specified check items.
+`AddCompliancePolicyAssetSetToWhitelist` is the reference API. Except for the input field, others should be the same, and if not, it may be due to the definition.
+     * @param {DeleteComplianceAssetPolicySetFromWhitelistRequest} req
+     * @param {function(string, DeleteComplianceAssetPolicySetFromWhitelistResponse):void} cb
+     * @public
+     */
+    DeleteComplianceAssetPolicySetFromWhitelist(req, cb) {
+        let resp = new DeleteComplianceAssetPolicySetFromWhitelistResponse();
+        this.request("DeleteComplianceAssetPolicySetFromWhitelist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of components in an local image.
+     * @param {DescribeImageComponentListRequest} req
+     * @param {function(string, DescribeImageComponentListResponse):void} cb
+     * @public
+     */
+    DescribeImageComponentList(req, cb) {
+        let resp = new DescribeImageComponentListResponse();
+        this.request("DescribeImageComponentList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the image statistics of an image repository.
+     * @param {DescribeAssetImageRegistrySummaryRequest} req
+     * @param {function(string, DescribeAssetImageRegistrySummaryResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistrySummary(req, cb) {
+        let resp = new DescribeAssetImageRegistrySummaryResponse();
+        this.request("DescribeAssetImageRegistrySummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to update a network policy in the container network.
+     * @param {UpdateNetworkFirewallPolicyDetailRequest} req
+     * @param {function(string, UpdateNetworkFirewallPolicyDetailResponse):void} cb
+     * @public
+     */
+    UpdateNetworkFirewallPolicyDetail(req, cb) {
+        let resp = new UpdateNetworkFirewallPolicyDetailResponse();
+        this.request("UpdateNetworkFirewallPolicyDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view the update progress of the assets in an image repository.
+     * @param {DescribeAssetImageRegistryAssetStatusRequest} req
+     * @param {function(string, DescribeAssetImageRegistryAssetStatusResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryAssetStatus(req, cb) {
+        let resp = new DescribeAssetImageRegistryAssetStatusResponse();
+        this.request("DescribeAssetImageRegistryAssetStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of image registries.
+     * @param {DescribeAssetImageRegistryRegistryListRequest} req
+     * @param {function(string, DescribeAssetImageRegistryRegistryListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryRegistryList(req, cb) {
+        let resp = new DescribeAssetImageRegistryRegistryListResponse();
+        this.request("DescribeAssetImageRegistryRegistryList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop an image scan task for an image repository.
+     * @param {ModifyAssetImageRegistryScanStopRequest} req
+     * @param {function(string, ModifyAssetImageRegistryScanStopResponse):void} cb
+     * @public
+     */
+    ModifyAssetImageRegistryScanStop(req, cb) {
+        let resp = new ModifyAssetImageRegistryScanStopResponse();
+        this.request("ModifyAssetImageRegistryScanStop", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of a cluster.
+     * @param {DescribeClusterDetailRequest} req
+     * @param {function(string, DescribeClusterDetailResponse):void} cb
+     * @public
+     */
+    DescribeClusterDetail(req, cb) {
+        let resp = new DescribeClusterDetailResponse();
+        this.request("DescribeClusterDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of viruses and trojans in an image repository.
+     * @param {DescribeAssetImageRegistryVirusListRequest} req
+     * @param {function(string, DescribeAssetImageRegistryVirusListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryVirusList(req, cb) {
+        let resp = new DescribeAssetImageRegistryVirusListResponse();
+        this.request("DescribeAssetImageRegistryVirusList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a scheduled task for an image repository.
+     * @param {UpdateImageRegistryTimingScanTaskRequest} req
+     * @param {function(string, UpdateImageRegistryTimingScanTaskResponse):void} cb
+     * @public
+     */
+    UpdateImageRegistryTimingScanTask(req, cb) {
+        let resp = new UpdateImageRegistryTimingScanTaskResponse();
+        this.request("UpdateImageRegistryTimingScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a quick image scan task for an image repository.
+     * @param {CreateAssetImageRegistryScanTaskOneKeyRequest} req
+     * @param {function(string, CreateAssetImageRegistryScanTaskOneKeyResponse):void} cb
+     * @public
+     */
+    CreateAssetImageRegistryScanTaskOneKey(req, cb) {
+        let resp = new CreateAssetImageRegistryScanTaskOneKeyResponse();
+        this.request("CreateAssetImageRegistryScanTaskOneKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the status of an access control policy at runtime, i.e., enable or disable it.
+     * @param {ModifyAccessControlRuleStatusRequest} req
+     * @param {function(string, ModifyAccessControlRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifyAccessControlRuleStatus(req, cb) {
+        let resp = new ModifyAccessControlRuleStatusResponse();
+        this.request("ModifyAccessControlRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view the details of a YAML network policy in the container network cluster.
+     * @param {DescribeNetworkFirewallPolicyYamlDetailRequest} req
+     * @param {function(string, DescribeNetworkFirewallPolicyYamlDetailResponse):void} cb
+     * @public
+     */
+    DescribeNetworkFirewallPolicyYamlDetail(req, cb) {
+        let resp = new DescribeNetworkFirewallPolicyYamlDetailResponse();
+        this.request("DescribeNetworkFirewallPolicyYamlDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of container escape events.
+     * @param {DescribeEscapeEventsExportRequest} req
+     * @param {function(string, DescribeEscapeEventsExportResponse):void} cb
+     * @public
+     */
+    DescribeEscapeEventsExport(req, cb) {
+        let resp = new DescribeEscapeEventsExportResponse();
+        this.request("DescribeEscapeEventsExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to check a YAML network policy in the container network.
+     * @param {CheckNetworkFirewallPolicyYamlRequest} req
+     * @param {function(string, CheckNetworkFirewallPolicyYamlResponse):void} cb
+     * @public
+     */
+    CheckNetworkFirewallPolicyYaml(req, cb) {
+        let resp = new CheckNetworkFirewallPolicyYamlResponse();
+        this.request("CheckNetworkFirewallPolicyYaml", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to update a YAML network policy in the container network.
+     * @param {UpdateNetworkFirewallPolicyYamlDetailRequest} req
+     * @param {function(string, UpdateNetworkFirewallPolicyYamlDetailResponse):void} cb
+     * @public
+     */
+    UpdateNetworkFirewallPolicyYamlDetail(req, cb) {
+        let resp = new UpdateNetworkFirewallPolicyYamlDetailResponse();
+        this.request("UpdateNetworkFirewallPolicyYamlDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of images.
+     * @param {DescribeAssetImageListExportRequest} req
+     * @param {function(string, DescribeAssetImageListExportResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageListExport(req, cb) {
+        let resp = new DescribeAssetImageListExportResponse();
+        this.request("DescribeAssetImageListExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the image scan settings.
+     * @param {DescribeAssetImageScanSettingRequest} req
+     * @param {function(string, DescribeAssetImageScanSettingResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageScanSetting(req, cb) {
+        let resp = new DescribeAssetImageScanSettingResponse();
+        this.request("DescribeAssetImageScanSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to install the check component and create a defender.
+     * @param {CreateCheckComponentRequest} req
+     * @param {function(string, CreateCheckComponentResponse):void} cb
+     * @public
+     */
+    CreateCheckComponent(req, cb) {
+        let resp = new CreateCheckComponentResponse();
+        this.request("CreateCheckComponent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the latest list of vulnerabilities.
+     * @param {DescribeNewestVulRequest} req
+     * @param {function(string, DescribeNewestVulResponse):void} cb
+     * @public
+     */
+    DescribeNewestVul(req, cb) {
+        let resp = new DescribeNewestVulResponse();
+        this.request("DescribeNewestVul", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of names of high-risk syscalls at runtime.
+     * @param {DescribeRiskSyscallNamesRequest} req
+     * @param {function(string, DescribeRiskSyscallNamesResponse):void} cb
+     * @public
+     */
+    DescribeRiskSyscallNames(req, cb) {
+        let resp = new DescribeRiskSyscallNamesResponse();
+        this.request("DescribeRiskSyscallNames", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the information of K8sApi abnormal rules.
+     * @param {ModifyK8sApiAbnormalRuleInfoRequest} req
+     * @param {function(string, ModifyK8sApiAbnormalRuleInfoResponse):void} cb
+     * @public
+     */
+    ModifyK8sApiAbnormalRuleInfo(req, cb) {
+        let resp = new ModifyK8sApiAbnormalRuleInfoResponse();
+        this.request("ModifyK8sApiAbnormalRuleInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of scheduled tasks.
+     * @param {DescribeCompliancePeriodTaskListRequest} req
+     * @param {function(string, DescribeCompliancePeriodTaskListResponse):void} cb
+     * @public
+     */
+    DescribeCompliancePeriodTaskList(req, cb) {
+        let resp = new DescribeCompliancePeriodTaskListResponse();
+        this.request("DescribeCompliancePeriodTaskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an access control policy at runtime.
+     * @param {DeleteAccessControlRulesRequest} req
+     * @param {function(string, DeleteAccessControlRulesResponse):void} cb
+     * @public
+     */
+    DeleteAccessControlRules(req, cb) {
+        let resp = new DeleteAccessControlRulesResponse();
+        this.request("DeleteAccessControlRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export servers with exploit prevention enabled.
+     * @param {CreateVulDefenceHostExportJobRequest} req
+     * @param {function(string, CreateVulDefenceHostExportJobResponse):void} cb
+     * @public
+     */
+    CreateVulDefenceHostExportJob(req, cb) {
+        let resp = new CreateVulDefenceHostExportJobResponse();
+        this.request("CreateVulDefenceHostExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the status of a container escape scan event.
+     * @param {ModifyEscapeEventStatusRequest} req
+     * @param {function(string, ModifyEscapeEventStatusResponse):void} cb
+     * @public
+     */
+    ModifyEscapeEventStatus(req, cb) {
+        let resp = new ModifyEscapeEventStatusResponse();
+        this.request("ModifyEscapeEventStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to count the number of pending abnormal process events at each severity level.
+     * @param {DescribeAbnormalProcessLevelSummaryRequest} req
+     * @param {function(string, DescribeAbnormalProcessLevelSummaryResponse):void} cb
+     * @public
+     */
+    DescribeAbnormalProcessLevelSummary(req, cb) {
+        let resp = new DescribeAbnormalProcessLevelSummaryResponse();
+        this.request("DescribeAbnormalProcessLevelSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check whether TCSS is purchased.
+     * @param {DescribePurchaseStateInfoRequest} req
+     * @param {function(string, DescribePurchaseStateInfoResponse):void} cb
+     * @public
+     */
+    DescribePurchaseStateInfo(req, cb) {
+        let resp = new DescribePurchaseStateInfoResponse();
+        this.request("DescribePurchaseStateInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of the allowlist of high-risk syscalls at runtime.
+     * @param {DescribeRiskSyscallWhiteListDetailRequest} req
+     * @param {function(string, DescribeRiskSyscallWhiteListDetailResponse):void} cb
+     * @public
+     */
+    DescribeRiskSyscallWhiteListDetail(req, cb) {
+        let resp = new DescribeRiskSyscallWhiteListDetailResponse();
+        this.request("DescribeRiskSyscallWhiteListDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the image repository details.
+     * @param {DescribeAssetImageRegistryDetailRequest} req
+     * @param {function(string, DescribeAssetImageRegistryDetailResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryDetail(req, cb) {
+        let resp = new DescribeAssetImageRegistryDetailResponse();
+        this.request("DescribeAssetImageRegistryDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an allowed escape.
+     * @param {ModifyEscapeWhiteListRequest} req
+     * @param {function(string, ModifyEscapeWhiteListResponse):void} cb
+     * @public
+     */
+    ModifyEscapeWhiteList(req, cb) {
+        let resp = new ModifyEscapeWhiteListResponse();
+        this.request("ModifyEscapeWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the estimated timeout period of a quick trojan scan.
+     * @param {DescribeVirusManualScanEstimateTimeoutRequest} req
+     * @param {function(string, DescribeVirusManualScanEstimateTimeoutResponse):void} cb
+     * @public
+     */
+    DescribeVirusManualScanEstimateTimeout(req, cb) {
+        let resp = new DescribeVirusManualScanEstimateTimeoutResponse();
+        this.request("DescribeVirusManualScanEstimateTimeout", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of high-risk syscalls at runtime.
+     * @param {DescribeRiskSyscallEventsExportRequest} req
+     * @param {function(string, DescribeRiskSyscallEventsExportResponse):void} cb
+     * @public
+     */
+    DescribeRiskSyscallEventsExport(req, cb) {
+        let resp = new DescribeRiskSyscallEventsExportResponse();
+        this.request("DescribeRiskSyscallEventsExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query an automatic licensing rule for local images.
+     * @param {DescribeImageAutoAuthorizedRuleRequest} req
+     * @param {function(string, DescribeImageAutoAuthorizedRuleResponse):void} cb
+     * @public
+     */
+    DescribeImageAutoAuthorizedRule(req, cb) {
+        let resp = new DescribeImageAutoAuthorizedRuleResponse();
+        this.request("DescribeImageAutoAuthorizedRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an abnormal process policy at runtime.
+     * @param {DescribeAbnormalProcessRuleDetailRequest} req
+     * @param {function(string, DescribeAbnormalProcessRuleDetailResponse):void} cb
+     * @public
+     */
+    DescribeAbnormalProcessRuleDetail(req, cb) {
+        let resp = new DescribeAbnormalProcessRuleDetailResponse();
+        this.request("DescribeAbnormalProcessRuleDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export vulnerabilities that can be prevented.
+     * @param {CreateDefenceVulExportJobRequest} req
+     * @param {function(string, CreateDefenceVulExportJobResponse):void} cb
+     * @public
+     */
+    CreateDefenceVulExportJob(req, cb) {
+        let resp = new CreateDefenceVulExportJobResponse();
+        this.request("CreateDefenceVulExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of the required value-added service.
+     * @param {DescribeValueAddedSrvInfoRequest} req
+     * @param {function(string, DescribeValueAddedSrvInfoResponse):void} cb
+     * @public
+     */
+    DescribeValueAddedSrvInfo(req, cb) {
+        let resp = new DescribeValueAddedSrvInfoResponse();
+        this.request("DescribeValueAddedSrvInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the status of a trojan file at runtime.
+     * @param {ModifyVirusFileStatusRequest} req
+     * @param {function(string, ModifyVirusFileStatusResponse):void} cb
+     * @public
+     */
+    ModifyVirusFileStatus(req, cb) {
+        let resp = new ModifyVirusFileStatusResponse();
+        this.request("ModifyVirusFileStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or edit an allowed reverse shell at runtime.
+     * @param {AddEditReverseShellWhiteListRequest} req
+     * @param {function(string, AddEditReverseShellWhiteListResponse):void} cb
+     * @public
+     */
+    AddEditReverseShellWhiteList(req, cb) {
+        let resp = new AddEditReverseShellWhiteListResponse();
+        this.request("AddEditReverseShellWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of a reverse shell event at runtime.
+     * @param {DescribeReverseShellDetailRequest} req
+     * @param {function(string, DescribeReverseShellDetailResponse):void} cb
+     * @public
+     */
+    DescribeReverseShellDetail(req, cb) {
+        let resp = new DescribeReverseShellDetailResponse();
+        this.request("DescribeReverseShellDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the aggregation result of the ES field.
+     * @param {DescribeESAggregationsRequest} req
+     * @param {function(string, DescribeESAggregationsResponse):void} cb
+     * @public
+     */
+    DescribeESAggregations(req, cb) {
+        let resp = new DescribeESAggregationsResponse();
+        this.request("DescribeESAggregations", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of rules bound to images, including runtime access control and abnormal process rules.
+     * @param {DescribeAssetImageBindRuleInfoRequest} req
+     * @param {function(string, DescribeAssetImageBindRuleInfoResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageBindRuleInfo(req, cb) {
+        let resp = new DescribeAssetImageBindRuleInfoResponse();
+        this.request("DescribeAssetImageBindRuleInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unignore vulnerabilities in a vulnerability scan.
+     * @param {DeleteIgnoreVulRequest} req
+     * @param {function(string, DeleteIgnoreVulResponse):void} cb
+     * @public
+     */
+    DeleteIgnoreVul(req, cb) {
+        let resp = new DeleteIgnoreVulResponse();
+        this.request("DeleteIgnoreVul", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export the list of trojans in a local image.
+     * @param {CreateAssetImageVirusExportJobRequest} req
+     * @param {function(string, CreateAssetImageVirusExportJobResponse):void} cb
+     * @public
+     */
+    CreateAssetImageVirusExportJob(req, cb) {
+        let resp = new CreateAssetImageVirusExportJobResponse();
+        this.request("CreateAssetImageVirusExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the progress of a network policy sync task in the container network.
+     * @param {DescribeNetworkFirewallPolicyDiscoverRequest} req
+     * @param {function(string, DescribeNetworkFirewallPolicyDiscoverResponse):void} cb
+     * @public
+     */
+    DescribeNetworkFirewallPolicyDiscover(req, cb) {
+        let resp = new DescribeNetworkFirewallPolicyDiscoverResponse();
+        this.request("DescribeNetworkFirewallPolicyDiscover", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the options of security log delivery to CLS.
+     * @param {DescribeSecLogDeliveryClsOptionsRequest} req
+     * @param {function(string, DescribeSecLogDeliveryClsOptionsResponse):void} cb
+     * @public
+     */
+    DescribeSecLogDeliveryClsOptions(req, cb) {
+        let resp = new DescribeSecLogDeliveryClsOptionsResponse();
+        this.request("DescribeSecLogDeliveryClsOptions", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the trend of daily unlicensed cores.
+     * @param {DescribeUnauthorizedCoresTendencyRequest} req
+     * @param {function(string, DescribeUnauthorizedCoresTendencyResponse):void} cb
+     * @public
+     */
+    DescribeUnauthorizedCoresTendency(req, cb) {
+        let resp = new DescribeUnauthorizedCoresTendencyResponse();
+        this.request("DescribeUnauthorizedCoresTendency", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the overview of a check result and return the number of affected nodes in the last seven days.
+     * @param {DescribeTaskResultSummaryRequest} req
+     * @param {function(string, DescribeTaskResultSummaryResponse):void} cb
+     * @public
+     */
+    DescribeTaskResultSummary(req, cb) {
+        let resp = new DescribeTaskResultSummaryResponse();
+        this.request("DescribeTaskResultSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of a container.
+     * @param {DescribeAssetContainerDetailRequest} req
+     * @param {function(string, DescribeAssetContainerDetailResponse):void} cb
+     * @public
+     */
+    DescribeAssetContainerDetail(req, cb) {
+        let resp = new DescribeAssetContainerDetailResponse();
+        this.request("DescribeAssetContainerDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of image high-risk behaviors of an image repository.
+     * @param {DescribeAssetImageRegistryRiskInfoListRequest} req
+     * @param {function(string, DescribeAssetImageRegistryRiskInfoListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryRiskInfoList(req, cb) {
+        let resp = new DescribeAssetImageRegistryRiskInfoListResponse();
+        this.request("DescribeAssetImageRegistryRiskInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the information of a container escape scan rule.
+     * @param {ModifyEscapeRuleRequest} req
+     * @param {function(string, ModifyEscapeRuleResponse):void} cb
+     * @public
+     */
+    ModifyEscapeRule(req, cb) {
+        let resp = new ModifyEscapeRuleResponse();
+        this.request("ModifyEscapeRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to apply the check item level in the "check item + asset" two-level structure.
+     * @param {DescribeCompliancePolicyItemAffectedSummaryRequest} req
+     * @param {function(string, DescribeCompliancePolicyItemAffectedSummaryResponse):void} cb
+     * @public
+     */
+    DescribeCompliancePolicyItemAffectedSummary(req, cb) {
+        let resp = new DescribeCompliancePolicyItemAffectedSummaryResponse();
+        this.request("DescribeCompliancePolicyItemAffectedSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a refresh task.
+     * @param {DescribeRefreshTaskRequest} req
+     * @param {function(string, DescribeRefreshTaskResponse):void} cb
+     * @public
+     */
+    DescribeRefreshTask(req, cb) {
+        let resp = new DescribeRefreshTaskResponse();
+        this.request("DescribeRefreshTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to distribute a refresh task in the container network cluster.
+     * @param {CreateNetworkFirewallClusterRefreshRequest} req
+     * @param {function(string, CreateNetworkFirewallClusterRefreshResponse):void} cb
+     * @public
+     */
+    CreateNetworkFirewallClusterRefresh(req, cb) {
+        let resp = new CreateNetworkFirewallClusterRefreshResponse();
+        this.request("CreateNetworkFirewallClusterRefresh", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of high-risk syscalls at runtime.
+     * @param {DescribeRiskSyscallEventsRequest} req
+     * @param {function(string, DescribeRiskSyscallEventsResponse):void} cb
+     * @public
+     */
+    DescribeRiskSyscallEvents(req, cb) {
+        let resp = new DescribeRiskSyscallEventsResponse();
+        this.request("DescribeRiskSyscallEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to ignore the specified asset IDs and check item IDs so as to hide the assets contained in the specified check items.
+`AddCompliancePolicyItemToWhitelist` is the reference API. Except for the input field, others should be the same, and if not, it may be due to the definition.
+     * @param {AddComplianceAssetPolicySetToWhitelistRequest} req
+     * @param {function(string, AddComplianceAssetPolicySetToWhitelistResponse):void} cb
+     * @public
+     */
+    AddComplianceAssetPolicySetToWhitelist(req, cb) {
+        let resp = new AddComplianceAssetPolicySetToWhitelistResponse();
+        this.request("AddComplianceAssetPolicySetToWhitelist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an accessed security log object.
+     * @param {ModifySecLogJoinObjectsRequest} req
+     * @param {function(string, ModifySecLogJoinObjectsResponse):void} cb
+     * @public
+     */
+    ModifySecLogJoinObjects(req, cb) {
+        let resp = new ModifySecLogJoinObjectsResponse();
+        this.request("ModifySecLogJoinObjects", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the asset overview.
+     * @param {DescribeContainerAssetSummaryRequest} req
+     * @param {function(string, DescribeContainerAssetSummaryResponse):void} cb
+     * @public
+     */
+    DescribeContainerAssetSummary(req, cb) {
+        let resp = new DescribeContainerAssetSummaryResponse();
+        this.request("DescribeContainerAssetSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view a scheduled task of an image repository.
+     * @param {DescribeImageRegistryTimingScanTaskRequest} req
+     * @param {function(string, DescribeImageRegistryTimingScanTaskResponse):void} cb
+     * @public
+     */
+    DescribeImageRegistryTimingScanTask(req, cb) {
+        let resp = new DescribeImageRegistryTimingScanTaskResponse();
+        this.request("DescribeImageRegistryTimingScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query and export the list of reverse shell events at runtime.
+     * @param {DescribeReverseShellEventsExportRequest} req
+     * @param {function(string, DescribeReverseShellEventsExportResponse):void} cb
+     * @public
+     */
+    DescribeReverseShellEventsExport(req, cb) {
+        let resp = new DescribeReverseShellEventsExportResponse();
+        this.request("DescribeReverseShellEventsExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of database services.
+     * @param {DescribeAssetDBServiceListRequest} req
+     * @param {function(string, DescribeAssetDBServiceListResponse):void} cb
+     * @public
+     */
+    DescribeAssetDBServiceList(req, cb) {
+        let resp = new DescribeAssetDBServiceListResponse();
+        this.request("DescribeAssetDBServiceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of images affected by vulnerabilities.
+     * @param {DescribeVulImageListRequest} req
+     * @param {function(string, DescribeVulImageListResponse):void} cb
+     * @public
+     */
+    DescribeVulImageList(req, cb) {
+        let resp = new DescribeVulImageListResponse();
+        this.request("DescribeVulImageList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the status of an abnormal process policy at runtime.
+     * @param {ModifyAbnormalProcessRuleStatusRequest} req
+     * @param {function(string, ModifyAbnormalProcessRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifyAbnormalProcessRuleStatus(req, cb) {
+        let resp = new ModifyAbnormalProcessRuleStatusResponse();
+        this.request("ModifyAbnormalProcessRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of exploit prevention events.
+     * @param {DescribeVulDefenceEventRequest} req
+     * @param {function(string, DescribeVulDefenceEventResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceEvent(req, cb) {
+        let resp = new DescribeVulDefenceEventResponse();
+        this.request("DescribeVulDefenceEvent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of repository images ignored in a vulnerability scan.
+     * @param {DescribeVulIgnoreRegistryImageListRequest} req
+     * @param {function(string, DescribeVulIgnoreRegistryImageListResponse):void} cb
+     * @public
+     */
+    DescribeVulIgnoreRegistryImageList(req, cb) {
+        let resp = new DescribeVulIgnoreRegistryImageListResponse();
+        this.request("DescribeVulIgnoreRegistryImageList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of a vulnerability scan task.
+     * @param {DescribeVulScanInfoRequest} req
+     * @param {function(string, DescribeVulScanInfoResponse):void} cb
+     * @public
+     */
+    DescribeVulScanInfo(req, cb) {
+        let resp = new DescribeVulScanInfoResponse();
+        this.request("DescribeVulScanInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the statistics of images affected by vulnerabilities.
+     * @param {DescribeVulImageSummaryRequest} req
+     * @param {function(string, DescribeVulImageSummaryResponse):void} cb
+     * @public
+     */
+    DescribeVulImageSummary(req, cb) {
+        let resp = new DescribeVulImageSummaryResponse();
+        this.request("DescribeVulImageSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export web vulnerabilities.
+     * @param {CreateWebVulExportJobRequest} req
+     * @param {function(string, CreateWebVulExportJobResponse):void} cb
+     * @public
+     */
+    CreateWebVulExportJob(req, cb) {
+        let resp = new CreateWebVulExportJobResponse();
+        this.request("CreateWebVulExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to update and publish a network policy in the container network.
+     * @param {UpdateAndPublishNetworkFirewallPolicyDetailRequest} req
+     * @param {function(string, UpdateAndPublishNetworkFirewallPolicyDetailResponse):void} cb
+     * @public
+     */
+    UpdateAndPublishNetworkFirewallPolicyDetail(req, cb) {
+        let resp = new UpdateAndPublishNetworkFirewallPolicyDetailResponse();
+        this.request("UpdateAndPublishNetworkFirewallPolicyDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to isolate a container.
+     * @param {ModifyContainerNetStatusRequest} req
+     * @param {function(string, ModifyContainerNetStatusResponse):void} cb
+     * @public
+     */
+    ModifyContainerNetStatus(req, cb) {
+        let resp = new ModifyContainerNetStatusResponse();
+        this.request("ModifyContainerNetStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the trend of local image risks.
+     * @param {DescribeImageRiskTendencyRequest} req
+     * @param {function(string, DescribeImageRiskTendencyResponse):void} cb
+     * @public
+     */
+    DescribeImageRiskTendency(req, cb) {
+        let resp = new DescribeImageRiskTendencyResponse();
+        this.request("DescribeImageRiskTendency", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query agent installation commands.
+     * @param {DescribeAgentInstallCommandRequest} req
+     * @param {function(string, DescribeAgentInstallCommandResponse):void} cb
+     * @public
+     */
+    DescribeAgentInstallCommand(req, cb) {
+        let resp = new DescribeAgentInstallCommandResponse();
+        this.request("DescribeAgentInstallCommand", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the result of an export task.
+     * @param {DescribeExportJobResultRequest} req
+     * @param {function(string, DescribeExportJobResultResponse):void} cb
+     * @public
+     */
+    DescribeExportJobResult(req, cb) {
+        let resp = new DescribeExportJobResultResponse();
+        this.request("DescribeExportJobResult", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an image scan task.
+     * @param {CreateAssetImageScanTaskRequest} req
+     * @param {function(string, CreateAssetImageScanTaskResponse):void} cb
+     * @public
+     */
+    CreateAssetImageScanTask(req, cb) {
+        let resp = new CreateAssetImageScanTaskResponse();
+        this.request("CreateAssetImageScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export emergency vulnerabilities.
+     * @param {CreateEmergencyVulExportJobRequest} req
+     * @param {function(string, CreateEmergencyVulExportJobResponse):void} cb
+     * @public
+     */
+    CreateEmergencyVulExportJob(req, cb) {
+        let resp = new CreateEmergencyVulExportJobResponse();
+        this.request("CreateEmergencyVulExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the ID of a running quick image scan task.
+     * @param {DescribeAssetImageScanTaskRequest} req
+     * @param {function(string, DescribeAssetImageScanTaskResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageScanTask(req, cb) {
+        let resp = new DescribeAssetImageScanTaskResponse();
+        this.request("DescribeAssetImageScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of images for an image repository.
+     * @param {DescribeAssetImageRegistryListExportRequest} req
+     * @param {function(string, DescribeAssetImageRegistryListExportResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryListExport(req, cb) {
+        let resp = new DescribeAssetImageRegistryListExportResponse();
+        this.request("DescribeAssetImageRegistryListExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of exploit prevention plugins.
+     * @param {DescribeVulDefencePluginRequest} req
+     * @param {function(string, DescribeVulDefencePluginResponse):void} cb
+     * @public
+     */
+    DescribeVulDefencePlugin(req, cb) {
+        let resp = new DescribeVulDefencePluginResponse();
+        this.request("DescribeVulDefencePlugin", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the K8sApi abnormal event list.
+     * @param {DescribeK8sApiAbnormalEventListRequest} req
+     * @param {function(string, DescribeK8sApiAbnormalEventListResponse):void} cb
+     * @public
+     */
+    DescribeK8sApiAbnormalEventList(req, cb) {
+        let resp = new DescribeK8sApiAbnormalEventListResponse();
+        this.request("DescribeK8sApiAbnormalEventList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the aggregated information of the asset pass rate in the last task.
+     * @param {DescribeComplianceTaskAssetSummaryRequest} req
+     * @param {function(string, DescribeComplianceTaskAssetSummaryResponse):void} cb
+     * @public
+     */
+    DescribeComplianceTaskAssetSummary(req, cb) {
+        let resp = new DescribeComplianceTaskAssetSummaryResponse();
+        this.request("DescribeComplianceTaskAssetSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the real-time monitoring settings of virus scanning at runtime.
+     * @param {ModifyVirusMonitorSettingRequest} req
+     * @param {function(string, ModifyVirusMonitorSettingResponse):void} cb
+     * @public
+     */
+    ModifyVirusMonitorSetting(req, cb) {
+        let resp = new ModifyVirusMonitorSettingResponse();
+        this.request("ModifyVirusMonitorSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of access control policies at runtime.
+     * @param {DescribeAccessControlRulesRequest} req
+     * @param {function(string, DescribeAccessControlRulesResponse):void} cb
+     * @public
+     */
+    DescribeAccessControlRules(req, cb) {
+        let resp = new DescribeAccessControlRulesResponse();
+        this.request("DescribeAccessControlRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of trojans in an image.
+     * @param {DescribeAssetImageVirusListExportRequest} req
+     * @param {function(string, DescribeAssetImageVirusListExportResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageVirusListExport(req, cb) {
+        let resp = new DescribeAssetImageVirusListExportResponse();
+        this.request("DescribeAssetImageVirusListExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of containers.
+     * @param {DescribeAssetContainerListRequest} req
+     * @param {function(string, DescribeAssetContainerListResponse):void} cb
+     * @public
+     */
+    DescribeAssetContainerList(req, cb) {
+        let resp = new DescribeAssetContainerListResponse();
+        this.request("DescribeAssetContainerList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add a search template.
+     * @param {CreateSearchTemplateRequest} req
+     * @param {function(string, CreateSearchTemplateResponse):void} cb
+     * @public
+     */
+    CreateSearchTemplate(req, cb) {
+        let resp = new CreateSearchTemplateResponse();
+        this.request("CreateSearchTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the pay-as-you-go billing details.
+     * @param {DescribePostPayDetailRequest} req
+     * @param {function(string, DescribePostPayDetailResponse):void} cb
+     * @public
+     */
+    DescribePostPayDetail(req, cb) {
+        let resp = new DescribePostPayDetailResponse();
+        this.request("DescribePostPayDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to add a YAML network policy in the container network.
+     * @param {AddNetworkFirewallPolicyYamlDetailRequest} req
+     * @param {function(string, AddNetworkFirewallPolicyYamlDetailResponse):void} cb
+     * @public
+     */
+    AddNetworkFirewallPolicyYamlDetail(req, cb) {
+        let resp = new AddNetworkFirewallPolicyYamlDetailResponse();
+        this.request("AddNetworkFirewallPolicyYamlDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a reverse shell event at runtime.
+     * @param {DeleteReverseShellEventsRequest} req
+     * @param {function(string, DeleteReverseShellEventsResponse):void} cb
+     * @public
+     */
+    DeleteReverseShellEvents(req, cb) {
+        let resp = new DeleteReverseShellEventsResponse();
+        this.request("DeleteReverseShellEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view the details of an image repository.
+     * @param {DescribeAssetImageRegistryRegistryDetailRequest} req
+     * @param {function(string, DescribeAssetImageRegistryRegistryDetailResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryRegistryDetail(req, cb) {
+        let resp = new DescribeAssetImageRegistryRegistryDetailResponse();
+        this.request("DescribeAssetImageRegistryRegistryDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add an allowed escape.
+     * @param {AddEscapeWhiteListRequest} req
+     * @param {function(string, AddEscapeWhiteListResponse):void} cb
+     * @public
+     */
+    AddEscapeWhiteList(req, cb) {
+        let resp = new AddEscapeWhiteListResponse();
+        this.request("AddEscapeWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an image export task.
+     * @param {CreateImageExportJobRequest} req
+     * @param {function(string, CreateImageExportJobResponse):void} cb
+     * @public
+     */
+    CreateImageExportJob(req, cb) {
+        let resp = new CreateImageExportJobResponse();
+        this.request("CreateImageExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the settings of security log delivery to CLS.
+     * @param {DescribeSecLogDeliveryClsSettingRequest} req
+     * @param {function(string, DescribeSecLogDeliveryClsSettingResponse):void} cb
+     * @public
+     */
+    DescribeSecLogDeliveryClsSetting(req, cb) {
+        let resp = new DescribeSecLogDeliveryClsSettingResponse();
+        this.request("DescribeSecLogDeliveryClsSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of virus scanning events at runtime.
+     * @param {DescribeVirusListRequest} req
+     * @param {function(string, DescribeVirusListResponse):void} cb
+     * @public
+     */
+    DescribeVirusList(req, cb) {
+        let resp = new DescribeVirusListResponse();
+        this.request("DescribeVirusList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop an image scan.
+     * @param {ModifyAssetImageScanStopRequest} req
+     * @param {function(string, ModifyAssetImageScanStopResponse):void} cb
+     * @public
+     */
+    ModifyAssetImageScanStop(req, cb) {
+        let resp = new ModifyAssetImageScanStopResponse();
+        this.request("ModifyAssetImageScanStop", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check the specified asset again.
+     * @param {ScanComplianceAssetsRequest} req
+     * @param {function(string, ScanComplianceAssetsResponse):void} cb
+     * @public
+     */
+    ScanComplianceAssets(req, cb) {
+        let resp = new ScanComplianceAssetsResponse();
+        this.request("ScanComplianceAssets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the status of K8sApi exception events.
+     * @param {ModifyK8sApiAbnormalEventStatusRequest} req
+     * @param {function(string, ModifyK8sApiAbnormalEventStatusResponse):void} cb
+     * @public
+     */
+    ModifyK8sApiAbnormalEventStatus(req, cb) {
+        let resp = new ModifyK8sApiAbnormalEventStatusResponse();
+        this.request("ModifyK8sApiAbnormalEventStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add ignored vulnerabilities in a vulnerability scan.
+     * @param {AddIgnoreVulRequest} req
+     * @param {function(string, AddIgnoreVulResponse):void} cb
+     * @public
+     */
+    AddIgnoreVul(req, cb) {
+        let resp = new AddIgnoreVulResponse();
+        this.request("AddIgnoreVul", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query all check items and return the total number and list of check items.
+     * @param {DescribeCheckItemListRequest} req
+     * @param {function(string, DescribeCheckItemListResponse):void} cb
+     * @public
+     */
+    DescribeCheckItemList(req, cb) {
+        let resp = new DescribeCheckItemListResponse();
+        this.request("DescribeCheckItemList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export system vulnerabilities.
+     * @param {CreateSystemVulExportJobRequest} req
+     * @param {function(string, CreateSystemVulExportJobResponse):void} cb
+     * @public
+     */
+    CreateSystemVulExportJob(req, cb) {
+        let resp = new CreateSystemVulExportJobResponse();
+        this.request("CreateSystemVulExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of a trojan file at runtime.
+     * @param {DescribeVirusDetailRequest} req
+     * @param {function(string, DescribeVirusDetailResponse):void} cb
+     * @public
+     */
+    DescribeVirusDetail(req, cb) {
+        let resp = new DescribeVirusDetailResponse();
+        this.request("DescribeVirusDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of vulnerabilities in a local image.
+     * @param {CreateVulExportJobRequest} req
+     * @param {function(string, CreateVulExportJobResponse):void} cb
+     * @public
+     */
+    CreateVulExportJob(req, cb) {
+        let resp = new CreateVulExportJobResponse();
+        this.request("CreateVulExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the allowlist.
+     * @param {DescribeComplianceWhitelistItemListRequest} req
+     * @param {function(string, DescribeComplianceWhitelistItemListResponse):void} cb
+     * @public
+     */
+    DescribeComplianceWhitelistItemList(req, cb) {
+        let resp = new DescribeComplianceWhitelistItemListResponse();
+        this.request("DescribeComplianceWhitelistItemList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of cluster network policies.
+     * @param {DescribeNetworkFirewallPolicyListRequest} req
+     * @param {function(string, DescribeNetworkFirewallPolicyListResponse):void} cb
+     * @public
+     */
+    DescribeNetworkFirewallPolicyList(req, cb) {
+        let resp = new DescribeNetworkFirewallPolicyListResponse();
+        this.request("DescribeNetworkFirewallPolicyList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to refresh the assets in an image repository.
+     * @param {SyncAssetImageRegistryAssetRequest} req
+     * @param {function(string, SyncAssetImageRegistryAssetResponse):void} cb
+     * @public
+     */
+    SyncAssetImageRegistryAsset(req, cb) {
+        let resp = new SyncAssetImageRegistryAssetResponse();
+        this.request("SyncAssetImageRegistryAsset", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a compliance check task for another check triggered at the asset level.
+     * @param {CreateComplianceTaskRequest} req
+     * @param {function(string, CreateComplianceTaskResponse):void} cb
+     * @public
+     */
+    CreateComplianceTask(req, cb) {
+        let resp = new CreateComplianceTaskResponse();
+        this.request("CreateComplianceTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the aggregate information of the pass rate at the asset level, the first level in the "asset + check item" two-level structure.
+     * @param {DescribeComplianceScanFailedAssetListRequest} req
+     * @param {function(string, DescribeComplianceScanFailedAssetListResponse):void} cb
+     * @public
+     */
+    DescribeComplianceScanFailedAssetList(req, cb) {
+        let resp = new DescribeComplianceScanFailedAssetListResponse();
+        this.request("DescribeComplianceScanFailedAssetList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of ranges in K8sApi abnormal rules.
+     * @param {DescribeK8sApiAbnormalRuleScopeListRequest} req
+     * @param {function(string, DescribeK8sApiAbnormalRuleScopeListResponse):void} cb
+     * @public
+     */
+    DescribeK8sApiAbnormalRuleScopeList(req, cb) {
+        let resp = new DescribeK8sApiAbnormalRuleScopeListResponse();
+        this.request("DescribeK8sApiAbnormalRuleScopeList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of clusters.
+     * @param {DescribeAssetClusterListRequest} req
+     * @param {function(string, DescribeAssetClusterListResponse):void} cb
+     * @public
+     */
+    DescribeAssetClusterList(req, cb) {
+        let resp = new DescribeAssetClusterListResponse();
+        this.request("DescribeAssetClusterList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of vulnerabilities that can be prevented
+     * @param {DescribeSupportDefenceVulRequest} req
+     * @param {function(string, DescribeSupportDefenceVulResponse):void} cb
+     * @public
+     */
+    DescribeSupportDefenceVul(req, cb) {
+        let resp = new DescribeSupportDefenceVulResponse();
+        this.request("DescribeSupportDefenceVul", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a high-risk syscall event at runtime.
+     * @param {DeleteRiskSyscallEventsRequest} req
+     * @param {function(string, DeleteRiskSyscallEventsResponse):void} cb
+     * @public
+     */
+    DeleteRiskSyscallEvents(req, cb) {
+        let resp = new DeleteRiskSyscallEventsResponse();
+        this.request("DeleteRiskSyscallEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query affected workload types and return the workload list.
+     * @param {DescribeAffectedWorkloadListRequest} req
+     * @param {function(string, DescribeAffectedWorkloadListResponse):void} cb
+     * @public
+     */
+    DescribeAffectedWorkloadList(req, cb) {
+        let resp = new DescribeAffectedWorkloadListResponse();
+        this.request("DescribeAffectedWorkloadList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to ignore the specified asset IDs and check item IDs so as to hide the assets contained in the specified check items.
+`AddCompliancePolicyItemToWhitelist` is the reference API. Except for the input field, others should be the same, and if not, it may be due to the definition.
+     * @param {AddCompliancePolicyAssetSetToWhitelistRequest} req
+     * @param {function(string, AddCompliancePolicyAssetSetToWhitelistResponse):void} cb
+     * @public
+     */
+    AddCompliancePolicyAssetSetToWhitelist(req, cb) {
+        let resp = new AddCompliancePolicyAssetSetToWhitelistResponse();
+        this.request("AddCompliancePolicyAssetSetToWhitelist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an abnormal process policy at runtime.
+     * @param {DeleteAbnormalProcessRulesRequest} req
+     * @param {function(string, DeleteAbnormalProcessRulesResponse):void} cb
+     * @public
+     */
+    DeleteAbnormalProcessRules(req, cb) {
+        let resp = new DeleteAbnormalProcessRulesResponse();
+        this.request("DeleteAbnormalProcessRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query vulnerability details.
+     * @param {DescribeVulDetailRequest} req
+     * @param {function(string, DescribeVulDetailResponse):void} cb
+     * @public
+     */
+    DescribeVulDetail(req, cb) {
+        let resp = new DescribeVulDetailResponse();
+        this.request("DescribeVulDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the export job management list.
+     * @param {DescribeExportJobManageListRequest} req
+     * @param {function(string, DescribeExportJobManageListResponse):void} cb
+     * @public
+     */
+    DescribeExportJobManageList(req, cb) {
+        let resp = new DescribeExportJobManageListResponse();
+        this.request("DescribeExportJobManageList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a vulnerability scan task.
+     * @param {CreateVulScanTaskRequest} req
+     * @param {function(string, CreateVulScanTaskResponse):void} cb
+     * @public
+     */
+    CreateVulScanTask(req, cb) {
+        let resp = new CreateVulScanTaskResponse();
+        this.request("CreateVulScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of clusters.
+     * @param {DescribeNetworkFirewallClusterListRequest} req
+     * @param {function(string, DescribeNetworkFirewallClusterListResponse):void} cb
+     * @public
+     */
+    DescribeNetworkFirewallClusterList(req, cb) {
+        let resp = new DescribeNetworkFirewallClusterListResponse();
+        this.request("DescribeNetworkFirewallClusterList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop a vulnerability scan task.
+     * @param {StopVulScanTaskRequest} req
+     * @param {function(string, StopVulScanTaskResponse):void} cb
+     * @public
+     */
+    StopVulScanTask(req, cb) {
+        let resp = new StopVulScanTaskResponse();
+        this.request("StopVulScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of sensitive data for an image repository.
+     * @param {DescribeAssetImageRegistryRiskListExportRequest} req
+     * @param {function(string, DescribeAssetImageRegistryRiskListExportResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryRiskListExport(req, cb) {
+        let resp = new DescribeAssetImageRegistryRiskListExportResponse();
+        this.request("DescribeAssetImageRegistryRiskListExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the timeout settings of a file scan at runtime.
+     * @param {ModifyVirusScanTimeoutSettingRequest} req
+     * @param {function(string, ModifyVirusScanTimeoutSettingResponse):void} cb
+     * @public
+     */
+    ModifyVirusScanTimeoutSetting(req, cb) {
+        let resp = new ModifyVirusScanTimeoutSettingResponse();
+        this.request("ModifyVirusScanTimeoutSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to perform a quick virus scan at runtime.
+     * @param {CreateVirusScanTaskRequest} req
+     * @param {function(string, CreateVirusScanTaskResponse):void} cb
+     * @public
+     */
+    CreateVirusScanTask(req, cb) {
+        let resp = new CreateVirusScanTaskResponse();
+        this.request("CreateVirusScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of servers with exploit prevention enabled.
+     * @param {DescribeVulDefenceHostRequest} req
+     * @param {function(string, DescribeVulDefenceHostResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceHost(req, cb) {
+        let resp = new DescribeVulDefenceHostResponse();
+        this.request("DescribeVulDefenceHost", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of local images ignored in a vulnerability scan.
+     * @param {DescribeVulIgnoreLocalImageListRequest} req
+     * @param {function(string, DescribeVulIgnoreLocalImageListResponse):void} cb
+     * @public
+     */
+    DescribeVulIgnoreLocalImageList(req, cb) {
+        let resp = new DescribeVulIgnoreLocalImageListResponse();
+        this.request("DescribeVulIgnoreLocalImageList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of a container escape event.
+     * @param {DescribeEscapeEventDetailRequest} req
+     * @param {function(string, DescribeEscapeEventDetailResponse):void} cb
+     * @public
+     */
+    DescribeEscapeEventDetail(req, cb) {
+        let resp = new DescribeEscapeEventDetailResponse();
+        this.request("DescribeEscapeEventDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the status of a high-risk syscall event.
+     * @param {ModifyRiskSyscallStatusRequest} req
+     * @param {function(string, ModifyRiskSyscallStatusResponse):void} cb
+     * @public
+     */
+    ModifyRiskSyscallStatus(req, cb) {
+        let resp = new ModifyRiskSyscallStatusResponse();
+        this.request("ModifyRiskSyscallStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export malicious request events.
+     * @param {CreateRiskDnsEventExportJobRequest} req
+     * @param {function(string, CreateRiskDnsEventExportJobResponse):void} cb
+     * @public
+     */
+    CreateRiskDnsEventExportJob(req, cb) {
+        let resp = new CreateRiskDnsEventExportJobResponse();
+        this.request("CreateRiskDnsEventExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the trend of exploit prevention events.
+     * @param {DescribeVulDefenceEventTendencyRequest} req
+     * @param {function(string, DescribeVulDefenceEventTendencyResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceEventTendency(req, cb) {
+        let resp = new DescribeVulDefenceEventTendencyResponse();
+        this.request("DescribeVulDefenceEventTendency", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the allowlist of escapes.
+     * @param {DescribeEscapeWhiteListRequest} req
+     * @param {function(string, DescribeEscapeWhiteListResponse):void} cb
+     * @public
+     */
+    DescribeEscapeWhiteList(req, cb) {
+        let resp = new DescribeEscapeWhiteListResponse();
+        this.request("DescribeEscapeWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check all the assets of the specified check item again and return the ID of the created compliance check task.
+     * @param {ScanCompliancePolicyItemsRequest} req
+     * @param {function(string, ScanCompliancePolicyItemsResponse):void} cb
+     * @public
+     */
+    ScanCompliancePolicyItems(req, cb) {
+        let resp = new ScanCompliancePolicyItemsResponse();
+        this.request("ScanCompliancePolicyItems", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an allowed reverse shell at runtime.
+     * @param {DeleteReverseShellWhiteListsRequest} req
+     * @param {function(string, DeleteReverseShellWhiteListsResponse):void} cb
+     * @public
+     */
+    DeleteReverseShellWhiteLists(req, cb) {
+        let resp = new DeleteReverseShellWhiteListsResponse();
+        this.request("DeleteReverseShellWhiteLists", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an asset.
+     * @param {DescribeComplianceAssetDetailInfoRequest} req
+     * @param {function(string, DescribeComplianceAssetDetailInfoResponse):void} cb
+     * @public
+     */
+    DescribeComplianceAssetDetailInfo(req, cb) {
+        let resp = new DescribeComplianceAssetDetailInfoResponse();
+        this.request("DescribeComplianceAssetDetailInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an access control policy at runtime.
+     * @param {DescribeAccessControlRuleDetailRequest} req
+     * @param {function(string, DescribeAccessControlRuleDetailResponse):void} cb
+     * @public
+     */
+    DescribeAccessControlRuleDetail(req, cb) {
+        let resp = new DescribeAccessControlRuleDetailResponse();
+        this.request("DescribeAccessControlRuleDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to update and publish a YAML network policy in the container network.
+     * @param {UpdateAndPublishNetworkFirewallPolicyYamlDetailRequest} req
+     * @param {function(string, UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse):void} cb
+     * @public
+     */
+    UpdateAndPublishNetworkFirewallPolicyYamlDetail(req, cb) {
+        let resp = new UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse();
+        this.request("UpdateAndPublishNetworkFirewallPolicyYamlDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to batch license images to be scanned (v2.0).
+     * @param {ModifyImageAuthorizedRequest} req
+     * @param {function(string, ModifyImageAuthorizedResponse):void} cb
+     * @public
+     */
+    ModifyImageAuthorized(req, cb) {
+        let resp = new ModifyImageAuthorizedResponse();
+        this.request("ModifyImageAuthorized", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the status of an abnormal process event.
+     * @param {ModifyAbnormalProcessStatusRequest} req
+     * @param {function(string, ModifyAbnormalProcessStatusResponse):void} cb
+     * @public
+     */
+    ModifyAbnormalProcessStatus(req, cb) {
+        let resp = new ModifyAbnormalProcessStatusResponse();
+        this.request("ModifyAbnormalProcessStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export security compliance information.
+     * @param {CreateExportComplianceStatusListJobRequest} req
+     * @param {function(string, CreateExportComplianceStatusListJobResponse):void} cb
+     * @public
+     */
+    CreateExportComplianceStatusListJob(req, cb) {
+        let resp = new CreateExportComplianceStatusListJobResponse();
+        this.request("CreateExportComplianceStatusListJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the brief information list of an image.
+     * @param {DescribeAssetImageSimpleListRequest} req
+     * @param {function(string, DescribeAssetImageSimpleListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageSimpleList(req, cb) {
+        let resp = new DescribeAssetImageSimpleListResponse();
+        this.request("DescribeAssetImageSimpleList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of all images.
+     * @param {DescribeImageSimpleListRequest} req
+     * @param {function(string, DescribeImageSimpleListResponse):void} cb
+     * @public
+     */
+    DescribeImageSimpleList(req, cb) {
+        let resp = new DescribeImageSimpleListResponse();
+        this.request("DescribeImageSimpleList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the status of an access control event at runtime.
+     * @param {ModifyAccessControlStatusRequest} req
+     * @param {function(string, ModifyAccessControlStatusResponse):void} cb
+     * @public
+     */
+    ModifyAccessControlStatus(req, cb) {
+        let resp = new ModifyAccessControlStatusResponse();
+        this.request("ModifyAccessControlStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export the allowlist of escapes.
+     * @param {CreateEscapeWhiteListExportJobRequest} req
+     * @param {function(string, CreateEscapeWhiteListExportJobResponse):void} cb
+     * @public
+     */
+    CreateEscapeWhiteListExportJob(req, cb) {
+        let resp = new CreateEscapeWhiteListExportJobResponse();
+        this.request("CreateEscapeWhiteListExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of a container escape scan rule.
+     * @param {DescribeEscapeRuleInfoRequest} req
+     * @param {function(string, DescribeEscapeRuleInfoResponse):void} cb
+     * @public
+     */
+    DescribeEscapeRuleInfo(req, cb) {
+        let resp = new DescribeEscapeRuleInfoResponse();
+        this.request("DescribeEscapeRuleInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of risks in an image.
+     * @param {DescribeAssetImageRiskListRequest} req
+     * @param {function(string, DescribeAssetImageRiskListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRiskList(req, cb) {
+        let resp = new DescribeAssetImageRiskListResponse();
+        this.request("DescribeAssetImageRiskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the servers associated with an image.
+     * @param {DescribeAssetImageHostListRequest} req
+     * @param {function(string, DescribeAssetImageHostListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageHostList(req, cb) {
+        let resp = new DescribeAssetImageHostListResponse();
+        this.request("DescribeAssetImageHostList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the overview of cluster assets.
+     * @param {DescribeClusterSummaryRequest} req
+     * @param {function(string, DescribeClusterSummaryResponse):void} cb
+     * @public
+     */
+    DescribeClusterSummary(req, cb) {
+        let resp = new DescribeClusterSummaryResponse();
+        this.request("DescribeClusterSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an exploit prevention event.
+     * @param {DescribeVulDefenceEventDetailRequest} req
+     * @param {function(string, DescribeVulDefenceEventDetailResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceEventDetail(req, cb) {
+        let resp = new DescribeVulDefenceEventDetailResponse();
+        this.request("DescribeVulDefenceEventDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the container escape security status.
+     * @param {DescribeEscapeSafeStateRequest} req
+     * @param {function(string, DescribeEscapeSafeStateResponse):void} cb
+     * @public
+     */
+    DescribeEscapeSafeState(req, cb) {
+        let resp = new DescribeEscapeSafeStateResponse();
+        this.request("DescribeEscapeSafeState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of virus scanning tasks at runtime.
+     * @param {DescribeVirusTaskListRequest} req
+     * @param {function(string, DescribeVirusTaskListResponse):void} cb
+     * @public
+     */
+    DescribeVirusTaskList(req, cb) {
+        let resp = new DescribeVirusTaskListResponse();
+        this.request("DescribeVirusTaskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get historical search records.
+     * @param {DescribeSearchLogsRequest} req
+     * @param {function(string, DescribeSearchLogsResponse):void} cb
+     * @public
+     */
+    DescribeSearchLogs(req, cb) {
+        let resp = new DescribeSearchLogsResponse();
+        this.request("DescribeSearchLogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add the details of an image repository.
+     * @param {AddAssetImageRegistryRegistryDetailRequest} req
+     * @param {function(string, AddAssetImageRegistryRegistryDetailResponse):void} cb
+     * @public
+     */
+    AddAssetImageRegistryRegistryDetail(req, cb) {
+        let resp = new AddAssetImageRegistryRegistryDetailResponse();
+        this.request("AddAssetImageRegistryRegistryDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of occupied ports.
+     * @param {DescribeAssetPortListRequest} req
+     * @param {function(string, DescribeAssetPortListResponse):void} cb
+     * @public
+     */
+    DescribeAssetPortList(req, cb) {
+        let resp = new DescribeAssetPortListResponse();
+        this.request("DescribeAssetPortList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or edit an automatic licensing rule for local images.
+     * @param {AddEditImageAutoAuthorizedRuleRequest} req
+     * @param {function(string, AddEditImageAutoAuthorizedRuleResponse):void} cb
+     * @public
+     */
+    AddEditImageAutoAuthorizedRule(req, cb) {
+        let resp = new AddEditImageAutoAuthorizedRuleResponse();
+        this.request("AddEditImageAutoAuthorizedRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the TCSS overview.
+     * @param {DescribeTcssSummaryRequest} req
+     * @param {function(string, DescribeTcssSummaryResponse):void} cb
+     * @public
+     */
+    DescribeTcssSummary(req, cb) {
+        let resp = new DescribeTcssSummaryResponse();
+        this.request("DescribeTcssSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the overview of local image risks.
+     * @param {DescribeImageRiskSummaryRequest} req
+     * @param {function(string, DescribeImageRiskSummaryResponse):void} cb
+     * @public
+     */
+    DescribeImageRiskSummary(req, cb) {
+        let resp = new DescribeImageRiskSummaryResponse();
+        this.request("DescribeImageRiskSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of emergency vulnerabilities.
+     * @param {DescribeEmergencyVulListRequest} req
+     * @param {function(string, DescribeEmergencyVulListResponse):void} cb
+     * @public
+     */
+    DescribeEmergencyVulList(req, cb) {
+        let resp = new DescribeEmergencyVulListResponse();
+        this.request("DescribeEmergencyVulList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the numbers of vulnerabilities at each severity level.
+     * @param {DescribeVulLevelSummaryRequest} req
+     * @param {function(string, DescribeVulLevelSummaryResponse):void} cb
+     * @public
+     */
+    DescribeVulLevelSummary(req, cb) {
+        let resp = new DescribeVulLevelSummaryResponse();
+        this.request("DescribeVulLevelSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of cluster network namespace labels.
+     * @param {DescribeNetworkFirewallNamespaceLabelListRequest} req
+     * @param {function(string, DescribeNetworkFirewallNamespaceLabelListResponse):void} cb
+     * @public
+     */
+    DescribeNetworkFirewallNamespaceLabelList(req, cb) {
+        let resp = new DescribeNetworkFirewallNamespaceLabelListResponse();
+        this.request("DescribeNetworkFirewallNamespaceLabelList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable/disable automatic trojan sample isolation.
+     * @param {ModifyVirusAutoIsolateExampleSwitchRequest} req
+     * @param {function(string, ModifyVirusAutoIsolateExampleSwitchResponse):void} cb
+     * @public
+     */
+    ModifyVirusAutoIsolateExampleSwitch(req, cb) {
+        let resp = new ModifyVirusAutoIsolateExampleSwitchResponse();
+        this.request("ModifyVirusAutoIsolateExampleSwitch", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the progress of the asset query task in the container network.
+     * @param {DescribeNetworkFirewallClusterRefreshStatusRequest} req
+     * @param {function(string, DescribeNetworkFirewallClusterRefreshStatusResponse):void} cb
+     * @public
+     */
+    DescribeNetworkFirewallClusterRefreshStatus(req, cb) {
+        let resp = new DescribeNetworkFirewallClusterRefreshStatusResponse();
+        this.request("DescribeNetworkFirewallClusterRefreshStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the real-time monitoring settings of virus scanning at runtime.
+     * @param {DescribeVirusMonitorSettingRequest} req
+     * @param {function(string, DescribeVirusMonitorSettingResponse):void} cb
+     * @public
+     */
+    DescribeVirusMonitorSetting(req, cb) {
+        let resp = new DescribeVirusMonitorSettingResponse();
+        this.request("DescribeVirusMonitorSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the settings of automatic trojan isolation.
+     * @param {DescribeVirusAutoIsolateSettingRequest} req
+     * @param {function(string, DescribeVirusAutoIsolateSettingResponse):void} cb
+     * @public
+     */
+    DescribeVirusAutoIsolateSetting(req, cb) {
+        let resp = new DescribeVirusAutoIsolateSettingResponse();
+        this.request("DescribeVirusAutoIsolateSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the trend of pending escape events.
+     * @param {DescribeEscapeEventTendencyRequest} req
+     * @param {function(string, DescribeEscapeEventTendencyResponse):void} cb
+     * @public
+     */
+    DescribeEscapeEventTendency(req, cb) {
+        let resp = new DescribeEscapeEventTendencyResponse();
+        this.request("DescribeEscapeEventTendency", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the settings of a scheduled task, including the check cycle and the status of the compliance benchmark.
+     * @param {ModifyCompliancePeriodTaskRequest} req
+     * @param {function(string, ModifyCompliancePeriodTaskResponse):void} cb
+     * @public
+     */
+    ModifyCompliancePeriodTask(req, cb) {
+        let resp = new ModifyCompliancePeriodTaskResponse();
+        this.request("ModifyCompliancePeriodTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the settings of security log cleanup.
+     * @param {DescribeSecLogCleanSettingInfoRequest} req
+     * @param {function(string, DescribeSecLogCleanSettingInfoResponse):void} cb
+     * @public
+     */
+    DescribeSecLogCleanSettingInfo(req, cb) {
+        let resp = new DescribeSecLogCleanSettingInfoResponse();
+        this.request("DescribeSecLogCleanSettingInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of system vulnerabilities.
+     * @param {DescribeSystemVulListRequest} req
+     * @param {function(string, DescribeSystemVulListResponse):void} cb
+     * @public
+     */
+    DescribeSystemVulList(req, cb) {
+        let resp = new DescribeSystemVulListResponse();
+        this.request("DescribeSystemVulList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of local images in a vulnerability scan task.
+     * @param {DescribeVulScanLocalImageListRequest} req
+     * @param {function(string, DescribeVulScanLocalImageListResponse):void} cb
+     * @public
+     */
+    DescribeVulScanLocalImageList(req, cb) {
+        let resp = new DescribeVulScanLocalImageListResponse();
+        this.request("DescribeVulScanLocalImageList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop a trojan scan task at runtime.
+     * @param {StopVirusScanTaskRequest} req
+     * @param {function(string, StopVirusScanTaskResponse):void} cb
+     * @public
+     */
+    StopVirusScanTask(req, cb) {
+        let resp = new StopVirusScanTaskResponse();
+        this.request("StopVirusScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or edit an abnormal process policy at runtime.
+     * @param {AddEditAbnormalProcessRuleRequest} req
+     * @param {function(string, AddEditAbnormalProcessRuleResponse):void} cb
+     * @public
+     */
+    AddEditAbnormalProcessRule(req, cb) {
+        let resp = new AddEditAbnormalProcessRuleResponse();
+        this.request("AddEditAbnormalProcessRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the status of an exploit prevention event.
+     * @param {ModifyVulDefenceEventStatusRequest} req
+     * @param {function(string, ModifyVulDefenceEventStatusResponse):void} cb
+     * @public
+     */
+    ModifyVulDefenceEventStatus(req, cb) {
+        let resp = new ModifyVulDefenceEventStatusResponse();
+        this.request("ModifyVulDefenceEventStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reset a security log topic.
+     * @param {ResetSecLogTopicConfigRequest} req
+     * @param {function(string, ResetSecLogTopicConfigResponse):void} cb
+     * @public
+     */
+    ResetSecLogTopicConfig(req, cb) {
+        let resp = new ResetSecLogTopicConfigResponse();
+        this.request("ResetSecLogTopicConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to perform another virus scan at runtime.
+     * @param {CreateVirusScanAgainRequest} req
+     * @param {function(string, CreateVirusScanAgainResponse):void} cb
+     * @public
+     */
+    CreateVirusScanAgain(req, cb) {
+        let resp = new CreateVirusScanAgainResponse();
+        this.request("CreateVirusScanAgain", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of cluster policy audits.
+     * @param {DescribeNetworkFirewallAuditRecordRequest} req
+     * @param {function(string, DescribeNetworkFirewallAuditRecordResponse):void} cb
+     * @public
+     */
+    DescribeNetworkFirewallAuditRecord(req, cb) {
+        let resp = new DescribeNetworkFirewallAuditRecordResponse();
+        this.request("DescribeNetworkFirewallAuditRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the security log access status.
+     * @param {ModifySecLogJoinStateRequest} req
+     * @param {function(string, ModifySecLogJoinStateResponse):void} cb
+     * @public
+     */
+    ModifySecLogJoinState(req, cb) {
+        let resp = new ModifySecLogJoinStateResponse();
+        this.request("ModifySecLogJoinState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the overview of pending events.
+     * @param {DescribeContainerSecEventSummaryRequest} req
+     * @param {function(string, DescribeContainerSecEventSummaryResponse):void} cb
+     * @public
+     */
+    DescribeContainerSecEventSummary(req, cb) {
+        let resp = new DescribeContainerSecEventSummaryResponse();
+        this.request("DescribeContainerSecEventSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of automatic image licensing tasks.
+     * @param {DescribeImageAutoAuthorizedTaskListRequest} req
+     * @param {function(string, DescribeImageAutoAuthorizedTaskListResponse):void} cb
+     * @public
+     */
+    DescribeImageAutoAuthorizedTaskList(req, cb) {
+        let resp = new DescribeImageAutoAuthorizedTaskListResponse();
+        this.request("DescribeImageAutoAuthorizedTaskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of aggregated information of check items identified in the last task in line with the "check item + asset" two-level structure.
+     * @param {DescribeComplianceTaskPolicyItemSummaryListRequest} req
+     * @param {function(string, DescribeComplianceTaskPolicyItemSummaryListResponse):void} cb
+     * @public
+     */
+    DescribeComplianceTaskPolicyItemSummaryList(req, cb) {
+        let resp = new DescribeComplianceTaskPolicyItemSummaryListResponse();
+        this.request("DescribeComplianceTaskPolicyItemSummaryList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of images.
+     * @param {DescribeAssetImageListRequest} req
+     * @param {function(string, DescribeAssetImageListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageList(req, cb) {
+        let resp = new DescribeAssetImageListResponse();
+        this.request("DescribeAssetImageList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a K8sApi abnormal event rules.
+     * @param {DeleteK8sApiAbnormalRuleRequest} req
+     * @param {function(string, DeleteK8sApiAbnormalRuleResponse):void} cb
+     * @public
+     */
+    DeleteK8sApiAbnormalRule(req, cb) {
+        let resp = new DeleteK8sApiAbnormalRuleResponse();
+        this.request("DeleteK8sApiAbnormalRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of reverse shell events at runtime.
+     * @param {DescribeReverseShellEventsRequest} req
+     * @param {function(string, DescribeReverseShellEventsResponse):void} cb
+     * @public
+     */
+    DescribeReverseShellEvents(req, cb) {
+        let resp = new DescribeReverseShellEventsResponse();
+        this.request("DescribeReverseShellEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to asynchronously export abnormal process events.
+     * @param {CreateProcessEventsExportJobRequest} req
+     * @param {function(string, CreateProcessEventsExportJobResponse):void} cb
+     * @public
+     */
+    CreateProcessEventsExportJob(req, cb) {
+        let resp = new CreateProcessEventsExportJobResponse();
+        this.request("CreateProcessEventsExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to view the details of a policy in the container network cluster.
+     * @param {DescribeNetworkFirewallPolicyDetailRequest} req
+     * @param {function(string, DescribeNetworkFirewallPolicyDetailResponse):void} cb
+     * @public
+     */
+    DescribeNetworkFirewallPolicyDetail(req, cb) {
+        let resp = new DescribeNetworkFirewallPolicyDetailResponse();
+        this.request("DescribeNetworkFirewallPolicyDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an image scan task for an image repository.
+     * @param {CreateAssetImageRegistryScanTaskRequest} req
+     * @param {function(string, CreateAssetImageRegistryScanTaskResponse):void} cb
+     * @public
+     */
+    CreateAssetImageRegistryScanTask(req, cb) {
+        let resp = new CreateAssetImageRegistryScanTaskResponse();
+        this.request("CreateAssetImageRegistryScanTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a security log alert message.
+     * @param {DescribeSecLogAlertMsgRequest} req
+     * @param {function(string, DescribeSecLogAlertMsgResponse):void} cb
+     * @public
+     */
+    DescribeSecLogAlertMsg(req, cb) {
+        let resp = new DescribeSecLogAlertMsgResponse();
+        this.request("DescribeSecLogAlertMsg", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of an unfinished asset refreshing task.
+     * @param {DescribeUnfinishRefreshTaskRequest} req
+     * @param {function(string, DescribeUnfinishRefreshTaskResponse):void} cb
+     * @public
+     */
+    DescribeUnfinishRefreshTask(req, cb) {
+        let resp = new DescribeUnfinishRefreshTaskResponse();
+        this.request("DescribeUnfinishRefreshTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or edit an allowed high-risk syscall at runtime.
+     * @param {AddEditRiskSyscallWhiteListRequest} req
+     * @param {function(string, AddEditRiskSyscallWhiteListResponse):void} cb
+     * @public
+     */
+    AddEditRiskSyscallWhiteList(req, cb) {
+        let resp = new AddEditRiskSyscallWhiteListResponse();
+        this.request("AddEditRiskSyscallWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the quick image scanning status of an image repository.
+     * @param {DescribeAssetImageRegistryScanStatusOneKeyRequest} req
+     * @param {function(string, DescribeAssetImageRegistryScanStatusOneKeyResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryScanStatusOneKey(req, cb) {
+        let resp = new DescribeAssetImageRegistryScanStatusOneKeyResponse();
+        this.request("DescribeAssetImageRegistryScanStatusOneKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to add and publish a network policy in the container network.
+     * @param {AddAndPublishNetworkFirewallPolicyDetailRequest} req
+     * @param {function(string, AddAndPublishNetworkFirewallPolicyDetailResponse):void} cb
+     * @public
+     */
+    AddAndPublishNetworkFirewallPolicyDetail(req, cb) {
+        let resp = new AddAndPublishNetworkFirewallPolicyDetailResponse();
+        this.request("AddAndPublishNetworkFirewallPolicyDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of vulnerabilities in an image.
+     * @param {DescribeAssetImageVulListExportRequest} req
+     * @param {function(string, DescribeAssetImageVulListExportResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageVulListExport(req, cb) {
+        let resp = new DescribeAssetImageVulListExportResponse();
+        this.request("DescribeAssetImageVulListExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of image repositories.
+     * @param {DescribeAssetImageRegistryListRequest} req
+     * @param {function(string, DescribeAssetImageRegistryListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryList(req, cb) {
+        let resp = new DescribeAssetImageRegistryListResponse();
+        this.request("DescribeAssetImageRegistryList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of processes.
+     * @param {DescribeAssetProcessListRequest} req
+     * @param {function(string, DescribeAssetProcessListResponse):void} cb
+     * @public
+     */
+    DescribeAssetProcessList(req, cb) {
+        let resp = new DescribeAssetProcessListResponse();
+        this.request("DescribeAssetProcessList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query cluster network Pod labels.
+     * @param {DescribeNetworkFirewallPodLabelsListRequest} req
+     * @param {function(string, DescribeNetworkFirewallPodLabelsListResponse):void} cb
+     * @public
+     */
+    DescribeNetworkFirewallPodLabelsList(req, cb) {
+        let resp = new DescribeNetworkFirewallPodLabelsListResponse();
+        this.request("DescribeNetworkFirewallPodLabelsList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the trend of K8sApi abnormal events.
+     * @param {DescribeK8sApiAbnormalTendencyRequest} req
+     * @param {function(string, DescribeK8sApiAbnormalTendencyResponse):void} cb
+     * @public
+     */
+    DescribeK8sApiAbnormalTendency(req, cb) {
+        let resp = new DescribeK8sApiAbnormalTendencyResponse();
+        this.request("DescribeK8sApiAbnormalTendency", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of abnormal process events at runtime.
+     * @param {DescribeAbnormalProcessEventsRequest} req
+     * @param {function(string, DescribeAbnormalProcessEventsResponse):void} cb
+     * @public
+     */
+    DescribeAbnormalProcessEvents(req, cb) {
+        let resp = new DescribeAbnormalProcessEventsResponse();
+        this.request("DescribeAbnormalProcessEvents", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the details of an image repository.
+     * @param {UpdateAssetImageRegistryRegistryDetailRequest} req
+     * @param {function(string, UpdateAssetImageRegistryRegistryDetailResponse):void} cb
+     * @public
+     */
+    UpdateAssetImageRegistryRegistryDetail(req, cb) {
+        let resp = new UpdateAssetImageRegistryRegistryDetailResponse();
+        this.request("UpdateAssetImageRegistryRegistryDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check whether the Pro Edition needs to be purchased.
+     * @param {DescribeProVersionInfoRequest} req
+     * @param {function(string, DescribeProVersionInfoResponse):void} cb
+     * @public
+     */
+    DescribeProVersionInfo(req, cb) {
+        let resp = new DescribeProVersionInfoResponse();
+        this.request("DescribeProVersionInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of check items of an asset.
+     * @param {DescribeComplianceAssetPolicyItemListRequest} req
+     * @param {function(string, DescribeComplianceAssetPolicyItemListResponse):void} cb
+     * @public
+     */
+    DescribeComplianceAssetPolicyItemList(req, cb) {
+        let resp = new DescribeComplianceAssetPolicyItemListResponse();
+        this.request("DescribeComplianceAssetPolicyItemList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set the check mode and automatic check.
+     * @param {SetCheckModeRequest} req
+     * @param {function(string, SetCheckModeResponse):void} cb
+     * @public
+     */
+    SetCheckMode(req, cb) {
+        let resp = new SetCheckModeResponse();
+        this.request("SetCheckMode", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of ES query files.
+     * @param {DescribeESHitsRequest} req
+     * @param {function(string, DescribeESHitsResponse):void} cb
+     * @public
+     */
+    DescribeESHits(req, cb) {
+        let resp = new DescribeESHitsResponse();
+        this.request("DescribeESHits", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the exploit prevention settings.
+     * @param {DescribeVulDefenceSettingRequest} req
+     * @param {function(string, DescribeVulDefenceSettingResponse):void} cb
+     * @public
+     */
+    DescribeVulDefenceSetting(req, cb) {
+        let resp = new DescribeVulDefenceSettingResponse();
+        this.request("DescribeVulDefenceSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the last asset sync time.
+     * @param {DescribeAssetSyncLastTimeRequest} req
+     * @param {function(string, DescribeAssetSyncLastTimeResponse):void} cb
+     * @public
+     */
+    DescribeAssetSyncLastTime(req, cb) {
+        let resp = new DescribeAssetSyncLastTimeResponse();
+        this.request("DescribeAssetSyncLastTime", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query K8sApi abnormal request rule details.
+     * @param {DescribeK8sApiAbnormalRuleInfoRequest} req
+     * @param {function(string, DescribeK8sApiAbnormalRuleInfoResponse):void} cb
+     * @public
+     */
+    DescribeK8sApiAbnormalRuleInfo(req, cb) {
+        let resp = new DescribeK8sApiAbnormalRuleInfoResponse();
+        this.request("DescribeK8sApiAbnormalRuleInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove the specified check item from the allowlist.
+     * @param {DeleteCompliancePolicyItemFromWhitelistRequest} req
+     * @param {function(string, DeleteCompliancePolicyItemFromWhitelistResponse):void} cb
+     * @public
+     */
+    DeleteCompliancePolicyItemFromWhitelist(req, cb) {
+        let resp = new DeleteCompliancePolicyItemFromWhitelistResponse();
+        this.request("DeleteCompliancePolicyItemFromWhitelist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query virus scanning settings at runtime.
+     * @param {DescribeVirusScanSettingRequest} req
+     * @param {function(string, DescribeVirusScanSettingResponse):void} cb
+     * @public
+     */
+    DescribeVirusScanSetting(req, cb) {
+        let resp = new DescribeVirusScanSettingResponse();
+        this.request("DescribeVirusScanSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query promotions.
+     * @param {DescribePromotionActivityRequest} req
+     * @param {function(string, DescribePromotionActivityResponse):void} cb
+     * @public
+     */
+    DescribePromotionActivity(req, cb) {
+        let resp = new DescribePromotionActivityResponse();
+        this.request("DescribePromotionActivity", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of assets of a certain type.
+     * @param {DescribeComplianceAssetListRequest} req
+     * @param {function(string, DescribeComplianceAssetListResponse):void} cb
+     * @public
+     */
+    DescribeComplianceAssetList(req, cb) {
+        let resp = new DescribeComplianceAssetListResponse();
+        this.request("DescribeComplianceAssetList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to apply the asset level in the "check item + asset" two-level structure.
+     * @param {DescribeCompliancePolicyItemAffectedAssetListRequest} req
+     * @param {function(string, DescribeCompliancePolicyItemAffectedAssetListResponse):void} cb
+     * @public
+     */
+    DescribeCompliancePolicyItemAffectedAssetList(req, cb) {
+        let resp = new DescribeCompliancePolicyItemAffectedAssetListResponse();
+        this.request("DescribeCompliancePolicyItemAffectedAssetList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the statistics of the log search usage.
+     * @param {DescribeLogStorageStatisticRequest} req
+     * @param {function(string, DescribeLogStorageStatisticResponse):void} cb
+     * @public
+     */
+    DescribeLogStorageStatistic(req, cb) {
+        let resp = new DescribeLogStorageStatisticResponse();
+        this.request("DescribeLogStorageStatistic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to refresh server assets.
+     * @param {ModifyAssetRequest} req
+     * @param {function(string, ModifyAssetResponse):void} cb
+     * @public
+     */
+    ModifyAsset(req, cb) {
+        let resp = new ModifyAssetResponse();
+        this.request("ModifyAsset", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create or edit the upper limit for elastic billing.
+     * @param {CreateOrModifyPostPayCoresRequest} req
+     * @param {function(string, CreateOrModifyPostPayCoresResponse):void} cb
+     * @public
+     */
+    CreateOrModifyPostPayCores(req, cb) {
+        let resp = new CreateOrModifyPostPayCoresResponse();
+        this.request("CreateOrModifyPostPayCores", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the settings of automatic trojan isolation.
+     * @param {ModifyVirusAutoIsolateSettingRequest} req
+     * @param {function(string, ModifyVirusAutoIsolateSettingResponse):void} cb
+     * @public
+     */
+    ModifyVirusAutoIsolateSetting(req, cb) {
+        let resp = new ModifyVirusAutoIsolateSettingResponse();
+        this.request("ModifyVirusAutoIsolateSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the UIN of a Kafka security log.
+     * @param {DescribeSecLogKafkaUINRequest} req
+     * @param {function(string, DescribeSecLogKafkaUINResponse):void} cb
+     * @public
+     */
+    DescribeSecLogKafkaUIN(req, cb) {
+        let resp = new DescribeSecLogKafkaUINResponse();
+        this.request("DescribeSecLogKafkaUIN", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an abnormal process event at runtime.
+     * @param {DescribeAbnormalProcessDetailRequest} req
+     * @param {function(string, DescribeAbnormalProcessDetailResponse):void} cb
+     * @public
+     */
+    DescribeAbnormalProcessDetail(req, cb) {
+        let resp = new DescribeAbnormalProcessDetailResponse();
+        this.request("DescribeAbnormalProcessDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to license an image to be scanned.
+     * @param {RenewImageAuthorizeStateRequest} req
+     * @param {function(string, RenewImageAuthorizeStateResponse):void} cb
+     * @public
+     */
+    RenewImageAuthorizeState(req, cb) {
+        let resp = new RenewImageAuthorizeStateResponse();
+        this.request("RenewImageAuthorizeState", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get and return the number of affected clusters.
+     * @param {DescribeAffectedClusterCountRequest} req
+     * @param {function(string, DescribeAffectedClusterCountResponse):void} cb
+     * @public
+     */
+    DescribeAffectedClusterCount(req, cb) {
+        let resp = new DescribeAffectedClusterCountResponse();
+        this.request("DescribeAffectedClusterCount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export containers affected by vulnerabilities.
+     * @param {CreateVulContainerExportJobRequest} req
+     * @param {function(string, CreateVulContainerExportJobResponse):void} cb
+     * @public
+     */
+    CreateVulContainerExportJob(req, cb) {
+        let resp = new CreateVulContainerExportJobResponse();
+        this.request("CreateVulContainerExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query affected node types and return the node list.
+     * @param {DescribeAffectedNodeListRequest} req
+     * @param {function(string, DescribeAffectedNodeListResponse):void} cb
+     * @public
+     */
+    DescribeAffectedNodeList(req, cb) {
+        let resp = new DescribeAffectedNodeListResponse();
+        this.request("DescribeAffectedNodeList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of access control events at runtime.
+     * @param {DescribeAccessControlEventsExportRequest} req
+     * @param {function(string, DescribeAccessControlEventsExportResponse):void} cb
+     * @public
+     */
+    DescribeAccessControlEventsExport(req, cb) {
+        let resp = new DescribeAccessControlEventsExportResponse();
+        this.request("DescribeAccessControlEventsExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the trend of trojan events.
+     * @param {DescribeVirusEventTendencyRequest} req
+     * @param {function(string, DescribeVirusEventTendencyResponse):void} cb
+     * @public
+     */
+    DescribeVirusEventTendency(req, cb) {
+        let resp = new DescribeVirusEventTendencyResponse();
+        this.request("DescribeVirusEventTendency", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of automatic image licensing results.
+     * @param {DescribeImageAutoAuthorizedLogListRequest} req
+     * @param {function(string, DescribeImageAutoAuthorizedLogListResponse):void} cb
+     * @public
+     */
+    DescribeImageAutoAuthorizedLogList(req, cb) {
+        let resp = new DescribeImageAutoAuthorizedLogListResponse();
+        this.request("DescribeImageAutoAuthorizedLogList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the numbers of images affected by emergency vulnerabilities at each severity level.
+     * @param {DescribeVulLevelImageSummaryRequest} req
+     * @param {function(string, DescribeVulLevelImageSummaryResponse):void} cb
+     * @public
+     */
+    DescribeVulLevelImageSummary(req, cb) {
+        let resp = new DescribeVulLevelImageSummaryResponse();
+        this.request("DescribeVulLevelImageSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the status of a reverse shell event.
+     * @param {ModifyReverseShellStatusRequest} req
+     * @param {function(string, ModifyReverseShellStatusResponse):void} cb
+     * @public
+     */
+    ModifyReverseShellStatus(req, cb) {
+        let resp = new ModifyReverseShellStatusResponse();
+        this.request("ModifyReverseShellStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of security log access types.
+     * @param {DescribeSecLogJoinTypeListRequest} req
+     * @param {function(string, DescribeSecLogJoinTypeListResponse):void} cb
+     * @public
+     */
+    DescribeSecLogJoinTypeList(req, cb) {
+        let resp = new DescribeSecLogJoinTypeListResponse();
+        this.request("DescribeSecLogJoinTypeList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or edit an alert policy.
+     * @param {AddEditWarningRulesRequest} req
+     * @param {function(string, AddEditWarningRulesResponse):void} cb
+     * @public
+     */
+    AddEditWarningRules(req, cb) {
+        let resp = new AddEditWarningRulesResponse();
+        this.request("AddEditWarningRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the current canary configuration of the user.
+     * @param {DescribeABTestConfigRequest} req
+     * @param {function(string, DescribeABTestConfigResponse):void} cb
+     * @public
+     */
+    DescribeABTestConfig(req, cb) {
+        let resp = new DescribeABTestConfigResponse();
+        this.request("DescribeABTestConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of risks in an image.
+     * @param {DescribeAssetImageRiskListExportRequest} req
+     * @param {function(string, DescribeAssetImageRiskListExportResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRiskListExport(req, cb) {
+        let resp = new DescribeAssetImageRiskListExportResponse();
+        this.request("DescribeAssetImageRiskListExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the settings of security log cleanup.
+     * @param {ModifySecLogCleanSettingInfoRequest} req
+     * @param {function(string, ModifySecLogCleanSettingInfoResponse):void} cb
+     * @public
+     */
+    ModifySecLogCleanSettingInfo(req, cb) {
+        let resp = new ModifySecLogCleanSettingInfoResponse();
+        this.request("ModifySecLogCleanSettingInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the URL to download the result of an exportation task.
+     * @param {DescribeExportJobDownloadURLRequest} req
+     * @param {function(string, DescribeExportJobDownloadURLResponse):void} cb
+     * @public
+     */
+    DescribeExportJobDownloadURL(req, cb) {
+        let resp = new DescribeExportJobDownloadURLResponse();
+        this.request("DescribeExportJobDownloadURL", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of image vulnerabilities of an image repository
+     * @param {DescribeAssetImageRegistryVulListRequest} req
+     * @param {function(string, DescribeAssetImageRegistryVulListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryVulList(req, cb) {
+        let resp = new DescribeAssetImageRegistryVulListResponse();
+        this.request("DescribeAssetImageRegistryVulList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of risk items identified in the last task and filter them by special field.
+     * @param {DescribeRiskListRequest} req
+     * @param {function(string, DescribeRiskListResponse):void} cb
+     * @public
+     */
+    DescribeRiskList(req, cb) {
+        let resp = new DescribeRiskListResponse();
+        this.request("DescribeRiskList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of container escape events.
+     * @param {DescribeEscapeEventInfoRequest} req
+     * @param {function(string, DescribeEscapeEventInfoResponse):void} cb
+     * @public
+     */
+    DescribeEscapeEventInfo(req, cb) {
+        let resp = new DescribeEscapeEventInfoResponse();
+        this.request("DescribeEscapeEventInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the overview of vulnerability risks.
+     * @param {DescribeVulSummaryRequest} req
+     * @param {function(string, DescribeVulSummaryResponse):void} cb
+     * @public
+     */
+    DescribeVulSummary(req, cb) {
+        let resp = new DescribeVulSummaryResponse();
+        this.request("DescribeVulSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the servers licensed according to an automatic licensing rule.
+     * @param {DescribeAutoAuthorizedRuleHostRequest} req
+     * @param {function(string, DescribeAutoAuthorizedRuleHostResponse):void} cb
+     * @public
+     */
+    DescribeAutoAuthorizedRuleHost(req, cb) {
+        let resp = new DescribeAutoAuthorizedRuleHostResponse();
+        this.request("DescribeAutoAuthorizedRuleHost", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to configure and publish a YAML network policy in the container network.
+     * @param {AddAndPublishNetworkFirewallPolicyYamlDetailRequest} req
+     * @param {function(string, AddAndPublishNetworkFirewallPolicyYamlDetailResponse):void} cb
+     * @public
+     */
+    AddAndPublishNetworkFirewallPolicyYamlDetail(req, cb) {
+        let resp = new AddAndPublishNetworkFirewallPolicyYamlDetailResponse();
+        this.request("AddAndPublishNetworkFirewallPolicyYamlDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the types of container escape events and the number of pending events.
+     * @param {DescribeEscapeEventTypeSummaryRequest} req
+     * @param {function(string, DescribeEscapeEventTypeSummaryResponse):void} cb
+     * @public
+     */
+    DescribeEscapeEventTypeSummary(req, cb) {
+        let resp = new DescribeEscapeEventTypeSummaryResponse();
+        this.request("DescribeEscapeEventTypeSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to asynchronously export escape events.
+     * @param {CreateEscapeEventsExportJobRequest} req
+     * @param {function(string, CreateEscapeEventsExportJobResponse):void} cb
+     * @public
+     */
+    CreateEscapeEventsExportJob(req, cb) {
+        let resp = new CreateEscapeEventsExportJobResponse();
+        this.request("CreateEscapeEventsExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of vulnerabilities in an image.
+     * @param {DescribeAssetImageVulListRequest} req
+     * @param {function(string, DescribeAssetImageVulListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageVulList(req, cb) {
+        let resp = new DescribeAssetImageVulListResponse();
+        this.request("DescribeAssetImageVulList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of alert policies.
+     * @param {DescribeWarningRulesRequest} req
+     * @param {function(string, DescribeWarningRulesResponse):void} cb
+     * @public
+     */
+    DescribeWarningRules(req, cb) {
+        let resp = new DescribeWarningRulesResponse();
+        this.request("DescribeWarningRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of search templates.
+     * @param {DescribeSearchTemplatesRequest} req
+     * @param {function(string, DescribeSearchTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeSearchTemplates(req, cb) {
+        let resp = new DescribeSearchTemplatesResponse();
+        this.request("DescribeSearchTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add the specified check item IDs to the allowlist so as to hide the failure result.
+     * @param {AddCompliancePolicyItemToWhitelistRequest} req
+     * @param {function(string, AddCompliancePolicyItemToWhitelistResponse):void} cb
+     * @public
+     */
+    AddCompliancePolicyItemToWhitelist(req, cb) {
+        let resp = new AddCompliancePolicyItemToWhitelistResponse();
+        this.request("AddCompliancePolicyItemToWhitelist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to initialize the compliance baseline environment and create necessary data and options.
+     * @param {InitializeUserComplianceEnvironmentRequest} req
+     * @param {function(string, InitializeUserComplianceEnvironmentResponse):void} cb
+     * @public
+     */
+    InitializeUserComplianceEnvironment(req, cb) {
+        let resp = new InitializeUserComplianceEnvironmentResponse();
+        this.request("InitializeUserComplianceEnvironment", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of a cluster on the Security Dashboard and Cluster Security pages.
+     * @param {DescribeUserClusterRequest} req
+     * @param {function(string, DescribeUserClusterResponse):void} cb
+     * @public
+     */
+    DescribeUserCluster(req, cb) {
+        let resp = new DescribeUserClusterResponse();
+        this.request("DescribeUserCluster", req, resp, cb);
+    }
+
+    /**
+     * This API is used to uninstall the agent.
+     * @param {DeleteMachineRequest} req
+     * @param {function(string, DeleteMachineResponse):void} cb
+     * @public
+     */
+    DeleteMachine(req, cb) {
+        let resp = new DeleteMachineResponse();
+        this.request("DeleteMachine", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to export the list of servers.
+     * @param {CreateHostExportJobRequest} req
+     * @param {function(string, CreateHostExportJobResponse):void} cb
+     * @public
+     */
+    CreateHostExportJob(req, cb) {
+        let resp = new CreateHostExportJobResponse();
+        this.request("CreateHostExportJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to activate TCSS trial.
+     * @param {OpenTcssTrialRequest} req
+     * @param {function(string, OpenTcssTrialResponse):void} cb
+     * @public
+     */
+    OpenTcssTrial(req, cb) {
+        let resp = new OpenTcssTrialResponse();
+        this.request("OpenTcssTrial", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of abnormal process policies at runtime.
+     * @param {DescribeAbnormalProcessRulesRequest} req
+     * @param {function(string, DescribeAbnormalProcessRulesResponse):void} cb
+     * @public
+     */
+    DescribeAbnormalProcessRules(req, cb) {
+        let resp = new DescribeAbnormalProcessRulesResponse();
+        this.request("DescribeAbnormalProcessRules", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check the specified asset again with the specified check item and return the ID of the created compliance check task.
+     * @param {ScanComplianceAssetsByPolicyItemRequest} req
+     * @param {function(string, ScanComplianceAssetsByPolicyItemResponse):void} cb
+     * @public
+     */
+    ScanComplianceAssetsByPolicyItem(req, cb) {
+        let resp = new ScanComplianceAssetsByPolicyItemResponse();
+        this.request("ScanComplianceAssetsByPolicyItem", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an allowed escape.
+     * @param {DeleteEscapeWhiteListRequest} req
+     * @param {function(string, DeleteEscapeWhiteListResponse):void} cb
+     * @public
+     */
+    DeleteEscapeWhiteList(req, cb) {
+        let resp = new DeleteEscapeWhiteListResponse();
+        this.request("DeleteEscapeWhiteList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to publish a network policy in the container network.
+     * @param {CreateNetworkFirewallPublishRequest} req
+     * @param {function(string, CreateNetworkFirewallPublishResponse):void} cb
+     * @public
+     */
+    CreateNetworkFirewallPublish(req, cb) {
+        let resp = new CreateNetworkFirewallPublishResponse();
+        this.request("CreateNetworkFirewallPublish", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to revoke a network policy in the container network.
+     * @param {CreateNetworkFirewallUndoPublishRequest} req
+     * @param {function(string, CreateNetworkFirewallUndoPublishResponse):void} cb
+     * @public
+     */
+    CreateNetworkFirewallUndoPublish(req, cb) {
+        let resp = new CreateNetworkFirewallUndoPublishResponse();
+        this.request("CreateNetworkFirewallUndoPublish", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an allowed high-risk syscall at runtime.
+     * @param {DeleteRiskSyscallWhiteListsRequest} req
+     * @param {function(string, DeleteRiskSyscallWhiteListsResponse):void} cb
+     * @public
+     */
+    DeleteRiskSyscallWhiteLists(req, cb) {
+        let resp = new DeleteRiskSyscallWhiteListsResponse();
+        this.request("DeleteRiskSyscallWhiteLists", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add or edit an access control policy at runtime.
+     * @param {AddEditAccessControlRuleRequest} req
+     * @param {function(string, AddEditAccessControlRuleResponse):void} cb
+     * @public
+     */
+    AddEditAccessControlRule(req, cb) {
+        let resp = new AddEditAccessControlRuleResponse();
+        this.request("AddEditAccessControlRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the trend of critical and high-risk vulnerabilities in local and repository images.
+     * @param {DescribeVulTendencyRequest} req
+     * @param {function(string, DescribeVulTendencyResponse):void} cb
+     * @public
+     */
+    DescribeVulTendency(req, cb) {
+        let resp = new DescribeVulTendencyResponse();
+        this.request("DescribeVulTendency", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of the allowlist of reverse shells at runtime.
+     * @param {DescribeReverseShellWhiteListDetailRequest} req
+     * @param {function(string, DescribeReverseShellWhiteListDetailResponse):void} cb
+     * @public
+     */
+    DescribeReverseShellWhiteListDetail(req, cb) {
+        let resp = new DescribeReverseShellWhiteListDetailResponse();
+        this.request("DescribeReverseShellWhiteListDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set an image scan.
+     * @param {CreateAssetImageScanSettingRequest} req
+     * @param {function(string, CreateAssetImageScanSettingResponse):void} cb
+     * @public
+     */
+    CreateAssetImageScanSetting(req, cb) {
+        let resp = new CreateAssetImageScanSettingResponse();
+        this.request("CreateAssetImageScanSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of viruses in an image.
+     * @param {DescribeAssetImageVirusListRequest} req
+     * @param {function(string, DescribeAssetImageVirusListResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageVirusList(req, cb) {
+        let resp = new DescribeAssetImageVirusListResponse();
+        this.request("DescribeAssetImageVirusList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create K8sApi abnormal event rules.
+     * @param {CreateK8sApiAbnormalRuleInfoRequest} req
+     * @param {function(string, CreateK8sApiAbnormalRuleInfoResponse):void} cb
+     * @public
+     */
+    CreateK8sApiAbnormalRuleInfo(req, cb) {
+        let resp = new CreateK8sApiAbnormalRuleInfoResponse();
+        this.request("CreateK8sApiAbnormalRuleInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the statistics of containers and images under an account.
+     * @param {DescribeAssetSummaryRequest} req
+     * @param {function(string, DescribeAssetSummaryResponse):void} cb
+     * @public
+     */
+    DescribeAssetSummary(req, cb) {
+        let resp = new DescribeAssetSummaryResponse();
+        this.request("DescribeAssetSummary", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the settings of security log delivery to Kafka.
+     * @param {DescribeSecLogDeliveryKafkaSettingRequest} req
+     * @param {function(string, DescribeSecLogDeliveryKafkaSettingResponse):void} cb
+     * @public
+     */
+    DescribeSecLogDeliveryKafkaSetting(req, cb) {
+        let resp = new DescribeSecLogDeliveryKafkaSettingResponse();
+        this.request("DescribeSecLogDeliveryKafkaSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query check reports.
+     * @param {DescribeInspectionReportRequest} req
+     * @param {function(string, DescribeInspectionReportResponse):void} cb
+     * @public
+     */
+    DescribeInspectionReport(req, cb) {
+        let resp = new DescribeInspectionReportResponse();
+        this.request("DescribeInspectionReport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to delete a network policy in the container network.
+     * @param {DeleteNetworkFirewallPolicyDetailRequest} req
+     * @param {function(string, DeleteNetworkFirewallPolicyDetailResponse):void} cb
+     * @public
+     */
+    DeleteNetworkFirewallPolicyDetail(req, cb) {
+        let resp = new DeleteNetworkFirewallPolicyDetailResponse();
+        this.request("DeleteNetworkFirewallPolicyDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of web services.
+     * @param {DescribeAssetWebServiceListRequest} req
+     * @param {function(string, DescribeAssetWebServiceListResponse):void} cb
+     * @public
+     */
+    DescribeAssetWebServiceList(req, cb) {
+        let resp = new DescribeAssetWebServiceListResponse();
+        this.request("DescribeAssetWebServiceList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to check whether an image repository name is duplicated.
+     * @param {CheckRepeatAssetImageRegistryRequest} req
+     * @param {function(string, CheckRepeatAssetImageRegistryResponse):void} cb
+     * @public
+     */
+    CheckRepeatAssetImageRegistry(req, cb) {
+        let resp = new CheckRepeatAssetImageRegistryResponse();
+        this.request("CheckRepeatAssetImageRegistry", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a task to add a network policy in the container network.
+     * @param {AddNetworkFirewallPolicyDetailRequest} req
+     * @param {function(string, AddNetworkFirewallPolicyDetailResponse):void} cb
+     * @public
+     */
+    AddNetworkFirewallPolicyDetail(req, cb) {
+        let resp = new AddNetworkFirewallPolicyDetailResponse();
+        this.request("AddNetworkFirewallPolicyDetail", req, resp, cb);
+    }
+
+    /**
+     * Querying details of a K8s API exception event
+     * @param {DescribeK8sApiAbnormalEventInfoRequest} req
+     * @param {function(string, DescribeK8sApiAbnormalEventInfoResponse):void} cb
+     * @public
+     */
+    DescribeK8sApiAbnormalEventInfo(req, cb) {
+        let resp = new DescribeK8sApiAbnormalEventInfoResponse();
+        this.request("DescribeK8sApiAbnormalEventInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the trend of pending abnormal process events.
+     * @param {DescribeAbnormalProcessEventTendencyRequest} req
+     * @param {function(string, DescribeAbnormalProcessEventTendencyResponse):void} cb
+     * @public
+     */
+    DescribeAbnormalProcessEventTendency(req, cb) {
+        let resp = new DescribeAbnormalProcessEventTendencyResponse();
+        this.request("DescribeAbnormalProcessEventTendency", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of containers affected by vulnerabilities.
+     * @param {DescribeVulContainerListRequest} req
+     * @param {function(string, DescribeVulContainerListResponse):void} cb
+     * @public
+     */
+    DescribeVulContainerList(req, cb) {
+        let resp = new DescribeVulContainerListResponse();
+        this.request("DescribeVulContainerList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of the security log product.
+     * @param {DescribeSecLogVasInfoRequest} req
+     * @param {function(string, DescribeSecLogVasInfoResponse):void} cb
+     * @public
+     */
+    DescribeSecLogVasInfo(req, cb) {
+        let resp = new DescribeSecLogVasInfoResponse();
+        this.request("DescribeSecLogVasInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of virus scanning events at runtime.
+     * @param {ExportVirusListRequest} req
+     * @param {function(string, ExportVirusListResponse):void} cb
+     * @public
+     */
+    ExportVirusList(req, cb) {
+        let resp = new ExportVirusListResponse();
+        this.request("ExportVirusList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the download URL of a trojan sample.
+     * @param {DescribeVirusSampleDownloadUrlRequest} req
+     * @param {function(string, DescribeVirusSampleDownloadUrlResponse):void} cb
+     * @public
+     */
+    DescribeVirusSampleDownloadUrl(req, cb) {
+        let resp = new DescribeVirusSampleDownloadUrlResponse();
+        this.request("DescribeVirusSampleDownloadUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of a server.
+     * @param {DescribeAssetHostDetailRequest} req
+     * @param {function(string, DescribeAssetHostDetailResponse):void} cb
+     * @public
+     */
+    DescribeAssetHostDetail(req, cb) {
+        let resp = new DescribeAssetHostDetailResponse();
+        this.request("DescribeAssetHostDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of vulnerabilities for an image repository.
+     * @param {DescribeAssetImageRegistryVulListExportRequest} req
+     * @param {function(string, DescribeAssetImageRegistryVulListExportResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageRegistryVulListExport(req, cb) {
+        let resp = new DescribeAssetImageRegistryVulListExportResponse();
+        this.request("DescribeAssetImageRegistryVulListExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of web application vulnerabilities.
+     * @param {DescribeWebVulListRequest} req
+     * @param {function(string, DescribeWebVulListResponse):void} cb
+     * @public
+     */
+    DescribeWebVulList(req, cb) {
+        let resp = new DescribeWebVulListResponse();
+        this.request("DescribeWebVulList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the allowlist of high-risk syscalls at runtime.
+     * @param {DescribeRiskSyscallWhiteListsRequest} req
+     * @param {function(string, DescribeRiskSyscallWhiteListsResponse):void} cb
+     * @public
+     */
+    DescribeRiskSyscallWhiteLists(req, cb) {
+        let resp = new DescribeRiskSyscallWhiteListsResponse();
+        this.request("DescribeRiskSyscallWhiteLists", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export the list of access control policies at runtime.
+     * @param {DescribeAccessControlRulesExportRequest} req
+     * @param {function(string, DescribeAccessControlRulesExportResponse):void} cb
+     * @public
+     */
+    DescribeAccessControlRulesExport(req, cb) {
+        let resp = new DescribeAccessControlRulesExportResponse();
+        this.request("DescribeAccessControlRulesExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of a high-risk syscall event.
+     * @param {DescribeRiskSyscallDetailRequest} req
+     * @param {function(string, DescribeRiskSyscallDetailResponse):void} cb
+     * @public
+     */
+    DescribeRiskSyscallDetail(req, cb) {
+        let resp = new DescribeRiskSyscallDetailResponse();
+        this.request("DescribeRiskSyscallDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of automatically isolated trojan samples.
+     * @param {DescribeVirusAutoIsolateSampleListRequest} req
+     * @param {function(string, DescribeVirusAutoIsolateSampleListResponse):void} cb
+     * @public
+     */
+    DescribeVirusAutoIsolateSampleList(req, cb) {
+        let resp = new DescribeVirusAutoIsolateSampleListResponse();
+        this.request("DescribeVirusAutoIsolateSampleList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the status of a virus scanning task at runtime.
+     * @param {DescribeVirusScanTaskStatusRequest} req
+     * @param {function(string, DescribeVirusScanTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeVirusScanTaskStatus(req, cb) {
+        let resp = new DescribeVirusScanTaskStatusResponse();
+        this.request("DescribeVirusScanTaskStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the status of K8sApi abnormal event rules.
+     * @param {ModifyK8sApiAbnormalRuleStatusRequest} req
+     * @param {function(string, ModifyK8sApiAbnormalRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifyK8sApiAbnormalRuleStatus(req, cb) {
+        let resp = new ModifyK8sApiAbnormalRuleStatusResponse();
+        this.request("ModifyK8sApiAbnormalRuleStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the trend of security events at runtime.
+     * @param {DescribeSecEventsTendencyRequest} req
+     * @param {function(string, DescribeSecEventsTendencyResponse):void} cb
+     * @public
+     */
+    DescribeSecEventsTendency(req, cb) {
+        let resp = new DescribeSecEventsTendencyResponse();
+        this.request("DescribeSecEventsTendency", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of an image.
+     * @param {DescribeAssetImageDetailRequest} req
+     * @param {function(string, DescribeAssetImageDetailResponse):void} cb
+     * @public
+     */
+    DescribeAssetImageDetail(req, cb) {
+        let resp = new DescribeAssetImageDetailResponse();
+        this.request("DescribeAssetImageDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the settings of security log delivery to Kafka.
+     * @param {ModifySecLogDeliveryKafkaSettingRequest} req
+     * @param {function(string, ModifySecLogDeliveryKafkaSettingResponse):void} cb
+     * @public
+     */
+    ModifySecLogDeliveryKafkaSetting(req, cb) {
+        let resp = new ModifySecLogDeliveryKafkaSettingResponse();
+        this.request("ModifySecLogDeliveryKafkaSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unignore the specified asset IDs and check item IDs so as to show the assets contained in the specified check items.
+     * @param {DeleteCompliancePolicyAssetSetFromWhitelistRequest} req
+     * @param {function(string, DeleteCompliancePolicyAssetSetFromWhitelistResponse):void} cb
+     * @public
+     */
+    DeleteCompliancePolicyAssetSetFromWhitelist(req, cb) {
+        let resp = new DeleteCompliancePolicyAssetSetFromWhitelistResponse();
+        this.request("DeleteCompliancePolicyAssetSetFromWhitelist", req, resp, cb);
+    }
+
+    /**
+     * This API is used to the K8sApi abnormal request rule list.
+     * @param {DescribeK8sApiAbnormalRuleListRequest} req
+     * @param {function(string, DescribeK8sApiAbnormalRuleListResponse):void} cb
+     * @public
+     */
+    DescribeK8sApiAbnormalRuleList(req, cb) {
+        let resp = new DescribeK8sApiAbnormalRuleListResponse();
+        this.request("DescribeK8sApiAbnormalRuleList", req, resp, cb);
+    }
+
+
+}
+module.exports = TcssClient;

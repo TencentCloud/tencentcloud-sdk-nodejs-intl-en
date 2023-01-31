@@ -23,6 +23,7 @@ const ModifyMigrateJobSpecRequest = models.ModifyMigrateJobSpecRequest;
 const StartMigrateJobRequest = models.StartMigrateJobRequest;
 const StepTip = models.StepTip;
 const DestroyMigrateJobRequest = models.DestroyMigrateJobRequest;
+const SkipCheckItemResponse = models.SkipCheckItemResponse;
 const ResizeSyncJobResponse = models.ResizeSyncJobResponse;
 const ResumeMigrateJobResponse = models.ResumeMigrateJobResponse;
 const DifferenceItem = models.DifferenceItem;
@@ -69,6 +70,8 @@ const DescribeMigrationJobsResponse = models.DescribeMigrationJobsResponse;
 const SkippedItem = models.SkippedItem;
 const DestroyMigrateJobResponse = models.DestroyMigrateJobResponse;
 const ProcessProgress = models.ProcessProgress;
+const SkipSyncCheckItemRequest = models.SkipSyncCheckItemRequest;
+const SkipSyncCheckItemResponse = models.SkipSyncCheckItemResponse;
 const IsolateSyncJobResponse = models.IsolateSyncJobResponse;
 const CreateMigrateCheckJobRequest = models.CreateMigrateCheckJobRequest;
 const DescribeMigrationJobsRequest = models.DescribeMigrationJobsRequest;
@@ -102,6 +105,7 @@ const TradeInfo = models.TradeInfo;
 const StartCompareResponse = models.StartCompareResponse;
 const CreateCompareTaskResponse = models.CreateCompareTaskResponse;
 const StopCompareResponse = models.StopCompareResponse;
+const SkipCheckItemRequest = models.SkipCheckItemRequest;
 const CompareAbstractInfo = models.CompareAbstractInfo;
 const CheckStep = models.CheckStep;
 const CompareTaskItem = models.CompareTaskItem;
@@ -131,6 +135,7 @@ const DescribeCompareReportRequest = models.DescribeCompareReportRequest;
 const View = models.View;
 const TagItem = models.TagItem;
 const RecoverMigrateJobRequest = models.RecoverMigrateJobRequest;
+const OnlineDDL = models.OnlineDDL;
 const DatabaseTableObject = models.DatabaseTableObject;
 const Table = models.Table;
 const CompareDetailInfo = models.CompareDetailInfo;
@@ -348,6 +353,17 @@ After calling this API, you can call the `DescribeMigrationJobs` API to query th
     }
 
     /**
+     * This API is used for the backend to skip a failed check item. Theoretically, to execute a migration task normally, any check step cannot be skipped, and the check must be passed. For products or links that support check item skipping, see [Check Item Overview](https://www.tencentcloud.com/document/product/571/42551).
+     * @param {SkipCheckItemRequest} req
+     * @param {function(string, SkipCheckItemResponse):void} cb
+     * @public
+     */
+    SkipCheckItem(req, cb) {
+        let resp = new SkipCheckItemResponse();
+        this.request("SkipCheckItem", req, resp, cb);
+    }
+
+    /**
      * This API is used to verify a migration task.
 Before migration, you should call this API to create a check task. Migration will start only if the check succeeds. You can view the check result through the `DescribeMigrationCheckJob` API.
 After successful check, if the migration task needs to be modified, a new check task should be created, and migration will start only after the new check succeeds.
@@ -381,6 +397,17 @@ After successful check, if the migration task needs to be modified, a new check 
     DescribeCompareTasks(req, cb) {
         let resp = new DescribeCompareTasksResponse();
         this.request("DescribeCompareTasks", req, resp, cb);
+    }
+
+    /**
+     * This API is used for the backend to skip a failed check item. Theoretically, to execute a sync task normally, any check step cannot be skipped, and the check must be passed. For products or links that support check item skipping, see [Check Item Overview](https://www.tencentcloud.com/document/product/571/42551).
+     * @param {SkipSyncCheckItemRequest} req
+     * @param {function(string, SkipSyncCheckItemResponse):void} cb
+     * @public
+     */
+    SkipSyncCheckItem(req, cb) {
+        let resp = new SkipSyncCheckItemResponse();
+        this.request("SkipSyncCheckItem", req, resp, cb);
     }
 
     /**

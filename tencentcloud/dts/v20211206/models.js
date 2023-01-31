@@ -277,6 +277,41 @@ class DestroyMigrateJobRequest extends  AbstractModel {
 }
 
 /**
+ * SkipCheckItem response structure.
+ * @class
+ */
+class SkipCheckItemResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Message = 'Message' in params ? params.Message : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ResizeSyncJob response structure.
  * @class
  */
@@ -636,7 +671,7 @@ class TableItem extends  AbstractModel {
         super();
 
         /**
-         * Name of the table to be migrated
+         * Name of the migrated table, which is case-sensitive
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2337,6 +2372,69 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * SkipSyncCheckItem request structure.
+ * @class
+ */
+class SkipSyncCheckItemRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID, such as "sync-4ddgid2".
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * ID of the check step to be skipped, which is obtained in the `StepInfos[i].StepId` field returned by the `DescribeCheckSyncJobResult` API, such as "OptimizeCheck".
+         * @type {Array.<string> || null}
+         */
+        this.StepIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.StepIds = 'StepIds' in params ? params.StepIds : null;
+
+    }
+}
+
+/**
+ * SkipSyncCheckItem response structure.
+ * @class
+ */
+class SkipSyncCheckItemResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * IsolateSyncJob response structure.
  * @class
  */
@@ -2810,6 +2908,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Region = null;
 
         /**
+         * Node type of TDSQL for MySQL. Enumerated values: `proxy`, `set`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
          * Database kernel type, which is used to distinguish between different kernels in TDSQL. Valid values: `percona`, `mariadb`, `mysql`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -2915,13 +3020,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EngineVersion = null;
 
         /**
-         * The account to which the resource belongs. Valid values: empty or `self` (the current account); `other` (another account).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.AccountMode = null;
-
-        /**
          * Instance account, which is required if the operation is performed across accounts.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -2929,11 +3027,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Account = null;
 
         /**
+         * The account to which the resource belongs. Valid values: empty or `self` (the current account); `other` (another account).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccountMode = null;
+
+        /**
          * The role used for cross-account sync, which can contain [a-zA-Z0-9\-\_]+ and is required if the operation is performed across accounts.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.AccountRole = null;
+
+        /**
+         * External role ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RoleExternalId = null;
 
         /**
          * ID of the temporary key, which is required if the operation is performed across accounts.
@@ -2957,11 +3069,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TmpToken = null;
 
         /**
-         * External role ID
+         * Whether to enable encrypted transfer (`UnEncrypted`: No; `Encrypted`: Yes). Default value: `UnEncrypted`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RoleExternalId = null;
+        this.EncryptConn = null;
 
     }
 
@@ -2973,6 +3085,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Region = 'Region' in params ? params.Region : null;
+        this.Role = 'Role' in params ? params.Role : null;
         this.DbKernel = 'DbKernel' in params ? params.DbKernel : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Ip = 'Ip' in params ? params.Ip : null;
@@ -2988,13 +3101,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CcnId = 'CcnId' in params ? params.CcnId : null;
         this.Supplier = 'Supplier' in params ? params.Supplier : null;
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
-        this.AccountMode = 'AccountMode' in params ? params.AccountMode : null;
         this.Account = 'Account' in params ? params.Account : null;
+        this.AccountMode = 'AccountMode' in params ? params.AccountMode : null;
         this.AccountRole = 'AccountRole' in params ? params.AccountRole : null;
+        this.RoleExternalId = 'RoleExternalId' in params ? params.RoleExternalId : null;
         this.TmpSecretId = 'TmpSecretId' in params ? params.TmpSecretId : null;
         this.TmpSecretKey = 'TmpSecretKey' in params ? params.TmpSecretKey : null;
         this.TmpToken = 'TmpToken' in params ? params.TmpToken : null;
-        this.RoleExternalId = 'RoleExternalId' in params ? params.RoleExternalId : null;
+        this.EncryptConn = 'EncryptConn' in params ? params.EncryptConn : null;
 
     }
 }
@@ -3274,22 +3388,10 @@ class ConfigureSyncJobRequest extends  AbstractModel {
         this.SrcAccessType = null;
 
         /**
-         * Source database information
-         * @type {Endpoint || null}
-         */
-        this.SrcInfo = null;
-
-        /**
          * Target database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `noProxy`. Note that the valid values are subject to the current link.
          * @type {string || null}
          */
         this.DstAccessType = null;
-
-        /**
-         * Target database information
-         * @type {Endpoint || null}
-         */
-        this.DstInfo = null;
 
         /**
          * Sync task options
@@ -3310,6 +3412,12 @@ class ConfigureSyncJobRequest extends  AbstractModel {
         this.JobName = null;
 
         /**
+         * Enumerated values: `liteMode`: Lite mode; `fullMode`: Standard mode
+         * @type {string || null}
+         */
+        this.JobMode = null;
+
+        /**
          * Running mode. Valid values: `Immediate`, `Timed`. Default value: `Immediate`.
          * @type {string || null}
          */
@@ -3320,6 +3428,24 @@ class ConfigureSyncJobRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ExpectRunTime = null;
+
+        /**
+         * Source database information. This parameter is used by single-node databases.
+         * @type {Endpoint || null}
+         */
+        this.SrcInfo = null;
+
+        /**
+         * Target database information. This parameter is used by single-node databases.
+         * @type {Endpoint || null}
+         */
+        this.DstInfo = null;
+
+        /**
+         * Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
+         * @type {number || null}
+         */
+        this.AutoRetryTimeRangeMinutes = null;
 
     }
 
@@ -3332,19 +3458,7 @@ class ConfigureSyncJobRequest extends  AbstractModel {
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.SrcAccessType = 'SrcAccessType' in params ? params.SrcAccessType : null;
-
-        if (params.SrcInfo) {
-            let obj = new Endpoint();
-            obj.deserialize(params.SrcInfo)
-            this.SrcInfo = obj;
-        }
         this.DstAccessType = 'DstAccessType' in params ? params.DstAccessType : null;
-
-        if (params.DstInfo) {
-            let obj = new Endpoint();
-            obj.deserialize(params.DstInfo)
-            this.DstInfo = obj;
-        }
 
         if (params.Options) {
             let obj = new Options();
@@ -3358,8 +3472,22 @@ class ConfigureSyncJobRequest extends  AbstractModel {
             this.Objects = obj;
         }
         this.JobName = 'JobName' in params ? params.JobName : null;
+        this.JobMode = 'JobMode' in params ? params.JobMode : null;
         this.RunMode = 'RunMode' in params ? params.RunMode : null;
         this.ExpectRunTime = 'ExpectRunTime' in params ? params.ExpectRunTime : null;
+
+        if (params.SrcInfo) {
+            let obj = new Endpoint();
+            obj.deserialize(params.SrcInfo)
+            this.SrcInfo = obj;
+        }
+
+        if (params.DstInfo) {
+            let obj = new Endpoint();
+            obj.deserialize(params.DstInfo)
+            this.DstInfo = obj;
+        }
+        this.AutoRetryTimeRangeMinutes = 'AutoRetryTimeRangeMinutes' in params ? params.AutoRetryTimeRangeMinutes : null;
 
     }
 }
@@ -3801,6 +3929,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Procedures = null;
 
+        /**
+         * Trigger migration mode (`all`: All objects; `partial`: Some objects)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TriggerMode = null;
+
+        /**
+         * This parameter is used to specify the names of the triggers to be migrated when the value of `TriggerMode` is `partial`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Triggers = null;
+
+        /**
+         * Event migration mode (`all`: All objects; `partial`: Some objects)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EventMode = null;
+
+        /**
+         * This parameter is used to specify the names of the events to be migrated when the value of `EventMode` is `partial`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Events = null;
+
     }
 
     /**
@@ -3839,6 +3995,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Functions = 'Functions' in params ? params.Functions : null;
         this.ProcedureMode = 'ProcedureMode' in params ? params.ProcedureMode : null;
         this.Procedures = 'Procedures' in params ? params.Procedures : null;
+        this.TriggerMode = 'TriggerMode' in params ? params.TriggerMode : null;
+        this.Triggers = 'Triggers' in params ? params.Triggers : null;
+        this.EventMode = 'EventMode' in params ? params.EventMode : null;
+        this.Events = 'Events' in params ? params.Events : null;
 
     }
 }
@@ -3899,6 +4059,12 @@ class ModifyMigrationJobRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
+         * @type {number || null}
+         */
+        this.AutoRetryTimeRangeMinutes = null;
+
     }
 
     /**
@@ -3939,6 +4105,7 @@ class ModifyMigrationJobRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.AutoRetryTimeRangeMinutes = 'AutoRetryTimeRangeMinutes' in params ? params.AutoRetryTimeRangeMinutes : null;
 
     }
 }
@@ -4589,6 +4756,48 @@ class StopCompareResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SkipCheckItem request structure.
+ * @class
+ */
+class SkipCheckItemRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Data migration task ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * ID of the check step to be skipped, which is obtained in the `StepInfo[i].StepId` field returned by the `DescribeMigrationCheckJob` API, such as "OptimizeCheck".
+         * @type {Array.<string> || null}
+         */
+        this.StepIds = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ForeignKeyFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.StepIds = 'StepIds' in params ? params.StepIds : null;
+        this.ForeignKeyFlag = 'ForeignKeyFlag' in params ? params.ForeignKeyFlag : null;
 
     }
 }
@@ -5465,6 +5674,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Tags = null;
 
+        /**
+         * Information of automatic retry time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AutoRetryTimeRangeMinutes = null;
+
     }
 
     /**
@@ -5529,6 +5745,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.Tags.push(obj);
             }
         }
+        this.AutoRetryTimeRangeMinutes = 'AutoRetryTimeRangeMinutes' in params ? params.AutoRetryTimeRangeMinutes : null;
 
     }
 }
@@ -5590,6 +5807,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.AdvancedObjects = null;
 
+        /**
+         * 
+         * @type {OnlineDDL || null}
+         */
+        this.OnlineDDL = null;
+
     }
 
     /**
@@ -5610,6 +5833,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.AdvancedObjects = 'AdvancedObjects' in params ? params.AdvancedObjects : null;
+
+        if (params.OnlineDDL) {
+            let obj = new OnlineDDL();
+            obj.deserialize(params.OnlineDDL)
+            this.OnlineDDL = obj;
+        }
 
     }
 }
@@ -5643,7 +5872,7 @@ class RecoverMigrateJobResponse extends  AbstractModel {
 }
 
 /**
- * Migration object information
+ * Migration object information, which is case-sensitive when objects such as databases, tables, and views are configured.
  * @class
  */
 class DBItem extends  AbstractModel {
@@ -6114,7 +6343,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SrcAccessType = null;
 
         /**
-         * Source database information
+         * Source database information. This parameter is used by single-node databases.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Endpoint || null}
          */
@@ -6142,7 +6371,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DstAccessType = null;
 
         /**
-         * Target database information
+         * Target database information. This parameter is used by single-node databases.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Endpoint || null}
          */
@@ -6218,6 +6447,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.OfflineTime = null;
 
+        /**
+         * Settings of automatic retry time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AutoRetryTimeRangeMinutes = null;
+
     }
 
     /**
@@ -6289,6 +6525,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceClass = 'InstanceClass' in params ? params.InstanceClass : null;
         this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
         this.OfflineTime = 'OfflineTime' in params ? params.OfflineTime : null;
+        this.AutoRetryTimeRangeMinutes = 'AutoRetryTimeRangeMinutes' in params ? params.AutoRetryTimeRangeMinutes : null;
 
     }
 }
@@ -6818,6 +7055,27 @@ class RecoverMigrateJobRequest extends  AbstractModel {
 }
 
 /**
+ * Online DDL type
+ * @class
+ */
+class OnlineDDL extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * Migration object options, which tell DTS which database/table objects should be migrated.
  * @class
  */
@@ -7027,6 +7285,7 @@ module.exports = {
     StartMigrateJobRequest: StartMigrateJobRequest,
     StepTip: StepTip,
     DestroyMigrateJobRequest: DestroyMigrateJobRequest,
+    SkipCheckItemResponse: SkipCheckItemResponse,
     ResizeSyncJobResponse: ResizeSyncJobResponse,
     ResumeMigrateJobResponse: ResumeMigrateJobResponse,
     DifferenceItem: DifferenceItem,
@@ -7073,6 +7332,8 @@ module.exports = {
     SkippedItem: SkippedItem,
     DestroyMigrateJobResponse: DestroyMigrateJobResponse,
     ProcessProgress: ProcessProgress,
+    SkipSyncCheckItemRequest: SkipSyncCheckItemRequest,
+    SkipSyncCheckItemResponse: SkipSyncCheckItemResponse,
     IsolateSyncJobResponse: IsolateSyncJobResponse,
     CreateMigrateCheckJobRequest: CreateMigrateCheckJobRequest,
     DescribeMigrationJobsRequest: DescribeMigrationJobsRequest,
@@ -7106,6 +7367,7 @@ module.exports = {
     StartCompareResponse: StartCompareResponse,
     CreateCompareTaskResponse: CreateCompareTaskResponse,
     StopCompareResponse: StopCompareResponse,
+    SkipCheckItemRequest: SkipCheckItemRequest,
     CompareAbstractInfo: CompareAbstractInfo,
     CheckStep: CheckStep,
     CompareTaskItem: CompareTaskItem,
@@ -7135,6 +7397,7 @@ module.exports = {
     View: View,
     TagItem: TagItem,
     RecoverMigrateJobRequest: RecoverMigrateJobRequest,
+    OnlineDDL: OnlineDDL,
     DatabaseTableObject: DatabaseTableObject,
     Table: Table,
     CompareDetailInfo: CompareDetailInfo,

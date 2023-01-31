@@ -1056,6 +1056,49 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * Information of multiple certificates bound with the load balancer listener or rule.
+ * @class
+ */
+class MultiCertInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Authentication type. Values: `UNIDIRECTIONAL` (one-way authentication), `MUTUAL` (two-way authentication)
+         * @type {string || null}
+         */
+        this.SSLMode = null;
+
+        /**
+         * List of listener or rule certificates. One-way and two-way authentication are supported. Only one certificate can be specified for one algorithm. If `SSLMode` is `MUTUAL` (two-way authentication), at least one CA certificate is required. 
+         * @type {Array.<CertInfo> || null}
+         */
+        this.CertList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
+
+        if (params.CertList) {
+            this.CertList = new Array();
+            for (let z in params.CertList) {
+                let obj = new CertInfo();
+                obj.deserialize(params.CertList[z]);
+                this.CertList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyRule request structure.
  * @class
  */
@@ -4061,7 +4104,7 @@ class ModifyListenerRequest extends  AbstractModel {
         this.HealthCheck = null;
 
         /**
-         * Certificate information. This parameter is applicable only to HTTPS and TCP_SSL listeners.
+         * Certificate information. This parameter is only applicable to HTTPS/TCP_SSL listeners. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
          * @type {CertificateInput || null}
          */
         this.Certificate = null;
@@ -4103,6 +4146,24 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.SessionType = null;
 
+        /**
+         * Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+         * @type {MultiCertInfo || null}
+         */
+        this.MultiCertInfo = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxConn = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxCps = null;
+
     }
 
     /**
@@ -4134,6 +4195,14 @@ They represent weighted round robin and least connections, respectively. Default
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
         this.DeregisterTargetRst = 'DeregisterTargetRst' in params ? params.DeregisterTargetRst : null;
         this.SessionType = 'SessionType' in params ? params.SessionType : null;
+
+        if (params.MultiCertInfo) {
+            let obj = new MultiCertInfo();
+            obj.deserialize(params.MultiCertInfo)
+            this.MultiCertInfo = obj;
+        }
+        this.MaxConn = 'MaxConn' in params ? params.MaxConn : null;
+        this.MaxCps = 'MaxCps' in params ? params.MaxCps : null;
 
     }
 }
@@ -4939,6 +5008,49 @@ class DescribeResourcesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyTargetGroupInstancesWeight request structure.
+ * @class
+ */
+class ModifyTargetGroupInstancesWeightRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Target group ID
+         * @type {string || null}
+         */
+        this.TargetGroupId = null;
+
+        /**
+         * Array of servers for which to modify weights
+         * @type {Array.<TargetGroupInstance> || null}
+         */
+        this.TargetGroupInstances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+
+        if (params.TargetGroupInstances) {
+            this.TargetGroupInstances = new Array();
+            for (let z in params.TargetGroupInstances) {
+                let obj = new TargetGroupInstance();
+                obj.deserialize(params.TargetGroupInstances[z]);
+                this.TargetGroupInstances.push(obj);
+            }
+        }
 
     }
 }
@@ -6550,36 +6662,36 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeTargetGroupInstances response structure.
+ * Certificate information
  * @class
  */
-class DescribeTargetGroupInstancesResponse extends  AbstractModel {
+class CertInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of results returned for the current query
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Information of the bound server
-         * @type {Array.<TargetGroupBackend> || null}
-         */
-        this.TargetGroupInstanceSet = null;
-
-        /**
-         * The actual total number of bound instances, which is not affected by the setting of `Limit`, `Offset` and the CAM permissions.
-         * @type {number || null}
-         */
-        this.RealCount = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * ID of the certificate. If it's not specified, `CertContent` and `CertKey` are required. For a server certificate, you also need to specify `CertName`. 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CertId = null;
+
+        /**
+         * Name of the uploaded certificate. It's required if `CertId` is not specified.
+         * @type {string || null}
+         */
+        this.CertName = null;
+
+        /**
+         * Public key of the uploaded certificate. It's required if `CertId` is not specified.
+         * @type {string || null}
+         */
+        this.CertContent = null;
+
+        /**
+         * Private key of the uploaded server certificate. It's required if `CertId` is not specified.
+         * @type {string || null}
+         */
+        this.CertKey = null;
 
     }
 
@@ -6590,18 +6702,10 @@ class DescribeTargetGroupInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.TargetGroupInstanceSet) {
-            this.TargetGroupInstanceSet = new Array();
-            for (let z in params.TargetGroupInstanceSet) {
-                let obj = new TargetGroupBackend();
-                obj.deserialize(params.TargetGroupInstanceSet[z]);
-                this.TargetGroupInstanceSet.push(obj);
-            }
-        }
-        this.RealCount = 'RealCount' in params ? params.RealCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.CertName = 'CertName' in params ? params.CertName : null;
+        this.CertContent = 'CertContent' in params ? params.CertContent : null;
+        this.CertKey = 'CertKey' in params ? params.CertKey : null;
 
     }
 }
@@ -6838,7 +6942,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.HealthCheck = null;
 
         /**
-         * Certificate information. This parameter is applicable only to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled.
+         * Certificate information. This parameter is only applicable to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
          * @type {CertificateInput || null}
          */
         this.Certificate = null;
@@ -6892,6 +6996,24 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.DeregisterTargetRst = null;
 
+        /**
+         * Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+         * @type {MultiCertInfo || null}
+         */
+        this.MultiCertInfo = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxConn = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxCps = null;
+
     }
 
     /**
@@ -6925,6 +7047,14 @@ They represent weighted round robin and least connections, respectively. Default
         this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
         this.EndPort = 'EndPort' in params ? params.EndPort : null;
         this.DeregisterTargetRst = 'DeregisterTargetRst' in params ? params.DeregisterTargetRst : null;
+
+        if (params.MultiCertInfo) {
+            let obj = new MultiCertInfo();
+            obj.deserialize(params.MultiCertInfo)
+            this.MultiCertInfo = obj;
+        }
+        this.MaxConn = 'MaxConn' in params ? params.MaxConn : null;
+        this.MaxCps = 'MaxCps' in params ? params.MaxCps : null;
 
     }
 }
@@ -7172,13 +7302,13 @@ OPEN: public network; INTERNAL: private network.
         this.LoadBalancerVips = null;
 
         /**
-         * Public IP of the real server bound to a CLB.
+         * Public IPs of the backend services bound with the load balancer. Only the public IPs of CVMs are supported now.
          * @type {Array.<string> || null}
          */
         this.BackendPublicIps = null;
 
         /**
-         * Private IP of the real server bound to a CLB.
+         * Private IPs of the backend services bound with the load balancer. Only the private IPs of CVMs are supported now.
          * @type {Array.<string> || null}
          */
         this.BackendPrivateIps = null;
@@ -8436,7 +8566,7 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         this.NewDomain = null;
 
         /**
-         * Domain name certificate information. Note: This is only applicable to SNI-enabled listeners.
+         * Certificate information of the domain name. It is only applicable to listeners with SNI enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
          * @type {CertificateInput || null}
          */
         this.Certificate = null;
@@ -8465,6 +8595,12 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
          */
         this.NewDomains = null;
 
+        /**
+         * Certificate information of the domain name. It is only applicable to listeners with SNI enabled. You can specify multiple server-side certificates with different algorithm types. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+         * @type {MultiCertInfo || null}
+         */
+        this.MultiCertInfo = null;
+
     }
 
     /**
@@ -8488,6 +8624,12 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
         this.NewDefaultServerDomain = 'NewDefaultServerDomain' in params ? params.NewDefaultServerDomain : null;
         this.NewDomains = 'NewDomains' in params ? params.NewDomains : null;
+
+        if (params.MultiCertInfo) {
+            let obj = new MultiCertInfo();
+            obj.deserialize(params.MultiCertInfo)
+            this.MultiCertInfo = obj;
+        }
 
     }
 }
@@ -8658,24 +8800,36 @@ class CreateLoadBalancerSnatIpsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyTargetGroupInstancesWeight request structure.
+ * DescribeTargetGroupInstances response structure.
  * @class
  */
-class ModifyTargetGroupInstancesWeightRequest extends  AbstractModel {
+class DescribeTargetGroupInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Target group ID
-         * @type {string || null}
+         * Number of results returned for the current query
+         * @type {number || null}
          */
-        this.TargetGroupId = null;
+        this.TotalCount = null;
 
         /**
-         * Array of servers for which to modify weights
-         * @type {Array.<TargetGroupInstance> || null}
+         * Information of the bound server
+         * @type {Array.<TargetGroupBackend> || null}
          */
-        this.TargetGroupInstances = null;
+        this.TargetGroupInstanceSet = null;
+
+        /**
+         * The actual total number of bound instances, which is not affected by the setting of `Limit`, `Offset` and the CAM permissions.
+         * @type {number || null}
+         */
+        this.RealCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -8686,16 +8840,18 @@ class ModifyTargetGroupInstancesWeightRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TargetGroupId = 'TargetGroupId' in params ? params.TargetGroupId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.TargetGroupInstances) {
-            this.TargetGroupInstances = new Array();
-            for (let z in params.TargetGroupInstances) {
-                let obj = new TargetGroupInstance();
-                obj.deserialize(params.TargetGroupInstances[z]);
-                this.TargetGroupInstances.push(obj);
+        if (params.TargetGroupInstanceSet) {
+            this.TargetGroupInstanceSet = new Array();
+            for (let z in params.TargetGroupInstanceSet) {
+                let obj = new TargetGroupBackend();
+                obj.deserialize(params.TargetGroupInstanceSet[z]);
+                this.TargetGroupInstanceSet.push(obj);
             }
         }
+        this.RealCount = 'RealCount' in params ? params.RealCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8972,7 +9128,7 @@ class RuleInput extends  AbstractModel {
         this.HealthCheck = null;
 
         /**
-         * Certificate information
+         * Certificate information. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
          * @type {CertificateInput || null}
          */
         this.Certificate = null;
@@ -9032,6 +9188,12 @@ They represent weighted round robin, least connections, and IP hash, respectivel
          */
         this.Domains = null;
 
+        /**
+         * Certificate information. You can specify multiple server-side certificates with different algorithm types. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+         * @type {MultiCertInfo || null}
+         */
+        this.MultiCertInfo = null;
+
     }
 
     /**
@@ -9065,6 +9227,12 @@ They represent weighted round robin, least connections, and IP hash, respectivel
         this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
         this.Quic = 'Quic' in params ? params.Quic : null;
         this.Domains = 'Domains' in params ? params.Domains : null;
+
+        if (params.MultiCertInfo) {
+            let obj = new MultiCertInfo();
+            obj.deserialize(params.MultiCertInfo)
+            this.MultiCertInfo = obj;
+        }
 
     }
 }
@@ -11224,6 +11392,7 @@ module.exports = {
     DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
     SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
     DescribeLoadBalancerTrafficResponse: DescribeLoadBalancerTrafficResponse,
+    MultiCertInfo: MultiCertInfo,
     ModifyRuleRequest: ModifyRuleRequest,
     DescribeCustomizedConfigListResponse: DescribeCustomizedConfigListResponse,
     DescribeBlockIPListResponse: DescribeBlockIPListResponse,
@@ -11299,6 +11468,7 @@ module.exports = {
     TargetGroupBackend: TargetGroupBackend,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
     DescribeResourcesResponse: DescribeResourcesResponse,
+    ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
     ManualRewriteResponse: ManualRewriteResponse,
     ModifyBlockIPListRequest: ModifyBlockIPListRequest,
     ModifyBlockIPListResponse: ModifyBlockIPListResponse,
@@ -11330,7 +11500,7 @@ module.exports = {
     ManualRewriteRequest: ManualRewriteRequest,
     ModifyListenerResponse: ModifyListenerResponse,
     DescribeTargetHealthResponse: DescribeTargetHealthResponse,
-    DescribeTargetGroupInstancesResponse: DescribeTargetGroupInstancesResponse,
+    CertInfo: CertInfo,
     CreateTargetGroupRequest: CreateTargetGroupRequest,
     ClusterItem: ClusterItem,
     BindDetailItem: BindDetailItem,
@@ -11367,7 +11537,7 @@ module.exports = {
     DeregisterTargetsRequest: DeregisterTargetsRequest,
     InternetAccessible: InternetAccessible,
     CreateLoadBalancerSnatIpsRequest: CreateLoadBalancerSnatIpsRequest,
-    ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
+    DescribeTargetGroupInstancesResponse: DescribeTargetGroupInstancesResponse,
     DescribeQuotaResponse: DescribeQuotaResponse,
     DeleteTargetGroupsResponse: DeleteTargetGroupsResponse,
     ModifyTargetGroupInstancesPortRequest: ModifyTargetGroupInstancesPortRequest,

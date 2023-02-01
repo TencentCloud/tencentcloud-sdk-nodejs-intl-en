@@ -357,6 +357,18 @@ class CreateRocketMQGroupRequest extends  AbstractModel {
          */
         this.Remark = null;
 
+        /**
+         * Group type (`TCP`, `HTTP`)
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+        /**
+         * The maximum number of retries for a group
+         * @type {number || null}
+         */
+        this.RetryMaxTimes = null;
+
     }
 
     /**
@@ -372,6 +384,8 @@ class CreateRocketMQGroupRequest extends  AbstractModel {
         this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
 
     }
 }
@@ -1539,6 +1553,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.BroadcastEnabled = null;
 
+        /**
+         * Group type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GroupType = null;
+
+        /**
+         * The number of retries
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RetryMaxTimes = null;
+
     }
 
     /**
@@ -1561,6 +1589,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.ConsumerType = 'ConsumerType' in params ? params.ConsumerType : null;
         this.BroadcastEnabled = 'BroadcastEnabled' in params ? params.BroadcastEnabled : null;
+        this.GroupType = 'GroupType' in params ? params.GroupType : null;
+        this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
 
     }
 }
@@ -2941,6 +2971,18 @@ class RocketMQTopic extends  AbstractModel {
         this.Name = null;
 
         /**
+         * Topic type. Enumerated values: `Normal`, `GlobalOrder`, `PartitionedOrder`, `Transaction`, `Retry`, and `DeadLetter`.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The number of subscription groups
+         * @type {number || null}
+         */
+        this.GroupNum = null;
+
+        /**
          * Description.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -2975,6 +3017,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.GroupNum = 'GroupNum' in params ? params.GroupNum : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
@@ -4892,6 +4936,12 @@ class ModifyRocketMQGroupRequest extends  AbstractModel {
          */
         this.BroadcastEnable = null;
 
+        /**
+         * The maximum number of retries
+         * @type {number || null}
+         */
+        this.RetryMaxTimes = null;
+
     }
 
     /**
@@ -4907,6 +4957,7 @@ class ModifyRocketMQGroupRequest extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.ReadEnable = 'ReadEnable' in params ? params.ReadEnable : null;
         this.BroadcastEnable = 'BroadcastEnable' in params ? params.BroadcastEnable : null;
+        this.RetryMaxTimes = 'RetryMaxTimes' in params ? params.RetryMaxTimes : null;
 
     }
 }
@@ -5858,25 +5909,29 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RocketMQFlag = null;
 
         /**
-         * 
+         * Billing status (`1`: Normal; `2`: Service suspended; `3`: Terminated)
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * Service suspension time in milliseconds
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IsolateTime = null;
 
         /**
-         * 
+         * HTTP-based public network access address
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpPublicEndpoint = null;
 
         /**
-         * 
+         * HTTP-based VPC access address
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.HttpVpcEndpoint = null;
@@ -9162,6 +9217,12 @@ class DescribeRocketMQGroupsRequest extends  AbstractModel {
          */
         this.FilterOneGroup = null;
 
+        /**
+         * Group type
+         * @type {Array.<string> || null}
+         */
+        this.Types = null;
+
     }
 
     /**
@@ -9180,6 +9241,7 @@ class DescribeRocketMQGroupsRequest extends  AbstractModel {
         this.SortedBy = 'SortedBy' in params ? params.SortedBy : null;
         this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
         this.FilterOneGroup = 'FilterOneGroup' in params ? params.FilterOneGroup : null;
+        this.Types = 'Types' in params ? params.Types : null;
 
     }
 }

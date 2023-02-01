@@ -1074,6 +1074,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeVulImageList response structure.
+ * @class
+ */
+class DescribeVulImageListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of affected images
+         * @type {Array.<VulAffectedImageInfo> || null}
+         */
+        this.List = null;
+
+        /**
+         * Total number of images
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new VulAffectedImageInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateVulExportJob request structure.
  * @class
  */
@@ -1878,6 +1928,41 @@ class AddIgnoreVulResponse extends  AbstractModel {
 }
 
 /**
+ * Trend of exploit prevention events
+ * @class
+ */
+class VulDefenceEventTendency extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Date
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * Number of events
+         * @type {number || null}
+         */
+        this.EventCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Date = 'Date' in params ? params.Date : null;
+        this.EventCount = 'EventCount' in params ? params.EventCount : null;
+
+    }
+}
+
+/**
  * DescribeNetworkFirewallClusterRefreshStatus request structure.
  * @class
  */
@@ -2130,22 +2215,24 @@ class DescribeNetworkFirewallPolicyDetailRequest extends  AbstractModel {
 }
 
 /**
- * DescribeComplianceTaskAssetSummary request structure.
+ * CreateAccessControlsRuleExportJob response structure.
  * @class
  */
-class DescribeComplianceTaskAssetSummaryRequest extends  AbstractModel {
+class CreateAccessControlsRuleExportJobResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of asset types
-`ASSET_CONTAINER`: Container.
-`ASSET_IMAGE`: Image.
-`ASSET_HOST`: Server.
-`ASSET_K8S`: K8s asset.
-         * @type {Array.<string> || null}
+         * ID of the exportation task. You can query the task progress by using this ID in the console.
+         * @type {string || null}
          */
-        this.AssetTypeSet = null;
+        this.JobId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2156,7 +2243,8 @@ class DescribeComplianceTaskAssetSummaryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AssetTypeSet = 'AssetTypeSet' in params ? params.AssetTypeSet : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16770,6 +16858,38 @@ class ModifySecLogDeliveryClsSettingResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeComplianceTaskAssetSummary request structure.
+ * @class
+ */
+class DescribeComplianceTaskAssetSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of asset types
+`ASSET_CONTAINER`: Container.
+`ASSET_IMAGE`: Image.
+`ASSET_HOST`: Server.
+`ASSET_K8S`: K8s asset.
+         * @type {Array.<string> || null}
+         */
+        this.AssetTypeSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetTypeSet = 'AssetTypeSet' in params ? params.AssetTypeSet : null;
+
+    }
+}
+
+/**
  * CreateCheckComponent response structure.
  * @class
  */
@@ -23897,24 +24017,18 @@ class DescribeImageComponentListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVulImageList response structure.
+ * CreateAbnormalProcessRulesExportJob response structure.
  * @class
  */
-class DescribeVulImageListResponse extends  AbstractModel {
+class CreateAbnormalProcessRulesExportJobResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of affected images
-         * @type {Array.<VulAffectedImageInfo> || null}
+         * ID of the exportation task. You can query the task progress by using this ID in the console.
+         * @type {string || null}
          */
-        this.List = null;
-
-        /**
-         * Total number of images
-         * @type {number || null}
-         */
-        this.TotalCount = null;
+        this.JobId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -23931,16 +24045,7 @@ class DescribeVulImageListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new VulAffectedImageInfo();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -26312,6 +26417,65 @@ ET_MALICIOUS_CONNECTION: Malicious connection event
 }
 
 /**
+ * CreateAccessControlsRuleExportJob request structure.
+ * @class
+ */
+class CreateAccessControlsRuleExportJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Filter conditions
+<li>`RuleType` - String  - Optional - Rule type</li>
+<li>`Status` - String - Optional - Status</li>
+         * @type {Array.<RunTimeFilters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sorting order
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field
+         * @type {Array.<string> || null}
+         */
+        this.By = null;
+
+        /**
+         * Fields to export
+         * @type {Array.<string> || null}
+         */
+        this.ExportField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
+
+    }
+}
+
+/**
  * Information of the automatically isolated trojan sample
  * @class
  */
@@ -27540,30 +27704,38 @@ class DescribeImageSimpleListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVirusManualScanEstimateTimeout request structure.
+ * CreateAbnormalProcessRulesExportJob request structure.
  * @class
  */
-class DescribeVirusManualScanEstimateTimeoutRequest extends  AbstractModel {
+class CreateAbnormalProcessRulesExportJobRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Scanning scope. Valid values: `0` (container); `1` (server).
-         * @type {number || null}
+         * Filter conditions
+<li>`RuleType` - String  - Optional - Rule type</li>
+<li>`Status` - String - Optional - Status</li>
+         * @type {Array.<RunTimeFilters> || null}
          */
-        this.ScanRangeType = null;
+        this.Filters = null;
 
         /**
-         * Valid values: `true` (all); `false` (specified).
-         * @type {boolean || null}
+         * Sorting order
+         * @type {string || null}
          */
-        this.ScanRangeAll = null;
+        this.Order = null;
 
         /**
-         * ID of the specified container or server to be scanned, which is based on `ScanRangeType`.
+         * Sorting field
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Fields to export
          * @type {Array.<string> || null}
          */
-        this.ScanIds = null;
+        this.ExportField = null;
 
     }
 
@@ -27574,9 +27746,18 @@ class DescribeVirusManualScanEstimateTimeoutRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ScanRangeType = 'ScanRangeType' in params ? params.ScanRangeType : null;
-        this.ScanRangeAll = 'ScanRangeAll' in params ? params.ScanRangeAll : null;
-        this.ScanIds = 'ScanIds' in params ? params.ScanIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new RunTimeFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.ExportField = 'ExportField' in params ? params.ExportField : null;
 
     }
 }
@@ -34717,24 +34898,30 @@ class DescribeEscapeWhiteListRequest extends  AbstractModel {
 }
 
 /**
- * Trend of exploit prevention events
+ * DescribeVirusManualScanEstimateTimeout request structure.
  * @class
  */
-class VulDefenceEventTendency extends  AbstractModel {
+class DescribeVirusManualScanEstimateTimeoutRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Date
-         * @type {string || null}
-         */
-        this.Date = null;
-
-        /**
-         * Number of events
+         * Scanning scope. Valid values: `0` (container); `1` (server).
          * @type {number || null}
          */
-        this.EventCount = null;
+        this.ScanRangeType = null;
+
+        /**
+         * Valid values: `true` (all); `false` (specified).
+         * @type {boolean || null}
+         */
+        this.ScanRangeAll = null;
+
+        /**
+         * ID of the specified container or server to be scanned, which is based on `ScanRangeType`.
+         * @type {Array.<string> || null}
+         */
+        this.ScanIds = null;
 
     }
 
@@ -34745,8 +34932,9 @@ class VulDefenceEventTendency extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Date = 'Date' in params ? params.Date : null;
-        this.EventCount = 'EventCount' in params ? params.EventCount : null;
+        this.ScanRangeType = 'ScanRangeType' in params ? params.ScanRangeType : null;
+        this.ScanRangeAll = 'ScanRangeAll' in params ? params.ScanRangeAll : null;
+        this.ScanIds = 'ScanIds' in params ? params.ScanIds : null;
 
     }
 }
@@ -44426,6 +44614,7 @@ module.exports = {
     AbnormalProcessEventDescription: AbnormalProcessEventDescription,
     CompliancePeriodTaskRule: CompliancePeriodTaskRule,
     DescribeVirusScanTimeoutSettingResponse: DescribeVirusScanTimeoutSettingResponse,
+    DescribeVulImageListResponse: DescribeVulImageListResponse,
     CreateVulExportJobRequest: CreateVulExportJobRequest,
     DescribeNetworkFirewallNamespaceLabelListResponse: DescribeNetworkFirewallNamespaceLabelListResponse,
     ClusterCreateComponentItem: ClusterCreateComponentItem,
@@ -44441,13 +44630,14 @@ module.exports = {
     ModifyAssetImageScanStopResponse: ModifyAssetImageScanStopResponse,
     AddAssetImageRegistryRegistryDetailRequest: AddAssetImageRegistryRegistryDetailRequest,
     AddIgnoreVulResponse: AddIgnoreVulResponse,
+    VulDefenceEventTendency: VulDefenceEventTendency,
     DescribeNetworkFirewallClusterRefreshStatusRequest: DescribeNetworkFirewallClusterRefreshStatusRequest,
     DescribeAssetImageRegistryVirusListExportResponse: DescribeAssetImageRegistryVirusListExportResponse,
     DescribeSecEventsTendencyResponse: DescribeSecEventsTendencyResponse,
     DescribeAccessControlEventsExportResponse: DescribeAccessControlEventsExportResponse,
     DescribeImageRiskSummaryResponse: DescribeImageRiskSummaryResponse,
     DescribeNetworkFirewallPolicyDetailRequest: DescribeNetworkFirewallPolicyDetailRequest,
-    DescribeComplianceTaskAssetSummaryRequest: DescribeComplianceTaskAssetSummaryRequest,
+    CreateAccessControlsRuleExportJobResponse: CreateAccessControlsRuleExportJobResponse,
     ModifyAssetImageRegistryScanStopResponse: ModifyAssetImageRegistryScanStopResponse,
     DescribeAssetImageRegistryRiskListExportRequest: DescribeAssetImageRegistryRiskListExportRequest,
     SetCheckModeResponse: SetCheckModeResponse,
@@ -44714,6 +44904,7 @@ module.exports = {
     AddEditAbnormalProcessRuleResponse: AddEditAbnormalProcessRuleResponse,
     ScanComplianceScanFailedAssetsRequest: ScanComplianceScanFailedAssetsRequest,
     ModifySecLogDeliveryClsSettingResponse: ModifySecLogDeliveryClsSettingResponse,
+    DescribeComplianceTaskAssetSummaryRequest: DescribeComplianceTaskAssetSummaryRequest,
     CreateCheckComponentResponse: CreateCheckComponentResponse,
     DescribeImageRegistryTimingScanTaskRequest: DescribeImageRegistryTimingScanTaskRequest,
     DescribeRiskSyscallWhiteListDetailResponse: DescribeRiskSyscallWhiteListDetailResponse,
@@ -44849,7 +45040,7 @@ module.exports = {
     SupportDefenceVul: SupportDefenceVul,
     DescribeCheckItemListRequest: DescribeCheckItemListRequest,
     DescribeImageComponentListResponse: DescribeImageComponentListResponse,
-    DescribeVulImageListResponse: DescribeVulImageListResponse,
+    CreateAbnormalProcessRulesExportJobResponse: CreateAbnormalProcessRulesExportJobResponse,
     DescribeSecLogDeliveryKafkaOptionsRequest: DescribeSecLogDeliveryKafkaOptionsRequest,
     DescribeVirusScanSettingResponse: DescribeVirusScanSettingResponse,
     DescribeAccessControlRuleDetailResponse: DescribeAccessControlRuleDetailResponse,
@@ -44889,6 +45080,7 @@ module.exports = {
     DescribeAssetImageVirusListExportResponse: DescribeAssetImageVirusListExportResponse,
     DescribeVirusScanSettingRequest: DescribeVirusScanSettingRequest,
     SecTendencyEventInfo: SecTendencyEventInfo,
+    CreateAccessControlsRuleExportJobRequest: CreateAccessControlsRuleExportJobRequest,
     VirusAutoIsolateSampleInfo: VirusAutoIsolateSampleInfo,
     DescribeExportJobDownloadURLRequest: DescribeExportJobDownloadURLRequest,
     DescribeImageAutoAuthorizedRuleRequest: DescribeImageAutoAuthorizedRuleRequest,
@@ -44916,7 +45108,7 @@ module.exports = {
     DescribeEscapeEventTypeSummaryResponse: DescribeEscapeEventTypeSummaryResponse,
     DescribeAssetImageRegistryVulListRequest: DescribeAssetImageRegistryVulListRequest,
     DescribeImageSimpleListResponse: DescribeImageSimpleListResponse,
-    DescribeVirusManualScanEstimateTimeoutRequest: DescribeVirusManualScanEstimateTimeoutRequest,
+    CreateAbnormalProcessRulesExportJobRequest: CreateAbnormalProcessRulesExportJobRequest,
     CreateK8sApiAbnormalEventExportJobResponse: CreateK8sApiAbnormalEventExportJobResponse,
     DescribeUserClusterResponse: DescribeUserClusterResponse,
     DescribeAssetImageRegistryRegistryListRequest: DescribeAssetImageRegistryRegistryListRequest,
@@ -45038,7 +45230,7 @@ module.exports = {
     ModifyAssetRequest: ModifyAssetRequest,
     RegionInfo: RegionInfo,
     DescribeEscapeWhiteListRequest: DescribeEscapeWhiteListRequest,
-    VulDefenceEventTendency: VulDefenceEventTendency,
+    DescribeVirusManualScanEstimateTimeoutRequest: DescribeVirusManualScanEstimateTimeoutRequest,
     ComponentInfo: ComponentInfo,
     ConfirmNetworkFirewallPolicyResponse: ConfirmNetworkFirewallPolicyResponse,
     CreateNetworkFirewallPublishResponse: CreateNetworkFirewallPublishResponse,

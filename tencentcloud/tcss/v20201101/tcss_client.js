@@ -37,6 +37,7 @@ const CreateVulImageExportJobResponse = models.CreateVulImageExportJobResponse;
 const AbnormalProcessEventDescription = models.AbnormalProcessEventDescription;
 const CompliancePeriodTaskRule = models.CompliancePeriodTaskRule;
 const DescribeVirusScanTimeoutSettingResponse = models.DescribeVirusScanTimeoutSettingResponse;
+const DescribeVulImageListResponse = models.DescribeVulImageListResponse;
 const CreateVulExportJobRequest = models.CreateVulExportJobRequest;
 const DescribeNetworkFirewallNamespaceLabelListResponse = models.DescribeNetworkFirewallNamespaceLabelListResponse;
 const ClusterCreateComponentItem = models.ClusterCreateComponentItem;
@@ -52,13 +53,14 @@ const ModifyK8sApiAbnormalRuleInfoResponse = models.ModifyK8sApiAbnormalRuleInfo
 const ModifyAssetImageScanStopResponse = models.ModifyAssetImageScanStopResponse;
 const AddAssetImageRegistryRegistryDetailRequest = models.AddAssetImageRegistryRegistryDetailRequest;
 const AddIgnoreVulResponse = models.AddIgnoreVulResponse;
+const VulDefenceEventTendency = models.VulDefenceEventTendency;
 const DescribeNetworkFirewallClusterRefreshStatusRequest = models.DescribeNetworkFirewallClusterRefreshStatusRequest;
 const DescribeAssetImageRegistryVirusListExportResponse = models.DescribeAssetImageRegistryVirusListExportResponse;
 const DescribeSecEventsTendencyResponse = models.DescribeSecEventsTendencyResponse;
 const DescribeAccessControlEventsExportResponse = models.DescribeAccessControlEventsExportResponse;
 const DescribeImageRiskSummaryResponse = models.DescribeImageRiskSummaryResponse;
 const DescribeNetworkFirewallPolicyDetailRequest = models.DescribeNetworkFirewallPolicyDetailRequest;
-const DescribeComplianceTaskAssetSummaryRequest = models.DescribeComplianceTaskAssetSummaryRequest;
+const CreateAccessControlsRuleExportJobResponse = models.CreateAccessControlsRuleExportJobResponse;
 const ModifyAssetImageRegistryScanStopResponse = models.ModifyAssetImageRegistryScanStopResponse;
 const DescribeAssetImageRegistryRiskListExportRequest = models.DescribeAssetImageRegistryRiskListExportRequest;
 const SetCheckModeResponse = models.SetCheckModeResponse;
@@ -325,6 +327,7 @@ const DescribeProVersionInfoResponse = models.DescribeProVersionInfoResponse;
 const AddEditAbnormalProcessRuleResponse = models.AddEditAbnormalProcessRuleResponse;
 const ScanComplianceScanFailedAssetsRequest = models.ScanComplianceScanFailedAssetsRequest;
 const ModifySecLogDeliveryClsSettingResponse = models.ModifySecLogDeliveryClsSettingResponse;
+const DescribeComplianceTaskAssetSummaryRequest = models.DescribeComplianceTaskAssetSummaryRequest;
 const CreateCheckComponentResponse = models.CreateCheckComponentResponse;
 const DescribeImageRegistryTimingScanTaskRequest = models.DescribeImageRegistryTimingScanTaskRequest;
 const DescribeRiskSyscallWhiteListDetailResponse = models.DescribeRiskSyscallWhiteListDetailResponse;
@@ -460,7 +463,7 @@ const ModifyVulDefenceSettingResponse = models.ModifyVulDefenceSettingResponse;
 const SupportDefenceVul = models.SupportDefenceVul;
 const DescribeCheckItemListRequest = models.DescribeCheckItemListRequest;
 const DescribeImageComponentListResponse = models.DescribeImageComponentListResponse;
-const DescribeVulImageListResponse = models.DescribeVulImageListResponse;
+const CreateAbnormalProcessRulesExportJobResponse = models.CreateAbnormalProcessRulesExportJobResponse;
 const DescribeSecLogDeliveryKafkaOptionsRequest = models.DescribeSecLogDeliveryKafkaOptionsRequest;
 const DescribeVirusScanSettingResponse = models.DescribeVirusScanSettingResponse;
 const DescribeAccessControlRuleDetailResponse = models.DescribeAccessControlRuleDetailResponse;
@@ -500,6 +503,7 @@ const ResetSecLogTopicConfigRequest = models.ResetSecLogTopicConfigRequest;
 const DescribeAssetImageVirusListExportResponse = models.DescribeAssetImageVirusListExportResponse;
 const DescribeVirusScanSettingRequest = models.DescribeVirusScanSettingRequest;
 const SecTendencyEventInfo = models.SecTendencyEventInfo;
+const CreateAccessControlsRuleExportJobRequest = models.CreateAccessControlsRuleExportJobRequest;
 const VirusAutoIsolateSampleInfo = models.VirusAutoIsolateSampleInfo;
 const DescribeExportJobDownloadURLRequest = models.DescribeExportJobDownloadURLRequest;
 const DescribeImageAutoAuthorizedRuleRequest = models.DescribeImageAutoAuthorizedRuleRequest;
@@ -527,7 +531,7 @@ const DescribeSearchLogsRequest = models.DescribeSearchLogsRequest;
 const DescribeEscapeEventTypeSummaryResponse = models.DescribeEscapeEventTypeSummaryResponse;
 const DescribeAssetImageRegistryVulListRequest = models.DescribeAssetImageRegistryVulListRequest;
 const DescribeImageSimpleListResponse = models.DescribeImageSimpleListResponse;
-const DescribeVirusManualScanEstimateTimeoutRequest = models.DescribeVirusManualScanEstimateTimeoutRequest;
+const CreateAbnormalProcessRulesExportJobRequest = models.CreateAbnormalProcessRulesExportJobRequest;
 const CreateK8sApiAbnormalEventExportJobResponse = models.CreateK8sApiAbnormalEventExportJobResponse;
 const DescribeUserClusterResponse = models.DescribeUserClusterResponse;
 const DescribeAssetImageRegistryRegistryListRequest = models.DescribeAssetImageRegistryRegistryListRequest;
@@ -649,7 +653,7 @@ const DescribeRiskListResponse = models.DescribeRiskListResponse;
 const ModifyAssetRequest = models.ModifyAssetRequest;
 const RegionInfo = models.RegionInfo;
 const DescribeEscapeWhiteListRequest = models.DescribeEscapeWhiteListRequest;
-const VulDefenceEventTendency = models.VulDefenceEventTendency;
+const DescribeVirusManualScanEstimateTimeoutRequest = models.DescribeVirusManualScanEstimateTimeoutRequest;
 const ComponentInfo = models.ComponentInfo;
 const ConfirmNetworkFirewallPolicyResponse = models.ConfirmNetworkFirewallPolicyResponse;
 const CreateNetworkFirewallPublishResponse = models.CreateNetworkFirewallPublishResponse;
@@ -910,14 +914,14 @@ class TcssClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of top vulnerabilities.
-     * @param {DescribeVulTopRankingRequest} req
-     * @param {function(string, DescribeVulTopRankingResponse):void} cb
+     * This API is used to export abnormal process rules.
+     * @param {CreateAbnormalProcessRulesExportJobRequest} req
+     * @param {function(string, CreateAbnormalProcessRulesExportJobResponse):void} cb
      * @public
      */
-    DescribeVulTopRanking(req, cb) {
-        let resp = new DescribeVulTopRankingResponse();
-        this.request("DescribeVulTopRanking", req, resp, cb);
+    CreateAbnormalProcessRulesExportJob(req, cb) {
+        let resp = new CreateAbnormalProcessRulesExportJobResponse();
+        this.request("CreateAbnormalProcessRulesExportJob", req, resp, cb);
     }
 
     /**
@@ -3916,6 +3920,17 @@ class TcssClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the list of top vulnerabilities.
+     * @param {DescribeVulTopRankingRequest} req
+     * @param {function(string, DescribeVulTopRankingResponse):void} cb
+     * @public
+     */
+    DescribeVulTopRanking(req, cb) {
+        let resp = new DescribeVulTopRankingResponse();
+        this.request("DescribeVulTopRanking", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of alert policies.
      * @param {DescribeWarningRulesRequest} req
      * @param {function(string, DescribeWarningRulesResponse):void} cb
@@ -4408,6 +4423,17 @@ class TcssClient extends AbstractClient {
     ModifySecLogDeliveryKafkaSetting(req, cb) {
         let resp = new ModifySecLogDeliveryKafkaSettingResponse();
         this.request("ModifySecLogDeliveryKafkaSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to export file tampering detection rules.
+     * @param {CreateAccessControlsRuleExportJobRequest} req
+     * @param {function(string, CreateAccessControlsRuleExportJobResponse):void} cb
+     * @public
+     */
+    CreateAccessControlsRuleExportJob(req, cb) {
+        let resp = new CreateAccessControlsRuleExportJobResponse();
+        this.request("CreateAccessControlsRuleExportJob", req, resp, cb);
     }
 
     /**

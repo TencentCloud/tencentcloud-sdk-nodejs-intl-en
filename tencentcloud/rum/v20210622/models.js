@@ -503,6 +503,41 @@ class DeleteOfflineLogConfigResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRumLogList response structure.
+ * @class
+ */
+class DescribeRumLogListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response string
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDataPvUrlInfo response structure.
  * @class
  */
@@ -532,6 +567,34 @@ class DescribeDataPvUrlInfoResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopProject response structure.
+ * @class
+ */
+class StopProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2112,6 +2175,34 @@ class DescribeDataRequest extends  AbstractModel {
 }
 
 /**
+ * StopProject request structure.
+ * @class
+ */
+class StopProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
  * CreateOfflineLogConfig response structure.
  * @class
  */
@@ -3346,6 +3437,62 @@ class DescribeDataStaticProjectRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRumStatsLogList request structure.
+ * @class
+ */
+class DescribeRumStatsLogListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time (required)
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Query statement, which is required and can contain up to 4,096 characters.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * End time (required)
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID (required)
+         * @type {number || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
  * Project API restriction type
  * @class
  */
@@ -3437,18 +3584,18 @@ class DeleteLogExportRequest extends  AbstractModel {
 }
 
 /**
- * DescribeWhitelists response structure.
+ * DescribeRumGroupLog response structure.
  * @class
  */
-class DescribeWhitelistsResponse extends  AbstractModel {
+class DescribeRumGroupLogResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Allowlist list
-         * @type {Array.<Whitelist> || null}
+         * Response string
+         * @type {string || null}
          */
-        this.WhitelistSet = null;
+        this.Result = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3465,15 +3612,42 @@ class DescribeWhitelistsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.WhitelistSet) {
-            this.WhitelistSet = new Array();
-            for (let z in params.WhitelistSet) {
-                let obj = new Whitelist();
-                obj.deserialize(params.WhitelistSet[z]);
-                this.WhitelistSet.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeRumStatsLogList response structure.
+ * @class
+ */
+class DescribeRumStatsLogListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response string
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5953,6 +6127,83 @@ class DescribeOfflineLogConfigsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRumGroupLog request structure.
+ * @class
+ */
+class DescribeRumGroupLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sorting order (required). Valid values: `desc`, `asc`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Start time (required)
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Query statement, which is required and can contain up to 4,096 characters.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * End time (required)
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID (required)
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Aggregate field
+         * @type {string || null}
+         */
+        this.GroupField = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.GroupField = 'GroupField' in params ? params.GroupField : null;
+
+    }
+}
+
+/**
  * DeleteOfflineLogConfig request structure.
  * @class
  */
@@ -5983,6 +6234,49 @@ class DeleteOfflineLogConfigRequest extends  AbstractModel {
         }
         this.ProjectKey = 'ProjectKey' in params ? params.ProjectKey : null;
         this.UniqueID = 'UniqueID' in params ? params.UniqueID : null;
+
+    }
+}
+
+/**
+ * DescribeWhitelists response structure.
+ * @class
+ */
+class DescribeWhitelistsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Allowlist list
+         * @type {Array.<Whitelist> || null}
+         */
+        this.WhitelistSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WhitelistSet) {
+            this.WhitelistSet = new Array();
+            for (let z in params.WhitelistSet) {
+                let obj = new Whitelist();
+                obj.deserialize(params.WhitelistSet[z]);
+                this.WhitelistSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6397,6 +6691,76 @@ class ModifyProjectRequest extends  AbstractModel {
         this.EnableURLGroup = 'EnableURLGroup' in params ? params.EnableURLGroup : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
+ * DescribeRumLogList request structure.
+ * @class
+ */
+class DescribeRumLogListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sorting order (required). Valid values: `desc`, `asc`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Start time (required)
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Query statement, which is required and can contain up to 4,096 characters.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * End time (required)
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID (required)
+         * @type {number || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
 
     }
 }
@@ -7163,7 +7527,9 @@ module.exports = {
     DeleteProjectRequest: DeleteProjectRequest,
     DescribeProjectLimitsResponse: DescribeProjectLimitsResponse,
     DeleteOfflineLogConfigResponse: DeleteOfflineLogConfigResponse,
+    DescribeRumLogListResponse: DescribeRumLogListResponse,
     DescribeDataPvUrlInfoResponse: DescribeDataPvUrlInfoResponse,
+    StopProjectResponse: StopProjectResponse,
     DescribeDataFetchUrlResponse: DescribeDataFetchUrlResponse,
     DescribeErrorRequest: DescribeErrorRequest,
     StopInstanceRequest: StopInstanceRequest,
@@ -7194,6 +7560,7 @@ module.exports = {
     DescribeUvListRequest: DescribeUvListRequest,
     DescribeTawAreasResponse: DescribeTawAreasResponse,
     DescribeDataRequest: DescribeDataRequest,
+    StopProjectRequest: StopProjectRequest,
     CreateOfflineLogConfigResponse: CreateOfflineLogConfigResponse,
     ModifyProjectLimitRequest: ModifyProjectLimitRequest,
     DeleteInstanceResponse: DeleteInstanceResponse,
@@ -7212,9 +7579,11 @@ module.exports = {
     ReleaseFile: ReleaseFile,
     ModifyProjectLimitResponse: ModifyProjectLimitResponse,
     DescribeDataStaticProjectRequest: DescribeDataStaticProjectRequest,
+    DescribeRumStatsLogListRequest: DescribeRumStatsLogListRequest,
     ProjectLimit: ProjectLimit,
     DeleteLogExportRequest: DeleteLogExportRequest,
-    DescribeWhitelistsResponse: DescribeWhitelistsResponse,
+    DescribeRumGroupLogResponse: DescribeRumGroupLogResponse,
+    DescribeRumStatsLogListResponse: DescribeRumStatsLogListResponse,
     CreateWhitelistRequest: CreateWhitelistRequest,
     DescribeDataPvUrlStatisticsResponse: DescribeDataPvUrlStatisticsResponse,
     DescribeDataLogUrlInfoRequest: DescribeDataLogUrlInfoRequest,
@@ -7257,13 +7626,16 @@ module.exports = {
     DescribeProjectsRequest: DescribeProjectsRequest,
     DescribeDataEventUrlRequest: DescribeDataEventUrlRequest,
     DescribeOfflineLogConfigsRequest: DescribeOfflineLogConfigsRequest,
+    DescribeRumGroupLogRequest: DescribeRumGroupLogRequest,
     DeleteOfflineLogConfigRequest: DeleteOfflineLogConfigRequest,
+    DescribeWhitelistsResponse: DescribeWhitelistsResponse,
     DescribeProjectsResponse: DescribeProjectsResponse,
     ModifyProjectResponse: ModifyProjectResponse,
     DescribeLogExportsRequest: DescribeLogExportsRequest,
     DescribeDataReportCountResponse: DescribeDataReportCountResponse,
     DescribeDataPerformanceProjectRequest: DescribeDataPerformanceProjectRequest,
     ModifyProjectRequest: ModifyProjectRequest,
+    DescribeRumLogListRequest: DescribeRumLogListRequest,
     DescribeDataStaticResourceRequest: DescribeDataStaticResourceRequest,
     DescribePvListRequest: DescribePvListRequest,
     DescribeDataPvUrlInfoRequest: DescribeDataPvUrlInfoRequest,

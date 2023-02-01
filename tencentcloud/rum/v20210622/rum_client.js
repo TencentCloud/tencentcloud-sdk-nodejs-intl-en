@@ -23,7 +23,9 @@ const CreateTawInstanceResponse = models.CreateTawInstanceResponse;
 const DeleteProjectRequest = models.DeleteProjectRequest;
 const DescribeProjectLimitsResponse = models.DescribeProjectLimitsResponse;
 const DeleteOfflineLogConfigResponse = models.DeleteOfflineLogConfigResponse;
+const DescribeRumLogListResponse = models.DescribeRumLogListResponse;
 const DescribeDataPvUrlInfoResponse = models.DescribeDataPvUrlInfoResponse;
+const StopProjectResponse = models.StopProjectResponse;
 const DescribeDataFetchUrlResponse = models.DescribeDataFetchUrlResponse;
 const DescribeErrorRequest = models.DescribeErrorRequest;
 const StopInstanceRequest = models.StopInstanceRequest;
@@ -54,6 +56,7 @@ const DescribeLogExportsResponse = models.DescribeLogExportsResponse;
 const DescribeUvListRequest = models.DescribeUvListRequest;
 const DescribeTawAreasResponse = models.DescribeTawAreasResponse;
 const DescribeDataRequest = models.DescribeDataRequest;
+const StopProjectRequest = models.StopProjectRequest;
 const CreateOfflineLogConfigResponse = models.CreateOfflineLogConfigResponse;
 const ModifyProjectLimitRequest = models.ModifyProjectLimitRequest;
 const DeleteInstanceResponse = models.DeleteInstanceResponse;
@@ -72,9 +75,11 @@ const DescribeDataPvUrlStatisticsRequest = models.DescribeDataPvUrlStatisticsReq
 const ReleaseFile = models.ReleaseFile;
 const ModifyProjectLimitResponse = models.ModifyProjectLimitResponse;
 const DescribeDataStaticProjectRequest = models.DescribeDataStaticProjectRequest;
+const DescribeRumStatsLogListRequest = models.DescribeRumStatsLogListRequest;
 const ProjectLimit = models.ProjectLimit;
 const DeleteLogExportRequest = models.DeleteLogExportRequest;
-const DescribeWhitelistsResponse = models.DescribeWhitelistsResponse;
+const DescribeRumGroupLogResponse = models.DescribeRumGroupLogResponse;
+const DescribeRumStatsLogListResponse = models.DescribeRumStatsLogListResponse;
 const CreateWhitelistRequest = models.CreateWhitelistRequest;
 const DescribeDataPvUrlStatisticsResponse = models.DescribeDataPvUrlStatisticsResponse;
 const DescribeDataLogUrlInfoRequest = models.DescribeDataLogUrlInfoRequest;
@@ -117,13 +122,16 @@ const DescribeDataWebVitalsPageResponse = models.DescribeDataWebVitalsPageRespon
 const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeDataEventUrlRequest = models.DescribeDataEventUrlRequest;
 const DescribeOfflineLogConfigsRequest = models.DescribeOfflineLogConfigsRequest;
+const DescribeRumGroupLogRequest = models.DescribeRumGroupLogRequest;
 const DeleteOfflineLogConfigRequest = models.DeleteOfflineLogConfigRequest;
+const DescribeWhitelistsResponse = models.DescribeWhitelistsResponse;
 const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const ModifyProjectResponse = models.ModifyProjectResponse;
 const DescribeLogExportsRequest = models.DescribeLogExportsRequest;
 const DescribeDataReportCountResponse = models.DescribeDataReportCountResponse;
 const DescribeDataPerformanceProjectRequest = models.DescribeDataPerformanceProjectRequest;
 const ModifyProjectRequest = models.ModifyProjectRequest;
+const DescribeRumLogListRequest = models.DescribeRumLogListRequest;
 const DescribeDataStaticResourceRequest = models.DescribeDataStaticResourceRequest;
 const DescribePvListRequest = models.DescribePvListRequest;
 const DescribeDataPvUrlInfoRequest = models.DescribeDataPvUrlInfoRequest;
@@ -157,6 +165,17 @@ class RumClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get the list of logs in a project every minute.
+     * @param {DescribeRumStatsLogListRequest} req
+     * @param {function(string, DescribeRumStatsLogListResponse):void} cb
+     * @public
+     */
+    DescribeRumStatsLogList(req, cb) {
+        let resp = new DescribeRumStatsLogListResponse();
+        this.request("DescribeRumStatsLogList", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a file record for the specified project.
      * @param {CreateReleaseFileRequest} req
      * @param {function(string, CreateReleaseFileResponse):void} cb
@@ -176,6 +195,17 @@ class RumClient extends AbstractClient {
     DescribeScores(req, cb) {
         let resp = new DescribeScoresResponse();
         this.request("DescribeScores", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of logs in a project (created by an instance).
+     * @param {DescribeRumLogListRequest} req
+     * @param {function(string, DescribeRumLogListResponse):void} cb
+     * @public
+     */
+    DescribeRumLogList(req, cb) {
+        let resp = new DescribeRumLogListResponse();
+        this.request("DescribeRumLogList", req, resp, cb);
     }
 
     /**
@@ -264,6 +294,17 @@ class RumClient extends AbstractClient {
     DescribeError(req, cb) {
         let resp = new DescribeErrorResponse();
         this.request("DescribeError", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the log aggregation information under a project.
+     * @param {DescribeRumGroupLogRequest} req
+     * @param {function(string, DescribeRumGroupLogResponse):void} cb
+     * @public
+     */
+    DescribeRumGroupLog(req, cb) {
+        let resp = new DescribeRumGroupLogResponse();
+        this.request("DescribeRumGroupLog", req, resp, cb);
     }
 
     /**
@@ -471,6 +512,17 @@ Default API request rate limit: 20 requests/sec.
     DescribeProjects(req, cb) {
         let resp = new DescribeProjectsResponse();
         this.request("DescribeProjects", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop a project from reporting data.
+     * @param {StopProjectRequest} req
+     * @param {function(string, StopProjectResponse):void} cb
+     * @public
+     */
+    StopProject(req, cb) {
+        let resp = new StopProjectResponse();
+        this.request("StopProject", req, resp, cb);
     }
 
     /**

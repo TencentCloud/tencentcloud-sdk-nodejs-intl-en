@@ -2590,6 +2590,13 @@ Note: this field may return `null`, indicating that no valid value can be obtain
          */
         this.LastUsedDate = null;
 
+        /**
+         * The most recent date the key was accessed
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LastSecretUsedDate = null;
+
     }
 
     /**
@@ -2601,6 +2608,7 @@ Note: this field may return `null`, indicating that no valid value can be obtain
         }
         this.SecretId = 'SecretId' in params ? params.SecretId : null;
         this.LastUsedDate = 'LastUsedDate' in params ? params.LastUsedDate : null;
+        this.LastSecretUsedDate = 'LastSecretUsedDate' in params ? params.LastSecretUsedDate : null;
 
     }
 }

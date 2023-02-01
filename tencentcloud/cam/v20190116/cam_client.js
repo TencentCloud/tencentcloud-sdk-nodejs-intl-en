@@ -269,7 +269,7 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to add sub-users.
+     * This API is used to create a sub-user.
      * @param {AddUserRequest} req
      * @param {function(string, AddUserResponse):void} cb
      * @public

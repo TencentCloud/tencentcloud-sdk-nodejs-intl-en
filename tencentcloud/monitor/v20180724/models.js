@@ -297,7 +297,7 @@ class InstallPluginsRequest extends  AbstractModel {
         this.Plugins = null;
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1286,6 +1286,18 @@ class BindingPolicyObjectRequest extends  AbstractModel {
          */
         this.Dimensions = null;
 
+        /**
+         * The alert configured for an event
+         * @type {string || null}
+         */
+        this.EbSubject = null;
+
+        /**
+         * Whether the event alert has been configured
+         * @type {number || null}
+         */
+        this.EbEventFlag = null;
+
     }
 
     /**
@@ -1308,6 +1320,8 @@ class BindingPolicyObjectRequest extends  AbstractModel {
                 this.Dimensions.push(obj);
             }
         }
+        this.EbSubject = 'EbSubject' in params ? params.EbSubject : null;
+        this.EbEventFlag = 'EbEventFlag' in params ? params.EbEventFlag : null;
 
     }
 }
@@ -1742,13 +1756,13 @@ class ModifyGrafanaInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Instance name
+         * TCMG instance name, such as “test”.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -1940,6 +1954,12 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
          */
         this.MigrateFlag = null;
 
+        /**
+         * The alert configured for an event
+         * @type {string || null}
+         */
+        this.EbSubject = null;
+
     }
 
     /**
@@ -2011,6 +2031,7 @@ class CreateAlarmPolicyRequest extends  AbstractModel {
             }
         }
         this.MigrateFlag = 'MigrateFlag' in params ? params.MigrateFlag : null;
+        this.EbSubject = 'EbSubject' in params ? params.EbSubject : null;
 
     }
 }
@@ -2176,6 +2197,34 @@ class DescribeProductEventListDimensions extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * UpdateExporterIntegration response structure.
+ * @class
+ */
+class UpdateExporterIntegrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4366,7 +4415,7 @@ class ResumeGrafanaInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-12345678”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4663,13 +4712,13 @@ class DeleteGrafanaIntegrationRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-12345678”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Integration ID
+         * Integration ID, such as “integration-abcd1234”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
          * @type {string || null}
          */
         this.IntegrationId = null;
@@ -4775,19 +4824,19 @@ class UpdateGrafanaNotificationChannelRequest extends  AbstractModel {
         super();
 
         /**
-         * Channel ID
+         * Channel ID, such as “nchannel-abcd1234”.
          * @type {string || null}
          */
         this.ChannelId = null;
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-12345678”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Channel name
+         * Alert channel name, such as “test”.
          * @type {string || null}
          */
         this.ChannelName = null;
@@ -5021,6 +5070,12 @@ class ModifyAlarmNoticeRequest extends  AbstractModel {
          */
         this.CLSNotices = null;
 
+        /**
+         * List of IDs of the alerting rules bound to an alarm notification template
+         * @type {Array.<string> || null}
+         */
+        this.PolicyIds = null;
+
     }
 
     /**
@@ -5062,6 +5117,7 @@ class ModifyAlarmNoticeRequest extends  AbstractModel {
                 this.CLSNotices.push(obj);
             }
         }
+        this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
 
     }
 }
@@ -5246,7 +5302,7 @@ class DescribeGrafanaEnvironmentsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -5845,13 +5901,13 @@ class EnableGrafanaSSORequest extends  AbstractModel {
         super();
 
         /**
-         * Whether to enable SSO
+         * Whether to enable SSO (`true`: Yes; `false`: No)
          * @type {boolean || null}
          */
         this.EnableSSO = null;
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6309,7 +6365,7 @@ class DescribeGrafanaNotificationChannelsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-12345678”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6327,19 +6383,19 @@ class DescribeGrafanaNotificationChannelsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Channel name
+         * Alert channel name, such as “test”.
          * @type {string || null}
          */
         this.ChannelName = null;
 
         /**
-         * Channel ID
+         * Alert channel ID, such as “nchannel-abcd1234”.
          * @type {Array.<string> || null}
          */
         this.ChannelIDs = null;
 
         /**
-         * Status
+         * Alert channel status
          * @type {number || null}
          */
         this.ChannelState = null;
@@ -6444,13 +6500,13 @@ class UpdatePrometheusAgentStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TMP instance ID, such as “prom-abcd1234”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * List of agent IDs
+         * List of agent IDs such as “agent-abcd1234”, which can be obtained on the **Agent Management** page in the console.
          * @type {Array.<string> || null}
          */
         this.AgentIds = null;
@@ -6801,13 +6857,13 @@ class DeleteGrafanaNotificationChannelRequest extends  AbstractModel {
         super();
 
         /**
-         * Array of channel IDs
+         * Array of channel IDs, such as “nchannel-abcd1234”.
          * @type {Array.<string> || null}
          */
         this.ChannelIDs = null;
 
         /**
-         * Instance name
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -6836,19 +6892,19 @@ class CreateGrafanaIntegrationRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Type
+         * Integration type, such as “tencent-cloud-prometheus”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
          * @type {string || null}
          */
         this.Kind = null;
 
         /**
-         * Configuration
+         * Integration configuration
          * @type {string || null}
          */
         this.Content = null;
@@ -7562,13 +7618,13 @@ class CreateGrafanaNotificationChannelRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Channel name
+         * Alert channel name, such as “test”.
          * @type {string || null}
          */
         this.ChannelName = null;
@@ -7880,13 +7936,13 @@ class CreateSSOAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * User account ID
+         * User account ID, such as “10000000”.
          * @type {string || null}
          */
         this.UserId = null;
@@ -8062,25 +8118,25 @@ class UpdatePrometheusScrapeJobRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TMP instance ID, such as “prom-abcd1234”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Agent ID
+         * Agent ID such as “agent-abcd1234”, which can be obtained on the **Agent Management** page in the console
          * @type {string || null}
          */
         this.AgentId = null;
 
         /**
-         * Scrape task ID
+         * Scrape task ID such as “job-abcd1234”. You can go to the **Agent Management** page and obtain the ID in the pop-up **Create Scrape Task** window.
          * @type {string || null}
          */
         this.JobId = null;
 
         /**
-         * Scrape task configuration
+         * Scrape task ID in the format of “job_name:xx”
          * @type {string || null}
          */
         this.Config = null;
@@ -8176,13 +8232,13 @@ class UpgradeGrafanaInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-12345678”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Version alias
+         * Version alias, such as v7.4.2.
          * @type {string || null}
          */
         this.Alias = null;
@@ -8275,18 +8331,30 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * UpdateExporterIntegration response structure.
+ * DescribePrometheusInstanceUsage request structure.
  * @class
  */
-class UpdateExporterIntegrationResponse extends  AbstractModel {
+class DescribePrometheusInstanceUsageRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Query by one or more instance IDs. Instance ID is in the format of `prom-xxxxxxxx`. Up to 100 instances can be queried in one request.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Start time
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.StartCalcDate = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndCalcDate = null;
 
     }
 
@@ -8297,7 +8365,9 @@ class UpdateExporterIntegrationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.StartCalcDate = 'StartCalcDate' in params ? params.StartCalcDate : null;
+        this.EndCalcDate = 'EndCalcDate' in params ? params.EndCalcDate : null;
 
     }
 }
@@ -8358,6 +8428,30 @@ class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
          */
         this.LogAlarmReqInfo = null;
 
+        /**
+         * Template ID, which is dedicated to TMP.
+         * @type {Array.<string> || null}
+         */
+        this.NoticeIds = null;
+
+        /**
+         * Status (`0`: Disabled; `1`: Enabled)
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Name of the policy dedicated to TMP
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * The alert configured for an event
+         * @type {string || null}
+         */
+        this.EbSubject = null;
+
     }
 
     /**
@@ -8395,6 +8489,45 @@ class ModifyAlarmPolicyConditionRequest extends  AbstractModel {
             obj.deserialize(params.LogAlarmReqInfo)
             this.LogAlarmReqInfo = obj;
         }
+        this.NoticeIds = 'NoticeIds' in params ? params.NoticeIds : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.EbSubject = 'EbSubject' in params ? params.EbSubject : null;
+
+    }
+}
+
+/**
+ * Binding between a notification template and a policy
+ * @class
+ */
+class NoticeBindPolicys extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alert notification template ID
+         * @type {string || null}
+         */
+        this.NoticeId = null;
+
+        /**
+         * List of IDs of the alerting rules bound to an alarm notification template
+         * @type {Array.<string> || null}
+         */
+        this.PolicyIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NoticeId = 'NoticeId' in params ? params.NoticeId : null;
+        this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
 
     }
 }
@@ -8408,13 +8541,13 @@ class DeleteSSOAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * User account ID
+         * User account ID, such as “10000000”.
          * @type {string || null}
          */
         this.UserId = null;
@@ -8867,6 +9000,50 @@ class BindingPolicyObjectDimension extends  AbstractModel {
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
         this.EventDimensions = 'EventDimensions' in params ? params.EventDimensions : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusInstanceUsage response structure.
+ * @class
+ */
+class DescribePrometheusInstanceUsageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Usage list
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PrometheusInstanceTenantUsage> || null}
+         */
+        this.UsageSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.UsageSet) {
+            this.UsageSet = new Array();
+            for (let z in params.UsageSet) {
+                let obj = new PrometheusInstanceTenantUsage();
+                obj.deserialize(params.UsageSet[z]);
+                this.UsageSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10016,13 +10193,13 @@ class DescribeInstalledPluginsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-kleu3gt0”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Filter by plugin ID
+         * Filter by plugin ID such as “grafana-piechart-panel”. You can view the IDs of installed plugins through the `DescribeInstalledPlugins` API.
          * @type {string || null}
          */
         this.PluginId = null;
@@ -10210,13 +10387,13 @@ class EnableSSOCamCheckRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Whether to enable CAM authentication
+         * Whether to enable CAM authentication (`true`: Yes; `false`: No)
          * @type {boolean || null}
          */
         this.EnableSSOCamCheck = null;
@@ -10273,7 +10450,7 @@ class DescribeGrafanaWhiteListRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -11291,6 +11468,12 @@ class DeleteAlarmNoticesRequest extends  AbstractModel {
          */
         this.NoticeIds = null;
 
+        /**
+         * Binding between a notification template and a policy
+         * @type {Array.<NoticeBindPolicys> || null}
+         */
+        this.NoticeBindPolicys = null;
+
     }
 
     /**
@@ -11302,6 +11485,15 @@ class DeleteAlarmNoticesRequest extends  AbstractModel {
         }
         this.Module = 'Module' in params ? params.Module : null;
         this.NoticeIds = 'NoticeIds' in params ? params.NoticeIds : null;
+
+        if (params.NoticeBindPolicys) {
+            this.NoticeBindPolicys = new Array();
+            for (let z in params.NoticeBindPolicys) {
+                let obj = new NoticeBindPolicys();
+                obj.deserialize(params.NoticeBindPolicys[z]);
+                this.NoticeBindPolicys.push(obj);
+            }
+        }
 
     }
 }
@@ -12150,13 +12342,13 @@ class EnableGrafanaInternetRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-kleu3gt0”.
          * @type {string || null}
          */
         this.InstanceID = null;
 
         /**
-         * Enable or disable
+         * Whether to enable public network access (`true`: Yes; `false`: No)
          * @type {boolean || null}
          */
         this.EnableInternet = null;
@@ -12185,13 +12377,13 @@ class UpdateSSOAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * User account ID
+         * User account ID, such as “10000000”.
          * @type {string || null}
          */
         this.UserId = null;
@@ -12982,19 +13174,19 @@ class UpdateGrafanaIntegrationRequest extends  AbstractModel {
         super();
 
         /**
-         * Integration ID
+         * Integration ID, such as “integration-abcd1234”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
          * @type {string || null}
          */
         this.IntegrationId = null;
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-12345678”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Integration type
+         * Integration type, such as “tencent-cloud-prometheus”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
          * @type {string || null}
          */
         this.Kind = null;
@@ -13060,6 +13252,18 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
          */
         this.PolicyId = null;
 
+        /**
+         * The alert configured for an event
+         * @type {string || null}
+         */
+        this.EbSubject = null;
+
+        /**
+         * Whether the event alert has been configured
+         * @type {number || null}
+         */
+        this.EbEventFlag = null;
+
     }
 
     /**
@@ -13074,6 +13278,8 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
         this.UniqueId = 'UniqueId' in params ? params.UniqueId : null;
         this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.EbSubject = 'EbSubject' in params ? params.EbSubject : null;
+        this.EbEventFlag = 'EbEventFlag' in params ? params.EbEventFlag : null;
 
     }
 }
@@ -13115,7 +13321,7 @@ class UpdateDNSConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-12345678”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -13150,7 +13356,7 @@ class CreateAlertRuleRequest extends  AbstractModel {
         super();
 
         /**
-         * Prometheus instance ID
+         * TMP instance ID, such as “prom-abcd1234”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -13162,7 +13368,7 @@ class CreateAlertRuleRequest extends  AbstractModel {
         this.RuleName = null;
 
         /**
-         * Rule expression
+         * Alerting rule expression. For more information, see <a href="https://www.tencentcloud.com/document/product/1116/43192?lang=en&pg=">Alerting Rule Description</a>
          * @type {string || null}
          */
         this.Expr = null;
@@ -13324,7 +13530,7 @@ class UpdateGrafanaEnvironmentsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-12345678”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -14182,19 +14388,19 @@ class CreatePrometheusScrapeJobRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TMP instance ID, such as “prom-abcd1234”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Agent ID
+         * Agent ID, such as “agent-abcd1234”. It can be obtained on the **Agent Management** page in the console.
          * @type {string || null}
          */
         this.AgentId = null;
 
         /**
-         * Task content
+         * Scrape task ID in the format of “job_name:xx”
          * @type {string || null}
          */
         this.Config = null;
@@ -14337,7 +14543,7 @@ class DescribeGrafanaChannelsRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-12345678”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -14355,19 +14561,19 @@ class DescribeGrafanaChannelsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Channel name
+         * Alert channel name, such as “test”.
          * @type {string || null}
          */
         this.ChannelName = null;
 
         /**
-         * Channel ID.
+         * Alert channel ID, such as “nchannel-abcd1234”.
          * @type {Array.<string> || null}
          */
         this.ChannelIds = null;
 
         /**
-         * Channel status
+         * Alert channel status
          * @type {number || null}
          */
         this.ChannelState = null;
@@ -14798,7 +15004,7 @@ class DescribeGrafanaConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-12345678”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -15039,13 +15245,13 @@ class DescribeGrafanaInstancesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Array of instance IDs
+         * Array of TCMG instance IDs
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Instance name, which supports fuzzy search by prefix.
+         * TCMG instance name, which can be fuzzily matched by prefix.
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -15524,13 +15730,13 @@ class UninstallGrafanaPluginsRequest extends  AbstractModel {
         super();
 
         /**
-         * Array of plugin IDs
+         * Array of plugin IDs, such as "PluginIds": [ "grafana-clock-panel" ]. The plugin ID can be obtained through the `DescribePluginOverviews` API.
          * @type {Array.<string> || null}
          */
         this.PluginIds = null;
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-abcdefg”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -15559,7 +15765,7 @@ class CleanGrafanaInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -15650,13 +15856,13 @@ class DescribeSSOAccountRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Filter by account UIN
+         * Filter by account ID such as “10000”
          * @type {string || null}
          */
         this.UserId = null;
@@ -15742,6 +15948,67 @@ class DescribeAlarmNoticeRequest extends  AbstractModel {
         }
         this.Module = 'Module' in params ? params.Module : null;
         this.NoticeId = 'NoticeId' in params ? params.NoticeId : null;
+
+    }
+}
+
+/**
+ * TMP usage information
+ * @class
+ */
+class PrometheusInstanceTenantUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Billing cycle
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CalcDate = null;
+
+        /**
+         * Total usage
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Usage of basic (free) metrics
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Basic = null;
+
+        /**
+         * Usage of paid metrics
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Fee = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CalcDate = 'CalcDate' in params ? params.CalcDate : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Basic = 'Basic' in params ? params.Basic : null;
+        this.Fee = 'Fee' in params ? params.Fee : null;
 
     }
 }
@@ -16409,6 +16676,18 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
          */
         this.PolicyId = null;
 
+        /**
+         * The alert configured for an event
+         * @type {string || null}
+         */
+        this.EbSubject = null;
+
+        /**
+         * Whether the event alert has been configured
+         * @type {number || null}
+         */
+        this.EbEventFlag = null;
+
     }
 
     /**
@@ -16421,6 +16700,8 @@ class UnBindingAllPolicyObjectRequest extends  AbstractModel {
         this.Module = 'Module' in params ? params.Module : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.EbSubject = 'EbSubject' in params ? params.EbSubject : null;
+        this.EbEventFlag = 'EbEventFlag' in params ? params.EbEventFlag : null;
 
     }
 }
@@ -16836,7 +17117,7 @@ class DescribeDNSConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID.
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -16988,13 +17269,13 @@ class UpdateGrafanaWhiteListRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance name
+         * TCMG instance ID, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Allowlist in array
+         * Array of public IPs (such as “127.0.0.1”) in the allowlist, which can be viewed through the `DescribeGrafanaWhiteList` API.
          * @type {Array.<string> || null}
          */
         this.Whitelist = null;
@@ -17919,6 +18200,7 @@ module.exports = {
     CreateExporterIntegrationRequest: CreateExporterIntegrationRequest,
     DescribeAlarmEventsResponse: DescribeAlarmEventsResponse,
     DescribeProductEventListDimensions: DescribeProductEventListDimensions,
+    UpdateExporterIntegrationResponse: UpdateExporterIntegrationResponse,
     DescribePolicyGroupInfoResponse: DescribePolicyGroupInfoResponse,
     Operator: Operator,
     ModifyAlarmPolicyNoticeRequest: ModifyAlarmPolicyNoticeRequest,
@@ -18031,8 +18313,9 @@ module.exports = {
     UpgradeGrafanaInstanceRequest: UpgradeGrafanaInstanceRequest,
     DescribeAlarmNoticeCallbacksRequest: DescribeAlarmNoticeCallbacksRequest,
     DescribeAlarmNoticeCallbacksResponse: DescribeAlarmNoticeCallbacksResponse,
-    UpdateExporterIntegrationResponse: UpdateExporterIntegrationResponse,
+    DescribePrometheusInstanceUsageRequest: DescribePrometheusInstanceUsageRequest,
     ModifyAlarmPolicyConditionRequest: ModifyAlarmPolicyConditionRequest,
+    NoticeBindPolicys: NoticeBindPolicys,
     DeleteSSOAccountRequest: DeleteSSOAccountRequest,
     PrometheusScrapeJob: PrometheusScrapeJob,
     CreateGrafanaIntegrationResponse: CreateGrafanaIntegrationResponse,
@@ -18044,6 +18327,7 @@ module.exports = {
     CreateGrafanaInstanceRequest: CreateGrafanaInstanceRequest,
     UpdateAlertRuleStateResponse: UpdateAlertRuleStateResponse,
     BindingPolicyObjectDimension: BindingPolicyObjectDimension,
+    DescribePrometheusInstanceUsageResponse: DescribePrometheusInstanceUsageResponse,
     UnbindPrometheusManagedGrafanaResponse: UnbindPrometheusManagedGrafanaResponse,
     DescribeBasicAlarmListAlarms: DescribeBasicAlarmListAlarms,
     DescribeGrafanaChannelsResponse: DescribeGrafanaChannelsResponse,
@@ -18156,6 +18440,7 @@ module.exports = {
     DescribeSSOAccountRequest: DescribeSSOAccountRequest,
     Tag: Tag,
     DescribeAlarmNoticeRequest: DescribeAlarmNoticeRequest,
+    PrometheusInstanceTenantUsage: PrometheusInstanceTenantUsage,
     UninstallGrafanaDashboardRequest: UninstallGrafanaDashboardRequest,
     GrafanaNotificationChannel: GrafanaNotificationChannel,
     CreatePrometheusAgentRequest: CreatePrometheusAgentRequest,

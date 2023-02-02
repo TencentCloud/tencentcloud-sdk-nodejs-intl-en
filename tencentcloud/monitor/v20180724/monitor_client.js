@@ -57,6 +57,7 @@ const EnableGrafanaSSOResponse = models.EnableGrafanaSSOResponse;
 const CreateExporterIntegrationRequest = models.CreateExporterIntegrationRequest;
 const DescribeAlarmEventsResponse = models.DescribeAlarmEventsResponse;
 const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
+const UpdateExporterIntegrationResponse = models.UpdateExporterIntegrationResponse;
 const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
 const Operator = models.Operator;
 const ModifyAlarmPolicyNoticeRequest = models.ModifyAlarmPolicyNoticeRequest;
@@ -169,8 +170,9 @@ const AlarmPolicyFilter = models.AlarmPolicyFilter;
 const UpgradeGrafanaInstanceRequest = models.UpgradeGrafanaInstanceRequest;
 const DescribeAlarmNoticeCallbacksRequest = models.DescribeAlarmNoticeCallbacksRequest;
 const DescribeAlarmNoticeCallbacksResponse = models.DescribeAlarmNoticeCallbacksResponse;
-const UpdateExporterIntegrationResponse = models.UpdateExporterIntegrationResponse;
+const DescribePrometheusInstanceUsageRequest = models.DescribePrometheusInstanceUsageRequest;
 const ModifyAlarmPolicyConditionRequest = models.ModifyAlarmPolicyConditionRequest;
+const NoticeBindPolicys = models.NoticeBindPolicys;
 const DeleteSSOAccountRequest = models.DeleteSSOAccountRequest;
 const PrometheusScrapeJob = models.PrometheusScrapeJob;
 const CreateGrafanaIntegrationResponse = models.CreateGrafanaIntegrationResponse;
@@ -182,6 +184,7 @@ const DescribeProductEventListResponse = models.DescribeProductEventListResponse
 const CreateGrafanaInstanceRequest = models.CreateGrafanaInstanceRequest;
 const UpdateAlertRuleStateResponse = models.UpdateAlertRuleStateResponse;
 const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
+const DescribePrometheusInstanceUsageResponse = models.DescribePrometheusInstanceUsageResponse;
 const UnbindPrometheusManagedGrafanaResponse = models.UnbindPrometheusManagedGrafanaResponse;
 const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms;
 const DescribeGrafanaChannelsResponse = models.DescribeGrafanaChannelsResponse;
@@ -294,6 +297,7 @@ const DeleteAlertRulesRequest = models.DeleteAlertRulesRequest;
 const DescribeSSOAccountRequest = models.DescribeSSOAccountRequest;
 const Tag = models.Tag;
 const DescribeAlarmNoticeRequest = models.DescribeAlarmNoticeRequest;
+const PrometheusInstanceTenantUsage = models.PrometheusInstanceTenantUsage;
 const UninstallGrafanaDashboardRequest = models.UninstallGrafanaDashboardRequest;
 const GrafanaNotificationChannel = models.GrafanaNotificationChannel;
 const CreatePrometheusAgentRequest = models.CreatePrometheusAgentRequest;
@@ -389,6 +393,17 @@ Note that alert object and alert message are special fields of Prometheus Rule A
     UpdateAlertRule(req, cb) {
         let resp = new UpdateAlertRuleResponse();
         this.request("UpdateAlertRule", req, resp, cb);
+    }
+
+    /**
+     *  This API is used to query the usage of a pay-as-you-go Tencent Managed Service for Prometheus (TMP) instance.
+     * @param {DescribePrometheusInstanceUsageRequest} req
+     * @param {function(string, DescribePrometheusInstanceUsageResponse):void} cb
+     * @public
+     */
+    DescribePrometheusInstanceUsage(req, cb) {
+        let resp = new DescribePrometheusInstanceUsageResponse();
+        this.request("DescribePrometheusInstanceUsage", req, resp, cb);
     }
 
     /**

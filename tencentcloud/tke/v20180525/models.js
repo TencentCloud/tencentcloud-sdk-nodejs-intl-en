@@ -1545,24 +1545,54 @@ class InstallEdgeLogAgentResponse extends  AbstractModel {
 }
 
 /**
- * DescribeEdgeClusterInstances response structure.
+ * DescribeClusterVirtualNodePools request structure.
  * @class
  */
-class DescribeEdgeClusterInstancesResponse extends  AbstractModel {
+class DescribeClusterVirtualNodePoolsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of nodes in the cluster
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterVirtualNodePools response structure.
+ * @class
+ */
+class DescribeClusterVirtualNodePoolsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of node pools
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Array of node information
-         * @type {string || null}
+         * List of virtual node pools
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<VirtualNodePool> || null}
          */
-        this.InstanceInfoSet = null;
+        this.NodePoolSet = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1580,7 +1610,15 @@ class DescribeEdgeClusterInstancesResponse extends  AbstractModel {
             return;
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.InstanceInfoSet = 'InstanceInfoSet' in params ? params.InstanceInfoSet : null;
+
+        if (params.NodePoolSet) {
+            this.NodePoolSet = new Array();
+            for (let z in params.NodePoolSet) {
+                let obj = new VirtualNodePool();
+                obj.deserialize(params.NodePoolSet[z]);
+                this.NodePoolSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1782,6 +1820,55 @@ class RunInstancesForNode extends  AbstractModel {
 }
 
 /**
+ * SetNodePoolNodeProtection request structure.
+ * @class
+ */
+class SetNodePoolNodeProtectionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Node ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Whether the node needs removal protection
+         * @type {boolean || null}
+         */
+        this.ProtectedFromScaleIn = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ProtectedFromScaleIn = 'ProtectedFromScaleIn' in params ? params.ProtectedFromScaleIn : null;
+
+    }
+}
+
+/**
  * DescribeTKEEdgeExternalKubeconfig request structure.
  * @class
  */
@@ -1875,6 +1962,48 @@ class DeleteClusterAsGroupsRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.AutoScalingGroupIds = 'AutoScalingGroupIds' in params ? params.AutoScalingGroupIds : null;
         this.KeepInstance = 'KeepInstance' in params ? params.KeepInstance : null;
+
+    }
+}
+
+/**
+ * DescribeClusterVirtualNode request structure.
+ * @class
+ */
+class DescribeClusterVirtualNodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Node name
+         * @type {Array.<string> || null}
+         */
+        this.NodeNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.NodeNames = 'NodeNames' in params ? params.NodeNames : null;
 
     }
 }
@@ -1989,6 +2118,56 @@ Note: this field may return `null`, indicating that no valid value is obtained.
             return;
         }
         this.Kubelet = 'Kubelet' in params ? params.Kubelet : null;
+
+    }
+}
+
+/**
+ * Virtual node
+ * @class
+ */
+class VirtualNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Virtual node name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Subnet of the virtual node
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Virtual node status
+         * @type {string || null}
+         */
+        this.Phase = null;
+
+        /**
+         * Creation time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Phase = 'Phase' in params ? params.Phase : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -2337,6 +2516,119 @@ Only filtering by an ECM ID is supported
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Custom parameters available for the edge cluster
+ * @class
+ */
+class EdgeAvailableExtraArgs extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * kube-apiserver custom parameter
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<EdgeArgsFlag> || null}
+         */
+        this.KubeAPIServer = null;
+
+        /**
+         * kube-controller-manager custom parameter
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<EdgeArgsFlag> || null}
+         */
+        this.KubeControllerManager = null;
+
+        /**
+         * kube-scheduler custom parameter
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<EdgeArgsFlag> || null}
+         */
+        this.KubeScheduler = null;
+
+        /**
+         * kubelet custom parameter
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<EdgeArgsFlag> || null}
+         */
+        this.Kubelet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.KubeAPIServer) {
+            this.KubeAPIServer = new Array();
+            for (let z in params.KubeAPIServer) {
+                let obj = new EdgeArgsFlag();
+                obj.deserialize(params.KubeAPIServer[z]);
+                this.KubeAPIServer.push(obj);
+            }
+        }
+
+        if (params.KubeControllerManager) {
+            this.KubeControllerManager = new Array();
+            for (let z in params.KubeControllerManager) {
+                let obj = new EdgeArgsFlag();
+                obj.deserialize(params.KubeControllerManager[z]);
+                this.KubeControllerManager.push(obj);
+            }
+        }
+
+        if (params.KubeScheduler) {
+            this.KubeScheduler = new Array();
+            for (let z in params.KubeScheduler) {
+                let obj = new EdgeArgsFlag();
+                obj.deserialize(params.KubeScheduler[z]);
+                this.KubeScheduler.push(obj);
+            }
+        }
+
+        if (params.Kubelet) {
+            this.Kubelet = new Array();
+            for (let z in params.Kubelet) {
+                let obj = new EdgeArgsFlag();
+                obj.deserialize(params.Kubelet[z]);
+                this.Kubelet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DrainClusterVirtualNode response structure.
+ * @class
+ */
+class DrainClusterVirtualNodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2926,6 +3218,116 @@ class ForwardTKEEdgeApplicationRequestV3Response extends  AbstractModel {
 }
 
 /**
+ * CreateClusterVirtualNodePool request structure.
+ * @class
+ */
+class CreateClusterVirtualNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node pool name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * List of subnet IDs
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * List of security group IDs
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Virtual node labels
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Virtual node taint
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+        /**
+         * List of nodes
+         * @type {Array.<VirtualNodeSpec> || null}
+         */
+        this.VirtualNodes = null;
+
+        /**
+         * Setting of deletion protection
+         * @type {boolean || null}
+         */
+        this.DeletionProtection = null;
+
+        /**
+         * Node pool OS:
+- `linux` (default value)
+- `windows`
+         * @type {string || null}
+         */
+        this.OS = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+
+        if (params.VirtualNodes) {
+            this.VirtualNodes = new Array();
+            for (let z in params.VirtualNodes) {
+                let obj = new VirtualNodeSpec();
+                obj.deserialize(params.VirtualNodes[z]);
+                this.VirtualNodes.push(obj);
+            }
+        }
+        this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
+        this.OS = 'OS' in params ? params.OS : null;
+
+    }
+}
+
+/**
  * Cluster network-related parameters
  * @class
  */
@@ -3234,33 +3636,18 @@ class DeleteClusterRouteResponse extends  AbstractModel {
 }
 
 /**
- * Edge cluster advanced settings
+ * DeleteClusterVirtualNodePool response structure.
  * @class
  */
-class EdgeClusterAdvancedSettings extends  AbstractModel {
+class DeleteClusterVirtualNodePoolResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Custom parameters of the cluster
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {EdgeClusterExtraArgs || null}
-         */
-        this.ExtraArgs = null;
-
-        /**
-         * Runtime type. Valid values: "docker" (default), "containerd".
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Runtime = null;
-
-        /**
-         * Forwarding mode of kube-proxy. Valid values: "iptables" (default), "ipvs".
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ProxyMode = null;
+        this.RequestId = null;
 
     }
 
@@ -3271,14 +3658,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-
-        if (params.ExtraArgs) {
-            let obj = new EdgeClusterExtraArgs();
-            obj.deserialize(params.ExtraArgs)
-            this.ExtraArgs = obj;
-        }
-        this.Runtime = 'Runtime' in params ? params.Runtime : null;
-        this.ProxyMode = 'ProxyMode' in params ? params.ProxyMode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3622,6 +4002,12 @@ major: in-place upgrade of major version
          */
         this.MaxNotReadyPercent = null;
 
+        /**
+         * Whether to upgrade node runtime. Values: `true`, `false` (default).
+         * @type {boolean || null}
+         */
+        this.UpgradeRunTime = null;
+
     }
 
     /**
@@ -3643,29 +4029,48 @@ major: in-place upgrade of major version
         }
         this.SkipPreCheck = 'SkipPreCheck' in params ? params.SkipPreCheck : null;
         this.MaxNotReadyPercent = 'MaxNotReadyPercent' in params ? params.MaxNotReadyPercent : null;
+        this.UpgradeRunTime = 'UpgradeRunTime' in params ? params.UpgradeRunTime : null;
 
     }
 }
 
 /**
- * Information of the add-on selected for installation during cluster creation
+ * CreateClusterVirtualNode request structure.
  * @class
  */
-class ExtensionAddon extends  AbstractModel {
+class CreateClusterVirtualNodeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Add-on name
+         * Cluster ID
          * @type {string || null}
          */
-        this.AddonName = null;
+        this.ClusterId = null;
 
         /**
-         * Add-on information (description of the add-on resource object in JSON string format)
+         * Node pool
          * @type {string || null}
          */
-        this.AddonParam = null;
+        this.NodePoolId = null;
+
+        /**
+         * Subnet
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * List of subnet IDs (this parameter and `SubnetId` are mutually exclusive)
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * List of virtual nodes
+         * @type {Array.<VirtualNodeSpec> || null}
+         */
+        this.VirtualNodes = null;
 
     }
 
@@ -3676,8 +4081,19 @@ class ExtensionAddon extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AddonName = 'AddonName' in params ? params.AddonName : null;
-        this.AddonParam = 'AddonParam' in params ? params.AddonParam : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+
+        if (params.VirtualNodes) {
+            this.VirtualNodes = new Array();
+            for (let z in params.VirtualNodes) {
+                let obj = new VirtualNodeSpec();
+                obj.deserialize(params.VirtualNodes[z]);
+                this.VirtualNodes.push(obj);
+            }
+        }
 
     }
 }
@@ -4954,6 +5370,41 @@ class DeleteClusterNodePoolRequest extends  AbstractModel {
 }
 
 /**
+ * Virtual node
+ * @class
+ */
+class VirtualNodeSpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node display name
+         * @type {string || null}
+         */
+        this.DisplayName = null;
+
+        /**
+         * Subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
  * DescribeClusterKubeconfig request structure.
  * @class
  */
@@ -5096,6 +5547,41 @@ class CreateClusterEndpointVipRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.SecurityPolicies = 'SecurityPolicies' in params ? params.SecurityPolicies : null;
+
+    }
+}
+
+/**
+ * CreateClusterVirtualNode response structure.
+ * @class
+ */
+class CreateClusterVirtualNodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Virtual node name
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5289,24 +5775,30 @@ class ModifyClusterAsGroupOptionAttributeRequest extends  AbstractModel {
 }
 
 /**
- * The policy to deal with resources in the cluster when the cluster is deleted.
+ * DeleteClusterVirtualNodePool request structure.
  * @class
  */
-class ResourceDeleteOption extends  AbstractModel {
+class DeleteClusterVirtualNodePoolRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Resource type, for example `CBS`
+         * Cluster ID
          * @type {string || null}
          */
-        this.ResourceType = null;
+        this.ClusterId = null;
 
         /**
-         * Specifies the policy to deal with resources in the cluster when the cluster is deleted. It can be `terminate` or `retain`.
-         * @type {string || null}
+         * List of virtual node pool IDs
+         * @type {Array.<string> || null}
          */
-        this.DeleteMode = null;
+        this.NodePoolIds = null;
+
+        /**
+         * Whether to forcibly delete the nodes with pods. Values: `true`, `false`.
+         * @type {boolean || null}
+         */
+        this.Force = null;
 
     }
 
@@ -5317,32 +5809,26 @@ class ResourceDeleteOption extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-        this.DeleteMode = 'DeleteMode' in params ? params.DeleteMode : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolIds = 'NodePoolIds' in params ? params.NodePoolIds : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }
 
 /**
- * DescribeClusterNodePools response structure.
+ * CreateClusterVirtualNodePool response structure.
  * @class
  */
-class DescribeClusterNodePoolsResponse extends  AbstractModel {
+class CreateClusterVirtualNodePoolResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * NodePools (node pool list)
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {Array.<NodePool> || null}
+         * Node pool ID
+         * @type {string || null}
          */
-        this.NodePoolSet = null;
-
-        /**
-         * Total resources
-         * @type {number || null}
-         */
-        this.TotalCount = null;
+        this.NodePoolId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5359,16 +5845,7 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         if (!params) {
             return;
         }
-
-        if (params.NodePoolSet) {
-            this.NodePoolSet = new Array();
-            for (let z in params.NodePoolSet) {
-                let obj = new NodePool();
-                obj.deserialize(params.NodePoolSet[z]);
-                this.NodePoolSet.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5750,6 +6227,41 @@ class AddNodeToNodePoolResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DrainClusterVirtualNode request structure.
+ * @class
+ */
+class DrainClusterVirtualNodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node name
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
 
     }
 }
@@ -6219,6 +6731,34 @@ class DescribeVpcCniPodLimitsRequest extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.InstanceFamily = 'InstanceFamily' in params ? params.InstanceFamily : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+    }
+}
+
+/**
+ * DeleteClusterVirtualNode response structure.
+ * @class
+ */
+class DeleteClusterVirtualNodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7173,6 +7713,57 @@ class DescribeClusterStatusResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterNodePools response structure.
+ * @class
+ */
+class DescribeClusterNodePoolsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * NodePools (node pool list)
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {Array.<NodePool> || null}
+         */
+        this.NodePoolSet = null;
+
+        /**
+         * Total resources
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NodePoolSet) {
+            this.NodePoolSet = new Array();
+            for (let z in params.NodePoolSet) {
+                let obj = new NodePool();
+                obj.deserialize(params.NodePoolSet[z]);
+                this.NodePoolSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRouteTableConflicts response structure.
  * @class
  */
@@ -7804,6 +8395,41 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             this.OIDCConfig = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information of the add-on selected for installation during cluster creation
+ * @class
+ */
+class ExtensionAddon extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Add-on name
+         * @type {string || null}
+         */
+        this.AddonName = null;
+
+        /**
+         * Add-on information (description of the add-on resource object in JSON string format)
+         * @type {string || null}
+         */
+        this.AddonParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddonName = 'AddonName' in params ? params.AddonName : null;
+        this.AddonParam = 'AddonParam' in params ? params.AddonParam : null;
 
     }
 }
@@ -8786,18 +9412,33 @@ class DescribeECMInstancesResponse extends  AbstractModel {
 }
 
 /**
- * GetClusterLevelPrice request structure.
+ * Edge cluster advanced settings
  * @class
  */
-class GetClusterLevelPriceRequest extends  AbstractModel {
+class EdgeClusterAdvancedSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The cluster model. It’s used for price query.
+         * Custom parameters of the cluster
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {EdgeClusterExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
+        /**
+         * Runtime type. Valid values: "docker" (default), "containerd".
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.ClusterLevel = null;
+        this.Runtime = null;
+
+        /**
+         * Forwarding mode of kube-proxy. Valid values: "iptables" (default), "ipvs".
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProxyMode = null;
 
     }
 
@@ -8808,7 +9449,131 @@ class GetClusterLevelPriceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
+
+        if (params.ExtraArgs) {
+            let obj = new EdgeClusterExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
+        }
+        this.Runtime = 'Runtime' in params ? params.Runtime : null;
+        this.ProxyMode = 'ProxyMode' in params ? params.ProxyMode : null;
+
+    }
+}
+
+/**
+ * DescribeEdgeClusterUpgradeInfo request structure.
+ * @class
+ */
+class DescribeEdgeClusterUpgradeInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Target TKEEdge version
+         * @type {string || null}
+         */
+        this.EdgeVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EdgeVersion = 'EdgeVersion' in params ? params.EdgeVersion : null;
+
+    }
+}
+
+/**
+ * Virtual node pool
+ * @class
+ */
+class VirtualNodePool extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * List of subnets
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * Node pool name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Node pool lifecycle status
+         * @type {string || null}
+         */
+        this.LifeState = null;
+
+        /**
+         * Virtual node labels
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Virtual node taint
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.LifeState = 'LifeState' in params ? params.LifeState : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
 
     }
 }
@@ -9211,40 +9976,30 @@ class AcquireClusterAdminRoleResponse extends  AbstractModel {
 }
 
 /**
- * Custom parameters available for the edge cluster
+ * DescribeEdgeClusterInstances response structure.
  * @class
  */
-class EdgeAvailableExtraArgs extends  AbstractModel {
+class DescribeEdgeClusterInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * kube-apiserver custom parameter
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<EdgeArgsFlag> || null}
+         * Total number of nodes in the cluster
+         * @type {number || null}
          */
-        this.KubeAPIServer = null;
+        this.TotalCount = null;
 
         /**
-         * kube-controller-manager custom parameter
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<EdgeArgsFlag> || null}
+         * Array of node information
+         * @type {string || null}
          */
-        this.KubeControllerManager = null;
+        this.InstanceInfoSet = null;
 
         /**
-         * kube-scheduler custom parameter
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<EdgeArgsFlag> || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.KubeScheduler = null;
-
-        /**
-         * kubelet custom parameter
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<EdgeArgsFlag> || null}
-         */
-        this.Kubelet = null;
+        this.RequestId = null;
 
     }
 
@@ -9255,42 +10010,9 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-
-        if (params.KubeAPIServer) {
-            this.KubeAPIServer = new Array();
-            for (let z in params.KubeAPIServer) {
-                let obj = new EdgeArgsFlag();
-                obj.deserialize(params.KubeAPIServer[z]);
-                this.KubeAPIServer.push(obj);
-            }
-        }
-
-        if (params.KubeControllerManager) {
-            this.KubeControllerManager = new Array();
-            for (let z in params.KubeControllerManager) {
-                let obj = new EdgeArgsFlag();
-                obj.deserialize(params.KubeControllerManager[z]);
-                this.KubeControllerManager.push(obj);
-            }
-        }
-
-        if (params.KubeScheduler) {
-            this.KubeScheduler = new Array();
-            for (let z in params.KubeScheduler) {
-                let obj = new EdgeArgsFlag();
-                obj.deserialize(params.KubeScheduler[z]);
-                this.KubeScheduler.push(obj);
-            }
-        }
-
-        if (params.Kubelet) {
-            this.Kubelet = new Array();
-            for (let z in params.Kubelet) {
-                let obj = new EdgeArgsFlag();
-                obj.deserialize(params.Kubelet[z]);
-                this.Kubelet.push(obj);
-            }
-        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.InstanceInfoSet = 'InstanceInfoSet' in params ? params.InstanceInfoSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11009,6 +11731,34 @@ class DescribeClusterRouteTablesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterVirtualNodePool response structure.
+ * @class
+ */
+class ModifyClusterVirtualNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteTKEEdgeCluster response structure.
  * @class
  */
@@ -11378,6 +12128,48 @@ class DescribeRegionsRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteClusterVirtualNode request structure.
+ * @class
+ */
+class DeleteClusterVirtualNodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * List of virtual nodes
+         * @type {Array.<string> || null}
+         */
+        this.NodeNames = null;
+
+        /**
+         * Whether to forcibly delete running pods in the virtual node. Values: `true`, `false`.
+         * @type {boolean || null}
+         */
+        this.Force = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodeNames = 'NodeNames' in params ? params.NodeNames : null;
+        this.Force = 'Force' in params ? params.Force : null;
+
+    }
+}
+
+/**
  * Describes the configuration of enhanced services, such as Cloud Security and Cloud Monitor.
  * @class
  */
@@ -11470,36 +12262,45 @@ class DescribeClusterNodePoolDetailRequest extends  AbstractModel {
 }
 
 /**
- * SetNodePoolNodeProtection request structure.
+ * The grafana information in the managed PROM instance
  * @class
  */
-class SetNodePoolNodeProtectionRequest extends  AbstractModel {
+class PrometheusGrafanaInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Node pool ID
-         * @type {string || null}
-         */
-        this.NodePoolId = null;
-
-        /**
-         * Node ID
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * Whether the node needs removal protection
+         * Whether it is enabled
          * @type {boolean || null}
          */
-        this.ProtectedFromScaleIn = null;
+        this.Enabled = null;
+
+        /**
+         * Domain name. It will be effective only when the public network access is enabled.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * The private network or public network address
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * Whether the public network access is enabled.
+`close`: the public network access is not enabled
+`opening`: the public network access is being enabled
+`open`: the public network access is enabled
+         * @type {string || null}
+         */
+        this.Internet = null;
+
+        /**
+         * The user name of the grafana admin
+         * @type {string || null}
+         */
+        this.AdminUser = null;
 
     }
 
@@ -11510,10 +12311,11 @@ class SetNodePoolNodeProtectionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.ProtectedFromScaleIn = 'ProtectedFromScaleIn' in params ? params.ProtectedFromScaleIn : null;
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Internet = 'Internet' in params ? params.Internet : null;
+        this.AdminUser = 'AdminUser' in params ? params.AdminUser : null;
 
     }
 }
@@ -13071,45 +13873,48 @@ class ModifyClusterAsGroupAttributeRequest extends  AbstractModel {
 }
 
 /**
- * The grafana information in the managed PROM instance
+ * ModifyClusterVirtualNodePool request structure.
  * @class
  */
-class PrometheusGrafanaInfo extends  AbstractModel {
+class ModifyClusterVirtualNodePoolRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether it is enabled
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Node pool ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Node pool name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Virtual node labels
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Virtual node taint
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+        /**
+         * Setting of deletion protection
          * @type {boolean || null}
          */
-        this.Enabled = null;
-
-        /**
-         * Domain name. It will be effective only when the public network access is enabled.
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * The private network or public network address
-         * @type {string || null}
-         */
-        this.Address = null;
-
-        /**
-         * Whether the public network access is enabled.
-`close`: the public network access is not enabled
-`opening`: the public network access is being enabled
-`open`: the public network access is enabled
-         * @type {string || null}
-         */
-        this.Internet = null;
-
-        /**
-         * The user name of the grafana admin
-         * @type {string || null}
-         */
-        this.AdminUser = null;
+        this.DeletionProtection = null;
 
     }
 
@@ -13120,11 +13925,28 @@ class PrometheusGrafanaInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Enabled = 'Enabled' in params ? params.Enabled : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Address = 'Address' in params ? params.Address : null;
-        this.Internet = 'Internet' in params ? params.Internet : null;
-        this.AdminUser = 'AdminUser' in params ? params.AdminUser : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+        this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
 
     }
 }
@@ -13217,6 +14039,34 @@ class RemoveNodeFromNodePoolRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * GetClusterLevelPrice request structure.
+ * @class
+ */
+class GetClusterLevelPriceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The cluster model. It’s used for price query.
+         * @type {string || null}
+         */
+        this.ClusterLevel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterLevel = 'ClusterLevel' in params ? params.ClusterLevel : null;
 
     }
 }
@@ -13319,24 +14169,32 @@ class DescribeClusterAsGroupsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeEdgeClusterUpgradeInfo request structure.
+ * DescribeClusterVirtualNode response structure.
  * @class
  */
-class DescribeEdgeClusterUpgradeInfoRequest extends  AbstractModel {
+class DescribeClusterVirtualNodeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
-         * @type {string || null}
+         * List of nodes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<VirtualNode> || null}
          */
-        this.ClusterId = null;
+        this.Nodes = null;
 
         /**
-         * Target TKEEdge version
+         * Total number of nodes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.EdgeVersion = null;
+        this.RequestId = null;
 
     }
 
@@ -13347,8 +14205,17 @@ class DescribeEdgeClusterUpgradeInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.EdgeVersion = 'EdgeVersion' in params ? params.EdgeVersion : null;
+
+        if (params.Nodes) {
+            this.Nodes = new Array();
+            for (let z in params.Nodes) {
+                let obj = new VirtualNode();
+                obj.deserialize(params.Nodes[z]);
+                this.Nodes.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13541,6 +14408,41 @@ class RunMonitorServiceEnabled extends  AbstractModel {
     }
 }
 
+/**
+ * The policy to deal with resources in the cluster when the cluster is deleted.
+ * @class
+ */
+class ResourceDeleteOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Resource type, for example `CBS`
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Specifies the policy to deal with resources in the cluster when the cluster is deleted. It can be `terminate` or `retain`.
+         * @type {string || null}
+         */
+        this.DeleteMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.DeleteMode = 'DeleteMode' in params ? params.DeleteMode : null;
+
+    }
+}
+
 module.exports = {
     EnableVpcCniNetworkTypeRequest: EnableVpcCniNetworkTypeRequest,
     DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
@@ -13572,17 +14474,21 @@ module.exports = {
     ModifyClusterEndpointSPResponse: ModifyClusterEndpointSPResponse,
     NodePool: NodePool,
     InstallEdgeLogAgentResponse: InstallEdgeLogAgentResponse,
-    DescribeEdgeClusterInstancesResponse: DescribeEdgeClusterInstancesResponse,
+    DescribeClusterVirtualNodePoolsRequest: DescribeClusterVirtualNodePoolsRequest,
+    DescribeClusterVirtualNodePoolsResponse: DescribeClusterVirtualNodePoolsResponse,
     IPAddress: IPAddress,
     DescribeTKEEdgeClusterCredentialRequest: DescribeTKEEdgeClusterCredentialRequest,
     AutoUpgradeClusterLevel: AutoUpgradeClusterLevel,
     CheckEdgeClusterCIDRResponse: CheckEdgeClusterCIDRResponse,
     RunInstancesForNode: RunInstancesForNode,
+    SetNodePoolNodeProtectionRequest: SetNodePoolNodeProtectionRequest,
     DescribeTKEEdgeExternalKubeconfigRequest: DescribeTKEEdgeExternalKubeconfigRequest,
     DescribeAvailableTKEEdgeVersionRequest: DescribeAvailableTKEEdgeVersionRequest,
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
+    DescribeClusterVirtualNodeRequest: DescribeClusterVirtualNodeRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     InstanceExtraArgs: InstanceExtraArgs,
+    VirtualNode: VirtualNode,
     UpdateEdgeClusterVersionResponse: UpdateEdgeClusterVersionResponse,
     DescribeRegionsResponse: DescribeRegionsResponse,
     ClusterLevelChangeRecord: ClusterLevelChangeRecord,
@@ -13591,6 +14497,8 @@ module.exports = {
     EnableVpcCniNetworkTypeResponse: EnableVpcCniNetworkTypeResponse,
     RouteTableInfo: RouteTableInfo,
     DescribeECMInstancesRequest: DescribeECMInstancesRequest,
+    EdgeAvailableExtraArgs: EdgeAvailableExtraArgs,
+    DrainClusterVirtualNodeResponse: DrainClusterVirtualNodeResponse,
     EnableClusterDeletionProtectionResponse: EnableClusterDeletionProtectionResponse,
     ClusterAsGroup: ClusterAsGroup,
     Instance: Instance,
@@ -13603,19 +14511,20 @@ module.exports = {
     Tag: Tag,
     NodePoolOption: NodePoolOption,
     ForwardTKEEdgeApplicationRequestV3Response: ForwardTKEEdgeApplicationRequestV3Response,
+    CreateClusterVirtualNodePoolRequest: CreateClusterVirtualNodePoolRequest,
     ClusterNetworkSettings: ClusterNetworkSettings,
     DescribeImagesResponse: DescribeImagesResponse,
     AutoScalingGroupRange: AutoScalingGroupRange,
     ModifyClusterAttributeRequest: ModifyClusterAttributeRequest,
     DeleteClusterRouteResponse: DeleteClusterRouteResponse,
-    EdgeClusterAdvancedSettings: EdgeClusterAdvancedSettings,
+    DeleteClusterVirtualNodePoolResponse: DeleteClusterVirtualNodePoolResponse,
     ServiceAccountAuthenticationOptions: ServiceAccountAuthenticationOptions,
     CreateClusterEndpointVipResponse: CreateClusterEndpointVipResponse,
     ResourceUsage: ResourceUsage,
     DescribeClusterRoutesResponse: DescribeClusterRoutesResponse,
     DescribeClustersRequest: DescribeClustersRequest,
     UpgradeClusterInstancesRequest: UpgradeClusterInstancesRequest,
-    ExtensionAddon: ExtensionAddon,
+    CreateClusterVirtualNodeRequest: CreateClusterVirtualNodeRequest,
     DeletePrometheusAlertRuleRequest: DeletePrometheusAlertRuleRequest,
     DescribeResourceUsageRequest: DescribeResourceUsageRequest,
     DescribeTKEEdgeClustersRequest: DescribeTKEEdgeClustersRequest,
@@ -13641,15 +14550,17 @@ module.exports = {
     DescribeClusterStatusRequest: DescribeClusterStatusRequest,
     VersionInstance: VersionInstance,
     DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
+    VirtualNodeSpec: VirtualNodeSpec,
     DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
+    CreateClusterVirtualNodeResponse: CreateClusterVirtualNodeResponse,
     Taint: Taint,
     CheckInstancesUpgradeAbleRequest: CheckInstancesUpgradeAbleRequest,
     CreateECMInstancesResponse: CreateECMInstancesResponse,
     ModifyClusterAsGroupOptionAttributeRequest: ModifyClusterAsGroupOptionAttributeRequest,
-    ResourceDeleteOption: ResourceDeleteOption,
-    DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
+    DeleteClusterVirtualNodePoolRequest: DeleteClusterVirtualNodePoolRequest,
+    CreateClusterVirtualNodePoolResponse: CreateClusterVirtualNodePoolResponse,
     UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
     GetUpgradeInstanceProgressRequest: GetUpgradeInstanceProgressRequest,
     DescribeClusterEndpointsRequest: DescribeClusterEndpointsRequest,
@@ -13657,6 +14568,7 @@ module.exports = {
     ExistedInstance: ExistedInstance,
     CreateEdgeCVMInstancesRequest: CreateEdgeCVMInstancesRequest,
     AddNodeToNodePoolResponse: AddNodeToNodePoolResponse,
+    DrainClusterVirtualNodeRequest: DrainClusterVirtualNodeRequest,
     ModifyNodePoolInstanceTypesRequest: ModifyNodePoolInstanceTypesRequest,
     DescribeClusterLevelAttributeRequest: DescribeClusterLevelAttributeRequest,
     DisableClusterDeletionProtectionRequest: DisableClusterDeletionProtectionRequest,
@@ -13667,6 +14579,7 @@ module.exports = {
     DescribeClustersResponse: DescribeClustersResponse,
     ClusterCredential: ClusterCredential,
     DescribeVpcCniPodLimitsRequest: DescribeVpcCniPodLimitsRequest,
+    DeleteClusterVirtualNodeResponse: DeleteClusterVirtualNodeResponse,
     DescribeTKEEdgeScriptRequest: DescribeTKEEdgeScriptRequest,
     CustomDriver: CustomDriver,
     CreateEdgeCVMInstancesResponse: CreateEdgeCVMInstancesResponse,
@@ -13688,6 +14601,7 @@ module.exports = {
     PrometheusAlertRule: PrometheusAlertRule,
     DescribeResourceUsageResponse: DescribeResourceUsageResponse,
     DescribeClusterStatusResponse: DescribeClusterStatusResponse,
+    DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
     DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
     EdgeClusterInternalLB: EdgeClusterInternalLB,
     DescribeVersionsRequest: DescribeVersionsRequest,
@@ -13703,6 +14617,7 @@ module.exports = {
     DeleteTKEEdgeClusterRequest: DeleteTKEEdgeClusterRequest,
     ModifyClusterAuthenticationOptionsResponse: ModifyClusterAuthenticationOptionsResponse,
     DescribeClusterAuthenticationOptionsResponse: DescribeClusterAuthenticationOptionsResponse,
+    ExtensionAddon: ExtensionAddon,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     EnableClusterDeletionProtectionRequest: EnableClusterDeletionProtectionRequest,
     DescribePrometheusInstanceRequest: DescribePrometheusInstanceRequest,
@@ -13719,13 +14634,15 @@ module.exports = {
     ModifyClusterNodePoolRequest: ModifyClusterNodePoolRequest,
     DescribeEdgeLogSwitchesRequest: DescribeEdgeLogSwitchesRequest,
     DescribeECMInstancesResponse: DescribeECMInstancesResponse,
-    GetClusterLevelPriceRequest: GetClusterLevelPriceRequest,
+    EdgeClusterAdvancedSettings: EdgeClusterAdvancedSettings,
+    DescribeEdgeClusterUpgradeInfoRequest: DescribeEdgeClusterUpgradeInfoRequest,
+    VirtualNodePool: VirtualNodePool,
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
     DescribeTKEEdgeClusterStatusRequest: DescribeTKEEdgeClusterStatusRequest,
     CreateClusterNodePoolRequest: CreateClusterNodePoolRequest,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
-    EdgeAvailableExtraArgs: EdgeAvailableExtraArgs,
+    DescribeEdgeClusterInstancesResponse: DescribeEdgeClusterInstancesResponse,
     UpdateEdgeClusterVersionRequest: UpdateEdgeClusterVersionRequest,
     ModifyPrometheusAlertRuleRequest: ModifyPrometheusAlertRuleRequest,
     UpdateClusterVersionRequest: UpdateClusterVersionRequest,
@@ -13756,6 +14673,7 @@ module.exports = {
     AddVpcCniSubnetsResponse: AddVpcCniSubnetsResponse,
     DescribeClusterNodePoolsRequest: DescribeClusterNodePoolsRequest,
     DescribeClusterRouteTablesRequest: DescribeClusterRouteTablesRequest,
+    ModifyClusterVirtualNodePoolResponse: ModifyClusterVirtualNodePoolResponse,
     DeleteTKEEdgeClusterResponse: DeleteTKEEdgeClusterResponse,
     ExistedInstancesForNode: ExistedInstancesForNode,
     InstanceUpgradeClusterStatus: InstanceUpgradeClusterStatus,
@@ -13765,9 +14683,10 @@ module.exports = {
     DeleteECMInstancesRequest: DeleteECMInstancesRequest,
     ClusterLevelAttribute: ClusterLevelAttribute,
     DescribeRegionsRequest: DescribeRegionsRequest,
+    DeleteClusterVirtualNodeRequest: DeleteClusterVirtualNodeRequest,
     EnhancedService: EnhancedService,
     DescribeClusterNodePoolDetailRequest: DescribeClusterNodePoolDetailRequest,
-    SetNodePoolNodeProtectionRequest: SetNodePoolNodeProtectionRequest,
+    PrometheusGrafanaInfo: PrometheusGrafanaInfo,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
     DescribeClusterEndpointsResponse: DescribeClusterEndpointsResponse,
     InstanceUpgradePreCheckResult: InstanceUpgradePreCheckResult,
@@ -13800,14 +14719,16 @@ module.exports = {
     ManuallyAdded: ManuallyAdded,
     CheckEdgeClusterCIDRRequest: CheckEdgeClusterCIDRRequest,
     ModifyClusterAsGroupAttributeRequest: ModifyClusterAsGroupAttributeRequest,
-    PrometheusGrafanaInfo: PrometheusGrafanaInfo,
+    ModifyClusterVirtualNodePoolRequest: ModifyClusterVirtualNodePoolRequest,
     InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
     RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
+    GetClusterLevelPriceRequest: GetClusterLevelPriceRequest,
     NodeCountSummary: NodeCountSummary,
     DescribeClusterAsGroupsResponse: DescribeClusterAsGroupsResponse,
-    DescribeEdgeClusterUpgradeInfoRequest: DescribeEdgeClusterUpgradeInfoRequest,
+    DescribeClusterVirtualNodeResponse: DescribeClusterVirtualNodeResponse,
     EdgeCluster: EdgeCluster,
     DescribeClusterNodePoolDetailResponse: DescribeClusterNodePoolDetailResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
+    ResourceDeleteOption: ResourceDeleteOption,
 
 }

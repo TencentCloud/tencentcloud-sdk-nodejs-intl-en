@@ -26,7 +26,7 @@ const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
 const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
 const DeleteFaceRequest = models.DeleteFaceRequest;
 const HeadPose = models.HeadPose;
-const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
+const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
 const GetGroupListResponse = models.GetGroupListResponse;
 const GroupInfo = models.GroupInfo;
 const GetPersonListResponse = models.GetPersonListResponse;
@@ -39,11 +39,10 @@ const CreatePersonRequest = models.CreatePersonRequest;
 const GetGroupListRequest = models.GetGroupListRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const CreateFaceResponse = models.CreateFaceResponse;
-const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
 const DetectFaceAttributesResponse = models.DetectFaceAttributesResponse;
 const GroupCandidate = models.GroupCandidate;
 const SearchPersonsResponse = models.SearchPersonsResponse;
-const VerifyPersonRequest = models.VerifyPersonRequest;
+const DetectLiveFaceAccurateRequest = models.DetectLiveFaceAccurateRequest;
 const CompareFaceResponse = models.CompareFaceResponse;
 const PersonExDescriptionInfo = models.PersonExDescriptionInfo;
 const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
@@ -54,7 +53,6 @@ const CreateFaceRequest = models.CreateFaceRequest;
 const Mouth = models.Mouth;
 const CreateGroupRequest = models.CreateGroupRequest;
 const PersonGroupInfo = models.PersonGroupInfo;
-const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
 const GetPersonGroupInfoRequest = models.GetPersonGroupInfoRequest;
 const Result = models.Result;
 const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
@@ -77,6 +75,8 @@ const AnalyzeFaceResponse = models.AnalyzeFaceResponse;
 const GetGroupInfoRequest = models.GetGroupInfoRequest;
 const FaceDetailInfo = models.FaceDetailInfo;
 const FaceHairAttributesInfo = models.FaceHairAttributesInfo;
+const VerifyPersonRequest = models.VerifyPersonRequest;
+const DetectLiveFaceAccurateResponse = models.DetectLiveFaceAccurateResponse;
 const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
 const Point = models.Point;
 const DetectFaceRequest = models.DetectFaceRequest;
@@ -244,17 +244,6 @@ Image-based liveness detection is suitable for scenarios where the image is a se
     AnalyzeFace(req, cb) {
         let resp = new AnalyzeFaceResponse();
         this.request("AnalyzeFace", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the information of a person, including name, gender, etc. The changes of person name and gender will be synced to all the groups that contain the person.
-     * @param {ModifyPersonBaseInfoRequest} req
-     * @param {function(string, ModifyPersonBaseInfoResponse):void} cb
-     * @public
-     */
-    ModifyPersonBaseInfo(req, cb) {
-        let resp = new ModifyPersonBaseInfoResponse();
-        this.request("ModifyPersonBaseInfo", req, resp, cb);
     }
 
     /**
@@ -434,24 +423,24 @@ This API fuses the features of all face images of a person; for example, if a pe
      * This API is used to detect the position, attributes, and quality information of a face in the given image. The position information includes (x, y, w, h); the face attributes include gender, age, expression, beauty, glass, hair, mask, and pose (pitch, roll, yaw); and the face quality information includes the overall quality score, sharpness, brightness, and completeness.
 
  
-The face quality information is mainly used to evaluate the quality of the input face image. When using the Face Recognition service, we recommended evaluating the quality of the input face image first to improve the effects of subsequent processing. Application scenarios of this feature include:
+The face quality information is mainly used to evaluate the quality of the input face image. When using the Face Recognition service, we recommend evaluating the quality of the input face image first to improve the effects of subsequent processing. Application scenarios of this feature include:
 
-1. [Creating](https://intl.cloud.tencent.com/document/product/867/32793?from_cn_redirect=1)/[Adding](https://intl.cloud.tencent.com/document/product/867/32795?from_cn_redirect=1) a person in a group: this is to ensure the quality of the face information to facilitate subsequent processing.
+1. [Creating](https://intl.cloud.tencent.com/document/api/1059/36964)/[Adding](https://intl.cloud.tencent.com/document/api/1059/36966) a person in a group: This is to ensure the quality of the face information to facilitate subsequent processing.
 
-2. [Face search](https://intl.cloud.tencent.com/document/product/867/32798?from_cn_redirect=1): this is to ensure the quality of the input image to quickly find the corresponding person.
+2. [Face search](https://intl.cloud.tencent.com/document/api/1059/36977): This is to ensure the quality of the input image to quickly find the corresponding person.
 
-3. [Face verification](https://intl.cloud.tencent.com/document/product/867/32806?from_cn_redirect=1): this is to ensure the quality of the face information to avoid cases where the verification incorrectly fails.
+3. [Face verification](https://intl.cloud.tencent.com/document/api/1059/36972): This is to ensure the quality of the face information to avoid cases where the verification fails unexpectedly.
 
-4. [Face fusion](https://intl.cloud.tencent.com/product/facefusion?from_cn_redirect=1): this is to ensure the quality of the uploaded face images to improve the fusion effect.
+4. Face fusion: This is to ensure the quality of the uploaded face images to improve the fusion effect.
 
 >     
-- This API is an upgrade of [DetectFace](https://intl.cloud.tencent.com/document/product/867/44989?from_cn_redirect=1) in the following terms:
+- This API is an upgrade of [DetectFace](https://intl.cloud.tencent.com/document/api/1059/36979); specifically:
 1. This API can be used to specify the face attributes that need to be computed and returned, which avoids ineffective computation and reduces time consumption.
 2. This API supports more detailed attribute items and will continue providing new features in the future.
-Please use this API for corresponding face detection and attribute analysis.
+Use this API for corresponding face detection and attribute analysis.
 
 >     
-- Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
+- Use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the parameter `SignatureMethod` to `TC3-HMAC-SHA256`.
      * @param {DetectFaceAttributesRequest} req
      * @param {function(string, DetectFaceAttributesResponse):void} cb
      * @public
@@ -459,6 +448,21 @@ Please use this API for corresponding face detection and attribute analysis.
     DetectFaceAttributes(req, cb) {
         let resp = new DetectFaceAttributesResponse();
         this.request("DetectFaceAttributes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to detect the liveness of faces in images uploaded by users and determine whether these images are photographed.
+
+Compared with normal Image-based Liveness Detection services, this API enhances the defense capability against attacks from HD screens, printed photos, and 3D masks, as well as improves attack blocking four to five times the competing products, while maintaining high accuracy. It also supports face verification in different use cases, and satisfies the image-based liveness detection needs on mobile or PCs, making it ideal for liveness detection applications in various industries.
+
+Pay-as-you-go billing officially started for this API at 00:00, August 1, 2022. For more information, see [Billing Overview](https://intl.cloud.tencent.com/document/product/867/17640?from_cn_redirect=1).
+     * @param {DetectLiveFaceAccurateRequest} req
+     * @param {function(string, DetectLiveFaceAccurateResponse):void} cb
+     * @public
+     */
+    DetectLiveFaceAccurate(req, cb) {
+        let resp = new DetectLiveFaceAccurateResponse();
+        this.request("DetectLiveFaceAccurate", req, resp, cb);
     }
 
     /**

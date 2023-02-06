@@ -183,6 +183,41 @@ class CreateSparkAppTaskRequest extends  AbstractModel {
 }
 
 /**
+ * SuspendResumeDataEngine response structure.
+ * @class
+ */
+class SuspendResumeDataEngineResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The details of the virtual cluster.
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Configuration format
  * @class
  */
@@ -943,6 +978,41 @@ class CreateSparkAppResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SuspendResumeDataEngine request structure.
+ * @class
+ */
+class SuspendResumeDataEngineRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The name of a virtual cluster.
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * The operation type: `suspend` or `resume`.
+         * @type {string || null}
+         */
+        this.Operate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.Operate = 'Operate' in params ? params.Operate : null;
 
     }
 }
@@ -2584,6 +2654,7 @@ module.exports = {
     DescribeTaskResultResponse: DescribeTaskResultResponse,
     DescribeTasksRequest: DescribeTasksRequest,
     CreateSparkAppTaskRequest: CreateSparkAppTaskRequest,
+    SuspendResumeDataEngineResponse: SuspendResumeDataEngineResponse,
     KVPair: KVPair,
     StreamingStatistics: StreamingStatistics,
     Task: Task,
@@ -2596,6 +2667,7 @@ module.exports = {
     CreateTaskResponse: CreateTaskResponse,
     DeleteSparkAppResponse: DeleteSparkAppResponse,
     CreateSparkAppResponse: CreateSparkAppResponse,
+    SuspendResumeDataEngineRequest: SuspendResumeDataEngineRequest,
     TaskResultInfo: TaskResultInfo,
     DescribeSparkAppJobsResponse: DescribeSparkAppJobsResponse,
     TasksOverview: TasksOverview,

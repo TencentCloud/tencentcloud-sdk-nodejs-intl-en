@@ -19,6 +19,7 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const CreateSparkAppTaskRequest = models.CreateSparkAppTaskRequest;
+const SuspendResumeDataEngineResponse = models.SuspendResumeDataEngineResponse;
 const KVPair = models.KVPair;
 const StreamingStatistics = models.StreamingStatistics;
 const Task = models.Task;
@@ -31,6 +32,7 @@ const CreateTasksRequest = models.CreateTasksRequest;
 const CreateTaskResponse = models.CreateTaskResponse;
 const DeleteSparkAppResponse = models.DeleteSparkAppResponse;
 const CreateSparkAppResponse = models.CreateSparkAppResponse;
+const SuspendResumeDataEngineRequest = models.SuspendResumeDataEngineRequest;
 const TaskResultInfo = models.TaskResultInfo;
 const DescribeSparkAppJobsResponse = models.DescribeSparkAppJobsResponse;
 const TasksOverview = models.TasksOverview;
@@ -72,6 +74,17 @@ class DlcClient extends AbstractClient {
     CreateTask(req, cb) {
         let resp = new CreateTaskResponse();
         this.request("CreateTask", req, resp, cb);
+    }
+
+    /**
+     * This API is used to suspend or resume a data engine.
+     * @param {SuspendResumeDataEngineRequest} req
+     * @param {function(string, SuspendResumeDataEngineResponse):void} cb
+     * @public
+     */
+    SuspendResumeDataEngine(req, cb) {
+        let resp = new SuspendResumeDataEngineResponse();
+        this.request("SuspendResumeDataEngine", req, resp, cb);
     }
 
     /**

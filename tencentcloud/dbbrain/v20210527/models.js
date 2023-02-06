@@ -1057,7 +1057,7 @@ class DescribeMySqlProcessListResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Access source details of the real-time session
  * @class
  */
 class SessionItem extends  AbstractModel {
@@ -1065,19 +1065,19 @@ class SessionItem extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Access source
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
-         * 
+         * The number of active connections from the current access source
          * @type {string || null}
          */
         this.ActiveConn = null;
 
         /**
-         * 
+         * The total number of connections from the current access source
          * @type {number || null}
          */
         this.AllConn = null;
@@ -1668,19 +1668,19 @@ class ProcessStatistic extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Array of session details
          * @type {Array.<SessionItem> || null}
          */
         this.Items = null;
 
         /**
-         * 
+         * The total number of connections
          * @type {number || null}
          */
         this.AllConnSum = null;
 
         /**
-         * 
+         * The total number of active connections
          * @type {number || null}
          */
         this.ActiveConnSum = null;
@@ -4710,7 +4710,7 @@ class DescribeProxyProcessStatisticsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * `ProxyID` under the current instance.
+         * The proxy ID you want to query under the instance
          * @type {string || null}
          */
         this.InstanceProxyId = null;

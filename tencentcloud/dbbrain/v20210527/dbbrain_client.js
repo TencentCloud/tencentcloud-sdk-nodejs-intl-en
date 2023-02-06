@@ -386,7 +386,7 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the session statistics of the current instance. Note that this API can be called only in certain environments.
+     * This API is used to get the session statistics of a single proxy under the current instance, and can only be called in particular environments.
      * @param {DescribeProxyProcessStatisticsRequest} req
      * @param {function(string, DescribeProxyProcessStatisticsResponse):void} cb
      * @public

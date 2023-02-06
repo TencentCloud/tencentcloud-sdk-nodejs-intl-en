@@ -17,13 +17,14 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyInstanceTagResponse = models.ModifyInstanceTagResponse;
-const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
+const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
 const DescribeProxyConnectionPoolConfRequest = models.DescribeProxyConnectionPoolConfRequest;
 const DeviceDiskInfo = models.DeviceDiskInfo;
 const CdbZoneSellConf = models.CdbZoneSellConf;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
+const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const ParamRecord = models.ParamRecord;
 const ModifyAccountMaxUserConnectionsResponse = models.ModifyAccountMaxUserConnectionsResponse;
@@ -85,7 +86,7 @@ const BackupSummaryItem = models.BackupSummaryItem;
 const SwitchForUpgradeRequest = models.SwitchForUpgradeRequest;
 const ModifyBackupDownloadRestrictionRequest = models.ModifyBackupDownloadRestrictionRequest;
 const CreateParamTemplateResponse = models.CreateParamTemplateResponse;
-const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
+const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
 const DescribeCloneListResponse = models.DescribeCloneListResponse;
 const ModifyAccountMaxUserConnectionsRequest = models.ModifyAccountMaxUserConnectionsRequest;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
@@ -103,7 +104,7 @@ const ModifyCDBProxyDescResponse = models.ModifyCDBProxyDescResponse;
 const ImportRecord = models.ImportRecord;
 const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
 const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResponse;
-const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
+const CreateAccountsRequest = models.CreateAccountsRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const RemoteBackupInfo = models.RemoteBackupInfo;
 const RWInstanceInfo = models.RWInstanceInfo;
@@ -119,6 +120,7 @@ const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const ModifyDBInstanceVipVportResponse = models.ModifyDBInstanceVipVportResponse;
 const CloseCDBProxyRequest = models.CloseCDBProxyRequest;
 const DescribeDBSwitchRecordsResponse = models.DescribeDBSwitchRecordsResponse;
+const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
 const ModifyCDBProxyConnectionPoolResponse = models.ModifyCDBProxyConnectionPoolResponse;
 const SlowLogInfo = models.SlowLogInfo;
 const RollbackTableName = models.RollbackTableName;
@@ -128,12 +130,13 @@ const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGrou
 const CdbRegionSellConf = models.CdbRegionSellConf;
 const UploadInfo = models.UploadInfo;
 const ModifyLocalBinlogConfigResponse = models.ModifyLocalBinlogConfigResponse;
-const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
+const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const ProxyNodeInfo = models.ProxyNodeInfo;
 const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
 const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
+const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const ModifyInstanceTagRequest = models.ModifyInstanceTagRequest;
 const DescribeDBInstanceCharsetResponse = models.DescribeDBInstanceCharsetResponse;
 const DeleteAccountsResponse = models.DeleteAccountsResponse;
@@ -165,7 +168,7 @@ const DescribeTimeWindowResponse = models.DescribeTimeWindowResponse;
 const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
 const BackupItem = models.BackupItem;
 const ModifyCDBProxyVipVPortRequest = models.ModifyCDBProxyVipVPortRequest;
-const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
+const AuditFilter = models.AuditFilter;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
 const DescribeRollbackTaskDetailRequest = models.DescribeRollbackTaskDetailRequest;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
@@ -246,7 +249,7 @@ const DescribeAuditPoliciesRequest = models.DescribeAuditPoliciesRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
 const InstanceRebootTime = models.InstanceRebootTime;
 const ModifyInstancePasswordComplexityRequest = models.ModifyInstancePasswordComplexityRequest;
-const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
+const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const ModifyParamTemplateRequest = models.ModifyParamTemplateRequest;
 const AddTimeWindowResponse = models.AddTimeWindowResponse;
@@ -258,7 +261,7 @@ const ModifyCDBProxyConnectionPoolRequest = models.ModifyCDBProxyConnectionPoolR
 const ModifyTimeWindowResponse = models.ModifyTimeWindowResponse;
 const InitDBInstancesRequest = models.InitDBInstancesRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
-const CreateAccountsRequest = models.CreateAccountsRequest;
+const CreateParamTemplateRequest = models.CreateParamTemplateRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
 const ModifyTimeWindowRequest = models.ModifyTimeWindowRequest;
@@ -283,6 +286,7 @@ const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const DescribeRemoteBackupConfigRequest = models.DescribeRemoteBackupConfigRequest;
+const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeDBImportRecordsRequest = models.DescribeDBImportRecordsRequest;
 const CreateDBImportJobResponse = models.CreateDBImportJobResponse;
 const DescribeTagsOfInstanceIdsRequest = models.DescribeTagsOfInstanceIdsRequest;
@@ -305,7 +309,7 @@ const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsReque
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
 const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
 const ZoneConf = models.ZoneConf;
-const AuditFilter = models.AuditFilter;
+const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
 const Rule = models.Rule;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
@@ -890,6 +894,17 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
+     * This API is used to configure the connection pool of database proxy. You can use the `DescribeProxyConnectionPoolConf` API to query the supported connection pool configurations.
+     * @param {ModifyCDBProxyConnectionPoolRequest} req
+     * @param {function(string, ModifyCDBProxyConnectionPoolResponse):void} cb
+     * @public
+     */
+    ModifyCDBProxyConnectionPool(req, cb) {
+        let resp = new ModifyCDBProxyConnectionPoolResponse();
+        this.request("ModifyCDBProxyConnectionPool", req, resp, cb);
+    }
+
+    /**
      * This API (DescribeSlowLogs) is used to query the slow logs of a TencentDB instance.
      * @param {DescribeSlowLogsRequest} req
      * @param {function(string, DescribeSlowLogsResponse):void} cb
@@ -912,14 +927,23 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API is used to configure the connection pool of database proxy. You can use the `DescribeProxyConnectionPoolConf` API to query the supported connection pool configurations.
-     * @param {ModifyCDBProxyConnectionPoolRequest} req
-     * @param {function(string, ModifyCDBProxyConnectionPoolResponse):void} cb
+     * This API is used to create a monthly subscribed TencentDB instance (which can be a source, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, purchased duration, and quantity.
+
+This is an asynchronous API. You can also use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance details. If the output parameter `Status` is `1` and the output parameter `TaskStatus` is `0`, the instance has been successfully delivered.
+
+1. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the purchasable instance specifications, and then use the [DescribeDBPrice](https://intl.cloud.tencent.com/document/api/236/18566?from_cn_redirect=1) API to query the prices of the purchasable instances.
+2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months.
+3. MySQL v5.5, v5.6, v5.7, and v8.0 are supported.
+4. Source instances, read-only instances, and disaster recovery instances can be created.
+5. If `Port`, `ParamList`, or `Password` is specified in the input parameters, the instance (excluding basic instances) will be initialized.
+6. If `Port`, `ParamTemplateId`, or `AlarmPolicyList` is specified in the input parameters, you need to update your SDK to the latest version.
+     * @param {CreateDBInstanceRequest} req
+     * @param {function(string, CreateDBInstanceResponse):void} cb
      * @public
      */
-    ModifyCDBProxyConnectionPool(req, cb) {
-        let resp = new ModifyCDBProxyConnectionPoolResponse();
-        this.request("ModifyCDBProxyConnectionPool", req, resp, cb);
+    CreateDBInstance(req, cb) {
+        let resp = new CreateDBInstanceResponse();
+        this.request("CreateDBInstance", req, resp, cb);
     }
 
     /**
@@ -1467,6 +1491,17 @@ Note: To query prices in a specific region, you need to use the access point of 
     SwitchCDBProxy(req, cb) {
         let resp = new SwitchCDBProxyResponse();
         this.request("SwitchCDBProxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to renew a monthly subscribed TencentDB instance, and a pay-as-you-go instance can be renewed as a monthly subscribed one by this API.
+     * @param {RenewDBInstanceRequest} req
+     * @param {function(string, RenewDBInstanceResponse):void} cb
+     * @public
+     */
+    RenewDBInstance(req, cb) {
+        let resp = new RenewDBInstanceResponse();
+        this.request("RenewDBInstance", req, resp, cb);
     }
 
     /**

@@ -56,7 +56,6 @@ const DeleteRepositoryResponse = models.DeleteRepositoryResponse;
 const DescribeInstanceAllNamespacesRequest = models.DescribeInstanceAllNamespacesRequest;
 const DownloadHelmChartResponse = models.DownloadHelmChartResponse;
 const ManageReplicationRequest = models.ManageReplicationRequest;
-const CreateSecurityPoliciesRequest = models.CreateSecurityPoliciesRequest;
 const DeleteWebhookTriggerResponse = models.DeleteWebhookTriggerResponse;
 const DescribeTagRetentionExecutionTaskResponse = models.DescribeTagRetentionExecutionTaskResponse;
 const ModifySecurityPolicyRequest = models.ModifySecurityPolicyRequest;
@@ -121,7 +120,6 @@ const DeleteSecurityPolicyRequest = models.DeleteSecurityPolicyRequest;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const DescribeInstanceTokenRequest = models.DescribeInstanceTokenRequest;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
-const CreateSecurityPoliciesResponse = models.CreateSecurityPoliciesResponse;
 const DeleteReplicationInstanceResponse = models.DeleteReplicationInstanceResponse;
 const GCJobInfo = models.GCJobInfo;
 const Registry = models.Registry;
@@ -841,17 +839,6 @@ class TcrClient extends AbstractClient {
     DeleteMultipleSecurityPolicy(req, cb) {
         let resp = new DeleteMultipleSecurityPolicyResponse();
         this.request("DeleteMultipleSecurityPolicy", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create public network access allowlist policies for an instance.
-     * @param {CreateSecurityPoliciesRequest} req
-     * @param {function(string, CreateSecurityPoliciesResponse):void} cb
-     * @public
-     */
-    CreateSecurityPolicies(req, cb) {
-        let resp = new CreateSecurityPoliciesResponse();
-        this.request("CreateSecurityPolicies", req, resp, cb);
     }
 
     /**

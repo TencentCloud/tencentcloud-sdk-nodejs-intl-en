@@ -68,6 +68,7 @@ const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse
 const CreatePartitionResponse = models.CreatePartitionResponse;
 const ClusterInfo = models.ClusterInfo;
 const DeleteUserResponse = models.DeleteUserResponse;
+const DescribeTopicProduceConnectionRequest = models.DescribeTopicProduceConnectionRequest;
 const CreateAclRequest = models.CreateAclRequest;
 const DescribeTopicSyncReplicaResponse = models.DescribeTopicSyncReplicaResponse;
 const DescribeAppInfoRequest = models.DescribeAppInfoRequest;
@@ -78,6 +79,7 @@ const ConsumerGroupResponse = models.ConsumerGroupResponse;
 const CreateTopicIpWhiteListResponse = models.CreateTopicIpWhiteListResponse;
 const GroupOffsetTopic = models.GroupOffsetTopic;
 const ModifyGroupOffsetsResponse = models.ModifyGroupOffsetsResponse;
+const DescribeConnectInfoResultDTO = models.DescribeConnectInfoResultDTO;
 const Partition = models.Partition;
 const CreateAclResponse = models.CreateAclResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
@@ -117,6 +119,7 @@ const ModifyInstanceAttributesRequest = models.ModifyInstanceAttributesRequest;
 const DescribeRegionResponse = models.DescribeRegionResponse;
 const DescribeConsumerGroupRequest = models.DescribeConsumerGroupRequest;
 const VipEntity = models.VipEntity;
+const DescribeTopicProduceConnectionResponse = models.DescribeTopicProduceConnectionResponse;
 const ConsumerGroupTopic = models.ConsumerGroupTopic;
 const User = models.User;
 const GroupOffsetPartition = models.GroupOffsetPartition;
@@ -605,6 +608,17 @@ class CkafkaClient extends AbstractClient {
     DescribeGroupOffsets(req, cb) {
         let resp = new DescribeGroupOffsetsResponse();
         this.request("DescribeGroupOffsets", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the connection information of the topic producer.
+     * @param {DescribeTopicProduceConnectionRequest} req
+     * @param {function(string, DescribeTopicProduceConnectionResponse):void} cb
+     * @public
+     */
+    DescribeTopicProduceConnection(req, cb) {
+        let resp = new DescribeTopicProduceConnectionResponse();
+        this.request("DescribeTopicProduceConnection", req, resp, cb);
     }
 
     /**

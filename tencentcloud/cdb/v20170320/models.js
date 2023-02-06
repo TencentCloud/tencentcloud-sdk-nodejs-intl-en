@@ -45,18 +45,240 @@ class ModifyInstanceTagResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceProject response structure.
+ * CreateDBInstance request structure.
  * @class
  */
-class ModifyDBInstanceProjectResponse extends  AbstractModel {
+class CreateDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance memory size in MB. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported memory specifications.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance disk size in GB. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported disk specifications.
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * Instance validity period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Number of instances. Value range: 1-100. Default value: `1`.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * AZ information. The system will automatically select an AZ by default. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported AZs.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Zone = null;
+
+        /**
+         * VPC ID. If this parameter is not passed in, the basic network will be selected by default. You can use the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API to query the VPCs.
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. You can use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Project ID. If this is left empty, the default project will be used. If read-only instances or disaster recovery instances are purchased, the project ID will be the same as the source instance ID by default.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Custom port. Value range: 1024-65535.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * Instance typeA. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance).
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
+
+        /**
+         * Instance ID. It is required when purchasing a read-only instance, which is the same as the source instance ID. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance ID.
+         * @type {string || null}
+         */
+        this.MasterInstanceId = null;
+
+        /**
+         * MySQL version. Valid values: `5.5`, `5.6`, `5.7`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported versions.
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * The root account password. It can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing a replica instance and is invalid for read-only or disaster recovery instances.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Data replication mode. Valid values: `0` (async replication), `1` (semi-sync replication), `2` (strong sync replication). Default value: `0`.
+         * @type {number || null}
+         */
+        this.ProtectMode = null;
+
+        /**
+         * Multi-AZ or single-AZ. Valid values: `0` (single-AZ), `1` (multi-AZ). Default value: `0`.
+         * @type {number || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * Information of replica AZ 1, which is the `Zone` value by default.
+         * @type {string || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * List of parameters in the format of ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can use the [DescribeDefaultParams](https://intl.cloud.tencent.com/document/api/236/32662?from_cn_redirect=1) API to query the configurable parameters.
+         * @type {Array.<ParamInfo> || null}
+         */
+        this.ParamList = null;
+
+        /**
+         * Information of replica AZ 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
+         * @type {string || null}
+         */
+        this.BackupZone = null;
+
+        /**
+         * Auto-renewal flag. Valid values: `0` (auto-renewal not enabled), `1` (auto-renewal enabled).
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Region information of the source instance, which is required when purchasing a read-only or disaster recovery instance.
+         * @type {string || null}
+         */
+        this.MasterRegion = null;
+
+        /**
+         * Security group parameter. You can use the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API to query the security group details of a project.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroup = null;
+
+        /**
+         * Read-only instance parameter. This parameter must be passed in when purchasing read-only instances.
+         * @type {RoGroup || null}
+         */
+        this.RoGroup = null;
+
+        /**
+         * Instance name. For multiple instances purchased at one time, they will be distinguished by the name suffix number, such as instnaceName=db and goodsNum=3, and their instance names are db1, db2, and db3, respectively.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance tag information
+         * @type {Array.<TagInfo> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * Placement group ID
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
+        /**
+         * A string unique in 48 hours, which is supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * Instance isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * Parameter template ID
+         * @type {number || null}
+         */
+        this.ParamTemplateId = null;
+
+        /**
+         * Array of alarm policy IDs, which is `OriginId` obtained through the `DescribeAlarmPolicy` API.
+         * @type {Array.<number> || null}
+         */
+        this.AlarmPolicyList = null;
+
+        /**
+         * The number of nodes of the instance. To purchase a read-only instance or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
+         * @type {number || null}
+         */
+        this.InstanceNodes = null;
+
+        /**
+         * The number of the instance CPU cores. If this parameter is left empty, it will be subject to the `Memory` value.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoSyncFlag = null;
+
+        /**
+         * Financial cage ID.
+         * @type {string || null}
+         */
+        this.CageId = null;
+
+        /**
+         * Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+         * @type {string || null}
+         */
+        this.ParamTemplateType = null;
+
+        /**
+         * The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
+         * @type {Array.<string> || null}
+         */
+        this.AlarmPolicyIdList = null;
+
+        /**
+         * Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+         * @type {string || null}
+         */
+        this.EngineType = null;
+
+        /**
+         * The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
+         * @type {Array.<string> || null}
+         */
+        this.Vips = null;
 
     }
 
@@ -67,7 +289,65 @@ class ModifyDBInstanceProjectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.MasterInstanceId = 'MasterInstanceId' in params ? params.MasterInstanceId : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new ParamInfo();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
+            }
+        }
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.MasterRegion = 'MasterRegion' in params ? params.MasterRegion : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
+
+        if (params.RoGroup) {
+            let obj = new RoGroup();
+            obj.deserialize(params.RoGroup)
+            this.RoGroup = obj;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.AlarmPolicyList = 'AlarmPolicyList' in params ? params.AlarmPolicyList : null;
+        this.InstanceNodes = 'InstanceNodes' in params ? params.InstanceNodes : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.AutoSyncFlag = 'AutoSyncFlag' in params ? params.AutoSyncFlag : null;
+        this.CageId = 'CageId' in params ? params.CageId : null;
+        this.ParamTemplateType = 'ParamTemplateType' in params ? params.ParamTemplateType : null;
+        this.AlarmPolicyIdList = 'AlarmPolicyIdList' in params ? params.AlarmPolicyIdList : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.Vips = 'Vips' in params ? params.Vips : null;
 
     }
 }
@@ -551,6 +831,139 @@ class DescribeDatabasesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.DatabaseRegexp = 'DatabaseRegexp' in params ? params.DatabaseRegexp : null;
+
+    }
+}
+
+/**
+ * UpgradeDBInstance request structure.
+ * @class
+ */
+class UpgradeDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `cdb-c1nl9rpv` or `cdbro-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in output parameters.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Memory size in MB after upgrade. To ensure that the `Memory` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the specifications of the memory that can be upgraded to.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Disk size in GB after upgrade. To ensure that the `Volume` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the specifications of the disk that can be upgraded to.
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
+         * @type {number || null}
+         */
+        this.ProtectMode = null;
+
+        /**
+         * Deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
+         * @type {number || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * AZ information of secondary database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading primary instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the supported AZs.
+         * @type {string || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * Version of primary instance database engine. Valid values: 5.5, 5.6, 5.7.
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * Mode of switch to new instance. Valid values: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) API to trigger the process.
+         * @type {number || null}
+         */
+        this.WaitSwitch = null;
+
+        /**
+         * AZ information of secondary database 2, which is empty by default. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
+         * @type {string || null}
+         */
+        this.BackupZone = null;
+
+        /**
+         * Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
+
+        /**
+         * The resource isolation type after the instance is upgraded. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). If this parameter is left empty, the resource isolation type will be the same as the original one.
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+         * @type {number || null}
+         */
+        this.FastUpgrade = null;
+
+        /**
+         * Delay threshold. Value range: 1-10. Default value: `10`.
+         * @type {number || null}
+         */
+        this.MaxDelayTime = null;
+
+        /**
+         * Whether to migrate the source node across AZs. Valid values: `0` (no), `1`(yes). Default value: `0`. If it is `1`, you can modify the source node AZ.
+         * @type {number || null}
+         */
+        this.CrossCluster = null;
+
+        /**
+         * New AZ of the source node. This field is only valid when `CrossCluster` is `1`. Only migration across AZs in the same region is supported.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.FastUpgrade = 'FastUpgrade' in params ? params.FastUpgrade : null;
+        this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
+        this.CrossCluster = 'CrossCluster' in params ? params.CrossCluster : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -3596,30 +4009,42 @@ class CreateParamTemplateResponse extends  AbstractModel {
 }
 
 /**
- * CreateDBInstanceHour response structure.
+ * DescribeBackupSummaries request structure.
  * @class
  */
-class CreateDBInstanceHourResponse extends  AbstractModel {
+class DescribeBackupSummariesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Short order ID.
-         * @type {Array.<string> || null}
-         */
-        this.DealIds = null;
-
-        /**
-         * Instance ID list
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * TencentDB product type to be queried. Currently, only `mysql` is supported.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Product = null;
+
+        /**
+         * Paginated query offset. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum entries returned per page, which ranges from 1 to 100. Default value: `20`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sorting criterion. Valid values: `BackupVolume` (backup capacity), `DataBackupVolume` (data backup capacity), `BinlogBackupVolume` (log backup capacity), `AutoBackupVolume` (automatic backup capacity), `ManualBackupVolume` (manual backup capacity). Default value: `BackupVolume`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `ASC` (ascending), `DESC` (descending). Default value: `ASC`.
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
 
     }
 
@@ -3630,9 +4055,11 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealIds = 'DealIds' in params ? params.DealIds : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -4655,54 +5082,42 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * CreateParamTemplate request structure.
+ * CreateAccounts request structure.
  * @class
  */
-class CreateParamTemplateRequest extends  AbstractModel {
+class CreateAccountsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter template name.
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
          * @type {string || null}
          */
-        this.Name = null;
+        this.InstanceId = null;
 
         /**
-         * Parameter template description.
+         * List of TencentDB accounts
+         * @type {Array.<Account> || null}
+         */
+        this.Accounts = null;
+
+        /**
+         * Password of the new account
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Remarks
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * MySQL version number.
-         * @type {string || null}
-         */
-        this.EngineVersion = null;
-
-        /**
-         * Source parameter template ID.
+         * Maximum connections of the new account. Default value: `10240`. Maximum value: `10240`.
          * @type {number || null}
          */
-        this.TemplateId = null;
-
-        /**
-         * List of parameters.
-         * @type {Array.<Parameter> || null}
-         */
-        this.ParamList = null;
-
-        /**
-         * Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
-         * @type {string || null}
-         */
-        this.TemplateType = null;
-
-        /**
-         * Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
-         * @type {string || null}
-         */
-        this.EngineType = null;
+        this.MaxUserConnections = null;
 
     }
 
@@ -4713,21 +5128,19 @@ class CreateParamTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
-        if (params.ParamList) {
-            this.ParamList = new Array();
-            for (let z in params.ParamList) {
-                let obj = new Parameter();
-                obj.deserialize(params.ParamList[z]);
-                this.ParamList.push(obj);
+        if (params.Accounts) {
+            this.Accounts = new Array();
+            for (let z in params.Accounts) {
+                let obj = new Account();
+                obj.deserialize(params.Accounts[z]);
+                this.Accounts.push(obj);
             }
         }
-        this.TemplateType = 'TemplateType' in params ? params.TemplateType : null;
-        this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
 
     }
 }
@@ -5901,6 +6314,18 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * Database proxy IP
+         * @type {Array.<string> || null}
+         */
+        this.ProxyVips = null;
+
+        /**
+         * Database proxy ID
+         * @type {Array.<string> || null}
+         */
+        this.ProxyIds = null;
+
     }
 
     /**
@@ -5950,6 +6375,8 @@ class DescribeDBInstancesRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.ProxyVips = 'ProxyVips' in params ? params.ProxyVips : null;
+        this.ProxyIds = 'ProxyIds' in params ? params.ProxyIds : null;
 
     }
 }
@@ -6113,6 +6540,48 @@ class DescribeDBSwitchRecordsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RenewDBInstance request structure.
+ * @class
+ */
+class RenewDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance to be renewed in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed in the TencentDB console. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Renewal period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * To renew a pay-as-you-go instance to a monthly subscribed one, you need to set this parameter to `PREPAID`.
+         * @type {string || null}
+         */
+        this.ModifyPayType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.ModifyPayType = 'ModifyPayType' in params ? params.ModifyPayType : null;
 
     }
 }
@@ -6530,42 +6999,30 @@ class ModifyLocalBinlogConfigResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBackupSummaries request structure.
+ * CreateDBInstanceHour response structure.
  * @class
  */
-class DescribeBackupSummariesRequest extends  AbstractModel {
+class CreateDBInstanceHourResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TencentDB product type to be queried. Currently, only `mysql` is supported.
+         * Short order ID.
+         * @type {Array.<string> || null}
+         */
+        this.DealIds = null;
+
+        /**
+         * Instance ID list
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Product = null;
-
-        /**
-         * Paginated query offset. Default value: `0`.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum entries returned per page, which ranges from 1 to 100. Default value: `20`.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Sorting criterion. Valid values: `BackupVolume` (backup capacity), `DataBackupVolume` (data backup capacity), `BinlogBackupVolume` (log backup capacity), `AutoBackupVolume` (automatic backup capacity), `ManualBackupVolume` (manual backup capacity). Default value: `BackupVolume`.
-         * @type {string || null}
-         */
-        this.OrderBy = null;
-
-        /**
-         * Sorting order. Valid values: `ASC` (ascending), `DESC` (descending). Default value: `ASC`.
-         * @type {string || null}
-         */
-        this.OrderDirection = null;
+        this.RequestId = null;
 
     }
 
@@ -6576,11 +7033,9 @@ class DescribeBackupSummariesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Product = 'Product' in params ? params.Product : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6789,6 +7244,48 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.Info = 'Info' in params ? params.Info : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateDBInstance response structure.
+ * @class
+ */
+class CreateDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Short order ID
+         * @type {Array.<string> || null}
+         */
+        this.DealIds = null;
+
+        /**
+         * List of instance IDs
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8119,24 +8616,37 @@ class ModifyCDBProxyVipVPortRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCDBProxy request structure.
+ * Audit rule filters
  * @class
  */
-class DescribeCDBProxyRequest extends  AbstractModel {
+class AuditFilter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Filter parameter names. Valid values:
+SrcIp: Client IP;
+User: Database account;
+DB: Database name.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Type = null;
 
         /**
-         * Proxy group ID
+         * Filter match type. Valid value:
+`INC`: Include;
+`EXC`: Exclude;
+`EQ`: Equal to;
+`NEQ`: Not equal to.
          * @type {string || null}
          */
-        this.ProxyGroupId = null;
+        this.Compare = null;
+
+        /**
+         * Filter match value
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -8147,8 +8657,9 @@ class DescribeCDBProxyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Compare = 'Compare' in params ? params.Compare : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -12460,108 +12971,24 @@ class ModifyInstancePasswordComplexityRequest extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstance request structure.
+ * RenewDBInstance response structure.
  * @class
  */
-class UpgradeDBInstanceRequest extends  AbstractModel {
+class RenewDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of `cdb-c1nl9rpv` or `cdbro-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in output parameters.
+         * Order ID
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.DealId = null;
 
         /**
-         * Memory size in MB after upgrade. To ensure that the `Memory` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the specifications of the memory that can be upgraded to.
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Disk size in GB after upgrade. To ensure that the `Volume` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the specifications of the disk that can be upgraded to.
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-        /**
-         * Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
-         * @type {number || null}
-         */
-        this.ProtectMode = null;
-
-        /**
-         * Deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
-         * @type {number || null}
-         */
-        this.DeployMode = null;
-
-        /**
-         * AZ information of secondary database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading primary instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the supported AZs.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.SlaveZone = null;
-
-        /**
-         * Version of primary instance database engine. Valid values: 5.5, 5.6, 5.7.
-         * @type {string || null}
-         */
-        this.EngineVersion = null;
-
-        /**
-         * Mode of switch to new instance. Valid values: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) API to trigger the process.
-         * @type {number || null}
-         */
-        this.WaitSwitch = null;
-
-        /**
-         * AZ information of secondary database 2, which is empty by default. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
-         * @type {string || null}
-         */
-        this.BackupZone = null;
-
-        /**
-         * Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
-         * @type {string || null}
-         */
-        this.InstanceRole = null;
-
-        /**
-         * The resource isolation type after the instance is upgraded. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). If this parameter is left empty, the resource isolation type will be the same as the original one.
-         * @type {string || null}
-         */
-        this.DeviceType = null;
-
-        /**
-         * The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
-         * @type {number || null}
-         */
-        this.FastUpgrade = null;
-
-        /**
-         * Delay threshold. Value range: 1-10. Default value: `10`.
-         * @type {number || null}
-         */
-        this.MaxDelayTime = null;
-
-        /**
-         * Whether to migrate the source node across AZs. Valid values: `0` (no), `1`(yes). Default value: `0`. If it is `1`, you can modify the source node AZ.
-         * @type {number || null}
-         */
-        this.CrossCluster = null;
-
-        /**
-         * New AZ of the source node. This field is only valid when `CrossCluster` is `1`. Only migration across AZs in the same region is supported.
-         * @type {string || null}
-         */
-        this.ZoneId = null;
+        this.RequestId = null;
 
     }
 
@@ -12572,22 +12999,8 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
-        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
-        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
-        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
-        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
-        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
-        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.FastUpgrade = 'FastUpgrade' in params ? params.FastUpgrade : null;
-        this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
-        this.CrossCluster = 'CrossCluster' in params ? params.CrossCluster : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13169,42 +13582,54 @@ class ModifyAccountDescriptionResponse extends  AbstractModel {
 }
 
 /**
- * CreateAccounts request structure.
+ * CreateParamTemplate request structure.
  * @class
  */
-class CreateAccountsRequest extends  AbstractModel {
+class CreateParamTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+         * Parameter template name.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Name = null;
 
         /**
-         * List of TencentDB accounts
-         * @type {Array.<Account> || null}
-         */
-        this.Accounts = null;
-
-        /**
-         * Password of the new account
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * Remarks
+         * Parameter template description.
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * Maximum connections of the new account. Default value: `10240`. Maximum value: `10240`.
+         * MySQL version number.
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * Source parameter template ID.
          * @type {number || null}
          */
-        this.MaxUserConnections = null;
+        this.TemplateId = null;
+
+        /**
+         * List of parameters.
+         * @type {Array.<Parameter> || null}
+         */
+        this.ParamList = null;
+
+        /**
+         * Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+         * @type {string || null}
+         */
+        this.TemplateType = null;
+
+        /**
+         * Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+         * @type {string || null}
+         */
+        this.EngineType = null;
 
     }
 
@@ -13215,19 +13640,21 @@ class CreateAccountsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
-        if (params.Accounts) {
-            this.Accounts = new Array();
-            for (let z in params.Accounts) {
-                let obj = new Account();
-                obj.deserialize(params.Accounts[z]);
-                this.Accounts.push(obj);
+        if (params.ParamList) {
+            this.ParamList = new Array();
+            for (let z in params.ParamList) {
+                let obj = new Parameter();
+                obj.deserialize(params.ParamList[z]);
+                this.ParamList.push(obj);
             }
         }
-        this.Password = 'Password' in params ? params.Password : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
+        this.TemplateType = 'TemplateType' in params ? params.TemplateType : null;
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
 
     }
 }
@@ -13656,6 +14083,24 @@ class CommonTimeWindow extends  AbstractModel {
          */
         this.Sunday = null;
 
+        /**
+         * Non-archive backup retention policy. Valid values: `weekly` (back up by week), monthly (back up by month), default value: `weekly`.
+         * @type {string || null}
+         */
+        this.BackupPeriodStrategy = null;
+
+        /**
+         * If `BackupPeriodStrategy` is `monthly`, you need to pass in the specific backup dates. The time interval between any two adjacent dates cannot exceed 2 days, for example, [1,4,7,9,11,14,17,19,22,25,28,30,31].
+         * @type {Array.<number> || null}
+         */
+        this.Days = null;
+
+        /**
+         * Backup time by month in the format of 02:00–06:00, which is required when `BackupPeriodStrategy` is `monthly`.
+         * @type {string || null}
+         */
+        this.BackupPeriodTime = null;
+
     }
 
     /**
@@ -13672,6 +14117,9 @@ class CommonTimeWindow extends  AbstractModel {
         this.Friday = 'Friday' in params ? params.Friday : null;
         this.Saturday = 'Saturday' in params ? params.Saturday : null;
         this.Sunday = 'Sunday' in params ? params.Sunday : null;
+        this.BackupPeriodStrategy = 'BackupPeriodStrategy' in params ? params.BackupPeriodStrategy : null;
+        this.Days = 'Days' in params ? params.Days : null;
+        this.BackupPeriodTime = 'BackupPeriodTime' in params ? params.BackupPeriodTime : null;
 
     }
 }
@@ -14497,6 +14945,34 @@ class DescribeRemoteBackupConfigRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceProject response structure.
+ * @class
+ */
+class ModifyDBInstanceProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15435,37 +15911,24 @@ class ZoneConf extends  AbstractModel {
 }
 
 /**
- * Audit rule filters
+ * DescribeCDBProxy request structure.
  * @class
  */
-class AuditFilter extends  AbstractModel {
+class DescribeCDBProxyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter parameter names. Valid values:
-SrcIp: Client IP;
-User: Database account;
-DB: Database name.
+         * Instance ID
          * @type {string || null}
          */
-        this.Type = null;
+        this.InstanceId = null;
 
         /**
-         * Filter match type. Valid value:
-`INC`: Include;
-`EXC`: Exclude;
-`EQ`: Equal to;
-`NEQ`: Not equal to.
+         * Proxy group ID
          * @type {string || null}
          */
-        this.Compare = null;
-
-        /**
-         * Filter match value
-         * @type {string || null}
-         */
-        this.Value = null;
+        this.ProxyGroupId = null;
 
     }
 
@@ -15476,9 +15939,8 @@ DB: Database name.
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Compare = 'Compare' in params ? params.Compare : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
 
     }
 }
@@ -16773,13 +17235,14 @@ class Tag extends  AbstractModel {
 
 module.exports = {
     ModifyInstanceTagResponse: ModifyInstanceTagResponse,
-    ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
+    CreateDBInstanceRequest: CreateDBInstanceRequest,
     DescribeProxyConnectionPoolConfRequest: DescribeProxyConnectionPoolConfRequest,
     DeviceDiskInfo: DeviceDiskInfo,
     CdbZoneSellConf: CdbZoneSellConf,
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     CreateDBImportJobRequest: CreateDBImportJobRequest,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
+    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
     ParamRecord: ParamRecord,
     ModifyAccountMaxUserConnectionsResponse: ModifyAccountMaxUserConnectionsResponse,
@@ -16841,7 +17304,7 @@ module.exports = {
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
     ModifyBackupDownloadRestrictionRequest: ModifyBackupDownloadRestrictionRequest,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
-    CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
     DescribeCloneListResponse: DescribeCloneListResponse,
     ModifyAccountMaxUserConnectionsRequest: ModifyAccountMaxUserConnectionsRequest,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
@@ -16859,7 +17322,7 @@ module.exports = {
     ImportRecord: ImportRecord,
     OfflineIsolatedInstancesRequest: OfflineIsolatedInstancesRequest,
     DescribeRollbackTaskDetailResponse: DescribeRollbackTaskDetailResponse,
-    CreateParamTemplateRequest: CreateParamTemplateRequest,
+    CreateAccountsRequest: CreateAccountsRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     RemoteBackupInfo: RemoteBackupInfo,
     RWInstanceInfo: RWInstanceInfo,
@@ -16875,6 +17338,7 @@ module.exports = {
     ModifyDBInstanceVipVportResponse: ModifyDBInstanceVipVportResponse,
     CloseCDBProxyRequest: CloseCDBProxyRequest,
     DescribeDBSwitchRecordsResponse: DescribeDBSwitchRecordsResponse,
+    RenewDBInstanceRequest: RenewDBInstanceRequest,
     ModifyCDBProxyConnectionPoolResponse: ModifyCDBProxyConnectionPoolResponse,
     SlowLogInfo: SlowLogInfo,
     RollbackTableName: RollbackTableName,
@@ -16884,12 +17348,13 @@ module.exports = {
     CdbRegionSellConf: CdbRegionSellConf,
     UploadInfo: UploadInfo,
     ModifyLocalBinlogConfigResponse: ModifyLocalBinlogConfigResponse,
-    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
+    CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     ProxyNodeInfo: ProxyNodeInfo,
     DescribeRoGroupsRequest: DescribeRoGroupsRequest,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
     DescribeSupportedPrivilegesRequest: DescribeSupportedPrivilegesRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
+    CreateDBInstanceResponse: CreateDBInstanceResponse,
     ModifyInstanceTagRequest: ModifyInstanceTagRequest,
     DescribeDBInstanceCharsetResponse: DescribeDBInstanceCharsetResponse,
     DeleteAccountsResponse: DeleteAccountsResponse,
@@ -16921,7 +17386,7 @@ module.exports = {
     OpenAuditServiceRequest: OpenAuditServiceRequest,
     BackupItem: BackupItem,
     ModifyCDBProxyVipVPortRequest: ModifyCDBProxyVipVPortRequest,
-    DescribeCDBProxyRequest: DescribeCDBProxyRequest,
+    AuditFilter: AuditFilter,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     DescribeRollbackTaskDetailRequest: DescribeRollbackTaskDetailRequest,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
@@ -17002,7 +17467,7 @@ module.exports = {
     DescribeTablesRequest: DescribeTablesRequest,
     InstanceRebootTime: InstanceRebootTime,
     ModifyInstancePasswordComplexityRequest: ModifyInstancePasswordComplexityRequest,
-    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    RenewDBInstanceResponse: RenewDBInstanceResponse,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
     AddTimeWindowResponse: AddTimeWindowResponse,
@@ -17014,7 +17479,7 @@ module.exports = {
     ModifyTimeWindowResponse: ModifyTimeWindowResponse,
     InitDBInstancesRequest: InitDBInstancesRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
-    CreateAccountsRequest: CreateAccountsRequest,
+    CreateParamTemplateRequest: CreateParamTemplateRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     ModifyBackupDownloadRestrictionResponse: ModifyBackupDownloadRestrictionResponse,
     ModifyTimeWindowRequest: ModifyTimeWindowRequest,
@@ -17039,6 +17504,7 @@ module.exports = {
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,
     DescribeRemoteBackupConfigRequest: DescribeRemoteBackupConfigRequest,
+    ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     DescribeDBImportRecordsRequest: DescribeDBImportRecordsRequest,
     CreateDBImportJobResponse: CreateDBImportJobResponse,
     DescribeTagsOfInstanceIdsRequest: DescribeTagsOfInstanceIdsRequest,
@@ -17061,7 +17527,7 @@ module.exports = {
     DeleteAccountsRequest: DeleteAccountsRequest,
     SwitchDrInstanceToMasterResponse: SwitchDrInstanceToMasterResponse,
     ZoneConf: ZoneConf,
-    AuditFilter: AuditFilter,
+    DescribeCDBProxyRequest: DescribeCDBProxyRequest,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     Rule: Rule,
     DescribeAccountsResponse: DescribeAccountsResponse,

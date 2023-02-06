@@ -1814,48 +1814,6 @@ class ManageReplicationRequest extends  AbstractModel {
 }
 
 /**
- * CreateSecurityPolicies request structure.
- * @class
- */
-class CreateSecurityPoliciesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.RegistryId = null;
-
-        /**
-         * 192.168.0.0/24
-         * @type {string || null}
-         */
-        this.CidrBlock = null;
-
-        /**
-         * Description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-    }
-}
-
-/**
  * DeleteWebhookTrigger response structure.
  * @class
  */
@@ -4645,6 +4603,12 @@ class CreateInstanceRequest extends  AbstractModel {
         this.RegistryChargeType = null;
 
         /**
+         * Auto-renewal setting and purchase period
+         * @type {RegistryChargePrepaid || null}
+         */
+        this.RegistryChargePrepaid = null;
+
+        /**
          * Whether to sync TCR cloud tags to the COS bucket
          * @type {boolean || null}
          */
@@ -4668,6 +4632,12 @@ class CreateInstanceRequest extends  AbstractModel {
             this.TagSpecification = obj;
         }
         this.RegistryChargeType = 'RegistryChargeType' in params ? params.RegistryChargeType : null;
+
+        if (params.RegistryChargePrepaid) {
+            let obj = new RegistryChargePrepaid();
+            obj.deserialize(params.RegistryChargePrepaid)
+            this.RegistryChargePrepaid = obj;
+        }
         this.SyncTag = 'SyncTag' in params ? params.SyncTag : null;
 
     }
@@ -4765,41 +4735,6 @@ class CreateNamespaceRequest extends  AbstractModel {
             obj.deserialize(params.TagSpecification)
             this.TagSpecification = obj;
         }
-
-    }
-}
-
-/**
- * CreateSecurityPolicies response structure.
- * @class
- */
-class CreateSecurityPoliciesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.RegistryId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8016,7 +7951,6 @@ module.exports = {
     DescribeInstanceAllNamespacesRequest: DescribeInstanceAllNamespacesRequest,
     DownloadHelmChartResponse: DownloadHelmChartResponse,
     ManageReplicationRequest: ManageReplicationRequest,
-    CreateSecurityPoliciesRequest: CreateSecurityPoliciesRequest,
     DeleteWebhookTriggerResponse: DeleteWebhookTriggerResponse,
     DescribeTagRetentionExecutionTaskResponse: DescribeTagRetentionExecutionTaskResponse,
     ModifySecurityPolicyRequest: ModifySecurityPolicyRequest,
@@ -8081,7 +8015,6 @@ module.exports = {
     CreateInstanceRequest: CreateInstanceRequest,
     DescribeInstanceTokenRequest: DescribeInstanceTokenRequest,
     CreateNamespaceRequest: CreateNamespaceRequest,
-    CreateSecurityPoliciesResponse: CreateSecurityPoliciesResponse,
     DeleteReplicationInstanceResponse: DeleteReplicationInstanceResponse,
     GCJobInfo: GCJobInfo,
     Registry: Registry,

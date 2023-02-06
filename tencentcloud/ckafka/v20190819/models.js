@@ -2675,6 +2675,41 @@ class DeleteUserResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTopicProduceConnection request structure.
+ * @class
+ */
+class DescribeTopicProduceConnectionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
  * CreateAcl request structure.
  * @class
  */
@@ -3186,6 +3221,51 @@ class ModifyGroupOffsetsResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Topic connection information
+ * @class
+ */
+class DescribeConnectInfoResultDTO extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IpAddr = null;
+
+        /**
+         * Connection time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Whether it is a supported version
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsUnSupportVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IpAddr = 'IpAddr' in params ? params.IpAddr : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.IsUnSupportVersion = 'IsUnSupportVersion' in params ? params.IsUnSupportVersion : null;
 
     }
 }
@@ -5196,6 +5276,49 @@ class VipEntity extends  AbstractModel {
         }
         this.Vip = 'Vip' in params ? params.Vip : null;
         this.Vport = 'Vport' in params ? params.Vport : null;
+
+    }
+}
+
+/**
+ * DescribeTopicProduceConnection response structure.
+ * @class
+ */
+class DescribeTopicProduceConnectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Result set of returned connection information
+         * @type {Array.<DescribeConnectInfoResultDTO> || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new DescribeConnectInfoResultDTO();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8931,6 +9054,7 @@ module.exports = {
     CreatePartitionResponse: CreatePartitionResponse,
     ClusterInfo: ClusterInfo,
     DeleteUserResponse: DeleteUserResponse,
+    DescribeTopicProduceConnectionRequest: DescribeTopicProduceConnectionRequest,
     CreateAclRequest: CreateAclRequest,
     DescribeTopicSyncReplicaResponse: DescribeTopicSyncReplicaResponse,
     DescribeAppInfoRequest: DescribeAppInfoRequest,
@@ -8941,6 +9065,7 @@ module.exports = {
     CreateTopicIpWhiteListResponse: CreateTopicIpWhiteListResponse,
     GroupOffsetTopic: GroupOffsetTopic,
     ModifyGroupOffsetsResponse: ModifyGroupOffsetsResponse,
+    DescribeConnectInfoResultDTO: DescribeConnectInfoResultDTO,
     Partition: Partition,
     CreateAclResponse: CreateAclResponse,
     CreateTopicRequest: CreateTopicRequest,
@@ -8980,6 +9105,7 @@ module.exports = {
     DescribeRegionResponse: DescribeRegionResponse,
     DescribeConsumerGroupRequest: DescribeConsumerGroupRequest,
     VipEntity: VipEntity,
+    DescribeTopicProduceConnectionResponse: DescribeTopicProduceConnectionResponse,
     ConsumerGroupTopic: ConsumerGroupTopic,
     User: User,
     GroupOffsetPartition: GroupOffsetPartition,

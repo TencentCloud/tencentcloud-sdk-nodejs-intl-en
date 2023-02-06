@@ -5805,6 +5805,13 @@ class ScoreInfo extends  AbstractModel {
          */
         this.PageDuration = null;
 
+        /**
+         * Time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -5827,6 +5834,7 @@ class ScoreInfo extends  AbstractModel {
         this.StaticNum = 'StaticNum' in params ? params.StaticNum : null;
         this.RecordNum = 'RecordNum' in params ? params.RecordNum : null;
         this.PageDuration = 'PageDuration' in params ? params.PageDuration : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }

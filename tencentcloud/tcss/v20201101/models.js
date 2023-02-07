@@ -22818,7 +22818,7 @@ class ModifyK8sApiAbnormalRuleStatusRequest extends  AbstractModel {
         this.RuleID = null;
 
         /**
-         * Status (true: Enable; false: Disable)
+         * Status of the rule. Values: `true` (Enabled), `false` (Disabled)
          * @type {boolean || null}
          */
         this.Status = null;
@@ -27083,7 +27083,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VerifyInfo = null;
 
         /**
-         * 
+         * Instance ID
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -38898,7 +38899,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CheckResult = null;
 
         /**
-         * 
+         * Node instance ID
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceId = null;

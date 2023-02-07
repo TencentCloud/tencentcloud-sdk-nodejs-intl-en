@@ -1179,7 +1179,8 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.InstancePrice = null;
 
         /**
-         * 
+         * Tiered-pricing details. The information of each tier includes the billable period, discount percentage, total price, discounted price, and discount details (`UserDiscount`, `CommonDiscount` and `FinalDiscount`).
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<DiscountDetail> || null}
          */
         this.DiscountDetail = null;
@@ -6637,6 +6638,21 @@ class PolicyDetail extends  AbstractModel {
          */
         this.FinalDiscount = null;
 
+        /**
+         * Activity discount. The value `null` indicates no discount.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ActivityDiscount = null;
+
+        /**
+         * Discount type.
+Valid values: `user` (user discount), `common` (discount displayed on the official website), `activity` (activity discount), `null` (no discount).
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiscountType = null;
+
     }
 
     /**
@@ -6649,6 +6665,8 @@ class PolicyDetail extends  AbstractModel {
         this.UserDiscount = 'UserDiscount' in params ? params.UserDiscount : null;
         this.CommonDiscount = 'CommonDiscount' in params ? params.CommonDiscount : null;
         this.FinalDiscount = 'FinalDiscount' in params ? params.FinalDiscount : null;
+        this.ActivityDiscount = 'ActivityDiscount' in params ? params.ActivityDiscount : null;
+        this.DiscountType = 'DiscountType' in params ? params.DiscountType : null;
 
     }
 }
@@ -7700,6 +7718,13 @@ class InstancePrice extends  AbstractModel {
          */
         this.DiscountPrice = null;
 
+        /**
+         * Currency unit. Valid values: `CNY` and `USD`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
     }
 
     /**
@@ -7713,6 +7738,7 @@ class InstancePrice extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Discount = 'Discount' in params ? params.Discount : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
 
     }
 }

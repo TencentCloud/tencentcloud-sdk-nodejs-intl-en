@@ -3833,6 +3833,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.LoadBalancerPassToTarget = null;
 
+        /**
+         * IPv6 address of a CLB instance
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AddressIPv6 = null;
+
     }
 
     /**
@@ -3875,6 +3882,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         }
         this.SecureGroups = 'SecureGroups' in params ? params.SecureGroups : null;
         this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
+        this.AddressIPv6 = 'AddressIPv6' in params ? params.AddressIPv6 : null;
 
     }
 }
@@ -11600,6 +11608,16 @@ class DescribePriceRunInstanceRequest extends  AbstractModel {
          */
         this.DataDisk = null;
 
+        /**
+         * Instance billing type. Valid values:
+`0`: Bill by daily resource usage peak (CPU, memory, and disk). It applies only to non-GNR models;
+`1`: Bill by usage hours of an instance. It applies only to GNR models. It’s available to beta users now. To enable it, submit a ticket;
+`2`: Bill by usage month of an instance. It applies only to GNR models.
+If this field is left empty, `0` is selected by default for non-GNR models, and `2` is selected by default for GNR models.
+         * @type {number || null}
+         */
+        this.InstanceChargeType = null;
+
     }
 
     /**
@@ -11626,6 +11644,7 @@ class DescribePriceRunInstanceRequest extends  AbstractModel {
                 this.DataDisk.push(obj);
             }
         }
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
     }
 }
@@ -12817,6 +12836,18 @@ Note: if the name of the new CLB instance already exists, a default name will be
          */
         this.SecurityGroups = null;
 
+        /**
+         * IP version. Valid values: `IPV4` (default), `IPv6FullChain` (IPv6 version). This parameter is only for public network CLB instances.
+         * @type {string || null}
+         */
+        this.AddressIPVersion = null;
+
+        /**
+         * Subnet ID. This parameter is required for IPv6 CLB instances.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -12848,6 +12879,8 @@ Note: if the name of the new CLB instance already exists, a default name will be
             }
         }
         this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
+        this.AddressIPVersion = 'AddressIPVersion' in params ? params.AddressIPVersion : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }

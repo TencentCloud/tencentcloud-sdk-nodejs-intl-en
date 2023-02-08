@@ -1782,6 +1782,12 @@ class DeleteCfsSnapshotRequest extends  AbstractModel {
          */
         this.SnapshotId = null;
 
+        /**
+         * The list of the IDs of the file system snapshots to be deleted. At least one of `SnapshotId` and `SnapshotIds` must be specified.
+         * @type {Array.<string> || null}
+         */
+        this.SnapshotIds = null;
+
     }
 
     /**
@@ -1792,6 +1798,7 @@ class DeleteCfsSnapshotRequest extends  AbstractModel {
             return;
         }
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.SnapshotIds = 'SnapshotIds' in params ? params.SnapshotIds : null;
 
     }
 }

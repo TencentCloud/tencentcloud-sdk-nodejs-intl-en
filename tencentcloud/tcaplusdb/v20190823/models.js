@@ -1421,6 +1421,12 @@ class DescribeSnapshotsRequest extends  AbstractModel {
          */
         this.SnapshotName = null;
 
+        /**
+         * The list of snapshots pulled in batches
+         * @type {Array.<SelectedTableInfoNew> || null}
+         */
+        this.SelectedTables = null;
+
     }
 
     /**
@@ -1434,6 +1440,15 @@ class DescribeSnapshotsRequest extends  AbstractModel {
         this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
         this.TableName = 'TableName' in params ? params.TableName : null;
         this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SelectedTableInfoNew();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
+            }
+        }
 
     }
 }

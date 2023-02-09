@@ -122,7 +122,7 @@ class ApplyConcurrentRequest extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * The user’s IP address.
+         * Public IP of user’s application client, which is used for nearby scheduling.
          * @type {string || null}
          */
         this.UserIp = null;
@@ -139,6 +139,12 @@ class ApplyConcurrentRequest extends  AbstractModel {
          */
         this.ApplicationVersionId = null;
 
+        /**
+         * Application ID, which is used only by the multi-application project to specify applications. For a single-application project, this parameter is ignored, and the application bound to the project will be used.
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
     }
 
     /**
@@ -152,6 +158,7 @@ class ApplyConcurrentRequest extends  AbstractModel {
         this.UserIp = 'UserIp' in params ? params.UserIp : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ApplicationVersionId = 'ApplicationVersionId' in params ? params.ApplicationVersionId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
 
     }
 }
@@ -199,7 +206,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * The user’s IP address.
+         * Public IP of user’s application client, which is used for nearby scheduling.
          * @type {string || null}
          */
         this.UserIp = null;

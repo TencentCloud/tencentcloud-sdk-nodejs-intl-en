@@ -2311,6 +2311,55 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeDBEncryptAttributes response structure.
+ * @class
+ */
+class DescribeDBEncryptAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether encryption is enabled. Valid values: `1` (enabled), `2` (disabled).
+         * @type {number || null}
+         */
+        this.EncryptStatus = null;
+
+        /**
+         * DEK key
+         * @type {string || null}
+         */
+        this.CipherText = null;
+
+        /**
+         * DEK key expiration date
+         * @type {string || null}
+         */
+        this.ExpireDate = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EncryptStatus = 'EncryptStatus' in params ? params.EncryptStatus : null;
+        this.CipherText = 'CipherText' in params ? params.CipherText : null;
+        this.ExpireDate = 'ExpireDate' in params ? params.ExpireDate : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DestroyDBInstance request structure.
  * @class
  */
@@ -2362,6 +2411,34 @@ class DatabaseTable extends  AbstractModel {
             return;
         }
         this.Table = 'Table' in params ? params.Table : null;
+
+    }
+}
+
+/**
+ * DescribeDBEncryptAttributes request structure.
+ * @class
+ */
+class DescribeDBEncryptAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `tdsql-ow728lmc`
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -6253,8 +6330,10 @@ module.exports = {
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
+    DescribeDBEncryptAttributesResponse: DescribeDBEncryptAttributesResponse,
     DestroyDBInstanceRequest: DestroyDBInstanceRequest,
     DatabaseTable: DatabaseTable,
+    DescribeDBEncryptAttributesRequest: DescribeDBEncryptAttributesRequest,
     Deal: Deal,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
     DBParamValue: DBParamValue,

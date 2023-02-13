@@ -23,10 +23,12 @@ const StreamVideoInfo = models.StreamVideoInfo;
 const CreateStreamLivePlanRequest = models.CreateStreamLivePlanRequest;
 const DescribeStreamLiveWatermarksResponse = models.DescribeStreamLiveWatermarksResponse;
 const DescribeStreamLiveInputRequest = models.DescribeStreamLiveInputRequest;
+const QueryDispatchInputInfo = models.QueryDispatchInputInfo;
 const CreateStreamLiveInputRequest = models.CreateStreamLiveInputRequest;
 const AudioPidSelectionInfo = models.AudioPidSelectionInfo;
 const AudioPipelineInputStatistics = models.AudioPipelineInputStatistics;
 const CreateStreamLivePlanResponse = models.CreateStreamLivePlanResponse;
+const InputStreamInfo = models.InputStreamInfo;
 const DescribeStreamLiveChannelOutputStatisticsRequest = models.DescribeStreamLiveChannelOutputStatisticsRequest;
 const ChannelPipelineAlerts = models.ChannelPipelineAlerts;
 const InputInfo = models.InputInfo;
@@ -51,6 +53,7 @@ const StreamInfo = models.StreamInfo;
 const SDMCSettingsInfo = models.SDMCSettingsInfo;
 const DeleteStreamLiveInputSecurityGroupRequest = models.DeleteStreamLiveInputSecurityGroupRequest;
 const AttachedInput = models.AttachedInput;
+const QueryInputStreamStateResponse = models.QueryInputStreamStateResponse;
 const DescribeStreamLiveWatermarksRequest = models.DescribeStreamLiveWatermarksRequest;
 const DescribeTranscodeDetailInfo = models.DescribeTranscodeDetailInfo;
 const TimeShiftSettingsInfo = models.TimeShiftSettingsInfo;
@@ -71,6 +74,7 @@ const TimingSettingsResp = models.TimingSettingsResp;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const StreamPackageSettingsInfo = models.StreamPackageSettingsInfo;
 const DescribeStreamLiveChannelsResponse = models.DescribeStreamLiveChannelsResponse;
+const QueryInputStreamStateRequest = models.QueryInputStreamStateRequest;
 const PlanReq = models.PlanReq;
 const DeleteStreamLiveWatermarkRequest = models.DeleteStreamLiveWatermarkRequest;
 const DescribeStreamLiveRegionsResponse = models.DescribeStreamLiveRegionsResponse;
@@ -99,12 +103,14 @@ const DescribeStreamLiveInputSecurityGroupRequest = models.DescribeStreamLiveInp
 const CreateStreamLiveChannelResponse = models.CreateStreamLiveChannelResponse;
 const DescribeStreamLiveChannelInputStatisticsResponse = models.DescribeStreamLiveChannelInputStatisticsResponse;
 const StopStreamLiveChannelResponse = models.StopStreamLiveChannelResponse;
+const PushEventSetting = models.PushEventSetting;
 const CreateImageSettings = models.CreateImageSettings;
 const StartStreamLiveChannelResponse = models.StartStreamLiveChannelResponse;
 const StreamLiveOutputGroupsInfo = models.StreamLiveOutputGroupsInfo;
 const ChannelOutputsStatistics = models.ChannelOutputsStatistics;
 const PlanSettings = models.PlanSettings;
 const DescribeStreamLiveInputSecurityGroupsResponse = models.DescribeStreamLiveInputSecurityGroupsResponse;
+const EventNotifySetting = models.EventNotifySetting;
 const DeleteStreamLiveInputResponse = models.DeleteStreamLiveInputResponse;
 const StartStreamLiveChannelRequest = models.StartStreamLiveChannelRequest;
 const DescribeStreamLiveWatermarkResponse = models.DescribeStreamLiveWatermarkResponse;
@@ -376,6 +382,17 @@ class MdlClient extends AbstractClient {
     DeleteStreamLivePlan(req, cb) {
         let resp = new DeleteStreamLivePlanResponse();
         this.request("DeleteStreamLivePlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the stream status of a StreamLive input.
+     * @param {QueryInputStreamStateRequest} req
+     * @param {function(string, QueryInputStreamStateResponse):void} cb
+     * @public
+     */
+    QueryInputStreamState(req, cb) {
+        let resp = new QueryInputStreamStateResponse();
+        this.request("QueryInputStreamState", req, resp, cb);
     }
 
     /**

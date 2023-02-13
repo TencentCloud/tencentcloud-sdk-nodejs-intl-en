@@ -302,6 +302,63 @@ class DescribeStreamLiveInputRequest extends  AbstractModel {
 }
 
 /**
+ * The stream status of the queried input.
+ * @class
+ */
+class QueryDispatchInputInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The input ID.
+         * @type {string || null}
+         */
+        this.InputID = null;
+
+        /**
+         * The input name.
+         * @type {string || null}
+         */
+        this.InputName = null;
+
+        /**
+         * The input protocol.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * The stream status of the input.
+         * @type {Array.<InputStreamInfo> || null}
+         */
+        this.InputStreamInfoList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputID = 'InputID' in params ? params.InputID : null;
+        this.InputName = 'InputName' in params ? params.InputName : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+
+        if (params.InputStreamInfoList) {
+            this.InputStreamInfoList = new Array();
+            for (let z in params.InputStreamInfoList) {
+                let obj = new InputStreamInfo();
+                obj.deserialize(params.InputStreamInfoList[z]);
+                this.InputStreamInfoList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateStreamLiveInput request structure.
  * @class
  */
@@ -454,6 +511,55 @@ class CreateStreamLivePlanResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The input stream information.
+ * @class
+ */
+class InputStreamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The input stream address.
+         * @type {string || null}
+         */
+        this.InputAddress = null;
+
+        /**
+         * The input stream path.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * The input stream name.
+         * @type {string || null}
+         */
+        this.StreamName = null;
+
+        /**
+         * The input stream status. `1` indicates the stream is active.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InputAddress = 'InputAddress' in params ? params.InputAddress : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -731,6 +837,24 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
          */
         this.WatermarkId = null;
 
+        /**
+         * Whether to convert audio to text. `0` (default): No; `1`: Yes.
+         * @type {number || null}
+         */
+        this.SmartSubtitles = null;
+
+        /**
+         * The subtitle settings. Currently, the following subtitles are supported:
+`eng2eng`: English speech to English text.
+`eng2chs`: English speech to Chinese text. 
+`eng2chseng`: English speech to English and Chinese text. 
+`chs2chs`: Chinese speech to Chinese text.   
+`chs2eng`: Chinese speech to English text. 
+`chs2chseng`: Chinese speech to Chinese and English text.
+         * @type {string || null}
+         */
+        this.SubtitleConfiguration = null;
+
     }
 
     /**
@@ -754,6 +878,8 @@ Valid values: `6000`, `7000`, `8000`, `10000`, `12000`, `14000`, `16000`, `20000
         this.VideoBitrate = 'VideoBitrate' in params ? params.VideoBitrate : null;
         this.RateControlMode = 'RateControlMode' in params ? params.RateControlMode : null;
         this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
+        this.SmartSubtitles = 'SmartSubtitles' in params ? params.SmartSubtitles : null;
+        this.SubtitleConfiguration = 'SubtitleConfiguration' in params ? params.SubtitleConfiguration : null;
 
     }
 }
@@ -1151,6 +1277,13 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.SDMCSettings = null;
 
+        /**
+         * The DRM type. Valid values: `FAIRPLAY`, `WIDEVINE`, `AES128`. For HLS, this can be `FAIRPLAY` or `AES128`. For DASH, this can only be `WIDEVINE`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DrmType = null;
+
     }
 
     /**
@@ -1178,6 +1311,7 @@ Note: This field may return `null`, indicating that no valid value was found.
             obj.deserialize(params.SDMCSettings)
             this.SDMCSettings = obj;
         }
+        this.DrmType = 'DrmType' in params ? params.DrmType : null;
 
     }
 }
@@ -1335,6 +1469,12 @@ class DashRemuxSettingsInfo extends  AbstractModel {
          */
         this.PeriodTriggers = null;
 
+        /**
+         * The HLS package type when the H.265 codec is used. Valid values: `hvc1`, `hev1` (default).
+         * @type {string || null}
+         */
+        this.H265PackageType = null;
+
     }
 
     /**
@@ -1347,6 +1487,7 @@ class DashRemuxSettingsInfo extends  AbstractModel {
         this.SegmentDuration = 'SegmentDuration' in params ? params.SegmentDuration : null;
         this.SegmentNumber = 'SegmentNumber' in params ? params.SegmentNumber : null;
         this.PeriodTriggers = 'PeriodTriggers' in params ? params.PeriodTriggers : null;
+        this.H265PackageType = 'H265PackageType' in params ? params.H265PackageType : null;
 
     }
 }
@@ -1642,6 +1783,46 @@ Note: this field may return `null`, indicating that no valid value was found.
             obj.deserialize(params.FailOverSettings)
             this.FailOverSettings = obj;
         }
+
+    }
+}
+
+/**
+ * QueryInputStreamState response structure.
+ * @class
+ */
+class QueryInputStreamStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The information of the StreamLive input queried.
+         * @type {QueryDispatchInputInfo || null}
+         */
+        this.Info = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Info) {
+            let obj = new QueryDispatchInputInfo();
+            obj.deserialize(params.Info)
+            this.Info = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2385,6 +2566,19 @@ class HlsRemuxSettingsInfo extends  AbstractModel {
          */
         this.Scheme = null;
 
+        /**
+         * The segment type. Valid values: `ts` (default), `fmp4`.
+Currently, fMP4 segments do not support DRM or time shifting.
+         * @type {string || null}
+         */
+        this.SegmentType = null;
+
+        /**
+         * The HLS package type when the H.265 codec is used. Valid values: `hvc1`, `hev1` (default).
+         * @type {string || null}
+         */
+        this.H265PackageType = null;
+
     }
 
     /**
@@ -2399,6 +2593,8 @@ class HlsRemuxSettingsInfo extends  AbstractModel {
         this.PdtInsertion = 'PdtInsertion' in params ? params.PdtInsertion : null;
         this.PdtDuration = 'PdtDuration' in params ? params.PdtDuration : null;
         this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.SegmentType = 'SegmentType' in params ? params.SegmentType : null;
+        this.H265PackageType = 'H265PackageType' in params ? params.H265PackageType : null;
 
     }
 }
@@ -2644,6 +2840,34 @@ Note: this field may return `null`, indicating that no valid value was found.
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryInputStreamState request structure.
+ * @class
+ */
+class QueryInputStreamStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The StreamLive input ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -2940,6 +3164,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
          */
         this.PlanSettings = null;
 
+        /**
+         * The callback settings.
+         * @type {EventNotifySetting || null}
+         */
+        this.EventNotifySettings = null;
+
     }
 
     /**
@@ -3000,6 +3230,12 @@ class CreateStreamLiveChannelRequest extends  AbstractModel {
             let obj = new PlanSettings();
             obj.deserialize(params.PlanSettings)
             this.PlanSettings = obj;
+        }
+
+        if (params.EventNotifySettings) {
+            let obj = new EventNotifySetting();
+            obj.deserialize(params.EventNotifySettings)
+            this.EventNotifySettings = obj;
         }
 
     }
@@ -3658,6 +3894,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.Iv = null;
 
+        /**
+         * The URI of the license server when AES-128 is used. This parameter may be empty.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.KeyUri = null;
+
     }
 
     /**
@@ -3671,6 +3914,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Track = 'Track' in params ? params.Track : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.Iv = 'Iv' in params ? params.Iv : null;
+        this.KeyUri = 'KeyUri' in params ? params.KeyUri : null;
 
     }
 }
@@ -3898,6 +4142,41 @@ class StopStreamLiveChannelResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The callback configuration for push events.
+ * @class
+ */
+class PushEventSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The callback URL (required).
+         * @type {string || null}
+         */
+        this.NotifyUrl = null;
+
+        /**
+         * The callback key (optional).
+         * @type {string || null}
+         */
+        this.NotifyKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NotifyUrl = 'NotifyUrl' in params ? params.NotifyUrl : null;
+        this.NotifyKey = 'NotifyKey' in params ? params.NotifyKey : null;
 
     }
 }
@@ -4249,6 +4528,39 @@ class DescribeStreamLiveInputSecurityGroupsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The callback settings.
+ * @class
+ */
+class EventNotifySetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The callback configuration for push events.
+         * @type {PushEventSetting || null}
+         */
+        this.PushEventSettings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PushEventSettings) {
+            let obj = new PushEventSetting();
+            obj.deserialize(params.PushEventSettings)
+            this.PushEventSettings = obj;
+        }
 
     }
 }
@@ -5103,6 +5415,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
          */
         this.PlanSettings = null;
 
+        /**
+         * The callback settings.
+         * @type {EventNotifySetting || null}
+         */
+        this.EventNotifySettings = null;
+
     }
 
     /**
@@ -5164,6 +5482,12 @@ class ModifyStreamLiveChannelRequest extends  AbstractModel {
             let obj = new PlanSettings();
             obj.deserialize(params.PlanSettings)
             this.PlanSettings = obj;
+        }
+
+        if (params.EventNotifySettings) {
+            let obj = new EventNotifySetting();
+            obj.deserialize(params.EventNotifySettings)
+            this.EventNotifySettings = obj;
         }
 
     }
@@ -5457,6 +5781,13 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.PlanSettings = null;
 
+        /**
+         * The callback settings.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {EventNotifySetting || null}
+         */
+        this.EventNotifySettings = null;
+
     }
 
     /**
@@ -5521,11 +5852,19 @@ Note: This field may return `null`, indicating that no valid value was found.
             this.PlanSettings = obj;
         }
 
+        if (params.EventNotifySettings) {
+            let obj = new EventNotifySetting();
+            obj.deserialize(params.EventNotifySettings)
+            this.EventNotifySettings = obj;
+        }
+
     }
 }
 
 /**
- * Input settings information.
+ * The input settings.
+The format of an RTMP_PUSH address is ${InputAddress}/${AppName}/${StreamName}.
+The format of an SRT_PUSH address is ${InputAddress}?streamid=${StreamName},h=${InputDomain}.
  * @class
  */
 class InputSettingInfo extends  AbstractModel {
@@ -5576,6 +5915,27 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.DelayTime = null;
 
+        /**
+         * The domain of an SRT_PUSH address. If this is a request parameter, you don’t need to specify it.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.InputDomain = null;
+
+        /**
+         * The username, which is used for authentication.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * The password, which is used for authentication.
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Password = null;
+
     }
 
     /**
@@ -5591,6 +5951,9 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.InputAddress = 'InputAddress' in params ? params.InputAddress : null;
         this.SourceType = 'SourceType' in params ? params.SourceType : null;
         this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
+        this.InputDomain = 'InputDomain' in params ? params.InputDomain : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -5652,10 +6015,12 @@ module.exports = {
     CreateStreamLivePlanRequest: CreateStreamLivePlanRequest,
     DescribeStreamLiveWatermarksResponse: DescribeStreamLiveWatermarksResponse,
     DescribeStreamLiveInputRequest: DescribeStreamLiveInputRequest,
+    QueryDispatchInputInfo: QueryDispatchInputInfo,
     CreateStreamLiveInputRequest: CreateStreamLiveInputRequest,
     AudioPidSelectionInfo: AudioPidSelectionInfo,
     AudioPipelineInputStatistics: AudioPipelineInputStatistics,
     CreateStreamLivePlanResponse: CreateStreamLivePlanResponse,
+    InputStreamInfo: InputStreamInfo,
     DescribeStreamLiveChannelOutputStatisticsRequest: DescribeStreamLiveChannelOutputStatisticsRequest,
     ChannelPipelineAlerts: ChannelPipelineAlerts,
     InputInfo: InputInfo,
@@ -5680,6 +6045,7 @@ module.exports = {
     SDMCSettingsInfo: SDMCSettingsInfo,
     DeleteStreamLiveInputSecurityGroupRequest: DeleteStreamLiveInputSecurityGroupRequest,
     AttachedInput: AttachedInput,
+    QueryInputStreamStateResponse: QueryInputStreamStateResponse,
     DescribeStreamLiveWatermarksRequest: DescribeStreamLiveWatermarksRequest,
     DescribeTranscodeDetailInfo: DescribeTranscodeDetailInfo,
     TimeShiftSettingsInfo: TimeShiftSettingsInfo,
@@ -5700,6 +6066,7 @@ module.exports = {
     AudioTemplateInfo: AudioTemplateInfo,
     StreamPackageSettingsInfo: StreamPackageSettingsInfo,
     DescribeStreamLiveChannelsResponse: DescribeStreamLiveChannelsResponse,
+    QueryInputStreamStateRequest: QueryInputStreamStateRequest,
     PlanReq: PlanReq,
     DeleteStreamLiveWatermarkRequest: DeleteStreamLiveWatermarkRequest,
     DescribeStreamLiveRegionsResponse: DescribeStreamLiveRegionsResponse,
@@ -5728,12 +6095,14 @@ module.exports = {
     CreateStreamLiveChannelResponse: CreateStreamLiveChannelResponse,
     DescribeStreamLiveChannelInputStatisticsResponse: DescribeStreamLiveChannelInputStatisticsResponse,
     StopStreamLiveChannelResponse: StopStreamLiveChannelResponse,
+    PushEventSetting: PushEventSetting,
     CreateImageSettings: CreateImageSettings,
     StartStreamLiveChannelResponse: StartStreamLiveChannelResponse,
     StreamLiveOutputGroupsInfo: StreamLiveOutputGroupsInfo,
     ChannelOutputsStatistics: ChannelOutputsStatistics,
     PlanSettings: PlanSettings,
     DescribeStreamLiveInputSecurityGroupsResponse: DescribeStreamLiveInputSecurityGroupsResponse,
+    EventNotifySetting: EventNotifySetting,
     DeleteStreamLiveInputResponse: DeleteStreamLiveInputResponse,
     StartStreamLiveChannelRequest: StartStreamLiveChannelRequest,
     DescribeStreamLiveWatermarkResponse: DescribeStreamLiveWatermarkResponse,

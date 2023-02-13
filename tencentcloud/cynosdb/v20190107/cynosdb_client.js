@@ -48,6 +48,7 @@ const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const SearchClusterTablesRequest = models.SearchClusterTablesRequest;
 const PauseServerlessRequest = models.PauseServerlessRequest;
 const ObjectTask = models.ObjectTask;
+const DescribeFlowResponse = models.DescribeFlowResponse;
 const CreateClustersResponse = models.CreateClustersResponse;
 const SetRenewFlagRequest = models.SetRenewFlagRequest;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
@@ -66,6 +67,7 @@ const CreateAccountsRequest = models.CreateAccountsRequest;
 const DeleteAuditRuleTemplatesRequest = models.DeleteAuditRuleTemplatesRequest;
 const DescribeAuditRuleTemplatesResponse = models.DescribeAuditRuleTemplatesResponse;
 const SwitchClusterZoneRequest = models.SwitchClusterZoneRequest;
+const RestartInstanceRequest = models.RestartInstanceRequest;
 const Ability = models.Ability;
 const InstanceInitInfo = models.InstanceInitInfo;
 const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
@@ -129,7 +131,7 @@ const OfflineClusterResponse = models.OfflineClusterResponse;
 const SwitchProxyVpcResponse = models.SwitchProxyVpcResponse;
 const DescribeAuditRuleTemplatesRequest = models.DescribeAuditRuleTemplatesRequest;
 const InstanceSpec = models.InstanceSpec;
-const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
+const DescribeFlowRequest = models.DescribeFlowRequest;
 const IsolateInstanceRequest = models.IsolateInstanceRequest;
 const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const Account = models.Account;
@@ -140,6 +142,7 @@ const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
 const SwitchProxyVpcRequest = models.SwitchProxyVpcRequest;
 const DescribeBackupListResponse = models.DescribeBackupListResponse;
+const RestartInstanceResponse = models.RestartInstanceResponse;
 const DescribeBinlogSaveDaysRequest = models.DescribeBinlogSaveDaysRequest;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const ActivateInstanceResponse = models.ActivateInstanceResponse;
@@ -147,6 +150,7 @@ const DescribeRollbackTimeValidityRequest = models.DescribeRollbackTimeValidityR
 const IsolateClusterRequest = models.IsolateClusterRequest;
 const DescribeClusterInstanceGrpsResponse = models.DescribeClusterInstanceGrpsResponse;
 const AddInstancesRequest = models.AddInstancesRequest;
+const InquirePriceCreateResponse = models.InquirePriceCreateResponse;
 const ModifyClusterSlaveZoneRequest = models.ModifyClusterSlaveZoneRequest;
 const CynosdbInstanceDetail = models.CynosdbInstanceDetail;
 const RuleFilters = models.RuleFilters;
@@ -399,6 +403,17 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query task flow information.
+     * @param {DescribeFlowRequest} req
+     * @param {function(string, DescribeFlowResponse):void} cb
+     * @public
+     */
+    DescribeFlow(req, cb) {
+        let resp = new DescribeFlowResponse();
+        this.request("DescribeFlow", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the backup configuration of the specified cluster.
      * @param {ModifyBackupConfigRequest} req
      * @param {function(string, ModifyBackupConfigResponse):void} cb
@@ -520,14 +535,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the database proxy VPC.
-     * @param {SwitchProxyVpcRequest} req
-     * @param {function(string, SwitchProxyVpcResponse):void} cb
+     * This API is used to restart an instance.
+     * @param {RestartInstanceRequest} req
+     * @param {function(string, RestartInstanceResponse):void} cb
      * @public
      */
-    SwitchProxyVpc(req, cb) {
-        let resp = new SwitchProxyVpcResponse();
-        this.request("SwitchProxyVpc", req, resp, cb);
+    RestartInstance(req, cb) {
+        let resp = new RestartInstanceResponse();
+        this.request("RestartInstance", req, resp, cb);
     }
 
     /**
@@ -594,6 +609,17 @@ class CynosdbClient extends AbstractClient {
     RemoveClusterSlaveZone(req, cb) {
         let resp = new RemoveClusterSlaveZoneResponse();
         this.request("RemoveClusterSlaveZone", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the database proxy VPC.
+     * @param {SwitchProxyVpcRequest} req
+     * @param {function(string, SwitchProxyVpcResponse):void} cb
+     * @public
+     */
+    SwitchProxyVpc(req, cb) {
+        let resp = new SwitchProxyVpcResponse();
+        this.request("SwitchProxyVpc", req, resp, cb);
     }
 
     /**

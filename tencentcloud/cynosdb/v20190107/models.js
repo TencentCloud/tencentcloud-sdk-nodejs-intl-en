@@ -1459,6 +1459,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeFlow response structure.
+ * @class
+ */
+class DescribeFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task flow status. Valid values: `0` (succeeded), `1` (failed), `2` (Processing).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateClusters response structure.
  * @class
  */
@@ -2425,6 +2460,34 @@ class SwitchClusterZoneRequest extends  AbstractModel {
         this.OldZone = 'OldZone' in params ? params.OldZone : null;
         this.NewZone = 'NewZone' in params ? params.NewZone : null;
         this.IsInMaintainPeriod = 'IsInMaintainPeriod' in params ? params.IsInMaintainPeriod : null;
+
+    }
+}
+
+/**
+ * RestartInstance request structure.
+ * @class
+ */
+class RestartInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -6668,30 +6731,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * InquirePriceCreate response structure.
+ * DescribeFlow request structure.
  * @class
  */
-class InquirePriceCreateResponse extends  AbstractModel {
+class DescribeFlowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance price
-         * @type {TradePrice || null}
+         * Task flow ID
+         * @type {number || null}
          */
-        this.InstancePrice = null;
-
-        /**
-         * Storage price
-         * @type {TradePrice || null}
-         */
-        this.StoragePrice = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.FlowId = null;
 
     }
 
@@ -6702,19 +6753,7 @@ class InquirePriceCreateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.InstancePrice) {
-            let obj = new TradePrice();
-            obj.deserialize(params.InstancePrice)
-            this.InstancePrice = obj;
-        }
-
-        if (params.StoragePrice) {
-            let obj = new TradePrice();
-            obj.deserialize(params.StoragePrice)
-            this.StoragePrice = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
     }
 }
@@ -7242,6 +7281,41 @@ class DescribeBackupListResponse extends  AbstractModel {
 }
 
 /**
+ * RestartInstance response structure.
+ * @class
+ */
+class RestartInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBinlogSaveDays request structure.
  * @class
  */
@@ -7625,6 +7699,58 @@ class AddInstancesRequest extends  AbstractModel {
                 this.InstanceParams.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * InquirePriceCreate response structure.
+ * @class
+ */
+class InquirePriceCreateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance price
+         * @type {TradePrice || null}
+         */
+        this.InstancePrice = null;
+
+        /**
+         * Storage price
+         * @type {TradePrice || null}
+         */
+        this.StoragePrice = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstancePrice) {
+            let obj = new TradePrice();
+            obj.deserialize(params.InstancePrice)
+            this.InstancePrice = obj;
+        }
+
+        if (params.StoragePrice) {
+            let obj = new TradePrice();
+            obj.deserialize(params.StoragePrice)
+            this.StoragePrice = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9534,6 +9660,7 @@ module.exports = {
     SearchClusterTablesRequest: SearchClusterTablesRequest,
     PauseServerlessRequest: PauseServerlessRequest,
     ObjectTask: ObjectTask,
+    DescribeFlowResponse: DescribeFlowResponse,
     CreateClustersResponse: CreateClustersResponse,
     SetRenewFlagRequest: SetRenewFlagRequest,
     CynosdbInstanceGrp: CynosdbInstanceGrp,
@@ -9552,6 +9679,7 @@ module.exports = {
     DeleteAuditRuleTemplatesRequest: DeleteAuditRuleTemplatesRequest,
     DescribeAuditRuleTemplatesResponse: DescribeAuditRuleTemplatesResponse,
     SwitchClusterZoneRequest: SwitchClusterZoneRequest,
+    RestartInstanceRequest: RestartInstanceRequest,
     Ability: Ability,
     InstanceInitInfo: InstanceInitInfo,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
@@ -9615,7 +9743,7 @@ module.exports = {
     SwitchProxyVpcResponse: SwitchProxyVpcResponse,
     DescribeAuditRuleTemplatesRequest: DescribeAuditRuleTemplatesRequest,
     InstanceSpec: InstanceSpec,
-    InquirePriceCreateResponse: InquirePriceCreateResponse,
+    DescribeFlowRequest: DescribeFlowRequest,
     IsolateInstanceRequest: IsolateInstanceRequest,
     SetRenewFlagResponse: SetRenewFlagResponse,
     Account: Account,
@@ -9626,6 +9754,7 @@ module.exports = {
     DescribeMaintainPeriodResponse: DescribeMaintainPeriodResponse,
     SwitchProxyVpcRequest: SwitchProxyVpcRequest,
     DescribeBackupListResponse: DescribeBackupListResponse,
+    RestartInstanceResponse: RestartInstanceResponse,
     DescribeBinlogSaveDaysRequest: DescribeBinlogSaveDaysRequest,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     ActivateInstanceResponse: ActivateInstanceResponse,
@@ -9633,6 +9762,7 @@ module.exports = {
     IsolateClusterRequest: IsolateClusterRequest,
     DescribeClusterInstanceGrpsResponse: DescribeClusterInstanceGrpsResponse,
     AddInstancesRequest: AddInstancesRequest,
+    InquirePriceCreateResponse: InquirePriceCreateResponse,
     ModifyClusterSlaveZoneRequest: ModifyClusterSlaveZoneRequest,
     CynosdbInstanceDetail: CynosdbInstanceDetail,
     RuleFilters: RuleFilters,

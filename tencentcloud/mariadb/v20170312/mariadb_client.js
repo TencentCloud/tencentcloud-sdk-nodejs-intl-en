@@ -62,8 +62,10 @@ const DatabaseFunction = models.DatabaseFunction;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
+const DescribeDBEncryptAttributesResponse = models.DescribeDBEncryptAttributesResponse;
 const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const DatabaseTable = models.DatabaseTable;
+const DescribeDBEncryptAttributesRequest = models.DescribeDBEncryptAttributesRequest;
 const Deal = models.Deal;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DBParamValue = models.DBParamValue;
@@ -639,6 +641,17 @@ Note: accounts with the same username but different hosts are different accounts
     DisassociateSecurityGroups(req, cb) {
         let resp = new DisassociateSecurityGroupsResponse();
         this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the encryption status of the instance data.
+     * @param {DescribeDBEncryptAttributesRequest} req
+     * @param {function(string, DescribeDBEncryptAttributesResponse):void} cb
+     * @public
+     */
+    DescribeDBEncryptAttributes(req, cb) {
+        let resp = new DescribeDBEncryptAttributesResponse();
+        this.request("DescribeDBEncryptAttributes", req, resp, cb);
     }
 
 

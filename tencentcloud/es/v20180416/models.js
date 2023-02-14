@@ -1751,6 +1751,12 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
          */
         this.DiskEnhance = null;
 
+        /**
+         * Whether to enable smart inspection.
+         * @type {boolean || null}
+         */
+        this.EnableDiagnose = null;
+
     }
 
     /**
@@ -1827,6 +1833,7 @@ Dedicated primary node disk size in GB, which is optional. If passed in, it can 
         }
         this.EnableHybridStorage = 'EnableHybridStorage' in params ? params.EnableHybridStorage : null;
         this.DiskEnhance = 'DiskEnhance' in params ? params.DiskEnhance : null;
+        this.EnableDiagnose = 'EnableDiagnose' in params ? params.EnableDiagnose : null;
 
     }
 }

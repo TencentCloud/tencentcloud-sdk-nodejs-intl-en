@@ -318,6 +318,34 @@ class DescribeAccountsRequest extends  AbstractModel {
 }
 
 /**
+ * UpgradeHourDCDBInstance response structure.
+ * @class
+ */
+class UpgradeHourDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ActiveHourDCDBInstance response structure.
  * @class
  */
@@ -1050,6 +1078,108 @@ class DescribeFlowResponse extends  AbstractModel {
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeHourDCDBInstance request structure.
+ * @class
+ */
+class UpgradeHourDCDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID to be upgraded in the format of dcdbt-ow728lmc, which can be obtained through the `DescribeDCDBInstances` API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Upgrade type. Valid values: 
+<li> `ADD`: Add a new shard </li> 
+ <li> `EXPAND`: Upgrade the existing shads</li> 
+ <li> `SPLIT`: Split data of the existing shads to the new ones</li>
+         * @type {string || null}
+         */
+        this.UpgradeType = null;
+
+        /**
+         * Add shards when `UpgradeType` is `ADD`.
+         * @type {AddShardConfig || null}
+         */
+        this.AddShardConfig = null;
+
+        /**
+         * Expand shard when `UpgradeType` is `EXPAND`.
+         * @type {ExpandShardConfig || null}
+         */
+        this.ExpandShardConfig = null;
+
+        /**
+         * Split shard when `UpgradeType` is `SPLIT`.
+         * @type {SplitShardConfig || null}
+         */
+        this.SplitShardConfig = null;
+
+        /**
+         * Switch start time in the format of "2019-12-12 07:00:00", which is no less than one hour and within 3 days from the current time.
+         * @type {string || null}
+         */
+        this.SwitchStartTime = null;
+
+        /**
+         * Switch end time in the format of "2019-12-12 07:15:00", which must be later than the start time.
+         * @type {string || null}
+         */
+        this.SwitchEndTime = null;
+
+        /**
+         * Whether to retry automatically. Valid values: `0` (no), `1` (yes).
+         * @type {number || null}
+         */
+        this.SwitchAutoRetry = null;
+
+        /**
+         * The list of new AZs specified in deployment modification. The first one is the source AZ, and the rest are replica AZs.
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UpgradeType = 'UpgradeType' in params ? params.UpgradeType : null;
+
+        if (params.AddShardConfig) {
+            let obj = new AddShardConfig();
+            obj.deserialize(params.AddShardConfig)
+            this.AddShardConfig = obj;
+        }
+
+        if (params.ExpandShardConfig) {
+            let obj = new ExpandShardConfig();
+            obj.deserialize(params.ExpandShardConfig)
+            this.ExpandShardConfig = obj;
+        }
+
+        if (params.SplitShardConfig) {
+            let obj = new SplitShardConfig();
+            obj.deserialize(params.SplitShardConfig)
+            this.SplitShardConfig = obj;
+        }
+        this.SwitchStartTime = 'SwitchStartTime' in params ? params.SwitchStartTime : null;
+        this.SwitchEndTime = 'SwitchEndTime' in params ? params.SwitchEndTime : null;
+        this.SwitchAutoRetry = 'SwitchAutoRetry' in params ? params.SwitchAutoRetry : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
 
     }
 }
@@ -2244,6 +2374,55 @@ class DescribeDatabaseObjectsRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.DbName = 'DbName' in params ? params.DbName : null;
+
+    }
+}
+
+/**
+ * Instance upgrade -- Expanding shard
+ * @class
+ */
+class ExpandShardConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Shard IDs in array
+         * @type {Array.<string> || null}
+         */
+        this.ShardInstanceIds = null;
+
+        /**
+         * Shard memory capacity in GB
+         * @type {number || null}
+         */
+        this.ShardMemory = null;
+
+        /**
+         * Shard storage capacity in GB
+         * @type {number || null}
+         */
+        this.ShardStorage = null;
+
+        /**
+         * Number of shard nodes
+         * @type {number || null}
+         */
+        this.ShardNodeCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShardInstanceIds = 'ShardInstanceIds' in params ? params.ShardInstanceIds : null;
+        this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
+        this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
+        this.ShardNodeCount = 'ShardNodeCount' in params ? params.ShardNodeCount : null;
 
     }
 }
@@ -3983,6 +4162,55 @@ class ColumnPrivilege extends  AbstractModel {
         this.Table = 'Table' in params ? params.Table : null;
         this.Column = 'Column' in params ? params.Column : null;
         this.Privileges = 'Privileges' in params ? params.Privileges : null;
+
+    }
+}
+
+/**
+ * Instance upgrade -- Sharding
+ * @class
+ */
+class SplitShardConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Shard IDs in array
+         * @type {Array.<string> || null}
+         */
+        this.ShardInstanceIds = null;
+
+        /**
+         * Data split ratio at 50% (fixed)
+         * @type {number || null}
+         */
+        this.SplitRate = null;
+
+        /**
+         * Shard memory capacity in GB
+         * @type {number || null}
+         */
+        this.ShardMemory = null;
+
+        /**
+         * Shard storage capacity in GB
+         * @type {number || null}
+         */
+        this.ShardStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShardInstanceIds = 'ShardInstanceIds' in params ? params.ShardInstanceIds : null;
+        this.SplitRate = 'SplitRate' in params ? params.SplitRate : null;
+        this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
+        this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
 
     }
 }
@@ -5767,6 +5995,48 @@ class DatabaseProcedure extends  AbstractModel {
 }
 
 /**
+ * Instance upgrade -- Adding shard
+ * @class
+ */
+class AddShardConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of shards to be added
+         * @type {number || null}
+         */
+        this.ShardCount = null;
+
+        /**
+         * Shard memory capacity in GB
+         * @type {number || null}
+         */
+        this.ShardMemory = null;
+
+        /**
+         * Shard storage capacity in GB
+         * @type {number || null}
+         */
+        this.ShardStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShardCount = 'ShardCount' in params ? params.ShardCount : null;
+        this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
+        this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
+
+    }
+}
+
+/**
  * ModifyDBSyncMode request structure.
  * @class
  */
@@ -6850,6 +7120,7 @@ module.exports = {
     DestroyDCDBInstanceResponse: DestroyDCDBInstanceResponse,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
+    UpgradeHourDCDBInstanceResponse: UpgradeHourDCDBInstanceResponse,
     ActiveHourDCDBInstanceResponse: ActiveHourDCDBInstanceResponse,
     DescribeDCDBPriceResponse: DescribeDCDBPriceResponse,
     ModifyInstanceVportResponse: ModifyInstanceVportResponse,
@@ -6866,6 +7137,7 @@ module.exports = {
     IsolateHourDCDBInstanceRequest: IsolateHourDCDBInstanceRequest,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     DescribeFlowResponse: DescribeFlowResponse,
+    UpgradeHourDCDBInstanceRequest: UpgradeHourDCDBInstanceRequest,
     CloneAccountResponse: CloneAccountResponse,
     IsolateDedicatedDBInstanceRequest: IsolateDedicatedDBInstanceRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
@@ -6892,6 +7164,7 @@ module.exports = {
     ParamConstraint: ParamConstraint,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
+    ExpandShardConfig: ExpandShardConfig,
     DatabaseTable: DatabaseTable,
     Deal: Deal,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
@@ -6917,6 +7190,7 @@ module.exports = {
     TableColumn: TableColumn,
     SecurityGroupBound: SecurityGroupBound,
     ColumnPrivilege: ColumnPrivilege,
+    SplitShardConfig: SplitShardConfig,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     DescribeDCDBShardsResponse: DescribeDCDBShardsResponse,
     CreateHourDCDBInstanceResponse: CreateHourDCDBInstanceResponse,
@@ -6949,6 +7223,7 @@ module.exports = {
     Account: Account,
     CreateDCDBInstanceRequest: CreateDCDBInstanceRequest,
     DatabaseProcedure: DatabaseProcedure,
+    AddShardConfig: AddShardConfig,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     CreateAccountResponse: CreateAccountResponse,
     IsolateDedicatedDBInstanceResponse: IsolateDedicatedDBInstanceResponse,

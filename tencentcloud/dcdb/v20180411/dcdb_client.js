@@ -23,6 +23,7 @@ const ParamDesc = models.ParamDesc;
 const DestroyDCDBInstanceResponse = models.DestroyDCDBInstanceResponse;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const UpgradeHourDCDBInstanceResponse = models.UpgradeHourDCDBInstanceResponse;
 const ActiveHourDCDBInstanceResponse = models.ActiveHourDCDBInstanceResponse;
 const DescribeDCDBPriceResponse = models.DescribeDCDBPriceResponse;
 const ModifyInstanceVportResponse = models.ModifyInstanceVportResponse;
@@ -39,6 +40,7 @@ const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
+const UpgradeHourDCDBInstanceRequest = models.UpgradeHourDCDBInstanceRequest;
 const CloneAccountResponse = models.CloneAccountResponse;
 const IsolateDedicatedDBInstanceRequest = models.IsolateDedicatedDBInstanceRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
@@ -65,6 +67,7 @@ const DatabaseFunction = models.DatabaseFunction;
 const ParamConstraint = models.ParamConstraint;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
+const ExpandShardConfig = models.ExpandShardConfig;
 const DatabaseTable = models.DatabaseTable;
 const Deal = models.Deal;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
@@ -90,6 +93,7 @@ const DescribeDcnDetailResponse = models.DescribeDcnDetailResponse;
 const TableColumn = models.TableColumn;
 const SecurityGroupBound = models.SecurityGroupBound;
 const ColumnPrivilege = models.ColumnPrivilege;
+const SplitShardConfig = models.SplitShardConfig;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
 const CreateHourDCDBInstanceResponse = models.CreateHourDCDBInstanceResponse;
@@ -122,6 +126,7 @@ const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const Account = models.Account;
 const CreateDCDBInstanceRequest = models.CreateDCDBInstanceRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
+const AddShardConfig = models.AddShardConfig;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const IsolateDedicatedDBInstanceResponse = models.IsolateDedicatedDBInstanceResponse;
@@ -400,6 +405,17 @@ Note: accounts with the same username but different hosts are different accounts
     IsolateHourDCDBInstance(req, cb) {
         let resp = new IsolateHourDCDBInstanceResponse();
         this.request("IsolateHourDCDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade a pay-as-you-go TDSQL for MySQL instance.
+     * @param {UpgradeHourDCDBInstanceRequest} req
+     * @param {function(string, UpgradeHourDCDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeHourDCDBInstance(req, cb) {
+        let resp = new UpgradeHourDCDBInstanceResponse();
+        this.request("UpgradeHourDCDBInstance", req, resp, cb);
     }
 
     /**

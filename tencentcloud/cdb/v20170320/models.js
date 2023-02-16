@@ -95,7 +95,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.UniqSubnetId = null;
 
         /**
-         * Project ID. If this is left empty, the default project will be used. If read-only instances or disaster recovery instances are purchased, the project ID will be the same as the source instance ID by default.
+         * Project ID. If this parameter is left empty, the default project will be used. When you purchase read-only instances and disaster recovery instances, the project ID is the same as that of the source instance by default.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -916,7 +916,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.Cpu = null;
 
         /**
-         * Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+         * Whether to enable QuickChange. Valid values: `0` (no), `1` (yes), `2` (QuickChange preferred). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
          * @type {number || null}
          */
         this.FastUpgrade = null;
@@ -1980,48 +1980,72 @@ class InstanceRollbackRangeTime extends  AbstractModel {
 }
 
 /**
- * SQL file information
+ * DescribeDBFeatures response structure.
  * @class
  */
-class SqlFileInfo extends  AbstractModel {
+class DescribeDBFeaturesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Upload time
+         * Whether database audit is supported
+         * @type {boolean || null}
+         */
+        this.IsSupportAudit = null;
+
+        /**
+         * Whether enabling audit requires a kernel version upgrade
+         * @type {boolean || null}
+         */
+        this.AuditNeedUpgrade = null;
+
+        /**
+         * Whether database encryption is supported
+         * @type {boolean || null}
+         */
+        this.IsSupportEncryption = null;
+
+        /**
+         * Whether enabling encryption requires a kernel version upgrade
+         * @type {boolean || null}
+         */
+        this.EncryptionNeedUpgrade = null;
+
+        /**
+         * Whether the instance is a remote read-only instance
+         * @type {boolean || null}
+         */
+        this.IsRemoteRo = null;
+
+        /**
+         * Region of the source instance
          * @type {string || null}
          */
-        this.UploadTime = null;
+        this.MasterRegion = null;
 
         /**
-         * Upload progress
-         * @type {UploadInfo || null}
+         * Whether minor version upgrade is supported
+         * @type {boolean || null}
          */
-        this.UploadInfo = null;
+        this.IsSupportUpdateSubVersion = null;
 
         /**
-         * Filename
+         * The current kernel version
          * @type {string || null}
          */
-        this.FileName = null;
+        this.CurrentSubVersion = null;
 
         /**
-         * File size in bytes
-         * @type {number || null}
-         */
-        this.FileSize = null;
-
-        /**
-         * Whether upload is finished. Valid values: 0 (not completed), 1 (completed)
-         * @type {number || null}
-         */
-        this.IsUploadFinished = null;
-
-        /**
-         * File ID
+         * Available kernel version for upgrade
          * @type {string || null}
          */
-        this.FileId = null;
+        this.TargetSubVersion = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2032,17 +2056,16 @@ class SqlFileInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UploadTime = 'UploadTime' in params ? params.UploadTime : null;
-
-        if (params.UploadInfo) {
-            let obj = new UploadInfo();
-            obj.deserialize(params.UploadInfo)
-            this.UploadInfo = obj;
-        }
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.FileSize = 'FileSize' in params ? params.FileSize : null;
-        this.IsUploadFinished = 'IsUploadFinished' in params ? params.IsUploadFinished : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.IsSupportAudit = 'IsSupportAudit' in params ? params.IsSupportAudit : null;
+        this.AuditNeedUpgrade = 'AuditNeedUpgrade' in params ? params.AuditNeedUpgrade : null;
+        this.IsSupportEncryption = 'IsSupportEncryption' in params ? params.IsSupportEncryption : null;
+        this.EncryptionNeedUpgrade = 'EncryptionNeedUpgrade' in params ? params.EncryptionNeedUpgrade : null;
+        this.IsRemoteRo = 'IsRemoteRo' in params ? params.IsRemoteRo : null;
+        this.MasterRegion = 'MasterRegion' in params ? params.MasterRegion : null;
+        this.IsSupportUpdateSubVersion = 'IsSupportUpdateSubVersion' in params ? params.IsSupportUpdateSubVersion : null;
+        this.CurrentSubVersion = 'CurrentSubVersion' in params ? params.CurrentSubVersion : null;
+        this.TargetSubVersion = 'TargetSubVersion' in params ? params.TargetSubVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6141,7 +6164,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.Vips = null;
 
         /**
-         * Instance status. Value range: <br>0 - creating <br>1 - running <br>4 - isolating <br>5 - isolated (the instance can be restored and started in the recycle bin)
+         * Instance status. Valid values: <br>`0` (creating) <br>`1` (running) <br>`4` (isolating) <br>`5` (isolated; the instance can be restored and started in the recycle bin)
          * @type {Array.<number> || null}
          */
         this.Status = null;
@@ -7576,6 +7599,34 @@ class DescribeTimeWindowRequest extends  AbstractModel {
 
         /**
          * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeDBFeatures request structure.
+ * @class
+ */
+class DescribeDBFeaturesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -11838,7 +11889,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Memory = null;
 
         /**
-         * Instance status. Value range: 0 (creating), 1 (running), 4 (isolating), 5 (isolated)
+         * Instance status. Valid values: `0` (creating), `1` (running), `4` (isolating), `5` (isolated).
          * @type {number || null}
          */
         this.Status = null;
@@ -14817,30 +14868,48 @@ class DatabasesWithCharacterLists extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstance response structure.
+ * SQL file information
  * @class
  */
-class UpgradeDBInstanceResponse extends  AbstractModel {
+class SqlFileInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Order ID.
-         * @type {Array.<string> || null}
-         */
-        this.DealIds = null;
-
-        /**
-         * Async task request ID, which can be used to query the execution result of an async task.
+         * Upload time
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.UploadTime = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Upload progress
+         * @type {UploadInfo || null}
+         */
+        this.UploadInfo = null;
+
+        /**
+         * Filename
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FileName = null;
+
+        /**
+         * File size in bytes
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * Whether upload is finished. Valid values: 0 (not completed), 1 (completed)
+         * @type {number || null}
+         */
+        this.IsUploadFinished = null;
+
+        /**
+         * File ID
+         * @type {string || null}
+         */
+        this.FileId = null;
 
     }
 
@@ -14851,9 +14920,17 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealIds = 'DealIds' in params ? params.DealIds : null;
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.UploadTime = 'UploadTime' in params ? params.UploadTime : null;
+
+        if (params.UploadInfo) {
+            let obj = new UploadInfo();
+            obj.deserialize(params.UploadInfo)
+            this.UploadInfo = obj;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.IsUploadFinished = 'IsUploadFinished' in params ? params.IsUploadFinished : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
 
     }
 }
@@ -16540,6 +16617,48 @@ class DescribeDeviceMonitorInfoResponse extends  AbstractModel {
 }
 
 /**
+ * UpgradeDBInstance response structure.
+ * @class
+ */
+class UpgradeDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID.
+         * @type {Array.<string> || null}
+         */
+        this.DealIds = null;
+
+        /**
+         * Async task request ID, which can be used to query the execution result of an async task.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRollbackRangeTime response structure.
  * @class
  */
@@ -17264,7 +17383,7 @@ module.exports = {
     CreateAccountsResponse: CreateAccountsResponse,
     SwitchDBInstanceMasterSlaveResponse: SwitchDBInstanceMasterSlaveResponse,
     InstanceRollbackRangeTime: InstanceRollbackRangeTime,
-    SqlFileInfo: SqlFileInfo,
+    DescribeDBFeaturesResponse: DescribeDBFeaturesResponse,
     CdbSellType: CdbSellType,
     DescribeProxyCustomConfRequest: DescribeProxyCustomConfRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
@@ -17363,6 +17482,7 @@ module.exports = {
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
     DescribeTimeWindowRequest: DescribeTimeWindowRequest,
+    DescribeDBFeaturesRequest: DescribeDBFeaturesRequest,
     CreateAuditPolicyResponse: CreateAuditPolicyResponse,
     SwitchForUpgradeResponse: SwitchForUpgradeResponse,
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
@@ -17501,7 +17621,7 @@ module.exports = {
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     DescribeSlowLogDataRequest: DescribeSlowLogDataRequest,
     DatabasesWithCharacterLists: DatabasesWithCharacterLists,
-    UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
+    SqlFileInfo: SqlFileInfo,
     ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,
     DescribeRemoteBackupConfigRequest: DescribeRemoteBackupConfigRequest,
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
@@ -17539,6 +17659,7 @@ module.exports = {
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     SlowLogItem: SlowLogItem,
     DescribeDeviceMonitorInfoResponse: DescribeDeviceMonitorInfoResponse,
+    UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     DescribeRollbackRangeTimeResponse: DescribeRollbackRangeTimeResponse,
     ModifyRoGroupInfoRequest: ModifyRoGroupInfoRequest,
     DescribeRollbackRangeTimeRequest: DescribeRollbackRangeTimeRequest,

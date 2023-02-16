@@ -11762,6 +11762,14 @@ class AiAnalysisTaskInput extends  AbstractModel {
          */
         this.Definition = null;
 
+        /**
+         * An extended parameter, whose value is a stringfied JSON.
+Note: This parameter is for customers with special requirements. It needs to be customized offline.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExtendedParameter = null;
+
     }
 
     /**
@@ -11772,6 +11780,7 @@ class AiAnalysisTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ExtendedParameter = 'ExtendedParameter' in params ? params.ExtendedParameter : null;
 
     }
 }

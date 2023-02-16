@@ -2102,6 +2102,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.GroupList = null;
 
+        /**
+         * Consumer group quota
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.GroupCountQuota = null;
+
     }
 
     /**
@@ -2121,6 +2128,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.GroupList.push(obj);
             }
         }
+        this.GroupCountQuota = 'GroupCountQuota' in params ? params.GroupCountQuota : null;
 
     }
 }
@@ -6388,7 +6396,7 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * (Filter) filter by instance name. Fuzzy search is supported
+         * Filter by instance name, instance ID, AZ, VPC ID, or subnet ID. Fuzzy query is supported.
          * @type {string || null}
          */
         this.SearchWord = null;

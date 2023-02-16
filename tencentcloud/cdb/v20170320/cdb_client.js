@@ -46,7 +46,7 @@ const TagInfoItem = models.TagInfoItem;
 const CreateAccountsResponse = models.CreateAccountsResponse;
 const SwitchDBInstanceMasterSlaveResponse = models.SwitchDBInstanceMasterSlaveResponse;
 const InstanceRollbackRangeTime = models.InstanceRollbackRangeTime;
-const SqlFileInfo = models.SqlFileInfo;
+const DescribeDBFeaturesResponse = models.DescribeDBFeaturesResponse;
 const CdbSellType = models.CdbSellType;
 const DescribeProxyCustomConfRequest = models.DescribeProxyCustomConfRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
@@ -145,6 +145,7 @@ const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
 const DescribeTimeWindowRequest = models.DescribeTimeWindowRequest;
+const DescribeDBFeaturesRequest = models.DescribeDBFeaturesRequest;
 const CreateAuditPolicyResponse = models.CreateAuditPolicyResponse;
 const SwitchForUpgradeResponse = models.SwitchForUpgradeResponse;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
@@ -283,7 +284,7 @@ const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVers
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
 const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
-const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
+const SqlFileInfo = models.SqlFileInfo;
 const ModifyDBInstanceVipVportRequest = models.ModifyDBInstanceVipVportRequest;
 const DescribeRemoteBackupConfigRequest = models.DescribeRemoteBackupConfigRequest;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
@@ -321,6 +322,7 @@ const UpgradeCDBProxyRequest = models.UpgradeCDBProxyRequest;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const SlowLogItem = models.SlowLogItem;
 const DescribeDeviceMonitorInfoResponse = models.DescribeDeviceMonitorInfoResponse;
+const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const DescribeRollbackRangeTimeResponse = models.DescribeRollbackRangeTimeResponse;
 const ModifyRoGroupInfoRequest = models.ModifyRoGroupInfoRequest;
 const DescribeRollbackRangeTimeRequest = models.DescribeRollbackRangeTimeRequest;
@@ -379,6 +381,17 @@ class CdbClient extends AbstractClient {
     CreateAuditPolicy(req, cb) {
         let resp = new CreateAuditPolicyResponse();
         this.request("CreateAuditPolicy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query database version attributes, including supported features such as database encryption and audit.
+     * @param {DescribeDBFeaturesRequest} req
+     * @param {function(string, DescribeDBFeaturesResponse):void} cb
+     * @public
+     */
+    DescribeDBFeatures(req, cb) {
+        let resp = new DescribeDBFeaturesResponse();
+        this.request("DescribeDBFeatures", req, resp, cb);
     }
 
     /**
@@ -809,15 +822,15 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API is used to create pay-as-you-go TencentDB instances (which can be source instances, disaster recovery instances, or read-only replicas) by passing in information such as instance specifications, MySQL version number, and instance quantity.
+     * This API is used to create a pay-as-you-go TencentDB instance (which can be a source, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, and quantity.
 
-This is an asynchronous API. You can also use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query instance details. If the output parameter `Status` is `1` and the output parameter `TaskStatus` is `0`, the instances have been successfully delivered.
+This is an async API. You can also use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance details. If the `Status` value of an instance is `1` and `TaskStatus` is `0`, the instance has been successfully delivered.
 
-1. Use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the purchasable instance specifications, and then use the [DescribeDBPrice](https://intl.cloud.tencent.com/document/api/236/18566?from_cn_redirect=1) API to query the prices of the purchasable instances;
-2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months;
-3. MySQL v5.5, v5.6, v5.7, and v8.0 are supported;
-4. Source instances, disaster recovery instances, and read-only replicas can be created;
-5. If `Port`, `ParamList`, or `Password` is specified in the input parameters, the instance (excluding basic instances) will be initialized.
+1. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the purchasable instance specifications, and then use the [DescribeDBPrice](https://intl.cloud.tencent.com/document/api/236/18566?from_cn_redirect=1) API to query the prices of the purchasable instances.
+2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months.
+3. MySQL 5.5, 5.6, 5.7, and 8.0 are supported.
+4. Source instances, disaster recovery instances, and read-only instances can be created.
+5. If `Port`, `ParamList`, or `Password` is specified in the input parameters, the instance will be initialized.
      * @param {CreateDBInstanceHourRequest} req
      * @param {function(string, CreateDBInstanceHourResponse):void} cb
      * @public
@@ -1002,7 +1015,9 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API is used to upgrade the configuration of database proxy.
+     * 接口已经废弃，请使用AdjustCdbProxy进行数据库代理的配置
+
+This API is used to upgrade the configuration of database proxy.
      * @param {UpgradeCDBProxyRequest} req
      * @param {function(string, UpgradeCDBProxyResponse):void} cb
      * @public

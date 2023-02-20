@@ -967,7 +967,7 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
         this.FilterInstanceIdList = null;
 
         /**
-         * Filters by Enterprise edition
+         * Enterprise edition. Values: `1` (the Convoy package included), `2` (the Convoy package not included)
          * @type {number || null}
          */
         this.FilterEnterpriseFlag = null;
@@ -989,6 +989,24 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
          * @type {TagFilter || null}
          */
         this.FilterTag = null;
+
+        /**
+         * Filters out trial instances. Values: `1` (emergency protection instances), `2` (PLG instances)
+         * @type {number || null}
+         */
+        this.FilterTrialFlag = null;
+
+        /**
+         * Filters out Convoy instances
+         * @type {number || null}
+         */
+        this.FilterConvoy = null;
+
+        /**
+         * Whether to exclude the advanced information (such as `InstanceList[0].Usage`). Values: `true` (exclude), `false` (do not exclude). The default value is `false`.
+         * @type {boolean || null}
+         */
+        this.ExcludeAdvancedInfo = null;
 
     }
 
@@ -1018,6 +1036,9 @@ class DescribeListBGPInstancesRequest extends  AbstractModel {
             obj.deserialize(params.FilterTag)
             this.FilterTag = obj;
         }
+        this.FilterTrialFlag = 'FilterTrialFlag' in params ? params.FilterTrialFlag : null;
+        this.FilterConvoy = 'FilterConvoy' in params ? params.FilterConvoy : null;
+        this.ExcludeAdvancedInfo = 'ExcludeAdvancedInfo' in params ? params.ExcludeAdvancedInfo : null;
 
     }
 }
@@ -2077,7 +2098,7 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
         this.FilterDamDDoSStatus = null;
 
         /**
-         * Filters by status of bound resources. `idle`: normal; `attacking`: being attacked; `blocking`: blocked
+         * Filters by the status of bound resources. Values: `idle` (normal), `attacking` (being attacked), `blocking` (being blocked), `trial` (in trial)
          * @type {string || null}
          */
         this.FilterStatus = null;
@@ -2105,6 +2126,12 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.FilterPackType = null;
+
+        /**
+         * Filters out Convoy instances
+         * @type {number || null}
+         */
+        this.FilterConvoy = null;
 
     }
 
@@ -2135,6 +2162,7 @@ class DescribeListBGPIPInstancesRequest extends  AbstractModel {
             this.FilterTag = obj;
         }
         this.FilterPackType = 'FilterPackType' in params ? params.FilterPackType : null;
+        this.FilterConvoy = 'FilterConvoy' in params ? params.FilterConvoy : null;
 
     }
 }
@@ -2601,6 +2629,91 @@ class DeleteCCThresholdPolicyResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBizHttpStatus request structure.
+ * @class
+ */
+class DescribeBizHttpStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Statistical mode. Value: `sum`.
+         * @type {string || null}
+         */
+        this.Statistics = null;
+
+        /**
+         * Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * Statistical period in seconds. Valid values: `60`, `300`, `1800`, `3600`, `21600`, and `86400`.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Statistics start time, such as `2020-02-01 12:04:12`
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Statistics end time, such as `2020-02-03 18:03:23`
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The resource ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Specific domain name query
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Protocol and port list, which is valid when the metric is `connum`, `new_conn` or `inactive_conn`. Valid protocols: `TCP`, `UDP`, `HTTP`, `HTTPS`
+         * @type {Array.<ProtocolPort> || null}
+         */
+        this.ProtoInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Statistics = 'Statistics' in params ? params.Statistics : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.ProtoInfo) {
+            this.ProtoInfo = new Array();
+            for (let z in params.ProtoInfo) {
+                let obj = new ProtocolPort();
+                obj.deserialize(params.ProtoInfo[z]);
+                this.ProtoInfo.push(obj);
+            }
+        }
 
     }
 }
@@ -3275,6 +3388,97 @@ class CreateCcGeoIPBlockConfigResponse extends  AbstractModel {
 }
 
 /**
+ * Aggregated data on the HTTP status codes of business traffic
+ * @class
+ */
+class HttpStatusMap extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * HTTP 2xx Forwarding status code
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp2xx = null;
+
+        /**
+         * HTTP 5xx Status code
+         * @type {Array.<number> || null}
+         */
+        this.Http5xx = null;
+
+        /**
+         * HTTP 5xx Forwarding status code
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp5xx = null;
+
+        /**
+         * HTTP 404 Forwarding status code
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp404 = null;
+
+        /**
+         * HTTP 4xx Status code
+         * @type {Array.<number> || null}
+         */
+        this.Http4xx = null;
+
+        /**
+         * HTTP 4xx Forwarding status code
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp4xx = null;
+
+        /**
+         * HTTP 2xx Status code
+         * @type {Array.<number> || null}
+         */
+        this.Http2xx = null;
+
+        /**
+         * HTTP 404 Status code
+         * @type {Array.<number> || null}
+         */
+        this.Http404 = null;
+
+        /**
+         * HTTP 3xx Forwarding status code
+         * @type {Array.<number> || null}
+         */
+        this.SourceHttp3xx = null;
+
+        /**
+         * HTTP 3xx Status code
+         * @type {Array.<number> || null}
+         */
+        this.Http3xx = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceHttp2xx = 'SourceHttp2xx' in params ? params.SourceHttp2xx : null;
+        this.Http5xx = 'Http5xx' in params ? params.Http5xx : null;
+        this.SourceHttp5xx = 'SourceHttp5xx' in params ? params.SourceHttp5xx : null;
+        this.SourceHttp404 = 'SourceHttp404' in params ? params.SourceHttp404 : null;
+        this.Http4xx = 'Http4xx' in params ? params.Http4xx : null;
+        this.SourceHttp4xx = 'SourceHttp4xx' in params ? params.SourceHttp4xx : null;
+        this.Http2xx = 'Http2xx' in params ? params.Http2xx : null;
+        this.Http404 = 'Http404' in params ? params.Http404 : null;
+        this.SourceHttp3xx = 'SourceHttp3xx' in params ? params.SourceHttp3xx : null;
+        this.Http3xx = 'Http3xx' in params ? params.Http3xx : null;
+
+    }
+}
+
+/**
  * Layer-7 forwarding rule
  * @class
  */
@@ -3863,7 +4067,7 @@ class CreateCcGeoIPBlockConfigRequest extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * Region blocking configuration. The configuration ID should be cleared when you set this parameter.
+         * CC regional blocking configuration
          * @type {CcGeoIPBlockConfig || null}
          */
         this.CcGeoIPBlockConfig = null;
@@ -3892,24 +4096,24 @@ class CreateCcGeoIPBlockConfigRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDomainUsrName request structure.
+ * DescribeBizHttpStatus response structure.
  * @class
  */
-class ModifyDomainUsrNameRequest extends  AbstractModel {
+class DescribeBizHttpStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * User CNAME
-         * @type {string || null}
+         * Statistics on the HTTP status codes of business traffic
+         * @type {HttpStatusMap || null}
          */
-        this.DomainName = null;
+        this.HttpStatusMap = null;
 
         /**
-         * Domain name
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.DomainUserName = null;
+        this.RequestId = null;
 
     }
 
@@ -3920,8 +4124,13 @@ class ModifyDomainUsrNameRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.DomainUserName = 'DomainUserName' in params ? params.DomainUserName : null;
+
+        if (params.HttpStatusMap) {
+            let obj = new HttpStatusMap();
+            obj.deserialize(params.HttpStatusMap)
+            this.HttpStatusMap = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4205,7 +4414,7 @@ class DescribePendingRiskInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Whether the user is a paid user
+         * Whether the user is a paid user. Values: `true`, `false`.
          * @type {boolean || null}
          */
         this.IsPaidUsr = null;
@@ -4535,6 +4744,27 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.InstanceVersion = null;
 
+        /**
+         * Convoy instance ID
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.ConvoyId = null;
+
+        /**
+         * Pay-as-you-go bandwidth
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.ElasticBandwidth = null;
+
+        /**
+         * Whether it’s the IP broadcasted by EdgeOne. Values: `1` (yes), `0` (no)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EOFlag = null;
+
     }
 
     /**
@@ -4620,6 +4850,9 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             this.AnycastOutPackRelation = obj;
         }
         this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
+        this.ConvoyId = 'ConvoyId' in params ? params.ConvoyId : null;
+        this.ElasticBandwidth = 'ElasticBandwidth' in params ? params.ElasticBandwidth : null;
+        this.EOFlag = 'EOFlag' in params ? params.EOFlag : null;
 
     }
 }
@@ -7328,6 +7561,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyDomainUsrName request structure.
+ * @class
+ */
+class ModifyDomainUsrNameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User CNAME
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.DomainUserName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.DomainUserName = 'DomainUserName' in params ? params.DomainUserName : null;
+
+    }
+}
+
+/**
  * The level-defining policy of CC attacks
  * @class
  */
@@ -7482,7 +7750,8 @@ class InsL7Rules extends  AbstractModel {
         super();
 
         /**
-         * Rule status. Valid values: `0` (the rule is working), `1` (the rule goes into effect), `2` (rule configuration failed), `3` (the rule is being deleted), `5` (rule deletion failed), `6` (waiting to add rules), `7` (waiting to delete rules), `8` (waiting to upload certificates), `9` (resources for the rule not found), `10` (waiting to modify rules), `11` (the rule is being modifying).
+         * Rules can only be modified when the status is `0`, `2`, or `8`.
+Rule status. Values: `0` (Normal), `1` (Being configured), `2` (Configuration failed), `3` (Being deleted), `5` (Failed to be deleted), `6` (Pending add), `7` (Pending delete), `8` (Pending certificate upload), `9` (Associated resource not exist), `10` (Pending modify), `11` (Being modified).
          * @type {number || null}
          */
         this.Status = null;
@@ -8078,6 +8347,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.ErrCode = null;
 
+        /**
+         * Version
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Version = null;
+
     }
 
     /**
@@ -8121,6 +8397,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
         this.RewriteHttps = 'RewriteHttps' in params ? params.RewriteHttps : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Version = 'Version' in params ? params.Version : null;
 
     }
 }
@@ -8251,6 +8528,12 @@ class SwitchWaterPrintConfigRequest extends  AbstractModel {
          */
         this.OpenStatus = null;
 
+        /**
+         * Whether to enable proxy. Values: `1` (Enable proxy and ignore IP+port verification), `0` (Do not enable proxy and IP+port verification is required)
+         * @type {number || null}
+         */
+        this.CloudSdkProxy = null;
+
     }
 
     /**
@@ -8262,6 +8545,7 @@ class SwitchWaterPrintConfigRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.OpenStatus = 'OpenStatus' in params ? params.OpenStatus : null;
+        this.CloudSdkProxy = 'CloudSdkProxy' in params ? params.CloudSdkProxy : null;
 
     }
 }
@@ -8493,6 +8777,13 @@ class WaterPrintConfig extends  AbstractModel {
          */
         this.Verify = null;
 
+        /**
+         * Whether to enable proxy. Values: `1` (Enable proxy and ignore IP+port verification), `0` (Do not enable proxy and IP+port verification is required)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CloudSdkProxy = null;
+
     }
 
     /**
@@ -8523,6 +8814,7 @@ class WaterPrintConfig extends  AbstractModel {
             }
         }
         this.Verify = 'Verify' in params ? params.Verify : null;
+        this.CloudSdkProxy = 'CloudSdkProxy' in params ? params.CloudSdkProxy : null;
 
     }
 }
@@ -9293,6 +9585,19 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.VitalityVersion = null;
 
+        /**
+         * Network line
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Line = null;
+
+        /**
+         * Whether to enable elastic bandwidth
+         * @type {number || null}
+         */
+        this.ElasticServiceBandwidth = null;
+
     }
 
     /**
@@ -9359,6 +9664,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         }
         this.IpCountNewFlag = 'IpCountNewFlag' in params ? params.IpCountNewFlag : null;
         this.VitalityVersion = 'VitalityVersion' in params ? params.VitalityVersion : null;
+        this.Line = 'Line' in params ? params.Line : null;
+        this.ElasticServiceBandwidth = 'ElasticServiceBandwidth' in params ? params.ElasticServiceBandwidth : null;
 
     }
 }
@@ -9483,7 +9790,7 @@ class DescribeBizTrendRequest extends  AbstractModel {
         this.Business = null;
 
         /**
-         * Sampling interval. Valid values: `300`, `1800`, `3600`, `21600`, `86400`
+         * Sampling interval in seconds. Valid values: `60`, `300`, `1800`, `3600`, `21600`, `86400`
          * @type {number || null}
          */
         this.Period = null;
@@ -10914,6 +11221,7 @@ module.exports = {
     DisassociateDDoSEipAddressResponse: DisassociateDDoSEipAddressResponse,
     DescribeBgpBizTrendRequest: DescribeBgpBizTrendRequest,
     DeleteCCThresholdPolicyResponse: DeleteCCThresholdPolicyResponse,
+    DescribeBizHttpStatusRequest: DescribeBizHttpStatusRequest,
     SourceServer: SourceServer,
     ModifyDomainUsrNameResponse: ModifyDomainUsrNameResponse,
     ModifyCcBlackWhiteIpListResponse: ModifyCcBlackWhiteIpListResponse,
@@ -10930,6 +11238,7 @@ module.exports = {
     DescribeListDDoSGeoIPBlockConfigRequest: DescribeListDDoSGeoIPBlockConfigRequest,
     DescribeOverviewDDoSEventListResponse: DescribeOverviewDDoSEventListResponse,
     CreateCcGeoIPBlockConfigResponse: CreateCcGeoIPBlockConfigResponse,
+    HttpStatusMap: HttpStatusMap,
     Layer7Rule: Layer7Rule,
     L4RuleSource: L4RuleSource,
     DeleteCcGeoIPBlockConfigRequest: DeleteCcGeoIPBlockConfigRequest,
@@ -10944,7 +11253,7 @@ module.exports = {
     ModifyPacketFilterConfigRequest: ModifyPacketFilterConfigRequest,
     DescribeBlackWhiteIpListRequest: DescribeBlackWhiteIpListRequest,
     CreateCcGeoIPBlockConfigRequest: CreateCcGeoIPBlockConfigRequest,
-    ModifyDomainUsrNameRequest: ModifyDomainUsrNameRequest,
+    DescribeBizHttpStatusResponse: DescribeBizHttpStatusResponse,
     CreateDDoSSpeedLimitConfigResponse: CreateDDoSSpeedLimitConfigResponse,
     DescribeNewL7RulesErrHealthResponse: DescribeNewL7RulesErrHealthResponse,
     DeletePacketFilterConfigRequest: DeletePacketFilterConfigRequest,
@@ -11003,6 +11312,7 @@ module.exports = {
     DefaultAlarmThreshold: DefaultAlarmThreshold,
     ForwardListener: ForwardListener,
     BGPInstanceSpecification: BGPInstanceSpecification,
+    ModifyDomainUsrNameRequest: ModifyDomainUsrNameRequest,
     CCLevelPolicy: CCLevelPolicy,
     CreateWaterPrintKeyRequest: CreateWaterPrintKeyRequest,
     WaterPrintRelation: WaterPrintRelation,

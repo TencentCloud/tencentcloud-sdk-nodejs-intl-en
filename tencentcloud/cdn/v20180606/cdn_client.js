@@ -232,6 +232,7 @@ const AdvancedScdnAclGroup = models.AdvancedScdnAclGroup;
 const VideoSeek = models.VideoSeek;
 const Compatibility = models.Compatibility;
 const ManageClsTopicDomainsResponse = models.ManageClsTopicDomainsResponse;
+const HttpsBilling = models.HttpsBilling;
 const ScdnAclGroup = models.ScdnAclGroup;
 const ScdnWafRule = models.ScdnWafRule;
 const ClsSearchLogs = models.ClsSearchLogs;

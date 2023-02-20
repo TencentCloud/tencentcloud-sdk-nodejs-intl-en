@@ -68,6 +68,7 @@ const BoundIpInfo = models.BoundIpInfo;
 const DisassociateDDoSEipAddressResponse = models.DisassociateDDoSEipAddressResponse;
 const DescribeBgpBizTrendRequest = models.DescribeBgpBizTrendRequest;
 const DeleteCCThresholdPolicyResponse = models.DeleteCCThresholdPolicyResponse;
+const DescribeBizHttpStatusRequest = models.DescribeBizHttpStatusRequest;
 const SourceServer = models.SourceServer;
 const ModifyDomainUsrNameResponse = models.ModifyDomainUsrNameResponse;
 const ModifyCcBlackWhiteIpListResponse = models.ModifyCcBlackWhiteIpListResponse;
@@ -84,6 +85,7 @@ const ModifyPacketFilterConfigResponse = models.ModifyPacketFilterConfigResponse
 const DescribeListDDoSGeoIPBlockConfigRequest = models.DescribeListDDoSGeoIPBlockConfigRequest;
 const DescribeOverviewDDoSEventListResponse = models.DescribeOverviewDDoSEventListResponse;
 const CreateCcGeoIPBlockConfigResponse = models.CreateCcGeoIPBlockConfigResponse;
+const HttpStatusMap = models.HttpStatusMap;
 const Layer7Rule = models.Layer7Rule;
 const L4RuleSource = models.L4RuleSource;
 const DeleteCcGeoIPBlockConfigRequest = models.DeleteCcGeoIPBlockConfigRequest;
@@ -98,7 +100,7 @@ const DeleteCCLevelPolicyResponse = models.DeleteCCLevelPolicyResponse;
 const ModifyPacketFilterConfigRequest = models.ModifyPacketFilterConfigRequest;
 const DescribeBlackWhiteIpListRequest = models.DescribeBlackWhiteIpListRequest;
 const CreateCcGeoIPBlockConfigRequest = models.CreateCcGeoIPBlockConfigRequest;
-const ModifyDomainUsrNameRequest = models.ModifyDomainUsrNameRequest;
+const DescribeBizHttpStatusResponse = models.DescribeBizHttpStatusResponse;
 const CreateDDoSSpeedLimitConfigResponse = models.CreateDDoSSpeedLimitConfigResponse;
 const DescribeNewL7RulesErrHealthResponse = models.DescribeNewL7RulesErrHealthResponse;
 const DeletePacketFilterConfigRequest = models.DeletePacketFilterConfigRequest;
@@ -157,6 +159,7 @@ const PacketFilterConfig = models.PacketFilterConfig;
 const DefaultAlarmThreshold = models.DefaultAlarmThreshold;
 const ForwardListener = models.ForwardListener;
 const BGPInstanceSpecification = models.BGPInstanceSpecification;
+const ModifyDomainUsrNameRequest = models.ModifyDomainUsrNameRequest;
 const CCLevelPolicy = models.CCLevelPolicy;
 const CreateWaterPrintKeyRequest = models.CreateWaterPrintKeyRequest;
 const WaterPrintRelation = models.WaterPrintRelation;
@@ -739,8 +742,18 @@ class AntiddosClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get a list of Anti-DDoS Pro instances.
+     * This API is used to get the statistics on the status codes of business traffic.
+     * @param {DescribeBizHttpStatusRequest} req
+     * @param {function(string, DescribeBizHttpStatusResponse):void} cb
+     * @public
+     */
+    DescribeBizHttpStatus(req, cb) {
+        let resp = new DescribeBizHttpStatusResponse();
+        this.request("DescribeBizHttpStatus", req, resp, cb);
+    }
 
+    /**
+     * This API is used to get the list of Anti-DDoS Pro instances.
      * @param {DescribeListBGPInstancesRequest} req
      * @param {function(string, DescribeListBGPInstancesResponse):void} cb
      * @public

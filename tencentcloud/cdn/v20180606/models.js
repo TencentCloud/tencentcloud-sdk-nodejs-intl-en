@@ -5123,6 +5123,12 @@ After switching to global acceleration, configurations of the domain name will b
          */
         this.QnPrivateAccess = null;
 
+        /**
+         * HTTPS service
+         * @type {HttpsBilling || null}
+         */
+        this.HttpsBilling = null;
+
     }
 
     /**
@@ -5388,6 +5394,12 @@ After switching to global acceleration, configurations of the domain name will b
             let obj = new QnPrivateAccess();
             obj.deserialize(params.QnPrivateAccess)
             this.QnPrivateAccess = obj;
+        }
+
+        if (params.HttpsBilling) {
+            let obj = new HttpsBilling();
+            obj.deserialize(params.HttpsBilling)
+            this.HttpsBilling = obj;
         }
 
     }
@@ -7743,6 +7755,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.QnPrivateAccess = null;
 
+        /**
+         * HTTPS service
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {HttpsBilling || null}
+         */
+        this.HttpsBilling = null;
+
     }
 
     /**
@@ -8066,6 +8085,12 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             let obj = new QnPrivateAccess();
             obj.deserialize(params.QnPrivateAccess)
             this.QnPrivateAccess = obj;
+        }
+
+        if (params.HttpsBilling) {
+            let obj = new HttpsBilling();
+            obj.deserialize(params.HttpsBilling)
+            this.HttpsBilling = obj;
         }
 
     }
@@ -13344,8 +13369,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.Reorder = null;
 
         /**
-         * Include/exclude query parameters. Valid values: `includeAll`, `excludeAll`, `includeCustom`, `excludeAll`
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Includes/excludes query parameters. Valid values: `includeAll`, `excludeAll`, `includeCustom`, `excludeCustom`
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Action = null;
@@ -14027,6 +14052,34 @@ class ManageClsTopicDomainsResponse extends  AbstractModel {
 }
 
 /**
+ * When it’s not enabled, HTTPS requests are blocked.
+ * @class
+ */
+class HttpsBilling extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * HTTPS Service
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * SCDN precise access control configuration
  * @class
  */
@@ -14274,9 +14327,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.FilterRules = null;
 
         /**
-         * HTTP code returned when the IP allowlist/blocklist verification fails
-Valid values: 400-499
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * [Unavailable soon] The code returned when the IP blocklist/allowlist verification fails.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ReturnCode = null;
@@ -15628,6 +15680,7 @@ module.exports = {
     VideoSeek: VideoSeek,
     Compatibility: Compatibility,
     ManageClsTopicDomainsResponse: ManageClsTopicDomainsResponse,
+    HttpsBilling: HttpsBilling,
     ScdnAclGroup: ScdnAclGroup,
     ScdnWafRule: ScdnWafRule,
     ClsSearchLogs: ClsSearchLogs,

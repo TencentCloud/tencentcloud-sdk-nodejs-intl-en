@@ -7698,6 +7698,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          */
         this.Timestamp = null;
 
+        /**
+         * Message headers
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Headers = null;
+
     }
 
     /**
@@ -7713,6 +7720,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Headers = 'Headers' in params ? params.Headers : null;
 
     }
 }

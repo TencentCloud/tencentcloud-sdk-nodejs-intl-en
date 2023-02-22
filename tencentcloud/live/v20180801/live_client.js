@@ -41,8 +41,9 @@ const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineList
 const PushQualityData = models.PushQualityData;
 const ModifyLivePlayAuthKeyRequest = models.ModifyLivePlayAuthKeyRequest;
 const DescribeLiveDelayInfoListRequest = models.DescribeLiveDelayInfoListRequest;
+const HttpCodeValue = models.HttpCodeValue;
 const DomainCertInfo = models.DomainCertInfo;
-const RecordTemplateInfo = models.RecordTemplateInfo;
+const CreateLiveTimeShiftRuleResponse = models.CreateLiveTimeShiftRuleResponse;
 const DeleteLiveTranscodeRuleResponse = models.DeleteLiveTranscodeRuleResponse;
 const ConcurrentRecordStreamNum = models.ConcurrentRecordStreamNum;
 const DescribeStreamPlayInfoListResponse = models.DescribeStreamPlayInfoListResponse;
@@ -59,6 +60,7 @@ const DescribeLiveTranscodeRulesRequest = models.DescribeLiveTranscodeRulesReque
 const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
 const DescribePlayErrorCodeDetailInfoListRequest = models.DescribePlayErrorCodeDetailInfoListRequest;
 const DeleteLivePullStreamTaskRequest = models.DeleteLivePullStreamTaskRequest;
+const CreateLiveTimeShiftRuleRequest = models.CreateLiveTimeShiftRuleRequest;
 const CommonMixOutputParams = models.CommonMixOutputParams;
 const DescribeUploadStreamNumsRequest = models.DescribeUploadStreamNumsRequest;
 const DescribeLiveSnapshotRulesResponse = models.DescribeLiveSnapshotRulesResponse;
@@ -75,9 +77,10 @@ const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateReque
 const MonitorStreamPlayInfo = models.MonitorStreamPlayInfo;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const ForbidLiveStreamRequest = models.ForbidLiveStreamRequest;
+const DescribeTimeShiftStreamListRequest = models.DescribeTimeShiftStreamListRequest;
 const DescribeDeliverBandwidthListRequest = models.DescribeDeliverBandwidthListRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
-const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
+const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const TranscodeTaskNum = models.TranscodeTaskNum;
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
@@ -88,11 +91,12 @@ const DescribeLiveDomainCertRequest = models.DescribeLiveDomainCertRequest;
 const DescribeLiveStreamEventListRequest = models.DescribeLiveStreamEventListRequest;
 const CallBackTemplateInfo = models.CallBackTemplateInfo;
 const DescribePlayErrorCodeSumInfoListResponse = models.DescribePlayErrorCodeSumInfoListResponse;
-const UnBindLiveDomainCertRequest = models.UnBindLiveDomainCertRequest;
+const DescribeLiveTimeShiftTemplatesRequest = models.DescribeLiveTimeShiftTemplatesRequest;
 const DeleteLiveRecordResponse = models.DeleteLiveRecordResponse;
 const DescribeScreenShotSheetNumListRequest = models.DescribeScreenShotSheetNumListRequest;
 const DescribeLiveDomainsResponse = models.DescribeLiveDomainsResponse;
 const TimeValue = models.TimeValue;
+const ModifyLiveTimeShiftTemplateRequest = models.ModifyLiveTimeShiftTemplateRequest;
 const ModifyLiveDomainCertBindingsResponse = models.ModifyLiveDomainCertBindingsResponse;
 const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveRecordResponse = models.CreateLiveRecordResponse;
@@ -100,13 +104,15 @@ const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const ModifyLiveDomainCertBindingsRequest = models.ModifyLiveDomainCertBindingsRequest;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
+const TimeShiftTemplate = models.TimeShiftTemplate;
 const LiveCertDomainInfo = models.LiveCertDomainInfo;
+const DescribeLiveTimeShiftRulesRequest = models.DescribeLiveTimeShiftRulesRequest;
 const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
-const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
+const DeleteLiveTimeShiftRuleRequest = models.DeleteLiveTimeShiftRuleRequest;
 const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
 const DescribeLiveDomainCertBindingsResponse = models.DescribeLiveDomainCertBindingsResponse;
-const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
+const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
 const DescribeLiveTimeShiftBillInfoListRequest = models.DescribeLiveTimeShiftBillInfoListRequest;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
@@ -128,10 +134,13 @@ const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
 const DescribeLiveWatermarkRulesRequest = models.DescribeLiveWatermarkRulesRequest;
 const DropLiveStreamRequest = models.DropLiveStreamRequest;
+const DeleteLiveTimeShiftRuleResponse = models.DeleteLiveTimeShiftRuleResponse;
 const PullPushWatermarkInfo = models.PullPushWatermarkInfo;
+const UnBindLiveDomainCertRequest = models.UnBindLiveDomainCertRequest;
 const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
 const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
 const RefererAuthConfig = models.RefererAuthConfig;
+const DescribeTimeShiftRecordDetailRequest = models.DescribeTimeShiftRecordDetailRequest;
 const PushDataInfo = models.PushDataInfo;
 const CommonMixLayoutParams = models.CommonMixLayoutParams;
 const DescribeGroupProIspPlayInfoListRequest = models.DescribeGroupProIspPlayInfoListRequest;
@@ -139,11 +148,13 @@ const DescribeStreamDayPlayInfoListRequest = models.DescribeStreamDayPlayInfoLis
 const TranscodeDetailInfo = models.TranscodeDetailInfo;
 const DescribeLiveSnapshotTemplateResponse = models.DescribeLiveSnapshotTemplateResponse;
 const DescribeLiveTranscodeRulesResponse = models.DescribeLiveTranscodeRulesResponse;
+const CreateLiveTimeShiftTemplateRequest = models.CreateLiveTimeShiftTemplateRequest;
 const DescribeLiveDomainRefererResponse = models.DescribeLiveDomainRefererResponse;
 const AddLiveDomainRequest = models.AddLiveDomainRequest;
 const StreamName = models.StreamName;
 const DescribeLiveCertsRequest = models.DescribeLiveCertsRequest;
-const DescribeLivePullStreamTasksRequest = models.DescribeLivePullStreamTasksRequest;
+const DeleteLiveTimeShiftTemplateRequest = models.DeleteLiveTimeShiftTemplateRequest;
+const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
 const CdnPlayStatData = models.CdnPlayStatData;
 const AddLiveDomainResponse = models.AddLiveDomainResponse;
 const DescribeHttpStatusInfoListRequest = models.DescribeHttpStatusInfoListRequest;
@@ -154,10 +165,12 @@ const DeleteLivePullStreamTaskResponse = models.DeleteLivePullStreamTaskResponse
 const AuthenticateDomainOwnerRequest = models.AuthenticateDomainOwnerRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
 const DescribeStreamPushInfoListRequest = models.DescribeStreamPushInfoListRequest;
-const DescribeLivePullStreamTasksResponse = models.DescribeLivePullStreamTasksResponse;
+const DeleteLiveTimeShiftTemplateResponse = models.DeleteLiveTimeShiftTemplateResponse;
 const DescribeLiveWatermarkResponse = models.DescribeLiveWatermarkResponse;
 const ResumeLiveStreamResponse = models.ResumeLiveStreamResponse;
 const ModifyLiveRecordTemplateRequest = models.ModifyLiveRecordTemplateRequest;
+const DescribeTimeShiftStreamListResponse = models.DescribeTimeShiftStreamListResponse;
+const ModifyLiveTimeShiftTemplateResponse = models.ModifyLiveTimeShiftTemplateResponse;
 const DescribeStreamPushInfoListResponse = models.DescribeStreamPushInfoListResponse;
 const DescribeLiveStreamPushInfoListRequest = models.DescribeLiveStreamPushInfoListRequest;
 const StopLiveRecordResponse = models.StopLiveRecordResponse;
@@ -167,6 +180,7 @@ const DescribeLiveForbidStreamListRequest = models.DescribeLiveForbidStreamListR
 const DescribeTopClientIpSumInfoListRequest = models.DescribeTopClientIpSumInfoListRequest;
 const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
 const DeleteLiveWatermarkRuleResponse = models.DeleteLiveWatermarkRuleResponse;
+const TimeShiftRecord = models.TimeShiftRecord;
 const PublishTime = models.PublishTime;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
 const ModifyLivePullStreamTaskRequest = models.ModifyLivePullStreamTaskRequest;
@@ -200,6 +214,7 @@ const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
 const DescribePlayErrorCodeDetailInfoListResponse = models.DescribePlayErrorCodeDetailInfoListResponse;
+const TimeShiftStreamInfo = models.TimeShiftStreamInfo;
 const CreateLiveRecordTemplateResponse = models.CreateLiveRecordTemplateResponse;
 const GroupProIspDataInfo = models.GroupProIspDataInfo;
 const RecordParam = models.RecordParam;
@@ -214,7 +229,9 @@ const HttpCodeInfo = models.HttpCodeInfo;
 const DescribeStreamPlayInfoListRequest = models.DescribeStreamPlayInfoListRequest;
 const CreateLiveTranscodeTemplateRequest = models.CreateLiveTranscodeTemplateRequest;
 const DescribeLiveStreamPublishedListResponse = models.DescribeLiveStreamPublishedListResponse;
+const DescribeLiveTimeShiftRulesResponse = models.DescribeLiveTimeShiftRulesResponse;
 const DeleteLiveDomainRequest = models.DeleteLiveDomainRequest;
+const DescribeLiveTimeShiftTemplatesResponse = models.DescribeLiveTimeShiftTemplatesResponse;
 const AddDelayLiveStreamResponse = models.AddDelayLiveStreamResponse;
 const DescribeLiveTranscodeTemplatesResponse = models.DescribeLiveTranscodeTemplatesResponse;
 const DeleteLiveCallbackRuleRequest = models.DeleteLiveCallbackRuleRequest;
@@ -226,7 +243,9 @@ const DescribeAllStreamPlayInfoListResponse = models.DescribeAllStreamPlayInfoLi
 const DescribeLiveTranscodeTotalInfoResponse = models.DescribeLiveTranscodeTotalInfoResponse;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
 const CreateRecordTaskRequest = models.CreateRecordTaskRequest;
+const DescribeLivePullStreamTasksResponse = models.DescribeLivePullStreamTasksResponse;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
+const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
 const CreateLiveCallbackRuleResponse = models.CreateLiveCallbackRuleResponse;
 const DescribeLiveRecordTemplateResponse = models.DescribeLiveRecordTemplateResponse;
 const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListResponse;
@@ -236,7 +255,7 @@ const DescribeLiveTranscodeTemplatesRequest = models.DescribeLiveTranscodeTempla
 const HlsSpecialParam = models.HlsSpecialParam;
 const DescribeLiveRecordRulesResponse = models.DescribeLiveRecordRulesResponse;
 const CreateLiveSnapshotTemplateRequest = models.CreateLiveSnapshotTemplateRequest;
-const HttpCodeValue = models.HttpCodeValue;
+const DescribeLivePullStreamTasksRequest = models.DescribeLivePullStreamTasksRequest;
 const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListRequest;
 const DeleteLiveCallbackTemplateRequest = models.DeleteLiveCallbackTemplateRequest;
 const DescribeLiveSnapshotTemplateRequest = models.DescribeLiveSnapshotTemplateRequest;
@@ -260,7 +279,9 @@ const DescribeAllStreamPlayInfoListRequest = models.DescribeAllStreamPlayInfoLis
 const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
 const DeleteRecordTaskRequest = models.DeleteRecordTaskRequest;
 const PullStreamTaskInfo = models.PullStreamTaskInfo;
+const CreateLiveTimeShiftTemplateResponse = models.CreateLiveTimeShiftTemplateResponse;
 const DescribeStreamDayPlayInfoListResponse = models.DescribeStreamDayPlayInfoListResponse;
+const RecordTemplateInfo = models.RecordTemplateInfo;
 const ModifyLivePullStreamTaskResponse = models.ModifyLivePullStreamTaskResponse;
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
 const DelayInfo = models.DelayInfo;
@@ -271,7 +292,7 @@ const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesRespon
 const DescribeLiveTranscodeTotalInfoRequest = models.DescribeLiveTranscodeTotalInfoRequest;
 const CreateRecordTaskResponse = models.CreateRecordTaskResponse;
 const ForbidStreamInfo = models.ForbidStreamInfo;
-const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
+const DescribeTimeShiftRecordDetailResponse = models.DescribeTimeShiftRecordDetailResponse;
 const DescribeLiveDomainCertBindingsRequest = models.DescribeLiveDomainCertBindingsRequest;
 const DeleteLiveDomainResponse = models.DeleteLiveDomainResponse;
 const CommonMixCropParams = models.CommonMixCropParams;
@@ -479,6 +500,17 @@ Note: data can be queried one hour after it is generated. For example, data betw
     }
 
     /**
+     * This API is used to query the time shifted streams in a specific time period (up to 24 hours).
+     * @param {DescribeTimeShiftStreamListRequest} req
+     * @param {function(string, DescribeTimeShiftStreamListResponse):void} cb
+     * @public
+     */
+    DescribeTimeShiftStreamList(req, cb) {
+        let resp = new DescribeTimeShiftStreamListResponse();
+        this.request("DescribeTimeShiftStreamList", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a transcoding template.
      * @param {DeleteLiveTranscodeTemplateRequest} req
      * @param {function(string, DeleteLiveTranscodeTemplateResponse):void} cb
@@ -638,6 +670,17 @@ Notes:
     DescribeLivePushAuthKey(req, cb) {
         let resp = new DescribeLivePushAuthKeyResponse();
         this.request("DescribeLivePushAuthKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the time shifting details of a specific time period (up to 24 hours). You need to call `DescribeTimeShiftStreamList` first to get the request parameters of this API.
+     * @param {DescribeTimeShiftRecordDetailRequest} req
+     * @param {function(string, DescribeTimeShiftRecordDetailResponse):void} cb
+     * @public
+     */
+    DescribeTimeShiftRecordDetail(req, cb) {
+        let resp = new DescribeTimeShiftRecordDetailResponse();
+        this.request("DescribeTimeShiftRecordDetail", req, resp, cb);
     }
 
     /**
@@ -1007,6 +1050,17 @@ Note: to query by `AppName`, you need to submit a ticket first. After your appli
     }
 
     /**
+     * This API is used to modify a standby stream template.
+     * @param {ModifyLiveTimeShiftTemplateRequest} req
+     * @param {function(string, ModifyLiveTimeShiftTemplateResponse):void} cb
+     * @public
+     */
+    ModifyLiveTimeShiftTemplate(req, cb) {
+        let resp = new ModifyLiveTimeShiftTemplateResponse();
+        this.request("ModifyLiveTimeShiftTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the screencapturing template list.
      * @param {DescribeLiveSnapshotTemplatesRequest} req
      * @param {function(string, DescribeLiveSnapshotTemplatesResponse):void} cb
@@ -1084,7 +1138,7 @@ Note: to query by `AppName`, you need to submit a ticket first. After your appli
     }
 
     /**
-     * This API is used to query the details of transcoding on a specified day or in a specified period of time.
+     * This API is used to query the transcoding details of a particular day or a specific time period. Querying may fail if the amount of data queried is too large. In such cases, try shortening the time period.
      * @param {DescribeLiveTranscodeDetailInfoRequest} req
      * @param {function(string, DescribeLiveTranscodeDetailInfoResponse):void} cb
      * @public
@@ -1106,6 +1160,17 @@ Note: to query by `AppName`, you need to submit a ticket first. After your appli
     }
 
     /**
+     * This API is used to query time shifting templates.
+     * @param {DescribeLiveTimeShiftTemplatesRequest} req
+     * @param {function(string, DescribeLiveTimeShiftTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeLiveTimeShiftTemplates(req, cb) {
+        let resp = new DescribeLiveTimeShiftTemplatesResponse();
+        this.request("DescribeLiveTimeShiftTemplates", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the list of delayed playbacks.
      * @param {DescribeLiveDelayInfoListRequest} req
      * @param {function(string, DescribeLiveDelayInfoListResponse):void} cb
@@ -1114,6 +1179,17 @@ Note: to query by `AppName`, you need to submit a ticket first. After your appli
     DescribeLiveDelayInfoList(req, cb) {
         let resp = new DescribeLiveDelayInfoListResponse();
         this.request("DescribeLiveDelayInfoList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query time shifting rules.
+     * @param {DescribeLiveTimeShiftRulesRequest} req
+     * @param {function(string, DescribeLiveTimeShiftRulesResponse):void} cb
+     * @public
+     */
+    DescribeLiveTimeShiftRules(req, cb) {
+        let resp = new DescribeLiveTimeShiftRulesResponse();
+        this.request("DescribeLiveTimeShiftRules", req, resp, cb);
     }
 
     /**
@@ -1231,6 +1307,18 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     }
 
     /**
+     * This API is used to create a time shifting rule. You need to first call the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/86169?from_cn_redirect=1) API to create a time shifting template, and then call this API to bind the template ID returned to a stream.
+<br>More about time shifting: [Time Shifting](https://intl.cloud.tencent.com/document/product/267/86134?from_cn_redirect=1).
+     * @param {CreateLiveTimeShiftRuleRequest} req
+     * @param {function(string, CreateLiveTimeShiftRuleResponse):void} cb
+     * @public
+     */
+    CreateLiveTimeShiftRule(req, cb) {
+        let resp = new CreateLiveTimeShiftRuleResponse();
+        this.request("CreateLiveTimeShiftRule", req, resp, cb);
+    }
+
+    /**
      * To create a recording rule, you need to first call the [CreateLiveRecordTemplate](https://intl.cloud.tencent.com/document/product/267/32614?from_cn_redirect=1) API to create a recording template and bind the returned template ID to the stream.
 <br>Recording-related document: [LVB Recording](https://intl.cloud.tencent.com/document/product/267/32739?from_cn_redirect=1).
      * @param {CreateLiveRecordRuleRequest} req
@@ -1300,6 +1388,17 @@ Note: Up to 10,000 entries can be queried per page. More data can be obtained by
     }
 
     /**
+     * This API is used to delete a time shifting rule.
+     * @param {DeleteLiveTimeShiftRuleRequest} req
+     * @param {function(string, DeleteLiveTimeShiftRuleResponse):void} cb
+     * @public
+     */
+    DeleteLiveTimeShiftRule(req, cb) {
+        let resp = new DeleteLiveTimeShiftRuleResponse();
+        this.request("DeleteLiveTimeShiftRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the watermarking rule list.
      * @param {DescribeLiveWatermarkRulesRequest} req
      * @param {function(string, DescribeLiveWatermarkRulesResponse):void} cb
@@ -1332,6 +1431,28 @@ Note: only one screencapturing template can be associated with one domain name.
     CreateLiveSnapshotRule(req, cb) {
         let resp = new CreateLiveSnapshotRuleResponse();
         this.request("CreateLiveSnapshotRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a time shifting template.
+     * @param {CreateLiveTimeShiftTemplateRequest} req
+     * @param {function(string, CreateLiveTimeShiftTemplateResponse):void} cb
+     * @public
+     */
+    CreateLiveTimeShiftTemplate(req, cb) {
+        let resp = new CreateLiveTimeShiftTemplateResponse();
+        this.request("CreateLiveTimeShiftTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a time shifting template.
+     * @param {DeleteLiveTimeShiftTemplateRequest} req
+     * @param {function(string, DeleteLiveTimeShiftTemplateResponse):void} cb
+     * @public
+     */
+    DeleteLiveTimeShiftTemplate(req, cb) {
+        let resp = new DeleteLiveTimeShiftTemplateResponse();
+        this.request("DeleteLiveTimeShiftTemplate", req, resp, cb);
     }
 
     /**

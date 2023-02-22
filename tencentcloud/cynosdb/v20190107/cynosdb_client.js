@@ -26,7 +26,7 @@ const ModifyAuditRuleTemplatesRequest = models.ModifyAuditRuleTemplatesRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const ModifyMaintainPeriodConfigRequest = models.ModifyMaintainPeriodConfigRequest;
 const DescribeRollbackTimeRangeResponse = models.DescribeRollbackTimeRangeResponse;
-const BillingResourceInfo = models.BillingResourceInfo;
+const DescribeZonesRequest = models.DescribeZonesRequest;
 const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
 const SwitchClusterZoneResponse = models.SwitchClusterZoneResponse;
 const ModifyParamItem = models.ModifyParamItem;
@@ -70,6 +70,8 @@ const SwitchClusterZoneRequest = models.SwitchClusterZoneRequest;
 const RestartInstanceRequest = models.RestartInstanceRequest;
 const Ability = models.Ability;
 const InstanceInitInfo = models.InstanceInitInfo;
+const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const SwitchClusterVpcResponse = models.SwitchClusterVpcResponse;
 const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
 const DeleteBackupResponse = models.DeleteBackupResponse;
 const Tag = models.Tag;
@@ -84,6 +86,7 @@ const DescribeBinlogDownloadUrlResponse = models.DescribeBinlogDownloadUrlRespon
 const DescribeAuditRuleWithInstanceIdsResponse = models.DescribeAuditRuleWithInstanceIdsResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
 const SearchClusterDatabasesRequest = models.SearchClusterDatabasesRequest;
+const SwitchClusterVpcRequest = models.SwitchClusterVpcRequest;
 const CynosdbInstance = models.CynosdbInstance;
 const DescribeAuditRuleWithInstanceIdsRequest = models.DescribeAuditRuleWithInstanceIdsRequest;
 const ModifyClusterSlaveZoneResponse = models.ModifyClusterSlaveZoneResponse;
@@ -124,8 +127,10 @@ const ExportInstanceSlowQueriesRequest = models.ExportInstanceSlowQueriesRequest
 const ParamItem = models.ParamItem;
 const CynosdbCluster = models.CynosdbCluster;
 const CreateAuditRuleTemplateResponse = models.CreateAuditRuleTemplateResponse;
+const DescribeZonesResponse = models.DescribeZonesResponse;
 const IsolateClusterResponse = models.IsolateClusterResponse;
-const SearchClusterDatabasesResponse = models.SearchClusterDatabasesResponse;
+const SaleZone = models.SaleZone;
+const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const OpenAuditServiceResponse = models.OpenAuditServiceResponse;
 const OfflineClusterResponse = models.OfflineClusterResponse;
 const SwitchProxyVpcResponse = models.SwitchProxyVpcResponse;
@@ -133,15 +138,16 @@ const DescribeAuditRuleTemplatesRequest = models.DescribeAuditRuleTemplatesReque
 const InstanceSpec = models.InstanceSpec;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const IsolateInstanceRequest = models.IsolateInstanceRequest;
-const SetRenewFlagResponse = models.SetRenewFlagResponse;
+const BillingResourceInfo = models.BillingResourceInfo;
 const Account = models.Account;
 const CreateBackupRequest = models.CreateBackupRequest;
 const ExportInstanceSlowQueriesResponse = models.ExportInstanceSlowQueriesResponse;
 const SearchClusterTablesResponse = models.SearchClusterTablesResponse;
-const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const PolicyRule = models.PolicyRule;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
 const SwitchProxyVpcRequest = models.SwitchProxyVpcRequest;
 const DescribeBackupListResponse = models.DescribeBackupListResponse;
+const SaleRegion = models.SaleRegion;
 const RestartInstanceResponse = models.RestartInstanceResponse;
 const DescribeBinlogSaveDaysRequest = models.DescribeBinlogSaveDaysRequest;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
@@ -156,6 +162,7 @@ const CynosdbInstanceDetail = models.CynosdbInstanceDetail;
 const RuleFilters = models.RuleFilters;
 const CynosdbClusterDetail = models.CynosdbClusterDetail;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const SearchClusterDatabasesResponse = models.SearchClusterDatabasesResponse;
 const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
 const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
 const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
@@ -173,7 +180,7 @@ const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const OfflineInstanceResponse = models.OfflineInstanceResponse;
 const ModifyAuditServiceResponse = models.ModifyAuditServiceResponse;
 const DeleteAuditRuleTemplatesResponse = models.DeleteAuditRuleTemplatesResponse;
-const PolicyRule = models.PolicyRule;
+const Module = models.Module;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const DescribeInstanceSlowQueriesRequest = models.DescribeInstanceSlowQueriesRequest;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
@@ -557,14 +564,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to search the list of cluster data tables.
-     * @param {SearchClusterTablesRequest} req
-     * @param {function(string, SearchClusterTablesResponse):void} cb
+     * This API is used to query the AZ information in a purchasable region.
+     * @param {DescribeZonesRequest} req
+     * @param {function(string, DescribeZonesResponse):void} cb
      * @public
      */
-    SearchClusterTables(req, cb) {
-        let resp = new SearchClusterTablesResponse();
-        this.request("SearchClusterTables", req, resp, cb);
+    DescribeZones(req, cb) {
+        let resp = new DescribeZonesResponse();
+        this.request("DescribeZones", req, resp, cb);
     }
 
     /**
@@ -598,6 +605,17 @@ class CynosdbClient extends AbstractClient {
     DescribeBackupDownloadUrl(req, cb) {
         let resp = new DescribeBackupDownloadUrlResponse();
         this.request("DescribeBackupDownloadUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the cluster VPC.
+     * @param {SwitchClusterVpcRequest} req
+     * @param {function(string, SwitchClusterVpcResponse):void} cb
+     * @public
+     */
+    SwitchClusterVpc(req, cb) {
+        let resp = new SwitchClusterVpcResponse();
+        this.request("SwitchClusterVpc", req, resp, cb);
     }
 
     /**
@@ -851,6 +869,17 @@ class CynosdbClient extends AbstractClient {
     ModifyAuditRuleTemplates(req, cb) {
         let resp = new ModifyAuditRuleTemplatesResponse();
         this.request("ModifyAuditRuleTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to search the list of cluster data tables.
+     * @param {SearchClusterTablesRequest} req
+     * @param {function(string, SearchClusterTablesResponse):void} cb
+     * @public
+     */
+    SearchClusterTables(req, cb) {
+        let resp = new SearchClusterTablesResponse();
+        this.request("SearchClusterTables", req, resp, cb);
     }
 
     /**

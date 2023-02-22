@@ -453,30 +453,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Billable resource information
+ * DescribeZones request structure.
  * @class
  */
-class BillingResourceInfo extends  AbstractModel {
+class DescribeZonesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
-         * @type {string || null}
+         * Whether the virtual zone is included.–
+         * @type {boolean || null}
          */
-        this.ClusterId = null;
+        this.IncludeVirtualZones = null;
 
         /**
-         * Instance ID list
-         * @type {Array.<string> || null}
+         * Whether to display all AZs in a region and the user’s permissions in each AZ.
+         * @type {boolean || null}
          */
-        this.InstanceIds = null;
-
-        /**
-         * Order ID
-         * @type {string || null}
-         */
-        this.DealName = null;
+        this.ShowPermission = null;
 
     }
 
@@ -487,9 +481,8 @@ class BillingResourceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.IncludeVirtualZones = 'IncludeVirtualZones' in params ? params.IncludeVirtualZones : null;
+        this.ShowPermission = 'ShowPermission' in params ? params.ShowPermission : null;
 
     }
 }
@@ -2593,6 +2586,125 @@ class InstanceInitInfo extends  AbstractModel {
 }
 
 /**
+ * UpgradeInstance request structure.
+ * @class
+ */
+class UpgradeInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Database CPU
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Database memory in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Upgrade type. Valid values: upgradeImmediate, upgradeInMaintain
+         * @type {string || null}
+         */
+        this.UpgradeType = null;
+
+        /**
+         * This parameter has been disused.
+         * @type {number || null}
+         */
+        this.StorageLimit = null;
+
+        /**
+         * Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * This parameter has been disused.
+         * @type {string || null}
+         */
+        this.DbType = null;
+
+        /**
+         * Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+         * @type {number || null}
+         */
+        this.DealMode = null;
+
+        /**
+         * Valid values: `NormalUpgrade` (Normal mode), `FastUpgrade` (QuickChange). If the system detects that the configuration modification process will cause a momentary disconnection, the process will be terminated.
+         * @type {string || null}
+         */
+        this.UpgradeMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.UpgradeType = 'UpgradeType' in params ? params.UpgradeType : null;
+        this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.DbType = 'DbType' in params ? params.DbType : null;
+        this.DealMode = 'DealMode' in params ? params.DealMode : null;
+        this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
+
+    }
+}
+
+/**
+ * SwitchClusterVpc response structure.
+ * @class
+ */
+class SwitchClusterVpcResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClusterDetail request structure.
  * @class
  */
@@ -3261,6 +3373,55 @@ Default value: `0`.
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Database = 'Database' in params ? params.Database : null;
         this.MatchType = 'MatchType' in params ? params.MatchType : null;
+
+    }
+}
+
+/**
+ * SwitchClusterVpc request structure.
+ * @class
+ */
+class SwitchClusterVpcRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * VPC ID in string
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * Subnet ID in string
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * Valid hours of old IP
+         * @type {number || null}
+         */
+        this.OldIpReserveHours = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.OldIpReserveHours = 'OldIpReserveHours' in params ? params.OldIpReserveHours : null;
 
     }
 }
@@ -6403,6 +6564,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeZones response structure.
+ * @class
+ */
+class DescribeZonesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region information
+         * @type {Array.<SaleRegion> || null}
+         */
+        this.RegionSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RegionSet) {
+            this.RegionSet = new Array();
+            for (let z in params.RegionSet) {
+                let obj = new SaleRegion();
+                obj.deserialize(params.RegionSet[z]);
+                this.RegionSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * IsolateCluster response structure.
  * @class
  */
@@ -6447,19 +6651,100 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * SearchClusterDatabases response structure.
+ * Information of a purchasable AZ
  * @class
  */
-class SearchClusterDatabasesResponse extends  AbstractModel {
+class SaleZone extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Database List
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
+         * AZ name
+         * @type {string || null}
          */
-        this.Databases = null;
+        this.Zone = null;
+
+        /**
+         * Numeric ID of an AZ
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * AZ name
+         * @type {string || null}
+         */
+        this.ZoneZh = null;
+
+        /**
+         * Whether serverless cluster is supported. Valid values: <br>
+`0`: No<br>
+`1`: Yes
+         * @type {number || null}
+         */
+        this.IsSupportServerless = null;
+
+        /**
+         * Whether standard cluster is supported. Valid values: <br>
+`0`: No<br>
+`1`: Yes
+         * @type {number || null}
+         */
+        this.IsSupportNormal = null;
+
+        /**
+         * Physical zone
+         * @type {string || null}
+         */
+        this.PhysicalZone = null;
+
+        /**
+         * Whether the user has AZ permission
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.HasPermission = null;
+
+        /**
+         * Whether it is a full-linkage RDMA AZ.
+         * @type {string || null}
+         */
+        this.IsWholeRdmaZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneZh = 'ZoneZh' in params ? params.ZoneZh : null;
+        this.IsSupportServerless = 'IsSupportServerless' in params ? params.IsSupportServerless : null;
+        this.IsSupportNormal = 'IsSupportNormal' in params ? params.IsSupportNormal : null;
+        this.PhysicalZone = 'PhysicalZone' in params ? params.PhysicalZone : null;
+        this.HasPermission = 'HasPermission' in params ? params.HasPermission : null;
+        this.IsWholeRdmaZone = 'IsWholeRdmaZone' in params ? params.IsWholeRdmaZone : null;
+
+    }
+}
+
+/**
+ * SetRenewFlag response structure.
+ * @class
+ */
+class SetRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of successfully manipulated instances
+         * @type {number || null}
+         */
+        this.Count = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6476,7 +6761,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Databases = 'Databases' in params ? params.Databases : null;
+        this.Count = 'Count' in params ? params.Count : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6801,24 +7086,30 @@ class IsolateInstanceRequest extends  AbstractModel {
 }
 
 /**
- * SetRenewFlag response structure.
+ * Billable resource information
  * @class
  */
-class SetRenewFlagResponse extends  AbstractModel {
+class BillingResourceInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of successfully manipulated instances
-         * @type {number || null}
-         */
-        this.Count = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Cluster ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClusterId = null;
+
+        /**
+         * Instance ID list
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Order ID
+         * @type {string || null}
+         */
+        this.DealName = null;
 
     }
 
@@ -6829,8 +7120,9 @@ class SetRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
 
     }
 }
@@ -7042,66 +7334,60 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * UpgradeInstance request structure.
+ * Security group rule
  * @class
  */
-class UpgradeInstanceRequest extends  AbstractModel {
+class PolicyRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Policy, which can be `ACCEPT` or `DROP`
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Action = null;
 
         /**
-         * Database CPU
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Database memory in GB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Upgrade type. Valid values: upgradeImmediate, upgradeInMaintain
+         * Source IP or IP range, such as 192.168.0.0/16
          * @type {string || null}
          */
-        this.UpgradeType = null;
+        this.CidrIp = null;
 
         /**
-         * This parameter has been disused.
-         * @type {number || null}
-         */
-        this.StorageLimit = null;
-
-        /**
-         * Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
-         * @type {number || null}
-         */
-        this.AutoVoucher = null;
-
-        /**
-         * This parameter has been disused.
+         * Port
          * @type {string || null}
          */
-        this.DbType = null;
+        this.PortRange = null;
 
         /**
-         * Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
-         * @type {number || null}
-         */
-        this.DealMode = null;
-
-        /**
-         * Valid values: `NormalUpgrade` (Normal mode), `FastUpgrade` (QuickChange). If the system detects that the configuration modification process will cause a momentary disconnection, the process will be terminated.
+         * Network protocol, such as UDP and TCP
          * @type {string || null}
          */
-        this.UpgradeMode = null;
+        this.IpProtocol = null;
+
+        /**
+         * Protocol port ID or protocol port group ID.
+         * @type {string || null}
+         */
+        this.ServiceModule = null;
+
+        /**
+         * IP address ID or IP address group ID.
+         * @type {string || null}
+         */
+        this.AddressModule = null;
+
+        /**
+         * id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Desc = null;
 
     }
 
@@ -7112,15 +7398,14 @@ class UpgradeInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.UpgradeType = 'UpgradeType' in params ? params.UpgradeType : null;
-        this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.DbType = 'DbType' in params ? params.DbType : null;
-        this.DealMode = 'DealMode' in params ? params.DealMode : null;
-        this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
+        this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
 
     }
 }
@@ -7276,6 +7561,85 @@ class DescribeBackupListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Information of a purchasable region
+ * @class
+ */
+class SaleRegion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Numeric ID of a region
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Region name
+         * @type {string || null}
+         */
+        this.RegionZh = null;
+
+        /**
+         * List of purchasable AZs
+         * @type {Array.<SaleZone> || null}
+         */
+        this.ZoneSet = null;
+
+        /**
+         * Engine type
+         * @type {string || null}
+         */
+        this.DbType = null;
+
+        /**
+         * Supported modules in a region
+         * @type {Array.<Module> || null}
+         */
+        this.Modules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionZh = 'RegionZh' in params ? params.RegionZh : null;
+
+        if (params.ZoneSet) {
+            this.ZoneSet = new Array();
+            for (let z in params.ZoneSet) {
+                let obj = new SaleZone();
+                obj.deserialize(params.ZoneSet[z]);
+                this.ZoneSet.push(obj);
+            }
+        }
+        this.DbType = 'DbType' in params ? params.DbType : null;
+
+        if (params.Modules) {
+            this.Modules = new Array();
+            for (let z in params.Modules) {
+                let obj = new Module();
+                obj.deserialize(params.Modules[z]);
+                this.Modules.push(obj);
+            }
+        }
 
     }
 }
@@ -8556,6 +8920,42 @@ class ResetAccountPasswordRequest extends  AbstractModel {
 }
 
 /**
+ * SearchClusterDatabases response structure.
+ * @class
+ */
+class SearchClusterDatabasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database List
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Databases = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Databases = 'Databases' in params ? params.Databases : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceDetail request structure.
  * @class
  */
@@ -9195,60 +9595,24 @@ class DeleteAuditRuleTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Security group rule
+ * Modules supported by the system
  * @class
  */
-class PolicyRule extends  AbstractModel {
+class Module extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Policy, which can be `ACCEPT` or `DROP`
+         * Whether it is supported. Valid values: `yes`, `no`.
          * @type {string || null}
          */
-        this.Action = null;
+        this.IsDisable = null;
 
         /**
-         * Source IP or IP range, such as 192.168.0.0/16
+         * Module name
          * @type {string || null}
          */
-        this.CidrIp = null;
-
-        /**
-         * Port
-         * @type {string || null}
-         */
-        this.PortRange = null;
-
-        /**
-         * Network protocol, such as UDP and TCP
-         * @type {string || null}
-         */
-        this.IpProtocol = null;
-
-        /**
-         * Protocol port ID or protocol port group ID.
-         * @type {string || null}
-         */
-        this.ServiceModule = null;
-
-        /**
-         * IP address ID or IP address group ID.
-         * @type {string || null}
-         */
-        this.AddressModule = null;
-
-        /**
-         * id
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * Description
-         * @type {string || null}
-         */
-        this.Desc = null;
+        this.ModuleName = null;
 
     }
 
@@ -9259,14 +9623,8 @@ class PolicyRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Action = 'Action' in params ? params.Action : null;
-        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
-        this.PortRange = 'PortRange' in params ? params.PortRange : null;
-        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
-        this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
-        this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Desc = 'Desc' in params ? params.Desc : null;
+        this.IsDisable = 'IsDisable' in params ? params.IsDisable : null;
+        this.ModuleName = 'ModuleName' in params ? params.ModuleName : null;
 
     }
 }
@@ -9638,7 +9996,7 @@ module.exports = {
     DescribeAccountsRequest: DescribeAccountsRequest,
     ModifyMaintainPeriodConfigRequest: ModifyMaintainPeriodConfigRequest,
     DescribeRollbackTimeRangeResponse: DescribeRollbackTimeRangeResponse,
-    BillingResourceInfo: BillingResourceInfo,
+    DescribeZonesRequest: DescribeZonesRequest,
     ModifyBackupNameResponse: ModifyBackupNameResponse,
     SwitchClusterZoneResponse: SwitchClusterZoneResponse,
     ModifyParamItem: ModifyParamItem,
@@ -9682,6 +10040,8 @@ module.exports = {
     RestartInstanceRequest: RestartInstanceRequest,
     Ability: Ability,
     InstanceInitInfo: InstanceInitInfo,
+    UpgradeInstanceRequest: UpgradeInstanceRequest,
+    SwitchClusterVpcResponse: SwitchClusterVpcResponse,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
     DeleteBackupResponse: DeleteBackupResponse,
     Tag: Tag,
@@ -9696,6 +10056,7 @@ module.exports = {
     DescribeAuditRuleWithInstanceIdsResponse: DescribeAuditRuleWithInstanceIdsResponse,
     DescribeBackupListRequest: DescribeBackupListRequest,
     SearchClusterDatabasesRequest: SearchClusterDatabasesRequest,
+    SwitchClusterVpcRequest: SwitchClusterVpcRequest,
     CynosdbInstance: CynosdbInstance,
     DescribeAuditRuleWithInstanceIdsRequest: DescribeAuditRuleWithInstanceIdsRequest,
     ModifyClusterSlaveZoneResponse: ModifyClusterSlaveZoneResponse,
@@ -9736,8 +10097,10 @@ module.exports = {
     ParamItem: ParamItem,
     CynosdbCluster: CynosdbCluster,
     CreateAuditRuleTemplateResponse: CreateAuditRuleTemplateResponse,
+    DescribeZonesResponse: DescribeZonesResponse,
     IsolateClusterResponse: IsolateClusterResponse,
-    SearchClusterDatabasesResponse: SearchClusterDatabasesResponse,
+    SaleZone: SaleZone,
+    SetRenewFlagResponse: SetRenewFlagResponse,
     OpenAuditServiceResponse: OpenAuditServiceResponse,
     OfflineClusterResponse: OfflineClusterResponse,
     SwitchProxyVpcResponse: SwitchProxyVpcResponse,
@@ -9745,15 +10108,16 @@ module.exports = {
     InstanceSpec: InstanceSpec,
     DescribeFlowRequest: DescribeFlowRequest,
     IsolateInstanceRequest: IsolateInstanceRequest,
-    SetRenewFlagResponse: SetRenewFlagResponse,
+    BillingResourceInfo: BillingResourceInfo,
     Account: Account,
     CreateBackupRequest: CreateBackupRequest,
     ExportInstanceSlowQueriesResponse: ExportInstanceSlowQueriesResponse,
     SearchClusterTablesResponse: SearchClusterTablesResponse,
-    UpgradeInstanceRequest: UpgradeInstanceRequest,
+    PolicyRule: PolicyRule,
     DescribeMaintainPeriodResponse: DescribeMaintainPeriodResponse,
     SwitchProxyVpcRequest: SwitchProxyVpcRequest,
     DescribeBackupListResponse: DescribeBackupListResponse,
+    SaleRegion: SaleRegion,
     RestartInstanceResponse: RestartInstanceResponse,
     DescribeBinlogSaveDaysRequest: DescribeBinlogSaveDaysRequest,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
@@ -9768,6 +10132,7 @@ module.exports = {
     RuleFilters: RuleFilters,
     CynosdbClusterDetail: CynosdbClusterDetail,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
+    SearchClusterDatabasesResponse: SearchClusterDatabasesResponse,
     DescribeInstanceDetailRequest: DescribeInstanceDetailRequest,
     ModifyMaintainPeriodConfigResponse: ModifyMaintainPeriodConfigResponse,
     ModifyBackupNameRequest: ModifyBackupNameRequest,
@@ -9785,7 +10150,7 @@ module.exports = {
     OfflineInstanceResponse: OfflineInstanceResponse,
     ModifyAuditServiceResponse: ModifyAuditServiceResponse,
     DeleteAuditRuleTemplatesResponse: DeleteAuditRuleTemplatesResponse,
-    PolicyRule: PolicyRule,
+    Module: Module,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
     DescribeInstanceSlowQueriesRequest: DescribeInstanceSlowQueriesRequest,
     DescribeBinlogsRequest: DescribeBinlogsRequest,

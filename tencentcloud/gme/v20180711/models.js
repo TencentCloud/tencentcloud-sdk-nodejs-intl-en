@@ -17,50 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * ScanVoice response structure.
- * @class
- */
-class ScanVoiceResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Voice moderation result. <li>`DataId`: Corresponding `DataId` in request.</li>
-<li>`TaskID`: Moderation task ID, which is used to poll the voice detection result.</li>
-         * @type {Array.<ScanVoiceResult> || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new ScanVoiceResult();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Application usage statistics
  * @class
  */
@@ -215,50 +171,6 @@ class ModifyAppStatusRequest extends  AbstractModel {
 }
 
 /**
- * DescribeScanResultList response structure.
- * @class
- */
-class DescribeScanResultListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Result of the voice detection task to be queried
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<DescribeScanResult> || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new DescribeScanResult();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeApplicationData request structure.
  * @class
  */
@@ -296,55 +208,6 @@ class DescribeApplicationDataRequest extends  AbstractModel {
         this.BizId = 'BizId' in params ? params.BizId : null;
         this.StartDate = 'StartDate' in params ? params.StartDate : null;
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
-
-    }
-}
-
-/**
- * Voice detection task list
- * @class
- */
-class Task extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique data ID
-         * @type {string || null}
-         */
-        this.DataId = null;
-
-        /**
-         * URL-encoded data file URL, which is a pull address if the detected voice is a stream.
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * GME Voice Chat room ID, which is entered during voice analysis by GME Voice Chat.
-         * @type {string || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * GME Voice Chat user ID, which is entered during voice analysis by GME Voice Chat.
-         * @type {string || null}
-         */
-        this.OpenId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DataId = 'DataId' in params ? params.DataId : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-        this.OpenId = 'OpenId' in params ? params.OpenId : null;
 
     }
 }
@@ -422,48 +285,6 @@ class DeleteRoomMemberRequest extends  AbstractModel {
         this.Uids = 'Uids' in params ? params.Uids : null;
         this.DeleteType = 'DeleteType' in params ? params.DeleteType : null;
         this.BizId = 'BizId' in params ? params.BizId : null;
-
-    }
-}
-
-/**
- * DescribeScanResultList request structure.
- * @class
- */
-class DescribeScanResultListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Application ID, which is obtained when you create an application in the [GME console](https://console.cloud.tencent.com/gamegme).
-         * @type {number || null}
-         */
-        this.BizId = null;
-
-        /**
-         * List of IDs of the tasks to be queried. Up to 100 entries can be added in the ID list.
-         * @type {Array.<string> || null}
-         */
-        this.TaskIdList = null;
-
-        /**
-         * Number of task results to be returned. Default value: 10. Maximum value: 500. This parameter will be ignored for large file tasks where all results will be returned.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BizId = 'BizId' in params ? params.BizId : null;
-        this.TaskIdList = 'TaskIdList' in params ? params.TaskIdList : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -881,24 +702,60 @@ class ModifyAppStatusResp extends  AbstractModel {
 }
 
 /**
- * DescribeAppStatistics response structure.
+ * Output parameters of `CreateApp`
  * @class
  */
-class DescribeAppStatisticsResponse extends  AbstractModel {
+class CreateAppResp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application usage statistics
-         * @type {DescribeAppStatisticsResp || null}
+         * Application ID, automatically generated by the backend.
+         * @type {number || null}
          */
-        this.Data = null;
+        this.BizId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Application name, the input of `AppName`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.AppName = null;
+
+        /**
+         * Project ID, the input of `ProjectId`.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Application key, used to initialize GME SDK.
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * Timestamp, indicating when the service is created.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Configuration information of Voice Chat
+         * @type {RealtimeSpeechConf || null}
+         */
+        this.RealtimeSpeechConf = null;
+
+        /**
+         * Configuration information of Voice Message Service
+         * @type {VoiceMessageConf || null}
+         */
+        this.VoiceMessageConf = null;
+
+        /**
+         * Configuration information of Voice Analysis Service
+         * @type {VoiceFilterConf || null}
+         */
+        this.VoiceFilterConf = null;
 
     }
 
@@ -909,13 +766,29 @@ class DescribeAppStatisticsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
-        if (params.Data) {
-            let obj = new DescribeAppStatisticsResp();
-            obj.deserialize(params.Data)
-            this.Data = obj;
+        if (params.RealtimeSpeechConf) {
+            let obj = new RealtimeSpeechConf();
+            obj.deserialize(params.RealtimeSpeechConf)
+            this.RealtimeSpeechConf = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.VoiceMessageConf) {
+            let obj = new VoiceMessageConf();
+            obj.deserialize(params.VoiceMessageConf)
+            this.VoiceMessageConf = obj;
+        }
+
+        if (params.VoiceFilterConf) {
+            let obj = new VoiceFilterConf();
+            obj.deserialize(params.VoiceFilterConf)
+            this.VoiceFilterConf = obj;
+        }
 
     }
 }
@@ -1029,60 +902,24 @@ class VoiceFilterStatisticsItem extends  AbstractModel {
 }
 
 /**
- * Output parameters of `CreateApp`
+ * Usage data unit
  * @class
  */
-class CreateAppResp extends  AbstractModel {
+class StatisticsItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID, automatically generated by the backend.
-         * @type {number || null}
-         */
-        this.BizId = null;
-
-        /**
-         * Application name, the input of `AppName`.
+         * Date in the format of yyyy-mm-dd, such as 2018-07-13
          * @type {string || null}
          */
-        this.AppName = null;
+        this.StatDate = null;
 
         /**
-         * Project ID, the input of `ProjectId`.
+         * Statistical value
          * @type {number || null}
          */
-        this.ProjectId = null;
-
-        /**
-         * Application key, used to initialize GME SDK.
-         * @type {string || null}
-         */
-        this.SecretKey = null;
-
-        /**
-         * Timestamp, indicating when the service is created.
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Configuration information of Voice Chat
-         * @type {RealtimeSpeechConf || null}
-         */
-        this.RealtimeSpeechConf = null;
-
-        /**
-         * Configuration information of Voice Message Service
-         * @type {VoiceMessageConf || null}
-         */
-        this.VoiceMessageConf = null;
-
-        /**
-         * Configuration information of Voice Analysis Service
-         * @type {VoiceFilterConf || null}
-         */
-        this.VoiceFilterConf = null;
+        this.Data = null;
 
     }
 
@@ -1093,29 +930,8 @@ class CreateAppResp extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BizId = 'BizId' in params ? params.BizId : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-
-        if (params.RealtimeSpeechConf) {
-            let obj = new RealtimeSpeechConf();
-            obj.deserialize(params.RealtimeSpeechConf)
-            this.RealtimeSpeechConf = obj;
-        }
-
-        if (params.VoiceMessageConf) {
-            let obj = new VoiceMessageConf();
-            obj.deserialize(params.VoiceMessageConf)
-            this.VoiceMessageConf = obj;
-        }
-
-        if (params.VoiceFilterConf) {
-            let obj = new VoiceFilterConf();
-            obj.deserialize(params.VoiceFilterConf)
-            this.VoiceFilterConf = obj;
-        }
+        this.StatDate = 'StatDate' in params ? params.StatDate : null;
+        this.Data = 'Data' in params ? params.Data : null;
 
     }
 }
@@ -1209,187 +1025,6 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
-
-    }
-}
-
-/**
- * Returned voice detection result
- * @class
- */
-class DescribeScanResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Business return code
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * Unique data ID
-         * @type {string || null}
-         */
-        this.DataId = null;
-
-        /**
-         * Detection completion timestamp
-         * @type {number || null}
-         */
-        this.ScanFinishTime = null;
-
-        /**
-         * Whether non-compliant information is detected
-         * @type {boolean || null}
-         */
-        this.HitFlag = null;
-
-        /**
-         * Whether it is a stream
-         * @type {boolean || null}
-         */
-        this.Live = null;
-
-        /**
-         * Business return description
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Msg = null;
-
-        /**
-         * Detection result, which will be returned if `Code` is 0
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<ScanPiece> || null}
-         */
-        this.ScanPiece = null;
-
-        /**
-         * Detection task submission timestamp
-         * @type {number || null}
-         */
-        this.ScanStartTime = null;
-
-        /**
-         * Voice detection scenario, which corresponds to the `Scene` at the time of request
-         * @type {Array.<string> || null}
-         */
-        this.Scenes = null;
-
-        /**
-         * Voice detection task ID, which is assigned by the backend
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * File or stream address
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Detection task execution result status. Valid values:
-<li>Start: Task started</li>
-<li>Success: Task ended successfully</li>
-<li>Error: An exception occurs</li>
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * ID of the application submitted for detection
-         * @type {number || null}
-         */
-        this.BizId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.DataId = 'DataId' in params ? params.DataId : null;
-        this.ScanFinishTime = 'ScanFinishTime' in params ? params.ScanFinishTime : null;
-        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
-        this.Live = 'Live' in params ? params.Live : null;
-        this.Msg = 'Msg' in params ? params.Msg : null;
-
-        if (params.ScanPiece) {
-            this.ScanPiece = new Array();
-            for (let z in params.ScanPiece) {
-                let obj = new ScanPiece();
-                obj.deserialize(params.ScanPiece[z]);
-                this.ScanPiece.push(obj);
-            }
-        }
-        this.ScanStartTime = 'ScanStartTime' in params ? params.ScanStartTime : null;
-        this.Scenes = 'Scenes' in params ? params.Scenes : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.BizId = 'BizId' in params ? params.BizId : null;
-
-    }
-}
-
-/**
- * Voice detection details
- * @class
- */
-class ScanDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Violation scenario. For more information, please see the definition of <a href="https://intl.cloud.tencent.com/document/product/607/37622?from_cn_redirect=1#Label_Value">Label</a>.
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
-         * Confidence score in scenario. Value range: [0.00,100.00]. The higher the score, the more likely the content is non-compliant.
-         * @type {string || null}
-         */
-        this.Rate = null;
-
-        /**
-         * Non-compliant keyword
-         * @type {string || null}
-         */
-        this.KeyWord = null;
-
-        /**
-         * Start time offset of keyword from 0 in audio (in milliseconds)
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time offset of keyword from 0 in audio (in milliseconds)
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Rate = 'Rate' in params ? params.Rate : null;
-        this.KeyWord = 'KeyWord' in params ? params.KeyWord : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -1566,41 +1201,6 @@ class DescribeAppStatisticsResp extends  AbstractModel {
 }
 
 /**
- * Result of voice moderation
- * @class
- */
-class ScanVoiceResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Data ID
-         * @type {string || null}
-         */
-        this.DataId = null;
-
-        /**
-         * Task ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DataId = 'DataId' in params ? params.DataId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-
-    }
-}
-
-/**
  * CreateApp response structure.
  * @class
  */
@@ -1632,6 +1232,46 @@ class CreateAppResponse extends  AbstractModel {
 
         if (params.Data) {
             let obj = new CreateAppResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAppStatistics response structure.
+ * @class
+ */
+class DescribeAppStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application usage statistics
+         * @type {DescribeAppStatisticsResp || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new DescribeAppStatisticsResp();
             obj.deserialize(params.Data)
             this.Data = obj;
         }
@@ -1685,113 +1325,6 @@ class DescribeAppStatisticsRequest extends  AbstractModel {
         this.StartDate = 'StartDate' in params ? params.StartDate : null;
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
         this.Services = 'Services' in params ? params.Services : null;
-
-    }
-}
-
-/**
- * Voice detection result, which will be returned if `Code` is 0.
- * @class
- */
-class ScanPiece extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Audio retention address, which will be returned for stream detection. The audio will be retained for 30 minutes.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DumpUrl = null;
-
-        /**
-         * Whether non-compliant information is detected
-         * @type {boolean || null}
-         */
-        this.HitFlag = null;
-
-        /**
-         * Main non-compliant content type
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MainType = null;
-
-        /**
-         * Voice detection details
-         * @type {Array.<ScanDetail> || null}
-         */
-        this.ScanDetail = null;
-
-        /**
-         * GME Voice Chat room ID, which is the `RoomId` passed through when the task was submitted.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * GME Voice Chat user ID, which is the `OpenId` passed through when the task was submitted.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.OpenId = null;
-
-        /**
-         * Remarks
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Info = null;
-
-        /**
-         * Offset time of multipart in stream during stream detection (in milliseconds)
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Multipart duration during stream detection
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * Multipart detection start time
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PieceStartTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DumpUrl = 'DumpUrl' in params ? params.DumpUrl : null;
-        this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
-        this.MainType = 'MainType' in params ? params.MainType : null;
-
-        if (params.ScanDetail) {
-            this.ScanDetail = new Array();
-            for (let z in params.ScanDetail) {
-                let obj = new ScanDetail();
-                obj.deserialize(params.ScanDetail[z]);
-                this.ScanDetail.push(obj);
-            }
-        }
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-        this.OpenId = 'OpenId' in params ? params.OpenId : null;
-        this.Info = 'Info' in params ? params.Info : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.PieceStartTime = 'PieceStartTime' in params ? params.PieceStartTime : null;
 
     }
 }
@@ -1864,124 +1397,12 @@ class VoiceFilterConf extends  AbstractModel {
     }
 }
 
-/**
- * Usage data unit
- * @class
- */
-class StatisticsItem extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Date in the format of yyyy-mm-dd, such as 2018-07-13
-         * @type {string || null}
-         */
-        this.StatDate = null;
-
-        /**
-         * Statistical value
-         * @type {number || null}
-         */
-        this.Data = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.StatDate = 'StatDate' in params ? params.StatDate : null;
-        this.Data = 'Data' in params ? params.Data : null;
-
-    }
-}
-
-/**
- * ScanVoice request structure.
- * @class
- */
-class ScanVoiceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Application ID, which is obtained when you create an application in the [GME console - Service Management](https://console.cloud.tencent.com/gamegme).
-         * @type {number || null}
-         */
-        this.BizId = null;
-
-        /**
-         * Voice detection scenario. It must be `default`. See the <a href="#Label_Value">Label description</a> as the result.
-         * @type {Array.<string> || null}
-         */
-        this.Scenes = null;
-
-        /**
-         * Whether it is a live stream. Values: `false` (voice file), `true` (live stream).
-         * @type {boolean || null}
-         */
-        this.Live = null;
-
-        /**
-         * Voice detection task list. Up to 100 tasks can be added in the list. 
-<li>`DataId`: Unique data ID</li>
-<li>`Url`: URL-encoded data file URL, which is a pull address if the detected voice is a stream</li>
-         * @type {Array.<Task> || null}
-         */
-        this.Tasks = null;
-
-        /**
-         * Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">Callback description</a> above. (Note: If this field is empty, the detection result can only be queried by calling the `DescribeScanResultList` API.)
-         * @type {string || null}
-         */
-        this.Callback = null;
-
-        /**
-         * Language. Chinese will be used if it is left empty.
-         * @type {string || null}
-         */
-        this.Lang = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BizId = 'BizId' in params ? params.BizId : null;
-        this.Scenes = 'Scenes' in params ? params.Scenes : null;
-        this.Live = 'Live' in params ? params.Live : null;
-
-        if (params.Tasks) {
-            this.Tasks = new Array();
-            for (let z in params.Tasks) {
-                let obj = new Task();
-                obj.deserialize(params.Tasks[z]);
-                this.Tasks.push(obj);
-            }
-        }
-        this.Callback = 'Callback' in params ? params.Callback : null;
-        this.Lang = 'Lang' in params ? params.Lang : null;
-
-    }
-}
-
 module.exports = {
-    ScanVoiceResponse: ScanVoiceResponse,
     AppStatisticsItem: AppStatisticsItem,
     ModifyAppStatusRequest: ModifyAppStatusRequest,
-    DescribeScanResultListResponse: DescribeScanResultListResponse,
     DescribeApplicationDataRequest: DescribeApplicationDataRequest,
-    Task: Task,
     VoiceMessageStatisticsItem: VoiceMessageStatisticsItem,
     DeleteRoomMemberRequest: DeleteRoomMemberRequest,
-    DescribeScanResultListRequest: DescribeScanResultListRequest,
     RealTimeSpeechStatisticsItem: RealTimeSpeechStatisticsItem,
     StreamTextStatisticsItem: StreamTextStatisticsItem,
     Tag: Tag,
@@ -1989,26 +1410,21 @@ module.exports = {
     AudioTextStatisticsItem: AudioTextStatisticsItem,
     ApplicationDataStatistics: ApplicationDataStatistics,
     ModifyAppStatusResp: ModifyAppStatusResp,
-    DescribeAppStatisticsResponse: DescribeAppStatisticsResponse,
+    CreateAppResp: CreateAppResp,
     DescribeApplicationDataResponse: DescribeApplicationDataResponse,
     DeleteRoomMemberResponse: DeleteRoomMemberResponse,
     VoiceFilterStatisticsItem: VoiceFilterStatisticsItem,
-    CreateAppResp: CreateAppResp,
+    StatisticsItem: StatisticsItem,
     RealtimeTextStatisticsItem: RealtimeTextStatisticsItem,
     DeleteResult: DeleteResult,
     OverseaTextStatisticsItem: OverseaTextStatisticsItem,
-    DescribeScanResult: DescribeScanResult,
-    ScanDetail: ScanDetail,
     CreateAppRequest: CreateAppRequest,
     RealtimeSpeechConf: RealtimeSpeechConf,
     DescribeAppStatisticsResp: DescribeAppStatisticsResp,
-    ScanVoiceResult: ScanVoiceResult,
     CreateAppResponse: CreateAppResponse,
+    DescribeAppStatisticsResponse: DescribeAppStatisticsResponse,
     DescribeAppStatisticsRequest: DescribeAppStatisticsRequest,
-    ScanPiece: ScanPiece,
     ModifyAppStatusResponse: ModifyAppStatusResponse,
     VoiceFilterConf: VoiceFilterConf,
-    StatisticsItem: StatisticsItem,
-    ScanVoiceRequest: ScanVoiceRequest,
 
 }

@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Usage data unit
+ * @class
+ */
+class StatisticsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Date in the format of yyyy-mm-dd, such as 2018-07-13
+         * @type {string || null}
+         */
+        this.StatDate = null;
+
+        /**
+         * Statistical value
+         * @type {number || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StatDate = 'StatDate' in params ? params.StatDate : null;
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
  * Application usage statistics
  * @class
  */
@@ -136,6 +171,55 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DeleteRoomMember request structure.
+ * @class
+ */
+class DeleteRoomMemberRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the target room
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * List of the members to remove
+         * @type {Array.<string> || null}
+         */
+        this.Uids = null;
+
+        /**
+         * Operation type. `1`: Delete a room; `2`: Remove members
+         * @type {number || null}
+         */
+        this.DeleteType = null;
+
+        /**
+         * Application ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.Uids = 'Uids' in params ? params.Uids : null;
+        this.DeleteType = 'DeleteType' in params ? params.DeleteType : null;
+        this.BizId = 'BizId' in params ? params.BizId : null;
+
+    }
+}
+
+/**
  * ModifyAppStatus request structure.
  * @class
  */
@@ -166,6 +250,60 @@ class ModifyAppStatusRequest extends  AbstractModel {
         }
         this.BizId = 'BizId' in params ? params.BizId : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * ModifyRecordInfo request structure.
+ * @class
+ */
+class ModifyRecordInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the ongoing task, which is returned from the `StartRecord` API.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+         * @type {number || null}
+         */
+        this.RecordMode = null;
+
+        /**
+         * Application ID.
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * Allowlist or blocklist for stream subscription.
+         * @type {SubscribeRecordUserIds || null}
+         */
+        this.SubscribeRecordUserIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RecordMode = 'RecordMode' in params ? params.RecordMode : null;
+        this.BizId = 'BizId' in params ? params.BizId : null;
+
+        if (params.SubscribeRecordUserIds) {
+            let obj = new SubscribeRecordUserIds();
+            obj.deserialize(params.SubscribeRecordUserIds)
+            this.SubscribeRecordUserIds = obj;
+        }
 
     }
 }
@@ -241,33 +379,21 @@ class VoiceMessageStatisticsItem extends  AbstractModel {
 }
 
 /**
- * DeleteRoomMember request structure.
+ * DescribeRecordInfo request structure.
  * @class
  */
-class DeleteRoomMemberRequest extends  AbstractModel {
+class DescribeRecordInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the target room
-         * @type {string || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * List of the members to remove
-         * @type {Array.<string> || null}
-         */
-        this.Uids = null;
-
-        /**
-         * Operation type. `1`: Delete a room; `2`: Remove members
+         * ID of the ongoing task, which is returned from the `StartRecord` API.
          * @type {number || null}
          */
-        this.DeleteType = null;
+        this.TaskId = null;
 
         /**
-         * Application ID
+         * Application ID.
          * @type {number || null}
          */
         this.BizId = null;
@@ -281,10 +407,97 @@ class DeleteRoomMemberRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
-        this.Uids = 'Uids' in params ? params.Uids : null;
-        this.DeleteType = 'DeleteType' in params ? params.DeleteType : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.BizId = 'BizId' in params ? params.BizId : null;
+
+    }
+}
+
+/**
+ * StartRecord response structure.
+ * @class
+ */
+class StartRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartRecord request structure.
+ * @class
+ */
+class StartRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * Room ID.
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+         * @type {number || null}
+         */
+        this.RecordMode = null;
+
+        /**
+         * Allowlist or blocklist for stream subscription. If you do not specify this parameter, the audio streams of all the users in the room are subscribed to by default.
+         * @type {SubscribeRecordUserIds || null}
+         */
+        this.SubscribeRecordUserIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.RecordMode = 'RecordMode' in params ? params.RecordMode : null;
+
+        if (params.SubscribeRecordUserIds) {
+            let obj = new SubscribeRecordUserIds();
+            obj.deserialize(params.SubscribeRecordUserIds)
+            this.SubscribeRecordUserIds = obj;
+        }
 
     }
 }
@@ -348,6 +561,55 @@ class RealTimeSpeechStatisticsItem extends  AbstractModel {
         this.OverseaDau = 'OverseaDau' in params ? params.OverseaDau : null;
         this.OverseaPcu = 'OverseaPcu' in params ? params.OverseaPcu : null;
         this.OverseaDuration = 'OverseaDuration' in params ? params.OverseaDuration : null;
+
+    }
+}
+
+/**
+ * DescribeAppStatistics request structure.
+ * @class
+ */
+class DescribeAppStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * GME application ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * Data start date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13.
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * Data end date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13.
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * List of services to be queried. Valid values: `RealTimeSpeech`, `VoiceMessage`, `VoiceFilter`, `SpeechToText`.
+         * @type {Array.<string> || null}
+         */
+        this.Services = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.Services = 'Services' in params ? params.Services : null;
 
     }
 }
@@ -478,6 +740,63 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
+ * DescribeTaskInfo response structure.
+ * @class
+ */
+class DescribeTaskInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the ongoing task, which is returned from the `StartRecord` API.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RecordMode = null;
+
+        /**
+         * Allowlist or blocklist for stream subscription.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SubscribeRecordUserIds || null}
+         */
+        this.SubscribeRecordUserIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RecordMode = 'RecordMode' in params ? params.RecordMode : null;
+
+        if (params.SubscribeRecordUserIds) {
+            let obj = new SubscribeRecordUserIds();
+            obj.deserialize(params.SubscribeRecordUserIds)
+            this.SubscribeRecordUserIds = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -702,60 +1021,24 @@ class ModifyAppStatusResp extends  AbstractModel {
 }
 
 /**
- * Output parameters of `CreateApp`
+ * DescribeAppStatistics response structure.
  * @class
  */
-class CreateAppResp extends  AbstractModel {
+class DescribeAppStatisticsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Application ID, automatically generated by the backend.
-         * @type {number || null}
+         * Application usage statistics
+         * @type {DescribeAppStatisticsResp || null}
          */
-        this.BizId = null;
+        this.Data = null;
 
         /**
-         * Application name, the input of `AppName`.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.AppName = null;
-
-        /**
-         * Project ID, the input of `ProjectId`.
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * Application key, used to initialize GME SDK.
-         * @type {string || null}
-         */
-        this.SecretKey = null;
-
-        /**
-         * Timestamp, indicating when the service is created.
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Configuration information of Voice Chat
-         * @type {RealtimeSpeechConf || null}
-         */
-        this.RealtimeSpeechConf = null;
-
-        /**
-         * Configuration information of Voice Message Service
-         * @type {VoiceMessageConf || null}
-         */
-        this.VoiceMessageConf = null;
-
-        /**
-         * Configuration information of Voice Analysis Service
-         * @type {VoiceFilterConf || null}
-         */
-        this.VoiceFilterConf = null;
+        this.RequestId = null;
 
     }
 
@@ -766,29 +1049,13 @@ class CreateAppResp extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BizId = 'BizId' in params ? params.BizId : null;
-        this.AppName = 'AppName' in params ? params.AppName : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
-        if (params.RealtimeSpeechConf) {
-            let obj = new RealtimeSpeechConf();
-            obj.deserialize(params.RealtimeSpeechConf)
-            this.RealtimeSpeechConf = obj;
+        if (params.Data) {
+            let obj = new DescribeAppStatisticsResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
         }
-
-        if (params.VoiceMessageConf) {
-            let obj = new VoiceMessageConf();
-            obj.deserialize(params.VoiceMessageConf)
-            this.VoiceMessageConf = obj;
-        }
-
-        if (params.VoiceFilterConf) {
-            let obj = new VoiceFilterConf();
-            obj.deserialize(params.VoiceFilterConf)
-            this.VoiceFilterConf = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -902,24 +1169,60 @@ class VoiceFilterStatisticsItem extends  AbstractModel {
 }
 
 /**
- * Usage data unit
+ * Output parameters of `CreateApp`
  * @class
  */
-class StatisticsItem extends  AbstractModel {
+class CreateAppResp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Date in the format of yyyy-mm-dd, such as 2018-07-13
-         * @type {string || null}
-         */
-        this.StatDate = null;
-
-        /**
-         * Statistical value
+         * Application ID, automatically generated by the backend.
          * @type {number || null}
          */
-        this.Data = null;
+        this.BizId = null;
+
+        /**
+         * Application name, the input of `AppName`.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * Project ID, the input of `ProjectId`.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Application key, used to initialize GME SDK.
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * Timestamp, indicating when the service is created.
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Configuration information of Voice Chat
+         * @type {RealtimeSpeechConf || null}
+         */
+        this.RealtimeSpeechConf = null;
+
+        /**
+         * Configuration information of Voice Message Service
+         * @type {VoiceMessageConf || null}
+         */
+        this.VoiceMessageConf = null;
+
+        /**
+         * Configuration information of Voice Analysis Service
+         * @type {VoiceFilterConf || null}
+         */
+        this.VoiceFilterConf = null;
 
     }
 
@@ -930,8 +1233,116 @@ class StatisticsItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StatDate = 'StatDate' in params ? params.StatDate : null;
-        this.Data = 'Data' in params ? params.Data : null;
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.RealtimeSpeechConf) {
+            let obj = new RealtimeSpeechConf();
+            obj.deserialize(params.RealtimeSpeechConf)
+            this.RealtimeSpeechConf = obj;
+        }
+
+        if (params.VoiceMessageConf) {
+            let obj = new VoiceMessageConf();
+            obj.deserialize(params.VoiceMessageConf)
+            this.VoiceMessageConf = obj;
+        }
+
+        if (params.VoiceFilterConf) {
+            let obj = new VoiceFilterConf();
+            obj.deserialize(params.VoiceFilterConf)
+            this.VoiceFilterConf = obj;
+        }
+
+    }
+}
+
+/**
+ * Information about the recording task in a room.
+Note: This field may return null, indicating that no valid values can be obtained.
+ * @class
+ */
+class RecordInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * User ID. The value is `0` in mixed streams recording mode.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Recording filename.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Recording start time, which is a Unix timestamp. Example: 1234567868.
+         * @type {number || null}
+         */
+        this.RecordBeginTime = null;
+
+        /**
+         * Recording status. Valid values: `2`: recording; `10`: to be transcoded; `11`: transcoding; `12`: uploading; `13`: uploaded; `14`: user notified.
+         * @type {number || null}
+         */
+        this.RecordStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.RecordBeginTime = 'RecordBeginTime' in params ? params.RecordBeginTime : null;
+        this.RecordStatus = 'RecordStatus' in params ? params.RecordStatus : null;
+
+    }
+}
+
+/**
+ * Allowlist or blocklist for stream subscription.
+ * @class
+ */
+class SubscribeRecordUserIds extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Blocklist for audio subscription. For example, `["1", "2", "3"]` means to not subscribe to the audio streams of users 1, 2, and 3. If this parameter is left empty, the audio streams of all users (max 20) in the room will not be subscribed to.
+Note: You cannot specify `UnSubscribeAudioUserIds` and `SubscribeAudioUserIds` at the same time.
+         * @type {Array.<string> || null}
+         */
+        this.UnSubscribeUserIds = null;
+
+        /**
+         * Allowlist for audio subscription. For example, `["1", "2", "3"]` means to subscribe to the audio streams of users 1, 2, and 3. If this parameter is left empty, the audio streams of all users (max 20) in the room will be subscribed to.
+Note: You cannot specify `UnSubscribeAudioUserIds` and `SubscribeAudioUserIds` at the same time.
+         * @type {Array.<string> || null}
+         */
+        this.SubscribeUserIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UnSubscribeUserIds = 'UnSubscribeUserIds' in params ? params.UnSubscribeUserIds : null;
+        this.SubscribeUserIds = 'SubscribeUserIds' in params ? params.SubscribeUserIds : null;
 
     }
 }
@@ -1025,6 +1436,273 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
+ * DescribeTaskInfo request structure.
+ * @class
+ */
+class DescribeTaskInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application ID.
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * Room ID.
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
+ * Configuration information of Voice Chat
+ * @class
+ */
+class RealtimeSpeechConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Voice Chat status. Valid values: `open`, `close`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Voice Chat sound quality. Valid value: `high`.
+         * @type {string || null}
+         */
+        this.Quality = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Quality = 'Quality' in params ? params.Quality : null;
+
+    }
+}
+
+/**
+ * Output parameters of application usage statistics
+ * @class
+ */
+class DescribeAppStatisticsResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Application usage statistics
+         * @type {Array.<AppStatisticsItem> || null}
+         */
+        this.AppStatistics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AppStatistics) {
+            this.AppStatistics = new Array();
+            for (let z in params.AppStatistics) {
+                let obj = new AppStatisticsItem();
+                obj.deserialize(params.AppStatistics[z]);
+                this.AppStatistics.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeRecordInfo response structure.
+ * @class
+ */
+class DescribeRecordInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information about the recording task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RecordInfo> || null}
+         */
+        this.RecordInfo = null;
+
+        /**
+         * Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+         * @type {number || null}
+         */
+        this.RecordMode = null;
+
+        /**
+         * Room ID.
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RecordInfo) {
+            this.RecordInfo = new Array();
+            for (let z in params.RecordInfo) {
+                let obj = new RecordInfo();
+                obj.deserialize(params.RecordInfo[z]);
+                this.RecordInfo.push(obj);
+            }
+        }
+        this.RecordMode = 'RecordMode' in params ? params.RecordMode : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateApp response structure.
+ * @class
+ */
+class CreateAppResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned data
+         * @type {CreateAppResp || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new CreateAppResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopRecord request structure.
+ * @class
+ */
+class StopRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Application ID.
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.BizId = 'BizId' in params ? params.BizId : null;
+
+    }
+}
+
+/**
+ * StopRecord response structure.
+ * @class
+ */
+class StopRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1130,206 +1808,6 @@ class CreateAppRequest extends  AbstractModel {
 }
 
 /**
- * Configuration information of Voice Chat
- * @class
- */
-class RealtimeSpeechConf extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Voice Chat status. Valid values: `open`, `close`.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Voice Chat sound quality. Valid value: `high`.
-         * @type {string || null}
-         */
-        this.Quality = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Quality = 'Quality' in params ? params.Quality : null;
-
-    }
-}
-
-/**
- * Output parameters of application usage statistics
- * @class
- */
-class DescribeAppStatisticsResp extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Application usage statistics
-         * @type {Array.<AppStatisticsItem> || null}
-         */
-        this.AppStatistics = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.AppStatistics) {
-            this.AppStatistics = new Array();
-            for (let z in params.AppStatistics) {
-                let obj = new AppStatisticsItem();
-                obj.deserialize(params.AppStatistics[z]);
-                this.AppStatistics.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * CreateApp response structure.
- * @class
- */
-class CreateAppResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Returned data
-         * @type {CreateAppResp || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new CreateAppResp();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeAppStatistics response structure.
- * @class
- */
-class DescribeAppStatisticsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Application usage statistics
-         * @type {DescribeAppStatisticsResp || null}
-         */
-        this.Data = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Data) {
-            let obj = new DescribeAppStatisticsResp();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeAppStatistics request structure.
- * @class
- */
-class DescribeAppStatisticsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * GME application ID
-         * @type {number || null}
-         */
-        this.BizId = null;
-
-        /**
-         * Data start date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13.
-         * @type {string || null}
-         */
-        this.StartDate = null;
-
-        /**
-         * Data end date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13.
-         * @type {string || null}
-         */
-        this.EndDate = null;
-
-        /**
-         * List of services to be queried. Valid values: `RealTimeSpeech`, `VoiceMessage`, `VoiceFilter`, `SpeechToText`.
-         * @type {Array.<string> || null}
-         */
-        this.Services = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BizId = 'BizId' in params ? params.BizId : null;
-        this.StartDate = 'StartDate' in params ? params.StartDate : null;
-        this.EndDate = 'EndDate' in params ? params.EndDate : null;
-        this.Services = 'Services' in params ? params.Services : null;
-
-    }
-}
-
-/**
  * ModifyAppStatus response structure.
  * @class
  */
@@ -1397,34 +1875,74 @@ class VoiceFilterConf extends  AbstractModel {
     }
 }
 
+/**
+ * ModifyRecordInfo response structure.
+ * @class
+ */
+class ModifyRecordInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
+    StatisticsItem: StatisticsItem,
     AppStatisticsItem: AppStatisticsItem,
+    DeleteRoomMemberRequest: DeleteRoomMemberRequest,
     ModifyAppStatusRequest: ModifyAppStatusRequest,
+    ModifyRecordInfoRequest: ModifyRecordInfoRequest,
     DescribeApplicationDataRequest: DescribeApplicationDataRequest,
     VoiceMessageStatisticsItem: VoiceMessageStatisticsItem,
-    DeleteRoomMemberRequest: DeleteRoomMemberRequest,
+    DescribeRecordInfoRequest: DescribeRecordInfoRequest,
+    StartRecordResponse: StartRecordResponse,
+    StartRecordRequest: StartRecordRequest,
     RealTimeSpeechStatisticsItem: RealTimeSpeechStatisticsItem,
+    DescribeAppStatisticsRequest: DescribeAppStatisticsRequest,
     StreamTextStatisticsItem: StreamTextStatisticsItem,
     Tag: Tag,
     VoiceMessageConf: VoiceMessageConf,
     AudioTextStatisticsItem: AudioTextStatisticsItem,
+    DescribeTaskInfoResponse: DescribeTaskInfoResponse,
     ApplicationDataStatistics: ApplicationDataStatistics,
     ModifyAppStatusResp: ModifyAppStatusResp,
-    CreateAppResp: CreateAppResp,
+    DescribeAppStatisticsResponse: DescribeAppStatisticsResponse,
     DescribeApplicationDataResponse: DescribeApplicationDataResponse,
     DeleteRoomMemberResponse: DeleteRoomMemberResponse,
     VoiceFilterStatisticsItem: VoiceFilterStatisticsItem,
-    StatisticsItem: StatisticsItem,
+    CreateAppResp: CreateAppResp,
+    RecordInfo: RecordInfo,
+    SubscribeRecordUserIds: SubscribeRecordUserIds,
     RealtimeTextStatisticsItem: RealtimeTextStatisticsItem,
     DeleteResult: DeleteResult,
     OverseaTextStatisticsItem: OverseaTextStatisticsItem,
-    CreateAppRequest: CreateAppRequest,
+    DescribeTaskInfoRequest: DescribeTaskInfoRequest,
     RealtimeSpeechConf: RealtimeSpeechConf,
     DescribeAppStatisticsResp: DescribeAppStatisticsResp,
+    DescribeRecordInfoResponse: DescribeRecordInfoResponse,
     CreateAppResponse: CreateAppResponse,
-    DescribeAppStatisticsResponse: DescribeAppStatisticsResponse,
-    DescribeAppStatisticsRequest: DescribeAppStatisticsRequest,
+    StopRecordRequest: StopRecordRequest,
+    StopRecordResponse: StopRecordResponse,
+    CreateAppRequest: CreateAppRequest,
     ModifyAppStatusResponse: ModifyAppStatusResponse,
     VoiceFilterConf: VoiceFilterConf,
+    ModifyRecordInfoResponse: ModifyRecordInfoResponse,
 
 }

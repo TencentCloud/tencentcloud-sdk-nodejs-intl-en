@@ -16,34 +16,46 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const StatisticsItem = models.StatisticsItem;
 const AppStatisticsItem = models.AppStatisticsItem;
+const DeleteRoomMemberRequest = models.DeleteRoomMemberRequest;
 const ModifyAppStatusRequest = models.ModifyAppStatusRequest;
+const ModifyRecordInfoRequest = models.ModifyRecordInfoRequest;
 const DescribeApplicationDataRequest = models.DescribeApplicationDataRequest;
 const VoiceMessageStatisticsItem = models.VoiceMessageStatisticsItem;
-const DeleteRoomMemberRequest = models.DeleteRoomMemberRequest;
+const DescribeRecordInfoRequest = models.DescribeRecordInfoRequest;
+const StartRecordResponse = models.StartRecordResponse;
+const StartRecordRequest = models.StartRecordRequest;
 const RealTimeSpeechStatisticsItem = models.RealTimeSpeechStatisticsItem;
+const DescribeAppStatisticsRequest = models.DescribeAppStatisticsRequest;
 const StreamTextStatisticsItem = models.StreamTextStatisticsItem;
 const Tag = models.Tag;
 const VoiceMessageConf = models.VoiceMessageConf;
 const AudioTextStatisticsItem = models.AudioTextStatisticsItem;
+const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const ApplicationDataStatistics = models.ApplicationDataStatistics;
 const ModifyAppStatusResp = models.ModifyAppStatusResp;
-const CreateAppResp = models.CreateAppResp;
+const DescribeAppStatisticsResponse = models.DescribeAppStatisticsResponse;
 const DescribeApplicationDataResponse = models.DescribeApplicationDataResponse;
 const DeleteRoomMemberResponse = models.DeleteRoomMemberResponse;
 const VoiceFilterStatisticsItem = models.VoiceFilterStatisticsItem;
-const StatisticsItem = models.StatisticsItem;
+const CreateAppResp = models.CreateAppResp;
+const RecordInfo = models.RecordInfo;
+const SubscribeRecordUserIds = models.SubscribeRecordUserIds;
 const RealtimeTextStatisticsItem = models.RealtimeTextStatisticsItem;
 const DeleteResult = models.DeleteResult;
 const OverseaTextStatisticsItem = models.OverseaTextStatisticsItem;
-const CreateAppRequest = models.CreateAppRequest;
+const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
 const RealtimeSpeechConf = models.RealtimeSpeechConf;
 const DescribeAppStatisticsResp = models.DescribeAppStatisticsResp;
+const DescribeRecordInfoResponse = models.DescribeRecordInfoResponse;
 const CreateAppResponse = models.CreateAppResponse;
-const DescribeAppStatisticsResponse = models.DescribeAppStatisticsResponse;
-const DescribeAppStatisticsRequest = models.DescribeAppStatisticsRequest;
+const StopRecordRequest = models.StopRecordRequest;
+const StopRecordResponse = models.StopRecordResponse;
+const CreateAppRequest = models.CreateAppRequest;
 const ModifyAppStatusResponse = models.ModifyAppStatusResponse;
 const VoiceFilterConf = models.VoiceFilterConf;
+const ModifyRecordInfoResponse = models.ModifyRecordInfoResponse;
 
 
 /**
@@ -68,6 +80,17 @@ class GmeClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify recording configurations.
+     * @param {ModifyRecordInfoRequest} req
+     * @param {function(string, ModifyRecordInfoResponse):void} cb
+     * @public
+     */
+    ModifyRecordInfo(req, cb) {
+        let resp = new ModifyRecordInfoResponse();
+        this.request("ModifyRecordInfo", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a room or remove members from the room.
      * @param {DeleteRoomMemberRequest} req
      * @param {function(string, DeleteRoomMemberResponse):void} cb
@@ -79,14 +102,36 @@ class GmeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change the status of an application.
-     * @param {ModifyAppStatusRequest} req
-     * @param {function(string, ModifyAppStatusResponse):void} cb
+     * This API is used to query data details for up to the past 90 days.
+     * @param {DescribeApplicationDataRequest} req
+     * @param {function(string, DescribeApplicationDataResponse):void} cb
      * @public
      */
-    ModifyAppStatus(req, cb) {
-        let resp = new ModifyAppStatusResponse();
-        this.request("ModifyAppStatus", req, resp, cb);
+    DescribeApplicationData(req, cb) {
+        let resp = new DescribeApplicationDataResponse();
+        this.request("DescribeApplicationData", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a recording task.
+     * @param {DescribeRecordInfoRequest} req
+     * @param {function(string, DescribeRecordInfoResponse):void} cb
+     * @public
+     */
+    DescribeRecordInfo(req, cb) {
+        let resp = new DescribeRecordInfoResponse();
+        this.request("DescribeRecordInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start recording.
+     * @param {StartRecordRequest} req
+     * @param {function(string, StartRecordResponse):void} cb
+     * @public
+     */
+    StartRecord(req, cb) {
+        let resp = new StartRecordResponse();
+        this.request("StartRecord", req, resp, cb);
     }
 
     /**
@@ -101,14 +146,37 @@ class GmeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query data details for up to the past 90 days.
-     * @param {DescribeApplicationDataRequest} req
-     * @param {function(string, DescribeApplicationDataResponse):void} cb
+     * This API is used to change the status of an application.
+     * @param {ModifyAppStatusRequest} req
+     * @param {function(string, ModifyAppStatusResponse):void} cb
      * @public
      */
-    DescribeApplicationData(req, cb) {
-        let resp = new DescribeApplicationDataResponse();
-        this.request("DescribeApplicationData", req, resp, cb);
+    ModifyAppStatus(req, cb) {
+        let resp = new ModifyAppStatusResponse();
+        this.request("ModifyAppStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the recording task in a room.
+     * @param {DescribeTaskInfoRequest} req
+     * @param {function(string, DescribeTaskInfoResponse):void} cb
+     * @public
+     */
+    DescribeTaskInfo(req, cb) {
+        let resp = new DescribeTaskInfoResponse();
+        this.request("DescribeTaskInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to stop recording.
+
+     * @param {StopRecordRequest} req
+     * @param {function(string, StopRecordResponse):void} cb
+     * @public
+     */
+    StopRecord(req, cb) {
+        let resp = new StopRecordResponse();
+        this.request("StopRecord", req, resp, cb);
     }
 
 

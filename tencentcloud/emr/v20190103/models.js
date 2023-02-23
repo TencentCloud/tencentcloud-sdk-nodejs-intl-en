@@ -1084,6 +1084,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.IsMultiZoneCluster = null;
 
+        /**
+         * Whether the feature of automatic abnormal node replacement is enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsCvmReplace = null;
+
     }
 
     /**
@@ -1163,6 +1170,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             }
         }
         this.IsMultiZoneCluster = 'IsMultiZoneCluster' in params ? params.IsMultiZoneCluster : null;
+        this.IsCvmReplace = 'IsCvmReplace' in params ? params.IsCvmReplace : null;
 
     }
 }
@@ -6901,8 +6909,8 @@ class CustomMetaDBInfo extends  AbstractModel {
 
         /**
          * The Hive-shared metadatabase type. Valid values:
-<li>`EMR_NEW_META`: The cluster creates a metadatabase by default.</li>
-<li>`EMR_EXIST_META`: The cluster uses a specified EMR-MetaDB instance.</li>
+<li>`EMR_DEFAULT_META`: The cluster creates one by default.</li>
+<li>`EMR_EXIST_META`: The cluster uses the specified EMR metadatabase instance.</li>
 <li>`USER_CUSTOM_META`: The cluster uses a custom metadatabase instance.</li>
          * @type {string || null}
          */

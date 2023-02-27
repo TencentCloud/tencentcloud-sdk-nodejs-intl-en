@@ -819,7 +819,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceVersion = null;
 
         /**
-         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal).
+         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
          * @type {number || null}
          */
         this.Status = null;
@@ -1006,6 +1006,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.SpecName = null;
 
+        /**
+         * Cluster exception
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExceptionInformation = null;
+
     }
 
     /**
@@ -1029,6 +1036,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.SpecName = 'SpecName' in params ? params.SpecName : null;
+        this.ExceptionInformation = 'ExceptionInformation' in params ? params.ExceptionInformation : null;
 
     }
 }
@@ -1110,6 +1118,36 @@ class DescribeRabbitMQNodeListRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * Node name for fuzzy search
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * Name and value of a filter.
+Currently, only the `nodeStatus` filter is supported.
+Valid values: `running`, `down`.
+It is an array type and can contain multiple filters.
+
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sorting by a specified element.
+Valid values: `cpuUsage`, `diskUsage`.
+         * @type {string || null}
+         */
+        this.SortElement = null;
+
+        /**
+         * Sorting order.
+Valid values: `ascend`, `descend`.
+         * @type {string || null}
+         */
+        this.SortOrder = null;
+
     }
 
     /**
@@ -1122,6 +1160,18 @@ class DescribeRabbitMQNodeListRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.SortElement = 'SortElement' in params ? params.SortElement : null;
+        this.SortOrder = 'SortOrder' in params ? params.SortOrder : null;
 
     }
 }
@@ -7822,6 +7872,13 @@ class RocketMQClusterConfig extends  AbstractModel {
          */
         this.MaxLatencyTime = null;
 
+        /**
+         * The maximum number of queues in a single topic
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxQueuesPerTopic = null;
+
     }
 
     /**
@@ -7840,6 +7897,7 @@ class RocketMQClusterConfig extends  AbstractModel {
         this.UsedGroupNum = 'UsedGroupNum' in params ? params.UsedGroupNum : null;
         this.MaxRetentionTime = 'MaxRetentionTime' in params ? params.MaxRetentionTime : null;
         this.MaxLatencyTime = 'MaxLatencyTime' in params ? params.MaxLatencyTime : null;
+        this.MaxQueuesPerTopic = 'MaxQueuesPerTopic' in params ? params.MaxQueuesPerTopic : null;
 
     }
 }
@@ -8591,7 +8649,7 @@ class CreateRocketMQTopicRequest extends  AbstractModel {
         this.Namespaces = null;
 
         /**
-         * Topic type. Valid values: Normal, GlobalOrder, PartitionedOrder.
+         * Topic type. Valid values: `Normal`, `PartitionedOrder`, `Transaction`, `DelayScheduled`.
          * @type {string || null}
          */
         this.Type = null;
@@ -10032,6 +10090,41 @@ Note: This field may return null, indicating that no valid value can be obtained
          */
         this.NodeName = null;
 
+        /**
+         * Node status
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.NodeStatus = null;
+
+        /**
+         * CPU utilization
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CPUUsage = null;
+
+        /**
+         * Memory usage in MB
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Disk utilization
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiskUsage = null;
+
+        /**
+         * The number of RabbitMQ Erlang processes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ProcessNumber = null;
+
     }
 
     /**
@@ -10042,6 +10135,11 @@ Note: This field may return null, indicating that no valid value can be obtained
             return;
         }
         this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.NodeStatus = 'NodeStatus' in params ? params.NodeStatus : null;
+        this.CPUUsage = 'CPUUsage' in params ? params.CPUUsage : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
+        this.ProcessNumber = 'ProcessNumber' in params ? params.ProcessNumber : null;
 
     }
 }

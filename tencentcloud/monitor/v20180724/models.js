@@ -590,6 +590,49 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
+ * DeletePrometheusClusterAgent request structure.
+ * @class
+ */
+class DeletePrometheusClusterAgentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Agent list
+         * @type {Array.<PrometheusAgentInfo> || null}
+         */
+        this.Agents = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Agents) {
+            this.Agents = new Array();
+            for (let z in params.Agents) {
+                let obj = new PrometheusAgentInfo();
+                obj.deserialize(params.Agents[z]);
+                this.Agents.push(obj);
+            }
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribePrometheusScrapeJobs request structure.
  * @class
  */
@@ -1411,7 +1454,7 @@ class DescribeGrafanaEnvironmentsRequest extends  AbstractModel {
         super();
 
         /**
-         * TCMG instance ID, such as “grafana-abcdefgh”.
+         * ID of a TencentCloud Managed Service for Grafana instance, such as “grafana-abcdefgh”.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1825,39 +1868,45 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeBasicAlarmList response structure.
+ * DeleteExporterIntegration request structure.
  * @class
  */
-class DescribeBasicAlarmListResponse extends  AbstractModel {
+class DeleteExporterIntegrationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Alarm list.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {Array.<DescribeBasicAlarmListAlarms> || null}
+         * Instance ID
+         * @type {string || null}
          */
-        this.Alarms = null;
+        this.InstanceId = null;
 
         /**
-         * Total number.
-Note: This field may return null, indicating that no valid value was found.
+         * Kubernetes cluster type. Valid values:
+<li> 1 = TKE </li>
+<li> 2 = EKS </li>
+<li> 3 = MEKS </li>
          * @type {number || null}
          */
-        this.Total = null;
+        this.KubeType = null;
 
         /**
-         * Remarks
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Cluster ID
          * @type {string || null}
          */
-        this.Warning = null;
+        this.ClusterId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Type
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Kind = null;
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Name = null;
 
     }
 
@@ -1868,18 +1917,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.Alarms) {
-            this.Alarms = new Array();
-            for (let z in params.Alarms) {
-                let obj = new DescribeBasicAlarmListAlarms();
-                obj.deserialize(params.Alarms[z]);
-                this.Alarms.push(obj);
-            }
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-        this.Warning = 'Warning' in params ? params.Warning : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.KubeType = 'KubeType' in params ? params.KubeType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Kind = 'Kind' in params ? params.Kind : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -3064,6 +3106,64 @@ class DescribeAlarmNoticesResponse extends  AbstractModel {
 }
 
 /**
+ * Additional pod configurations of the components deployed in the cluster when a cluster is associated
+ * @class
+ */
+class PrometheusClusterAgentPodConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to use HostNetWork
+         * @type {boolean || null}
+         */
+        this.HostNet = null;
+
+        /**
+         * A parameter used to specify the running nodes for a pod
+         * @type {Array.<Label> || null}
+         */
+        this.NodeSelector = null;
+
+        /**
+         * Tolerable taints
+         * @type {Array.<Toleration> || null}
+         */
+        this.Tolerations = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HostNet = 'HostNet' in params ? params.HostNet : null;
+
+        if (params.NodeSelector) {
+            this.NodeSelector = new Array();
+            for (let z in params.NodeSelector) {
+                let obj = new Label();
+                obj.deserialize(params.NodeSelector[z]);
+                this.NodeSelector.push(obj);
+            }
+        }
+
+        if (params.Tolerations) {
+            this.Tolerations = new Array();
+            for (let z in params.Tolerations) {
+                let obj = new Toleration();
+                obj.deserialize(params.Tolerations[z]);
+                this.Tolerations.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Instance type when the Grafana instance is queried
  * @class
  */
@@ -3222,6 +3322,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EnableSSO = 'EnableSSO' in params ? params.EnableSSO : null;
         this.Version = 'Version' in params ? params.Version : null;
         this.EnableSSOCamCheck = 'EnableSSOCamCheck' in params ? params.EnableSSOCamCheck : null;
+
+    }
+}
+
+/**
+ * DeletePrometheusConfig response structure.
+ * @class
+ */
+class DeletePrometheusConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4321,6 +4449,75 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Cloud Monitor alarm notification template - callback notification details
+ * @class
+ */
+class URLNotice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Callback URL, which can contain up to 256 characters
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.URL = null;
+
+        /**
+         * Whether verification is passed. Valid values: 0 (no), 1 (yes)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsValid = null;
+
+        /**
+         * Verification code
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ValidationCode = null;
+
+        /**
+         * Start time of the notification in seconds, which is calculated from 00:00:00.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the notification in seconds, which is calculated from 00:00:00.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Notification cycle. The values 1-7 indicate Monday to Sunday.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.Weekday = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.URL = 'URL' in params ? params.URL : null;
+        this.IsValid = 'IsValid' in params ? params.IsValid : null;
+        this.ValidationCode = 'ValidationCode' in params ? params.ValidationCode : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Weekday = 'Weekday' in params ? params.Weekday : null;
+
+    }
+}
+
+/**
  * DeletePrometheusTemp response structure.
  * @class
  */
@@ -4857,84 +5054,45 @@ class DescribePrometheusTempSyncRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAccidentEventList request structure.
+ * DescribePrometheusGlobalConfig response structure.
  * @class
  */
-class DescribeAccidentEventListRequest extends  AbstractModel {
+class DescribePrometheusGlobalConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * API component name. The value for the current API is monitor.
+         * Configuration content
          * @type {string || null}
          */
-        this.Module = null;
+        this.Config = null;
 
         /**
-         * Start time, which is the timestamp one day prior by default.
-         * @type {number || null}
+         * List of service monitors and the corresponding targets information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PrometheusConfigItem> || null}
          */
-        this.StartTime = null;
+        this.ServiceMonitors = null;
 
         /**
-         * End time, which is the current timestamp by default.
-         * @type {number || null}
+         * List of pod monitors and the corresponding targets information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PrometheusConfigItem> || null}
          */
-        this.EndTime = null;
+        this.PodMonitors = null;
 
         /**
-         * Number of parameters that can be returned on each page. Value range: 1 - 100. Default value: 20.
-         * @type {number || null}
+         * List of raw jobs and the corresponding targets information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PrometheusConfigItem> || null}
          */
-        this.Limit = null;
+        this.RawJobs = null;
 
         /**
-         * Parameter offset on each page. The value starts from 0 and the default value is 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Sorting rule by UpdateTime. Valid values: asc and desc.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.UpdateTimeOrder = null;
-
-        /**
-         * Sorting rule by OccurTime. Valid values: asc or desc. Sorting by UpdateTimeOrder takes priority.
-         * @type {string || null}
-         */
-        this.OccurTimeOrder = null;
-
-        /**
-         * Filter by event type. The value 1 indicates service issues. The value 2 indicates other subscriptions.
-         * @type {Array.<number> || null}
-         */
-        this.AccidentType = null;
-
-        /**
-         * Filter by event. The value 1 indicates CVM storage issues. The value 2 indicates CVM network connection issues. The value 3 indicates that the CVM has an exception. The value 202 indicates that an ISP network jitter occurs.
-         * @type {Array.<number> || null}
-         */
-        this.AccidentEvent = null;
-
-        /**
-         * Filter by event status. The value 0 indicates that the event has been recovered. The value 1 indicates that the event has not been recovered.
-         * @type {Array.<number> || null}
-         */
-        this.AccidentStatus = null;
-
-        /**
-         * Filter by region where the event occurs. The value gz indicates Guangzhou. The value sh indicates Shanghai.
-         * @type {Array.<string> || null}
-         */
-        this.AccidentRegion = null;
-
-        /**
-         * Filter by affected resource, such as ins-19a06bka.
-         * @type {string || null}
-         */
-        this.AffectResource = null;
+        this.RequestId = null;
 
     }
 
@@ -4945,18 +5103,35 @@ class DescribeAccidentEventListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.UpdateTimeOrder = 'UpdateTimeOrder' in params ? params.UpdateTimeOrder : null;
-        this.OccurTimeOrder = 'OccurTimeOrder' in params ? params.OccurTimeOrder : null;
-        this.AccidentType = 'AccidentType' in params ? params.AccidentType : null;
-        this.AccidentEvent = 'AccidentEvent' in params ? params.AccidentEvent : null;
-        this.AccidentStatus = 'AccidentStatus' in params ? params.AccidentStatus : null;
-        this.AccidentRegion = 'AccidentRegion' in params ? params.AccidentRegion : null;
-        this.AffectResource = 'AffectResource' in params ? params.AffectResource : null;
+        this.Config = 'Config' in params ? params.Config : null;
+
+        if (params.ServiceMonitors) {
+            this.ServiceMonitors = new Array();
+            for (let z in params.ServiceMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.ServiceMonitors[z]);
+                this.ServiceMonitors.push(obj);
+            }
+        }
+
+        if (params.PodMonitors) {
+            this.PodMonitors = new Array();
+            for (let z in params.PodMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.PodMonitors[z]);
+                this.PodMonitors.push(obj);
+            }
+        }
+
+        if (params.RawJobs) {
+            this.RawJobs = new Array();
+            for (let z in params.RawJobs) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.RawJobs[z]);
+                this.RawJobs.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5327,6 +5502,34 @@ class InstanceGroups extends  AbstractModel {
         }
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * UpdateGrafanaNotificationChannel response structure.
+ * @class
+ */
+class UpdateGrafanaNotificationChannelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5937,6 +6140,48 @@ class DescribePrometheusInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * Kubernetes taint
+ * @class
+ */
+class Toleration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key of the taint to which the toleration is applied
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * The key-value relationship
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * The taint effect to be matched
+         * @type {string || null}
+         */
+        this.Effect = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Effect = 'Effect' in params ? params.Effect : null;
+
+    }
+}
+
+/**
  * Instance tag information of the alarm policy
  * @class
  */
@@ -6480,6 +6725,111 @@ class EnableSSOCamCheckResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAccidentEventList request structure.
+ * @class
+ */
+class DescribeAccidentEventListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API component name. The value for the current API is monitor.
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * Start time, which is the timestamp one day prior by default.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time, which is the current timestamp by default.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Number of parameters that can be returned on each page. Value range: 1 - 100. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Parameter offset on each page. The value starts from 0 and the default value is 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting rule by UpdateTime. Valid values: asc and desc.
+         * @type {string || null}
+         */
+        this.UpdateTimeOrder = null;
+
+        /**
+         * Sorting rule by OccurTime. Valid values: asc or desc. Sorting by UpdateTimeOrder takes priority.
+         * @type {string || null}
+         */
+        this.OccurTimeOrder = null;
+
+        /**
+         * Filter by event type. The value 1 indicates service issues. The value 2 indicates other subscriptions.
+         * @type {Array.<number> || null}
+         */
+        this.AccidentType = null;
+
+        /**
+         * Filter by event. The value 1 indicates CVM storage issues. The value 2 indicates CVM network connection issues. The value 3 indicates that the CVM has an exception. The value 202 indicates that an ISP network jitter occurs.
+         * @type {Array.<number> || null}
+         */
+        this.AccidentEvent = null;
+
+        /**
+         * Filter by event status. The value 0 indicates that the event has been recovered. The value 1 indicates that the event has not been recovered.
+         * @type {Array.<number> || null}
+         */
+        this.AccidentStatus = null;
+
+        /**
+         * Filter by region where the event occurs. The value gz indicates Guangzhou. The value sh indicates Shanghai.
+         * @type {Array.<string> || null}
+         */
+        this.AccidentRegion = null;
+
+        /**
+         * Filter by affected resource, such as ins-19a06bka.
+         * @type {string || null}
+         */
+        this.AffectResource = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.UpdateTimeOrder = 'UpdateTimeOrder' in params ? params.UpdateTimeOrder : null;
+        this.OccurTimeOrder = 'OccurTimeOrder' in params ? params.OccurTimeOrder : null;
+        this.AccidentType = 'AccidentType' in params ? params.AccidentType : null;
+        this.AccidentEvent = 'AccidentEvent' in params ? params.AccidentEvent : null;
+        this.AccidentStatus = 'AccidentStatus' in params ? params.AccidentStatus : null;
+        this.AccidentRegion = 'AccidentRegion' in params ? params.AccidentRegion : null;
+        this.AffectResource = 'AffectResource' in params ? params.AffectResource : null;
+
+    }
+}
+
+/**
  * CreatePrometheusScrapeJob response structure.
  * @class
  */
@@ -6764,6 +7114,46 @@ class PrometheusZoneItem extends  AbstractModel {
         this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+
+    }
+}
+
+/**
+ * ModifyPrometheusAlertPolicy request structure.
+ * @class
+ */
+class ModifyPrometheusAlertPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Alert configuration
+         * @type {PrometheusAlertPolicyItem || null}
+         */
+        this.AlertRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.AlertRule) {
+            let obj = new PrometheusAlertPolicyItem();
+            obj.deserialize(params.AlertRule)
+            this.AlertRule = obj;
+        }
 
     }
 }
@@ -7171,6 +7561,46 @@ class DescribeAlarmPoliciesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyPrometheusGlobalNotification request structure.
+ * @class
+ */
+class ModifyPrometheusGlobalNotificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Alert notification channel
+         * @type {PrometheusNotificationItem || null}
+         */
+        this.Notification = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Notification) {
+            let obj = new PrometheusNotificationItem();
+            obj.deserialize(params.Notification)
+            this.Notification = obj;
+        }
+
+    }
+}
+
+/**
  * DescribePolicyConditionList.ConfigManual.Period
  * @class
  */
@@ -7265,6 +7695,47 @@ class DescribePrometheusRecordRulesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePrometheusGlobalNotification response structure.
+ * @class
+ */
+class DescribePrometheusGlobalNotificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Global alert notification channel
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PrometheusNotificationItem || null}
+         */
+        this.Notification = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Notification) {
+            let obj = new PrometheusNotificationItem();
+            obj.deserialize(params.Notification)
+            this.Notification = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMonitorTypes request structure.
  * @class
  */
@@ -7316,6 +7787,48 @@ class DimensionsDesc extends  AbstractModel {
             return;
         }
         this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
+
+    }
+}
+
+/**
+ * DeletePrometheusAlertPolicy request structure.
+ * @class
+ */
+class DeletePrometheusAlertPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * List of alerting rule IDs
+         * @type {Array.<string> || null}
+         */
+        this.AlertIds = null;
+
+        /**
+         * Alerting rule name
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AlertIds = 'AlertIds' in params ? params.AlertIds : null;
+        this.Names = 'Names' in params ? params.Names : null;
 
     }
 }
@@ -7394,24 +7907,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * SetDefaultAlarmPolicy request structure.
+ * ModifyPrometheusAgentExternalLabels response structure.
  * @class
  */
-class SetDefaultAlarmPolicyRequest extends  AbstractModel {
+class ModifyPrometheusAgentExternalLabelsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Module name, which is fixed at "monitor"
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Module = null;
-
-        /**
-         * Alarm policy ID
-         * @type {string || null}
-         */
-        this.PolicyId = null;
+        this.RequestId = null;
 
     }
 
@@ -7422,8 +7929,7 @@ class SetDefaultAlarmPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Module = 'Module' in params ? params.Module : null;
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7646,6 +8152,66 @@ class ResumeGrafanaInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeBasicAlarmList response structure.
+ * @class
+ */
+class DescribeBasicAlarmListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alarm list.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {Array.<DescribeBasicAlarmListAlarms> || null}
+         */
+        this.Alarms = null;
+
+        /**
+         * Total number.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Remarks
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Warning = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Alarms) {
+            this.Alarms = new Array();
+            for (let z in params.Alarms) {
+                let obj = new DescribeBasicAlarmListAlarms();
+                obj.deserialize(params.Alarms[z]);
+                this.Alarms.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Warning = 'Warning' in params ? params.Warning : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8058,103 +8624,24 @@ class CreateGrafanaNotificationChannelRequest extends  AbstractModel {
 }
 
 /**
- * Cloud Monitor alarm notification template - user notification details
+ * DescribePrometheusTargetsTMP response structure.
  * @class
  */
-class UserNotice extends  AbstractModel {
+class DescribePrometheusTargetsTMPResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Recipient type. Valid values: USER (user), GROUP (user group)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Targets information of all jobs
+         * @type {Array.<PrometheusJobTargets> || null}
+         */
+        this.Jobs = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ReceiverType = null;
-
-        /**
-         * Notification start time, which is expressed by the number of seconds since 00:00:00. Value range: 0–86399
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Notification end time, which is expressed by the number of seconds since 00:00:00. Value range: 0–86399
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Notification channel list. Valid values: `EMAIL` (email), `SMS` (SMS), `CALL` (phone), `WECHAT` (WeChat), `RTX` (WeCom)
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.NoticeWay = null;
-
-        /**
-         * User `uid` list
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<number> || null}
-         */
-        this.UserIds = null;
-
-        /**
-         * User group ID list
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<number> || null}
-         */
-        this.GroupIds = null;
-
-        /**
-         * Phone polling list
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<number> || null}
-         */
-        this.PhoneOrder = null;
-
-        /**
-         * Number of phone pollings. Value range: 1–5
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PhoneCircleTimes = null;
-
-        /**
-         * Call interval in seconds within one polling. Value range: 60–900
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PhoneInnerInterval = null;
-
-        /**
-         * Polling interval in seconds. Value range: 60–900
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.PhoneCircleInterval = null;
-
-        /**
-         * Whether receipt notification is required. Valid values: 0 (no), 1 (yes)
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.NeedPhoneArriveNotice = null;
-
-        /**
-         * Dial type. `SYNC` (simultaneous dial), `CIRCLE` (polled dial). Default value: `CIRCLE`.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PhoneCallType = null;
-
-        /**
-         * Notification cycle. The values 1-7 indicate Monday to Sunday.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<number> || null}
-         */
-        this.Weekday = null;
+        this.RequestId = null;
 
     }
 
@@ -8165,19 +8652,66 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.ReceiverType = 'ReceiverType' in params ? params.ReceiverType : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.NoticeWay = 'NoticeWay' in params ? params.NoticeWay : null;
-        this.UserIds = 'UserIds' in params ? params.UserIds : null;
-        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
-        this.PhoneOrder = 'PhoneOrder' in params ? params.PhoneOrder : null;
-        this.PhoneCircleTimes = 'PhoneCircleTimes' in params ? params.PhoneCircleTimes : null;
-        this.PhoneInnerInterval = 'PhoneInnerInterval' in params ? params.PhoneInnerInterval : null;
-        this.PhoneCircleInterval = 'PhoneCircleInterval' in params ? params.PhoneCircleInterval : null;
-        this.NeedPhoneArriveNotice = 'NeedPhoneArriveNotice' in params ? params.NeedPhoneArriveNotice : null;
-        this.PhoneCallType = 'PhoneCallType' in params ? params.PhoneCallType : null;
-        this.Weekday = 'Weekday' in params ? params.Weekday : null;
+
+        if (params.Jobs) {
+            this.Jobs = new Array();
+            for (let z in params.Jobs) {
+                let obj = new PrometheusJobTargets();
+                obj.deserialize(params.Jobs[z]);
+                this.Jobs.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusClusterAgents response structure.
+ * @class
+ */
+class DescribePrometheusClusterAgentsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Information of the associated cluster
+         * @type {Array.<PrometheusAgentOverview> || null}
+         */
+        this.Agents = null;
+
+        /**
+         * The total number of the associated clusters
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Agents) {
+            this.Agents = new Array();
+            for (let z in params.Agents) {
+                let obj = new PrometheusAgentOverview();
+                obj.deserialize(params.Agents[z]);
+                this.Agents.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8232,10 +8766,31 @@ class UpdatePrometheusScrapeJobRequest extends  AbstractModel {
 }
 
 /**
- * UpdateGrafanaNotificationChannel response structure.
+ * Information of managed Prometheus agent
  * @class
  */
-class UpdateGrafanaNotificationChannelResponse extends  AbstractModel {
+class PrometheusAgentInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * CreatePrometheusClusterAgent response structure.
+ * @class
+ */
+class CreatePrometheusClusterAgentResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -8485,6 +9040,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusGlobalNotification request structure.
+ * @class
+ */
+class DescribePrometheusGlobalNotificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -9257,6 +9840,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreatePrometheusConfig response structure.
+ * @class
+ */
+class CreatePrometheusConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateDNSConfig request structure.
  * @class
  */
@@ -9292,68 +9903,18 @@ class UpdateDNSConfigRequest extends  AbstractModel {
 }
 
 /**
- * Output parameter type of the DescribeAccidentEventList API
+ * DeletePrometheusClusterAgent response structure.
  * @class
  */
-class DescribeAccidentEventListAlarms extends  AbstractModel {
+class DeletePrometheusClusterAgentResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Event type.
-Note: This field may return null, indicating that no valid value was found.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.BusinessTypeDesc = null;
-
-        /**
-         * Event type.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.AccidentTypeDesc = null;
-
-        /**
-         * ID of the event type. The value 1 indicates service issues. The value 2 indicates other subscriptions.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {number || null}
-         */
-        this.BusinessID = null;
-
-        /**
-         * Event status ID. The value 0 indicates that the event has been recovered. The value 1 indicates that the event has not been recovered.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {number || null}
-         */
-        this.EventStatus = null;
-
-        /**
-         * Affected object.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.AffectResource = null;
-
-        /**
-         * Region where the event occurs.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * Time when the event occurs.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.OccurTime = null;
-
-        /**
-         * Update time.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
+        this.RequestId = null;
 
     }
 
@@ -9364,14 +9925,7 @@ Note: This field may return null, indicating that no valid value was found.
         if (!params) {
             return;
         }
-        this.BusinessTypeDesc = 'BusinessTypeDesc' in params ? params.BusinessTypeDesc : null;
-        this.AccidentTypeDesc = 'AccidentTypeDesc' in params ? params.AccidentTypeDesc : null;
-        this.BusinessID = 'BusinessID' in params ? params.BusinessID : null;
-        this.EventStatus = 'EventStatus' in params ? params.EventStatus : null;
-        this.AffectResource = 'AffectResource' in params ? params.AffectResource : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.OccurTime = 'OccurTime' in params ? params.OccurTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10787,6 +11341,34 @@ class CreateExporterIntegrationRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyPrometheusConfig response structure.
+ * @class
+ */
+class ModifyPrometheusConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * prometheus agent
  * @class
  */
@@ -10869,6 +11451,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreatePrometheusAlertPolicy response structure.
+ * @class
+ */
+class CreatePrometheusAlertPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Alerting rule ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePrometheusInstanceDetail request structure.
  * @class
  */
@@ -10892,6 +11509,131 @@ class DescribePrometheusInstanceDetailRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Cloud Monitor alarm notification template - user notification details
+ * @class
+ */
+class UserNotice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recipient type. Valid values: USER (user), GROUP (user group)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReceiverType = null;
+
+        /**
+         * Notification start time, which is expressed by the number of seconds since 00:00:00. Value range: 0–86399
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Notification end time, which is expressed by the number of seconds since 00:00:00. Value range: 0–86399
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Notification channel list. Valid values: `EMAIL` (email), `SMS` (SMS), `CALL` (phone), `WECHAT` (WeChat), `RTX` (WeCom)
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.NoticeWay = null;
+
+        /**
+         * User `uid` list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.UserIds = null;
+
+        /**
+         * User group ID list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.GroupIds = null;
+
+        /**
+         * Phone polling list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.PhoneOrder = null;
+
+        /**
+         * Number of phone pollings. Value range: 1–5
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PhoneCircleTimes = null;
+
+        /**
+         * Call interval in seconds within one polling. Value range: 60–900
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PhoneInnerInterval = null;
+
+        /**
+         * Polling interval in seconds. Value range: 60–900
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PhoneCircleInterval = null;
+
+        /**
+         * Whether receipt notification is required. Valid values: 0 (no), 1 (yes)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.NeedPhoneArriveNotice = null;
+
+        /**
+         * Dial type. `SYNC` (simultaneous dial), `CIRCLE` (polled dial). Default value: `CIRCLE`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PhoneCallType = null;
+
+        /**
+         * Notification cycle. The values 1-7 indicate Monday to Sunday.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.Weekday = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReceiverType = 'ReceiverType' in params ? params.ReceiverType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.NoticeWay = 'NoticeWay' in params ? params.NoticeWay : null;
+        this.UserIds = 'UserIds' in params ? params.UserIds : null;
+        this.GroupIds = 'GroupIds' in params ? params.GroupIds : null;
+        this.PhoneOrder = 'PhoneOrder' in params ? params.PhoneOrder : null;
+        this.PhoneCircleTimes = 'PhoneCircleTimes' in params ? params.PhoneCircleTimes : null;
+        this.PhoneInnerInterval = 'PhoneInnerInterval' in params ? params.PhoneInnerInterval : null;
+        this.PhoneCircleInterval = 'PhoneCircleInterval' in params ? params.PhoneCircleInterval : null;
+        this.NeedPhoneArriveNotice = 'NeedPhoneArriveNotice' in params ? params.NeedPhoneArriveNotice : null;
+        this.PhoneCallType = 'PhoneCallType' in params ? params.PhoneCallType : null;
+        this.Weekday = 'Weekday' in params ? params.Weekday : null;
 
     }
 }
@@ -11483,6 +12225,93 @@ Default value: 2 (enabled).
 }
 
 /**
+ * ModifyPrometheusConfig request structure.
+ * @class
+ */
+class ModifyPrometheusConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Cluster type
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Configuration of service monitors
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.ServiceMonitors = null;
+
+        /**
+         * Configuration of pod monitors
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.PodMonitors = null;
+
+        /**
+         * Configuration of Prometheus raw jobs
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.RawJobs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ServiceMonitors) {
+            this.ServiceMonitors = new Array();
+            for (let z in params.ServiceMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.ServiceMonitors[z]);
+                this.ServiceMonitors.push(obj);
+            }
+        }
+
+        if (params.PodMonitors) {
+            this.PodMonitors = new Array();
+            for (let z in params.PodMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.PodMonitors[z]);
+                this.PodMonitors.push(obj);
+            }
+        }
+
+        if (params.RawJobs) {
+            this.RawJobs = new Array();
+            for (let z in params.RawJobs) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.RawJobs[z]);
+                this.RawJobs.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeGrafanaEnvironments response structure.
  * @class
  */
@@ -11694,6 +12523,93 @@ class DeleteGrafanaIntegrationRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyPrometheusAlertPolicy response structure.
+ * @class
+ */
+class ModifyPrometheusAlertPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusTargetsTMP request structure.
+ * @class
+ */
+class DescribePrometheusTargetsTMPRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Cluster type
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Filters.
+You can filter by `RawJob`, `Job`, `ServiceMonitor`, `PodMonitor`, or `Health`.
+`Health` contains three values: `up`, `down`, `unknown`.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateServiceDiscovery request structure.
  * @class
  */
@@ -11876,6 +12792,93 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
         this.OrganizationIds = 'OrganizationIds' in params ? params.OrganizationIds : null;
+
+    }
+}
+
+/**
+ * CreatePrometheusConfig request structure.
+ * @class
+ */
+class CreatePrometheusConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Cluster type
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Configuration of service monitors
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.ServiceMonitors = null;
+
+        /**
+         * Configuration of pod monitors
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.PodMonitors = null;
+
+        /**
+         * Configuration of Prometheus raw job
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.RawJobs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ServiceMonitors) {
+            this.ServiceMonitors = new Array();
+            for (let z in params.ServiceMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.ServiceMonitors[z]);
+                this.ServiceMonitors.push(obj);
+            }
+        }
+
+        if (params.PodMonitors) {
+            this.PodMonitors = new Array();
+            for (let z in params.PodMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.PodMonitors[z]);
+                this.PodMonitors.push(obj);
+            }
+        }
+
+        if (params.RawJobs) {
+            this.RawJobs = new Array();
+            for (let z in params.RawJobs) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.RawJobs[z]);
+                this.RawJobs.push(obj);
+            }
+        }
 
     }
 }
@@ -12199,6 +13202,49 @@ Note: This field may return null, indicating that no valid value was found.
         this.Key = 'Key' in params ? params.Key : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * CreatePrometheusClusterAgent request structure.
+ * @class
+ */
+class CreatePrometheusClusterAgentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Agent list
+         * @type {Array.<PrometheusClusterAgentBasic> || null}
+         */
+        this.Agents = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Agents) {
+            this.Agents = new Array();
+            for (let z in params.Agents) {
+                let obj = new PrometheusClusterAgentBasic();
+                obj.deserialize(params.Agents[z]);
+                this.Agents.push(obj);
+            }
+        }
 
     }
 }
@@ -13309,18 +14355,104 @@ class UpgradeGrafanaInstanceRequest extends  AbstractModel {
 }
 
 /**
- * CreateAlarmNotice response structure.
+ * Output parameter type of the DescribeAccidentEventList API
  * @class
  */
-class CreateAlarmNoticeResponse extends  AbstractModel {
+class DescribeAccidentEventListAlarms extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Alarm notification template ID
+         * Event type.
+Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
-        this.NoticeId = null;
+        this.BusinessTypeDesc = null;
+
+        /**
+         * Event type.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.AccidentTypeDesc = null;
+
+        /**
+         * ID of the event type. The value 1 indicates service issues. The value 2 indicates other subscriptions.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.BusinessID = null;
+
+        /**
+         * Event status ID. The value 0 indicates that the event has been recovered. The value 1 indicates that the event has not been recovered.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.EventStatus = null;
+
+        /**
+         * Affected object.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.AffectResource = null;
+
+        /**
+         * Region where the event occurs.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Time when the event occurs.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.OccurTime = null;
+
+        /**
+         * Update time.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessTypeDesc = 'BusinessTypeDesc' in params ? params.BusinessTypeDesc : null;
+        this.AccidentTypeDesc = 'AccidentTypeDesc' in params ? params.AccidentTypeDesc : null;
+        this.BusinessID = 'BusinessID' in params ? params.BusinessID : null;
+        this.EventStatus = 'EventStatus' in params ? params.EventStatus : null;
+        this.AffectResource = 'AffectResource' in params ? params.AffectResource : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.OccurTime = 'OccurTime' in params ? params.OccurTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * CreatePrometheusGlobalNotification response structure.
+ * @class
+ */
+class CreatePrometheusGlobalNotificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the global alert notification channel
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -13337,7 +14469,7 @@ class CreateAlarmNoticeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NoticeId = 'NoticeId' in params ? params.NoticeId : null;
+        this.Id = 'Id' in params ? params.Id : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13881,6 +15013,46 @@ class DescribePrometheusInstanceInitStatusRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * CreatePrometheusAlertPolicy request structure.
+ * @class
+ */
+class CreatePrometheusAlertPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Alert configuration
+         * @type {PrometheusAlertPolicyItem || null}
+         */
+        this.AlertRule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.AlertRule) {
+            let obj = new PrometheusAlertPolicyItem();
+            obj.deserialize(params.AlertRule)
+            this.AlertRule = obj;
+        }
 
     }
 }
@@ -14433,6 +15605,48 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DescribePrometheusClusterAgents request structure.
+ * @class
+ */
+class DescribePrometheusClusterAgentsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Page offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Page limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * UnbindPrometheusManagedGrafana request structure.
  * @class
  */
@@ -14887,6 +16101,27 @@ class ModifyAlarmNoticeResponse extends  AbstractModel {
 }
 
 /**
+ * Targets of a Prometheus job
+ * @class
+ */
+class PrometheusJobTargets extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * UpdateGrafanaConfig request structure.
  * @class
  */
@@ -15171,54 +16406,60 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Cloud Monitor alarm notification template - callback notification details
+ * Basic information of the cluster associated with a CM-integrated TMP instance.
  * @class
  */
-class URLNotice extends  AbstractModel {
+class PrometheusClusterAgentBasic extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Callback URL, which can contain up to 256 characters
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cluster ID
          * @type {string || null}
          */
-        this.URL = null;
+        this.Region = null;
 
         /**
-         * Whether verification is passed. Valid values: 0 (no), 1 (yes)
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.IsValid = null;
-
-        /**
-         * Verification code
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Cluster type
          * @type {string || null}
          */
-        this.ValidationCode = null;
+        this.ClusterType = null;
 
         /**
-         * Start time of the notification in seconds, which is calculated from 00:00:00.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Cluster ID
+         * @type {string || null}
          */
-        this.StartTime = null;
+        this.ClusterId = null;
 
         /**
-         * End time of the notification in seconds, which is calculated from 00:00:00.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * Whether to enable public network CLB
+         * @type {boolean || null}
          */
-        this.EndTime = null;
+        this.EnableExternal = null;
 
         /**
-         * Notification cycle. The values 1-7 indicate Monday to Sunday.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<number> || null}
+         * Pod configurations of components deployed in the cluster
+         * @type {PrometheusClusterAgentPodConfig || null}
          */
-        this.Weekday = null;
+        this.InClusterPodConfig = null;
+
+        /**
+         * External labels, which will be attached to all metrics collected by this cluster
+         * @type {Array.<Label> || null}
+         */
+        this.ExternalLabels = null;
+
+        /**
+         * Whether to install the default collection configuration.
+         * @type {boolean || null}
+         */
+        this.NotInstallBasicScrape = null;
+
+        /**
+         * Whether to collect metrics (`true`: Drop all metrics; `false`: Collect default metrics)
+         * @type {boolean || null}
+         */
+        this.NotScrape = null;
 
     }
 
@@ -15229,12 +16470,27 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.URL = 'URL' in params ? params.URL : null;
-        this.IsValid = 'IsValid' in params ? params.IsValid : null;
-        this.ValidationCode = 'ValidationCode' in params ? params.ValidationCode : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Weekday = 'Weekday' in params ? params.Weekday : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.EnableExternal = 'EnableExternal' in params ? params.EnableExternal : null;
+
+        if (params.InClusterPodConfig) {
+            let obj = new PrometheusClusterAgentPodConfig();
+            obj.deserialize(params.InClusterPodConfig)
+            this.InClusterPodConfig = obj;
+        }
+
+        if (params.ExternalLabels) {
+            this.ExternalLabels = new Array();
+            for (let z in params.ExternalLabels) {
+                let obj = new Label();
+                obj.deserialize(params.ExternalLabels[z]);
+                this.ExternalLabels.push(obj);
+            }
+        }
+        this.NotInstallBasicScrape = 'NotInstallBasicScrape' in params ? params.NotInstallBasicScrape : null;
+        this.NotScrape = 'NotScrape' in params ? params.NotScrape : null;
 
     }
 }
@@ -15517,6 +16773,34 @@ class NoticeBindPolicys extends  AbstractModel {
         }
         this.NoticeId = 'NoticeId' in params ? params.NoticeId : null;
         this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
+
+    }
+}
+
+/**
+ * UnBindingAllPolicyObject response structure.
+ * @class
+ */
+class UnBindingAllPolicyObjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16275,65 +17559,6 @@ class UpdateGrafanaConfigResponse extends  AbstractModel {
 }
 
 /**
- * DeleteExporterIntegration request structure.
- * @class
- */
-class DeleteExporterIntegrationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Kubernetes cluster type. Valid values:
-<li> 1 = TKE </li>
-<li> 2 = EKS </li>
-<li> 3 = MEKS </li>
-         * @type {number || null}
-         */
-        this.KubeType = null;
-
-        /**
-         * Cluster ID
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * Type
-         * @type {string || null}
-         */
-        this.Kind = null;
-
-        /**
-         * Name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.KubeType = 'KubeType' in params ? params.KubeType : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.Kind = 'Kind' in params ? params.Kind : null;
-        this.Name = 'Name' in params ? params.Name : null;
-
-    }
-}
-
-/**
  * ModifyPrometheusInstanceAttributes request structure.
  * @class
  */
@@ -16561,6 +17786,46 @@ class DescribeProductEventListRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * CreatePrometheusGlobalNotification request structure.
+ * @class
+ */
+class CreatePrometheusGlobalNotificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Alert notification channel
+         * @type {PrometheusNotificationItem || null}
+         */
+        this.Notification = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Notification) {
+            let obj = new PrometheusNotificationItem();
+            obj.deserialize(params.Notification)
+            this.Notification = obj;
+        }
 
     }
 }
@@ -16808,10 +18073,10 @@ class CheckIsPrometheusNewUserResponse extends  AbstractModel {
 }
 
 /**
- * ModifyAlarmPolicyTasks response structure.
+ * PutMonitorData response structure.
  * @class
  */
-class ModifyAlarmPolicyTasksResponse extends  AbstractModel {
+class PutMonitorDataResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -16936,6 +18201,34 @@ class ModifyPrometheusRecordRuleYamlRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * DeletePrometheusAlertPolicy response structure.
+ * @class
+ */
+class DeletePrometheusAlertPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -17198,10 +18491,10 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * PutMonitorData response structure.
+ * ModifyAlarmPolicyTasks response structure.
  * @class
  */
-class PutMonitorDataResponse extends  AbstractModel {
+class ModifyAlarmPolicyTasksResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -18320,6 +19613,41 @@ class DeletePrometheusTempSyncRequest extends  AbstractModel {
 }
 
 /**
+ * DescribePrometheusGlobalConfig request structure.
+ * @class
+ */
+class DescribePrometheusGlobalConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance-level scrape configuration
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Whether to disable statistics
+         * @type {boolean || null}
+         */
+        this.DisableStatistics = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DisableStatistics = 'DisableStatistics' in params ? params.DisableStatistics : null;
+
+    }
+}
+
+/**
  * TMP usage information
  * @class
  */
@@ -18389,10 +19717,16 @@ class DescribePrometheusZonesRequest extends  AbstractModel {
         super();
 
         /**
-         * Region ID
+         * Region ID. You only need to specify the value of either `RegionId` or `RegionName`.
          * @type {number || null}
          */
         this.RegionId = null;
+
+        /**
+         * Region name. You only need to specify the value of either `RegionId` or `RegionName`.
+         * @type {string || null}
+         */
+        this.RegionName = null;
 
     }
 
@@ -18404,6 +19738,7 @@ class DescribePrometheusZonesRequest extends  AbstractModel {
             return;
         }
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
 
     }
 }
@@ -18621,6 +19956,69 @@ class DescribeBaseMetricsRequest extends  AbstractModel {
 }
 
 /**
+ * DeletePrometheusConfig request structure.
+ * @class
+ */
+class DeletePrometheusConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Cluster type
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * List of names of the service monitors to be deleted
+         * @type {Array.<string> || null}
+         */
+        this.ServiceMonitors = null;
+
+        /**
+         * List of names of the pod monitors to be deleted
+         * @type {Array.<string> || null}
+         */
+        this.PodMonitors = null;
+
+        /**
+         * List of names of the raw jobs to be deleted
+         * @type {Array.<string> || null}
+         */
+        this.RawJobs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ServiceMonitors = 'ServiceMonitors' in params ? params.ServiceMonitors : null;
+        this.PodMonitors = 'PodMonitors' in params ? params.PodMonitors : null;
+        this.RawJobs = 'RawJobs' in params ? params.RawJobs : null;
+
+    }
+}
+
+/**
  * TMP alerting rule instance
  * @class
  */
@@ -18704,6 +20102,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * ModifyPrometheusAgentExternalLabels request structure.
+ * @class
+ */
+class ModifyPrometheusAgentExternalLabelsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * New external labels
+         * @type {Array.<Label> || null}
+         */
+        this.ExternalLabels = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ExternalLabels) {
+            this.ExternalLabels = new Array();
+            for (let z in params.ExternalLabels) {
+                let obj = new Label();
+                obj.deserialize(params.ExternalLabels[z]);
+                this.ExternalLabels.push(obj);
+            }
+        }
 
     }
 }
@@ -19055,12 +20503,18 @@ Note: This field may return null, indicating that no valid value was found.
 }
 
 /**
- * UnBindingAllPolicyObject response structure.
+ * CreateAlarmNotice response structure.
  * @class
  */
-class UnBindingAllPolicyObjectResponse extends  AbstractModel {
+class CreateAlarmNoticeResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Alarm notification template ID
+         * @type {string || null}
+         */
+        this.NoticeId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -19077,6 +20531,7 @@ class UnBindingAllPolicyObjectResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.NoticeId = 'NoticeId' in params ? params.NoticeId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -19222,6 +20677,98 @@ class DeleteGrafanaInstanceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Overview of managed Prometheus agent
+ * @class
+ */
+class PrometheusAgentOverview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster type
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Agent status. Valid values: 
+`normal`
+`abnormal`
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * External labels
+External labels, which will be attached to all metrics in this cluster
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Label> || null}
+         */
+        this.ExternalLabels = null;
+
+        /**
+         * Cluster region
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * ID of the VPC where the cluster resides
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Recorded information of failed operations, such as association.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FailedReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+
+        if (params.ExternalLabels) {
+            this.ExternalLabels = new Array();
+            for (let z in params.ExternalLabels) {
+                let obj = new Label();
+                obj.deserialize(params.ExternalLabels[z]);
+                this.ExternalLabels.push(obj);
+            }
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.FailedReason = 'FailedReason' in params ? params.FailedReason : null;
 
     }
 }
@@ -19954,6 +21501,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyPrometheusGlobalNotification response structure.
+ * @class
+ */
+class ModifyPrometheusGlobalNotificationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CleanGrafanaInstance response structure.
  * @class
  */
@@ -20525,6 +22100,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * SetDefaultAlarmPolicy request structure.
+ * @class
+ */
+class SetDefaultAlarmPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Module name, which is fixed at "monitor"
+         * @type {string || null}
+         */
+        this.Module = null;
+
+        /**
+         * Alarm policy ID
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Module = 'Module' in params ? params.Module : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+
+    }
+}
+
+/**
  * The operation of pushing alarm notifications to CLS
  * @class
  */
@@ -20898,6 +22508,7 @@ module.exports = {
     AlarmHistoryMetric: AlarmHistoryMetric,
     EnableGrafanaSSOResponse: EnableGrafanaSSOResponse,
     DescribePolicyGroupInfoResponse: DescribePolicyGroupInfoResponse,
+    DeletePrometheusClusterAgentRequest: DeletePrometheusClusterAgentRequest,
     DescribePrometheusScrapeJobsRequest: DescribePrometheusScrapeJobsRequest,
     CreatePolicyGroupResponse: CreatePolicyGroupResponse,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
@@ -20918,7 +22529,7 @@ module.exports = {
     DescribeGrafanaEnvironmentsRequest: DescribeGrafanaEnvironmentsRequest,
     PrometheusConfigItem: PrometheusConfigItem,
     AlarmPolicy: AlarmPolicy,
-    DescribeBasicAlarmListResponse: DescribeBasicAlarmListResponse,
+    DeleteExporterIntegrationRequest: DeleteExporterIntegrationRequest,
     DescribePolicyConditionListResponse: DescribePolicyConditionListResponse,
     PrometheusRuleSet: PrometheusRuleSet,
     DescribeAllNamespacesResponse: DescribeAllNamespacesResponse,
@@ -20937,7 +22548,9 @@ module.exports = {
     CreatePrometheusRecordRuleYamlRequest: CreatePrometheusRecordRuleYamlRequest,
     Instance: Instance,
     DescribeAlarmNoticesResponse: DescribeAlarmNoticesResponse,
+    PrometheusClusterAgentPodConfig: PrometheusClusterAgentPodConfig,
     GrafanaInstanceInfo: GrafanaInstanceInfo,
+    DeletePrometheusConfigResponse: DeletePrometheusConfigResponse,
     CreatePrometheusRecordRuleYamlResponse: CreatePrometheusRecordRuleYamlResponse,
     MetricObjectMeaning: MetricObjectMeaning,
     AlarmEvent: AlarmEvent,
@@ -20963,6 +22576,7 @@ module.exports = {
     MidQueryCondition: MidQueryCondition,
     DeleteSSOAccountRequest: DeleteSSOAccountRequest,
     DescribePrometheusAgentInstancesResponse: DescribePrometheusAgentInstancesResponse,
+    URLNotice: URLNotice,
     DeletePrometheusTempResponse: DeletePrometheusTempResponse,
     CreatePolicyGroupCondition: CreatePolicyGroupCondition,
     DescribePolicyGroupInfoReceiverInfo: DescribePolicyGroupInfoReceiverInfo,
@@ -20971,7 +22585,7 @@ module.exports = {
     ModifyAlarmPolicyStatusResponse: ModifyAlarmPolicyStatusResponse,
     DescribeGrafanaInstancesRequest: DescribeGrafanaInstancesRequest,
     DescribePrometheusTempSyncRequest: DescribePrometheusTempSyncRequest,
-    DescribeAccidentEventListRequest: DescribeAccidentEventListRequest,
+    DescribePrometheusGlobalConfigResponse: DescribePrometheusGlobalConfigResponse,
     CreateRecordingRuleResponse: CreateRecordingRuleResponse,
     CreateGrafanaNotificationChannelResponse: CreateGrafanaNotificationChannelResponse,
     DescribeGrafanaNotificationChannelsRequest: DescribeGrafanaNotificationChannelsRequest,
@@ -20980,6 +22594,7 @@ module.exports = {
     UpdateExporterIntegrationResponse: UpdateExporterIntegrationResponse,
     CreateAlarmNoticeRequest: CreateAlarmNoticeRequest,
     InstanceGroups: InstanceGroups,
+    UpdateGrafanaNotificationChannelResponse: UpdateGrafanaNotificationChannelResponse,
     CreatePrometheusTempResponse: CreatePrometheusTempResponse,
     UnBindingAllPolicyObjectRequest: UnBindingAllPolicyObjectRequest,
     SendCustomAlarmMsgResponse: SendCustomAlarmMsgResponse,
@@ -20990,6 +22605,7 @@ module.exports = {
     UpdateRecordingRuleRequest: UpdateRecordingRuleRequest,
     DescribePolicyConditionListConfigManualCalcValue: DescribePolicyConditionListConfigManualCalcValue,
     DescribePrometheusInstancesRequest: DescribePrometheusInstancesRequest,
+    Toleration: Toleration,
     TagInstance: TagInstance,
     DescribePolicyConditionListConfigManual: DescribePolicyConditionListConfigManual,
     InstallPluginsRequest: InstallPluginsRequest,
@@ -21000,9 +22616,11 @@ module.exports = {
     BindingPolicyObjectRequest: BindingPolicyObjectRequest,
     CreateServiceDiscoveryResponse: CreateServiceDiscoveryResponse,
     EnableSSOCamCheckResponse: EnableSSOCamCheckResponse,
+    DescribeAccidentEventListRequest: DescribeAccidentEventListRequest,
     CreatePrometheusScrapeJobResponse: CreatePrometheusScrapeJobResponse,
     CreateAlarmPolicyRequest: CreateAlarmPolicyRequest,
     PrometheusZoneItem: PrometheusZoneItem,
+    ModifyPrometheusAlertPolicyRequest: ModifyPrometheusAlertPolicyRequest,
     ModifyPrometheusInstanceAttributesResponse: ModifyPrometheusInstanceAttributesResponse,
     PrometheusTemplateSyncTarget: PrometheusTemplateSyncTarget,
     DescribePrometheusAlertPolicyResponse: DescribePrometheusAlertPolicyResponse,
@@ -21011,30 +22629,37 @@ module.exports = {
     DeleteGrafanaNotificationChannelResponse: DeleteGrafanaNotificationChannelResponse,
     DataPoint: DataPoint,
     DescribeAlarmPoliciesResponse: DescribeAlarmPoliciesResponse,
+    ModifyPrometheusGlobalNotificationRequest: ModifyPrometheusGlobalNotificationRequest,
     DescribePolicyConditionListConfigManualPeriod: DescribePolicyConditionListConfigManualPeriod,
     DescribePrometheusRecordRulesResponse: DescribePrometheusRecordRulesResponse,
+    DescribePrometheusGlobalNotificationResponse: DescribePrometheusGlobalNotificationResponse,
     DescribeMonitorTypesRequest: DescribeMonitorTypesRequest,
     DimensionsDesc: DimensionsDesc,
+    DeletePrometheusAlertPolicyRequest: DeletePrometheusAlertPolicyRequest,
     ServiceDiscoveryItem: ServiceDiscoveryItem,
-    SetDefaultAlarmPolicyRequest: SetDefaultAlarmPolicyRequest,
+    ModifyPrometheusAgentExternalLabelsResponse: ModifyPrometheusAgentExternalLabelsResponse,
     ModifyAlarmNoticeRequest: ModifyAlarmNoticeRequest,
     DescribeGrafanaWhiteListResponse: DescribeGrafanaWhiteListResponse,
     DescribeAlertRulesResponse: DescribeAlertRulesResponse,
     ResumeGrafanaInstanceRequest: ResumeGrafanaInstanceRequest,
+    DescribeBasicAlarmListResponse: DescribeBasicAlarmListResponse,
     ModifyAlarmReceiversRequest: ModifyAlarmReceiversRequest,
     DescribeExporterIntegrationsRequest: DescribeExporterIntegrationsRequest,
     DescribePrometheusInstanceDetailResponse: DescribePrometheusInstanceDetailResponse,
     Point: Point,
     ModifyPolicyGroupEventCondition: ModifyPolicyGroupEventCondition,
     CreateGrafanaNotificationChannelRequest: CreateGrafanaNotificationChannelRequest,
-    UserNotice: UserNotice,
+    DescribePrometheusTargetsTMPResponse: DescribePrometheusTargetsTMPResponse,
+    DescribePrometheusClusterAgentsResponse: DescribePrometheusClusterAgentsResponse,
     UpdatePrometheusScrapeJobRequest: UpdatePrometheusScrapeJobRequest,
-    UpdateGrafanaNotificationChannelResponse: UpdateGrafanaNotificationChannelResponse,
+    PrometheusAgentInfo: PrometheusAgentInfo,
+    CreatePrometheusClusterAgentResponse: CreatePrometheusClusterAgentResponse,
     CreateGrafanaIntegrationResponse: CreateGrafanaIntegrationResponse,
     BindPrometheusManagedGrafanaRequest: BindPrometheusManagedGrafanaRequest,
     PrometheusAlertManagerConfig: PrometheusAlertManagerConfig,
     CreateGrafanaInstanceRequest: CreateGrafanaInstanceRequest,
     DescribePrometheusInstanceUsageResponse: DescribePrometheusInstanceUsageResponse,
+    DescribePrometheusGlobalNotificationRequest: DescribePrometheusGlobalNotificationRequest,
     DeleteExporterIntegrationResponse: DeleteExporterIntegrationResponse,
     UpdateRecordingRuleResponse: UpdateRecordingRuleResponse,
     CreatePrometheusAgentResponse: CreatePrometheusAgentResponse,
@@ -21052,8 +22677,9 @@ module.exports = {
     ResumeGrafanaInstanceResponse: ResumeGrafanaInstanceResponse,
     DescribeAccidentEventListResponse: DescribeAccidentEventListResponse,
     DescribePrometheusTempSyncResponse: DescribePrometheusTempSyncResponse,
+    CreatePrometheusConfigResponse: CreatePrometheusConfigResponse,
     UpdateDNSConfigRequest: UpdateDNSConfigRequest,
-    DescribeAccidentEventListAlarms: DescribeAccidentEventListAlarms,
+    DeletePrometheusClusterAgentResponse: DeletePrometheusClusterAgentResponse,
     DescribeDNSConfigResponse: DescribeDNSConfigResponse,
     DeleteRecordingRulesRequest: DeleteRecordingRulesRequest,
     MonitorTypeNamespace: MonitorTypeNamespace,
@@ -21081,29 +22707,37 @@ module.exports = {
     DescribePrometheusInstancesResponse: DescribePrometheusInstancesResponse,
     LogFilterInfo: LogFilterInfo,
     CreateExporterIntegrationRequest: CreateExporterIntegrationRequest,
+    ModifyPrometheusConfigResponse: ModifyPrometheusConfigResponse,
     PrometheusAgent: PrometheusAgent,
+    CreatePrometheusAlertPolicyResponse: CreatePrometheusAlertPolicyResponse,
     DescribePrometheusInstanceDetailRequest: DescribePrometheusInstanceDetailRequest,
+    UserNotice: UserNotice,
     PrometheusInstancesItem: PrometheusInstancesItem,
     DescribeConditionsTemplateListRequest: DescribeConditionsTemplateListRequest,
     DeletePrometheusRecordRuleYamlResponse: DeletePrometheusRecordRuleYamlResponse,
     MetricDataPoint: MetricDataPoint,
     GetMonitorDataRequest: GetMonitorDataRequest,
     CreateRecordingRuleRequest: CreateRecordingRuleRequest,
+    ModifyPrometheusConfigRequest: ModifyPrometheusConfigRequest,
     DescribeGrafanaEnvironmentsResponse: DescribeGrafanaEnvironmentsResponse,
     DescribePolicyConditionListRequest: DescribePolicyConditionListRequest,
     DeletePolicyGroupResponse: DeletePolicyGroupResponse,
     DeleteGrafanaInstanceRequest: DeleteGrafanaInstanceRequest,
     GrafanaIntegrationConfig: GrafanaIntegrationConfig,
     DeleteGrafanaIntegrationRequest: DeleteGrafanaIntegrationRequest,
+    ModifyPrometheusAlertPolicyResponse: ModifyPrometheusAlertPolicyResponse,
+    DescribePrometheusTargetsTMPRequest: DescribePrometheusTargetsTMPRequest,
     CreateServiceDiscoveryRequest: CreateServiceDiscoveryRequest,
     PeriodsSt: PeriodsSt,
     ModifyAlarmReceiversResponse: ModifyAlarmReceiversResponse,
     GrafanaChannel: GrafanaChannel,
+    CreatePrometheusConfigRequest: CreatePrometheusConfigRequest,
     DescribeSSOAccountResponse: DescribeSSOAccountResponse,
     CreateAlarmPolicyResponse: CreateAlarmPolicyResponse,
     DeleteGrafanaNotificationChannelRequest: DeleteGrafanaNotificationChannelRequest,
     AlarmNotice: AlarmNotice,
     DescribeProductEventListEventsDimensions: DescribeProductEventListEventsDimensions,
+    CreatePrometheusClusterAgentRequest: CreatePrometheusClusterAgentRequest,
     ModifyAlarmPolicyConditionResponse: ModifyAlarmPolicyConditionResponse,
     DescribePrometheusInstancesOverviewResponse: DescribePrometheusInstancesOverviewResponse,
     MetricSet: MetricSet,
@@ -21123,7 +22757,8 @@ module.exports = {
     PrometheusNotificationItem: PrometheusNotificationItem,
     DescribeMonitorTypesResponse: DescribeMonitorTypesResponse,
     UpgradeGrafanaInstanceRequest: UpgradeGrafanaInstanceRequest,
-    CreateAlarmNoticeResponse: CreateAlarmNoticeResponse,
+    DescribeAccidentEventListAlarms: DescribeAccidentEventListAlarms,
+    CreatePrometheusGlobalNotificationResponse: CreatePrometheusGlobalNotificationResponse,
     DescribeAlarmHistoriesRequest: DescribeAlarmHistoriesRequest,
     DescribePrometheusRecordRuleYamlResponse: DescribePrometheusRecordRuleYamlResponse,
     DeletePolicyGroupRequest: DeletePolicyGroupRequest,
@@ -21134,12 +22769,14 @@ module.exports = {
     DescribePrometheusAgentsRequest: DescribePrometheusAgentsRequest,
     DescribePolicyGroupInfoCondition: DescribePolicyGroupInfoCondition,
     DescribePrometheusInstanceInitStatusRequest: DescribePrometheusInstanceInitStatusRequest,
+    CreatePrometheusAlertPolicyRequest: CreatePrometheusAlertPolicyRequest,
     DescribeBindingPolicyObjectListRequest: DescribeBindingPolicyObjectListRequest,
     DescribeProductEventListEvents: DescribeProductEventListEvents,
     DescribePolicyConditionListConfigManualPeriodNum: DescribePolicyConditionListConfigManualPeriodNum,
     UpgradeGrafanaDashboardResponse: UpgradeGrafanaDashboardResponse,
     DescribeAllNamespacesRequest: DescribeAllNamespacesRequest,
     PolicyGroup: PolicyGroup,
+    DescribePrometheusClusterAgentsRequest: DescribePrometheusClusterAgentsRequest,
     UnbindPrometheusManagedGrafanaRequest: UnbindPrometheusManagedGrafanaRequest,
     DescribePolicyGroupListGroupInstanceGroup: DescribePolicyGroupListGroupInstanceGroup,
     DescribeConditionsTemplateListResponse: DescribeConditionsTemplateListResponse,
@@ -21149,15 +22786,17 @@ module.exports = {
     DescribeAlarmEventsRequest: DescribeAlarmEventsRequest,
     ModifyAlarmPolicyConditionRequest: ModifyAlarmPolicyConditionRequest,
     ModifyAlarmNoticeResponse: ModifyAlarmNoticeResponse,
+    PrometheusJobTargets: PrometheusJobTargets,
     UpdateGrafanaConfigRequest: UpdateGrafanaConfigRequest,
     DescribeGrafanaIntegrationsRequest: DescribeGrafanaIntegrationsRequest,
     AlarmHistory: AlarmHistory,
-    URLNotice: URLNotice,
+    PrometheusClusterAgentBasic: PrometheusClusterAgentBasic,
     CreatePolicyGroupRequest: CreatePolicyGroupRequest,
     CreatePrometheusScrapeJobRequest: CreatePrometheusScrapeJobRequest,
     CreateExporterIntegrationResponse: CreateExporterIntegrationResponse,
     DescribePolicyConditionListEventMetric: DescribePolicyConditionListEventMetric,
     NoticeBindPolicys: NoticeBindPolicys,
+    UnBindingAllPolicyObjectResponse: UnBindingAllPolicyObjectResponse,
     DescribeAlarmNoticesRequest: DescribeAlarmNoticesRequest,
     RunPrometheusInstanceResponse: RunPrometheusInstanceResponse,
     UpdateExporterIntegrationRequest: UpdateExporterIntegrationRequest,
@@ -21172,11 +22811,11 @@ module.exports = {
     DeleteAlarmPolicyResponse: DeleteAlarmPolicyResponse,
     DescribeInstalledPluginsResponse: DescribeInstalledPluginsResponse,
     UpdateGrafanaConfigResponse: UpdateGrafanaConfigResponse,
-    DeleteExporterIntegrationRequest: DeleteExporterIntegrationRequest,
     ModifyPrometheusInstanceAttributesRequest: ModifyPrometheusInstanceAttributesRequest,
     DescribePrometheusConfigResponse: DescribePrometheusConfigResponse,
     UpdateGrafanaEnvironmentsResponse: UpdateGrafanaEnvironmentsResponse,
     DescribeProductEventListRequest: DescribeProductEventListRequest,
+    CreatePrometheusGlobalNotificationRequest: CreatePrometheusGlobalNotificationRequest,
     ModifyPrometheusTempResponse: ModifyPrometheusTempResponse,
     DescribeRecordingRulesResponse: DescribeRecordingRulesResponse,
     DeleteRecordingRulesResponse: DeleteRecordingRulesResponse,
@@ -21184,17 +22823,18 @@ module.exports = {
     UpdatePrometheusAgentStatusRequest: UpdatePrometheusAgentStatusRequest,
     DescribeAlarmNoticeCallbacksRequest: DescribeAlarmNoticeCallbacksRequest,
     CheckIsPrometheusNewUserResponse: CheckIsPrometheusNewUserResponse,
-    ModifyAlarmPolicyTasksResponse: ModifyAlarmPolicyTasksResponse,
+    PutMonitorDataResponse: PutMonitorDataResponse,
     DescribePolicyGroupInfoRequest: DescribePolicyGroupInfoRequest,
     UpdateAlertRuleStateResponse: UpdateAlertRuleStateResponse,
     ModifyPrometheusRecordRuleYamlRequest: ModifyPrometheusRecordRuleYamlRequest,
+    DeletePrometheusAlertPolicyResponse: DeletePrometheusAlertPolicyResponse,
     DescribeProductEventListDimensions: DescribeProductEventListDimensions,
     ModifyAlarmPolicyNoticeRequest: ModifyAlarmPolicyNoticeRequest,
     DeleteAlarmPolicyRequest: DeleteAlarmPolicyRequest,
     EventCondition: EventCondition,
     CreateAlertRuleResponse: CreateAlertRuleResponse,
     DescribePolicyConditionListConfigManualContinueTime: DescribePolicyConditionListConfigManualContinueTime,
-    PutMonitorDataResponse: PutMonitorDataResponse,
+    ModifyAlarmPolicyTasksResponse: ModifyAlarmPolicyTasksResponse,
     MonitorTypeInfo: MonitorTypeInfo,
     DimensionNew: DimensionNew,
     DeleteAlertRulesResponse: DeleteAlertRulesResponse,
@@ -21216,19 +22856,23 @@ module.exports = {
     CreatePrometheusAgentRequest: CreatePrometheusAgentRequest,
     DeleteAlarmNoticesResponse: DeleteAlarmNoticesResponse,
     DeletePrometheusTempSyncRequest: DeletePrometheusTempSyncRequest,
+    DescribePrometheusGlobalConfigRequest: DescribePrometheusGlobalConfigRequest,
     PrometheusInstanceTenantUsage: PrometheusInstanceTenantUsage,
     DescribePrometheusZonesRequest: DescribePrometheusZonesRequest,
     ModifyPolicyGroupCondition: ModifyPolicyGroupCondition,
     ModifyPolicyGroupRequest: ModifyPolicyGroupRequest,
     DescribeBaseMetricsRequest: DescribeBaseMetricsRequest,
+    DeletePrometheusConfigRequest: DeletePrometheusConfigRequest,
     PrometheusAlertPolicyItem: PrometheusAlertPolicyItem,
+    ModifyPrometheusAgentExternalLabelsRequest: ModifyPrometheusAgentExternalLabelsRequest,
     AlarmHierarchicalNotice: AlarmHierarchicalNotice,
     BindingPolicyObjectDimension: BindingPolicyObjectDimension,
     DescribePrometheusTempRequest: DescribePrometheusTempRequest,
     DescribeBasicAlarmListAlarms: DescribeBasicAlarmListAlarms,
-    UnBindingAllPolicyObjectResponse: UnBindingAllPolicyObjectResponse,
+    CreateAlarmNoticeResponse: CreateAlarmNoticeResponse,
     Condition: Condition,
     DeleteGrafanaInstanceResponse: DeleteGrafanaInstanceResponse,
+    PrometheusAgentOverview: PrometheusAgentOverview,
     Filter: Filter,
     DescribeProductEventListEventsGroupInfo: DescribeProductEventListEventsGroupInfo,
     UpdateSSOAccountRequest: UpdateSSOAccountRequest,
@@ -21240,6 +22884,7 @@ module.exports = {
     DescribePolicyConditionListConfigManualStatType: DescribePolicyConditionListConfigManualStatType,
     IntegrationConfiguration: IntegrationConfiguration,
     DescribePrometheusAgentsResponse: DescribePrometheusAgentsResponse,
+    ModifyPrometheusGlobalNotificationResponse: ModifyPrometheusGlobalNotificationResponse,
     CleanGrafanaInstanceResponse: CleanGrafanaInstanceResponse,
     CreateAlertRuleRequest: CreateAlertRuleRequest,
     ModifyPrometheusRecordRuleYamlResponse: ModifyPrometheusRecordRuleYamlResponse,
@@ -21251,6 +22896,7 @@ module.exports = {
     MetricDatum: MetricDatum,
     DescribeStatisticDataRequest: DescribeStatisticDataRequest,
     GrafanaNotificationChannel: GrafanaNotificationChannel,
+    SetDefaultAlarmPolicyRequest: SetDefaultAlarmPolicyRequest,
     CLSNotice: CLSNotice,
     LogAlarmReq: LogAlarmReq,
     TerminatePrometheusInstancesResponse: TerminatePrometheusInstancesResponse,

@@ -17,6 +17,42 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * StartBatchRollback request structure.
+ * @class
+ */
+class StartBatchRollbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Details of the instance for rollback
+         * @type {Array.<RollbackInstancesInfo> || null}
+         */
+        this.Instances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new RollbackInstancesInfo();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyInstanceTag response structure.
  * @class
  */
@@ -836,6 +872,174 @@ class DescribeDatabasesRequest extends  AbstractModel {
 }
 
 /**
+ * RenewDBInstance request structure.
+ * @class
+ */
+class RenewDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance to be renewed in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed in the TencentDB console. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Renewal period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * To renew a pay-as-you-go instance to a monthly subscribed one, you need to set this parameter to `PREPAID`.
+         * @type {string || null}
+         */
+        this.ModifyPayType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.ModifyPayType = 'ModifyPayType' in params ? params.ModifyPayType : null;
+
+    }
+}
+
+/**
+ * DescribeBackupConfig request structure.
+ * @class
+ */
+class DescribeBackupConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Parameter modification records
+ * @class
+ */
+class ParamRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Parameter name
+         * @type {string || null}
+         */
+        this.ParamName = null;
+
+        /**
+         * Parameter value before modification
+         * @type {string || null}
+         */
+        this.OldValue = null;
+
+        /**
+         * Parameter value after modification
+         * @type {string || null}
+         */
+        this.NewValue = null;
+
+        /**
+         * Whether the parameter is modified successfully
+         * @type {boolean || null}
+         */
+        this.IsSucess = null;
+
+        /**
+         * Modification time
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.OldValue = 'OldValue' in params ? params.OldValue : null;
+        this.NewValue = 'NewValue' in params ? params.NewValue : null;
+        this.IsSucess = 'IsSucess' in params ? params.IsSucess : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
+ * ModifyAccountMaxUserConnections response structure.
+ * @class
+ */
+class ModifyAccountMaxUserConnectionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task request ID, which can be used to query the execution result of an async task
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpgradeDBInstance request structure.
  * @class
  */
@@ -964,132 +1168,6 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
         this.CrossCluster = 'CrossCluster' in params ? params.CrossCluster : null;
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-
-    }
-}
-
-/**
- * DescribeBackupConfig request structure.
- * @class
- */
-class DescribeBackupConfigRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
- * Parameter modification records
- * @class
- */
-class ParamRecord extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Parameter name
-         * @type {string || null}
-         */
-        this.ParamName = null;
-
-        /**
-         * Parameter value before modification
-         * @type {string || null}
-         */
-        this.OldValue = null;
-
-        /**
-         * Parameter value after modification
-         * @type {string || null}
-         */
-        this.NewValue = null;
-
-        /**
-         * Whether the parameter is modified successfully
-         * @type {boolean || null}
-         */
-        this.IsSucess = null;
-
-        /**
-         * Modification time
-         * @type {string || null}
-         */
-        this.ModifyTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ParamName = 'ParamName' in params ? params.ParamName : null;
-        this.OldValue = 'OldValue' in params ? params.OldValue : null;
-        this.NewValue = 'NewValue' in params ? params.NewValue : null;
-        this.IsSucess = 'IsSucess' in params ? params.IsSucess : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-
-    }
-}
-
-/**
- * ModifyAccountMaxUserConnections response structure.
- * @class
- */
-class ModifyAccountMaxUserConnectionsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Async task request ID, which can be used to query the execution result of an async task
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1437,13 +1515,13 @@ class DescribeErrorLogDataRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Start timestamp.
+         * Start timestamp, such as 1585142640.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * End timestamp.
+         * End timestamp, such as 1585142640.
          * @type {number || null}
          */
         this.EndTime = null;
@@ -2902,6 +2980,41 @@ class ReleaseIsolatedDBInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * StartBatchRollback response structure.
+ * @class
+ */
+class StartBatchRollbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task request ID, which can be used to query the execution result of an async task.
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Proxy configuration
  * @class
  */
@@ -4032,42 +4145,30 @@ class CreateParamTemplateResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBackupSummaries request structure.
+ * CreateDBInstanceHour response structure.
  * @class
  */
-class DescribeBackupSummariesRequest extends  AbstractModel {
+class CreateDBInstanceHourResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TencentDB product type to be queried. Currently, only `mysql` is supported.
+         * Short order ID.
+         * @type {Array.<string> || null}
+         */
+        this.DealIds = null;
+
+        /**
+         * Instance ID list
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Product = null;
-
-        /**
-         * Paginated query offset. Default value: `0`.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum entries returned per page, which ranges from 1 to 100. Default value: `20`.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Sorting criterion. Valid values: `BackupVolume` (backup capacity), `DataBackupVolume` (data backup capacity), `BinlogBackupVolume` (log backup capacity), `AutoBackupVolume` (automatic backup capacity), `ManualBackupVolume` (manual backup capacity). Default value: `BackupVolume`.
-         * @type {string || null}
-         */
-        this.OrderBy = null;
-
-        /**
-         * Sorting order. Valid values: `ASC` (ascending), `DESC` (descending). Default value: `ASC`.
-         * @type {string || null}
-         */
-        this.OrderDirection = null;
+        this.RequestId = null;
 
     }
 
@@ -4078,11 +4179,9 @@ class DescribeBackupSummariesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Product = 'Product' in params ? params.Product : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6568,30 +6667,24 @@ class DescribeDBSwitchRecordsResponse extends  AbstractModel {
 }
 
 /**
- * RenewDBInstance request structure.
+ * ModifyBackupEncryptionStatus request structure.
  * @class
  */
-class RenewDBInstanceRequest extends  AbstractModel {
+class ModifyBackupEncryptionStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the instance to be renewed in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed in the TencentDB console. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID.
+         * Instance ID in the format of cdb-XXXX, which is the same as that displayed in the TencentDB console.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Renewal period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
-         * @type {number || null}
-         */
-        this.TimeSpan = null;
-
-        /**
-         * To renew a pay-as-you-go instance to a monthly subscribed one, you need to set this parameter to `PREPAID`.
+         * Default encryption status for the new auto-generated physical backup files. Valid values: `on`, `off`.
          * @type {string || null}
          */
-        this.ModifyPayType = null;
+        this.EncryptionStatus = null;
 
     }
 
@@ -6603,8 +6696,7 @@ class RenewDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
-        this.ModifyPayType = 'ModifyPayType' in params ? params.ModifyPayType : null;
+        this.EncryptionStatus = 'EncryptionStatus' in params ? params.EncryptionStatus : null;
 
     }
 }
@@ -7022,30 +7114,42 @@ class ModifyLocalBinlogConfigResponse extends  AbstractModel {
 }
 
 /**
- * CreateDBInstanceHour response structure.
+ * DescribeBackupSummaries request structure.
  * @class
  */
-class CreateDBInstanceHourResponse extends  AbstractModel {
+class DescribeBackupSummariesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Short order ID.
-         * @type {Array.<string> || null}
-         */
-        this.DealIds = null;
-
-        /**
-         * Instance ID list
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * TencentDB product type to be queried. Currently, only `mysql` is supported.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Product = null;
+
+        /**
+         * Paginated query offset. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum entries returned per page, which ranges from 1 to 100. Default value: `20`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sorting criterion. Valid values: `BackupVolume` (backup capacity), `DataBackupVolume` (data backup capacity), `BinlogBackupVolume` (log backup capacity), `AutoBackupVolume` (automatic backup capacity), `ManualBackupVolume` (manual backup capacity). Default value: `BackupVolume`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `ASC` (ascending), `DESC` (descending). Default value: `ASC`.
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
 
     }
 
@@ -7056,9 +7160,11 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealIds = 'DealIds' in params ? params.DealIds : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -8515,42 +8621,18 @@ class DescribeTimeWindowResponse extends  AbstractModel {
 }
 
 /**
- * OpenAuditService request structure.
+ * ModifyBackupEncryptionStatus response structure.
  * @class
  */
-class OpenAuditServiceRequest extends  AbstractModel {
+class ModifyBackupEncryptionStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TencentDB for MySQL instance ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Retention period of audit logs. Valid values:
-7: seven days (a week);
-30: 30 days (a month);
-180: 180 days (six months);
-365: 365 days (a year);
-1095: 1095 days (three years);
-1825: 1825 days (five years).
-         * @type {number || null}
-         */
-        this.LogExpireDay = null;
-
-        /**
-         * Retention period of high-frequency audit logs. Valid values:
-7: seven days (a week);
-30: 30 days (a month);
-180: 180 days (six months);
-365: 365 days (a year);
-1095: 1095 days (three years);
-1825: 1825 days (five years).
-         * @type {number || null}
-         */
-        this.HighLogExpireDay = null;
+        this.RequestId = null;
 
     }
 
@@ -8561,9 +8643,7 @@ class OpenAuditServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
-        this.HighLogExpireDay = 'HighLogExpireDay' in params ? params.HighLogExpireDay : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8926,6 +9006,34 @@ class DescribeRollbackTaskDetailRequest extends  AbstractModel {
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * OpenDBInstanceEncryption response structure.
+ * @class
+ */
+class OpenDBInstanceEncryptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11538,42 +11646,6 @@ class TagsInfoOfInstance extends  AbstractModel {
 }
 
 /**
- * UpgradeCDBProxy response structure.
- * @class
- */
-class UpgradeCDBProxyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Async request ID
-Note: this field may return `null`, indicating that no valid value can be found.
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ResetRootAccount request structure.
  * @class
  */
@@ -13711,6 +13783,34 @@ class CreateParamTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupEncryptionStatus request structure.
+ * @class
+ */
+class DescribeBackupEncryptionStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-XXXX, which is the same as that displayed in the TencentDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * IsolateDBInstance request structure.
  * @class
  */
@@ -14006,7 +14106,7 @@ class CreateBackupRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Backup method of target instance. Value range: logical (logical cold backup), physical (physical cold backup).
+         * Target backup method. Valid values: `logical` (logical cold backup), `physical` (physical cold backup), `snapshot` (snapshot backup). Basic Edition instances only support snapshot backups.
          * @type {string || null}
          */
         this.BackupMethod = null;
@@ -14050,24 +14150,30 @@ For example, if you want to backup tb1 and tb2 in db1 and the entire db2, you sh
 }
 
 /**
- * StartBatchRollback response structure.
+ * OpenDBInstanceEncryption request structure.
  * @class
  */
-class StartBatchRollbackResponse extends  AbstractModel {
+class OpenDBInstanceEncryptionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task request ID, which can be used to query the execution result of an async task.
+         * TencentDB instance ID
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.InstanceId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Custom key ID, which is the unique CMK ID. If this value is empty, the key KMS-CDB auto-generated by Tencent Cloud will be used.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.KeyId = null;
+
+        /**
+         * Custom storage region, such as ap-guangzhou. When `KeyId` is not empty, this parameter is required.
+         * @type {string || null}
+         */
+        this.KeyRegion = null;
 
     }
 
@@ -14078,8 +14184,9 @@ class StartBatchRollbackResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KeyRegion = 'KeyRegion' in params ? params.KeyRegion : null;
 
     }
 }
@@ -14477,18 +14584,42 @@ class ModifyAutoRenewFlagRequest extends  AbstractModel {
 }
 
 /**
- * StartBatchRollback request structure.
+ * OpenAuditService request structure.
  * @class
  */
-class StartBatchRollbackRequest extends  AbstractModel {
+class OpenAuditServiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Details of the instance for rollback
-         * @type {Array.<RollbackInstancesInfo> || null}
+         * TencentDB for MySQL instance ID
+         * @type {string || null}
          */
-        this.Instances = null;
+        this.InstanceId = null;
+
+        /**
+         * Retention period of audit logs. Valid values:
+7: seven days (a week);
+30: 30 days (a month);
+180: 180 days (six months);
+365: 365 days (a year);
+1095: 1095 days (three years);
+1825: 1825 days (five years).
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * Retention period of high-frequency audit logs. Valid values:
+7: seven days (a week);
+30: 30 days (a month);
+180: 180 days (six months);
+365: 365 days (a year);
+1095: 1095 days (three years);
+1825: 1825 days (five years).
+         * @type {number || null}
+         */
+        this.HighLogExpireDay = null;
 
     }
 
@@ -14499,15 +14630,9 @@ class StartBatchRollbackRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Instances) {
-            this.Instances = new Array();
-            for (let z in params.Instances) {
-                let obj = new RollbackInstancesInfo();
-                obj.deserialize(params.Instances[z]);
-                this.Instances.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.HighLogExpireDay = 'HighLogExpireDay' in params ? params.HighLogExpireDay : null;
 
     }
 }
@@ -14749,13 +14874,13 @@ class DescribeSlowLogDataRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Start timestamp.
+         * Start timestamp, such as 1585142640.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * End timestamp.
+         * End timestamp, such as 1585142640.
          * @type {number || null}
          */
         this.EndTime = null;
@@ -16334,76 +16459,6 @@ class DescribeParamTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * UpgradeCDBProxy request structure.
- * @class
- */
-class UpgradeCDBProxyRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Database proxy ID
-         * @type {string || null}
-         */
-        this.ProxyGroupId = null;
-
-        /**
-         * Number of proxy nodes
-         * @type {number || null}
-         */
-        this.ProxyCount = null;
-
-        /**
-         * Number of CPU cores per proxy node
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Memory per proxy node
-         * @type {number || null}
-         */
-        this.Mem = null;
-
-        /**
-         * Load rebalance mode. Valid values: `auto`, `manual`
-         * @type {string || null}
-         */
-        this.ReloadBalance = null;
-
-        /**
-         * Upgrade time. Valid values: `nowTime` (upgrade immediately), `timeWindow` (upgrade during instance maintenance time)
-         * @type {string || null}
-         */
-        this.UpgradeTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ProxyGroupId = 'ProxyGroupId' in params ? params.ProxyGroupId : null;
-        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Mem = 'Mem' in params ? params.Mem : null;
-        this.ReloadBalance = 'ReloadBalance' in params ? params.ReloadBalance : null;
-        this.UpgradeTime = 'UpgradeTime' in params ? params.UpgradeTime : null;
-
-    }
-}
-
-/**
  * DescribeInstanceParams request structure.
  * @class
  */
@@ -17283,6 +17338,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeBackupEncryptionStatus response structure.
+ * @class
+ */
+class DescribeBackupEncryptionStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether the physical cold backup is enabled for the instance. Valid values: `on`, `off`.
+         * @type {string || null}
+         */
+        this.EncryptionStatus = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EncryptionStatus = 'EncryptionStatus' in params ? params.EncryptionStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Retention policy of local binlog
  * @class
  */
@@ -17353,6 +17443,7 @@ class Tag extends  AbstractModel {
 }
 
 module.exports = {
+    StartBatchRollbackRequest: StartBatchRollbackRequest,
     ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
     DescribeProxyConnectionPoolConfRequest: DescribeProxyConnectionPoolConfRequest,
@@ -17361,10 +17452,11 @@ module.exports = {
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     CreateDBImportJobRequest: CreateDBImportJobRequest,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
-    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    RenewDBInstanceRequest: RenewDBInstanceRequest,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
     ParamRecord: ParamRecord,
     ModifyAccountMaxUserConnectionsResponse: ModifyAccountMaxUserConnectionsResponse,
+    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     StopDBImportJobRequest: StopDBImportJobRequest,
     DescribeUploadedFilesResponse: DescribeUploadedFilesResponse,
@@ -17403,6 +17495,7 @@ module.exports = {
     DescribeDBPriceResponse: DescribeDBPriceResponse,
     CloseCDBProxyResponse: CloseCDBProxyResponse,
     ReleaseIsolatedDBInstancesResponse: ReleaseIsolatedDBInstancesResponse,
+    StartBatchRollbackResponse: StartBatchRollbackResponse,
     CustomConfig: CustomConfig,
     ConnectionPoolInfo: ConnectionPoolInfo,
     DescribeBackupOverviewRequest: DescribeBackupOverviewRequest,
@@ -17423,7 +17516,7 @@ module.exports = {
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
     ModifyBackupDownloadRestrictionRequest: ModifyBackupDownloadRestrictionRequest,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
-    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
+    CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     DescribeCloneListResponse: DescribeCloneListResponse,
     ModifyAccountMaxUserConnectionsRequest: ModifyAccountMaxUserConnectionsRequest,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
@@ -17457,7 +17550,7 @@ module.exports = {
     ModifyDBInstanceVipVportResponse: ModifyDBInstanceVipVportResponse,
     CloseCDBProxyRequest: CloseCDBProxyRequest,
     DescribeDBSwitchRecordsResponse: DescribeDBSwitchRecordsResponse,
-    RenewDBInstanceRequest: RenewDBInstanceRequest,
+    ModifyBackupEncryptionStatusRequest: ModifyBackupEncryptionStatusRequest,
     ModifyCDBProxyConnectionPoolResponse: ModifyCDBProxyConnectionPoolResponse,
     SlowLogInfo: SlowLogInfo,
     RollbackTableName: RollbackTableName,
@@ -17467,7 +17560,7 @@ module.exports = {
     CdbRegionSellConf: CdbRegionSellConf,
     UploadInfo: UploadInfo,
     ModifyLocalBinlogConfigResponse: ModifyLocalBinlogConfigResponse,
-    CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
     ProxyNodeInfo: ProxyNodeInfo,
     DescribeRoGroupsRequest: DescribeRoGroupsRequest,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
@@ -17503,12 +17596,13 @@ module.exports = {
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
     DescribeTimeWindowResponse: DescribeTimeWindowResponse,
-    OpenAuditServiceRequest: OpenAuditServiceRequest,
+    ModifyBackupEncryptionStatusResponse: ModifyBackupEncryptionStatusResponse,
     BackupItem: BackupItem,
     ModifyCDBProxyVipVPortRequest: ModifyCDBProxyVipVPortRequest,
     AuditFilter: AuditFilter,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
     DescribeRollbackTaskDetailRequest: DescribeRollbackTaskDetailRequest,
+    OpenDBInstanceEncryptionResponse: OpenDBInstanceEncryptionResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
@@ -17562,7 +17656,6 @@ module.exports = {
     DescribeLocalBinlogConfigResponse: DescribeLocalBinlogConfigResponse,
     DescribeCDBProxyResponse: DescribeCDBProxyResponse,
     TagsInfoOfInstance: TagsInfoOfInstance,
-    UpgradeCDBProxyResponse: UpgradeCDBProxyResponse,
     ResetRootAccountRequest: ResetRootAccountRequest,
     DeviceCpuInfo: DeviceCpuInfo,
     AuditPolicy: AuditPolicy,
@@ -17600,6 +17693,7 @@ module.exports = {
     InitDBInstancesRequest: InitDBInstancesRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
+    DescribeBackupEncryptionStatusRequest: DescribeBackupEncryptionStatusRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     ModifyBackupDownloadRestrictionResponse: ModifyBackupDownloadRestrictionResponse,
     ModifyTimeWindowRequest: ModifyTimeWindowRequest,
@@ -17607,7 +17701,7 @@ module.exports = {
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     Account: Account,
     CreateBackupRequest: CreateBackupRequest,
-    StartBatchRollbackResponse: StartBatchRollbackResponse,
+    OpenDBInstanceEncryptionRequest: OpenDBInstanceEncryptionRequest,
     CommonTimeWindow: CommonTimeWindow,
     AccountInfo: AccountInfo,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
@@ -17616,7 +17710,7 @@ module.exports = {
     LocalBinlogConfigDefault: LocalBinlogConfigDefault,
     DeviceMemInfo: DeviceMemInfo,
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
-    StartBatchRollbackRequest: StartBatchRollbackRequest,
+    OpenAuditServiceRequest: OpenAuditServiceRequest,
     UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     DescribeSlowLogDataRequest: DescribeSlowLogDataRequest,
@@ -17655,7 +17749,6 @@ module.exports = {
     ModifyRemoteBackupConfigRequest: ModifyRemoteBackupConfigRequest,
     DeleteBackupRequest: DeleteBackupRequest,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
-    UpgradeCDBProxyRequest: UpgradeCDBProxyRequest,
     DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
     SlowLogItem: SlowLogItem,
     DescribeDeviceMonitorInfoResponse: DescribeDeviceMonitorInfoResponse,
@@ -17673,6 +17766,7 @@ module.exports = {
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     DescribeDBInstanceGTIDRequest: DescribeDBInstanceGTIDRequest,
     RollbackDBName: RollbackDBName,
+    DescribeBackupEncryptionStatusResponse: DescribeBackupEncryptionStatusResponse,
     LocalBinlogConfig: LocalBinlogConfig,
     Tag: Tag,
 

@@ -23,6 +23,7 @@ const CreateTawInstanceResponse = models.CreateTawInstanceResponse;
 const DeleteProjectRequest = models.DeleteProjectRequest;
 const DescribeProjectLimitsResponse = models.DescribeProjectLimitsResponse;
 const DeleteOfflineLogConfigResponse = models.DeleteOfflineLogConfigResponse;
+const ResumeProjectResponse = models.ResumeProjectResponse;
 const DescribeRumLogListResponse = models.DescribeRumLogListResponse;
 const DescribeDataPvUrlInfoResponse = models.DescribeDataPvUrlInfoResponse;
 const StopProjectResponse = models.StopProjectResponse;
@@ -64,6 +65,7 @@ const DescribeDataPerformancePageRequest = models.DescribeDataPerformancePageReq
 const DeleteReleaseFileRequest = models.DeleteReleaseFileRequest;
 const ResumeInstanceRequest = models.ResumeInstanceRequest;
 const DescribeDataFetchUrlRequest = models.DescribeDataFetchUrlRequest;
+const DescribeRumLogExportRequest = models.DescribeRumLogExportRequest;
 const DescribeDataLogUrlStatisticsResponse = models.DescribeDataLogUrlStatisticsResponse;
 const CreateProjectResponse = models.CreateProjectResponse;
 const StopInstanceResponse = models.StopInstanceResponse;
@@ -74,8 +76,10 @@ const DescribeOfflineLogRecordsRequest = models.DescribeOfflineLogRecordsRequest
 const DescribeDataPvUrlStatisticsRequest = models.DescribeDataPvUrlStatisticsRequest;
 const ReleaseFile = models.ReleaseFile;
 const ModifyProjectLimitResponse = models.ModifyProjectLimitResponse;
+const DescribeRumLogExportsResponse = models.DescribeRumLogExportsResponse;
 const DescribeDataStaticProjectRequest = models.DescribeDataStaticProjectRequest;
 const DescribeRumStatsLogListRequest = models.DescribeRumStatsLogListRequest;
+const ResumeProjectRequest = models.ResumeProjectRequest;
 const ProjectLimit = models.ProjectLimit;
 const DeleteLogExportRequest = models.DeleteLogExportRequest;
 const DescribeRumGroupLogResponse = models.DescribeRumGroupLogResponse;
@@ -130,6 +134,8 @@ const ModifyProjectResponse = models.ModifyProjectResponse;
 const DescribeLogExportsRequest = models.DescribeLogExportsRequest;
 const DescribeDataReportCountResponse = models.DescribeDataReportCountResponse;
 const DescribeDataPerformanceProjectRequest = models.DescribeDataPerformanceProjectRequest;
+const DescribeRumLogExportResponse = models.DescribeRumLogExportResponse;
+const DescribeRumLogExportsRequest = models.DescribeRumLogExportsRequest;
 const ModifyProjectRequest = models.ModifyProjectRequest;
 const DescribeRumLogListRequest = models.DescribeRumLogListRequest;
 const DescribeDataStaticResourceRequest = models.DescribeDataStaticResourceRequest;
@@ -253,6 +259,28 @@ class RumClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get the list of logs in a project (created by an instance).
+     * @param {DescribeRumLogExportRequest} req
+     * @param {function(string, DescribeRumLogExportResponse):void} cb
+     * @public
+     */
+    DescribeRumLogExport(req, cb) {
+        let resp = new DescribeRumLogExportResponse();
+        this.request("DescribeRumLogExport", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of exported logs in a project.
+     * @param {DescribeRumLogExportsRequest} req
+     * @param {function(string, DescribeRumLogExportsResponse):void} cb
+     * @public
+     */
+    DescribeRumLogExports(req, cb) {
+        let resp = new DescribeRumLogExportsResponse();
+        this.request("DescribeRumLogExports", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a starred project for the specified user.
      * @param {DeleteStarProjectRequest} req
      * @param {function(string, DeleteStarProjectResponse):void} cb
@@ -264,7 +292,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * This API is used to resume an instance.
+     * This API is used to recover a RUM business system so that you can use the application to report data normally.
      * @param {ResumeInstanceRequest} req
      * @param {function(string, ResumeInstanceResponse):void} cb
      * @public
@@ -308,7 +336,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of logs in a project (created by an instance).
+     * This API is used to get the log list. It has been deprecated. Use `DescribeRumLogList` instead.
      * @param {DescribeLogListRequest} req
      * @param {function(string, DescribeLogListResponse):void} cb
      * @public
@@ -330,7 +358,7 @@ class RumClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a RUM instance.
+     * This API is used to create a RUM business system.
      * @param {CreateTawInstanceRequest} req
      * @param {function(string, CreateTawInstanceResponse):void} cb
      * @public
@@ -449,7 +477,7 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
-     * This API is used to modify an instance.
+     * This API is used to modify a RUM business system.
      * @param {ModifyInstanceRequest} req
      * @param {function(string, ModifyInstanceResponse):void} cb
      * @public
@@ -471,7 +499,7 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
-     * This API is used to get the list of project reporting rates.
+     * This API is used to get the sampling information of an application’s reporting APIs.
      * @param {DescribeProjectLimitsRequest} req
      * @param {function(string, DescribeProjectLimitsResponse):void} cb
      * @public
@@ -512,6 +540,17 @@ Default API request rate limit: 20 requests/sec.
     DescribeProjects(req, cb) {
         let resp = new DescribeProjectsResponse();
         this.request("DescribeProjects", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recover an application and resume data reporting.
+     * @param {ResumeProjectRequest} req
+     * @param {function(string, ResumeProjectResponse):void} cb
+     * @public
+     */
+    ResumeProject(req, cb) {
+        let resp = new ResumeProjectResponse();
+        this.request("ResumeProject", req, resp, cb);
     }
 
     /**
@@ -570,7 +609,7 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
-     * This API is used to modify a RUM project.
+     * This API is used to modify the RUM application information.
      * @param {ModifyProjectRequest} req
      * @param {function(string, ModifyProjectResponse):void} cb
      * @public
@@ -581,7 +620,7 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
-     * This API is used to get the list of sourcemap files of a project.
+     * This API is used to get the list of source maps of an application.
      * @param {DescribeReleaseFilesRequest} req
      * @param {function(string, DescribeReleaseFilesResponse):void} cb
      * @public
@@ -662,7 +701,7 @@ Default API request rate limit: 20 requests/sec.
     }
 
     /**
-     * This API is used to create a project (owned by the specified team).
+     * This API is used to create a RUM application which belongs to a specific team.
      * @param {CreateProjectRequest} req
      * @param {function(string, CreateProjectResponse):void} cb
      * @public

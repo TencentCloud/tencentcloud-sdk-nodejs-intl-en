@@ -135,6 +135,12 @@ class EnableKeyRotationRequest extends  AbstractModel {
          */
         this.KeyId = null;
 
+        /**
+         * The interval between each key rotation in days. Value range: 7 - 365 (default).
+         * @type {number || null}
+         */
+        this.RotateDays = null;
+
     }
 
     /**
@@ -145,6 +151,7 @@ class EnableKeyRotationRequest extends  AbstractModel {
             return;
         }
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.RotateDays = 'RotateDays' in params ? params.RotateDays : null;
 
     }
 }
@@ -164,8 +171,8 @@ class DescribeWhiteBoxKeyDetailsResponse extends  AbstractModel {
         this.KeyInfos = null;
 
         /**
-         * Total number of keys
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Total white-box keys.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -2635,8 +2642,8 @@ class GetServiceStatusResponse extends  AbstractModel {
         this.UserLevel = null;
 
         /**
-         * Ultimate Edition expiration time
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Expiration time of the KMS Ultimate edition. It’s represented in a Unix Epoch timestamp.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ProExpireTime = null;

@@ -503,6 +503,34 @@ class DeleteOfflineLogConfigResponse extends  AbstractModel {
 }
 
 /**
+ * ResumeProject response structure.
+ * @class
+ */
+class ResumeProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRumLogList response structure.
  * @class
  */
@@ -2763,6 +2791,69 @@ class DescribeDataFetchUrlRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRumLogExport request structure.
+ * @class
+ */
+class DescribeRumLogExportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Export identifier name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Start time (required)
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Query statement, which is required and can contain up to 4,096 characters.
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * End time (required)
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Project ID (required)
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * Filter field
+         * @type {Array.<string> || null}
+         */
+        this.Fields = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Fields = 'Fields' in params ? params.Fields : null;
+
+    }
+}
+
+/**
  * DescribeDataLogUrlStatistics response structure.
  * @class
  */
@@ -3255,6 +3346,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeRumLogExports response structure.
+ * @class
+ */
+class DescribeRumLogExportsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response string
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDataStaticProject request structure.
  * @class
  */
@@ -3488,6 +3614,34 @@ class DescribeRumStatsLogListRequest extends  AbstractModel {
         this.Query = 'Query' in params ? params.Query : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
+ * ResumeProject request structure.
+ * @class
+ */
+class ResumeProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Project ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -6620,6 +6774,83 @@ class DescribeDataPerformanceProjectRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRumLogExport response structure.
+ * @class
+ */
+class DescribeRumLogExportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Response string
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRumLogExports request structure.
+ * @class
+ */
+class DescribeRumLogExportsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Page size
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Project ID (required)
+         * @type {number || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
  * ModifyProject request structure.
  * @class
  */
@@ -6718,7 +6949,7 @@ class DescribeRumLogListRequest extends  AbstractModel {
         this.OrderBy = null;
 
         /**
-         * Start time (required)
+         * Start time in milliseconds. It is in timestamp format and is required.
          * @type {string || null}
          */
         this.StartTime = null;
@@ -6742,7 +6973,7 @@ class DescribeRumLogListRequest extends  AbstractModel {
         this.Query = null;
 
         /**
-         * End time (required)
+         * End time in milliseconds. It is in timestamp format and is required.
          * @type {string || null}
          */
         this.EndTime = null;
@@ -7535,6 +7766,7 @@ module.exports = {
     DeleteProjectRequest: DeleteProjectRequest,
     DescribeProjectLimitsResponse: DescribeProjectLimitsResponse,
     DeleteOfflineLogConfigResponse: DeleteOfflineLogConfigResponse,
+    ResumeProjectResponse: ResumeProjectResponse,
     DescribeRumLogListResponse: DescribeRumLogListResponse,
     DescribeDataPvUrlInfoResponse: DescribeDataPvUrlInfoResponse,
     StopProjectResponse: StopProjectResponse,
@@ -7576,6 +7808,7 @@ module.exports = {
     DeleteReleaseFileRequest: DeleteReleaseFileRequest,
     ResumeInstanceRequest: ResumeInstanceRequest,
     DescribeDataFetchUrlRequest: DescribeDataFetchUrlRequest,
+    DescribeRumLogExportRequest: DescribeRumLogExportRequest,
     DescribeDataLogUrlStatisticsResponse: DescribeDataLogUrlStatisticsResponse,
     CreateProjectResponse: CreateProjectResponse,
     StopInstanceResponse: StopInstanceResponse,
@@ -7586,8 +7819,10 @@ module.exports = {
     DescribeDataPvUrlStatisticsRequest: DescribeDataPvUrlStatisticsRequest,
     ReleaseFile: ReleaseFile,
     ModifyProjectLimitResponse: ModifyProjectLimitResponse,
+    DescribeRumLogExportsResponse: DescribeRumLogExportsResponse,
     DescribeDataStaticProjectRequest: DescribeDataStaticProjectRequest,
     DescribeRumStatsLogListRequest: DescribeRumStatsLogListRequest,
+    ResumeProjectRequest: ResumeProjectRequest,
     ProjectLimit: ProjectLimit,
     DeleteLogExportRequest: DeleteLogExportRequest,
     DescribeRumGroupLogResponse: DescribeRumGroupLogResponse,
@@ -7642,6 +7877,8 @@ module.exports = {
     DescribeLogExportsRequest: DescribeLogExportsRequest,
     DescribeDataReportCountResponse: DescribeDataReportCountResponse,
     DescribeDataPerformanceProjectRequest: DescribeDataPerformanceProjectRequest,
+    DescribeRumLogExportResponse: DescribeRumLogExportResponse,
+    DescribeRumLogExportsRequest: DescribeRumLogExportsRequest,
     ModifyProjectRequest: ModifyProjectRequest,
     DescribeRumLogListRequest: DescribeRumLogListRequest,
     DescribeDataStaticResourceRequest: DescribeDataStaticResourceRequest,

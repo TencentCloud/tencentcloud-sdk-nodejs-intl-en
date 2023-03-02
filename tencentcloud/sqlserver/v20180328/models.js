@@ -2378,6 +2378,13 @@ Note: this field may return ‘null’, indicating that no valid values can be o
          */
         this.IsRecovery = null;
 
+        /**
+         * Name set of renamed databases
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DBRenameRes> || null}
+         */
+        this.DBRename = null;
+
     }
 
     /**
@@ -2413,6 +2420,15 @@ Note: this field may return ‘null’, indicating that no valid values can be o
             this.Action = obj;
         }
         this.IsRecovery = 'IsRecovery' in params ? params.IsRecovery : null;
+
+        if (params.DBRename) {
+            this.DBRename = new Array();
+            for (let z in params.DBRename) {
+                let obj = new DBRenameRes();
+                obj.deserialize(params.DBRename[z]);
+                this.DBRename.push(obj);
+            }
+        }
 
     }
 }
@@ -3239,10 +3255,16 @@ class AccountPrivilege extends  AbstractModel {
         this.UserName = null;
 
         /**
-         * Database permissions. ReadWrite: read/write, ReadOnly: read-only
+         * Database permission. Valid values: `ReadWrite` (read-write), `ReadOnly` (read-only), `Delete` (delete the database permissions of this account), `DBOwner` (owner).
          * @type {string || null}
          */
         this.Privilege = null;
+
+        /**
+         * Account name. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account).
+         * @type {string || null}
+         */
+        this.AccountType = null;
 
     }
 
@@ -3255,6 +3277,7 @@ class AccountPrivilege extends  AbstractModel {
         }
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.Privilege = 'Privilege' in params ? params.Privilege : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
 
     }
 }
@@ -3540,58 +3563,33 @@ class DescribeDBInstancesRequest extends  AbstractModel {
 }
 
 /**
- * Slow query log file information
+ * Migration steps of a cold backup import task
  * @class
  */
-class SlowlogInfo extends  AbstractModel {
+class MigrationStep extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of slow query log file
+         * Step sequence
          * @type {number || null}
          */
-        this.Id = null;
+        this.StepNo = null;
 
         /**
-         * File generation start time
+         * Step name
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.StepName = null;
 
         /**
-         * File generation end time
+         * Step ID in English
          * @type {string || null}
          */
-        this.EndTime = null;
+        this.StepId = null;
 
         /**
-         * File size in KB
-         * @type {number || null}
-         */
-        this.Size = null;
-
-        /**
-         * Number of logs in file
-         * @type {number || null}
-         */
-        this.Count = null;
-
-        /**
-         * Download address for private network
-         * @type {string || null}
-         */
-        this.InternalAddr = null;
-
-        /**
-         * Download address for public network
-         * @type {string || null}
-         */
-        this.ExternalAddr = null;
-
-        /**
-         * Status (1: success, 2: failure)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Step status: 0 (default value), 1 (succeeded), 2 (failed), 3 (in progress), 4 (not started)
          * @type {number || null}
          */
         this.Status = null;
@@ -3605,13 +3603,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Size = 'Size' in params ? params.Size : null;
-        this.Count = 'Count' in params ? params.Count : null;
-        this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
-        this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
+        this.StepNo = 'StepNo' in params ? params.StepNo : null;
+        this.StepName = 'StepName' in params ? params.StepName : null;
+        this.StepId = 'StepId' in params ? params.StepId : null;
         this.Status = 'Status' in params ? params.Status : null;
 
     }
@@ -4616,7 +4610,7 @@ class DBPrivilegeModifyInfo extends  AbstractModel {
         this.DBName = null;
 
         /**
-         * Permission change information. ReadWrite: read/write, ReadOnly: read-only, Delete: the account has the permission to delete this database
+         * Permission modification information. Valid values: `ReadWrite` (read-write), `ReadOnly` (read-only), `Delete` (delete the account's permission to this database), `DBOwner` (owner).
          * @type {string || null}
          */
         this.Privilege = null;
@@ -4814,7 +4808,7 @@ class DescribeBackupFilesRequest extends  AbstractModel {
 }
 
 /**
- * Used in the `RestoreInstance`, `RollbackInstance`, `CreateMigration`, and `CloneDB` APIs to specify and rename the database to be restored, rolled back, migrated, or cloned.
+ * It is used to specify and rename the database to be restored through the `RestoreInstance`, `RollbackInstance`, `CreateMigration`, `CloneDB` or `ModifyBackupMigration` APIs.
  * @class
  */
 class RenameRestoreDatabase extends  AbstractModel {
@@ -5646,6 +5640,12 @@ class DbNormalDetail extends  AbstractModel {
          */
         this.UserAccessDesc = null;
 
+        /**
+         * Database creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -5673,6 +5673,7 @@ class DbNormalDetail extends  AbstractModel {
         this.RetentionPeriod = 'RetentionPeriod' in params ? params.RetentionPeriod : null;
         this.StateDesc = 'StateDesc' in params ? params.StateDesc : null;
         this.UserAccessDesc = 'UserAccessDesc' in params ? params.UserAccessDesc : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -5751,6 +5752,12 @@ class AccountDetail extends  AbstractModel {
          */
         this.Host = null;
 
+        /**
+         * Account type. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account).
+         * @type {string || null}
+         */
+        this.AccountType = null;
+
     }
 
     /**
@@ -5779,6 +5786,7 @@ class AccountDetail extends  AbstractModel {
         this.IsAdmin = 'IsAdmin' in params ? params.IsAdmin : null;
         this.Authentication = 'Authentication' in params ? params.Authentication : null;
         this.Host = 'Host' in params ? params.Host : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
 
     }
 }
@@ -7219,10 +7227,16 @@ class AccountPrivilegeModifyInfo extends  AbstractModel {
         this.DBPrivileges = null;
 
         /**
-         * Whether it is an admin account
+         * Whether the account has the admin permission. Valid values: `true` (Yes. It is an admin account when the instance is a basic edition type and `AccountType` is `L0`; it is a privileged account when the instance is a dual-server high availability edition type and `AccountType` is `L1`.), `false` (No. The admin permission is disabled by default).
          * @type {boolean || null}
          */
         this.IsAdmin = null;
+
+        /**
+         * Account type, which is an extension field of `IsAdmin`. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account, default)
+         * @type {string || null}
+         */
+        this.AccountType = null;
 
     }
 
@@ -7244,6 +7258,7 @@ class AccountPrivilegeModifyInfo extends  AbstractModel {
             }
         }
         this.IsAdmin = 'IsAdmin' in params ? params.IsAdmin : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
 
     }
 }
@@ -7331,7 +7346,7 @@ class AccountCreateInfo extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * Whether it is an admin account. Default value: no
+         * Whether it is an admin account. Valid values: `true` (Yes. It is an admin account when the instance is a basic edition type and `AccountType` is `L0`; it is a privileged account when the instance is a dual-server high availability edition type and `AccountType` is `L1`.), `false` (No. It is a standard account when `AccountType` is `L3`.)
          * @type {boolean || null}
          */
         this.IsAdmin = null;
@@ -7341,6 +7356,12 @@ class AccountCreateInfo extends  AbstractModel {
          * @type {string || null}
          */
         this.Authentication = null;
+
+        /**
+         * Account type, which is an extension field of `IsAdmin`. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account, default)
+         * @type {string || null}
+         */
+        this.AccountType = null;
 
     }
 
@@ -7365,6 +7386,7 @@ class AccountCreateInfo extends  AbstractModel {
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.IsAdmin = 'IsAdmin' in params ? params.IsAdmin : null;
         this.Authentication = 'Authentication' in params ? params.Authentication : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
 
     }
 }
@@ -7475,7 +7497,7 @@ class DBPrivilege extends  AbstractModel {
         this.DBName = null;
 
         /**
-         * Database permissions. ReadWrite: read/write, ReadOnly: read-only
+         * Database permissions. Valid values: `ReadWrite` (read-write), `ReadOnly` (read-only), `DBOwner` (owner)
          * @type {string || null}
          */
         this.Privilege = null;
@@ -9139,36 +9161,24 @@ class ModifyDBInstanceProjectRequest extends  AbstractModel {
 }
 
 /**
- * Migration steps of a cold backup import task
+ * Database renaming response parameter
  * @class
  */
-class MigrationStep extends  AbstractModel {
+class DBRenameRes extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Step sequence
-         * @type {number || null}
-         */
-        this.StepNo = null;
-
-        /**
-         * Step name
+         * Name of the new database
          * @type {string || null}
          */
-        this.StepName = null;
+        this.NewName = null;
 
         /**
-         * Step ID in English
+         * Name of the old database
          * @type {string || null}
          */
-        this.StepId = null;
-
-        /**
-         * Step status: 0 (default value), 1 (succeeded), 2 (failed), 3 (in progress), 4 (not started)
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.OldName = null;
 
     }
 
@@ -9179,10 +9189,8 @@ class MigrationStep extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StepNo = 'StepNo' in params ? params.StepNo : null;
-        this.StepName = 'StepName' in params ? params.StepName : null;
-        this.StepId = 'StepId' in params ? params.StepId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.NewName = 'NewName' in params ? params.NewName : null;
+        this.OldName = 'OldName' in params ? params.OldName : null;
 
     }
 }
@@ -9449,6 +9457,84 @@ class ModifyDatabaseCTResponse extends  AbstractModel {
 }
 
 /**
+ * Slow query log file information
+ * @class
+ */
+class SlowlogInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of slow query log file
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * File generation start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * File generation end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * File size in KB
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * Number of logs in file
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Download address for private network
+         * @type {string || null}
+         */
+        this.InternalAddr = null;
+
+        /**
+         * Download address for public network
+         * @type {string || null}
+         */
+        this.ExternalAddr = null;
+
+        /**
+         * Status (1: success, 2: failure)
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
+        this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * DescribeIncrementalMigration response structure.
  * @class
  */
@@ -9654,6 +9740,12 @@ class ModifyBackupMigrationRequest extends  AbstractModel {
          */
         this.BackupFiles = null;
 
+        /**
+         * Name set of databases to be renamed
+         * @type {Array.<RenameRestoreDatabase> || null}
+         */
+        this.DBRename = null;
+
     }
 
     /**
@@ -9669,6 +9761,15 @@ class ModifyBackupMigrationRequest extends  AbstractModel {
         this.RecoveryType = 'RecoveryType' in params ? params.RecoveryType : null;
         this.UploadType = 'UploadType' in params ? params.UploadType : null;
         this.BackupFiles = 'BackupFiles' in params ? params.BackupFiles : null;
+
+        if (params.DBRename) {
+            this.DBRename = new Array();
+            for (let z in params.DBRename) {
+                let obj = new RenameRestoreDatabase();
+                obj.deserialize(params.DBRename[z]);
+                this.DBRename.push(obj);
+            }
+        }
 
     }
 }
@@ -9807,7 +9908,7 @@ module.exports = {
     DescribeZonesResponse: DescribeZonesResponse,
     DescribeDBsResponse: DescribeDBsResponse,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
-    SlowlogInfo: SlowlogInfo,
+    MigrationStep: MigrationStep,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     DescribeMigrationsResponse: DescribeMigrationsResponse,
     DescribeBackupFilesResponse: DescribeBackupFilesResponse,
@@ -9914,13 +10015,14 @@ module.exports = {
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
-    MigrationStep: MigrationStep,
+    DBRenameRes: DBRenameRes,
     TerminateDBInstanceResponse: TerminateDBInstanceResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackInstanceRequest: RollbackInstanceRequest,
     RestoreInstanceResponse: RestoreInstanceResponse,
     DescribeBackupCommandResponse: DescribeBackupCommandResponse,
     ModifyDatabaseCTResponse: ModifyDatabaseCTResponse,
+    SlowlogInfo: SlowlogInfo,
     DescribeIncrementalMigrationResponse: DescribeIncrementalMigrationResponse,
     ModifyDBRemarkResponse: ModifyDBRemarkResponse,
     MigrateTarget: MigrateTarget,

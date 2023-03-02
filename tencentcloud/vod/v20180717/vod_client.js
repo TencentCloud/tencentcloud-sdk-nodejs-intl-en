@@ -24,6 +24,7 @@ const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullT
 const DescribeFileAttributesTask = models.DescribeFileAttributesTask;
 const ReviewAudioVideoTaskInput = models.ReviewAudioVideoTaskInput;
 const DescribeAllClassRequest = models.DescribeAllClassRequest;
+const DescribeRoundPlaysRequest = models.DescribeRoundPlaysRequest;
 const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
 const SvgWatermarkInput = models.SvgWatermarkInput;
 const CreateTranscodeTemplateRequest = models.CreateTranscodeTemplateRequest;
@@ -45,6 +46,7 @@ const ModifyDefaultStorageRegionRequest = models.ModifyDefaultStorageRegionReque
 const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
+const RebuildMediaTargetInfo = models.RebuildMediaTargetInfo;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
 const AiReviewPoliticalOcrTaskInput = models.AiReviewPoliticalOcrTaskInput;
 const MediaInputInfo = models.MediaInputInfo;
@@ -66,9 +68,10 @@ const ModifySuperPlayerConfigRequest = models.ModifySuperPlayerConfigRequest;
 const ResetProcedureTemplateRequest = models.ResetProcedureTemplateRequest;
 const ContentReviewOcrResult = models.ContentReviewOcrResult;
 const ComposeMediaResponse = models.ComposeMediaResponse;
+const RoundPlayInfo = models.RoundPlayInfo;
 const DescribeLicenseUsageDataResponse = models.DescribeLicenseUsageDataResponse;
 const UrlSignatureAuthPolicy = models.UrlSignatureAuthPolicy;
-const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
+const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const DescribeStorageDataResponse = models.DescribeStorageDataResponse;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
 const ModifySubAppIdInfoRequest = models.ModifySubAppIdInfoRequest;
@@ -110,6 +113,7 @@ const StorageRegionInfo = models.StorageRegionInfo;
 const MediaTransitionItem = models.MediaTransitionItem;
 const MediaAiAnalysisCoverItem = models.MediaAiAnalysisCoverItem;
 const TagConfigureInfo = models.TagConfigureInfo;
+const SharpEnhanceInfo = models.SharpEnhanceInfo;
 const ModifySuperPlayerConfigResponse = models.ModifySuperPlayerConfigResponse;
 const AiRecognitionTaskOcrWordsResultOutput = models.AiRecognitionTaskOcrWordsResultOutput;
 const RefreshUrlCacheResponse = models.RefreshUrlCacheResponse;
@@ -128,6 +132,7 @@ const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTempla
 const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
 const AiSampleFaceInfo = models.AiSampleFaceInfo;
 const ModifyVodDomainAccelerateConfigRequest = models.ModifyVodDomainAccelerateConfigRequest;
+const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
 const MediaProcessTaskAdaptiveDynamicStreamingResult = models.MediaProcessTaskAdaptiveDynamicStreamingResult;
 const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
 const FileReviewInfo = models.FileReviewInfo;
@@ -147,14 +152,17 @@ const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUp
 const ReviewAudioVideoSegmentItem = models.ReviewAudioVideoSegmentItem;
 const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
+const RepairInfo = models.RepairInfo;
 const CdnLogInfo = models.CdnLogInfo;
+const ReduceMediaBitrateTranscodeResult = models.ReduceMediaBitrateTranscodeResult;
 const MediaSubtitleInfo = models.MediaSubtitleInfo;
 const AiRecognitionTaskAsrFullTextResultInput = models.AiRecognitionTaskAsrFullTextResultInput;
 const MediaMiniProgramReviewInfoItem = models.MediaMiniProgramReviewInfoItem;
 const TaskStatData = models.TaskStatData;
 const CreateVodDomainRequest = models.CreateVodDomainRequest;
 const OcrFullTextConfigureInfoForUpdate = models.OcrFullTextConfigureInfoForUpdate;
-const ProcessMediaByProcedureRequest = models.ProcessMediaByProcedureRequest;
+const DeleteRoundPlayRequest = models.DeleteRoundPlayRequest;
+const SuperResolutionInfo = models.SuperResolutionInfo;
 const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
 const ProcessMediaResponse = models.ProcessMediaResponse;
@@ -177,14 +185,16 @@ const ModifyAIAnalysisTemplateResponse = models.ModifyAIAnalysisTemplateResponse
 const LiveRealTimeClipRequest = models.LiveRealTimeClipRequest;
 const DeleteAdaptiveDynamicStreamingTemplateRequest = models.DeleteAdaptiveDynamicStreamingTemplateRequest;
 const AiRecognitionTaskOcrFullTextSegmentItem = models.AiRecognitionTaskOcrFullTextSegmentItem;
+const ColorEnhanceInfo = models.ColorEnhanceInfo;
 const SplitMediaTaskSegmentInfo = models.SplitMediaTaskSegmentInfo;
 const AiReviewPornAsrTaskOutput = models.AiReviewPornAsrTaskOutput;
 const AiRecognitionTaskAsrFullTextResultOutputSubtitleItem = models.AiRecognitionTaskAsrFullTextResultOutputSubtitleItem;
 const SimpleHlsClipResponse = models.SimpleHlsClipResponse;
 const DeleteAIAnalysisTemplateRequest = models.DeleteAIAnalysisTemplateRequest;
+const VideoFrameInterpolationInfo = models.VideoFrameInterpolationInfo;
 const DescribeFileAttributesResponse = models.DescribeFileAttributesResponse;
 const LicenseUsageDataItem = models.LicenseUsageDataItem;
-const ReviewImageSegmentItem = models.ReviewImageSegmentItem;
+const RebuildMediaTargetAudioStream = models.RebuildMediaTargetAudioStream;
 const ConcatFileInfo2017 = models.ConcatFileInfo2017;
 const ContentReviewResult = models.ContentReviewResult;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
@@ -198,6 +208,7 @@ const MediaMiniProgramReviewInfo = models.MediaMiniProgramReviewInfo;
 const ForbidMediaDistributionResponse = models.ForbidMediaDistributionResponse;
 const TimeRange = models.TimeRange;
 const DescribeAdaptiveDynamicStreamingTemplatesRequest = models.DescribeAdaptiveDynamicStreamingTemplatesRequest;
+const ModifyRoundPlayRequest = models.ModifyRoundPlayRequest;
 const ImageWatermarkInput = models.ImageWatermarkInput;
 const ObjectConfigureInfo = models.ObjectConfigureInfo;
 const AsrFullTextConfigureInfoForUpdate = models.AsrFullTextConfigureInfoForUpdate;
@@ -221,8 +232,10 @@ const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUp
 const AiReviewTaskPornOcrResult = models.AiReviewTaskPornOcrResult;
 const ModifyContentReviewTemplateResponse = models.ModifyContentReviewTemplateResponse;
 const DescribeWatermarkTemplatesRequest = models.DescribeWatermarkTemplatesRequest;
+const ArtifactRepairInfo = models.ArtifactRepairInfo;
 const CoverBySnapshotTaskInput = models.CoverBySnapshotTaskInput;
 const SegmentConfigureInfoForUpdate = models.SegmentConfigureInfoForUpdate;
+const RebuildMediaTaskInput = models.RebuildMediaTaskInput;
 const UserDefineConfigureInfo = models.UserDefineConfigureInfo;
 const AiRecognitionTaskSegmentSegmentItem = models.AiRecognitionTaskSegmentSegmentItem;
 const RestoreMediaTask = models.RestoreMediaTask;
@@ -246,8 +259,11 @@ const RemoveWaterMarkTaskOutput = models.RemoveWaterMarkTaskOutput;
 const ModifyMediaStorageClassRequest = models.ModifyMediaStorageClassRequest;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
 const AiAnalysisTaskHighlightOutput = models.AiAnalysisTaskHighlightOutput;
+const ReviewImageSegmentItem = models.ReviewImageSegmentItem;
+const CreateRoundPlayResponse = models.CreateRoundPlayResponse;
 const MediaSubtitleInput = models.MediaSubtitleInput;
 const ProcessMediaRequest = models.ProcessMediaRequest;
+const FaceEnhanceInfo = models.FaceEnhanceInfo;
 const PornImageResult = models.PornImageResult;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const ModifyReviewTemplateRequest = models.ModifyReviewTemplateRequest;
@@ -255,12 +271,13 @@ const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextRe
 const RestoreMediaResponse = models.RestoreMediaResponse;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
 const ManageTaskRequest = models.ManageTaskRequest;
+const RoundPlayListItemInfo = models.RoundPlayListItemInfo;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
 const ModifyAdaptiveDynamicStreamingTemplateResponse = models.ModifyAdaptiveDynamicStreamingTemplateResponse;
 const MediaProcessTaskTranscodeResult = models.MediaProcessTaskTranscodeResult;
 const DomainDetailInfo = models.DomainDetailInfo;
 const ExtractTraceWatermarkTask = models.ExtractTraceWatermarkTask;
-const ImageProcessingTemplate = models.ImageProcessingTemplate;
+const AiRecognitionTaskSegmentResultOutput = models.AiRecognitionTaskSegmentResultOutput;
 const ImageSpriteTaskInput = models.ImageSpriteTaskInput;
 const ObjectConfigureInfoForUpdate = models.ObjectConfigureInfoForUpdate;
 const DeleteMediaRequest = models.DeleteMediaRequest;
@@ -280,6 +297,7 @@ const DescribeSuperPlayerConfigsResponse = models.DescribeSuperPlayerConfigsResp
 const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
 const DescribeStorageDataRequest = models.DescribeStorageDataRequest;
 const DeleteImageSpriteTemplateResponse = models.DeleteImageSpriteTemplateResponse;
+const LowLightEnhanceInfo = models.LowLightEnhanceInfo;
 const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTemplatesResponse;
 const TEHDConfig = models.TEHDConfig;
 const ImageReviewUsageDataItem = models.ImageReviewUsageDataItem;
@@ -287,7 +305,6 @@ const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const AiRecognitionTaskHeadTailResultOutput = models.AiRecognitionTaskHeadTailResultOutput;
-const AdaptiveDynamicStreamingTaskInput = models.AdaptiveDynamicStreamingTaskInput;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
 const ExtractTraceWatermarkTaskOutput = models.ExtractTraceWatermarkTaskOutput;
 const MediaProcessTaskCoverBySnapshotResult = models.MediaProcessTaskCoverBySnapshotResult;
@@ -358,12 +375,13 @@ const DeleteReviewTemplateRequest = models.DeleteReviewTemplateRequest;
 const AttachMediaSubtitlesResponse = models.AttachMediaSubtitlesResponse;
 const AiContentReviewTaskInput = models.AiContentReviewTaskInput;
 const CreateAdaptiveDynamicStreamingTemplateResponse = models.CreateAdaptiveDynamicStreamingTemplateResponse;
-const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
+const DeleteSampleSnapshotTemplateRequest = models.DeleteSampleSnapshotTemplateRequest;
 const AiAnalysisTaskInput = models.AiAnalysisTaskInput;
 const ImageSpriteTemplate = models.ImageSpriteTemplate;
 const AiRecognitionTaskOcrFullTextSegmentTextItem = models.AiRecognitionTaskOcrFullTextSegmentTextItem;
-const AiRecognitionTaskSegmentResultOutput = models.AiRecognitionTaskSegmentResultOutput;
+const ImageProcessingTemplate = models.ImageProcessingTemplate;
 const SegmentConfigureInfo = models.SegmentConfigureInfo;
+const ScratchRepairInfo = models.ScratchRepairInfo;
 const FileDeleteResultItem = models.FileDeleteResultItem;
 const SnapshotByTimeOffsetTaskInput = models.SnapshotByTimeOffsetTaskInput;
 const RefererAuthPolicy = models.RefererAuthPolicy;
@@ -378,6 +396,8 @@ const MediaBasicInfo = models.MediaBasicInfo;
 const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
 const PullUploadRequest = models.PullUploadRequest;
 const SortBy = models.SortBy;
+const ProcessMediaByProcedureRequest = models.ProcessMediaByProcedureRequest;
+const RebuildMediaTargetVideoStream = models.RebuildMediaTargetVideoStream;
 const ClipTask2017 = models.ClipTask2017;
 const TranscodeTemplate = models.TranscodeTemplate;
 const DescribeCDNUsageDataRequest = models.DescribeCDNUsageDataRequest;
@@ -390,6 +410,7 @@ const PornConfigureInfoForUpdate = models.PornConfigureInfoForUpdate;
 const AiReviewProhibitedAsrTaskInput = models.AiReviewProhibitedAsrTaskInput;
 const MediaContentReviewSegmentItem = models.MediaContentReviewSegmentItem;
 const TerrorismOcrReviewTemplateInfo = models.TerrorismOcrReviewTemplateInfo;
+const CreateRoundPlayRequest = models.CreateRoundPlayRequest;
 const AiReviewTaskPornResult = models.AiReviewTaskPornResult;
 const AiRecognitionTaskObjectResultOutput = models.AiRecognitionTaskObjectResultOutput;
 const DescribeMediaPlayStatDetailsRequest = models.DescribeMediaPlayStatDetailsRequest;
@@ -411,6 +432,7 @@ const WechatPublishTask = models.WechatPublishTask;
 const DescribeCDNStatDetailsRequest = models.DescribeCDNStatDetailsRequest;
 const AiRecognitionTaskOcrFullTextResultInput = models.AiRecognitionTaskOcrFullTextResultInput;
 const DescribeImageReviewUsageDataResponse = models.DescribeImageReviewUsageDataResponse;
+const DeleteRoundPlayResponse = models.DeleteRoundPlayResponse;
 const StatDataItem = models.StatDataItem;
 const CreateStorageRegionResponse = models.CreateStorageRegionResponse;
 const AccelerateAreaInfo = models.AccelerateAreaInfo;
@@ -466,19 +488,23 @@ const MediaInfo = models.MediaInfo;
 const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
 const CreateContentReviewTemplateRequest = models.CreateContentReviewTemplateRequest;
 const DescribeContentReviewTemplatesRequest = models.DescribeContentReviewTemplatesRequest;
-const ImageOperation = models.ImageOperation;
+const AdaptiveDynamicStreamingTaskInput = models.AdaptiveDynamicStreamingTaskInput;
 const DescribeImageSpriteTemplatesResponse = models.DescribeImageSpriteTemplatesResponse;
 const AiAnalysisTaskFrameTagInput = models.AiAnalysisTaskFrameTagInput;
 const MediaAiAnalysisFrameTagSegmentItem = models.MediaAiAnalysisFrameTagSegmentItem;
 const AiRecognitionTaskAsrWordsResultItem = models.AiRecognitionTaskAsrWordsResultItem;
+const RebuildMediaTaskOutput = models.RebuildMediaTaskOutput;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
+const RebuildMediaRequest = models.RebuildMediaRequest;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const MediaKeyFrameDescInfo = models.MediaKeyFrameDescInfo;
 const DeleteImageSpriteTemplateRequest = models.DeleteImageSpriteTemplateRequest;
 const CreateClassRequest = models.CreateClassRequest;
 const AiSampleFailFaceInfo = models.AiSampleFailFaceInfo;
 const UserDefineFaceReviewTemplateInfoForUpdate = models.UserDefineFaceReviewTemplateInfoForUpdate;
+const ModifyRoundPlayResponse = models.ModifyRoundPlayResponse;
 const CreateProcedureTemplateResponse = models.CreateProcedureTemplateResponse;
+const RebuildMediaResponse = models.RebuildMediaResponse;
 const DomainHTTPSConfig = models.DomainHTTPSConfig;
 const DescribeMediaProcessUsageDataResponse = models.DescribeMediaProcessUsageDataResponse;
 const DescribeSuperPlayerConfigsRequest = models.DescribeSuperPlayerConfigsRequest;
@@ -510,6 +536,7 @@ const DescribeVodDomainsRequest = models.DescribeVodDomainsRequest;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const DescribeReviewDetailsResponse = models.DescribeReviewDetailsResponse;
 const CreateTranscodeTemplateResponse = models.CreateTranscodeTemplateResponse;
+const AudioDenoiseInfo = models.AudioDenoiseInfo;
 const AiRecognitionTaskAsrWordsResultInput = models.AiRecognitionTaskAsrWordsResultInput;
 const SnapshotByTimeOffset2017 = models.SnapshotByTimeOffset2017;
 const CreateAIAnalysisTemplateRequest = models.CreateAIAnalysisTemplateRequest;
@@ -536,16 +563,19 @@ const ReviewAudioVideoResponse = models.ReviewAudioVideoResponse;
 const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const ReviewTemplate = models.ReviewTemplate;
-const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
+const ImageOperation = models.ImageOperation;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
+const DescribeRoundPlaysResponse = models.DescribeRoundPlaysResponse;
 const ImageTransform = models.ImageTransform;
 const CreateAnimatedGraphicsTemplateRequest = models.CreateAnimatedGraphicsTemplateRequest;
 const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
 const RemoveWatermarkRequest = models.RemoveWatermarkRequest;
 const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
+const RebuildMediaTask = models.RebuildMediaTask;
 const ConfirmEventsResponse = models.ConfirmEventsResponse;
 const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const VideoTrackItem = models.VideoTrackItem;
+const VideoDenoiseInfo = models.VideoDenoiseInfo;
 const DescribeLicenseUsageDataRequest = models.DescribeLicenseUsageDataRequest;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const MediaTranscodeItem = models.MediaTranscodeItem;
@@ -616,7 +646,7 @@ const PullUploadTask = models.PullUploadTask;
 const FrameTagConfigureInfoForUpdate = models.FrameTagConfigureInfoForUpdate;
 const CreateImageSpriteTemplateResponse = models.CreateImageSpriteTemplateResponse;
 const DescribeAIRecognitionTemplatesRequest = models.DescribeAIRecognitionTemplatesRequest;
-const ReduceMediaBitrateTranscodeResult = models.ReduceMediaBitrateTranscodeResult;
+const HDRInfo = models.HDRInfo;
 const ModifyWatermarkTemplateResponse = models.ModifyWatermarkTemplateResponse;
 const AiRecognitionResult = models.AiRecognitionResult;
 
@@ -643,14 +673,16 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a custom time point screencapturing template. Up to 16 templates can be created.
-     * @param {CreateSnapshotByTimeOffsetTemplateRequest} req
-     * @param {function(string, CreateSnapshotByTimeOffsetTemplateResponse):void} cb
+     * This API is used to create a playlist. You can create at most 100 playlists.
+For each video on the list, you can either use the original file or a transcoding file.
+The files must be in HLS format. Preferably, they should have the same bitrate and resolution.
+     * @param {CreateRoundPlayRequest} req
+     * @param {function(string, CreateRoundPlayResponse):void} cb
      * @public
      */
-    CreateSnapshotByTimeOffsetTemplate(req, cb) {
-        let resp = new CreateSnapshotByTimeOffsetTemplateResponse();
-        this.request("CreateSnapshotByTimeOffsetTemplate", req, resp, cb);
+    CreateRoundPlay(req, cb) {
+        let resp = new CreateRoundPlayResponse();
+        this.request("CreateRoundPlay", req, resp, cb);
     }
 
     /**
@@ -712,14 +744,14 @@ class VodClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete a custom animated image generating template.
-     * @param {DeleteAnimatedGraphicsTemplateRequest} req
-     * @param {function(string, DeleteAnimatedGraphicsTemplateResponse):void} cb
+     * This API is used to create a custom time point screencapturing template. Up to 16 templates can be created.
+     * @param {CreateSnapshotByTimeOffsetTemplateRequest} req
+     * @param {function(string, CreateSnapshotByTimeOffsetTemplateResponse):void} cb
      * @public
      */
-    DeleteAnimatedGraphicsTemplate(req, cb) {
-        let resp = new DeleteAnimatedGraphicsTemplateResponse();
-        this.request("DeleteAnimatedGraphicsTemplate", req, resp, cb);
+    CreateSnapshotByTimeOffsetTemplate(req, cb) {
+        let resp = new CreateSnapshotByTimeOffsetTemplateResponse();
+        this.request("CreateSnapshotByTimeOffsetTemplate", req, resp, cb);
     }
 
     /**
@@ -941,16 +973,14 @@ This API returns the video content duration for intelligent recognition in secon
     }
 
     /**
-     * This API is used to enable storage in a region.
-  1. When you activate VOD, the system will enable storage for you in certain regions. If you need to store data in another region, you can use this API to enable storage in that region.
-  2. You can use the `DescribeStorageRegions` API to query all supported storage regions and the regions you have storage access to currently.
-     * @param {CreateStorageRegionRequest} req
-     * @param {function(string, CreateStorageRegionResponse):void} cb
+     * This API is used to create keyword samples in batches for using OCR and ASR technologies to perform video processing operations such as content recognition and inappropriate information recognition.
+     * @param {CreateWordSamplesRequest} req
+     * @param {function(string, CreateWordSamplesResponse):void} cb
      * @public
      */
-    CreateStorageRegion(req, cb) {
-        let resp = new CreateStorageRegionResponse();
-        this.request("CreateStorageRegion", req, resp, cb);
+    CreateWordSamples(req, cb) {
+        let resp = new CreateWordSamplesResponse();
+        this.request("CreateWordSamples", req, resp, cb);
     }
 
     /**
@@ -1158,6 +1188,17 @@ This API is used to create a custom audio/video moderation template. Up to 50 te
     CreateContentReviewTemplate(req, cb) {
         let resp = new CreateContentReviewTemplateResponse();
         this.request("CreateContentReviewTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remaster audio/video.
+     * @param {RebuildMediaRequest} req
+     * @param {function(string, RebuildMediaResponse):void} cb
+     * @public
+     */
+    RebuildMedia(req, cb) {
+        let resp = new RebuildMediaResponse();
+        this.request("RebuildMedia", req, resp, cb);
     }
 
     /**
@@ -1403,14 +1444,39 @@ If event notifications are used, the event type is [ReviewAudioVideoComplete](ht
     }
 
     /**
-     * This API is used to modify sample information according to the sample ID. You can modify the name and description, add, delete, and reset facial features or tags. Leave at least one image after deleting facial features. To leave no image, please use the reset operation.
-     * @param {ModifyPersonSampleRequest} req
-     * @param {function(string, ModifyPersonSampleResponse):void} cb
+     * This API is used to enable storage in a region.
+  1. When you activate VOD, the system will enable storage for you in certain regions. If you need to store data in another region, you can use this API to enable storage in that region.
+  2. You can use the `DescribeStorageRegions` API to query all supported storage regions and the regions you have storage access to currently.
+     * @param {CreateStorageRegionRequest} req
+     * @param {function(string, CreateStorageRegionResponse):void} cb
      * @public
      */
-    ModifyPersonSample(req, cb) {
-        let resp = new ModifyPersonSampleResponse();
-        this.request("ModifyPersonSample", req, resp, cb);
+    CreateStorageRegion(req, cb) {
+        let resp = new CreateStorageRegionResponse();
+        this.request("CreateStorageRegion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a playlist.
+The modification will only take effect for new playback requests. For ongoing playback, the old playlist will be playable for seven days after the modification.
+     * @param {ModifyRoundPlayRequest} req
+     * @param {function(string, ModifyRoundPlayResponse):void} cb
+     * @public
+     */
+    ModifyRoundPlay(req, cb) {
+        let resp = new ModifyRoundPlayResponse();
+        this.request("ModifyRoundPlay", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a custom animated image generating template.
+     * @param {DeleteAnimatedGraphicsTemplateRequest} req
+     * @param {function(string, DeleteAnimatedGraphicsTemplateResponse):void} cb
+     * @public
+     */
+    DeleteAnimatedGraphicsTemplate(req, cb) {
+        let resp = new DeleteAnimatedGraphicsTemplateResponse();
+        this.request("DeleteAnimatedGraphicsTemplate", req, resp, cb);
     }
 
     /**
@@ -1662,6 +1728,17 @@ If event notifications are used, the event type is [ProcedureStateChanged](https
     }
 
     /**
+     * This API is used to modify sample information according to the sample ID. You can modify the name and description, add, delete, and reset facial features or tags. Leave at least one image after deleting facial features. To leave no image, please use the reset operation.
+     * @param {ModifyPersonSampleRequest} req
+     * @param {function(string, ModifyPersonSampleResponse):void} cb
+     * @public
+     */
+    ModifyPersonSample(req, cb) {
+        let resp = new ModifyPersonSampleResponse();
+        this.request("ModifyPersonSample", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of animated image generating templates and supports paged queries by filters.
      * @param {DescribeAnimatedGraphicsTemplatesRequest} req
      * @param {function(string, DescribeAnimatedGraphicsTemplatesResponse):void} cb
@@ -1746,14 +1823,14 @@ This API is used to modify a player configuration.
     }
 
     /**
-     * This API is used to create keyword samples in batches for using OCR and ASR technologies to perform video processing operations such as content recognition and inappropriate information recognition.
-     * @param {CreateWordSamplesRequest} req
-     * @param {function(string, CreateWordSamplesResponse):void} cb
+     * This API is used to query playlists.
+     * @param {DescribeRoundPlaysRequest} req
+     * @param {function(string, DescribeRoundPlaysResponse):void} cb
      * @public
      */
-    CreateWordSamples(req, cb) {
-        let resp = new CreateWordSamplesResponse();
-        this.request("CreateWordSamples", req, resp, cb);
+    DescribeRoundPlays(req, cb) {
+        let resp = new DescribeRoundPlaysResponse();
+        this.request("DescribeRoundPlays", req, resp, cb);
     }
 
     /**
@@ -2141,6 +2218,17 @@ Clipping for temporary sharing is lightweight and incurs no additional storage f
     ModifySubAppIdStatus(req, cb) {
         let resp = new ModifySubAppIdStatusResponse();
         this.request("ModifySubAppIdStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a playlist.
+     * @param {DeleteRoundPlayRequest} req
+     * @param {function(string, DeleteRoundPlayResponse):void} cb
+     * @public
+     */
+    DeleteRoundPlay(req, cb) {
+        let resp = new DeleteRoundPlayResponse();
+        this.request("DeleteRoundPlay", req, resp, cb);
     }
 
     /**

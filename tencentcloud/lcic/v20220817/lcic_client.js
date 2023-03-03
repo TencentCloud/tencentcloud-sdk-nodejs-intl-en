@@ -17,35 +17,95 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateRoomRequest = models.CreateRoomRequest;
-const SetAppCustomContentRequest = models.SetAppCustomContentRequest;
+const ModifyRoomResponse = models.ModifyRoomResponse;
+const GetWatermarkResponse = models.GetWatermarkResponse;
+const BatchDeleteRecordRequest = models.BatchDeleteRecordRequest;
+const BatchRegisterRequest = models.BatchRegisterRequest;
+const DeleteRoomResponse = models.DeleteRoomResponse;
+const ModifyUserProfileRequest = models.ModifyUserProfileRequest;
+const CreateGroupWithMembersRequest = models.CreateGroupWithMembersRequest;
+const DescribeDocumentsByRoomRequest = models.DescribeDocumentsByRoomRequest;
+const BatchCreateGroupWithMembersResponse = models.BatchCreateGroupWithMembersResponse;
+const CreateGroupWithMembersResponse = models.CreateGroupWithMembersResponse;
+const BatchAddGroupMemberResponse = models.BatchAddGroupMemberResponse;
+const ModifyUserProfileResponse = models.ModifyUserProfileResponse;
+const ModifyAppResponse = models.ModifyAppResponse;
+const LoginOriginIdRequest = models.LoginOriginIdRequest;
+const BatchRegisterResponse = models.BatchRegisterResponse;
+const BindDocumentToRoomResponse = models.BindDocumentToRoomResponse;
+const CreateGroupWithSubGroupRequest = models.CreateGroupWithSubGroupRequest;
+const SetWatermarkRequest = models.SetWatermarkRequest;
+const DescribeRoomRequest = models.DescribeRoomRequest;
+const BatchCreateRoomResponse = models.BatchCreateRoomResponse;
 const UnbindDocumentFromRoomResponse = models.UnbindDocumentFromRoomResponse;
-const DescribeUserRequest = models.DescribeUserRequest;
 const CreateDocumentResponse = models.CreateDocumentResponse;
-const DescribeRoomStatisticsRequest = models.DescribeRoomStatisticsRequest;
+const DescribeGroupResponse = models.DescribeGroupResponse;
+const SetAppCustomContentResponse = models.SetAppCustomContentResponse;
+const BatchUserRequest = models.BatchUserRequest;
+const LoginUserResponse = models.LoginUserResponse;
+const ModifyGroupRequest = models.ModifyGroupRequest;
+const DeleteGroupRequest = models.DeleteGroupRequest;
+const AddGroupMemberRequest = models.AddGroupMemberRequest;
+const DescribeGroupListRequest = models.DescribeGroupListRequest;
+const DocumentInfo = models.DocumentInfo;
+const DeleteDocumentResponse = models.DeleteDocumentResponse;
+const DeleteRecordRequest = models.DeleteRecordRequest;
+const BatchDeleteGroupMemberResponse = models.BatchDeleteGroupMemberResponse;
+const CreateGroupWithSubGroupResponse = models.CreateGroupWithSubGroupResponse;
+const GroupInfo = models.GroupInfo;
+const DescribeDocumentResponse = models.DescribeDocumentResponse;
+const DeleteGroupMemberResponse = models.DeleteGroupMemberResponse;
+const DescribeGroupMemberListResponse = models.DescribeGroupMemberListResponse;
+const SetWatermarkResponse = models.SetWatermarkResponse;
+const BatchCreateRoomRequest = models.BatchCreateRoomRequest;
+const DescribeGroupMemberListRequest = models.DescribeGroupMemberListRequest;
+const UserInfo = models.UserInfo;
+const DescribeUserResponse = models.DescribeUserResponse;
+const DescribeDocumentRequest = models.DescribeDocumentRequest;
+const BatchDeleteRecordResponse = models.BatchDeleteRecordResponse;
+const WatermarkConfig = models.WatermarkConfig;
+const SetAppCustomContentRequest = models.SetAppCustomContentRequest;
+const DescribeUserRequest = models.DescribeUserRequest;
+const BatchCreateGroupWithMembersRequest = models.BatchCreateGroupWithMembersRequest;
 const BindDocumentToRoomRequest = models.BindDocumentToRoomRequest;
 const CreateDocumentRequest = models.CreateDocumentRequest;
-const SetAppCustomContentResponse = models.SetAppCustomContentResponse;
-const LoginOriginIdResponse = models.LoginOriginIdResponse;
-const LoginUserResponse = models.LoginUserResponse;
+const BatchUserInfo = models.BatchUserInfo;
+const BatchAddGroupMemberRequest = models.BatchAddGroupMemberRequest;
 const DescribeRoomResponse = models.DescribeRoomResponse;
-const DeleteRoomResponse = models.DeleteRoomResponse;
-const AppCustomContent = models.AppCustomContent;
+const DescribeCurrentMemberListRequest = models.DescribeCurrentMemberListRequest;
+const DescribeSdkAppIdUsersResponse = models.DescribeSdkAppIdUsersResponse;
 const DescribeRoomStatisticsResponse = models.DescribeRoomStatisticsResponse;
+const DeleteDocumentRequest = models.DeleteDocumentRequest;
+const DeleteGroupMemberRequest = models.DeleteGroupMemberRequest;
+const GetWatermarkRequest = models.GetWatermarkRequest;
+const MemberRecord = models.MemberRecord;
+const BatchDeleteGroupMemberRequest = models.BatchDeleteGroupMemberRequest;
+const ModifyAppRequest = models.ModifyAppRequest;
+const UnbindDocumentFromRoomRequest = models.UnbindDocumentFromRoomRequest;
+const RegisterUserRequest = models.RegisterUserRequest;
+const GroupBaseInfo = models.GroupBaseInfo;
+const LoginUserRequest = models.LoginUserRequest;
+const DeleteRecordResponse = models.DeleteRecordResponse;
+const RoomInfo = models.RoomInfo;
+const DescribeDocumentsByRoomResponse = models.DescribeDocumentsByRoomResponse;
+const DescribeRoomStatisticsRequest = models.DescribeRoomStatisticsRequest;
+const ModifyRoomRequest = models.ModifyRoomRequest;
+const LoginOriginIdResponse = models.LoginOriginIdResponse;
+const AppCustomContent = models.AppCustomContent;
+const DeleteGroupResponse = models.DeleteGroupResponse;
+const DescribeSdkAppIdUsersRequest = models.DescribeSdkAppIdUsersRequest;
 const CreateSupervisorResponse = models.CreateSupervisorResponse;
 const DeleteRoomRequest = models.DeleteRoomRequest;
 const RegisterUserResponse = models.RegisterUserResponse;
-const ModifyAppResponse = models.ModifyAppResponse;
-const MemberRecord = models.MemberRecord;
-const ModifyAppRequest = models.ModifyAppRequest;
+const DescribeGroupRequest = models.DescribeGroupRequest;
 const CreateSupervisorRequest = models.CreateSupervisorRequest;
-const UnbindDocumentFromRoomRequest = models.UnbindDocumentFromRoomRequest;
-const LoginOriginIdRequest = models.LoginOriginIdRequest;
-const RegisterUserRequest = models.RegisterUserRequest;
-const LoginUserRequest = models.LoginUserRequest;
-const BindDocumentToRoomResponse = models.BindDocumentToRoomResponse;
+const BackgroundPictureConfig = models.BackgroundPictureConfig;
+const DescribeCurrentMemberListResponse = models.DescribeCurrentMemberListResponse;
+const ModifyGroupResponse = models.ModifyGroupResponse;
+const DescribeGroupListResponse = models.DescribeGroupListResponse;
 const CreateRoomResponse = models.CreateRoomResponse;
-const DescribeUserResponse = models.DescribeUserResponse;
-const DescribeRoomRequest = models.DescribeRoomRequest;
+const AddGroupMemberResponse = models.AddGroupMemberResponse;
+const TextMarkConfig = models.TextMarkConfig;
 
 
 /**
@@ -59,47 +119,69 @@ class LcicClient extends AbstractClient {
     }
     
     /**
-     * This API is used to create a document to be used in a room.
-     * @param {CreateDocumentRequest} req
-     * @param {function(string, CreateDocumentResponse):void} cb
+     * This API is used to configure watermarks.
+     * @param {SetWatermarkRequest} req
+     * @param {function(string, SetWatermarkResponse):void} cb
      * @public
      */
-    CreateDocument(req, cb) {
-        let resp = new CreateDocumentResponse();
-        this.request("CreateDocument", req, resp, cb);
+    SetWatermark(req, cb) {
+        let resp = new SetWatermarkResponse();
+        this.request("SetWatermark", req, resp, cb);
     }
 
     /**
-     * This API is used to set or update the custom content of an application, including the application icon and custom code. After you update JS and CSS content, you also need to call this API for the updates to take effect.
-     * @param {SetAppCustomContentRequest} req
-     * @param {function(string, SetAppCustomContentResponse):void} cb
+     * This API is used to get the document list of a specific room.
+     * @param {DescribeDocumentsByRoomRequest} req
+     * @param {function(string, DescribeDocumentsByRoomResponse):void} cb
      * @public
      */
-    SetAppCustomContent(req, cb) {
-        let resp = new SetAppCustomContentResponse();
-        this.request("SetAppCustomContent", req, resp, cb);
+    DescribeDocumentsByRoom(req, cb) {
+        let resp = new DescribeDocumentsByRoomResponse();
+        this.request("DescribeDocumentsByRoom", req, resp, cb);
     }
 
     /**
-     * This API is used to obtain the statistics of a room. It can be called only after the room is ended.
-     * @param {DescribeRoomStatisticsRequest} req
-     * @param {function(string, DescribeRoomStatisticsResponse):void} cb
+     * This API is used to modify a room.
+     * @param {ModifyRoomRequest} req
+     * @param {function(string, ModifyRoomResponse):void} cb
      * @public
      */
-    DescribeRoomStatistics(req, cb) {
-        let resp = new DescribeRoomStatisticsResponse();
-        this.request("DescribeRoomStatistics", req, resp, cb);
+    ModifyRoom(req, cb) {
+        let resp = new ModifyRoomResponse();
+        this.request("ModifyRoom", req, resp, cb);
     }
 
     /**
-     * This API is used to delete a room.
-     * @param {DeleteRoomRequest} req
-     * @param {function(string, DeleteRoomResponse):void} cb
+     * This API is used to get watermark settings.
+     * @param {GetWatermarkRequest} req
+     * @param {function(string, GetWatermarkResponse):void} cb
      * @public
      */
-    DeleteRoom(req, cb) {
-        let resp = new DeleteRoomResponse();
-        this.request("DeleteRoom", req, resp, cb);
+    GetWatermark(req, cb) {
+        let resp = new GetWatermarkResponse();
+        this.request("GetWatermark", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the details of a group.
+     * @param {DescribeGroupRequest} req
+     * @param {function(string, DescribeGroupResponse):void} cb
+     * @public
+     */
+    DescribeGroup(req, cb) {
+        let resp = new DescribeGroupResponse();
+        this.request("DescribeGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an application.
+     * @param {ModifyAppRequest} req
+     * @param {function(string, ModifyAppResponse):void} cb
+     * @public
+     */
+    ModifyApp(req, cb) {
+        let resp = new ModifyAppResponse();
+        this.request("ModifyApp", req, resp, cb);
     }
 
     /**
@@ -111,6 +193,182 @@ class LcicClient extends AbstractClient {
     UnbindDocumentFromRoom(req, cb) {
         let resp = new UnbindDocumentFromRoomResponse();
         this.request("UnbindDocumentFromRoom", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the user list of a specific application.
+     * @param {DescribeSdkAppIdUsersRequest} req
+     * @param {function(string, DescribeSdkAppIdUsersResponse):void} cb
+     * @public
+     */
+    DescribeSdkAppIdUsers(req, cb) {
+        let resp = new DescribeSdkAppIdUsersResponse();
+        this.request("DescribeSdkAppIdUsers", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove users from a group.
+     * @param {DeleteGroupMemberRequest} req
+     * @param {function(string, DeleteGroupMemberResponse):void} cb
+     * @public
+     */
+    DeleteGroupMember(req, cb) {
+        let resp = new DeleteGroupMemberResponse();
+        this.request("DeleteGroupMember", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a document to be used in a room.
+     * @param {CreateDocumentRequest} req
+     * @param {function(string, CreateDocumentResponse):void} cb
+     * @public
+     */
+    CreateDocument(req, cb) {
+        let resp = new CreateDocumentResponse();
+        this.request("CreateDocument", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete one or multiple groups.
+     * @param {DeleteGroupRequest} req
+     * @param {function(string, DeleteGroupResponse):void} cb
+     * @public
+     */
+    DeleteGroup(req, cb) {
+        let resp = new DeleteGroupResponse();
+        this.request("DeleteGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain user profile.
+     * @param {DescribeUserRequest} req
+     * @param {function(string, DescribeUserResponse):void} cb
+     * @public
+     */
+    DescribeUser(req, cb) {
+        let resp = new DescribeUserResponse();
+        this.request("DescribeUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a group.
+     * @param {ModifyGroupRequest} req
+     * @param {function(string, ModifyGroupResponse):void} cb
+     * @public
+     */
+    ModifyGroup(req, cb) {
+        let resp = new ModifyGroupResponse();
+        this.request("ModifyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to register multiple users (up to 1,000) at a time. If a user ID already exists, the existing one will be overwritten.
+     * @param {BatchRegisterRequest} req
+     * @param {function(string, BatchRegisterResponse):void} cb
+     * @public
+     */
+    BatchRegister(req, cb) {
+        let resp = new BatchRegisterResponse();
+        this.request("BatchRegister", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add users to multiple groups at a time.
+     * @param {BatchAddGroupMemberRequest} req
+     * @param {function(string, BatchAddGroupMemberResponse):void} cb
+     * @public
+     */
+    BatchAddGroupMember(req, cb) {
+        let resp = new BatchAddGroupMemberResponse();
+        this.request("BatchAddGroupMember", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove users from multiple groups at a time.
+     * @param {BatchDeleteGroupMemberRequest} req
+     * @param {function(string, BatchDeleteGroupMemberResponse):void} cb
+     * @public
+     */
+    BatchDeleteGroupMember(req, cb) {
+        let resp = new BatchDeleteGroupMemberResponse();
+        this.request("BatchDeleteGroupMember", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get room information.
+     * @param {DescribeRoomRequest} req
+     * @param {function(string, DescribeRoomResponse):void} cb
+     * @public
+     */
+    DescribeRoom(req, cb) {
+        let resp = new DescribeRoomResponse();
+        this.request("DescribeRoom", req, resp, cb);
+    }
+
+    /**
+     * This example shows you how to delete the recording files of a specific room.
+     * @param {DeleteRecordRequest} req
+     * @param {function(string, DeleteRecordResponse):void} cb
+     * @public
+     */
+    DeleteRecord(req, cb) {
+        let resp = new DeleteRecordResponse();
+        this.request("DeleteRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query groups.
+     * @param {DescribeGroupListRequest} req
+     * @param {function(string, DescribeGroupListResponse):void} cb
+     * @public
+     */
+    DescribeGroupList(req, cb) {
+        let resp = new DescribeGroupListResponse();
+        this.request("DescribeGroupList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a user profile such as the nickname and profile photo.
+     * @param {ModifyUserProfileRequest} req
+     * @param {function(string, ModifyUserProfileResponse):void} cb
+     * @public
+     */
+    ModifyUserProfile(req, cb) {
+        let resp = new ModifyUserProfileResponse();
+        this.request("ModifyUserProfile", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add users to a group.
+     * @param {AddGroupMemberRequest} req
+     * @param {function(string, AddGroupMemberResponse):void} cb
+     * @public
+     */
+    AddGroupMember(req, cb) {
+        let resp = new AddGroupMemberResponse();
+        this.request("AddGroupMember", req, resp, cb);
+    }
+
+    /**
+     * This API is used to register a user.
+     * @param {RegisterUserRequest} req
+     * @param {function(string, RegisterUserResponse):void} cb
+     * @public
+     */
+    RegisterUser(req, cb) {
+        let resp = new RegisterUserResponse();
+        this.request("RegisterUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the statistics of a room. It can be called only after the room is ended.
+     * @param {DescribeRoomStatisticsRequest} req
+     * @param {function(string, DescribeRoomStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeRoomStatistics(req, cb) {
+        let resp = new DescribeRoomStatisticsResponse();
+        this.request("DescribeRoomStatistics", req, resp, cb);
     }
 
     /**
@@ -136,28 +394,6 @@ class LcicClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain user profile.
-     * @param {DescribeUserRequest} req
-     * @param {function(string, DescribeUserResponse):void} cb
-     * @public
-     */
-    DescribeUser(req, cb) {
-        let resp = new DescribeUserResponse();
-        this.request("DescribeUser", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify an application.
-     * @param {ModifyAppRequest} req
-     * @param {function(string, ModifyAppResponse):void} cb
-     * @public
-     */
-    ModifyApp(req, cb) {
-        let resp = new ModifyAppResponse();
-        this.request("ModifyApp", req, resp, cb);
-    }
-
-    /**
      * This API is used to log in.
      * @param {LoginUserRequest} req
      * @param {function(string, LoginUserResponse):void} cb
@@ -166,6 +402,17 @@ class LcicClient extends AbstractClient {
     LoginUser(req, cb) {
         let resp = new LoginUserResponse();
         this.request("LoginUser", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a group and specify its members.
+     * @param {CreateGroupWithMembersRequest} req
+     * @param {function(string, CreateGroupWithMembersResponse):void} cb
+     * @public
+     */
+    CreateGroupWithMembers(req, cb) {
+        let resp = new CreateGroupWithMembersResponse();
+        this.request("CreateGroupWithMembers", req, resp, cb);
     }
 
     /**
@@ -180,25 +427,113 @@ class LcicClient extends AbstractClient {
     }
 
     /**
-     * This API is used to register a user.
-     * @param {RegisterUserRequest} req
-     * @param {function(string, RegisterUserResponse):void} cb
+     * This API is used to set or update the custom content of an application, including the application icon and custom code. After you update JS and CSS content, you also need to call this API for the updates to take effect.
+     * @param {SetAppCustomContentRequest} req
+     * @param {function(string, SetAppCustomContentResponse):void} cb
      * @public
      */
-    RegisterUser(req, cb) {
-        let resp = new RegisterUserResponse();
-        this.request("RegisterUser", req, resp, cb);
+    SetAppCustomContent(req, cb) {
+        let resp = new SetAppCustomContentResponse();
+        this.request("SetAppCustomContent", req, resp, cb);
     }
 
     /**
-     * This API is used to get room information.
-     * @param {DescribeRoomRequest} req
-     * @param {function(string, DescribeRoomResponse):void} cb
+     * This API is used to get the members of a group.
+     * @param {DescribeGroupMemberListRequest} req
+     * @param {function(string, DescribeGroupMemberListResponse):void} cb
      * @public
      */
-    DescribeRoom(req, cb) {
-        let resp = new DescribeRoomResponse();
-        this.request("DescribeRoom", req, resp, cb);
+    DescribeGroupMemberList(req, cb) {
+        let resp = new DescribeGroupMemberListResponse();
+        this.request("DescribeGroupMemberList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the user list of a room. This API will not work if a room has ended or expired.
+     * @param {DescribeCurrentMemberListRequest} req
+     * @param {function(string, DescribeCurrentMemberListResponse):void} cb
+     * @public
+     */
+    DescribeCurrentMemberList(req, cb) {
+        let resp = new DescribeCurrentMemberListResponse();
+        this.request("DescribeCurrentMemberList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create multiple rooms at a time.
+     * @param {BatchCreateRoomRequest} req
+     * @param {function(string, BatchCreateRoomResponse):void} cb
+     * @public
+     */
+    BatchCreateRoom(req, cb) {
+        let resp = new BatchCreateRoomResponse();
+        this.request("BatchCreateRoom", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a document.
+     * @param {DeleteDocumentRequest} req
+     * @param {function(string, DeleteDocumentResponse):void} cb
+     * @public
+     */
+    DeleteDocument(req, cb) {
+        let resp = new DeleteDocumentResponse();
+        this.request("DeleteDocument", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the recordings of multiple rooms.
+     * @param {BatchDeleteRecordRequest} req
+     * @param {function(string, BatchDeleteRecordResponse):void} cb
+     * @public
+     */
+    BatchDeleteRecord(req, cb) {
+        let resp = new BatchDeleteRecordResponse();
+        this.request("BatchDeleteRecord", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a room.
+     * @param {DeleteRoomRequest} req
+     * @param {function(string, DeleteRoomResponse):void} cb
+     * @public
+     */
+    DeleteRoom(req, cb) {
+        let resp = new DeleteRoomResponse();
+        this.request("DeleteRoom", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the information of a specific document.
+     * @param {DescribeDocumentRequest} req
+     * @param {function(string, DescribeDocumentResponse):void} cb
+     * @public
+     */
+    DescribeDocument(req, cb) {
+        let resp = new DescribeDocumentResponse();
+        this.request("DescribeDocument", req, resp, cb);
+    }
+
+    /**
+     * This API is used to merge groups.
+     * @param {CreateGroupWithSubGroupRequest} req
+     * @param {function(string, CreateGroupWithSubGroupResponse):void} cb
+     * @public
+     */
+    CreateGroupWithSubGroup(req, cb) {
+        let resp = new CreateGroupWithSubGroupResponse();
+        this.request("CreateGroupWithSubGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create multiple groups at a time.
+     * @param {BatchCreateGroupWithMembersRequest} req
+     * @param {function(string, BatchCreateGroupWithMembersResponse):void} cb
+     * @public
+     */
+    BatchCreateGroupWithMembers(req, cb) {
+        let resp = new BatchCreateGroupWithMembersResponse();
+        this.request("BatchCreateGroupWithMembers", req, resp, cb);
     }
 
     /**

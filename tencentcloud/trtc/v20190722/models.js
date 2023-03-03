@@ -1381,6 +1381,13 @@ This parameter is invalid if the output format is HLS.
          */
         this.MaxMediaFileDuration = null;
 
+        /**
+         * The type of stream to record. `0`: The primary stream and substream; `1`: The primary stream; `2`: The substream.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MediaId = null;
+
     }
 
     /**
@@ -1402,6 +1409,7 @@ This parameter is invalid if the output format is HLS.
         this.OutputFormat = 'OutputFormat' in params ? params.OutputFormat : null;
         this.AvMerge = 'AvMerge' in params ? params.AvMerge : null;
         this.MaxMediaFileDuration = 'MaxMediaFileDuration' in params ? params.MaxMediaFileDuration : null;
+        this.MediaId = 'MediaId' in params ? params.MediaId : null;
 
     }
 }

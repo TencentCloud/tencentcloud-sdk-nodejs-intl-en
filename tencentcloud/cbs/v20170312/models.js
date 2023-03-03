@@ -17,38 +17,12 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * The snapshot operation log.
+ * Snapshot operation log (disused).
  * @class
  */
 class SnapshotOperationLog extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * UIN of operator.
-Note: This field may return null, indicating that no valid value was found.
-         * @type {string || null}
-         */
-        this.Operator = null;
-
-        /**
-         * Operation type. Value range:
-SNAP_OPERATION_DELETE: Delete snapshot
-SNAP_OPERATION_ROLLBACK: Roll back snapshot
-SNAP_OPERATION_MODIFY: Modify snapshot attributes
-SNAP_OPERATION_CREATE: Create snapshot
-SNAP_OPERATION_COPY: Cross-region replication of snapshot
-ASP_OPERATION_CREATE_SNAP: Create snapshot with scheduled snapshot policy
-ASP_OPERATION_DELETE_SNAP: Delete snapshot from scheduled snapshot policy
-         * @type {string || null}
-         */
-        this.Operation = null;
-
-        /**
-         * ID of snapshot being operated.
-         * @type {string || null}
-         */
-        this.SnapshotId = null;
 
         /**
          * Status of operation. Value range:
@@ -66,6 +40,32 @@ PROCESSING: Operation in process
         this.StartTime = null;
 
         /**
+         * UIN of operator.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * ID of snapshot being operated.
+         * @type {string || null}
+         */
+        this.SnapshotId = null;
+
+        /**
+         * Operation type. Value range:
+SNAP_OPERATION_DELETE: Delete snapshot
+SNAP_OPERATION_ROLLBACK: Roll back snapshot
+SNAP_OPERATION_MODIFY: Modify snapshot attributes
+SNAP_OPERATION_CREATE: Create snapshot
+SNAP_OPERATION_COPY: Cross-region replication of snapshot
+ASP_OPERATION_CREATE_SNAP: Create snapshot with scheduled snapshot policy
+ASP_OPERATION_DELETE_SNAP: Delete snapshot from scheduled snapshot policy
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
          * End time
          * @type {string || null}
          */
@@ -80,11 +80,11 @@ PROCESSING: Operation in process
         if (!params) {
             return;
         }
-        this.Operator = 'Operator' in params ? params.Operator : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
-        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.OperationState = 'OperationState' in params ? params.OperationState : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
@@ -396,6 +396,41 @@ class DescribeSnapshotOperationLogsRequest extends  AbstractModel {
         }
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * CreateDiskBackup request structure.
+ * @class
+ */
+class CreateDiskBackupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the cloud disk for which to create a backup point.
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+        /**
+         * Name of the cloud disk backup point, which can contain up to 100 characters.
+         * @type {string || null}
+         */
+        this.DiskBackupName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskBackupName = 'DiskBackupName' in params ? params.DiskBackupName : null;
 
     }
 }
@@ -1727,6 +1762,12 @@ Note: This field may return null, indicating that no valid value was found.
         this.DeleteSnapshot = null;
 
         /**
+         * Quota of cloud disk backup points, i.e., the maximum number of backup points that a cloud disk can have.
+         * @type {number || null}
+         */
+        this.DiskBackupQuota = null;
+
+        /**
          * Number of used cloud disk backups.
          * @type {number || null}
          */
@@ -1737,6 +1778,18 @@ Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
          */
         this.InstanceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LastAttachInsId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ErrorPrompt = null;
 
     }
 
@@ -1796,8 +1849,11 @@ Note: This field may return null, indicating that no valid value was found.
         this.Shareable = 'Shareable' in params ? params.Shareable : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.DeleteSnapshot = 'DeleteSnapshot' in params ? params.DeleteSnapshot : null;
+        this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
         this.DiskBackupCount = 'DiskBackupCount' in params ? params.DiskBackupCount : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.LastAttachInsId = 'LastAttachInsId' in params ? params.LastAttachInsId : null;
+        this.ErrorPrompt = 'ErrorPrompt' in params ? params.ErrorPrompt : null;
 
     }
 }
@@ -2924,6 +2980,41 @@ Note: This field may return null, indicating that no valid value was found.
         this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
         this.MinDiskSize = 'MinDiskSize' in params ? params.MinDiskSize : null;
         this.MaxDiskSize = 'MaxDiskSize' in params ? params.MaxDiskSize : null;
+
+    }
+}
+
+/**
+ * CreateDiskBackup response structure.
+ * @class
+ */
+class CreateDiskBackupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the cloud disk backup point.
+         * @type {string || null}
+         */
+        this.DiskBackupId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskBackupId = 'DiskBackupId' in params ? params.DiskBackupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4742,6 +4833,7 @@ module.exports = {
     DescribeDiskBackupsRequest: DescribeDiskBackupsRequest,
     AutoSnapshotPolicy: AutoSnapshotPolicy,
     DescribeSnapshotOperationLogsRequest: DescribeSnapshotOperationLogsRequest,
+    CreateDiskBackupRequest: CreateDiskBackupRequest,
     CopySnapshotCrossRegionsResponse: CopySnapshotCrossRegionsResponse,
     ModifyAutoSnapshotPolicyAttributeResponse: ModifyAutoSnapshotPolicyAttributeResponse,
     ModifyDiskBackupQuotaRequest: ModifyDiskBackupQuotaRequest,
@@ -4795,6 +4887,7 @@ module.exports = {
     CreateAutoSnapshotPolicyResponse: CreateAutoSnapshotPolicyResponse,
     ModifySnapshotAttributeRequest: ModifySnapshotAttributeRequest,
     DiskConfig: DiskConfig,
+    CreateDiskBackupResponse: CreateDiskBackupResponse,
     InquirePriceModifyDiskBackupQuotaResponse: InquirePriceModifyDiskBackupQuotaResponse,
     DeleteAutoSnapshotPoliciesRequest: DeleteAutoSnapshotPoliciesRequest,
     DiskChargePrepaid: DiskChargePrepaid,

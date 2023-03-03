@@ -22,6 +22,7 @@ const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
 const DescribeDiskBackupsRequest = models.DescribeDiskBackupsRequest;
 const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
+const CreateDiskBackupRequest = models.CreateDiskBackupRequest;
 const CopySnapshotCrossRegionsResponse = models.CopySnapshotCrossRegionsResponse;
 const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
 const ModifyDiskBackupQuotaRequest = models.ModifyDiskBackupQuotaRequest;
@@ -75,6 +76,7 @@ const InitializeDisksRequest = models.InitializeDisksRequest;
 const CreateAutoSnapshotPolicyResponse = models.CreateAutoSnapshotPolicyResponse;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
 const DiskConfig = models.DiskConfig;
+const CreateDiskBackupResponse = models.CreateDiskBackupResponse;
 const InquirePriceModifyDiskBackupQuotaResponse = models.InquirePriceModifyDiskBackupQuotaResponse;
 const DeleteAutoSnapshotPoliciesRequest = models.DeleteAutoSnapshotPoliciesRequest;
 const DiskChargePrepaid = models.DiskChargePrepaid;
@@ -291,7 +293,9 @@ If the parameter is empty, a certain number (as specified by `Limit` and 20 by d
     }
 
     /**
-     * This API (DescribeDiskOperationLogs) is used to query a list of cloud disk operation logs.
+     * 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
+
+This API (DescribeDiskOperationLogs) is used to query a list of cloud disk operation logs.
 
 This can be filtered according to the cloud disk ID. The format of cloud disk IDs is as follows: disk-a1kmcp13.
 
@@ -517,6 +521,17 @@ This can be filtered according to the cloud disk ID. The format of cloud disk ID
     }
 
     /**
+     * This API is used to create a backup point for a cloud disk.
+     * @param {CreateDiskBackupRequest} req
+     * @param {function(string, CreateDiskBackupResponse):void} cb
+     * @public
+     */
+    CreateDiskBackup(req, cb) {
+        let resp = new CreateDiskBackupResponse();
+        this.request("CreateDiskBackup", req, resp, cb);
+    }
+
+    /**
      * This API (ApplySnapshot) is used to roll back a snapshot to the original cloud disk.
 
 * The snapshot can only be rolled back to the original cloud disk. For data disk snapshots, if you need to copy the snapshot data to other cloud disks, use the API [CreateDisks](https://intl.cloud.tencent.com/document/product/362/16312?from_cn_redirect=1) to create an elastic cloud disk and then copy the snapshot data to the created cloud disk. 
@@ -532,9 +547,9 @@ This can be filtered according to the cloud disk ID. The format of cloud disk ID
     }
 
     /**
-     * This API (DescribeSnapshotOperationLogs) is used to query a list of snapshot operation logs.
+     * 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
 
-You can filter according to the snapshot ID. The snapshot ID format is as follows: snap-a1kmcp13.
+This API is used to query the operation logs of a snapshot. It will be disused soon. Use [LookUpEvents](https://intl.cloud.tencent.com/document/product/629/12359?from_cn_redirect=1) instead.
 
      * @param {DescribeSnapshotOperationLogsRequest} req
      * @param {function(string, DescribeSnapshotOperationLogsResponse):void} cb
@@ -563,18 +578,17 @@ After snapshots are shared, the accounts they are shared to can use the snapshot
     }
 
     /**
-     * This API is used to create a snapshot for the specified cloud disk.
+     * This API is used to unmount one or more cloud disks.
 
-* You can only create snapshots for cloud disks with the snapshot capability. To check whether a cloud disk is snapshot-enabled, call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API and see the `SnapshotAbility` field in the response.
-* For the maximum number of snapshots that can be created, see [Use Limits](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
-* Currently, you can convert backup points into general snapshots. After the conversion, snapshot usage fees may be charged, backup points will not be retained, and the occupied backup point quota will be released.
-     * @param {CreateSnapshotRequest} req
-     * @param {function(string, CreateSnapshotResponse):void} cb
+* Batch operation is supported. You can unmount multiple cloud disks from the same CVM in a single request. If any of these cloud disks cannot be unmounted, the operation fails and a specific error code returns.
+* This is an async API. A successful request does not mean that the cloud disks have been unmounted successfully. You can call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API to query the status of cloud disks. When the status changes from `ATTACHED` to `UNATTACHED`, the unmounting is successful.
+     * @param {DetachDisksRequest} req
+     * @param {function(string, DetachDisksResponse):void} cb
      * @public
      */
-    CreateSnapshot(req, cb) {
-        let resp = new CreateSnapshotResponse();
-        this.request("CreateSnapshot", req, resp, cb);
+    DetachDisks(req, cb) {
+        let resp = new DetachDisksResponse();
+        this.request("DetachDisks", req, resp, cb);
     }
 
     /**
@@ -603,17 +617,18 @@ After snapshots are shared, the accounts they are shared to can use the snapshot
     }
 
     /**
-     * This API is used to unmount one or more cloud disks.
+     * This API is used to create a snapshot for the specified cloud disk.
 
-* Batch operation is supported. You can unmount multiple cloud disks from the same CVM in a single request. If any of these cloud disks cannot be unmounted, the operation fails and a specific error code returns.
-* This is an async API. A successful request does not mean that the cloud disks have been unmounted successfully. You can call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API to query the status of cloud disks. When the status changes from `ATTACHED` to `UNATTACHED`, the unmounting is successful.
-     * @param {DetachDisksRequest} req
-     * @param {function(string, DetachDisksResponse):void} cb
+* You can only create snapshots for cloud disks with the snapshot capability. To check whether a cloud disk is snapshot-enabled, call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API and see the `SnapshotAbility` field in the response.
+* For the maximum number of snapshots that can be created, see [Use Limits](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
+* Currently, you can convert backup points into general snapshots. After the conversion, snapshot usage fees may be charged, backup points will not be retained, and the occupied backup point quota will be released.
+     * @param {CreateSnapshotRequest} req
+     * @param {function(string, CreateSnapshotResponse):void} cb
      * @public
      */
-    DetachDisks(req, cb) {
-        let resp = new DetachDisksResponse();
-        this.request("DetachDisks", req, resp, cb);
+    CreateSnapshot(req, cb) {
+        let resp = new CreateSnapshotResponse();
+        this.request("CreateSnapshot", req, resp, cb);
     }
 
 

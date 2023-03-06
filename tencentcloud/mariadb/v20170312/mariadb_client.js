@@ -42,6 +42,7 @@ const IsolateDedicatedDBInstanceRequest = models.IsolateDedicatedDBInstanceReque
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const ParamConstraint = models.ParamConstraint;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
+const ModifyDBEncryptAttributesResponse = models.ModifyDBEncryptAttributesResponse;
 const DatabaseView = models.DatabaseView;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
 const NodeInfo = models.NodeInfo;
@@ -112,6 +113,7 @@ const DatabaseProcedure = models.DatabaseProcedure;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const CloneAccountRequest = models.CloneAccountRequest;
+const ModifyDBEncryptAttributesRequest = models.ModifyDBEncryptAttributesRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const IsolateDedicatedDBInstanceResponse = models.IsolateDedicatedDBInstanceResponse;
 const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
@@ -507,6 +509,17 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     DescribeDcnDetail(req, cb) {
         let resp = new DescribeDcnDetailResponse();
         this.request("DescribeDcnDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the instance data encryption.
+     * @param {ModifyDBEncryptAttributesRequest} req
+     * @param {function(string, ModifyDBEncryptAttributesResponse):void} cb
+     * @public
+     */
+    ModifyDBEncryptAttributes(req, cb) {
+        let resp = new ModifyDBEncryptAttributesResponse();
+        this.request("ModifyDBEncryptAttributes", req, resp, cb);
     }
 
     /**

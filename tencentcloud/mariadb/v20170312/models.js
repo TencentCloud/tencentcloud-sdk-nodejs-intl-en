@@ -1257,6 +1257,34 @@ class ModifyDBInstancesProjectResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDBEncryptAttributes response structure.
+ * @class
+ */
+class ModifyDBEncryptAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Database view information
  * @class
  */
@@ -5062,6 +5090,41 @@ class CloneAccountRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyDBEncryptAttributes request structure.
+ * @class
+ */
+class ModifyDBEncryptAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `tdsql-ow728lmc`
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Whether to enable the data encryption (Once enabled, it can’t be disabled). Valid values: `1` (Yes), `0` (No. Default）
+         * @type {number || null}
+         */
+        this.EncryptEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EncryptEnabled = 'EncryptEnabled' in params ? params.EncryptEnabled : null;
+
+    }
+}
+
+/**
  * CreateAccount response structure.
  * @class
  */
@@ -6310,6 +6373,7 @@ module.exports = {
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     ParamConstraint: ParamConstraint,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
+    ModifyDBEncryptAttributesResponse: ModifyDBEncryptAttributesResponse,
     DatabaseView: DatabaseView,
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
     NodeInfo: NodeInfo,
@@ -6380,6 +6444,7 @@ module.exports = {
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     CloneAccountRequest: CloneAccountRequest,
+    ModifyDBEncryptAttributesRequest: ModifyDBEncryptAttributesRequest,
     CreateAccountResponse: CreateAccountResponse,
     IsolateDedicatedDBInstanceResponse: IsolateDedicatedDBInstanceResponse,
     DescribeLogFileRetentionPeriodResponse: DescribeLogFileRetentionPeriodResponse,

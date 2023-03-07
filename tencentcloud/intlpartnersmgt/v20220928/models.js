@@ -17,27 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * GetCountryCodes request structure.
- * @class
- */
-class GetCountryCodesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
  * QueryPartnerCredit response structure.
  * @class
  */
@@ -207,36 +186,30 @@ class QueryVoucherAmountByUinItem extends  AbstractModel {
 }
 
 /**
- * Returned information for querying the customer credit allocation records
+ * The credit information of direct customers
  * @class
  */
-class QueryCreditAllocationHistoryData extends  AbstractModel {
+class QueryDirectCustomersCreditData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Allocation time
-         * @type {string || null}
-         */
-        this.AllocatedTime = null;
-
-        /**
-         * Operator
-         * @type {string || null}
-         */
-        this.Operator = null;
-
-        /**
-         * Allocated credit value
+         * User UIN
          * @type {number || null}
          */
-        this.Credit = null;
+        this.Uin = null;
 
         /**
-         * The allocated total credit
+         * Total credit
          * @type {number || null}
          */
-        this.AllocatedCredit = null;
+        this.TotalCredit = null;
+
+        /**
+         * Remaining credit
+         * @type {number || null}
+         */
+        this.RemainingCredit = null;
 
     }
 
@@ -247,10 +220,80 @@ class QueryCreditAllocationHistoryData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AllocatedTime = 'AllocatedTime' in params ? params.AllocatedTime : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
-        this.Credit = 'Credit' in params ? params.Credit : null;
-        this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.TotalCredit = 'TotalCredit' in params ? params.TotalCredit : null;
+        this.RemainingCredit = 'RemainingCredit' in params ? params.RemainingCredit : null;
+
+    }
+}
+
+/**
+ * Voucher information of a single customer
+ * @class
+ */
+class QueryVoucherListByUinItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.ClientUin = null;
+
+        /**
+         * The total number of vouchers
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Voucher details
+         * @type {Array.<QueryVoucherListByUinVoucherItem> || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new QueryVoucherListByUinVoucherItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * QueryPartnerCredit request structure.
+ * @class
+ */
+class QueryPartnerCreditRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -291,18 +334,18 @@ class AllocateCustomerCreditRequest extends  AbstractModel {
 }
 
 /**
- * GetCountryCodes response structure.
+ * DescribeCustomerBillSummary response structure.
  * @class
  */
-class GetCountryCodesResponse extends  AbstractModel {
+class DescribeCustomerBillSummaryResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of country/region codes
-         * @type {Array.<CountryCodeItem> || null}
+         * Total amount
+         * @type {number || null}
          */
-        this.Data = null;
+        this.TotalCost = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -319,15 +362,7 @@ class GetCountryCodesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new CountryCodeItem();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -453,10 +488,10 @@ class CreateAccountResponse extends  AbstractModel {
 }
 
 /**
- * QueryPartnerCredit request structure.
+ * GetCountryCodes request structure.
  * @class
  */
-class QueryPartnerCreditRequest extends  AbstractModel {
+class GetCountryCodesRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -574,6 +609,157 @@ class QueryVoucherPoolResponse extends  AbstractModel {
         this.TotalQuota = 'TotalQuota' in params ? params.TotalQuota : null;
         this.RemainingQuota = 'RemainingQuota' in params ? params.RemainingQuota : null;
         this.IssuedNum = 'IssuedNum' in params ? params.IssuedNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCustomerBillDetail request structure.
+ * @class
+ */
+class DescribeCustomerBillDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.CustomerUin = null;
+
+        /**
+         * The queried month in “YYYY-MM” format, such as 2023-01.
+         * @type {string || null}
+         */
+        this.Month = null;
+
+        /**
+         * A pagination parameter that specifies the number of entries per page
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * A pagination parameter that specifies the current page number
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Billing mode. Valid values:
+`prePay` (Monthly subscription)
+`postPay` (Pay-as-you-go)
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Transaction type. Valid values:
+`prepay_purchase` (Purchase)
+`prepay_renew` (Renewal)
+`prepay_modify` (Upgrade/Downgrade)
+`prepay_return` ( Monthly subscription refund)
+`postpay_deduct` (Pay-as-you-go)
+`postpay_deduct_h` (Hourly settlement)
+`postpay_deduct_d` (Daily settlement)
+`postpay_deduct_m` (Monthly settlement)
+`offline_deduct` (Offline project deduction)
+`online_deduct` (Offline product deduction)
+`recon_deduct` (Adjustment - deduction)
+`recon_increase` (Adjustment - compensation)
+`ripay_purchase` (One-off RI Fee)
+`postpay_deduct_s` (Spot)
+`ri_hour_pay` (Hourly RI fee)
+`prePurchase` (New monthly subscription)
+`preRenew` (Monthly subscription renewal)
+`preUpgrade` (Upgrade/Downgrade)
+`preDowngrade` (Upgrade/Downgrade)
+`svp_hour_pay` (Hourly Savings Plan fee)
+`recon_guarantee` (Minimum spend deduction)
+`pre_purchase` (New monthly subscription)
+`pre_renew` (Monthly subscription renewal)
+`pre_upgrade` (Upgrade/Downgrade)
+`pre_downgrade` (Upgrade/Downgrade)
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * Payment status
+`0`: N/A
+`1`: Paid
+`2`: Unpaid
+         * @type {string || null}
+         */
+        this.IsConfirmed = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
+        this.Month = 'Month' in params ? params.Month : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.IsConfirmed = 'IsConfirmed' in params ? params.IsConfirmed : null;
+
+    }
+}
+
+/**
+ * DescribeCustomerBillDetail response structure.
+ * @class
+ */
+class DescribeCustomerBillDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of data entries
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Data details
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<BillDetailData> || null}
+         */
+        this.DetailSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.DetailSet) {
+            this.DetailSet = new Array();
+            for (let z in params.DetailSet) {
+                let obj = new BillDetailData();
+                obj.deserialize(params.DetailSet[z]);
+                this.DetailSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -708,6 +894,49 @@ A global mobile number within 1-32 digits is allowed, such as 18888888888.
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Area = 'Area' in params ? params.Area : null;
         this.Extended = 'Extended' in params ? params.Extended : null;
+
+    }
+}
+
+/**
+ * GetCountryCodes response structure.
+ * @class
+ */
+class GetCountryCodesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of country/region codes
+         * @type {Array.<CountryCodeItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new CountryCodeItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -853,30 +1082,36 @@ class QueryVoucherAmountByUinRequest extends  AbstractModel {
 }
 
 /**
- * The credit information of direct customers
+ * Returned information for querying the customer credit allocation records
  * @class
  */
-class QueryDirectCustomersCreditData extends  AbstractModel {
+class QueryCreditAllocationHistoryData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * User UIN
-         * @type {number || null}
+         * Allocation time
+         * @type {string || null}
          */
-        this.Uin = null;
+        this.AllocatedTime = null;
 
         /**
-         * Total credit
-         * @type {number || null}
+         * Operator
+         * @type {string || null}
          */
-        this.TotalCredit = null;
+        this.Operator = null;
 
         /**
-         * Remaining credit
+         * Allocated credit value
          * @type {number || null}
          */
-        this.RemainingCredit = null;
+        this.Credit = null;
+
+        /**
+         * The allocated total credit
+         * @type {number || null}
+         */
+        this.AllocatedCredit = null;
 
     }
 
@@ -887,9 +1122,10 @@ class QueryDirectCustomersCreditData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.TotalCredit = 'TotalCredit' in params ? params.TotalCredit : null;
-        this.RemainingCredit = 'RemainingCredit' in params ? params.RemainingCredit : null;
+        this.AllocatedTime = 'AllocatedTime' in params ? params.AllocatedTime : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Credit = 'Credit' in params ? params.Credit : null;
+        this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
 
     }
 }
@@ -988,6 +1224,274 @@ class CountryCodeItem extends  AbstractModel {
         this.IOS2 = 'IOS2' in params ? params.IOS2 : null;
         this.IOS3 = 'IOS3' in params ? params.IOS3 : null;
         this.Code = 'Code' in params ? params.Code : null;
+
+    }
+}
+
+/**
+ * Customer bill details
+ * @class
+ */
+class BillDetailData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Reseller account
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.PayerAccountId = null;
+
+        /**
+         * Customer account
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OwnerAccountId = null;
+
+        /**
+         * Operator account
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OperatorAccountId = null;
+
+        /**
+         * Product name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * Billing mode
+`Monthly subscription` (Monthly subscription)
+`Pay-As-You-Go resources` (Pay-as-you-go)
+`Standard RI` (Reserved instance)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BillingMode = null;
+
+        /**
+         * Project name
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * Resource region
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Resource AZ
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AvailabilityZone = null;
+
+        /**
+         * Instance ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Subproduct name
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubProductName = null;
+
+        /**
+         * Settlement type
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TransactionType = null;
+
+        /**
+         * Transaction ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TransactionId = null;
+
+        /**
+         * Settlement time
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TransactionTime = null;
+
+        /**
+         * Start time of resource use
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsageStartTime = null;
+
+        /**
+         * End time of resource use
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsageEndTime = null;
+
+        /**
+         * Component
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ComponentType = null;
+
+        /**
+         * Component name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ComponentName = null;
+
+        /**
+         * Component list price
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ComponentListPrice = null;
+
+        /**
+         * Price unit
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ComponentPriceMeasurementUnit = null;
+
+        /**
+         * Component usage
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ComponentUsage = null;
+
+        /**
+         * Component usage unit
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ComponentUsageUnit = null;
+
+        /**
+         * Resource usage duration
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UsageDuration = null;
+
+        /**
+         * Duration unit
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DurationUnit = null;
+
+        /**
+         * Original cost
+Original cost = component list price * component usage * usage duration
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalCost = null;
+
+        /**
+         * Discount, which defaults to `1`, indicating there is no discount.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiscountRate = null;
+
+        /**
+         * Currency
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Currency = null;
+
+        /**
+         * Discounted total
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalAmountAfterDiscount = null;
+
+        /**
+         * Voucher deduction
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VoucherDeduction = null;
+
+        /**
+         * Total cost = discounted total - voucher deduction
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayerAccountId = 'PayerAccountId' in params ? params.PayerAccountId : null;
+        this.OwnerAccountId = 'OwnerAccountId' in params ? params.OwnerAccountId : null;
+        this.OperatorAccountId = 'OperatorAccountId' in params ? params.OperatorAccountId : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.AvailabilityZone = 'AvailabilityZone' in params ? params.AvailabilityZone : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.SubProductName = 'SubProductName' in params ? params.SubProductName : null;
+        this.TransactionType = 'TransactionType' in params ? params.TransactionType : null;
+        this.TransactionId = 'TransactionId' in params ? params.TransactionId : null;
+        this.TransactionTime = 'TransactionTime' in params ? params.TransactionTime : null;
+        this.UsageStartTime = 'UsageStartTime' in params ? params.UsageStartTime : null;
+        this.UsageEndTime = 'UsageEndTime' in params ? params.UsageEndTime : null;
+        this.ComponentType = 'ComponentType' in params ? params.ComponentType : null;
+        this.ComponentName = 'ComponentName' in params ? params.ComponentName : null;
+        this.ComponentListPrice = 'ComponentListPrice' in params ? params.ComponentListPrice : null;
+        this.ComponentPriceMeasurementUnit = 'ComponentPriceMeasurementUnit' in params ? params.ComponentPriceMeasurementUnit : null;
+        this.ComponentUsage = 'ComponentUsage' in params ? params.ComponentUsage : null;
+        this.ComponentUsageUnit = 'ComponentUsageUnit' in params ? params.ComponentUsageUnit : null;
+        this.UsageDuration = 'UsageDuration' in params ? params.UsageDuration : null;
+        this.DurationUnit = 'DurationUnit' in params ? params.DurationUnit : null;
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+        this.DiscountRate = 'DiscountRate' in params ? params.DiscountRate : null;
+        this.Currency = 'Currency' in params ? params.Currency : null;
+        this.TotalAmountAfterDiscount = 'TotalAmountAfterDiscount' in params ? params.TotalAmountAfterDiscount : null;
+        this.VoucherDeduction = 'VoucherDeduction' in params ? params.VoucherDeduction : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -1100,10 +1604,10 @@ class QueryVoucherPoolRequest extends  AbstractModel {
 }
 
 /**
- * Voucher information of a single customer
+ * DescribeCustomerBillSummary request structure.
  * @class
  */
-class QueryVoucherListByUinItem extends  AbstractModel {
+class DescribeCustomerBillSummaryRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -1111,19 +1615,61 @@ class QueryVoucherListByUinItem extends  AbstractModel {
          * Customer UIN
          * @type {number || null}
          */
-        this.ClientUin = null;
+        this.CustomerUin = null;
 
         /**
-         * The total number of vouchers
-         * @type {number || null}
+         * The queried month in “YYYY-MM” format, such as 2023-01.
+         * @type {string || null}
          */
-        this.TotalCount = null;
+        this.Month = null;
 
         /**
-         * Voucher details
-         * @type {Array.<QueryVoucherListByUinVoucherItem> || null}
+         * Billing mode. Valid values:
+`prePay` (Monthly subscription)
+`postPay` (Pay-as-you-go)
+         * @type {string || null}
          */
-        this.Data = null;
+        this.PayMode = null;
+
+        /**
+         * Transaction type. Valid values:
+`prepay_purchase` (Purchase)
+`prepay_renew` (Renewal)
+`prepay_modify` (Upgrade/Downgrade)
+`prepay_return` (Monthly subscription refund)
+`postpay_deduct` (Pay-as-you-go)
+`postpay_deduct_h` (Hourly settlement)
+`postpay_deduct_d` (Daily settlement)
+`postpay_deduct_m` (Monthly settlement)
+`offline_deduct` (Offline project deduction)
+`online_deduct` (Offline product deduction)
+`recon_deduct` (Adjustment - deduction)
+`recon_increase` (Adjustment - compensation)
+`ripay_purchase` (One-off RI Fee)
+`postpay_deduct_s` (Spot)
+`ri_hour_pay` (Hourly RI fee)
+`prePurchase` (New monthly subscription)
+`preRenew` (Monthly subscription renewal)
+`preUpgrade` (Upgrade/Downgrade)
+`preDowngrade` (Upgrade/Downgrade)
+`svp_hour_pay` (Hourly Savings Plan fee)
+`recon_guarantee` (Minimum spend deduction)
+`pre_purchase` (New monthly subscription)
+`pre_renew` (Monthly subscription renewal)
+`pre_upgrade` (Upgrade/Downgrade)
+`pre_downgrade` (Upgrade/Downgrade)
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * Payment status
+`0`: N/A
+`1`: Paid
+`2`: Unpaid
+         * @type {string || null}
+         */
+        this.IsConfirmed = null;
 
     }
 
@@ -1134,17 +1680,11 @@ class QueryVoucherListByUinItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new QueryVoucherListByUinVoucherItem();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
+        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
+        this.Month = 'Month' in params ? params.Month : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.IsConfirmed = 'IsConfirmed' in params ? params.IsConfirmed : null;
 
     }
 }
@@ -1313,33 +1853,38 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 module.exports = {
-    GetCountryCodesRequest: GetCountryCodesRequest,
     QueryPartnerCreditResponse: QueryPartnerCreditResponse,
     QueryVoucherListByUinRequest: QueryVoucherListByUinRequest,
     QueryVoucherAmountByUinResponse: QueryVoucherAmountByUinResponse,
     QueryVoucherAmountByUinItem: QueryVoucherAmountByUinItem,
-    QueryCreditAllocationHistoryData: QueryCreditAllocationHistoryData,
+    QueryDirectCustomersCreditData: QueryDirectCustomersCreditData,
+    QueryVoucherListByUinItem: QueryVoucherListByUinItem,
+    QueryPartnerCreditRequest: QueryPartnerCreditRequest,
     AllocateCustomerCreditRequest: AllocateCustomerCreditRequest,
-    GetCountryCodesResponse: GetCountryCodesResponse,
+    DescribeCustomerBillSummaryResponse: DescribeCustomerBillSummaryResponse,
     QueryCustomersCreditRequest: QueryCustomersCreditRequest,
     QueryCreditByUinListRequest: QueryCreditByUinListRequest,
     CreateAccountResponse: CreateAccountResponse,
-    QueryPartnerCreditRequest: QueryPartnerCreditRequest,
+    GetCountryCodesRequest: GetCountryCodesRequest,
     QueryCreditByUinListResponse: QueryCreditByUinListResponse,
     QueryVoucherPoolResponse: QueryVoucherPoolResponse,
+    DescribeCustomerBillDetailRequest: DescribeCustomerBillDetailRequest,
+    DescribeCustomerBillDetailResponse: DescribeCustomerBillDetailResponse,
     QueryCreditAllocationHistoryResponse: QueryCreditAllocationHistoryResponse,
     CreateAccountRequest: CreateAccountRequest,
+    GetCountryCodesResponse: GetCountryCodesResponse,
     QueryDirectCustomersCreditRequest: QueryDirectCustomersCreditRequest,
     AllocateCustomerCreditResponse: AllocateCustomerCreditResponse,
     QueryVoucherListByUinVoucherItem: QueryVoucherListByUinVoucherItem,
     QueryVoucherAmountByUinRequest: QueryVoucherAmountByUinRequest,
-    QueryDirectCustomersCreditData: QueryDirectCustomersCreditData,
+    QueryCreditAllocationHistoryData: QueryCreditAllocationHistoryData,
     QueryCreditAllocationHistoryRequest: QueryCreditAllocationHistoryRequest,
     CountryCodeItem: CountryCodeItem,
+    BillDetailData: BillDetailData,
     QueryDirectCustomersCreditResponse: QueryDirectCustomersCreditResponse,
     QueryVoucherListByUinResponse: QueryVoucherListByUinResponse,
     QueryVoucherPoolRequest: QueryVoucherPoolRequest,
-    QueryVoucherListByUinItem: QueryVoucherListByUinItem,
+    DescribeCustomerBillSummaryRequest: DescribeCustomerBillSummaryRequest,
     QueryCustomersCreditData: QueryCustomersCreditData,
     QueryCustomersCreditResponse: QueryCustomersCreditResponse,
 

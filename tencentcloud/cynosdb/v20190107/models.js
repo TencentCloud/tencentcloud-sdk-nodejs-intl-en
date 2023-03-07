@@ -2038,6 +2038,70 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyVipVport request structure.
+ * @class
+ */
+class ModifyVipVportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Instance group ID
+         * @type {string || null}
+         */
+        this.InstanceGrpId = null;
+
+        /**
+         * Target IP to be modified
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Target port to be modified
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * Database type. Valid values: 
+<li> MYSQL </li>
+         * @type {string || null}
+         */
+        this.DbType = null;
+
+        /**
+         * Valid hours of old IPs. If it is set to `0` hours, the IPs will be released immediately.
+         * @type {number || null}
+         */
+        this.OldIpReserveHours = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceGrpId = 'InstanceGrpId' in params ? params.InstanceGrpId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.DbType = 'DbType' in params ? params.DbType : null;
+        this.OldIpReserveHours = 'OldIpReserveHours' in params ? params.OldIpReserveHours : null;
+
+    }
+}
+
+/**
  * DescribeClusters request structure.
  * @class
  */
@@ -4487,6 +4551,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ReserveDuration = 'ReserveDuration' in params ? params.ReserveDuration : null;
         this.BackupFreq = 'BackupFreq' in params ? params.BackupFreq : null;
         this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyVipVport response structure.
+ * @class
+ */
+class ModifyVipVportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10027,6 +10126,7 @@ module.exports = {
     DatabaseTables: DatabaseTables,
     AddClusterSlaveZoneRequest: AddClusterSlaveZoneRequest,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
+    ModifyVipVportRequest: ModifyVipVportRequest,
     DescribeClustersRequest: DescribeClustersRequest,
     DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
@@ -10066,6 +10166,7 @@ module.exports = {
     CreateClustersRequest: CreateClustersRequest,
     DescribeClustersResponse: DescribeClustersResponse,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
+    ModifyVipVportResponse: ModifyVipVportResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     CloseAuditServiceRequest: CloseAuditServiceRequest,

@@ -57,6 +57,7 @@ const ActivateInstanceRequest = models.ActivateInstanceRequest;
 const DatabaseTables = models.DatabaseTables;
 const AddClusterSlaveZoneRequest = models.AddClusterSlaveZoneRequest;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
+const ModifyVipVportRequest = models.ModifyVipVportRequest;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
@@ -96,6 +97,7 @@ const ModifyAuditServiceRequest = models.ModifyAuditServiceRequest;
 const CreateClustersRequest = models.CreateClustersRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
+const ModifyVipVportResponse = models.ModifyVipVportResponse;
 const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DescribeParamTemplatesResponse = models.DescribeParamTemplatesResponse;
 const CloseAuditServiceRequest = models.CloseAuditServiceRequest;
@@ -311,14 +313,14 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to deactivate a cluster.
-     * @param {OfflineClusterRequest} req
-     * @param {function(string, OfflineClusterResponse):void} cb
+     * This API is used to modify the IP and port of an instance group.
+     * @param {ModifyVipVportRequest} req
+     * @param {function(string, ModifyVipVportResponse):void} cb
      * @public
      */
-    OfflineCluster(req, cb) {
-        let resp = new OfflineClusterResponse();
-        this.request("OfflineCluster", req, resp, cb);
+    ModifyVipVport(req, cb) {
+        let resp = new ModifyVipVportResponse();
+        this.request("ModifyVipVport", req, resp, cb);
     }
 
     /**
@@ -858,6 +860,17 @@ class CynosdbClient extends AbstractClient {
     ExportInstanceSlowQueries(req, cb) {
         let resp = new ExportInstanceSlowQueriesResponse();
         this.request("ExportInstanceSlowQueries", req, resp, cb);
+    }
+
+    /**
+     * This API is used to deactivate a cluster.
+     * @param {OfflineClusterRequest} req
+     * @param {function(string, OfflineClusterResponse):void} cb
+     * @public
+     */
+    OfflineCluster(req, cb) {
+        let resp = new OfflineClusterResponse();
+        this.request("OfflineCluster", req, resp, cb);
     }
 
     /**

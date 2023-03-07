@@ -16,33 +16,38 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
 const QueryVoucherListByUinRequest = models.QueryVoucherListByUinRequest;
 const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
 const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
-const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
+const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
+const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
+const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
 const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
-const GetCountryCodesResponse = models.GetCountryCodesResponse;
+const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
 const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
-const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
+const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
 const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
+const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
+const DescribeCustomerBillDetailResponse = models.DescribeCustomerBillDetailResponse;
 const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
+const GetCountryCodesResponse = models.GetCountryCodesResponse;
 const QueryDirectCustomersCreditRequest = models.QueryDirectCustomersCreditRequest;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
 const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
 const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
-const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
+const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
 const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
 const CountryCodeItem = models.CountryCodeItem;
+const BillDetailData = models.BillDetailData;
 const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
 const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
 const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
-const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
+const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
 const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
 
@@ -162,6 +167,28 @@ Notes:<br>
     QueryCreditAllocationHistory(req, cb) {
         let resp = new QueryCreditAllocationHistoryResponse();
         this.request("QueryCreditAllocationHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the customer bill details.
+     * @param {DescribeCustomerBillDetailRequest} req
+     * @param {function(string, DescribeCustomerBillDetailResponse):void} cb
+     * @public
+     */
+    DescribeCustomerBillDetail(req, cb) {
+        let resp = new DescribeCustomerBillDetailResponse();
+        this.request("DescribeCustomerBillDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the total amount of customer bills.
+     * @param {DescribeCustomerBillSummaryRequest} req
+     * @param {function(string, DescribeCustomerBillSummaryResponse):void} cb
+     * @public
+     */
+    DescribeCustomerBillSummary(req, cb) {
+        let resp = new DescribeCustomerBillSummaryResponse();
+        this.request("DescribeCustomerBillSummary", req, resp, cb);
     }
 
     /**

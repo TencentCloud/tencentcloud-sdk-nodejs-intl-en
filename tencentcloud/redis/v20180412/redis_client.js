@@ -94,6 +94,7 @@ const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
 const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
+const BackupLimitVpcItem = models.BackupLimitVpcItem;
 const UpgradeProxyVersionResponse = models.UpgradeProxyVersionResponse;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const ModifyInstanceAccountResponse = models.ModifyInstanceAccountResponse;
@@ -250,7 +251,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the global replication group.
+     * This API is used to query a replication group.
      * @param {DescribeReplicationGroupRequest} req
      * @param {function(string, DescribeReplicationGroupResponse):void} cb
      * @public
@@ -283,7 +284,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the big key size distribution of an instance.
+     * The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
      * @param {DescribeInstanceMonitorBigKeySizeDistRequest} req
      * @param {function(string, DescribeInstanceMonitorBigKeySizeDistResponse):void} cb
      * @public
@@ -679,7 +680,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the download address of a backup RDB (it is in beta test and can be used only after you apply for the eligibility).
+     * This API is used to query the download address of a backup RDB file.
      * @param {DescribeBackupUrlRequest} req
      * @param {function(string, DescribeBackupUrlResponse):void} cb
      * @public
@@ -800,7 +801,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the big key of an instance.
+     * The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
      * @param {DescribeInstanceMonitorBigKeyRequest} req
      * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
      * @public
@@ -833,7 +834,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the big key type distribution of an instance
+     * The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
      * @param {DescribeInstanceMonitorBigKeyTypeDistRequest} req
      * @param {function(string, DescribeInstanceMonitorBigKeyTypeDistResponse):void} cb
      * @public
@@ -899,7 +900,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the purchasable capacity specifications of Redis instances in the specified AZ and instance type. If you are not in the allowlist for the AZ or instance type, you cannot view the details of the capacity specifications. To apply for the eligibility, please submit a ticket.
+     * This API is used to query purchasable TencentDB for Redis specifications in all regions.
      * @param {DescribeProductInfoRequest} req
      * @param {function(string, DescribeProductInfoResponse):void} cb
      * @public
@@ -1064,7 +1065,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of Redis instance backups.
+     * This API is used to query the backup list of an instance.
      * @param {DescribeInstanceBackupsRequest} req
      * @param {function(string, DescribeInstanceBackupsResponse):void} cb
      * @public

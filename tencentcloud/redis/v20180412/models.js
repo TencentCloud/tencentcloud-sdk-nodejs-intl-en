@@ -163,13 +163,22 @@ class RedisBackupSet extends  AbstractModel {
         this.BackupId = null;
 
         /**
-         * Backup type. 1: manual backup initiated by the user; 0: automatic backup in the early morning initiated by the system
+         * Backup type
+
+- `1`: Manual backup initiated by the user.
+- `0`: Automatic backup in the early morning initiated by the system.
          * @type {string || null}
          */
         this.BackupType = null;
 
         /**
-         * Backup status. 1: backup is locked by another process; 2: backup is normal and not locked by any process; -1: backup has expired; 3: backup is being exported; 4: backup is exported successfully
+         * Backup status 
+
+- `1`: The backup is locked by another process.
+- `2`: The backup is normal and not locked by any process.
+- `-1`: The backup expired.
+- `3`: The backup is being exported.
+- `4`: The backup was exported successfully.
          * @type {number || null}
          */
         this.Status = null;
@@ -181,7 +190,10 @@ class RedisBackupSet extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * Whether a backup is locked. 0: no; 1: yes.
+         * Whether the backup is locked
+
+- `0`: Not locked.
+- `1`: Locked.
          * @type {number || null}
          */
         this.Locked = null;
@@ -207,6 +219,42 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.InstanceType = null;
 
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * The region where the local backup resides.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Backup end time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Backup file type
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * Backup file expiration time
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
     }
 
     /**
@@ -225,6 +273,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BackupSize = 'BackupSize' in params ? params.BackupSize : null;
         this.FullBackup = 'FullBackup' in params ? params.FullBackup : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
 }
@@ -287,13 +341,13 @@ class ModifyAutoBackupConfigResponse extends  AbstractModel {
         this.AutoBackupType = null;
 
         /**
-         * Date. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+         * Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`.
          * @type {Array.<string> || null}
          */
         this.WeekDays = null;
 
         /**
-         * Time period. Value range: 00:00-01:00, 01:00-02:00...... 23:00-00:00
+         * Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
          * @type {string || null}
          */
         this.TimePeriod = null;
@@ -755,28 +809,34 @@ class ModifyNetworkConfigResponse extends  AbstractModel {
         super();
 
         /**
-         * Execution status: true or false
+         * Execution status. Ignore this parameter.
          * @type {boolean || null}
          */
         this.Status = null;
 
         /**
-         * Subnet ID
+         * New subnet ID of the instance
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * VPC ID
+         * New VPC ID of the instance
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * VIP address
+         * New private IPv4 address of the instance
          * @type {string || null}
          */
         this.Vip = null;
+
+        /**
+         * Task ID, which can be used to query the task execution status through the `DescribeTaskInfo` API.
+         * @type {number || null}
+         */
+        this.TaskId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -797,6 +857,7 @@ class ModifyNetworkConfigResponse extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.Vip = 'Vip' in params ? params.Vip : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1451,7 +1512,7 @@ class RestoreInstanceResponse extends  AbstractModel {
 }
 
 /**
- * Redis master or replica node information
+ * Master or replica node information of the TencentDB for Redis instance.
  * @class
  */
 class RedisNodeInfo extends  AbstractModel {
@@ -1459,25 +1520,25 @@ class RedisNodeInfo extends  AbstractModel {
         super();
 
         /**
-         * Node type. 0: master node; 1: replica node
+         * Node type. <ul><li>`0`: Master node.</li><li>`1`: Replica node.</li></ul>
          * @type {number || null}
          */
         this.NodeType = null;
 
         /**
-         * ID of the master or replica node, which is not required during instance creation
+         * Master or replica node ID. <ul><li>This parameter is optional when the [CreateInstances](https://intl.cloud.tencent.com/document/product/239/20026?from_cn_redirect=1) API is used to create a TencentDB for Redis instance, but it is required when the [UpgradeInstance](https://intl.cloud.tencent.com/document/product/239/20013?from_cn_redirect=1) API is used to adjust the configuration of an instance. </li><li>You can use the [DescribeInstances](https://intl.cloud.tencent.com/document/product/239/20018?from_cn_redirect=1) API to get the node ID of integer type. </li></ul>
          * @type {number || null}
          */
         this.NodeId = null;
 
         /**
-         * AZ ID of the master or replica node
+         * ID of the AZ of the master or replica node
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * AZ name of the master or replica node
+         * Name of the AZ of the master or replica node
          * @type {string || null}
          */
         this.ZoneName = null;
@@ -1514,10 +1575,47 @@ class DescribeBackupUrlRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Backup ID, which can be queried through the `DescribeInstanceBackups` API
+         * Backup ID, which can be obtained through the `RedisBackupSet` parameter returned by the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.BackupId = null;
+
+        /**
+         * Type of the network restriction for downloading backup files. If this parameter is not configured, the user-defined configuration will be used.
+
+- `NoLimit`: Backup files can be downloaded over both public and private networks.
+- `LimitOnlyIntranet`: Backup files can be downloaded only at private network addresses auto-assigned by Tencent Cloud.
+- `Customize`: Backup files can be downloaded only in the customized VPC.
+         * @type {string || null}
+         */
+        this.LimitType = null;
+
+        /**
+         * Only `In` can be passed in for this parameter, indicating that backup files can be downloaded in the custom `LimitVpc`.
+         * @type {string || null}
+         */
+        this.VpcComparisonSymbol = null;
+
+        /**
+         * Whether backups can be downloaded at the custom `LimitIp` address.
+
+- `In` (default value): Download is allowed for the custom IP.
+- `NotIn`: Download is not allowed for the custom IP.
+         * @type {string || null}
+         */
+        this.IpComparisonSymbol = null;
+
+        /**
+         * VPC ID of the custom backup file download address, which is required if `LimitType` is `Customize`.
+         * @type {Array.<BackupLimitVpcItem> || null}
+         */
+        this.LimitVpc = null;
+
+        /**
+         * VPC IP of the custom backup file download address, which is required if `LimitType` is `Customize`.
+         * @type {Array.<string> || null}
+         */
+        this.LimitIp = null;
 
     }
 
@@ -1530,6 +1628,19 @@ class DescribeBackupUrlRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.LimitType = 'LimitType' in params ? params.LimitType : null;
+        this.VpcComparisonSymbol = 'VpcComparisonSymbol' in params ? params.VpcComparisonSymbol : null;
+        this.IpComparisonSymbol = 'IpComparisonSymbol' in params ? params.IpComparisonSymbol : null;
+
+        if (params.LimitVpc) {
+            this.LimitVpc = new Array();
+            for (let z in params.LimitVpc) {
+                let obj = new BackupLimitVpcItem();
+                obj.deserialize(params.LimitVpc[z]);
+                this.LimitVpc.push(obj);
+            }
+        }
+        this.LimitIp = 'LimitIp' in params ? params.LimitIp : null;
 
     }
 }
@@ -1740,7 +1851,7 @@ class InstanceProxySlowlogDetail extends  AbstractModel {
         super();
 
         /**
-         * Slow query duration
+         * Duration of the slow query in ms.
          * @type {number || null}
          */
         this.Duration = null;
@@ -2252,19 +2363,19 @@ class ModifyAutoBackupConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Date. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter cannot be modified for now.
+         * Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter currently cannot be modified.
          * @type {Array.<string> || null}
          */
         this.WeekDays = null;
 
         /**
-         * Time period. Value range: 00:00-01:00, 01:00-02:00...... 23:00-00:00
+         * Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
          * @type {string || null}
          */
         this.TimePeriod = null;
 
         /**
-         * Automatic backup type: 1 (scheduled rollback)
+         * Automatic backup type. `1`: Scheduled rollback.
          * @type {number || null}
          */
         this.AutoBackupType = null;
@@ -3584,7 +3695,7 @@ class DescribeProductInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Sale information of a region
+         * Sale information of a region.
          * @type {Array.<RegionConf> || null}
          */
         this.RegionSet = null;
@@ -3786,7 +3897,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Filenames = null;
 
         /**
-         * List of backup file information
+         * List of backup file information.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BackupDownloadInfo> || null}
          */
@@ -3934,6 +4045,41 @@ class InstanceSecurityGroupDetail extends  AbstractModel {
                 this.SecurityGroupDetails.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * VPC information of the custom backup file download address.
+ * @class
+ */
+class BackupLimitVpcItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region of the VPC of the custom backup file download address.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * VPC list of the custom backup file download address.
+         * @type {Array.<string> || null}
+         */
+        this.VpcList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.VpcList = 'VpcList' in params ? params.VpcList : null;
 
     }
 }
@@ -4200,13 +4346,13 @@ class DescribeInstanceBackupsResponse extends  AbstractModel {
         super();
 
         /**
-         * Total number of backups
+         * Total number of backups.
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Array of instance backups
+         * Array of instance backups.
          * @type {Array.<RedisBackupSet> || null}
          */
         this.BackupSet = null;
@@ -5106,13 +5252,13 @@ class DescribeReplicationGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance list size. Default value: 20
+         * Number of instances returned per page. Default value: `20`.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit`
+         * Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
          * @type {number || null}
          */
         this.Offset = null;
@@ -5124,7 +5270,7 @@ class DescribeReplicationGroupRequest extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * Instance ID/name. Fuzzy query is supported.
+         * Keyword for fuzzy search, which can be an instance name or instance ID.
          * @type {string || null}
          */
         this.SearchKey = null;
@@ -5245,34 +5391,48 @@ class ModifyNetworkConfigRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Operation type. changeVip: modify the VIP of an instance; changeVpc: modify the subnet of an instance; changeBaseToVpc: change from classic network to VPC
+         * Network change type. Valid values:
+- `changeVip`: VPC change, including the private IPv4 address and port.
+- `changeVpc`: Subnet change.
+- `changeBaseToVpc`: Change from classic network to VPC.
+- `changeVPort`: Port change.
          * @type {string || null}
          */
         this.Operation = null;
 
         /**
-         * VIP address, which is required for the `changeVip` operation. If this parameter is left blank, a random one will be assigned by default.
+         * Private IPv4 address of the instance, which is required if `Operation` is `changeVip`.
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * VPC ID, which is required for `changeVpc` and `changeBaseToVpc` operations.
+         * VPC ID after the change, which is required if `Operation` is `changeVpc` or `changeBaseToVpc`.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet ID, which is required for `changeVpc` and `changeBaseToVpc` operations
+         * Subnet ID after the change, which is required if `Operation` is `changeVpc` or `changeBaseToVpc`.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Retention time of the original VIP in days. Note that this parameter works only in the latest SDK. In earlier SDKs, the original VIP is released immediately. To view the SDK version, go to [SDK Center](https://intl.cloud.tencent.com/document/sdk?from_cn_redirect=1).
+         * Retention period of the original private IPv4 address
+- Unit: Days.
+- Valid values: `0`, `1`, `2`, `3`, `7`, `15`.
+
+**Note**: You can set the retention period of the original address only in the latest SDK. In earlier SDKs, the original address is released immediately. To view the SDK version, go to [SDK Center](https://intl.cloud.tencent.com/document/sdk?from_cn_redirect=1).
          * @type {number || null}
          */
         this.Recycle = null;
+
+        /**
+         * Network port after the change, which is required if `Operation` is `changeVPort` or `changeVip`. Value range: [1024,65535].
+         * @type {number || null}
+         */
+        this.VPort = null;
 
     }
 
@@ -5289,6 +5449,7 @@ class ModifyNetworkConfigRequest extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.Recycle = 'Recycle' in params ? params.Recycle : null;
+        this.VPort = 'VPort' in params ? params.VPort : null;
 
     }
 }
@@ -7053,13 +7214,13 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Number of instances. Default value: 20. Maximum value: 1000.
+         * Number of instances returned per page. Default value: `20`. Maximum value: `1000`.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit`.
+         * Pagination offset, which is an integral multiple of `Limit`.
          * @type {number || null}
          */
         this.Offset = null;
@@ -7366,7 +7527,7 @@ class DescribeSlowLogRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * The average execution time threshold of slow query in microseconds
+         * The average execution time threshold of slow query in ms.
          * @type {number || null}
          */
         this.MinQueryTime = null;
@@ -7734,13 +7895,13 @@ class DescribeReplicationGroupResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of replication group
+         * Number of replication groups
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
-         * Replication group info
+         * Replication group information
          * @type {Array.<Groups> || null}
          */
         this.Groups = null;
@@ -7888,7 +8049,7 @@ class InstanceSet extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * User's Appid
+         * User AppID
          * @type {number || null}
          */
         this.Appid = null;
@@ -7900,7 +8061,7 @@ class InstanceSet extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Region ID. 1: Guangzhou; 4: Shanghai; 5: Hong Kong (China); 6: Toronto; 7: Shanghai Finance; 8: Beijing; 9: Singapore; 11: Shenzhen Finance; 15: West US (Silicon Valley); 16: Chengdu; 17: Germany; 18: South Korea; 19: Chongqing; 21: India; 22: East US (Virginia); 23: Thailand; 24: Russia; 25: Japan.
+         * Region ID. <ul><li>`1`: Guangzhou. </li><li>`4`: Shanghai. </li><li>`5`: Hong Kong (China). </li><li>`6`: Toronto. </li> <li>`7`: Shanghai Finance. </li> <li>`8`: Beijing. </li> <li>`9`: Singapore. </li> <li>`11`: Shenzhen Finance. </li> <li>`15`: West US (Silicon Valley). </li><li>`16`: Chengdu. </li><li>`17`: Frankfurt. </li><li>`18`: Seoul. </li><li>`19`: Chongqing. </li><li>`21`: Mumbai. </li><li>`22`: East US (Virginia). </li><li>`23`: Bangkok. </li><li>`24`: Moscow. </li><li>`25`: Tokyo. </li></ul>
          * @type {number || null}
          */
         this.RegionId = null;
@@ -7912,13 +8073,13 @@ class InstanceSet extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * VPC ID, such as 75101.
+         * VPC ID, such as `75101`.
          * @type {number || null}
          */
         this.VpcId = null;
 
         /**
-         * VPC subnet ID, such as 46315.
+         * Subnet ID, such as `46315`.
          * @type {number || null}
          */
         this.SubnetId = null;
@@ -7954,7 +8115,7 @@ class InstanceSet extends  AbstractModel {
         this.Size = null;
 
         /**
-         * This field has been disused
+         * This field has been disused. You can use the [GetMonitorData](https://intl.cloud.tencent.com/document/product/248/31014?from_cn_redirect=1) API to query the capacity used by the instance.
          * @type {number || null}
          */
         this.SizeUsed = null;
@@ -8151,8 +8312,8 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.DiskSize = null;
 
         /**
-         * Monitoring granularity type. <ul><li>`1m`: Monitoring at 1-minute granularity). </li><li>`5s`: Monitoring at 5-second granularity. </li></ul>
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Monitoring granularity type. <ul><li>`1m`: Monitoring at 1-minute granularity. </li><li>`5s`: Monitoring at 5-second granularity. </li></ul>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MonitorVersion = null;
@@ -9852,22 +10013,22 @@ class DescribeInstanceBackupsRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * Instance list size. Default value: 20
+         * Number of backups returned per page. Default value: `20`. Maximum value: `100`.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset, which is an integral multiple of `Limit`.
+         * Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
          * @type {number || null}
          */
         this.Offset = null;
+
+        /**
+         * ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
 
         /**
          * Start time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-02-08 16:46:34. This parameter is used to query the list of instance backups started during the [beginTime, endTime] range.
@@ -9882,10 +10043,22 @@ class DescribeInstanceBackupsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 1: backup in process; 2: backing up normally; 3: converting from backup to RDB file; 4: RDB conversion completed; -1: backup expired; -2: backup deleted.
+         * Backup task status:
+`1`: The backup is in the process.
+`2`: The backup is normal.
+`3`: The backup is being converted to an RDB file.
+`4`: Conversion to RDB has been completed.
+`-1`: The backup expired.
+`-2`: The backup has been deleted.
          * @type {Array.<number> || null}
          */
         this.Status = null;
+
+        /**
+         * Instance name, which can be fuzzily searched.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
 
     }
 
@@ -9896,12 +10069,13 @@ class DescribeInstanceBackupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -10443,7 +10617,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>
+         * New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li><li>In case of capacity reduction, the new specification must be at least 1.3 times the used capacity; otherwise, the operation will fail.</li></ul>
          * @type {number || null}
          */
         this.MemSize = null;
@@ -10641,7 +10815,7 @@ class Instances extends  AbstractModel {
         super();
 
         /**
-         * User App ID
+         * User AppID
          * @type {number || null}
          */
         this.AppId = null;
@@ -10659,7 +10833,7 @@ class Instances extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * Region ID. 1: Guangzhou; 4: Shanghai; 5: Hong Kong (China); 6: Toronto; 7: Shanghai Finance; 8: Beijing; 9: Singapore; 11: Shenzhen Finance; 15: West US (Silicon Valley)
+         * Region ID. <ul><li>`1`: Guangzhou. </li><li>`4`: Shanghai. </li><li>`5`: Hong Kong (China). </li> <li>`6`: Toronto. </li> <li>`7`: Shanghai Finance. </li> <li>`8`: Beijing. </li> <li>`9`: Singapore. </li> <li>`11`: Shenzhen Finance. </li> <li>`15`: West US (Silicon Valley). </li> </ul>
          * @type {number || null}
          */
         this.RegionId = null;
@@ -10683,7 +10857,7 @@ class Instances extends  AbstractModel {
         this.RedisShardNum = null;
 
         /**
-         * Shard size
+         * Shard memory size.
          * @type {number || null}
          */
         this.RedisShardSize = null;
@@ -10696,13 +10870,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.DiskSize = null;
 
         /**
-         * Engine: Redis community edition, Tencent Cloud CKV
+         * Engine: Redis Community Edition, Tencent Cloud CKV.
          * @type {string || null}
          */
         this.Engine = null;
 
         /**
-         * Instance role. Valid values: `rw` (read-write), `r`( read-only)
+         * Read-write permission of the instance. <ul><li>`rw`: Read/Write. </li><li>`r`: Read-only. </li></ul>
          * @type {string || null}
          */
         this.Role = null;
@@ -10715,25 +10889,25 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 
         /**
          * Internal parameter, which can be ignored.
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Vip6 = null;
 
         /**
-         * VPC ID, such as 75101
+         * VPC ID, such as `75101`.
          * @type {number || null}
          */
         this.VpcID = null;
 
         /**
-         * Instance Port
+         * Instance port
          * @type {number || null}
          */
         this.VPort = null;
 
         /**
-         * Instance status. 0: to be initialized; 1: in process; 2: running; -2: isolated; -3: to be deleted
+         * Instance status. <ul><li>`0`: Uninitialized. </li><li>`1`: In the process. </li><li>`2`: Running. </li><li>`-2`: Isolated. </li><li>`-3`: To be deleted. </li></ul>
          * @type {number || null}
          */
         this.Status = null;
@@ -10745,19 +10919,19 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.GrocerySysId = null;
 
         /**
-         * Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture)
+         * Instance type. <ul><li>`1`: Redis 2.8 Memory Edition (Cluster Architecture). </li><li>`2`: Redis 2.8 Memory Edition (Standard Architecture). </li><li>`3`: CKV 3.2 Memory Edition (Standard Architecture). </li><li>`4`: CKV 3.2 Memory Edition (Cluster Architecture). </li><li>`5`: Redis 2.8 Standalone Edition. </li><li>`6`: Redis 4.0 Memory Edition (Standard Architecture). </li><li>`7`: Redis 4.0 Memory Edition (Cluster Architecture). </li><li>`8`: Redis 5.0 Memory Edition (Standard Architecture). </li><li>`9`: Redis 5.0 Memory Edition (Cluster Architecture). </li></ul>
          * @type {number || null}
          */
         this.ProductType = null;
 
         /**
-         * Creation time
+         * The time when the instance was added to the replication group.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * Update time
+         * The time when instances in the replication group were updated.
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -11078,6 +11252,7 @@ module.exports = {
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
     InstanceSecurityGroupDetail: InstanceSecurityGroupDetail,
+    BackupLimitVpcItem: BackupLimitVpcItem,
     UpgradeProxyVersionResponse: UpgradeProxyVersionResponse,
     ResetPasswordRequest: ResetPasswordRequest,
     ModifyInstanceAccountResponse: ModifyInstanceAccountResponse,

@@ -2709,7 +2709,7 @@ class SyncImagesResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * ID of the image created in the destination region
          * @type {Array.<SyncImage> || null}
          */
         this.ImageSet = null;
@@ -3075,7 +3075,7 @@ class Placement extends  AbstractModel {
         this.HostIds = null;
 
         /**
-         * Master host IP used to create the CVM
+         * IPs of the hosts to create CVMs
          * @type {Array.<string> || null}
          */
         this.HostIps = null;
@@ -3213,6 +3213,12 @@ class SyncImagesRequest extends  AbstractModel {
          */
         this.ImageName = null;
 
+        /**
+         * Whether to return the ID of image created in the destination region
+         * @type {boolean || null}
+         */
+        this.ImageSetRequired = null;
+
     }
 
     /**
@@ -3226,6 +3232,7 @@ class SyncImagesRequest extends  AbstractModel {
         this.DestinationRegions = 'DestinationRegions' in params ? params.DestinationRegions : null;
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
         this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageSetRequired = 'ImageSetRequired' in params ? params.ImageSetRequired : null;
 
     }
 }
@@ -5034,7 +5041,7 @@ Click [here](https://intl.cloud.tencent.com/document/product/213/43498?from_cn_r
         this.Sysprep = null;
 
         /**
-         * Specified data disk ID included in the full image created from the instance.
+         * IDs of data disks included in the image. 
          * @type {Array.<string> || null}
          */
         this.DataDiskIds = null;
@@ -5327,6 +5334,25 @@ Note: this field may return null, indicating that no valid value was found.
          */
         this.DisableApiTermination = null;
 
+        /**
+         * Default login user
+         * @type {string || null}
+         */
+        this.DefaultLoginUser = null;
+
+        /**
+         * Default login port
+         * @type {number || null}
+         */
+        this.DefaultLoginPort = null;
+
+        /**
+         * Latest operation errors of the instance.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LatestOperationErrorMsg = null;
+
     }
 
     /**
@@ -5419,6 +5445,9 @@ Note: this field may return null, indicating that no valid value was found.
         }
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
         this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
+        this.DefaultLoginUser = 'DefaultLoginUser' in params ? params.DefaultLoginUser : null;
+        this.DefaultLoginPort = 'DefaultLoginPort' in params ? params.DefaultLoginPort : null;
+        this.LatestOperationErrorMsg = 'LatestOperationErrorMsg' in params ? params.LatestOperationErrorMsg : null;
 
     }
 }
@@ -6805,8 +6834,8 @@ Unit: second
         this.Duration = null;
 
         /**
-         * The operating system of the reserved instance, such as `linux`.
-Valid value: linux.
+         * The operating system of the reserved instance, such as `Linux`.
+Valid value: `Linux`.
          * @type {string || null}
          */
         this.ProductDescription = null;
@@ -6840,7 +6869,7 @@ class AllocateHostsResponse extends  AbstractModel {
         super();
 
         /**
-         * The ID list of the CVM instances newly created on the CDH.
+         * IDs of created instances
          * @type {Array.<string> || null}
          */
         this.HostIdSet = null;
@@ -8107,6 +8136,18 @@ Note: this field may return null, indicating that no valid value is obtained.
          */
         this.Remark = null;
 
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.GpuCount = null;
+
+        /**
+         * CPU clock rate of the instance
+         * @type {string || null}
+         */
+        this.Frequency = null;
+
     }
 
     /**
@@ -8154,12 +8195,14 @@ Note: this field may return null, indicating that no valid value is obtained.
         this.Gpu = 'Gpu' in params ? params.Gpu : null;
         this.Fpga = 'Fpga' in params ? params.Fpga : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+        this.GpuCount = 'GpuCount' in params ? params.GpuCount : null;
+        this.Frequency = 'Frequency' in params ? params.Frequency : null;
 
     }
 }
 
 /**
- * Supported operating systems are divided into two categories, Windows and Linux.
+ * Supported operating systems. They are divided into two categories, Windows and Linux.
  * @class
  */
 class ImageOsList extends  AbstractModel {
@@ -8168,14 +8211,14 @@ class ImageOsList extends  AbstractModel {
 
         /**
          * Supported Windows OS
-Note: This field may return null, indicating that no valid value is found.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Windows = null;
 
         /**
          * Supported Linux OS
-Note: This field may return null, indicating that no valid value is found.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Linux = null;
@@ -8342,6 +8385,12 @@ class ExportImagesResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
+         * List of COS filenames of the exported images
+         * @type {Array.<string> || null}
+         */
+        this.CosPaths = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -8357,6 +8406,7 @@ class ExportImagesResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.CosPaths = 'CosPaths' in params ? params.CosPaths : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9720,7 +9770,7 @@ If you want to use the default project, specify 0 for the parameter.
 }
 
 /**
- * 
+ * Image sync information
  * @class
  */
 class SyncImage extends  AbstractModel {
@@ -9728,13 +9778,13 @@ class SyncImage extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Image ID
          * @type {string || null}
          */
         this.ImageId = null;
 
         /**
-         * 
+         * Region
          * @type {string || null}
          */
         this.Region = null;

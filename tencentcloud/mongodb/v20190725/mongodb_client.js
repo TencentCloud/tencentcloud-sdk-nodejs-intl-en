@@ -26,8 +26,6 @@ const BackupDownloadTaskStatus = models.BackupDownloadTaskStatus;
 const ModifyDBInstanceNetworkAddressResponse = models.ModifyDBInstanceNetworkAddressResponse;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
 const DBInstancePrice = models.DBInstancePrice;
-const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
-const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
 const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
 const ReplicaSetInfo = models.ReplicaSetInfo;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
@@ -57,7 +55,7 @@ const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
 const InstanceIntegerParam = models.InstanceIntegerParam;
 const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
-const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
@@ -72,7 +70,7 @@ const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const InstanceTextParam = models.InstanceTextParam;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
 const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
-const DescribeBackupAccessRequest = models.DescribeBackupAccessRequest;
+const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const ModifyNetworkAddress = models.ModifyNetworkAddress;
 const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
 const RenameInstanceRequest = models.RenameInstanceRequest;
@@ -83,7 +81,6 @@ const DescribeClientConnectionsResponse = models.DescribeClientConnectionsRespon
 const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
 const DBInstanceInfo = models.DBInstanceInfo;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
-const BackupFile = models.BackupFile;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const InstanceDetail = models.InstanceDetail;
 const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
@@ -194,21 +191,6 @@ class MongodbClient extends AbstractClient {
     IsolateDBInstance(req, cb) {
         let resp = new IsolateDBInstanceResponse();
         this.request("IsolateDBInstance", req, resp, cb);
-    }
-
-    /**
-     * 备份下载功能已调整，此接口即将下线
-
-TencentDB will soon stop supporting this API as the backup download feature has been modified.
-
-This API is used to get the permission to download a backup file. The detailed backup file information can be obtained through the `DescribeDBBackups` API.
-     * @param {DescribeBackupAccessRequest} req
-     * @param {function(string, DescribeBackupAccessResponse):void} cb
-     * @public
-     */
-    DescribeBackupAccess(req, cb) {
-        let resp = new DescribeBackupAccessResponse();
-        this.request("DescribeBackupAccess", req, resp, cb);
     }
 
     /**

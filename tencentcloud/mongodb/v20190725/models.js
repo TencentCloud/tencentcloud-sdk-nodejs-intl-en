@@ -166,7 +166,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance password, which must contain 8 to 16 characters and comprise at least two of the following types: letters, digits, and symbols (!@#%^*()). If it is left empty, the password is in the format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001".
+         * Instance password. If it is left empty, the password is in the default format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001". The custom password must contain 8-32 characters in at least two of the following types: letters, digits, and symbols (!@#%^*()_).
          * @type {string || null}
          */
         this.Password = null;
@@ -243,6 +243,24 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.MongosNodeNum = null;
 
+        /**
+         * Number of read-only nodes. Value range: 2-7.
+         * @type {number || null}
+         */
+        this.ReadonlyNodeNum = null;
+
+        /**
+         * The AZ where the read-only node is deployed
+         * @type {Array.<string> || null}
+         */
+        this.ReadonlyNodeAvailabilityZoneList = null;
+
+        /**
+         * The AZ where the hidden node resides. It is required for cross-AZ instances.
+         * @type {string || null}
+         */
+        this.HiddenZone = null;
+
     }
 
     /**
@@ -286,6 +304,9 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.MongosCpu = 'MongosCpu' in params ? params.MongosCpu : null;
         this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
         this.MongosNodeNum = 'MongosNodeNum' in params ? params.MongosNodeNum : null;
+        this.ReadonlyNodeNum = 'ReadonlyNodeNum' in params ? params.ReadonlyNodeNum : null;
+        this.ReadonlyNodeAvailabilityZoneList = 'ReadonlyNodeAvailabilityZoneList' in params ? params.ReadonlyNodeAvailabilityZoneList : null;
+        this.HiddenZone = 'HiddenZone' in params ? params.HiddenZone : null;
 
     }
 }
@@ -533,154 +554,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
-
-    }
-}
-
-/**
- * DescribeBackupAccess response structure.
- * @class
- */
-class DescribeBackupAccessResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance region
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * The bucket where a backup file is located
-         * @type {string || null}
-         */
-        this.Bucket = null;
-
-        /**
-         * Storage information of a backup file
-         * @type {Array.<BackupFile> || null}
-         */
-        this.Files = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
-
-        if (params.Files) {
-            this.Files = new Array();
-            for (let z in params.Files) {
-                let obj = new BackupFile();
-                obj.deserialize(params.Files[z]);
-                this.Files.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * InquirePriceCreateDBInstances request structure.
- * @class
- */
-class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance region name in the format of ap-guangzhou-2.
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
-         * @type {number || null}
-         */
-        this.NodeNum = null;
-
-        /**
-         * Instance memory size in GB.
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Instance disk size in GB.
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-        /**
-         * Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition.
-         * @type {string || null}
-         */
-        this.MongoVersion = null;
-
-        /**
-         * Server type. Valid values: `HIO` (high IO), `HIO10G` (ten-gigabit high IO)
-         * @type {string || null}
-         */
-        this.MachineCode = null;
-
-        /**
-         * Number of instances. Minimum value: 1. Maximum value: 10.
-         * @type {number || null}
-         */
-        this.GoodsNum = null;
-
-        /**
-         * Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * Instance type. Valid values: REPLSET (replica set), SHARD (sharded cluster), STANDALONE (single-node).
-         * @type {string || null}
-         */
-        this.ClusterType = null;
-
-        /**
-         * Number of replica sets. To create a replica set instance, set this parameter to 1; to create a shard instance, see the parameters returned by the `DescribeSpecInfo` API; to create a single-node instance, set this parameter to 0.
-         * @type {number || null}
-         */
-        this.ReplicateSetNum = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.MongoVersion = 'MongoVersion' in params ? params.MongoVersion : null;
-        this.MachineCode = 'MachineCode' in params ? params.MachineCode : null;
-        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
-        this.Period = 'Period' in params ? params.Period : null;
-        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
-        this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
 
     }
 }
@@ -2319,96 +2192,114 @@ class DescribeDBInstanceDealRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstances request structure.
+ * InquirePriceCreateDBInstances request structure.
  * @class
  */
-class DescribeDBInstancesRequest extends  AbstractModel {
+class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
-         * @type {Array.<string> || null}
+         * Instance region name in the format of ap-guangzhou-2.
+         * @type {string || null}
          */
-        this.InstanceIds = null;
+        this.Zone = null;
 
         /**
-         * Instance type. Valid values: 0 (all instances), 1 (promoted), 2 (temp), 3 (read-only), -1 (promoted + read-only + disaster recovery)
+         * Number of primary and secondary nodes per shard. <br>Value range: It can be queried by the <a href="https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API, and the `MinNodeNum` and `MaxNodeNum` parameters are the minimal and maximum value respectively.</li></ul>
          * @type {number || null}
          */
-        this.InstanceType = null;
+        this.NodeNum = null;
 
         /**
-         * Cluster type. Valid values: 0 (replica set instance), 1 (sharding instance), -1 (all instances)
+         * Instance memory size in GB.
          * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         *  Instance disk size. <ul><li>Unit: GB</li><li>Value range: It can be queried by the <a href="https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API, and `MinStorage` and `MaxStorage` parameters are the minimal and maximum value of the disk size respectively.</br>
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * Instance version information. <ul><li>For specific supported versions, query through the <a href="https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API, the returned parameter `MongoVersionCode` in data structure `SpecItems` is the supported version information. </li><li>The correspondences between parameters and versions are as follows <ul><li>MONGO_3_WT: MongoDB 3.2 WiredTiger storage engine version. </li><li>MONGO_3_ROCKS: MongoDB 3.2 RocksDB storage engine version. </li><li>MONGO_36_WT: MongoDB 3.6 WiredTiger storage engine version. </li><li>MONGO_40_WT: MongoDB 4.0 WiredTiger storage engine version. </li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger storage engine version. </li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger storage engine version. </li></ul>
+         * @type {string || null}
+         */
+        this.MongoVersion = null;
+
+        /**
+         * Server type. Valid values: `HIO` (high IO), `HIO10G` (ten-gigabit high IO)
+         * @type {string || null}
+         */
+        this.MachineCode = null;
+
+        /**
+         * Number of instances. Minimum value: 1. Maximum value: 10.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * Instance type. Valid values: REPLSET (replica set), SHARD (sharded cluster), STANDALONE (single-node).
+         * @type {string || null}
          */
         this.ClusterType = null;
 
         /**
-         * Instance status. Valid values: `0` (to be initialized), `1` (executing task), `2` (running), `-2` (isolated monthly-subscribed instance), `-3` (isolated pay-as-you-go instance)
-         * @type {Array.<number> || null}
-         */
-        this.Status = null;
-
-        /**
-         * VPC ID. This parameter can be left empty for the basic network
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * Subnet ID of VPC. This parameter can be left empty for the basic network. If it is passed in as an input parameter, the corresponding VpcId must be set
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Billing type. Valid value: 0 (pay-as-you-go)
+         * Number of replica sets. To create a replica set instance, set this parameter to 1; to create a shard instance, see the parameters returned by the `DescribeSpecInfo` API; to create a single-node instance, set this parameter to 0.
          * @type {number || null}
          */
-        this.PayMode = null;
+        this.ReplicateSetNum = null;
 
         /**
-         * Number of results to be returned for a single request. Valid values: 1-100. Default value: 20
+         * Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
          * @type {number || null}
          */
-        this.Limit = null;
+        this.Period = null;
 
         /**
-         * Offset. Default value: 0
+         * 
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 
          * @type {number || null}
          */
-        this.Offset = null;
+        this.MongosCpu = null;
 
         /**
-         * Sort by field of the returned result set. Currently, supported values include "ProjectId", "InstanceName", and "CreateTime". The return results are sorted in ascending order by default.
-         * @type {string || null}
+         * 
+         * @type {number || null}
          */
-        this.OrderBy = null;
+        this.MongosMemory = null;
 
         /**
-         * Sorting method of the return result set. Currently, "ASC" or "DESC" is supported
-         * @type {string || null}
+         * 
+         * @type {number || null}
          */
-        this.OrderByType = null;
+        this.MongosNum = null;
 
         /**
-         * Project ID
-         * @type {Array.<number> || null}
+         * 
+         * @type {number || null}
          */
-        this.ProjectIds = null;
+        this.ConfigServerCpu = null;
 
         /**
-         * Search keyword, which can be instance ID, instance name, or complete IP
-         * @type {string || null}
+         * 
+         * @type {number || null}
          */
-        this.SearchKey = null;
+        this.ConfigServerMemory = null;
 
         /**
-         * Tag information
-         * @type {TagInfo || null}
+         * 
+         * @type {number || null}
          */
-        this.Tags = null;
+        this.ConfigServerVolume = null;
 
     }
 
@@ -2419,25 +2310,23 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.MongoVersion = 'MongoVersion' in params ? params.MongoVersion : null;
+        this.MachineCode = 'MachineCode' in params ? params.MachineCode : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
-        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
-        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
-
-        if (params.Tags) {
-            let obj = new TagInfo();
-            obj.deserialize(params.Tags)
-            this.Tags = obj;
-        }
+        this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.MongosCpu = 'MongosCpu' in params ? params.MongosCpu : null;
+        this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
+        this.MongosNum = 'MongosNum' in params ? params.MongosNum : null;
+        this.ConfigServerCpu = 'ConfigServerCpu' in params ? params.ConfigServerCpu : null;
+        this.ConfigServerMemory = 'ConfigServerMemory' in params ? params.ConfigServerMemory : null;
+        this.ConfigServerVolume = 'ConfigServerVolume' in params ? params.ConfigServerVolume : null;
 
     }
 }
@@ -3232,24 +3121,96 @@ class DescribeBackupDownloadTaskRequest extends  AbstractModel {
 }
 
 /**
- * DescribeBackupAccess request structure.
+ * DescribeDBInstances request structure.
  * @class
  */
-class DescribeBackupAccessRequest extends  AbstractModel {
+class DescribeDBInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
-         * @type {string || null}
+         * List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+         * @type {Array.<string> || null}
          */
-        this.InstanceId = null;
+        this.InstanceIds = null;
 
         /**
-         * Name of the backup file for which to get the download permission
+         * Instance type. Valid values: 0 (all instances), 1 (promoted), 2 (temp), 3 (read-only), -1 (promoted + read-only + disaster recovery)
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * Cluster type. Valid values: 0 (replica set instance), 1 (sharding instance), -1 (all instances)
+         * @type {number || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * Instance status. Valid values: `0` (to be initialized), `1` (executing task), `2` (running), `-2` (isolated monthly-subscribed instance), `-3` (isolated pay-as-you-go instance)
+         * @type {Array.<number> || null}
+         */
+        this.Status = null;
+
+        /**
+         * VPC ID. This parameter can be left empty for the basic network
          * @type {string || null}
          */
-        this.BackupName = null;
+        this.VpcId = null;
+
+        /**
+         * Subnet ID of VPC. This parameter can be left empty for the basic network. If it is passed in as an input parameter, the corresponding VpcId must be set
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Billing type. Valid value: 0 (pay-as-you-go)
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Number of results to be returned for a single request. Valid values: 1-100. Default value: 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sort by field of the returned result set. Currently, supported values include "ProjectId", "InstanceName", and "CreateTime". The return results are sorted in ascending order by default.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting method of the return result set. Currently, "ASC" or "DESC" is supported
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * Project ID
+         * @type {Array.<number> || null}
+         */
+        this.ProjectIds = null;
+
+        /**
+         * Search keyword, which can be instance ID, instance name, or complete IP
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
+        /**
+         * Tag information
+         * @type {TagInfo || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -3260,8 +3221,25 @@ class DescribeBackupAccessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+
+        if (params.Tags) {
+            let obj = new TagInfo();
+            obj.deserialize(params.Tags)
+            this.Tags = obj;
+        }
 
     }
 }
@@ -3703,41 +3681,6 @@ class DescribeSlowLogsRequest extends  AbstractModel {
 }
 
 /**
- * Storage information of a backup file
- * @class
- */
-class BackupFile extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * ID of the replica set/shard to which a backup file belongs
-         * @type {string || null}
-         */
-        this.ReplicateSetId = null;
-
-        /**
-         * Path to a backup file
-         * @type {string || null}
-         */
-        this.File = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ReplicateSetId = 'ReplicateSetId' in params ? params.ReplicateSetId : null;
-        this.File = 'File' in params ? params.File : null;
-
-    }
-}
-
-/**
  * DescribeDBBackups response structure.
  * @class
  */
@@ -3820,7 +3763,7 @@ class InstanceDetail extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * Cluster type. Valid values: 0 (replica set instance), 1 (sharding instance),
+         * Cluster type. Valid values: `0` (replica set instance), `1` (sharded instance).
          * @type {number || null}
          */
         this.ClusterType = null;
@@ -3856,7 +3799,7 @@ class InstanceDetail extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * Instance status. Valid values: 0 (to be initialized), 1 (in process), 2 (running), -2 (expired)
+         * Instance status. Valid values: `0` (to be initialized), `1` (in process), `2` (running), `-2` (expired).
          * @type {number || null}
          */
         this.Status = null;
@@ -3928,7 +3871,7 @@ class InstanceDetail extends  AbstractModel {
         this.ReplicationSetNum = null;
 
         /**
-         * Instance auto-renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal), 2 (no renewal upon expiration)
+         * Instance auto-renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal), `2` (no renewal upon expiration)
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
@@ -3940,13 +3883,13 @@ class InstanceDetail extends  AbstractModel {
         this.UsedVolume = null;
 
         /**
-         * Start time of the maintenance time window
+         * Start time of the maintenance time
          * @type {string || null}
          */
         this.MaintenanceStart = null;
 
         /**
-         * End time of the maintenance time window
+         * End time of the maintenance time
          * @type {string || null}
          */
         this.MaintenanceEnd = null;
@@ -3976,7 +3919,7 @@ class InstanceDetail extends  AbstractModel {
         this.CloneInstances = null;
 
         /**
-         * Information of associated instances. For a promoted instance, this field represents information of its temp instance; for a temp instance, this field represents information of its promoted instance; and for a read-only/disaster recovery instance, this field represents information of its primary instance
+         * Information of associated instances. For a regular instance, this field represents the information of its temp instance; for a temp instance, this field represents the information of its regular instance; and for a read-only instance or a disaster recovery instance, this field represents the information of its primary instance.
          * @type {DBInstanceInfo || null}
          */
         this.RelatedInstance = null;
@@ -3988,19 +3931,19 @@ class InstanceDetail extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * Instance version tag
+         * Instance version
          * @type {number || null}
          */
         this.InstanceVer = null;
 
         /**
-         * Instance version tag
+         * Instance version
          * @type {number || null}
          */
         this.ClusterVer = null;
 
         /**
-         * Protocol information. Valid values: 1 (mongodb), 2 (dynamodb)
+         * Protocol information. Valid values: `1` (mongodb), `2` (dynamodb).
          * @type {number || null}
          */
         this.Protocol = null;
@@ -4022,6 +3965,62 @@ class InstanceDetail extends  AbstractModel {
          * @type {string || null}
          */
         this.RealInstanceId = null;
+
+        /**
+         * Number of mongos nodes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MongosNodeNum = null;
+
+        /**
+         * mongos node memory
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MongosMemory = null;
+
+        /**
+         * Number of mongos nodes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MongosCpuNum = null;
+
+        /**
+         * Number of ConfigServer nodes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ConfigServerNodeNum = null;
+
+        /**
+         * Memory of ConfigServer node
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ConfigServerMemory = null;
+
+        /**
+         * Disk size of ConfigServer node
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ConfigServerVolume = null;
+
+        /**
+         * CPU number of ConfigServer node
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ConfigServerCpuNum = null;
+
+        /**
+         * Number of read-only nodes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ReadonlyNodeNum = null;
 
     }
 
@@ -4115,6 +4114,14 @@ class InstanceDetail extends  AbstractModel {
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.InstanceStatusDesc = 'InstanceStatusDesc' in params ? params.InstanceStatusDesc : null;
         this.RealInstanceId = 'RealInstanceId' in params ? params.RealInstanceId : null;
+        this.MongosNodeNum = 'MongosNodeNum' in params ? params.MongosNodeNum : null;
+        this.MongosMemory = 'MongosMemory' in params ? params.MongosMemory : null;
+        this.MongosCpuNum = 'MongosCpuNum' in params ? params.MongosCpuNum : null;
+        this.ConfigServerNodeNum = 'ConfigServerNodeNum' in params ? params.ConfigServerNodeNum : null;
+        this.ConfigServerMemory = 'ConfigServerMemory' in params ? params.ConfigServerMemory : null;
+        this.ConfigServerVolume = 'ConfigServerVolume' in params ? params.ConfigServerVolume : null;
+        this.ConfigServerCpuNum = 'ConfigServerCpuNum' in params ? params.ConfigServerCpuNum : null;
+        this.ReadonlyNodeNum = 'ReadonlyNodeNum' in params ? params.ReadonlyNodeNum : null;
 
     }
 }
@@ -4624,8 +4631,6 @@ module.exports = {
     ModifyDBInstanceNetworkAddressResponse: ModifyDBInstanceNetworkAddressResponse,
     CreateBackupDBInstanceResponse: CreateBackupDBInstanceResponse,
     DBInstancePrice: DBInstancePrice,
-    DescribeBackupAccessResponse: DescribeBackupAccessResponse,
-    InquirePriceCreateDBInstancesRequest: InquirePriceCreateDBInstancesRequest,
     DescribeSlowLogPatternsResponse: DescribeSlowLogPatternsResponse,
     ReplicaSetInfo: ReplicaSetInfo,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
@@ -4655,7 +4660,7 @@ module.exports = {
     OfflineIsolatedDBInstanceRequest: OfflineIsolatedDBInstanceRequest,
     InstanceIntegerParam: InstanceIntegerParam,
     DescribeDBInstanceDealRequest: DescribeDBInstanceDealRequest,
-    DescribeDBInstancesRequest: DescribeDBInstancesRequest,
+    InquirePriceCreateDBInstancesRequest: InquirePriceCreateDBInstancesRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
@@ -4670,7 +4675,7 @@ module.exports = {
     InstanceTextParam: InstanceTextParam,
     OfflineIsolatedDBInstanceResponse: OfflineIsolatedDBInstanceResponse,
     DescribeBackupDownloadTaskRequest: DescribeBackupDownloadTaskRequest,
-    DescribeBackupAccessRequest: DescribeBackupAccessRequest,
+    DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     ModifyNetworkAddress: ModifyNetworkAddress,
     DescribeSecurityGroupRequest: DescribeSecurityGroupRequest,
     RenameInstanceRequest: RenameInstanceRequest,
@@ -4681,7 +4686,6 @@ module.exports = {
     FlushInstanceRouterConfigRequest: FlushInstanceRouterConfigRequest,
     DBInstanceInfo: DBInstanceInfo,
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
-    BackupFile: BackupFile,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     InstanceDetail: InstanceDetail,
     ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,

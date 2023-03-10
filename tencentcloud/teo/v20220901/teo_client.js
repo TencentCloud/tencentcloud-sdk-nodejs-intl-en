@@ -34,13 +34,16 @@ const DeleteApplicationProxyResponse = models.DeleteApplicationProxyResponse;
 const Https = models.Https;
 const SecEntryValue = models.SecEntryValue;
 const DescribeZonesRequest = models.DescribeZonesRequest;
+const DiffIPWhitelist = models.DiffIPWhitelist;
 const DescribeLogTopicTasksRequest = models.DescribeLogTopicTasksRequest;
 const CreateCredentialRequest = models.CreateCredentialRequest;
 const ModifyRuleRequest = models.ModifyRuleRequest;
+const OriginRecord = models.OriginRecord;
 const DescribePrefetchTasksResponse = models.DescribePrefetchTasksResponse;
 const DescribeWebManagedRulesHitRuleDetailRequest = models.DescribeWebManagedRulesHitRuleDetailRequest;
 const AdvancedFilter = models.AdvancedFilter;
 const DeleteApplicationProxyRequest = models.DeleteApplicationProxyRequest;
+const DescribeDDoSAttackDataResponse = models.DescribeDDoSAttackDataResponse;
 const ModifySecurityWafGroupPolicyRequest = models.ModifySecurityWafGroupPolicyRequest;
 const DescribeZoneSettingRequest = models.DescribeZoneSettingRequest;
 const DescribeClientRuleListResponse = models.DescribeClientRuleListResponse;
@@ -75,6 +78,8 @@ const DeleteApplicationProxyRuleResponse = models.DeleteApplicationProxyRuleResp
 const ReclaimAliasDomainRequest = models.ReclaimAliasDomainRequest;
 const DescribeRulesResponse = models.DescribeRulesResponse;
 const TimingDataRecord = models.TimingDataRecord;
+const OriginProtectionInfo = models.OriginProtectionInfo;
+const DescribeOriginProtectionResponse = models.DescribeOriginProtectionResponse;
 const BindZoneToPlanResponse = models.BindZoneToPlanResponse;
 const ExceptConfig = models.ExceptConfig;
 const DeleteOriginGroupRequest = models.DeleteOriginGroupRequest;
@@ -107,6 +112,7 @@ const AclConfig = models.AclConfig;
 const ModifyZoneSettingResponse = models.ModifyZoneSettingResponse;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const SubRuleItem = models.SubRuleItem;
+const UpdateOriginProtectionIPWhitelistRequest = models.UpdateOriginProtectionIPWhitelistRequest;
 const Origin = models.Origin;
 const WafConfig = models.WafConfig;
 const DescribeSpeedTestingDetailsResponse = models.DescribeSpeedTestingDetailsResponse;
@@ -115,7 +121,7 @@ const DnsData = models.DnsData;
 const ServerCertInfo = models.ServerCertInfo;
 const CreateAliasDomainRequest = models.CreateAliasDomainRequest;
 const CreateAliasDomainResponse = models.CreateAliasDomainResponse;
-const OriginRecord = models.OriginRecord;
+const DescribeOriginProtectionRequest = models.DescribeOriginProtectionRequest;
 const ClientIpCountry = models.ClientIpCountry;
 const CreatePrefetchTaskRequest = models.CreatePrefetchTaskRequest;
 const DeleteApplicationProxyRuleRequest = models.DeleteApplicationProxyRuleRequest;
@@ -149,6 +155,7 @@ const NoCache = models.NoCache;
 const DescribeDefaultCertificatesRequest = models.DescribeDefaultCertificatesRequest;
 const DescribeAliasDomainsResponse = models.DescribeAliasDomainsResponse;
 const DescribeWebProtectionHitRuleDetailRequest = models.DescribeWebProtectionHitRuleDetailRequest;
+const IPWhitelist = models.IPWhitelist;
 const DDoS = models.DDoS;
 const CreateZoneRequest = models.CreateZoneRequest;
 const PlanInfo = models.PlanInfo;
@@ -169,6 +176,7 @@ const CodeAction = models.CodeAction;
 const CreateReplayTaskRequest = models.CreateReplayTaskRequest;
 const DescribeWebProtectionHitRuleDetailResponse = models.DescribeWebProtectionHitRuleDetailResponse;
 const Identification = models.Identification;
+const DescribeDDoSAttackDataRequest = models.DescribeDDoSAttackDataRequest;
 const CachePrefresh = models.CachePrefresh;
 const DescribeWebProtectionClientIpListResponse = models.DescribeWebProtectionClientIpListResponse;
 const DescribeTimingL7AnalysisDataResponse = models.DescribeTimingL7AnalysisDataResponse;
@@ -227,6 +235,7 @@ const RuleAndConditions = models.RuleAndConditions;
 const DescribeSpeedTestingDetailsRequest = models.DescribeSpeedTestingDetailsRequest;
 const DropPageConfig = models.DropPageConfig;
 const SpeedTestingMetricData = models.SpeedTestingMetricData;
+const UpdateOriginProtectionIPWhitelistResponse = models.UpdateOriginProtectionIPWhitelistResponse;
 const SecEntry = models.SecEntry;
 const DescribeIdentificationsRequest = models.DescribeIdentificationsRequest;
 const DescribeDefaultCertificatesResponse = models.DescribeDefaultCertificatesResponse;
@@ -603,6 +612,17 @@ class TeoClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the origin protection configuration.
+     * @param {DescribeOriginProtectionRequest} req
+     * @param {function(string, DescribeOriginProtectionResponse):void} cb
+     * @public
+     */
+    DescribeOriginProtection(req, cb) {
+        let resp = new DescribeOriginProtectionResponse();
+        this.request("DescribeOriginProtection", req, resp, cb);
+    }
+
+    /**
      * This API is used to query a list of default certificates.
      * @param {DescribeDefaultCertificatesRequest} req
      * @param {function(string, DescribeDefaultCertificatesResponse):void} cb
@@ -900,6 +920,17 @@ class TeoClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the time-series data of DDoS attacks.
+     * @param {DescribeDDoSAttackDataRequest} req
+     * @param {function(string, DescribeDDoSAttackDataResponse):void} cb
+     * @public
+     */
+    DescribeDDoSAttackData(req, cb) {
+        let resp = new DescribeDDoSAttackDataResponse();
+        this.request("DescribeDDoSAttackData", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify the web and bot security configurations.
      * @param {ModifySecurityPolicyRequest} req
      * @param {function(string, ModifySecurityPolicyResponse):void} cb
@@ -1051,6 +1082,17 @@ class TeoClient extends AbstractClient {
     CreateSpeedTesting(req, cb) {
         let resp = new CreateSpeedTestingResponse();
         this.request("CreateSpeedTesting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the list of intermediate IPs.
+     * @param {UpdateOriginProtectionIPWhitelistRequest} req
+     * @param {function(string, UpdateOriginProtectionIPWhitelistResponse):void} cb
+     * @public
+     */
+    UpdateOriginProtectionIPWhitelist(req, cb) {
+        let resp = new UpdateOriginProtectionIPWhitelistResponse();
+        this.request("UpdateOriginProtectionIPWhitelist", req, resp, cb);
     }
 
     /**

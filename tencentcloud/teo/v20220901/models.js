@@ -966,6 +966,75 @@ class DescribeZonesRequest extends  AbstractModel {
 }
 
 /**
+ * Differences between the newest and existing intermediate IPs
+ * @class
+ */
+class DiffIPWhitelist extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The latest intermediate IPs.
+         * @type {IPWhitelist || null}
+         */
+        this.LatestIPWhitelist = null;
+
+        /**
+         * The intermediate IPs added to the existing list.
+         * @type {IPWhitelist || null}
+         */
+        this.AddedIPWhitelist = null;
+
+        /**
+         * The intermediate IPs removed from the existing list.
+         * @type {IPWhitelist || null}
+         */
+        this.RemovedIPWhitelist = null;
+
+        /**
+         * The intermediate IPs that remain unchanged.
+         * @type {IPWhitelist || null}
+         */
+        this.NoChangeIPWhitelist = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LatestIPWhitelist) {
+            let obj = new IPWhitelist();
+            obj.deserialize(params.LatestIPWhitelist)
+            this.LatestIPWhitelist = obj;
+        }
+
+        if (params.AddedIPWhitelist) {
+            let obj = new IPWhitelist();
+            obj.deserialize(params.AddedIPWhitelist)
+            this.AddedIPWhitelist = obj;
+        }
+
+        if (params.RemovedIPWhitelist) {
+            let obj = new IPWhitelist();
+            obj.deserialize(params.RemovedIPWhitelist)
+            this.RemovedIPWhitelist = obj;
+        }
+
+        if (params.NoChangeIPWhitelist) {
+            let obj = new IPWhitelist();
+            obj.deserialize(params.NoChangeIPWhitelist)
+            this.NoChangeIPWhitelist = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeLogTopicTasks request structure.
  * @class
  */
@@ -1097,6 +1166,106 @@ class ModifyRuleRequest extends  AbstractModel {
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
+
+    }
+}
+
+/**
+ * Origin group record
+ * @class
+ */
+class OriginRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The origin record value, which can be an IPv4/IPv6 address or a domain name.
+         * @type {string || null}
+         */
+        this.Record = null;
+
+        /**
+         * The origin record ID.
+         * @type {string || null}
+         */
+        this.RecordId = null;
+
+        /**
+         * The origin port. Value rang: 1-65535.
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * The weight when `ConfigurationType=weight`.
+If 0 or no value is passed, the weight of each origin in a group will be 0 or left empty, indicating that origin-pull is performed by round-robin.
+If a value between 1-100 is passed, the total weight of multiple origins in a group should be 100, indicating that origin-pull is performed by weight.
+The weight when `ConfigurationType=proto`.
+If 0 or no value is passed, the weight of each origin in a group will be 0 or left empty, indicating that origin-pull is performed by round-robin.
+If a value between 1-100 is passed, the total weight of multiple origins with the same protocol in a group should be 100, indicating that origin-pull is performed by weight.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * The origin protocol when `ConfigurationType=proto`, indicating that origin-pull is performed by protocol.
+<li>`http`: HTTP protocol</li>
+<li>`https`: HTTPS protocol</li>
+         * @type {string || null}
+         */
+        this.Proto = null;
+
+        /**
+         * The region when `ConfigurationType=area`, which is specified by country code (ISO 3166 alpha-2) or continent code. If not specified, it indicates all regions. Supported continent codes:
+<li>`Asia`</li>
+<li>`Europe`</li>
+<li>`Africa`</li>
+<li>`Oceania`</li>
+<li>`Americas`</li>An origin group must have at least one origin configured with all regions.
+         * @type {Array.<string> || null}
+         */
+        this.Area = null;
+
+        /**
+         * It is valid only when `OriginType=third_part`.
+Whether the origin group is private. Values:
+<li>`true`: Yes.</li>
+<li>`false`: No.</li>If not specified, it defaults to false.
+         * @type {boolean || null}
+         */
+        this.Private = null;
+
+        /**
+         * The authentication parameter, which is used when `Private=true`.
+         * @type {Array.<PrivateParameter> || null}
+         */
+        this.PrivateParameters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Record = 'Record' in params ? params.Record : null;
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.Proto = 'Proto' in params ? params.Proto : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.Private = 'Private' in params ? params.Private : null;
+
+        if (params.PrivateParameters) {
+            this.PrivateParameters = new Array();
+            for (let z in params.PrivateParameters) {
+                let obj = new PrivateParameter();
+                obj.deserialize(params.PrivateParameters[z]);
+                this.PrivateParameters.push(obj);
+            }
+        }
 
     }
 }
@@ -1325,6 +1494,57 @@ class DeleteApplicationProxyRequest extends  AbstractModel {
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.ProxyId = 'ProxyId' in params ? params.ProxyId : null;
+
+    }
+}
+
+/**
+ * DescribeDDoSAttackData response structure.
+ * @class
+ */
+class DescribeDDoSAttackDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of query results.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of DDoS attack data.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SecEntry> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SecEntry();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2460,7 +2680,7 @@ class DescribeSingleL7AnalysisDataRequest extends  AbstractModel {
 
         /**
          * List of sites
-If it's not specified, all sites are selected by default, and the query period must be within the last 30 days. 
+If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
 Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. 
          * @type {Array.<string> || null}
          */
@@ -2468,11 +2688,11 @@ Enter the IDs of sites to query. The maximum query period is determined by the <
 
         /**
          * Filters
-<li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-<li>`domain`<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-<li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
-<li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-<li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+<li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
+<li>`domain`<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+<li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
+<li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
+<li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -2482,7 +2702,7 @@ Enter the IDs of sites to query. The maximum query period is determined by the <
 <li>`min`: 1 minute;</li>
 <li>`5min`: 5 minutes;</li>
 <li>`hour`: 1 hour;</li>
-<li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < Period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
+<li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
          * @type {string || null}
          */
         this.Interval = null;
@@ -3107,6 +3327,146 @@ class TimingDataRecord extends  AbstractModel {
 }
 
 /**
+ * Origin protection configuration
+ * @class
+ */
+class OriginProtectionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * List of domain names.
+         * @type {Array.<string> || null}
+         */
+        this.Hosts = null;
+
+        /**
+         * List of proxy IDs.
+         * @type {Array.<string> || null}
+         */
+        this.ProxyIds = null;
+
+        /**
+         * The existing intermediate IPs.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {IPWhitelist || null}
+         */
+        this.CurrentIPWhitelist = null;
+
+        /**
+         * Whether the intermediate IP update is needed for the site. Values:
+<li>`true`: Update needed;</li>
+<li>`false`: Update not needed.</li>
+         * @type {boolean || null}
+         */
+        this.NeedUpdate = null;
+
+        /**
+         * Status of the origin protection configuration. Values:
+<li>`online`: Origin protection is activated;</li>
+<li>`offline`: Origin protection is disabled.</li>
+<li>`nonactivate`: Origin protection is not activated. This value is returned only when the feature is not activated before it’s used.</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Whether origin protection is supported in the plan. Values:
+<li>`true`: Origin protection supported;</li>
+<li>`false`: Origin protection not supported.</li>
+         * @type {boolean || null}
+         */
+        this.PlanSupport = null;
+
+        /**
+         * Differences between the latest and existing intermediate IPs.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {DiffIPWhitelist || null}
+         */
+        this.DiffIPWhitelist = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Hosts = 'Hosts' in params ? params.Hosts : null;
+        this.ProxyIds = 'ProxyIds' in params ? params.ProxyIds : null;
+
+        if (params.CurrentIPWhitelist) {
+            let obj = new IPWhitelist();
+            obj.deserialize(params.CurrentIPWhitelist)
+            this.CurrentIPWhitelist = obj;
+        }
+        this.NeedUpdate = 'NeedUpdate' in params ? params.NeedUpdate : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PlanSupport = 'PlanSupport' in params ? params.PlanSupport : null;
+
+        if (params.DiffIPWhitelist) {
+            let obj = new DiffIPWhitelist();
+            obj.deserialize(params.DiffIPWhitelist)
+            this.DiffIPWhitelist = obj;
+        }
+
+    }
+}
+
+/**
+ * DescribeOriginProtection response structure.
+ * @class
+ */
+class DescribeOriginProtectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Origin protection configuration.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<OriginProtectionInfo> || null}
+         */
+        this.OriginProtectionInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.OriginProtectionInfo) {
+            this.OriginProtectionInfo = new Array();
+            for (let z in params.OriginProtectionInfo) {
+                let obj = new OriginProtectionInfo();
+                obj.deserialize(params.OriginProtectionInfo[z]);
+                this.OriginProtectionInfo.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BindZoneToPlan response structure.
  * @class
  */
@@ -3312,6 +3672,7 @@ class AclCondition extends  AbstractModel {
 <li>`accept`: Request content type</li>
 <li>`method`: Request method</li>
 <li>`header`: Request header</li>
+<li>`app_proto`: Application layer protocol</li>
 <li>`sip_proto`: Network layer protocol</li>
          * @type {string || null}
          */
@@ -3649,10 +4010,18 @@ class IpTableRule extends  AbstractModel {
         this.MatchFrom = null;
 
         /**
-         * The matching content.
+         * Matching method. It defaults to `equal` if it’s left empty.
+Values: 
+<li>`is_empty`: The field is empty.</li>
+<li>`not_exists`: The configuration item does not exist.</li>
+<li>`include`: Include</li>
+<li>`not_include`: Do not include</li>
+<li>`equal`: Equal to</li>
+<li>`not_equal`: Not equal to</li>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.MatchContent = null;
+        this.Operator = null;
 
         /**
          * The rule ID, which is only used as an output parameter.
@@ -3675,6 +4044,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Status = null;
 
+        /**
+         * The rule name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * Matching content. It’s not required when `Operator` is `is_emty` or `not_exists`. 
+         * @type {string || null}
+         */
+        this.MatchContent = null;
+
     }
 
     /**
@@ -3686,10 +4068,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.Action = 'Action' in params ? params.Action : null;
         this.MatchFrom = 'MatchFrom' in params ? params.MatchFrom : null;
-        this.MatchContent = 'MatchContent' in params ? params.MatchContent : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
         this.RuleID = 'RuleID' in params ? params.RuleID : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.MatchContent = 'MatchContent' in params ? params.MatchContent : null;
 
     }
 }
@@ -4616,8 +5000,8 @@ class DescribeRulesRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Filter criteria. Each filter criteria can have up to 20 entries.
-<li>`rule-id`:<br>   Filter by the <strong>rule ID</strong><br>   Type: string<br>   Required: No
+         * Filter conditions. Each filter condition can have up to 20 entries. See below for details:
+<li>`rule-id`:<br>   Filter by the <strong>rule ID</strong><br>   Type: String<br>   Required: No</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5010,6 +5394,34 @@ class SubRuleItem extends  AbstractModel {
 }
 
 /**
+ * UpdateOriginProtectionIPWhitelist request structure.
+ * @class
+ */
+class UpdateOriginProtectionIPWhitelistRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the site.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+    }
+}
+
+/**
  * The origin server configuration.
  * @class
  */
@@ -5390,9 +5802,8 @@ class CreateAliasDomainRequest extends  AbstractModel {
 
         /**
          * Certificate configuration. Values:
-<li>`none`: Off</li>
+<li>`none`: (Default) Do not configure</li>
 <li>`hosting`: Managed SSL certificate</li>
-<li>`apply`: Free certificate</li>Default value: none
          * @type {string || null}
          */
         this.CertType = null;
@@ -5450,75 +5861,38 @@ class CreateAliasDomainResponse extends  AbstractModel {
 }
 
 /**
- * Origin group record
+ * DescribeOriginProtection request structure.
  * @class
  */
-class OriginRecord extends  AbstractModel {
+class DescribeOriginProtectionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The origin record value, which can be an IPv4/IPv6 address or a domain name.
-         * @type {string || null}
-         */
-        this.Record = null;
-
-        /**
-         * The origin record ID.
-         * @type {string || null}
-         */
-        this.RecordId = null;
-
-        /**
-         * The origin port. Value rang: 1-65535.
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * The weight when `ConfigurationType=weight`.
-If 0 or no value is passed, the weight of each origin in a group will be 0 or left empty, indicating that origin-pull is performed by round-robin.
-If a value between 1-100 is passed, the total weight of multiple origins in a group should be 100, indicating that origin-pull is performed by weight.
-The weight when `ConfigurationType=proto`.
-If 0 or no value is passed, the weight of each origin in a group will be 0 or left empty, indicating that origin-pull is performed by round-robin.
-If a value between 1-100 is passed, the total weight of multiple origins with the same protocol in a group should be 100, indicating that origin-pull is performed by weight.
-         * @type {number || null}
-         */
-        this.Weight = null;
-
-        /**
-         * The origin protocol when `ConfigurationType=proto`, indicating that origin-pull is performed by protocol.
-<li>`http`: HTTP protocol</li>
-<li>`https`: HTTPS protocol</li>
-         * @type {string || null}
-         */
-        this.Proto = null;
-
-        /**
-         * The region when `ConfigurationType=area`, which is specified by country code (ISO 3166 alpha-2) or continent code. If not specified, it indicates all regions. Supported continent codes:
-<li>`Asia`</li>
-<li>`Europe`</li>
-<li>`Africa`</li>
-<li>`Oceania`</li>
-<li>`Americas`</li>An origin group must have at least one origin configured with all regions.
+         * List of sites to be queried. All sites will be selected if this field is not specified.
          * @type {Array.<string> || null}
          */
-        this.Area = null;
+        this.ZoneIds = null;
 
         /**
-         * It is valid only when `OriginType=third_part`.
-Whether the origin group is private. Values:
-<li>`true`: Yes.</li>
-<li>`false`: No.</li>If not specified, it defaults to false.
-         * @type {boolean || null}
+         * Filter conditions. Each filter condition can have up to 20 entries. See below for details:
+<li>`need-update`:<br>   Whether <strong>the intermediate IP update is needed for the site</strong>.<br>   Type: String<br>   Required: No<br>   Values:<br>   `true`: Update needed.<br>   `false`: Update not needed.<br></li>
+<li>`plan-support`:<br>   Whether <strong>origin protection is supported in the plan</strong>.<br>   Type: String<br>   Required: No<br>   Values:<br>   `true`: Origin protection supported.<br>   `false`: Origin protection not supported.<br></li>
+         * @type {Array.<Filter> || null}
          */
-        this.Private = null;
+        this.Filters = null;
 
         /**
-         * The authentication parameter, which is used when `Private=true`.
-         * @type {Array.<PrivateParameter> || null}
+         * Offset for paginated queries. Default value: 0.
+         * @type {number || null}
          */
-        this.PrivateParameters = null;
+        this.Offset = null;
+
+        /**
+         * Limit on paginated queries. Default value: 20. Maximum value: 1000.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -5529,22 +5903,18 @@ Whether the origin group is private. Values:
         if (!params) {
             return;
         }
-        this.Record = 'Record' in params ? params.Record : null;
-        this.RecordId = 'RecordId' in params ? params.RecordId : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
-        this.Proto = 'Proto' in params ? params.Proto : null;
-        this.Area = 'Area' in params ? params.Area : null;
-        this.Private = 'Private' in params ? params.Private : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
 
-        if (params.PrivateParameters) {
-            this.PrivateParameters = new Array();
-            for (let z in params.PrivateParameters) {
-                let obj = new PrivateParameter();
-                obj.deserialize(params.PrivateParameters[z]);
-                this.PrivateParameters.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5788,21 +6158,21 @@ class DescribeTopL7AnalysisDataRequest extends  AbstractModel {
         /**
          * Filter conditions. See below for details: 
 <li>`country`:<br>   Filter by the <strong>country/region code</strong>. <a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.<br>   Type: String<br>   Required: No</li>
-<li>`province`<br>   Filter by the <strong>province name</strong>. It’s only available when `Area` is `mainland`. <br>   Type: String<br>   Required: No</li>
-<li>`isp`<br>   Filter by the <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Type: String<br>   Required: No<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
-<li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
-<li>`url`<br>   Filter by the <strong>URL</strong>, such as `/content`. Separate multiple URLs with semicolons. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
-<li>`referer`<br>   Filter by the <strong>Referer header</strong>, such as `example.com`. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No</li>
-<li>`resourceType`<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
-<li>`protocol`:<br>   Filter by the <strong>HTTP protocol</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
-<li>`statusCode`<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>   `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
-<li>`browserType`<br>   Filter by the <strong>browser type</strong>. The query period cannot exceed 30 days. <br>   Type:  String<br>   Required:  No<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
-<li>`deviceType`<br>   Filter by the <strong>device type</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
-<li>`operatingSystemType`<br>   Filter by the <strong>operating system</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Max OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
-<li>`tlsVersion`<br>   Filter by the <strong>TLS version</strong>. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
-<li>`ipVersion`<br>   Filter by the <strong>IP version</strong>.<br>   Type: String<br>   Required: No<br>   Values:<br>   `4`: IPv4；<br>   `6`: IPv6.</li>
-<li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
-<li>`tagValue`<br>   Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
+<li>`province`:<br>   Filter by the <strong>province name</strong>. It’s only available when `Area` is `mainland`. <br>   Type: String<br>   Required: No</li>
+<li>`isp`:<br>   Filter by the <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Type: String<br>   Required: No<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
+<li>`domain`:<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+<li>`url`:<br>   Filter by the <strong>URL</strong>, such as `/content`. Separate multiple URLs with semicolons. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
+<li>`referer`:<br>   Filter by the <strong>Referer header</strong>, such as `example.com`. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No</li>
+<li>`resourceType`:<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
+<li>`protocol`:<br>   Filter by the <strong>HTTP protocol</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
+<li>`statusCode`:<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+<li>`browserType`:<br>   Filter by the <strong>browser type</strong>. The query period cannot exceed 30 days. <br>   Type:  String<br>   Required:  No<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
+<li>`deviceType`:<br>   Filter by the <strong>device type</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
+<li>`operatingSystemType`:<br>   Filter by the <strong>operating system</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `Linux`：Linux OS;<br>   `MacOS`: OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
+<li>`tlsVersion`:<br>   Filter by the <strong>TLS version</strong>. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
+<li>`ipVersion`:<br>   Filter by the <strong>IP version</strong>.<br>   Type: String<br>   Required: No<br>   Values:<br>   `4`: IPv4;<br>   `6`: IPv6.</li>
+<li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+<li>`tagValue`:<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -6272,7 +6642,7 @@ class DescribeOverviewL7DataRequest extends  AbstractModel {
 
         /**
          * List of sites
-Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. If it's not specified, all sites are selected by default, and the query period must be within the last 30 days. 
+Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -6288,7 +6658,7 @@ Enter the IDs of sites to query. The maximum query period is determined by the <
 <li>`http`: HTTP protocol;</li>
 <li>`https`: HTTPS protocol;</li>
 <li>`http2`: HTTP2 protocol;</li>
-<li>`all`:   All protocols. </li>If it's not specified, `all` is used. This parameter is not yet available now.
+<li>`all`:   All protocols. </li>If it’s not specified, `all` is used. This parameter is not yet available now.
          * @type {string || null}
          */
         this.Protocol = null;
@@ -6298,15 +6668,15 @@ Enter the IDs of sites to query. The maximum query period is determined by the <
 <li>`min`: 1 minute;</li>
 <li>`5min`: 5 minutes;</li>
 <li>`hour`: 1 hour;</li>
-<li>`day`: One day</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < Period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
+<li>`day`: One day</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
          * @type {string || null}
          */
         this.Interval = null;
 
         /**
          * Filters
-<li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-<li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+<li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
+<li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -7342,7 +7712,7 @@ class DescribeTimingL7AnalysisDataRequest extends  AbstractModel {
 
         /**
          * List of sites
-Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. If it's not specified, all sites are selected by default, and the query period must be within the last 30 days. 
+Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -7352,29 +7722,29 @@ Enter the IDs of sites to query. The maximum query period is determined by the <
 <li>`min`: 1 minute;</li>
 <li>`5min`: 5 minutes;</li>
 <li>`hour`: 1 hour;</li>
-<li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < Period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
+<li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
          * @type {string || null}
          */
         this.Interval = null;
 
         /**
          * Filters
-<li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-<li>`province`<br>   Filter by the specified <strong>province name</strong>. It's only available when `Area` is `mainland`. </li>
-<li>`isp`<br>   Filter by the specified <strong>ISP</strong>. It's only available when `Area` is `mainland`.<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
-<li>`domain`<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-<li>`url`<br>   Filter by the specified <strong>URL Path</strong> (such as `/content` or `content/test.jpg`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-<li>`referer`<br>   Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-<li>`resourceType`<br>   Filter by the specified <strong>resource file type</strong>, such as `jpg`, `css`. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-<li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
-<li>`statusCode`<br>   Filter by the specified <strong> status code</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
-<li>`browserType`<br>   Filter by the specified <strong>browser type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
-<li>`deviceType`<br>   Filter by the <strong>device type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
-<li>`operatingSystemType`<br>   Filter by the <strong>operating system</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Mac OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
-<li>`tlsVersion`<br>   Filter by the <strong>TLS version</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
-<li>`ipVersion`<br>   Filter by the specified <strong>IP version</strong>.<br>   Values:<br>   `4`: IPv4;<br>   `6`: IPv6.</li>
-<li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-<li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+<li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
+<li>`province`<br>   Filter by the specified <strong>province name</strong>. It’s only available when `Area` is `mainland`. </li>
+<li>`isp`<br>   Filter by the specified <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
+<li>`domain`<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+<li>`url`<br>   Filter by the specified <strong>URL Path</strong> (such as `/content` or `content/test.jpg`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+<li>`referer`<br>   Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+<li>`resourceType`<br>   Filter by the specified <strong>resource file type</strong>, such as `jpg`, `css`. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+<li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
+<li>`statusCode`<br>   Filter by the specified <strong> status code</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+<li>`browserType`<br>   Filter by the specified <strong>browser type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
+<li>`deviceType`<br>   Filter by the <strong>device type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
+<li>`operatingSystemType`<br>   Filter by the <strong>operating system</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Mac OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
+<li>`tlsVersion`<br>   Filter by the <strong>TLS version</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
+<li>`ipVersion`<br>   Filter by the specified <strong>IP version</strong>.<br>   Values:<br>   `4`: IPv4；<br>   `6`: IPv6.</li>
+<li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
+<li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -7702,6 +8072,41 @@ class DescribeWebProtectionHitRuleDetailRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
+ * Intermediate IPs
+ * @class
+ */
+class IPWhitelist extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of IPv4 addresses
+         * @type {Array.<string> || null}
+         */
+        this.IPv4 = null;
+
+        /**
+         * List of IPv6 addresses
+         * @type {Array.<string> || null}
+         */
+        this.IPv6 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IPv4 = 'IPv4' in params ? params.IPv4 : null;
+        this.IPv6 = 'IPv6' in params ? params.IPv6 : null;
 
     }
 }
@@ -8816,6 +9221,87 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.FileAscription)
             this.FileAscription = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeDDoSAttackData request structure.
+ * @class
+ */
+class DescribeDDoSAttackDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time of the query period.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the query period.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Statistical metrics.
+<li>`ddos_attackMaxBandwidth`: Peak attack bandwidth;</li>
+<li>`ddos_attackMaxPackageRate`: Peak attack packet rate;</li>
+<li>`ddos_attackBandwidth`: Time-series data of attack bandwidth;</li>
+<li>`ddos_attackPackageRate`: Time-series data of attack packet rate.</li>
+         * @type {Array.<string> || null}
+         */
+        this.MetricNames = null;
+
+        /**
+         * List of sites to be queried. All sites will be selected if this field is not specified.
+         * @type {Array.<string> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * IDs of DDoS policies to be queried. All policies will be selected if this field is not specified.
+         * @type {Array.<number> || null}
+         */
+        this.PolicyIds = null;
+
+        /**
+         * The query granularity. Values:
+<li>`min`: 1 minute;</li>
+<li>`5min`: 5 minutes;</li>
+<li>`hour`: 1 hour;</li>
+<li>`day`: 1 day</li>If this field is not specified, the granularity is determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < Period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+        /**
+         * Geolocation scope. Values:
+<li>`overseas`: Regions outside the Chinese mainland</li>
+<li>`mainland`: Chinese mainland</li>
+<li>`global`: Global </li>If this field is not specified, the default value `global` is used.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MetricNames = 'MetricNames' in params ? params.MetricNames : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -11573,10 +12059,10 @@ class WebLogs extends  AbstractModel {
         this.EventId = null;
 
         /**
-         * The attacker IP.
+         * The HTTP log content.
          * @type {string || null}
          */
-        this.AttackIp = null;
+        this.HttpLog = null;
 
         /**
          * The attacked subdomain name.
@@ -11585,16 +12071,28 @@ class WebLogs extends  AbstractModel {
         this.Domain = null;
 
         /**
-         * The HTTP log content.
+         * The attacker IP.
          * @type {string || null}
          */
-        this.HttpLog = null;
+        this.AttackIp = null;
 
         /**
          * The country code of the attacker IP, which is defined in ISO-3166 alpha-2. For the list of country codes, see [ISO-3166](https://git.woa.com/edgeone/iso-3166/blob/master/all/all.json).
          * @type {string || null}
          */
         this.SipCountryCode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RealClientIp = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RealClientIpCountryCode = null;
 
         /**
          * The attack time recorded in seconds using UNIX timestamp.
@@ -11609,11 +12107,11 @@ class WebLogs extends  AbstractModel {
         this.RequestUri = null;
 
         /**
-         * The attack content.
+         * The request type.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.AttackContent = null;
+        this.ReqMethod = null;
 
         /**
          * The security rule information.
@@ -11623,11 +12121,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RuleDetailList = null;
 
         /**
-         * The request type.
+         * The attack content.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.ReqMethod = null;
+        this.AttackContent = null;
+
+        /**
+         * Log region
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Area = null;
 
     }
 
@@ -11639,13 +12144,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.EventId = 'EventId' in params ? params.EventId : null;
-        this.AttackIp = 'AttackIp' in params ? params.AttackIp : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
         this.HttpLog = 'HttpLog' in params ? params.HttpLog : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.AttackIp = 'AttackIp' in params ? params.AttackIp : null;
         this.SipCountryCode = 'SipCountryCode' in params ? params.SipCountryCode : null;
+        this.RealClientIp = 'RealClientIp' in params ? params.RealClientIp : null;
+        this.RealClientIpCountryCode = 'RealClientIpCountryCode' in params ? params.RealClientIpCountryCode : null;
         this.AttackTime = 'AttackTime' in params ? params.AttackTime : null;
         this.RequestUri = 'RequestUri' in params ? params.RequestUri : null;
-        this.AttackContent = 'AttackContent' in params ? params.AttackContent : null;
+        this.ReqMethod = 'ReqMethod' in params ? params.ReqMethod : null;
 
         if (params.RuleDetailList) {
             this.RuleDetailList = new Array();
@@ -11655,7 +12162,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.RuleDetailList.push(obj);
             }
         }
-        this.ReqMethod = 'ReqMethod' in params ? params.ReqMethod : null;
+        this.AttackContent = 'AttackContent' in params ? params.AttackContent : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -12188,6 +12696,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.ProxyLoadTime = 'ProxyLoadTime' in params ? params.ProxyLoadTime : null;
         this.OriginLoadTime = 'OriginLoadTime' in params ? params.OriginLoadTime : null;
+
+    }
+}
+
+/**
+ * UpdateOriginProtectionIPWhitelist response structure.
+ * @class
+ */
+class UpdateOriginProtectionIPWhitelistResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14740,7 +15276,7 @@ class DescribeTimingL4DataRequest extends  AbstractModel {
 
         /**
          * List of sites
-If it's not specified, all sites are selected by default, and the query period must be within the last 30 days. 
+If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
 Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. 
          * @type {Array.<string> || null}
          */
@@ -14757,15 +15293,15 @@ Enter the IDs of sites to query. The maximum query period is determined by the <
 <li>`min`: 1 minute;</li>
 <li>`5min`: 5 minutes;</li>
 <li>`hour`: 1 hour;</li>
-<li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < Period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
+<li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
          * @type {string || null}
          */
         this.Interval = null;
 
         /**
          * Filters
-<li>ruleId<br>   Filter by the specified <strong>forwarding rule ID</strong></li>
-<li>proxyId<br>   Filter by the specified <strong>L4 agent ID</strong></li>
+<li>ruleId<br>   Filter by the specified <strong>forwarding rule ID</strong></li>
+<li>proxyId<br>   Filter by the specified <strong>L4 agent ID</strong></li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -15603,6 +16139,12 @@ class RateLimitIntelligence extends  AbstractModel {
          */
         this.Action = null;
 
+        /**
+         * The rule ID, which is only used as a response parameter.
+         * @type {number || null}
+         */
+        this.RuleId = null;
+
     }
 
     /**
@@ -15614,6 +16156,7 @@ class RateLimitIntelligence extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Action = 'Action' in params ? params.Action : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -15810,6 +16353,12 @@ class SecHitRuleInfo extends  AbstractModel {
         super();
 
         /**
+         * The site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
          * The rule ID.
          * @type {number || null}
          */
@@ -15820,19 +16369,6 @@ class SecHitRuleInfo extends  AbstractModel {
          * @type {string || null}
          */
         this.RuleTypeName = null;
-
-        /**
-         * Action. Values:
-<li>`trans`: Allow;</li>
-<li>`alg`: Algorithm challenge;</li>
-<li>`drop`: Discard;</li>
-<li>`ban`: Block the source IP;</li>
-<li>`redirect`: Redirect;</li>
-<li>`page`: Return to the specified page;</li>
-<li>`monitor`: Observe.</li>
-         * @type {string || null}
-         */
-        this.Action = null;
 
         /**
          * The hit time recorded in seconds using UNIX timestamp.
@@ -15859,6 +16395,19 @@ class SecHitRuleInfo extends  AbstractModel {
         this.Domain = null;
 
         /**
+         * Action. Values:
+<li>`trans`: Allow;</li>
+<li>`alg`: Algorithm challenge;</li>
+<li>`drop`: Discard;</li>
+<li>`ban`: Block the source IP;</li>
+<li>`redirect`: Redirect;</li>
+<li>`page`: Return to the specified page;</li>
+<li>`monitor`: Observe.</li>
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
          * The bot tag. Values:
 <li>`evil_bot`: Malicious bot</li>
 <li>`suspect_bot`: Suspected bot</li>
@@ -15869,6 +16418,26 @@ class SecHitRuleInfo extends  AbstractModel {
          */
         this.BotLabel = null;
 
+        /**
+         * Whether to enable the rule
+         * @type {boolean || null}
+         */
+        this.RuleEnabled = null;
+
+        /**
+         * Whether to enable alerting for this rule
+         * @type {boolean || null}
+         */
+        this.AlarmEnabled = null;
+
+        /**
+         * Whether the rule is deleted. Values: 
+<li>`true`: The rule has been deleted (does not exist).</li>
+<li>`false`: The rule is not deleted (exists).</li>
+         * @type {boolean || null}
+         */
+        this.RuleDeleted = null;
+
     }
 
     /**
@@ -15878,14 +16447,18 @@ class SecHitRuleInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.RuleTypeName = 'RuleTypeName' in params ? params.RuleTypeName : null;
-        this.Action = 'Action' in params ? params.Action : null;
         this.HitTime = 'HitTime' in params ? params.HitTime : null;
         this.RequestNum = 'RequestNum' in params ? params.RequestNum : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Action = 'Action' in params ? params.Action : null;
         this.BotLabel = 'BotLabel' in params ? params.BotLabel : null;
+        this.RuleEnabled = 'RuleEnabled' in params ? params.RuleEnabled : null;
+        this.AlarmEnabled = 'AlarmEnabled' in params ? params.AlarmEnabled : null;
+        this.RuleDeleted = 'RuleDeleted' in params ? params.RuleDeleted : null;
 
     }
 }
@@ -16236,6 +16809,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.AttackContent = null;
 
+        /**
+         * The rule type. Values:
+<li>`waf`: Tencent Cloud-managed rule</li>
+<li>`acl`: Custom rule</li>
+<li>`rate`: Rate limiting rule</li>
+<li>`bot`: Bot rule</li>
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Whether to enable the rule
+         * @type {boolean || null}
+         */
+        this.RuleEnabled = null;
+
+        /**
+         * Whether the rule is deleted. Values: 
+<li>`true`: The rule has been deleted (does not exist).</li>
+<li>`false`: The rule is not deleted (exists).</li>
+         * @type {boolean || null}
+         */
+        this.RuleDeleted = null;
+
+        /**
+         * Whether to enable alerting for this rule
+         * @type {boolean || null}
+         */
+        this.AlarmEnabled = null;
+
     }
 
     /**
@@ -16252,6 +16855,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Description = 'Description' in params ? params.Description : null;
         this.RuleTypeName = 'RuleTypeName' in params ? params.RuleTypeName : null;
         this.AttackContent = 'AttackContent' in params ? params.AttackContent : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RuleEnabled = 'RuleEnabled' in params ? params.RuleEnabled : null;
+        this.RuleDeleted = 'RuleDeleted' in params ? params.RuleDeleted : null;
+        this.AlarmEnabled = 'AlarmEnabled' in params ? params.AlarmEnabled : null;
 
     }
 }
@@ -16443,13 +17050,16 @@ module.exports = {
     Https: Https,
     SecEntryValue: SecEntryValue,
     DescribeZonesRequest: DescribeZonesRequest,
+    DiffIPWhitelist: DiffIPWhitelist,
     DescribeLogTopicTasksRequest: DescribeLogTopicTasksRequest,
     CreateCredentialRequest: CreateCredentialRequest,
     ModifyRuleRequest: ModifyRuleRequest,
+    OriginRecord: OriginRecord,
     DescribePrefetchTasksResponse: DescribePrefetchTasksResponse,
     DescribeWebManagedRulesHitRuleDetailRequest: DescribeWebManagedRulesHitRuleDetailRequest,
     AdvancedFilter: AdvancedFilter,
     DeleteApplicationProxyRequest: DeleteApplicationProxyRequest,
+    DescribeDDoSAttackDataResponse: DescribeDDoSAttackDataResponse,
     ModifySecurityWafGroupPolicyRequest: ModifySecurityWafGroupPolicyRequest,
     DescribeZoneSettingRequest: DescribeZoneSettingRequest,
     DescribeClientRuleListResponse: DescribeClientRuleListResponse,
@@ -16484,6 +17094,8 @@ module.exports = {
     ReclaimAliasDomainRequest: ReclaimAliasDomainRequest,
     DescribeRulesResponse: DescribeRulesResponse,
     TimingDataRecord: TimingDataRecord,
+    OriginProtectionInfo: OriginProtectionInfo,
+    DescribeOriginProtectionResponse: DescribeOriginProtectionResponse,
     BindZoneToPlanResponse: BindZoneToPlanResponse,
     ExceptConfig: ExceptConfig,
     DeleteOriginGroupRequest: DeleteOriginGroupRequest,
@@ -16516,6 +17128,7 @@ module.exports = {
     ModifyZoneSettingResponse: ModifyZoneSettingResponse,
     DescribeZonesResponse: DescribeZonesResponse,
     SubRuleItem: SubRuleItem,
+    UpdateOriginProtectionIPWhitelistRequest: UpdateOriginProtectionIPWhitelistRequest,
     Origin: Origin,
     WafConfig: WafConfig,
     DescribeSpeedTestingDetailsResponse: DescribeSpeedTestingDetailsResponse,
@@ -16524,7 +17137,7 @@ module.exports = {
     ServerCertInfo: ServerCertInfo,
     CreateAliasDomainRequest: CreateAliasDomainRequest,
     CreateAliasDomainResponse: CreateAliasDomainResponse,
-    OriginRecord: OriginRecord,
+    DescribeOriginProtectionRequest: DescribeOriginProtectionRequest,
     ClientIpCountry: ClientIpCountry,
     CreatePrefetchTaskRequest: CreatePrefetchTaskRequest,
     DeleteApplicationProxyRuleRequest: DeleteApplicationProxyRuleRequest,
@@ -16558,6 +17171,7 @@ module.exports = {
     DescribeDefaultCertificatesRequest: DescribeDefaultCertificatesRequest,
     DescribeAliasDomainsResponse: DescribeAliasDomainsResponse,
     DescribeWebProtectionHitRuleDetailRequest: DescribeWebProtectionHitRuleDetailRequest,
+    IPWhitelist: IPWhitelist,
     DDoS: DDoS,
     CreateZoneRequest: CreateZoneRequest,
     PlanInfo: PlanInfo,
@@ -16578,6 +17192,7 @@ module.exports = {
     CreateReplayTaskRequest: CreateReplayTaskRequest,
     DescribeWebProtectionHitRuleDetailResponse: DescribeWebProtectionHitRuleDetailResponse,
     Identification: Identification,
+    DescribeDDoSAttackDataRequest: DescribeDDoSAttackDataRequest,
     CachePrefresh: CachePrefresh,
     DescribeWebProtectionClientIpListResponse: DescribeWebProtectionClientIpListResponse,
     DescribeTimingL7AnalysisDataResponse: DescribeTimingL7AnalysisDataResponse,
@@ -16636,6 +17251,7 @@ module.exports = {
     DescribeSpeedTestingDetailsRequest: DescribeSpeedTestingDetailsRequest,
     DropPageConfig: DropPageConfig,
     SpeedTestingMetricData: SpeedTestingMetricData,
+    UpdateOriginProtectionIPWhitelistResponse: UpdateOriginProtectionIPWhitelistResponse,
     SecEntry: SecEntry,
     DescribeIdentificationsRequest: DescribeIdentificationsRequest,
     DescribeDefaultCertificatesResponse: DescribeDefaultCertificatesResponse,

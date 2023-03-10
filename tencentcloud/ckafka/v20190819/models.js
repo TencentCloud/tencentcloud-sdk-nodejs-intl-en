@@ -2169,6 +2169,46 @@ class InstanceChargeParam extends  AbstractModel {
 }
 
 /**
+ * DescribeDatahubTopic response structure.
+ * @class
+ */
+class DescribeDatahubTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result object
+         * @type {DescribeDatahubTopicResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DescribeDatahubTopicResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTopicAttributes response structure.
  * @class
  */
@@ -2555,6 +2595,65 @@ class CreatePartitionResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * `DescribeTopicSubscribeGroup` output parameters
+ * @class
+ */
+class TopicSubscribeGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Number of consumer group status
+         * @type {string || null}
+         */
+        this.StatusCountInfo = null;
+
+        /**
+         * Consumer group information
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<GroupInfoResponse> || null}
+         */
+        this.GroupsInfo = null;
+
+        /**
+         * Whether a request is asynchronous. If there are fewer consumer groups in the instances, the result will be returned directly, and status code is 1. When there are many consumer groups in the instances, cache will be updated asynchronously. When status code is 0, grouping information will not be returned until cache update is completed and status code becomes 1.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.StatusCountInfo = 'StatusCountInfo' in params ? params.StatusCountInfo : null;
+
+        if (params.GroupsInfo) {
+            this.GroupsInfo = new Array();
+            for (let z in params.GroupsInfo) {
+                let obj = new GroupInfoResponse();
+                obj.deserialize(params.GroupsInfo[z]);
+                this.GroupsInfo.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -4096,24 +4195,30 @@ class ModifyTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
- * Message content that can be sent in batches
+ * DescribeDatahubTopics request structure.
  * @class
  */
-class BatchContent extends  AbstractModel {
+class DescribeDatahubTopicsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Message body that is sent.
+         * Keyword for query
          * @type {string || null}
          */
-        this.Body = null;
+        this.SearchWord = null;
 
         /**
-         * Message sending key name.
-         * @type {string || null}
+         * Query offset, which defaults to `0`.
+         * @type {number || null}
          */
-        this.Key = null;
+        this.Offset = null;
+
+        /**
+         * Maximum number of results to be returned in this request. Default value: `50`. Maximum value: `50`.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -4124,8 +4229,9 @@ class BatchContent extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Body = 'Body' in params ? params.Body : null;
-        this.Key = 'Key' in params ? params.Key : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4861,38 +4967,18 @@ class DeleteInstancePreRequest extends  AbstractModel {
 }
 
 /**
- * `DescribeTopicSubscribeGroup` output parameters
+ * DescribeDatahubTopic request structure.
  * @class
  */
-class TopicSubscribeGroup extends  AbstractModel {
+class DescribeDatahubTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Number of consumer group status
+         * Name
          * @type {string || null}
          */
-        this.StatusCountInfo = null;
-
-        /**
-         * Consumer group information
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<GroupInfoResponse> || null}
-         */
-        this.GroupsInfo = null;
-
-        /**
-         * Whether a request is asynchronous. If there are fewer consumer groups in the instances, the result will be returned directly, and status code is 1. When there are many consumer groups in the instances, cache will be updated asynchronously. When status code is 0, grouping information will not be returned until cache update is completed and status code becomes 1.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.Name = null;
 
     }
 
@@ -4903,18 +4989,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.StatusCountInfo = 'StatusCountInfo' in params ? params.StatusCountInfo : null;
-
-        if (params.GroupsInfo) {
-            this.GroupsInfo = new Array();
-            for (let z in params.GroupsInfo) {
-                let obj = new GroupInfoResponse();
-                obj.deserialize(params.GroupsInfo[z]);
-                this.GroupsInfo.push(obj);
-            }
-        }
-        this.Status = 'Status' in params ? params.Status : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -6000,6 +6075,47 @@ class CreateInstancePostRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDatahubTopics response structure.
+ * @class
+ */
+class DescribeDatahubTopicsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic list
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DescribeDatahubTopicsResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new DescribeDatahubTopicsResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeGroup request structure.
  * @class
  */
@@ -6443,6 +6559,12 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
          */
         this.InstanceIdList = null;
 
+        /**
+         * Filter instances by a set of tags
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
     }
 
     /**
@@ -6469,6 +6591,15 @@ class DescribeInstancesDetailRequest extends  AbstractModel {
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -6586,6 +6717,41 @@ class DescribeRouteRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * Disk purchase parameters
+ * @class
+ */
+class InquiryDiskParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Disk type. Valid values: `SSD` (SSD), `CLOUD_SSD` (SSD cloud disk), `CLOUD_PREMIUM` (Premium cloud disk), `CLOUD_BASIC` (Cloud disk).
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * Size of the purchased disk in GB
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
 
     }
 }
@@ -7048,6 +7214,76 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DataHub topic
+ * @class
+ */
+class DatahubTopicDTO extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * The number of partitions
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * Expiration time
+         * @type {number || null}
+         */
+        this.RetentionMs = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Note = null;
+
+        /**
+         * Status (`1`: In use; `2`: Deleting)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.RetentionMs = 'RetentionMs' in params ? params.RetentionMs : null;
+        this.Note = 'Note' in params ? params.Note : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * Returned result value of operation
  * @class
  */
@@ -7341,6 +7577,41 @@ class DescribeRouteResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Message content that can be sent in batches
+ * @class
+ */
+class BatchContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Message body that is sent.
+         * @type {string || null}
+         */
+        this.Body = null;
+
+        /**
+         * Message sending key name.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Body = 'Body' in params ? params.Body : null;
+        this.Key = 'Key' in params ? params.Key : null;
 
     }
 }
@@ -8432,6 +8703,99 @@ class DescribeGroupOffsetsRequest extends  AbstractModel {
 }
 
 /**
+ * DataHub topic details
+ * @class
+ */
+class DescribeDatahubTopicResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Topic ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * The number of partitions
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * Expiration time
+         * @type {number || null}
+         */
+        this.RetentionMs = null;
+
+        /**
+         * Remarks
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Note = null;
+
+        /**
+         * Username
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Password
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * Status (`1`: In use; `2`: Deleting)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Service routing address
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.RetentionMs = 'RetentionMs' in params ? params.RetentionMs : null;
+        this.Note = 'Note' in params ? params.Note : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Address = 'Address' in params ? params.Address : null;
+
+    }
+}
+
+/**
  * DescribeUser request structure.
  * @class
  */
@@ -8481,24 +8845,25 @@ class DescribeUserRequest extends  AbstractModel {
 }
 
 /**
- * Disk purchase parameters
+ * DataHub topic list
  * @class
  */
-class InquiryDiskParam extends  AbstractModel {
+class DescribeDatahubTopicsResp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Disk type. Valid values: `SSD` (SSD), `CLOUD_SSD` (SSD cloud disk), `CLOUD_PREMIUM` (Premium cloud disk), `CLOUD_BASIC` (Cloud disk).
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * Size of the purchased disk in GB
+         * Total count
          * @type {number || null}
          */
-        this.DiskSize = null;
+        this.TotalCount = null;
+
+        /**
+         * Topic list
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DatahubTopicDTO> || null}
+         */
+        this.TopicList = null;
 
     }
 
@@ -8509,8 +8874,16 @@ class InquiryDiskParam extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TopicList) {
+            this.TopicList = new Array();
+            for (let z in params.TopicList) {
+                let obj = new DatahubTopicDTO();
+                obj.deserialize(params.TopicList[z]);
+                this.TopicList.push(obj);
+            }
+        }
 
     }
 }
@@ -9058,6 +9431,7 @@ module.exports = {
     BatchModifyGroupOffsetsResponse: BatchModifyGroupOffsetsResponse,
     GroupResponse: GroupResponse,
     InstanceChargeParam: InstanceChargeParam,
+    DescribeDatahubTopicResponse: DescribeDatahubTopicResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
     FetchMessageListByOffsetResponse: FetchMessageListByOffsetResponse,
     CreateConsumerResponse: CreateConsumerResponse,
@@ -9068,6 +9442,7 @@ module.exports = {
     CreateUserResponse: CreateUserResponse,
     ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
     CreatePartitionResponse: CreatePartitionResponse,
+    TopicSubscribeGroup: TopicSubscribeGroup,
     ClusterInfo: ClusterInfo,
     DeleteUserResponse: DeleteUserResponse,
     DescribeTopicProduceConnectionRequest: DescribeTopicProduceConnectionRequest,
@@ -9098,7 +9473,7 @@ module.exports = {
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
     DescribeGroupInfoResponse: DescribeGroupInfoResponse,
     ModifyTopicAttributesResponse: ModifyTopicAttributesResponse,
-    BatchContent: BatchContent,
+    DescribeDatahubTopicsRequest: DescribeDatahubTopicsRequest,
     DeleteRouteTriggerTimeResponse: DeleteRouteTriggerTimeResponse,
     DescribeUserResponse: DescribeUserResponse,
     AppIdResponse: AppIdResponse,
@@ -9114,7 +9489,7 @@ module.exports = {
     ModifyPasswordResponse: ModifyPasswordResponse,
     TopicDetailResponse: TopicDetailResponse,
     DeleteInstancePreRequest: DeleteInstancePreRequest,
-    TopicSubscribeGroup: TopicSubscribeGroup,
+    DescribeDatahubTopicRequest: DescribeDatahubTopicRequest,
     Config: Config,
     ModifyPasswordRequest: ModifyPasswordRequest,
     ModifyInstanceAttributesRequest: ModifyInstanceAttributesRequest,
@@ -9130,6 +9505,7 @@ module.exports = {
     DescribeInstancesRequest: DescribeInstancesRequest,
     InstanceAttributesResponse: InstanceAttributesResponse,
     CreateInstancePostRequest: CreateInstancePostRequest,
+    DescribeDatahubTopicsResponse: DescribeDatahubTopicsResponse,
     DescribeGroupRequest: DescribeGroupRequest,
     Filter: Filter,
     GroupOffsetResponse: GroupOffsetResponse,
@@ -9143,6 +9519,7 @@ module.exports = {
     CreateConsumerRequest: CreateConsumerRequest,
     InquireCkafkaPriceResponse: InquireCkafkaPriceResponse,
     DescribeRouteRequest: DescribeRouteRequest,
+    InquiryDiskParam: InquiryDiskParam,
     TopicInSyncReplicaResult: TopicInSyncReplicaResult,
     SendMessageResponse: SendMessageResponse,
     InquiryBasePrice: InquiryBasePrice,
@@ -9150,12 +9527,14 @@ module.exports = {
     BatchModifyGroupOffsetsRequest: BatchModifyGroupOffsetsRequest,
     TopicAttributesResponse: TopicAttributesResponse,
     InstanceResponse: InstanceResponse,
+    DatahubTopicDTO: DatahubTopicDTO,
     JgwOperateResponse: JgwOperateResponse,
     DescribeGroup: DescribeGroup,
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
     BatchModifyTopicInfo: BatchModifyTopicInfo,
     DescribeRouteResponse: DescribeRouteResponse,
+    BatchContent: BatchContent,
     InquiryPrice: InquiryPrice,
     TopicResult: TopicResult,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
@@ -9173,8 +9552,9 @@ module.exports = {
     CreateTopicResponse: CreateTopicResponse,
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
     DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
+    DescribeDatahubTopicResp: DescribeDatahubTopicResp,
     DescribeUserRequest: DescribeUserRequest,
-    InquiryDiskParam: InquiryDiskParam,
+    DescribeDatahubTopicsResp: DescribeDatahubTopicsResp,
     DescribeTopicSyncReplicaRequest: DescribeTopicSyncReplicaRequest,
     InstanceDetail: InstanceDetail,
     InstanceQuotaConfigResp: InstanceQuotaConfigResp,

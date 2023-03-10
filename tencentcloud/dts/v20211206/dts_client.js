@@ -28,6 +28,8 @@ const ResizeSyncJobResponse = models.ResizeSyncJobResponse;
 const ResumeMigrateJobResponse = models.ResumeMigrateJobResponse;
 const DifferenceItem = models.DifferenceItem;
 const IsolateSyncJobRequest = models.IsolateSyncJobRequest;
+const PauseMigrateJobRequest = models.PauseMigrateJobRequest;
+const ContinueMigrateJobRequest = models.ContinueMigrateJobRequest;
 const DescribeCheckSyncJobResultRequest = models.DescribeCheckSyncJobResultRequest;
 const DestroySyncJobResponse = models.DestroySyncJobResponse;
 const DescribeCompareReportResponse = models.DescribeCompareReportResponse;
@@ -47,7 +49,9 @@ const DdlOption = models.DdlOption;
 const ConflictHandleOption = models.ConflictHandleOption;
 const ResumeSyncJobResponse = models.ResumeSyncJobResponse;
 const ModifyCompareTaskNameResponse = models.ModifyCompareTaskNameResponse;
+const PauseSyncJobRequest = models.PauseSyncJobRequest;
 const CreateMigrateCheckJobResponse = models.CreateMigrateCheckJobResponse;
+const ContinueMigrateJobResponse = models.ContinueMigrateJobResponse;
 const CreateMigrationServiceRequest = models.CreateMigrationServiceRequest;
 const DetailCheckItem = models.DetailCheckItem;
 const DescribeCompareTasksRequest = models.DescribeCompareTasksRequest;
@@ -57,6 +61,7 @@ const RecoverSyncJobResponse = models.RecoverSyncJobResponse;
 const MigrateAction = models.MigrateAction;
 const DeleteCompareTaskResponse = models.DeleteCompareTaskResponse;
 const DBEndpointInfo = models.DBEndpointInfo;
+const ContinueSyncJobResponse = models.ContinueSyncJobResponse;
 const Options = models.Options;
 const CompleteMigrateJobRequest = models.CompleteMigrateJobRequest;
 const DescribeCompareTasksResponse = models.DescribeCompareTasksResponse;
@@ -76,14 +81,15 @@ const IsolateSyncJobResponse = models.IsolateSyncJobResponse;
 const CreateMigrateCheckJobRequest = models.CreateMigrateCheckJobRequest;
 const DescribeMigrationJobsRequest = models.DescribeMigrationJobsRequest;
 const CompareTaskInfo = models.CompareTaskInfo;
+const ContinueSyncJobRequest = models.ContinueSyncJobRequest;
 const CreateMigrationServiceResponse = models.CreateMigrationServiceResponse;
 const StartSyncJobRequest = models.StartSyncJobRequest;
 const DescribeMigrationCheckJobResponse = models.DescribeMigrationCheckJobResponse;
-const CompareObjectItem = models.CompareObjectItem;
+const DBInfo = models.DBInfo;
 const Endpoint = models.Endpoint;
 const DifferenceDetail = models.DifferenceDetail;
 const CreateCheckSyncJobResponse = models.CreateCheckSyncJobResponse;
-const DBInfo = models.DBInfo;
+const CompareObjectItem = models.CompareObjectItem;
 const ConfigureSyncJobRequest = models.ConfigureSyncJobRequest;
 const MigrateDBItem = models.MigrateDBItem;
 const DescribeMigrateDBInstancesRequest = models.DescribeMigrateDBInstancesRequest;
@@ -101,6 +107,7 @@ const ConfigureSyncJobResponse = models.ConfigureSyncJobResponse;
 const CompareViewItem = models.CompareViewItem;
 const StepInfo = models.StepInfo;
 const ResumeMigrateJobRequest = models.ResumeMigrateJobRequest;
+const PauseSyncJobResponse = models.PauseSyncJobResponse;
 const TradeInfo = models.TradeInfo;
 const StartCompareResponse = models.StartCompareResponse;
 const CreateCompareTaskResponse = models.CreateCompareTaskResponse;
@@ -126,6 +133,7 @@ const MigrateDetailInfo = models.MigrateDetailInfo;
 const StopMigrateJobRequest = models.StopMigrateJobRequest;
 const IsolateMigrateJobResponse = models.IsolateMigrateJobResponse;
 const SyncJobInfo = models.SyncJobInfo;
+const CompareOptions = models.CompareOptions;
 const RoleItem = models.RoleItem;
 const TagFilter = models.TagFilter;
 const StepDetailInfo = models.StepDetailInfo;
@@ -137,6 +145,7 @@ const TagItem = models.TagItem;
 const RecoverMigrateJobRequest = models.RecoverMigrateJobRequest;
 const OnlineDDL = models.OnlineDDL;
 const DatabaseTableObject = models.DatabaseTableObject;
+const PauseMigrateJobResponse = models.PauseMigrateJobResponse;
 const Table = models.Table;
 const CompareDetailInfo = models.CompareDetailInfo;
 const StartMigrateJobResponse = models.StartMigrateJobResponse;
@@ -187,14 +196,14 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the parameters of a data consistency check task after it is created and before it starts.
-     * @param {ModifyCompareTaskRequest} req
-     * @param {function(string, ModifyCompareTaskResponse):void} cb
+     * This API is used to isolate a sync task. After the task is isolated, you can call the `DescribeSyncJobs` API to query its status, call `RecoverSyncJob` to recover it, or directly delete it. For a free task, calling this API will directly delete it permanently.
+     * @param {IsolateSyncJobRequest} req
+     * @param {function(string, IsolateSyncJobResponse):void} cb
      * @public
      */
-    ModifyCompareTask(req, cb) {
-        let resp = new ModifyCompareTaskResponse();
-        this.request("ModifyCompareTask", req, resp, cb);
+    IsolateSyncJob(req, cb) {
+        let resp = new IsolateSyncJobResponse();
+        this.request("IsolateSyncJob", req, resp, cb);
     }
 
     /**
@@ -275,6 +284,39 @@ class DtsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to resume a paused migration task.
+     * @param {ContinueMigrateJobRequest} req
+     * @param {function(string, ContinueMigrateJobResponse):void} cb
+     * @public
+     */
+    ContinueMigrateJob(req, cb) {
+        let resp = new ContinueMigrateJobResponse();
+        this.request("ContinueMigrateJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pause a migration task.
+     * @param {PauseMigrateJobRequest} req
+     * @param {function(string, PauseMigrateJobResponse):void} cb
+     * @public
+     */
+    PauseMigrateJob(req, cb) {
+        let resp = new PauseMigrateJobResponse();
+        this.request("PauseMigrateJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used for the backend to skip a failed check item. Theoretically, to execute a sync task normally, any check step cannot be skipped, and the check must be passed. For products or links that support check item skipping, see [Check Item Overview](https://www.tencentcloud.com/document/product/571/42551).
+     * @param {SkipSyncCheckItemRequest} req
+     * @param {function(string, SkipSyncCheckItemResponse):void} cb
+     * @public
+     */
+    SkipSyncCheckItem(req, cb) {
+        let resp = new SkipSyncCheckItemResponse();
+        this.request("SkipSyncCheckItem", req, resp, cb);
+    }
+
+    /**
      * This API is used to configure a sync task.
      * @param {ConfigureSyncJobRequest} req
      * @param {function(string, ConfigureSyncJobResponse):void} cb
@@ -328,6 +370,28 @@ After calling this API, you can call the `DescribeMigrationJobs` API to query th
     StopMigrateJob(req, cb) {
         let resp = new StopMigrateJobResponse();
         this.request("StopMigrateJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pause a data sync task.
+     * @param {PauseSyncJobRequest} req
+     * @param {function(string, PauseSyncJobResponse):void} cb
+     * @public
+     */
+    PauseSyncJob(req, cb) {
+        let resp = new PauseSyncJobResponse();
+        this.request("PauseSyncJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to resume a paused data sync task.
+     * @param {ContinueSyncJobRequest} req
+     * @param {function(string, ContinueSyncJobResponse):void} cb
+     * @public
+     */
+    ContinueSyncJob(req, cb) {
+        let resp = new ContinueSyncJobResponse();
+        this.request("ContinueSyncJob", req, resp, cb);
     }
 
     /**
@@ -400,14 +464,14 @@ After successful check, if the migration task needs to be modified, a new check 
     }
 
     /**
-     * This API is used for the backend to skip a failed check item. Theoretically, to execute a sync task normally, any check step cannot be skipped, and the check must be passed. For products or links that support check item skipping, see [Check Item Overview](https://www.tencentcloud.com/document/product/571/42551).
-     * @param {SkipSyncCheckItemRequest} req
-     * @param {function(string, SkipSyncCheckItemResponse):void} cb
+     * This API is used to modify the parameters of a data consistency check task after it is created and before it starts.
+     * @param {ModifyCompareTaskRequest} req
+     * @param {function(string, ModifyCompareTaskResponse):void} cb
      * @public
      */
-    SkipSyncCheckItem(req, cb) {
-        let resp = new SkipSyncCheckItemResponse();
-        this.request("SkipSyncCheckItem", req, resp, cb);
+    ModifyCompareTask(req, cb) {
+        let resp = new ModifyCompareTaskResponse();
+        this.request("ModifyCompareTask", req, resp, cb);
     }
 
     /**
@@ -545,20 +609,6 @@ If the check fails, the cause can be queried. Modify the migration configuration
     }
 
     /**
-     * This API is used to complete a data migration task.
-For tasks in incremental migration mode, you need to call this API before migration gets ready for completion to stop migrating incremental data.
-If the task status queried through the `DescribeMigrationJobs` API is ready (`Status` = `readyComplete), you can call this API to complete the migration task.
-
-     * @param {CompleteMigrateJobRequest} req
-     * @param {function(string, CompleteMigrateJobResponse):void} cb
-     * @public
-     */
-    CompleteMigrateJob(req, cb) {
-        let resp = new CompleteMigrateJobResponse();
-        this.request("CompleteMigrateJob", req, resp, cb);
-    }
-
-    /**
      * This API is used to rename a migration task.
      * @param {ModifyMigrateNameRequest} req
      * @param {function(string, ModifyMigrateNameResponse):void} cb
@@ -570,14 +620,17 @@ If the task status queried through the `DescribeMigrationJobs` API is ready (`St
     }
 
     /**
-     * This API is used to isolate a sync task. After the task is isolated, you can call the `DescribeSyncJobs` API to query its status, call `RecoverSyncJob` to recover it, or directly delete it. For a free task, calling this API will directly delete it permanently.
-     * @param {IsolateSyncJobRequest} req
-     * @param {function(string, IsolateSyncJobResponse):void} cb
+     * This API is used to complete a data migration task.
+For tasks in incremental migration mode, you need to call this API before migration gets ready for completion to stop migrating incremental data.
+If the task status queried through the `DescribeMigrationJobs` API is ready (`Status` = `readyComplete), you can call this API to complete the migration task.
+
+     * @param {CompleteMigrateJobRequest} req
+     * @param {function(string, CompleteMigrateJobResponse):void} cb
      * @public
      */
-    IsolateSyncJob(req, cb) {
-        let resp = new IsolateSyncJobResponse();
-        this.request("IsolateSyncJob", req, resp, cb);
+    CompleteMigrateJob(req, cb) {
+        let resp = new CompleteMigrateJobResponse();
+        this.request("CompleteMigrateJob", req, resp, cb);
     }
 
 

@@ -56,6 +56,7 @@ const Tag = models.Tag;
 const BatchModifyGroupOffsetsResponse = models.BatchModifyGroupOffsetsResponse;
 const GroupResponse = models.GroupResponse;
 const InstanceChargeParam = models.InstanceChargeParam;
+const DescribeDatahubTopicResponse = models.DescribeDatahubTopicResponse;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
 const FetchMessageListByOffsetResponse = models.FetchMessageListByOffsetResponse;
 const CreateConsumerResponse = models.CreateConsumerResponse;
@@ -66,6 +67,7 @@ const OperateResponseData = models.OperateResponseData;
 const CreateUserResponse = models.CreateUserResponse;
 const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
 const CreatePartitionResponse = models.CreatePartitionResponse;
+const TopicSubscribeGroup = models.TopicSubscribeGroup;
 const ClusterInfo = models.ClusterInfo;
 const DeleteUserResponse = models.DeleteUserResponse;
 const DescribeTopicProduceConnectionRequest = models.DescribeTopicProduceConnectionRequest;
@@ -96,7 +98,7 @@ const UserResponse = models.UserResponse;
 const DescribeGroupInfoRequest = models.DescribeGroupInfoRequest;
 const DescribeGroupInfoResponse = models.DescribeGroupInfoResponse;
 const ModifyTopicAttributesResponse = models.ModifyTopicAttributesResponse;
-const BatchContent = models.BatchContent;
+const DescribeDatahubTopicsRequest = models.DescribeDatahubTopicsRequest;
 const DeleteRouteTriggerTimeResponse = models.DeleteRouteTriggerTimeResponse;
 const DescribeUserResponse = models.DescribeUserResponse;
 const AppIdResponse = models.AppIdResponse;
@@ -112,7 +114,7 @@ const DescribeInstanceAttributesResponse = models.DescribeInstanceAttributesResp
 const ModifyPasswordResponse = models.ModifyPasswordResponse;
 const TopicDetailResponse = models.TopicDetailResponse;
 const DeleteInstancePreRequest = models.DeleteInstancePreRequest;
-const TopicSubscribeGroup = models.TopicSubscribeGroup;
+const DescribeDatahubTopicRequest = models.DescribeDatahubTopicRequest;
 const Config = models.Config;
 const ModifyPasswordRequest = models.ModifyPasswordRequest;
 const ModifyInstanceAttributesRequest = models.ModifyInstanceAttributesRequest;
@@ -128,6 +130,7 @@ const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InstanceAttributesResponse = models.InstanceAttributesResponse;
 const CreateInstancePostRequest = models.CreateInstancePostRequest;
+const DescribeDatahubTopicsResponse = models.DescribeDatahubTopicsResponse;
 const DescribeGroupRequest = models.DescribeGroupRequest;
 const Filter = models.Filter;
 const GroupOffsetResponse = models.GroupOffsetResponse;
@@ -141,6 +144,7 @@ const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const CreateConsumerRequest = models.CreateConsumerRequest;
 const InquireCkafkaPriceResponse = models.InquireCkafkaPriceResponse;
 const DescribeRouteRequest = models.DescribeRouteRequest;
+const InquiryDiskParam = models.InquiryDiskParam;
 const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
 const SendMessageResponse = models.SendMessageResponse;
 const InquiryBasePrice = models.InquiryBasePrice;
@@ -148,12 +152,14 @@ const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const BatchModifyGroupOffsetsRequest = models.BatchModifyGroupOffsetsRequest;
 const TopicAttributesResponse = models.TopicAttributesResponse;
 const InstanceResponse = models.InstanceResponse;
+const DatahubTopicDTO = models.DatahubTopicDTO;
 const JgwOperateResponse = models.JgwOperateResponse;
 const DescribeGroup = models.DescribeGroup;
 const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
 const BatchModifyTopicInfo = models.BatchModifyTopicInfo;
 const DescribeRouteResponse = models.DescribeRouteResponse;
+const BatchContent = models.BatchContent;
 const InquiryPrice = models.InquiryPrice;
 const TopicResult = models.TopicResult;
 const DescribeTopicDetailRequest = models.DescribeTopicDetailRequest;
@@ -171,8 +177,9 @@ const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
 const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
+const DescribeDatahubTopicResp = models.DescribeDatahubTopicResp;
 const DescribeUserRequest = models.DescribeUserRequest;
-const InquiryDiskParam = models.InquiryDiskParam;
+const DescribeDatahubTopicsResp = models.DescribeDatahubTopicsResp;
 const DescribeTopicSyncReplicaRequest = models.DescribeTopicSyncReplicaRequest;
 const InstanceDetail = models.InstanceDetail;
 const InstanceQuotaConfigResp = models.InstanceQuotaConfigResp;
@@ -398,6 +405,17 @@ class CkafkaClient extends AbstractClient {
     DescribeACL(req, cb) {
         let resp = new DescribeACLResponse();
         this.request("DescribeACL", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the DataHub topic list.
+     * @param {DescribeDatahubTopicsRequest} req
+     * @param {function(string, DescribeDatahubTopicsResponse):void} cb
+     * @public
+     */
+    DescribeDatahubTopics(req, cb) {
+        let resp = new DescribeDatahubTopicsResponse();
+        this.request("DescribeDatahubTopics", req, resp, cb);
     }
 
     /**
@@ -631,6 +649,17 @@ This API is used to get the list of topics in a CKafka instance of a user.
     DescribeTopic(req, cb) {
         let resp = new DescribeTopicResponse();
         this.request("DescribeTopic", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the DataHub topic attributes.
+     * @param {DescribeDatahubTopicRequest} req
+     * @param {function(string, DescribeDatahubTopicResponse):void} cb
+     * @public
+     */
+    DescribeDatahubTopic(req, cb) {
+        let resp = new DescribeDatahubTopicResponse();
+        this.request("DescribeDatahubTopic", req, resp, cb);
     }
 
     /**

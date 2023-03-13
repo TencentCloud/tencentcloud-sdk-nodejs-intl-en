@@ -1247,6 +1247,34 @@ class AiReviewProhibitedOcrTaskOutput extends  AbstractModel {
 }
 
 /**
+ * DeleteSchedule response structure.
+ * @class
+ */
+class DeleteScheduleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ManageTask response structure.
  * @class
  */
@@ -1298,6 +1326,85 @@ class DeleteWorkflowRequest extends  AbstractModel {
             return;
         }
         this.WorkflowId = 'WorkflowId' in params ? params.WorkflowId : null;
+
+    }
+}
+
+/**
+ * An AWS S3 file upload trigger.
+ * @class
+ */
+class AwsS3FileUploadTrigger extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The AWS S3 bucket bound to the scheme.
+         * @type {string || null}
+         */
+        this.S3Bucket = null;
+
+        /**
+         * The region of the AWS S3 bucket.
+         * @type {string || null}
+         */
+        this.S3Region = null;
+
+        /**
+         * The bucket directory bound. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.	
+         * @type {string || null}
+         */
+        this.Dir = null;
+
+        /**
+         * The file formats that will trigger the scheme, such as ["mp4", "flv", "mov"]. If you do not specify this, the upload of files in any format will trigger the scheme.	
+         * @type {Array.<string> || null}
+         */
+        this.Formats = null;
+
+        /**
+         * The key ID of the AWS S3 bucket.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.S3SecretId = null;
+
+        /**
+         * The key of the AWS S3 bucket.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.S3SecretKey = null;
+
+        /**
+         * The SQS queue of the AWS S3 bucket.
+Note: The queue must be in the same region as the bucket.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AwsSQS || null}
+         */
+        this.AwsSQS = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.S3Bucket = 'S3Bucket' in params ? params.S3Bucket : null;
+        this.S3Region = 'S3Region' in params ? params.S3Region : null;
+        this.Dir = 'Dir' in params ? params.Dir : null;
+        this.Formats = 'Formats' in params ? params.Formats : null;
+        this.S3SecretId = 'S3SecretId' in params ? params.S3SecretId : null;
+        this.S3SecretKey = 'S3SecretKey' in params ? params.S3SecretKey : null;
+
+        if (params.AwsSQS) {
+            let obj = new AwsSQS();
+            obj.deserialize(params.AwsSQS)
+            this.AwsSQS = obj;
+        }
 
     }
 }
@@ -1597,7 +1704,10 @@ class MediaInputInfo extends  AbstractModel {
         super();
 
         /**
-         * The input type, which can be `COS` or `URL`.
+         * The input type. Valid values:
+<li>`COS`: A COS bucket address.</li>
+<li> `URL`: A URL.</li>
+<li> `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -1614,6 +1724,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          * @type {UrlInputInfo || null}
          */
         this.UrlInputInfo = null;
+
+        /**
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {S3InputInfo || null}
+         */
+        this.S3InputInfo = null;
 
     }
 
@@ -1636,6 +1753,12 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new UrlInputInfo();
             obj.deserialize(params.UrlInputInfo)
             this.UrlInputInfo = obj;
+        }
+
+        if (params.S3InputInfo) {
+            let obj = new S3InputInfo();
+            obj.deserialize(params.S3InputInfo)
+            this.S3InputInfo = obj;
         }
 
     }
@@ -2631,6 +2754,101 @@ class AiReviewPoliticalTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * ModifySchedule request structure.
+ * @class
+ */
+class ModifyScheduleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scheme ID.
+         * @type {number || null}
+         */
+        this.ScheduleId = null;
+
+        /**
+         * The scheme name.
+         * @type {string || null}
+         */
+        this.ScheduleName = null;
+
+        /**
+         * The trigger of the scheme.
+         * @type {WorkflowTrigger || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * The subtasks of the scheme.
+Note: You need to pass in the full list of subtasks even if you want to change only some of the subtasks.
+         * @type {Array.<Activity> || null}
+         */
+        this.Activities = null;
+
+        /**
+         * The bucket to save the output file.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * The directory to save the output file.
+Note: If this parameter is left empty, the current `OutputDir` value will be invalidated.
+         * @type {string || null}
+         */
+        this.OutputDir = null;
+
+        /**
+         * The notification configuration.
+         * @type {TaskNotifyConfig || null}
+         */
+        this.TaskNotifyConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
+        this.ScheduleName = 'ScheduleName' in params ? params.ScheduleName : null;
+
+        if (params.Trigger) {
+            let obj = new WorkflowTrigger();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
+        }
+
+        if (params.Activities) {
+            this.Activities = new Array();
+            for (let z in params.Activities) {
+                let obj = new Activity();
+                obj.deserialize(params.Activities[z]);
+                this.Activities.push(obj);
+            }
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
+
+        if (params.TaskNotifyConfig) {
+            let obj = new TaskNotifyConfig();
+            obj.deserialize(params.TaskNotifyConfig)
+            this.TaskNotifyConfig = obj;
+        }
 
     }
 }
@@ -4058,6 +4276,41 @@ class CosInputInfo extends  AbstractModel {
 }
 
 /**
+ * CreateSchedule response structure.
+ * @class
+ */
+class CreateScheduleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scheme ID.
+         * @type {number || null}
+         */
+        this.ScheduleId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Control parameter of intelligent tagging task
  * @class
  */
@@ -4836,6 +5089,135 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * A subtask of a scheme.
+ * @class
+ */
+class ActivityPara extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A transcoding task.
+         * @type {TranscodeTaskInput || null}
+         */
+        this.TranscodeTask = null;
+
+        /**
+         * An animated screenshot generation task.
+         * @type {AnimatedGraphicTaskInput || null}
+         */
+        this.AnimatedGraphicTask = null;
+
+        /**
+         * A time point screencapturing task.
+         * @type {SnapshotByTimeOffsetTaskInput || null}
+         */
+        this.SnapshotByTimeOffsetTask = null;
+
+        /**
+         * A sampled screencapturing task.
+         * @type {SampleSnapshotTaskInput || null}
+         */
+        this.SampleSnapshotTask = null;
+
+        /**
+         * An image sprite generation task.
+         * @type {ImageSpriteTaskInput || null}
+         */
+        this.ImageSpriteTask = null;
+
+        /**
+         * An adaptive bitrate streaming task.
+         * @type {AdaptiveDynamicStreamingTaskInput || null}
+         */
+        this.AdaptiveDynamicStreamingTask = null;
+
+        /**
+         * A content moderation task.
+         * @type {AiContentReviewTaskInput || null}
+         */
+        this.AiContentReviewTask = null;
+
+        /**
+         * A content analysis task.
+         * @type {AiAnalysisTaskInput || null}
+         */
+        this.AiAnalysisTask = null;
+
+        /**
+         * A content recognition task.
+         * @type {AiRecognitionTaskInput || null}
+         */
+        this.AiRecognitionTask = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TranscodeTask) {
+            let obj = new TranscodeTaskInput();
+            obj.deserialize(params.TranscodeTask)
+            this.TranscodeTask = obj;
+        }
+
+        if (params.AnimatedGraphicTask) {
+            let obj = new AnimatedGraphicTaskInput();
+            obj.deserialize(params.AnimatedGraphicTask)
+            this.AnimatedGraphicTask = obj;
+        }
+
+        if (params.SnapshotByTimeOffsetTask) {
+            let obj = new SnapshotByTimeOffsetTaskInput();
+            obj.deserialize(params.SnapshotByTimeOffsetTask)
+            this.SnapshotByTimeOffsetTask = obj;
+        }
+
+        if (params.SampleSnapshotTask) {
+            let obj = new SampleSnapshotTaskInput();
+            obj.deserialize(params.SampleSnapshotTask)
+            this.SampleSnapshotTask = obj;
+        }
+
+        if (params.ImageSpriteTask) {
+            let obj = new ImageSpriteTaskInput();
+            obj.deserialize(params.ImageSpriteTask)
+            this.ImageSpriteTask = obj;
+        }
+
+        if (params.AdaptiveDynamicStreamingTask) {
+            let obj = new AdaptiveDynamicStreamingTaskInput();
+            obj.deserialize(params.AdaptiveDynamicStreamingTask)
+            this.AdaptiveDynamicStreamingTask = obj;
+        }
+
+        if (params.AiContentReviewTask) {
+            let obj = new AiContentReviewTaskInput();
+            obj.deserialize(params.AiContentReviewTask)
+            this.AiContentReviewTask = obj;
+        }
+
+        if (params.AiAnalysisTask) {
+            let obj = new AiAnalysisTaskInput();
+            obj.deserialize(params.AiAnalysisTask)
+            this.AiAnalysisTask = obj;
+        }
+
+        if (params.AiRecognitionTask) {
+            let obj = new AiRecognitionTaskInput();
+            obj.deserialize(params.AiRecognitionTask)
+            this.AiRecognitionTask = obj;
+        }
+
+    }
+}
+
+/**
  * Text watermarking template
  * @class
  */
@@ -5434,6 +5816,34 @@ class MediaProcessTaskInput extends  AbstractModel {
 }
 
 /**
+ * DisableSchedule request structure.
+ * @class
+ */
+class DisableScheduleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scheme ID.
+         * @type {number || null}
+         */
+        this.ScheduleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
+
+    }
+}
+
+/**
  * The information of the output COS object after media processing.
  * @class
  */
@@ -5611,18 +6021,48 @@ class ClassificationConfigureInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * DeleteAdaptiveDynamicStreamingTemplate response structure.
+ * CreateSchedule request structure.
  * @class
  */
-class DeleteAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
+class CreateScheduleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The scheme name (max 128 characters). This name should be unique across your account.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ScheduleName = null;
+
+        /**
+         * The trigger of the scheme. If a file is uploaded to the specified bucket, the scheme will be triggered.
+         * @type {WorkflowTrigger || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * The subtasks of the scheme.
+         * @type {Array.<Activity> || null}
+         */
+        this.Activities = null;
+
+        /**
+         * The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * The directory to save the output file, such as `/movie/201907/`. If you do not specify this parameter, the directory of the source file will be used.
+         * @type {string || null}
+         */
+        this.OutputDir = null;
+
+        /**
+         * The notification configuration. If you do not specify this parameter, notifications will not be sent.
+         * @type {TaskNotifyConfig || null}
+         */
+        this.TaskNotifyConfig = null;
 
     }
 
@@ -5633,7 +6073,35 @@ class DeleteAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ScheduleName = 'ScheduleName' in params ? params.ScheduleName : null;
+
+        if (params.Trigger) {
+            let obj = new WorkflowTrigger();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
+        }
+
+        if (params.Activities) {
+            this.Activities = new Array();
+            for (let z in params.Activities) {
+                let obj = new Activity();
+                obj.deserialize(params.Activities[z]);
+                this.Activities.push(obj);
+            }
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
+
+        if (params.TaskNotifyConfig) {
+            let obj = new TaskNotifyConfig();
+            obj.deserialize(params.TaskNotifyConfig)
+            this.TaskNotifyConfig = obj;
+        }
 
     }
 }
@@ -6111,6 +6579,34 @@ class ProhibitedAsrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * DisableSchedule response structure.
+ * @class
+ */
+class DisableScheduleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAnimatedGraphicsTemplate response structure.
  * @class
  */
@@ -6428,6 +6924,62 @@ class EditMediaRequest extends  AbstractModel {
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+    }
+}
+
+/**
+ * The AWS S3 storage information of a source file.
+ * @class
+ */
+class S3InputInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The AWS S3 bucket.
+         * @type {string || null}
+         */
+        this.S3Bucket = null;
+
+        /**
+         * The region of the AWS S3 bucket.
+         * @type {string || null}
+         */
+        this.S3Region = null;
+
+        /**
+         * The path of the AWS S3 object.
+         * @type {string || null}
+         */
+        this.S3Object = null;
+
+        /**
+         * The key ID required to access the AWS S3 object.
+         * @type {string || null}
+         */
+        this.S3SecretId = null;
+
+        /**
+         * The key required to access the AWS S3 object.
+         * @type {string || null}
+         */
+        this.S3SecretKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.S3Bucket = 'S3Bucket' in params ? params.S3Bucket : null;
+        this.S3Region = 'S3Region' in params ? params.S3Region : null;
+        this.S3Object = 'S3Object' in params ? params.S3Object : null;
+        this.S3SecretId = 'S3SecretId' in params ? params.S3SecretId : null;
+        this.S3SecretKey = 'S3SecretKey' in params ? params.S3SecretKey : null;
 
     }
 }
@@ -7006,6 +7558,34 @@ class DeleteWordSamplesRequest extends  AbstractModel {
 }
 
 /**
+ * EnableSchedule request structure.
+ * @class
+ */
+class EnableScheduleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scheme ID.
+         * @type {number || null}
+         */
+        this.ScheduleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
+
+    }
+}
+
+/**
  * Specifications for custom transcoding
  * @class
  */
@@ -7521,7 +8101,9 @@ class TaskOutputStorage extends  AbstractModel {
         super();
 
         /**
-         * The type of storage location for the media processing output object. Only COS is supported currently.
+         * The storage type for a media processing output file. Valid values:
+<li>`COS`: Tencent Cloud COS</li>
+<li>`>AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -7532,6 +8114,13 @@ Note: This field may return null, indicating that no valid value can be obtained
          * @type {CosOutputStorage || null}
          */
         this.CosOutputStorage = null;
+
+        /**
+         * The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {S3OutputStorage || null}
+         */
+        this.S3OutputStorage = null;
 
     }
 
@@ -7548,6 +8137,102 @@ Note: This field may return null, indicating that no valid value can be obtained
             let obj = new CosOutputStorage();
             obj.deserialize(params.CosOutputStorage)
             this.CosOutputStorage = obj;
+        }
+
+        if (params.S3OutputStorage) {
+            let obj = new S3OutputStorage();
+            obj.deserialize(params.S3OutputStorage)
+            this.S3OutputStorage = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifyAIAnalysisTemplate request structure.
+ * @class
+ */
+class ModifyAIAnalysisTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of video content analysis template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Video content analysis template name. Length limit: 64 characters.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Video content analysis template description. Length limit: 256 characters.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Control parameter of intelligent categorization task.
+         * @type {ClassificationConfigureInfoForUpdate || null}
+         */
+        this.ClassificationConfigure = null;
+
+        /**
+         * Control parameter of intelligent tagging task.
+         * @type {TagConfigureInfoForUpdate || null}
+         */
+        this.TagConfigure = null;
+
+        /**
+         * Control parameter of intelligent cover generating task.
+         * @type {CoverConfigureInfoForUpdate || null}
+         */
+        this.CoverConfigure = null;
+
+        /**
+         * Control parameter of intelligent frame-specific tagging task.
+         * @type {FrameTagConfigureInfoForUpdate || null}
+         */
+        this.FrameTagConfigure = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.ClassificationConfigure) {
+            let obj = new ClassificationConfigureInfoForUpdate();
+            obj.deserialize(params.ClassificationConfigure)
+            this.ClassificationConfigure = obj;
+        }
+
+        if (params.TagConfigure) {
+            let obj = new TagConfigureInfoForUpdate();
+            obj.deserialize(params.TagConfigure)
+            this.TagConfigure = obj;
+        }
+
+        if (params.CoverConfigure) {
+            let obj = new CoverConfigureInfoForUpdate();
+            obj.deserialize(params.CoverConfigure)
+            this.CoverConfigure = obj;
+        }
+
+        if (params.FrameTagConfigure) {
+            let obj = new FrameTagConfigureInfoForUpdate();
+            obj.deserialize(params.FrameTagConfigure)
+            this.FrameTagConfigure = obj;
         }
 
     }
@@ -8492,6 +9177,56 @@ class AiRecognitionTaskTransTextResultInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * DescribeSchedules response structure.
+ * @class
+ */
+class DescribeSchedulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of records that meet the conditions.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The information of the schemes.
+         * @type {Array.<SchedulesInfo> || null}
+         */
+        this.ScheduleInfoSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ScheduleInfoSet) {
+            this.ScheduleInfoSet = new Array();
+            for (let z in params.ScheduleInfoSet) {
+                let obj = new SchedulesInfo();
+                obj.deserialize(params.ScheduleInfoSet[z]);
+                this.ScheduleInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9585,7 +10320,11 @@ class WorkflowTrigger extends  AbstractModel {
         super();
 
         /**
-         * Trigger type. Only `CosFileUpload` is supported currently.
+         * The trigger type. Valid values:
+<li>`CosFileUpload`: Tencent Cloud COS trigger.</li>
+<li>`AwsS3FileUpload`: AWS S3 trigger. Currently, this type is only supported for transcoding tasks and schemes (not supported for workflows).</li>
+
+
          * @type {string || null}
          */
         this.Type = null;
@@ -9596,6 +10335,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {CosFileUploadTrigger || null}
          */
         this.CosFileUploadTrigger = null;
+
+        /**
+         * The AWS S3 trigger. This parameter is valid and required if `Type` is `AwsS3FileUpload`.
+
+Note: Currently, the key for the AWS S3 bucket, the trigger SQS queue, and the callback SQS queue must be the same.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AwsS3FileUploadTrigger || null}
+         */
+        this.AwsS3FileUploadTrigger = null;
 
     }
 
@@ -9612,6 +10360,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new CosFileUploadTrigger();
             obj.deserialize(params.CosFileUploadTrigger)
             this.CosFileUploadTrigger = obj;
+        }
+
+        if (params.AwsS3FileUploadTrigger) {
+            let obj = new AwsS3FileUploadTrigger();
+            obj.deserialize(params.AwsS3FileUploadTrigger)
+            this.AwsS3FileUploadTrigger = obj;
         }
 
     }
@@ -10098,6 +10852,62 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
         }
+
+    }
+}
+
+/**
+ * EnableSchedule response structure.
+ * @class
+ */
+class EnableScheduleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAdaptiveDynamicStreamingTemplate response structure.
+ * @class
+ */
+class DeleteAdaptiveDynamicStreamingTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11686,6 +12496,34 @@ class AiContentReviewTaskInput extends  AbstractModel {
 }
 
 /**
+ * DeleteSchedule request structure.
+ * @class
+ */
+class DeleteScheduleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scheme ID.
+         * @type {number || null}
+         */
+        this.ScheduleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
+
+    }
+}
+
+/**
  * CreateAdaptiveDynamicStreamingTemplate response structure.
  * @class
  */
@@ -13101,110 +13939,48 @@ class DisableWorkflowResponse extends  AbstractModel {
 }
 
 /**
- * Details of a sampled screencapturing template
+ * Result type of intelligent categorization task
  * @class
  */
-class SampleSnapshotTemplate extends  AbstractModel {
+class AiAnalysisTaskClassificationResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a sampled screencapturing template.
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
-        this.Definition = null;
+        this.ErrCode = null;
 
         /**
-         * Template type. Valid values:
-<li>Preset: Preset template;</li>
-<li>Custom: Custom template.</li>
+         * Error message.
          * @type {string || null}
          */
-        this.Type = null;
+        this.Message = null;
 
         /**
-         * Name of a sampled screencapturing template.
-         * @type {string || null}
+         * Input of intelligent categorization task.
+         * @type {AiAnalysisTaskClassificationInput || null}
          */
-        this.Name = null;
+        this.Input = null;
 
         /**
-         * Template description.
-         * @type {string || null}
+         * Output of intelligent categorization task.
+         * @type {AiAnalysisTaskClassificationOutput || null}
          */
-        this.Comment = null;
-
-        /**
-         * Maximum value of the width (or long side) of a screenshot in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Maximum value of the height (or short side) of a screenshot in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Resolution adaption. Valid values:
-<li>open: Enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-<li>close: Disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
-Default value: open.
-         * @type {string || null}
-         */
-        this.ResolutionAdaptive = null;
-
-        /**
-         * Image format.
-         * @type {string || null}
-         */
-        this.Format = null;
-
-        /**
-         * Sampled screencapturing type.
-         * @type {string || null}
-         */
-        this.SampleType = null;
-
-        /**
-         * Sampling interval.
-         * @type {number || null}
-         */
-        this.SampleInterval = null;
-
-        /**
-         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-<li> stretch: Stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-<li>black: Fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-<li>white: Fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
-<li>gauss: Fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
-Default value: black.
-         * @type {string || null}
-         */
-        this.FillType = null;
+        this.Output = null;
 
     }
 
@@ -13215,19 +13991,22 @@ Default value: black.
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
-        this.Format = 'Format' in params ? params.Format : null;
-        this.SampleType = 'SampleType' in params ? params.SampleType : null;
-        this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskClassificationInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskClassificationOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -13999,6 +14778,55 @@ class UserDefineConfigureInfoForUpdate extends  AbstractModel {
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
         }
+
+    }
+}
+
+/**
+ * The AWS S3 storage information of an output file.
+ * @class
+ */
+class S3OutputStorage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The AWS S3 bucket.
+         * @type {string || null}
+         */
+        this.S3Bucket = null;
+
+        /**
+         * The region of the AWS S3 bucket.
+         * @type {string || null}
+         */
+        this.S3Region = null;
+
+        /**
+         * The key ID required to upload files to the AWS S3 object.
+         * @type {string || null}
+         */
+        this.S3SecretId = null;
+
+        /**
+         * The key required to upload files to the AWS S3 object.
+         * @type {string || null}
+         */
+        this.S3SecretKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.S3Bucket = 'S3Bucket' in params ? params.S3Bucket : null;
+        this.S3Region = 'S3Region' in params ? params.S3Region : null;
+        this.S3SecretId = 'S3SecretId' in params ? params.S3SecretId : null;
+        this.S3SecretKey = 'S3SecretKey' in params ? params.S3SecretKey : null;
 
     }
 }
@@ -15259,6 +16087,64 @@ class EnableWorkflowResponse extends  AbstractModel {
 }
 
 /**
+ * A subtask of a scheme.
+ * @class
+ */
+class Activity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The subtask type.
+<li>`input`: The start.</li>
+<li>`output`: The end.</li>
+<li>`action-trans`: Transcoding.</li>
+<li>`action-samplesnapshot`: Sampled screencapturing.</li>
+<li>`action-AIAnalysis`: Content analysis.</li>
+<li>`action-AIRecognition`: Content recognition.</li>
+<li>`action-aiReview`: Content moderation.</li>
+<li>`action-animated-graphics`: Animated screenshot generation.</li>
+<li>`action-image-sprite`: Image sprite generation.</li>
+<li>`action-snapshotByTimeOffset`: Time point screencapturing.</li>
+<li>`action-adaptive-substream`: Adaptive bitrate streaming.</li>
+         * @type {string || null}
+         */
+        this.ActivityType = null;
+
+        /**
+         * The indexes of the subsequent actions.
+         * @type {Array.<number> || null}
+         */
+        this.ReardriveIndex = null;
+
+        /**
+         * The parameters of a subtask.
+         * @type {ActivityPara || null}
+         */
+        this.ActivityPara = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityType = 'ActivityType' in params ? params.ActivityType : null;
+        this.ReardriveIndex = 'ReardriveIndex' in params ? params.ReardriveIndex : null;
+
+        if (params.ActivityPara) {
+            let obj = new ActivityPara();
+            obj.deserialize(params.ActivityPara)
+            this.ActivityPara = obj;
+        }
+
+    }
+}
+
+/**
  * AI-based sample management - keyword input information.
  * @class
  */
@@ -16112,6 +16998,7 @@ class TaskNotifyConfig extends  AbstractModel {
 <li>`TDMQ-CMQ`: Message queue</li>
 <li>`URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
 <li>`SCF`: This notification type is not recommended. You need to configure it in the SCF console.</li>
+<li>`AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.</li>
 <font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
          * @type {string || null}
          */
@@ -16122,6 +17009,14 @@ class TaskNotifyConfig extends  AbstractModel {
          * @type {string || null}
          */
         this.NotifyUrl = null;
+
+        /**
+         * The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.
+
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AwsSQS || null}
+         */
+        this.AwsSQS = null;
 
     }
 
@@ -16139,6 +17034,12 @@ class TaskNotifyConfig extends  AbstractModel {
         this.NotifyMode = 'NotifyMode' in params ? params.NotifyMode : null;
         this.NotifyType = 'NotifyType' in params ? params.NotifyType : null;
         this.NotifyUrl = 'NotifyUrl' in params ? params.NotifyUrl : null;
+
+        if (params.AwsSQS) {
+            let obj = new AwsSQS();
+            obj.deserialize(params.AwsSQS)
+            this.AwsSQS = obj;
+        }
 
     }
 }
@@ -16184,49 +17085,62 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The result of sensitive information detection.
+ * Result of porn information detection in image in AI-based live stream content audit
  * @class
  */
-class AiReviewTaskPoliticalResult extends  AbstractModel {
+class LiveStreamAiReviewImagePornResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
-         * @type {string || null}
-         */
-        this.ErrCodeExt = null;
-
-        /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Start PTS time of a suspected segment in seconds.
          * @type {number || null}
          */
-        this.ErrCode = null;
+        this.StartPtsTime = null;
 
         /**
-         * Error message.
+         * End PTS time of a suspected segment in seconds.
+         * @type {number || null}
+         */
+        this.EndPtsTime = null;
+
+        /**
+         * Score of a suspected porn segment.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Suggestion for porn information detection of a suspected segment. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
          * @type {string || null}
          */
-        this.Message = null;
+        this.Suggestion = null;
 
         /**
-         * The input parameter for sensitive information detection.
-         * @type {AiReviewPoliticalTaskInput || null}
+         * Tag of the detected porn information in video. Valid values:
+<li>porn: Porn.</li>
+<li>sexy: Sexiness.</li>
+<li>vulgar: Vulgarity.</li>
+<li>intimacy: Intimacy.</li>
+         * @type {string || null}
          */
-        this.Input = null;
+        this.Label = null;
 
         /**
-         * The output of sensitive information detection.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {AiReviewPoliticalTaskOutput || null}
+         * URL of a suspected image (which will not be permanently stored
+and will be deleted after `PicUrlExpireTime`).
+         * @type {string || null}
          */
-        this.Output = null;
+        this.Url = null;
+
+        /**
+         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.PicUrlExpireTime = null;
 
     }
 
@@ -16237,22 +17151,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Input) {
-            let obj = new AiReviewPoliticalTaskInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new AiReviewPoliticalTaskOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
+        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
+        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
 
     }
 }
@@ -17041,62 +17946,49 @@ Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/mili
 }
 
 /**
- * Result of porn information detection in image in AI-based live stream content audit
+ * The result of sensitive information detection.
  * @class
  */
-class LiveStreamAiReviewImagePornResult extends  AbstractModel {
+class AiReviewTaskPoliticalResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start PTS time of a suspected segment in seconds.
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
          * @type {number || null}
          */
-        this.StartPtsTime = null;
+        this.ErrCode = null;
 
         /**
-         * End PTS time of a suspected segment in seconds.
-         * @type {number || null}
-         */
-        this.EndPtsTime = null;
-
-        /**
-         * Score of a suspected porn segment.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Suggestion for porn information detection of a suspected segment. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * Error message.
          * @type {string || null}
          */
-        this.Suggestion = null;
+        this.Message = null;
 
         /**
-         * Tag of the detected porn information in video. Valid values:
-<li>porn: Porn.</li>
-<li>sexy: Sexiness.</li>
-<li>vulgar: Vulgarity.</li>
-<li>intimacy: Intimacy.</li>
-         * @type {string || null}
+         * The input parameter for sensitive information detection.
+         * @type {AiReviewPoliticalTaskInput || null}
          */
-        this.Label = null;
+        this.Input = null;
 
         /**
-         * URL of a suspected image (which will not be permanently stored
-and will be deleted after `PicUrlExpireTime`).
-         * @type {string || null}
+         * The output of sensitive information detection.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {AiReviewPoliticalTaskOutput || null}
          */
-        this.Url = null;
-
-        /**
-         * Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-         * @type {string || null}
-         */
-        this.PicUrlExpireTime = null;
+        this.Output = null;
 
     }
 
@@ -17107,13 +17999,22 @@ and will be deleted after `PicUrlExpireTime`).
         if (!params) {
             return;
         }
-        this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
-        this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiReviewPoliticalTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiReviewPoliticalTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
 
     }
 }
@@ -18082,6 +18983,58 @@ If this parameter is left empty, the workflow status will not be distinguished.
 }
 
 /**
+ * DescribeSchedules request structure.
+ * @class
+ */
+class DescribeSchedulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The IDs of the schemes to query. Array length limit: 100.
+         * @type {Array.<number> || null}
+         */
+        this.ScheduleIds = null;
+
+        /**
+         * The scheme status. Valid values:
+<li>`Enabled`</li>
+<li>`Disabled`</li>
+If you do not specify this parameter, schemes in both statuses will be returned.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The maximum number of records to return. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ScheduleIds = 'ScheduleIds' in params ? params.ScheduleIds : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Information of the audio stream in a VOD file
  * @class
  */
@@ -18549,54 +19502,36 @@ You can select multiple elements, which are connected by OR logic. If a usage co
 }
 
 /**
- * ModifyAIAnalysisTemplate request structure.
+ * The information of an AWS SQS queue.
  * @class
  */
-class ModifyAIAnalysisTemplateRequest extends  AbstractModel {
+class AwsSQS extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of video content analysis template.
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * Video content analysis template name. Length limit: 64 characters.
+         * The region of the SQS queue.
          * @type {string || null}
          */
-        this.Name = null;
+        this.SQSRegion = null;
 
         /**
-         * Video content analysis template description. Length limit: 256 characters.
+         * The name of the SQS queue.
          * @type {string || null}
          */
-        this.Comment = null;
+        this.SQSQueueName = null;
 
         /**
-         * Control parameter of intelligent categorization task.
-         * @type {ClassificationConfigureInfoForUpdate || null}
+         * The key ID required to read from/write to the SQS queue.
+         * @type {string || null}
          */
-        this.ClassificationConfigure = null;
+        this.S3SecretId = null;
 
         /**
-         * Control parameter of intelligent tagging task.
-         * @type {TagConfigureInfoForUpdate || null}
+         * The key required to read from/write to the SQS queue.
+         * @type {string || null}
          */
-        this.TagConfigure = null;
-
-        /**
-         * Control parameter of intelligent cover generating task.
-         * @type {CoverConfigureInfoForUpdate || null}
-         */
-        this.CoverConfigure = null;
-
-        /**
-         * Control parameter of intelligent frame-specific tagging task.
-         * @type {FrameTagConfigureInfoForUpdate || null}
-         */
-        this.FrameTagConfigure = null;
+        this.S3SecretKey = null;
 
     }
 
@@ -18607,33 +19542,10 @@ class ModifyAIAnalysisTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-
-        if (params.ClassificationConfigure) {
-            let obj = new ClassificationConfigureInfoForUpdate();
-            obj.deserialize(params.ClassificationConfigure)
-            this.ClassificationConfigure = obj;
-        }
-
-        if (params.TagConfigure) {
-            let obj = new TagConfigureInfoForUpdate();
-            obj.deserialize(params.TagConfigure)
-            this.TagConfigure = obj;
-        }
-
-        if (params.CoverConfigure) {
-            let obj = new CoverConfigureInfoForUpdate();
-            obj.deserialize(params.CoverConfigure)
-            this.CoverConfigure = obj;
-        }
-
-        if (params.FrameTagConfigure) {
-            let obj = new FrameTagConfigureInfoForUpdate();
-            obj.deserialize(params.FrameTagConfigure)
-            this.FrameTagConfigure = obj;
-        }
+        this.SQSRegion = 'SQSRegion' in params ? params.SQSRegion : null;
+        this.SQSQueueName = 'SQSQueueName' in params ? params.SQSQueueName : null;
+        this.S3SecretId = 'S3SecretId' in params ? params.S3SecretId : null;
+        this.S3SecretKey = 'S3SecretKey' in params ? params.S3SecretKey : null;
 
     }
 }
@@ -19132,6 +20044,131 @@ This parameter is left empty by default, which indicates to return all types of 
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.TranscodeType = 'TranscodeType' in params ? params.TranscodeType : null;
+
+    }
+}
+
+/**
+ * The details of a scheme.
+ * @class
+ */
+class SchedulesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scheme ID.
+         * @type {number || null}
+         */
+        this.ScheduleId = null;
+
+        /**
+         * The scheme name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ScheduleName = null;
+
+        /**
+         * The scheme status. Valid values:
+`Enabled`
+`Disabled`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Status = null;
+
+        /**
+         * The trigger of the scheme.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {WorkflowTrigger || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * The subtasks of the scheme.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Activity> || null}
+         */
+        this.Activities = null;
+
+        /**
+         * The bucket to save the output file.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+        /**
+         * The directory to save the output file.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OutputDir = null;
+
+        /**
+         * The notification configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TaskNotifyConfig || null}
+         */
+        this.TaskNotifyConfig = null;
+
+        /**
+         * The creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * The last updated time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
+        this.ScheduleName = 'ScheduleName' in params ? params.ScheduleName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Trigger) {
+            let obj = new WorkflowTrigger();
+            obj.deserialize(params.Trigger)
+            this.Trigger = obj;
+        }
+
+        if (params.Activities) {
+            this.Activities = new Array();
+            for (let z in params.Activities) {
+                let obj = new Activity();
+                obj.deserialize(params.Activities[z]);
+                this.Activities.push(obj);
+            }
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+        this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
+
+        if (params.TaskNotifyConfig) {
+            let obj = new TaskNotifyConfig();
+            obj.deserialize(params.TaskNotifyConfig)
+            this.TaskNotifyConfig = obj;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -19682,6 +20719,34 @@ class DescribePersonSamplesResponse extends  AbstractModel {
                 obj.deserialize(params.PersonSet[z]);
                 this.PersonSet.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySchedule response structure.
+ * @class
+ */
+class ModifyScheduleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -21284,48 +22349,110 @@ class CreateAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Result type of intelligent categorization task
+ * Details of a sampled screencapturing template
  * @class
  */
-class AiAnalysisTaskClassificationResult extends  AbstractModel {
+class SampleSnapshotTemplate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * The error code. An empty string indicates the task is successful; any other value returned indicates the task failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
-         * @type {string || null}
-         */
-        this.ErrCodeExt = null;
-
-        /**
-         * Error code. 0 indicates the task is successful; otherwise it is failed. This parameter is no longer recommended. Consider using the new error code parameter ErrCodeExt.
+         * Unique ID of a sampled screencapturing template.
          * @type {number || null}
          */
-        this.ErrCode = null;
+        this.Definition = null;
 
         /**
-         * Error message.
+         * Template type. Valid values:
+<li>Preset: Preset template;</li>
+<li>Custom: Custom template.</li>
          * @type {string || null}
          */
-        this.Message = null;
+        this.Type = null;
 
         /**
-         * Input of intelligent categorization task.
-         * @type {AiAnalysisTaskClassificationInput || null}
+         * Name of a sampled screencapturing template.
+         * @type {string || null}
          */
-        this.Input = null;
+        this.Name = null;
 
         /**
-         * Output of intelligent categorization task.
-         * @type {AiAnalysisTaskClassificationOutput || null}
+         * Template description.
+         * @type {string || null}
          */
-        this.Output = null;
+        this.Comment = null;
+
+        /**
+         * Maximum value of the width (or long side) of a screenshot in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Maximum value of the height (or short side) of a screenshot in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Resolution adaption. Valid values:
+<li>open: Enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: Disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * Image format.
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Sampled screencapturing type.
+         * @type {string || null}
+         */
+        this.SampleType = null;
+
+        /**
+         * Sampling interval.
+         * @type {number || null}
+         */
+        this.SampleInterval = null;
+
+        /**
+         * Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+<li> stretch: Stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+<li>black: Fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+<li>white: Fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+<li>gauss: Fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+Default value: black.
+         * @type {string || null}
+         */
+        this.FillType = null;
 
     }
 
@@ -21336,22 +22463,19 @@ class AiAnalysisTaskClassificationResult extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Input) {
-            let obj = new AiAnalysisTaskClassificationInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new AiAnalysisTaskClassificationOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.SampleType = 'SampleType' in params ? params.SampleType : null;
+        this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
 
     }
 }
@@ -22225,8 +23349,10 @@ module.exports = {
     AiReviewTaskProhibitedOcrResult: AiReviewTaskProhibitedOcrResult,
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
     AiReviewProhibitedOcrTaskOutput: AiReviewProhibitedOcrTaskOutput,
+    DeleteScheduleResponse: DeleteScheduleResponse,
     ManageTaskResponse: ManageTaskResponse,
     DeleteWorkflowRequest: DeleteWorkflowRequest,
+    AwsS3FileUploadTrigger: AwsS3FileUploadTrigger,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
@@ -22246,6 +23372,7 @@ module.exports = {
     VideoEnhanceConfig: VideoEnhanceConfig,
     MosaicInput: MosaicInput,
     AiReviewPoliticalTaskInput: AiReviewPoliticalTaskInput,
+    ModifyScheduleRequest: ModifyScheduleRequest,
     ClassificationConfigureInfo: ClassificationConfigureInfo,
     MediaAiAnalysisClassificationItem: MediaAiAnalysisClassificationItem,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
@@ -22274,6 +23401,7 @@ module.exports = {
     CreatePersonSampleRequest: CreatePersonSampleRequest,
     MediaAiAnalysisCoverItem: MediaAiAnalysisCoverItem,
     CosInputInfo: CosInputInfo,
+    CreateScheduleResponse: CreateScheduleResponse,
     TagConfigureInfo: TagConfigureInfo,
     DescribeWordSamplesResponse: DescribeWordSamplesResponse,
     AiSampleFaceInfo: AiSampleFaceInfo,
@@ -22289,6 +23417,7 @@ module.exports = {
     MediaProcessTaskAdaptiveDynamicStreamingResult: MediaProcessTaskAdaptiveDynamicStreamingResult,
     OcrWordsConfigureInfoForUpdate: OcrWordsConfigureInfoForUpdate,
     WatermarkTemplate: WatermarkTemplate,
+    ActivityPara: ActivityPara,
     TextWatermarkTemplateInput: TextWatermarkTemplateInput,
     ModifyAIAnalysisTemplateResponse: ModifyAIAnalysisTemplateResponse,
     DescribeAIRecognitionTemplatesResponse: DescribeAIRecognitionTemplatesResponse,
@@ -22301,12 +23430,13 @@ module.exports = {
     ScheduleRecognitionTaskResult: ScheduleRecognitionTaskResult,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     MediaProcessTaskInput: MediaProcessTaskInput,
+    DisableScheduleRequest: DisableScheduleRequest,
     CosOutputStorage: CosOutputStorage,
     AiRecognitionTaskFaceSegmentItem: AiRecognitionTaskFaceSegmentItem,
     ProcessMediaResponse: ProcessMediaResponse,
     CreateWordSamplesResponse: CreateWordSamplesResponse,
     ClassificationConfigureInfoForUpdate: ClassificationConfigureInfoForUpdate,
-    DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
+    CreateScheduleRequest: CreateScheduleRequest,
     ArtifactRepairConfig: ArtifactRepairConfig,
     CreateWordSamplesRequest: CreateWordSamplesRequest,
     PoliticalAsrReviewTemplateInfoForUpdate: PoliticalAsrReviewTemplateInfoForUpdate,
@@ -22316,6 +23446,7 @@ module.exports = {
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
     ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
+    DisableScheduleResponse: DisableScheduleResponse,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
@@ -22323,6 +23454,7 @@ module.exports = {
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     EditMediaRequest: EditMediaRequest,
+    S3InputInfo: S3InputInfo,
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
     DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
@@ -22335,6 +23467,7 @@ module.exports = {
     ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
     DeleteWordSamplesRequest: DeleteWordSamplesRequest,
+    EnableScheduleRequest: EnableScheduleRequest,
     RawTranscodeParameter: RawTranscodeParameter,
     LiveStreamTaskNotifyConfig: LiveStreamTaskNotifyConfig,
     VideoTemplateInfo: VideoTemplateInfo,
@@ -22344,6 +23477,7 @@ module.exports = {
     ModifyContentReviewTemplateResponse: ModifyContentReviewTemplateResponse,
     DescribeWatermarkTemplatesRequest: DescribeWatermarkTemplatesRequest,
     TaskOutputStorage: TaskOutputStorage,
+    ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
     UserDefineConfigureInfo: UserDefineConfigureInfo,
     ColorEnhanceConfig: ColorEnhanceConfig,
     AiReviewPornOcrTaskInput: AiReviewPornOcrTaskInput,
@@ -22358,6 +23492,7 @@ module.exports = {
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
     AiRecognitionTaskTransTextResultInput: AiRecognitionTaskTransTextResultInput,
+    DescribeSchedulesResponse: DescribeSchedulesResponse,
     ImageQualityEnhanceConfig: ImageQualityEnhanceConfig,
     AiSampleWord: AiSampleWord,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
@@ -22387,6 +23522,8 @@ module.exports = {
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     ScheduleAnalysisTaskResult: ScheduleAnalysisTaskResult,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
+    EnableScheduleResponse: EnableScheduleResponse,
+    DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
     ParseNotificationRequest: ParseNotificationRequest,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     DeleteContentReviewTemplateRequest: DeleteContentReviewTemplateRequest,
@@ -22415,6 +23552,7 @@ module.exports = {
     ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
     ImageWatermarkInputForUpdate: ImageWatermarkInputForUpdate,
     AiContentReviewTaskInput: AiContentReviewTaskInput,
+    DeleteScheduleRequest: DeleteScheduleRequest,
     CreateAdaptiveDynamicStreamingTemplateResponse: CreateAdaptiveDynamicStreamingTemplateResponse,
     DeleteSampleSnapshotTemplateRequest: DeleteSampleSnapshotTemplateRequest,
     AiAnalysisTaskInput: AiAnalysisTaskInput,
@@ -22441,7 +23579,7 @@ module.exports = {
     DescribeSampleSnapshotTemplatesRequest: DescribeSampleSnapshotTemplatesRequest,
     CoverConfigureInfoForUpdate: CoverConfigureInfoForUpdate,
     DisableWorkflowResponse: DisableWorkflowResponse,
-    SampleSnapshotTemplate: SampleSnapshotTemplate,
+    AiAnalysisTaskClassificationResult: AiAnalysisTaskClassificationResult,
     PoliticalImgReviewTemplateInfoForUpdate: PoliticalImgReviewTemplateInfoForUpdate,
     UserDefineOcrTextReviewTemplateInfo: UserDefineOcrTextReviewTemplateInfo,
     AdaptiveStreamTemplate: AdaptiveStreamTemplate,
@@ -22453,6 +23591,7 @@ module.exports = {
     CreateAIAnalysisTemplateResponse: CreateAIAnalysisTemplateResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
     UserDefineConfigureInfoForUpdate: UserDefineConfigureInfoForUpdate,
+    S3OutputStorage: S3OutputStorage,
     CosFileUploadTrigger: CosFileUploadTrigger,
     AiReviewPoliticalAsrTaskOutput: AiReviewPoliticalAsrTaskOutput,
     TEHDConfigForUpdate: TEHDConfigForUpdate,
@@ -22475,6 +23614,7 @@ module.exports = {
     LiveStreamTransTextRecognitionResult: LiveStreamTransTextRecognitionResult,
     WatermarkInput: WatermarkInput,
     EnableWorkflowResponse: EnableWorkflowResponse,
+    Activity: Activity,
     AiSampleWordInfo: AiSampleWordInfo,
     AdaptiveDynamicStreamingInfoItem: AdaptiveDynamicStreamingInfoItem,
     ProhibitedOcrReviewTemplateInfo: ProhibitedOcrReviewTemplateInfo,
@@ -22489,7 +23629,7 @@ module.exports = {
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
     TaskNotifyConfig: TaskNotifyConfig,
     FaceEnhanceConfig: FaceEnhanceConfig,
-    AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
+    LiveStreamAiReviewImagePornResult: LiveStreamAiReviewImagePornResult,
     AiAnalysisTaskFrameTagInput: AiAnalysisTaskFrameTagInput,
     MediaAiAnalysisFrameTagSegmentItem: MediaAiAnalysisFrameTagSegmentItem,
     AiRecognitionTaskAsrWordsResultItem: AiRecognitionTaskAsrWordsResultItem,
@@ -22504,7 +23644,7 @@ module.exports = {
     DescribeTasksResponse: DescribeTasksResponse,
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
-    LiveStreamAiReviewImagePornResult: LiveStreamAiReviewImagePornResult,
+    AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
     AiRecognitionTaskTransTextResultOutput: AiRecognitionTaskTransTextResultOutput,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     LiveStreamAiReviewResultItem: LiveStreamAiReviewResultItem,
@@ -22521,6 +23661,7 @@ module.exports = {
     CreateAIAnalysisTemplateRequest: CreateAIAnalysisTemplateRequest,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
     DescribeWorkflowsRequest: DescribeWorkflowsRequest,
+    DescribeSchedulesRequest: DescribeSchedulesRequest,
     MediaAudioStreamItem: MediaAudioStreamItem,
     LiveStreamAiReviewImageTerrorismResult: LiveStreamAiReviewImageTerrorismResult,
     ProcessLiveStreamRequest: ProcessLiveStreamRequest,
@@ -22528,7 +23669,7 @@ module.exports = {
     AiReviewProhibitedOcrTaskInput: AiReviewProhibitedOcrTaskInput,
     DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
     DescribeWordSamplesRequest: DescribeWordSamplesRequest,
-    ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
+    AwsSQS: AwsSQS,
     LiveStreamProcessTask: LiveStreamProcessTask,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
@@ -22536,6 +23677,7 @@ module.exports = {
     AiContentReviewResult: AiContentReviewResult,
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
+    SchedulesInfo: SchedulesInfo,
     DisableWorkflowRequest: DisableWorkflowRequest,
     PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,
     DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
@@ -22546,6 +23688,7 @@ module.exports = {
     DeleteTranscodeTemplateResponse: DeleteTranscodeTemplateResponse,
     MediaTranscodeItem: MediaTranscodeItem,
     DescribePersonSamplesResponse: DescribePersonSamplesResponse,
+    ModifyScheduleResponse: ModifyScheduleResponse,
     PornConfigureInfo: PornConfigureInfo,
     VideoDenoiseConfig: VideoDenoiseConfig,
     DescribeAIAnalysisTemplatesResponse: DescribeAIAnalysisTemplatesResponse,
@@ -22573,7 +23716,7 @@ module.exports = {
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
-    AiAnalysisTaskClassificationResult: AiAnalysisTaskClassificationResult,
+    SampleSnapshotTemplate: SampleSnapshotTemplate,
     MediaImageSpriteItem: MediaImageSpriteItem,
     DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,

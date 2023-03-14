@@ -45,6 +45,7 @@ const AssociateTargetGroupsRequest = models.AssociateTargetGroupsRequest;
 const ClassicalTarget = models.ClassicalTarget;
 const ListenerItem = models.ListenerItem;
 const RsWeightRule = models.RsWeightRule;
+const RegisterFunctionTargetsRequest = models.RegisterFunctionTargetsRequest;
 const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
 const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadbalancersResponse;
 const BasicTargetGroupInfo = models.BasicTargetGroupInfo;
@@ -70,9 +71,11 @@ const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersReq
 const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
 const DescribeClassicalLBTargetsRequest = models.DescribeClassicalLBTargetsRequest;
+const DeregisterFunctionTargetsResponse = models.DeregisterFunctionTargetsResponse;
 const DescribeCustomizedConfigListRequest = models.DescribeCustomizedConfigListRequest;
 const AutoRewriteRequest = models.AutoRewriteRequest;
 const DescribeCrossTargetsResponse = models.DescribeCrossTargetsResponse;
+const FunctionInfo = models.FunctionInfo;
 const DescribeLoadBalancerListByCertIdResponse = models.DescribeLoadBalancerListByCertIdResponse;
 const ModifyTargetGroupInstancesWeightResponse = models.ModifyTargetGroupInstancesWeightResponse;
 const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
@@ -107,7 +110,9 @@ const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const MigrateClassicalLoadBalancersRequest = models.MigrateClassicalLoadBalancersRequest;
 const DescribeLoadBalancersDetailRequest = models.DescribeLoadBalancersDetailRequest;
 const TargetGroupBackend = models.TargetGroupBackend;
+const DeregisterFunctionTargetsRequest = models.DeregisterFunctionTargetsRequest;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
+const FunctionTarget = models.FunctionTarget;
 const DescribeResourcesResponse = models.DescribeResourcesResponse;
 const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
 const ManualRewriteResponse = models.ManualRewriteResponse;
@@ -122,6 +127,7 @@ const LBChargePrepaid = models.LBChargePrepaid;
 const ClassicalListener = models.ClassicalListener;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const CertificateInput = models.CertificateInput;
+const ResourceAvailability = models.ResourceAvailability;
 const DescribeCustomizedConfigAssociateListResponse = models.DescribeCustomizedConfigAssociateListResponse;
 const SetCustomizedConfigForLoadBalancerRequest = models.SetCustomizedConfigForLoadBalancerRequest;
 const CreateListenerResponse = models.CreateListenerResponse;
@@ -131,6 +137,7 @@ const CreateLoadBalancerSnatIpsResponse = models.CreateLoadBalancerSnatIpsRespon
 const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
 const DescribeListenersResponse = models.DescribeListenersResponse;
 const RuleOutput = models.RuleOutput;
+const RegisterFunctionTargetsResponse = models.RegisterFunctionTargetsResponse;
 const CreateTopicResponse = models.CreateTopicResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
 const ModifyTargetGroupInstancesPortResponse = models.ModifyTargetGroupInstancesPortResponse;
@@ -299,6 +306,18 @@ This is an async API. After it is returned successfully, you can call the Descri
     DescribeCustomizedConfigAssociateList(req, cb) {
         let resp = new DescribeCustomizedConfigAssociateListResponse();
         this.request("DescribeCustomizedConfigAssociateList", req, resp, cb);
+    }
+
+    /**
+     * This API (ModifyTargetWeight) is used to modify the forwarding weight of a real server bound to a CLB instance.
+This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+     * @param {ModifyTargetWeightRequest} req
+     * @param {function(string, ModifyTargetWeightResponse):void} cb
+     * @public
+     */
+    ModifyTargetWeight(req, cb) {
+        let resp = new ModifyTargetWeightResponse();
+        this.request("ModifyTargetWeight", req, resp, cb);
     }
 
     /**
@@ -708,6 +727,27 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
+     * This API is used to bind an SCF function with the L7 forwarding rule of a CLB instance. Note that you need to create an L7 listener (HTTP, HTTPS) and forwarding rule first.
+This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.<br/>
+**Limits:**
+- Binding with SCF is only available in Guangzhou, Shenzhen Finance, Shanghai, Shanghai Finance, Beijing, Chengdu, Hong Kong (China), Singapore, Mumbai, Tokyo, and Silicon Valley.
+- SCF functions can only be bound with CLB instances of bill-by-IP accounts but not with bill-by-CVM accounts. If you are using a bill-by-CVM account, we recommend upgrading it to a bill-by-IP account. For more information, please see [Checking Account Type](https://intl.cloud.tencent.com/document/product/1199/49090?from_cn_redirect=1). 
+- SCF functions cannot be bound with classic CLB instances.
+- SCF functions cannot be bound with classic network-based CLB instances.
+- SCF functions in the same region can be bound with CLB instances. SCF functions can only be bound across VPCs but not regions.
+- SCF functions can only be bound with IPv4 and IPv6 NAT64 CLB instances, but currently not with IPv6 CLB instances.
+- SCF functions can only be bound with layer-7 HTTP and HTTPS listeners, but not with layer-7 QUIC listeners or layer-4 (TCP, UDP, and TCP SSL) listeners.
+- Only SCF event-triggered functions can be bound with CLB instances.
+     * @param {RegisterFunctionTargetsRequest} req
+     * @param {function(string, RegisterFunctionTargetsResponse):void} cb
+     * @public
+     */
+    RegisterFunctionTargets(req, cb) {
+        let resp = new RegisterFunctionTargetsResponse();
+        this.request("RegisterFunctionTargets", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the CLB exclusive logset.
      * @param {DescribeClsLogSetRequest} req
      * @param {function(string, DescribeClsLogSetResponse):void} cb
@@ -730,15 +770,14 @@ This is an async API. After it is returned successfully, you can call the Descri
     }
 
     /**
-     * This API (ModifyTargetWeight) is used to modify the forwarding weight of a real server bound to a CLB instance.
-This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
-     * @param {ModifyTargetWeightRequest} req
-     * @param {function(string, ModifyTargetWeightResponse):void} cb
+     * This API is used to rename a target group or modify its default port attribute.
+     * @param {ModifyTargetGroupAttributeRequest} req
+     * @param {function(string, ModifyTargetGroupAttributeResponse):void} cb
      * @public
      */
-    ModifyTargetWeight(req, cb) {
-        let resp = new ModifyTargetWeightResponse();
-        this.request("ModifyTargetWeight", req, resp, cb);
+    ModifyTargetGroupAttribute(req, cb) {
+        let resp = new ModifyTargetGroupAttributeResponse();
+        this.request("ModifyTargetGroupAttribute", req, resp, cb);
     }
 
     /**
@@ -888,14 +927,25 @@ This is an async API. After it is returned successfully, you can check the actio
     }
 
     /**
-     * This API is used to rename a target group or modify its default port attribute.
-     * @param {ModifyTargetGroupAttributeRequest} req
-     * @param {function(string, ModifyTargetGroupAttributeResponse):void} cb
+     * This API is used to unbind a SCF function with a CLB forwarding rule. For L7 listeners, you need to specify the forwarding rule by using `LocationId` or `Domain+Url`. 
+This is an async API. After it is returned successfully, you can call the [DescribeTaskStatus](https://intl.cloud.tencent.com/document/product/214/30683?from_cn_redirect=1) API with the returned RequestID to check whether this task is successful.
+<br/>Limits: 
+
+- Binding with SCF is only available in Guangzhou, Shenzhen Finance, Shanghai, Shanghai Finance, Beijing, Chengdu, Hong Kong (China), Singapore, Mumbai, Tokyo, and Silicon Valley.
+- SCF functions can only be bound with CLB instances of bill-by-IP accounts but not with bill-by-CVM accounts. If you are using a bill-by-CVM account, we recommend upgrading it to a bill-by-IP account. For more information, please see [Checking Account Type](https://intl.cloud.tencent.com/document/product/1199/49090?from_cn_redirect=1).
+- SCF functions cannot be bound with classic CLB instances.
+- SCF functions cannot be bound with classic network-based CLB instances.
+- SCF functions in the same region can be bound with CLB instances. SCF functions can only be bound across VPCs but not regions.
+- SCF functions can only be bound with IPv4 and IPv6 NAT64 CLB instances, but currently not with IPv6 CLB instances.
+- SCF functions can only be bound with layer-7 HTTP and HTTPS listeners, but not with layer-7 QUIC listeners or layer-4 (TCP, UDP, and TCP SSL) listeners.
+- Only SCF event-triggered functions can be bound with CLB instances.
+     * @param {DeregisterFunctionTargetsRequest} req
+     * @param {function(string, DeregisterFunctionTargetsResponse):void} cb
      * @public
      */
-    ModifyTargetGroupAttribute(req, cb) {
-        let resp = new ModifyTargetGroupAttributeResponse();
-        this.request("ModifyTargetGroupAttribute", req, resp, cb);
+    DeregisterFunctionTargets(req, cb) {
+        let resp = new DeregisterFunctionTargetsResponse();
+        this.request("DeregisterFunctionTargets", req, resp, cb);
     }
 
     /**

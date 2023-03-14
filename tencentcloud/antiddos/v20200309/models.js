@@ -1918,6 +1918,12 @@ class L7RuleHealth extends  AbstractModel {
          */
         this.PassiveStatusCode = null;
 
+        /**
+         * Configuration status of the passive health check. Values: `0` (Normal), `1` (configuration in progress) and `2` (configuration failed).
+         * @type {number || null}
+         */
+        this.PassiveStatus = null;
+
     }
 
     /**
@@ -1942,6 +1948,7 @@ class L7RuleHealth extends  AbstractModel {
         this.FailedCountInter = 'FailedCountInter' in params ? params.FailedCountInter : null;
         this.FailedThreshold = 'FailedThreshold' in params ? params.FailedThreshold : null;
         this.PassiveStatusCode = 'PassiveStatusCode' in params ? params.PassiveStatusCode : null;
+        this.PassiveStatus = 'PassiveStatus' in params ? params.PassiveStatus : null;
 
     }
 }
@@ -2747,6 +2754,12 @@ class SourceServer extends  AbstractModel {
          */
         this.Weight = null;
 
+        /**
+         * Port number. Value range: 0-65535.
+         * @type {number || null}
+         */
+        this.Port = null;
+
     }
 
     /**
@@ -2759,6 +2772,7 @@ class SourceServer extends  AbstractModel {
         this.RealServer = 'RealServer' in params ? params.RealServer : null;
         this.RsType = 'RsType' in params ? params.RsType : null;
         this.Weight = 'Weight' in params ? params.Weight : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
     }
 }
@@ -3516,6 +3530,18 @@ class Layer7Rule extends  AbstractModel {
          */
         this.InstanceDetailRule = null;
 
+        /**
+         * Protocol
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Port number
+         * @type {number || null}
+         */
+        this.Vport = null;
+
     }
 
     /**
@@ -3562,6 +3588,8 @@ class Layer7Rule extends  AbstractModel {
                 this.InstanceDetailRule.push(obj);
             }
         }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
 
     }
 }
@@ -9598,6 +9626,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ElasticServiceBandwidth = null;
 
+        /**
+         * Bandwidth quota given away by Tencent Cloud
+         * @type {number || null}
+         */
+        this.GiftServiceBandWidth = null;
+
     }
 
     /**
@@ -9666,6 +9700,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VitalityVersion = 'VitalityVersion' in params ? params.VitalityVersion : null;
         this.Line = 'Line' in params ? params.Line : null;
         this.ElasticServiceBandwidth = 'ElasticServiceBandwidth' in params ? params.ElasticServiceBandwidth : null;
+        this.GiftServiceBandWidth = 'GiftServiceBandWidth' in params ? params.GiftServiceBandWidth : null;
 
     }
 }

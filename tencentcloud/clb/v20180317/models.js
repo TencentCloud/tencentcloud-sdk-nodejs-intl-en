@@ -1746,6 +1746,77 @@ class RsWeightRule extends  AbstractModel {
 }
 
 /**
+ * RegisterFunctionTargets request structure.
+ * @class
+ */
+class RegisterFunctionTargetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * 
+         * @type {Array.<FunctionTarget> || null}
+         */
+        this.FunctionTargets = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+
+        if (params.FunctionTargets) {
+            this.FunctionTargets = new Array();
+            for (let z in params.FunctionTargets) {
+                let obj = new FunctionTarget();
+                obj.deserialize(params.FunctionTargets[z]);
+                this.FunctionTargets.push(obj);
+            }
+        }
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * DeregisterTargetsFromClassicalLB request structure.
  * @class
  */
@@ -1917,6 +1988,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.LocalZone = null;
 
+        /**
+         * Type of resources in the zone. Values: `SHARED`, `EXCLUSIVE`
+         * @type {string || null}
+         */
+        this.ZoneResourceType = null;
+
+        /**
+         * Whether the AZ is an edge zone. Values: `true`, `false`.
+         * @type {boolean || null}
+         */
+        this.EdgeZone = null;
+
     }
 
     /**
@@ -1940,6 +2023,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IPVersion = 'IPVersion' in params ? params.IPVersion : null;
         this.ZoneRegion = 'ZoneRegion' in params ? params.ZoneRegion : null;
         this.LocalZone = 'LocalZone' in params ? params.LocalZone : null;
+        this.ZoneResourceType = 'ZoneResourceType' in params ? params.ZoneResourceType : null;
+        this.EdgeZone = 'EdgeZone' in params ? params.EdgeZone : null;
 
     }
 }
@@ -2521,6 +2606,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.LocalZone = null;
 
+        /**
+         * Whether the AZ is an edge zone. Values: `true`, `false`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.EdgeZone = null;
+
     }
 
     /**
@@ -2535,6 +2627,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.ZoneRegion = 'ZoneRegion' in params ? params.ZoneRegion : null;
         this.LocalZone = 'LocalZone' in params ? params.LocalZone : null;
+        this.EdgeZone = 'EdgeZone' in params ? params.EdgeZone : null;
 
     }
 }
@@ -2831,6 +2924,34 @@ class DescribeClassicalLBTargetsRequest extends  AbstractModel {
 }
 
 /**
+ * DeregisterFunctionTargets response structure.
+ * @class
+ */
+class DeregisterFunctionTargetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeCustomizedConfigList request structure.
  * @class
  */
@@ -3005,6 +3126,56 @@ class DescribeCrossTargetsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SCF related information
+ * @class
+ */
+class FunctionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Function namespace
+         * @type {string || null}
+         */
+        this.FunctionNamespace = null;
+
+        /**
+         * Function name
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Function version name or alias
+         * @type {string || null}
+         */
+        this.FunctionQualifier = null;
+
+        /**
+         * Function qualifier type. Values: `VERSION`, `ALIAS`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FunctionQualifierType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FunctionNamespace = 'FunctionNamespace' in params ? params.FunctionNamespace : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.FunctionQualifier = 'FunctionQualifier' in params ? params.FunctionQualifier : null;
+        this.FunctionQualifierType = 'FunctionQualifierType' in params ? params.FunctionQualifierType : null;
 
     }
 }
@@ -3747,6 +3918,27 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.AttrFlags = null;
 
+        /**
+         * List of bound target groups
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<BasicTargetGroupInfo> || null}
+         */
+        this.TargetGroupList = null;
+
+        /**
+         * Maximum number of concurrent listener connections. If it’s set to `-1`, the listener speed is not limited. 
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxConn = null;
+
+        /**
+         * Maximum number of new listener connections. If it’s set to `-1`, the listener speed is not limited. 
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxCps = null;
+
     }
 
     /**
@@ -3798,6 +3990,17 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Toa = 'Toa' in params ? params.Toa : null;
         this.DeregisterTargetRst = 'DeregisterTargetRst' in params ? params.DeregisterTargetRst : null;
         this.AttrFlags = 'AttrFlags' in params ? params.AttrFlags : null;
+
+        if (params.TargetGroupList) {
+            this.TargetGroupList = new Array();
+            for (let z in params.TargetGroupList) {
+                let obj = new BasicTargetGroupInfo();
+                obj.deserialize(params.TargetGroupList[z]);
+                this.TargetGroupList.push(obj);
+            }
+        }
+        this.MaxConn = 'MaxConn' in params ? params.MaxConn : null;
+        this.MaxCps = 'MaxCps' in params ? params.MaxCps : null;
 
     }
 }
@@ -4153,13 +4356,13 @@ They represent weighted round robin and least connections, respectively. Default
         this.MultiCertInfo = null;
 
         /**
-         * 
+         * Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
          * @type {number || null}
          */
         this.MaxConn = null;
 
         /**
-         * 
+         * Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
          * @type {number || null}
          */
         this.MaxCps = null;
@@ -4935,6 +5138,77 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DeregisterFunctionTargets request structure.
+ * @class
+ */
+class DeregisterFunctionTargetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID.
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLB listener ID.
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * List of functions to be unbound
+         * @type {Array.<FunctionTarget> || null}
+         */
+        this.FunctionTargets = null;
+
+        /**
+         * The ID of target forwarding rule. To unbind a function from an L7 forwarding rule, either `LocationId` or `Domain+Url` is required. 
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * Domain name of the target forwarding rule. It is ignored if `LocationId` is specified. 
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * URL of the target forwarding rule. It is ignored if `LocationId` is specified. 
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+
+        if (params.FunctionTargets) {
+            this.FunctionTargets = new Array();
+            for (let z in params.FunctionTargets) {
+                let obj = new FunctionTarget();
+                obj.deserialize(params.FunctionTargets[z]);
+                this.FunctionTargets.push(obj);
+            }
+        }
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * DescribeClassicalLBByInstanceId request structure.
  * @class
  */
@@ -4958,6 +5232,47 @@ class DescribeClassicalLBByInstanceIdRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * Whether to use SCF (Serverless Cloud Function) as the backend service
+ * @class
+ */
+class FunctionTarget extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SCF related information
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {FunctionInfo || null}
+         */
+        this.Function = null;
+
+        /**
+         * Weight
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Function) {
+            let obj = new FunctionInfo();
+            obj.deserialize(params.Function)
+            this.Function = obj;
+        }
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -5716,6 +6031,41 @@ class CertificateInput extends  AbstractModel {
 }
 
 /**
+ * Resource availability
+ * @class
+ */
+class ResourceAvailability extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Specific ISP resource information. Values: `CMCC`, `CUCC`, `CTCC`, `BGP`.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Whether the resource is available. Values: `Available`, `Unavailable`
+         * @type {string || null}
+         */
+        this.Availability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Availability = 'Availability' in params ? params.Availability : null;
+
+    }
+}
+
+/**
  * DescribeCustomizedConfigAssociateList response structure.
  * @class
  */
@@ -6185,6 +6535,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.Domains = null;
 
+        /**
+         * List of bound target groups
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<BasicTargetGroupInfo> || null}
+         */
+        this.TargetGroupList = null;
+
     }
 
     /**
@@ -6236,6 +6593,43 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.TrpcFunc = 'TrpcFunc' in params ? params.TrpcFunc : null;
         this.QuicStatus = 'QuicStatus' in params ? params.QuicStatus : null;
         this.Domains = 'Domains' in params ? params.Domains : null;
+
+        if (params.TargetGroupList) {
+            this.TargetGroupList = new Array();
+            for (let z in params.TargetGroupList) {
+                let obj = new BasicTargetGroupInfo();
+                obj.deserialize(params.TargetGroupList[z]);
+                this.TargetGroupList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * RegisterFunctionTargets response structure.
+ * @class
+ */
+class RegisterFunctionTargetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6682,13 +7076,13 @@ class CertInfo extends  AbstractModel {
         this.CertName = null;
 
         /**
-         * Public key of the uploaded certificate. It's required if `CertId` is not specified.
+         * Public key of the uploaded certificate. This is required if `CertId` is not specified.
          * @type {string || null}
          */
         this.CertContent = null;
 
         /**
-         * Private key of the uploaded server certificate. It's required if `CertId` is not specified.
+         * Private key of the uploaded server certificate. This is required if `CertId` is not specified.
          * @type {string || null}
          */
         this.CertKey = null;
@@ -7003,13 +7397,13 @@ They represent weighted round robin and least connections, respectively. Default
         this.MultiCertInfo = null;
 
         /**
-         * 
+         * Maximum number of concurrent listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
          * @type {number || null}
          */
         this.MaxConn = null;
 
         /**
-         * 
+         * Maximum number of new listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
          * @type {number || null}
          */
         this.MaxCps = null;
@@ -7999,6 +8393,33 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.Domains = null;
 
+        /**
+         * The secondary zone of multi-AZ CLB instance
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * The AZ of private CLB instance. This is only available for beta users.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * Whether SNI is enabled. This parameter is only meaningful for HTTPS listeners.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SniSwitch = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.LoadBalancerDomain = null;
+
     }
 
     /**
@@ -8065,6 +8486,10 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
         this.TargetHealth = 'TargetHealth' in params ? params.TargetHealth : null;
         this.Domains = 'Domains' in params ? params.Domains : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
+        this.LoadBalancerDomain = 'LoadBalancerDomain' in params ? params.LoadBalancerDomain : null;
 
     }
 }
@@ -9550,6 +9975,13 @@ class Resource extends  AbstractModel {
          */
         this.Isp = null;
 
+        /**
+         * Available resources
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ResourceAvailability> || null}
+         */
+        this.AvailabilitySet = null;
+
     }
 
     /**
@@ -9561,6 +9993,15 @@ class Resource extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Isp = 'Isp' in params ? params.Isp : null;
+
+        if (params.AvailabilitySet) {
+            this.AvailabilitySet = new Array();
+            for (let z in params.AvailabilitySet) {
+                let obj = new ResourceAvailability();
+                obj.deserialize(params.AvailabilitySet[z]);
+                this.AvailabilitySet.push(obj);
+            }
+        }
 
     }
 }
@@ -10390,6 +10831,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.CertCaId = null;
 
+        /**
+         * IDs of extra server certificates
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.ExtCertIds = null;
+
     }
 
     /**
@@ -10402,6 +10850,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SSLMode = 'SSLMode' in params ? params.SSLMode : null;
         this.CertId = 'CertId' in params ? params.CertId : null;
         this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
+        this.ExtCertIds = 'ExtCertIds' in params ? params.ExtCertIds : null;
 
     }
 }
@@ -11404,6 +11853,7 @@ module.exports = {
     ClassicalTarget: ClassicalTarget,
     ListenerItem: ListenerItem,
     RsWeightRule: RsWeightRule,
+    RegisterFunctionTargetsRequest: RegisterFunctionTargetsRequest,
     DeregisterTargetsFromClassicalLBRequest: DeregisterTargetsFromClassicalLBRequest,
     SetSecurityGroupForLoadbalancersResponse: SetSecurityGroupForLoadbalancersResponse,
     BasicTargetGroupInfo: BasicTargetGroupInfo,
@@ -11429,9 +11879,11 @@ module.exports = {
     BlockedIP: BlockedIP,
     ModifyRuleResponse: ModifyRuleResponse,
     DescribeClassicalLBTargetsRequest: DescribeClassicalLBTargetsRequest,
+    DeregisterFunctionTargetsResponse: DeregisterFunctionTargetsResponse,
     DescribeCustomizedConfigListRequest: DescribeCustomizedConfigListRequest,
     AutoRewriteRequest: AutoRewriteRequest,
     DescribeCrossTargetsResponse: DescribeCrossTargetsResponse,
+    FunctionInfo: FunctionInfo,
     DescribeLoadBalancerListByCertIdResponse: DescribeLoadBalancerListByCertIdResponse,
     ModifyTargetGroupInstancesWeightResponse: ModifyTargetGroupInstancesWeightResponse,
     DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
@@ -11466,7 +11918,9 @@ module.exports = {
     MigrateClassicalLoadBalancersRequest: MigrateClassicalLoadBalancersRequest,
     DescribeLoadBalancersDetailRequest: DescribeLoadBalancersDetailRequest,
     TargetGroupBackend: TargetGroupBackend,
+    DeregisterFunctionTargetsRequest: DeregisterFunctionTargetsRequest,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
+    FunctionTarget: FunctionTarget,
     DescribeResourcesResponse: DescribeResourcesResponse,
     ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
     ManualRewriteResponse: ManualRewriteResponse,
@@ -11481,6 +11935,7 @@ module.exports = {
     ClassicalListener: ClassicalListener,
     DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
     CertificateInput: CertificateInput,
+    ResourceAvailability: ResourceAvailability,
     DescribeCustomizedConfigAssociateListResponse: DescribeCustomizedConfigAssociateListResponse,
     SetCustomizedConfigForLoadBalancerRequest: SetCustomizedConfigForLoadBalancerRequest,
     CreateListenerResponse: CreateListenerResponse,
@@ -11490,6 +11945,7 @@ module.exports = {
     ClassicalLoadBalancerInfo: ClassicalLoadBalancerInfo,
     DescribeListenersResponse: DescribeListenersResponse,
     RuleOutput: RuleOutput,
+    RegisterFunctionTargetsResponse: RegisterFunctionTargetsResponse,
     CreateTopicResponse: CreateTopicResponse,
     CreateRuleRequest: CreateRuleRequest,
     ModifyTargetGroupInstancesPortResponse: ModifyTargetGroupInstancesPortResponse,

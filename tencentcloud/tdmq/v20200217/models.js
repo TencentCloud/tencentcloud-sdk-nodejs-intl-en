@@ -314,6 +314,48 @@ class DescribeSubscriptionsRequest extends  AbstractModel {
 }
 
 /**
+ * Information of instance node distribution
+ * @class
+ */
+class InstanceNodeDistribution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * AZ ID
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Number of nodes
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+
+    }
+}
+
+/**
  * CreateRocketMQGroup request structure.
  * @class
  */
@@ -1214,6 +1256,127 @@ class PublishCmqMsgRequest extends  AbstractModel {
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.MsgContent = 'MsgContent' in params ? params.MsgContent : null;
         this.MsgTag = 'MsgTag' in params ? params.MsgTag : null;
+
+    }
+}
+
+/**
+ * Instance configurations of a TDMQ for RocketMQ exclusive cluster
+ * @class
+ */
+class RocketMQInstanceConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Maximum TPS per namespace
+         * @type {number || null}
+         */
+        this.MaxTpsPerNamespace = null;
+
+        /**
+         * Maximum number of namespaces
+         * @type {number || null}
+         */
+        this.MaxNamespaceNum = null;
+
+        /**
+         * Number of used namespaces
+         * @type {number || null}
+         */
+        this.UsedNamespaceNum = null;
+
+        /**
+         * Maximum number of topics
+         * @type {number || null}
+         */
+        this.MaxTopicNum = null;
+
+        /**
+         * Number of used topics
+         * @type {number || null}
+         */
+        this.UsedTopicNum = null;
+
+        /**
+         * Maximum number of groups
+         * @type {number || null}
+         */
+        this.MaxGroupNum = null;
+
+        /**
+         * Number of used groups
+         * @type {number || null}
+         */
+        this.UsedGroupNum = null;
+
+        /**
+         * Cluster type
+         * @type {string || null}
+         */
+        this.ConfigDisplay = null;
+
+        /**
+         * Number of nodes in the cluster
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * Node distribution
+         * @type {Array.<InstanceNodeDistribution> || null}
+         */
+        this.NodeDistribution = null;
+
+        /**
+         * Topic distribution
+         * @type {Array.<RocketMQTopicDistribution> || null}
+         */
+        this.TopicDistribution = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxQueuesPerTopic = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxTpsPerNamespace = 'MaxTpsPerNamespace' in params ? params.MaxTpsPerNamespace : null;
+        this.MaxNamespaceNum = 'MaxNamespaceNum' in params ? params.MaxNamespaceNum : null;
+        this.UsedNamespaceNum = 'UsedNamespaceNum' in params ? params.UsedNamespaceNum : null;
+        this.MaxTopicNum = 'MaxTopicNum' in params ? params.MaxTopicNum : null;
+        this.UsedTopicNum = 'UsedTopicNum' in params ? params.UsedTopicNum : null;
+        this.MaxGroupNum = 'MaxGroupNum' in params ? params.MaxGroupNum : null;
+        this.UsedGroupNum = 'UsedGroupNum' in params ? params.UsedGroupNum : null;
+        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+
+        if (params.NodeDistribution) {
+            this.NodeDistribution = new Array();
+            for (let z in params.NodeDistribution) {
+                let obj = new InstanceNodeDistribution();
+                obj.deserialize(params.NodeDistribution[z]);
+                this.NodeDistribution.push(obj);
+            }
+        }
+
+        if (params.TopicDistribution) {
+            this.TopicDistribution = new Array();
+            for (let z in params.TopicDistribution) {
+                let obj = new RocketMQTopicDistribution();
+                obj.deserialize(params.TopicDistribution[z]);
+                this.TopicDistribution.push(obj);
+            }
+        }
+        this.MaxQueuesPerTopic = 'MaxQueuesPerTopic' in params ? params.MaxQueuesPerTopic : null;
 
     }
 }
@@ -3489,24 +3652,24 @@ class ResetRocketMQConsumerOffSetResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTopics response structure.
+ * DescribeRocketMQVipInstanceDetail response structure.
  * @class
  */
-class DescribeTopicsResponse extends  AbstractModel {
+class DescribeRocketMQVipInstanceDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array of topic sets.
-         * @type {Array.<Topic> || null}
+         * Cluster information
+         * @type {RocketMQClusterInfo || null}
          */
-        this.TopicSets = null;
+        this.ClusterInfo = null;
 
         /**
-         * The number of topics.
-         * @type {number || null}
+         * Cluster configuration
+         * @type {RocketMQInstanceConfig || null}
          */
-        this.TotalCount = null;
+        this.InstanceConfig = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3524,15 +3687,17 @@ class DescribeTopicsResponse extends  AbstractModel {
             return;
         }
 
-        if (params.TopicSets) {
-            this.TopicSets = new Array();
-            for (let z in params.TopicSets) {
-                let obj = new Topic();
-                obj.deserialize(params.TopicSets[z]);
-                this.TopicSets.push(obj);
-            }
+        if (params.ClusterInfo) {
+            let obj = new RocketMQClusterInfo();
+            obj.deserialize(params.ClusterInfo)
+            this.ClusterInfo = obj;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceConfig) {
+            let obj = new RocketMQInstanceConfig();
+            obj.deserialize(params.InstanceConfig)
+            this.InstanceConfig = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7116,64 +7281,18 @@ class DescribeRocketMQVipInstancesRequest extends  AbstractModel {
 }
 
 /**
- * ReceiveMessage response structure.
+ * DescribeRocketMQVipInstanceDetail request structure.
  * @class
  */
-class ReceiveMessageResponse extends  AbstractModel {
+class DescribeRocketMQVipInstanceDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique primary key used to identify the message
+         * Cluster ID
          * @type {string || null}
          */
-        this.MessageID = null;
-
-        /**
-         * Content of the received message
-         * @type {string || null}
-         */
-        this.MessagePayload = null;
-
-        /**
-         * Provided to the `Ack` API and used to acknowledge messages in the topic
-         * @type {string || null}
-         */
-        this.AckTopic = null;
-
-        /**
-         * Returned error message. If it is an empty string, no error occurred.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ErrorMsg = null;
-
-        /**
-         * Returned subscriber name, which will be used when an acknowledgment consumer is created.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SubName = null;
-
-        /**
-         * MessageIDs returned by `BatchReceivePolicy` at a time, which are separated by “###”.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MessageIDList = null;
-
-        /**
-         * Message contents returned by `BatchReceivePolicy` at a time, which are separated by “###”.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.MessagesPayload = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.ClusterId = null;
 
     }
 
@@ -7184,14 +7303,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.MessageID = 'MessageID' in params ? params.MessageID : null;
-        this.MessagePayload = 'MessagePayload' in params ? params.MessagePayload : null;
-        this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
-        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
-        this.SubName = 'SubName' in params ? params.SubName : null;
-        this.MessageIDList = 'MessageIDList' in params ? params.MessageIDList : null;
-        this.MessagesPayload = 'MessagesPayload' in params ? params.MessagesPayload : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -8410,6 +8522,87 @@ class CreateRocketMQClusterResponse extends  AbstractModel {
 }
 
 /**
+ * ReceiveMessage response structure.
+ * @class
+ */
+class ReceiveMessageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique primary key used to identify the message
+         * @type {string || null}
+         */
+        this.MessageID = null;
+
+        /**
+         * Content of the received message
+         * @type {string || null}
+         */
+        this.MessagePayload = null;
+
+        /**
+         * Provided to the `Ack` API and used to acknowledge messages in the topic
+         * @type {string || null}
+         */
+        this.AckTopic = null;
+
+        /**
+         * Returned error message. If it is an empty string, no error occurred.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * Returned subscriber name, which will be used when an acknowledgment consumer is created.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubName = null;
+
+        /**
+         * MessageIDs returned by `BatchReceivePolicy` at a time, which are separated by “###”.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MessageIDList = null;
+
+        /**
+         * Message contents returned by `BatchReceivePolicy` at a time, which are separated by “###”.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MessagesPayload = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageID = 'MessageID' in params ? params.MessageID : null;
+        this.MessagePayload = 'MessagePayload' in params ? params.MessagePayload : null;
+        this.AckTopic = 'AckTopic' in params ? params.AckTopic : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.SubName = 'SubName' in params ? params.SubName : null;
+        this.MessageIDList = 'MessageIDList' in params ? params.MessageIDList : null;
+        this.MessagesPayload = 'MessagesPayload' in params ? params.MessagesPayload : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteRocketMQNamespace response structure.
  * @class
  */
@@ -9356,6 +9549,76 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * TDMQ for RocketMQ topic distribution
+ * @class
+ */
+class RocketMQTopicDistribution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic type
+         * @type {string || null}
+         */
+        this.TopicType = null;
+
+        /**
+         * Number of topics
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
+ * Sort by field
+ * @class
+ */
+class Sort extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sorting field.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Ascending order: `ASC`; descending order: `DESC`.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
  * CreateRole request structure.
  * @class
  */
@@ -9587,24 +9850,30 @@ class Role extends  AbstractModel {
 }
 
 /**
- * Sort by field
+ * DescribeTopics response structure.
  * @class
  */
-class Sort extends  AbstractModel {
+class DescribeTopicsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sorting field.
-         * @type {string || null}
+         * Array of topic sets.
+         * @type {Array.<Topic> || null}
          */
-        this.Name = null;
+        this.TopicSets = null;
 
         /**
-         * Ascending order: `ASC`; descending order: `DESC`.
+         * The number of topics.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Order = null;
+        this.RequestId = null;
 
     }
 
@@ -9615,8 +9884,17 @@ class Sort extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Order = 'Order' in params ? params.Order : null;
+
+        if (params.TopicSets) {
+            this.TopicSets = new Array();
+            for (let z in params.TopicSets) {
+                let obj = new Topic();
+                obj.deserialize(params.TopicSets[z]);
+                this.TopicSets.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10621,6 +10899,7 @@ module.exports = {
     CmqDeadLetterPolicy: CmqDeadLetterPolicy,
     RocketMQNamespace: RocketMQNamespace,
     DescribeSubscriptionsRequest: DescribeSubscriptionsRequest,
+    InstanceNodeDistribution: InstanceNodeDistribution,
     CreateRocketMQGroupRequest: CreateRocketMQGroupRequest,
     ModifyEnvironmentAttributesRequest: ModifyEnvironmentAttributesRequest,
     DeleteClusterResponse: DeleteClusterResponse,
@@ -10636,6 +10915,7 @@ module.exports = {
     DescribeCmqQueuesResponse: DescribeCmqQueuesResponse,
     DescribeRabbitMQNodeListRequest: DescribeRabbitMQNodeListRequest,
     PublishCmqMsgRequest: PublishCmqMsgRequest,
+    RocketMQInstanceConfig: RocketMQInstanceConfig,
     CreateCmqSubscribeRequest: CreateCmqSubscribeRequest,
     RewindCmqQueueResponse: RewindCmqQueueResponse,
     DeleteClusterRequest: DeleteClusterRequest,
@@ -10672,7 +10952,7 @@ module.exports = {
     ModifyRocketMQClusterRequest: ModifyRocketMQClusterRequest,
     AcknowledgeMessageRequest: AcknowledgeMessageRequest,
     ResetRocketMQConsumerOffSetResponse: ResetRocketMQConsumerOffSetResponse,
-    DescribeTopicsResponse: DescribeTopicsResponse,
+    DescribeRocketMQVipInstanceDetailResponse: DescribeRocketMQVipInstanceDetailResponse,
     PublishCmqMsgResponse: PublishCmqMsgResponse,
     DescribePublishersRequest: DescribePublishersRequest,
     CreateRocketMQClusterRequest: CreateRocketMQClusterRequest,
@@ -10739,7 +11019,7 @@ module.exports = {
     ModifyCmqSubscriptionAttributeRequest: ModifyCmqSubscriptionAttributeRequest,
     ModifyTopicResponse: ModifyTopicResponse,
     DescribeRocketMQVipInstancesRequest: DescribeRocketMQVipInstancesRequest,
-    ReceiveMessageResponse: ReceiveMessageResponse,
+    DescribeRocketMQVipInstanceDetailRequest: DescribeRocketMQVipInstanceDetailRequest,
     DeleteRocketMQClusterResponse: DeleteRocketMQClusterResponse,
     CreateCmqTopicResponse: CreateCmqTopicResponse,
     CmqDeadLetterSource: CmqDeadLetterSource,
@@ -10762,6 +11042,7 @@ module.exports = {
     Cluster: Cluster,
     RetentionPolicy: RetentionPolicy,
     CreateRocketMQClusterResponse: CreateRocketMQClusterResponse,
+    ReceiveMessageResponse: ReceiveMessageResponse,
     DeleteRocketMQNamespaceResponse: DeleteRocketMQNamespaceResponse,
     DescribePublishersResponse: DescribePublishersResponse,
     SendMsgRequest: SendMsgRequest,
@@ -10781,11 +11062,13 @@ module.exports = {
     DeleteCmqQueueRequest: DeleteCmqQueueRequest,
     DescribeRocketMQGroupsRequest: DescribeRocketMQGroupsRequest,
     DescribeRocketMQClustersResponse: DescribeRocketMQClustersResponse,
+    RocketMQTopicDistribution: RocketMQTopicDistribution,
+    Sort: Sort,
     CreateRoleRequest: CreateRoleRequest,
     ModifyEnvironmentRoleRequest: ModifyEnvironmentRoleRequest,
     DescribeEnvironmentAttributesResponse: DescribeEnvironmentAttributesResponse,
     Role: Role,
-    Sort: Sort,
+    DescribeTopicsResponse: DescribeTopicsResponse,
     DescribePublisherSummaryResponse: DescribePublisherSummaryResponse,
     CreateRocketMQNamespaceResponse: CreateRocketMQNamespaceResponse,
     SendBatchMessagesRequest: SendBatchMessagesRequest,

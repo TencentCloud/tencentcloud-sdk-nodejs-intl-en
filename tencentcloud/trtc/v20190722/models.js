@@ -26,7 +26,7 @@ class CloudStorage extends  AbstractModel {
 
         /**
          * The cloud storage provider.
-0: Tencent Cloud COS. The storage services of other providers are not supported currently.
+`0`: Tencent Cloud COS; `1`: AWS storage. Other vendors are not supported currently.
          * @type {number || null}
          */
         this.Vendor = null;
@@ -552,7 +552,6 @@ class UpdatePublishCdnStreamRequest extends  AbstractModel {
 
 /**
  * The layout parameters for mixed-stream recording.
-
  * @class
  */
 class MixLayoutParams extends  AbstractModel {
@@ -605,7 +604,7 @@ This parameter specifies the type of the stream displayed in the big window. If 
         this.MediaId = null;
 
         /**
-         * The download URL of the background image for the canvas, which must be in JPG or PNG format and cannot be larger than 5 MB.
+         * The URL of the background image, which cannot contain Chinese characters. The image must be in JPG or PNG format and cannot be larger than 5 MB.
          * @type {string || null}
          */
         this.BackgroundImageUrl = null;
@@ -708,13 +707,13 @@ class McuFeedBackRoomParams extends  AbstractModel {
         this.RoomIdType = null;
 
         /**
-         * The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the relaying robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in this user ID.
+         * The [user ID](https://www.tencentcloud.com/document/product/647/37714) of the relaying robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in this user ID.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * The signature (similar to login password) required for the relaying robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104).
+         * The signature (similar to login password) required for the relaying robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://www.tencentcloud.com/document/product/647/38104).
          * @type {string || null}
          */
         this.UserSig = null;
@@ -835,7 +834,7 @@ class MixLayout extends  AbstractModel {
         this.ImageLayer = null;
 
         /**
-         * The download URL of the background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
+         * The URL of the background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
          * @type {string || null}
          */
         this.SubBackgroundImage = null;
@@ -1190,6 +1189,20 @@ class McuLayoutVolume extends  AbstractModel {
          */
         this.PayloadType = null;
 
+        /**
+         * The SEI sending interval (milliseconds). The default value is 1000.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * Valid values: `1`: SEI is guaranteed when keyframes are sent; `0` (default): SEI is not guaranteed when keyframes are sent.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FollowIdr = null;
+
     }
 
     /**
@@ -1201,6 +1214,8 @@ class McuLayoutVolume extends  AbstractModel {
         }
         this.AppData = 'AppData' in params ? params.AppData : null;
         this.PayloadType = 'PayloadType' in params ? params.PayloadType : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.FollowIdr = 'FollowIdr' in params ? params.FollowIdr : null;
 
     }
 }
@@ -1440,6 +1455,20 @@ class McuPassThrough extends  AbstractModel {
          */
         this.PayloadUuid = null;
 
+        /**
+         * The SEI sending interval (milliseconds). The default value is 1000.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * Valid values: `1`: SEI is guaranteed when keyframes are sent; `0` (default): SEI is not guaranteed when keyframes are sent.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FollowIdr = null;
+
     }
 
     /**
@@ -1452,6 +1481,8 @@ class McuPassThrough extends  AbstractModel {
         this.PayloadContent = 'PayloadContent' in params ? params.PayloadContent : null;
         this.PayloadType = 'PayloadType' in params ? params.PayloadType : null;
         this.PayloadUuid = 'PayloadUuid' in params ? params.PayloadUuid : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.FollowIdr = 'FollowIdr' in params ? params.FollowIdr : null;
 
     }
 }

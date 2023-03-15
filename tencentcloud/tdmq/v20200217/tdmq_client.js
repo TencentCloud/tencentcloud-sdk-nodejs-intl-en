@@ -21,6 +21,7 @@ const DescribeBindClustersResponse = models.DescribeBindClustersResponse;
 const CmqDeadLetterPolicy = models.CmqDeadLetterPolicy;
 const RocketMQNamespace = models.RocketMQNamespace;
 const DescribeSubscriptionsRequest = models.DescribeSubscriptionsRequest;
+const InstanceNodeDistribution = models.InstanceNodeDistribution;
 const CreateRocketMQGroupRequest = models.CreateRocketMQGroupRequest;
 const ModifyEnvironmentAttributesRequest = models.ModifyEnvironmentAttributesRequest;
 const DeleteClusterResponse = models.DeleteClusterResponse;
@@ -36,6 +37,7 @@ const RabbitMQVipInstance = models.RabbitMQVipInstance;
 const DescribeCmqQueuesResponse = models.DescribeCmqQueuesResponse;
 const DescribeRabbitMQNodeListRequest = models.DescribeRabbitMQNodeListRequest;
 const PublishCmqMsgRequest = models.PublishCmqMsgRequest;
+const RocketMQInstanceConfig = models.RocketMQInstanceConfig;
 const CreateCmqSubscribeRequest = models.CreateCmqSubscribeRequest;
 const RewindCmqQueueResponse = models.RewindCmqQueueResponse;
 const DeleteClusterRequest = models.DeleteClusterRequest;
@@ -72,7 +74,7 @@ const DescribeEnvironmentAttributesRequest = models.DescribeEnvironmentAttribute
 const ModifyRocketMQClusterRequest = models.ModifyRocketMQClusterRequest;
 const AcknowledgeMessageRequest = models.AcknowledgeMessageRequest;
 const ResetRocketMQConsumerOffSetResponse = models.ResetRocketMQConsumerOffSetResponse;
-const DescribeTopicsResponse = models.DescribeTopicsResponse;
+const DescribeRocketMQVipInstanceDetailResponse = models.DescribeRocketMQVipInstanceDetailResponse;
 const PublishCmqMsgResponse = models.PublishCmqMsgResponse;
 const DescribePublishersRequest = models.DescribePublishersRequest;
 const CreateRocketMQClusterRequest = models.CreateRocketMQClusterRequest;
@@ -139,7 +141,7 @@ const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
 const ModifyCmqSubscriptionAttributeRequest = models.ModifyCmqSubscriptionAttributeRequest;
 const ModifyTopicResponse = models.ModifyTopicResponse;
 const DescribeRocketMQVipInstancesRequest = models.DescribeRocketMQVipInstancesRequest;
-const ReceiveMessageResponse = models.ReceiveMessageResponse;
+const DescribeRocketMQVipInstanceDetailRequest = models.DescribeRocketMQVipInstanceDetailRequest;
 const DeleteRocketMQClusterResponse = models.DeleteRocketMQClusterResponse;
 const CreateCmqTopicResponse = models.CreateCmqTopicResponse;
 const CmqDeadLetterSource = models.CmqDeadLetterSource;
@@ -162,6 +164,7 @@ const ConsumersSchedule = models.ConsumersSchedule;
 const Cluster = models.Cluster;
 const RetentionPolicy = models.RetentionPolicy;
 const CreateRocketMQClusterResponse = models.CreateRocketMQClusterResponse;
+const ReceiveMessageResponse = models.ReceiveMessageResponse;
 const DeleteRocketMQNamespaceResponse = models.DeleteRocketMQNamespaceResponse;
 const DescribePublishersResponse = models.DescribePublishersResponse;
 const SendMsgRequest = models.SendMsgRequest;
@@ -181,11 +184,13 @@ const ModifyEnvironmentRoleResponse = models.ModifyEnvironmentRoleResponse;
 const DeleteCmqQueueRequest = models.DeleteCmqQueueRequest;
 const DescribeRocketMQGroupsRequest = models.DescribeRocketMQGroupsRequest;
 const DescribeRocketMQClustersResponse = models.DescribeRocketMQClustersResponse;
+const RocketMQTopicDistribution = models.RocketMQTopicDistribution;
+const Sort = models.Sort;
 const CreateRoleRequest = models.CreateRoleRequest;
 const ModifyEnvironmentRoleRequest = models.ModifyEnvironmentRoleRequest;
 const DescribeEnvironmentAttributesResponse = models.DescribeEnvironmentAttributesResponse;
 const Role = models.Role;
-const Sort = models.Sort;
+const DescribeTopicsResponse = models.DescribeTopicsResponse;
 const DescribePublisherSummaryResponse = models.DescribePublisherSummaryResponse;
 const CreateRocketMQNamespaceResponse = models.CreateRocketMQNamespaceResponse;
 const SendBatchMessagesRequest = models.SendBatchMessagesRequest;
@@ -447,6 +452,17 @@ class TdmqClient extends AbstractClient {
     DescribePublishers(req, cb) {
         let resp = new DescribePublishersResponse();
         this.request("DescribePublishers", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update a RocketMQ namespace.
+     * @param {ModifyRocketMQNamespaceRequest} req
+     * @param {function(string, ModifyRocketMQNamespaceResponse):void} cb
+     * @public
+     */
+    ModifyRocketMQNamespace(req, cb) {
+        let resp = new ModifyRocketMQNamespaceResponse();
+        this.request("ModifyRocketMQNamespace", req, resp, cb);
     }
 
     /**
@@ -725,14 +741,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of subscribers under the specified environment and topic.
-     * @param {DescribeSubscriptionsRequest} req
-     * @param {function(string, DescribeSubscriptionsResponse):void} cb
+     * This API is used to get the information of a specific TDMQ for RocketMQ exclusive cluster.
+     * @param {DescribeRocketMQVipInstanceDetailRequest} req
+     * @param {function(string, DescribeRocketMQVipInstanceDetailResponse):void} cb
      * @public
      */
-    DescribeSubscriptions(req, cb) {
-        let resp = new DescribeSubscriptionsResponse();
-        this.request("DescribeSubscriptions", req, resp, cb);
+    DescribeRocketMQVipInstanceDetail(req, cb) {
+        let resp = new DescribeRocketMQVipInstanceDetailResponse();
+        this.request("DescribeRocketMQVipInstanceDetail", req, resp, cb);
     }
 
     /**
@@ -758,14 +774,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to update a RocketMQ namespace.
-     * @param {ModifyRocketMQNamespaceRequest} req
-     * @param {function(string, ModifyRocketMQNamespaceResponse):void} cb
+     * This API is used to query the list of subscribers under the specified environment and topic.
+     * @param {DescribeSubscriptionsRequest} req
+     * @param {function(string, DescribeSubscriptionsResponse):void} cb
      * @public
      */
-    ModifyRocketMQNamespace(req, cb) {
-        let resp = new ModifyRocketMQNamespaceResponse();
-        this.request("ModifyRocketMQNamespace", req, resp, cb);
+    DescribeSubscriptions(req, cb) {
+        let resp = new DescribeSubscriptionsResponse();
+        this.request("DescribeSubscriptions", req, resp, cb);
     }
 
     /**

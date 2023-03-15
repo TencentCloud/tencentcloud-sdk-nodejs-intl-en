@@ -1229,7 +1229,7 @@ class InquirePriceRenewInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
+         * Parameter setting for prepaid mode. This parameter can specify the renewal period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
@@ -2050,6 +2050,7 @@ class Disk extends  AbstractModel {
         /**
          * Creation time according to ISO 8601 standard. UTC time is used. 
 Format: YYYY-MM-DDThh:mm:ssZ.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -2762,12 +2763,12 @@ class DescribeBlueprintsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter list
+         * Filter list.
 <li>blueprint-id</li>Filter by the **image ID**.
 Type: String
 Required: no
 <li>blueprint-type</li>Filter by the **image type**.
-Valid values: `APP_OS` (application image); `PURE_OS` (system image); `PRIVATE` (custom image) and `SHARED` (shared image)
+Valid values: `APP_OS` (application image), `PURE_OS` (system image), `DOCKER` (Docker container image), `PRIVATE` (custom image), `SHARED` (shared image)
 Type: String
 Required: no
 <li>platform-type</li>Filter by the **image operating system**.
@@ -2784,7 +2785,7 @@ Required: no
 Type: String
 Required: no
 
-Each request can contain up to 10 `Filters`, each of which can contain up to 00 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
+Each request can contain up to 10 `Filters`, each of which can contain up to 100 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4774,6 +4775,7 @@ class Blueprint extends  AbstractModel {
 
         /**
          * Image description information.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Description = null;
@@ -4872,6 +4874,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.SceneIdSet = null;
 
+        /**
+         * Docker version.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DockerVersion = null;
+
     }
 
     /**
@@ -4900,6 +4909,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.CommunityUrl = 'CommunityUrl' in params ? params.CommunityUrl : null;
         this.GuideUrl = 'GuideUrl' in params ? params.GuideUrl : null;
         this.SceneIdSet = 'SceneIdSet' in params ? params.SceneIdSet : null;
+        this.DockerVersion = 'DockerVersion' in params ? params.DockerVersion : null;
 
     }
 }
@@ -5805,6 +5815,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 
         /**
          * Snapshot creation time.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CreatedTime = null;
@@ -8163,16 +8174,16 @@ class InquirePriceCreateInstancesRequest extends  AbstractModel {
         this.BundleId = null;
 
         /**
+         * Parameter setting for prepaid mode. This parameter can specify the purchase period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
          * Number of instances to be created. Default value: 1.
          * @type {number || null}
          */
         this.InstanceCount = null;
-
-        /**
-         * Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
-         * @type {InstanceChargePrepaid || null}
-         */
-        this.InstanceChargePrepaid = null;
 
         /**
          * Application image ID, which is required if a paid application image is used and can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
@@ -8190,13 +8201,13 @@ class InquirePriceCreateInstancesRequest extends  AbstractModel {
             return;
         }
         this.BundleId = 'BundleId' in params ? params.BundleId : null;
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
 
         if (params.InstanceChargePrepaid) {
             let obj = new InstanceChargePrepaid();
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
 
     }

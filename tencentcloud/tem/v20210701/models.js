@@ -1690,6 +1690,13 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.CreateDate = null;
 
+        /**
+         * Region ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
     }
 
     /**
@@ -1742,6 +1749,7 @@ Note: This field may return `null`, indicating that no valid value was found.
             this.WorkloadInfo = obj;
         }
         this.CreateDate = 'CreateDate' in params ? params.CreateDate : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
 
     }
 }
@@ -1817,6 +1825,20 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.UnMatchedKey = null;
 
+        /**
+         * tracking
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Backtracking = null;
+
+        /**
+         * Separator
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Delimiter = null;
+
     }
 
     /**
@@ -1835,6 +1857,8 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
         this.UnMatchUpload = 'UnMatchUpload' in params ? params.UnMatchUpload : null;
         this.UnMatchedKey = 'UnMatchedKey' in params ? params.UnMatchedKey : null;
+        this.Backtracking = 'Backtracking' in params ? params.Backtracking : null;
+        this.Delimiter = 'Delimiter' in params ? params.Delimiter : null;
 
     }
 }
@@ -1854,6 +1878,12 @@ class CreateEnvironmentRequest extends  AbstractModel {
         this.EnvironmentName = null;
 
         /**
+         * Environment description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
          * VPC name
          * @type {string || null}
          */
@@ -1864,12 +1894,6 @@ class CreateEnvironmentRequest extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.SubnetIds = null;
-
-        /**
-         * Environment description
-         * @type {string || null}
-         */
-        this.Description = null;
 
         /**
          * Kubernetes version
@@ -1907,6 +1931,30 @@ class CreateEnvironmentRequest extends  AbstractModel {
          */
         this.CreateRegion = null;
 
+        /**
+         * Whether to create a VPC
+         * @type {boolean || null}
+         */
+        this.SetupVpc = null;
+
+        /**
+         * Whether to create a TMP instance
+         * @type {boolean || null}
+         */
+        this.SetupPrometheus = null;
+
+        /**
+         * TMP instance ID
+         * @type {string || null}
+         */
+        this.PrometheusId = null;
+
+        /**
+         * APM ID
+         * @type {string || null}
+         */
+        this.ApmId = null;
+
     }
 
     /**
@@ -1917,9 +1965,9 @@ class CreateEnvironmentRequest extends  AbstractModel {
             return;
         }
         this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
+        this.Description = 'Description' in params ? params.Description : null;
         this.Vpc = 'Vpc' in params ? params.Vpc : null;
         this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
-        this.Description = 'Description' in params ? params.Description : null;
         this.K8sVersion = 'K8sVersion' in params ? params.K8sVersion : null;
         this.SourceChannel = 'SourceChannel' in params ? params.SourceChannel : null;
         this.EnableTswTraceService = 'EnableTswTraceService' in params ? params.EnableTswTraceService : null;
@@ -1934,6 +1982,10 @@ class CreateEnvironmentRequest extends  AbstractModel {
         }
         this.EnvType = 'EnvType' in params ? params.EnvType : null;
         this.CreateRegion = 'CreateRegion' in params ? params.CreateRegion : null;
+        this.SetupVpc = 'SetupVpc' in params ? params.SetupVpc : null;
+        this.SetupPrometheus = 'SetupPrometheus' in params ? params.SetupPrometheus : null;
+        this.PrometheusId = 'PrometheusId' in params ? params.PrometheusId : null;
+        this.ApmId = 'ApmId' in params ? params.ApmId : null;
 
     }
 }
@@ -2961,6 +3013,20 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.Tags = null;
 
+        /**
+         * Whether to encode
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PreStopEncoded = null;
+
+        /**
+         * Whether to encode
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PostStartEncoded = null;
+
     }
 
     /**
@@ -3178,6 +3244,8 @@ Note: This field may return `null`, indicating that no valid value was found.
                 this.Tags.push(obj);
             }
         }
+        this.PreStopEncoded = 'PreStopEncoded' in params ? params.PreStopEncoded : null;
+        this.PostStartEncoded = 'PostStartEncoded' in params ? params.PostStartEncoded : null;
 
     }
 }
@@ -4499,6 +4567,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.StoppedApplicationNum = null;
 
+        /**
+         * Number of applications failed to be stopped
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StopFailedApplicationNum = null;
+
     }
 
     /**
@@ -4510,6 +4585,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         }
         this.ApplicationNumNeedToStop = 'ApplicationNumNeedToStop' in params ? params.ApplicationNumNeedToStop : null;
         this.StoppedApplicationNum = 'StoppedApplicationNum' in params ? params.StoppedApplicationNum : null;
+        this.StopFailedApplicationNum = 'StopFailedApplicationNum' in params ? params.StopFailedApplicationNum : null;
 
     }
 }
@@ -5298,6 +5374,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.StartedApplicationNum = null;
 
+        /**
+         * Number of applications failed to be started
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StartFailedApplicationNum = null;
+
     }
 
     /**
@@ -5309,6 +5392,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         }
         this.ApplicationNumNeedToStart = 'ApplicationNumNeedToStart' in params ? params.ApplicationNumNeedToStart : null;
         this.StartedApplicationNum = 'StartedApplicationNum' in params ? params.StartedApplicationNum : null;
+        this.StartFailedApplicationNum = 'StartFailedApplicationNum' in params ? params.StartFailedApplicationNum : null;
 
     }
 }

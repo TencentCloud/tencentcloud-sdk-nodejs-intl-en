@@ -1561,6 +1561,34 @@ class RedisNodeInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyBackupDownloadRestriction response structure.
+ * @class
+ */
+class ModifyBackupDownloadRestrictionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBackupUrl request structure.
  * @class
  */
@@ -2759,24 +2787,18 @@ class DestroyPrepaidInstanceRequest extends  AbstractModel {
 }
 
 /**
- * ManualBackupInstance response structure.
+ * DisableReplicaReadonly request structure.
  * @class
  */
-class ManualBackupInstanceResponse extends  AbstractModel {
+class DisableReplicaReadonlyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
-         * @type {number || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -2787,8 +2809,7 @@ class ManualBackupInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -2882,6 +2903,78 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Progress = 'Progress' in params ? params.Progress : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Result = 'Result' in params ? params.Result : null;
+
+    }
+}
+
+/**
+ * ModifyBackupDownloadRestriction request structure.
+ * @class
+ */
+class ModifyBackupDownloadRestrictionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of the network restrictions for downloading backup files. Valid values:
+
+- `NoLimit`: Backup files can be downloaded over both public and private networks.
+- `LimitOnlyIntranet`: Backup files can be downloaded only at private network addresses auto-assigned by Tencent Cloud.
+- `Customize`: Backup files can be downloaded only in the customized VPC.
+         * @type {string || null}
+         */
+        this.LimitType = null;
+
+        /**
+         * Only `In` can be passed in for this parameter, indicating that backup files can be downloaded in the custom `LimitVpc`.
+         * @type {string || null}
+         */
+        this.VpcComparisonSymbol = null;
+
+        /**
+         * Whether backups can be downloaded at the custom `LimitIp` address.
+
+- `In`: Download is allowed for the custom IP.
+- `NotIn`: Download is not allowed for the custom IP.
+         * @type {string || null}
+         */
+        this.IpComparisonSymbol = null;
+
+        /**
+         * VPC ID of the custom backup file download address, which is required if `LimitType` is `Customize`.
+         * @type {Array.<BackupLimitVpcItem> || null}
+         */
+        this.LimitVpc = null;
+
+        /**
+         * VPC IP of the custom backup file download address, which is required if `LimitType` is `Customize`.
+
+         * @type {Array.<string> || null}
+         */
+        this.LimitIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LimitType = 'LimitType' in params ? params.LimitType : null;
+        this.VpcComparisonSymbol = 'VpcComparisonSymbol' in params ? params.VpcComparisonSymbol : null;
+        this.IpComparisonSymbol = 'IpComparisonSymbol' in params ? params.IpComparisonSymbol : null;
+
+        if (params.LimitVpc) {
+            this.LimitVpc = new Array();
+            for (let z in params.LimitVpc) {
+                let obj = new BackupLimitVpcItem();
+                obj.deserialize(params.LimitVpc[z]);
+                this.LimitVpc.push(obj);
+            }
+        }
+        this.LimitIp = 'LimitIp' in params ? params.LimitIp : null;
 
     }
 }
@@ -6483,6 +6576,41 @@ class ProductConf extends  AbstractModel {
 }
 
 /**
+ * ManualBackupInstance response structure.
+ * @class
+ */
+class ManualBackupInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Instance node
  * @class
  */
@@ -7805,6 +7933,84 @@ class DescribeInstanceMonitorHotKeyRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SpanType = 'SpanType' in params ? params.SpanType : null;
+
+    }
+}
+
+/**
+ * DescribeBackupDownloadRestriction response structure.
+ * @class
+ */
+class DescribeBackupDownloadRestrictionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of the network restrictions for downloading backup files. Valid values:
+
+- `NoLimit`: Backup files can be downloaded over both public and private networks.
+- `LimitOnlyIntranet`: Backup files can be downloaded only at private network addresses auto-assigned by Tencent Cloud.
+- `Customize`: Backup files can be downloaded only in the customized VPC.
+         * @type {string || null}
+         */
+        this.LimitType = null;
+
+        /**
+         * Only `In` can be passed in for this parameter, indicating that backup files can be downloaded in the custom `LimitVpc`.
+         * @type {string || null}
+         */
+        this.VpcComparisonSymbol = null;
+
+        /**
+         * Whether backups can be downloaded at the custom `LimitIp` address.
+
+- `In`: Download is allowed for the custom IP.
+- `NotIn`: Download is not allowed for the custom IP.
+         * @type {string || null}
+         */
+        this.IpComparisonSymbol = null;
+
+        /**
+         * VPC ID of the custom backup file download address, which will be displayed if `LimitType` is `Customize`.
+         * @type {Array.<BackupLimitVpcItem> || null}
+         */
+        this.LimitVpc = null;
+
+        /**
+         * VPC ID of the custom backup file download address, which will be displayed if `LimitType` is `Customize`.
+         * @type {Array.<string> || null}
+         */
+        this.LimitIp = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LimitType = 'LimitType' in params ? params.LimitType : null;
+        this.VpcComparisonSymbol = 'VpcComparisonSymbol' in params ? params.VpcComparisonSymbol : null;
+        this.IpComparisonSymbol = 'IpComparisonSymbol' in params ? params.IpComparisonSymbol : null;
+
+        if (params.LimitVpc) {
+            this.LimitVpc = new Array();
+            for (let z in params.LimitVpc) {
+                let obj = new BackupLimitVpcItem();
+                obj.deserialize(params.LimitVpc[z]);
+                this.LimitVpc.push(obj);
+            }
+        }
+        this.LimitIp = 'LimitIp' in params ? params.LimitIp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9524,18 +9730,12 @@ class DescribeInstanceMonitorBigKeyRequest extends  AbstractModel {
 }
 
 /**
- * DisableReplicaReadonly request structure.
+ * DescribeBackupDownloadRestriction request structure.
  * @class
  */
-class DisableReplicaReadonlyRequest extends  AbstractModel {
+class DescribeBackupDownloadRestrictionRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
 
     }
 
@@ -9546,7 +9746,6 @@ class DisableReplicaReadonlyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -11201,6 +11400,7 @@ module.exports = {
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     RestoreInstanceResponse: RestoreInstanceResponse,
     RedisNodeInfo: RedisNodeInfo,
+    ModifyBackupDownloadRestrictionResponse: ModifyBackupDownloadRestrictionResponse,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
     DeleteParamTemplateResponse: DeleteParamTemplateResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
@@ -11225,8 +11425,9 @@ module.exports = {
     ParameterDetail: ParameterDetail,
     DescribeInstanceShardsResponse: DescribeInstanceShardsResponse,
     DestroyPrepaidInstanceRequest: DestroyPrepaidInstanceRequest,
-    ManualBackupInstanceResponse: ManualBackupInstanceResponse,
+    DisableReplicaReadonlyRequest: DisableReplicaReadonlyRequest,
     TaskInfoDetail: TaskInfoDetail,
+    ModifyBackupDownloadRestrictionRequest: ModifyBackupDownloadRestrictionRequest,
     DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     InstanceTagInfo: InstanceTagInfo,
@@ -11302,6 +11503,7 @@ module.exports = {
     DescribeInstanceSecurityGroupResponse: DescribeInstanceSecurityGroupResponse,
     ReleaseWanAddressResponse: ReleaseWanAddressResponse,
     ProductConf: ProductConf,
+    ManualBackupInstanceResponse: ManualBackupInstanceResponse,
     InstanceNode: InstanceNode,
     TendisNodes: TendisNodes,
     SwitchProxyResponse: SwitchProxyResponse,
@@ -11327,6 +11529,7 @@ module.exports = {
     ChangeInstanceRoleRequest: ChangeInstanceRoleRequest,
     DeleteInstanceAccountRequest: DeleteInstanceAccountRequest,
     DescribeInstanceMonitorHotKeyRequest: DescribeInstanceMonitorHotKeyRequest,
+    DescribeBackupDownloadRestrictionResponse: DescribeBackupDownloadRestrictionResponse,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     ManualBackupInstanceRequest: ManualBackupInstanceRequest,
     DescribeReplicationGroupResponse: DescribeReplicationGroupResponse,
@@ -11355,7 +11558,7 @@ module.exports = {
     ModifyInstanceReadOnlyRequest: ModifyInstanceReadOnlyRequest,
     DescribeInstanceAccountResponse: DescribeInstanceAccountResponse,
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
-    DisableReplicaReadonlyRequest: DisableReplicaReadonlyRequest,
+    DescribeBackupDownloadRestrictionRequest: DescribeBackupDownloadRestrictionRequest,
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     DescribeProductInfoRequest: DescribeProductInfoRequest,
     SwitchInstanceVipResponse: SwitchInstanceVipResponse,

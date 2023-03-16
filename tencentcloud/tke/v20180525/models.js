@@ -5878,6 +5878,18 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.LatestVersion = null;
 
+        /**
+         * RuntimeVersion
+         * @type {string || null}
+         */
+        this.RuntimeVersion = null;
+
+        /**
+         * RuntimeLatestVersion
+         * @type {string || null}
+         */
+        this.RuntimeLatestVersion = null;
+
     }
 
     /**
@@ -5890,6 +5902,45 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Version = 'Version' in params ? params.Version : null;
         this.LatestVersion = 'LatestVersion' in params ? params.LatestVersion : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
+        this.RuntimeLatestVersion = 'RuntimeLatestVersion' in params ? params.RuntimeLatestVersion : null;
+
+    }
+}
+
+/**
+ * Reason for unavailability
+ * @class
+ */
+class UnavailableReason extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Reason
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
 
     }
 }
@@ -8640,6 +8691,34 @@ class InstanceAdvancedSettings extends  AbstractModel {
         super();
 
         /**
+         * When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DesiredPodNumber = null;
+
+        /**
+         * GPU driver parameters
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {GPUArgs || null}
+         */
+        this.GPUArgs = null;
+
+        /**
+         * Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PreStartUserScript = null;
+
+        /**
+         * Node taint
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+        /**
          * Data disk mount point. By default, no data disk is mounted. Data disks in ext3, ext4, or XFS file system formats will be mounted directly, while data disks in other file systems and unformatted data disks will automatically be formatted as ext4 (xfs for tlinux system) and then mounted. Please back up your data in advance. This setting is only applicable to CVMs with a single data disk.
 Note: in multi-disk scenarios, use the DataDisks data structure below to set the corresponding information, such as cloud disk type, cloud disk size, mount path, and whether to perform formatting.
 Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -8688,34 +8767,6 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.ExtraArgs = null;
 
-        /**
-         * When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.DesiredPodNumber = null;
-
-        /**
-         * GPU driver parameters
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {GPUArgs || null}
-         */
-        this.GPUArgs = null;
-
-        /**
-         * Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.PreStartUserScript = null;
-
-        /**
-         * Node taint
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {Array.<Taint> || null}
-         */
-        this.Taints = null;
-
     }
 
     /**
@@ -8724,6 +8775,23 @@ Note: This field may return `null`, indicating that no valid value can be obtain
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
+
+        if (params.GPUArgs) {
+            let obj = new GPUArgs();
+            obj.deserialize(params.GPUArgs)
+            this.GPUArgs = obj;
+        }
+        this.PreStartUserScript = 'PreStartUserScript' in params ? params.PreStartUserScript : null;
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
         }
         this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
         this.DockerGraphPath = 'DockerGraphPath' in params ? params.DockerGraphPath : null;
@@ -8752,23 +8820,6 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             let obj = new InstanceExtraArgs();
             obj.deserialize(params.ExtraArgs)
             this.ExtraArgs = obj;
-        }
-        this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
-
-        if (params.GPUArgs) {
-            let obj = new GPUArgs();
-            obj.deserialize(params.GPUArgs)
-            this.GPUArgs = obj;
-        }
-        this.PreStartUserScript = 'PreStartUserScript' in params ? params.PreStartUserScript : null;
-
-        if (params.Taints) {
-            this.Taints = new Array();
-            for (let z in params.Taints) {
-                let obj = new Taint();
-                obj.deserialize(params.Taints[z]);
-                this.Taints.push(obj);
-            }
         }
 
     }
@@ -10393,6 +10444,13 @@ Note: this field may return `null`, indicating that no valid value is obtained.
         this.Total = null;
 
         /**
+         * Reason why the upgrade is not available
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<UnavailableReason> || null}
+         */
+        this.UnavailableVersionReason = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -10419,6 +10477,15 @@ Note: this field may return `null`, indicating that no valid value is obtained.
             }
         }
         this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.UnavailableVersionReason) {
+            this.UnavailableVersionReason = new Array();
+            for (let z in params.UnavailableVersionReason) {
+                let obj = new UnavailableReason();
+                obj.deserialize(params.UnavailableVersionReason[z]);
+                this.UnavailableVersionReason.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -14562,6 +14629,7 @@ module.exports = {
     DeleteClusterVirtualNodePoolRequest: DeleteClusterVirtualNodePoolRequest,
     CreateClusterVirtualNodePoolResponse: CreateClusterVirtualNodePoolResponse,
     UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
+    UnavailableReason: UnavailableReason,
     GetUpgradeInstanceProgressRequest: GetUpgradeInstanceProgressRequest,
     DescribeClusterEndpointsRequest: DescribeClusterEndpointsRequest,
     DescribeEdgeAvailableExtraArgsRequest: DescribeEdgeAvailableExtraArgsRequest,

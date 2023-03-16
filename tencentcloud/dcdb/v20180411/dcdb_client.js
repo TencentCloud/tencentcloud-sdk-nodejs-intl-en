@@ -48,6 +48,7 @@ const DestroyDCDBInstanceRequest = models.DestroyDCDBInstanceRequest;
 const CreateDCDBInstanceResponse = models.CreateDCDBInstanceResponse;
 const BriefNodeInfo = models.BriefNodeInfo;
 const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
+const ModifyDBEncryptAttributesResponse = models.ModifyDBEncryptAttributesResponse;
 const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
 const DatabaseView = models.DatabaseView;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
@@ -128,6 +129,7 @@ const CreateDCDBInstanceRequest = models.CreateDCDBInstanceRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const AddShardConfig = models.AddShardConfig;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
+const ModifyDBEncryptAttributesRequest = models.ModifyDBEncryptAttributesRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const IsolateDedicatedDBInstanceResponse = models.IsolateDedicatedDBInstanceResponse;
 const TerminateDedicatedDBInstanceResponse = models.TerminateDedicatedDBInstanceResponse;
@@ -553,6 +555,17 @@ Note: accounts with the same username but different hosts are different accounts
     DescribeDcnDetail(req, cb) {
         let resp = new DescribeDcnDetailResponse();
         this.request("DescribeDcnDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the instance data encryption.
+     * @param {ModifyDBEncryptAttributesRequest} req
+     * @param {function(string, ModifyDBEncryptAttributesResponse):void} cb
+     * @public
+     */
+    ModifyDBEncryptAttributes(req, cb) {
+        let resp = new ModifyDBEncryptAttributesResponse();
+        this.request("ModifyDBEncryptAttributes", req, resp, cb);
     }
 
     /**

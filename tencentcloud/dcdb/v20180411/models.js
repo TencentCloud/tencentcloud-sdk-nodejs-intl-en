@@ -1418,6 +1418,34 @@ class ModifyDBInstancesProjectResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDBEncryptAttributes response structure.
+ * @class
+ */
+class ModifyDBEncryptAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDCDBInstanceNodeInfo request structure.
  * @class
  */
@@ -1646,11 +1674,7 @@ class CreateHourDCDBInstanceRequest extends  AbstractModel {
         this.ShardCpu = null;
 
         /**
-         * Database engine version. Valid values:
-10.0.10: MariaDB 10.0.10;
-10.1.9: MariaDB 10.1.9;
-5.7.17: Percona 5.7.17.
-If this parameter is left empty, `10.1.9` will be used.
+         * Database engine version. Valid values: `5.7`, `8.0`, `10.0`, `10.1`.
          * @type {string || null}
          */
         this.DbVersionId = null;
@@ -5840,11 +5864,7 @@ The current purchasable AZ needs be pulled through `DescribeDCDBSaleInfo` API.
         this.SubnetId = null;
 
         /**
-         * Database engine version. Valid values: 8.0.18, 10.1.9, 5.7.17.
-8.0.18 - MySQL 8.0.18；
-10.1.9: MariaDB 10.1.9;
-5.7.17: Percona 5.7.17.
-If this parameter is left empty, `5.7.17` will be used.
+         * Database engine version. Valid values: `5.7`, `8.0`, `10.0`, `10.1`.
          * @type {string || null}
          */
         this.DbVersionId = null;
@@ -6067,6 +6087,41 @@ class ModifyDBSyncModeRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
+
+    }
+}
+
+/**
+ * ModifyDBEncryptAttributes request structure.
+ * @class
+ */
+class ModifyDBEncryptAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `tdsqlshard-ow728lmc`
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Whether to enable the data encryption (Once enabled, it can’t be disabled). Valid values: `1` (Yes), `0` (No. Default).
+         * @type {number || null}
+         */
+        this.EncryptEnabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EncryptEnabled = 'EncryptEnabled' in params ? params.EncryptEnabled : null;
 
     }
 }
@@ -7145,6 +7200,7 @@ module.exports = {
     CreateDCDBInstanceResponse: CreateDCDBInstanceResponse,
     BriefNodeInfo: BriefNodeInfo,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
+    ModifyDBEncryptAttributesResponse: ModifyDBEncryptAttributesResponse,
     DescribeDCDBInstanceNodeInfoRequest: DescribeDCDBInstanceNodeInfoRequest,
     DatabaseView: DatabaseView,
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
@@ -7225,6 +7281,7 @@ module.exports = {
     DatabaseProcedure: DatabaseProcedure,
     AddShardConfig: AddShardConfig,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
+    ModifyDBEncryptAttributesRequest: ModifyDBEncryptAttributesRequest,
     CreateAccountResponse: CreateAccountResponse,
     IsolateDedicatedDBInstanceResponse: IsolateDedicatedDBInstanceResponse,
     TerminateDedicatedDBInstanceResponse: TerminateDedicatedDBInstanceResponse,

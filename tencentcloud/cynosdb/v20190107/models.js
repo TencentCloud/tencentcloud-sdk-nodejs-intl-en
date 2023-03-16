@@ -2316,24 +2316,78 @@ class DescribeResourcesByDealNameResponse extends  AbstractModel {
 }
 
 /**
- * ResumeServerless response structure.
+ * 
  * @class
  */
-class ResumeServerlessResponse extends  AbstractModel {
+class InstanceNetInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task ID
-         * @type {number || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceGroupType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.InstanceGroupId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.NetType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WanDomain = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WanIP = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.WanPort = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.WanStatus = null;
 
     }
 
@@ -2344,8 +2398,17 @@ class ResumeServerlessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceGroupType = 'InstanceGroupType' in params ? params.InstanceGroupType : null;
+        this.InstanceGroupId = 'InstanceGroupId' in params ? params.InstanceGroupId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.WanDomain = 'WanDomain' in params ? params.WanDomain : null;
+        this.WanIP = 'WanIP' in params ? params.WanIP : null;
+        this.WanPort = 'WanPort' in params ? params.WanPort : null;
+        this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
 
     }
 }
@@ -3787,6 +3850,26 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ResourceTags = null;
 
+        /**
+         * Source AZ
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.MasterZone = null;
+
+        /**
+         * Replica AZ
+Note: This field may return null, indicating that no valid value can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SlaveZones = null;
+
+        /**
+         * 
+         * @type {Array.<InstanceNetInfo> || null}
+         */
+        this.InstanceNetInfo = null;
+
     }
 
     /**
@@ -3857,6 +3940,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 let obj = new Tag();
                 obj.deserialize(params.ResourceTags[z]);
                 this.ResourceTags.push(obj);
+            }
+        }
+        this.MasterZone = 'MasterZone' in params ? params.MasterZone : null;
+        this.SlaveZones = 'SlaveZones' in params ? params.SlaveZones : null;
+
+        if (params.InstanceNetInfo) {
+            this.InstanceNetInfo = new Array();
+            for (let z in params.InstanceNetInfo) {
+                let obj = new InstanceNetInfo();
+                obj.deserialize(params.InstanceNetInfo[z]);
+                this.InstanceNetInfo.push(obj);
             }
         }
 
@@ -6934,6 +7028,41 @@ class OfflineClusterResponse extends  AbstractModel {
  * @class
  */
 class SwitchProxyVpcResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ResumeServerless response structure.
+ * @class
+ */
+class ResumeServerlessResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -10132,7 +10261,7 @@ module.exports = {
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeClusterInstanceGrpsRequest: DescribeClusterInstanceGrpsRequest,
     DescribeResourcesByDealNameResponse: DescribeResourcesByDealNameResponse,
-    ResumeServerlessResponse: ResumeServerlessResponse,
+    InstanceNetInfo: InstanceNetInfo,
     CreateAccountsRequest: CreateAccountsRequest,
     DeleteAuditRuleTemplatesRequest: DeleteAuditRuleTemplatesRequest,
     DescribeAuditRuleTemplatesResponse: DescribeAuditRuleTemplatesResponse,
@@ -10205,6 +10334,7 @@ module.exports = {
     OpenAuditServiceResponse: OpenAuditServiceResponse,
     OfflineClusterResponse: OfflineClusterResponse,
     SwitchProxyVpcResponse: SwitchProxyVpcResponse,
+    ResumeServerlessResponse: ResumeServerlessResponse,
     DescribeAuditRuleTemplatesRequest: DescribeAuditRuleTemplatesRequest,
     InstanceSpec: InstanceSpec,
     DescribeFlowRequest: DescribeFlowRequest,

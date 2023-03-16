@@ -134,6 +134,7 @@ const ModifyClusterAsGroupOptionAttributeRequest = models.ModifyClusterAsGroupOp
 const DeleteClusterVirtualNodePoolRequest = models.DeleteClusterVirtualNodePoolRequest;
 const CreateClusterVirtualNodePoolResponse = models.CreateClusterVirtualNodePoolResponse;
 const UpgradeAbleInstancesItem = models.UpgradeAbleInstancesItem;
+const UnavailableReason = models.UnavailableReason;
 const GetUpgradeInstanceProgressRequest = models.GetUpgradeInstanceProgressRequest;
 const DescribeClusterEndpointsRequest = models.DescribeClusterEndpointsRequest;
 const DescribeEdgeAvailableExtraArgsRequest = models.DescribeEdgeAvailableExtraArgsRequest;
@@ -414,7 +415,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify an alarm rule. 
+     * This API is used to modify an alert rule.
      * @param {ModifyPrometheusAlertRuleRequest} req
      * @param {function(string, ModifyPrometheusAlertRuleResponse):void} cb
      * @public
@@ -469,7 +470,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain the current progress of the node upgrade. 
+     * This API is used to obtain the current progress of the node upgrade.
      * @param {GetUpgradeInstanceProgressRequest} req
      * @param {function(string, GetUpgradeInstanceProgressResponse):void} cb
      * @public
@@ -1008,7 +1009,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     *  This API is used to query information of one or more instances in a cluster. 
+     * This API is used to query information of node instances in a cluster.
      * @param {DescribeClusterInstancesRequest} req
      * @param {function(string, DescribeClusterInstancesResponse):void} cb
      * @public
@@ -1195,7 +1196,7 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * This API is used to check which nodes can be upgraded in the given node list. 
+     * This API is used to query nodes eligible for an upgrade in the given node list.
      * @param {CheckInstancesUpgradeAbleRequest} req
      * @param {function(string, CheckInstancesUpgradeAbleResponse):void} cb
      * @public

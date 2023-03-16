@@ -562,7 +562,7 @@ class DescribeCheckSyncJobResultRequest extends  AbstractModel {
         super();
 
         /**
-         * Sync task ID
+         * Sync task instance ID in the format of `sync-werwfs23`, which is used to identify a sync task. This parameter is required.
          * @type {string || null}
          */
         this.JobId = null;
@@ -1783,6 +1783,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ExtraAttr = null;
 
+        /**
+         * Network environment of the database. This parameter is required when `AccessType` is `ccn`. Valid values: `UserIDC` (user IDC), `TencentVPC` (Tencent Cloud VPC).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DatabaseNetEnv = null;
+
     }
 
     /**
@@ -1815,6 +1822,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.ExtraAttr.push(obj);
             }
         }
+        this.DatabaseNetEnv = 'DatabaseNetEnv' in params ? params.DatabaseNetEnv : null;
 
     }
 }
@@ -2068,7 +2076,7 @@ class DescribeCheckSyncJobResultResponse extends  AbstractModel {
         super();
 
         /**
-         * Check result
+         * Execution status of the check task. Valid values: `notStarted`, `running`, `failed`, `success`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -2089,7 +2097,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.StepCur = null;
 
         /**
-         * Overall progress
+         * Overall progress. Value range: 0-100.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -4064,7 +4072,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.NewDbName = null;
 
         /**
-         * Database selection mode, which is required if `Mode` is `Partial`. Valid values: `All`, `Partial`. Note that the sync of advanced objects does not depend on this parameter.
+         * Database selection mode, which is required if `Mode` is `Partial`. Valid values: `All`, `Partial`. Note that the sync of advanced objects does not depend on this parameter. To sync an entire database, set this parameter to `All`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4085,7 +4093,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.NewSchemaName = null;
 
         /**
-         * Table selection mode, which is required if `DBMode` is `Partial`. Valid values: `All`, `Partial`.
+         * Table selection mode, which is required if `DBMode` is `Partial`. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4099,7 +4107,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Tables = null;
 
         /**
-         * View selection mode. Valid values: `All`, `Partial`.
+         * View selection mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4113,7 +4121,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Views = null;
 
         /**
-         * Sync mode. Valid values: `Partial`, `All`.
+         * Sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4127,7 +4135,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Functions = null;
 
         /**
-         * Sync mode. Valid values: `Partial`, `All`.
+         * Sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4141,7 +4149,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Procedures = null;
 
         /**
-         * Trigger migration mode (`all`: All objects; `partial`: Some objects)
+         * Trigger sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object “trigger” is not supported for data sync.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4155,7 +4163,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Triggers = null;
 
         /**
-         * Event migration mode (`all`: All objects; `partial`: Some objects)
+         * Event sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object “event” is not supported for data sync.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4672,14 +4680,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.StepId = null;
 
         /**
-         * Current status
+         * Status of the current step. Valid values: `notStarted`, `running`, `failed`, `finished, `skipped`, `paused`.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Step start time
+         * Step start time, which may be null.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -4700,7 +4708,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Warnings = null;
 
         /**
-         * Progress of the current step
+         * Progress of the current step. Value range: 0-100.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -6141,7 +6149,7 @@ class Objects extends  AbstractModel {
         super();
 
         /**
-         * Migration object type, such as `Partial`.
+         * Sync object type. Valid value: `Partial` (default).
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */

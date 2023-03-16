@@ -2805,6 +2805,20 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Email = null;
 
         /**
+         * Last login IP
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RecentlyLoginIP = null;
+
+        /**
+         * Last login time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RecentlyLoginTime = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2827,6 +2841,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Email = 'Email' in params ? params.Email : null;
+        this.RecentlyLoginIP = 'RecentlyLoginIP' in params ? params.RecentlyLoginIP : null;
+        this.RecentlyLoginTime = 'RecentlyLoginTime' in params ? params.RecentlyLoginTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

@@ -753,7 +753,7 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query security settings.
+     * This API is used to get a sub-account’s security settings.
      * @param {DescribeSafeAuthFlagCollRequest} req
      * @param {function(string, DescribeSafeAuthFlagCollResponse):void} cb
      * @public

@@ -130,6 +130,56 @@ class SetUserBlockedRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeRecordingUsage request structure.
+ * @class
+ */
+class DescribeRecordingUsageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The start date in the format of YYYY-MM-DD.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end date in the format of YYYY-MM-DD.
+The period queried per request cannot be longer than 31 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Whether to query single-stream or mixed-stream recording. Valid values: `single`, `multi`.
+         * @type {string || null}
+         */
+        this.MixType = null;
+
+        /**
+         * The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.MixType = 'MixType' in params ? params.MixType : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
  * The information of the recording files, which is returned by the `DescribeCloudRecording` API.
  * @class
  */
@@ -184,24 +234,30 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * The watermark layout.
+ * DescribeTrtcUsage response structure.
  * @class
  */
-class WaterMark extends  AbstractModel {
+class DescribeTrtcUsageResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The watermark type. 0 (default): image; 1: text (not supported yet).
-         * @type {number || null}
+         * The usage type. Each element of this parameter corresponds to an element of `UsageValue` in the order they are listed.
+         * @type {Array.<string> || null}
          */
-        this.WaterMarkType = null;
+        this.UsageKey = null;
 
         /**
-         * The information of watermark images. This parameter is required if the watermark type is image.
-         * @type {WaterMarkImage || null}
+         * The usage data in each time unit.
+         * @type {Array.<TrtcUsage> || null}
          */
-        this.WaterMarkImage = null;
+        this.UsageList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -212,13 +268,17 @@ class WaterMark extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WaterMarkType = 'WaterMarkType' in params ? params.WaterMarkType : null;
+        this.UsageKey = 'UsageKey' in params ? params.UsageKey : null;
 
-        if (params.WaterMarkImage) {
-            let obj = new WaterMarkImage();
-            obj.deserialize(params.WaterMarkImage)
-            this.WaterMarkImage = obj;
+        if (params.UsageList) {
+            this.UsageList = new Array();
+            for (let z in params.UsageList) {
+                let obj = new TrtcUsage();
+                obj.deserialize(params.UsageList[z]);
+                this.UsageList.push(obj);
+            }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -551,99 +611,31 @@ class UpdatePublishCdnStreamRequest extends  AbstractModel {
 }
 
 /**
- * The layout parameters for mixed-stream recording.
+ * DescribeRelayUsage request structure.
  * @class
  */
-class MixLayoutParams extends  AbstractModel {
+class DescribeRelayUsageRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Layout mode:
-1: Floating
-2: Screen sharing
-3: Grid (default)
-4: Custom
-
-Floating: By default, the video of the first anchor (you can also specify an anchor) who enters the room is scaled to fill the screen. When other anchors enter the room, their videos appear smaller and are superimposed over the large video from left to right starting from the bottom of the canvas according to their room entry sequence. If the total number of videos is 17 or less, there will be four windows in each row (4 x 4); if it is greater than 17, there will be five windows in each row (5 x 5). Up to 25 videos can be displayed. A user who publishes only audio will still be displayed in one window.
-
-Screen sharing: The video of a specified anchor occupies a larger part of the canvas on the left side (if you do not specify an anchor, the left window will display the canvas background). The videos of other anchors are smaller and are positioned on the right side. If the total number of videos is 17 or less, the small videos are positioned from top to bottom in up to two columns on the right side, with eight videos per column at most. If there are more than 17 videos, the additional videos are positioned at the bottom of the canvas from left to right. Up to 25 videos can be displayed. A user who publishes only audio will still be displayed in one window.
-
-Grid: The videos of anchors are scaled and positioned automatically according to the total number of anchors in a room. Each video has the same size. Up to 25 videos can be displayed.
-
-Custom: Specify the layout of videos by using the `MixLayoutList` parameter.
-         * @type {number || null}
-         */
-        this.MixLayoutMode = null;
-
-        /**
-         * The custom layout details. This parameter is valid if `MixLayoutMode` is set to `4`. Up to 25 videos can be displayed.
-         * @type {Array.<MixLayout> || null}
-         */
-        this.MixLayoutList = null;
-
-        /**
-         * The background color, which is a hexadecimal value (starting with "#", followed by the color value) converted from an 8-bit RGB value. For example, the RGB value of orange is `R:255 G:165 B:0`, and its hexadecimal value is `#FFA500`. The default color is black.
+         * The start date in the format of YYYY-MM-DD.
          * @type {string || null}
          */
-        this.BackGroundColor = null;
+        this.StartTime = null;
 
         /**
-         * The user whose video is displayed in the big window. This parameter is valid if `MixLayoutMode` is set to `1` (floating) or `2` (screen sharing). If it is left empty, the first anchor entering the room is displayed in the big window in the floating mode and the canvas background is displayed in the screen sharing mode.
+         * The end date in the format of YYYY-MM-DD.
+The period queried per request cannot be longer than 31 days.
          * @type {string || null}
          */
-        this.MaxResolutionUserId = null;
+        this.EndTime = null;
 
         /**
-         * The stream type.
-0: Primary stream (default)
-1: Substream (screen sharing stream)
-This parameter specifies the type of the stream displayed in the big window. If it appears in `MixLayoutList`, it indicates the type of the stream of a specified user.
+         * The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
          * @type {number || null}
          */
-        this.MediaId = null;
-
-        /**
-         * The URL of the background image, which cannot contain Chinese characters. The image must be in JPG or PNG format and cannot be larger than 5 MB.
-         * @type {string || null}
-         */
-        this.BackgroundImageUrl = null;
-
-        /**
-         * `1` means to use placeholders, and `0` (default) means to not use placeholders. If this parameter is set to `1`, when a user is not publishing video, a placeholder image will be displayed in the window reserved for the user.
-         * @type {number || null}
-         */
-        this.PlaceHolderMode = null;
-
-        /**
-         * The render mode to use when the aspect ratio of a video is different from that of the window. This parameter is defined the same as `RenderMode` in `MixLayoufList`.
-         * @type {number || null}
-         */
-        this.BackgroundImageRenderMode = null;
-
-        /**
-         * The URL of the background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
-         * @type {string || null}
-         */
-        this.DefaultSubBackgroundImage = null;
-
-        /**
-         * The watermark layout. Up to 25 watermarks are supported.
-         * @type {Array.<WaterMark> || null}
-         */
-        this.WaterMarkList = null;
-
-        /**
-         * The render mode to use when the aspect ratio of a video is different from that of the window. This parameter is invalid if a custom layout is used. It is defined the same as `RenderMode` in `MixLayoufList`.
-         * @type {number || null}
-         */
-        this.RenderMode = null;
-
-        /**
-         * This parameter is valid only if the screen sharing layout is used. If you set it to `1`, the large video window will appear on the right and the small window on the left. The default value is `0`.
-         * @type {number || null}
-         */
-        this.MaxResolutionUserAlign = null;
+        this.SdkAppId = null;
 
     }
 
@@ -654,34 +646,59 @@ This parameter specifies the type of the stream displayed in the big window. If 
         if (!params) {
             return;
         }
-        this.MixLayoutMode = 'MixLayoutMode' in params ? params.MixLayoutMode : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
 
-        if (params.MixLayoutList) {
-            this.MixLayoutList = new Array();
-            for (let z in params.MixLayoutList) {
-                let obj = new MixLayout();
-                obj.deserialize(params.MixLayoutList[z]);
-                this.MixLayoutList.push(obj);
+    }
+}
+
+/**
+ * DescribeMixTranscodingUsage response structure.
+ * @class
+ */
+class DescribeMixTranscodingUsageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The usage type. Each element of this parameter corresponds to an element of `UsageValue` in the order they are listed.
+         * @type {Array.<string> || null}
+         */
+        this.UsageKey = null;
+
+        /**
+         * The usage data in each time unit.
+         * @type {Array.<TrtcUsage> || null}
+         */
+        this.UsageList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsageKey = 'UsageKey' in params ? params.UsageKey : null;
+
+        if (params.UsageList) {
+            this.UsageList = new Array();
+            for (let z in params.UsageList) {
+                let obj = new TrtcUsage();
+                obj.deserialize(params.UsageList[z]);
+                this.UsageList.push(obj);
             }
         }
-        this.BackGroundColor = 'BackGroundColor' in params ? params.BackGroundColor : null;
-        this.MaxResolutionUserId = 'MaxResolutionUserId' in params ? params.MaxResolutionUserId : null;
-        this.MediaId = 'MediaId' in params ? params.MediaId : null;
-        this.BackgroundImageUrl = 'BackgroundImageUrl' in params ? params.BackgroundImageUrl : null;
-        this.PlaceHolderMode = 'PlaceHolderMode' in params ? params.PlaceHolderMode : null;
-        this.BackgroundImageRenderMode = 'BackgroundImageRenderMode' in params ? params.BackgroundImageRenderMode : null;
-        this.DefaultSubBackgroundImage = 'DefaultSubBackgroundImage' in params ? params.DefaultSubBackgroundImage : null;
-
-        if (params.WaterMarkList) {
-            this.WaterMarkList = new Array();
-            for (let z in params.WaterMarkList) {
-                let obj = new WaterMark();
-                obj.deserialize(params.WaterMarkList[z]);
-                this.WaterMarkList.push(obj);
-            }
-        }
-        this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
-        this.MaxResolutionUserAlign = 'MaxResolutionUserAlign' in params ? params.MaxResolutionUserAlign : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -863,6 +880,105 @@ class MixLayout extends  AbstractModel {
 }
 
 /**
+ * DescribeRecordingUsage response structure.
+ * @class
+ */
+class DescribeRecordingUsageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The usage type. Each element of this parameter corresponds to an element of `UsageValue` in the order they are listed.
+         * @type {Array.<string> || null}
+         */
+        this.UsageKey = null;
+
+        /**
+         * The usage data in each time unit.
+         * @type {Array.<TrtcUsage> || null}
+         */
+        this.UsageList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsageKey = 'UsageKey' in params ? params.UsageKey : null;
+
+        if (params.UsageList) {
+            this.UsageList = new Array();
+            for (let z in params.UsageList) {
+                let obj = new TrtcUsage();
+                obj.deserialize(params.UsageList[z]);
+                this.UsageList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The audio encoding parameters.
+ * @class
+ */
+class AudioEncode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The audio sample rate (Hz). Valid values: 48000, 44100, 32000, 24000, 16000, 8000.
+         * @type {number || null}
+         */
+        this.SampleRate = null;
+
+        /**
+         * The number of sound channels. Valid values: 1 (mono), 2 (dual).
+         * @type {number || null}
+         */
+        this.Channel = null;
+
+        /**
+         * The audio bitrate (Kbps). Value range: 8-500.
+         * @type {number || null}
+         */
+        this.BitRate = null;
+
+        /**
+         * The audio codec. Valid values: 0 (LC-AAC), 1 (HE-AAC), 2 (HE-AACv2). The default value is 0. If this parameter is set to 2, `Channel` must be 2. If it is set to 1 or 2, `SampleRate` can only be 48000, 44100, 32000, 24000, or 16000.
+         * @type {number || null}
+         */
+        this.Codec = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+        this.BitRate = 'BitRate' in params ? params.BitRate : null;
+        this.Codec = 'Codec' in params ? params.Codec : null;
+
+    }
+}
+
+/**
  * The video parameters for relaying.
  * @class
  */
@@ -939,55 +1055,6 @@ Grey: 0x999999
                 this.WaterMarkList.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * The audio encoding parameters.
- * @class
- */
-class AudioEncode extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The audio sample rate (Hz). Valid values: 48000, 44100, 32000, 24000, 16000, 8000.
-         * @type {number || null}
-         */
-        this.SampleRate = null;
-
-        /**
-         * The number of sound channels. Valid values: 1 (mono), 2 (dual).
-         * @type {number || null}
-         */
-        this.Channel = null;
-
-        /**
-         * The audio bitrate (Kbps). Value range: 8-500.
-         * @type {number || null}
-         */
-        this.BitRate = null;
-
-        /**
-         * The audio codec. Valid values: 0 (LC-AAC), 1 (HE-AAC), 2 (HE-AACv2). The default value is 0. If this parameter is set to 2, `Channel` must be 2. If it is set to 1 or 2, `SampleRate` can only be 48000, 44100, 32000, 24000, or 16000.
-         * @type {number || null}
-         */
-        this.Codec = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SampleRate = 'SampleRate' in params ? params.SampleRate : null;
-        this.Channel = 'Channel' in params ? params.Channel : null;
-        this.BitRate = 'BitRate' in params ? params.BitRate : null;
-        this.Codec = 'Codec' in params ? params.Codec : null;
 
     }
 }
@@ -1080,18 +1147,154 @@ class StorageParams extends  AbstractModel {
 }
 
 /**
- * The information of the large video in screen sharing or floating layout mode.
+ * The layout parameters for mixed-stream recording.
  * @class
  */
-class MaxVideoUser extends  AbstractModel {
+class MixLayoutParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The stream information.
-         * @type {UserMediaStream || null}
+         * Layout mode:
+1: Floating
+2: Screen sharing
+3: Grid (default)
+4: Custom
+
+Floating: By default, the video of the first anchor (you can also specify an anchor) who enters the room is scaled to fill the screen. When other anchors enter the room, their videos appear smaller and are superimposed over the large video from left to right starting from the bottom of the canvas according to their room entry sequence. If the total number of videos is 17 or less, there will be four windows in each row (4 x 4); if it is greater than 17, there will be five windows in each row (5 x 5). Up to 25 videos can be displayed. A user who publishes only audio will still be displayed in one window.
+
+Screen sharing: The video of a specified anchor occupies a larger part of the canvas on the left side (if you do not specify an anchor, the left window will display the canvas background). The videos of other anchors are smaller and are positioned on the right side. If the total number of videos is 17 or less, the small videos are positioned from top to bottom in up to two columns on the right side, with eight videos per column at most. If there are more than 17 videos, the additional videos are positioned at the bottom of the canvas from left to right. Up to 25 videos can be displayed. A user who publishes only audio will still be displayed in one window.
+
+Grid: The videos of anchors are scaled and positioned automatically according to the total number of anchors in a room. Each video has the same size. Up to 25 videos can be displayed.
+
+Custom: Specify the layout of videos by using the `MixLayoutList` parameter.
+         * @type {number || null}
          */
-        this.UserMediaStream = null;
+        this.MixLayoutMode = null;
+
+        /**
+         * The custom layout details. This parameter is valid if `MixLayoutMode` is set to `4`. Up to 25 videos can be displayed.
+         * @type {Array.<MixLayout> || null}
+         */
+        this.MixLayoutList = null;
+
+        /**
+         * The background color, which is a hexadecimal value (starting with "#", followed by the color value) converted from an 8-bit RGB value. For example, the RGB value of orange is `R:255 G:165 B:0`, and its hexadecimal value is `#FFA500`. The default color is black.
+         * @type {string || null}
+         */
+        this.BackGroundColor = null;
+
+        /**
+         * The user whose video is displayed in the big window. This parameter is valid if `MixLayoutMode` is set to `1` (floating) or `2` (screen sharing). If it is left empty, the first anchor entering the room is displayed in the big window in the floating mode and the canvas background is displayed in the screen sharing mode.
+         * @type {string || null}
+         */
+        this.MaxResolutionUserId = null;
+
+        /**
+         * The stream type.
+0: Primary stream (default)
+1: Substream (screen sharing stream)
+This parameter specifies the type of the stream displayed in the big window. If it appears in `MixLayoutList`, it indicates the type of the stream of a specified user.
+         * @type {number || null}
+         */
+        this.MediaId = null;
+
+        /**
+         * The URL of the background image, which cannot contain Chinese characters. The image must be in JPG or PNG format and cannot be larger than 5 MB.
+         * @type {string || null}
+         */
+        this.BackgroundImageUrl = null;
+
+        /**
+         * `1` means to use placeholders, and `0` (default) means to not use placeholders. If this parameter is set to `1`, when a user is not publishing video, a placeholder image will be displayed in the window reserved for the user.
+         * @type {number || null}
+         */
+        this.PlaceHolderMode = null;
+
+        /**
+         * The render mode to use when the aspect ratio of a video is different from that of the window. This parameter is defined the same as `RenderMode` in `MixLayoufList`.
+         * @type {number || null}
+         */
+        this.BackgroundImageRenderMode = null;
+
+        /**
+         * The URL of the background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
+         * @type {string || null}
+         */
+        this.DefaultSubBackgroundImage = null;
+
+        /**
+         * The watermark layout. Up to 25 watermarks are supported.
+         * @type {Array.<WaterMark> || null}
+         */
+        this.WaterMarkList = null;
+
+        /**
+         * The render mode to use when the aspect ratio of a video is different from that of the window. This parameter is invalid if a custom layout is used. It is defined the same as `RenderMode` in `MixLayoufList`.
+         * @type {number || null}
+         */
+        this.RenderMode = null;
+
+        /**
+         * This parameter is valid only if the screen sharing layout is used. If you set it to `1`, the large video window will appear on the right and the small window on the left. The default value is `0`.
+         * @type {number || null}
+         */
+        this.MaxResolutionUserAlign = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MixLayoutMode = 'MixLayoutMode' in params ? params.MixLayoutMode : null;
+
+        if (params.MixLayoutList) {
+            this.MixLayoutList = new Array();
+            for (let z in params.MixLayoutList) {
+                let obj = new MixLayout();
+                obj.deserialize(params.MixLayoutList[z]);
+                this.MixLayoutList.push(obj);
+            }
+        }
+        this.BackGroundColor = 'BackGroundColor' in params ? params.BackGroundColor : null;
+        this.MaxResolutionUserId = 'MaxResolutionUserId' in params ? params.MaxResolutionUserId : null;
+        this.MediaId = 'MediaId' in params ? params.MediaId : null;
+        this.BackgroundImageUrl = 'BackgroundImageUrl' in params ? params.BackgroundImageUrl : null;
+        this.PlaceHolderMode = 'PlaceHolderMode' in params ? params.PlaceHolderMode : null;
+        this.BackgroundImageRenderMode = 'BackgroundImageRenderMode' in params ? params.BackgroundImageRenderMode : null;
+        this.DefaultSubBackgroundImage = 'DefaultSubBackgroundImage' in params ? params.DefaultSubBackgroundImage : null;
+
+        if (params.WaterMarkList) {
+            this.WaterMarkList = new Array();
+            for (let z in params.WaterMarkList) {
+                let obj = new WaterMark();
+                obj.deserialize(params.WaterMarkList[z]);
+                this.WaterMarkList.push(obj);
+            }
+        }
+        this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
+        this.MaxResolutionUserAlign = 'MaxResolutionUserAlign' in params ? params.MaxResolutionUserAlign : null;
+
+    }
+}
+
+/**
+ * The VOD parameters.
+ * @class
+ */
+class CloudVod extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Tencent Cloud VOD parameters.
+         * @type {TencentVod || null}
+         */
+        this.TencentVod = null;
 
     }
 
@@ -1103,10 +1306,10 @@ class MaxVideoUser extends  AbstractModel {
             return;
         }
 
-        if (params.UserMediaStream) {
-            let obj = new UserMediaStream();
-            obj.deserialize(params.UserMediaStream)
-            this.UserMediaStream = obj;
+        if (params.TencentVod) {
+            let obj = new TencentVod();
+            obj.deserialize(params.TencentVod)
+            this.TencentVod = obj;
         }
 
     }
@@ -1488,18 +1691,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The users whose streams are mixed.
+ * The information of the large video in screen sharing or floating layout mode.
  * @class
  */
-class McuUserInfoParams extends  AbstractModel {
+class MaxVideoUser extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The user information.
-         * @type {MixUserInfo || null}
+         * The stream information.
+         * @type {UserMediaStream || null}
          */
-        this.UserInfo = null;
+        this.UserMediaStream = null;
 
     }
 
@@ -1511,60 +1714,11 @@ class McuUserInfoParams extends  AbstractModel {
             return;
         }
 
-        if (params.UserInfo) {
-            let obj = new MixUserInfo();
-            obj.deserialize(params.UserInfo)
-            this.UserInfo = obj;
+        if (params.UserMediaStream) {
+            let obj = new UserMediaStream();
+            obj.deserialize(params.UserMediaStream)
+            this.UserMediaStream = obj;
         }
-
-    }
-}
-
-/**
- * The cropping parameters for mixed videos.
- * @class
- */
-class McuCustomCrop extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The horizontal offset (pixels) of the starting point for cropping. This parameter must be greater than 0.
-         * @type {number || null}
-         */
-        this.LocationX = null;
-
-        /**
-         * The vertical offset (pixels) of the starting point for cropping. This parameter must be greater than 0.
-         * @type {number || null}
-         */
-        this.LocationY = null;
-
-        /**
-         * The video width (pixels) after cropping. The sum of this parameter and `LocationX` cannot be greater than 10000.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * The video height (pixels) after cropping. The sum of this parameter and `LocationY` cannot be greater than 10000.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.LocationX = 'LocationX' in params ? params.LocationX : null;
-        this.LocationY = 'LocationY' in params ? params.LocationY : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -1746,6 +1900,89 @@ class CreateCloudRecordingRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeMixTranscodingUsage request structure.
+ * @class
+ */
+class DescribeMixTranscodingUsageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The start date in the format of YYYY-MM-DD.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end date in the format of YYYY-MM-DD.
+The period queried per request cannot be longer than 31 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
+ * The watermark layout.
+ * @class
+ */
+class WaterMark extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The watermark type. 0 (default): image; 1: text (not supported yet).
+         * @type {number || null}
+         */
+        this.WaterMarkType = null;
+
+        /**
+         * The information of watermark images. This parameter is required if the watermark type is image.
+         * @type {WaterMarkImage || null}
+         */
+        this.WaterMarkImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WaterMarkType = 'WaterMarkType' in params ? params.WaterMarkType : null;
+
+        if (params.WaterMarkImage) {
+            let obj = new WaterMarkImage();
+            obj.deserialize(params.WaterMarkImage)
+            this.WaterMarkImage = obj;
+        }
+
+    }
+}
+
+/**
  * DeleteCloudRecording response structure.
  * @class
  */
@@ -1856,6 +2093,86 @@ class MixTranscodeParams extends  AbstractModel {
             obj.deserialize(params.AudioParams)
             this.AudioParams = obj;
         }
+
+    }
+}
+
+/**
+ * The text watermark configuration.
+ * @class
+ */
+class McuWaterMarkText extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The text.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * The watermark width (pixels).
+         * @type {number || null}
+         */
+        this.WaterMarkWidth = null;
+
+        /**
+         * The watermark height (pixels).
+         * @type {number || null}
+         */
+        this.WaterMarkHeight = null;
+
+        /**
+         * The horizontal offset (pixels) of the watermark.
+         * @type {number || null}
+         */
+        this.LocationX = null;
+
+        /**
+         * The vertical offset (pixels) of the watermark.
+         * @type {number || null}
+         */
+        this.LocationY = null;
+
+        /**
+         * The font size.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.FontSize = null;
+
+        /**
+         * The text color. The default color is white. Values for some commonly used colors: Red: 0xcc0033; yellow: 0xcc9900; green: 0xcccc33; blue: 0x99CCFF; black: 0x000000; white: 0xFFFFFF; gray: 0x999999.	
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FontColor = null;
+
+        /**
+         * The text fill color. If you do not specify this parameter, the fill color will be transparent. Values for some commonly used colors: Red: 0xcc0033; yellow: 0xcc9900; green: 0xcccc33; blue: 0x99CCFF; black: 0x000000; white: 0xFFFFFF; gray: 0x999999.	
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BackGroundColor = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.WaterMarkWidth = 'WaterMarkWidth' in params ? params.WaterMarkWidth : null;
+        this.WaterMarkHeight = 'WaterMarkHeight' in params ? params.WaterMarkHeight : null;
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+        this.FontSize = 'FontSize' in params ? params.FontSize : null;
+        this.FontColor = 'FontColor' in params ? params.FontColor : null;
+        this.BackGroundColor = 'BackGroundColor' in params ? params.BackGroundColor : null;
 
     }
 }
@@ -2092,18 +2409,18 @@ class AgentParams extends  AbstractModel {
 }
 
 /**
- * The VOD parameters.
+ * The users whose streams are mixed.
  * @class
  */
-class CloudVod extends  AbstractModel {
+class McuUserInfoParams extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Tencent Cloud VOD parameters.
-         * @type {TencentVod || null}
+         * The user information.
+         * @type {MixUserInfo || null}
          */
-        this.TencentVod = null;
+        this.UserInfo = null;
 
     }
 
@@ -2115,10 +2432,10 @@ class CloudVod extends  AbstractModel {
             return;
         }
 
-        if (params.TencentVod) {
-            let obj = new TencentVod();
-            obj.deserialize(params.TencentVod)
-            this.TencentVod = obj;
+        if (params.UserInfo) {
+            let obj = new MixUserInfo();
+            obj.deserialize(params.UserInfo)
+            this.UserInfo = obj;
         }
 
     }
@@ -2299,6 +2616,49 @@ class StartPublishCdnStreamRequest extends  AbstractModel {
                 this.FeedBackRoomParams.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeTrtcUsage request structure.
+ * @class
+ */
+class DescribeTrtcUsageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The start date in the format of YYYY-MM-DD.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end date in the format of YYYY-MM-DD.
+The period queried per request cannot be longer than 31 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
 
     }
 }
@@ -2767,6 +3127,55 @@ In cases where `SubscribeAudioList` and `UnSubscribeAudioList` are used at the s
 }
 
 /**
+ * The cropping parameters for mixed videos.
+ * @class
+ */
+class McuCustomCrop extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The horizontal offset (pixels) of the starting point for cropping. This parameter must be greater than 0.
+         * @type {number || null}
+         */
+        this.LocationX = null;
+
+        /**
+         * The vertical offset (pixels) of the starting point for cropping. This parameter must be greater than 0.
+         * @type {number || null}
+         */
+        this.LocationY = null;
+
+        /**
+         * The video width (pixels) after cropping. The sum of this parameter and `LocationX` cannot be greater than 10000.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * The video height (pixels) after cropping. The sum of this parameter and `LocationY` cannot be greater than 10000.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
  * The relaying parameters.
  * @class
  */
@@ -3037,7 +3446,7 @@ class McuWaterMarkParams extends  AbstractModel {
         super();
 
         /**
-         * The watermark type. The default is 0, which indicates an image watermark.
+         * The watermark type. Valid values: `0` (default): Image; `1`: Text.
          * @type {number || null}
          */
         this.WaterMarkType = null;
@@ -3047,6 +3456,13 @@ class McuWaterMarkParams extends  AbstractModel {
          * @type {McuWaterMarkImage || null}
          */
         this.WaterMarkImage = null;
+
+        /**
+         * The text watermark configuration. This parameter is required if `WaterMarkType` is `1`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {McuWaterMarkText || null}
+         */
+        this.WaterMarkText = null;
 
     }
 
@@ -3064,6 +3480,47 @@ class McuWaterMarkParams extends  AbstractModel {
             obj.deserialize(params.WaterMarkImage)
             this.WaterMarkImage = obj;
         }
+
+        if (params.WaterMarkText) {
+            let obj = new McuWaterMarkText();
+            obj.deserialize(params.WaterMarkText)
+            this.WaterMarkText = obj;
+        }
+
+    }
+}
+
+/**
+ * The TRTC audio/video duration generated in a certain time period.
+ * @class
+ */
+class TrtcUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The time point in the format of `YYYY-MM-DD HH:mm:ss`. If more than one day is queried, `HH:mm:ss` is `00:00:00`.
+         * @type {string || null}
+         */
+        this.TimeKey = null;
+
+        /**
+         * The usage (minutes). Each element of this parameter corresponds to an element of `UsageKey` in the order they are listed.
+         * @type {Array.<number> || null}
+         */
+        this.UsageValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
+        this.UsageValue = 'UsageValue' in params ? params.UsageValue : null;
 
     }
 }
@@ -3132,6 +3589,56 @@ class ModifyCloudRecordingResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRelayUsage response structure.
+ * @class
+ */
+class DescribeRelayUsageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The usage type. Each element of this parameter corresponds to an element of `UsageValue` in the order they are listed.
+         * @type {Array.<string> || null}
+         */
+        this.UsageKey = null;
+
+        /**
+         * The usage data in each time unit.
+         * @type {Array.<TrtcUsage> || null}
+         */
+        this.UsageList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsageKey = 'UsageKey' in params ? params.UsageKey : null;
+
+        if (params.UsageList) {
+            this.UsageList = new Array();
+            for (let z in params.UsageList) {
+                let obj = new TrtcUsage();
+                obj.deserialize(params.UsageList[z]);
+                this.UsageList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyCloudRecording request structure.
  * @class
  */
@@ -3193,22 +3700,26 @@ class ModifyCloudRecordingRequest extends  AbstractModel {
 module.exports = {
     CloudStorage: CloudStorage,
     SetUserBlockedRequest: SetUserBlockedRequest,
+    DescribeRecordingUsageRequest: DescribeRecordingUsageRequest,
     StorageFile: StorageFile,
-    WaterMark: WaterMark,
+    DescribeTrtcUsageResponse: DescribeTrtcUsageResponse,
     DescribeCloudRecordingResponse: DescribeCloudRecordingResponse,
     McuLayoutParams: McuLayoutParams,
     DismissRoomByStrRoomIdRequest: DismissRoomByStrRoomIdRequest,
     MixUserInfo: MixUserInfo,
     UpdatePublishCdnStreamRequest: UpdatePublishCdnStreamRequest,
-    MixLayoutParams: MixLayoutParams,
+    DescribeRelayUsageRequest: DescribeRelayUsageRequest,
+    DescribeMixTranscodingUsageResponse: DescribeMixTranscodingUsageResponse,
     McuFeedBackRoomParams: McuFeedBackRoomParams,
     DismissRoomResponse: DismissRoomResponse,
     MixLayout: MixLayout,
-    McuVideoParams: McuVideoParams,
+    DescribeRecordingUsageResponse: DescribeRecordingUsageResponse,
     AudioEncode: AudioEncode,
+    McuVideoParams: McuVideoParams,
     RemoveUserRequest: RemoveUserRequest,
     StorageParams: StorageParams,
-    MaxVideoUser: MaxVideoUser,
+    MixLayoutParams: MixLayoutParams,
+    CloudVod: CloudVod,
     SetUserBlockedResponse: SetUserBlockedResponse,
     RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
     McuLayoutVolume: McuLayoutVolume,
@@ -3216,22 +3727,25 @@ module.exports = {
     TencentVod: TencentVod,
     RecordParams: RecordParams,
     McuPassThrough: McuPassThrough,
-    McuUserInfoParams: McuUserInfoParams,
-    McuCustomCrop: McuCustomCrop,
+    MaxVideoUser: MaxVideoUser,
     VideoParams: VideoParams,
     CreateCloudRecordingRequest: CreateCloudRecordingRequest,
+    DescribeMixTranscodingUsageRequest: DescribeMixTranscodingUsageRequest,
+    WaterMark: WaterMark,
     DeleteCloudRecordingResponse: DeleteCloudRecordingResponse,
     UpdatePublishCdnStreamResponse: UpdatePublishCdnStreamResponse,
     MixTranscodeParams: MixTranscodeParams,
+    McuWaterMarkText: McuWaterMarkText,
     StopPublishCdnStreamResponse: StopPublishCdnStreamResponse,
     RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
     SetUserBlockedByStrRoomIdResponse: SetUserBlockedByStrRoomIdResponse,
     StopPublishCdnStreamRequest: StopPublishCdnStreamRequest,
     SubscribeStreamUserIds: SubscribeStreamUserIds,
     AgentParams: AgentParams,
-    CloudVod: CloudVod,
+    McuUserInfoParams: McuUserInfoParams,
     UserMediaStream: UserMediaStream,
     StartPublishCdnStreamRequest: StartPublishCdnStreamRequest,
+    DescribeTrtcUsageRequest: DescribeTrtcUsageRequest,
     WaterMarkImage: WaterMarkImage,
     DismissRoomRequest: DismissRoomRequest,
     RemoveUserResponse: RemoveUserResponse,
@@ -3241,6 +3755,7 @@ module.exports = {
     McuLayout: McuLayout,
     McuSeiParams: McuSeiParams,
     McuAudioParams: McuAudioParams,
+    McuCustomCrop: McuCustomCrop,
     McuPublishCdnParam: McuPublishCdnParam,
     SetUserBlockedByStrRoomIdRequest: SetUserBlockedByStrRoomIdRequest,
     AudioParams: AudioParams,
@@ -3248,8 +3763,10 @@ module.exports = {
     StartPublishCdnStreamResponse: StartPublishCdnStreamResponse,
     SingleSubscribeParams: SingleSubscribeParams,
     McuWaterMarkParams: McuWaterMarkParams,
+    TrtcUsage: TrtcUsage,
     DismissRoomByStrRoomIdResponse: DismissRoomByStrRoomIdResponse,
     ModifyCloudRecordingResponse: ModifyCloudRecordingResponse,
+    DescribeRelayUsageResponse: DescribeRelayUsageResponse,
     ModifyCloudRecordingRequest: ModifyCloudRecordingRequest,
 
 }

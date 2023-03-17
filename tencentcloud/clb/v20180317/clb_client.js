@@ -76,6 +76,7 @@ const DescribeCustomizedConfigListRequest = models.DescribeCustomizedConfigListR
 const AutoRewriteRequest = models.AutoRewriteRequest;
 const DescribeCrossTargetsResponse = models.DescribeCrossTargetsResponse;
 const FunctionInfo = models.FunctionInfo;
+const ModifyFunctionTargetsResponse = models.ModifyFunctionTargetsResponse;
 const DescribeLoadBalancerListByCertIdResponse = models.DescribeLoadBalancerListByCertIdResponse;
 const ModifyTargetGroupInstancesWeightResponse = models.ModifyTargetGroupInstancesWeightResponse;
 const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
@@ -202,6 +203,7 @@ const ModifyLoadBalancerSlaRequest = models.ModifyLoadBalancerSlaRequest;
 const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const Resource = models.Resource;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
+const ModifyFunctionTargetsRequest = models.ModifyFunctionTargetsRequest;
 const DescribeRewriteResponse = models.DescribeRewriteResponse;
 const Quota = models.Quota;
 const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
@@ -460,16 +462,14 @@ This is an async API. After it is returned successfully, you can call the `Descr
     }
 
     /**
-     * This API (SetLoadBalancerSecurityGroups) is used to bind/unbind security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups bound to a CLB instance. This API uses `set` semantics.
-During a binding operation, the input parameters need to be all security groups to be bound to the CLB instance (including those already bound ones and new ones).
-During an unbinding operation, the input parameters need to be all the security groups still bound to the CLB instance after the unbinding operation. To unbind all security groups, you can leave this parameter empty or pass in an empty array. Note: Private network CLB do not support binding security groups.
-     * @param {SetLoadBalancerSecurityGroupsRequest} req
-     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * This API is used to modify the cloud functions associated with a load balancing forwarding rule.
+     * @param {ModifyFunctionTargetsRequest} req
+     * @param {function(string, ModifyFunctionTargetsResponse):void} cb
      * @public
      */
-    SetLoadBalancerSecurityGroups(req, cb) {
-        let resp = new SetLoadBalancerSecurityGroupsResponse();
-        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
+    ModifyFunctionTargets(req, cb) {
+        let resp = new ModifyFunctionTargetsResponse();
+        this.request("ModifyFunctionTargets", req, resp, cb);
     }
 
     /**
@@ -484,7 +484,12 @@ During an unbinding operation, the input parameters need to be all the security 
     }
 
     /**
-     * This API is used to upgrade shared CLB instances to LCU-supported CLB instances.
+     * This API is used to upgrade a pay-as-you-go shared CLB instance to an LCU-supported CLB instance.<br/>
+Limits
+- This API can be used to upgrade only a pay-as-you-go shared instance. A monthly subscription shared instance must be upgraded in the console.
+- An LCU-supported instance cannot be rolled back to a shared instance.
+- LCU-supported instances are in beta testing. To upgrade to an LCU-supported instance, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.
+- Classic CLB instances cannot be upgraded to LCU-supported instances.
      * @param {ModifyLoadBalancerSlaRequest} req
      * @param {function(string, ModifyLoadBalancerSlaResponse):void} cb
      * @public
@@ -756,6 +761,19 @@ This is an async API. After it is returned successfully, you can call the `Descr
     DescribeClsLogSet(req, cb) {
         let resp = new DescribeClsLogSetResponse();
         this.request("DescribeClsLogSet", req, resp, cb);
+    }
+
+    /**
+     * This API (SetLoadBalancerSecurityGroups) is used to bind/unbind security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups bound to a CLB instance. This API uses `set` semantics.
+During a binding operation, the input parameters need to be all security groups to be bound to the CLB instance (including those already bound ones and new ones).
+During an unbinding operation, the input parameters need to be all the security groups still bound to the CLB instance after the unbinding operation. To unbind all security groups, you can leave this parameter empty or pass in an empty array. Note: Private network CLB do not support binding security groups.
+     * @param {SetLoadBalancerSecurityGroupsRequest} req
+     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * @public
+     */
+    SetLoadBalancerSecurityGroups(req, cb) {
+        let resp = new SetLoadBalancerSecurityGroupsResponse();
+        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
     }
 
     /**

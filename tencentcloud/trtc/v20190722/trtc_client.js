@@ -18,22 +18,26 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CloudStorage = models.CloudStorage;
 const SetUserBlockedRequest = models.SetUserBlockedRequest;
+const DescribeRecordingUsageRequest = models.DescribeRecordingUsageRequest;
 const StorageFile = models.StorageFile;
-const WaterMark = models.WaterMark;
+const DescribeTrtcUsageResponse = models.DescribeTrtcUsageResponse;
 const DescribeCloudRecordingResponse = models.DescribeCloudRecordingResponse;
 const McuLayoutParams = models.McuLayoutParams;
 const DismissRoomByStrRoomIdRequest = models.DismissRoomByStrRoomIdRequest;
 const MixUserInfo = models.MixUserInfo;
 const UpdatePublishCdnStreamRequest = models.UpdatePublishCdnStreamRequest;
-const MixLayoutParams = models.MixLayoutParams;
+const DescribeRelayUsageRequest = models.DescribeRelayUsageRequest;
+const DescribeMixTranscodingUsageResponse = models.DescribeMixTranscodingUsageResponse;
 const McuFeedBackRoomParams = models.McuFeedBackRoomParams;
 const DismissRoomResponse = models.DismissRoomResponse;
 const MixLayout = models.MixLayout;
-const McuVideoParams = models.McuVideoParams;
+const DescribeRecordingUsageResponse = models.DescribeRecordingUsageResponse;
 const AudioEncode = models.AudioEncode;
+const McuVideoParams = models.McuVideoParams;
 const RemoveUserRequest = models.RemoveUserRequest;
 const StorageParams = models.StorageParams;
-const MaxVideoUser = models.MaxVideoUser;
+const MixLayoutParams = models.MixLayoutParams;
+const CloudVod = models.CloudVod;
 const SetUserBlockedResponse = models.SetUserBlockedResponse;
 const RemoveUserByStrRoomIdResponse = models.RemoveUserByStrRoomIdResponse;
 const McuLayoutVolume = models.McuLayoutVolume;
@@ -41,22 +45,25 @@ const DescribeCloudRecordingRequest = models.DescribeCloudRecordingRequest;
 const TencentVod = models.TencentVod;
 const RecordParams = models.RecordParams;
 const McuPassThrough = models.McuPassThrough;
-const McuUserInfoParams = models.McuUserInfoParams;
-const McuCustomCrop = models.McuCustomCrop;
+const MaxVideoUser = models.MaxVideoUser;
 const VideoParams = models.VideoParams;
 const CreateCloudRecordingRequest = models.CreateCloudRecordingRequest;
+const DescribeMixTranscodingUsageRequest = models.DescribeMixTranscodingUsageRequest;
+const WaterMark = models.WaterMark;
 const DeleteCloudRecordingResponse = models.DeleteCloudRecordingResponse;
 const UpdatePublishCdnStreamResponse = models.UpdatePublishCdnStreamResponse;
 const MixTranscodeParams = models.MixTranscodeParams;
+const McuWaterMarkText = models.McuWaterMarkText;
 const StopPublishCdnStreamResponse = models.StopPublishCdnStreamResponse;
 const RemoveUserByStrRoomIdRequest = models.RemoveUserByStrRoomIdRequest;
 const SetUserBlockedByStrRoomIdResponse = models.SetUserBlockedByStrRoomIdResponse;
 const StopPublishCdnStreamRequest = models.StopPublishCdnStreamRequest;
 const SubscribeStreamUserIds = models.SubscribeStreamUserIds;
 const AgentParams = models.AgentParams;
-const CloudVod = models.CloudVod;
+const McuUserInfoParams = models.McuUserInfoParams;
 const UserMediaStream = models.UserMediaStream;
 const StartPublishCdnStreamRequest = models.StartPublishCdnStreamRequest;
+const DescribeTrtcUsageRequest = models.DescribeTrtcUsageRequest;
 const WaterMarkImage = models.WaterMarkImage;
 const DismissRoomRequest = models.DismissRoomRequest;
 const RemoveUserResponse = models.RemoveUserResponse;
@@ -66,6 +73,7 @@ const DeleteCloudRecordingRequest = models.DeleteCloudRecordingRequest;
 const McuLayout = models.McuLayout;
 const McuSeiParams = models.McuSeiParams;
 const McuAudioParams = models.McuAudioParams;
+const McuCustomCrop = models.McuCustomCrop;
 const McuPublishCdnParam = models.McuPublishCdnParam;
 const SetUserBlockedByStrRoomIdRequest = models.SetUserBlockedByStrRoomIdRequest;
 const AudioParams = models.AudioParams;
@@ -73,8 +81,10 @@ const McuWaterMarkImage = models.McuWaterMarkImage;
 const StartPublishCdnStreamResponse = models.StartPublishCdnStreamResponse;
 const SingleSubscribeParams = models.SingleSubscribeParams;
 const McuWaterMarkParams = models.McuWaterMarkParams;
+const TrtcUsage = models.TrtcUsage;
 const DismissRoomByStrRoomIdResponse = models.DismissRoomByStrRoomIdResponse;
 const ModifyCloudRecordingResponse = models.ModifyCloudRecordingResponse;
+const DescribeRelayUsageResponse = models.DescribeRelayUsageResponse;
 const ModifyCloudRecordingRequest = models.ModifyCloudRecordingRequest;
 
 
@@ -157,6 +167,22 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     }
 
     /**
+     * This API is used to query your TRTC audio/video duration.
+- If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+- The period queried per request cannot be longer than 31 days.
+- If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+- You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+- The rate limit of this API is five calls per second.
+     * @param {DescribeTrtcUsageRequest} req
+     * @param {function(string, DescribeTrtcUsageResponse):void} cb
+     * @public
+     */
+    DescribeTrtcUsage(req, cb) {
+        let resp = new DescribeTrtcUsageResponse();
+        this.request("DescribeTrtcUsage", req, resp, cb);
+    }
+
+    /**
      * This API is used to stop a recording task. If a task is stopped successfully, but the uploading of recording files has not completed, the backend will continue to upload the files and will notify you via a callback when the upload is completed.
      * @param {DeleteCloudRecordingRequest} req
      * @param {function(string, DeleteCloudRecordingResponse):void} cb
@@ -165,6 +191,22 @@ Note: For details about how to use this API, see the `StartPublishCdnStream` doc
     DeleteCloudRecording(req, cb) {
         let resp = new DeleteCloudRecordingResponse();
         this.request("DeleteCloudRecording", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query your usage of TRTC’s relay to CDN service.
+- If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+- The period queried per request cannot be longer than 31 days.
+- If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+- You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+- The rate limit of this API is five calls per second.
+     * @param {DescribeRelayUsageRequest} req
+     * @param {function(string, DescribeRelayUsageResponse):void} cb
+     * @public
+     */
+    DescribeRelayUsage(req, cb) {
+        let resp = new DescribeRelayUsageResponse();
+        this.request("DescribeRelayUsage", req, resp, cb);
     }
 
     /**
@@ -244,6 +286,22 @@ Others:
     }
 
     /**
+     * This API is used to query your TRTC recording usage.
+- If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+- The period queried per request cannot be longer than 31 days.
+- If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+- You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+- The rate limit of this API is five calls per second.
+     * @param {DescribeRecordingUsageRequest} req
+     * @param {function(string, DescribeRecordingUsageResponse):void} cb
+     * @public
+     */
+    DescribeRecordingUsage(req, cb) {
+        let resp = new DescribeRecordingUsageResponse();
+        this.request("DescribeRecordingUsage", req, resp, cb);
+    }
+
+    /**
      * This API is used to remove a user from a room. It allows the anchor, room owner, or admin to kick out a user, and works on all platforms. For Android, iOS, Windows, and macOS, you need to update the TRTC SDK to version 6.6 or above.
      * @param {RemoveUserByStrRoomIdRequest} req
      * @param {function(string, RemoveUserByStrRoomIdResponse):void} cb
@@ -252,6 +310,22 @@ Others:
     RemoveUserByStrRoomId(req, cb) {
         let resp = new RemoveUserByStrRoomIdResponse();
         this.request("RemoveUserByStrRoomId", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query your usage of TRTC’s On-Cloud MixTranscoding service.
+- If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+- The period queried per request cannot be longer than 31 days.
+- If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+- You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+- The rate limit of this API is five calls per second.
+     * @param {DescribeMixTranscodingUsageRequest} req
+     * @param {function(string, DescribeMixTranscodingUsageResponse):void} cb
+     * @public
+     */
+    DescribeMixTranscodingUsage(req, cb) {
+        let resp = new DescribeMixTranscodingUsageResponse();
+        this.request("DescribeMixTranscodingUsage", req, resp, cb);
     }
 
     /**

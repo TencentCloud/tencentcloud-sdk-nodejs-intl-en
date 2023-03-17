@@ -519,10 +519,8 @@ Note: By default, the traffic goes to the primary AZ. The secondary AZs only car
         this.Tags = null;
 
         /**
-         * Specifies a VIP for the CLB instance.
-<ul><li>`VpcId` is optional for creating shared clusters of public network CLB instances. For IPv6 CLB instance type, `SubnetId` is required; for IPv4 and IPv6 NAT64 types, it can be left empty.</li>
-<li>`VpcId` is optional for creating shared clusters of public network CLB instances. For IPv6 CLB instance type, `SubnetId` is required; for IPv4 and IPv6 NAT64 types, it can be left empty.
-</li></ul>
+         * Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+Note: If the specified VIP is occupied or is not within the IP range of the specified VPC subnet, you cannot use the VIP to create a CLB instance in a private network or an IPv6 BGP CLB instance in a public network.
          * @type {string || null}
          */
         this.Vip = null;
@@ -534,15 +532,16 @@ Note: By default, the traffic goes to the primary AZ. The secondary AZs only car
         this.BandwidthPackageId = null;
 
         /**
-         * Exclusive cluster information. This parameter is required for creating exclusive clusters of CLB instances.
+         * Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
          * @type {ExclusiveCluster || null}
          */
         this.ExclusiveCluster = null;
 
         /**
-         * Creates an LCU-supported CLB instance
-<ul><li>To create an LCU-supported CLB, this field is required and the value is `SLA`. LCU-supports CLBs adopt the pay-as-you-go model and their performance is guaranteed.</li>
-<li>It’s not required for a shared CLB instance.</li></ul>
+         * Creates an LCU-supported instance.
+<ul><li>To create an LCU-supported instance, set this parameter to `SLA`, which indicates that an LCU-supported instance is created with the default specification in pay-as-you-go mode.
+<ul><li>If you enable general LCU-supported instances, `SLA` corresponds to the Super Large 1 specification. General LCU-supported instances are in beta testing, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.</li>
+<li>If you enable ultra-large LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Ultra-large LCU-supported instances are in beta testing, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.</li></ul></li><li>This parameter is not required when you create a shared instance.</li></ul>
          * @type {string || null}
          */
         this.SlaType = null;
@@ -874,7 +873,7 @@ Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use 
         this.ClusterIds = null;
 
         /**
-         * Guaranteed performance specification.
+         * Specification of the LCU-supported instance.
          * @type {string || null}
          */
         this.SlaType = null;
@@ -1754,37 +1753,37 @@ class RegisterFunctionTargetsRequest extends  AbstractModel {
         super();
 
         /**
-         * 
+         * CLB instance ID.
          * @type {string || null}
          */
         this.LoadBalancerId = null;
 
         /**
-         * 
+         * CLB listener ID.
          * @type {string || null}
          */
         this.ListenerId = null;
 
         /**
-         * 
+         * SCF functions to be bound.
          * @type {Array.<FunctionTarget> || null}
          */
         this.FunctionTargets = null;
 
         /**
-         * 
+         * ID of the target forwarding rule. To bind an SCF function to a L7 forwarding rule, this parameter or `Domain+Url` is required.
          * @type {string || null}
          */
         this.LocationId = null;
 
         /**
-         * 
+         * Domain name of the target forwarding rule. It is ignored if `LocationId` is specified.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * 
+         * URL of the target forwarding rule. It is ignored if `LocationId` is specified.
          * @type {string || null}
          */
         this.Url = null;
@@ -2546,6 +2545,14 @@ class DescribeTargetsRequest extends  AbstractModel {
          */
         this.Port = null;
 
+        /**
+         * Query the list of backend services associated with a load balancer
+<li> `location-id` - String - Optional - Rule ID, such as "loc-12345678".</li>
+<li> `private-ip-address` - String - Optional - Backend service private IP, such as `172.16.1.1`</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -2559,6 +2566,15 @@ class DescribeTargetsRequest extends  AbstractModel {
         this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
         this.Port = 'Port' in params ? params.Port : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -3181,6 +3197,34 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * ModifyFunctionTargets response structure.
+ * @class
+ */
+class ModifyFunctionTargetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLoadBalancerListByCertId response structure.
  * @class
  */
@@ -3408,7 +3452,7 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         this.LoadBalancerName = null;
 
         /**
-         * Region information of the real server bound to a CLB.
+         * The backend service information of cross-region binding 1.0
          * @type {TargetRegionInfo || null}
          */
         this.TargetRegionInfo = null;
@@ -3426,7 +3470,7 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         this.LoadBalancerPassToTarget = null;
 
         /**
-         * Whether to enable SnatPro
+         * Whether to enable cross-region binding 2.0
          * @type {boolean || null}
          */
         this.SnatPro = null;
@@ -3504,7 +3548,7 @@ class DescribeLBListenersRequest extends  AbstractModel {
 }
 
 /**
- * Instance specification adjustment parameters
+ * Parameters for upgrading to an LCU-supported instance
  * @class
  */
 class SlaUpdateParam extends  AbstractModel {
@@ -3518,7 +3562,9 @@ class SlaUpdateParam extends  AbstractModel {
         this.LoadBalancerId = null;
 
         /**
-         * To upgrade to LCU-supported CLB instances. It must be `SLA`.
+         * This parameter is set to a fixed value of `SLA`, which specifies to upgrade to an LCU-supported instance of default specification.
+<ul><li>If you enable general LCU-supported instances, `SLA` corresponds to the Super Large 1 specification. General LCU-supported instances are in beta testing, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.</li>
+<li>If you enable ultra-large LCU-supported instances, SLA corresponds to the Super Large 4 specification. Ultra-large LCU-supported instances are in beta testing, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.</li></ul>
          * @type {string || null}
          */
         this.SlaType = null;
@@ -4043,6 +4089,13 @@ class LoadBalancerTraffic extends  AbstractModel {
          */
         this.OutBandwidth = null;
 
+        /**
+         * CLB domain name
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
     }
 
     /**
@@ -4057,6 +4110,7 @@ class LoadBalancerTraffic extends  AbstractModel {
         this.Region = 'Region' in params ? params.Region : null;
         this.Vip = 'Vip' in params ? params.Vip : null;
         this.OutBandwidth = 'OutBandwidth' in params ? params.OutBandwidth : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -4356,13 +4410,13 @@ They represent weighted round robin and least connections, respectively. Default
         this.MultiCertInfo = null;
 
         /**
-         * Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
+         * The maximum number of concurrent connections at the listener level. This parameter takes effect only on LCU-supported instances and TCP/UDP/TCP_SSL/QUIC listeners. Value range: 1 to the maximum concurrency of the instance. -1 indicates that no limit is set on concurrent connections.
          * @type {number || null}
          */
         this.MaxConn = null;
 
         /**
-         * Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
+         * The maximum number of new connections at the listener level. This parameter takes effect only on LCU-supported instances and TCP/UDP/TCP_SSL/QUIC listeners. Value range: 1 to the maximum number of new connections of the instance. -1 indicates that no limit is set on concurrent connections.
          * @type {number || null}
          */
         this.MaxCps = null;
@@ -6815,6 +6869,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Targets = null;
 
+        /**
+         * Information about backend SCF functions.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<FunctionTarget> || null}
+         */
+        this.FunctionTargets = null;
+
     }
 
     /**
@@ -6834,6 +6895,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 let obj = new Backend();
                 obj.deserialize(params.Targets[z]);
                 this.Targets.push(obj);
+            }
+        }
+
+        if (params.FunctionTargets) {
+            this.FunctionTargets = new Array();
+            for (let z in params.FunctionTargets) {
+                let obj = new FunctionTarget();
+                obj.deserialize(params.FunctionTargets[z]);
+                this.FunctionTargets.push(obj);
             }
         }
 
@@ -7318,7 +7388,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.Ports = null;
 
         /**
-         * Listener protocol: TCP, UDP, HTTP, HTTPS, or TCP_SSL (which is currently in beta test. If you want to use it, please submit a ticket for application).
+         * Listener protocol. Values: TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC
          * @type {string || null}
          */
         this.Protocol = null;
@@ -8275,8 +8345,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ExtraInfo = null;
 
         /**
-         * Custom configuration ID at the CLB instance level.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Custom configuration IDs of CLB instances. Multiple IDs must be separated by commas (,).
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ConfigId = null;
@@ -8415,7 +8485,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.SniSwitch = null;
 
         /**
-         * 
+         * Domain name of the CLB instance.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LoadBalancerDomain = null;
@@ -9900,7 +9971,7 @@ class ModifyLoadBalancerSlaRequest extends  AbstractModel {
         super();
 
         /**
-         * CLB instance information
+         * CLB instance information.
          * @type {Array.<SlaUpdateParam> || null}
          */
         this.LoadBalancerSla = null;
@@ -10047,6 +10118,77 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
         this.DealName = 'DealName' in params ? params.DealName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyFunctionTargets request structure.
+ * @class
+ */
+class ModifyFunctionTargetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CLB instance ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * CLB listener ID
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * The backend cloud functions to modify
+         * @type {Array.<FunctionTarget> || null}
+         */
+        this.FunctionTargets = null;
+
+        /**
+         * Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or `Domain`+`Url`.
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * Target rule domain name. This parameter does not take effect if `LocationId` is specified.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Target rule URL. This parameter does not take effect if `LocationId` is specified.
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+
+        if (params.FunctionTargets) {
+            this.FunctionTargets = new Array();
+            for (let z in params.FunctionTargets) {
+                let obj = new FunctionTarget();
+                obj.deserialize(params.FunctionTargets[z]);
+                this.FunctionTargets.push(obj);
+            }
+        }
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -10972,7 +11114,13 @@ class TargetHealth extends  AbstractModel {
         this.TargetId = null;
 
         /**
-         * Detailed information of the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+         * Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+         * @type {string || null}
+         */
+        this.HealthStatusDetail = null;
+
+        /**
+         * Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status. This parameter will be discarded soon. We recommend that you use the HealthStatusDetail parameter.
          * @type {string || null}
          */
         this.HealthStatusDetial = null;
@@ -10990,6 +11138,7 @@ class TargetHealth extends  AbstractModel {
         this.Port = 'Port' in params ? params.Port : null;
         this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
         this.TargetId = 'TargetId' in params ? params.TargetId : null;
+        this.HealthStatusDetail = 'HealthStatusDetail' in params ? params.HealthStatusDetail : null;
         this.HealthStatusDetial = 'HealthStatusDetial' in params ? params.HealthStatusDetial : null;
 
     }
@@ -11363,7 +11512,7 @@ OPEN: public network; INTERNAL: private network.
         this.Forward = null;
 
         /**
-         * CLB instance domain name. This field is provided only to public network classic CLB instance.
+         * Domain name of the CLB instance. It is only available for public classic CLBs. This parameter will be discontinued soon. Please use `LoadBalancerDomain` instead.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -11622,8 +11771,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.SnatIps = null;
 
         /**
-         * Performance guarantee specification
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Specification of the LCU-supported instance.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SlaType = null;
@@ -11691,7 +11840,8 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.HealthLogTopicId = null;
 
         /**
-         * 
+         * Cluster ID.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.ClusterIds = null;
@@ -11702,6 +11852,13 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          * @type {Array.<string> || null}
          */
         this.AttributeFlags = null;
+
+        /**
+         * Domain name of the CLB instance.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LoadBalancerDomain = null;
 
     }
 
@@ -11819,6 +11976,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.HealthLogTopicId = 'HealthLogTopicId' in params ? params.HealthLogTopicId : null;
         this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
         this.AttributeFlags = 'AttributeFlags' in params ? params.AttributeFlags : null;
+        this.LoadBalancerDomain = 'LoadBalancerDomain' in params ? params.LoadBalancerDomain : null;
 
     }
 }
@@ -11884,6 +12042,7 @@ module.exports = {
     AutoRewriteRequest: AutoRewriteRequest,
     DescribeCrossTargetsResponse: DescribeCrossTargetsResponse,
     FunctionInfo: FunctionInfo,
+    ModifyFunctionTargetsResponse: ModifyFunctionTargetsResponse,
     DescribeLoadBalancerListByCertIdResponse: DescribeLoadBalancerListByCertIdResponse,
     ModifyTargetGroupInstancesWeightResponse: ModifyTargetGroupInstancesWeightResponse,
     DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
@@ -12010,6 +12169,7 @@ module.exports = {
     DescribeBlockIPTaskRequest: DescribeBlockIPTaskRequest,
     Resource: Resource,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
+    ModifyFunctionTargetsRequest: ModifyFunctionTargetsRequest,
     DescribeRewriteResponse: DescribeRewriteResponse,
     Quota: Quota,
     SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,

@@ -315,6 +315,39 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.InstanceIdSet = null;
 
+        /**
+         * The number of months for which the snapshots created by this scheduled snapshot policy can be retained.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RetentionMonths = null;
+
+        /**
+         * The maximum number of snapshots created by this scheduled snapshot policy that can be retained.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RetentionAmount = null;
+
+        /**
+         * Retention policy for scheduled snapshots.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AdvancedRetentionPolicy || null}
+         */
+        this.AdvancedRetentionPolicy = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CopyFromAccountUin = null;
+
+        /**
+         * 
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -345,6 +378,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RetentionDays = 'RetentionDays' in params ? params.RetentionDays : null;
         this.CopyToAccountUin = 'CopyToAccountUin' in params ? params.CopyToAccountUin : null;
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.RetentionMonths = 'RetentionMonths' in params ? params.RetentionMonths : null;
+        this.RetentionAmount = 'RetentionAmount' in params ? params.RetentionAmount : null;
+
+        if (params.AdvancedRetentionPolicy) {
+            let obj = new AdvancedRetentionPolicy();
+            obj.deserialize(params.AdvancedRetentionPolicy)
+            this.AdvancedRetentionPolicy = obj;
+        }
+        this.CopyFromAccountUin = 'CopyFromAccountUin' in params ? params.CopyFromAccountUin : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -969,6 +1020,59 @@ class InquirePriceModifyDiskExtraPerformanceResponse extends  AbstractModel {
             this.DiskPrice = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Retention policy for scheduled snapshots. All four parameters are required.
+ * @class
+ */
+class AdvancedRetentionPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Retains one latest snapshot each day within `Days` days. Value range: [0, 100].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Days = null;
+
+        /**
+         * Retains one latest snapshot each week within `Weeks` weeks. Value range: [0, 100].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Weeks = null;
+
+        /**
+         * Retains one latest snapshot each month within `Months` months. Value range: [0, 100].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Months = null;
+
+        /**
+         * Retains one latest snapshot each year within `Years` years. Value range: [0, 100].
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Years = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Days = 'Days' in params ? params.Days : null;
+        this.Weeks = 'Weeks' in params ? params.Weeks : null;
+        this.Months = 'Months' in params ? params.Months : null;
+        this.Years = 'Years' in params ? params.Years : null;
 
     }
 }
@@ -3982,6 +4086,18 @@ class Policy extends  AbstractModel {
          */
         this.DayOfWeek = null;
 
+        /**
+         * Specifies the dates of the month on which a scheduled snapshot will be triggered. Value range: [1, 31]. `1` to `31` indicate the specific dates of the month; for example, `5` indicates the 5th day of the month. Note: If you set a date that does not exist in some months such as 29, 30, and 31, these months will be skipped for scheduled snapshot creation.
+         * @type {Array.<number> || null}
+         */
+        this.DayOfMonth = null;
+
+        /**
+         * Specifies the interval for creating scheduled snapshots in days. Value range: [1, 365]. For example, if it is set to `5`, scheduled snapshots will be created every 5 days. Note: If you choose to back up by day, the time for the first backup is theoretically the day when the backup policy is created. If the backup policy creation time on the current day is later than the set backup time, the first backup will be performed in the second backup cycle.
+         * @type {number || null}
+         */
+        this.IntervalDays = null;
+
     }
 
     /**
@@ -3993,6 +4109,8 @@ class Policy extends  AbstractModel {
         }
         this.Hour = 'Hour' in params ? params.Hour : null;
         this.DayOfWeek = 'DayOfWeek' in params ? params.DayOfWeek : null;
+        this.DayOfMonth = 'DayOfMonth' in params ? params.DayOfMonth : null;
+        this.IntervalDays = 'IntervalDays' in params ? params.IntervalDays : null;
 
     }
 }
@@ -4848,6 +4966,7 @@ module.exports = {
     DescribeDiskBackupsResponse: DescribeDiskBackupsResponse,
     SnapshotCopyResult: SnapshotCopyResult,
     InquirePriceModifyDiskExtraPerformanceResponse: InquirePriceModifyDiskExtraPerformanceResponse,
+    AdvancedRetentionPolicy: AdvancedRetentionPolicy,
     CreateDisksRequest: CreateDisksRequest,
     AttachDisksRequest: AttachDisksRequest,
     DescribeDiskAssociatedAutoSnapshotPolicyRequest: DescribeDiskAssociatedAutoSnapshotPolicyRequest,

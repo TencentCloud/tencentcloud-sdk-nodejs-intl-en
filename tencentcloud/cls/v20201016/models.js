@@ -2300,6 +2300,7 @@ class ModifyMachineGroupResponse extends  AbstractModel {
 
 /**
  * Index rule. At least one of the `FullText`, `KeyValue`, and `Tag` parameters must be valid.
+
  * @class
  */
 class RuleInfo extends  AbstractModel {
@@ -2307,22 +2308,22 @@ class RuleInfo extends  AbstractModel {
         super();
 
         /**
-         * Full-Text index configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Full-text index configuration. If the configuration is left empty, full-text indexing is not enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {FullTextInfo || null}
          */
         this.FullText = null;
 
         /**
-         * Key-Value index configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Key-value index configuration. If the configuration is left empty, key-value indexing is not enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {RuleKeyValueInfo || null}
          */
         this.KeyValue = null;
 
         /**
-         * Metafield index configuration
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Metadata field index configuration. If the configuration is left empty, metadata field indexing is not enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {RuleTagInfo || null}
          */
         this.Tag = null;
@@ -2825,7 +2826,7 @@ class RuleKeyValueInfo extends  AbstractModel {
         this.CaseSensitive = null;
 
         /**
-         * Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+         * Key-value pair information of the index to be created
          * @type {Array.<KeyValueInfo> || null}
          */
         this.KeyValues = null;
@@ -3552,13 +3553,18 @@ class CreateIndexRequest extends  AbstractModel {
         this.Status = null;
 
         /**
-         * Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+         * Whether full-text indexing includes internal fields (`__FILENAME__`, `__HOSTNAME__`, and `__SOURCE__`). Default value: `false`. Recommended value: `true`.
+* `false`: Full-text indexing does not include internal fields.
+* `true`: Full-text indexing includes internal fields.
          * @type {boolean || null}
          */
         this.IncludeInternalFields = null;
 
         /**
-         * Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+         * Whether full-text indexing includes metadata fields (which are prefixed with `__TAG__`). Default value: `0`. Recommended value: `1`.
+* `0`: Full-text indexing includes only the metadata fields with key-value indexing enabled.
+* `1`: Full-text indexing includes all metadata fields.
+* `2`: Full-text indexing does not include metadata fields.
          * @type {number || null}
          */
         this.MetadataFlag = null;
@@ -5524,13 +5530,18 @@ class ModifyIndexRequest extends  AbstractModel {
         this.Rule = null;
 
         /**
-         * Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+         * Whether full-text indexing includes internal fields (`__FILENAME__`, `__HOSTNAME__`, and `__SOURCE__`). Default value: `false`. Recommended value: `true`.
+* `false`: Full-text indexing does not include internal fields.
+* `true`: Full-text indexing includes internal fields.
          * @type {boolean || null}
          */
         this.IncludeInternalFields = null;
 
         /**
-         * Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+         * Whether full-text indexing includes metadata fields (which are prefixed with `__TAG__`). Default value: `0`. Recommended value: `1`.
+* `0`: Full-text indexing includes only metadata fields with key-value indexing enabled.
+* `1`: Full-text indexing includes all metadata fields.
+* `2`: Full-text indexing does not include metadata fields.
          * @type {number || null}
          */
         this.MetadataFlag = null;
@@ -5651,8 +5662,8 @@ Note: \n\t\r can be directly enclosed in double quotes as the input parameter wi
         this.SqlFlag = null;
 
         /**
-         * Whether Chinese characters are contained
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Whether Chinese characters are contained. For `long` and `double` fields, set them to `false`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.ContainZH = null;
@@ -6997,7 +7008,13 @@ class KeyValueInfo extends  AbstractModel {
         super();
 
         /**
-         * When a key value or metafield index needs to be configured for a field, the metafield `Key` does not need to be prefixed with `__TAG__.` and is consistent with the one when logs are uploaded. `__TAG__.` will be prefixed automatically for display in the console.
+         * Name of the field for which you want to configure a key-value or metadata field index. The name can contain letters, digits, underscores, and symbols -./@ and cannot start with an underscore.
+
+Note:
+For a metadata field, set its `Key` to be consistent with the one for log uploading, without prefixing it with `__TAG__.`. `__TAG__.` will be prefixed automatically for display in the console.
+2. The total number of keys in key-value indexes (`KeyValue`) and metadata field indexes (`Tag`) cannot exceed 300.
+3. The number of levels in `Key` cannot exceed 10. Example: a.b.c.d.e.f.g.h.j.k
+4. JSON parent and child fields (such as “a” and “a.b”) cannot be contained at the same time.
          * @type {string || null}
          */
         this.Key = null;
@@ -7581,12 +7598,6 @@ class SearchLogRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the log topic to be searched
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
          * Start time of the log to be searched, which is a Unix timestamp in milliseconds
          * @type {number || null}
          */
@@ -7599,11 +7610,18 @@ class SearchLogRequest extends  AbstractModel {
         this.To = null;
 
         /**
-         * Statement for search and analysis. Maximum length: 12 KB
-A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search rule]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
+         * Search and analysis statement. Maximum length: 12 KB
+A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search criteria]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
+Queries all logs using * or an empty string
          * @type {string || null}
          */
         this.Query = null;
+
+        /**
+         * ID of the log topic to be searched
+         * @type {string || null}
+         */
+        this.TopicId = null;
 
         /**
          * The number of raw logs returned by a single query. Maximum value: 1000. You need to use `Context` to continue to get logs.
@@ -7660,10 +7678,10 @@ Default value: `1`
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.From = 'From' in params ? params.From : null;
         this.To = 'To' in params ? params.To : null;
         this.Query = 'Query' in params ? params.Query : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Context = 'Context' in params ? params.Context : null;
         this.Sort = 'Sort' in params ? params.Sort : null;
@@ -8044,15 +8062,20 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.ModifyTime = null;
 
         /**
-         * Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
-Note: This field may return `null`, indicating that no valid value was found.
+         * Whether full-text indexing includes internal fields (`__FILENAME__`, `__HOSTNAME__`, and `__SOURCE__`)
+* `false`: Full-text indexing does not include internal fields.
+* `true`: Full-text indexing includes internal fields.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.IncludeInternalFields = null;
 
         /**
-         * Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
-Note: This field may return `null`, indicating that no valid value was found.
+         * Whether full-text indexing includes metadata fields (which are prefixed with `__TAG__`)
+* `0`: Full-text indexing includes only the metadata fields with key-value indexing enabled.
+* `1`: Full-text indexing includes all metadata fields.
+* `2`: Full-text indexing does not include metadata fields.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MetadataFlag = null;

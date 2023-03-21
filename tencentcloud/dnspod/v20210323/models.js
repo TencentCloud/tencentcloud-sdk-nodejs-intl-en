@@ -1508,6 +1508,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.MX = null;
 
+        /**
+         * The record weight.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
     }
 
     /**
@@ -1529,6 +1536,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Id = 'Id' in params ? params.Id : null;
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
         this.MX = 'MX' in params ? params.MX : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }

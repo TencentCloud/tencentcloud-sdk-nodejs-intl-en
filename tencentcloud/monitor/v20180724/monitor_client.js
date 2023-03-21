@@ -31,6 +31,7 @@ const DescribePrometheusScrapeJobsRequest = models.DescribePrometheusScrapeJobsR
 const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
 const CreatePrometheusMultiTenantInstancePostPayModeRequest = models.CreatePrometheusMultiTenantInstancePostPayModeRequest;
+const DescribePolicyConditionListResponseDeprecatingInfo = models.DescribePolicyConditionListResponseDeprecatingInfo;
 const PrometheusTempModify = models.PrometheusTempModify;
 const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
 const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest;

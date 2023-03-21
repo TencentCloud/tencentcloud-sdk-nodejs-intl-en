@@ -852,6 +852,51 @@ class CreatePrometheusMultiTenantInstancePostPayModeRequest extends  AbstractMod
 }
 
 /**
+ * DescribePolicyConditionListResponseDeprecatingInfo
+ * @class
+ */
+class DescribePolicyConditionListResponseDeprecatingInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to hide
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.Hidden = null;
+
+        /**
+         * Names of new views
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.NewViewNames = null;
+
+        /**
+         * Description
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Hidden = 'Hidden' in params ? params.Hidden : null;
+        this.NewViewNames = 'NewViewNames' in params ? params.NewViewNames : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * Modifiable items in the TMP template
  * @class
  */
@@ -4596,7 +4641,7 @@ class CreatePolicyGroupCondition extends  AbstractModel {
         this.ContinuePeriod = null;
 
         /**
-         * If a metric is created based on a template, the RuleId of the metric in the template must be passed in.
+         * If a metric is created based on a template, the `RuleId` of the metric in the template must be passed in.
          * @type {number || null}
          */
         this.RuleId = null;
@@ -5662,8 +5707,8 @@ class AlarmPolicyCondition extends  AbstractModel {
         super();
 
         /**
-         * Metric trigger condition operator. Valid values: 0 (OR), 1 (AND)
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Judgment condition of an alarm trigger condition (`0`: Any; `1`: All; `2`: Composite). When the value is set to `2` (i.e., composite trigger conditions), this parameter should be used together with `ComplexExpression`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.IsUnionRule = null;
@@ -5674,6 +5719,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {Array.<AlarmPolicyRule> || null}
          */
         this.Rules = null;
+
+        /**
+         * The judgment expression of composite alarm trigger conditions, which is valid when the value of `IsUnionRule` is `2`. This parameter is used to determine that an alarm condition is met only when the expression values are `True` for multiple trigger conditions.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ComplexExpression = null;
 
     }
 
@@ -5694,6 +5746,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
                 this.Rules.push(obj);
             }
         }
+        this.ComplexExpression = 'ComplexExpression' in params ? params.ComplexExpression : null;
 
     }
 }
@@ -11030,7 +11083,7 @@ class CreatePolicyGroupEventCondition extends  AbstractModel {
         this.AlarmNotifyPeriod = null;
 
         /**
-         * If a metric is created based on a template, the RuleId of the metric in the template must be passed in.
+         * If a metric is created based on a template, the `RuleId` of the metric in the template must be passed in.
          * @type {number || null}
          */
         this.RuleId = null;
@@ -16564,7 +16617,7 @@ class CreatePolicyGroupRequest extends  AbstractModel {
         this.EventConditions = null;
 
         /**
-         * Whether it is a backend call. If the value is 1, rules from the policy template will be used to fill in the `Conditions` and `EventConditions` fields.
+         * Whether it is a backend call. Rules pulled from the policy template will be used to fill in the `Conditions` and `EventConditions` fields only when the value of this parameter is `1`.
          * @type {number || null}
          */
         this.BackEndCall = null;
@@ -17609,6 +17662,36 @@ class DescribePrometheusConfigResponse extends  AbstractModel {
         super();
 
         /**
+         * Global configuration
+         * @type {string || null}
+         */
+        this.Config = null;
+
+        /**
+         * ServiceMonitor configuration
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.ServiceMonitors = null;
+
+        /**
+         * PodMonitor configuration
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.PodMonitors = null;
+
+        /**
+         * Raw jobs
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.RawJobs = null;
+
+        /**
+         * 
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.Probes = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -17622,6 +17705,43 @@ class DescribePrometheusConfigResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.Config = 'Config' in params ? params.Config : null;
+
+        if (params.ServiceMonitors) {
+            this.ServiceMonitors = new Array();
+            for (let z in params.ServiceMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.ServiceMonitors[z]);
+                this.ServiceMonitors.push(obj);
+            }
+        }
+
+        if (params.PodMonitors) {
+            this.PodMonitors = new Array();
+            for (let z in params.PodMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.PodMonitors[z]);
+                this.PodMonitors.push(obj);
+            }
+        }
+
+        if (params.RawJobs) {
+            this.RawJobs = new Array();
+            for (let z in params.RawJobs) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.RawJobs[z]);
+                this.RawJobs.push(obj);
+            }
+        }
+
+        if (params.Probes) {
+            this.Probes = new Array();
+            for (let z in params.Probes) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.Probes[z]);
+                this.Probes.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -17671,19 +17791,19 @@ class DescribeProductEventListRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * Filter by product type. For example, 'cvm' indicates Cloud Virtual Machine.
+         * Filter by product type. For example, "cvm" indicates Cloud Virtual Machine.
          * @type {Array.<string> || null}
          */
         this.ProductName = null;
 
         /**
-         * Filter by product name. For example, "guest_reboot" indicates server restart.
+         * Filter by event name. For example, "guest_reboot" indicates instance restart.
          * @type {Array.<string> || null}
          */
         this.EventName = null;
 
         /**
-         * Affected object, such as "ins-19708ino"
+         * Affected object, such as "ins-19708ino".
          * @type {Array.<string> || null}
          */
         this.InstanceId = null;
@@ -19289,6 +19409,13 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.SupportRegions = null;
 
+        /**
+         * Deprecated information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DescribePolicyConditionListResponseDeprecatingInfo || null}
+         */
+        this.DeprecatingInfo = null;
+
     }
 
     /**
@@ -19322,6 +19449,12 @@ Note: This field may return null, indicating that no valid value was found.
         this.SortId = 'SortId' in params ? params.SortId : null;
         this.SupportDefault = 'SupportDefault' in params ? params.SupportDefault : null;
         this.SupportRegions = 'SupportRegions' in params ? params.SupportRegions : null;
+
+        if (params.DeprecatingInfo) {
+            let obj = new DescribePolicyConditionListResponseDeprecatingInfo();
+            obj.deserialize(params.DeprecatingInfo)
+            this.DeprecatingInfo = obj;
+        }
 
     }
 }
@@ -22513,6 +22646,7 @@ module.exports = {
     CreatePolicyGroupResponse: CreatePolicyGroupResponse,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
     CreatePrometheusMultiTenantInstancePostPayModeRequest: CreatePrometheusMultiTenantInstancePostPayModeRequest,
+    DescribePolicyConditionListResponseDeprecatingInfo: DescribePolicyConditionListResponseDeprecatingInfo,
     PrometheusTempModify: PrometheusTempModify,
     SendCustomAlarmMsgRequest: SendCustomAlarmMsgRequest,
     UnBindingPolicyObjectRequest: UnBindingPolicyObjectRequest,

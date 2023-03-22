@@ -864,6 +864,20 @@ class MLIDPassportOCRResponse extends  AbstractModel {
         this.CodeCrc = null;
 
         /**
+         * The surname.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Surname = null;
+
+        /**
+         * The given name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GivenName = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -890,6 +904,8 @@ class MLIDPassportOCRResponse extends  AbstractModel {
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
         this.CodeSet = 'CodeSet' in params ? params.CodeSet : null;
         this.CodeCrc = 'CodeCrc' in params ? params.CodeCrc : null;
+        this.Surname = 'Surname' in params ? params.Surname : null;
+        this.GivenName = 'GivenName' in params ? params.GivenName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

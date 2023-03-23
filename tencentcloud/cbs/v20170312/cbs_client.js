@@ -21,6 +21,7 @@ const ModifyDiskExtraPerformanceRequest = models.ModifyDiskExtraPerformanceReque
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
 const DescribeDiskBackupsRequest = models.DescribeDiskBackupsRequest;
 const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
+const DetailPrice = models.DetailPrice;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
 const CreateDiskBackupRequest = models.CreateDiskBackupRequest;
 const CopySnapshotCrossRegionsResponse = models.CopySnapshotCrossRegionsResponse;
@@ -202,11 +203,10 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * This API (DescribeAutoSnapshotPolicies) is used to query scheduled snapshot policies.
+     * This API is used to query scheduled snapshot policies.
 
-* You can query the detailed information of scheduled snapshot policies by ID, name, or status. Insert `AND` between different values. For details on filtering information, see `Filter`.
-* If the parameter is empty, a certain number (specified by `Limit`; the default is 20) of the scheduled snapshot policy lists are returned to the current user.
-
+* You can filter scheduled snapshot policies by ID, name, state, etc. The relationship between different filters is logical `AND`. For details on filters, see `Filter`.
+* If no parameter is specified, a certain number of scheduled snapshot policies under the current account will be returned. The number is specified by `Limit` and is 20 by default.
      * @param {DescribeAutoSnapshotPoliciesRequest} req
      * @param {function(string, DescribeAutoSnapshotPoliciesResponse):void} cb
      * @public

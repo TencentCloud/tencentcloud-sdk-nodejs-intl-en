@@ -337,13 +337,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AdvancedRetentionPolicy = null;
 
         /**
-         * 
+         * Source account ID of the copied snapshot policy
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.CopyFromAccountUin = null;
 
         /**
-         * 
+         * Tag.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -396,6 +398,114 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.Tags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Pricing details for the cloud disk.
+ * @class
+ */
+class DetailPrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the billable item.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PriceTitle = null;
+
+        /**
+         * Name of the billable item displayed in the console.
+         * @type {string || null}
+         */
+        this.PriceName = null;
+
+        /**
+         * Original price of a monthly subscribed cloud disk, in USD.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Discounted price of a monthly subscribed cloud disk, in USD.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * Original unit price of a pay-as-you-go cloud disk, in USD.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * Discount unit price of a pay-as-you-go cloud disk, in USD.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * Billing unit for pay-as-you-go cloud disks. Valid value: `HOUR` (billed hourly).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
+
+        /**
+         * Original highly-precise price of a monthly subscribed cloud disk, in USD.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalPriceHigh = null;
+
+        /**
+         * Discounted highly-precise price of a monthly subscribed cloud disk, in USD.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DiscountPriceHigh = null;
+
+        /**
+         * Original highly-precise unit price of a pay-as-you-go cloud disk, in USD.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceHigh = null;
+
+        /**
+         * Discounted highly-precise unit price of a pay-as-you-go cloud disk, in USD.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceDiscountHigh = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PriceTitle = 'PriceTitle' in params ? params.PriceTitle : null;
+        this.PriceName = 'PriceName' in params ? params.PriceName : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.OriginalPriceHigh = 'OriginalPriceHigh' in params ? params.OriginalPriceHigh : null;
+        this.DiscountPriceHigh = 'DiscountPriceHigh' in params ? params.DiscountPriceHigh : null;
+        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
+        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
 
     }
 }
@@ -1884,13 +1994,15 @@ Note: This field may return null, indicating that no valid value was found.
         this.InstanceType = null;
 
         /**
-         * 
+         * ID of the last instance to which the cloud disk is attached
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.LastAttachInsId = null;
 
         /**
-         * 
+         * Error message for the last operation of the cloud disk
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ErrorPrompt = null;
@@ -2463,6 +2575,13 @@ Note: This field may return null, indicating that no valid value was found.
         this.ProjectId = null;
 
         /**
+         * Project name of the instance.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
          * Dedicated cluster name. When it is an input parameter, it is ignored.  When it is an output parameter, it is the name of the dedicated cluster the cloud disk belongs to, and it can be left blank.
 Note: This field may return null, indicating that no valid value was found.
          * @type {string || null}
@@ -2494,6 +2613,7 @@ Note: This field may return null, indicating that no valid value was found.
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.CageId = 'CageId' in params ? params.CageId : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
         this.CdcName = 'CdcName' in params ? params.CdcName : null;
         this.CdcId = 'CdcId' in params ? params.CdcId : null;
         this.DedicatedClusterId = 'DedicatedClusterId' in params ? params.DedicatedClusterId : null;
@@ -3064,6 +3184,13 @@ Note: This field may return null, indicating that no valid value was found.
          */
         this.MaxDiskSize = null;
 
+        /**
+         * Price of a monthly subscribed or pay-as-you-go cloud disk.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Price || null}
+         */
+        this.Price = null;
+
     }
 
     /**
@@ -3084,6 +3211,12 @@ Note: This field may return null, indicating that no valid value was found.
         this.DiskUsage = 'DiskUsage' in params ? params.DiskUsage : null;
         this.MinDiskSize = 'MinDiskSize' in params ? params.MinDiskSize : null;
         this.MaxDiskSize = 'MaxDiskSize' in params ? params.MaxDiskSize : null;
+
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
 
     }
 }
@@ -4496,22 +4629,50 @@ class PrepayPrice extends  AbstractModel {
         super();
 
         /**
-         * Original payment of a monthly-subscribed cloud disk or a snapshot, in USD.
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
          * Discounted price of a monthly-subscribed cloud disk or a snapshot, in USD.
          * @type {number || null}
          */
         this.DiscountPrice = null;
 
         /**
+         * Billing unit for pay-as-you-go cloud disks. Valid value: <br><li>HOUR: billed hourly.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ChargeUnit = null;
+
+        /**
+         * Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceHigh = null;
+
+        /**
          * Original payment of a monthly-subscribed cloud disk or a snapshot, in USD, with six decimal places.
          * @type {string || null}
          */
         this.OriginalPriceHigh = null;
+
+        /**
+         * Original payment of a monthly-subscribed cloud disk or a snapshot, in USD.
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * Discount unit price of a pay-as-you-go cloud disk, in USD.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UnitPriceDiscountHigh = null;
 
         /**
          * Discounted price of a monthly-subscribed cloud disk or a snapshot, in USD, with six decimal places.
@@ -4527,32 +4688,11 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.UnitPrice = null;
 
         /**
-         * Billing unit for pay-as-you-go cloud disks. Valid value: <br><li>HOUR: billed hourly.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Detailed billing items
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DetailPrice> || null}
          */
-        this.ChargeUnit = null;
-
-        /**
-         * Discount unit price of a pay-as-you-go cloud disk, in USD.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.UnitPriceDiscount = null;
-
-        /**
-         * Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UnitPriceHigh = null;
-
-        /**
-         * Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
-Note: this field may return `null`, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UnitPriceDiscountHigh = null;
+        this.DetailPrices = null;
 
     }
 
@@ -4563,15 +4703,24 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
+        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
         this.OriginalPriceHigh = 'OriginalPriceHigh' in params ? params.OriginalPriceHigh : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
         this.DiscountPriceHigh = 'DiscountPriceHigh' in params ? params.DiscountPriceHigh : null;
         this.UnitPrice = 'UnitPrice' in params ? params.UnitPrice : null;
-        this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
-        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
-        this.UnitPriceHigh = 'UnitPriceHigh' in params ? params.UnitPriceHigh : null;
-        this.UnitPriceDiscountHigh = 'UnitPriceDiscountHigh' in params ? params.UnitPriceDiscountHigh : null;
+
+        if (params.DetailPrices) {
+            this.DetailPrices = new Array();
+            for (let z in params.DetailPrices) {
+                let obj = new DetailPrice();
+                obj.deserialize(params.DetailPrices[z]);
+                this.DetailPrices.push(obj);
+            }
+        }
 
     }
 }
@@ -4950,6 +5099,7 @@ module.exports = {
     ModifyDiskAttributesResponse: ModifyDiskAttributesResponse,
     DescribeDiskBackupsRequest: DescribeDiskBackupsRequest,
     AutoSnapshotPolicy: AutoSnapshotPolicy,
+    DetailPrice: DetailPrice,
     DescribeSnapshotOperationLogsRequest: DescribeSnapshotOperationLogsRequest,
     CreateDiskBackupRequest: CreateDiskBackupRequest,
     CopySnapshotCrossRegionsResponse: CopySnapshotCrossRegionsResponse,

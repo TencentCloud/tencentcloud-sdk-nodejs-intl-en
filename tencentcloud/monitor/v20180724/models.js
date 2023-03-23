@@ -1315,6 +1315,18 @@ class Label extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Label name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Label value
+         * @type {string || null}
+         */
+        this.Value = null;
+
     }
 
     /**
@@ -1324,6 +1336,8 @@ class Label extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -8826,6 +8840,24 @@ class PrometheusAgentInfo extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Cluster type
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Remarks
+         * @type {string || null}
+         */
+        this.Describe = null;
+
     }
 
     /**
@@ -8835,6 +8867,9 @@ class PrometheusAgentInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
 
     }
 }
@@ -17686,7 +17721,7 @@ class DescribePrometheusConfigResponse extends  AbstractModel {
         this.RawJobs = null;
 
         /**
-         * 
+         * Probes
          * @type {Array.<PrometheusConfigItem> || null}
          */
         this.Probes = null;
@@ -20877,6 +20912,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.FailedReason = null;
 
+        /**
+         * Agent name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
     }
 
     /**
@@ -20902,6 +20944,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Region = 'Region' in params ? params.Region : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.FailedReason = 'FailedReason' in params ? params.FailedReason : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -22070,7 +22113,7 @@ class DescribeStatisticDataRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * Namespace. Valid values: QCE/TKE
+         * Namespace. Valid values: `QCE`, `TKE2`.
          * @type {string || null}
          */
         this.Namespace = null;

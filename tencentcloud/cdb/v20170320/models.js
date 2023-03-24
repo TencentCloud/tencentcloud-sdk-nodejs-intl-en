@@ -4660,6 +4660,18 @@ class CloneItem extends  AbstractModel {
          */
         this.TaskStatus = null;
 
+        /**
+         * Clone instance region ID
+         * @type {number || null}
+         */
+        this.NewRegionId = null;
+
+        /**
+         * Source instance region ID
+         * @type {number || null}
+         */
+        this.SrcRegionId = null;
+
     }
 
     /**
@@ -4677,6 +4689,8 @@ class CloneItem extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.NewRegionId = 'NewRegionId' in params ? params.NewRegionId : null;
+        this.SrcRegionId = 'SrcRegionId' in params ? params.SrcRegionId : null;
 
     }
 }

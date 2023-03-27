@@ -2677,6 +2677,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ExclusiveHSMEnabled = null;
 
         /**
+         * KMS subscription information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubscriptionInfo = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2699,6 +2706,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.ProResourceId = 'ProResourceId' in params ? params.ProResourceId : null;
         this.ExclusiveVSMEnabled = 'ExclusiveVSMEnabled' in params ? params.ExclusiveVSMEnabled : null;
         this.ExclusiveHSMEnabled = 'ExclusiveHSMEnabled' in params ? params.ExclusiveHSMEnabled : null;
+        this.SubscriptionInfo = 'SubscriptionInfo' in params ? params.SubscriptionInfo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

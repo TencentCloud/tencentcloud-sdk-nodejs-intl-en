@@ -12899,6 +12899,12 @@ class AddVpcCniSubnetsRequest extends  AbstractModel {
          */
         this.VpcId = null;
 
+        /**
+         * Whether to skip adding the VPC IP range to `NonMasqueradeCIDRs` field of `ip-masq-agent-config`. Default value: `false`
+         * @type {boolean || null}
+         */
+        this.SkipAddingNonMasqueradeCIDRs = null;
+
     }
 
     /**
@@ -12911,6 +12917,7 @@ class AddVpcCniSubnetsRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SkipAddingNonMasqueradeCIDRs = 'SkipAddingNonMasqueradeCIDRs' in params ? params.SkipAddingNonMasqueradeCIDRs : null;
 
     }
 }
@@ -14376,6 +14383,20 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.Level = null;
 
+        /**
+         * Whether to support auto upgrade of cluster spec level
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.AutoUpgradeClusterLevel = null;
+
+        /**
+         * Cluster billing mode. Valid values: `POSTPAID_BY_HOUR`, `PREPAID`
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ChargeType = null;
+
     }
 
     /**
@@ -14403,6 +14424,8 @@ Note: This field may return `null`, indicating that no valid values can be obtai
             this.ClusterAdvancedSettings = obj;
         }
         this.Level = 'Level' in params ? params.Level : null;
+        this.AutoUpgradeClusterLevel = 'AutoUpgradeClusterLevel' in params ? params.AutoUpgradeClusterLevel : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
 
     }
 }

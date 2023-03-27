@@ -638,6 +638,50 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * DescribeCosRecharges response structure.
+ * @class
+ */
+class DescribeCosRechargesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * See the description of the `CosRechargeInfo` structure.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<CosRechargeInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new CosRechargeInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeShipperTasks response structure.
  * @class
  */
@@ -712,6 +756,41 @@ class CreateMachineGroupResponse extends  AbstractModel {
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Filter
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Field to be filtered
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value to be filtered
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -1637,13 +1716,15 @@ class Tag extends  AbstractModel {
         super();
 
         /**
-         * Tag key
+         * The tag key.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Key = null;
 
         /**
-         * Tag value
+         * The tag value.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Value = null;
@@ -1965,6 +2046,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Describes = null;
 
+        /**
+         * The lifecycle of hot storage when log transitioning is enabled. The value of `hotPeriod` is smaller than that of `Period`.
+The hot storage period is the value of `hotPeriod`, and the cold storage period is the value of `Period` minus the value of `hotPeriod`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.HotPeriod = null;
+
     }
 
     /**
@@ -1997,6 +2086,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Period = 'Period' in params ? params.Period : null;
         this.SubAssumerName = 'SubAssumerName' in params ? params.SubAssumerName : null;
         this.Describes = 'Describes' in params ? params.Describes : null;
+        this.HotPeriod = 'HotPeriod' in params ? params.HotPeriod : null;
 
     }
 }
@@ -3297,6 +3387,48 @@ class SplitPartitionRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCosRecharges request structure.
+ * @class
+ */
+class DescribeCosRechargesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the log topic.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Status. `0`: Created, `1`: Running, `2`: Stopped, `3`: Completed, `4`: Run failed
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+
+    }
+}
+
+/**
  * Machine group information
  * @class
  */
@@ -3484,24 +3616,60 @@ class CloseKafkaConsumerResponse extends  AbstractModel {
 }
 
 /**
- * Metafield index configuration
+ * DescribeMachineGroups request structure.
  * @class
  */
-class RuleTagInfo extends  AbstractModel {
+class DescribeMachineGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Case sensitivity
-         * @type {boolean || null}
+         * <br><li> machineGroupName
+
+Filter by **machine group name**.
+Type: String
+
+Required: no
+
+<br><li> machineGroupId
+
+Filter by **machine group ID**.
+Type: String
+
+Required: no
+
+<br><li> tagKey
+
+Filter by **tag key**.
+
+Type: String
+
+Required: no
+
+<br><li> tag:tagKey
+
+Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
+Type: String
+
+Required: no
+
+
+Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+         * @type {Array.<Filter> || null}
          */
-        this.CaseSensitive = null;
+        this.Filters = null;
 
         /**
-         * Field information in the metafield index configuration
-         * @type {Array.<KeyValueInfo> || null}
+         * Page offset. Default value: 0
+         * @type {number || null}
          */
-        this.KeyValues = null;
+        this.Offset = null;
+
+        /**
+         * Maximum number of entries per page. Default value: 20. Maximum value: 100
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -3512,16 +3680,17 @@ class RuleTagInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
 
-        if (params.KeyValues) {
-            this.KeyValues = new Array();
-            for (let z in params.KeyValues) {
-                let obj = new KeyValueInfo();
-                obj.deserialize(params.KeyValues[z]);
-                this.KeyValues.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3919,60 +4088,67 @@ class CreateTopicRequest extends  AbstractModel {
 }
 
 /**
- * DescribeMachineGroups request structure.
+ * CreateCosRecharge request structure.
  * @class
  */
-class DescribeMachineGroupsRequest extends  AbstractModel {
+class CreateCosRechargeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * <br><li> machineGroupName
-
-Filter by **machine group name**.
-Type: String
-
-Required: no
-
-<br><li> machineGroupId
-
-Filter by **machine group ID**.
-Type: String
-
-Required: no
-
-<br><li> tagKey
-
-Filter by **tag key**.
-
-Type: String
-
-Required: no
-
-<br><li> tag:tagKey
-
-Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
-Type: String
-
-Required: no
-
-
-Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
-         * @type {Array.<Filter> || null}
+         * ID of the log topic.
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.TopicId = null;
 
         /**
-         * Page offset. Default value: 0
-         * @type {number || null}
+         * ID of the logset.
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.LogsetId = null;
 
         /**
-         * Maximum number of entries per page. Default value: 20. Maximum value: 100
-         * @type {number || null}
+         * Shipping task name.
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Name = null;
+
+        /**
+         * COS bucket.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * Region where the COS bucket is located.
+         * @type {string || null}
+         */
+        this.BucketRegion = null;
+
+        /**
+         * The prefix of the folder where COS files are located.
+         * @type {string || null}
+         */
+        this.Prefix = null;
+
+        /**
+         * The type of log collected. `json_log`: JSON logs; `delimiter_log`: separator logs; `minimalist_log`: full text in a single line
+Default value: `minimalist_log`
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * Valid values: "" (default), "gzip", "lzop", "snappy"
+         * @type {string || null}
+         */
+        this.Compress = null;
+
+        /**
+         * Extraction rule. If `ExtractRule` is set, `LogType` must be set.
+         * @type {ExtractRuleInfo || null}
+         */
+        this.ExtractRuleInfo = null;
 
     }
 
@@ -3983,17 +4159,20 @@ Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
         if (!params) {
             return;
         }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.BucketRegion = 'BucketRegion' in params ? params.BucketRegion : null;
+        this.Prefix = 'Prefix' in params ? params.Prefix : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Compress = 'Compress' in params ? params.Compress : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+        if (params.ExtractRuleInfo) {
+            let obj = new ExtractRuleInfo();
+            obj.deserialize(params.ExtractRuleInfo)
+            this.ExtractRuleInfo = obj;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4614,6 +4793,49 @@ class CloseKafkaConsumerRequest extends  AbstractModel {
             return;
         }
         this.FromTopicId = 'FromTopicId' in params ? params.FromTopicId : null;
+
+    }
+}
+
+/**
+ * Metafield index configuration
+ * @class
+ */
+class RuleTagInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Case sensitivity
+         * @type {boolean || null}
+         */
+        this.CaseSensitive = null;
+
+        /**
+         * Field information in the metafield index configuration
+         * @type {Array.<KeyValueInfo> || null}
+         */
+        this.KeyValues = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaseSensitive = 'CaseSensitive' in params ? params.CaseSensitive : null;
+
+        if (params.KeyValues) {
+            this.KeyValues = new Array();
+            for (let z in params.KeyValues) {
+                let obj = new KeyValueInfo();
+                obj.deserialize(params.KeyValues[z]);
+                this.KeyValues.push(obj);
+            }
+        }
 
     }
 }
@@ -5414,7 +5636,7 @@ class CreateShipperResponse extends  AbstractModel {
         super();
 
         /**
-         * Shipping rule ID
+         * Shipping task ID.
          * @type {string || null}
          */
         this.ShipperId = null;
@@ -6631,6 +6853,34 @@ class DescribeMachinesResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyCosRecharge response structure.
+ * @class
+ */
+class ModifyCosRechargeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Format configuration of shipped log content
  * @class
  */
@@ -6995,6 +7245,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.FilenameMode = 'FilenameMode' in params ? params.FilenameMode : null;
+
+    }
+}
+
+/**
+ * CreateCosRecharge response structure.
+ * @class
+ */
+class CreateCosRechargeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8253,6 +8531,55 @@ class DeleteMachineGroupInfoResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyCosRecharge request structure.
+ * @class
+ */
+class ModifyCosRechargeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * COS import configuration ID.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * ID of the log topic.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * COS import task name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+
+    }
+}
+
+/**
  * DescribeLogsets request structure.
  * @class
  */
@@ -8397,24 +8724,118 @@ class DeleteTopicResponse extends  AbstractModel {
 }
 
 /**
- * Filter
+ * COS import configuration information.
  * @class
  */
-class Filter extends  AbstractModel {
+class CosRechargeInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Field to be filtered
+         * COS import configuration ID.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Key = null;
+        this.Id = null;
 
         /**
-         * Value to be filtered
-         * @type {Array.<string> || null}
+         * ID of the log topic.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.Values = null;
+        this.TopicId = null;
+
+        /**
+         * ID of the logset.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * COS import task name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * COS bucket.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * COS bucket region.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BucketRegion = null;
+
+        /**
+         * The prefix of the folder where COS files are located.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Prefix = null;
+
+        /**
+         * The type of log collected. `json_log`: JSON logs; `delimiter_log`: separator logs; `minimalist_log`: full text in a single line
+Default value: `minimalist_log`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * Status. `0`: Created, `1`: Running, `2`: Stopped, `3`: Completed, `4`: Run failed
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Creation time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Update time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Progress in percentage.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Valid values: "" (default), "gzip", "lzop", "snappy"
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Compress = null;
+
+        /**
+         * See the description of the `ExtractRuleInfo` structure.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ExtractRuleInfo || null}
+         */
+        this.ExtractRuleInfo = null;
 
     }
 
@@ -8425,8 +8846,26 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Values = 'Values' in params ? params.Values : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.BucketRegion = 'BucketRegion' in params ? params.BucketRegion : null;
+        this.Prefix = 'Prefix' in params ? params.Prefix : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.Compress = 'Compress' in params ? params.Compress : null;
+
+        if (params.ExtractRuleInfo) {
+            let obj = new ExtractRuleInfo();
+            obj.deserialize(params.ExtractRuleInfo)
+            this.ExtractRuleInfo = obj;
+        }
 
     }
 }
@@ -8609,8 +9048,10 @@ module.exports = {
     ModifyTopicRequest: ModifyTopicRequest,
     DeleteLogsetResponse: DeleteLogsetResponse,
     ParquetKeyInfo: ParquetKeyInfo,
+    DescribeCosRechargesResponse: DescribeCosRechargesResponse,
     DescribeShipperTasksResponse: DescribeShipperTasksResponse,
     CreateMachineGroupResponse: CreateMachineGroupResponse,
+    Filter: Filter,
     DescribeConfigMachineGroupsRequest: DescribeConfigMachineGroupsRequest,
     CreateLogsetRequest: CreateLogsetRequest,
     LogItem: LogItem,
@@ -8661,17 +9102,18 @@ module.exports = {
     FilterRuleInfo: FilterRuleInfo,
     RetryShipperTaskResponse: RetryShipperTaskResponse,
     SplitPartitionRequest: SplitPartitionRequest,
+    DescribeCosRechargesRequest: DescribeCosRechargesRequest,
     MachineGroupInfo: MachineGroupInfo,
     DescribeLogHistogramResponse: DescribeLogHistogramResponse,
     CloseKafkaConsumerResponse: CloseKafkaConsumerResponse,
-    RuleTagInfo: RuleTagInfo,
+    DescribeMachineGroupsRequest: DescribeMachineGroupsRequest,
     CreateIndexRequest: CreateIndexRequest,
     DescribeLogsetsResponse: DescribeLogsetsResponse,
     DeleteConsumerResponse: DeleteConsumerResponse,
     DescribeTopicsRequest: DescribeTopicsRequest,
     GetAlarmLogResponse: GetAlarmLogResponse,
     CreateTopicRequest: CreateTopicRequest,
-    DescribeMachineGroupsRequest: DescribeMachineGroupsRequest,
+    CreateCosRechargeRequest: CreateCosRechargeRequest,
     AlarmTarget: AlarmTarget,
     OpenKafkaConsumerRequest: OpenKafkaConsumerRequest,
     DeleteConfigResponse: DeleteConfigResponse,
@@ -8686,6 +9128,7 @@ module.exports = {
     DeleteConfigRequest: DeleteConfigRequest,
     AnalysisDimensional: AnalysisDimensional,
     CloseKafkaConsumerRequest: CloseKafkaConsumerRequest,
+    RuleTagInfo: RuleTagInfo,
     CreateExportRequest: CreateExportRequest,
     DescribeAlarmNoticesResponse: DescribeAlarmNoticesResponse,
     DescribeMachineGroupsResponse: DescribeMachineGroupsResponse,
@@ -8721,6 +9164,7 @@ module.exports = {
     ModifyConfigResponse: ModifyConfigResponse,
     ModifyAlarmNoticeResponse: ModifyAlarmNoticeResponse,
     DescribeMachinesResponse: DescribeMachinesResponse,
+    ModifyCosRechargeResponse: ModifyCosRechargeResponse,
     ContentInfo: ContentInfo,
     ApplyConfigToMachineGroupResponse: ApplyConfigToMachineGroupResponse,
     DeleteAlarmRequest: DeleteAlarmRequest,
@@ -8728,6 +9172,7 @@ module.exports = {
     MachineGroupTypeInfo: MachineGroupTypeInfo,
     DeleteConfigFromMachineGroupRequest: DeleteConfigFromMachineGroupRequest,
     ShipperInfo: ShipperInfo,
+    CreateCosRechargeResponse: CreateCosRechargeResponse,
     KeyValueInfo: KeyValueInfo,
     AddMachineGroupInfoResponse: AddMachineGroupInfoResponse,
     ModifyMachineGroupRequest: ModifyMachineGroupRequest,
@@ -8752,10 +9197,11 @@ module.exports = {
     DescribeMachineGroupConfigsRequest: DescribeMachineGroupConfigsRequest,
     ModifyLogsetRequest: ModifyLogsetRequest,
     DeleteMachineGroupInfoResponse: DeleteMachineGroupInfoResponse,
+    ModifyCosRechargeRequest: ModifyCosRechargeRequest,
     DescribeLogsetsRequest: DescribeLogsetsRequest,
     ParquetInfo: ParquetInfo,
     DeleteTopicResponse: DeleteTopicResponse,
-    Filter: Filter,
+    CosRechargeInfo: CosRechargeInfo,
     ConsumerContent: ConsumerContent,
     CreateExportResponse: CreateExportResponse,
     KeyRegexInfo: KeyRegexInfo,

@@ -49,19 +49,19 @@ class CreateRoomRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD
+         * 	Resolution. Valid values: 1: SD; 2: HD; 3: FHD
          * @type {number || null}
          */
         this.Resolution = null;
 
         /**
-         * Maximum number of mic-on users (excluding teachers). Value range: [0, 16]	
+         * Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
          * @type {number || null}
          */
         this.MaxMicNumber = null;
 
         /**
-         * The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only. 
+         * The room subtype. Valid values: videodoc: Document + Video; video: Video only.
          * @type {string || null}
          */
         this.SubType = null;
@@ -73,19 +73,19 @@ class CreateRoomRequest extends  AbstractModel {
         this.TeacherId = null;
 
         /**
-         * Whether to automatically turn the mic on when the user enters a room. Valid values: `0`: No (default value); `1`: Yes.
+         * Whether to automatically turn the mic on when the user enters a room. Valid values: 0: No (default value); 1: Yes.
          * @type {number || null}
          */
         this.AutoMic = null;
 
         /**
-         * Whether to enable the high audio quality mode. Valid values: `0`: No (default value); `1`: Yes.
+         * Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
          * @type {number || null}
          */
         this.AudioQuality = null;
 
         /**
-         * Whether to disable auto recording. Valid values: `0`: No (default); `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.
+         * Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
          * @type {number || null}
          */
         this.DisableRecord = null;
@@ -172,29 +172,25 @@ class GetWatermarkResponse extends  AbstractModel {
         super();
 
         /**
-         * The watermark settings for the teacher’s video.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The watermark settings for the teacher’s video. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {WatermarkConfig || null}
          */
         this.TeacherLogo = null;
 
         /**
-         * The watermark settings for the whiteboard.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The watermark settings for the whiteboard. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {WatermarkConfig || null}
          */
         this.BoardLogo = null;
 
         /**
-         * The background image.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The background image. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {BackgroundPictureConfig || null}
          */
         this.BackgroundPicture = null;
 
         /**
-         * The watermark text.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The watermark text. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {TextMarkConfig || null}
          */
         this.Text = null;
@@ -252,13 +248,13 @@ class BatchDeleteRecordRequest extends  AbstractModel {
         super();
 
         /**
-         * The room IDs.	
+         * The room IDs.
          * @type {Array.<number> || null}
          */
         this.RoomIds = null;
 
         /**
-         * The SDKAppID assigned by LCIC.	
+         * The SDKAppID assigned by LCIC.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -460,18 +456,13 @@ class DescribeDocumentsByRoomRequest extends  AbstractModel {
         this.Page = null;
 
         /**
-         * The maximum number of records to return per page. The maximum value can be `1000`. The default value is `100`.
+         * The maximum number of records to return per page. The maximum value can be 1000. The default value is 100.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * The document access type.
-[0]: The private documents of the owner.
-[1]: The public documents of the owner.
-[0,1]: The private and public documents of the owner.
-[2]: The private and public documents of all users (including the owner).
-Default value: [2].
+         * The document access type. [0]: The private documents of the owner. [1]: The public documents of the owner. [0,1]: The private and public documents of the owner. [2]: The private and public documents of all users (including the owner). Default value: [2].
          * @type {Array.<number> || null}
          */
         this.Permission = null;
@@ -699,8 +690,7 @@ class BatchRegisterResponse extends  AbstractModel {
         super();
 
         /**
-         * The information of the successfully registered users.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The information of the successfully registered users. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<BatchUserInfo> || null}
          */
         this.Users = null;
@@ -820,7 +810,7 @@ class SetWatermarkRequest extends  AbstractModel {
         super();
 
         /**
-         * The SDKAppID assigned by LCIC.	
+         * The SDKAppID assigned by LCIC.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -844,49 +834,49 @@ class SetWatermarkRequest extends  AbstractModel {
         this.VideoUrl = null;
 
         /**
-         * The width of the whiteboard’s watermark, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is `0`.
+         * The width of the whiteboard’s watermark, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is 0.
          * @type {number || null}
          */
         this.BoardW = null;
 
         /**
-         * The height of the whiteboard’s watermark, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is `0`.
+         * The height of the whiteboard’s watermark, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is 0.
          * @type {number || null}
          */
         this.BoardH = null;
 
         /**
-         * The horizontal offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
+         * The horizontal offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
          * @type {number || null}
          */
         this.BoardX = null;
 
         /**
-         * The vertical offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle vertically. Value range: 0-100.
+         * The vertical offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100.
          * @type {number || null}
          */
         this.BoardY = null;
 
         /**
-         * The width of the watermark for the teacher’s video, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is `0`.
+         * The width of the watermark for the teacher’s video, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is 0.
          * @type {number || null}
          */
         this.TeacherW = null;
 
         /**
-         * The height of the watermark for the teacher’s video, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is `0`.
+         * The height of the watermark for the teacher’s video, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is 0.
          * @type {number || null}
          */
         this.TeacherH = null;
 
         /**
-         * The horizontal offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
+         * The horizontal offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
          * @type {number || null}
          */
         this.TeacherX = null;
 
         /**
-         * The vertical offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle vertically. Value range: 0-100.
+         * The vertical offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100.
          * @type {number || null}
          */
         this.TeacherY = null;
@@ -1077,23 +1067,19 @@ class DescribeGroupResponse extends  AbstractModel {
         this.GroupName = null;
 
         /**
-         * The user ID of the group’s teacher.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user ID of the group’s teacher. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeacherId = null;
 
         /**
-         * The group type.
-`0`: Ordinary group.
-`1`: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned.
+         * The group type. 0: Ordinary group. 1: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned.
          * @type {number || null}
          */
         this.GroupType = null;
 
         /**
-         * The IDs of the sub-groups.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The IDs of the sub-groups. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.SubGroupIds = null;
@@ -1153,6 +1139,7 @@ class SetAppCustomContentResponse extends  AbstractModel {
 
 /**
  * The information of the users to register.
+Used by actions: BatchRegister.
  * @class
  */
 class BatchUserRequest extends  AbstractModel {
@@ -1160,33 +1147,25 @@ class BatchUserRequest extends  AbstractModel {
         super();
 
         /**
-         * The SDKAppID assigned by LCIC.
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The SDKAppID assigned by LCIC.  Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * The username.
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The username.  Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * The user’s ID in your system, which must be unique across the same application.
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user’s ID in your system, which must be unique across the same application.  Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginId = null;
 
         /**
-         * The user’s profile photo.
-
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user’s profile photo.  Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Avatar = null;
@@ -1397,19 +1376,19 @@ class DescribeGroupListRequest extends  AbstractModel {
         this.Page = null;
 
         /**
-         * The maximum number of records per page. The value of this parameter cannot exceed `1000` and is `20` by default.
+         * The maximum number of records per page. The value of this parameter cannot exceed 1000 and is 20 by default.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * The user ID of the teacher, which is used as the filter. This parameter and `MemberId` are mutually exclusive. If both are specified, only this parameter will take effect.
+         * The user ID of the teacher, which is used as the filter. This parameter and MemberId are mutually exclusive. If both are specified, only this parameter will take effect.
          * @type {string || null}
          */
         this.TeacherId = null;
 
         /**
-         * The user ID of a member, which is used as the filter. This parameter and `TeacherId` are mutually exclusive.
+         * The user ID of a member, which is used as the filter. This parameter and TeacherId are mutually exclusive.
          * @type {string || null}
          */
         this.MemberId = null;
@@ -1433,7 +1412,57 @@ class DescribeGroupListRequest extends  AbstractModel {
 }
 
 /**
+ * GetRoomMessage request structure.
+ * @class
+ */
+class GetRoomMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The SDKAppID assigned by LCIC.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The room ID.
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * The starting message sequence. Messages before this sequence will be returned (not including the message whose sequence is `seq`).
+         * @type {number || null}
+         */
+        this.Seq = null;
+
+        /**
+         * The maximum number of messages to return. The value of this parameter cannot exceed the maximum message count allowed by your package.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.Seq = 'Seq' in params ? params.Seq : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * Document Information.
+Used by actions: DescribeDocumentsByRoom.
  * @class
  */
 class DocumentInfo extends  AbstractModel {
@@ -1441,99 +1470,85 @@ class DocumentInfo extends  AbstractModel {
         super();
 
         /**
-         * The document ID.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The document ID. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DocumentId = null;
 
         /**
-         * The document’s original URL.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The document’s original URL. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DocumentUrl = null;
 
         /**
-         * The document title.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The document title. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DocumentName = null;
 
         /**
-         * The user ID of the document’s owner.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user ID of the document’s owner. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Owner = null;
 
         /**
-         * The application ID.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The application ID. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * The document access type. `0`: Private; `1`: Public.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The document access type. 0: Private; 1: Public. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Permission = null;
 
         /**
-         * The transcoding result. If the file is not transcoded, this parameter will be empty. If it is successfully transcoded, this parameter will be the URL of the transcoded file. If transcoding fails, this parameter will indicate the error code.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The transcoding result. If the file is not transcoded, this parameter will be empty. If it is successfully transcoded, this parameter will be the URL of the transcoded file. If transcoding fails, this parameter will indicate the error code. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TranscodeResult = null;
 
         /**
-         * The transcoding type.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The transcoding type. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TranscodeType = null;
 
         /**
-         * The transcoding progress. Value range: 0-100.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The transcoding progress. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TranscodeProgress = null;
 
         /**
-         * The transcoding status. `0`: The file is not transcoded. `1`: The file is being transcoded. `2`: Transcoding failed. `3`: Transcoding is successful.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The transcoding status. 0: The file is not transcoded. 1: The file is being transcoded. 2: Transcoding failed. 3: Transcoding is successful. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TranscodeState = null;
 
         /**
-         * The error message for failed transcoding.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The error message for failed transcoding. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TranscodeInfo = null;
 
         /**
-         * The document type.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The document type. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DocumentType = null;
 
         /**
-         * The document size (bytes).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The document size (bytes). Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DocumentSize = null;
 
         /**
-         * The time (Unix timestamp) when the document was last updated.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The time (Unix timestamp) when the document was last updated. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.UpdateTime = null;
@@ -1602,7 +1617,7 @@ class DeleteRecordRequest extends  AbstractModel {
         super();
 
         /**
-         * The room ID.	
+         * The room ID.
          * @type {number || null}
          */
         this.RoomId = null;
@@ -1693,6 +1708,7 @@ class CreateGroupWithSubGroupResponse extends  AbstractModel {
 
 /**
  * The information of the groups queried.
+Used by actions: DescribeGroupList.
  * @class
  */
 class GroupInfo extends  AbstractModel {
@@ -1700,38 +1716,31 @@ class GroupInfo extends  AbstractModel {
         super();
 
         /**
-         * Group ID
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Group ID Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * The group name.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The group name. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * The user ID of the teacher.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user ID of the teacher. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeacherId = null;
 
         /**
-         * The group type. 
-`0`: Ordinary group. 
-`1`: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The group type. 0: Ordinary group. 1: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.GroupType = null;
 
         /**
-         * The IDs of the sub-groups.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The IDs of the sub-groups. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubGroupIds = null;
@@ -1817,7 +1826,7 @@ class DescribeDocumentResponse extends  AbstractModel {
         this.TranscodeProgress = null;
 
         /**
-         * The transcoding status. `0`: The file is not transcoded. `1`: The file is being transcoded. `2`: Transcoding failed. `3`: Transcoding is successful.
+         * The transcoding status. 0: The file is not transcoded. 1: The file is being transcoded. 2: Transcoding failed. 3: Transcoding is successful.
          * @type {number || null}
          */
         this.TranscodeState = null;
@@ -1923,8 +1932,7 @@ class DescribeGroupMemberListResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * The user IDs of the members.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user IDs of the members. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.MemberIds = null;
@@ -1952,10 +1960,10 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * SetWatermark response structure.
+ * DeleteRecord response structure.
  * @class
  */
-class SetWatermarkResponse extends  AbstractModel {
+class DeleteRecordResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2043,13 +2051,13 @@ class DescribeGroupMemberListRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * The page to return records from. The default value is `1`.
+         * The page to return records from. The default value is 1.
          * @type {number || null}
          */
         this.Page = null;
 
         /**
-         * The maximum number of records per page. The value of this parameter cannot exceed `1000` and is `20` by default.
+         * The maximum number of records per page. The value of this parameter cannot exceed 1000 and is 20 by default.
          * @type {number || null}
          */
         this.Limit = null;
@@ -2073,6 +2081,7 @@ class DescribeGroupMemberListRequest extends  AbstractModel {
 
 /**
  * The user information.
+Used by actions: DescribeSdkAppIdUsers.
  * @class
  */
 class UserInfo extends  AbstractModel {
@@ -2080,29 +2089,25 @@ class UserInfo extends  AbstractModel {
         super();
 
         /**
-         * The application ID.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The application ID. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * The user ID.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user ID. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * The username.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The username. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * The URL of profile photo.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The URL of profile photo. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Avatar = null;
@@ -2217,8 +2222,7 @@ class BatchDeleteRecordResponse extends  AbstractModel {
         super();
 
         /**
-         * The IDs of the rooms whose recordings are deleted.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The IDs of the rooms whose recordings are deleted. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
         this.RoomIds = null;
@@ -2246,6 +2250,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
 /**
  * Watermark settings.
+Used by actions: GetWatermark.
  * @class
  */
 class WatermarkConfig extends  AbstractModel {
@@ -2253,36 +2258,31 @@ class WatermarkConfig extends  AbstractModel {
         super();
 
         /**
-         * The URL of the watermark image.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The URL of the watermark image. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * The watermark width, which is expressed as a percentage of the video width.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The watermark width, which is expressed as a percentage of the video width. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Width = null;
 
         /**
-         * The watermark height, which is expressed as a percentage of the video height.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The watermark height, which is expressed as a percentage of the video height. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * The horizontal offset of the watermark, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle horizontally. Value range: 0-100.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The horizontal offset of the watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.LocationX = null;
 
         /**
-         * The vertical offset of the watermark, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle vertically. Value range: 0-100.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The vertical offset of the watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.LocationY = null;
@@ -2546,7 +2546,51 @@ class CreateDocumentRequest extends  AbstractModel {
 }
 
 /**
+ * GetRoomMessage response structure.
+ * @class
+ */
+class GetRoomMessageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The message list.
+         * @type {Array.<MessageList> || null}
+         */
+        this.Messages = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Messages) {
+            this.Messages = new Array();
+            for (let z in params.Messages) {
+                let obj = new MessageList();
+                obj.deserialize(params.Messages[z]);
+                this.Messages.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The information of registered users.
+Used by actions: BatchRegister.
  * @class
  */
 class BatchUserInfo extends  AbstractModel {
@@ -2561,15 +2605,13 @@ class BatchUserInfo extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * The user ID.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user ID. Note: This field may return null, indicating that no valid values can be obtained
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * The user’s ID in your system. If the same request parameter is not specified, the value of this parameter will be the same as `UserId`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user’s ID in your system. If the same request parameter is not specified, the value of this parameter will be the same as UserId. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginId = null;
@@ -2671,65 +2713,61 @@ class DescribeRoomResponse extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * Resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD	
+         * Resolution. Valid values: 1: SD; 2: HD; 3: FHD
          * @type {number || null}
          */
         this.Resolution = null;
 
         /**
-         * Maximum number of mic-on users (excluding teachers). Value range: [0, 16]	
+         * Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
          * @type {number || null}
          */
         this.MaxMicNumber = null;
 
         /**
-         * Whether to automatically turn the mic on when the user enters a room. Valid values: `0`: No (default value); `1`: Yes.	
+         * Whether to automatically turn the mic on when the user enters a room. Valid values: 0: No (default value); 1: Yes.
          * @type {number || null}
          */
         this.AutoMic = null;
 
         /**
-         * Whether to enable the high audio quality mode. Valid values: `0`: No (default value); `1`: Yes.	
+         * Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
          * @type {number || null}
          */
         this.AudioQuality = null;
 
         /**
-         * The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only.
+         * The room subtype. Valid values: videodoc: Document + Video; video: Video only.
          * @type {string || null}
          */
         this.SubType = null;
 
         /**
-         * Whether to disable auto recording. Valid values: `0`: No (default); `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.	
+         * Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
          * @type {number || null}
          */
         this.DisableRecord = null;
 
         /**
-         * Assistant ID list	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Assistant ID list Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Assistants = null;
 
         /**
-         * Recording URL. This parameter exists only after a room is ended.	
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Recording URL. This parameter exists only after a room is ended. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RecordUrl = null;
 
         /**
-         * The class status. `0`: The class has not started. `1`: The class has started. `2`: The class ended. `3`: The class expired.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The class status. 0: The class has not started. 1: The class has started. 2: The class ended. 3: The class expired. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * 
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.GroupId = null;
@@ -2790,7 +2828,7 @@ class DescribeCurrentMemberListRequest extends  AbstractModel {
         this.Page = null;
 
         /**
-         * The maximum number of records per page. The value of this parameter cannot exceed `1000`.
+         * The maximum number of records per page. The value of this parameter cannot exceed 1000.
          * @type {number || null}
          */
         this.Limit = null;
@@ -2826,8 +2864,7 @@ class DescribeSdkAppIdUsersResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * The information of the users.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The information of the users. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<UserInfo> || null}
          */
         this.Users = null;
@@ -2895,27 +2932,25 @@ class DescribeRoomStatisticsResponse extends  AbstractModel {
         this.MemberRecords = null;
 
         /**
-         * The actual start time of the room, in Unix timestamp, accurate to seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The actual start time of the room, in Unix timestamp, accurate to seconds. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RealStartTime = null;
 
         /**
-         * The actual end time of the room, in Unix timestamp, accurate to seconds.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The actual end time of the room, in Unix timestamp, accurate to seconds. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RealEndTime = null;
 
         /**
-         * The total number of room messages.
+         * The total message count of the room.
          * @type {number || null}
          */
         this.MessageCount = null;
 
         /**
-         * The total number of mics in the room.
+         * The total number of mic-on students in the room.
          * @type {number || null}
          */
         this.MicCount = null;
@@ -2985,6 +3020,67 @@ class DeleteDocumentRequest extends  AbstractModel {
 }
 
 /**
+ * The list of historical messages.
+ * @class
+ */
+class MessageList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The message timestamp.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * The sender.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FromAccount = null;
+
+        /**
+         * The message sequence, which is unique across a class. The earlier a message is sent, the lower the sequence.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Seq = null;
+
+        /**
+         * The message content.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MessageItem> || null}
+         */
+        this.MessageBody = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.FromAccount = 'FromAccount' in params ? params.FromAccount : null;
+        this.Seq = 'Seq' in params ? params.Seq : null;
+
+        if (params.MessageBody) {
+            this.MessageBody = new Array();
+            for (let z in params.MessageBody) {
+                let obj = new MessageItem();
+                obj.deserialize(params.MessageBody[z]);
+                this.MessageBody.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteGroupMember request structure.
  * @class
  */
@@ -3035,7 +3131,7 @@ class GetWatermarkRequest extends  AbstractModel {
         super();
 
         /**
-         * The SDKAppID assigned by LCIC.	
+         * The SDKAppID assigned by LCIC.
          * @type {number || null}
          */
         this.SdkAppId = null;
@@ -3056,6 +3152,7 @@ class GetWatermarkRequest extends  AbstractModel {
 
 /**
  * Member record information
+Used by actions: DescribeCurrentMemberList, DescribeRoomStatistics.
  * @class
  */
 class MemberRecord extends  AbstractModel {
@@ -3141,19 +3238,19 @@ class MemberRecord extends  AbstractModel {
         this.Location = null;
 
         /**
-         * The user’s device type. `0`: Unknown; `1`: Windows; `2`: macOS; `3`: Android; `4`: iOS; `5`: Web; `6`: Mobile webpage; `7`: Weixin Mini Program.
+         * The user’s device type. 0: Unknown; 1: Windows; 2: macOS; 3: Android; 4: iOS; 5: Web; 6: Mobile webpage; 7: Weixin Mini Program.
          * @type {number || null}
          */
         this.Device = null;
 
         /**
-         * The number of times each member mics.
+         * The number of times a user turned their mic on.
          * @type {number || null}
          */
         this.PerMemberMicCount = null;
 
         /**
-         * The number of messages sent by each member.
+         * The number of messages sent by a user.
          * @type {number || null}
          */
         this.PerMemberMessageCount = null;
@@ -3357,6 +3454,7 @@ class RegisterUserRequest extends  AbstractModel {
 
 /**
  * The information of the groups to create.
+Used by actions: BatchCreateGroupWithMembers.
  * @class
  */
 class GroupBaseInfo extends  AbstractModel {
@@ -3364,15 +3462,13 @@ class GroupBaseInfo extends  AbstractModel {
         super();
 
         /**
-         * The group names.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The group names. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * The user ID of the teacher.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user ID of the teacher. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeacherId = null;
@@ -3421,10 +3517,10 @@ class LoginUserRequest extends  AbstractModel {
 }
 
 /**
- * DeleteRecord response structure.
+ * SetWatermark response structure.
  * @class
  */
-class DeleteRecordResponse extends  AbstractModel {
+class SetWatermarkResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3450,6 +3546,7 @@ class DeleteRecordResponse extends  AbstractModel {
 
 /**
  * The information of the room to create.
+Used by actions: BatchCreateRoom.
  * @class
  */
 class RoomInfo extends  AbstractModel {
@@ -3457,36 +3554,31 @@ class RoomInfo extends  AbstractModel {
         super();
 
         /**
-         * The room name.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The room name. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * The room start time (Unix timestamp).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The room start time (Unix timestamp). Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
-         * The room end time (Unix timestamp).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The room end time (Unix timestamp). Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * The resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The resolution. Valid values: 1: SD; 2: HD; 3: FHD. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Resolution = null;
 
         /**
-         * The maximum number of mic-on users (excluding the teacher). Value range: 0-16.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The maximum number of mic-on users (excluding the teacher). Value range: 0-16. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.MaxMicNumber = null;
@@ -3499,71 +3591,61 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SubType = null;
 
         /**
-         * The user ID of the teacher. User IDs are returned by the user registration APIs.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user ID of the teacher. User IDs are returned by the user registration APIs. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TeacherId = null;
 
         /**
-         * Whether to automatically turn the mic on when a user enters the room. Valid values: `0`: No (default value); `1`: Yes.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to automatically turn the mic on when a user enters the room. Valid values: 0: No (default value); 1: Yes. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AutoMic = null;
 
         /**
-         * Whether to disconnect communication after audio/video permissions are revoked. Valid values: `0`: Yes (default value); `1`: No.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to disconnect communication after audio/video permissions are revoked. Valid values: 0: Yes (default value); 1: No. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.TurnOffMic = null;
 
         /**
-         * Whether to enable the high audio quality mode. Valid values: `0`: No (default value); `1`: Yes.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AudioQuality = null;
 
         /**
-         * Whether to disable auto recording. Valid values: `0`: No (default); `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.DisableRecord = null;
 
         /**
-         * The user IDs of the teacher assistants. User IDs are returned by the user registration APIs.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The user IDs of the teacher assistants. User IDs are returned by the user registration APIs. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.Assistants = null;
 
         /**
-         * The number of RTC users.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The number of RTC users. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RTCAudienceNumber = null;
 
         /**
-         * The audience type.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The audience type. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AudienceType = null;
 
         /**
-         * The recording layout.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The recording layout. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.RecordLayout = null;
 
         /**
-         * The ID of the group to bind.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The ID of the group to bind. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.GroupId = null;
@@ -3606,8 +3688,7 @@ class DescribeDocumentsByRoomResponse extends  AbstractModel {
         super();
 
         /**
-         * The information of the documents.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The information of the documents. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<DocumentInfo> || null}
          */
         this.Documents = null;
@@ -3735,7 +3816,7 @@ class ModifyRoomRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * The resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD.
+         * The resolution. Valid values: 1: SD; 2: HD; 3: FHD.
          * @type {number || null}
          */
         this.Resolution = null;
@@ -3747,25 +3828,25 @@ class ModifyRoomRequest extends  AbstractModel {
         this.MaxMicNumber = null;
 
         /**
-         * Whether to automatically turn the mic on when a user enters the room. Valid values: `0`: No (default value); `1`: Yes.
+         * Whether to automatically turn the mic on when a user enters the room. Valid values: 0: No (default value); 1: Yes.
          * @type {number || null}
          */
         this.AutoMic = null;
 
         /**
-         * Whether to enable the high audio quality mode. Valid values: `0`: No (default value); `1`: Yes.
+         * Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
          * @type {number || null}
          */
         this.AudioQuality = null;
 
         /**
-         * The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only; `coteaching`: Dual-teacher.
+         * The room subtype. Valid values: videodoc: Document + Video; video: Video only; coteaching: Dual-teacher.
          * @type {string || null}
          */
         this.SubType = null;
 
         /**
-         * Whether to disable auto recording. Valid values: `0`: No (default); `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.
+         * Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
          * @type {number || null}
          */
         this.DisableRecord = null;
@@ -3853,6 +3934,7 @@ class LoginOriginIdResponse extends  AbstractModel {
 
 /**
  * Custom application content
+Used by actions: SetAppCustomContent.
  * @class
  */
 class AppCustomContent extends  AbstractModel {
@@ -3950,13 +4032,13 @@ class DescribeSdkAppIdUsersRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * The page to return records from. The default value is `1`.
+         * The page to return records from. The default value is 1.
          * @type {number || null}
          */
         this.Page = null;
 
         /**
-         * The maximum number of records to return per page. The default value is `20`.
+         * The maximum number of records to return per page. The default value is 20.
          * @type {number || null}
          */
         this.Limit = null;
@@ -3973,6 +4055,51 @@ class DescribeSdkAppIdUsersRequest extends  AbstractModel {
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.Page = 'Page' in params ? params.Page : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * The information of a message.
+ * @class
+ */
+class MessageItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The message type. `0`: Text; `1`: Image.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessageType = null;
+
+        /**
+         * The text. This parameter is valid if `MessageType` is `0`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TextMessage = null;
+
+        /**
+         * The image URL. This parameter is valid if `MessageType` is `1`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageType = 'MessageType' in params ? params.MessageType : null;
+        this.TextMessage = 'TextMessage' in params ? params.TextMessage : null;
+        this.ImageMessage = 'ImageMessage' in params ? params.ImageMessage : null;
 
     }
 }
@@ -4253,8 +4380,7 @@ class DescribeGroupListResponse extends  AbstractModel {
         this.Total = null;
 
         /**
-         * The information of the groups.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The information of the groups. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<GroupInfo> || null}
          */
         this.GroupInfos = null;
@@ -4354,6 +4480,7 @@ class AddGroupMemberResponse extends  AbstractModel {
 
 /**
  * The watermark text.
+Used by actions: GetWatermark.
  * @class
  */
 class TextMarkConfig extends  AbstractModel {
@@ -4361,15 +4488,13 @@ class TextMarkConfig extends  AbstractModel {
         super();
 
         /**
-         * The watermark text.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The watermark text. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Text = null;
 
         /**
-         * The watermark text color.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The watermark text color. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Color = null;
@@ -4421,6 +4546,7 @@ module.exports = {
     DeleteGroupRequest: DeleteGroupRequest,
     AddGroupMemberRequest: AddGroupMemberRequest,
     DescribeGroupListRequest: DescribeGroupListRequest,
+    GetRoomMessageRequest: GetRoomMessageRequest,
     DocumentInfo: DocumentInfo,
     DeleteDocumentResponse: DeleteDocumentResponse,
     DeleteRecordRequest: DeleteRecordRequest,
@@ -4430,7 +4556,7 @@ module.exports = {
     DescribeDocumentResponse: DescribeDocumentResponse,
     DeleteGroupMemberResponse: DeleteGroupMemberResponse,
     DescribeGroupMemberListResponse: DescribeGroupMemberListResponse,
-    SetWatermarkResponse: SetWatermarkResponse,
+    DeleteRecordResponse: DeleteRecordResponse,
     BatchCreateRoomRequest: BatchCreateRoomRequest,
     DescribeGroupMemberListRequest: DescribeGroupMemberListRequest,
     UserInfo: UserInfo,
@@ -4443,6 +4569,7 @@ module.exports = {
     BatchCreateGroupWithMembersRequest: BatchCreateGroupWithMembersRequest,
     BindDocumentToRoomRequest: BindDocumentToRoomRequest,
     CreateDocumentRequest: CreateDocumentRequest,
+    GetRoomMessageResponse: GetRoomMessageResponse,
     BatchUserInfo: BatchUserInfo,
     BatchAddGroupMemberRequest: BatchAddGroupMemberRequest,
     DescribeRoomResponse: DescribeRoomResponse,
@@ -4450,6 +4577,7 @@ module.exports = {
     DescribeSdkAppIdUsersResponse: DescribeSdkAppIdUsersResponse,
     DescribeRoomStatisticsResponse: DescribeRoomStatisticsResponse,
     DeleteDocumentRequest: DeleteDocumentRequest,
+    MessageList: MessageList,
     DeleteGroupMemberRequest: DeleteGroupMemberRequest,
     GetWatermarkRequest: GetWatermarkRequest,
     MemberRecord: MemberRecord,
@@ -4459,7 +4587,7 @@ module.exports = {
     RegisterUserRequest: RegisterUserRequest,
     GroupBaseInfo: GroupBaseInfo,
     LoginUserRequest: LoginUserRequest,
-    DeleteRecordResponse: DeleteRecordResponse,
+    SetWatermarkResponse: SetWatermarkResponse,
     RoomInfo: RoomInfo,
     DescribeDocumentsByRoomResponse: DescribeDocumentsByRoomResponse,
     DescribeRoomStatisticsRequest: DescribeRoomStatisticsRequest,
@@ -4468,6 +4596,7 @@ module.exports = {
     AppCustomContent: AppCustomContent,
     DeleteGroupResponse: DeleteGroupResponse,
     DescribeSdkAppIdUsersRequest: DescribeSdkAppIdUsersRequest,
+    MessageItem: MessageItem,
     CreateSupervisorResponse: CreateSupervisorResponse,
     DeleteRoomRequest: DeleteRoomRequest,
     RegisterUserResponse: RegisterUserResponse,

@@ -1360,6 +1360,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.RewriteType = null;
 
+        /**
+         * CLB domain name
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
     }
 
     /**
@@ -1397,6 +1404,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Mixed = 'Mixed' in params ? params.Mixed : null;
         this.RewriteType = 'RewriteType' in params ? params.RewriteType : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -3328,6 +3336,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.PortMappingItemList = null;
 
+        /**
+         * CLB domain name
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExternalDomain = null;
+
     }
 
     /**
@@ -3355,6 +3370,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
                 this.PortMappingItemList.push(obj);
             }
         }
+        this.ExternalDomain = 'ExternalDomain' in params ? params.ExternalDomain : null;
 
     }
 }
@@ -8980,6 +8996,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.AllIpDone = null;
 
+        /**
+         * CLB domain name
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExternalDomain = null;
+
     }
 
     /**
@@ -9021,6 +9044,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.EnableRegistryNextDeploy = 'EnableRegistryNextDeploy' in params ? params.EnableRegistryNextDeploy : null;
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.AllIpDone = 'AllIpDone' in params ? params.AllIpDone : null;
+        this.ExternalDomain = 'ExternalDomain' in params ? params.ExternalDomain : null;
 
     }
 }

@@ -27,8 +27,10 @@ const DeleteShipperRequest = models.DeleteShipperRequest;
 const ModifyTopicRequest = models.ModifyTopicRequest;
 const DeleteLogsetResponse = models.DeleteLogsetResponse;
 const ParquetKeyInfo = models.ParquetKeyInfo;
+const DescribeCosRechargesResponse = models.DescribeCosRechargesResponse;
 const DescribeShipperTasksResponse = models.DescribeShipperTasksResponse;
 const CreateMachineGroupResponse = models.CreateMachineGroupResponse;
+const Filter = models.Filter;
 const DescribeConfigMachineGroupsRequest = models.DescribeConfigMachineGroupsRequest;
 const CreateLogsetRequest = models.CreateLogsetRequest;
 const LogItem = models.LogItem;
@@ -79,17 +81,18 @@ const ExcludePathInfo = models.ExcludePathInfo;
 const FilterRuleInfo = models.FilterRuleInfo;
 const RetryShipperTaskResponse = models.RetryShipperTaskResponse;
 const SplitPartitionRequest = models.SplitPartitionRequest;
+const DescribeCosRechargesRequest = models.DescribeCosRechargesRequest;
 const MachineGroupInfo = models.MachineGroupInfo;
 const DescribeLogHistogramResponse = models.DescribeLogHistogramResponse;
 const CloseKafkaConsumerResponse = models.CloseKafkaConsumerResponse;
-const RuleTagInfo = models.RuleTagInfo;
+const DescribeMachineGroupsRequest = models.DescribeMachineGroupsRequest;
 const CreateIndexRequest = models.CreateIndexRequest;
 const DescribeLogsetsResponse = models.DescribeLogsetsResponse;
 const DeleteConsumerResponse = models.DeleteConsumerResponse;
 const DescribeTopicsRequest = models.DescribeTopicsRequest;
 const GetAlarmLogResponse = models.GetAlarmLogResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
-const DescribeMachineGroupsRequest = models.DescribeMachineGroupsRequest;
+const CreateCosRechargeRequest = models.CreateCosRechargeRequest;
 const AlarmTarget = models.AlarmTarget;
 const OpenKafkaConsumerRequest = models.OpenKafkaConsumerRequest;
 const DeleteConfigResponse = models.DeleteConfigResponse;
@@ -104,6 +107,7 @@ const LogsetInfo = models.LogsetInfo;
 const DeleteConfigRequest = models.DeleteConfigRequest;
 const AnalysisDimensional = models.AnalysisDimensional;
 const CloseKafkaConsumerRequest = models.CloseKafkaConsumerRequest;
+const RuleTagInfo = models.RuleTagInfo;
 const CreateExportRequest = models.CreateExportRequest;
 const DescribeAlarmNoticesResponse = models.DescribeAlarmNoticesResponse;
 const DescribeMachineGroupsResponse = models.DescribeMachineGroupsResponse;
@@ -139,6 +143,7 @@ const AlarmNotice = models.AlarmNotice;
 const ModifyConfigResponse = models.ModifyConfigResponse;
 const ModifyAlarmNoticeResponse = models.ModifyAlarmNoticeResponse;
 const DescribeMachinesResponse = models.DescribeMachinesResponse;
+const ModifyCosRechargeResponse = models.ModifyCosRechargeResponse;
 const ContentInfo = models.ContentInfo;
 const ApplyConfigToMachineGroupResponse = models.ApplyConfigToMachineGroupResponse;
 const DeleteAlarmRequest = models.DeleteAlarmRequest;
@@ -146,6 +151,7 @@ const CreateConfigResponse = models.CreateConfigResponse;
 const MachineGroupTypeInfo = models.MachineGroupTypeInfo;
 const DeleteConfigFromMachineGroupRequest = models.DeleteConfigFromMachineGroupRequest;
 const ShipperInfo = models.ShipperInfo;
+const CreateCosRechargeResponse = models.CreateCosRechargeResponse;
 const KeyValueInfo = models.KeyValueInfo;
 const AddMachineGroupInfoResponse = models.AddMachineGroupInfoResponse;
 const ModifyMachineGroupRequest = models.ModifyMachineGroupRequest;
@@ -170,10 +176,11 @@ const HistogramInfo = models.HistogramInfo;
 const DescribeMachineGroupConfigsRequest = models.DescribeMachineGroupConfigsRequest;
 const ModifyLogsetRequest = models.ModifyLogsetRequest;
 const DeleteMachineGroupInfoResponse = models.DeleteMachineGroupInfoResponse;
+const ModifyCosRechargeRequest = models.ModifyCosRechargeRequest;
 const DescribeLogsetsRequest = models.DescribeLogsetsRequest;
 const ParquetInfo = models.ParquetInfo;
 const DeleteTopicResponse = models.DeleteTopicResponse;
-const Filter = models.Filter;
+const CosRechargeInfo = models.CosRechargeInfo;
 const ConsumerContent = models.ConsumerContent;
 const CreateExportResponse = models.CreateExportResponse;
 const KeyRegexInfo = models.KeyRegexInfo;
@@ -246,15 +253,14 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the index configuration. It is subject to the default request frequency limit, and the number of concurrent requests to the same log topic cannot exceed 1, i.e., the index configuration of only one log topic can be modified at a time.
-
-     * @param {ModifyIndexRequest} req
-     * @param {function(string, ModifyIndexResponse):void} cb
+     * This API is used to get COS import configuration.
+     * @param {DescribeCosRechargesRequest} req
+     * @param {function(string, DescribeCosRechargesResponse):void} cb
      * @public
      */
-    ModifyIndex(req, cb) {
-        let resp = new ModifyIndexResponse();
-        this.request("ModifyIndex", req, resp, cb);
+    DescribeCosRecharges(req, cb) {
+        let resp = new DescribeCosRechargesResponse();
+        this.request("DescribeCosRecharges", req, resp, cb);
     }
 
     /**
@@ -288,6 +294,18 @@ class ClsClient extends AbstractClient {
     DescribeExports(req, cb) {
         let resp = new DescribeExportsResponse();
         this.request("DescribeExports", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the index configuration. It is subject to the default request frequency limit, and the number of concurrent requests to the same log topic cannot exceed 1, i.e., the index configuration of only one log topic can be modified at a time.
+
+     * @param {ModifyIndexRequest} req
+     * @param {function(string, ModifyIndexResponse):void} cb
+     * @public
+     */
+    ModifyIndex(req, cb) {
+        let resp = new ModifyIndexResponse();
+        this.request("ModifyIndex", req, resp, cb);
     }
 
     /**
@@ -335,7 +353,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a shipping rule. Note: To use this API, you need to check whether you have configured the role and permission for COS shipping tasks. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
+     * This API is used to create a task to ship to COS. Note: To use this API, you need to check whether you have configured the role and permission for shipping to COS. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
      * @param {CreateShipperRequest} req
      * @param {function(string, CreateShipperResponse):void} cb
      * @public
@@ -401,7 +419,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     *  This API is used to get the list of log topics and supports pagination.
+     * This API is used to get the list of log topics and supports pagination.
      * @param {DescribeTopicsRequest} req
      * @param {function(string, DescribeTopicsResponse):void} cb
      * @public
@@ -423,7 +441,7 @@ class ClsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of shipping rules.
+     * This API is used to get the configuration of the task of shipping to COS.
      * @param {DescribeShippersRequest} req
      * @param {function(string, DescribeShippersResponse):void} cb
      * @public
@@ -522,6 +540,17 @@ class ClsClient extends AbstractClient {
     }
 
     /**
+     * This API is used to split a topic partition.
+     * @param {SplitPartitionRequest} req
+     * @param {function(string, SplitPartitionResponse):void} cb
+     * @public
+     */
+    SplitPartition(req, cb) {
+        let resp = new SplitPartitionResponse();
+        this.request("SplitPartition", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a notification group.
      * @param {DeleteAlarmNoticeRequest} req
      * @param {function(string, DeleteAlarmNoticeResponse):void} cb
@@ -563,6 +592,17 @@ class ClsClient extends AbstractClient {
     ModifyAlarmNotice(req, cb) {
         let resp = new ModifyAlarmNoticeResponse();
         this.request("ModifyAlarmNotice", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a COS import task.
+     * @param {ModifyCosRechargeRequest} req
+     * @param {function(string, ModifyCosRechargeResponse):void} cb
+     * @public
+     */
+    ModifyCosRecharge(req, cb) {
+        let resp = new ModifyCosRechargeResponse();
+        this.request("ModifyCosRecharge", req, resp, cb);
     }
 
     /**
@@ -852,17 +892,6 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     }
 
     /**
-     * This API is used to split a topic partition.
-     * @param {SplitPartitionRequest} req
-     * @param {function(string, SplitPartitionResponse):void} cb
-     * @public
-     */
-    SplitPartition(req, cb) {
-        let resp = new SplitPartitionResponse();
-        this.request("SplitPartition", req, resp, cb);
-    }
-
-    /**
      * This API is used to get a collection rule configuration.
      * @param {DescribeConfigsRequest} req
      * @param {function(string, DescribeConfigsResponse):void} cb
@@ -871,6 +900,17 @@ Import the generated `cls.pb.h` header file into the code and call the API for d
     DescribeConfigs(req, cb) {
         let resp = new DescribeConfigsResponse();
         this.request("DescribeConfigs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a COS import task.
+     * @param {CreateCosRechargeRequest} req
+     * @param {function(string, CreateCosRechargeResponse):void} cb
+     * @public
+     */
+    CreateCosRecharge(req, cb) {
+        let resp = new CreateCosRechargeResponse();
+        this.request("CreateCosRecharge", req, resp, cb);
     }
 
     /**

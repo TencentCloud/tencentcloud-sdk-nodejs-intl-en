@@ -564,6 +564,7 @@ const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const ReviewTemplate = models.ReviewTemplate;
 const ImageOperation = models.ImageOperation;
+const MediaSubStreamInfoItem = models.MediaSubStreamInfoItem;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
 const DescribeRoundPlaysResponse = models.DescribeRoundPlaysResponse;
 const ImageTransform = models.ImageTransform;

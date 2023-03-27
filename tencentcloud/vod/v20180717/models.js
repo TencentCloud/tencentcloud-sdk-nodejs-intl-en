@@ -21701,9 +21701,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.Category = null;
 
         /**
-         * File status. Valid values: Normal, Forbidden.
+         * The file status. Valid values: `Normal`, `Forbidden`.
 
-*Note: this field is not supported yet.
+*Note: This field is not supported yet.	
          * @type {string || null}
          */
         this.Status = null;
@@ -26795,7 +26795,9 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
         this.Definition = null;
 
         /**
-         * Container format. Valid values: hls, dash.
+         * The packaging format. Valid values:
+<li>`HLS`</li>
+<li>`DASH`</li>
          * @type {string || null}
          */
         this.Package = null;
@@ -26829,6 +26831,12 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
          */
         this.DigitalWatermarkType = null;
 
+        /**
+         * The information of the streams.
+         * @type {Array.<MediaSubStreamInfoItem> || null}
+         */
+        this.SubStreamSet = null;
+
     }
 
     /**
@@ -26844,6 +26852,15 @@ class AdaptiveDynamicStreamingInfoItem extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.Size = 'Size' in params ? params.Size : null;
         this.DigitalWatermarkType = 'DigitalWatermarkType' in params ? params.DigitalWatermarkType : null;
+
+        if (params.SubStreamSet) {
+            this.SubStreamSet = new Array();
+            for (let z in params.SubStreamSet) {
+                let obj = new MediaSubStreamInfoItem();
+                obj.deserialize(params.SubStreamSet[z]);
+                this.SubStreamSet.push(obj);
+            }
+        }
 
     }
 }
@@ -28275,6 +28292,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
 <li>`DescribeFileAttributesTask`: Getting file attributes</li>
 <li>`RebuildMedia`; Remastering audio/video</li>
 <li> `ReviewAudioVideo`: Moderation</li>
+<li>`ExtractTraceWatermark`: Digital watermark extraction</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -32371,6 +32389,58 @@ class ImageOperation extends  AbstractModel {
             obj.deserialize(params.CenterCut)
             this.CenterCut = obj;
         }
+
+    }
+}
+
+/**
+ * The stream information of adaptive bitrate streaming.
+ * @class
+ */
+class MediaSubStreamInfoItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The stream type. Valid values:
+<li>`audio`: Audio only</li>
+<li>`video`: Video (may include audio)</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The video width (px) if `Type` is `video`.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * The video height (px) if `Type` is `video`.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * The file size (bytes).
+<font color=red>Note:</font>For adaptive bitrate streaming files generated before 2023-02-09T16:00:00Z, the value of this parameter is `0`.
+         * @type {number || null}
+         */
+        this.Size = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }
@@ -38114,6 +38184,7 @@ module.exports = {
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     ReviewTemplate: ReviewTemplate,
     ImageOperation: ImageOperation,
+    MediaSubStreamInfoItem: MediaSubStreamInfoItem,
     DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
     DescribeRoundPlaysResponse: DescribeRoundPlaysResponse,
     ImageTransform: ImageTransform,

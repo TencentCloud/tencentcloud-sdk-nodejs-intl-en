@@ -43,7 +43,7 @@ class ImageModerationRequest extends  AbstractModel {
         this.FileContent = null;
 
         /**
-         * This field indicates the access URL of the image to be detected in PNG, JPG, JPEG, BMP, GIF, or WEBP format and of **up to 5 MB in size**. **A resolution of 256x256 or higher** is recommended. The image download time should be limited to 3 seconds; otherwise, a download timeout will be returned.<br>Note: **you must enter a value for either this field or `FileContent`**.
+         * URL of the image to moderate. It supports PNG, JPG, JPEG, BMP, GIF AND WEBP files. The file **cannot exceed 5 MB** and the resolution should not below **256*246**. The default timeout period is 3 seconds. Note that **redirection URLs may be blocked by security policies**. In this case, an error message will return. For example, if an HTTP request gets the 302 code, the error `ResourceUnavailable.ImageDownloadError` is returned. <br>**Either `FileUrl` or `FileContent` must be specified. 
          * @type {string || null}
          */
         this.FileUrl = null;
@@ -98,6 +98,51 @@ class ImageModerationRequest extends  AbstractModel {
             let obj = new Device();
             obj.deserialize(params.Device)
             this.Device = obj;
+        }
+
+    }
+}
+
+/**
+ * Label of the identification moderation result
+ * @class
+ */
+class RecognitionResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Value: `Scene`
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * Hit tags under the `Label`
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<RecognitionTag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Label = 'Label' in params ? params.Label : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new RecognitionTag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
         }
 
     }
@@ -269,6 +314,56 @@ class OcrTextDetail extends  AbstractModel {
         }
         this.Rate = 'Rate' in params ? params.Rate : null;
         this.SubLabel = 'SubLabel' in params ? params.SubLabel : null;
+
+    }
+}
+
+/**
+ * Recognition tag information
+ * @class
+ */
+class RecognitionTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Tag name
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Confidence score. Value: 1 to 100. 
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * Location information. It returns 0 if there is not location information.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Location || null}
+         */
+        this.Location = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Score = 'Score' in params ? params.Score : null;
+
+        if (params.Location) {
+            let obj = new Location();
+            obj.deserialize(params.Location)
+            this.Location = obj;
+        }
 
     }
 }
@@ -581,7 +676,7 @@ class LabelResult extends  AbstractModel {
         this.SubLabel = null;
 
         /**
-         * This field is used to return the confidence under the current tag (Label). Value range: 0 (**the lowest confidence**)–100 (**the highest confidence**), where a higher value indicates that the text is more likely to fall into the category of the current returned tag; for example, *Porn 99* indicates that the text is highly likely to be pornographic, while *Porn 0* indicates that the text is not pornographic.
+         * Confidence score of the under the current label. Value range: 0 (**the lowest confidence**) to 100 (**the highest confidence**). For example, *Porn 99* indicates that the image is highly likely to be pornographic, while *Porn 0* indicates that the image is not pornographic.
          * @type {number || null}
          */
         this.Score = null;
@@ -843,7 +938,7 @@ class ImageModerationResponse extends  AbstractModel {
         this.SubLabel = null;
 
         /**
-         * This field is used to return the confidence under the current tag (Label). Value range: 0 (**the lowest confidence**)–100 (**the highest confidence**), where a higher value indicates that the text is more likely to fall into the category of the current returned tag; for example, *Porn 99* indicates that the text is highly likely to be pornographic, while *Porn 0* indicates that the text is not pornographic.
+         * Confidence score of the under the current label. Value range: 0 (**the lowest confidence**) to 100 (**the highest confidence**). For example, *Porn 99* indicates that the image is highly likely to be pornographic, while *Porn 0* indicates that the image is not pornographic.
          * @type {number || null}
          */
         this.Score = null;
@@ -900,6 +995,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.FileMD5 = null;
+
+        /**
+         * Image recognition result, including the hit tags, confidence and location.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<RecognitionResult> || null}
+         */
+        this.RecognitionResults = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -960,6 +1062,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.BizType = 'BizType' in params ? params.BizType : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.FileMD5 = 'FileMD5' in params ? params.FileMD5 : null;
+
+        if (params.RecognitionResults) {
+            this.RecognitionResults = new Array();
+            for (let z in params.RecognitionResults) {
+                let obj = new RecognitionResult();
+                obj.deserialize(params.RecognitionResults[z]);
+                this.RecognitionResults.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1056,8 +1167,10 @@ Note: you need to use a consistent mobile number format, such as area code forma
 
 module.exports = {
     ImageModerationRequest: ImageModerationRequest,
+    RecognitionResult: RecognitionResult,
     ObjectResult: ObjectResult,
     OcrTextDetail: OcrTextDetail,
+    RecognitionTag: RecognitionTag,
     ObjectDetail: ObjectDetail,
     OcrResult: OcrResult,
     LibDetail: LibDetail,

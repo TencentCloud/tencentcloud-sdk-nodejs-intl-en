@@ -47,6 +47,7 @@ const ModifyGroupRequest = models.ModifyGroupRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const AddGroupMemberRequest = models.AddGroupMemberRequest;
 const DescribeGroupListRequest = models.DescribeGroupListRequest;
+const GetRoomMessageRequest = models.GetRoomMessageRequest;
 const DocumentInfo = models.DocumentInfo;
 const DeleteDocumentResponse = models.DeleteDocumentResponse;
 const DeleteRecordRequest = models.DeleteRecordRequest;
@@ -56,7 +57,7 @@ const GroupInfo = models.GroupInfo;
 const DescribeDocumentResponse = models.DescribeDocumentResponse;
 const DeleteGroupMemberResponse = models.DeleteGroupMemberResponse;
 const DescribeGroupMemberListResponse = models.DescribeGroupMemberListResponse;
-const SetWatermarkResponse = models.SetWatermarkResponse;
+const DeleteRecordResponse = models.DeleteRecordResponse;
 const BatchCreateRoomRequest = models.BatchCreateRoomRequest;
 const DescribeGroupMemberListRequest = models.DescribeGroupMemberListRequest;
 const UserInfo = models.UserInfo;
@@ -69,6 +70,7 @@ const DescribeUserRequest = models.DescribeUserRequest;
 const BatchCreateGroupWithMembersRequest = models.BatchCreateGroupWithMembersRequest;
 const BindDocumentToRoomRequest = models.BindDocumentToRoomRequest;
 const CreateDocumentRequest = models.CreateDocumentRequest;
+const GetRoomMessageResponse = models.GetRoomMessageResponse;
 const BatchUserInfo = models.BatchUserInfo;
 const BatchAddGroupMemberRequest = models.BatchAddGroupMemberRequest;
 const DescribeRoomResponse = models.DescribeRoomResponse;
@@ -76,6 +78,7 @@ const DescribeCurrentMemberListRequest = models.DescribeCurrentMemberListRequest
 const DescribeSdkAppIdUsersResponse = models.DescribeSdkAppIdUsersResponse;
 const DescribeRoomStatisticsResponse = models.DescribeRoomStatisticsResponse;
 const DeleteDocumentRequest = models.DeleteDocumentRequest;
+const MessageList = models.MessageList;
 const DeleteGroupMemberRequest = models.DeleteGroupMemberRequest;
 const GetWatermarkRequest = models.GetWatermarkRequest;
 const MemberRecord = models.MemberRecord;
@@ -85,7 +88,7 @@ const UnbindDocumentFromRoomRequest = models.UnbindDocumentFromRoomRequest;
 const RegisterUserRequest = models.RegisterUserRequest;
 const GroupBaseInfo = models.GroupBaseInfo;
 const LoginUserRequest = models.LoginUserRequest;
-const DeleteRecordResponse = models.DeleteRecordResponse;
+const SetWatermarkResponse = models.SetWatermarkResponse;
 const RoomInfo = models.RoomInfo;
 const DescribeDocumentsByRoomResponse = models.DescribeDocumentsByRoomResponse;
 const DescribeRoomStatisticsRequest = models.DescribeRoomStatisticsRequest;
@@ -94,6 +97,7 @@ const LoginOriginIdResponse = models.LoginOriginIdResponse;
 const AppCustomContent = models.AppCustomContent;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const DescribeSdkAppIdUsersRequest = models.DescribeSdkAppIdUsersRequest;
+const MessageItem = models.MessageItem;
 const CreateSupervisorResponse = models.CreateSupervisorResponse;
 const DeleteRoomRequest = models.DeleteRoomRequest;
 const RegisterUserResponse = models.RegisterUserResponse;
@@ -119,7 +123,19 @@ class LcicClient extends AbstractClient {
     }
     
     /**
+     * This API is used to get the message history of a room (room messages are retained for seven days).
+     * @param {GetRoomMessageRequest} req
+     * @param {function(string, GetRoomMessageResponse):void} cb
+     * @public
+     */
+    GetRoomMessage(req, cb) {
+        let resp = new GetRoomMessageResponse();
+        this.request("GetRoomMessage", req, resp, cb);
+    }
+
+    /**
      * This API is used to configure watermarks.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {SetWatermarkRequest} req
      * @param {function(string, SetWatermarkResponse):void} cb
      * @public
@@ -131,6 +147,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to get the document list of a specific room.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DescribeDocumentsByRoomRequest} req
      * @param {function(string, DescribeDocumentsByRoomResponse):void} cb
      * @public
@@ -142,6 +159,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to modify a room.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {ModifyRoomRequest} req
      * @param {function(string, ModifyRoomResponse):void} cb
      * @public
@@ -153,6 +171,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to get watermark settings.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {GetWatermarkRequest} req
      * @param {function(string, GetWatermarkResponse):void} cb
      * @public
@@ -164,6 +183,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to get the details of a group.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DescribeGroupRequest} req
      * @param {function(string, DescribeGroupResponse):void} cb
      * @public
@@ -175,6 +195,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to modify an application.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {ModifyAppRequest} req
      * @param {function(string, ModifyAppResponse):void} cb
      * @public
@@ -197,6 +218,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to get the user list of a specific application.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DescribeSdkAppIdUsersRequest} req
      * @param {function(string, DescribeSdkAppIdUsersResponse):void} cb
      * @public
@@ -208,6 +230,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to remove users from a group.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DeleteGroupMemberRequest} req
      * @param {function(string, DeleteGroupMemberResponse):void} cb
      * @public
@@ -230,6 +253,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to delete one or multiple groups.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DeleteGroupRequest} req
      * @param {function(string, DeleteGroupResponse):void} cb
      * @public
@@ -252,6 +276,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to modify a group.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {ModifyGroupRequest} req
      * @param {function(string, ModifyGroupResponse):void} cb
      * @public
@@ -263,6 +288,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to register multiple users (up to 1,000) at a time. If a user ID already exists, the existing one will be overwritten.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {BatchRegisterRequest} req
      * @param {function(string, BatchRegisterResponse):void} cb
      * @public
@@ -274,6 +300,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to add users to multiple groups at a time.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {BatchAddGroupMemberRequest} req
      * @param {function(string, BatchAddGroupMemberResponse):void} cb
      * @public
@@ -285,6 +312,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to remove users from multiple groups at a time.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {BatchDeleteGroupMemberRequest} req
      * @param {function(string, BatchDeleteGroupMemberResponse):void} cb
      * @public
@@ -296,6 +324,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to get room information.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DescribeRoomRequest} req
      * @param {function(string, DescribeRoomResponse):void} cb
      * @public
@@ -307,6 +336,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This example shows you how to delete the recording files of a specific room.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DeleteRecordRequest} req
      * @param {function(string, DeleteRecordResponse):void} cb
      * @public
@@ -318,6 +348,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to query groups.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DescribeGroupListRequest} req
      * @param {function(string, DescribeGroupListResponse):void} cb
      * @public
@@ -329,6 +360,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to modify a user profile such as the nickname and profile photo.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {ModifyUserProfileRequest} req
      * @param {function(string, ModifyUserProfileResponse):void} cb
      * @public
@@ -340,6 +372,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to add users to a group.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {AddGroupMemberRequest} req
      * @param {function(string, AddGroupMemberResponse):void} cb
      * @public
@@ -362,6 +395,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to obtain the statistics of a room. It can be called only after the room is ended.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DescribeRoomStatisticsRequest} req
      * @param {function(string, DescribeRoomStatisticsResponse):void} cb
      * @public
@@ -405,7 +439,8 @@ class LcicClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a group and specify its members.
+     * his API is used to create a group and specify its members.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {CreateGroupWithMembersRequest} req
      * @param {function(string, CreateGroupWithMembersResponse):void} cb
      * @public
@@ -439,6 +474,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to get the members of a group.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DescribeGroupMemberListRequest} req
      * @param {function(string, DescribeGroupMemberListResponse):void} cb
      * @public
@@ -450,6 +486,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to get the user list of a room. This API will not work if a room has ended or expired.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DescribeCurrentMemberListRequest} req
      * @param {function(string, DescribeCurrentMemberListResponse):void} cb
      * @public
@@ -461,6 +498,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to create multiple rooms at a time.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {BatchCreateRoomRequest} req
      * @param {function(string, BatchCreateRoomResponse):void} cb
      * @public
@@ -472,6 +510,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to delete a document.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DeleteDocumentRequest} req
      * @param {function(string, DeleteDocumentResponse):void} cb
      * @public
@@ -483,6 +522,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to delete the recordings of multiple rooms.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {BatchDeleteRecordRequest} req
      * @param {function(string, BatchDeleteRecordResponse):void} cb
      * @public
@@ -505,6 +545,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to get the information of a specific document.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {DescribeDocumentRequest} req
      * @param {function(string, DescribeDocumentResponse):void} cb
      * @public
@@ -516,6 +557,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to merge groups.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {CreateGroupWithSubGroupRequest} req
      * @param {function(string, CreateGroupWithSubGroupResponse):void} cb
      * @public
@@ -527,6 +569,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to create multiple groups at a time.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {BatchCreateGroupWithMembersRequest} req
      * @param {function(string, BatchCreateGroupWithMembersResponse):void} cb
      * @public
@@ -538,6 +581,7 @@ class LcicClient extends AbstractClient {
 
     /**
      * This API is used to create a room.
+A maximum of 20 requests can be initiated per second for this API.
      * @param {CreateRoomRequest} req
      * @param {function(string, CreateRoomResponse):void} cb
      * @public

@@ -68,7 +68,7 @@ const DeleteImmutableTagRulesResponse = models.DeleteImmutableTagRulesResponse;
 const ModifyTagRetentionRuleResponse = models.ModifyTagRetentionRuleResponse;
 const CreateTagRetentionRuleRequest = models.CreateTagRetentionRuleRequest;
 const WebhookTarget = models.WebhookTarget;
-const DescribeInstanceStatusResponse = models.DescribeInstanceStatusResponse;
+const DeleteReplicationInstanceRequest = models.DeleteReplicationInstanceRequest;
 const DescribeGCJobsResponse = models.DescribeGCJobsResponse;
 const ModifyInstanceTokenRequest = models.ModifyInstanceTokenRequest;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
@@ -79,10 +79,9 @@ const DeleteRepositoryTagsRequest = models.DeleteRepositoryTagsRequest;
 const TcrImageInfo = models.TcrImageInfo;
 const DescribeReplicationInstanceSyncStatusRequest = models.DescribeReplicationInstanceSyncStatusRequest;
 const DeleteInstanceResponse = models.DeleteInstanceResponse;
-const DescribeInstanceAllRequest = models.DescribeInstanceAllRequest;
 const DescribeInstanceStatusRequest = models.DescribeInstanceStatusRequest;
 const ModifyWebhookTriggerRequest = models.ModifyWebhookTriggerRequest;
-const DeleteReplicationInstanceRequest = models.DeleteReplicationInstanceRequest;
+const DescribeInstanceStatusResponse = models.DescribeInstanceStatusResponse;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
 const CreateSignatureRequest = models.CreateSignatureRequest;
 const CreateSecurityPolicyResponse = models.CreateSecurityPolicyResponse;
@@ -112,7 +111,6 @@ const CustomizedDomainInfo = models.CustomizedDomainInfo;
 const DescribeWebhookTriggerResponse = models.DescribeWebhookTriggerResponse;
 const DescribeImageManifestsRequest = models.DescribeImageManifestsRequest;
 const RegistryChargePrepaid = models.RegistryChargePrepaid;
-const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
 const TagSpecification = models.TagSpecification;
 const CreateMultipleSecurityPolicyRequest = models.CreateMultipleSecurityPolicyRequest;
 const KeyValueString = models.KeyValueString;
@@ -155,7 +153,7 @@ const DeleteImageAccelerateServiceRequest = models.DeleteImageAccelerateServiceR
 const DescribeTagRetentionRulesResponse = models.DescribeTagRetentionRulesResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const ManageExternalEndpointResponse = models.ManageExternalEndpointResponse;
-const DescribeInstanceAllResponse = models.DescribeInstanceAllResponse;
+const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
 const CreateReplicationInstanceResponse = models.CreateReplicationInstanceResponse;
 const CreateInstanceTokenRequest = models.CreateInstanceTokenRequest;
 const CreateInstanceCustomizedDomainResponse = models.CreateInstanceCustomizedDomainResponse;
@@ -938,17 +936,6 @@ class TcrClient extends AbstractClient {
     ModifyTagRetentionRule(req, cb) {
         let resp = new ModifyTagRetentionRuleResponse();
         this.request("ModifyTagRetentionRule", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the information of all instances.
-     * @param {DescribeInstanceAllRequest} req
-     * @param {function(string, DescribeInstanceAllResponse):void} cb
-     * @public
-     */
-    DescribeInstanceAll(req, cb) {
-        let resp = new DescribeInstanceAllResponse();
-        this.request("DescribeInstanceAll", req, resp, cb);
     }
 
     /**

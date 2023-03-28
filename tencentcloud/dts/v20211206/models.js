@@ -1217,6 +1217,34 @@ class ModifyCompareTaskNameResponse extends  AbstractModel {
 }
 
 /**
+ * StartSyncJob request structure.
+ * @class
+ */
+class StartSyncJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sync task ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
  * PauseSyncJob request structure.
  * @class
  */
@@ -1828,6 +1856,69 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Topic description
+ * @class
+ */
+class TopicRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Topic partitioning policy. If the topic sync policy is delivering data to multiple custom topics (`TopicType` = `Multi`), the value of this parameter is `Random` (deliver to a random partition). If the topic sync policy is delivering all data to a single topic (`TopicType` = `Single`), this parameter has three valid values: `AllInPartitionZero` (deliver all data to partition0), `PartitionByTable` (partition by table name), `PartitionByTableAndKey` (partition by table name and primary key).
+         * @type {string || null}
+         */
+        this.PartitionType = null;
+
+        /**
+         * Database name matching rule. This parameter takes effect only when `TopicType` is `Multi`. Valid values: `Regular` (match by regex), `Default` (default rule for the remaining databases that cannot be matched by regex). The default rule must be included in the array of matching rules.
+         * @type {string || null}
+         */
+        this.DbMatchMode = null;
+
+        /**
+         * Database name, which can only be matched by regex when `TopicType` is `Multi` and `DbMatchMode` is `Regular`.
+         * @type {string || null}
+         */
+        this.DbName = null;
+
+        /**
+         * Table name matching rule. This parameter takes effect only when `TopicType` is `Multi`. Valid values: `Regular` (match by regex), `Default` (default rule for the remaining databases that cannot be matched by regex). The default rule must be included in the array of matching rules.
+         * @type {string || null}
+         */
+        this.TableMatchMode = null;
+
+        /**
+         * Table name, which can only be matched by regex when `TopicType` is `Multi` and `DbMatchMode` is `Regular`.
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.PartitionType = 'PartitionType' in params ? params.PartitionType : null;
+        this.DbMatchMode = 'DbMatchMode' in params ? params.DbMatchMode : null;
+        this.DbName = 'DbName' in params ? params.DbName : null;
+        this.TableMatchMode = 'TableMatchMode' in params ? params.TableMatchMode : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+
+    }
+}
+
+/**
  * ContinueSyncJob response structure.
  * @class
  */
@@ -1912,6 +2003,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.DdlOptions = null;
 
+        /**
+         * Kafka sync options
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {KafkaOption || null}
+         */
+        this.KafkaOption = null;
+
     }
 
     /**
@@ -1940,6 +2038,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.DdlOptions[z]);
                 this.DdlOptions.push(obj);
             }
+        }
+
+        if (params.KafkaOption) {
+            let obj = new KafkaOption();
+            obj.deserialize(params.KafkaOption)
+            this.KafkaOption = obj;
         }
 
     }
@@ -2063,6 +2167,67 @@ class StopCompareRequest extends  AbstractModel {
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.CompareTaskId = 'CompareTaskId' in params ? params.CompareTaskId : null;
+
+    }
+}
+
+/**
+ * Node information of multi-node databases configured for data sync. This data structure is valid for multi-node databases such as TDSQL for MySQL. For single-node databases such as MySQL, use `Endpoint` instead.
+ * @class
+ */
+class SyncDBEndpointInfos extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region of the database
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Instance network access type. Valid values: `extranet` (public network); `ipv6` (public IPv6); `cvm` (self-build on CVM); `dcg` (Direct Connect); `vpncloud` (VPN access); `cdb` (database); `ccn` (CCN); `intranet` (intranet); `vpc` (VPC). Note that the valid values are subject to the current link.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * Database type, such as `mysql`, `redis`, `mongodb`, `postgresql`, `mariadb`, and `percona`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DatabaseType = null;
+
+        /**
+         * Database information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Endpoint> || null}
+         */
+        this.Info = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+        this.DatabaseType = 'DatabaseType' in params ? params.DatabaseType : null;
+
+        if (params.Info) {
+            this.Info = new Array();
+            for (let z in params.Info) {
+                let obj = new Endpoint();
+                obj.deserialize(params.Info[z]);
+                this.Info.push(obj);
+            }
+        }
 
     }
 }
@@ -2904,18 +3069,36 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * StartSyncJob request structure.
+ * Sync options configured when the target database is Kafka
  * @class
  */
-class StartSyncJobRequest extends  AbstractModel {
+class KafkaOption extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Sync task ID
+         * Type of data that is delivered to Kafka, such as `Avro` and `Json`.
          * @type {string || null}
          */
-        this.JobId = null;
+        this.DataType = null;
+
+        /**
+         * Topic sync policy, such as `Single` (deliver all data to a single topic), `Multi` (deliver data to multiple custom topics).
+         * @type {string || null}
+         */
+        this.TopicType = null;
+
+        /**
+         * Topic for DDL storage
+         * @type {string || null}
+         */
+        this.DDLTopicName = null;
+
+        /**
+         * Topic description
+         * @type {Array.<TopicRule> || null}
+         */
+        this.TopicRules = null;
 
     }
 
@@ -2926,7 +3109,18 @@ class StartSyncJobRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.DataType = 'DataType' in params ? params.DataType : null;
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.DDLTopicName = 'DDLTopicName' in params ? params.DDLTopicName : null;
+
+        if (params.TopicRules) {
+            this.TopicRules = new Array();
+            for (let z in params.TopicRules) {
+                let obj = new TopicRule();
+                obj.deserialize(params.TopicRules[z]);
+                this.TopicRules.push(obj);
+            }
+        }
 
     }
 }
@@ -3637,10 +3831,34 @@ class ConfigureSyncJobRequest extends  AbstractModel {
         this.SrcInfo = null;
 
         /**
+         * Source database information. This parameter is valid for multi-node databases, and the value of `SrcNodeType` must be `cluster`.
+         * @type {SyncDBEndpointInfos || null}
+         */
+        this.SrcInfos = null;
+
+        /**
+         * Enumerated values: `single` (for single-node source database), `cluster` (for multi-node source database).
+         * @type {string || null}
+         */
+        this.SrcNodeType = null;
+
+        /**
          * Target database information. This parameter is used by single-node databases.
          * @type {Endpoint || null}
          */
         this.DstInfo = null;
+
+        /**
+         * Target database information. This parameter is valid for multi-node databases, and the value of `DstNodeType` must be `cluster`.
+         * @type {SyncDBEndpointInfos || null}
+         */
+        this.DstInfos = null;
+
+        /**
+         * Enumerated values: `single` (for single-node target database), `cluster` (for multi-node target database).
+         * @type {string || null}
+         */
+        this.DstNodeType = null;
 
         /**
          * Sync task options
@@ -3683,11 +3901,25 @@ class ConfigureSyncJobRequest extends  AbstractModel {
             this.SrcInfo = obj;
         }
 
+        if (params.SrcInfos) {
+            let obj = new SyncDBEndpointInfos();
+            obj.deserialize(params.SrcInfos)
+            this.SrcInfos = obj;
+        }
+        this.SrcNodeType = 'SrcNodeType' in params ? params.SrcNodeType : null;
+
         if (params.DstInfo) {
             let obj = new Endpoint();
             obj.deserialize(params.DstInfo)
             this.DstInfo = obj;
         }
+
+        if (params.DstInfos) {
+            let obj = new SyncDBEndpointInfos();
+            obj.deserialize(params.DstInfos)
+            this.DstInfos = obj;
+        }
+        this.DstNodeType = 'DstNodeType' in params ? params.DstNodeType : null;
 
         if (params.Options) {
             let obj = new Options();
@@ -7146,7 +7378,7 @@ class CreateSyncJobRequest extends  AbstractModel {
         this.SrcRegion = null;
 
         /**
-         * Target database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, and `tdsqlmysql`.
+         * Target database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, `tdsqlmysql`, and `kafka`.
          * @type {string || null}
          */
         this.DstDatabaseType = null;
@@ -7771,6 +8003,7 @@ module.exports = {
     ConflictHandleOption: ConflictHandleOption,
     ResumeSyncJobResponse: ResumeSyncJobResponse,
     ModifyCompareTaskNameResponse: ModifyCompareTaskNameResponse,
+    StartSyncJobRequest: StartSyncJobRequest,
     PauseSyncJobRequest: PauseSyncJobRequest,
     CreateMigrateCheckJobResponse: CreateMigrateCheckJobResponse,
     ContinueMigrateJobResponse: ContinueMigrateJobResponse,
@@ -7783,11 +8016,13 @@ module.exports = {
     MigrateAction: MigrateAction,
     DeleteCompareTaskResponse: DeleteCompareTaskResponse,
     DBEndpointInfo: DBEndpointInfo,
+    TopicRule: TopicRule,
     ContinueSyncJobResponse: ContinueSyncJobResponse,
     Options: Options,
     CompleteMigrateJobRequest: CompleteMigrateJobRequest,
     DescribeCompareTasksResponse: DescribeCompareTasksResponse,
     StopCompareRequest: StopCompareRequest,
+    SyncDBEndpointInfos: SyncDBEndpointInfos,
     DescribeCheckSyncJobResultResponse: DescribeCheckSyncJobResultResponse,
     StopSyncJobResponse: StopSyncJobResponse,
     SkippedDetail: SkippedDetail,
@@ -7805,7 +8040,7 @@ module.exports = {
     CompareTaskInfo: CompareTaskInfo,
     ContinueSyncJobRequest: ContinueSyncJobRequest,
     CreateMigrationServiceResponse: CreateMigrationServiceResponse,
-    StartSyncJobRequest: StartSyncJobRequest,
+    KafkaOption: KafkaOption,
     DescribeMigrationCheckJobResponse: DescribeMigrationCheckJobResponse,
     DBInfo: DBInfo,
     Endpoint: Endpoint,

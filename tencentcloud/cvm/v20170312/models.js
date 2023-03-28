@@ -6110,22 +6110,22 @@ class ActionTimer extends  AbstractModel {
         super();
 
         /**
-         * Additional data
-         * @type {Externals || null}
-         */
-        this.Externals = null;
-
-        /**
          * Timer name. Currently `TerminateInstances` is the only supported value.
          * @type {string || null}
          */
         this.TimerAction = null;
 
         /**
-         * Execution time, which must be at least 5 minutes later than the current time. For example, 2018-5-29 11:26:40.
+         * Execution time, which follows the ISO8601 standard and uses UTC time. It must be at least 5 minutes later than the current time. Format: YYYY-MM-DDThh:mm:ssZ. For example: 2018-05-29T11:26:40Z.
          * @type {string || null}
          */
         this.ActionTime = null;
+
+        /**
+         * Additional data
+         * @type {Externals || null}
+         */
+        this.Externals = null;
 
     }
 
@@ -6136,14 +6136,14 @@ class ActionTimer extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TimerAction = 'TimerAction' in params ? params.TimerAction : null;
+        this.ActionTime = 'ActionTime' in params ? params.ActionTime : null;
 
         if (params.Externals) {
             let obj = new Externals();
             obj.deserialize(params.Externals)
             this.Externals = obj;
         }
-        this.TimerAction = 'TimerAction' in params ? params.TimerAction : null;
-        this.ActionTime = 'ActionTime' in params ? params.ActionTime : null;
 
     }
 }
@@ -6547,6 +6547,12 @@ Valid values:
          */
         this.LicenseType = null;
 
+        /**
+         * Boot mode
+         * @type {string || null}
+         */
+        this.BootMode = null;
+
     }
 
     /**
@@ -6574,6 +6580,7 @@ Valid values:
             }
         }
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
+        this.BootMode = 'BootMode' in params ? params.BootMode : null;
 
     }
 }
@@ -8699,6 +8706,12 @@ class TerminateInstancesRequest extends  AbstractModel {
          */
         this.InstanceIds = null;
 
+        /**
+         * Release the monthly subscribed data disks attached to the instance
+         * @type {boolean || null}
+         */
+        this.ReleasePrepaidDataDisks = null;
+
     }
 
     /**
@@ -8709,6 +8722,7 @@ class TerminateInstancesRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ReleasePrepaidDataDisks = 'ReleasePrepaidDataDisks' in params ? params.ReleasePrepaidDataDisks : null;
 
     }
 }

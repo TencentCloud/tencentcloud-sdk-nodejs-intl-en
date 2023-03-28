@@ -2334,25 +2334,30 @@ class WebhookTarget extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceStatus response structure.
+ * DeleteReplicationInstance request structure.
  * @class
  */
-class DescribeInstanceStatusResponse extends  AbstractModel {
+class DeleteReplicationInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of instance statuses
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<RegistryStatus> || null}
-         */
-        this.RegistryStatusSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RegistryId = null;
+
+        /**
+         * Replica instance ID
+         * @type {string || null}
+         */
+        this.ReplicationRegistryId = null;
+
+        /**
+         * Region ID of the replica instance
+         * @type {number || null}
+         */
+        this.ReplicationRegionId = null;
 
     }
 
@@ -2363,16 +2368,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.RegistryStatusSet) {
-            this.RegistryStatusSet = new Array();
-            for (let z in params.RegistryStatusSet) {
-                let obj = new RegistryStatus();
-                obj.deserialize(params.RegistryStatusSet[z]);
-                this.RegistryStatusSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.ReplicationRegistryId = 'ReplicationRegistryId' in params ? params.ReplicationRegistryId : null;
+        this.ReplicationRegionId = 'ReplicationRegionId' in params ? params.ReplicationRegionId : null;
 
     }
 }
@@ -2836,71 +2834,6 @@ class DeleteInstanceResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceAll request structure.
- * @class
- */
-class DescribeInstanceAllRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * List of instance IDs (if it is empty,
-it indicates to get all instances under the current account)
-         * @type {Array.<string> || null}
-         */
-        this.Registryids = null;
-
-        /**
-         * Offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum number of output entries. Default value: 20. Maximum value: 100.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Filters
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * Whether to get the instances in all regions. Default value: False.
-         * @type {boolean || null}
-         */
-        this.AllRegion = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Registryids = 'Registryids' in params ? params.Registryids : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.AllRegion = 'AllRegion' in params ? params.AllRegion : null;
-
-    }
-}
-
-/**
  * DescribeInstanceStatus request structure.
  * @class
  */
@@ -2976,30 +2909,25 @@ class ModifyWebhookTriggerRequest extends  AbstractModel {
 }
 
 /**
- * DeleteReplicationInstance request structure.
+ * DescribeInstanceStatus response structure.
  * @class
  */
-class DeleteReplicationInstanceRequest extends  AbstractModel {
+class DescribeInstanceStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
-         * @type {string || null}
+         * List of instance statuses
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RegistryStatus> || null}
          */
-        this.RegistryId = null;
+        this.RegistryStatusSet = null;
 
         /**
-         * Replica instance ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ReplicationRegistryId = null;
-
-        /**
-         * Region ID of the replica instance
-         * @type {number || null}
-         */
-        this.ReplicationRegionId = null;
+        this.RequestId = null;
 
     }
 
@@ -3010,9 +2938,16 @@ class DeleteReplicationInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.ReplicationRegistryId = 'ReplicationRegistryId' in params ? params.ReplicationRegistryId : null;
-        this.ReplicationRegionId = 'ReplicationRegionId' in params ? params.ReplicationRegionId : null;
+
+        if (params.RegistryStatusSet) {
+            this.RegistryStatusSet = new Array();
+            for (let z in params.RegistryStatusSet) {
+                let obj = new RegistryStatus();
+                obj.deserialize(params.RegistryStatusSet[z]);
+                this.RegistryStatusSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4371,41 +4306,6 @@ class RegistryChargePrepaid extends  AbstractModel {
 }
 
 /**
- * DeleteSecurityPolicy response structure.
- * @class
- */
-class DeleteSecurityPolicyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Instance ID
-         * @type {string || null}
-         */
-        this.RegistryId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Cloud tag
  * @class
  */
@@ -4614,6 +4514,12 @@ class CreateInstanceRequest extends  AbstractModel {
          */
         this.SyncTag = null;
 
+        /**
+         * Whether to enable the COS Multi-AZ feature
+         * @type {boolean || null}
+         */
+        this.EnableCosMAZ = null;
+
     }
 
     /**
@@ -4639,6 +4545,7 @@ class CreateInstanceRequest extends  AbstractModel {
             this.RegistryChargePrepaid = obj;
         }
         this.SyncTag = 'SyncTag' in params ? params.SyncTag : null;
+        this.EnableCosMAZ = 'EnableCosMAZ' in params ? params.EnableCosMAZ : null;
 
     }
 }
@@ -6354,25 +6261,18 @@ class ManageExternalEndpointResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceAll response structure.
+ * DeleteSecurityPolicy response structure.
  * @class
  */
-class DescribeInstanceAllResponse extends  AbstractModel {
+class DeleteSecurityPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of instances
-         * @type {number || null}
+         * Instance ID
+         * @type {string || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * List of instances
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Registry> || null}
-         */
-        this.Registries = null;
+        this.RegistryId = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6389,16 +6289,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Registries) {
-            this.Registries = new Array();
-            for (let z in params.Registries) {
-                let obj = new Registry();
-                obj.deserialize(params.Registries[z]);
-                this.Registries.push(obj);
-            }
-        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7963,7 +7854,7 @@ module.exports = {
     ModifyTagRetentionRuleResponse: ModifyTagRetentionRuleResponse,
     CreateTagRetentionRuleRequest: CreateTagRetentionRuleRequest,
     WebhookTarget: WebhookTarget,
-    DescribeInstanceStatusResponse: DescribeInstanceStatusResponse,
+    DeleteReplicationInstanceRequest: DeleteReplicationInstanceRequest,
     DescribeGCJobsResponse: DescribeGCJobsResponse,
     ModifyInstanceTokenRequest: ModifyInstanceTokenRequest,
     CreateNamespaceResponse: CreateNamespaceResponse,
@@ -7974,10 +7865,9 @@ module.exports = {
     TcrImageInfo: TcrImageInfo,
     DescribeReplicationInstanceSyncStatusRequest: DescribeReplicationInstanceSyncStatusRequest,
     DeleteInstanceResponse: DeleteInstanceResponse,
-    DescribeInstanceAllRequest: DescribeInstanceAllRequest,
     DescribeInstanceStatusRequest: DescribeInstanceStatusRequest,
     ModifyWebhookTriggerRequest: ModifyWebhookTriggerRequest,
-    DeleteReplicationInstanceRequest: DeleteReplicationInstanceRequest,
+    DescribeInstanceStatusResponse: DescribeInstanceStatusResponse,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
     CreateSignatureRequest: CreateSignatureRequest,
     CreateSecurityPolicyResponse: CreateSecurityPolicyResponse,
@@ -8007,7 +7897,6 @@ module.exports = {
     DescribeWebhookTriggerResponse: DescribeWebhookTriggerResponse,
     DescribeImageManifestsRequest: DescribeImageManifestsRequest,
     RegistryChargePrepaid: RegistryChargePrepaid,
-    DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
     TagSpecification: TagSpecification,
     CreateMultipleSecurityPolicyRequest: CreateMultipleSecurityPolicyRequest,
     KeyValueString: KeyValueString,
@@ -8050,7 +7939,7 @@ module.exports = {
     DescribeTagRetentionRulesResponse: DescribeTagRetentionRulesResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     ManageExternalEndpointResponse: ManageExternalEndpointResponse,
-    DescribeInstanceAllResponse: DescribeInstanceAllResponse,
+    DeleteSecurityPolicyResponse: DeleteSecurityPolicyResponse,
     CreateReplicationInstanceResponse: CreateReplicationInstanceResponse,
     CreateInstanceTokenRequest: CreateInstanceTokenRequest,
     CreateInstanceCustomizedDomainResponse: CreateInstanceCustomizedDomainResponse,

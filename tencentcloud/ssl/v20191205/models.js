@@ -372,8 +372,10 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.From = null;
 
         /**
-         * Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The certificate plan type. Valid values:
+null: Certificates uploaded by users (no plan type)
+`1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PackageType = null;
@@ -733,6 +735,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.RenewOrder = null;
 
+        /**
+         * Whether the certificate is a Chinese SM certificate.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SMCert = null;
+
     }
 
     /**
@@ -747,6 +756,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ReplacedBy = 'ReplacedBy' in params ? params.ReplacedBy : null;
         this.ReplacedFor = 'ReplacedFor' in params ? params.ReplacedFor : null;
         this.RenewOrder = 'RenewOrder' in params ? params.RenewOrder : null;
+        this.SMCert = 'SMCert' in params ? params.SMCert : null;
 
     }
 }
@@ -1182,6 +1192,12 @@ class UploadCertificateRequest extends  AbstractModel {
          */
         this.CertificateUse = null;
 
+        /**
+         * Whether a certificate can be repeatedly uploaded.
+         * @type {boolean || null}
+         */
+        this.Repeatable = null;
+
     }
 
     /**
@@ -1197,6 +1213,7 @@ class UploadCertificateRequest extends  AbstractModel {
         this.Alias = 'Alias' in params ? params.Alias : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.CertificateUse = 'CertificateUse' in params ? params.CertificateUse : null;
+        this.Repeatable = 'Repeatable' in params ? params.Repeatable : null;
 
     }
 }
@@ -2024,6 +2041,13 @@ class UploadCertificateResponse extends  AbstractModel {
         this.CertificateId = null;
 
         /**
+         * The ID of the repeatedly uploaded certificate.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RepeatCertId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2039,6 +2063,7 @@ class UploadCertificateResponse extends  AbstractModel {
             return;
         }
         this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RepeatCertId = 'RepeatCertId' in params ? params.RepeatCertId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

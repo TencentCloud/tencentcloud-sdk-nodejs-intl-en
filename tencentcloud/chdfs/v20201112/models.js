@@ -226,6 +226,20 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.DegradeCapacityUsed = null;
 
         /**
+         * COS DEEP ARCHIVE storage usage, in bytes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DeepArchiveCapacityUsed = null;
+
+        /**
+         * COS INTELLIGENT TIERING storage usage, in bytes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IntelligentCapacityUsed = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -250,6 +264,8 @@ Note: this field may return `null`, indicating that no valid value was found.
         this.ArchiveCapacityUsed = 'ArchiveCapacityUsed' in params ? params.ArchiveCapacityUsed : null;
         this.StandardCapacityUsed = 'StandardCapacityUsed' in params ? params.StandardCapacityUsed : null;
         this.DegradeCapacityUsed = 'DegradeCapacityUsed' in params ? params.DegradeCapacityUsed : null;
+        this.DeepArchiveCapacityUsed = 'DeepArchiveCapacityUsed' in params ? params.DeepArchiveCapacityUsed : null;
+        this.IntelligentCapacityUsed = 'IntelligentCapacityUsed' in params ? params.IntelligentCapacityUsed : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1321,6 +1337,13 @@ class CreateAccessRulesResponse extends  AbstractModel {
         super();
 
         /**
+         * List of permission rules
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AccessRule> || null}
+         */
+        this.AccessRules = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1334,6 +1357,15 @@ class CreateAccessRulesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.AccessRules) {
+            this.AccessRules = new Array();
+            for (let z in params.AccessRules) {
+                let obj = new AccessRule();
+                obj.deserialize(params.AccessRules[z]);
+                this.AccessRules.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1716,7 +1748,7 @@ class Transition extends  AbstractModel {
         this.Days = null;
 
         /**
-         * Transition type (`1`: transition to ARCHIVE; `2`: delete; `3`: transition to STANDARD_IA)
+         * Transition type (`1`: ARCHIVE; `2`: Delete; `3`: STANDARD_IA; `4`: DEEP ARCHIVE; `5`: INTELLIGENT TIERING)
          * @type {number || null}
          */
         this.Type = null;

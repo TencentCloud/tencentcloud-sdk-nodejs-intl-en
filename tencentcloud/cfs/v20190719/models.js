@@ -425,6 +425,19 @@ class FileSystemInfo extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * The lifecycle management status of a file system.
+         * @type {string || null}
+         */
+        this.TieringState = null;
+
+        /**
+         * The details about tiered storage.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TieringDetailInfo || null}
+         */
+        this.TieringDetail = null;
+
     }
 
     /**
@@ -466,6 +479,13 @@ class FileSystemInfo extends  AbstractModel {
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
             }
+        }
+        this.TieringState = 'TieringState' in params ? params.TieringState : null;
+
+        if (params.TieringDetail) {
+            let obj = new TieringDetailInfo();
+            obj.deserialize(params.TieringDetail)
+            this.TieringDetail = obj;
         }
 
     }
@@ -2446,24 +2466,12 @@ class CreateCfsPGroupResponse extends  AbstractModel {
 }
 
 /**
- * UpdateCfsFileSystemPGroup request structure.
+ * The details about tiered storage.
  * @class
  */
-class UpdateCfsFileSystemPGroupRequest extends  AbstractModel {
+class TieringDetailInfo extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Permission group ID
-         * @type {string || null}
-         */
-        this.PGroupId = null;
-
-        /**
-         * File system ID
-         * @type {string || null}
-         */
-        this.FileSystemId = null;
 
     }
 
@@ -2474,8 +2482,6 @@ class UpdateCfsFileSystemPGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PGroupId = 'PGroupId' in params ? params.PGroupId : null;
-        this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
 
     }
 }
@@ -2905,7 +2911,7 @@ class AutoSnapshotPolicyInfo extends  AbstractModel {
         this.FileSystemNums = null;
 
         /**
-         * The day of the week on which to regularly back up the snapshot
+         * The specific day of the week on which to create a snapshot. This parameter is mutually exclusive with `DayOfMonth` and `IntervalDays`.
          * @type {string || null}
          */
         this.DayOfWeek = null;
@@ -2958,6 +2964,20 @@ class AutoSnapshotPolicyInfo extends  AbstractModel {
          */
         this.FileSystems = null;
 
+        /**
+         * The specific day of the month on which to create a snapshot. This parameter is mutually exclusive with `DayOfWeek` and `IntervalDays`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DayOfMonth = null;
+
+        /**
+         * The snapshot interval (1 to 365 days). This parameter is mutually exclusive with `DayOfWeek` and `DayOfMonth`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IntervalDays = null;
+
     }
 
     /**
@@ -2988,6 +3008,8 @@ class AutoSnapshotPolicyInfo extends  AbstractModel {
                 this.FileSystems.push(obj);
             }
         }
+        this.DayOfMonth = 'DayOfMonth' in params ? params.DayOfMonth : null;
+        this.IntervalDays = 'IntervalDays' in params ? params.IntervalDays : null;
 
     }
 }
@@ -3128,6 +3150,41 @@ class CreateAutoSnapshotPolicyResponse extends  AbstractModel {
         }
         this.AutoSnapshotPolicyId = 'AutoSnapshotPolicyId' in params ? params.AutoSnapshotPolicyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateCfsFileSystemPGroup request structure.
+ * @class
+ */
+class UpdateCfsFileSystemPGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Permission group ID
+         * @type {string || null}
+         */
+        this.PGroupId = null;
+
+        /**
+         * File system ID
+         * @type {string || null}
+         */
+        this.FileSystemId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PGroupId = 'PGroupId' in params ? params.PGroupId : null;
+        this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
 
     }
 }
@@ -3486,6 +3543,18 @@ class UpdateAutoSnapshotPolicyRequest extends  AbstractModel {
          */
         this.IsActivated = null;
 
+        /**
+         * The specific day of the month on which to create a snapshot. This parameter is mutually exclusive with `DayOfWeek`.
+         * @type {string || null}
+         */
+        this.DayOfMonth = null;
+
+        /**
+         * The snapshot interval. This parameter is mutually exclusive with `DayOfWeek` and `DayOfMonth`.
+         * @type {number || null}
+         */
+        this.IntervalDays = null;
+
     }
 
     /**
@@ -3501,6 +3570,8 @@ class UpdateAutoSnapshotPolicyRequest extends  AbstractModel {
         this.Hour = 'Hour' in params ? params.Hour : null;
         this.AliveDays = 'AliveDays' in params ? params.AliveDays : null;
         this.IsActivated = 'IsActivated' in params ? params.IsActivated : null;
+        this.DayOfMonth = 'DayOfMonth' in params ? params.DayOfMonth : null;
+        this.IntervalDays = 'IntervalDays' in params ? params.IntervalDays : null;
 
     }
 }
@@ -3817,12 +3888,6 @@ class CreateAutoSnapshotPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * The day of the week on which to repeat the snapshot operation
-         * @type {string || null}
-         */
-        this.DayOfWeek = null;
-
-        /**
          * The time point when to repeat the snapshot operation
          * @type {string || null}
          */
@@ -3835,10 +3900,28 @@ class CreateAutoSnapshotPolicyRequest extends  AbstractModel {
         this.PolicyName = null;
 
         /**
+         * The day of the week on which to repeat the snapshot operation
+         * @type {string || null}
+         */
+        this.DayOfWeek = null;
+
+        /**
          * Snapshot retention period
          * @type {number || null}
          */
         this.AliveDays = null;
+
+        /**
+         * The specific day (day 1 to day 31) of the month on which to create a snapshot.
+         * @type {string || null}
+         */
+        this.DayOfMonth = null;
+
+        /**
+         * The snapshot interval, in days.
+         * @type {number || null}
+         */
+        this.IntervalDays = null;
 
     }
 
@@ -3849,10 +3932,12 @@ class CreateAutoSnapshotPolicyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DayOfWeek = 'DayOfWeek' in params ? params.DayOfWeek : null;
         this.Hour = 'Hour' in params ? params.Hour : null;
         this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.DayOfWeek = 'DayOfWeek' in params ? params.DayOfWeek : null;
         this.AliveDays = 'AliveDays' in params ? params.AliveDays : null;
+        this.DayOfMonth = 'DayOfMonth' in params ? params.DayOfMonth : null;
+        this.IntervalDays = 'IntervalDays' in params ? params.IntervalDays : null;
 
     }
 }
@@ -3974,7 +4059,7 @@ module.exports = {
     CreateCfsFileSystemRequest: CreateCfsFileSystemRequest,
     DescribeMountTargetsRequest: DescribeMountTargetsRequest,
     CreateCfsPGroupResponse: CreateCfsPGroupResponse,
-    UpdateCfsFileSystemPGroupRequest: UpdateCfsFileSystemPGroupRequest,
+    TieringDetailInfo: TieringDetailInfo,
     PGroupRuleInfo: PGroupRuleInfo,
     UpdateCfsFileSystemNameResponse: UpdateCfsFileSystemNameResponse,
     DescribeCfsServiceStatusRequest: DescribeCfsServiceStatusRequest,
@@ -3988,6 +4073,7 @@ module.exports = {
     DescribeCfsServiceStatusResponse: DescribeCfsServiceStatusResponse,
     CreateCfsRuleResponse: CreateCfsRuleResponse,
     CreateAutoSnapshotPolicyResponse: CreateAutoSnapshotPolicyResponse,
+    UpdateCfsFileSystemPGroupRequest: UpdateCfsFileSystemPGroupRequest,
     UpdateCfsFileSystemPGroupResponse: UpdateCfsFileSystemPGroupResponse,
     TagInfo: TagInfo,
     AvailableProtoStatus: AvailableProtoStatus,

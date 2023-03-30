@@ -2542,15 +2542,15 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.ApiAccessIpv6 = null;
 
         /**
-         * Cluster type
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Cluster type. Valid values: `0` and `1` (shared cluster), `2` (dedicated cluster).
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ClusterType = null;
 
         /**
-         * Cluster status
-Note: this field may return `null`, indicating that no valid values can be obtained.
+         * Cluster status. Valid values: `0` (Running), `1` (Isolated. This status is caused by overdue payments), `2` (To be repossessed. This status is caused when the cluster is actively deleted.),·`3` (To be released. The resources occupied by the table can be released in this status.), `4` (Modifying).
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ClusterStatus = null;
@@ -2638,6 +2638,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.IsReadOnlyUlogBackupExpireDay = null;
 
+        /**
+         * restproxy Status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RestProxyStatus = null;
+
     }
 
     /**
@@ -2697,6 +2704,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.TxhBackupExpireDay = 'TxhBackupExpireDay' in params ? params.TxhBackupExpireDay : null;
         this.UlogBackupExpireDay = 'UlogBackupExpireDay' in params ? params.UlogBackupExpireDay : null;
         this.IsReadOnlyUlogBackupExpireDay = 'IsReadOnlyUlogBackupExpireDay' in params ? params.IsReadOnlyUlogBackupExpireDay : null;
+        this.RestProxyStatus = 'RestProxyStatus' in params ? params.RestProxyStatus : null;
 
     }
 }
@@ -4566,6 +4574,13 @@ class ServerDetailInfo extends  AbstractModel {
          */
         this.WriteNum = null;
 
+        /**
+         * Version
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Version = null;
+
     }
 
     /**
@@ -4581,6 +4596,7 @@ class ServerDetailInfo extends  AbstractModel {
         this.DiskRate = 'DiskRate' in params ? params.DiskRate : null;
         this.ReadNum = 'ReadNum' in params ? params.ReadNum : null;
         this.WriteNum = 'WriteNum' in params ? params.WriteNum : null;
+        this.Version = 'Version' in params ? params.Version : null;
 
     }
 }
@@ -7093,6 +7109,13 @@ class ProxyDetailInfo extends  AbstractModel {
          */
         this.SlowProcessSpeed = null;
 
+        /**
+         * Version
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Version = null;
+
     }
 
     /**
@@ -7107,6 +7130,7 @@ class ProxyDetailInfo extends  AbstractModel {
         this.ProcessSpeed = 'ProcessSpeed' in params ? params.ProcessSpeed : null;
         this.AverageProcessDelay = 'AverageProcessDelay' in params ? params.AverageProcessDelay : null;
         this.SlowProcessSpeed = 'SlowProcessSpeed' in params ? params.SlowProcessSpeed : null;
+        this.Version = 'Version' in params ? params.Version : null;
 
     }
 }
@@ -7573,6 +7597,33 @@ class TableGroupInfo extends  AbstractModel {
          */
         this.TotalSize = null;
 
+        /**
+         * The number of days before the backup files of the Txh tables expire and are deleted.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TxhBackupExpireDay = null;
+
+        /**
+         * Whether MySQL load rebalancing is enabled. Valid values: `0` (Disabled), `1` (Enabling), `2` (Enabled).
+         * @type {number || null}
+         */
+        this.EnableMysql = null;
+
+        /**
+         * MySQL load rebalancing vip
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.MysqlConnIp = null;
+
+        /**
+         * MySQL load rebalancing vport
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MysqlConnPort = null;
+
     }
 
     /**
@@ -7587,6 +7638,10 @@ class TableGroupInfo extends  AbstractModel {
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.TableCount = 'TableCount' in params ? params.TableCount : null;
         this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+        this.TxhBackupExpireDay = 'TxhBackupExpireDay' in params ? params.TxhBackupExpireDay : null;
+        this.EnableMysql = 'EnableMysql' in params ? params.EnableMysql : null;
+        this.MysqlConnIp = 'MysqlConnIp' in params ? params.MysqlConnIp : null;
+        this.MysqlConnPort = 'MysqlConnPort' in params ? params.MysqlConnPort : null;
 
     }
 }

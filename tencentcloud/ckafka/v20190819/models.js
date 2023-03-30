@@ -2150,6 +2150,70 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreateDatahubTopic request structure.
+ * @class
+ */
+class CreateDatahubTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Number of partitions, which should be greater than 0.
+         * @type {number || null}
+         */
+        this.PartitionNum = null;
+
+        /**
+         * Message retention period in milliseconds. The current minimum value is 60,000 ms.
+         * @type {number || null}
+         */
+        this.RetentionMs = null;
+
+        /**
+         * Topic remarks, which are a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+         * @type {string || null}
+         */
+        this.Note = null;
+
+        /**
+         * Tag list
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PartitionNum = 'PartitionNum' in params ? params.PartitionNum : null;
+        this.RetentionMs = 'RetentionMs' in params ? params.RetentionMs : null;
+        this.Note = 'Note' in params ? params.Note : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Instance billing parameters
  * @class
  */
@@ -2536,24 +2600,18 @@ class CreateUserResponse extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceAttributes response structure.
+ * DescribeRoute request structure.
  * @class
  */
-class ModifyInstanceAttributesResponse extends  AbstractModel {
+class DescribeRouteRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Returned result
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Unique instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -2564,13 +2622,7 @@ class ModifyInstanceAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3787,6 +3839,34 @@ class DeleteInstancePreResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DataHub topic response
+ * @class
+ */
+class DatahubTopicResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic name
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
 
     }
 }
@@ -5423,6 +5503,46 @@ class DescribeTopicProduceConnectionResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyInstanceAttributes response structure.
+ * @class
+ */
+class ModifyInstanceAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Consumer group topic object
  * @class
  */
@@ -6710,18 +6830,24 @@ class InquireCkafkaPriceResponse extends  AbstractModel {
 }
 
 /**
- * DescribeRoute request structure.
+ * CreateDatahubTopic response structure.
  * @class
  */
-class DescribeRouteRequest extends  AbstractModel {
+class CreateDatahubTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique instance ID
+         * Returned creation result
+         * @type {DatahubTopicResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.RequestId = null;
 
     }
 
@@ -6732,7 +6858,13 @@ class DescribeRouteRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Result) {
+            let obj = new DatahubTopicResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9454,6 +9586,7 @@ module.exports = {
     Tag: Tag,
     BatchModifyGroupOffsetsResponse: BatchModifyGroupOffsetsResponse,
     GroupResponse: GroupResponse,
+    CreateDatahubTopicRequest: CreateDatahubTopicRequest,
     InstanceChargeParam: InstanceChargeParam,
     DescribeDatahubTopicResponse: DescribeDatahubTopicResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
@@ -9464,7 +9597,7 @@ module.exports = {
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
     OperateResponseData: OperateResponseData,
     CreateUserResponse: CreateUserResponse,
-    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
+    DescribeRouteRequest: DescribeRouteRequest,
     CreatePartitionResponse: CreatePartitionResponse,
     TopicSubscribeGroup: TopicSubscribeGroup,
     ClusterInfo: ClusterInfo,
@@ -9488,6 +9621,7 @@ module.exports = {
     DynamicRetentionTime: DynamicRetentionTime,
     DescribeTopicSubscribeGroupRequest: DescribeTopicSubscribeGroupRequest,
     DeleteInstancePreResponse: DeleteInstancePreResponse,
+    DatahubTopicResp: DatahubTopicResp,
     FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
     InquiryPublicNetworkParam: InquiryPublicNetworkParam,
     TopicInSyncReplicaInfo: TopicInSyncReplicaInfo,
@@ -9521,6 +9655,7 @@ module.exports = {
     DescribeConsumerGroupRequest: DescribeConsumerGroupRequest,
     VipEntity: VipEntity,
     DescribeTopicProduceConnectionResponse: DescribeTopicProduceConnectionResponse,
+    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
     ConsumerGroupTopic: ConsumerGroupTopic,
     User: User,
     GroupOffsetPartition: GroupOffsetPartition,
@@ -9542,7 +9677,7 @@ module.exports = {
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
     CreateConsumerRequest: CreateConsumerRequest,
     InquireCkafkaPriceResponse: InquireCkafkaPriceResponse,
-    DescribeRouteRequest: DescribeRouteRequest,
+    CreateDatahubTopicResponse: CreateDatahubTopicResponse,
     InquiryDiskParam: InquiryDiskParam,
     TopicInSyncReplicaResult: TopicInSyncReplicaResult,
     SendMessageResponse: SendMessageResponse,

@@ -2316,7 +2316,7 @@ class DescribeResourcesByDealNameResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Instance network information
  * @class
  */
 class InstanceNetInfo extends  AbstractModel {
@@ -2324,49 +2324,57 @@ class InstanceNetInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Network type
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceGroupType = null;
 
         /**
-         * 
+         * Instance group ID
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InstanceGroupId = null;
 
         /**
-         * 
+         * VPC ID
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 
+         * Subnet ID
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 
+         * Network type
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.NetType = null;
 
         /**
-         * 
+         * VPC IP
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * 
+         * VPC port
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Vport = null;
 
         /**
-         * 
+         * Public network domain name
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.WanDomain = null;
@@ -2378,13 +2386,15 @@ class InstanceNetInfo extends  AbstractModel {
         this.WanIP = null;
 
         /**
-         * 
+         * Public network port
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.WanPort = null;
 
         /**
-         * 
+         * Public network status
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.WanStatus = null;
@@ -3865,7 +3875,8 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.SlaveZones = null;
 
         /**
-         * 
+         * Instance network information
+Note: This field may return null, indicating that no valid value can be obtained.
          * @type {Array.<InstanceNetInfo> || null}
          */
         this.InstanceNetInfo = null;
@@ -8193,19 +8204,19 @@ class AddInstancesRequest extends  AbstractModel {
         this.ReadOnlyCount = null;
 
         /**
-         * Instance group ID, which is used when you add an instance to an existing RO group. If this parameter is left empty, an RO group will be created. We recommend you not pass in this value on the current version.
+         * Instance group ID, which will be used when you add an instance in an existing RO group. If this parameter is left empty, an RO group will be created. But it is not recommended to pass in this parameter for the current version, as this version has been disused.
          * @type {string || null}
          */
         this.InstanceGrpId = null;
 
         /**
-         * VPC ID. This parameter has been disused.
+         * VPC ID
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet ID. If `VpcId` is set, `SubnetId` is required. This parameter has been disused.
+         * Subnet ID. If `VpcId` is set, `SubnetId` is required.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -8259,6 +8270,12 @@ class AddInstancesRequest extends  AbstractModel {
          */
         this.InstanceParams = null;
 
+        /**
+         * Security group ID. You can specify an security group when creating a read-only instance.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -8291,6 +8308,7 @@ class AddInstancesRequest extends  AbstractModel {
                 this.InstanceParams.push(obj);
             }
         }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }

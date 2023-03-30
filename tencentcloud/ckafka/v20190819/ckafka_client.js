@@ -55,6 +55,7 @@ const Topic = models.Topic;
 const Tag = models.Tag;
 const BatchModifyGroupOffsetsResponse = models.BatchModifyGroupOffsetsResponse;
 const GroupResponse = models.GroupResponse;
+const CreateDatahubTopicRequest = models.CreateDatahubTopicRequest;
 const InstanceChargeParam = models.InstanceChargeParam;
 const DescribeDatahubTopicResponse = models.DescribeDatahubTopicResponse;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
@@ -65,7 +66,7 @@ const DescribeGroupResponse = models.DescribeGroupResponse;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
 const OperateResponseData = models.OperateResponseData;
 const CreateUserResponse = models.CreateUserResponse;
-const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
+const DescribeRouteRequest = models.DescribeRouteRequest;
 const CreatePartitionResponse = models.CreatePartitionResponse;
 const TopicSubscribeGroup = models.TopicSubscribeGroup;
 const ClusterInfo = models.ClusterInfo;
@@ -89,6 +90,7 @@ const DeleteAclResponse = models.DeleteAclResponse;
 const DynamicRetentionTime = models.DynamicRetentionTime;
 const DescribeTopicSubscribeGroupRequest = models.DescribeTopicSubscribeGroupRequest;
 const DeleteInstancePreResponse = models.DeleteInstancePreResponse;
+const DatahubTopicResp = models.DatahubTopicResp;
 const FetchMessageByOffsetRequest = models.FetchMessageByOffsetRequest;
 const InquiryPublicNetworkParam = models.InquiryPublicNetworkParam;
 const TopicInSyncReplicaInfo = models.TopicInSyncReplicaInfo;
@@ -122,6 +124,7 @@ const DescribeRegionResponse = models.DescribeRegionResponse;
 const DescribeConsumerGroupRequest = models.DescribeConsumerGroupRequest;
 const VipEntity = models.VipEntity;
 const DescribeTopicProduceConnectionResponse = models.DescribeTopicProduceConnectionResponse;
+const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
 const ConsumerGroupTopic = models.ConsumerGroupTopic;
 const User = models.User;
 const GroupOffsetPartition = models.GroupOffsetPartition;
@@ -143,7 +146,7 @@ const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const CreateConsumerRequest = models.CreateConsumerRequest;
 const InquireCkafkaPriceResponse = models.InquireCkafkaPriceResponse;
-const DescribeRouteRequest = models.DescribeRouteRequest;
+const CreateDatahubTopicResponse = models.CreateDatahubTopicResponse;
 const InquiryDiskParam = models.InquiryDiskParam;
 const TopicInSyncReplicaResult = models.TopicInSyncReplicaResult;
 const SendMessageResponse = models.SendMessageResponse;
@@ -394,6 +397,17 @@ class CkafkaClient extends AbstractClient {
     FetchMessageListByOffset(req, cb) {
         let resp = new FetchMessageListByOffsetResponse();
         this.request("FetchMessageListByOffset", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a DataHub topic.
+     * @param {CreateDatahubTopicRequest} req
+     * @param {function(string, CreateDatahubTopicResponse):void} cb
+     * @public
+     */
+    CreateDatahubTopic(req, cb) {
+        let resp = new CreateDatahubTopicResponse();
+        this.request("CreateDatahubTopic", req, resp, cb);
     }
 
     /**

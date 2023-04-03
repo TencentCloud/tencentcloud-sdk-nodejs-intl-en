@@ -1943,24 +1943,18 @@ The period queried per request cannot be longer than 31 days.
 }
 
 /**
- * The watermark layout.
+ * DescribeTrtcRoomUsage response structure.
  * @class
  */
-class WaterMark extends  AbstractModel {
+class DescribeTrtcRoomUsageResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The watermark type. 0 (default): image; 1: text (not supported yet).
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.WaterMarkType = null;
-
-        /**
-         * The information of watermark images. This parameter is required if the watermark type is image.
-         * @type {WaterMarkImage || null}
-         */
-        this.WaterMarkImage = null;
+        this.RequestId = null;
 
     }
 
@@ -1971,13 +1965,7 @@ class WaterMark extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WaterMarkType = 'WaterMarkType' in params ? params.WaterMarkType : null;
-
-        if (params.WaterMarkImage) {
-            let obj = new WaterMarkImage();
-            obj.deserialize(params.WaterMarkImage)
-            this.WaterMarkImage = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3307,6 +3295,48 @@ class AudioParams extends  AbstractModel {
 }
 
 /**
+ * DescribeTrtcRoomUsage request structure.
+ * @class
+ */
+class DescribeTrtcRoomUsageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.SdkAppid = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppid = 'SdkAppid' in params ? params.SdkAppid : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * The information of the watermark image.
  * @class
  */
@@ -3526,6 +3556,46 @@ class TrtcUsage extends  AbstractModel {
 }
 
 /**
+ * The watermark layout.
+ * @class
+ */
+class WaterMark extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The watermark type. 0 (default): image; 1: text (not supported yet).
+         * @type {number || null}
+         */
+        this.WaterMarkType = null;
+
+        /**
+         * The information of watermark images. This parameter is required if the watermark type is image.
+         * @type {WaterMarkImage || null}
+         */
+        this.WaterMarkImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WaterMarkType = 'WaterMarkType' in params ? params.WaterMarkType : null;
+
+        if (params.WaterMarkImage) {
+            let obj = new WaterMarkImage();
+            obj.deserialize(params.WaterMarkImage)
+            this.WaterMarkImage = obj;
+        }
+
+    }
+}
+
+/**
  * DismissRoomByStrRoomId response structure.
  * @class
  */
@@ -3731,7 +3801,7 @@ module.exports = {
     VideoParams: VideoParams,
     CreateCloudRecordingRequest: CreateCloudRecordingRequest,
     DescribeMixTranscodingUsageRequest: DescribeMixTranscodingUsageRequest,
-    WaterMark: WaterMark,
+    DescribeTrtcRoomUsageResponse: DescribeTrtcRoomUsageResponse,
     DeleteCloudRecordingResponse: DeleteCloudRecordingResponse,
     UpdatePublishCdnStreamResponse: UpdatePublishCdnStreamResponse,
     MixTranscodeParams: MixTranscodeParams,
@@ -3759,11 +3829,13 @@ module.exports = {
     McuPublishCdnParam: McuPublishCdnParam,
     SetUserBlockedByStrRoomIdRequest: SetUserBlockedByStrRoomIdRequest,
     AudioParams: AudioParams,
+    DescribeTrtcRoomUsageRequest: DescribeTrtcRoomUsageRequest,
     McuWaterMarkImage: McuWaterMarkImage,
     StartPublishCdnStreamResponse: StartPublishCdnStreamResponse,
     SingleSubscribeParams: SingleSubscribeParams,
     McuWaterMarkParams: McuWaterMarkParams,
     TrtcUsage: TrtcUsage,
+    WaterMark: WaterMark,
     DismissRoomByStrRoomIdResponse: DismissRoomByStrRoomIdResponse,
     ModifyCloudRecordingResponse: ModifyCloudRecordingResponse,
     DescribeRelayUsageResponse: DescribeRelayUsageResponse,

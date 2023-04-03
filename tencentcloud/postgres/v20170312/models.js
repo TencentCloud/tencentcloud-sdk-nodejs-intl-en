@@ -453,6 +453,41 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * OpenDBExtranetAccess request structure.
+ * @class
+ */
+class OpenDBExtranetAccessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of postgres-hez4fh0v
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Whether to enable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+         * @type {number || null}
+         */
+        this.IsIpv6 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.IsIpv6 = 'IsIpv6' in params ? params.IsIpv6 : null;
+
+    }
+}
+
+/**
  * CreateInstances request structure.
  * @class
  */
@@ -954,6 +989,34 @@ class DescribeAvailableRecoveryTimeResponse extends  AbstractModel {
 }
 
 /**
+ * CreateBaseBackup request structure.
+ * @class
+ */
+class CreateBaseBackupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceReadOnlyGroup response structure.
  * @class
  */
@@ -989,120 +1052,48 @@ class ModifyDBInstanceReadOnlyGroupResponse extends  AbstractModel {
 }
 
 /**
- * CloneDBInstance request structure.
+ * Database instance specification
  * @class
  */
-class CloneDBInstanceRequest extends  AbstractModel {
+class ClassInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the original instance to be cloned.
-         * @type {string || null}
-         */
-        this.DBInstanceId = null;
-
-        /**
-         * Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * Specification ID
          * @type {string || null}
          */
         this.SpecCode = null;
 
         /**
-         * Instance storage capacity in GB.
+         * Number of CPU cores
          * @type {number || null}
          */
-        this.Storage = null;
+        this.CPU = null;
 
         /**
-         * Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+         * Memory size in MB
          * @type {number || null}
          */
-        this.Period = null;
+        this.Memory = null;
 
         /**
-         * Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+         * Maximum storage capacity in GB supported by this specification
          * @type {number || null}
          */
-        this.AutoRenewFlag = null;
+        this.MaxStorage = null;
 
         /**
-         * VPC ID.
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * ID of a subnet in the VPC specified by `VpcId`.
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * Name of the purchased instance.
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
-         * Security group ID.
-         * @type {Array.<string> || null}
-         */
-        this.SecurityGroupIds = null;
-
-        /**
-         * Project ID.
+         * Minimum storage capacity in GB supported by this specification
          * @type {number || null}
          */
-        this.ProjectId = null;
+        this.MinStorage = null;
 
         /**
-         * The information of tags to be bound with the purchased instance. This parameter is left empty by default.
-         * @type {Array.<Tag> || null}
-         */
-        this.TagList = null;
-
-        /**
-         * This parameter is required if you purchase a multi-AZ deployed instance.
-         * @type {Array.<DBNode> || null}
-         */
-        this.DBNodeSet = null;
-
-        /**
-         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * Estimated QPS for this specification
          * @type {number || null}
          */
-        this.AutoVoucher = null;
-
-        /**
-         * Voucher ID list.
-         * @type {string || null}
-         */
-        this.VoucherIds = null;
-
-        /**
-         * Campaign ID.
-         * @type {number || null}
-         */
-        this.ActivityId = null;
-
-        /**
-         * Basic backup set ID.
-         * @type {string || null}
-         */
-        this.BackupSetId = null;
-
-        /**
-         * Restoration point in time.
-         * @type {string || null}
-         */
-        this.RecoveryTargetTime = null;
+        this.QPS = null;
 
     }
 
@@ -1113,40 +1104,12 @@ class CloneDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
         this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.Period = 'Period' in params ? params.Period : null;
-        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-
-        if (params.TagList) {
-            this.TagList = new Array();
-            for (let z in params.TagList) {
-                let obj = new Tag();
-                obj.deserialize(params.TagList[z]);
-                this.TagList.push(obj);
-            }
-        }
-
-        if (params.DBNodeSet) {
-            this.DBNodeSet = new Array();
-            for (let z in params.DBNodeSet) {
-                let obj = new DBNode();
-                obj.deserialize(params.DBNodeSet[z]);
-                this.DBNodeSet.push(obj);
-            }
-        }
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
-        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
-        this.BackupSetId = 'BackupSetId' in params ? params.BackupSetId : null;
-        this.RecoveryTargetTime = 'RecoveryTargetTime' in params ? params.RecoveryTargetTime : null;
+        this.CPU = 'CPU' in params ? params.CPU : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.MinStorage = 'MinStorage' in params ? params.MinStorage : null;
+        this.QPS = 'QPS' in params ? params.QPS : null;
 
     }
 }
@@ -1341,6 +1304,34 @@ class DeleteServerlessDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteLogBackup response structure.
+ * @class
+ */
+class DeleteLogBackupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyReadOnlyGroupConfig request structure.
  * @class
  */
@@ -1413,6 +1404,90 @@ class ModifyReadOnlyGroupConfigRequest extends  AbstractModel {
         this.MaxReplayLag = 'MaxReplayLag' in params ? params.MaxReplayLag : null;
         this.Rebalance = 'Rebalance' in params ? params.Rebalance : null;
         this.MinDelayEliminateReserve = 'MinDelayEliminateReserve' in params ? params.MinDelayEliminateReserve : null;
+
+    }
+}
+
+/**
+ * Instance backup statistics
+ * @class
+ */
+class BackupSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Number of log backups of an instance
+         * @type {number || null}
+         */
+        this.LogBackupCount = null;
+
+        /**
+         * Size of log backups of an instance
+         * @type {number || null}
+         */
+        this.LogBackupSize = null;
+
+        /**
+         * Number of manually created full backups of an instance
+         * @type {number || null}
+         */
+        this.ManualBaseBackupCount = null;
+
+        /**
+         * Size of manually created full backups of an instance
+         * @type {number || null}
+         */
+        this.ManualBaseBackupSize = null;
+
+        /**
+         * Number of automatically created full backups of an instance
+         * @type {number || null}
+         */
+        this.AutoBaseBackupCount = null;
+
+        /**
+         * Size of automatically created full backups of an instance
+         * @type {number || null}
+         */
+        this.AutoBaseBackupSize = null;
+
+        /**
+         * Total number of backups
+         * @type {number || null}
+         */
+        this.TotalBackupCount = null;
+
+        /**
+         * Total backup size
+         * @type {number || null}
+         */
+        this.TotalBackupSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.LogBackupCount = 'LogBackupCount' in params ? params.LogBackupCount : null;
+        this.LogBackupSize = 'LogBackupSize' in params ? params.LogBackupSize : null;
+        this.ManualBaseBackupCount = 'ManualBaseBackupCount' in params ? params.ManualBaseBackupCount : null;
+        this.ManualBaseBackupSize = 'ManualBaseBackupSize' in params ? params.ManualBaseBackupSize : null;
+        this.AutoBaseBackupCount = 'AutoBaseBackupCount' in params ? params.AutoBaseBackupCount : null;
+        this.AutoBaseBackupSize = 'AutoBaseBackupSize' in params ? params.AutoBaseBackupSize : null;
+        this.TotalBackupCount = 'TotalBackupCount' in params ? params.TotalBackupCount : null;
+        this.TotalBackupSize = 'TotalBackupSize' in params ? params.TotalBackupSize : null;
 
     }
 }
@@ -1645,18 +1720,12 @@ class RenewInstanceRequest extends  AbstractModel {
 }
 
 /**
- * RebalanceReadOnlyGroup request structure.
+ * DescribeBackupOverview request structure.
  * @class
  */
-class RebalanceReadOnlyGroupRequest extends  AbstractModel {
+class DescribeBackupOverviewRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * RO group ID
-         * @type {string || null}
-         */
-        this.ReadOnlyGroupId = null;
 
     }
 
@@ -1667,7 +1736,6 @@ class RebalanceReadOnlyGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
 
     }
 }
@@ -1716,6 +1784,34 @@ class DescribeRegionsResponse extends  AbstractModel {
                 obj.deserialize(params.RegionSet[z]);
                 this.RegionSet.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyBaseBackupExpireTime response structure.
+ * @class
+ */
+class ModifyBaseBackupExpireTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1942,7 +2038,11 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Availability status. Valid values: `UNAVAILABLE`, `AVAILABLE`, `SELLOUT`
+         * Availability status. Valid values:
+`UNAVAILABLE`.
+`AVAILABLE`.
+`SELLOUT`.
+`SUPPORTMODIFYONLY` (supports configuration adjustment).
          * @type {string || null}
          */
         this.ZoneState = null;
@@ -1980,68 +2080,24 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * InquiryPriceCreateDBInstances request structure.
+ * DescribeReadOnlyGroups response structure.
  * @class
  */
-class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
+class DescribeReadOnlyGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+         * RO group list
+         * @type {Array.<ReadOnlyGroup> || null}
+         */
+        this.ReadOnlyGroupList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Zone = null;
-
-        /**
-         * Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
-         * @type {string || null}
-         */
-        this.SpecCode = null;
-
-        /**
-         * Storage capacity size in GB.
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Number of instances. Maximum value: 100. If you need to create more instances at a time, please contact customer service.
-         * @type {number || null}
-         */
-        this.InstanceCount = null;
-
-        /**
-         * Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * [Disused] Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-        /**
-         * Instance billing type. Valid value: POSTPAID_BY_HOUR (pay-as-you-go)
-         * @type {string || null}
-         */
-        this.InstanceChargeType = null;
-
-        /**
-         * Instance type. Default value: `primary`. Valid values:
-`primary` (dual-server high-availability, one-primary-one-standby)
-`readonly` (read-only instance)
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * 
-         * @type {string || null}
-         */
-        this.DBEngine = null;
+        this.RequestId = null;
 
     }
 
@@ -2052,15 +2108,16 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
-        this.Period = 'Period' in params ? params.Period : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
+
+        if (params.ReadOnlyGroupList) {
+            this.ReadOnlyGroupList = new Array();
+            for (let z in params.ReadOnlyGroupList) {
+                let obj = new ReadOnlyGroup();
+                obj.deserialize(params.ReadOnlyGroupList[z]);
+                this.ReadOnlyGroupList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2227,6 +2284,73 @@ class Tag extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupSummaries request structure.
+ * @class
+ */
+class DescribeBackupSummariesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The maximum number of results returned per page. Value range: 1-100. Default: `10`
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Data offset, which starts from 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter instances using one or more criteria. Valid filter names:
+db-instance-id: Filter by instance ID (in string format).
+db-instance-name: Filter by instance name (in string format).
+db-instance-ip: Filter by instance VPC IP (in string format).
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Sorting field. Valid values: `TotalBackupSize`, `LogBackupSize`, `ManualBaseBackupSize`, `AutoBaseBackupSize`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `asc` (ascending), `desc` (descending).
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
  * DescribeDBInstanceAttribute request structure.
  * @class
  */
@@ -2285,6 +2409,34 @@ class CloseServerlessDBExtranetAccessRequest extends  AbstractModel {
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
         this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
+
+    }
+}
+
+/**
+ * CreateBaseBackup response structure.
+ * @class
+ */
+class CreateBaseBackupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2414,6 +2566,97 @@ class AddDBInstanceToReadOnlyGroupResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Full backup information of a database
+ * @class
+ */
+class BaseBackup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Unique ID of a backup file
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Backup file name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Backup method, including physical and logical.
+         * @type {string || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * Backup mode, including automatic and manual.
+         * @type {string || null}
+         */
+        this.BackupMode = null;
+
+        /**
+         * Backup task status
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Backup set size in bytes
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * Backup start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Backup end time
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * Backup expiration time
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.BackupMode = 'BackupMode' in params ? params.BackupMode : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
 }
@@ -2616,6 +2859,41 @@ class DescribeOrdersResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupDownloadURL response structure.
+ * @class
+ */
+class DescribeBackupDownloadURLResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup download URL
+         * @type {string || null}
+         */
+        this.BackupDownloadURL = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BackupDownloadURL = 'BackupDownloadURL' in params ? params.BackupDownloadURL : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * OpenServerlessDBExtranetAccess response structure.
  * @class
  */
@@ -2757,6 +3035,81 @@ class InquiryPriceCreateDBInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * Database version information
+ * @class
+ */
+class Version extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database engines. Valid values:
+1. `postgresql` (TencentDB for PostgreSQL)
+2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL)
+         * @type {string || null}
+         */
+        this.DBEngine = null;
+
+        /**
+         * Database version, such as 12.4.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * Database major version, such as 12.
+         * @type {string || null}
+         */
+        this.DBMajorVersion = null;
+
+        /**
+         * Database kernel version, such as v12.4_r1.3.
+         * @type {string || null}
+         */
+        this.DBKernelVersion = null;
+
+        /**
+         * List of features supported by the database kernel, such as:
+TDE: Supports data encryption.
+         * @type {Array.<string> || null}
+         */
+        this.SupportedFeatureNames = null;
+
+        /**
+         * Database version status. Valid values:
+`AVAILABLE`.
+`DEPRECATED`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * List of versions to which this database version (`DBKernelVersion`) can be upgraded.
+         * @type {Array.<string> || null}
+         */
+        this.AvailableUpgradeTarget = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
+        this.DBKernelVersion = 'DBKernelVersion' in params ? params.DBKernelVersion : null;
+        this.SupportedFeatureNames = 'SupportedFeatureNames' in params ? params.SupportedFeatureNames : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AvailableUpgradeTarget = 'AvailableUpgradeTarget' in params ? params.AvailableUpgradeTarget : null;
+
+    }
+}
+
+/**
  * CreateDBInstanceNetworkAccess request structure.
  * @class
  */
@@ -2836,6 +3189,92 @@ class ModifySwitchTimePeriodResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceCreateDBInstances request structure.
+ * @class
+ */
+class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * @type {string || null}
+         */
+        this.SpecCode = null;
+
+        /**
+         * Storage capacity size in GB.
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Number of instances. Maximum value: 100. If you need to create more instances at a time, please contact customer service.
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * [Disused] Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Instance billing type. Valid value: POSTPAID_BY_HOUR (pay-as-you-go)
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Instance type. Default value: `primary`. Valid values:
+`primary` (dual-server high-availability, one-primary-one-standby)
+`readonly` (read-only instance)
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DBEngine = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
 
     }
 }
@@ -3595,24 +4034,57 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeReadOnlyGroups response structure.
+ * DescribeLogBackups request structure.
  * @class
  */
-class DescribeReadOnlyGroupsResponse extends  AbstractModel {
+class DescribeLogBackupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * RO group list
-         * @type {Array.<ReadOnlyGroup> || null}
-         */
-        this.ReadOnlyGroupList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Minimum end time of a backup in the format of `2018-01-01 00:00:00`. It is 7 days ago by default.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.MinFinishTime = null;
+
+        /**
+         * Maximum end time of a backup in the format of `2018-01-01 00:00:00`. It is the current time by default.
+         * @type {string || null}
+         */
+        this.MaxFinishTime = null;
+
+        /**
+         * Filter instances using one or more criteria. Valid filter names:
+db-instance-id: Filter by instance ID (in string format).
+db-instance-name: Filter by instance name (in string format).
+db-instance-ip: Filter by instance VPC IP (in string format).
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The maximum number of results returned per page. Value range: 1-100. Default: `10`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Data offset, which starts from 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting field. Valid values: `StartTime`, `FinishTime`, `Size`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `asc` (ascending), `desc` (descending).
+         * @type {string || null}
+         */
+        this.OrderByType = null;
 
     }
 
@@ -3623,16 +4095,21 @@ class DescribeReadOnlyGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MinFinishTime = 'MinFinishTime' in params ? params.MinFinishTime : null;
+        this.MaxFinishTime = 'MaxFinishTime' in params ? params.MaxFinishTime : null;
 
-        if (params.ReadOnlyGroupList) {
-            this.ReadOnlyGroupList = new Array();
-            for (let z in params.ReadOnlyGroupList) {
-                let obj = new ReadOnlyGroup();
-                obj.deserialize(params.ReadOnlyGroupList[z]);
-                this.ReadOnlyGroupList.push(obj);
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
 }
@@ -4082,6 +4559,56 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DescribeBackupSummaries response structure.
+ * @class
+ */
+class DescribeBackupSummariesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup statistics list.
+         * @type {Array.<BackupSummary> || null}
+         */
+        this.BackupSummarySet = null;
+
+        /**
+         * Number of all queried backups.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BackupSummarySet) {
+            this.BackupSummarySet = new Array();
+            for (let z in params.BackupSummarySet) {
+                let obj = new BackupSummary();
+                obj.deserialize(params.BackupSummarySet[z]);
+                this.BackupSummarySet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBErrlogs request structure.
  * @class
  */
@@ -4303,18 +4830,120 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * ModifyDBInstanceDeployment response structure.
+ * CloneDBInstance request structure.
  * @class
  */
-class ModifyDBInstanceDeploymentResponse extends  AbstractModel {
+class CloneDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * ID of the original instance to be cloned.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DBInstanceId = null;
+
+        /**
+         * Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+         * @type {string || null}
+         */
+        this.SpecCode = null;
+
+        /**
+         * Instance storage capacity in GB.
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * VPC ID.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * ID of a subnet in the VPC specified by `VpcId`.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Name of the purchased instance.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Security group ID.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * Project ID.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * The information of tags to be bound with the purchased instance. This parameter is left empty by default.
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
+        /**
+         * This parameter is required if you purchase a multi-AZ deployed instance.
+         * @type {Array.<DBNode> || null}
+         */
+        this.DBNodeSet = null;
+
+        /**
+         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID list.
+         * @type {string || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * Campaign ID.
+         * @type {number || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * Basic backup set ID.
+         * @type {string || null}
+         */
+        this.BackupSetId = null;
+
+        /**
+         * Restoration point in time.
+         * @type {string || null}
+         */
+        this.RecoveryTargetTime = null;
 
     }
 
@@ -4325,7 +4954,40 @@ class ModifyDBInstanceDeploymentResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
+
+        if (params.DBNodeSet) {
+            this.DBNodeSet = new Array();
+            for (let z in params.DBNodeSet) {
+                let obj = new DBNode();
+                obj.deserialize(params.DBNodeSet[z]);
+                this.DBNodeSet.push(obj);
+            }
+        }
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.BackupSetId = 'BackupSetId' in params ? params.BackupSetId : null;
+        this.RecoveryTargetTime = 'RecoveryTargetTime' in params ? params.RecoveryTargetTime : null;
 
     }
 }
@@ -4354,6 +5016,50 @@ class DeleteParameterTemplateRequest extends  AbstractModel {
             return;
         }
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * DescribeClasses request structure.
+ * @class
+ */
+class DescribeClassesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ ID, which can be obtained through the `DescribeZones` API.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Database engines. Valid values:
+1. `postgresql` (TencentDB for PostgreSQL)
+2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL)
+         * @type {string || null}
+         */
+        this.DBEngine = null;
+
+        /**
+         * Major version of a database, such as 12 or 13, which can be obtained through the `DescribeDBVersions` API.
+         * @type {string || null}
+         */
+        this.DBMajorVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DBEngine = 'DBEngine' in params ? params.DBEngine : null;
+        this.DBMajorVersion = 'DBMajorVersion' in params ? params.DBMajorVersion : null;
 
     }
 }
@@ -5177,42 +5883,6 @@ class CreateReadOnlyGroupRequest extends  AbstractModel {
 }
 
 /**
- * CreateReadOnlyGroupNetworkAccess response structure.
- * @class
- */
-class CreateReadOnlyGroupNetworkAccessResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Task ID.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.FlowId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * DescribeParamsEvent response structure.
  * @class
  */
@@ -5692,6 +6362,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeLogBackups response structure.
+ * @class
+ */
+class DescribeLogBackupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of queried log backups
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of log backup details
+         * @type {Array.<LogBackup> || null}
+         */
+        this.LogBackupSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.LogBackupSet) {
+            this.LogBackupSet = new Array();
+            for (let z in params.LogBackupSet) {
+                let obj = new LogBackup();
+                obj.deserialize(params.LogBackupSet[z]);
+                this.LogBackupSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Details returned by the `DescribeSlowQueryAnalysis` API
  * @class
  */
@@ -5941,18 +6661,18 @@ class InquiryPriceUpgradeDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * RebalanceReadOnlyGroup response structure.
+ * IsolateDBInstances request structure.
  * @class
  */
-class RebalanceReadOnlyGroupResponse extends  AbstractModel {
+class IsolateDBInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * List of instance IDs. Note that currently you cannot isolate multiple instances at the same time. Only one instance ID can be passed in here.
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.DBInstanceIdSet = null;
 
     }
 
@@ -5963,7 +6683,7 @@ class RebalanceReadOnlyGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
 
     }
 }
@@ -6068,6 +6788,34 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.IsEnabled = 'IsEnabled' in params ? params.IsEnabled : null;
         this.KeyRegion = 'KeyRegion' in params ? params.KeyRegion : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
+ * UpgradeDBInstanceKernelVersion response structure.
+ * @class
+ */
+class UpgradeDBInstanceKernelVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6299,18 +7047,72 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * IsolateDBInstances request structure.
+ * DescribeBackupOverview response structure.
  * @class
  */
-class IsolateDBInstancesRequest extends  AbstractModel {
+class DescribeBackupOverviewResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of instance IDs. Note that currently you cannot isolate multiple instances at the same time. Only one instance ID can be passed in here.
-         * @type {Array.<string> || null}
+         * Total free space size in bytes
+         * @type {number || null}
          */
-        this.DBInstanceIdSet = null;
+        this.TotalFreeSize = null;
+
+        /**
+         * Used free space size in bytes
+         * @type {number || null}
+         */
+        this.UsedFreeSize = null;
+
+        /**
+         * Used paid space size in bytes
+         * @type {number || null}
+         */
+        this.UsedBillingSize = null;
+
+        /**
+         * Number of log backups
+         * @type {number || null}
+         */
+        this.LogBackupCount = null;
+
+        /**
+         * Log backup size in bytes
+         * @type {number || null}
+         */
+        this.LogBackupSize = null;
+
+        /**
+         * Number of manually created full backups
+         * @type {number || null}
+         */
+        this.ManualBaseBackupCount = null;
+
+        /**
+         * Size of manually created full backups in bytes
+         * @type {number || null}
+         */
+        this.ManualBaseBackupSize = null;
+
+        /**
+         * Number of automatically created full backups
+         * @type {number || null}
+         */
+        this.AutoBaseBackupCount = null;
+
+        /**
+         * Size of automatically created full backups in bytes
+         * @type {number || null}
+         */
+        this.AutoBaseBackupSize = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -6321,7 +7123,16 @@ class IsolateDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
+        this.TotalFreeSize = 'TotalFreeSize' in params ? params.TotalFreeSize : null;
+        this.UsedFreeSize = 'UsedFreeSize' in params ? params.UsedFreeSize : null;
+        this.UsedBillingSize = 'UsedBillingSize' in params ? params.UsedBillingSize : null;
+        this.LogBackupCount = 'LogBackupCount' in params ? params.LogBackupCount : null;
+        this.LogBackupSize = 'LogBackupSize' in params ? params.LogBackupSize : null;
+        this.ManualBaseBackupCount = 'ManualBaseBackupCount' in params ? params.ManualBaseBackupCount : null;
+        this.ManualBaseBackupSize = 'ManualBaseBackupSize' in params ? params.ManualBaseBackupSize : null;
+        this.AutoBaseBackupCount = 'AutoBaseBackupCount' in params ? params.AutoBaseBackupCount : null;
+        this.AutoBaseBackupSize = 'AutoBaseBackupSize' in params ? params.AutoBaseBackupSize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6440,6 +7251,49 @@ class InitDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeClasses response structure.
+ * @class
+ */
+class DescribeClassesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of database specifications
+         * @type {Array.<ClassInfo> || null}
+         */
+        this.ClassInfoSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ClassInfoSet) {
+            this.ClassInfoSet = new Array();
+            for (let z in params.ClassInfoSet) {
+                let obj = new ClassInfo();
+                obj.deserialize(params.ClassInfoSet[z]);
+                this.ClassInfoSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteDBInstanceNetworkAccess request structure.
  * @class
  */
@@ -6484,6 +7338,34 @@ class DeleteDBInstanceNetworkAccessRequest extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.Vip = 'Vip' in params ? params.Vip : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceDeployment response structure.
+ * @class
+ */
+class ModifyDBInstanceDeploymentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6539,7 +7421,7 @@ class DBInstance extends  AbstractModel {
         this.DBInstanceName = null;
 
         /**
-         * Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`
+         * Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`, upgrading (upgrading kernel version).
          * @type {string || null}
          */
         this.DBInstanceStatus = null;
@@ -6982,18 +7864,42 @@ class Filter extends  AbstractModel {
 }
 
 /**
- * DisIsolateDBInstances response structure.
+ * DescribeReadOnlyGroups request structure.
  * @class
  */
-class DisIsolateDBInstancesResponse extends  AbstractModel {
+class DescribeReadOnlyGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Filter condition. The primary ID must be specified in the format of `db-master-instance-id` to filter results, or else `null` will be returned.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The number of results per page. Default value: 10.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Specify which page is displayed. Default value: 1 (the first page).
+         * @type {number || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * Sorting criterion. Valid values: `ROGroupId`, `CreateTime`, `Name`.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `desc`, `asc`.
+         * @type {string || null}
+         */
+        this.OrderByType = null;
 
     }
 
@@ -7004,7 +7910,68 @@ class DisIsolateDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
+ * DescribeBackupDownloadURL request structure.
+ * @class
+ */
+class DescribeBackupDownloadURLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Backup type. Valid values: `LogBackup`, `BaseBackup`.
+         * @type {string || null}
+         */
+        this.BackupType = null;
+
+        /**
+         * Unique backup ID.
+         * @type {string || null}
+         */
+        this.BackupId = null;
+
+        /**
+         * Validity period of a URL, which is 12 hours by default.
+         * @type {number || null}
+         */
+        this.URLExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.URLExpireTime = 'URLExpireTime' in params ? params.URLExpireTime : null;
 
     }
 }
@@ -7038,24 +8005,24 @@ class ModifyDBInstanceParametersResponse extends  AbstractModel {
 }
 
 /**
- * OpenDBExtranetAccess request structure.
+ * DescribeDBVersions response structure.
  * @class
  */
-class OpenDBExtranetAccessRequest extends  AbstractModel {
+class DescribeDBVersionsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of postgres-hez4fh0v
-         * @type {string || null}
+         * List of database versions
+         * @type {Array.<Version> || null}
          */
-        this.DBInstanceId = null;
+        this.VersionSet = null;
 
         /**
-         * Whether to enable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.IsIpv6 = null;
+        this.RequestId = null;
 
     }
 
@@ -7066,8 +8033,16 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-        this.IsIpv6 = 'IsIpv6' in params ? params.IsIpv6 : null;
+
+        if (params.VersionSet) {
+            this.VersionSet = new Array();
+            for (let z in params.VersionSet) {
+                let obj = new Version();
+                obj.deserialize(params.VersionSet[z]);
+                this.VersionSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7741,6 +8716,125 @@ class DescribeEncryptionKeysRequest extends  AbstractModel {
 }
 
 /**
+ * Log backup information of a database
+ * @class
+ */
+class LogBackup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Unique ID of a backup file
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Backup file name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Backup method, including physical and logical.
+         * @type {string || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * Backup mode, including automatic and manual.
+         * @type {string || null}
+         */
+        this.BackupMode = null;
+
+        /**
+         * Backup task status
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Backup set size in bytes
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * Backup start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Backup end time
+         * @type {string || null}
+         */
+        this.FinishTime = null;
+
+        /**
+         * Backup expiration time
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.BackupMode = 'BackupMode' in params ? params.BackupMode : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+    }
+}
+
+/**
+ * RebalanceReadOnlyGroup request structure.
+ * @class
+ */
+class RebalanceReadOnlyGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO group ID
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
+
+    }
+}
+
+/**
  * ModifyBackupPlan response structure.
  * @class
  */
@@ -8298,6 +9392,41 @@ class ModifyBackupPlanRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteBaseBackup request structure.
+ * @class
+ */
+class DeleteBaseBackupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Base backup ID
+         * @type {string || null}
+         */
+        this.BaseBackupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.BaseBackupId = 'BaseBackupId' in params ? params.BaseBackupId : null;
+
+    }
+}
+
+/**
  * Parameters to be modified in batches
  * @class
  */
@@ -8376,6 +9505,34 @@ class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
         this.Currency = 'Currency' in params ? params.Currency : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisIsolateDBInstances response structure.
+ * @class
+ */
+class DisIsolateDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8734,6 +9891,48 @@ class RestartDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyBaseBackupExpireTime request structure.
+ * @class
+ */
+class ModifyBaseBackupExpireTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Base backup ID
+         * @type {string || null}
+         */
+        this.BaseBackupId = null;
+
+        /**
+         * New expiration time
+         * @type {string || null}
+         */
+        this.NewExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.BaseBackupId = 'BaseBackupId' in params ? params.BaseBackupId : null;
+        this.NewExpireTime = 'NewExpireTime' in params ? params.NewExpireTime : null;
+
+    }
+}
+
+/**
  * DescribeDBInstances response structure.
  * @class
  */
@@ -8842,6 +10041,34 @@ class DescribeBackupPlansRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
+ * RebalanceReadOnlyGroup response structure.
+ * @class
+ */
+class RebalanceReadOnlyGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9042,42 +10269,25 @@ class RawSlowQuery extends  AbstractModel {
 }
 
 /**
- * DescribeReadOnlyGroups request structure.
+ * CreateReadOnlyGroupNetworkAccess response structure.
  * @class
  */
-class DescribeReadOnlyGroupsRequest extends  AbstractModel {
+class CreateReadOnlyGroupNetworkAccessResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Filter condition. The primary ID must be specified in the format of `db-master-instance-id` to filter results, or else `null` will be returned.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * The number of results per page. Default value: 10.
+         * Task ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
-        this.PageSize = null;
+        this.FlowId = null;
 
         /**
-         * Specify which page is displayed. Default value: 1 (the first page).
-         * @type {number || null}
-         */
-        this.PageNumber = null;
-
-        /**
-         * Sorting criterion. Valid values: `ROGroupId`, `CreateTime`, `Name`.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.OrderBy = null;
-
-        /**
-         * Sorting order. Valid values: `desc`, `asc`.
-         * @type {string || null}
-         */
-        this.OrderByType = null;
+        this.RequestId = null;
 
     }
 
@@ -9088,19 +10298,8 @@ class DescribeReadOnlyGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9290,6 +10489,27 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDBVersions request structure.
+ * @class
+ */
+class DescribeDBVersionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ModifyDBInstancesProject request structure.
  * @class
  */
@@ -9470,6 +10690,69 @@ class DescribeDBInstanceAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteLogBackup request structure.
+ * @class
+ */
+class DeleteLogBackupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Log backup ID
+         * @type {string || null}
+         */
+        this.LogBackupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.LogBackupId = 'LogBackupId' in params ? params.LogBackupId : null;
+
+    }
+}
+
+/**
+ * DeleteBaseBackup response structure.
+ * @class
+ */
+class DeleteBaseBackupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Rule information for security group
  * @class
  */
@@ -9568,6 +10851,56 @@ class ModifyDBInstanceSpecResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBaseBackups response structure.
+ * @class
+ */
+class DescribeBaseBackupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of queried full backups
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * List of full backup details
+         * @type {Array.<BaseBackup> || null}
+         */
+        this.BaseBackupSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BaseBackupSet) {
+            this.BaseBackupSet = new Array();
+            for (let z in params.BaseBackupSet) {
+                let obj = new BaseBackup();
+                obj.deserialize(params.BaseBackupSet[z]);
+                this.BaseBackupSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBXlogs response structure.
  * @class
  */
@@ -9613,6 +10946,87 @@ class DescribeDBXlogsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBaseBackups request structure.
+ * @class
+ */
+class DescribeBaseBackupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Minimum end time of a backup in the format of `2018-01-01 00:00:00`. It is 7 days ago by default.
+         * @type {string || null}
+         */
+        this.MinFinishTime = null;
+
+        /**
+         * Maximum end time of a backup in the format of `2018-01-01 00:00:00`. It is the current time by default.
+         * @type {string || null}
+         */
+        this.MaxFinishTime = null;
+
+        /**
+         * Filter instances using one or more criteria. Valid filter names:
+db-instance-id: Filter by instance ID (in string format).
+db-instance-name: Filter by instance name (in string format).
+db-instance-ip: Filter by instance VPC IP (in string format).
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The maximum number of results returned per page. Value range: 1-100. Default: `10`
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Data offset, which starts from 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sorting field. Valid values: `StartTime`, `FinishTime`, `Size`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `asc` (ascending), `desc` (descending).
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MinFinishTime = 'MinFinishTime' in params ? params.MinFinishTime : null;
+        this.MaxFinishTime = 'MaxFinishTime' in params ? params.MaxFinishTime : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
 }
@@ -9757,6 +11171,74 @@ class CreateDBInstancesResponse extends  AbstractModel {
     }
 }
 
+/**
+ * UpgradeDBInstanceKernelVersion request structure.
+ * @class
+ */
+class UpgradeDBInstanceKernelVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Target kernel version, which can be obtained in the `AvailableUpgradeTarget` field returned by the `DescribeDBVersions` API.
+         * @type {string || null}
+         */
+        this.TargetDBKernelVersion = null;
+
+        /**
+         * Switch time after the kernel version upgrade. Valid values:
+`0` (default value): Switch now.
+`1`: Switch at the specified time.
+`2`: Switch in the maintenance time.
+         * @type {number || null}
+         */
+        this.SwitchTag = null;
+
+        /**
+         * Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is `0` or `2`, this parameter is invalid.
+         * @type {string || null}
+         */
+        this.SwitchStartTime = null;
+
+        /**
+         * Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is `0` or `2`, this parameter is invalid. The difference between `SwitchStartTime` and `SwitchEndTime` cannot be less than 30 minutes.
+         * @type {string || null}
+         */
+        this.SwitchEndTime = null;
+
+        /**
+         * Whether to perform a precheck on the current operation of upgrading the instance kernel version. Valid values:
+`true`: Performs a precheck without upgrading the kernel version. Check items include request parameters, kernel version compatibility, and instance parameters.
+`false` (default value): Sends a normal request and upgrades the kernel version directly after the check is passed.
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.TargetDBKernelVersion = 'TargetDBKernelVersion' in params ? params.TargetDBKernelVersion : null;
+        this.SwitchTag = 'SwitchTag' in params ? params.SwitchTag : null;
+        this.SwitchStartTime = 'SwitchStartTime' in params ? params.SwitchStartTime : null;
+        this.SwitchEndTime = 'SwitchEndTime' in params ? params.SwitchEndTime : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+
+    }
+}
+
 module.exports = {
     CreateDBInstancesRequest: CreateDBInstancesRequest,
     SetAutoRenewFlagRequest: SetAutoRenewFlagRequest,
@@ -9765,49 +11247,60 @@ module.exports = {
     CreateReadOnlyGroupNetworkAccessRequest: CreateReadOnlyGroupNetworkAccessRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     DeleteReadOnlyGroupResponse: DeleteReadOnlyGroupResponse,
+    OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     CreateInstancesRequest: CreateInstancesRequest,
     SpecItemInfo: SpecItemInfo,
     ParameterTemplate: ParameterTemplate,
     CreateDBInstanceNetworkAccessResponse: CreateDBInstanceNetworkAccessResponse,
     DescribeAvailableRecoveryTimeResponse: DescribeAvailableRecoveryTimeResponse,
+    CreateBaseBackupRequest: CreateBaseBackupRequest,
     ModifyDBInstanceReadOnlyGroupResponse: ModifyDBInstanceReadOnlyGroupResponse,
-    CloneDBInstanceRequest: CloneDBInstanceRequest,
+    ClassInfo: ClassInfo,
     DescribeCloneDBInstanceSpecRequest: DescribeCloneDBInstanceSpecRequest,
     BackupPlan: BackupPlan,
     OpenServerlessDBExtranetAccessRequest: OpenServerlessDBExtranetAccessRequest,
     RenewInstanceResponse: RenewInstanceResponse,
     DeleteServerlessDBInstanceResponse: DeleteServerlessDBInstanceResponse,
+    DeleteLogBackupResponse: DeleteLogBackupResponse,
     ModifyReadOnlyGroupConfigRequest: ModifyReadOnlyGroupConfigRequest,
+    BackupSummary: BackupSummary,
     AddDBInstanceToReadOnlyGroupRequest: AddDBInstanceToReadOnlyGroupRequest,
     DescribeProductConfigRequest: DescribeProductConfigRequest,
     RemoveDBInstanceFromReadOnlyGroupRequest: RemoveDBInstanceFromReadOnlyGroupRequest,
     InitDBInstancesResponse: InitDBInstancesResponse,
     DescribeDefaultParametersRequest: DescribeDefaultParametersRequest,
     RenewInstanceRequest: RenewInstanceRequest,
-    RebalanceReadOnlyGroupRequest: RebalanceReadOnlyGroupRequest,
+    DescribeBackupOverviewRequest: DescribeBackupOverviewRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    ModifyBaseBackupExpireTimeResponse: ModifyBaseBackupExpireTimeResponse,
     DBInstanceNetInfo: DBInstanceNetInfo,
     ModifyDBInstanceDeploymentRequest: ModifyDBInstanceDeploymentRequest,
     DeleteReadOnlyGroupNetworkAccessRequest: DeleteReadOnlyGroupNetworkAccessRequest,
     ZoneInfo: ZoneInfo,
-    InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
+    DescribeReadOnlyGroupsResponse: DescribeReadOnlyGroupsResponse,
     NormalQueryItem: NormalQueryItem,
     Tag: Tag,
+    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
     DescribeDBInstanceAttributeRequest: DescribeDBInstanceAttributeRequest,
     CloseServerlessDBExtranetAccessRequest: CloseServerlessDBExtranetAccessRequest,
+    CreateBaseBackupResponse: CreateBaseBackupResponse,
     CloneDBInstanceResponse: CloneDBInstanceResponse,
     ModifyDBInstanceReadOnlyGroupRequest: ModifyDBInstanceReadOnlyGroupRequest,
     AddDBInstanceToReadOnlyGroupResponse: AddDBInstanceToReadOnlyGroupResponse,
+    BaseBackup: BaseBackup,
     CreateReadOnlyDBInstanceResponse: CreateReadOnlyDBInstanceResponse,
     DescribeAvailableRecoveryTimeRequest: DescribeAvailableRecoveryTimeRequest,
     DurationAnalysis: DurationAnalysis,
     DescribeDBInstanceParametersRequest: DescribeDBInstanceParametersRequest,
     DescribeOrdersResponse: DescribeOrdersResponse,
+    DescribeBackupDownloadURLResponse: DescribeBackupDownloadURLResponse,
     OpenServerlessDBExtranetAccessResponse: OpenServerlessDBExtranetAccessResponse,
     ModifyParameterTemplateRequest: ModifyParameterTemplateRequest,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
+    Version: Version,
     CreateDBInstanceNetworkAccessRequest: CreateDBInstanceNetworkAccessRequest,
     ModifySwitchTimePeriodResponse: ModifySwitchTimePeriodResponse,
+    InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     DescribeDefaultParametersResponse: DescribeDefaultParametersResponse,
     ServerlessDBInstanceNetInfo: ServerlessDBInstanceNetInfo,
     DescribeBackupPlansResponse: DescribeBackupPlansResponse,
@@ -9819,7 +11312,7 @@ module.exports = {
     DescribeZonesRequest: DescribeZonesRequest,
     SpecInfo: SpecInfo,
     ParamVersionRelation: ParamVersionRelation,
-    DescribeReadOnlyGroupsResponse: DescribeReadOnlyGroupsResponse,
+    DescribeLogBackupsRequest: DescribeLogBackupsRequest,
     SetAutoRenewFlagResponse: SetAutoRenewFlagResponse,
     NetworkAccess: NetworkAccess,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
@@ -9829,11 +11322,13 @@ module.exports = {
     ParamSpecRelation: ParamSpecRelation,
     PgDeal: PgDeal,
     DeleteReadOnlyGroupNetworkAccessResponse: DeleteReadOnlyGroupNetworkAccessResponse,
+    DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeDBErrlogsRequest: DescribeDBErrlogsRequest,
     DBBackup: DBBackup,
     ServerlessDBAccount: ServerlessDBAccount,
-    ModifyDBInstanceDeploymentResponse: ModifyDBInstanceDeploymentResponse,
+    CloneDBInstanceRequest: CloneDBInstanceRequest,
     DeleteParameterTemplateRequest: DeleteParameterTemplateRequest,
+    DescribeClassesRequest: DescribeClassesRequest,
     DescribeParamsEventRequest: DescribeParamsEventRequest,
     EventInfo: EventInfo,
     CreateInstancesResponse: CreateInstancesResponse,
@@ -9845,7 +11340,6 @@ module.exports = {
     DescribeSlowQueryListResponse: DescribeSlowQueryListResponse,
     ServerlessDBInstance: ServerlessDBInstance,
     CreateReadOnlyGroupRequest: CreateReadOnlyGroupRequest,
-    CreateReadOnlyGroupNetworkAccessResponse: CreateReadOnlyGroupNetworkAccessResponse,
     DescribeParamsEventResponse: DescribeParamsEventResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     CloseServerlessDBExtranetAccessResponse: CloseServerlessDBExtranetAccessResponse,
@@ -9854,30 +11348,35 @@ module.exports = {
     DescribeDBInstanceSecurityGroupsResponse: DescribeDBInstanceSecurityGroupsResponse,
     CreateParameterTemplateResponse: CreateParameterTemplateResponse,
     ParamInfo: ParamInfo,
+    DescribeLogBackupsResponse: DescribeLogBackupsResponse,
     Detail: Detail,
     SecurityGroup: SecurityGroup,
     IsolateDBInstancesResponse: IsolateDBInstancesResponse,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
-    RebalanceReadOnlyGroupResponse: RebalanceReadOnlyGroupResponse,
+    IsolateDBInstancesRequest: IsolateDBInstancesRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     EncryptionKey: EncryptionKey,
+    UpgradeDBInstanceKernelVersionResponse: UpgradeDBInstanceKernelVersionResponse,
     InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
     DescribeSlowQueryAnalysisRequest: DescribeSlowQueryAnalysisRequest,
     ErrLogDetail: ErrLogDetail,
     DescribeServerlessDBInstancesResponse: DescribeServerlessDBInstancesResponse,
-    IsolateDBInstancesRequest: IsolateDBInstancesRequest,
+    DescribeBackupOverviewResponse: DescribeBackupOverviewResponse,
     DescribeParameterTemplatesRequest: DescribeParameterTemplatesRequest,
     InitDBInstancesRequest: InitDBInstancesRequest,
+    DescribeClassesResponse: DescribeClassesResponse,
     DeleteDBInstanceNetworkAccessRequest: DeleteDBInstanceNetworkAccessRequest,
+    ModifyDBInstanceDeploymentResponse: ModifyDBInstanceDeploymentResponse,
     DBInstance: DBInstance,
     DeleteParameterTemplateResponse: DeleteParameterTemplateResponse,
     DeleteReadOnlyGroupRequest: DeleteReadOnlyGroupRequest,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     Filter: Filter,
-    DisIsolateDBInstancesResponse: DisIsolateDBInstancesResponse,
+    DescribeReadOnlyGroupsRequest: DescribeReadOnlyGroupsRequest,
+    DescribeBackupDownloadURLRequest: DescribeBackupDownloadURLRequest,
     ModifyDBInstanceParametersResponse: ModifyDBInstanceParametersResponse,
-    OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
+    DescribeDBVersionsResponse: DescribeDBVersionsResponse,
     SlowlogDetail: SlowlogDetail,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DBNode: DBNode,
@@ -9893,6 +11392,8 @@ module.exports = {
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     ModifyParameterTemplateResponse: ModifyParameterTemplateResponse,
     DescribeEncryptionKeysRequest: DescribeEncryptionKeysRequest,
+    LogBackup: LogBackup,
+    RebalanceReadOnlyGroupRequest: RebalanceReadOnlyGroupRequest,
     ModifyBackupPlanResponse: ModifyBackupPlanResponse,
     DestroyDBInstanceRequest: DestroyDBInstanceRequest,
     CreateServerlessDBInstanceRequest: CreateServerlessDBInstanceRequest,
@@ -9906,8 +11407,10 @@ module.exports = {
     DescribeParameterTemplateAttributesRequest: DescribeParameterTemplateAttributesRequest,
     DescribeDBErrlogsResponse: DescribeDBErrlogsResponse,
     ModifyBackupPlanRequest: ModifyBackupPlanRequest,
+    DeleteBaseBackupRequest: DeleteBaseBackupRequest,
     ParamEntry: ParamEntry,
     InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
+    DisIsolateDBInstancesResponse: DisIsolateDBInstancesResponse,
     CreateParameterTemplateRequest: CreateParameterTemplateRequest,
     ModifySwitchTimePeriodRequest: ModifySwitchTimePeriodRequest,
     DescribeSlowQueryListRequest: DescribeSlowQueryListRequest,
@@ -9915,26 +11418,34 @@ module.exports = {
     RegionInfo: RegionInfo,
     DisIsolateDBInstancesRequest: DisIsolateDBInstancesRequest,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
+    ModifyBaseBackupExpireTimeRequest: ModifyBaseBackupExpireTimeRequest,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     DescribeDBInstanceSecurityGroupsRequest: DescribeDBInstanceSecurityGroupsRequest,
     DescribeBackupPlansRequest: DescribeBackupPlansRequest,
+    RebalanceReadOnlyGroupResponse: RebalanceReadOnlyGroupResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
     DescribeSlowQueryAnalysisResponse: DescribeSlowQueryAnalysisResponse,
     ModifyDBInstanceParametersRequest: ModifyDBInstanceParametersRequest,
     RawSlowQuery: RawSlowQuery,
-    DescribeReadOnlyGroupsRequest: DescribeReadOnlyGroupsRequest,
+    CreateReadOnlyGroupNetworkAccessResponse: CreateReadOnlyGroupNetworkAccessResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeParameterTemplateAttributesResponse: DescribeParameterTemplateAttributesResponse,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
+    DescribeDBVersionsRequest: DescribeDBVersionsRequest,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     DescribeDBSlowlogsRequest: DescribeDBSlowlogsRequest,
     DestroyDBInstanceResponse: DestroyDBInstanceResponse,
     DescribeDBInstanceAttributeResponse: DescribeDBInstanceAttributeResponse,
+    DeleteLogBackupRequest: DeleteLogBackupRequest,
+    DeleteBaseBackupResponse: DeleteBaseBackupResponse,
     PolicyRule: PolicyRule,
     ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
+    DescribeBaseBackupsResponse: DescribeBaseBackupsResponse,
     DescribeDBXlogsResponse: DescribeDBXlogsResponse,
+    DescribeBaseBackupsRequest: DescribeBaseBackupsRequest,
     DescribeEncryptionKeysResponse: DescribeEncryptionKeysResponse,
     DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
     CreateDBInstancesResponse: CreateDBInstancesResponse,
+    UpgradeDBInstanceKernelVersionRequest: UpgradeDBInstanceKernelVersionRequest,
 
 }

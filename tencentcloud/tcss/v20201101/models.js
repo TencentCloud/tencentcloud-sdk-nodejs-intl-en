@@ -12157,6 +12157,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ScanPath = null;
 
         /**
+         * Path scanning mode: 
+`SCAN_PATH_ALL`: Scan all paths
+`SCAN_PATH_DEFAULT`: Scan the default path
+`SCAN_PATH_USER_DEFINE`: Scan the custom path
+
+         * @type {string || null}
+         */
+        this.ScanPathMode = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -12175,6 +12185,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ScanPathAll = 'ScanPathAll' in params ? params.ScanPathAll : null;
         this.ScanPathType = 'ScanPathType' in params ? params.ScanPathType : null;
         this.ScanPath = 'ScanPath' in params ? params.ScanPath : null;
+        this.ScanPathMode = 'ScanPathMode' in params ? params.ScanPathMode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -12905,6 +12916,16 @@ class ModifyVirusMonitorSettingRequest extends  AbstractModel {
          */
         this.ScanPath = null;
 
+        /**
+         * Path scanning mode: 
+`SCAN_PATH_ALL`: Scan all paths
+`SCAN_PATH_DEFAULT`: Scan the default path
+`SCAN_PATH_USER_DEFINE`: Scan the custom path
+
+         * @type {string || null}
+         */
+        this.ScanPathMode = null;
+
     }
 
     /**
@@ -12918,6 +12939,7 @@ class ModifyVirusMonitorSettingRequest extends  AbstractModel {
         this.ScanPathAll = 'ScanPathAll' in params ? params.ScanPathAll : null;
         this.ScanPathType = 'ScanPathType' in params ? params.ScanPathType : null;
         this.ScanPath = 'ScanPath' in params ? params.ScanPath : null;
+        this.ScanPathMode = 'ScanPathMode' in params ? params.ScanPathMode : null;
 
     }
 }
@@ -16398,6 +16420,16 @@ class ModifyVirusScanSettingRequest extends  AbstractModel {
          */
         this.ScanPath = null;
 
+        /**
+         * Path scanning mode: 
+`SCAN_PATH_ALL`: Scan all paths
+`SCAN_PATH_DEFAULT`: Scan the default path
+`SCAN_PATH_USER_DEFINE`: Scan the custom path
+
+         * @type {string || null}
+         */
+        this.ScanPathMode = null;
+
     }
 
     /**
@@ -16417,6 +16449,7 @@ class ModifyVirusScanSettingRequest extends  AbstractModel {
         this.ScanRangeAll = 'ScanRangeAll' in params ? params.ScanRangeAll : null;
         this.ScanIds = 'ScanIds' in params ? params.ScanIds : null;
         this.ScanPath = 'ScanPath' in params ? params.ScanPath : null;
+        this.ScanPathMode = 'ScanPathMode' in params ? params.ScanPathMode : null;
 
     }
 }
@@ -24155,6 +24188,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ClickTimeout = null;
 
         /**
+         * Path scanning mode: 
+`SCAN_PATH_ALL`: Scan all paths
+`SCAN_PATH_DEFAULT`: Scan the default path
+`SCAN_PATH_USER_DEFINE`: Scan the custom path
+
+         * @type {string || null}
+         */
+        this.ScanPathMode = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -24180,6 +24223,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ScanIds = 'ScanIds' in params ? params.ScanIds : null;
         this.ScanPath = 'ScanPath' in params ? params.ScanPath : null;
         this.ClickTimeout = 'ClickTimeout' in params ? params.ClickTimeout : null;
+        this.ScanPathMode = 'ScanPathMode' in params ? params.ScanPathMode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -31243,6 +31287,16 @@ class CreateVirusScanTaskRequest extends  AbstractModel {
          */
         this.ScanPath = null;
 
+        /**
+         * Path scanning mode: 
+`SCAN_PATH_ALL`: Scan all paths
+`SCAN_PATH_DEFAULT`: Scan the default path
+`SCAN_PATH_USER_DEFINE`: Scan the custom path
+
+         * @type {string || null}
+         */
+        this.ScanPathMode = null;
+
     }
 
     /**
@@ -31259,6 +31313,7 @@ class CreateVirusScanTaskRequest extends  AbstractModel {
         this.ScanPathType = 'ScanPathType' in params ? params.ScanPathType : null;
         this.ScanIds = 'ScanIds' in params ? params.ScanIds : null;
         this.ScanPath = 'ScanPath' in params ? params.ScanPath : null;
+        this.ScanPathMode = 'ScanPathMode' in params ? params.ScanPathMode : null;
 
     }
 }
@@ -41345,6 +41400,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CheckPlatform = null;
 
         /**
+         * File accessed time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileAccessTime = null;
+
+        /**
+         * File modified time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileModifyTime = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -41406,6 +41475,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ContainerNetSubStatus = 'ContainerNetSubStatus' in params ? params.ContainerNetSubStatus : null;
         this.ContainerIsolateOperationSrc = 'ContainerIsolateOperationSrc' in params ? params.ContainerIsolateOperationSrc : null;
         this.CheckPlatform = 'CheckPlatform' in params ? params.CheckPlatform : null;
+        this.FileAccessTime = 'FileAccessTime' in params ? params.FileAccessTime : null;
+        this.FileModifyTime = 'FileModifyTime' in params ? params.FileModifyTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

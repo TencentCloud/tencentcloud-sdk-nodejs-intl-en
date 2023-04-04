@@ -9117,6 +9117,34 @@ class ModifyInstanceParamsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSSLStatus request structure.
+ * @class
+ */
+class DescribeSSLStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * OpenSSL request structure.
  * @class
  */
@@ -9420,6 +9448,69 @@ class InstanceClusterNode extends  AbstractModel {
         this.QpsSlope = 'QpsSlope' in params ? params.QpsSlope : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.StorageSlope = 'StorageSlope' in params ? params.StorageSlope : null;
+
+    }
+}
+
+/**
+ * DescribeSSLStatus response structure.
+ * @class
+ */
+class DescribeSSLStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Certificate download address
+         * @type {string || null}
+         */
+        this.CertDownloadUrl = null;
+
+        /**
+         * Expiration time of the certificate download address
+         * @type {string || null}
+         */
+        this.UrlExpiredTime = null;
+
+        /**
+         * SSL configuration status of an instance. Valid values: `true` (enable), `false` (disable).
+         * @type {boolean || null}
+         */
+        this.SSLConfig = null;
+
+        /**
+         * Whether the instance supports SSL. Valid values: `true` (Yes. When minor version is upgraded.), `false` (No).
+         * @type {boolean || null}
+         */
+        this.FeatureSupport = null;
+
+        /**
+         * SSL configuration status. Valid values: `1`(Configuring), `2` (Configured).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertDownloadUrl = 'CertDownloadUrl' in params ? params.CertDownloadUrl : null;
+        this.UrlExpiredTime = 'UrlExpiredTime' in params ? params.UrlExpiredTime : null;
+        this.SSLConfig = 'SSLConfig' in params ? params.SSLConfig : null;
+        this.FeatureSupport = 'FeatureSupport' in params ? params.FeatureSupport : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11546,12 +11637,14 @@ module.exports = {
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     UpgradeSmallVersionResponse: UpgradeSmallVersionResponse,
     ModifyInstanceParamsRequest: ModifyInstanceParamsRequest,
+    DescribeSSLStatusRequest: DescribeSSLStatusRequest,
     OpenSSLRequest: OpenSSLRequest,
     BackupDownloadInfo: BackupDownloadInfo,
     BigKeyTypeInfo: BigKeyTypeInfo,
     DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
     InstanceClusterNode: InstanceClusterNode,
+    DescribeSSLStatusResponse: DescribeSSLStatusResponse,
     DescribeTendisSlowLogRequest: DescribeTendisSlowLogRequest,
     DescribeProxySlowLogRequest: DescribeProxySlowLogRequest,
     DescribeProxySlowLogResponse: DescribeProxySlowLogResponse,

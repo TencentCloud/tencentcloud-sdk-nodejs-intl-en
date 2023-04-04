@@ -189,12 +189,14 @@ const DescribeCommonDBInstancesResponse = models.DescribeCommonDBInstancesRespon
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const UpgradeSmallVersionResponse = models.UpgradeSmallVersionResponse;
 const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
+const DescribeSSLStatusRequest = models.DescribeSSLStatusRequest;
 const OpenSSLRequest = models.OpenSSLRequest;
 const BackupDownloadInfo = models.BackupDownloadInfo;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const InstanceClusterNode = models.InstanceClusterNode;
+const DescribeSSLStatusResponse = models.DescribeSSLStatusResponse;
 const DescribeTendisSlowLogRequest = models.DescribeTendisSlowLogRequest;
 const DescribeProxySlowLogRequest = models.DescribeProxySlowLogRequest;
 const DescribeProxySlowLogResponse = models.DescribeProxySlowLogResponse;
@@ -802,6 +804,17 @@ class RedisClient extends AbstractClient {
     ModifyBackupDownloadRestriction(req, cb) {
         let resp = new ModifyBackupDownloadRestrictionResponse();
         this.request("ModifyBackupDownloadRestriction", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query SSL status.
+     * @param {DescribeSSLStatusRequest} req
+     * @param {function(string, DescribeSSLStatusResponse):void} cb
+     * @public
+     */
+    DescribeSSLStatus(req, cb) {
+        let resp = new DescribeSSLStatusResponse();
+        this.request("DescribeSSLStatus", req, resp, cb);
     }
 
     /**

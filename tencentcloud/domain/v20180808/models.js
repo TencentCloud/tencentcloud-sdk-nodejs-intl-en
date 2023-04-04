@@ -222,6 +222,12 @@ class CreateIntlDomainBatchRequest extends  AbstractModel {
          */
         this.UpdateProhibition = null;
 
+        /**
+         * The custom DNS servers
+         * @type {Array.<string> || null}
+         */
+        this.CustomDns = null;
+
     }
 
     /**
@@ -238,6 +244,7 @@ class CreateIntlDomainBatchRequest extends  AbstractModel {
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.TransferProhibition = 'TransferProhibition' in params ? params.TransferProhibition : null;
         this.UpdateProhibition = 'UpdateProhibition' in params ? params.UpdateProhibition : null;
+        this.CustomDns = 'CustomDns' in params ? params.CustomDns : null;
 
     }
 }

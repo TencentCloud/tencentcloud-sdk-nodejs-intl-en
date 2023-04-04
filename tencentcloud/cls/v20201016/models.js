@@ -291,6 +291,20 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.HostName = null;
 
+        /**
+         * Raw log (this parameter has a value only when an exception occurred while creating indexes for logs).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RawLog = null;
+
+        /**
+         * The cause of index creation exception (this parameter has a value only when an exception occurred while creating indexes for logs).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IndexStatus = null;
+
     }
 
     /**
@@ -309,6 +323,8 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.PkgLogId = 'PkgLogId' in params ? params.PkgLogId : null;
         this.LogJson = 'LogJson' in params ? params.LogJson : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
+        this.RawLog = 'RawLog' in params ? params.RawLog : null;
+        this.IndexStatus = 'IndexStatus' in params ? params.IndexStatus : null;
 
     }
 }
@@ -2494,7 +2510,7 @@ class FullTextInfo extends  AbstractModel {
         /**
          * Separator of the full-text index. Each character represents a separator.
 Only symbols, \n\t\r, and escape character \ are supported.
-Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping.
+Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping. When debugging with API Explorer, use the JSON parameter input method to avoid repeated escaping of \n\t\r.
          * @type {string || null}
          */
         this.Tokenizer = null;
@@ -5872,7 +5888,7 @@ class ValueInfo extends  AbstractModel {
          * Separator of fields. Each character represents a separator.
 Only symbols, \n\t\r, and escape character \ are supported.
 `long` and `double` fields need to be null.
-Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping.
+Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping. When debugging with API Explorer, use the JSON parameter input method to avoid repeated escaping of \n\t\r.
          * @type {string || null}
          */
         this.Tokenizer = null;
@@ -6358,6 +6374,20 @@ Note: This field may return `null`, indicating that no valid value was found.
          */
         this.HostName = null;
 
+        /**
+         * Raw log (this parameter has a value only when an exception occurred while creating indexes for logs).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RawLog = null;
+
+        /**
+         * The cause of index creation exception (this parameter has a value only when an exception occurred while creating indexes for logs).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IndexStatus = null;
+
     }
 
     /**
@@ -6374,6 +6404,8 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.PkgLogId = 'PkgLogId' in params ? params.PkgLogId : null;
         this.BTime = 'BTime' in params ? params.BTime : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
+        this.RawLog = 'RawLog' in params ? params.RawLog : null;
+        this.IndexStatus = 'IndexStatus' in params ? params.IndexStatus : null;
 
     }
 }
@@ -7947,6 +7979,14 @@ Default value: `1`
          */
         this.SamplingRate = null;
 
+        /**
+         * Search syntax.
+`0` (default): Lucene; `1`: CQL.
+For more information, visit https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules.
+         * @type {number || null}
+         */
+        this.SyntaxRule = null;
+
     }
 
     /**
@@ -7965,6 +8005,7 @@ Default value: `1`
         this.Sort = 'Sort' in params ? params.Sort : null;
         this.UseNewAnalysis = 'UseNewAnalysis' in params ? params.UseNewAnalysis : null;
         this.SamplingRate = 'SamplingRate' in params ? params.SamplingRate : null;
+        this.SyntaxRule = 'SyntaxRule' in params ? params.SyntaxRule : null;
 
     }
 }
@@ -8767,7 +8808,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Bucket = null;
 
         /**
-         * COS bucket region.
+         * Region where the COS bucket is located.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */

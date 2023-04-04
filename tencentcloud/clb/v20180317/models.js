@@ -9080,6 +9080,12 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         this.DefaultServer = null;
 
         /**
+         * Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+         * @type {boolean || null}
+         */
+        this.Quic = null;
+
+        /**
          * Specifies a new default domain name for the listener. This field is used when the original default domain name is disabled. If there are multiple domain names, specify one of them.
          * @type {string || null}
          */
@@ -9118,6 +9124,7 @@ class ModifyDomainAttributesRequest extends  AbstractModel {
         }
         this.Http2 = 'Http2' in params ? params.Http2 : null;
         this.DefaultServer = 'DefaultServer' in params ? params.DefaultServer : null;
+        this.Quic = 'Quic' in params ? params.Quic : null;
         this.NewDefaultServerDomain = 'NewDefaultServerDomain' in params ? params.NewDefaultServerDomain : null;
         this.NewDomains = 'NewDomains' in params ? params.NewDomains : null;
 

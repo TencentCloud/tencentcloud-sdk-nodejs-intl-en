@@ -26,7 +26,10 @@ const ModifyUserProfileRequest = models.ModifyUserProfileRequest;
 const CreateGroupWithMembersRequest = models.CreateGroupWithMembersRequest;
 const DescribeDocumentsByRoomRequest = models.DescribeDocumentsByRoomRequest;
 const BatchCreateGroupWithMembersResponse = models.BatchCreateGroupWithMembersResponse;
+const AddGroupMemberResponse = models.AddGroupMemberResponse;
+const GetRoomEventResponse = models.GetRoomEventResponse;
 const CreateGroupWithMembersResponse = models.CreateGroupWithMembersResponse;
+const DeleteAppCustomContentRequest = models.DeleteAppCustomContentRequest;
 const BatchAddGroupMemberResponse = models.BatchAddGroupMemberResponse;
 const ModifyUserProfileResponse = models.ModifyUserProfileResponse;
 const ModifyAppResponse = models.ModifyAppResponse;
@@ -54,9 +57,11 @@ const DeleteRecordRequest = models.DeleteRecordRequest;
 const BatchDeleteGroupMemberResponse = models.BatchDeleteGroupMemberResponse;
 const CreateGroupWithSubGroupResponse = models.CreateGroupWithSubGroupResponse;
 const GroupInfo = models.GroupInfo;
+const GetRoomEventRequest = models.GetRoomEventRequest;
 const DescribeDocumentResponse = models.DescribeDocumentResponse;
 const DeleteGroupMemberResponse = models.DeleteGroupMemberResponse;
 const DescribeGroupMemberListResponse = models.DescribeGroupMemberListResponse;
+const EventInfo = models.EventInfo;
 const DeleteRecordResponse = models.DeleteRecordResponse;
 const BatchCreateRoomRequest = models.BatchCreateRoomRequest;
 const DescribeGroupMemberListRequest = models.DescribeGroupMemberListRequest;
@@ -67,7 +72,7 @@ const BatchDeleteRecordResponse = models.BatchDeleteRecordResponse;
 const WatermarkConfig = models.WatermarkConfig;
 const SetAppCustomContentRequest = models.SetAppCustomContentRequest;
 const DescribeUserRequest = models.DescribeUserRequest;
-const BatchCreateGroupWithMembersRequest = models.BatchCreateGroupWithMembersRequest;
+const RegisterUserResponse = models.RegisterUserResponse;
 const BindDocumentToRoomRequest = models.BindDocumentToRoomRequest;
 const CreateDocumentRequest = models.CreateDocumentRequest;
 const GetRoomMessageResponse = models.GetRoomMessageResponse;
@@ -76,6 +81,7 @@ const BatchAddGroupMemberRequest = models.BatchAddGroupMemberRequest;
 const DescribeRoomResponse = models.DescribeRoomResponse;
 const DescribeCurrentMemberListRequest = models.DescribeCurrentMemberListRequest;
 const DescribeSdkAppIdUsersResponse = models.DescribeSdkAppIdUsersResponse;
+const EventDataInfo = models.EventDataInfo;
 const DescribeRoomStatisticsResponse = models.DescribeRoomStatisticsResponse;
 const DeleteDocumentRequest = models.DeleteDocumentRequest;
 const MessageList = models.MessageList;
@@ -90,25 +96,27 @@ const GroupBaseInfo = models.GroupBaseInfo;
 const LoginUserRequest = models.LoginUserRequest;
 const SetWatermarkResponse = models.SetWatermarkResponse;
 const RoomInfo = models.RoomInfo;
-const DescribeDocumentsByRoomResponse = models.DescribeDocumentsByRoomResponse;
-const DescribeRoomStatisticsRequest = models.DescribeRoomStatisticsRequest;
 const ModifyRoomRequest = models.ModifyRoomRequest;
+const DescribeRoomStatisticsRequest = models.DescribeRoomStatisticsRequest;
+const DescribeDocumentsByRoomResponse = models.DescribeDocumentsByRoomResponse;
 const LoginOriginIdResponse = models.LoginOriginIdResponse;
+const DescribeDeveloperRequest = models.DescribeDeveloperRequest;
 const AppCustomContent = models.AppCustomContent;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const DescribeSdkAppIdUsersRequest = models.DescribeSdkAppIdUsersRequest;
 const MessageItem = models.MessageItem;
 const CreateSupervisorResponse = models.CreateSupervisorResponse;
 const DeleteRoomRequest = models.DeleteRoomRequest;
-const RegisterUserResponse = models.RegisterUserResponse;
+const BatchCreateGroupWithMembersRequest = models.BatchCreateGroupWithMembersRequest;
 const DescribeGroupRequest = models.DescribeGroupRequest;
 const CreateSupervisorRequest = models.CreateSupervisorRequest;
 const BackgroundPictureConfig = models.BackgroundPictureConfig;
+const DeleteAppCustomContentResponse = models.DeleteAppCustomContentResponse;
 const DescribeCurrentMemberListResponse = models.DescribeCurrentMemberListResponse;
 const ModifyGroupResponse = models.ModifyGroupResponse;
 const DescribeGroupListResponse = models.DescribeGroupListResponse;
 const CreateRoomResponse = models.CreateRoomResponse;
-const AddGroupMemberResponse = models.AddGroupMemberResponse;
+const DescribeDeveloperResponse = models.DescribeDeveloperResponse;
 const TextMarkConfig = models.TextMarkConfig;
 
 
@@ -167,6 +175,17 @@ A maximum of 20 requests can be initiated per second for this API.
     ModifyRoom(req, cb) {
         let resp = new ModifyRoomResponse();
         this.request("ModifyRoom", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the custom elements. The `Scenes` parameter specifies the custom elements to delete. If `Scenes` is empty, all custom elements will be deleted.
+     * @param {DeleteAppCustomContentRequest} req
+     * @param {function(string, DeleteAppCustomContentResponse):void} cb
+     * @public
+     */
+    DeleteAppCustomContent(req, cb) {
+        let resp = new DeleteAppCustomContentResponse();
+        this.request("DeleteAppCustomContent", req, resp, cb);
     }
 
     /**
@@ -275,6 +294,18 @@ A maximum of 20 requests can be initiated per second for this API.
     }
 
     /**
+     * This API is used to get the members of a group.
+A maximum of 20 requests can be initiated per second for this API.
+     * @param {DescribeGroupMemberListRequest} req
+     * @param {function(string, DescribeGroupMemberListResponse):void} cb
+     * @public
+     */
+    DescribeGroupMemberList(req, cb) {
+        let resp = new DescribeGroupMemberListResponse();
+        this.request("DescribeGroupMemberList", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify a group.
 A maximum of 20 requests can be initiated per second for this API.
      * @param {ModifyGroupRequest} req
@@ -311,15 +342,25 @@ A maximum of 20 requests can be initiated per second for this API.
     }
 
     /**
-     * This API is used to remove users from multiple groups at a time.
-A maximum of 20 requests can be initiated per second for this API.
-     * @param {BatchDeleteGroupMemberRequest} req
-     * @param {function(string, BatchDeleteGroupMemberResponse):void} cb
+     * This API is used to get the developer information.
+     * @param {DescribeDeveloperRequest} req
+     * @param {function(string, DescribeDeveloperResponse):void} cb
      * @public
      */
-    BatchDeleteGroupMember(req, cb) {
-        let resp = new BatchDeleteGroupMemberResponse();
-        this.request("BatchDeleteGroupMember", req, resp, cb);
+    DescribeDeveloper(req, cb) {
+        let resp = new DescribeDeveloperResponse();
+        this.request("DescribeDeveloper", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the events of a room. It only works within one hour after a class ends.
+     * @param {GetRoomEventRequest} req
+     * @param {function(string, GetRoomEventResponse):void} cb
+     * @public
+     */
+    GetRoomEvent(req, cb) {
+        let resp = new GetRoomEventResponse();
+        this.request("GetRoomEvent", req, resp, cb);
     }
 
     /**
@@ -473,15 +514,15 @@ A maximum of 20 requests can be initiated per second for this API.
     }
 
     /**
-     * This API is used to get the members of a group.
+     * This API is used to remove users from multiple groups at a time.
 A maximum of 20 requests can be initiated per second for this API.
-     * @param {DescribeGroupMemberListRequest} req
-     * @param {function(string, DescribeGroupMemberListResponse):void} cb
+     * @param {BatchDeleteGroupMemberRequest} req
+     * @param {function(string, BatchDeleteGroupMemberResponse):void} cb
      * @public
      */
-    DescribeGroupMemberList(req, cb) {
-        let resp = new DescribeGroupMemberListResponse();
-        this.request("DescribeGroupMemberList", req, resp, cb);
+    BatchDeleteGroupMember(req, cb) {
+        let resp = new BatchDeleteGroupMemberResponse();
+        this.request("BatchDeleteGroupMember", req, resp, cb);
     }
 
     /**
@@ -498,7 +539,6 @@ A maximum of 20 requests can be initiated per second for this API.
 
     /**
      * This API is used to create multiple rooms at a time.
-A maximum of 20 requests can be initiated per second for this API.
      * @param {BatchCreateRoomRequest} req
      * @param {function(string, BatchCreateRoomResponse):void} cb
      * @public

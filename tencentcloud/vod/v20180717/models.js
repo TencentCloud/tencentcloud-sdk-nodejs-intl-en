@@ -10084,7 +10084,7 @@ class VideoFrameInterpolationInfo extends  AbstractModel {
         this.Switch = null;
 
         /**
-         * The frame rate. Value range: (0, 60]. This parameter is valid only if `Switch` is `ON`. By default, the original frame rate will be used.
+         * The frame rate. Value range: (0, 100]. This parameter is valid only if `Switch` is `ON`. By default, the original frame rate will be used.
          * @type {number || null}
          */
         this.Fps = null;
@@ -22044,7 +22044,7 @@ Default value: `open`.
         this.ResolutionAdaptive = null;
 
         /**
-         * The maximum video width (or long side), in pixels. Value range: 0 and 128-8192.
+         * The maximum video width (or long side) in pixels. Value range: 0 and 128-4096.
 <li>If both `Width` and `Height` are `0`, the original resolution will be used.</li>
 <li>If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.</li>
 <li>If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.</li>
@@ -22056,7 +22056,7 @@ Default value: `0`.
         this.Width = null;
 
         /**
-         * The maximum video height (or short side), in pixels. Value range: 0 and 128-8192.
+         * The maximum video width (or short side) in pixels. Value range: 0 and [128, 4096].
 <li>If both `Width` and `Height` are `0`, the original resolution will be used.</li>
 <li>If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.</li>
 <li>If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.</li>
@@ -34296,6 +34296,25 @@ class SearchMediaRequest extends  AbstractModel {
         this.StorageClasses = null;
 
         /**
+         * The file formats.
+<li>Array length limit: 10</li>
+         * @type {Array.<string> || null}
+         */
+        this.MediaTypes = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Status = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.ReviewResults = null;
+
+        /**
          * The TRTC application IDs. Any file that matches one of the application IDs will be returned.
 <li>Array length limit: 10</li>
          * @type {Array.<number> || null}
@@ -34405,6 +34424,9 @@ End time in the creation time range.
         this.Filters = 'Filters' in params ? params.Filters : null;
         this.StorageRegions = 'StorageRegions' in params ? params.StorageRegions : null;
         this.StorageClasses = 'StorageClasses' in params ? params.StorageClasses : null;
+        this.MediaTypes = 'MediaTypes' in params ? params.MediaTypes : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ReviewResults = 'ReviewResults' in params ? params.ReviewResults : null;
         this.TrtcSdkAppIds = 'TrtcSdkAppIds' in params ? params.TrtcSdkAppIds : null;
         this.TrtcRoomIds = 'TrtcRoomIds' in params ? params.TrtcRoomIds : null;
         this.Text = 'Text' in params ? params.Text : null;

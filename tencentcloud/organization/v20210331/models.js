@@ -366,13 +366,13 @@ class DescribeOrganizationMemberAuthIdentitiesRequest extends  AbstractModel {
         super();
 
         /**
-         * Offset.
+         * Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Maximum number of returned results. Maximum value: `50`.
+         * Limit, which defaults to `10`. Value range: 1-50.
          * @type {number || null}
          */
         this.Limit = null;
@@ -1339,7 +1339,7 @@ class DescribeOrganizationMemberAuthIdentitiesResponse extends  AbstractModel {
         super();
 
         /**
-         * List.
+         * List of authorizable identities
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<OrgMemberAuthIdentity> || null}
          */
@@ -1775,14 +1775,14 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.IdentityId = null;
 
         /**
-         * Identity role name.
+         * Role name of an identity
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IdentityRoleName = null;
 
         /**
-         * Identity role alias.
+         * Role alias of an identity
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -1809,6 +1809,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.UpdateTime = null;
 
+        /**
+         * Identity type (`1`: Preset; `2`: Custom)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IdentityType = null;
+
     }
 
     /**
@@ -1824,6 +1831,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Description = 'Description' in params ? params.Description : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.IdentityType = 'IdentityType' in params ? params.IdentityType : null;
 
     }
 }
@@ -1966,13 +1974,13 @@ class DescribeOrganizationMembersRequest extends  AbstractModel {
         super();
 
         /**
-         * Offset.
+         * Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Maximum number of returned results. Maximum value: `50`.
+         * Limit, which defaults to `10`. Value range: 1-50.
          * @type {number || null}
          */
         this.Limit = null;

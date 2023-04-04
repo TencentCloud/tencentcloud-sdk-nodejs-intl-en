@@ -1606,6 +1606,41 @@ class Parameter extends  AbstractModel {
 }
 
 /**
+ * SwitchDrInstanceToMaster response structure.
+ * @class
+ */
+class SwitchDrInstanceToMasterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task request ID, which can be used to query the execution result of an async task
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDBInstanceRebootTime request structure.
  * @class
  */
@@ -2643,7 +2678,7 @@ class DescribeDefaultParamsRequest extends  AbstractModel {
         super();
 
         /**
-         * MySQL version. Currently, the supported versions are ["5.1", "5.5", "5.6", "5.7"].
+         * Engine version. Currently, the supported versions are `5.1`, `5.5`, `5.6`, `5.7`, and `8.0`.
          * @type {string || null}
          */
         this.EngineVersion = null;
@@ -2653,6 +2688,12 @@ class DescribeDefaultParamsRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.TemplateType = null;
+
+        /**
+         * Parameter template engine. Default value: `InnoDB`.
+         * @type {string || null}
+         */
+        this.EngineType = null;
 
     }
 
@@ -2665,6 +2706,7 @@ class DescribeDefaultParamsRequest extends  AbstractModel {
         }
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
         this.TemplateType = 'TemplateType' in params ? params.TemplateType : null;
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
 
     }
 }
@@ -2975,6 +3017,146 @@ class ReleaseIsolatedDBInstancesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Filter condition for an audit log, which is used by users to filter the returned audit logs when querying them.
+ * @class
+ */
+class AuditLogFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Client address
+         * @type {Array.<string> || null}
+         */
+        this.Host = null;
+
+        /**
+         * Username
+         * @type {Array.<string> || null}
+         */
+        this.User = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.DBName = null;
+
+        /**
+         * Table name
+         * @type {Array.<string> || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Audit policy name
+         * @type {Array.<string> || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Sql = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SqlType = null;
+
+        /**
+         * Execution time in ms, which is used to filter the audit log with execution time greater than this value.
+         * @type {number || null}
+         */
+        this.ExecTime = null;
+
+        /**
+         * Number of affected rows, which is used to filter the audit log with affected rows greater than this value.
+         * @type {number || null}
+         */
+        this.AffectRows = null;
+
+        /**
+         * SQL type (Multiple types can be queried at same time). Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `ALTER`, `SET`, `REPLACE`, `EXECUTE`.
+         * @type {Array.<string> || null}
+         */
+        this.SqlTypes = null;
+
+        /**
+         * SQL statement. Multiple SQL statements can be passed in.
+         * @type {Array.<string> || null}
+         */
+        this.Sqls = null;
+
+        /**
+         * Number of rows affected in the format of M-N, such as 10-200.
+         * @type {string || null}
+         */
+        this.AffectRowsSection = null;
+
+        /**
+         * Number of rows returned in the format of M-N, such as 10-200.
+         * @type {string || null}
+         */
+        this.SentRowsSection = null;
+
+        /**
+         * Execution time in the format of M-N, such as 10-200.
+         * @type {string || null}
+         */
+        this.ExecTimeSection = null;
+
+        /**
+         * Lock wait time in the format of M-N, such as 10-200.
+         * @type {string || null}
+         */
+        this.LockWaitTimeSection = null;
+
+        /**
+         * IO wait time in the format of M-N, such as 10-200.
+         * @type {string || null}
+         */
+        this.IoWaitTimeSection = null;
+
+        /**
+         * Transaction duration in the format of M-N, such as 10-200.
+         * @type {string || null}
+         */
+        this.TransactionLivingTimeSection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Host = 'Host' in params ? params.Host : null;
+        this.User = 'User' in params ? params.User : null;
+        this.DBName = 'DBName' in params ? params.DBName : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Sql = 'Sql' in params ? params.Sql : null;
+        this.SqlType = 'SqlType' in params ? params.SqlType : null;
+        this.ExecTime = 'ExecTime' in params ? params.ExecTime : null;
+        this.AffectRows = 'AffectRows' in params ? params.AffectRows : null;
+        this.SqlTypes = 'SqlTypes' in params ? params.SqlTypes : null;
+        this.Sqls = 'Sqls' in params ? params.Sqls : null;
+        this.AffectRowsSection = 'AffectRowsSection' in params ? params.AffectRowsSection : null;
+        this.SentRowsSection = 'SentRowsSection' in params ? params.SentRowsSection : null;
+        this.ExecTimeSection = 'ExecTimeSection' in params ? params.ExecTimeSection : null;
+        this.LockWaitTimeSection = 'LockWaitTimeSection' in params ? params.LockWaitTimeSection : null;
+        this.IoWaitTimeSection = 'IoWaitTimeSection' in params ? params.IoWaitTimeSection : null;
+        this.TransactionLivingTimeSection = 'TransactionLivingTimeSection' in params ? params.TransactionLivingTimeSection : null;
 
     }
 }
@@ -4696,6 +4878,62 @@ class CloneItem extends  AbstractModel {
 }
 
 /**
+ * UpgradeDBInstanceEngineVersion request structure.
+ * @class
+ */
+class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Version of primary instance database engine. Value range: 5.6, 5.7
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * Mode of switch to a new instance. Value range: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [switching to new instance API](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) to trigger the process.
+         * @type {number || null}
+         */
+        this.WaitSwitch = null;
+
+        /**
+         * Whether to upgrade kernel minor version. Valid values: 1 (upgrade kernel minor version), 0 (upgrade database engine).
+         * @type {number || null}
+         */
+        this.UpgradeSubversion = null;
+
+        /**
+         * Delay threshold. Value range: 1-10
+         * @type {number || null}
+         */
+        this.MaxDelayTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+        this.UpgradeSubversion = 'UpgradeSubversion' in params ? params.UpgradeSubversion : null;
+        this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
+
+    }
+}
+
+/**
  * DescribeTasks request structure.
  * @class
  */
@@ -5139,18 +5377,42 @@ class ImportRecord extends  AbstractModel {
 }
 
 /**
- * OfflineIsolatedInstances request structure.
+ * DescribeBackupSummaries request structure.
  * @class
  */
-class OfflineIsolatedInstancesRequest extends  AbstractModel {
+class DescribeBackupSummariesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-         * @type {Array.<string> || null}
+         * TencentDB product type to be queried. Currently, only `mysql` is supported.
+         * @type {string || null}
          */
-        this.InstanceIds = null;
+        this.Product = null;
+
+        /**
+         * Paginated query offset. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum entries returned per page, which ranges from 1 to 100. Default value: `20`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Sorting criterion. Valid values: `BackupVolume` (backup capacity), `DataBackupVolume` (data backup capacity), `BinlogBackupVolume` (log backup capacity), `AutoBackupVolume` (automatic backup capacity), `ManualBackupVolume` (manual backup capacity). Default value: `BackupVolume`.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * Sorting order. Valid values: `ASC` (ascending), `DESC` (descending). Default value: `ASC`.
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
 
     }
 
@@ -5161,7 +5423,11 @@ class OfflineIsolatedInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
 
     }
 }
@@ -6462,6 +6728,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.ProxyIds = null;
 
+        /**
+         * Database engine type
+         * @type {Array.<string> || null}
+         */
+        this.EngineTypes = null;
+
     }
 
     /**
@@ -6513,6 +6785,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         }
         this.ProxyVips = 'ProxyVips' in params ? params.ProxyVips : null;
         this.ProxyIds = 'ProxyIds' in params ? params.ProxyIds : null;
+        this.EngineTypes = 'EngineTypes' in params ? params.EngineTypes : null;
 
     }
 }
@@ -7128,42 +7401,72 @@ class ModifyLocalBinlogConfigResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBackupSummaries request structure.
+ * Common time window
  * @class
  */
-class DescribeBackupSummariesRequest extends  AbstractModel {
+class CommonTimeWindow extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TencentDB product type to be queried. Currently, only `mysql` is supported.
+         * Time window on Monday in the format of 02:00-06:00
          * @type {string || null}
          */
-        this.Product = null;
+        this.Monday = null;
 
         /**
-         * Paginated query offset. Default value: `0`.
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Maximum entries returned per page, which ranges from 1 to 100. Default value: `20`.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Sorting criterion. Valid values: `BackupVolume` (backup capacity), `DataBackupVolume` (data backup capacity), `BinlogBackupVolume` (log backup capacity), `AutoBackupVolume` (automatic backup capacity), `ManualBackupVolume` (manual backup capacity). Default value: `BackupVolume`.
+         * Time window on Tuesday in the format of 02:00-06:00
          * @type {string || null}
          */
-        this.OrderBy = null;
+        this.Tuesday = null;
 
         /**
-         * Sorting order. Valid values: `ASC` (ascending), `DESC` (descending). Default value: `ASC`.
+         * Time window on Wednesday in the format of 02:00-06:00
          * @type {string || null}
          */
-        this.OrderDirection = null;
+        this.Wednesday = null;
+
+        /**
+         * Time window on Thursday in the format of 02:00-06:00
+         * @type {string || null}
+         */
+        this.Thursday = null;
+
+        /**
+         * Time window on Friday in the format of 02:00-06:00
+         * @type {string || null}
+         */
+        this.Friday = null;
+
+        /**
+         * Time window on Saturday in the format of 02:00-06:00
+         * @type {string || null}
+         */
+        this.Saturday = null;
+
+        /**
+         * Time window on Sunday in the format of 02:00-06:00
+         * @type {string || null}
+         */
+        this.Sunday = null;
+
+        /**
+         * Non-archive backup retention policy. Valid values: `weekly` (back up by week), monthly (back up by month), default value: `weekly`.
+         * @type {string || null}
+         */
+        this.BackupPeriodStrategy = null;
+
+        /**
+         * If `BackupPeriodStrategy` is `monthly`, you need to pass in the specific backup dates. The time interval between any two adjacent dates cannot exceed 2 days, for example, [1,4,7,9,11,14,17,19,22,25,28,30,31].
+         * @type {Array.<number> || null}
+         */
+        this.Days = null;
+
+        /**
+         * Backup time by month in the format of 02:00–06:00, which is required when `BackupPeriodStrategy` is `monthly`.
+         * @type {string || null}
+         */
+        this.BackupPeriodTime = null;
 
     }
 
@@ -7174,11 +7477,16 @@ class DescribeBackupSummariesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Product = 'Product' in params ? params.Product : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+        this.Monday = 'Monday' in params ? params.Monday : null;
+        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
+        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
+        this.Thursday = 'Thursday' in params ? params.Thursday : null;
+        this.Friday = 'Friday' in params ? params.Friday : null;
+        this.Saturday = 'Saturday' in params ? params.Saturday : null;
+        this.Sunday = 'Sunday' in params ? params.Sunday : null;
+        this.BackupPeriodStrategy = 'BackupPeriodStrategy' in params ? params.BackupPeriodStrategy : null;
+        this.Days = 'Days' in params ? params.Days : null;
+        this.BackupPeriodTime = 'BackupPeriodTime' in params ? params.BackupPeriodTime : null;
 
     }
 }
@@ -7251,18 +7559,32 @@ Note: this field may return `null`, indicating that no valid value can be found.
 }
 
 /**
- * DescribeRoGroups request structure.
+ * AnalyzeAuditLogs response structure.
  * @class
  */
-class DescribeRoGroupsRequest extends  AbstractModel {
+class AnalyzeAuditLogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of `cdb-c1nl9rpv` or `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page.
+         * Information set of the aggregation bucket returned
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AuditLogAggregationResult> || null}
+         */
+        this.Items = null;
+
+        /**
+         * Number of scanned logs
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.RequestId = null;
 
     }
 
@@ -7273,7 +7595,17 @@ class DescribeRoGroupsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AuditLogAggregationResult();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8340,18 +8672,42 @@ class DescribeBackupsResponse extends  AbstractModel {
 }
 
 /**
- * ReloadBalanceProxyNode response structure.
+ * AnalyzeAuditLogs request structure.
  * @class
  */
-class ReloadBalanceProxyNodeResponse extends  AbstractModel {
+class AnalyzeAuditLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * Start time of the log to be analyzed in the format of `2023-02-16 00:00:20`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the log to be analyzed in the format of `2023-02-16 00:00:20`.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Sorting conditions for aggregation dimension
+         * @type {Array.<AggregationCondition> || null}
+         */
+        this.AggregationConditions = null;
+
+        /**
+         * The result set of the audit log filtered by this condition is set as the analysis Log.
+         * @type {AuditLogFilter || null}
+         */
+        this.AuditLogFilter = null;
 
     }
 
@@ -8362,7 +8718,24 @@ class ReloadBalanceProxyNodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.AggregationConditions) {
+            this.AggregationConditions = new Array();
+            for (let z in params.AggregationConditions) {
+                let obj = new AggregationCondition();
+                obj.deserialize(params.AggregationConditions[z]);
+                this.AggregationConditions.push(obj);
+            }
+        }
+
+        if (params.AuditLogFilter) {
+            let obj = new AuditLogFilter();
+            obj.deserialize(params.AuditLogFilter)
+            this.AuditLogFilter = obj;
+        }
 
     }
 }
@@ -9960,6 +10333,41 @@ class ModifyCDBProxyVipVPortResponse extends  AbstractModel {
 }
 
 /**
+ * Time range available for rollback
+ * @class
+ */
+class RollbackTimeRange extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time available for rollback in the format of yyyy-MM-dd HH:mm:ss, such as 2016-10-29 01:06:04
+         * @type {string || null}
+         */
+        this.Begin = null;
+
+        /**
+         * End time available for rollback in the format of yyyy-MM-dd HH:mm:ss, such as 2016-11-02 11:44:47
+         * @type {string || null}
+         */
+        this.End = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Begin = 'Begin' in params ? params.Begin : null;
+        this.End = 'End' in params ? params.End : null;
+
+    }
+}
+
+/**
  * DescribeSupportedPrivileges response structure.
  * @class
  */
@@ -11500,6 +11908,34 @@ class DescribeLocalBinlogConfigResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRoGroups request structure.
+ * @class
+ */
+class DescribeRoGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `cdb-c1nl9rpv` or `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeCDBProxy response structure.
  * @class
  */
@@ -12224,6 +12660,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.MaxDelayTime = null;
 
+        /**
+         * Instance disk type, which is returned only for the instances of cloud disk edition. Valid values: `CLOUD_SSD` (SSD), `CLOUD_HSSD` (Enhanced SSD).
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
     }
 
     /**
@@ -12317,6 +12759,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.EngineType = 'EngineType' in params ? params.EngineType : null;
         this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
 
     }
 }
@@ -14206,97 +14649,6 @@ class OpenDBInstanceEncryptionRequest extends  AbstractModel {
 }
 
 /**
- * Common time window
- * @class
- */
-class CommonTimeWindow extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Time window on Monday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Monday = null;
-
-        /**
-         * Time window on Tuesday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Tuesday = null;
-
-        /**
-         * Time window on Wednesday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Wednesday = null;
-
-        /**
-         * Time window on Thursday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Thursday = null;
-
-        /**
-         * Time window on Friday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Friday = null;
-
-        /**
-         * Time window on Saturday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Saturday = null;
-
-        /**
-         * Time window on Sunday in the format of 02:00-06:00
-         * @type {string || null}
-         */
-        this.Sunday = null;
-
-        /**
-         * Non-archive backup retention policy. Valid values: `weekly` (back up by week), monthly (back up by month), default value: `weekly`.
-         * @type {string || null}
-         */
-        this.BackupPeriodStrategy = null;
-
-        /**
-         * If `BackupPeriodStrategy` is `monthly`, you need to pass in the specific backup dates. The time interval between any two adjacent dates cannot exceed 2 days, for example, [1,4,7,9,11,14,17,19,22,25,28,30,31].
-         * @type {Array.<number> || null}
-         */
-        this.Days = null;
-
-        /**
-         * Backup time by month in the format of 02:00–06:00, which is required when `BackupPeriodStrategy` is `monthly`.
-         * @type {string || null}
-         */
-        this.BackupPeriodTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Monday = 'Monday' in params ? params.Monday : null;
-        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
-        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
-        this.Thursday = 'Thursday' in params ? params.Thursday : null;
-        this.Friday = 'Friday' in params ? params.Friday : null;
-        this.Saturday = 'Saturday' in params ? params.Saturday : null;
-        this.Sunday = 'Sunday' in params ? params.Sunday : null;
-        this.BackupPeriodStrategy = 'BackupPeriodStrategy' in params ? params.BackupPeriodStrategy : null;
-        this.Days = 'Days' in params ? params.Days : null;
-        this.BackupPeriodTime = 'BackupPeriodTime' in params ? params.BackupPeriodTime : null;
-
-    }
-}
-
-/**
  * Account details
  * @class
  */
@@ -14652,42 +15004,26 @@ class OpenAuditServiceRequest extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstanceEngineVersion request structure.
+ * Analysis result of an audit log
  * @class
  */
-class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
+class AuditLogAggregationResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+         * Aggregation dimension
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.AggregationField = null;
 
         /**
-         * Version of primary instance database engine. Value range: 5.6, 5.7
-         * @type {string || null}
+         * Result set of an aggregation bucket
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Bucket> || null}
          */
-        this.EngineVersion = null;
-
-        /**
-         * Mode of switch to a new instance. Value range: 0 (switch immediately), 1 (switch within a time window). Default value: 0. If the value is 1, the switch process will be performed within a time window. Or, you can call the [switching to new instance API](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) to trigger the process.
-         * @type {number || null}
-         */
-        this.WaitSwitch = null;
-
-        /**
-         * Whether to upgrade kernel minor version. Valid values: 1 (upgrade kernel minor version), 0 (upgrade database engine).
-         * @type {number || null}
-         */
-        this.UpgradeSubversion = null;
-
-        /**
-         * Delay threshold. Value range: 1-10
-         * @type {number || null}
-         */
-        this.MaxDelayTime = null;
+        this.Buckets = null;
 
     }
 
@@ -14698,11 +15034,16 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
-        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
-        this.UpgradeSubversion = 'UpgradeSubversion' in params ? params.UpgradeSubversion : null;
-        this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
+        this.AggregationField = 'AggregationField' in params ? params.AggregationField : null;
+
+        if (params.Buckets) {
+            this.Buckets = new Array();
+            for (let z in params.Buckets) {
+                let obj = new Bucket();
+                obj.deserialize(params.Buckets[z]);
+                this.Buckets.push(obj);
+            }
+        }
 
     }
 }
@@ -16000,6 +16341,42 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * Information of an aggregation bucket
+ * @class
+ */
+class Bucket extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * None
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Number of keys in the statistic report
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
  * DeleteAccounts request structure.
  * @class
  */
@@ -16043,24 +16420,18 @@ class DeleteAccountsRequest extends  AbstractModel {
 }
 
 /**
- * SwitchDrInstanceToMaster response structure.
+ * OfflineIsolatedInstances request structure.
  * @class
  */
-class SwitchDrInstanceToMasterResponse extends  AbstractModel {
+class OfflineIsolatedInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Async task request ID, which can be used to query the execution result of an async task
-         * @type {string || null}
+         * Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+         * @type {Array.<string> || null}
          */
-        this.AsyncRequestId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.InstanceIds = null;
 
     }
 
@@ -16071,8 +16442,44 @@ class SwitchDrInstanceToMasterResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * Weight rule
+ * @class
+ */
+class Rule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The maximum weight
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {number || null}
+         */
+        this.LessThan = null;
+
+        /**
+         * Weight
+Note: this field may return `null`, indicating that no valid value can be found.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LessThan = 'LessThan' in params ? params.LessThan : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -16204,26 +16611,18 @@ class DescribeAccountPrivilegesRequest extends  AbstractModel {
 }
 
 /**
- * Weight rule
+ * ReloadBalanceProxyNode response structure.
  * @class
  */
-class Rule extends  AbstractModel {
+class ReloadBalanceProxyNodeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The maximum weight
-Note: this field may return `null`, indicating that no valid value can be found.
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.LessThan = null;
-
-        /**
-         * Weight
-Note: this field may return `null`, indicating that no valid value can be found.
-         * @type {number || null}
-         */
-        this.Weight = null;
+        this.RequestId = null;
 
     }
 
@@ -16234,8 +16633,7 @@ Note: this field may return `null`, indicating that no valid value can be found.
         if (!params) {
             return;
         }
-        this.LessThan = 'LessThan' in params ? params.LessThan : null;
-        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16298,24 +16696,26 @@ class DescribeAccountsResponse extends  AbstractModel {
 }
 
 /**
- * Time range available for rollback
+ * Name of the database for rollback
  * @class
  */
-class RollbackTimeRange extends  AbstractModel {
+class RollbackDBName extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time available for rollback in the format of yyyy-MM-dd HH:mm:ss, such as 2016-10-29 01:06:04
+         * Original database name before rollback
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Begin = null;
+        this.DatabaseName = null;
 
         /**
-         * End time available for rollback in the format of yyyy-MM-dd HH:mm:ss, such as 2016-11-02 11:44:47
+         * New database name after rollback
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.End = null;
+        this.NewDatabaseName = null;
 
     }
 
@@ -16326,8 +16726,8 @@ class RollbackTimeRange extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Begin = 'Begin' in params ? params.Begin : null;
-        this.End = 'End' in params ? params.End : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.NewDatabaseName = 'NewDatabaseName' in params ? params.NewDatabaseName : null;
 
     }
 }
@@ -17315,26 +17715,30 @@ class DescribeDBInstanceGTIDRequest extends  AbstractModel {
 }
 
 /**
- * Name of the database for rollback
+ * Aggregation condition for an audit log
  * @class
  */
-class RollbackDBName extends  AbstractModel {
+class AggregationCondition extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Original database name before rollback
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Aggregation field. Valid values: `host` (source IP), `user` （username), `dbName` (database name), `sqlType` (SQL type).
          * @type {string || null}
          */
-        this.DatabaseName = null;
+        this.AggregationField = null;
 
         /**
-         * New database name after rollback
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Offset
+         * @type {number || null}
          */
-        this.NewDatabaseName = null;
+        this.Offset = null;
+
+        /**
+         * Number of buckets returned under this field. Maximum value: `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -17345,8 +17749,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.NewDatabaseName = 'NewDatabaseName' in params ? params.NewDatabaseName : null;
+        this.AggregationField = 'AggregationField' in params ? params.AggregationField : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -17480,6 +17885,7 @@ module.exports = {
     SlaveInstanceInfo: SlaveInstanceInfo,
     DescribeErrorLogDataRequest: DescribeErrorLogDataRequest,
     Parameter: Parameter,
+    SwitchDrInstanceToMasterResponse: SwitchDrInstanceToMasterResponse,
     DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
     TaskDetail: TaskDetail,
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
@@ -17509,6 +17915,7 @@ module.exports = {
     DescribeDBPriceResponse: DescribeDBPriceResponse,
     CloseCDBProxyResponse: CloseCDBProxyResponse,
     ReleaseIsolatedDBInstancesResponse: ReleaseIsolatedDBInstancesResponse,
+    AuditLogFilter: AuditLogFilter,
     StartBatchRollbackResponse: StartBatchRollbackResponse,
     CustomConfig: CustomConfig,
     ConnectionPoolInfo: ConnectionPoolInfo,
@@ -17539,6 +17946,7 @@ module.exports = {
     BinlogInfo: BinlogInfo,
     StopRollbackRequest: StopRollbackRequest,
     CloneItem: CloneItem,
+    UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
     DescribeTasksRequest: DescribeTasksRequest,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
     SlaveConfig: SlaveConfig,
@@ -17546,7 +17954,7 @@ module.exports = {
     AddTimeWindowRequest: AddTimeWindowRequest,
     ModifyCDBProxyDescResponse: ModifyCDBProxyDescResponse,
     ImportRecord: ImportRecord,
-    OfflineIsolatedInstancesRequest: OfflineIsolatedInstancesRequest,
+    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
     DescribeRollbackTaskDetailResponse: DescribeRollbackTaskDetailResponse,
     CreateAccountsRequest: CreateAccountsRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
@@ -17574,9 +17982,9 @@ module.exports = {
     CdbRegionSellConf: CdbRegionSellConf,
     UploadInfo: UploadInfo,
     ModifyLocalBinlogConfigResponse: ModifyLocalBinlogConfigResponse,
-    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
+    CommonTimeWindow: CommonTimeWindow,
     ProxyNodeInfo: ProxyNodeInfo,
-    DescribeRoGroupsRequest: DescribeRoGroupsRequest,
+    AnalyzeAuditLogsResponse: AnalyzeAuditLogsResponse,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
     DescribeSupportedPrivilegesRequest: DescribeSupportedPrivilegesRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
@@ -17604,7 +18012,7 @@ module.exports = {
     RollbackTask: RollbackTask,
     StartReplicationRequest: StartReplicationRequest,
     DescribeBackupsResponse: DescribeBackupsResponse,
-    ReloadBalanceProxyNodeResponse: ReloadBalanceProxyNodeResponse,
+    AnalyzeAuditLogsRequest: AnalyzeAuditLogsRequest,
     CreateAuditPolicyRequest: CreateAuditPolicyRequest,
     CreateRoInstanceIpRequest: CreateRoInstanceIpRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
@@ -17634,6 +18042,7 @@ module.exports = {
     DescribeProxyConnectionPoolConfResponse: DescribeProxyConnectionPoolConfResponse,
     TagInfo: TagInfo,
     ModifyCDBProxyVipVPortResponse: ModifyCDBProxyVipVPortResponse,
+    RollbackTimeRange: RollbackTimeRange,
     DescribeSupportedPrivilegesResponse: DescribeSupportedPrivilegesResponse,
     CreateCloneInstanceResponse: CreateCloneInstanceResponse,
     DescribeCdbZoneConfigRequest: DescribeCdbZoneConfigRequest,
@@ -17668,6 +18077,7 @@ module.exports = {
     SwitchCDBProxyRequest: SwitchCDBProxyRequest,
     BackupConfig: BackupConfig,
     DescribeLocalBinlogConfigResponse: DescribeLocalBinlogConfigResponse,
+    DescribeRoGroupsRequest: DescribeRoGroupsRequest,
     DescribeCDBProxyResponse: DescribeCDBProxyResponse,
     TagsInfoOfInstance: TagsInfoOfInstance,
     ResetRootAccountRequest: ResetRootAccountRequest,
@@ -17716,7 +18126,6 @@ module.exports = {
     Account: Account,
     CreateBackupRequest: CreateBackupRequest,
     OpenDBInstanceEncryptionRequest: OpenDBInstanceEncryptionRequest,
-    CommonTimeWindow: CommonTimeWindow,
     AccountInfo: AccountInfo,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
     DescribeRemoteBackupConfigResponse: DescribeRemoteBackupConfigResponse,
@@ -17725,7 +18134,7 @@ module.exports = {
     DeviceMemInfo: DeviceMemInfo,
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
     OpenAuditServiceRequest: OpenAuditServiceRequest,
-    UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
+    AuditLogAggregationResult: AuditLogAggregationResult,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
     DescribeSlowLogDataRequest: DescribeSlowLogDataRequest,
     DatabasesWithCharacterLists: DatabasesWithCharacterLists,
@@ -17752,14 +18161,16 @@ module.exports = {
     BackupLimitVpcItem: BackupLimitVpcItem,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
+    Bucket: Bucket,
     DeleteAccountsRequest: DeleteAccountsRequest,
-    SwitchDrInstanceToMasterResponse: SwitchDrInstanceToMasterResponse,
+    OfflineIsolatedInstancesRequest: OfflineIsolatedInstancesRequest,
+    Rule: Rule,
     ZoneConf: ZoneConf,
     DescribeCDBProxyRequest: DescribeCDBProxyRequest,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
-    Rule: Rule,
+    ReloadBalanceProxyNodeResponse: ReloadBalanceProxyNodeResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
-    RollbackTimeRange: RollbackTimeRange,
+    RollbackDBName: RollbackDBName,
     ModifyRemoteBackupConfigRequest: ModifyRemoteBackupConfigRequest,
     DeleteBackupRequest: DeleteBackupRequest,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
@@ -17779,7 +18190,7 @@ module.exports = {
     DescribeBinlogsRequest: DescribeBinlogsRequest,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     DescribeDBInstanceGTIDRequest: DescribeDBInstanceGTIDRequest,
-    RollbackDBName: RollbackDBName,
+    AggregationCondition: AggregationCondition,
     DescribeBackupEncryptionStatusResponse: DescribeBackupEncryptionStatusResponse,
     LocalBinlogConfig: LocalBinlogConfig,
     Tag: Tag,

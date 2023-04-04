@@ -39,6 +39,7 @@ const DescribeDBInstanceInfoResponse = models.DescribeDBInstanceInfoResponse;
 const SlaveInstanceInfo = models.SlaveInstanceInfo;
 const DescribeErrorLogDataRequest = models.DescribeErrorLogDataRequest;
 const Parameter = models.Parameter;
+const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
 const DescribeDBInstanceRebootTimeRequest = models.DescribeDBInstanceRebootTimeRequest;
 const TaskDetail = models.TaskDetail;
 const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
@@ -68,6 +69,7 @@ const StopDBImportJobResponse = models.StopDBImportJobResponse;
 const DescribeDBPriceResponse = models.DescribeDBPriceResponse;
 const CloseCDBProxyResponse = models.CloseCDBProxyResponse;
 const ReleaseIsolatedDBInstancesResponse = models.ReleaseIsolatedDBInstancesResponse;
+const AuditLogFilter = models.AuditLogFilter;
 const StartBatchRollbackResponse = models.StartBatchRollbackResponse;
 const CustomConfig = models.CustomConfig;
 const ConnectionPoolInfo = models.ConnectionPoolInfo;
@@ -98,6 +100,7 @@ const ProxyGroup = models.ProxyGroup;
 const BinlogInfo = models.BinlogInfo;
 const StopRollbackRequest = models.StopRollbackRequest;
 const CloneItem = models.CloneItem;
+const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
 const SlaveConfig = models.SlaveConfig;
@@ -105,7 +108,7 @@ const DescribeErrorLogDataResponse = models.DescribeErrorLogDataResponse;
 const AddTimeWindowRequest = models.AddTimeWindowRequest;
 const ModifyCDBProxyDescResponse = models.ModifyCDBProxyDescResponse;
 const ImportRecord = models.ImportRecord;
-const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
+const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
 const DescribeRollbackTaskDetailResponse = models.DescribeRollbackTaskDetailResponse;
 const CreateAccountsRequest = models.CreateAccountsRequest;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
@@ -133,9 +136,9 @@ const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGrou
 const CdbRegionSellConf = models.CdbRegionSellConf;
 const UploadInfo = models.UploadInfo;
 const ModifyLocalBinlogConfigResponse = models.ModifyLocalBinlogConfigResponse;
-const DescribeBackupSummariesRequest = models.DescribeBackupSummariesRequest;
+const CommonTimeWindow = models.CommonTimeWindow;
 const ProxyNodeInfo = models.ProxyNodeInfo;
-const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
+const AnalyzeAuditLogsResponse = models.AnalyzeAuditLogsResponse;
 const DescribeDBSwitchRecordsRequest = models.DescribeDBSwitchRecordsRequest;
 const DescribeSupportedPrivilegesRequest = models.DescribeSupportedPrivilegesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
@@ -163,7 +166,7 @@ const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewR
 const RollbackTask = models.RollbackTask;
 const StartReplicationRequest = models.StartReplicationRequest;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
-const ReloadBalanceProxyNodeResponse = models.ReloadBalanceProxyNodeResponse;
+const AnalyzeAuditLogsRequest = models.AnalyzeAuditLogsRequest;
 const CreateAuditPolicyRequest = models.CreateAuditPolicyRequest;
 const CreateRoInstanceIpRequest = models.CreateRoInstanceIpRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
@@ -193,6 +196,7 @@ const DeviceNetInfo = models.DeviceNetInfo;
 const DescribeProxyConnectionPoolConfResponse = models.DescribeProxyConnectionPoolConfResponse;
 const TagInfo = models.TagInfo;
 const ModifyCDBProxyVipVPortResponse = models.ModifyCDBProxyVipVPortResponse;
+const RollbackTimeRange = models.RollbackTimeRange;
 const DescribeSupportedPrivilegesResponse = models.DescribeSupportedPrivilegesResponse;
 const CreateCloneInstanceResponse = models.CreateCloneInstanceResponse;
 const DescribeCdbZoneConfigRequest = models.DescribeCdbZoneConfigRequest;
@@ -227,6 +231,7 @@ const ModifyAccountPrivilegesResponse = models.ModifyAccountPrivilegesResponse;
 const SwitchCDBProxyRequest = models.SwitchCDBProxyRequest;
 const BackupConfig = models.BackupConfig;
 const DescribeLocalBinlogConfigResponse = models.DescribeLocalBinlogConfigResponse;
+const DescribeRoGroupsRequest = models.DescribeRoGroupsRequest;
 const DescribeCDBProxyResponse = models.DescribeCDBProxyResponse;
 const TagsInfoOfInstance = models.TagsInfoOfInstance;
 const ResetRootAccountRequest = models.ResetRootAccountRequest;
@@ -275,7 +280,6 @@ const ModifyAccountPrivilegesRequest = models.ModifyAccountPrivilegesRequest;
 const Account = models.Account;
 const CreateBackupRequest = models.CreateBackupRequest;
 const OpenDBInstanceEncryptionRequest = models.OpenDBInstanceEncryptionRequest;
-const CommonTimeWindow = models.CommonTimeWindow;
 const AccountInfo = models.AccountInfo;
 const DescribeDBInstanceCharsetRequest = models.DescribeDBInstanceCharsetRequest;
 const DescribeRemoteBackupConfigResponse = models.DescribeRemoteBackupConfigResponse;
@@ -284,7 +288,7 @@ const LocalBinlogConfigDefault = models.LocalBinlogConfigDefault;
 const DeviceMemInfo = models.DeviceMemInfo;
 const ModifyAutoRenewFlagRequest = models.ModifyAutoRenewFlagRequest;
 const OpenAuditServiceRequest = models.OpenAuditServiceRequest;
-const UpgradeDBInstanceEngineVersionRequest = models.UpgradeDBInstanceEngineVersionRequest;
+const AuditLogAggregationResult = models.AuditLogAggregationResult;
 const ModifyBackupConfigRequest = models.ModifyBackupConfigRequest;
 const DescribeSlowLogDataRequest = models.DescribeSlowLogDataRequest;
 const DatabasesWithCharacterLists = models.DatabasesWithCharacterLists;
@@ -311,14 +315,16 @@ const DescribeDBInstanceInfoRequest = models.DescribeDBInstanceInfoRequest;
 const BackupLimitVpcItem = models.BackupLimitVpcItem;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const Bucket = models.Bucket;
 const DeleteAccountsRequest = models.DeleteAccountsRequest;
-const SwitchDrInstanceToMasterResponse = models.SwitchDrInstanceToMasterResponse;
+const OfflineIsolatedInstancesRequest = models.OfflineIsolatedInstancesRequest;
+const Rule = models.Rule;
 const ZoneConf = models.ZoneConf;
 const DescribeCDBProxyRequest = models.DescribeCDBProxyRequest;
 const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest;
-const Rule = models.Rule;
+const ReloadBalanceProxyNodeResponse = models.ReloadBalanceProxyNodeResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const RollbackTimeRange = models.RollbackTimeRange;
+const RollbackDBName = models.RollbackDBName;
 const ModifyRemoteBackupConfigRequest = models.ModifyRemoteBackupConfigRequest;
 const DeleteBackupRequest = models.DeleteBackupRequest;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
@@ -338,7 +344,7 @@ const AuditRule = models.AuditRule;
 const DescribeBinlogsRequest = models.DescribeBinlogsRequest;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const DescribeDBInstanceGTIDRequest = models.DescribeDBInstanceGTIDRequest;
-const RollbackDBName = models.RollbackDBName;
+const AggregationCondition = models.AggregationCondition;
 const DescribeBackupEncryptionStatusResponse = models.DescribeBackupEncryptionStatusResponse;
 const LocalBinlogConfig = models.LocalBinlogConfig;
 const Tag = models.Tag;
@@ -1051,6 +1057,17 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
+     * This API is used to aggregate the audit logs filtered by different conditions and aggregate the statistics of the specified data rows.
+     * @param {AnalyzeAuditLogsRequest} req
+     * @param {function(string, AnalyzeAuditLogsResponse):void} cb
+     * @public
+     */
+    AnalyzeAuditLogs(req, cb) {
+        let resp = new AnalyzeAuditLogsResponse();
+        this.request("AnalyzeAuditLogs", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a TencentDB account. The account name, host address, and password are required. Account remarks and maximum connections can also be configured.
      * @param {CreateAccountsRequest} req
      * @param {function(string, CreateAccountsResponse):void} cb
@@ -1305,6 +1322,8 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
 
     /**
      * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
+
+This API was disused. You can refer to the CreateDBInstance API, and initialize the instance when creating it.
 
 This API is used to initialize a TencentDB instance, including initial password, default character set, and instance port number. But it is disused and not recommended. You can now set the instance information by using the parameter `Password`, `ParamList`, and `Port` respectively in the `CreateDBInstance` and `CreateDBInstanceHour` APIs.
      * @param {InitDBInstancesRequest} req

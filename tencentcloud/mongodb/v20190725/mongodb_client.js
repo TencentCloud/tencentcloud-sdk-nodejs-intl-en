@@ -194,7 +194,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query price of instance specification adjustment.
+     * This API is used to query the price of instance specification adjustment.
      * @param {InquirePriceModifyDBInstanceSpecRequest} req
      * @param {function(string, InquirePriceModifyDBInstanceSpecResponse):void} cb
      * @public

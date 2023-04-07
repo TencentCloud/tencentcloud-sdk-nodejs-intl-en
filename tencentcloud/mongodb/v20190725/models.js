@@ -1082,7 +1082,7 @@ class InquirePriceModifyDBInstanceSpecRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed in the TencentDB Console.
+         * Instance ID in the format of cmgo-p8vn****. It is the same as the instance ID displayed in the TencentDB console.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1100,13 +1100,13 @@ class InquirePriceModifyDBInstanceSpecRequest extends  AbstractModel {
         this.Volume = null;
 
         /**
-         * Node quantity after configuration modification. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the node quantity remains unchanged.
+         * Number of instance nodes. The number of nodes is left unchanged by default and cannot be changed currently.
          * @type {number || null}
          */
         this.NodeNum = null;
 
         /**
-         * Shard quantity after configuration modification, which can only be increased rather than decreased. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the shard quantity remains unchanged.
+         * Number of instance shards. The number of shards is left unchanged by default and cannot be changed currently.
          * @type {number || null}
          */
         this.ReplicateSetNum = null;
@@ -2053,7 +2053,7 @@ class DescribeDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of eligible instances.
+         * Number of eligible instances
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -3179,37 +3179,37 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+         * List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB console page.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * Instance type. Valid values: 0 (all instances), 1 (promoted), 2 (temp), 3 (read-only), -1 (promoted + read-only + disaster recovery)
+         * Instance type. Valid values: <ul><li>`0`: All instances. </li><li>`1`: Regular instances. </li><li>`2`: Temp instances. </li><li>`3`: Read-only instances. </li><li>`-1`: Regular instances, read-only instances, disaster recovery instances.</li></ul>
          * @type {number || null}
          */
         this.InstanceType = null;
 
         /**
-         * Cluster type. Valid values: 0 (replica set instance), 1 (sharding instance), -1 (all instances)
+         * Cluster type. Valid values: <ul><li>`0`: Replica set instances. </li><li>`1`: Sharded cluster instances. </li><li>`-1`: All instances.</li></ul>
          * @type {number || null}
          */
         this.ClusterType = null;
 
         /**
-         * Instance status. Valid values: `0` (to be initialized), `1` (executing task), `2` (running), `-2` (isolated monthly-subscribed instance), `-3` (isolated pay-as-you-go instance)
+         * Instance status. Valid values: <ul><li>`0`: To be initialized. </li><li>`1`: In process. </li><li>`2`: Valid. </li><li>`-2`: Isolated (for monthly subscribed instances). </li><li>`-3`: Isolated (for pay-as-you-go instances).</li></ul>
          * @type {Array.<number> || null}
          */
         this.Status = null;
 
         /**
-         * VPC ID. This parameter can be left empty for the basic network
+         * VPC ID. This parameter can be left empty for the classic network.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet ID of VPC. This parameter can be left empty for the basic network. If it is passed in as an input parameter, the corresponding VpcId must be set
+         * Subnet ID of VPC. This parameter can be left empty for the classic network. If it is passed in as an input parameter, the corresponding VpcId must be set.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -3221,25 +3221,25 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * Number of results to be returned for a single request. Valid values: 1-100. Default value: 20
+         * Number of results returned per request. Default value: `20`. Value range: [1,100].
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Offset. Default value: 0
+         * Offset. Default value: `0`.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Sort by field of the returned result set. Currently, supported values include "ProjectId", "InstanceName", and "CreateTime". The return results are sorted in ascending order by default.
+         * Sort by field of the returned result set. Valid values: `ProjectId`, `InstanceName`, `CreateTime`. The return results are sorted in ascending order by default.
          * @type {string || null}
          */
         this.OrderBy = null;
 
         /**
-         * Sorting method of the return result set. Currently, "ASC" or "DESC" is supported
+         * Sorting method of the return result set. Valid values: `ASC`, `DESC`.
          * @type {string || null}
          */
         this.OrderByType = null;
@@ -3251,14 +3251,14 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ProjectIds = null;
 
         /**
-         * Search keyword, which can be instance ID, instance name, or complete IP
+         * Search keyword, which can be instance ID, instance name, or complete IP.
          * @type {string || null}
          */
         this.SearchKey = null;
 
         /**
          * Tag information
-         * @type {TagInfo || null}
+         * @type {Array.<TagInfo> || null}
          */
         this.Tags = null;
 
@@ -3286,9 +3286,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
 
         if (params.Tags) {
-            let obj = new TagInfo();
-            obj.deserialize(params.Tags)
-            this.Tags = obj;
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
         }
 
     }
@@ -3705,7 +3708,7 @@ class DescribeSlowLogsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Slow log format, which can be JSON. If this parameter is left empty, the slow log will be returned in its native format.
+         * Return format of slow log. The original slow log format is returned by default, and the format can be set to JSON on versions 4.4 and later.
          * @type {string || null}
          */
         this.Format = null;

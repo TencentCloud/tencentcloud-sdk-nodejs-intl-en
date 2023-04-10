@@ -2132,6 +2132,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.OutSideSoftInfo = null;
 
+        /**
+         * Whether the current cluster supports external clients.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.IsSupportOutsideCluster = null;
+
     }
 
     /**
@@ -2186,6 +2193,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.OutSideSoftInfo.push(obj);
             }
         }
+        this.IsSupportOutsideCluster = 'IsSupportOutsideCluster' in params ? params.IsSupportOutsideCluster : null;
 
     }
 }

@@ -3318,6 +3318,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.JobExecutorMaxNumbers = null;
 
+        /**
+         * The image version.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SparkImageVersion = null;
+
     }
 
     /**
@@ -3367,6 +3374,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TaskNum = 'TaskNum' in params ? params.TaskNum : null;
         this.DataEngineStatus = 'DataEngineStatus' in params ? params.DataEngineStatus : null;
         this.JobExecutorMaxNumbers = 'JobExecutorMaxNumbers' in params ? params.JobExecutorMaxNumbers : null;
+        this.SparkImageVersion = 'SparkImageVersion' in params ? params.SparkImageVersion : null;
 
     }
 }

@@ -392,6 +392,13 @@ class InstanceConfs extends  AbstractModel {
          */
         this.OverviewDisplay = null;
 
+        /**
+         * Custom big key analysis separator for Redis only
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.KeyDelimiters = null;
+
     }
 
     /**
@@ -403,6 +410,7 @@ class InstanceConfs extends  AbstractModel {
         }
         this.DailyInspection = 'DailyInspection' in params ? params.DailyInspection : null;
         this.OverviewDisplay = 'OverviewDisplay' in params ? params.OverviewDisplay : null;
+        this.KeyDelimiters = 'KeyDelimiters' in params ? params.KeyDelimiters : null;
 
     }
 }
@@ -3831,6 +3839,26 @@ class InstanceInfo extends  AbstractModel {
          */
         this.AuditRunningStatus = null;
 
+        /**
+         * Private VIP
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InternalVip = null;
+
+        /**
+         * Private network port
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InternalVport = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -3873,6 +3901,9 @@ class InstanceInfo extends  AbstractModel {
         this.SecAuditStatus = 'SecAuditStatus' in params ? params.SecAuditStatus : null;
         this.AuditPolicyStatus = 'AuditPolicyStatus' in params ? params.AuditPolicyStatus : null;
         this.AuditRunningStatus = 'AuditRunningStatus' in params ? params.AuditRunningStatus : null;
+        this.InternalVip = 'InternalVip' in params ? params.InternalVip : null;
+        this.InternalVport = 'InternalVport' in params ? params.InternalVport : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }

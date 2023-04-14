@@ -3419,6 +3419,14 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.Ipv6ServiceCIDR = null;
 
+        /**
+         * Cluster Cilium Mode configuration
+- clusterIP
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CiliumMode = null;
+
     }
 
     /**
@@ -3441,6 +3449,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.IgnoreServiceCIDRConflict = 'IgnoreServiceCIDRConflict' in params ? params.IgnoreServiceCIDRConflict : null;
         this.IsDualStack = 'IsDualStack' in params ? params.IsDualStack : null;
         this.Ipv6ServiceCIDR = 'Ipv6ServiceCIDR' in params ? params.Ipv6ServiceCIDR : null;
+        this.CiliumMode = 'CiliumMode' in params ? params.CiliumMode : null;
 
     }
 }
@@ -3672,6 +3681,13 @@ class ServiceAccountAuthenticationOptions extends  AbstractModel {
         super();
 
         /**
+         * Use TKE default issuer and jwksuri
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.UseTKEDefault = null;
+
+        /**
          * service-account-issuer
 Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
@@ -3701,6 +3717,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         if (!params) {
             return;
         }
+        this.UseTKEDefault = 'UseTKEDefault' in params ? params.UseTKEDefault : null;
         this.Issuer = 'Issuer' in params ? params.Issuer : null;
         this.JWKSURI = 'JWKSURI' in params ? params.JWKSURI : null;
         this.AutoCreateDiscoveryAnonymousAuth = 'AutoCreateDiscoveryAnonymousAuth' in params ? params.AutoCreateDiscoveryAnonymousAuth : null;
@@ -10560,7 +10577,7 @@ class Cluster extends  AbstractModel {
         this.TagSpecification = null;
 
         /**
-         * Cluster status (`Running`, `Creating`, `Idling` or `Abnormal`)
+         * Cluster status. Values: `Trading` (Preparing), `Creating`, `Running`, `Deleting`, `Idling` (Idle), `Recovering`, `Scaling`, `Upgrading` (Upgrading the cluster), `WaittingForConnect` (Pending registration), `Pause` (Cluster upgrade paused), `NodeUpgrading` (Upgrading the node), `RuntimeUpgrading` (Upgrading the node runtime), `MasterScaling` (Scaling Master), `ClusterLevelUpgrading` (Adjusting cluster specification level), `ResourceIsolate` (Isolating), `ResourceIsolated` (Isolated), `ResourceReverse` (Overdue payment made. Recovering the cluster), and `Abnormal`.
          * @type {string || null}
          */
         this.ClusterStatus = null;
@@ -10647,6 +10664,13 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.RuntimeVersion = null;
 
+        /**
+         * Number of current etcd in the cluster
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ClusterEtcdNodeNum = null;
+
     }
 
     /**
@@ -10692,6 +10716,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.AutoUpgradeClusterLevel = 'AutoUpgradeClusterLevel' in params ? params.AutoUpgradeClusterLevel : null;
         this.QGPUShareEnable = 'QGPUShareEnable' in params ? params.QGPUShareEnable : null;
         this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
+        this.ClusterEtcdNodeNum = 'ClusterEtcdNodeNum' in params ? params.ClusterEtcdNodeNum : null;
 
     }
 }
@@ -11470,7 +11495,7 @@ The array length of `InstanceAdvancedSettingsOverride` should be the same as the
         this.InstanceAdvancedSettingsOverrides = null;
 
         /**
-         * Node image (it is required when creating a node)
+         * Node image
          * @type {string || null}
          */
         this.ImageId = null;

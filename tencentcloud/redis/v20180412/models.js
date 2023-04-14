@@ -4741,60 +4741,30 @@ class KillMasterGroupRequest extends  AbstractModel {
 }
 
 /**
- * Description of instance parameter in Char type
+ * CloneInstances response structure.
  * @class
  */
-class InstanceTextParam extends  AbstractModel {
+class CloneInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Parameter name
+         * Request task ID
          * @type {string || null}
          */
-        this.ParamName = null;
+        this.DealId = null;
 
         /**
-         * Parameter type: Text
-         * @type {string || null}
-         */
-        this.ValueType = null;
-
-        /**
-         * Whether restart is required after a modification is made. Valid values: true, false
-         * @type {string || null}
-         */
-        this.NeedRestart = null;
-
-        /**
-         * Default value of the parameter
-         * @type {string || null}
-         */
-        this.DefaultValue = null;
-
-        /**
-         * Current value
-         * @type {string || null}
-         */
-        this.CurrentValue = null;
-
-        /**
-         * Parameter description
-         * @type {string || null}
-         */
-        this.Tips = null;
-
-        /**
-         * Valid values of the parameter
+         * Clone instance ID
          * @type {Array.<string> || null}
          */
-        this.TextValue = null;
+        this.InstanceIds = null;
 
         /**
-         * Parameter status. 1: modifying; 2: modified
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.Status = null;
+        this.RequestId = null;
 
     }
 
@@ -4805,14 +4775,9 @@ class InstanceTextParam extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ParamName = 'ParamName' in params ? params.ParamName : null;
-        this.ValueType = 'ValueType' in params ? params.ValueType : null;
-        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
-        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
-        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
-        this.Tips = 'Tips' in params ? params.Tips : null;
-        this.TextValue = 'TextValue' in params ? params.TextValue : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5015,24 +4980,60 @@ class DescribeInstanceAccountRequest extends  AbstractModel {
 }
 
 /**
- * SwitchProxy request structure.
+ * Description of instance parameter in Char type
  * @class
  */
-class SwitchProxyRequest extends  AbstractModel {
+class InstanceTextParam extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Parameter name
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.ParamName = null;
 
         /**
-         * Instance ProxyID
+         * Parameter type: Text
          * @type {string || null}
          */
-        this.ProxyID = null;
+        this.ValueType = null;
+
+        /**
+         * Whether restart is required after a modification is made. Valid values: true, false
+         * @type {string || null}
+         */
+        this.NeedRestart = null;
+
+        /**
+         * Default value of the parameter
+         * @type {string || null}
+         */
+        this.DefaultValue = null;
+
+        /**
+         * Current value
+         * @type {string || null}
+         */
+        this.CurrentValue = null;
+
+        /**
+         * Parameter description
+         * @type {string || null}
+         */
+        this.Tips = null;
+
+        /**
+         * Valid values of the parameter
+         * @type {Array.<string> || null}
+         */
+        this.TextValue = null;
+
+        /**
+         * Parameter status. 1: modifying; 2: modified
+         * @type {number || null}
+         */
+        this.Status = null;
 
     }
 
@@ -5043,8 +5044,14 @@ class SwitchProxyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ProxyID = 'ProxyID' in params ? params.ProxyID : null;
+        this.ParamName = 'ParamName' in params ? params.ParamName : null;
+        this.ValueType = 'ValueType' in params ? params.ValueType : null;
+        this.NeedRestart = 'NeedRestart' in params ? params.NeedRestart : null;
+        this.DefaultValue = 'DefaultValue' in params ? params.DefaultValue : null;
+        this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+        this.TextValue = 'TextValue' in params ? params.TextValue : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -5302,6 +5309,176 @@ class DescribeTaskInfoRequest extends  AbstractModel {
 }
 
 /**
+ * CloneInstances request structure.
+ * @class
+ */
+class CloneInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the current instance
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Number of instance to be cloned each time. You can purchase up to 100 monthly subscribed instances or up to 30 pay-as-you-go instances at a time. You can purchase up to 100 instances in each region.
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * ID of the AZ where the clone instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Billing mode. Valid values: <ul><li>`0` (Pay-as-you-go) </li><li>`1` (Monthly subscription) </li></ul>
+         * @type {number || null}
+         */
+        this.BillingMode = null;
+
+        /**
+         * Purchase duration of an instance. <ul><li>Unit: Month</li><li>Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60` (for monthly subscription mode).</li><li> Valid value: `1` (for pay-as-you-go mode).</li></ul>
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Security group ID, which can be obtained on the <b>Security Group</b> page in the console.
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIdList = null;
+
+        /**
+         * Backup ID of the clone instance, which can be obtained through the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
+         * @type {string || null}
+         */
+        this.BackupId = null;
+
+        /**
+         * Whether the clone instance supports password-free access. Valid values: <ul><li>`true` (Yes)</li><li>`false` (No. When SSL or public network is enabled). Default value: `false`.</li></ul>
+         * @type {boolean || null}
+         */
+        this.NoAuth = null;
+
+        /**
+         * VPC ID. If this parameter is not passed in, the classic network will be selected by default.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC subnet ID, which is not required for the classic network.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Name of the clone instance. <br>Enter up to 60 letters, digits, hyphens, and underscores.</br>
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * The access password of the clone instance. <ul><li>When the input parameter <b>NoAuth</b> is <b>true</b>, this parameter is not required. </li><li>When the instance is Redis 2.8, 4.0, or 5.0, the password must contain 8–30 characters in at least two of the following types: lowercase letters, uppercase letters, digits, and special characters `()`~!@#$%^&*-+=_|{}[]:;<>,.?/` and cannot start with `/`.</li><li>When the instance is CKV 3.2, the password must and can only contain 8–30 letters and digits.</li></ul>
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * The auto-renewal flag. Valid values <ul><li>`0`: Manual renewal (default) </li><li>`1`: Auto-renewal. </li><li>`2`: Not auto-renewal (set by user)</ul>
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
+
+        /**
+         * Customized port. Valid range: 1024-65535. Default value: `6379`.
+         * @type {number || null}
+         */
+        this.VPort = null;
+
+        /**
+         * Node information of an instance. <ul><li>Currently supported type and AZ information of a node to be configured (master node or replica node) For more information, see [RedisNodeInfo](https://intl.cloud.tencent.com/document/product/239/20022?from_cn_redirect=1#RedisNodeInfo).</li><li>This parameter is not required for single-AZ deployment.</li></ul>
+         * @type {Array.<RedisNodeInfo> || null}
+         */
+        this.NodeSet = null;
+
+        /**
+         * Project ID, which can be obtained in <b>Account Center</b> > <b>Project Management</b> in the upper-right corner in the console.
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * Tag to be bound for the clone instance
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * The ID of a parameter template to be applied to the clone instance, which can be obtained on <b>Parameter Template</b> page in the console. If this parameter is not configured, the default parameter template will be applied.
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Alarm policy ID of the specified clone instance, which can be obtained on <b>Cloud Monitor</b> > <b>Alarm Configuration</b> > <b>Alarm Policy</b> in the console.
+         * @type {Array.<string> || null}
+         */
+        this.AlarmPolicyList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.BillingMode = 'BillingMode' in params ? params.BillingMode : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.SecurityGroupIdList = 'SecurityGroupIdList' in params ? params.SecurityGroupIdList : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.VPort = 'VPort' in params ? params.VPort : null;
+
+        if (params.NodeSet) {
+            this.NodeSet = new Array();
+            for (let z in params.NodeSet) {
+                let obj = new RedisNodeInfo();
+                obj.deserialize(params.NodeSet[z]);
+                this.NodeSet.push(obj);
+            }
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.AlarmPolicyList = 'AlarmPolicyList' in params ? params.AlarmPolicyList : null;
+
+    }
+}
+
+/**
  * ApplyParamsTemplate response structure.
  * @class
  */
@@ -5363,7 +5540,7 @@ class DescribeReplicationGroupRequest extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * Keyword for fuzzy search, which can be an instance name or instance ID.
+         * Key words for fuzzy query, which can be set as the ID or name of a replication group.
          * @type {string || null}
          */
         this.SearchKey = null;
@@ -7260,26 +7437,49 @@ class Groups extends  AbstractModel {
         this.AppId = null;
 
         /**
-         * Region ID. 1: Guangzhou; 4: Shanghai; 5: Hong Kong (China); 6: Toronto; 7: Shanghai Finance; 8: Beijing; 9: Singapore; 11: Shenzhen Finance; 15: West US (Silicon Valley); 16: Chengdu; 17: Germany; 18: South Korea; 19: Chongqing; 21: India; 22: East US (Virginia); 23: Thailand; 24: Russia; 25: Japan
+         * Region ID
+- `1`: Guangzhou 
+- `4`: Shanghai 
+- `5`: Hong Kong (China) 
+- `6`: Toronto 
+- `7`: Shanghai Finance 
+- `8`: Beijing 
+- `9`: Singapore
+- `11`: Shenzhen Finance
+- `15`: Silicon Valley (West US)
+- `16`: Chengdu 
+- `17`: Germany 
+- `18`: South Korea 
+- `19`: Chongqing 
+- `21`: India 
+- `22`: Virginia (East US)
+- `23`: Thailand 
+- `24`: Russia 
+- `25`: Japan
          * @type {number || null}
          */
         this.RegionId = null;
 
         /**
-         * Replication group info
+         * Replication group ID
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
          * Replication group name
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.GroupName = null;
 
         /**
-         * Replication group status. Valid values: 37 (Associating replication group), 38 (Reconnecting to replication group), 51 (Disassociating the replication group), 52 (Switching primary instance in the replication group), 53 (Modifying roles)
+         * Status of replication group
+- `37`: Associating replication group
+- `38`: Reconnecting to replication group
+- `51`: Disassociating replication group
+- `52`: Switching with master instance in replication group
+- `53`: Modifying the roles
          * @type {number || null}
          */
         this.Status = null;
@@ -7291,15 +7491,15 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.InstanceCount = null;
 
         /**
-         * Instances in replication group
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * Instance information in replication groups
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<Instances> || null}
          */
         this.Instances = null;
 
         /**
          * Remarks
-Note: This field may return `null`, indicating that no valid values can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Remark = null;
@@ -7607,7 +7807,10 @@ class ModfiyInstancePasswordRequest extends  AbstractModel {
         this.OldPassword = null;
 
         /**
-         * New password of an instance
+         * New instance password, which has the following requirements:
+- It must contain 8-30 characters, preferably 12 or more.
+- It cannot start with a slash (/)
+- It must contain two of the following three types: lowercase letters, uppercase letters, and symbols (()~!@#$%^&*-+=_|{}[]:;<>,.?/)
          * @type {string || null}
          */
         this.Password = null;
@@ -9461,7 +9664,7 @@ class DescribeSSLStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * Certificate download address
+         * Download address for SSL certificate
          * @type {string || null}
          */
         this.CertDownloadUrl = null;
@@ -9473,19 +9676,25 @@ class DescribeSSLStatusResponse extends  AbstractModel {
         this.UrlExpiredTime = null;
 
         /**
-         * SSL configuration status of an instance. Valid values: `true` (enable), `false` (disable).
+         * Whether the SSL is enabled for the identified instance.
+- `true`: Enabled
+- `false`: Disabled
          * @type {boolean || null}
          */
         this.SSLConfig = null;
 
         /**
-         * Whether the instance supports SSL. Valid values: `true` (Yes. When minor version is upgraded.), `false` (No).
+         * Whether SSL is supported for the identified instance.
+-`true`: Supported
+-`false`: Not supported
          * @type {boolean || null}
          */
         this.FeatureSupport = null;
 
         /**
-         * SSL configuration status. Valid values: `1`(Configuring), `2` (Configured).
+         * Status of SSL configuration
+- `1`: Configuring
+- `2`: Configured successfully
          * @type {number || null}
          */
         this.Status = null;
@@ -9915,6 +10124,41 @@ class DescribeParamTemplateInfoResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SwitchProxy request structure.
+ * @class
+ */
+class SwitchProxyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance ProxyID
+         * @type {string || null}
+         */
+        this.ProxyID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ProxyID = 'ProxyID' in params ? params.ProxyID : null;
 
     }
 }
@@ -11557,18 +11801,19 @@ module.exports = {
     AllocateWanAddressResponse: AllocateWanAddressResponse,
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
     KillMasterGroupRequest: KillMasterGroupRequest,
-    InstanceTextParam: InstanceTextParam,
+    CloneInstancesResponse: CloneInstancesResponse,
     ParamTemplateInfo: ParamTemplateInfo,
     DescribeInstanceMonitorTopNCmdTookResponse: DescribeInstanceMonitorTopNCmdTookResponse,
     CloseSSLRequest: CloseSSLRequest,
     DescribeInstanceMonitorBigKeySizeDistRequest: DescribeInstanceMonitorBigKeySizeDistRequest,
     DescribeInstanceAccountRequest: DescribeInstanceAccountRequest,
-    SwitchProxyRequest: SwitchProxyRequest,
+    InstanceTextParam: InstanceTextParam,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     DescribeTaskListRequest: DescribeTaskListRequest,
     ChangeReplicaToMasterResponse: ChangeReplicaToMasterResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
+    CloneInstancesRequest: CloneInstancesRequest,
     ApplyParamsTemplateResponse: ApplyParamsTemplateResponse,
     DescribeReplicationGroupRequest: DescribeReplicationGroupRequest,
     RedisNodes: RedisNodes,
@@ -11653,6 +11898,7 @@ module.exports = {
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
     DescribeBackupDownloadRestrictionRequest: DescribeBackupDownloadRestrictionRequest,
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
+    SwitchProxyRequest: SwitchProxyRequest,
     DescribeProductInfoRequest: DescribeProductInfoRequest,
     SwitchInstanceVipResponse: SwitchInstanceVipResponse,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,

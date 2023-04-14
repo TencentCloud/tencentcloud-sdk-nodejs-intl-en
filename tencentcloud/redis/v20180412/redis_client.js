@@ -109,18 +109,19 @@ const UpgradeVersionToMultiAvailabilityZonesRequest = models.UpgradeVersionToMul
 const AllocateWanAddressResponse = models.AllocateWanAddressResponse;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
 const KillMasterGroupRequest = models.KillMasterGroupRequest;
-const InstanceTextParam = models.InstanceTextParam;
+const CloneInstancesResponse = models.CloneInstancesResponse;
 const ParamTemplateInfo = models.ParamTemplateInfo;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
 const CloseSSLRequest = models.CloseSSLRequest;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
 const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
-const SwitchProxyRequest = models.SwitchProxyRequest;
+const InstanceTextParam = models.InstanceTextParam;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
 const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const ChangeReplicaToMasterResponse = models.ChangeReplicaToMasterResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
+const CloneInstancesRequest = models.CloneInstancesRequest;
 const ApplyParamsTemplateResponse = models.ApplyParamsTemplateResponse;
 const DescribeReplicationGroupRequest = models.DescribeReplicationGroupRequest;
 const RedisNodes = models.RedisNodes;
@@ -205,6 +206,7 @@ const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
 const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
 const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
 const DescribeParamTemplateInfoResponse = models.DescribeParamTemplateInfoResponse;
+const SwitchProxyRequest = models.SwitchProxyRequest;
 const DescribeProductInfoRequest = models.DescribeProductInfoRequest;
 const SwitchInstanceVipResponse = models.SwitchInstanceVipResponse;
 const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
@@ -301,6 +303,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the parameter template details.
+     * @param {DescribeParamTemplateInfoRequest} req
+     * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
+     * @public
+     */
+    DescribeParamTemplateInfo(req, cb) {
+        let resp = new DescribeParamTemplateInfoResponse();
+        this.request("DescribeParamTemplateInfo", req, resp, cb);
+    }
+
+    /**
      * This API is used to create an instance sub-account.
      * @param {CreateInstanceAccountRequest} req
      * @param {function(string, CreateInstanceAccountResponse):void} cb
@@ -389,14 +402,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the parameter template details.
-     * @param {DescribeParamTemplateInfoRequest} req
-     * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
+     * This API is used to query instance maintenance window. The maintenance window specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business.
+     * @param {DescribeMaintenanceWindowRequest} req
+     * @param {function(string, DescribeMaintenanceWindowResponse):void} cb
      * @public
      */
-    DescribeParamTemplateInfo(req, cb) {
-        let resp = new DescribeParamTemplateInfoResponse();
-        this.request("DescribeParamTemplateInfo", req, resp, cb);
+    DescribeMaintenanceWindow(req, cb) {
+        let resp = new DescribeMaintenanceWindowResponse();
+        this.request("DescribeMaintenanceWindow", req, resp, cb);
     }
 
     /**
@@ -411,14 +424,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the backup configuration.
-     * @param {DescribeAutoBackupConfigRequest} req
-     * @param {function(string, DescribeAutoBackupConfigResponse):void} cb
+     * This API is used to query the DTS task details of an instance.
+     * @param {DescribeInstanceDTSInfoRequest} req
+     * @param {function(string, DescribeInstanceDTSInfoResponse):void} cb
      * @public
      */
-    DescribeAutoBackupConfig(req, cb) {
-        let resp = new DescribeAutoBackupConfigResponse();
-        this.request("DescribeAutoBackupConfig", req, resp, cb);
+    DescribeInstanceDTSInfo(req, cb) {
+        let resp = new DescribeInstanceDTSInfoResponse();
+        this.request("DescribeInstanceDTSInfo", req, resp, cb);
     }
 
     /**
@@ -510,14 +523,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query instance maintenance window. The maintenance window specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business.
-     * @param {DescribeMaintenanceWindowRequest} req
-     * @param {function(string, DescribeMaintenanceWindowResponse):void} cb
+     * This API is used to clone a complete instance based on the current instance backup file.
+     * @param {CloneInstancesRequest} req
+     * @param {function(string, CloneInstancesResponse):void} cb
      * @public
      */
-    DescribeMaintenanceWindow(req, cb) {
-        let resp = new DescribeMaintenanceWindowResponse();
-        this.request("DescribeMaintenanceWindow", req, resp, cb);
+    CloneInstances(req, cb) {
+        let resp = new CloneInstancesResponse();
+        this.request("CloneInstances", req, resp, cb);
     }
 
     /**
@@ -565,14 +578,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the DTS task details of an instance.
-     * @param {DescribeInstanceDTSInfoRequest} req
-     * @param {function(string, DescribeInstanceDTSInfoResponse):void} cb
+     * This API is used to get the backup configuration.
+     * @param {DescribeAutoBackupConfigRequest} req
+     * @param {function(string, DescribeAutoBackupConfigResponse):void} cb
      * @public
      */
-    DescribeInstanceDTSInfo(req, cb) {
-        let resp = new DescribeInstanceDTSInfoResponse();
-        this.request("DescribeInstanceDTSInfo", req, resp, cb);
+    DescribeAutoBackupConfig(req, cb) {
+        let resp = new DescribeAutoBackupConfigResponse();
+        this.request("DescribeAutoBackupConfig", req, resp, cb);
     }
 
     /**
@@ -807,7 +820,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query SSL status.
+     * This API is used to query the SSL authentication information of an instance, such as enablement status, configuration status, and certificate address.
      * @param {DescribeSSLStatusRequest} req
      * @param {function(string, DescribeSSLStatusResponse):void} cb
      * @public
@@ -983,7 +996,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to change the Redis password.
+     * This API is used to modify the access password for an instance.
      * @param {ModfiyInstancePasswordRequest} req
      * @param {function(string, ModfiyInstancePasswordResponse):void} cb
      * @public

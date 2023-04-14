@@ -197,6 +197,12 @@ Note: This field is default to empty
          */
         this.IPv6InternetAccessible = null;
 
+        /**
+         * Placement group ID. Only one is allowed.
+         * @type {Array.<string> || null}
+         */
+        this.DisasterRecoverGroupIds = null;
+
     }
 
     /**
@@ -274,6 +280,7 @@ Note: This field is default to empty
             obj.deserialize(params.IPv6InternetAccessible)
             this.IPv6InternetAccessible = obj;
         }
+        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
 
     }
 }
@@ -389,10 +396,12 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         this.Zones = null;
 
         /**
-         * Retry policy. Value range: IMMEDIATE_RETRY, INCREMENTAL_INTERVALS, and NO_RETRY. Default value: IMMEDIATE_RETRY.
-<br><li> IMMEDIATE_RETRY: Retrying immediately in a short period of time and stopping after a number of consecutive failures (5).
-<br><li> INCREMENTAL_INTERVALS: Retrying at incremental intervals, i.e., as the number of consecutive failures increases, the retry interval gradually increases, ranging from one second to one day.
-<br><li> NO_RETRY: No retry until a user call or alarm message is received again.
+         * Retry policy. Valid values: `IMMEDIATE_RETRY` (default), `INCREMENTAL_INTERVALS`, `NO_RETRY`. A partially successful scaling is judged as a failed one.
+<br><li>
+`IMMEDIATE_RETRY`: Retrying immediately in a short period of time and stopping after five consecutive failures.
+<br><li>
+`INCREMENTAL_INTERVALS`: Retrying at incremental intervals. As the number of consecutive failures increases, the retry interval gradually increases, ranging from seconds to one day.
+<br><li>`NO_RETRY`: Do not retry. Actions are taken when the next call or alarm message comes.
          * @type {string || null}
          */
         this.RetryPolicy = null;
@@ -1522,11 +1531,12 @@ class DescribeScalingPoliciesRequest extends  AbstractModel {
         this.AutoScalingPolicyIds = null;
 
         /**
-         * Filter.
-<li> auto-scaling-policy-id - String - Required: No - (Filter) Filter by alarm policy ID.</li>
-<li> auto-scaling-group-id - String - Required: No - (Filter) Filter by auto scaling group ID.</li>
-<li> scaling-policy-name - String - Required: No - (Filter) Filter by alarm policy name.</li>
-The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `AutoScalingPolicyIds` and `Filters` at the same time.
+         * Filters.
+<li> `auto-scaling-policy-id` - String - Optional - Filter by the alarm policy ID.</li>
+<li> `auto-scaling-group-id` - String - Optional - Filter by the scaling group ID.</li>
+<li> `scaling-policy-name` - String - Optional - Filter by the alarm policy name.</li>
+<li> `scaling-policy-type` - String - Optional - Filter by the alarm policy type. Valid values: `SIMPLE`, `TARGET_TRACKING`.</li>
+The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. You cannot specify `AutoScalingPolicyIds` and `Filters` at the same time.
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2675,6 +2685,12 @@ Note: This field is default to empty
          */
         this.IPv6InternetAccessible = null;
 
+        /**
+         * Placement group ID. Only one is allowed.
+         * @type {Array.<string> || null}
+         */
+        this.DisasterRecoverGroupIds = null;
+
     }
 
     /**
@@ -2777,6 +2793,7 @@ Note: This field is default to empty
             obj.deserialize(params.IPv6InternetAccessible)
             this.IPv6InternetAccessible = obj;
         }
+        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
 
     }
 }
@@ -3311,34 +3328,77 @@ class ScalingPolicy extends  AbstractModel {
         this.AutoScalingPolicyId = null;
 
         /**
+         * Scaling policy type. Valid values:
+- `SIMPLE`: A simple policy.
+- `TARGET_TRACKING`: A target tracking policy.
+         * @type {string || null}
+         */
+        this.ScalingPolicyType = null;
+
+        /**
          * Alarm trigger policy name.
          * @type {string || null}
          */
         this.ScalingPolicyName = null;
 
         /**
-         * The method to adjust the desired number of instances after the alarm is triggered. Value range: <br><li>CHANGE_IN_CAPACITY: Increase or decrease the desired number of instances </li><li>EXACT_CAPACITY: Adjust to the specified desired number of instances </li> <li>PERCENT_CHANGE_IN_CAPACITY: Adjust the desired number of instances by percentage </li>
+         * The method to adjust the desired capacity after the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
          * @type {string || null}
          */
         this.AdjustmentType = null;
 
         /**
-         * The adjusted value of desired number of instances after the alarm is triggered.
+         * The adjusted value of desired capacity after the alarm is triggered. This parameter is only applicable to a simple policy.
          * @type {number || null}
          */
         this.AdjustmentValue = null;
 
         /**
-         * Cooldown period.
+         * Cooldown period. This parameter is only applicable to a simple policy.
          * @type {number || null}
          */
         this.Cooldown = null;
 
         /**
-         * Alarm monitoring metric.
+         * Alarm monitoring metrics of a simple policy.
          * @type {MetricAlarm || null}
          */
         this.MetricAlarm = null;
+
+        /**
+         * Preset monitoring item. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Valid values: <br><li>ASG_AVG_CPU_UTILIZATION: Average CPU utilization</li><li>ASG_AVG_LAN_TRAFFIC_OUT: Average private bandwidth out</li><li>ASG_AVG_LAN_TRAFFIC_IN: Average private bandwidth in</li><li>ASG_AVG_WAN_TRAFFIC_OUT: Average public bandwidth out</li><li>ASG_AVG_WAN_TRAFFIC_IN: Average public bandwidth in</li>
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PredefinedMetricType = null;
+
+        /**
+         * Target value. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value ranges: <br><li>`ASG_AVG_CPU_UTILIZATION` (in %): [1, 100)</li><li>`ASG_AVG_LAN_TRAFFIC_OUT` (in Mbps): >0</li><li>`ASG_AVG_LAN_TRAFFIC_IN` (in Mbps): >0</li><li>`ASG_AVG_WAN_TRAFFIC_OUT` (in Mbps): >0</li><li>`ASG_AVG_WAN_TRAFFIC_IN` (in Mbps): >0</li>
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TargetValue = null;
+
+        /**
+         * Instance warm-up period (in seconds). It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value range: 0-3600.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EstimatedInstanceWarmup = null;
+
+        /**
+         * Whether to disable scale-in. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Valid values: <br><li>`true`: Scaling in is not allowed.</li><li>`false`: Allows both scale-out and scale-in</li>
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.DisableScaleIn = null;
+
+        /**
+         * List of alarm monitoring metrics. This parameter is only applicable to a target tracking policy.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<MetricAlarm> || null}
+         */
+        this.MetricAlarms = null;
 
         /**
          * Notification group ID, which is the set of user group IDs.
@@ -3357,6 +3417,7 @@ class ScalingPolicy extends  AbstractModel {
         }
         this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
         this.AutoScalingPolicyId = 'AutoScalingPolicyId' in params ? params.AutoScalingPolicyId : null;
+        this.ScalingPolicyType = 'ScalingPolicyType' in params ? params.ScalingPolicyType : null;
         this.ScalingPolicyName = 'ScalingPolicyName' in params ? params.ScalingPolicyName : null;
         this.AdjustmentType = 'AdjustmentType' in params ? params.AdjustmentType : null;
         this.AdjustmentValue = 'AdjustmentValue' in params ? params.AdjustmentValue : null;
@@ -3366,6 +3427,19 @@ class ScalingPolicy extends  AbstractModel {
             let obj = new MetricAlarm();
             obj.deserialize(params.MetricAlarm)
             this.MetricAlarm = obj;
+        }
+        this.PredefinedMetricType = 'PredefinedMetricType' in params ? params.PredefinedMetricType : null;
+        this.TargetValue = 'TargetValue' in params ? params.TargetValue : null;
+        this.EstimatedInstanceWarmup = 'EstimatedInstanceWarmup' in params ? params.EstimatedInstanceWarmup : null;
+        this.DisableScaleIn = 'DisableScaleIn' in params ? params.DisableScaleIn : null;
+
+        if (params.MetricAlarms) {
+            this.MetricAlarms = new Array();
+            for (let z in params.MetricAlarms) {
+                let obj = new MetricAlarm();
+                obj.deserialize(params.MetricAlarms[z]);
+                this.MetricAlarms.push(obj);
+            }
         }
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
 
@@ -3812,28 +3886,52 @@ class ModifyScalingPolicyRequest extends  AbstractModel {
         this.ScalingPolicyName = null;
 
         /**
-         * The method to adjust the desired number of instances after the alarm is triggered. Value range: <br><li>CHANGE_IN_CAPACITY: Increase or decrease the desired number of instances </li><li>EXACT_CAPACITY: Adjust to the specified desired number of instances </li> <li>PERCENT_CHANGE_IN_CAPACITY: Adjust the desired number of instances by percentage </li>
+         * The method to adjust the desired capacity after the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
          * @type {string || null}
          */
         this.AdjustmentType = null;
 
         /**
-         * The adjusted value of desired number of instances after the alarm is triggered. Value range: <br><li>When AdjustmentType is CHANGE_IN_CAPACITY, if AdjustmentValue is a positive value, some new instances will be added after the alarm is triggered, and if it is a negative value, some existing instances will be removed after the alarm is triggered </li> <li> When AdjustmentType is EXACT_CAPACITY, the value of AdjustmentValue is the desired number of instances after the alarm is triggered, which should be equal to or greater than 0 </li> <li> When AdjustmentType is PERCENT_CHANGE_IN_CAPACITY, if AdjusmentValue (in %) is a positive value, new instances will be added by percentage after the alarm is triggered; if it is a negative value, existing instances will be removed by percentage after the alarm is triggered.
+         * Specifies how to adjust the number of desired capacity when the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Values: <br><li>`AdjustmentType`=`CHANGE_IN_CAPACITY`: Number of instances to add (positive number) or remove (negative number). </li> <li>`AdjustmentType`=`EXACT_CAPACITY`: Set the desired capacity to the specified number. It must be ≥ 0. </li> <li>`AdjustmentType`=`PERCENT_CHANGE_IN_CAPACITY`: Percentage of instance number. Add instances (positive value) or remove instances (negative value) accordingly.
          * @type {number || null}
          */
         this.AdjustmentValue = null;
 
         /**
-         * Cooldown period in seconds.
+         * Cooldown period (in seconds). It’s only available when `ScalingPolicyType` is `Simple`.
          * @type {number || null}
          */
         this.Cooldown = null;
 
         /**
-         * Alarm monitoring metric.
+         * Alarm monitoring metric. It’s only available when `ScalingPolicyType` is `Simple`.
          * @type {MetricAlarm || null}
          */
         this.MetricAlarm = null;
+
+        /**
+         * Preset monitoring item. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Valid values: <br><li>ASG_AVG_CPU_UTILIZATION: Average CPU utilization</li><li>ASG_AVG_LAN_TRAFFIC_OUT: Average private bandwidth out</li><li>ASG_AVG_LAN_TRAFFIC_IN: Average private bandwidth in</li><li>ASG_AVG_WAN_TRAFFIC_OUT: Average public bandwidth out</li><li>ASG_AVG_WAN_TRAFFIC_IN: Average public bandwidth in</li>
+         * @type {string || null}
+         */
+        this.PredefinedMetricType = null;
+
+        /**
+         * Target value. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value ranges: <br><li>`ASG_AVG_CPU_UTILIZATION` (in %): [1, 100)</li><li>`ASG_AVG_LAN_TRAFFIC_OUT` (in Mbps): >0</li><li>`ASG_AVG_LAN_TRAFFIC_IN` (in Mbps): >0</li><li>`ASG_AVG_WAN_TRAFFIC_OUT` (in Mbps): >0</li><li>`ASG_AVG_WAN_TRAFFIC_IN` (in Mbps): >0</li>
+         * @type {number || null}
+         */
+        this.TargetValue = null;
+
+        /**
+         * Instance warm-up period (in seconds). It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value range: 0-3600.
+         * @type {number || null}
+         */
+        this.EstimatedInstanceWarmup = null;
+
+        /**
+         * Whether to disable scale-in. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Valid values: <br><li>`true`: Scaling in is not allowed.</li><li>`false`: Allows both scale-out and scale-in</li>
+         * @type {boolean || null}
+         */
+        this.DisableScaleIn = null;
 
         /**
          * Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
@@ -3862,6 +3960,10 @@ If you want to clear the user group, you need to pass in the specific string "NU
             obj.deserialize(params.MetricAlarm)
             this.MetricAlarm = obj;
         }
+        this.PredefinedMetricType = 'PredefinedMetricType' in params ? params.PredefinedMetricType : null;
+        this.TargetValue = 'TargetValue' in params ? params.TargetValue : null;
+        this.EstimatedInstanceWarmup = 'EstimatedInstanceWarmup' in params ? params.EstimatedInstanceWarmup : null;
+        this.DisableScaleIn = 'DisableScaleIn' in params ? params.DisableScaleIn : null;
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
 
     }
@@ -4171,10 +4273,10 @@ class CreateAutoScalingGroupRequest extends  AbstractModel {
         this.Zones = null;
 
         /**
-         * Retry policy. Value range: IMMEDIATE_RETRY, INCREMENTAL_INTERVALS, and NO_RETRY. Default value: IMMEDIATE_RETRY.
-<br><li> IMMEDIATE_RETRY: Retrying immediately in a short period of time and stopping after a number of consecutive failures (5).
-<br><li> INCREMENTAL_INTERVALS: Retrying at incremental intervals, i.e., as the number of consecutive failures increases, the retry interval gradually increases, ranging from one second to one day.
-<br><li> NO_RETRY: No retry until a user call or alarm message is received again.
+         * Retry policy. Valid values: `IMMEDIATE_RETRY` (default), `INCREMENTAL_INTERVALS`, `NO_RETRY`. A partially successful scaling is judged as a failed one.
+<br><li>`IMMEDIATE_RETRY`: Retry immediately. Stop retrying after five consecutive failures.
+<br><li>`INCREMENTAL_INTERVALS`: Retry at incremental intervals. As the number of consecutive failures increases, the retry interval gradually increases, ranging from seconds to one day.
+<br><li>`NO_RETRY`: Do not retry. Actions are taken when the next call or alarm message comes.
          * @type {string || null}
          */
         this.RetryPolicy = null;
@@ -4801,8 +4903,7 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * Login password of the instance. The password requirements vary among different operating systems: <br><li>For Linux instances, the password must be 8-16 characters long and contain at least one character from two of the following categories: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be 12-16 characters long and contain at least one character from three of the following categories: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a random password will be generated and sent to you via the Message Center.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Instance login password. <br><li>Linux: 8-16 characters. It should contain at least two sets of the following categories: [a-z], [A-Z], [0-9] and [()`~!@#$%^&*-+=|{}[]:;',.?/]. <br><li>Windows: 12-16 characters. It should contain at least three sets of the following categories: [a-z], [A-Z], [0-9] and [()`~!@#$%^&*-+={}[]:;',.?/]. <br><br>If this parameter is not specified, a random password is generated and sent to you via the Message Center.
          * @type {string || null}
          */
         this.Password = null;
@@ -4814,8 +4915,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.KeyIds = null;
 
         /**
-         * Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Whether to keep the original settings of an image. It cannot be specified together with `Password` or `KeyIds.N`. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>`TRUE`: Keep the login settings of the image <br><li>`FALSE` (Default): Do not keep the login settings of the image <br>
          * @type {boolean || null}
          */
         this.KeepImageLogin = null;
@@ -4940,19 +5040,25 @@ class Instance extends  AbstractModel {
 
         /**
          * Lifecycle status. Valid values:<br>
-<li>IN_SERVICE: the instance is running.
-<li>CREATING: the instance is being created.
-<li>CREATION_FAILED: the instance fails to be created.
-<li>TERMINATING: the instance is being terminated.
-<li>TERMINATION_FAILED: the instance fails to be terminated.
-<li>ATTACHING: the instance is being bound.
-<li>DETACHING: the instance is being unbound.
-<li>ATTACHING_LB: the instance is being bound to an LB.<li>DETACHING_LB: the instance is being unbound from an LB.
-<li>STARTING: the instance is being started.
-<li>START_FAILED: the instance fails to be started.
-<li>STOPPING: the instance is being stopped.
-<li>STOP_FAILED: the instance fails to be stopped.
-<li>STOPPED: the instance is stopped.
+<li>`IN_SERVICE`: The instance is running.
+<li>`CREATING`: The instance is being created.
+<li>`CREATION_FAILED`: The instance fails to be created.
+<li>`TERMINATING`: The instance is being terminated.
+<li>`TERMINATION_FAILED`: The instance fails to be terminated.
+<li>`ATTACHING`: The instance is being bound.
+<li>`ATTACH_FAILED`: The instance fails to be bound.
+<li>`DETACHING`: The instance is being unbound.
+<li>`DETACH_FAILED`: The instance fails to be unbound.
+<li>`ATTACHING_LB`: The LB is being bound.
+<li>DETACHING_LB: The LB is being unbound.
+<li>`MODIFYING_LB`: The LB is being modified.
+<li>`STARTING`: The instance is being started up.
+<li>`START_FAILED`: The instance fails to be started up.
+<li>`STOPPING`: The instance is being shut down.
+<li>`STOP_FAILED`: The instance fails to be shut down.
+<li>`STOPPED`: The instance is shut down.
+<li>`IN_LAUNCHING_HOOK`: The lifecycle hook is being scaled out.
+<li>`IN_TERMINATING_HOOK`: The lifecycle hook is being scaled in.
          * @type {string || null}
          */
         this.LifeCycleState = null;
@@ -5005,6 +5111,23 @@ class Instance extends  AbstractModel {
          */
         this.AutoScalingGroupName = null;
 
+        /**
+         * Warming up status. Valid values:
+<li>`WAITING_ENTER_WARMUP`: The instance is waiting to be warmed up.
+<li>`NO_NEED_WARMUP`: Warming up is not required.
+<li>`IN_WARMUP`: The instance is being warmed up.
+<li>`AFTER_WARMUP`: Warming up is completed.
+         * @type {string || null}
+         */
+        this.WarmupStatus = null;
+
+        /**
+         * Placement group ID. Only one is allowed.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.DisasterRecoverGroupIds = null;
+
     }
 
     /**
@@ -5027,6 +5150,8 @@ class Instance extends  AbstractModel {
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.VersionNumber = 'VersionNumber' in params ? params.VersionNumber : null;
         this.AutoScalingGroupName = 'AutoScalingGroupName' in params ? params.AutoScalingGroupName : null;
+        this.WarmupStatus = 'WarmupStatus' in params ? params.WarmupStatus : null;
+        this.DisasterRecoverGroupIds = 'DisasterRecoverGroupIds' in params ? params.DisasterRecoverGroupIds : null;
 
     }
 }
@@ -5228,7 +5353,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.InternetChargeType = null;
 
         /**
-         * Maximum outbound bandwidth of the public network, in Mbps. <br>The default value is 0, and no public network bandwidth is allocated to IPv6. The maximum bandwidth varies with the model, availability zone and billing mode. For more information, see [Public Network Bandwidth Cap](https://intl.cloud.tencent.com/document/product/213/12523?from_cn_redirect=1).
+         * Outbound bandwidth cap of the public network (in Mbps). <br>It defaults to `0`, which indicates no public network bandwidth is allocated to IPv6. The value range of bandwidth caps varies with the model, availability zone and billing mode. For more information, see [Public Network Bandwidth Cap](https://intl.cloud.tencent.com/document/product/213/12523?from_cn_redirect=1).
 Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -6227,28 +6352,58 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         this.ScalingPolicyName = null;
 
         /**
-         * The method to adjust the desired number of instances after the alarm is triggered. Value range: <br><li>CHANGE_IN_CAPACITY: Increase or decrease the desired number of instances </li><li>EXACT_CAPACITY: Adjust to the specified desired number of instances </li> <li>PERCENT_CHANGE_IN_CAPACITY: Adjust the desired number of instances by percentage </li>
+         * Scaling policy type. Valid values: <br><li>`SIMPLE` (default): A simple policy</li><li>`TARGET_TRACKING`: A target tracking policy</li>.
+         * @type {string || null}
+         */
+        this.ScalingPolicyType = null;
+
+        /**
+         * The method to adjust the desired capacity after the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
          * @type {string || null}
          */
         this.AdjustmentType = null;
 
         /**
-         * The adjusted value of desired number of instances after the alarm is triggered. Value range: <br><li>When AdjustmentType is CHANGE_IN_CAPACITY, if AdjustmentValue is a positive value, some new instances will be added after the alarm is triggered, and if it is a negative value, some existing instances will be removed after the alarm is triggered </li> <li> When AdjustmentType is EXACT_CAPACITY, the value of AdjustmentValue is the desired number of instances after the alarm is triggered, which should be equal to or greater than 0 </li> <li> When AdjustmentType is PERCENT_CHANGE_IN_CAPACITY, if AdjusmentValue (in %) is a positive value, new instances will be added by percentage after the alarm is triggered; if it is a negative value, existing instances will be removed by percentage after the alarm is triggered.
+         * Specifies how to adjust the number of desired capacity when the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Values: <br><li>`AdjustmentType`=`CHANGE_IN_CAPACITY`: Number of instances to add (positive number) or remove (negative number). </li> <li>`AdjustmentType`=`EXACT_CAPACITY`: Set the desired capacity to the specified number. It must be ≥ 0. </li> <li>`AdjustmentType`=`PERCENT_CHANGE_IN_CAPACITY`: Percentage of instance number. Add instances (positive value) or remove instances (negative value) accordingly.
          * @type {number || null}
          */
         this.AdjustmentValue = null;
 
         /**
-         * Alarm monitoring metric.
+         * Cooldown period (in seconds). This parameter is only applicable to a simple policy. Default value: 300.
+         * @type {number || null}
+         */
+        this.Cooldown = null;
+
+        /**
+         * Alarm monitoring metric. It’s only available when `ScalingPolicyType` is `Simple`.
          * @type {MetricAlarm || null}
          */
         this.MetricAlarm = null;
 
         /**
-         * Cooldown period in seconds. Default value: 300 seconds.
+         * Preset monitoring item. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Valid values: <br><li>ASG_AVG_CPU_UTILIZATION: Average CPU utilization</li><li>ASG_AVG_LAN_TRAFFIC_OUT: Average private bandwidth out</li><li>ASG_AVG_LAN_TRAFFIC_IN: Average private bandwidth in</li><li>ASG_AVG_WAN_TRAFFIC_OUT: Average public bandwidth out</li><li>ASG_AVG_WAN_TRAFFIC_IN: Average public bandwidth in</li>
+         * @type {string || null}
+         */
+        this.PredefinedMetricType = null;
+
+        /**
+         * Target value. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value ranges: <br><li>`ASG_AVG_CPU_UTILIZATION` (in %): [1, 100)</li><li>`ASG_AVG_LAN_TRAFFIC_OUT` (in Mbps): >0</li><li>`ASG_AVG_LAN_TRAFFIC_IN` (in Mbps): >0</li><li>`ASG_AVG_WAN_TRAFFIC_OUT` (in Mbps): >0</li><li>`ASG_AVG_WAN_TRAFFIC_IN` (in Mbps): >0</li>
          * @type {number || null}
          */
-        this.Cooldown = null;
+        this.TargetValue = null;
+
+        /**
+         * Instance warm-up period (in seconds). It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value range: 0-3600. Default value: 300.
+         * @type {number || null}
+         */
+        this.EstimatedInstanceWarmup = null;
+
+        /**
+         * Whether to disable scale-in. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Valid values: <br><li>`true`: Do not scale in </li><li>`false` (default): Both scale-out and scale-in can be triggered.</li>
+         * @type {boolean || null}
+         */
+        this.DisableScaleIn = null;
 
         /**
          * This parameter is diused. Please use [CreateNotificationConfiguration](https://intl.cloud.tencent.com/document/api/377/33185?from_cn_redirect=1) instead.
@@ -6268,15 +6423,20 @@ Notification group ID, which is the set of user group IDs.
         }
         this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
         this.ScalingPolicyName = 'ScalingPolicyName' in params ? params.ScalingPolicyName : null;
+        this.ScalingPolicyType = 'ScalingPolicyType' in params ? params.ScalingPolicyType : null;
         this.AdjustmentType = 'AdjustmentType' in params ? params.AdjustmentType : null;
         this.AdjustmentValue = 'AdjustmentValue' in params ? params.AdjustmentValue : null;
+        this.Cooldown = 'Cooldown' in params ? params.Cooldown : null;
 
         if (params.MetricAlarm) {
             let obj = new MetricAlarm();
             obj.deserialize(params.MetricAlarm)
             this.MetricAlarm = obj;
         }
-        this.Cooldown = 'Cooldown' in params ? params.Cooldown : null;
+        this.PredefinedMetricType = 'PredefinedMetricType' in params ? params.PredefinedMetricType : null;
+        this.TargetValue = 'TargetValue' in params ? params.TargetValue : null;
+        this.EstimatedInstanceWarmup = 'EstimatedInstanceWarmup' in params ? params.EstimatedInstanceWarmup : null;
+        this.DisableScaleIn = 'DisableScaleIn' in params ? params.DisableScaleIn : null;
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
 
     }
@@ -6746,6 +6906,12 @@ class MetricAlarm extends  AbstractModel {
          */
         this.Statistic = null;
 
+        /**
+         * Exact alarming threshold. This parameter is only used in API outputs. Values: <br><li>`CPU_UTILIZATION` (in %): (0, 100]</li><li>`MEM_UTILIZATION` (in %): (0, 100]</li><li>`LAN_TRAFFIC_OUT` (in Mbps): > 0</li><li>`LAN_TRAFFIC_IN` (in Mbps): > 0</li><li>`WAN_TRAFFIC_OUT` (in Mbps): > 0</li><li>`WAN_TRAFFIC_IN` (in Mbps): > 0</li>
+         * @type {number || null}
+         */
+        this.PreciseThreshold = null;
+
     }
 
     /**
@@ -6761,6 +6927,7 @@ class MetricAlarm extends  AbstractModel {
         this.Period = 'Period' in params ? params.Period : null;
         this.ContinuousTime = 'ContinuousTime' in params ? params.ContinuousTime : null;
         this.Statistic = 'Statistic' in params ? params.Statistic : null;
+        this.PreciseThreshold = 'PreciseThreshold' in params ? params.PreciseThreshold : null;
 
     }
 }
@@ -7068,6 +7235,13 @@ Setting it to `true` will clear the instance name settings, which means that CVM
          */
         this.ClearInstanceNameSettings = null;
 
+        /**
+         * Whether to clear placement group information. This parameter is optional. Default value: `false`.
+`True` means clearing placement group information. After that, no placement groups are specified for CVMs created based on the information.
+         * @type {boolean || null}
+         */
+        this.ClearDisasterRecoverGroupIds = null;
+
     }
 
     /**
@@ -7081,6 +7255,7 @@ Setting it to `true` will clear the instance name settings, which means that CVM
         this.ClearDataDisks = 'ClearDataDisks' in params ? params.ClearDataDisks : null;
         this.ClearHostNameSettings = 'ClearHostNameSettings' in params ? params.ClearHostNameSettings : null;
         this.ClearInstanceNameSettings = 'ClearInstanceNameSettings' in params ? params.ClearInstanceNameSettings : null;
+        this.ClearDisasterRecoverGroupIds = 'ClearDisasterRecoverGroupIds' in params ? params.ClearDisasterRecoverGroupIds : null;
 
     }
 }
@@ -8025,7 +8200,7 @@ class ExecuteScalingPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * Alarm-based scaling policy ID
+         * Auto-scaling policy ID. This parameter is not available to a target tracking policy.
          * @type {string || null}
          */
         this.AutoScalingPolicyId = null;

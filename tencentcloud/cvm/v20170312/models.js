@@ -2321,13 +2321,15 @@ class TagSpecification extends  AbstractModel {
         super();
 
         /**
-         * The type of resource that the tag is bound to. Valid values: `instance` (for CVM), `host` (for CDH), `image` (for image), and `keypair` (for key).
+         * Resource type. Valid values: `instance` (CVM), `host` (CDH), `image` (for image), and `keypair` (for key).
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ResourceType = null;
 
         /**
-         * List of tags
+         * Tag pairs
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
@@ -3463,13 +3465,15 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
         super();
 
         /**
-         * Options related to bidding
+         * Spot-related options
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {SpotMarketOptions || null}
          */
         this.SpotOptions = null;
 
         /**
-         * Market option type. Currently `spot` is the only supported value.
+         * Market type. Valid value: `spot`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.MarketType = null;
@@ -4701,6 +4705,18 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.TagSpecification = null;
 
+        /**
+         * Whether to enable termination protection. Valid values:
+
+TRUE: Termination protection is enabled.
+FALSE: Termination protection is disabled.
+
+Default value: `FALSE`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.DisableApiTermination = null;
+
     }
 
     /**
@@ -4794,6 +4810,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
                 this.TagSpecification.push(obj);
             }
         }
+        this.DisableApiTermination = 'DisableApiTermination' in params ? params.DisableApiTermination : null;
 
     }
 }
@@ -6110,19 +6127,22 @@ class ActionTimer extends  AbstractModel {
         super();
 
         /**
-         * Timer name. Currently `TerminateInstances` is the only supported value.
+         * Timer action. Valid value: `TerminateInstances`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.TimerAction = null;
 
         /**
-         * Execution time, which follows the ISO8601 standard and uses UTC time. It must be at least 5 minutes later than the current time. Format: YYYY-MM-DDThh:mm:ssZ. For example: 2018-05-29T11:26:40Z.
+         * Action time, which follows the ISO8601 standard and uses UTC time. It must be 5 minutes later than the current time. Format: YYYY-MM-DDThh:mm:ssZ. For example: 2018-05-29T11:26:40Z.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ActionTime = null;
 
         /**
-         * Additional data
+         * Extended data
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {Externals || null}
          */
         this.Externals = null;
@@ -10642,13 +10662,15 @@ class InstanceChargePrepaid extends  AbstractModel {
         super();
 
         /**
-         * Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+         * Subscription period (in month). Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48’, `60`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * Auto renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
+         * Auto-renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: Notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: Notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify upon expiration nor renew automatically <br><br>Default value: `NOTIFY_AND_MANUAL_RENEW`. When `NOTIFY_AND_AUTO_RENEW` is specified, the instance is automatically renewed on a monthly basis if the account has sufficient balance.
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.RenewFlag = null;

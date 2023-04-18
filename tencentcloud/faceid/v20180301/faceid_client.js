@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const GetLivenessResultResponse = models.GetLivenessResultResponse;
+const GetFaceIdTokenIntlResponse = models.GetFaceIdTokenIntlResponse;
 const GetSdkVerificationResultResponse = models.GetSdkVerificationResultResponse;
 const VerificationDetail = models.VerificationDetail;
 const LivenessCompareResponse = models.LivenessCompareResponse;
@@ -26,6 +27,7 @@ const VideoLivenessCompareRequest = models.VideoLivenessCompareRequest;
 const ApplyWebVerificationTokenResponse = models.ApplyWebVerificationTokenResponse;
 const GetWebVerificationResultRequest = models.GetWebVerificationResultRequest;
 const FileInfo = models.FileInfo;
+const GetFaceIdResultIntlRequest = models.GetFaceIdResultIntlRequest;
 const ApplySdkVerificationTokenRequest = models.ApplySdkVerificationTokenRequest;
 const GenerateReflectSequenceRequest = models.GenerateReflectSequenceRequest;
 const DetectReflectLivenessAndCompareResponse = models.DetectReflectLivenessAndCompareResponse;
@@ -36,11 +38,13 @@ const ApplyLivenessTokenResponse = models.ApplyLivenessTokenResponse;
 const GetLivenessResultRequest = models.GetLivenessResultRequest;
 const ApplySdkVerificationTokenResponse = models.ApplySdkVerificationTokenResponse;
 const CreateUploadUrlRequest = models.CreateUploadUrlRequest;
+const GetFaceIdTokenIntlRequest = models.GetFaceIdTokenIntlRequest;
 const GetWebVerificationResultResponse = models.GetWebVerificationResultResponse;
 const GetSdkVerificationResultRequest = models.GetSdkVerificationResultRequest;
 const ApplyLivenessTokenRequest = models.ApplyLivenessTokenRequest;
 const GenerateReflectSequenceResponse = models.GenerateReflectSequenceResponse;
 const LivenessCompareRequest = models.LivenessCompareRequest;
+const GetFaceIdResultIntlResponse = models.GetFaceIdResultIntlResponse;
 const CompareResult = models.CompareResult;
 
 
@@ -124,6 +128,17 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     }
 
     /**
+     * This API is used to get the verification result with the corresponding SDK token after the identity verification process is completed. The SDK token is valid for two hours (2*3,600s) after generation and can be called multiple times.
+     * @param {GetFaceIdResultIntlRequest} req
+     * @param {function(string, GetFaceIdResultIntlResponse):void} cb
+     * @public
+     */
+    GetFaceIdResultIntl(req, cb) {
+        let resp = new GetFaceIdResultIntlResponse();
+        this.request("GetFaceIdResultIntl", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the verification result with the corresponding token after the SDK-based verification is completed. The token is valid for three days after issuance and can be called multiple times.
      * @param {GetSdkVerificationResultRequest} req
      * @param {function(string, GetSdkVerificationResultResponse):void} cb
@@ -132,6 +147,17 @@ The data generated with the SDK must be stored in COS, and the region of the COS
     GetSdkVerificationResult(req, cb) {
         let resp = new GetSdkVerificationResultResponse();
         this.request("GetSdkVerificationResult", req, resp, cb);
+    }
+
+    /**
+     * This API is used to apply for an SDK token before calling the liveness detection and face comparison SDK each time. The SDK token is used throughout the identity verification process and to get the verification result after the verification is completed. A token is valid for one identity verification process only.
+     * @param {GetFaceIdTokenIntlRequest} req
+     * @param {function(string, GetFaceIdTokenIntlResponse):void} cb
+     * @public
+     */
+    GetFaceIdTokenIntl(req, cb) {
+        let resp = new GetFaceIdTokenIntlResponse();
+        this.request("GetFaceIdTokenIntl", req, resp, cb);
     }
 
     /**

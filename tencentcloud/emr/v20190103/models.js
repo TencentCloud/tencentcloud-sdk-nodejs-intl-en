@@ -184,73 +184,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribeClusterNodes response structure.
- * @class
- */
-class DescribeClusterNodesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Total number of queried nodes
-         * @type {number || null}
-         */
-        this.TotalCnt = null;
-
-        /**
-         * List of node details
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<NodeHardwareInfo> || null}
-         */
-        this.NodeList = null;
-
-        /**
-         * List of tag keys owned by user
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.TagKeys = null;
-
-        /**
-         * Resource type list
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.HardwareResourceTypeList = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
-
-        if (params.NodeList) {
-            this.NodeList = new Array();
-            for (let z in params.NodeList) {
-                let obj = new NodeHardwareInfo();
-                obj.deserialize(params.NodeList[z]);
-                this.NodeList.push(obj);
-            }
-        }
-        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
-        this.HardwareResourceTypeList = 'HardwareResourceTypeList' in params ? params.HardwareResourceTypeList : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateInstance response structure.
  * @class
  */
@@ -606,26 +539,78 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Subnet information
+ * DescribeEmrApplicationStatics request structure.
  * @class
  */
-class SubnetInfo extends  AbstractModel {
+class DescribeEmrApplicationStaticsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Subnet information (name)
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Cluster ID
          * @type {string || null}
          */
-        this.SubnetName = null;
+        this.InstanceId = null;
 
         /**
-         * Subnet information (ID)
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * Start time in the format of timestamp. Unit: seconds.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time in the format of timestamp. Unit: seconds.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Queue name used for filtering
+         * @type {Array.<string> || null}
+         */
+        this.Queues = null;
+
+        /**
+         * Username used for filtering
+         * @type {Array.<string> || null}
+         */
+        this.Users = null;
+
+        /**
+         * Application type used for filtering
+         * @type {Array.<string> || null}
+         */
+        this.ApplicationTypes = null;
+
+        /**
+         * Group field. Valid values: `queue`, `user`, and `applicationType`.
+         * @type {Array.<string> || null}
+         */
+        this.GroupBy = null;
+
+        /**
+         * Sorting field. Valid values: `sumMemorySeconds`, `sumVCoreSeconds`, `sumHDFSBytesWritten`, and `sumHDFSBytesRead`.
          * @type {string || null}
          */
-        this.SubnetId = null;
+        this.OrderBy = null;
+
+        /**
+         * Order type. Valid values: `0` (descending) and `1`(ascending).
+         * @type {number || null}
+         */
+        this.IsAsc = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Page limit
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -636,8 +621,17 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Queues = 'Queues' in params ? params.Queues : null;
+        this.Users = 'Users' in params ? params.Users : null;
+        this.ApplicationTypes = 'ApplicationTypes' in params ? params.ApplicationTypes : null;
+        this.GroupBy = 'GroupBy' in params ? params.GroupBy : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.IsAsc = 'IsAsc' in params ? params.IsAsc : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1576,65 +1570,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.PodName = 'PodName' in params ? params.PodName : null;
-
-    }
-}
-
-/**
- * DescribeInstances response structure.
- * @class
- */
-class DescribeInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Number of eligible instances.
-         * @type {number || null}
-         */
-        this.TotalCnt = null;
-
-        /**
-         * List of EMR instance details.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<ClusterInstancesInfo> || null}
-         */
-        this.ClusterList = null;
-
-        /**
-         * List of tag keys associated to an instance.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.TagKeys = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
-
-        if (params.ClusterList) {
-            this.ClusterList = new Array();
-            for (let z in params.ClusterList) {
-                let obj = new ClusterInstancesInfo();
-                obj.deserialize(params.ClusterList[z]);
-                this.ClusterList.push(obj);
-            }
-        }
-        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2884,6 +2819,93 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * StartStopServiceOrMonitor request structure.
+ * @class
+ */
+class StartStopServiceOrMonitorRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The cluster ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The operation type. Valid values:
+<li>`StartService`: Start services.</li>
+<li>`StopService`: Stop services.</li>
+<li>`StartMonitor`: Start the monitor.</li>
+<li>`StopMonitor`: Stop the monitor.</li>
+
+         * @type {string || null}
+         */
+        this.OpType = null;
+
+        /**
+         * The operation scope.
+         * @type {OpScope || null}
+         */
+        this.OpScope = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.OpType = 'OpType' in params ? params.OpType : null;
+
+        if (params.OpScope) {
+            let obj = new OpScope();
+            obj.deserialize(params.OpScope)
+            this.OpScope = obj;
+        }
+
+    }
+}
+
+/**
+ * TerminateInstance request structure.
+ * @class
+ */
+class TerminateInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * ID of terminated node. This parameter is reserved and does not need to be configured.
+         * @type {Array.<string> || null}
+         */
+        this.ResourceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+
+    }
+}
+
+/**
  * DescribeResourceSchedule request structure.
  * @class
  */
@@ -3258,6 +3280,34 @@ class DescribeUsersForUserManagerRequest extends  AbstractModel {
             this.UserManagerFilter = obj;
         }
         this.NeedKeytabInfo = 'NeedKeytabInfo' in params ? params.NeedKeytabInfo : null;
+
+    }
+}
+
+/**
+ * StartStopServiceOrMonitor response structure.
+ * @class
+ */
+class StartStopServiceOrMonitorResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3838,6 +3888,41 @@ class DescribeResourceScheduleResponse extends  AbstractModel {
 }
 
 /**
+ * TerminateClusterNodes response structure.
+ * @class
+ */
+class TerminateClusterNodesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The scale-in process ID.
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyResourceScheduler request structure.
  * @class
  */
@@ -4122,6 +4207,43 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Subnet information
+ * @class
+ */
+class SubnetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Subnet information (name)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * Subnet information (ID)
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -4446,6 +4568,43 @@ Note: only the above values are supported for the time being. Entering other val
         }
         this.OrderField = 'OrderField' in params ? params.OrderField : null;
         this.Asc = 'Asc' in params ? params.Asc : null;
+
+    }
+}
+
+/**
+ * Target processes
+ * @class
+ */
+class ComponentBasicRestartInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The process name (required), such as NameNode.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ComponentName = null;
+
+        /**
+         * The target IP list.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.IpList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ComponentName = 'ComponentName' in params ? params.ComponentName : null;
+        this.IpList = 'IpList' in params ? params.IpList : null;
 
     }
 }
@@ -5056,6 +5215,68 @@ class InquiryPriceUpdateInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * TerminateClusterNodes request structure.
+ * @class
+ */
+class TerminateClusterNodesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The instance ID.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The list of resources to be terminated.
+         * @type {Array.<string> || null}
+         */
+        this.CvmInstanceIds = null;
+
+        /**
+         * Valid values of node type:
+  <li>MASTER</li>
+  <li>TASK</li>
+  <li>CORE</li>
+  <li>ROUTER</li>
+         * @type {string || null}
+         */
+        this.NodeFlag = null;
+
+        /**
+         * The graceful scale-in feature. Valid values:
+  <li>`true`: Enabled.</li>
+  <li>`false`: Disabled.</li>
+         * @type {boolean || null}
+         */
+        this.GraceDownFlag = null;
+
+        /**
+         * The graceful scale-in wait time in seconds. Value range: 60–1800.
+         * @type {number || null}
+         */
+        this.GraceDownTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CvmInstanceIds = 'CvmInstanceIds' in params ? params.CvmInstanceIds : null;
+        this.NodeFlag = 'NodeFlag' in params ? params.NodeFlag : null;
+        this.GraceDownFlag = 'GraceDownFlag' in params ? params.GraceDownFlag : null;
+        this.GraceDownTime = 'GraceDownTime' in params ? params.GraceDownTime : null;
+
+    }
+}
+
+/**
  * DescribeInstancesList request structure.
  * @class
  */
@@ -5220,6 +5441,43 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Operation scope
+ * @class
+ */
+class OpScope extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The information of the services to operate on.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ServiceBasicRestartInfo> || null}
+         */
+        this.ServiceInfoList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ServiceInfoList) {
+            this.ServiceInfoList = new Array();
+            for (let z in params.ServiceInfoList) {
+                let obj = new ServiceBasicRestartInfo();
+                obj.deserialize(params.ServiceInfoList[z]);
+                this.ServiceInfoList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * VPC parameters
  * @class
  */
@@ -5255,78 +5513,38 @@ class VPCSettings extends  AbstractModel {
 }
 
 /**
- * DescribeEmrApplicationStatics request structure.
+ * DescribeInstances response structure.
  * @class
  */
-class DescribeEmrApplicationStaticsRequest extends  AbstractModel {
+class DescribeInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
+         * Number of eligible instances.
+         * @type {number || null}
+         */
+        this.TotalCnt = null;
+
+        /**
+         * List of EMR instance details.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ClusterInstancesInfo> || null}
+         */
+        this.ClusterList = null;
+
+        /**
+         * List of tag keys associated to an instance.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * Start time in the format of timestamp. Unit: seconds.
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * End time in the format of timestamp. Unit: seconds.
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Queue name used for filtering
-         * @type {Array.<string> || null}
-         */
-        this.Queues = null;
-
-        /**
-         * Username used for filtering
-         * @type {Array.<string> || null}
-         */
-        this.Users = null;
-
-        /**
-         * Application type used for filtering
-         * @type {Array.<string> || null}
-         */
-        this.ApplicationTypes = null;
-
-        /**
-         * Group field. Valid values: `queue`, `user`, and `applicationType`.
-         * @type {Array.<string> || null}
-         */
-        this.GroupBy = null;
-
-        /**
-         * Sorting field. Valid values: `sumMemorySeconds`, `sumVCoreSeconds`, `sumHDFSBytesWritten`, and `sumHDFSBytesRead`.
-         * @type {string || null}
-         */
-        this.OrderBy = null;
-
-        /**
-         * Order type. Valid values: `0` (descending) and `1`(ascending).
-         * @type {number || null}
-         */
-        this.IsAsc = null;
-
-        /**
-         * Page number
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Page limit
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -5337,17 +5555,18 @@ class DescribeEmrApplicationStaticsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Queues = 'Queues' in params ? params.Queues : null;
-        this.Users = 'Users' in params ? params.Users : null;
-        this.ApplicationTypes = 'ApplicationTypes' in params ? params.ApplicationTypes : null;
-        this.GroupBy = 'GroupBy' in params ? params.GroupBy : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.IsAsc = 'IsAsc' in params ? params.IsAsc : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
+
+        if (params.ClusterList) {
+            this.ClusterList = new Array();
+            for (let z in params.ClusterList) {
+                let obj = new ClusterInstancesInfo();
+                obj.deserialize(params.ClusterList[z]);
+                this.ClusterList.push(obj);
+            }
+        }
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6144,24 +6363,45 @@ Hadoop-Hbase
 }
 
 /**
- * TerminateInstance request structure.
+ * DescribeClusterNodes response structure.
  * @class
  */
-class TerminateInstanceRequest extends  AbstractModel {
+class DescribeClusterNodesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID.
-         * @type {string || null}
+         * Total number of queried nodes
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.TotalCnt = null;
 
         /**
-         * ID of terminated node. This parameter is reserved and does not need to be configured.
+         * List of node details
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<NodeHardwareInfo> || null}
+         */
+        this.NodeList = null;
+
+        /**
+         * List of tag keys owned by user
+Note: this field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
-        this.ResourceIds = null;
+        this.TagKeys = null;
+
+        /**
+         * Resource type list
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.HardwareResourceTypeList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -6172,8 +6412,19 @@ class TerminateInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ResourceIds = 'ResourceIds' in params ? params.ResourceIds : null;
+        this.TotalCnt = 'TotalCnt' in params ? params.TotalCnt : null;
+
+        if (params.NodeList) {
+            this.NodeList = new Array();
+            for (let z in params.NodeList) {
+                let obj = new NodeHardwareInfo();
+                obj.deserialize(params.NodeList[z]);
+                this.NodeList.push(obj);
+            }
+        }
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.HardwareResourceTypeList = 'HardwareResourceTypeList' in params ? params.HardwareResourceTypeList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7750,6 +8001,49 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * The services to operate on
+ * @class
+ */
+class ServiceBasicRestartInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The service name (required), such as HDFS.
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * If it is left empty, all processes will be operated on.
+         * @type {Array.<ComponentBasicRestartInfo> || null}
+         */
+        this.ComponentInfoList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+
+        if (params.ComponentInfoList) {
+            this.ComponentInfoList = new Array();
+            for (let z in params.ComponentInfoList) {
+                let obj = new ComponentBasicRestartInfo();
+                obj.deserialize(params.ComponentInfoList[z]);
+                this.ComponentInfoList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ScaleOutCluster response structure.
  * @class
  */
@@ -7878,13 +8172,12 @@ module.exports = {
     PodSpecInfo: PodSpecInfo,
     ScaleOutInstanceResponse: ScaleOutInstanceResponse,
     PodVolume: PodVolume,
-    DescribeClusterNodesResponse: DescribeClusterNodesResponse,
     CreateInstanceResponse: CreateInstanceResponse,
     TerminateTasksRequest: TerminateTasksRequest,
     HostVolumeContext: HostVolumeContext,
     ScaleOutClusterRequest: ScaleOutClusterRequest,
     DiskSpecInfo: DiskSpecInfo,
-    SubnetInfo: SubnetInfo,
+    DescribeEmrApplicationStaticsRequest: DescribeEmrApplicationStaticsRequest,
     UserManagerFilter: UserManagerFilter,
     DynamicPodSpec: DynamicPodSpec,
     COSSettings: COSSettings,
@@ -7892,7 +8185,6 @@ module.exports = {
     ScaleOutInstanceRequest: ScaleOutInstanceRequest,
     ZoneDetailPriceResult: ZoneDetailPriceResult,
     PodNewSpec: PodNewSpec,
-    DescribeInstancesResponse: DescribeInstancesResponse,
     NodeResourceSpec: NodeResourceSpec,
     ModifyResourceScheduleConfigResponse: ModifyResourceScheduleConfigResponse,
     TopologyInfo: TopologyInfo,
@@ -7908,11 +8200,14 @@ module.exports = {
     PodSpec: PodSpec,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
+    StartStopServiceOrMonitorRequest: StartStopServiceOrMonitorRequest,
+    TerminateInstanceRequest: TerminateInstanceRequest,
     DescribeResourceScheduleRequest: DescribeResourceScheduleRequest,
     Placement: Placement,
     PodParameter: PodParameter,
     AllNodeResourceSpec: AllNodeResourceSpec,
     DescribeUsersForUserManagerRequest: DescribeUsersForUserManagerRequest,
+    StartStopServiceOrMonitorResponse: StartStopServiceOrMonitorResponse,
     MultiDisk: MultiDisk,
     PodNewParameter: PodNewParameter,
     SearchItem: SearchItem,
@@ -7923,22 +8218,27 @@ module.exports = {
     PersistentVolumeContext: PersistentVolumeContext,
     ScaleOutNodeConfig: ScaleOutNodeConfig,
     DescribeResourceScheduleResponse: DescribeResourceScheduleResponse,
+    TerminateClusterNodesResponse: TerminateClusterNodesResponse,
     ModifyResourceSchedulerRequest: ModifyResourceSchedulerRequest,
     LoginSettings: LoginSettings,
     PriceResource: PriceResource,
     CustomServiceDefine: CustomServiceDefine,
     CreateClusterResponse: CreateClusterResponse,
+    SubnetInfo: SubnetInfo,
     CreateClusterRequest: CreateClusterRequest,
     DescribeClusterNodesRequest: DescribeClusterNodesRequest,
+    ComponentBasicRestartInfo: ComponentBasicRestartInfo,
     CreateInstanceRequest: CreateInstanceRequest,
     UpdateInstanceSettings: UpdateInstanceSettings,
     ScriptBootstrapActionConfig: ScriptBootstrapActionConfig,
     DescribeInstancesRequest: DescribeInstancesRequest,
     InquiryPriceUpdateInstanceRequest: InquiryPriceUpdateInstanceRequest,
+    TerminateClusterNodesRequest: TerminateClusterNodesRequest,
     DescribeInstancesListRequest: DescribeInstancesListRequest,
     OutterResource: OutterResource,
+    OpScope: OpScope,
     VPCSettings: VPCSettings,
-    DescribeEmrApplicationStaticsRequest: DescribeEmrApplicationStaticsRequest,
+    DescribeInstancesResponse: DescribeInstancesResponse,
     DescribeUsersForUserManagerResponse: DescribeUsersForUserManagerResponse,
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
     CdbInfo: CdbInfo,
@@ -7949,7 +8249,7 @@ module.exports = {
     CustomMetaInfo: CustomMetaInfo,
     ApplicationStatics: ApplicationStatics,
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
-    TerminateInstanceRequest: TerminateInstanceRequest,
+    DescribeClusterNodesResponse: DescribeClusterNodesResponse,
     ModifyResourceScheduleConfigRequest: ModifyResourceScheduleConfigRequest,
     UserInfoForUserManager: UserInfoForUserManager,
     ExternalService: ExternalService,
@@ -7968,6 +8268,7 @@ module.exports = {
     ShortNodeInfo: ShortNodeInfo,
     EmrPrice: EmrPrice,
     NodeHardwareInfo: NodeHardwareInfo,
+    ServiceBasicRestartInfo: ServiceBasicRestartInfo,
     ScaleOutClusterResponse: ScaleOutClusterResponse,
     Filters: Filters,
     InstanceChargePrepaid: InstanceChargePrepaid,

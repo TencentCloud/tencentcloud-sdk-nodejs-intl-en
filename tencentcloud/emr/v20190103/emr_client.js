@@ -19,13 +19,12 @@ const AbstractClient = require('../../common/abstract_client')
 const PodSpecInfo = models.PodSpecInfo;
 const ScaleOutInstanceResponse = models.ScaleOutInstanceResponse;
 const PodVolume = models.PodVolume;
-const DescribeClusterNodesResponse = models.DescribeClusterNodesResponse;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const TerminateTasksRequest = models.TerminateTasksRequest;
 const HostVolumeContext = models.HostVolumeContext;
 const ScaleOutClusterRequest = models.ScaleOutClusterRequest;
 const DiskSpecInfo = models.DiskSpecInfo;
-const SubnetInfo = models.SubnetInfo;
+const DescribeEmrApplicationStaticsRequest = models.DescribeEmrApplicationStaticsRequest;
 const UserManagerFilter = models.UserManagerFilter;
 const DynamicPodSpec = models.DynamicPodSpec;
 const COSSettings = models.COSSettings;
@@ -33,7 +32,6 @@ const ClusterInstancesInfo = models.ClusterInstancesInfo;
 const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
 const ZoneDetailPriceResult = models.ZoneDetailPriceResult;
 const PodNewSpec = models.PodNewSpec;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const NodeResourceSpec = models.NodeResourceSpec;
 const ModifyResourceScheduleConfigResponse = models.ModifyResourceScheduleConfigResponse;
 const TopologyInfo = models.TopologyInfo;
@@ -49,11 +47,14 @@ const DependService = models.DependService;
 const PodSpec = models.PodSpec;
 const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceResponse;
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
+const StartStopServiceOrMonitorRequest = models.StartStopServiceOrMonitorRequest;
+const TerminateInstanceRequest = models.TerminateInstanceRequest;
 const DescribeResourceScheduleRequest = models.DescribeResourceScheduleRequest;
 const Placement = models.Placement;
 const PodParameter = models.PodParameter;
 const AllNodeResourceSpec = models.AllNodeResourceSpec;
 const DescribeUsersForUserManagerRequest = models.DescribeUsersForUserManagerRequest;
+const StartStopServiceOrMonitorResponse = models.StartStopServiceOrMonitorResponse;
 const MultiDisk = models.MultiDisk;
 const PodNewParameter = models.PodNewParameter;
 const SearchItem = models.SearchItem;
@@ -64,22 +65,27 @@ const SoftDependInfo = models.SoftDependInfo;
 const PersistentVolumeContext = models.PersistentVolumeContext;
 const ScaleOutNodeConfig = models.ScaleOutNodeConfig;
 const DescribeResourceScheduleResponse = models.DescribeResourceScheduleResponse;
+const TerminateClusterNodesResponse = models.TerminateClusterNodesResponse;
 const ModifyResourceSchedulerRequest = models.ModifyResourceSchedulerRequest;
 const LoginSettings = models.LoginSettings;
 const PriceResource = models.PriceResource;
 const CustomServiceDefine = models.CustomServiceDefine;
 const CreateClusterResponse = models.CreateClusterResponse;
+const SubnetInfo = models.SubnetInfo;
 const CreateClusterRequest = models.CreateClusterRequest;
 const DescribeClusterNodesRequest = models.DescribeClusterNodesRequest;
+const ComponentBasicRestartInfo = models.ComponentBasicRestartInfo;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const UpdateInstanceSettings = models.UpdateInstanceSettings;
 const ScriptBootstrapActionConfig = models.ScriptBootstrapActionConfig;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InquiryPriceUpdateInstanceRequest = models.InquiryPriceUpdateInstanceRequest;
+const TerminateClusterNodesRequest = models.TerminateClusterNodesRequest;
 const DescribeInstancesListRequest = models.DescribeInstancesListRequest;
 const OutterResource = models.OutterResource;
+const OpScope = models.OpScope;
 const VPCSettings = models.VPCSettings;
-const DescribeEmrApplicationStaticsRequest = models.DescribeEmrApplicationStaticsRequest;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeUsersForUserManagerResponse = models.DescribeUsersForUserManagerResponse;
 const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
 const CdbInfo = models.CdbInfo;
@@ -90,7 +96,7 @@ const ZoneResourceConfiguration = models.ZoneResourceConfiguration;
 const CustomMetaInfo = models.CustomMetaInfo;
 const ApplicationStatics = models.ApplicationStatics;
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
-const TerminateInstanceRequest = models.TerminateInstanceRequest;
+const DescribeClusterNodesResponse = models.DescribeClusterNodesResponse;
 const ModifyResourceScheduleConfigRequest = models.ModifyResourceScheduleConfigRequest;
 const UserInfoForUserManager = models.UserInfoForUserManager;
 const ExternalService = models.ExternalService;
@@ -109,6 +115,7 @@ const SceneSoftwareConfig = models.SceneSoftwareConfig;
 const ShortNodeInfo = models.ShortNodeInfo;
 const EmrPrice = models.EmrPrice;
 const NodeHardwareInfo = models.NodeHardwareInfo;
+const ServiceBasicRestartInfo = models.ServiceBasicRestartInfo;
 const ScaleOutClusterResponse = models.ScaleOutClusterResponse;
 const Filters = models.Filters;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
@@ -202,6 +209,17 @@ class EmrClient extends AbstractClient {
     }
 
     /**
+     * This API is used to start or stop the monitor or services.
+     * @param {StartStopServiceOrMonitorRequest} req
+     * @param {function(string, StartStopServiceOrMonitorResponse):void} cb
+     * @public
+     */
+    StartStopServiceOrMonitor(req, cb) {
+        let resp = new StartStopServiceOrMonitorResponse();
+        this.request("StartStopServiceOrMonitor", req, resp, cb);
+    }
+
+    /**
      * This API is used to create an EMR cluster instance.
      * @param {CreateInstanceRequest} req
      * @param {function(string, CreateInstanceResponse):void} cb
@@ -210,6 +228,17 @@ class EmrClient extends AbstractClient {
     CreateInstance(req, cb) {
         let resp = new CreateInstanceResponse();
         this.request("CreateInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to terminate cluster nodes.
+     * @param {TerminateClusterNodesRequest} req
+     * @param {function(string, TerminateClusterNodesResponse):void} cb
+     * @public
+     */
+    TerminateClusterNodes(req, cb) {
+        let resp = new TerminateClusterNodesResponse();
+        this.request("TerminateClusterNodes", req, resp, cb);
     }
 
     /**

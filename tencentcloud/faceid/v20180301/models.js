@@ -83,6 +83,41 @@ class GetLivenessResultResponse extends  AbstractModel {
 }
 
 /**
+ * GetFaceIdTokenIntl response structure.
+ * @class
+ */
+class GetFaceIdTokenIntlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The SDK token, which is used throughout the verification process and to get the verification result.
+         * @type {string || null}
+         */
+        this.SdkToken = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetSdkVerificationResult response structure.
  * @class
  */
@@ -605,6 +640,34 @@ class FileInfo extends  AbstractModel {
 }
 
 /**
+ * GetFaceIdResultIntl request structure.
+ * @class
+ */
+class GetFaceIdResultIntlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the SDK-based liveness detection and face comparison process, which is generated when the `GetFaceIdTokenIntl` API is called.	
+         * @type {string || null}
+         */
+        this.SdkToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkToken = 'SdkToken' in params ? params.SdkToken : null;
+
+    }
+}
+
+/**
  * ApplySdkVerificationToken request structure.
  * @class
  */
@@ -619,7 +682,7 @@ class ApplySdkVerificationTokenRequest extends  AbstractModel {
         this.NeedVerifyIdCard = null;
 
         /**
-         * The card type. Valid values: `HK` (identity card of Hong Kong (China)) (default), `ML` (Malaysian identity card), `PhilippinesVoteID` (Philippine voters ID card), `PhilippinesDrivingLicense` (Philippine driver's license), and `IndonesiaIDCard` (Indonesian identity card).
+         * The card type. Valid values: `HK` (identity card of Hong Kong (China)) (default), `ML` (Malaysian identity card), `PhilippinesVoteID` (Philippine voters ID card), `IndonesiaIDCard` (Indonesian identity card), `SingaporeIDCard` (Singapore identity card), and `PhilippinesDrivingLicense` (Philippine driver's license).
          * @type {string || null}
          */
         this.IdCardType = null;
@@ -1135,6 +1198,63 @@ class CreateUploadUrlRequest extends  AbstractModel {
 }
 
 /**
+ * GetFaceIdTokenIntl request structure.
+ * @class
+ */
+class GetFaceIdTokenIntlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The detection mode. Valid values:
+`liveness`: Liveness detection only.
+`compare`: Liveness detection and face comparison.
+Default value: `liveness`.
+         * @type {string || null}
+         */
+        this.CheckMode = null;
+
+        /**
+         * The verification security level. Valid values:
+`1`: Video-based liveness detection.
+`2`: Motion-based liveness detection.
+`3`: Reflection-based liveness detection.
+`4`: Motion- and reflection-based liveness detection.
+Default value: `4`.
+         * @type {string || null}
+         */
+        this.SecureLevel = null;
+
+        /**
+         * The image for comparison in the `compare` (liveness detection and face comparison) mode. This parameter is required when the value of `CheckMode` is `compare`.
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * The pass-through parameter.
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CheckMode = 'CheckMode' in params ? params.CheckMode : null;
+        this.SecureLevel = 'SecureLevel' in params ? params.SecureLevel : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+
+    }
+}
+
+/**
  * GetWebVerificationResult response structure.
  * @class
  */
@@ -1422,6 +1542,88 @@ We recommend you store the video in Tencent Cloud, as a Tencent Cloud URL can gu
 }
 
 /**
+ * GetFaceIdResultIntl response structure.
+ * @class
+ */
+class GetFaceIdResultIntlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The return code of the verification result.
+0: Succeeded.
+1001: System error.
+1004: Liveness detection and face comparison failed.
+2004: The image passed in is too large or too small.
+2012: Several faces were detected.
+2013: No face was detected, or the face detected was incomplete.
+2014: The image resolution is too low or the quality does not meet the requirements.
+2015: Face comparison failed.
+2016: The similarity did not reach the standard passing threshold.
+-999: The verification process wasn't finished.
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * The description of the verification result.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * The best frame screenshot (in Base64) obtained during the verification.
+         * @type {string || null}
+         */
+        this.BestFrame = null;
+
+        /**
+         * The video file (Base64) for verification.
+         * @type {string || null}
+         */
+        this.Video = null;
+
+        /**
+         * The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (liveness detection and face comparison) mode.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Similarity = null;
+
+        /**
+         * The pass-through parameter.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.BestFrame = 'BestFrame' in params ? params.BestFrame : null;
+        this.Video = 'Video' in params ? params.Video : null;
+        this.Similarity = 'Similarity' in params ? params.Similarity : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * The description of a single comparison result.
  * @class
  */
@@ -1591,6 +1793,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
 module.exports = {
     GetLivenessResultResponse: GetLivenessResultResponse,
+    GetFaceIdTokenIntlResponse: GetFaceIdTokenIntlResponse,
     GetSdkVerificationResultResponse: GetSdkVerificationResultResponse,
     VerificationDetail: VerificationDetail,
     LivenessCompareResponse: LivenessCompareResponse,
@@ -1600,6 +1803,7 @@ module.exports = {
     ApplyWebVerificationTokenResponse: ApplyWebVerificationTokenResponse,
     GetWebVerificationResultRequest: GetWebVerificationResultRequest,
     FileInfo: FileInfo,
+    GetFaceIdResultIntlRequest: GetFaceIdResultIntlRequest,
     ApplySdkVerificationTokenRequest: ApplySdkVerificationTokenRequest,
     GenerateReflectSequenceRequest: GenerateReflectSequenceRequest,
     DetectReflectLivenessAndCompareResponse: DetectReflectLivenessAndCompareResponse,
@@ -1610,11 +1814,13 @@ module.exports = {
     GetLivenessResultRequest: GetLivenessResultRequest,
     ApplySdkVerificationTokenResponse: ApplySdkVerificationTokenResponse,
     CreateUploadUrlRequest: CreateUploadUrlRequest,
+    GetFaceIdTokenIntlRequest: GetFaceIdTokenIntlRequest,
     GetWebVerificationResultResponse: GetWebVerificationResultResponse,
     GetSdkVerificationResultRequest: GetSdkVerificationResultRequest,
     ApplyLivenessTokenRequest: ApplyLivenessTokenRequest,
     GenerateReflectSequenceResponse: GenerateReflectSequenceResponse,
     LivenessCompareRequest: LivenessCompareRequest,
+    GetFaceIdResultIntlResponse: GetFaceIdResultIntlResponse,
     CompareResult: CompareResult,
 
 }

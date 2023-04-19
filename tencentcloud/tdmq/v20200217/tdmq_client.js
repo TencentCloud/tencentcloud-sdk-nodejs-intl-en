@@ -35,6 +35,7 @@ const RocketMQClusterRecentStats = models.RocketMQClusterRecentStats;
 const RocketMQVipInstance = models.RocketMQVipInstance;
 const RabbitMQVipInstance = models.RabbitMQVipInstance;
 const DescribeCmqQueuesResponse = models.DescribeCmqQueuesResponse;
+const CreateRabbitMQVipInstanceRequest = models.CreateRabbitMQVipInstanceRequest;
 const DescribeRabbitMQNodeListRequest = models.DescribeRabbitMQNodeListRequest;
 const PublishCmqMsgRequest = models.PublishCmqMsgRequest;
 const RocketMQInstanceConfig = models.RocketMQInstanceConfig;
@@ -146,6 +147,7 @@ const DeleteRocketMQClusterResponse = models.DeleteRocketMQClusterResponse;
 const CreateCmqTopicResponse = models.CreateCmqTopicResponse;
 const CmqDeadLetterSource = models.CmqDeadLetterSource;
 const ClearCmqSubscriptionFilterTagsResponse = models.ClearCmqSubscriptionFilterTagsResponse;
+const CreateRabbitMQVipInstanceResponse = models.CreateRabbitMQVipInstanceResponse;
 const DescribeCmqTopicsRequest = models.DescribeCmqTopicsRequest;
 const Filter = models.Filter;
 const DeleteTopicsRequest = models.DeleteTopicsRequest;
@@ -543,14 +545,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to get the list of dedicated clusters bound to a user.
-     * @param {DescribeBindClustersRequest} req
-     * @param {function(string, DescribeBindClustersResponse):void} cb
+     * This API is used to create a TDMQ for RabbitMQ exclusive instance.
+     * @param {CreateRabbitMQVipInstanceRequest} req
+     * @param {function(string, CreateRabbitMQVipInstanceResponse):void} cb
      * @public
      */
-    DescribeBindClusters(req, cb) {
-        let resp = new DescribeBindClustersResponse();
-        this.request("DescribeBindClusters", req, resp, cb);
+    CreateRabbitMQVipInstance(req, cb) {
+        let resp = new CreateRabbitMQVipInstanceResponse();
+        this.request("CreateRabbitMQVipInstance", req, resp, cb);
     }
 
     /**
@@ -595,6 +597,17 @@ class TdmqClient extends AbstractClient {
     DescribeClusters(req, cb) {
         let resp = new DescribeClustersResponse();
         this.request("DescribeClusters", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the list of dedicated clusters bound to a user.
+     * @param {DescribeBindClustersRequest} req
+     * @param {function(string, DescribeBindClustersResponse):void} cb
+     * @public
+     */
+    DescribeBindClusters(req, cb) {
+        let resp = new DescribeBindClustersResponse();
+        this.request("DescribeBindClusters", req, resp, cb);
     }
 
     /**

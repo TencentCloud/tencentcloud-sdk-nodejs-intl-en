@@ -37,6 +37,7 @@ const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const CloneAccountResponse = models.CloneAccountResponse;
 const IsolateDedicatedDBInstanceRequest = models.IsolateDedicatedDBInstanceRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
@@ -57,15 +58,19 @@ const DescribePriceRequest = models.DescribePriceRequest;
 const ParamModifyResult = models.ParamModifyResult;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const DescribeBackupFilesResponse = models.DescribeBackupFilesResponse;
 const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DatabaseFunction = models.DatabaseFunction;
+const ViewPrivileges = models.ViewPrivileges;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const DescribeDBInstanceDetailResponse = models.DescribeDBInstanceDetailResponse;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
 const DescribeDBEncryptAttributesResponse = models.DescribeDBEncryptAttributesResponse;
 const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const DatabaseTable = models.DatabaseTable;
+const DescribeDBInstanceDetailRequest = models.DescribeDBInstanceDetailRequest;
 const DescribeDBEncryptAttributesRequest = models.DescribeDBEncryptAttributesRequest;
 const Deal = models.Deal;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
@@ -76,7 +81,7 @@ const DescribeFileDownloadUrlResponse = models.DescribeFileDownloadUrlResponse;
 const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
-const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
+const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
 const KillSessionRequest = models.KillSessionRequest;
 const TerminateDedicatedDBInstanceRequest = models.TerminateDedicatedDBInstanceRequest;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
@@ -100,7 +105,7 @@ const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const KillSessionResponse = models.KillSessionResponse;
 const SlowLogData = models.SlowLogData;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
-const ViewPrivileges = models.ViewPrivileges;
+const InstanceBackupFileItem = models.InstanceBackupFileItem;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
@@ -490,6 +495,17 @@ If no filter is specified, 20 instances will be returned by default. Up to 100 i
     }
 
     /**
+     * This API is used to query the list of backup files.
+     * @param {DescribeBackupFilesRequest} req
+     * @param {function(string, DescribeBackupFilesResponse):void} cb
+     * @public
+     */
+    DescribeBackupFiles(req, cb) {
+        let resp = new DescribeBackupFilesResponse();
+        this.request("DescribeBackupFiles", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of accounts of a specified TencentDB instance.
      * @param {DescribeAccountsRequest} req
      * @param {function(string, DescribeAccountsResponse):void} cb
@@ -632,6 +648,17 @@ Note: accounts with the same username but different hosts are different accounts
     CloneAccount(req, cb) {
         let resp = new CloneAccountResponse();
         this.request("CloneAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of a specified instance.
+     * @param {DescribeDBInstanceDetailRequest} req
+     * @param {function(string, DescribeDBInstanceDetailResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceDetail(req, cb) {
+        let resp = new DescribeDBInstanceDetailResponse();
+        this.request("DescribeDBInstanceDetail", req, resp, cb);
     }
 
     /**

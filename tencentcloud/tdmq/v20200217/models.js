@@ -1135,6 +1135,97 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreateRabbitMQVipInstance request structure.
+ * @class
+ */
+class CreateRabbitMQVipInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * VPC subnet ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Node specification (`rabbit-vip-basic-1`: Basic; `rabbit-vip-basic-2`: Standard; `rabbit-vip-basic-3`: Advanced I; `rabbit-vip-basic-4`: Advanced II). If this parameter is left empty, the default value is `rabbit-vip-basic-1`.
+         * @type {string || null}
+         */
+        this.NodeSpec = null;
+
+        /**
+         * Number of nodes, which is at least three for multi-AZ deployment. If this parameter is left empty, the value will be set to 1 for single-AZ deployment and 3 for multi-AZ deployment by default.
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * Storage capacity of a single node, which is 200 GB by default.
+         * @type {number || null}
+         */
+        this.StorageSize = null;
+
+        /**
+         * Whether to enable mirrored queue. Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.EnableCreateDefaultHaMirrorQueue = null;
+
+        /**
+         * Whether to enable auto-renewal. Default value: `true`.
+         * @type {boolean || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Validity period, which is one month by default.
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.NodeSpec = 'NodeSpec' in params ? params.NodeSpec : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.StorageSize = 'StorageSize' in params ? params.StorageSize : null;
+        this.EnableCreateDefaultHaMirrorQueue = 'EnableCreateDefaultHaMirrorQueue' in params ? params.EnableCreateDefaultHaMirrorQueue : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+
+    }
+}
+
+/**
  * DescribeRabbitMQNodeList request structure.
  * @class
  */
@@ -7437,6 +7528,50 @@ class ClearCmqSubscriptionFilterTagsResponse extends  AbstractModel {
 }
 
 /**
+ * CreateRabbitMQVipInstance response structure.
+ * @class
+ */
+class CreateRabbitMQVipInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Order ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TranId = null;
+
+        /**
+         * Instance ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TranId = 'TranId' in params ? params.TranId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeCmqTopics request structure.
  * @class
  */
@@ -10913,6 +11048,7 @@ module.exports = {
     RocketMQVipInstance: RocketMQVipInstance,
     RabbitMQVipInstance: RabbitMQVipInstance,
     DescribeCmqQueuesResponse: DescribeCmqQueuesResponse,
+    CreateRabbitMQVipInstanceRequest: CreateRabbitMQVipInstanceRequest,
     DescribeRabbitMQNodeListRequest: DescribeRabbitMQNodeListRequest,
     PublishCmqMsgRequest: PublishCmqMsgRequest,
     RocketMQInstanceConfig: RocketMQInstanceConfig,
@@ -11024,6 +11160,7 @@ module.exports = {
     CreateCmqTopicResponse: CreateCmqTopicResponse,
     CmqDeadLetterSource: CmqDeadLetterSource,
     ClearCmqSubscriptionFilterTagsResponse: ClearCmqSubscriptionFilterTagsResponse,
+    CreateRabbitMQVipInstanceResponse: CreateRabbitMQVipInstanceResponse,
     DescribeCmqTopicsRequest: DescribeCmqTopicsRequest,
     Filter: Filter,
     DeleteTopicsRequest: DeleteTopicsRequest,

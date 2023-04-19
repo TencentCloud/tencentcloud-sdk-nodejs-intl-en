@@ -1031,7 +1031,7 @@ class SendCustomAlarmMsgRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * Message policy ID, which is configured on the custom message page of Cloud Monitor.
+         * Message policy ID, which is configured on the custom message page.
          * @type {string || null}
          */
         this.PolicyId = null;
@@ -3063,6 +3063,12 @@ class CreatePrometheusRecordRuleYamlRequest extends  AbstractModel {
          */
         this.Content = null;
 
+        /**
+         * Rule name
+         * @type {string || null}
+         */
+        this.Name = null;
+
     }
 
     /**
@@ -3074,6 +3080,7 @@ class CreatePrometheusRecordRuleYamlRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Content = 'Content' in params ? params.Content : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -16549,6 +16556,12 @@ class PrometheusClusterAgentBasic extends  AbstractModel {
          */
         this.NotScrape = null;
 
+        /**
+         * Whether to enable the default recording rule
+         * @type {boolean || null}
+         */
+        this.OpenDefaultRecord = null;
+
     }
 
     /**
@@ -16579,6 +16592,7 @@ class PrometheusClusterAgentBasic extends  AbstractModel {
         }
         this.NotInstallBasicScrape = 'NotInstallBasicScrape' in params ? params.NotInstallBasicScrape : null;
         this.NotScrape = 'NotScrape' in params ? params.NotScrape : null;
+        this.OpenDefaultRecord = 'OpenDefaultRecord' in params ? params.OpenDefaultRecord : null;
 
     }
 }
@@ -18455,6 +18469,12 @@ class ModifyAlarmPolicyNoticeRequest extends  AbstractModel {
          */
         this.PolicyIds = null;
 
+        /**
+         * Notification rules for different alarm levels
+         * @type {Array.<AlarmHierarchicalNotice> || null}
+         */
+        this.HierarchicalNotices = null;
+
     }
 
     /**
@@ -18468,6 +18488,15 @@ class ModifyAlarmPolicyNoticeRequest extends  AbstractModel {
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.NoticeIds = 'NoticeIds' in params ? params.NoticeIds : null;
         this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
+
+        if (params.HierarchicalNotices) {
+            this.HierarchicalNotices = new Array();
+            for (let z in params.HierarchicalNotices) {
+                let obj = new AlarmHierarchicalNotice();
+                obj.deserialize(params.HierarchicalNotices[z]);
+                this.HierarchicalNotices.push(obj);
+            }
+        }
 
     }
 }

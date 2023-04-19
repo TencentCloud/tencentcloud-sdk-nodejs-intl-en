@@ -27,6 +27,7 @@ const UpgradeHourDCDBInstanceResponse = models.UpgradeHourDCDBInstanceResponse;
 const ActiveHourDCDBInstanceResponse = models.ActiveHourDCDBInstanceResponse;
 const DescribeDCDBPriceResponse = models.DescribeDCDBPriceResponse;
 const ModifyInstanceVportResponse = models.ModifyInstanceVportResponse;
+const DescribeDCDBInstanceDetailRequest = models.DescribeDCDBInstanceDetailRequest;
 const ModifyInstanceVipResponse = models.ModifyInstanceVipResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
@@ -37,6 +38,7 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
 const IsolateHourDCDBInstanceRequest = models.IsolateHourDCDBInstanceRequest;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
@@ -52,15 +54,18 @@ const ModifyDBEncryptAttributesResponse = models.ModifyDBEncryptAttributesRespon
 const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
 const DatabaseView = models.DatabaseView;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
+const NodeInfo = models.NodeInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const CreateHourDCDBInstanceRequest = models.CreateHourDCDBInstanceRequest;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const CopyAccountPrivilegesResponse = models.CopyAccountPrivilegesResponse;
 const CloneAccountRequest = models.CloneAccountRequest;
+const DescribeDCDBInstanceDetailResponse = models.DescribeDCDBInstanceDetailResponse;
 const ModifyInstanceNetworkResponse = models.ModifyInstanceNetworkResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const DescribeDCDBPriceRequest = models.DescribeDCDBPriceRequest;
 const SwitchDBInstanceHAResponse = models.SwitchDBInstanceHAResponse;
+const DescribeBackupFilesResponse = models.DescribeBackupFilesResponse;
 const ParamModifyResult = models.ParamModifyResult;
 const TablePrivilege = models.TablePrivilege;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
@@ -84,7 +89,7 @@ const ModifyDBParametersResponse = models.ModifyDBParametersResponse;
 const DCDBShardInfo = models.DCDBShardInfo;
 const CopyAccountPrivilegesRequest = models.CopyAccountPrivilegesRequest;
 const SecurityGroup = models.SecurityGroup;
-const DescribeDatabaseTableRequest = models.DescribeDatabaseTableRequest;
+const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
 const DescribeDCDBInstanceNodeInfoResponse = models.DescribeDCDBInstanceNodeInfoResponse;
 const KillSessionRequest = models.KillSessionRequest;
 const TerminateDedicatedDBInstanceRequest = models.TerminateDedicatedDBInstanceRequest;
@@ -97,6 +102,7 @@ const ColumnPrivilege = models.ColumnPrivilege;
 const SplitShardConfig = models.SplitShardConfig;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
+const InstanceBackupFileItem = models.InstanceBackupFileItem;
 const CreateHourDCDBInstanceResponse = models.CreateHourDCDBInstanceResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
@@ -104,6 +110,7 @@ const CancelDcnJobRequest = models.CancelDcnJobRequest;
 const IsolateHourDCDBInstanceResponse = models.IsolateHourDCDBInstanceResponse;
 const ShardInfo = models.ShardInfo;
 const ModifyInstanceVipRequest = models.ModifyInstanceVipRequest;
+const ShardBriefInfo = models.ShardBriefInfo;
 const DatabasePrivilege = models.DatabasePrivilege;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DcnDetailItem = models.DcnDetailItem;
@@ -536,6 +543,17 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
+     * This API is used to query the list of backup files.
+     * @param {DescribeBackupFilesRequest} req
+     * @param {function(string, DescribeBackupFilesResponse):void} cb
+     * @public
+     */
+    DescribeBackupFiles(req, cb) {
+        let resp = new DescribeBackupFilesResponse();
+        this.request("DescribeBackupFiles", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of accounts of a specified TencentDB instance.
      * @param {DescribeAccountsRequest} req
      * @param {function(string, DescribeAccountsResponse):void} cb
@@ -700,6 +718,17 @@ Note: Accounts with the same username but different hosts are different accounts
     CloneAccount(req, cb) {
         let resp = new CloneAccountResponse();
         this.request("CloneAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the details of a TDSQL instance.
+     * @param {DescribeDCDBInstanceDetailRequest} req
+     * @param {function(string, DescribeDCDBInstanceDetailResponse):void} cb
+     * @public
+     */
+    DescribeDCDBInstanceDetail(req, cb) {
+        let resp = new DescribeDCDBInstanceDetailResponse();
+        this.request("DescribeDCDBInstanceDetail", req, resp, cb);
     }
 
     /**

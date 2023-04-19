@@ -725,6 +725,88 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyAclRule request structure.
+ * @class
+ */
+class ModifyAclRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * ACL policy name
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * Whether to be applied to new topics
+         * @type {number || null}
+         */
+        this.IsApplied = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.IsApplied = 'IsApplied' in params ? params.IsApplied : null;
+
+    }
+}
+
+/**
+ * DescribeAclRule response structure.
+ * @class
+ */
+class DescribeAclRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The set of returned ACL rules
+         * @type {AclRuleResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new AclRuleResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeConsumerGroup response structure.
  * @class
  */
@@ -1335,6 +1417,91 @@ class ModifyInstancePreRequest extends  AbstractModel {
 }
 
 /**
+ * CreateAclRule request structure.
+ * @class
+ */
+class CreateAclRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * ACL resource type. Currently, the only valid value is `Topic`.
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * Matching type. Valid values: `PREFIXED`(match by prefix), `PRESET` (match by preset policy).
+         * @type {string || null}
+         */
+        this.PatternType = null;
+
+        /**
+         * Rule name
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * ACL rule list
+         * @type {Array.<AclRuleInfo> || null}
+         */
+        this.RuleList = null;
+
+        /**
+         * Prefix value for prefix match
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * A parameter used to specify whether the preset ACL rule is applied to new topics
+         * @type {number || null}
+         */
+        this.IsApplied = null;
+
+        /**
+         * Remarks for ACL rules
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.PatternType = 'PatternType' in params ? params.PatternType : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+
+        if (params.RuleList) {
+            this.RuleList = new Array();
+            for (let z in params.RuleList) {
+                let obj = new AclRuleInfo();
+                obj.deserialize(params.RuleList[z]);
+                this.RuleList.push(obj);
+            }
+        }
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.IsApplied = 'IsApplied' in params ? params.IsApplied : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+    }
+}
+
+/**
  * DescribeInstancesDetail response structure.
  * @class
  */
@@ -1540,6 +1707,55 @@ Note: this field may return `null`, indicating that no valid values can be obtai
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
         this.TopicCount = 'TopicCount' in params ? params.TopicCount : null;
         this.PatternTypeTitle = 'PatternTypeTitle' in params ? params.PatternTypeTitle : null;
+
+    }
+}
+
+/**
+ * DescribeAclRule request structure.
+ * @class
+ */
+class DescribeAclRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * ACL rule name
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * ACL rule matching type
+         * @type {string || null}
+         */
+        this.PatternType = null;
+
+        /**
+         * Whether to read simplified ACL rules
+         * @type {boolean || null}
+         */
+        this.IsSimplified = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.PatternType = 'PatternType' in params ? params.PatternType : null;
+        this.IsSimplified = 'IsSimplified' in params ? params.IsSimplified : null;
 
     }
 }
@@ -2052,6 +2268,41 @@ class Tag extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * ModifyAclRule response structure.
+ * @class
+ */
+class ModifyAclRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique key of a rule
+         * @type {number || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5627,49 +5878,24 @@ class User extends  AbstractModel {
 }
 
 /**
- * Group offset partition object
+ * CreateAclRule response structure.
  * @class
  */
-class GroupOffsetPartition extends  AbstractModel {
+class CreateAclRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Topic `partitionId`
+         * Unique key of a rule
          * @type {number || null}
          */
-        this.Partition = null;
+        this.Result = null;
 
         /**
-         * Offset position submitted by consumer
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Metadata can be passed in for other purposes when the consumer submits messages. Currently, this parameter is usually an empty string
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Metadata = null;
-
-        /**
-         * Error code
-         * @type {number || null}
-         */
-        this.ErrorCode = null;
-
-        /**
-         * Latest offset of current partition
-         * @type {number || null}
-         */
-        this.LogEndOffset = null;
-
-        /**
-         * Number of unconsumed messages
-         * @type {number || null}
-         */
-        this.Lag = null;
+        this.RequestId = null;
 
     }
 
@@ -5680,12 +5906,8 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Metadata = 'Metadata' in params ? params.Metadata : null;
-        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
-        this.LogEndOffset = 'LogEndOffset' in params ? params.LogEndOffset : null;
-        this.Lag = 'Lag' in params ? params.Lag : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5754,6 +5976,70 @@ class DeleteRouteTriggerTimeRequest extends  AbstractModel {
             return;
         }
         this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
+
+    }
+}
+
+/**
+ * Group offset partition object
+ * @class
+ */
+class GroupOffsetPartition extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic `partitionId`
+         * @type {number || null}
+         */
+        this.Partition = null;
+
+        /**
+         * Offset position submitted by consumer
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Metadata can be passed in for other purposes when the consumer submits messages. Currently, this parameter is usually an empty string
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Metadata = null;
+
+        /**
+         * Error code
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * Latest offset of current partition
+         * @type {number || null}
+         */
+        this.LogEndOffset = null;
+
+        /**
+         * Number of unconsumed messages
+         * @type {number || null}
+         */
+        this.Lag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Partition = 'Partition' in params ? params.Partition : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Metadata = 'Metadata' in params ? params.Metadata : null;
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.LogEndOffset = 'LogEndOffset' in params ? params.LogEndOffset : null;
+        this.Lag = 'Lag' in params ? params.Lag : null;
 
     }
 }
@@ -7738,6 +8024,46 @@ class DescribeRouteResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDatahubTopic response structure.
+ * @class
+ */
+class ModifyDatahubTopicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Returned result set
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Message content that can be sent in batches
  * @class
  */
@@ -8554,6 +8880,63 @@ Note: `null` may be returned for this field, indicating that no valid values can
         this.Expect = 'Expect' in params ? params.Expect : null;
         this.Current = 'Current' in params ? params.Current : null;
         this.ModTimeStamp = 'ModTimeStamp' in params ? params.ModTimeStamp : null;
+
+    }
+}
+
+/**
+ * ModifyDatahubTopic request structure.
+ * @class
+ */
+class ModifyDatahubTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Message retention period in ms. The current minimum value is 60,000 ms.
+         * @type {number || null}
+         */
+        this.RetentionMs = null;
+
+        /**
+         * Topic remarks, which are a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+         * @type {string || null}
+         */
+        this.Note = null;
+
+        /**
+         * Tag list
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RetentionMs = 'RetentionMs' in params ? params.RetentionMs : null;
+        this.Note = 'Note' in params ? params.Note : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -9512,6 +9895,50 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Results returned by the `AclRuleList` API
+ * @class
+ */
+class AclRuleResp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of data entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * ACL rule list
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AclRule> || null}
+         */
+        this.AclRuleList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AclRuleList) {
+            this.AclRuleList = new Array();
+            for (let z in params.AclRuleList) {
+                let obj = new AclRule();
+                obj.deserialize(params.AclRuleList[z]);
+                this.AclRuleList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Message price entity
  * @class
  */
@@ -9560,6 +9987,8 @@ module.exports = {
     DescribeInstanceAttributesRequest: DescribeInstanceAttributesRequest,
     ConsumerGroup: ConsumerGroup,
     Assignment: Assignment,
+    ModifyAclRuleRequest: ModifyAclRuleRequest,
+    DescribeAclRuleResponse: DescribeAclRuleResponse,
     DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
     InquiryDetailPrice: InquiryDetailPrice,
     InquireCkafkaPriceResp: InquireCkafkaPriceResp,
@@ -9572,9 +10001,11 @@ module.exports = {
     FetchMessageListByOffsetRequest: FetchMessageListByOffsetRequest,
     Region: Region,
     ModifyInstancePreRequest: ModifyInstancePreRequest,
+    CreateAclRuleRequest: CreateAclRuleRequest,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
     CreateInstancePreData: CreateInstancePreData,
     AclRule: AclRule,
+    DescribeAclRuleRequest: DescribeAclRuleRequest,
     DescribeACLResponse: DescribeACLResponse,
     DynamicDiskConfig: DynamicDiskConfig,
     InquireCkafkaPriceRequest: InquireCkafkaPriceRequest,
@@ -9584,6 +10015,7 @@ module.exports = {
     SaleInfo: SaleInfo,
     Topic: Topic,
     Tag: Tag,
+    ModifyAclRuleResponse: ModifyAclRuleResponse,
     BatchModifyGroupOffsetsResponse: BatchModifyGroupOffsetsResponse,
     GroupResponse: GroupResponse,
     CreateDatahubTopicRequest: CreateDatahubTopicRequest,
@@ -9658,9 +10090,10 @@ module.exports = {
     ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
     ConsumerGroupTopic: ConsumerGroupTopic,
     User: User,
-    GroupOffsetPartition: GroupOffsetPartition,
+    CreateAclRuleResponse: CreateAclRuleResponse,
     DeleteTopicResponse: DeleteTopicResponse,
     DeleteRouteTriggerTimeRequest: DeleteRouteTriggerTimeRequest,
+    GroupOffsetPartition: GroupOffsetPartition,
     DescribeInstancesRequest: DescribeInstancesRequest,
     InstanceAttributesResponse: InstanceAttributesResponse,
     CreateInstancePostRequest: CreateInstancePostRequest,
@@ -9693,6 +10126,7 @@ module.exports = {
     CreateTopicResp: CreateTopicResp,
     BatchModifyTopicInfo: BatchModifyTopicInfo,
     DescribeRouteResponse: DescribeRouteResponse,
+    ModifyDatahubTopicResponse: ModifyDatahubTopicResponse,
     BatchContent: BatchContent,
     InquiryPrice: InquiryPrice,
     TopicResult: TopicResult,
@@ -9707,6 +10141,7 @@ module.exports = {
     AclRuleInfo: AclRuleInfo,
     Acl: Acl,
     TopicRetentionTimeConfigRsp: TopicRetentionTimeConfigRsp,
+    ModifyDatahubTopicRequest: ModifyDatahubTopicRequest,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateTopicResponse: CreateTopicResponse,
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
@@ -9719,6 +10154,7 @@ module.exports = {
     InstanceQuotaConfigResp: InstanceQuotaConfigResp,
     DescribeTopicDetailResponse: DescribeTopicDetailResponse,
     SubscribedInfo: SubscribedInfo,
+    AclRuleResp: AclRuleResp,
     Price: Price,
 
 }

@@ -29,6 +29,8 @@ const DescribeTopicAttributesRequest = models.DescribeTopicAttributesRequest;
 const DescribeInstanceAttributesRequest = models.DescribeInstanceAttributesRequest;
 const ConsumerGroup = models.ConsumerGroup;
 const Assignment = models.Assignment;
+const ModifyAclRuleRequest = models.ModifyAclRuleRequest;
+const DescribeAclRuleResponse = models.DescribeAclRuleResponse;
 const DescribeConsumerGroupResponse = models.DescribeConsumerGroupResponse;
 const InquiryDetailPrice = models.InquiryDetailPrice;
 const InquireCkafkaPriceResp = models.InquireCkafkaPriceResp;
@@ -41,9 +43,11 @@ const GroupInfoTopics = models.GroupInfoTopics;
 const FetchMessageListByOffsetRequest = models.FetchMessageListByOffsetRequest;
 const Region = models.Region;
 const ModifyInstancePreRequest = models.ModifyInstancePreRequest;
+const CreateAclRuleRequest = models.CreateAclRuleRequest;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
 const CreateInstancePreData = models.CreateInstancePreData;
 const AclRule = models.AclRule;
+const DescribeAclRuleRequest = models.DescribeAclRuleRequest;
 const DescribeACLResponse = models.DescribeACLResponse;
 const DynamicDiskConfig = models.DynamicDiskConfig;
 const InquireCkafkaPriceRequest = models.InquireCkafkaPriceRequest;
@@ -53,6 +57,7 @@ const DescribeCkafkaZoneRequest = models.DescribeCkafkaZoneRequest;
 const SaleInfo = models.SaleInfo;
 const Topic = models.Topic;
 const Tag = models.Tag;
+const ModifyAclRuleResponse = models.ModifyAclRuleResponse;
 const BatchModifyGroupOffsetsResponse = models.BatchModifyGroupOffsetsResponse;
 const GroupResponse = models.GroupResponse;
 const CreateDatahubTopicRequest = models.CreateDatahubTopicRequest;
@@ -127,9 +132,10 @@ const DescribeTopicProduceConnectionResponse = models.DescribeTopicProduceConnec
 const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
 const ConsumerGroupTopic = models.ConsumerGroupTopic;
 const User = models.User;
-const GroupOffsetPartition = models.GroupOffsetPartition;
+const CreateAclRuleResponse = models.CreateAclRuleResponse;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const DeleteRouteTriggerTimeRequest = models.DeleteRouteTriggerTimeRequest;
+const GroupOffsetPartition = models.GroupOffsetPartition;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InstanceAttributesResponse = models.InstanceAttributesResponse;
 const CreateInstancePostRequest = models.CreateInstancePostRequest;
@@ -162,6 +168,7 @@ const TopicPartitionDO = models.TopicPartitionDO;
 const CreateTopicResp = models.CreateTopicResp;
 const BatchModifyTopicInfo = models.BatchModifyTopicInfo;
 const DescribeRouteResponse = models.DescribeRouteResponse;
+const ModifyDatahubTopicResponse = models.ModifyDatahubTopicResponse;
 const BatchContent = models.BatchContent;
 const InquiryPrice = models.InquiryPrice;
 const TopicResult = models.TopicResult;
@@ -176,6 +183,7 @@ const Route = models.Route;
 const AclRuleInfo = models.AclRuleInfo;
 const Acl = models.Acl;
 const TopicRetentionTimeConfigRsp = models.TopicRetentionTimeConfigRsp;
+const ModifyDatahubTopicRequest = models.ModifyDatahubTopicRequest;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
@@ -188,6 +196,7 @@ const InstanceDetail = models.InstanceDetail;
 const InstanceQuotaConfigResp = models.InstanceQuotaConfigResp;
 const DescribeTopicDetailResponse = models.DescribeTopicDetailResponse;
 const SubscribedInfo = models.SubscribedInfo;
+const AclRuleResp = models.AclRuleResp;
 const Price = models.Price;
 
 
@@ -257,6 +266,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query the ACL rule list.
+     * @param {DescribeAclRuleRequest} req
+     * @param {function(string, DescribeAclRuleResponse):void} cb
+     * @public
+     */
+    DescribeAclRule(req, cb) {
+        let resp = new DescribeAclRuleResponse();
+        this.request("DescribeAclRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to search and subscribe the message group information of a topic.
      * @param {DescribeTopicSubscribeGroupRequest} req
      * @param {function(string, DescribeTopicSubscribeGroupResponse):void} cb
@@ -312,14 +332,14 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify topic attributes.
-     * @param {ModifyTopicAttributesRequest} req
-     * @param {function(string, ModifyTopicAttributesResponse):void} cb
+     * This API is used to modify the DataHub topic attributes.
+     * @param {ModifyDatahubTopicRequest} req
+     * @param {function(string, ModifyDatahubTopicResponse):void} cb
      * @public
      */
-    ModifyTopicAttributes(req, cb) {
-        let resp = new ModifyTopicAttributesResponse();
-        this.request("ModifyTopicAttributes", req, resp, cb);
+    ModifyDatahubTopic(req, cb) {
+        let resp = new ModifyDatahubTopicResponse();
+        this.request("ModifyDatahubTopic", req, resp, cb);
     }
 
     /**
@@ -499,6 +519,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify an ACL policy, and currently only supports specifying whether to apply the preset rule to new topics.
+     * @param {ModifyAclRuleRequest} req
+     * @param {function(string, ModifyAclRuleResponse):void} cb
+     * @public
+     */
+    ModifyAclRule(req, cb) {
+        let resp = new ModifyAclRuleResponse();
+        this.request("ModifyAclRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to add a partition in a topic.
      * @param {CreatePartitionRequest} req
      * @param {function(string, CreatePartitionResponse):void} cb
@@ -666,6 +697,17 @@ This API is used to get the list of topics in a CKafka instance of a user.
     }
 
     /**
+     * This API shows you how to create an ACL rule.
+     * @param {CreateAclRuleRequest} req
+     * @param {function(string, CreateAclRuleResponse):void} cb
+     * @public
+     */
+    CreateAclRule(req, cb) {
+        let resp = new CreateAclRuleResponse();
+        this.request("CreateAclRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to get the DataHub topic attributes.
      * @param {DescribeDatahubTopicRequest} req
      * @param {function(string, DescribeDatahubTopicResponse):void} cb
@@ -729,6 +771,17 @@ This API is used to get the list of topics in a CKafka instance of a user.
     InquireCkafkaPrice(req, cb) {
         let resp = new InquireCkafkaPriceResponse();
         this.request("InquireCkafkaPrice", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify topic attributes.
+     * @param {ModifyTopicAttributesRequest} req
+     * @param {function(string, ModifyTopicAttributesResponse):void} cb
+     * @public
+     */
+    ModifyTopicAttributes(req, cb) {
+        let resp = new ModifyTopicAttributesResponse();
+        this.request("ModifyTopicAttributes", req, resp, cb);
     }
 
 

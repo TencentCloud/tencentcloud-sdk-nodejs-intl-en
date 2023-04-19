@@ -2430,6 +2430,13 @@ class IdleLoadBalancer extends  AbstractModel {
          */
         this.Forward = null;
 
+        /**
+         * The load balancing hostname.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
     }
 
     /**
@@ -2446,6 +2453,7 @@ class IdleLoadBalancer extends  AbstractModel {
         this.IdleReason = 'IdleReason' in params ? params.IdleReason : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Forward = 'Forward' in params ? params.Forward : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -3985,6 +3993,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.MaxCps = null;
 
+        /**
+         * Connection idle timeout period (in seconds). It’s only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IdleConnectTimeout = null;
+
     }
 
     /**
@@ -4047,6 +4062,7 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         }
         this.MaxConn = 'MaxConn' in params ? params.MaxConn : null;
         this.MaxCps = 'MaxCps' in params ? params.MaxCps : null;
+        this.IdleConnectTimeout = 'IdleConnectTimeout' in params ? params.IdleConnectTimeout : null;
 
     }
 }
@@ -4421,6 +4437,12 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.MaxCps = null;
 
+        /**
+         * Connection idle timeout period (in seconds). It’s only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900. To set a period longer than 2000 seconds (up to 3600 seconds), please submit a [submit](https://console.cloud.tencent.com/workorder/category). 
+         * @type {number || null}
+         */
+        this.IdleConnectTimeout = null;
+
     }
 
     /**
@@ -4460,6 +4482,7 @@ They represent weighted round robin and least connections, respectively. Default
         }
         this.MaxConn = 'MaxConn' in params ? params.MaxConn : null;
         this.MaxCps = 'MaxCps' in params ? params.MaxCps : null;
+        this.IdleConnectTimeout = 'IdleConnectTimeout' in params ? params.IdleConnectTimeout : null;
 
     }
 }
@@ -7478,6 +7501,12 @@ They represent weighted round robin and least connections, respectively. Default
          */
         this.MaxCps = null;
 
+        /**
+         * Connection idle timeout period (in seconds). It’s only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900. To set a period longer than 2000 seconds (up to 3600 seconds), please submit a [submit](https://console.cloud.tencent.com/workorder/category). 
+         * @type {number || null}
+         */
+        this.IdleConnectTimeout = null;
+
     }
 
     /**
@@ -7519,6 +7548,7 @@ They represent weighted round robin and least connections, respectively. Default
         }
         this.MaxConn = 'MaxConn' in params ? params.MaxConn : null;
         this.MaxCps = 'MaxCps' in params ? params.MaxCps : null;
+        this.IdleConnectTimeout = 'IdleConnectTimeout' in params ? params.IdleConnectTimeout : null;
 
     }
 }

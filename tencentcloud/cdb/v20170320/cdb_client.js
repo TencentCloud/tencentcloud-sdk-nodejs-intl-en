@@ -567,7 +567,9 @@ Note that once an instance is deactivated, its resources and data will not be re
     }
 
     /**
-     * This API is used to modify the description of database proxy.
+     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
+
+This API is used to modify the description of database proxy.
      * @param {ModifyCDBProxyDescRequest} req
      * @param {function(string, ModifyCDBProxyDescResponse):void} cb
      * @public
@@ -809,7 +811,9 @@ Note: the HTTP response packet will be very large if it contain a single large e
     }
 
     /**
-     * This API is used to query the proxy details.
+     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
+
+This API is used to query the proxy details.
      * @param {QueryCDBProxyRequest} req
      * @param {function(string, QueryCDBProxyResponse):void} cb
      * @public
@@ -949,7 +953,9 @@ This is an async API. You can also use the [DescribeDBInstances](https://intl.cl
     }
 
     /**
-     * This API is used to configure the connection pool of database proxy. You can use the `DescribeProxyConnectionPoolConf` API to query the supported connection pool configurations.
+     * 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
+
+This API is used to configure the connection pool of database proxy. You can use the `DescribeProxyConnectionPoolConf` API to query the supported connection pool configurations.
      * @param {ModifyCDBProxyConnectionPoolRequest} req
      * @param {function(string, ModifyCDBProxyConnectionPoolResponse):void} cb
      * @public
@@ -1200,7 +1206,9 @@ This is an asynchronous API. You can also use the [DescribeDBInstances](https://
     }
 
     /**
-     * This API is used to modify the VIP or port of database proxy.
+     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
+
+This API is used to modify the VIP or port of database proxy.
      * @param {ModifyCDBProxyVipVPortRequest} req
      * @param {function(string, ModifyCDBProxyVipVPortResponse):void} cb
      * @public
@@ -1451,7 +1459,9 @@ Note that the files for a data import task must be uploaded to Tencent Cloud in 
     }
 
     /**
-     * This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
+     * 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
+
+This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
      * @param {DescribeCDBProxyRequest} req
      * @param {function(string, DescribeCDBProxyResponse):void} cb
      * @public
@@ -1632,7 +1642,9 @@ Note that before enabling public network access, you need to first [initialize t
     }
 
     /**
-     * This API is used to query the connection pool configuration of database proxy.
+     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
+
+This API is used to query the connection pool configuration of database proxy.
      * @param {DescribeProxyConnectionPoolConfRequest} req
      * @param {function(string, DescribeProxyConnectionPoolConfResponse):void} cb
      * @public

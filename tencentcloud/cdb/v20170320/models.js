@@ -1114,13 +1114,13 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.DeviceType = null;
 
         /**
-         * The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
+         * The number of CPU cores after the instance is upgraded. If this parameter is left empty, it will be subject to the `Memory` value.
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * Whether to enable QuickChange. Valid values: `0` (no), `1` (yes), `2` (QuickChange preferred). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+         * QuickChange options. Valid values: `0` (common upgrade), `1` (QuickChange), `2` (QuickChange first). After QuickChange is enabled, the required resources will be checked. QuickChange will be performed only when the required resources support the feature; otherwise, an error message will be returned.
          * @type {number || null}
          */
         this.FastUpgrade = null;
@@ -1142,6 +1142,12 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ZoneId = null;
+
+        /**
+         * Processing logic of the intra-AZ read-only instance for cross-cluster migration. Valid values: `together` (intra-AZ read-only instances will be migrated to the target AZ with the source instance by default.), `severally` (intra-AZ read-only instances will maintain the original deployment mode and will not be migrated to the target AZ.).
+         * @type {string || null}
+         */
+        this.RoTransType = null;
 
     }
 
@@ -1168,6 +1174,7 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         this.MaxDelayTime = 'MaxDelayTime' in params ? params.MaxDelayTime : null;
         this.CrossCluster = 'CrossCluster' in params ? params.CrossCluster : null;
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.RoTransType = 'RoTransType' in params ? params.RoTransType : null;
 
     }
 }
@@ -16356,7 +16363,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Key = null;
 
         /**
-         * Number of keys in the statistic report
+         * Number of occurrences of the key value
          * @type {number || null}
          */
         this.Count = null;

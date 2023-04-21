@@ -79,6 +79,12 @@ class CreateRoomRequest extends  AbstractModel {
         this.AutoMic = null;
 
         /**
+         * Whether to disconnect communication after audio/video permissions are revoked. Valid values: `0` (default): Yes; `1`: No.
+         * @type {number || null}
+         */
+        this.TurnOffMic = null;
+
+        /**
          * Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
          * @type {number || null}
          */
@@ -95,6 +101,18 @@ class CreateRoomRequest extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.Assistants = null;
+
+        /**
+         * The number of RTC users.
+         * @type {number || null}
+         */
+        this.RTCAudienceNumber = null;
+
+        /**
+         * The audience type.
+         * @type {number || null}
+         */
+        this.AudienceType = null;
 
         /**
          * Recording layout
@@ -126,11 +144,56 @@ class CreateRoomRequest extends  AbstractModel {
         this.SubType = 'SubType' in params ? params.SubType : null;
         this.TeacherId = 'TeacherId' in params ? params.TeacherId : null;
         this.AutoMic = 'AutoMic' in params ? params.AutoMic : null;
+        this.TurnOffMic = 'TurnOffMic' in params ? params.TurnOffMic : null;
         this.AudioQuality = 'AudioQuality' in params ? params.AudioQuality : null;
         this.DisableRecord = 'DisableRecord' in params ? params.DisableRecord : null;
         this.Assistants = 'Assistants' in params ? params.Assistants : null;
+        this.RTCAudienceNumber = 'RTCAudienceNumber' in params ? params.RTCAudienceNumber : null;
+        this.AudienceType = 'AudienceType' in params ? params.AudienceType : null;
         this.RecordLayout = 'RecordLayout' in params ? params.RecordLayout : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * DescribeQuestionList request structure.
+ * @class
+ */
+class DescribeQuestionListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The room ID.
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -234,6 +297,62 @@ class GetWatermarkResponse extends  AbstractModel {
             obj.deserialize(params.Text)
             this.Text = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSupervisors response structure.
+ * @class
+ */
+class DescribeSupervisorsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of spectators.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The current page number.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * The number of records on the current page.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * A list of the spectators.
+         * @type {Array.<string> || null}
+         */
+        this.UserIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.UserIds = 'UserIds' in params ? params.UserIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -528,34 +647,6 @@ class BatchCreateGroupWithMembersResponse extends  AbstractModel {
 }
 
 /**
- * AddGroupMember response structure.
- * @class
- */
-class AddGroupMemberResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * GetRoomEvent response structure.
  * @class
  */
@@ -607,24 +698,109 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * CreateGroupWithMembers response structure.
+ * Member record information
+Used by actions: DescribeCurrentMemberList, DescribeRoomStatistics.
  * @class
  */
-class CreateGroupWithMembersResponse extends  AbstractModel {
+class MemberRecord extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The ID of the successfully created group.
+         * User ID
          * @type {string || null}
          */
-        this.GroupId = null;
+        this.UserId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Username
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.UserName = null;
+
+        /**
+         * Online duration, in seconds
+         * @type {number || null}
+         */
+        this.PresentTime = null;
+
+        /**
+         * Whether the camera is enabled
+         * @type {number || null}
+         */
+        this.Camera = null;
+
+        /**
+         * Whether the mic is enabled
+         * @type {number || null}
+         */
+        this.Mic = null;
+
+        /**
+         * Whether the user is muted
+         * @type {number || null}
+         */
+        this.Silence = null;
+
+        /**
+         * Number of questions answered by the user
+         * @type {number || null}
+         */
+        this.AnswerQuestions = null;
+
+        /**
+         * Number of hand raising times
+         * @type {number || null}
+         */
+        this.HandUps = null;
+
+        /**
+         * First time that the user entered the room, in UNIX timestamp format
+         * @type {number || null}
+         */
+        this.FirstJoinTimestamp = null;
+
+        /**
+         * Last time that the user left the room, in UNIX timestamp format
+         * @type {number || null}
+         */
+        this.LastQuitTimestamp = null;
+
+        /**
+         * Number of rewards received
+         * @type {number || null}
+         */
+        this.Rewords = null;
+
+        /**
+         * The user’s IP address.
+         * @type {string || null}
+         */
+        this.IPAddress = null;
+
+        /**
+         * The user’s location.
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * The user’s device type. 0: Unknown; 1: Windows; 2: macOS; 3: Android; 4: iOS; 5: Web; 6: Mobile webpage; 7: Weixin Mini Program.
+         * @type {number || null}
+         */
+        this.Device = null;
+
+        /**
+         * The number of times a user turned their mic on.
+         * @type {number || null}
+         */
+        this.PerMemberMicCount = null;
+
+        /**
+         * The number of messages sent by a user.
+         * @type {number || null}
+         */
+        this.PerMemberMessageCount = null;
 
     }
 
@@ -635,31 +811,64 @@ class CreateGroupWithMembersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.PresentTime = 'PresentTime' in params ? params.PresentTime : null;
+        this.Camera = 'Camera' in params ? params.Camera : null;
+        this.Mic = 'Mic' in params ? params.Mic : null;
+        this.Silence = 'Silence' in params ? params.Silence : null;
+        this.AnswerQuestions = 'AnswerQuestions' in params ? params.AnswerQuestions : null;
+        this.HandUps = 'HandUps' in params ? params.HandUps : null;
+        this.FirstJoinTimestamp = 'FirstJoinTimestamp' in params ? params.FirstJoinTimestamp : null;
+        this.LastQuitTimestamp = 'LastQuitTimestamp' in params ? params.LastQuitTimestamp : null;
+        this.Rewords = 'Rewords' in params ? params.Rewords : null;
+        this.IPAddress = 'IPAddress' in params ? params.IPAddress : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.Device = 'Device' in params ? params.Device : null;
+        this.PerMemberMicCount = 'PerMemberMicCount' in params ? params.PerMemberMicCount : null;
+        this.PerMemberMessageCount = 'PerMemberMessageCount' in params ? params.PerMemberMessageCount : null;
 
     }
 }
 
 /**
- * DeleteAppCustomContent request structure.
+ * GetRooms request structure.
  * @class
  */
-class DeleteAppCustomContentRequest extends  AbstractModel {
+class GetRoomsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The application ID.
+         * The SDKAppID assigned by LCIC.
+
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * The custom elements (for which a scene has been configured) to delete. If this is empty, all custom elements will be deleted.
-         * @type {Array.<string> || null}
+         * The start time. The default start time is 30 minutes before the current time.
+         * @type {number || null}
          */
-        this.Scenes = null;
+        this.StartTime = null;
+
+        /**
+         * The end time. The default end time is 30 minutes after the current time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The page to return records from. Pagination starts from 1.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * The number of records per page. The default is 10.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -671,7 +880,10 @@ class DeleteAppCustomContentRequest extends  AbstractModel {
             return;
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.Scenes = 'Scenes' in params ? params.Scenes : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -911,6 +1123,117 @@ class CreateGroupWithSubGroupRequest extends  AbstractModel {
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.SubGroupIds = 'SubGroupIds' in params ? params.SubGroupIds : null;
         this.TeacherId = 'TeacherId' in params ? params.TeacherId : null;
+
+    }
+}
+
+/**
+ * The room list.
+ * @class
+ */
+class RoomItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The room ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * The room status. `0`: Not started; `1`: Started; `2`: Ended.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The scheduled start time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The scheduled end time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The actual start time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RealStartTime = null;
+
+        /**
+         * The actual end time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RealEndTime = null;
+
+        /**
+         * The resolution. `1`: SD.
+`2`: HD
+`3`: FHD
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * The maximum number of mic-on users allowed.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxRTCMember = null;
+
+        /**
+         * The URL of the room's recording. This parameter has been deprecated. Please use `RecordUrl` instead.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ReplayUrl = null;
+
+        /**
+         * The recording URL (HTTPS), which is generated only after a room ends.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RecordUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RealStartTime = 'RealStartTime' in params ? params.RealStartTime : null;
+        this.RealEndTime = 'RealEndTime' in params ? params.RealEndTime : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.MaxRTCMember = 'MaxRTCMember' in params ? params.MaxRTCMember : null;
+        this.ReplayUrl = 'ReplayUrl' in params ? params.ReplayUrl : null;
+        this.RecordUrl = 'RecordUrl' in params ? params.RecordUrl : null;
 
     }
 }
@@ -1823,6 +2146,51 @@ class CreateGroupWithSubGroupResponse extends  AbstractModel {
 }
 
 /**
+ * The information of a message.
+ * @class
+ */
+class MessageItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The message type. `0`: Text; `1`: Image.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MessageType = null;
+
+        /**
+         * The text. This parameter is valid if `MessageType` is `0`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TextMessage = null;
+
+        /**
+         * The image URL. This parameter is valid if `MessageType` is `1`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageMessage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageType = 'MessageType' in params ? params.MessageType : null;
+        this.TextMessage = 'TextMessage' in params ? params.TextMessage : null;
+        this.ImageMessage = 'ImageMessage' in params ? params.ImageMessage : null;
+
+    }
+}
+
+/**
  * The information of the groups queried.
 Used by actions: DescribeGroupList.
  * @class
@@ -2215,6 +2583,48 @@ class DeleteRecordResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAnswerList request structure.
+ * @class
+ */
+class DescribeAnswerListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The question ID.
+         * @type {string || null}
+         */
+        this.QuestionId = null;
+
+        /**
+         * 1
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QuestionId = 'QuestionId' in params ? params.QuestionId : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3167,6 +3577,57 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeAnswerList response structure.
+ * @class
+ */
+class DescribeAnswerListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of answers.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * A list of the answers.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AnswerInfo> || null}
+         */
+        this.AnswerInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.AnswerInfo) {
+            this.AnswerInfo = new Array();
+            for (let z in params.AnswerInfo) {
+                let obj = new AnswerInfo();
+                obj.deserialize(params.AnswerInfo[z]);
+                this.AnswerInfo.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRoomStatistics response structure.
  * @class
  */
@@ -3282,6 +3743,49 @@ class DeleteDocumentRequest extends  AbstractModel {
             return;
         }
         this.DocumentId = 'DocumentId' in params ? params.DocumentId : null;
+
+    }
+}
+
+/**
+ * DescribeSupervisors request structure.
+ * @class
+ */
+class DescribeSupervisorsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The SDKAppID assigned by LCIC.
+
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The maximum number of records per page. The maximum value allowed is 100, and the default value is 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Page = 'Page' in params ? params.Page : null;
 
     }
 }
@@ -3418,109 +3922,24 @@ class GetWatermarkRequest extends  AbstractModel {
 }
 
 /**
- * Member record information
-Used by actions: DescribeCurrentMemberList, DescribeRoomStatistics.
+ * CreateGroupWithMembers response structure.
  * @class
  */
-class MemberRecord extends  AbstractModel {
+class CreateGroupWithMembersResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * User ID
+         * The ID of the successfully created group.
          * @type {string || null}
          */
-        this.UserId = null;
+        this.GroupId = null;
 
         /**
-         * Username
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.UserName = null;
-
-        /**
-         * Online duration, in seconds
-         * @type {number || null}
-         */
-        this.PresentTime = null;
-
-        /**
-         * Whether the camera is enabled
-         * @type {number || null}
-         */
-        this.Camera = null;
-
-        /**
-         * Whether the mic is enabled
-         * @type {number || null}
-         */
-        this.Mic = null;
-
-        /**
-         * Whether the user is muted
-         * @type {number || null}
-         */
-        this.Silence = null;
-
-        /**
-         * Number of questions answered by the user
-         * @type {number || null}
-         */
-        this.AnswerQuestions = null;
-
-        /**
-         * Number of hand raising times
-         * @type {number || null}
-         */
-        this.HandUps = null;
-
-        /**
-         * First time that the user entered the room, in UNIX timestamp format
-         * @type {number || null}
-         */
-        this.FirstJoinTimestamp = null;
-
-        /**
-         * Last time that the user left the room, in UNIX timestamp format
-         * @type {number || null}
-         */
-        this.LastQuitTimestamp = null;
-
-        /**
-         * Number of rewards received
-         * @type {number || null}
-         */
-        this.Rewords = null;
-
-        /**
-         * The user’s IP address.
-         * @type {string || null}
-         */
-        this.IPAddress = null;
-
-        /**
-         * The user’s location.
-         * @type {string || null}
-         */
-        this.Location = null;
-
-        /**
-         * The user’s device type. 0: Unknown; 1: Windows; 2: macOS; 3: Android; 4: iOS; 5: Web; 6: Mobile webpage; 7: Weixin Mini Program.
-         * @type {number || null}
-         */
-        this.Device = null;
-
-        /**
-         * The number of times a user turned their mic on.
-         * @type {number || null}
-         */
-        this.PerMemberMicCount = null;
-
-        /**
-         * The number of messages sent by a user.
-         * @type {number || null}
-         */
-        this.PerMemberMessageCount = null;
+        this.RequestId = null;
 
     }
 
@@ -3531,22 +3950,8 @@ class MemberRecord extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.PresentTime = 'PresentTime' in params ? params.PresentTime : null;
-        this.Camera = 'Camera' in params ? params.Camera : null;
-        this.Mic = 'Mic' in params ? params.Mic : null;
-        this.Silence = 'Silence' in params ? params.Silence : null;
-        this.AnswerQuestions = 'AnswerQuestions' in params ? params.AnswerQuestions : null;
-        this.HandUps = 'HandUps' in params ? params.HandUps : null;
-        this.FirstJoinTimestamp = 'FirstJoinTimestamp' in params ? params.FirstJoinTimestamp : null;
-        this.LastQuitTimestamp = 'LastQuitTimestamp' in params ? params.LastQuitTimestamp : null;
-        this.Rewords = 'Rewords' in params ? params.Rewords : null;
-        this.IPAddress = 'IPAddress' in params ? params.IPAddress : null;
-        this.Location = 'Location' in params ? params.Location : null;
-        this.Device = 'Device' in params ? params.Device : null;
-        this.PerMemberMicCount = 'PerMemberMicCount' in params ? params.PerMemberMicCount : null;
-        this.PerMemberMessageCount = 'PerMemberMessageCount' in params ? params.PerMemberMessageCount : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3779,6 +4184,41 @@ class LoginUserRequest extends  AbstractModel {
             return;
         }
         this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
+ * The statistics for each type of answer.
+ * @class
+ */
+class AnswerStat extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The answer. Bits are used to indicate the options chosen. For example, `0x1` indicates that option A is chosen; `0x11` indicates that A and B are chosen, and so on.
+         * @type {number || null}
+         */
+        this.Answer = null;
+
+        /**
+         * The number of users that submitted the answer.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
@@ -4065,6 +4505,62 @@ class ModifyRoomRequest extends  AbstractModel {
 }
 
 /**
+ * The answers to a quiz question in a room.
+ * @class
+ */
+class AnswerInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The username.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The answer. Bits are used to indicate the options chosen. For example, `0x1` indicates that option A is chosen; `0x11` indicates that A and B are chosen, and so on.
+         * @type {number || null}
+         */
+        this.Answer = null;
+
+        /**
+         * The time used.
+         * @type {number || null}
+         */
+        this.CostTime = null;
+
+        /**
+         * The user ID.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * Whether the answer is correct. `1`: Correct; `0`: Incorrect.
+         * @type {number || null}
+         */
+        this.IsCorrect = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Answer = 'Answer' in params ? params.Answer : null;
+        this.CostTime = 'CostTime' in params ? params.CostTime : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.IsCorrect = 'IsCorrect' in params ? params.IsCorrect : null;
+
+    }
+}
+
+/**
  * DescribeRoomStatistics request structure.
  * @class
  */
@@ -4195,6 +4691,207 @@ class LoginOriginIdResponse extends  AbstractModel {
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.Token = 'Token' in params ? params.Token : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeQuestionList response structure.
+ * @class
+ */
+class DescribeQuestionListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of quiz questions.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * A list of the questions.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<QuestionInfo> || null}
+         */
+        this.QuestionInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.QuestionInfo) {
+            this.QuestionInfo = new Array();
+            for (let z in params.QuestionInfo) {
+                let obj = new QuestionInfo();
+                obj.deserialize(params.QuestionInfo[z]);
+                this.QuestionInfo.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetRooms response structure.
+ * @class
+ */
+class GetRoomsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of rooms.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The room list.
+         * @type {Array.<RoomItem> || null}
+         */
+        this.Rooms = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Rooms) {
+            this.Rooms = new Array();
+            for (let z in params.Rooms) {
+                let obj = new RoomItem();
+                obj.deserialize(params.Rooms[z]);
+                this.Rooms.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The details of a quiz question.
+ * @class
+ */
+class QuestionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The question ID.
+         * @type {string || null}
+         */
+        this.QuestionId = null;
+
+        /**
+         * The question.
+         * @type {string || null}
+         */
+        this.QuestionContent = null;
+
+        /**
+         * The time limit for the question. If you set this parameter to `0`, there will not be a time limit.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * The correct answer. Bits are used to indicate the options that should be chosen. For example, `0x1` indicates option A; `0x11` indicates A and B, and so on.
+         * @type {number || null}
+         */
+        this.CorrectAnswer = null;
+
+        /**
+         * The statistics for each type of answer.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<AnswerStat> || null}
+         */
+        this.AnswerStats = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QuestionId = 'QuestionId' in params ? params.QuestionId : null;
+        this.QuestionContent = 'QuestionContent' in params ? params.QuestionContent : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.CorrectAnswer = 'CorrectAnswer' in params ? params.CorrectAnswer : null;
+
+        if (params.AnswerStats) {
+            this.AnswerStats = new Array();
+            for (let z in params.AnswerStats) {
+                let obj = new AnswerStat();
+                obj.deserialize(params.AnswerStats[z]);
+                this.AnswerStats.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteAppCustomContent request structure.
+ * @class
+ */
+class DeleteAppCustomContentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The application ID.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The custom elements (for which a scene has been configured) to delete. If this is empty, all custom elements will be deleted.
+         * @type {Array.<string> || null}
+         */
+        this.Scenes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
 
     }
 }
@@ -4348,33 +5045,18 @@ class DescribeSdkAppIdUsersRequest extends  AbstractModel {
 }
 
 /**
- * The information of a message.
+ * AddGroupMember response structure.
  * @class
  */
-class MessageItem extends  AbstractModel {
+class AddGroupMemberResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The message type. `0`: Text; `1`: Image.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.MessageType = null;
-
-        /**
-         * The text. This parameter is valid if `MessageType` is `0`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TextMessage = null;
-
-        /**
-         * The image URL. This parameter is valid if `MessageType` is `1`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ImageMessage = null;
+        this.RequestId = null;
 
     }
 
@@ -4385,9 +5067,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.MessageType = 'MessageType' in params ? params.MessageType : null;
-        this.TextMessage = 'TextMessage' in params ? params.TextMessage : null;
-        this.ImageMessage = 'ImageMessage' in params ? params.ImageMessage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4798,7 +5478,7 @@ class DescribeDeveloperResponse extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The developer ID.
          * @type {string || null}
          */
         this.DeveloperId = null;
@@ -4862,8 +5542,10 @@ class TextMarkConfig extends  AbstractModel {
 
 module.exports = {
     CreateRoomRequest: CreateRoomRequest,
+    DescribeQuestionListRequest: DescribeQuestionListRequest,
     ModifyRoomResponse: ModifyRoomResponse,
     GetWatermarkResponse: GetWatermarkResponse,
+    DescribeSupervisorsResponse: DescribeSupervisorsResponse,
     BatchDeleteRecordRequest: BatchDeleteRecordRequest,
     BatchRegisterRequest: BatchRegisterRequest,
     DeleteRoomResponse: DeleteRoomResponse,
@@ -4871,10 +5553,9 @@ module.exports = {
     CreateGroupWithMembersRequest: CreateGroupWithMembersRequest,
     DescribeDocumentsByRoomRequest: DescribeDocumentsByRoomRequest,
     BatchCreateGroupWithMembersResponse: BatchCreateGroupWithMembersResponse,
-    AddGroupMemberResponse: AddGroupMemberResponse,
     GetRoomEventResponse: GetRoomEventResponse,
-    CreateGroupWithMembersResponse: CreateGroupWithMembersResponse,
-    DeleteAppCustomContentRequest: DeleteAppCustomContentRequest,
+    MemberRecord: MemberRecord,
+    GetRoomsRequest: GetRoomsRequest,
     BatchAddGroupMemberResponse: BatchAddGroupMemberResponse,
     ModifyUserProfileResponse: ModifyUserProfileResponse,
     ModifyAppResponse: ModifyAppResponse,
@@ -4882,6 +5563,7 @@ module.exports = {
     BatchRegisterResponse: BatchRegisterResponse,
     BindDocumentToRoomResponse: BindDocumentToRoomResponse,
     CreateGroupWithSubGroupRequest: CreateGroupWithSubGroupRequest,
+    RoomItem: RoomItem,
     SetWatermarkRequest: SetWatermarkRequest,
     DescribeRoomRequest: DescribeRoomRequest,
     BatchCreateRoomResponse: BatchCreateRoomResponse,
@@ -4901,6 +5583,7 @@ module.exports = {
     DeleteRecordRequest: DeleteRecordRequest,
     BatchDeleteGroupMemberResponse: BatchDeleteGroupMemberResponse,
     CreateGroupWithSubGroupResponse: CreateGroupWithSubGroupResponse,
+    MessageItem: MessageItem,
     GroupInfo: GroupInfo,
     GetRoomEventRequest: GetRoomEventRequest,
     DescribeDocumentResponse: DescribeDocumentResponse,
@@ -4908,6 +5591,7 @@ module.exports = {
     DescribeGroupMemberListResponse: DescribeGroupMemberListResponse,
     EventInfo: EventInfo,
     DeleteRecordResponse: DeleteRecordResponse,
+    DescribeAnswerListRequest: DescribeAnswerListRequest,
     BatchCreateRoomRequest: BatchCreateRoomRequest,
     DescribeGroupMemberListRequest: DescribeGroupMemberListRequest,
     UserInfo: UserInfo,
@@ -4927,29 +5611,37 @@ module.exports = {
     DescribeCurrentMemberListRequest: DescribeCurrentMemberListRequest,
     DescribeSdkAppIdUsersResponse: DescribeSdkAppIdUsersResponse,
     EventDataInfo: EventDataInfo,
+    DescribeAnswerListResponse: DescribeAnswerListResponse,
     DescribeRoomStatisticsResponse: DescribeRoomStatisticsResponse,
     DeleteDocumentRequest: DeleteDocumentRequest,
+    DescribeSupervisorsRequest: DescribeSupervisorsRequest,
     MessageList: MessageList,
     DeleteGroupMemberRequest: DeleteGroupMemberRequest,
     GetWatermarkRequest: GetWatermarkRequest,
-    MemberRecord: MemberRecord,
+    CreateGroupWithMembersResponse: CreateGroupWithMembersResponse,
     BatchDeleteGroupMemberRequest: BatchDeleteGroupMemberRequest,
     ModifyAppRequest: ModifyAppRequest,
     UnbindDocumentFromRoomRequest: UnbindDocumentFromRoomRequest,
     RegisterUserRequest: RegisterUserRequest,
     GroupBaseInfo: GroupBaseInfo,
     LoginUserRequest: LoginUserRequest,
+    AnswerStat: AnswerStat,
     SetWatermarkResponse: SetWatermarkResponse,
     RoomInfo: RoomInfo,
     ModifyRoomRequest: ModifyRoomRequest,
+    AnswerInfo: AnswerInfo,
     DescribeRoomStatisticsRequest: DescribeRoomStatisticsRequest,
     DescribeDocumentsByRoomResponse: DescribeDocumentsByRoomResponse,
     LoginOriginIdResponse: LoginOriginIdResponse,
+    DescribeQuestionListResponse: DescribeQuestionListResponse,
+    GetRoomsResponse: GetRoomsResponse,
+    QuestionInfo: QuestionInfo,
+    DeleteAppCustomContentRequest: DeleteAppCustomContentRequest,
     DescribeDeveloperRequest: DescribeDeveloperRequest,
     AppCustomContent: AppCustomContent,
     DeleteGroupResponse: DeleteGroupResponse,
     DescribeSdkAppIdUsersRequest: DescribeSdkAppIdUsersRequest,
-    MessageItem: MessageItem,
+    AddGroupMemberResponse: AddGroupMemberResponse,
     CreateSupervisorResponse: CreateSupervisorResponse,
     DeleteRoomRequest: DeleteRoomRequest,
     BatchCreateGroupWithMembersRequest: BatchCreateGroupWithMembersRequest,

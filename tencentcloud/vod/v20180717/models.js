@@ -1589,7 +1589,7 @@ class CreateImageProcessingTemplateRequest extends  AbstractModel {
 
         /**
          * An array of image processing operations. The operations will be performed in the specified order.
-<li>Length limit: 3.</li>
+<li>Length limit: 10.</li>
          * @type {Array.<ImageOperation> || null}
          */
         this.Operations = null;
@@ -4000,6 +4000,128 @@ class DescribeClientUploadAccelerationUsageDataResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyRebuildMediaTemplate request structure.
+ * @class
+ */
+class ModifyRebuildMediaTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The remaster template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {string || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The remaster template name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The template description.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * The video remaster parameters.
+         * @type {RebuildVideoInfo || null}
+         */
+        this.RebuildVideoInfo = null;
+
+        /**
+         * The audio remaster parameters.
+         * @type {RebuildAudioInfo || null}
+         */
+        this.RebuildAudioInfo = null;
+
+        /**
+         * The output video parameters.
+         * @type {RebuildMediaTargetVideoStream || null}
+         */
+        this.TargetVideoInfo = null;
+
+        /**
+         * The output audio parameters.
+         * @type {RebuildMediaTargetAudioStream || null}
+         */
+        this.TargetAudioInfo = null;
+
+        /**
+         * The output container format. Valid values: `mp4`, `flv`, `hls`.
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * Whether to remove video data. Valid values:
+<li>`0`: No</li>
+<li>`1`: Yes</li>
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * Whether to remove audio data. Valid values:
+<li>`0`: No</li>
+<li>`1`: Yes</li>
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.RebuildVideoInfo) {
+            let obj = new RebuildVideoInfo();
+            obj.deserialize(params.RebuildVideoInfo)
+            this.RebuildVideoInfo = obj;
+        }
+
+        if (params.RebuildAudioInfo) {
+            let obj = new RebuildAudioInfo();
+            obj.deserialize(params.RebuildAudioInfo)
+            this.RebuildAudioInfo = obj;
+        }
+
+        if (params.TargetVideoInfo) {
+            let obj = new RebuildMediaTargetVideoStream();
+            obj.deserialize(params.TargetVideoInfo)
+            this.TargetVideoInfo = obj;
+        }
+
+        if (params.TargetAudioInfo) {
+            let obj = new RebuildMediaTargetAudioStream();
+            obj.deserialize(params.TargetAudioInfo)
+            this.TargetAudioInfo = obj;
+        }
+        this.Container = 'Container' in params ? params.Container : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+    }
+}
+
+/**
  * ComposeMedia request structure.
  * @class
  */
@@ -5256,6 +5378,58 @@ class AiReviewPornTaskInput extends  AbstractModel {
 }
 
 /**
+ * Parameters for custom ASR-based recognition
+ * @class
+ */
+class UserDefineAsrTextReviewTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable custom ASR-based recognition. Valid values:
+<li>ON</li>
+<li>OFF</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Filter labels for custom ASR-based recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding keywords for custom ASR-based recognition.
+Up to 10 labels are allowed, each containing no more than 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
  * CreateProcedureTemplate request structure.
  * @class
  */
@@ -5386,17 +5560,18 @@ class DescribeMediaProcessUsageDataRequest extends  AbstractModel {
 
         /**
          * The type of media processing task. Valid values:
-<li>Transcoding: General transcoding</li>
-<li>Transcoding-TESHD: Top Speed Codec transcoding</li>
-<li>Editing: Video editing</li>
-<li>Editing-TESHD: Top Speed Codec editing</li>
-<li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
-<li>ContentAudit: Content moderation</li>
-<li> ContentRecognition: Content recognition</li>
-<li>RemoveWatermark: Watermark removal</li>
-<li> ExtractTraceWatermark: Digital watermark extraction</li>
-<li> AddTraceWatermark: Digital watermarking</li>
-<li>Transcode: Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
+<li>`Transcoding`: General transcoding</li>
+<li>`Transcoding-TESHD`: Top Speed Codec transcoding</li>
+<li>`Editing`: Video editing</li>
+<li>`Editing-TESHD`: Top Speed Codec editing</li>
+<li>`AdaptiveBitrateStreaming`: Adaptive bitrate streaming</li>
+<li>`ContentAudit`: Content moderation</li>
+<li>`ContentRecognition`: Content recognition</li>
+<li>`RemoveWatermark`: Watermark removal</li>
+<li>`ExtractTraceWatermark`: Digital watermark extraction</li>
+<li>`AddTraceWatermark`: Digital watermarking</li>
+<li>`RebuildMedia`: Remaster</li>
+<li>`Transcode` Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -6317,6 +6492,92 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Video segment containing OCR-detected suspicious content
+ * @class
+ */
+class MediaContentReviewOcrTextSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time offset of suspected segment in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * End time offset of suspected segment in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * Confidence of suspected segment.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Processing suggestion for the detected suspicious content. Valid values:
+<li>pass</li>
+<li>review</li>
+<li>block</li>
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * List of suspected keywords.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.KeywordSet = null;
+
+        /**
+         * Zone coordinates (at the pixel level) of suspected text: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+        /**
+         * URL of a suspected image (which will not be permanently stored
+and will be deleted after `PicUrlExpireTime`).
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.PicUrlExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+
+    }
+}
+
+/**
  * Result information of intelligent categorization
  * @class
  */
@@ -6557,39 +6818,24 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Parameters for custom ASR-based recognition
+ * CreateRebuildMediaTemplate response structure.
  * @class
  */
-class UserDefineAsrTextReviewTemplateInfo extends  AbstractModel {
+class CreateRebuildMediaTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable custom ASR-based recognition. Valid values:
-<li>ON</li>
-<li>OFF</li>
+         * The remaster template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * Filter labels for custom ASR-based recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding keywords for custom ASR-based recognition.
-Up to 10 labels are allowed, each containing no more than 16 characters.
-         * @type {Array.<string> || null}
-         */
-        this.LabelSet = null;
-
-        /**
-         * Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
-         * @type {number || null}
-         */
-        this.BlockConfidence = null;
-
-        /**
-         * Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
-         * @type {number || null}
-         */
-        this.ReviewConfidence = null;
+        this.RequestId = null;
 
     }
 
@@ -6600,10 +6846,8 @@ Up to 10 labels are allowed, each containing no more than 16 characters.
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6689,6 +6933,49 @@ class AiSampleFaceInfo extends  AbstractModel {
         }
         this.FaceId = 'FaceId' in params ? params.FaceId : null;
         this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * Image blurring parameters.
+ * @class
+ */
+class ImageBlur extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The blur type. Valid values:
+<li>`Gaussian`</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The radius of the blur. Value range: 1-50. This parameter is valid if `Type` is `Gaussian`.
+         * @type {number || null}
+         */
+        this.Radius = null;
+
+        /**
+         * The standard deviation of the Gaussian distribution, which must be greater than 0. This parameter is valid if `Type` is `Gaussian`.
+         * @type {number || null}
+         */
+        this.Sigma = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Radius = 'Radius' in params ? params.Radius : null;
+        this.Sigma = 'Sigma' in params ? params.Sigma : null;
 
     }
 }
@@ -8350,17 +8637,18 @@ class TaskStatData extends  AbstractModel {
 
         /**
          * The task type.
-<li>Transcoding: General transcoding</li>
-<li>Transcoding-TESHD: Top Speed Codec transcoding</li>
-<li>Editing: Video editing</li>
-<li>Editing-TESHD: Top Speed Codec editing</li>
-<li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
+<li>`Transcoding`: General transcoding</li>
+<li>`Transcoding-TESHD`: Top Speed Codec transcoding</li>
+<li>`Editing`: Video editing</li>
+<li>`Editing-TESHD`: Top Speed Codec editing</li>
+<li>`AdaptiveBitrateStreaming`: Adaptive bitrate streaming</li>
 <li>ContentAudit: Content moderation</li>
-<li> ContentRecognition: Content recognition</li>
+<li>`ContentRecognition`: Content recognition</li>
 <li>RemoveWatermark: Watermark removal</li>
-<li> ExtractTraceWatermark: Digital watermark extraction</li>
-<li> AddTraceWatermark: Digital watermarking</li>
-<li>Transcode: Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
+<li>`ExtractTraceWatermark`: Digital watermark extraction</li>
+<li>`AddTraceWatermark`: Digital watermarking</li>
+<li>`RebuildMedia`: Remaster</li>
+<li>`Transcode` Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
          * @type {string || null}
          */
         this.TaskType = null;
@@ -8372,58 +8660,59 @@ class TaskStatData extends  AbstractModel {
         this.Summary = null;
 
         /**
-         * The detailed statistics of different tasks.
+         * The usage statistics for different task types.
 Transcoding:
-<li>Remuxing</li>
-<li>Audio</li>
-<li>Standard.H264.SD</li>
-<li>Standard.H264.HD</li>
-<li>Standard.H264.FHD</li>
-<li>Standard.H264.2K</li>
-<li>Standard.H264.4K</li>
-<li>Standard.H265.SD</li>
-<li>Standard.H265.HD</li>
-<li>Standard.H265.FHD</li>
-<li>Standard.H265.2K</li>
-<li>Standard.H265.4K</li>
-<li>TESHD-10.H264.SD</li>
-<li>TESHD-10.H264.HD</li>
-<li>TESHD-10.H264.FHD</li>
-<li>TESHD-10.H264.2K</li>
-<li>TESHD-10.H264.4K</li>
-<li>TESHD-10.H265.SD</li>
-<li>TESHD-10.H265.HD</li>
-<li>TESHD-10.H265.FHD</li>
-<li>TESHD-10.H265.2K</li>
-<li>TESHD-10.H265.4K</li>
-<li>Edit.Audio</li>
-<li>Edit.H264.SD</li>
-<li>Edit.H264.HD</li>
-<li>Edit.H264.FHD</li>
-<li>Edit.H264.2K</li>
-<li>Edit.H264.4K</li>
-<li>Edit.H265.SD</li>
-<li>Edit.H265.HD</li>
-<li>Edit.H265.FHD</li>
-<li>Edit.H265.2K</li>
-<li>Edit.H265.4K</li>
-<li>Edit.TESHD-10.H264.SD</li>
-<li>Edit.TESHD-10.H264.HD</li>
-<li>Edit.TESHD-10.H264.FHD</li>
-<li>Edit.TESHD-10.H264.2K</li>
-<li>Edit.TESHD-10.H264.4K</li>
-<li>Edit.TESHD-10.H265.SD</li>
-<li>Edit.TESHD-10.H265.HD</li>
-<li>Edit.TESHD-10.H265.FHD</li>
-<li>Edit.TESHD-10.H265.2K</li>
-<li>Edit.TESHD-10.H265.4K</li>
-Watermark removal:
-<li>480P: 640 x 480 and below</li>
-<li>720P: 1280 x 720 and below</li>
-<li>1080P: 1920 x 1080 and below</li>
-<li>2K: 2560 x 1440 and below</li>
-<li>4K: 3840 x 2160 and below</li>
-<li>8K: 7680 x 4320 and below</li>
+<li>`Remuxing`</li>
+<li>`Audio` (audio transcoding)</li>
+<li>`Standard.H264.SD`</li>
+<li>`Standard.H264.HD`</li>
+<li>`Standard.H264.FHD`</li>
+<li>`Standard.H264.2K`</li>
+<li>`Standard.H264.4K`</li>
+<li>`Standard.H265.SD`</li>
+<li>`Standard.H265.HD`</li>
+<li>`Standard.H265.FHD`</li>
+<li>`Standard.H265.2K`</li>
+<li>`Standard.H265.4K`</li>
+<li>`TESHD-10.H264.SD` (H.264 SD Top Speed Codec transcoding)</li>
+<li>`TESHD-10.H264.HD` (H.264 HD Top Speed Codec transcoding)</li>
+<li>`TESHD-10.H264.FHD` (H.264 FHD Top Speed Codec transcoding)</li>
+<li>`TESHD-10.H264.2K` (H.264 2K Top Speed Codec transcoding)</li>
+<li>`TESHD-10.H264.4K` (H.264 4K Top Speed Codec transcoding)</li>
+<li>`TESHD-10.H265.SD` (H.265 SD Top Speed Codec transcoding)</li>
+<li>`TESHD-10.H265.HD` (H.265 HD Top Speed Codec transcoding)</li>
+<li>`TESHD-10.H265.FHD` (H.265 FHD Top Speed Codec transcoding)</li>
+<li>`TESHD-10.H265.2K` (H.265 2K Top Speed Codec transcoding)</li>
+<li>`TESHD-10.H265.4K` (H.265 4K Top Speed Codec transcoding)</li>
+<li>`Edit.Audio`</li>
+<li>`Edit.H264.SD` (H.264 SD video editing)</li>
+<li>`Edit.H264.HD` (H.264 HD video editing)</li>
+<li>`Edit.H264.FHD` (H.264 FHD video editing)</li>
+<li>`Edit.H264.2K` (H.264 2K video editing)</li>
+<li>`Edit.H264.4K` (H.264 4K video editing)</li>
+<li>`Edit.H265.SD` (H.265 SD video editing)</li>
+<li>`Edit.H265.HD` (H.265 HD video editing)</li>
+<li>`Edit.H265.FHD` (H.265 FHD video editing)</li>
+<li>`Edit.H265.2K` (H.265 2K video editing)</li>
+<li>`Edit.H265.4K` (H.265 4K video editing)</li>
+<li>`Edit.TESHD-10.H264.SD` (H.264 SD Top Speed Codec video editing)</li>
+<li>`Edit.TESHD-10.H264.HD` (H.264 HD Top Speed Codec video editing)</li>
+<li>`Edit.TESHD-10.H264.FHD` (H.264 FHD Top Speed Codec video editing)</li>
+<li>`Edit.TESHD-10.H264.2K` (H.264 2K Top Speed Codec video editing)</li>
+<li>`Edit.TESHD-10.H264.4K` (H.264 4K Top Speed Codec video editing)</li>
+<li>`Edit.TESHD-10.H265.SD` (H.265 SD Top Speed Codec video editing)</li>
+<li>`Edit.TESHD-10.H265.HD` (H.265 HD Top Speed Codec video editing)</li>
+<li>`Edit.TESHD-10.H265.FHD` (H.265 FHD Top Speed Codec video editing)</li>
+<li>`Edit.TESHD-10.H265.2K` (H.265 2K Top Speed Codec video editing)</li>
+<li>`Edit.TESHD-10.H265.4K` (H.265 4K Top Speed Codec video editing)</li>
+The watermark removal/remaster specifications. Valid values:
+<li>`480P` (short side ≤ 480 px)</li>
+<li>`720P` (short side ≤ 720 px)</li>
+<li>`1080P` (short side ≤ 1080 px)</li>
+<li>`2K` (short side ≤ 1440 px)</li>
+<li>`4K` (short side ≤ 2160 px)</li>
+<li>`8K` (short side ≤ 4320 px)</li>
+<li>`audio`</li>
          * @type {Array.<SpecificationDataItem> || null}
          */
         this.Details = null;
@@ -11320,6 +11609,40 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * The audio remaster parameters.
+ * @class
+ */
+class RebuildAudioInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The noise removal parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AudioDenoiseInfo || null}
+         */
+        this.AudioDenoiseInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AudioDenoiseInfo) {
+            let obj = new AudioDenoiseInfo();
+            obj.deserialize(params.AudioDenoiseInfo)
+            this.AudioDenoiseInfo = obj;
+        }
+
+    }
+}
+
+/**
  * RemoveWatermark response structure.
  * @class
  */
@@ -11355,69 +11678,102 @@ class RemoveWatermarkResponse extends  AbstractModel {
 }
 
 /**
- * The details of a video transcoding task. This parameter is only valid for tasks initiated by the v2017 video transcoding API.
+ * The details of a remaster template.
  * @class
  */
-class TranscodeTask2017 extends  AbstractModel {
+class RebuildMediaTemplate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Transcoding task ID.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * Error code
-<li>0: success;</li>
-<li>Other values: failure.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The remaster template ID.
          * @type {number || null}
          */
-        this.ErrCode = null;
+        this.Definition = null;
 
         /**
-         * Error message.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The template type. Valid values:
+<li>`Preset`</li>
+<li>`Custom`</li>
          * @type {string || null}
          */
-        this.Message = null;
+        this.Type = null;
 
         /**
-         * ID of transcoded file.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The remaster template name.
          * @type {string || null}
          */
-        this.FileId = null;
+        this.Name = null;
 
         /**
-         * Name of transcoded file.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The template description.
          * @type {string || null}
          */
-        this.FileName = null;
+        this.Comment = null;
 
         /**
-         * Video duration in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The video remaster parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RebuildVideoInfo || null}
+         */
+        this.RebuildVideoInfo = null;
+
+        /**
+         * The audio remaster parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RebuildAudioInfo || null}
+         */
+        this.RebuildAudioInfo = null;
+
+        /**
+         * The output video parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RebuildMediaTargetVideoStream || null}
+         */
+        this.TargetVideoInfo = null;
+
+        /**
+         * The output audio parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RebuildMediaTargetAudioStream || null}
+         */
+        this.TargetAudioInfo = null;
+
+        /**
+         * The output file format. Valid values: `mp4` (default), `hls`.
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * Whether to remove video data. Valid values:
+<li>`0`: No</li>
+<li>`1`: Yes</li>
+Default value: 0.
          * @type {number || null}
          */
-        this.Duration = null;
+        this.RemoveVideo = null;
 
         /**
-         * Cover address.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Whether to remove audio data. Valid values:
+<li>`0`: No</li>
+<li>`1`: Yes</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * The template creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
          * @type {string || null}
          */
-        this.CoverUrl = null;
+        this.CreateTime = null;
 
         /**
-         * Playback information generated after video transcoding.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TranscodePlayInfo2017> || null}
+         * The last updated time of the template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
          */
-        this.PlayInfoSet = null;
+        this.UpdateTime = null;
 
     }
 
@@ -11428,22 +11784,39 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
-        if (params.PlayInfoSet) {
-            this.PlayInfoSet = new Array();
-            for (let z in params.PlayInfoSet) {
-                let obj = new TranscodePlayInfo2017();
-                obj.deserialize(params.PlayInfoSet[z]);
-                this.PlayInfoSet.push(obj);
-            }
+        if (params.RebuildVideoInfo) {
+            let obj = new RebuildVideoInfo();
+            obj.deserialize(params.RebuildVideoInfo)
+            this.RebuildVideoInfo = obj;
         }
+
+        if (params.RebuildAudioInfo) {
+            let obj = new RebuildAudioInfo();
+            obj.deserialize(params.RebuildAudioInfo)
+            this.RebuildAudioInfo = obj;
+        }
+
+        if (params.TargetVideoInfo) {
+            let obj = new RebuildMediaTargetVideoStream();
+            obj.deserialize(params.TargetVideoInfo)
+            this.TargetVideoInfo = obj;
+        }
+
+        if (params.TargetAudioInfo) {
+            let obj = new RebuildMediaTargetAudioStream();
+            obj.deserialize(params.TargetAudioInfo)
+            this.TargetAudioInfo = obj;
+        }
+        this.Container = 'Container' in params ? params.Container : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -12614,6 +12987,12 @@ class RebuildMediaTaskInput extends  AbstractModel {
         this.EndTimeOffset = null;
 
         /**
+         * The ID of the remaster template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
          * The video quality remastering parameters.
          * @type {RepairInfo || null}
          */
@@ -12703,6 +13082,7 @@ class RebuildMediaTaskInput extends  AbstractModel {
         this.FileId = 'FileId' in params ? params.FileId : null;
         this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
         this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
         if (params.RepairInfo) {
             let obj = new RepairInfo();
@@ -14085,6 +14465,64 @@ class AiAnalysisTaskHighlightOutput extends  AbstractModel {
         }
         this.HighlightSetFileUrl = 'HighlightSetFileUrl' in params ? params.HighlightSetFileUrl : null;
         this.HighlightSetFileUrlExpireTime = 'HighlightSetFileUrlExpireTime' in params ? params.HighlightSetFileUrlExpireTime : null;
+
+    }
+}
+
+/**
+ * DescribeRebuildMediaTemplates request structure.
+ * @class
+ */
+class DescribeRebuildMediaTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The remaster template IDs.
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The template type. Valid values:
+<li>`Preset`</li>
+<li>`Custom`</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The pagination offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The maximum number of records to return. Default value: 10. Maximum value: 100.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -15732,10 +16170,10 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
- * ModifySubAppIdStatus response structure.
+ * DeleteRebuildMediaTemplate response structure.
  * @class
  */
-class ModifySubAppIdStatusResponse extends  AbstractModel {
+class DeleteRebuildMediaTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -15755,6 +16193,41 @@ class ModifySubAppIdStatusResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRebuildMediaTemplate request structure.
+ * @class
+ */
+class DeleteRebuildMediaTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The remaster template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -17999,6 +18472,34 @@ class DescribeImageSpriteTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyRebuildMediaTemplate response structure.
+ * @class
+ */
+class ModifyRebuildMediaTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Video timestamp information
  * @class
  */
@@ -18029,6 +18530,102 @@ class MediaKeyFrameDescItem extends  AbstractModel {
         }
         this.TimeOffset = 'TimeOffset' in params ? params.TimeOffset : null;
         this.Content = 'Content' in params ? params.Content : null;
+
+    }
+}
+
+/**
+ * RebuildMediaByTemplate request structure.
+ * @class
+ */
+class RebuildMediaByTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The file ID.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * The remaster template ID.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {string || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * The end offset (seconds). If you do not specify this, the segment will end at the end of the video.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * The parameters for the output file of remastering.
+         * @type {RebuildMediaOutputConfig || null}
+         */
+        this.OutputConfig = null;
+
+        /**
+         * The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+        /**
+         * The task priority, which can be a value from -10 to 10. The higher the value, the higher the priority. If this parameter is left empty, 0 will be used.
+         * @type {number || null}
+         */
+        this.TasksPriority = null;
+
+        /**
+         * A reserved parameter.
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+
+        if (params.OutputConfig) {
+            let obj = new RebuildMediaOutputConfig();
+            obj.deserialize(params.OutputConfig)
+            this.OutputConfig = obj;
+        }
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -18291,7 +18888,7 @@ Array length limit: 16.
         this.ExtInfo = null;
 
         /**
-         * [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
         this.SubAppId = null;
@@ -21798,6 +22395,13 @@ For more information about supported extensions, see [Media types](https://intl.
         this.MediaUrl = null;
 
         /**
+         * The file format (extension). For information about supported extensions, see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
+If you do not specify this parameter or pass in an empty string, the file obtained will have the same extension as `MediaUrl`.
+         * @type {string || null}
+         */
+        this.MediaType = null;
+
+        /**
          * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
          * @type {number || null}
          */
@@ -21875,6 +22479,7 @@ For more information about supported extensions, see [Media types](https://intl.
             return;
         }
         this.MediaUrl = 'MediaUrl' in params ? params.MediaUrl : null;
+        this.MediaType = 'MediaType' in params ? params.MediaType : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
         this.MediaName = 'MediaName' in params ? params.MediaName : null;
         this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
@@ -24206,15 +24811,15 @@ If the difference between `StartTime` and `EndTime` is larger than 24 hours, the
 }
 
 /**
- * Input of full text recognition.
+ * Input parameters for a video opening/closing credits generation task
  * @class
  */
-class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
+class HeadTailTaskInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Full text recognition template ID.
+         * Video opening/closing credits configuration template ID
          * @type {number || null}
          */
         this.Definition = null;
@@ -29071,15 +29676,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Input parameters for a video opening/closing credits generation task
+ * Input of full text recognition.
  * @class
  */
-class HeadTailTaskInput extends  AbstractModel {
+class AiRecognitionTaskOcrFullTextResultInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Video opening/closing credits configuration template ID
+         * Full text recognition template ID.
          * @type {number || null}
          */
         this.Definition = null;
@@ -29368,6 +29973,49 @@ class AiRecognitionTaskFaceResultInput extends  AbstractModel {
 }
 
 /**
+ * The parameters for the output file of a remaster task.
+ * @class
+ */
+class RebuildMediaOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The filename. This parameter can contain up to 64 characters, and will be generated by the system if it is left empty.
+         * @type {string || null}
+         */
+        this.MediaName = null;
+
+        /**
+         * The ID of the file's category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+<li>The default value is `0`, which means the "Other" category.</li>
+         * @type {number || null}
+         */
+        this.ClassId = null;
+
+        /**
+         * The expiration time of the output file, in [ISO date format](https://www.tencentcloud.com/document/product/266/11732?lang=en&pg=). The file will be deleted after the specified expiration time. By default, the file will never expire.
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
+        this.ClassId = 'ClassId' in params ? params.ClassId : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+    }
+}
+
+/**
  * Output for intelligent recognition of politically sensitive content
  * @class
  */
@@ -29524,6 +30172,34 @@ Note: This field may return `null`, indicating that no valid value can be found.
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+
+    }
+}
+
+/**
+ * ModifySubAppIdStatus response structure.
+ * @class
+ */
+class ModifySubAppIdStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -31038,6 +31714,41 @@ class AiReviewTerrorismTaskInput extends  AbstractModel {
 }
 
 /**
+ * RebuildMediaByTemplate response structure.
+ * @class
+ */
+class RebuildMediaByTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the remaster task. You need to provide this ID to query the task status.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Information of audio stream in VOD file
  * @class
  */
@@ -32340,6 +33051,123 @@ class ReviewTemplate extends  AbstractModel {
 }
 
 /**
+ * CreateRebuildMediaTemplate request structure.
+ * @class
+ */
+class CreateRebuildMediaTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The output container format. Valid values: `mp4`, `flv`, `hls`.
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+        /**
+         * The remaster template name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The template description.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * The video remaster parameters.
+         * @type {RebuildVideoInfo || null}
+         */
+        this.RebuildVideoInfo = null;
+
+        /**
+         * The audio remaster parameters.
+         * @type {RebuildAudioInfo || null}
+         */
+        this.RebuildAudioInfo = null;
+
+        /**
+         * The output video parameters.
+         * @type {RebuildMediaTargetVideoStream || null}
+         */
+        this.TargetVideoInfo = null;
+
+        /**
+         * The output audio parameters.
+         * @type {RebuildMediaTargetAudioStream || null}
+         */
+        this.TargetAudioInfo = null;
+
+        /**
+         * Whether to remove video data. Valid values:
+<li>`0`: No</li>
+<li>`1`: Yes</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * Whether to remove audio data. Valid values:
+<li>`0`: No</li>
+<li>`1`: Yes</li>
+Default value: 0.
+         * @type {string || null}
+         */
+        this.RemoveAudio = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Container = 'Container' in params ? params.Container : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+
+        if (params.RebuildVideoInfo) {
+            let obj = new RebuildVideoInfo();
+            obj.deserialize(params.RebuildVideoInfo)
+            this.RebuildVideoInfo = obj;
+        }
+
+        if (params.RebuildAudioInfo) {
+            let obj = new RebuildAudioInfo();
+            obj.deserialize(params.RebuildAudioInfo)
+            this.RebuildAudioInfo = obj;
+        }
+
+        if (params.TargetVideoInfo) {
+            let obj = new RebuildMediaTargetVideoStream();
+            obj.deserialize(params.TargetVideoInfo)
+            this.TargetVideoInfo = obj;
+        }
+
+        if (params.TargetAudioInfo) {
+            let obj = new RebuildMediaTargetAudioStream();
+            obj.deserialize(params.TargetAudioInfo)
+            this.TargetAudioInfo = obj;
+        }
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+    }
+}
+
+/**
  * An image operation.
  * @class
  */
@@ -32367,6 +33195,12 @@ class ImageOperation extends  AbstractModel {
          */
         this.CenterCut = null;
 
+        /**
+         * Image blurring. This parameter is valid only if `Type` is `Blur`.
+         * @type {ImageBlur || null}
+         */
+        this.Blur = null;
+
     }
 
     /**
@@ -32388,6 +33222,12 @@ class ImageOperation extends  AbstractModel {
             let obj = new ImageCenterCut();
             obj.deserialize(params.CenterCut)
             this.CenterCut = obj;
+        }
+
+        if (params.Blur) {
+            let obj = new ImageBlur();
+            obj.deserialize(params.Blur)
+            this.Blur = obj;
         }
 
     }
@@ -34303,13 +35143,20 @@ class SearchMediaRequest extends  AbstractModel {
         this.MediaTypes = null;
 
         /**
-         * 
+         * The file statuses.
+<li>`Normal`</li>
+<li>`SystemForbidden` (blocked by VOD)</li>
+<li>`Forbidden` (blocked by you)</li>
          * @type {Array.<string> || null}
          */
         this.Status = null;
 
         /**
-         * 
+         * The types of moderation result.
+<li>`pass`</li>
+<li>`review` (the content may be non-compliant and needs to be reviewed)</li>
+<li>`block` (the content is non-compliant and should be blocked)</li>
+<li>`notModerated` (the file hasn't been moderated yet)</li>
          * @type {Array.<string> || null}
          */
         this.ReviewResults = null;
@@ -34593,69 +35440,30 @@ Default value: black.
 }
 
 /**
- * Video segment containing OCR-detected suspicious content
+ * DescribeRebuildMediaTemplates response structure.
  * @class
  */
-class MediaContentReviewOcrTextSegmentItem extends  AbstractModel {
+class DescribeRebuildMediaTemplatesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time offset of suspected segment in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The total number of records that meet the conditions.
          * @type {number || null}
          */
-        this.StartTimeOffset = null;
+        this.TotalCount = null;
 
         /**
-         * End time offset of suspected segment in seconds.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
+         * The details of the remaster templates.
+         * @type {Array.<RebuildMediaTemplate> || null}
          */
-        this.EndTimeOffset = null;
+        this.RebuildMediaTemplateSet = null;
 
         /**
-         * Confidence of suspected segment.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Processing suggestion for the detected suspicious content. Valid values:
-<li>pass</li>
-<li>review</li>
-<li>block</li>
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Suggestion = null;
-
-        /**
-         * List of suspected keywords.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
-         */
-        this.KeywordSet = null;
-
-        /**
-         * Zone coordinates (at the pixel level) of suspected text: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<number> || null}
-         */
-        this.AreaCoordSet = null;
-
-        /**
-         * URL of a suspected image (which will not be permanently stored
-and will be deleted after `PicUrlExpireTime`).
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * Expiration time of suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
-         * @type {string || null}
-         */
-        this.PicUrlExpireTime = null;
+        this.RequestId = null;
 
     }
 
@@ -34666,14 +35474,17 @@ and will be deleted after `PicUrlExpireTime`).
         if (!params) {
             return;
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
-        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RebuildMediaTemplateSet) {
+            this.RebuildMediaTemplateSet = new Array();
+            for (let z in params.RebuildMediaTemplateSet) {
+                let obj = new RebuildMediaTemplate();
+                obj.deserialize(params.RebuildMediaTemplateSet[z]);
+                this.RebuildMediaTemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -36085,6 +36896,170 @@ class ReviewImageRequest extends  AbstractModel {
 }
 
 /**
+ * The video remaster parameters.
+ * @class
+ */
+class RebuildVideoInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The image restoration parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {RepairInfo || null}
+         */
+        this.RepairInfo = null;
+
+        /**
+         * The smart frame interpolation parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoFrameInterpolationInfo || null}
+         */
+        this.VideoFrameInterpolationInfo = null;
+
+        /**
+         * The super resolution parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SuperResolutionInfo || null}
+         */
+        this.SuperResolutionInfo = null;
+
+        /**
+         * The high dynamic range (HDR) configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {HDRInfo || null}
+         */
+        this.HDRInfo = null;
+
+        /**
+         * The image noise removal parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {VideoDenoiseInfo || null}
+         */
+        this.VideoDenoiseInfo = null;
+
+        /**
+         * The color enhancement parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ColorEnhanceInfo || null}
+         */
+        this.ColorInfo = null;
+
+        /**
+         * The detail enhancement parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {SharpEnhanceInfo || null}
+         */
+        this.SharpInfo = null;
+
+        /**
+         * The face enhancement parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {FaceEnhanceInfo || null}
+         */
+        this.FaceInfo = null;
+
+        /**
+         * The low-light enhancement parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {LowLightEnhanceInfo || null}
+         */
+        this.LowLightInfo = null;
+
+        /**
+         * The banding removal parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScratchRepairInfo || null}
+         */
+        this.ScratchRepairInfo = null;
+
+        /**
+         * The artifact removal parameters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ArtifactRepairInfo || null}
+         */
+        this.ArtifactRepairInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RepairInfo) {
+            let obj = new RepairInfo();
+            obj.deserialize(params.RepairInfo)
+            this.RepairInfo = obj;
+        }
+
+        if (params.VideoFrameInterpolationInfo) {
+            let obj = new VideoFrameInterpolationInfo();
+            obj.deserialize(params.VideoFrameInterpolationInfo)
+            this.VideoFrameInterpolationInfo = obj;
+        }
+
+        if (params.SuperResolutionInfo) {
+            let obj = new SuperResolutionInfo();
+            obj.deserialize(params.SuperResolutionInfo)
+            this.SuperResolutionInfo = obj;
+        }
+
+        if (params.HDRInfo) {
+            let obj = new HDRInfo();
+            obj.deserialize(params.HDRInfo)
+            this.HDRInfo = obj;
+        }
+
+        if (params.VideoDenoiseInfo) {
+            let obj = new VideoDenoiseInfo();
+            obj.deserialize(params.VideoDenoiseInfo)
+            this.VideoDenoiseInfo = obj;
+        }
+
+        if (params.ColorInfo) {
+            let obj = new ColorEnhanceInfo();
+            obj.deserialize(params.ColorInfo)
+            this.ColorInfo = obj;
+        }
+
+        if (params.SharpInfo) {
+            let obj = new SharpEnhanceInfo();
+            obj.deserialize(params.SharpInfo)
+            this.SharpInfo = obj;
+        }
+
+        if (params.FaceInfo) {
+            let obj = new FaceEnhanceInfo();
+            obj.deserialize(params.FaceInfo)
+            this.FaceInfo = obj;
+        }
+
+        if (params.LowLightInfo) {
+            let obj = new LowLightEnhanceInfo();
+            obj.deserialize(params.LowLightInfo)
+            this.LowLightInfo = obj;
+        }
+
+        if (params.ScratchRepairInfo) {
+            let obj = new ScratchRepairInfo();
+            obj.deserialize(params.ScratchRepairInfo)
+            this.ScratchRepairInfo = obj;
+        }
+
+        if (params.ArtifactRepairInfo) {
+            let obj = new ArtifactRepairInfo();
+            obj.deserialize(params.ArtifactRepairInfo)
+            this.ArtifactRepairInfo = obj;
+        }
+
+    }
+}
+
+/**
  * Parameters for recognition of terrorism content
  * @class
  */
@@ -36795,6 +37770,100 @@ class StorageStatData extends  AbstractModel {
         this.StandardStorage = 'StandardStorage' in params ? params.StandardStorage : null;
         this.ArchiveStorage = 'ArchiveStorage' in params ? params.ArchiveStorage : null;
         this.DeepArchiveStorage = 'DeepArchiveStorage' in params ? params.DeepArchiveStorage : null;
+
+    }
+}
+
+/**
+ * The details of a video transcoding task. This parameter is only valid for tasks initiated by the v2017 video transcoding API.
+ * @class
+ */
+class TranscodeTask2017 extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Transcoding task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Error code
+<li>0: success;</li>
+<li>Other values: failure.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * ID of transcoded file.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * Name of transcoded file.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * Video duration in seconds.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Cover address.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CoverUrl = null;
+
+        /**
+         * Playback information generated after video transcoding.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<TranscodePlayInfo2017> || null}
+         */
+        this.PlayInfoSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
+
+        if (params.PlayInfoSet) {
+            this.PlayInfoSet = new Array();
+            for (let z in params.PlayInfoSet) {
+                let obj = new TranscodePlayInfo2017();
+                obj.deserialize(params.PlayInfoSet[z]);
+                this.PlayInfoSet.push(obj);
+            }
+        }
 
     }
 }
@@ -37725,6 +38794,7 @@ module.exports = {
     ExecuteFunctionResponse: ExecuteFunctionResponse,
     CoverConfigureInfo: CoverConfigureInfo,
     DescribeClientUploadAccelerationUsageDataResponse: DescribeClientUploadAccelerationUsageDataResponse,
+    ModifyRebuildMediaTemplateRequest: ModifyRebuildMediaTemplateRequest,
     ComposeMediaRequest: ComposeMediaRequest,
     AIRecognitionTemplateItem: AIRecognitionTemplateItem,
     AiReviewPornAsrTaskInput: AiReviewPornAsrTaskInput,
@@ -37746,6 +38816,7 @@ module.exports = {
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
     ModifyMediaStorageClassResponse: ModifyMediaStorageClassResponse,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
+    UserDefineAsrTextReviewTemplateInfo: UserDefineAsrTextReviewTemplateInfo,
     CreateProcedureTemplateRequest: CreateProcedureTemplateRequest,
     DescribeMediaProcessUsageDataRequest: DescribeMediaProcessUsageDataRequest,
     CreatePersonSampleRequest: CreatePersonSampleRequest,
@@ -37765,14 +38836,16 @@ module.exports = {
     DescribeCDNStatDetailsResponse: DescribeCDNStatDetailsResponse,
     AttachMediaSubtitlesRequest: AttachMediaSubtitlesRequest,
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
+    MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
     AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
     FileDeleteTask: FileDeleteTask,
     ResourceTag: ResourceTag,
     AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
     EditMediaTaskInput: EditMediaTaskInput,
-    UserDefineAsrTextReviewTemplateInfo: UserDefineAsrTextReviewTemplateInfo,
+    CreateRebuildMediaTemplateResponse: CreateRebuildMediaTemplateResponse,
     DescribeWordSamplesResponse: DescribeWordSamplesResponse,
     AiSampleFaceInfo: AiSampleFaceInfo,
+    ImageBlur: ImageBlur,
     ModifyVodDomainAccelerateConfigRequest: ModifyVodDomainAccelerateConfigRequest,
     PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,
     MediaProcessTaskAdaptiveDynamicStreamingResult: MediaProcessTaskAdaptiveDynamicStreamingResult,
@@ -37855,8 +38928,9 @@ module.exports = {
     ObjectConfigureInfo: ObjectConfigureInfo,
     AsrFullTextConfigureInfoForUpdate: AsrFullTextConfigureInfoForUpdate,
     AiRecognitionTaskHeadTailResult: AiRecognitionTaskHeadTailResult,
+    RebuildAudioInfo: RebuildAudioInfo,
     RemoveWatermarkResponse: RemoveWatermarkResponse,
-    TranscodeTask2017: TranscodeTask2017,
+    RebuildMediaTemplate: RebuildMediaTemplate,
     CreatePersonSampleResponse: CreatePersonSampleResponse,
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
     ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
@@ -37901,6 +38975,7 @@ module.exports = {
     ModifyMediaStorageClassRequest: ModifyMediaStorageClassRequest,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
     AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
+    DescribeRebuildMediaTemplatesRequest: DescribeRebuildMediaTemplatesRequest,
     ReviewImageSegmentItem: ReviewImageSegmentItem,
     CreateRoundPlayResponse: CreateRoundPlayResponse,
     MediaSubtitleInput: MediaSubtitleInput,
@@ -37928,7 +39003,8 @@ module.exports = {
     ImageWatermarkTemplate: ImageWatermarkTemplate,
     ModifySubAppIdInfoResponse: ModifySubAppIdInfoResponse,
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
-    ModifySubAppIdStatusResponse: ModifySubAppIdStatusResponse,
+    DeleteRebuildMediaTemplateResponse: DeleteRebuildMediaTemplateResponse,
+    DeleteRebuildMediaTemplateRequest: DeleteRebuildMediaTemplateRequest,
     SimpleHlsClipRequest: SimpleHlsClipRequest,
     MediaDeleteItem: MediaDeleteItem,
     PoliticalImageResult: PoliticalImageResult,
@@ -37969,7 +39045,9 @@ module.exports = {
     ModifyVodDomainConfigResponse: ModifyVodDomainConfigResponse,
     MediaSnapshotByTimeOffsetInfo: MediaSnapshotByTimeOffsetInfo,
     DescribeImageSpriteTemplatesRequest: DescribeImageSpriteTemplatesRequest,
+    ModifyRebuildMediaTemplateResponse: ModifyRebuildMediaTemplateResponse,
     MediaKeyFrameDescItem: MediaKeyFrameDescItem,
+    RebuildMediaByTemplateRequest: RebuildMediaByTemplateRequest,
     ModifyVodDomainConfigRequest: ModifyVodDomainConfigRequest,
     AiSampleTagOperation: AiSampleTagOperation,
     PlayerConfig: PlayerConfig,
@@ -38072,7 +39150,7 @@ module.exports = {
     DescribeStorageRegionsRequest: DescribeStorageRegionsRequest,
     WechatPublishTask: WechatPublishTask,
     DescribeCDNStatDetailsRequest: DescribeCDNStatDetailsRequest,
-    AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
+    HeadTailTaskInput: HeadTailTaskInput,
     DescribeImageReviewUsageDataResponse: DescribeImageReviewUsageDataResponse,
     DeleteRoundPlayResponse: DeleteRoundPlayResponse,
     StatDataItem: StatDataItem,
@@ -38151,7 +39229,7 @@ module.exports = {
     DescribeMediaProcessUsageDataResponse: DescribeMediaProcessUsageDataResponse,
     DescribeSuperPlayerConfigsRequest: DescribeSuperPlayerConfigsRequest,
     ReduceMediaBitrateMediaProcessTaskResult: ReduceMediaBitrateMediaProcessTaskResult,
-    HeadTailTaskInput: HeadTailTaskInput,
+    AiRecognitionTaskOcrFullTextResultInput: AiRecognitionTaskOcrFullTextResultInput,
     SplitMediaOutputConfig: SplitMediaOutputConfig,
     CreateVodDomainResponse: CreateVodDomainResponse,
     ModifyVodDomainAccelerateConfigResponse: ModifyVodDomainAccelerateConfigResponse,
@@ -38159,8 +39237,10 @@ module.exports = {
     DescribeTasksResponse: DescribeTasksResponse,
     DescribeSubAppIdsRequest: DescribeSubAppIdsRequest,
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
+    RebuildMediaOutputConfig: RebuildMediaOutputConfig,
     AiReviewPoliticalTaskOutput: AiReviewPoliticalTaskOutput,
     AiReviewTaskPoliticalResult: AiReviewTaskPoliticalResult,
+    ModifySubAppIdStatusResponse: ModifySubAppIdStatusResponse,
     ReviewImageResponse: ReviewImageResponse,
     DescribeStorageRegionsResponse: DescribeStorageRegionsResponse,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
@@ -38183,6 +39263,7 @@ module.exports = {
     SnapshotByTimeOffset2017: SnapshotByTimeOffset2017,
     CreateAIAnalysisTemplateRequest: CreateAIAnalysisTemplateRequest,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
+    RebuildMediaByTemplateResponse: RebuildMediaByTemplateResponse,
     MediaAudioStreamItem: MediaAudioStreamItem,
     SubtitleFormatsOperation: SubtitleFormatsOperation,
     SubAppIdInfo: SubAppIdInfo,
@@ -38205,6 +39286,7 @@ module.exports = {
     DeleteClassRequest: DeleteClassRequest,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     ReviewTemplate: ReviewTemplate,
+    CreateRebuildMediaTemplateRequest: CreateRebuildMediaTemplateRequest,
     ImageOperation: ImageOperation,
     MediaSubStreamInfoItem: MediaSubStreamInfoItem,
     DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
@@ -38237,7 +39319,7 @@ module.exports = {
     SearchMediaRequest: SearchMediaRequest,
     DynamicRangeInfo: DynamicRangeInfo,
     CreateSampleSnapshotTemplateRequest: CreateSampleSnapshotTemplateRequest,
-    MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
+    DescribeRebuildMediaTemplatesResponse: DescribeRebuildMediaTemplatesResponse,
     AudioVolumeParam: AudioVolumeParam,
     AiReviewTaskPornAsrResult: AiReviewTaskPornAsrResult,
     ModifyClassResponse: ModifyClassResponse,
@@ -38266,6 +39348,7 @@ module.exports = {
     DescribeImageProcessingTemplatesResponse: DescribeImageProcessingTemplatesResponse,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     ReviewImageRequest: ReviewImageRequest,
+    RebuildVideoInfo: RebuildVideoInfo,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
@@ -38278,6 +39361,7 @@ module.exports = {
     DescribeStorageDetailsRequest: DescribeStorageDetailsRequest,
     MediaTrack: MediaTrack,
     StorageStatData: StorageStatData,
+    TranscodeTask2017: TranscodeTask2017,
     DescribeFileAttributesRequest: DescribeFileAttributesRequest,
     MediaOutputInfo: MediaOutputInfo,
     EditMediaTaskOutput: EditMediaTaskOutput,

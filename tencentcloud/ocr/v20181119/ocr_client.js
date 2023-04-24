@@ -16,25 +16,36 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DetectedWords = models.DetectedWords;
+const TextDetectionResult = models.TextDetectionResult;
+const HKIDCardOCRRequest = models.HKIDCardOCRRequest;
+const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
+const TextTable = models.TextTable;
+const RecognizePhilippinesDrivingLicenseOCRRequest = models.RecognizePhilippinesDrivingLicenseOCRRequest;
+const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
-const DetectedWords = models.DetectedWords;
-const TextTable = models.TextTable;
+const RecognizePhilippinesDrivingLicenseOCRResponse = models.RecognizePhilippinesDrivingLicenseOCRResponse;
+const BankCardOCRRequest = models.BankCardOCRRequest;
+const RecognizePhilippinesSssIDOCRRequest = models.RecognizePhilippinesSssIDOCRRequest;
+const TextDetection = models.TextDetection;
+const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
+const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
-const TableOCRRequest = models.TableOCRRequest;
 const TableOCRResponse = models.TableOCRResponse;
 const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
-const BankCardOCRRequest = models.BankCardOCRRequest;
 const Coord = models.Coord;
-const HKIDCardOCRRequest = models.HKIDCardOCRRequest;
+const RecognizePhilippinesSssIDOCRResponse = models.RecognizePhilippinesSssIDOCRResponse;
+const RecognizeIndonesiaIDCardOCRRequest = models.RecognizeIndonesiaIDCardOCRRequest;
+const RecognizeIndonesiaIDCardOCRResponse = models.RecognizeIndonesiaIDCardOCRResponse;
+const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
+const RecognizePhilippinesTinIDOCRRequest = models.RecognizePhilippinesTinIDOCRRequest;
+const RecognizePhilippinesVoteIDOCRRequest = models.RecognizePhilippinesVoteIDOCRRequest;
+const TableOCRRequest = models.TableOCRRequest;
+const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
 const BankCardOCRResponse = models.BankCardOCRResponse;
 const ItemCoord = models.ItemCoord;
-const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
-const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
-const TextDetection = models.TextDetection;
-const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
-const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
-const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
+const RecognizePhilippinesTinIDOCRResponse = models.RecognizePhilippinesTinIDOCRResponse;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 
 
@@ -49,6 +60,17 @@ class OcrClient extends AbstractClient {
     }
     
     /**
+     * This API is used to recognize a Philippine driver's license.
+     * @param {RecognizePhilippinesDrivingLicenseOCRRequest} req
+     * @param {function(string, RecognizePhilippinesDrivingLicenseOCRResponse):void} cb
+     * @public
+     */
+    RecognizePhilippinesDrivingLicenseOCR(req, cb) {
+        let resp = new RecognizePhilippinesDrivingLicenseOCRResponse();
+        this.request("RecognizePhilippinesDrivingLicenseOCR", req, resp, cb);
+    }
+
+    /**
      * This API is used to detect and recognize key fields such as the card number, bank information, and expiration date on mainstream bank cards in Mainland China.
 
 This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
@@ -59,6 +81,17 @@ This API is not fully available for the time being. For more information, please
     BankCardOCR(req, cb) {
         let resp = new BankCardOCRResponse();
         this.request("BankCardOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize a Philippine SSSID/UMID card.
+     * @param {RecognizePhilippinesSssIDOCRRequest} req
+     * @param {function(string, RecognizePhilippinesSssIDOCRResponse):void} cb
+     * @public
+     */
+    RecognizePhilippinesSssIDOCR(req, cb) {
+        let resp = new RecognizePhilippinesSssIDOCRResponse();
+        this.request("RecognizePhilippinesSssIDOCR", req, resp, cb);
     }
 
     /**
@@ -133,6 +166,43 @@ This API is not fully available for the time being. For more information, please
     HKIDCardOCR(req, cb) {
         let resp = new HKIDCardOCRResponse();
         this.request("HKIDCardOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize an Indonesian identity card.
+
+The API request rate is limited to 20 requests/sec by default.
+     * @param {RecognizeIndonesiaIDCardOCRRequest} req
+     * @param {function(string, RecognizeIndonesiaIDCardOCRResponse):void} cb
+     * @public
+     */
+    RecognizeIndonesiaIDCardOCR(req, cb) {
+        let resp = new RecognizeIndonesiaIDCardOCRResponse();
+        this.request("RecognizeIndonesiaIDCardOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize a Philippine voters ID card. It can recognize fields such as first name, family name, date of birth, civil status, citizenship, address, precinct, and voter's identification number (VIN).
+
+The API request rate is limited to 20 requests/sec by default.
+     * @param {RecognizePhilippinesVoteIDOCRRequest} req
+     * @param {function(string, RecognizePhilippinesVoteIDOCRResponse):void} cb
+     * @public
+     */
+    RecognizePhilippinesVoteIDOCR(req, cb) {
+        let resp = new RecognizePhilippinesVoteIDOCRResponse();
+        this.request("RecognizePhilippinesVoteIDOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize a Philippine TIN ID card.
+     * @param {RecognizePhilippinesTinIDOCRRequest} req
+     * @param {function(string, RecognizePhilippinesTinIDOCRResponse):void} cb
+     * @public
+     */
+    RecognizePhilippinesTinIDOCR(req, cb) {
+        let resp = new RecognizePhilippinesTinIDOCRResponse();
+        this.request("RecognizePhilippinesTinIDOCR", req, resp, cb);
     }
 
     /**

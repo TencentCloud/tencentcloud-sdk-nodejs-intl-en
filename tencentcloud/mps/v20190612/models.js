@@ -375,6 +375,13 @@ class OverrideTranscodeParameter extends  AbstractModel {
          */
         this.SubtitleTemplate = null;
 
+        /**
+         * The information of the external audio track to add.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<MediaInputInfo> || null}
+         */
+        this.AddonAudioStream = null;
+
     }
 
     /**
@@ -410,6 +417,15 @@ class OverrideTranscodeParameter extends  AbstractModel {
             let obj = new SubtitleTemplate();
             obj.deserialize(params.SubtitleTemplate)
             this.SubtitleTemplate = obj;
+        }
+
+        if (params.AddonAudioStream) {
+            this.AddonAudioStream = new Array();
+            for (let z in params.AddonAudioStream) {
+                let obj = new MediaInputInfo();
+                obj.deserialize(params.AddonAudioStream[z]);
+                this.AddonAudioStream.push(obj);
+            }
         }
 
     }
@@ -796,6 +812,70 @@ class ProcessLiveStreamResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The information of intelligently generated highlight segments.
+ * @class
+ */
+class MediaAiAnalysisHighlightItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The URL of the highlight segments.
+         * @type {string || null}
+         */
+        this.HighlightPath = null;
+
+        /**
+         * The URL of the thumbnail.
+         * @type {string || null}
+         */
+        this.CovImgPath = null;
+
+        /**
+         * The confidence score. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The duration of the highlights.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * A list of the highlight segments.
+         * @type {Array.<HighlightSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HighlightPath = 'HighlightPath' in params ? params.HighlightPath : null;
+        this.CovImgPath = 'CovImgPath' in params ? params.CovImgPath : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new HighlightSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
 
     }
 }
@@ -1791,7 +1871,8 @@ class CreateWorkflowRequest extends  AbstractModel {
         this.OutputStorage = null;
 
         /**
-         * The directory to save the media processing output file, such as `/movie/201907/`. If this parameter is left empty, the output file will be saved to the same directory where the source file is located.
+         * The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
+If you do not specify this, the file will be saved to the trigger directory.
          * @type {string || null}
          */
         this.OutputDir = null;
@@ -2798,7 +2879,7 @@ Note: You need to pass in the full list of subtasks even if you want to change o
         this.OutputStorage = null;
 
         /**
-         * The directory to save the output file.
+         * The directory to save the media processing output file, which must start and end with `/`.
 Note: If this parameter is left empty, the current `OutputDir` value will be invalidated.
          * @type {string || null}
          */
@@ -3821,6 +3902,73 @@ class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
 }
 
 /**
+ * The result of an intelligent highlight generation task.
+ * @class
+ */
+class AiAnalysisTaskHighlightResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task status. Valid values: `PROCESSING`, `SUCCESS`, `FAIL`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. `0`: The task succeeded; other values: The task failed.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The input of the intelligent highlight generation task.
+         * @type {AiAnalysisTaskHighlightInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * The output of the intelligent highlight generation task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskHighlightOutput || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiAnalysisTaskHighlightInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiAnalysisTaskHighlightOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
  * DeleteAIAnalysisTemplate response structure.
  * @class
  */
@@ -3986,6 +4134,65 @@ class DeleteWorkflowResponse extends  AbstractModel {
 }
 
 /**
+ * The issues detected by quality control.
+ * @class
+ */
+class QualityControlResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The issue type. Valid values:
+`Jitter`
+`Blur`
+`LowLighting`
+`HighLighting` (overexposure)
+`CrashScreen` (video corruption)
+`BlackWhiteEdge`
+`SolidColorScreen` (blank screen)
+`Noise`
+`Mosaic` (pixelation)
+`QRCode`
+`AppletCode` (Weixin Mini Program code)
+`BarCode`
+`LowVoice`
+`HighVoice`
+`NoVoice`
+`LowEvaluation` (low no-reference video quality score)
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The information of a checked segment in quality control.
+         * @type {Array.<QualityControlItem> || null}
+         */
+        this.QualityControlItems = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.QualityControlItems) {
+            this.QualityControlItems = new Array();
+            for (let z in params.QualityControlItems) {
+                let obj = new QualityControlItem();
+                obj.deserialize(params.QualityControlItems[z]);
+                this.QualityControlItems.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Input parameter type of a porn information detection task during content audit
  * @class
  */
@@ -4080,6 +4287,18 @@ class ScheduleTask extends  AbstractModel {
         this.Status = null;
 
         /**
+         * If the value returned is not 0, there was a source error. If 0 is returned, refer to the error codes of the corresponding task type.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * If there was a source error, this parameter is the error message. For other errors, refer to the error messages of the corresponding task type.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
          * The information of the file processed.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {MediaInputInfo || null}
@@ -4111,6 +4330,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
         if (params.InputInfo) {
             let obj = new MediaInputInfo();
@@ -6053,7 +6274,8 @@ class CreateScheduleRequest extends  AbstractModel {
         this.OutputStorage = null;
 
         /**
-         * The directory to save the output file, such as `/movie/201907/`. If you do not specify this parameter, the directory of the source file will be used.
+         * The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
+If you do not specify this, the file will be saved to the trigger directory.
          * @type {string || null}
          */
         this.OutputDir = null;
@@ -6743,6 +6965,43 @@ class EditMediaOutputConfig extends  AbstractModel {
         }
         this.Container = 'Container' in params ? params.Container : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * The parameters for a video quality control task.
+ * @class
+ */
+class AiQualityControlTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the quality control template.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * The channel extension parameter, which is a serialized JSON string.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ChannelExtPara = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ChannelExtPara = 'ChannelExtPara' in params ? params.ChannelExtPara : null;
 
     }
 }
@@ -8851,6 +9110,54 @@ class AiAnalysisTaskTagOutput extends  AbstractModel {
 }
 
 /**
+ * The output of an intelligent highlight generation task.
+ * @class
+ */
+class AiAnalysisTaskHighlightOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * A list of the highlight segments generated.
+         * @type {Array.<MediaAiAnalysisHighlightItem> || null}
+         */
+        this.HighlightSet = null;
+
+        /**
+         * The storage location of the highlight segments.
+         * @type {TaskOutputStorage || null}
+         */
+        this.OutputStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.HighlightSet) {
+            this.HighlightSet = new Array();
+            for (let z in params.HighlightSet) {
+                let obj = new MediaAiAnalysisHighlightItem();
+                obj.deserialize(params.HighlightSet[z]);
+                this.HighlightSet.push(obj);
+            }
+        }
+
+        if (params.OutputStorage) {
+            let obj = new TaskOutputStorage();
+            obj.deserialize(params.OutputStorage)
+            this.OutputStorage = obj;
+        }
+
+    }
+}
+
+/**
  * ProcessMedia request structure.
  * @class
  */
@@ -8871,10 +9178,23 @@ class ProcessMediaRequest extends  AbstractModel {
         this.OutputStorage = null;
 
         /**
-         * The directory to save the media processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be saved to the directory in `InputInfo`.
+         * The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
+If you do not specify this parameter, the file will be saved to the directory specified in `InputInfo`.
          * @type {string || null}
          */
         this.OutputDir = null;
+
+        /**
+         * The scheme ID.
+Note 1: About `OutputStorage` and `OutputDir`
+<li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
+<li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
+Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
+
+Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+         * @type {number || null}
+         */
+        this.ScheduleId = null;
 
         /**
          * The media processing parameters to use.
@@ -8901,6 +9221,12 @@ class ProcessMediaRequest extends  AbstractModel {
         this.AiRecognitionTask = null;
 
         /**
+         * The parameters of a quality control task.
+         * @type {AiQualityControlTaskInput || null}
+         */
+        this.AiQualityControlTask = null;
+
+        /**
          * Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
          * @type {TaskNotifyConfig || null}
          */
@@ -8923,18 +9249,6 @@ class ProcessMediaRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.SessionContext = null;
-
-        /**
-         * The scheme ID.
-Note 1: About `OutputStorage` and `OutputDir`
-<li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
-<li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
-Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
-
-Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
-         * @type {number || null}
-         */
-        this.ScheduleId = null;
 
         /**
          * The task type.
@@ -8966,6 +9280,7 @@ Note 3: The trigger configured for a scheme is for automatically starting a sche
             this.OutputStorage = obj;
         }
         this.OutputDir = 'OutputDir' in params ? params.OutputDir : null;
+        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
 
         if (params.MediaProcessTask) {
             let obj = new MediaProcessTaskInput();
@@ -8991,6 +9306,12 @@ Note 3: The trigger configured for a scheme is for automatically starting a sche
             this.AiRecognitionTask = obj;
         }
 
+        if (params.AiQualityControlTask) {
+            let obj = new AiQualityControlTaskInput();
+            obj.deserialize(params.AiQualityControlTask)
+            this.AiQualityControlTask = obj;
+        }
+
         if (params.TaskNotifyConfig) {
             let obj = new TaskNotifyConfig();
             obj.deserialize(params.TaskNotifyConfig)
@@ -8999,7 +9320,6 @@ Note 3: The trigger configured for a scheme is for automatically starting a sche
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
-        this.ScheduleId = 'ScheduleId' in params ? params.ScheduleId : null;
         this.TaskType = 'TaskType' in params ? params.TaskType : null;
 
     }
@@ -10812,6 +11132,80 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * The result of a quality control task.
+ * @class
+ */
+class ScheduleQualityControlTaskResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The task status. Valid values: `PROCESSING`, `SUCCESS`, `FAIL`.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * The error code. An empty string indicates the task is successful; any other value indicates the task has failed. For details, see [Error Codes](https://www.tencentcloud.com/document/product/1041/40249).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * The error code. `0` indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * The error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The input of the quality control task.
+         * @type {AiQualityControlTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * The output of the quality control task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {QualityControlData || null}
+         */
+        this.Output = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiQualityControlTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new QualityControlData();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+    }
+}
+
+/**
  * The parameters for detecting sensitive information.
  * @class
  */
@@ -11617,6 +12011,13 @@ class AiAnalysisResult extends  AbstractModel {
          */
         this.FrameTagTask = null;
 
+        /**
+         * The result of a highlight generation task. This parameter is valid if `Type` is `Highlight`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskHighlightResult || null}
+         */
+        this.HighlightTask = null;
+
     }
 
     /**
@@ -11650,6 +12051,12 @@ class AiAnalysisResult extends  AbstractModel {
             let obj = new AiAnalysisTaskFrameTagResult();
             obj.deserialize(params.FrameTagTask)
             this.FrameTagTask = obj;
+        }
+
+        if (params.HighlightTask) {
+            let obj = new AiAnalysisTaskHighlightResult();
+            obj.deserialize(params.HighlightTask)
+            this.HighlightTask = obj;
         }
 
     }
@@ -12800,6 +13207,57 @@ class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
 }
 
 /**
+ * The information of a checked segment in quality control.
+ * @class
+ */
+class QualityControlItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The confidence score. Value range: 0-100.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The start timestamp (second) of the segment.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * The end timestamp (second) of the segment.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * The coordinates (px) of the top left and bottom right corner.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+
+    }
+}
+
+/**
  * ASR-based full live stream recognition
  * @class
  */
@@ -12932,6 +13390,34 @@ class CreateSampleSnapshotTemplateResponse extends  AbstractModel {
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The input of an intelligent highlight generation task.
+ * @class
+ */
+class AiAnalysisTaskHighlightInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the intelligent highlight generation template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
 
     }
 }
@@ -16107,18 +16593,21 @@ class Activity extends  AbstractModel {
 <li>`action-image-sprite`: Image sprite generation.</li>
 <li>`action-snapshotByTimeOffset`: Time point screencapturing.</li>
 <li>`action-adaptive-substream`: Adaptive bitrate streaming.</li>
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ActivityType = null;
 
         /**
          * The indexes of the subsequent actions.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<number> || null}
          */
         this.ReardriveIndex = null;
 
         /**
          * The parameters of a subtask.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {ActivityPara || null}
          */
         this.ActivityPara = null;
@@ -18168,11 +18657,11 @@ class LiveStreamAiReviewResultItem extends  AbstractModel {
         super();
 
         /**
-         * The type of the moderation result. Valid values:
+         * The type of moderation result. Valid values:
 <li>ImagePorn</li>
 <li>ImageTerrorism</li>
 <li>ImagePolitical</li>
-<li>PornVoice (pornographic content in speech)</li>
+<li>VoicePorn</li>
          * @type {string || null}
          */
         this.Type = null;
@@ -18196,7 +18685,7 @@ class LiveStreamAiReviewResultItem extends  AbstractModel {
         this.ImagePoliticalResultSet = null;
 
         /**
-         * Result of porn information detection in speech, which is valid when `Type` is `PornVoice`.
+         * The result for moderation of pornographic content in audio. This parameter is valid if `Type` is `VoicePorn`.
          * @type {Array.<LiveStreamAiReviewVoicePornResult> || null}
          */
         this.VoicePornResultSet = null;
@@ -18997,10 +19486,19 @@ class DescribeSchedulesRequest extends  AbstractModel {
         this.ScheduleIds = null;
 
         /**
+         * The trigger type. Valid values:
+<li>`CosFileUpload`: The scheme is triggered when a file is uploaded to Tencent Cloud Object Storage (COS).</li>
+<li>`AwsS3FileUpload`: The scheme is triggered when a file is uploaded to AWS S3.</li>
+If you do not specify this parameter or leave it empty, all schemes will be returned regardless of the trigger type.
+         * @type {string || null}
+         */
+        this.TriggerType = null;
+
+        /**
          * The scheme status. Valid values:
 <li>`Enabled`</li>
 <li>`Disabled`</li>
-If you do not specify this parameter, schemes in both statuses will be returned.
+If you do not specify this parameter, all schemes will be returned regardless of the status.
          * @type {string || null}
          */
         this.Status = null;
@@ -19027,6 +19525,7 @@ If you do not specify this parameter, schemes in both statuses will be returned.
             return;
         }
         this.ScheduleIds = 'ScheduleIds' in params ? params.ScheduleIds : null;
+        this.TriggerType = 'TriggerType' in params ? params.TriggerType : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
@@ -19604,6 +20103,67 @@ class LiveStreamProcessTask extends  AbstractModel {
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
         this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * The quality check output.
+ * @class
+ */
+class QualityControlData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether there is an audio track. `true` indicates that there isn't.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.NoAudio = null;
+
+        /**
+         * Whether there is a video track. `true` indicates that there isn't.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.NoVideo = null;
+
+        /**
+         * The no-reference video quality score. Value range: 0-100.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.QualityEvaluationScore = null;
+
+        /**
+         * The issues detected by quality control.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<QualityControlResult> || null}
+         */
+        this.QualityControlResultSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NoAudio = 'NoAudio' in params ? params.NoAudio : null;
+        this.NoVideo = 'NoVideo' in params ? params.NoVideo : null;
+        this.QualityEvaluationScore = 'QualityEvaluationScore' in params ? params.QualityEvaluationScore : null;
+
+        if (params.QualityControlResultSet) {
+            this.QualityControlResultSet = new Array();
+            for (let z in params.QualityControlResultSet) {
+                let obj = new QualityControlResult();
+                obj.deserialize(params.QualityControlResultSet[z]);
+                this.QualityControlResultSet.push(obj);
+            }
+        }
 
     }
 }
@@ -21253,6 +21813,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.AiRecognitionResultSet = null;
 
+        /**
+         * The execution status and result of a quality control task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ScheduleQualityControlTaskResult || null}
+         */
+        this.AiQualityControlTaskResult = null;
+
     }
 
     /**
@@ -21313,6 +21880,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 obj.deserialize(params.AiRecognitionResultSet[z]);
                 this.AiRecognitionResultSet.push(obj);
             }
+        }
+
+        if (params.AiQualityControlTaskResult) {
+            let obj = new ScheduleQualityControlTaskResult();
+            obj.deserialize(params.AiQualityControlTaskResult)
+            this.AiQualityControlTaskResult = obj;
         }
 
     }
@@ -22903,6 +23476,48 @@ class EditMediaTaskOutput extends  AbstractModel {
 }
 
 /**
+ * The information of a highlight segment.
+ * @class
+ */
+class HighlightSegmentItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The confidence score.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * The start time offset of the segment.
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * The end time offset of the segment.
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+
+    }
+}
+
+/**
  * DeleteWatermarkTemplate response structure.
  * @class
  */
@@ -23342,6 +23957,7 @@ module.exports = {
     WorkflowInfo: WorkflowInfo,
     CreateTranscodeTemplateRequest: CreateTranscodeTemplateRequest,
     ProcessLiveStreamResponse: ProcessLiveStreamResponse,
+    MediaAiAnalysisHighlightItem: MediaAiAnalysisHighlightItem,
     DescribeAnimatedGraphicsTemplatesRequest: DescribeAnimatedGraphicsTemplatesRequest,
     AiReviewTaskProhibitedAsrResult: AiReviewTaskProhibitedAsrResult,
     AdaptiveDynamicStreamingTemplate: AdaptiveDynamicStreamingTemplate,
@@ -23390,11 +24006,13 @@ module.exports = {
     CreateAdaptiveDynamicStreamingTemplateRequest: CreateAdaptiveDynamicStreamingTemplateRequest,
     TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
     AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
+    AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
     DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
     AiReviewTerrorismOcrTaskInput: AiReviewTerrorismOcrTaskInput,
     AiRecognitionTaskOcrWordsResultInput: AiRecognitionTaskOcrWordsResultInput,
     DeleteWorkflowResponse: DeleteWorkflowResponse,
+    QualityControlResult: QualityControlResult,
     AiReviewPornTaskInput: AiReviewPornTaskInput,
     HdrConfig: HdrConfig,
     ScheduleTask: ScheduleTask,
@@ -23451,6 +24069,7 @@ module.exports = {
     DeleteAdaptiveDynamicStreamingTemplateRequest: DeleteAdaptiveDynamicStreamingTemplateRequest,
     AiRecognitionTaskOcrFullTextSegmentItem: AiRecognitionTaskOcrFullTextSegmentItem,
     EditMediaOutputConfig: EditMediaOutputConfig,
+    AiQualityControlTaskInput: AiQualityControlTaskInput,
     AiReviewPornAsrTaskOutput: AiReviewPornAsrTaskOutput,
     DeleteAIAnalysisTemplateRequest: DeleteAIAnalysisTemplateRequest,
     EditMediaRequest: EditMediaRequest,
@@ -23488,6 +24107,7 @@ module.exports = {
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
+    AiAnalysisTaskHighlightOutput: AiAnalysisTaskHighlightOutput,
     ProcessMediaRequest: ProcessMediaRequest,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
@@ -23521,6 +24141,7 @@ module.exports = {
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     ScheduleAnalysisTaskResult: ScheduleAnalysisTaskResult,
+    ScheduleQualityControlTaskResult: ScheduleQualityControlTaskResult,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
     EnableScheduleResponse: EnableScheduleResponse,
     DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
@@ -23558,9 +24179,11 @@ module.exports = {
     AiAnalysisTaskInput: AiAnalysisTaskInput,
     ImageSpriteTemplate: ImageSpriteTemplate,
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
+    QualityControlItem: QualityControlItem,
     LiveStreamAsrFullTextRecognitionResult: LiveStreamAsrFullTextRecognitionResult,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
     CreateSampleSnapshotTemplateResponse: CreateSampleSnapshotTemplateResponse,
+    AiAnalysisTaskHighlightInput: AiAnalysisTaskHighlightInput,
     ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
     AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
@@ -23671,6 +24294,7 @@ module.exports = {
     DescribeWordSamplesRequest: DescribeWordSamplesRequest,
     AwsSQS: AwsSQS,
     LiveStreamProcessTask: LiveStreamProcessTask,
+    QualityControlData: QualityControlData,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
     ModifyWordSampleResponse: ModifyWordSampleResponse,
@@ -23723,6 +24347,7 @@ module.exports = {
     AiAnalysisTaskCoverInput: AiAnalysisTaskCoverInput,
     AiRecognitionTaskTransTextResult: AiRecognitionTaskTransTextResult,
     EditMediaTaskOutput: EditMediaTaskOutput,
+    HighlightSegmentItem: HighlightSegmentItem,
     DeleteWatermarkTemplateResponse: DeleteWatermarkTemplateResponse,
     LowLightEnhanceConfig: LowLightEnhanceConfig,
     DescribeMediaMetaDataRequest: DescribeMediaMetaDataRequest,

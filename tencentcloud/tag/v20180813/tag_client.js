@@ -28,7 +28,7 @@ const DeleteResourceTagResponse = models.DeleteResourceTagResponse;
 const DescribeResourceTagsByTagKeysRequest = models.DescribeResourceTagsByTagKeysRequest;
 const ModifyResourceTagsResponse = models.ModifyResourceTagsResponse;
 const DescribeTagsRequest = models.DescribeTagsRequest;
-const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
+const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
 const DescribeResourcesByTagsUnionRequest = models.DescribeResourcesByTagsUnionRequest;
 const DeleteTagsResponse = models.DeleteTagsResponse;
@@ -36,7 +36,7 @@ const ModifyResourcesTagValueResponse = models.ModifyResourcesTagValueResponse;
 const DescribeTagsResponse = models.DescribeTagsResponse;
 const DeleteTagsRequest = models.DeleteTagsRequest;
 const DescribeTagKeysRequest = models.DescribeTagKeysRequest;
-const GetTagsRequest = models.GetTagsRequest;
+const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const UnTagResourcesRequest = models.UnTagResourcesRequest;
 const DescribeTagsSeqResponse = models.DescribeTagsSeqResponse;
 const ModifyResourceTagsRequest = models.ModifyResourceTagsRequest;
@@ -56,7 +56,9 @@ const CreateTagRequest = models.CreateTagRequest;
 const DescribeResourceTagsByTagKeysResponse = models.DescribeResourceTagsByTagKeysResponse;
 const DescribeTagsSeqRequest = models.DescribeTagsSeqRequest;
 const DescribeTagValuesResponse = models.DescribeTagValuesResponse;
+const ResourceIdTag = models.ResourceIdTag;
 const TagFilter = models.TagFilter;
+const Project = models.Project;
 const Tag = models.Tag;
 const AttachResourcesTagRequest = models.AttachResourcesTagRequest;
 const CreateTagResponse = models.CreateTagResponse;
@@ -66,12 +68,13 @@ const DetachResourcesTagResponse = models.DetachResourcesTagResponse;
 const GetResourcesResponse = models.GetResourcesResponse;
 const DescribeResourceTagsByResourceIdsSeqResponse = models.DescribeResourceTagsByResourceIdsSeqResponse;
 const DeleteTagResponse = models.DeleteTagResponse;
-const ResourceIdTag = models.ResourceIdTag;
+const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
 const DescribeTagValuesSeqRequest = models.DescribeTagValuesSeqRequest;
 const UpdateResourceTagValueRequest = models.UpdateResourceTagValueRequest;
 const TagResourcesResponse = models.TagResourcesResponse;
 const CreateTagsRequest = models.CreateTagsRequest;
 const CreateTagsResponse = models.CreateTagsResponse;
+const GetTagsRequest = models.GetTagsRequest;
 const DescribeResourcesByTagsRequest = models.DescribeResourcesByTagsRequest;
 const TagResourcesRequest = models.TagResourcesRequest;
 const DeleteResourceTagRequest = models.DeleteResourceTagRequest;
@@ -94,7 +97,7 @@ class TagClient extends AbstractClient {
     }
     
     /**
-     * This API is used to delete multiple tag key-value pairs.
+     * This API is used to delete tag keys and tag values in batches.
      * @param {DeleteTagsRequest} req
      * @param {function(string, DeleteTagsResponse):void} cb
      * @public
@@ -335,6 +338,17 @@ class TagClient extends AbstractClient {
     DescribeTags(req, cb) {
         let resp = new DescribeTagsResponse();
         this.request("DescribeTags", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get project lists.
+     * @param {DescribeProjectsRequest} req
+     * @param {function(string, DescribeProjectsResponse):void} cb
+     * @public
+     */
+    DescribeProjects(req, cb) {
+        let resp = new DescribeProjectsResponse();
+        this.request("DescribeProjects", req, resp, cb);
     }
 
     /**

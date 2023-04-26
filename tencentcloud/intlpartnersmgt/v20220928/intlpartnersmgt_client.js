@@ -20,36 +20,46 @@ const QueryPartnerCreditResponse = models.QueryPartnerCreditResponse;
 const QueryVoucherListByUinRequest = models.QueryVoucherListByUinRequest;
 const QueryVoucherAmountByUinResponse = models.QueryVoucherAmountByUinResponse;
 const QueryVoucherAmountByUinItem = models.QueryVoucherAmountByUinItem;
-const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
+const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
+const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const QueryVoucherListByUinItem = models.QueryVoucherListByUinItem;
+const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
 const QueryPartnerCreditRequest = models.QueryPartnerCreditRequest;
 const AllocateCustomerCreditRequest = models.AllocateCustomerCreditRequest;
+const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const DescribeCustomerBillSummaryResponse = models.DescribeCustomerBillSummaryResponse;
 const QueryCustomersCreditRequest = models.QueryCustomersCreditRequest;
 const QueryCreditByUinListRequest = models.QueryCreditByUinListRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
-const GetCountryCodesRequest = models.GetCountryCodesRequest;
+const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
+const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
 const QueryCreditByUinListResponse = models.QueryCreditByUinListResponse;
+const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
+const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const QueryVoucherPoolResponse = models.QueryVoucherPoolResponse;
 const DescribeCustomerBillDetailRequest = models.DescribeCustomerBillDetailRequest;
 const DescribeCustomerBillDetailResponse = models.DescribeCustomerBillDetailResponse;
 const QueryCreditAllocationHistoryResponse = models.QueryCreditAllocationHistoryResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
+const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
+const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const GetCountryCodesResponse = models.GetCountryCodesResponse;
 const QueryDirectCustomersCreditRequest = models.QueryDirectCustomersCreditRequest;
 const AllocateCustomerCreditResponse = models.AllocateCustomerCreditResponse;
 const QueryVoucherListByUinVoucherItem = models.QueryVoucherListByUinVoucherItem;
 const QueryVoucherAmountByUinRequest = models.QueryVoucherAmountByUinRequest;
-const QueryCreditAllocationHistoryData = models.QueryCreditAllocationHistoryData;
-const QueryCreditAllocationHistoryRequest = models.QueryCreditAllocationHistoryRequest;
+const QueryDirectCustomersCreditData = models.QueryDirectCustomersCreditData;
+const GetCountryCodesRequest = models.GetCountryCodesRequest;
 const CountryCodeItem = models.CountryCodeItem;
 const BillDetailData = models.BillDetailData;
+const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
 const QueryDirectCustomersCreditResponse = models.QueryDirectCustomersCreditResponse;
 const QueryVoucherListByUinResponse = models.QueryVoucherListByUinResponse;
 const QueryVoucherPoolRequest = models.QueryVoucherPoolRequest;
-const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
-const QueryCustomersCreditData = models.QueryCustomersCreditData;
 const QueryCustomersCreditResponse = models.QueryCustomersCreditResponse;
+const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
+const QueryCustomersCreditData = models.QueryCustomersCreditData;
+const DescribeCustomerBillSummaryRequest = models.DescribeCustomerBillSummaryRequest;
 
 
 /**
@@ -148,6 +158,17 @@ Notes:<br>
     }
 
     /**
+     * This API is used to obtain the total amount of customer bills by payment mode.
+     * @param {DescribeBillSummaryByPayModeRequest} req
+     * @param {function(string, DescribeBillSummaryByPayModeResponse):void} cb
+     * @public
+     */
+    DescribeBillSummaryByPayMode(req, cb) {
+        let resp = new DescribeBillSummaryByPayModeResponse();
+        this.request("DescribeBillSummaryByPayMode", req, resp, cb);
+    }
+
+    /**
      * This API is used to obtain country/region codes.
      * @param {GetCountryCodesRequest} req
      * @param {function(string, GetCountryCodesResponse):void} cb
@@ -159,6 +180,17 @@ Notes:<br>
     }
 
     /**
+     * This API is used for a partner to the credits and basic information of cutomers.
+     * @param {QueryCustomersCreditRequest} req
+     * @param {function(string, QueryCustomersCreditResponse):void} cb
+     * @public
+     */
+    QueryCustomersCredit(req, cb) {
+        let resp = new QueryCustomersCreditResponse();
+        this.request("QueryCustomersCredit", req, resp, cb);
+    }
+
+    /**
      * This API is used to query all the credit allocation records of a single customer.
      * @param {QueryCreditAllocationHistoryRequest} req
      * @param {function(string, QueryCreditAllocationHistoryResponse):void} cb
@@ -167,6 +199,17 @@ Notes:<br>
     QueryCreditAllocationHistory(req, cb) {
         let resp = new QueryCreditAllocationHistoryResponse();
         this.request("QueryCreditAllocationHistory", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the total amount of customer bills by region.
+     * @param {DescribeBillSummaryByRegionRequest} req
+     * @param {function(string, DescribeBillSummaryByRegionResponse):void} cb
+     * @public
+     */
+    DescribeBillSummaryByRegion(req, cb) {
+        let resp = new DescribeBillSummaryByRegionResponse();
+        this.request("DescribeBillSummaryByRegion", req, resp, cb);
     }
 
     /**
@@ -192,14 +235,14 @@ Notes:<br>
     }
 
     /**
-     * This API is used for a partner to the credits and basic information of cutomers.
-     * @param {QueryCustomersCreditRequest} req
-     * @param {function(string, QueryCustomersCreditResponse):void} cb
+     * This API is used to obtain the total amount of customer bills by product.
+     * @param {DescribeBillSummaryByProductRequest} req
+     * @param {function(string, DescribeBillSummaryByProductResponse):void} cb
      * @public
      */
-    QueryCustomersCredit(req, cb) {
-        let resp = new QueryCustomersCreditResponse();
-        this.request("QueryCustomersCredit", req, resp, cb);
+    DescribeBillSummaryByProduct(req, cb) {
+        let resp = new DescribeBillSummaryByProductResponse();
+        this.request("DescribeBillSummaryByProduct", req, resp, cb);
     }
 
     /**

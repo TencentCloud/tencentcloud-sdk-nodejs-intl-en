@@ -1786,6 +1786,8 @@ If you need to call a large number of APIs to pull metrics or objects at a time,
     /**
      * 对应的功能控制台及后端服务已于2年前下线，剩余该API接口未下线。
 
+This API is not deprecated, but its related console features and backend services were deactivated two years ago.
+
 The default API request rate limit is 50 requests/sec.
 The default upper limit on metrics of a single tenant is 100.
 A maximum of 30 metric/value pairs can be reported at a time. When an error is returned for a request, no metrics/values in the request will be saved.
@@ -1983,7 +1985,7 @@ The data of the same IP metric/value pair must be reported by minute in chronolo
     }
 
     /**
-     * This API is used to get the list of CM-integrated instances.
+     * This API is used to obtain the list of Tencent Managed Service for Prometheus (TMP) instances and the clusters associated with them.
      * @param {DescribePrometheusInstancesOverviewRequest} req
      * @param {function(string, DescribePrometheusInstancesOverviewResponse):void} cb
      * @public

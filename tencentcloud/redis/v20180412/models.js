@@ -531,26 +531,30 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture), `15` (Redis 6.0 Memory Edition in standard architecture), `16` (Redis 6.0 Memory Edition in cluster architecture)
+         * Instance type
+<ul><li>`2`: Redis 2.8 Memory Edition (Standard Architecture). </li><li>`3`: CKV 3.2 Memory Edition (Standard Architecture). </li><li>`4`: CKV 3.2 Memory Edition (Cluster Architecture). </li><li>`6`: Redis 4.0 Memory Edition (Standard Architecture). </li><li>`7`: Redis 4.0 Memory Edition (Cluster Architecture). </li><li>`8`: Redis 5.0 Memory Edition (Standard Architecture). </li><li>`9`: Redis 5.0 Memory Edition (Cluster Architecture). </li><li>`15`: Redis 6.2 Memory Edition (Standard Architecture). </li><li>`16`: Redis 6.2 Memory Edition (Cluster Architecture).</li></ul>
          * @type {number || null}
          */
         this.TypeId = null;
 
         /**
-         * Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
-If `TypeId` is the standard architecture, `MemSize` indicates the total memory capacity of the instance; if `TypeId` is the cluster architecture, `MemSize` indicates the memory capacity per shard.
+         * Memory capacity in MB, which must be an integer multiple of 1024. For specific specifications, query the sales specifications in all regions through the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
+- When **TypeId** is a standard architecture, **MemSize** is the total memory capacity of the instance;
+- When **TypeId** is a cluster architecture, **MemSize** is the single-shard memory capacity.
          * @type {number || null}
          */
         this.MemSize = null;
 
         /**
-         * Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
+         * The number of instances for each purchase. For details, query the sales specifications in all regions through the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * Length of purchase in months, which is required when creating a monthly subscribed instance. Valid values: [1,2,3,4,5,6,7,8,9,10,11,12,24,36]. For pay-as-you-go instances, set the parameter to `1`.
+         * The purchase duration of an instance
+- If `BillingMode` is `1`, that is, when the billing mode is monthly subscription, you need to set this parameter to specify the duration of the purchased instance. Unit: month. Value range: [1,2,3,4,5,6,7,8,9,10,11,12,24,36].
+- If `BillingMode` is `0`, that is, when the billing mode is pay-as-you-go, you need to set this parameter to `1`.
          * @type {number || null}
          */
         this.Period = null;
@@ -568,87 +572,101 @@ If `TypeId` is the standard architecture, `MemSize` indicates the total memory c
         this.ZoneId = null;
 
         /**
-         * Instance password. If the input parameter `NoAuth` is `true` and a VPC is used, the `Password` is optional; otherwise, it is required.
-If the instance `TypeId` is Redis 2.8, 4.0, or 5.0, the password cannot start with "/" and must contain 8–30 characters in at least two of the following character types: lowercase letters, uppercase letters, digits, and special symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/).
-If the instance `TypeId` is CKV 3.2, the password can contain 8–30 letters and digits.
+         * Instance access password
+- When the input parameter `NoAuth` is `true`, it means that the instance access is set to be password-free, and the `Password` field does not need to be configured; otherwise, `Password` is a required parameter.
+- When the instance type `TypeId` is Redis 2.8 Memory Edition (Standard Architecture), Redis 4.0, 5.0, 6.0 (regardless of architecture), the password must contains 8-30 characters in at least two of the following types: lowercase letters, uppercase letters, digits, and symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/), and it cannot start with a slash (/).
+- When the instance type **TypeId** is CKV 3.2 Memory Edition (regardless of architecture), the password contains 8-30 letters and digits and excludes other characters.
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * VPC ID such as vpc-sad23jfdfk. If this parameter is not passed in, the classic network will be selected by default. Use the VPC list querying API to query.
+         * VPC ID. If this parameter is not passed in, the classic network will be selected by default. You can query the specific VPC ID in the [VPC console](https://console.cloud.tencent.com/vpc).
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * In the classic network, `subnetId` is invalid. In a VPC subnet, the value is the subnet ID, such as subnet-fdj24n34j2.
+         * VPC subnet ID. This parameter is not required for the classic network. You can get the specific subnet ID by querying the subnet list in the [VPC console](https://console.cloud.tencent.com/vpc).
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Project ID. The value is subject to the `projectId` returned by user account > user account querying APIs > project list.
+         * Project ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * Auto-renewal flag. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
+         * Auto-renewal flag
+- `0`: Manual renewal (default).
+- `1`: Auto-renewal.
+- `2`: Not auto-renewal (set by user).
          * @type {number || null}
          */
         this.AutoRenew = null;
 
         /**
-         * Array of security group IDs.
+         * Array of security group IDs. Get the security group ID of the instance through the [DescribeInstanceSecurityGroup](https://intl.cloud.tencent.com/document/product/239/34447?from_cn_redirect=1) API.
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIdList = null;
 
         /**
-         * User-defined port. If this parameter is left empty, 6379 will be used by default. Value range: [1024,65535].
+         * User-defined network port. Default value: `6379`. Range: [1024,65535].
          * @type {number || null}
          */
         this.VPort = null;
 
         /**
-         * Number of shards in an instance. This parameter is required for Cluster Edition instances. Valid values: [3,5,8,12,16,24,32,64,96,128].
+         * Quantity of instance shards
+- This parameter is not required for instances of Standard Edition.
+- For instances of Cluster Edition, the range of shard quantity is [1, 3, 5, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 128].
          * @type {number || null}
          */
         this.RedisShardNum = null;
 
         /**
-         * Number of replicas in the instance. Redis 2.8 Standard Edition and CKV Standard Edition support 1 replica. Standard/Cluster Edition 4.0 and 5.0 support 1–5 replicas.
+         * Quantity of instance replicas
+- For Redis Memory Edition 4.0, 5.0, 6.2 (regardless of architecture), the range of replica quantity is [1,5].
+- For Redis 2.8 Standard Edition and CKV Standard Edition, the replica quantity is `1`.
          * @type {number || null}
          */
         this.RedisReplicasNum = null;
 
         /**
-         * Whether to support read-only replicas. Neither Redis 2.8 Standard Edition nor CKV Standard Edition supports read-only replicas. Read/write separation will be automatically enabled for an instance after it enables read-only replicas. Write requests will be directed to the master node and read requests will be distributed to replica nodes. To enable read-only replicas, we recommend you create two or more replicas.
+         * Whether to support read-only replicas.
+- Redis 2.8 Standard Edition and CKV Standard Edition don’t support read-only replicas.
+- If read-only replicas are enabled, read/write separation will be automatically enabled for an instance, with write requests routed to the master node and read requests to the replica node.
+- To enable read-only replicas, we recommend that you create two or more replicas.
          * @type {boolean || null}
          */
         this.ReplicasReadonly = null;
 
         /**
-         * Instance name, which can contain up to 60 letters, digits, underscores, or hyphens.
+         * Instance name, which can contain up to 60 letters, digits, hyphens, and underscores.
          * @type {string || null}
          */
         this.InstanceName = null;
 
         /**
-         * Whether to support the password-free feature. Valid values: true (password-free instance), false (password-enabled instance). Default value: false. Only instances in a VPC support the password-free access.
+         * Whether to support password-free access for an instance
+- `true`: The instance access is password-free.
+- `false`: The instance access is password-enabled. Default value: `false`. Only instances in a VPC support the password-free access.
          * @type {boolean || null}
          */
         this.NoAuth = null;
 
         /**
-         * Node information of the instance. Currently, information about the node type (master or replica) and node AZ can be passed in. This parameter is not required for single-AZ deployed instances.
+         * The node information of the instance, including node ID, type, and AZ. For more information, see [RedisNodeInfo](https://intl.cloud.tencent.com/document/product/239/20022?from_cn_redirect=1).
+Node information of an instance. Currently, information about the node type (master or replica) and node AZ can be passed in. This parameter is not required for instances deployed in a single AZ.
          * @type {Array.<RedisNodeInfo> || null}
          */
         this.NodeSet = null;
 
         /**
-         * Tag bound to the instance to be purchased
+         * The tag for an instance
          * @type {Array.<ResourceTag> || null}
          */
         this.ResourceTags = null;
@@ -660,25 +678,32 @@ If the instance `TypeId` is CKV 3.2, the password can contain 8–30 letters and
         this.ZoneName = null;
 
         /**
-         * ID of the parameter template applied to the created instance. If this parameter is left blank, the default parameter template will be applied.
+         * The parameter template ID associated with the instance
+- If this parameter is not configured, the system will automatically adapt the corresponding default template based on the selected compatible version and architecture.
+- Query the list of parameter templates of an instance to get the template ID through the [DescribeParamTemplates](https://intl.cloud.tencent.com/document/product/239/58750?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.TemplateId = null;
 
         /**
-         * false: send a normal request and create an instance directly after the check is passed (default value); true: send a check request without creating an instance.
+         * An internal parameter used to indicate whether to check when creating an instance.
+- `false`: Default value. Send a normal request and create an instance if all the requirements are met.
+- `true`: Send a check request and create no instance.
          * @type {boolean || null}
          */
         this.DryRun = null;
 
         /**
-         * Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). Default value: `local` (local disk edition)
+         * The product edition of the instance
+- `local`: Local Disk Edition.
+- `cloud`: Cloud Disk Edition.
+- `cdc`: Dedicated Cluster Edition. Default value: `local`.
          * @type {string || null}
          */
         this.ProductVersion = null;
 
         /**
-         * Dedicated cluster ID, which is required when `ProductVersion` is "cdc".
+         * Exclusive cluster ID. When `ProductVersion` is set to `cdc`, this parameter is required.
          * @type {string || null}
          */
         this.RedisClusterId = null;
@@ -1879,7 +1904,7 @@ class InstanceProxySlowlogDetail extends  AbstractModel {
         super();
 
         /**
-         * Duration of the slow query in ms.
+         * Slow query duration in milliseconds
          * @type {number || null}
          */
         this.Duration = null;
@@ -1891,13 +1916,13 @@ class InstanceProxySlowlogDetail extends  AbstractModel {
         this.Client = null;
 
         /**
-         * Command
+         * Slow query command
          * @type {string || null}
          */
         this.Command = null;
 
         /**
-         * Command line details
+         * Detailed command line information of slow query
          * @type {string || null}
          */
         this.CommandLine = null;
@@ -2208,6 +2233,62 @@ class BigKeyInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeBandwidthRange response structure.
+ * @class
+ */
+class DescribeBandwidthRangeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Standard bandwidth, which is the bandwidth allocated by the system to each node when an instance is purchased.
+         * @type {number || null}
+         */
+        this.BaseBandwidth = null;
+
+        /**
+         * The additional bandwidth of the instance. If the standard bandwidth does not meet your needs, you can increase the bandwidth on your own. <ul><li>If read-only replica is enabled, the total instance bandwidth = additional bandwidth * shard quantity + standard bandwidth * shard quantity * Max ([read-only replica quantity, 1]). The shard quantity in the standard architecture is 1. </li><li>If read-only replica is not enabled, the total instance bandwidth = additional bandwidth * shard quantity + standard bandwidth * shard quantity. The shard quantity in the standard architecture is 1.</li></ul>
+         * @type {number || null}
+         */
+        this.AddBandwidth = null;
+
+        /**
+         * The lower limit for additional bandwidth
+         * @type {number || null}
+         */
+        this.MinAddBandwidth = null;
+
+        /**
+         * The upper limit for additional bandwidth
+         * @type {number || null}
+         */
+        this.MaxAddBandwidth = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BaseBandwidth = 'BaseBandwidth' in params ? params.BaseBandwidth : null;
+        this.AddBandwidth = 'AddBandwidth' in params ? params.AddBandwidth : null;
+        this.MinAddBandwidth = 'MinAddBandwidth' in params ? params.MinAddBandwidth : null;
+        this.MaxAddBandwidth = 'MaxAddBandwidth' in params ? params.MaxAddBandwidth : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeParamTemplates request structure.
  * @class
  */
@@ -2321,6 +2402,56 @@ class UpgradeVersionToMultiAvailabilityZonesResponse extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceBackups response structure.
+ * @class
+ */
+class DescribeInstanceBackupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of backups.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Array of instance backups.
+         * @type {Array.<RedisBackupSet> || null}
+         */
+        this.BackupSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BackupSet) {
+            this.BackupSet = new Array();
+            for (let z in params.BackupSet) {
+                let obj = new RedisBackupSet();
+                obj.deserialize(params.BackupSet[z]);
+                this.BackupSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2636,7 +2767,7 @@ class ParameterDetail extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Data type of the parameter
+         * Parameter Type
          * @type {string || null}
          */
         this.ParamType = null;
@@ -2654,13 +2785,15 @@ class ParameterDetail extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Current value
+         * Current value of the parameter
          * @type {string || null}
          */
         this.CurrentValue = null;
 
         /**
-         * Whether the database needs to be restarted for the modified parameter to take effect. Valid values: 0 (no); 1 (yes).
+         * Whether to restart the database for the modified parameters to take effect
+- `0`: No restart.
+- `1`: Restart required.
          * @type {number || null}
          */
         this.NeedReboot = null;
@@ -2680,7 +2813,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Min = null;
 
         /**
-         * Enumerated values of the parameter. It is null if the parameter is non-enumerated.
+         * Enumerated values of the parameter. It is null if the parameter is non-enumerated
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
@@ -3434,13 +3567,13 @@ class RedisCommonInstanceList extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * User ID
+         * User APPID, which is the unique application ID that matches an account. Some Tencent Cloud products use this APPID.
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * Instance project ID
+         * Project ID of the instance
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -3458,25 +3591,30 @@ class RedisCommonInstanceList extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * Instance network ID
+         * Instance VPC ID
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * Subnet ID
+         * VPC subnet ID
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * Instance status. 1: task running; 2: instance running; -2: instance isolated; -3: instance being eliminated; -4: instance eliminated
+         * Instance status information
+- `1`: Task running.
+- `2`: Instance running.
+- `-2`: Instance isolated.
+- `-3`: Instance being eliminated.
+- `-4`: Instance eliminated.
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * Instance network IP
+         * Private network IP address of an instance
          * @type {Array.<string> || null}
          */
         this.Vips = null;
@@ -3494,13 +3632,17 @@ class RedisCommonInstanceList extends  AbstractModel {
         this.Createtime = null;
 
         /**
-         * Billing mode. 0: pay-as-you-go; 1: monthly subscription
+         * Billing type
+- `0`: Pay-as-you-go.
+- `1`: Monthly subscription.
          * @type {number || null}
          */
         this.PayMode = null;
 
         /**
-         * Network type. Valid values: 0 (classic network); 1 (VPC).
+         * Network Type
+- `0`: Classic network.
+- `1`: VPC.
          * @type {number || null}
          */
         this.NetType = null;
@@ -3943,7 +4085,7 @@ class DescribeParamTemplateInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * Parameter template ID.
+         * The parameter template ID for query. Get parameter template list information through the [DescribeParamTemplates](https://intl.cloud.tencent.com/document/product/239/58750?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -4143,7 +4285,7 @@ class InstanceSecurityGroupDetail extends  AbstractModel {
 }
 
 /**
- * VPC information of the custom backup file download address.
+ * The VPC that corresponds to the configured download address of the backup file
  * @class
  */
 class BackupLimitVpcItem extends  AbstractModel {
@@ -4151,13 +4293,13 @@ class BackupLimitVpcItem extends  AbstractModel {
         super();
 
         /**
-         * Region of the VPC of the custom backup file download address.
+         * The region of the VPC that corresponds to the download address of the backup file
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * VPC list of the custom backup file download address.
+         * The list of VPCs that correspond to the download addresses of the backup files
          * @type {Array.<string> || null}
          */
         this.VpcList = null;
@@ -4431,30 +4573,18 @@ class DescribeInstanceMonitorTookDistResponse extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceBackups response structure.
+ * DescribeBandwidthRange request structure.
  * @class
  */
-class DescribeInstanceBackupsResponse extends  AbstractModel {
+class DescribeBandwidthRangeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of backups.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Array of instance backups.
-         * @type {Array.<RedisBackupSet> || null}
-         */
-        this.BackupSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Instance ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -4465,17 +4595,7 @@ class DescribeInstanceBackupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.BackupSet) {
-            this.BackupSet = new Array();
-            for (let z in params.BackupSet) {
-                let obj = new RedisBackupSet();
-                obj.deserialize(params.BackupSet[z]);
-                this.BackupSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4809,7 +4929,17 @@ class ParamTemplateInfo extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Instance type. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture)
+         * Instance type
+- `2`: Redis 2.8 Memory Edition (Standard Architecture).
+- `3`: CKV 3.2 Memory Edition (Standard Architecture).
+- `4`: CKV 3.2 Memory Edition (Cluster Architecture).
+- `5`: Redis 2.8 Memory Edition (Standalone).
+- `6`: Redis 4.0 Memory Edition (Standard Architecture).
+- `7`: Redis 4.0 Memory Edition (Cluster Architecture).
+- `8`: Redis 5.0 Memory Edition (Standard Architecture).
+- `9`: Redis 5.0 Memory Edition (Cluster Architecture).
+- `15`: Redis 6.2 Memory Edition (Standard Architecture).
+- `16`: Redis 6.2 Memory Edition (Cluster Architecture).
          * @type {number || null}
          */
         this.ProductType = null;
@@ -5317,13 +5447,15 @@ class CloneInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * ID of the current instance
+         * The ID of the source instance to be cloned, such as "crs-xjhsdj****". Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Number of instance to be cloned each time. You can purchase up to 100 monthly subscribed instances or up to 30 pay-as-you-go instances at a time. You can purchase up to 100 instances in each region.
+         * The number of clone instances at a time
+- The maximum number of monthly subscribed instances is 100 for each purchase.
+- The maximum number of pay-as-you-go instances is 30 for each purchase.
          * @type {number || null}
          */
         this.GoodsNum = null;
@@ -5365,13 +5497,13 @@ class CloneInstancesRequest extends  AbstractModel {
         this.NoAuth = null;
 
         /**
-         * VPC ID. If this parameter is not passed in, the classic network will be selected by default.
+         * The VPC ID of the clone instance. If this parameter is not passed in, the classic network will be selected by default.
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * VPC subnet ID, which is not required for the classic network.
+         * The VPC subnet ID to which the clone instance belongs, which is not required for the classic network.
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -5389,7 +5521,7 @@ class CloneInstancesRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * The auto-renewal flag. Valid values <ul><li>`0`: Manual renewal (default) </li><li>`1`: Auto-renewal. </li><li>`2`: Not auto-renewal (set by user)</ul>
+         * The auto-renewal flag. Valid values <ul><li>`0`: Manual renewal (default). </li><li>`1`: Auto-renewal. </li><li>`2`: Not auto-renewal (set by user).</ul>
          * @type {number || null}
          */
         this.AutoRenew = null;
@@ -5407,7 +5539,7 @@ class CloneInstancesRequest extends  AbstractModel {
         this.NodeSet = null;
 
         /**
-         * Project ID, which can be obtained in <b>Account Center</b> > <b>Project Management</b> in the upper-right corner in the console.
+         * Project ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), and find the project ID in <b>Account Center</b> > <b>Project Management</b> in the top-right corner.
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -5419,13 +5551,15 @@ class CloneInstancesRequest extends  AbstractModel {
         this.ResourceTags = null;
 
         /**
-         * The ID of a parameter template to be applied to the clone instance, which can be obtained on <b>Parameter Template</b> page in the console. If this parameter is not configured, the default parameter template will be applied.
+         * The parameter template ID associated with the clone instance
+- If this parameter is not configured, the system will automatically adapt the corresponding default template based on the selected compatible version and architecture.
+- You can query the parameter template list of the instance to get the template ID through the [DescribeParamTemplates](https://intl.cloud.tencent.com/document/product/239/58750?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.TemplateId = null;
 
         /**
-         * Alarm policy ID of the specified clone instance, which can be obtained on <b>Cloud Monitor</b> > <b>Alarm Configuration</b> > <b>Alarm Policy</b> in the console.
+         * The alarm policy ID of the instance to be cloned. Log in to the [Tencent Cloud Observable Platform console](https://console.cloud.tencent.com/monitor/alarm2/policy), and get the policy ID in <b>Alarm Management</b> > <b>Policy Management</b>.
          * @type {Array.<string> || null}
          */
         this.AlarmPolicyList = null;
@@ -5767,19 +5901,22 @@ class InstanceParamHistory extends  AbstractModel {
         this.ParamName = null;
 
         /**
-         * Value before modification
+         * The value of the parameter before modification
          * @type {string || null}
          */
         this.PreValue = null;
 
         /**
-         * Value after modification
+         * The value of the parameter after modification
          * @type {string || null}
          */
         this.NewValue = null;
 
         /**
-         * Status. 1: modifying the parameter configuration; 2: modified the parameter configuration successfully; 3: failed to modify the parameter configuration
+         * Parameter configuration status
+- `1`: The parameter configuration is being modified.
+- `2`: The parameter configuration has been modified successfully.
+- `3`: Failed to modify the parameter configuration.
          * @type {number || null}
          */
         this.Status = null;
@@ -6470,6 +6607,48 @@ class CreateInstanceAccountRequest extends  AbstractModel {
 }
 
 /**
+ * RemoveReplicationInstance request structure.
+ * @class
+ */
+class RemoveReplicationInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Replication group ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Data sync type. Valid values: `true` (strong sync is required), `false` (strong sync is not required, only the master instance can be deleted).
+         * @type {boolean || null}
+         */
+        this.SyncType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SyncType = 'SyncType' in params ? params.SyncType : null;
+
+    }
+}
+
+/**
  * EnableReplicaReadonly response structure.
  * @class
  */
@@ -6649,13 +6828,23 @@ class ProductConf extends  AbstractModel {
         super();
 
         /**
-         * Product type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture), `10` (Redis 4.0 Hybrid Storage Edition (Tendis)).
+         * Product type
+- `2`: Redis 2.8 Memory Edition (Standard Architecture).
+- `3`: CKV 3.2 Memory Edition (Standard Architecture).
+- `4`: CKV 3.2 Memory Edition (Cluster Architecture).
+- `5`: Redis 2.8 Memory Edition (Standalone).
+- `6`: Redis 4.0 Memory Edition (Standard Architecture).
+- `7`: Redis 4.0 Memory Edition (Cluster Architecture).
+- `8`: Redis 5.0 Memory Edition (Standard Architecture).
+- `9`: Redis 5.0 Memory Edition (Cluster Architecture).
+- `15`: Redis 6.2 Memory Edition (Standard Architecture).
+- `16`: Redis 6.2 Memory Edition (Cluster Architecture).
          * @type {number || null}
          */
         this.Type = null;
 
         /**
-         * Product name: Redis Master-Replica Edition, CKV Master-Replica Edition, CKV Cluster Edition, Redis Standalone Edition, Redis Cluster Edition, Tendis Hybrid Storage Edition
+         * Product names, including Redis Master-Replica Edition, Redis Standalone Edition, Redis 4.0 Cluster Edition, CKV Master-Replica Edition, and CKV Standalone Edition.
          * @type {string || null}
          */
         this.TypeName = null;
@@ -6674,18 +6863,20 @@ class ProductConf extends  AbstractModel {
 
         /**
          * Whether a product is sold out
+- `true`: Sold out.
+- `false`: Not sold out.
          * @type {boolean || null}
          */
         this.Saleout = null;
 
         /**
-         * Product engine: Tencent Cloud CKV or Redis community edition
+         * Product engines, including Tencent Cloud CKV and Redis Community Edition.
          * @type {string || null}
          */
         this.Engine = null;
 
         /**
-         * Compatible version: Redis 2.8, Redis 3.2, or Redis 4.0
+         * Compatible versions, including Redis 2.8, 3.2, 4.0, 5.0, and 6.2.
          * @type {string || null}
          */
         this.Version = null;
@@ -6703,25 +6894,29 @@ class ProductConf extends  AbstractModel {
         this.ShardSize = null;
 
         /**
-         * Number of replicas
+         * Quantity of replicas
          * @type {Array.<string> || null}
          */
         this.ReplicaNum = null;
 
         /**
-         * Number of shards
+         * Quantity of shards
          * @type {Array.<string> || null}
          */
         this.ShardNum = null;
 
         /**
-         * Supported billing method. 1: monthly subscription; 0: pay-as-you-go
+         * Supported billing modes
+- `1`: Monthly subscription.
+- `0`: Pay-as-you-go.
          * @type {string || null}
          */
         this.PayMode = null;
 
         /**
          * Whether to support read-only replicas
+- `true`: Supported.
+-`false`: Not supported.
          * @type {boolean || null}
          */
         this.EnableRepicaReadOnly = null;
@@ -7133,7 +7328,7 @@ class ResourceTag extends  AbstractModel {
         this.TagKey = null;
 
         /**
-         * Tag value
+         * The value corresponding to the tag key
          * @type {string || null}
          */
         this.TagValue = null;
@@ -7431,7 +7626,7 @@ class Groups extends  AbstractModel {
         super();
 
         /**
-         * User App ID
+         * User APPID, which is the unique application ID that matches an account. Some Tencent Cloud products use this APPID.
          * @type {number || null}
          */
         this.AppId = null;
@@ -7461,7 +7656,7 @@ class Groups extends  AbstractModel {
         this.RegionId = null;
 
         /**
-         * Replication group ID
+         * Replication group ID in the format of "crs-rpl-deind****"
          * @type {string || null}
          */
         this.GroupId = null;
@@ -7795,7 +7990,7 @@ class ModfiyInstancePasswordRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance ID
+         * Instance ID, such as "crs-xjhsdj****". Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -8458,7 +8653,8 @@ class InstanceSet extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * User AppID
+         * User APPID, which is the unique application ID that matches an account. Some Tencent Cloud products use this APPID.
+
          * @type {number || null}
          */
         this.Appid = null;
@@ -8512,25 +8708,35 @@ class InstanceSet extends  AbstractModel {
         this.Port = null;
 
         /**
-         * Instance creation time
+         * Instance creation time in the format of "2020-01-15 10:20:00"
          * @type {string || null}
          */
         this.Createtime = null;
 
         /**
-         * Instance capacity in MB
+         * Instance memory capacity in MB (1 MB = 1024 KB)
          * @type {number || null}
          */
         this.Size = null;
 
         /**
-         * This field has been disused. You can use the [GetMonitorData](https://intl.cloud.tencent.com/document/product/248/31014?from_cn_redirect=1) API to query the capacity used by the instance.
+         * This field has been disused. You can use the TCOP’s [GetMonitorData](https://intl.cloud.tencent.com/document/product/248/31014?from_cn_redirect=1) API to query the capacity used by the instance.
          * @type {number || null}
          */
         this.SizeUsed = null;
 
         /**
-         * Instance type. <ul><li>`1`: Redis 2.8 memory edition in cluster architecture. </li><li>`2`: Redis 2.8 memory edition in standard architecture. </li><li>`3`: CKV 3.2 memory edition in standard architecture. </li><li>`4`: CKV 3.2 memory edition in cluster architecture. </li><li>`5`: Redis 2.8 memory edition in standalone architecture. </li></li><li>`6`: Redis 4.0 memory edition in standard architecture. </li></li><li>`7`: Redis 4.0 memory edition in cluster architecture. </li></li><li>`8`: Redis 5.0 memory edition in standard architecture. </li></li><li>`9`: Redis 5.0 memory edition in cluster architecture. </li></ul>
+         * Instance type
+- `2`: Redis 2.8 Memory Edition (Standard Architecture).
+- `3`: CKV 3.2 Memory Edition (Standard Architecture).
+- `4`: CKV 3.2 Memory Edition (Cluster Architecture).
+- `5`: Redis 2.8 Memory Edition (Standalone).
+- `6`: Redis 4.0 Memory Edition (Standard Architecture).
+- `7`: Redis 4.0 Memory Edition (Cluster Architecture).
+- `8`: Redis 5.0 Memory Edition (Standard Architecture).
+- `9`: Redis 5.0 Memory Edition (Cluster Architecture).
+- `15`: Redis 6.2 Memory Edition (Standard Architecture).
+- `16`: Redis 6.2 Memory Edition (Cluster Architecture).
          * @type {number || null}
          */
         this.Type = null;
@@ -8542,7 +8748,7 @@ class InstanceSet extends  AbstractModel {
         this.AutoRenewFlag = null;
 
         /**
-         * Instance expiration time
+         * The time when a monthly subscribed instance expires
          * @type {string || null}
          */
         this.DeadlineTime = null;
@@ -8584,7 +8790,7 @@ class InstanceSet extends  AbstractModel {
         this.InstanceTitle = null;
 
         /**
-         * Scheduled deactivation time
+         * The default termination time for isolated instances in the format of "2020-02-15 10:20:00". By default, a pay-as-you-go instance will be terminated after two hours of isolation, and a monthly subscribed instance will be terminated after seven days by default.
          * @type {string || null}
          */
         this.OfflineTime = null;
@@ -8632,7 +8838,7 @@ class InstanceSet extends  AbstractModel {
         this.PriceId = null;
 
         /**
-         * Isolation time
+         * The time when an instance start to be isolated
          * @type {string || null}
          */
         this.CloseTime = null;
@@ -8721,7 +8927,7 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.DiskSize = null;
 
         /**
-         * Monitoring granularity type. <ul><li>`1m`: Monitoring at 1-minute granularity. </li><li>`5s`: Monitoring at 5-second granularity. </li></ul>
+         * Monitoring granularity. <ul><li>`1m`: Monitoring at one-minute granularity. This granularity has been disused. For more information, see [1-Minute Granularity Will Be Disused](https://www.tencentcloud.com/document/product/239/50440).</li><li>`5s`: Monitoring at five-second granularity.</li></ul>
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
@@ -8763,8 +8969,8 @@ Note: This field may return null, indicating that no valid value can be obtained
         this.WanAddress = null;
 
         /**
-         * Polaris service address
-Note: This field may return null, indicating that no valid value can be obtained.
+         * Polaris service address, which is for internal use.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PolarisServer = null;
@@ -10059,7 +10265,7 @@ class DescribeParamTemplateInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * Number of instance parameters
+         * Quantity of parameters in the parameter template
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -10077,7 +10283,17 @@ class DescribeParamTemplateInfoResponse extends  AbstractModel {
         this.Name = null;
 
         /**
-         * Instance type. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture)
+         * Product type
+- `2`: Redis 2.8 Memory Edition (Standard Architecture).
+- `3`: CKV 3.2 Memory Edition (Standard Architecture).
+- `4`: CKV 3.2 Memory Edition (Cluster Architecture).
+- `5`: Redis 2.8 Memory Edition (Standalone).
+- `6`: Redis 4.0 Memory Edition (Standard Architecture).
+- `7`: Redis 4.0 Memory Edition (Cluster Architecture).
+- `8`: Redis 5.0 Memory Edition (Standard Architecture).
+- `9`: Redis 5.0 Memory Edition (Cluster Architecture).
+- `15`: Redis 6.2 Memory Edition (Standard Architecture).
+- `16`: Redis 6.2 Memory Edition (Cluster Architecture).
          * @type {number || null}
          */
         this.ProductType = null;
@@ -10089,7 +10305,7 @@ class DescribeParamTemplateInfoResponse extends  AbstractModel {
         this.Description = null;
 
         /**
-         * Parameter details
+         * Parameter details, including parameter name, current value, default value, maximum value, minimum value, enumeration value and other information.
          * @type {Array.<ParameterDetail> || null}
          */
         this.Items = null;
@@ -10615,6 +10831,41 @@ class DescribeInstanceBackupsRequest extends  AbstractModel {
 }
 
 /**
+ * RemoveReplicationInstance response structure.
+ * @class
+ */
+class RemoveReplicationInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Security group details
  * @class
  */
@@ -10808,19 +11059,21 @@ class InstanceClusterShard extends  AbstractModel {
         super();
 
         /**
-         * Shard node name
+         * The name of a shard node
          * @type {string || null}
          */
         this.ShardName = null;
 
         /**
-         * Shard node ID
+         * The serial number of a shard node
          * @type {string || null}
          */
         this.ShardId = null;
 
         /**
-         * Role
+         * The role of a shard node
+- `0`: Master node.
+- `1`: Replica node.
          * @type {number || null}
          */
         this.Role = null;
@@ -10838,7 +11091,7 @@ class InstanceClusterShard extends  AbstractModel {
         this.Slots = null;
 
         /**
-         * Storage capacity
+         * Used Capacity
          * @type {number || null}
          */
         this.Storage = null;
@@ -10850,13 +11103,15 @@ class InstanceClusterShard extends  AbstractModel {
         this.StorageSlope = null;
 
         /**
-         * ID of the runtime node of the instance
+         * Instance runtime node ID
          * @type {string || null}
          */
         this.Runid = null;
 
         /**
-         * Service status. 0: down; 1: on
+         * Service status
+- `0`: Down.
+- `1`: On.
          * @type {number || null}
          */
         this.Connected = null;
@@ -11349,7 +11604,7 @@ class Instances extends  AbstractModel {
         super();
 
         /**
-         * User AppID
+         * User APPID, which is the unique application ID that matches an account. Some Tencent Cloud products use this APPID.
          * @type {number || null}
          */
         this.AppId = null;
@@ -11453,7 +11708,17 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.GrocerySysId = null;
 
         /**
-         * Instance type. <ul><li>`1`: Redis 2.8 Memory Edition (Cluster Architecture). </li><li>`2`: Redis 2.8 Memory Edition (Standard Architecture). </li><li>`3`: CKV 3.2 Memory Edition (Standard Architecture). </li><li>`4`: CKV 3.2 Memory Edition (Cluster Architecture). </li><li>`5`: Redis 2.8 Standalone Edition. </li><li>`6`: Redis 4.0 Memory Edition (Standard Architecture). </li><li>`7`: Redis 4.0 Memory Edition (Cluster Architecture). </li><li>`8`: Redis 5.0 Memory Edition (Standard Architecture). </li><li>`9`: Redis 5.0 Memory Edition (Cluster Architecture). </li></ul>
+         * Instance type
+- `2`: Redis 2.8 Memory Edition (Standard Architecture).
+- `3`: CKV 3.2 Memory Edition (Standard Architecture).
+- `4`: CKV 3.2 Memory Edition (Cluster Architecture)
+- `5`: Redis 2.8 Memory Edition (Standalone)
+- `6`: Redis 4.0 Memory Edition (Standard Architecture).
+- `7`: Redis 4.0 Memory Edition (Cluster Architecture)
+- `8`: Redis 5.0 Memory Edition (Standard Architecture).
+- `9`: Redis 5.0 Memory Edition (Cluster Architecture)
+- `15`: Redis 6.2 Memory Edition (Standard Architecture).
+- `16`: Redis 6.2 Memory Edition (Cluster Architecture)
          * @type {number || null}
          */
         this.ProductType = null;
@@ -11748,9 +12013,11 @@ module.exports = {
     UpgradeInstanceVersionRequest: UpgradeInstanceVersionRequest,
     RegionConf: RegionConf,
     BigKeyInfo: BigKeyInfo,
+    DescribeBandwidthRangeResponse: DescribeBandwidthRangeResponse,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
     RenewInstanceRequest: RenewInstanceRequest,
     UpgradeVersionToMultiAvailabilityZonesResponse: UpgradeVersionToMultiAvailabilityZonesResponse,
+    DescribeInstanceBackupsResponse: DescribeInstanceBackupsResponse,
     DescribeInstanceParamRecordsResponse: DescribeInstanceParamRecordsResponse,
     ModifyAutoBackupConfigRequest: ModifyAutoBackupConfigRequest,
     InstanceMultiParam: InstanceMultiParam,
@@ -11795,7 +12062,7 @@ module.exports = {
     DelayDistribution: DelayDistribution,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     DescribeInstanceMonitorTookDistResponse: DescribeInstanceMonitorTookDistResponse,
-    DescribeInstanceBackupsResponse: DescribeInstanceBackupsResponse,
+    DescribeBandwidthRangeRequest: DescribeBandwidthRangeRequest,
     InstanceIntegerParam: InstanceIntegerParam,
     UpgradeVersionToMultiAvailabilityZonesRequest: UpgradeVersionToMultiAvailabilityZonesRequest,
     AllocateWanAddressResponse: AllocateWanAddressResponse,
@@ -11834,6 +12101,7 @@ module.exports = {
     DescribeInstanceMonitorBigKeySizeDistResponse: DescribeInstanceMonitorBigKeySizeDistResponse,
     SecurityGroup: SecurityGroup,
     CreateInstanceAccountRequest: CreateInstanceAccountRequest,
+    RemoveReplicationInstanceRequest: RemoveReplicationInstanceRequest,
     EnableReplicaReadonlyResponse: EnableReplicaReadonlyResponse,
     DescribeMaintenanceWindowResponse: DescribeMaintenanceWindowResponse,
     DescribeInstanceSecurityGroupResponse: DescribeInstanceSecurityGroupResponse,
@@ -11908,6 +12176,7 @@ module.exports = {
     InstanceEnumParam: InstanceEnumParam,
     CreateInstanceAccountResponse: CreateInstanceAccountResponse,
     DescribeInstanceBackupsRequest: DescribeInstanceBackupsRequest,
+    RemoveReplicationInstanceResponse: RemoveReplicationInstanceResponse,
     SecurityGroupDetail: SecurityGroupDetail,
     InquiryPriceUpgradeInstanceResponse: InquiryPriceUpgradeInstanceResponse,
     DeleteInstanceAccountResponse: DeleteInstanceAccountResponse,

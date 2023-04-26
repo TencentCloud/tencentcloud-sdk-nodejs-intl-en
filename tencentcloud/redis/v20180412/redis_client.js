@@ -56,9 +56,11 @@ const ClearInstanceRequest = models.ClearInstanceRequest;
 const UpgradeInstanceVersionRequest = models.UpgradeInstanceVersionRequest;
 const RegionConf = models.RegionConf;
 const BigKeyInfo = models.BigKeyInfo;
+const DescribeBandwidthRangeResponse = models.DescribeBandwidthRangeResponse;
 const DescribeParamTemplatesRequest = models.DescribeParamTemplatesRequest;
 const RenewInstanceRequest = models.RenewInstanceRequest;
 const UpgradeVersionToMultiAvailabilityZonesResponse = models.UpgradeVersionToMultiAvailabilityZonesResponse;
+const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
 const InstanceMultiParam = models.InstanceMultiParam;
@@ -103,7 +105,7 @@ const ModifyInstanceAccountResponse = models.ModifyInstanceAccountResponse;
 const DelayDistribution = models.DelayDistribution;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DescribeInstanceMonitorTookDistResponse = models.DescribeInstanceMonitorTookDistResponse;
-const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
+const DescribeBandwidthRangeRequest = models.DescribeBandwidthRangeRequest;
 const InstanceIntegerParam = models.InstanceIntegerParam;
 const UpgradeVersionToMultiAvailabilityZonesRequest = models.UpgradeVersionToMultiAvailabilityZonesRequest;
 const AllocateWanAddressResponse = models.AllocateWanAddressResponse;
@@ -142,6 +144,7 @@ const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroup
 const DescribeInstanceMonitorBigKeySizeDistResponse = models.DescribeInstanceMonitorBigKeySizeDistResponse;
 const SecurityGroup = models.SecurityGroup;
 const CreateInstanceAccountRequest = models.CreateInstanceAccountRequest;
+const RemoveReplicationInstanceRequest = models.RemoveReplicationInstanceRequest;
 const EnableReplicaReadonlyResponse = models.EnableReplicaReadonlyResponse;
 const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowResponse;
 const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGroupResponse;
@@ -216,6 +219,7 @@ const HotKeyInfo = models.HotKeyInfo;
 const InstanceEnumParam = models.InstanceEnumParam;
 const CreateInstanceAccountResponse = models.CreateInstanceAccountResponse;
 const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
+const RemoveReplicationInstanceResponse = models.RemoveReplicationInstanceResponse;
 const SecurityGroupDetail = models.SecurityGroupDetail;
 const InquiryPriceUpgradeInstanceResponse = models.InquiryPriceUpgradeInstanceResponse;
 const DeleteInstanceAccountResponse = models.DeleteInstanceAccountResponse;
@@ -248,39 +252,6 @@ class RedisClient extends AbstractClient {
     }
     
     /**
-     * This API is used to enable read/write separation.
-     * @param {EnableReplicaReadonlyRequest} req
-     * @param {function(string, EnableReplicaReadonlyResponse):void} cb
-     * @public
-     */
-    EnableReplicaReadonly(req, cb) {
-        let resp = new EnableReplicaReadonlyResponse();
-        this.request("EnableReplicaReadonly", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query a replication group.
-     * @param {DescribeReplicationGroupRequest} req
-     * @param {function(string, DescribeReplicationGroupResponse):void} cb
-     * @public
-     */
-    DescribeReplicationGroup(req, cb) {
-        let resp = new DescribeReplicationGroupResponse();
-        this.request("DescribeReplicationGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query instance node information.
-     * @param {DescribeInstanceNodeInfoRequest} req
-     * @param {function(string, DescribeInstanceNodeInfoResponse):void} cb
-     * @public
-     */
-    DescribeInstanceNodeInfo(req, cb) {
-        let resp = new DescribeInstanceNodeInfoResponse();
-        this.request("DescribeInstanceNodeInfo", req, resp, cb);
-    }
-
-    /**
      * This API is used to set instance input mode.
      * @param {ModifyInstanceReadOnlyRequest} req
      * @param {function(string, ModifyInstanceReadOnlyResponse):void} cb
@@ -303,72 +274,6 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the parameter template details.
-     * @param {DescribeParamTemplateInfoRequest} req
-     * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
-     * @public
-     */
-    DescribeParamTemplateInfo(req, cb) {
-        let resp = new DescribeParamTemplateInfoResponse();
-        this.request("DescribeParamTemplateInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create an instance sub-account.
-     * @param {CreateInstanceAccountRequest} req
-     * @param {function(string, CreateInstanceAccountResponse):void} cb
-     * @public
-     */
-    CreateInstanceAccount(req, cb) {
-        let resp = new CreateInstanceAccountResponse();
-        this.request("CreateInstanceAccount", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the instance maintenance time. The maintenance time specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business. Note: if the compatible version upgrade or architecture upgrade task has been initiated for an instance, its maintenance time cannot be modified.
-     * @param {ModifyMaintenanceWindowRequest} req
-     * @param {function(string, ModifyMaintenanceWindowResponse):void} cb
-     * @public
-     */
-    ModifyMaintenanceWindow(req, cb) {
-        let resp = new ModifyMaintenanceWindowResponse();
-        this.request("ModifyMaintenanceWindow", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of parameter templates.
-     * @param {DescribeParamTemplatesRequest} req
-     * @param {function(string, DescribeParamTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeParamTemplates(req, cb) {
-        let resp = new DescribeParamTemplatesResponse();
-        this.request("DescribeParamTemplates", req, resp, cb);
-    }
-
-    /**
-     * This API is used to disable public network access.
-     * @param {ReleaseWanAddressRequest} req
-     * @param {function(string, ReleaseWanAddressResponse):void} cb
-     * @public
-     */
-    ReleaseWanAddress(req, cb) {
-        let resp = new ReleaseWanAddressResponse();
-        this.request("ReleaseWanAddress", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the records of slow query.
-     * @param {DescribeSlowLogRequest} req
-     * @param {function(string, DescribeSlowLogResponse):void} cb
-     * @public
-     */
-    DescribeSlowLog(req, cb) {
-        let resp = new DescribeSlowLogResponse();
-        this.request("DescribeSlowLog", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the list of tasks.
      * @param {DescribeTaskListRequest} req
      * @param {function(string, DescribeTaskListResponse):void} cb
@@ -377,17 +282,6 @@ class RedisClient extends AbstractClient {
     DescribeTaskList(req, cb) {
         let resp = new DescribeTaskListResponse();
         this.request("DescribeTaskList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the instance configuration.
-     * @param {UpgradeInstanceRequest} req
-     * @param {function(string, UpgradeInstanceResponse):void} cb
-     * @public
-     */
-    UpgradeInstance(req, cb) {
-        let resp = new UpgradeInstanceResponse();
-        this.request("UpgradeInstance", req, resp, cb);
     }
 
     /**
@@ -402,58 +296,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query instance maintenance window. The maintenance window specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business.
-     * @param {DescribeMaintenanceWindowRequest} req
-     * @param {function(string, DescribeMaintenanceWindowResponse):void} cb
+     * This API is used to view instance sub-account information.
+     * @param {DescribeInstanceAccountRequest} req
+     * @param {function(string, DescribeInstanceAccountResponse):void} cb
      * @public
      */
-    DescribeMaintenanceWindow(req, cb) {
-        let resp = new DescribeMaintenanceWindowResponse();
-        this.request("DescribeMaintenanceWindow", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the backup list of an instance.
-     * @param {DescribeInstanceBackupsRequest} req
-     * @param {function(string, DescribeInstanceBackupsResponse):void} cb
-     * @public
-     */
-    DescribeInstanceBackups(req, cb) {
-        let resp = new DescribeInstanceBackupsResponse();
-        this.request("DescribeInstanceBackups", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the DTS task details of an instance.
-     * @param {DescribeInstanceDTSInfoRequest} req
-     * @param {function(string, DescribeInstanceDTSInfoResponse):void} cb
-     * @public
-     */
-    DescribeInstanceDTSInfo(req, cb) {
-        let resp = new DescribeInstanceDTSInfoResponse();
-        this.request("DescribeInstanceDTSInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the instance CPU time.
-     * @param {DescribeInstanceMonitorTopNCmdTookRequest} req
-     * @param {function(string, DescribeInstanceMonitorTopNCmdTookResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorTopNCmdTook(req, cb) {
-        let resp = new DescribeInstanceMonitorTopNCmdTookResponse();
-        this.request("DescribeInstanceMonitorTopNCmdTook", req, resp, cb);
-    }
-
-    /**
-     * This API is used to simulate the failure of a proxy node.
-     * @param {SwitchProxyRequest} req
-     * @param {function(string, SwitchProxyResponse):void} cb
-     * @public
-     */
-    SwitchProxy(req, cb) {
-        let resp = new SwitchProxyResponse();
-        this.request("SwitchProxy", req, resp, cb);
+    DescribeInstanceAccount(req, cb) {
+        let resp = new DescribeInstanceAccountResponse();
+        this.request("DescribeInstanceAccount", req, resp, cb);
     }
 
     /**
@@ -468,6 +318,215 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * This API is used to query an instance access command.
+     * @param {DescribeInstanceMonitorTopNCmdRequest} req
+     * @param {function(string, DescribeInstanceMonitorTopNCmdResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorTopNCmd(req, cb) {
+        let resp = new DescribeInstanceMonitorTopNCmdResponse();
+        this.request("DescribeInstanceMonitorTopNCmd", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade compatible instance version (for example, from Redis 2.8 to 4.0), or upgrade instance architecture (for example, from standard architecture to cluster architecture).
+     * @param {UpgradeInstanceVersionRequest} req
+     * @param {function(string, UpgradeInstanceVersionResponse):void} cb
+     * @public
+     */
+    UpgradeInstanceVersion(req, cb) {
+        let resp = new UpgradeInstanceVersionResponse();
+        this.request("UpgradeInstanceVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query purchasable TencentDB for Redis specifications in all regions.
+     * @param {DescribeProductInfoRequest} req
+     * @param {function(string, DescribeProductInfoResponse):void} cb
+     * @public
+     */
+    DescribeProductInfo(req, cb) {
+        let resp = new DescribeProductInfoResponse();
+        this.request("DescribeProductInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the task result.
+     * @param {DescribeTaskInfoRequest} req
+     * @param {function(string, DescribeTaskInfoResponse):void} cb
+     * @public
+     */
+    DescribeTaskInfo(req, cb) {
+        let resp = new DescribeTaskInfoResponse();
+        this.request("DescribeTaskInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the network information and address for downloading a backup file.
+     * @param {ModifyBackupDownloadRestrictionRequest} req
+     * @param {function(string, ModifyBackupDownloadRestrictionResponse):void} cb
+     * @public
+     */
+    ModifyBackupDownloadRestriction(req, cb) {
+        let resp = new ModifyBackupDownloadRestrictionResponse();
+        this.request("ModifyBackupDownloadRestriction", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify an instance sub-account.
+     * @param {ModifyInstanceAccountRequest} req
+     * @param {function(string, ModifyInstanceAccountResponse):void} cb
+     * @public
+     */
+    ModifyInstanceAccount(req, cb) {
+        let resp = new ModifyInstanceAccountResponse();
+        this.request("ModifyInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the security group information of an instance.
+     * @param {DescribeInstanceSecurityGroupRequest} req
+     * @param {function(string, DescribeInstanceSecurityGroupResponse):void} cb
+     * @public
+     */
+    DescribeInstanceSecurityGroup(req, cb) {
+        let resp = new DescribeInstanceSecurityGroupResponse();
+        this.request("DescribeInstanceSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade an instance to support multi-AZ deployment.
+     * @param {UpgradeVersionToMultiAvailabilityZonesRequest} req
+     * @param {function(string, UpgradeVersionToMultiAvailabilityZonesResponse):void} cb
+     * @public
+     */
+    UpgradeVersionToMultiAvailabilityZones(req, cb) {
+        let resp = new UpgradeVersionToMultiAvailabilityZonesResponse();
+        this.request("UpgradeVersionToMultiAvailabilityZones", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the parameters of TencentDB for Redis instances
+     * @param {ModifyInstanceParamsRequest} req
+     * @param {function(string, ModifyInstanceParamsResponse):void} cb
+     * @public
+     */
+    ModifyInstanceParams(req, cb) {
+        let resp = new ModifyInstanceParamsResponse();
+        this.request("ModifyInstanceParams", req, resp, cb);
+    }
+
+    /**
+     * This API is used to clear the data of a Redis instance.
+     * @param {ClearInstanceRequest} req
+     * @param {function(string, ClearInstanceResponse):void} cb
+     * @public
+     */
+    ClearInstance(req, cb) {
+        let resp = new ClearInstanceResponse();
+        this.request("ClearInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the download address of a backup RDB file.
+     * @param {DescribeBackupUrlRequest} req
+     * @param {function(string, DescribeBackupUrlResponse):void} cb
+     * @public
+     */
+    DescribeBackupUrl(req, cb) {
+        let resp = new DescribeBackupUrlResponse();
+        this.request("DescribeBackupUrl", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an instance sub-account.
+     * @param {DeleteInstanceAccountRequest} req
+     * @param {function(string, DeleteInstanceAccountResponse):void} cb
+     * @public
+     */
+    DeleteInstanceAccount(req, cb) {
+        let resp = new DeleteInstanceAccountResponse();
+        this.request("DeleteInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to unbind a security group from instances in batches.
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify instance information.
+     * @param {ModifyInstanceRequest} req
+     * @param {function(string, ModifyInstanceResponse):void} cb
+     * @public
+     */
+    ModifyInstance(req, cb) {
+        let resp = new ModifyInstanceResponse();
+        this.request("ModifyInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the role of an instance in a replication group.
+     * @param {ChangeInstanceRoleRequest} req
+     * @param {function(string, ChangeInstanceRoleResponse):void} cb
+     * @public
+     */
+    ChangeInstanceRole(req, cb) {
+        let resp = new ChangeInstanceRoleResponse();
+        this.request("ChangeInstanceRole", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query instance node information.
+     * @param {DescribeInstanceNodeInfoRequest} req
+     * @param {function(string, DescribeInstanceNodeInfoResponse):void} cb
+     * @public
+     */
+    DescribeInstanceNodeInfo(req, cb) {
+        let resp = new DescribeInstanceNodeInfoResponse();
+        this.request("DescribeInstanceNodeInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an instance sub-account.
+     * @param {CreateInstanceAccountRequest} req
+     * @param {function(string, CreateInstanceAccountResponse):void} cb
+     * @public
+     */
+    CreateInstanceAccount(req, cb) {
+        let resp = new CreateInstanceAccountResponse();
+        this.request("CreateInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade instance proxy version.
+     * @param {UpgradeProxyVersionRequest} req
+     * @param {function(string, UpgradeProxyVersionResponse):void} cb
+     * @public
+     */
+    UpgradeProxyVersion(req, cb) {
+        let resp = new UpgradeProxyVersionResponse();
+        this.request("UpgradeProxyVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the instance CPU time.
+     * @param {DescribeInstanceMonitorTopNCmdTookRequest} req
+     * @param {function(string, DescribeInstanceMonitorTopNCmdTookResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorTopNCmdTook(req, cb) {
+        let resp = new DescribeInstanceMonitorTopNCmdTookResponse();
+        this.request("DescribeInstanceMonitorTopNCmdTook", req, resp, cb);
+    }
+
+    /**
      * This API is used to configure automatic backup.
      * @param {ModifyAutoBackupConfigRequest} req
      * @param {function(string, ModifyAutoBackupConfigResponse):void} cb
@@ -476,39 +535,6 @@ class RedisClient extends AbstractClient {
     ModifyAutoBackupConfig(req, cb) {
         let resp = new ModifyAutoBackupConfigResponse();
         this.request("ModifyAutoBackupConfig", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the information of Cluster Edition instance shards.
-     * @param {DescribeInstanceShardsRequest} req
-     * @param {function(string, DescribeInstanceShardsResponse):void} cb
-     * @public
-     */
-    DescribeInstanceShards(req, cb) {
-        let resp = new DescribeInstanceShardsResponse();
-        this.request("DescribeInstanceShards", req, resp, cb);
-    }
-
-    /**
-     * This API is used to return a monthly subscribed instance.
-     * @param {DestroyPrepaidInstanceRequest} req
-     * @param {function(string, DestroyPrepaidInstanceResponse):void} cb
-     * @public
-     */
-    DestroyPrepaidInstance(req, cb) {
-        let resp = new DestroyPrepaidInstanceResponse();
-        this.request("DestroyPrepaidInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of Redis instances.
-     * @param {DescribeInstancesRequest} req
-     * @param {function(string, DescribeInstancesResponse):void} cb
-     * @public
-     */
-    DescribeInstances(req, cb) {
-        let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**
@@ -523,7 +549,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to clone a complete instance based on the current instance backup file.
+     * This API is used to clone a complete new instance based on the current instance backup file.
      * @param {CloneInstancesRequest} req
      * @param {function(string, CloneInstancesResponse):void} cb
      * @public
@@ -531,17 +557,6 @@ class RedisClient extends AbstractClient {
     CloneInstances(req, cb) {
         let resp = new CloneInstancesResponse();
         this.request("CloneInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query an instance access command.
-     * @param {DescribeInstanceMonitorTopNCmdRequest} req
-     * @param {function(string, DescribeInstanceMonitorTopNCmdResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorTopNCmd(req, cb) {
-        let resp = new DescribeInstanceMonitorTopNCmdResponse();
-        this.request("DescribeInstanceMonitorTopNCmd", req, resp, cb);
     }
 
     /**
@@ -567,80 +582,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to enable SSL.
-     * @param {OpenSSLRequest} req
-     * @param {function(string, OpenSSLResponse):void} cb
+     * This API is used to query the DTS task details of an instance.
+     * @param {DescribeInstanceDTSInfoRequest} req
+     * @param {function(string, DescribeInstanceDTSInfoResponse):void} cb
      * @public
      */
-    OpenSSL(req, cb) {
-        let resp = new OpenSSLResponse();
-        this.request("OpenSSL", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the backup configuration.
-     * @param {DescribeAutoBackupConfigRequest} req
-     * @param {function(string, DescribeAutoBackupConfigResponse):void} cb
-     * @public
-     */
-    DescribeAutoBackupConfig(req, cb) {
-        let resp = new DescribeAutoBackupConfigResponse();
-        this.request("DescribeAutoBackupConfig", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the network configuration of an instance.
-     * @param {ModifyNetworkConfigRequest} req
-     * @param {function(string, ModifyNetworkConfigResponse):void} cb
-     * @public
-     */
-    ModifyNetworkConfig(req, cb) {
-        let resp = new ModifyNetworkConfigResponse();
-        this.request("ModifyNetworkConfig", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the access source information of an instance.
-     * @param {DescribeInstanceMonitorSIPRequest} req
-     * @param {function(string, DescribeInstanceMonitorSIPResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorSIP(req, cb) {
-        let resp = new DescribeInstanceMonitorSIPResponse();
-        this.request("DescribeInstanceMonitorSIP", req, resp, cb);
-    }
-
-    /**
-     * This API is used to clear the data of a Redis instance.
-     * @param {ClearInstanceRequest} req
-     * @param {function(string, ClearInstanceResponse):void} cb
-     * @public
-     */
-    ClearInstance(req, cb) {
-        let resp = new ClearInstanceResponse();
-        this.request("ClearInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify an instance sub-account.
-     * @param {ModifyInstanceAccountRequest} req
-     * @param {function(string, ModifyInstanceAccountResponse):void} cb
-     * @public
-     */
-    ModifyInstanceAccount(req, cb) {
-        let resp = new ModifyInstanceAccountResponse();
-        this.request("ModifyInstanceAccount", req, resp, cb);
-    }
-
-    /**
-     * This API is used to upgrade compatible instance version (for example, from Redis 2.8 to 4.0), or upgrade instance architecture (for example, from standard architecture to cluster architecture).
-     * @param {UpgradeInstanceVersionRequest} req
-     * @param {function(string, UpgradeInstanceVersionResponse):void} cb
-     * @public
-     */
-    UpgradeInstanceVersion(req, cb) {
-        let resp = new UpgradeInstanceVersionResponse();
-        this.request("UpgradeInstanceVersion", req, resp, cb);
+    DescribeInstanceDTSInfo(req, cb) {
+        let resp = new DescribeInstanceDTSInfoResponse();
+        this.request("DescribeInstanceDTSInfo", req, resp, cb);
     }
 
     /**
@@ -655,69 +604,25 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the security group information of a project.
-     * @param {DescribeProjectSecurityGroupRequest} req
-     * @param {function(string, DescribeProjectSecurityGroupResponse):void} cb
+     * This API is used to renew an instance.
+     * @param {RenewInstanceRequest} req
+     * @param {function(string, RenewInstanceResponse):void} cb
      * @public
      */
-    DescribeProjectSecurityGroup(req, cb) {
-        let resp = new DescribeProjectSecurityGroupResponse();
-        this.request("DescribeProjectSecurityGroup", req, resp, cb);
+    RenewInstance(req, cb) {
+        let resp = new RenewInstanceResponse();
+        this.request("RenewInstance", req, resp, cb);
     }
 
     /**
-     * This API is used to query the hot key of an instance.
-     * @param {DescribeInstanceMonitorHotKeyRequest} req
-     * @param {function(string, DescribeInstanceMonitorHotKeyResponse):void} cb
+     * This API is used to enable public network access.
+     * @param {AllocateWanAddressRequest} req
+     * @param {function(string, AllocateWanAddressResponse):void} cb
      * @public
      */
-    DescribeInstanceMonitorHotKey(req, cb) {
-        let resp = new DescribeInstanceMonitorHotKeyResponse();
-        this.request("DescribeInstanceMonitorHotKey", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the task result.
-     * @param {DescribeTaskInfoRequest} req
-     * @param {function(string, DescribeTaskInfoResponse):void} cb
-     * @public
-     */
-    DescribeTaskInfo(req, cb) {
-        let resp = new DescribeTaskInfoResponse();
-        this.request("DescribeTaskInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to restore a Redis instance.
-     * @param {RestoreInstanceRequest} req
-     * @param {function(string, RestoreInstanceResponse):void} cb
-     * @public
-     */
-    RestoreInstance(req, cb) {
-        let resp = new RestoreInstanceResponse();
-        this.request("RestoreInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the download address of a backup RDB file.
-     * @param {DescribeBackupUrlRequest} req
-     * @param {function(string, DescribeBackupUrlResponse):void} cb
-     * @public
-     */
-    DescribeBackupUrl(req, cb) {
-        let resp = new DescribeBackupUrlResponse();
-        this.request("DescribeBackupUrl", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the slow queries of the proxy.
-     * @param {DescribeProxySlowLogRequest} req
-     * @param {function(string, DescribeProxySlowLogResponse):void} cb
-     * @public
-     */
-    DescribeProxySlowLog(req, cb) {
-        let resp = new DescribeProxySlowLogResponse();
-        this.request("DescribeProxySlowLog", req, resp, cb);
+    AllocateWanAddress(req, cb) {
+        let resp = new AllocateWanAddressResponse();
+        this.request("AllocateWanAddress", req, resp, cb);
     }
 
     /**
@@ -743,50 +648,6 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to bind a security group to instances in batches.
-     * @param {AssociateSecurityGroupsRequest} req
-     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
-     * @public
-     */
-    AssociateSecurityGroups(req, cb) {
-        let resp = new AssociateSecurityGroupsResponse();
-        this.request("AssociateSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * This API is used to upgrade instance proxy version.
-     * @param {UpgradeProxyVersionRequest} req
-     * @param {function(string, UpgradeProxyVersionResponse):void} cb
-     * @public
-     */
-    UpgradeProxyVersion(req, cb) {
-        let resp = new UpgradeProxyVersionResponse();
-        this.request("UpgradeProxyVersion", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the parameters of TencentDB for Redis instances
-     * @param {ModifyInstanceParamsRequest} req
-     * @param {function(string, ModifyInstanceParamsResponse):void} cb
-     * @public
-     */
-    ModifyInstanceParams(req, cb) {
-        let resp = new ModifyInstanceParamsResponse();
-        this.request("ModifyInstanceParams", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the order information.
-     * @param {DescribeInstanceDealDetailRequest} req
-     * @param {function(string, DescribeInstanceDealDetailResponse):void} cb
-     * @public
-     */
-    DescribeInstanceDealDetail(req, cb) {
-        let resp = new DescribeInstanceDealDetailResponse();
-        this.request("DescribeInstanceDealDetail", req, resp, cb);
-    }
-
-    /**
      * This API is used to modify a parameter template.
      * @param {ModifyParamTemplateRequest} req
      * @param {function(string, ModifyParamTemplateResponse):void} cb
@@ -809,69 +670,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the network information and address for downloading a backup file.
-     * @param {ModifyBackupDownloadRestrictionRequest} req
-     * @param {function(string, ModifyBackupDownloadRestrictionResponse):void} cb
+     * This API is used to query the list of instance parameters.
+     * @param {DescribeInstanceParamsRequest} req
+     * @param {function(string, DescribeInstanceParamsResponse):void} cb
      * @public
      */
-    ModifyBackupDownloadRestriction(req, cb) {
-        let resp = new ModifyBackupDownloadRestrictionResponse();
-        this.request("ModifyBackupDownloadRestriction", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the SSL authentication information of an instance, such as enablement status, configuration status, and certificate address.
-     * @param {DescribeSSLStatusRequest} req
-     * @param {function(string, DescribeSSLStatusResponse):void} cb
-     * @public
-     */
-    DescribeSSLStatus(req, cb) {
-        let resp = new DescribeSSLStatusResponse();
-        this.request("DescribeSSLStatus", req, resp, cb);
-    }
-
-    /**
-     * This API is used to terminate a pay-as-you-go instance.
-     * @param {DestroyPostpaidInstanceRequest} req
-     * @param {function(string, DestroyPostpaidInstanceResponse):void} cb
-     * @public
-     */
-    DestroyPostpaidInstance(req, cb) {
-        let resp = new DestroyPostpaidInstanceResponse();
-        this.request("DestroyPostpaidInstance", req, resp, cb);
-    }
-
-    /**
-     * The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
-     * @param {DescribeInstanceMonitorBigKeyRequest} req
-     * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
-     * @public
-     */
-    DescribeInstanceMonitorBigKey(req, cb) {
-        let resp = new DescribeInstanceMonitorBigKeyResponse();
-        this.request("DescribeInstanceMonitorBigKey", req, resp, cb);
-    }
-
-    /**
-     * This API is used to swap the VIPs of instances for instance disaster recovery switch in scenarios where cross-AZ disaster recovery is supported through DTS. After the VIPs of the source and target instances are swapped, the target instance can be written into and the DTS sync task between them will be disconnected.
-     * @param {SwitchInstanceVipRequest} req
-     * @param {function(string, SwitchInstanceVipResponse):void} cb
-     * @public
-     */
-    SwitchInstanceVip(req, cb) {
-        let resp = new SwitchInstanceVipResponse();
-        this.request("SwitchInstanceVip", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the security group information of an instance.
-     * @param {DescribeInstanceSecurityGroupRequest} req
-     * @param {function(string, DescribeInstanceSecurityGroupResponse):void} cb
-     * @public
-     */
-    DescribeInstanceSecurityGroup(req, cb) {
-        let resp = new DescribeInstanceSecurityGroupResponse();
-        this.request("DescribeInstanceSecurityGroup", req, resp, cb);
+    DescribeInstanceParams(req, cb) {
+        let resp = new DescribeInstanceParamsResponse();
+        this.request("DescribeInstanceParams", req, resp, cb);
     }
 
     /**
@@ -886,91 +692,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to switch with master instance in a replication group.
-     * @param {ChangeMasterInstanceRequest} req
-     * @param {function(string, ChangeMasterInstanceResponse):void} cb
+     * This API is used to disable public network access.
+     * @param {ReleaseWanAddressRequest} req
+     * @param {function(string, ReleaseWanAddressResponse):void} cb
      * @public
      */
-    ChangeMasterInstance(req, cb) {
-        let resp = new ChangeMasterInstanceResponse();
-        this.request("ChangeMasterInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to reset a password.
-     * @param {ResetPasswordRequest} req
-     * @param {function(string, ResetPasswordResponse):void} cb
-     * @public
-     */
-    ResetPassword(req, cb) {
-        let resp = new ResetPasswordResponse();
-        this.request("ResetPassword", req, resp, cb);
-    }
-
-    /**
-     * This API is used to perform a failure simulation.
-     * @param {KillMasterGroupRequest} req
-     * @param {function(string, KillMasterGroupResponse):void} cb
-     * @public
-     */
-    KillMasterGroup(req, cb) {
-        let resp = new KillMasterGroupResponse();
-        this.request("KillMasterGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to upgrade an instance to support multi-AZ deployment.
-     * @param {UpgradeVersionToMultiAvailabilityZonesRequest} req
-     * @param {function(string, UpgradeVersionToMultiAvailabilityZonesResponse):void} cb
-     * @public
-     */
-    UpgradeVersionToMultiAvailabilityZones(req, cb) {
-        let resp = new UpgradeVersionToMultiAvailabilityZonesResponse();
-        this.request("UpgradeVersionToMultiAvailabilityZones", req, resp, cb);
-    }
-
-    /**
-     * This API has been disused. It was used to query the list of Redis instance information.
-     * @param {DescribeCommonDBInstancesRequest} req
-     * @param {function(string, DescribeCommonDBInstancesResponse):void} cb
-     * @public
-     */
-    DescribeCommonDBInstances(req, cb) {
-        let resp = new DescribeCommonDBInstancesResponse();
-        this.request("DescribeCommonDBInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query purchasable TencentDB for Redis specifications in all regions.
-     * @param {DescribeProductInfoRequest} req
-     * @param {function(string, DescribeProductInfoResponse):void} cb
-     * @public
-     */
-    DescribeProductInfo(req, cb) {
-        let resp = new DescribeProductInfoResponse();
-        this.request("DescribeProductInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to renew an instance.
-     * @param {RenewInstanceRequest} req
-     * @param {function(string, RenewInstanceResponse):void} cb
-     * @public
-     */
-    RenewInstance(req, cb) {
-        let resp = new RenewInstanceResponse();
-        this.request("RenewInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to upgrade instance minor version.
-     * @param {UpgradeSmallVersionRequest} req
-     * @param {function(string, UpgradeSmallVersionResponse):void} cb
-     * @public
-     */
-    UpgradeSmallVersion(req, cb) {
-        let resp = new UpgradeSmallVersionResponse();
-        this.request("UpgradeSmallVersion", req, resp, cb);
+    ReleaseWanAddress(req, cb) {
+        let resp = new ReleaseWanAddressResponse();
+        this.request("ReleaseWanAddress", req, resp, cb);
     }
 
     /**
@@ -985,69 +714,25 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the security groups bound to an instance.
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * This API is used to simulate the failure of a proxy node.
+     * @param {SwitchProxyRequest} req
+     * @param {function(string, SwitchProxyResponse):void} cb
      * @public
      */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    SwitchProxy(req, cb) {
+        let resp = new SwitchProxyResponse();
+        this.request("SwitchProxy", req, resp, cb);
     }
 
     /**
-     * This API is used to modify the access password for an instance.
-     * @param {ModfiyInstancePasswordRequest} req
-     * @param {function(string, ModfiyInstancePasswordResponse):void} cb
+     * This API is used to return a monthly subscribed instance.
+     * @param {DestroyPrepaidInstanceRequest} req
+     * @param {function(string, DestroyPrepaidInstanceResponse):void} cb
      * @public
      */
-    ModfiyInstancePassword(req, cb) {
-        let resp = new ModfiyInstancePasswordResponse();
-        this.request("ModfiyInstancePassword", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the security group details of an instance.
-     * @param {DescribeDBSecurityGroupsRequest} req
-     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
-     * @public
-     */
-    DescribeDBSecurityGroups(req, cb) {
-        let resp = new DescribeDBSecurityGroupsResponse();
-        this.request("DescribeDBSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of instance parameters.
-     * @param {DescribeInstanceParamsRequest} req
-     * @param {function(string, DescribeInstanceParamsResponse):void} cb
-     * @public
-     */
-    DescribeInstanceParams(req, cb) {
-        let resp = new DescribeInstanceParamsResponse();
-        this.request("DescribeInstanceParams", req, resp, cb);
-    }
-
-    /**
-     * This API is used to apply a parameter template to instances.
-     * @param {ApplyParamsTemplateRequest} req
-     * @param {function(string, ApplyParamsTemplateResponse):void} cb
-     * @public
-     */
-    ApplyParamsTemplate(req, cb) {
-        let resp = new ApplyParamsTemplateResponse();
-        this.request("ApplyParamsTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the download address for a database backup file in the current region.
-     * @param {DescribeBackupDownloadRestrictionRequest} req
-     * @param {function(string, DescribeBackupDownloadRestrictionResponse):void} cb
-     * @public
-     */
-    DescribeBackupDownloadRestriction(req, cb) {
-        let resp = new DescribeBackupDownloadRestrictionResponse();
-        this.request("DescribeBackupDownloadRestriction", req, resp, cb);
+    DestroyPrepaidInstance(req, cb) {
+        let resp = new DestroyPrepaidInstanceResponse();
+        this.request("DestroyPrepaidInstance", req, resp, cb);
     }
 
     /**
@@ -1062,102 +747,25 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a Redis instance.
-     * @param {CreateInstancesRequest} req
-     * @param {function(string, CreateInstancesResponse):void} cb
+     * This API is used to query the details of a parameter template.
+     * @param {DescribeParamTemplateInfoRequest} req
+     * @param {function(string, DescribeParamTemplateInfoResponse):void} cb
      * @public
      */
-    CreateInstances(req, cb) {
-        let resp = new CreateInstancesResponse();
-        this.request("CreateInstances", req, resp, cb);
+    DescribeParamTemplateInfo(req, cb) {
+        let resp = new DescribeParamTemplateInfoResponse();
+        this.request("DescribeParamTemplateInfo", req, resp, cb);
     }
 
     /**
-     * This API is used to query the Redis node details.
-     * @param {DescribeInstanceZoneInfoRequest} req
-     * @param {function(string, DescribeInstanceZoneInfoResponse):void} cb
+     * This API is used to terminate a pay-as-you-go instance.
+     * @param {DestroyPostpaidInstanceRequest} req
+     * @param {function(string, DestroyPostpaidInstanceResponse):void} cb
      * @public
      */
-    DescribeInstanceZoneInfo(req, cb) {
-        let resp = new DescribeInstanceZoneInfoResponse();
-        this.request("DescribeInstanceZoneInfo", req, resp, cb);
-    }
-
-    /**
-     * This API is used to enable public network access.
-     * @param {AllocateWanAddressRequest} req
-     * @param {function(string, AllocateWanAddressResponse):void} cb
-     * @public
-     */
-    AllocateWanAddress(req, cb) {
-        let resp = new AllocateWanAddressResponse();
-        this.request("AllocateWanAddress", req, resp, cb);
-    }
-
-    /**
-     * This API is used to disable SSL.
-     * @param {CloseSSLRequest} req
-     * @param {function(string, CloseSSLResponse):void} cb
-     * @public
-     */
-    CloseSSL(req, cb) {
-        let resp = new CloseSSLResponse();
-        this.request("CloseSSL", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete an instance sub-account.
-     * @param {DeleteInstanceAccountRequest} req
-     * @param {function(string, DeleteInstanceAccountResponse):void} cb
-     * @public
-     */
-    DeleteInstanceAccount(req, cb) {
-        let resp = new DeleteInstanceAccountResponse();
-        this.request("DeleteInstanceAccount", req, resp, cb);
-    }
-
-    /**
-     * This API is used to view instance sub-account information.
-     * @param {DescribeInstanceAccountRequest} req
-     * @param {function(string, DescribeInstanceAccountResponse):void} cb
-     * @public
-     */
-    DescribeInstanceAccount(req, cb) {
-        let resp = new DescribeInstanceAccountResponse();
-        this.request("DescribeInstanceAccount", req, resp, cb);
-    }
-
-    /**
-     * This API is used to unbind a security group from instances in batches.
-     * @param {DisassociateSecurityGroupsRequest} req
-     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
-     * @public
-     */
-    DisassociateSecurityGroups(req, cb) {
-        let resp = new DisassociateSecurityGroupsResponse();
-        this.request("DisassociateSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * This API is used to deisolate an instance.
-     * @param {StartupInstanceRequest} req
-     * @param {function(string, StartupInstanceResponse):void} cb
-     * @public
-     */
-    StartupInstance(req, cb) {
-        let resp = new StartupInstanceResponse();
-        this.request("StartupInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify instance information.
-     * @param {ModifyInstanceRequest} req
-     * @param {function(string, ModifyInstanceResponse):void} cb
-     * @public
-     */
-    ModifyInstance(req, cb) {
-        let resp = new ModifyInstanceResponse();
-        this.request("ModifyInstance", req, resp, cb);
+    DestroyPostpaidInstance(req, cb) {
+        let resp = new DestroyPostpaidInstanceResponse();
+        this.request("DestroyPostpaidInstance", req, resp, cb);
     }
 
     /**
@@ -1172,14 +780,432 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the role of an instance in a replication group.
-     * @param {ChangeInstanceRoleRequest} req
-     * @param {function(string, ChangeInstanceRoleResponse):void} cb
+     * This API is used to query the list of parameter templates.
+     * @param {DescribeParamTemplatesRequest} req
+     * @param {function(string, DescribeParamTemplatesResponse):void} cb
      * @public
      */
-    ChangeInstanceRole(req, cb) {
-        let resp = new ChangeInstanceRoleResponse();
-        this.request("ChangeInstanceRole", req, resp, cb);
+    DescribeParamTemplates(req, cb) {
+        let resp = new DescribeParamTemplatesResponse();
+        this.request("DescribeParamTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the backup list of an instance.
+     * @param {DescribeInstanceBackupsRequest} req
+     * @param {function(string, DescribeInstanceBackupsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceBackups(req, cb) {
+        let resp = new DescribeInstanceBackupsResponse();
+        this.request("DescribeInstanceBackups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reset a password.
+     * @param {ResetPasswordRequest} req
+     * @param {function(string, ResetPasswordResponse):void} cb
+     * @public
+     */
+    ResetPassword(req, cb) {
+        let resp = new ResetPasswordResponse();
+        this.request("ResetPassword", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove a member from a replication group.
+     * @param {RemoveReplicationInstanceRequest} req
+     * @param {function(string, RemoveReplicationInstanceResponse):void} cb
+     * @public
+     */
+    RemoveReplicationInstance(req, cb) {
+        let resp = new RemoveReplicationInstanceResponse();
+        this.request("RemoveReplicationInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade instance minor version.
+     * @param {UpgradeSmallVersionRequest} req
+     * @param {function(string, UpgradeSmallVersionResponse):void} cb
+     * @public
+     */
+    UpgradeSmallVersion(req, cb) {
+        let resp = new UpgradeSmallVersionResponse();
+        this.request("UpgradeSmallVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the access source information of an instance.
+     * @param {DescribeInstanceMonitorSIPRequest} req
+     * @param {function(string, DescribeInstanceMonitorSIPResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorSIP(req, cb) {
+        let resp = new DescribeInstanceMonitorSIPResponse();
+        this.request("DescribeInstanceMonitorSIP", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the security group information of a project.
+     * @param {DescribeProjectSecurityGroupRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupResponse):void} cb
+     * @public
+     */
+    DescribeProjectSecurityGroup(req, cb) {
+        let resp = new DescribeProjectSecurityGroupResponse();
+        this.request("DescribeProjectSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the hot key of an instance.
+     * @param {DescribeInstanceMonitorHotKeyRequest} req
+     * @param {function(string, DescribeInstanceMonitorHotKeyResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorHotKey(req, cb) {
+        let resp = new DescribeInstanceMonitorHotKeyResponse();
+        this.request("DescribeInstanceMonitorHotKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the access password for an instance.
+     * @param {ModfiyInstancePasswordRequest} req
+     * @param {function(string, ModfiyInstancePasswordResponse):void} cb
+     * @public
+     */
+    ModfiyInstancePassword(req, cb) {
+        let resp = new ModfiyInstancePasswordResponse();
+        this.request("ModfiyInstancePassword", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable read/write separation.
+     * @param {EnableReplicaReadonlyRequest} req
+     * @param {function(string, EnableReplicaReadonlyResponse):void} cb
+     * @public
+     */
+    EnableReplicaReadonly(req, cb) {
+        let resp = new EnableReplicaReadonlyResponse();
+        this.request("EnableReplicaReadonly", req, resp, cb);
+    }
+
+    /**
+     * This API is used to bind a security group to instances in batches.
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the SSL authentication information of an instance, such as enablement status, configuration status, and certificate address.
+     * @param {DescribeSSLStatusRequest} req
+     * @param {function(string, DescribeSSLStatusResponse):void} cb
+     * @public
+     */
+    DescribeSSLStatus(req, cb) {
+        let resp = new DescribeSSLStatusResponse();
+        this.request("DescribeSSLStatus", req, resp, cb);
+    }
+
+    /**
+     * The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
+     * @param {DescribeInstanceMonitorBigKeyRequest} req
+     * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorBigKey(req, cb) {
+        let resp = new DescribeInstanceMonitorBigKeyResponse();
+        this.request("DescribeInstanceMonitorBigKey", req, resp, cb);
+    }
+
+    /**
+     * This API is used to perform a failure simulation.
+     * @param {KillMasterGroupRequest} req
+     * @param {function(string, KillMasterGroupResponse):void} cb
+     * @public
+     */
+    KillMasterGroup(req, cb) {
+        let resp = new KillMasterGroupResponse();
+        this.request("KillMasterGroup", req, resp, cb);
+    }
+
+    /**
+     * This API has been disused. It was used to query the list of Redis instance information.
+     * @param {DescribeCommonDBInstancesRequest} req
+     * @param {function(string, DescribeCommonDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeCommonDBInstances(req, cb) {
+        let resp = new DescribeCommonDBInstancesResponse();
+        this.request("DescribeCommonDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the records of slow query.
+     * @param {DescribeSlowLogRequest} req
+     * @param {function(string, DescribeSlowLogResponse):void} cb
+     * @public
+     */
+    DescribeSlowLog(req, cb) {
+        let resp = new DescribeSlowLogResponse();
+        this.request("DescribeSlowLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the download address for a database backup file in the current region.
+     * @param {DescribeBackupDownloadRestrictionRequest} req
+     * @param {function(string, DescribeBackupDownloadRestrictionResponse):void} cb
+     * @public
+     */
+    DescribeBackupDownloadRestriction(req, cb) {
+        let resp = new DescribeBackupDownloadRestrictionResponse();
+        this.request("DescribeBackupDownloadRestriction", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the Redis node details.
+     * @param {DescribeInstanceZoneInfoRequest} req
+     * @param {function(string, DescribeInstanceZoneInfoResponse):void} cb
+     * @public
+     */
+    DescribeInstanceZoneInfo(req, cb) {
+        let resp = new DescribeInstanceZoneInfoResponse();
+        this.request("DescribeInstanceZoneInfo", req, resp, cb);
+    }
+
+    /**
+     * This API is used to swap the VIPs of instances for instance disaster recovery switch in scenarios where cross-AZ disaster recovery is supported through DTS. After the VIPs of the source and target instances are swapped, the target instance can be written into and the DTS sync task between them will be disconnected.
+     * @param {SwitchInstanceVipRequest} req
+     * @param {function(string, SwitchInstanceVipResponse):void} cb
+     * @public
+     */
+    SwitchInstanceVip(req, cb) {
+        let resp = new SwitchInstanceVipResponse();
+        this.request("SwitchInstanceVip", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query a replication group.
+     * @param {DescribeReplicationGroupRequest} req
+     * @param {function(string, DescribeReplicationGroupResponse):void} cb
+     * @public
+     */
+    DescribeReplicationGroup(req, cb) {
+        let resp = new DescribeReplicationGroupResponse();
+        this.request("DescribeReplicationGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the instance maintenance time. The maintenance time specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business. Note: if the compatible version upgrade or architecture upgrade task has been initiated for an instance, its maintenance time cannot be modified.
+     * @param {ModifyMaintenanceWindowRequest} req
+     * @param {function(string, ModifyMaintenanceWindowResponse):void} cb
+     * @public
+     */
+    ModifyMaintenanceWindow(req, cb) {
+        let resp = new ModifyMaintenanceWindowResponse();
+        this.request("ModifyMaintenanceWindow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the network configuration of an instance.
+     * @param {ModifyNetworkConfigRequest} req
+     * @param {function(string, ModifyNetworkConfigResponse):void} cb
+     * @public
+     */
+    ModifyNetworkConfig(req, cb) {
+        let resp = new ModifyNetworkConfigResponse();
+        this.request("ModifyNetworkConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the information of Cluster Edition instance shards.
+     * @param {DescribeInstanceShardsRequest} req
+     * @param {function(string, DescribeInstanceShardsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceShards(req, cb) {
+        let resp = new DescribeInstanceShardsResponse();
+        this.request("DescribeInstanceShards", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restore a Redis instance.
+     * @param {RestoreInstanceRequest} req
+     * @param {function(string, RestoreInstanceResponse):void} cb
+     * @public
+     */
+    RestoreInstance(req, cb) {
+        let resp = new RestoreInstanceResponse();
+        this.request("RestoreInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of Redis instances.
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable SSL.
+     * @param {OpenSSLRequest} req
+     * @param {function(string, OpenSSLResponse):void} cb
+     * @public
+     */
+    OpenSSL(req, cb) {
+        let resp = new OpenSSLResponse();
+        this.request("OpenSSL", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the backup configuration.
+     * @param {DescribeAutoBackupConfigRequest} req
+     * @param {function(string, DescribeAutoBackupConfigResponse):void} cb
+     * @public
+     */
+    DescribeAutoBackupConfig(req, cb) {
+        let resp = new DescribeAutoBackupConfigResponse();
+        this.request("DescribeAutoBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the information of instance bandwidth.
+     * @param {DescribeBandwidthRangeRequest} req
+     * @param {function(string, DescribeBandwidthRangeResponse):void} cb
+     * @public
+     */
+    DescribeBandwidthRange(req, cb) {
+        let resp = new DescribeBandwidthRangeResponse();
+        this.request("DescribeBandwidthRange", req, resp, cb);
+    }
+
+    /**
+     * This API is used to deisolate an instance.
+     * @param {StartupInstanceRequest} req
+     * @param {function(string, StartupInstanceResponse):void} cb
+     * @public
+     */
+    StartupInstance(req, cb) {
+        let resp = new StartupInstanceResponse();
+        this.request("StartupInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the slow queries of the proxy.
+     * @param {DescribeProxySlowLogRequest} req
+     * @param {function(string, DescribeProxySlowLogResponse):void} cb
+     * @public
+     */
+    DescribeProxySlowLog(req, cb) {
+        let resp = new DescribeProxySlowLogResponse();
+        this.request("DescribeProxySlowLog", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the security groups bound to an instance.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to switch with master instance in a replication group.
+     * @param {ChangeMasterInstanceRequest} req
+     * @param {function(string, ChangeMasterInstanceResponse):void} cb
+     * @public
+     */
+    ChangeMasterInstance(req, cb) {
+        let resp = new ChangeMasterInstanceResponse();
+        this.request("ChangeMasterInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the instance configuration.
+     * @param {UpgradeInstanceRequest} req
+     * @param {function(string, UpgradeInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeInstance(req, cb) {
+        let resp = new UpgradeInstanceResponse();
+        this.request("UpgradeInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the security group details of an instance.
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to apply a parameter template to instances.
+     * @param {ApplyParamsTemplateRequest} req
+     * @param {function(string, ApplyParamsTemplateResponse):void} cb
+     * @public
+     */
+    ApplyParamsTemplate(req, cb) {
+        let resp = new ApplyParamsTemplateResponse();
+        this.request("ApplyParamsTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query instance maintenance window. The maintenance window specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business.
+     * @param {DescribeMaintenanceWindowRequest} req
+     * @param {function(string, DescribeMaintenanceWindowResponse):void} cb
+     * @public
+     */
+    DescribeMaintenanceWindow(req, cb) {
+        let resp = new DescribeMaintenanceWindowResponse();
+        this.request("DescribeMaintenanceWindow", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an TencentDB or Redis instance.
+     * @param {CreateInstancesRequest} req
+     * @param {function(string, CreateInstancesResponse):void} cb
+     * @public
+     */
+    CreateInstances(req, cb) {
+        let resp = new CreateInstancesResponse();
+        this.request("CreateInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the order information.
+     * @param {DescribeInstanceDealDetailRequest} req
+     * @param {function(string, DescribeInstanceDealDetailResponse):void} cb
+     * @public
+     */
+    DescribeInstanceDealDetail(req, cb) {
+        let resp = new DescribeInstanceDealDetailResponse();
+        this.request("DescribeInstanceDealDetail", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable SSL.
+     * @param {CloseSSLRequest} req
+     * @param {function(string, CloseSSLResponse):void} cb
+     * @public
+     */
+    CloseSSL(req, cb) {
+        let resp = new CloseSSLResponse();
+        this.request("CloseSSL", req, resp, cb);
     }
 
 

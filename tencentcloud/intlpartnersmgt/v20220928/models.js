@@ -186,30 +186,36 @@ class QueryVoucherAmountByUinItem extends  AbstractModel {
 }
 
 /**
- * The credit information of direct customers
+ * Returned information for querying the customer credit allocation records
  * @class
  */
-class QueryDirectCustomersCreditData extends  AbstractModel {
+class QueryCreditAllocationHistoryData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * User UIN
-         * @type {number || null}
+         * Allocation time
+         * @type {string || null}
          */
-        this.Uin = null;
+        this.AllocatedTime = null;
 
         /**
-         * Total credit
-         * @type {number || null}
+         * Operator
+         * @type {string || null}
          */
-        this.TotalCredit = null;
+        this.Operator = null;
 
         /**
-         * Remaining credit
+         * Allocated credit value
          * @type {number || null}
          */
-        this.RemainingCredit = null;
+        this.Credit = null;
+
+        /**
+         * The allocated total credit
+         * @type {number || null}
+         */
+        this.AllocatedCredit = null;
 
     }
 
@@ -220,9 +226,54 @@ class QueryDirectCustomersCreditData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.TotalCredit = 'TotalCredit' in params ? params.TotalCredit : null;
-        this.RemainingCredit = 'RemainingCredit' in params ? params.RemainingCredit : null;
+        this.AllocatedTime = 'AllocatedTime' in params ? params.AllocatedTime : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Credit = 'Credit' in params ? params.Credit : null;
+        this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
+
+    }
+}
+
+/**
+ * DescribeBillSummaryByPayMode response structure.
+ * @class
+ */
+class DescribeBillSummaryByPayModeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Payment mode details in the customer bill data totaled by payment mode
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PayModeSummaryOverviewItem> || null}
+         */
+        this.SummaryOverview = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SummaryOverview) {
+            this.SummaryOverview = new Array();
+            for (let z in params.SummaryOverview) {
+                let obj = new PayModeSummaryOverviewItem();
+                obj.deserialize(params.SummaryOverview[z]);
+                this.SummaryOverview.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -273,6 +324,50 @@ class QueryVoucherListByUinItem extends  AbstractModel {
                 this.Data.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeBillSummaryByProduct response structure.
+ * @class
+ */
+class DescribeBillSummaryByProductResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Bill details from the product dimension
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<BusinessSummaryOverviewItem> || null}
+         */
+        this.SummaryOverview = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SummaryOverview) {
+            this.SummaryOverview = new Array();
+            for (let z in params.SummaryOverview) {
+                let obj = new BusinessSummaryOverviewItem();
+                obj.deserialize(params.SummaryOverview[z]);
+                this.SummaryOverview.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -329,6 +424,50 @@ class AllocateCustomerCreditRequest extends  AbstractModel {
         }
         this.AddedCredit = 'AddedCredit' in params ? params.AddedCredit : null;
         this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+
+    }
+}
+
+/**
+ * DescribeBillSummaryByRegion response structure.
+ * @class
+ */
+class DescribeBillSummaryByRegionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region details in the customer bill data totaled by region
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<RegionSummaryOverviewItem> || null}
+         */
+        this.SummaryOverview = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SummaryOverview) {
+            this.SummaryOverview = new Array();
+            for (let z in params.SummaryOverview) {
+                let obj = new RegionSummaryOverviewItem();
+                obj.deserialize(params.SummaryOverview[z]);
+                this.SummaryOverview.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -488,12 +627,30 @@ class CreateAccountResponse extends  AbstractModel {
 }
 
 /**
- * GetCountryCodes request structure.
+ * QueryCreditAllocationHistory request structure.
  * @class
  */
-class GetCountryCodesRequest extends  AbstractModel {
+class QueryCreditAllocationHistoryRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.ClientUin = null;
+
+        /**
+         * Page number
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * Number of data entries per page
+         * @type {number || null}
+         */
+        this.PageSize = null;
 
     }
 
@@ -504,6 +661,70 @@ class GetCountryCodesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+
+    }
+}
+
+/**
+ * Region details in the customer bill data totaled by region
+ * @class
+ */
+class RegionSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Region ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * Region name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * The actual total consumption amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalCost = null;
+
+        /**
+         * The deducted voucher amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * Total consumption amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -547,6 +768,102 @@ class QueryCreditByUinListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Product details in the customer bill data totaled by product
+ * @class
+ */
+class BusinessSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Product code
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BusinessCode = null;
+
+        /**
+         * Product name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BusinessCodeName = null;
+
+        /**
+         * List price accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalCost = null;
+
+        /**
+         * The deducted voucher amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * Consumption amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BusinessCode = 'BusinessCode' in params ? params.BusinessCode : null;
+        this.BusinessCodeName = 'BusinessCodeName' in params ? params.BusinessCodeName : null;
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+
+    }
+}
+
+/**
+ * DescribeBillSummaryByRegion request structure.
+ * @class
+ */
+class DescribeBillSummaryByRegionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Bill month in the format of "yyyy-MM"
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
+        /**
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.CustomerUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
 
     }
 }
@@ -899,6 +1216,102 @@ A global mobile number within 1-32 digits is allowed, such as 18888888888.
 }
 
 /**
+ * DescribeBillSummaryByPayMode request structure.
+ * @class
+ */
+class DescribeBillSummaryByPayModeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Bill month in the format of "yyyy-MM"
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
+        /**
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.CustomerUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
+
+    }
+}
+
+/**
+ * Transaction type details in the customer bill data totaled by payment mode
+ * @class
+ */
+class ActionSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Transaction type code
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * Transaction type name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ActionTypeName = null;
+
+        /**
+         * The actual total consumption amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalCost = null;
+
+        /**
+         * The deducted voucher amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * Total consumption amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ActionTypeName = 'ActionTypeName' in params ? params.ActionTypeName : null;
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+
+    }
+}
+
+/**
  * GetCountryCodes response structure.
  * @class
  */
@@ -1082,36 +1495,30 @@ class QueryVoucherAmountByUinRequest extends  AbstractModel {
 }
 
 /**
- * Returned information for querying the customer credit allocation records
+ * The credit information of direct customers
  * @class
  */
-class QueryCreditAllocationHistoryData extends  AbstractModel {
+class QueryDirectCustomersCreditData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Allocation time
-         * @type {string || null}
-         */
-        this.AllocatedTime = null;
-
-        /**
-         * Operator
-         * @type {string || null}
-         */
-        this.Operator = null;
-
-        /**
-         * Allocated credit value
+         * User UIN
          * @type {number || null}
          */
-        this.Credit = null;
+        this.Uin = null;
 
         /**
-         * The allocated total credit
+         * Total credit
          * @type {number || null}
          */
-        this.AllocatedCredit = null;
+        this.TotalCredit = null;
+
+        /**
+         * Remaining credit
+         * @type {number || null}
+         */
+        this.RemainingCredit = null;
 
     }
 
@@ -1122,39 +1529,20 @@ class QueryCreditAllocationHistoryData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AllocatedTime = 'AllocatedTime' in params ? params.AllocatedTime : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
-        this.Credit = 'Credit' in params ? params.Credit : null;
-        this.AllocatedCredit = 'AllocatedCredit' in params ? params.AllocatedCredit : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.TotalCredit = 'TotalCredit' in params ? params.TotalCredit : null;
+        this.RemainingCredit = 'RemainingCredit' in params ? params.RemainingCredit : null;
 
     }
 }
 
 /**
- * QueryCreditAllocationHistory request structure.
+ * GetCountryCodes request structure.
  * @class
  */
-class QueryCreditAllocationHistoryRequest extends  AbstractModel {
+class GetCountryCodesRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Customer UIN
-         * @type {number || null}
-         */
-        this.ClientUin = null;
-
-        /**
-         * Page number
-         * @type {number || null}
-         */
-        this.Page = null;
-
-        /**
-         * Number of data entries per page
-         * @type {number || null}
-         */
-        this.PageSize = null;
 
     }
 
@@ -1165,9 +1553,6 @@ class QueryCreditAllocationHistoryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
-        this.Page = 'Page' in params ? params.Page : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -1497,6 +1882,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeBillSummaryByProduct request structure.
+ * @class
+ */
+class DescribeBillSummaryByProductRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Bill month in the format of "yyyy-MM"
+         * @type {string || null}
+         */
+        this.BillMonth = null;
+
+        /**
+         * Customer UIN
+         * @type {number || null}
+         */
+        this.CustomerUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BillMonth = 'BillMonth' in params ? params.BillMonth : null;
+        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
+
+    }
+}
+
+/**
  * QueryDirectCustomersCredit response structure.
  * @class
  */
@@ -1604,72 +2024,31 @@ class QueryVoucherPoolRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCustomerBillSummary request structure.
+ * QueryCustomersCredit response structure.
  * @class
  */
-class DescribeCustomerBillSummaryRequest extends  AbstractModel {
+class QueryCustomersCreditResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Customer UIN
+         * The list of queried customers
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<QueryCustomersCreditData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Number of customers
          * @type {number || null}
          */
-        this.CustomerUin = null;
+        this.Total = null;
 
         /**
-         * The queried month in “YYYY-MM” format, such as 2023-01.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Month = null;
-
-        /**
-         * Billing mode. Valid values:
-`prePay` (Monthly subscription)
-`postPay` (Pay-as-you-go)
-         * @type {string || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * Transaction type. Valid values:
-`prepay_purchase` (Purchase)
-`prepay_renew` (Renewal)
-`prepay_modify` (Upgrade/Downgrade)
-`prepay_return` (Monthly subscription refund)
-`postpay_deduct` (Pay-as-you-go)
-`postpay_deduct_h` (Hourly settlement)
-`postpay_deduct_d` (Daily settlement)
-`postpay_deduct_m` (Monthly settlement)
-`offline_deduct` (Offline project deduction)
-`online_deduct` (Offline product deduction)
-`recon_deduct` (Adjustment - deduction)
-`recon_increase` (Adjustment - compensation)
-`ripay_purchase` (One-off RI Fee)
-`postpay_deduct_s` (Spot)
-`ri_hour_pay` (Hourly RI fee)
-`prePurchase` (New monthly subscription)
-`preRenew` (Monthly subscription renewal)
-`preUpgrade` (Upgrade/Downgrade)
-`preDowngrade` (Upgrade/Downgrade)
-`svp_hour_pay` (Hourly Savings Plan fee)
-`recon_guarantee` (Minimum spend deduction)
-`pre_purchase` (New monthly subscription)
-`pre_renew` (Monthly subscription renewal)
-`pre_upgrade` (Upgrade/Downgrade)
-`pre_downgrade` (Upgrade/Downgrade)
-         * @type {string || null}
-         */
-        this.ActionType = null;
-
-        /**
-         * Payment status
-`0`: N/A
-`1`: Paid
-`2`: Unpaid
-         * @type {string || null}
-         */
-        this.IsConfirmed = null;
+        this.RequestId = null;
 
     }
 
@@ -1680,11 +2059,94 @@ class DescribeCustomerBillSummaryRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
-        this.Month = 'Month' in params ? params.Month : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new QueryCustomersCreditData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Payment mode details in the customer bill data totaled by payment mode
+ * @class
+ */
+class PayModeSummaryOverviewItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Billing mode
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Billing mode name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PayModeName = null;
+
+        /**
+         * The actual total consumption amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.OriginalCost = null;
+
+        /**
+         * Bill details in each payment mode
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<ActionSummaryOverviewItem> || null}
+         */
+        this.Detail = null;
+
+        /**
+         * The deducted voucher amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VoucherPayAmount = null;
+
+        /**
+         * Total consumption amount accurate down to eight decimal places
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.ActionType = 'ActionType' in params ? params.ActionType : null;
-        this.IsConfirmed = 'IsConfirmed' in params ? params.IsConfirmed : null;
+        this.PayModeName = 'PayModeName' in params ? params.PayModeName : null;
+        this.OriginalCost = 'OriginalCost' in params ? params.OriginalCost : null;
+
+        if (params.Detail) {
+            this.Detail = new Array();
+            for (let z in params.Detail) {
+                let obj = new ActionSummaryOverviewItem();
+                obj.deserialize(params.Detail[z]);
+                this.Detail.push(obj);
+            }
+        }
+        this.VoucherPayAmount = 'VoucherPayAmount' in params ? params.VoucherPayAmount : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
 
     }
 }
@@ -1802,31 +2264,72 @@ class QueryCustomersCreditData extends  AbstractModel {
 }
 
 /**
- * QueryCustomersCredit response structure.
+ * DescribeCustomerBillSummary request structure.
  * @class
  */
-class QueryCustomersCreditResponse extends  AbstractModel {
+class DescribeCustomerBillSummaryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The list of queried customers
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<QueryCustomersCreditData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * Number of customers
+         * Customer UIN
          * @type {number || null}
          */
-        this.Total = null;
+        this.CustomerUin = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The queried month in “YYYY-MM” format, such as 2023-01.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Month = null;
+
+        /**
+         * Billing mode. Valid values:
+`prePay` (Monthly subscription)
+`postPay` (Pay-as-you-go)
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Transaction type. Valid values:
+`prepay_purchase` (Purchase)
+`prepay_renew` (Renewal)
+`prepay_modify` (Upgrade/Downgrade)
+`prepay_return` (Monthly subscription refund)
+`postpay_deduct` (Pay-as-you-go)
+`postpay_deduct_h` (Hourly settlement)
+`postpay_deduct_d` (Daily settlement)
+`postpay_deduct_m` (Monthly settlement)
+`offline_deduct` (Offline project deduction)
+`online_deduct` (Offline product deduction)
+`recon_deduct` (Adjustment - deduction)
+`recon_increase` (Adjustment - compensation)
+`ripay_purchase` (One-off RI Fee)
+`postpay_deduct_s` (Spot)
+`ri_hour_pay` (Hourly RI fee)
+`prePurchase` (New monthly subscription)
+`preRenew` (Monthly subscription renewal)
+`preUpgrade` (Upgrade/Downgrade)
+`preDowngrade` (Upgrade/Downgrade)
+`svp_hour_pay` (Hourly Savings Plan fee)
+`recon_guarantee` (Minimum spend deduction)
+`pre_purchase` (New monthly subscription)
+`pre_renew` (Monthly subscription renewal)
+`pre_upgrade` (Upgrade/Downgrade)
+`pre_downgrade` (Upgrade/Downgrade)
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * Payment status
+`0`: N/A
+`1`: Paid
+`2`: Unpaid
+         * @type {string || null}
+         */
+        this.IsConfirmed = null;
 
     }
 
@@ -1837,17 +2340,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new QueryCustomersCreditData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.Total = 'Total' in params ? params.Total : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CustomerUin = 'CustomerUin' in params ? params.CustomerUin : null;
+        this.Month = 'Month' in params ? params.Month : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.IsConfirmed = 'IsConfirmed' in params ? params.IsConfirmed : null;
 
     }
 }
@@ -1857,35 +2354,45 @@ module.exports = {
     QueryVoucherListByUinRequest: QueryVoucherListByUinRequest,
     QueryVoucherAmountByUinResponse: QueryVoucherAmountByUinResponse,
     QueryVoucherAmountByUinItem: QueryVoucherAmountByUinItem,
-    QueryDirectCustomersCreditData: QueryDirectCustomersCreditData,
+    QueryCreditAllocationHistoryData: QueryCreditAllocationHistoryData,
+    DescribeBillSummaryByPayModeResponse: DescribeBillSummaryByPayModeResponse,
     QueryVoucherListByUinItem: QueryVoucherListByUinItem,
+    DescribeBillSummaryByProductResponse: DescribeBillSummaryByProductResponse,
     QueryPartnerCreditRequest: QueryPartnerCreditRequest,
     AllocateCustomerCreditRequest: AllocateCustomerCreditRequest,
+    DescribeBillSummaryByRegionResponse: DescribeBillSummaryByRegionResponse,
     DescribeCustomerBillSummaryResponse: DescribeCustomerBillSummaryResponse,
     QueryCustomersCreditRequest: QueryCustomersCreditRequest,
     QueryCreditByUinListRequest: QueryCreditByUinListRequest,
     CreateAccountResponse: CreateAccountResponse,
-    GetCountryCodesRequest: GetCountryCodesRequest,
+    QueryCreditAllocationHistoryRequest: QueryCreditAllocationHistoryRequest,
+    RegionSummaryOverviewItem: RegionSummaryOverviewItem,
     QueryCreditByUinListResponse: QueryCreditByUinListResponse,
+    BusinessSummaryOverviewItem: BusinessSummaryOverviewItem,
+    DescribeBillSummaryByRegionRequest: DescribeBillSummaryByRegionRequest,
     QueryVoucherPoolResponse: QueryVoucherPoolResponse,
     DescribeCustomerBillDetailRequest: DescribeCustomerBillDetailRequest,
     DescribeCustomerBillDetailResponse: DescribeCustomerBillDetailResponse,
     QueryCreditAllocationHistoryResponse: QueryCreditAllocationHistoryResponse,
     CreateAccountRequest: CreateAccountRequest,
+    DescribeBillSummaryByPayModeRequest: DescribeBillSummaryByPayModeRequest,
+    ActionSummaryOverviewItem: ActionSummaryOverviewItem,
     GetCountryCodesResponse: GetCountryCodesResponse,
     QueryDirectCustomersCreditRequest: QueryDirectCustomersCreditRequest,
     AllocateCustomerCreditResponse: AllocateCustomerCreditResponse,
     QueryVoucherListByUinVoucherItem: QueryVoucherListByUinVoucherItem,
     QueryVoucherAmountByUinRequest: QueryVoucherAmountByUinRequest,
-    QueryCreditAllocationHistoryData: QueryCreditAllocationHistoryData,
-    QueryCreditAllocationHistoryRequest: QueryCreditAllocationHistoryRequest,
+    QueryDirectCustomersCreditData: QueryDirectCustomersCreditData,
+    GetCountryCodesRequest: GetCountryCodesRequest,
     CountryCodeItem: CountryCodeItem,
     BillDetailData: BillDetailData,
+    DescribeBillSummaryByProductRequest: DescribeBillSummaryByProductRequest,
     QueryDirectCustomersCreditResponse: QueryDirectCustomersCreditResponse,
     QueryVoucherListByUinResponse: QueryVoucherListByUinResponse,
     QueryVoucherPoolRequest: QueryVoucherPoolRequest,
-    DescribeCustomerBillSummaryRequest: DescribeCustomerBillSummaryRequest,
-    QueryCustomersCreditData: QueryCustomersCreditData,
     QueryCustomersCreditResponse: QueryCustomersCreditResponse,
+    PayModeSummaryOverviewItem: PayModeSummaryOverviewItem,
+    QueryCustomersCreditData: QueryCustomersCreditData,
+    DescribeCustomerBillSummaryRequest: DescribeCustomerBillSummaryRequest,
 
 }

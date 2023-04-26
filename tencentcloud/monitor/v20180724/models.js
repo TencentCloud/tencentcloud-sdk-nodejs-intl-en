@@ -2760,6 +2760,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.BoundNormal = null;
 
+        /**
+         * Resource pack status (`0`: Unavailable; `1`: Available)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ResourcePackageStatus = null;
+
+        /**
+         * Resource pack specification name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ResourcePackageSpecName = null;
+
     }
 
     /**
@@ -2784,6 +2798,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.BoundTotal = 'BoundTotal' in params ? params.BoundTotal : null;
         this.BoundNormal = 'BoundNormal' in params ? params.BoundNormal : null;
+        this.ResourcePackageStatus = 'ResourcePackageStatus' in params ? params.ResourcePackageStatus : null;
+        this.ResourcePackageSpecName = 'ResourcePackageSpecName' in params ? params.ResourcePackageSpecName : null;
 
     }
 }
@@ -8761,6 +8777,12 @@ class DescribePrometheusClusterAgentsResponse extends  AbstractModel {
         this.Total = null;
 
         /**
+         * Whether the TMP instance is associated with the cluster for the first time. If so, you need to configure recording rules for it. This also applies if it has no default recording rule.
+         * @type {boolean || null}
+         */
+        this.IsFirstBind = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -8785,6 +8807,7 @@ class DescribePrometheusClusterAgentsResponse extends  AbstractModel {
             }
         }
         this.Total = 'Total' in params ? params.Total : null;
+        this.IsFirstBind = 'IsFirstBind' in params ? params.IsFirstBind : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -21004,6 +21027,18 @@ class Filter extends  AbstractModel {
          */
         this.Value = null;
 
+        /**
+         * Filter name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Filter value range
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
     }
 
     /**
@@ -21016,6 +21051,8 @@ class Filter extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }

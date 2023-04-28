@@ -4108,6 +4108,13 @@ class DatahubTopicResp extends  AbstractModel {
          */
         this.TopicName = null;
 
+        /**
+         * TopicId
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
     }
 
     /**
@@ -4118,6 +4125,7 @@ class DatahubTopicResp extends  AbstractModel {
             return;
         }
         this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
 
     }
 }

@@ -393,6 +393,66 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * Origin-pull authentication for other origins
+ * @class
+ */
+class OthersPrivateAccess extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable access authentication. Valid values: `on`, `off`.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Access ID.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * Key.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * Region.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Bucket name
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+
+    }
+}
+
+/**
  * DescribePushQuota response structure.
  * @class
  */
@@ -3445,7 +3505,8 @@ class BriefDomain extends  AbstractModel {
          * Acceleration service status
 `rejected`: The domain name is rejected due to expiration/deregistration of its ICP filing
 `processing`: Deploying
-`online`: Activated
+`closing`: Disabling
+`online`: Enabled
 `offline`: Disabled
          * @type {string || null}
          */
@@ -4769,6 +4830,500 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
+ * AddCdnDomain request structure.
+ * @class
+ */
+class AddCdnDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Acceleration domain name service type
+`web`: Webpage file downloads
+`download`: Large file downloads
+`media`: Audio and video on demand acceleration
+`hybrid`: Dynamic and static content acceleration
+`dynamic`: Dynamic content acceleration
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * Origin server configuration
+         * @type {Origin || null}
+         */
+        this.Origin = null;
+
+        /**
+         * Project ID. Default value: 0, indicating `Default Project`
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * IP blocklist/allowlist
+         * @type {IpFilter || null}
+         */
+        this.IpFilter = null;
+
+        /**
+         * IP rate limiting
+         * @type {IpFreqLimit || null}
+         */
+        this.IpFreqLimit = null;
+
+        /**
+         * Status code cache
+         * @type {StatusCodeCache || null}
+         */
+        this.StatusCodeCache = null;
+
+        /**
+         * Smart compression
+         * @type {Compression || null}
+         */
+        this.Compression = null;
+
+        /**
+         * Bandwidth cap configuration
+         * @type {BandwidthAlert || null}
+         */
+        this.BandwidthAlert = null;
+
+        /**
+         * Range GETs configuration
+         * @type {RangeOriginPull || null}
+         */
+        this.RangeOriginPull = null;
+
+        /**
+         * 301/302 origin-pull follow-redirect configuration
+         * @type {FollowRedirect || null}
+         */
+        this.FollowRedirect = null;
+
+        /**
+         * Error code redirection (in beta)
+         * @type {ErrorPage || null}
+         */
+        this.ErrorPage = null;
+
+        /**
+         * Request header configuration
+         * @type {RequestHeader || null}
+         */
+        this.RequestHeader = null;
+
+        /**
+         * Response header configuration
+         * @type {ResponseHeader || null}
+         */
+        this.ResponseHeader = null;
+
+        /**
+         * Download speed configuration
+         * @type {DownstreamCapping || null}
+         */
+        this.DownstreamCapping = null;
+
+        /**
+         * Node cache key configuration
+         * @type {CacheKey || null}
+         */
+        this.CacheKey = null;
+
+        /**
+         * Header cache configuration
+         * @type {ResponseHeaderCache || null}
+         */
+        this.ResponseHeaderCache = null;
+
+        /**
+         * Video dragging configuration
+         * @type {VideoSeek || null}
+         */
+        this.VideoSeek = null;
+
+        /**
+         * Cache validity configuration
+         * @type {Cache || null}
+         */
+        this.Cache = null;
+
+        /**
+         * Cross-MLC-border origin-pull optimization
+         * @type {OriginPullOptimization || null}
+         */
+        this.OriginPullOptimization = null;
+
+        /**
+         * HTTPS acceleration
+         * @type {Https || null}
+         */
+        this.Https = null;
+
+        /**
+         * Timestamp hotlink protection
+         * @type {Authentication || null}
+         */
+        this.Authentication = null;
+
+        /**
+         * SEO optimization
+         * @type {Seo || null}
+         */
+        this.Seo = null;
+
+        /**
+         * Force redirect by access protocol
+         * @type {ForceRedirect || null}
+         */
+        this.ForceRedirect = null;
+
+        /**
+         * Referer hotlink protection
+         * @type {Referer || null}
+         */
+        this.Referer = null;
+
+        /**
+         * Browser caching (in beta)
+         * @type {MaxAge || null}
+         */
+        this.MaxAge = null;
+
+        /**
+         * IPv6 configuration (This feature is in beta and not generally available yet.)
+         * @type {Ipv6 || null}
+         */
+        this.Ipv6 = null;
+
+        /**
+         * Specific region configuration
+Applicable to cases where the acceleration domain name configuration differs for regions in and outside mainland China.
+         * @type {SpecificConfig || null}
+         */
+        this.SpecificConfig = null;
+
+        /**
+         * Domain name acceleration region
+mainland: acceleration inside mainland China
+overseas: acceleration outside mainland China
+global: global acceleration
+Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Origin-pull timeout configuration
+         * @type {OriginPullTimeout || null}
+         */
+        this.OriginPullTimeout = null;
+
+        /**
+         * Tag configuration
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
+        /**
+         * Ipv6 access configuration
+         * @type {Ipv6Access || null}
+         */
+        this.Ipv6Access = null;
+
+        /**
+         * Offline cache
+         * @type {OfflineCache || null}
+         */
+        this.OfflineCache = null;
+
+        /**
+         * QUIC access, which is a paid service. You can check the product document and Billing Overview for more information.
+         * @type {Quic || null}
+         */
+        this.Quic = null;
+
+        /**
+         * Access authentication for S3 origin
+         * @type {AwsPrivateAccess || null}
+         */
+        this.AwsPrivateAccess = null;
+
+        /**
+         * Access authentication for OSS origin
+         * @type {OssPrivateAccess || null}
+         */
+        this.OssPrivateAccess = null;
+
+        /**
+         * Origin-pull authentication for Huawei Cloud OBS origin
+         * @type {HwPrivateAccess || null}
+         */
+        this.HwPrivateAccess = null;
+
+        /**
+         * Origin-pull authentication for Qiniu Cloud Kodo origin
+         * @type {QnPrivateAccess || null}
+         */
+        this.QnPrivateAccess = null;
+
+        /**
+         * Origin-pull authentication for other origins
+         * @type {OthersPrivateAccess || null}
+         */
+        this.OthersPrivateAccess = null;
+
+        /**
+         * HTTPS (enabled by default), which is a paid service. You can check the product document and Billing Overview for more information.
+         * @type {HttpsBilling || null}
+         */
+        this.HttpsBilling = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+
+        if (params.Origin) {
+            let obj = new Origin();
+            obj.deserialize(params.Origin)
+            this.Origin = obj;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+        if (params.IpFilter) {
+            let obj = new IpFilter();
+            obj.deserialize(params.IpFilter)
+            this.IpFilter = obj;
+        }
+
+        if (params.IpFreqLimit) {
+            let obj = new IpFreqLimit();
+            obj.deserialize(params.IpFreqLimit)
+            this.IpFreqLimit = obj;
+        }
+
+        if (params.StatusCodeCache) {
+            let obj = new StatusCodeCache();
+            obj.deserialize(params.StatusCodeCache)
+            this.StatusCodeCache = obj;
+        }
+
+        if (params.Compression) {
+            let obj = new Compression();
+            obj.deserialize(params.Compression)
+            this.Compression = obj;
+        }
+
+        if (params.BandwidthAlert) {
+            let obj = new BandwidthAlert();
+            obj.deserialize(params.BandwidthAlert)
+            this.BandwidthAlert = obj;
+        }
+
+        if (params.RangeOriginPull) {
+            let obj = new RangeOriginPull();
+            obj.deserialize(params.RangeOriginPull)
+            this.RangeOriginPull = obj;
+        }
+
+        if (params.FollowRedirect) {
+            let obj = new FollowRedirect();
+            obj.deserialize(params.FollowRedirect)
+            this.FollowRedirect = obj;
+        }
+
+        if (params.ErrorPage) {
+            let obj = new ErrorPage();
+            obj.deserialize(params.ErrorPage)
+            this.ErrorPage = obj;
+        }
+
+        if (params.RequestHeader) {
+            let obj = new RequestHeader();
+            obj.deserialize(params.RequestHeader)
+            this.RequestHeader = obj;
+        }
+
+        if (params.ResponseHeader) {
+            let obj = new ResponseHeader();
+            obj.deserialize(params.ResponseHeader)
+            this.ResponseHeader = obj;
+        }
+
+        if (params.DownstreamCapping) {
+            let obj = new DownstreamCapping();
+            obj.deserialize(params.DownstreamCapping)
+            this.DownstreamCapping = obj;
+        }
+
+        if (params.CacheKey) {
+            let obj = new CacheKey();
+            obj.deserialize(params.CacheKey)
+            this.CacheKey = obj;
+        }
+
+        if (params.ResponseHeaderCache) {
+            let obj = new ResponseHeaderCache();
+            obj.deserialize(params.ResponseHeaderCache)
+            this.ResponseHeaderCache = obj;
+        }
+
+        if (params.VideoSeek) {
+            let obj = new VideoSeek();
+            obj.deserialize(params.VideoSeek)
+            this.VideoSeek = obj;
+        }
+
+        if (params.Cache) {
+            let obj = new Cache();
+            obj.deserialize(params.Cache)
+            this.Cache = obj;
+        }
+
+        if (params.OriginPullOptimization) {
+            let obj = new OriginPullOptimization();
+            obj.deserialize(params.OriginPullOptimization)
+            this.OriginPullOptimization = obj;
+        }
+
+        if (params.Https) {
+            let obj = new Https();
+            obj.deserialize(params.Https)
+            this.Https = obj;
+        }
+
+        if (params.Authentication) {
+            let obj = new Authentication();
+            obj.deserialize(params.Authentication)
+            this.Authentication = obj;
+        }
+
+        if (params.Seo) {
+            let obj = new Seo();
+            obj.deserialize(params.Seo)
+            this.Seo = obj;
+        }
+
+        if (params.ForceRedirect) {
+            let obj = new ForceRedirect();
+            obj.deserialize(params.ForceRedirect)
+            this.ForceRedirect = obj;
+        }
+
+        if (params.Referer) {
+            let obj = new Referer();
+            obj.deserialize(params.Referer)
+            this.Referer = obj;
+        }
+
+        if (params.MaxAge) {
+            let obj = new MaxAge();
+            obj.deserialize(params.MaxAge)
+            this.MaxAge = obj;
+        }
+
+        if (params.Ipv6) {
+            let obj = new Ipv6();
+            obj.deserialize(params.Ipv6)
+            this.Ipv6 = obj;
+        }
+
+        if (params.SpecificConfig) {
+            let obj = new SpecificConfig();
+            obj.deserialize(params.SpecificConfig)
+            this.SpecificConfig = obj;
+        }
+        this.Area = 'Area' in params ? params.Area : null;
+
+        if (params.OriginPullTimeout) {
+            let obj = new OriginPullTimeout();
+            obj.deserialize(params.OriginPullTimeout)
+            this.OriginPullTimeout = obj;
+        }
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+
+        if (params.Ipv6Access) {
+            let obj = new Ipv6Access();
+            obj.deserialize(params.Ipv6Access)
+            this.Ipv6Access = obj;
+        }
+
+        if (params.OfflineCache) {
+            let obj = new OfflineCache();
+            obj.deserialize(params.OfflineCache)
+            this.OfflineCache = obj;
+        }
+
+        if (params.Quic) {
+            let obj = new Quic();
+            obj.deserialize(params.Quic)
+            this.Quic = obj;
+        }
+
+        if (params.AwsPrivateAccess) {
+            let obj = new AwsPrivateAccess();
+            obj.deserialize(params.AwsPrivateAccess)
+            this.AwsPrivateAccess = obj;
+        }
+
+        if (params.OssPrivateAccess) {
+            let obj = new OssPrivateAccess();
+            obj.deserialize(params.OssPrivateAccess)
+            this.OssPrivateAccess = obj;
+        }
+
+        if (params.HwPrivateAccess) {
+            let obj = new HwPrivateAccess();
+            obj.deserialize(params.HwPrivateAccess)
+            this.HwPrivateAccess = obj;
+        }
+
+        if (params.QnPrivateAccess) {
+            let obj = new QnPrivateAccess();
+            obj.deserialize(params.QnPrivateAccess)
+            this.QnPrivateAccess = obj;
+        }
+
+        if (params.OthersPrivateAccess) {
+            let obj = new OthersPrivateAccess();
+            obj.deserialize(params.OthersPrivateAccess)
+            this.OthersPrivateAccess = obj;
+        }
+
+        if (params.HttpsBilling) {
+            let obj = new HttpsBilling();
+            obj.deserialize(params.HttpsBilling)
+            this.HttpsBilling = obj;
+        }
+
+    }
+}
+
+/**
  * `UserAgent` blacklist/whitelist rule configuration
  * @class
  */
@@ -5124,7 +5679,13 @@ After switching to global acceleration, configurations of the domain name will b
         this.QnPrivateAccess = null;
 
         /**
-         * HTTPS service
+         * Origin-pull authentication for other origins
+         * @type {OthersPrivateAccess || null}
+         */
+        this.OthersPrivateAccess = null;
+
+        /**
+         * HTTPS, which is a paid service. You can check the product document and Billing Overview for more information.
          * @type {HttpsBilling || null}
          */
         this.HttpsBilling = null;
@@ -5394,6 +5955,12 @@ After switching to global acceleration, configurations of the domain name will b
             let obj = new QnPrivateAccess();
             obj.deserialize(params.QnPrivateAccess)
             this.QnPrivateAccess = obj;
+        }
+
+        if (params.OthersPrivateAccess) {
+            let obj = new OthersPrivateAccess();
+            obj.deserialize(params.OthersPrivateAccess)
+            this.OthersPrivateAccess = obj;
         }
 
         if (params.HttpsBilling) {
@@ -6776,6 +7343,34 @@ class IpStatus extends  AbstractModel {
 }
 
 /**
+ * AddCdnDomain response structure.
+ * @class
+ */
+class AddCdnDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Region configuration for domain names
  * @class
  */
@@ -7319,6 +7914,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
          * Acceleration service status
 `rejected`: The domain name is rejected due to expiration/deregistration of its ICP filing
 `processing`: Deploying
+`closing`: Disabling
 `online`: Enabled
 `offline`: Disabled
          * @type {string || null}
@@ -7756,11 +8352,18 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.QnPrivateAccess = null;
 
         /**
-         * HTTPS service
-Note: This field may return null, indicating that no valid values can be obtained.
+         * HTTPS (enabled by default)
+Note: This field may return `null`, indicating that no valid values can be obtained.
          * @type {HttpsBilling || null}
          */
         this.HttpsBilling = null;
+
+        /**
+         * Origin-pull authentication for other origins
+Note: this field may return `null`, indicating that no valid values can be obtained.
+         * @type {OthersPrivateAccess || null}
+         */
+        this.OthersPrivateAccess = null;
 
     }
 
@@ -8091,6 +8694,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new HttpsBilling();
             obj.deserialize(params.HttpsBilling)
             this.HttpsBilling = obj;
+        }
+
+        if (params.OthersPrivateAccess) {
+            let obj = new OthersPrivateAccess();
+            obj.deserialize(params.OthersPrivateAccess)
+            this.OthersPrivateAccess = obj;
         }
 
     }
@@ -14052,7 +14661,7 @@ class ManageClsTopicDomainsResponse extends  AbstractModel {
 }
 
 /**
- * When it’s not enabled, HTTPS requests are blocked.
+ * HTTPS. When it’s disabled, HTTPS requests are blocked.
  * @class
  */
 class HttpsBilling extends  AbstractModel {
@@ -14060,7 +14669,7 @@ class HttpsBilling extends  AbstractModel {
         super();
 
         /**
-         * HTTPS Service
+         * HTTPS (enabled by default), which will incur charges.
          * @type {string || null}
          */
         this.Switch = null;
@@ -14327,8 +14936,8 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         this.FilterRules = null;
 
         /**
-         * [Unavailable soon] The code returned when the IP blocklist/allowlist verification fails.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * (Disused) Expected HTTP code to return when the IP allowlist/blocklist verification fails. <br><font color=red>The 514 code is used instead.</font>
+Note: this field may return `null`, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.ReturnCode = null;
@@ -15470,6 +16079,7 @@ module.exports = {
     Revalidate: Revalidate,
     ResourceData: ResourceData,
     UrlRecord: UrlRecord,
+    OthersPrivateAccess: OthersPrivateAccess,
     DescribePushQuotaResponse: DescribePushQuotaResponse,
     DescribePurgeQuotaResponse: DescribePurgeQuotaResponse,
     ScdnSevenLayerRules: ScdnSevenLayerRules,
@@ -15540,6 +16150,7 @@ module.exports = {
     ListClsLogTopicsResponse: ListClsLogTopicsResponse,
     RemoteAuthenticationRule: RemoteAuthenticationRule,
     OverseaConfig: OverseaConfig,
+    AddCdnDomainRequest: AddCdnDomainRequest,
     UserAgentFilterRule: UserAgentFilterRule,
     UpdateDomainConfigRequest: UpdateDomainConfigRequest,
     Tag: Tag,
@@ -15567,6 +16178,7 @@ module.exports = {
     DescribePushTasksResponse: DescribePushTasksResponse,
     ResourceOriginData: ResourceOriginData,
     IpStatus: IpStatus,
+    AddCdnDomainResponse: AddCdnDomainResponse,
     DomainAreaConfig: DomainAreaConfig,
     ServerCert: ServerCert,
     AccessControlRule: AccessControlRule,

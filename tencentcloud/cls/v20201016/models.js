@@ -505,54 +505,19 @@ class DeleteShipperRequest extends  AbstractModel {
 }
 
 /**
- * ModifyTopic request structure.
+ * Dynamic index configuration
  * @class
  */
-class ModifyTopicRequest extends  AbstractModel {
+class DynamicIndex extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log topic ID
-         * @type {string || null}
-         */
-        this.TopicId = null;
-
-        /**
-         * Log topic name
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Whether to start collection for this log topic
+         * Dynamic index configuration status
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {boolean || null}
          */
         this.Status = null;
-
-        /**
-         * Whether to enable automatic split
-         * @type {boolean || null}
-         */
-        this.AutoSplit = null;
-
-        /**
-         * Maximum number of partitions to split into for this topic if automatic split is enabled
-         * @type {number || null}
-         */
-        this.MaxSplitPartitions = null;
-
-        /**
-         * Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
-         * @type {number || null}
-         */
-        this.Period = null;
 
     }
 
@@ -563,21 +528,7 @@ class ModifyTopicRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
         this.Status = 'Status' in params ? params.Status : null;
-        this.AutoSplit = 'AutoSplit' in params ? params.AutoSplit : null;
-        this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
-        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -984,6 +935,13 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.Columns = null;
 
         /**
+         * Sample rate used in this statistical analysis
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SamplingRate = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -1030,6 +988,7 @@ Note: This field may return `null`, indicating that no valid value was found.
                 this.Columns.push(obj);
             }
         }
+        this.SamplingRate = 'SamplingRate' in params ? params.SamplingRate : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1358,24 +1317,73 @@ class ModifyShipperResponse extends  AbstractModel {
 }
 
 /**
- * RetryShipperTask request structure.
+ * ModifyTopic request structure.
  * @class
  */
-class RetryShipperTaskRequest extends  AbstractModel {
+class ModifyTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Shipping rule ID
+         * Log topic ID
          * @type {string || null}
          */
-        this.ShipperId = null;
+        this.TopicId = null;
 
         /**
-         * Shipping task ID
+         * Log topic name
          * @type {string || null}
          */
-        this.TaskId = null;
+        this.TopicName = null;
+
+        /**
+         * Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Whether to start collection for this log topic
+         * @type {boolean || null}
+         */
+        this.Status = null;
+
+        /**
+         * Whether to enable automatic split
+         * @type {boolean || null}
+         */
+        this.AutoSplit = null;
+
+        /**
+         * Maximum number of partitions to split into for this topic if automatic split is enabled
+         * @type {number || null}
+         */
+        this.MaxSplitPartitions = null;
+
+        /**
+         * Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Log topic description
+         * @type {string || null}
+         */
+        this.Describes = null;
+
+        /**
+         * `0`: Disable log transitioning.
+A value other than `0`: The number of STANDARD storage days after log transitioning is enabled (valid only if `StorageType` is `hot`). Note: `HotPeriod` should be greater than or equal to `7` and less than `Period`.
+         * @type {number || null}
+         */
+        this.HotPeriod = null;
+
+        /**
+         * Whether to enable web tracking. Valid values: `false` (disable); `true` (enable)
+         * @type {boolean || null}
+         */
+        this.IsWebTracking = null;
 
     }
 
@@ -1386,8 +1394,24 @@ class RetryShipperTaskRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ShipperId = 'ShipperId' in params ? params.ShipperId : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AutoSplit = 'AutoSplit' in params ? params.AutoSplit : null;
+        this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Describes = 'Describes' in params ? params.Describes : null;
+        this.HotPeriod = 'HotPeriod' in params ? params.HotPeriod : null;
+        this.IsWebTracking = 'IsWebTracking' in params ? params.IsWebTracking : null;
 
     }
 }
@@ -2406,7 +2430,6 @@ class ModifyMachineGroupResponse extends  AbstractModel {
 
 /**
  * Index rule. At least one of the `FullText`, `KeyValue`, and `Tag` parameters must be valid.
-
  * @class
  */
 class RuleInfo extends  AbstractModel {
@@ -2434,6 +2457,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Tag = null;
 
+        /**
+         * Dynamic index configuration. If the configuration is empty, dynamic indexing is not enabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DynamicIndex || null}
+         */
+        this.DynamicIndex = null;
+
     }
 
     /**
@@ -2460,6 +2490,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new RuleTagInfo();
             obj.deserialize(params.Tag)
             this.Tag = obj;
+        }
+
+        if (params.DynamicIndex) {
+            let obj = new DynamicIndex();
+            obj.deserialize(params.DynamicIndex)
+            this.DynamicIndex = obj;
         }
 
     }
@@ -4074,6 +4110,25 @@ class CreateTopicRequest extends  AbstractModel {
          */
         this.Period = null;
 
+        /**
+         * Log topic description
+         * @type {string || null}
+         */
+        this.Describes = null;
+
+        /**
+         * `0`: Disable log transitioning.
+A value other than `0`: The number of STANDARD storage days after log transitioning is enabled (valid only if `StorageType` is `hot`). Note: `HotPeriod` should be greater than or equal to `7` and less than `Period`.
+         * @type {number || null}
+         */
+        this.HotPeriod = null;
+
+        /**
+         * Whether to enable web tracking. Valid values: `false` (disable); `true` (enable)
+         * @type {boolean || null}
+         */
+        this.IsWebTracking = null;
+
     }
 
     /**
@@ -4099,6 +4154,9 @@ class CreateTopicRequest extends  AbstractModel {
         this.MaxSplitPartitions = 'MaxSplitPartitions' in params ? params.MaxSplitPartitions : null;
         this.StorageType = 'StorageType' in params ? params.StorageType : null;
         this.Period = 'Period' in params ? params.Period : null;
+        this.Describes = 'Describes' in params ? params.Describes : null;
+        this.HotPeriod = 'HotPeriod' in params ? params.HotPeriod : null;
+        this.IsWebTracking = 'IsWebTracking' in params ? params.IsWebTracking : null;
 
     }
 }
@@ -4549,6 +4607,75 @@ class ModifyConsumerResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAlertRecordHistory request structure.
+ * @class
+ */
+class DescribeAlertRecordHistoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time of the query range, which is a Unix timestamp in ms
+         * @type {number || null}
+         */
+        this.From = null;
+
+        /**
+         * End time of the query range, which is a Unix timestamp in ms
+         * @type {number || null}
+         */
+        this.To = null;
+
+        /**
+         * Page offset. Default value: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Maximum number of entries per page. Maximum value: 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * - alertId: Filter by alarm policy ID. Type: String; optional
+- topicId: Filter by ID of monitored object. Type: String; optional
+- status: Filter by alarm status. Type: String, optional. Valid values: `0` (uncleared), `1` (cleared), `2` (expired)
+- alarmLevel: Filter by alarm severity. Type: String, optional. Valid values: `0` (Warn), `1` (Info), `2` (Critical)
+
+Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.From = 'From' in params ? params.From : null;
+        this.To = 'To' in params ? params.To : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeConfigs request structure.
  * @class
  */
@@ -4738,24 +4865,28 @@ class AnalysisDimensional extends  AbstractModel {
 
         /**
          * Analysis name
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * Type of data being analyzed. Valid values: `query`; `field`; `original`
+         * Type of data being analyzed. Valid values: `query`, `field`, `original`
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Type = null;
 
         /**
          * Analysis content
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Content = null;
 
         /**
          * Configuration
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<AlarmAnalysisConfig> || null}
          */
         this.ConfigInfo = null;
@@ -6134,6 +6265,98 @@ class ExportInfo extends  AbstractModel {
 }
 
 /**
+ * Condition of triggering by group
+ * @class
+ */
+class GroupTriggerConditionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Name of the field for triggering by group
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value of the field for triggering by group
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeLogContext response structure.
+ * @class
+ */
+class DescribeLogContextResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Log context information set
+         * @type {Array.<LogContextInfo> || null}
+         */
+        this.LogContextInfos = null;
+
+        /**
+         * Whether the previous logs have been returned
+         * @type {boolean || null}
+         */
+        this.PrevOver = null;
+
+        /**
+         * Whether the next logs have been returned
+         * @type {boolean || null}
+         */
+        this.NextOver = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LogContextInfos) {
+            this.LogContextInfos = new Array();
+            for (let z in params.LogContextInfos) {
+                let obj = new LogContextInfo();
+                obj.deserialize(params.LogContextInfos[z]);
+                this.LogContextInfos.push(obj);
+            }
+        }
+        this.PrevOver = 'PrevOver' in params ? params.PrevOver : null;
+        this.NextOver = 'NextOver' in params ? params.NextOver : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Collection rule configuration information
  * @class
  */
@@ -6534,36 +6757,112 @@ class ModifyShipperRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLogContext response structure.
+ * Alarm record details
  * @class
  */
-class DescribeLogContextResponse extends  AbstractModel {
+class AlertHistoryRecord extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Log context information set
-         * @type {Array.<LogContextInfo> || null}
-         */
-        this.LogContextInfos = null;
-
-        /**
-         * Whether the previous logs have been returned
-         * @type {boolean || null}
-         */
-        this.PrevOver = null;
-
-        /**
-         * Whether the next logs have been returned
-         * @type {boolean || null}
-         */
-        this.NextOver = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Alarm record ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RecordId = null;
+
+        /**
+         * Alarm policy ID
+         * @type {string || null}
+         */
+        this.AlarmId = null;
+
+        /**
+         * Alarm policy name
+         * @type {string || null}
+         */
+        this.AlarmName = null;
+
+        /**
+         * ID of the monitored object
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * Name of the monitored object
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * Region of the monitored object
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * Trigger condition
+         * @type {string || null}
+         */
+        this.Trigger = null;
+
+        /**
+         * Number of cycles for which the alarm lasts. An alarm will be triggered only after the trigger condition is met for the number of cycles specified by `TriggerCount`.
+         * @type {number || null}
+         */
+        this.TriggerCount = null;
+
+        /**
+         * Alarm notification frequency (minutes)
+         * @type {number || null}
+         */
+        this.AlarmPeriod = null;
+
+        /**
+         * Notification group
+         * @type {Array.<AlertHistoryNotice> || null}
+         */
+        this.Notices = null;
+
+        /**
+         * Alarm duration (minutes)
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Alarm status. Valid values: `0` (uncleared), `1` (cleared), `2` (expired)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Alarm generation time, which is a Unix timestamp in ms
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Group information corresponding to triggering by group
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<GroupTriggerConditionInfo> || null}
+         */
+        this.GroupTriggerCondition = null;
+
+        /**
+         * Alarm severity. Valid values: `0` (Warn), `1` (Info), `2` (Critical)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.AlarmLevel = null;
+
+        /**
+         * Type of the monitored object
+`0`: The same object is specified for all statements. `1`: An object is separately specified for each statement. 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MonitorObjectType = null;
 
     }
 
@@ -6574,18 +6873,38 @@ class DescribeLogContextResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RecordId = 'RecordId' in params ? params.RecordId : null;
+        this.AlarmId = 'AlarmId' in params ? params.AlarmId : null;
+        this.AlarmName = 'AlarmName' in params ? params.AlarmName : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Trigger = 'Trigger' in params ? params.Trigger : null;
+        this.TriggerCount = 'TriggerCount' in params ? params.TriggerCount : null;
+        this.AlarmPeriod = 'AlarmPeriod' in params ? params.AlarmPeriod : null;
 
-        if (params.LogContextInfos) {
-            this.LogContextInfos = new Array();
-            for (let z in params.LogContextInfos) {
-                let obj = new LogContextInfo();
-                obj.deserialize(params.LogContextInfos[z]);
-                this.LogContextInfos.push(obj);
+        if (params.Notices) {
+            this.Notices = new Array();
+            for (let z in params.Notices) {
+                let obj = new AlertHistoryNotice();
+                obj.deserialize(params.Notices[z]);
+                this.Notices.push(obj);
             }
         }
-        this.PrevOver = 'PrevOver' in params ? params.PrevOver : null;
-        this.NextOver = 'NextOver' in params ? params.NextOver : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.GroupTriggerCondition) {
+            this.GroupTriggerCondition = new Array();
+            for (let z in params.GroupTriggerCondition) {
+                let obj = new GroupTriggerConditionInfo();
+                obj.deserialize(params.GroupTriggerCondition[z]);
+                this.GroupTriggerCondition.push(obj);
+            }
+        }
+        this.AlarmLevel = 'AlarmLevel' in params ? params.AlarmLevel : null;
+        this.MonitorObjectType = 'MonitorObjectType' in params ? params.MonitorObjectType : null;
 
     }
 }
@@ -7008,6 +7327,41 @@ class ApplyConfigToMachineGroupResponse extends  AbstractModel {
 }
 
 /**
+ * Details about an alarm notification group
+ * @class
+ */
+class AlertHistoryNotice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Notification group name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Notification group ID
+         * @type {string || null}
+         */
+        this.AlarmNoticeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.AlarmNoticeId = 'AlarmNoticeId' in params ? params.AlarmNoticeId : null;
+
+    }
+}
+
+/**
  * DeleteAlarm request structure.
  * @class
  */
@@ -7303,6 +7657,56 @@ class CreateCosRechargeResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAlertRecordHistory response structure.
+ * @class
+ */
+class DescribeAlertRecordHistoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total alarm records
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Alarm record details
+         * @type {Array.<AlertHistoryRecord> || null}
+         */
+        this.Records = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Records) {
+            this.Records = new Array();
+            for (let z in params.Records) {
+                let obj = new AlertHistoryRecord();
+                obj.deserialize(params.Records[z]);
+                this.Records.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -7980,9 +8384,9 @@ Default value: `1`
         this.SamplingRate = null;
 
         /**
-         * Search syntax.
+         * Search syntax
 `0` (default): Lucene; `1`: CQL.
-For more information, visit https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules.
+For more information, see <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Syntax Rules</a>
          * @type {number || null}
          */
         this.SyntaxRule = null;
@@ -8965,6 +9369,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * RetryShipperTask request structure.
+ * @class
+ */
+class RetryShipperTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Shipping rule ID
+         * @type {string || null}
+         */
+        this.ShipperId = null;
+
+        /**
+         * Shipping task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShipperId = 'ShipperId' in params ? params.ShipperId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * CreateExport response structure.
  * @class
  */
@@ -9086,7 +9525,7 @@ module.exports = {
     DescribeLogHistogramRequest: DescribeLogHistogramRequest,
     DescribeLogContextRequest: DescribeLogContextRequest,
     DeleteShipperRequest: DeleteShipperRequest,
-    ModifyTopicRequest: ModifyTopicRequest,
+    DynamicIndex: DynamicIndex,
     DeleteLogsetResponse: DeleteLogsetResponse,
     ParquetKeyInfo: ParquetKeyInfo,
     DescribeCosRechargesResponse: DescribeCosRechargesResponse,
@@ -9105,7 +9544,7 @@ module.exports = {
     MergePartitionRequest: MergePartitionRequest,
     DescribeShippersResponse: DescribeShippersResponse,
     ModifyShipperResponse: ModifyShipperResponse,
-    RetryShipperTaskRequest: RetryShipperTaskRequest,
+    ModifyTopicRequest: ModifyTopicRequest,
     CallBackInfo: CallBackInfo,
     OpenKafkaConsumerResponse: OpenKafkaConsumerResponse,
     AlarmTargetInfo: AlarmTargetInfo,
@@ -9164,6 +9603,7 @@ module.exports = {
     DescribeConsumerResponse: DescribeConsumerResponse,
     UploadLogRequest: UploadLogRequest,
     ModifyConsumerResponse: ModifyConsumerResponse,
+    DescribeAlertRecordHistoryRequest: DescribeAlertRecordHistoryRequest,
     DescribeConfigsRequest: DescribeConfigsRequest,
     LogsetInfo: LogsetInfo,
     DeleteConfigRequest: DeleteConfigRequest,
@@ -9194,12 +9634,14 @@ module.exports = {
     GetAlarmLogRequest: GetAlarmLogRequest,
     DeleteShipperResponse: DeleteShipperResponse,
     ExportInfo: ExportInfo,
+    GroupTriggerConditionInfo: GroupTriggerConditionInfo,
+    DescribeLogContextResponse: DescribeLogContextResponse,
     ConfigInfo: ConfigInfo,
     DeleteExportRequest: DeleteExportRequest,
     SplitPartitionResponse: SplitPartitionResponse,
     LogContextInfo: LogContextInfo,
     ModifyShipperRequest: ModifyShipperRequest,
-    DescribeLogContextResponse: DescribeLogContextResponse,
+    AlertHistoryRecord: AlertHistoryRecord,
     CreateConsumerRequest: CreateConsumerRequest,
     AlarmNotice: AlarmNotice,
     ModifyConfigResponse: ModifyConfigResponse,
@@ -9208,12 +9650,14 @@ module.exports = {
     ModifyCosRechargeResponse: ModifyCosRechargeResponse,
     ContentInfo: ContentInfo,
     ApplyConfigToMachineGroupResponse: ApplyConfigToMachineGroupResponse,
+    AlertHistoryNotice: AlertHistoryNotice,
     DeleteAlarmRequest: DeleteAlarmRequest,
     CreateConfigResponse: CreateConfigResponse,
     MachineGroupTypeInfo: MachineGroupTypeInfo,
     DeleteConfigFromMachineGroupRequest: DeleteConfigFromMachineGroupRequest,
     ShipperInfo: ShipperInfo,
     CreateCosRechargeResponse: CreateCosRechargeResponse,
+    DescribeAlertRecordHistoryResponse: DescribeAlertRecordHistoryResponse,
     KeyValueInfo: KeyValueInfo,
     AddMachineGroupInfoResponse: AddMachineGroupInfoResponse,
     ModifyMachineGroupRequest: ModifyMachineGroupRequest,
@@ -9244,6 +9688,7 @@ module.exports = {
     DeleteTopicResponse: DeleteTopicResponse,
     CosRechargeInfo: CosRechargeInfo,
     ConsumerContent: ConsumerContent,
+    RetryShipperTaskRequest: RetryShipperTaskRequest,
     CreateExportResponse: CreateExportResponse,
     KeyRegexInfo: KeyRegexInfo,
     MergePartitionResponse: MergePartitionResponse,

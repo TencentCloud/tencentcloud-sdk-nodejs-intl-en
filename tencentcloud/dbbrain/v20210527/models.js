@@ -268,6 +268,111 @@ class TableSpaceTimeSeries extends  AbstractModel {
 }
 
 /**
+ * DescribeSlowLogs request structure.
+ * @class
+ */
+class DescribeSlowLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * MD5 value of a SQL template
+         * @type {string || null}
+         */
+        this.Md5 = null;
+
+        /**
+         * Start time in the format of "2019-09-10 12:13:14".
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time in the format of "2019-09-11 10:13:14". The interval between the end time and the start time can be up to 7 days.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The offset. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * The number of queried items. Default value: `20`. Max value: `100`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Database list
+         * @type {Array.<string> || null}
+         */
+        this.DB = null;
+
+        /**
+         * Keyword
+         * @type {Array.<string> || null}
+         */
+        this.Key = null;
+
+        /**
+         * User
+         * @type {Array.<string> || null}
+         */
+        this.User = null;
+
+        /**
+         * ip
+         * @type {Array.<string> || null}
+         */
+        this.Ip = null;
+
+        /**
+         * Duration range. The left and right borders of the range are the zeroth and first element of the array, respectively.
+         * @type {Array.<number> || null}
+         */
+        this.Time = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.DB = 'DB' in params ? params.DB : null;
+        this.Key = 'Key' in params ? params.Key : null;
+        this.User = 'User' in params ? params.User : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Time = 'Time' in params ? params.Time : null;
+
+    }
+}
+
+/**
  * DescribeTopSpaceTables request structure.
  * @class
  */
@@ -1536,6 +1641,49 @@ class TimeSlice extends  AbstractModel {
 }
 
 /**
+ * DeleteDBDiagReportTasks request structure.
+ * @class
+ */
+class DeleteDBDiagReportTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of IDs of tasks to be deleted
+         * @type {Array.<number> || null}
+         */
+        this.AsyncRequestIds = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL).
+Default value: `mysql`.
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestIds = 'AsyncRequestIds' in params ? params.AsyncRequestIds : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
  * ModifyDiagDBInstanceConf request structure.
  * @class
  */
@@ -1585,6 +1733,56 @@ class ModifyDiagDBInstanceConfRequest extends  AbstractModel {
         this.Regions = 'Regions' in params ? params.Regions : null;
         this.Product = 'Product' in params ? params.Product : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogs response structure.
+ * @class
+ */
+class DescribeSlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible entries.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Slow log details
+         * @type {Array.<SlowLogInfoItem> || null}
+         */
+        this.Rows = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Rows) {
+            this.Rows = new Array();
+            for (let z in params.Rows) {
+                let obj = new SlowLogInfoItem();
+                obj.deserialize(params.Rows[z]);
+                this.Rows.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2232,6 +2430,41 @@ class CreateKillTaskRequest extends  AbstractModel {
         this.User = 'User' in params ? params.User : null;
         this.Time = 'Time' in params ? params.Time : null;
         this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
+ * DeleteDBDiagReportTasks response structure.
+ * @class
+ */
+class DeleteDBDiagReportTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task deletion status (`0`: Successful)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5369,6 +5602,95 @@ class MonitorMetricSeriesData extends  AbstractModel {
 }
 
 /**
+ * Slow log details
+ * @class
+ */
+class SlowLogInfoItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Slow log start time
+         * @type {string || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * SQL statement
+         * @type {string || null}
+         */
+        this.SqlText = null;
+
+        /**
+         * Database
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * User source
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * IP source
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserHost = null;
+
+        /**
+         * Execution time in seconds
+         * @type {number || null}
+         */
+        this.QueryTime = null;
+
+        /**
+         * Lock time in seconds
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.LockTime = null;
+
+        /**
+         * Number of scanned rows
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RowsExamined = null;
+
+        /**
+         * Number of returned rows
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RowsSent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.SqlText = 'SqlText' in params ? params.SqlText : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.UserHost = 'UserHost' in params ? params.UserHost : null;
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+        this.LockTime = 'LockTime' in params ? params.LockTime : null;
+        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
+        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
+
+    }
+}
+
+/**
  * Security audit log export task information.
  * @class
  */
@@ -5899,6 +6221,7 @@ module.exports = {
     HealthReportTask: HealthReportTask,
     CreateDBDiagReportTaskRequest: CreateDBDiagReportTaskRequest,
     TableSpaceTimeSeries: TableSpaceTimeSeries,
+    DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     DescribeTopSpaceTablesRequest: DescribeTopSpaceTablesRequest,
     ScoreItem: ScoreItem,
     InstanceConfs: InstanceConfs,
@@ -5921,7 +6244,9 @@ module.exports = {
     ContactItem: ContactItem,
     DescribeDBSpaceStatusRequest: DescribeDBSpaceStatusRequest,
     TimeSlice: TimeSlice,
+    DeleteDBDiagReportTasksRequest: DeleteDBDiagReportTasksRequest,
     ModifyDiagDBInstanceConfRequest: ModifyDiagDBInstanceConfRequest,
+    DescribeSlowLogsResponse: DescribeSlowLogsResponse,
     DescribeSecurityAuditLogDownloadUrlsRequest: DescribeSecurityAuditLogDownloadUrlsRequest,
     CreateDBDiagReportTaskResponse: CreateDBDiagReportTaskResponse,
     ProcessStatistic: ProcessStatistic,
@@ -5934,6 +6259,7 @@ module.exports = {
     DescribeDBDiagEventsRequest: DescribeDBDiagEventsRequest,
     CreateDBDiagReportUrlResponse: CreateDBDiagReportUrlResponse,
     CreateKillTaskRequest: CreateKillTaskRequest,
+    DeleteDBDiagReportTasksResponse: DeleteDBDiagReportTasksResponse,
     DescribeProxyProcessStatisticsResponse: DescribeProxyProcessStatisticsResponse,
     SlowLogHost: SlowLogHost,
     CreateMailProfileRequest: CreateMailProfileRequest,
@@ -5990,6 +6316,7 @@ module.exports = {
     DescribeTopSpaceTableTimeSeriesRequest: DescribeTopSpaceTableTimeSeriesRequest,
     DescribeDBDiagReportTasksRequest: DescribeDBDiagReportTasksRequest,
     MonitorMetricSeriesData: MonitorMetricSeriesData,
+    SlowLogInfoItem: SlowLogInfoItem,
     SecLogExportTaskInfo: SecLogExportTaskInfo,
     DescribeHealthScoreResponse: DescribeHealthScoreResponse,
     ScoreDetail: ScoreDetail,

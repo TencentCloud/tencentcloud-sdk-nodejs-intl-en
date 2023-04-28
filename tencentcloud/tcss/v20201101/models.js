@@ -14677,6 +14677,12 @@ class DescribeClusterSummaryResponse extends  AbstractModel {
         this.FailedClusterCount = null;
 
         /**
+         * Number of clusters not imported
+         * @type {number || null}
+         */
+        this.NotImportedClusterCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -14701,6 +14707,7 @@ class DescribeClusterSummaryResponse extends  AbstractModel {
         this.AutoCheckClusterCount = 'AutoCheckClusterCount' in params ? params.AutoCheckClusterCount : null;
         this.ManualCheckClusterCount = 'ManualCheckClusterCount' in params ? params.ManualCheckClusterCount : null;
         this.FailedClusterCount = 'FailedClusterCount' in params ? params.FailedClusterCount : null;
+        this.NotImportedClusterCount = 'NotImportedClusterCount' in params ? params.NotImportedClusterCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -20691,7 +20698,7 @@ class DescribeAssetHostDetailResponse extends  AbstractModel {
         super();
 
         /**
-         * CWPP UUID
+         * TCSS UUID
          * @type {string || null}
          */
         this.UUID = null;
@@ -28751,6 +28758,36 @@ class DescribeVulSummaryResponse extends  AbstractModel {
         this.SeriousVulNewestImageCount = null;
 
         /**
+         * Number of high-priority system vulnerabilities
+         * @type {number || null}
+         */
+        this.SystemVulnerabilityFocusCount = null;
+
+        /**
+         * Number of high-priority web vulnerabilities
+         * @type {number || null}
+         */
+        this.WebVulnerabilityFocusCount = null;
+
+        /**
+         * Number of affected local images
+         * @type {number || null}
+         */
+        this.SeriousVulnerabilityLocalImageCount = null;
+
+        /**
+         * Number of affected repository images
+         * @type {number || null}
+         */
+        this.SeriousVulnerabilityRegistryImageCount = null;
+
+        /**
+         * Number of emergency vulnerabilities
+         * @type {number || null}
+         */
+        this.EmergencyVulnerabilityCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -28771,6 +28808,11 @@ class DescribeVulSummaryResponse extends  AbstractModel {
         this.PocExpLevelVulCount = 'PocExpLevelVulCount' in params ? params.PocExpLevelVulCount : null;
         this.RemoteExpLevelVulCount = 'RemoteExpLevelVulCount' in params ? params.RemoteExpLevelVulCount : null;
         this.SeriousVulNewestImageCount = 'SeriousVulNewestImageCount' in params ? params.SeriousVulNewestImageCount : null;
+        this.SystemVulnerabilityFocusCount = 'SystemVulnerabilityFocusCount' in params ? params.SystemVulnerabilityFocusCount : null;
+        this.WebVulnerabilityFocusCount = 'WebVulnerabilityFocusCount' in params ? params.WebVulnerabilityFocusCount : null;
+        this.SeriousVulnerabilityLocalImageCount = 'SeriousVulnerabilityLocalImageCount' in params ? params.SeriousVulnerabilityLocalImageCount : null;
+        this.SeriousVulnerabilityRegistryImageCount = 'SeriousVulnerabilityRegistryImageCount' in params ? params.SeriousVulnerabilityRegistryImageCount : null;
+        this.EmergencyVulnerabilityCount = 'EmergencyVulnerabilityCount' in params ? params.EmergencyVulnerabilityCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -33741,6 +33783,12 @@ class DescribeClusterDetailResponse extends  AbstractModel {
         this.IngressCount = null;
 
         /**
+         * IPs of the primary nodes
+         * @type {string || null}
+         */
+        this.MasterIps = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -33779,6 +33827,7 @@ class DescribeClusterDetailResponse extends  AbstractModel {
         this.PodCount = 'PodCount' in params ? params.PodCount : null;
         this.ServiceCount = 'ServiceCount' in params ? params.ServiceCount : null;
         this.IngressCount = 'IngressCount' in params ? params.IngressCount : null;
+        this.MasterIps = 'MasterIps' in params ? params.MasterIps : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

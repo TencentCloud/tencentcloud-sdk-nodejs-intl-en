@@ -22,6 +22,7 @@ const AdvanceHttps = models.AdvanceHttps;
 const Revalidate = models.Revalidate;
 const ResourceData = models.ResourceData;
 const UrlRecord = models.UrlRecord;
+const OthersPrivateAccess = models.OthersPrivateAccess;
 const DescribePushQuotaResponse = models.DescribePushQuotaResponse;
 const DescribePurgeQuotaResponse = models.DescribePurgeQuotaResponse;
 const ScdnSevenLayerRules = models.ScdnSevenLayerRules;
@@ -92,6 +93,7 @@ const EnableClsLogTopicResponse = models.EnableClsLogTopicResponse;
 const ListClsLogTopicsResponse = models.ListClsLogTopicsResponse;
 const RemoteAuthenticationRule = models.RemoteAuthenticationRule;
 const OverseaConfig = models.OverseaConfig;
+const AddCdnDomainRequest = models.AddCdnDomainRequest;
 const UserAgentFilterRule = models.UserAgentFilterRule;
 const UpdateDomainConfigRequest = models.UpdateDomainConfigRequest;
 const Tag = models.Tag;
@@ -119,6 +121,7 @@ const OriginAuthenticationTypeA = models.OriginAuthenticationTypeA;
 const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
 const IpStatus = models.IpStatus;
+const AddCdnDomainResponse = models.AddCdnDomainResponse;
 const DomainAreaConfig = models.DomainAreaConfig;
 const ServerCert = models.ServerCert;
 const AccessControlRule = models.AccessControlRule;
@@ -348,6 +351,17 @@ class CdnClient extends AbstractClient {
     DescribeDomainsConfig(req, cb) {
         let resp = new DescribeDomainsConfigResponse();
         this.request("DescribeDomainsConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add a CDN acceleration domain name. Up to 100 domain names can be added per minute.
+     * @param {AddCdnDomainRequest} req
+     * @param {function(string, AddCdnDomainResponse):void} cb
+     * @public
+     */
+    AddCdnDomain(req, cb) {
+        let resp = new AddCdnDomainResponse();
+        this.request("AddCdnDomain", req, resp, cb);
     }
 
     /**

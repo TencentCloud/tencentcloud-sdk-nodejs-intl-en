@@ -302,6 +302,7 @@ const DescribeConditionsTemplateListResponse = models.DescribeConditionsTemplate
 const CreatePrometheusTempRequest = models.CreatePrometheusTempRequest;
 const ModifyAlarmPolicyInfoResponse = models.ModifyAlarmPolicyInfoResponse;
 const MetricConfig = models.MetricConfig;
+const Targets = models.Targets;
 const DescribeAlarmEventsRequest = models.DescribeAlarmEventsRequest;
 const ModifyAlarmPolicyConditionRequest = models.ModifyAlarmPolicyConditionRequest;
 const ModifyAlarmNoticeResponse = models.ModifyAlarmNoticeResponse;

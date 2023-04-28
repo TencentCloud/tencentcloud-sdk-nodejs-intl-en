@@ -2127,8 +2127,7 @@ class AddRecordBatch extends  AbstractModel {
         this.RecordLineId = null;
 
         /**
-         * Record weight (not supported).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * The record weight (not supported).
          * @type {number || null}
          */
         this.Weight = null;
@@ -3201,6 +3200,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.MX = null;
 
+        /**
+         * The record weight.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Weight = null;
+
     }
 
     /**
@@ -3220,6 +3226,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.MX = 'MX' in params ? params.MX : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
 
     }
 }
@@ -4810,7 +4817,7 @@ class DescribeDomainListRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain group type. Valid values: `ALL`, `MINE`, `SHARE`, `ISMARK`, `PAUSE`, `VIP`, `RECENT`, `SHARE_OUT`. Default value: `ALL`.
+         * The domain group type. Valid values: `ALL` (default), `MINE`, `SHARE`, `ISMARK`, `PAUSE`, `VIP`, `RECENT`, `SHARE_OUT`, and `FREE`.
          * @type {string || null}
          */
         this.Type = null;

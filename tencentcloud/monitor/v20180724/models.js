@@ -1289,6 +1289,27 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ClusterId = null;
 
+        /**
+         * Status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * id
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Number of rules
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Count = null;
+
     }
 
     /**
@@ -1303,6 +1324,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.Content = 'Content' in params ? params.Content : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
@@ -1559,6 +1583,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.TemplateId = null;
 
+        /**
+         * Number of targets
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Targets || null}
+         */
+        this.Targets = null;
+
     }
 
     /**
@@ -1571,6 +1602,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Name = 'Name' in params ? params.Name : null;
         this.Config = 'Config' in params ? params.Config : null;
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+        if (params.Targets) {
+            let obj = new Targets();
+            obj.deserialize(params.Targets)
+            this.Targets = obj;
+        }
 
     }
 }
@@ -4531,7 +4568,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Cloud Monitor alarm notification template - callback notification details
+ * Alarm notification template – callback notification details
  * @class
  */
 class URLNotice extends  AbstractModel {
@@ -5171,6 +5208,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RawJobs = null;
 
         /**
+         * List of probes and the corresponding targets information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.Probes = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -5211,6 +5255,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 let obj = new PrometheusConfigItem();
                 obj.deserialize(params.RawJobs[z]);
                 this.RawJobs.push(obj);
+            }
+        }
+
+        if (params.Probes) {
+            this.Probes = new Array();
+            for (let z in params.Probes) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.Probes[z]);
+                this.Probes.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -11632,7 +11685,7 @@ class DescribePrometheusInstanceDetailRequest extends  AbstractModel {
 }
 
 /**
- * Cloud Monitor alarm notification template - user notification details
+ * Alarm notification template – user notification details
  * @class
  */
 class UserNotice extends  AbstractModel {
@@ -16024,6 +16077,59 @@ class MetricConfig extends  AbstractModel {
 }
 
 /**
+ * Number of scrape targets
+ * @class
+ */
+class Targets extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total count
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Number of online targets
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Up = null;
+
+        /**
+         * Number of offline targets
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Down = null;
+
+        /**
+         * Number of unknown status
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Unknown = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Up = 'Up' in params ? params.Up : null;
+        this.Down = 'Down' in params ? params.Down : null;
+        this.Unknown = 'Unknown' in params ? params.Unknown : null;
+
+    }
+}
+
+/**
  * DescribeAlarmEvents request structure.
  * @class
  */
@@ -16524,7 +16630,7 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * Basic information of the cluster associated with a CM-integrated TMP instance.
+ * Basic information of the cluster associated with a Tencent Cloud Observability Platform (TCOP)-integrated TMP instance.
  * @class
  */
 class PrometheusClusterAgentBasic extends  AbstractModel {
@@ -23026,6 +23132,7 @@ module.exports = {
     CreatePrometheusTempRequest: CreatePrometheusTempRequest,
     ModifyAlarmPolicyInfoResponse: ModifyAlarmPolicyInfoResponse,
     MetricConfig: MetricConfig,
+    Targets: Targets,
     DescribeAlarmEventsRequest: DescribeAlarmEventsRequest,
     ModifyAlarmPolicyConditionRequest: ModifyAlarmPolicyConditionRequest,
     ModifyAlarmNoticeResponse: ModifyAlarmNoticeResponse,

@@ -599,7 +599,7 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * Cost allocation tag key
+         * Cost allocation tag key, which can be customized.
          * @type {string || null}
          */
         this.TagKey = null;
@@ -1851,13 +1851,13 @@ class DescribeVoucherInfoRequest extends  AbstractModel {
         this.VoucherName = null;
 
         /**
-         * The start time of the promotional campaign.
+         * The start date of the voucher issuance, such as `2021-01-01`.
          * @type {string || null}
          */
         this.TimeFrom = null;
 
         /**
-         * The end time of the promotional campaign.
+         * The end date of the voucher issuance, such as `2021-01-01`.
          * @type {string || null}
          */
         this.TimeTo = null;
@@ -2055,13 +2055,13 @@ class DescribeDosageCosDetailByDateRequest extends  AbstractModel {
         super();
 
         /**
-         * The start date of the usage query
+         * The start date of the usage query, such as `2020-09-01`.
          * @type {string || null}
          */
         this.StartDate = null;
 
         /**
-         * The end date of the usage query (end date must be in the same month as the start date)
+         * The end date of the usage query (end date must be in the same month as the start date), such as `2020-09-30`.
          * @type {string || null}
          */
         this.EndDate = null;
@@ -2440,6 +2440,13 @@ Note: This field may return `null`, indicating that no valid value can be found.
          */
         this.ProjectId = null;
 
+        /**
+         * Price attribute
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.PriceInfo = null;
+
     }
 
     /**
@@ -2489,6 +2496,7 @@ Note: This field may return `null`, indicating that no valid value can be found.
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.PriceInfo = 'PriceInfo' in params ? params.PriceInfo : null;
 
     }
 }
@@ -2848,7 +2856,7 @@ class CosDetailSets extends  AbstractModel {
         this.DosageEndTime = null;
 
         /**
-         * Sub-product name
+         * Subproduct name
          * @type {string || null}
          */
         this.SubProductCodeName = null;

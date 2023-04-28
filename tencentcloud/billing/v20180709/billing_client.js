@@ -124,7 +124,7 @@ class BillingClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query bill resources summary. 
+     * This API is used to query bill resources summary.
      * @param {DescribeBillResourceSummaryRequest} req
      * @param {function(string, DescribeBillResourceSummaryResponse):void} cb
      * @public

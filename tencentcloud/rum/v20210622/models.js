@@ -4402,6 +4402,12 @@ class DescribeReleaseFileSignRequest extends  AbstractModel {
          */
         this.Timeout = null;
 
+        /**
+         * Bucket type. Valid values: `1`: (Web, which is the default value), `2` (Application).
+         * @type {number || null}
+         */
+        this.FileType = null;
+
     }
 
     /**
@@ -4412,6 +4418,7 @@ class DescribeReleaseFileSignRequest extends  AbstractModel {
             return;
         }
         this.Timeout = 'Timeout' in params ? params.Timeout : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
 
     }
 }

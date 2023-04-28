@@ -20,6 +20,7 @@ const SchemaSpaceTimeSeries = models.SchemaSpaceTimeSeries;
 const HealthReportTask = models.HealthReportTask;
 const CreateDBDiagReportTaskRequest = models.CreateDBDiagReportTaskRequest;
 const TableSpaceTimeSeries = models.TableSpaceTimeSeries;
+const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const DescribeTopSpaceTablesRequest = models.DescribeTopSpaceTablesRequest;
 const ScoreItem = models.ScoreItem;
 const InstanceConfs = models.InstanceConfs;
@@ -42,7 +43,9 @@ const CreateSchedulerMailProfileRequest = models.CreateSchedulerMailProfileReque
 const ContactItem = models.ContactItem;
 const DescribeDBSpaceStatusRequest = models.DescribeDBSpaceStatusRequest;
 const TimeSlice = models.TimeSlice;
+const DeleteDBDiagReportTasksRequest = models.DeleteDBDiagReportTasksRequest;
 const ModifyDiagDBInstanceConfRequest = models.ModifyDiagDBInstanceConfRequest;
+const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const DescribeSecurityAuditLogDownloadUrlsRequest = models.DescribeSecurityAuditLogDownloadUrlsRequest;
 const CreateDBDiagReportTaskResponse = models.CreateDBDiagReportTaskResponse;
 const ProcessStatistic = models.ProcessStatistic;
@@ -55,6 +58,7 @@ const CreateKillTaskResponse = models.CreateKillTaskResponse;
 const DescribeDBDiagEventsRequest = models.DescribeDBDiagEventsRequest;
 const CreateDBDiagReportUrlResponse = models.CreateDBDiagReportUrlResponse;
 const CreateKillTaskRequest = models.CreateKillTaskRequest;
+const DeleteDBDiagReportTasksResponse = models.DeleteDBDiagReportTasksResponse;
 const DescribeProxyProcessStatisticsResponse = models.DescribeProxyProcessStatisticsResponse;
 const SlowLogHost = models.SlowLogHost;
 const CreateMailProfileRequest = models.CreateMailProfileRequest;
@@ -111,6 +115,7 @@ const RedisPreKeySpaceData = models.RedisPreKeySpaceData;
 const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
 const DescribeDBDiagReportTasksRequest = models.DescribeDBDiagReportTasksRequest;
 const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
+const SlowLogInfoItem = models.SlowLogInfoItem;
 const SecLogExportTaskInfo = models.SecLogExportTaskInfo;
 const DescribeHealthScoreResponse = models.DescribeHealthScoreResponse;
 const ScoreDetail = models.ScoreDetail;
@@ -141,6 +146,17 @@ class DbbrainClient extends AbstractClient {
     DescribeSecurityAuditLogDownloadUrls(req, cb) {
         let resp = new DescribeSecurityAuditLogDownloadUrlsResponse();
         this.request("DescribeSecurityAuditLogDownloadUrls", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete health report generation tasks by task ID.
+     * @param {DeleteDBDiagReportTasksRequest} req
+     * @param {function(string, DeleteDBDiagReportTasksResponse):void} cb
+     * @public
+     */
+    DeleteDBDiagReportTasks(req, cb) {
+        let resp = new DeleteDBDiagReportTasksResponse();
+        this.request("DeleteDBDiagReportTasks", req, resp, cb);
     }
 
     /**
@@ -361,6 +377,17 @@ class DbbrainClient extends AbstractClient {
     DescribeRedisTopKeyPrefixList(req, cb) {
         let resp = new DescribeRedisTopKeyPrefixListResponse();
         this.request("DescribeRedisTopKeyPrefixList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to obtain the slow query log details of a SQL template in a specified time period.
+     * @param {DescribeSlowLogsRequest} req
+     * @param {function(string, DescribeSlowLogsResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogs(req, cb) {
+        let resp = new DescribeSlowLogsResponse();
+        this.request("DescribeSlowLogs", req, resp, cb);
     }
 
     /**

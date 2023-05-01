@@ -427,6 +427,12 @@ class ModifySparkAppRequest extends  AbstractModel {
          */
         this.AppExecutorMaxNumbers = null;
 
+        /**
+         * The associated Data Lake Compute query script.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
     }
 
     /**
@@ -463,6 +469,7 @@ class ModifySparkAppRequest extends  AbstractModel {
         this.SparkImage = 'SparkImage' in params ? params.SparkImage : null;
         this.SparkImageVersion = 'SparkImageVersion' in params ? params.SparkImageVersion : null;
         this.AppExecutorMaxNumbers = 'AppExecutorMaxNumbers' in params ? params.AppExecutorMaxNumbers : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
     }
 }
@@ -2001,25 +2008,25 @@ class DescribeSparkAppJobsRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * Update start time
+         * The update start time in the format of yyyy-mm-dd HH:MM:SS.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * Update end time
+         * The update end time in the format of yyyy-mm-dd HH:MM:SS.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Query list offset
+         * The query list offset, which defaults to 0.
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Query list limit
+         * The maximum number of queries allowed in the list, which defaults to 100.
          * @type {number || null}
          */
         this.Limit = null;
@@ -2398,6 +2405,12 @@ class CreateSparkAppRequest extends  AbstractModel {
          */
         this.AppExecutorMaxNumbers = null;
 
+        /**
+         * The ID of the associated Data Lake Compute query script.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
     }
 
     /**
@@ -2433,6 +2446,7 @@ class CreateSparkAppRequest extends  AbstractModel {
         this.SparkImage = 'SparkImage' in params ? params.SparkImage : null;
         this.SparkImageVersion = 'SparkImageVersion' in params ? params.SparkImageVersion : null;
         this.AppExecutorMaxNumbers = 'AppExecutorMaxNumbers' in params ? params.AppExecutorMaxNumbers : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
 
     }
 }
@@ -2835,13 +2849,13 @@ class CreateDataEngineRequest extends  AbstractModel {
         this.MainClusterName = null;
 
         /**
-         * 
+         * Whether to enable the scaling feature for a monthly subscribed Spark job cluster.
          * @type {boolean || null}
          */
         this.ElasticSwitch = null;
 
         /**
-         * 
+         * The upper limit (in CUs) for scaling of the monthly subscribed Spark job cluster.
          * @type {number || null}
          */
         this.ElasticLimit = null;
@@ -3325,6 +3339,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.SparkImageVersion = null;
 
+        /**
+         * The ID of the associated Data Lake Compute query script.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DataEngineClusterType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DataEngineImageVersion = null;
+
     }
 
     /**
@@ -3375,6 +3408,9 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.DataEngineStatus = 'DataEngineStatus' in params ? params.DataEngineStatus : null;
         this.JobExecutorMaxNumbers = 'JobExecutorMaxNumbers' in params ? params.JobExecutorMaxNumbers : null;
         this.SparkImageVersion = 'SparkImageVersion' in params ? params.SparkImageVersion : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.DataEngineClusterType = 'DataEngineClusterType' in params ? params.DataEngineClusterType : null;
+        this.DataEngineImageVersion = 'DataEngineImageVersion' in params ? params.DataEngineImageVersion : null;
 
     }
 }

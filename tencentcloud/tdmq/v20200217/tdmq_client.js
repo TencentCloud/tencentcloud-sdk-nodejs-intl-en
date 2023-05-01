@@ -28,6 +28,8 @@ const DeleteClusterResponse = models.DeleteClusterResponse;
 const SendBatchMessagesResponse = models.SendBatchMessagesResponse;
 const ModifyCmqSubscriptionAttributeResponse = models.ModifyCmqSubscriptionAttributeResponse;
 const CreateCmqTopicRequest = models.CreateCmqTopicRequest;
+const PulsarProClusterSpecInfo = models.PulsarProClusterSpecInfo;
+const RocketMQTopicDistribution = models.RocketMQTopicDistribution;
 const DescribeRocketMQNamespacesResponse = models.DescribeRocketMQNamespacesResponse;
 const BindCluster = models.BindCluster;
 const ModifyClusterResponse = models.ModifyClusterResponse;
@@ -116,6 +118,7 @@ const DescribeBindVpcsRequest = models.DescribeBindVpcsRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const ClearCmqSubscriptionFilterTagsRequest = models.ClearCmqSubscriptionFilterTagsRequest;
 const TopicRecord = models.TopicRecord;
+const SendCmqMsgResponse = models.SendCmqMsgResponse;
 const CreateRocketMQGroupResponse = models.CreateRocketMQGroupResponse;
 const ModifyRocketMQNamespaceRequest = models.ModifyRocketMQNamespaceRequest;
 const DescribeEnvironmentRolesRequest = models.DescribeEnvironmentRolesRequest;
@@ -127,6 +130,7 @@ const Environment = models.Environment;
 const RocketMQClusterDetail = models.RocketMQClusterDetail;
 const DeleteRocketMQGroupResponse = models.DeleteRocketMQGroupResponse;
 const CreateCmqQueueResponse = models.CreateCmqQueueResponse;
+const PulsarProInstance = models.PulsarProInstance;
 const PartitionsTopic = models.PartitionsTopic;
 const DescribeRocketMQGroupsResponse = models.DescribeRocketMQGroupsResponse;
 const ResetMsgSubOffsetByTimestampResponse = models.ResetMsgSubOffsetByTimestampResponse;
@@ -172,9 +176,11 @@ const DescribePublishersResponse = models.DescribePublishersResponse;
 const SendMsgRequest = models.SendMsgRequest;
 const ResetRocketMQConsumerOffSetRequest = models.ResetRocketMQConsumerOffSetRequest;
 const DescribeCmqQueueDetailRequest = models.DescribeCmqQueueDetailRequest;
+const DescribePulsarProInstancesRequest = models.DescribePulsarProInstancesRequest;
 const CreateRocketMQTopicRequest = models.CreateRocketMQTopicRequest;
 const CreateRoleResponse = models.CreateRoleResponse;
 const DeleteRocketMQClusterRequest = models.DeleteRocketMQClusterRequest;
+const DescribePulsarProInstancesResponse = models.DescribePulsarProInstancesResponse;
 const DeleteEnvironmentRolesRequest = models.DeleteEnvironmentRolesRequest;
 const ClearCmqQueueResponse = models.ClearCmqQueueResponse;
 const DescribeBindClustersRequest = models.DescribeBindClustersRequest;
@@ -186,9 +192,10 @@ const ModifyEnvironmentRoleResponse = models.ModifyEnvironmentRoleResponse;
 const DeleteCmqQueueRequest = models.DeleteCmqQueueRequest;
 const DescribeRocketMQGroupsRequest = models.DescribeRocketMQGroupsRequest;
 const DescribeRocketMQClustersResponse = models.DescribeRocketMQClustersResponse;
-const RocketMQTopicDistribution = models.RocketMQTopicDistribution;
+const DescribePulsarProInstanceDetailRequest = models.DescribePulsarProInstanceDetailRequest;
 const Sort = models.Sort;
 const CreateRoleRequest = models.CreateRoleRequest;
+const PulsarNetworkAccessPointInfo = models.PulsarNetworkAccessPointInfo;
 const ModifyEnvironmentRoleRequest = models.ModifyEnvironmentRoleRequest;
 const DescribeEnvironmentAttributesResponse = models.DescribeEnvironmentAttributesResponse;
 const Role = models.Role;
@@ -198,7 +205,7 @@ const CreateRocketMQNamespaceResponse = models.CreateRocketMQNamespaceResponse;
 const SendBatchMessagesRequest = models.SendBatchMessagesRequest;
 const DeleteCmqTopicRequest = models.DeleteCmqTopicRequest;
 const DescribeRabbitMQNodeListResponse = models.DescribeRabbitMQNodeListResponse;
-const SendCmqMsgResponse = models.SendCmqMsgResponse;
+const DescribePulsarProInstanceDetailResponse = models.DescribePulsarProInstanceDetailResponse;
 const UnbindCmqDeadLetterRequest = models.UnbindCmqDeadLetterRequest;
 const ModifyCmqQueueAttributeRequest = models.ModifyCmqQueueAttributeRequest;
 const RabbitMQPrivateNode = models.RabbitMQPrivateNode;
@@ -206,6 +213,7 @@ const DeleteCmqSubscribeResponse = models.DeleteCmqSubscribeResponse;
 const DescribePublisherSummaryRequest = models.DescribePublisherSummaryRequest;
 const DeleteSubscriptionsRequest = models.DeleteSubscriptionsRequest;
 const VpcConfig = models.VpcConfig;
+const PulsarProClusterInfo = models.PulsarProClusterInfo;
 const ModifyRocketMQGroupResponse = models.ModifyRocketMQGroupResponse;
 const DescribeRocketMQVipInstancesResponse = models.DescribeRocketMQVipInstancesResponse;
 const DescribeRabbitMQVipInstancesRequest = models.DescribeRabbitMQVipInstancesRequest;
@@ -281,14 +289,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to modify the topic remarks and number of partitions.
-     * @param {ModifyTopicRequest} req
-     * @param {function(string, ModifyTopicResponse):void} cb
+     * This API is used to query the list of the purchased TDMQ for Pulsar pro instances.
+     * @param {DescribePulsarProInstancesRequest} req
+     * @param {function(string, DescribePulsarProInstancesResponse):void} cb
      * @public
      */
-    ModifyTopic(req, cb) {
-        let resp = new ModifyTopicResponse();
-        this.request("ModifyTopic", req, resp, cb);
+    DescribePulsarProInstances(req, cb) {
+        let resp = new DescribePulsarProInstancesResponse();
+        this.request("DescribePulsarProInstances", req, resp, cb);
     }
 
     /**
@@ -523,14 +531,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * This API is used to send a CMQ topic message.
-     * @param {PublishCmqMsgRequest} req
-     * @param {function(string, PublishCmqMsgResponse):void} cb
+     * This API is used to modify the topic remarks and number of partitions.
+     * @param {ModifyTopicRequest} req
+     * @param {function(string, ModifyTopicResponse):void} cb
      * @public
      */
-    PublishCmqMsg(req, cb) {
-        let resp = new PublishCmqMsgResponse();
-        this.request("PublishCmqMsg", req, resp, cb);
+    ModifyTopic(req, cb) {
+        let resp = new ModifyTopicResponse();
+        this.request("ModifyTopic", req, resp, cb);
     }
 
     /**
@@ -619,6 +627,17 @@ class TdmqClient extends AbstractClient {
     SendMsg(req, cb) {
         let resp = new SendMsgResponse();
         this.request("SendMsg", req, resp, cb);
+    }
+
+    /**
+     * This API is used to send a CMQ topic message.
+     * @param {PublishCmqMsgRequest} req
+     * @param {function(string, PublishCmqMsgResponse):void} cb
+     * @public
+     */
+    PublishCmqMsg(req, cb) {
+        let resp = new PublishCmqMsgResponse();
+        this.request("PublishCmqMsg", req, resp, cb);
     }
 
     /**
@@ -928,14 +947,14 @@ The API configured with `BatchReceivePolicy` returns multiple messages at a time
     }
 
     /**
-     * This API is used to modify a role.
-     * @param {ModifyRoleRequest} req
-     * @param {function(string, ModifyRoleResponse):void} cb
+     * This API is used to obtain the information of a TDMQ for Pulsar pro cluster instance.
+     * @param {DescribePulsarProInstanceDetailRequest} req
+     * @param {function(string, DescribePulsarProInstanceDetailResponse):void} cb
      * @public
      */
-    ModifyRole(req, cb) {
-        let resp = new ModifyRoleResponse();
-        this.request("ModifyRole", req, resp, cb);
+    DescribePulsarProInstanceDetail(req, cb) {
+        let resp = new DescribePulsarProInstanceDetailResponse();
+        this.request("DescribePulsarProInstanceDetail", req, resp, cb);
     }
 
     /**
@@ -1002,6 +1021,17 @@ The API configured with `BatchReceivePolicy` returns multiple messages at a time
     CreateRocketMQNamespace(req, cb) {
         let resp = new CreateRocketMQNamespaceResponse();
         this.request("CreateRocketMQNamespace", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify a role.
+     * @param {ModifyRoleRequest} req
+     * @param {function(string, ModifyRoleResponse):void} cb
+     * @public
+     */
+    ModifyRole(req, cb) {
+        let resp = new ModifyRoleResponse();
+        this.request("ModifyRole", req, resp, cb);
     }
 
     /**

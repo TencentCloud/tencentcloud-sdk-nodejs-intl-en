@@ -672,6 +672,105 @@ class CreateCmqTopicRequest extends  AbstractModel {
 }
 
 /**
+ * TDMQ for Pulsar pro cluster specification information
+ * @class
+ */
+class PulsarProClusterSpecInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster specification name
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+        /**
+         * Peak TPS
+         * @type {number || null}
+         */
+        this.MaxTps = null;
+
+        /**
+         * Peak bandwidth in Mbps
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+        /**
+         * Maximum number of namespaces
+         * @type {number || null}
+         */
+        this.MaxNamespaces = null;
+
+        /**
+         * Maximum number of topic partitions
+         * @type {number || null}
+         */
+        this.MaxTopics = null;
+
+        /**
+         * Elastic TPS beyond the specification
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ScalableTps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.MaxNamespaces = 'MaxNamespaces' in params ? params.MaxNamespaces : null;
+        this.MaxTopics = 'MaxTopics' in params ? params.MaxTopics : null;
+        this.ScalableTps = 'ScalableTps' in params ? params.ScalableTps : null;
+
+    }
+}
+
+/**
+ * TDMQ for RocketMQ topic distribution
+ * @class
+ */
+class RocketMQTopicDistribution extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Topic type
+         * @type {string || null}
+         */
+        this.TopicType = null;
+
+        /**
+         * Number of topics
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
  * DescribeRocketMQNamespaces response structure.
  * @class
  */
@@ -5887,6 +5986,48 @@ class TopicRecord extends  AbstractModel {
 }
 
 /**
+ * SendCmqMsg response structure.
+ * @class
+ */
+class SendCmqMsgResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `true` indicates that the sending is successful
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * Message ID
+         * @type {string || null}
+         */
+        this.MsgId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateRocketMQGroup response structure.
  * @class
  */
@@ -6531,6 +6672,143 @@ class CreateCmqQueueResponse extends  AbstractModel {
         }
         this.QueueId = 'QueueId' in params ? params.QueueId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TDMQ for Pulsar pro instance information
+ * @class
+ */
+class PulsarProInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Instance name
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * Instance version
+         * @type {string || null}
+         */
+        this.InstanceVersion = null;
+
+        /**
+         * Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed), `6` (Adjusting configuration), `7` (Configuration adjustment failed).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Instance specification name
+         * @type {string || null}
+         */
+        this.ConfigDisplay = null;
+
+        /**
+         * Peak TPS
+         * @type {number || null}
+         */
+        this.MaxTps = null;
+
+        /**
+         * Storage capacity in GB
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * Instance expiration time in milliseconds
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Payment mode. Valid values: `0` (Pay-as-you-go), `1` (Monthly subscription).
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Remarks
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Instance specification ID
+         * @type {string || null}
+         */
+        this.SpecName = null;
+
+        /**
+         * Elastic TPS beyond the specification
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ScalableTps = null;
+
+        /**
+         * VPC ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Peak bandwidth in Mbps
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceVersion = 'InstanceVersion' in params ? params.InstanceVersion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ConfigDisplay = 'ConfigDisplay' in params ? params.ConfigDisplay : null;
+        this.MaxTps = 'MaxTps' in params ? params.MaxTps : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.SpecName = 'SpecName' in params ? params.SpecName : null;
+        this.ScalableTps = 'ScalableTps' in params ? params.ScalableTps : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
 
     }
 }
@@ -8957,6 +9235,56 @@ class DescribeCmqQueueDetailRequest extends  AbstractModel {
 }
 
 /**
+ * DescribePulsarProInstances request structure.
+ * @class
+ */
+class DescribePulsarProInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Query condition filter
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * The maximum number of queried items, which defaults to `20`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Start offset for query
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * CreateRocketMQTopic request structure.
  * @class
  */
@@ -9093,6 +9421,56 @@ class DeleteRocketMQClusterRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribePulsarProInstances response structure.
+ * @class
+ */
+class DescribePulsarProInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of unpaginated items
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Instance information list
+         * @type {Array.<PulsarProInstance> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new PulsarProInstance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9684,24 +10062,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * TDMQ for RocketMQ topic distribution
+ * DescribePulsarProInstanceDetail request structure.
  * @class
  */
-class RocketMQTopicDistribution extends  AbstractModel {
+class DescribePulsarProInstanceDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Topic type
+         * Cluster ID
          * @type {string || null}
          */
-        this.TopicType = null;
-
-        /**
-         * Number of topics
-         * @type {number || null}
-         */
-        this.Count = null;
+        this.ClusterId = null;
 
     }
 
@@ -9712,8 +10084,7 @@ class RocketMQTopicDistribution extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
-        this.Count = 'Count' in params ? params.Count : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -9791,6 +10162,67 @@ class CreateRoleRequest extends  AbstractModel {
         this.RoleName = 'RoleName' in params ? params.RoleName : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * TDMQ for Pulsar network access point information
+ * @class
+ */
+class PulsarNetworkAccessPointInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC ID. This field is left empty for supporting network and public network access points.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet ID. This field is left empty for supporting network and public network access points.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Access address
+         * @type {string || null}
+         */
+        this.Endpoint = null;
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Access point type: 
+`0`: Supporting network access point 
+`1`: VPC access point 
+`2`: Public network access point
+         * @type {number || null}
+         */
+        this.RouteType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Endpoint = 'Endpoint' in params ? params.Endpoint : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RouteType = 'RouteType' in params ? params.RouteType : null;
 
     }
 }
@@ -10286,24 +10718,32 @@ Note: This field may return null, indicating that no valid value can be obtained
 }
 
 /**
- * SendCmqMsg response structure.
+ * DescribePulsarProInstanceDetail response structure.
  * @class
  */
-class SendCmqMsgResponse extends  AbstractModel {
+class DescribePulsarProInstanceDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * `true` indicates that the sending is successful
-         * @type {boolean || null}
+         * Cluster information
+         * @type {PulsarProClusterInfo || null}
          */
-        this.Result = null;
+        this.ClusterInfo = null;
 
         /**
-         * Message ID
-         * @type {string || null}
+         * Cluster network access point information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<PulsarNetworkAccessPointInfo> || null}
          */
-        this.MsgId = null;
+        this.NetworkAccessPointInfos = null;
+
+        /**
+         * Cluster specification information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {PulsarProClusterSpecInfo || null}
+         */
+        this.ClusterSpecInfo = null;
 
         /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -10320,8 +10760,27 @@ class SendCmqMsgResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.MsgId = 'MsgId' in params ? params.MsgId : null;
+
+        if (params.ClusterInfo) {
+            let obj = new PulsarProClusterInfo();
+            obj.deserialize(params.ClusterInfo)
+            this.ClusterInfo = obj;
+        }
+
+        if (params.NetworkAccessPointInfos) {
+            this.NetworkAccessPointInfos = new Array();
+            for (let z in params.NetworkAccessPointInfos) {
+                let obj = new PulsarNetworkAccessPointInfo();
+                obj.deserialize(params.NetworkAccessPointInfos[z]);
+                this.NetworkAccessPointInfos.push(obj);
+            }
+        }
+
+        if (params.ClusterSpecInfo) {
+            let obj = new PulsarProClusterSpecInfo();
+            obj.deserialize(params.ClusterSpecInfo)
+            this.ClusterSpecInfo = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10720,6 +11179,92 @@ class VpcConfig extends  AbstractModel {
 }
 
 /**
+ * TDMQ for Pulsar pro cluster information
+ * @class
+ */
+class PulsarProClusterInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster name
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Cluster status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Cluster version
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * Node distribution
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<InstanceNodeDistribution> || null}
+         */
+        this.NodeDistribution = null;
+
+        /**
+         * Max storage capacity in MB
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Version = 'Version' in params ? params.Version : null;
+
+        if (params.NodeDistribution) {
+            this.NodeDistribution = new Array();
+            for (let z in params.NodeDistribution) {
+                let obj = new InstanceNodeDistribution();
+                obj.deserialize(params.NodeDistribution[z]);
+                this.NodeDistribution.push(obj);
+            }
+        }
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+
+    }
+}
+
+/**
  * ModifyRocketMQGroup response structure.
  * @class
  */
@@ -11041,6 +11586,8 @@ module.exports = {
     SendBatchMessagesResponse: SendBatchMessagesResponse,
     ModifyCmqSubscriptionAttributeResponse: ModifyCmqSubscriptionAttributeResponse,
     CreateCmqTopicRequest: CreateCmqTopicRequest,
+    PulsarProClusterSpecInfo: PulsarProClusterSpecInfo,
+    RocketMQTopicDistribution: RocketMQTopicDistribution,
     DescribeRocketMQNamespacesResponse: DescribeRocketMQNamespacesResponse,
     BindCluster: BindCluster,
     ModifyClusterResponse: ModifyClusterResponse,
@@ -11129,6 +11676,7 @@ module.exports = {
     DescribeClustersResponse: DescribeClustersResponse,
     ClearCmqSubscriptionFilterTagsRequest: ClearCmqSubscriptionFilterTagsRequest,
     TopicRecord: TopicRecord,
+    SendCmqMsgResponse: SendCmqMsgResponse,
     CreateRocketMQGroupResponse: CreateRocketMQGroupResponse,
     ModifyRocketMQNamespaceRequest: ModifyRocketMQNamespaceRequest,
     DescribeEnvironmentRolesRequest: DescribeEnvironmentRolesRequest,
@@ -11140,6 +11688,7 @@ module.exports = {
     RocketMQClusterDetail: RocketMQClusterDetail,
     DeleteRocketMQGroupResponse: DeleteRocketMQGroupResponse,
     CreateCmqQueueResponse: CreateCmqQueueResponse,
+    PulsarProInstance: PulsarProInstance,
     PartitionsTopic: PartitionsTopic,
     DescribeRocketMQGroupsResponse: DescribeRocketMQGroupsResponse,
     ResetMsgSubOffsetByTimestampResponse: ResetMsgSubOffsetByTimestampResponse,
@@ -11185,9 +11734,11 @@ module.exports = {
     SendMsgRequest: SendMsgRequest,
     ResetRocketMQConsumerOffSetRequest: ResetRocketMQConsumerOffSetRequest,
     DescribeCmqQueueDetailRequest: DescribeCmqQueueDetailRequest,
+    DescribePulsarProInstancesRequest: DescribePulsarProInstancesRequest,
     CreateRocketMQTopicRequest: CreateRocketMQTopicRequest,
     CreateRoleResponse: CreateRoleResponse,
     DeleteRocketMQClusterRequest: DeleteRocketMQClusterRequest,
+    DescribePulsarProInstancesResponse: DescribePulsarProInstancesResponse,
     DeleteEnvironmentRolesRequest: DeleteEnvironmentRolesRequest,
     ClearCmqQueueResponse: ClearCmqQueueResponse,
     DescribeBindClustersRequest: DescribeBindClustersRequest,
@@ -11199,9 +11750,10 @@ module.exports = {
     DeleteCmqQueueRequest: DeleteCmqQueueRequest,
     DescribeRocketMQGroupsRequest: DescribeRocketMQGroupsRequest,
     DescribeRocketMQClustersResponse: DescribeRocketMQClustersResponse,
-    RocketMQTopicDistribution: RocketMQTopicDistribution,
+    DescribePulsarProInstanceDetailRequest: DescribePulsarProInstanceDetailRequest,
     Sort: Sort,
     CreateRoleRequest: CreateRoleRequest,
+    PulsarNetworkAccessPointInfo: PulsarNetworkAccessPointInfo,
     ModifyEnvironmentRoleRequest: ModifyEnvironmentRoleRequest,
     DescribeEnvironmentAttributesResponse: DescribeEnvironmentAttributesResponse,
     Role: Role,
@@ -11211,7 +11763,7 @@ module.exports = {
     SendBatchMessagesRequest: SendBatchMessagesRequest,
     DeleteCmqTopicRequest: DeleteCmqTopicRequest,
     DescribeRabbitMQNodeListResponse: DescribeRabbitMQNodeListResponse,
-    SendCmqMsgResponse: SendCmqMsgResponse,
+    DescribePulsarProInstanceDetailResponse: DescribePulsarProInstanceDetailResponse,
     UnbindCmqDeadLetterRequest: UnbindCmqDeadLetterRequest,
     ModifyCmqQueueAttributeRequest: ModifyCmqQueueAttributeRequest,
     RabbitMQPrivateNode: RabbitMQPrivateNode,
@@ -11219,6 +11771,7 @@ module.exports = {
     DescribePublisherSummaryRequest: DescribePublisherSummaryRequest,
     DeleteSubscriptionsRequest: DeleteSubscriptionsRequest,
     VpcConfig: VpcConfig,
+    PulsarProClusterInfo: PulsarProClusterInfo,
     ModifyRocketMQGroupResponse: ModifyRocketMQGroupResponse,
     DescribeRocketMQVipInstancesResponse: DescribeRocketMQVipInstancesResponse,
     DescribeRabbitMQVipInstancesRequest: DescribeRabbitMQVipInstancesRequest,

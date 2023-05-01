@@ -14276,10 +14276,28 @@ class RemoveWaterMarkTaskOutput extends  AbstractModel {
         super();
 
         /**
-         * The file ID of the video.
+         * The file ID.
          * @type {string || null}
          */
         this.FileId = null;
+
+        /**
+         * The file type, such as MP4 or MP3.
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * The playback URL of the output file.
+         * @type {string || null}
+         */
+        this.FileUrl = null;
+
+        /**
+         * The filename, which can be up to 64 characters long.
+         * @type {string || null}
+         */
+        this.MediaName = null;
 
         /**
          * The metadata of the video, including size, duration, video stream information, and audio stream information.
@@ -14297,6 +14315,9 @@ class RemoveWaterMarkTaskOutput extends  AbstractModel {
             return;
         }
         this.FileId = 'FileId' in params ? params.FileId : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.FileUrl = 'FileUrl' in params ? params.FileUrl : null;
+        this.MediaName = 'MediaName' in params ? params.MediaName : null;
 
         if (params.MetaData) {
             let obj = new MediaMetaData();
@@ -15536,6 +15557,13 @@ Note: this field may return `null`, indicating that no valid value is obtained.
          */
         this.CreateTime = null;
 
+        /**
+         * The QUIC configuration for the domain.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DomainQUICConfig || null}
+         */
+        this.QUICConfig = null;
+
     }
 
     /**
@@ -15575,6 +15603,12 @@ Note: this field may return `null`, indicating that no valid value is obtained.
             this.RefererAuthPolicy = obj;
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.QUICConfig) {
+            let obj = new DomainQUICConfig();
+            obj.deserialize(params.QUICConfig)
+            this.QUICConfig = obj;
+        }
 
     }
 }
@@ -18662,6 +18696,12 @@ class ModifyVodDomainConfigRequest extends  AbstractModel {
          */
         this.UrlSignatureAuthPolicy = null;
 
+        /**
+         * The QUIC configuration.
+         * @type {DomainQUICConfig || null}
+         */
+        this.QUICConfig = null;
+
     }
 
     /**
@@ -18684,6 +18724,12 @@ class ModifyVodDomainConfigRequest extends  AbstractModel {
             let obj = new UrlSignatureAuthPolicy();
             obj.deserialize(params.UrlSignatureAuthPolicy)
             this.UrlSignatureAuthPolicy = obj;
+        }
+
+        if (params.QUICConfig) {
+            let obj = new DomainQUICConfig();
+            obj.deserialize(params.QUICConfig)
+            this.QUICConfig = obj;
         }
 
     }
@@ -30921,60 +30967,20 @@ class DescribeSnapshotByTimeOffsetTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * Information of video stream in VOD file
+ * The QUIC configuration of a domain.
  * @class
  */
-class MediaVideoStreamItem extends  AbstractModel {
+class DomainQUICConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Bitrate of video stream in bps.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Bitrate = null;
-
-        /**
-         * Height of video stream in px.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Width of video stream in px.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Video stream encoder, such as h264.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The QUIC status. Valid values:
+<li>`Enabled`</li>
+<li>`Disabled`</li>
          * @type {string || null}
          */
-        this.Codec = null;
-
-        /**
-         * Frame rate in Hz.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.Fps = null;
-
-        /**
-         * The codec tag. This parameter is valid only if `Codec` is `hevc`.
-         * @type {string || null}
-         */
-        this.CodecTag = null;
-
-        /**
-         * Dynamic range information.
-<li><font color=red>Note</font>: This parameter is valid for transcoding files generated after 2023-01-10T00:00:00Z.</li>
-         * @type {DynamicRangeInfo || null}
-         */
-        this.DynamicRangeInfo = null;
+        this.Status = null;
 
     }
 
@@ -30985,18 +30991,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Codec = 'Codec' in params ? params.Codec : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.CodecTag = 'CodecTag' in params ? params.CodecTag : null;
-
-        if (params.DynamicRangeInfo) {
-            let obj = new DynamicRangeInfo();
-            obj.deserialize(params.DynamicRangeInfo)
-            this.DynamicRangeInfo = obj;
-        }
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -33046,6 +33041,87 @@ class ReviewTemplate extends  AbstractModel {
         this.Labels = 'Labels' in params ? params.Labels : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * Information of video stream in VOD file
+ * @class
+ */
+class MediaVideoStreamItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Bitrate of video stream in bps.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * Height of video stream in px.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Width of video stream in px.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Video stream encoder, such as h264.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Codec = null;
+
+        /**
+         * Frame rate in Hz.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * The codec tag. This parameter is valid only if `Codec` is `hevc`.
+         * @type {string || null}
+         */
+        this.CodecTag = null;
+
+        /**
+         * Dynamic range information.
+<li><font color=red>Note</font>: This parameter is valid for transcoding files generated after 2023-01-10T00:00:00Z.</li>
+         * @type {DynamicRangeInfo || null}
+         */
+        this.DynamicRangeInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Codec = 'Codec' in params ? params.Codec : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.CodecTag = 'CodecTag' in params ? params.CodecTag : null;
+
+        if (params.DynamicRangeInfo) {
+            let obj = new DynamicRangeInfo();
+            obj.deserialize(params.DynamicRangeInfo)
+            this.DynamicRangeInfo = obj;
+        }
 
     }
 }
@@ -39249,7 +39325,7 @@ module.exports = {
     TaskSimpleInfo: TaskSimpleInfo,
     ReviewAudioVideoTask: ReviewAudioVideoTask,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
-    MediaVideoStreamItem: MediaVideoStreamItem,
+    DomainQUICConfig: DomainQUICConfig,
     SetDrmKeyProviderInfoRequest: SetDrmKeyProviderInfoRequest,
     SnapshotByTimeOffsetTemplate: SnapshotByTimeOffsetTemplate,
     DeleteSnapshotByTimeOffsetTemplateResponse: DeleteSnapshotByTimeOffsetTemplateResponse,
@@ -39286,6 +39362,7 @@ module.exports = {
     DeleteClassRequest: DeleteClassRequest,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     ReviewTemplate: ReviewTemplate,
+    MediaVideoStreamItem: MediaVideoStreamItem,
     CreateRebuildMediaTemplateRequest: CreateRebuildMediaTemplateRequest,
     ImageOperation: ImageOperation,
     MediaSubStreamInfoItem: MediaSubStreamInfoItem,

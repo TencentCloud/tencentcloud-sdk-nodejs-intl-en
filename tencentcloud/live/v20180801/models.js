@@ -194,6 +194,62 @@ class DescribeUploadStreamNumsResponse extends  AbstractModel {
 }
 
 /**
+ * Total usage of the transcoding service
+ * @class
+ */
+class TranscodeTotalInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Usage time (Beijing time)
+Example: 2019-03-01 00:00:00
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * Transcoding duration in minutes
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * Codec, with modules
+Examples:
+`liveprocessor_H264`: live transcoding-H264
+`liveprocessor_H265`: live transcoding-H265
+`topspeed_H264`: top speed codec-H264
+`topspeed_H265`: top speed codec-H265
+         * @type {string || null}
+         */
+        this.ModuleCodec = null;
+
+        /**
+         * Resolution
+Example: 540*480
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.ModuleCodec = 'ModuleCodec' in params ? params.ModuleCodec : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+
+    }
+}
+
+/**
  * StopRecordTask response structure.
  * @class
  */
@@ -408,177 +464,24 @@ class FlvSpecialParam extends  AbstractModel {
 }
 
 /**
- * Transcoding template information.
+ * CreateScreenshotTask response structure.
  * @class
  */
-class TemplateInfo extends  AbstractModel {
+class CreateScreenshotTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Codec: h264/h265/origin. Default value: h264.
-
-origin: keep the original codec.
+         * A unique task ID. If this parameter is returned, the screencapturing task is created successfully.
          * @type {string || null}
          */
-        this.Vcodec = null;
+        this.TaskId = null;
 
         /**
-         * Video bitrate. Value range: 0–8,000 Kbps.
-If the value is 0, the original bitrate will be retained.
-Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
-         * @type {number || null}
-         */
-        this.VideoBitrate = null;
-
-        /**
-         * Audio codec: aac. Default value: aac.
-Note: This parameter will not take effect for now and will be supported soon.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Acodec = null;
-
-        /**
-         * Audio bitrate. Value range: 0–500 Kbps.
-0 by default.
-         * @type {number || null}
-         */
-        this.AudioBitrate = null;
-
-        /**
-         * Width. Default value: 0.
-Value range: [0-3,000].
-The value must be a multiple of 2. The original width is 0.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Height. Default value: 0.
-Value range: [0-3,000].
-The value must be a multiple of 2. The original width is 0.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Frame rate. Default value: 0.
-Range: 0-60 Fps.
-         * @type {number || null}
-         */
-        this.Fps = null;
-
-        /**
-         * Keyframe interval, unit: second.
-Original interval by default
-Range: 2-6
-         * @type {number || null}
-         */
-        this.Gop = null;
-
-        /**
-         * Rotation angle. Default value: 0.
-Value range: 0, 90, 180, 270
-         * @type {number || null}
-         */
-        this.Rotate = null;
-
-        /**
-         * Encoding quality:
-baseline/main/high. Default value: baseline.
-         * @type {string || null}
-         */
-        this.Profile = null;
-
-        /**
-         * Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
-0: no, 1: yes
-Default value: 0.
-         * @type {number || null}
-         */
-        this.BitrateToOrig = null;
-
-        /**
-         * Whether to use the original height when the set height is higher than the original height.
-0: no, 1: yes
-Default value: 0.
-         * @type {number || null}
-         */
-        this.HeightToOrig = null;
-
-        /**
-         * Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
-0: no, 1: yes
-Default value: 0.
-         * @type {number || null}
-         */
-        this.FpsToOrig = null;
-
-        /**
-         * Whether to keep the video. 0: no; 1: yes.
-         * @type {number || null}
-         */
-        this.NeedVideo = null;
-
-        /**
-         * Whether to keep the audio. 0: no; 1: yes.
-         * @type {number || null}
-         */
-        this.NeedAudio = null;
-
-        /**
-         * Template ID.
-         * @type {number || null}
-         */
-        this.TemplateId = null;
-
-        /**
-         * Template name.
-         * @type {string || null}
-         */
-        this.TemplateName = null;
-
-        /**
-         * Template description.
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
-         * @type {number || null}
-         */
-        this.AiTransCode = null;
-
-        /**
-         * Bitrate compression ratio of top speed code video.
-Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
-
-Value range: 0.0-0.5.
-         * @type {number || null}
-         */
-        this.AdaptBitratePercent = null;
-
-        /**
-         * Whether to take the shorter side as height. 0: no, 1: yes. Default value: 0.
-Note: this field may return `null`, indicating that no valid value is obtained.
-         * @type {number || null}
-         */
-        this.ShortEdgeAsHeight = null;
-
-        /**
-         * The DRM encryption type. Valid values: fairplay, normalaes, widevine.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DRMType = null;
-
-        /**
-         * The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. Separate multiple tracks with “|”. You can choose only one video track (SD, HD, UHD1, or UHD2).
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DRMTracks = null;
+        this.RequestId = null;
 
     }
 
@@ -589,29 +492,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Vcodec = 'Vcodec' in params ? params.Vcodec : null;
-        this.VideoBitrate = 'VideoBitrate' in params ? params.VideoBitrate : null;
-        this.Acodec = 'Acodec' in params ? params.Acodec : null;
-        this.AudioBitrate = 'AudioBitrate' in params ? params.AudioBitrate : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Gop = 'Gop' in params ? params.Gop : null;
-        this.Rotate = 'Rotate' in params ? params.Rotate : null;
-        this.Profile = 'Profile' in params ? params.Profile : null;
-        this.BitrateToOrig = 'BitrateToOrig' in params ? params.BitrateToOrig : null;
-        this.HeightToOrig = 'HeightToOrig' in params ? params.HeightToOrig : null;
-        this.FpsToOrig = 'FpsToOrig' in params ? params.FpsToOrig : null;
-        this.NeedVideo = 'NeedVideo' in params ? params.NeedVideo : null;
-        this.NeedAudio = 'NeedAudio' in params ? params.NeedAudio : null;
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.AiTransCode = 'AiTransCode' in params ? params.AiTransCode : null;
-        this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
-        this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
-        this.DRMType = 'DRMType' in params ? params.DRMType : null;
-        this.DRMTracks = 'DRMTracks' in params ? params.DRMTracks : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1229,48 +1111,62 @@ class DeleteLiveCallbackTemplateResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLiveStreamOnlineList response structure.
+ * CreateScreenshotTask request structure.
  * @class
  */
-class DescribeLiveStreamOnlineListResponse extends  AbstractModel {
+class CreateScreenshotTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total number of eligible ones.
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * Total number of pages.
-         * @type {number || null}
-         */
-        this.TotalPage = null;
-
-        /**
-         * Page number.
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * Number of entries displayed per page.
-         * @type {number || null}
-         */
-        this.PageSize = null;
-
-        /**
-         * Active push information list.
-         * @type {Array.<StreamOnlineInfo> || null}
-         */
-        this.OnlineInfo = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The stream name.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.StreamName = null;
+
+        /**
+         * The push domain.
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * The push path.
+         * @type {string || null}
+         */
+        this.AppName = null;
+
+        /**
+         * The task end time, which must be a Unix timestamp and later than `StartTime` and the current time. The end time and start time cannot be more than 24 hours apart.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The ID of the screencapturing template, which is returned by `CreateLiveSnapshotTemplate`. If an incorrect template ID is passed in, the screencapturing task will fail.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * The task start time, which must be a Unix timestamp and cannot be later than six days from the current time. If you do not specify this parameter, the task will start immediately.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The publishing type. Valid values:
+`0` (default): Live stream
+`1`: Mixed stream
+         * @type {number || null}
+         */
+        this.StreamType = null;
+
+        /**
+         * An extension field, which is not defined currently and is empty by default.
+         * @type {string || null}
+         */
+        this.Extension = null;
 
     }
 
@@ -1281,20 +1177,14 @@ class DescribeLiveStreamOnlineListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
-
-        if (params.OnlineInfo) {
-            this.OnlineInfo = new Array();
-            for (let z in params.OnlineInfo) {
-                let obj = new StreamOnlineInfo();
-                obj.deserialize(params.OnlineInfo[z]);
-                this.OnlineInfo.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StreamName = 'StreamName' in params ? params.StreamName : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AppName = 'AppName' in params ? params.AppName : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.StreamType = 'StreamType' in params ? params.StreamType : null;
+        this.Extension = 'Extension' in params ? params.Extension : null;
 
     }
 }
@@ -3966,6 +3856,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.PushExceptionNotifyUrl = null;
 
+        /**
+         * The audio/video moderation callback URL.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.AudioAuditNotifyUrl = null;
+
     }
 
     /**
@@ -3986,6 +3883,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
         this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
         this.PushExceptionNotifyUrl = 'PushExceptionNotifyUrl' in params ? params.PushExceptionNotifyUrl : null;
+        this.AudioAuditNotifyUrl = 'AudioAuditNotifyUrl' in params ? params.AudioAuditNotifyUrl : null;
 
     }
 }
@@ -5930,7 +5828,8 @@ In UTC format, such as 2019-01-07T15:00:00Z.
         this.Duration = null;
 
         /**
-         * Host IP.
+         * The IP address of the host.
+If the stream is published from a private network, this parameter will be `-`.
          * @type {string || null}
          */
         this.ClientIp = null;
@@ -6027,7 +5926,7 @@ class CreateLiveTranscodeRuleRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. If you only bind a domain name, leave this parameter empty.
+         * The push path, which is the same as `AppName` in the push and playback addresses and is `live` by default. If you only want to bind the template to a domain, pass in an empty string.
          * @type {string || null}
          */
         this.AppName = null;
@@ -8083,78 +7982,48 @@ class ResumeLiveStreamResponse extends  AbstractModel {
 }
 
 /**
- * ModifyLiveRecordTemplate request structure.
+ * DescribeLiveStreamOnlineList response structure.
  * @class
  */
-class ModifyLiveRecordTemplateRequest extends  AbstractModel {
+class DescribeLiveStreamOnlineListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Template ID obtained through the `DescribeRecordTemplates` API.
+         * Total number of eligible ones.
          * @type {number || null}
          */
-        this.TemplateId = null;
+        this.TotalNum = null;
 
         /**
-         * Template name.
+         * Total number of pages.
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * Page number.
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * Number of entries displayed per page.
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * Active push information list.
+         * @type {Array.<StreamOnlineInfo> || null}
+         */
+        this.OnlineInfo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TemplateName = null;
-
-        /**
-         * Message description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * FLV recording parameter, which is set when FLV recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.FlvParam = null;
-
-        /**
-         * HLS recording parameter, which is set when HLS recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.HlsParam = null;
-
-        /**
-         * MP4 recording parameter, which is set when MP4 recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.Mp4Param = null;
-
-        /**
-         * AAC recording parameter, which is set when AAC recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.AacParam = null;
-
-        /**
-         * Custom HLS recording parameter.
-         * @type {HlsSpecialParam || null}
-         */
-        this.HlsSpecialParam = null;
-
-        /**
-         * MP3 recording parameter, which is set when MP3 recording is enabled.
-         * @type {RecordParam || null}
-         */
-        this.Mp3Param = null;
-
-        /**
-         * Whether to remove the watermark. This parameter is invalid if `IsDelayLive` is `1`.
-         * @type {boolean || null}
-         */
-        this.RemoveWatermark = null;
-
-        /**
-         * A special parameter for FLV recording.
-         * @type {FlvSpecialParam || null}
-         */
-        this.FlvSpecialParam = null;
+        this.RequestId = null;
 
     }
 
@@ -8165,52 +8034,20 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.Description = 'Description' in params ? params.Description : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
-        if (params.FlvParam) {
-            let obj = new RecordParam();
-            obj.deserialize(params.FlvParam)
-            this.FlvParam = obj;
+        if (params.OnlineInfo) {
+            this.OnlineInfo = new Array();
+            for (let z in params.OnlineInfo) {
+                let obj = new StreamOnlineInfo();
+                obj.deserialize(params.OnlineInfo[z]);
+                this.OnlineInfo.push(obj);
+            }
         }
-
-        if (params.HlsParam) {
-            let obj = new RecordParam();
-            obj.deserialize(params.HlsParam)
-            this.HlsParam = obj;
-        }
-
-        if (params.Mp4Param) {
-            let obj = new RecordParam();
-            obj.deserialize(params.Mp4Param)
-            this.Mp4Param = obj;
-        }
-
-        if (params.AacParam) {
-            let obj = new RecordParam();
-            obj.deserialize(params.AacParam)
-            this.AacParam = obj;
-        }
-
-        if (params.HlsSpecialParam) {
-            let obj = new HlsSpecialParam();
-            obj.deserialize(params.HlsSpecialParam)
-            this.HlsSpecialParam = obj;
-        }
-
-        if (params.Mp3Param) {
-            let obj = new RecordParam();
-            obj.deserialize(params.Mp3Param)
-            this.Mp3Param = obj;
-        }
-        this.RemoveWatermark = 'RemoveWatermark' in params ? params.RemoveWatermark : null;
-
-        if (params.FlvSpecialParam) {
-            let obj = new FlvSpecialParam();
-            obj.deserialize(params.FlvSpecialParam)
-            this.FlvSpecialParam = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10282,43 +10119,78 @@ If you set this parameter to 1, SEI (Supplemental Enhanced Information) of the i
 }
 
 /**
- * Total usage of the transcoding service
+ * ModifyLiveRecordTemplate request structure.
  * @class
  */
-class TranscodeTotalInfo extends  AbstractModel {
+class ModifyLiveRecordTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Usage time (Beijing time)
-Example: 2019-03-01 00:00:00
-         * @type {string || null}
-         */
-        this.Time = null;
-
-        /**
-         * Transcoding duration in minutes
+         * Template ID obtained through the `DescribeRecordTemplates` API.
          * @type {number || null}
          */
-        this.Duration = null;
+        this.TemplateId = null;
 
         /**
-         * Codec, with modules
-Examples:
-`liveprocessor_H264`: live transcoding-H264
-`liveprocessor_H265`: live transcoding-H265
-`topspeed_H264`: top speed codec-H264
-`topspeed_H265`: top speed codec-H265
+         * Template name.
          * @type {string || null}
          */
-        this.ModuleCodec = null;
+        this.TemplateName = null;
 
         /**
-         * Resolution
-Example: 540*480
+         * Message description
          * @type {string || null}
          */
-        this.Resolution = null;
+        this.Description = null;
+
+        /**
+         * FLV recording parameter, which is set when FLV recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.FlvParam = null;
+
+        /**
+         * HLS recording parameter, which is set when HLS recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.HlsParam = null;
+
+        /**
+         * MP4 recording parameter, which is set when MP4 recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.Mp4Param = null;
+
+        /**
+         * AAC recording parameter, which is set when AAC recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.AacParam = null;
+
+        /**
+         * Custom HLS recording parameter.
+         * @type {HlsSpecialParam || null}
+         */
+        this.HlsSpecialParam = null;
+
+        /**
+         * MP3 recording parameter, which is set when MP3 recording is enabled.
+         * @type {RecordParam || null}
+         */
+        this.Mp3Param = null;
+
+        /**
+         * Whether to remove the watermark. This parameter is invalid if `IsDelayLive` is `1`.
+         * @type {boolean || null}
+         */
+        this.RemoveWatermark = null;
+
+        /**
+         * A special parameter for FLV recording.
+         * @type {FlvSpecialParam || null}
+         */
+        this.FlvSpecialParam = null;
 
     }
 
@@ -10329,10 +10201,52 @@ Example: 540*480
         if (!params) {
             return;
         }
-        this.Time = 'Time' in params ? params.Time : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.ModuleCodec = 'ModuleCodec' in params ? params.ModuleCodec : null;
-        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.FlvParam) {
+            let obj = new RecordParam();
+            obj.deserialize(params.FlvParam)
+            this.FlvParam = obj;
+        }
+
+        if (params.HlsParam) {
+            let obj = new RecordParam();
+            obj.deserialize(params.HlsParam)
+            this.HlsParam = obj;
+        }
+
+        if (params.Mp4Param) {
+            let obj = new RecordParam();
+            obj.deserialize(params.Mp4Param)
+            this.Mp4Param = obj;
+        }
+
+        if (params.AacParam) {
+            let obj = new RecordParam();
+            obj.deserialize(params.AacParam)
+            this.AacParam = obj;
+        }
+
+        if (params.HlsSpecialParam) {
+            let obj = new HlsSpecialParam();
+            obj.deserialize(params.HlsSpecialParam)
+            this.HlsSpecialParam = obj;
+        }
+
+        if (params.Mp3Param) {
+            let obj = new RecordParam();
+            obj.deserialize(params.Mp3Param)
+            this.Mp3Param = obj;
+        }
+        this.RemoveWatermark = 'RemoveWatermark' in params ? params.RemoveWatermark : null;
+
+        if (params.FlvSpecialParam) {
+            let obj = new FlvSpecialParam();
+            obj.deserialize(params.FlvSpecialParam)
+            this.FlvSpecialParam = obj;
+        }
 
     }
 }
@@ -12755,6 +12669,215 @@ will be used.
 }
 
 /**
+ * Transcoding template information.
+ * @class
+ */
+class TemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Codec: h264/h265/origin. Default value: h264.
+
+origin: keep the original codec.
+         * @type {string || null}
+         */
+        this.Vcodec = null;
+
+        /**
+         * Video bitrate. Value range: 0–8,000 Kbps.
+If the value is 0, the original bitrate will be retained.
+Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
+         * @type {number || null}
+         */
+        this.VideoBitrate = null;
+
+        /**
+         * Audio codec: aac. Default value: aac.
+Note: This parameter will not take effect for now and will be supported soon.
+         * @type {string || null}
+         */
+        this.Acodec = null;
+
+        /**
+         * Audio bitrate. Value range: 0–500 Kbps.
+0 by default.
+         * @type {number || null}
+         */
+        this.AudioBitrate = null;
+
+        /**
+         * Width. Default value: 0.
+Value range: [0-3,000].
+The value must be a multiple of 2. The original width is 0.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Height. Default value: 0.
+Value range: [0-3,000].
+The value must be a multiple of 2. The original width is 0.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Frame rate. Default value: 0.
+Range: 0-60 Fps.
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * Keyframe interval, unit: second.
+Original interval by default
+Range: 2-6
+         * @type {number || null}
+         */
+        this.Gop = null;
+
+        /**
+         * Rotation angle. Default value: 0.
+Value range: 0, 90, 180, 270
+         * @type {number || null}
+         */
+        this.Rotate = null;
+
+        /**
+         * Encoding quality:
+baseline/main/high. Default value: baseline.
+         * @type {string || null}
+         */
+        this.Profile = null;
+
+        /**
+         * Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
+0: no, 1: yes
+Default value: 0.
+         * @type {number || null}
+         */
+        this.BitrateToOrig = null;
+
+        /**
+         * Whether to use the original height when the set height is higher than the original height.
+0: no, 1: yes
+Default value: 0.
+         * @type {number || null}
+         */
+        this.HeightToOrig = null;
+
+        /**
+         * Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
+0: no, 1: yes
+Default value: 0.
+         * @type {number || null}
+         */
+        this.FpsToOrig = null;
+
+        /**
+         * Whether to keep the video. 0: no; 1: yes.
+         * @type {number || null}
+         */
+        this.NeedVideo = null;
+
+        /**
+         * Whether to keep the audio. 0: no; 1: yes.
+         * @type {number || null}
+         */
+        this.NeedAudio = null;
+
+        /**
+         * Template ID.
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * Template name.
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * Template description.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
+         * @type {number || null}
+         */
+        this.AiTransCode = null;
+
+        /**
+         * Bitrate compression ratio of top speed code video.
+Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
+
+Value range: 0.0-0.5.
+         * @type {number || null}
+         */
+        this.AdaptBitratePercent = null;
+
+        /**
+         * Whether to take the shorter side as height. 0: no, 1: yes. Default value: 0.
+Note: this field may return `null`, indicating that no valid value is obtained.
+         * @type {number || null}
+         */
+        this.ShortEdgeAsHeight = null;
+
+        /**
+         * The DRM encryption type. Valid values: fairplay, normalaes, widevine.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DRMType = null;
+
+        /**
+         * The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. Separate multiple tracks with “|”. You can choose only one video track (SD, HD, UHD1, or UHD2).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DRMTracks = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Vcodec = 'Vcodec' in params ? params.Vcodec : null;
+        this.VideoBitrate = 'VideoBitrate' in params ? params.VideoBitrate : null;
+        this.Acodec = 'Acodec' in params ? params.Acodec : null;
+        this.AudioBitrate = 'AudioBitrate' in params ? params.AudioBitrate : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Gop = 'Gop' in params ? params.Gop : null;
+        this.Rotate = 'Rotate' in params ? params.Rotate : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
+        this.BitrateToOrig = 'BitrateToOrig' in params ? params.BitrateToOrig : null;
+        this.HeightToOrig = 'HeightToOrig' in params ? params.HeightToOrig : null;
+        this.FpsToOrig = 'FpsToOrig' in params ? params.FpsToOrig : null;
+        this.NeedVideo = 'NeedVideo' in params ? params.NeedVideo : null;
+        this.NeedAudio = 'NeedAudio' in params ? params.NeedAudio : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AiTransCode = 'AiTransCode' in params ? params.AiTransCode : null;
+        this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
+        this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
+        this.DRMType = 'DRMType' in params ? params.DRMType : null;
+        this.DRMTracks = 'DRMTracks' in params ? params.DRMTracks : null;
+
+    }
+}
+
+/**
  * DescribeLivePullStreamTasks request structure.
  * @class
  */
@@ -15096,13 +15219,14 @@ module.exports = {
     TimeShiftBillData: TimeShiftBillData,
     EnableLiveDomainResponse: EnableLiveDomainResponse,
     DescribeUploadStreamNumsResponse: DescribeUploadStreamNumsResponse,
+    TranscodeTotalInfo: TranscodeTotalInfo,
     StopRecordTaskResponse: StopRecordTaskResponse,
     DescribeDeliverBandwidthListResponse: DescribeDeliverBandwidthListResponse,
     DeleteLiveRecordRuleRequest: DeleteLiveRecordRuleRequest,
     ResumeLiveStreamRequest: ResumeLiveStreamRequest,
     DeleteLiveTranscodeTemplateResponse: DeleteLiveTranscodeTemplateResponse,
     FlvSpecialParam: FlvSpecialParam,
-    TemplateInfo: TemplateInfo,
+    CreateScreenshotTaskResponse: CreateScreenshotTaskResponse,
     DeleteLiveCallbackRuleResponse: DeleteLiveCallbackRuleResponse,
     ResumeDelayLiveStreamRequest: ResumeDelayLiveStreamRequest,
     DescribeLiveStreamPublishedListRequest: DescribeLiveStreamPublishedListRequest,
@@ -15113,7 +15237,7 @@ module.exports = {
     PushAuthKeyInfo: PushAuthKeyInfo,
     DeleteLiveRecordTemplateRequest: DeleteLiveRecordTemplateRequest,
     DeleteLiveCallbackTemplateResponse: DeleteLiveCallbackTemplateResponse,
-    DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
+    CreateScreenshotTaskRequest: CreateScreenshotTaskRequest,
     PushQualityData: PushQualityData,
     ModifyLivePlayAuthKeyRequest: ModifyLivePlayAuthKeyRequest,
     DescribeLiveDelayInfoListRequest: DescribeLiveDelayInfoListRequest,
@@ -15244,7 +15368,7 @@ module.exports = {
     DeleteLiveTimeShiftTemplateResponse: DeleteLiveTimeShiftTemplateResponse,
     DescribeLiveWatermarkResponse: DescribeLiveWatermarkResponse,
     ResumeLiveStreamResponse: ResumeLiveStreamResponse,
-    ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
+    DescribeLiveStreamOnlineListResponse: DescribeLiveStreamOnlineListResponse,
     DescribeTimeShiftStreamListResponse: DescribeTimeShiftStreamListResponse,
     ModifyLiveTimeShiftTemplateResponse: ModifyLiveTimeShiftTemplateResponse,
     DescribeStreamPushInfoListResponse: DescribeStreamPushInfoListResponse,
@@ -15284,7 +15408,7 @@ module.exports = {
     DescribePlayErrorCodeSumInfoListRequest: DescribePlayErrorCodeSumInfoListRequest,
     ModifyLiveRecordTemplateResponse: ModifyLiveRecordTemplateResponse,
     CommonMixControlParams: CommonMixControlParams,
-    TranscodeTotalInfo: TranscodeTotalInfo,
+    ModifyLiveRecordTemplateRequest: ModifyLiveRecordTemplateRequest,
     DescribeTranscodeTaskNumResponse: DescribeTranscodeTaskNumResponse,
     UnBindLiveDomainCertResponse: UnBindLiveDomainCertResponse,
     ForbidLiveDomainRequest: ForbidLiveDomainRequest,
@@ -15331,6 +15455,7 @@ module.exports = {
     HlsSpecialParam: HlsSpecialParam,
     DescribeLiveRecordRulesResponse: DescribeLiveRecordRulesResponse,
     CreateLiveSnapshotTemplateRequest: CreateLiveSnapshotTemplateRequest,
+    TemplateInfo: TemplateInfo,
     DescribeLivePullStreamTasksRequest: DescribeLivePullStreamTasksRequest,
     DescribeLiveStreamOnlineListRequest: DescribeLiveStreamOnlineListRequest,
     DeleteLiveCallbackTemplateRequest: DeleteLiveCallbackTemplateRequest,

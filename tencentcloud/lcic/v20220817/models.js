@@ -303,6 +303,41 @@ class GetWatermarkResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteSupervisor request structure.
+ * @class
+ */
+class DeleteSupervisorRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The application ID.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The user IDs.
+         * @type {Array.<string> || null}
+         */
+        this.Users = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Users = 'Users' in params ? params.Users : null;
+
+    }
+}
+
+/**
  * DescribeSupervisors response structure.
  * @class
  */
@@ -698,6 +733,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * BatchCreateRoom response structure.
+ * @class
+ */
+class BatchCreateRoomResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The IDs of the rooms created, which are in the same order as they are passed in.
+         * @type {Array.<number> || null}
+         */
+        this.RoomIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoomIds = 'RoomIds' in params ? params.RoomIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Member record information
 Used by actions: DescribeCurrentMemberList, DescribeRoomStatistics.
  * @class
@@ -802,6 +872,32 @@ class MemberRecord extends  AbstractModel {
          */
         this.PerMemberMessageCount = null;
 
+        /**
+         * The user role. `0`: Student; `1`: Teacher; `2`: Teaching Assistant; `3`: Spectator.
+         * @type {number || null}
+         */
+        this.Role = null;
+
+        /**
+         * The class number.
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * The sub-class number.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.SubGroupId = null;
+
+        /**
+         * Whether the user is on the stage.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Stage = null;
+
     }
 
     /**
@@ -827,48 +923,33 @@ class MemberRecord extends  AbstractModel {
         this.Device = 'Device' in params ? params.Device : null;
         this.PerMemberMicCount = 'PerMemberMicCount' in params ? params.PerMemberMicCount : null;
         this.PerMemberMessageCount = 'PerMemberMessageCount' in params ? params.PerMemberMessageCount : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.SubGroupId = 'SubGroupId' in params ? params.SubGroupId : null;
+        this.Stage = 'Stage' in params ? params.Stage : null;
 
     }
 }
 
 /**
- * GetRooms request structure.
+ * DeleteAppCustomContent request structure.
  * @class
  */
-class GetRoomsRequest extends  AbstractModel {
+class DeleteAppCustomContentRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The SDKAppID assigned by LCIC.
-
+         * The application ID.
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * The start time. The default start time is 30 minutes before the current time.
-         * @type {number || null}
+         * The custom elements (for which a scene has been configured) to delete. If this is empty, all custom elements will be deleted.
+         * @type {Array.<string> || null}
          */
-        this.StartTime = null;
-
-        /**
-         * The end time. The default end time is 30 minutes after the current time.
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * The page to return records from. Pagination starts from 1.
-         * @type {number || null}
-         */
-        this.Page = null;
-
-        /**
-         * The number of records per page. The default is 10.
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.Scenes = null;
 
     }
 
@@ -880,10 +961,7 @@ class GetRoomsRequest extends  AbstractModel {
             return;
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Page = 'Page' in params ? params.Page : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
 
     }
 }
@@ -1386,24 +1464,54 @@ class DescribeRoomRequest extends  AbstractModel {
 }
 
 /**
- * BatchCreateRoom response structure.
+ * BatchDescribeDocument request structure.
  * @class
  */
-class BatchCreateRoomResponse extends  AbstractModel {
+class BatchDescribeDocumentRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The IDs of the rooms created, which are in the same order as they are passed in.
-         * @type {Array.<number> || null}
+         * The SDKAppID assigned by LCIC.
+         * @type {number || null}
          */
-        this.RoomIds = null;
+        this.SdkAppId = null;
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The page to return records from. Pagination starts from 1.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * The maximum number of records per page. The value of this parameter cannot exceed `1000`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The courseware access. [0]: The private courseware of the specified user (`Owner`) will be returned; [1]: The public courseware of the specified user will be returned; [0,1]: Both the private and public courseware of the specified user will be returned; [2]: The private courseware of the specified user and the public courseware of all users (including `Owner`) will be returned.
+         * @type {Array.<number> || null}
+         */
+        this.Permission = null;
+
+        /**
+         * The user ID of the courseware owner. If you do not specify this, the information of all courseware under the application will be returned.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Owner = null;
+
+        /**
+         * The filename keyword.
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * The courseware IDs. Non-existent IDs will be ignored.
+         * @type {Array.<string> || null}
+         */
+        this.DocumentId = null;
 
     }
 
@@ -1414,8 +1522,41 @@ class BatchCreateRoomResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RoomIds = 'RoomIds' in params ? params.RoomIds : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Permission = 'Permission' in params ? params.Permission : null;
+        this.Owner = 'Owner' in params ? params.Owner : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.DocumentId = 'DocumentId' in params ? params.DocumentId : null;
+
+    }
+}
+
+/**
+ * EndRoom request structure.
+ * @class
+ */
+class EndRoomRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The room ID.
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
 
     }
 }
@@ -1753,6 +1894,34 @@ class DeleteGroupRequest extends  AbstractModel {
 }
 
 /**
+ * StartRoom request structure.
+ * @class
+ */
+class StartRoomRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The room ID.
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
  * AddGroupMember request structure.
  * @class
  */
@@ -1900,6 +2069,57 @@ class GetRoomMessageRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDocuments response structure.
+ * @class
+ */
+class DescribeDocumentsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of records that meet the conditions.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The information of the courseware.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DocumentInfo> || null}
+         */
+        this.Documents = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Documents) {
+            this.Documents = new Array();
+            for (let z in params.Documents) {
+                let obj = new DocumentInfo();
+                obj.deserialize(params.Documents[z]);
+                this.Documents.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Document Information.
 Used by actions: DescribeDocumentsByRoom.
  * @class
@@ -1992,6 +2212,34 @@ class DocumentInfo extends  AbstractModel {
          */
         this.UpdateTime = null;
 
+        /**
+         * The number of pages.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Pages = null;
+
+        /**
+         * The width. This parameter is valid only if static document transcoding is used.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * The height. This parameter is valid only if static document transcoding is used.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * The thumbnail. Only transcoded courseware has thumbnails.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Cover = null;
+
     }
 
     /**
@@ -2015,6 +2263,10 @@ class DocumentInfo extends  AbstractModel {
         this.DocumentType = 'DocumentType' in params ? params.DocumentType : null;
         this.DocumentSize = 'DocumentSize' in params ? params.DocumentSize : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Pages = 'Pages' in params ? params.Pages : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Cover = 'Cover' in params ? params.Cover : null;
 
     }
 }
@@ -2141,6 +2393,76 @@ class CreateGroupWithSubGroupResponse extends  AbstractModel {
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDocuments request structure.
+ * @class
+ */
+class DescribeDocumentsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The school ID.
+         * @type {number || null}
+         */
+        this.SchoolId = null;
+
+        /**
+         * The page to return records from. Pagination starts from 1.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * The maximum number of records per page. The value of this parameter cannot exceed `1000`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The courseware access. [0]: The private courseware of the specified user (`Owner`) will be returned; [1]: The public courseware of the specified user will be returned; [0,1]: Both the private and public courseware of the specified user will be returned; [2]: The private courseware of the specified user and the public courseware of all users (including `Owner`) will be returned.
+         * @type {Array.<number> || null}
+         */
+        this.Permission = null;
+
+        /**
+         * The user ID of the courseware owner. If you do not specify this parameter, all courseware under the school ID will be returned.
+         * @type {string || null}
+         */
+        this.Owner = null;
+
+        /**
+         * The filename keyword.
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
+        /**
+         * The courseware IDs. Non-existent IDs will be ignored.
+         * @type {Array.<string> || null}
+         */
+        this.DocumentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SchoolId = 'SchoolId' in params ? params.SchoolId : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Permission = 'Permission' in params ? params.Permission : null;
+        this.Owner = 'Owner' in params ? params.Owner : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
+        this.DocumentId = 'DocumentId' in params ? params.DocumentId : null;
 
     }
 }
@@ -3065,6 +3387,34 @@ class RegisterUserResponse extends  AbstractModel {
 }
 
 /**
+ * StartRoom response structure.
+ * @class
+ */
+class StartRoomResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BindDocumentToRoom request structure.
  * @class
  */
@@ -3894,6 +4244,34 @@ class DeleteGroupMemberRequest extends  AbstractModel {
 }
 
 /**
+ * EndRoom response structure.
+ * @class
+ */
+class EndRoomResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetWatermark request structure.
  * @class
  */
@@ -4224,6 +4602,34 @@ class AnswerStat extends  AbstractModel {
 }
 
 /**
+ * DeleteSupervisor response structure.
+ * @class
+ */
+class DeleteSupervisorResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SetWatermark response structure.
  * @class
  */
@@ -4505,7 +4911,7 @@ class ModifyRoomRequest extends  AbstractModel {
 }
 
 /**
- * The answers to a quiz question in a room.
+ * The answer to a quiz question.
  * @class
  */
 class AnswerInfo extends  AbstractModel {
@@ -4797,7 +5203,7 @@ class GetRoomsResponse extends  AbstractModel {
 }
 
 /**
- * The details of a quiz question.
+ * A quiz question in a room.
  * @class
  */
 class QuestionInfo extends  AbstractModel {
@@ -4862,24 +5268,43 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DeleteAppCustomContent request structure.
+ * GetRooms request structure.
  * @class
  */
-class DeleteAppCustomContentRequest extends  AbstractModel {
+class GetRoomsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The application ID.
+         * The SDKAppID assigned by LCIC.
+
          * @type {number || null}
          */
         this.SdkAppId = null;
 
         /**
-         * The custom elements (for which a scene has been configured) to delete. If this is empty, all custom elements will be deleted.
-         * @type {Array.<string> || null}
+         * The start time. The default start time is 30 minutes before the current time.
+         * @type {number || null}
          */
-        this.Scenes = null;
+        this.StartTime = null;
+
+        /**
+         * The end time. The default end time is 30 minutes after the current time.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The page to return records from. Pagination starts from 1.
+         * @type {number || null}
+         */
+        this.Page = null;
+
+        /**
+         * The number of records per page. The default is 10.
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -4891,7 +5316,10 @@ class DeleteAppCustomContentRequest extends  AbstractModel {
             return;
         }
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.Scenes = 'Scenes' in params ? params.Scenes : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Page = 'Page' in params ? params.Page : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4970,6 +5398,57 @@ class AppCustomContent extends  AbstractModel {
         this.HomeUrl = 'HomeUrl' in params ? params.HomeUrl : null;
         this.JsUrl = 'JsUrl' in params ? params.JsUrl : null;
         this.CssUrl = 'CssUrl' in params ? params.CssUrl : null;
+
+    }
+}
+
+/**
+ * BatchDescribeDocument response structure.
+ * @class
+ */
+class BatchDescribeDocumentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The total number of records that meet the conditions.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * The information of the courseware.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DocumentInfo> || null}
+         */
+        this.Documents = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Documents) {
+            this.Documents = new Array();
+            for (let z in params.Documents) {
+                let obj = new DocumentInfo();
+                obj.deserialize(params.Documents[z]);
+                this.Documents.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5545,6 +6024,7 @@ module.exports = {
     DescribeQuestionListRequest: DescribeQuestionListRequest,
     ModifyRoomResponse: ModifyRoomResponse,
     GetWatermarkResponse: GetWatermarkResponse,
+    DeleteSupervisorRequest: DeleteSupervisorRequest,
     DescribeSupervisorsResponse: DescribeSupervisorsResponse,
     BatchDeleteRecordRequest: BatchDeleteRecordRequest,
     BatchRegisterRequest: BatchRegisterRequest,
@@ -5554,8 +6034,9 @@ module.exports = {
     DescribeDocumentsByRoomRequest: DescribeDocumentsByRoomRequest,
     BatchCreateGroupWithMembersResponse: BatchCreateGroupWithMembersResponse,
     GetRoomEventResponse: GetRoomEventResponse,
+    BatchCreateRoomResponse: BatchCreateRoomResponse,
     MemberRecord: MemberRecord,
-    GetRoomsRequest: GetRoomsRequest,
+    DeleteAppCustomContentRequest: DeleteAppCustomContentRequest,
     BatchAddGroupMemberResponse: BatchAddGroupMemberResponse,
     ModifyUserProfileResponse: ModifyUserProfileResponse,
     ModifyAppResponse: ModifyAppResponse,
@@ -5566,7 +6047,8 @@ module.exports = {
     RoomItem: RoomItem,
     SetWatermarkRequest: SetWatermarkRequest,
     DescribeRoomRequest: DescribeRoomRequest,
-    BatchCreateRoomResponse: BatchCreateRoomResponse,
+    BatchDescribeDocumentRequest: BatchDescribeDocumentRequest,
+    EndRoomRequest: EndRoomRequest,
     UnbindDocumentFromRoomResponse: UnbindDocumentFromRoomResponse,
     CreateDocumentResponse: CreateDocumentResponse,
     DescribeGroupResponse: DescribeGroupResponse,
@@ -5575,14 +6057,17 @@ module.exports = {
     LoginUserResponse: LoginUserResponse,
     ModifyGroupRequest: ModifyGroupRequest,
     DeleteGroupRequest: DeleteGroupRequest,
+    StartRoomRequest: StartRoomRequest,
     AddGroupMemberRequest: AddGroupMemberRequest,
     DescribeGroupListRequest: DescribeGroupListRequest,
     GetRoomMessageRequest: GetRoomMessageRequest,
+    DescribeDocumentsResponse: DescribeDocumentsResponse,
     DocumentInfo: DocumentInfo,
     DeleteDocumentResponse: DeleteDocumentResponse,
     DeleteRecordRequest: DeleteRecordRequest,
     BatchDeleteGroupMemberResponse: BatchDeleteGroupMemberResponse,
     CreateGroupWithSubGroupResponse: CreateGroupWithSubGroupResponse,
+    DescribeDocumentsRequest: DescribeDocumentsRequest,
     MessageItem: MessageItem,
     GroupInfo: GroupInfo,
     GetRoomEventRequest: GetRoomEventRequest,
@@ -5602,6 +6087,7 @@ module.exports = {
     SetAppCustomContentRequest: SetAppCustomContentRequest,
     DescribeUserRequest: DescribeUserRequest,
     RegisterUserResponse: RegisterUserResponse,
+    StartRoomResponse: StartRoomResponse,
     BindDocumentToRoomRequest: BindDocumentToRoomRequest,
     CreateDocumentRequest: CreateDocumentRequest,
     GetRoomMessageResponse: GetRoomMessageResponse,
@@ -5617,6 +6103,7 @@ module.exports = {
     DescribeSupervisorsRequest: DescribeSupervisorsRequest,
     MessageList: MessageList,
     DeleteGroupMemberRequest: DeleteGroupMemberRequest,
+    EndRoomResponse: EndRoomResponse,
     GetWatermarkRequest: GetWatermarkRequest,
     CreateGroupWithMembersResponse: CreateGroupWithMembersResponse,
     BatchDeleteGroupMemberRequest: BatchDeleteGroupMemberRequest,
@@ -5626,6 +6113,7 @@ module.exports = {
     GroupBaseInfo: GroupBaseInfo,
     LoginUserRequest: LoginUserRequest,
     AnswerStat: AnswerStat,
+    DeleteSupervisorResponse: DeleteSupervisorResponse,
     SetWatermarkResponse: SetWatermarkResponse,
     RoomInfo: RoomInfo,
     ModifyRoomRequest: ModifyRoomRequest,
@@ -5636,9 +6124,10 @@ module.exports = {
     DescribeQuestionListResponse: DescribeQuestionListResponse,
     GetRoomsResponse: GetRoomsResponse,
     QuestionInfo: QuestionInfo,
-    DeleteAppCustomContentRequest: DeleteAppCustomContentRequest,
+    GetRoomsRequest: GetRoomsRequest,
     DescribeDeveloperRequest: DescribeDeveloperRequest,
     AppCustomContent: AppCustomContent,
+    BatchDescribeDocumentResponse: BatchDescribeDocumentResponse,
     DeleteGroupResponse: DeleteGroupResponse,
     DescribeSdkAppIdUsersRequest: DescribeSdkAppIdUsersRequest,
     AddGroupMemberResponse: AddGroupMemberResponse,

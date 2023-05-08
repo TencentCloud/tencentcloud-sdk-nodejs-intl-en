@@ -95,6 +95,41 @@ class DescribeNatFwInstanceWithRegionRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyNatAcRule response structure.
+ * @class
+ */
+class ModifyNatAcRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID list of new rules that have been successfully modified.
+         * @type {Array.<number> || null}
+         */
+        this.RuleUuid = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRuleOverview response structure.
  * @class
  */
@@ -226,6 +261,56 @@ class CfwNatDnatRule extends  AbstractModel {
 }
 
 /**
+ * Firewall IP range information
+ * @class
+ */
+class FwCidrInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The IP range type of the firewall. Values: `VpcSelf` (VPC IP range preferred); `Assis` (Secondary IP range preferred); `Custom` (Custom IP range)
+         * @type {string || null}
+         */
+        this.FwCidrType = null;
+
+        /**
+         * The IP segment assigned for each VPC.
+         * @type {Array.<FwVpcCidr> || null}
+         */
+        this.FwCidrLst = null;
+
+        /**
+         * The IP segment used by other firewalls. Specify this if you want to assign a dedicated segment for the firewall.
+         * @type {string || null}
+         */
+        this.ComFwCidr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FwCidrType = 'FwCidrType' in params ? params.FwCidrType : null;
+
+        if (params.FwCidrLst) {
+            this.FwCidrLst = new Array();
+            for (let z in params.FwCidrLst) {
+                let obj = new FwVpcCidr();
+                obj.deserialize(params.FwCidrLst[z]);
+                this.FwCidrLst.push(obj);
+            }
+        }
+        this.ComFwCidr = 'ComFwCidr' in params ? params.ComFwCidr : null;
+
+    }
+}
+
+/**
  * Most frequent attacker statistics
  
  * @class
@@ -290,6 +375,64 @@ class StaticInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeNatAcRule response structure.
+ * @class
+ */
+class DescribeNatAcRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Total number of entries.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * NAT access control list data.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DescAcItem> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number of entries returned without filtering.
+         * @type {number || null}
+         */
+        this.AllTotal = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DescAcItem();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.AllTotal = 'AllTotal' in params ? params.AllTotal : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyPublicIPSwitchStatus response structure.
  * @class
  */
@@ -333,6 +476,42 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * ModifyNatAcRule request structure.
+ * @class
+ */
+class ModifyNatAcRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Array of rules to be modified.
+         * @type {Array.<CreateNatRuleItem> || null}
+         */
+        this.Rules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new CreateNatRuleItem();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyAcRule response structure.
  * @class
  */
@@ -371,6 +550,49 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.Status = 'Status' in params ? params.Status : null;
         this.Info = 'Info' in params ? params.Info : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNatSequenceRules request structure.
+ * @class
+ */
+class ModifyNatSequenceRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule sequence number. Values: `OrderIndex` (Original sequence number), `NewOrderIndex` (New sequence number)
+         * @type {Array.<RuleChangeItem> || null}
+         */
+        this.RuleChangeItems = null;
+
+        /**
+         * Rule direction. Values: `1` (Inbound) and `0` (Outbound)
+         * @type {number || null}
+         */
+        this.Direction = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RuleChangeItems) {
+            this.RuleChangeItems = new Array();
+            for (let z in params.RuleChangeItems) {
+                let obj = new RuleChangeItem();
+                obj.deserialize(params.RuleChangeItems[z]);
+                this.RuleChangeItems.push(obj);
+            }
+        }
+        this.Direction = 'Direction' in params ? params.Direction : null;
 
     }
 }
@@ -567,36 +789,24 @@ true: enable; false: disable
 }
 
 /**
- * DescribeTLogInfo request structure.
+ * IP protection status
  * @class
  */
-class DescribeTLogInfoRequest extends  AbstractModel {
+class IPDefendStatus extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time
+         * IP address
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.IP = null;
 
         /**
-         * End time
-         * @type {string || null}
+         * Protection status. 1: enabled; -1: incorrect address; others: disabled
+         * @type {number || null}
          */
-        this.EndTime = null;
-
-        /**
-         * Type. 1: alert; 2: block
-         * @type {string || null}
-         */
-        this.QueryType = null;
-
-        /**
-         * Search criteria
-         * @type {string || null}
-         */
-        this.SearchValue = null;
+        this.Status = null;
 
     }
 
@@ -607,112 +817,130 @@ class DescribeTLogInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.QueryType = 'QueryType' in params ? params.QueryType : null;
-        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+        this.IP = 'IP' in params ? params.IP : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
 
 /**
- * Security group rules
+ * Allowlist or blocklist for intrusion prevention
  * @class
  */
-class SecurityGroupRule extends  AbstractModel {
+class BlockIgnoreRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Source example:
-net: IP/CIDR (192.168.0.2)
-template: parameter template (ipm-dyodhpby)
-instance: asset instance (ins-123456)
-resourcegroup: asset group (/all groups/group 1/subgroup 1)
-tag: resource tag ({"Key":"tag key","Value":"tag value"})
-region: region (ap-gaungzhou)
+         * Domain name.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.SourceContent = null;
+        this.Domain = null;
 
         /**
-         * Access source type. Valid values: net|template|instance|resourcegroup|tag|region
+         * Rule IP.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.SourceType = null;
+        this.Ioc = null;
 
         /**
-         * Destination example:
-net: IP/CIDR (192.168.0.2)
-template: parameter template (ipm-dyodhpby)
-instance: asset instance (ins-123456)
-resourcegroup: asset group (/all groups/group 1/subgroup 1)
-tag: resource tag ({"Key":"tag key","Value":"tag value"})
-region: region (ap-gaungzhou)
+         * Threat level.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.DestContent = null;
+        this.Level = null;
 
         /**
-         * Access destination type. Valid values: net|template|instance|resourcegroup|tag|region
+         * Source event name.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.DestType = null;
+        this.EventName = null;
 
         /**
-         * The action that Cloud Firewall performs on the traffic. Valid values:
-accept: allow
-drop: deny
-         * @type {string || null}
+         * Direction. Valid values: 0: outbound; 1: inbound.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.RuleAction = null;
+        this.Direction = null;
 
         /**
-         * Description
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * Rule priority. -1: lowest; 1: highest
-         * @type {string || null}
-         */
-        this.OrderIndex = null;
-
-        /**
-         * Protocol. TCP/UDP/ICMP/ANY
-Note: This field may return `null`, indicating that no valid value was found.
+         * Protocol.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Protocol = null;
 
         /**
-         * The port to apply access control rules. Valid values:
--1/-1: all ports
-80: port 80
-Note: This field may return `null`, indicating that no valid value was found.
+         * Address.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Port = null;
+        this.Address = null;
 
         /**
-         * Parameter template ID of port and protocol type; mutually exclusive with Protocol and Port
-Note: This field may return `null`, indicating that no valid value was found.
-         * @type {string || null}
+         * Rule type. Valid values: 1: block; 2: allow.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
          */
-        this.ServiceTemplateId = null;
+        this.Action = null;
 
         /**
-         * The unique ID of the rule
+         * Time when a rule starts to take effect.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Id = null;
+        this.StartTime = null;
 
         /**
-         * Rule status. true: enabled; false: disabled
+         * Time when a rule expires.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.Enable = null;
+        this.EndTime = null;
+
+        /**
+         * Reason for ignoring.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IgnoreReason = null;
+
+        /**
+         * Security event source.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * Rule ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UniqueId = null;
+
+        /**
+         * Number of rule matching times.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MatchTimes = null;
+
+        /**
+         * Country.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Country = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Comment = null;
 
     }
 
@@ -723,18 +951,22 @@ Note: This field may return `null`, indicating that no valid value was found.
         if (!params) {
             return;
         }
-        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.DestContent = 'DestContent' in params ? params.DestContent : null;
-        this.DestType = 'DestType' in params ? params.DestType : null;
-        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Ioc = 'Ioc' in params ? params.Ioc : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
         this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.ServiceTemplateId = 'ServiceTemplateId' in params ? params.ServiceTemplateId : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.IgnoreReason = 'IgnoreReason' in params ? params.IgnoreReason : null;
+        this.Source = 'Source' in params ? params.Source : null;
+        this.UniqueId = 'UniqueId' in params ? params.UniqueId : null;
+        this.MatchTimes = 'MatchTimes' in params ? params.MatchTimes : null;
+        this.Country = 'Country' in params ? params.Country : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
 }
@@ -1010,7 +1242,12 @@ class DescribeTLogInfoResponse extends  AbstractModel {
         super();
 
         /**
-         * None
+         * `NetworkNum`: Number of detected network scans
+ `HandleNum`: Number of pending processing events
+"BanNum": 
+  `VulNum`: Number of vulnerability exploits
+  "OutNum`: Number of compromised servers
+"BruteForceNum": 0
          * @type {TLogInfo || null}
          */
         this.Data = null;
@@ -1216,6 +1453,34 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.PublicIp = 'PublicIp' in params ? params.PublicIp : null;
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.SecurityGroupCount = 'SecurityGroupCount' in params ? params.SecurityGroupCount : null;
+
+    }
+}
+
+/**
+ * ModifyStorageSetting response structure.
+ * @class
+ */
+class ModifyStorageSettingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1524,7 +1789,7 @@ class ModifyBlockIgnoreListRequest extends  AbstractModel {
         super();
 
         /**
-         * 1: blocklist; 2: ignore list
+         * Type of the rule. Values: `1` (Blocklist); `2` (Allowlist)
          * @type {number || null}
          */
         this.RuleType = null;
@@ -1548,7 +1813,7 @@ class ModifyBlockIgnoreListRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
+         * End time of the period in the format of yyyy-MM-dd HH:mm:ss. It must be later than both the start time and the current time. It’s required when `IocAction` is `edit` or `add`. 
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1632,6 +1897,130 @@ class AddEnterpriseSecurityGroupRulesRequest extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
         this.IsDelay = 'IsDelay' in params ? params.IsDelay : null;
+
+    }
+}
+
+/**
+ * Security group rules
+ * @class
+ */
+class SecurityGroupRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Source example:
+net: IP/CIDR (192.168.0.2)
+template: parameter template (ipm-dyodhpby)
+instance: asset instance (ins-123456)
+resourcegroup: asset group (/all groups/group 1/subgroup 1)
+tag: resource tag ({"Key":"tag key","Value":"tag value"})
+region: region (ap-gaungzhou)
+         * @type {string || null}
+         */
+        this.SourceContent = null;
+
+        /**
+         * Access source type. Valid values: net|template|instance|resourcegroup|tag|region
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * Destination example:
+net: IP/CIDR (192.168.0.2)
+template: parameter template (ipm-dyodhpby)
+instance: asset instance (ins-123456)
+resourcegroup: asset group (/all groups/group 1/subgroup 1)
+tag: resource tag ({"Key":"tag key","Value":"tag value"})
+region: region (ap-gaungzhou)
+         * @type {string || null}
+         */
+        this.DestContent = null;
+
+        /**
+         * Access destination type. Valid values: net|template|instance|resourcegroup|tag|region
+         * @type {string || null}
+         */
+        this.DestType = null;
+
+        /**
+         * The action that Cloud Firewall performs on the traffic. Valid values:
+accept: allow
+drop: deny
+         * @type {string || null}
+         */
+        this.RuleAction = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Rule priority. -1: lowest; 1: highest
+         * @type {string || null}
+         */
+        this.OrderIndex = null;
+
+        /**
+         * Protocol. TCP/UDP/ICMP/ANY
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * The port to apply access control rules. Valid values:
+-1/-1: all ports
+80: port 80
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * Parameter template ID of port and protocol type; mutually exclusive with Protocol and Port
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ServiceTemplateId = null;
+
+        /**
+         * The unique ID of the rule
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * Rule status. true: enabled; false: disabled
+         * @type {string || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.DestContent = 'DestContent' in params ? params.DestContent : null;
+        this.DestType = 'DestType' in params ? params.DestType : null;
+        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ServiceTemplateId = 'ServiceTemplateId' in params ? params.ServiceTemplateId : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -1737,6 +2126,48 @@ class ModifySequenceRulesRequest extends  AbstractModel {
 }
 
 /**
+ * Priority
+ * @class
+ */
+class SequenceData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Rule ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * Rule priority before change
+         * @type {number || null}
+         */
+        this.OrderIndex = null;
+
+        /**
+         * Rule priority after change
+         * @type {number || null}
+         */
+        this.NewOrderIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.NewOrderIndex = 'NewOrderIndex' in params ? params.NewOrderIndex : null;
+
+    }
+}
+
+/**
  * CreateNatFwInstance request structure.
  * @class
  */
@@ -1792,6 +2223,12 @@ class CreateNatFwInstanceRequest extends  AbstractModel {
          */
         this.CrossAZone = null;
 
+        /**
+         * IP range of the firewall
+         * @type {FwCidrInfo || null}
+         */
+        this.FwCidrInfo = null;
+
     }
 
     /**
@@ -1814,6 +2251,12 @@ class CreateNatFwInstanceRequest extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.ZoneBak = 'ZoneBak' in params ? params.ZoneBak : null;
         this.CrossAZone = 'CrossAZone' in params ? params.CrossAZone : null;
+
+        if (params.FwCidrInfo) {
+            let obj = new FwCidrInfo();
+            obj.deserialize(params.FwCidrInfo)
+            this.FwCidrInfo = obj;
+        }
 
     }
 }
@@ -2139,60 +2582,36 @@ class ModifyNatFwReSelectResponse extends  AbstractModel {
 }
 
 /**
- * DescribeSwitchLists request structure.
+ * DeleteSecurityGroupRule request structure.
  * @class
  */
-class DescribeSwitchListsRequest extends  AbstractModel {
+class DeleteSecurityGroupRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Firewall status. 0: disabled; 1: enabled
+         * ID of the rule to delete
          * @type {number || null}
          */
-        this.Status = null;
+        this.Id = null;
 
         /**
-         * Asset type, e.g. CVM/NAT/VPN/CLB/others
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * Region, e.g. Shanghai, Chongqing, Guangzhou, etc.
+         * Tencent Cloud region (abbreviation)
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * Search value, e.g. "{"common":"106.54.189.45"}"
-         * @type {string || null}
-         */
-        this.SearchValue = null;
-
-        /**
-         * Number of entries. Default: 10
+         * Direction. 0: outbound; 1: inbound
          * @type {number || null}
          */
-        this.Limit = null;
+        this.Direction = null;
 
         /**
-         * Offset. Default: 0
+         * Indicates whether to delete the reverse rule. 0: no; 1: yes
          * @type {number || null}
          */
-        this.Offset = null;
-
-        /**
-         * Sort order. desc: descending; asc: ascending
-         * @type {string || null}
-         */
-        this.Order = null;
-
-        /**
-         * Sorting field. PortTimes (number of risky ports)
-         * @type {string || null}
-         */
-        this.By = null;
+        this.IsDelReverse = null;
 
     }
 
@@ -2203,14 +2622,10 @@ class DescribeSwitchListsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.Id = 'Id' in params ? params.Id : null;
         this.Area = 'Area' in params ? params.Area : null;
-        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Order = 'Order' in params ? params.Order : null;
-        this.By = 'By' in params ? params.By : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
+        this.IsDelReverse = 'IsDelReverse' in params ? params.IsDelReverse : null;
 
     }
 }
@@ -2419,30 +2834,84 @@ class ModifyPublicIPSwitchStatusRequest extends  AbstractModel {
 }
 
 /**
- * Priority
+ * Parameters for creating an NAT access control rule
  * @class
  */
-class SequenceData extends  AbstractModel {
+class CreateNatRuleItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Rule ID
-         * @type {number || null}
+         * Access source. Example: `net: IP/CIDR(192.168.0.2)`
+         * @type {string || null}
          */
-        this.Id = null;
+        this.SourceContent = null;
 
         /**
-         * Rule priority before change
+         * Access source type. Values for inbound rules: `ip`, `net`, `template`, and `location`. Values for outbound rules: `ip`, `net`, `template`, `instance`, `group`, and `tag`.
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * Access target. Example: `net: IP/CIDR(192.168.0.2); domain: domain name rule, e.g., *.qq.com
+         * @type {string || null}
+         */
+        this.TargetContent = null;
+
+        /**
+         * Access target type. Values for inbound rules: `ip`, `net`, `template`, `instance`, `group`, and `tag`. Values for outbound rules: `ip`, `net`, `domain`, `template`, and `location`.
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * Protocol. Values: `TCP`, `UDP`, `ICMP`, `ANY`, `HTTP`, `HTTPS`, `HTTP/HTTPS`, `SMTP`, `SMTPS`, `SMTP/SMTPS`, `FTP`, and `DNS`.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Specify how the CFW instance deals with the traffic hit the access control rule. Values: `accept` (allow), `drop` (reject), and `log` (observe).
+         * @type {string || null}
+         */
+        this.RuleAction = null;
+
+        /**
+         * The port of the access control rule. Values: `-1/-1` (all ports) and `80` (Port 80)
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * Rule direction. Values: `1` (Inbound) and `0` (Outbound)
+         * @type {number || null}
+         */
+        this.Direction = null;
+
+        /**
+         * Rule sequence number
          * @type {number || null}
          */
         this.OrderIndex = null;
 
         /**
-         * Rule priority after change
+         * Rule status. `true` (Enabled); `false` (Disabled)
+         * @type {string || null}
+         */
+        this.Enable = null;
+
+        /**
+         * The unique ID of the rule, which is not required when you create a rule.
          * @type {number || null}
          */
-        this.NewOrderIndex = null;
+        this.Uuid = null;
+
+        /**
+         * Description
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -2453,9 +2922,60 @@ class SequenceData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.TargetContent = 'TargetContent' in params ? params.TargetContent : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
         this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
-        this.NewOrderIndex = 'NewOrderIndex' in params ? params.NewOrderIndex : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * ModifySecurityGroupItemRuleStatus request structure.
+ * @class
+ */
+class ModifySecurityGroupItemRuleStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Direction. 0: outbound; 1: inbound. 1 by default
+         * @type {number || null}
+         */
+        this.Direction = null;
+
+        /**
+         * Toggle status. 0: off; 1: on
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Modified priority of enterprise security group rules
+         * @type {number || null}
+         */
+        this.RuleSequence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Direction = 'Direction' in params ? params.Direction : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RuleSequence = 'RuleSequence' in params ? params.RuleSequence : null;
 
     }
 }
@@ -2624,24 +3144,36 @@ class DescribeSourceAssetResponse extends  AbstractModel {
 }
 
 /**
- * IP protection status
+ * DescribeTLogInfo request structure.
  * @class
  */
-class IPDefendStatus extends  AbstractModel {
+class DescribeTLogInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * IP address
+         * Start time
          * @type {string || null}
          */
-        this.IP = null;
+        this.StartTime = null;
 
         /**
-         * Protection status. 1: enabled; -1: incorrect address; others: disabled
-         * @type {number || null}
+         * End time
+         * @type {string || null}
          */
-        this.Status = null;
+        this.EndTime = null;
+
+        /**
+         * Type. 1: alert; 2: block
+         * @type {string || null}
+         */
+        this.QueryType = null;
+
+        /**
+         * Search criteria
+         * @type {string || null}
+         */
+        this.SearchValue = null;
 
     }
 
@@ -2652,8 +3184,10 @@ class IPDefendStatus extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.IP = 'IP' in params ? params.IP : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
+        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
 
     }
 }
@@ -2815,6 +3349,76 @@ class DescribeTLogIpListRequest extends  AbstractModel {
 }
 
 /**
+ * Common filters for search
+ * @class
+ */
+class CommonFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Search key.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Search values.
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * Enum of integers that represent relations between Name and Values.
+enum FilterOperatorType {
+    // Invalid
+    FILTER_OPERATOR_TYPE_INVALID = 0;
+    // Equal to
+    FILTER_OPERATOR_TYPE_EQUAL = 1;
+    // Greater than
+    FILTER_OPERATOR_TYPE_GREATER = 2;
+    // Less than
+    FILTER_OPERATOR_TYPE_LESS = 3;
+    // Greater than or equal to
+    FILTER_OPERATOR_TYPE_GREATER_EQ = 4;
+    // Less than or equal to
+    FILTER_OPERATOR_TYPE_LESS_EQ = 5;
+    // Not equal to
+    FILTER_OPERATOR_TYPE_NO_EQ = 6;
+    // In (contained in the array)
+    FILTER_OPERATOR_TYPE_IN = 7;
+    // Not in
+    FILTER_OPERATOR_TYPE_NOT_IN = 8;
+    // Fuzzily matched
+    FILTER_OPERATOR_TYPE_FUZZINESS = 9;
+    // Existing
+    FILTER_OPERATOR_TYPE_EXIST = 10;
+    // Not existing
+    FILTER_OPERATOR_TYPE_NOT_EXIST = 11;
+    // Regular
+    FILTER_OPERATOR_TYPE_REGULAR = 12;
+}
+         * @type {number || null}
+         */
+        this.OperatorType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.OperatorType = 'OperatorType' in params ? params.OperatorType : null;
+
+    }
+}
+
+/**
  * DescribeNatFwInstancesInfo request structure.
  * @class
  */
@@ -2860,6 +3464,34 @@ class DescribeNatFwInstancesInfoRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyNatSequenceRules response structure.
+ * @class
+ */
+class ModifyNatSequenceRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3184,6 +3816,42 @@ class DescribeDefenseSwitchRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyEnterpriseSecurityDispatchStatus response structure.
+ * @class
+ */
+class ModifyEnterpriseSecurityDispatchStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `0`: Modified successfully; Others: Modification failed
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Security group list data
  * @class
  */
@@ -3382,6 +4050,41 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * RemoveNatAcRule response structure.
+ * @class
+ */
+class RemoveNatAcRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * UUID list of the deleted rules.
+         * @type {Array.<number> || null}
+         */
+        this.RuleUuid = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateNatFwInstanceWithDomain response structure.
  * @class
  */
@@ -3441,6 +4144,86 @@ class RemoveAcRuleRequest extends  AbstractModel {
             return;
         }
         this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+
+    }
+}
+
+/**
+ * Canary publish information of the rule
+ * @class
+ */
+class BetaInfoByACL extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * Last execution time
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.LastTime = 'LastTime' in params ? params.LastTime : null;
+
+    }
+}
+
+/**
+ * RemoveNatAcRule request structure.
+ * @class
+ */
+class RemoveNatAcRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * UUIDs of the rules to delete, which can be obtained by querying the rule list. Note: If [-1] is passed in, all rules are deleted.
+         * @type {Array.<number> || null}
+         */
+        this.RuleUuid = null;
+
+        /**
+         * Rule direction. Valid values: 1: inbound; 0: outbound.
+         * @type {number || null}
+         */
+        this.Direction = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
 
     }
 }
@@ -3707,36 +4490,24 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * ModifyAcRule request structure.
+ * ModifyAllPublicIPSwitchStatus request structure.
  * @class
  */
-class ModifyAcRuleRequest extends  AbstractModel {
+class ModifyAllPublicIPSwitchStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Array of rules
-         * @type {Array.<RuleInfoData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * EdgeId value
-         * @type {string || null}
-         */
-        this.EdgeId = null;
-
-        /**
-         * Access rule status
+         * Status. 0: off; 1: on
          * @type {number || null}
          */
-        this.Enable = null;
+        this.Status = null;
 
         /**
-         * NAT region
-         * @type {string || null}
+         * ID of the selected firewall toggle
+         * @type {Array.<string> || null}
          */
-        this.Area = null;
+        this.FireWallPublicIPs = null;
 
     }
 
@@ -3747,18 +4518,8 @@ class ModifyAcRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new RuleInfoData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.EdgeId = 'EdgeId' in params ? params.EdgeId : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
-        this.Area = 'Area' in params ? params.Area : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FireWallPublicIPs = 'FireWallPublicIPs' in params ? params.FireWallPublicIPs : null;
 
     }
 }
@@ -3802,6 +4563,49 @@ class DescribeBlockStaticListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddNatAcRule request structure.
+ * @class
+ */
+class AddNatAcRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * NAT access control rules to be added.
+         * @type {Array.<CreateNatRuleItem> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * Source of the rules to be added. Generally, this parameter is not used. The value insert_rule indicates that rules in the specified location are inserted, and the value batch_import indicates that rules are imported in batches. If the parameter is left empty, rules defined in the API request are added.
+         * @type {string || null}
+         */
+        this.From = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new CreateNatRuleItem();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.From = 'From' in params ? params.From : null;
 
     }
 }
@@ -4091,6 +4895,48 @@ class ModifyRunSyncAssetResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyEnterpriseSecurityGroupRule response structure.
+ * @class
+ */
+class ModifyEnterpriseSecurityGroupRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Status value. `0`: Edited successfully; Others: Failed to edit
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * ID of new rule generated after the modification
+         * @type {number || null}
+         */
+        this.NewRuleUuid = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NewRuleUuid = 'NewRuleUuid' in params ? params.NewRuleUuid : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4415,6 +5261,60 @@ Note: This field may return `null`, indicating that no valid value was found.
         this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyEnterpriseSecurityGroupRule request structure.
+ * @class
+ */
+class ModifyEnterpriseSecurityGroupRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * UUID of the rule, which can be obtained by querying the rule list
+         * @type {number || null}
+         */
+        this.RuleUuid = null;
+
+        /**
+         * Modification type. Values: `0` (Modify rule content), `1` (Toggle on/off a rule) and `2` (Toggle on/off all rules)
+         * @type {number || null}
+         */
+        this.ModifyType = null;
+
+        /**
+         * The new rule content you want. It’s only required when you want to modify the rule content (`ModifyType=0`)
+         * @type {SecurityGroupRule || null}
+         */
+        this.Data = null;
+
+        /**
+         * `0`: Do not enable; `1`: Enable
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
+        this.ModifyType = 'ModifyType' in params ? params.ModifyType : null;
+
+        if (params.Data) {
+            let obj = new SecurityGroupRule();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -5181,6 +6081,27 @@ class DescribeAcListsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeGuideScanInfo request structure.
+ * @class
+ */
+class DescribeGuideScanInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeAssociatedInstanceList request structure.
  * @class
  */
@@ -5315,7 +6236,7 @@ class DeleteAllAccessControlRuleResponse extends  AbstractModel {
         super();
 
         /**
-         * Status value. 0: modified successfully; !0: modification failed
+         * Status of the task. `0`: Modified successfully; Others: Modification failed
          * @type {number || null}
          */
         this.Status = null;
@@ -5560,6 +6481,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ZoneZhBak = null;
 
+        /**
+         * Number of used rules.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RuleUsed = null;
+
+        /**
+         * The maximum number of rules allowed in the instance.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RuleMax = null;
+
     }
 
     /**
@@ -5584,6 +6519,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RegionDetail = 'RegionDetail' in params ? params.RegionDetail : null;
         this.ZoneZh = 'ZoneZh' in params ? params.ZoneZh : null;
         this.ZoneZhBak = 'ZoneZhBak' in params ? params.ZoneZhBak : null;
+        this.RuleUsed = 'RuleUsed' in params ? params.RuleUsed : null;
+        this.RuleMax = 'RuleMax' in params ? params.RuleMax : null;
 
     }
 }
@@ -5769,6 +6706,12 @@ class ModifyNatFwReSelectRequest extends  AbstractModel {
          */
         this.VpcList = null;
 
+        /**
+         * IP range of the firewall
+         * @type {FwCidrInfo || null}
+         */
+        this.FwCidrInfo = null;
+
     }
 
     /**
@@ -5782,6 +6725,12 @@ class ModifyNatFwReSelectRequest extends  AbstractModel {
         this.CfwInstance = 'CfwInstance' in params ? params.CfwInstance : null;
         this.NatGwList = 'NatGwList' in params ? params.NatGwList : null;
         this.VpcList = 'VpcList' in params ? params.VpcList : null;
+
+        if (params.FwCidrInfo) {
+            let obj = new FwCidrInfo();
+            obj.deserialize(params.FwCidrInfo)
+            this.FwCidrInfo = obj;
+        }
 
     }
 }
@@ -6162,12 +7111,54 @@ class StopSecurityGroupRuleDispatchRequest extends  AbstractModel {
 }
 
 /**
- * DescribeGuideScanInfo request structure.
+ * DescribeBlockIgnoreList request structure.
  * @class
  */
-class DescribeGuideScanInfoRequest extends  AbstractModel {
+class DescribeBlockIgnoreListRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * Number of entries per page.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Direction. Valid values: 1: inbound public access; 0: outbound public access; 3: private network access; empty string: all access.
+         * @type {string || null}
+         */
+        this.Direction = null;
+
+        /**
+         * Rule type. Valid values: 1: block; 2: allow.
+         * @type {number || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Column by which rules are sorted. Valid values: EndTime: end time; StartTime: start time; MatchTimes: number of matching times.
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sort order. Valid values: desc: descending; asc: ascending.
+         * @type {string || null}
+         */
+        this.By = null;
+
+        /**
+         * Search keys, in a JSON string. Valid values: {}: empty; domain: domain name; level: threat level; ignore_reason: reason for allowing access; rule_source: source of a security event; address: geographical location; common: fuzzy search.
+         * @type {string || null}
+         */
+        this.SearchValue = null;
 
     }
 
@@ -6178,6 +7169,13 @@ class DescribeGuideScanInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
 
     }
 }
@@ -6206,6 +7204,27 @@ class ModifyBlockTopResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyStorageSetting request structure.
+ * @class
+ */
+class ModifyStorageSettingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -6271,6 +7290,268 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
+ * Item in the access control list. Each item represents an access control rule.
+ * @class
+ */
+class DescAcItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Access source.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SourceContent = null;
+
+        /**
+         * Access destination.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TargetContent = null;
+
+        /**
+         * Protocol.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * Port.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * Action that Cloud Firewall performs on the traffic. Valid values: accept (allow), drop (reject), and log (monitor).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleAction = null;
+
+        /**
+         * Description.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * Number of rule matching times.
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * Rule sequence number.
+         * @type {number || null}
+         */
+        this.OrderIndex = null;
+
+        /**
+         * Access source type. Valid values for an inbound rule: ip, net, template, and location; valid values for an outbound rule: ip, net, template, instance, group, and tag.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * Access destination type. Valid values for an inbound rule: ip, net, template, instance, group, and tag; valid values for an outbound rule: ip, net, domain, template, and location.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * Unique ID of the rule.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * Rule validity.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Invalid = null;
+
+        /**
+         * Valid values: 0: common rules; 1: regional rules.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsRegion = null;
+
+        /**
+         * Country ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * City ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CityCode = null;
+
+        /**
+         * Country name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CountryName = null;
+
+        /**
+         * City name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CityName = null;
+
+        /**
+         * Cloud provider code.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CloudCode = null;
+
+        /**
+         * Valid values: 0: common rules; 1: cloud provider rules.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsCloud = null;
+
+        /**
+         * Rule status. Valid values: true: enabled; false: disabled.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Rule direction. Valid values: 1: inbound; 0: outbound.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Direction = null;
+
+        /**
+         * Instance name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * UUID for internal use. Generally, this field is not required.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.InternalUuid = null;
+
+        /**
+         * Rule status. This field is valid when you query rule matching details. Valid values: 0: new; 1: deleted; 2: edited and deleted.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Details of associated tasks
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<BetaInfoByACL> || null}
+         */
+        this.BetaList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceContent = 'SourceContent' in params ? params.SourceContent : null;
+        this.TargetContent = 'TargetContent' in params ? params.TargetContent : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Invalid = 'Invalid' in params ? params.Invalid : null;
+        this.IsRegion = 'IsRegion' in params ? params.IsRegion : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.CityCode = 'CityCode' in params ? params.CityCode : null;
+        this.CountryName = 'CountryName' in params ? params.CountryName : null;
+        this.CityName = 'CityName' in params ? params.CityName : null;
+        this.CloudCode = 'CloudCode' in params ? params.CloudCode : null;
+        this.IsCloud = 'IsCloud' in params ? params.IsCloud : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Direction = 'Direction' in params ? params.Direction : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InternalUuid = 'InternalUuid' in params ? params.InternalUuid : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.BetaList) {
+            this.BetaList = new Array();
+            for (let z in params.BetaList) {
+                let obj = new BetaInfoByACL();
+                obj.deserialize(params.BetaList[z]);
+                this.BetaList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * Changes of the rule sequence number.
+ * @class
+ */
+class RuleChangeItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Original sequence number
+         * @type {number || null}
+         */
+        this.OrderIndex = null;
+
+        /**
+         * New sequence number
+         * @type {number || null}
+         */
+        this.NewOrderIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderIndex = 'OrderIndex' in params ? params.OrderIndex : null;
+        this.NewOrderIndex = 'NewOrderIndex' in params ? params.NewOrderIndex : null;
+
+    }
+}
+
+/**
  * ExpandCfwVertical response structure.
  * @class
  */
@@ -6299,42 +7580,60 @@ class ExpandCfwVerticalResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBlockStaticList request structure.
+ * DescribeNatAcRule request structure.
  * @class
  */
-class DescribeBlockStaticListRequest extends  AbstractModel {
+class DescribeNatAcRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Start time
+         * Number of entries per page.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page offset.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Index to be queried. This parameter is optional, and is used only in specific cases.
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * Filter condition combination.
+         * @type {Array.<CommonFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * Start time for search. This parameter is optional.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time
+         * End time for search. This parameter is optional.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * List type. Valid values: port, address, or IP
+         * Valid values: desc: descending; asc: ascending. The returned results are sorted by the value of By. If this parameter is specified, By is also required.
          * @type {string || null}
          */
-        this.QueryType = null;
+        this.Order = null;
 
         /**
-         * Number of top results returned
-         * @type {number || null}
-         */
-        this.Top = null;
-
-        /**
-         * Search criteria
+         * Field by which the returned results are sorted.
          * @type {string || null}
          */
-        this.SearchValue = null;
+        this.By = null;
 
     }
 
@@ -6345,11 +7644,22 @@ class DescribeBlockStaticListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Index = 'Index' in params ? params.Index : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new CommonFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.QueryType = 'QueryType' in params ? params.QueryType : null;
-        this.Top = 'Top' in params ? params.Top : null;
-        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -6686,6 +7996,12 @@ class CreateNatFwInstanceWithDomainRequest extends  AbstractModel {
          */
         this.Domain = null;
 
+        /**
+         * IP range of the firewall
+         * @type {FwCidrInfo || null}
+         */
+        this.FwCidrInfo = null;
+
     }
 
     /**
@@ -6710,6 +8026,12 @@ class CreateNatFwInstanceWithDomainRequest extends  AbstractModel {
         this.CrossAZone = 'CrossAZone' in params ? params.CrossAZone : null;
         this.IsCreateDomain = 'IsCreateDomain' in params ? params.IsCreateDomain : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.FwCidrInfo) {
+            let obj = new FwCidrInfo();
+            obj.deserialize(params.FwCidrInfo)
+            this.FwCidrInfo = obj;
+        }
 
     }
 }
@@ -6844,79 +8166,60 @@ class DeleteResourceGroupResponse extends  AbstractModel {
 }
 
 /**
- * DeleteSecurityGroupRule request structure.
+ * DescribeSwitchLists request structure.
  * @class
  */
-class DeleteSecurityGroupRuleRequest extends  AbstractModel {
+class DescribeSwitchListsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the rule to delete
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * Tencent Cloud region (abbreviation)
-         * @type {string || null}
-         */
-        this.Area = null;
-
-        /**
-         * Direction. 0: outbound; 1: inbound
-         * @type {number || null}
-         */
-        this.Direction = null;
-
-        /**
-         * Indicates whether to delete the reverse rule. 0: no; 1: yes
-         * @type {number || null}
-         */
-        this.IsDelReverse = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Area = 'Area' in params ? params.Area : null;
-        this.Direction = 'Direction' in params ? params.Direction : null;
-        this.IsDelReverse = 'IsDelReverse' in params ? params.IsDelReverse : null;
-
-    }
-}
-
-/**
- * ModifySecurityGroupItemRuleStatus request structure.
- * @class
- */
-class ModifySecurityGroupItemRuleStatusRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Direction. 0: outbound; 1: inbound. 1 by default
-         * @type {number || null}
-         */
-        this.Direction = null;
-
-        /**
-         * Toggle status. 0: off; 1: on
+         * Firewall status. 0: disabled; 1: enabled
          * @type {number || null}
          */
         this.Status = null;
 
         /**
-         * Modified priority of enterprise security group rules
+         * Asset type, e.g. CVM/NAT/VPN/CLB/others
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Region, e.g. Shanghai, Chongqing, Guangzhou, etc.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * Search value, e.g. "{"common":"106.54.189.45"}"
+         * @type {string || null}
+         */
+        this.SearchValue = null;
+
+        /**
+         * Number of entries. Default: 10
          * @type {number || null}
          */
-        this.RuleSequence = null;
+        this.Limit = null;
+
+        /**
+         * Offset. Default: 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Sort order. desc: descending; asc: ascending
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * Sorting field. PortTimes (number of risky ports)
+         * @type {string || null}
+         */
+        this.By = null;
 
     }
 
@@ -6927,9 +8230,105 @@ class ModifySecurityGroupItemRuleStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Direction = 'Direction' in params ? params.Direction : null;
         this.Status = 'Status' in params ? params.Status : null;
-        this.RuleSequence = 'RuleSequence' in params ? params.RuleSequence : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
+
+    }
+}
+
+/**
+ * DescribeBlockStaticList request structure.
+ * @class
+ */
+class DescribeBlockStaticListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Start time
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * List type. Valid values: port, address, or IP
+         * @type {string || null}
+         */
+        this.QueryType = null;
+
+        /**
+         * Number of top results returned
+         * @type {number || null}
+         */
+        this.Top = null;
+
+        /**
+         * Search criteria
+         * @type {string || null}
+         */
+        this.SearchValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
+        this.Top = 'Top' in params ? params.Top : null;
+        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+
+    }
+}
+
+/**
+ * Firewall IP range of the VPC
+ * @class
+ */
+class FwVpcCidr extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * IP range of the firewall. The mask must be at least /24.
+         * @type {string || null}
+         */
+        this.FwCidr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.FwCidr = 'FwCidr' in params ? params.FwCidr : null;
 
     }
 }
@@ -7057,24 +8456,36 @@ Note: This field may return `null`, indicating that no valid value was found.
 }
 
 /**
- * ModifyAllPublicIPSwitchStatus request structure.
+ * ModifyAcRule request structure.
  * @class
  */
-class ModifyAllPublicIPSwitchStatusRequest extends  AbstractModel {
+class ModifyAcRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Status. 0: off; 1: on
-         * @type {number || null}
+         * Array of rules
+         * @type {Array.<RuleInfoData> || null}
          */
-        this.Status = null;
+        this.Data = null;
 
         /**
-         * ID of the selected firewall toggle
-         * @type {Array.<string> || null}
+         * EdgeId value
+         * @type {string || null}
          */
-        this.FireWallPublicIPs = null;
+        this.EdgeId = null;
+
+        /**
+         * Access rule status
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * NAT region
+         * @type {string || null}
+         */
+        this.Area = null;
 
     }
 
@@ -7085,8 +8496,18 @@ class ModifyAllPublicIPSwitchStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.FireWallPublicIPs = 'FireWallPublicIPs' in params ? params.FireWallPublicIPs : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new RuleInfoData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.EdgeId = 'EdgeId' in params ? params.EdgeId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -7138,6 +8559,41 @@ Note: This field may return `null`, indicating that no valid value was found.
             }
         }
         this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddNatAcRule response structure.
+ * @class
+ */
+class AddNatAcRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID list of new rules.
+         * @type {Array.<number> || null}
+         */
+        this.RuleUuid = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleUuid = 'RuleUuid' in params ? params.RuleUuid : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7349,6 +8805,98 @@ class CreateAcRulesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyEnterpriseSecurityDispatchStatus request structure.
+ * @class
+ */
+class ModifyEnterpriseSecurityDispatchStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Status. Values: `0` (Publish now), `1` (Stop publishing)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeBlockIgnoreList response structure.
+ * @class
+ */
+class DescribeBlockIgnoreListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List data.
+         * @type {Array.<BlockIgnoreRule> || null}
+         */
+        this.Data = null;
+
+        /**
+         * Total number of results, which is used for pagination.
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * Status code. Valid values: 0: successful; others: failed.
+         * @type {number || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * Status message. Valid values: success: successful query; fail: failed query.
+         * @type {string || null}
+         */
+        this.ReturnMsg = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new BlockIgnoreRule();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.ReturnMsg = 'ReturnMsg' in params ? params.ReturnMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyTableStatus request structure.
  * @class
  */
@@ -7477,15 +9025,20 @@ module.exports = {
     DescribeNatFwInstanceRequest: DescribeNatFwInstanceRequest,
     ModifyNatFwVpcDnsSwitchResponse: ModifyNatFwVpcDnsSwitchResponse,
     DescribeNatFwInstanceWithRegionRequest: DescribeNatFwInstanceWithRegionRequest,
+    ModifyNatAcRuleResponse: ModifyNatAcRuleResponse,
     DescribeRuleOverviewResponse: DescribeRuleOverviewResponse,
     CfwNatDnatRule: CfwNatDnatRule,
+    FwCidrInfo: FwCidrInfo,
     StaticInfo: StaticInfo,
+    DescribeNatAcRuleResponse: DescribeNatAcRuleResponse,
     ModifyPublicIPSwitchStatusResponse: ModifyPublicIPSwitchStatusResponse,
+    ModifyNatAcRuleRequest: ModifyNatAcRuleRequest,
     ModifyAcRuleResponse: ModifyAcRuleResponse,
+    ModifyNatSequenceRulesRequest: ModifyNatSequenceRulesRequest,
     DescribeTableStatusResponse: DescribeTableStatusResponse,
     AddAcRuleRequest: AddAcRuleRequest,
-    DescribeTLogInfoRequest: DescribeTLogInfoRequest,
-    SecurityGroupRule: SecurityGroupRule,
+    IPDefendStatus: IPDefendStatus,
+    BlockIgnoreRule: BlockIgnoreRule,
     ModifyNatFwVpcDnsSwitchRequest: ModifyNatFwVpcDnsSwitchRequest,
     UnHandleEvent: UnHandleEvent,
     DeleteAllAccessControlRuleRequest: DeleteAllAccessControlRuleRequest,
@@ -7496,6 +9049,7 @@ module.exports = {
     DescribeUnHandleEventTabListRequest: DescribeUnHandleEventTabListRequest,
     DescribeAssociatedInstanceListResponse: DescribeAssociatedInstanceListResponse,
     AssociatedInstanceInfo: AssociatedInstanceInfo,
+    ModifyStorageSettingResponse: ModifyStorageSettingResponse,
     RemoveAcRuleResponse: RemoveAcRuleResponse,
     NatFwInstance: NatFwInstance,
     ExpandCfwVerticalRequest: ExpandCfwVerticalRequest,
@@ -7504,28 +9058,33 @@ module.exports = {
     ModifyAssetScanRequest: ModifyAssetScanRequest,
     ModifyBlockIgnoreListRequest: ModifyBlockIgnoreListRequest,
     AddEnterpriseSecurityGroupRulesRequest: AddEnterpriseSecurityGroupRulesRequest,
+    SecurityGroupRule: SecurityGroupRule,
     DeleteSecurityGroupRuleResponse: DeleteSecurityGroupRuleResponse,
     ModifySequenceRulesRequest: ModifySequenceRulesRequest,
+    SequenceData: SequenceData,
     CreateNatFwInstanceRequest: CreateNatFwInstanceRequest,
     ModifySecurityGroupItemRuleStatusResponse: ModifySecurityGroupItemRuleStatusResponse,
     DescribeEnterpriseSecurityGroupRuleResponse: DescribeEnterpriseSecurityGroupRuleResponse,
     VpcDnsInfo: VpcDnsInfo,
     DescribeEnterpriseSecurityGroupRuleRequest: DescribeEnterpriseSecurityGroupRuleRequest,
     ModifyNatFwReSelectResponse: ModifyNatFwReSelectResponse,
-    DescribeSwitchListsRequest: DescribeSwitchListsRequest,
+    DeleteSecurityGroupRuleRequest: DeleteSecurityGroupRuleRequest,
     SetNatFwEipRequest: SetNatFwEipRequest,
     SetNatFwEipResponse: SetNatFwEipResponse,
     AcListsData: AcListsData,
     ModifyPublicIPSwitchStatusRequest: ModifyPublicIPSwitchStatusRequest,
-    SequenceData: SequenceData,
+    CreateNatRuleItem: CreateNatRuleItem,
+    ModifySecurityGroupItemRuleStatusRequest: ModifySecurityGroupItemRuleStatusRequest,
     DescribeSourceAssetRequest: DescribeSourceAssetRequest,
     SecurityGroupOrderIndexData: SecurityGroupOrderIndexData,
     DescribeSourceAssetResponse: DescribeSourceAssetResponse,
-    IPDefendStatus: IPDefendStatus,
+    DescribeTLogInfoRequest: DescribeTLogInfoRequest,
     DescribeSecurityGroupListResponse: DescribeSecurityGroupListResponse,
     AssetZone: AssetZone,
     DescribeTLogIpListRequest: DescribeTLogIpListRequest,
+    CommonFilter: CommonFilter,
     DescribeNatFwInstancesInfoRequest: DescribeNatFwInstancesInfoRequest,
+    ModifyNatSequenceRulesResponse: ModifyNatSequenceRulesResponse,
     DescribeTableStatusRequest: DescribeTableStatusRequest,
     DescribeSecurityGroupListRequest: DescribeSecurityGroupListRequest,
     ModifyResourceGroupRequest: ModifyResourceGroupRequest,
@@ -7533,20 +9092,26 @@ module.exports = {
     NewModeItems: NewModeItems,
     DescribeNatFwInfoCountResponse: DescribeNatFwInfoCountResponse,
     DescribeDefenseSwitchRequest: DescribeDefenseSwitchRequest,
+    ModifyEnterpriseSecurityDispatchStatusResponse: ModifyEnterpriseSecurityDispatchStatusResponse,
     SecurityGroupListData: SecurityGroupListData,
+    RemoveNatAcRuleResponse: RemoveNatAcRuleResponse,
     CreateNatFwInstanceWithDomainResponse: CreateNatFwInstanceWithDomainResponse,
     RemoveAcRuleRequest: RemoveAcRuleRequest,
+    BetaInfoByACL: BetaInfoByACL,
+    RemoveNatAcRuleRequest: RemoveNatAcRuleRequest,
     ModifyAllRuleStatusRequest: ModifyAllRuleStatusRequest,
     RuleInfoData: RuleInfoData,
     DescribeAcListsResponse: DescribeAcListsResponse,
-    ModifyAcRuleRequest: ModifyAcRuleRequest,
+    ModifyAllPublicIPSwitchStatusRequest: ModifyAllPublicIPSwitchStatusRequest,
     DescribeBlockStaticListResponse: DescribeBlockStaticListResponse,
+    AddNatAcRuleRequest: AddNatAcRuleRequest,
     ModifySecurityGroupSequenceRulesRequest: ModifySecurityGroupSequenceRulesRequest,
     ScanResultInfo: ScanResultInfo,
     ScanInfo: ScanInfo,
     DescribeUnHandleEventTabListResponse: DescribeUnHandleEventTabListResponse,
     NatFwFilter: NatFwFilter,
     ModifyRunSyncAssetResponse: ModifyRunSyncAssetResponse,
+    ModifyEnterpriseSecurityGroupRuleResponse: ModifyEnterpriseSecurityGroupRuleResponse,
     ModifySecurityGroupSequenceRulesResponse: ModifySecurityGroupSequenceRulesResponse,
     IpStatic: IpStatic,
     AddEnterpriseSecurityGroupRulesResponse: AddEnterpriseSecurityGroupRulesResponse,
@@ -7555,6 +9120,7 @@ module.exports = {
     DeleteResourceGroupRequest: DeleteResourceGroupRequest,
     DescribeBlockByIpTimesListRequest: DescribeBlockByIpTimesListRequest,
     RemoveEnterpriseSecurityGroupRuleResponse: RemoveEnterpriseSecurityGroupRuleResponse,
+    ModifyEnterpriseSecurityGroupRuleRequest: ModifyEnterpriseSecurityGroupRuleRequest,
     ModifySequenceRulesResponse: ModifySequenceRulesResponse,
     DescribeResourceGroupNewResponse: DescribeResourceGroupNewResponse,
     DescribeNatFwInstanceWithRegionResponse: DescribeNatFwInstanceWithRegionResponse,
@@ -7570,6 +9136,7 @@ module.exports = {
     DescribeRuleOverviewRequest: DescribeRuleOverviewRequest,
     DescribeDefenseSwitchResponse: DescribeDefenseSwitchResponse,
     DescribeAcListsRequest: DescribeAcListsRequest,
+    DescribeGuideScanInfoRequest: DescribeGuideScanInfoRequest,
     DescribeAssociatedInstanceListRequest: DescribeAssociatedInstanceListRequest,
     DeleteAcRuleRequest: DeleteAcRuleRequest,
     DeleteAllAccessControlRuleResponse: DeleteAllAccessControlRuleResponse,
@@ -7586,11 +9153,14 @@ module.exports = {
     SecurityGroupBothWayInfo: SecurityGroupBothWayInfo,
     ModifyAllRuleStatusResponse: ModifyAllRuleStatusResponse,
     StopSecurityGroupRuleDispatchRequest: StopSecurityGroupRuleDispatchRequest,
-    DescribeGuideScanInfoRequest: DescribeGuideScanInfoRequest,
+    DescribeBlockIgnoreListRequest: DescribeBlockIgnoreListRequest,
     ModifyBlockTopResponse: ModifyBlockTopResponse,
+    ModifyStorageSettingRequest: ModifyStorageSettingRequest,
     DescribeNatFwVpcDnsLstResponse: DescribeNatFwVpcDnsLstResponse,
+    DescAcItem: DescAcItem,
+    RuleChangeItem: RuleChangeItem,
     ExpandCfwVerticalResponse: ExpandCfwVerticalResponse,
-    DescribeBlockStaticListRequest: DescribeBlockStaticListRequest,
+    DescribeNatAcRuleRequest: DescribeNatAcRuleRequest,
     TLogInfo: TLogInfo,
     CreateSecurityGroupRulesRequest: CreateSecurityGroupRulesRequest,
     DeleteVpcInstanceRequest: DeleteVpcInstanceRequest,
@@ -7599,17 +9169,21 @@ module.exports = {
     DescribeSwitchListsResponse: DescribeSwitchListsResponse,
     ModifyResourceGroupResponse: ModifyResourceGroupResponse,
     DeleteResourceGroupResponse: DeleteResourceGroupResponse,
-    DeleteSecurityGroupRuleRequest: DeleteSecurityGroupRuleRequest,
-    ModifySecurityGroupItemRuleStatusRequest: ModifySecurityGroupItemRuleStatusRequest,
+    DescribeSwitchListsRequest: DescribeSwitchListsRequest,
+    DescribeBlockStaticListRequest: DescribeBlockStaticListRequest,
+    FwVpcCidr: FwVpcCidr,
     ModifyRunSyncAssetRequest: ModifyRunSyncAssetRequest,
     CreateAcRulesResponse: CreateAcRulesResponse,
     ModifyAssetScanResponse: ModifyAssetScanResponse,
-    ModifyAllPublicIPSwitchStatusRequest: ModifyAllPublicIPSwitchStatusRequest,
+    ModifyAcRuleRequest: ModifyAcRuleRequest,
     DescribeNatFwInstancesInfoResponse: DescribeNatFwInstancesInfoResponse,
+    AddNatAcRuleResponse: AddNatAcRuleResponse,
     ModifyBlockIgnoreListResponse: ModifyBlockIgnoreListResponse,
     DescribeNatFwInstanceResponse: DescribeNatFwInstanceResponse,
     DnsVpcSwitch: DnsVpcSwitch,
     CreateAcRulesRequest: CreateAcRulesRequest,
+    ModifyEnterpriseSecurityDispatchStatusRequest: ModifyEnterpriseSecurityDispatchStatusRequest,
+    DescribeBlockIgnoreListResponse: DescribeBlockIgnoreListResponse,
     ModifyTableStatusRequest: ModifyTableStatusRequest,
     ModifyTableStatusResponse: ModifyTableStatusResponse,
     DescribeGuideScanInfoResponse: DescribeGuideScanInfoResponse,

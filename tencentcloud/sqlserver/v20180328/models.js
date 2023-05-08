@@ -435,7 +435,19 @@ class RestoreInstanceRequest extends  AbstractModel {
         this.RenameRestore = null;
 
         /**
-         * Group ID of unarchived backup files grouped by backup task. This parameter is returned by the [DescribeBackups](https://intl.cloud.tencent.com/document/product/238/19943?from_cn_redirect=1) API.
+         * Rollback type. Valid values: `0` (overwriting), `1` (renaming).
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Database to be overwritten, which is required when overwriting a rollback database.
+         * @type {Array.<string> || null}
+         */
+        this.DBList = null;
+
+        /**
+         * Group ID of unarchived backup files grouped by backup task
          * @type {string || null}
          */
         this.GroupId = null;
@@ -461,6 +473,8 @@ class RestoreInstanceRequest extends  AbstractModel {
                 this.RenameRestore.push(obj);
             }
         }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.DBList = 'DBList' in params ? params.DBList : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
@@ -994,6 +1008,34 @@ class ModifyIncrementalMigrationRequest extends  AbstractModel {
         this.IncrementalMigrationId = 'IncrementalMigrationId' in params ? params.IncrementalMigrationId : null;
         this.IsRecovery = 'IsRecovery' in params ? params.IsRecovery : null;
         this.BackupFiles = 'BackupFiles' in params ? params.BackupFiles : null;
+
+    }
+}
+
+/**
+ * StartInstanceXEvent response structure.
+ * @class
+ */
+class StartInstanceXEventResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2132,72 +2174,48 @@ class ZoneInfo extends  AbstractModel {
 }
 
 /**
- * InquiryPriceCreateDBInstances request structure.
+ * DescribeXEvents request structure.
  * @class
  */
-class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
+class DescribeXEventsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API
+         * Instance ID
          * @type {string || null}
          */
-        this.Zone = null;
+        this.InstanceId = null;
 
         /**
-         * Memory size in GB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Instance capacity in GB
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Billing type. Valid value: POSTPAID.
+         * Event type. Valid values: `slow` (Slow SQL event), `blocked` (blocking event),  deadlock` (deadlock event).
          * @type {string || null}
          */
-        this.InstanceChargeType = null;
+        this.EventType = null;
 
         /**
-         * Length of purchase in months. Value range: 1-48. Default value: 1
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * Number of instances purchased at a time. Value range: 1-100. Default value: 1
-         * @type {number || null}
-         */
-        this.GoodsNum = null;
-
-        /**
-         * SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). Default value: 2008R2.
+         * Generation start time of an extended file
          * @type {string || null}
          */
-        this.DBVersion = null;
+        this.StartTime = null;
 
         /**
-         * The number of CPU cores of the instance you want to purchase.
+         * Generation end time of an extended file
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Page number. Default value: `0`
          * @type {number || null}
          */
-        this.Cpu = null;
+        this.Offset = null;
 
         /**
-         * The type of purchased instance. Valid values: HA (high-availability edition, including dual-server high availability and AlwaysOn cluster), RO (read-only replica), SI (basic edition). Default value: HA.
-         * @type {string || null}
+         * Number of entries to be returned per page. Value range: 1-100. Default value: `20`
+         * @type {number || null}
          */
-        this.InstanceType = null;
-
-        /**
-         * The host type of purchased instance. Valid values: PM (physical machine), CLOUD_PREMIUM (physical machine with premium cloud disk), CLOUD_SSD (physical machine with SSD). Default value: PM.
-         * @type {string || null}
-         */
-        this.MachineType = null;
+        this.Limit = null;
 
     }
 
@@ -2208,16 +2226,12 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
-        this.Period = 'Period' in params ? params.Period : null;
-        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
-        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3283,6 +3297,97 @@ class AccountPrivilege extends  AbstractModel {
 }
 
 /**
+ * InquiryPriceCreateDBInstances request structure.
+ * @class
+ */
+class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * Memory size in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Instance capacity in GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Billing type. Valid value: POSTPAID.
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Length of purchase in months. Value range: 1-48. Default value: 1
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Number of instances purchased at a time. Value range: 1-100. Default value: 1
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). Default value: 2008R2.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * The number of CPU cores of the instance you want to purchase.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * The type of purchased instance. Valid values: HA (high-availability edition, including dual-server high availability and AlwaysOn cluster), RO (read-only replica), SI (basic edition). Default value: HA.
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * The host type of purchased instance. Valid values: PM (physical machine), CLOUD_PREMIUM (physical machine with premium cloud disk), CLOUD_SSD (physical machine with SSD). Default value: PM.
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+
+    }
+}
+
+/**
  * ModifyMigration response structure.
  * @class
  */
@@ -3640,6 +3745,90 @@ class ModifyAccountRemarkResponse extends  AbstractModel {
 }
 
 /**
+ * Details of an extended event
+ * @class
+ */
+class Events extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * File name of an extended event
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * File size of an extended event
+         * @type {number || null}
+         */
+        this.Size = null;
+
+        /**
+         * Event type. Valid values: `slow` (Slow SQL event), `blocked` (blocking event),  `deadlock` (deadlock event).
+         * @type {string || null}
+         */
+        this.EventType = null;
+
+        /**
+         * Event record status. Valid values: `1` (succeeded), `2` (failed).
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Generation start time of an extended file
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Generation end time of an extended file
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Download address on the private network
+         * @type {string || null}
+         */
+        this.InternalAddr = null;
+
+        /**
+         * Download address on the public network
+         * @type {string || null}
+         */
+        this.ExternalAddr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
+        this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
+
+    }
+}
+
+/**
  * DescribeMigrations response structure.
  * @class
  */
@@ -3735,6 +3924,97 @@ class DescribeBackupFilesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeDBInstance request structure.
+ * @class
+ */
+class UpgradeDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of mssql-j8kv137v
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Memory size after instance upgrade in GB, which cannot be smaller than the current instance memory size
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Storage capacity after instance upgrade in GB, which cannot be smaller than the current instance storage capacity
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Whether to automatically use vouchers. 0: no, 1: yes. Default value: 0
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * Voucher ID (currently, only one voucher can be used per order)
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * The number of CUP cores after the instance is upgraded.
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Upgrade the SQL Server version. Supported versions include SQL Server 2008 Enterprise (`2008R2`), SQL Server 2012 Enterprise (`2012SP3`), etc. As the purchasable versions are region-specific, you can use the `DescribeProductConfig` API to query the information of purchasable versions in each region. Downgrading is unsupported. If this parameter is left empty, the SQL Server version will not be changed.
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * Upgrade the high availability architecture from image-based disaster recovery to Always On cluster disaster recovery. This parameter is valid only for instances which support Always On high availability and run SQL Server 2017 or later. Neither downgrading to image-based disaster recovery nor upgrading from cluster disaster recovery to Always On disaster recovery is supported. If this parameter is left empty, the high availability architecture will not be changed.
+         * @type {string || null}
+         */
+        this.HAType = null;
+
+        /**
+         * Change the instance deployment scheme. Valid values: `SameZones` (change to single-AZ deployment, which does not support cross-AZ disaster recovery), `MultiZones` (change to multi-AZ deployment, which supports cross-AZ disaster recovery).
+         * @type {string || null}
+         */
+        this.MultiZones = null;
+
+        /**
+         * The time when configuration adjustment task is performed. Valid values: `0` (execute immediately), `1` (execute during maintenance time). Default value: `1`.
+         * @type {number || null}
+         */
+        this.WaitSwitch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.HAType = 'HAType' in params ? params.HAType : null;
+        this.MultiZones = 'MultiZones' in params ? params.MultiZones : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
 
     }
 }
@@ -4107,6 +4387,56 @@ class CreateBackupMigrationRequest extends  AbstractModel {
         this.UploadType = 'UploadType' in params ? params.UploadType : null;
         this.MigrationName = 'MigrationName' in params ? params.MigrationName : null;
         this.BackupFiles = 'BackupFiles' in params ? params.BackupFiles : null;
+
+    }
+}
+
+/**
+ * DescribeXEvents response structure.
+ * @class
+ */
+class DescribeXEventsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of extended events
+         * @type {Array.<Events> || null}
+         */
+        this.Events = null;
+
+        /**
+         * Total number of extended events
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Events) {
+            this.Events = new Array();
+            for (let z in params.Events) {
+                let obj = new Events();
+                obj.deserialize(params.Events[z]);
+                this.Events.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4697,6 +5027,41 @@ class CreateDBRequest extends  AbstractModel {
                 this.DBs.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Threshold setting for an extended event
+ * @class
+ */
+class EventConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Event type. Valid values: `slow` (set threshold for slow SQL ), `blocked` (set threshold for the blocking and deadlock).
+         * @type {string || null}
+         */
+        this.EventType = null;
+
+        /**
+         * Threshold in milliseconds. Valid values: `0`(disable), `non-zero` (enable)
+         * @type {number || null}
+         */
+        this.Threshold = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.Threshold = 'Threshold' in params ? params.Threshold : null;
 
     }
 }
@@ -6189,6 +6554,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.SlaveZones = null;
 
+        /**
+         * Architecture type. Valid values: `SINGLE` (single-node), `DOUBLE` (two-node), `TRIPLE` (three-node).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Architecture = null;
+
+        /**
+         * Instance type. Valid values: `EXCLUSIVE` (dedicated), `SHARED` (shared)
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Style = null;
+
     }
 
     /**
@@ -6263,6 +6642,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
             obj.deserialize(params.SlaveZones)
             this.SlaveZones = obj;
         }
+        this.Architecture = 'Architecture' in params ? params.Architecture : null;
+        this.Style = 'Style' in params ? params.Style : null;
 
     }
 }
@@ -6834,6 +7215,90 @@ class StartBackupMigrationRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstancesAttribute response structure.
+ * @class
+ */
+class DescribeDBInstancesAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Archive backup status. Valid values: `enable` (enabled), `disable` (disabled)
+         * @type {string || null}
+         */
+        this.RegularBackupEnable = null;
+
+        /**
+         * Archive backup retention period: [90-3650] days
+         * @type {number || null}
+         */
+        this.RegularBackupSaveDays = null;
+
+        /**
+         * Archive backup policy. Valid values: `years` (yearly); `quarters (quarterly); `months` (monthly).
+         * @type {string || null}
+         */
+        this.RegularBackupStrategy = null;
+
+        /**
+         * The number of retained archive backups
+         * @type {number || null}
+         */
+        this.RegularBackupCounts = null;
+
+        /**
+         * Archive backup start date in YYYY-MM-DD format, which is the current time by default.
+         * @type {string || null}
+         */
+        this.RegularBackupStartTime = null;
+
+        /**
+         * Block process threshold in milliseconds
+         * @type {number || null}
+         */
+        this.BlockedThreshold = null;
+
+        /**
+         * Retention period for the files of slow SQL, blocking, deadlock, and extended events.
+         * @type {number || null}
+         */
+        this.EventSaveDays = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RegularBackupEnable = 'RegularBackupEnable' in params ? params.RegularBackupEnable : null;
+        this.RegularBackupSaveDays = 'RegularBackupSaveDays' in params ? params.RegularBackupSaveDays : null;
+        this.RegularBackupStrategy = 'RegularBackupStrategy' in params ? params.RegularBackupStrategy : null;
+        this.RegularBackupCounts = 'RegularBackupCounts' in params ? params.RegularBackupCounts : null;
+        this.RegularBackupStartTime = 'RegularBackupStartTime' in params ? params.RegularBackupStartTime : null;
+        this.BlockedThreshold = 'BlockedThreshold' in params ? params.BlockedThreshold : null;
+        this.EventSaveDays = 'EventSaveDays' in params ? params.EventSaveDays : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Backup file details
  * @class
  */
@@ -7392,72 +7857,24 @@ class AccountCreateInfo extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstance request structure.
+ * StartInstanceXEvent request structure.
  * @class
  */
-class UpgradeDBInstanceRequest extends  AbstractModel {
+class StartInstanceXEventRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID in the format of mssql-j8kv137v
+         * Instance ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * Memory size after instance upgrade in GB, which cannot be smaller than the current instance memory size
-         * @type {number || null}
+         * Whether to start or stop an extended event
+         * @type {Array.<EventConfig> || null}
          */
-        this.Memory = null;
-
-        /**
-         * Storage capacity after instance upgrade in GB, which cannot be smaller than the current instance storage capacity
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Whether to automatically use vouchers. 0: no, 1: yes. Default value: 0
-         * @type {number || null}
-         */
-        this.AutoVoucher = null;
-
-        /**
-         * Voucher ID (currently, only one voucher can be used per order)
-         * @type {Array.<string> || null}
-         */
-        this.VoucherIds = null;
-
-        /**
-         * The number of CUP cores after the instance is upgraded.
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Upgrade the SQL Server version. Supported versions include SQL Server 2008 Enterprise (`2008R2`), SQL Server 2012 Enterprise (`2012SP3`), etc. As the purchasable versions are region-specific, you can use the `DescribeProductConfig` API to query the information of purchasable versions in each region. Downgrading is unsupported. If this parameter is left empty, the SQL Server version will not be changed.
-         * @type {string || null}
-         */
-        this.DBVersion = null;
-
-        /**
-         * Upgrade the high availability architecture from image-based disaster recovery to Always On cluster disaster recovery. This parameter is valid only for instances which support Always On high availability and run SQL Server 2017 or later. Neither downgrading to image-based disaster recovery nor upgrading from cluster disaster recovery to Always On disaster recovery is supported. If this parameter is left empty, the high availability architecture will not be changed.
-         * @type {string || null}
-         */
-        this.HAType = null;
-
-        /**
-         * Change the instance deployment scheme. Valid values: `SameZones` (change to single-AZ deployment, which does not support cross-AZ disaster recovery), `MultiZones` (change to multi-AZ deployment, which supports cross-AZ disaster recovery).
-         * @type {string || null}
-         */
-        this.MultiZones = null;
-
-        /**
-         * The time when configuration adjustment task is performed. Valid values: `0` (execute immediately), `1` (execute during maintenance time). Default value: `1`.
-         * @type {number || null}
-         */
-        this.WaitSwitch = null;
+        this.EventConfig = null;
 
     }
 
@@ -7469,15 +7886,15 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
-        this.HAType = 'HAType' in params ? params.HAType : null;
-        this.MultiZones = 'MultiZones' in params ? params.MultiZones : null;
-        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+
+        if (params.EventConfig) {
+            this.EventConfig = new Array();
+            for (let z in params.EventConfig) {
+                let obj = new EventConfig();
+                obj.deserialize(params.EventConfig[z]);
+                this.EventConfig.push(obj);
+            }
+        }
 
     }
 }
@@ -9352,6 +9769,34 @@ class RollbackInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstancesAttribute request structure.
+ * @class
+ */
+class DescribeDBInstancesAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * RestoreInstance response structure.
  * @class
  */
@@ -9863,6 +10308,7 @@ module.exports = {
     ModifyBackupStrategyResponse: ModifyBackupStrategyResponse,
     SlaveZones: SlaveZones,
     ModifyIncrementalMigrationRequest: ModifyIncrementalMigrationRequest,
+    StartInstanceXEventResponse: StartInstanceXEventResponse,
     MigrateDetail: MigrateDetail,
     CreateIncrementalMigrationRequest: CreateIncrementalMigrationRequest,
     RunMigrationRequest: RunMigrationRequest,
@@ -9887,7 +10333,7 @@ module.exports = {
     ParameterDetail: ParameterDetail,
     DescribeBusinessIntelligenceFileResponse: DescribeBusinessIntelligenceFileResponse,
     ZoneInfo: ZoneInfo,
-    InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
+    DescribeXEventsRequest: DescribeXEventsRequest,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
     Migration: Migration,
     ModifyDBInstanceNetworkRequest: ModifyDBInstanceNetworkRequest,
@@ -9904,14 +10350,17 @@ module.exports = {
     ModifyAccountPrivilegeResponse: ModifyAccountPrivilegeResponse,
     DBCreateInfo: DBCreateInfo,
     AccountPrivilege: AccountPrivilege,
+    InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     ModifyMigrationResponse: ModifyMigrationResponse,
     DescribeZonesResponse: DescribeZonesResponse,
     DescribeDBsResponse: DescribeDBsResponse,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     MigrationStep: MigrationStep,
     ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
+    Events: Events,
     DescribeMigrationsResponse: DescribeMigrationsResponse,
     DescribeBackupFilesResponse: DescribeBackupFilesResponse,
+    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeZonesRequest: DescribeZonesRequest,
     DeleteDBRequest: DeleteDBRequest,
     StartIncrementalMigrationRequest: StartIncrementalMigrationRequest,
@@ -9920,6 +10369,7 @@ module.exports = {
     ModifyBackupMigrationResponse: ModifyBackupMigrationResponse,
     ModifyAccountPrivilegeRequest: ModifyAccountPrivilegeRequest,
     CreateBackupMigrationRequest: CreateBackupMigrationRequest,
+    DescribeXEventsResponse: DescribeXEventsResponse,
     DescribeDBsNormalResponse: DescribeDBsNormalResponse,
     DescribeMigrationsRequest: DescribeMigrationsRequest,
     DescribeDBCharsetsRequest: DescribeDBCharsetsRequest,
@@ -9936,6 +10386,7 @@ module.exports = {
     DBPrivilegeModifyInfo: DBPrivilegeModifyInfo,
     TerminateDBInstanceRequest: TerminateDBInstanceRequest,
     CreateDBRequest: CreateDBRequest,
+    EventConfig: EventConfig,
     InstanceDBDetail: InstanceDBDetail,
     DescribeBackupFilesRequest: DescribeBackupFilesRequest,
     RenameRestoreDatabase: RenameRestoreDatabase,
@@ -9969,6 +10420,7 @@ module.exports = {
     ModifyDBNameResponse: ModifyDBNameResponse,
     CosUploadBackupFile: CosUploadBackupFile,
     StartBackupMigrationRequest: StartBackupMigrationRequest,
+    DescribeDBInstancesAttributeResponse: DescribeDBInstancesAttributeResponse,
     Backup: Backup,
     DescribeBackupCommandRequest: DescribeBackupCommandRequest,
     AccountRemark: AccountRemark,
@@ -9979,7 +10431,7 @@ module.exports = {
     AccountPrivilegeModifyInfo: AccountPrivilegeModifyInfo,
     DescribeBackupMigrationResponse: DescribeBackupMigrationResponse,
     AccountCreateInfo: AccountCreateInfo,
-    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    StartInstanceXEventRequest: StartInstanceXEventRequest,
     DBPrivilege: DBPrivilege,
     FileAction: FileAction,
     DescribeOrdersRequest: DescribeOrdersRequest,
@@ -10019,6 +10471,7 @@ module.exports = {
     TerminateDBInstanceResponse: TerminateDBInstanceResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     RollbackInstanceRequest: RollbackInstanceRequest,
+    DescribeDBInstancesAttributeRequest: DescribeDBInstancesAttributeRequest,
     RestoreInstanceResponse: RestoreInstanceResponse,
     DescribeBackupCommandResponse: DescribeBackupCommandResponse,
     ModifyDatabaseCTResponse: ModifyDatabaseCTResponse,

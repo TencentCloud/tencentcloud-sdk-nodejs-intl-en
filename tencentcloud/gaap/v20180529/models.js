@@ -6769,7 +6769,7 @@ class CreateRuleRequest extends  AbstractModel {
         this.RealServerType = null;
 
         /**
-         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
+         * The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy).
          * @type {string || null}
          */
         this.Scheduler = null;
@@ -6800,7 +6800,7 @@ If this field is not passed in, it indicates that the ForwardProtocol of the cor
         this.ForwardHost = null;
 
         /**
-         * Specifies whether to enable Server Name Indication (SNI). Valid values: `ON` (enable) and `OFF` (disable).
+         * Whether to enable SNI. Values: `on` (enable), `off` (disable). For creation of HTTP listener forwarding rules, SNI is disabled by default.
          * @type {string || null}
          */
         this.ServerNameIndicationSwitch = null;

@@ -463,6 +463,56 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeBackupRecords response structure.
+ * @class
+ */
+class DescribeBackupRecordsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup record details
+         * @type {Array.<BackupRecords> || null}
+         */
+        this.BackupRecords = null;
+
+        /**
+         * Number of returned entries
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BackupRecords) {
+            this.BackupRecords = new Array();
+            for (let z in params.BackupRecords) {
+                let obj = new BackupRecords();
+                obj.deserialize(params.BackupRecords[z]);
+                this.BackupRecords.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Application ID and status
  * @class
  */
@@ -3345,6 +3395,69 @@ class ModifyTableGroupNameRequest extends  AbstractModel {
 }
 
 /**
+ * The details of backup retention policy
+Policy for cluster: `ClusterId` = cluster ID, TableGroupId·= `-1`, `TableName`= `-1`.
+Policy for cluster + table group: `ClusterId` = cluster ID, `TableGroupId` = table group ID, `TableName` = `-1`.
+Policy for cluster + table group + table: ClusterId` = cluster ID, `TableGroupId` = table group ID, `TableName` = table name.
+
+For `FileTag`, valid values: `0` (txh engine file), `1` (ulog file). When `FileTag` is set to `1`, `TableGroupId` = `-1` and `TableName` = `-1` remain unchanged.
+`ExpireDay` is an integer number falling in the range of 1 (inclusive) to 999 (exclusive).
+For `OperType, valid values: `0` (Add), `1` (Delete), `2` (Modify). The values `0` and `2` can be mixed, and the backend implementation is compatible.
+ * @class
+ */
+class BackupExpireRuleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the table group where the table resides
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * file tag, which is described above.
+         * @type {number || null}
+         */
+        this.FileTag = null;
+
+        /**
+         * Retention days, which is described above.
+         * @type {number || null}
+         */
+        this.ExpireDay = null;
+
+        /**
+         * Operation type, which is described above.
+         * @type {number || null}
+         */
+        this.OperType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.FileTag = 'FileTag' in params ? params.FileTag : null;
+        this.ExpireDay = 'ExpireDay' in params ? params.ExpireDay : null;
+        this.OperType = 'OperType' in params ? params.OperType : null;
+
+    }
+}
+
+/**
  * DescribeTableGroups request structure.
  * @class
  */
@@ -4284,6 +4397,85 @@ class CreateSnapshotsResponse extends  AbstractModel {
                 this.TableResults.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetBackupExpireRule request structure.
+ * @class
+ */
+class SetBackupExpireRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID of the cluster where the tables reside
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Array of retention policies
+         * @type {Array.<BackupExpireRuleInfo> || null}
+         */
+        this.BackupExpireRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.BackupExpireRules) {
+            this.BackupExpireRules = new Array();
+            for (let z in params.BackupExpireRules) {
+                let obj = new BackupExpireRuleInfo();
+                obj.deserialize(params.BackupExpireRules[z]);
+                this.BackupExpireRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteBackupRecords response structure.
+ * @class
+ */
+class DeleteBackupRecordsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `TaskId` is in the format of `AppInstanceId-taskId`, which is used to identify tasks of different clusters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5409,6 +5601,85 @@ class DescribeSnapshotsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetBackupExpireRule response structure.
+ * @class
+ */
+class SetBackupExpireRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `TaskId` is in the format of `AppInstanceId-taskId`, which is used to identify tasks of different clusters.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteBackupRecords request structure.
+ * @class
+ */
+class DeleteBackupRecordsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID of the backup records to be deleted
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Details of the backup records to be deleted
+         * @type {Array.<BackupRecords> || null}
+         */
+        this.BackupRecords = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.BackupRecords) {
+            this.BackupRecords = new Array();
+            for (let z in params.BackupRecords) {
+                let obj = new BackupRecords();
+                obj.deserialize(params.BackupRecords[z]);
+                this.BackupRecords.push(obj);
+            }
+        }
 
     }
 }
@@ -6792,6 +7063,62 @@ class DeleteTableGroupResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupRecords request structure.
+ * @class
+ */
+class DescribeBackupRecordsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID, which is used to query a specified cluster
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Number of results per page
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Page offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Table group ID used as a filter condition
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * Table name used as a filter condition
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+
+    }
+}
+
+/**
  * Information of the machines in the resource pool
  * @class
  */
@@ -6944,6 +7271,99 @@ class RollbackTablesRequest extends  AbstractModel {
         }
         this.RollbackTime = 'RollbackTime' in params ? params.RollbackTime : null;
         this.Mode = 'Mode' in params ? params.Mode : null;
+
+    }
+}
+
+/**
+ * Backup records
+When it is used as an output parameter, each field will be filled.
+When it is used as an input parameter, each field will be filled back into the structure as it is. This API can only be called if `FIleTag` = `OSDATA`.
+ * @class
+ */
+class BackupRecords extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Table group ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Table name
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * Backup source
+         * @type {string || null}
+         */
+        this.BackupType = null;
+
+        /**
+         * File tag: TCAPLUS_FULL or OSDATA
+         * @type {string || null}
+         */
+        this.FileTag = null;
+
+        /**
+         * Number of shards
+         * @type {number || null}
+         */
+        this.ShardCount = null;
+
+        /**
+         * Backup batch date
+         * @type {string || null}
+         */
+        this.BackupBatchTime = null;
+
+        /**
+         * Total size of backup files
+         * @type {number || null}
+         */
+        this.BackupFileSize = null;
+
+        /**
+         * Backup success rate
+         * @type {string || null}
+         */
+        this.BackupSuccRate = null;
+
+        /**
+         * Backup file expiration time
+         * @type {string || null}
+         */
+        this.BackupExpireTime = null;
+
+        /**
+         * Business ID
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.BackupType = 'BackupType' in params ? params.BackupType : null;
+        this.FileTag = 'FileTag' in params ? params.FileTag : null;
+        this.ShardCount = 'ShardCount' in params ? params.ShardCount : null;
+        this.BackupBatchTime = 'BackupBatchTime' in params ? params.BackupBatchTime : null;
+        this.BackupFileSize = 'BackupFileSize' in params ? params.BackupFileSize : null;
+        this.BackupSuccRate = 'BackupSuccRate' in params ? params.BackupSuccRate : null;
+        this.BackupExpireTime = 'BackupExpireTime' in params ? params.BackupExpireTime : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
 
     }
 }
@@ -7656,6 +8076,7 @@ module.exports = {
     DeleteClusterResponse: DeleteClusterResponse,
     DeleteTableIndexResponse: DeleteTableIndexResponse,
     TableRollbackResultNew: TableRollbackResultNew,
+    DescribeBackupRecordsResponse: DescribeBackupRecordsResponse,
     ApplyStatus: ApplyStatus,
     ServerMachineInfo: ServerMachineInfo,
     DescribeTablesResponse: DescribeTablesResponse,
@@ -7707,6 +8128,7 @@ module.exports = {
     DeleteSnapshotsResponse: DeleteSnapshotsResponse,
     DeleteTablesResponse: DeleteTablesResponse,
     ModifyTableGroupNameRequest: ModifyTableGroupNameRequest,
+    BackupExpireRuleInfo: BackupExpireRuleInfo,
     DescribeTableGroupsRequest: DescribeTableGroupsRequest,
     DescribeUinInWhitelistRequest: DescribeUinInWhitelistRequest,
     MergeTablesDataRequest: MergeTablesDataRequest,
@@ -7726,6 +8148,8 @@ module.exports = {
     ClearTablesRequest: ClearTablesRequest,
     DescribeIdlFileInfosResponse: DescribeIdlFileInfosResponse,
     CreateSnapshotsResponse: CreateSnapshotsResponse,
+    SetBackupExpireRuleRequest: SetBackupExpireRuleRequest,
+    DeleteBackupRecordsResponse: DeleteBackupRecordsResponse,
     IdlFileInfo: IdlFileInfo,
     DisableRestProxyResponse: DisableRestProxyResponse,
     TagInfoUnit: TagInfoUnit,
@@ -7742,6 +8166,8 @@ module.exports = {
     DescribeTableTagsResponse: DescribeTableTagsResponse,
     CreateTableGroupResponse: CreateTableGroupResponse,
     DescribeSnapshotsResponse: DescribeSnapshotsResponse,
+    SetBackupExpireRuleResponse: SetBackupExpireRuleResponse,
+    DeleteBackupRecordsRequest: DeleteBackupRecordsRequest,
     VerifyIdlFilesRequest: VerifyIdlFilesRequest,
     EnableRestProxyResponse: EnableRestProxyResponse,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
@@ -7767,9 +8193,11 @@ module.exports = {
     RegionInfo: RegionInfo,
     DescribeTableGroupsResponse: DescribeTableGroupsResponse,
     DeleteTableGroupResponse: DeleteTableGroupResponse,
+    DescribeBackupRecordsRequest: DescribeBackupRecordsRequest,
     PoolInfo: PoolInfo,
     DescribeMachineRequest: DescribeMachineRequest,
     RollbackTablesRequest: RollbackTablesRequest,
+    BackupRecords: BackupRecords,
     ModifyCensorshipResponse: ModifyCensorshipResponse,
     CompareIdlFilesRequest: CompareIdlFilesRequest,
     ProxyDetailInfo: ProxyDetailInfo,

@@ -25,6 +25,7 @@ const ModifyClusterPasswordResponse = models.ModifyClusterPasswordResponse;
 const DeleteClusterResponse = models.DeleteClusterResponse;
 const DeleteTableIndexResponse = models.DeleteTableIndexResponse;
 const TableRollbackResultNew = models.TableRollbackResultNew;
+const DescribeBackupRecordsResponse = models.DescribeBackupRecordsResponse;
 const ApplyStatus = models.ApplyStatus;
 const ServerMachineInfo = models.ServerMachineInfo;
 const DescribeTablesResponse = models.DescribeTablesResponse;
@@ -76,6 +77,7 @@ const RecoverRecycleTablesRequest = models.RecoverRecycleTablesRequest;
 const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
 const DeleteTablesResponse = models.DeleteTablesResponse;
 const ModifyTableGroupNameRequest = models.ModifyTableGroupNameRequest;
+const BackupExpireRuleInfo = models.BackupExpireRuleInfo;
 const DescribeTableGroupsRequest = models.DescribeTableGroupsRequest;
 const DescribeUinInWhitelistRequest = models.DescribeUinInWhitelistRequest;
 const MergeTablesDataRequest = models.MergeTablesDataRequest;
@@ -95,6 +97,8 @@ const SetTableIndexResponse = models.SetTableIndexResponse;
 const ClearTablesRequest = models.ClearTablesRequest;
 const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
 const CreateSnapshotsResponse = models.CreateSnapshotsResponse;
+const SetBackupExpireRuleRequest = models.SetBackupExpireRuleRequest;
+const DeleteBackupRecordsResponse = models.DeleteBackupRecordsResponse;
 const IdlFileInfo = models.IdlFileInfo;
 const DisableRestProxyResponse = models.DisableRestProxyResponse;
 const TagInfoUnit = models.TagInfoUnit;
@@ -111,6 +115,8 @@ const VerifyIdlFilesResponse = models.VerifyIdlFilesResponse;
 const DescribeTableTagsResponse = models.DescribeTableTagsResponse;
 const CreateTableGroupResponse = models.CreateTableGroupResponse;
 const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
+const SetBackupExpireRuleResponse = models.SetBackupExpireRuleResponse;
+const DeleteBackupRecordsRequest = models.DeleteBackupRecordsRequest;
 const VerifyIdlFilesRequest = models.VerifyIdlFilesRequest;
 const EnableRestProxyResponse = models.EnableRestProxyResponse;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
@@ -136,9 +142,11 @@ const MergeTablesDataResponse = models.MergeTablesDataResponse;
 const RegionInfo = models.RegionInfo;
 const DescribeTableGroupsResponse = models.DescribeTableGroupsResponse;
 const DeleteTableGroupResponse = models.DeleteTableGroupResponse;
+const DescribeBackupRecordsRequest = models.DescribeBackupRecordsRequest;
 const PoolInfo = models.PoolInfo;
 const DescribeMachineRequest = models.DescribeMachineRequest;
 const RollbackTablesRequest = models.RollbackTablesRequest;
+const BackupRecords = models.BackupRecords;
 const ModifyCensorshipResponse = models.ModifyCensorshipResponse;
 const CompareIdlFilesRequest = models.CompareIdlFilesRequest;
 const ProxyDetailInfo = models.ProxyDetailInfo;
@@ -263,6 +271,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * This API is used to rename a specified cluster.
+     * @param {ModifyClusterNameRequest} req
+     * @param {function(string, ModifyClusterNameResponse):void} cb
+     * @public
+     */
+    ModifyClusterName(req, cb) {
+        let resp = new ModifyClusterNameResponse();
+        this.request("ModifyClusterName", req, resp, cb);
+    }
+
+    /**
      * This API is used to disable the RESTful API.
      * @param {DisableRestProxyRequest} req
      * @param {function(string, DisableRestProxyResponse):void} cb
@@ -285,14 +304,14 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * This API is used to rename a specified cluster.
-     * @param {ModifyClusterNameRequest} req
-     * @param {function(string, ModifyClusterNameResponse):void} cb
+     * This API is used to delete a manual backup.
+     * @param {DeleteBackupRecordsRequest} req
+     * @param {function(string, DeleteBackupRecordsResponse):void} cb
      * @public
      */
-    ModifyClusterName(req, cb) {
-        let resp = new ModifyClusterNameResponse();
-        this.request("ModifyClusterName", req, resp, cb);
+    DeleteBackupRecords(req, cb) {
+        let resp = new DeleteBackupRecordsResponse();
+        this.request("DeleteBackupRecords", req, resp, cb);
     }
 
     /**
@@ -359,6 +378,17 @@ class TcaplusdbClient extends AbstractClient {
     EnableRestProxy(req, cb) {
         let resp = new EnableRestProxyResponse();
         this.request("EnableRestProxy", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add/delete/modify backup expiration policy. `ClusterId` must be a specific cluster ID (appid).
+     * @param {SetBackupExpireRuleRequest} req
+     * @param {function(string, SetBackupExpireRuleResponse):void} cb
+     * @public
+     */
+    SetBackupExpireRule(req, cb) {
+        let resp = new SetBackupExpireRuleResponse();
+        this.request("SetBackupExpireRule", req, resp, cb);
     }
 
     /**
@@ -513,6 +543,21 @@ class TcaplusdbClient extends AbstractClient {
     DescribeSnapshots(req, cb) {
         let resp = new DescribeSnapshotsResponse();
         this.request("DescribeSnapshots", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query backup records.
+
+When querying the cluster level, set `TableGroupId` to `-1` and `TableName` to `-1`.
+When querying the cluster and table group levels, set `TableName` to `-1`.
+When querying the cluster, table group, and table levels, both `TableGroupId` and `TableName` cannot be set to `-1`.
+     * @param {DescribeBackupRecordsRequest} req
+     * @param {function(string, DescribeBackupRecordsResponse):void} cb
+     * @public
+     */
+    DescribeBackupRecords(req, cb) {
+        let resp = new DescribeBackupRecordsResponse();
+        this.request("DescribeBackupRecords", req, resp, cb);
     }
 
     /**

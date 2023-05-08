@@ -50,6 +50,7 @@ const DescribeBackupOverviewRequest = models.DescribeBackupOverviewRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const ModifyBaseBackupExpireTimeResponse = models.ModifyBaseBackupExpireTimeResponse;
 const DBInstanceNetInfo = models.DBInstanceNetInfo;
+const BackupDownloadRestriction = models.BackupDownloadRestriction;
 const ModifyDBInstanceDeploymentRequest = models.ModifyDBInstanceDeploymentRequest;
 const DeleteReadOnlyGroupNetworkAccessRequest = models.DeleteReadOnlyGroupNetworkAccessRequest;
 const ZoneInfo = models.ZoneInfo;

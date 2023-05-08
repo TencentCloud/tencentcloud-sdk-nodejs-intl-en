@@ -19,15 +19,20 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeNatFwInstanceRequest = models.DescribeNatFwInstanceRequest;
 const ModifyNatFwVpcDnsSwitchResponse = models.ModifyNatFwVpcDnsSwitchResponse;
 const DescribeNatFwInstanceWithRegionRequest = models.DescribeNatFwInstanceWithRegionRequest;
+const ModifyNatAcRuleResponse = models.ModifyNatAcRuleResponse;
 const DescribeRuleOverviewResponse = models.DescribeRuleOverviewResponse;
 const CfwNatDnatRule = models.CfwNatDnatRule;
+const FwCidrInfo = models.FwCidrInfo;
 const StaticInfo = models.StaticInfo;
+const DescribeNatAcRuleResponse = models.DescribeNatAcRuleResponse;
 const ModifyPublicIPSwitchStatusResponse = models.ModifyPublicIPSwitchStatusResponse;
+const ModifyNatAcRuleRequest = models.ModifyNatAcRuleRequest;
 const ModifyAcRuleResponse = models.ModifyAcRuleResponse;
+const ModifyNatSequenceRulesRequest = models.ModifyNatSequenceRulesRequest;
 const DescribeTableStatusResponse = models.DescribeTableStatusResponse;
 const AddAcRuleRequest = models.AddAcRuleRequest;
-const DescribeTLogInfoRequest = models.DescribeTLogInfoRequest;
-const SecurityGroupRule = models.SecurityGroupRule;
+const IPDefendStatus = models.IPDefendStatus;
+const BlockIgnoreRule = models.BlockIgnoreRule;
 const ModifyNatFwVpcDnsSwitchRequest = models.ModifyNatFwVpcDnsSwitchRequest;
 const UnHandleEvent = models.UnHandleEvent;
 const DeleteAllAccessControlRuleRequest = models.DeleteAllAccessControlRuleRequest;
@@ -38,6 +43,7 @@ const DescribeTLogInfoResponse = models.DescribeTLogInfoResponse;
 const DescribeUnHandleEventTabListRequest = models.DescribeUnHandleEventTabListRequest;
 const DescribeAssociatedInstanceListResponse = models.DescribeAssociatedInstanceListResponse;
 const AssociatedInstanceInfo = models.AssociatedInstanceInfo;
+const ModifyStorageSettingResponse = models.ModifyStorageSettingResponse;
 const RemoveAcRuleResponse = models.RemoveAcRuleResponse;
 const NatFwInstance = models.NatFwInstance;
 const ExpandCfwVerticalRequest = models.ExpandCfwVerticalRequest;
@@ -46,28 +52,33 @@ const DeleteVpcInstanceResponse = models.DeleteVpcInstanceResponse;
 const ModifyAssetScanRequest = models.ModifyAssetScanRequest;
 const ModifyBlockIgnoreListRequest = models.ModifyBlockIgnoreListRequest;
 const AddEnterpriseSecurityGroupRulesRequest = models.AddEnterpriseSecurityGroupRulesRequest;
+const SecurityGroupRule = models.SecurityGroupRule;
 const DeleteSecurityGroupRuleResponse = models.DeleteSecurityGroupRuleResponse;
 const ModifySequenceRulesRequest = models.ModifySequenceRulesRequest;
+const SequenceData = models.SequenceData;
 const CreateNatFwInstanceRequest = models.CreateNatFwInstanceRequest;
 const ModifySecurityGroupItemRuleStatusResponse = models.ModifySecurityGroupItemRuleStatusResponse;
 const DescribeEnterpriseSecurityGroupRuleResponse = models.DescribeEnterpriseSecurityGroupRuleResponse;
 const VpcDnsInfo = models.VpcDnsInfo;
 const DescribeEnterpriseSecurityGroupRuleRequest = models.DescribeEnterpriseSecurityGroupRuleRequest;
 const ModifyNatFwReSelectResponse = models.ModifyNatFwReSelectResponse;
-const DescribeSwitchListsRequest = models.DescribeSwitchListsRequest;
+const DeleteSecurityGroupRuleRequest = models.DeleteSecurityGroupRuleRequest;
 const SetNatFwEipRequest = models.SetNatFwEipRequest;
 const SetNatFwEipResponse = models.SetNatFwEipResponse;
 const AcListsData = models.AcListsData;
 const ModifyPublicIPSwitchStatusRequest = models.ModifyPublicIPSwitchStatusRequest;
-const SequenceData = models.SequenceData;
+const CreateNatRuleItem = models.CreateNatRuleItem;
+const ModifySecurityGroupItemRuleStatusRequest = models.ModifySecurityGroupItemRuleStatusRequest;
 const DescribeSourceAssetRequest = models.DescribeSourceAssetRequest;
 const SecurityGroupOrderIndexData = models.SecurityGroupOrderIndexData;
 const DescribeSourceAssetResponse = models.DescribeSourceAssetResponse;
-const IPDefendStatus = models.IPDefendStatus;
+const DescribeTLogInfoRequest = models.DescribeTLogInfoRequest;
 const DescribeSecurityGroupListResponse = models.DescribeSecurityGroupListResponse;
 const AssetZone = models.AssetZone;
 const DescribeTLogIpListRequest = models.DescribeTLogIpListRequest;
+const CommonFilter = models.CommonFilter;
 const DescribeNatFwInstancesInfoRequest = models.DescribeNatFwInstancesInfoRequest;
+const ModifyNatSequenceRulesResponse = models.ModifyNatSequenceRulesResponse;
 const DescribeTableStatusRequest = models.DescribeTableStatusRequest;
 const DescribeSecurityGroupListRequest = models.DescribeSecurityGroupListRequest;
 const ModifyResourceGroupRequest = models.ModifyResourceGroupRequest;
@@ -75,20 +86,26 @@ const CreateNatFwInstanceResponse = models.CreateNatFwInstanceResponse;
 const NewModeItems = models.NewModeItems;
 const DescribeNatFwInfoCountResponse = models.DescribeNatFwInfoCountResponse;
 const DescribeDefenseSwitchRequest = models.DescribeDefenseSwitchRequest;
+const ModifyEnterpriseSecurityDispatchStatusResponse = models.ModifyEnterpriseSecurityDispatchStatusResponse;
 const SecurityGroupListData = models.SecurityGroupListData;
+const RemoveNatAcRuleResponse = models.RemoveNatAcRuleResponse;
 const CreateNatFwInstanceWithDomainResponse = models.CreateNatFwInstanceWithDomainResponse;
 const RemoveAcRuleRequest = models.RemoveAcRuleRequest;
+const BetaInfoByACL = models.BetaInfoByACL;
+const RemoveNatAcRuleRequest = models.RemoveNatAcRuleRequest;
 const ModifyAllRuleStatusRequest = models.ModifyAllRuleStatusRequest;
 const RuleInfoData = models.RuleInfoData;
 const DescribeAcListsResponse = models.DescribeAcListsResponse;
-const ModifyAcRuleRequest = models.ModifyAcRuleRequest;
+const ModifyAllPublicIPSwitchStatusRequest = models.ModifyAllPublicIPSwitchStatusRequest;
 const DescribeBlockStaticListResponse = models.DescribeBlockStaticListResponse;
+const AddNatAcRuleRequest = models.AddNatAcRuleRequest;
 const ModifySecurityGroupSequenceRulesRequest = models.ModifySecurityGroupSequenceRulesRequest;
 const ScanResultInfo = models.ScanResultInfo;
 const ScanInfo = models.ScanInfo;
 const DescribeUnHandleEventTabListResponse = models.DescribeUnHandleEventTabListResponse;
 const NatFwFilter = models.NatFwFilter;
 const ModifyRunSyncAssetResponse = models.ModifyRunSyncAssetResponse;
+const ModifyEnterpriseSecurityGroupRuleResponse = models.ModifyEnterpriseSecurityGroupRuleResponse;
 const ModifySecurityGroupSequenceRulesResponse = models.ModifySecurityGroupSequenceRulesResponse;
 const IpStatic = models.IpStatic;
 const AddEnterpriseSecurityGroupRulesResponse = models.AddEnterpriseSecurityGroupRulesResponse;
@@ -97,6 +114,7 @@ const RemoveEnterpriseSecurityGroupRuleRequest = models.RemoveEnterpriseSecurity
 const DeleteResourceGroupRequest = models.DeleteResourceGroupRequest;
 const DescribeBlockByIpTimesListRequest = models.DescribeBlockByIpTimesListRequest;
 const RemoveEnterpriseSecurityGroupRuleResponse = models.RemoveEnterpriseSecurityGroupRuleResponse;
+const ModifyEnterpriseSecurityGroupRuleRequest = models.ModifyEnterpriseSecurityGroupRuleRequest;
 const ModifySequenceRulesResponse = models.ModifySequenceRulesResponse;
 const DescribeResourceGroupNewResponse = models.DescribeResourceGroupNewResponse;
 const DescribeNatFwInstanceWithRegionResponse = models.DescribeNatFwInstanceWithRegionResponse;
@@ -112,6 +130,7 @@ const SetNatFwDnatRuleResponse = models.SetNatFwDnatRuleResponse;
 const DescribeRuleOverviewRequest = models.DescribeRuleOverviewRequest;
 const DescribeDefenseSwitchResponse = models.DescribeDefenseSwitchResponse;
 const DescribeAcListsRequest = models.DescribeAcListsRequest;
+const DescribeGuideScanInfoRequest = models.DescribeGuideScanInfoRequest;
 const DescribeAssociatedInstanceListRequest = models.DescribeAssociatedInstanceListRequest;
 const DeleteAcRuleRequest = models.DeleteAcRuleRequest;
 const DeleteAllAccessControlRuleResponse = models.DeleteAllAccessControlRuleResponse;
@@ -128,11 +147,14 @@ const ModifyAllVPCSwitchStatusRequest = models.ModifyAllVPCSwitchStatusRequest;
 const SecurityGroupBothWayInfo = models.SecurityGroupBothWayInfo;
 const ModifyAllRuleStatusResponse = models.ModifyAllRuleStatusResponse;
 const StopSecurityGroupRuleDispatchRequest = models.StopSecurityGroupRuleDispatchRequest;
-const DescribeGuideScanInfoRequest = models.DescribeGuideScanInfoRequest;
+const DescribeBlockIgnoreListRequest = models.DescribeBlockIgnoreListRequest;
 const ModifyBlockTopResponse = models.ModifyBlockTopResponse;
+const ModifyStorageSettingRequest = models.ModifyStorageSettingRequest;
 const DescribeNatFwVpcDnsLstResponse = models.DescribeNatFwVpcDnsLstResponse;
+const DescAcItem = models.DescAcItem;
+const RuleChangeItem = models.RuleChangeItem;
 const ExpandCfwVerticalResponse = models.ExpandCfwVerticalResponse;
-const DescribeBlockStaticListRequest = models.DescribeBlockStaticListRequest;
+const DescribeNatAcRuleRequest = models.DescribeNatAcRuleRequest;
 const TLogInfo = models.TLogInfo;
 const CreateSecurityGroupRulesRequest = models.CreateSecurityGroupRulesRequest;
 const DeleteVpcInstanceRequest = models.DeleteVpcInstanceRequest;
@@ -141,17 +163,21 @@ const CreateNatFwInstanceWithDomainRequest = models.CreateNatFwInstanceWithDomai
 const DescribeSwitchListsResponse = models.DescribeSwitchListsResponse;
 const ModifyResourceGroupResponse = models.ModifyResourceGroupResponse;
 const DeleteResourceGroupResponse = models.DeleteResourceGroupResponse;
-const DeleteSecurityGroupRuleRequest = models.DeleteSecurityGroupRuleRequest;
-const ModifySecurityGroupItemRuleStatusRequest = models.ModifySecurityGroupItemRuleStatusRequest;
+const DescribeSwitchListsRequest = models.DescribeSwitchListsRequest;
+const DescribeBlockStaticListRequest = models.DescribeBlockStaticListRequest;
+const FwVpcCidr = models.FwVpcCidr;
 const ModifyRunSyncAssetRequest = models.ModifyRunSyncAssetRequest;
 const CreateAcRulesResponse = models.CreateAcRulesResponse;
 const ModifyAssetScanResponse = models.ModifyAssetScanResponse;
-const ModifyAllPublicIPSwitchStatusRequest = models.ModifyAllPublicIPSwitchStatusRequest;
+const ModifyAcRuleRequest = models.ModifyAcRuleRequest;
 const DescribeNatFwInstancesInfoResponse = models.DescribeNatFwInstancesInfoResponse;
+const AddNatAcRuleResponse = models.AddNatAcRuleResponse;
 const ModifyBlockIgnoreListResponse = models.ModifyBlockIgnoreListResponse;
 const DescribeNatFwInstanceResponse = models.DescribeNatFwInstanceResponse;
 const DnsVpcSwitch = models.DnsVpcSwitch;
 const CreateAcRulesRequest = models.CreateAcRulesRequest;
+const ModifyEnterpriseSecurityDispatchStatusRequest = models.ModifyEnterpriseSecurityDispatchStatusRequest;
+const DescribeBlockIgnoreListResponse = models.DescribeBlockIgnoreListResponse;
 const ModifyTableStatusRequest = models.ModifyTableStatusRequest;
 const ModifyTableStatusResponse = models.ModifyTableStatusResponse;
 const DescribeGuideScanInfoResponse = models.DescribeGuideScanInfoResponse;
@@ -234,6 +260,17 @@ class CfwClient extends AbstractClient {
     }
 
     /**
+     * This API is used to get the NAT instance with the region that is newly maintained by the tenant.
+     * @param {DescribeNatFwInstanceWithRegionRequest} req
+     * @param {function(string, DescribeNatFwInstanceWithRegionResponse):void} cb
+     * @public
+     */
+    DescribeNatFwInstanceWithRegion(req, cb) {
+        let resp = new DescribeNatFwInstanceWithRegionResponse();
+        this.request("DescribeNatFwInstanceWithRegion", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a rule.
      * @param {DeleteAcRuleRequest} req
      * @param {function(string, DeleteAcRuleResponse):void} cb
@@ -255,6 +292,17 @@ class CfwClient extends AbstractClient {
     ModifyResourceGroup(req, cb) {
         let resp = new ModifyResourceGroupResponse();
         this.request("ModifyResourceGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable or disable an enterprise security group rule.
+     * @param {ModifySecurityGroupItemRuleStatusRequest} req
+     * @param {function(string, ModifySecurityGroupItemRuleStatusResponse):void} cb
+     * @public
+     */
+    ModifySecurityGroupItemRuleStatus(req, cb) {
+        let resp = new ModifySecurityGroupItemRuleStatusResponse();
+        this.request("ModifySecurityGroupItemRuleStatus", req, resp, cb);
     }
 
     /**
@@ -357,7 +405,7 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create rules.
+     * This API is used to create access control rules.
      * @param {CreateAcRulesRequest} req
      * @param {function(string, CreateAcRulesResponse):void} cb
      * @public
@@ -423,6 +471,17 @@ class CfwClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify a new enterprise security group rule.
+     * @param {ModifyEnterpriseSecurityGroupRuleRequest} req
+     * @param {function(string, ModifyEnterpriseSecurityGroupRuleResponse):void} cb
+     * @public
+     */
+    ModifyEnterpriseSecurityGroupRule(req, cb) {
+        let resp = new ModifyEnterpriseSecurityGroupRuleResponse();
+        this.request("ModifyEnterpriseSecurityGroupRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of firewall toggles with Intrusion Defense enabled.
      * @param {DescribeDefenseSwitchRequest} req
      * @param {function(string, DescribeDefenseSwitchResponse):void} cb
@@ -454,6 +513,17 @@ class CfwClient extends AbstractClient {
     ModifyRunSyncAsset(req, cb) {
         let resp = new ModifyRunSyncAssetResponse();
         this.request("ModifyRunSyncAsset", req, resp, cb);
+    }
+
+    /**
+     * This API is used to change the sequence number of NAT firewall rules.
+     * @param {ModifyNatSequenceRulesRequest} req
+     * @param {function(string, ModifyNatSequenceRulesResponse):void} cb
+     * @public
+     */
+    ModifyNatSequenceRules(req, cb) {
+        let resp = new ModifyNatSequenceRulesResponse();
+        this.request("ModifyNatSequenceRules", req, resp, cb);
     }
 
     /**
@@ -490,10 +560,10 @@ class CfwClient extends AbstractClient {
     }
 
     /**
-     * This API is used to:
-add IPs/domains in the blocklist or ignored list
-delete IPs/domains in the blocklist or ignored list
-modify IPs/domains in the blocklist or ignored list
+     * This API is used to manage blocked/allowed IPs and domains.
+Add IPs/domains to the blocked/allowed list
+Remove IPs/domains from the blocked/allowed list
+Modify events related with the IPs/domains in the blocked/allowed list
      * @param {ModifyBlockIgnoreListRequest} req
      * @param {function(string, ModifyBlockIgnoreListResponse):void} cb
      * @public
@@ -515,14 +585,14 @@ modify IPs/domains in the blocklist or ignored list
     }
 
     /**
-     * This API is used to get the NAT instance with the region that is newly maintained by the tenant.
-     * @param {DescribeNatFwInstanceWithRegionRequest} req
-     * @param {function(string, DescribeNatFwInstanceWithRegionResponse):void} cb
+     * This API is used to get the scan interface information in Get Started.
+     * @param {DescribeGuideScanInfoRequest} req
+     * @param {function(string, DescribeGuideScanInfoResponse):void} cb
      * @public
      */
-    DescribeNatFwInstanceWithRegion(req, cb) {
-        let resp = new DescribeNatFwInstanceWithRegionResponse();
-        this.request("DescribeNatFwInstanceWithRegion", req, resp, cb);
+    DescribeGuideScanInfo(req, cb) {
+        let resp = new DescribeGuideScanInfoResponse();
+        this.request("DescribeGuideScanInfo", req, resp, cb);
     }
 
     /**
@@ -538,14 +608,14 @@ modify IPs/domains in the blocklist or ignored list
     }
 
     /**
-     * This API is used to get the scan interface information in Get Started.
-     * @param {DescribeGuideScanInfoRequest} req
-     * @param {function(string, DescribeGuideScanInfoResponse):void} cb
+     * This API is used to enable or disable a NAT firewall.
+     * @param {ModifyNatFwSwitchRequest} req
+     * @param {function(string, ModifyNatFwSwitchResponse):void} cb
      * @public
      */
-    DescribeGuideScanInfo(req, cb) {
-        let resp = new DescribeGuideScanInfoResponse();
-        this.request("DescribeGuideScanInfo", req, resp, cb);
+    ModifyNatFwSwitch(req, cb) {
+        let resp = new ModifyNatFwSwitchResponse();
+        this.request("ModifyNatFwSwitch", req, resp, cb);
     }
 
     /**
@@ -671,6 +741,28 @@ modify IPs/domains in the blocklist or ignored list
     }
 
     /**
+     * This API is used to modify the log retention period or to clear logs.
+     * @param {ModifyStorageSettingRequest} req
+     * @param {function(string, ModifyStorageSettingResponse):void} cb
+     * @public
+     */
+    ModifyStorageSetting(req, cb) {
+        let resp = new ModifyStorageSettingResponse();
+        this.request("ModifyStorageSetting", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify NAT access control rules.
+     * @param {ModifyNatAcRuleRequest} req
+     * @param {function(string, ModifyNatAcRuleResponse):void} cb
+     * @public
+     */
+    ModifyNatAcRule(req, cb) {
+        let resp = new ModifyNatAcRuleResponse();
+        this.request("ModifyNatAcRule", req, resp, cb);
+    }
+
+    /**
      * This API is used to modify rules.
      * @param {ModifyAcRuleRequest} req
      * @param {function(string, ModifyAcRuleResponse):void} cb
@@ -704,14 +796,14 @@ modify IPs/domains in the blocklist or ignored list
     }
 
     /**
-     * This API is used to enable or disable a NAT firewall.
-     * @param {ModifyNatFwSwitchRequest} req
-     * @param {function(string, ModifyNatFwSwitchResponse):void} cb
+     * This API is used to modify the publishing status of an enterprise security group.
+     * @param {ModifyEnterpriseSecurityDispatchStatusRequest} req
+     * @param {function(string, ModifyEnterpriseSecurityDispatchStatusResponse):void} cb
      * @public
      */
-    ModifyNatFwSwitch(req, cb) {
-        let resp = new ModifyNatFwSwitchResponse();
-        this.request("ModifyNatFwSwitch", req, resp, cb);
+    ModifyEnterpriseSecurityDispatchStatus(req, cb) {
+        let resp = new ModifyEnterpriseSecurityDispatchStatusResponse();
+        this.request("ModifyEnterpriseSecurityDispatchStatus", req, resp, cb);
     }
 
     /**
@@ -727,14 +819,25 @@ modify IPs/domains in the blocklist or ignored list
     }
 
     /**
-     * This API is used to enable or disable an enterprise security group rule.
-     * @param {ModifySecurityGroupItemRuleStatusRequest} req
-     * @param {function(string, ModifySecurityGroupItemRuleStatusResponse):void} cb
+     * This API is used to get allowlists or blocklists for intrusion prevention.
+     * @param {DescribeBlockIgnoreListRequest} req
+     * @param {function(string, DescribeBlockIgnoreListResponse):void} cb
      * @public
      */
-    ModifySecurityGroupItemRuleStatus(req, cb) {
-        let resp = new ModifySecurityGroupItemRuleStatusResponse();
-        this.request("ModifySecurityGroupItemRuleStatus", req, resp, cb);
+    DescribeBlockIgnoreList(req, cb) {
+        let resp = new DescribeBlockIgnoreListResponse();
+        this.request("DescribeBlockIgnoreList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete NAT access control rules.
+     * @param {RemoveNatAcRuleRequest} req
+     * @param {function(string, RemoveNatAcRuleResponse):void} cb
+     * @public
+     */
+    RemoveNatAcRule(req, cb) {
+        let resp = new RemoveNatAcRuleResponse();
+        this.request("RemoveNatAcRule", req, resp, cb);
     }
 
     /**
@@ -757,6 +860,28 @@ modify IPs/domains in the blocklist or ignored list
     ModifyPublicIPSwitchStatus(req, cb) {
         let resp = new ModifyPublicIPSwitchStatusResponse();
         this.request("ModifyPublicIPSwitchStatus", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the NAT access control list.
+     * @param {DescribeNatAcRuleRequest} req
+     * @param {function(string, DescribeNatAcRuleResponse):void} cb
+     * @public
+     */
+    DescribeNatAcRule(req, cb) {
+        let resp = new DescribeNatAcRuleResponse();
+        this.request("DescribeNatAcRule", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add NAT access control rules.
+     * @param {AddNatAcRuleRequest} req
+     * @param {function(string, AddNatAcRuleResponse):void} cb
+     * @public
+     */
+    AddNatAcRule(req, cb) {
+        let resp = new AddNatAcRuleResponse();
+        this.request("AddNatAcRule", req, resp, cb);
     }
 
     /**

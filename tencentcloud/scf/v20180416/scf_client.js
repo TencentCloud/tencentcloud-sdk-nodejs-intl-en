@@ -90,6 +90,7 @@ const ListLayerVersionsRequest = models.ListLayerVersionsRequest;
 const CreateTriggerResponse = models.CreateTriggerResponse;
 const PublishLayerVersionRequest = models.PublishLayerVersionRequest;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
+const UpdateTriggerStatusResponse = models.UpdateTriggerStatusResponse;
 const UpdateFunctionEventInvokeConfigRequest = models.UpdateFunctionEventInvokeConfigRequest;
 const DeleteLayerVersionRequest = models.DeleteLayerVersionRequest;
 const Filter = models.Filter;
@@ -105,6 +106,7 @@ const FunctionLog = models.FunctionLog;
 const InvokeFunctionRequest = models.InvokeFunctionRequest;
 const RetryConfig = models.RetryConfig;
 const GetFunctionAddressResponse = models.GetFunctionAddressResponse;
+const UpdateTriggerStatusRequest = models.UpdateTriggerStatusRequest;
 const TriggerAction = models.TriggerAction;
 const LimitsInfo = models.LimitsInfo;
 const ListLayersResponse = models.ListLayersResponse;
@@ -389,6 +391,17 @@ You can manually configure the function after replication as required.
     DeleteNamespace(req, cb) {
         let resp = new DeleteNamespaceResponse();
         this.request("DeleteNamespace", req, resp, cb);
+    }
+
+    /**
+     * This API is used to update the trigger status.
+     * @param {UpdateTriggerStatusRequest} req
+     * @param {function(string, UpdateTriggerStatusResponse):void} cb
+     * @public
+     */
+    UpdateTriggerStatus(req, cb) {
+        let resp = new UpdateTriggerStatusResponse();
+        this.request("UpdateTriggerStatus", req, resp, cb);
     }
 
     /**

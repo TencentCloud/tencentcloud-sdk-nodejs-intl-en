@@ -34,6 +34,7 @@ const RegionInfo = models.RegionInfo;
 const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
 const SlaveZones = models.SlaveZones;
 const ModifyIncrementalMigrationRequest = models.ModifyIncrementalMigrationRequest;
+const StartInstanceXEventResponse = models.StartInstanceXEventResponse;
 const MigrateDetail = models.MigrateDetail;
 const CreateIncrementalMigrationRequest = models.CreateIncrementalMigrationRequest;
 const RunMigrationRequest = models.RunMigrationRequest;
@@ -58,7 +59,7 @@ const DeleteBusinessIntelligenceFileResponse = models.DeleteBusinessIntelligence
 const ParameterDetail = models.ParameterDetail;
 const DescribeBusinessIntelligenceFileResponse = models.DescribeBusinessIntelligenceFileResponse;
 const ZoneInfo = models.ZoneInfo;
-const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
+const DescribeXEventsRequest = models.DescribeXEventsRequest;
 const ModifyInstanceParamRequest = models.ModifyInstanceParamRequest;
 const Migration = models.Migration;
 const ModifyDBInstanceNetworkRequest = models.ModifyDBInstanceNetworkRequest;
@@ -75,14 +76,17 @@ const OpenInterCommunicationResponse = models.OpenInterCommunicationResponse;
 const ModifyAccountPrivilegeResponse = models.ModifyAccountPrivilegeResponse;
 const DBCreateInfo = models.DBCreateInfo;
 const AccountPrivilege = models.AccountPrivilege;
+const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyMigrationResponse = models.ModifyMigrationResponse;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const DescribeDBsResponse = models.DescribeDBsResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const MigrationStep = models.MigrationStep;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
+const Events = models.Events;
 const DescribeMigrationsResponse = models.DescribeMigrationsResponse;
 const DescribeBackupFilesResponse = models.DescribeBackupFilesResponse;
+const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const DeleteDBRequest = models.DeleteDBRequest;
 const StartIncrementalMigrationRequest = models.StartIncrementalMigrationRequest;
@@ -91,6 +95,7 @@ const ModifyDatabaseCTRequest = models.ModifyDatabaseCTRequest;
 const ModifyBackupMigrationResponse = models.ModifyBackupMigrationResponse;
 const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
 const CreateBackupMigrationRequest = models.CreateBackupMigrationRequest;
+const DescribeXEventsResponse = models.DescribeXEventsResponse;
 const DescribeDBsNormalResponse = models.DescribeDBsNormalResponse;
 const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
 const DescribeDBCharsetsRequest = models.DescribeDBCharsetsRequest;
@@ -107,6 +112,7 @@ const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
 const DBPrivilegeModifyInfo = models.DBPrivilegeModifyInfo;
 const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
 const CreateDBRequest = models.CreateDBRequest;
+const EventConfig = models.EventConfig;
 const InstanceDBDetail = models.InstanceDBDetail;
 const DescribeBackupFilesRequest = models.DescribeBackupFilesRequest;
 const RenameRestoreDatabase = models.RenameRestoreDatabase;
@@ -140,6 +146,7 @@ const DescribeUploadBackupInfoRequest = models.DescribeUploadBackupInfoRequest;
 const ModifyDBNameResponse = models.ModifyDBNameResponse;
 const CosUploadBackupFile = models.CosUploadBackupFile;
 const StartBackupMigrationRequest = models.StartBackupMigrationRequest;
+const DescribeDBInstancesAttributeResponse = models.DescribeDBInstancesAttributeResponse;
 const Backup = models.Backup;
 const DescribeBackupCommandRequest = models.DescribeBackupCommandRequest;
 const AccountRemark = models.AccountRemark;
@@ -150,7 +157,7 @@ const RunMigrationResponse = models.RunMigrationResponse;
 const AccountPrivilegeModifyInfo = models.AccountPrivilegeModifyInfo;
 const DescribeBackupMigrationResponse = models.DescribeBackupMigrationResponse;
 const AccountCreateInfo = models.AccountCreateInfo;
-const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
+const StartInstanceXEventRequest = models.StartInstanceXEventRequest;
 const DBPrivilege = models.DBPrivilege;
 const FileAction = models.FileAction;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
@@ -190,6 +197,7 @@ const DBRenameRes = models.DBRenameRes;
 const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackInstanceRequest = models.RollbackInstanceRequest;
+const DescribeDBInstancesAttributeRequest = models.DescribeDBInstancesAttributeRequest;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const DescribeBackupCommandResponse = models.DescribeBackupCommandResponse;
 const ModifyDatabaseCTResponse = models.ModifyDatabaseCTResponse;
@@ -546,7 +554,7 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to roll back an instance.
+     * This API is used to roll back the instance by time point.
      * @param {RollbackInstanceRequest} req
      * @param {function(string, RollbackInstanceResponse):void} cb
      * @public
@@ -744,6 +752,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to start and stop an extended event.
+     * @param {StartInstanceXEventRequest} req
+     * @param {function(string, StartInstanceXEventResponse):void} cb
+     * @public
+     */
+    StartInstanceXEvent(req, cb) {
+        let resp = new StartInstanceXEventResponse();
+        this.request("StartInstanceXEvent", req, resp, cb);
+    }
+
+    /**
      * This API is used to query purchasable regions.
      * @param {DescribeRegionsRequest} req
      * @param {function(string, DescribeRegionsResponse):void} cb
@@ -788,6 +807,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
+     * This API is used to query the parameter modification records of an instance.
+     * @param {DescribeInstanceParamRecordsRequest} req
+     * @param {function(string, DescribeInstanceParamRecordsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceParamRecords(req, cb) {
+        let resp = new DescribeInstanceParamRecordsResponse();
+        this.request("DescribeInstanceParamRecords", req, resp, cb);
+    }
+
+    /**
      * This API is used to switch a running instance from a VPC to another.
      * @param {ModifyDBInstanceNetworkRequest} req
      * @param {function(string, ModifyDBInstanceNetworkResponse):void} cb
@@ -807,6 +837,17 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     DescribeBackupFiles(req, cb) {
         let resp = new DescribeBackupFilesResponse();
         this.request("DescribeBackupFiles", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of extended events.
+     * @param {DescribeXEventsRequest} req
+     * @param {function(string, DescribeXEventsResponse):void} cb
+     * @public
+     */
+    DescribeXEvents(req, cb) {
+        let resp = new DescribeXEventsResponse();
+        this.request("DescribeXEvents", req, resp, cb);
     }
 
     /**
@@ -832,7 +873,7 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to restore an instance from a backup file.
+     * This API is used to roll back the database by backup set.
      * @param {RestoreInstanceRequest} req
      * @param {function(string, RestoreInstanceResponse):void} cb
      * @public
@@ -909,14 +950,14 @@ Before you modify a parameter, you can use the `DescribeInstanceParams` API to q
     }
 
     /**
-     * This API is used to query the parameter modification records of an instance.
-     * @param {DescribeInstanceParamRecordsRequest} req
-     * @param {function(string, DescribeInstanceParamRecordsResponse):void} cb
+     * This API is used to query the attributes of an instance.
+     * @param {DescribeDBInstancesAttributeRequest} req
+     * @param {function(string, DescribeDBInstancesAttributeResponse):void} cb
      * @public
      */
-    DescribeInstanceParamRecords(req, cb) {
-        let resp = new DescribeInstanceParamRecordsResponse();
-        this.request("DescribeInstanceParamRecords", req, resp, cb);
+    DescribeDBInstancesAttribute(req, cb) {
+        let resp = new DescribeDBInstancesAttributeResponse();
+        this.request("DescribeDBInstancesAttribute", req, resp, cb);
     }
 
     /**

@@ -1899,6 +1899,62 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * Restriction information for downloading a backup
+ * @class
+ */
+class BackupDownloadRestriction extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+         * @type {string || null}
+         */
+        this.RestrictionType = null;
+
+        /**
+         * Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         * @type {string || null}
+         */
+        this.VpcRestrictionEffect = null;
+
+        /**
+         * Whether it is allowed to download the VPC ID list of the backup files.
+         * @type {Array.<string> || null}
+         */
+        this.VpcIdSet = null;
+
+        /**
+         * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         * @type {string || null}
+         */
+        this.IpRestrictionEffect = null;
+
+        /**
+         * Whether it is allowed to download IP list of the backup files.
+         * @type {Array.<string> || null}
+         */
+        this.IpSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RestrictionType = 'RestrictionType' in params ? params.RestrictionType : null;
+        this.VpcRestrictionEffect = 'VpcRestrictionEffect' in params ? params.VpcRestrictionEffect : null;
+        this.VpcIdSet = 'VpcIdSet' in params ? params.VpcIdSet : null;
+        this.IpRestrictionEffect = 'IpRestrictionEffect' in params ? params.IpRestrictionEffect : null;
+        this.IpSet = 'IpSet' in params ? params.IpSet : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceDeployment request structure.
  * @class
  */
@@ -7959,6 +8015,12 @@ class DescribeBackupDownloadURLRequest extends  AbstractModel {
          */
         this.URLExpireTime = null;
 
+        /**
+         * Backup download restriction
+         * @type {BackupDownloadRestriction || null}
+         */
+        this.BackupDownloadRestriction = null;
+
     }
 
     /**
@@ -7972,6 +8034,12 @@ class DescribeBackupDownloadURLRequest extends  AbstractModel {
         this.BackupType = 'BackupType' in params ? params.BackupType : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
         this.URLExpireTime = 'URLExpireTime' in params ? params.URLExpireTime : null;
+
+        if (params.BackupDownloadRestriction) {
+            let obj = new BackupDownloadRestriction();
+            obj.deserialize(params.BackupDownloadRestriction)
+            this.BackupDownloadRestriction = obj;
+        }
 
     }
 }
@@ -11274,6 +11342,7 @@ module.exports = {
     DescribeRegionsResponse: DescribeRegionsResponse,
     ModifyBaseBackupExpireTimeResponse: ModifyBaseBackupExpireTimeResponse,
     DBInstanceNetInfo: DBInstanceNetInfo,
+    BackupDownloadRestriction: BackupDownloadRestriction,
     ModifyDBInstanceDeploymentRequest: ModifyDBInstanceDeploymentRequest,
     DeleteReadOnlyGroupNetworkAccessRequest: DeleteReadOnlyGroupNetworkAccessRequest,
     ZoneInfo: ZoneInfo,

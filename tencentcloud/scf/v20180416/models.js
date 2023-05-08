@@ -548,6 +548,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.Status = null;
 
+        /**
+         * Stamp
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Stamp = null;
+
     }
 
     /**
@@ -564,6 +571,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
         this.LayerName = 'LayerName' in params ? params.LayerName : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Stamp = 'Stamp' in params ? params.Stamp : null;
 
     }
 }
@@ -2272,6 +2280,13 @@ class TriggerCount extends  AbstractModel {
          */
         this.Vod = null;
 
+        /**
+         * Number of EventBridge triggers
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Eb = null;
+
     }
 
     /**
@@ -2292,6 +2307,7 @@ class TriggerCount extends  AbstractModel {
         this.Mps = 'Mps' in params ? params.Mps : null;
         this.Cm = 'Cm' in params ? params.Cm : null;
         this.Vod = 'Vod' in params ? params.Vod : null;
+        this.Eb = 'Eb' in params ? params.Eb : null;
 
     }
 }
@@ -2787,7 +2803,7 @@ class Result extends  AbstractModel {
         this.FunctionRequestId = null;
 
         /**
-         * `0` indicates successful execution. Null is returned for asynchronous invocations.
+         * The [status code](https://intl.cloud.tencent.com/document/product/583/42611?from_cn_redirect=1) of the request. It’s not available for `Invoke` API. 
          * @type {number || null}
          */
         this.InvokeResult = null;
@@ -3850,6 +3866,34 @@ class CreateNamespaceRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateTriggerStatus response structure.
+ * @class
+ */
+class UpdateTriggerStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateFunctionEventInvokeConfig request structure.
  * @class
  */
@@ -4271,11 +4315,7 @@ class GetLayerVersionResponse extends  AbstractModel {
         this.LayerName = null;
 
         /**
-         * Current status of specific layer version. Valid values:
-Active: normal
-Publishing: publishing
-PublishFailed: publishing failed
-Deleted: deleted
+         * Current status of specific layer version. For the status values, [see here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81)
          * @type {string || null}
          */
         this.Status = null;
@@ -4672,6 +4712,76 @@ class GetFunctionAddressResponse extends  AbstractModel {
         this.Url = 'Url' in params ? params.Url : null;
         this.CodeSha256 = 'CodeSha256' in params ? params.CodeSha256 : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateTriggerStatus request structure.
+ * @class
+ */
+class UpdateTriggerStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled)
+         * @type {string || null}
+         */
+        this.Enable = null;
+
+        /**
+         * Function name.
+         * @type {string || null}
+         */
+        this.FunctionName = null;
+
+        /**
+         * Trigger name
+         * @type {string || null}
+         */
+        this.TriggerName = null;
+
+        /**
+         * Trigger Type
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Function version. It defaults to `$LATEST`. It’s recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+        /**
+         * Function namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * To update a COS trigger, this field is required. It stores the data {"event":"cos:ObjectCreated:*"} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+         * @type {string || null}
+         */
+        this.TriggerDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
+        this.TriggerName = 'TriggerName' in params ? params.TriggerName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.TriggerDesc = 'TriggerDesc' in params ? params.TriggerDesc : null;
 
     }
 }
@@ -5824,6 +5934,23 @@ Note: This field may return `null`, indicating that no valid value can be found.
          */
         this.Args = null;
 
+        /**
+         * Whether to enable image acceleration. It defaults to `False`.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.ContainerImageAccelerate = null;
+
+        /**
+         * Image function port settings
+`-1`: No port-specific image functions
+`0`: Default port (Port 9000)
+Others: Special ports
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ImagePort = null;
+
     }
 
     /**
@@ -5839,6 +5966,8 @@ Note: This field may return `null`, indicating that no valid value can be found.
         this.EntryPoint = 'EntryPoint' in params ? params.EntryPoint : null;
         this.Command = 'Command' in params ? params.Command : null;
         this.Args = 'Args' in params ? params.Args : null;
+        this.ContainerImageAccelerate = 'ContainerImageAccelerate' in params ? params.ContainerImageAccelerate : null;
+        this.ImagePort = 'ImagePort' in params ? params.ImagePort : null;
 
     }
 }
@@ -5945,7 +6074,7 @@ class DeleteTriggerRequest extends  AbstractModel {
         this.TriggerDesc = null;
 
         /**
-         * Function version information
+         * Function version. It defaults to `$LATEST`. It’s recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
          * @type {string || null}
          */
         this.Qualifier = null;
@@ -6222,6 +6351,7 @@ module.exports = {
     CreateTriggerResponse: CreateTriggerResponse,
     PublishLayerVersionRequest: PublishLayerVersionRequest,
     CreateNamespaceRequest: CreateNamespaceRequest,
+    UpdateTriggerStatusResponse: UpdateTriggerStatusResponse,
     UpdateFunctionEventInvokeConfigRequest: UpdateFunctionEventInvokeConfigRequest,
     DeleteLayerVersionRequest: DeleteLayerVersionRequest,
     Filter: Filter,
@@ -6237,6 +6367,7 @@ module.exports = {
     InvokeFunctionRequest: InvokeFunctionRequest,
     RetryConfig: RetryConfig,
     GetFunctionAddressResponse: GetFunctionAddressResponse,
+    UpdateTriggerStatusRequest: UpdateTriggerStatusRequest,
     TriggerAction: TriggerAction,
     LimitsInfo: LimitsInfo,
     ListLayersResponse: ListLayersResponse,

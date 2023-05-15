@@ -87,7 +87,7 @@ Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;
         this.TimedParam = null;
 
         /**
-         * Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
+         * Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic
          * @type {string || null}
          */
         this.Unsubscribe = null;
@@ -790,7 +790,7 @@ Sender <email address>
         this.Attachments = null;
 
         /**
-         * Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
+         * Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic
          * @type {string || null}
          */
         this.Unsubscribe = null;

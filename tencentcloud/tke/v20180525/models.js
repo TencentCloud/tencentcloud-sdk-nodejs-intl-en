@@ -54,6 +54,12 @@ class EnableVpcCniNetworkTypeRequest extends  AbstractModel {
          */
         this.ExpiredSeconds = null;
 
+        /**
+         * Whether to skip adding the VPC IP range to `NonMasqueradeCIDRs` field of `ip-masq-agent-config`. Default value: `false`
+         * @type {boolean || null}
+         */
+        this.SkipAddingNonMasqueradeCIDRs = null;
+
     }
 
     /**
@@ -68,6 +74,7 @@ class EnableVpcCniNetworkTypeRequest extends  AbstractModel {
         this.EnableStaticIp = 'EnableStaticIp' in params ? params.EnableStaticIp : null;
         this.Subnets = 'Subnets' in params ? params.Subnets : null;
         this.ExpiredSeconds = 'ExpiredSeconds' in params ? params.ExpiredSeconds : null;
+        this.SkipAddingNonMasqueradeCIDRs = 'SkipAddingNonMasqueradeCIDRs' in params ? params.SkipAddingNonMasqueradeCIDRs : null;
 
     }
 }
@@ -447,18 +454,24 @@ class DescribeClusterKubeconfigResponse extends  AbstractModel {
 }
 
 /**
- * RemoveNodeFromNodePool response structure.
+ * Maximum and minimum number of pods in cluster-associated scaling groups
  * @class
  */
-class RemoveNodeFromNodePoolResponse extends  AbstractModel {
+class AutoScalingGroupRange extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
+         * Minimum number of pods in a scaling group
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.MinSize = null;
+
+        /**
+         * Maximum number of pods in a scaling group
+         * @type {number || null}
+         */
+        this.MaxSize = null;
 
     }
 
@@ -469,7 +482,8 @@ class RemoveNodeFromNodePoolResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
 
     }
 }
@@ -847,6 +861,34 @@ class DeleteClusterEndpointResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterStatus request structure.
+ * @class
+ */
+class DescribeClusterStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID list. All clusters are pulled if it is left empty.
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
 
     }
 }
@@ -1284,6 +1326,89 @@ Note: this field may return `null`, indicating that no valid value is obtained.
                 this.Detail.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * Storage repository information
+ * @class
+ */
+class BackupStorageLocation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Backup repository name	
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Repository region, such as `ap-guangzhou`	
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * The provider of storage service. It defaults to Tencent Cloud. 	
+Note: This parameter may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Provider = null;
+
+        /**
+         * COS bucket name. For COS storage type, it must start with the prefix `tke-backup`. 	
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * COS bucket path 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * Storage repository status 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * Status information 	
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Last checked time 	
+Note: This parameter may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LastValidationTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.Provider = 'Provider' in params ? params.Provider : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.LastValidationTime = 'LastValidationTime' in params ? params.LastValidationTime : null;
 
     }
 }
@@ -2986,36 +3111,18 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeEdgeClusterInstances request structure.
+ * CreateBackupStorageLocation response structure.
  * @class
  */
-class DescribeEdgeClusterInstancesRequest extends  AbstractModel {
+class CreateBackupStorageLocationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.ClusterID = null;
-
-        /**
-         * Max number of returned entries
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * Offset
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * Filter condition. Only `NodeName` is supported.
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
+        this.RequestId = null;
 
     }
 
@@ -3026,18 +3133,7 @@ class DescribeEdgeClusterInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3066,6 +3162,42 @@ class ECMRunMonitorServiceEnabled extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * UpdateClusterKubeconfig response structure.
+ * @class
+ */
+class UpdateClusterKubeconfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of updated sub-account UINs 
+Note: This parameter may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.UpdatedSubAccounts = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UpdatedSubAccounts = 'UpdatedSubAccounts' in params ? params.UpdatedSubAccounts : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3507,24 +3639,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Maximum and minimum number of pods in cluster-associated scaling groups
+ * DeleteBackupStorageLocation response structure.
  * @class
  */
-class AutoScalingGroupRange extends  AbstractModel {
+class DeleteBackupStorageLocationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Minimum number of pods in a scaling group
-         * @type {number || null}
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
          */
-        this.MinSize = null;
-
-        /**
-         * Maximum number of pods in a scaling group
-         * @type {number || null}
-         */
-        this.MaxSize = null;
+        this.RequestId = null;
 
     }
 
@@ -3535,8 +3661,7 @@ class AutoScalingGroupRange extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MinSize = 'MinSize' in params ? params.MinSize : null;
-        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4446,6 +4571,63 @@ Note: this field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
+ * DescribeEdgeClusterInstances request structure.
+ * @class
+ */
+class DescribeEdgeClusterInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cluster ID
+         * @type {string || null}
+         */
+        this.ClusterID = null;
+
+        /**
+         * Max number of returned entries
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Filter condition. Only `NodeName` is supported.
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterID = 'ClusterID' in params ? params.ClusterID : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Resource usage details
  * @class
  */
@@ -5272,18 +5454,18 @@ Note: This field may return `null`, indicating that no valid values can be obtai
 }
 
 /**
- * DescribeClusterStatus request structure.
+ * DeleteBackupStorageLocation request structure.
  * @class
  */
-class DescribeClusterStatusRequest extends  AbstractModel {
+class DeleteBackupStorageLocationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cluster ID list. All clusters are pulled if it is left empty.
-         * @type {Array.<string> || null}
+         * Backup repository name
+         * @type {string || null}
          */
-        this.ClusterIds = null;
+        this.Name = null;
 
     }
 
@@ -5294,7 +5476,63 @@ class DescribeClusterStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * CreateBackupStorageLocation request structure.
+ * @class
+ */
+class CreateBackupStorageLocationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Repository region, such as `ap-guangzhou`
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * COS bucket name. For COS storage type, it must start with the prefix `tke-backup`.
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+        /**
+         * Backup repository name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The provider of storage service. It defaults to Tencent Cloud.
+         * @type {string || null}
+         */
+        this.Provider = null;
+
+        /**
+         * COS bucket path
+         * @type {string || null}
+         */
+        this.Path = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Provider = 'Provider' in params ? params.Provider : null;
+        this.Path = 'Path' in params ? params.Path : null;
 
     }
 }
@@ -5406,6 +5644,12 @@ class VirtualNodeSpec extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * Tencent Cloud tags
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -5417,6 +5661,15 @@ class VirtualNodeSpec extends  AbstractModel {
         }
         this.DisplayName = 'DisplayName' in params ? params.DisplayName : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -5599,6 +5852,41 @@ class CreateClusterVirtualNodeResponse extends  AbstractModel {
         }
         this.NodeName = 'NodeName' in params ? params.NodeName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateClusterKubeconfig request structure.
+ * @class
+ */
+class UpdateClusterKubeconfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The cluster ID.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * List of sub-account UINs. If it’s not specified, the SubUin used to invoke this API is used.
+         * @type {Array.<string> || null}
+         */
+        this.SubAccounts = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SubAccounts = 'SubAccounts' in params ? params.SubAccounts : null;
 
     }
 }
@@ -7354,33 +7642,30 @@ class ECMEnhancedService extends  AbstractModel {
 }
 
 /**
- * Describes login settings of an instance.
+ * Mounting configuration of the CVM instance data disk
  * @class
  */
-class LoginSettings extends  AbstractModel {
+class InstanceDataDiskMountSetting extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Login password of the instance. <br><li>For Linux instances, the password must include 8-30 characters, and contain at least two of the following character sets: [a-z], [A-Z], [0-9] and [()\`~!@#$%^&*-+=|{}[]:;',.?/]. <br><li>For Windows instances, the password must include 12-30 characters, and contain at least three of the following character sets: [a-z], [A-Z], [0-9] and [()\`~!@#$%^&*-+=|{}[]:;',.?/]. <br><br>If it's not specified, the user needs to set the login password using the **Reset password** option in the CVM console or calling the API `ResetInstancesPassword` to complete the creation of the CVM instance(s).
-Note: This field may return `null`, indicating that no valid values can be obtained.
+         * CVM instance type
          * @type {string || null}
          */
-        this.Password = null;
+        this.InstanceType = null;
 
         /**
-         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. You cannot specify a key and a password at the same time. Windows instances do not support keys.
-Note: This field may return `null`, indicating that no valid values can be obtained.
-         * @type {Array.<string> || null}
+         * Data disk mounting information
+         * @type {Array.<DataDisk> || null}
          */
-        this.KeyIds = null;
+        this.DataDisks = null;
 
         /**
-         * Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
-Note: This field may return null, indicating that no valid value is found.
+         * Availability zone where the CVM instance is located
          * @type {string || null}
          */
-        this.KeepImageLogin = null;
+        this.Zone = null;
 
     }
 
@@ -7391,9 +7676,17 @@ Note: This field may return null, indicating that no valid value is found.
         if (!params) {
             return;
         }
-        this.Password = 'Password' in params ? params.Password : null;
-        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
-        this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -10175,6 +10468,51 @@ class ModifyPrometheusAlertRuleRequest extends  AbstractModel {
 }
 
 /**
+ * Describes login settings of an instance.
+ * @class
+ */
+class LoginSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Login password of the instance. <br><li>For Linux instances, the password must include 8-30 characters, and contain at least two of the following character sets: [a-z], [A-Z], [0-9] and [()\`~!@#$%^&*-+=|{}[]:;',.?/]. <br><li>For Windows instances, the password must include 12-30 characters, and contain at least three of the following character sets: [a-z], [A-Z], [0-9] and [()\`~!@#$%^&*-+=|{}[]:;',.?/]. <br><br>If it's not specified, the user needs to set the login password using the **Reset password** option in the CVM console or calling the API `ResetInstancesPassword` to complete the creation of the CVM instance(s).
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. You cannot specify a key and a password at the same time. Windows instances do not support keys.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+        /**
+         * Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
+Note: This field may return null, indicating that no valid value is found.
+         * @type {string || null}
+         */
+        this.KeepImageLogin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Password = 'Password' in params ? params.Password : null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+        this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
+
+    }
+}
+
+/**
  * UpdateClusterVersion request structure.
  * @class
  */
@@ -11294,7 +11632,12 @@ class CreateClusterEndpointRequest extends  AbstractModel {
         this.SecurityGroup = null;
 
         /**
-         * The LB parameter. Required only for public network access.
+         * Parameters used to create a CLB in JSON format. It’s only required for public network access. Example: `{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":"200"},"VipIsp":"","BandwidthPackageId":""}`. 
+Parameters: 
+`InternetAccessible.InternetChargeType`: `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR`, `InternetAccessible.BANDWIDTH_PACKAGE` (Bill by the bandwidth package) 
+`InternetMaxBandwidthOut`: Outbound bandwidth cap in Mbps. Range: 0 - 2048. It defaults to 10. 
+`VipIsp`: The VIP provider. Values: `CMCC` (China Mobile), `CTCC` (China Telecom), `CUCC` (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode. 
+`BandwidthPackageId`: Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
          * @type {string || null}
          */
         this.ExtensiveParameters = null;
@@ -14051,30 +14394,18 @@ class ModifyClusterVirtualNodePoolRequest extends  AbstractModel {
 }
 
 /**
- * Mounting configuration of the CVM instance data disk
+ * RemoveNodeFromNodePool response structure.
  * @class
  */
-class InstanceDataDiskMountSetting extends  AbstractModel {
+class RemoveNodeFromNodePoolResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CVM instance type
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.InstanceType = null;
-
-        /**
-         * Data disk mounting information
-         * @type {Array.<DataDisk> || null}
-         */
-        this.DataDisks = null;
-
-        /**
-         * Availability zone where the CVM instance is located
-         * @type {string || null}
-         */
-        this.Zone = null;
+        this.RequestId = null;
 
     }
 
@@ -14085,17 +14416,51 @@ class InstanceDataDiskMountSetting extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.DataDisks) {
-            this.DataDisks = new Array();
-            for (let z in params.DataDisks) {
-                let obj = new DataDisk();
-                obj.deserialize(params.DataDisks[z]);
-                this.DataDisks.push(obj);
+    }
+}
+
+/**
+ * DescribeBackupStorageLocations response structure.
+ * @class
+ */
+class DescribeBackupStorageLocationsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Detailed information of the backup repository 
+Note: This parameter may return null, indicating that no valid values can be obtained.
+         * @type {Array.<BackupStorageLocation> || null}
+         */
+        this.BackupStorageLocationSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BackupStorageLocationSet) {
+            this.BackupStorageLocationSet = new Array();
+            for (let z in params.BackupStorageLocationSet) {
+                let obj = new BackupStorageLocation();
+                obj.deserialize(params.BackupStorageLocationSet[z]);
+                this.BackupStorageLocationSet.push(obj);
             }
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14422,6 +14787,19 @@ Note: This field may return `null`, indicating that no valid values can be obtai
          */
         this.ChargeType = null;
 
+        /**
+         * Edge cluster component version 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EdgeVersion = null;
+
+        /**
+         * 
+         * @type {TagSpecification || null}
+         */
+        this.TagSpecification = null;
+
     }
 
     /**
@@ -14451,6 +14829,13 @@ Note: This field may return `null`, indicating that no valid values can be obtai
         this.Level = 'Level' in params ? params.Level : null;
         this.AutoUpgradeClusterLevel = 'AutoUpgradeClusterLevel' in params ? params.AutoUpgradeClusterLevel : null;
         this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+        this.EdgeVersion = 'EdgeVersion' in params ? params.EdgeVersion : null;
+
+        if (params.TagSpecification) {
+            let obj = new TagSpecification();
+            obj.deserialize(params.TagSpecification)
+            this.TagSpecification = obj;
+        }
 
     }
 }
@@ -14524,6 +14909,34 @@ class RunMonitorServiceEnabled extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupStorageLocations request structure.
+ * @class
+ */
+class DescribeBackupStorageLocationsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Names of repositories. If it’s not specified, all storage repository names in the current region are returned.
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Names = 'Names' in params ? params.Names : null;
+
+    }
+}
+
+/**
  * The policy to deal with resources in the cluster when the cluster is deleted.
  * @class
  */
@@ -14568,7 +14981,7 @@ module.exports = {
     InstallEdgeLogAgentRequest: InstallEdgeLogAgentRequest,
     DescribeEdgeCVMInstancesRequest: DescribeEdgeCVMInstancesRequest,
     DescribeClusterKubeconfigResponse: DescribeClusterKubeconfigResponse,
-    RemoveNodeFromNodePoolResponse: RemoveNodeFromNodePoolResponse,
+    AutoScalingGroupRange: AutoScalingGroupRange,
     DescribeClusterEndpointVipStatusResponse: DescribeClusterEndpointVipStatusResponse,
     ModifyClusterEndpointSPRequest: ModifyClusterEndpointSPRequest,
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
@@ -14579,6 +14992,7 @@ module.exports = {
     DescribeClusterCommonNamesRequest: DescribeClusterCommonNamesRequest,
     RunAutomationServiceEnabled: RunAutomationServiceEnabled,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
+    DescribeClusterStatusRequest: DescribeClusterStatusRequest,
     PrometheusNotification: PrometheusNotification,
     ClusterVersion: ClusterVersion,
     RouteInfo: RouteInfo,
@@ -14586,6 +15000,7 @@ module.exports = {
     ClusterCondition: ClusterCondition,
     DescribeAvailableTKEEdgeVersionResponse: DescribeAvailableTKEEdgeVersionResponse,
     InstanceUpgradeProgressItem: InstanceUpgradeProgressItem,
+    BackupStorageLocation: BackupStorageLocation,
     ModifyClusterEndpointSPResponse: ModifyClusterEndpointSPResponse,
     NodePool: NodePool,
     InstallEdgeLogAgentResponse: InstallEdgeLogAgentResponse,
@@ -14620,8 +15035,9 @@ module.exports = {
     ImageInstance: ImageInstance,
     DescribeVpcCniPodLimitsResponse: DescribeVpcCniPodLimitsResponse,
     DescribeVersionsResponse: DescribeVersionsResponse,
-    DescribeEdgeClusterInstancesRequest: DescribeEdgeClusterInstancesRequest,
+    CreateBackupStorageLocationResponse: CreateBackupStorageLocationResponse,
     ECMRunMonitorServiceEnabled: ECMRunMonitorServiceEnabled,
+    UpdateClusterKubeconfigResponse: UpdateClusterKubeconfigResponse,
     DeleteEdgeClusterInstancesRequest: DeleteEdgeClusterInstancesRequest,
     Tag: Tag,
     NodePoolOption: NodePoolOption,
@@ -14629,7 +15045,7 @@ module.exports = {
     CreateClusterVirtualNodePoolRequest: CreateClusterVirtualNodePoolRequest,
     ClusterNetworkSettings: ClusterNetworkSettings,
     DescribeImagesResponse: DescribeImagesResponse,
-    AutoScalingGroupRange: AutoScalingGroupRange,
+    DeleteBackupStorageLocationResponse: DeleteBackupStorageLocationResponse,
     ModifyClusterAttributeRequest: ModifyClusterAttributeRequest,
     DeleteClusterRouteResponse: DeleteClusterRouteResponse,
     DeleteClusterVirtualNodePoolResponse: DeleteClusterVirtualNodePoolResponse,
@@ -14648,6 +15064,7 @@ module.exports = {
     PodLimitsByType: PodLimitsByType,
     DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
     SetNodePoolNodeProtectionResponse: SetNodePoolNodeProtectionResponse,
+    DescribeEdgeClusterInstancesRequest: DescribeEdgeClusterInstancesRequest,
     ResourceUsageDetail: ResourceUsageDetail,
     CreateTKEEdgeClusterRequest: CreateTKEEdgeClusterRequest,
     DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
@@ -14662,7 +15079,8 @@ module.exports = {
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     DescribeClusterAuthenticationOptionsRequest: DescribeClusterAuthenticationOptionsRequest,
     DescribeTKEEdgeScriptResponse: DescribeTKEEdgeScriptResponse,
-    DescribeClusterStatusRequest: DescribeClusterStatusRequest,
+    DeleteBackupStorageLocationRequest: DeleteBackupStorageLocationRequest,
+    CreateBackupStorageLocationRequest: CreateBackupStorageLocationRequest,
     VersionInstance: VersionInstance,
     DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
     VirtualNodeSpec: VirtualNodeSpec,
@@ -14670,6 +15088,7 @@ module.exports = {
     ClusterCIDRSettings: ClusterCIDRSettings,
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
     CreateClusterVirtualNodeResponse: CreateClusterVirtualNodeResponse,
+    UpdateClusterKubeconfigRequest: UpdateClusterKubeconfigRequest,
     Taint: Taint,
     CheckInstancesUpgradeAbleRequest: CheckInstancesUpgradeAbleRequest,
     CreateECMInstancesResponse: CreateECMInstancesResponse,
@@ -14708,7 +15127,7 @@ module.exports = {
     DescribeClusterAsGroupOptionRequest: DescribeClusterAsGroupOptionRequest,
     CreatePrometheusAlertRuleResponse: CreatePrometheusAlertRuleResponse,
     ECMEnhancedService: ECMEnhancedService,
-    LoginSettings: LoginSettings,
+    InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
     ModifyNodePoolInstanceTypesResponse: ModifyNodePoolInstanceTypesResponse,
     EdgeClusterPublicLB: EdgeClusterPublicLB,
     DescribeEnableVpcCniProgressRequest: DescribeEnableVpcCniProgressRequest,
@@ -14761,6 +15180,7 @@ module.exports = {
     DescribeEdgeClusterInstancesResponse: DescribeEdgeClusterInstancesResponse,
     UpdateEdgeClusterVersionRequest: UpdateEdgeClusterVersionRequest,
     ModifyPrometheusAlertRuleRequest: ModifyPrometheusAlertRuleRequest,
+    LoginSettings: LoginSettings,
     UpdateClusterVersionRequest: UpdateClusterVersionRequest,
     ModifyClusterAuthenticationOptionsRequest: ModifyClusterAuthenticationOptionsRequest,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
@@ -14836,7 +15256,8 @@ module.exports = {
     CheckEdgeClusterCIDRRequest: CheckEdgeClusterCIDRRequest,
     ModifyClusterAsGroupAttributeRequest: ModifyClusterAsGroupAttributeRequest,
     ModifyClusterVirtualNodePoolRequest: ModifyClusterVirtualNodePoolRequest,
-    InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
+    RemoveNodeFromNodePoolResponse: RemoveNodeFromNodePoolResponse,
+    DescribeBackupStorageLocationsResponse: DescribeBackupStorageLocationsResponse,
     RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
     GetClusterLevelPriceRequest: GetClusterLevelPriceRequest,
     NodeCountSummary: NodeCountSummary,
@@ -14845,6 +15266,7 @@ module.exports = {
     EdgeCluster: EdgeCluster,
     DescribeClusterNodePoolDetailResponse: DescribeClusterNodePoolDetailResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
+    DescribeBackupStorageLocationsRequest: DescribeBackupStorageLocationsRequest,
     ResourceDeleteOption: ResourceDeleteOption,
 
 }

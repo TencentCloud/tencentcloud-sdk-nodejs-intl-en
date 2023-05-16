@@ -17,9 +17,10 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateLiveSnapshotRuleRequest = models.CreateLiveSnapshotRuleRequest;
-const TimeShiftBillData = models.TimeShiftBillData;
+const BillDataInfo = models.BillDataInfo;
 const EnableLiveDomainResponse = models.EnableLiveDomainResponse;
 const DescribeUploadStreamNumsResponse = models.DescribeUploadStreamNumsResponse;
+const HlsSpecialParam = models.HlsSpecialParam;
 const TranscodeTotalInfo = models.TranscodeTotalInfo;
 const StopRecordTaskResponse = models.StopRecordTaskResponse;
 const DescribeDeliverBandwidthListResponse = models.DescribeDeliverBandwidthListResponse;
@@ -27,6 +28,7 @@ const DeleteLiveRecordRuleRequest = models.DeleteLiveRecordRuleRequest;
 const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
 const DeleteLiveTranscodeTemplateResponse = models.DeleteLiveTranscodeTemplateResponse;
 const FlvSpecialParam = models.FlvSpecialParam;
+const DescribeBillBandwidthAndFluxListResponse = models.DescribeBillBandwidthAndFluxListResponse;
 const CreateScreenshotTaskResponse = models.CreateScreenshotTaskResponse;
 const DeleteLiveCallbackRuleResponse = models.DeleteLiveCallbackRuleResponse;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
@@ -117,6 +119,7 @@ const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecor
 const DescribeLiveTimeShiftBillInfoListRequest = models.DescribeLiveTimeShiftBillInfoListRequest;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
+const WatermarkInfo = models.WatermarkInfo;
 const DescribeLiveWatermarkRulesResponse = models.DescribeLiveWatermarkRulesResponse;
 const DescribeLiveRecordTemplatesResponse = models.DescribeLiveRecordTemplatesResponse;
 const PlayDataInfoByStream = models.PlayDataInfoByStream;
@@ -176,7 +179,7 @@ const DescribeStreamPushInfoListResponse = models.DescribeStreamPushInfoListResp
 const DescribeLiveStreamPushInfoListRequest = models.DescribeLiveStreamPushInfoListRequest;
 const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const DescribeLiveWatermarksResponse = models.DescribeLiveWatermarksResponse;
-const WatermarkInfo = models.WatermarkInfo;
+const TimeShiftBillData = models.TimeShiftBillData;
 const DescribeLiveForbidStreamListRequest = models.DescribeLiveForbidStreamListRequest;
 const DescribeTopClientIpSumInfoListRequest = models.DescribeTopClientIpSumInfoListRequest;
 const CreateLiveCallbackRuleRequest = models.CreateLiveCallbackRuleRequest;
@@ -253,7 +256,7 @@ const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListRe
 const CallBackRuleInfo = models.CallBackRuleInfo;
 const PlaySumStatInfo = models.PlaySumStatInfo;
 const DescribeLiveTranscodeTemplatesRequest = models.DescribeLiveTranscodeTemplatesRequest;
-const HlsSpecialParam = models.HlsSpecialParam;
+const DescribeBillBandwidthAndFluxListRequest = models.DescribeBillBandwidthAndFluxListRequest;
 const DescribeLiveRecordRulesResponse = models.DescribeLiveRecordRulesResponse;
 const CreateLiveSnapshotTemplateRequest = models.CreateLiveSnapshotTemplateRequest;
 const TemplateInfo = models.TemplateInfo;
@@ -1385,6 +1388,17 @@ Note:
     CreateLiveRecordTemplate(req, cb) {
         let resp = new CreateLiveRecordTemplateResponse();
         this.request("CreateLiveRecordTemplate", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the data of billable LVB bandwidth and traffic.
+     * @param {DescribeBillBandwidthAndFluxListRequest} req
+     * @param {function(string, DescribeBillBandwidthAndFluxListResponse):void} cb
+     * @public
+     */
+    DescribeBillBandwidthAndFluxList(req, cb) {
+        let resp = new DescribeBillBandwidthAndFluxListResponse();
+        this.request("DescribeBillBandwidthAndFluxList", req, resp, cb);
     }
 
     /**

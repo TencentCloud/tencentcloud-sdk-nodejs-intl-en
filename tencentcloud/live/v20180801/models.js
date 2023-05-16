@@ -67,42 +67,36 @@ Note: if this parameter is a non-empty string, the rule will take effect only fo
 }
 
 /**
- * The time shifting billing data.
+ * Bandwidth and traffic information.
  * @class
  */
-class TimeShiftBillData extends  AbstractModel {
+class BillDataInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The push domain name.
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * The time-shift video length (minutes).
-         * @type {number || null}
-         */
-        this.Duration = null;
-
-        /**
-         * The time-shift days.
-         * @type {number || null}
-         */
-        this.StoragePeriod = null;
-
-        /**
-         * The time for the data returned. Format: YYYY-MM-DDThh:mm:ssZ.
+         * Time point in the format of `yyyy-mm-dd HH:MM:SS`.
          * @type {string || null}
          */
         this.Time = null;
 
         /**
-         * The total time-shift duration (minutes).
+         * Bandwidth in Mbps.
          * @type {number || null}
          */
-        this.TotalDuration = null;
+        this.Bandwidth = null;
+
+        /**
+         * Traffic in MB.
+         * @type {number || null}
+         */
+        this.Flux = null;
+
+        /**
+         * Time point of peak value in the format of `yyyy-mm-dd HH:MM:SS`. As raw data is at a 5-minute granularity, if data at a 1-hour or 1-day granularity is queried, the time point of peak bandwidth value at the corresponding granularity will be returned.
+         * @type {string || null}
+         */
+        this.PeakTime = null;
 
     }
 
@@ -113,11 +107,10 @@ class TimeShiftBillData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Duration = 'Duration' in params ? params.Duration : null;
-        this.StoragePeriod = 'StoragePeriod' in params ? params.StoragePeriod : null;
         this.Time = 'Time' in params ? params.Time : null;
-        this.TotalDuration = 'TotalDuration' in params ? params.TotalDuration : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.Flux = 'Flux' in params ? params.Flux : null;
+        this.PeakTime = 'PeakTime' in params ? params.PeakTime : null;
 
     }
 }
@@ -189,6 +182,35 @@ class DescribeUploadStreamNumsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * HLS-specific recording parameter
+ * @class
+ */
+class HlsSpecialParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Timeout period for restarting an interrupted HLS push.
+Value range: [0, 1,800].
+         * @type {number || null}
+         */
+        this.FlowContinueDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowContinueDuration = 'FlowContinueDuration' in params ? params.FlowContinueDuration : null;
 
     }
 }
@@ -459,6 +481,84 @@ class FlvSpecialParam extends  AbstractModel {
             return;
         }
         this.UploadInRecording = 'UploadInRecording' in params ? params.UploadInRecording : null;
+
+    }
+}
+
+/**
+ * DescribeBillBandwidthAndFluxList response structure.
+ * @class
+ */
+class DescribeBillBandwidthAndFluxListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Time point of peak bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
+         * @type {string || null}
+         */
+        this.PeakBandwidthTime = null;
+
+        /**
+         * Peak bandwidth in Mbps.
+         * @type {number || null}
+         */
+        this.PeakBandwidth = null;
+
+        /**
+         * Time point of 95th percentile bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
+         * @type {string || null}
+         */
+        this.P95PeakBandwidthTime = null;
+
+        /**
+         * 95th percentile bandwidth in Mbps.
+         * @type {number || null}
+         */
+        this.P95PeakBandwidth = null;
+
+        /**
+         * Total traffic in MB.
+         * @type {number || null}
+         */
+        this.SumFlux = null;
+
+        /**
+         * Detailed data information.
+         * @type {Array.<BillDataInfo> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PeakBandwidthTime = 'PeakBandwidthTime' in params ? params.PeakBandwidthTime : null;
+        this.PeakBandwidth = 'PeakBandwidth' in params ? params.PeakBandwidth : null;
+        this.P95PeakBandwidthTime = 'P95PeakBandwidthTime' in params ? params.P95PeakBandwidthTime : null;
+        this.P95PeakBandwidth = 'P95PeakBandwidth' in params ? params.P95PeakBandwidth : null;
+        this.SumFlux = 'SumFlux' in params ? params.SumFlux : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new BillDataInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5234,6 +5334,91 @@ The value can be a random name for identification, such as `Canvas1` or `Picture
 }
 
 /**
+ * Watermark information.
+ * @class
+ */
+class WatermarkInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Watermark ID.
+         * @type {number || null}
+         */
+        this.WatermarkId = null;
+
+        /**
+         * Watermark image URL.
+         * @type {string || null}
+         */
+        this.PictureUrl = null;
+
+        /**
+         * Display position: X-axis offset.
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * Display position: Y-axis offset.
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+        /**
+         * Watermark name.
+         * @type {string || null}
+         */
+        this.WatermarkName = null;
+
+        /**
+         * Current status. 0: not used. 1: in use.
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * The time when the watermark was added.
+Note: Beijing time (UTC+8) is used.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Watermark width.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Watermark height.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
+        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
  * DescribeLiveWatermarkRules response structure.
  * @class
  */
@@ -8306,67 +8491,42 @@ class DescribeLiveWatermarksResponse extends  AbstractModel {
 }
 
 /**
- * Watermark information.
+ * The time shifting billing data.
  * @class
  */
-class WatermarkInfo extends  AbstractModel {
+class TimeShiftBillData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Watermark ID.
-         * @type {number || null}
-         */
-        this.WatermarkId = null;
-
-        /**
-         * Watermark image URL.
+         * The push domain name.
          * @type {string || null}
          */
-        this.PictureUrl = null;
+        this.Domain = null;
 
         /**
-         * Display position: X-axis offset.
+         * The time-shift video length (minutes).
          * @type {number || null}
          */
-        this.XPosition = null;
+        this.Duration = null;
 
         /**
-         * Display position: Y-axis offset.
+         * The time-shift days.
          * @type {number || null}
          */
-        this.YPosition = null;
+        this.StoragePeriod = null;
 
         /**
-         * Watermark name.
+         * The time for the data returned. Format: YYYY-MM-DDThh:mm:ssZ.
          * @type {string || null}
          */
-        this.WatermarkName = null;
+        this.Time = null;
 
         /**
-         * Current status. 0: not used. 1: in use.
+         * The total time-shift duration (minutes).
          * @type {number || null}
          */
-        this.Status = null;
-
-        /**
-         * The time when the watermark was added.
-Note: Beijing time (UTC+8) is used.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Watermark width.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Watermark height.
-         * @type {number || null}
-         */
-        this.Height = null;
+        this.TotalDuration = null;
 
     }
 
@@ -8377,15 +8537,11 @@ Note: Beijing time (UTC+8) is used.
         if (!params) {
             return;
         }
-        this.WatermarkId = 'WatermarkId' in params ? params.WatermarkId : null;
-        this.PictureUrl = 'PictureUrl' in params ? params.PictureUrl : null;
-        this.XPosition = 'XPosition' in params ? params.XPosition : null;
-        this.YPosition = 'YPosition' in params ? params.YPosition : null;
-        this.WatermarkName = 'WatermarkName' in params ? params.WatermarkName : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.StoragePeriod = 'StoragePeriod' in params ? params.StoragePeriod : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.TotalDuration = 'TotalDuration' in params ? params.TotalDuration : null;
 
     }
 }
@@ -12485,19 +12641,71 @@ class DescribeLiveTranscodeTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * HLS-specific recording parameter
+ * DescribeBillBandwidthAndFluxList request structure.
  * @class
  */
-class HlsSpecialParam extends  AbstractModel {
+class DescribeBillBandwidthAndFluxListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Timeout period for restarting an interrupted HLS push.
-Value range: [0, 1,800].
+         * Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 3 years can be queried.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * LVB playback domain name. If this parameter is left empty, full data will be queried.
+         * @type {Array.<string> || null}
+         */
+        this.PlayDomains = null;
+
+        /**
+         * Valid values:
+Mainland: query data for Mainland China,
+Oversea: query data for regions outside Mainland China,
+Default: query data for all regions.
+Note: LEB only supports querying data for all regions.
+         * @type {string || null}
+         */
+        this.MainlandOrOversea = null;
+
+        /**
+         * Data granularity. Valid values:
+5: 5-minute granularity (the query time span should be within 1 day),
+60: 1-hour granularity (the query time span should be within one month),
+1440: 1-day granularity (the query time span should be within one month).
+Default value: 5.
          * @type {number || null}
          */
-        this.FlowContinueDuration = null;
+        this.Granularity = null;
+
+        /**
+         * Service name. Valid values: LVB, LEB. The sum of LVB and LEB usage will be returned if this parameter is left empty.
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * Region. Valid values:
+China Mainland
+Asia Pacific I
+Asia Pacific II
+Asia Pacific III
+Europe
+North America
+South America
+Middle East
+Africa
+         * @type {Array.<string> || null}
+         */
+        this.RegionNames = null;
 
     }
 
@@ -12508,7 +12716,13 @@ Value range: [0, 1,800].
         if (!params) {
             return;
         }
-        this.FlowContinueDuration = 'FlowContinueDuration' in params ? params.FlowContinueDuration : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PlayDomains = 'PlayDomains' in params ? params.PlayDomains : null;
+        this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.RegionNames = 'RegionNames' in params ? params.RegionNames : null;
 
     }
 }
@@ -15216,9 +15430,10 @@ class DeleteLiveRecordRuleResponse extends  AbstractModel {
 
 module.exports = {
     CreateLiveSnapshotRuleRequest: CreateLiveSnapshotRuleRequest,
-    TimeShiftBillData: TimeShiftBillData,
+    BillDataInfo: BillDataInfo,
     EnableLiveDomainResponse: EnableLiveDomainResponse,
     DescribeUploadStreamNumsResponse: DescribeUploadStreamNumsResponse,
+    HlsSpecialParam: HlsSpecialParam,
     TranscodeTotalInfo: TranscodeTotalInfo,
     StopRecordTaskResponse: StopRecordTaskResponse,
     DescribeDeliverBandwidthListResponse: DescribeDeliverBandwidthListResponse,
@@ -15226,6 +15441,7 @@ module.exports = {
     ResumeLiveStreamRequest: ResumeLiveStreamRequest,
     DeleteLiveTranscodeTemplateResponse: DeleteLiveTranscodeTemplateResponse,
     FlvSpecialParam: FlvSpecialParam,
+    DescribeBillBandwidthAndFluxListResponse: DescribeBillBandwidthAndFluxListResponse,
     CreateScreenshotTaskResponse: CreateScreenshotTaskResponse,
     DeleteLiveCallbackRuleResponse: DeleteLiveCallbackRuleResponse,
     ResumeDelayLiveStreamRequest: ResumeDelayLiveStreamRequest,
@@ -15316,6 +15532,7 @@ module.exports = {
     DescribeLiveTimeShiftBillInfoListRequest: DescribeLiveTimeShiftBillInfoListRequest,
     DescribeLiveCertsResponse: DescribeLiveCertsResponse,
     CommonMixInputParam: CommonMixInputParam,
+    WatermarkInfo: WatermarkInfo,
     DescribeLiveWatermarkRulesResponse: DescribeLiveWatermarkRulesResponse,
     DescribeLiveRecordTemplatesResponse: DescribeLiveRecordTemplatesResponse,
     PlayDataInfoByStream: PlayDataInfoByStream,
@@ -15375,7 +15592,7 @@ module.exports = {
     DescribeLiveStreamPushInfoListRequest: DescribeLiveStreamPushInfoListRequest,
     StopLiveRecordResponse: StopLiveRecordResponse,
     DescribeLiveWatermarksResponse: DescribeLiveWatermarksResponse,
-    WatermarkInfo: WatermarkInfo,
+    TimeShiftBillData: TimeShiftBillData,
     DescribeLiveForbidStreamListRequest: DescribeLiveForbidStreamListRequest,
     DescribeTopClientIpSumInfoListRequest: DescribeTopClientIpSumInfoListRequest,
     CreateLiveCallbackRuleRequest: CreateLiveCallbackRuleRequest,
@@ -15452,7 +15669,7 @@ module.exports = {
     CallBackRuleInfo: CallBackRuleInfo,
     PlaySumStatInfo: PlaySumStatInfo,
     DescribeLiveTranscodeTemplatesRequest: DescribeLiveTranscodeTemplatesRequest,
-    HlsSpecialParam: HlsSpecialParam,
+    DescribeBillBandwidthAndFluxListRequest: DescribeBillBandwidthAndFluxListRequest,
     DescribeLiveRecordRulesResponse: DescribeLiveRecordRulesResponse,
     CreateLiveSnapshotTemplateRequest: CreateLiveSnapshotTemplateRequest,
     TemplateInfo: TemplateInfo,

@@ -1226,13 +1226,13 @@ Default value: `4`.
         this.SecureLevel = null;
 
         /**
-         * The image for comparison in the `compare` (liveness detection and face comparison) mode. This parameter is required when the value of `CheckMode` is `compare`.
+         * The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
          * @type {string || null}
          */
         this.Image = null;
 
         /**
-         * The pass-through parameter.
+         * The pass-through parameter, which can be omitted if there are no special requirements.
          * @type {string || null}
          */
         this.Extra = null;

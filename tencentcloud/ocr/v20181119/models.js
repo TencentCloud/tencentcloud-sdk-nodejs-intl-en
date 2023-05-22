@@ -52,6 +52,76 @@ class DetectedWords extends  AbstractModel {
 }
 
 /**
+ * The coordinates of the four vertices of the text
+Note: This field may return null, indicating that no valid values can be obtained.
+ * @class
+ */
+class Polygon extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The coordinates of the upper-left vertex.
+         * @type {Coord || null}
+         */
+        this.LeftTop = null;
+
+        /**
+         * The coordinates of the upper-right vertex.
+         * @type {Coord || null}
+         */
+        this.RightTop = null;
+
+        /**
+         * The coordinates of the lower-left vertex.
+         * @type {Coord || null}
+         */
+        this.RightBottom = null;
+
+        /**
+         * The coordinates of the lower-right vertex.
+         * @type {Coord || null}
+         */
+        this.LeftBottom = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LeftTop) {
+            let obj = new Coord();
+            obj.deserialize(params.LeftTop)
+            this.LeftTop = obj;
+        }
+
+        if (params.RightTop) {
+            let obj = new Coord();
+            obj.deserialize(params.RightTop)
+            this.RightTop = obj;
+        }
+
+        if (params.RightBottom) {
+            let obj = new Coord();
+            obj.deserialize(params.RightBottom)
+            this.RightBottom = obj;
+        }
+
+        if (params.LeftBottom) {
+            let obj = new Coord();
+            obj.deserialize(params.LeftBottom)
+            this.LeftBottom = obj;
+        }
+
+    }
+}
+
+/**
  * Recognition result
  * @class
  */
@@ -150,6 +220,142 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
 }
 
 /**
+ * RecognizePhilippinesVoteIDOCR response structure.
+ * @class
+ */
+class RecognizePhilippinesVoteIDOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Base64-encoded identity photo.
+         * @type {TextDetectionResult || null}
+         */
+        this.HeadPortrait = null;
+
+        /**
+         * The voter's identification number (VIN).
+         * @type {TextDetectionResult || null}
+         */
+        this.VIN = null;
+
+        /**
+         * The first name.
+         * @type {TextDetectionResult || null}
+         */
+        this.FirstName = null;
+
+        /**
+         * The last name.
+         * @type {TextDetectionResult || null}
+         */
+        this.LastName = null;
+
+        /**
+         * The date of birth.
+         * @type {TextDetectionResult || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * The civil status.
+         * @type {TextDetectionResult || null}
+         */
+        this.CivilStatus = null;
+
+        /**
+         * The citizenship.
+         * @type {TextDetectionResult || null}
+         */
+        this.Citizenship = null;
+
+        /**
+         * The address.
+         * @type {TextDetectionResult || null}
+         */
+        this.Address = null;
+
+        /**
+         * The precinct.
+         * @type {TextDetectionResult || null}
+         */
+        this.PrecinctNo = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.HeadPortrait) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.HeadPortrait)
+            this.HeadPortrait = obj;
+        }
+
+        if (params.VIN) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.VIN)
+            this.VIN = obj;
+        }
+
+        if (params.FirstName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.FirstName)
+            this.FirstName = obj;
+        }
+
+        if (params.LastName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.LastName)
+            this.LastName = obj;
+        }
+
+        if (params.Birthday) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Birthday)
+            this.Birthday = obj;
+        }
+
+        if (params.CivilStatus) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.CivilStatus)
+            this.CivilStatus = obj;
+        }
+
+        if (params.Citizenship) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Citizenship)
+            this.Citizenship = obj;
+        }
+
+        if (params.Address) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Address)
+            this.Address = obj;
+        }
+
+        if (params.PrecinctNo) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.PrecinctNo)
+            this.PrecinctNo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GeneralAccurateOCR response structure.
  * @class
  */
@@ -194,6 +400,145 @@ class GeneralAccurateOCRResponse extends  AbstractModel {
             }
         }
         this.Angel = 'Angel' in params ? params.Angel : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MLIDPassportOCR response structure.
+ * @class
+ */
+class MLIDPassportOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Passport ID
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * Name
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Date of birth
+         * @type {string || null}
+         */
+        this.DateOfBirth = null;
+
+        /**
+         * Gender (F: female, M: male)
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * Expiration date
+         * @type {string || null}
+         */
+        this.DateOfExpiration = null;
+
+        /**
+         * Issuing country
+         * @type {string || null}
+         */
+        this.IssuingCountry = null;
+
+        /**
+         * Country/region code
+         * @type {string || null}
+         */
+        this.Nationality = null;
+
+        /**
+         * Alarm codes
+-9103 Alarm for spoofed document
+-9102 Alarm for photocopied document (including black & white and color ones)
+-9106 Alarm for covered card
+         * @type {Array.<number> || null}
+         */
+        this.Warn = null;
+
+        /**
+         * Identity photo
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * Extended field:
+{
+    ID:{
+        Confidence:0.9999
+    },
+    Name:{
+        Confidence:0.9996
+    }
+}
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
+         * The first row of the machine-readable zone (MRZ) at the bottom
+         * @type {string || null}
+         */
+        this.CodeSet = null;
+
+        /**
+         * The second row of the MRZ at the bottom
+         * @type {string || null}
+         */
+        this.CodeCrc = null;
+
+        /**
+         * The surname.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Surname = null;
+
+        /**
+         * The given name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GivenName = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DateOfBirth = 'DateOfBirth' in params ? params.DateOfBirth : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.DateOfExpiration = 'DateOfExpiration' in params ? params.DateOfExpiration : null;
+        this.IssuingCountry = 'IssuingCountry' in params ? params.IssuingCountry : null;
+        this.Nationality = 'Nationality' in params ? params.Nationality : null;
+        this.Warn = 'Warn' in params ? params.Warn : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+        this.CodeSet = 'CodeSet' in params ? params.CodeSet : null;
+        this.CodeCrc = 'CodeCrc' in params ? params.CodeCrc : null;
+        this.Surname = 'Surname' in params ? params.Surname : null;
+        this.GivenName = 'GivenName' in params ? params.GivenName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -341,6 +686,46 @@ For a non-Tencent Cloud URL, the download speed and stability may be affected.
 }
 
 /**
+ * The recognized text information.
+ * @class
+ */
+class WordItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The text content.
+         * @type {string || null}
+         */
+        this.DetectedText = null;
+
+        /**
+         * The coordinates of the four vertices.
+         * @type {Polygon || null}
+         */
+        this.Coord = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DetectedText = 'DetectedText' in params ? params.DetectedText : null;
+
+        if (params.Coord) {
+            let obj = new Polygon();
+            obj.deserialize(params.Coord)
+            this.Coord = obj;
+        }
+
+    }
+}
+
+/**
  * MLIDPassportOCR request structure.
  * @class
  */
@@ -438,6 +823,125 @@ We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can gu
         this.EnableDetectSplit = 'EnableDetectSplit' in params ? params.EnableDetectSplit : null;
         this.IsPdf = 'IsPdf' in params ? params.IsPdf : null;
         this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
+
+    }
+}
+
+/**
+ * Structured element group
+ * @class
+ */
+class ItemInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The key information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Key || null}
+         */
+        this.Key = null;
+
+        /**
+         * The value information.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Value || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Key) {
+            let obj = new Key();
+            obj.deserialize(params.Key)
+            this.Key = obj;
+        }
+
+        if (params.Value) {
+            let obj = new Value();
+            obj.deserialize(params.Value)
+            this.Value = obj;
+        }
+
+    }
+}
+
+/**
+ * SmartStructuralOCRV2 request structure.
+ * @class
+ */
+class SmartStructuralOCRV2Request extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The URL of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * The Base64-encoded value of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * Whether to enable PDF recognition. Default value: `false`. If you enable this feature, both images and PDF files can be recognized.
+         * @type {boolean || null}
+         */
+        this.IsPdf = null;
+
+        /**
+         * The number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF and the value of `IsPdf` is `true`. Default value: `1`.
+         * @type {number || null}
+         */
+        this.PdfPageNumber = null;
+
+        /**
+         * The names of the fields you want to return for the structured information recognition.
+For example, if you want to return only the recognition result of the "Name" and "Gender" fields, set this parameter as follows:
+ItemNames=["Name","Gender"]
+         * @type {Array.<string> || null}
+         */
+        this.ItemNames = null;
+
+        /**
+         * Whether to enable recognition of all fields.
+         * @type {boolean || null}
+         */
+        this.ReturnFullText = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.IsPdf = 'IsPdf' in params ? params.IsPdf : null;
+        this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
+        this.ItemNames = 'ItemNames' in params ? params.ItemNames : null;
+        this.ReturnFullText = 'ReturnFullText' in params ? params.ReturnFullText : null;
 
     }
 }
@@ -810,56 +1314,18 @@ For a non-Tencent Cloud URL, the download speed and stability may be affected.
 }
 
 /**
- * OCR result.
+ * Key information
  * @class
  */
-class TextDetection extends  AbstractModel {
+class Key extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Recognized text line content.
+         * The name of the recognized field.
          * @type {string || null}
          */
-        this.DetectedText = null;
-
-        /**
-         * Confidence. Value range: 0–100.
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Text line coordinates, which are represented as 4 vertex coordinates.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Coord> || null}
-         */
-        this.Polygon = null;
-
-        /**
-         * Extended field.
-The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains `ParagNo`.
-         * @type {string || null}
-         */
-        this.AdvancedInfo = null;
-
-        /**
-         * Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`.
-         * @type {ItemCoord || null}
-         */
-        this.ItemPolygon = null;
-
-        /**
-         * Information about a character, including the character itself and its confidence. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
-         * @type {Array.<DetectedWords> || null}
-         */
-        this.Words = null;
-
-        /**
-         * Coordinates of a word’s four corners on the input image. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
-         * @type {Array.<DetectedWordCoordPoint> || null}
-         */
-        this.WordCoordPoint = null;
+        this.AutoName = null;
 
     }
 
@@ -870,42 +1336,72 @@ The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains
         if (!params) {
             return;
         }
-        this.DetectedText = 'DetectedText' in params ? params.DetectedText : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.AutoName = 'AutoName' in params ? params.AutoName : null;
 
-        if (params.Polygon) {
-            this.Polygon = new Array();
-            for (let z in params.Polygon) {
-                let obj = new Coord();
-                obj.deserialize(params.Polygon[z]);
-                this.Polygon.push(obj);
+    }
+}
+
+/**
+ * SmartStructuralOCRV2 response structure.
+ * @class
+ */
+class SmartStructuralOCRV2Response extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The rotation angle (degrees) of the text on the image. 0: The text is horizontal. Positive value: The text is rotated clockwise. Negative value: The text is rotated counterclockwise.
+         * @type {number || null}
+         */
+        this.Angle = null;
+
+        /**
+         * The structural information (key-value).
+         * @type {Array.<GroupInfo> || null}
+         */
+        this.StructuralList = null;
+
+        /**
+         * The recognized text information.
+         * @type {Array.<WordItem> || null}
+         */
+        this.WordList = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Angle = 'Angle' in params ? params.Angle : null;
+
+        if (params.StructuralList) {
+            this.StructuralList = new Array();
+            for (let z in params.StructuralList) {
+                let obj = new GroupInfo();
+                obj.deserialize(params.StructuralList[z]);
+                this.StructuralList.push(obj);
             }
         }
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
 
-        if (params.ItemPolygon) {
-            let obj = new ItemCoord();
-            obj.deserialize(params.ItemPolygon)
-            this.ItemPolygon = obj;
-        }
-
-        if (params.Words) {
-            this.Words = new Array();
-            for (let z in params.Words) {
-                let obj = new DetectedWords();
-                obj.deserialize(params.Words[z]);
-                this.Words.push(obj);
+        if (params.WordList) {
+            this.WordList = new Array();
+            for (let z in params.WordList) {
+                let obj = new WordItem();
+                obj.deserialize(params.WordList[z]);
+                this.WordList.push(obj);
             }
         }
-
-        if (params.WordCoordPoint) {
-            this.WordCoordPoint = new Array();
-            for (let z in params.WordCoordPoint) {
-                let obj = new DetectedWordCoordPoint();
-                obj.deserialize(params.WordCoordPoint[z]);
-                this.WordCoordPoint.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1041,115 +1537,18 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * MLIDPassportOCR response structure.
+ * The sequence number of an element group in the image
  * @class
  */
-class MLIDPassportOCRResponse extends  AbstractModel {
+class GroupInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Passport ID
-         * @type {string || null}
+         * The elements in each line.
+         * @type {Array.<LineInfo> || null}
          */
-        this.ID = null;
-
-        /**
-         * Name
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * Date of birth
-         * @type {string || null}
-         */
-        this.DateOfBirth = null;
-
-        /**
-         * Gender (F: female, M: male)
-         * @type {string || null}
-         */
-        this.Sex = null;
-
-        /**
-         * Expiration date
-         * @type {string || null}
-         */
-        this.DateOfExpiration = null;
-
-        /**
-         * Issuing country
-         * @type {string || null}
-         */
-        this.IssuingCountry = null;
-
-        /**
-         * Country/region code
-         * @type {string || null}
-         */
-        this.Nationality = null;
-
-        /**
-         * Alarm codes
--9103 Alarm for spoofed document
--9102 Alarm for photocopied document (including black & white and color ones)
--9106 Alarm for covered card
-         * @type {Array.<number> || null}
-         */
-        this.Warn = null;
-
-        /**
-         * Identity photo
-         * @type {string || null}
-         */
-        this.Image = null;
-
-        /**
-         * Extended field:
-{
-    ID:{
-        Confidence:0.9999
-    },
-    Name:{
-        Confidence:0.9996
-    }
-}
-         * @type {string || null}
-         */
-        this.AdvancedInfo = null;
-
-        /**
-         * The first row of the machine-readable zone (MRZ) at the bottom
-         * @type {string || null}
-         */
-        this.CodeSet = null;
-
-        /**
-         * The second row of the MRZ at the bottom
-         * @type {string || null}
-         */
-        this.CodeCrc = null;
-
-        /**
-         * The surname.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Surname = null;
-
-        /**
-         * The given name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.GivenName = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Groups = null;
 
     }
 
@@ -1160,21 +1559,15 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ID = 'ID' in params ? params.ID : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.DateOfBirth = 'DateOfBirth' in params ? params.DateOfBirth : null;
-        this.Sex = 'Sex' in params ? params.Sex : null;
-        this.DateOfExpiration = 'DateOfExpiration' in params ? params.DateOfExpiration : null;
-        this.IssuingCountry = 'IssuingCountry' in params ? params.IssuingCountry : null;
-        this.Nationality = 'Nationality' in params ? params.Nationality : null;
-        this.Warn = 'Warn' in params ? params.Warn : null;
-        this.Image = 'Image' in params ? params.Image : null;
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
-        this.CodeSet = 'CodeSet' in params ? params.CodeSet : null;
-        this.CodeCrc = 'CodeCrc' in params ? params.CodeCrc : null;
-        this.Surname = 'Surname' in params ? params.Surname : null;
-        this.GivenName = 'GivenName' in params ? params.GivenName : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new LineInfo();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
 
     }
 }
@@ -1308,6 +1701,47 @@ class DetectedWordCoordPoint extends  AbstractModel {
                 obj.deserialize(params.WordCoordinate[z]);
                 this.WordCoordinate.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * Value information
+ * @class
+ */
+class Value extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The value of the recognized field.
+         * @type {string || null}
+         */
+        this.AutoContent = null;
+
+        /**
+         * The coordinates of the four vertices.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Polygon || null}
+         */
+        this.Coord = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoContent = 'AutoContent' in params ? params.AutoContent : null;
+
+        if (params.Coord) {
+            let obj = new Polygon();
+            obj.deserialize(params.Coord)
+            this.Coord = obj;
         }
 
     }
@@ -1886,72 +2320,18 @@ The download speed and stability of non-Tencent Cloud URLs may be low.
 }
 
 /**
- * RecognizePhilippinesVoteIDOCR response structure.
+ * Line number
  * @class
  */
-class RecognizePhilippinesVoteIDOCRResponse extends  AbstractModel {
+class LineInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The Base64-encoded identity photo.
-         * @type {TextDetectionResult || null}
+         * The elements in a line
+         * @type {Array.<ItemInfo> || null}
          */
-        this.HeadPortrait = null;
-
-        /**
-         * The voter's identification number (VIN).
-         * @type {TextDetectionResult || null}
-         */
-        this.VIN = null;
-
-        /**
-         * The first name.
-         * @type {TextDetectionResult || null}
-         */
-        this.FirstName = null;
-
-        /**
-         * The last name.
-         * @type {TextDetectionResult || null}
-         */
-        this.LastName = null;
-
-        /**
-         * The date of birth.
-         * @type {TextDetectionResult || null}
-         */
-        this.Birthday = null;
-
-        /**
-         * The civil status.
-         * @type {TextDetectionResult || null}
-         */
-        this.CivilStatus = null;
-
-        /**
-         * The citizenship.
-         * @type {TextDetectionResult || null}
-         */
-        this.Citizenship = null;
-
-        /**
-         * The address.
-         * @type {TextDetectionResult || null}
-         */
-        this.Address = null;
-
-        /**
-         * The precinct.
-         * @type {TextDetectionResult || null}
-         */
-        this.PrecinctNo = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Lines = null;
 
     }
 
@@ -1963,60 +2343,14 @@ class RecognizePhilippinesVoteIDOCRResponse extends  AbstractModel {
             return;
         }
 
-        if (params.HeadPortrait) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.HeadPortrait)
-            this.HeadPortrait = obj;
+        if (params.Lines) {
+            this.Lines = new Array();
+            for (let z in params.Lines) {
+                let obj = new ItemInfo();
+                obj.deserialize(params.Lines[z]);
+                this.Lines.push(obj);
+            }
         }
-
-        if (params.VIN) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.VIN)
-            this.VIN = obj;
-        }
-
-        if (params.FirstName) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.FirstName)
-            this.FirstName = obj;
-        }
-
-        if (params.LastName) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.LastName)
-            this.LastName = obj;
-        }
-
-        if (params.Birthday) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.Birthday)
-            this.Birthday = obj;
-        }
-
-        if (params.CivilStatus) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.CivilStatus)
-            this.CivilStatus = obj;
-        }
-
-        if (params.Citizenship) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.Citizenship)
-            this.Citizenship = obj;
-        }
-
-        if (params.Address) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.Address)
-            this.Address = obj;
-        }
-
-        if (params.PrecinctNo) {
-            let obj = new TextDetectionResult();
-            obj.deserialize(params.PrecinctNo)
-            this.PrecinctNo = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2167,6 +2501,107 @@ class ItemCoord extends  AbstractModel {
         this.Y = 'Y' in params ? params.Y : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
+ * OCR result.
+ * @class
+ */
+class TextDetection extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Recognized text line content.
+         * @type {string || null}
+         */
+        this.DetectedText = null;
+
+        /**
+         * Confidence. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * Text line coordinates, which are represented as 4 vertex coordinates.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Coord> || null}
+         */
+        this.Polygon = null;
+
+        /**
+         * Extended field.
+The paragraph information `Parag` returned by the `GeneralBasicOcr` API contains `ParagNo`.
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
+         * Pixel coordinates of the text line in the image after rotation correction, which is in the format of `(X-coordinate of top-left point, Y-coordinate of top-left point, width, height)`.
+         * @type {ItemCoord || null}
+         */
+        this.ItemPolygon = null;
+
+        /**
+         * Information about a character, including the character itself and its confidence. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
+         * @type {Array.<DetectedWords> || null}
+         */
+        this.Words = null;
+
+        /**
+         * Coordinates of a word’s four corners on the input image. Supported APIs: `GeneralBasicOCR`, `GeneralAccurateOCR`
+         * @type {Array.<DetectedWordCoordPoint> || null}
+         */
+        this.WordCoordPoint = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DetectedText = 'DetectedText' in params ? params.DetectedText : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.Polygon) {
+            this.Polygon = new Array();
+            for (let z in params.Polygon) {
+                let obj = new Coord();
+                obj.deserialize(params.Polygon[z]);
+                this.Polygon.push(obj);
+            }
+        }
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+        if (params.ItemPolygon) {
+            let obj = new ItemCoord();
+            obj.deserialize(params.ItemPolygon)
+            this.ItemPolygon = obj;
+        }
+
+        if (params.Words) {
+            this.Words = new Array();
+            for (let z in params.Words) {
+                let obj = new DetectedWords();
+                obj.deserialize(params.Words[z]);
+                this.Words.push(obj);
+            }
+        }
+
+        if (params.WordCoordPoint) {
+            this.WordCoordPoint = new Array();
+            for (let z in params.WordCoordPoint) {
+                let obj = new DetectedWordCoordPoint();
+                obj.deserialize(params.WordCoordPoint[z]);
+                this.WordCoordPoint.push(obj);
+            }
+        }
 
     }
 }
@@ -2371,23 +2806,31 @@ Valid values:
 
 module.exports = {
     DetectedWords: DetectedWords,
+    Polygon: Polygon,
     TextDetectionResult: TextDetectionResult,
     HKIDCardOCRRequest: HKIDCardOCRRequest,
+    RecognizePhilippinesVoteIDOCRResponse: RecognizePhilippinesVoteIDOCRResponse,
     GeneralAccurateOCRResponse: GeneralAccurateOCRResponse,
+    MLIDPassportOCRResponse: MLIDPassportOCRResponse,
     TextTable: TextTable,
     RecognizePhilippinesDrivingLicenseOCRRequest: RecognizePhilippinesDrivingLicenseOCRRequest,
+    WordItem: WordItem,
     MLIDPassportOCRRequest: MLIDPassportOCRRequest,
     GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,
+    ItemInfo: ItemInfo,
+    SmartStructuralOCRV2Request: SmartStructuralOCRV2Request,
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
     RecognizePhilippinesDrivingLicenseOCRResponse: RecognizePhilippinesDrivingLicenseOCRResponse,
     BankCardOCRRequest: BankCardOCRRequest,
     RecognizePhilippinesSssIDOCRRequest: RecognizePhilippinesSssIDOCRRequest,
-    TextDetection: TextDetection,
+    Key: Key,
+    SmartStructuralOCRV2Response: SmartStructuralOCRV2Response,
     HKIDCardOCRResponse: HKIDCardOCRResponse,
-    MLIDPassportOCRResponse: MLIDPassportOCRResponse,
+    GroupInfo: GroupInfo,
     MLIDCardOCRRequest: MLIDCardOCRRequest,
     TableOCRResponse: TableOCRResponse,
     DetectedWordCoordPoint: DetectedWordCoordPoint,
+    Value: Value,
     Coord: Coord,
     RecognizePhilippinesSssIDOCRResponse: RecognizePhilippinesSssIDOCRResponse,
     RecognizeIndonesiaIDCardOCRRequest: RecognizeIndonesiaIDCardOCRRequest,
@@ -2396,9 +2839,10 @@ module.exports = {
     RecognizePhilippinesTinIDOCRRequest: RecognizePhilippinesTinIDOCRRequest,
     RecognizePhilippinesVoteIDOCRRequest: RecognizePhilippinesVoteIDOCRRequest,
     TableOCRRequest: TableOCRRequest,
-    RecognizePhilippinesVoteIDOCRResponse: RecognizePhilippinesVoteIDOCRResponse,
+    LineInfo: LineInfo,
     BankCardOCRResponse: BankCardOCRResponse,
     ItemCoord: ItemCoord,
+    TextDetection: TextDetection,
     RecognizePhilippinesTinIDOCRResponse: RecognizePhilippinesTinIDOCRResponse,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,
 

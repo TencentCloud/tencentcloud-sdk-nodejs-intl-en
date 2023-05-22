@@ -17,23 +17,31 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DetectedWords = models.DetectedWords;
+const Polygon = models.Polygon;
 const TextDetectionResult = models.TextDetectionResult;
 const HKIDCardOCRRequest = models.HKIDCardOCRRequest;
+const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
+const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const TextTable = models.TextTable;
 const RecognizePhilippinesDrivingLicenseOCRRequest = models.RecognizePhilippinesDrivingLicenseOCRRequest;
+const WordItem = models.WordItem;
 const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
+const ItemInfo = models.ItemInfo;
+const SmartStructuralOCRV2Request = models.SmartStructuralOCRV2Request;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
 const RecognizePhilippinesDrivingLicenseOCRResponse = models.RecognizePhilippinesDrivingLicenseOCRResponse;
 const BankCardOCRRequest = models.BankCardOCRRequest;
 const RecognizePhilippinesSssIDOCRRequest = models.RecognizePhilippinesSssIDOCRRequest;
-const TextDetection = models.TextDetection;
+const Key = models.Key;
+const SmartStructuralOCRV2Response = models.SmartStructuralOCRV2Response;
 const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
-const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
+const GroupInfo = models.GroupInfo;
 const MLIDCardOCRRequest = models.MLIDCardOCRRequest;
 const TableOCRResponse = models.TableOCRResponse;
 const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
+const Value = models.Value;
 const Coord = models.Coord;
 const RecognizePhilippinesSssIDOCRResponse = models.RecognizePhilippinesSssIDOCRResponse;
 const RecognizeIndonesiaIDCardOCRRequest = models.RecognizeIndonesiaIDCardOCRRequest;
@@ -42,9 +50,10 @@ const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
 const RecognizePhilippinesTinIDOCRRequest = models.RecognizePhilippinesTinIDOCRRequest;
 const RecognizePhilippinesVoteIDOCRRequest = models.RecognizePhilippinesVoteIDOCRRequest;
 const TableOCRRequest = models.TableOCRRequest;
-const RecognizePhilippinesVoteIDOCRResponse = models.RecognizePhilippinesVoteIDOCRResponse;
+const LineInfo = models.LineInfo;
 const BankCardOCRResponse = models.BankCardOCRResponse;
 const ItemCoord = models.ItemCoord;
+const TextDetection = models.TextDetection;
 const RecognizePhilippinesTinIDOCRResponse = models.RecognizePhilippinesTinIDOCRResponse;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 
@@ -68,6 +77,19 @@ class OcrClient extends AbstractClient {
     RecognizePhilippinesDrivingLicenseOCR(req, cb) {
         let resp = new RecognizePhilippinesDrivingLicenseOCRResponse();
         this.request("RecognizePhilippinesDrivingLicenseOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize fields from cards, documents, bills, forms, contracts, and other structured information. It is flexible and efficient to use, without any configuration required. This API is suitable for recognizing structured information.
+
+A maximum of 10 requests can be initiated per second for this API.
+     * @param {SmartStructuralOCRV2Request} req
+     * @param {function(string, SmartStructuralOCRV2Response):void} cb
+     * @public
+     */
+    SmartStructuralOCRV2(req, cb) {
+        let resp = new SmartStructuralOCRV2Response();
+        this.request("SmartStructuralOCRV2", req, resp, cb);
     }
 
     /**

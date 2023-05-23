@@ -257,13 +257,13 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * Bundle ID.
+         * Bundle ID. You can get it via the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.BundleId = null;
 
         /**
-         * Image ID
+         * Image ID. You can get it via the [DescribeBlueprints](https://intl.cloud.tencent.com/document/api/1207/47689?from_cn_redirect=1) API.
          * @type {string || null}
          */
         this.BlueprintId = null;
@@ -1152,6 +1152,51 @@ class DescribeBundlesResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyInstancesBundle request structure.
+ * @class
+ */
+class ModifyInstancesBundleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 15 instances can be specified at the same time.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * ID of bundles to change. You can get the IDs from the `BundleId` returned by the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1).
+         * @type {string || null}
+         */
+        this.BundleId = null;
+
+        /**
+         * Whether to use existing vouchers under the current account automatically. Valid values: 
+`true`: Deduct from existing vouchers automatically 
+`false`: Do not deduct from existing vouchers automatically 
+Default value: `false`.
+         * @type {boolean || null}
+         */
+        this.AutoVoucher = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.BundleId = 'BundleId' in params ? params.BundleId : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
 
     }
 }
@@ -2318,6 +2363,17 @@ class CreateBlueprintRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * Whether to forcibly shut down the instance before creating the image 
+Valid values: 
+`True`: Shut down and instance first 
+`False`: Create the image when the instance is running 
+Default: `True` 
+Note that if you create an image when the instance is running, there might be data loss.
+         * @type {boolean || null}
+         */
+        this.ForcePowerOff = null;
+
     }
 
     /**
@@ -2330,6 +2386,7 @@ class CreateBlueprintRequest extends  AbstractModel {
         this.BlueprintName = 'BlueprintName' in params ? params.BlueprintName : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ForcePowerOff = 'ForcePowerOff' in params ? params.ForcePowerOff : null;
 
     }
 }
@@ -3643,6 +3700,44 @@ class ModifyInstancesLoginKeyPairAttributeRequest extends  AbstractModel {
 }
 
 /**
+ * IsolateInstances request structure.
+ * @class
+ */
+class IsolateInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 20 instances can be specified at the same time.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * Whether to return data disks mounted on the instance together with the instance. Valid values: 
+`TRUE`: Return the mounted data disks at the same time 
+`FALSE`: Do not return the mounted data disks at the same time 
+Default value: `TRUE`.
+         * @type {boolean || null}
+         */
+        this.IsolateDataDisk = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.IsolateDataDisk = 'IsolateDataDisk' in params ? params.IsolateDataDisk : null;
+
+    }
+}
+
+/**
  * StopInstances response structure.
  * @class
  */
@@ -4457,6 +4552,34 @@ class DockerContainerVolume extends  AbstractModel {
 }
 
 /**
+ * IsolateInstances response structure.
+ * @class
+ */
+class IsolateInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateKeyPair response structure.
  * @class
  */
@@ -5194,12 +5317,26 @@ Valid values:
         this.BundleSalesState = null;
 
         /**
-         * Package type.
-Valid values:
-<li> GENERAL_BUNDLE: general</li><li> STORAGE_BUNDLE: Storage</li>
+         * Bundle type. 
+Valid values: 
+<li>STARTER_BUNDLE: Starter bundle</li>
+<li>GENERAL_BUNDLE: General bundle</li>
+<li>ENTERPRISE_BUNDLE: Enterprise bundle</li>
+<li>STORAGE_BUNDLE: Storage-optimized bundle</li>
+<li>EXCLUSIVE_BUNDLE: Dedicated bundle</li>
+<li>HK_EXCLUSIVE_BUNDLE: Hong Kong-dedicated bundle </li>
+<li>CAREFREE_BUNDLE: Lighthouse Care bundle</li>
+<li>BEFAST_BUNDLE: BeFast bundle </li>
          * @type {string || null}
          */
         this.BundleType = null;
+
+        /**
+         * Bundle type description 
+Note: This parameter may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BundleTypeDescription = null;
 
         /**
          * Package tag.
@@ -5238,6 +5375,7 @@ Valid values:
         this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
         this.BundleSalesState = 'BundleSalesState' in params ? params.BundleSalesState : null;
         this.BundleType = 'BundleType' in params ? params.BundleType : null;
+        this.BundleTypeDescription = 'BundleTypeDescription' in params ? params.BundleTypeDescription : null;
         this.BundleDisplayLabel = 'BundleDisplayLabel' in params ? params.BundleDisplayLabel : null;
 
     }
@@ -5553,22 +5691,31 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * Filter list.
-<li>instance-name</li>Filter by **instance name**.
-Type: String
-Required: no
-<li>private-ip-address</li>Filter by **private IP of instance primary ENI**.
-Type: String
-Required: no
-<li>public-ip-address</li>Filter by **public IP of instance primary ENI**.
-Type: String
-Required: no
-<li>zone</li>Filter by the availability zone
-Type: String
-Required: no
-<li>instance-state</li>Filter by **instance status**.
-Type: String
-Required: no
+         * Filter list. 
+<li>instance-name</li>Filter by the **instance name**. 
+Type: String 
+Required: No 
+<li>private-ip-address</li>Filter by the **private IP of instance primary ENI**. 
+Type: String 
+Required: No 
+<li>public-ip-address</li>Filter by the **public IP of instance primary ENI**. 
+Type: String 
+Required: No 
+<li>zone</li>Filter by the availability zone. 
+Type: String 
+Required: No 
+<li>instance-state</li>Filter by the **instance status**. 
+Type: String 
+Required: No 
+<li>tag-key</li>Filter by the **tag key**. 
+Type: String 
+Required: No 
+<li>tag-value</li>Filter by the **tag value**. 
+Type: String 
+Required: No 
+<li> tag:tag-key</li>Filter by tag key-value pair. The `tag-key` should be replaced with a specific tag key. 
+Type: String 
+Required: No 
 Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
          * @type {Array.<Filter> || null}
          */
@@ -7520,6 +7667,34 @@ class BlueprintPrice extends  AbstractModel {
 }
 
 /**
+ * ModifyInstancesBundle response structure.
+ * @class
+ */
+class ModifyInstancesBundleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * General resource quota information.
 
 
@@ -8696,6 +8871,7 @@ module.exports = {
     SystemDisk: SystemDisk,
     ResetInstanceBlueprint: ResetInstanceBlueprint,
     DescribeBundlesResponse: DescribeBundlesResponse,
+    ModifyInstancesBundleRequest: ModifyInstancesBundleRequest,
     InstancePriceDetail: InstancePriceDetail,
     InquirePriceRenewInstancesRequest: InquirePriceRenewInstancesRequest,
     DiscountDetail: DiscountDetail,
@@ -8752,6 +8928,7 @@ module.exports = {
     ImportKeyPairRequest: ImportKeyPairRequest,
     DeleteBlueprintsResponse: DeleteBlueprintsResponse,
     ModifyInstancesLoginKeyPairAttributeRequest: ModifyInstancesLoginKeyPairAttributeRequest,
+    IsolateInstancesRequest: IsolateInstancesRequest,
     StopInstancesResponse: StopInstancesResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     ModifyBlueprintAttributeResponse: ModifyBlueprintAttributeResponse,
@@ -8768,6 +8945,7 @@ module.exports = {
     LoginSettings: LoginSettings,
     Instance: Instance,
     DockerContainerVolume: DockerContainerVolume,
+    IsolateInstancesResponse: IsolateInstancesResponse,
     CreateKeyPairResponse: CreateKeyPairResponse,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     ModifyFirewallRulesResponse: ModifyFirewallRulesResponse,
@@ -8832,6 +9010,7 @@ module.exports = {
     Price: Price,
     DescribeDisksReturnableResponse: DescribeDisksReturnableResponse,
     BlueprintPrice: BlueprintPrice,
+    ModifyInstancesBundleResponse: ModifyInstancesBundleResponse,
     GeneralResourceQuota: GeneralResourceQuota,
     DescribeResetInstanceBlueprintsResponse: DescribeResetInstanceBlueprintsResponse,
     DescribeDisksReturnableRequest: DescribeDisksReturnableRequest,

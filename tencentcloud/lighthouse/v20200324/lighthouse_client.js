@@ -41,6 +41,7 @@ const DeleteKeyPairsRequest = models.DeleteKeyPairsRequest;
 const SystemDisk = models.SystemDisk;
 const ResetInstanceBlueprint = models.ResetInstanceBlueprint;
 const DescribeBundlesResponse = models.DescribeBundlesResponse;
+const ModifyInstancesBundleRequest = models.ModifyInstancesBundleRequest;
 const InstancePriceDetail = models.InstancePriceDetail;
 const InquirePriceRenewInstancesRequest = models.InquirePriceRenewInstancesRequest;
 const DiscountDetail = models.DiscountDetail;
@@ -97,6 +98,7 @@ const SceneInfo = models.SceneInfo;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const DeleteBlueprintsResponse = models.DeleteBlueprintsResponse;
 const ModifyInstancesLoginKeyPairAttributeRequest = models.ModifyInstancesLoginKeyPairAttributeRequest;
+const IsolateInstancesRequest = models.IsolateInstancesRequest;
 const StopInstancesResponse = models.StopInstancesResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const ModifyBlueprintAttributeResponse = models.ModifyBlueprintAttributeResponse;
@@ -113,6 +115,7 @@ const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const LoginSettings = models.LoginSettings;
 const Instance = models.Instance;
 const DockerContainerVolume = models.DockerContainerVolume;
+const IsolateInstancesResponse = models.IsolateInstancesResponse;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const ModifyFirewallRulesResponse = models.ModifyFirewallRulesResponse;
@@ -177,6 +180,7 @@ const DescribeBundleDiscountRequest = models.DescribeBundleDiscountRequest;
 const Price = models.Price;
 const DescribeDisksReturnableResponse = models.DescribeDisksReturnableResponse;
 const BlueprintPrice = models.BlueprintPrice;
+const ModifyInstancesBundleResponse = models.ModifyInstancesBundleResponse;
 const GeneralResourceQuota = models.GeneralResourceQuota;
 const DescribeResetInstanceBlueprintsResponse = models.DescribeResetInstanceBlueprintsResponse;
 const DescribeDisksReturnableRequest = models.DescribeDisksReturnableRequest;
@@ -274,11 +278,25 @@ In the `FirewallRule` parameter:
     }
 
     /**
-     * This API is used to modify the renewal flags of monthly subscribed instances.
+     * This API is used to return one or more Lighthouse instances. 
+* Only `RUNNING` and `STOPPED` instances can be returned. 
+* The instance status goes to `SHUTDOWN` after the API is called successfully. 
+* Batch operations are supported. Up to 20 resources (including instances and data disks) can be returned in each request. 
+* This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+     * @param {IsolateInstancesRequest} req
+     * @param {function(string, IsolateInstancesResponse):void} cb
+     * @public
+     */
+    IsolateInstances(req, cb) {
+        let resp = new IsolateInstancesResponse();
+        this.request("IsolateInstances", req, resp, cb);
+    }
 
-* Instances marked with "auto-renewal" will be automatically renewed for one month when they expire.
-* Batch operations are supported. The maximum number of instances in each request is 100.
-* The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+    /**
+     * This API is used to change the auto-renewal setting of monthly-subscribed instances. 
+
+* Instances with auto-renewal enabled are automatically renewed on a monthly basis upon the expiration. 
+* Batch operations are supported. Up to 100 instances per request is allowed.
      * @param {ModifyInstancesRenewFlagRequest} req
      * @param {function(string, ModifyInstancesRenewFlagResponse):void} cb
      * @public
@@ -321,10 +339,9 @@ In the `FirewallRules` parameter:
     }
 
     /**
-     * This API is used to modify the attributes of instances.
-* The instance name is used only for users’ convenience.
-* Batch operations are supported. Each request can contain up to 100 instances at a time.
-* This API is async. A successful request will return a `RequestId`, it does not mean the operation is completed. You can call the `DescribeInstances` API to query the operation result. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+     * This API is used to modify an instance attribute. 
+* The instance name is used only for users’ convenience. 
+* Batch operations are supported. The maximum number of instances in each request is 100.
      * @param {ModifyInstancesAttributeRequest} req
      * @param {function(string, ModifyInstancesAttributeResponse):void} cb
      * @public
@@ -1073,6 +1090,20 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     DetachDisks(req, cb) {
         let resp = new DetachDisksResponse();
         this.request("DetachDisks", req, resp, cb);
+    }
+
+    /**
+     * This API is used change one or more Lighthouse instance bundles. 
+* Only `RUNNING` and `STOPPED` instances can be changed. 
+* Batch operations are supported. The maximum number of instances in each request is 30. 
+* This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+     * @param {ModifyInstancesBundleRequest} req
+     * @param {function(string, ModifyInstancesBundleResponse):void} cb
+     * @public
+     */
+    ModifyInstancesBundle(req, cb) {
+        let resp = new ModifyInstancesBundleResponse();
+        this.request("ModifyInstancesBundle", req, resp, cb);
     }
 
 

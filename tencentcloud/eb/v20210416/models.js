@@ -186,6 +186,40 @@ class GetEventBusResponse extends  AbstractModel {
         this.Type = null;
 
         /**
+         * Billing mode
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * EventBridge log storage period
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.SaveDays = null;
+
+        /**
+         * EventBridge log topic ID
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
+        /**
+         * Whether to enable log storage
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.EnableStore = null;
+
+        /**
+         * Whether to sort the message
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.LinkMode = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -208,6 +242,11 @@ class GetEventBusResponse extends  AbstractModel {
         this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.SaveDays = 'SaveDays' in params ? params.SaveDays : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+        this.EnableStore = 'EnableStore' in params ? params.EnableStore : null;
+        this.LinkMode = 'LinkMode' in params ? params.LinkMode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -573,6 +612,27 @@ class TargetBrief extends  AbstractModel {
 }
 
 /**
+ * Data Transfer Service (DTS) connector information
+ * @class
+ */
+class DTSParams extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ListRules response structure.
  * @class
  */
@@ -848,6 +908,27 @@ class EventBus extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * Billing Mode
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * Connector basic information
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<ConnectionBrief> || null}
+         */
+        this.ConnectionBriefs = null;
+
+        /**
+         * Target information
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<TargetBrief> || null}
+         */
+        this.TargetBriefs = null;
+
     }
 
     /**
@@ -863,6 +944,25 @@ class EventBus extends  AbstractModel {
         this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+
+        if (params.ConnectionBriefs) {
+            this.ConnectionBriefs = new Array();
+            for (let z in params.ConnectionBriefs) {
+                let obj = new ConnectionBrief();
+                obj.deserialize(params.ConnectionBriefs[z]);
+                this.ConnectionBriefs.push(obj);
+            }
+        }
+
+        if (params.TargetBriefs) {
+            this.TargetBriefs = new Array();
+            for (let z in params.TargetBriefs) {
+                let obj = new TargetBrief();
+                obj.deserialize(params.TargetBriefs[z]);
+                this.TargetBriefs.push(obj);
+            }
+        }
 
     }
 }
@@ -1268,6 +1368,24 @@ class UpdateEventBusRequest extends  AbstractModel {
          */
         this.EventBusName = null;
 
+        /**
+         * Log retention period
+         * @type {number || null}
+         */
+        this.SaveDays = null;
+
+        /**
+         * EventBridge log topic ID
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
+        /**
+         * Whether to enable log retention
+         * @type {boolean || null}
+         */
+        this.EnableStore = null;
+
     }
 
     /**
@@ -1280,6 +1398,9 @@ class UpdateEventBusRequest extends  AbstractModel {
         this.EventBusId = 'EventBusId' in params ? params.EventBusId : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
+        this.SaveDays = 'SaveDays' in params ? params.SaveDays : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+        this.EnableStore = 'EnableStore' in params ? params.EnableStore : null;
 
     }
 }
@@ -1304,6 +1425,18 @@ class CreateEventBusRequest extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * Log retention period
+         * @type {number || null}
+         */
+        this.SaveDays = null;
+
+        /**
+         * Whether to enable log storage
+         * @type {boolean || null}
+         */
+        this.EnableStore = null;
+
     }
 
     /**
@@ -1315,6 +1448,8 @@ class CreateEventBusRequest extends  AbstractModel {
         }
         this.EventBusName = 'EventBusName' in params ? params.EventBusName : null;
         this.Description = 'Description' in params ? params.Description : null;
+        this.SaveDays = 'SaveDays' in params ? params.SaveDays : null;
+        this.EnableStore = 'EnableStore' in params ? params.EnableStore : null;
 
     }
 }
@@ -1949,6 +2084,13 @@ Note: this field may return null, indicating that no valid values can be obtaine
          */
         this.CkafkaParams = null;
 
+        /**
+         * Data Transfer Service (DTS) connector information
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {DTSParams || null}
+         */
+        this.DTSParams = null;
+
     }
 
     /**
@@ -1970,6 +2112,12 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new CkafkaParams();
             obj.deserialize(params.CkafkaParams)
             this.CkafkaParams = obj;
+        }
+
+        if (params.DTSParams) {
+            let obj = new DTSParams();
+            obj.deserialize(params.DTSParams)
+            this.DTSParams = obj;
         }
 
     }
@@ -2234,19 +2382,26 @@ class CreateTransformationResponse extends  AbstractModel {
 }
 
 /**
- * Describes how to transform data
-
+ * Connector basic information
  * @class
  */
-class Transform extends  AbstractModel {
+class ConnectionBrief extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Describes how to transform data
-         * @type {Array.<OutputStructParam> || null}
+         * Connector type
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
          */
-        this.OutputStructs = null;
+        this.Type = null;
+
+        /**
+         * Connector status
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
 
     }
 
@@ -2257,15 +2412,8 @@ class Transform extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.OutputStructs) {
-            this.OutputStructs = new Array();
-            for (let z in params.OutputStructs) {
-                let obj = new OutputStructParam();
-                obj.deserialize(params.OutputStructs[z]);
-                this.OutputStructs.push(obj);
-            }
-        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2973,6 +3121,43 @@ class OutputStructParam extends  AbstractModel {
 }
 
 /**
+ * Describes how to transform data
+
+ * @class
+ */
+class Transform extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Describes how to transform data
+         * @type {Array.<OutputStructParam> || null}
+         */
+        this.OutputStructs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.OutputStructs) {
+            this.OutputStructs = new Array();
+            for (let z in params.OutputStructs) {
+                let obj = new OutputStructParam();
+                obj.deserialize(params.OutputStructs[z]);
+                this.OutputStructs.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CheckTransformation request structure.
  * @class
  */
@@ -3217,6 +3402,7 @@ module.exports = {
     DeleteTargetResponse: DeleteTargetResponse,
     Extraction: Extraction,
     TargetBrief: TargetBrief,
+    DTSParams: DTSParams,
     ListRulesResponse: ListRulesResponse,
     CreateTargetResponse: CreateTargetResponse,
     CheckRuleRequest: CheckRuleRequest,
@@ -3252,7 +3438,7 @@ module.exports = {
     DeleteEventBusRequest: DeleteEventBusRequest,
     ListEventBusesRequest: ListEventBusesRequest,
     CreateTransformationResponse: CreateTransformationResponse,
-    Transform: Transform,
+    ConnectionBrief: ConnectionBrief,
     Filter: Filter,
     Connection: Connection,
     DeleteEventBusResponse: DeleteEventBusResponse,
@@ -3269,6 +3455,7 @@ module.exports = {
     DeleteTargetRequest: DeleteTargetRequest,
     CkafkaParams: CkafkaParams,
     OutputStructParam: OutputStructParam,
+    Transform: Transform,
     CheckTransformationRequest: CheckTransformationRequest,
     UpdateConnectionResponse: UpdateConnectionResponse,
     GetRuleRequest: GetRuleRequest,

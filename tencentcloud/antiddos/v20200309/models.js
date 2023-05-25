@@ -7565,6 +7565,13 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ElasticLimit = null;
 
+        /**
+         * Protection bandwidth after the plan downgrade, in Gbps. 
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.DownGradeProtect = null;
+
     }
 
     /**
@@ -7584,6 +7591,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ChannelEditionFlag = 'ChannelEditionFlag' in params ? params.ChannelEditionFlag : null;
         this.EnterpriseFlag = 'EnterpriseFlag' in params ? params.EnterpriseFlag : null;
         this.ElasticLimit = 'ElasticLimit' in params ? params.ElasticLimit : null;
+        this.DownGradeProtect = 'DownGradeProtect' in params ? params.DownGradeProtect : null;
 
     }
 }

@@ -579,7 +579,7 @@ class DescribeTopL7CacheDataRequest extends  AbstractModel {
         this.ZoneIds = null;
 
         /**
-         * Queries the top rows of data. Top 10 rows of data will be queried if this field is not specified.
+         * Top rows of data to query. Maximum value: 1000. Top 10 rows of data are queried if this field is not specified.
          * @type {number || null}
          */
         this.Limit = null;
@@ -796,6 +796,16 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.ApplyType = null;
 
+        /**
+         * Cipher suite. Values:
+<li>`loose-v2023`: Offer the highest compatibility but relatively lower security. It supports TLS 1.0-1.3.</li>
+<li>`general-v2023`: Keep a balance between the compatibility and security. It supports TLS 1.2-1.3.</li>
+<li>`strict-v2023`: Provides high security, disabling all insecure cipher suites. It supports TLS 1.2-1.3.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.CipherSuite = null;
+
     }
 
     /**
@@ -824,6 +834,99 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             }
         }
         this.ApplyType = 'ApplyType' in params ? params.ApplyType : null;
+        this.CipherSuite = 'CipherSuite' in params ? params.CipherSuite : null;
+
+    }
+}
+
+/**
+ * Active bot detection rule.
+ * @class
+ */
+class AlgDetectRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the rule.
+         * @type {number || null}
+         */
+        this.RuleID = null;
+
+        /**
+         * Name of the rule.
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * Whether to enable the rule.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Condition specified for the rule.
+         * @type {Array.<AclCondition> || null}
+         */
+        this.AlgConditions = null;
+
+        /**
+         * Validate Cookie when the condition is satisfied.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {AlgDetectSession || null}
+         */
+        this.AlgDetectSession = null;
+
+        /**
+         * Validate client behavior when the condition is satisfied.
+         * @type {Array.<AlgDetectJS> || null}
+         */
+        this.AlgDetectJS = null;
+
+        /**
+         * The update time, which is only used as an output parameter.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.AlgConditions) {
+            this.AlgConditions = new Array();
+            for (let z in params.AlgConditions) {
+                let obj = new AclCondition();
+                obj.deserialize(params.AlgConditions[z]);
+                this.AlgConditions.push(obj);
+            }
+        }
+
+        if (params.AlgDetectSession) {
+            let obj = new AlgDetectSession();
+            obj.deserialize(params.AlgDetectSession)
+            this.AlgDetectSession = obj;
+        }
+
+        if (params.AlgDetectJS) {
+            this.AlgDetectJS = new Array();
+            for (let z in params.AlgDetectJS) {
+                let obj = new AlgDetectJS();
+                obj.deserialize(params.AlgDetectJS[z]);
+                this.AlgDetectJS.push(obj);
+            }
+        }
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -1826,6 +1929,56 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribeIdentifications response structure.
+ * @class
+ */
+class DescribeIdentificationsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible sites.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The site verification information.
+         * @type {Array.<Identification> || null}
+         */
+        this.Identifications = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Identifications) {
+            this.Identifications = new Array();
+            for (let z in params.Identifications) {
+                let obj = new Identification();
+                obj.deserialize(params.Identifications[z]);
+                this.Identifications.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifySecurityPolicy request structure.
  * @class
  */
@@ -1880,26 +2033,31 @@ class ModifySecurityPolicyRequest extends  AbstractModel {
 }
 
 /**
- * N/A
+ * DescribeDDoSAttackEvent response structure.
  * @class
  */
-class Waf extends  AbstractModel {
+class DescribeDDoSAttackEventResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable WAF. Values:
-<li>`on`: Enable</li>
-<li>`off`: Disable</li>
-         * @type {string || null}
+         * List of DDoS attack data. 
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<DDoSAttackEvent> || null}
          */
-        this.Switch = null;
+        this.Data = null;
 
         /**
-         * ID of the policy
+         * Total number of query results.
          * @type {number || null}
          */
-        this.PolicyId = null;
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1910,8 +2068,17 @@ class Waf extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DDoSAttackEvent();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2368,6 +2535,130 @@ class CreateApplicationProxyResponse extends  AbstractModel {
 }
 
 /**
+ * Custom bot rules
+ * @class
+ */
+class BotUserRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * The action. Values:
+<li>`drop`: Block</li>
+<li>`monitor`: Observe</li>
+<li>`trans`: Allow</li>
+<li>`alg`: JavaScript challenge</li>
+<li>`captcha`: Managed challenge</li>
+<li>`silence`: Drop w/o response</li>
+<li>`shortdelay`: Add short latency</li>
+<li>`longdelay`: Add long latency</li>
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * The rule status. Values:
+<li>`on`: Enabled</li>
+<li>`off`: Disabled</li>Default value: `on`
+         * @type {string || null}
+         */
+        this.RuleStatus = null;
+
+        /**
+         * Details of the rule.
+         * @type {Array.<AclCondition> || null}
+         */
+        this.AclConditions = null;
+
+        /**
+         * The rule weight. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.RulePriority = null;
+
+        /**
+         * The rule ID, which is only used as an output parameter.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RuleID = null;
+
+        /**
+         * [Currently unavailable] Specify the random action and percentage.
+         * @type {Array.<BotExtendAction> || null}
+         */
+        this.ExtendActions = null;
+
+        /**
+         * The filter. Values:
+<li>`sip`: Client IP</li>
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.FreqFields = null;
+
+        /**
+         * Updated time
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * The statistical dimension. Values:
+<li>`source_to_eo`: Responses from the origin server to EdgeOne</li>
+<li>`client_to_eo`: Requests from the client to EdgeOne</li>
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.FreqScope = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.RuleStatus = 'RuleStatus' in params ? params.RuleStatus : null;
+
+        if (params.AclConditions) {
+            this.AclConditions = new Array();
+            for (let z in params.AclConditions) {
+                let obj = new AclCondition();
+                obj.deserialize(params.AclConditions[z]);
+                this.AclConditions.push(obj);
+            }
+        }
+        this.RulePriority = 'RulePriority' in params ? params.RulePriority : null;
+        this.RuleID = 'RuleID' in params ? params.RuleID : null;
+
+        if (params.ExtendActions) {
+            this.ExtendActions = new Array();
+            for (let z in params.ExtendActions) {
+                let obj = new BotExtendAction();
+                obj.deserialize(params.ExtendActions[z]);
+                this.ExtendActions.push(obj);
+            }
+        }
+        this.FreqFields = 'FreqFields' in params ? params.FreqFields : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FreqScope = 'FreqScope' in params ? params.FreqScope : null;
+
+    }
+}
+
+/**
  * ModifyOriginGroup response structure.
  * @class
  */
@@ -2457,10 +2748,12 @@ class ExceptUserRuleScope extends  AbstractModel {
 
         /**
          * The module to be activated. Values:
-<li>`waf`: Managed rules</li>
-<li>`cc`: Rate limiting rules</li>
-<li>`bot`: bot protection</li>
-Note: This field may return `null`, indicating that no valid value can be obtained.
+<li>`waf`: Tencent Cloud-managed rules</li>
+<li>`rate`: Rate limiting rules</li>
+<li>`acl`: Custom rule</li>
+<li>`cc`: CC attack defense</li>
+<li>`bot`: Bot protection</li>
+Note: this field may return `null`, indicating that no valid value is obtained.
          * @type {Array.<string> || null}
          */
         this.Modules = null;
@@ -2699,42 +2992,37 @@ class OriginInfo extends  AbstractModel {
         super();
 
         /**
-         * The origin type. Values:
+         * The origin type. Values: 
 <li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
 <li>`COS`: COS bucket address</li>
 <li>`ORIGIN_GROUP`: Origin group</li>
 <li>`AWS_S3`: AWS S3 bucket address</li>
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
          * The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Origin = null;
 
         /**
          * ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it’s not specified, it indicates that secondary origins are not used.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.BackupOrigin = null;
 
         /**
-         * Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values:
+         * Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values: 
 <li>`on`: Enable private authentication.</li>
 <li>`off`: Disable private authentication.</li>If this field is not specified, the default value `off` is used.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.PrivateAccess = null;
 
         /**
          * The private authentication parameters. This field is valid when `PrivateAccess=on`.
-Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<PrivateParameter> || null}
          */
         this.PrivateParameters = null;
@@ -2802,11 +3090,12 @@ Enter the IDs of sites to query. The maximum query period is determined by the <
 
         /**
          * Filters
-<li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-<li>`domain`<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-<li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
-<li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-<li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+<li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
+<li>`domain`:<br>u2003u2003 Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+<li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>u2003u2003 `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
+<li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
+<li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
+<li>`tagValue`:<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -2993,32 +3282,24 @@ class ModifyZoneResponse extends  AbstractModel {
 }
 
 /**
- * WAF rule
+ * Security template settings
  * @class
  */
-class WafRule extends  AbstractModel {
+class TemplateConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable managed rules. Values:
-<li>`on`: Enable</li>
-<li>`off`: Disable</li>
+         * The template ID.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.TemplateId = null;
 
         /**
-         * IDs of the managed rules in the Block mode. You can obtain more details from [DescribeSecurityGroupManagedRules](https://tcloud4api.woa.com/document/product/1657/80807?!preview&!document=1).
-         * @type {Array.<number> || null}
+         * The template name.
+         * @type {string || null}
          */
-        this.BlockRuleIDs = null;
-
-        /**
-         * IDs of the managed rules in the Observe mode. You can obtain more details from [DescribeSecurityGroupManagedRules](https://tcloud4api.woa.com/document/product/1657/80807?!preview&!document=1).
-         * @type {Array.<number> || null}
-         */
-        this.ObserveRuleIDs = null;
+        this.TemplateName = null;
 
     }
 
@@ -3029,9 +3310,98 @@ class WafRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.BlockRuleIDs = 'BlockRuleIDs' in params ? params.BlockRuleIDs : null;
-        this.ObserveRuleIDs = 'ObserveRuleIDs' in params ? params.ObserveRuleIDs : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+
+    }
+}
+
+/**
+ * Validate Cookie.
+ * @class
+ */
+class AlgDetectSession extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Method to validate Cookie.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The validation mode. Values:
+<li>`detect`: Validate only</li>
+<li>`update_detect` (default): Update Cookie and validate</li>
+         * @type {string || null}
+         */
+        this.DetectMode = null;
+
+        /**
+         * Whether to enable Cookie-based session check. The default value is `off`. Values:
+<li>`off`: Disable</li>
+<li>`on`: Enable</li>
+         * @type {string || null}
+         */
+        this.SessionAnalyzeSwitch = null;
+
+        /**
+         * The period threshold for validating the result "No Cookie/Cookie expired" in seconds. Value range: 5-3600. Default value: 10.
+         * @type {number || null}
+         */
+        this.InvalidStatTime = null;
+
+        /**
+         * The number of times for the result "No Cookie/Cookie expired" occurred in the specified period. Value range: 1-100000000. Default value: 300.
+         * @type {number || null}
+         */
+        this.InvalidThreshold = null;
+
+        /**
+         * Cookie validation results.
+         * @type {Array.<AlgDetectResult> || null}
+         */
+        this.AlgDetectResults = null;
+
+        /**
+         * Cookie-based session check results.
+         * @type {Array.<AlgDetectResult> || null}
+         */
+        this.SessionBehaviors = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DetectMode = 'DetectMode' in params ? params.DetectMode : null;
+        this.SessionAnalyzeSwitch = 'SessionAnalyzeSwitch' in params ? params.SessionAnalyzeSwitch : null;
+        this.InvalidStatTime = 'InvalidStatTime' in params ? params.InvalidStatTime : null;
+        this.InvalidThreshold = 'InvalidThreshold' in params ? params.InvalidThreshold : null;
+
+        if (params.AlgDetectResults) {
+            this.AlgDetectResults = new Array();
+            for (let z in params.AlgDetectResults) {
+                let obj = new AlgDetectResult();
+                obj.deserialize(params.AlgDetectResults[z]);
+                this.AlgDetectResults.push(obj);
+            }
+        }
+
+        if (params.SessionBehaviors) {
+            this.SessionBehaviors = new Array();
+            for (let z in params.SessionBehaviors) {
+                let obj = new AlgDetectResult();
+                obj.deserialize(params.SessionBehaviors[z]);
+                this.SessionBehaviors.push(obj);
+            }
+        }
 
     }
 }
@@ -3184,30 +3554,33 @@ class CreateRuleResponse extends  AbstractModel {
 }
 
 /**
- * DescribeIdentifications response structure.
+ * Bot extended actions
  * @class
  */
-class DescribeIdentificationsResponse extends  AbstractModel {
+class BotExtendAction extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of eligible sites.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * The site verification information.
-         * @type {Array.<Identification> || null}
-         */
-        this.Identifications = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The action. Values:
+<li>`monitor`: Observe</li>
+<li>`trans`: Allow</li>
+<li>`alg`: JavaScript challenge</li>
+<li>`captcha`: Managed challenge</li>
+<li>`random`: Weighted random. Actions are executed based on the percentage specified in `ExtendActions`.</li>
+<li>`silence`: Drop w/o response</li>
+<li>`shortdelay`: Add short latency</li>
+<li>`longdelay`: Add long latency</li>
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Action = null;
+
+        /**
+         * The probability for triggering the action. Value range: 0-100.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Percent = null;
 
     }
 
@@ -3218,17 +3591,8 @@ class DescribeIdentificationsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Identifications) {
-            this.Identifications = new Array();
-            for (let z in params.Identifications) {
-                let obj = new Identification();
-                obj.deserialize(params.Identifications[z]);
-                this.Identifications.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
 
     }
 }
@@ -3788,6 +4152,11 @@ class AclCondition extends  AbstractModel {
 <li>`header`: Request header</li>
 <li>`app_proto`: Application layer protocol</li>
 <li>`sip_proto`: Network layer protocol</li>
+<li>`uabot`: UA rules (only available in custom bot rules)</li>
+<li>`idcid`: IDC rules (only available in custom bot rules)</li>
+<li>`sipbot`: Search engine rules (only available in custom bot rules)</li>
+<li>`portrait`: Client reputation (only available in custom bot rules)</li>
+<li>`header_seq`: Header sequence (only available in custom bot rules)</li>
          * @type {string || null}
          */
         this.MatchFrom = null;
@@ -4906,6 +5275,118 @@ class RulesSettingAction extends  AbstractModel {
 }
 
 /**
+ * Information of the DDoS attacker
+ * @class
+ */
+class DDoSAttackEvent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The event ID.
+         * @type {string || null}
+         */
+        this.EventId = null;
+
+        /**
+         * The attack type.
+         * @type {string || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * The attack status.
+         * @type {number || null}
+         */
+        this.AttackStatus = null;
+
+        /**
+         * The maximum attack bandwidth.
+         * @type {number || null}
+         */
+        this.AttackMaxBandWidth = null;
+
+        /**
+         * The peak attack packet rate.
+         * @type {number || null}
+         */
+        this.AttackPacketMaxRate = null;
+
+        /**
+         * The attack start time recorded in seconds.
+         * @type {number || null}
+         */
+        this.AttackStartTime = null;
+
+        /**
+         * The attack end time recorded in seconds.
+         * @type {number || null}
+         */
+        this.AttackEndTime = null;
+
+        /**
+         * The DDoS policy ID. 
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * The site ID. 
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Geolocation scope. Values: 
+<li>`overseas`: Regions outside the Chinese mainland</li>
+<li>`mainland`: Chinese mainland</li>
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * The blocking time of a DDoS attack. 
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {Array.<DDoSBlockData> || null}
+         */
+        this.DDoSBlockData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.AttackStatus = 'AttackStatus' in params ? params.AttackStatus : null;
+        this.AttackMaxBandWidth = 'AttackMaxBandWidth' in params ? params.AttackMaxBandWidth : null;
+        this.AttackPacketMaxRate = 'AttackPacketMaxRate' in params ? params.AttackPacketMaxRate : null;
+        this.AttackStartTime = 'AttackStartTime' in params ? params.AttackStartTime : null;
+        this.AttackEndTime = 'AttackEndTime' in params ? params.AttackEndTime : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Area = 'Area' in params ? params.Area : null;
+
+        if (params.DDoSBlockData) {
+            this.DDoSBlockData = new Array();
+            for (let z in params.DDoSBlockData) {
+                let obj = new DDoSBlockData();
+                obj.deserialize(params.DDoSBlockData[z]);
+                this.DDoSBlockData.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * The client IP header configuration
  * @class
  */
@@ -5488,30 +5969,51 @@ class ModifyZoneSettingResponse extends  AbstractModel {
 }
 
 /**
- * DescribeZones response structure.
+ * Validate client behavior.
  * @class
  */
-class DescribeZonesResponse extends  AbstractModel {
+class AlgDetectJS extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Number of eligible sites.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Details of sites
-         * @type {Array.<Zone> || null}
-         */
-        this.Zones = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * Method to validate client behavior.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * Proof-of-work strength. Values:
+<li>`low` (default): Low</li>
+<li>`middle`: Medium</li>
+<li>`high`: High</li>
+         * @type {string || null}
+         */
+        this.WorkLevel = null;
+
+        /**
+         * Implement a delay before executing JS in milliseconds. Value range: 0-1000. Default value: 500.
+         * @type {number || null}
+         */
+        this.ExecuteMode = null;
+
+        /**
+         * The period threshold for validating the result "Client JS disabled" in seconds. Value range: 5-3600. Default value: 10.
+         * @type {number || null}
+         */
+        this.InvalidStatTime = null;
+
+        /**
+         * The number of times for the result "Client JS disabled" occurred in the specified period. Value range: 1-100000000. Default value: 30.
+         * @type {number || null}
+         */
+        this.InvalidThreshold = null;
+
+        /**
+         * Client behavior validation results.
+         * @type {Array.<AlgDetectResult> || null}
+         */
+        this.AlgDetectResults = null;
 
     }
 
@@ -5522,17 +6024,20 @@ class DescribeZonesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.WorkLevel = 'WorkLevel' in params ? params.WorkLevel : null;
+        this.ExecuteMode = 'ExecuteMode' in params ? params.ExecuteMode : null;
+        this.InvalidStatTime = 'InvalidStatTime' in params ? params.InvalidStatTime : null;
+        this.InvalidThreshold = 'InvalidThreshold' in params ? params.InvalidThreshold : null;
 
-        if (params.Zones) {
-            this.Zones = new Array();
-            for (let z in params.Zones) {
-                let obj = new Zone();
-                obj.deserialize(params.Zones[z]);
-                this.Zones.push(obj);
+        if (params.AlgDetectResults) {
+            this.AlgDetectResults = new Array();
+            for (let z in params.AlgDetectResults) {
+                let obj = new AlgDetectResult();
+                obj.deserialize(params.AlgDetectResults[z]);
+                this.AlgDetectResults.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5594,7 +6099,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Cname = null;
 
         /**
-         * 
+         * Ownership verification status. Values: <li>`pending`: Pending verification</li> <li>`finished`: Verified</li>	
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.IdentificationStatus = null;
@@ -5649,6 +6155,80 @@ class UpdateOriginProtectionIPWhitelistRequest extends  AbstractModel {
             return;
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+
+    }
+}
+
+/**
+ * The settings of the rate limiting template
+ * @class
+ */
+class RateLimitTemplateDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The mode. Values:
+<li>`sup_loose`: Super loose</li>
+<li>`loose`: Loose</li>
+<li>`emergency`: Emergency</li>
+<li>`normal`: Moderate</li>
+<li>`strict`: Strict</li>
+<li>`close`: Off</li>
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * The unique ID.
+         * @type {number || null}
+         */
+        this.ID = null;
+
+        /**
+         * The action. Values:
+<li>`alg`: JavaScript challenge</li>
+<li>`monitor`: Observe</li>
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * The blocking duration, in seconds. Value range: 0-172800.
+Note: This field may return `null`, indicating that no valid value can be obtained.
+         * @type {number || null}
+         */
+        this.PunishTime = null;
+
+        /**
+         * The request threshold. Value range: 0-4294967294.
+         * @type {number || null}
+         */
+        this.Threshold = null;
+
+        /**
+         * The statistical period. Value range: 0-120 seconds.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.PunishTime = 'PunishTime' in params ? params.PunishTime : null;
+        this.Threshold = 'Threshold' in params ? params.Threshold : null;
+        this.Period = 'Period' in params ? params.Period : null;
 
     }
 }
@@ -6406,23 +6986,34 @@ class DescribeTopL7AnalysisDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * The query metric. Values:
-<li>`l7Flow_outFlux_country`: Country the request came from;</li>
-<li>`l7Flow_outFlux_statusCode`: Status code of the request;</li>
-<li>`l7Flow_outFlux_domain`: Domain name of the request;</li>
-<li>`l7Flow_outFlux_url`: URL of the request;</li>
-<li>`l7Flow_outFlux_resourceType`: Resource type;</li>
-<li>`l7Flow_outFlux_sip`: Client IP;</li>
-<li>`l7Flow_outFlux_referers`: Refer header;</li>
-<li>`l7Flow_outFlux_ua_device`: Device type;</li>
-<li>`l7Flow_outFlux_ua_browser`: Browser type;</li>
-<li>`l7Flow_outFlux_us_os`: OS type;</li>
+         * The metric to query. Values: 
+<li>`l7Flow_outFlux_country`: Traffic by country/region</li>
+<li>`l7Flow_outFlux_statusCode`: Traffic by status code</li>
+<li>`l7Flow_outFlux_domain`: Traffic by domain name</li>
+<li>`l7Flow_outFlux_url`: Traffic by URL</li>
+<li>`l7Flow_outFlux_resourceType`: Traffic by resource type</li>
+<li>`l7Flow_outFlux_sip`: Traffic by client IP</li>
+<li>`l7Flow_outFlux_referers`: Traffic by referer</li>
+<li>`l7Flow_outFlux_ua_device`: Traffic by device</li>
+<li>`l7Flow_outFlux_ua_browser`: Traffic by browser</li>
+<li>`l7Flow_outFlux_us_os`: Traffic by operating system</li>
+<li>`l7Flow_request_country`: Requests by country/region</li>
+<li>`l7Flow_request_statusCode`: Requests by status code</li>
+<li>`l7Flow_request_domain`: Requests by domain name</li>
+<li>`l7Flow_request_url`: Requests by URL</li>
+<li>`l7Flow_request_resourceType`: Requests by resource type</li>
+<li>`l7Flow_request_sip`: Requests by client IP</li>
+<li>`l7Flow_request_referer`: Requests by referer</li>
+<li>`l7Flow_request_ua_device`: Requests by device</li>
+<li>`l7Flow_request_ua_browser`: Requests by browser</li>
+<li>`l7Flow_request_us_os`: Requests by operating system</li>
+
          * @type {string || null}
          */
         this.MetricName = null;
 
         /**
-         * List of sites to be queried. All sites will be selected if this field is not specified.
+         * (Required) List of sites. No query results are returned if this field is not specified.
          * @type {Array.<string> || null}
          */
         this.ZoneIds = null;
@@ -6737,6 +7328,19 @@ Note: This field may return `null`, indicating that no valid value can be obtain
          */
         this.Grpc = null;
 
+        /**
+         * Image optimization configuration. 
+Note: This field may return `null`, indicating that no valid value was found.
+         * @type {ImageOptimize || null}
+         */
+        this.ImageOptimize = null;
+
+        /**
+         * 
+         * @type {AccelerateMainland || null}
+         */
+        this.AccelerateMainland = null;
+
     }
 
     /**
@@ -6857,6 +7461,18 @@ Note: This field may return `null`, indicating that no valid value can be obtain
             this.Grpc = obj;
         }
 
+        if (params.ImageOptimize) {
+            let obj = new ImageOptimize();
+            obj.deserialize(params.ImageOptimize)
+            this.ImageOptimize = obj;
+        }
+
+        if (params.AccelerateMainland) {
+            let obj = new AccelerateMainland();
+            obj.deserialize(params.AccelerateMainland)
+            this.AccelerateMainland = obj;
+        }
+
     }
 }
 
@@ -6960,11 +7576,15 @@ class DescribeOverviewL7DataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * The query metric. Values:
-<li>`l7Flow_outFlux`: Access traffic;</li>
-<li>`l7Flow_request`: Access requests;</li>
-<li>`l7Flow_outBandwidth`: Access bandwidth.</li>
-<li>`l7Flow_hit_outFlux`: Cache hit traffic.</li>
+         * The metric to query. Values:
+<li>`l7Flow_outFlux`: Traffic used for EdegOne responses</li>
+<li>`l7Flow_inFlux`: Traffic used for EdegOne requests</li>
+<li>`l7Flow_outBandwidth`: Bandwidth used for EdegOne responses</li>
+<li>`l7Flow_inBandwidth`: Bandwidth used for EdegOne requests</li>
+<li>`l7Flow_hit_outFlux`: Traffic used for cache hit</li>
+<li>`l7Flow_request`: Access requests</li>
+<li>`l7Flow_flux`: Upstream and downstream traffic used for client access</li>
+<li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
          * @type {Array.<string> || null}
          */
         this.MetricNames = null;
@@ -7004,8 +7624,9 @@ Enter the IDs of sites to query. The maximum query period is determined by the <
 
         /**
          * Filters
-<li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-<li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+<li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
+<li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
+<li>`tagValue`<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
          * @type {Array.<QueryCondition> || null}
          */
         this.Filters = null;
@@ -7318,6 +7939,48 @@ class SpeedTestingDetailData extends  AbstractModel {
                 this.DistrictStatistics.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DDoS blocking details
+ * @class
+ */
+class DDoSBlockData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The start time recorded in UNIX timestamp.
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * The end time recorded in UNIX timestamp. `0` indicates the blocking is ongoing.
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * The regions blocked.
+         * @type {string || null}
+         */
+        this.BlockArea = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.BlockArea = 'BlockArea' in params ? params.BlockArea : null;
 
     }
 }
@@ -7746,6 +8409,50 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * WAF rule
+ * @class
+ */
+class WafRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable managed rules. Values:
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * IDs of the rules to be disabled.
+         * @type {Array.<number> || null}
+         */
+        this.BlockRuleIDs = null;
+
+        /**
+         * IDs of the rules to be executed in Observe mode.
+         * @type {Array.<number> || null}
+         */
+        this.ObserveRuleIDs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.BlockRuleIDs = 'BlockRuleIDs' in params ? params.BlockRuleIDs : null;
+        this.ObserveRuleIDs = 'ObserveRuleIDs' in params ? params.ObserveRuleIDs : null;
+
+    }
+}
+
+/**
  * Security configuration
  * @class
  */
@@ -8095,10 +8802,14 @@ class DescribeTimingL7AnalysisDataRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * The list of metrics. Values:
-<li>`l7Flow_outFlux`: Access traffic;</li>
-<li>`l7Flow_request`: Access requests;</li>
-<li>`l7Flow_outBandwidth`: Access bandwidth.</li>
+         * The metric to query. Values:
+<li>`l7Flow_outFlux`: Traffic used for EdgeOne responses</li>
+<li>`l7Flow_inFlux`: Traffic used for EdgeOne requests</li>
+<li>`l7Flow_outBandwidth`: Bandwidth used for EdgeOne responses</li>
+<li>`l7Flow_inBandwidth`: Bandwidth used for EdgeOne requests</li>
+<li>`l7Flow_request`: Access requests</li>
+<li>`l7Flow_flux`: Upstream and downstream traffic used for client access</li>
+<li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
          * @type {Array.<string> || null}
          */
         this.MetricNames = null;
@@ -8313,30 +9024,24 @@ class DescribeDefaultCertificatesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeAliasDomains response structure.
+ * BindZoneToPlan request structure.
  * @class
  */
-class DescribeAliasDomainsResponse extends  AbstractModel {
+class BindZoneToPlanRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Total eligible alias domain names.
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * Information of the eligible alias domain names.
-         * @type {Array.<AliasDomain> || null}
-         */
-        this.AliasDomains = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * ID of the site to be bound.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ZoneId = null;
+
+        /**
+         * ID of the target plan.
+         * @type {string || null}
+         */
+        this.PlanId = null;
 
     }
 
@@ -8347,17 +9052,8 @@ class DescribeAliasDomainsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.AliasDomains) {
-            this.AliasDomains = new Array();
-            for (let z in params.AliasDomains) {
-                let obj = new AliasDomain();
-                obj.deserialize(params.AliasDomains[z]);
-                this.AliasDomains.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.PlanId = 'PlanId' in params ? params.PlanId : null;
 
     }
 }
@@ -8835,6 +9531,43 @@ class SpeedTestingQuota extends  AbstractModel {
         }
         this.TotalTestRuns = 'TotalTestRuns' in params ? params.TotalTestRuns : null;
         this.AvailableTestRuns = 'AvailableTestRuns' in params ? params.AvailableTestRuns : null;
+
+    }
+}
+
+/**
+ * N/A
+ * @class
+ */
+class Waf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable WAF. Values:
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * ID of the policy
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -9468,24 +10201,48 @@ The original configuration will apply if this field is not specified.
 }
 
 /**
- * Security template settings
+ * DownloadL4Logs request structure.
  * @class
  */
-class TemplateConfig extends  AbstractModel {
+class DownloadL4LogsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The template ID.
+         * The start time.
          * @type {string || null}
          */
-        this.TemplateId = null;
+        this.StartTime = null;
 
         /**
-         * The template name.
+         * The end time.
          * @type {string || null}
          */
-        this.TemplateName = null;
+        this.EndTime = null;
+
+        /**
+         * List of sites to be queried. All sites will be selected if this field is not specified.
+         * @type {Array.<string> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * List of L4 proxy IDs.
+         * @type {Array.<string> || null}
+         */
+        this.ProxyIds = null;
+
+        /**
+         * Limit on paginated queries. Default value: 20. Maximum value: 1000.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The page offset. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -9496,8 +10253,12 @@ class TemplateConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+        this.ProxyIds = 'ProxyIds' in params ? params.ProxyIds : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -9639,6 +10400,13 @@ class Identification extends  AbstractModel {
         this.ZoneName = null;
 
         /**
+         * The subdomain name to be verified. To verify the ownership of a site, leave it blank.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
          * The verification status. Values:
 <li>`pending`: The verification is ongoing.</li>
 <li>`finished`: The verification completed.</li>
@@ -9675,6 +10443,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
         this.Status = 'Status' in params ? params.Status : null;
 
         if (params.Ascription) {
@@ -9813,6 +10582,77 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * DescribePurgeTasks request structure.
+ * @class
+ */
+class DescribePurgeTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Disused. Use "zone-id" in "Filters" instead.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Start time of the query.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * End time of the query.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Offset for paginated queries. Default value: `0`.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * Filter criteria. Each filter criteria can have up to 20 entries. <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt and tag1<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.<li>`type`:<br>   Filter by <strong>purging mode</strong> (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge by URL.<br>   `purge_prefix`: Purge by prefix.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge by hostname.<br>   `purge_cache_tag`: Purge by cache tag.</li>
+         * @type {Array.<AdvancedFilter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AdvancedFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeWebProtectionClientIpList response structure.
  * @class
  */
@@ -9915,32 +10755,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyAliasDomainStatus request structure.
+ * Image optimization configuration.
  * @class
  */
-class ModifyAliasDomainStatusRequest extends  AbstractModel {
+class ImageOptimize extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The site ID.
+         * Whether to enable configuration. Values: 
+<li>`on`: Enable</li>
+<li>`off`: Disable</li>
          * @type {string || null}
          */
-        this.ZoneId = null;
-
-        /**
-         * Status of the alias domain name. Values:
-<li>`false`: Enable the alias domain name.</li>
-<li>`true`: Disable the alias domain name.</li>
-         * @type {boolean || null}
-         */
-        this.Paused = null;
-
-        /**
-         * The alias domain name you want to modify its status. If it is left empty, the modify operation is not performed.
-         * @type {Array.<string> || null}
-         */
-        this.AliasNames = null;
+        this.Switch = null;
 
     }
 
@@ -9951,9 +10779,7 @@ class ModifyAliasDomainStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Paused = 'Paused' in params ? params.Paused : null;
-        this.AliasNames = 'AliasNames' in params ? params.AliasNames : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -10744,59 +11570,18 @@ Note: This field may return `null`, indicating that no valid value can be obtain
 }
 
 /**
- * The settings of the rate limiting template
+ * 
  * @class
  */
-class RateLimitTemplateDetail extends  AbstractModel {
+class AccelerateMainland extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The mode. Values:
-<li>`sup_loose`: Super loose</li>
-<li>`loose`: Loose</li>
-<li>`emergency`: Emergency</li>
-<li>`normal`: Moderate</li>
-<li>`strict`: Strict</li>
-<li>`close`: Off</li>
-Note: This field may return `null`, indicating that no valid value can be obtained.
+         * 
          * @type {string || null}
          */
-        this.Mode = null;
-
-        /**
-         * The unique ID.
-         * @type {number || null}
-         */
-        this.ID = null;
-
-        /**
-         * The action. Values:
-<li>`alg`: JavaScript challenge</li>
-<li>`monitor`: Observe</li>
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {string || null}
-         */
-        this.Action = null;
-
-        /**
-         * The blocking duration, in seconds. Value range: 0-172800.
-Note: This field may return `null`, indicating that no valid value can be obtained.
-         * @type {number || null}
-         */
-        this.PunishTime = null;
-
-        /**
-         * The request threshold. Value range: 0-4294967294.
-         * @type {number || null}
-         */
-        this.Threshold = null;
-
-        /**
-         * The statistical period. Value range: 0-120 seconds.
-         * @type {number || null}
-         */
-        this.Period = null;
+        this.Switch = null;
 
     }
 
@@ -10807,12 +11592,7 @@ Note: This field may return `null`, indicating that no valid value can be obtain
         if (!params) {
             return;
         }
-        this.Mode = 'Mode' in params ? params.Mode : null;
-        this.ID = 'ID' in params ? params.ID : null;
-        this.Action = 'Action' in params ? params.Action : null;
-        this.PunishTime = 'PunishTime' in params ? params.PunishTime : null;
-        this.Threshold = 'Threshold' in params ? params.Threshold : null;
-        this.Period = 'Period' in params ? params.Period : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -11203,7 +11983,7 @@ class CreatePlanForZoneRequest extends  AbstractModel {
 <li>`ent_cm`: Enterprise plan that supports content delivery network inside the Chinese mainland.</li>
 <li>`ent_cm_with_bot`: Enterprise plan that supports content delivery network inside the Chinese mainland and bot management.</li>
 <li>`ent_global`: Enterprise plan that supports content delivery network over the globe.</li>
-<li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>To get the available plan options for your account, view the output from <a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>.
+<li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>To get the available plan options for your account, view the output from <a href="https://intl.cloud.tencent.com/document/product/1552/80606?from_cn_redirect=1">DescribeAvailablePlans</a>.
          * @type {string || null}
          */
         this.PlanType = null;
@@ -11219,6 +11999,50 @@ class CreatePlanForZoneRequest extends  AbstractModel {
         }
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.PlanType = 'PlanType' in params ? params.PlanType : null;
+
+    }
+}
+
+/**
+ * ModifyAliasDomainStatus request structure.
+ * @class
+ */
+class ModifyAliasDomainStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The site ID.
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * Status of the alias domain name. Values:
+<li>`false`: Enable the alias domain name.</li>
+<li>`true`: Disable the alias domain name.</li>
+         * @type {boolean || null}
+         */
+        this.Paused = null;
+
+        /**
+         * The alias domain name you want to modify its status. If it is left empty, the modify operation is not performed.
+         * @type {Array.<string> || null}
+         */
+        this.AliasNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Paused = 'Paused' in params ? params.Paused : null;
+        this.AliasNames = 'AliasNames' in params ? params.AliasNames : null;
 
     }
 }
@@ -12053,7 +12877,7 @@ class Action extends  AbstractModel {
         super();
 
         /**
-         * Common feature operation. Values:
+         * Common operation. Values:
 <li>`AccessUrlRedirect`: Access URL rewrite</li>
 <li>`UpstreamUrlRedirect`: Origin-pull URL rewrite</li>
 <li>`QUIC`: QUIC</li>
@@ -12074,7 +12898,7 @@ class Action extends  AbstractModel {
 <li>`Compression`: Smart compression</li>
 <li>`Hsts`</li>
 <li>`ClientIpHeader`</li>
-<li>`TlsVersion`</li>
+<li>`SslTlsSecureConf`</li>
 <li>`OcspStapling`</li>
 <li>`Http2`: HTTP/2 access</li>
 <li>`UpstreamFollowRedirect`: Follow origin redirect</li>
@@ -13798,24 +14622,30 @@ class NormalAction extends  AbstractModel {
 }
 
 /**
- * BindZoneToPlan request structure.
+ * DescribeAliasDomains response structure.
  * @class
  */
-class BindZoneToPlanRequest extends  AbstractModel {
+class DescribeAliasDomainsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ID of the site to be bound.
-         * @type {string || null}
+         * Total eligible alias domain names.
+         * @type {number || null}
          */
-        this.ZoneId = null;
+        this.TotalCount = null;
 
         /**
-         * ID of the target plan.
+         * Information of the eligible alias domain names.
+         * @type {Array.<AliasDomain> || null}
+         */
+        this.AliasDomains = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.PlanId = null;
+        this.RequestId = null;
 
     }
 
@@ -13826,8 +14656,17 @@ class BindZoneToPlanRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.PlanId = 'PlanId' in params ? params.PlanId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.AliasDomains) {
+            this.AliasDomains = new Array();
+            for (let z in params.AliasDomains) {
+                let obj = new AliasDomain();
+                obj.deserialize(params.AliasDomains[z]);
+                this.AliasDomains.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14436,8 +15275,8 @@ class DescribeOriginGroupRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * Filter criteria. Each filter criteria can have up to 20 entries.
-<li>`zone-id`<br>   Filter by <strong>site ID</strong>, such as zone-20hzkd4rdmy0<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`origin-group-id`:<br>   Filter by <strong>origin group ID</strong>, such as origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`origin-group-name`:<br>   Filter by <strong>origin group name</strong><br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one origin group name allowed in a query)
+         * Filters. Each filter can have up to 20 entries. See below for details:
+<li>`zone-id`<br>   Filter by the specified <strong>site ID</strong>, such as zone-20hzkd4rdmy0<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`origin-group-id`:<br>   Filter by the specified <strong>origin group ID</strong>, such as origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`origin-group-name`:<br>   Filter by the specified <strong>origin group name</strong><br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one origin group name allowed in a query)</li>
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -15127,6 +15966,56 @@ class DescribeRulesSettingRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeZones response structure.
+ * @class
+ */
+class DescribeZonesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Number of eligible sites.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * Details of sites
+         * @type {Array.<Zone> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Zones) {
+            this.Zones = new Array();
+            for (let z in params.Zones) {
+                let obj = new Zone();
+                obj.deserialize(params.Zones[z]);
+                this.Zones.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16638,48 +17527,79 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * DescribePurgeTasks request structure.
+ * DescribeDDoSAttackEvent request structure.
  * @class
  */
-class DescribePurgeTasksRequest extends  AbstractModel {
+class DescribeDDoSAttackEventRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Disused. Use "zone-id" in "Filters" instead.
-         * @type {string || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * Start time of the query.
+         * Start time of the query period.
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * End time of the query.
+         * End time of the query period.
          * @type {string || null}
          */
         this.EndTime = null;
 
         /**
-         * Offset for paginated queries. Default value: `0`.
-         * @type {number || null}
+         * List of DDoS policy IDs. All policies are selected if this field is not specified.
+         * @type {Array.<number> || null}
          */
-        this.Offset = null;
+        this.PolicyIds = null;
 
         /**
-         * Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
+         * (Required) List of sites. No query results are returned if this field is not specified.
+         * @type {Array.<string> || null}
+         */
+        this.ZoneIds = null;
+
+        /**
+         * Limit on paginated queries. Default value: 20. Maximum value: 1000.
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * Filter criteria. Each filter criteria can have up to 20 entries. <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt and tag1<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.<li>`type`:<br>   Filter by <strong>purging mode</strong> (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge by URL.<br>   `purge_prefix`: Purge by prefix.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge by hostname.<br>   `purge_cache_tag`: Purge by cache tag.</li>
-         * @type {Array.<AdvancedFilter> || null}
+         * The page offset. Default value: 0.
+         * @type {number || null}
          */
-        this.Filters = null;
+        this.Offset = null;
+
+        /**
+         * Whether to display the details.
+         * @type {boolean || null}
+         */
+        this.ShowDetail = null;
+
+        /**
+         * Geolocation scope. Values: 
+<li>`overseas`: Regions outside the Chinese mainland</li>
+<li>`mainland`: Chinese mainland</li>
+<li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * The sorting field. Values: 
+<li>`MaxBandWidth`: Peak bandwidth</li>
+<li>`AttackStartTime` Start time of the attack</li>If this field is not specified, the default value `AttackStartTime` is used.
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * The sorting method. Values: 
+<Li>`asc`: Ascending</li>
+<li>`desc`: Descending</li>If this field is not specified, the default value `desc` is used.
+         * @type {string || null}
+         */
+        this.OrderType = null;
 
     }
 
@@ -16690,20 +17610,16 @@ class DescribePurgeTasksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.PolicyIds = 'PolicyIds' in params ? params.PolicyIds : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new AdvancedFilter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.ShowDetail = 'ShowDetail' in params ? params.ShowDetail : null;
+        this.Area = 'Area' in params ? params.Area : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
 
     }
 }
@@ -17057,6 +17973,13 @@ class IdentifyZoneRequest extends  AbstractModel {
          */
         this.ZoneName = null;
 
+        /**
+         * A subdomain name under the site. Specify this field if you want to verify the ownership of a subdomain name. Otherwise you can leave it blank.
+
+         * @type {string || null}
+         */
+        this.Domain = null;
+
     }
 
     /**
@@ -17067,53 +17990,44 @@ class IdentifyZoneRequest extends  AbstractModel {
             return;
         }
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
 
 /**
- * DownloadL4Logs request structure.
+ * Active bot detection results.
  * @class
  */
-class DownloadL4LogsRequest extends  AbstractModel {
+class AlgDetectResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The start time.
+         * The validation result. Values:
+<li>`invalid`: Invalid Cookie</li>
+<li>`cookie_empty`: No Cookie/Cookie expired</li>
+<li>`js_empty`: Client JS disabled</li>
+<li>`low`: Low-risk session</li>
+<li>`middle`: Medium-risk session</li>
+<li>`high`: High-risk session</li>
+<li>`timeout`: JS validation timed out</li>
+<li>`not_browser`: Invalid browser</li>
+<li>`is_bot`: Bot client</li>
          * @type {string || null}
          */
-        this.StartTime = null;
+        this.Result = null;
 
         /**
-         * The end time.
+         * The action. Values:
+<li>`drop`: Block</li>
+<li>`monitor`: Observe</li>
+<li>`silence`: Drop w/o response</li>
+<li>`shortdelay`: Add short latency</li>
+<li>`longdelay`: Add long latency</li>
          * @type {string || null}
          */
-        this.EndTime = null;
-
-        /**
-         * List of sites to be queried. All sites will be selected if this field is not specified.
-         * @type {Array.<string> || null}
-         */
-        this.ZoneIds = null;
-
-        /**
-         * List of L4 proxy IDs.
-         * @type {Array.<string> || null}
-         */
-        this.ProxyIds = null;
-
-        /**
-         * Limit on paginated queries. Default value: 20. Maximum value: 1000.
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * The page offset. Default value: 0.
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.Action = null;
 
     }
 
@@ -17124,12 +18038,8 @@ class DownloadL4LogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
-        this.ProxyIds = 'ProxyIds' in params ? params.ProxyIds : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Action = 'Action' in params ? params.Action : null;
 
     }
 }
@@ -17451,11 +18361,13 @@ class DescribeAccelerationDomainsRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * Filter criteria. Each filter criteria can have up to 20 entries. Values:
-<li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No
-<li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No
-<li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No
-<li>`backup-origin`<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No
+         * Filters. Each filter can have up to 20 entries. See below for details: 
+<li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No 
+<li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No 
+<li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No 
+<li>`backup-origin`:<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No 
+<li>`domain-cname`:<br>   <strong>Accelerated CNAME</strong><br>   Type: String<br>   Required: No 
+<li>`share-cname`:<br>   <strong> Shared CNAME</strong><br>   Type: String<br>   Required: No
          * @type {Array.<AdvancedFilter> || null}
          */
         this.Filters = null;
@@ -17962,6 +18874,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.IntelligenceRule = null;
 
+        /**
+         * Settings of the custom bot rule. If it is null, the settings that were last configured will be used.
+         * @type {Array.<BotUserRule> || null}
+         */
+        this.BotUserRules = null;
+
+        /**
+         * Active bot detection rule.
+         * @type {Array.<AlgDetectRule> || null}
+         */
+        this.AlgDetectRule = null;
+
+        /**
+         * Settings of the bot managed rule. It is only used for output.
+Note: This field may return `null`, indicating that no valid values can be obtained.
+         * @type {Array.<BotUserRule> || null}
+         */
+        this.Customizes = null;
+
     }
 
     /**
@@ -17989,6 +18920,33 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new IntelligenceRule();
             obj.deserialize(params.IntelligenceRule)
             this.IntelligenceRule = obj;
+        }
+
+        if (params.BotUserRules) {
+            this.BotUserRules = new Array();
+            for (let z in params.BotUserRules) {
+                let obj = new BotUserRule();
+                obj.deserialize(params.BotUserRules[z]);
+                this.BotUserRules.push(obj);
+            }
+        }
+
+        if (params.AlgDetectRule) {
+            this.AlgDetectRule = new Array();
+            for (let z in params.AlgDetectRule) {
+                let obj = new AlgDetectRule();
+                obj.deserialize(params.AlgDetectRule[z]);
+                this.AlgDetectRule.push(obj);
+            }
+        }
+
+        if (params.Customizes) {
+            this.Customizes = new Array();
+            for (let z in params.Customizes) {
+                let obj = new BotUserRule();
+                obj.deserialize(params.Customizes[z]);
+                this.Customizes.push(obj);
+            }
         }
 
     }
@@ -18112,6 +19070,7 @@ module.exports = {
     CreateCredentialResponse: CreateCredentialResponse,
     DeleteApplicationProxyResponse: DeleteApplicationProxyResponse,
     Https: Https,
+    AlgDetectRule: AlgDetectRule,
     SecEntryValue: SecEntryValue,
     DescribeZonesRequest: DescribeZonesRequest,
     DiffIPWhitelist: DiffIPWhitelist,
@@ -18128,13 +19087,15 @@ module.exports = {
     ModifySecurityWafGroupPolicyRequest: ModifySecurityWafGroupPolicyRequest,
     DescribeZoneSettingRequest: DescribeZoneSettingRequest,
     DescribeClientRuleListResponse: DescribeClientRuleListResponse,
+    DescribeIdentificationsResponse: DescribeIdentificationsResponse,
     ModifySecurityPolicyRequest: ModifySecurityPolicyRequest,
-    Waf: Waf,
+    DescribeDDoSAttackEventResponse: DescribeDDoSAttackEventResponse,
     ModifyApplicationProxyRuleStatusResponse: ModifyApplicationProxyRuleStatusResponse,
     DescribeClientRuleListRequest: DescribeClientRuleListRequest,
     ModifyZoneSettingRequest: ModifyZoneSettingRequest,
     RuleRewriteActionParams: RuleRewriteActionParams,
     CreateApplicationProxyResponse: CreateApplicationProxyResponse,
+    BotUserRule: BotUserRule,
     ModifyOriginGroupResponse: ModifyOriginGroupResponse,
     DeleteAccelerationDomainsRequest: DeleteAccelerationDomainsRequest,
     ExceptUserRuleScope: ExceptUserRuleScope,
@@ -18148,12 +19109,13 @@ module.exports = {
     DescribeHostsSettingResponse: DescribeHostsSettingResponse,
     ModifyZoneStatusResponse: ModifyZoneStatusResponse,
     ModifyZoneResponse: ModifyZoneResponse,
-    WafRule: WafRule,
+    TemplateConfig: TemplateConfig,
+    AlgDetectSession: AlgDetectSession,
     ModifyZoneRequest: ModifyZoneRequest,
     ModifyApplicationProxyStatusResponse: ModifyApplicationProxyStatusResponse,
     DeleteZoneResponse: DeleteZoneResponse,
     CreateRuleResponse: CreateRuleResponse,
-    DescribeIdentificationsResponse: DescribeIdentificationsResponse,
+    BotExtendAction: BotExtendAction,
     CreatePurgeTaskResponse: CreatePurgeTaskResponse,
     DeleteApplicationProxyRuleResponse: DeleteApplicationProxyRuleResponse,
     ReclaimAliasDomainRequest: ReclaimAliasDomainRequest,
@@ -18181,6 +19143,7 @@ module.exports = {
     DescribeRulesSettingResponse: DescribeRulesSettingResponse,
     RuleExtraParameter: RuleExtraParameter,
     RulesSettingAction: RulesSettingAction,
+    DDoSAttackEvent: DDoSAttackEvent,
     ClientIpHeader: ClientIpHeader,
     DescribeDDoSAttackTopDataRequest: DescribeDDoSAttackTopDataRequest,
     Quic: Quic,
@@ -18192,9 +19155,10 @@ module.exports = {
     TopDataRecord: TopDataRecord,
     AclConfig: AclConfig,
     ModifyZoneSettingResponse: ModifyZoneSettingResponse,
-    DescribeZonesResponse: DescribeZonesResponse,
+    AlgDetectJS: AlgDetectJS,
     AccelerationDomain: AccelerationDomain,
     UpdateOriginProtectionIPWhitelistRequest: UpdateOriginProtectionIPWhitelistRequest,
+    RateLimitTemplateDetail: RateLimitTemplateDetail,
     Origin: Origin,
     WafConfig: WafConfig,
     DescribeSpeedTestingDetailsResponse: DescribeSpeedTestingDetailsResponse,
@@ -18221,6 +19185,7 @@ module.exports = {
     WebSocket: WebSocket,
     DescribeWebProtectionTopDataRequest: DescribeWebProtectionTopDataRequest,
     SpeedTestingDetailData: SpeedTestingDetailData,
+    DDoSBlockData: DDoSBlockData,
     VanityNameServers: VanityNameServers,
     RuleItem: RuleItem,
     ModifySecurityWafGroupPolicyResponse: ModifySecurityWafGroupPolicyResponse,
@@ -18228,6 +19193,7 @@ module.exports = {
     DescribeWebManagedRulesDataRequest: DescribeWebManagedRulesDataRequest,
     RuleChoicePropertiesItem: RuleChoicePropertiesItem,
     DescribeWebManagedRulesDataResponse: DescribeWebManagedRulesDataResponse,
+    WafRule: WafRule,
     SecurityConfig: SecurityConfig,
     CreateSpeedTestingRequest: CreateSpeedTestingRequest,
     MaxAge: MaxAge,
@@ -18238,7 +19204,7 @@ module.exports = {
     CreatePrefetchTaskResponse: CreatePrefetchTaskResponse,
     NoCache: NoCache,
     DescribeDefaultCertificatesRequest: DescribeDefaultCertificatesRequest,
-    DescribeAliasDomainsResponse: DescribeAliasDomainsResponse,
+    BindZoneToPlanRequest: BindZoneToPlanRequest,
     DescribeWebProtectionHitRuleDetailRequest: DescribeWebProtectionHitRuleDetailRequest,
     IPWhitelist: IPWhitelist,
     DDoS: DDoS,
@@ -18246,6 +19212,7 @@ module.exports = {
     PlanInfo: PlanInfo,
     DescribeTimingL7CacheDataRequest: DescribeTimingL7CacheDataRequest,
     SpeedTestingQuota: SpeedTestingQuota,
+    Waf: Waf,
     ModifyRuleResponse: ModifyRuleResponse,
     CheckCertificateResponse: CheckCertificateResponse,
     AscriptionInfo: AscriptionInfo,
@@ -18258,16 +19225,17 @@ module.exports = {
     Cache: Cache,
     ForceRedirect: ForceRedirect,
     ModifyApplicationProxyRequest: ModifyApplicationProxyRequest,
-    TemplateConfig: TemplateConfig,
+    DownloadL4LogsRequest: DownloadL4LogsRequest,
     CodeAction: CodeAction,
     CreateReplayTaskRequest: CreateReplayTaskRequest,
     DescribeWebProtectionHitRuleDetailResponse: DescribeWebProtectionHitRuleDetailResponse,
     Identification: Identification,
     DescribeDDoSAttackDataRequest: DescribeDDoSAttackDataRequest,
     CachePrefresh: CachePrefresh,
+    DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     DescribeWebProtectionClientIpListResponse: DescribeWebProtectionClientIpListResponse,
     DescribeTimingL7AnalysisDataResponse: DescribeTimingL7AnalysisDataResponse,
-    ModifyAliasDomainStatusRequest: ModifyAliasDomainStatusRequest,
+    ImageOptimize: ImageOptimize,
     TopDetailData: TopDetailData,
     DescribeApplicationProxiesRequest: DescribeApplicationProxiesRequest,
     DescribeContentQuotaRequest: DescribeContentQuotaRequest,
@@ -18282,13 +19250,14 @@ module.exports = {
     ModifyZoneStatusRequest: ModifyZoneStatusRequest,
     TopEntry: TopEntry,
     SlowPostConfig: SlowPostConfig,
-    RateLimitTemplateDetail: RateLimitTemplateDetail,
+    AccelerateMainland: AccelerateMainland,
     ExceptUserRule: ExceptUserRule,
     CreateApplicationProxyRuleResponse: CreateApplicationProxyRuleResponse,
     RateLimitUserRule: RateLimitUserRule,
     SubRule: SubRule,
     DescribeLogSetsRequest: DescribeLogSetsRequest,
     CreatePlanForZoneRequest: CreatePlanForZoneRequest,
+    ModifyAliasDomainStatusRequest: ModifyAliasDomainStatusRequest,
     ClientRule: ClientRule,
     TimingDataItem: TimingDataItem,
     SpeedTestingConfig: SpeedTestingConfig,
@@ -18336,7 +19305,7 @@ module.exports = {
     ModifyApplicationProxyRuleStatusRequest: ModifyApplicationProxyRuleStatusRequest,
     AccelerateType: AccelerateType,
     NormalAction: NormalAction,
-    BindZoneToPlanRequest: BindZoneToPlanRequest,
+    DescribeAliasDomainsResponse: DescribeAliasDomainsResponse,
     CreateAccelerationDomainRequest: CreateAccelerationDomainRequest,
     FollowOrigin: FollowOrigin,
     DeleteZoneRequest: DeleteZoneRequest,
@@ -18360,6 +19329,7 @@ module.exports = {
     FailReason: FailReason,
     DescribePrefetchTasksRequest: DescribePrefetchTasksRequest,
     DescribeRulesSettingRequest: DescribeRulesSettingRequest,
+    DescribeZonesResponse: DescribeZonesResponse,
     ModifyAliasDomainResponse: ModifyAliasDomainResponse,
     LogSetInfo: LogSetInfo,
     RewriteAction: RewriteAction,
@@ -18386,14 +19356,14 @@ module.exports = {
     WafGroup: WafGroup,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
     DescribeAvailablePlansResponse: DescribeAvailablePlansResponse,
-    DescribePurgeTasksRequest: DescribePurgeTasksRequest,
+    DescribeDDoSAttackEventRequest: DescribeDDoSAttackEventRequest,
     OriginGroup: OriginGroup,
     DescribeWebProtectionTopDataResponse: DescribeWebProtectionTopDataResponse,
     VanityNameServersIps: VanityNameServersIps,
     DescribeWebManagedRulesHitRuleDetailResponse: DescribeWebManagedRulesHitRuleDetailResponse,
     DescribeWebProtectionClientIpListRequest: DescribeWebProtectionClientIpListRequest,
     IdentifyZoneRequest: IdentifyZoneRequest,
-    DownloadL4LogsRequest: DownloadL4LogsRequest,
+    AlgDetectResult: AlgDetectResult,
     CreateSpeedTestingResponse: CreateSpeedTestingResponse,
     QueryString: QueryString,
     DefaultServerCertInfo: DefaultServerCertInfo,

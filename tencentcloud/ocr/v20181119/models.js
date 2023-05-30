@@ -1327,6 +1327,13 @@ class Key extends  AbstractModel {
          */
         this.AutoName = null;
 
+        /**
+         * The name of a defined field (the key passed in).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConfigName = null;
+
     }
 
     /**
@@ -1337,6 +1344,7 @@ class Key extends  AbstractModel {
             return;
         }
         this.AutoName = 'AutoName' in params ? params.AutoName : null;
+        this.ConfigName = 'ConfigName' in params ? params.ConfigName : null;
 
     }
 }
@@ -1783,6 +1791,132 @@ class Coord extends  AbstractModel {
 }
 
 /**
+ * RecognizeKoreanIDCardOCR request structure.
+ * @class
+ */
+class RecognizeKoreanIDCardOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Base64-encoded value of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * The URL of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * Whether to return the identity photo.
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
+
+    }
+}
+
+/**
+ * RecognizeKoreanIDCardOCR response structure.
+ * @class
+ */
+class RecognizeKoreanIDCardOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID card number.
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * The address.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * The name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The issue date.
+         * @type {string || null}
+         */
+        this.DateOfIssue = null;
+
+        /**
+         * The Base64-encoded identity photo.
+         * @type {string || null}
+         */
+        this.Photo = null;
+
+        /**
+         * The gender.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * The birth date in the format of dd/mm/yyyy.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DateOfIssue = 'DateOfIssue' in params ? params.DateOfIssue : null;
+        this.Photo = 'Photo' in params ? params.Photo : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RecognizePhilippinesSssIDOCR response structure.
  * @class
  */
@@ -1854,6 +1988,55 @@ class RecognizePhilippinesSssIDOCRResponse extends  AbstractModel {
             this.Birthday = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RecognizeKoreanDrivingLicenseOCR request structure.
+ * @class
+ */
+class RecognizeKoreanDrivingLicenseOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Base64-encoded value of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * The URL of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * Whether to return the identity photo.
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
 
     }
 }
@@ -2066,6 +2249,111 @@ class RecognizeIndonesiaIDCardOCRResponse extends  AbstractModel {
         this.Photo = 'Photo' in params ? params.Photo : null;
         this.Provinsi = 'Provinsi' in params ? params.Provinsi : null;
         this.Kota = 'Kota' in params ? params.Kota : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RecognizeKoreanDrivingLicenseOCR response structure.
+ * @class
+ */
+class RecognizeKoreanDrivingLicenseOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The ID card number.
+         * @type {string || null}
+         */
+        this.ID = null;
+
+        /**
+         * The license number.
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * The resident registration number.
+         * @type {string || null}
+         */
+        this.Number = null;
+
+        /**
+         * The license class type.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The address.
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * The name.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * The renewal period.
+         * @type {string || null}
+         */
+        this.AptitudeTesDate = null;
+
+        /**
+         * The issue date.
+         * @type {string || null}
+         */
+        this.DateOfIssue = null;
+
+        /**
+         * The Base64-encoded identity photo.
+         * @type {string || null}
+         */
+        this.Photo = null;
+
+        /**
+         * The gender.
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * The birth date in the format of dd/mm/yyyy.
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ID = 'ID' in params ? params.ID : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.Number = 'Number' in params ? params.Number : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.AptitudeTesDate = 'AptitudeTesDate' in params ? params.AptitudeTesDate : null;
+        this.DateOfIssue = 'DateOfIssue' in params ? params.DateOfIssue : null;
+        this.Photo = 'Photo' in params ? params.Photo : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2832,9 +3120,13 @@ module.exports = {
     DetectedWordCoordPoint: DetectedWordCoordPoint,
     Value: Value,
     Coord: Coord,
+    RecognizeKoreanIDCardOCRRequest: RecognizeKoreanIDCardOCRRequest,
+    RecognizeKoreanIDCardOCRResponse: RecognizeKoreanIDCardOCRResponse,
     RecognizePhilippinesSssIDOCRResponse: RecognizePhilippinesSssIDOCRResponse,
+    RecognizeKoreanDrivingLicenseOCRRequest: RecognizeKoreanDrivingLicenseOCRRequest,
     RecognizeIndonesiaIDCardOCRRequest: RecognizeIndonesiaIDCardOCRRequest,
     RecognizeIndonesiaIDCardOCRResponse: RecognizeIndonesiaIDCardOCRResponse,
+    RecognizeKoreanDrivingLicenseOCRResponse: RecognizeKoreanDrivingLicenseOCRResponse,
     MLIDCardOCRResponse: MLIDCardOCRResponse,
     RecognizePhilippinesTinIDOCRRequest: RecognizePhilippinesTinIDOCRRequest,
     RecognizePhilippinesVoteIDOCRRequest: RecognizePhilippinesVoteIDOCRRequest,

@@ -43,9 +43,13 @@ const TableOCRResponse = models.TableOCRResponse;
 const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
 const Value = models.Value;
 const Coord = models.Coord;
+const RecognizeKoreanIDCardOCRRequest = models.RecognizeKoreanIDCardOCRRequest;
+const RecognizeKoreanIDCardOCRResponse = models.RecognizeKoreanIDCardOCRResponse;
 const RecognizePhilippinesSssIDOCRResponse = models.RecognizePhilippinesSssIDOCRResponse;
+const RecognizeKoreanDrivingLicenseOCRRequest = models.RecognizeKoreanDrivingLicenseOCRRequest;
 const RecognizeIndonesiaIDCardOCRRequest = models.RecognizeIndonesiaIDCardOCRRequest;
 const RecognizeIndonesiaIDCardOCRResponse = models.RecognizeIndonesiaIDCardOCRResponse;
+const RecognizeKoreanDrivingLicenseOCRResponse = models.RecognizeKoreanDrivingLicenseOCRResponse;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
 const RecognizePhilippinesTinIDOCRRequest = models.RecognizePhilippinesTinIDOCRRequest;
 const RecognizePhilippinesVoteIDOCRRequest = models.RecognizePhilippinesVoteIDOCRRequest;
@@ -80,6 +84,17 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * This API is used to recognize a Philippine SSSID/UMID card.
+     * @param {RecognizePhilippinesSssIDOCRRequest} req
+     * @param {function(string, RecognizePhilippinesSssIDOCRResponse):void} cb
+     * @public
+     */
+    RecognizePhilippinesSssIDOCR(req, cb) {
+        let resp = new RecognizePhilippinesSssIDOCRResponse();
+        this.request("RecognizePhilippinesSssIDOCR", req, resp, cb);
+    }
+
+    /**
      * This API is used to recognize fields from cards, documents, bills, forms, contracts, and other structured information. It is flexible and efficient to use, without any configuration required. This API is suitable for recognizing structured information.
 
 A maximum of 10 requests can be initiated per second for this API.
@@ -106,14 +121,25 @@ This API is not fully available for the time being. For more information, please
     }
 
     /**
-     * This API is used to recognize a Philippine SSSID/UMID card.
-     * @param {RecognizePhilippinesSssIDOCRRequest} req
-     * @param {function(string, RecognizePhilippinesSssIDOCRResponse):void} cb
+     * This API is used to recognize a South Korean driver's license.
+     * @param {RecognizeKoreanDrivingLicenseOCRRequest} req
+     * @param {function(string, RecognizeKoreanDrivingLicenseOCRResponse):void} cb
      * @public
      */
-    RecognizePhilippinesSssIDOCR(req, cb) {
-        let resp = new RecognizePhilippinesSssIDOCRResponse();
-        this.request("RecognizePhilippinesSssIDOCR", req, resp, cb);
+    RecognizeKoreanDrivingLicenseOCR(req, cb) {
+        let resp = new RecognizeKoreanDrivingLicenseOCRResponse();
+        this.request("RecognizeKoreanDrivingLicenseOCR", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize a South Korean ID card.
+     * @param {RecognizeKoreanIDCardOCRRequest} req
+     * @param {function(string, RecognizeKoreanIDCardOCRResponse):void} cb
+     * @public
+     */
+    RecognizeKoreanIDCardOCR(req, cb) {
+        let resp = new RecognizeKoreanIDCardOCRResponse();
+        this.request("RecognizeKoreanIDCardOCR", req, resp, cb);
     }
 
     /**

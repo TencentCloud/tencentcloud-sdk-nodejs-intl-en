@@ -1791,6 +1791,130 @@ class Coord extends  AbstractModel {
 }
 
 /**
+ * RecognizePhilippinesUMIDOCR response structure.
+ * @class
+ */
+class RecognizePhilippinesUMIDOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The surname.
+         * @type {TextDetectionResult || null}
+         */
+        this.Surname = null;
+
+        /**
+         * The middle name.
+         * @type {TextDetectionResult || null}
+         */
+        this.MiddleName = null;
+
+        /**
+         * The given name.
+         * @type {TextDetectionResult || null}
+         */
+        this.GivenName = null;
+
+        /**
+         * The address.
+         * @type {TextDetectionResult || null}
+         */
+        this.Address = null;
+
+        /**
+         * The date of birth.
+         * @type {TextDetectionResult || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * The common reference number (CRN).
+         * @type {TextDetectionResult || null}
+         */
+        this.CRN = null;
+
+        /**
+         * The gender.
+         * @type {TextDetectionResult || null}
+         */
+        this.Sex = null;
+
+        /**
+         * The Base64-encoded identity photo.
+         * @type {TextDetectionResult || null}
+         */
+        this.HeadPortrait = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Surname) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Surname)
+            this.Surname = obj;
+        }
+
+        if (params.MiddleName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.MiddleName)
+            this.MiddleName = obj;
+        }
+
+        if (params.GivenName) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.GivenName)
+            this.GivenName = obj;
+        }
+
+        if (params.Address) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Address)
+            this.Address = obj;
+        }
+
+        if (params.Birthday) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Birthday)
+            this.Birthday = obj;
+        }
+
+        if (params.CRN) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.CRN)
+            this.CRN = obj;
+        }
+
+        if (params.Sex) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.Sex)
+            this.Sex = obj;
+        }
+
+        if (params.HeadPortrait) {
+            let obj = new TextDetectionResult();
+            obj.deserialize(params.HeadPortrait)
+            this.HeadPortrait = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RecognizeKoreanIDCardOCR request structure.
  * @class
  */
@@ -2794,6 +2918,55 @@ class ItemCoord extends  AbstractModel {
 }
 
 /**
+ * RecognizePhilippinesUMIDOCR request structure.
+ * @class
+ */
+class RecognizePhilippinesUMIDOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The Base64-encoded value of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * The URL of the image.
+Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+The download speed and stability of non-Tencent Cloud URLs may be low.
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * Whether to return the identity photo.
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
+
+    }
+}
+
+/**
  * OCR result.
  * @class
  */
@@ -3120,6 +3293,7 @@ module.exports = {
     DetectedWordCoordPoint: DetectedWordCoordPoint,
     Value: Value,
     Coord: Coord,
+    RecognizePhilippinesUMIDOCRResponse: RecognizePhilippinesUMIDOCRResponse,
     RecognizeKoreanIDCardOCRRequest: RecognizeKoreanIDCardOCRRequest,
     RecognizeKoreanIDCardOCRResponse: RecognizeKoreanIDCardOCRResponse,
     RecognizePhilippinesSssIDOCRResponse: RecognizePhilippinesSssIDOCRResponse,
@@ -3134,6 +3308,7 @@ module.exports = {
     LineInfo: LineInfo,
     BankCardOCRResponse: BankCardOCRResponse,
     ItemCoord: ItemCoord,
+    RecognizePhilippinesUMIDOCRRequest: RecognizePhilippinesUMIDOCRRequest,
     TextDetection: TextDetection,
     RecognizePhilippinesTinIDOCRResponse: RecognizePhilippinesTinIDOCRResponse,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,

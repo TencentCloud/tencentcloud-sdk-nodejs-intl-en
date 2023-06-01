@@ -43,6 +43,7 @@ const TableOCRResponse = models.TableOCRResponse;
 const DetectedWordCoordPoint = models.DetectedWordCoordPoint;
 const Value = models.Value;
 const Coord = models.Coord;
+const RecognizePhilippinesUMIDOCRResponse = models.RecognizePhilippinesUMIDOCRResponse;
 const RecognizeKoreanIDCardOCRRequest = models.RecognizeKoreanIDCardOCRRequest;
 const RecognizeKoreanIDCardOCRResponse = models.RecognizeKoreanIDCardOCRResponse;
 const RecognizePhilippinesSssIDOCRResponse = models.RecognizePhilippinesSssIDOCRResponse;
@@ -57,6 +58,7 @@ const TableOCRRequest = models.TableOCRRequest;
 const LineInfo = models.LineInfo;
 const BankCardOCRResponse = models.BankCardOCRResponse;
 const ItemCoord = models.ItemCoord;
+const RecognizePhilippinesUMIDOCRRequest = models.RecognizePhilippinesUMIDOCRRequest;
 const TextDetection = models.TextDetection;
 const RecognizePhilippinesTinIDOCRResponse = models.RecognizePhilippinesTinIDOCRResponse;
 const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
@@ -105,6 +107,17 @@ A maximum of 10 requests can be initiated per second for this API.
     SmartStructuralOCRV2(req, cb) {
         let resp = new SmartStructuralOCRV2Response();
         this.request("SmartStructuralOCRV2", req, resp, cb);
+    }
+
+    /**
+     * This API is used to recognize a Philippine Unified Multi-Purpose ID (UMID) card.
+     * @param {RecognizePhilippinesUMIDOCRRequest} req
+     * @param {function(string, RecognizePhilippinesUMIDOCRResponse):void} cb
+     * @public
+     */
+    RecognizePhilippinesUMIDOCR(req, cb) {
+        let resp = new RecognizePhilippinesUMIDOCRResponse();
+        this.request("RecognizePhilippinesUMIDOCR", req, resp, cb);
     }
 
     /**

@@ -87,7 +87,7 @@ Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;
         this.TimedParam = null;
 
         /**
-         * Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic
+         * Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic; `10`: Thai
          * @type {string || null}
          */
         this.Unsubscribe = null;
@@ -772,6 +772,18 @@ Sender <email address>
         this.ReplyToAddresses = null;
 
         /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Cc = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Bcc = null;
+
+        /**
          * Template parameters for template-based sending. As `Simple` has been disused, `Template` is required.
          * @type {Template || null}
          */
@@ -790,7 +802,7 @@ Sender <email address>
         this.Attachments = null;
 
         /**
-         * Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic
+         * Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic; `10`: Thai
          * @type {string || null}
          */
         this.Unsubscribe = null;
@@ -814,6 +826,8 @@ Sender <email address>
         this.Destination = 'Destination' in params ? params.Destination : null;
         this.Subject = 'Subject' in params ? params.Subject : null;
         this.ReplyToAddresses = 'ReplyToAddresses' in params ? params.ReplyToAddresses : null;
+        this.Cc = 'Cc' in params ? params.Cc : null;
+        this.Bcc = 'Bcc' in params ? params.Bcc : null;
 
         if (params.Template) {
             let obj = new Template();

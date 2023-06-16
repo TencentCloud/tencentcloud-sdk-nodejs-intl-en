@@ -92,6 +92,41 @@ class ModifySampleSnapshotTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * ForbidMediaDistribution response structure.
+ * @class
+ */
+class ForbidMediaDistributionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of IDs of files that do not exist.
+         * @type {Array.<string> || null}
+         */
+        this.NotExistFileIdSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NotExistFileIdSet = 'NotExistFileIdSet' in params ? params.NotExistFileIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyWatermarkTemplate request structure.
  * @class
  */
@@ -457,6 +492,55 @@ class DescribeAllClassRequest extends  AbstractModel {
             return;
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class UserAgentFilterRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.UserAgents = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.UserAgents = 'UserAgents' in params ? params.UserAgents : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
 
     }
 }
@@ -1250,6 +1334,105 @@ The default is `VOD`.
 }
 
 /**
+ * 
+ * @class
+ */
+class HttpHeaderPathRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HeaderMode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HeaderName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HeaderValue = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HeaderMode = 'HeaderMode' in params ? params.HeaderMode : null;
+        this.HeaderName = 'HeaderName' in params ? params.HeaderName : null;
+        this.HeaderValue = 'HeaderValue' in params ? params.HeaderValue : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class UserAgentFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {Array.<UserAgentFilterRule> || null}
+         */
+        this.FilterRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new UserAgentFilterRule();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteAnimatedGraphicsTemplate response structure.
  * @class
  */
@@ -1673,6 +1856,48 @@ class ModifyDefaultStorageRegionRequest extends  AbstractModel {
 }
 
 /**
+ * CloneCDNDomain request structure.
+ * @class
+ */
+class CloneCDNDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * The cloned domain name.
+         * @type {string || null}
+         */
+        this.ReferenceDomain = null;
+
+        /**
+         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.ReferenceDomain = 'ReferenceDomain' in params ? params.ReferenceDomain : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * Result information of intelligent cover generating
  * @class
  */
@@ -1771,6 +1996,83 @@ Up to 10 labels are allowed, each containing no more than 16 characters.
         this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
         this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
         this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class Origin extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Origins = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OriginType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ServerName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OriginPullProtocol = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.BackupOrigins = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BackupOriginType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BackupServerName = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.OriginCompany = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Origins = 'Origins' in params ? params.Origins : null;
+        this.OriginType = 'OriginType' in params ? params.OriginType : null;
+        this.ServerName = 'ServerName' in params ? params.ServerName : null;
+        this.OriginPullProtocol = 'OriginPullProtocol' in params ? params.OriginPullProtocol : null;
+        this.BackupOrigins = 'BackupOrigins' in params ? params.BackupOrigins : null;
+        this.BackupOriginType = 'BackupOriginType' in params ? params.BackupOriginType : null;
+        this.BackupServerName = 'BackupServerName' in params ? params.BackupServerName : null;
+        this.OriginCompany = 'OriginCompany' in params ? params.OriginCompany : null;
 
     }
 }
@@ -2438,6 +2740,63 @@ class AiSampleWord extends  AbstractModel {
         this.UsageSet = 'UsageSet' in params ? params.UsageSet : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RuleCacheConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {CacheConfigCache || null}
+         */
+        this.Cache = null;
+
+        /**
+         * 
+         * @type {CacheConfigNoCache || null}
+         */
+        this.NoCache = null;
+
+        /**
+         * 
+         * @type {CacheConfigFollowOrigin || null}
+         */
+        this.FollowOrigin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Cache) {
+            let obj = new CacheConfigCache();
+            obj.deserialize(params.Cache)
+            this.Cache = obj;
+        }
+
+        if (params.NoCache) {
+            let obj = new CacheConfigNoCache();
+            obj.deserialize(params.NoCache)
+            this.NoCache = obj;
+        }
+
+        if (params.FollowOrigin) {
+            let obj = new CacheConfigFollowOrigin();
+            obj.deserialize(params.FollowOrigin)
+            this.FollowOrigin = obj;
+        }
 
     }
 }
@@ -3552,6 +3911,34 @@ class DescribeStorageDataResponse extends  AbstractModel {
 }
 
 /**
+ * CreateCDNDomain response structure.
+ * @class
+ */
+class CreateCDNDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Audio stream configuration parameter
  * @class
  */
@@ -3808,6 +4195,53 @@ class AiRecognitionTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * CreateCDNDomain request structure.
+ * @class
+ */
+class CreateCDNDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Domain configuration.
+         * @type {CDNDomainConfig || null}
+         */
+        this.Config = null;
+
+        /**
+         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.Config) {
+            let obj = new CDNDomainConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -4795,6 +5229,71 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * Control parameter of face recognition task
+ * @class
+ */
+class FaceConfigureInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Switch of face recognition task. Valid values:
+<li>ON: enables intelligent face recognition task;</li>
+<li>OFF: disables intelligent face recognition task.</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * Default face filter labels, which specify the types of faces to return. If this parameter is left empty or an empty value is entered, the recognition results for all labels are returned. Valid values:
+<li>`entertainment`: people in the entertainment industry</li>
+<li>`sport`: sports celebrities</li>
+<li>`politician`: politically sensitive people</li>
+         * @type {Array.<string> || null}
+         */
+        this.DefaultLibraryLabelSet = null;
+
+        /**
+         * Custom face labels for filtering. After you specify a label, callbacks of face images without this label will be returned. If this parameter is not specified or left empty, callbacks of all face images will be returned.
+You can specify up to 100 labels, with each containing up to 16 characters.
+         * @type {Array.<string> || null}
+         */
+        this.UserDefineLibraryLabelSet = null;
+
+        /**
+         * Figure library. Valid values:
+<li>Default: default figure library;</li>
+<li>UserDefine: custom figure library.</li>
+<li>All: both default and custom figure libraries will be used.</li>
+         * @type {string || null}
+         */
+        this.FaceLibrary = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
+        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
+        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
+
+    }
+}
+
+/**
  * ModifyTranscodeTemplate request structure.
  * @class
  */
@@ -4914,55 +5413,30 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * Result type of an intelligent highlight generating task
+ * 
  * @class
  */
-class AiAnalysisTaskHighlightResult extends  AbstractModel {
+class RuleCache extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+         * 
          * @type {string || null}
          */
-        this.Status = null;
+        this.RuleType = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
-         * @type {string || null}
+         * 
+         * @type {Array.<string> || null}
          */
-        this.ErrCodeExt = null;
+        this.RulePaths = null;
 
         /**
-         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
-         * @type {number || null}
+         * 
+         * @type {RuleCacheConfig || null}
          */
-        this.ErrCode = null;
-
-        /**
-         * Error message.
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * Input for an intelligent highlight generating task.
-         * @type {AiAnalysisTaskHighlightInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * Output of an intelligent highlight generating task.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {AiAnalysisTaskHighlightOutput || null}
-         */
-        this.Output = null;
-
-        /**
-         * The progress of an intelligent highlight generation task. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.Progress = null;
+        this.CacheConfig = null;
 
     }
 
@@ -4973,23 +5447,74 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
 
-        if (params.Input) {
-            let obj = new AiAnalysisTaskHighlightInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
+        if (params.CacheConfig) {
+            let obj = new RuleCacheConfig();
+            obj.deserialize(params.CacheConfig)
+            this.CacheConfig = obj;
         }
 
-        if (params.Output) {
-            let obj = new AiAnalysisTaskHighlightOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
+    }
+}
+
+/**
+ * Input of video editing task.
+ * @class
+ */
+class EditMediaTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Input video source type. Valid values: File, Stream.
+         * @type {string || null}
+         */
+        this.InputType = null;
+
+        /**
+         * Information of input video file. This field has a value only when `InputType` is `File`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<EditMediaFileInfo> || null}
+         */
+        this.FileInfoSet = null;
+
+        /**
+         * Input stream information. This field has a value only when `InputType` is `Stream`.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<EditMediaStreamInfo> || null}
+         */
+        this.StreamInfoSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.InputType = 'InputType' in params ? params.InputType : null;
+
+        if (params.FileInfoSet) {
+            this.FileInfoSet = new Array();
+            for (let z in params.FileInfoSet) {
+                let obj = new EditMediaFileInfo();
+                obj.deserialize(params.FileInfoSet[z]);
+                this.FileInfoSet.push(obj);
+            }
+        }
+
+        if (params.StreamInfoSet) {
+            this.StreamInfoSet = new Array();
+            for (let z in params.StreamInfoSet) {
+                let obj = new EditMediaStreamInfo();
+                obj.deserialize(params.StreamInfoSet[z]);
+                this.StreamInfoSet.push(obj);
+            }
+        }
 
     }
 }
@@ -6629,6 +7154,41 @@ class AiAnalysisTaskClassificationOutput extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class CacheConfigNoCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Revalidate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Revalidate = 'Revalidate' in params ? params.Revalidate : null;
+
+    }
+}
+
+/**
  * File deleting task
  * @class
  */
@@ -6758,32 +7318,55 @@ class AiRecognitionTaskOcrFullTextResultOutput extends  AbstractModel {
 }
 
 /**
- * Input of video editing task.
+ * Result type of an intelligent highlight generating task
  * @class
  */
-class EditMediaTaskInput extends  AbstractModel {
+class AiAnalysisTaskHighlightResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Input video source type. Valid values: File, Stream.
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
          * @type {string || null}
          */
-        this.InputType = null;
+        this.Status = null;
 
         /**
-         * Information of input video file. This field has a value only when `InputType` is `File`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<EditMediaFileInfo> || null}
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
          */
-        this.FileInfoSet = null;
+        this.ErrCodeExt = null;
 
         /**
-         * Input stream information. This field has a value only when `InputType` is `Stream`.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<EditMediaStreamInfo> || null}
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
+         * @type {number || null}
          */
-        this.StreamInfoSet = null;
+        this.ErrCode = null;
+
+        /**
+         * Error message.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Input for an intelligent highlight generating task.
+         * @type {AiAnalysisTaskHighlightInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of an intelligent highlight generating task.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {AiAnalysisTaskHighlightOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * The progress of an intelligent highlight generation task. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Progress = null;
 
     }
 
@@ -6794,25 +7377,23 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.InputType = 'InputType' in params ? params.InputType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
-        if (params.FileInfoSet) {
-            this.FileInfoSet = new Array();
-            for (let z in params.FileInfoSet) {
-                let obj = new EditMediaFileInfo();
-                obj.deserialize(params.FileInfoSet[z]);
-                this.FileInfoSet.push(obj);
-            }
+        if (params.Input) {
+            let obj = new AiAnalysisTaskHighlightInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
         }
 
-        if (params.StreamInfoSet) {
-            this.StreamInfoSet = new Array();
-            for (let z in params.StreamInfoSet) {
-                let obj = new EditMediaStreamInfo();
-                obj.deserialize(params.StreamInfoSet[z]);
-                this.StreamInfoSet.push(obj);
-            }
+        if (params.Output) {
+            let obj = new AiAnalysisTaskHighlightOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
         }
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -6933,6 +7514,67 @@ class AiSampleFaceInfo extends  AbstractModel {
         }
         this.FaceId = 'FaceId' in params ? params.FaceId : null;
         this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class CDNDomainInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.DeployStatus = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Cname = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 
+         * @type {CDNDomainConfig || null}
+         */
+        this.Config = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DeployStatus = 'DeployStatus' in params ? params.DeployStatus : null;
+        this.Cname = 'Cname' in params ? params.Cname : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Config) {
+            let obj = new CDNDomainConfig();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
 
     }
 }
@@ -7423,6 +8065,42 @@ class CoverBySnapshotTaskOutput extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class MaxAge extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<MaxAgeRule> || null}
+         */
+        this.MaxAgeRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MaxAgeRules) {
+            this.MaxAgeRules = new Array();
+            for (let z in params.MaxAgeRules) {
+                let obj = new MaxAgeRule();
+                obj.deserialize(params.MaxAgeRules[z]);
+                this.MaxAgeRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Text watermarking template
  * @class
  */
@@ -7564,6 +8242,62 @@ class DescribeAIRecognitionTemplatesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class AwsPrivateAccess extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
 
     }
 }
@@ -7966,41 +8700,6 @@ In the same request, `ClearTags` and `AddTags` cannot be present at the same tim
 }
 
 /**
- * DeleteTranscodeTemplate request structure.
- * @class
- */
-class DeleteTranscodeTemplateRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Unique ID of transcoding template.
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-
-    }
-}
-
-/**
  * The information of a digital watermark.
  * @class
  */
@@ -8300,6 +8999,55 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * DescribeCDNDomains request structure.
+ * @class
+ */
+class DescribeCDNDomainsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of domain names. If this field is left blank, all domain name information will be listed by default.
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * The maximum number of returned results for pagination fetching. Default value: 20.
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * The starting offset for page fetching. Default value: 0.
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -9676,6 +10424,49 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class RequestHeader extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {Array.<HttpHeaderPathRule> || null}
+         */
+        this.HeaderRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.HeaderRules) {
+            this.HeaderRules = new Array();
+            for (let z in params.HeaderRules) {
+                let obj = new HttpHeaderPathRule();
+                obj.deserialize(params.HeaderRules[z]);
+                this.HeaderRules.push(obj);
+            }
+        }
 
     }
 }
@@ -11175,24 +11966,42 @@ class MediaMiniProgramReviewInfo extends  AbstractModel {
 }
 
 /**
- * ForbidMediaDistribution response structure.
+ * 
  * @class
  */
-class ForbidMediaDistributionResponse extends  AbstractModel {
+class CacheConfigCache extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * List of IDs of files that do not exist.
-         * @type {Array.<string> || null}
-         */
-        this.NotExistFileIdSet = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.CacheTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CompareMaxAge = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IgnoreCacheControl = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.IgnoreSetCookie = null;
 
     }
 
@@ -11203,8 +12012,11 @@ class ForbidMediaDistributionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NotExistFileIdSet = 'NotExistFileIdSet' in params ? params.NotExistFileIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+        this.CompareMaxAge = 'CompareMaxAge' in params ? params.CompareMaxAge : null;
+        this.IgnoreCacheControl = 'IgnoreCacheControl' in params ? params.IgnoreCacheControl : null;
+        this.IgnoreSetCookie = 'IgnoreSetCookie' in params ? params.IgnoreSetCookie : null;
 
     }
 }
@@ -12277,6 +13089,102 @@ class EmptyTrackItem extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class RefererRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RefererType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Referers = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.AllowEmpty = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.RefererType = 'RefererType' in params ? params.RefererType : null;
+        this.Referers = 'Referers' in params ? params.Referers : null;
+        this.AllowEmpty = 'AllowEmpty' in params ? params.AllowEmpty : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class CacheConfigFollowOrigin extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {HeuristicCache || null}
+         */
+        this.HeuristicCache = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.HeuristicCache) {
+            let obj = new HeuristicCache();
+            obj.deserialize(params.HeuristicCache)
+            this.HeuristicCache = obj;
+        }
+
+    }
+}
+
+/**
  * Information of sticker on sticker track.
  * @class
  */
@@ -12428,6 +13336,44 @@ class DescribeMediaPlayStatDetailsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Face enhancement configuration.
+ * @class
+ */
+class FaceEnhanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable face enhancement. Valid values:
+<li>`ON`</li>
+<li>`OFF`</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The face enhancement strength. This parameter is valid only if `Switch` is `ON`. Value range: 0.0 – 1.0.
+Default value: `0.0`.
+         * @type {number || null}
+         */
+        this.Intensity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Intensity = 'Intensity' in params ? params.Intensity : null;
 
     }
 }
@@ -13856,6 +14802,145 @@ class ModifyWordSampleRequest extends  AbstractModel {
 }
 
 /**
+ * Video editing task information
+ * @class
+ */
+class EditMediaTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Task ID.
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Task flow status. Valid values:
+<li>PROCESSING: processing;</li>
+<li>FINISH: completed.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Error code. 0: success; other values: failure.
+<li>40000: invalid input parameter. Please check it;</li>
+<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
+<li>70000: internal service error. Please try again.</li>
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ErrCode = null;
+
+        /**
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error message.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * Progress of a video editing task. Value range: [0, 100]
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Input of video editing task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {EditMediaTaskInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output of video editing task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {EditMediaTaskOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * The metadata of the output video.
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * The task ID for the task type `Procedure`. If a task flow (`ProcedureName`) is specified by [EditMedia](https://intl.cloud.tencent.com/document/api/266/34783?from_cn_redirect=1), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
+         * @type {string || null}
+         */
+        this.ProcedureTaskId = null;
+
+        /**
+         * The task ID for the task type `ReviewAudioVideo`. If a task flow (`ProcedureName`) is specified by [EditMedia](https://intl.cloud.tencent.com/document/api/266/34783?from_cn_redirect=1), and the task flow includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+         * @type {string || null}
+         */
+        this.ReviewAudioVideoTaskId = null;
+
+        /**
+         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.SessionContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+        if (params.Input) {
+            let obj = new EditMediaTaskInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new EditMediaTaskOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+        this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
+        this.ReviewAudioVideoTaskId = 'ReviewAudioVideoTaskId' in params ? params.ReviewAudioVideoTaskId : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+
+    }
+}
+
+/**
  * Face recognition result segment
  * @class
  */
@@ -13956,87 +15041,6 @@ class ModifySnapshotByTimeOffsetTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Object recognition result.
- * @class
- */
-class AiRecognitionTaskObjectResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
-         * @type {string || null}
-         */
-        this.ErrCodeExt = null;
-
-        /**
-         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
-         * @type {number || null}
-         */
-        this.ErrCode = null;
-
-        /**
-         * Error message.
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * Input information of object recognition task.
-         * @type {AiRecognitionTaskObjectResultInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * Output information of object recognition task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {AiRecognitionTaskObjectResultOutput || null}
-         */
-        this.Output = null;
-
-        /**
-         * The progress of an object recognition task. Value range: 0-100.
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Input) {
-            let obj = new AiRecognitionTaskObjectResultInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new AiRecognitionTaskObjectResultOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
-        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -14262,6 +15266,42 @@ Note: This field may return null, indicating that no valid values can be obtaine
             let obj = new ReviewImageResult();
             obj.deserialize(params.CoverReviewResult)
             this.CoverReviewResult = obj;
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class Cache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {Array.<RuleCache> || null}
+         */
+        this.RuleCache = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RuleCache) {
+            this.RuleCache = new Array();
+            for (let z in params.RuleCache) {
+                let obj = new RuleCache();
+                obj.deserialize(params.RuleCache[z]);
+                this.RuleCache.push(obj);
+            }
         }
 
     }
@@ -14852,27 +15892,18 @@ This parameter is <font color=red>\*no longer recommended</font>. Please use [Re
 }
 
 /**
- * Face enhancement configuration.
+ * DeleteCDNDomain response structure.
  * @class
  */
-class FaceEnhanceInfo extends  AbstractModel {
+class DeleteCDNDomainResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable face enhancement. Valid values:
-<li>`ON`</li>
-<li>`OFF`</li>
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * The face enhancement strength. This parameter is valid only if `Switch` is `ON`. Value range: 0.0 – 1.0.
-Default value: `0.0`.
-         * @type {number || null}
-         */
-        this.Intensity = null;
+        this.RequestId = null;
 
     }
 
@@ -14883,8 +15914,7 @@ Default value: `0.0`.
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Intensity = 'Intensity' in params ? params.Intensity : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -15127,6 +16157,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifyCDNDomainConfig response structure.
+ * @class
+ */
+class ModifyCDNDomainConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RestoreMedia response structure.
  * @class
  */
@@ -15232,6 +16290,34 @@ Note: this field may return null, indicating that no valid values can be obtaine
             this.Output = obj;
         }
         this.Progress = 'Progress' in params ? params.Progress : null;
+
+    }
+}
+
+/**
+ * ModifyWordSample response structure.
+ * @class
+ */
+class ModifyWordSampleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16204,6 +17290,48 @@ There can be up to 10 tags, each with a length limit of 16 characters.
 }
 
 /**
+ * StartCDNDomain request structure.
+ * @class
+ */
+class StartCDNDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Domain name operation, value: <li>start: enable;</li> <li>stop: disable. </li>
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * DeleteRebuildMediaTemplate response structure.
  * @class
  */
@@ -17041,6 +18169,63 @@ Default value: open.
 }
 
 /**
+ * 
+ * @class
+ */
+class IpFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 
+         * @type {Array.<IpFilterPathRule> || null}
+         */
+        this.FilterRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.Filters = 'Filters' in params ? params.Filters : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new IpFilterPathRule();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Parameters for OCR-based recognition of terrorism content
  * @class
  */
@@ -17664,6 +18849,55 @@ class CreateImageProcessingTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class IpFilterPathRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.Filters = 'Filters' in params ? params.Filters : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+
+    }
+}
+
+/**
  * Media file composing task information
  * @class
  */
@@ -18021,6 +19255,62 @@ class SplitMediaTask extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class OthersPrivateAccess extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+
+    }
+}
+
+/**
  * Input of media file composing task.
  * @class
  */
@@ -18076,6 +19366,82 @@ Note: this field may return null, indicating that no valid values can be obtaine
             let obj = new ComposeMediaOutput();
             obj.deserialize(params.Output)
             this.Output = obj;
+        }
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class Authentication extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {AuthenticationTypeA || null}
+         */
+        this.TypeA = null;
+
+        /**
+         * 
+         * @type {AuthenticationTypeB || null}
+         */
+        this.TypeB = null;
+
+        /**
+         * 
+         * @type {AuthenticationTypeC || null}
+         */
+        this.TypeC = null;
+
+        /**
+         * 
+         * @type {AuthenticationTypeD || null}
+         */
+        this.TypeD = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.TypeA) {
+            let obj = new AuthenticationTypeA();
+            obj.deserialize(params.TypeA)
+            this.TypeA = obj;
+        }
+
+        if (params.TypeB) {
+            let obj = new AuthenticationTypeB();
+            obj.deserialize(params.TypeB)
+            this.TypeB = obj;
+        }
+
+        if (params.TypeC) {
+            let obj = new AuthenticationTypeC();
+            obj.deserialize(params.TypeC)
+            this.TypeC = obj;
+        }
+
+        if (params.TypeD) {
+            let obj = new AuthenticationTypeD();
+            obj.deserialize(params.TypeD)
+            this.TypeD = obj;
         }
 
     }
@@ -19065,30 +20431,24 @@ class CreateSubAppIdResponse extends  AbstractModel {
 }
 
 /**
- * CreateWatermarkTemplate response structure.
+ * DeleteTranscodeTemplate request structure.
  * @class
  */
-class CreateWatermarkTemplateResponse extends  AbstractModel {
+class DeleteTranscodeTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of watermarking template.
+         * Unique ID of transcoding template.
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * Watermark image address. This field is valid only when `Type` is `image`.
-         * @type {string || null}
+         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+         * @type {number || null}
          */
-        this.ImageUrl = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.SubAppId = null;
 
     }
 
@@ -19100,8 +20460,7 @@ class CreateWatermarkTemplateResponse extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -19843,6 +21202,41 @@ class AiRecognitionTaskOcrWordsResultItem extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DeleteCDNDomain request structure.
+ * @class
+ */
+class DeleteCDNDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -22196,10 +23590,85 @@ class AiAnalysisTaskHighlightInput extends  AbstractModel {
 }
 
 /**
+ * ModifyCDNDomainConfig request structure.
+ * @class
+ */
+class ModifyCDNDomainConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Domain name.
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * Domain configuration.
+         * @type {CDNDomainConfigForUpdate || null}
+         */
+        this.Config = null;
+
+        /**
+         * VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+        if (params.Config) {
+            let obj = new CDNDomainConfigForUpdate();
+            obj.deserialize(params.Config)
+            this.Config = obj;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * DeleteContentReviewTemplate response structure.
  * @class
  */
 class DeleteContentReviewTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CloneCDNDomain response structure.
+ * @class
+ */
+class CloneCDNDomainResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -22572,6 +24041,34 @@ class SortBy extends  AbstractModel {
         }
         this.Field = 'Field' in params ? params.Field : null;
         this.Order = 'Order' in params ? params.Order : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class Ipv6Access extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -24427,6 +25924,34 @@ If you do not specify this parameter, the usage of both types will be queried.
 }
 
 /**
+ * StartCDNDomain response structure.
+ * @class
+ */
+class StartCDNDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAIRecognitionTemplate request structure.
  * @class
  */
@@ -24602,6 +26127,62 @@ class DescribeStorageRegionsRequest extends  AbstractModel {
             return;
         }
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class OssPrivateAccess extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AccessKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Bucket = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
 
     }
 }
@@ -27093,6 +28674,55 @@ class HighlightsConfigureInfo extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class CDNCertInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CertId = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Certificate = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.PrivateKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.ExpireTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertId = 'CertId' in params ? params.CertId : null;
+        this.Certificate = 'Certificate' in params ? params.Certificate : null;
+        this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+
+    }
+}
+
+/**
  * Text recognition segment.
  * @class
  */
@@ -27291,6 +28921,46 @@ class DeleteWordSamplesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class HeuristicCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {HeuristicCacheConfig || null}
+         */
+        this.CacheConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.CacheConfig) {
+            let obj = new HeuristicCacheConfig();
+            obj.deserialize(params.CacheConfig)
+            this.CacheConfig = obj;
+        }
 
     }
 }
@@ -28689,6 +30359,53 @@ class MediaAiAnalysisTagItem extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class Https extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Http2 = null;
+
+        /**
+         * 
+         * @type {CDNCertInfo || null}
+         */
+        this.CertInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Http2 = 'Http2' in params ? params.Http2 : null;
+
+        if (params.CertInfo) {
+            let obj = new CDNCertInfo();
+            obj.deserialize(params.CertInfo)
+            this.CertInfo = obj;
+        }
+
+    }
+}
+
+/**
  * RebuildMedia request structure.
  * @class
  */
@@ -29501,6 +31218,34 @@ class CreateProcedureTemplateResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class FollowRedirect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * RebuildMedia response structure.
  * @class
  */
@@ -29879,6 +31624,55 @@ class AiRecognitionTaskSegmentResultInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ForceRedirect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.RedirectType = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.RedirectStatusCode = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.CarryHeaders = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.RedirectType = 'RedirectType' in params ? params.RedirectType : null;
+        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
+        this.CarryHeaders = 'CarryHeaders' in params ? params.CarryHeaders : null;
 
     }
 }
@@ -30350,6 +32144,138 @@ class DescribeStorageRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * Details of a sampled screencapturing template
+ * @class
+ */
+class SampleSnapshotTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique ID of a sampled screencapturing template.
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * Template type. Valid values:
+<li>Preset: preset template;</li>
+<li>Custom: custom template.</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Name of a sampled screencapturing template.
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Template description.
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * Maximum value of the width (or long side) of a screenshot in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * Maximum value of the height (or short side) of a screenshot in px. Value range: 0 and [128, 4,096].
+<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+Default value: 0.
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * Resolution adaption. Valid values:
+<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+Default value: open.
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * Image format.
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * Sampled screencapturing type.
+         * @type {string || null}
+         */
+        this.SampleType = null;
+
+        /**
+         * Sampling interval.
+         * @type {number || null}
+         */
+        this.SampleInterval = null;
+
+        /**
+         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * The fill mode, or the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:
+<li>stretch: Stretch the image frame by frame to fill the entire screen. The video image may become "squashed" or "stretched" after transcoding.</li>
+<li>black: Keep the image's original aspect ratio and fill the blank space with black bars.</li>
+<li>white: Keep the image’s original aspect ratio and fill the blank space with white bars.</li>
+<li>gauss: Keep the image’s original aspect ratio and apply Gaussian blur to the blank space.</li>
+Default value: black.
+         * @type {string || null}
+         */
+        this.FillType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.SampleType = 'SampleType' in params ? params.SampleType : null;
+        this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.FillType = 'FillType' in params ? params.FillType : null;
+
+    }
+}
+
+/**
  * ModifySnapshotByTimeOffsetTemplate request structure.
  * @class
  */
@@ -30726,6 +32652,250 @@ class ExtractTraceWatermarkRequest extends  AbstractModel {
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class CDNDomainConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Area = null;
+
+        /**
+         * 
+         * @type {Origin || null}
+         */
+        this.Origin = null;
+
+        /**
+         * 
+         * @type {IpFilter || null}
+         */
+        this.IpFilter = null;
+
+        /**
+         * 
+         * @type {UserAgentFilter || null}
+         */
+        this.UserAgentFilter = null;
+
+        /**
+         * 
+         * @type {FollowRedirect || null}
+         */
+        this.FollowRedirect = null;
+
+        /**
+         * 
+         * @type {RequestHeader || null}
+         */
+        this.RequestHeader = null;
+
+        /**
+         * 
+         * @type {ResponseHeader || null}
+         */
+        this.ResponseHeader = null;
+
+        /**
+         * 
+         * @type {Cache || null}
+         */
+        this.Cache = null;
+
+        /**
+         * 
+         * @type {Https || null}
+         */
+        this.Https = null;
+
+        /**
+         * 
+         * @type {Authentication || null}
+         */
+        this.Authentication = null;
+
+        /**
+         * 
+         * @type {ForceRedirect || null}
+         */
+        this.ForceRedirect = null;
+
+        /**
+         * 
+         * @type {Referer || null}
+         */
+        this.Referer = null;
+
+        /**
+         * 
+         * @type {MaxAge || null}
+         */
+        this.MaxAge = null;
+
+        /**
+         * 
+         * @type {Ipv6Access || null}
+         */
+        this.Ipv6Access = null;
+
+        /**
+         * 
+         * @type {Quic || null}
+         */
+        this.Quic = null;
+
+        /**
+         * 
+         * @type {AwsPrivateAccess || null}
+         */
+        this.AwsPrivateAccess = null;
+
+        /**
+         * 
+         * @type {OssPrivateAccess || null}
+         */
+        this.OssPrivateAccess = null;
+
+        /**
+         * 
+         * @type {HwPrivateAccess || null}
+         */
+        this.HwPrivateAccess = null;
+
+        /**
+         * 
+         * @type {OthersPrivateAccess || null}
+         */
+        this.OthersPrivateAccess = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Area = 'Area' in params ? params.Area : null;
+
+        if (params.Origin) {
+            let obj = new Origin();
+            obj.deserialize(params.Origin)
+            this.Origin = obj;
+        }
+
+        if (params.IpFilter) {
+            let obj = new IpFilter();
+            obj.deserialize(params.IpFilter)
+            this.IpFilter = obj;
+        }
+
+        if (params.UserAgentFilter) {
+            let obj = new UserAgentFilter();
+            obj.deserialize(params.UserAgentFilter)
+            this.UserAgentFilter = obj;
+        }
+
+        if (params.FollowRedirect) {
+            let obj = new FollowRedirect();
+            obj.deserialize(params.FollowRedirect)
+            this.FollowRedirect = obj;
+        }
+
+        if (params.RequestHeader) {
+            let obj = new RequestHeader();
+            obj.deserialize(params.RequestHeader)
+            this.RequestHeader = obj;
+        }
+
+        if (params.ResponseHeader) {
+            let obj = new ResponseHeader();
+            obj.deserialize(params.ResponseHeader)
+            this.ResponseHeader = obj;
+        }
+
+        if (params.Cache) {
+            let obj = new Cache();
+            obj.deserialize(params.Cache)
+            this.Cache = obj;
+        }
+
+        if (params.Https) {
+            let obj = new Https();
+            obj.deserialize(params.Https)
+            this.Https = obj;
+        }
+
+        if (params.Authentication) {
+            let obj = new Authentication();
+            obj.deserialize(params.Authentication)
+            this.Authentication = obj;
+        }
+
+        if (params.ForceRedirect) {
+            let obj = new ForceRedirect();
+            obj.deserialize(params.ForceRedirect)
+            this.ForceRedirect = obj;
+        }
+
+        if (params.Referer) {
+            let obj = new Referer();
+            obj.deserialize(params.Referer)
+            this.Referer = obj;
+        }
+
+        if (params.MaxAge) {
+            let obj = new MaxAge();
+            obj.deserialize(params.MaxAge)
+            this.MaxAge = obj;
+        }
+
+        if (params.Ipv6Access) {
+            let obj = new Ipv6Access();
+            obj.deserialize(params.Ipv6Access)
+            this.Ipv6Access = obj;
+        }
+
+        if (params.Quic) {
+            let obj = new Quic();
+            obj.deserialize(params.Quic)
+            this.Quic = obj;
+        }
+
+        if (params.AwsPrivateAccess) {
+            let obj = new AwsPrivateAccess();
+            obj.deserialize(params.AwsPrivateAccess)
+            this.AwsPrivateAccess = obj;
+        }
+
+        if (params.OssPrivateAccess) {
+            let obj = new OssPrivateAccess();
+            obj.deserialize(params.OssPrivateAccess)
+            this.OssPrivateAccess = obj;
+        }
+
+        if (params.HwPrivateAccess) {
+            let obj = new HwPrivateAccess();
+            obj.deserialize(params.HwPrivateAccess)
+            this.HwPrivateAccess = obj;
+        }
+
+        if (params.OthersPrivateAccess) {
+            let obj = new OthersPrivateAccess();
+            obj.deserialize(params.OthersPrivateAccess)
+            this.OthersPrivateAccess = obj;
+        }
 
     }
 }
@@ -31463,30 +33633,126 @@ class CreateTranscodeTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Noise removal configuration.
+ * 
  * @class
  */
-class AudioDenoiseInfo extends  AbstractModel {
+class CDNDomainConfigForUpdate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Whether to enable noise removal. Valid values:
-<li>`ON`</li>
-<li>`OFF`</li>
+         * 
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Area = null;
 
         /**
-         * The noise removal type. This parameter is valid only if `Switch` is `ON`. Valid values:
-<li>`weak`</li>
-<li>`normal`</li>
-<li>`strong`</li>
-Default value: `weak`.
-         * @type {string || null}
+         * 
+         * @type {Origin || null}
          */
-        this.Type = null;
+        this.Origin = null;
+
+        /**
+         * 
+         * @type {IpFilter || null}
+         */
+        this.IpFilter = null;
+
+        /**
+         * 
+         * @type {UserAgentFilter || null}
+         */
+        this.UserAgentFilter = null;
+
+        /**
+         * 
+         * @type {FollowRedirect || null}
+         */
+        this.FollowRedirect = null;
+
+        /**
+         * 
+         * @type {RequestHeader || null}
+         */
+        this.RequestHeader = null;
+
+        /**
+         * 
+         * @type {ResponseHeader || null}
+         */
+        this.ResponseHeader = null;
+
+        /**
+         * 
+         * @type {Cache || null}
+         */
+        this.Cache = null;
+
+        /**
+         * 
+         * @type {Https || null}
+         */
+        this.Https = null;
+
+        /**
+         * 
+         * @type {Authentication || null}
+         */
+        this.Authentication = null;
+
+        /**
+         * 
+         * @type {ForceRedirect || null}
+         */
+        this.ForceRedirect = null;
+
+        /**
+         * 
+         * @type {Referer || null}
+         */
+        this.Referer = null;
+
+        /**
+         * 
+         * @type {MaxAge || null}
+         */
+        this.MaxAge = null;
+
+        /**
+         * 
+         * @type {Ipv6Access || null}
+         */
+        this.Ipv6Access = null;
+
+        /**
+         * 
+         * @type {Quic || null}
+         */
+        this.Quic = null;
+
+        /**
+         * 
+         * @type {AwsPrivateAccess || null}
+         */
+        this.AwsPrivateAccess = null;
+
+        /**
+         * 
+         * @type {OssPrivateAccess || null}
+         */
+        this.OssPrivateAccess = null;
+
+        /**
+         * 
+         * @type {HwPrivateAccess || null}
+         */
+        this.HwPrivateAccess = null;
+
+        /**
+         * 
+         * @type {OthersPrivateAccess || null}
+         */
+        this.OthersPrivateAccess = null;
 
     }
 
@@ -31497,8 +33763,115 @@ Default value: `weak`.
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.Area = 'Area' in params ? params.Area : null;
+
+        if (params.Origin) {
+            let obj = new Origin();
+            obj.deserialize(params.Origin)
+            this.Origin = obj;
+        }
+
+        if (params.IpFilter) {
+            let obj = new IpFilter();
+            obj.deserialize(params.IpFilter)
+            this.IpFilter = obj;
+        }
+
+        if (params.UserAgentFilter) {
+            let obj = new UserAgentFilter();
+            obj.deserialize(params.UserAgentFilter)
+            this.UserAgentFilter = obj;
+        }
+
+        if (params.FollowRedirect) {
+            let obj = new FollowRedirect();
+            obj.deserialize(params.FollowRedirect)
+            this.FollowRedirect = obj;
+        }
+
+        if (params.RequestHeader) {
+            let obj = new RequestHeader();
+            obj.deserialize(params.RequestHeader)
+            this.RequestHeader = obj;
+        }
+
+        if (params.ResponseHeader) {
+            let obj = new ResponseHeader();
+            obj.deserialize(params.ResponseHeader)
+            this.ResponseHeader = obj;
+        }
+
+        if (params.Cache) {
+            let obj = new Cache();
+            obj.deserialize(params.Cache)
+            this.Cache = obj;
+        }
+
+        if (params.Https) {
+            let obj = new Https();
+            obj.deserialize(params.Https)
+            this.Https = obj;
+        }
+
+        if (params.Authentication) {
+            let obj = new Authentication();
+            obj.deserialize(params.Authentication)
+            this.Authentication = obj;
+        }
+
+        if (params.ForceRedirect) {
+            let obj = new ForceRedirect();
+            obj.deserialize(params.ForceRedirect)
+            this.ForceRedirect = obj;
+        }
+
+        if (params.Referer) {
+            let obj = new Referer();
+            obj.deserialize(params.Referer)
+            this.Referer = obj;
+        }
+
+        if (params.MaxAge) {
+            let obj = new MaxAge();
+            obj.deserialize(params.MaxAge)
+            this.MaxAge = obj;
+        }
+
+        if (params.Ipv6Access) {
+            let obj = new Ipv6Access();
+            obj.deserialize(params.Ipv6Access)
+            this.Ipv6Access = obj;
+        }
+
+        if (params.Quic) {
+            let obj = new Quic();
+            obj.deserialize(params.Quic)
+            this.Quic = obj;
+        }
+
+        if (params.AwsPrivateAccess) {
+            let obj = new AwsPrivateAccess();
+            obj.deserialize(params.AwsPrivateAccess)
+            this.AwsPrivateAccess = obj;
+        }
+
+        if (params.OssPrivateAccess) {
+            let obj = new OssPrivateAccess();
+            obj.deserialize(params.OssPrivateAccess)
+            this.OssPrivateAccess = obj;
+        }
+
+        if (params.HwPrivateAccess) {
+            let obj = new HwPrivateAccess();
+            obj.deserialize(params.HwPrivateAccess)
+            this.HwPrivateAccess = obj;
+        }
+
+        if (params.OthersPrivateAccess) {
+            let obj = new OthersPrivateAccess();
+            obj.deserialize(params.OthersPrivateAccess)
+            this.OthersPrivateAccess = obj;
+        }
 
     }
 }
@@ -31704,6 +34077,34 @@ class AiReviewTerrorismTaskInput extends  AbstractModel {
             return;
         }
         this.Definition = 'Definition' in params ? params.Definition : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class Quic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -32065,6 +34466,49 @@ Default value: black.
 }
 
 /**
+ * 
+ * @class
+ */
+class Referer extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {Array.<RefererRule> || null}
+         */
+        this.RefererRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.RefererRules) {
+            this.RefererRules = new Array();
+            for (let z in params.RefererRules) {
+                let obj = new RefererRule();
+                obj.deserialize(params.RefererRules[z]);
+                this.RefererRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * Input parameters for OCR-based recognition of banned content
  * @class
  */
@@ -32195,6 +34639,41 @@ Note: this field may return null, indicating that no valid values can be obtaine
         this.StreamId = 'StreamId' in params ? params.StreamId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class HeuristicCacheConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.HeuristicCacheTimeSwitch = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.HeuristicCacheTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HeuristicCacheTimeSwitch = 'HeuristicCacheTimeSwitch' in params ? params.HeuristicCacheTimeSwitch : null;
+        this.HeuristicCacheTime = 'HeuristicCacheTime' in params ? params.HeuristicCacheTime : null;
 
     }
 }
@@ -32480,6 +34959,55 @@ class CommitUploadResponse extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class MaxAgeRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.MaxAgeType = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.MaxAgeContents = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MaxAgeTime = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FollowOrigin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxAgeType = 'MaxAgeType' in params ? params.MaxAgeType : null;
+        this.MaxAgeContents = 'MaxAgeContents' in params ? params.MaxAgeContents : null;
+        this.MaxAgeTime = 'MaxAgeTime' in params ? params.MaxAgeTime : null;
+        this.FollowOrigin = 'FollowOrigin' in params ? params.FollowOrigin : null;
+
+    }
+}
+
+/**
  * DescribeSampleSnapshotTemplates response structure.
  * @class
  */
@@ -32530,18 +35058,60 @@ class DescribeSampleSnapshotTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * ModifyWordSample response structure.
+ * 
  * @class
  */
-class ModifyWordSampleResponse extends  AbstractModel {
+class AuthenticationTypeD extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SecretKey = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.FileExtensions = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SignParam = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TimeParam = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
 
     }
 
@@ -32552,7 +35122,196 @@ class ModifyWordSampleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.SignParam = 'SignParam' in params ? params.SignParam : null;
+        this.TimeParam = 'TimeParam' in params ? params.TimeParam : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class AuthenticationTypeC extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.FileExtensions = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class AuthenticationTypeB extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.FileExtensions = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class AuthenticationTypeA extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SecretKey = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.SignParam = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 
+         * @type {Array.<string> || null}
+         */
+        this.FileExtensions = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.BackupSecretKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.SignParam = 'SignParam' in params ? params.SignParam : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.BackupSecretKey = 'BackupSecretKey' in params ? params.BackupSecretKey : null;
 
     }
 }
@@ -33041,6 +35800,56 @@ class ReviewTemplate extends  AbstractModel {
         this.Labels = 'Labels' in params ? params.Labels : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * DescribeCDNDomains response structure.
+ * @class
+ */
+class DescribeCDNDomainsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * List of domain name information.
+         * @type {Array.<CDNDomainInfo> || null}
+         */
+        this.DomainSet = null;
+
+        /**
+         * The total number of CDN domain names under the current application.
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomainSet) {
+            this.DomainSet = new Array();
+            for (let z in params.DomainSet) {
+                let obj = new CDNDomainInfo();
+                obj.deserialize(params.DomainSet[z]);
+                this.DomainSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -34682,51 +37491,55 @@ class PullEventsRequest extends  AbstractModel {
 }
 
 /**
- * Control parameter of face recognition task
+ * Object recognition result.
  * @class
  */
-class FaceConfigureInfoForUpdate extends  AbstractModel {
+class AiRecognitionTaskObjectResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Switch of face recognition task. Valid values:
-<li>ON: enables intelligent face recognition task;</li>
-<li>OFF: disables intelligent face recognition task.</li>
+         * Task status. Valid values: PROCESSING, SUCCESS, FAIL.
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Status = null;
 
         /**
-         * Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
+         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * Error code. 0 indicates the task is successful; other values indicate failure. You’re not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
          * @type {number || null}
          */
-        this.Score = null;
+        this.ErrCode = null;
 
         /**
-         * Default face filter labels, which specify the types of faces to return. If this parameter is left empty or an empty value is entered, the recognition results for all labels are returned. Valid values:
-<li>`entertainment`: people in the entertainment industry</li>
-<li>`sport`: sports celebrities</li>
-<li>`politician`: politically sensitive people</li>
-         * @type {Array.<string> || null}
-         */
-        this.DefaultLibraryLabelSet = null;
-
-        /**
-         * Custom face labels for filtering. After you specify a label, callbacks of face images without this label will be returned. If this parameter is not specified or left empty, callbacks of all face images will be returned.
-You can specify up to 100 labels, with each containing up to 16 characters.
-         * @type {Array.<string> || null}
-         */
-        this.UserDefineLibraryLabelSet = null;
-
-        /**
-         * Figure library. Valid values:
-<li>Default: default figure library;</li>
-<li>UserDefine: custom figure library.</li>
-<li>All: both default and custom figure libraries will be used.</li>
+         * Error message.
          * @type {string || null}
          */
-        this.FaceLibrary = null;
+        this.Message = null;
+
+        /**
+         * Input information of object recognition task.
+         * @type {AiRecognitionTaskObjectResultInput || null}
+         */
+        this.Input = null;
+
+        /**
+         * Output information of object recognition task.
+Note: this field may return null, indicating that no valid values can be obtained.
+         * @type {AiRecognitionTaskObjectResultOutput || null}
+         */
+        this.Output = null;
+
+        /**
+         * The progress of an object recognition task. Value range: 0-100.
+         * @type {number || null}
+         */
+        this.Progress = null;
 
     }
 
@@ -34737,11 +37550,23 @@ You can specify up to 100 labels, with each containing up to 16 characters.
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.Score = 'Score' in params ? params.Score : null;
-        this.DefaultLibraryLabelSet = 'DefaultLibraryLabelSet' in params ? params.DefaultLibraryLabelSet : null;
-        this.UserDefineLibraryLabelSet = 'UserDefineLibraryLabelSet' in params ? params.UserDefineLibraryLabelSet : null;
-        this.FaceLibrary = 'FaceLibrary' in params ? params.FaceLibrary : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
+        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Input) {
+            let obj = new AiRecognitionTaskObjectResultInput();
+            obj.deserialize(params.Input)
+            this.Input = obj;
+        }
+
+        if (params.Output) {
+            let obj = new AiRecognitionTaskObjectResultOutput();
+            obj.deserialize(params.Output)
+            this.Output = obj;
+        }
+        this.Progress = 'Progress' in params ? params.Progress : null;
 
     }
 }
@@ -35608,6 +38433,47 @@ Default value: 0.
 }
 
 /**
+ * Noise removal configuration.
+ * @class
+ */
+class AudioDenoiseInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether to enable noise removal. Valid values:
+<li>`ON`</li>
+<li>`OFF`</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * The noise removal type. This parameter is valid only if `Switch` is `ON`. Valid values:
+<li>`weak`</li>
+<li>`normal`</li>
+<li>`strong`</li>
+Default value: `weak`.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
  * Result for ASR-based recognition of pornographic content
  * @class
  */
@@ -36067,102 +38933,30 @@ class PornImgReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * Video editing task information
+ * CreateWatermarkTemplate response structure.
  * @class
  */
-class EditMediaTask extends  AbstractModel {
+class CreateWatermarkTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID.
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * Task flow status. Valid values:
-<li>PROCESSING: processing;</li>
-<li>FINISH: completed.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Error code. 0: success; other values: failure.
-<li>40000: invalid input parameter. Please check it;</li>
-<li>60000: invalid source file (e.g., video data is corrupted). Please check whether the source file is normal;</li>
-<li>70000: internal service error. Please try again.</li>
-Note: this field may return null, indicating that no valid values can be obtained.
+         * Unique ID of watermarking template.
          * @type {number || null}
          */
-        this.ErrCode = null;
+        this.Definition = null;
 
         /**
-         * Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+         * Watermark image address. This field is valid only when `Type` is `image`.
          * @type {string || null}
          */
-        this.ErrCodeExt = null;
+        this.ImageUrl = null;
 
         /**
-         * Error message.
-Note: this field may return null, indicating that no valid values can be obtained.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.Message = null;
-
-        /**
-         * Progress of a video editing task. Value range: [0, 100]
-         * @type {number || null}
-         */
-        this.Progress = null;
-
-        /**
-         * Input of video editing task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {EditMediaTaskInput || null}
-         */
-        this.Input = null;
-
-        /**
-         * Output of video editing task.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {EditMediaTaskOutput || null}
-         */
-        this.Output = null;
-
-        /**
-         * The metadata of the output video.
-         * @type {MediaMetaData || null}
-         */
-        this.MetaData = null;
-
-        /**
-         * The task ID for the task type `Procedure`. If a task flow (`ProcedureName`) is specified by [EditMedia](https://intl.cloud.tencent.com/document/api/266/34783?from_cn_redirect=1), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
-         * @type {string || null}
-         */
-        this.ProcedureTaskId = null;
-
-        /**
-         * The task ID for the task type `ReviewAudioVideo`. If a task flow (`ProcedureName`) is specified by [EditMedia](https://intl.cloud.tencent.com/document/api/266/34783?from_cn_redirect=1), and the task flow includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
-         * @type {string || null}
-         */
-        this.ReviewAudioVideoTaskId = null;
-
-        /**
-         * The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SessionId = null;
-
-        /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-Note: this field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.SessionContext = null;
+        this.RequestId = null;
 
     }
 
@@ -36173,34 +38967,9 @@ Note: this field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
-        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
-        this.Message = 'Message' in params ? params.Message : null;
-        this.Progress = 'Progress' in params ? params.Progress : null;
-
-        if (params.Input) {
-            let obj = new EditMediaTaskInput();
-            obj.deserialize(params.Input)
-            this.Input = obj;
-        }
-
-        if (params.Output) {
-            let obj = new EditMediaTaskOutput();
-            obj.deserialize(params.Output)
-            this.Output = obj;
-        }
-
-        if (params.MetaData) {
-            let obj = new MediaMetaData();
-            obj.deserialize(params.MetaData)
-            this.MetaData = obj;
-        }
-        this.ProcedureTaskId = 'ProcedureTaskId' in params ? params.ProcedureTaskId : null;
-        this.ReviewAudioVideoTaskId = 'ReviewAudioVideoTaskId' in params ? params.ReviewAudioVideoTaskId : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -37262,110 +40031,36 @@ class CreateAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * Details of a sampled screencapturing template
+ * 
  * @class
  */
-class SampleSnapshotTemplate extends  AbstractModel {
+class HwPrivateAccess extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Unique ID of a sampled screencapturing template.
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * Template type. Valid values:
-<li>Preset: preset template;</li>
-<li>Custom: custom template.</li>
+         * 
          * @type {string || null}
          */
-        this.Type = null;
+        this.Switch = null;
 
         /**
-         * Name of a sampled screencapturing template.
+         * 
          * @type {string || null}
          */
-        this.Name = null;
+        this.AccessKey = null;
 
         /**
-         * Template description.
+         * 
          * @type {string || null}
          */
-        this.Comment = null;
+        this.SecretKey = null;
 
         /**
-         * Maximum value of the width (or long side) of a screenshot in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * Maximum value of the height (or short side) of a screenshot in px. Value range: 0 and [128, 4,096].
-<li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-<li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-<li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-<li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-Default value: 0.
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * Resolution adaption. Valid values:
-<li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-<li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
-Default value: open.
+         * 
          * @type {string || null}
          */
-        this.ResolutionAdaptive = null;
-
-        /**
-         * Image format.
-         * @type {string || null}
-         */
-        this.Format = null;
-
-        /**
-         * Sampled screencapturing type.
-         * @type {string || null}
-         */
-        this.SampleType = null;
-
-        /**
-         * Sampling interval.
-         * @type {number || null}
-         */
-        this.SampleInterval = null;
-
-        /**
-         * Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * The fill mode, or the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:
-<li>stretch: Stretch the image frame by frame to fill the entire screen. The video image may become "squashed" or "stretched" after transcoding.</li>
-<li>black: Keep the image's original aspect ratio and fill the blank space with black bars.</li>
-<li>white: Keep the image’s original aspect ratio and fill the blank space with white bars.</li>
-<li>gauss: Keep the image’s original aspect ratio and apply Gaussian blur to the blank space.</li>
-Default value: black.
-         * @type {string || null}
-         */
-        this.FillType = null;
+        this.Bucket = null;
 
     }
 
@@ -37376,19 +40071,10 @@ Default value: black.
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
-        this.Format = 'Format' in params ? params.Format : null;
-        this.SampleType = 'SampleType' in params ? params.SampleType : null;
-        this.SampleInterval = 'SampleInterval' in params ? params.SampleInterval : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.AccessKey = 'AccessKey' in params ? params.AccessKey : null;
+        this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
 
     }
 }
@@ -38003,6 +40689,49 @@ class DescribeFileAttributesRequest extends  AbstractModel {
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
+
+    }
+}
+
+/**
+ * 
+ * @class
+ */
+class ResponseHeader extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 
+         * @type {Array.<HttpHeaderPathRule> || null}
+         */
+        this.HeaderRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.HeaderRules) {
+            this.HeaderRules = new Array();
+            for (let z in params.HeaderRules) {
+                let obj = new HttpHeaderPathRule();
+                obj.deserialize(params.HeaderRules[z]);
+                this.HeaderRules.push(obj);
+            }
+        }
 
     }
 }
@@ -38805,12 +41534,14 @@ Note: this field may return null, indicating that no valid values can be obtaine
 module.exports = {
     Canvas: Canvas,
     ModifySampleSnapshotTemplateResponse: ModifySampleSnapshotTemplateResponse,
+    ForbidMediaDistributionResponse: ForbidMediaDistributionResponse,
     ModifyWatermarkTemplateRequest: ModifyWatermarkTemplateRequest,
     CreateStorageRegionRequest: CreateStorageRegionRequest,
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
     DescribeFileAttributesTask: DescribeFileAttributesTask,
     ReviewAudioVideoTaskInput: ReviewAudioVideoTaskInput,
     DescribeAllClassRequest: DescribeAllClassRequest,
+    UserAgentFilterRule: UserAgentFilterRule,
     DescribeRoundPlaysRequest: DescribeRoundPlaysRequest,
     AiAnalysisTaskClassificationInput: AiAnalysisTaskClassificationInput,
     SvgWatermarkInput: SvgWatermarkInput,
@@ -38822,6 +41553,8 @@ module.exports = {
     LiveRealTimeClipResponse: LiveRealTimeClipResponse,
     AiReviewTaskProhibitedAsrResult: AiReviewTaskProhibitedAsrResult,
     AdaptiveDynamicStreamingTemplate: AdaptiveDynamicStreamingTemplate,
+    HttpHeaderPathRule: HttpHeaderPathRule,
+    UserAgentFilter: UserAgentFilter,
     DeleteAnimatedGraphicsTemplateResponse: DeleteAnimatedGraphicsTemplateResponse,
     AiReviewTaskProhibitedOcrResult: AiReviewTaskProhibitedOcrResult,
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
@@ -38830,8 +41563,10 @@ module.exports = {
     ManageTaskResponse: ManageTaskResponse,
     CreateImageProcessingTemplateRequest: CreateImageProcessingTemplateRequest,
     ModifyDefaultStorageRegionRequest: ModifyDefaultStorageRegionRequest,
+    CloneCDNDomainRequest: CloneCDNDomainRequest,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     UserDefineOcrTextReviewTemplateInfoForUpdate: UserDefineOcrTextReviewTemplateInfoForUpdate,
+    Origin: Origin,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     RebuildMediaTargetInfo: RebuildMediaTargetInfo,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
@@ -38842,6 +41577,7 @@ module.exports = {
     TempCertificate: TempCertificate,
     AiReviewTaskPoliticalOcrResult: AiReviewTaskPoliticalOcrResult,
     AiSampleWord: AiSampleWord,
+    RuleCacheConfig: RuleCacheConfig,
     CreateImageSpriteTemplateRequest: CreateImageSpriteTemplateRequest,
     MediaSnapshotByTimePicInfoItem: MediaSnapshotByTimePicInfoItem,
     UserDefineFaceReviewTemplateInfo: UserDefineFaceReviewTemplateInfo,
@@ -38860,12 +41596,14 @@ module.exports = {
     UrlSignatureAuthPolicy: UrlSignatureAuthPolicy,
     ClassificationConfigureInfo: ClassificationConfigureInfo,
     DescribeStorageDataResponse: DescribeStorageDataResponse,
+    CreateCDNDomainResponse: CreateCDNDomainResponse,
     AudioTemplateInfoForUpdate: AudioTemplateInfoForUpdate,
     ModifySubAppIdInfoRequest: ModifySubAppIdInfoRequest,
     DeletePersonSampleRequest: DeletePersonSampleRequest,
     ProcedureReviewAudioVideoTaskInput: ProcedureReviewAudioVideoTaskInput,
     AiRecognitionTaskAsrWordsSegmentItem: AiRecognitionTaskAsrWordsSegmentItem,
     AiRecognitionTaskInput: AiRecognitionTaskInput,
+    CreateCDNDomainRequest: CreateCDNDomainRequest,
     AudioTemplateInfo: AudioTemplateInfo,
     ExecuteFunctionResponse: ExecuteFunctionResponse,
     CoverConfigureInfo: CoverConfigureInfo,
@@ -38880,8 +41618,10 @@ module.exports = {
     PushUrlCacheResponse: PushUrlCacheResponse,
     MediaProcessTaskSampleSnapshotResult: MediaProcessTaskSampleSnapshotResult,
     TerrorismImgReviewTemplateInfoForUpdate: TerrorismImgReviewTemplateInfoForUpdate,
+    FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
-    AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
+    RuleCache: RuleCache,
+    EditMediaTaskInput: EditMediaTaskInput,
     DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
     DeleteImageProcessingTemplateRequest: DeleteImageProcessingTemplateRequest,
     ApplyUploadResponse: ApplyUploadResponse,
@@ -38914,13 +41654,15 @@ module.exports = {
     AiAnalysisTaskCoverResult: AiAnalysisTaskCoverResult,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
     AiAnalysisTaskClassificationOutput: AiAnalysisTaskClassificationOutput,
+    CacheConfigNoCache: CacheConfigNoCache,
     FileDeleteTask: FileDeleteTask,
     ResourceTag: ResourceTag,
     AiRecognitionTaskOcrFullTextResultOutput: AiRecognitionTaskOcrFullTextResultOutput,
-    EditMediaTaskInput: EditMediaTaskInput,
+    AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
     CreateRebuildMediaTemplateResponse: CreateRebuildMediaTemplateResponse,
     DescribeWordSamplesResponse: DescribeWordSamplesResponse,
     AiSampleFaceInfo: AiSampleFaceInfo,
+    CDNDomainInfo: CDNDomainInfo,
     ImageBlur: ImageBlur,
     ModifyVodDomainAccelerateConfigRequest: ModifyVodDomainAccelerateConfigRequest,
     PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,
@@ -38929,20 +41671,22 @@ module.exports = {
     FileReviewInfo: FileReviewInfo,
     WatermarkTemplate: WatermarkTemplate,
     CoverBySnapshotTaskOutput: CoverBySnapshotTaskOutput,
+    MaxAge: MaxAge,
     TextWatermarkTemplateInput: TextWatermarkTemplateInput,
     ForbidMediaDistributionRequest: ForbidMediaDistributionRequest,
     DescribeAIRecognitionTemplatesResponse: DescribeAIRecognitionTemplatesResponse,
+    AwsPrivateAccess: AwsPrivateAccess,
     PoliticalOcrReviewTemplateInfoForUpdate: PoliticalOcrReviewTemplateInfoForUpdate,
     TaskOutputMediaInfo: TaskOutputMediaInfo,
     ProcessMediaByUrlRequest: ProcessMediaByUrlRequest,
     PlayStatFileInfo: PlayStatFileInfo,
     ModifyMediaInfoRequest: ModifyMediaInfoRequest,
-    DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     TraceWatermarkInput: TraceWatermarkInput,
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     ReviewAudioVideoSegmentItem: ReviewAudioVideoSegmentItem,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    DescribeCDNDomainsRequest: DescribeCDNDomainsRequest,
     RepairInfo: RepairInfo,
     CdnLogInfo: CdnLogInfo,
     ReduceMediaBitrateTranscodeResult: ReduceMediaBitrateTranscodeResult,
@@ -38969,6 +41713,7 @@ module.exports = {
     AiRecognitionTaskOcrWordsResult: AiRecognitionTaskOcrWordsResult,
     PornAsrReviewTemplateInfo: PornAsrReviewTemplateInfo,
     AiRecognitionTaskSegmentResult: AiRecognitionTaskSegmentResult,
+    RequestHeader: RequestHeader,
     MediaSubtitleItem: MediaSubtitleItem,
     ProhibitedAsrReviewTemplateInfoForUpdate: ProhibitedAsrReviewTemplateInfoForUpdate,
     ModifyAnimatedGraphicsTemplateResponse: ModifyAnimatedGraphicsTemplateResponse,
@@ -38996,7 +41741,7 @@ module.exports = {
     DescribeReviewTemplatesResponse: DescribeReviewTemplatesResponse,
     DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
     MediaMiniProgramReviewInfo: MediaMiniProgramReviewInfo,
-    ForbidMediaDistributionResponse: ForbidMediaDistributionResponse,
+    CacheConfigCache: CacheConfigCache,
     TimeRange: TimeRange,
     DescribeAdaptiveDynamicStreamingTemplatesRequest: DescribeAdaptiveDynamicStreamingTemplatesRequest,
     ModifyRoundPlayRequest: ModifyRoundPlayRequest,
@@ -39016,8 +41761,11 @@ module.exports = {
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
     DeleteWordSamplesRequest: DeleteWordSamplesRequest,
     EmptyTrackItem: EmptyTrackItem,
+    RefererRule: RefererRule,
+    CacheConfigFollowOrigin: CacheConfigFollowOrigin,
     StickerTrackItem: StickerTrackItem,
     DescribeMediaPlayStatDetailsResponse: DescribeMediaPlayStatDetailsResponse,
+    FaceEnhanceInfo: FaceEnhanceInfo,
     VideoTemplateInfo: VideoTemplateInfo,
     PoliticalOcrReviewTemplateInfo: PoliticalOcrReviewTemplateInfo,
     PornOcrReviewTemplateInfoForUpdate: PornOcrReviewTemplateInfoForUpdate,
@@ -39040,13 +41788,14 @@ module.exports = {
     MediaAnimatedGraphicsItem: MediaAnimatedGraphicsItem,
     DescribeCDNUsageDataResponse: DescribeCDNUsageDataResponse,
     ModifyWordSampleRequest: ModifyWordSampleRequest,
+    EditMediaTask: EditMediaTask,
     AiRecognitionTaskFaceSegmentItem: AiRecognitionTaskFaceSegmentItem,
     DeleteMediaResponse: DeleteMediaResponse,
     ModifySnapshotByTimeOffsetTemplateResponse: ModifySnapshotByTimeOffsetTemplateResponse,
-    AiRecognitionTaskObjectResult: AiRecognitionTaskObjectResult,
     AiAnalysisTaskTagResult: AiAnalysisTaskTagResult,
     SearchMediaResponse: SearchMediaResponse,
     ReviewAudioVideoTaskOutput: ReviewAudioVideoTaskOutput,
+    Cache: Cache,
     RemoveWaterMarkTaskOutput: RemoveWaterMarkTaskOutput,
     ModifyMediaStorageClassRequest: ModifyMediaStorageClassRequest,
     AiAnalysisTaskTagOutput: AiAnalysisTaskTagOutput,
@@ -39056,13 +41805,15 @@ module.exports = {
     CreateRoundPlayResponse: CreateRoundPlayResponse,
     MediaSubtitleInput: MediaSubtitleInput,
     ProcessMediaRequest: ProcessMediaRequest,
-    FaceEnhanceInfo: FaceEnhanceInfo,
+    DeleteCDNDomainResponse: DeleteCDNDomainResponse,
     PornImageResult: PornImageResult,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,
     ModifyReviewTemplateRequest: ModifyReviewTemplateRequest,
     AiRecognitionTaskOcrFullTextResult: AiRecognitionTaskOcrFullTextResult,
+    ModifyCDNDomainConfigResponse: ModifyCDNDomainConfigResponse,
     RestoreMediaResponse: RestoreMediaResponse,
     MediaProcessTaskSnapshotByTimeOffsetResult: MediaProcessTaskSnapshotByTimeOffsetResult,
+    ModifyWordSampleResponse: ModifyWordSampleResponse,
     ManageTaskRequest: ManageTaskRequest,
     RoundPlayListItemInfo: RoundPlayListItemInfo,
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
@@ -39079,6 +41830,7 @@ module.exports = {
     ImageWatermarkTemplate: ImageWatermarkTemplate,
     ModifySubAppIdInfoResponse: ModifySubAppIdInfoResponse,
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
+    StartCDNDomainRequest: StartCDNDomainRequest,
     DeleteRebuildMediaTemplateResponse: DeleteRebuildMediaTemplateResponse,
     DeleteRebuildMediaTemplateRequest: DeleteRebuildMediaTemplateRequest,
     SimpleHlsClipRequest: SimpleHlsClipRequest,
@@ -39096,6 +41848,7 @@ module.exports = {
     TEHDConfig: TEHDConfig,
     ImageReviewUsageDataItem: ImageReviewUsageDataItem,
     AnimatedGraphicsTemplate: AnimatedGraphicsTemplate,
+    IpFilter: IpFilter,
     TerrorismOcrReviewTemplateInfoForUpdate: TerrorismOcrReviewTemplateInfoForUpdate,
     UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
     AiRecognitionTaskHeadTailResultOutput: AiRecognitionTaskHeadTailResultOutput,
@@ -39108,12 +41861,15 @@ module.exports = {
     DescribeDrmKeyProviderInfoRequest: DescribeDrmKeyProviderInfoRequest,
     ModifyDefaultStorageRegionResponse: ModifyDefaultStorageRegionResponse,
     CreateImageProcessingTemplateResponse: CreateImageProcessingTemplateResponse,
+    IpFilterPathRule: IpFilterPathRule,
     ComposeMediaTask: ComposeMediaTask,
     HeadTailConfigureInfoForUpdate: HeadTailConfigureInfoForUpdate,
     ImageScale: ImageScale,
     TranscodePlayInfo2017: TranscodePlayInfo2017,
     SplitMediaTask: SplitMediaTask,
+    OthersPrivateAccess: OthersPrivateAccess,
     ComposeMediaTaskInput: ComposeMediaTaskInput,
+    Authentication: Authentication,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
     MosaicInput: MosaicInput,
     AIAnalysisTemplateItem: AIAnalysisTemplateItem,
@@ -39131,7 +41887,7 @@ module.exports = {
     CreateAIRecognitionTemplateResponse: CreateAIRecognitionTemplateResponse,
     ModifySubAppIdStatusRequest: ModifySubAppIdStatusRequest,
     CreateSubAppIdResponse: CreateSubAppIdResponse,
-    CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
+    DeleteTranscodeTemplateRequest: DeleteTranscodeTemplateRequest,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
     ModifyReviewTemplateResponse: ModifyReviewTemplateResponse,
     DescribeImageProcessingTemplatesRequest: DescribeImageProcessingTemplatesRequest,
@@ -39146,6 +41902,7 @@ module.exports = {
     MediaTranscodeInfo: MediaTranscodeInfo,
     ResolutionNameInfo: ResolutionNameInfo,
     AiRecognitionTaskOcrWordsResultItem: AiRecognitionTaskOcrWordsResultItem,
+    DeleteCDNDomainRequest: DeleteCDNDomainRequest,
     ParseStreamingManifestRequest: ParseStreamingManifestRequest,
     ReviewImageResult: ReviewImageResult,
     DeleteSampleSnapshotTemplateResponse: DeleteSampleSnapshotTemplateResponse,
@@ -39187,11 +41944,14 @@ module.exports = {
     ApplyUploadRequest: ApplyUploadRequest,
     CreateSampleSnapshotTemplateResponse: CreateSampleSnapshotTemplateResponse,
     AiAnalysisTaskHighlightInput: AiAnalysisTaskHighlightInput,
+    ModifyCDNDomainConfigRequest: ModifyCDNDomainConfigRequest,
     DeleteContentReviewTemplateResponse: DeleteContentReviewTemplateResponse,
+    CloneCDNDomainResponse: CloneCDNDomainResponse,
     MediaBasicInfo: MediaBasicInfo,
     AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
     PullUploadRequest: PullUploadRequest,
     SortBy: SortBy,
+    Ipv6Access: Ipv6Access,
     ProcessMediaByProcedureRequest: ProcessMediaByProcedureRequest,
     RebuildMediaTargetVideoStream: RebuildMediaTargetVideoStream,
     ClipTask2017: ClipTask2017,
@@ -39222,8 +41982,10 @@ module.exports = {
     AdaptiveStreamTemplate: AdaptiveStreamTemplate,
     TranscodeTaskInput: TranscodeTaskInput,
     DescribeClientUploadAccelerationUsageDataRequest: DescribeClientUploadAccelerationUsageDataRequest,
+    StartCDNDomainResponse: StartCDNDomainResponse,
     ModifyAIRecognitionTemplateRequest: ModifyAIRecognitionTemplateRequest,
     DescribeStorageRegionsRequest: DescribeStorageRegionsRequest,
+    OssPrivateAccess: OssPrivateAccess,
     WechatPublishTask: WechatPublishTask,
     DescribeCDNStatDetailsRequest: DescribeCDNStatDetailsRequest,
     HeadTailTaskInput: HeadTailTaskInput,
@@ -39266,9 +42028,11 @@ module.exports = {
     PoliticalImgReviewTemplateInfo: PoliticalImgReviewTemplateInfo,
     PoliticalConfigureInfo: PoliticalConfigureInfo,
     HighlightsConfigureInfo: HighlightsConfigureInfo,
+    CDNCertInfo: CDNCertInfo,
     AiRecognitionTaskOcrWordsSegmentItem: AiRecognitionTaskOcrWordsSegmentItem,
     MediaProcessTaskResult: MediaProcessTaskResult,
     DeleteWordSamplesResponse: DeleteWordSamplesResponse,
+    HeuristicCache: HeuristicCache,
     DeleteProcedureTemplateRequest: DeleteProcedureTemplateRequest,
     WatermarkInput: WatermarkInput,
     AiSampleWordInfo: AiSampleWordInfo,
@@ -39291,6 +42055,7 @@ module.exports = {
     AiRecognitionTaskAsrWordsResultItem: AiRecognitionTaskAsrWordsResultItem,
     RebuildMediaTaskOutput: RebuildMediaTaskOutput,
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
+    Https: Https,
     RebuildMediaRequest: RebuildMediaRequest,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
     MediaKeyFrameDescInfo: MediaKeyFrameDescInfo,
@@ -39300,6 +42065,7 @@ module.exports = {
     UserDefineFaceReviewTemplateInfoForUpdate: UserDefineFaceReviewTemplateInfoForUpdate,
     ModifyRoundPlayResponse: ModifyRoundPlayResponse,
     CreateProcedureTemplateResponse: CreateProcedureTemplateResponse,
+    FollowRedirect: FollowRedirect,
     RebuildMediaResponse: RebuildMediaResponse,
     DomainHTTPSConfig: DomainHTTPSConfig,
     DescribeMediaProcessUsageDataResponse: DescribeMediaProcessUsageDataResponse,
@@ -39310,6 +42076,7 @@ module.exports = {
     CreateVodDomainResponse: CreateVodDomainResponse,
     ModifyVodDomainAccelerateConfigResponse: ModifyVodDomainAccelerateConfigResponse,
     AiRecognitionTaskSegmentResultInput: AiRecognitionTaskSegmentResultInput,
+    ForceRedirect: ForceRedirect,
     DescribeTasksResponse: DescribeTasksResponse,
     DescribeSubAppIdsRequest: DescribeSubAppIdsRequest,
     AiRecognitionTaskFaceResultInput: AiRecognitionTaskFaceResultInput,
@@ -39319,9 +42086,11 @@ module.exports = {
     ModifySubAppIdStatusResponse: ModifySubAppIdStatusResponse,
     ReviewImageResponse: ReviewImageResponse,
     DescribeStorageRegionsResponse: DescribeStorageRegionsResponse,
+    SampleSnapshotTemplate: SampleSnapshotTemplate,
     ModifySnapshotByTimeOffsetTemplateRequest: ModifySnapshotByTimeOffsetTemplateRequest,
     ProcedureTask: ProcedureTask,
     ExtractTraceWatermarkRequest: ExtractTraceWatermarkRequest,
+    CDNDomainConfig: CDNDomainConfig,
     TaskSimpleInfo: TaskSimpleInfo,
     ReviewAudioVideoTask: ReviewAudioVideoTask,
     DescribeSnapshotByTimeOffsetTemplatesResponse: DescribeSnapshotByTimeOffsetTemplatesResponse,
@@ -39334,27 +42103,34 @@ module.exports = {
     DescribeTasksRequest: DescribeTasksRequest,
     DescribeReviewDetailsResponse: DescribeReviewDetailsResponse,
     CreateTranscodeTemplateResponse: CreateTranscodeTemplateResponse,
-    AudioDenoiseInfo: AudioDenoiseInfo,
+    CDNDomainConfigForUpdate: CDNDomainConfigForUpdate,
     AiRecognitionTaskAsrWordsResultInput: AiRecognitionTaskAsrWordsResultInput,
     SnapshotByTimeOffset2017: SnapshotByTimeOffset2017,
     CreateAIAnalysisTemplateRequest: CreateAIAnalysisTemplateRequest,
     AiReviewTerrorismTaskInput: AiReviewTerrorismTaskInput,
+    Quic: Quic,
     RebuildMediaByTemplateResponse: RebuildMediaByTemplateResponse,
     MediaAudioStreamItem: MediaAudioStreamItem,
     SubtitleFormatsOperation: SubtitleFormatsOperation,
     SubAppIdInfo: SubAppIdInfo,
     DescribeAllClassResponse: DescribeAllClassResponse,
     ModifyImageSpriteTemplateRequest: ModifyImageSpriteTemplateRequest,
+    Referer: Referer,
     AiReviewProhibitedOcrTaskInput: AiReviewProhibitedOcrTaskInput,
     DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
     DeleteVodDomainResponse: DeleteVodDomainResponse,
     EditMediaStreamInfo: EditMediaStreamInfo,
+    HeuristicCacheConfig: HeuristicCacheConfig,
     DescribeWordSamplesRequest: DescribeWordSamplesRequest,
     ImageCenterCut: ImageCenterCut,
     ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
     CommitUploadResponse: CommitUploadResponse,
+    MaxAgeRule: MaxAgeRule,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
-    ModifyWordSampleResponse: ModifyWordSampleResponse,
+    AuthenticationTypeD: AuthenticationTypeD,
+    AuthenticationTypeC: AuthenticationTypeC,
+    AuthenticationTypeB: AuthenticationTypeB,
+    AuthenticationTypeA: AuthenticationTypeA,
     AiContentReviewResult: AiContentReviewResult,
     TerrorismImgReviewTemplateInfo: TerrorismImgReviewTemplateInfo,
     DrmStreamingsInfoForUpdate: DrmStreamingsInfoForUpdate,
@@ -39362,6 +42138,7 @@ module.exports = {
     DeleteClassRequest: DeleteClassRequest,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
     ReviewTemplate: ReviewTemplate,
+    DescribeCDNDomainsResponse: DescribeCDNDomainsResponse,
     MediaVideoStreamItem: MediaVideoStreamItem,
     CreateRebuildMediaTemplateRequest: CreateRebuildMediaTemplateRequest,
     ImageOperation: ImageOperation,
@@ -39387,7 +42164,7 @@ module.exports = {
     AiRecognitionTaskObjectSeqmentItem: AiRecognitionTaskObjectSeqmentItem,
     RestoreMediaRequest: RestoreMediaRequest,
     PullEventsRequest: PullEventsRequest,
-    FaceConfigureInfoForUpdate: FaceConfigureInfoForUpdate,
+    AiRecognitionTaskObjectResult: AiRecognitionTaskObjectResult,
     DescribeAIAnalysisTemplatesResponse: DescribeAIAnalysisTemplatesResponse,
     CreateSnapshotByTimeOffsetTemplateRequest: CreateSnapshotByTimeOffsetTemplateRequest,
     AiRecognitionTaskAsrWordsResult: AiRecognitionTaskAsrWordsResult,
@@ -39398,6 +42175,7 @@ module.exports = {
     CreateSampleSnapshotTemplateRequest: CreateSampleSnapshotTemplateRequest,
     DescribeRebuildMediaTemplatesResponse: DescribeRebuildMediaTemplatesResponse,
     AudioVolumeParam: AudioVolumeParam,
+    AudioDenoiseInfo: AudioDenoiseInfo,
     AiReviewTaskPornAsrResult: AiReviewTaskPornAsrResult,
     ModifyClassResponse: ModifyClassResponse,
     EditMediaFileInfo: EditMediaFileInfo,
@@ -39408,7 +42186,7 @@ module.exports = {
     AiRecognitionTaskFaceResultOutput: AiRecognitionTaskFaceResultOutput,
     DeleteImageProcessingTemplateResponse: DeleteImageProcessingTemplateResponse,
     PornImgReviewTemplateInfoForUpdate: PornImgReviewTemplateInfoForUpdate,
-    EditMediaTask: EditMediaTask,
+    CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     PornImgReviewTemplateInfo: PornImgReviewTemplateInfo,
     AiReviewPoliticalOcrTaskOutput: AiReviewPoliticalOcrTaskOutput,
     OcrFullTextConfigureInfo: OcrFullTextConfigureInfo,
@@ -39429,7 +42207,7 @@ module.exports = {
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,
     CreateAnimatedGraphicsTemplateResponse: CreateAnimatedGraphicsTemplateResponse,
-    SampleSnapshotTemplate: SampleSnapshotTemplate,
+    HwPrivateAccess: HwPrivateAccess,
     MediaImageSpriteItem: MediaImageSpriteItem,
     DescribePersonSamplesRequest: DescribePersonSamplesRequest,
     AiRecognitionTaskFaceResultItem: AiRecognitionTaskFaceResultItem,
@@ -39440,6 +42218,7 @@ module.exports = {
     StorageStatData: StorageStatData,
     TranscodeTask2017: TranscodeTask2017,
     DescribeFileAttributesRequest: DescribeFileAttributesRequest,
+    ResponseHeader: ResponseHeader,
     MediaOutputInfo: MediaOutputInfo,
     EditMediaTaskOutput: EditMediaTaskOutput,
     HighlightSegmentItem: HighlightSegmentItem,

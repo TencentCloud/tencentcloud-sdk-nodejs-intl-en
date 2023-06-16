@@ -18,12 +18,14 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const Canvas = models.Canvas;
 const ModifySampleSnapshotTemplateResponse = models.ModifySampleSnapshotTemplateResponse;
+const ForbidMediaDistributionResponse = models.ForbidMediaDistributionResponse;
 const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
 const CreateStorageRegionRequest = models.CreateStorageRegionRequest;
 const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullTextSegmentItem;
 const DescribeFileAttributesTask = models.DescribeFileAttributesTask;
 const ReviewAudioVideoTaskInput = models.ReviewAudioVideoTaskInput;
 const DescribeAllClassRequest = models.DescribeAllClassRequest;
+const UserAgentFilterRule = models.UserAgentFilterRule;
 const DescribeRoundPlaysRequest = models.DescribeRoundPlaysRequest;
 const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
 const SvgWatermarkInput = models.SvgWatermarkInput;
@@ -35,6 +37,8 @@ const DescribeAnimatedGraphicsTemplatesRequest = models.DescribeAnimatedGraphics
 const LiveRealTimeClipResponse = models.LiveRealTimeClipResponse;
 const AiReviewTaskProhibitedAsrResult = models.AiReviewTaskProhibitedAsrResult;
 const AdaptiveDynamicStreamingTemplate = models.AdaptiveDynamicStreamingTemplate;
+const HttpHeaderPathRule = models.HttpHeaderPathRule;
+const UserAgentFilter = models.UserAgentFilter;
 const DeleteAnimatedGraphicsTemplateResponse = models.DeleteAnimatedGraphicsTemplateResponse;
 const AiReviewTaskProhibitedOcrResult = models.AiReviewTaskProhibitedOcrResult;
 const AiRecognitionTaskAsrFullTextResultOutput = models.AiRecognitionTaskAsrFullTextResultOutput;
@@ -43,8 +47,10 @@ const MediaMiniProgramReviewElem = models.MediaMiniProgramReviewElem;
 const ManageTaskResponse = models.ManageTaskResponse;
 const CreateImageProcessingTemplateRequest = models.CreateImageProcessingTemplateRequest;
 const ModifyDefaultStorageRegionRequest = models.ModifyDefaultStorageRegionRequest;
+const CloneCDNDomainRequest = models.CloneCDNDomainRequest;
 const AiAnalysisTaskCoverOutput = models.AiAnalysisTaskCoverOutput;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
+const Origin = models.Origin;
 const MediaSnapshotByTimeOffsetItem = models.MediaSnapshotByTimeOffsetItem;
 const RebuildMediaTargetInfo = models.RebuildMediaTargetInfo;
 const ModifySampleSnapshotTemplateRequest = models.ModifySampleSnapshotTemplateRequest;
@@ -55,6 +61,7 @@ const ClipFileInfo2017 = models.ClipFileInfo2017;
 const TempCertificate = models.TempCertificate;
 const AiReviewTaskPoliticalOcrResult = models.AiReviewTaskPoliticalOcrResult;
 const AiSampleWord = models.AiSampleWord;
+const RuleCacheConfig = models.RuleCacheConfig;
 const CreateImageSpriteTemplateRequest = models.CreateImageSpriteTemplateRequest;
 const MediaSnapshotByTimePicInfoItem = models.MediaSnapshotByTimePicInfoItem;
 const UserDefineFaceReviewTemplateInfo = models.UserDefineFaceReviewTemplateInfo;
@@ -73,12 +80,14 @@ const DescribeLicenseUsageDataResponse = models.DescribeLicenseUsageDataResponse
 const UrlSignatureAuthPolicy = models.UrlSignatureAuthPolicy;
 const ClassificationConfigureInfo = models.ClassificationConfigureInfo;
 const DescribeStorageDataResponse = models.DescribeStorageDataResponse;
+const CreateCDNDomainResponse = models.CreateCDNDomainResponse;
 const AudioTemplateInfoForUpdate = models.AudioTemplateInfoForUpdate;
 const ModifySubAppIdInfoRequest = models.ModifySubAppIdInfoRequest;
 const DeletePersonSampleRequest = models.DeletePersonSampleRequest;
 const ProcedureReviewAudioVideoTaskInput = models.ProcedureReviewAudioVideoTaskInput;
 const AiRecognitionTaskAsrWordsSegmentItem = models.AiRecognitionTaskAsrWordsSegmentItem;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
+const CreateCDNDomainRequest = models.CreateCDNDomainRequest;
 const AudioTemplateInfo = models.AudioTemplateInfo;
 const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
 const CoverConfigureInfo = models.CoverConfigureInfo;
@@ -93,8 +102,10 @@ const CreateAdaptiveDynamicStreamingTemplateRequest = models.CreateAdaptiveDynam
 const PushUrlCacheResponse = models.PushUrlCacheResponse;
 const MediaProcessTaskSampleSnapshotResult = models.MediaProcessTaskSampleSnapshotResult;
 const TerrorismImgReviewTemplateInfoForUpdate = models.TerrorismImgReviewTemplateInfoForUpdate;
+const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
 const ModifyTranscodeTemplateRequest = models.ModifyTranscodeTemplateRequest;
-const AiAnalysisTaskHighlightResult = models.AiAnalysisTaskHighlightResult;
+const RuleCache = models.RuleCache;
+const EditMediaTaskInput = models.EditMediaTaskInput;
 const DeleteAIAnalysisTemplateResponse = models.DeleteAIAnalysisTemplateResponse;
 const DeleteImageProcessingTemplateRequest = models.DeleteImageProcessingTemplateRequest;
 const ApplyUploadResponse = models.ApplyUploadResponse;
@@ -127,13 +138,15 @@ const AttachMediaSubtitlesRequest = models.AttachMediaSubtitlesRequest;
 const AiAnalysisTaskCoverResult = models.AiAnalysisTaskCoverResult;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
 const AiAnalysisTaskClassificationOutput = models.AiAnalysisTaskClassificationOutput;
+const CacheConfigNoCache = models.CacheConfigNoCache;
 const FileDeleteTask = models.FileDeleteTask;
 const ResourceTag = models.ResourceTag;
 const AiRecognitionTaskOcrFullTextResultOutput = models.AiRecognitionTaskOcrFullTextResultOutput;
-const EditMediaTaskInput = models.EditMediaTaskInput;
+const AiAnalysisTaskHighlightResult = models.AiAnalysisTaskHighlightResult;
 const CreateRebuildMediaTemplateResponse = models.CreateRebuildMediaTemplateResponse;
 const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
 const AiSampleFaceInfo = models.AiSampleFaceInfo;
+const CDNDomainInfo = models.CDNDomainInfo;
 const ImageBlur = models.ImageBlur;
 const ModifyVodDomainAccelerateConfigRequest = models.ModifyVodDomainAccelerateConfigRequest;
 const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
@@ -142,20 +155,22 @@ const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
 const FileReviewInfo = models.FileReviewInfo;
 const WatermarkTemplate = models.WatermarkTemplate;
 const CoverBySnapshotTaskOutput = models.CoverBySnapshotTaskOutput;
+const MaxAge = models.MaxAge;
 const TextWatermarkTemplateInput = models.TextWatermarkTemplateInput;
 const ForbidMediaDistributionRequest = models.ForbidMediaDistributionRequest;
 const DescribeAIRecognitionTemplatesResponse = models.DescribeAIRecognitionTemplatesResponse;
+const AwsPrivateAccess = models.AwsPrivateAccess;
 const PoliticalOcrReviewTemplateInfoForUpdate = models.PoliticalOcrReviewTemplateInfoForUpdate;
 const TaskOutputMediaInfo = models.TaskOutputMediaInfo;
 const ProcessMediaByUrlRequest = models.ProcessMediaByUrlRequest;
 const PlayStatFileInfo = models.PlayStatFileInfo;
 const ModifyMediaInfoRequest = models.ModifyMediaInfoRequest;
-const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const TraceWatermarkInput = models.TraceWatermarkInput;
 const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
 const ReviewAudioVideoSegmentItem = models.ReviewAudioVideoSegmentItem;
 const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
+const DescribeCDNDomainsRequest = models.DescribeCDNDomainsRequest;
 const RepairInfo = models.RepairInfo;
 const CdnLogInfo = models.CdnLogInfo;
 const ReduceMediaBitrateTranscodeResult = models.ReduceMediaBitrateTranscodeResult;
@@ -182,6 +197,7 @@ const AiReviewTaskTerrorismOcrResult = models.AiReviewTaskTerrorismOcrResult;
 const AiRecognitionTaskOcrWordsResult = models.AiRecognitionTaskOcrWordsResult;
 const PornAsrReviewTemplateInfo = models.PornAsrReviewTemplateInfo;
 const AiRecognitionTaskSegmentResult = models.AiRecognitionTaskSegmentResult;
+const RequestHeader = models.RequestHeader;
 const MediaSubtitleItem = models.MediaSubtitleItem;
 const ProhibitedAsrReviewTemplateInfoForUpdate = models.ProhibitedAsrReviewTemplateInfoForUpdate;
 const ModifyAnimatedGraphicsTemplateResponse = models.ModifyAnimatedGraphicsTemplateResponse;
@@ -209,7 +225,7 @@ const DeleteProcedureTemplateResponse = models.DeleteProcedureTemplateResponse;
 const DescribeReviewTemplatesResponse = models.DescribeReviewTemplatesResponse;
 const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
 const MediaMiniProgramReviewInfo = models.MediaMiniProgramReviewInfo;
-const ForbidMediaDistributionResponse = models.ForbidMediaDistributionResponse;
+const CacheConfigCache = models.CacheConfigCache;
 const TimeRange = models.TimeRange;
 const DescribeAdaptiveDynamicStreamingTemplatesRequest = models.DescribeAdaptiveDynamicStreamingTemplatesRequest;
 const ModifyRoundPlayRequest = models.ModifyRoundPlayRequest;
@@ -229,8 +245,11 @@ const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
 const DeleteWordSamplesRequest = models.DeleteWordSamplesRequest;
 const EmptyTrackItem = models.EmptyTrackItem;
+const RefererRule = models.RefererRule;
+const CacheConfigFollowOrigin = models.CacheConfigFollowOrigin;
 const StickerTrackItem = models.StickerTrackItem;
 const DescribeMediaPlayStatDetailsResponse = models.DescribeMediaPlayStatDetailsResponse;
+const FaceEnhanceInfo = models.FaceEnhanceInfo;
 const VideoTemplateInfo = models.VideoTemplateInfo;
 const PoliticalOcrReviewTemplateInfo = models.PoliticalOcrReviewTemplateInfo;
 const PornOcrReviewTemplateInfoForUpdate = models.PornOcrReviewTemplateInfoForUpdate;
@@ -253,13 +272,14 @@ const ModifyAdaptiveDynamicStreamingTemplateRequest = models.ModifyAdaptiveDynam
 const MediaAnimatedGraphicsItem = models.MediaAnimatedGraphicsItem;
 const DescribeCDNUsageDataResponse = models.DescribeCDNUsageDataResponse;
 const ModifyWordSampleRequest = models.ModifyWordSampleRequest;
+const EditMediaTask = models.EditMediaTask;
 const AiRecognitionTaskFaceSegmentItem = models.AiRecognitionTaskFaceSegmentItem;
 const DeleteMediaResponse = models.DeleteMediaResponse;
 const ModifySnapshotByTimeOffsetTemplateResponse = models.ModifySnapshotByTimeOffsetTemplateResponse;
-const AiRecognitionTaskObjectResult = models.AiRecognitionTaskObjectResult;
 const AiAnalysisTaskTagResult = models.AiAnalysisTaskTagResult;
 const SearchMediaResponse = models.SearchMediaResponse;
 const ReviewAudioVideoTaskOutput = models.ReviewAudioVideoTaskOutput;
+const Cache = models.Cache;
 const RemoveWaterMarkTaskOutput = models.RemoveWaterMarkTaskOutput;
 const ModifyMediaStorageClassRequest = models.ModifyMediaStorageClassRequest;
 const AiAnalysisTaskTagOutput = models.AiAnalysisTaskTagOutput;
@@ -269,13 +289,15 @@ const ReviewImageSegmentItem = models.ReviewImageSegmentItem;
 const CreateRoundPlayResponse = models.CreateRoundPlayResponse;
 const MediaSubtitleInput = models.MediaSubtitleInput;
 const ProcessMediaRequest = models.ProcessMediaRequest;
-const FaceEnhanceInfo = models.FaceEnhanceInfo;
+const DeleteCDNDomainResponse = models.DeleteCDNDomainResponse;
 const PornImageResult = models.PornImageResult;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
 const ModifyReviewTemplateRequest = models.ModifyReviewTemplateRequest;
 const AiRecognitionTaskOcrFullTextResult = models.AiRecognitionTaskOcrFullTextResult;
+const ModifyCDNDomainConfigResponse = models.ModifyCDNDomainConfigResponse;
 const RestoreMediaResponse = models.RestoreMediaResponse;
 const MediaProcessTaskSnapshotByTimeOffsetResult = models.MediaProcessTaskSnapshotByTimeOffsetResult;
+const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
 const ManageTaskRequest = models.ManageTaskRequest;
 const RoundPlayListItemInfo = models.RoundPlayListItemInfo;
 const AiRecognitionTaskAsrWordsResultOutput = models.AiRecognitionTaskAsrWordsResultOutput;
@@ -292,6 +314,7 @@ const CreateSuperPlayerConfigRequest = models.CreateSuperPlayerConfigRequest;
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const ModifySubAppIdInfoResponse = models.ModifySubAppIdInfoResponse;
 const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
+const StartCDNDomainRequest = models.StartCDNDomainRequest;
 const DeleteRebuildMediaTemplateResponse = models.DeleteRebuildMediaTemplateResponse;
 const DeleteRebuildMediaTemplateRequest = models.DeleteRebuildMediaTemplateRequest;
 const SimpleHlsClipRequest = models.SimpleHlsClipRequest;
@@ -309,6 +332,7 @@ const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTempl
 const TEHDConfig = models.TEHDConfig;
 const ImageReviewUsageDataItem = models.ImageReviewUsageDataItem;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
+const IpFilter = models.IpFilter;
 const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
 const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const AiRecognitionTaskHeadTailResultOutput = models.AiRecognitionTaskHeadTailResultOutput;
@@ -321,12 +345,15 @@ const WechatMiniProgramPublishTask = models.WechatMiniProgramPublishTask;
 const DescribeDrmKeyProviderInfoRequest = models.DescribeDrmKeyProviderInfoRequest;
 const ModifyDefaultStorageRegionResponse = models.ModifyDefaultStorageRegionResponse;
 const CreateImageProcessingTemplateResponse = models.CreateImageProcessingTemplateResponse;
+const IpFilterPathRule = models.IpFilterPathRule;
 const ComposeMediaTask = models.ComposeMediaTask;
 const HeadTailConfigureInfoForUpdate = models.HeadTailConfigureInfoForUpdate;
 const ImageScale = models.ImageScale;
 const TranscodePlayInfo2017 = models.TranscodePlayInfo2017;
 const SplitMediaTask = models.SplitMediaTask;
+const OthersPrivateAccess = models.OthersPrivateAccess;
 const ComposeMediaTaskInput = models.ComposeMediaTaskInput;
+const Authentication = models.Authentication;
 const AnimatedGraphicTaskInput = models.AnimatedGraphicTaskInput;
 const MosaicInput = models.MosaicInput;
 const AIAnalysisTemplateItem = models.AIAnalysisTemplateItem;
@@ -344,7 +371,7 @@ const ConfirmEventsRequest = models.ConfirmEventsRequest;
 const CreateAIRecognitionTemplateResponse = models.CreateAIRecognitionTemplateResponse;
 const ModifySubAppIdStatusRequest = models.ModifySubAppIdStatusRequest;
 const CreateSubAppIdResponse = models.CreateSubAppIdResponse;
-const CreateWatermarkTemplateResponse = models.CreateWatermarkTemplateResponse;
+const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const AiReviewTerrorismTaskOutput = models.AiReviewTerrorismTaskOutput;
 const ModifyReviewTemplateResponse = models.ModifyReviewTemplateResponse;
 const DescribeImageProcessingTemplatesRequest = models.DescribeImageProcessingTemplatesRequest;
@@ -359,6 +386,7 @@ const DescribeAIAnalysisTemplatesRequest = models.DescribeAIAnalysisTemplatesReq
 const MediaTranscodeInfo = models.MediaTranscodeInfo;
 const ResolutionNameInfo = models.ResolutionNameInfo;
 const AiRecognitionTaskOcrWordsResultItem = models.AiRecognitionTaskOcrWordsResultItem;
+const DeleteCDNDomainRequest = models.DeleteCDNDomainRequest;
 const ParseStreamingManifestRequest = models.ParseStreamingManifestRequest;
 const ReviewImageResult = models.ReviewImageResult;
 const DeleteSampleSnapshotTemplateResponse = models.DeleteSampleSnapshotTemplateResponse;
@@ -400,11 +428,14 @@ const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
 const ApplyUploadRequest = models.ApplyUploadRequest;
 const CreateSampleSnapshotTemplateResponse = models.CreateSampleSnapshotTemplateResponse;
 const AiAnalysisTaskHighlightInput = models.AiAnalysisTaskHighlightInput;
+const ModifyCDNDomainConfigRequest = models.ModifyCDNDomainConfigRequest;
 const DeleteContentReviewTemplateResponse = models.DeleteContentReviewTemplateResponse;
+const CloneCDNDomainResponse = models.CloneCDNDomainResponse;
 const MediaBasicInfo = models.MediaBasicInfo;
 const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
 const PullUploadRequest = models.PullUploadRequest;
 const SortBy = models.SortBy;
+const Ipv6Access = models.Ipv6Access;
 const ProcessMediaByProcedureRequest = models.ProcessMediaByProcedureRequest;
 const RebuildMediaTargetVideoStream = models.RebuildMediaTargetVideoStream;
 const ClipTask2017 = models.ClipTask2017;
@@ -435,8 +466,10 @@ const DescribeVodDomainsResponse = models.DescribeVodDomainsResponse;
 const AdaptiveStreamTemplate = models.AdaptiveStreamTemplate;
 const TranscodeTaskInput = models.TranscodeTaskInput;
 const DescribeClientUploadAccelerationUsageDataRequest = models.DescribeClientUploadAccelerationUsageDataRequest;
+const StartCDNDomainResponse = models.StartCDNDomainResponse;
 const ModifyAIRecognitionTemplateRequest = models.ModifyAIRecognitionTemplateRequest;
 const DescribeStorageRegionsRequest = models.DescribeStorageRegionsRequest;
+const OssPrivateAccess = models.OssPrivateAccess;
 const WechatPublishTask = models.WechatPublishTask;
 const DescribeCDNStatDetailsRequest = models.DescribeCDNStatDetailsRequest;
 const HeadTailTaskInput = models.HeadTailTaskInput;
@@ -479,9 +512,11 @@ const PlayStatInfo = models.PlayStatInfo;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
 const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
+const CDNCertInfo = models.CDNCertInfo;
 const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSegmentItem;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
+const HeuristicCache = models.HeuristicCache;
 const DeleteProcedureTemplateRequest = models.DeleteProcedureTemplateRequest;
 const WatermarkInput = models.WatermarkInput;
 const AiSampleWordInfo = models.AiSampleWordInfo;
@@ -504,6 +539,7 @@ const MediaAiAnalysisFrameTagSegmentItem = models.MediaAiAnalysisFrameTagSegment
 const AiRecognitionTaskAsrWordsResultItem = models.AiRecognitionTaskAsrWordsResultItem;
 const RebuildMediaTaskOutput = models.RebuildMediaTaskOutput;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
+const Https = models.Https;
 const RebuildMediaRequest = models.RebuildMediaRequest;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const MediaKeyFrameDescInfo = models.MediaKeyFrameDescInfo;
@@ -513,6 +549,7 @@ const AiSampleFailFaceInfo = models.AiSampleFailFaceInfo;
 const UserDefineFaceReviewTemplateInfoForUpdate = models.UserDefineFaceReviewTemplateInfoForUpdate;
 const ModifyRoundPlayResponse = models.ModifyRoundPlayResponse;
 const CreateProcedureTemplateResponse = models.CreateProcedureTemplateResponse;
+const FollowRedirect = models.FollowRedirect;
 const RebuildMediaResponse = models.RebuildMediaResponse;
 const DomainHTTPSConfig = models.DomainHTTPSConfig;
 const DescribeMediaProcessUsageDataResponse = models.DescribeMediaProcessUsageDataResponse;
@@ -523,6 +560,7 @@ const SplitMediaOutputConfig = models.SplitMediaOutputConfig;
 const CreateVodDomainResponse = models.CreateVodDomainResponse;
 const ModifyVodDomainAccelerateConfigResponse = models.ModifyVodDomainAccelerateConfigResponse;
 const AiRecognitionTaskSegmentResultInput = models.AiRecognitionTaskSegmentResultInput;
+const ForceRedirect = models.ForceRedirect;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DescribeSubAppIdsRequest = models.DescribeSubAppIdsRequest;
 const AiRecognitionTaskFaceResultInput = models.AiRecognitionTaskFaceResultInput;
@@ -532,9 +570,11 @@ const AiReviewTaskPoliticalResult = models.AiReviewTaskPoliticalResult;
 const ModifySubAppIdStatusResponse = models.ModifySubAppIdStatusResponse;
 const ReviewImageResponse = models.ReviewImageResponse;
 const DescribeStorageRegionsResponse = models.DescribeStorageRegionsResponse;
+const SampleSnapshotTemplate = models.SampleSnapshotTemplate;
 const ModifySnapshotByTimeOffsetTemplateRequest = models.ModifySnapshotByTimeOffsetTemplateRequest;
 const ProcedureTask = models.ProcedureTask;
 const ExtractTraceWatermarkRequest = models.ExtractTraceWatermarkRequest;
+const CDNDomainConfig = models.CDNDomainConfig;
 const TaskSimpleInfo = models.TaskSimpleInfo;
 const ReviewAudioVideoTask = models.ReviewAudioVideoTask;
 const DescribeSnapshotByTimeOffsetTemplatesResponse = models.DescribeSnapshotByTimeOffsetTemplatesResponse;
@@ -547,27 +587,34 @@ const DescribeVodDomainsRequest = models.DescribeVodDomainsRequest;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const DescribeReviewDetailsResponse = models.DescribeReviewDetailsResponse;
 const CreateTranscodeTemplateResponse = models.CreateTranscodeTemplateResponse;
-const AudioDenoiseInfo = models.AudioDenoiseInfo;
+const CDNDomainConfigForUpdate = models.CDNDomainConfigForUpdate;
 const AiRecognitionTaskAsrWordsResultInput = models.AiRecognitionTaskAsrWordsResultInput;
 const SnapshotByTimeOffset2017 = models.SnapshotByTimeOffset2017;
 const CreateAIAnalysisTemplateRequest = models.CreateAIAnalysisTemplateRequest;
 const AiReviewTerrorismTaskInput = models.AiReviewTerrorismTaskInput;
+const Quic = models.Quic;
 const RebuildMediaByTemplateResponse = models.RebuildMediaByTemplateResponse;
 const MediaAudioStreamItem = models.MediaAudioStreamItem;
 const SubtitleFormatsOperation = models.SubtitleFormatsOperation;
 const SubAppIdInfo = models.SubAppIdInfo;
 const DescribeAllClassResponse = models.DescribeAllClassResponse;
 const ModifyImageSpriteTemplateRequest = models.ModifyImageSpriteTemplateRequest;
+const Referer = models.Referer;
 const AiReviewProhibitedOcrTaskInput = models.AiReviewProhibitedOcrTaskInput;
 const DeleteWatermarkTemplateRequest = models.DeleteWatermarkTemplateRequest;
 const DeleteVodDomainResponse = models.DeleteVodDomainResponse;
 const EditMediaStreamInfo = models.EditMediaStreamInfo;
+const HeuristicCacheConfig = models.HeuristicCacheConfig;
 const DescribeWordSamplesRequest = models.DescribeWordSamplesRequest;
 const ImageCenterCut = models.ImageCenterCut;
 const ModifyAIAnalysisTemplateRequest = models.ModifyAIAnalysisTemplateRequest;
 const CommitUploadResponse = models.CommitUploadResponse;
+const MaxAgeRule = models.MaxAgeRule;
 const DescribeSampleSnapshotTemplatesResponse = models.DescribeSampleSnapshotTemplatesResponse;
-const ModifyWordSampleResponse = models.ModifyWordSampleResponse;
+const AuthenticationTypeD = models.AuthenticationTypeD;
+const AuthenticationTypeC = models.AuthenticationTypeC;
+const AuthenticationTypeB = models.AuthenticationTypeB;
+const AuthenticationTypeA = models.AuthenticationTypeA;
 const AiContentReviewResult = models.AiContentReviewResult;
 const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
 const DrmStreamingsInfoForUpdate = models.DrmStreamingsInfoForUpdate;
@@ -575,6 +622,7 @@ const ReviewAudioVideoResponse = models.ReviewAudioVideoResponse;
 const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
 const ReviewTemplate = models.ReviewTemplate;
+const DescribeCDNDomainsResponse = models.DescribeCDNDomainsResponse;
 const MediaVideoStreamItem = models.MediaVideoStreamItem;
 const CreateRebuildMediaTemplateRequest = models.CreateRebuildMediaTemplateRequest;
 const ImageOperation = models.ImageOperation;
@@ -600,7 +648,7 @@ const PornConfigureInfo = models.PornConfigureInfo;
 const AiRecognitionTaskObjectSeqmentItem = models.AiRecognitionTaskObjectSeqmentItem;
 const RestoreMediaRequest = models.RestoreMediaRequest;
 const PullEventsRequest = models.PullEventsRequest;
-const FaceConfigureInfoForUpdate = models.FaceConfigureInfoForUpdate;
+const AiRecognitionTaskObjectResult = models.AiRecognitionTaskObjectResult;
 const DescribeAIAnalysisTemplatesResponse = models.DescribeAIAnalysisTemplatesResponse;
 const CreateSnapshotByTimeOffsetTemplateRequest = models.CreateSnapshotByTimeOffsetTemplateRequest;
 const AiRecognitionTaskAsrWordsResult = models.AiRecognitionTaskAsrWordsResult;
@@ -611,6 +659,7 @@ const DynamicRangeInfo = models.DynamicRangeInfo;
 const CreateSampleSnapshotTemplateRequest = models.CreateSampleSnapshotTemplateRequest;
 const DescribeRebuildMediaTemplatesResponse = models.DescribeRebuildMediaTemplatesResponse;
 const AudioVolumeParam = models.AudioVolumeParam;
+const AudioDenoiseInfo = models.AudioDenoiseInfo;
 const AiReviewTaskPornAsrResult = models.AiReviewTaskPornAsrResult;
 const ModifyClassResponse = models.ModifyClassResponse;
 const EditMediaFileInfo = models.EditMediaFileInfo;
@@ -621,7 +670,7 @@ const FaceConfigureInfo = models.FaceConfigureInfo;
 const AiRecognitionTaskFaceResultOutput = models.AiRecognitionTaskFaceResultOutput;
 const DeleteImageProcessingTemplateResponse = models.DeleteImageProcessingTemplateResponse;
 const PornImgReviewTemplateInfoForUpdate = models.PornImgReviewTemplateInfoForUpdate;
-const EditMediaTask = models.EditMediaTask;
+const CreateWatermarkTemplateResponse = models.CreateWatermarkTemplateResponse;
 const PornImgReviewTemplateInfo = models.PornImgReviewTemplateInfo;
 const AiReviewPoliticalOcrTaskOutput = models.AiReviewPoliticalOcrTaskOutput;
 const OcrFullTextConfigureInfo = models.OcrFullTextConfigureInfo;
@@ -642,7 +691,7 @@ const RebuildVideoInfo = models.RebuildVideoInfo;
 const TerrorismConfigureInfo = models.TerrorismConfigureInfo;
 const PoliticalAsrReviewTemplateInfo = models.PoliticalAsrReviewTemplateInfo;
 const CreateAnimatedGraphicsTemplateResponse = models.CreateAnimatedGraphicsTemplateResponse;
-const SampleSnapshotTemplate = models.SampleSnapshotTemplate;
+const HwPrivateAccess = models.HwPrivateAccess;
 const MediaImageSpriteItem = models.MediaImageSpriteItem;
 const DescribePersonSamplesRequest = models.DescribePersonSamplesRequest;
 const AiRecognitionTaskFaceResultItem = models.AiRecognitionTaskFaceResultItem;
@@ -653,6 +702,7 @@ const MediaTrack = models.MediaTrack;
 const StorageStatData = models.StorageStatData;
 const TranscodeTask2017 = models.TranscodeTask2017;
 const DescribeFileAttributesRequest = models.DescribeFileAttributesRequest;
+const ResponseHeader = models.ResponseHeader;
 const MediaOutputInfo = models.MediaOutputInfo;
 const EditMediaTaskOutput = models.EditMediaTaskOutput;
 const HighlightSegmentItem = models.HighlightSegmentItem;
@@ -1241,6 +1291,17 @@ This API is used to create a custom audio/video moderation template. Up to 50 te
     }
 
     /**
+     * ModifyCDNDomainConfig.
+     * @param {ModifyCDNDomainConfigRequest} req
+     * @param {function(string, ModifyCDNDomainConfigResponse):void} cb
+     * @public
+     */
+    ModifyCDNDomainConfig(req, cb) {
+        let resp = new ModifyCDNDomainConfigResponse();
+        this.request("ModifyCDNDomainConfig", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a custom video content analysis template.
 
 Note: templates with an ID below 10000 are preset and cannot be deleted.
@@ -1430,6 +1491,17 @@ If event notifications are used, the event type is [ReviewAudioVideoComplete](ht
     }
 
     /**
+     * DeleteCDNDomain.
+     * @param {DeleteCDNDomainRequest} req
+     * @param {function(string, DeleteCDNDomainResponse):void} cb
+     * @public
+     */
+    DeleteCDNDomain(req, cb) {
+        let resp = new DeleteCDNDomainResponse();
+        this.request("DeleteCDNDomain", req, resp, cb);
+    }
+
+    /**
      * This API is used to create a custom task flow template. Up to 50 templates can be created.
      * @param {CreateProcedureTemplateRequest} req
      * @param {function(string, CreateProcedureTemplateResponse):void} cb
@@ -1542,14 +1614,14 @@ This API is used to delete a custom audio/video moderation template.
     }
 
     /**
-     * This API is used to create a custom video content analysis template. Up to 50 templates can be created.
-     * @param {CreateAIAnalysisTemplateRequest} req
-     * @param {function(string, CreateAIAnalysisTemplateResponse):void} cb
+     * This interface is used to add domain names to VOD, and a user can add at most 20 domains. 1. After the domain name is successfully added, VOD will deploy the domain name. It takes about 2 minutes for the domain name to change from the deployed state to the online state.
+     * @param {CreateCDNDomainRequest} req
+     * @param {function(string, CreateCDNDomainResponse):void} cb
      * @public
      */
-    CreateAIAnalysisTemplate(req, cb) {
-        let resp = new CreateAIAnalysisTemplateResponse();
-        this.request("CreateAIAnalysisTemplate", req, resp, cb);
+    CreateCDNDomain(req, cb) {
+        let resp = new CreateCDNDomainResponse();
+        this.request("CreateCDNDomain", req, resp, cb);
     }
 
     /**
@@ -1649,6 +1721,17 @@ This API is used to get the information of custom and [preset](https://intl.clou
     DescribeContentReviewTemplates(req, cb) {
         let resp = new DescribeContentReviewTemplatesResponse();
         this.request("DescribeContentReviewTemplates", req, resp, cb);
+    }
+
+    /**
+     * This interface is used to enable/disable CDN accelerated domain names.
+     * @param {StartCDNDomainRequest} req
+     * @param {function(string, StartCDNDomainResponse):void} cb
+     * @public
+     */
+    StartCDNDomain(req, cb) {
+        let resp = new StartCDNDomainResponse();
+        this.request("StartCDNDomain", req, resp, cb);
     }
 
     /**
@@ -1903,6 +1986,17 @@ This API is used to modify a player configuration.
     DescribeAdaptiveDynamicStreamingTemplates(req, cb) {
         let resp = new DescribeAdaptiveDynamicStreamingTemplatesResponse();
         this.request("DescribeAdaptiveDynamicStreamingTemplates", req, resp, cb);
+    }
+
+    /**
+     * DescribeCDNDomains.
+     * @param {DescribeCDNDomainsRequest} req
+     * @param {function(string, DescribeCDNDomainsResponse):void} cb
+     * @public
+     */
+    DescribeCDNDomains(req, cb) {
+        let resp = new DescribeCDNDomainsResponse();
+        this.request("DescribeCDNDomains", req, resp, cb);
     }
 
     /**
@@ -2208,6 +2302,17 @@ This API is used to modify a player configuration.
     }
 
     /**
+     * This API is used to create a custom video content analysis template. Up to 50 templates can be created.
+     * @param {CreateAIAnalysisTemplateRequest} req
+     * @param {function(string, CreateAIAnalysisTemplateResponse):void} cb
+     * @public
+     */
+    CreateAIAnalysisTemplate(req, cb) {
+        let resp = new CreateAIAnalysisTemplateResponse();
+        this.request("CreateAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
      * This API is used to cut a clip from an HLS video to generate a new video (in HLS format). You can either share the new video or save it.
 
 VOD supports two types of clipping:
@@ -2293,6 +2398,17 @@ Clipping for temporary sharing is lightweight and incurs no additional storage f
     DeleteRoundPlay(req, cb) {
         let resp = new DeleteRoundPlayResponse();
         this.request("DeleteRoundPlay", req, resp, cb);
+    }
+
+    /**
+     * CloneCDNDomain.
+     * @param {CloneCDNDomainRequest} req
+     * @param {function(string, CloneCDNDomainResponse):void} cb
+     * @public
+     */
+    CloneCDNDomain(req, cb) {
+        let resp = new CloneCDNDomainResponse();
+        this.request("CloneCDNDomain", req, resp, cb);
     }
 
     /**

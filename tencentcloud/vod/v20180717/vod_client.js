@@ -184,7 +184,6 @@ const DeleteRoundPlayRequest = models.DeleteRoundPlayRequest;
 const SuperResolutionInfo = models.SuperResolutionInfo;
 const MediaImageSpriteInfo = models.MediaImageSpriteInfo;
 const MediaProcessTaskAnimatedGraphicResult = models.MediaProcessTaskAnimatedGraphicResult;
-const ProcessMediaResponse = models.ProcessMediaResponse;
 const CreateWordSamplesResponse = models.CreateWordSamplesResponse;
 const ClassificationConfigureInfoForUpdate = models.ClassificationConfigureInfoForUpdate;
 const DeleteAdaptiveDynamicStreamingTemplateResponse = models.DeleteAdaptiveDynamicStreamingTemplateResponse;
@@ -288,7 +287,6 @@ const DescribeRebuildMediaTemplatesRequest = models.DescribeRebuildMediaTemplate
 const ReviewImageSegmentItem = models.ReviewImageSegmentItem;
 const CreateRoundPlayResponse = models.CreateRoundPlayResponse;
 const MediaSubtitleInput = models.MediaSubtitleInput;
-const ProcessMediaRequest = models.ProcessMediaRequest;
 const DeleteCDNDomainResponse = models.DeleteCDNDomainResponse;
 const PornImageResult = models.PornImageResult;
 const ModifyMediaInfoResponse = models.ModifyMediaInfoResponse;
@@ -1743,29 +1741,6 @@ This API is used to get the information of custom and [preset](https://intl.clou
     DeleteImageProcessingTemplate(req, cb) {
         let resp = new DeleteImageProcessingTemplateResponse();
         this.request("DeleteImageProcessingTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to initiate a media processing task on a VOD file. The task may include:
-1. Video transcoding (with watermark)
-2. Animated image generating
-3. Time point screenshot
-4. Sampled screenshot
-5. Image sprite generating
-6. Taking a screenshot to use as the thumbnail
-7. Adaptive bitrate streaming and encryption
-8. Moderation (pornographic, terrorist, and politically sensitive content). We <font color=red>do not recommend</font> using this API to initiate a moderation task. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
-9. Content analysis for labeling, categorization, thumbnail generation, or labeling by frame.
-10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
-
-If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
-     * @param {ProcessMediaRequest} req
-     * @param {function(string, ProcessMediaResponse):void} cb
-     * @public
-     */
-    ProcessMedia(req, cb) {
-        let resp = new ProcessMediaResponse();
-        this.request("ProcessMedia", req, resp, cb);
     }
 
     /**

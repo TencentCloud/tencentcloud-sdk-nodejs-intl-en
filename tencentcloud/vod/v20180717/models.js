@@ -497,7 +497,7 @@ class DescribeAllClassRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * UserAgent blacklist/whitelist rule configuration
  * @class
  */
 class UserAgentFilterRule extends  AbstractModel {
@@ -505,25 +505,25 @@ class UserAgentFilterRule extends  AbstractModel {
         super();
 
         /**
-         * 
+         * UserAgent blacklist/whitelist type: <li>whitelist:whitelist;</li> <li>blacklist:blacklist.</li>
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * 
+         * UserAgent list.
          * @type {Array.<string> || null}
          */
         this.UserAgents = null;
 
         /**
-         * 
+         * Rule type: <li>all: All files take effect;</li> <li>file: The specified file suffix takes effect;</li> <li>directory: The specified path takes effect;</li> <li>path: The specified absolute path takes effect.</li>
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * 
+         * Matching content under the corresponding type of RuleType:<li>For `all`, enter an asterisk (*).</li> <li>For `file`, enter the suffix, such as jpg, txt.</li> <li>For `directory`, enter the path, such as /xxx/test/.</li> <li>For `path`, enter the corresponding absolute path, such as /xxx/test.html.</li>
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -1334,7 +1334,7 @@ The default is `VOD`.
 }
 
 /**
- * 
+ * HTTP header setting rules. Up to 100 entries can be set.
  * @class
  */
 class HttpHeaderPathRule extends  AbstractModel {
@@ -1342,31 +1342,31 @@ class HttpHeaderPathRule extends  AbstractModel {
         super();
 
         /**
-         * 
+         * HTTP header setting methods: <li>set: sets a value for an existing header parameter, a new header parameter, or multiple header parameters. Multiple header parameters will be merged into one.</li> <li>del: deletes a header parameter.</li> <li>add: adds a header parameter. By default, you can repeat the same action to add the same header parameter, which may affect browser response. Please consider the set operation first.</li>
          * @type {string || null}
          */
         this.HeaderMode = null;
 
         /**
-         * 
+         * HTTP header name. Up to 100 characters can be set.
          * @type {string || null}
          */
         this.HeaderName = null;
 
         /**
-         * 
+         * HTTP header value. Up to 1000 characters can be set.<li>Not required when Mode is del.</li> <li>Required when Mode is add/set.</li>
          * @type {string || null}
          */
         this.HeaderValue = null;
 
         /**
-         * 
+         * Rule types:<li>all: Apply to all files.</li> <li>file: Apply to files with the specified suffixes.</li> <li>directory: Apply to specified paths.</li> <li>path: Apply to specified absolute paths.</li>
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * 
+         * Content for each RuleType:<li>For all, enter a wildcard *.</li> <li>For file, enter a suffix, e.g., jpg or txt.</li> <li>For directory, enter a path, e.g., /xxx/test/.</li> <li>For path, enter an absolute path, e.g., /xxx/test.html.</li>
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -1390,7 +1390,7 @@ class HttpHeaderPathRule extends  AbstractModel {
 }
 
 /**
- * 
+ * UserAgent:blacklist/whitelist configuration
  * @class
  */
 class UserAgentFilter extends  AbstractModel {
@@ -1398,13 +1398,13 @@ class UserAgentFilter extends  AbstractModel {
         super();
 
         /**
-         * 
+         * UserAgent blacklist and whitelist configuration switches, the values are: <li>on:Enable; </li> <li>off: Disable. </li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * UA blacklist/whitelist effect rule list
          * @type {Array.<UserAgentFilterRule> || null}
          */
         this.FilterRules = null;
@@ -1864,13 +1864,13 @@ class CloneCDNDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain name.
+         * Domain
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * The cloned domain name.
+         * The cloned domain.
          * @type {string || null}
          */
         this.ReferenceDomain = null;
@@ -2001,7 +2001,7 @@ Up to 10 labels are allowed, each containing no more than 16 characters.
 }
 
 /**
- * 
+ * Origin Server Configuration
  * @class
  */
 class Origin extends  AbstractModel {
@@ -2009,49 +2009,49 @@ class Origin extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Primary origin server list When modifying the origin server, you need to enter the corresponding OriginType. Note: This field may return null, indicating that no valid value was found.
          * @type {Array.<string> || null}
          */
         this.Origins = null;
 
         /**
-         * 
+         * Primary origin server type The following types are supported for input parameters: <li> domain:domain；</li> <li>ip：IP address；</li> <li>third_party：third-party object storage origin.</li>
          * @type {string || null}
          */
         this.OriginType = null;
 
         /**
-         * 
+         * Host header used when accessing the primary origin server. If it is left empty, the acceleration domain name will be used by default.When the origin server type is object storage, the ServerName field is required.
          * @type {string || null}
          */
         this.ServerName = null;
 
         /**
-         * 
+         * Origin-pull protocol configuration http: forced HTTP origin-pull follow: protocol follow origin-pull https: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull. Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.OriginPullProtocol = null;
 
         /**
-         * 
+         * Backup origin server list When modifying the backup origin server, you need to enter the corresponding BackupOriginType. Note: This field may return null, indicating that no valid value can be obtained.
          * @type {Array.<string> || null}
          */
         this.BackupOrigins = null;
 
         /**
-         * 
+         *  Backup origin server type, which supports the following types: <li>domain：Domain；</li> <li>ip：IP address；</li> <li>third_party：third-party object storage origin.</li>
          * @type {string || null}
          */
         this.BackupOriginType = null;
 
         /**
-         * 
+         * Host header used when accessing the backup origin server. If it is left empty, the ServerName of primary origin server will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
          * @type {string || null}
          */
         this.BackupServerName = null;
 
         /**
-         * 
+         * The object storage returns to the source vendor. It is required when the source site type is a third-party storage source site (third_party). The optional values include the following:<li>aws_s3：AWS S3;</li> <li>ali_oss：Alibaba Cloud OSS;</li> <li>hw_obs：Huawei OBS;</li> <li>others：Object storage from other vendors only supports object storage compatible with the AWS signature algorithm, such as Tencent Cloud COS.</li>
          * @type {string || null}
          */
         this.OriginCompany = null;
@@ -2745,7 +2745,7 @@ class AiSampleWord extends  AbstractModel {
 }
 
 /**
- * 
+ * Path cache configuration, choose one from the following three cache modes.
  * @class
  */
 class RuleCacheConfig extends  AbstractModel {
@@ -2753,19 +2753,19 @@ class RuleCacheConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Cache configuration
          * @type {CacheConfigCache || null}
          */
         this.Cache = null;
 
         /**
-         * 
+         * No cache configuration
          * @type {CacheConfigNoCache || null}
          */
         this.NoCache = null;
 
         /**
-         * 
+         * Follows the origin server configuration
          * @type {CacheConfigFollowOrigin || null}
          */
         this.FollowOrigin = null;
@@ -4208,7 +4208,7 @@ class CreateCDNDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain name.
+         * Domain.
          * @type {string || null}
          */
         this.Domain = null;
@@ -5413,7 +5413,8 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * ath-based cache rule configuration
+The cache expiration time for all files is 30 days by default.
  * @class
  */
 class RuleCache extends  AbstractModel {
@@ -5421,19 +5422,19 @@ class RuleCache extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Rule types:<li>all: effective for all files.</li> <li>file: effective for specified file suffixes.</li> <li>directory: effective for specified paths.</li> <li>path: effective for specified absolute paths.</li>
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * 
+         * Content for each CacheType: <li>For all, enter a wildcard *.</li> <li>For file, enter the suffix, e.g., jpg or txt.</li> <li>For directory, enter the path, e.g., /xxx/test/.</li> <li>For path, enter the absolute path, e.g., /xxx/test.html.</li>
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
 
         /**
-         * 
+         * Cache configuration
          * @type {RuleCacheConfig || null}
          */
         this.CacheConfig = null;
@@ -7154,7 +7155,7 @@ class AiAnalysisTaskClassificationOutput extends  AbstractModel {
 }
 
 /**
- * 
+ * Path cache/no cache configuration.
  * @class
  */
 class CacheConfigNoCache extends  AbstractModel {
@@ -7162,13 +7163,13 @@ class CacheConfigNoCache extends  AbstractModel {
         super();
 
         /**
-         * 
+         * No-cache configuration switch: <li>on: Enable;</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Always forwards to the origin server for verification:<li>on: Enable;</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.Revalidate = null;
@@ -7519,7 +7520,7 @@ class AiSampleFaceInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * CDN DomainInfo
  * @class
  */
 class CDNDomainInfo extends  AbstractModel {
@@ -7527,31 +7528,31 @@ class CDNDomainInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Domain.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * 
+         * Deployment status.
          * @type {string || null}
          */
         this.DeployStatus = null;
 
         /**
-         * 
+         * CNAME record.
          * @type {string || null}
          */
         this.Cname = null;
 
         /**
-         * 
+         * Creation time.
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 
+         * CDN domain configuration information.
          * @type {CDNDomainConfig || null}
          */
         this.Config = null;
@@ -8065,7 +8066,7 @@ class CoverBySnapshotTaskOutput extends  AbstractModel {
 }
 
 /**
- * 
+ * Browser cache rule configuration, which is used to set the default value of MaxAge and is disabled by default.
  * @class
  */
 class MaxAge extends  AbstractModel {
@@ -8073,7 +8074,7 @@ class MaxAge extends  AbstractModel {
         super();
 
         /**
-         * 
+         * MaxAge rule.
          * @type {Array.<MaxAgeRule> || null}
          */
         this.MaxAgeRules = null;
@@ -8247,7 +8248,7 @@ class DescribeAIRecognitionTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Origin access authentication for S3 bucket.
  * @class
  */
 class AwsPrivateAccess extends  AbstractModel {
@@ -8255,31 +8256,31 @@ class AwsPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * 
+         *  Aws S3 back-to-origin authentication configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Access ID.
          * @type {string || null}
          */
         this.AccessKey = null;
 
         /**
-         * 
+         * Key.
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * 
+         * Region.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * BucketName.
          * @type {string || null}
          */
         this.Bucket = null;
@@ -9012,7 +9013,7 @@ class DescribeCDNDomainsRequest extends  AbstractModel {
         super();
 
         /**
-         * List of domain names. If this field is left blank, all domain name information will be listed by default.
+         * List of domain. If this field is left blank, all domain information will be listed by default.
          * @type {Array.<string> || null}
          */
         this.Domains = null;
@@ -9777,41 +9778,6 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ProcessMedia response structure.
- * @class
- */
-class ProcessMediaResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Task ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CreateWordSamples response structure.
  * @class
  */
@@ -10429,7 +10395,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Custom request header configuration. This is disabled by default.
  * @class
  */
 class RequestHeader extends  AbstractModel {
@@ -10437,13 +10403,13 @@ class RequestHeader extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Custom request header configuration switch: <li>on：Enable;</li> <li>off：Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Custom request header configuration rules
          * @type {Array.<HttpHeaderPathRule> || null}
          */
         this.HeaderRules = null;
@@ -11966,7 +11932,7 @@ class MediaMiniProgramReviewInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Path cache configuration
  * @class
  */
 class CacheConfigCache extends  AbstractModel {
@@ -11974,31 +11940,31 @@ class CacheConfigCache extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Cache configuration switch: <li>on:enable；</li> <li>off: disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Cache expiration time settings<li>Unit: second. The maximum value is 365 days.</li>
          * @type {number || null}
          */
         this.CacheTime = null;
 
         /**
-         * 
+         * Advanced cache expiration configuration. If this is enabled, the max-age value returned by the origin server will be compared with the cache expiration time set in CacheRules, and the smallest value will be cached on the node: <li>on: Enable;</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.CompareMaxAge = null;
 
         /**
-         * 
+         * Force cache: <li>on: Enable;</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.IgnoreCacheControl = null;
 
         /**
-         * 
+         * Whether to ignore the header and body on cache nodes if the origin server returns the header Set-Cookie. <li>on: Ignore; do not cache the header and body.</li> <li>off: Do not ignore; follow the custom cache rules of cache nodes.</li>
          * @type {string || null}
          */
         this.IgnoreSetCookie = null;
@@ -13089,7 +13055,7 @@ class EmptyTrackItem extends  AbstractModel {
 }
 
 /**
- * 
+ * Referer blacklist/whitelist configuration rules, which is effective for specific resources.
  * @class
  */
 class RefererRule extends  AbstractModel {
@@ -13097,31 +13063,31 @@ class RefererRule extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Rule types: <li>all: Apply to all files.</li> <li>file: Apply to files with the specified suffixes.</li> <li>directory: Apply to specified paths.</li> <li>path: Apply to specified absolute paths.</li>
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * 
+         * Content for each RuleType:<li>For all, enter a wildcard *.</li> <li>For file, enter a suffix, e.g., jpg or txt.</li> <li>For directory, enter a path, e.g., /xxx/test/.</li> <li>For path, enter an absolute path, e.g., /xxx/test.html.</li>
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
 
         /**
-         * 
+         * Referer configuration types:<li>whitelist：Allowlist;</li> <li>blacklist:Blocklist.</li>
          * @type {string || null}
          */
         this.RefererType = null;
 
         /**
-         * 
+         * Referer content list
          * @type {Array.<string> || null}
          */
         this.Referers = null;
 
         /**
-         * 
+         * Whether to allow empty referer：true: Allow empty referer when RefererType = whitelist; false: Reject empty refer when RefererType = blacklist.
          * @type {boolean || null}
          */
         this.AllowEmpty = null;
@@ -13145,7 +13111,7 @@ class RefererRule extends  AbstractModel {
 }
 
 /**
- * 
+ * Path cache configuration follows the origin server configuration.
  * @class
  */
 class CacheConfigFollowOrigin extends  AbstractModel {
@@ -13153,13 +13119,13 @@ class CacheConfigFollowOrigin extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Follow origin server switch configuration: <li>on: Enable.</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Heuristic cache configuration
          * @type {HeuristicCache || null}
          */
         this.HeuristicCache = null;
@@ -15272,7 +15238,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Node cache expiration time configuration.
  * @class
  */
 class Cache extends  AbstractModel {
@@ -15280,7 +15246,7 @@ class Cache extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Advanced path cache configuration.
          * @type {Array.<RuleCache> || null}
          */
         this.RuleCache = null;
@@ -15768,125 +15734,6 @@ For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
         this.Format = 'Format' in params ? params.Format : null;
         this.Content = 'Content' in params ? params.Content : null;
         this.Id = 'Id' in params ? params.Id : null;
-
-    }
-}
-
-/**
- * ProcessMedia request structure.
- * @class
- */
-class ProcessMediaRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
-         * @type {string || null}
-         */
-        this.FileId = null;
-
-        /**
-         * <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-         * @type {number || null}
-         */
-        this.SubAppId = null;
-
-        /**
-         * Parameter of video processing task.
-         * @type {MediaProcessTaskInput || null}
-         */
-        this.MediaProcessTask = null;
-
-        /**
-         * The information of the audio/video moderation task\*.
-This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
-         * @type {AiContentReviewTaskInput || null}
-         */
-        this.AiContentReviewTask = null;
-
-        /**
-         * Video content analysis task parameter.
-         * @type {AiAnalysisTaskInput || null}
-         */
-        this.AiAnalysisTask = null;
-
-        /**
-         * Type parameter of video content recognition task.
-         * @type {AiRecognitionTaskInput || null}
-         */
-        this.AiRecognitionTask = null;
-
-        /**
-         * Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
-         * @type {number || null}
-         */
-        this.TasksPriority = null;
-
-        /**
-         * Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
-         * @type {string || null}
-         */
-        this.TasksNotifyMode = null;
-
-        /**
-         * The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-         * @type {string || null}
-         */
-        this.SessionContext = null;
-
-        /**
-         * Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
-         * @type {string || null}
-         */
-        this.SessionId = null;
-
-        /**
-         * Reserved field for special purposes.
-         * @type {string || null}
-         */
-        this.ExtInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
-
-        if (params.MediaProcessTask) {
-            let obj = new MediaProcessTaskInput();
-            obj.deserialize(params.MediaProcessTask)
-            this.MediaProcessTask = obj;
-        }
-
-        if (params.AiContentReviewTask) {
-            let obj = new AiContentReviewTaskInput();
-            obj.deserialize(params.AiContentReviewTask)
-            this.AiContentReviewTask = obj;
-        }
-
-        if (params.AiAnalysisTask) {
-            let obj = new AiAnalysisTaskInput();
-            obj.deserialize(params.AiAnalysisTask)
-            this.AiAnalysisTask = obj;
-        }
-
-        if (params.AiRecognitionTask) {
-            let obj = new AiRecognitionTaskInput();
-            obj.deserialize(params.AiRecognitionTask)
-            this.AiRecognitionTask = obj;
-        }
-        this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
-        this.TasksNotifyMode = 'TasksNotifyMode' in params ? params.TasksNotifyMode : null;
-        this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
-        this.SessionId = 'SessionId' in params ? params.SessionId : null;
-        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
 
     }
 }
@@ -17298,13 +17145,13 @@ class StartCDNDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain name.
+         * Domain.
          * @type {string || null}
          */
         this.Domain = null;
 
         /**
-         * Domain name operation, value: <li>start: enable;</li> <li>stop: disable. </li>
+         * Domain operation, value: <li>start: enable;</li> <li>stop: disable. </li>
          * @type {string || null}
          */
         this.Operation = null;
@@ -18169,7 +18016,7 @@ Default value: open.
 }
 
 /**
- * 
+ * IP blocklist/allowlist configuration. This is disabled by default.
  * @class
  */
 class IpFilter extends  AbstractModel {
@@ -18177,25 +18024,25 @@ class IpFilter extends  AbstractModel {
         super();
 
         /**
-         * 
+         * IP blocklist/allowlist configuration switch :<li>on：Enable;</li> <li>off：Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * IP blocklist/allowlist type <li>whitelist: IP allowlist;</li> <li>blacklist:IP blocklist.</li>
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * 
+         * IP blocklist/allowlist Supports IPs in X.X.X.X format, or IP ranges in /8, /16, /24 format. Up to 50 whitelists or blacklists can be entered
          * @type {Array.<string> || null}
          */
         this.Filters = null;
 
         /**
-         * 
+         * IP blocklist/allowlist path-based configuration. This feature is only available to selected beta customers.
          * @type {Array.<IpFilterPathRule> || null}
          */
         this.FilterRules = null;
@@ -18849,7 +18696,7 @@ class CreateImageProcessingTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * IP blocklist/allowlist path-based configuration
  * @class
  */
 class IpFilterPathRule extends  AbstractModel {
@@ -18857,25 +18704,25 @@ class IpFilterPathRule extends  AbstractModel {
         super();
 
         /**
-         * 
+         * IP blocklist/allowlist type: <li>whitelist: allowlist IPs;</li> <li>blacklist: blocklist IPs.</li>
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * 
+         * IP blocklist/allowlist list Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
          * @type {Array.<string> || null}
          */
         this.Filters = null;
 
         /**
-         * 
+         * Rule types: <li>all: Effective for all files;</li> <li>file: Effective for specified file suffixes;</li> <li>directory: Effective for specified paths;</li> <li>path: Effective for specified absolute paths.</li>
          * @type {string || null}
          */
         this.RuleType = null;
 
         /**
-         * 
+         * Content for each RuleType: <li>For all, enter an asterisk (*).</li> <li>For file, enter the suffix, such as jpg, txt.</li> <li>For directory, enter the path, such as /xxx/test/.</li> <li>For path, enter the corresponding absolute path, such as /xxx/test.html.</li>
          * @type {Array.<string> || null}
          */
         this.RulePaths = null;
@@ -19255,7 +19102,7 @@ class SplitMediaTask extends  AbstractModel {
 }
 
 /**
- * 
+ * Origin-pull authentication for other origins
  * @class
  */
 class OthersPrivateAccess extends  AbstractModel {
@@ -19263,31 +19110,31 @@ class OthersPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Other vendor object storage back-to-source authentication configuration switches, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Access ID.
          * @type {string || null}
          */
         this.AccessKey = null;
 
         /**
-         * 
+         * Key.
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * 
+         * Region.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * Bucket name
          * @type {string || null}
          */
         this.Bucket = null;
@@ -19372,7 +19219,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Timestamp hotlink protection configuration
  * @class
  */
 class Authentication extends  AbstractModel {
@@ -19380,31 +19227,31 @@ class Authentication extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Hotlink protection configuration switch: <li>on:Enable;</li> <li>off:Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Timestamp hotlink protection mode A configuration
          * @type {AuthenticationTypeA || null}
          */
         this.TypeA = null;
 
         /**
-         * 
+         * Timestamp hotlink protection mode B configuration
          * @type {AuthenticationTypeB || null}
          */
         this.TypeB = null;
 
         /**
-         * 
+         * Timestamp hotlink protection mode C configuration
          * @type {AuthenticationTypeC || null}
          */
         this.TypeC = null;
 
         /**
-         * 
+         * Timestamp hotlink protection mode D configuration
          * @type {AuthenticationTypeD || null}
          */
         this.TypeD = null;
@@ -21215,7 +21062,7 @@ class DeleteCDNDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain name.
+         * Domain.
          * @type {string || null}
          */
         this.Domain = null;
@@ -23598,7 +23445,7 @@ class ModifyCDNDomainConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * Domain name.
+         * Domain.
          * @type {string || null}
          */
         this.Domain = null;
@@ -24046,7 +23893,7 @@ class SortBy extends  AbstractModel {
 }
 
 /**
- * 
+ * IPv6 access configuration
  * @class
  */
 class Ipv6Access extends  AbstractModel {
@@ -24054,7 +23901,7 @@ class Ipv6Access extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Enable the ipv6 access configuration switch for the domain name, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -26132,7 +25979,7 @@ class DescribeStorageRegionsRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Access authentication configuration for OSS origin
  * @class
  */
 class OssPrivateAccess extends  AbstractModel {
@@ -26140,31 +25987,31 @@ class OssPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Alibaba Cloud OSS back-to-origin authentication configuration switch, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Access ID.
          * @type {string || null}
          */
         this.AccessKey = null;
 
         /**
-         * 
+         * Key.
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * 
+         * Region.
          * @type {string || null}
          */
         this.Region = null;
 
         /**
-         * 
+         * BucketName.
          * @type {string || null}
          */
         this.Bucket = null;
@@ -28674,7 +28521,7 @@ class HighlightsConfigureInfo extends  AbstractModel {
 }
 
 /**
- * 
+ * Domain https acceleration configuration, the default is off
  * @class
  */
 class CDNCertInfo extends  AbstractModel {
@@ -28682,25 +28529,25 @@ class CDNCertInfo extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Server certificate ID, which is auto-generated when the certificate is being managed by the SSL Certificate Service
          * @type {string || null}
          */
         this.CertId = null;
 
         /**
-         * 
+         * Server certificate information.
          * @type {string || null}
          */
         this.Certificate = null;
 
         /**
-         * 
+         * Server key information.
          * @type {string || null}
          */
         this.PrivateKey = null;
 
         /**
-         * 
+         * Time when the certificate expires;Can be left blank when used as an input parameter.
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -30359,7 +30206,7 @@ class MediaAiAnalysisTagItem extends  AbstractModel {
 }
 
 /**
- * 
+ * Domain name HTTPS acceleration configuration. This is disabled by default.
  * @class
  */
 class Https extends  AbstractModel {
@@ -30367,19 +30214,19 @@ class Https extends  AbstractModel {
         super();
 
         /**
-         * 
+         * HTTPS configuration switch: <li>on:Enable;</li> <li>off:Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Whether to enable HTTP2: <li>on:Enable;</li> <li>off:Disable.</li>
          * @type {string || null}
          */
         this.Http2 = null;
 
         /**
-         * 
+         * Server certificate configuration information
          * @type {CDNCertInfo || null}
          */
         this.CertInfo = null;
@@ -31218,7 +31065,7 @@ class CreateProcedureTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Back to the source 301/302 status code automatically follows the configuration, the default is off
  * @class
  */
 class FollowRedirect extends  AbstractModel {
@@ -31226,7 +31073,7 @@ class FollowRedirect extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Access forced redirect configuration switch <li>on：Enable;</li> <li>off：Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -31629,7 +31476,7 @@ class AiRecognitionTaskSegmentResultInput extends  AbstractModel {
 }
 
 /**
- * 
+ * Access protocol forced redirect configuration. This is disabled by default.
  * @class
  */
 class ForceRedirect extends  AbstractModel {
@@ -31637,25 +31484,25 @@ class ForceRedirect extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Access forced redirect configuration switch:<li>on:Enable;</li> <li>off:Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Access forced redirect types: <li>http:forced HTTP redirect</li> <li>https: forced HTTPS redirect</li>
          * @type {string || null}
          */
         this.RedirectType = null;
 
         /**
-         * 
+         * Status code returned for forced redirect Supports 301, 302.
          * @type {number || null}
          */
         this.RedirectStatusCode = null;
 
         /**
-         * 
+         * Whether to return the newly added header during force redirection.
          * @type {string || null}
          */
         this.CarryHeaders = null;
@@ -32657,7 +32504,7 @@ class ExtractTraceWatermarkRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * CDN Domain Config
  * @class
  */
 class CDNDomainConfig extends  AbstractModel {
@@ -32665,115 +32512,115 @@ class CDNDomainConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Acceleration region:<li>mainland:Acceleration inside the Chinese mainland;</li> <li>overseas: Acceleration outside the Chinese mainland;</li> <li>Acceleration over the globe.</li>
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * 
+         * Origin Server Configuration
          * @type {Origin || null}
          */
         this.Origin = null;
 
         /**
-         * 
+         * IP blocklist/allowlist configuration. This is disabled by default.
          * @type {IpFilter || null}
          */
         this.IpFilter = null;
 
         /**
-         * 
+         * UserAgent:blacklist/whitelist configuration.
          * @type {UserAgentFilter || null}
          */
         this.UserAgentFilter = null;
 
         /**
-         * 
+         * Back to the source 301/302 status code automatically follows the configuration, the default is off
          * @type {FollowRedirect || null}
          */
         this.FollowRedirect = null;
 
         /**
-         * 
+         * Custom request header configuration. This is disabled by default.
          * @type {RequestHeader || null}
          */
         this.RequestHeader = null;
 
         /**
-         * 
+         * Custom response header configuration. This is disabled by default.
          * @type {ResponseHeader || null}
          */
         this.ResponseHeader = null;
 
         /**
-         * 
+         * Node cache expiration time configuration.
          * @type {Cache || null}
          */
         this.Cache = null;
 
         /**
-         * 
+         * Domain name HTTPS acceleration configuration. This is disabled by default.
          * @type {Https || null}
          */
         this.Https = null;
 
         /**
-         * 
+         * Timestamp hotlink protection configuration.
          * @type {Authentication || null}
          */
         this.Authentication = null;
 
         /**
-         * 
+         * Access protocol forced redirect configuration. This is disabled by default.
          * @type {ForceRedirect || null}
          */
         this.ForceRedirect = null;
 
         /**
-         * 
+         * Referer blacklist/whitelist configuration. This is disabled by default.
          * @type {Referer || null}
          */
         this.Referer = null;
 
         /**
-         * 
+         * Browser cache rule configuration, which is used to set the default value of MaxAge and is disabled by default.
          * @type {MaxAge || null}
          */
         this.MaxAge = null;
 
         /**
-         * 
+         * IPv6 access configuration.
          * @type {Ipv6Access || null}
          */
         this.Ipv6Access = null;
 
         /**
-         * 
+         * QUIC configuration item.
          * @type {Quic || null}
          */
         this.Quic = null;
 
         /**
-         * 
+         * Origin access authentication for S3 bucket.
          * @type {AwsPrivateAccess || null}
          */
         this.AwsPrivateAccess = null;
 
         /**
-         * 
+         * Access authentication configuration for OSS origin.
          * @type {OssPrivateAccess || null}
          */
         this.OssPrivateAccess = null;
 
         /**
-         * 
+         * Access authentication for Huawei Cloud OBS origin
          * @type {HwPrivateAccess || null}
          */
         this.HwPrivateAccess = null;
 
         /**
-         * 
+         * Origin-pull authentication for other origins.
          * @type {OthersPrivateAccess || null}
          */
         this.OthersPrivateAccess = null;
@@ -33633,7 +33480,7 @@ class CreateTranscodeTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * CDN domain config for update
  * @class
  */
 class CDNDomainConfigForUpdate extends  AbstractModel {
@@ -33641,115 +33488,115 @@ class CDNDomainConfigForUpdate extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Acceleration region:<li>mainland:Acceleration inside the Chinese mainland;</li> <li>overseas: Acceleration outside the Chinese mainland;</li> <li>Acceleration over the globe.</li>
          * @type {string || null}
          */
         this.Area = null;
 
         /**
-         * 
+         * Origin Server Configuration.
          * @type {Origin || null}
          */
         this.Origin = null;
 
         /**
-         * 
+         * IP blocklist/allowlist configuration. This is disabled by default.
          * @type {IpFilter || null}
          */
         this.IpFilter = null;
 
         /**
-         * 
+         * UserAgent:blacklist/whitelist configuration.
          * @type {UserAgentFilter || null}
          */
         this.UserAgentFilter = null;
 
         /**
-         * 
+         * Back to the source 301/302 status code automatically follows the configuration, the default is off
          * @type {FollowRedirect || null}
          */
         this.FollowRedirect = null;
 
         /**
-         * 
+         * Custom request header configuration. This is disabled by default.
          * @type {RequestHeader || null}
          */
         this.RequestHeader = null;
 
         /**
-         * 
+         * Custom response header configuration. This is disabled by default.
          * @type {ResponseHeader || null}
          */
         this.ResponseHeader = null;
 
         /**
-         * 
+         * Node cache expiration time configuration.
          * @type {Cache || null}
          */
         this.Cache = null;
 
         /**
-         * 
+         * Domain name HTTPS acceleration configuration. This is disabled by default.
          * @type {Https || null}
          */
         this.Https = null;
 
         /**
-         * 
+         * Timestamp hotlink protection configuration.
          * @type {Authentication || null}
          */
         this.Authentication = null;
 
         /**
-         * 
+         * Access protocol forced redirect configuration. This is disabled by default.
          * @type {ForceRedirect || null}
          */
         this.ForceRedirect = null;
 
         /**
-         * 
+         * Referer blacklist/whitelist configuration. This is disabled by default.
          * @type {Referer || null}
          */
         this.Referer = null;
 
         /**
-         * 
+         * Browser cache rule configuration, which is used to set the default value of MaxAge and is disabled by default.
          * @type {MaxAge || null}
          */
         this.MaxAge = null;
 
         /**
-         * 
+         * IPv6 access configuration.
          * @type {Ipv6Access || null}
          */
         this.Ipv6Access = null;
 
         /**
-         * 
+         * QUIC configuration item.
          * @type {Quic || null}
          */
         this.Quic = null;
 
         /**
-         * 
+         * Origin access authentication for S3 bucket.
          * @type {AwsPrivateAccess || null}
          */
         this.AwsPrivateAccess = null;
 
         /**
-         * 
+         * Access authentication configuration for OSS origin.
          * @type {OssPrivateAccess || null}
          */
         this.OssPrivateAccess = null;
 
         /**
-         * 
+         * Access authentication for Huawei Cloud OBS origin
          * @type {HwPrivateAccess || null}
          */
         this.HwPrivateAccess = null;
 
         /**
-         * 
+         * Origin-pull authentication for other origins.
          * @type {OthersPrivateAccess || null}
          */
         this.OthersPrivateAccess = null;
@@ -34082,7 +33929,7 @@ class AiReviewTerrorismTaskInput extends  AbstractModel {
 }
 
 /**
- * 
+ * QUIC configuration item
  * @class
  */
 class Quic extends  AbstractModel {
@@ -34090,7 +33937,7 @@ class Quic extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Quic function configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
@@ -34466,7 +34313,7 @@ Default value: black.
 }
 
 /**
- * 
+ * Referer blacklist/whitelist configuration. This is disabled by default.
  * @class
  */
 class Referer extends  AbstractModel {
@@ -34474,13 +34321,13 @@ class Referer extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Referer blacklist/whitelist configuration switch:<li>on:Enable;</li> <li>off:Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Referer blacklist/whitelist configuration rule
          * @type {Array.<RefererRule> || null}
          */
         this.RefererRules = null;
@@ -34644,7 +34491,7 @@ Note: this field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * 
+ * Heuristic cache configuration
  * @class
  */
 class HeuristicCacheConfig extends  AbstractModel {
@@ -34652,13 +34499,13 @@ class HeuristicCacheConfig extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Heuristic cache configuration switch:<li>on:Enable.</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.HeuristicCacheTimeSwitch = null;
 
         /**
-         * 
+         * Unit: seconds.
          * @type {number || null}
          */
         this.HeuristicCacheTime = null;
@@ -34959,7 +34806,7 @@ class CommitUploadResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * MaxAge rules configuration
  * @class
  */
 class MaxAgeRule extends  AbstractModel {
@@ -34967,25 +34814,25 @@ class MaxAgeRule extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Rule types: <li>all: effective for all files.</li> <li>file: effective for specified file suffixes.</li> <li>directory: effective for specified paths.</li> <li>path: effective for specified absolute paths.</li>
          * @type {string || null}
          */
         this.MaxAgeType = null;
 
         /**
-         * 
+         * Content for each MaxAgeType: <li>For all, enter a wildcard *.</li> <li>For file, enter the suffix, e.g., jpg or txt.</li> <li>For directory, enter the path, e.g., /xxx/test/.</li> <li>For path, enter the absolute path, e.g., /xxx/test.html.</li> <b>Note: the all rule cannot be deleted, and it follows the origin site by default, which can be modified.</b>
          * @type {Array.<string> || null}
          */
         this.MaxAgeContents = null;
 
         /**
-         * 
+         * Note: The value 0 means not to cache. <b>Note: The value 0 means not to cache.</b>
          * @type {number || null}
          */
         this.MaxAgeTime = null;
 
         /**
-         * 
+         * Whether to follow the origin server. Valid values: on and off. If it's on, MaxAgeTime is ignored.
          * @type {string || null}
          */
         this.FollowOrigin = null;
@@ -35058,7 +34905,10 @@ class DescribeSampleSnapshotTemplatesResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Timestamp hotlink protection mode D configuration
+The access URL format of timestamp hotlink protection mode D is as follows: http://DomainName/FileName?sign=md5hash&t=timestamp
+Here, timestamp is a decimal or hexadecimal timestamp in Unix format;
+md5hash: MD5 (custom key + file path + timestamp)
  * @class
  */
 class AuthenticationTypeD extends  AbstractModel {
@@ -35066,49 +34916,49 @@ class AuthenticationTypeD extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The key for signature calculation 6-32 characters. Only digits and letters are allowed.
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * 
+         * Signature expiration time;Unit: second. The maximum value is 630720000.
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * 
+         * File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
          * @type {Array.<string> || null}
          */
         this.FileExtensions = null;
 
         /**
-         * 
+         * whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * 
+         * Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
          * @type {string || null}
          */
         this.SignParam = null;
 
         /**
-         * 
+         * Timestamp parameter name;Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
          * @type {string || null}
          */
         this.TimeParam = null;
 
         /**
-         * 
+         * Timestamp settings: <li>dec: Decimal</li> <li>hex: Hexadecimal</li>
          * @type {string || null}
          */
         this.TimeFormat = null;
 
         /**
-         * 
+         * Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -35135,7 +34985,10 @@ class AuthenticationTypeD extends  AbstractModel {
 }
 
 /**
- * 
+ * Timestamp hotlink protection mode C configuration
+The access URL format of timestamp hotlink protection mode C is as follows: http://DomainName/md5hash/timestamp/FileName
+Here, timestamp is a hexadecimal timestamp in Unix format;
+md5hash: MD5 (custom key + file path + timestamp)
  * @class
  */
 class AuthenticationTypeC extends  AbstractModel {
@@ -35143,37 +34996,37 @@ class AuthenticationTypeC extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The key for signature calculation 6-32 characters. Only digits and letters are allowed.
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * 
+         * Signature expiration time;Unit: second. The maximum value is 630720000.
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * 
+         * File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
          * @type {Array.<string> || null}
          */
         this.FileExtensions = null;
 
         /**
-         * 
+         * whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * 
+         * Timestamp settings:<li>dec: Decimal</li> <li>hex: Hexadecimal</li>
          * @type {string || null}
          */
         this.TimeFormat = null;
 
         /**
-         * 
+         * Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -35198,7 +35051,7 @@ class AuthenticationTypeC extends  AbstractModel {
 }
 
 /**
- * 
+ * Timestamp hotlink protection mode B configuration
  * @class
  */
 class AuthenticationTypeB extends  AbstractModel {
@@ -35206,31 +35059,31 @@ class AuthenticationTypeB extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The key for signature calculation 6-32 characters. Only digits and letters are allowed.
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * 
+         * Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * 
+         * File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
          * @type {Array.<string> || null}
          */
         this.FileExtensions = null;
 
         /**
-         * 
+         * whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * 
+         * Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -35254,7 +35107,12 @@ class AuthenticationTypeB extends  AbstractModel {
 }
 
 /**
- * 
+ * Timestamp hotlink protection mode A configuration
+The access URL format of timestamp hotlink protection mode A is as follows: http://DomainName/Filename?sign=timestamp-rand-uid-md5hash
+Here, timestamp is a decimal timestamp in Unix format;
+rand is a random string composed of 0-100 characters, including digits, upper and lower-case letters.
+uid is 0;
+md5hash: MD5 (file path-timestamp-rand-uid-custom key)
  * @class
  */
 class AuthenticationTypeA extends  AbstractModel {
@@ -35262,37 +35120,37 @@ class AuthenticationTypeA extends  AbstractModel {
         super();
 
         /**
-         * 
+         * The key for signature calculation 6-32 characters. Only digits and letters are allowed.
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * 
+         * Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
          * @type {string || null}
          */
         this.SignParam = null;
 
         /**
-         * 
+         * Signature expiration time;Unit: second. The maximum value is 630720000.
          * @type {number || null}
          */
         this.ExpireTime = null;
 
         /**
-         * 
+         * File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
          * @type {Array.<string> || null}
          */
         this.FileExtensions = null;
 
         /**
-         * 
+         * whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
          * @type {string || null}
          */
         this.FilterType = null;
 
         /**
-         * 
+         * Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
          * @type {string || null}
          */
         this.BackupSecretKey = null;
@@ -35813,13 +35671,13 @@ class DescribeCDNDomainsResponse extends  AbstractModel {
         super();
 
         /**
-         * List of domain name information.
+         * List of domain information.
          * @type {Array.<CDNDomainInfo> || null}
          */
         this.DomainSet = null;
 
         /**
-         * The total number of CDN domain names under the current application.
+         * The total number of CDN domain under the current application.
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -40031,7 +39889,7 @@ class CreateAnimatedGraphicsTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 
+ * Access authentication for Huawei Cloud OBS origin
  * @class
  */
 class HwPrivateAccess extends  AbstractModel {
@@ -40039,25 +39897,25 @@ class HwPrivateAccess extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Huawei Cloud OBS origin authentication configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Access ID
          * @type {string || null}
          */
         this.AccessKey = null;
 
         /**
-         * 
+         * Key
          * @type {string || null}
          */
         this.SecretKey = null;
 
         /**
-         * 
+         * BucketName
          * @type {string || null}
          */
         this.Bucket = null;
@@ -40694,7 +40552,7 @@ class DescribeFileAttributesRequest extends  AbstractModel {
 }
 
 /**
- * 
+ * Custom response header configuration. This is disabled by default.
  * @class
  */
 class ResponseHeader extends  AbstractModel {
@@ -40702,13 +40560,13 @@ class ResponseHeader extends  AbstractModel {
         super();
 
         /**
-         * 
+         * Custom response header switch: <li>on：Enable;</li> <li>off：Disable.</li>
          * @type {string || null}
          */
         this.Switch = null;
 
         /**
-         * 
+         * Custom response header rules
          * @type {Array.<HttpHeaderPathRule> || null}
          */
         this.HeaderRules = null;
@@ -41700,7 +41558,6 @@ module.exports = {
     SuperResolutionInfo: SuperResolutionInfo,
     MediaImageSpriteInfo: MediaImageSpriteInfo,
     MediaProcessTaskAnimatedGraphicResult: MediaProcessTaskAnimatedGraphicResult,
-    ProcessMediaResponse: ProcessMediaResponse,
     CreateWordSamplesResponse: CreateWordSamplesResponse,
     ClassificationConfigureInfoForUpdate: ClassificationConfigureInfoForUpdate,
     DeleteAdaptiveDynamicStreamingTemplateResponse: DeleteAdaptiveDynamicStreamingTemplateResponse,
@@ -41804,7 +41661,6 @@ module.exports = {
     ReviewImageSegmentItem: ReviewImageSegmentItem,
     CreateRoundPlayResponse: CreateRoundPlayResponse,
     MediaSubtitleInput: MediaSubtitleInput,
-    ProcessMediaRequest: ProcessMediaRequest,
     DeleteCDNDomainResponse: DeleteCDNDomainResponse,
     PornImageResult: PornImageResult,
     ModifyMediaInfoResponse: ModifyMediaInfoResponse,

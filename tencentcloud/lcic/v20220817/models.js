@@ -126,6 +126,14 @@ class CreateRoomRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * Whether the teacher/teaching assistant can control students' cameras/microphones without the students' consent. Valid values: 
+`0` (default): No (consent required)
+`1`: Yes (no consent required)
+         * @type {number || null}
+         */
+        this.EnableDirectControl = null;
+
     }
 
     /**
@@ -152,6 +160,7 @@ class CreateRoomRequest extends  AbstractModel {
         this.AudienceType = 'AudienceType' in params ? params.AudienceType : null;
         this.RecordLayout = 'RecordLayout' in params ? params.RecordLayout : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.EnableDirectControl = 'EnableDirectControl' in params ? params.EnableDirectControl : null;
 
     }
 }
@@ -388,6 +397,34 @@ class DescribeSupervisorsResponse extends  AbstractModel {
         this.Page = 'Page' in params ? params.Page : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.UserIds = 'UserIds' in params ? params.UserIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * KickUserFromRoom response structure.
+ * @class
+ */
+class KickUserFromRoomResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1292,6 +1329,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.RecordUrl = null;
 
+        /**
+         * The maximum number of users allowed (including teachers) in the room. The default value is `0`, which indicates that no limit is set. 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.MaxMicNumber = null;
+
+        /**
+         * Whether the students' consent is required to control their cameras/microphones.
+Note: This field may return null, indicating that no valid value was found.
+         * @type {number || null}
+         */
+        this.EnableDirectControl = null;
+
     }
 
     /**
@@ -1312,6 +1363,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.MaxRTCMember = 'MaxRTCMember' in params ? params.MaxRTCMember : null;
         this.ReplayUrl = 'ReplayUrl' in params ? params.ReplayUrl : null;
         this.RecordUrl = 'RecordUrl' in params ? params.RecordUrl : null;
+        this.MaxMicNumber = 'MaxMicNumber' in params ? params.MaxMicNumber : null;
+        this.EnableDirectControl = 'EnableDirectControl' in params ? params.EnableDirectControl : null;
 
     }
 }
@@ -2847,8 +2900,16 @@ class EventInfo extends  AbstractModel {
         this.Timestamp = null;
 
         /**
-         * The event type. Valid values:
+         * The event type. Valid values: 
 `RoomStart`: The class started. `RoomEnd`: The class ended. `MemberJoin`: A user joined. `MemberQuit`: A user left. `RecordFinish`: Recording is finished.
+·Camera0n·: The camera is turned on.
+`Camera0ff`: The camera is turned off.
+`MicOn`: The mic is turned on.
+`MicOff`: The mic is turned off.
+`ScreenOn`: Screen sharing is enabled.
+`ScreenOff`: Screen sharing is disabled.
+`VisibleOn`: The page is visible.
+`VisibleOff`: The page is invisible.
          * @type {string || null}
          */
         this.EventType = null;
@@ -3763,6 +3824,12 @@ class DescribeRoomResponse extends  AbstractModel {
         this.GroupId = null;
 
         /**
+         * Whether the students' consent is required to control their cameras/microphones.
+         * @type {number || null}
+         */
+        this.EnableDirectControl = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -3792,6 +3859,7 @@ class DescribeRoomResponse extends  AbstractModel {
         this.RecordUrl = 'RecordUrl' in params ? params.RecordUrl : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.EnableDirectControl = 'EnableDirectControl' in params ? params.EnableDirectControl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4762,6 +4830,12 @@ class RoomInfo extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * Whether the students' consent is required to control their cameras/microphones.
+         * @type {number || null}
+         */
+        this.EnableDirectControl = null;
+
     }
 
     /**
@@ -4787,6 +4861,7 @@ class RoomInfo extends  AbstractModel {
         this.AudienceType = 'AudienceType' in params ? params.AudienceType : null;
         this.RecordLayout = 'RecordLayout' in params ? params.RecordLayout : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.EnableDirectControl = 'EnableDirectControl' in params ? params.EnableDirectControl : null;
 
     }
 }
@@ -4883,6 +4958,12 @@ class ModifyRoomRequest extends  AbstractModel {
          */
         this.GroupId = null;
 
+        /**
+         * Whether the students' consent is required to control their cameras/microphones.
+         * @type {number || null}
+         */
+        this.EnableDirectControl = null;
+
     }
 
     /**
@@ -4906,6 +4987,7 @@ class ModifyRoomRequest extends  AbstractModel {
         this.DisableRecord = 'DisableRecord' in params ? params.DisableRecord : null;
         this.Assistants = 'Assistants' in params ? params.Assistants : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.EnableDirectControl = 'EnableDirectControl' in params ? params.EnableDirectControl : null;
 
     }
 }
@@ -5263,6 +5345,64 @@ Note: This field may return null, indicating that no valid values can be obtaine
                 this.AnswerStats.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * KickUserFromRoom request structure.
+ * @class
+ */
+class KickUserFromRoomRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The room ID.
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * The SDKAppID assigned by LCIC.
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * The ID of the user to be removed.
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * The removal type: 
+`1`: Keep the user out temporarily. The `Duration` parameter specifies the ban duration, during which the user is banned from entering the room. 
+`2`: Remove the user permanently.
+         * @type {number || null}
+         */
+        this.KickType = null;
+
+        /**
+         * The ban duration (seconds). This parameter is valid if `KickType` is `1`. The default value is `0`.
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.KickType = 'KickType' in params ? params.KickType : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
 
     }
 }
@@ -6026,6 +6166,7 @@ module.exports = {
     GetWatermarkResponse: GetWatermarkResponse,
     DeleteSupervisorRequest: DeleteSupervisorRequest,
     DescribeSupervisorsResponse: DescribeSupervisorsResponse,
+    KickUserFromRoomResponse: KickUserFromRoomResponse,
     BatchDeleteRecordRequest: BatchDeleteRecordRequest,
     BatchRegisterRequest: BatchRegisterRequest,
     DeleteRoomResponse: DeleteRoomResponse,
@@ -6124,6 +6265,7 @@ module.exports = {
     DescribeQuestionListResponse: DescribeQuestionListResponse,
     GetRoomsResponse: GetRoomsResponse,
     QuestionInfo: QuestionInfo,
+    KickUserFromRoomRequest: KickUserFromRoomRequest,
     GetRoomsRequest: GetRoomsRequest,
     DescribeDeveloperRequest: DescribeDeveloperRequest,
     AppCustomContent: AppCustomContent,

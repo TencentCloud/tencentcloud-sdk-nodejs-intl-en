@@ -470,6 +470,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreateModifyCheckSyncJob request structure.
+ * @class
+ */
+class CreateModifyCheckSyncJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sync task ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
  * IsolateSyncJob request structure.
  * @class
  */
@@ -960,6 +988,77 @@ class CreateCheckSyncJobRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeModifyCheckSyncJobResult response structure.
+ * @class
+ */
+class DescribeModifyCheckSyncJobResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Execution status of the check task Valid values: `notStarted` (Not started), `running` (Running), `failed` (Failed), `success` (Successful).
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Number of check steps Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StepCount = null;
+
+        /**
+         * Current step Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StepCur = null;
+
+        /**
+         * Overall progress. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * Step details Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<StepInfo> || null}
+         */
+        this.StepInfos = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StepCount = 'StepCount' in params ? params.StepCount : null;
+        this.StepCur = 'StepCur' in params ? params.StepCur : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+
+        if (params.StepInfos) {
+            this.StepInfos = new Array();
+            for (let z in params.StepInfos) {
+                let obj = new StepInfo();
+                obj.deserialize(params.StepInfos[z]);
+                this.StepInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StopSyncJob request structure.
  * @class
  */
@@ -1301,6 +1400,58 @@ class CreateMigrateCheckJobResponse extends  AbstractModel {
 }
 
 /**
+ * ModifySyncJobConfig request structure.
+ * @class
+ */
+class ModifySyncJobConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sync task ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * The modified sync objects
+         * @type {Objects || null}
+         */
+        this.DynamicObjects = null;
+
+        /**
+         * The modified sync task options
+         * @type {DynamicOptions || null}
+         */
+        this.DynamicOptions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+        if (params.DynamicObjects) {
+            let obj = new Objects();
+            obj.deserialize(params.DynamicObjects)
+            this.DynamicObjects = obj;
+        }
+
+        if (params.DynamicOptions) {
+            let obj = new DynamicOptions();
+            obj.deserialize(params.DynamicOptions)
+            this.DynamicOptions = obj;
+        }
+
+    }
+}
+
+/**
  * ContinueMigrateJob response structure.
  * @class
  */
@@ -1337,13 +1488,13 @@ class CreateMigrationServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * Source database type. Valid values: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`.
+         * Source database type. Valid values: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`, and `cynosdbmysql`.
          * @type {string || null}
          */
         this.SrcDatabaseType = null;
 
         /**
-         * Target database type. Valid values: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`.
+         * Target database type. Valid values: `mysql`, `redis`, `percona`, `mongodb` ,`postgresql`, `sqlserver`, `mariadb`, and `cynosdbmysql`.
          * @type {string || null}
          */
         this.DstDatabaseType = null;
@@ -2233,6 +2384,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * StartModifySyncJob request structure.
+ * @class
+ */
+class StartModifySyncJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sync task ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
  * DescribeCheckSyncJobResult response structure.
  * @class
  */
@@ -2558,33 +2737,66 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * Details of skipped tables
+ * ModifyMigrationJob request structure.
  * @class
  */
-class SkippedItem extends  AbstractModel {
+class ModifyMigrationJobRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Database name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task ID
          * @type {string || null}
          */
-        this.Db = null;
+        this.JobId = null;
 
         /**
-         * Table name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Running mode. Valid values: `immediate`, `timed`.
          * @type {string || null}
          */
-        this.Table = null;
+        this.RunMode = null;
 
         /**
-         * The cause why check is not initiated
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Migration task configuration options, which describe how the task performs migration.
+         * @type {MigrateOption || null}
+         */
+        this.MigrateOption = null;
+
+        /**
+         * Source instance information
+         * @type {DBEndpointInfo || null}
+         */
+        this.SrcInfo = null;
+
+        /**
+         * Target instance information
+         * @type {DBEndpointInfo || null}
+         */
+        this.DstInfo = null;
+
+        /**
+         * Migration task name, which can contain up to 128 characters.
          * @type {string || null}
          */
-        this.Reason = null;
+        this.JobName = null;
+
+        /**
+         * Expected start time in the format of "2006-01-02 15:04:05", which is required if `RunMode` is `timed`.
+         * @type {string || null}
+         */
+        this.ExpectRunTime = null;
+
+        /**
+         * Tag information
+         * @type {Array.<TagItem> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
+         * @type {number || null}
+         */
+        this.AutoRetryTimeRangeMinutes = null;
 
     }
 
@@ -2595,9 +2807,38 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.Db = 'Db' in params ? params.Db : null;
-        this.Table = 'Table' in params ? params.Table : null;
-        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.RunMode = 'RunMode' in params ? params.RunMode : null;
+
+        if (params.MigrateOption) {
+            let obj = new MigrateOption();
+            obj.deserialize(params.MigrateOption)
+            this.MigrateOption = obj;
+        }
+
+        if (params.SrcInfo) {
+            let obj = new DBEndpointInfo();
+            obj.deserialize(params.SrcInfo)
+            this.SrcInfo = obj;
+        }
+
+        if (params.DstInfo) {
+            let obj = new DBEndpointInfo();
+            obj.deserialize(params.DstInfo)
+            this.DstInfo = obj;
+        }
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.ExpectRunTime = 'ExpectRunTime' in params ? params.ExpectRunTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagItem();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.AutoRetryTimeRangeMinutes = 'AutoRetryTimeRangeMinutes' in params ? params.AutoRetryTimeRangeMinutes : null;
 
     }
 }
@@ -2738,6 +2979,34 @@ class SkipSyncCheckItemRequest extends  AbstractModel {
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.StepIds = 'StepIds' in params ? params.StepIds : null;
+
+    }
+}
+
+/**
+ * DescribeModifyCheckSyncJobResult request structure.
+ * @class
+ */
+class DescribeModifyCheckSyncJobResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Sync task ID
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
@@ -3932,6 +4201,34 @@ class ConfigureSyncJobRequest extends  AbstractModel {
 }
 
 /**
+ * StartModifySyncJob response structure.
+ * @class
+ */
+class StartModifySyncJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Object in the migration task instance list
  * @class
  */
@@ -4455,63 +4752,134 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * ModifyMigrationJob request structure.
+ * Migration task list
  * @class
  */
-class ModifyMigrationJobRequest extends  AbstractModel {
+class JobItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Task ID
+         * Data migration task ID
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.JobId = null;
 
         /**
-         * Running mode. Valid values: `immediate`, `timed`.
-         * @type {string || null}
-         */
-        this.RunMode = null;
-
-        /**
-         * Migration task configuration options, which describe how the task performs migration.
-         * @type {MigrateOption || null}
-         */
-        this.MigrateOption = null;
-
-        /**
-         * Source instance information
-         * @type {DBEndpointInfo || null}
-         */
-        this.SrcInfo = null;
-
-        /**
-         * Target instance information
-         * @type {DBEndpointInfo || null}
-         */
-        this.DstInfo = null;
-
-        /**
-         * Migration task name, which can contain up to 128 characters.
+         * Data migration task name
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.JobName = null;
 
         /**
-         * Expected start time in the format of "2006-01-02 15:04:05", which is required if `RunMode` is `timed`.
+         * Task creation (submission) time in the format of `yyyy-mm-dd hh:mm:ss`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Task update time in the format of `yyyy-mm-dd hh:mm:ss`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * Task start time in the format of `yyyy-mm-dd hh:mm:ss`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * Task end time in the format of `yyyy-mm-dd hh:mm:ss`
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * Migration task error message
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.BriefMsg = null;
+
+        /**
+         * Task status. Valid values: `creating` (Creating), `created`(Created), `checking` (Checking), `checkPass` (Check passed), `checkNotPass` (Check not passed), `readyRun` (Ready for running), `running` (Running), `readyComplete` (Preparation completed), `success` (Successful), `failed` (Failed), `stopping` (Stopping), `completing` (Completing), `pausing` (Pausing), `manualPaused` (Paused). Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * Task running mode. Valid values: `immediate`, `timed`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RunMode = null;
+
+        /**
+         * Expected start time in the format of "2022-07-11 16:20:49", which is required if `RunMode` is `timed`.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.ExpectRunTime = null;
 
         /**
+         * Task operation information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MigrateAction || null}
+         */
+        this.Action = null;
+
+        /**
+         * Information of the migration task execution process
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {MigrateDetailInfo || null}
+         */
+        this.StepInfo = null;
+
+        /**
+         * Source instance information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DBEndpointInfo || null}
+         */
+        this.SrcInfo = null;
+
+        /**
+         * Target database information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DBEndpointInfo || null}
+         */
+        this.DstInfo = null;
+
+        /**
+         * Data consistency check result
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {CompareTaskInfo || null}
+         */
+        this.CompareTask = null;
+
+        /**
+         * Billing status information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {TradeInfo || null}
+         */
+        this.TradeInfo = null;
+
+        /**
          * Tag information
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<TagItem> || null}
          */
         this.Tags = null;
 
         /**
-         * Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
+         * Information of automatic retry time
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.AutoRetryTimeRangeMinutes = null;
@@ -4526,12 +4894,26 @@ class ModifyMigrationJobRequest extends  AbstractModel {
             return;
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.BriefMsg = 'BriefMsg' in params ? params.BriefMsg : null;
+        this.Status = 'Status' in params ? params.Status : null;
         this.RunMode = 'RunMode' in params ? params.RunMode : null;
+        this.ExpectRunTime = 'ExpectRunTime' in params ? params.ExpectRunTime : null;
 
-        if (params.MigrateOption) {
-            let obj = new MigrateOption();
-            obj.deserialize(params.MigrateOption)
-            this.MigrateOption = obj;
+        if (params.Action) {
+            let obj = new MigrateAction();
+            obj.deserialize(params.Action)
+            this.Action = obj;
+        }
+
+        if (params.StepInfo) {
+            let obj = new MigrateDetailInfo();
+            obj.deserialize(params.StepInfo)
+            this.StepInfo = obj;
         }
 
         if (params.SrcInfo) {
@@ -4545,8 +4927,18 @@ class ModifyMigrationJobRequest extends  AbstractModel {
             obj.deserialize(params.DstInfo)
             this.DstInfo = obj;
         }
-        this.JobName = 'JobName' in params ? params.JobName : null;
-        this.ExpectRunTime = 'ExpectRunTime' in params ? params.ExpectRunTime : null;
+
+        if (params.CompareTask) {
+            let obj = new CompareTaskInfo();
+            obj.deserialize(params.CompareTask)
+            this.CompareTask = obj;
+        }
+
+        if (params.TradeInfo) {
+            let obj = new TradeInfo();
+            obj.deserialize(params.TradeInfo)
+            this.TradeInfo = obj;
+        }
 
         if (params.Tags) {
             this.Tags = new Array();
@@ -4940,8 +5332,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Warnings = null;
 
         /**
-         * Progress of the current step. Value range: 0-100.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Current step progress. Value range: 0-100. The value `-1` indicates that the progress of the current step is unavailable. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Progress = null;
@@ -5179,6 +5570,68 @@ class StartCompareResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Data sync options
+ * @class
+ */
+class DynamicOptions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DML and DDL options to be synced. Valid values: `Insert` (INSERT), `Update` (UPDATE), `Delete` (DELETE), `DDL` (structure sync), `PartialDDL` (custom option, which is used together with `DdlOptions`). This parameter is required, and its value will overwrite the previous value. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.OpTypes = null;
+
+        /**
+         * DDL options to be synced. This parameter is required when `OpTypes` is `PartialDDL`, and its value will overwrite the previous value. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<DdlOption> || null}
+         */
+        this.DdlOptions = null;
+
+        /**
+         * Conflict resolution method. Valid values: `ReportError` (Report error), `Ignore` (Ignore), `Cover` (Overwrite), `ConditionCover` (Conditionally overwrite). Currently, this parameter cannot be modified if the target of the link is Kafka. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ConflictHandleType = null;
+
+        /**
+         * Detailed options of the conflict resolution method, such as the conditionally overwritten rows and condition operations for the “conditionally overwrite” method. The internal field of this parameter cannot be modified separately. If this parameter needs to be updated, update it fully. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {ConflictHandleOption || null}
+         */
+        this.ConflictHandleOption = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OpTypes = 'OpTypes' in params ? params.OpTypes : null;
+
+        if (params.DdlOptions) {
+            this.DdlOptions = new Array();
+            for (let z in params.DdlOptions) {
+                let obj = new DdlOption();
+                obj.deserialize(params.DdlOptions[z]);
+                this.DdlOptions.push(obj);
+            }
+        }
+        this.ConflictHandleType = 'ConflictHandleType' in params ? params.ConflictHandleType : null;
+
+        if (params.ConflictHandleOption) {
+            let obj = new ConflictHandleOption();
+            obj.deserialize(params.ConflictHandleOption)
+            this.ConflictHandleOption = obj;
+        }
 
     }
 }
@@ -5920,8 +6373,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.BriefMsg = null;
 
         /**
-         * Task status. Valid values: `created`, `checking`, `checkPass`, `checkNotPass`, `readyRun`, `running`, `readyComplete`, `success`, `failed`, `stopping`, `completing`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Task status. Valid values: `created`(Created), `checking` (Checking), `checkPass` (Check passed), `checkNotPass` (Check not passed), `readyRun` (Ready for running), `running` (Running), `readyComplete` (Preparation completed), `success` (Successful), `failed` (Failed), `stopping` (Stopping), `completing` (Completing), `pausing` (Pausing), `manualPaused` (Paused). Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Status = null;
@@ -6107,6 +6559,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * CreateModifyCheckSyncJob response structure.
+ * @class
+ */
+class CreateModifyCheckSyncJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyMigrateName request structure.
  * @class
  */
@@ -6137,209 +6617,6 @@ class ModifyMigrateNameRequest extends  AbstractModel {
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.JobName = 'JobName' in params ? params.JobName : null;
-
-    }
-}
-
-/**
- * Migration task list
- * @class
- */
-class JobItem extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Data migration task ID
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-        /**
-         * Data migration task name
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.JobName = null;
-
-        /**
-         * Task creation (submission) time in the format of `yyyy-mm-dd hh:mm:ss`
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Task update time in the format of `yyyy-mm-dd hh:mm:ss`
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * Task start time in the format of `yyyy-mm-dd hh:mm:ss`
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * Task end time in the format of `yyyy-mm-dd hh:mm:ss`
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * Migration task error message
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.BriefMsg = null;
-
-        /**
-         * Task status. Valid values: `creating`, `created`, `checking`, `checkPass`, `checkNotPass`, `readyRun`, `running`, `readyComplete`, `success`, `failed`, `stopping`, `completing`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * Task running mode. Valid values: `immediate`, `timed`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.RunMode = null;
-
-        /**
-         * Expected start time in the format of "2022-07-11 16:20:49", which is required if `RunMode` is `timed`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ExpectRunTime = null;
-
-        /**
-         * Task operation information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {MigrateAction || null}
-         */
-        this.Action = null;
-
-        /**
-         * Information of the migration task execution process
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {MigrateDetailInfo || null}
-         */
-        this.StepInfo = null;
-
-        /**
-         * Source instance information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {DBEndpointInfo || null}
-         */
-        this.SrcInfo = null;
-
-        /**
-         * Target database information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {DBEndpointInfo || null}
-         */
-        this.DstInfo = null;
-
-        /**
-         * Data consistency check result
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {CompareTaskInfo || null}
-         */
-        this.CompareTask = null;
-
-        /**
-         * Billing status information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {TradeInfo || null}
-         */
-        this.TradeInfo = null;
-
-        /**
-         * Tag information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<TagItem> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * Information of automatic retry time
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {number || null}
-         */
-        this.AutoRetryTimeRangeMinutes = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.JobName = 'JobName' in params ? params.JobName : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.BriefMsg = 'BriefMsg' in params ? params.BriefMsg : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RunMode = 'RunMode' in params ? params.RunMode : null;
-        this.ExpectRunTime = 'ExpectRunTime' in params ? params.ExpectRunTime : null;
-
-        if (params.Action) {
-            let obj = new MigrateAction();
-            obj.deserialize(params.Action)
-            this.Action = obj;
-        }
-
-        if (params.StepInfo) {
-            let obj = new MigrateDetailInfo();
-            obj.deserialize(params.StepInfo)
-            this.StepInfo = obj;
-        }
-
-        if (params.SrcInfo) {
-            let obj = new DBEndpointInfo();
-            obj.deserialize(params.SrcInfo)
-            this.SrcInfo = obj;
-        }
-
-        if (params.DstInfo) {
-            let obj = new DBEndpointInfo();
-            obj.deserialize(params.DstInfo)
-            this.DstInfo = obj;
-        }
-
-        if (params.CompareTask) {
-            let obj = new CompareTaskInfo();
-            obj.deserialize(params.CompareTask)
-            this.CompareTask = obj;
-        }
-
-        if (params.TradeInfo) {
-            let obj = new TradeInfo();
-            obj.deserialize(params.TradeInfo)
-            this.TradeInfo = obj;
-        }
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new TagItem();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-        this.AutoRetryTimeRangeMinutes = 'AutoRetryTimeRangeMinutes' in params ? params.AutoRetryTimeRangeMinutes : null;
 
     }
 }
@@ -6381,8 +6658,7 @@ class Objects extends  AbstractModel {
         super();
 
         /**
-         * Sync object type. Valid value: `Partial` (default).
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Sync object type. Valid value: `Partial` (Partial objects). Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.Mode = null;
@@ -6395,8 +6671,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.Databases = null;
 
         /**
-         * Advanced object type, such as function and procedure. If you need to sync advanced objects, the initialization type must include structure initialization; that is, `Options.InitType` must be `Structure` or `Full`.
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Advanced object type, such as functions and procedures. If you need to sync advanced objects, the initialization type must include structure initialization, that is, `Options.InitType` must be `Structure` or `Full`. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.AdvancedObjects = null;
@@ -7171,6 +7446,34 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * ModifySyncJobConfig response structure.
+ * @class
+ */
+class ModifySyncJobConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Role object, which is exclusive to PostgreSQL.
  * @class
  */
@@ -7593,6 +7896,51 @@ class DescribeCompareReportRequest extends  AbstractModel {
 }
 
 /**
+ * Details of skipped tables
+ * @class
+ */
+class SkippedItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Database name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Db = null;
+
+        /**
+         * Table name
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Table = null;
+
+        /**
+         * The cause why check is not initiated
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Db = 'Db' in params ? params.Db : null;
+        this.Table = 'Table' in params ? params.Table : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
  * Synced view description
  * @class
  */
@@ -7608,8 +7956,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ViewName = null;
 
         /**
-         * New view name
-Note: This field may return null, indicating that no valid values can be obtained.
+         * Reserved field. Currently, a view cannot be renamed. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.NewViewName = null;
@@ -7981,6 +8328,7 @@ module.exports = {
     ResizeSyncJobResponse: ResizeSyncJobResponse,
     ResumeMigrateJobResponse: ResumeMigrateJobResponse,
     DifferenceItem: DifferenceItem,
+    CreateModifyCheckSyncJobRequest: CreateModifyCheckSyncJobRequest,
     IsolateSyncJobRequest: IsolateSyncJobRequest,
     PauseMigrateJobRequest: PauseMigrateJobRequest,
     ContinueMigrateJobRequest: ContinueMigrateJobRequest,
@@ -7995,6 +8343,7 @@ module.exports = {
     DescribeMigrateDBInstancesResponse: DescribeMigrateDBInstancesResponse,
     KeyValuePairOption: KeyValuePairOption,
     CreateCheckSyncJobRequest: CreateCheckSyncJobRequest,
+    DescribeModifyCheckSyncJobResultResponse: DescribeModifyCheckSyncJobResultResponse,
     StopSyncJobRequest: StopSyncJobRequest,
     DescribeMigrationDetailRequest: DescribeMigrationDetailRequest,
     DestroySyncJobRequest: DestroySyncJobRequest,
@@ -8006,6 +8355,7 @@ module.exports = {
     StartSyncJobRequest: StartSyncJobRequest,
     PauseSyncJobRequest: PauseSyncJobRequest,
     CreateMigrateCheckJobResponse: CreateMigrateCheckJobResponse,
+    ModifySyncJobConfigRequest: ModifySyncJobConfigRequest,
     ContinueMigrateJobResponse: ContinueMigrateJobResponse,
     CreateMigrationServiceRequest: CreateMigrationServiceRequest,
     DetailCheckItem: DetailCheckItem,
@@ -8023,16 +8373,18 @@ module.exports = {
     DescribeCompareTasksResponse: DescribeCompareTasksResponse,
     StopCompareRequest: StopCompareRequest,
     SyncDBEndpointInfos: SyncDBEndpointInfos,
+    StartModifySyncJobRequest: StartModifySyncJobRequest,
     DescribeCheckSyncJobResultResponse: DescribeCheckSyncJobResultResponse,
     StopSyncJobResponse: StopSyncJobResponse,
     SkippedDetail: SkippedDetail,
     MigrateOption: MigrateOption,
     ModifyMigrateNameResponse: ModifyMigrateNameResponse,
     DescribeMigrationJobsResponse: DescribeMigrationJobsResponse,
-    SkippedItem: SkippedItem,
+    ModifyMigrationJobRequest: ModifyMigrationJobRequest,
     DestroyMigrateJobResponse: DestroyMigrateJobResponse,
     ProcessProgress: ProcessProgress,
     SkipSyncCheckItemRequest: SkipSyncCheckItemRequest,
+    DescribeModifyCheckSyncJobResultRequest: DescribeModifyCheckSyncJobResultRequest,
     SkipSyncCheckItemResponse: SkipSyncCheckItemResponse,
     IsolateSyncJobResponse: IsolateSyncJobResponse,
     CreateMigrateCheckJobRequest: CreateMigrateCheckJobRequest,
@@ -8048,6 +8400,7 @@ module.exports = {
     CreateCheckSyncJobResponse: CreateCheckSyncJobResponse,
     CompareObjectItem: CompareObjectItem,
     ConfigureSyncJobRequest: ConfigureSyncJobRequest,
+    StartModifySyncJobResponse: StartModifySyncJobResponse,
     MigrateDBItem: MigrateDBItem,
     DescribeMigrateDBInstancesRequest: DescribeMigrateDBInstancesRequest,
     CheckStepInfo: CheckStepInfo,
@@ -8055,7 +8408,7 @@ module.exports = {
     ModifyCompareTaskRequest: ModifyCompareTaskRequest,
     RecoverSyncJobRequest: RecoverSyncJobRequest,
     Database: Database,
-    ModifyMigrationJobRequest: ModifyMigrationJobRequest,
+    JobItem: JobItem,
     DescribeSyncJobsRequest: DescribeSyncJobsRequest,
     SyncDetailInfo: SyncDetailInfo,
     ResumeSyncJobRequest: ResumeSyncJobRequest,
@@ -8067,6 +8420,7 @@ module.exports = {
     PauseSyncJobResponse: PauseSyncJobResponse,
     TradeInfo: TradeInfo,
     StartCompareResponse: StartCompareResponse,
+    DynamicOptions: DynamicOptions,
     CreateCompareTaskResponse: CreateCompareTaskResponse,
     StopCompareResponse: StopCompareResponse,
     SkipCheckItemRequest: SkipCheckItemRequest,
@@ -8079,8 +8433,8 @@ module.exports = {
     StartCompareRequest: StartCompareRequest,
     DescribeMigrationCheckJobRequest: DescribeMigrationCheckJobRequest,
     DescribeMigrationDetailResponse: DescribeMigrationDetailResponse,
+    CreateModifyCheckSyncJobResponse: CreateModifyCheckSyncJobResponse,
     ModifyMigrateNameRequest: ModifyMigrateNameRequest,
-    JobItem: JobItem,
     StartSyncJobResponse: StartSyncJobResponse,
     Objects: Objects,
     RecoverMigrateJobResponse: RecoverMigrateJobResponse,
@@ -8091,12 +8445,14 @@ module.exports = {
     IsolateMigrateJobResponse: IsolateMigrateJobResponse,
     SyncJobInfo: SyncJobInfo,
     CompareOptions: CompareOptions,
+    ModifySyncJobConfigResponse: ModifySyncJobConfigResponse,
     RoleItem: RoleItem,
     TagFilter: TagFilter,
     StepDetailInfo: StepDetailInfo,
     CreateSyncJobRequest: CreateSyncJobRequest,
     ViewItem: ViewItem,
     DescribeCompareReportRequest: DescribeCompareReportRequest,
+    SkippedItem: SkippedItem,
     View: View,
     TagItem: TagItem,
     RecoverMigrateJobRequest: RecoverMigrateJobRequest,

@@ -786,7 +786,7 @@ class CreateSnapshotResponse extends  AbstractModel {
         super();
 
         /**
-         * ID of the new snapshot.
+         * ID of the created snapshot <br/>Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.SnapshotId = null;
@@ -1291,6 +1291,12 @@ class CreateDisksRequest extends  AbstractModel {
          */
         this.DiskBackupQuota = null;
 
+        /**
+         * Specifies whether to enable disk bursting.
+         * @type {boolean || null}
+         */
+        this.BurstPerformance = null;
+
     }
 
     /**
@@ -1339,6 +1345,7 @@ class CreateDisksRequest extends  AbstractModel {
             this.AutoMountConfiguration = obj;
         }
         this.DiskBackupQuota = 'DiskBackupQuota' in params ? params.DiskBackupQuota : null;
+        this.BurstPerformance = 'BurstPerformance' in params ? params.BurstPerformance : null;
 
     }
 }
@@ -2007,6 +2014,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.ErrorPrompt = null;
 
+        /**
+         * Whether the cloud disk has enabled disk bursting. Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {boolean || null}
+         */
+        this.BurstPerformance = null;
+
     }
 
     /**
@@ -2070,6 +2083,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.LastAttachInsId = 'LastAttachInsId' in params ? params.LastAttachInsId : null;
         this.ErrorPrompt = 'ErrorPrompt' in params ? params.ErrorPrompt : null;
+        this.BurstPerformance = 'BurstPerformance' in params ? params.BurstPerformance : null;
 
     }
 }
@@ -2186,7 +2200,7 @@ class CreateSnapshotRequest extends  AbstractModel {
         this.SnapshotName = null;
 
         /**
-         * Expiration time of the snapshot. It must be in UTC ISO-8601 format, such as 2022-01-08T09:47:55+00:00. The snapshot will be automatically deleted when it expires.
+         * Expiration time of the snapshot. It must be in UTC ISO-8601 format, eg. 2022-01-08T09:47:55+00:00. The snapshot will be automatically deleted when it expires.
          * @type {string || null}
          */
         this.Deadline = null;
@@ -2692,12 +2706,6 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
         this.DiskIds = null;
 
         /**
-         * The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1).
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
          * Name of new cloud disk.
          * @type {string || null}
          */
@@ -2708,6 +2716,12 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
          * @type {boolean || null}
          */
         this.Portable = null;
+
+        /**
+         * The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1).
+         * @type {number || null}
+         */
+        this.ProjectId = null;
 
         /**
          * Whether the cloud disk is terminated with the CVM after it has been successfully mounted. `TRUE` indicates that it is terminated with the CVM. `FALSE` indicates that it is not terminated with the CVM. This is only supported for cloud disks and data disks that are pay-as-you-go.
@@ -2721,6 +2735,12 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
          */
         this.DiskType = null;
 
+        /**
+         * Enable/disable disk bursting.
+         * @type {string || null}
+         */
+        this.BurstPerformanceOperation = null;
+
     }
 
     /**
@@ -2731,11 +2751,12 @@ class ModifyDiskAttributesRequest extends  AbstractModel {
             return;
         }
         this.DiskIds = 'DiskIds' in params ? params.DiskIds : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.DiskName = 'DiskName' in params ? params.DiskName : null;
         this.Portable = 'Portable' in params ? params.Portable : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.BurstPerformanceOperation = 'BurstPerformanceOperation' in params ? params.BurstPerformanceOperation : null;
 
     }
 }
@@ -3724,7 +3745,7 @@ class CreateDisksResponse extends  AbstractModel {
         super();
 
         /**
-         * List of IDs of the created cloud disks.
+         * ID list of the created cloud disks. Note: This field may return null, indicating that no valid values can be obtained.
          * @type {Array.<string> || null}
          */
         this.DiskIdSet = null;

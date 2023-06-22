@@ -118,7 +118,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.AutoRenewFlag = null;
 
         /**
-         * Whether IPv6 is supported.
+         * Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
          * @type {number || null}
          */
         this.Ipv6Flag = null;
@@ -1385,6 +1385,41 @@ class DescribeDBLogFilesRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * UpgradeDedicatedDBInstance response structure.
+ * @class
+ */
+class UpgradeDedicatedDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Async task ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2751,6 +2786,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RsAccessStrategy = null;
 
         /**
+         * Unclaimed network resource
+         * @type {Array.<ReservedNetResource> || null}
+         */
+        this.ReservedNetResources = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsPhysicalReplicationSupported = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2846,6 +2893,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         }
         this.ExclusterType = 'ExclusterType' in params ? params.ExclusterType : null;
         this.RsAccessStrategy = 'RsAccessStrategy' in params ? params.RsAccessStrategy : null;
+
+        if (params.ReservedNetResources) {
+            this.ReservedNetResources = new Array();
+            for (let z in params.ReservedNetResources) {
+                let obj = new ReservedNetResource();
+                obj.deserialize(params.ReservedNetResources[z]);
+                this.ReservedNetResources.push(obj);
+            }
+        }
+        this.IsPhysicalReplicationSupported = 'IsPhysicalReplicationSupported' in params ? params.IsPhysicalReplicationSupported : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2975,6 +3032,69 @@ class DescribeDBEncryptAttributesResponse extends  AbstractModel {
         this.CipherText = 'CipherText' in params ? params.CipherText : null;
         this.ExpireDate = 'ExpireDate' in params ? params.ExpireDate : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeDedicatedDBInstance request structure.
+ * @class
+ */
+class UpgradeDedicatedDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID of the instance to be upgraded.  It is in the form of  `tdsql-ow728lmc`, which can be obtained by querying the instance details through the `DescribeDBInstances` API.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Memory size in GB,  which can be obtained through the `DescribeFenceDBInstanceSpecs` API.
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Storage space size in GB.  You can obtain the disk space limits by querying instance specification through the `DescribeDBInstanceSpecs` API.
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Whether to retry again when missing the switch time window. Valid values: `0` (no), `1` (yes).
+         * @type {number || null}
+         */
+        this.SwitchAutoRetry = null;
+
+        /**
+         * Switch start time
+         * @type {string || null}
+         */
+        this.SwitchStartTime = null;
+
+        /**
+         * Switch end time
+         * @type {string || null}
+         */
+        this.SwitchEndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.SwitchAutoRetry = 'SwitchAutoRetry' in params ? params.SwitchAutoRetry : null;
+        this.SwitchStartTime = 'SwitchStartTime' in params ? params.SwitchStartTime : null;
+        this.SwitchEndTime = 'SwitchEndTime' in params ? params.SwitchEndTime : null;
 
     }
 }
@@ -4687,6 +4807,62 @@ class ModifyInstanceVipRequest extends  AbstractModel {
 }
 
 /**
+ * Information of the reserved network resource
+ * @class
+ */
+class ReservedNetResource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * Subnet
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * Reserved private network IP under `VpcId` and `SubnetId`
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * Port under `Vip`
+         * @type {Array.<number> || null}
+         */
+        this.Vports = null;
+
+        /**
+         * Valid hours of VIP
+         * @type {string || null}
+         */
+        this.RecycleTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vports = 'Vports' in params ? params.Vports : null;
+        this.RecycleTime = 'RecycleTime' in params ? params.RecycleTime : null;
+
+    }
+}
+
+/**
  * Database permission
  * @class
  */
@@ -6335,6 +6511,12 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.SlaveConst = null;
 
+        /**
+         * Maximum number of connections. `0` indicates no limit.
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
+
     }
 
     /**
@@ -6352,6 +6534,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
         this.DelayThresh = 'DelayThresh' in params ? params.DelayThresh : null;
         this.SlaveConst = 'SlaveConst' in params ? params.SlaveConst : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
 
     }
 }
@@ -6431,7 +6614,7 @@ class CreateHourDBInstanceRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * Whether IPv6 is supported.
+         * Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
          * @type {number || null}
          */
         this.Ipv6Flag = null;
@@ -6463,7 +6646,7 @@ class CreateHourDBInstanceRequest extends  AbstractModel {
         this.InitParams = null;
 
         /**
-         * ID of the instance whose backup data will be rolled back to the new instance you create.
+         * ID of the instance to be rolled back, such as “2021-11-22 00:00:00”.
          * @type {string || null}
          */
         this.RollbackInstanceId = null;
@@ -7088,6 +7271,7 @@ module.exports = {
     ModifyDBEncryptAttributesResponse: ModifyDBEncryptAttributesResponse,
     DatabaseView: DatabaseView,
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
+    UpgradeDedicatedDBInstanceResponse: UpgradeDedicatedDBInstanceResponse,
     NodeInfo: NodeInfo,
     DescribeOrdersResponse: DescribeOrdersResponse,
     ModifySyncTaskAttributeResponse: ModifySyncTaskAttributeResponse,
@@ -7110,6 +7294,7 @@ module.exports = {
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     DescribeDBEncryptAttributesResponse: DescribeDBEncryptAttributesResponse,
+    UpgradeDedicatedDBInstanceRequest: UpgradeDedicatedDBInstanceRequest,
     DestroyDBInstanceRequest: DestroyDBInstanceRequest,
     DatabaseTable: DatabaseTable,
     DescribeDBInstanceDetailRequest: DescribeDBInstanceDetailRequest,
@@ -7140,6 +7325,7 @@ module.exports = {
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     CancelDcnJobRequest: CancelDcnJobRequest,
     ModifyInstanceVipRequest: ModifyInstanceVipRequest,
+    ReservedNetResource: ReservedNetResource,
     DatabasePrivilege: DatabasePrivilege,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     FunctionPrivilege: FunctionPrivilege,

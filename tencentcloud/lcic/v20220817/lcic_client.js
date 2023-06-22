@@ -22,6 +22,7 @@ const ModifyRoomResponse = models.ModifyRoomResponse;
 const GetWatermarkResponse = models.GetWatermarkResponse;
 const DeleteSupervisorRequest = models.DeleteSupervisorRequest;
 const DescribeSupervisorsResponse = models.DescribeSupervisorsResponse;
+const KickUserFromRoomResponse = models.KickUserFromRoomResponse;
 const BatchDeleteRecordRequest = models.BatchDeleteRecordRequest;
 const BatchRegisterRequest = models.BatchRegisterRequest;
 const DeleteRoomResponse = models.DeleteRoomResponse;
@@ -120,6 +121,7 @@ const LoginOriginIdResponse = models.LoginOriginIdResponse;
 const DescribeQuestionListResponse = models.DescribeQuestionListResponse;
 const GetRoomsResponse = models.GetRoomsResponse;
 const QuestionInfo = models.QuestionInfo;
+const KickUserFromRoomRequest = models.KickUserFromRoomRequest;
 const GetRoomsRequest = models.GetRoomsRequest;
 const DescribeDeveloperRequest = models.DescribeDeveloperRequest;
 const AppCustomContent = models.AppCustomContent;
@@ -211,6 +213,17 @@ A maximum of 20 requests can be initiated per second for this API.
     DeleteAppCustomContent(req, cb) {
         let resp = new DeleteAppCustomContentResponse();
         this.request("DeleteAppCustomContent", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove a user from the room.
+     * @param {KickUserFromRoomRequest} req
+     * @param {function(string, KickUserFromRoomResponse):void} cb
+     * @public
+     */
+    KickUserFromRoom(req, cb) {
+        let resp = new KickUserFromRoomResponse();
+        this.request("KickUserFromRoom", req, resp, cb);
     }
 
     /**
@@ -563,7 +576,7 @@ A maximum of 20 requests can be initiated per second for this API.
     }
 
     /**
-     * This API is used to get the developer information.
+     * This API is used to get developer information.
      * @param {DescribeDeveloperRequest} req
      * @param {function(string, DescribeDeveloperResponse):void} cb
      * @public

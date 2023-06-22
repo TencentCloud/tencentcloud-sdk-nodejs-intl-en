@@ -57,6 +57,48 @@ class SchemaSpaceTimeSeries extends  AbstractModel {
 }
 
 /**
+ * Details of the source users of slow logs
+ * @class
+ */
+class SlowLogUser extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Source username
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Percentage of the number of slow logs from this source username to the total number of slow logs
+         * @type {number || null}
+         */
+        this.Ratio = null;
+
+        /**
+         * Number of slow logs from this source username
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Ratio = 'Ratio' in params ? params.Ratio : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
  * Details of the health report task.
  * @class
  */
@@ -336,7 +378,7 @@ class DescribeSlowLogsRequest extends  AbstractModel {
         this.User = null;
 
         /**
-         * ip
+         * IP
          * @type {Array.<string> || null}
          */
         this.Ip = null;
@@ -1661,8 +1703,7 @@ class DeleteDBDiagReportTasksRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL).
-Default value: `mysql`.
+         * Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
          * @type {string || null}
          */
         this.Product = null;
@@ -2739,6 +2780,18 @@ class DescribeSlowLogUserHostStatsResponse extends  AbstractModel {
         this.Items = null;
 
         /**
+         * Detailed list of the percentages of slow logs from different source usernames
+         * @type {Array.<SlowLogUser> || null}
+         */
+        this.UserNameItems = null;
+
+        /**
+         * The number of source users
+         * @type {number || null}
+         */
+        this.UserTotalCount = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2763,6 +2816,16 @@ class DescribeSlowLogUserHostStatsResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
+
+        if (params.UserNameItems) {
+            this.UserNameItems = new Array();
+            for (let z in params.UserNameItems) {
+                let obj = new SlowLogUser();
+                obj.deserialize(params.UserNameItems[z]);
+                this.UserNameItems.push(obj);
+            }
+        }
+        this.UserTotalCount = 'UserTotalCount' in params ? params.UserTotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3065,6 +3128,12 @@ class KillMySqlThreadsRequest extends  AbstractModel {
          */
         this.Product = null;
 
+        /**
+         * Whether to record the thread killing history. The default value is `true`, indicating “yes”. You can set it to `false` (“no”) to speed up the killing process.
+         * @type {boolean || null}
+         */
+        this.RecordHistory = null;
+
     }
 
     /**
@@ -3079,6 +3148,7 @@ class KillMySqlThreadsRequest extends  AbstractModel {
         this.Threads = 'Threads' in params ? params.Threads : null;
         this.SqlExecId = 'SqlExecId' in params ? params.SqlExecId : null;
         this.Product = 'Product' in params ? params.Product : null;
+        this.RecordHistory = 'RecordHistory' in params ? params.RecordHistory : null;
 
     }
 }
@@ -4073,14 +4143,14 @@ class InstanceInfo extends  AbstractModel {
         this.AuditRunningStatus = null;
 
         /**
-         * Private VIP
+         * Private VIP 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.InternalVip = null;
 
         /**
-         * Private network port
+         * Private network port 
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
@@ -4091,6 +4161,20 @@ Note: This field may return null, indicating that no valid values can be obtaine
          * @type {string || null}
          */
         this.CreateTime = null;
+
+        /**
+         * Cluster ID. This field is only required for cluster database products like TDSQL-C. 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * Cluster name. This field is only required for cluster database products like TDSQL-C. 
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ClusterName = null;
 
     }
 
@@ -4137,6 +4221,8 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.InternalVip = 'InternalVip' in params ? params.InternalVip : null;
         this.InternalVport = 'InternalVport' in params ? params.InternalVport : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
 
     }
 }
@@ -6218,6 +6304,7 @@ class DescribeProxySessionKillTasksResponse extends  AbstractModel {
 
 module.exports = {
     SchemaSpaceTimeSeries: SchemaSpaceTimeSeries,
+    SlowLogUser: SlowLogUser,
     HealthReportTask: HealthReportTask,
     CreateDBDiagReportTaskRequest: CreateDBDiagReportTaskRequest,
     TableSpaceTimeSeries: TableSpaceTimeSeries,

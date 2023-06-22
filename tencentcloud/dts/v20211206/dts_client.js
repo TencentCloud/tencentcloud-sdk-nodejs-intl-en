@@ -27,6 +27,7 @@ const SkipCheckItemResponse = models.SkipCheckItemResponse;
 const ResizeSyncJobResponse = models.ResizeSyncJobResponse;
 const ResumeMigrateJobResponse = models.ResumeMigrateJobResponse;
 const DifferenceItem = models.DifferenceItem;
+const CreateModifyCheckSyncJobRequest = models.CreateModifyCheckSyncJobRequest;
 const IsolateSyncJobRequest = models.IsolateSyncJobRequest;
 const PauseMigrateJobRequest = models.PauseMigrateJobRequest;
 const ContinueMigrateJobRequest = models.ContinueMigrateJobRequest;
@@ -41,6 +42,7 @@ const CompleteMigrateJobResponse = models.CompleteMigrateJobResponse;
 const DescribeMigrateDBInstancesResponse = models.DescribeMigrateDBInstancesResponse;
 const KeyValuePairOption = models.KeyValuePairOption;
 const CreateCheckSyncJobRequest = models.CreateCheckSyncJobRequest;
+const DescribeModifyCheckSyncJobResultResponse = models.DescribeModifyCheckSyncJobResultResponse;
 const StopSyncJobRequest = models.StopSyncJobRequest;
 const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
 const DestroySyncJobRequest = models.DestroySyncJobRequest;
@@ -52,6 +54,7 @@ const ModifyCompareTaskNameResponse = models.ModifyCompareTaskNameResponse;
 const StartSyncJobRequest = models.StartSyncJobRequest;
 const PauseSyncJobRequest = models.PauseSyncJobRequest;
 const CreateMigrateCheckJobResponse = models.CreateMigrateCheckJobResponse;
+const ModifySyncJobConfigRequest = models.ModifySyncJobConfigRequest;
 const ContinueMigrateJobResponse = models.ContinueMigrateJobResponse;
 const CreateMigrationServiceRequest = models.CreateMigrationServiceRequest;
 const DetailCheckItem = models.DetailCheckItem;
@@ -69,16 +72,18 @@ const CompleteMigrateJobRequest = models.CompleteMigrateJobRequest;
 const DescribeCompareTasksResponse = models.DescribeCompareTasksResponse;
 const StopCompareRequest = models.StopCompareRequest;
 const SyncDBEndpointInfos = models.SyncDBEndpointInfos;
+const StartModifySyncJobRequest = models.StartModifySyncJobRequest;
 const DescribeCheckSyncJobResultResponse = models.DescribeCheckSyncJobResultResponse;
 const StopSyncJobResponse = models.StopSyncJobResponse;
 const SkippedDetail = models.SkippedDetail;
 const MigrateOption = models.MigrateOption;
 const ModifyMigrateNameResponse = models.ModifyMigrateNameResponse;
 const DescribeMigrationJobsResponse = models.DescribeMigrationJobsResponse;
-const SkippedItem = models.SkippedItem;
+const ModifyMigrationJobRequest = models.ModifyMigrationJobRequest;
 const DestroyMigrateJobResponse = models.DestroyMigrateJobResponse;
 const ProcessProgress = models.ProcessProgress;
 const SkipSyncCheckItemRequest = models.SkipSyncCheckItemRequest;
+const DescribeModifyCheckSyncJobResultRequest = models.DescribeModifyCheckSyncJobResultRequest;
 const SkipSyncCheckItemResponse = models.SkipSyncCheckItemResponse;
 const IsolateSyncJobResponse = models.IsolateSyncJobResponse;
 const CreateMigrateCheckJobRequest = models.CreateMigrateCheckJobRequest;
@@ -94,6 +99,7 @@ const DifferenceDetail = models.DifferenceDetail;
 const CreateCheckSyncJobResponse = models.CreateCheckSyncJobResponse;
 const CompareObjectItem = models.CompareObjectItem;
 const ConfigureSyncJobRequest = models.ConfigureSyncJobRequest;
+const StartModifySyncJobResponse = models.StartModifySyncJobResponse;
 const MigrateDBItem = models.MigrateDBItem;
 const DescribeMigrateDBInstancesRequest = models.DescribeMigrateDBInstancesRequest;
 const CheckStepInfo = models.CheckStepInfo;
@@ -101,7 +107,7 @@ const ProcessStepTip = models.ProcessStepTip;
 const ModifyCompareTaskRequest = models.ModifyCompareTaskRequest;
 const RecoverSyncJobRequest = models.RecoverSyncJobRequest;
 const Database = models.Database;
-const ModifyMigrationJobRequest = models.ModifyMigrationJobRequest;
+const JobItem = models.JobItem;
 const DescribeSyncJobsRequest = models.DescribeSyncJobsRequest;
 const SyncDetailInfo = models.SyncDetailInfo;
 const ResumeSyncJobRequest = models.ResumeSyncJobRequest;
@@ -113,6 +119,7 @@ const ResumeMigrateJobRequest = models.ResumeMigrateJobRequest;
 const PauseSyncJobResponse = models.PauseSyncJobResponse;
 const TradeInfo = models.TradeInfo;
 const StartCompareResponse = models.StartCompareResponse;
+const DynamicOptions = models.DynamicOptions;
 const CreateCompareTaskResponse = models.CreateCompareTaskResponse;
 const StopCompareResponse = models.StopCompareResponse;
 const SkipCheckItemRequest = models.SkipCheckItemRequest;
@@ -125,8 +132,8 @@ const CreateCompareTaskRequest = models.CreateCompareTaskRequest;
 const StartCompareRequest = models.StartCompareRequest;
 const DescribeMigrationCheckJobRequest = models.DescribeMigrationCheckJobRequest;
 const DescribeMigrationDetailResponse = models.DescribeMigrationDetailResponse;
+const CreateModifyCheckSyncJobResponse = models.CreateModifyCheckSyncJobResponse;
 const ModifyMigrateNameRequest = models.ModifyMigrateNameRequest;
-const JobItem = models.JobItem;
 const StartSyncJobResponse = models.StartSyncJobResponse;
 const Objects = models.Objects;
 const RecoverMigrateJobResponse = models.RecoverMigrateJobResponse;
@@ -137,12 +144,14 @@ const StopMigrateJobRequest = models.StopMigrateJobRequest;
 const IsolateMigrateJobResponse = models.IsolateMigrateJobResponse;
 const SyncJobInfo = models.SyncJobInfo;
 const CompareOptions = models.CompareOptions;
+const ModifySyncJobConfigResponse = models.ModifySyncJobConfigResponse;
 const RoleItem = models.RoleItem;
 const TagFilter = models.TagFilter;
 const StepDetailInfo = models.StepDetailInfo;
 const CreateSyncJobRequest = models.CreateSyncJobRequest;
 const ViewItem = models.ViewItem;
 const DescribeCompareReportRequest = models.DescribeCompareReportRequest;
+const SkippedItem = models.SkippedItem;
 const View = models.View;
 const TagItem = models.TagItem;
 const RecoverMigrateJobRequest = models.RecoverMigrateJobRequest;
@@ -165,6 +174,17 @@ class DtsClient extends AbstractClient {
         super("dts.tencentcloudapi.com", "2021-12-06", credential, region, profile);
     }
     
+    /**
+     * This API is used to check whether the current data sync task supports object modification after the task configuration is modified.
+     * @param {CreateModifyCheckSyncJobRequest} req
+     * @param {function(string, CreateModifyCheckSyncJobResponse):void} cb
+     * @public
+     */
+    CreateModifyCheckSyncJob(req, cb) {
+        let resp = new CreateModifyCheckSyncJobResponse();
+        this.request("CreateModifyCheckSyncJob", req, resp, cb);
+    }
+
     /**
      * This API is used to configure a migration task. After it is configured successfully, you can call the `CreateMigrationCheckJob` API to create a check task, and only after it passes the check can it be started.
      * @param {ModifyMigrationJobRequest} req
@@ -342,14 +362,14 @@ class DtsClient extends AbstractClient {
     }
 
     /**
-     * This API is used to start a data consistency check task after creating it by calling the `CreateCompareTask` API. After calling this API, you can call the `DescribeCompareTasks` API to query the latest task status.
-     * @param {StartCompareRequest} req
-     * @param {function(string, StartCompareResponse):void} cb
+     * This API is used to modify the configuration of a data sync task after the task is started.\n Configuration modification steps:  Modify sync task configuration -> Create a modification check task -> Query the check task result -> Start the configuration modification check task
+     * @param {ModifySyncJobConfigRequest} req
+     * @param {function(string, ModifySyncJobConfigResponse):void} cb
      * @public
      */
-    StartCompare(req, cb) {
-        let resp = new StartCompareResponse();
-        this.request("StartCompare", req, resp, cb);
+    ModifySyncJobConfig(req, cb) {
+        let resp = new ModifySyncJobConfigResponse();
+        this.request("ModifySyncJobConfig", req, resp, cb);
     }
 
     /**
@@ -387,6 +407,28 @@ After calling this API, you can call the `DescribeMigrationJobs` API to query th
     }
 
     /**
+     * This API is used to start the configuration modification process when the modification check task status becomes “success”.
+     * @param {StartModifySyncJobRequest} req
+     * @param {function(string, StartModifySyncJobResponse):void} cb
+     * @public
+     */
+    StartModifySyncJob(req, cb) {
+        let resp = new StartModifySyncJobResponse();
+        this.request("StartModifySyncJob", req, resp, cb);
+    }
+
+    /**
+     * This API is used to start a data consistency check task after creating it by calling the `CreateCompareTask` API. After calling this API, you can call the `DescribeCompareTasks` API to query the latest task status.
+     * @param {StartCompareRequest} req
+     * @param {function(string, StartCompareResponse):void} cb
+     * @public
+     */
+    StartCompare(req, cb) {
+        let resp = new StartCompareResponse();
+        this.request("StartCompare", req, resp, cb);
+    }
+
+    /**
      * This API is used to resume a paused data sync task.
      * @param {ContinueSyncJobRequest} req
      * @param {function(string, ContinueSyncJobResponse):void} cb
@@ -398,14 +440,14 @@ After calling this API, you can call the `DescribeMigrationJobs` API to query th
     }
 
     /**
-     * This API is used to delete a sync task. Only tasks in **Isolated** status can be completely deleted. After deletion, you can call the `DescribeSyncJobs` API to get the task list. If the deleted task is not in the list, it is deleted successfully.
-     * @param {DestroySyncJobRequest} req
-     * @param {function(string, DestroySyncJobResponse):void} cb
+     *  This API is used to isolate and return a data migration task. After calling this API, you can call the `DescribeMigrationJobs` API to query the latest task status. For a billed task, after isolating it, you can call `RecoverMigrationJob` to recover it or call `DestroyMigrateJob` to delete it. For a free task, calling this API will directly delete it permanently.
+     * @param {IsolateMigrateJobRequest} req
+     * @param {function(string, IsolateMigrateJobResponse):void} cb
      * @public
      */
-    DestroySyncJob(req, cb) {
-        let resp = new DestroySyncJobResponse();
-        this.request("DestroySyncJob", req, resp, cb);
+    IsolateMigrateJob(req, cb) {
+        let resp = new IsolateMigrateJobResponse();
+        this.request("IsolateMigrateJob", req, resp, cb);
     }
 
     /**
@@ -522,6 +564,17 @@ After successful check, if the migration task needs to be modified, a new check 
     }
 
     /**
+     * This API is used to query the result of the created check task for object modification.
+     * @param {DescribeModifyCheckSyncJobResultRequest} req
+     * @param {function(string, DescribeModifyCheckSyncJobResultResponse):void} cb
+     * @public
+     */
+    DescribeModifyCheckSyncJobResult(req, cb) {
+        let resp = new DescribeModifyCheckSyncJobResultResponse();
+        this.request("DescribeModifyCheckSyncJobResult", req, resp, cb);
+    }
+
+    /**
      * This API is used to delete a data migration task. For a billed task, you must first call the `IsolateMigrateJob` API to isolate it and make sure that it is in **Isolated** status before calling this API to delete it. For a free task, you can directly call the `IsolateMigrateJob` API to delete it.
      * @param {DestroyMigrateJobRequest} req
      * @param {function(string, DestroyMigrateJobResponse):void} cb
@@ -590,14 +643,14 @@ If the check fails, the cause can be queried. Modify the migration configuration
     }
 
     /**
-     *  This API is used to isolate and return a data migration task. After calling this API, you can call the `DescribeMigrationJobs` API to query the latest task status. For a billed task, after isolating it, you can call `RecoverMigrationJob` to recover it or call `DestroyMigrateJob` to delete it. For a free task, calling this API will directly delete it permanently.
-     * @param {IsolateMigrateJobRequest} req
-     * @param {function(string, IsolateMigrateJobResponse):void} cb
+     * This API is used to delete a sync task. Only tasks in **Isolated** status can be completely deleted. After deletion, you can call the `DescribeSyncJobs` API to get the task list. If the deleted task is not in the list, it is deleted successfully.
+     * @param {DestroySyncJobRequest} req
+     * @param {function(string, DestroySyncJobResponse):void} cb
      * @public
      */
-    IsolateMigrateJob(req, cb) {
-        let resp = new IsolateMigrateJobResponse();
-        this.request("IsolateMigrateJob", req, resp, cb);
+    DestroySyncJob(req, cb) {
+        let resp = new DestroySyncJobResponse();
+        this.request("DestroySyncJob", req, resp, cb);
     }
 
     /**

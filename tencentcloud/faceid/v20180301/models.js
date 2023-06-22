@@ -126,13 +126,13 @@ class GetSdkVerificationResultResponse extends  AbstractModel {
         super();
 
         /**
-         * The result of the entire verification process.
+         * The result code of the verification result.
          * @type {string || null}
          */
         this.Result = null;
 
         /**
-         * The result description.
+         * The verification result description.
          * @type {string || null}
          */
         this.Description = null;
@@ -144,19 +144,19 @@ class GetSdkVerificationResultResponse extends  AbstractModel {
         this.ChargeCount = null;
 
         /**
-         * The results of multiple OCR processes (in order). The result of the final process is taken as the valid result.
+         * The results of multiple OCR processes (in order). The result of the final process is used as the valid result.
          * @type {Array.<CardVerifyResult> || null}
          */
         this.CardVerifyResults = null;
 
         /**
-         * The results of multiple liveness detection processes (in order). The result of the final process is taken as the valid result.
+         * The results of multiple liveness detection processes (in order). The result of the final process is used as the valid result.
          * @type {Array.<CompareResult> || null}
          */
         this.CompareResults = null;
 
         /**
-         * Info passed in the process of getting the token.
+         * Data passed through in the process of getting the token.
          * @type {string || null}
          */
         this.Extra = null;
@@ -682,19 +682,56 @@ class ApplySdkVerificationTokenRequest extends  AbstractModel {
         this.NeedVerifyIdCard = null;
 
         /**
-         * The identity document type. Valid values: `HK` (identity card of Hong Kong (China)) (default), `ML` (Malaysian identity card), `IndonesiaIDCard` (Indonesian identity card), `PhilippinesVoteID` (Philippine voters ID card), `PhilippinesDrivingLicense` (Philippine driver's license), `PhilippinesTinID` (Philippine TIN ID card), `PhilippinesSSSID` (Philippine SSS ID card), and `MLIDPassport` (passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions).
+         * The verification mode. Valid values:
+1: OCR + liveness detection + face comparison
+2: Liveness detection + face comparison
+3: Liveness detection
+Default value: 1
+         * @type {number || null}
+         */
+        this.CheckMode = null;
+
+        /**
+         * The security level of the verification. Valid values:
+1: Video-based liveness detection
+2: Motion-based liveness detection
+3: Reflection-based liveness detection
+4: Motion- and reflection-based liveness detection
+Default value: 4
+         * @type {number || null}
+         */
+        this.SecurityLevel = null;
+
+        /**
+         * The identity document type. Valid values: 
+1. `HK` (default): Identity card of Hong Kong (China)
+2. `ML`: Malaysian identity card
+3. `IndonesiaIDCard`: Indonesian identity card
+4. `PhilippinesVoteID`: Philippine voters ID card
+5. `PhilippinesDrivingLicense`: Philippine driver's license
+6. `PhilippinesTinID`: Philippine TIN ID card
+7. `PhilippinesSSSID`: Philippine SSS ID card
+8. `PhilippinesUMID`: Philippine UMID card
+9. `MLIDPassport`: Passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
          * @type {string || null}
          */
         this.IdCardType = null;
 
         /**
-         * Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed).
+         * The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
+         * @type {string || null}
+         */
+        this.CompareImage = null;
+
+        /**
+         * Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). (Currently, this parameter is not applied.)
          * @type {boolean || null}
          */
         this.DisableChangeOcrResult = null;
 
         /**
-         * Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning. If `NeedVerifyIdCard` is set to `true`, this parameter must also be set to `true`.
+         * Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning.
+This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
          * @type {boolean || null}
          */
         this.DisableCheckOcrWarnings = null;
@@ -715,7 +752,10 @@ class ApplySdkVerificationTokenRequest extends  AbstractModel {
             return;
         }
         this.NeedVerifyIdCard = 'NeedVerifyIdCard' in params ? params.NeedVerifyIdCard : null;
+        this.CheckMode = 'CheckMode' in params ? params.CheckMode : null;
+        this.SecurityLevel = 'SecurityLevel' in params ? params.SecurityLevel : null;
         this.IdCardType = 'IdCardType' in params ? params.IdCardType : null;
+        this.CompareImage = 'CompareImage' in params ? params.CompareImage : null;
         this.DisableChangeOcrResult = 'DisableChangeOcrResult' in params ? params.DisableChangeOcrResult : null;
         this.DisableCheckOcrWarnings = 'DisableCheckOcrWarnings' in params ? params.DisableCheckOcrWarnings : null;
         this.Extra = 'Extra' in params ? params.Extra : null;
@@ -981,6 +1021,15 @@ When the value of `IdCardType` is `PhilippinesSSSID`:
 - FullName (string): Full name.
 - Birthday (string): Date of birth.
 
+When the value of `IdCardType` is `PhilippinesUMID`:
+- Surname (string): Surname.
+- MiddleName (string):Middle name.
+- GivenName (string): Given name.
+- Sex (string): Gender.
+- Birthday (string): Date of birth.
+- Address (string): Address.
+- CRN (string): Common reference number (CRN).
+
 (4) Indonesian identity card
 When the value of `IdCardType` is `IndonesiaIDCard`:
 - NIK (string): Single Identity Number.
@@ -1009,7 +1058,7 @@ When the value of `IdCardType` is `MLIDPassport`:
 - DateOfExpiration (string): Expiration date.
 - IssuingCountry (string): Issuing country.
 - NationalityCode (string): Country/region code.
-Note: This field may return null, indicating that no valid value can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {FileInfo || null}
          */
         this.CardInfoOcrJson = null;
@@ -1679,7 +1728,7 @@ class CompareResult extends  AbstractModel {
         this.ErrorMsg = null;
 
         /**
-         * 
+         * The liveness algorithm package generated during this SDK-based liveness detection.
          * @type {FileInfo || null}
          */
         this.LiveData = null;
@@ -1741,38 +1790,19 @@ Note: This field may return null, indicating that no valid values can be obtaine
 
         /**
          * The similarity score of face comparison.
-Note: This field may return null, indicating that no valid value can be obtained.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {number || null}
          */
         this.Sim = null;
 
         /**
-         * This field is disused.
+         * This parameter is disused.
          * @type {boolean || null}
          */
         this.IsNeedCharge = null;
 
         /**
-         * The identity document photo info edited by the user in JSON. If the value of `DisableChangeOcrResult` is `true`, the editing feature is disabled and this field does not exist. The URL is valid for 10 minutes.
-When the value of `IdCardType` is `HK`:
-- CnName string: Chinese name
-- EnName string: English name
-- TelexCode string: The code corresponding to the Chinese name
-- Sex string: Gender. Valid values: `M` (male) and `F` (female).
-- Birthday string: Date of birth.
-- Permanent int: Whether it is a permanent residence identity card. Valid values: `0` (non-permanent), `1` (permanent), and `-1` (unknown).
-- IdNum string: ID number.
-- Symbol string: The ID symbol below the date of birth, such as "***AZ".
-- FirstIssueDate string: The date of first issuance.
-- CurrentIssueDate string: The date of latest issuance.
-
-When the value of `IdCardType` is `ML`:
-- Sex string: `LELAKI` (male) and `PEREMPUAN` (female).
-- Birthday string
-- ID string
-- Name string
-- Address string
-- Type string: Identity document type.
+         * The identity document photo info edited by the user. Currently, this parameter is not applied.
 Note: This field may return null, indicating that no valid values can be obtained.
          * @type {FileInfo || null}
          */

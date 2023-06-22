@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SchemaSpaceTimeSeries = models.SchemaSpaceTimeSeries;
+const SlowLogUser = models.SlowLogUser;
 const HealthReportTask = models.HealthReportTask;
 const CreateDBDiagReportTaskRequest = models.CreateDBDiagReportTaskRequest;
 const TableSpaceTimeSeries = models.TableSpaceTimeSeries;
@@ -380,7 +381,7 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * This API is used to obtain the slow query log details of a SQL template in a specified time period.
+     * This API is used to obtain the slow log details of a SQL template in a specified time period.
      * @param {DescribeSlowLogsRequest} req
      * @param {function(string, DescribeSlowLogsResponse):void} cb
      * @public

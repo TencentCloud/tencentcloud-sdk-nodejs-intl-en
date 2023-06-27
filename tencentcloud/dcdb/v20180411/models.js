@@ -567,6 +567,141 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * TDSQL shard information
+ * @class
+ */
+class ShardBriefInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Shard serial ID
+         * @type {string || null}
+         */
+        this.ShardSerialId = null;
+
+        /**
+         * Shard ID, such as shard-7vg1o339.
+         * @type {string || null}
+         */
+        this.ShardInstanceId = null;
+
+        /**
+         * Shard running status
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * Description of shard running status
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * Shard creation time
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Shard memory size in GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * Shard disk size in GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * Log disk space size of a shard in GB
+         * @type {number || null}
+         */
+        this.LogDisk = null;
+
+        /**
+         * Number of shard nodes
+         * @type {number || null}
+         */
+        this.NodeCount = null;
+
+        /**
+         * Disk space utilization of a shard
+         * @type {number || null}
+         */
+        this.StorageUsage = null;
+
+        /**
+         * Version information of the shard proxy
+         * @type {string || null}
+         */
+        this.ProxyVersion = null;
+
+        /**
+         * Source AZ of a shard
+         * @type {string || null}
+         */
+        this.ShardMasterZone = null;
+
+        /**
+         * Replica AZ of a shard
+         * @type {Array.<string> || null}
+         */
+        this.ShardSlaveZones = null;
+
+        /**
+         * Number of CPU cores
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Node information
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<NodeInfo> || null}
+         */
+        this.NodesInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShardSerialId = 'ShardSerialId' in params ? params.ShardSerialId : null;
+        this.ShardInstanceId = 'ShardInstanceId' in params ? params.ShardInstanceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.LogDisk = 'LogDisk' in params ? params.LogDisk : null;
+        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.StorageUsage = 'StorageUsage' in params ? params.StorageUsage : null;
+        this.ProxyVersion = 'ProxyVersion' in params ? params.ProxyVersion : null;
+        this.ShardMasterZone = 'ShardMasterZone' in params ? params.ShardMasterZone : null;
+        this.ShardSlaveZones = 'ShardSlaveZones' in params ? params.ShardSlaveZones : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+
+        if (params.NodesInfo) {
+            this.NodesInfo = new Array();
+            for (let z in params.NodesInfo) {
+                let obj = new NodeInfo();
+                obj.deserialize(params.NodesInfo[z]);
+                this.NodesInfo.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeDBSecurityGroups response structure.
  * @class
  */
@@ -1063,7 +1198,7 @@ class IsolateHourDCDBInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * Instance uuid list
+         * ID list of the instances to be upgraded  in the format of  `dcdbt-ow728lmc`, which can be obtained through the `DescribeDCDBInstances` API.
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1285,6 +1420,34 @@ class CloneAccountResponse extends  AbstractModel {
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * IsolateDCDBInstance request structure.
+ * @class
+ */
+class IsolateDCDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `tdsqlshard-avw0207d`,  which is the same as the instance ID displayed on the TencentDB console and can be queried through the `DescribeDBInstances` API.
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -1586,6 +1749,41 @@ class DatabaseView extends  AbstractModel {
 }
 
 /**
+ * Configuration information,  which contains `Config` and `Value`.
+ * @class
+ */
+class ConfigValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configuration name, which supports `max_user_connections`.
+         * @type {string || null}
+         */
+        this.Config = null;
+
+        /**
+         * Configuration value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Config = 'Config' in params ? params.Config : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeDBLogFiles request structure.
  * @class
  */
@@ -1803,7 +2001,7 @@ class CreateHourDCDBInstanceRequest extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * Whether IPv6 is supported
+         * Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
          * @type {number || null}
          */
         this.Ipv6Flag = null;
@@ -1839,7 +2037,7 @@ class CreateHourDCDBInstanceRequest extends  AbstractModel {
         this.RollbackInstanceId = null;
 
         /**
-         * Rollback time
+         * Rollback time, such as "2021-11-22 00:00:00".
          * @type {string || null}
          */
         this.RollbackTime = null;
@@ -2366,6 +2564,18 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.RsAccessStrategy = null;
 
         /**
+         * Unclaimed network resource
+         * @type {Array.<ReservedNetResource> || null}
+         */
+        this.ReservedNetResources = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsPhysicalReplicationSupported = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2446,6 +2656,16 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.EncryptStatus = 'EncryptStatus' in params ? params.EncryptStatus : null;
         this.ExclusterType = 'ExclusterType' in params ? params.ExclusterType : null;
         this.RsAccessStrategy = 'RsAccessStrategy' in params ? params.RsAccessStrategy : null;
+
+        if (params.ReservedNetResources) {
+            this.ReservedNetResources = new Array();
+            for (let z in params.ReservedNetResources) {
+                let obj = new ReservedNetResource();
+                obj.deserialize(params.ReservedNetResources[z]);
+                this.ReservedNetResources.push(obj);
+            }
+        }
+        this.IsPhysicalReplicationSupported = 'IsPhysicalReplicationSupported' in params ? params.IsPhysicalReplicationSupported : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3018,6 +3238,112 @@ class ExpandShardConfig extends  AbstractModel {
 }
 
 /**
+ * ModifyAccountConfig request structure.
+ * @class
+ */
+class ModifyAccountConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of  `tdsqlshard-kpkvq5oj`, which is the same as the one displayed in the TencentDB console.
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * Account name
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * Account domain name
+         * @type {string || null}
+         */
+        this.Host = null;
+
+        /**
+         * Configuration list. Each element in the list is a pair of `Config` and `Value`.
+         * @type {Array.<ConfigValue> || null}
+         */
+        this.Configs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Host = 'Host' in params ? params.Host : null;
+
+        if (params.Configs) {
+            this.Configs = new Array();
+            for (let z in params.Configs) {
+                let obj = new ConfigValue();
+                obj.deserialize(params.Configs[z]);
+                this.Configs.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeDBEncryptAttributes response structure.
+ * @class
+ */
+class DescribeDBEncryptAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Whether encryption is enabled. Valid values: `1` (enabled), `2` (disabled).
+         * @type {number || null}
+         */
+        this.EncryptStatus = null;
+
+        /**
+         * DEK
+         * @type {string || null}
+         */
+        this.CipherText = null;
+
+        /**
+         * DEK expiration date
+         * @type {string || null}
+         */
+        this.ExpireDate = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EncryptStatus = 'EncryptStatus' in params ? params.EncryptStatus : null;
+        this.CipherText = 'CipherText' in params ? params.CipherText : null;
+        this.ExpireDate = 'ExpireDate' in params ? params.ExpireDate : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Database table information
  * @class
  */
@@ -3041,6 +3367,34 @@ class DatabaseTable extends  AbstractModel {
             return;
         }
         this.Table = 'Table' in params ? params.Table : null;
+
+    }
+}
+
+/**
+ * DescribeDBEncryptAttributes request structure.
+ * @class
+ */
+class DescribeDBEncryptAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of  `tdsqlshard-ow728lmc`
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5348,103 +5702,42 @@ class ModifyInstanceVipRequest extends  AbstractModel {
 }
 
 /**
- * TDSQL shard information
+ * Information of the reserved network resource
  * @class
  */
-class ShardBriefInfo extends  AbstractModel {
+class ReservedNetResource extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Shard serial ID
+         * VPC
          * @type {string || null}
          */
-        this.ShardSerialId = null;
+        this.VpcId = null;
 
         /**
-         * Shard ID, such as shard-7vg1o339.
+         * Subnet
          * @type {string || null}
          */
-        this.ShardInstanceId = null;
+        this.SubnetId = null;
 
         /**
-         * Shard running status
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * Description of shard running status
+         * Reserved private network IP under `VpcId` and `SubnetId`
          * @type {string || null}
          */
-        this.StatusDesc = null;
+        this.Vip = null;
 
         /**
-         * Shard creation time
+         * Port under `Vip`
+         * @type {Array.<number> || null}
+         */
+        this.Vports = null;
+
+        /**
+         * Valid hours of VIP	
          * @type {string || null}
          */
-        this.CreateTime = null;
-
-        /**
-         * Shard memory size in GB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * Shard disk size in GB
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * Log disk space size of a shard in GB
-         * @type {number || null}
-         */
-        this.LogDisk = null;
-
-        /**
-         * Number of shard nodes
-         * @type {number || null}
-         */
-        this.NodeCount = null;
-
-        /**
-         * Disk space utilization of a shard
-         * @type {number || null}
-         */
-        this.StorageUsage = null;
-
-        /**
-         * Version information of the shard proxy
-         * @type {string || null}
-         */
-        this.ProxyVersion = null;
-
-        /**
-         * Source AZ of a shard
-         * @type {string || null}
-         */
-        this.ShardMasterZone = null;
-
-        /**
-         * Replica AZ of a shard
-         * @type {Array.<string> || null}
-         */
-        this.ShardSlaveZones = null;
-
-        /**
-         * Number of CPU cores
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * Node information
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<NodeInfo> || null}
-         */
-        this.NodesInfo = null;
+        this.RecycleTime = null;
 
     }
 
@@ -5455,29 +5748,11 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.ShardSerialId = 'ShardSerialId' in params ? params.ShardSerialId : null;
-        this.ShardInstanceId = 'ShardInstanceId' in params ? params.ShardInstanceId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.LogDisk = 'LogDisk' in params ? params.LogDisk : null;
-        this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
-        this.StorageUsage = 'StorageUsage' in params ? params.StorageUsage : null;
-        this.ProxyVersion = 'ProxyVersion' in params ? params.ProxyVersion : null;
-        this.ShardMasterZone = 'ShardMasterZone' in params ? params.ShardMasterZone : null;
-        this.ShardSlaveZones = 'ShardSlaveZones' in params ? params.ShardSlaveZones : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-
-        if (params.NodesInfo) {
-            this.NodesInfo = new Array();
-            for (let z in params.NodesInfo) {
-                let obj = new NodeInfo();
-                obj.deserialize(params.NodesInfo[z]);
-                this.NodesInfo.push(obj);
-            }
-        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vports = 'Vports' in params ? params.Vports : null;
+        this.RecycleTime = 'RecycleTime' in params ? params.RecycleTime : null;
 
     }
 }
@@ -6735,7 +7010,7 @@ The current purchasable AZ needs be pulled through `DescribeDCDBSaleInfo` API.
         this.InstanceName = null;
 
         /**
-         * Whether IPv6 is supported
+         * Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
          * @type {number || null}
          */
         this.Ipv6Flag = null;
@@ -6765,7 +7040,7 @@ The current purchasable AZ needs be pulled through `DescribeDCDBSaleInfo` API.
         this.DcnInstanceId = null;
 
         /**
-         * Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users). If no renewal is required, set it to `0`.
+         * Renewal mode. Valid values: `0` (manual renewal, which is the default mode), `1` (auto-renewal), `2` (manual renewal, which is specified by users).  If no renewal is required, set it to `0`.
          * @type {number || null}
          */
         this.AutoRenewFlag = null;
@@ -6928,6 +7203,76 @@ class ModifyDBSyncModeRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.SyncMode = 'SyncMode' in params ? params.SyncMode : null;
+
+    }
+}
+
+/**
+ * ModifyAccountConfig response structure.
+ * @class
+ */
+class ModifyAccountConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * IsolateDCDBInstance response structure.
+ * @class
+ */
+class IsolateDCDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IDs of isolated instances
+         * @type {Array.<string> || null}
+         */
+        this.SuccessInstanceIds = null;
+
+        /**
+         * IDs of instances failed to be isolated
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessInstanceIds = 'SuccessInstanceIds' in params ? params.SuccessInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7402,6 +7747,12 @@ Set this parameter to a value above 10. This parameter takes effect when `ReadOn
          */
         this.SlaveConst = null;
 
+        /**
+         * Maximum number of connections. `0` indicates no limit.	
+         * @type {number || null}
+         */
+        this.MaxUserConnections = null;
+
     }
 
     /**
@@ -7419,6 +7770,7 @@ Set this parameter to a value above 10. This parameter takes effect when `ReadOn
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
         this.DelayThresh = 'DelayThresh' in params ? params.DelayThresh : null;
         this.SlaveConst = 'SlaveConst' in params ? params.SlaveConst : null;
+        this.MaxUserConnections = 'MaxUserConnections' in params ? params.MaxUserConnections : null;
 
     }
 }
@@ -8023,6 +8375,7 @@ module.exports = {
     DescribeDCDBInstanceDetailRequest: DescribeDCDBInstanceDetailRequest,
     ModifyInstanceVipResponse: ModifyInstanceVipResponse,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
+    ShardBriefInfo: ShardBriefInfo,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     CancelDcnJobResponse: CancelDcnJobResponse,
     DescribeFileDownloadUrlRequest: DescribeFileDownloadUrlRequest,
@@ -8037,6 +8390,7 @@ module.exports = {
     DescribeFlowResponse: DescribeFlowResponse,
     UpgradeHourDCDBInstanceRequest: UpgradeHourDCDBInstanceRequest,
     CloneAccountResponse: CloneAccountResponse,
+    IsolateDCDBInstanceRequest: IsolateDCDBInstanceRequest,
     IsolateDedicatedDBInstanceRequest: IsolateDedicatedDBInstanceRequest,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     DestroyDCDBInstanceRequest: DestroyDCDBInstanceRequest,
@@ -8046,6 +8400,7 @@ module.exports = {
     ModifyDBEncryptAttributesResponse: ModifyDBEncryptAttributesResponse,
     DescribeDCDBInstanceNodeInfoRequest: DescribeDCDBInstanceNodeInfoRequest,
     DatabaseView: DatabaseView,
+    ConfigValue: ConfigValue,
     DescribeDBLogFilesRequest: DescribeDBLogFilesRequest,
     NodeInfo: NodeInfo,
     DescribeOrdersResponse: DescribeOrdersResponse,
@@ -8067,7 +8422,10 @@ module.exports = {
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
     ExpandShardConfig: ExpandShardConfig,
+    ModifyAccountConfigRequest: ModifyAccountConfigRequest,
+    DescribeDBEncryptAttributesResponse: DescribeDBEncryptAttributesResponse,
     DatabaseTable: DatabaseTable,
+    DescribeDBEncryptAttributesRequest: DescribeDBEncryptAttributesRequest,
     Deal: Deal,
     GrantAccountPrivilegesRequest: GrantAccountPrivilegesRequest,
     DescribeDCDBShardsRequest: DescribeDCDBShardsRequest,
@@ -8103,7 +8461,7 @@ module.exports = {
     IsolateHourDCDBInstanceResponse: IsolateHourDCDBInstanceResponse,
     ShardInfo: ShardInfo,
     ModifyInstanceVipRequest: ModifyInstanceVipRequest,
-    ShardBriefInfo: ShardBriefInfo,
+    ReservedNetResource: ReservedNetResource,
     DatabasePrivilege: DatabasePrivilege,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     DcnDetailItem: DcnDetailItem,
@@ -8129,6 +8487,8 @@ module.exports = {
     DatabaseProcedure: DatabaseProcedure,
     AddShardConfig: AddShardConfig,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
+    ModifyAccountConfigResponse: ModifyAccountConfigResponse,
+    IsolateDCDBInstanceResponse: IsolateDCDBInstanceResponse,
     ModifyDBEncryptAttributesRequest: ModifyDBEncryptAttributesRequest,
     CreateAccountResponse: CreateAccountResponse,
     IsolateDedicatedDBInstanceResponse: IsolateDedicatedDBInstanceResponse,

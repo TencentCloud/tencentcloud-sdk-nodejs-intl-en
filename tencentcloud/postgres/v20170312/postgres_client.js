@@ -49,10 +49,12 @@ const RenewInstanceRequest = models.RenewInstanceRequest;
 const DescribeBackupOverviewRequest = models.DescribeBackupOverviewRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const ModifyBaseBackupExpireTimeResponse = models.ModifyBaseBackupExpireTimeResponse;
+const ModifyBackupDownloadRestrictionRequest = models.ModifyBackupDownloadRestrictionRequest;
 const DBInstanceNetInfo = models.DBInstanceNetInfo;
 const BackupDownloadRestriction = models.BackupDownloadRestriction;
 const ModifyDBInstanceDeploymentRequest = models.ModifyDBInstanceDeploymentRequest;
 const DeleteReadOnlyGroupNetworkAccessRequest = models.DeleteReadOnlyGroupNetworkAccessRequest;
+const DescribeBackupDownloadRestrictionRequest = models.DescribeBackupDownloadRestrictionRequest;
 const ZoneInfo = models.ZoneInfo;
 const DescribeReadOnlyGroupsResponse = models.DescribeReadOnlyGroupsResponse;
 const NormalQueryItem = models.NormalQueryItem;
@@ -88,6 +90,7 @@ const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const SpecInfo = models.SpecInfo;
+const ModifyBackupDownloadRestrictionResponse = models.ModifyBackupDownloadRestrictionResponse;
 const ParamVersionRelation = models.ParamVersionRelation;
 const DescribeLogBackupsRequest = models.DescribeLogBackupsRequest;
 const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
@@ -159,6 +162,7 @@ const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGr
 const DBNode = models.DBNode;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
+const DescribeBackupDownloadRestrictionResponse = models.DescribeBackupDownloadRestrictionResponse;
 const CreateReadOnlyDBInstanceRequest = models.CreateReadOnlyDBInstanceRequest;
 const DescribeCloneDBInstanceSpecResponse = models.DescribeCloneDBInstanceSpecResponse;
 const DescribeZonesResponse = models.DescribeZonesResponse;
@@ -206,6 +210,7 @@ const ModifyDBInstanceParametersRequest = models.ModifyDBInstanceParametersReque
 const RawSlowQuery = models.RawSlowQuery;
 const CreateReadOnlyGroupNetworkAccessResponse = models.CreateReadOnlyGroupNetworkAccessResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const ModifyDBInstanceChargeTypeRequest = models.ModifyDBInstanceChargeTypeRequest;
 const DescribeParameterTemplateAttributesResponse = models.DescribeParameterTemplateAttributesResponse;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const DescribeDBVersionsRequest = models.DescribeDBVersionsRequest;
@@ -219,11 +224,12 @@ const PolicyRule = models.PolicyRule;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
 const DescribeBaseBackupsResponse = models.DescribeBaseBackupsResponse;
 const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
+const UpgradeDBInstanceKernelVersionRequest = models.UpgradeDBInstanceKernelVersionRequest;
 const DescribeBaseBackupsRequest = models.DescribeBaseBackupsRequest;
 const DescribeEncryptionKeysResponse = models.DescribeEncryptionKeysResponse;
 const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
 const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
-const UpgradeDBInstanceKernelVersionRequest = models.UpgradeDBInstanceKernelVersionRequest;
+const ModifyDBInstanceChargeTypeResponse = models.ModifyDBInstanceChargeTypeResponse;
 
 
 /**
@@ -237,50 +243,6 @@ class PostgresClient extends AbstractClient {
     }
     
     /**
-     * This API is used to add a network for an RO group.
-     * @param {CreateReadOnlyGroupNetworkAccessRequest} req
-     * @param {function(string, CreateReadOnlyGroupNetworkAccessResponse):void} cb
-     * @public
-     */
-    CreateReadOnlyGroupNetworkAccess(req, cb) {
-        let resp = new CreateReadOnlyGroupNetworkAccessResponse();
-        this.request("CreateReadOnlyGroupNetworkAccess", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get instance key list.
-     * @param {DescribeEncryptionKeysRequest} req
-     * @param {function(string, DescribeEncryptionKeysResponse):void} cb
-     * @public
-     */
-    DescribeEncryptionKeys(req, cb) {
-        let resp = new DescribeEncryptionKeysResponse();
-        this.request("DescribeEncryptionKeys", req, resp, cb);
-    }
-
-    /**
-     * This API is used to transfer an instance to another project.
-     * @param {ModifyDBInstancesProjectRequest} req
-     * @param {function(string, ModifyDBInstancesProjectResponse):void} cb
-     * @public
-     */
-    ModifyDBInstancesProject(req, cb) {
-        let resp = new ModifyDBInstancesProjectResponse();
-        this.request("ModifyDBInstancesProject", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get order information.
-     * @param {DescribeOrdersRequest} req
-     * @param {function(string, DescribeOrdersResponse):void} cb
-     * @public
-     */
-    DescribeOrders(req, cb) {
-        let resp = new DescribeOrdersResponse();
-        this.request("DescribeOrders", req, resp, cb);
-    }
-
-    /**
      * This API is used to get the download URL of a backup.
      * @param {DescribeBackupDownloadURLRequest} req
      * @param {function(string, DescribeBackupDownloadURLResponse):void} cb
@@ -289,17 +251,6 @@ class PostgresClient extends AbstractClient {
     DescribeBackupDownloadURL(req, cb) {
         let resp = new DescribeBackupDownloadURLResponse();
         this.request("DescribeBackupDownloadURL", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a network of an RO group.
-     * @param {DeleteReadOnlyGroupNetworkAccessRequest} req
-     * @param {function(string, DeleteReadOnlyGroupNetworkAccessResponse):void} cb
-     * @public
-     */
-    DeleteReadOnlyGroupNetworkAccess(req, cb) {
-        let resp = new DeleteReadOnlyGroupNetworkAccessResponse();
-        this.request("DeleteReadOnlyGroupNetworkAccess", req, resp, cb);
     }
 
     /**
@@ -314,94 +265,6 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to upgrade instance configurations.
-     * @param {UpgradeDBInstanceRequest} req
-     * @param {function(string, UpgradeDBInstanceResponse):void} cb
-     * @public
-     */
-    UpgradeDBInstance(req, cb) {
-        let resp = new UpgradeDBInstanceResponse();
-        this.request("UpgradeDBInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify parameters in batches.
-     * @param {ModifyDBInstanceParametersRequest} req
-     * @param {function(string, ModifyDBInstanceParametersResponse):void} cb
-     * @public
-     */
-    ModifyDBInstanceParameters(req, cb) {
-        let resp = new ModifyDBInstanceParametersResponse();
-        this.request("ModifyDBInstanceParameters", req, resp, cb);
-    }
-
-    /**
-     * This API is used to terminate an isolated instance by specifying the `DBInstanceId` parameter. The data of an terminated instance will be deleted and cannot be recovered.
-     * @param {DestroyDBInstanceRequest} req
-     * @param {function(string, DestroyDBInstanceResponse):void} cb
-     * @public
-     */
-    DestroyDBInstance(req, cb) {
-        let resp = new DestroyDBInstanceResponse();
-        this.request("DestroyDBInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to set auto-renewal.
-     * @param {SetAutoRenewFlagRequest} req
-     * @param {function(string, SetAutoRenewFlagResponse):void} cb
-     * @public
-     */
-    SetAutoRenewFlag(req, cb) {
-        let resp = new SetAutoRenewFlagResponse();
-        this.request("SetAutoRenewFlag", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query all backup plans of an instance.
-     * @param {DescribeBackupPlansRequest} req
-     * @param {function(string, DescribeBackupPlansResponse):void} cb
-     * @public
-     */
-    DescribeBackupPlans(req, cb) {
-        let resp = new DescribeBackupPlansResponse();
-        this.request("DescribeBackupPlans", req, resp, cb);
-    }
-
-    /**
-     * This API is used to renew an instance.
-     * @param {RenewInstanceRequest} req
-     * @param {function(string, RenewInstanceResponse):void} cb
-     * @public
-     */
-    RenewInstance(req, cb) {
-        let resp = new RenewInstanceResponse();
-        this.request("RenewInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the instance backup list.
-     * @param {DescribeDBBackupsRequest} req
-     * @param {function(string, DescribeDBBackupsResponse):void} cb
-     * @public
-     */
-    DescribeDBBackups(req, cb) {
-        let resp = new DescribeDBBackupsResponse();
-        this.request("DescribeDBBackups", req, resp, cb);
-    }
-
-    /**
-     * This API is used to reset the account password of an instance.
-     * @param {ResetAccountPasswordRequest} req
-     * @param {function(string, ResetAccountPasswordResponse):void} cb
-     * @public
-     */
-    ResetAccountPassword(req, cb) {
-        let resp = new ResetAccountPasswordResponse();
-        this.request("ResetAccountPassword", req, resp, cb);
-    }
-
-    /**
      * This API is used to get error logs.
      * @param {DescribeDBErrlogsRequest} req
      * @param {function(string, DescribeDBErrlogsResponse):void} cb
@@ -410,226 +273,6 @@ class PostgresClient extends AbstractClient {
     DescribeDBErrlogs(req, cb) {
         let resp = new DescribeDBErrlogsResponse();
         this.request("DescribeDBErrlogs", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the list of parameter templates.
-     * @param {DescribeParameterTemplatesRequest} req
-     * @param {function(string, DescribeParameterTemplatesResponse):void} cb
-     * @public
-     */
-    DescribeParameterTemplates(req, cb) {
-        let resp = new DescribeParameterTemplatesResponse();
-        this.request("DescribeParameterTemplates", req, resp, cb);
-    }
-
-    /**
-     * This API is used to perform a primary-standby switch for an instance waiting for the switch after it is upgraded.
-     * @param {ModifySwitchTimePeriodRequest} req
-     * @param {function(string, ModifySwitchTimePeriodResponse):void} cb
-     * @public
-     */
-    ModifySwitchTimePeriod(req, cb) {
-        let resp = new ModifySwitchTimePeriodResponse();
-        this.request("ModifySwitchTimePeriod", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the purchase price of one or multiple instances.
-     * @param {InquiryPriceCreateDBInstancesRequest} req
-     * @param {function(string, InquiryPriceCreateDBInstancesResponse):void} cb
-     * @public
-     */
-    InquiryPriceCreateDBInstances(req, cb) {
-        let resp = new InquiryPriceCreateDBInstancesResponse();
-        this.request("InquiryPriceCreateDBInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the security group information of an instance.
-     * @param {DescribeDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, DescribeDBInstanceSecurityGroupsResponse):void} cb
-     * @public
-     */
-    DescribeDBInstanceSecurityGroups(req, cb) {
-        let resp = new DescribeDBInstanceSecurityGroupsResponse();
-        this.request("DescribeDBInstanceSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the list of modifiable parameters of an instance.
-     * @param {DescribeDBInstanceParametersRequest} req
-     * @param {function(string, DescribeDBInstanceParametersResponse):void} cb
-     * @public
-     */
-    DescribeDBInstanceParameters(req, cb) {
-        let resp = new DescribeDBInstanceParametersResponse();
-        this.request("DescribeDBInstanceParameters", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create a full backup of an instance.
-     * @param {CreateBaseBackupRequest} req
-     * @param {function(string, CreateBaseBackupResponse):void} cb
-     * @public
-     */
-    CreateBaseBackup(req, cb) {
-        let resp = new CreateBaseBackupResponse();
-        this.request("CreateBaseBackup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the details of a parameter template, including basic information and parameter information.
-     * @param {DescribeParameterTemplateAttributesRequest} req
-     * @param {function(string, DescribeParameterTemplateAttributesResponse):void} cb
-     * @public
-     */
-    DescribeParameterTemplateAttributes(req, cb) {
-        let resp = new DescribeParameterTemplateAttributesResponse();
-        this.request("DescribeParameterTemplateAttributes", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete a network of an instance.
-     * @param {DeleteDBInstanceNetworkAccessRequest} req
-     * @param {function(string, DeleteDBInstanceNetworkAccessResponse):void} cb
-     * @public
-     */
-    DeleteDBInstanceNetworkAccess(req, cb) {
-        let resp = new DeleteDBInstanceNetworkAccessResponse();
-        this.request("DeleteDBInstanceNetworkAccess", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the expiration time of the specified full backup of an instance.
-     * @param {ModifyBaseBackupExpireTimeRequest} req
-     * @param {function(string, ModifyBaseBackupExpireTimeResponse):void} cb
-     * @public
-     */
-    ModifyBaseBackupExpireTime(req, cb) {
-        let resp = new ModifyBaseBackupExpireTimeResponse();
-        this.request("ModifyBaseBackupExpireTime", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the backup plan of an instance, such as modifying the backup start time. By default, a full backup starts at midnight every day and the generated backup files will be retained for seven days.
-     * @param {ModifyBackupPlanRequest} req
-     * @param {function(string, ModifyBackupPlanResponse):void} cb
-     * @public
-     */
-    ModifyBackupPlan(req, cb) {
-        let resp = new ModifyBackupPlanResponse();
-        this.request("ModifyBackupPlan", req, resp, cb);
-    }
-
-    /**
-     * This API is used to disable public network access for a PostgreSQL for Serverless instance.
-     * @param {CloseServerlessDBExtranetAccessRequest} req
-     * @param {function(string, CloseServerlessDBExtranetAccessResponse):void} cb
-     * @public
-     */
-    CloseServerlessDBExtranetAccess(req, cb) {
-        let resp = new CloseServerlessDBExtranetAccessResponse();
-        this.request("CloseServerlessDBExtranetAccess", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete an RO group.
-     * @param {DeleteReadOnlyGroupRequest} req
-     * @param {function(string, DeleteReadOnlyGroupResponse):void} cb
-     * @public
-     */
-    DeleteReadOnlyGroup(req, cb) {
-        let resp = new DeleteReadOnlyGroupResponse();
-        this.request("DeleteReadOnlyGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify account remarks.
-     * @param {ModifyAccountRemarkRequest} req
-     * @param {function(string, ModifyAccountRemarkResponse):void} cb
-     * @public
-     */
-    ModifyAccountRemark(req, cb) {
-        let resp = new ModifyAccountRemarkResponse();
-        this.request("ModifyAccountRemark", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the instance Xlog list.
-     * @param {DescribeDBXlogsRequest} req
-     * @param {function(string, DescribeDBXlogsResponse):void} cb
-     * @public
-     */
-    DescribeDBXlogs(req, cb) {
-        let resp = new DescribeDBXlogsResponse();
-        this.request("DescribeDBXlogs", req, resp, cb);
-    }
-
-    /**
-     * This API is used to enable public network access for a PostgreSQL for Serverless instance.
-     * @param {OpenServerlessDBExtranetAccessRequest} req
-     * @param {function(string, OpenServerlessDBExtranetAccessResponse):void} cb
-     * @public
-     */
-    OpenServerlessDBExtranetAccess(req, cb) {
-        let resp = new OpenServerlessDBExtranetAccessResponse();
-        this.request("OpenServerlessDBExtranetAccess", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the details of one instance.
-     * @param {DescribeDBInstanceAttributeRequest} req
-     * @param {function(string, DescribeDBInstanceAttributeResponse):void} cb
-     * @public
-     */
-    DescribeDBInstanceAttribute(req, cb) {
-        let resp = new DescribeDBInstanceAttributeResponse();
-        this.request("DescribeDBInstanceAttribute", req, resp, cb);
-    }
-
-    /**
-     * This API is used to rename a TencentDB for PostgreSQL instance.
-     * @param {ModifyDBInstanceNameRequest} req
-     * @param {function(string, ModifyDBInstanceNameResponse):void} cb
-     * @public
-     */
-    ModifyDBInstanceName(req, cb) {
-        let resp = new ModifyDBInstanceNameResponse();
-        this.request("ModifyDBInstanceName", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the fees of upgrading a specified database instance. Only pay-as-you-go instance is supported.
-     * @param {InquiryPriceUpgradeDBInstanceRequest} req
-     * @param {function(string, InquiryPriceUpgradeDBInstanceResponse):void} cb
-     * @public
-     */
-    InquiryPriceUpgradeDBInstance(req, cb) {
-        let resp = new InquiryPriceUpgradeDBInstanceResponse();
-        this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the AZs where the nodes of a source instance reside.
-     * @param {ModifyDBInstanceDeploymentRequest} req
-     * @param {function(string, ModifyDBInstanceDeploymentResponse):void} cb
-     * @public
-     */
-    ModifyDBInstanceDeployment(req, cb) {
-        let resp = new ModifyDBInstanceDeploymentResponse();
-        this.request("ModifyDBInstanceDeployment", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances.
-     * @param {CreateDBInstancesRequest} req
-     * @param {function(string, CreateDBInstancesResponse):void} cb
-     * @public
-     */
-    CreateDBInstances(req, cb) {
-        let resp = new CreateDBInstancesResponse();
-        this.request("CreateDBInstances", req, resp, cb);
     }
 
     /**
@@ -644,14 +287,36 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query RO group information by specifying the primary instance IDs.
-     * @param {DescribeReadOnlyGroupsRequest} req
-     * @param {function(string, DescribeReadOnlyGroupsResponse):void} cb
+     * This API is used to modify account remarks.
+     * @param {ModifyAccountRemarkRequest} req
+     * @param {function(string, ModifyAccountRemarkResponse):void} cb
      * @public
      */
-    DescribeReadOnlyGroups(req, cb) {
-        let resp = new DescribeReadOnlyGroupsResponse();
-        this.request("DescribeReadOnlyGroups", req, resp, cb);
+    ModifyAccountRemark(req, cb) {
+        let resp = new ModifyAccountRemarkResponse();
+        this.request("ModifyAccountRemark", req, resp, cb);
+    }
+
+    /**
+     * This API is used to set auto-renewal.
+     * @param {SetAutoRenewFlagRequest} req
+     * @param {function(string, SetAutoRenewFlagResponse):void} cb
+     * @public
+     */
+    SetAutoRenewFlag(req, cb) {
+        let resp = new SetAutoRenewFlagResponse();
+        this.request("SetAutoRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * This API is used to rename a TencentDB for PostgreSQL instance.
+     * @param {ModifyDBInstanceNameRequest} req
+     * @param {function(string, ModifyDBInstanceNameResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceName(req, cb) {
+        let resp = new ModifyDBInstanceNameResponse();
+        this.request("ModifyDBInstanceName", req, resp, cb);
     }
 
     /**
@@ -666,69 +331,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to delete the specified log backup of an instance.
-     * @param {DeleteLogBackupRequest} req
-     * @param {function(string, DeleteLogBackupResponse):void} cb
+     * This API is used to get the list of modifiable parameters of an instance.
+     * @param {DescribeDBInstanceParametersRequest} req
+     * @param {function(string, DescribeDBInstanceParametersResponse):void} cb
      * @public
      */
-    DeleteLogBackup(req, cb) {
-        let resp = new DeleteLogBackupResponse();
-        this.request("DeleteLogBackup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the supported AZs.
-     * @param {DescribeZonesRequest} req
-     * @param {function(string, DescribeZonesResponse):void} cb
-     * @public
-     */
-    DescribeZones(req, cb) {
-        let resp = new DescribeZonesResponse();
-        this.request("DescribeZones", req, resp, cb);
-    }
-
-    /**
-     * This API is used to restart an instance.
-     * @param {RestartDBInstanceRequest} req
-     * @param {function(string, RestartDBInstanceResponse):void} cb
-     * @public
-     */
-    RestartDBInstance(req, cb) {
-        let resp = new RestartDBInstanceResponse();
-        this.request("RestartDBInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the details of one or more instances.
-     * @param {DescribeDBInstancesRequest} req
-     * @param {function(string, DescribeDBInstancesResponse):void} cb
-     * @public
-     */
-    DescribeDBInstances(req, cb) {
-        let resp = new DescribeDBInstancesResponse();
-        this.request("DescribeDBInstances", req, resp, cb);
-    }
-
-    /**
-     * This API is used to enable public network access.
-     * @param {OpenDBExtranetAccessRequest} req
-     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
-     * @public
-     */
-    OpenDBExtranetAccess(req, cb) {
-        let resp = new OpenDBExtranetAccessResponse();
-        this.request("OpenDBExtranetAccess", req, resp, cb);
-    }
-
-    /**
-     * This API is used to isolate one or more instances.
-     * @param {IsolateDBInstancesRequest} req
-     * @param {function(string, IsolateDBInstancesResponse):void} cb
-     * @public
-     */
-    IsolateDBInstances(req, cb) {
-        let resp = new IsolateDBInstancesResponse();
-        this.request("IsolateDBInstances", req, resp, cb);
+    DescribeDBInstanceParameters(req, cb) {
+        let resp = new DescribeDBInstanceParametersResponse();
+        this.request("DescribeDBInstanceParameters", req, resp, cb);
     }
 
     /**
@@ -740,17 +350,6 @@ class PostgresClient extends AbstractClient {
     DeleteServerlessDBInstance(req, cb) {
         let resp = new DeleteServerlessDBInstanceResponse();
         this.request("DeleteServerlessDBInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to initialize a TencentDB for PostgreSQL instance.
-     * @param {InitDBInstancesRequest} req
-     * @param {function(string, InitDBInstancesResponse):void} cb
-     * @public
-     */
-    InitDBInstances(req, cb) {
-        let resp = new InitDBInstancesResponse();
-        this.request("InitDBInstances", req, resp, cb);
     }
 
     /**
@@ -776,6 +375,215 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * This API is used to modify the security group of an instance.
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a PostgreSQL for Serverless instance. If the creation succeeds, the instance ID will be returned.
+     * @param {CreateServerlessDBInstanceRequest} req
+     * @param {function(string, CreateServerlessDBInstanceResponse):void} cb
+     * @public
+     */
+    CreateServerlessDBInstance(req, cb) {
+        let resp = new CreateServerlessDBInstanceResponse();
+        this.request("CreateServerlessDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to pull the list of databases.
+     * @param {DescribeDatabasesRequest} req
+     * @param {function(string, DescribeDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeDatabases(req, cb) {
+        let resp = new DescribeDatabasesResponse();
+        this.request("DescribeDatabases", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of parameter templates.
+     * @param {DescribeParameterTemplatesRequest} req
+     * @param {function(string, DescribeParameterTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeParameterTemplates(req, cb) {
+        let resp = new DescribeParameterTemplatesResponse();
+        this.request("DescribeParameterTemplates", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the purchasable specification configuration.
+     * @param {DescribeProductConfigRequest} req
+     * @param {function(string, DescribeProductConfigResponse):void} cb
+     * @public
+     */
+    DescribeProductConfig(req, cb) {
+        let resp = new DescribeProductConfigResponse();
+        this.request("DescribeProductConfig", req, resp, cb);
+    }
+
+    /**
+     * This API was used to get slow query logs. Since it was deprecated on September 1, 2021, it has no longer returned data. Please use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
+     * @param {DescribeDBSlowlogsRequest} req
+     * @param {function(string, DescribeDBSlowlogsResponse):void} cb
+     * @public
+     */
+    DescribeDBSlowlogs(req, cb) {
+        let resp = new DescribeDBSlowlogsResponse();
+        this.request("DescribeDBSlowlogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a network of an RO group.
+     * @param {DeleteReadOnlyGroupNetworkAccessRequest} req
+     * @param {function(string, DeleteReadOnlyGroupNetworkAccessResponse):void} cb
+     * @public
+     */
+    DeleteReadOnlyGroupNetworkAccess(req, cb) {
+        let resp = new DeleteReadOnlyGroupNetworkAccessResponse();
+        this.request("DeleteReadOnlyGroupNetworkAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to switch the instance billing mode from pay-as-you-go to monthly subscription.
+     * @param {ModifyDBInstanceChargeTypeRequest} req
+     * @param {function(string, ModifyDBInstanceChargeTypeResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceChargeType(req, cb) {
+        let resp = new ModifyDBInstanceChargeTypeResponse();
+        this.request("ModifyDBInstanceChargeType", req, resp, cb);
+    }
+
+    /**
+     * This API is used to terminate an isolated instance by specifying the `DBInstanceId` parameter. The data of an terminated instance will be deleted and cannot be recovered.
+     * @param {DestroyDBInstanceRequest} req
+     * @param {function(string, DestroyDBInstanceResponse):void} cb
+     * @public
+     */
+    DestroyDBInstance(req, cb) {
+        let resp = new DestroyDBInstanceResponse();
+        this.request("DestroyDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the instance backup list.
+     * @param {DescribeDBBackupsRequest} req
+     * @param {function(string, DescribeDBBackupsResponse):void} cb
+     * @public
+     */
+    DescribeDBBackups(req, cb) {
+        let resp = new DescribeDBBackupsResponse();
+        this.request("DescribeDBBackups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to count and analyze slow query statements during the specified period of time and return aggregated statistical analysis results which are classified by statement with abstract parameter values.
+     * @param {DescribeSlowQueryAnalysisRequest} req
+     * @param {function(string, DescribeSlowQueryAnalysisResponse):void} cb
+     * @public
+     */
+    DescribeSlowQueryAnalysis(req, cb) {
+        let resp = new DescribeSlowQueryAnalysisResponse();
+        this.request("DescribeSlowQueryAnalysis", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the purchase price of one or multiple instances.
+     * @param {InquiryPriceCreateDBInstancesRequest} req
+     * @param {function(string, InquiryPriceCreateDBInstancesResponse):void} cb
+     * @public
+     */
+    InquiryPriceCreateDBInstances(req, cb) {
+        let resp = new InquiryPriceCreateDBInstancesResponse();
+        this.request("InquiryPriceCreateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the security group information of an instance.
+     * @param {DescribeDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceSecurityGroups(req, cb) {
+        let resp = new DescribeDBInstanceSecurityGroupsResponse();
+        this.request("DescribeDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create a full backup of an instance.
+     * @param {CreateBaseBackupRequest} req
+     * @param {function(string, CreateBaseBackupResponse):void} cb
+     * @public
+     */
+    CreateBaseBackup(req, cb) {
+        let resp = new CreateBaseBackupResponse();
+        this.request("CreateBaseBackup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of a parameter template, including basic information and parameter information.
+     * @param {DescribeParameterTemplateAttributesRequest} req
+     * @param {function(string, DescribeParameterTemplateAttributesResponse):void} cb
+     * @public
+     */
+    DescribeParameterTemplateAttributes(req, cb) {
+        let resp = new DescribeParameterTemplateAttributesResponse();
+        this.request("DescribeParameterTemplateAttributes", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable public network access for a PostgreSQL for Serverless instance.
+     * @param {CloseServerlessDBExtranetAccessRequest} req
+     * @param {function(string, CloseServerlessDBExtranetAccessResponse):void} cb
+     * @public
+     */
+    CloseServerlessDBExtranetAccess(req, cb) {
+        let resp = new CloseServerlessDBExtranetAccessResponse();
+        this.request("CloseServerlessDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the AZs where the nodes of a source instance reside.
+     * @param {ModifyDBInstanceDeploymentRequest} req
+     * @param {function(string, ModifyDBInstanceDeploymentResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceDeployment(req, cb) {
+        let resp = new ModifyDBInstanceDeploymentResponse();
+        this.request("ModifyDBInstanceDeployment", req, resp, cb);
+    }
+
+    /**
+     * This API is used to renew an instance.
+     * @param {RenewInstanceRequest} req
+     * @param {function(string, RenewInstanceResponse):void} cb
+     * @public
+     */
+    RenewInstance(req, cb) {
+        let resp = new RenewInstanceResponse();
+        this.request("RenewInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify parameters in batches.
+     * @param {ModifyDBInstanceParametersRequest} req
+     * @param {function(string, ModifyDBInstanceParametersResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceParameters(req, cb) {
+        let resp = new ModifyDBInstanceParametersResponse();
+        this.request("ModifyDBInstanceParameters", req, resp, cb);
+    }
+
+    /**
      * This API is used to query the list of full backups.
      * @param {DescribeBaseBackupsRequest} req
      * @param {function(string, DescribeBaseBackupsResponse):void} cb
@@ -798,17 +606,6 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create an RO group.
-     * @param {CreateReadOnlyGroupRequest} req
-     * @param {function(string, CreateReadOnlyGroupResponse):void} cb
-     * @public
-     */
-    CreateReadOnlyGroup(req, cb) {
-        let resp = new CreateReadOnlyGroupResponse();
-        this.request("CreateReadOnlyGroup", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the purchasable regions.
      * @param {DescribeRegionsRequest} req
      * @param {function(string, DescribeRegionsResponse):void} cb
@@ -820,36 +617,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to query the list of log backups.
-     * @param {DescribeLogBackupsRequest} req
-     * @param {function(string, DescribeLogBackupsResponse):void} cb
+     * This API is used to enable public network access for a PostgreSQL for Serverless instance.
+     * @param {OpenServerlessDBExtranetAccessRequest} req
+     * @param {function(string, OpenServerlessDBExtranetAccessResponse):void} cb
      * @public
      */
-    DescribeLogBackups(req, cb) {
-        let resp = new DescribeLogBackupsResponse();
-        this.request("DescribeLogBackups", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the slow queries during the specified period of time.
-     * @param {DescribeSlowQueryListRequest} req
-     * @param {function(string, DescribeSlowQueryListResponse):void} cb
-     * @public
-     */
-    DescribeSlowQueryList(req, cb) {
-        let resp = new DescribeSlowQueryListResponse();
-        this.request("DescribeSlowQueryList", req, resp, cb);
-    }
-
-    /**
-     * This API is used to delete the specified full backup of an instance.
-     * @param {DeleteBaseBackupRequest} req
-     * @param {function(string, DeleteBaseBackupResponse):void} cb
-     * @public
-     */
-    DeleteBaseBackup(req, cb) {
-        let resp = new DeleteBaseBackupResponse();
-        this.request("DeleteBaseBackup", req, resp, cb);
+    OpenServerlessDBExtranetAccess(req, cb) {
+        let resp = new OpenServerlessDBExtranetAccessResponse();
+        this.request("OpenServerlessDBExtranetAccess", req, resp, cb);
     }
 
     /**
@@ -864,39 +639,6 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to disable the public network link to an instance.
-     * @param {CloseDBExtranetAccessRequest} req
-     * @param {function(string, CloseDBExtranetAccessResponse):void} cb
-     * @public
-     */
-    CloseDBExtranetAccess(req, cb) {
-        let resp = new CloseDBExtranetAccessResponse();
-        this.request("CloseDBExtranetAccess", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the minimum specification required by a cloned instance, including `SpecCode` and disk specification.
-     * @param {DescribeCloneDBInstanceSpecRequest} req
-     * @param {function(string, DescribeCloneDBInstanceSpecResponse):void} cb
-     * @public
-     */
-    DescribeCloneDBInstanceSpec(req, cb) {
-        let resp = new DescribeCloneDBInstanceSpecResponse();
-        this.request("DescribeCloneDBInstanceSpec", req, resp, cb);
-    }
-
-    /**
-     * This API is used to upgrade the kernel version of an instance.
-     * @param {UpgradeDBInstanceKernelVersionRequest} req
-     * @param {function(string, UpgradeDBInstanceKernelVersionResponse):void} cb
-     * @public
-     */
-    UpgradeDBInstanceKernelVersion(req, cb) {
-        let resp = new UpgradeDBInstanceKernelVersionResponse();
-        this.request("UpgradeDBInstanceKernelVersion", req, resp, cb);
-    }
-
-    /**
      * This API is used to clone an instance by specifying a backup set or a point in time.
      * @param {CloneDBInstanceRequest} req
      * @param {function(string, CloneDBInstanceResponse):void} cb
@@ -905,39 +647,6 @@ class PostgresClient extends AbstractClient {
     CloneDBInstance(req, cb) {
         let resp = new CloneDBInstanceResponse();
         this.request("CloneDBInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to add a read-only replica to an RO group.
-     * @param {AddDBInstanceToReadOnlyGroupRequest} req
-     * @param {function(string, AddDBInstanceToReadOnlyGroupResponse):void} cb
-     * @public
-     */
-    AddDBInstanceToReadOnlyGroup(req, cb) {
-        let resp = new AddDBInstanceToReadOnlyGroupResponse();
-        this.request("AddDBInstanceToReadOnlyGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the renewal price of an instance.
-     * @param {InquiryPriceRenewDBInstanceRequest} req
-     * @param {function(string, InquiryPriceRenewDBInstanceResponse):void} cb
-     * @public
-     */
-    InquiryPriceRenewDBInstance(req, cb) {
-        let resp = new InquiryPriceRenewDBInstanceResponse();
-        this.request("InquiryPriceRenewDBInstance", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the instance user list.
-     * @param {DescribeAccountsRequest} req
-     * @param {function(string, DescribeAccountsResponse):void} cb
-     * @public
-     */
-    DescribeAccounts(req, cb) {
-        let resp = new DescribeAccountsResponse();
-        this.request("DescribeAccounts", req, resp, cb);
     }
 
     /**
@@ -985,17 +694,6 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API is used to create a PostgreSQL for Serverless instance. If the creation succeeds, the instance ID will be returned.
-     * @param {CreateServerlessDBInstanceRequest} req
-     * @param {function(string, CreateServerlessDBInstanceResponse):void} cb
-     * @public
-     */
-    CreateServerlessDBInstance(req, cb) {
-        let resp = new CreateServerlessDBInstanceResponse();
-        this.request("CreateServerlessDBInstance", req, resp, cb);
-    }
-
-    /**
      * This API is used to create a parameter template.
      * @param {CreateParameterTemplateRequest} req
      * @param {function(string, CreateParameterTemplateResponse):void} cb
@@ -1004,39 +702,6 @@ class PostgresClient extends AbstractClient {
     CreateParameterTemplate(req, cb) {
         let resp = new CreateParameterTemplateResponse();
         this.request("CreateParameterTemplate", req, resp, cb);
-    }
-
-    /**
-     * This API is used to count and analyze slow query statements during the specified period of time and return aggregated statistical analysis results which are classified by statement with abstract parameter values.
-     * @param {DescribeSlowQueryAnalysisRequest} req
-     * @param {function(string, DescribeSlowQueryAnalysisResponse):void} cb
-     * @public
-     */
-    DescribeSlowQueryAnalysis(req, cb) {
-        let resp = new DescribeSlowQueryAnalysisResponse();
-        this.request("DescribeSlowQueryAnalysis", req, resp, cb);
-    }
-
-    /**
-     * This API is used to pull the list of databases.
-     * @param {DescribeDatabasesRequest} req
-     * @param {function(string, DescribeDatabasesResponse):void} cb
-     * @public
-     */
-    DescribeDatabases(req, cb) {
-        let resp = new DescribeDatabasesResponse();
-        this.request("DescribeDatabases", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify the security group of an instance.
-     * @param {ModifyDBInstanceSecurityGroupsRequest} req
-     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
-     * @public
-     */
-    ModifyDBInstanceSecurityGroups(req, cb) {
-        let resp = new ModifyDBInstanceSecurityGroupsResponse();
-        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -1051,39 +716,6 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * This API was used to get slow query logs. Since it was deprecated on September 1, 2021, it has no longer returned data. Please use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
-     * @param {DescribeDBSlowlogsRequest} req
-     * @param {function(string, DescribeDBSlowlogsResponse):void} cb
-     * @public
-     */
-    DescribeDBSlowlogs(req, cb) {
-        let resp = new DescribeDBSlowlogsResponse();
-        this.request("DescribeDBSlowlogs", req, resp, cb);
-    }
-
-    /**
-     * This API is used to modify RO group configuration.
-     * @param {ModifyReadOnlyGroupConfigRequest} req
-     * @param {function(string, ModifyReadOnlyGroupConfigResponse):void} cb
-     * @public
-     */
-    ModifyReadOnlyGroupConfig(req, cb) {
-        let resp = new ModifyReadOnlyGroupConfigResponse();
-        this.request("ModifyReadOnlyGroupConfig", req, resp, cb);
-    }
-
-    /**
-     * This API is used to create and initialize one or more TencentDB for PostgreSQL instances.
-     * @param {CreateInstancesRequest} req
-     * @param {function(string, CreateInstancesResponse):void} cb
-     * @public
-     */
-    CreateInstances(req, cb) {
-        let resp = new CreateInstancesResponse();
-        this.request("CreateInstances", req, resp, cb);
-    }
-
-    /**
      * This API is used to query the backup statistics of an instance. It will return the number and size (bytes) of backups of the instance.
      * @param {DescribeBackupSummariesRequest} req
      * @param {function(string, DescribeBackupSummariesResponse):void} cb
@@ -1092,39 +724,6 @@ class PostgresClient extends AbstractClient {
     DescribeBackupSummaries(req, cb) {
         let resp = new DescribeBackupSummariesResponse();
         this.request("DescribeBackupSummaries", req, resp, cb);
-    }
-
-    /**
-     * This API is used to remove a read-only replica from an RO group.
-     * @param {RemoveDBInstanceFromReadOnlyGroupRequest} req
-     * @param {function(string, RemoveDBInstanceFromReadOnlyGroupResponse):void} cb
-     * @public
-     */
-    RemoveDBInstanceFromReadOnlyGroup(req, cb) {
-        let resp = new RemoveDBInstanceFromReadOnlyGroupResponse();
-        this.request("RemoveDBInstanceFromReadOnlyGroup", req, resp, cb);
-    }
-
-    /**
-     * This API is used to query the purchasable specification configuration.
-     * @param {DescribeProductConfigRequest} req
-     * @param {function(string, DescribeProductConfigResponse):void} cb
-     * @public
-     */
-    DescribeProductConfig(req, cb) {
-        let resp = new DescribeProductConfigResponse();
-        this.request("DescribeProductConfig", req, resp, cb);
-    }
-
-    /**
-     * This API is used to get the details of parameter modification events.
-     * @param {DescribeParamsEventRequest} req
-     * @param {function(string, DescribeParamsEventResponse):void} cb
-     * @public
-     */
-    DescribeParamsEvent(req, cb) {
-        let resp = new DescribeParamsEventResponse();
-        this.request("DescribeParamsEvent", req, resp, cb);
     }
 
     /**
@@ -1139,6 +738,292 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * This API is used to add a network for an RO group.
+     * @param {CreateReadOnlyGroupNetworkAccessRequest} req
+     * @param {function(string, CreateReadOnlyGroupNetworkAccessResponse):void} cb
+     * @public
+     */
+    CreateReadOnlyGroupNetworkAccess(req, cb) {
+        let resp = new CreateReadOnlyGroupNetworkAccessResponse();
+        this.request("CreateReadOnlyGroupNetworkAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get instance key list.
+     * @param {DescribeEncryptionKeysRequest} req
+     * @param {function(string, DescribeEncryptionKeysResponse):void} cb
+     * @public
+     */
+    DescribeEncryptionKeys(req, cb) {
+        let resp = new DescribeEncryptionKeysResponse();
+        this.request("DescribeEncryptionKeys", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete an RO group.
+     * @param {DeleteReadOnlyGroupRequest} req
+     * @param {function(string, DeleteReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    DeleteReadOnlyGroup(req, cb) {
+        let resp = new DeleteReadOnlyGroupResponse();
+        this.request("DeleteReadOnlyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade the kernel version of an instance.
+     * @param {UpgradeDBInstanceKernelVersionRequest} req
+     * @param {function(string, UpgradeDBInstanceKernelVersionResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstanceKernelVersion(req, cb) {
+        let resp = new UpgradeDBInstanceKernelVersionResponse();
+        this.request("UpgradeDBInstanceKernelVersion", req, resp, cb);
+    }
+
+    /**
+     * This API is used to reset the account password of an instance.
+     * @param {ResetAccountPasswordRequest} req
+     * @param {function(string, ResetAccountPasswordResponse):void} cb
+     * @public
+     */
+    ResetAccountPassword(req, cb) {
+        let resp = new ResetAccountPasswordResponse();
+        this.request("ResetAccountPassword", req, resp, cb);
+    }
+
+    /**
+     * This API is used to restart an instance.
+     * @param {RestartDBInstanceRequest} req
+     * @param {function(string, RestartDBInstanceResponse):void} cb
+     * @public
+     */
+    RestartDBInstance(req, cb) {
+        let resp = new RestartDBInstanceResponse();
+        this.request("RestartDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete a network of an instance.
+     * @param {DeleteDBInstanceNetworkAccessRequest} req
+     * @param {function(string, DeleteDBInstanceNetworkAccessResponse):void} cb
+     * @public
+     */
+    DeleteDBInstanceNetworkAccess(req, cb) {
+        let resp = new DeleteDBInstanceNetworkAccessResponse();
+        this.request("DeleteDBInstanceNetworkAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to transfer an instance to another project.
+     * @param {ModifyDBInstancesProjectRequest} req
+     * @param {function(string, ModifyDBInstancesProjectResponse):void} cb
+     * @public
+     */
+    ModifyDBInstancesProject(req, cb) {
+        let resp = new ModifyDBInstancesProjectResponse();
+        this.request("ModifyDBInstancesProject", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the instance Xlog list.
+     * @param {DescribeDBXlogsRequest} req
+     * @param {function(string, DescribeDBXlogsResponse):void} cb
+     * @public
+     */
+    DescribeDBXlogs(req, cb) {
+        let resp = new DescribeDBXlogsResponse();
+        this.request("DescribeDBXlogs", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of one instance.
+     * @param {DescribeDBInstanceAttributeRequest} req
+     * @param {function(string, DescribeDBInstanceAttributeResponse):void} cb
+     * @public
+     */
+    DescribeDBInstanceAttribute(req, cb) {
+        let resp = new DescribeDBInstanceAttributeResponse();
+        this.request("DescribeDBInstanceAttribute", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances.
+     * @param {CreateDBInstancesRequest} req
+     * @param {function(string, CreateDBInstancesResponse):void} cb
+     * @public
+     */
+    CreateDBInstances(req, cb) {
+        let resp = new CreateDBInstancesResponse();
+        this.request("CreateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the specified log backup of an instance.
+     * @param {DeleteLogBackupRequest} req
+     * @param {function(string, DeleteLogBackupResponse):void} cb
+     * @public
+     */
+    DeleteLogBackup(req, cb) {
+        let resp = new DeleteLogBackupResponse();
+        this.request("DeleteLogBackup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to isolate one or more instances.
+     * @param {IsolateDBInstancesRequest} req
+     * @param {function(string, IsolateDBInstancesResponse):void} cb
+     * @public
+     */
+    IsolateDBInstances(req, cb) {
+        let resp = new IsolateDBInstancesResponse();
+        this.request("IsolateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the expiration time of the specified full backup of an instance.
+     * @param {ModifyBaseBackupExpireTimeRequest} req
+     * @param {function(string, ModifyBaseBackupExpireTimeResponse):void} cb
+     * @public
+     */
+    ModifyBaseBackupExpireTime(req, cb) {
+        let resp = new ModifyBaseBackupExpireTimeResponse();
+        this.request("ModifyBaseBackupExpireTime", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create an RO group.
+     * @param {CreateReadOnlyGroupRequest} req
+     * @param {function(string, CreateReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    CreateReadOnlyGroup(req, cb) {
+        let resp = new CreateReadOnlyGroupResponse();
+        this.request("CreateReadOnlyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the slow queries during the specified period of time.
+     * @param {DescribeSlowQueryListRequest} req
+     * @param {function(string, DescribeSlowQueryListResponse):void} cb
+     * @public
+     */
+    DescribeSlowQueryList(req, cb) {
+        let resp = new DescribeSlowQueryListResponse();
+        this.request("DescribeSlowQueryList", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the list of log backups.
+     * @param {DescribeLogBackupsRequest} req
+     * @param {function(string, DescribeLogBackupsResponse):void} cb
+     * @public
+     */
+    DescribeLogBackups(req, cb) {
+        let resp = new DescribeLogBackupsResponse();
+        this.request("DescribeLogBackups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to disable the public network link to an instance.
+     * @param {CloseDBExtranetAccessRequest} req
+     * @param {function(string, CloseDBExtranetAccessResponse):void} cb
+     * @public
+     */
+    CloseDBExtranetAccess(req, cb) {
+        let resp = new CloseDBExtranetAccessResponse();
+        this.request("CloseDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to add a read-only replica to an RO group.
+     * @param {AddDBInstanceToReadOnlyGroupRequest} req
+     * @param {function(string, AddDBInstanceToReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    AddDBInstanceToReadOnlyGroup(req, cb) {
+        let resp = new AddDBInstanceToReadOnlyGroupResponse();
+        this.request("AddDBInstanceToReadOnlyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the instance user list.
+     * @param {DescribeAccountsRequest} req
+     * @param {function(string, DescribeAccountsResponse):void} cb
+     * @public
+     */
+    DescribeAccounts(req, cb) {
+        let resp = new DescribeAccountsResponse();
+        this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the minimum specification required by a cloned instance, including `SpecCode` and disk specification.
+     * @param {DescribeCloneDBInstanceSpecRequest} req
+     * @param {function(string, DescribeCloneDBInstanceSpecResponse):void} cb
+     * @public
+     */
+    DescribeCloneDBInstanceSpec(req, cb) {
+        let resp = new DescribeCloneDBInstanceSpecResponse();
+        this.request("DescribeCloneDBInstanceSpec", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the details of one or more instances.
+     * @param {DescribeDBInstancesRequest} req
+     * @param {function(string, DescribeDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeDBInstances(req, cb) {
+        let resp = new DescribeDBInstancesResponse();
+        this.request("DescribeDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the backup download restrictions.
+     * @param {DescribeBackupDownloadRestrictionRequest} req
+     * @param {function(string, DescribeBackupDownloadRestrictionResponse):void} cb
+     * @public
+     */
+    DescribeBackupDownloadRestriction(req, cb) {
+        let resp = new DescribeBackupDownloadRestrictionResponse();
+        this.request("DescribeBackupDownloadRestriction", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify RO group configuration.
+     * @param {ModifyReadOnlyGroupConfigRequest} req
+     * @param {function(string, ModifyReadOnlyGroupConfigResponse):void} cb
+     * @public
+     */
+    ModifyReadOnlyGroupConfig(req, cb) {
+        let resp = new ModifyReadOnlyGroupConfigResponse();
+        this.request("ModifyReadOnlyGroupConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove a read-only replica from an RO group.
+     * @param {RemoveDBInstanceFromReadOnlyGroupRequest} req
+     * @param {function(string, RemoveDBInstanceFromReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    RemoveDBInstanceFromReadOnlyGroup(req, cb) {
+        let resp = new RemoveDBInstanceFromReadOnlyGroupResponse();
+        this.request("RemoveDBInstanceFromReadOnlyGroup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get the details of parameter modification events.
+     * @param {DescribeParamsEventRequest} req
+     * @param {function(string, DescribeParamsEventResponse):void} cb
+     * @public
+     */
+    DescribeParamsEvent(req, cb) {
+        let resp = new DescribeParamsEventResponse();
+        this.request("DescribeParamsEvent", req, resp, cb);
+    }
+
+    /**
      * This API is used to query purchasable instance specifications.
      * @param {DescribeClassesRequest} req
      * @param {function(string, DescribeClassesResponse):void} cb
@@ -1147,6 +1032,160 @@ class PostgresClient extends AbstractClient {
     DescribeClasses(req, cb) {
         let resp = new DescribeClassesResponse();
         this.request("DescribeClasses", req, resp, cb);
+    }
+
+    /**
+     * This API is used to get order information.
+     * @param {DescribeOrdersRequest} req
+     * @param {function(string, DescribeOrdersResponse):void} cb
+     * @public
+     */
+    DescribeOrders(req, cb) {
+        let resp = new DescribeOrdersResponse();
+        this.request("DescribeOrders", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query all backup plans of an instance.
+     * @param {DescribeBackupPlansRequest} req
+     * @param {function(string, DescribeBackupPlansResponse):void} cb
+     * @public
+     */
+    DescribeBackupPlans(req, cb) {
+        let resp = new DescribeBackupPlansResponse();
+        this.request("DescribeBackupPlans", req, resp, cb);
+    }
+
+    /**
+     * This API is used to perform a primary-standby switch for an instance waiting for the switch after it is upgraded.
+     * @param {ModifySwitchTimePeriodRequest} req
+     * @param {function(string, ModifySwitchTimePeriodResponse):void} cb
+     * @public
+     */
+    ModifySwitchTimePeriod(req, cb) {
+        let resp = new ModifySwitchTimePeriodResponse();
+        this.request("ModifySwitchTimePeriod", req, resp, cb);
+    }
+
+    /**
+     * This API is used to enable public network access.
+     * @param {OpenDBExtranetAccessRequest} req
+     * @param {function(string, OpenDBExtranetAccessResponse):void} cb
+     * @public
+     */
+    OpenDBExtranetAccess(req, cb) {
+        let resp = new OpenDBExtranetAccessResponse();
+        this.request("OpenDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the backup plan of an instance, such as modifying the backup start time. By default, a full backup starts at midnight every day and the generated backup files will be retained for seven days.
+     * @param {ModifyBackupPlanRequest} req
+     * @param {function(string, ModifyBackupPlanResponse):void} cb
+     * @public
+     */
+    ModifyBackupPlan(req, cb) {
+        let resp = new ModifyBackupPlanResponse();
+        this.request("ModifyBackupPlan", req, resp, cb);
+    }
+
+    /**
+     * This API is used to initialize a TencentDB for PostgreSQL instance.
+     * @param {InitDBInstancesRequest} req
+     * @param {function(string, InitDBInstancesResponse):void} cb
+     * @public
+     */
+    InitDBInstances(req, cb) {
+        let resp = new InitDBInstancesResponse();
+        this.request("InitDBInstances", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the supported AZs.
+     * @param {DescribeZonesRequest} req
+     * @param {function(string, DescribeZonesResponse):void} cb
+     * @public
+     */
+    DescribeZones(req, cb) {
+        let resp = new DescribeZonesResponse();
+        this.request("DescribeZones", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the fees of upgrading a specified database instance. Only pay-as-you-go instance is supported.
+     * @param {InquiryPriceUpgradeDBInstanceRequest} req
+     * @param {function(string, InquiryPriceUpgradeDBInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceUpgradeDBInstance(req, cb) {
+        let resp = new InquiryPriceUpgradeDBInstanceResponse();
+        this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the renewal price of an instance.
+     * @param {InquiryPriceRenewDBInstanceRequest} req
+     * @param {function(string, InquiryPriceRenewDBInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceRenewDBInstance(req, cb) {
+        let resp = new InquiryPriceRenewDBInstanceResponse();
+        this.request("InquiryPriceRenewDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to modify the backup download restrictions.
+     * @param {ModifyBackupDownloadRestrictionRequest} req
+     * @param {function(string, ModifyBackupDownloadRestrictionResponse):void} cb
+     * @public
+     */
+    ModifyBackupDownloadRestriction(req, cb) {
+        let resp = new ModifyBackupDownloadRestrictionResponse();
+        this.request("ModifyBackupDownloadRestriction", req, resp, cb);
+    }
+
+    /**
+     * This API is used to delete the specified full backup of an instance.
+     * @param {DeleteBaseBackupRequest} req
+     * @param {function(string, DeleteBaseBackupResponse):void} cb
+     * @public
+     */
+    DeleteBaseBackup(req, cb) {
+        let resp = new DeleteBaseBackupResponse();
+        this.request("DeleteBaseBackup", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query RO group information by specifying the primary instance IDs.
+     * @param {DescribeReadOnlyGroupsRequest} req
+     * @param {function(string, DescribeReadOnlyGroupsResponse):void} cb
+     * @public
+     */
+    DescribeReadOnlyGroups(req, cb) {
+        let resp = new DescribeReadOnlyGroupsResponse();
+        this.request("DescribeReadOnlyGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to upgrade instance configurations.
+     * @param {UpgradeDBInstanceRequest} req
+     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstance(req, cb) {
+        let resp = new UpgradeDBInstanceResponse();
+        this.request("UpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to create and initialize one or more TencentDB for PostgreSQL instances.
+     * @param {CreateInstancesRequest} req
+     * @param {function(string, CreateInstancesResponse):void} cb
+     * @public
+     */
+    CreateInstances(req, cb) {
+        let resp = new CreateInstancesResponse();
+        this.request("CreateInstances", req, resp, cb);
     }
 
 

@@ -25,6 +25,7 @@ const AccessGroup = models.AccessGroup;
 const ModifyFileSystemResponse = models.ModifyFileSystemResponse;
 const ModifyFileSystemRequest = models.ModifyFileSystemRequest;
 const DescribeLifeCycleRulesRequest = models.DescribeLifeCycleRulesRequest;
+const Summary = models.Summary;
 const AssociateAccessGroupsRequest = models.AssociateAccessGroupsRequest;
 const ModifyAccessGroupRequest = models.ModifyAccessGroupRequest;
 const DescribeFileSystemsResponse = models.DescribeFileSystemsResponse;

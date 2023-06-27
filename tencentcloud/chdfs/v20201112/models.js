@@ -469,6 +469,75 @@ class DescribeLifeCycleRulesRequest extends  AbstractModel {
 }
 
 /**
+ * Details about the storage usage of the current lifecycle rule path
+ * @class
+ */
+class Summary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Capacity usage in bytes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.CapacityUsed = null;
+
+        /**
+         * COS STANDARD storage usage in bytes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.StandardCapacityUsed = null;
+
+        /**
+         * COS STANDARD_IA storage usage in bytes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DegradeCapacityUsed = null;
+
+        /**
+         * COS ARCHIVE storage usage in bytes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ArchiveCapacityUsed = null;
+
+        /**
+         * COS DEEP ARCHIVE storage usage in bytes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DeepArchiveCapacityUsed = null;
+
+        /**
+         * COS INTELLIGENT TIERING storage usage in bytes
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IntelligentCapacityUsed = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CapacityUsed = 'CapacityUsed' in params ? params.CapacityUsed : null;
+        this.StandardCapacityUsed = 'StandardCapacityUsed' in params ? params.StandardCapacityUsed : null;
+        this.DegradeCapacityUsed = 'DegradeCapacityUsed' in params ? params.DegradeCapacityUsed : null;
+        this.ArchiveCapacityUsed = 'ArchiveCapacityUsed' in params ? params.ArchiveCapacityUsed : null;
+        this.DeepArchiveCapacityUsed = 'DeepArchiveCapacityUsed' in params ? params.DeepArchiveCapacityUsed : null;
+        this.IntelligentCapacityUsed = 'IntelligentCapacityUsed' in params ? params.IntelligentCapacityUsed : null;
+
+    }
+}
+
+/**
  * AssociateAccessGroups request structure.
  * @class
  */
@@ -2099,6 +2168,18 @@ class LifeCycleRule extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * Detailed storage usage of the current lifecycle rule path
+         * @type {Summary || null}
+         */
+        this.Summary = null;
+
+        /**
+         * Update time of `Summary`
+         * @type {string || null}
+         */
+        this.LastSummaryTime = null;
+
     }
 
     /**
@@ -2122,6 +2203,13 @@ class LifeCycleRule extends  AbstractModel {
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Summary) {
+            let obj = new Summary();
+            obj.deserialize(params.Summary)
+            this.Summary = obj;
+        }
+        this.LastSummaryTime = 'LastSummaryTime' in params ? params.LastSummaryTime : null;
 
     }
 }
@@ -2681,6 +2769,7 @@ module.exports = {
     ModifyFileSystemResponse: ModifyFileSystemResponse,
     ModifyFileSystemRequest: ModifyFileSystemRequest,
     DescribeLifeCycleRulesRequest: DescribeLifeCycleRulesRequest,
+    Summary: Summary,
     AssociateAccessGroupsRequest: AssociateAccessGroupsRequest,
     ModifyAccessGroupRequest: ModifyAccessGroupRequest,
     DescribeFileSystemsResponse: DescribeFileSystemsResponse,

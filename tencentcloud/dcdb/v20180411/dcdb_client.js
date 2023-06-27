@@ -30,6 +30,7 @@ const ModifyInstanceVportResponse = models.ModifyInstanceVportResponse;
 const DescribeDCDBInstanceDetailRequest = models.DescribeDCDBInstanceDetailRequest;
 const ModifyInstanceVipResponse = models.ModifyInstanceVipResponse;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const ShardBriefInfo = models.ShardBriefInfo;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const CancelDcnJobResponse = models.CancelDcnJobResponse;
 const DescribeFileDownloadUrlRequest = models.DescribeFileDownloadUrlRequest;
@@ -44,6 +45,7 @@ const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const DescribeFlowResponse = models.DescribeFlowResponse;
 const UpgradeHourDCDBInstanceRequest = models.UpgradeHourDCDBInstanceRequest;
 const CloneAccountResponse = models.CloneAccountResponse;
+const IsolateDCDBInstanceRequest = models.IsolateDCDBInstanceRequest;
 const IsolateDedicatedDBInstanceRequest = models.IsolateDedicatedDBInstanceRequest;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const DestroyDCDBInstanceRequest = models.DestroyDCDBInstanceRequest;
@@ -53,6 +55,7 @@ const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse
 const ModifyDBEncryptAttributesResponse = models.ModifyDBEncryptAttributesResponse;
 const DescribeDCDBInstanceNodeInfoRequest = models.DescribeDCDBInstanceNodeInfoRequest;
 const DatabaseView = models.DatabaseView;
+const ConfigValue = models.ConfigValue;
 const DescribeDBLogFilesRequest = models.DescribeDBLogFilesRequest;
 const NodeInfo = models.NodeInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
@@ -74,7 +77,10 @@ const ParamConstraint = models.ParamConstraint;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
 const ExpandShardConfig = models.ExpandShardConfig;
+const ModifyAccountConfigRequest = models.ModifyAccountConfigRequest;
+const DescribeDBEncryptAttributesResponse = models.DescribeDBEncryptAttributesResponse;
 const DatabaseTable = models.DatabaseTable;
+const DescribeDBEncryptAttributesRequest = models.DescribeDBEncryptAttributesRequest;
 const Deal = models.Deal;
 const GrantAccountPrivilegesRequest = models.GrantAccountPrivilegesRequest;
 const DescribeDCDBShardsRequest = models.DescribeDCDBShardsRequest;
@@ -110,7 +116,7 @@ const CancelDcnJobRequest = models.CancelDcnJobRequest;
 const IsolateHourDCDBInstanceResponse = models.IsolateHourDCDBInstanceResponse;
 const ShardInfo = models.ShardInfo;
 const ModifyInstanceVipRequest = models.ModifyInstanceVipRequest;
-const ShardBriefInfo = models.ShardBriefInfo;
+const ReservedNetResource = models.ReservedNetResource;
 const DatabasePrivilege = models.DatabasePrivilege;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const DcnDetailItem = models.DcnDetailItem;
@@ -136,6 +142,8 @@ const CreateDCDBInstanceRequest = models.CreateDCDBInstanceRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const AddShardConfig = models.AddShardConfig;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
+const ModifyAccountConfigResponse = models.ModifyAccountConfigResponse;
+const IsolateDCDBInstanceResponse = models.IsolateDCDBInstanceResponse;
 const ModifyDBEncryptAttributesRequest = models.ModifyDBEncryptAttributesRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const IsolateDedicatedDBInstanceResponse = models.IsolateDedicatedDBInstanceResponse;
@@ -183,7 +191,18 @@ Note: Accounts with the same username but different hosts are considered as diff
     }
 
     /**
-     * This API is used to remove the isolation of a pay-as-you-go TDSQL for MySQL instance.
+     * This API is used to modify the configurations of an account, such as `max_user_connections`.
+     * @param {ModifyAccountConfigRequest} req
+     * @param {function(string, ModifyAccountConfigResponse):void} cb
+     * @public
+     */
+    ModifyAccountConfig(req, cb) {
+        let resp = new ModifyAccountConfigResponse();
+        this.request("ModifyAccountConfig", req, resp, cb);
+    }
+
+    /**
+     * This API is used to remove a pay-as-you-go TDSQL instance from isolation.
      * @param {ActiveHourDCDBInstanceRequest} req
      * @param {function(string, ActiveHourDCDBInstanceResponse):void} cb
      * @public
@@ -406,7 +425,7 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to isolate pay-as-you-go TDSQL for MySQL instances.
+     * This API is used to isolate a pay-as-you-go TDSQL instance.
      * @param {IsolateHourDCDBInstanceRequest} req
      * @param {function(string, IsolateHourDCDBInstanceResponse):void} cb
      * @public
@@ -417,7 +436,7 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to upgrade a pay-as-you-go TDSQL for MySQL instance.
+     * This API is used to upgrade a pay-as-you-go TDSQL instance.
      * @param {UpgradeHourDCDBInstanceRequest} req
      * @param {function(string, UpgradeHourDCDBInstanceResponse):void} cb
      * @public
@@ -483,12 +502,7 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to modify the permissions of a TencentDB instance account.
-
-**Notes**
-- Only the SELECT permission (that is, set the permission parameter to `["SELECT"]`) of the system database `mysql` can be granted.
-- An error will be reported if read-write permissions are granted to a read-only account.
-- If the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
+     * This API is used to modify the permissions of a TencentDB instance account. \n\n**Note**\n-Only the SELECT permission (that is, set the permission parameter to `["SELECT"]`) of the system database `mysql` can be granted. An error will be reported if read-write permissions are granted to a read-only account. If the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted view permissions, set `Privileges` to an empty array.
      * @param {ModifyAccountPrivilegesRequest} req
      * @param {function(string, ModifyAccountPrivilegesResponse):void} cb
      * @public
@@ -499,7 +513,7 @@ Note: accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to terminate an isolated monthly-subscribed instance.
+     * This API is used to terminate an isolated monthly subscribed TDSQL instance.
      * @param {DestroyDCDBInstanceRequest} req
      * @param {function(string, DestroyDCDBInstanceResponse):void} cb
      * @public
@@ -633,7 +647,7 @@ Note: Accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to create a monthly subscribed TencentDB instance by passing in information such as instance specifications, database version number, and purchased duration.
+     * This API is used to create a monthly subscribed TDSQL instance by passing in information such as instance specifications, database version number, and purchased duration.
      * @param {CreateDCDBInstanceRequest} req
      * @param {function(string, CreateDCDBInstanceResponse):void} cb
      * @public
@@ -644,7 +658,7 @@ Note: Accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to terminate a pay-as-you-go instance.
+     * This API is used to terminate a pay-as-you-go TDSQL instance.
      * @param {DestroyHourDCDBInstanceRequest} req
      * @param {function(string, DestroyHourDCDBInstanceResponse):void} cb
      * @public
@@ -652,6 +666,17 @@ Note: Accounts with the same username but different hosts are different accounts
     DestroyHourDCDBInstance(req, cb) {
         let resp = new DestroyHourDCDBInstanceResponse();
         this.request("DestroyHourDCDBInstance", req, resp, cb);
+    }
+
+    /**
+     * This API is used to isolate a monthly subscribed TDSQL instance, which will no longer be accessible via IP and port.  The isolated instance can be started up in the recycle bin.  If it is isolated due to overdue payments, top up your account as soon as possible.
+     * @param {IsolateDCDBInstanceRequest} req
+     * @param {function(string, IsolateDCDBInstanceResponse):void} cb
+     * @public
+     */
+    IsolateDCDBInstance(req, cb) {
+        let resp = new IsolateDCDBInstanceResponse();
+        this.request("IsolateDCDBInstance", req, resp, cb);
     }
 
     /**
@@ -743,7 +768,7 @@ Note: Accounts with the same username but different hosts are different accounts
     }
 
     /**
-     * This API is used to create pay-as-you-go TDSQL for MySQL instances.
+     * This API is used to create a pay-as-you-go TDSQL instance.
      * @param {CreateHourDCDBInstanceRequest} req
      * @param {function(string, CreateHourDCDBInstanceResponse):void} cb
      * @public
@@ -762,6 +787,17 @@ Note: Accounts with the same username but different hosts are different accounts
     DisassociateSecurityGroups(req, cb) {
         let resp = new DisassociateSecurityGroupsResponse();
         this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * This API is used to query the encryption status of the instance data.
+     * @param {DescribeDBEncryptAttributesRequest} req
+     * @param {function(string, DescribeDBEncryptAttributesResponse):void} cb
+     * @public
+     */
+    DescribeDBEncryptAttributes(req, cb) {
+        let resp = new DescribeDBEncryptAttributesResponse();
+        this.request("DescribeDBEncryptAttributes", req, resp, cb);
     }
 
     /**

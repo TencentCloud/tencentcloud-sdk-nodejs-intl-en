@@ -17,6 +17,110 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * Table configurations
+ * @class
+ */
+class TableBaseInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The database name.
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * The table name.
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * The data source name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
+        /**
+         * The table remarks.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TableComment = null;
+
+        /**
+         * The specific type: `table` or `view`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * The data format type, such as `hive` and `iceberg`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TableFormat = null;
+
+        /**
+         * The table creator name.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserAlias = null;
+
+        /**
+         * The table creator ID.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.UserSubUin = null;
+
+        /**
+         * The data governance configuration.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {DataGovernPolicy || null}
+         */
+        this.GovernPolicy = null;
+
+        /**
+         * Whether database data governance is disabled. Valid values: `true` (disabled) and `false` (not disabled).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DbGovernPolicyIsDisable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
+        this.TableComment = 'TableComment' in params ? params.TableComment : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.TableFormat = 'TableFormat' in params ? params.TableFormat : null;
+        this.UserAlias = 'UserAlias' in params ? params.UserAlias : null;
+        this.UserSubUin = 'UserSubUin' in params ? params.UserSubUin : null;
+
+        if (params.GovernPolicy) {
+            let obj = new DataGovernPolicy();
+            obj.deserialize(params.GovernPolicy)
+            this.GovernPolicy = obj;
+        }
+        this.DbGovernPolicyIsDisable = 'DbGovernPolicyIsDisable' in params ? params.DbGovernPolicyIsDisable : null;
+
+    }
+}
+
+/**
  * DescribeResultDownload response structure.
  * @class
  */
@@ -258,6 +362,308 @@ class CreateSparkAppTaskRequest extends  AbstractModel {
 }
 
 /**
+ * 
+ * @class
+ */
+class PrestoMonitorMetrics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.LocalCacheHitRate = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.FragmentCacheHitRate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocalCacheHitRate = 'LocalCacheHitRate' in params ? params.LocalCacheHitRate : null;
+        this.FragmentCacheHitRate = 'FragmentCacheHitRate' in params ? params.FragmentCacheHitRate : null;
+
+    }
+}
+
+/**
+ * ModifySparkAppBatch response structure.
+ * @class
+ */
+class ModifySparkAppBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeForbiddenTablePro response structure.
+ * @class
+ */
+class DescribeForbiddenTableProResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Configuration format
+ * @class
+ */
+class KVPair extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Configured key
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Configured value
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * CreateSparkSessionBatchSQL response structure.
+ * @class
+ */
+class CreateSparkSessionBatchSQLResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique identifier of a batch task.
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLakeFsDirSummary request structure.
+ * @class
+ */
+class DescribeLakeFsDirSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * GenerateCreateMangedTableSql response structure.
+ * @class
+ */
+class GenerateCreateMangedTableSqlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The SQL statements for creating the managed internal table.
+         * @type {Execution || null}
+         */
+        this.Execution = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Execution) {
+            let obj = new Execution();
+            obj.deserialize(params.Execution)
+            this.Execution = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateInternalTable request structure.
+ * @class
+ */
+class CreateInternalTableRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The basic table information.
+         * @type {TableBaseInfo || null}
+         */
+        this.TableBaseInfo = null;
+
+        /**
+         * The table fields.
+         * @type {Array.<TColumn> || null}
+         */
+        this.Columns = null;
+
+        /**
+         * The table partitions.
+         * @type {Array.<TPartition> || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * The table properties.
+         * @type {Array.<Property> || null}
+         */
+        this.Properties = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TableBaseInfo) {
+            let obj = new TableBaseInfo();
+            obj.deserialize(params.TableBaseInfo)
+            this.TableBaseInfo = obj;
+        }
+
+        if (params.Columns) {
+            this.Columns = new Array();
+            for (let z in params.Columns) {
+                let obj = new TColumn();
+                obj.deserialize(params.Columns[z]);
+                this.Columns.push(obj);
+            }
+        }
+
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new TPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
+        }
+
+        if (params.Properties) {
+            this.Properties = new Array();
+            for (let z in params.Properties) {
+                let obj = new Property();
+                obj.deserialize(params.Properties[z]);
+                this.Properties.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifySparkApp request structure.
  * @class
  */
@@ -433,6 +839,12 @@ class ModifySparkAppRequest extends  AbstractModel {
          */
         this.SessionId = null;
 
+        /**
+         * Whether to inherit the task resource configuration from the cluster configuration template. Valid values: `0` (default): No; `1`: Yes.
+         * @type {number || null}
+         */
+        this.IsInherit = null;
+
     }
 
     /**
@@ -470,351 +882,7 @@ class ModifySparkAppRequest extends  AbstractModel {
         this.SparkImageVersion = 'SparkImageVersion' in params ? params.SparkImageVersion : null;
         this.AppExecutorMaxNumbers = 'AppExecutorMaxNumbers' in params ? params.AppExecutorMaxNumbers : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
-
-    }
-}
-
-/**
- * DescribeForbiddenTablePro response structure.
- * @class
- */
-class DescribeForbiddenTableProResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * Configuration format
- * @class
- */
-class KVPair extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * Configured key
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Key = null;
-
-        /**
-         * Configured value
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Value = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
-
-    }
-}
-
-/**
- * Table configurations
- * @class
- */
-class TableBaseInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The database name.
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
-
-        /**
-         * The table name.
-         * @type {string || null}
-         */
-        this.TableName = null;
-
-        /**
-         * The data source name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DatasourceConnectionName = null;
-
-        /**
-         * The table remarks.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TableComment = null;
-
-        /**
-         * The specific type: `table` or `view`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * The data format type, such as `hive` and `iceberg`.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.TableFormat = null;
-
-        /**
-         * The table creator name.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UserAlias = null;
-
-        /**
-         * The table creator ID.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.UserSubUin = null;
-
-        /**
-         * The data governance configuration.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {DataGovernPolicy || null}
-         */
-        this.GovernPolicy = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.TableName = 'TableName' in params ? params.TableName : null;
-        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
-        this.TableComment = 'TableComment' in params ? params.TableComment : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.TableFormat = 'TableFormat' in params ? params.TableFormat : null;
-        this.UserAlias = 'UserAlias' in params ? params.UserAlias : null;
-        this.UserSubUin = 'UserSubUin' in params ? params.UserSubUin : null;
-
-        if (params.GovernPolicy) {
-            let obj = new DataGovernPolicy();
-            obj.deserialize(params.GovernPolicy)
-            this.GovernPolicy = obj;
-        }
-
-    }
-}
-
-/**
- * DescribeLakeFsDirSummary request structure.
- * @class
- */
-class DescribeLakeFsDirSummaryRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
- * GenerateCreateMangedTableSql response structure.
- * @class
- */
-class GenerateCreateMangedTableSqlResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The SQL statements for creating the managed internal table.
-         * @type {Execution || null}
-         */
-        this.Execution = null;
-
-        /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Execution) {
-            let obj = new Execution();
-            obj.deserialize(params.Execution)
-            this.Execution = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateInternalTable request structure.
- * @class
- */
-class CreateInternalTableRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * The basic table information.
-         * @type {TableBaseInfo || null}
-         */
-        this.TableBaseInfo = null;
-
-        /**
-         * The table fields.
-         * @type {Array.<TColumn> || null}
-         */
-        this.Columns = null;
-
-        /**
-         * The table partitions.
-         * @type {Array.<TPartition> || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * The table properties.
-         * @type {Array.<Property> || null}
-         */
-        this.Properties = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TableBaseInfo) {
-            let obj = new TableBaseInfo();
-            obj.deserialize(params.TableBaseInfo)
-            this.TableBaseInfo = obj;
-        }
-
-        if (params.Columns) {
-            this.Columns = new Array();
-            for (let z in params.Columns) {
-                let obj = new TColumn();
-                obj.deserialize(params.Columns[z]);
-                this.Columns.push(obj);
-            }
-        }
-
-        if (params.Partitions) {
-            this.Partitions = new Array();
-            for (let z in params.Partitions) {
-                let obj = new TPartition();
-                obj.deserialize(params.Partitions[z]);
-                this.Partitions.push(obj);
-            }
-        }
-
-        if (params.Properties) {
-            this.Properties = new Array();
-            for (let z in params.Properties) {
-                let obj = new Property();
-                obj.deserialize(params.Properties[z]);
-                this.Properties.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * Task type, such as SQL query.
- * @class
- */
-class Task extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * SQL query task
-         * @type {SQLTask || null}
-         */
-        this.SQLTask = null;
-
-        /**
-         * Spark SQL query task
-         * @type {SQLTask || null}
-         */
-        this.SparkSQLTask = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.SQLTask) {
-            let obj = new SQLTask();
-            obj.deserialize(params.SQLTask)
-            this.SQLTask = obj;
-        }
-
-        if (params.SparkSQLTask) {
-            let obj = new SQLTask();
-            obj.deserialize(params.SparkSQLTask)
-            this.SparkSQLTask = obj;
-        }
+        this.IsInherit = 'IsInherit' in params ? params.IsInherit : null;
 
     }
 }
@@ -1213,6 +1281,63 @@ Note: This field may return null, indicating that no valid values can be obtaine
          */
         this.CmdArgs = null;
 
+        /**
+         * The image version of the cluster.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ImageVersion = null;
+
+        /**
+         * The driver size.
+Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DriverSize = null;
+
+        /**
+         * The executor size.
+Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExecutorSize = null;
+
+        /**
+         * The executor count. The minimum value is 1 and the maximum value is less than the cluster specification.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ExecutorNums = null;
+
+        /**
+         * The maximum executor count (in dynamic mode). The minimum value is 1 and the maximum value is less than the cluster specification. If you set `ExecutorMaxNumbers` to a value smaller than that of `ExecutorNums`, the value of `ExecutorMaxNumbers` is automatically changed to that of `ExecutorNums`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ExecutorMaxNumbers = null;
+
+        /**
+         * 
+         * @type {CommonMetrics || null}
+         */
+        this.CommonMetrics = null;
+
+        /**
+         * 
+         * @type {SparkMonitorMetrics || null}
+         */
+        this.SparkMonitorMetrics = null;
+
+        /**
+         * 
+         * @type {PrestoMonitorMetrics || null}
+         */
+        this.PrestoMonitorMetrics = null;
+
     }
 
     /**
@@ -1254,6 +1379,29 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.UiUrl = 'UiUrl' in params ? params.UiUrl : null;
         this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
         this.CmdArgs = 'CmdArgs' in params ? params.CmdArgs : null;
+        this.ImageVersion = 'ImageVersion' in params ? params.ImageVersion : null;
+        this.DriverSize = 'DriverSize' in params ? params.DriverSize : null;
+        this.ExecutorSize = 'ExecutorSize' in params ? params.ExecutorSize : null;
+        this.ExecutorNums = 'ExecutorNums' in params ? params.ExecutorNums : null;
+        this.ExecutorMaxNumbers = 'ExecutorMaxNumbers' in params ? params.ExecutorMaxNumbers : null;
+
+        if (params.CommonMetrics) {
+            let obj = new CommonMetrics();
+            obj.deserialize(params.CommonMetrics)
+            this.CommonMetrics = obj;
+        }
+
+        if (params.SparkMonitorMetrics) {
+            let obj = new SparkMonitorMetrics();
+            obj.deserialize(params.SparkMonitorMetrics)
+            this.SparkMonitorMetrics = obj;
+        }
+
+        if (params.PrestoMonitorMetrics) {
+            let obj = new PrestoMonitorMetrics();
+            obj.deserialize(params.PrestoMonitorMetrics)
+            this.PrestoMonitorMetrics = obj;
+        }
 
     }
 }
@@ -1325,6 +1473,57 @@ Note: This field may return null, indicating that no valid values can be obtaine
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSparkSessionBatchSqlLog response structure.
+ * @class
+ */
+class DescribeSparkSessionBatchSqlLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The status. Valid values: `0` (initializing), `1` (successful), `2` (failed), `3` (canceled), and `4` (exception).
+         * @type {number || null}
+         */
+        this.State = null;
+
+        /**
+         * The log information list.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SparkSessionBatchLog> || null}
+         */
+        this.LogSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.State = 'State' in params ? params.State : null;
+
+        if (params.LogSet) {
+            this.LogSet = new Array();
+            for (let z in params.LogSet) {
+                let obj = new SparkSessionBatchLog();
+                obj.deserialize(params.LogSet[z]);
+                this.LogSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1483,130 +1682,12 @@ class SuspendResumeDataEngineRequest extends  AbstractModel {
 }
 
 /**
- * The task result information.
+ * Engine configurations
  * @class
  */
-class TaskResultInfo extends  AbstractModel {
+class DataEngineConfigPair extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * Unique task ID
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * Name of the default selected data source when the current job is executed
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DatasourceConnectionName = null;
-
-        /**
-         * Name of the default selected database when the current job is executed
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.DatabaseName = null;
-
-        /**
-         * The currently executed SQL statement. Each task contains one SQL statement.
-         * @type {string || null}
-         */
-        this.SQL = null;
-
-        /**
-         * Type of the executed task. Valid values: `DDL`, `DML`, `DQL`.
-         * @type {string || null}
-         */
-        this.SQLType = null;
-
-        /**
-         * Current status of the task. `0`: initial; `1`: task running; `2`: task execution succeeded; `-1`: task execution failed; `-3`: task terminated manually by the user. The task execution result will be returned only if task execution succeeds.
-         * @type {number || null}
-         */
-        this.State = null;
-
-        /**
-         * Amount of the data scanned in bytes
-         * @type {number || null}
-         */
-        this.DataAmount = null;
-
-        /**
-         * The compute time in ms.
-         * @type {number || null}
-         */
-        this.UsedTime = null;
-
-        /**
-         * Address of the COS bucket for storing the task result
-         * @type {string || null}
-         */
-        this.OutputPath = null;
-
-        /**
-         * Task creation timestamp
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * Task execution information. `success` will be returned if the task succeeds; otherwise, the failure cause will be returned.
-         * @type {string || null}
-         */
-        this.OutputMessage = null;
-
-        /**
-         * Number of affected rows
-         * @type {string || null}
-         */
-        this.RowAffectInfo = null;
-
-        /**
-         * Schema information of the result
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {Array.<Column> || null}
-         */
-        this.ResultSchema = null;
-
-        /**
-         * Result information. After it is unescaped, each element of the outer array is a data row.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
-         */
-        this.ResultSet = null;
-
-        /**
-         * Pagination information. If there is no more result data, `nextToken` will be empty.
-         * @type {string || null}
-         */
-        this.NextToken = null;
-
-        /**
-         * Task progress (%)
-         * @type {number || null}
-         */
-        this.Percentage = null;
-
-        /**
-         * Task progress details
-         * @type {string || null}
-         */
-        this.ProgressDetail = null;
-
-        /**
-         * Console display format. Valid values: `table`, `text`.
-         * @type {string || null}
-         */
-        this.DisplayFormat = null;
-
-        /**
-         * The task time in ms.
-         * @type {number || null}
-         */
-        this.TotalTime = null;
 
     }
 
@@ -1617,33 +1698,6 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.SQL = 'SQL' in params ? params.SQL : null;
-        this.SQLType = 'SQLType' in params ? params.SQLType : null;
-        this.State = 'State' in params ? params.State : null;
-        this.DataAmount = 'DataAmount' in params ? params.DataAmount : null;
-        this.UsedTime = 'UsedTime' in params ? params.UsedTime : null;
-        this.OutputPath = 'OutputPath' in params ? params.OutputPath : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.OutputMessage = 'OutputMessage' in params ? params.OutputMessage : null;
-        this.RowAffectInfo = 'RowAffectInfo' in params ? params.RowAffectInfo : null;
-
-        if (params.ResultSchema) {
-            this.ResultSchema = new Array();
-            for (let z in params.ResultSchema) {
-                let obj = new Column();
-                obj.deserialize(params.ResultSchema[z]);
-                this.ResultSchema.push(obj);
-            }
-        }
-        this.ResultSet = 'ResultSet' in params ? params.ResultSet : null;
-        this.NextToken = 'NextToken' in params ? params.NextToken : null;
-        this.Percentage = 'Percentage' in params ? params.Percentage : null;
-        this.ProgressDetail = 'ProgressDetail' in params ? params.ProgressDetail : null;
-        this.DisplayFormat = 'DisplayFormat' in params ? params.DisplayFormat : null;
-        this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
 
     }
 }
@@ -1763,6 +1817,41 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
+ * 
+ * @class
+ */
+class SparkMonitorMetrics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ShuffleWriteBytesCos = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ShuffleWriteBytesTotal = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShuffleWriteBytesCos = 'ShuffleWriteBytesCos' in params ? params.ShuffleWriteBytesCos : null;
+        this.ShuffleWriteBytesTotal = 'ShuffleWriteBytesTotal' in params ? params.ShuffleWriteBytesTotal : null;
+
+    }
+}
+
+/**
  * SuspendResumeDataEngine response structure.
  * @class
  */
@@ -1798,26 +1887,24 @@ class SuspendResumeDataEngineResponse extends  AbstractModel {
 }
 
 /**
- * Tag pair info
+ * Task type, such as SQL query.
  * @class
  */
-class TagInfo extends  AbstractModel {
+class Task extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The tag key.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * SQL query task
+         * @type {SQLTask || null}
          */
-        this.TagKey = null;
+        this.SQLTask = null;
 
         /**
-         * The tag value.
-Note: This field may return null, indicating that no valid values can be obtained.
-         * @type {string || null}
+         * Spark SQL query task
+         * @type {SQLTask || null}
          */
-        this.TagValue = null;
+        this.SparkSQLTask = null;
 
     }
 
@@ -1828,31 +1915,35 @@ Note: This field may return null, indicating that no valid values can be obtaine
         if (!params) {
             return;
         }
-        this.TagKey = 'TagKey' in params ? params.TagKey : null;
-        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+        if (params.SQLTask) {
+            let obj = new SQLTask();
+            obj.deserialize(params.SQLTask)
+            this.SQLTask = obj;
+        }
+
+        if (params.SparkSQLTask) {
+            let obj = new SQLTask();
+            obj.deserialize(params.SparkSQLTask)
+            this.SparkSQLTask = obj;
+        }
 
     }
 }
 
 /**
- * SwitchDataEngine request structure.
+ * CancelSparkSessionBatchSQL request structure.
  * @class
  */
-class SwitchDataEngineRequest extends  AbstractModel {
+class CancelSparkSessionBatchSQLRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The name of the primary cluster.
+         * The unique identifier of a batch task.
          * @type {string || null}
          */
-        this.DataEngineName = null;
-
-        /**
-         * Whether to start the standby cluster.
-         * @type {boolean || null}
-         */
-        this.StartStandbyCluster = null;
+        this.BatchId = null;
 
     }
 
@@ -1863,8 +1954,125 @@ class SwitchDataEngineRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
-        this.StartStandbyCluster = 'StartStandbyCluster' in params ? params.StartStandbyCluster : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+
+    }
+}
+
+/**
+ * The session resource configuration template for a Spark cluster.
+ * @class
+ */
+class SessionResourceTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The driver size.
+Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DriverSize = null;
+
+        /**
+         * The executor size.
+Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ExecutorSize = null;
+
+        /**
+         * The executor count. The minimum value is 1 and the maximum value is less than the cluster specification.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ExecutorNums = null;
+
+        /**
+         * The maximum executor count (in dynamic mode). The minimum value is 1 and the maximum value is less than the cluster specification. If you set `ExecutorMaxNumbers` to a value smaller than that of `ExecutorNums`, the value of `ExecutorMaxNumbers` is automatically changed to that of `ExecutorNums`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.ExecutorMaxNumbers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DriverSize = 'DriverSize' in params ? params.DriverSize : null;
+        this.ExecutorSize = 'ExecutorSize' in params ? params.ExecutorSize : null;
+        this.ExecutorNums = 'ExecutorNums' in params ? params.ExecutorNums : null;
+        this.ExecutorMaxNumbers = 'ExecutorMaxNumbers' in params ? params.ExecutorMaxNumbers : null;
+
+    }
+}
+
+/**
+ * Running logs of a Spark SQL batch job
+ * @class
+ */
+class SparkSessionBatchLog extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The log step. Valid values: `BEG`, `CS`, `DS`, `DSS`, `DSF`, `FINF`, `RTO`, `CANCEL`, `CT`, `DT`, `DTS`, `DTF`, `FINT`, and `EXCE`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Step = null;
+
+        /**
+         * Time.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * The log message.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * The operation.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<SparkSessionBatchLogOperate> || null}
+         */
+        this.Operate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Step = 'Step' in params ? params.Step : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Operate) {
+            this.Operate = new Array();
+            for (let z in params.Operate) {
+                let obj = new SparkSessionBatchLogOperate();
+                obj.deserialize(params.Operate[z]);
+                this.Operate.push(obj);
+            }
+        }
 
     }
 }
@@ -2060,18 +2268,26 @@ class DescribeSparkAppJobsRequest extends  AbstractModel {
 }
 
 /**
- * UpdateRowFilter response structure.
+ * Tag pair info
  * @class
  */
-class UpdateRowFilterResponse extends  AbstractModel {
+class TagInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * The tag key.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TagKey = null;
+
+        /**
+         * The tag value.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.TagValue = null;
 
     }
 
@@ -2082,7 +2298,61 @@ class UpdateRowFilterResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * Operation information in the logs of a Spark SQL batch job
+ * @class
+ */
+class SparkSessionBatchLogOperate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The operation message.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * The operation type. Valid values: `COPY`, `LOG`, `UI`, `RESULT`, `List`, and `TAB`.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.Operate = null;
+
+        /**
+         * Additional information, such as taskid, sessionid, and sparkui.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<KVPair> || null}
+         */
+        this.Supplement = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Operate = 'Operate' in params ? params.Operate : null;
+
+        if (params.Supplement) {
+            this.Supplement = new Array();
+            for (let z in params.Supplement) {
+                let obj = new KVPair();
+                obj.deserialize(params.Supplement[z]);
+                this.Supplement.push(obj);
+            }
+        }
 
     }
 }
@@ -2193,36 +2463,24 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * The task overview.
+ * SwitchDataEngine request structure.
  * @class
  */
-class TasksOverview extends  AbstractModel {
+class SwitchDataEngineRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The number of tasks in queue.
-         * @type {number || null}
+         * The name of the primary cluster.
+         * @type {string || null}
          */
-        this.TaskQueuedCount = null;
+        this.DataEngineName = null;
 
         /**
-         * The number of initialized tasks.
-         * @type {number || null}
+         * Whether to start the standby cluster.
+         * @type {boolean || null}
          */
-        this.TaskInitCount = null;
-
-        /**
-         * The number of tasks in progress.
-         * @type {number || null}
-         */
-        this.TaskRunningCount = null;
-
-        /**
-         * The total number of tasks in this time range.
-         * @type {number || null}
-         */
-        this.TotalTaskCount = null;
+        this.StartStandbyCluster = null;
 
     }
 
@@ -2233,10 +2491,8 @@ class TasksOverview extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskQueuedCount = 'TaskQueuedCount' in params ? params.TaskQueuedCount : null;
-        this.TaskInitCount = 'TaskInitCount' in params ? params.TaskInitCount : null;
-        this.TaskRunningCount = 'TaskRunningCount' in params ? params.TaskRunningCount : null;
-        this.TotalTaskCount = 'TotalTaskCount' in params ? params.TotalTaskCount : null;
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.StartStandbyCluster = 'StartStandbyCluster' in params ? params.StartStandbyCluster : null;
 
     }
 }
@@ -2411,6 +2667,12 @@ class CreateSparkAppRequest extends  AbstractModel {
          */
         this.SessionId = null;
 
+        /**
+         * Whether to inherit the task resource configuration from the cluster template. Valid values: `0` (default): No; `1`: Yes.
+         * @type {number || null}
+         */
+        this.IsInherit = null;
+
     }
 
     /**
@@ -2447,6 +2709,7 @@ class CreateSparkAppRequest extends  AbstractModel {
         this.SparkImageVersion = 'SparkImageVersion' in params ? params.SparkImageVersion : null;
         this.AppExecutorMaxNumbers = 'AppExecutorMaxNumbers' in params ? params.AppExecutorMaxNumbers : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.IsInherit = 'IsInherit' in params ? params.IsInherit : null;
 
     }
 }
@@ -2592,6 +2855,105 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
         this.IsPartition = 'IsPartition' in params ? params.IsPartition : null;
+
+    }
+}
+
+/**
+ * CreateSparkSessionBatchSQL request structure.
+ * @class
+ */
+class CreateSparkSessionBatchSQLRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The name of the engine for executing the Spark job.
+         * @type {string || null}
+         */
+        this.DataEngineName = null;
+
+        /**
+         * The SQL statement to execute.
+         * @type {string || null}
+         */
+        this.ExecuteSQL = null;
+
+        /**
+         * The driver size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
+         * @type {string || null}
+         */
+        this.DriverSize = null;
+
+        /**
+         * The executor size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
+         * @type {string || null}
+         */
+        this.ExecutorSize = null;
+
+        /**
+         * The executor count, which defaults to 1.
+         * @type {number || null}
+         */
+        this.ExecutorNumbers = null;
+
+        /**
+         * The maximum executor count, which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the value of this parameter is the same as that of `ExecutorNumbers`.
+         * @type {number || null}
+         */
+        this.ExecutorMaxNumbers = null;
+
+        /**
+         * The session timeout period in seconds. Default value: 3600
+         * @type {number || null}
+         */
+        this.TimeoutInSecond = null;
+
+        /**
+         * The unique ID of a session. If this parameter is specified, the task will be run using the specified session.
+         * @type {string || null}
+         */
+        this.SessionId = null;
+
+        /**
+         * The name of the session to create.
+         * @type {string || null}
+         */
+        this.SessionName = null;
+
+        /**
+         * Session configurations. `dlc.eni`, `dlc.role.arn`, `dlc.sql.set.config`, and user-defined configurations are supported.
+         * @type {Array.<KVPair> || null}
+         */
+        this.Arguments = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataEngineName = 'DataEngineName' in params ? params.DataEngineName : null;
+        this.ExecuteSQL = 'ExecuteSQL' in params ? params.ExecuteSQL : null;
+        this.DriverSize = 'DriverSize' in params ? params.DriverSize : null;
+        this.ExecutorSize = 'ExecutorSize' in params ? params.ExecutorSize : null;
+        this.ExecutorNumbers = 'ExecutorNumbers' in params ? params.ExecutorNumbers : null;
+        this.ExecutorMaxNumbers = 'ExecutorMaxNumbers' in params ? params.ExecutorMaxNumbers : null;
+        this.TimeoutInSecond = 'TimeoutInSecond' in params ? params.TimeoutInSecond : null;
+        this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.SessionName = 'SessionName' in params ? params.SessionName : null;
+
+        if (params.Arguments) {
+            this.Arguments = new Array();
+            for (let z in params.Arguments) {
+                let obj = new KVPair();
+                obj.deserialize(params.Arguments[z]);
+                this.Arguments.push(obj);
+            }
+        }
 
     }
 }
@@ -2860,6 +3222,12 @@ class CreateDataEngineRequest extends  AbstractModel {
          */
         this.ElasticLimit = null;
 
+        /**
+         * The session resource configuration template for a Spark job cluster.
+         * @type {SessionResourceTemplate || null}
+         */
+        this.SessionResourceTemplate = null;
+
     }
 
     /**
@@ -2919,6 +3287,86 @@ class CreateDataEngineRequest extends  AbstractModel {
         this.MainClusterName = 'MainClusterName' in params ? params.MainClusterName : null;
         this.ElasticSwitch = 'ElasticSwitch' in params ? params.ElasticSwitch : null;
         this.ElasticLimit = 'ElasticLimit' in params ? params.ElasticLimit : null;
+
+        if (params.SessionResourceTemplate) {
+            let obj = new SessionResourceTemplate();
+            obj.deserialize(params.SessionResourceTemplate)
+            this.SessionResourceTemplate = obj;
+        }
+
+    }
+}
+
+/**
+ * ModifySparkAppBatch request structure.
+ * @class
+ */
+class ModifySparkAppBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The list of the IDs of the Spark job tasks to be modified in batches.
+         * @type {Array.<string> || null}
+         */
+        this.SparkAppId = null;
+
+        /**
+         * The engine ID.
+         * @type {string || null}
+         */
+        this.DataEngine = null;
+
+        /**
+         * The driver size.
+Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+         * @type {string || null}
+         */
+        this.AppDriverSize = null;
+
+        /**
+         * The executor size.
+Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+         * @type {string || null}
+         */
+        this.AppExecutorSize = null;
+
+        /**
+         * The executor count. The minimum value is 1 and the maximum value is less than the cluster specification.
+         * @type {number || null}
+         */
+        this.AppExecutorNums = null;
+
+        /**
+         * The maximum executor count (in dynamic configuration scenarios). The minimum value is 1 and the maximum value is less than the cluster specification. If you set `ExecutorMaxNumbers` to a value smaller than that of `ExecutorNums`, the value of `ExecutorMaxNumbers` is automatically changed to that of `ExecutorNums`.
+         * @type {number || null}
+         */
+        this.AppExecutorMaxNumbers = null;
+
+        /**
+         * Whether to inherit the task resource configuration from the cluster template. Valid values: `0` (default): No; `1`: Yes.
+         * @type {number || null}
+         */
+        this.IsInherit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SparkAppId = 'SparkAppId' in params ? params.SparkAppId : null;
+        this.DataEngine = 'DataEngine' in params ? params.DataEngine : null;
+        this.AppDriverSize = 'AppDriverSize' in params ? params.AppDriverSize : null;
+        this.AppExecutorSize = 'AppExecutorSize' in params ? params.AppExecutorSize : null;
+        this.AppExecutorNums = 'AppExecutorNums' in params ? params.AppExecutorNums : null;
+        this.AppExecutorMaxNumbers = 'AppExecutorMaxNumbers' in params ? params.AppExecutorMaxNumbers : null;
+        this.IsInherit = 'IsInherit' in params ? params.IsInherit : null;
 
     }
 }
@@ -3064,6 +3512,55 @@ class ModifySparkAppResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * The task overview.
+ * @class
+ */
+class TasksOverview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The number of tasks in queue.
+         * @type {number || null}
+         */
+        this.TaskQueuedCount = null;
+
+        /**
+         * The number of initialized tasks.
+         * @type {number || null}
+         */
+        this.TaskInitCount = null;
+
+        /**
+         * The number of tasks in progress.
+         * @type {number || null}
+         */
+        this.TaskRunningCount = null;
+
+        /**
+         * The total number of tasks in this time range.
+         * @type {number || null}
+         */
+        this.TotalTaskCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskQueuedCount = 'TaskQueuedCount' in params ? params.TaskQueuedCount : null;
+        this.TaskInitCount = 'TaskInitCount' in params ? params.TaskInitCount : null;
+        this.TaskRunningCount = 'TaskRunningCount' in params ? params.TaskRunningCount : null;
+        this.TotalTaskCount = 'TotalTaskCount' in params ? params.TotalTaskCount : null;
 
     }
 }
@@ -3347,16 +3844,25 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SessionId = null;
 
         /**
-         * 
+         * `spark_emr_livy` indicates to create an EMR cluster.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DataEngineClusterType = null;
 
         /**
-         * 
+         * `Spark 3.2-EMR` indicates to use the Spark 3.2 image.
+Note: This field may return null, indicating that no valid values can be obtained.
          * @type {string || null}
          */
         this.DataEngineImageVersion = null;
+
+        /**
+         * Whether the task resource configuration is inherited from the cluster template. Valid values: `0` (default): No; `1`: Yes.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.IsInherit = null;
 
     }
 
@@ -3411,6 +3917,7 @@ Note: This field may return null, indicating that no valid values can be obtaine
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.DataEngineClusterType = 'DataEngineClusterType' in params ? params.DataEngineClusterType : null;
         this.DataEngineImageVersion = 'DataEngineImageVersion' in params ? params.DataEngineImageVersion : null;
+        this.IsInherit = 'IsInherit' in params ? params.IsInherit : null;
 
     }
 }
@@ -3560,6 +4067,12 @@ class GenerateCreateMangedTableSqlRequest extends  AbstractModel {
          */
         this.Properties = null;
 
+        /**
+         * The Upsert key for a v2 table (in Upsert mode).
+         * @type {Array.<string> || null}
+         */
+        this.UpsertKeys = null;
+
     }
 
     /**
@@ -3602,6 +4115,7 @@ class GenerateCreateMangedTableSqlRequest extends  AbstractModel {
                 this.Properties.push(obj);
             }
         }
+        this.UpsertKeys = 'UpsertKeys' in params ? params.UpsertKeys : null;
 
     }
 }
@@ -3642,6 +4156,20 @@ class DataGovernPolicy extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * Governance rule type. Valid values: `Customize` (custom) and `Intelligence` (intelligent).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * The governance engine.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.GovernEngine = null;
+
     }
 
     /**
@@ -3651,6 +4179,8 @@ class DataGovernPolicy extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.GovernEngine = 'GovernEngine' in params ? params.GovernEngine : null;
 
     }
 }
@@ -3660,6 +4190,34 @@ class DataGovernPolicy extends  AbstractModel {
  * @class
  */
 class ModifyGovernEventRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SwitchDataEngine response structure.
+ * @class
+ */
+class SwitchDataEngineResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3755,6 +4313,34 @@ class SQLTask extends  AbstractModel {
 }
 
 /**
+ * DescribeSparkSessionBatchSqlLog request structure.
+ * @class
+ */
+class DescribeSparkSessionBatchSqlLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique ID of a Spark SQL job.
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+
+    }
+}
+
+/**
  * DescribeLakeFsInfo request structure.
  * @class
  */
@@ -3771,6 +4357,34 @@ class DescribeLakeFsInfoRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * UpdateRowFilter response structure.
+ * @class
+ */
+class UpdateRowFilterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4186,18 +4800,78 @@ Note: This field may return null, indicating that no valid values can be obtaine
 }
 
 /**
- * SwitchDataEngine response structure.
+ * 
  * @class
  */
-class SwitchDataEngineResponse extends  AbstractModel {
+class CommonMetrics extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * 
+         * @type {number || null}
+         */
+        this.CreateTaskTime = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ProcessTime = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.QueueTime = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ExecutionTime = null;
+
+        /**
+         * 
+         * @type {boolean || null}
+         */
+        this.IsResultCacheHit = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.MatchedMVBytes = null;
+
+        /**
+         * 
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.MatchedMVs = null;
+
+        /**
+         * 
+         * @type {string || null}
+         */
+        this.AffectedBytes = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.AffectedRows = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ProcessedBytes = null;
+
+        /**
+         * 
+         * @type {number || null}
+         */
+        this.ProcessedRows = null;
 
     }
 
@@ -4208,7 +4882,17 @@ class SwitchDataEngineResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CreateTaskTime = 'CreateTaskTime' in params ? params.CreateTaskTime : null;
+        this.ProcessTime = 'ProcessTime' in params ? params.ProcessTime : null;
+        this.QueueTime = 'QueueTime' in params ? params.QueueTime : null;
+        this.ExecutionTime = 'ExecutionTime' in params ? params.ExecutionTime : null;
+        this.IsResultCacheHit = 'IsResultCacheHit' in params ? params.IsResultCacheHit : null;
+        this.MatchedMVBytes = 'MatchedMVBytes' in params ? params.MatchedMVBytes : null;
+        this.MatchedMVs = 'MatchedMVs' in params ? params.MatchedMVs : null;
+        this.AffectedBytes = 'AffectedBytes' in params ? params.AffectedBytes : null;
+        this.AffectedRows = 'AffectedRows' in params ? params.AffectedRows : null;
+        this.ProcessedBytes = 'ProcessedBytes' in params ? params.ProcessedBytes : null;
+        this.ProcessedRows = 'ProcessedRows' in params ? params.ProcessedRows : null;
 
     }
 }
@@ -4291,6 +4975,172 @@ class TPartition extends  AbstractModel {
 }
 
 /**
+ * The task result information.
+ * @class
+ */
+class TaskResultInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Unique task ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * Name of the default selected data source when the current job is executed
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DatasourceConnectionName = null;
+
+        /**
+         * Name of the default selected database when the current job is executed
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * The currently executed SQL statement. Each task contains one SQL statement.
+         * @type {string || null}
+         */
+        this.SQL = null;
+
+        /**
+         * Type of the executed task. Valid values: `DDL`, `DML`, `DQL`.
+         * @type {string || null}
+         */
+        this.SQLType = null;
+
+        /**
+         * Current status of the task. `0`: initial; `1`: task running; `2`: task execution succeeded; `-1`: task execution failed; `-3`: task terminated manually by the user. The task execution result will be returned only if task execution succeeds.
+         * @type {number || null}
+         */
+        this.State = null;
+
+        /**
+         * Amount of the data scanned in bytes
+         * @type {number || null}
+         */
+        this.DataAmount = null;
+
+        /**
+         * The compute time in ms.
+         * @type {number || null}
+         */
+        this.UsedTime = null;
+
+        /**
+         * Address of the COS bucket for storing the task result
+         * @type {string || null}
+         */
+        this.OutputPath = null;
+
+        /**
+         * Task creation timestamp
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * Task execution information. `success` will be returned if the task succeeds; otherwise, the failure cause will be returned.
+         * @type {string || null}
+         */
+        this.OutputMessage = null;
+
+        /**
+         * Number of affected rows
+         * @type {string || null}
+         */
+        this.RowAffectInfo = null;
+
+        /**
+         * Schema information of the result
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<Column> || null}
+         */
+        this.ResultSchema = null;
+
+        /**
+         * Result information. After it is unescaped, each element of the outer array is a data row.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.ResultSet = null;
+
+        /**
+         * Pagination information. If there is no more result data, `nextToken` will be empty.
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * Task progress (%)
+         * @type {number || null}
+         */
+        this.Percentage = null;
+
+        /**
+         * Task progress details
+         * @type {string || null}
+         */
+        this.ProgressDetail = null;
+
+        /**
+         * Console display format. Valid values: `table`, `text`.
+         * @type {string || null}
+         */
+        this.DisplayFormat = null;
+
+        /**
+         * The task time in ms.
+         * @type {number || null}
+         */
+        this.TotalTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.DatasourceConnectionName = 'DatasourceConnectionName' in params ? params.DatasourceConnectionName : null;
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.SQL = 'SQL' in params ? params.SQL : null;
+        this.SQLType = 'SQLType' in params ? params.SQLType : null;
+        this.State = 'State' in params ? params.State : null;
+        this.DataAmount = 'DataAmount' in params ? params.DataAmount : null;
+        this.UsedTime = 'UsedTime' in params ? params.UsedTime : null;
+        this.OutputPath = 'OutputPath' in params ? params.OutputPath : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.OutputMessage = 'OutputMessage' in params ? params.OutputMessage : null;
+        this.RowAffectInfo = 'RowAffectInfo' in params ? params.RowAffectInfo : null;
+
+        if (params.ResultSchema) {
+            this.ResultSchema = new Array();
+            for (let z in params.ResultSchema) {
+                let obj = new Column();
+                obj.deserialize(params.ResultSchema[z]);
+                this.ResultSchema.push(obj);
+            }
+        }
+        this.ResultSet = 'ResultSet' in params ? params.ResultSet : null;
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.Percentage = 'Percentage' in params ? params.Percentage : null;
+        this.ProgressDetail = 'ProgressDetail' in params ? params.ProgressDetail : null;
+        this.DisplayFormat = 'DisplayFormat' in params ? params.DisplayFormat : null;
+        this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
+
+    }
+}
+
+/**
  * DescribeLakeFsInfo response structure.
  * @class
  */
@@ -4319,12 +5169,18 @@ class DescribeLakeFsInfoResponse extends  AbstractModel {
 }
 
 /**
- * Engine configurations
+ * CancelSparkSessionBatchSQL response structure.
  * @class
  */
-class DataEngineConfigPair extends  AbstractModel {
+class CancelSparkSessionBatchSQLResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4335,6 +5191,7 @@ class DataEngineConfigPair extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4424,18 +5281,20 @@ class DescribeResultDownloadRequest extends  AbstractModel {
 }
 
 module.exports = {
+    TableBaseInfo: TableBaseInfo,
     DescribeResultDownloadResponse: DescribeResultDownloadResponse,
     DescribeTaskResultResponse: DescribeTaskResultResponse,
     DescribeTasksRequest: DescribeTasksRequest,
     CreateSparkAppTaskRequest: CreateSparkAppTaskRequest,
-    ModifySparkAppRequest: ModifySparkAppRequest,
+    PrestoMonitorMetrics: PrestoMonitorMetrics,
+    ModifySparkAppBatchResponse: ModifySparkAppBatchResponse,
     DescribeForbiddenTableProResponse: DescribeForbiddenTableProResponse,
     KVPair: KVPair,
-    TableBaseInfo: TableBaseInfo,
+    CreateSparkSessionBatchSQLResponse: CreateSparkSessionBatchSQLResponse,
     DescribeLakeFsDirSummaryRequest: DescribeLakeFsDirSummaryRequest,
     GenerateCreateMangedTableSqlResponse: GenerateCreateMangedTableSqlResponse,
     CreateInternalTableRequest: CreateInternalTableRequest,
-    Task: Task,
+    ModifySparkAppRequest: ModifySparkAppRequest,
     DescribeSparkAppJobRequest: DescribeSparkAppJobRequest,
     TasksInfo: TasksInfo,
     CreateSparkAppTaskResponse: CreateSparkAppTaskResponse,
@@ -4443,35 +5302,43 @@ module.exports = {
     TaskResponseInfo: TaskResponseInfo,
     CreateSparkAppResponse: CreateSparkAppResponse,
     CreateTaskResponse: CreateTaskResponse,
+    DescribeSparkSessionBatchSqlLogResponse: DescribeSparkSessionBatchSqlLogResponse,
     DeleteSparkAppResponse: DeleteSparkAppResponse,
     CreateResultDownloadResponse: CreateResultDownloadResponse,
     CreateTasksRequest: CreateTasksRequest,
     SuspendResumeDataEngineRequest: SuspendResumeDataEngineRequest,
-    TaskResultInfo: TaskResultInfo,
+    DataEngineConfigPair: DataEngineConfigPair,
     DescribeSparkAppJobsResponse: DescribeSparkAppJobsResponse,
     DescribeSparkAppTasksResponse: DescribeSparkAppTasksResponse,
+    SparkMonitorMetrics: SparkMonitorMetrics,
     SuspendResumeDataEngineResponse: SuspendResumeDataEngineResponse,
-    TagInfo: TagInfo,
-    SwitchDataEngineRequest: SwitchDataEngineRequest,
+    Task: Task,
+    CancelSparkSessionBatchSQLRequest: CancelSparkSessionBatchSQLRequest,
+    SessionResourceTemplate: SessionResourceTemplate,
+    SparkSessionBatchLog: SparkSessionBatchLog,
     DescribeEngineUsageInfoRequest: DescribeEngineUsageInfoRequest,
     DeleteSparkAppRequest: DeleteSparkAppRequest,
     DescribeForbiddenTableProRequest: DescribeForbiddenTableProRequest,
     CreateDataEngineResponse: CreateDataEngineResponse,
     DescribeSparkAppJobsRequest: DescribeSparkAppJobsRequest,
-    UpdateRowFilterResponse: UpdateRowFilterResponse,
+    TagInfo: TagInfo,
+    SparkSessionBatchLogOperate: SparkSessionBatchLogOperate,
     CreateTasksResponse: CreateTasksResponse,
     DescribeTasksResponse: DescribeTasksResponse,
-    TasksOverview: TasksOverview,
+    SwitchDataEngineRequest: SwitchDataEngineRequest,
     CreateSparkAppRequest: CreateSparkAppRequest,
     CrontabResumeSuspendStrategy: CrontabResumeSuspendStrategy,
     Column: Column,
+    CreateSparkSessionBatchSQLRequest: CreateSparkSessionBatchSQLRequest,
     DescribeTaskResultRequest: DescribeTaskResultRequest,
     UpdateRowFilterRequest: UpdateRowFilterRequest,
     CreateDataEngineRequest: CreateDataEngineRequest,
+    ModifySparkAppBatchRequest: ModifySparkAppBatchRequest,
     Filter: Filter,
     DescribeLakeFsDirSummaryResponse: DescribeLakeFsDirSummaryResponse,
     CreateTaskRequest: CreateTaskRequest,
     ModifySparkAppResponse: ModifySparkAppResponse,
+    TasksOverview: TasksOverview,
     CreateInternalTableResponse: CreateInternalTableResponse,
     SparkJobInfo: SparkJobInfo,
     DescribeSparkAppTasksRequest: DescribeSparkAppTasksRequest,
@@ -4480,19 +5347,23 @@ module.exports = {
     CancelTaskResponse: CancelTaskResponse,
     DataGovernPolicy: DataGovernPolicy,
     ModifyGovernEventRuleResponse: ModifyGovernEventRuleResponse,
+    SwitchDataEngineResponse: SwitchDataEngineResponse,
     Execution: Execution,
     SQLTask: SQLTask,
+    DescribeSparkSessionBatchSqlLogRequest: DescribeSparkSessionBatchSqlLogRequest,
     DescribeLakeFsInfoRequest: DescribeLakeFsInfoRequest,
+    UpdateRowFilterResponse: UpdateRowFilterResponse,
     CreateResultDownloadRequest: CreateResultDownloadRequest,
     DescribeSparkAppJobResponse: DescribeSparkAppJobResponse,
     DescribeEngineUsageInfoResponse: DescribeEngineUsageInfoResponse,
     StreamingStatistics: StreamingStatistics,
     ModifyGovernEventRuleRequest: ModifyGovernEventRuleRequest,
     Policy: Policy,
-    SwitchDataEngineResponse: SwitchDataEngineResponse,
+    CommonMetrics: CommonMetrics,
     TPartition: TPartition,
+    TaskResultInfo: TaskResultInfo,
     DescribeLakeFsInfoResponse: DescribeLakeFsInfoResponse,
-    DataEngineConfigPair: DataEngineConfigPair,
+    CancelSparkSessionBatchSQLResponse: CancelSparkSessionBatchSQLResponse,
     TColumn: TColumn,
     DescribeResultDownloadRequest: DescribeResultDownloadRequest,
 

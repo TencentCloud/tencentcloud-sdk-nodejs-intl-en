@@ -1819,6 +1819,62 @@ class ModifyBaseBackupExpireTimeResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyBackupDownloadRestriction request structure.
+ * @class
+ */
+class ModifyBackupDownloadRestrictionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of the network restrictions for downloading a backup file. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+         * @type {string || null}
+         */
+        this.RestrictionType = null;
+
+        /**
+         * Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         * @type {string || null}
+         */
+        this.VpcRestrictionEffect = null;
+
+        /**
+         * Whether it is allowed to download the VPC ID list of the backup files.
+         * @type {Array.<string> || null}
+         */
+        this.VpcIdSet = null;
+
+        /**
+         * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+         * @type {string || null}
+         */
+        this.IpRestrictionEffect = null;
+
+        /**
+         * Whether it is allowed to download the IP list of the backup files.
+         * @type {Array.<string> || null}
+         */
+        this.IpSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RestrictionType = 'RestrictionType' in params ? params.RestrictionType : null;
+        this.VpcRestrictionEffect = 'VpcRestrictionEffect' in params ? params.VpcRestrictionEffect : null;
+        this.VpcIdSet = 'VpcIdSet' in params ? params.VpcIdSet : null;
+        this.IpRestrictionEffect = 'IpRestrictionEffect' in params ? params.IpRestrictionEffect : null;
+        this.IpSet = 'IpSet' in params ? params.IpSet : null;
+
+    }
+}
+
+/**
  * Instance network connection information
  * @class
  */
@@ -2063,6 +2119,27 @@ class DeleteReadOnlyGroupNetworkAccessRequest extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.Vip = 'Vip' in params ? params.Vip : null;
+
+    }
+}
+
+/**
+ * DescribeBackupDownloadRestriction request structure.
+ * @class
+ */
+class DescribeBackupDownloadRestrictionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -2478,6 +2555,12 @@ class CreateBaseBackupResponse extends  AbstractModel {
         super();
 
         /**
+         * Full backup set ID
+         * @type {string || null}
+         */
+        this.BaseBackupId = null;
+
+        /**
          * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
@@ -2492,6 +2575,7 @@ class CreateBaseBackupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.BaseBackupId = 'BaseBackupId' in params ? params.BaseBackupId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4008,6 +4092,34 @@ Note: This field may return `null`, indicating that no valid value was found.
             }
         }
         this.SupportKMSRegions = 'SupportKMSRegions' in params ? params.SupportKMSRegions : null;
+
+    }
+}
+
+/**
+ * ModifyBackupDownloadRestriction response structure.
+ * @class
+ */
+class ModifyBackupDownloadRestrictionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7477,7 +7589,7 @@ class DBInstance extends  AbstractModel {
         this.DBInstanceName = null;
 
         /**
-         * Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`, upgrading (upgrading kernel version).
+         * Instance status.  Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolating`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`, `upgrading` (upgrading kernel version).
          * @type {string || null}
          */
         this.DBInstanceStatus = null;
@@ -7928,7 +8040,7 @@ class DescribeReadOnlyGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * Filter condition. The primary ID must be specified in the format of `db-master-instance-id` to filter results, or else `null` will be returned.
+         * Filter instances by using one or more filters. Valid values:  `db-master-instance-id` (filter by the primary instance ID in string), `read-only-group-id` (filter by the read-only group ID in string),
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -8288,6 +8400,73 @@ class CloseDBExtranetAccessResponse extends  AbstractModel {
             return;
         }
         this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBackupDownloadRestriction response structure.
+ * @class
+ */
+class DescribeBackupDownloadRestrictionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Type of the network restrictions for downloading a backup file. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+         * @type {string || null}
+         */
+        this.RestrictionType = null;
+
+        /**
+         * Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny). 
+Note:  This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.VpcRestrictionEffect = null;
+
+        /**
+         * Whether it is allowed to download the VPC ID list of the backup files. 
+Note:  This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.VpcIdSet = null;
+
+        /**
+         * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny). 
+Note: Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {string || null}
+         */
+        this.IpRestrictionEffect = null;
+
+        /**
+         * Whether it is allowed to download the IP list of the backup files. 
+Note:  This field may return null, indicating that no valid values can be obtained.
+         * @type {Array.<string> || null}
+         */
+        this.IpSet = null;
+
+        /**
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RestrictionType = 'RestrictionType' in params ? params.RestrictionType : null;
+        this.VpcRestrictionEffect = 'VpcRestrictionEffect' in params ? params.VpcRestrictionEffect : null;
+        this.VpcIdSet = 'VpcIdSet' in params ? params.VpcIdSet : null;
+        this.IpRestrictionEffect = 'IpRestrictionEffect' in params ? params.IpRestrictionEffect : null;
+        this.IpSet = 'IpSet' in params ? params.IpSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10423,6 +10602,62 @@ class DescribeAccountsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceChargeType request structure.
+ * @class
+ */
+class ModifyDBInstanceChargeTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID in the format of `postgres-6fego161`
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Instance billing mode.  Valid values:  `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go). Default value:  `PREPAID`.
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * Validity period  in months. Valid values:  Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * Renewal flag. Valid values；  Valid values: `0` (manual renewal), `1` (auto-renewal).
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+
+    }
+}
+
+/**
  * DescribeParameterTemplateAttributes response structure.
  * @class
  */
@@ -11019,6 +11254,74 @@ class DescribeDBXlogsResponse extends  AbstractModel {
 }
 
 /**
+ * UpgradeDBInstanceKernelVersion request structure.
+ * @class
+ */
+class UpgradeDBInstanceKernelVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Instance ID
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * Target kernel version, which can be obtained in the `AvailableUpgradeTarget` field returned by the `DescribeDBVersions` API.
+         * @type {string || null}
+         */
+        this.TargetDBKernelVersion = null;
+
+        /**
+         * Switch time after the kernel version upgrade. Valid values:
+`0` (default value): Switch now.
+`1`: Switch at the specified time.
+`2`: Switch in the maintenance time.
+         * @type {number || null}
+         */
+        this.SwitchTag = null;
+
+        /**
+         * Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is `0` or `2`, this parameter is invalid.
+         * @type {string || null}
+         */
+        this.SwitchStartTime = null;
+
+        /**
+         * Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is `0` or `2`, this parameter is invalid. The difference between `SwitchStartTime` and `SwitchEndTime` cannot be less than 30 minutes.
+         * @type {string || null}
+         */
+        this.SwitchEndTime = null;
+
+        /**
+         * Whether to perform a precheck on the current operation of upgrading the instance kernel version. Valid values:
+`true`: Performs a precheck without upgrading the kernel version. Check items include request parameters, kernel version compatibility, and instance parameters.
+`false` (default value): Sends a normal request and upgrades the kernel version directly after the check is passed.
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.TargetDBKernelVersion = 'TargetDBKernelVersion' in params ? params.TargetDBKernelVersion : null;
+        this.SwitchTag = 'SwitchTag' in params ? params.SwitchTag : null;
+        this.SwitchStartTime = 'SwitchStartTime' in params ? params.SwitchStartTime : null;
+        this.SwitchEndTime = 'SwitchEndTime' in params ? params.SwitchEndTime : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+
+    }
+}
+
+/**
  * DescribeBaseBackups request structure.
  * @class
  */
@@ -11039,10 +11342,7 @@ class DescribeBaseBackupsRequest extends  AbstractModel {
         this.MaxFinishTime = null;
 
         /**
-         * Filter instances using one or more criteria. Valid filter names:
-db-instance-id: Filter by instance ID (in string format).
-db-instance-name: Filter by instance name (in string format).
-db-instance-ip: Filter by instance VPC IP (in string format).
+         * Filter instances by using one or more filters. Valid values:  `db-instance-idFilter` (filter by instance ID in string),  `db-instance-name` (filter by instance name in string),  `db-instance-ip` (filter by instance VPC IP address in string),  `base-backup-id` (filter by backup set ID in string), 
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -11240,53 +11540,24 @@ class CreateDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstanceKernelVersion request structure.
+ * ModifyDBInstanceChargeType response structure.
  * @class
  */
-class UpgradeDBInstanceKernelVersionRequest extends  AbstractModel {
+class ModifyDBInstanceChargeTypeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Instance ID
+         * Order name
          * @type {string || null}
          */
-        this.DBInstanceId = null;
+        this.DealName = null;
 
         /**
-         * Target kernel version, which can be obtained in the `AvailableUpgradeTarget` field returned by the `DescribeDBVersions` API.
+         * The unique request ID, which is returned for each request. RequestId is required for locating a problem.
          * @type {string || null}
          */
-        this.TargetDBKernelVersion = null;
-
-        /**
-         * Switch time after the kernel version upgrade. Valid values:
-`0` (default value): Switch now.
-`1`: Switch at the specified time.
-`2`: Switch in the maintenance time.
-         * @type {number || null}
-         */
-        this.SwitchTag = null;
-
-        /**
-         * Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is `0` or `2`, this parameter is invalid.
-         * @type {string || null}
-         */
-        this.SwitchStartTime = null;
-
-        /**
-         * Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is `0` or `2`, this parameter is invalid. The difference between `SwitchStartTime` and `SwitchEndTime` cannot be less than 30 minutes.
-         * @type {string || null}
-         */
-        this.SwitchEndTime = null;
-
-        /**
-         * Whether to perform a precheck on the current operation of upgrading the instance kernel version. Valid values:
-`true`: Performs a precheck without upgrading the kernel version. Check items include request parameters, kernel version compatibility, and instance parameters.
-`false` (default value): Sends a normal request and upgrades the kernel version directly after the check is passed.
-         * @type {boolean || null}
-         */
-        this.DryRun = null;
+        this.RequestId = null;
 
     }
 
@@ -11297,12 +11568,8 @@ class UpgradeDBInstanceKernelVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-        this.TargetDBKernelVersion = 'TargetDBKernelVersion' in params ? params.TargetDBKernelVersion : null;
-        this.SwitchTag = 'SwitchTag' in params ? params.SwitchTag : null;
-        this.SwitchStartTime = 'SwitchStartTime' in params ? params.SwitchStartTime : null;
-        this.SwitchEndTime = 'SwitchEndTime' in params ? params.SwitchEndTime : null;
-        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11341,10 +11608,12 @@ module.exports = {
     DescribeBackupOverviewRequest: DescribeBackupOverviewRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
     ModifyBaseBackupExpireTimeResponse: ModifyBaseBackupExpireTimeResponse,
+    ModifyBackupDownloadRestrictionRequest: ModifyBackupDownloadRestrictionRequest,
     DBInstanceNetInfo: DBInstanceNetInfo,
     BackupDownloadRestriction: BackupDownloadRestriction,
     ModifyDBInstanceDeploymentRequest: ModifyDBInstanceDeploymentRequest,
     DeleteReadOnlyGroupNetworkAccessRequest: DeleteReadOnlyGroupNetworkAccessRequest,
+    DescribeBackupDownloadRestrictionRequest: DescribeBackupDownloadRestrictionRequest,
     ZoneInfo: ZoneInfo,
     DescribeReadOnlyGroupsResponse: DescribeReadOnlyGroupsResponse,
     NormalQueryItem: NormalQueryItem,
@@ -11380,6 +11649,7 @@ module.exports = {
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeZonesRequest: DescribeZonesRequest,
     SpecInfo: SpecInfo,
+    ModifyBackupDownloadRestrictionResponse: ModifyBackupDownloadRestrictionResponse,
     ParamVersionRelation: ParamVersionRelation,
     DescribeLogBackupsRequest: DescribeLogBackupsRequest,
     SetAutoRenewFlagResponse: SetAutoRenewFlagResponse,
@@ -11451,6 +11721,7 @@ module.exports = {
     DBNode: DBNode,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
+    DescribeBackupDownloadRestrictionResponse: DescribeBackupDownloadRestrictionResponse,
     CreateReadOnlyDBInstanceRequest: CreateReadOnlyDBInstanceRequest,
     DescribeCloneDBInstanceSpecResponse: DescribeCloneDBInstanceSpecResponse,
     DescribeZonesResponse: DescribeZonesResponse,
@@ -11498,6 +11769,7 @@ module.exports = {
     RawSlowQuery: RawSlowQuery,
     CreateReadOnlyGroupNetworkAccessResponse: CreateReadOnlyGroupNetworkAccessResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
+    ModifyDBInstanceChargeTypeRequest: ModifyDBInstanceChargeTypeRequest,
     DescribeParameterTemplateAttributesResponse: DescribeParameterTemplateAttributesResponse,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     DescribeDBVersionsRequest: DescribeDBVersionsRequest,
@@ -11511,10 +11783,11 @@ module.exports = {
     ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
     DescribeBaseBackupsResponse: DescribeBaseBackupsResponse,
     DescribeDBXlogsResponse: DescribeDBXlogsResponse,
+    UpgradeDBInstanceKernelVersionRequest: UpgradeDBInstanceKernelVersionRequest,
     DescribeBaseBackupsRequest: DescribeBaseBackupsRequest,
     DescribeEncryptionKeysResponse: DescribeEncryptionKeysResponse,
     DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
     CreateDBInstancesResponse: CreateDBInstancesResponse,
-    UpgradeDBInstanceKernelVersionRequest: UpgradeDBInstanceKernelVersionRequest,
+    ModifyDBInstanceChargeTypeResponse: ModifyDBInstanceChargeTypeResponse,
 
 }

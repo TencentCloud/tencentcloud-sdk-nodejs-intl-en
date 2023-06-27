@@ -2834,11 +2834,11 @@ class StartStopServiceOrMonitorRequest extends  AbstractModel {
 
         /**
          * The operation type. Valid values:
-<li>`StartService`: Start services.</li>
-<li>`StopService`: Stop services.</li>
-<li>`StartMonitor`: Start the monitor.</li>
-<li>`StopMonitor`: Stop the monitor.</li>
-
+<li>StartService: Start service</li>
+<li>StopService: Stop service</li>
+<li>StartMonitor: Start maintenance</li>
+<li>StopMonitor: Stop maintenance</li>
+<li>RestartService: Restart service. If this type is selected, "StrategyConfig" is required.</li>
          * @type {string || null}
          */
         this.OpType = null;
@@ -2848,6 +2848,12 @@ class StartStopServiceOrMonitorRequest extends  AbstractModel {
          * @type {OpScope || null}
          */
         this.OpScope = null;
+
+        /**
+         * The operation policy.
+         * @type {StrategyConfig || null}
+         */
+        this.StrategyConfig = null;
 
     }
 
@@ -2865,6 +2871,12 @@ class StartStopServiceOrMonitorRequest extends  AbstractModel {
             let obj = new OpScope();
             obj.deserialize(params.OpScope)
             this.OpScope = obj;
+        }
+
+        if (params.StrategyConfig) {
+            let obj = new StrategyConfig();
+            obj.deserialize(params.StrategyConfig)
+            this.StrategyConfig = obj;
         }
 
     }
@@ -3280,6 +3292,60 @@ class DescribeUsersForUserManagerRequest extends  AbstractModel {
             this.UserManagerFilter = obj;
         }
         this.NeedKeytabInfo = 'NeedKeytabInfo' in params ? params.NeedKeytabInfo : null;
+
+    }
+}
+
+/**
+ * Restart, stop, or start of service/monitoring configurations
+ * @class
+ */
+class StrategyConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * `0`: Disable rolling restart
+`1`: Enable rolling restart
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.RollingRestartSwitch = null;
+
+        /**
+         * The number of nodes to be restarted per batch in rolling restart, with a maximum value of 99,999.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.BatchSize = null;
+
+        /**
+         * The wait time (in seconds) per batch in rolling restart, with a maximum value of 5 minutes.
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.TimeWait = null;
+
+        /**
+         * The failure handling policy. Valid values: `0` (blocks the process) and `1` (skips).
+Note: This field may return null, indicating that no valid values can be obtained.
+         * @type {number || null}
+         */
+        this.DealOnFail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RollingRestartSwitch = 'RollingRestartSwitch' in params ? params.RollingRestartSwitch : null;
+        this.BatchSize = 'BatchSize' in params ? params.BatchSize : null;
+        this.TimeWait = 'TimeWait' in params ? params.TimeWait : null;
+        this.DealOnFail = 'DealOnFail' in params ? params.DealOnFail : null;
 
     }
 }
@@ -8207,6 +8273,7 @@ module.exports = {
     PodParameter: PodParameter,
     AllNodeResourceSpec: AllNodeResourceSpec,
     DescribeUsersForUserManagerRequest: DescribeUsersForUserManagerRequest,
+    StrategyConfig: StrategyConfig,
     StartStopServiceOrMonitorResponse: StartStopServiceOrMonitorResponse,
     MultiDisk: MultiDisk,
     PodNewParameter: PodNewParameter,

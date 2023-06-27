@@ -54,6 +54,7 @@ const Placement = models.Placement;
 const PodParameter = models.PodParameter;
 const AllNodeResourceSpec = models.AllNodeResourceSpec;
 const DescribeUsersForUserManagerRequest = models.DescribeUsersForUserManagerRequest;
+const StrategyConfig = models.StrategyConfig;
 const StartStopServiceOrMonitorResponse = models.StartStopServiceOrMonitorResponse;
 const MultiDisk = models.MultiDisk;
 const PodNewParameter = models.PodNewParameter;
